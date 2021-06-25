@@ -47,7 +47,7 @@ final class ServicesStorage: ServicesStorageProtocol {
         let filterFilesStorage = try FilterFilesStorage(filterFilesDirectoryUrl: filterFilesDirectoryUrl)
         let productionDbManager = try ProductionDatabaseManager(dbContainerUrl: dbContainerUrl)
         let metaStorage = MetaStorage(productionDbManager: productionDbManager)
-        let httpRequests = HttpRequestService()
+        let apiMethods = ApiMethods()
         
         self.userDefaults = UserDefaultsStorage(storage: userDefaults)
         
@@ -65,7 +65,7 @@ final class ServicesStorage: ServicesStorageProtocol {
                                           filterFilesStorage: filterFilesStorage,
                                           metaStorage: metaStorage,
                                           userDefaultsStorage: self.userDefaults,
-                                          httpRequestService: httpRequests)
+                                          apiMethods: apiMethods)
         
         self.converter = FiltersConverterService(configuration: self.configuration,
                                                  filtersService: self.filters,

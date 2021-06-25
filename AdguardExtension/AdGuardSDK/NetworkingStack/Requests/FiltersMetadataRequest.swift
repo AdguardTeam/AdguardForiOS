@@ -18,13 +18,41 @@
 
 import Foundation
 
-struct FiltersLocalizationsRequest: RequestProtocol {
+/// Request to obtain filters meta data
+struct FiltersMetadataRequest: RequestProtocol {
+    
+    let version: String
+    let id: String
+    let cid: String
+    let lang: String
+    
+    init(version: String, id: String, cid: String, lang: String) {
+        self.version = version
+        self.id = id
+        self.cid = cid
+        self.lang = lang
+    }
     
     var urlRequest: URLRequest? {
-        let path = "\(urlBase)filters_i18n.js"
-        guard let url = URL(string: path) else { return nil }
+        let path = "\(urlBase)filters.js"
         
-        var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: TimeInterval(30))
+        var params: [String: Any] = [
+            "v": version,
+            "lang": lang
+        ]
+        
+#if os(iOS)
+        params["id"] = id
+        params["cid"] = cid
+#endif
+
+        guard let resultStr = params.constructLink(url: path),
+            let resultUrl = URL(string: resultStr) else  {
+            Logger.logError("FiltersMetadataRequest errror - can not construct url" )
+            return nil
+        }
+        
+        var request = URLRequest(url: resultUrl)
         request.httpMethod = "GET"
         
         return request

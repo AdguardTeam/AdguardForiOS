@@ -19,16 +19,17 @@
 
 import Foundation
 
-struct FiltersLocalizationsParser: ParserProtocol {
-    typealias Model = ExtendedFiltersMetaLocalizations
+/// Parser to parse data from `FiltersMetadataRequest` and returns `ExtendedFiltersMeta`
+struct FiltersMetadataParser: ParserProtocol {
+    typealias Model = ExtendedFiltersMeta
     
     func parse(data: Data, response: URLResponse?) -> Model? {
         guard let response = response as? HTTPURLResponse, response.statusCode != 200 else {
-            Logger.logError("(FiltersLocalizationsParser) bad response")
+            Logger.logError("(FiltersMetadataParser) bad response")
             return nil
         }
         
         let decoder = JSONDecoder()
-        return try? decoder.decode(ExtendedFiltersMetaLocalizations.self, from: data)
+        return try? decoder.decode(ExtendedFiltersMeta.self, from: data)
     }
 }
