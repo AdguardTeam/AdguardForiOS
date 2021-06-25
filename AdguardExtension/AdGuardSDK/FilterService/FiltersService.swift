@@ -142,7 +142,7 @@ final class FiltersService: FiltersServiceProtocol {
     private let metaStorage: MetaStorageProtocol
     private let userDefaultsStorage: UserDefaultsStorageProtocol
     private let metaParser: CustomFilterMetaParserProtocol
-    private let httpRequestService: HttpRequestServiceProtocol
+    private let apiMethods: ApiMethodsProtocol
     
     // MARK: - Initialization
     
@@ -152,14 +152,14 @@ final class FiltersService: FiltersServiceProtocol {
         metaStorage: MetaStorageProtocol,
         userDefaultsStorage: UserDefaultsStorageProtocol,
         metaParser: CustomFilterMetaParserProtocol = CustomFilterMetaParser(),
-        httpRequestService: HttpRequestServiceProtocol
+        apiMethods: ApiMethodsProtocol
     ) throws {
         self.configuration = configuration
         self.filterFilesStorage = filterFilesStorage
         self.metaStorage = metaStorage
         self.userDefaultsStorage = userDefaultsStorage
         self.metaParser = metaParser
-        self.httpRequestService = httpRequestService
+        self.apiMethods = apiMethods
         try self._groupsAtomic.mutate { $0.append(contentsOf: try getAllLocalizedGroups()) }
     }
     
@@ -602,7 +602,7 @@ final class FiltersService: FiltersServiceProtocol {
         let group = DispatchGroup()
         
         group.enter()
-        httpRequestService.loadFiltersMetadata(version: configuration.appProductVersion,
+        apiMethods.loadFiltersMetadata(version: configuration.appProductVersion,
                                                id: configuration.appId,
                                                cid: configuration.cid,
                                                lang: configuration.currentLanguage) { [weak self] filtersMeta in
@@ -618,7 +618,7 @@ final class FiltersService: FiltersServiceProtocol {
         }
         
         group.enter()
-        httpRequestService.loadFiltersLocalizations { [weak self] filtersMetaLocalizations in
+        apiMethods.loadFiltersLocalizations { [weak self] filtersMetaLocalizations in
             if let localizations = filtersMetaLocalizations {
                 do {
                     try self?.save(localizations: localizations, filtersIdsToSave: ids, groupIds)
