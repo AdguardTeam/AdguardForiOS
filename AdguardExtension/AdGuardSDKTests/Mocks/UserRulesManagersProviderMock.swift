@@ -5,8 +5,13 @@ final class UserRulesManagersProviderMock: UserRulesManagersProviderProtocol {
     var allowlistRulesManager: UserRulesManagerProtocol = AllowlistRulesManagerMock()
     var invertedAllowlistRulesManager: UserRulesManagerProtocol = InvertedAllowlistRulesManagerMock()
     
+    var resetCalledCount = 0
+    var resetError: Error?
     func reset() throws {
-        
+        resetCalledCount += 1
+        if let error = resetError {
+            throw error
+        }
     }
 }
 

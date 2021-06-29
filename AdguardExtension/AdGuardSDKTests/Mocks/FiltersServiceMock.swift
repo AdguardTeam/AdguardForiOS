@@ -53,7 +53,10 @@ final class FiltersServiceMock: FiltersServiceProtocol {
         }
     }
     
+    var resetCalledCount = 0
+    var resetError: Error?
     func reset(_ onResetFinished: @escaping (Error?) -> Void) {
-        onResetFinished(nil)
+        resetCalledCount += 1
+        onResetFinished(resetError)
     }
 }

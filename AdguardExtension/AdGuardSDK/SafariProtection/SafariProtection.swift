@@ -39,7 +39,7 @@ public final class SafariProtection: SafariProtectionProtocol {
     let userDefaults: UserDefaultsStorageProtocol
     let filters: FiltersServiceProtocol
     let converter: FiltersConverterServiceProtocol
-    let cbStorage: ContentBlockersInfoStorage
+    let cbStorage: ContentBlockersInfoStorageProtocol
     let cbService: ContentBlockerServiceProtocol
     let userRulesManagersProvider: UserRulesManagersProviderProtocol
     private let defaultConfiguration: ConfigurationProtocol
@@ -85,7 +85,7 @@ public final class SafariProtection: SafariProtectionProtocol {
          userDefaults: UserDefaultsStorageProtocol,
          filters: FiltersServiceProtocol,
          converter: FiltersConverterServiceProtocol,
-         cbStorage: ContentBlockersInfoStorage,
+         cbStorage: ContentBlockersInfoStorageProtocol,
          cbService: ContentBlockerServiceProtocol,
          userRulesManagersProvider: UserRulesManagersProviderProtocol)
     {
@@ -112,13 +112,21 @@ public final class SafariProtection: SafariProtectionProtocol {
             
             Logger.logInfo("(SafariProtection) - reset start")
             
-            // Update filters meta; Ignore it's error and continue to reset
+            // Update filters meta
+            var filtersError: Error?
             let group = DispatchGroup()
             group.enter()
-            self.filters.reset { _ in
+            self.filters.reset { error in
+                filtersError = error
                 group.leave()
             }
             group.wait()
+            
+            guard filtersError == nil else {
+                Logger.logError("(SafariProtection) - reset; Error reseting filters service; Error: \(filtersError!)")
+                self.completionQueue.async { onResetFinished(filtersError) }
+                return
+            }
             
             do {
                 Logger.logInfo("(SafariProtection) - reset; filters service was reset")
