@@ -855,4 +855,60 @@ class FitlerServiceTest: XCTestCase {
         }
         XCTAssertEqual(metaStorage.renameFilterCalledCount, 0)
     }
+    
+    func testResetWithSuccess() {
+        let expectation = XCTestExpectation()
+        let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: filtersUpdateFinishedNoteName)
+        let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name: filtersUpdateStartedNoteName)
+        
+        apiMethods.loadFiltersMetadataResult = mockFiltersMeta
+        apiMethods.loadFiltersLocalizationsResult = mockFiltersLocalizations
+        
+        filterService.reset { error in
+            XCTAssertNil(error)
+            expectation.fulfill()
+        }
+        wait(for: [expectation, filtersUpdateFinishedExpectation, filtersUpdateStartedExpectation], timeout: 1.0)
+        
+        XCTAssertEqual(metaStorage.resetCalledCount, 1)
+        XCTAssertEqual(filterFileStorage.resetCalledCount, 1)
+    }
+    
+    func testResetWithMetaStorageError() {
+        let expectation = XCTestExpectation()
+        let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: filtersUpdateFinishedNoteName)
+        let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name: filtersUpdateStartedNoteName)
+        filtersUpdateFinishedExpectation.isInverted = true
+        filtersUpdateStartedExpectation.isInverted = true
+        
+        metaStorage.resetError = MetaStorageMockError.resetError
+        
+        filterService.reset { error in
+            XCTAssertEqual(error as! MetaStorageMockError, MetaStorageMockError.resetError)
+            expectation.fulfill()
+        }
+        wait(for: [expectation, filtersUpdateFinishedExpectation, filtersUpdateStartedExpectation], timeout: 1.0)
+        
+        XCTAssertEqual(metaStorage.resetCalledCount, 1)
+        XCTAssertEqual(filterFileStorage.resetCalledCount, 0)
+    }
+    
+    func testResetWithFilterFilesStorageError() {
+        let expectation = XCTestExpectation()
+        let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: filtersUpdateFinishedNoteName)
+        let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name: filtersUpdateStartedNoteName)
+        filtersUpdateFinishedExpectation.isInverted = true
+        filtersUpdateStartedExpectation.isInverted = true
+        
+        filterFileStorage.resetError = FilterFilesStorageMockError.resetError
+        
+        filterService.reset { error in
+            XCTAssertEqual(error as! FilterFilesStorageMockError, FilterFilesStorageMockError.resetError)
+            expectation.fulfill()
+        }
+        wait(for: [expectation, filtersUpdateFinishedExpectation, filtersUpdateStartedExpectation], timeout: 1.0)
+        
+        XCTAssertEqual(metaStorage.resetCalledCount, 1)
+        XCTAssertEqual(filterFileStorage.resetCalledCount, 1)
+    }
 }

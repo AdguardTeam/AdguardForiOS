@@ -15,6 +15,7 @@ enum MetaStorageMockError: Error {
     case addError
     case deleteError
     case renameError
+    case resetError
     case error
 }
 
@@ -316,7 +317,12 @@ class MetaStorageMock: MetaStorageProtocol {
         deleteAllLocalizationForFilterCalledCount += 1
     }
     
+    var resetCalledCount = 0
+    var resetError: Error?
     func reset() throws {
-        
+        resetCalledCount += 1
+        if let error = resetError {
+            throw error
+        }
     }
 }

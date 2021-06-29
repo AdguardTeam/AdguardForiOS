@@ -396,6 +396,7 @@ final class FiltersService: FiltersServiceProtocol {
             catch {
                 Logger.logInfo("(FiltersService) - reset; Error: \(error)")
                 onResetFinished(error)
+                return
             }
             
             self.userDefaultsStorage.lastFiltersUpdateCheckDate = Date(timeIntervalSince1970: 0.0)

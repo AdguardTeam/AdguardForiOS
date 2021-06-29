@@ -4,6 +4,7 @@ enum FilterFilesStorageMockError: Error {
     case updateFilterError
     case updateCustomFilterError
     case deleteError
+    case resetError
     case error
 }
 
