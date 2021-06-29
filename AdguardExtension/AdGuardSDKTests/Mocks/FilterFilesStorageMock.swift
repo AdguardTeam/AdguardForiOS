@@ -8,43 +8,31 @@ enum FilterFilesStorageMockError: Error {
 }
 
 class FilterFilesStorageMock: FilterFilesStorageProtocol {
-    
-    var updateFilterResult: Result<FilterFilesStorageMockError?> = .success(nil)
-    var updateCustomFilterResult: Result<FilterFilesStorageMockError?> = .success(nil)
-    var deleteResult: Result<FilterFilesStorageMockError?> = .success(nil)
-    
-    var customFilters: Set<Int> = Set()
-    
-    var updateFilterCalled = false
+
+    var updateFilterCalledCount = 0
+    var updateFilterResultError: Error?
     func updateFilter(withId id: Int, onFilterUpdated: @escaping (Error?) -> Void) {
-        updateFilterCalled = true
-        switch updateFilterResult {
-        case .success(_): onFilterUpdated(nil)
-        case .error(let error): onFilterUpdated(error)
-        }
+        updateFilterCalledCount += 1
+        onFilterUpdated(updateFilterResultError)
     }
     
-    var updateCustomFilterCalled = false
+    var updateCustomFilterCalledCount = 0
+    var updateCustomFilterError: Error?
     func updateCustomFilter(withId id: Int, subscriptionUrl: URL, onFilterUpdated: @escaping (Error?) -> Void) {
-        updateCustomFilterCalled = true
-        switch updateCustomFilterResult {
-        case .success(_):
-            customFilters.insert(id)
-            onFilterUpdated(nil)
-        case .error(let error): onFilterUpdated(error)
-        }
+        updateCustomFilterCalledCount += 1
+        onFilterUpdated(updateCustomFilterError)
     }
     
-    var getFilterContentForFilterCalled = false
+    var getFilterContentForFilterCalledCount = 0
     var getFilterResultHandler: ((_ id: Int) -> String?)?
     func getFilterContentForFilter(withId id: Int) -> String? {
-        getFilterContentForFilterCalled = true
+        getFilterContentForFilterCalledCount += 1
         return getFilterResultHandler?(id)
     }
     
-    var getFiltersContentForFiltersCalled = false
+    var getFiltersContentForFiltersCalledCount = 0
     func getFiltersContentForFilters(withIds identifiers: [Int]) -> [Int : String] {
-        getFiltersContentForFiltersCalled = true
+        getFiltersContentForFiltersCalledCount += 1
         return [:]
     }
     
@@ -53,18 +41,21 @@ class FilterFilesStorageMock: FilterFilesStorageProtocol {
         saveFilterCalled = true
     }
     
-    var deleteFilterCalled = false
+    var deleteFilterCalledCount = 0
+    var deleteResultError: Error?
     func deleteFilter(withId id: Int) throws {
-        deleteFilterCalled = true
-        switch deleteResult {
-        case .success(_):
-            customFilters.remove(id)
-            break
-        case .error(let error): throw error
+        deleteFilterCalledCount += 1
+        if let error = deleteResultError {
+            throw error
         }
     }
     
+    var resetCalledCount = 0
+    var resetError: Error?
     func reset() throws {
-        
+        resetCalledCount += 1
+        if let error = resetError {
+            throw error
+        }
     }
 }

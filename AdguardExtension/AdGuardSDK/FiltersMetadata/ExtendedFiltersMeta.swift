@@ -212,7 +212,7 @@ extension ExtendedFiltersMeta {
 // MARK: - ExtendedFiltersMeta + Tag
 
 public extension ExtendedFiltersMeta {
-    struct Tag: Decodable {
+    struct Tag: Decodable, Equatable {
         public enum TagType: String, Codable {
             case purpose
             case lang

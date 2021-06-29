@@ -81,119 +81,123 @@ class MetaStorageMock: MetaStorageProtocol {
 
     init() {
         getAllLocalizedGroupsResult = .success(groupsTableMock)
-        getAllLocalizaedFiltersResult = .success(filtersTableMock)
     }
     
     // MARK: - FiltersMetaStorageProtocol + Filters methods
 
-    var getLocalizedFiltersForGroupCalled = false
-    var getAllLocalizaedFiltersResult: Result<[FiltersTable]> = .success([])
+    var getLocalizedFiltersForGroupCalledCount = 0
+    var getAllLocalizaedFiltersResult: Result<[FiltersTable]>?
     func getLocalizedFiltersForGroup(withId id: Int, forLanguage lang: String) throws -> [FiltersTable] {
-        getLocalizedFiltersForGroupCalled = true
-        switch getAllLocalizaedFiltersResult {
+        getLocalizedFiltersForGroupCalledCount += 1
+        
+        guard let result = getAllLocalizaedFiltersResult else {
+            return filtersTableMock.filter { $0.groupId == id }
+        }
+        
+        switch result {
         case .success(let filters): return filters
         case .error(let error): throw error
         }
     }
     
-    var setFilterCalled = false
+    var setFilterCalledCount = 0
     var setFilterResultError: Error?
     func setFilter(withId id: Int, enabled: Bool) throws {
-        setFilterCalled = true
+        setFilterCalledCount += 1
         if let error = setFilterResultError {
             throw error
         }
     }
     
-    var updateFilterCalled = false
+    var updateFilterCalledCount = 0
     var updateFilterResult: Result<Bool> = .success(true)
     func update(filter: ExtendedFilterMetaProtocol) throws -> Bool {
-        updateFilterCalled = true
+        updateFilterCalledCount += 1
         switch updateFilterResult {
         case .success(let wasUpdated): return wasUpdated
         case .error(let error): throw error
         }
     }
     
-    var updateFiltersCalled = false
+    var updateFiltersCalledCount = 0
     var updateFiltersResult: Result<[Int]> = .success([])
     func update(filters: [ExtendedFilterMetaProtocol]) throws -> [Int] {
-        updateFiltersCalled = true
+        updateFiltersCalledCount += 1
         switch updateFiltersResult {
         case .success(let updatedFiltersIds): return updatedFiltersIds
         case .error(let error): throw error
         }
     }
     
-    var addFilterCalled = false
+    var addFilterCalledCount = 0
     var addResultError: Error?
     func add(filter: ExtendedFilterMetaProtocol, enabled: Bool) throws {
-        addFilterCalled = true
+        addFilterCalledCount += 1
         if let error = addResultError {
             throw error
         }
     }
     
-    var deleteFilterCalled = false
+    var deleteFilterCalledCount = 0
     var deleteFilterResultError: Error?
     func deleteFilter(withId id: Int) throws {
-        deleteFilterCalled = true
+        deleteFilterCalledCount += 1
         if let error = deleteFilterResultError {
             throw error
         }
     }
     
-    var deleteFiltersCalled = false
+    var deleteFiltersCalledCount = 0
     var deleteFiltersResultError: Error?
     func deleteFilters(withIds ids: [Int]) throws {
-        deleteFiltersCalled = true
+        deleteFiltersCalledCount += 1
         if let error = deleteFiltersResultError {
             throw error
         }
     }
     
-    var renameFilterCalled = false
+    var renameFilterCalledCount = 0
     var renameResultError: Error?
     func renameFilter(withId id: Int, name: String) throws {
-        renameFilterCalled = true
+        renameFilterCalledCount += 1
         if let error = renameResultError {
             throw error
         }
     }
     
     // MARK: - FiltersMetaStorageProtocol + Groups methods
-    var getAllLocalizedGroupsCalled = false
+    var getAllLocalizedGroupsCalledCount = 0
     var getAllLocalizedGroupsResult: Result<[FilterGroupsTable]> = .success([])
     func getAllLocalizedGroups(forLanguage lang: String) throws -> [FilterGroupsTable] {
-        getAllLocalizedGroupsCalled = true
+        getAllLocalizedGroupsCalledCount += 1
         switch getAllLocalizedGroupsResult {
         case .success(let groups): return groups
         case .error(let error): throw error
         }
     }
     
-    var setGroupCalled = false
+    var setGroupCalledCount = 0
     var setGroupResultError: Error?
     func setGroup(withId id: Int, enabled: Bool) throws {
-        setGroupCalled = true
+        setGroupCalledCount += 1
         if let error = setGroupResultError {
             throw error
         }
     }
     
-    var updateGroupCalled = false
+    var updateGroupCalledCount = 0
     var updateGroupResultError: Error?
     func update(group: GroupMetaProtocol) throws {
-        updateGroupCalled = true
+        updateGroupCalledCount += 1
         if let error = updateGroupResultError {
             throw error
         }
     }
     
-    var updateGroupsCalled = false
+    var updateGroupsCalledCount = 0
     var updateGroupsResultError: Error?
     func update(groups: [GroupMetaProtocol]) throws {
-        updateGroupsCalled = true
+        updateGroupsCalledCount += 1
         if let error = updateGroupsResultError {
             throw error
         }
@@ -201,85 +205,85 @@ class MetaStorageMock: MetaStorageProtocol {
     
     // MARK: - FiltersMetaStorageProtocol + Tags methods
         
-    var getAllTagsCalled = false
+    var getAllTagsCalledCount = 0
     func getAllTags() throws -> [FilterTagsTable] {
-        getAllTagsCalled = true
+        getAllTagsCalledCount += 1
         return []
     }
     
-    var getTagsForFilterCalled = false
+    var getTagsForFilterCalledCount = 0
     func getTagsForFilter(withId id: Int) throws -> [FilterTagsTable] {
-        getTagsForFilterCalled = true
+        getTagsForFilterCalledCount += 1
         return []
     }
     
-    var updateAllTagsCalled = false
+    var updateAllTagsCalledCount = 0
     var updateAllTagsResultError: Error?
     func updateAll(tags: [ExtendedFiltersMeta.Tag], forFilterWithId id: Int) throws {
-        updateAllTagsCalled = true
+        updateAllTagsCalledCount += 1
         if let error = updateAllTagsResultError {
             throw error
         }
     }
     
-    var updateTagCalled = false
+    var updateTagCalledCount = 0
     var updateTagResultError: Error?
     func update(tag: ExtendedFiltersMeta.Tag, forFilterWithId id: Int) throws {
-        updateTagCalled = true
+        updateTagCalledCount += 1
         if let error = updateTagResultError {
             throw error
         }
     }
     
-    var deleteTagsForFiltersCalled = false
+    var deleteTagsForFiltersCalledCount = 0
     func deleteTagsForFilters(withIds ids: [Int]) throws {
-        deleteTagsForFiltersCalled = true
+        deleteTagsForFiltersCalledCount += 1
     }
     
     
     // MARK: - FiltersMetaStorageProtocol + Langs methods
     
-    var getLangsForFilterCalled = false
+    var getLangsForFilterCalledCount = 0
     func getLangsForFilter(withId id: Int) throws -> [String] {
-        getLangsForFilterCalled = true
+        getLangsForFilterCalledCount += 1
         return []
     }
     
-    var updateAllLangsCalled = false
+    var updateAllLangsCalledCount = 0
     var updateAllLangsResultError: Error?
     func updateAll(langs: [String], forFilterWithId id: Int) throws {
-        updateAllLangsCalled = true
+        updateAllLangsCalledCount += 1
         if let error = updateAllLangsResultError {
             throw error
         }
     }
     
-    var updateLangCalled = false
+    var updateLangCalledCount = 0
     var updateLangResultError: Error?
     func update(lang: String, forFilterWithId id: Int) throws {
-        updateLangCalled = true
+        updateLangCalledCount += 1
         if let error = updateLangResultError {
             throw error
         }
     }
     
-    var deleteLangsForFiltersCalled = false
+    var deleteLangsForFiltersCalledCount = 0
     func deleteLangsForFilters(withIds ids: [Int]) throws {
-        deleteLangsForFiltersCalled = true
+        deleteLangsForFiltersCalledCount += 1
     }
     
     // MARK: - FiltersMetaStorageProtocol + Group localizations methods
     
-    var getLocalizationForGroupCalled = false
+    var getLocalizationForGroupCalledCount = 0
     func getLocalizationForGroup(withId id: Int, forLanguage lang: String) -> FilterGroupLocalizationsTable? {
-        getLocalizationForGroupCalled = true
+        getLocalizationForGroupCalledCount += 1
         return nil
     }
 
-    var updateLocalizationForGroupCalled = false
+    var updateLocalizationForGroupCalledCount = 0
     var updateLocalizationForGroupResultError: Error?
     func updateLocalizationForGroup(withId id: Int, forLanguage lang: String, localization: ExtendedFiltersMetaLocalizations.GroupLocalization) throws {
-        updateLocalizationForGroupCalled = true
+        updateLocalizationForGroupCalledCount += 1
         if let error = updateLocalizationForGroupResultError {
             throw error
         }
@@ -287,29 +291,29 @@ class MetaStorageMock: MetaStorageProtocol {
     
     // MARK: - FiltersMetaStorageProtocol + Filters localizations methods
     
-    var getLocalizationForFilterCalled = false
+    var getLocalizationForFilterCalledCount = 0
     func getLocalizationForFilter(withId id: Int, forLanguage lang: String) throws -> FilterLocalizationsTable? {
-        getLocalizationForFilterCalled = true
+        getLocalizationForFilterCalledCount += 1
         return nil
     }
     
-    var updateLocalizationForFilterCalled = false
+    var updateLocalizationForFilterCalledCount = 0
     var updateLocalizationForFilterResultError: Error?
     func updateLocalizationForFilter(withId id: Int, forLanguage lang: String, localization: ExtendedFiltersMetaLocalizations.FilterLocalization) throws {
-        updateLocalizationForFilterCalled = true
+        updateLocalizationForFilterCalledCount += 1
         if let error = updateLocalizationForFilterResultError {
             throw error
         }
     }
     
-    var deleteAllLocalizationForFiltersCalled = false
+    var deleteAllLocalizationForFiltersCalledCount = 0
     func deleteAllLocalizationForFilters(withIds ids: [Int]) throws {
-        deleteAllLocalizationForFiltersCalled = true
+        deleteAllLocalizationForFiltersCalledCount += 1
     }
     
-    var deleteAllLocalizationForFilterCalled = false
+    var deleteAllLocalizationForFilterCalledCount = 0
     func deleteAllLocalizationForFilter(withId id: Int) throws {
-        deleteAllLocalizationForFiltersCalled = true
+        deleteAllLocalizationForFilterCalledCount += 1
     }
     
     func reset() throws {

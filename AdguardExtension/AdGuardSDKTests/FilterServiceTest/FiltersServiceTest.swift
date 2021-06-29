@@ -2,7 +2,7 @@ import XCTest
 
 class FitlerServiceTest: XCTestCase {
     
-    var mockFiltersMeta: ExtendedFiltersMeta {
+    lazy var mockFiltersMeta: ExtendedFiltersMeta = {
         let groups = metaStorage.groupsTableMock.map { group in
             return ExtendedFiltersMeta.Group(groupId: group.groupId,
                                              groupName: group.name,
@@ -36,15 +36,48 @@ class FitlerServiceTest: XCTestCase {
         return ExtendedFiltersMeta(groups: groups,
                                    tags: tags,
                                    filters: filters)
-    }
+    }()
+    
+    lazy var mockFiltersLocalizations: ExtendedFiltersMetaLocalizations = {
+        var groups: [Int : [String: ExtendedFiltersMetaLocalizations.GroupLocalization]] = [:]
+        mockFiltersMeta.groups.forEach {
+            let groupLocalization = ExtendedFiltersMetaLocalizations.GroupLocalization(name: "group_\($0.groupId)")
+            groups[$0.groupId] = [:]
+            groups[$0.groupId]?["en"] = groupLocalization
+        }
+    
+        var tags: [Int: [String: ExtendedFiltersMetaLocalizations.TagLocalization]] = [:]
+        mockFiltersMeta.tags.forEach {
+            let tagLocalization = ExtendedFiltersMetaLocalizations.TagLocalization(name: "tag_name_\($0.tagId)", description: "tag_desc_\($0.tagId)")
+            tags[$0.tagId] = [:]
+            tags[$0.tagId]?["en"] = tagLocalization
+        }
+        
+        var filters: [Int: [String: ExtendedFiltersMetaLocalizations.FilterLocalization]] = [:]
+        mockFiltersMeta.filters.forEach {
+            let filterLocalization = ExtendedFiltersMetaLocalizations.FilterLocalization(name: "filter_name_\($0.filterId)", description: "filter_desc_\($0.filterId)")
+            filters[$0.filterId] = [:]
+            filters[$0.filterId]?["en"] = filterLocalization
+        }
+        
+        let localizations = ExtendedFiltersMetaLocalizations(groups: groups,
+                                                             tags: tags,
+                                                             filters: filters)
+        return localizations
+    }()
     
     let lastFiltersUpdateCheckDateKey = "AdGuardSDK.lastFiltersUpdateCheckDateKey"
     
     var filterService: FiltersServiceProtocol!
+    var configuration: ConfigurationMock!
     var metaStorage: MetaStorageMock!
     var filterFileStorage: FilterFilesStorageMock!
-    var httpRequestService: HttpRequestServiceProtocol!
+    var apiMethods: ApiMethodsMock!
+    var metaParser: MetaParserMock!
     var userDefaultsStorage: UserDefaultsStorageMock!
+    
+    let filtersUpdateFinishedNoteName = NSNotification.Name.init("AdGuardSDK.filtersUpdateFinished")
+    let filtersUpdateStartedNoteName = NSNotification.Name.init("AdGuardSDK.filtersUpdateStarted")
     
     override class func setUp() {
         TestsFileManager.deleteTestFolder()
@@ -55,62 +88,30 @@ class FitlerServiceTest: XCTestCase {
         TestsFileManager.deleteTestFolder()
         TestsFileManager.clearRootDirectory()
         
+        configuration = ConfigurationMock()
         metaStorage = MetaStorageMock()
         filterFileStorage = FilterFilesStorageMock()
         userDefaultsStorage = UserDefaultsStorageMock()
+        apiMethods = ApiMethodsMock()
+        metaParser = MetaParserMock()
+        
+        filterService = try FiltersService(configuration: configuration,
+                                           filterFilesStorage: filterFileStorage,
+                                           metaStorage: metaStorage,
+                                           userDefaultsStorage: userDefaultsStorage,
+                                           metaParser: metaParser,
+                                           apiMethods: apiMethods)
     }
     
-    func testUpdateAllMetaWithAllFiltersSuccessUpdate() {
-        let expectation = XCTestExpectation()
-        let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: NSNotification.Name.init("AdGuardSDK.filtersUpdateFinished"))
-        let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name:
-            NSNotification.Name.init("AdGuardSDK.filtersUpdateStarted"))
-
-        let beforeUpdateDate = Date()
-        
-        filterService.updateAllMeta(forcibly: true, onFiltersUpdated: { result in
-            switch result {
-            case .success(let updateResult):
-                
-                break
-            case .error(_):
-                XCTFail()
-            }
-            expectation.fulfill()
-        })
-        
-        wait(for: [expectation, filtersUpdateFinishedExpectation, filtersUpdateStartedExpectation], timeout: 1.0)
-        let afterUpdateDate = userDefaultsStorage.storage.value(forKey: lastFiltersUpdateCheckDateKey) as! Date
-        XCTAssert(afterUpdateDate > beforeUpdateDate)
-        
-        XCTAssert(filterFileStorage.updateCustomFilterCalled)
-        XCTAssert(filterFileStorage.updateFilterCalled)
-        XCTAssert(metaStorage.updateFiltersCalled)
-        XCTAssert(metaStorage.updateGroupsCalled)
-        XCTAssert(metaStorage.updateAllLangsCalled)
-        XCTAssert(metaStorage.updateAllTagsCalled)
-        XCTAssert(metaStorage.updateLocalizationForGroupCalled)
-        XCTAssert(metaStorage.updateLocalizationForFilterCalled)
-    }
     
     func testUpdateAllMetaWithUpdatePeriodError() {
         let expectation = XCTestExpectation()
-        let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: NSNotification.Name.init("AdGuardSDK.filtersUpdateFinished"))
-        filtersUpdateFinishedExpectation.isInverted = true
-        let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name:
-            NSNotification.Name.init( "AdGuardSDK.filtersUpdateStarted"))
+        let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: filtersUpdateFinishedNoteName)
+        let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name: filtersUpdateStartedNoteName)
         filtersUpdateStartedExpectation.isInverted = true
+        filtersUpdateFinishedExpectation.isInverted = true
         
         userDefaultsStorage.storage.setValue(Date(), forKey: lastFiltersUpdateCheckDateKey)
-        
-        XCTAssertFalse(filterFileStorage.updateCustomFilterCalled)
-        XCTAssertFalse(filterFileStorage.updateFilterCalled)
-        XCTAssertFalse(metaStorage.updateFiltersCalled)
-        XCTAssertFalse(metaStorage.updateGroupsCalled)
-        XCTAssertFalse(metaStorage.updateAllLangsCalled)
-        XCTAssertFalse(metaStorage.updateAllTagsCalled)
-        XCTAssertFalse(metaStorage.updateLocalizationForGroupCalled)
-        XCTAssertFalse(metaStorage.updateLocalizationForFilterCalled)
         
         filterService.updateAllMeta(forcibly: false, onFiltersUpdated: { result in
             switch result {
@@ -125,110 +126,226 @@ class FitlerServiceTest: XCTestCase {
         })
         wait(for: [expectation, filtersUpdateFinishedExpectation, filtersUpdateStartedExpectation], timeout: 1.0)
         
-        XCTAssertFalse(filterFileStorage.updateCustomFilterCalled)
-        XCTAssertFalse(filterFileStorage.updateFilterCalled)
-        XCTAssertFalse(metaStorage.updateFiltersCalled)
-        XCTAssertFalse(metaStorage.updateGroupsCalled)
-        XCTAssertFalse(metaStorage.updateAllLangsCalled)
-        XCTAssertFalse(metaStorage.updateAllTagsCalled)
-        XCTAssertFalse(metaStorage.updateLocalizationForGroupCalled)
-        XCTAssertFalse(metaStorage.updateLocalizationForFilterCalled)
+        XCTAssertEqual(filterFileStorage.updateCustomFilterCalledCount, 0)
+        XCTAssertEqual(filterFileStorage.updateFilterCalledCount, 0)
+        XCTAssertEqual(metaStorage.updateFiltersCalledCount, 0)
+        XCTAssertEqual(metaStorage.updateGroupsCalledCount, 0)
+        XCTAssertEqual(metaStorage.updateAllLangsCalledCount, 0)
+        XCTAssertEqual(metaStorage.updateAllTagsCalledCount, 0)
+        XCTAssertEqual(metaStorage.updateLocalizationForGroupCalledCount, 0)
+        XCTAssertEqual(metaStorage.updateLocalizationForFilterCalledCount, 0)
+        XCTAssertEqual(metaStorage.getAllLocalizedGroupsCalledCount, 1)
     }
     
-    func testUpdateAllMetaWithUpdateFilesError() {
+    // All filter files were updated, but none of filter's version changed
+    func testUpdateAllMetaWhenFiltersWereNotUpdatedBecauseVersionWasTheSame() {
+        let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: filtersUpdateFinishedNoteName)
+        let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name: filtersUpdateStartedNoteName)
+        
+        apiMethods.loadFiltersMetadataResult = mockFiltersMeta
+        apiMethods.loadFiltersLocalizationsResult = mockFiltersLocalizations
+        
         let expectation = XCTestExpectation()
-        let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: NSNotification.Name.init("AdGuardSDK.filtersUpdateFinished"))
-        let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name:
-            NSNotification.Name.init( "AdGuardSDK.filtersUpdateStarted"))
-        
-        filterFileStorage.updateFilterResult = .error(FilterFilesStorageMockError.updateFilterError)
-        
-        
-        XCTAssertFalse(filterFileStorage.updateCustomFilterCalled)
-        XCTAssertFalse(filterFileStorage.updateFilterCalled)
-        XCTAssertFalse(metaStorage.updateFiltersCalled)
-        XCTAssertFalse(metaStorage.updateGroupsCalled)
-        XCTAssertFalse(metaStorage.updateAllLangsCalled)
-        XCTAssertFalse(metaStorage.updateAllTagsCalled)
-        XCTAssertFalse(metaStorage.updateLocalizationForGroupCalled)
-        XCTAssertFalse(metaStorage.updateLocalizationForFilterCalled)
+        let beforeUpdateDate = Date()
         
         filterService.updateAllMeta(forcibly: true, onFiltersUpdated: { result in
             switch result {
-            case .success(_): XCTFail()
-            case .error(let error):
-                if case FilterFilesStorageMockError.updateFilterError = error {}
-                else {
-                    XCTFail()
-                }
+            case .success(let updateResult):
+                XCTAssert(updateResult.addedFilterIds.isEmpty)
+                XCTAssert(updateResult.failedFilterIds.isEmpty)
+                XCTAssert(updateResult.removedFiltersIds.isEmpty)
+                XCTAssert(updateResult.updatedFilterIds.isEmpty)
+                XCTAssertNil(updateResult.error)
+            case .error(_):
+                XCTFail()
+            }
+            expectation.fulfill()
+        })
+        
+        wait(for: [expectation, filtersUpdateFinishedExpectation, filtersUpdateStartedExpectation], timeout: 1.0)
+        let afterUpdateDate = userDefaultsStorage.storage.value(forKey: lastFiltersUpdateCheckDateKey) as! Date
+        XCTAssert(afterUpdateDate > beforeUpdateDate)
+        
+        XCTAssertEqual(filterFileStorage.updateCustomFilterCalledCount, metaStorage.filtersTableMock.filter{ $0.groupId == SafariGroup.GroupType.custom.id }.count)
+        XCTAssertEqual(filterFileStorage.updateFilterCalledCount, metaStorage.filtersTableMock.filter{ $0.groupId != SafariGroup.GroupType.custom.id }.count)
+        XCTAssertEqual(apiMethods.loadFiltersMetadataCalledCount, 1)
+        XCTAssertEqual(apiMethods.loadFiltersLocalizationsCalledCount, 1)
+        XCTAssertEqual(metaStorage.updateFiltersCalledCount, 1)
+        XCTAssertEqual(metaStorage.updateGroupsCalledCount, 1)
+        XCTAssertEqual(metaStorage.updateAllLangsCalledCount, 0)
+        XCTAssertEqual(metaStorage.updateAllTagsCalledCount, 0)
+        XCTAssertEqual(metaStorage.updateLocalizationForGroupCalledCount, 8)
+        XCTAssertEqual(metaStorage.updateLocalizationForFilterCalledCount, 30)
+        XCTAssertEqual(metaStorage.addFilterCalledCount, 0)
+        XCTAssertEqual(metaStorage.deleteFilterCalledCount, 0)
+        XCTAssertEqual(metaStorage.getAllLocalizedGroupsCalledCount, 2)
+    }
+    
+    // Predefined filter files failed to update, but custom succeded
+    func testUpdateAllMetaWithUpdatePredefinedFiltersFilesError() {
+        let expectation = XCTestExpectation()
+        let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: filtersUpdateFinishedNoteName)
+        let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name: filtersUpdateStartedNoteName)
+        
+        apiMethods.loadFiltersMetadataResult = mockFiltersMeta
+        apiMethods.loadFiltersLocalizationsResult = mockFiltersLocalizations
+        filterFileStorage.updateFilterResultError = FilterFilesStorageMockError.updateFilterError
+        
+        filterService.updateAllMeta(forcibly: true, onFiltersUpdated: { result in
+            switch result {
+            case .success(let updateResult):
+                XCTAssert(updateResult.addedFilterIds.isEmpty)
+                XCTAssertEqual(updateResult.failedFilterIds.count, 28)
+                XCTAssert(updateResult.removedFiltersIds.isEmpty)
+                XCTAssert(updateResult.updatedFilterIds.isEmpty)
+                XCTAssertNil(updateResult.error)
+            case .error(_):
+                XCTFail()
             }
             expectation.fulfill()
         })
         wait(for: [expectation, filtersUpdateFinishedExpectation, filtersUpdateStartedExpectation], timeout: 1.0)
         
-        XCTAssert(filterFileStorage.updateCustomFilterCalled)
-        XCTAssert(filterFileStorage.updateFilterCalled)
-        XCTAssert(metaStorage.updateFiltersCalled)
-        XCTAssert(metaStorage.updateGroupsCalled)
-        XCTAssert(metaStorage.updateAllLangsCalled)
-        XCTAssert(metaStorage.updateAllTagsCalled)
-        XCTAssert(metaStorage.updateLocalizationForGroupCalled)
-        XCTAssert(metaStorage.updateLocalizationForFilterCalled)
+        XCTAssertEqual(filterFileStorage.updateCustomFilterCalledCount, 2)
+        XCTAssertEqual(filterFileStorage.updateFilterCalledCount, 28)
+        XCTAssertEqual(metaStorage.updateFiltersCalledCount, 1)
+        XCTAssertEqual(metaStorage.updateGroupsCalledCount, 1)
+        XCTAssertEqual(metaStorage.updateAllLangsCalledCount, 0)
+        XCTAssertEqual(metaStorage.updateAllTagsCalledCount, 0)
+        XCTAssertEqual(metaStorage.updateLocalizationForGroupCalledCount, 8)
+        XCTAssertEqual(metaStorage.updateLocalizationForFilterCalledCount, 30)
     }
     
-    func testUpdateAllFiltersError() {
-        metaStorage.updateFiltersResult = .error(MetaStorageMockError.updateAllFiltersError)
+    // Test case when we receive new filters from the server and some stored filters are missing and we need to delete them
+    func testNewFiltersAddedAndSomeOldRemoved() {
         let expectation = XCTestExpectation()
-        let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: NSNotification.Name.init("AdGuardSDK.filtersUpdateFinished"))
-        let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name:
-            NSNotification.Name.init( "AdGuardSDK.filtersUpdateStarted"))
+        let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: filtersUpdateFinishedNoteName)
+        let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name: filtersUpdateStartedNoteName)
         
-        XCTAssertFalse(filterFileStorage.updateCustomFilterCalled)
-        XCTAssertFalse(filterFileStorage.updateFilterCalled)
-        XCTAssertFalse(metaStorage.updateFiltersCalled)
-        XCTAssertFalse(metaStorage.updateGroupsCalled)
-        XCTAssertFalse(metaStorage.updateAllLangsCalled)
-        XCTAssertFalse(metaStorage.updateAllTagsCalled)
-        XCTAssertFalse(metaStorage.updateLocalizationForGroupCalled)
-        XCTAssertFalse(metaStorage.updateLocalizationForFilterCalled)
+        let storedGroupIds = metaStorage.groupsTableMock.map{ $0.groupId }
+        let storedFilterIds = metaStorage.filtersTableMock.map{ $0.filterId }
+        filterService.groups.forEach { group in
+            XCTAssert(storedGroupIds.contains(group.groupId))
+            group.filters.forEach { XCTAssert(storedFilterIds.contains($0.filterId)) }
+        }
+        
+        let removedFilterId = 3
+        let modifiedFilterId = 10
+        let addedFilterId = 31
+        
+        var modifiedFilters = mockFiltersMeta.filters
+        modifiedFilters.removeAll(where: { $0.filterId ==  removedFilterId })
+        
+        var modifiedFilter = modifiedFilters.first(where: { $0.filterId == modifiedFilterId })!
+        modifiedFilter = ExtendedFiltersMeta.Meta(filterId: modifiedFilter.filterId,
+                                                  name: modifiedFilter.name! + "_mod",
+                                                  description: modifiedFilter.description! + "_mod",
+                                                  timeAdded: modifiedFilter.timeAdded,
+                                                  homePage: modifiedFilter.homePage,
+                                                  updateFrequency: modifiedFilter.updateFrequency,
+                                                  displayNumber: modifiedFilter.displayNumber,
+                                                  group: modifiedFilter.group,
+                                                  filterDownloadPage: modifiedFilter.filterDownloadPage,
+                                                  trustLevel: modifiedFilter.trustLevel,
+                                                  version: modifiedFilter.version! + "1",
+                                                  lastUpdateDate: modifiedFilter.lastUpdateDate,
+                                                  languages: [],
+                                                  tags: [])
+        let modifiedFilterIndex = modifiedFilters.firstIndex(where: { $0.filterId == modifiedFilterId })!
+        modifiedFilters[modifiedFilterIndex] = modifiedFilter
+        
+        let newFilterGroup = mockFiltersMeta.groups.first(where: { $0.groupId == SafariGroup.GroupType.annoyances.id })!
+        let newFilter = ExtendedFiltersMeta.Meta(filterId: addedFilterId,
+                                                 name: "newFilterName",
+                                                 description: "newFilterDescription",
+                                                 timeAdded: Date(),
+                                                 homePage: "newFilterHomepage",
+                                                 updateFrequency: 30000,
+                                                 displayNumber: addedFilterId,
+                                                 group: newFilterGroup,
+                                                 filterDownloadPage: "newFilterDownloadPage",
+                                                 trustLevel: .full,
+                                                 version: "1.1.1.1",
+                                                 lastUpdateDate: Date(),
+                                                 languages: [],
+                                                 tags: [])
+        modifiedFilters.append(newFilter)
+    
+        let newMeta = ExtendedFiltersMeta(groups: mockFiltersMeta.groups, tags: mockFiltersMeta.tags, filters: modifiedFilters)
+        apiMethods.loadFiltersMetadataResult = newMeta
+        apiMethods.loadFiltersLocalizationsResult = mockFiltersLocalizations
+        metaStorage.updateFiltersResult = .success([modifiedFilterId])
+        
+        filterService.updateAllMeta(forcibly: true) { result in
+            switch result {
+            case .success(let updateResult):
+                XCTAssertEqual(updateResult.addedFilterIds, [addedFilterId])
+                XCTAssertEqual(updateResult.removedFiltersIds, [removedFilterId])
+                XCTAssertEqual(updateResult.failedFilterIds, [])
+                XCTAssertEqual(updateResult.updatedFilterIds, [modifiedFilterId])
+            case .error(_):
+                XCTFail()
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation, filtersUpdateFinishedExpectation, filtersUpdateStartedExpectation], timeout: 1.0)
+        
+        XCTAssertEqual(filterFileStorage.updateCustomFilterCalledCount, 2)
+        XCTAssertEqual(filterFileStorage.updateFilterCalledCount, 29)
+        XCTAssertEqual(metaStorage.updateFiltersCalledCount, 1)
+        XCTAssertEqual(metaStorage.updateGroupsCalledCount, 1)
+        XCTAssertEqual(metaStorage.updateAllLangsCalledCount, 2)
+        XCTAssertEqual(metaStorage.updateAllTagsCalledCount, 2)
+        XCTAssertEqual(metaStorage.updateLocalizationForGroupCalledCount, 8)
+        XCTAssertEqual(metaStorage.updateLocalizationForFilterCalledCount, 30)
+    }
+    
+    // All filters files failed to update
+    func testUpdateAllMetaWithUpdateAllFiltersFilesError() {
+        let expectation = XCTestExpectation()
+        let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: filtersUpdateFinishedNoteName)
+        let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name: filtersUpdateStartedNoteName)
+        
+        apiMethods.loadFiltersMetadataResult = mockFiltersMeta
+        apiMethods.loadFiltersLocalizationsResult = mockFiltersLocalizations
+        filterFileStorage.updateFilterResultError = FilterFilesStorageMockError.updateFilterError
+        filterFileStorage.updateCustomFilterError = FilterFilesStorageMockError.updateFilterError
         
         filterService.updateAllMeta(forcibly: true, onFiltersUpdated: { result in
-            
             switch result {
-            case .success(_): XCTFail()
-            case .error(let error):
-                XCTAssertEqual(error as! MetaStorageMockError, MetaStorageMockError.updateAllFiltersError)
+            case .success(let updateResult):
+                XCTAssert(updateResult.addedFilterIds.isEmpty)
+                XCTAssertEqual(updateResult.failedFilterIds.count, 30)
+                XCTAssert(updateResult.removedFiltersIds.isEmpty)
+                XCTAssert(updateResult.updatedFilterIds.isEmpty)
+                XCTAssertNil(updateResult.error)
+            case .error(_):
+                XCTFail()
             }
             expectation.fulfill()
         })
         wait(for: [expectation, filtersUpdateFinishedExpectation, filtersUpdateStartedExpectation], timeout: 1.0)
         
-        XCTAssert(filterFileStorage.updateCustomFilterCalled)
-        XCTAssert(filterFileStorage.updateFilterCalled)
-        XCTAssert(metaStorage.updateFiltersCalled)
-        XCTAssert(metaStorage.updateGroupsCalled)
-        XCTAssertFalse(metaStorage.updateAllLangsCalled)
-        XCTAssertFalse(metaStorage.updateAllTagsCalled)
-        XCTAssert(metaStorage.updateLocalizationForGroupCalled)
-        XCTAssert(metaStorage.updateLocalizationForFilterCalled)
+        XCTAssertEqual(filterFileStorage.updateCustomFilterCalledCount, 2)
+        XCTAssertEqual(filterFileStorage.updateFilterCalledCount, 28)
+        XCTAssertEqual(metaStorage.updateFiltersCalledCount, 0)
+        XCTAssertEqual(metaStorage.updateGroupsCalledCount, 1)
+        XCTAssertEqual(metaStorage.updateAllLangsCalledCount, 0)
+        XCTAssertEqual(metaStorage.updateAllTagsCalledCount, 0)
+        XCTAssertEqual(metaStorage.updateLocalizationForGroupCalledCount, 8)
+        XCTAssertEqual(metaStorage.updateLocalizationForFilterCalledCount, 30)
     }
     
+    // Error updating meta for groups
     func testUpdateAllGroupsError() {
-        metaStorage.updateGroupsResultError = MetaStorageMockError.updateAllGroupsError
         let expectation = XCTestExpectation()
-        let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: NSNotification.Name.init("AdGuardSDK.filtersUpdateFinished"))
-        let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name:
-            NSNotification.Name.init( "AdGuardSDK.filtersUpdateStarted"))
+        let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: filtersUpdateFinishedNoteName)
+        let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name: filtersUpdateStartedNoteName)
         
-        XCTAssertFalse(filterFileStorage.updateCustomFilterCalled)
-        XCTAssertFalse(filterFileStorage.updateFilterCalled)
-        XCTAssertFalse(metaStorage.updateFiltersCalled)
-        XCTAssertFalse(metaStorage.updateGroupsCalled)
-        XCTAssertFalse(metaStorage.updateAllLangsCalled)
-        XCTAssertFalse(metaStorage.updateAllTagsCalled)
-        XCTAssertFalse(metaStorage.updateLocalizationForGroupCalled)
-        XCTAssertFalse(metaStorage.updateLocalizationForFilterCalled)
-        
+        metaStorage.updateGroupsResultError = MetaStorageMockError.updateAllGroupsError
+        apiMethods.loadFiltersMetadataResult = mockFiltersMeta
+        apiMethods.loadFiltersLocalizationsResult = mockFiltersLocalizations
+
         filterService.updateAllMeta(forcibly: true, onFiltersUpdated: { result in
             switch result {
             case .success(_): XCTFail()
@@ -239,32 +356,28 @@ class FitlerServiceTest: XCTestCase {
         })
         wait(for: [expectation, filtersUpdateFinishedExpectation, filtersUpdateStartedExpectation], timeout: 1.0)
         
-        XCTAssert(filterFileStorage.updateCustomFilterCalled)
-        XCTAssert(filterFileStorage.updateFilterCalled)
-        XCTAssertFalse(metaStorage.updateFiltersCalled)
-        XCTAssert(metaStorage.updateGroupsCalled)
-        XCTAssertFalse(metaStorage.updateAllLangsCalled)
-        XCTAssertFalse(metaStorage.updateAllTagsCalled)
-        XCTAssert(metaStorage.updateLocalizationForGroupCalled)
-        XCTAssert(metaStorage.updateLocalizationForFilterCalled)
+        XCTAssertEqual(filterFileStorage.updateCustomFilterCalledCount, 2)
+        XCTAssertEqual(filterFileStorage.updateFilterCalledCount, 28)
+        XCTAssertEqual(metaStorage.updateFiltersCalledCount, 0)
+        XCTAssertEqual(metaStorage.updateGroupsCalledCount, 1)
+        XCTAssertEqual(metaStorage.updateAllLangsCalledCount, 0)
+        XCTAssertEqual(metaStorage.updateAllTagsCalledCount, 0)
+        XCTAssertEqual(metaStorage.updateLocalizationForGroupCalledCount, 8)
+        XCTAssertEqual(metaStorage.updateLocalizationForFilterCalledCount, 30)
         
     }
     
+    // Error updating meta for tags
     func testUpdateAllTagsError() {
-        metaStorage.updateAllTagsResultError = MetaStorageMockError.updateAllTagsError
         let expectation = XCTestExpectation()
-        let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: NSNotification.Name.init("AdGuardSDK.filtersUpdateFinished"))
-        let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name:
-            NSNotification.Name.init( "AdGuardSDK.filtersUpdateStarted"))
-        XCTAssertFalse(filterFileStorage.updateCustomFilterCalled)
-        XCTAssertFalse(filterFileStorage.updateFilterCalled)
-        XCTAssertFalse(metaStorage.updateFiltersCalled)
-        XCTAssertFalse(metaStorage.updateGroupsCalled)
-        XCTAssertFalse(metaStorage.updateAllLangsCalled)
-        XCTAssertFalse(metaStorage.updateAllTagsCalled)
-        XCTAssertFalse(metaStorage.updateLocalizationForGroupCalled)
-        XCTAssertFalse(metaStorage.updateLocalizationForFilterCalled)
+        let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: filtersUpdateFinishedNoteName)
+        let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name: filtersUpdateStartedNoteName)
         
+        metaStorage.updateAllTagsResultError = MetaStorageMockError.updateAllTagsError
+        apiMethods.loadFiltersMetadataResult = mockFiltersMeta
+        apiMethods.loadFiltersLocalizationsResult = mockFiltersLocalizations
+        metaStorage.updateFiltersResult = .success([1, 10]) // Random filters ids
+
         filterService.updateAllMeta(forcibly: true, onFiltersUpdated: { result in
             switch result {
             case .success(_): XCTFail()
@@ -275,31 +388,27 @@ class FitlerServiceTest: XCTestCase {
         })
         wait(for: [expectation, filtersUpdateFinishedExpectation, filtersUpdateStartedExpectation], timeout: 1.0)
         
-        XCTAssert(filterFileStorage.updateCustomFilterCalled)
-        XCTAssert(filterFileStorage.updateFilterCalled)
-        XCTAssert(metaStorage.updateFiltersCalled)
-        XCTAssert(metaStorage.updateGroupsCalled)
-        XCTAssertFalse(metaStorage.updateAllLangsCalled)
-        XCTAssert(metaStorage.updateAllTagsCalled)
-        XCTAssert(metaStorage.updateLocalizationForGroupCalled)
-        XCTAssert(metaStorage.updateLocalizationForFilterCalled)
+        XCTAssertEqual(filterFileStorage.updateCustomFilterCalledCount, 2)
+        XCTAssertEqual(filterFileStorage.updateFilterCalledCount, 28)
+        XCTAssertEqual(metaStorage.updateFiltersCalledCount, 1)
+        XCTAssertEqual(metaStorage.updateGroupsCalledCount, 1)
+        XCTAssertEqual(metaStorage.updateAllLangsCalledCount, 0)
+        XCTAssertEqual(metaStorage.updateAllTagsCalledCount, 1)
+        XCTAssertEqual(metaStorage.updateLocalizationForGroupCalledCount, 8)
+        XCTAssertEqual(metaStorage.updateLocalizationForFilterCalledCount, 30)
     }
     
+    // Error updating meta for langs
     func testUpdateAllLangsError() {
-        metaStorage.updateAllLangsResultError = MetaStorageMockError.updateAllLangsError
         let expectation = XCTestExpectation()
-        let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: NSNotification.Name.init("AdGuardSDK.filtersUpdateFinished"))
-        let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name:
-            NSNotification.Name.init( "AdGuardSDK.filtersUpdateStarted"))
-        XCTAssertFalse(filterFileStorage.updateCustomFilterCalled)
-        XCTAssertFalse(filterFileStorage.updateFilterCalled)
-        XCTAssertFalse(metaStorage.updateFiltersCalled)
-        XCTAssertFalse(metaStorage.updateGroupsCalled)
-        XCTAssertFalse(metaStorage.updateAllLangsCalled)
-        XCTAssertFalse(metaStorage.updateAllTagsCalled)
-        XCTAssertFalse(metaStorage.updateLocalizationForGroupCalled)
-        XCTAssertFalse(metaStorage.updateLocalizationForFilterCalled)
+        let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: filtersUpdateFinishedNoteName)
+        let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name: filtersUpdateStartedNoteName)
         
+        metaStorage.updateAllLangsResultError = MetaStorageMockError.updateAllLangsError
+        metaStorage.updateFiltersResult = .success([1, 10]) // Random filters ids
+        apiMethods.loadFiltersMetadataResult = mockFiltersMeta
+        apiMethods.loadFiltersLocalizationsResult = mockFiltersLocalizations
+    
         filterService.updateAllMeta(forcibly: true, onFiltersUpdated: { result in
             switch result {
             case .success(_): XCTFail()
@@ -310,30 +419,24 @@ class FitlerServiceTest: XCTestCase {
         })
         wait(for: [expectation, filtersUpdateFinishedExpectation, filtersUpdateStartedExpectation], timeout: 1.0)
         
-        XCTAssert(filterFileStorage.updateCustomFilterCalled)
-        XCTAssert(filterFileStorage.updateFilterCalled)
-        XCTAssert(metaStorage.updateFiltersCalled)
-        XCTAssert(metaStorage.updateGroupsCalled)
-        XCTAssert(metaStorage.updateAllLangsCalled)
-        XCTAssert(metaStorage.updateAllTagsCalled)
-        XCTAssert(metaStorage.updateLocalizationForGroupCalled)
-        XCTAssert(metaStorage.updateLocalizationForFilterCalled)
+        XCTAssertEqual(filterFileStorage.updateCustomFilterCalledCount, 2)
+        XCTAssertEqual(filterFileStorage.updateFilterCalledCount, 28)
+        XCTAssertEqual(metaStorage.updateFiltersCalledCount, 1)
+        XCTAssertEqual(metaStorage.updateGroupsCalledCount, 1)
+        XCTAssertEqual(metaStorage.updateAllLangsCalledCount, 1)
+        XCTAssertEqual(metaStorage.updateAllTagsCalledCount, 1)
+        XCTAssertEqual(metaStorage.updateLocalizationForGroupCalledCount, 8)
+        XCTAssertEqual(metaStorage.updateLocalizationForFilterCalledCount, 30)
     }
     
     func testUpdateLocalizationForFilterError() {
-        metaStorage.updateLocalizationForFilterResultError = MetaStorageMockError.updateLocalizationForFilterError
         let expectation = XCTestExpectation()
-        let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: NSNotification.Name.init("AdGuardSDK.filtersUpdateFinished"))
-        let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name:
-            NSNotification.Name.init( "AdGuardSDK.filtersUpdateStarted"))
-        XCTAssertFalse(filterFileStorage.updateCustomFilterCalled)
-        XCTAssertFalse(filterFileStorage.updateFilterCalled)
-        XCTAssertFalse(metaStorage.updateFiltersCalled)
-        XCTAssertFalse(metaStorage.updateGroupsCalled)
-        XCTAssertFalse(metaStorage.updateAllLangsCalled)
-        XCTAssertFalse(metaStorage.updateAllTagsCalled)
-        XCTAssertFalse(metaStorage.updateLocalizationForGroupCalled)
-        XCTAssertFalse(metaStorage.updateLocalizationForFilterCalled)
+        let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: filtersUpdateFinishedNoteName)
+        let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name: filtersUpdateStartedNoteName)
+
+        apiMethods.loadFiltersMetadataResult = mockFiltersMeta
+        apiMethods.loadFiltersLocalizationsResult = mockFiltersLocalizations
+        metaStorage.updateLocalizationForFilterResultError = MetaStorageMockError.updateLocalizationForFilterError
         
         filterService.updateAllMeta(forcibly: true, onFiltersUpdated: { result in
             switch result {
@@ -345,30 +448,24 @@ class FitlerServiceTest: XCTestCase {
         })
         wait(for: [expectation, filtersUpdateFinishedExpectation, filtersUpdateStartedExpectation], timeout: 1.0)
         
-        XCTAssert(filterFileStorage.updateCustomFilterCalled)
-        XCTAssert(filterFileStorage.updateFilterCalled)
-        XCTAssert(metaStorage.updateFiltersCalled)
-        XCTAssert(metaStorage.updateGroupsCalled)
-        XCTAssert(metaStorage.updateAllLangsCalled)
-        XCTAssert(metaStorage.updateAllTagsCalled)
-        XCTAssert(metaStorage.updateLocalizationForGroupCalled)
-        XCTAssert(metaStorage.updateLocalizationForFilterCalled)
+        XCTAssertEqual(filterFileStorage.updateCustomFilterCalledCount, 2)
+        XCTAssertEqual(filterFileStorage.updateFilterCalledCount, 28)
+        XCTAssertEqual(metaStorage.updateFiltersCalledCount, 1)
+        XCTAssertEqual(metaStorage.updateGroupsCalledCount, 1)
+        XCTAssertEqual(metaStorage.updateAllLangsCalledCount, 0)
+        XCTAssertEqual(metaStorage.updateAllTagsCalledCount, 0)
+        XCTAssertEqual(metaStorage.updateLocalizationForGroupCalledCount, 8)
+        XCTAssertEqual(metaStorage.updateLocalizationForFilterCalledCount, 1)
     }
     
     func testUpdateLocalizationForGroupErorr() {
-        metaStorage.updateLocalizationForGroupResultError = MetaStorageMockError.updateLocalizationForGroupErorr
         let expectation = XCTestExpectation()
-        let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: NSNotification.Name.init("AdGuardSDK.filtersUpdateFinished"))
-        let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name:
-            NSNotification.Name.init( "AdGuardSDK.filtersUpdateStarted"))
-        XCTAssertFalse(filterFileStorage.updateCustomFilterCalled)
-        XCTAssertFalse(filterFileStorage.updateFilterCalled)
-        XCTAssertFalse(metaStorage.updateFiltersCalled)
-        XCTAssertFalse(metaStorage.updateGroupsCalled)
-        XCTAssertFalse(metaStorage.updateAllLangsCalled)
-        XCTAssertFalse(metaStorage.updateAllTagsCalled)
-        XCTAssertFalse(metaStorage.updateLocalizationForGroupCalled)
-        XCTAssertFalse(metaStorage.updateLocalizationForFilterCalled)
+        let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: filtersUpdateFinishedNoteName)
+        let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name: filtersUpdateStartedNoteName)
+
+        apiMethods.loadFiltersMetadataResult = mockFiltersMeta
+        apiMethods.loadFiltersLocalizationsResult = mockFiltersLocalizations
+        metaStorage.updateLocalizationForGroupResultError = MetaStorageMockError.updateLocalizationForGroupErorr
         
         filterService.updateAllMeta(forcibly: true, onFiltersUpdated: { result in
             switch result {
@@ -380,30 +477,24 @@ class FitlerServiceTest: XCTestCase {
         })
         wait(for: [expectation, filtersUpdateFinishedExpectation, filtersUpdateStartedExpectation], timeout: 1.0)
         
-        XCTAssert(filterFileStorage.updateCustomFilterCalled)
-        XCTAssert(filterFileStorage.updateFilterCalled)
-        XCTAssert(metaStorage.updateFiltersCalled)
-        XCTAssert(metaStorage.updateGroupsCalled)
-        XCTAssert(metaStorage.updateAllLangsCalled)
-        XCTAssert(metaStorage.updateAllTagsCalled)
-        XCTAssert(metaStorage.updateLocalizationForGroupCalled)
-        XCTAssertFalse(metaStorage.updateLocalizationForFilterCalled)
+        XCTAssertEqual(filterFileStorage.updateCustomFilterCalledCount, 2)
+        XCTAssertEqual(filterFileStorage.updateFilterCalledCount, 28)
+        XCTAssertEqual(metaStorage.updateFiltersCalledCount, 1)
+        XCTAssertEqual(metaStorage.updateGroupsCalledCount, 1)
+        XCTAssertEqual(metaStorage.updateAllLangsCalledCount, 0)
+        XCTAssertEqual(metaStorage.updateAllTagsCalledCount, 0)
+        XCTAssertEqual(metaStorage.updateLocalizationForGroupCalledCount, 1)
+        XCTAssertEqual(metaStorage.updateLocalizationForFilterCalledCount, 0)
     }
     
     func testGetAllLocalizedGroupsError() {
-        metaStorage.getAllLocalizedGroupsResult = .error(MetaStorageMockError.getAllLocalizedGroupsError)
         let expectation = XCTestExpectation()
-        let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: NSNotification.Name.init("AdGuardSDK.filtersUpdateFinished"))
-        let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name:
-            NSNotification.Name.init( "AdGuardSDK.filtersUpdateStarted"))
-        XCTAssertFalse(filterFileStorage.updateCustomFilterCalled)
-        XCTAssertFalse(filterFileStorage.updateFilterCalled)
-        XCTAssertFalse(metaStorage.updateFiltersCalled)
-        XCTAssertFalse(metaStorage.updateGroupsCalled)
-        XCTAssertFalse(metaStorage.updateAllLangsCalled)
-        XCTAssertFalse(metaStorage.updateAllTagsCalled)
-        XCTAssertFalse(metaStorage.updateLocalizationForGroupCalled)
-        XCTAssertFalse(metaStorage.updateLocalizationForFilterCalled)
+        let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: filtersUpdateFinishedNoteName)
+        let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name: filtersUpdateStartedNoteName)
+        
+        apiMethods.loadFiltersMetadataResult = mockFiltersMeta
+        apiMethods.loadFiltersLocalizationsResult = mockFiltersLocalizations
+        metaStorage.getAllLocalizedGroupsResult = .error(MetaStorageMockError.getAllLocalizedGroupsError)
         
         filterService.updateAllMeta(forcibly: true, onFiltersUpdated: { result in
             switch result {
@@ -415,36 +506,26 @@ class FitlerServiceTest: XCTestCase {
         })
         wait(for: [expectation, filtersUpdateFinishedExpectation, filtersUpdateStartedExpectation], timeout: 1.0)
         
-        XCTAssert(filterFileStorage.updateCustomFilterCalled)
-        XCTAssert(filterFileStorage.updateFilterCalled)
-        XCTAssert(metaStorage.updateFiltersCalled)
-        XCTAssert(metaStorage.updateGroupsCalled)
-        XCTAssert(metaStorage.updateAllLangsCalled)
-        XCTAssert(metaStorage.updateAllTagsCalled)
-        XCTAssert(metaStorage.updateLocalizationForGroupCalled)
-        XCTAssert(metaStorage.updateLocalizationForFilterCalled)
-        XCTAssert(metaStorage.getAllLocalizedGroupsCalled)
+        XCTAssertEqual(filterFileStorage.updateCustomFilterCalledCount, 2)
+        XCTAssertEqual(filterFileStorage.updateFilterCalledCount, 28)
+        XCTAssertEqual(metaStorage.updateFiltersCalledCount, 1)
+        XCTAssertEqual(metaStorage.updateGroupsCalledCount, 1)
+        XCTAssertEqual(metaStorage.updateAllLangsCalledCount, 0)
+        XCTAssertEqual(metaStorage.updateAllTagsCalledCount, 0)
+        XCTAssertEqual(metaStorage.updateLocalizationForGroupCalledCount, 8)
+        XCTAssertEqual(metaStorage.updateLocalizationForFilterCalledCount, 30)
     }
     
     func testSetGroupWithSuccess() {
-        do {
-            let group = filterService.groups.first(where: { $0.groupType == .ads })!
-            let oldValue = group.isEnabled
-            
-            XCTAssertFalse(metaStorage.setGroupCalled)
-
-            try filterService.setGroup(withId: group.groupId, enabled: !group.isEnabled)
-            guard let group = filterService.groups.first(where: { $0.groupType == .ads }) else { return XCTFail() }
-            XCTAssertNotEqual(oldValue, group.isEnabled)
-            
-            XCTAssert(metaStorage.setGroupCalled)
-        } catch {
-            XCTFail("\(error)")
-        }
+        let group = filterService.groups.first(where: { $0.groupType == .ads })!
+        try! filterService.setGroup(withId: group.groupId, enabled: !group.isEnabled)
+        let groupAfterSet = filterService.groups.first(where: { $0.groupType == .ads })!
+        XCTAssertNotEqual(groupAfterSet.isEnabled, group.isEnabled)
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 1)
     }
     
     func testSetGroupWithNonExistingGroupId() {
-        XCTAssertThrowsError(try filterService.setGroup(withId: -123466, enabled: false), "") { error in
+        XCTAssertThrowsError(try filterService.setGroup(withId: -123466, enabled: false)) { error in
             if case FiltersService.FilterServiceError.nonExistingGroupId(groupId: _) = error {}
             else {
                 XCTFail()
@@ -454,32 +535,23 @@ class FitlerServiceTest: XCTestCase {
     
     func testSetGroupWithFailure() {
         metaStorage.setGroupResultError = MetaStorageMockError.setGroupError
-        XCTAssertFalse(metaStorage.setGroupCalled)
-        XCTAssertThrowsError(try filterService.setGroup(withId: 1, enabled: false), "") { error in
+        XCTAssertThrowsError(try filterService.setGroup(withId: SafariGroup.GroupType.ads.id, enabled: false), "") { error in
             XCTAssertEqual(error as! MetaStorageMockError, MetaStorageMockError.setGroupError)
         }
         
-        XCTAssert(metaStorage.setGroupCalled)
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 1)
     }
     
     func testSetFilterWithSuccess() {
-        do {
-            var fitler = (filterService.groups.first(where: { $0.groupType == .ads})?.filters.first)!
-            let oldValue = fitler.isEnabled
-            XCTAssertFalse(metaStorage.setFilterCalled)
-
-            try filterService.setFilter(withId: fitler.filterId, SafariGroup.GroupType.ads.rawValue, enabled: !fitler.isEnabled)
-            fitler = (filterService.groups.first(where: { $0.groupType == .ads })?.filters.first(where: { $0.filterId == fitler.filterId }))!
-            XCTAssertNotEqual(oldValue, fitler.isEnabled)
-            XCTAssert(metaStorage.setFilterCalled)
-            
-        } catch {
-            XCTFail("\(error)")
-        }
+        let fitler = (filterService.groups.first(where: { $0.groupType == .ads})?.filters.first)!
+        try! filterService.setFilter(withId: fitler.filterId, SafariGroup.GroupType.ads.rawValue, enabled: !fitler.isEnabled)
+        let fitlerAfterSet = (filterService.groups.first(where: { $0.groupType == .ads })?.filters.first(where: { $0.filterId == fitler.filterId }))!
+        XCTAssertNotEqual(fitlerAfterSet.isEnabled, fitler.isEnabled)
+        XCTAssertEqual(metaStorage.setFilterCalledCount, 1)
     }
     
     func testSetFilterWithNonExistingFilterId() {
-        XCTAssertThrowsError(try filterService.setFilter(withId: -123123, -123123, enabled: false), "") { error in
+        XCTAssertThrowsError(try filterService.setFilter(withId: -123123, -123123, enabled: false)) { error in
             if case FiltersService.FilterServiceError.nonExistingFilterId(filterId: _) = error {}
             else {
                 XCTFail()
@@ -489,16 +561,14 @@ class FitlerServiceTest: XCTestCase {
     
     func testSetFilterWithFailure() {
         metaStorage.setFilterResultError = MetaStorageMockError.setFilterError
-        XCTAssertFalse(metaStorage.setFilterCalled)
         XCTAssertThrowsError(try filterService.setFilter(withId: 1, 1, enabled: false), "") { error in
             XCTAssertEqual(error as! MetaStorageMockError, MetaStorageMockError.setFilterError)
         }
-        XCTAssert(metaStorage.setFilterCalled)
+        XCTAssertEqual(metaStorage.setFilterCalledCount, 1)
     }
     
     func testAddCustomFilter() {
         let filterId = metaStorage.nextCustomFilterId
-        let filterDownloadPage = "https://gitcdn.xyz/cdn/farrokhi/adblock-iran/4eb5c3eae9bb7593d98731e200233af27760874c/filter.txt"
         let lastUpdateDate = Date()
         let filter = CustomFilterMeta(name: "Foo",
                              description: "Bar",
@@ -509,38 +579,35 @@ class FitlerServiceTest: XCTestCase {
                              licensePage: "license",
                              issuesReportPage: "issuePage",
                              communityPage: "page",
-                             filterDownloadPage: filterDownloadPage,
-                             rulesCount: 1)
+                             filterDownloadPage: "filterDownloadPage",
+                             rulesCount: 10)
         
-        XCTAssertFalse(metaStorage.addFilterCalled)
-        XCTAssertFalse(filterFileStorage.updateCustomFilterCalled)
-        XCTAssertNil(filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: {$0.filterId == filterId }))
-        XCTAssert(filterFileStorage.customFilters.isEmpty)
+        XCTAssertEqual(filterService.groups.filter{$0.groupId == SafariGroup.GroupType.custom.id}[0].filters.count, 2)
         
         let expectation = XCTestExpectation()
-        filterService.add(customFilter: filter, enabled: false) { error in
+        
+        filterService.add(customFilter: filter, enabled: true) { error in
             XCTAssertNil(error)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.5)
         
-        XCTAssert(metaStorage.addFilterCalled)
-        XCTAssert(filterFileStorage.updateCustomFilterCalled)
-        let newFilter = filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: {$0.filterId == filterId })!
+        XCTAssertEqual(metaStorage.addFilterCalledCount, 1)
+        XCTAssertEqual(filterFileStorage.updateCustomFilterCalledCount, 1)
         
+        let newFilter = filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: {$0.filterId == filterId })!
         XCTAssertEqual(newFilter?.name, "Foo")
         XCTAssertEqual(newFilter?.description, "Bar")
         XCTAssertEqual(newFilter?.version, "123")
         XCTAssertEqual(newFilter?.lastUpdateDate, lastUpdateDate)
         XCTAssertEqual(newFilter?.updateFrequency, 123)
         XCTAssertEqual(newFilter?.homePage, "url")
-        XCTAssertEqual(newFilter?.filterDownloadPage, filterDownloadPage)
+        XCTAssertEqual(newFilter?.filterDownloadPage, "filterDownloadPage")
         
-        XCTAssertEqual(filterFileStorage.customFilters.count, 1)
+        XCTAssertEqual(filterService.groups.filter{$0.groupId == SafariGroup.GroupType.custom.id}[0].filters.count, 3)
     }
     
     func testAddCustomFilterWithAddError() {
-        let filterDownloadPage = "https://gitcdn.xyz/cdn/farrokhi/adblock-iran/4eb5c3eae9bb7593d98731e200233af27760874c/filter.txt"
         let filterId = metaStorage.nextCustomFilterId
         metaStorage.addResultError = MetaStorageMockError.addError
         let customFilter = CustomFilterMeta(name: "Foo",
@@ -552,20 +619,16 @@ class FitlerServiceTest: XCTestCase {
                                             licensePage: "license",
                                             issuesReportPage: "issuePage",
                                             communityPage: "page",
-                                            filterDownloadPage: filterDownloadPage,
+                                            filterDownloadPage: "filterDownloadPage",
                                             rulesCount: 1)
         
-        XCTAssertFalse(metaStorage.addFilterCalled)
-        XCTAssertFalse(filterFileStorage.updateCustomFilterCalled)
-        XCTAssertNil(filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: {$0.filterId == filterId }))
-        XCTAssert(filterFileStorage.customFilters.isEmpty)
-        
         let expectation = XCTestExpectation()
+        
         filterService.add(customFilter: customFilter, enabled: false) { error in
             XCTAssertEqual(error as! MetaStorageMockError, MetaStorageMockError.addError)
-            XCTAssert(self.metaStorage.addFilterCalled)
-            XCTAssert(self.filterFileStorage.updateCustomFilterCalled)
-            XCTAssertEqual(self.filterFileStorage.customFilters.count, 1)
+            XCTAssertEqual(self.metaStorage.addFilterCalledCount, 1)
+            XCTAssertEqual(self.filterFileStorage.updateCustomFilterCalledCount, 1)
+            XCTAssertEqual(self.filterService.groups.filter{$0.groupId == SafariGroup.GroupType.custom.id}[0].filters.count, 2)
             XCTAssertNil(self.filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: {$0.filterId == filterId }))
             expectation.fulfill()
         }
@@ -573,7 +636,6 @@ class FitlerServiceTest: XCTestCase {
     }
     
     func testAddCustomFilterWithUpdateCustomFilterError() {
-        let filterDownloadPage = "https://gitcdn.xyz/cdn/farrokhi/adblock-iran/4eb5c3eae9bb7593d98731e200233af27760874c/filter.txt"
         let filterId = metaStorage.nextCustomFilterId
         let customFilter = CustomFilterMeta(name: "Foo",
                                             description: "Bar",
@@ -584,20 +646,17 @@ class FitlerServiceTest: XCTestCase {
                                             licensePage: "license",
                                             issuesReportPage: "issuePage",
                                             communityPage: "page",
-                                            filterDownloadPage: filterDownloadPage,
+                                            filterDownloadPage: "filterDownloadPage",
                                             rulesCount: 1)
-        filterFileStorage.updateCustomFilterResult = .error(FilterFilesStorageMockError.updateCustomFilterError)
-        XCTAssertFalse(metaStorage.addFilterCalled)
-        XCTAssertFalse(filterFileStorage.updateCustomFilterCalled)
-        XCTAssert(filterFileStorage.customFilters.isEmpty)
-        XCTAssertNil(filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: {$0.filterId == filterId }))
         
+        filterFileStorage.updateCustomFilterError = FilterFilesStorageMockError.updateCustomFilterError
         let expectation = XCTestExpectation()
+        
         filterService.add(customFilter: customFilter, enabled: false) { error in
             XCTAssertEqual(error as! FilterFilesStorageMockError, FilterFilesStorageMockError.updateCustomFilterError)
-            XCTAssertFalse(self.metaStorage.addFilterCalled)
-            XCTAssert(self.filterFileStorage.updateCustomFilterCalled)
-            XCTAssert(self.filterFileStorage.customFilters.isEmpty)
+            XCTAssertEqual(self.metaStorage.addFilterCalledCount, 0)
+            XCTAssertEqual(self.filterFileStorage.updateCustomFilterCalledCount, 1)
+            XCTAssertEqual(self.filterService.groups.filter{$0.groupId == SafariGroup.GroupType.custom.id}[0].filters.count, 2)
             XCTAssertNil(self.filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: {$0.filterId == filterId }))
             expectation.fulfill()
         }
@@ -605,7 +664,7 @@ class FitlerServiceTest: XCTestCase {
     }
     
     func testAddCustomFilterWithMissedDownloadPageError() {
-        let filterId = metaStorage.nextCustomFilterId
+        let filterId = CustomFilterMeta.baseCustomFilterId + 1
         let customFilter = CustomFilterMeta(name: "Foo",
                                             description: "Bar",
                                             version: "123",
@@ -617,20 +676,16 @@ class FitlerServiceTest: XCTestCase {
                                             communityPage: "page",
                                             filterDownloadPage: nil,
                                             rulesCount: 1)
-        XCTAssertFalse(metaStorage.addFilterCalled)
-        XCTAssertFalse(filterFileStorage.updateCustomFilterCalled)
-        XCTAssert(filterFileStorage.customFilters.isEmpty)
-        XCTAssertNil(filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: {$0.filterId == filterId }))
-        
+
         let expectation = XCTestExpectation()
         filterService.add(customFilter: customFilter, enabled: false) { error in
             guard case FiltersService.FilterServiceError.missedFilterDownloadPage(filterName: _) = error! else {
                 XCTFail()
                 return
             }
-            XCTAssertFalse(self.metaStorage.addFilterCalled)
-            XCTAssertFalse(self.filterFileStorage.updateCustomFilterCalled)
-            XCTAssert(self.filterFileStorage.customFilters.isEmpty)
+            XCTAssertEqual(self.metaStorage.addFilterCalledCount, 0)
+            XCTAssertEqual(self.filterFileStorage.updateCustomFilterCalledCount, 0)
+            XCTAssertEqual(self.filterService.groups.filter{$0.groupId == SafariGroup.GroupType.custom.id}[0].filters.count, 2)
             XCTAssertNil(self.filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: {$0.filterId == filterId }))
             expectation.fulfill()
         }
@@ -638,198 +693,166 @@ class FitlerServiceTest: XCTestCase {
     }
     
     func testDeleteCustomFilterWithSuccess() {
-        do {
-            let filterId = metaStorage.nextCustomFilterId
-            let filterDownloadPage = "https://gitcdn.xyz/cdn/farrokhi/adblock-iran/4eb5c3eae9bb7593d98731e200233af27760874c/filter.txt"
-            let filter = CustomFilterMeta(name: "Foo",
-                                 description: "Bar",
-                                 version: "123",
-                                 lastUpdateDate: Date(),
-                                 updateFrequency: 123,
-                                 homePage: "url",
-                                 licensePage: "license",
-                                 issuesReportPage: "issuePage",
-                                 communityPage: "page",
-                                 filterDownloadPage: filterDownloadPage,
-                                 rulesCount: 1)
-            
+        let expectedFilterId = metaStorage.nextCustomFilterId
+        let filter = CustomFilterMeta(name: "Foo",
+                             description: "Bar",
+                             version: "123",
+                             lastUpdateDate: Date(),
+                             updateFrequency: 123,
+                             homePage: "url",
+                             licensePage: "license",
+                             issuesReportPage: "issuePage",
+                             communityPage: "page",
+                             filterDownloadPage: "filterDownloadPage",
+                             rulesCount: 1)
+        
 
-            let expectation = XCTestExpectation()
-            filterService.add(customFilter: filter, enabled: false) { error in
-                XCTAssertNil(error)
-                expectation.fulfill()
-            }
-            wait(for: [expectation], timeout: 0.5)
-            
-            XCTAssertFalse(filterFileStorage.customFilters.isEmpty)
-            XCTAssertNotNil(filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: { $0.filterId == filterId }))
-            
-            XCTAssertFalse(metaStorage.deleteFilterCalled)
-            XCTAssertFalse(filterFileStorage.deleteFilterCalled)
-            
-            try filterService.deleteCustomFilter(withId: filterId)
-            
-            XCTAssert(metaStorage.deleteFilterCalled)
-            XCTAssert(filterFileStorage.deleteFilterCalled)
-            XCTAssert(filterFileStorage.customFilters.isEmpty)
-            XCTAssertNil(filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: { $0.filterId == filterId }))
-
-        } catch {
-            XCTFail("\(error)")
+        let expectation = XCTestExpectation()
+        filterService.add(customFilter: filter, enabled: false) { error in
+            XCTAssertNil(error)
+            expectation.fulfill()
         }
+        wait(for: [expectation], timeout: 0.5)
+        
+        XCTAssertFalse(filterService.groups.filter{$0.groupId == SafariGroup.GroupType.custom.id}[0].filters.isEmpty)
+        XCTAssertNotNil(filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: { $0.filterId == expectedFilterId }))
+        XCTAssertEqual(metaStorage.deleteFilterCalledCount, 0)
+        XCTAssertEqual(filterFileStorage.deleteFilterCalledCount, 0)
+        
+        try! filterService.deleteCustomFilter(withId: expectedFilterId)
+        
+        XCTAssertEqual(metaStorage.deleteFilterCalledCount, 1)
+        XCTAssertEqual(filterFileStorage.deleteFilterCalledCount, 1)
+        XCTAssertEqual(filterService.groups.filter{$0.groupId == SafariGroup.GroupType.custom.id}[0].filters.count, 2)
+        XCTAssertNil(filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: { $0.filterId == expectedFilterId }))
     }
     
     func testDeleteCustomFilterWithDeleteMetaError() {
         let filterId = metaStorage.nextCustomFilterId
         metaStorage.deleteFilterResultError = MetaStorageMockError.deleteError
-        XCTAssertFalse(metaStorage.deleteFilterCalled)
-        XCTAssertFalse(filterFileStorage.deleteFilterCalled)
-        XCTAssert(filterFileStorage.customFilters.isEmpty)
         XCTAssertNil(filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: { $0.filterId == filterId }))
-        XCTAssertThrowsError(try filterService.deleteCustomFilter(withId: metaStorage.nextCustomFilterId), "") { error in
+        
+        XCTAssertThrowsError(try filterService.deleteCustomFilter(withId: filterId)) { error in
             XCTAssertEqual(error as! MetaStorageMockError, MetaStorageMockError.deleteError)
         }
         
-        XCTAssert(metaStorage.deleteFilterCalled)
-        XCTAssertFalse(filterFileStorage.deleteFilterCalled)
+        XCTAssertEqual(metaStorage.deleteFilterCalledCount, 1)
+        XCTAssertEqual(filterFileStorage.deleteFilterCalledCount, 0)
         XCTAssertNil(filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: { $0.filterId == filterId }))
-        XCTAssert(filterFileStorage.customFilters.isEmpty)
-
+        XCTAssertEqual(self.filterService.groups.filter{$0.groupId == SafariGroup.GroupType.custom.id}[0].filters.count, 2)
     }
     
     func testDeleteCustomFilterWithDeleteFilterError() {
         let filterId = metaStorage.nextCustomFilterId
-        XCTAssertFalse(metaStorage.deleteFilterCalled)
-        XCTAssertFalse(filterFileStorage.deleteFilterCalled)
-        filterFileStorage.deleteResult = .error(FilterFilesStorageMockError.deleteError)
+        filterFileStorage.deleteResultError = FilterFilesStorageMockError.deleteError
         XCTAssertNil(filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: { $0.filterId == filterId }))
-        XCTAssert(filterFileStorage.customFilters.isEmpty)
-        XCTAssertThrowsError(try filterService.deleteCustomFilter(withId: metaStorage.nextCustomFilterId), "") { error in
+        XCTAssertEqual(filterService.groups.filter{$0.groupId == SafariGroup.GroupType.custom.id}[0].filters.count, 2)
+        
+        XCTAssertThrowsError(try filterService.deleteCustomFilter(withId: metaStorage.nextCustomFilterId)) { error in
             XCTAssertEqual(error as! FilterFilesStorageMockError, FilterFilesStorageMockError.deleteError)
         }
-        XCTAssert(metaStorage.deleteFilterCalled)
-        XCTAssert(filterFileStorage.deleteFilterCalled)
+        XCTAssertEqual(metaStorage.deleteFilterCalledCount, 1)
+        XCTAssertEqual(filterFileStorage.deleteFilterCalledCount, 1)
         XCTAssertNil(filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: { $0.filterId == filterId }))
-        XCTAssert(filterFileStorage.customFilters.isEmpty)
+        XCTAssertEqual(filterService.groups.filter{$0.groupId == SafariGroup.GroupType.custom.id}[0].filters.count, 2)
     }
     
-    func testDeleteCustomFilterWithNegativeId() {
+    func testDeleteCustomFilterWithNotExistingId() {
         let filterId = metaStorage.nextCustomFilterId
 
-        XCTAssertFalse(metaStorage.deleteFilterCalled)
-        XCTAssertFalse(filterFileStorage.deleteFilterCalled)
         XCTAssertNil(filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: { $0.filterId == filterId }))
-        XCTAssert(filterFileStorage.customFilters.isEmpty)
-        XCTAssertThrowsError(try filterService.deleteCustomFilter(withId: -12345), "") { error in
+        XCTAssertEqual(filterService.groups.filter{$0.groupId == SafariGroup.GroupType.custom.id}[0].filters.count, 2)
+        
+        XCTAssertThrowsError(try filterService.deleteCustomFilter(withId: -12345)) { error in
             if case FiltersService.FilterServiceError.invalidCustomFilterId(filterId: _) = error {}
             else {
                 XCTFail()
             }
         }
-        XCTAssertFalse(metaStorage.deleteFilterCalled)
-        XCTAssertFalse(filterFileStorage.deleteFilterCalled)
+        XCTAssertEqual(metaStorage.deleteFilterCalledCount, 0)
+        XCTAssertEqual(filterFileStorage.deleteFilterCalledCount, 0)
         XCTAssertNil(filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: { $0.filterId == filterId }))
-        XCTAssert(filterFileStorage.customFilters.isEmpty)
+        XCTAssertEqual(filterService.groups.filter{$0.groupId == SafariGroup.GroupType.custom.id}[0].filters.count, 2)
     }
     
     func testDeleteCustomFilterWithWrongId() {
         let filterId = metaStorage.nextCustomFilterId
-
-        XCTAssertFalse(metaStorage.deleteFilterCalled)
-        XCTAssertFalse(filterFileStorage.deleteFilterCalled)
         XCTAssertNil(filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: { $0.filterId == filterId }))
-        XCTAssert(filterFileStorage.customFilters.isEmpty)
-        XCTAssertThrowsError(try filterService.deleteCustomFilter(withId: 1), "") { error in
+        XCTAssertEqual(filterService.groups.filter{$0.groupId == SafariGroup.GroupType.custom.id}[0].filters.count, 2)
+        
+        XCTAssertThrowsError(try filterService.deleteCustomFilter(withId: 1)) { error in
             if case FiltersService.FilterServiceError.invalidCustomFilterId(filterId: _) = error {}
             else {
                 XCTFail()
             }
         }
-        XCTAssertFalse(metaStorage.deleteFilterCalled)
-        XCTAssertFalse(filterFileStorage.deleteFilterCalled)
+        XCTAssertEqual(metaStorage.deleteFilterCalledCount, 0)
+        XCTAssertEqual(filterFileStorage.deleteFilterCalledCount, 0)
         XCTAssertNil(filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: { $0.filterId == filterId }))
-        XCTAssert(filterFileStorage.customFilters.isEmpty)
+        XCTAssertEqual(filterService.groups.filter{$0.groupId == SafariGroup.GroupType.custom.id}[0].filters.count, 2)
     }
     
     func testRenameCustomFilterWithSuccess() {
-        do {
-            let filterId = metaStorage.nextCustomFilterId
-            XCTAssertNil(filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: {$0.filterId == filterId }))
-            let filter = CustomFilterMeta(name: "Foo",
-                                 description: "Bar",
-                                 version: "123",
-                                 lastUpdateDate: Date(),
-                                 updateFrequency: 123,
-                                 homePage: "url",
-                                 licensePage: "license",
-                                 issuesReportPage: "issuePage",
-                                 communityPage: "page",
-                                 filterDownloadPage: "downloadPage",
-                                 rulesCount: 1)
-            
-            let expectation = XCTestExpectation()
-            filterService.add(customFilter: filter, enabled: false) { error in
-                XCTAssertNil(error)
-                expectation.fulfill()
-            }
-            wait(for: [expectation], timeout: 0.5)
-            
-            XCTAssertNotNil(filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: { $0.filterId == filterId }))
-            
-            XCTAssertFalse(metaStorage.renameFilterCalled)
-            try filterService.renameCustomFilter(withId: filterId, to: "Bar")
-            
-            XCTAssert(metaStorage.renameFilterCalled)
-
-            let renamedFilter = filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: { $0.filterId == filterId })
-            
-            XCTAssertNotNil(renamedFilter)
-            XCTAssert(renamedFilter?.name == "Bar")
-            
-        } catch {
-            XCTFail("\(error)")
+        let filterId = metaStorage.nextCustomFilterId
+        XCTAssertNil(filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: {$0.filterId == filterId }))
+        let filter = CustomFilterMeta(name: "Foo",
+                             description: "Bar",
+                             version: "123",
+                             lastUpdateDate: Date(),
+                             updateFrequency: 123,
+                             homePage: "url",
+                             licensePage: "license",
+                             issuesReportPage: "issuePage",
+                             communityPage: "page",
+                             filterDownloadPage: "downloadPage",
+                             rulesCount: 1)
+        
+        let expectation = XCTestExpectation()
+        filterService.add(customFilter: filter, enabled: false) { error in
+            XCTAssertNil(error)
+            expectation.fulfill()
         }
+        wait(for: [expectation], timeout: 0.5)
+        
+        XCTAssertNotNil(filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: { $0.filterId == filterId }))
+        XCTAssertEqual(metaStorage.renameFilterCalledCount, 0)
+        
+        try! filterService.renameCustomFilter(withId: filterId, to: "Bar")
+        
+        XCTAssertEqual(metaStorage.renameFilterCalledCount, 1)
+
+        let renamedFilter = filterService.groups.first(where: { $0.groupType == .custom })?.filters.first(where: { $0.filterId == filterId })
+        
+        XCTAssertNotNil(renamedFilter)
+        XCTAssert(renamedFilter?.name == "Bar")
     }
     
     func testRenameCustomFilterWithRenameError() {
         metaStorage.renameResultError = MetaStorageMockError.renameError
-        XCTAssertFalse(metaStorage.renameFilterCalled)
-        XCTAssertThrowsError(try filterService.renameCustomFilter(withId: metaStorage.nextCustomFilterId, to: "foo"), "") { error in
+        
+        XCTAssertThrowsError(try filterService.renameCustomFilter(withId: metaStorage.nextCustomFilterId, to: "foo")) { error in
             XCTAssertEqual(error as! MetaStorageMockError, MetaStorageMockError.renameError)
         }
-        XCTAssert(metaStorage.renameFilterCalled)
+        XCTAssertEqual(metaStorage.renameFilterCalledCount, 1)
     }
     
     func testRenameCustomFilterWithNegativeId() {
-        XCTAssertFalse(metaStorage.renameFilterCalled)
-        XCTAssertThrowsError(try filterService.renameCustomFilter(withId: -123, to: "some"), "") { error in
+        XCTAssertThrowsError(try filterService.renameCustomFilter(withId: -123, to: "some")) { error in
             if case FiltersService.FilterServiceError.invalidCustomFilterId(filterId: _) = error {}
             else {
                 XCTFail()
             }
         }
-        XCTAssertFalse(metaStorage.renameFilterCalled)
+        XCTAssertEqual(metaStorage.renameFilterCalledCount, 0)
     }
     
     func testRenameCustomFilterWithWrongId() {
-        XCTAssertFalse(metaStorage.renameFilterCalled)
         XCTAssertThrowsError(try filterService.renameCustomFilter(withId: 1, to: "some"), "") { error in
             if case FiltersService.FilterServiceError.invalidCustomFilterId(filterId: _) = error {}
             else {
                 XCTFail()
             }
         }
-        XCTAssertFalse(metaStorage.renameFilterCalled)
-    }
-    
-    private func getFiltersService(_ filtersMetaResu: ExtendedFiltersMeta) -> FiltersServiceProtocol {
-        
-        httpRequestService = HttpRequestService(requestSender: <#T##RequestSenderProtocol#>)
-        
-        filterService = try FiltersService(configuration: ConfigurationMock(),
-                                           filterFilesStorage: filterFileStorage,
-                                           metaStorage: metaStorage,
-                                           userDefaultsStorage: userDefaultsStorage,
-                                           httpRequestService:  httpRequestService)
+        XCTAssertEqual(metaStorage.renameFilterCalledCount, 0)
     }
 }

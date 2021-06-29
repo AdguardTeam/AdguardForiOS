@@ -25,7 +25,6 @@ import Foundation
  If you want to get more info about filters or groups themselves you can searh them by filter or group id respectively
  */
 public struct FiltersUpdateResult {
-    var updatedGroupIds: [Int] = [] // Identifiers of groups that were successfully updated
     var updatedFilterIds: [Int] = [] // Identifiers of filters that were successfully updated
     var failedFilterIds: [Int] = [] // Identifiers of filters that failed to update
     var addedFilterIds: [Int] = [] // Identifiers of filters that were successfully added while updating
@@ -191,14 +190,15 @@ final class FiltersService: FiltersServiceProtocol {
             // Notify that filters started to update
             NotificationCenter.default.filtersUpdateStarted()
             
-            let group = DispatchGroup()
+            var updatedFilterFilesIds: Set<Int> = []
             
             // Update filters file content
+            let group = DispatchGroup()
             group.enter()
             self.updateFiltersFileContent { result in
-                updateResult.updatedGroupIds = result.0.sorted()
-                updateResult.updatedFilterIds = result.1.sorted()
-                updateResult.failedFilterIds = result.2.sorted()
+                updatedFilterFilesIds = result.0
+                updateResult.failedFilterIds = result.1.sorted()
+                
                 group.leave()
             }
             // Wait when files finish updating
@@ -206,11 +206,12 @@ final class FiltersService: FiltersServiceProtocol {
             
             // Update filters metadata
             group.enter()
-            self.updateMetadataForFilters(withIds: Set(updateResult.updatedFilterIds), Set(updateResult.updatedGroupIds)) { result in
+            self.updateMetadataForFilters(withIds: updatedFilterFilesIds) { result in
                 switch result {
                 case .success(let metaResult):
                     updateResult.addedFilterIds = metaResult.0
                     updateResult.removedFiltersIds = metaResult.1
+                    updateResult.updatedFilterIds = metaResult.2
                 case .error(let error):
                     updateMetadataError = error
                 }
@@ -562,9 +563,8 @@ final class FiltersService: FiltersServiceProtocol {
      Updates filters file content
      - Returns ids of groups which filters were updated; ids of filters that were updated; ids of filters that failed to update
      */
-    private typealias FiltersFileUpdateResult = (updatedGroupIds: Set<Int>, updatedFilterIds: Set<Int>, failedFilterIds: Set<Int>)
+    private typealias FiltersFileUpdateResult = (updatedFilterIds: Set<Int>, failedFilterIds: Set<Int>)
     private func updateFiltersFileContent(onFilesUpdated: @escaping (FiltersFileUpdateResult) -> Void) {
-        @Atomic var successfullyLoadedGroupIds: Set<Int> = []
         @Atomic var successfullyLoadedFilterIds: Set<Int> = []
         @Atomic var failedFilterIds: Set<Int> = []
         
@@ -580,13 +580,12 @@ final class FiltersService: FiltersServiceProtocol {
                     _failedFilterIds.mutate { $0.insert(filter.filterId) }
                 } else {
                     Logger.logDebug("(FiltersService) - updateFiltersFileContent; Successfully downloaded content of filter with id=\(filter.filterId)")
-                    _successfullyLoadedGroupIds.mutate { $0.insert(filter.group.groupId) }
                     _successfullyLoadedFilterIds.mutate { $0.insert(filter.filterId) }
                 }
                 group.leave()
             }
         }
-        let result = (_successfullyLoadedGroupIds.wrappedValue, _successfullyLoadedFilterIds.wrappedValue, _failedFilterIds.wrappedValue)
+        let result = (_successfullyLoadedFilterIds.wrappedValue, _failedFilterIds.wrappedValue)
         group.notify(queue: .main) { onFilesUpdated(result) }
     }
     
@@ -596,7 +595,7 @@ final class FiltersService: FiltersServiceProtocol {
      If update was successfull we return update result with new filter ids and removed filter ids in completion
      If update fails we provide an error in completion
      */
-    private func updateMetadataForFilters(withIds ids: Set<Int>, _ groupIds: Set<Int>, onFiltersMetaUpdated: @escaping (_ result: Result<FiltersMetaUpdateResult>) -> Void) {
+    private func updateMetadataForFilters(withIds ids: Set<Int>, onFiltersMetaUpdated: @escaping (_ result: Result<FiltersMetaUpdateResult>) -> Void) {
         var resultError: Error?
         var metaUpdateResult: FiltersMetaUpdateResult?
         let group = DispatchGroup()
@@ -608,7 +607,7 @@ final class FiltersService: FiltersServiceProtocol {
                                                lang: configuration.currentLanguage) { [weak self] filtersMeta in
             if let meta = filtersMeta {
                 do {
-                    metaUpdateResult = try self?.save(filtersMeta: meta, filtersIdsToUpdate: ids, groupIds)
+                    metaUpdateResult = try self?.save(filtersMeta: meta, filtersIdsToUpdate: ids)
                 } catch {
                     resultError = error
                     Logger.logError("(FiltersService) - Saving filters metadata error: \(error)")
@@ -621,7 +620,7 @@ final class FiltersService: FiltersServiceProtocol {
         apiMethods.loadFiltersLocalizations { [weak self] filtersMetaLocalizations in
             if let localizations = filtersMetaLocalizations {
                 do {
-                    try self?.save(localizations: localizations, filtersIdsToSave: ids, groupIds)
+                    try self?.save(localizations: localizations, filtersIdsToSave: ids)
                 } catch {
                     resultError = error
                     Logger.logError("(FiltersService) - Saving filters localizations error: \(error)")
@@ -649,19 +648,18 @@ final class FiltersService: FiltersServiceProtocol {
      - Parameter groupIds: Ids of groups which filters were successfully downloaded from the server
      - Returns ids of filters that were successfully added; ids of filters that were successfully removed
      */
-    private typealias FiltersMetaUpdateResult = (addedFilterIds: [Int], removedFiltersIds: [Int])
-    private func save(filtersMeta: ExtendedFiltersMeta, filtersIdsToUpdate: Set<Int>, _ groupIds: Set<Int>) throws -> FiltersMetaUpdateResult {
+    private typealias FiltersMetaUpdateResult = (addedFilterIds: [Int], removedFiltersIds: [Int], updatedFiltersIds: [Int])
+    private func save(filtersMeta: ExtendedFiltersMeta, filtersIdsToUpdate: Set<Int>) throws -> FiltersMetaUpdateResult {
         // Meta received from the server
         let allGroupsMeta = filtersMeta.groups
         let allFiltersMeta = filtersMeta.filters
         
         // Meta we should try to update in database
-        let groupsToUpdate = allGroupsMeta.filter { groupIds.contains($0.groupId) }
         let filtersToUpdate = allFiltersMeta.filter { filtersIdsToUpdate.contains($0.filterId) }
         
         // Update Groups meta
-        if !groupsToUpdate.isEmpty {
-            try metaStorage.update(groups: groupsToUpdate)
+        if !allGroupsMeta.isEmpty {
+            try metaStorage.update(groups: allGroupsMeta)
         }
         
         // Update Filters meta
@@ -689,18 +687,17 @@ final class FiltersService: FiltersServiceProtocol {
         let obsoleteFilterIds = Set(existingFilterIds).subtracting(receivedMetaFilterIds)
         let removedFiltersIds = removeFilters(withIds: obsoleteFilterIds.sorted())
         
-        return (addedFilterIds, removedFiltersIds)
+        return (addedFilterIds, removedFiltersIds, updatedFiltersIds)
     }
     
     /* Updates filters and groups localizations in database that were downloaded */
-    private func save(localizations: ExtendedFiltersMetaLocalizations, filtersIdsToSave: Set<Int>, _ groupIds: Set<Int>) throws {
+    private func save(localizations: ExtendedFiltersMetaLocalizations, filtersIdsToSave: Set<Int>) throws {
         // Groups localizations received from the server
         let allGroupsLocalizations = localizations.groups
         let allGroupIdsReceived = allGroupsLocalizations.keys
-        let groupIdsToUpdate = allGroupIdsReceived.filter { groupIds.contains($0) }
         
         // Updating groups localizations in database
-        for groupId in groupIdsToUpdate {
+        for groupId in allGroupIdsReceived {
             let localizationsByLangs = allGroupsLocalizations[groupId] ?? [:]
             let langs = localizationsByLangs.keys
             for lang in langs {
@@ -712,10 +709,9 @@ final class FiltersService: FiltersServiceProtocol {
         // Filters localizations received from the server
         let allFilterLocalizations = localizations.filters
         let allFilterIdsReceived = allFilterLocalizations.keys
-        let filterIdsToUpdate = allFilterIdsReceived.filter { filtersIdsToSave.contains($0) }
         
         // Updating filters localizations in database
-        for filterId in filterIdsToUpdate {
+        for filterId in allFilterIdsReceived {
             let localizationsByLangs = allFilterLocalizations[filterId] ?? [:]
             let langs = localizationsByLangs.keys
             for lang in langs {
