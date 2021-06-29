@@ -318,4 +318,34 @@ class FiltersMetaStorageTest: XCTestCase {
         XCTAssertEqual(filters[0].name, "New name")
         XCTAssertEqual(filters[0].description, "Custom filter description")
     }
+    
+    func testReset() {
+        let customGroupId = SafariGroup.GroupType.custom.id
+        var filters = try! metaStorage.getLocalizedFiltersForGroup(withId: customGroupId, forLanguage: "en")
+        XCTAssertEqual(filters.count, 0)
+        
+        let customFilterId = metaStorage.nextCustomFilterId
+        let customFilter = ExtendedFiltersMeta.Meta(filterId: customFilterId,
+                                                    name: "Custom filter",
+                                                    description: "Custom filter description",
+                                                    timeAdded: nil,
+                                                    homePage: "some.home.page",
+                                                    updateFrequency: 1000,
+                                                    displayNumber: 0,
+                                                    group: ExtendedFiltersMeta.Group(groupId: customGroupId, groupName: "name", displayNumber: 1),
+                                                    filterDownloadPage: "some.download.page",
+                                                    trustLevel: .full,
+                                                    version: "1.1.1",
+                                                    lastUpdateDate: nil,
+                                                    languages: [],
+                                                    tags: [])
+        try! metaStorage.add(filter: customFilter, enabled: true)
+        filters = try! metaStorage.getLocalizedFiltersForGroup(withId: customGroupId, forLanguage: "en")
+        XCTAssertEqual(filters.count, 1)
+        
+        try! metaStorage.reset()
+        
+        filters = try! metaStorage.getLocalizedFiltersForGroup(withId: customGroupId, forLanguage: "en")
+        XCTAssertEqual(filters.count, 0)
+    }
  }

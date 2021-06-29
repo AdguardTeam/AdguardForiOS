@@ -39,45 +39,33 @@ class UserRulesManagerTest: XCTestCase {
                      UserRule(ruleText: "foo10")]
     
     func testAllowlistRulesManager() {
-        guard let allowlistRulesManager = allowlistRulesManager else { return XCTFail() }
-        do {
-            try testAddRule(userRuleManager: allowlistRulesManager)
-            try testAddRules(userRuleManager: allowlistRulesManager)
-            try testModifyRule(userRuleManager: allowlistRulesManager)
-            try testRemoveRules(userRuleManager: allowlistRulesManager)
-            try testRemoveAllRules(userRuleManager: allowlistRulesManager)
-            testThreadSafty(userRuleManager: allowlistRulesManager)
-        } catch {
-            XCTFail("\(error)")
-        }
+        try! testAddRule(userRuleManager: allowlistRulesManager!)
+        try! testAddRules(userRuleManager: allowlistRulesManager!)
+        try! testModifyRule(userRuleManager: allowlistRulesManager!)
+        try! testRemoveRules(userRuleManager: allowlistRulesManager!)
+        try! testRemoveAllRules(userRuleManager: allowlistRulesManager!)
+        try! testReset(userRuleManager: allowlistRulesManager!)
+        testThreadSafty(userRuleManager: allowlistRulesManager!)
     }
     
     func testInvertedAllowlistRulesManager() {
-        guard let invertedAllowlistRulesManager = invertedAllowlistRulesManager else { return XCTFail() }
-        do {
-            try testAddRule(userRuleManager: invertedAllowlistRulesManager)
-            try testAddRules(userRuleManager: invertedAllowlistRulesManager)
-            try testModifyRule(userRuleManager: invertedAllowlistRulesManager)
-            try testRemoveRules(userRuleManager: invertedAllowlistRulesManager)
-            try testRemoveAllRules(userRuleManager: invertedAllowlistRulesManager)
-            testThreadSafty(userRuleManager: invertedAllowlistRulesManager)
-        } catch {
-            XCTFail("\(error)")
-        }
+        try! testAddRule(userRuleManager: invertedAllowlistRulesManager!)
+        try! testAddRules(userRuleManager: invertedAllowlistRulesManager!)
+        try! testModifyRule(userRuleManager: invertedAllowlistRulesManager!)
+        try! testRemoveRules(userRuleManager: invertedAllowlistRulesManager!)
+        try! testRemoveAllRules(userRuleManager: invertedAllowlistRulesManager!)
+        try! testReset(userRuleManager: invertedAllowlistRulesManager!)
+        testThreadSafty(userRuleManager: invertedAllowlistRulesManager!)
     }
     
     func testBlockinglistRulesManager() {
-        guard let blocklistRulesManager = blocklistRulesManager else { return XCTFail() }
-        do {
-            try testAddRule(userRuleManager: blocklistRulesManager)
-            try testAddRules(userRuleManager: blocklistRulesManager)
-            try testModifyRule(userRuleManager: blocklistRulesManager)
-            try testRemoveRules(userRuleManager: blocklistRulesManager)
-            try testRemoveAllRules(userRuleManager: blocklistRulesManager)
-            testThreadSafty(userRuleManager: blocklistRulesManager)
-        } catch {
-            XCTFail("\(error)")
-        }
+        try! testAddRule(userRuleManager: blocklistRulesManager!)
+        try! testAddRules(userRuleManager: blocklistRulesManager!)
+        try! testModifyRule(userRuleManager: blocklistRulesManager!)
+        try! testRemoveRules(userRuleManager: blocklistRulesManager!)
+        try! testRemoveAllRules(userRuleManager: blocklistRulesManager!)
+        try! testReset(userRuleManager: blocklistRulesManager!)
+        testThreadSafty(userRuleManager: blocklistRulesManager!)
     }
     
     private func testAddRule(userRuleManager: UserRulesManagerProtocol) throws {
@@ -155,8 +143,6 @@ class UserRulesManagerTest: XCTestCase {
         
         userRuleManager.removeAllRules()
         XCTAssert(userRuleManager.allRules.isEmpty)
-        
-        userRuleManager.removeAllRules()
     }
     
     private func testThreadSafty(userRuleManager: UserRulesManagerProtocol) {
@@ -199,5 +185,17 @@ class UserRulesManagerTest: XCTestCase {
         thread3.start()
         
         sleep(1)
+    }
+    
+    private func testReset(userRuleManager: UserRulesManagerProtocol) throws {
+        XCTAssert(userRuleManager.allRules.isEmpty)
+        userRuleManager.removeAllRules()
+        XCTAssert(userRuleManager.allRules.isEmpty)
+        
+        try userRuleManager.add(rules: testRules, override: false)
+        XCTAssertEqual(userRuleManager.allRules.count, testRules.count)
+        
+        try userRuleManager.reset()
+        XCTAssert(userRuleManager.allRules.isEmpty)
     }
 }

@@ -84,6 +84,18 @@ class ContentBlockersInfoStorageTest: XCTestCase {
         XCTAssertEqual(expectedRule, resultRule)
     }
     
+    func testReset() {
+        fillStorage()
+        try! infoStorage.reset()
+        XCTAssert(infoStorage.allCbInfo.isEmpty)
+        
+        let items = try! FileManager.default.contentsOfDirectory(at: TestsFileManager.workingUrl, includingPropertiesForKeys: nil, options: .includesDirectoriesPostOrder)
+        XCTAssert(items.isEmpty)
+        
+        // Test that service continues operating as usual
+        testSaveCbJsonWithEmptyStorage()
+    }
+    
     private func fillStorage() {
         XCTAssert(infoStorage.allCbInfo.isEmpty)
         
