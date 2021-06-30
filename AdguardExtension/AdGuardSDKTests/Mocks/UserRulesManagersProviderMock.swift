@@ -1,9 +1,13 @@
 import Foundation
 
 final class UserRulesManagersProviderMock: UserRulesManagersProviderProtocol {
-    var blocklistRulesManager: UserRulesManagerProtocol = BlocklistRulesManagerMock()
-    var allowlistRulesManager: UserRulesManagerProtocol = AllowlistRulesManagerMock()
-    var invertedAllowlistRulesManager: UserRulesManagerProtocol = InvertedAllowlistRulesManagerMock()
+    lazy var blocklistRulesManager: UserRulesManagerProtocol = { blocklistRulesManagerMock }()
+    lazy var allowlistRulesManager: UserRulesManagerProtocol = { allowlistRulesManagerMock }()
+    lazy var invertedAllowlistRulesManager: UserRulesManagerProtocol = { invertedAllowlistRulesManagerMock }()
+    
+    let blocklistRulesManagerMock = BlocklistRulesManagerMock()
+    let allowlistRulesManagerMock = AllowlistRulesManagerMock()
+    let invertedAllowlistRulesManagerMock = InvertedAllowlistRulesManagerMock()
     
     var resetCalledCount = 0
     var resetError: Error?
@@ -15,50 +19,53 @@ final class UserRulesManagersProviderMock: UserRulesManagersProviderProtocol {
     }
 }
 
-final class BlocklistRulesManagerMock: UserRulesManagerProtocol {
+class UserRulesManagerMock: UserRulesManagerProtocol {
+
+    var type: UserRuleType { .blocklist }
+    
     var rulesString: String = ""
     
     var allRules: [UserRuleProtocol] = []
     
-    var addRuleCalled = false
+    var addRuleCalledCount = 0
     var addRuleError: Error?
     func add(rule: UserRuleProtocol, override: Bool) throws {
-        addRuleCalled = true
+        addRuleCalledCount += 1
         if let error = addRuleError {
             throw error
         }
     }
     
-    var addRulesCalled = false
+    var addRulesCalledCount = 0
     var addRulesError: Error?
     func add(rules: [UserRuleProtocol], override: Bool) throws {
-        addRulesCalled = true
+        addRulesCalledCount += 1
         if let error = addRulesError {
             throw error
         }
     }
     
-    var modifyRuleCalled = false
+    var modifyRuleCalledCount = 0
     var modifyRuleError: Error?
     func modifyRule(_ oldRuleText: String, _ newRule: UserRuleProtocol) throws {
-        modifyRuleCalled = true
+        modifyRuleCalledCount += 1
         if let error = modifyRuleError {
             throw error
         }
     }
     
-    var removeRuleCalled = false
+    var removeRuleCalledCount = 0
     var removeRuleError: Error?
     func removeRule(withText ruleText: String) throws {
-        removeRuleCalled = true
+        removeRuleCalledCount += 1
         if let error = removeRuleError {
             throw error
         }
     }
     
-    var removeAllRulesCalled = false
+    var removeAllRulesCalledCount = 0
     func removeAllRules() {
-        removeAllRulesCalled = true
+        removeAllRulesCalledCount += 1
     }
     
     func reset() throws {
@@ -66,104 +73,12 @@ final class BlocklistRulesManagerMock: UserRulesManagerProtocol {
     }
 }
 
-final class AllowlistRulesManagerMock: UserRulesManagerProtocol {
-    var rulesString: String = ""
-    
-    var allRules: [UserRuleProtocol] = []
-    
-    var addRuleCalled = false
-    var addRuleError: Error?
-    func add(rule: UserRuleProtocol, override: Bool) throws {
-        addRuleCalled = true
-        if let error = addRuleError {
-            throw error
-        }
-    }
-    
-    var addRulesCalled = false
-    var addRulesError: Error?
-    func add(rules: [UserRuleProtocol], override: Bool) throws {
-        addRulesCalled = true
-        if let error = addRulesError {
-            throw error
-        }
-    }
-    
-    var modifyRuleCalled = false
-    var modifyRuleError: Error?
-    func modifyRule(_ oldRuleText: String, _ newRule: UserRuleProtocol) throws {
-        modifyRuleCalled = true
-        if let error = modifyRuleError {
-            throw error
-        }
-    }
-    
-    var removeRuleCalled = false
-    var removeRuleError: Error?
-    func removeRule(withText ruleText: String) throws {
-        removeRuleCalled = true
-        if let error = removeRuleError {
-            throw error
-        }
-    }
-    
-    var removeAllRulesCalled = false
-    func removeAllRules() {
-        removeAllRulesCalled = true
-    }
-    
-    func reset() throws {
-        
-    }
+final class BlocklistRulesManagerMock: UserRulesManagerMock {
+    override var type: UserRuleType { .blocklist }
 }
-
-final class InvertedAllowlistRulesManagerMock: UserRulesManagerProtocol {
-    var rulesString: String = ""
-    
-    var allRules: [UserRuleProtocol] = []
-    
-    var addRuleCalled = false
-    var addRuleError: Error?
-    func add(rule: UserRuleProtocol, override: Bool) throws {
-        addRuleCalled = true
-        if let error = addRuleError {
-            throw error
-        }
-    }
-    
-    var addRulesCalled = false
-    var addRulesError: Error?
-    func add(rules: [UserRuleProtocol], override: Bool) throws {
-        addRulesCalled = true
-        if let error = addRulesError {
-            throw error
-        }
-    }
-    
-    var modifyRuleCalled = false
-    var modifyRuleError: Error?
-    func modifyRule(_ oldRuleText: String, _ newRule: UserRuleProtocol) throws {
-        modifyRuleCalled = true
-        if let error = modifyRuleError {
-            throw error
-        }
-    }
-    
-    var removeRuleCalled = false
-    var removeRuleError: Error?
-    func removeRule(withText ruleText: String) throws {
-        removeRuleCalled = true
-        if let error = removeRuleError {
-            throw error
-        }
-    }
-    
-    var removeAllRulesCalled = false
-    func removeAllRules() {
-        removeAllRulesCalled = true
-    }
-    
-    func reset() throws {
-        
-    }
+final class AllowlistRulesManagerMock: UserRulesManagerMock {
+    override var type: UserRuleType { .allowlist }
+}
+final class InvertedAllowlistRulesManagerMock: UserRulesManagerMock {
+    override var type: UserRuleType { .invertedAllowlist }
 }

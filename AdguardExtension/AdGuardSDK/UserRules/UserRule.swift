@@ -39,7 +39,7 @@ public protocol UserRuleProtocol: Codable {
     static func isValid(rule: String) -> Bool
 }
 
-public struct UserRule: UserRuleProtocol {
+public struct UserRule: UserRuleProtocol, Equatable {
     public var ruleText: String
     public var isEnabled: Bool
     
