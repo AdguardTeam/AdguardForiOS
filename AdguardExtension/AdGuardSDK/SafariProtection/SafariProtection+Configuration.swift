@@ -74,19 +74,6 @@ extension SafariProtection {
         return workingQueue.sync { return configuration.allowlistIsInverted }
     }
     
-    public var updateOverWifiOnly: Bool {
-        get {
-            return workingQueue.sync { return configuration.updateOverWifiOnly }
-        }
-        set {
-            workingQueue.sync {
-                if newValue != updateOverWifiOnly {
-                    configuration.updateOverWifiOnly = updateOverWifiOnly
-                }
-            }
-        }
-    }
-    
     public func update(proStatus: Bool, onProStatusUpdated: @escaping (Error?) -> Void) {
         workingQueue.async { [weak self] in
             guard let self = self else {
