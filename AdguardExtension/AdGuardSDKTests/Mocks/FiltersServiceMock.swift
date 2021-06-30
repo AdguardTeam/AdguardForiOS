@@ -3,51 +3,53 @@ import Foundation
 final class FiltersServiceMock: FiltersServiceProtocol {
     var groups: [SafariGroup] = []
     
-    var updateAllMetaCalled = false
-    var updateAllMetaResult: Result<FiltersUpdateResult> = .error(NSError(domain: "test", code: 0, userInfo: nil))
+    var updateAllMetaCalledCount = 0
+    var updateAllMetaResult: Result<FiltersUpdateResult> = .success(FiltersUpdateResult())
     func updateAllMeta(forcibly: Bool, onFiltersUpdated: @escaping (Result<FiltersUpdateResult>) -> Void) {
-        updateAllMetaCalled = true
-        onFiltersUpdated(updateAllMetaResult)
+        updateAllMetaCalledCount += 1
+        DispatchQueue.global().async {
+            onFiltersUpdated(self.updateAllMetaResult)
+        }
     }
     
-    var setGroupCalled = false
+    var setGroupCalledCount = 0
     var setGroupError: Error?
     func setGroup(withId id: Int, enabled: Bool) throws {
-        setGroupCalled = true
+        setGroupCalledCount += 1
         if let error = setGroupError {
             throw error
         }
     }
     
-    var setFilterCalled = false
+    var setFilterCalledCount = 0
     var setFilterError: Error?
     func setFilter(withId id: Int, _ groupId: Int, enabled: Bool) throws {
-        setFilterCalled = true
+        setFilterCalledCount += 1
         if let error = setFilterError {
             throw error
         }
     }
     
-    var addCustomFilterCalled = false
-    var customFilterError: Error?
+    var addCustomFilterCalledCount = 0
+    var addCustomFilterError: Error?
     func add(customFilter: ExtendedCustomFilterMetaProtocol, enabled: Bool, _ onFilterAdded: @escaping (Error?) -> Void) {
-        addCustomFilterCalled = true
-        onFilterAdded(customFilterError)
+        addCustomFilterCalledCount += 1
+        onFilterAdded(addCustomFilterError)
     }
     
-    var deleteCustomFilterCalled = false
+    var deleteCustomFilterCalledCount = 0
     var deleteCustomFilterError: Error?
     func deleteCustomFilter(withId id: Int) throws {
-        deleteCustomFilterCalled = true
+        deleteCustomFilterCalledCount += 1
         if let error = deleteCustomFilterError {
             throw error
         }
     }
     
-    var renameCustomFilterCalled = false
+    var renameCustomFilterCalledCount = 0
     var renameCustomFilterError: Error?
     func renameCustomFilter(withId id: Int, to name: String) throws {
-        renameCustomFilterCalled = true
+        renameCustomFilterCalledCount += 1
         if let error = renameCustomFilterError {
             throw error
         }

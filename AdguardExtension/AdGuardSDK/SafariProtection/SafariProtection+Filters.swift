@@ -251,6 +251,7 @@ extension SafariProtection {
                         if let error = error {
                             Logger.logError("(SafariProtection+Filters) - updateFiltersMetaAndLocalizations; Error reloading CBs when updating filters meta forcibly=\(forcibly): \(error)")
                             self.completionQueue.async { onFiltersUpdated(.error(error)) }
+                            return
                         } else {
                             Logger.logInfo("(SafariProtection+Filters) - updateFiltersMetaAndLocalizations; Successfully reloaded CBs after updating filters meta forcibly=\(forcibly)")
                         }
