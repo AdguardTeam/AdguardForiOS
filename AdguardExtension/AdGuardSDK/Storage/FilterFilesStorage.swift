@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol FilterFilesStorageProtocol {
+protocol FilterFilesStorageProtocol: ResetableSyncProtocol {
     /**
      Updates filter file with specified **id**
      - Parameter id: Filter unique id
@@ -135,9 +135,23 @@ final class FilterFilesStorage: FilterFilesStorageProtocol {
         try filterContent.write(to: filterFileUrl, atomically: true, encoding: .utf8)
     }
     
-    public func deleteFilter(withId id: Int) throws {
+    func deleteFilter(withId id: Int) throws {
         let filterFileUrl = fileUrlForFilter(withId: id)
         try fileManager.removeItem(at: filterFileUrl)
+    }
+    
+    func reset() throws {
+        Logger.logInfo("(FilterFilesStorage) - reset start")
+        
+        // Delete directory where all filters are saved
+        try fileManager.removeItem(at: filterFilesDirectoryUrl)
+        
+        // Create directory
+        if !filterFilesDirectoryUrl.isDirectory {
+            try fileManager.createDirectory(at: filterFilesDirectoryUrl, withIntermediateDirectories: true, attributes: nil)
+        }
+        
+        Logger.logInfo("(FilterFilesStorage) - reset; Successfully deleted directory with filters")
     }
     
     // MARK: - Private methods

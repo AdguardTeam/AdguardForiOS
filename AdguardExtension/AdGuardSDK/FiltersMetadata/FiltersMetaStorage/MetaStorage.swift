@@ -26,23 +26,38 @@ typealias MetaStorageTypeAlias = FiltersMetaStorageProtocol
                                 & GroupLocalizationsMetaStorageProtocol
                                 & FiltersLocalizationsMetaStorageProtocol
 
-protocol MetaStorageProtocol: MetaStorageTypeAlias, AnyObject {
+protocol MetaStorageProtocol: MetaStorageTypeAlias, ResetableSyncProtocol, AnyObject {
     static var defaultDbLanguage: String { get }
-    var filtersDb: Connection { get }
 }
 
 final class MetaStorage: MetaStorageProtocol {
+    
     // MARK: - Public properties
+    
     static var defaultDbLanguage: String = "en"
     
-    let filtersDb: Connection
+    var filtersDb: Connection
+    
+    // MARK: - Production DB manager
+    
+    private let productionDbManager: ProductionDatabaseManagerProtocol
     
     // MARK: - Initialization
     
     init(productionDbManager: ProductionDatabaseManagerProtocol) {
+        self.productionDbManager = productionDbManager
         self.filtersDb = productionDbManager.filtersDb
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         insertCustomGroupIfNeeded()
+    }
+    
+    func reset() throws {
+        Logger.logInfo("(MetaStorage) - reset start")
+        
+        try productionDbManager.reset()
+        filtersDb = productionDbManager.filtersDb
+        
+        Logger.logInfo("(MetaStorage) - reset; Successfully reset adguard.db reinitialize Connection object now")
     }
     
     /*

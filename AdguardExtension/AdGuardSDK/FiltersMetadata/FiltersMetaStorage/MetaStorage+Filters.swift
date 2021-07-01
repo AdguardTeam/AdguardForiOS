@@ -22,7 +22,7 @@ import SQLite
 // MARK: - FiltersMetaStorageProtocol + Filters methods
 
 /* FiltersTable; filters table */
-struct FiltersTable {
+struct FiltersTable: Equatable {
     // Properties from table
     let filterId: Int
     let groupId: Int
@@ -116,14 +116,10 @@ struct FiltersTable {
 // MARK: - ExtendedFilterMetaProtocol + Setters
 
 fileprivate extension ExtendedFilterMetaProtocol {
-    func getDbSetters(isEnabled: Bool?) -> [Setter] {
-        var sttrs: [Setter] = [FiltersTable.filterId <- self.filterId,
-                               FiltersTable.groupId <- self.group.groupId,
+    var updateSetters: [Setter] {
+        var sttrs: [Setter] = [FiltersTable.groupId <- self.group.groupId,
                                FiltersTable.displayNumber <- self.displayNumber]
         
-        if let isEnabled = isEnabled {
-            sttrs.append(FiltersTable.isEnabled <- isEnabled)
-        }
         if let version = self.version {
             sttrs.append(FiltersTable.version <- version)
         }
@@ -145,6 +141,17 @@ fileprivate extension ExtendedFilterMetaProtocol {
         
         return sttrs
     }
+    
+    func getDbAddSetters(isEnabled: Bool?) -> [Setter] {
+        var sttrs: [Setter] = updateSetters
+        sttrs.append(FiltersTable.filterId <- self.filterId)
+        
+        if let isEnabled = isEnabled {
+            sttrs.append(FiltersTable.isEnabled <- isEnabled)
+        }
+        
+        return sttrs
+    }
 }
 
 // MARK: - MetaStorage + Filters
@@ -153,8 +160,8 @@ protocol FiltersMetaStorageProtocol {
     
     func getLocalizedFiltersForGroup(withId id: Int, forLanguage lang: String) throws -> [FiltersTable]
     func setFilter(withId id: Int, enabled: Bool) throws
-    func updateAll(filters: [ExtendedFilterMetaProtocol]) throws
-    func update(filter: ExtendedFilterMetaProtocol) throws
+    func update(filter: ExtendedFilterMetaProtocol) throws -> Bool
+    func update(filters: [ExtendedFilterMetaProtocol]) throws -> [Int]
     func add(filter: ExtendedFilterMetaProtocol, enabled: Bool) throws
     func deleteFilter(withId id: Int) throws
     func deleteFilters(withIds ids: [Int]) throws
@@ -190,51 +197,59 @@ extension MetaStorage: FiltersMetaStorageProtocol {
     
     // Enables or disables a filter with specified id
     func setFilter(withId id: Int, enabled: Bool) throws {
-        let query = FiltersTable.table.where(FiltersTable.filterId == id).update(FiltersTable.isEnabled <- enabled)
         //Query: UPDATE "filters" SET "is_enabled" = enabled WHERE ("filter_id" = filterId)
+        let query = FiltersTable.table.where(FiltersTable.filterId == id).update(FiltersTable.isEnabled <- enabled)
         let rowId = try filtersDb.run(query)
         Logger.logInfo("(FiltersMetaStorage) - Filter enabled state with filter Id \(rowId) was updated to state \(enabled)")
     }
     
-    /*
-     Updates all passed filters.
-     Adds new filter if missing.
-     If there are some filters from database that are not present in passed list than they will be deleted
+    /**
+     Updates filter with passed meta
+     Compares passed filter version and filter version in DB
+     If they differ than we update filter and return true
+     If they are equal than we don't update filter and return false
+     - Returns true if update occured and false otherwise
      */
-    func updateAll(filters: [ExtendedFilterMetaProtocol]) throws {
-        for filter in filters {
-            /*
-             Check if filter exists
-             If true than update filter with new data otherwise create it
-             */
-            let selectQuery = FiltersTable.table.where(FiltersTable.filterId == filter.filterId)
-            if let _ = try filtersDb.pluck(selectQuery) {
-                try update(filter: filter)
-            } else {
-                try add(filter: filter, enabled: true)
-            }
+    func update(filter: ExtendedFilterMetaProtocol) throws -> Bool {
+        Logger.logDebug("(FiltersMetaStorage) - updateFilter start; Filter id=\(filter.filterId)")
+        
+        // Query: SELECT version FROM filters WHERE filter_id = filter.filterId
+        let versionQuery = FiltersTable.table.select(FiltersTable.version).where(FiltersTable.filterId == filter.filterId)
+        guard let currentFilterVersion = try filtersDb.pluck(versionQuery)?.get(FiltersTable.version) else {
+            Logger.logDebug("(FiltersMetaStorage) - updateFilter; Failed to get current filter version; Filter id=\(filter.filterId)")
+            return false
         }
         
-        // Remove filters and associated data
-        let filterIds = filters.map { $0.filterId }
-        let filterIdsToDeleteQuery = FiltersTable.table.filter(!filterIds.contains(FiltersTable.filterId))
-        let filterIdsToDeleteResult = try filtersDb.prepare(filterIdsToDeleteQuery)
-        let filterIdsToDelete = filterIdsToDeleteResult.map { $0[FiltersTable.filterId] }
-        try deleteFilters(withIds: filterIdsToDelete)
-    }
-    
-    // Updates filter with passed meta
-    func update(filter: ExtendedFilterMetaProtocol) throws {
-        // Query: UPDATE filters SET (filter_id, group_id, is_enabled, version, last_update_time, editable, display_number, name, description, homepage, removable, expires, subscriptionUrl) WHERE filter_id = meta.filterId
-        let query = FiltersTable.table.where(FiltersTable.filterId == filter.filterId).update(filter.getDbSetters(isEnabled: nil))
+        Logger.logDebug("(FiltersMetaStorage) - updateFilter; Filter id=\(filter.filterId); Update \(currentFilterVersion) -> \(filter.version ?? "nil")")
+        guard currentFilterVersion != filter.version else { return false }
+        
+        // Query: UPDATE filters SET (group_id, version, last_update_time, editable, display_number, name, description, homepage, removable, expires, subscriptionUrl) WHERE filter_id = filter.filterId
+        let query = FiltersTable.table
+                                .where(FiltersTable.filterId == filter.filterId)
+                                .update(filter.updateSetters)
+            
         try filtersDb.run(query)
         Logger.logInfo("(FiltersMetaStorage) - Filter was updated with id \(filter.filterId)")
+        return true
+    }
+    
+    /**
+     Updates meta for passed filters if needed
+     Checks filter version for every filter and decides whether to update filter or not
+     - Returns array of filter ids that were updated
+     */
+    func update(filters: [ExtendedFilterMetaProtocol]) throws -> [Int] {
+        Logger.logDebug("(FiltersMetaStorage) - updateFilters start; Filters number = \(filters.count)")
+        return try filters.compactMap {
+            let wasUpdated = try update(filter: $0)
+            return wasUpdated ? $0.filterId : nil
+        }
     }
     
     // Creates filter with passed meta
     func add(filter: ExtendedFilterMetaProtocol, enabled: Bool) throws {
         // Query: INSERT OR REPLACE INTO "filters" (filter_id, group_id, is_enabled, version, last_update_time, editable, display_number, name, description, homepage, removable, expires, subscriptionUrl)
-        let query = FiltersTable.table.insert(or: .replace, filter.getDbSetters(isEnabled: enabled))
+        let query = FiltersTable.table.insert(or: .replace, filter.getDbAddSetters(isEnabled: enabled))
         try filtersDb.run(query)
         Logger.logInfo("(FiltersMetaStorage) - Filter was added with id \(filter.filterId)")
     }

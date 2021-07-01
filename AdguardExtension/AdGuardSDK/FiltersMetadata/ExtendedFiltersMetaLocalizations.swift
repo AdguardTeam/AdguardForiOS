@@ -33,6 +33,11 @@ extension ExtendedFiltersMetaLocalizations {
     struct FilterLocalization: Decodable {
         let name: String
         let description: String
+        
+        init(name: String, description: String) {
+            self.name = name
+            self.description = description
+        }
     }
 }
 
@@ -42,6 +47,11 @@ extension ExtendedFiltersMetaLocalizations {
     struct TagLocalization: Decodable {
         let name: String
         let description: String
+        
+        init(name: String, description: String) {
+            self.name = name
+            self.description = description
+        }
     }
 }
 

@@ -2,40 +2,49 @@ import Foundation
 
 final class ContentBlockersInfoStorageMock: ContentBlockersInfoStorageProtocol {
     
-    var allCbInfo: [ContentBlockerType : ContentBlockersInfoStorage.ConverterResult] = [:]
+    var allCbInfo: [ContentBlockerType : ConverterResult] = [:]
     
-    var saveCbInfoCalled = false
+    var saveCbInfoCalledCount = 0
     var saveCbInfoError: Error?
-    func save(cbInfo: SafariFilter) throws {
-        saveCbInfoCalled = true
+    func save(cbInfo: FiltersConverter.Result) throws {
+        saveCbInfoCalledCount += 1
         if let error = saveCbInfoError {
             throw error
         }
     }
     
-    var saveCbInfosCalled = false
+    var saveCbInfosCalledCount = 0
     var saveCbInfosError: Error?
-    func save(cbInfos: [SafariFilter]) throws {
-        saveCbInfosCalled = true
+    func save(cbInfos: [FiltersConverter.Result]) throws {
+        saveCbInfosCalledCount += 1
         if let error = saveCbInfosError {
             throw error
         }
     }
     
-    var getInfoCalled = false
-    var getInfoResult: ContentBlockersInfoStorage.ConverterResult?
-    func getInfo(for cbType: ContentBlockerType) -> ContentBlockersInfoStorage.ConverterResult? {
-        getInfoCalled = true
+    var getInfoCalledCount = 0
+    var getInfoResult: ConverterResult?
+    func getInfo(for cbType: ContentBlockerType) -> ConverterResult? {
+        getInfoCalledCount += 1
         return getInfoResult
     }
     
-    var getEmptyRuleJsonUrlCalled = false
+    var getEmptyRuleJsonUrlCalledCount = 0
     var getEmptyRuleJsonUrlResult: Result<URL> = .error(NSError(domain: "test", code: 1, userInfo: nil))
     func getEmptyRuleJsonUrl() throws -> URL {
-        getEmptyRuleJsonUrlCalled = true
+        getEmptyRuleJsonUrlCalledCount += 1
         switch getEmptyRuleJsonUrlResult {
         case .success(let url): return url
         case .error(let error): throw error
+        }
+    }
+    
+    var resetCalledCount = 0
+    var resetError: Error?
+    func reset() throws {
+        resetCalledCount += 1
+        if let error = resetError {
+            throw error
         }
     }
 }

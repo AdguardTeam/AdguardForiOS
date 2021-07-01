@@ -19,6 +19,7 @@
 
 import Foundation
 
+/// Parser to parse data from `FiltersLocalizationsRequest` and returns `ExtendedFiltersMetaLocalizations`
 struct FiltersLocalizationsParser: ParserProtocol {
     typealias Model = ExtendedFiltersMetaLocalizations
     

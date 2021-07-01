@@ -20,7 +20,7 @@ import Foundation
 
 // MARK: - ExtendedFilterMetaProtocol
 
-protocol ExtendedFilterMetaProtocol: FilterMetaProtocol {
+public protocol ExtendedFilterMetaProtocol: FilterMetaProtocol {
     var filterId: Int { get }
     var group: GroupMetaProtocol { get }
     var displayNumber: Int { get }
@@ -33,10 +33,10 @@ protocol ExtendedFilterMetaProtocol: FilterMetaProtocol {
 // MARK: - ExtendedFiltersMeta
 
 /* ExtendedFiltersMeta is an object representation of json from https://filters.adtidy.org/ios/filters.js */
-struct ExtendedFiltersMeta: Decodable {
-    let groups: [GroupMetaProtocol]
-    let tags: [Tag]
-    let filters: [ExtendedFilterMetaProtocol]
+public struct ExtendedFiltersMeta: Decodable {
+    public let groups: [GroupMetaProtocol]
+    public let tags: [Tag]
+    public let filters: [ExtendedFilterMetaProtocol]
     
     enum CodingKeys: String, CodingKey {
         case groups
@@ -44,7 +44,7 @@ struct ExtendedFiltersMeta: Decodable {
         case filters
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         self.groups = try container.decode([Group].self, forKey: .groups)
@@ -71,6 +71,12 @@ struct ExtendedFiltersMeta: Decodable {
             decodedFilters.append(filter)
         }
         self.filters = decodedFilters
+    }
+    
+    init(groups: [GroupMetaProtocol], tags: [Tag], filters: [ExtendedFilterMetaProtocol]) {
+        self.groups = groups
+        self.tags = tags
+        self.filters = filters
     }
 }
 
@@ -185,7 +191,7 @@ extension ExtendedFiltersMeta {
 
 // MARK: - ExtendedFiltersMeta + TrustLevel
 
-extension ExtendedFiltersMeta {
+public extension ExtendedFiltersMeta {
     enum TrustLevel: String, Decodable {
         case full
         case high
@@ -205,9 +211,9 @@ extension ExtendedFiltersMeta {
 
 // MARK: - ExtendedFiltersMeta + Tag
 
-extension ExtendedFiltersMeta {
-    struct Tag: Decodable {
-        enum TagType: String, Codable {
+public extension ExtendedFiltersMeta {
+    struct Tag: Decodable, Equatable {
+        public enum TagType: String, Codable {
             case purpose
             case lang
             case recommended
@@ -248,7 +254,7 @@ extension ExtendedFiltersMeta {
             case keyword
         }
         
-        init(from decoder: Decoder) throws {
+        public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
             self.tagId = try container.decode(Int.self, forKey: .tagId)

@@ -48,9 +48,6 @@ final class ContentBlockerService: ContentBlockerServiceProtocol {
     // Queue for updating content blockers
     private let updateQueue = DispatchQueue(label: "AdGuardSDK.ContentBlockerService.updateQueue", qos: .background)
     
-    // Queue for invalidating content blocking JSON
-    private let invalidateQueue = DispatchQueue(label: "AdGuardSDK.ContentBlockerService.invalidateQueue", qos: .background)
-    
     /* Services */
     private let configuration: ConfigurationProtocol
     private let jsonStorage: ContentBlockersInfoStorageProtocol
@@ -115,31 +112,35 @@ final class ContentBlockerService: ContentBlockerServiceProtocol {
                 }
                 group.leave()
             }
+            group.wait()
         }
         
-        group.wait()
         return resultError
     }
     
     // Reloads safari content blocker. If fails for the first reload than tries to reload it once more
     private func reloadContentBlocker(for cbType: ContentBlockerType, firstTry: Bool = true, _ onContentBlockerReloaded: @escaping (_ error: Error?) -> Void) {
-        invalidateQueue.async { [unowned self] in
-            let cbBundleId = cbType.contentBlockerBundleId(configuration.appBundleId)
+        let cbBundleId = cbType.contentBlockerBundleId(configuration.appBundleId)
+        
+        // Try to reload content blocker
+        contentBlockersManager.reloadContentBlocker(withId: cbBundleId) { [weak self] error in
+            guard let self = self else {
+                Logger.logError("(ContentBlockerService) - reloadContentBlocker; сontentBlockersManager.reloadContentBlocker self is missing!")
+                onContentBlockerReloaded(CommonError.missingSelf)
+                return
+            }
             
-            // Try to reload content blocker
-            contentBlockersManager.reloadContentBlocker(withId: cbBundleId) { error in
-                if let userInfo = (error as NSError?)?.userInfo {
-                    Logger.logError("(ContentBlockerService) - reloadContentBlocker; Error reloadind content blocker; Error: \(userInfo)")
-                    // Sometimes Safari fails to register a content blocker because of inner race conditions, so we try to reload it second time
-                    if firstTry {
-                        reloadContentBlocker(for: cbType, firstTry: false, onContentBlockerReloaded)
-                    } else {
-                        onContentBlockerReloaded(error)
-                    }
+            if let userInfo = (error as NSError?)?.userInfo {
+                Logger.logError("(ContentBlockerService) - reloadContentBlocker; Error reloadind content blocker; Error: \(userInfo)")
+                // Sometimes Safari fails to register a content blocker because of inner race conditions, so we try to reload it second time
+                if firstTry {
+                    self.reloadContentBlocker(for: cbType, firstTry: false, onContentBlockerReloaded)
+                } else {
+                    onContentBlockerReloaded(error)
                 }
-                else {
-                    onContentBlockerReloaded(nil)
-                }
+            }
+            else {
+                onContentBlockerReloaded(nil)
             }
         }
     }

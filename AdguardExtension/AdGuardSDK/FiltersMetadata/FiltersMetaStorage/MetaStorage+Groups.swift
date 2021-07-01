@@ -20,7 +20,7 @@ import Foundation
 import SQLite
 
 /* FilterGroupsTable; filter_groups table */
-struct FilterGroupsTable {
+struct FilterGroupsTable: Equatable {
     // Properties from table
     let groupId: Int
     let name: String
@@ -65,8 +65,8 @@ struct FilterGroupsTable {
 protocol GroupsMetaStorageProtocol {
     func getAllLocalizedGroups(forLanguage lang: String) throws -> [FilterGroupsTable]
     func setGroup(withId id: Int, enabled: Bool) throws
-    func updateAll(groups: [GroupMetaProtocol]) throws
     func update(group: GroupMetaProtocol) throws
+    func update(groups: [GroupMetaProtocol]) throws
 }
 
 extension MetaStorage: GroupsMetaStorageProtocol {
@@ -99,22 +99,6 @@ extension MetaStorage: GroupsMetaStorageProtocol {
         Logger.logDebug("(FiltersMetaStorage) - setGroup group with id=\(id) was set to enabled=\(enabled)")
     }
     
-    /*
-     Updates all passed groups.
-     If there are some groups from database that are not present in passed list than they will be deleted
-     */
-    func updateAll(groups: [GroupMetaProtocol]) throws {
-        for group in groups {
-            try update(group: group)
-        }
-        
-        // Remove groups
-        let groupIds = groups.map { $0.groupId }
-        let groupsToDelete = FilterGroupsTable.table.filter(!groupIds.contains(FilterGroupsTable.groupId))
-        let deletedRows = try filtersDb.run(groupsToDelete.delete())
-        Logger.logDebug("(FiltersMetaStorage) - updateAll groups; deleted \(deletedRows) rows")
-    }
-    
     // Updates group metadata with passed one
     func update(group: GroupMetaProtocol) throws {
         // Query: UPDATE filter_groups SET name = group.groupName, display_number = group.displayNumber) WHERE group_id = group.groupId
@@ -123,5 +107,10 @@ extension MetaStorage: GroupsMetaStorageProtocol {
                                      .update(FilterGroupsTable.name <- group.groupName, FilterGroupsTable.displayNumber <- group.displayNumber)
         try filtersDb.run(query)
         Logger.logDebug("(FiltersMetaStorage) - Update group with id=\(group.groupId)")
+    }
+    
+    // Updates passed groups meta
+    func update(groups: [GroupMetaProtocol]) throws {
+        try groups.forEach { try update(group: $0) }
     }
 }

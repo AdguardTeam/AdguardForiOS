@@ -19,7 +19,7 @@
 import Foundation
 import SQLite
 
-protocol ProductionDatabaseManagerProtocol {
+protocol ProductionDatabaseManagerProtocol: ResetableSyncProtocol {
     /*
      Database connections are established using the Connection class.
      filtersDb is thread safe, the doc to SQLite says:
@@ -50,7 +50,7 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
     
     // MARK: - Public properties
     
-    let filtersDb: Connection
+    var filtersDb: Connection
     
     // MARK: - Private properties
     
@@ -104,6 +104,7 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
     // MARK: - Public methods
     
     func updateDatabaseIfNeeded() throws {
+        Logger.logInfo("(ProductionDatabaseManager) - updateDatabaseIfNeeded start")
         
         try defaultDatabaseManager.updateDefaultDb()
         
@@ -117,6 +118,23 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
         
         // Remove default.db when update finished
         try defaultDatabaseManager.removeDefaultDb()
+        
+        Logger.logInfo("(ProductionDatabaseManager) - updateDatabaseIfNeeded finished; shouldUpgradeDb=\(shouldUpgradeDb); updateVersions=\(updateVersions)")
+    }
+    
+    func reset() throws {
+        Logger.logInfo("(ProductionDatabaseManager) - reset start")
+        
+        // Update default.db to the latest saved
+        try defaultDatabaseManager.updateDefaultDb()
+        
+        // Replace existing production db with default one
+        let _ = try fileManager.replaceItemAt(productionDbFileUrl, withItemAt: defaultDatabaseManager.defaultDbFileUrl)
+        
+        // Reinitialize database object
+        filtersDb = try Connection(productionDbFileUrl.path)
+        
+        Logger.logInfo("(ProductionDatabaseManager) - reset; Successfully reset adguard.db")
     }
     
     // MARK: - Private methods

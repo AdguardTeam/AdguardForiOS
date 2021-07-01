@@ -18,21 +18,24 @@
 
 import Foundation
 
-protocol SafariGroupProtocol: GroupMetaProtocol {
-    var filters: [SafariFilterProtocol] { get }
-    var isEnabled: Bool { get set }
-    var groupType: SafariGroup.GroupType { get }
-    var groupName: String { get }
-    var displayNumber: Int { get }
+/**
+ All filters that we store have their own Group.
+ Filters are grouped in order to make navigation easier for user and somehow devide them by Content Blockers
+ Filters rules are not always grouped by Content Blockers directly. For more information you can look here **AffinityRulesParser.swift**
+ */
+public protocol SafariGroupProtocol: GroupMetaProtocol {
+    var filters: [SafariFilterProtocol] { get } // Filters that belong to this group
+    var isEnabled: Bool { get set } // State of the group. If group is disabled we won't use it's filters
+    var groupType: SafariGroup.GroupType { get } // Type of the group. We use it when sending filters to the Content Blockers and some other operations
 }
 
-struct SafariGroup: SafariGroupProtocol {
-    let groupId: Int
-    var filters: [SafariFilterProtocol]
-    var isEnabled: Bool
-    let groupType: SafariGroup.GroupType
-    let groupName: String
-    let displayNumber: Int
+public struct SafariGroup: SafariGroupProtocol {
+    public let groupId: Int
+    public var filters: [SafariFilterProtocol]
+    public var isEnabled: Bool
+    public let groupType: SafariGroup.GroupType
+    public let groupName: String
+    public let displayNumber: Int
     
     // MARK: Initialization
     

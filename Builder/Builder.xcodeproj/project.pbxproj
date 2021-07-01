@@ -195,7 +195,6 @@
 		D0450FB22642E9F400CA2110 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		D0450FB52642E9F400CA2110 /* AffinityRulesParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffinityRulesParser.swift; sourceTree = "<group>"; };
 		D0450FB72642E9F400CA2110 /* FiltersConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersConverter.swift; sourceTree = "<group>"; };
-		D0450FB82642E9F400CA2110 /* SafariFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariFilter.swift; sourceTree = "<group>"; };
 		D0450FBA2642E9F400CA2110 /* ABECFilterParsers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABECFilterParsers.h; sourceTree = "<group>"; };
 		D0450FBE2642E9F400CA2110 /* ABECFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABECFilter.h; sourceTree = "<group>"; };
 		D0450FC02642E9F400CA2110 /* ABECFilterParsers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABECFilterParsers.m; sourceTree = "<group>"; };
@@ -586,7 +585,6 @@
 			children = (
 				D0450FB52642E9F400CA2110 /* AffinityRulesParser.swift */,
 				D0450FB72642E9F400CA2110 /* FiltersConverter.swift */,
-				D0450FB82642E9F400CA2110 /* SafariFilter.swift */,
 			);
 			path = FiltersConvertation;
 			sourceTree = "<group>";

@@ -18,6 +18,7 @@
 
 import Foundation
 
+/// Request to obtain filters meta data
 struct FiltersMetadataRequest: RequestProtocol {
     
     let version: String

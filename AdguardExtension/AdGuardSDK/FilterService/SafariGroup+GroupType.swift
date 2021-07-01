@@ -18,7 +18,7 @@
 
 import Foundation
 
-extension SafariGroup {
+public extension SafariGroup {
     enum GroupType: Int, Equatable {
         case ads = 1
         case privacy = 2

@@ -19,6 +19,7 @@
 
 import Foundation
 
+/// Parser to parse data from `FiltersMetadataRequest` and returns `ExtendedFiltersMeta`
 struct FiltersMetadataParser: ParserProtocol {
     typealias Model = ExtendedFiltersMeta
     
