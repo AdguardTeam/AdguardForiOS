@@ -15,6 +15,9 @@
       </FileRef>
    </Group>
    <FileRef
+      location = "group:AdGuardSDK/AdGuardSDK.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "container:Builder/Builder.xcodeproj">
    </FileRef>
    <FileRef

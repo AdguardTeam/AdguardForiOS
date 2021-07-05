@@ -17,7 +17,7 @@
 */
 
 import Foundation
-import SQLite
+@_implementationOnly import SQLite
 
 /* FilterGroupsTable; filter_groups table */
 struct FilterGroupsTable: Equatable {
@@ -105,8 +105,19 @@ extension MetaStorage: GroupsMetaStorageProtocol {
         let query = FilterGroupsTable.table
                                      .where(FilterGroupsTable.groupId == group.groupId)
                                      .update(FilterGroupsTable.name <- group.groupName, FilterGroupsTable.displayNumber <- group.displayNumber)
-        try filtersDb.run(query)
-        Logger.logDebug("(FiltersMetaStorage) - Update group with id=\(group.groupId)")
+        if try filtersDb.run(query) > 0 {
+            Logger.logDebug("(FiltersMetaStorage) - Update group with id=\(group.groupId)")
+        }
+        else {
+            // insert
+            let insertQuery = FilterGroupsTable.table
+                .insert(FilterGroupsTable.name <- group.groupName,
+                        FilterGroupsTable.displayNumber <- group.displayNumber,
+                        FilterGroupsTable.groupId <- group.groupId,
+                        FilterGroupsTable.isEnabled <- true)
+            
+            try filtersDb.run(insertQuery)
+        }
     }
     
     // Updates passed groups meta

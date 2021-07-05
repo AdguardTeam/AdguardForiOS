@@ -16,6 +16,8 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import AdGuardSDK
+
 protocol ActionWebReporterProtocol {
     func composeWebReportUrl(_ site: URL?) -> URL
 }
@@ -25,25 +27,26 @@ struct ActionWebReporter: ActionWebReporterProtocol {
     private let reportUrl = "https://reports.adguard.com/new_issue.html"
     
     private let productInfo: ADProductInfoProtocol
-    private let antibanner: AESAntibannerProtocol
     private let complexProtection: ComplexProtectionServiceProtocol
     private let dnsProviders: DnsProvidersServiceProtocol
     private let configuration: ConfigurationServiceProtocol
     private let dnsFilters: DnsFiltersServiceProtocol
+    private let safariProtection: SafariProtectionProtocol
     
     init(productInfo: ADProductInfoProtocol,
-         antibanner: AESAntibannerProtocol,
          complexProtection: ComplexProtectionServiceProtocol,
          dnsProviders: DnsProvidersServiceProtocol,
          configuration: ConfigurationServiceProtocol,
-         dnsFilters: DnsFiltersServiceProtocol) {
+         dnsFilters: DnsFiltersServiceProtocol,
+         safariProtection: SafariProtectionProtocol
+    ) {
         
         self.productInfo = productInfo
-        self.antibanner = antibanner
         self.complexProtection = complexProtection
         self.dnsProviders = dnsProviders
         self.configuration = configuration
         self.dnsFilters = dnsFilters
+        self.safariProtection = safariProtection
     }
     
     
@@ -58,7 +61,18 @@ struct ActionWebReporter: ActionWebReporterProtocol {
         params["product_version"] = productInfo.version()
         params["browser"] = "Safari"
         
-        let filterIDs = antibanner.activeFilterIDs().map { $0.stringValue }
+        // todo: we can move it to SDK
+        var filterIDs = [String]()
+        for group in safariProtection.groups {
+            if !group.isEnabled { continue }
+            
+            for filter in group.filters {
+                if filter.isEnabled {
+                    filterIDs.append("\(filter.filterId)")
+                }
+            }
+        }
+        
         let filtersString = filterIDs.joined(separator: ".")
         
         params["filters"] = filtersString

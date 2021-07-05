@@ -18,6 +18,7 @@
 
 import Foundation
 import UIKit
+import AdGuardSDK
 
 class FilterCellUISwitch: UISwitch {
     var section: Int?
@@ -26,32 +27,32 @@ class FilterCellUISwitch: UISwitch {
 
 class FilterCell: UITableViewCell {
     
-    var filter: Filter? {
+    var filter: SafariFilterProtocol? {
         didSet{
             filterTagsView.filter = filter
-            if filter?.searchAttributedString != nil {
-                name.attributedText = filter?.searchAttributedString
-            } else {
+            // todo: make view model data type for filter
+//            if filter?.searchAttributedString != nil {
+//                name.attributedText = filter?.searchAttributedString
+//            } else {
                 name.text = filter?.name
-            }
+//            }
             if let versionString = filter?.version {
                 version.text = String(format: ACLocalizedString("filter_version_format", nil), versionString)
             }
-            let dateString = filter?.updateDate?.formatedStringWithHoursAndMinutes()
+            let dateString = filter?.lastUpdateDate?.formatedStringWithHoursAndMinutes()
             updateDate.text = dateString == nil ? "" : String(format: ACLocalizedString("filter_date_format", nil), dateString ?? "")
-            enableSwitch.isOn = filter?.enabled ?? false
+            enableSwitch.isOn = filter?.isEnabled ?? false
             
         }
     }
     
-    var group: Group? {
+    var group: SafariGroupProtocol? {
         didSet{
-            let groupEnabled = group?.enabled ?? false
+            let groupEnabled = group?.isEnabled ?? false
             contentView.isUserInteractionEnabled = groupEnabled
             contentView.alpha = groupEnabled ? 1.0 : 0.5
         }
     }
-    
     
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var version: UILabel!

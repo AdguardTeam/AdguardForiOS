@@ -44,8 +44,6 @@ class DnsSettingsController : UITableViewController {
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
-    private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
     private var dnsProviders: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!

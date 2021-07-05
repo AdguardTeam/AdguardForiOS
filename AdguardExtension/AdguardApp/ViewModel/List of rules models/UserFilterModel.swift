@@ -17,6 +17,7 @@
 */
 
 import Foundation
+import AdGuardSDK
 
 class UserFilterModel: ListOfRulesModelProtocol {
     
@@ -58,7 +59,9 @@ class UserFilterModel: ListOfRulesModelProtocol {
         set{
             if enabled != newValue {
                 resources.safariUserFilterEnabled = newValue
-                contentBlockerService.reloadJsons(backgroundUpdate: false, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.safariUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertWhitelist: resources.invertedWhitelist) {_ in }
+                safariProtection.update(blocklistIsEnabled: newValue) { _ in
+                    // todo:
+                }
             }
         }
     }
@@ -100,31 +103,27 @@ class UserFilterModel: ListOfRulesModelProtocol {
     
     /* Services */
     private let resources: AESharedResourcesProtocol
-    private let contentBlockerService: ContentBlockerService
-    private let antibanner: AESAntibannerProtocol
     private let theme: ThemeServiceProtocol
     private let fileShare: FileShareServiceProtocol = FileShareService()
     private let productInfo: ADProductInfoProtocol
-    private let safariProtection: SafariProtectionServiceProtocol
+    private let safariProtection: SafariProtectionProtocol
     
-    private var ruleObjects: [ASDFilterRule] = [ASDFilterRule]()
+    private var ruleObjects = [UserRuleProtocol]()
     
     private var allRules = [RuleInfo]()
     private var searchRules = [RuleInfo]()
     
     // MARK: - Initializer
     
-    init(resources: AESharedResourcesProtocol, contentBlockerService: ContentBlockerService, antibanner: AESAntibannerProtocol, theme: ThemeServiceProtocol, productInfo: ADProductInfoProtocol, safariProtection: SafariProtectionServiceProtocol) {
+    init(resources: AESharedResourcesProtocol, theme: ThemeServiceProtocol, productInfo: ADProductInfoProtocol, safariProtection: SafariProtectionProtocol) {
         self.resources = resources
-        self.contentBlockerService = contentBlockerService
-        self.antibanner = antibanner
         self.theme = theme
         self.productInfo = productInfo
         self.safariProtection = safariProtection
         
-        ruleObjects = antibanner.rules(forFilter: ASDF_USER_FILTER_ID as NSNumber)
+        ruleObjects = safariProtection.allRules(for: .blocklist)
         for ruleObject in ruleObjects {
-            let rule = RuleInfo(ruleObject.ruleText, false, ruleObject.isEnabled.boolValue, theme)
+            let rule = RuleInfo(ruleObject.ruleText, false, ruleObject.isEnabled, theme)
             allRules.append(rule)
         }
     }
@@ -208,9 +207,8 @@ class UserFilterModel: ListOfRulesModelProtocol {
     func processRulesFromString(_ string: String, errorHandler: @escaping (_ error: String)->Void) {
         let ruleStrings = string.components(separatedBy: .newlines)
         
-        var newRuleObjects = [ASDFilterRule]()
+        var newRuleObjects = [UserRuleProtocol]()
         var newRuleInfos = [RuleInfo]()
-        
         for ruleString in ruleStrings {
             
             let trimmedRuleString = ruleString.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -218,7 +216,7 @@ class UserFilterModel: ListOfRulesModelProtocol {
                 continue
             }
 
-            let ruleObject = ASDFilterRule(text: trimmedRuleString, enabled: true)
+            let ruleObject = UserRule(ruleText: trimmedRuleString, isEnabled: true)
   
             let ruleInfo = RuleInfo(trimmedRuleString, false, true, theme)
 
@@ -237,15 +235,16 @@ class UserFilterModel: ListOfRulesModelProtocol {
         DispatchQueue.global().async { [weak self] in
             guard let strongSelf = self else { return }
             
-            var rulesToAdd = [ASDFilterRule]()
+            var rulesToAdd = [UserRuleProtocol]()
             var ruleTextsToAdd = [String]()
             for ruleText in ruleTexts {
             
-                if !strongSelf.contentBlockerService.validateRule(ruleText) {
-                   errorHandler(ACLocalizedString("rule_converting_error", nil))
-                   return
-                }
-                let rule = ASDFilterRule(text: ruleText, enabled: true)
+                // todo:
+//                if !strongSelf.contentBlockerService.validateRule(ruleText) {
+//                   errorHandler(ACLocalizedString("rule_converting_error", nil))
+//                   return
+//                }
+                let rule = UserRule(ruleText: ruleText, isEnabled: true)
                 
                 rulesToAdd.append(rule)
                 ruleTextsToAdd.append(ruleText)
@@ -270,42 +269,33 @@ class UserFilterModel: ListOfRulesModelProtocol {
         }
     }
     
-    private func setNewRules(_ newRuleObjects: [ASDFilterRule], ruleInfos: [RuleInfo], completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
+    private func setNewRules(_ newRuleObjects: [UserRuleProtocol], ruleInfos: [RuleInfo], completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
     
-        let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
-        
         DispatchQueue.main.async { [weak self] in
-            guard let strongSelf = self else { return }
+            guard let self = self else { return }
             
-            let rulesCopy = strongSelf.allRules
-            let objectsCopy = strongSelf.ruleObjects
+            let rulesCopy = self.allRules
+            let objectsCopy = self.ruleObjects
             
-            strongSelf.allRules = ruleInfos
-            strongSelf.ruleObjects = newRuleObjects
+            self.allRules = ruleInfos
+            self.ruleObjects = newRuleObjects
             
-            strongSelf.delegate?.listOfRulesChanged()
+            self.delegate?.listOfRulesChanged()
             
             DispatchQueue.global().async { [weak self] in
                 guard let self = self else { return }
-                if let error = strongSelf.contentBlockerService.replaceUserFilter(newRuleObjects) {
+                self.safariProtection.add(rules: newRuleObjects, for: .blocklist, override: true) { error in
                     DispatchQueue.main.async {
                         self.allRules = rulesCopy
                         self.ruleObjects = objectsCopy
                         self.delegate?.listOfRulesChanged()
-                        errorHandler(error.localizedDescription)
+                        if let error = error {
+                            errorHandler(error.localizedDescription)
+                        }
                     }
                 }
-                completionHandler()
                 
-                strongSelf.contentBlockerService.reloadJsons(backgroundUpdate: false, protectionEnabled: self.safariProtection.safariProtectionEnabled, userFilterEnabled: self.resources.safariUserFilterEnabled, whitelistEnabled: self.resources.safariWhitelistEnabled, invertWhitelist: self.resources.invertedWhitelist) { (error) in
-                    
-                    if error != nil {
-                        DDLogError("(UserFilterModel) Error occured during content blocker reloading - \(error!.localizedDescription)")
-                        // do not rollback changes and do not show any alert to user in this case
-                        // https://github.com/AdguardTeam/AdguardForiOS/issues/1174
-                    }
-                    UIApplication.shared.endBackgroundTask(backgroundTaskId)
-                }
+                completionHandler()
             }
         }
     }
@@ -318,7 +308,7 @@ class UserFilterModel: ListOfRulesModelProtocol {
         let ruleObject = ruleObjects[index]
         
         let filteredRules = allRules.filter({$0 != rule})
-        let filteredRuleObjects = ruleObjects.filter({$0 != ruleObject})
+        let filteredRuleObjects = ruleObjects.filter({$0.ruleText != ruleObject.ruleText})
         
         setNewRules(filteredRuleObjects, ruleInfos: filteredRules, completionHandler: completionHandler, errorHandler: errorHandler)
     }
@@ -337,7 +327,7 @@ class UserFilterModel: ListOfRulesModelProtocol {
         
         let ruleStrings = plainText.components(separatedBy: .newlines)
         
-        var newRuleObjects = [ASDFilterRule]()
+        var newRuleObjects = [UserRuleProtocol]()
         var newRuleInfos = [RuleInfo]()
         
         for ruleString in ruleStrings {
@@ -347,7 +337,7 @@ class UserFilterModel: ListOfRulesModelProtocol {
                 continue
             }
     
-            let ruleObject = ASDFilterRule(text: trimmedRuleString, enabled: true)
+            let ruleObject = UserRule(ruleText: trimmedRuleString, isEnabled: true)
             
             let ruleInfo = RuleInfo(trimmedRuleString, false, true, theme)
             newRuleObjects.append(ruleObject)
@@ -362,10 +352,11 @@ class UserFilterModel: ListOfRulesModelProtocol {
     
     private func changeSafariUserfilterRule(index: Int, text: String, enabled: Bool, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
         
-        if !contentBlockerService.validateRule(text) {
-           errorHandler(ACLocalizedString("rule_converting_error", nil))
-           return
-        }
+        // todo:
+//        if !contentBlockerService.validateRule(text) {
+//           errorHandler(ACLocalizedString("rule_converting_error", nil))
+//           return
+//        }
         
         let ruleObject = ruleObjects[index]
         let rule = allRules[index]
@@ -373,8 +364,9 @@ class UserFilterModel: ListOfRulesModelProtocol {
         rule.rule = text
         rule.enabled = enabled
         
-        ruleObject.ruleText = text
-        ruleObject.isEnabled = NSNumber(booleanLiteral: enabled)
+        // todo: replace rule object in array
+//        ruleObject.ruleText = text
+//        ruleObject.isEnabled = NSNumber(booleanLiteral: enabled)
         
         setNewRules(ruleObjects, ruleInfos: allRules, completionHandler: completionHandler, errorHandler: errorHandler)
     }

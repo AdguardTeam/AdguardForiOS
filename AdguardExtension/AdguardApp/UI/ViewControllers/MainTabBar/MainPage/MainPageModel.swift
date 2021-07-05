@@ -17,6 +17,7 @@
 */
 
 import Foundation
+import AdGuardSDK
 
 protocol MainPageModelDelegate: AnyObject {
     func updateStarted()
@@ -35,15 +36,13 @@ class MainPageModel: MainPageModelProtocol {
     
     // MARK: - private members
     
-    private let filtersService: FiltersServiceProtocol
-    private let safariProtection: SafariProtectionServiceProtocol
+    private let safariProtection: SafariProtectionProtocol
     private let resources: AESharedResourcesProtocol
     
     // MARK: - init
     
-    init(resource: AESharedResourcesProtocol, filtersService: FiltersServiceProtocol, safariProtection: SafariProtectionServiceProtocol) {
+    init(resource: AESharedResourcesProtocol, safariProtection: SafariProtectionProtocol) {
         self.resources = resource
-        self.filtersService = filtersService
         self.safariProtection = safariProtection
     }
     
@@ -54,22 +53,25 @@ class MainPageModel: MainPageModelProtocol {
      */
     func updateFilters() {
         delegate?.updateStarted()
-        filtersService.load(refresh: true, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.safariUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertedWhitelist: resources.invertedWhitelist) { [weak delegate] filtersCount, error in
+        
+        safariProtection.updateFiltersMetaAndLocalizations(true) {  [weak delegate] result in
             
-            if error != nil {
+            switch result {
+            case .error(let error):
                 delegate?.updateFailed(error: String.localizedString("filter_updates_error"))
                 return
+            case .success(let updateResult):
+                let message: String?
+                let filtersCount = updateResult.updatedFilterIds.count
+                if filtersCount > 0 {
+                    let format = ACLocalizedString("filters_updated_format", nil);
+                    message = String(format: format, filtersCount)
+                } else {
+                    message = ACLocalizedString("filters_noUpdates", nil);
+                }
+                
+                delegate?.updateFinished(message: message)
             }
-            
-            let message: String?
-            if filtersCount > 0 {
-                let format = ACLocalizedString("filters_updated_format", nil);
-                message = String(format: format, filtersCount)
-            } else {
-                message = ACLocalizedString("filters_noUpdates", nil);
-            }
-            
-            delegate?.updateFinished(message: message)
         }
     }
 }

@@ -17,6 +17,7 @@
 */
 
 import Foundation
+import AdGuardSDK
 
 class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITableViewDataSource, ImportSettingsCellDelegate {
     
@@ -29,16 +30,17 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
     
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
     private let importService: ImportSettingsServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsProvidersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
+    private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
+    
     private var model: ImportSettingsViewModelProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if settings != nil {
-            model = ImportSettingsViewModel(settings: settings!, importSettingsService: importService, antibanner: antibanner, dnsProvidersService: dnsProvidersService)
+            model = ImportSettingsViewModel(settings: settings!, importSettingsService: importService, dnsProvidersService: dnsProvidersService, safariProtection: safariProtection)
         }
         
         updateTheme()

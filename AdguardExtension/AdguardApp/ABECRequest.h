@@ -16,7 +16,7 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 #import <Foundation/Foundation.h>
-#import "ABECConstants.h"
+//#import "ABECConstants.h"
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - ABECRequest

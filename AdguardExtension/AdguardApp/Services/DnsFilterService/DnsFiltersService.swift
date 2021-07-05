@@ -90,7 +90,7 @@ protocol DnsFiltersServiceProtocol {
 
 @objc(DnsFilter)
 @objcMembers
-class DnsFilter: NSObject, NSCoding, FilterDetailedInterface {
+class DnsFilter: NSObject, NSCoding {
     
     static let userFilterId = 1
     static let whitelistFilterId = 2
@@ -207,7 +207,7 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     private let resources: AESharedResourcesProtocol
     private let vpnManager: VpnManagerProtocol?
     private let configuration: ConfigurationServiceProtocol
-    private let parser = AASFilterSubscriptionParser()
+//    private let parser = AASFilterSubscriptionParser()
     private let complexProtection: ComplexProtectionServiceProtocol?
     
     private let workingQueue = DispatchQueue(label: "Dns filtres queue")
@@ -559,21 +559,22 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     }
     
     private func getDnsFilter(name: String?, url: URL, enabled:Bool, networking: ACNNetworkingProtocol, callback: @escaping ((DnsFilter?, Data?) -> Void)) {
-        self.parser.parse(from: url, networking: networking) { (result, error) in
-            var filter: DnsFilter? = nil
-            
-            if let parserError = error {
-                callback(nil, nil)
-                DDLogError("Failed updating dns filters with error: \(parserError)")
-                return
-            }
-            if let parserResult = result {
-                let meta = parserResult.meta
-                filter = DnsFilter(subscriptionUrl: meta.subscriptionUrl, name: name ?? meta.name, date: meta.updateDate ?? Date(), enabled: enabled, desc: meta.descr, importantDesc: "", version: meta.version, rulesCount: parserResult.rules.count, homepage: meta.homepage)
-                    
-                callback(filter, parserResult.filtersData)
-                return
-            }
-        }
+            //todo: move this logic to sdk
+//        self.parser.parse(from: url, networking: networking) { (result, error) in
+//            var filter: DnsFilter? = nil
+//
+//            if let parserError = error {
+//                callback(nil, nil)
+//                DDLogError("Failed updating dns filters with error: \(parserError)")
+//                return
+//            }
+//            if let parserResult = result {
+//                let meta = parserResult.meta
+//                filter = DnsFilter(subscriptionUrl: meta.subscriptionUrl, name: name ?? meta.name, date: meta.updateDate ?? Date(), enabled: enabled, desc: meta.descr, importantDesc: "", version: meta.version, rulesCount: parserResult.rules.count, homepage: meta.homepage)
+//
+//                callback(filter, parserResult.filtersData)
+//                return
+//            }
+//        }
     }
 }

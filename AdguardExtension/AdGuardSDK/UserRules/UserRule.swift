@@ -43,7 +43,7 @@ public struct UserRule: UserRuleProtocol, Equatable {
     public var ruleText: String
     public var isEnabled: Bool
     
-    init(ruleText: String, isEnabled: Bool = true) {
+    public init(ruleText: String, isEnabled: Bool = true) {
         self.ruleText = ruleText
         self.isEnabled = isEnabled
     }

@@ -18,6 +18,7 @@
 
 import Foundation
 import Zip
+import AdGuardSDK
 
 protocol SupportServiceProtocol {
     func exportLogs() -> URL?
@@ -35,10 +36,8 @@ class SupportService: SupportServiceProtocol {
     private let networkSettings: NetworkSettingsServiceProtocol
     private let dnsFilters: DnsFiltersServiceProtocol
     private let productInfo: ADProductInfoProtocol
-    private let antibanner: AESAntibannerProtocol
-    private let requestsService: HttpRequestServiceProtocol
     private let keyChainService: KeychainServiceProtocol
-    private let safariService: SafariServiceProtocol
+    private let safariProtection: SafariProtectionProtocol
 
     // Helper variable
     private let reportUrl = "https://reports.adguard.com/new_issue.html"
@@ -54,18 +53,16 @@ class SupportService: SupportServiceProtocol {
     private var logsDirectory: URL?
     private var logsZipDirectory: URL?
     
-    init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol, complexProtection: ComplexProtectionServiceProtocol, dnsProviders: DnsProvidersServiceProtocol, networkSettings: NetworkSettingsServiceProtocol, dnsFilters: DnsFiltersServiceProtocol, productInfo: ADProductInfoProtocol, antibanner: AESAntibannerProtocol, requestsService: HttpRequestServiceProtocol, keyChainService: KeychainServiceProtocol, safariService: SafariServiceProtocol) {
+    init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol, complexProtection: ComplexProtectionServiceProtocol, dnsProviders: DnsProvidersServiceProtocol, dnsFilters: DnsFiltersServiceProtocol, productInfo: ADProductInfoProtocol, keyChainService: KeychainServiceProtocol, safariProtection: SafariProtectionProtocol, networkSettings: NetworkSettingsServiceProtocol) {
         self.resources = resources
         self.configuration = configuration
         self.complexProtection = complexProtection
         self.dnsProviders = dnsProviders
-        self.networkSettings = networkSettings
         self.dnsFilters = dnsFilters
         self.productInfo = productInfo
-        self.antibanner = antibanner
-        self.requestsService = requestsService
         self.keyChainService = keyChainService
-        self.safariService = safariService
+        self.safariProtection = safariProtection
+        self.networkSettings = networkSettings
     }
     
     func exportLogs() -> URL? {
@@ -83,12 +80,13 @@ class SupportService: SupportServiceProtocol {
         try? fileManager.createDirectory(atPath: targetsUrlString, withIntermediateDirectories: true, attributes: nil)
         
         /// Get jsons for content blockers and append them to base directory
-        let contentBlockingJsonByFilename = safariService.allBlockingContentRules()
-        contentBlockingJsonByFilename.forEach { fileName, jsonData in
-            let fileUrl = URL(fileURLWithPath: cbUrlString + fileName)
-            try? jsonData.write(to: fileUrl)
+        let contentBlockingInfo = safariProtection.allContentBlockersInfo
+        contentBlockingInfo.forEach { (_, cbInfo) in
+            // todo: copy file
+//            let fileUrl = URL(fileURLWithPath: cbUrlString + fileName)
+//            try? jsonData.write(to: fileUrl)
         }
-
+        
         /// Get application state info and save it as state.txt to base directory
         let appStateData = createApplicationStateInfo().data(using: .utf8)
         let appStateUrl = URL(fileURLWithPath: baseUrlString + "state.txt")
@@ -151,19 +149,22 @@ class SupportService: SupportServiceProtocol {
         let applicationState = createApplicationStateInfo()
         let debugInfo = sendLogs ? createDebugInfo() : ""
         let feedback: FeedBackProtocol = FeedBack(applicationId: appId, version: version, email: email, language: language, subject: subject, description: description, applicationState: applicationState, debugInfo: debugInfo)
-        requestsService.sendFeedback(feedback) { logsSentSuccessfully in
-            completion(logsSentSuccessfully)
-        }
+        // todo: do something with reqest service
+//        requestsService.sendFeedback(feedback) { logsSentSuccessfully in
+//            completion(logsSentSuccessfully)
+//        }
     }
     
     private func createApplicationStateInfo() -> String {
         let server = dnsProviders.activeDnsServer
         let device = UIDevice.current
         
-        let filters = antibanner.activeFilters().reduce("") { filtersString, meta -> String in
-            let metaString = "ID=\(meta.filterId) Name=\"\(meta.name)\" Version=\(meta.version ?? "-") Enabled=\(meta.enabled)"
-            return filtersString + metaString + "\n"
-        }
+        // todo:
+        let filters = [String]()
+//        let filters = antibanner.activeFilters().reduce("") { filtersString, meta -> String in
+//            let metaString = "ID=\(meta.filterId) Name=\"\(meta.name)\" Version=\(meta.version ?? "-") Enabled=\(meta.enabled)"
+//            return filtersString + metaString + "\n"
+//        }
         
         let tunnelMode: String
         switch resources.tunnelMode {

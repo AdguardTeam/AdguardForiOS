@@ -44,19 +44,6 @@ extension AESharedResourcesProtocol {
         }
     }
 
-    dynamic var backgroundFetchState: BackgroundFetchState {
-        get {
-            guard let value = sharedDefaults().object(forKey: BackgroundFetchStateKey) as? Int else {
-                return .notStarted
-            }
-            return BackgroundFetchState(rawValue: value)!
-        }
-        set {
-            DDLogInfo("(SharedResources) set background fetch state: \(newValue.rawValue)")
-            sharedDefaults().set(newValue.rawValue, forKey: BackgroundFetchStateKey)
-        }
-    }
-
     dynamic var dnsImplementation: DnsImplementation {
         get {
             if let savedImplementation = sharedDefaults().object(forKey: DnsImplementationKey) as? Int {

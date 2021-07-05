@@ -17,7 +17,7 @@
 */
 
 import Foundation
-import SQLite
+@_implementationOnly import SQLite
 
 protocol ProductionDatabaseManagerProtocol: ResetableSyncProtocol {
     /*

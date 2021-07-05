@@ -21,7 +21,7 @@ import Foundation
 public typealias LogMessage = (_ message: String) -> Void
 
 public class Logger {
-    public static var logInfo: LogMessage = { _ in }
-    public static var logError: LogMessage = { _ in }
-    public static var logDebug: LogMessage = { _ in }
+    public static var logInfo: LogMessage = { msg in print(msg) }
+    public static var logError: LogMessage = { msg in print(msg) }
+    public static var logDebug: LogMessage = { msg in print(msg) }
 }

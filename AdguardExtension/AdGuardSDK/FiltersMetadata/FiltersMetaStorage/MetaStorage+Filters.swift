@@ -17,7 +17,7 @@
 */
 
 import Foundation
-import SQLite
+@_implementationOnly import SQLite
 
 // MARK: - FiltersMetaStorageProtocol + Filters methods
 
@@ -215,22 +215,30 @@ extension MetaStorage: FiltersMetaStorageProtocol {
         
         // Query: SELECT version FROM filters WHERE filter_id = filter.filterId
         let versionQuery = FiltersTable.table.select(FiltersTable.version).where(FiltersTable.filterId == filter.filterId)
-        guard let currentFilterVersion = try filtersDb.pluck(versionQuery)?.get(FiltersTable.version) else {
-            Logger.logDebug("(FiltersMetaStorage) - updateFilter; Failed to get current filter version; Filter id=\(filter.filterId)")
-            return false
-        }
-        
-        Logger.logDebug("(FiltersMetaStorage) - updateFilter; Filter id=\(filter.filterId); Update \(currentFilterVersion) -> \(filter.version ?? "nil")")
-        guard currentFilterVersion != filter.version else { return false }
-        
-        // Query: UPDATE filters SET (group_id, version, last_update_time, editable, display_number, name, description, homepage, removable, expires, subscriptionUrl) WHERE filter_id = filter.filterId
-        let query = FiltersTable.table
-                                .where(FiltersTable.filterId == filter.filterId)
-                                .update(filter.updateSetters)
+        if let currentFilterVersion = try filtersDb.pluck(versionQuery)?.get(FiltersTable.version) {
             
-        try filtersDb.run(query)
-        Logger.logInfo("(FiltersMetaStorage) - Filter was updated with id \(filter.filterId)")
-        return true
+            Logger.logDebug("(FiltersMetaStorage) - updateFilter; Filter id=\(filter.filterId); Update \(currentFilterVersion) -> \(filter.version ?? "nil")")
+            guard currentFilterVersion != filter.version else { return false }
+            
+            // Query: UPDATE filters SET (group_id, version, last_update_time, editable, display_number, name, description, homepage, removable, expires, subscriptionUrl) WHERE filter_id = filter.filterId
+            let query = FiltersTable.table
+                                    .where(FiltersTable.filterId == filter.filterId)
+                                    .update(filter.updateSetters)
+                
+            try filtersDb.run(query)
+            Logger.logInfo("(FiltersMetaStorage) - Filter was updated with id \(filter.filterId)")
+            return true
+        }
+        else {
+            Logger.logDebug("(FiltersMetaStorage) - insertFilter; Filter id=\(filter.filterId)")
+            
+            var updateSetters = filter.updateSetters
+            updateSetters.append(FiltersTable.filterId <- filter.filterId)
+            let query = FiltersTable.table
+                .insert(updateSetters)
+            try filtersDb.run(query)
+            return true
+        }
     }
     
     /**

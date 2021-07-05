@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import AdGuardSDK
 
 class MainMenuController: UITableViewController {
     
@@ -26,7 +27,7 @@ class MainMenuController: UITableViewController {
     private var dnsProviders: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
 
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
-    private let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
+    private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
     
@@ -60,12 +61,23 @@ class MainMenuController: UITableViewController {
         let updateFilters: ()->() = { [weak self] in
             guard let self = self else { return }
             let safariFiltersTextFormat = String.localizedString("safari_filters_format")
-            self.safariProtectionLabel.text = String.localizedStringWithFormat(safariFiltersTextFormat, self.filtersService.activeFiltersCount)
+            // todo: move it to SDK
+            var filtersCount = 0
+            for group in self.safariProtection.groups {
+                if !group.isEnabled { continue }
+                for filter in group.filters {
+                    if !filter.isEnabled { continue }
+                    filtersCount += 1
+                }
+            }
+            
+            self.safariProtectionLabel.text = String.localizedStringWithFormat(safariFiltersTextFormat, filtersCount)
         }
 
-        activeFiltersCountObservation = (filtersService as! FiltersService).observe(\.activeFiltersCount) { (_, _) in
-            updateFilters()
-        }
+        // todo: add update notification
+//        activeFiltersCountObservation = (filtersService as! FiltersService).observe(\.activeFiltersCount) { (_, _) in
+//            updateFilters()
+//        }
         
         updateFilters()
         

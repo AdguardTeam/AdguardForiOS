@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import AdGuardSDK
 
 protocol FilterDetailsControllerAnimationDelegate {
     func scrolledToBottom()
@@ -29,7 +30,7 @@ protocol FilterDetailsControllerTableViewDelegate {
 
 class FilterDetailsController : UIViewController, FilterDetailsControllerAnimationDelegate, FilterDetailsControllerTableViewDelegate, EditFilterDelegate {
     
-    var filter: FilterDetailedInterface!
+    var filter: SafariFilterProtocol!
     
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var shadowView: BottomShadowView!
@@ -38,9 +39,8 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
-    private let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsFiltersService:DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
-    private let safariProtection: SafariProtectionServiceProtocol = ServiceLocator.shared.getService()!
+    private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResources = ServiceLocator.shared.getService()!
     
     weak var delegate: DnsFiltersControllerDelegate?
@@ -70,14 +70,14 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     private func setupButtons(){
         var buttons: [BottomShadowButton] = []
         
-        if filter.editable {
+        if filter.group.groupId == SafariGroup.GroupType.custom.rawValue {
             let editButton = BottomShadowButton()
             editButton.title = String.localizedString("common_edit").uppercased()
             editButton.titleColor = nil
             editButton.action = {[weak self] in
                 guard let self = self else { return }
                 if let controller = self.storyboard?.instantiateViewController(withIdentifier: "NewCustomFilterDetailsController") as? NewCustomFilterDetailsController {
-                    let model: NewCustomFilterDetailsControllerInterface = NewCustomFilterDetailsControllerModel(name: self.filter.name, rulesCount: self.filter.rulesCount, homepage: self.filter.homepage)
+                    let model: NewCustomFilterDetailsControllerInterface = NewCustomFilterDetailsControllerModel(name: self.filter.name, rulesCount: self.filter.rulesCount, homepage: self.filter.homePage)
                     
                     controller.editDelegate = self
                     controller.model = model
@@ -88,7 +88,7 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
             buttons.append(editButton)
         }
         
-        if filter.removable {
+        if filter.group.groupId == SafariGroup.GroupType.custom.rawValue {
             let deleteButton = BottomShadowButton()
             deleteButton.title = String.localizedString("common_delete").uppercased()
             deleteButton.titleColor = UIColor(hexString: "#df3812")
@@ -107,8 +107,10 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
         let yesAction = UIAlertAction(title: String.localizedString("common_action_yes"), style: .destructive) {[weak self] _ in
             guard let self = self else { return }
             
-            if let customFilter = self.filter as? Filter {
-                self.filtersService.deleteCustomFilter(customFilter, protectionEnabled: self.safariProtection.safariProtectionEnabled, userFilterEnabled: self.resources.safariUserFilterEnabled, whitelistEnabled: self.resources.safariWhitelistEnabled, invertedWhitelist: self.resources.invertedWhitelist)
+            if let customFilter = self.filter {
+                self.safariProtection.deleteCustomFilter(withId: customFilter.filterId) { _ in
+                    // todo: proces error
+                }
             }
             
             if let dnsFilter = self.filter as? DnsFilter {
@@ -161,8 +163,9 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     
     func renameFilter(newName: String) {
         title = newName
-        if let safariFilter = filter as? Filter {
-            filtersService.renameCustomFilter(safariFilter.filterId, newName)
+        if let safariFilter = filter {
+            // todo: catch error
+            try? safariProtection.renameCustomFilter(withId: safariFilter.filterId, to: newName)
         }
     }
 }
@@ -182,13 +185,12 @@ class FilterDetailsTableCotroller : UITableViewController {
     @IBOutlet weak var tagsView: FilterTagsView!
     @IBOutlet weak var enabledLabel: ThemableLabel!
     
-    var filter: FilterDetailedInterface!
+    var filter: SafariFilterProtocol!
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsFiltersService:DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResources = ServiceLocator.shared.getService()!
-    private let safariProtection: SafariProtectionServiceProtocol = ServiceLocator.shared.getService()!
+    private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     
     var animationDelegate: FilterDetailsControllerAnimationDelegate?
     var tableViewDelegate: FilterDetailsControllerTableViewDelegate?
@@ -216,20 +218,16 @@ class FilterDetailsTableCotroller : UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        enabledSwitch.isOn = filter.enabled
-        enabledLabel.text = filter.enabled ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
-        descriptionLabel.text = filter.desc
+        enabledSwitch.isOn = filter.isEnabled
+        enabledLabel.text = filter.isEnabled ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
+        descriptionLabel.text = filter.description
         versionLabel.text = filter.version == zeroVersion ? nil : filter.version
-        updatedLabel.text = filter.updateDate?.formatedString()
+        updatedLabel.text = filter.lastUpdateDate?.formatedString()
         rulesCountLabel.text = "\(filter.rulesCount ?? 0)"
         
         tagsView.highlightIsOn = false
         
-        if let safariFilter = filter as? Filter {
-            tagsView.filter = safariFilter
-        } else {
-            tagsView.filter = nil
-        }
+        tagsView.filter = filter
         
         updateTheme()
         setupBackButton()
@@ -256,30 +254,27 @@ class FilterDetailsTableCotroller : UITableViewController {
             return calculatedHeight
         
         case .description:
-            return filter.desc == nil || filter.desc?.count == 0 ? 0.0 : calculatedHeight
+            return filter.description == nil || filter.description?.count == 0 ? 0.0 : calculatedHeight
             
         case .version:
             return (filter.version == nil || filter.version?.count == 0 || filter.version == zeroVersion) ? 0.0 : calculatedHeight
             
         case .updated:
-            return filter.updateDate == nil ? 0.0 : calculatedHeight
+            return filter.lastUpdateDate == nil ? 0.0 : calculatedHeight
             
         case .rulesCount:
             return filter.rulesCount == nil ? 0.0 : calculatedHeight
             
         case .website:
-            return filter.homepage == nil || filter.homepage?.count == 0 ? 0.0 : calculatedHeight
+            return filter.homePage == nil || filter.homePage?.count == 0 ? 0.0 : calculatedHeight
             
         case .subscriptionURL:
-            guard filter.editable || filter.removable else { return 0 }
+            guard filter.group.groupId == SafariGroup.GroupType.custom.rawValue else { return 0 }
             return calculatedHeight
             
         case .tags:
-            if let safariFilter = filter as? Filter {
-                let tagsCount = (safariFilter.tags?.count ?? 0) + (safariFilter.langs?.count ?? 0)
-                return tagsCount == 0 ? 0.0 : calculatedHeight
-            }
-            return 0.0
+            let tagsCount = filter.tags.count + filter.languages.count
+            return tagsCount == 0 ? 0.0 : calculatedHeight
         }
     }
     
@@ -292,13 +287,13 @@ class FilterDetailsTableCotroller : UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let row = Row(rawValue: indexPath.row) else { return }
         if row == .website {
-            if let url = URL(string: filter.homepage ?? "") {
+            if let url = URL(string: filter.homePage ?? "") {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
         }
         
         if row == .subscriptionURL {
-            if let url = URL(string: filter.subscriptionUrl ?? "") {
+            if let url = URL(string: filter.filterDownloadPage ?? "") {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
         }
@@ -316,13 +311,16 @@ class FilterDetailsTableCotroller : UITableViewController {
     }
     
     @IBAction func toggleEnableSwitch(_ sender: UISwitch) {
-        if let safariFilter = filter as? Filter {
-            filtersService.setFilter(safariFilter, enabled: sender.isOn, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.safariUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertedWhitelist: resources.invertedWhitelist)
+        
+        safariProtection.setFilter(withId: filter.filterId, filter.group.groupId, enabled: sender.isOn) { error in
+            // todo: process error
         }
-        if let dnsFilter = filter as? DnsFilter {
-            dnsFiltersService.setFilter(filterId: dnsFilter.id, enabled: sender.isOn)
-        }
-        enabledLabel.text = filter.enabled ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
+
+        // todo: change it when dnsProtection will be implemented
+//        if let dnsFilter = filter as? DnsFilter {
+//            dnsFiltersService.setFilter(filterId: dnsFilter.id, enabled: sender.isOn)
+//        }
+        enabledLabel.text = filter.isEnabled ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
         delegate?.filtersStateWasChanged()
     }
 }
@@ -343,14 +341,14 @@ extension FilterDetailsTableCotroller: ThemableProtocol {
         theme.setupSeparators(separators)
         theme.setupSwitch(enabledSwitch)
         
-        if let homepage = filter.homepage {
+        if let homepage = filter.homePage {
             let homepage = NSAttributedString(string: homepage, attributes:
                                                 [.foregroundColor: theme.grayTextColor,
                                                  .underlineStyle: NSUnderlineStyle.single.rawValue])
             websiteLabel.attributedText = homepage
         }
         
-        if let subscriptionUrl = filter.subscriptionUrl {
+        if let subscriptionUrl = filter.filterDownloadPage {
             let subscriptionUrl = NSAttributedString(string: subscriptionUrl, attributes:
                                                         [.foregroundColor: theme.grayTextColor,
                                                          .underlineStyle: NSUnderlineStyle.single.rawValue])

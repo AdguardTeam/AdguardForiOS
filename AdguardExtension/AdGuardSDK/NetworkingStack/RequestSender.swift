@@ -74,21 +74,22 @@ final class RequestSender: RequestSenderProtocol{
         let group = DispatchGroup()
         
         // Process HTTP requests in background
-        ProcessInfo().performExpiringActivity(withReason: "Sending HTTP request") { [weak self, group] expired in
-            Logger.logDebug("Sending request with URL = \(requestConfig.request.urlRequest?.url?.absoluteString ?? "nil"); expired = \(expired)")
+        // todo: ProcessInfo().performExpiringActivity if not availiable for mac os build
+//        ProcessInfo().performExpiringActivity(withReason: "Sending HTTP request") { [weak self, group] expired in
+//            Logger.logDebug("Sending request with URL = \(requestConfig.request.urlRequest?.url?.absoluteString ?? "nil"); expired = \(expired)")
             
             group.enter()
-            self?.requestQueue.async {
-                if expired {
-                    let error = NSError(domain: "request.send.expired", code: 1, userInfo: nil)
-                    completion(.error(error))
-                } else {
-                    self?.sendInternal(requestConfig: requestConfig, completion: completion)
-                }
+            /*self?.*/requestQueue.async {
+//                if expired {
+//                    let error = NSError(domain: "request.send.expired", code: 1, userInfo: nil)
+//                    completion(.error(error))
+//                } else {
+                /*self?.*/self.sendInternal(requestConfig: requestConfig, completion: completion)
+//                }
                 group.leave()
             }
             group.wait()
-        }
+//        }
     }
     
     // MARK: - Private method

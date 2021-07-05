@@ -17,16 +17,17 @@
 */
 
 import Foundation
+import AdGuardSDK
 
 protocol FiltersAndGroupsViewModelProtocol: class {
     
     /* Indicates whether you need to work only with single group, otherwise it is nil */
-    var currentGroup: Group? { get set }
+    var currentGroup: SafariGroupProtocol? { get set }
     
     /* Returns array of groups to display */
-    var groups: [Group]? { get }
+    var groups: [SafariGroupProtocol]? { get }
     
-    var constantAllGroups: [Group] { get }
+    var constantAllGroups: [SafariGroupProtocol] { get }
     
     /* contains search query string */
     var searchString: String { get }
@@ -44,7 +45,7 @@ protocol FiltersAndGroupsViewModelProtocol: class {
     func switchTag(name: String)
     
     /* enable/disable filter */
-    func set(filter: Filter, enabled: Bool)
+    func set(filter: SafariFilterProtocol, enabled: Bool)
     
     /* enable/disable group */
     func set(groupId: Int, enabled: Bool)
@@ -64,7 +65,7 @@ protocol FiltersAndGroupsViewModelProtocol: class {
     
     /* adds custom filter to database and reloads safari content blockers
     returns @success result in callback */
-    func addCustomFilter(filter: AASCustomFilterParserResult, completion: @escaping (Bool) -> Void)
+    func addCustomFilter(filter: ExtendedCustomFilterMetaProtocol, completion: @escaping (Bool) -> Void)
     
     // MARK - callbacks methods
     func add(_ callback: @escaping ()->(), with key: String)
@@ -73,12 +74,12 @@ protocol FiltersAndGroupsViewModelProtocol: class {
 }
 
 final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtocol {
-
+    
     // MARK: - Public properties
     
-    var currentGroup: Group?
+    var currentGroup: SafariGroupProtocol?
     
-    var groups: [Group]? {
+    var groups: [SafariGroupProtocol]? {
         get {
             return isSearchActive ? searchGroups : allGroups
         }
@@ -91,15 +92,14 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
     
     // MARK: - Private properties
     
-    private var searchGroups: [Group] = []
-    private var allGroups: [Group] = []
-    var constantAllGroups: [Group] = []
+    private var searchGroups: [SafariGroupProtocol] = []
+    private var allGroups: [SafariGroupProtocol] = []
+    var constantAllGroups: [SafariGroupProtocol] = []
     
     private var groupsObserver: ((_ index: Int)->Void)?
-    private var filtersService: FiltersServiceProtocol
     private var configurationService: ConfigurationService
-    private var resources: AESharedResources
-    private var safariProtection: SafariProtectionServiceProtocol
+    private var resources: AESharedResourcesProtocol
+    private var safariProtection: SafariProtectionProtocol
     
     
     // MARK: - Callbacks
@@ -111,18 +111,13 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
     
     // MARK: - initializers
     
-    init(filtersService: FiltersServiceProtocol, configurationService: ConfigurationService, resources: AESharedResources, safariProtection: SafariProtectionServiceProtocol) {
+    init(configurationService: ConfigurationService, resources: AESharedResourcesProtocol, safariProtection: SafariProtectionProtocol) {
         self.configurationService = configurationService
-        self.filtersService = filtersService
         self.resources = resources
         self.safariProtection = safariProtection
         super.init()
         
         updateAllGroups()
-        notificationToken = NotificationCenter.default.observe(name: self.filtersService.updateNotification, object: nil, queue: nil) {
-            [weak self] (notification) in
-            self?.groupsObserver?(0)
-        }
     }
     
     // MARK: - Public methods
@@ -131,13 +126,14 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
         isSearchActive = true
         searchString = query
         
-        searchGroups = [Group]()
-        let groupsToSearchIn: [Group] = (currentGroup != nil) ? [currentGroup!] : allGroups
+        searchGroups = [SafariGroup]()
+//        let groupsToSearchIn: [SafariGroup] = (currentGroup != nil) ? [currentGroup!] : allGroups
         
         if query.count == 0 {
-            groupsToSearchIn.forEach({ $0.filters.forEach({ $0.searchAttributedString = nil }) })
-            searchGroups = groupsToSearchIn
-            highlightTags([])
+            // todo:
+//            groupsToSearchIn.forEach({ $0.filters.forEach({ $0.searchAttributedString = nil }) })
+//            searchGroups = groupsToSearchIn
+//            highlightTags([])
         } else {
             
             let components = searchString.lowercased().split(separator: " ")
@@ -145,57 +141,60 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
             let searchSet = Set(components.map({ String($0) }))
             let searchStrings = Array(searchSet)
             
-            for group in groupsToSearchIn{
-                
-                var foundFiltersSet = Set<Filter>()
-                
-                let filters = group.filters
-                
-                for filter in filters{
-                    filter.searchAttributedString = filter.name?.highlight(search: searchStrings)
-                    
-                    // Adding "#" symbol to satisfy search string
-                    let tags = filter.tags?.map({"#" + $0.name}) ?? []
-                    let langs = filter.langs?.map({"#" + $0.name}) ?? []
-                    
-                    let tagsSet = Set(tags)
-                    let langsSet = Set(langs)
-                    
-                    let langsAndTagsUnion = tagsSet.union(langsSet)
-                    let selectedTagsForFilterSet = searchSet.intersection(langsAndTagsUnion)
-                    
-                    // Remove "#" for tags, because filter names do not contain "#" symbol
-                    var untaggedTags: Set<String> = []
-                    
-                    for tag in selectedTagsForFilterSet {
-                        untaggedTags.insert(String(tag.dropFirst()))
-                    }
-                    
-                    highlight(filter: filter, tags: untaggedTags)
-                    
-                    let filterNameSatisfies = checkFilter(filter: filter, components: components)
-                    
-                    if !selectedTagsForFilterSet.isEmpty || filterNameSatisfies {
-                        foundFiltersSet.insert(filter)
-                    }
-                }
-                let foundFilters = order(filtersSet: foundFiltersSet, inGroup: group)
-                if foundFilters.count > 0 {
-                    guard let searchGroup = group.copy() as? Group else { return }
-                    searchGroup.filters = foundFilters
-                    searchGroups.append(searchGroup)
-                }
-            }
+//            for group in groupsToSearchIn{
+//
+//                var foundFiltersSet = [SafariFilterProtocol]()
+//
+//                let filters = group.filters
+//
+//                for filter in filters{
+//                    // todo:
+////                    filter.searchAttributedString = filter.name?.highlight(search: searchStrings)
+//
+//                    // Adding "#" symbol to satisfy search string
+//                    let tags = filter.tags.map({"#" + $0.tagName})
+//                    let langs = filter.languages.map({"#" + $0})
+//
+//                    let tagsSet = Set(tags)
+//                    let langsSet = Set(langs)
+//
+//                    let langsAndTagsUnion = tagsSet.union(langsSet)
+//                    let selectedTagsForFilterSet = searchSet.intersection(langsAndTagsUnion)
+//
+//                    // Remove "#" for tags, because filter names do not contain "#" symbol
+//                    var untaggedTags: Set<String> = []
+//
+//                    for tag in selectedTagsForFilterSet {
+//                        untaggedTags.insert(String(tag.dropFirst()))
+//                    }
+//
+////                    highlight(filter: filter, tags: untaggedTags)
+//
+//                    let filterNameSatisfies = checkFilter(filter: filter, components: components)
+//
+//                    if !selectedTagsForFilterSet.isEmpty || filterNameSatisfies {
+//                        foundFiltersSet.append(filter)
+//                    }
+//                }
+//                let foundFilters = order(filtersSet: foundFiltersSet, inGroup: group)
+//                if foundFilters.count > 0 {
+//                    // todo:
+////                    guard var searchGroup = group as? SafariGroupProtocol else { return }
+////                    searchGroup.filters = foundFilters
+////                    searchGroups.append(searchGroup)
+//                }
+//            }
         }
         callAllCallbacks()
     }
     
     func cancelSearch() {
         isSearchActive = false
-        allGroups.forEach({ $0.filters.forEach({ $0.searchAttributedString = nil }) })
+        // todo:
+//        allGroups.forEach({ $0.filters.forEach({ $0.searchAttributedString = nil }) })
         searchString = ""
-        highlightTags([])
-        searchGroups = [Group]()
+//        highlightTags([])
+        searchGroups = [SafariGroup]()
             
         callAllCallbacks()
     }
@@ -218,24 +217,29 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
         searchChangedCallback?()
     }
     
-    func set(filter: Filter, enabled: Bool) {
-        filtersService.setFilter(filter, enabled: enabled, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.systemUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertedWhitelist: resources.invertedWhitelist)
+    func set(filter: SafariFilterProtocol, enabled: Bool) {
+        safariProtection.setFilter(withId: filter.filterId, filter.group.groupId, enabled: enabled) { _ in
+            // todo:
+        }
     }
     
     func set(groupId: Int, enabled: Bool) {
-        filtersService.setGroup(groupId, enabled: enabled, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.systemUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertedWhitelist: resources.invertedWhitelist)
-        guard let group = getGroupFromSearchGroups(by: groupId) else { return }
-        group.enabled = enabled
+        safariProtection.setGroup(SafariGroup.GroupType(rawValue: groupId)! , enabled: enabled) { error in
+            // todo:
+        }
+//        guard let group = getGroupFromSearchGroups(by: groupId) else { return }
+//        group.enabled = enabled
     }
 
     func load(_ completion: @escaping () -> Void) {
-        filtersService.load(refresh: false, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.systemUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertedWhitelist: resources.invertedWhitelist) {_,_ in
+        
+        safariProtection.updateFiltersMetaAndLocalizations(false) { _ in
             completion()
         }
     }
     
     func refresh(_ completion: @escaping () -> Void) {
-        filtersService.load(refresh: true, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.systemUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertedWhitelist: resources.invertedWhitelist) { [weak self] _,_  in
+        safariProtection.updateFiltersMetaAndLocalizations(true) { [weak self] _ in
             self?.updateAllGroups()
             self?.updateCurrentGroup()
             completion()
@@ -246,16 +250,17 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
         groupsObserver = groupChanged
     }
     
-    func addCustomFilter(filter: AASCustomFilterParserResult, completion: @escaping (Bool) -> Void) {
-        filtersService.addCustomFilter(filter, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.systemUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertedWhitelist: resources.invertedWhitelist)
-        updateAllGroups()
-        completion(true)
-        callAllCallbacks()
+    func addCustomFilter(filter: ExtendedCustomFilterMetaProtocol, completion: @escaping (Bool) -> Void) {
+        safariProtection.add(customFilter: filter, enabled: true) {[weak self] _ in
+            self?.updateAllGroups()
+            completion(true)
+            self?.callAllCallbacks()
+        }
     }
     
     func updateCurrentGroup(){
         if currentGroup != nil {
-            let groups = filtersService.groups
+            let groups = safariProtection.groups
             let id = currentGroup?.groupId
             for group in groups {
                 if group.groupId == id {
@@ -266,18 +271,20 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
     }
     
     func updateAllGroups(){
-        constantAllGroups = filtersService.groups
+        constantAllGroups = safariProtection.groups
         let proStatus = configurationService.proStatus
-        let groups = filtersService.groups.filter { (group) -> Bool in
+        let groups = safariProtection.groups.filter { (group) -> Bool in
             if proStatus {
                 return true
             }
-            return !group.proOnly
+            // todo: move to sdk
+//            return !group.proOnly
+            return true
         }
         
         let sortedGroups = groups.sorted(by: { $0.groupId < $1.groupId })
         for group in sortedGroups {
-            sortFilters(in: group)
+//            sortFilters(in: group)
         }
         allGroups = sortedGroups
     }
@@ -294,12 +301,12 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
     // MARK: - Private methods
     
     /* Preserves initial filters order in a specific filters group */
-    private func order(filtersSet: Set<Filter>, inGroup group: Group) -> [Filter] {
+    private func order(filtersSet: [SafariFilterProtocol], inGroup group: SafariGroupProtocol) -> [SafariFilterProtocol] {
         var foundFilters = Array(filtersSet)
         let filters = group.filters
         foundFilters.sort { filter1, filter2 -> Bool in
-            if let pos1 = filters.firstIndex(of: filter1),
-               let pos2 = filters.firstIndex(of: filter2) {
+            if let pos1 = filters.firstIndex(where: { $0.filterId == filter1.filterId }),
+               let pos2 = filters.firstIndex(where: { $0.filterId == filter2.filterId }) {
                 return pos1 < pos2
             } else {
                 return true
@@ -312,31 +319,32 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
         callbacksByKey.forEach({ $0.value() })
     }
     
-    private func highlight(filter: Filter, tags: Set<String>){
-        for i in 0..<(filter.tags?.count ?? 0) {
-            filter.tags![i].highlighted = !(tags.count == 0 || tags.contains(filter.tags![i].name))
-        }
-        for i in 0..<(filter.langs?.count ?? 0) {
-            filter.langs![i].highlighted = !(tags.count == 0 || tags.contains(filter.langs![i].name))
-        }
-    }
+    // todo:
+//    private func highlight(filter: SafariFilterProtocol, tags: Set<String>){
+//        for i in 0..<(filter.tags.count ?? 0) {
+//            filter.tags![i].highlighted = !(tags.count == 0 || tags.contains(filter.tags![i].name))
+//        }
+//        for i in 0..<(filter.languages.count ?? 0) {
+//            filter.langs![i].highlighted = !(tags.count == 0 || tags.contains(filter.langs![i].name))
+//        }
+//    }
+//
+//    private func highlightTags(_ tags: Set<String>){
+//        for group in allGroups{
+//            let filters = group.filters
+//            for filter in filters {
+//                for i in 0..<(filter.tags.count ?? 0) {
+//                    filter.tags![i].highlighted = !(tags.count == 0 || tags.contains(filter.tags![i].name))
+//                }
+//
+//                for i in 0..<(filter.languages.count ?? 0) {
+//                    filter.langs![i].highlighted = !(tags.count == 0 || tags.contains(filter.langs![i].name))
+//                }
+//            }
+//        }
+//    }
     
-    private func highlightTags(_ tags: Set<String>){
-        for group in allGroups{
-            let filters = group.filters
-            for filter in filters {
-                for i in 0..<(filter.tags?.count ?? 0) {
-                    filter.tags![i].highlighted = !(tags.count == 0 || tags.contains(filter.tags![i].name))
-                }
-                
-                for i in 0..<(filter.langs?.count ?? 0) {
-                    filter.langs![i].highlighted = !(tags.count == 0 || tags.contains(filter.langs![i].name))
-                }
-            }
-        }
-    }
-    
-    private func checkFilter(filter: Filter?, components: [Substring]) -> Bool {
+    private func checkFilter(filter: SafariFilterProtocol?, components: [Substring]) -> Bool {
         let name = filter?.name
         for component in components {
             let range = name?.range(of: component, options: .caseInsensitive)
@@ -347,32 +355,34 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
         return false
     }
     
-    private func sortFilters(in group: Group){
-        let filters = group.filters
-        group.filters = filters.sorted { (filter1, filter2) -> Bool in
-        
-            let enabled1 = filter1.enabled
-            let enabled2 = filter2.enabled
-                
-            switch (enabled1, enabled2) {
-            case (true, false):
-                return true
-            case (false, true):
-                return false
-            default:
-                break
-            }
-                    
-            if filter1.displayNumber != filter2.displayNumber {
-                return filter1.displayNumber ?? 0 < filter2.displayNumber ?? 0
-            }
-            else {
-                return filter1.name ?? "" < filter2.name ?? ""
-            }
-        }
-    }
+    // todo:
+//    private func sortFilters(in group: SafariGroupProtocol){
+//        let filters = group.filters
+//        let sortedFilters = filters.sorted { (filter1, filter2) -> Bool in
+//
+//            let enabled1 = filter1.isEnabled
+//            let enabled2 = filter2.isEnabled
+//
+//            switch (enabled1, enabled2) {
+//            case (true, false):
+//                return true
+//            case (false, true):
+//                return false
+//            default:
+//                break
+//            }
+//
+//            if filter1.displayNumber != filter2.displayNumber {
+//                return filter1.displayNumber ?? 0 < filter2.displayNumber ?? 0
+//            }
+//            else {
+//                return filter1.name ?? "" < filter2.name ?? ""
+//            }
+//        }
+//    }
     
-    private func getGroupFromSearchGroups(by groupId: Int) -> Group? {
-        return searchGroups.first {$0.groupId == groupId }
-    }
+    // todo:
+//    private func getGroupFromSearchGroups(by groupId: Int) -> Group? {
+//        return searchGroups.first {$0.groupId == groupId }
+//    }
 }

@@ -24,7 +24,7 @@ struct FiltersLocalizationsParser: ParserProtocol {
     typealias Model = ExtendedFiltersMetaLocalizations
     
     func parse(data: Data, response: URLResponse?) -> Model? {
-        guard let response = response as? HTTPURLResponse, response.statusCode != 200 else {
+        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
             Logger.logError("(FiltersLocalizationsParser) bad response")
             return nil
         }

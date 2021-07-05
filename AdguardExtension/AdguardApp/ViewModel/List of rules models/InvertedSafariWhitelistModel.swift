@@ -17,6 +17,7 @@
 */
 
 import Foundation
+import AdGuardSDK
 
 class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
     
@@ -50,12 +51,13 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
     
     var enabled: Bool {
         get {
-            return resources.safariWhitelistEnabled
+            return safariProtection.allowlistIsEnbaled
         }
         set{
             if enabled != newValue {
-                resources.safariWhitelistEnabled = newValue
-                contentBlockerService.reloadJsons(backgroundUpdate: false, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.safariUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertWhitelist: resources.invertedWhitelist) {_ in }
+                safariProtection.update(allowlistIsEnbaled: newValue) { error in
+                    // todo:
+                }
             }
         }
     }
@@ -95,11 +97,9 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
     
     /* Services */
     private let resources: AESharedResourcesProtocol
-    private let contentBlockerService: ContentBlockerService
-    private let antibanner: AESAntibannerProtocol
     private let theme: ThemeServiceProtocol
     private let fileShare: FileShareServiceProtocol = FileShareService()
-    private let safariProtection: SafariProtectionServiceProtocol
+    private let safariProtection: SafariProtectionProtocol
     
     /* Variables */
     private var allRules = [RuleInfo]()
@@ -107,16 +107,14 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
     
     // MARK: - Initializer
     
-    init(resources: AESharedResourcesProtocol, contentBlockerService: ContentBlockerService, antibanner: AESAntibannerProtocol, theme: ThemeServiceProtocol, safariProtection: SafariProtectionServiceProtocol) {
+    init(resources: AESharedResourcesProtocol, theme: ThemeServiceProtocol, safariProtection: SafariProtectionProtocol) {
         self.resources = resources
-        self.contentBlockerService = contentBlockerService
-        self.antibanner = antibanner
         self.theme = theme
         self.safariProtection = safariProtection
         
-        let invertedRules = contentBlockerService.invertedWhitelistRules()
+        let invertedRules = safariProtection.allRules(for: .invertedAllowlist)
         allRules = invertedRules.map({ (rule) -> RuleInfo in
-            RuleInfo(rule.ruleText, false, rule.isEnabled.boolValue, theme)
+            RuleInfo(rule.ruleText, false, rule.isEnabled, theme)
         })
     }
     
@@ -216,12 +214,11 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
     
     private func addInvertedSafariWhitelistRule(ruleText: String, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void){
         
-        let domainObject = AEWhitelistDomainObject(domain: ruleText)
-                        
-        if !contentBlockerService.validateRule(domainObject.rule.ruleText) {
-           errorHandler(ACLocalizedString("rule_converting_error", nil))
-           return
-        }
+        // todo:
+//        if !contentBlockerService.validateRule(domainObject.rule.ruleText) {
+//           errorHandler(ACLocalizedString("rule_converting_error", nil))
+//           return
+//        }
         
         let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
         
@@ -231,20 +228,17 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
         allRules = domains
         delegate?.listOfRulesChanged()
         
-        contentBlockerService.addInvertedWhitelistDomain(ruleText) { (error) in
-            DispatchQueue.main.async {
-                [weak self] in
-                if error == nil {
-                    completionHandler()
-                    self?.allRules = domains
-                    self?.delegate?.listOfRulesChanged()
-                }
-                else {
-                    errorHandler(error?.localizedDescription ?? "")
-                }
-                
-                UIApplication.shared.endBackgroundTask(backgroundTaskId)
+        safariProtection.add(rule: UserRule(ruleText: ruleText), for: .invertedAllowlist, override: false) { [weak self] error in
+            if error == nil {
+                completionHandler()
+                self?.allRules = domains
+                self?.delegate?.listOfRulesChanged()
             }
+            else {
+                errorHandler(error?.localizedDescription ?? "")
+            }
+            
+            UIApplication.shared.endBackgroundTask(backgroundTaskId)
         }
     }
     
@@ -290,25 +284,21 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
                 guard let self = self else { return }
 
                 let objects = self.rulesToObjectsConverter(rules: self.allRules)
-                self.contentBlockerService.setInvertedWhitelistRules(objects)
-                
-                completionHandler()
-                
-                self.contentBlockerService.reloadJsons(backgroundUpdate: false, protectionEnabled: self.safariProtection.safariProtectionEnabled, userFilterEnabled: self.resources.safariUserFilterEnabled, whitelistEnabled: self.resources.safariWhitelistEnabled, invertWhitelist: self.resources.invertedWhitelist) { (error) in
+                self.safariProtection.add(rules: objects, for: .invertedAllowlist, override: true) { error in
+                    
                     if error != nil {
                         DDLogError("(invertedSafariWhitelistModel) Error occured during content blocker reloading - \(error!.localizedDescription)")
                         // do not rollback changes and do not show any alert to user in this case
                         // https://github.com/AdguardTeam/AdguardForiOS/issues/1174
                     }
                     UIApplication.shared.endBackgroundTask(backgroundTaskId)
+                    completionHandler()
                 }
             }
         }
     }
     
     private func changeInvertedSafariWhitelistRule(index: Int, text: String, enabled: Bool, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
-        
-        let backgroundTaskId = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
         
         let domains = allRules
         domains[index].rule = text
@@ -318,26 +308,16 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
         delegate?.listOfRulesChanged()
         
         let objects = rulesToObjectsConverter(rules: allRules)
-        contentBlockerService.setInvertedWhitelistRules(objects)
-        
-        contentBlockerService.reloadJsons(backgroundUpdate: false, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.safariUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertWhitelist: resources.invertedWhitelist) {(error)  in
-            
-            DispatchQueue.main.async {
-                if error != nil {
-                    DDLogError("(InvertedSafariWhitelistModel) changeInvertedSafariWhitelistRule - Error occured during content blocker reloading - \(error!.localizedDescription)")
-                    // do not rollback changes and do not show any alert to user in this case
-                    // https://github.com/AdguardTeam/AdguardForiOS/issues/1174
-                }
-                
-                completionHandler()
-                UIApplication.shared.endBackgroundTask(backgroundTaskId)
+        safariProtection.add(rules: objects, for: .invertedAllowlist, override: true) { error in
+            if error != nil {
+                DDLogError("(InvertedSafariWhitelistModel) changeInvertedSafariWhitelistRule - Error occured during content blocker reloading - \(error!.localizedDescription)")
+                // do not rollback changes and do not show any alert to user in this case
+                // https://github.com/AdguardTeam/AdguardForiOS/issues/1174
             }
         }
     }
     
     private func deleteInvertedSafariWhitelistRule(index: Int, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
-        
-        let backgroundTaskId = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
         
         var newAllRules = allRules
         let rule = newAllRules.remove(at: index)
@@ -347,19 +327,14 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
         allRules = newAllRules
         delegate?.listOfRulesChanged()
         
-        contentBlockerService.removeInvertedWhitelistDomain(rule.rule) { (error) in
-            DispatchQueue.main.async {
-                [weak self] in
-                if error == nil {
-                    completionHandler()
-                }
-                else {
-                    self?.allRules = oldRules
-                    self?.delegate?.listOfRulesChanged()
-                    errorHandler(error?.localizedDescription ?? "")
-                }
-                
-                UIApplication.shared.endBackgroundTask(backgroundTaskId)
+        safariProtection.removeRule(withText: rule.rule, for: .invertedAllowlist) { [weak self] error in
+            if error == nil {
+                completionHandler()
+            }
+            else {
+                self?.allRules = oldRules
+                self?.delegate?.listOfRulesChanged()
+                errorHandler(error?.localizedDescription ?? "")
             }
         }
     }
@@ -398,10 +373,10 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
         return false
     }
     
-    private func rulesToObjectsConverter(rules: [RuleInfo]) -> [ASDFilterRule]{
-        var objects: [ASDFilterRule] = []
+    private func rulesToObjectsConverter(rules: [RuleInfo]) -> [UserRuleProtocol]{
+        var objects: [UserRuleProtocol] = []
         for rule in rules {
-            let object = ASDFilterRule(text: rule.rule, enabled: rule.enabled)
+            let object = UserRule(ruleText: rule.rule, isEnabled: rule.enabled)
             objects.append(object)
         }
         return objects

@@ -107,7 +107,7 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
         segueButton.addTarget(self, action: #selector(segueButtonTapped(_:)), for: .touchUpInside)
         
         label.font = font
-        label.text = group.name
+        label.text = group.groupName
         label.textAlignment = .left
         label.greyText = true
         theme.setupLabel(label)
@@ -146,7 +146,7 @@ class SearchFilterController: UITableViewController, UISearchBarDelegate, TagBut
         selectedGroup = indexPath.section
         selectedFilter = indexPath.row
         guard let group = viewModel?.groups?[selectedGroup] else { return }
-        if group.enabled {
+        if group.isEnabled {
             performSegue(withIdentifier: showFilterDetailsSegue, sender: self)
         } else {
             performSegue(withIdentifier: showGroupSegue, sender: self)

@@ -17,6 +17,7 @@
  */
 
 import UIKit
+import AdGuardSDK
 
 class FilterTagsView: UIView, FilterTagsViewModel {
     
@@ -27,7 +28,7 @@ class FilterTagsView: UIView, FilterTagsViewModel {
     
     private var viewHeight: NSLayoutConstraint?
     
-    var filter: Filter?{
+    var filter: SafariFilterProtocol?{
         didSet{
             setupUI()
             layoutIfNeeded()
@@ -109,10 +110,7 @@ class FilterTagsView: UIView, FilterTagsViewModel {
         
         guard let filter = self.filter else { return }
         
-        guard let langs = filter.langs else { return }
-        guard let tags = filter.tags else { return }
-        
-        if (langs.count > 0 || tags.count > 0) {
+        if (filter.languages.count > 0 || filter.tags.count > 0) {
             height += buttonHeight + inset
             currentYposition += inset
         }
@@ -140,15 +138,11 @@ class FilterTagsView: UIView, FilterTagsViewModel {
         
         guard let filter = self.filter else { return }
         
-        guard let langs = filter.langs else { return }
-        guard let tags = filter.tags else { return }
-        
-        
-        for lang in langs {
-            setupLangButton(lang: lang)
+        for lang in filter.languages {
+            setupLangButton(lang: (lang, false))
         }
-        for tag in tags {
-            setupTagButton(tag: tag)
+        for tag in filter.tags {
+            setupTagButton(tag: (tag.tagName, false))
         }
         
         setNeedsLayout()

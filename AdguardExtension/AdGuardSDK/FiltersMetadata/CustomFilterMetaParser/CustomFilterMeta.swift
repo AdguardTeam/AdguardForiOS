@@ -30,7 +30,7 @@ public extension ExtendedCustomFilterMetaProtocol {
 }
 
 struct CustomFilterMeta: ExtendedCustomFilterMetaProtocol {
-    let name: String? // key: 'Title'
+    var name: String? // key: 'Title'
     let description: String? // key: 'Description'
     let version: String? // key: 'Version'; Filter version
     let lastUpdateDate: Date? // keys: 'Last Modified', 'TimeUpdated'; The date when the filter was last updated on the server-side

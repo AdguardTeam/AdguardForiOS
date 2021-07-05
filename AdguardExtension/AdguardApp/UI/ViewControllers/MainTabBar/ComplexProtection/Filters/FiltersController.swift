@@ -18,13 +18,14 @@
 
 import Foundation
 import UIKit
+import AdGuardSDK
 
 
 // MARK: - FiltersController
 class FiltersController: UITableViewController, UISearchBarDelegate, AddNewFilterDelegate, TagButtonTappedDelegate {
     
     var viewModel: FiltersAndGroupsViewModelProtocol?
-    var group: Group? {
+    var group: SafariGroupProtocol? {
         get {
             if viewModel?.isSearchActive ?? false {
                 if viewModel?.groups?.count == 0{
@@ -90,7 +91,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, AddNewFilte
 
         tableView.rowHeight = UITableView.automaticDimension
         updateBarButtons()
-        navigationItem.title = viewModel?.currentGroup?.name ?? ""
+        navigationItem.title = viewModel?.currentGroup?.groupName ?? ""
         
         tableView.refreshControl = UIRefreshControl()
         tableView.refreshControl?.addTarget(self, action: #selector(FiltersController.refresh), for: .valueChanged)
@@ -168,7 +169,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, AddNewFilte
         case groupSection:
             let cell = tableView.dequeueReusableCell(withIdentifier: groupCellId) as! GroupCell
             
-            let enabled = viewModel?.currentGroup?.enabled ?? false
+            let enabled = viewModel?.currentGroup?.isEnabled ?? false
             if cell.enabledSwitch.isOn != enabled {
                 cell.enabledSwitch.setOn(enabled, animated: true)
             }
@@ -185,7 +186,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, AddNewFilte
             
         case addFilterSection:
             let cell = tableView.dequeueReusableCell(withIdentifier: newFilterCellId)
-            cell?.isHidden = group?.groupId == AdGuardFilterGroup.custom.rawValue ? false : true
+            cell?.isHidden = group?.groupId == SafariGroup.GroupType.custom.rawValue ? false : true
             return cell!
             
         case filtersSection:
@@ -228,21 +229,21 @@ class FiltersController: UITableViewController, UISearchBarDelegate, AddNewFilte
         case groupSection:
             return viewModel?.isSearchActive ?? true ? 0.0 : 72.0
         case addFilterSection:
-            return group?.groupId == AdGuardFilterGroup.custom.rawValue ? 60 : 0
+            return group?.groupId == SafariGroup.GroupType.custom.rawValue ? 60 : 0
         default:
             return super.tableView(tableView, heightForRowAt: indexPath)
         }
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if !(group?.groupId == AdGuardFilterGroup.custom.rawValue) {
+        if !(group?.groupId == SafariGroup.GroupType.custom.rawValue) {
             return nil
         }
         return section == addFilterSection ? headerView : nil
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if !(group?.groupId == AdGuardFilterGroup.custom.rawValue) {
+        if !(group?.groupId == SafariGroup.GroupType.custom.rawValue) {
             return 0.0
         }
         return section == addFilterSection ? 72.0 : 0.0
@@ -292,7 +293,7 @@ class FiltersController: UITableViewController, UISearchBarDelegate, AddNewFilte
     }
     
     // MARK: - NewCustomFilter delegate
-    func addCustomFilter(filter: AASCustomFilterParserResult) {
+    func addCustomFilter(filter: ExtendedCustomFilterMetaProtocol) {
         viewModel?.addCustomFilter(filter: filter, completion: { (success) in
             self.tableView.reloadData()
         })

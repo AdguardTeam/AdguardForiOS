@@ -19,6 +19,7 @@
 import UIKit
 import NotificationCenter
 import NetworkExtension
+import AdGuardSDK
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     
@@ -58,11 +59,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     
     private let resources: AESharedResources = AESharedResources()
-    private var safariService: SafariService
+    private var safariProtection: SafariProtectionProtocol
     private var complexProtection: ComplexProtectionServiceProtocol
     private let networkService = ACNNetworking()
     private var purchaseService: PurchaseServiceProtocol
-    private var configuration: ConfigurationService
     private let dnsStatisticsService: DnsStatisticsServiceProtocol
     private let dnsProvidersService: DnsProvidersServiceProtocol
     private let productInfo: ADProductInfoProtocol
@@ -91,19 +91,19 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         ACLLogger.singleton()?.flush()
         
         // todo:
-        safariService = SafariService(mainAppBundleId: Bundle.main.hostAppBundleId)
+        let configuration = Configuration(currentLanguage: "", proStatus: true, safariProtectionEnabled: true, blocklistIsEnabled: true, allowlistIsEnbaled: true, allowlistIsInverted: true, updateOverWifiOnly: true, appBundleId: "", appProductVersion: "", appId: "", cid: "")
+        safariProtection = try! SafariProtection(configuration: configuration, defaultConfiguration: configuration, filterFilesDirectoryUrl: URL(string: "")!, dbContainerUrl: URL(string: "")!, jsonStorageUrl: URL(string: "")!, userDefaults: UserDefaults(suiteName: "")!)
         
         productInfo = ADProductInfo()
         purchaseService = PurchaseService(network: networkService, resources: resources, productInfo: productInfo)
-        configuration = ConfigurationService(purchaseService: purchaseService, resources: resources, safariService: safariService)
+        let oldConfiguration = ConfigurationService(purchaseService: purchaseService, resources: resources, safariProtection: safariProtection)
         dnsProvidersService = DnsProvidersService(resources: resources)
         dnsStatisticsService = DnsStatisticsService(resources: resources)
-        let vpnManager = VpnManager(resources: resources, configuration: configuration, networkSettings: NetworkSettingsService(resources: resources), dnsProviders: dnsProvidersService as! DnsProvidersService)
+        let vpnManager = VpnManager(resources: resources, configuration: oldConfiguration, networkSettings: NetworkSettingsService(resources: resources), dnsProviders: dnsProvidersService as! DnsProvidersService)
         
-        let safariProtection = SafariProtectionService(resources: resources)
         let networkSettings = NetworkSettingsService(resources: resources)
-        let nativeProviders = NativeProvidersService(dnsProvidersService: dnsProvidersService, networkSettingsService: networkSettings, resources: resources, configuration: configuration)
-        complexProtection = ComplexProtectionService(resources: resources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtection, productInfo: productInfo, nativeProvidersService: nativeProviders)
+        let nativeProviders = NativeProvidersService(dnsProvidersService: dnsProvidersService, networkSettingsService: networkSettings, resources: resources, configuration: oldConfiguration)
+        complexProtection = ComplexProtectionService(resources: resources, configuration: oldConfiguration, vpnManager: vpnManager, productInfo: productInfo, nativeProvidersService: nativeProviders, safariProtection: safariProtection)
         
         super.init(coder: coder)
         

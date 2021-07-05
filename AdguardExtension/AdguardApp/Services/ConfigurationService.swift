@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import AdGuardSDK
 
 /**
  ConfigurationService - the service is responsible for current application configuration
@@ -28,15 +29,15 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
     // MARK: - private fields
     private var purchaseService : PurchaseServiceProtocol
     private var resources: AESharedResourcesProtocol
-    private var safariService: SafariServiceProtocol
+    private var safariProtection: SafariProtectionProtocol
     var notificationObserver: Any?
     
     // MARK: - init
 
-    init(purchaseService : PurchaseServiceProtocol, resources: AESharedResourcesProtocol, safariService: SafariServiceProtocol) {
+    init(purchaseService : PurchaseServiceProtocol, resources: AESharedResourcesProtocol, safariProtection: SafariProtectionProtocol) {
         self.purchaseService = purchaseService
         self.resources = resources
-        self.safariService = safariService
+        self.safariProtection = safariProtection
         super.init()
         
         notificationObserver = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification),
@@ -77,8 +78,7 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
     /**
      this flag indicates that all safari content blockers are enabled in safari settings
      */
-    @objc
-    dynamic var contentBlockerEnabled: [Int : Bool]?
+    dynamic var contentBlockerEnabled: [ContentBlockerType : Bool]?
     
     var allContentBlockersEnabled: Bool {
         return contentBlockerEnabled?.reduce(true, { (result, state) -> Bool in return result && state.value }) ?? true
@@ -167,13 +167,8 @@ class ConfigurationService : NSObject, ConfigurationServiceProtocol {
      you need observe @contentBlockerEnabled property to get the result
     */
     @objc func checkContentBlockerEnabled() {
-        safariService.checkStatus() { (enabledDict) in
-            var mappedDict = [Int: Bool]()
-            enabledDict.forEach { (key, value) in
-                mappedDict[key.rawValue] = value
-            }
-            self.contentBlockerEnabled = mappedDict
-        }
+        // todo: maybe it must be called on async queue
+        self.contentBlockerEnabled = safariProtection.allContentBlockersStates
     }
 }
 

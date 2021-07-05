@@ -16,6 +16,7 @@
       along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 import UIKit
+import AdGuardSDK
 
 class SafariProtectionController: UITableViewController {
 
@@ -30,14 +31,11 @@ class SafariProtectionController: UITableViewController {
     
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
-    private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
-    private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
     private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
     private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
-    private let safariProtection: SafariProtectionServiceProtocol = ServiceLocator.shared.getService()!
+    private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     
     private var filtersCountObservation: Any?
     private var activeFiltersCountObservation: Any?
@@ -59,7 +57,7 @@ class SafariProtectionController: UITableViewController {
     // MARK: - view controler life cycle
     
     required init?(coder: NSCoder) {
-        blacklistModel = UserFilterModel(resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme, productInfo: productInfo, safariProtection: safariProtection)
+        blacklistModel = UserFilterModel(resources: resources, theme: theme, productInfo: productInfo, safariProtection: safariProtection)
         super.init(coder: coder)
     }
     
@@ -67,7 +65,7 @@ class SafariProtectionController: UITableViewController {
         if segue.identifier == whiteListSegue {
             if let controller = segue.destination as? ListOfRulesController{
                 let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
-                let model: ListOfRulesModelProtocol = inverted ? InvertedSafariWhitelistModel(resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme, safariProtection: safariProtection) : SafariWhitelistModel(resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme, safariProtection: safariProtection)
+                let model: ListOfRulesModelProtocol = inverted ? InvertedSafariWhitelistModel(resources: resources, theme: theme, safariProtection: safariProtection) : SafariWhitelistModel(resources: resources, theme: theme, safariProtection: safariProtection)
                 controller.model = model
             }
         } else if segue.identifier == blackListSegue {
@@ -85,12 +83,15 @@ class SafariProtectionController: UITableViewController {
         let updateFilters: ()->() = { [weak self] in
             guard let self = self else { return }
             let safariFiltersTextFormat = String.localizedString("safari_filters_format")
-            self.numberOfFiltersLabel.text = String.localizedStringWithFormat(safariFiltersTextFormat, self.filtersService.activeFiltersCount)
+            // todo: add active filters count to sdk
+            let activeFiltersCount = 0
+            self.numberOfFiltersLabel.text = String.localizedStringWithFormat(safariFiltersTextFormat, activeFiltersCount)
         }
         
-        activeFiltersCountObservation = (filtersService as! FiltersService).observe(\.activeFiltersCount) { (_, _) in
-            updateFilters()
-        }
+        // todo:
+//        activeFiltersCountObservation = (filtersService as! FiltersService).observe(\.activeFiltersCount) { (_, _) in
+//            updateFilters()
+//        }
         
         resources.sharedDefaults().addObserver(self, forKeyPath: SafariProtectionState, options: .new, context: nil)
         resources.sharedDefaults().addObserver(self, forKeyPath: AEComplexProtectionEnabled, options: .new, context: nil)

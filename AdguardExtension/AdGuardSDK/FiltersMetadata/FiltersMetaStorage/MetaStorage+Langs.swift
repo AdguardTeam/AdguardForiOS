@@ -17,7 +17,7 @@
 */
 
 import Foundation
-import SQLite
+@_implementationOnly import SQLite
 
 /* FilterLangsTablel; filter_langs table */
 fileprivate struct FilterLangsTable {

@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import AdGuardSDK
 
 class AddCustomFilterController: BottomAlertController {
     
@@ -36,8 +37,9 @@ class AddCustomFilterController: BottomAlertController {
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let networking: ACNNetworking = ServiceLocator.shared.getService()!
+    private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     
-    private var filter : AASCustomFilterParserResult?
+    private var filter : ExtendedCustomFilterMetaProtocol?
     var delegate: AddNewFilterDelegate?
     
     // MARK: - View Controller life cycle
@@ -96,26 +98,28 @@ class AddCustomFilterController: BottomAlertController {
             nextButton.stopIndicator()
             return
         }
-        let parser = AASFilterSubscriptionParser()
-        parser.parse(from: url, networking: networking) { [weak self]  (result, error) in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                if let parserError = error {
-                    ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: parserError.localizedDescription)
-                    self.nextButton.isEnabled = true
-                    self.nextButton.stopIndicator()
-                    return
-                }
-
-                if let parserResult = result {
-                    self.filter = parserResult
-                    self.nextButton.isEnabled = true
-                    self.nextButton.stopIndicator()
-                    self.presentNewCustomFilterDetailsController()
-                    return
-                }
-            }
-        }
+        
+        // todo: add this functionality to sdk
+//        let parser = AASFilterSubscriptionParser()
+//        parser.parse(from: url, networking: networking) { [weak self]  (result, error) in
+//            guard let self = self else { return }
+//            DispatchQueue.main.async {
+//                if let parserError = error {
+//                    ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: parserError.localizedDescription)
+//                    self.nextButton.isEnabled = true
+//                    self.nextButton.stopIndicator()
+//                    return
+//                }
+//
+//                if let parserResult = result {
+//                    self.filter = parserResult
+//                    self.nextButton.isEnabled = true
+//                    self.nextButton.stopIndicator()
+//                    self.presentNewCustomFilterDetailsController()
+//                    return
+//                }
+//            }
+//        }
     }
     
     @IBAction func cancelAction(_ sender: Any) {
@@ -134,7 +138,7 @@ class AddCustomFilterController: BottomAlertController {
             controller.addDelegate = self.delegate
             
             if let title = self.openTitle {
-                controller.filter?.meta.name = title
+                controller.filter?.name = title
             }
             
             presenter?.present(controller, animated: true, completion: nil)

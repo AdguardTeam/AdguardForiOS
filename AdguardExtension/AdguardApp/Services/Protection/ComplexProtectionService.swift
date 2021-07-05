@@ -18,6 +18,7 @@
 
 import Foundation
 import NetworkExtension
+import AdGuardSDK
 
 
 // MARK: - Complex protection Interface -
@@ -53,8 +54,6 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         return safariProtection.safariProtectionEnabled
     }
     
-    let safariProtection: SafariProtectionServiceProtocol
-    
     var systemProtectionEnabled: Bool {
         if resources.dnsImplementation == .adGuard {
             return proStatus
@@ -71,11 +70,11 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     }
     
     private let resources: AESharedResourcesProtocol
-    private let safariService: SafariServiceProtocol
     private let configuration: ConfigurationServiceProtocol
     private let vpnManager: VpnManagerProtocol
     private let productInfo: ADProductInfoProtocol
     private let nativeProvidersService: NativeProvidersServiceProtocol
+    private let safariProtection: SafariProtectionProtocol
     
     private var vpnConfigurationObserver: NotificationToken!
     private var vpnStateChangeObserver: NotificationToken!
@@ -85,14 +84,13 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         return configuration.proStatus
     }
     
-    init(resources: AESharedResourcesProtocol, safariService: SafariServiceProtocol, configuration: ConfigurationServiceProtocol, vpnManager: VpnManagerProtocol, safariProtection: SafariProtectionService, productInfo: ADProductInfoProtocol, nativeProvidersService: NativeProvidersServiceProtocol) {
+    init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol, vpnManager: VpnManagerProtocol, productInfo: ADProductInfoProtocol, nativeProvidersService: NativeProvidersServiceProtocol, safariProtection: SafariProtectionProtocol) {
         self.resources = resources
-        self.safariService = safariService
         self.configuration = configuration
         self.vpnManager = vpnManager
-        self.safariProtection = safariProtection
         self.productInfo = productInfo
         self.nativeProvidersService = nativeProvidersService
+        self.safariProtection = safariProtection
         
         nativeProvidersService.delegate = self
         
@@ -224,14 +222,12 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
             var systemError: Error?
             
             let group = DispatchGroup()
-            if safari {
-                DDLogInfo("(ComplexProtectionService) - Begining updating safari protection")
-                group.enter()
-                self.safariInvalidateJson { error in
-                    safariError = error
-                    DDLogInfo("(ComplexProtectionService) - Ending updating safari protection with error - \(error?.localizedDescription ?? "nil")")
-                    group.leave()
-                }
+            
+            group.enter()
+            self.safariProtection.update(safariProtectionEnabled: safari) { error in
+                safariError = error
+                DDLogInfo("(ComplexProtectionService) - Ending updating safari protection with error - \(error?.localizedDescription ?? "nil")")
+                group.leave()
             }
             
             if system {
@@ -273,20 +269,6 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         resources.systemProtectionEnabled = enabled
         
         return (needsUpdateSafari, needsUpdateSystem)
-    }
-    
-    /**
-     This method invalidates blocking json
-     */
-    private func safariInvalidateJson(completion: @escaping (Error?)->Void){
-        safariService.invalidateBlockingJsons { (error) in
-            if error != nil {
-                DDLogError("(ComplexProtectionService) Error invalidating json")
-            } else {
-                DDLogInfo("(ComplexProtectionService) Successfull invalidating of json")
-            }
-            completion(error)
-        }
     }
     
     private func updateVpnSettings(vc: UIViewController?, completion: @escaping (Error?)->Void) {

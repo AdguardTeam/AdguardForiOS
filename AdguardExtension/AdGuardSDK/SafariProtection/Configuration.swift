@@ -20,10 +20,9 @@ import Foundation
 
 // MARK: - ConfigurationProtocol
 
-public protocol ConfigurationProtocol: AnyObject {
+public protocol OtherConfigurationProtocol: AnyObject {
     var currentLanguage: String { get } // Language preferred by user
     var proStatus: Bool { get set } // Shows if user has Premium app version
-    var safariProtectionEnabled: Bool { get set }
     
     // Application user configuration
     var blocklistIsEnabled: Bool { get set }
@@ -40,6 +39,12 @@ public protocol ConfigurationProtocol: AnyObject {
     // New object created from self
     var copy: Self { get }
 }
+
+public protocol SafariConfigurationProtocol: AnyObject {
+    var safariProtectionEnabled: Bool { get set }
+}
+
+public typealias ConfigurationProtocol = SafariConfigurationProtocol & OtherConfigurationProtocol
 
 // MARK: - Configuration
 
@@ -84,5 +89,13 @@ public final class Configuration: ConfigurationProtocol {
         self.appProductVersion = appProductVersion
         self.appId = appId
         self.cid = cid
+    }
+}
+
+public final class SafariConfiguration: SafariConfigurationProtocol {
+    public var safariProtectionEnabled: Bool
+    
+    public init(safariProtectionEnabled: Bool) {
+        self.safariProtectionEnabled = safariProtectionEnabled
     }
 }

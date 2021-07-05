@@ -85,7 +85,7 @@ public struct ExtendedFiltersMeta: Decodable {
 extension ExtendedFiltersMeta {
     struct Meta: ExtendedFilterMetaProtocol, Decodable {
         let filterId: Int
-        let name: String?
+        var name: String?
         let description: String?
         let timeAdded: Date?
         let homePage: String?
@@ -245,9 +245,9 @@ public extension ExtendedFiltersMeta {
             }
         }
         
-        let tagId: Int
-        let tagType: TagType
-        let tagName: String
+        public let tagId: Int
+        public let tagType: TagType
+        public let tagName: String
         
         enum CodingKeys: String, CodingKey {
             case tagId

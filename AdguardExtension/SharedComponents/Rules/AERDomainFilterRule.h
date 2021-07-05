@@ -18,7 +18,6 @@
 
 #import <Foundation/Foundation.h>
 #import "ACommons/ACNetwork.h"
-#import "AEFilterRuleSyntaxConstants.h"
 
 @interface AERDomainFilterRule : NSObject 
 

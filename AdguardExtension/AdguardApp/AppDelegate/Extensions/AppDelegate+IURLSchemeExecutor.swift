@@ -16,29 +16,21 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import AdGuardSDK
+
 extension AppDelegate: IURLSchemeExecutor {
 
     
     func openUserFilterController(rule: String) -> Bool {
-        let antibannerController: AntibannerControllerProtocol = ServiceLocator.shared.getService()!
         let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-        let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
         let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
         let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-        let safariProtection: SafariProtectionServiceProtocol = ServiceLocator.shared.getService()!
+        let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
         
-        antibannerController.onReady { antibanner in
-            DispatchQueue.main.async {
-                let model: ListOfRulesModelProtocol = UserFilterModel(resources: resources,
-                                                                      contentBlockerService: contentBlockerService,
-                                                                      antibanner: antibanner,
-                                                                      theme: themeService,
-                                                                      productInfo: productInfo,
-                                                                      safariProtection: safariProtection)
-                
-                self.presentUserFilterController(showLaunchScreen: true, model, newRule: rule)
-            }
-        }
+        let model: ListOfRulesModelProtocol = UserFilterModel(resources: resources, theme: themeService, productInfo: productInfo, safariProtection: safariProtection)
+        
+        self.presentUserFilterController(showLaunchScreen: true, model, newRule: rule)
+        
         return true
     }
     

@@ -17,6 +17,7 @@
  */
 
 import UIKit
+import AdGuardSDK
 
 class ContentBlockerTitleCell: UITableViewCell {
     @IBOutlet weak var titleLabel: ThemableLabel!
@@ -114,37 +115,38 @@ class ContentBlockerStateController: UITableViewController {
     
     private func addObservers(){
         
+        // todo:
         // Start of filter update observing
-        safariObserver1 = NotificationCenter.default.observe(name: SafariService.filterBeganUpdating, object: nil, queue: OperationQueue.main) { [weak self] (notification) in
-            
-            guard let type = notification.userInfo?[SafariService.contentBlockerTypeString] as! ContentBlockerType? else { return }
-            self?.contentBlockersDataSource!.contentBlockers[type]?.currentState = .updating
-            self?.reloadRaw(with: type)
-        }
-        
-        // Finish of filter update observer
-        safariObserver2 = NotificationCenter.default.observe(name: SafariService.filterFinishedUpdating, object: nil, queue: OperationQueue.main) { [weak self] (notification) in
-            
-            guard let type = notification.userInfo?[SafariService.contentBlockerTypeString] as! ContentBlockerType? else { return }
-            
-            guard let success = notification.userInfo?[SafariService.successString] as? Bool else { return }
-            if !success {
-                self?.contentBlockersDataSource!.contentBlockers[type]?.currentState = .failedUpdating
-                self?.reloadRaw(with: type)
-            } else {
-                let blocker = self?.contentBlockersDataSource!.contentBlockers[type]
-                self?.contentBlockersDataSource!.contentBlockers[type]?.currentState = (blocker?.numberOfOverlimitedRules == 0) ? (blocker?.enabled ?? false ? .enabled : .disabled) : .overLimited
-                self?.reloadRaw(with: type)
-            }
-        }
-        
-        // Content blockers checked observer
-        contentBlockerObserver = NotificationCenter.default.observe(name: SafariService.contentBlcokersChecked, object: nil, queue: OperationQueue.main) { [weak self] (notification) in
-            DispatchQueue.main.async {
-                self?.contentBlockersDataSource!.updateContentBlockersArray()
-                self?.tableView.reloadData()
-            }
-        }
+//        safariObserver1 = NotificationCenter.default.observe(name: SafariService.filterBeganUpdating, object: nil, queue: OperationQueue.main) { [weak self] (notification) in
+//
+//            guard let type = notification.userInfo?[SafariService.contentBlockerTypeString] as! ContentBlockerType? else { return }
+//            self?.contentBlockersDataSource!.contentBlockers[type]?.currentState = .updating
+//            self?.reloadRaw(with: type)
+//        }
+//
+//        // Finish of filter update observer
+//        safariObserver2 = NotificationCenter.default.observe(name: SafariService.filterFinishedUpdating, object: nil, queue: OperationQueue.main) { [weak self] (notification) in
+//
+//            guard let type = notification.userInfo?[SafariService.contentBlockerTypeString] as! ContentBlockerType? else { return }
+//
+//            guard let success = notification.userInfo?[SafariService.successString] as? Bool else { return }
+//            if !success {
+//                self?.contentBlockersDataSource!.contentBlockers[type]?.currentState = .failedUpdating
+//                self?.reloadRaw(with: type)
+//            } else {
+//                let blocker = self?.contentBlockersDataSource!.contentBlockers[type]
+//                self?.contentBlockersDataSource!.contentBlockers[type]?.currentState = (blocker?.numberOfOverlimitedRules == 0) ? (blocker?.enabled ?? false ? .enabled : .disabled) : .overLimited
+//                self?.reloadRaw(with: type)
+//            }
+//        }
+//
+//        // Content blockers checked observer
+//        contentBlockerObserver = NotificationCenter.default.observe(name: SafariService.contentBlcokersChecked, object: nil, queue: OperationQueue.main) { [weak self] (notification) in
+//            DispatchQueue.main.async {
+//                self?.contentBlockersDataSource!.updateContentBlockersArray()
+//                self?.tableView.reloadData()
+//            }
+//        }
     }
     
     private func reloadRaw(with type: ContentBlockerType){

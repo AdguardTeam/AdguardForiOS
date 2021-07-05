@@ -15,14 +15,14 @@ protocol ContentBlockerJsonProviderProtocol {
 final class ContentBlockerJsonProvider: ContentBlockerJsonProviderProtocol {
     
     private let jsonStorage: ContentBlockersInfoStorageProtocol
-    private let configuration: ConfigurationProtocol
+    private let configuration: SafariConfigurationProtocol
     
-    init(jsonStorage: ContentBlockersInfoStorageProtocol, configuration: ConfigurationProtocol) {
+    init(jsonStorage: ContentBlockersInfoStorageProtocol, configuration: SafariConfigurationProtocol) {
         self.jsonStorage = jsonStorage
         self.configuration = configuration
     }
     
-    func getJsonUrl(for cbType: ContentBlockerType) throws -> URL {
+    public func getJsonUrl(for cbType: ContentBlockerType) throws -> URL {
         let emptyJsonUrl = try jsonStorage.getEmptyRuleJsonUrl()
         
         guard configuration.safariProtectionEnabled else {

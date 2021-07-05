@@ -18,6 +18,7 @@
 
 import Foundation
 import UIKit
+import AdGuardSDK
 
 class GroupsTitleCell: UITableViewCell {
     @IBOutlet weak var groupsTitleLabel: ThemableLabel!
@@ -49,9 +50,8 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
     
     private lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
     
-    private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
-    private let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - lifecycle
     
@@ -131,28 +131,31 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
               let cell = tableView.dequeueReusableCell(withIdentifier: "groupCell") as? GroupCell
               else { return UITableViewCell() }
         
-        cell.nameLabel.text = group.name
-        cell.descriptionLabel.text = group.subtitle
+        cell.nameLabel.text = group.groupName
+        // todo: do something with subtitles
+//        cell.descriptionLabel.text = group.subtitle
         
-        cell.enabledSwitch.isOn = group.enabled
+        cell.enabledSwitch.isOn = group.isEnabled
         
         cell.enabledSwitch.tag = indexPath.row
         cell.enabledSwitch.removeTarget(self, action: nil, for: .valueChanged)
         cell.enabledSwitch.addTarget(self, action: #selector(GroupsController.enabledChanged(_:)), for: .valueChanged)
         
-        cell.icon.image = UIImage(named: group.iconName ?? "")
+        // todo: get group icon
+//        cell.icon.image = UIImage(named: group.iconName ?? "")
         theme.setupSeparator(cell.separator)
         theme.setupLabels(cell.themableLabels)
         
-        if group.proOnly && !configuration.proStatus {
-            cell.enabledSwitch.isUserInteractionEnabled = false
-            cell.descriptionLabel.text = group.groupId == AdGuardFilterGroup.security.rawValue ? String.localizedString("security_description") : String.localizedString("custom_description")
-            cell.descriptionLabel.textColor = UIColor(hexString: "#eb9300")
-            cell.icon.tintColor = UIColor(hexString: "#d8d8d8")
-        } else {
+        // todo: process pro status
+//        if group.proOnly && !configuration.proStatus {
+//            cell.enabledSwitch.isUserInteractionEnabled = false
+//            cell.descriptionLabel.text = group.groupId == AdGuardFilterGroup.security.rawValue ? String.localizedString("security_description") : String.localizedString("custom_description")
+//            cell.descriptionLabel.textColor = UIColor(hexString: "#eb9300")
+//            cell.icon.tintColor = UIColor(hexString: "#d8d8d8")
+//        } else {
             cell.enabledSwitch.isUserInteractionEnabled = true
             cell.icon.tintColor = UIColor.AdGuardColor.lightGreen1
-        }
+//        }
         theme.setupTableCell(cell)
         theme.setupSwitch(cell.enabledSwitch)
         
@@ -166,12 +169,13 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndex = indexPath.row
         guard let group = viewModel?.constantAllGroups[selectedIndex!] else { return }
-        if group.proOnly && !configuration.proStatus {
-            performSegue(withIdentifier: getProSegueID, sender: self)
-        }
-        else {
+        // todo:
+//        if group.proOnly && !configuration.proStatus {
+//            performSegue(withIdentifier: getProSegueID, sender: self)
+//        }
+//        else {
             performSegue(withIdentifier: filtersSegueID, sender: self)
-        }
+//        }
     }
     
     @IBAction func switchTap(_ sender: UIView) {
@@ -226,7 +230,7 @@ class GroupsController: UITableViewController, FilterMasterControllerDelegate {
             else {
                 var index = 0
                 viewModel?.groups?.forEach{ (group) in
-                    if group.groupId == AdGuardFilterGroup.custom.rawValue {
+                    if group.groupId == SafariGroup.GroupType.custom.rawValue {
                         selectedIndex = index
                     }
                     index += 1

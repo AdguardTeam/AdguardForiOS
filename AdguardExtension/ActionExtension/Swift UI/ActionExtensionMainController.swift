@@ -18,6 +18,7 @@
 
 import UIKit
 import CoreServices
+import AdGuardSDK
 
 @objcMembers
 class ActionExtensionMainController: UITableViewController {
@@ -36,8 +37,7 @@ class ActionExtensionMainController: UITableViewController {
     var injectScriptSupported: Bool = false
     
     var resources: AESharedResourcesProtocol?
-    var safariService: SafariServiceProtocol?
-    var contentBlockerService: ContentBlockerService?
+    var safariProtection: SafariProtectionProtocol?
     var webReporter: ActionWebReporterProtocol?
     var theme: ThemeServiceProtocol?
     var configuration: SimpleConfigurationSwift?
@@ -74,16 +74,16 @@ class ActionExtensionMainController: UITableViewController {
         enabledHolder = domainEnabled
         domainLabel.text = domainName
         
-        safariService!.checkStatus { [weak self] (enabledDict) in
-            var enabled = true
-            for d in enabledDict {
-                enabled = enabled && d.value
-            }
-            if (!enabled){
-                DispatchQueue.main.async{[weak self] in
-                    guard let sSelf = self else { return }
-                    ACSSystemUtils.showSimpleAlert(for: sSelf, withTitle: String.localizedString("common_warning_title"), message: String.localizedString("content_blocker_disabled_format"))
-                }
+        // todo: maybe we should use it asyncronously
+        let states = safariProtection?.allContentBlockersStates
+        let disabled = !(states?.contains(where: { (_, enabled) in
+            return !enabled
+        }) ?? true)
+        
+        if (!disabled){
+            DispatchQueue.main.async{[weak self] in
+                guard let sSelf = self else { return }
+                ACSSystemUtils.showSimpleAlert(for: sSelf, withTitle: String.localizedString("common_warning_title"), message: String.localizedString("content_blocker_disabled_format"))
             }
         }
 
@@ -110,7 +110,7 @@ class ActionExtensionMainController: UITableViewController {
         let group = DispatchGroup()
         toggleQueue.async { [weak self] in
             ProcessInfo().performExpiringActivity(withReason: "Loading json to content blocker") {[weak self] (expired) in
-                guard let sSelf = self else { return }
+                guard let self = self else { return }
                 
                 if (expired) {
                     return
@@ -118,46 +118,38 @@ class ActionExtensionMainController: UITableViewController {
                 
                 let newEnabled = sender.isOn
                 
-                if newEnabled == sSelf.domainEnabled {
+                if newEnabled == self.domainEnabled {
                     return
                 }
                 //check rule overlimit
-                if !(sSelf.enableChangeDomainFilteringStatus) {
+                if !(self.enableChangeDomainFilteringStatus) {
                     DispatchQueue.main.async {
-                        ACSSystemUtils.showSimpleAlert(for: sSelf, withTitle: String.localizedString("common_error_title"), message: String.localizedString("filter_rules_maximum"))
-                        sSelf.enabledSwitch.isOn = sSelf.domainEnabled
+                        ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("common_error_title"), message: String.localizedString("filter_rules_maximum"))
+                        self.enabledSwitch.isOn = self.domainEnabled
                     }
                     return
                 }
                 
-                let inverted: Bool = sSelf.resources!.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
+                let inverted: Bool = self.resources!.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
                 
                 group.enter()
                 // disable filtering == remove from inverted whitelist
-                if inverted && sSelf.domainEnabled{
-                    sSelf.contentBlockerService!.removeInvertedWhitelistDomain(sSelf.domainName!) {[weak self] (error) in
-                        guard let sSelf = self else { return }
-                        sSelf.safariService!.invalidateBlockingJsons {[weak self] (error) in
-                            guard let sSelf = self else { return }
-                            sSelf.domainEnabled = false
-                            group.leave()
-                        }
+                if inverted && self.domainEnabled{
+                    self.safariProtection?.removeRule(withText: self.domainName!, for: .invertedAllowlist) {[weak self] (error) in
+                        self?.domainEnabled = false
+                        group.leave()
                     }
                 }
                 // enable filtering == add to inverted whitelist
-                else if (inverted && !(sSelf.domainEnabled)) {
-                    sSelf.contentBlockerService!.addInvertedWhitelistDomain(sSelf.domainName!) {[weak self] (error) in
-                        guard let sSelf = self else { return }
-                        sSelf.safariService!.invalidateBlockingJsons { [weak self] (error) in
-                            guard let sSelf = self else { return }
-                            sSelf.domainEnabled = true
-                            group.leave()
-                        }
+                else if (inverted && !(self.domainEnabled)) {
+                    self.safariProtection?.add(rule: UserRule(ruleText: self.domainName!), for: .invertedAllowlist, override: true) {[weak self] (error) in
+                        self?.domainEnabled = true
+                        group.leave()
                     }
                 }
                 // disable filtering (add to whitelist)
-                else if sSelf.domainEnabled{
-                    sSelf.contentBlockerService!.addWhitelistDomain(sSelf.domainName!) { [weak self] (error) in
+                else if self.domainEnabled{
+                    self.safariProtection?.add(rule: UserRule(ruleText: self.domainName!), for: .allowlist, override: true) { [weak self] (error) in
                         guard let sSelf = self else { return }
                         DispatchQueue.main.async {
                             if error != nil {
@@ -171,7 +163,7 @@ class ActionExtensionMainController: UITableViewController {
                 }
                 // enable filtering (remove from whitelist)
                 else {
-                    sSelf.contentBlockerService!.removeWhitelistDomain(sSelf.domainName!) {[weak self] (error) in
+                    self.safariProtection?.removeRule(withText: self.domainName!, for: .allowlist) {[weak self] (error) in
                         guard let sSelf = self else { return }
                         DispatchQueue.main.async {
                             if error != nil {

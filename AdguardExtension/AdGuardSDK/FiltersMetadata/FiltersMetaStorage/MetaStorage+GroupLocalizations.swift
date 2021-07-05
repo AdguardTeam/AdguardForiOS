@@ -17,7 +17,7 @@
 */
 
 import Foundation
-import SQLite
+@_implementationOnly import SQLite
 
 /* FilterGroupLocalizationsTable; filter_group_localization table */
 struct FilterGroupLocalizationsTable {

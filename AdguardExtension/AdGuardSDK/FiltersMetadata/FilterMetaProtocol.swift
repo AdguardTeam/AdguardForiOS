@@ -19,7 +19,7 @@
 import Foundation
 
 public protocol FilterMetaProtocol {
-    var name: String? { get }
+    var name: String? { get set }
     var description: String? { get }
     var version: String? { get }
     var lastUpdateDate: Date? { get }

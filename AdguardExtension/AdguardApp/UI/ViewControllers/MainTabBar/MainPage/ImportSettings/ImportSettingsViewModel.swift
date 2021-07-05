@@ -17,6 +17,7 @@
 */
 
 import Foundation
+import AdGuardSDK
 
 enum ImportRowType {
     case cbFilter
@@ -84,13 +85,13 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
     
     private var settings: Settings
     private let importService: ImportSettingsServiceProtocol
-    private let antibanner :AESAntibannerProtocol
     private let dnsProvidersService: DnsProvidersServiceProtocol
+    private let safariProtection: SafariProtectionProtocol
     
-    init(settings: Settings, importSettingsService: ImportSettingsServiceProtocol, antibanner: AESAntibannerProtocol, dnsProvidersService: DnsProvidersServiceProtocol) {
+    init(settings: Settings, importSettingsService: ImportSettingsServiceProtocol, dnsProvidersService: DnsProvidersServiceProtocol, safariProtection: SafariProtectionProtocol) {
         self.settings = settings
         self.importService = importSettingsService
-        self.antibanner = antibanner
+        self.safariProtection = safariProtection
         self.dnsProvidersService = dnsProvidersService
         
         rows = []
@@ -256,12 +257,12 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
             var row = SettingRow(type: .cbFilter, index: index)
             let format = String.localizedString(filter.enable ? "enable_cb_filter_format" : "disable_cb_filter_format")
             
-            let localizations = antibanner.filtersI18n()
-            let filters = antibanner.filters()
-            if let filterMeta = filters.first(where: { Int(truncating: $0.filterId) == filter.id }) {
-                let localization = localizations.localization(forFilter: filterMeta)
-                
-                let name = localization?.name ?? ""
+            let filters:[SafariFilterProtocol] = safariProtection.groups.flatMap { group in
+                return group.filters
+            }
+            
+            if let filterMeta = filters.first(where: { $0.filterId == filter.id })  {
+                let name = filterMeta.name ?? "" 
                 row.title = String(format: format, name)
             }
             else {

@@ -50,7 +50,7 @@
     
     @autoreleasepool {
         
-        ABECRequest *request = [[ABECRequest alloc] initWithURL:theURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:ABEC_BACKEND_READ_TIMEOUT];
+        ABECRequest *request = [[ABECRequest alloc] initWithURL:theURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval: 30];
         
         if (request) {
             
@@ -73,7 +73,7 @@
 + (NSURLRequest *)postRequestForURL:(NSURL *)theURL json:(NSString *)jsonString {
     @autoreleasepool {
         
-        ABECRequest *request = [[ABECRequest alloc] initWithURL:theURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:ABEC_BACKEND_READ_TIMEOUT];
+        ABECRequest *request = [[ABECRequest alloc] initWithURL:theURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval: 30];
         
         if (request) {
             
@@ -99,7 +99,7 @@
             theURL = [NSURL URLWithString:[[theURL absoluteString] stringByAppendingString:paramString]];
         }
         
-        ABECRequest *request = [[ABECRequest alloc] initWithURL:theURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:ABEC_BACKEND_READ_TIMEOUT];
+        ABECRequest *request = [[ABECRequest alloc] initWithURL:theURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval: 30];
         
         if (request) {
             

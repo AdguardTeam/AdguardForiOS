@@ -17,6 +17,7 @@
 */
 
 import UIKit
+import AdGuardSDK
 
 class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfRequestsChangedDelegate, ComplexSwitchDelegate, OnboardingControllerDelegate, GetProControllerDelegate, MainPageModelDelegate {
     
@@ -163,18 +164,16 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     // MARK: - Services
     
     private lazy var configuration: ConfigurationService = { ServiceLocator.shared.getService()! }()
-    private lazy var antibanner: AESAntibannerProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var resources: AESharedResourcesProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var complexProtection: ComplexProtectionServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var dnsFiltersService: DnsFiltersServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var nativeProviders: NativeProvidersServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var importSettingsService: ImportSettingsServiceProtocol = { ServiceLocator.shared.getService()! }()
-    private lazy var filtersService: FiltersServiceProtocol = { ServiceLocator.shared.getService()! }()
-    private lazy var safariProtection: SafariProtectionService = { ServiceLocator.shared.getService()! }()
+    private lazy var safariProtection: SafariProtectionProtocol = { ServiceLocator.shared.getService()! }()
     
     // MARK: - View models
-    private lazy var mainPageModel: MainPageModelProtocol = { MainPageModel(resource: resources, filtersService: filtersService, safariProtection: safariProtection) }()
+    private lazy var mainPageModel: MainPageModelProtocol = { MainPageModel(resource: resources, safariProtection: safariProtection) }()
     private lazy var chartModel: ChartViewModelProtocol = { ServiceLocator.shared.getService()! }()
     
     // MARK: - Observers
@@ -583,10 +582,11 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
             }
         }
         
-        let contenBlockerObservation = configuration.observe(\.contentBlockerEnabled) {[weak self] (_, _) in
-            guard let self = self else { return }
-            self.observeContentBlockersState()
-        }
+        // todo: handle notifications from sdk
+//        let contenBlockerObservation = configuration.observe(\.contentBlockerEnabled) {[weak self] (_, _) in
+//            guard let self = self else { return }
+//            self.observeContentBlockersState()
+//        }
         
         vpnConfigurationObserver = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: .main) { [weak self] _ in
             self?.updateProtectionStates()
@@ -603,7 +603,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         }
 
         observations.append(proObservation)
-        observations.append(contenBlockerObservation)
+//        observations.append(contenBlockerObservation)
     }
     
     /**

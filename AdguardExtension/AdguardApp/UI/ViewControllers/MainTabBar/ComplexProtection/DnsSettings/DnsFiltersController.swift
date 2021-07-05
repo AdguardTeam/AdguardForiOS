@@ -17,6 +17,7 @@
 */
 
 import UIKit
+import AdGuardSDK
 
 protocol DnsFiltersControllerDelegate: AnyObject {
     func filtersStateWasChanged()
@@ -199,7 +200,8 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
             showAddFilterDialog()
         } else {
             let filter = model.filters[indexPath.row]
-            showFilterDetailsController(with: filter)
+            // todo:
+//            showFilterDetailsController(with: filter)
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -251,16 +253,16 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
     
     // MARK: - NewCustomFilter delegate
     
-    func addCustomFilter(filter: AASCustomFilterParserResult) {
-        let meta = filter.meta
-        let dnsFilter = DnsFilter(subscriptionUrl: meta.subscriptionUrl, name: meta.name, date: meta.updateDate ?? Date(), enabled: true, desc: meta.descr, version: meta.version, rulesCount: filter.rules.count, homepage: meta.homepage)
+    func addCustomFilter(filter: ExtendedCustomFilterMetaProtocol) {
+        let dnsFilter = DnsFilter(subscriptionUrl: filter.filterDownloadPage, name: filter.name ?? "", date: filter.lastUpdateDate ?? Date(), enabled: true, desc: filter.description, version: filter.version, rulesCount: filter.rulesCount, homepage: filter.homePage)
         
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
-            let isAlreadyAdded = self.model.addFilter(dnsFilter, data: filter.filtersData)
-            if isAlreadyAdded {
-                ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: String.localizedString("filter_exists"))
-            }
+            // todo:
+//            let isAlreadyAdded = self.model.addFilter(dnsFilter, data: filter.filtersData)
+//            if isAlreadyAdded {
+//                ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: String.localizedString("filter_exists"))
+//            }
         }
     }
 
@@ -289,15 +291,16 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
         present(controller, animated: true, completion: nil)
     }
     
-    private func showFilterDetailsController(with filter: FilterDetailedInterface) {
-        let storyboard = UIStoryboard(name: "Filters", bundle: nil)
-        guard let controller = storyboard.instantiateViewController(withIdentifier: filterDetailsControllerId) as? FilterDetailsController else { return }
-        controller.delegate = self
-        
-        controller.filter = filter
-        
-        navigationController?.pushViewController(controller, animated: true)
-    }
+    // todo:
+//    private func showFilterDetailsController(with filter: FilterDetailedInterface) {
+//        let storyboard = UIStoryboard(name: "Filters", bundle: nil)
+//        guard let controller = storyboard.instantiateViewController(withIdentifier: filterDetailsControllerId) as? FilterDetailsController else { return }
+//        controller.delegate = self
+//
+//        controller.filter = filter
+//
+//        navigationController?.pushViewController(controller, animated: true)
+//    }
     
     private func updateTextForTitle(){
         DispatchQueue.main.async {[weak self] in

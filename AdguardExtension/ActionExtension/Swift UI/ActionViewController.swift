@@ -18,6 +18,7 @@
 
 import UIKit
 import CoreServices
+import AdGuardSDK
 
 class ActionViewController: UIViewController {
 
@@ -62,13 +63,10 @@ class ActionViewController: UIViewController {
     // MARK: - Services
     
     private let sharedResources: AESharedResourcesProtocol = AESharedResources()
-    private let safariService: SafariService
-    private let contentBlockerService: ContentBlockerService
+    private let safariProtection: SafariProtectionProtocol
     private let networking = ACNNetworking()
-    private let antibannerController: AntibannerControllerProtocol
     private let webReporter: ActionWebReporterProtocol
     private var theme: ThemeServiceProtocol?
-    private let asDataBase = ASDatabase()
     private let productInfo: ADProductInfoProtocol
     
     private var notificationToken1: NotificationToken?
@@ -77,19 +75,15 @@ class ActionViewController: UIViewController {
     // MARK: - View Controller LifeCycle
     
     required init?(coder: NSCoder) {
-        safariService = SafariService(mainAppBundleId: Bundle.main.hostAppBundleId as! String)
-        let antibanner = AESAntibanner(resources: sharedResources)
+        // todo:
+        let sdkConfiguration = Configuration(currentLanguage: "", proStatus: true, safariProtectionEnabled: true, blocklistIsEnabled: true, allowlistIsEnbaled: true, allowlistIsInverted: true, updateOverWifiOnly: true, appBundleId: "", appProductVersion: "", appId: "", cid: "")
+        safariProtection = try! SafariProtection(configuration: sdkConfiguration, defaultConfiguration: sdkConfiguration, filterFilesDirectoryUrl: URL(string: "")!, dbContainerUrl: URL(string: "")!, jsonStorageUrl: URL(string: "")!, userDefaults: UserDefaults(suiteName: "")!)
+        
         configuration = SimpleConfigurationSwift(withResources: sharedResources, systemAppearenceIsDark: true)
         
         productInfo = ADProductInfo()
         
-        self.antibannerController = AntibannerController(antibanner: antibanner, version: productInfo.version())
-        
-        let safariProtectoin = SafariProtectionService(resources: sharedResources)
-        
         let dnsFiltersService = DnsFiltersService(resources: sharedResources, vpnManager: nil, configuration: configuration, complexProtection: nil)
-        
-        let safariProtection = SafariProtectionService(resources: sharedResources)
         
         let dnsProviders = DnsProvidersService(resources: sharedResources)
         
@@ -99,21 +93,9 @@ class ActionViewController: UIViewController {
         
         let nativeProviders = NativeProvidersService(dnsProvidersService: dnsProviders, networkSettingsService: networkSettings, resources: sharedResources, configuration: configuration)
         
-        let complexProtection = ComplexProtectionService(resources: sharedResources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtectoin, productInfo: productInfo, nativeProvidersService: nativeProviders)
+        let complexProtection = ComplexProtectionService(resources: sharedResources, configuration: configuration, vpnManager: vpnManager, productInfo: productInfo, nativeProvidersService: nativeProviders, safariProtection: safariProtection)
  
-        // todo: we need another place for it
-        let sdkResources = Resources(contentFolder: sharedResources.sharedResuorcesURL())
-        contentBlockerService = ContentBlockerService(resources: sdkResources,
-                                                      safariService: safariService,
-                                                      antibanner: antibanner,
-                                                      filtersStorage: FiltersStorage())
-        
-        webReporter = ActionWebReporter(productInfo: productInfo,
-                                    antibanner: antibanner,
-                                    complexProtection: complexProtection,
-                                    dnsProviders: dnsProviders,
-                                    configuration: configuration,
-                                    dnsFilters: dnsFiltersService)
+        webReporter = ActionWebReporter(productInfo: productInfo, complexProtection: complexProtection, dnsProviders: dnsProviders, configuration: configuration, dnsFilters: dnsFiltersService, safariProtection: safariProtection)
         
         super.init(coder: coder)
     }
@@ -190,15 +172,13 @@ class ActionViewController: UIViewController {
                 } else {
                     succeed = true
                     
-                    self.antibannerController.onReady { (antibanner) in
-                        // Add observers for application notifications
-                        self.addObservers()
-                        
-                        let formattedString = String(format: "%@://%@/favicon.ico", self.url?.scheme ?? "", self.url?.hostWithPort() ?? "")
-                        self.iconUrl = URL(string: formattedString)
-                        
-                        self.startProcessing()
-                    }
+                    // Add observers for application notifications
+                    self.addObservers()
+                    
+                    let formattedString = String(format: "%@://%@/favicon.ico", self.url?.scheme ?? "", self.url?.hostWithPort() ?? "")
+                    self.iconUrl = URL(string: formattedString)
+                    
+                    self.startProcessing()
                 }
             }
         }
@@ -214,9 +194,8 @@ class ActionViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueId {
             guard let mainVC = segue.destination as? ActionExtensionMainController else { return }
+            mainVC.safariProtection = safariProtection
             mainVC.resources = sharedResources
-            mainVC.safariService = safariService
-            mainVC.contentBlockerService = contentBlockerService
             mainVC.webReporter = webReporter
             mainVC.domainName = host
             mainVC.iconUrl = iconUrl
@@ -279,10 +258,11 @@ class ActionViewController: UIViewController {
     }
     
     private func isHostInInvertedWhitelist(host: String) -> Bool {
-        let rules = contentBlockerService.invertedWhitelistRules()
+        
+        let rules = safariProtection.allRules(for: .invertedAllowlist)
         
         for rule in rules{
-            if rule.ruleText.caseInsensitiveCompare(host) == ComparisonResult.orderedSame && rule.isEnabled.boolValue {
+            if rule.ruleText.caseInsensitiveCompare(host) == ComparisonResult.orderedSame && rule.isEnabled {
                 return true
             }
         }
@@ -290,26 +270,15 @@ class ActionViewController: UIViewController {
         return false
     }
     
-    private func domainObjectIfExistsFromContentBlockingWhitelistFor(host: String) -> AEWhitelistDomainObject? {
+    private func domainObjectIfExistsFromContentBlockingWhitelistFor(host: String) -> UserRuleProtocol? {
         DDLogDebug("(ActionViewController) domainObjectIfExistsFromContentBlockingWhitelistFor:\(host)")
-        let rules = contentBlockerService.whitelistRules()
+        let rules = safariProtection.allRules(for: .allowlist)
         return domainObjectIfExists(host: host, rules: rules)
     }
     
-    private func domainObjectIfExists(host: String, rules: [ASDFilterRule]) -> AEWhitelistDomainObject? {
+    private func domainObjectIfExists(host: String, rules: [UserRuleProtocol]) -> UserRuleProtocol? {
         let filteredRules = rules.filter { $0.ruleText.localizedCaseInsensitiveContains(host) }
-        
-        if filteredRules.count > 0 {
-            var obj: AEWhitelistDomainObject? = AEWhitelistDomainObject()
-            for rule in filteredRules {
-                obj = AEWhitelistDomainObject.init(rule: rule)
-                if obj != nil {
-                    break
-                }
-            }
-            return obj
-        }
-        return nil
+        return filteredRules.first
     }
     
     private func prepareDataModel() -> NSError? {
@@ -341,34 +310,9 @@ class ActionViewController: UIViewController {
         //-------------------------------
         
         // Init database
-        let dbUrl = sharedResources.sharedResuorcesURL().appendingPathComponent(aeProductionDb)
-        asDataBase.initDb(with: dbUrl, upgradeDefaultDb: false, buildVersion: productInfo.buildVersion())
-        
-        if asDataBase.error != nil {
-            DDLogError("(ActionViewController) production DB was not created before.")
-            let messageFormat = String.localizedString("action_extension_no_configuration_message_format")
-            let formattedString = String(format: messageFormat, Constants.aeProductName(), Constants.aeProductName())
-            let userInfo = [NSLocalizedDescriptionKey : formattedString]
-            return NSError.init(domain: AEActionErrorDomain, code: AEActionErrorNoDb, userInfo: userInfo)
-        }
-        
-        DispatchQueue.main.async {[weak self] in
-            guard let sSelf = self else { return }
-            //------------ Checking DB status -----------------------------
-            if sSelf.asDataBase.error != nil {
-                DDLogError("(ActionViewController) production DB was not created before.")
-            } else if !sSelf.asDataBase.ready {
-                sSelf.dbObserver = sSelf.asDataBase.observe(\.ready, options: .new, changeHandler: { (db, change) in
-                    if sSelf.asDataBase.ready{
-                        sSelf.antibannerController.start()
-                    }
-                })
-            }
-            //--------------------- Start Services ---------------------------
-            else {
-                sSelf.antibannerController.start()
-            }
-        }
+        // todo: check datbase installed
+        //    DDLogError("(ActionViewController) production DB was not created before.")
+            
         return nil
     }
     

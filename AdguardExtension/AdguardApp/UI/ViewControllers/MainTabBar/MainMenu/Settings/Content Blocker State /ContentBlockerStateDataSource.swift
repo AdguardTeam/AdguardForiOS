@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import AdGuardSDK
 
 enum ContentBlockerState {
     case disabled, enabled, updating, overLimited, failedUpdating
@@ -32,17 +33,14 @@ protocol ContentBlockerStateProtocol {
 }
 
 class ContentBlocker: ContentBlockerStateProtocol {
-    
-    private let safariService: SafariService
-    private let resources: AESharedResourcesProtocol
-    private let filterService: FiltersServiceProtocol
+    private let safariProtection: SafariProtectionProtocol
     
     var userFilterString: String?
     
     var enabled: Bool {
         get {
             guard let type = contentBlockerType else { return false }
-            return safariService.getContentBlockerEnabled(type: type)
+            return safariProtection.getState(for: type)
         }
     }
     
@@ -95,11 +93,9 @@ class ContentBlocker: ContentBlockerStateProtocol {
         }
     }
     
-    init(contentBlockerType: ContentBlockerType?, safariService: SafariService, resources: AESharedResourcesProtocol, filterService: FiltersServiceProtocol) {
+    init(contentBlockerType: ContentBlockerType?, safariProtection: SafariProtectionProtocol) {
         self.contentBlockerType = contentBlockerType
-        self.safariService = safariService
-        self.resources = resources
-        self.filterService = filterService
+        self.safariProtection = safariProtection
         self.currentState = enabled ? (self.numberOfOverlimitedRules == 0 ? .enabled : .overLimited) : .disabled
     }
 
@@ -107,11 +103,8 @@ class ContentBlocker: ContentBlockerStateProtocol {
 
 class ContentBlockersDataSource {
     
-    private let safariService: SafariService
     private let resources: AESharedResourcesProtocol
-    private let filterService: FiltersServiceProtocol
-    private let antibanner: AESAntibannerProtocol
-    private let contentBlockerService: ContentBlockerServiceProtocol
+    private let safariProtection: SafariProtectionProtocol
     
     var contentBlockers = [ContentBlockerType : ContentBlocker]()
     
@@ -119,18 +112,15 @@ class ContentBlockersDataSource {
        return getUserFilterStringIfNedeed()
     }()
     
-    init(safariService: SafariService, resources: AESharedResourcesProtocol, filterService: FiltersServiceProtocol, antibanner: AESAntibannerProtocol, contentBlockerService: ContentBlockerServiceProtocol) {
-        self.safariService = safariService
+    init(resources: AESharedResourcesProtocol, safariProtection: SafariProtectionProtocol) {
         self.resources = resources
-        self.filterService = filterService
-        self.antibanner = antibanner
-        self.contentBlockerService = contentBlockerService
+        self.safariProtection = safariProtection
         self.updateContentBlockersArray()
     }
     
     func updateContentBlockersArray(){
         for type in ContentBlockerType.allCases {
-            let contentBlocker = ContentBlocker(contentBlockerType: type, safariService: safariService, resources: resources, filterService: filterService)
+            let contentBlocker = ContentBlocker(contentBlockerType: type, safariProtection: safariProtection)
             contentBlocker.userFilterString = userFilterString
             self.contentBlockers[type] = contentBlocker
         }
@@ -139,12 +129,12 @@ class ContentBlockersDataSource {
     private func getUserFilterStringIfNedeed() -> String {
         var result = ""
         let userTitleString = ACLocalizedString("user_filter_title", nil)
-        let blacklistRuleObjects = antibanner.rulesCount(forFilter: ASDF_USER_FILTER_ID as NSNumber)
-        let whitelistRuleObjects = contentBlockerService.whitelistRules()
+        let blacklistRuleObjects = safariProtection.allRules(for: .blocklist)
+        let whitelistRuleObjects = safariProtection.allRules(for: .allowlist)
         let userFilterEnabled = resources.safariUserFilterEnabled
         let whitelistEnabled = resources.safariWhitelistEnabled
         
-        if (userFilterEnabled && blacklistRuleObjects != 0) || (whitelistEnabled && !whitelistRuleObjects.isEmpty) {
+        if (userFilterEnabled && blacklistRuleObjects.count != 0) || (whitelistEnabled && !whitelistRuleObjects.isEmpty) {
             result = userTitleString + "\n"
         }
         return result

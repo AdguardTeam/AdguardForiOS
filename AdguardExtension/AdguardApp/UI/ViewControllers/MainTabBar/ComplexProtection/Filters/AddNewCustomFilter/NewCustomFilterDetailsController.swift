@@ -17,9 +17,10 @@
  */
 
 import Foundation
+import AdGuardSDK
 
 protocol AddNewFilterDelegate {
-    func addCustomFilter(filter: AASCustomFilterParserResult)
+    func addCustomFilter(filter: ExtendedCustomFilterMetaProtocol)
 }
 
 protocol EditFilterDelegate {
@@ -48,12 +49,12 @@ class NewCustomFilterDetailsController : BottomAlertController {
     var controllerModeType: ControllerModeType = .addingFilter
     
     var model: NewCustomFilterDetailsControllerInterface? = nil
-    var filter : AASCustomFilterParserResult?
+    var filter : ExtendedCustomFilterMetaProtocol?
     
     var addDelegate : AddNewFilterDelegate?
     var editDelegate: EditFilterDelegate?
     
-    private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
+    private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
     private var homepageLink: String?
@@ -93,7 +94,7 @@ class NewCustomFilterDetailsController : BottomAlertController {
     // MARK: - Actions
     @IBAction func AddAction(_ sender: Any) {
         if controllerModeType == .addingFilter {
-            filter?.meta.name = ((name.text == nil || name.text == "") ? filter?.meta.name : name.text) ?? ""
+            filter?.name = ((name.text == nil || name.text == "") ? filter?.name : name.text) ?? ""
             addDelegate?.addCustomFilter(filter: filter!)
         } else if controllerModeType == .editingFilter {
             if let newName = (name.text == nil || name.text == "") ? model?.name : name.text {
@@ -139,11 +140,11 @@ class NewCustomFilterDetailsController : BottomAlertController {
     private func setupAddingNewFilter() {
         newFilterTitle.text = filterType.getTitleText()
         
-        name.text = String(filter?.meta.name.prefix(textFieldCharectersLimit) ?? "")
-        let count: Int = filter?.rules.count ?? 0
+        name.text = String(filter?.name?.prefix(textFieldCharectersLimit) ?? "")
+        let count: Int = filter?.rulesCount ?? 0
         rulesCount.text = String(count)
         
-        if let homepageUrl = filter?.meta.homepage, homepageUrl.count > 0 {
+        if let homepageUrl = filter?.homePage, homepageUrl.count > 0 {
             homepageLink = homepageUrl
             homepage.attributedText = makeAttributedLink(with: homepageUrl)
             homepageTopConstraint.constant = 52.0

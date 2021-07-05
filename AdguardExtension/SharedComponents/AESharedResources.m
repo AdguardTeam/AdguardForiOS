@@ -182,62 +182,7 @@ NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
     return [_containerFolderUrl URLByAppendingPathComponent:@"Logs"];
 }
 
-//- (NSMutableArray <ASDFilterRule *> *)whitelistContentBlockingRules {
-//
-//    NSData *data = [self loadDataFromFileRelativePath:AES_SAFARI_WHITELIST_RULES];
-//    if (data.length) {
-//        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
-//    }
-//    return nil;
-//}
-//
-//- (void)setWhitelistContentBlockingRules:(NSMutableArray<ASDFilterRule *> *)whitelistContentBlockingRules {
-//
-//    if (whitelistContentBlockingRules == nil) {
-//        [self saveData:[NSData data] toFileRelativePath:AES_SAFARI_WHITELIST_RULES];
-//    }
-//    else {
-//
-//        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:whitelistContentBlockingRules];
-//        if (!data) {
-//            data = [NSData data];
-//        }
-//
-//        [self saveData:data toFileRelativePath:AES_SAFARI_WHITELIST_RULES];
-//    }
-//}
-//
-//-(AEInvertedWhitelistDomainsObject *)invertedWhitelistContentBlockingObject {
-//
-//    NSData *data = [self loadDataFromFileRelativePath:AES_SAFARI_INVERTED_WHITELIST_RULES];
-//    if (data.length) {
-//        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
-//    }
-//    return nil;
-//}
-//
-//- (void)setInvertedWhitelistContentBlockingObject:(AEInvertedWhitelistDomainsObject *)invertedWhitelistContentBlockingObject{
-//
-//    if (invertedWhitelistContentBlockingObject == nil) {
-//        [self saveData:[NSData data] toFileRelativePath:AES_SAFARI_INVERTED_WHITELIST_RULES];
-//    }
-//    else {
-//
-//        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:invertedWhitelistContentBlockingObject];
-//        if (!data) {
-//            data = [NSData data];
-//        }
-//
-//        [self saveData:data toFileRelativePath:AES_SAFARI_INVERTED_WHITELIST_RULES];
-//    }
-//}
-//
-//
-
 - (void)reset {
-    // todo: maybe move this code to swift
-    // clear user defaults
-//    DDLogInfo(@"(AESharedResources) reset settings");
     
     for (NSString* key in _sharedUserDefaults.dictionaryRepresentation.allKeys) {
         [_sharedUserDefaults removeObjectForKey:key];
@@ -254,8 +199,6 @@ NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
         if ([file contains:@".db"]) continue;
         BOOL success = [fm removeItemAtPath:[NSString stringWithFormat:@"%@/%@", _containerFolderUrl.path, file] error:&error];
         if (!success || error) {
-            // todo:
-            //DDLogError(@"(AEsharedResources) reset. Error - can not delete file. Error: %@", error.localizedDescription);
         }
     }
 }

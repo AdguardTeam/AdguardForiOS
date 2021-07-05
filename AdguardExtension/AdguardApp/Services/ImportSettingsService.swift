@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import AdGuardSDK
 
 /** this class is responsible for applying the imported settings */
 protocol ImportSettingsServiceProtocol {
@@ -29,24 +30,18 @@ protocol ImportSettingsServiceDelegate {
 
 class ImportSettingsService: ImportSettingsServiceProtocol {
     
-    private let antibanner: AESAntibannerProtocol
     private let networking: ACNNetworkingProtocol
-    private let filtersService: FiltersServiceProtocol
     private let dnsFiltersService: DnsFiltersServiceProtocol
     private let dnsProvidersService: DnsProvidersServiceProtocol
     private let purchaseService: PurchaseServiceProtocol
-    private let contentBlockerService: ContentBlockerServiceProtocol
     private let resources: AESharedResourcesProtocol
-    private let safariProtection: SafariProtectionServiceProtocol
+    private let safariProtection: SafariProtectionProtocol
     
-    init(antibanner: AESAntibannerProtocol, networking: ACNNetworkingProtocol, filtersService: FiltersServiceProtocol, dnsFiltersService: DnsFiltersServiceProtocol, dnsProvidersService: DnsProvidersServiceProtocol, purchaseService: PurchaseServiceProtocol, contentBlockerService: ContentBlockerServiceProtocol, resources: AESharedResourcesProtocol, safariProtection: SafariProtectionServiceProtocol) {
-        self.antibanner = antibanner
+    init(networking: ACNNetworkingProtocol, dnsFiltersService: DnsFiltersServiceProtocol, dnsProvidersService: DnsProvidersServiceProtocol, purchaseService: PurchaseServiceProtocol, resources: AESharedResourcesProtocol, safariProtection: SafariProtectionProtocol) {
         self.networking = networking
-        self.filtersService = filtersService
         self.dnsFiltersService = dnsFiltersService
         self.dnsProvidersService = dnsProvidersService
         self.purchaseService = purchaseService
-        self.contentBlockerService = contentBlockerService
         self.resources = resources
         self.safariProtection = safariProtection
     }
@@ -71,7 +66,8 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
         
         var resultCbFilters:[CustomCBFilterSettings] = []
         
-        let customFilters = filtersService.groups.filter { $0.groupId == AdGuardFilterGroup.custom.rawValue }.flatMap { $0.filters }
+        // todo: add to sdk
+        let customFilters = [SafariFilterProtocol]() //filtersService.groups.filter { $0.groupId == AdGuardFilterGroup.custom.rawValue }.flatMap { $0.filters }
         let customDnsFilters = dnsFiltersService.filters
         
         let customCbFilters = settings.customCbFilters?.uniqueElements { $0.url }
@@ -107,8 +103,9 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
         // custom dns filters
         
         if let dnsFilters = dnsCustomFilters {
-            guard let uniqueFilters = uniqueCustomFilterSettings(filters: customDnsFilters, filterSettings: dnsFilters) as? [DnsFilterSettings] else { return }
-            uniqueCustomDnsFilterSettings = uniqueFilters
+            // todo:
+//            guard let uniqueFilters = uniqueCustomFilterSettings(filters: customDnsFilters, filterSettings: dnsFilters) as? [DnsFilterSettings] else { return }
+//            uniqueCustomDnsFilterSettings = uniqueFilters
         }
         
         
@@ -154,19 +151,22 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
     private func applyCBFilters(_ filters: [DefaultCBFilterSettings]?, override: Bool)-> [DefaultCBFilterSettings]{
         
         if override {
-            filtersService.disableAllFilters(protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.safariUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertedWhitelist: resources.invertedWhitelist)
+            // todo: add to sdk
+//            disable all filters
         }
         
         var resultFilters: [DefaultCBFilterSettings] = []
         
-        let allFilters = filtersService.groups.flatMap { $0.filters }
+        let allFilters = safariProtection.groups.flatMap { $0.filters }
         for var filter in filters ?? [] {
             if filter.status == .enabled {
 
                 let cbFilter = allFilters.first { $0.filterId == filter.id }
                 
                 if cbFilter != nil {
-                    filtersService.setFilter(cbFilter!, enabled: filter.enable, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.safariUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertedWhitelist: resources.invertedWhitelist)
+                    safariProtection.setFilter(withId: cbFilter!.filterId, cbFilter!.group.groupId, enabled: filter.enable) { error in
+                        //todo:
+                    }
                     filter.status = .successful
                 }
                 else {
@@ -182,33 +182,33 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
     
     private func subscribeCustomCBFilter(_ filter: CustomCBFilterSettings, callback: @escaping (Bool)->Void) {
         
-        let parser = AASFilterSubscriptionParser()
         guard let url = URL(string: filter.url) else {
             DDLogError("import custom cb filter error - can not parse url: \(filter.url)")
             callback(false)
             return
         }
         
-        parser.parse(from: url, networking: networking) { [weak self]  (result, error) in
-            guard let self = self else { return }
-            
-            if let parserError = error {
-                DDLogError("import custom cb filter error: \(parserError.localizedDescription)")
-                callback(false)
-                return
-            }
-
-            if let parserResult = result {
-                if !filter.name.isEmpty {
-                    parserResult.meta.name = filter.name
-                }
-                self.filtersService.addCustomFilter(parserResult, protectionEnabled: self.safariProtection.safariProtectionEnabled, userFilterEnabled: self.resources.safariUserFilterEnabled, whitelistEnabled: self.resources.safariWhitelistEnabled, invertedWhitelist: self.resources.invertedWhitelist)
-                callback(true)
-                return
-            }
-            
-            callback(false)
-        }
+        // todo: add custom filter from url
+//        parser.parse(from: url, networking: networking) { [weak self]  (result, error) in
+//            guard let self = self else { return }
+//
+//            if let parserError = error {
+//                DDLogError("import custom cb filter error: \(parserError.localizedDescription)")
+//                callback(false)
+//                return
+//            }
+//
+//            if let parserResult = result {
+//                if !filter.name.isEmpty {
+//                    parserResult.meta.name = filter.name
+//                }
+//                self.filtersService.addCustomFilter(parserResult, protectionEnabled: self.safariProtection.safariProtectionEnabled, userFilterEnabled: self.resources.safariUserFilterEnabled, whitelistEnabled: self.resources.safariWhitelistEnabled, invertedWhitelist: self.resources.invertedWhitelist)
+//                callback(true)
+//                return
+//            }
+//
+//            callback(false)
+//        }
     }
     
     private func applyDnsFilters(_ filters: [DnsFilterSettings], override: Bool)->[DnsFilterSettings] {
@@ -273,24 +273,19 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
     
     func applyCbRules(_ rules: [String]?, override: Bool) {
         
-        if override {
-            antibanner.disableUserRules()
-        }
-        
-        for rule in rules ?? [] {
-            let agRule = ASDFilterRule(text: rule, enabled: true)
-            agRule.filterId = ASDF_USER_FILTER_ID as NSNumber
-            antibanner.add(agRule)
+        let agRules = (rules ?? []).map { UserRule(ruleText: $0)}
+        safariProtection.add(rules: agRules, for: .blocklist, override: override) { error in
+            // todo:
         }
     }
     
-    private func uniqueCustomFilterSettings(filters: [FilterDetailedInterface], filterSettings: [CustomFilterSettingsProtocol] ) -> [Any] {
-        var result = [CustomFilterSettingsProtocol]()
-            for cbFilter in filterSettings {
-                if !filters.contains(where: { $0.subscriptionUrl == cbFilter.url }) {
-                    result.append(cbFilter)
-                }
+    private func uniqueCustomFilterSettings(filters: [SafariFilterProtocol], filterSettings: [CustomCBFilterSettings] ) -> [Any] {
+        var result = [CustomCBFilterSettings]()
+        for cbFilter in filterSettings {
+            if !filters.contains(where: { $0.filterDownloadPage == cbFilter.url }) {
+                result.append(cbFilter)
             }
+        }
         return result
     }
 }

@@ -31,20 +31,24 @@ protocol ContentBlockersManagerProtocol {
 struct ContentBlockersManager: ContentBlockersManagerProtocol {
     
     func reloadContentBlocker(withId id: String, _ onContentBlockerReloaded: @escaping (_ error: Error?) -> Void) {
-        SFContentBlockerManager.reloadContentBlocker(withIdentifier: id, completionHandler: onContentBlockerReloaded)
+        if #available(iOS 10.0, *) {
+            SFContentBlockerManager.reloadContentBlocker(withIdentifier: id, completionHandler: onContentBlockerReloaded)
+        }
     }
     
     func getStateOfContentBlocker(withId id: String, _ onContentBlockerStateRevealed: @escaping (Result<Bool>) -> Void) {
-        SFContentBlockerManager.getStateOfContentBlocker(withIdentifier: id) { state, error in
-            if let error = error {
-                onContentBlockerStateRevealed(.error(error))
-                return
+        if #available(iOS 10.0, *) {
+            SFContentBlockerManager.getStateOfContentBlocker(withIdentifier: id) { state, error in
+                if let error = error {
+                    onContentBlockerStateRevealed(.error(error))
+                    return
+                }
+                if let state = state {
+                    onContentBlockerStateRevealed(.success(state.isEnabled))
+                    return
+                }
+                onContentBlockerStateRevealed(.error(NSError(domain: "AdGuardSDK.ContentBlockersManager.unknownError", code: 1, userInfo: nil)))
             }
-            if let state = state {
-                onContentBlockerStateRevealed(.success(state.isEnabled))
-                return
-            }
-            onContentBlockerStateRevealed(.error(NSError(domain: "AdGuardSDK.ContentBlockersManager.unknownError", code: 1, userInfo: nil)))
         }
     }
 }

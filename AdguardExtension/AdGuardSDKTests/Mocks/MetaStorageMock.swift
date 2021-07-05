@@ -1,5 +1,5 @@
 import Foundation
-import SQLite
+@_implementationOnly import SQLite
 
 enum MetaStorageMockError: Error {
     case updateAllGroupsError

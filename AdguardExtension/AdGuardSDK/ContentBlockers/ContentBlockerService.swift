@@ -159,6 +159,16 @@ extension ContentBlockerType {
         case .security: return "\(mainAppBundleId).extensionSecurity"
         }
     }
+    
+    static func typeForBundleId(_ extensionBundleId: String, mainAppBundleId: String)->ContentBlockerType {
+        for type in ContentBlockerType.allCases {
+            if type.contentBlockerBundleId(mainAppBundleId) == extensionBundleId {
+                return type
+            }
+        }
+        
+        return .general
+    }
 }
 
 // MARK: - NotificationCenter + Content blockers reload events

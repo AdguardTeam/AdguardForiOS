@@ -25,8 +25,6 @@ class RequestsBlockingController: UITableViewController {
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
-    private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
     private let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
