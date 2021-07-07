@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/AdguardTeam/DnsLibs",
         "state": {
           "branch": null,
-          "revision": "82cc82cdc40c52d51999a066a83a730f60b34816",
-          "version": "1.5.44"
+          "revision": "4ebcbe6f4e21242f1a921b6f0c740c312d729748",
+          "version": "1.5.7"
         }
       },
       {
@@ -44,6 +44,15 @@
           "branch": null,
           "revision": "afcde544e849e27993a6d2aef8d7534c5bf94b8c",
           "version": "0.2.1"
+        }
+      },
+      {
+        "package": "SQLite.swift",
+        "repositoryURL": "https://github.com/stephencelis/SQLite.swift.git",
+        "state": {
+          "branch": null,
+          "revision": "0a9893ec030501a3956bee572d6b4fdd3ae158a1",
+          "version": "0.12.2"
         }
       },
       {

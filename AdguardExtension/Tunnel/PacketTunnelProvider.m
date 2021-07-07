@@ -697,7 +697,7 @@
     
     switch (blockingModeSettings) {
         case BlockingModeSettingsAgDefault:
-            blockingMode = AGBM_DEFAULT;
+            blockingMode = AGBM_REFUSED;
             break;
         case BlockingModeSettingsAgRefused:
             blockingMode = AGBM_REFUSED;
@@ -706,10 +706,10 @@
             blockingMode = AGBM_NXDOMAIN;
             break;
         case BlockingModeSettingsAgUnspecifiedAddress:
-            blockingMode = AGBM_UNSPECIFIED_ADDRESS;
+            blockingMode = AGBM_ADDRESS;
             break;
         case BlockingModeSettingsAgCustomAddress:
-            blockingMode = AGBM_CUSTOM_ADDRESS;
+            blockingMode = AGBM_ADDRESS;
             break;
     }
     
@@ -717,8 +717,14 @@
     NSString *customBlockingIpv4;
     NSString *customBlockingIpv6;
     
-    if (blockingMode == AGBM_CUSTOM_ADDRESS) {
-        customBlockingIp = [_resources.sharedDefaults valueForKey: CustomBlockingIp]? :@[@"127.0.0.1", @"::1"];
+    if (blockingMode == AGBM_ADDRESS) {
+        if (blockingModeSettings == BlockingModeSettingsAgUnspecifiedAddress) {
+            customBlockingIp = @[@"127.0.0.1", @"::1"];
+        }
+        else {
+            customBlockingIp = [_resources.sharedDefaults valueForKey: CustomBlockingIp]? :@[@"127.0.0.1", @"::1"];
+        }
+        
         for (NSString* ip in customBlockingIp) {
             if ([ACNUrlUtils isIPv4:ip]) {
                 customBlockingIpv4 = ip;
