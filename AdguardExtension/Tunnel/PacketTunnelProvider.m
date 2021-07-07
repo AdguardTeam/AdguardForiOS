@@ -693,23 +693,29 @@
     NSArray<NSString*> *customBootstraps = [_resources.sharedDefaults valueForKey:CustomBootstrapServers];
     BlockingModeSettings blockingModeSettings = [_resources.sharedDefaults integerForKey: BlockingMode];
     NSInteger blockedResponseTtlSecs = [_resources.sharedDefaults integerForKey: BlockedResponseTtlSecs];
-    AGBlockingMode blockingMode;
+    AGBlockingMode rulesBlockingMode;
+    AGBlockingMode hostsBlockingMode;
     
     switch (blockingModeSettings) {
         case BlockingModeSettingsAgDefault:
-            blockingMode = AGBM_REFUSED;
+            rulesBlockingMode = AGDnsProxyConfig.getDefault.adblockRulesBlockingMode;
+            hostsBlockingMode = AGDnsProxyConfig.getDefault.hostsRulesBlockingMode;
             break;
         case BlockingModeSettingsAgRefused:
-            blockingMode = AGBM_REFUSED;
+            rulesBlockingMode = AGBM_REFUSED;
+            hostsBlockingMode = AGBM_REFUSED;
             break;
         case BlockingModeSettingsAgNxdomain:
-            blockingMode = AGBM_NXDOMAIN;
+            rulesBlockingMode = AGBM_NXDOMAIN;
+            hostsBlockingMode = AGBM_NXDOMAIN;
             break;
         case BlockingModeSettingsAgUnspecifiedAddress:
-            blockingMode = AGBM_ADDRESS;
+            rulesBlockingMode = AGBM_ADDRESS;
+            hostsBlockingMode = AGBM_ADDRESS;
             break;
         case BlockingModeSettingsAgCustomAddress:
-            blockingMode = AGBM_ADDRESS;
+            rulesBlockingMode = AGBM_ADDRESS;
+            hostsBlockingMode = AGBM_ADDRESS;
             break;
     }
     
@@ -717,9 +723,9 @@
     NSString *customBlockingIpv4;
     NSString *customBlockingIpv6;
     
-    if (blockingMode == AGBM_ADDRESS) {
+    if (rulesBlockingMode == AGBM_ADDRESS) {
         if (blockingModeSettings == BlockingModeSettingsAgUnspecifiedAddress) {
-            customBlockingIp = @[@"127.0.0.1", @"::1"];
+            customBlockingIp = @[@"0.0.0.0", @"::"];
         }
         else {
             customBlockingIp = [_resources.sharedDefaults valueForKey: CustomBlockingIp]? :@[@"127.0.0.1", @"::1"];
@@ -746,11 +752,12 @@
                                 userFilterId:userFilterId
                            whitelistFilterId:whitelistFilterId
                                ipv6Available:ipv6Available
-                                blockingMode:blockingMode
+                           rulesBlockingMode:rulesBlockingMode
+                           hostsBlockingMode:hostsBlockingMode
                       blockedResponseTtlSecs:blockedResponseTtlSecs
                           customBlockingIpv4:customBlockingIpv4
                           customBlockingIpv6:customBlockingIpv6
-                                   blockIpv6: blockIpv6];
+                                   blockIpv6:blockIpv6];
 }
 
 @end
