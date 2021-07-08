@@ -392,19 +392,30 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     </variation>
                                                 </label>
-                                                <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" text="Not installed" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNo-hV-l4c">
-                                                    <rect key="frame" x="56" y="16" width="85" height="0.0"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not installed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNo-hV-l4c" customClass="EdgeInsetLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="56" y="16" width="83.5" height="0.0"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" id="fEu-eh-lxu"/>
+                                                        <constraint firstAttribute="height" id="Ofd-TS-u6k"/>
                                                     </constraints>
-                                                    <color key="textColor" red="0.64313725489999995" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" textContentType="name"/>
-                                                    <variation key="heightClass=regular-widthClass=regular">
-                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                                    </variation>
-                                                </textView>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="leftTextInset">
+                                                            <real key="value" value="6"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="rightTextInset">
+                                                            <real key="value" value="6"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="topTextInset">
+                                                            <real key="value" value="2"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="bottomTextInset">
+                                                            <real key="value" value="2"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="b6z-h3-A62">
                                                     <rect key="frame" x="366" y="10" width="24" height="24"/>
                                                     <constraints>
@@ -418,26 +429,22 @@
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Hnw-bh-Bgh" firstAttribute="top" secondItem="vNo-hV-l4c" secondAttribute="bottom" id="2WP-ab-dIX"/>
                                                 <constraint firstItem="Ka5-Oa-6Ze" firstAttribute="leading" secondItem="pnl-gK-eOR" secondAttribute="leading" constant="16" id="3xm-f3-Mwh">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
                                                 <constraint firstItem="tKQ-Yn-fgL" firstAttribute="trailing" secondItem="Hnw-bh-Bgh" secondAttribute="trailing" id="7oN-4w-bqc"/>
-                                                <constraint firstItem="vNo-hV-l4c" firstAttribute="top" secondItem="pnl-gK-eOR" secondAttribute="top" constant="16" id="8zY-O2-Atc">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                                </constraint>
-                                                <constraint firstItem="vNo-hV-l4c" firstAttribute="leading" secondItem="Ka5-Oa-6Ze" secondAttribute="trailing" constant="16" id="CVa-Bl-HxD">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
-                                                </constraint>
-                                                <constraint firstItem="Ka5-Oa-6Ze" firstAttribute="top" secondItem="vNo-hV-l4c" secondAttribute="top" id="Ezg-d9-7ps"/>
                                                 <constraint firstAttribute="bottom" secondItem="tKQ-Yn-fgL" secondAttribute="bottom" constant="16" id="LbQ-wN-2YA">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                                 </constraint>
                                                 <constraint firstAttribute="trailing" secondItem="b6z-h3-A62" secondAttribute="trailing" constant="24" id="NI1-UC-3Y3"/>
                                                 <constraint firstItem="b6z-h3-A62" firstAttribute="leading" secondItem="tKQ-Yn-fgL" secondAttribute="trailing" constant="24" id="Pks-Cj-Awt"/>
+                                                <constraint firstItem="Hnw-bh-Bgh" firstAttribute="top" secondItem="vNo-hV-l4c" secondAttribute="bottom" id="REp-8z-reQ"/>
                                                 <constraint firstItem="tKQ-Yn-fgL" firstAttribute="top" secondItem="Hnw-bh-Bgh" secondAttribute="bottom" constant="2" id="Tew-hi-mKq"/>
+                                                <constraint firstItem="Ka5-Oa-6Ze" firstAttribute="top" secondItem="vNo-hV-l4c" secondAttribute="top" id="gQL-rQ-MVA"/>
                                                 <constraint firstItem="tKQ-Yn-fgL" firstAttribute="leading" secondItem="Hnw-bh-Bgh" secondAttribute="leading" id="kS6-ul-TD1"/>
-                                                <constraint firstItem="Hnw-bh-Bgh" firstAttribute="leading" secondItem="vNo-hV-l4c" secondAttribute="leading" id="mkZ-yd-bvZ"/>
+                                                <constraint firstItem="vNo-hV-l4c" firstAttribute="leading" secondItem="Ka5-Oa-6Ze" secondAttribute="trailing" constant="16" id="kiZ-tg-mPu"/>
+                                                <constraint firstItem="Hnw-bh-Bgh" firstAttribute="leading" secondItem="vNo-hV-l4c" secondAttribute="leading" id="nUr-LC-4cV"/>
+                                                <constraint firstItem="vNo-hV-l4c" firstAttribute="top" secondItem="pnl-gK-eOR" secondAttribute="top" constant="16" id="oNV-YI-mK6"/>
                                                 <constraint firstItem="b6z-h3-A62" firstAttribute="centerY" secondItem="pnl-gK-eOR" secondAttribute="centerY" id="s35-Qr-6ed"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -455,9 +462,9 @@
                         <outlet property="freeTextView" destination="l1g-hs-4EK" id="Rrm-oh-ghP"/>
                         <outlet property="freeTextViewHeight" destination="F2d-Jj-88t" id="1iM-Xn-cPx"/>
                         <outlet property="freeTextViewSpacing" destination="rP0-oc-1L7" id="JhW-Ec-IR7"/>
-                        <outlet property="notInstalledTextViewHeight" destination="fEu-eh-lxu" id="kD2-sv-F45"/>
-                        <outlet property="notInstalledTextViewSpacing" destination="2WP-ab-dIX" id="fgy-3C-7Tq"/>
-                        <outlet property="notIntalledTextView" destination="vNo-hV-l4c" id="gJh-9i-J2l"/>
+                        <outlet property="notInstalledLabel" destination="vNo-hV-l4c" id="cgn-fO-0Gz"/>
+                        <outlet property="notInstalledTextViewHeight" destination="Ofd-TS-u6k" id="jqp-pQ-ZFU"/>
+                        <outlet property="notInstalledTextViewSpacing" destination="REp-8z-reQ" id="ZdK-ft-JfS"/>
                         <outlet property="premiumTextView" destination="P9C-72-GAw" id="2xj-F7-tRJ"/>
                         <outlet property="premiumTextViewHeight" destination="3n8-9r-Ztx" id="Q2M-xx-qlq"/>
                         <outlet property="premiumTextViewSpacing" destination="1gX-CS-WTC" id="kqb-89-sNk"/>
@@ -479,6 +486,7 @@
                         <outletCollection property="themableLabels" destination="tKQ-Yn-fgL" collectionClass="NSMutableArray" id="TCs-QH-k0m"/>
                         <outletCollection property="themableLabels" destination="Hnw-bh-Bgh" collectionClass="NSMutableArray" id="2jz-LX-f4e"/>
                         <outletCollection property="themableLabels" destination="Sry-3f-FQj" collectionClass="NSMutableArray" id="ct5-xW-9xu"/>
+                        <outletCollection property="themableLabels" destination="vNo-hV-l4c" collectionClass="NSMutableArray" id="4ut-cS-Wtx"/>
                         <segue destination="J4w-JZ-q8A" kind="show" identifier="ShowLicenseSegueId" id="WYM-YR-INH"/>
                     </connections>
                 </tableViewController>
@@ -651,6 +659,11 @@
             <point key="canvasLocation" x="307" y="-172"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="vNo-hV-l4c">
+            <size key="intrinsicContentSize" width="83.5" height="18.5"/>
+        </designable>
+    </designables>
     <resources>
         <image name="Group-1" width="717" height="512"/>
         <image name="Play" width="24" height="24"/>

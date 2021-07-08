@@ -69,16 +69,15 @@ class ComplexProtectionController: UITableViewController {
     // MARK: - AdGuard VPN upsell outlets
     
     @IBOutlet weak var adguardVpnIcon: UIImageView!
-    @IBOutlet weak var notIntalledTextView: UITextView! {
+    @IBOutlet weak var notInstalledLabel: EdgeInsetLabel! {
         didSet{
-            notIntalledTextView.text = notIntalledTextView.text.uppercased()
-            notIntalledTextView.textContainerInset = UIEdgeInsets(top: 2.0, left: 2.0, bottom: 2.0, right: 2.0)
+            notInstalledLabel.text = notInstalledLabel.text?.uppercased()
             
-            notIntalledTextView.layer.borderColor = UIColor(hexString: "#a4a4a4").cgColor
-            notIntalledTextView.layer.borderWidth = 1.0
+            notInstalledLabel.layer.borderColor = UIColor.AdGuardColor.lightGray4.cgColor
+            notInstalledLabel.layer.borderWidth = 1.0
             
-            notIntalledTextView.clipsToBounds = true
-            notIntalledTextView.layer.cornerRadius = 4.0
+            notInstalledLabel.clipsToBounds = true
+            notInstalledLabel.layer.cornerRadius = 4.0
         }
     }
     
