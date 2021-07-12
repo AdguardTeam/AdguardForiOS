@@ -19,6 +19,9 @@
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "cnF-td-Ba1"; */
 "cnF-td-Ba1.text" = "DNS protection";
 
+/* Class = "UILabel"; text = "Not installed"; ObjectID = "e8U-WK-75O"; */
+"e8U-WK-75O.text" = "Not installed";
+
 /* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "kDM-2d-bRK"; */
 "kDM-2d-bRK.text" = "YouTube ad blocking";
 
@@ -30,9 +33,6 @@
 
 /* Class = "UILabel"; text = "This module allows you to use a custom DNS server and enhances your privacy by encrypting your DNS queries"; ObjectID = "teo-vm-NRJ"; */
 "teo-vm-NRJ.text" = "This module allows you to use a custom DNS server and enhances your privacy by encrypting your DNS queries";
-
-/* Class = "UITextView"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
-"vNo-hV-l4c.text" = "Not installed";
 
 /* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "vlx-BS-A2y"; */
 "vlx-BS-A2y.text" = "Blocks ads and trackers on websites opened in Safari";

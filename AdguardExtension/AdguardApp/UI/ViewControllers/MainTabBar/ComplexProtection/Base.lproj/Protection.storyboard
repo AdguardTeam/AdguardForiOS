@@ -123,23 +123,35 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     </variation>
                                                 </label>
-                                                <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" text="free" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1g-hs-4EK">
-                                                    <rect key="frame" x="56" y="22" width="34" height="0.0"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="free" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1g-hs-4EK" customClass="EdgeInsetLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="56" y="16" width="42" height="0.0"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" id="F2d-Jj-88t"/>
+                                                        <constraint firstAttribute="height" id="dfV-T9-E0E"/>
                                                     </constraints>
-                                                    <color key="textColor" red="0.35294117650000001" green="0.61176470589999998" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" textContentType="name"/>
-                                                    <variation key="heightClass=regular-widthClass=regular">
-                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                                    </variation>
-                                                </textView>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                                    <color key="textColor" red="0.3529411764705882" green="0.61176470588235299" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="leftTextInset">
+                                                            <real key="value" value="6"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="rightTextInset">
+                                                            <real key="value" value="6"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="topTextInset">
+                                                            <real key="value" value="2"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="bottomTextInset">
+                                                            <real key="value" value="2"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="vlx-BS-A2y" firstAttribute="trailing" secondItem="884-Hm-mb6" secondAttribute="trailing" id="1eM-XZ-2PO"/>
                                                 <constraint firstItem="vlx-BS-A2y" firstAttribute="leading" secondItem="884-Hm-mb6" secondAttribute="leading" id="44p-7q-ClC"/>
                                                 <constraint firstItem="vlx-BS-A2y" firstAttribute="top" secondItem="884-Hm-mb6" secondAttribute="bottom" constant="2" id="5IX-ew-Nmq"/>
+                                                <constraint firstItem="l1g-hs-4EK" firstAttribute="top" secondItem="atW-1j-3o5" secondAttribute="top" constant="16" id="8R5-Mi-4hA"/>
                                                 <constraint firstItem="gZs-M6-5s0" firstAttribute="top" secondItem="atW-1j-3o5" secondAttribute="top" constant="16" id="8f5-Xx-ls1">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                                 </constraint>
@@ -149,21 +161,17 @@
                                                 <constraint firstAttribute="trailing" secondItem="gZs-M6-5s0" secondAttribute="trailing" constant="16" id="LMt-sj-QDo">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
+                                                <constraint firstItem="l1g-hs-4EK" firstAttribute="leading" secondItem="X7W-0Y-oFy" secondAttribute="trailing" constant="16" id="N16-Du-ox7"/>
                                                 <constraint firstItem="gZs-M6-5s0" firstAttribute="leading" secondItem="884-Hm-mb6" secondAttribute="trailing" constant="16" id="OxP-aC-PHp">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
-                                                </constraint>
-                                                <constraint firstItem="l1g-hs-4EK" firstAttribute="leading" secondItem="X7W-0Y-oFy" secondAttribute="trailing" constant="16" id="RRf-7o-nnI">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
                                                 <constraint firstAttribute="bottom" secondItem="vlx-BS-A2y" secondAttribute="bottom" constant="16" id="UYG-gn-VnA">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                                 </constraint>
-                                                <constraint firstItem="X7W-0Y-oFy" firstAttribute="top" secondItem="l1g-hs-4EK" secondAttribute="top" id="aPs-ao-QHD"/>
-                                                <constraint firstItem="884-Hm-mb6" firstAttribute="top" secondItem="l1g-hs-4EK" secondAttribute="bottom" id="rP0-oc-1L7"/>
-                                                <constraint firstItem="884-Hm-mb6" firstAttribute="leading" secondItem="l1g-hs-4EK" secondAttribute="leading" id="wn5-St-EH0"/>
-                                                <constraint firstItem="l1g-hs-4EK" firstAttribute="top" secondItem="atW-1j-3o5" secondAttribute="top" constant="16" id="y78-mB-GKy">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                                </constraint>
+                                                <constraint firstItem="884-Hm-mb6" firstAttribute="leading" secondItem="l1g-hs-4EK" secondAttribute="leading" id="Xch-BP-A4v"/>
+                                                <constraint firstItem="gZs-M6-5s0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="l1g-hs-4EK" secondAttribute="trailing" constant="16" id="Ytf-Az-aTs"/>
+                                                <constraint firstItem="X7W-0Y-oFy" firstAttribute="top" secondItem="l1g-hs-4EK" secondAttribute="top" id="b5U-LU-A8I"/>
+                                                <constraint firstItem="884-Hm-mb6" firstAttribute="top" secondItem="l1g-hs-4EK" secondAttribute="bottom" id="gwh-uU-JbG"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -220,44 +228,50 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     </variation>
                                                 </label>
-                                                <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" text="premium" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P9C-72-GAw">
-                                                    <rect key="frame" x="56" y="22" width="62" height="0.0"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="premium" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P9C-72-GAw" customClass="EdgeInsetLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="56" y="16" width="63" height="0.0"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" id="3n8-9r-Ztx"/>
+                                                        <constraint firstAttribute="height" id="LTI-yF-HO3"/>
                                                     </constraints>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" textContentType="name"/>
-                                                    <variation key="heightClass=regular-widthClass=regular">
-                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                                    </variation>
-                                                </textView>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="leftTextInset">
+                                                            <real key="value" value="6"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="rightTextInset">
+                                                            <real key="value" value="6"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="topTextInset">
+                                                            <real key="value" value="2"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="bottomTextInset">
+                                                            <real key="value" value="2"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="cnF-td-Ba1" firstAttribute="top" secondItem="P9C-72-GAw" secondAttribute="bottom" id="1gX-CS-WTC"/>
                                                 <constraint firstItem="Nk5-ay-wTI" firstAttribute="top" secondItem="rW1-K7-XNG" secondAttribute="top" constant="16" id="DR7-tP-vQx">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                                 </constraint>
-                                                <constraint firstItem="P9C-72-GAw" firstAttribute="top" secondItem="rW1-K7-XNG" secondAttribute="top" constant="16" id="Lx0-o2-DWX">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                                </constraint>
                                                 <constraint firstItem="teo-vm-NRJ" firstAttribute="top" secondItem="cnF-td-Ba1" secondAttribute="bottom" constant="2" id="RiJ-Za-rxq"/>
-                                                <constraint firstItem="cnF-td-Ba1" firstAttribute="leading" secondItem="P9C-72-GAw" secondAttribute="leading" id="SUB-Wd-OAg"/>
+                                                <constraint firstItem="P9C-72-GAw" firstAttribute="leading" secondItem="4LF-7o-NaU" secondAttribute="trailing" constant="16" id="UET-lF-eLF"/>
                                                 <constraint firstItem="teo-vm-NRJ" firstAttribute="leading" secondItem="cnF-td-Ba1" secondAttribute="leading" id="YTk-Bj-AAL"/>
-                                                <constraint firstItem="4LF-7o-NaU" firstAttribute="top" secondItem="P9C-72-GAw" secondAttribute="top" id="alg-dB-Hn2"/>
                                                 <constraint firstAttribute="trailing" secondItem="Nk5-ay-wTI" secondAttribute="trailing" constant="16" id="hgw-WW-ANP">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
-                                                <constraint firstItem="P9C-72-GAw" firstAttribute="leading" secondItem="4LF-7o-NaU" secondAttribute="trailing" constant="16" id="lYP-NT-6yI">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
-                                                </constraint>
+                                                <constraint firstItem="4LF-7o-NaU" firstAttribute="top" secondItem="P9C-72-GAw" secondAttribute="top" id="k4y-4J-pmD"/>
+                                                <constraint firstItem="P9C-72-GAw" firstAttribute="top" secondItem="rW1-K7-XNG" secondAttribute="top" constant="16" id="m97-p6-3F7"/>
+                                                <constraint firstItem="P9C-72-GAw" firstAttribute="leading" secondItem="cnF-td-Ba1" secondAttribute="leading" id="mDF-xj-Fi0"/>
                                                 <constraint firstItem="4LF-7o-NaU" firstAttribute="leading" secondItem="rW1-K7-XNG" secondAttribute="leading" constant="16" id="pIQ-3B-x7p">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
                                                 <constraint firstItem="Nk5-ay-wTI" firstAttribute="leading" secondItem="cnF-td-Ba1" secondAttribute="trailing" constant="16" id="t00-Pz-ITD">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
+                                                <constraint firstItem="cnF-td-Ba1" firstAttribute="top" secondItem="P9C-72-GAw" secondAttribute="bottom" id="wGY-Kc-fAX"/>
                                                 <constraint firstItem="teo-vm-NRJ" firstAttribute="trailing" secondItem="cnF-td-Ba1" secondAttribute="trailing" id="zii-Gr-Qlx"/>
                                                 <constraint firstAttribute="bottom" secondItem="teo-vm-NRJ" secondAttribute="bottom" constant="16" id="zsJ-Mi-jYC">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="20"/>
@@ -392,19 +406,30 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     </variation>
                                                 </label>
-                                                <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" text="Not installed" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNo-hV-l4c">
-                                                    <rect key="frame" x="56" y="16" width="85" height="0.0"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not installed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNo-hV-l4c" customClass="EdgeInsetLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="56" y="16" width="85.5" height="0.0"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" id="fEu-eh-lxu"/>
+                                                        <constraint firstAttribute="height" id="Ofd-TS-u6k"/>
                                                     </constraints>
-                                                    <color key="textColor" red="0.64313725489999995" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" textContentType="name"/>
-                                                    <variation key="heightClass=regular-widthClass=regular">
-                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                                    </variation>
-                                                </textView>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="leftTextInset">
+                                                            <real key="value" value="6"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="rightTextInset">
+                                                            <real key="value" value="6"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="topTextInset">
+                                                            <real key="value" value="2"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="bottomTextInset">
+                                                            <real key="value" value="2"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="b6z-h3-A62">
                                                     <rect key="frame" x="366" y="10" width="24" height="24"/>
                                                     <constraints>
@@ -418,26 +443,22 @@
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Hnw-bh-Bgh" firstAttribute="top" secondItem="vNo-hV-l4c" secondAttribute="bottom" id="2WP-ab-dIX"/>
                                                 <constraint firstItem="Ka5-Oa-6Ze" firstAttribute="leading" secondItem="pnl-gK-eOR" secondAttribute="leading" constant="16" id="3xm-f3-Mwh">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
                                                 <constraint firstItem="tKQ-Yn-fgL" firstAttribute="trailing" secondItem="Hnw-bh-Bgh" secondAttribute="trailing" id="7oN-4w-bqc"/>
-                                                <constraint firstItem="vNo-hV-l4c" firstAttribute="top" secondItem="pnl-gK-eOR" secondAttribute="top" constant="16" id="8zY-O2-Atc">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                                </constraint>
-                                                <constraint firstItem="vNo-hV-l4c" firstAttribute="leading" secondItem="Ka5-Oa-6Ze" secondAttribute="trailing" constant="16" id="CVa-Bl-HxD">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
-                                                </constraint>
-                                                <constraint firstItem="Ka5-Oa-6Ze" firstAttribute="top" secondItem="vNo-hV-l4c" secondAttribute="top" id="Ezg-d9-7ps"/>
                                                 <constraint firstAttribute="bottom" secondItem="tKQ-Yn-fgL" secondAttribute="bottom" constant="16" id="LbQ-wN-2YA">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                                 </constraint>
                                                 <constraint firstAttribute="trailing" secondItem="b6z-h3-A62" secondAttribute="trailing" constant="24" id="NI1-UC-3Y3"/>
                                                 <constraint firstItem="b6z-h3-A62" firstAttribute="leading" secondItem="tKQ-Yn-fgL" secondAttribute="trailing" constant="24" id="Pks-Cj-Awt"/>
+                                                <constraint firstItem="Hnw-bh-Bgh" firstAttribute="top" secondItem="vNo-hV-l4c" secondAttribute="bottom" id="REp-8z-reQ"/>
                                                 <constraint firstItem="tKQ-Yn-fgL" firstAttribute="top" secondItem="Hnw-bh-Bgh" secondAttribute="bottom" constant="2" id="Tew-hi-mKq"/>
+                                                <constraint firstItem="Ka5-Oa-6Ze" firstAttribute="top" secondItem="vNo-hV-l4c" secondAttribute="top" id="gQL-rQ-MVA"/>
                                                 <constraint firstItem="tKQ-Yn-fgL" firstAttribute="leading" secondItem="Hnw-bh-Bgh" secondAttribute="leading" id="kS6-ul-TD1"/>
-                                                <constraint firstItem="Hnw-bh-Bgh" firstAttribute="leading" secondItem="vNo-hV-l4c" secondAttribute="leading" id="mkZ-yd-bvZ"/>
+                                                <constraint firstItem="vNo-hV-l4c" firstAttribute="leading" secondItem="Ka5-Oa-6Ze" secondAttribute="trailing" constant="16" id="kiZ-tg-mPu"/>
+                                                <constraint firstItem="Hnw-bh-Bgh" firstAttribute="leading" secondItem="vNo-hV-l4c" secondAttribute="leading" id="nUr-LC-4cV"/>
+                                                <constraint firstItem="vNo-hV-l4c" firstAttribute="top" secondItem="pnl-gK-eOR" secondAttribute="top" constant="16" id="oNV-YI-mK6"/>
                                                 <constraint firstItem="b6z-h3-A62" firstAttribute="centerY" secondItem="pnl-gK-eOR" secondAttribute="centerY" id="s35-Qr-6ed"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -452,15 +473,15 @@
                     </tableView>
                     <connections>
                         <outlet property="adguardVpnIcon" destination="Ka5-Oa-6Ze" id="teT-si-G2h"/>
-                        <outlet property="freeTextView" destination="l1g-hs-4EK" id="Rrm-oh-ghP"/>
-                        <outlet property="freeTextViewHeight" destination="F2d-Jj-88t" id="1iM-Xn-cPx"/>
-                        <outlet property="freeTextViewSpacing" destination="rP0-oc-1L7" id="JhW-Ec-IR7"/>
-                        <outlet property="notInstalledTextViewHeight" destination="fEu-eh-lxu" id="kD2-sv-F45"/>
-                        <outlet property="notInstalledTextViewSpacing" destination="2WP-ab-dIX" id="fgy-3C-7Tq"/>
-                        <outlet property="notIntalledTextView" destination="vNo-hV-l4c" id="gJh-9i-J2l"/>
-                        <outlet property="premiumTextView" destination="P9C-72-GAw" id="2xj-F7-tRJ"/>
-                        <outlet property="premiumTextViewHeight" destination="3n8-9r-Ztx" id="Q2M-xx-qlq"/>
-                        <outlet property="premiumTextViewSpacing" destination="1gX-CS-WTC" id="kqb-89-sNk"/>
+                        <outlet property="freeLabel" destination="l1g-hs-4EK" id="27n-kI-CKU"/>
+                        <outlet property="freeLabelHeight" destination="dfV-T9-E0E" id="KFa-8E-cU3"/>
+                        <outlet property="freeLabelSpacing" destination="gwh-uU-JbG" id="J8Y-Nr-4dQ"/>
+                        <outlet property="notInstalledLabel" destination="vNo-hV-l4c" id="cgn-fO-0Gz"/>
+                        <outlet property="notInstalledLabelHeight" destination="Ofd-TS-u6k" id="jqp-pQ-ZFU"/>
+                        <outlet property="notInstalledLabelSpacing" destination="REp-8z-reQ" id="ZdK-ft-JfS"/>
+                        <outlet property="premiumLabel" destination="P9C-72-GAw" id="uGL-Xs-2qk"/>
+                        <outlet property="premiumLabelHeight" destination="LTI-yF-HO3" id="GIh-ec-ukn"/>
+                        <outlet property="premiumLabelSpacing" destination="wGY-Kc-fAX" id="Qxe-lv-BzE"/>
                         <outlet property="safariDescriptionLabel" destination="vlx-BS-A2y" id="XTV-25-i6z"/>
                         <outlet property="safariIcon" destination="X7W-0Y-oFy" id="j1H-Vf-Mte"/>
                         <outlet property="safariProtectionLabel" destination="884-Hm-mb6" id="bj0-6m-uV1"/>
@@ -479,6 +500,7 @@
                         <outletCollection property="themableLabels" destination="tKQ-Yn-fgL" collectionClass="NSMutableArray" id="TCs-QH-k0m"/>
                         <outletCollection property="themableLabels" destination="Hnw-bh-Bgh" collectionClass="NSMutableArray" id="2jz-LX-f4e"/>
                         <outletCollection property="themableLabels" destination="Sry-3f-FQj" collectionClass="NSMutableArray" id="ct5-xW-9xu"/>
+                        <outletCollection property="themableLabels" destination="vNo-hV-l4c" collectionClass="NSMutableArray" id="4ut-cS-Wtx"/>
                         <segue destination="J4w-JZ-q8A" kind="show" identifier="ShowLicenseSegueId" id="WYM-YR-INH"/>
                     </connections>
                 </tableViewController>
@@ -651,6 +673,17 @@
             <point key="canvasLocation" x="307" y="-172"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="P9C-72-GAw">
+            <size key="intrinsicContentSize" width="63" height="18.5"/>
+        </designable>
+        <designable name="l1g-hs-4EK">
+            <size key="intrinsicContentSize" width="35.5" height="18.5"/>
+        </designable>
+        <designable name="vNo-hV-l4c">
+            <size key="intrinsicContentSize" width="85.5" height="18.5"/>
+        </designable>
+    </designables>
     <resources>
         <image name="Group-1" width="717" height="512"/>
         <image name="Play" width="24" height="24"/>
