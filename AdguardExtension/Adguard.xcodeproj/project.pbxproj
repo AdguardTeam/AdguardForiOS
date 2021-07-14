@@ -1119,6 +1119,8 @@
 		D033980F243192A500F6B9DE /* BackgroundFetchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03398052431927200F6B9DE /* BackgroundFetchState.swift */; };
 		D0339810243192AB00F6B9DE /* BackgroundFetchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03398052431927200F6B9DE /* BackgroundFetchState.swift */; };
 		D034DDAD22CA23030007641A /* UIViewController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D034DDAC22CA23030007641A /* UIViewController+Utils.swift */; };
+		D0369336269707BD002E0F2E /* EdgeInsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0369335269707BD002E0F2E /* EdgeInsetLabel.swift */; };
+		D0369337269707BD002E0F2E /* EdgeInsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0369335269707BD002E0F2E /* EdgeInsetLabel.swift */; };
 		D03E532921B412FA00C62152 /* SafariService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093718A21B0414A004A24F1 /* SafariService.swift */; };
 		D03E532A21B41FF000C62152 /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D031A0B4219EFC99002C17D9 /* CocoaLumberjack.swift */; };
 		D03E532B21B6A16C00C62152 /* ThemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E9643216CB14A00313AB1 /* ThemeService.swift */; };
@@ -3610,6 +3612,7 @@
 		D032D172232BA87B001E7BF1 /* NotEcapingJsonSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotEcapingJsonSerialization.swift; sourceTree = "<group>"; };
 		D03398052431927200F6B9DE /* BackgroundFetchState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundFetchState.swift; sourceTree = "<group>"; };
 		D034DDAC22CA23030007641A /* UIViewController+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utils.swift"; sourceTree = "<group>"; };
+		D0369335269707BD002E0F2E /* EdgeInsetLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdgeInsetLabel.swift; sourceTree = "<group>"; };
 		D03E532C21B6A3B400C62152 /* ConfigurationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationServiceProtocol.swift; sourceTree = "<group>"; };
 		D03E537321BA82BD00C62152 /* FiltersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersService.swift; sourceTree = "<group>"; };
 		D0427C761F434129002FB018 /* APDnsServerAddress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APDnsServerAddress.h; sourceTree = "<group>"; };
@@ -5627,6 +5630,7 @@
 		D0F91161212EDD51006DF0D3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D0369335269707BD002E0F2E /* EdgeInsetLabel.swift */,
 				24AD872C260A247B0034D402 /* RadioButton.swift */,
 				7E5FC200234F71F0008E383D /* ListOfRulesCells.swift */,
 				D0F9115B212DDCD3006DF0D3 /* StackElementView.swift */,
@@ -7271,6 +7275,7 @@
 				659886771CF74DE9003ECD1C /* NSString+Utils.m in Sources */,
 				D0B545AD2435D640002F0AEC /* SystemProtectionEnablerController.swift in Sources */,
 				D0B545FC2435D6CB002F0AEC /* NotificationService+Utils.swift in Sources */,
+				D0369337269707BD002E0F2E /* EdgeInsetLabel.swift in Sources */,
 				D0D7E615244455CA001801A5 /* ThemableButton.swift in Sources */,
 				D0B545BE2435D65C002F0AEC /* MainNavigationController.swift in Sources */,
 				659886791CF74DE9003ECD1C /* ABECRequest.m in Sources */,
@@ -7744,6 +7749,7 @@
 				7EB2F95623F2B96B00F9A544 /* CharacterSet+Utils.swift in Sources */,
 				7EBEC6DE25501A89004A753D /* DnsProvidersModel.swift in Sources */,
 				65EC9CA01BB9824C00F53F3B /* FMResultSet.m in Sources */,
+				D0369336269707BD002E0F2E /* EdgeInsetLabel.swift in Sources */,
 				7ED0D64D23D593D2004D9E7C /* UIButton+Utils.swift in Sources */,
 				7EA45505254AB249002B69C6 /* ActivityNativeDnsController.swift in Sources */,
 				247CB5B12600B9940047974C /* OpenDnsSettingsControllerParser.swift in Sources */,
@@ -12190,7 +12196,7 @@
 			repositoryURL = "https://github.com/AdguardTeam/DnsLibs";
 			requirement = {
 				kind = exactVersion;
-				version = 1.5.44;
+				version = 1.6.9;
 			};
 		};
 		D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */ = {

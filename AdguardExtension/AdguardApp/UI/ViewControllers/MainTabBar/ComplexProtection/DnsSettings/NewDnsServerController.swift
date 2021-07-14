@@ -137,7 +137,11 @@ class NewDnsServerController: BottomAlertController {
         DispatchQueue(label: "save dns queue").async { [weak self] in
             guard let self = self else { return }
             
-            let error = AGDnsUtils.test(upstream)
+            let isIpv6Available = ACNIPUtils.isIpv6Available()
+            
+            DDLogInfo("(NewDnsServerController) test upstream: \(upstream?.address ?? "nil") bootstrap: \(upstream?.bootstrap ?? []) ipv6: \(isIpv6Available)")
+            
+            let error = AGDnsUtils.test(upstream, ipv6Available: isIpv6Available)
             
             DispatchQueue.main.async {
                 
