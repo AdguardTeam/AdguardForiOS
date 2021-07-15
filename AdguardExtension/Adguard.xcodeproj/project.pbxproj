@@ -948,6 +948,12 @@
 		D0116CEE20627E58009598B1 /* ACNCidrRange.m in Sources */ = {isa = PBXBuildFile; fileRef = D0116CED20627E58009598B1 /* ACNCidrRange.m */; };
 		D0116CEF20627E58009598B1 /* ACNCidrRange.m in Sources */ = {isa = PBXBuildFile; fileRef = D0116CED20627E58009598B1 /* ACNCidrRange.m */; };
 		D0116CF22063E004009598B1 /* ACNCidrRangeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D0116CF12063E004009598B1 /* ACNCidrRangeTest.m */; };
+		D013F46326A0382400A39BBF /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = D013F46226A0382400A39BBF /* Sentry */; };
+		D013F46526A03BC300A39BBF /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = D013F46426A03BC300A39BBF /* Sentry */; };
+		D013F46D26A072C400A39BBF /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = D013F46C26A072C400A39BBF /* Sentry */; };
+		D013F47126A072DC00A39BBF /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = D013F47026A072DC00A39BBF /* Sentry */; };
+		D013F47226A077A400A39BBF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C493921CA7E1800770AB0 /* Constants.swift */; };
+		D013F47326A077A500A39BBF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02C493921CA7E1800770AB0 /* Constants.swift */; };
 		D016FBB7224BC79B00CF3B29 /* AASFilterSubscriptionParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BDDD13215933D6000C85F1 /* AASFilterSubscriptionParser.m */; };
 		D016FBB9224CF46B00CF3B29 /* UIApplication+OpenAdguardUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D016FBB8224CF46B00CF3B29 /* UIApplication+OpenAdguardUrl.swift */; };
 		D018672A203C86050003110A /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D0186726203C86040003110A /* MGSwipeButton.m */; };
@@ -3956,6 +3962,7 @@
 				D0D7E53224371896001801A5 /* Security.framework in Frameworks */,
 				65D829501EDDA92A008F7F30 /* NetworkExtension.framework in Frameworks */,
 				D0D7E53124371892001801A5 /* libiconv.tbd in Frameworks */,
+				D013F46526A03BC300A39BBF /* Sentry in Frameworks */,
 				D0B546042435D740002F0AEC /* Lottie in Frameworks */,
 				659886A01CF74DE9003ECD1C /* JavaScriptCore.framework in Frameworks */,
 				7ECAA28F257E4ACB004DA0D3 /* Zip in Frameworks */,
@@ -3999,6 +4006,7 @@
 				D020B28121F8B71D0075BB8D /* libresolv.tbd in Frameworks */,
 				7E4D205B22D71AE8003B0E75 /* Security.framework in Frameworks */,
 				7E4D205E22D71B3E003B0E75 /* libiconv.tbd in Frameworks */,
+				D013F46326A0382400A39BBF /* Sentry in Frameworks */,
 				D09E271B2541D00B002D6BC0 /* Setapp in Frameworks */,
 				D06E2F8B253F0E24008BBD2D /* ContentBlockerConverter in Frameworks */,
 				7ECAA27C257E4AAD004DA0D3 /* Zip in Frameworks */,
@@ -4077,6 +4085,7 @@
 				A5E0262F261E328D00198396 /* AGDnsProxy in Frameworks */,
 				D0569E2621F1C0A800985DA9 /* libsqlite3.tbd in Frameworks */,
 				D0569E2721F1C0A800985DA9 /* libresolv.tbd in Frameworks */,
+				D013F46D26A072C400A39BBF /* Sentry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4198,6 +4207,7 @@
 				A5E02633261E331E00198396 /* AGDnsProxy in Frameworks */,
 				D0B5451E2435C6BF002F0AEC /* libsqlite3.tbd in Frameworks */,
 				D0B5451F2435C6BF002F0AEC /* libresolv.tbd in Frameworks */,
+				D013F47126A072DC00A39BBF /* Sentry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5791,6 +5801,7 @@
 				D06E3082253F2F32008BBD2D /* ContentBlockerConverter */,
 				7ECAA28E257E4ACB004DA0D3 /* Zip */,
 				A5E02630261E330900198396 /* AGDnsProxy */,
+				D013F46426A03BC300A39BBF /* Sentry */,
 			);
 			productName = AdguardExtension;
 			productReference = 659886B91CF74DE9003ECD1C /* Adguard Pro.app */;
@@ -5857,6 +5868,7 @@
 				D09E271A2541D00B002D6BC0 /* Setapp */,
 				7ECAA27B257E4AAD004DA0D3 /* Zip */,
 				A5E0261B261E31FA00198396 /* AGDnsProxy */,
+				D013F46226A0382400A39BBF /* Sentry */,
 			);
 			productName = AdguardExtension;
 			productReference = 65F398111B7B684700ABCD39 /* Adguard.app */;
@@ -5899,6 +5911,8 @@
 				65423D9C1C89B86700DD1224 /* PBXTargetDependency */,
 			);
 			name = AdguardBlockingExtensionGeneral;
+			packageProductDependencies = (
+			);
 			productName = extension;
 			productReference = 65F3985E1B7B6A5300ABCD39 /* AdguardBlockingExtensionGeneral.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -6014,6 +6028,7 @@
 			name = Tunnel;
 			packageProductDependencies = (
 				A5E0262E261E328D00198396 /* AGDnsProxy */,
+				D013F46C26A072C400A39BBF /* Sentry */,
 			);
 			productName = tunnel;
 			productReference = D0569E2F21F1C0A800985DA9 /* Tunnel.appex */;
@@ -6034,6 +6049,8 @@
 				D067D8DD21428AA900ECDE6D /* PBXTargetDependency */,
 			);
 			name = AdguardBlockingExtensionPrivacy;
+			packageProductDependencies = (
+			);
 			productName = extension;
 			productReference = D067D90B21428AA900ECDE6D /* AdguardBlockingExtensionPrivacy.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -6270,6 +6287,7 @@
 			name = ProTunnel;
 			packageProductDependencies = (
 				A5E02632261E331E00198396 /* AGDnsProxy */,
+				D013F47026A072DC00A39BBF /* Sentry */,
 			);
 			productName = tunnel;
 			productReference = D0B545262435C6BF002F0AEC /* ProTunnel.appex */;
@@ -6448,6 +6466,7 @@
 				D06E2F89253F0E24008BBD2D /* XCRemoteSwiftPackageReference "SafariConverterLib" */,
 				7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */,
 				A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */,
+				D013F46126A0382400A39BBF /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 			);
 			productRefGroup = 65F398121B7B684700ABCD39 /* Products */;
 			projectDirPath = "";
@@ -8487,6 +8506,7 @@
 				D08187C32260ACE300E961B5 /* DnsLogRecord.swift in Sources */,
 				D0569E0221F1C0A800985DA9 /* APCommonSharedResources.m in Sources */,
 				D020B28E21FA12FE0075BB8D /* DnsProxyService.swift in Sources */,
+				D013F47326A077A500A39BBF /* Constants.swift in Sources */,
 				D0569E0821F1C0A800985DA9 /* DDContextFilterLogFormatter.m in Sources */,
 				7E9C0C35256292E100F1999D /* UIColor+Utils.swift in Sources */,
 				D0569E0921F1C0A800985DA9 /* CLIColor.m in Sources */,
@@ -9360,6 +9380,7 @@
 				D0D7E5F824444F06001801A5 /* RuleLabel.swift in Sources */,
 				D0B544EB2435C6BF002F0AEC /* LoginService.swift in Sources */,
 				D0B544EC2435C6BF002F0AEC /* FMDatabasePool.m in Sources */,
+				D013F47226A077A400A39BBF /* Constants.swift in Sources */,
 				D0B544ED2435C6BF002F0AEC /* DDLoggerNames.m in Sources */,
 				2425D73C258F8D1F0037AEBE /* CharacterSet+Utils.swift in Sources */,
 				D0B544EE2435C6BF002F0AEC /* (null) in Sources */,
@@ -12199,6 +12220,14 @@
 				version = 1.6.14;
 			};
 		};
+		D013F46126A0382400A39BBF /* XCRemoteSwiftPackageReference "sentry-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/getsentry/sentry-cocoa.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.1.3;
+			};
+		};
 		D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MacPaw/Setapp-framework.git";
@@ -12292,6 +12321,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */;
 			productName = AGDnsProxy;
+		};
+		D013F46226A0382400A39BBF /* Sentry */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D013F46126A0382400A39BBF /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
+			productName = Sentry;
+		};
+		D013F46426A03BC300A39BBF /* Sentry */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D013F46126A0382400A39BBF /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
+			productName = Sentry;
+		};
+		D013F46C26A072C400A39BBF /* Sentry */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D013F46126A0382400A39BBF /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
+			productName = Sentry;
+		};
+		D013F47026A072DC00A39BBF /* Sentry */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D013F46126A0382400A39BBF /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
+			productName = Sentry;
 		};
 		D024973D25714928000EED34 /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;

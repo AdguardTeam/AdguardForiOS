@@ -90,6 +90,8 @@ platform :ios do
       build_info_output: "#{ENV['OUTPUT_DIRECTORY']}/build.txt",
     )
     zip_archive()
+
+    upload_dsym()
   end
 
   desc "Builds adhoc build for inner testing"
@@ -174,4 +176,15 @@ lane :auth do
   UI.message("Ignore the previous FASTLANE_SESSION, use the new one below")
   UI.message("Pass the following via the FASTLANE_SESSION environment variable:")
   UI.message("#{cookie}".cyan.underline);
+end
+
+# upload dsym files to sentry
+lane :upload_dsym do
+  sentry_upload_dsym(
+      auth_token: "#{ENV['bamboo_sentryAuthTokenProductsPassword']}",
+      org_slug: 'adg',
+      project_slug: 'adguard-ios',
+      url: 'https://s10.adtidy.org/',
+      dsym_path: "#{ENV['OUTPUT_DIRECTORY']}/#{ENV['DSYM_NAME']}"
+    )
 end

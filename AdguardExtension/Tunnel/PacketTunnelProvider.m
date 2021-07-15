@@ -39,6 +39,7 @@
 #include <resolv.h>
 #include <dns.h>
 #include <net/if.h>
+#include <Sentry.h>
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - PacketTunnelProvider Constants
@@ -138,6 +139,11 @@
     
     self = [super init];
     if (self) {
+        
+        [SentrySDK startWithConfigureOptions:^(SentryOptions *options) {
+            options.dsn = SentryConst.dsnUrl;
+            options.enableAutoSessionTracking = NO;
+        }];
         
         _resources = [AESharedResources new];
         
