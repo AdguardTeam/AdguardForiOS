@@ -180,7 +180,6 @@ end
 
 # upload dsym files to sentry
 lane :upload_dsym do
-  echo(message: "key for test: #{ENV['bamboo_sentryAuthTokenProductsPassword']}")
   sentry_upload_dsym(
       auth_token: "#{ENV['bamboo_sentryAuthTokenProductsPassword']}",
       org_slug: 'adg',
