@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import Sentry
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -143,6 +144,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        
+        SentrySDK.start { options in
+            options.dsn = SentryConst.dsnUrl
+            options.enableAutoSessionTracking = false
+        }
+        
         prepareControllers()
         
         //------------- Preparing for start application. Stage 2. -----------------

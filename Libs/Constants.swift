@@ -21,4 +21,10 @@ class EnabledFilterGroups: NSObject {
                                           FilterGroupId.languageSpecific]
 }
 
+@objc
+@objcMembers
+class SentryConst: NSObject {
+    static let dsnUrl = "https://c7ddc70397fe47198302226c5baab7df@s10.adtidy.org/214"
+}
+
 
