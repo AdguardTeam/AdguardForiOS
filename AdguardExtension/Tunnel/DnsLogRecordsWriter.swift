@@ -103,8 +103,11 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         )
         
         addRecord(record: record)
-        addActivityRecord(domain: domain, isEncrypted: recordIsEncrypted, elapsed: event.elapsed)
-        addDnsStatisticsRecord(isEncrypted: recordIsEncrypted, elapsed: event.elapsed)
+        
+        if event.status.caseInsensitiveCompare("SERVFAIL") != ComparisonResult.orderedSame {
+            addActivityRecord(domain: domain, isEncrypted: recordIsEncrypted, elapsed: event.elapsed)
+            addDnsStatisticsRecord(isEncrypted: recordIsEncrypted, elapsed: event.elapsed)
+        }
     }
     
     func flush() {
