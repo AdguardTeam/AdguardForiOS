@@ -104,6 +104,8 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
         
         addRecord(record: record)
         
+        // We don't count SERVFAIL responses since it just means that the request timed out
+        // and there's no internet connection.
         if event.status.caseInsensitiveCompare("SERVFAIL") != ComparisonResult.orderedSame {
             addActivityRecord(domain: domain, isEncrypted: recordIsEncrypted, elapsed: event.elapsed)
             addDnsStatisticsRecord(isEncrypted: recordIsEncrypted, elapsed: event.elapsed)
