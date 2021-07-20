@@ -46,6 +46,7 @@ def clean()
                                         error: proc do |error_output|
                                           UI.error("Failed to run clean: #{error_output}")
                                         end)
+  clear_derived_data()
 end
 
 def prepare_key()
