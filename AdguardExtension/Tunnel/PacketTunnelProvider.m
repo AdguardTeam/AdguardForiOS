@@ -140,11 +140,6 @@
     self = [super init];
     if (self) {
         
-        [SentrySDK startWithConfigureOptions:^(SentryOptions *options) {
-            options.dsn = SentryConst.dsnUrl;
-            options.enableAutoSessionTracking = NO;
-        }];
-        
         _resources = [AESharedResources new];
         
         // Init Logger
@@ -160,7 +155,18 @@
                 @autoreleasepool {
                     DDLogInfo(@"(DnsLibs) %.*s", (int)length, msg);
                 }
-            }];
+        }];
+        
+        [SentrySDK startWithConfigureOptions:^(SentryOptions *options) {
+            options.dsn = SentryConst.dsnUrl;
+            options.enableAutoSessionTracking = NO;
+            
+        }];
+        
+        [SentrySDK configureScope:^(SentryScope * _Nonnull scope) {
+            [scope setTagValue: AGDnsProxy.libraryVersion forKey:@"dnslibs.version"];
+            [scope setTagValue: isDebugLogs ? @"true" : @"false" forKey:@"dnslibs.debuglogs"];
+        }];
         
         _dnsTrackerService = [DnsTrackerService new];
         _providersService = [[DnsProvidersService alloc] initWithResources:_resources];
