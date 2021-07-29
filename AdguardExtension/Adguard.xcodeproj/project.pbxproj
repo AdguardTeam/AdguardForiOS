@@ -12217,7 +12217,7 @@
 			repositoryURL = "https://github.com/AdguardTeam/DnsLibs";
 			requirement = {
 				kind = exactVersion;
-				version = 1.6.16;
+				version = 1.6.19;
 			};
 		};
 		D013F46126A0382400A39BBF /* XCRemoteSwiftPackageReference "sentry-cocoa" */ = {
