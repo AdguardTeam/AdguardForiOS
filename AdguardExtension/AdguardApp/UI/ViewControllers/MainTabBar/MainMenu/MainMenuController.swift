@@ -33,8 +33,6 @@ class MainMenuController: UITableViewController {
     @IBOutlet weak var settingsImageView: UIImageView!
     @IBOutlet weak var safariProtectionLabel: ThemableLabel!
     @IBOutlet weak var systemProtectionLabel: ThemableLabel!
-    @IBOutlet weak var supportCell: UITableViewCell!
-    @IBOutlet weak var LicenseCell: UITableViewCell!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
     private var filtersCountObservation: Any?
@@ -69,9 +67,7 @@ class MainMenuController: UITableViewController {
         
         updateFilters()
         
-        if Bundle.main.isPro {
-            LicenseCell.isHidden = true
-        }
+       
     }
     
     // MARK: - table view cells
@@ -90,20 +86,13 @@ class MainMenuController: UITableViewController {
         return 0.01
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let cell = self.tableView(tableView, cellForRowAt: indexPath)
-        if cell == LicenseCell &&  Bundle.main.isPro {
-            return 0.0
-        }
-        
-        return super.tableView(tableView, heightForRowAt: indexPath)
-    }
+    
     
     // MARK: - private methods
     
     private func updateServerName() {
         if proStatus {
-            if resources.dnsImplementation == .adGuard {
+            if resources.dnsImplementation == .vpn {
                 systemProtectionLabel.text = dnsProviders.currentServerName
             } else {
                 systemProtectionLabel.text = nativeProviders.serverName

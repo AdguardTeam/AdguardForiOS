@@ -291,7 +291,7 @@ class SafariService: NSObject, SafariServiceProtocol {
             DDLogInfo("(SafariService) Starting notify Safari - invalidateJson. BundleId = \(bundleId)");
             
             self.contentBlockerManager.reloadContentBlocker(withIdentifier: bundleId) {[weak self] (error) in
-                guard let sSelf = self else { return }
+                
                 
                 DDLogInfo("(SafariService) Finishing notify Safari - invalidateJson.");
                 if error != nil {
@@ -303,13 +303,7 @@ class SafariService: NSObject, SafariServiceProtocol {
                     DDLogInfo("(SafariService) Notify Safari fihished.")
                     
                     // If content blocker failed to load in safari - we try to reload it second time
-                    sSelf.tryToReload(contentBlockerWith: bundleId) { (error) in
-                        if error != nil {
-                            completion(error)
-                        } else {
-                            completion(nil)
-                        }
-                    }
+                   
                     group.leave()
                 }
                 else {
@@ -332,35 +326,5 @@ class SafariService: NSObject, SafariServiceProtocol {
         }
     }
     
-    // Sometimes Safari fails to register a content blocker because of inner race conditions, so we try to reload it second time
-    private func tryToReload(contentBlockerWith bundleId: String, completion: @escaping (Error?) -> Void) {
-        invalidateQueue.async {
-            
-            let group = DispatchGroup()
-            group.enter()
-            
-            self.contentBlockerManager.reloadContentBlocker(withIdentifier: bundleId) { (error) in
-                DDLogInfo("(SafariService) Finishing notify Safari - invalidateJson. ( 2-nd try )");
-                if error != nil {
-                    DDLogError("(SafariService) \(bundleId) Error occured twice: \(error!.localizedDescription)")
-                    if let userInfo = (error as NSError?)?.userInfo {
-                        DDLogError("(SafariService) userInfo for 2-nd try: \(userInfo)")
-                    }
-                    let errorDescription = ACLocalizedString("safari_filters_loading_error", "");
-                    let error =  NSError(domain: SafariService.safariServiceErrorDomain, code: SafariService.safariServiceErrorCode, userInfo: [NSLocalizedDescriptionKey: errorDescription])
-                    
-                    DDLogInfo("(SafariService) Notify Safari fihished. ( 2-nd try )")
-                    completion(error)
-                }
-                else {
-                    DDLogError("(SafariService)  \(bundleId) reload successeded with 2-nd try.")
-                    completion(nil)
-                }
-                
-                group.leave()
-            }
-            
-            group.wait()
-        }
-    }
+   
 }

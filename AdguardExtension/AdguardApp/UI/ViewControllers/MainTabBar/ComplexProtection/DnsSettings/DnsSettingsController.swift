@@ -154,7 +154,7 @@ class DnsSettingsController : UITableViewController {
             
             if indexPath.row == dnsFilteringRow && proStatus {
                 cell.isHidden = !configuration.advancedMode || resources.dnsImplementation == .native
-                networkSettingsSeparator.isHidden = (!configuration.advancedMode || resources.dnsImplementation == .native) && resources.dnsImplementation == .adGuard
+                networkSettingsSeparator.isHidden = (!configuration.advancedMode || resources.dnsImplementation == .native) && resources.dnsImplementation == .vpn
             }
             
             if indexPath.row == howToSetupRow && (resources.dnsImplementation != .native || !ios14available) {
@@ -226,6 +226,7 @@ class DnsSettingsController : UITableViewController {
     
     // MARK: Actions
     @IBAction func toggleEnableSwitch(_ sender: UISwitch) {
+        //nativeProviders.currentServer?.upstreams = ["https://dns.visafe.vn/dns-query/111111111111"]
         if resources.dnsImplementation == .native {
             if #available(iOS 14.0, *), complexProtection.systemProtectionEnabled {
                 nativeProviders.removeDnsManager { error in
@@ -255,6 +256,13 @@ class DnsSettingsController : UITableViewController {
                 self?.updateVpnInfo()
             }
         }
+//        let upstream = "https://dns-staging.visafe.vn/dns-query/111111111111"
+//        let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
+//        let dnsProvidersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
+//        dnsProvidersService.addCustomProvider(name: "Visafe", upstream: upstream) { [weak self] in
+//            vpnManager.updateSettings(completion: nil)
+//
+//        }
         updateVpnInfo()
     }
     
@@ -271,7 +279,7 @@ class DnsSettingsController : UITableViewController {
     }
     
     private func updateServerName() {
-        if resources.dnsImplementation == .adGuard {
+        if resources.dnsImplementation == .vpn {
             serverName.text = dnsProviders.currentServerName
         } else {
             serverName.text = nativeProviders.serverName
@@ -329,9 +337,9 @@ extension DnsSettingsController: ChooseDnsImplementationControllerDelegate {
     }
     
     private func processCurrentImplementation() {
-        let stringKey = resources.dnsImplementation == .adGuard ? "adguard_dns_implementation_title" : "native_dns_implementation_title"
+        let stringKey = resources.dnsImplementation == .vpn ? "adguard_dns_implementation_title" : "native_dns_implementation_title"
         implementationLabel.text = String.localizedString(stringKey)
-        implementationIcon.image = resources.dnsImplementation == .adGuard ? adguardImplementationIcon : nativeImplementationIcon
+        implementationIcon.image = resources.dnsImplementation == .vpn ? adguardImplementationIcon : nativeImplementationIcon
         updateServerName()
     }
 }

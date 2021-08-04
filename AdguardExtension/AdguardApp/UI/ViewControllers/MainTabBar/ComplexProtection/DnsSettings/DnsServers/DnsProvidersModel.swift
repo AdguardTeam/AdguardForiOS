@@ -91,7 +91,7 @@ class DnsProvidersModel: DnsProvidersModelProtocol {
         if providerId == DnsProvidersService.systemDefaultProviderId {
             return nil
         }
-        let providers = resources.dnsImplementation == .adGuard ? dnsProvidersService.allProviders : nativeProvidersService.providers
+        let providers = resources.dnsImplementation == .vpn ? dnsProvidersService.allProviders : nativeProvidersService.providers
         return providers.first(where: { $0.providerId == providerId })
     }
 }

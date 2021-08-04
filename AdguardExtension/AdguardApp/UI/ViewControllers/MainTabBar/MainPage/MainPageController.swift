@@ -18,7 +18,7 @@
 
 import UIKit
 
-class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfRequestsChangedDelegate, ComplexSwitchDelegate, OnboardingControllerDelegate, GetProControllerDelegate, MainPageModelDelegate {
+class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfRequestsChangedDelegate, ComplexSwitchDelegate,  GetProControllerDelegate, MainPageModelDelegate {
     
     var ready = false
     var onReady: (()->Void)? {
@@ -49,7 +49,6 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     
     @IBOutlet weak var safariProtectionButton: RoundRectButton!
     @IBOutlet weak var systemProtectionButton: RoundRectButton!
-    @IBOutlet weak var vpnUpsellButton: RoundRectButton!
     
     @IBOutlet weak var protectionStateLabel: ThemableLabel!
     @IBOutlet weak var protectionStatusLabel: ThemableLabel!
@@ -223,7 +222,6 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         }
         
         processDnsServerChange()
-        checkAdGuardVpnIsInstalled()
     }
         
     override func viewWillAppear(_ animated: Bool) {
@@ -258,17 +256,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return theme.statusbarStyle()
     }
-    
-    private func processContentBlockersHelper() {
-        if !configuration.someContentBlockersEnabled && !contentBlockerHelperWasShown {
-            showContentBlockersHelper()
-            contentBlockerHelperWasShown = true
-        } else {
-            ready = true
-            callOnready()
-        }
-    }
-
+  
     // MARK: - Actions
 
     
@@ -407,10 +395,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         hideContentBlockersInfo()
     }
     
-    @IBAction func fixItTapped(_ sender: UIButton) {
-        showContentBlockersHelper()
-    }
-    
+   
     // MARK: - ChartPointsChangedDelegate method
     
     func numberOfRequestsChanged(requestsCount: Int, encryptedCount: Int, averageElapsed: Double) {
@@ -558,23 +543,12 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     private func chooseElapsedTime(){
         ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("average_info_alert_title"), message: String.localizedString("average_info_alert_message"))
     }
-    
-    /**
-    Checks if AdGuard VPN is installed and changes VPN upsell button color
-    */
-    private func checkAdGuardVpnIsInstalled() {
-        vpnUpsellButton.buttonIsOn = UIApplication.adGuardVpnIsActive
-    }
-    
-    /**
-     Adds observers to controller
-     */
+ 
     private func addObservers(){
         
         appWillEnterForeground = NotificationCenter.default.observe(name: UIApplication.willEnterForegroundNotification, object: nil, queue: .main, using: {[weak self] (notification) in
             self?.updateProtectionStates()
             self?.updateProtectionStatusText()
-            self?.checkAdGuardVpnIsInstalled()
         })
         
         let proObservation = configuration.observe(\.proStatus) { [weak self] (_, _) in
@@ -582,11 +556,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
                 self?.processState()
             }
         }
-        
-        let contenBlockerObservation = configuration.observe(\.contentBlockerEnabled) {[weak self] (_, _) in
-            guard let self = self else { return }
-            self.observeContentBlockersState()
-        }
+     
         
         vpnConfigurationObserver = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: .main) { [weak self] _ in
             self?.updateProtectionStates()
@@ -603,7 +573,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         }
 
         observations.append(proObservation)
-        observations.append(contenBlockerObservation)
+        
     }
     
     /**
@@ -721,30 +691,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         self.complexProtectionSwitch.setOn(on: complexProtection.complexProtectionEnabled)
     }
     
-    /**
-    Checks state of content blockers
-     and updates UI
-    */
-    private func observeContentBlockersState() {
-        DDLogInfo("Content blockers states changed; allContentBlockersEnabled = \(configuration.allContentBlockersEnabled)")
-        if configuration.allContentBlockersEnabled {
-            hideContentBlockersInfo()
-        } else {
-            showContentBlockersInfo()
-        }
-        
-        let onboardingShown = resources.sharedDefaults().bool(forKey: OnboardingWasShown)
-        
-        DDLogInfo("Content blockers states changed; onboardingShown = \(onboardingShown); onBoardingIsInProcess = \(onBoardingIsInProcess)")
-        if !onBoardingIsInProcess {
-            if !onboardingShown {
-                showOnboarding()
-            } else {
-                processContentBlockersHelper()
-            }
-        }
-    }
-
+    
     /**
      Shows iPad content blockers info
      */
@@ -821,30 +768,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         }
     }
     
-    private func showOnboarding() {
-        DispatchQueue.main.async { [weak self] in
-            let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-            if let navController = storyboard.instantiateViewController(withIdentifier: "OnboardingNavigationController") as? UINavigationController {
-                if let controller = navController.viewControllers.first as? IntroductionOnboardingController {
-                    controller.delegate = self
-                }
-                self?.onBoardingIsInProcess = true
-                self?.present(navController, animated: true)
-            }
-        }
-    }
-    
-    private func showContentBlockersHelper(){
-        DispatchQueue.main.async { [weak self] in
-            let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-            if let navController = storyboard.instantiateViewController(withIdentifier: "OnboardingNavigationController") as? UINavigationController, let controller = storyboard.instantiateViewController(withIdentifier: "OnboardingController") as? OnboardingController{
-                navController.viewControllers = [controller]
-                controller.delegate = self
-                controller.needsShowingPremium = false
-                self?.present(navController, animated: true)
-            }
-        }
-    }
+  
     
     private func callOnready() {
         onReady?()

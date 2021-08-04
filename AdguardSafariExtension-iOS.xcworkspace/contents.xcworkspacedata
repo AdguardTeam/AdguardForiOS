@@ -20,7 +20,4 @@
    <FileRef
       location = "container:AdguardExtension/Adguard.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:classStyleTemplate.txt">
-   </FileRef>
 </Workspace>

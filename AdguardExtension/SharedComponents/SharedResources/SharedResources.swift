@@ -203,9 +203,9 @@ extension AESharedResourcesProtocol {
     dynamic var dnsImplementation: DnsImplementation {
         get {
             if let savedImplementation = sharedDefaults().object(forKey: DnsImplementationKey) as? Int {
-                return DnsImplementation(rawValue: savedImplementation) ?? .adGuard
+                return DnsImplementation(rawValue: savedImplementation) ?? .vpn
             }
-            return .adGuard
+            return .vpn
         }
         set {
             if dnsImplementation != newValue {

@@ -327,7 +327,7 @@ final class BackgroundFetchPerformer: IBackgroundFetchPerformer {
     private func updateTunnelSettingsIfAppropriate(callback: @escaping ()->Void ) {
         vpnManager.getConfigurationStatus { [weak self] (status) in
             guard let self = self else { return }
-            if self.complexProtection.systemProtectionEnabled, self.resources.dnsImplementation == .adGuard, status.configurationIsActive, self.dnsFiltersService.enabledFiltersCount > 0 {
+            if self.complexProtection.systemProtectionEnabled, self.resources.dnsImplementation == .vpn, status.configurationIsActive, self.dnsFiltersService.enabledFiltersCount > 0 {
                 self.vpnManager.updateSettings { _ in
                     callback()
                 }

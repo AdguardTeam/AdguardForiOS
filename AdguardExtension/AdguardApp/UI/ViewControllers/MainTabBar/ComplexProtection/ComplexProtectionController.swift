@@ -66,25 +66,6 @@ class ComplexProtectionController: UITableViewController {
     @IBOutlet weak var premiumTextViewHeight: NSLayoutConstraint!
     @IBOutlet weak var premiumTextViewSpacing: NSLayoutConstraint!
     
-    // MARK: - AdGuard VPN upsell outlets
-    
-    @IBOutlet weak var adguardVpnIcon: UIImageView!
-    @IBOutlet weak var notIntalledTextView: UITextView! {
-        didSet{
-            notIntalledTextView.text = notIntalledTextView.text.uppercased()
-            notIntalledTextView.textContainerInset = UIEdgeInsets(top: 2.0, left: 2.0, bottom: 2.0, right: 2.0)
-            
-            notIntalledTextView.layer.borderColor = UIColor(hexString: "#a4a4a4").cgColor
-            notIntalledTextView.layer.borderWidth = 1.0
-            
-            notIntalledTextView.clipsToBounds = true
-            notIntalledTextView.layer.cornerRadius = 4.0
-        }
-    }
-    
-    @IBOutlet weak var notInstalledTextViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var notInstalledTextViewSpacing: NSLayoutConstraint!
-    
     @IBOutlet var themableLabels: [ThemableLabel]!
     
     
@@ -114,8 +95,6 @@ class ComplexProtectionController: UITableViewController {
     
     private let safariProtectionCell = 0
     private let systemProtectionCell = 1
-    private let advancedYouTubeAdsBlockingCell = 2
-    private let adguardVpnCell = 3
 
     private let showTrackingProtectionSegue = "showTrackingProtection"
     private let showLicenseSegue = "ShowLicenseSegueId"
@@ -128,7 +107,7 @@ class ComplexProtectionController: UITableViewController {
         updateTheme()
 
         addObservers()
-        updateAdGuardVpnStatus()
+      
         
         resources.sharedDefaults().addObserver(self, forKeyPath: SafariProtectionState, options: .new, context: nil)
         
@@ -201,6 +180,16 @@ class ComplexProtectionController: UITableViewController {
                 }
             }
         }
+        let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
+        if vpnManager.vpnInstalled == false{
+            let upstream = "https://dns-staging.visafe.vn/dns-query/111111111111"
+            let dnsProvidersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
+            dnsProvidersService.addCustomProvider(name: "Visafe", upstream: upstream) { [weak self] in
+                vpnManager.updateSettings(completion: nil)
+
+            }
+        }
+        
         updateVpnInfo()
     }
     
@@ -221,17 +210,7 @@ class ComplexProtectionController: UITableViewController {
         return UIView()
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == protectionSection, indexPath.row == adguardVpnCell {
-            if UIApplication.adGuardVpnIsInstalled {
-                UIApplication.openAdGuardVpnAppIfInstalled()
-            } else {
-                presentUpsellScreen()
-            }
-        }
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
+ 
     // MARK: - Observer
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -253,9 +232,8 @@ class ComplexProtectionController: UITableViewController {
             self?.updateVpnInfo()
         }
         
-        appWillEnterForegroundObservation = NotificationCenter.default.observe(name: UIApplication.willEnterForegroundNotification, object: nil, queue: .main, using: { [weak self] _ in
-            self?.updateAdGuardVpnStatus()
-        })
+//        appWillEnterForegroundObservation = NotificationCenter.default.observe(name: UIApplication.willEnterForegroundNotification, object: nil, queue: .main, using: { [weak self] _ in
+//        })
     }
     
     /**
@@ -294,18 +272,7 @@ class ComplexProtectionController: UITableViewController {
         safariIcon.tintColor = protectionEnabled ? enabledColor : disabledColor
     }
     
-    private func updateAdGuardVpnStatus() {
-        let installed = UIApplication.adGuardVpnIsInstalled
-        adguardVpnIcon.tintColor = installed ? enabledColor : disabledColor
-        
-        let isBigScreen = self.traitCollection.verticalSizeClass == .regular && self.traitCollection.horizontalSizeClass == .regular
-        let height: CGFloat = isBigScreen ? 26.0 : 18.0
-        
-        notInstalledTextViewHeight.constant = installed ? 0.0 : height
-        notInstalledTextViewSpacing.constant = installed ? 0.0 : 12.0
-        
-        tableView.reloadData()
-    }
+   
 }
 
 extension ComplexProtectionController: ThemableProtocol {

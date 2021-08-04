@@ -49,7 +49,7 @@ class ChooseDnsImplementationController: BottomAlertController {
     // MARK: - Private methods
     
     @IBAction func adGuardSelected(_ sender: UIButton) {
-        resources.dnsImplementation = .adGuard
+        resources.dnsImplementation = .vpn
         delegate?.currentImplementationChanged()
         processCurrentImplementation()
         if #available(iOS 14.0, *) {
@@ -70,7 +70,7 @@ class ChooseDnsImplementationController: BottomAlertController {
     private func processCurrentImplementation() {
         let implementation = resources.dnsImplementation
         
-        adGuardButton.isSelected = implementation == .adGuard
+        adGuardButton.isSelected = implementation == .vpn
         nativeButton.isSelected = implementation == .native
     }
 }

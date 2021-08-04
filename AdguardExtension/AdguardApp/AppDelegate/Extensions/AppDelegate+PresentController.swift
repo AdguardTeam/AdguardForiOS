@@ -357,45 +357,6 @@ extension AppDelegate {
         return true
     }
     
-    /*
-     Presents RateAppController
-     */
-    func presentRateAppController() {
-        guard let topVC = Self.topViewController() else {
-            DDLogError("Failed to get top view controller")
-            return
-        }
-        let rateAppStoryboard = UIStoryboard(name: "RateApp", bundle: nil)
-        guard let rateAppController = rateAppStoryboard.instantiateViewController(withIdentifier: "RateAppController") as? RateAppController else {
-            DDLogError("RateApp.storyboard doesnt't have RateAppController")
-            return
-        }
-        // Check if VC does not present any controller
-        if topVC.presentedViewController == nil {
-            topVC.present(rateAppController, animated: true)
-            return
-        }
-    }
-    
-    /*
-     Presents RateAppProblemController
-     */
-    func presentRateAppProblemController() {
-        guard let topVC = Self.topViewController() else {
-            DDLogError("Failed to get top view controller")
-            return
-        }
-        let rateAppStoryboard = UIStoryboard(name: "RateApp", bundle: nil)
-        guard let rateAppController = rateAppStoryboard.instantiateViewController(withIdentifier: "RateAppProblemController") as? RateAppProblemController else {
-            DDLogError("RateApp.storyboard doesnt't have RateAppProblemController")
-            return
-        }
-        // Check if VC does not present any controller
-        if topVC.presentedViewController == nil {
-            topVC.present(rateAppController, animated: true)
-            return
-        }
-    }
     
     func presentBugReportController(withType type: ReportType) {
         guard let tabBar = getMainTabController() else {

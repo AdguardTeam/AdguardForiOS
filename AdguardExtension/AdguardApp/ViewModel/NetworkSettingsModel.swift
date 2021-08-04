@@ -41,7 +41,7 @@ class NetworkSettingsModel: NetworkSettingsModelProtocol {
         }
         set {
             networkSettingsService.filterWifiDataEnabled = newValue
-            if resources.dnsImplementation == .adGuard {
+            if resources.dnsImplementation == .vpn {
                 vpnManager.updateSettings(completion: nil)
             } else {
                 if #available(iOS 14.0, *) {
@@ -57,7 +57,7 @@ class NetworkSettingsModel: NetworkSettingsModelProtocol {
         }
         set {
             networkSettingsService.filterMobileDataEnabled = newValue
-            if resources.dnsImplementation == .adGuard {
+            if resources.dnsImplementation == .vpn {
                 vpnManager.updateSettings(completion: nil)
             } else {
                 if #available(iOS 14.0, *) {

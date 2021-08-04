@@ -72,7 +72,7 @@ class NewDnsServerController: BottomAlertController {
             upstreamsField.text = provider?.servers?.first?.upstreams.first ?? ""
         }
         else if openUrl != nil {
-            if resources.dnsImplementation == .adGuard {
+            if resources.dnsImplementation == .vpn {
                 upstreamsField.text = openUrl
             } else {
                 // Native DNS implementation doesn't support port syntax
@@ -106,7 +106,7 @@ class NewDnsServerController: BottomAlertController {
     }
     
     private func checkForValidNativeImplementationProtocol(upstream: String) -> Bool {
-        if resources.dnsImplementation == .adGuard { return true }
+        if resources.dnsImplementation == .vpn { return true }
         
         let dnsProtocol = DnsProtocol.getProtocolByUpstream(upstream)
         if NativeProvidersService.supportedProtocols.contains(dnsProtocol) {

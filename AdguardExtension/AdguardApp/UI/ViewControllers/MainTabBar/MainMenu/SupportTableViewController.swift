@@ -92,8 +92,6 @@ class SupportTableViewController: UITableViewController {
             showBugReportController(.feedback)
         case (optionsSection, discussRow):
             UIApplication.shared.openAdguardUrl(action: "discuss", from: "support", buildVersion: productInfo.buildVersion())
-        case (optionsSection, rateAppRow):
-            rateAppRowTapped()
         case (optionsSection, exportLogsRow):
             exportLogsTapped()
         default:
@@ -112,10 +110,6 @@ class SupportTableViewController: UITableViewController {
     private func reportIncorrectBlockingRowTapped() {
         let reportUrl = webReporter.composeWebReportUrl(nil)
         UIApplication.shared.open(reportUrl, options: [:], completionHandler: nil)
-    }
-    
-    private func rateAppRowTapped() {
-        AppDelegate.shared.presentRateAppController()
     }
     
     private func exportLogsTapped() {

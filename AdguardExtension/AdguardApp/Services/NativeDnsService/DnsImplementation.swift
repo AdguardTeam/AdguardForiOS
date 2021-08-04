@@ -19,6 +19,6 @@
 import Foundation
 
 enum DnsImplementation: Int {
-    case adGuard = 0
+    case vpn = 0
     case native
 }

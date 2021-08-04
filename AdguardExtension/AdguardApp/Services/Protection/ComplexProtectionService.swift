@@ -56,7 +56,7 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     let safariProtection: SafariProtectionServiceProtocol
     
     var systemProtectionEnabled: Bool {
-        if resources.dnsImplementation == .adGuard {
+        if resources.dnsImplementation == .vpn {
             return proStatus
                 && resources.systemProtectionEnabled
                 && resources.complexProtectionEnabled
@@ -114,7 +114,7 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         
         if enabled && !safariEnabled && !systemEnabled {
             resources.safariProtectionEnabled = true
-            if resources.dnsImplementation == .adGuard {
+            if resources.dnsImplementation == .vpn {
                 resources.systemProtectionEnabled = proStatus
             }
         }
@@ -130,7 +130,7 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         }
         
         // We can't control native DNS configuration, we can only check it's state
-        let shouldUpdateSystemProtection = resources.dnsImplementation == .adGuard
+        let shouldUpdateSystemProtection = resources.dnsImplementation == .vpn
         
         updateProtections(safari: true, system: shouldUpdateSystemProtection, vc: VC) { [weak self] (safariError, systemError) in
             guard let self = self else { return }
@@ -350,7 +350,7 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
             DDLogInfo("(ComplexProtectionService) dnsImplementationChanged called")
             guard let self = self else { return }
         
-            if self.resources.dnsImplementation == .adGuard {
+            if self.resources.dnsImplementation == .vpn {
                 self.checkVpnInstalled()
             } else {
                 self.switchSystemProtectionInternal(state: false, for: nil) { [weak self] error in
