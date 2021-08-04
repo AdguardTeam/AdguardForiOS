@@ -93,6 +93,7 @@ class AdvancedSettingsController: UITableViewController {
         resources.isDebugLogs = isDebugLogs
         DDLogInfo("Log level changed to \(isDebugLogs ? "DEBUG" : "Normal")")
         ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
+        AGLogger.setLevel(isDebugLogs ? .AGLL_TRACE : .AGLL_INFO)
         vpnManager.updateSettings(completion: nil) // restart tunnel to apply new log level
     }
     
