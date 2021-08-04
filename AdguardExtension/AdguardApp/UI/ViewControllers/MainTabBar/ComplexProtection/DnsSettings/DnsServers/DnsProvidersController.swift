@@ -110,12 +110,6 @@ class DnsProvidersController: UITableViewController {
             cell.tag = indexPath.row
             return cell
             
-        case addProviderSection :
-            let reuseId = "AddServer"
-            let cell = tableView.dequeueReusableCell(withIdentifier: reuseId) ?? UITableViewCell()
-            theme.setupTableCell(cell)
-            return cell
-            
         default:
             assertionFailure("unknown tableview section")
             return UITableViewCell()
@@ -128,15 +122,13 @@ class DnsProvidersController: UITableViewController {
             return 1
         case providerSection:
             return providers.count
-        case addProviderSection:
-            return 1
         default:
             return 0
         }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -159,32 +151,12 @@ class DnsProvidersController: UITableViewController {
                 model.setServerAsActive(nil)
                 return
             }
-            
-            if provider.isCustomProvider {
-                editProvider(provider)
-                return
-            } else {
-                providerToShow = provider
-                performSegue(withIdentifier: "dnsDetailsSegue", sender: self)
-            }
        
         case addProviderSection:
             showNewServer()
             
         default:
             break
-        }
-    }
-        
-    // MARK: - private methods
-    
-    private func editProvider(_ provider: DnsProviderCellModel) {
-        guard let controller = storyboard?.instantiateViewController(withIdentifier: "NewDnsServerController") as? NewDnsServerController else { return }
-        if let id = provider.providerId, let providerInfo = model.getProvider(byId: id) {
-            controller.controllerType = .edit
-            controller.provider = providerInfo
-            controller.delegate = self
-            present(controller, animated: true, completion: nil)
         }
     }
     

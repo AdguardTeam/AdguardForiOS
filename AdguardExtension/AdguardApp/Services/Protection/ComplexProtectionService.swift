@@ -29,12 +29,12 @@ protocol ComplexProtectionServiceProtocol: class {
     func switchComplexProtection(state enabled: Bool, for VC: UIViewController?,  completion: @escaping (_ safariError: Error?,_ systemError: Error?)->Void)
     
     // Turns on/off safari protection
-    func switchSafariProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (Error?)->Void)
+//     func switchSafariProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (Error?)->Void)
     
     // Turns on/off tracking protection
     func switchSystemProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (Error?)->Void)
     
-    var safariProtectionEnabled: Bool { get }
+//    var safariProtectionEnabled: Bool { get }
     var systemProtectionEnabled: Bool { get }
     var complexProtectionEnabled: Bool { get }
 }

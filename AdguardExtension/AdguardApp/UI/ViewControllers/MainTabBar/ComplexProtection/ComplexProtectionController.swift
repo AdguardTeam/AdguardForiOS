@@ -110,14 +110,11 @@ class ComplexProtectionController: UITableViewController {
       
         
         resources.sharedDefaults().addObserver(self, forKeyPath: SafariProtectionState, options: .new, context: nil)
-        
-        freeTextView.text = freeTextView.text.uppercased()
         premiumTextView.text = premiumTextView.text.uppercased()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateSafariProtectionInfo()
         observeProStatus()
         updateVpnInfo()
     }
@@ -134,11 +131,11 @@ class ComplexProtectionController: UITableViewController {
     
     // MARK: - Actions
 
-    @IBAction func safariProtectionChanged(_ sender: UISwitch) {
-        let enabled = sender.isOn
-        complexProtection.switchSafariProtection(state: enabled, for: self) { _ in }
-        updateSafariProtectionInfo()
-    }
+//    @IBAction func safariProtectionChanged(_ sender: UISwitch) {
+//        let enabled = sender.isOn
+//        complexProtection.switchSafariProtection(state: enabled, for: self) { _ in }
+//        updateSafariProtectionInfo()
+//    }
     
     @IBAction func systemProtectionChanged(_ sender: UISwitch) {
         if resources.dnsImplementation == .native {
@@ -213,11 +210,7 @@ class ComplexProtectionController: UITableViewController {
  
     // MARK: - Observer
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == SafariProtectionState {
-            updateSafariProtectionInfo()
-        }
-    }
+  
     
     // MARK: - Private methods
     
@@ -246,10 +239,8 @@ class ComplexProtectionController: UITableViewController {
             let isBigScreen = self.traitCollection.verticalSizeClass == .regular && self.traitCollection.horizontalSizeClass == .regular
             let height: CGFloat = isBigScreen ? 26.0 : 18.0
             
-            self.freeTextViewHeight.constant = self.proStatus ? 0.0 : height
             self.premiumTextViewHeight.constant = self.proStatus ? 0.0 : height
             
-            self.freeTextViewSpacing.constant = self.proStatus ? 0.0 : 12.0
             self.premiumTextViewSpacing.constant = self.proStatus ? 0.0 : 12.0
             
             self.tableView.reloadData()
@@ -264,15 +255,7 @@ class ComplexProtectionController: UITableViewController {
         systemProtectionSwitch.isOn = enabled
         systemIcon.tintColor = enabled ? enabledColor : disabledColor
         tableView.reloadData()
-    }
-    
-    private func updateSafariProtectionInfo(){
-        let protectionEnabled = complexProtection.safariProtectionEnabled
-        safariProtectionSwitch.isOn = protectionEnabled
-        safariIcon.tintColor = protectionEnabled ? enabledColor : disabledColor
-    }
-    
-   
+    }  
 }
 
 extension ComplexProtectionController: ThemableProtocol {
@@ -280,8 +263,6 @@ extension ComplexProtectionController: ThemableProtocol {
         view.backgroundColor = theme.backgroundColor
         premiumTextView.backgroundColor = theme.invertedBackgroundColor
         premiumTextView.textColor = theme.backgroundColor
-
-        theme.setupSwitch(safariProtectionSwitch)
         theme.setupSwitch(systemProtectionSwitch)
         theme.setupTable(tableView)
         theme.setupNavigationBar(navigationController?.navigationBar)

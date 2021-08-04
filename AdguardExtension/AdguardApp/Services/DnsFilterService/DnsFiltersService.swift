@@ -90,7 +90,7 @@ protocol DnsFiltersServiceProtocol {
 
 @objc(DnsFilter)
 @objcMembers
-class DnsFilter: NSObject, NSCoding, FilterDetailedInterface {
+class DnsFilter: NSObject, NSCoding{
     
     static let userFilterId = 1
     static let whitelistFilterId = 2

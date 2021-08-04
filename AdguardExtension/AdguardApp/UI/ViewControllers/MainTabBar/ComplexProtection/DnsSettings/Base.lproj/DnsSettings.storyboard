@@ -20,7 +20,7 @@
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="VE8-I7-1eE">
-                            <rect key="frame" x="0.0" y="1239.0000010403719" width="414" height="1"/>
+                            <rect key="frame" x="0.0" y="1238.6818190487948" width="414" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -684,9 +684,6 @@
                                                     <variation key="heightClass=regular-widthClass=regular">
                                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     </variation>
-                                                    <connections>
-                                                        <segue destination="Tdq-in-4Ws" kind="show" id="8cE-On-CMn"/>
-                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Security filters, DNS privacy, custom filters, etc." textAlignment="center" lineBreakMode="clip" numberOfLines="0" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="pY3-X6-fFy" customClass="ThemableLabel" customModule="Adguard_Pro" customModuleProvider="target">
                                                     <rect key="frame" x="24" y="32" width="366" height="19.5"/>
@@ -732,6 +729,7 @@
                             <outlet property="delegate" destination="So5-wP-aAQ" id="f5R-fO-wuO"/>
                         </connections>
                     </tableView>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="dnsFilteringSeparator" destination="U2h-dr-Q48" id="IxX-ka-2uP"/>
                         <outlet property="dnsServerSeparator" destination="euy-BK-FVm" id="j1R-wf-1yx"/>
@@ -1111,7 +1109,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="RequestsBlockingController" id="6xC-0w-wab" customClass="RequestsBlockingController" customModule="Adguard_Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="7n9-Hj-1hJ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -1461,7 +1459,7 @@
                         <color key="tintColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="a2t-rG-DMO">
-                            <rect key="frame" x="0.0" y="257.00000034679067" width="414" height="0.0"/>
+                            <rect key="frame" x="0.0" y="200.50000034679067" width="414" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -1606,52 +1604,6 @@
                                     <outlet property="selectedButton" destination="DzF-Qn-Xxp" id="y6F-6p-AWc"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddServer" id="JQg-e2-CBx">
-                                <rect key="frame" x="0.0" y="176" width="414" height="56.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JQg-e2-CBx" id="TOz-o6-rxt">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="56.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" translatesAutoresizingMaskIntoConstraints="NO" id="ZSp-mD-pjg">
-                                            <rect key="frame" x="16" y="16" width="24" height="24.5"/>
-                                            <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="24" id="CVl-Sa-17f"/>
-                                                <constraint firstAttribute="height" constant="24" id="Hx6-pn-HXe"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a custom DNS server" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1u-rO-z2K">
-                                            <rect key="frame" x="56" y="18.5" width="342" height="19.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                            <variation key="heightClass=regular-widthClass=regular">
-                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                            </variation>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="ZSp-mD-pjg" secondAttribute="bottom" constant="16" id="3Of-Aj-V25">
-                                            <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                        </constraint>
-                                        <constraint firstAttribute="trailing" secondItem="d1u-rO-z2K" secondAttribute="trailing" constant="16" id="67l-z6-oqI"/>
-                                        <constraint firstItem="d1u-rO-z2K" firstAttribute="leading" secondItem="ZSp-mD-pjg" secondAttribute="trailing" constant="16" id="6ll-fU-YJy">
-                                            <variation key="heightClass=regular-widthClass=regular" constant="24"/>
-                                        </constraint>
-                                        <constraint firstItem="ZSp-mD-pjg" firstAttribute="leading" secondItem="TOz-o6-rxt" secondAttribute="leading" constant="16" id="7p2-9D-UhK">
-                                            <variation key="heightClass=regular-widthClass=regular" constant="24"/>
-                                        </constraint>
-                                        <constraint firstItem="ZSp-mD-pjg" firstAttribute="top" secondItem="TOz-o6-rxt" secondAttribute="top" constant="16" id="A4Q-qT-I1L">
-                                            <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                        </constraint>
-                                        <constraint firstItem="d1u-rO-z2K" firstAttribute="centerY" secondItem="ZSp-mD-pjg" secondAttribute="centerY" id="vgH-13-405"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="5ol-3D-VBk" id="yKH-8E-GFX"/>
@@ -1671,7 +1623,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="DnsFiltersController" id="MAM-dm-Y5w" customClass="DnsFiltersController" customModule="Adguard_Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="1gf-a6-Dh3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -3247,16 +3199,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ehj-Jx-SeY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5631.884057971015" y="-137.27678571428569"/>
-        </scene>
-        <!--License-->
-        <scene sceneID="YTP-Ek-qXw">
-            <objects>
-                <viewControllerPlaceholder storyboardName="License" id="Tdq-in-4Ws" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="u9q-OT-CoA"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="36m-PW-jU4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-996" y="6"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

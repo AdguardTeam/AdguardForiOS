@@ -64,52 +64,11 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
         let group = DispatchGroup()
         
         resultSettings.defaultCbFilters = resultFilters
-        
-        var resultCbFilters:[CustomCBFilterSettings] = []
-        
-        let customFilters = filtersService.groups.filter { $0.groupId == FilterGroupId.custom }.flatMap { $0.filters }
-        let customDnsFilters = dnsFiltersService.filters
-        
-        let customCbFilters = settings.customCbFilters?.uniqueElements { $0.url }
-        let dnsCustomFilters = settings.dnsFilters?.uniqueElements { $0.url }
-
-        var uniqueCBFilterSettings = [CustomCBFilterSettings]()
-        var uniqueCustomDnsFilterSettings = [DnsFilterSettings]()
-        
-        // custom cb filters
-        if let cbFilters = customCbFilters {
-            guard let uniqueFilters = uniqueCustomFilterSettings(filters: customFilters, filterSettings: cbFilters) as? [CustomCBFilterSettings] else { return }
-            uniqueCBFilterSettings = uniqueFilters
-        }
-    
-        for var filter in uniqueCBFilterSettings {
-            if filter.status == .enabled {
-                group.enter()
-                subscribeCustomCBFilter(filter) { (success) in
-                    filter.status = success ? .successful : .unsuccessful
-                    resultCbFilters.append(filter)
-                    group.leave()
-                }
-            }
-            else {
-                resultCbFilters.append(filter)
-            }
-        }
-        
+               
+       
         group.wait()
         
-        resultSettings.customCbFilters = resultCbFilters
         
-        // custom dns filters
-        
-        if let dnsFilters = dnsCustomFilters {
-            guard let uniqueFilters = uniqueCustomFilterSettings(filters: customDnsFilters, filterSettings: dnsFilters) as? [DnsFilterSettings] else { return }
-            uniqueCustomDnsFilterSettings = uniqueFilters
-        }
-        
-        
-        let resultDnsFilters = applyDnsFilters(uniqueCustomDnsFilterSettings, override: settings.overrideDnsFilters ?? false)
-        resultSettings.dnsFilters = resultDnsFilters
         
         // set dns server
         if let dnsServerId = settings.dnsServerId {
@@ -280,13 +239,5 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
         }
     }
     
-    private func uniqueCustomFilterSettings(filters: [FilterDetailedInterface], filterSettings: [CustomFilterSettingsProtocol] ) -> [Any] {
-        var result = [CustomFilterSettingsProtocol]()
-            for cbFilter in filterSettings {
-                if !filters.contains(where: { $0.subscriptionUrl == cbFilter.url }) {
-                    result.append(cbFilter)
-                }
-            }
-        return result
-    }
+ 
 }

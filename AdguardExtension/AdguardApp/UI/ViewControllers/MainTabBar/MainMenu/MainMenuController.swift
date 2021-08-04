@@ -47,27 +47,13 @@ class MainMenuController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateTheme()
-        updateServerName()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         settingsImageView.image = UIImage(named: "advanced-settings-icon")
-        
-        let updateFilters: ()->() = { [weak self] in
-            guard let self = self else { return }
-            let safariFiltersTextFormat = String.localizedString("safari_filters_format")
-            self.safariProtectionLabel.text = String.localizedStringWithFormat(safariFiltersTextFormat, self.filtersService.activeFiltersCount)
-        }
 
-        activeFiltersCountObservation = (filtersService as! FiltersService).observe(\.activeFiltersCount) { (_, _) in
-            updateFilters()
-        }
-        
-        updateFilters()
-        
-       
     }
     
     // MARK: - table view cells
@@ -86,21 +72,6 @@ class MainMenuController: UITableViewController {
         return 0.01
     }
     
-    
-    
-    // MARK: - private methods
-    
-    private func updateServerName() {
-        if proStatus {
-            if resources.dnsImplementation == .vpn {
-                systemProtectionLabel.text = dnsProviders.currentServerName
-            } else {
-                systemProtectionLabel.text = nativeProviders.serverName
-            }
-        } else {
-            systemProtectionLabel.text = String.localizedString("system_dns_server")
-        }
-    }
 }
 
 extension MainMenuController: ThemableProtocol {

@@ -106,7 +106,7 @@ class ComplexProtectionSwitch: UIControl {
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         super.beginTracking(touch, with: event)
         
-        initialSwitchState = isOn
+        initialSwitchState = !isOn
         
         delegate?.beginTracking()
         

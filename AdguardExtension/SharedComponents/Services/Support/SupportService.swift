@@ -205,7 +205,6 @@ class SupportService: SupportServiceProtocol {
         Pro feature \(configuration.proStatus ? "ENABLED" : "DISABLED").
         
         Complex protection enabled: \(complexProtection.complexProtectionEnabled)
-        Safari protection enabled: \(complexProtection.safariProtectionEnabled)
         System protection enabled: \(complexProtection.systemProtectionEnabled)
         Tunnel mode \(tunnelMode)
         DNS server: \(server?.name ?? "System default")

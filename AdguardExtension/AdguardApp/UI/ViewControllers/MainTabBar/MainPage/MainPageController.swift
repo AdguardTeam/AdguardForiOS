@@ -18,7 +18,7 @@
 
 import UIKit
 
-class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfRequestsChangedDelegate, ComplexSwitchDelegate,  GetProControllerDelegate, MainPageModelDelegate {
+class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfRequestsChangedDelegate, ComplexSwitchDelegate,   MainPageModelDelegate {
     
     var ready = false
     var onReady: (()->Void)? {
@@ -47,7 +47,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
 
     // MARK: - Protection status elements
     
-    @IBOutlet weak var safariProtectionButton: RoundRectButton!
+//    @IBOutlet weak var safariProtectionButton: RoundRectButton!
     @IBOutlet weak var systemProtectionButton: RoundRectButton!
     
     @IBOutlet weak var protectionStateLabel: ThemableLabel!
@@ -111,14 +111,9 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     
     // MARK: - Constraints to change for iphone SE - like devices
     
-    @IBOutlet weak var safariIconHeight: NSLayoutConstraint!
-    @IBOutlet weak var safariIconWidth: NSLayoutConstraint!
-    
     @IBOutlet weak var systemIconWidth: NSLayoutConstraint!
     @IBOutlet weak var systemIconHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var vpnPromoIconWidth: NSLayoutConstraint!
-    @IBOutlet weak var vpnPromoIconHeight: NSLayoutConstraint!
     
     @IBOutlet weak var safariIconCenterSpace: NSLayoutConstraint!
     @IBOutlet weak var systemIconCenterSpace: NSLayoutConstraint!
@@ -200,10 +195,9 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         setupVoiceOverLabels()
     
         chartModel.chartPointsChangedDelegates.append(self)
-        complexProtectionSwitch.delegate = self
+//        complexProtectionSwitch.delegate = self
         mainPageModel.delegate = self
         
-        dateTypeChanged(dateType: resources.chartDateType)
         
         contentBlockersGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleContentBlockersView(_:)))
         if let recognizer = contentBlockersGestureRecognizer {
@@ -277,25 +271,6 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         }
     }
     
-    // MARK: - Protection Status Actions
-    
-    @IBAction func changeSafariProtectionState(_ sender: RoundRectButton) {
-        safariProtectionButton.buttonIsOn = !safariProtectionButton.buttonIsOn
-    
-        applyingChangesStarted()
-        complexProtection.switchSafariProtection(state: safariProtectionButton.buttonIsOn, for: self) { [weak self] error in
-            DispatchQueue.main.async {
-                guard let self = self else { return }
-                self.applyingChangesEnded()
-                
-                if error != nil {
-                    ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: error?.localizedDescription)
-                }
-            }
-        }
-        updateProtectionStates()
-    }
-    
     @IBAction func changeSystemProtectionState(_ sender: RoundRectButton) {
         if resources.dnsImplementation == .native {
             if systemProtectionButton.buttonIsOn {
@@ -340,13 +315,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         updateProtectionStates()
     }
     
-    @IBAction func vpnUpsellTapped(_ sender: RoundRectButton) {
-        if UIApplication.adGuardVpnIsInstalled {
-            UIApplication.openAdGuardVpnAppIfInstalled()
-        } else {
-            presentUpsellScreen()
-        }
-    }
+
     
     // MARK: - Complex protection switch action
     
@@ -405,7 +374,6 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     // MARK: - DateTypeChangedProtocol method
     
     func dateTypeChanged(dateType: ChartDateType) {
-        resources.chartDateType = dateType
         changeStatisticsDatesButton.setTitle(dateType.getDateTypeString(), for: .normal)
         chartModel.chartDateType = dateType
     }
@@ -661,23 +629,23 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         
         let complexText: String
         
-        switch (complexProtection.safariProtectionEnabled, complexProtection.systemProtectionEnabled, complexProtection.complexProtectionEnabled) {
-        case (true, true, true):
+        switch ( complexProtection.systemProtectionEnabled, complexProtection.complexProtectionEnabled) {
+        case (true, true):
             complexText = ACLocalizedString("complex_enabled", nil)
-        case (_, _, false):
+        case ( _, false):
             complexText = ACLocalizedString("complex_disabled", nil)
-        case (true, _, _):
+        case ( _, _):
             complexText = ACLocalizedString("safari_enabled", nil)
-        case (_, true, _):
+        case (true, _):
             complexText = ACLocalizedString("system_enabled", nil)
-        case (false, false, true):
+        case (false, true):
             // incorrect state
             complexText = ""
         }
         
         protectionStatusLabel.text = safariUpdateEnded && dnsUpdateEnded ? complexText : String.localizedString("update_filter_start_message")
-        complexProtectionSwitch.accessibilityLabel = safariUpdateEnded && dnsUpdateEnded ? complexText : String.localizedString("update_filter_start_message")
-        
+//        complexProtectionSwitch.accessibilityLabel = safariUpdateEnded && dnsUpdateEnded ? complexText : String.localizedString("update_filter_start_message")
+//        
         nativeDnsTitleLabel.text = complexProtection.systemProtectionEnabled ? String.localizedString("native_dns_working") : String.localizedString("native_dns_not_working")
     }
     
@@ -685,10 +653,10 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         let enabledText = complexProtection.complexProtectionEnabled ? ACLocalizedString("protection_enabled", nil) : ACLocalizedString("protection_disabled", nil)
         protectionStateLabel.text = enabledText
         
-        self.safariProtectionButton.buttonIsOn = complexProtection.safariProtectionEnabled
+//        self.safariProtectionButton.buttonIsOn = complexProtection.safariProtectionEnabled
         self.systemProtectionButton.buttonIsOn = complexProtection.systemProtectionEnabled
         self.chartView.isEnabled = complexProtection.systemProtectionEnabled
-        self.complexProtectionSwitch.setOn(on: complexProtection.complexProtectionEnabled)
+//        self.complexProtectionSwitch.setOn(on: complexProtection.complexProtectionEnabled)
     }
     
     
@@ -784,16 +752,13 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         fixItIphoneButton.titleLabel?.font = UIFont.systemFont(ofSize: 11.0, weight: .bold)
         manDialogText.font = UIFont.systemFont(ofSize: 19.0, weight: .regular)
         
-        safariIconHeight.constant = 24.0
-        safariIconWidth.constant = 24.0
+        
+    
         
         systemIconWidth.constant = 24.0
         systemIconHeight.constant = 24.0
+   
         
-        vpnPromoIconWidth.constant = 24.0
-        vpnPromoIconHeight.constant = 24.0
-        
-        safariIconCenterSpace.constant = 20.0
         systemIconCenterSpace.constant = 20.0
         
         protectionStateLabel.font = protectionStateLabel.font.withSize(20.0)
@@ -812,15 +777,15 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     }
     
     private func setupVoiceOverLabels(){
-        safariProtectionButton.accessibilityLabel = String.localizedString("safari_enabled")
+//        safariProtectionButton.accessibilityLabel = String.localizedString("safari_enabled")
         systemProtectionButton.accessibilityLabel = String.localizedString("system_enabled")
         
         requestsButton.accessibilityLabel = String.localizedString("requests_number_voiceover")
         encryptedButton.accessibilityLabel = String.localizedString("encrypted_number_voiceover")
         elapsedButton.accessibilityLabel = String.localizedString("elapsed_time_voiceover")
         
-        safariProtectionButton.onAccessibilityTitle = String.localizedString("safari_protection_enabled_voiceover")
-        safariProtectionButton.offAccessibilityTitle = String.localizedString("safari_protection_disabled_voiceover")
+//        safariProtectionButton.onAccessibilityTitle = String.localizedString("safari_protection_enabled_voiceover")
+//        safariProtectionButton.offAccessibilityTitle = String.localizedString("safari_protection_disabled_voiceover")
         
         systemProtectionButton.onAccessibilityTitle = String.localizedString("tracking_protection_enabled_voiceover")
         systemProtectionButton.offAccessibilityTitle = String.localizedString("tracking_protection_disabled_voiceover")

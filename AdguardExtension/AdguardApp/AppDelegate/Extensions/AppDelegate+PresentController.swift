@@ -74,22 +74,9 @@ extension AppDelegate {
             return
         }
         
-        let userFilterStoryboard = UIStoryboard(name: "UserFilter", bundle: Bundle.main)
-        guard let userFilterController = userFilterStoryboard.instantiateViewController(withIdentifier: "UserFilterController") as? ListOfRulesController else {
-            DDLogError("UserFilter.storyboard doesnt't have UserFilterController")
-            return
-        }
-        userFilterController.model = model
-        userFilterController.newRuleText = rule
         
-        let filtersStoryboard = UIStoryboard(name: "Filters", bundle: Bundle.main)
-        guard let safariProtectionController = filtersStoryboard.instantiateViewController(withIdentifier: "SafariProtectionController") as? SafariProtectionController else {
-            DDLogError("Filters.storyboard doesnt't have SafariProtectionController")
-            return
-        }
-        safariProtectionController.loadViewIfNeeded()
         
-        navController.viewControllers = [mainMenuController, safariProtectionController, userFilterController]
+        navController.viewControllers = [mainMenuController]
         tabBar.selectedViewController = navController
         window?.rootViewController = tabBar
     }
@@ -192,20 +179,8 @@ extension AppDelegate {
             return false
         }
         
-        let licenseStoryboard = UIStoryboard(name: "License", bundle: Bundle.main)
-        guard let getProController = licenseStoryboard.instantiateViewController(withIdentifier: "GetProController") as? GetProController else {
-            DDLogError("License.storyboard doesnt't have GetProController")
-            return false
-        }
-        
-        guard let loginController = licenseStoryboard.instantiateViewController(withIdentifier: "EmailSignInScene") as? EmailSignInController else {
-            DDLogError("License.storyboard doesnt't have EmailSignInController")
-            return false
-        }
-        loginController.licenseKey = key
-        loginController.loadViewIfNeeded()
-        
-        navController.viewControllers = [mainPageController, getProController, loginController]
+      
+        navController.viewControllers = [mainPageController]
         tabBar.selectedViewController = navController
         window?.rootViewController = tabBar
         
@@ -281,27 +256,9 @@ extension AppDelegate {
             return false
         }
         
-        let filtersStoryboard = UIStoryboard(name: "Filters", bundle: Bundle.main)
-        guard let safariProtectionController = filtersStoryboard.instantiateViewController(withIdentifier: "SafariProtectionController") as? SafariProtectionController else {
-            DDLogError("Filters.storyboard doesnt't have SafariProtectionController")
-            return false
-        }
+      
         
-        guard let filtersMasterController = filtersStoryboard.instantiateViewController(withIdentifier: "FiltersMasterController") as? FiltersMasterController else {
-            DDLogError("Filters.storyboard doesnt't have FiltersMasterController")
-            return false
-        }
-        filtersMasterController.loadViewIfNeeded()
-    
-        guard let groupsController = filtersMasterController.children.first(where: { $0 is GroupsController }) as? GroupsController else {
-            DDLogError("FiltersMasterController doesnt't have GroupsController")
-            return false
-        }
-        groupsController.openUrl = url
-        groupsController.openTitle = title
-        groupsController.loadViewIfNeeded()
-        
-        navController.viewControllers = [mainMenuController, safariProtectionController, filtersMasterController]
+        navController.viewControllers = [mainMenuController]
         tabBar.selectedViewController = navController
         window?.rootViewController = tabBar
         

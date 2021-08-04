@@ -93,8 +93,6 @@ class SafariProtectionController: UITableViewController {
         
         resources.sharedDefaults().addObserver(self, forKeyPath: SafariProtectionState, options: .new, context: nil)
         resources.sharedDefaults().addObserver(self, forKeyPath: AEComplexProtectionEnabled, options: .new, context: nil)
-        
-        updateSafariProtectionInfo()
         updateFilters()
     }
     
@@ -112,11 +110,7 @@ class SafariProtectionController: UITableViewController {
         updateTheme()
     }
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == SafariProtectionState || keyPath == AEComplexProtectionEnabled {
-            updateSafariProtectionInfo()
-        }
-    }
+    
     
     deinit {
         if isViewLoaded{
@@ -141,22 +135,22 @@ class SafariProtectionController: UITableViewController {
         return cell
     }
     
-    @IBAction func protectionSwitchAction(_ sender: UISwitch) {
-        let enabled = sender.isOn
-        safariProtectionStateLabel.text = enabled ? String.localizedString("on_state") : String.localizedString("off_state")
-        
-        complexProtection.switchSafariProtection(state: enabled, for: self) { _ in }
-    }
+//    @IBAction func protectionSwitchAction(_ sender: UISwitch) {
+//        let enabled = sender.isOn
+//        safariProtectionStateLabel.text = enabled ? String.localizedString("on_state") : String.localizedString("off_state")
+//
+//        complexProtection.switchSafariProtection(state: enabled, for: self) { _ in }
+//    }
     
     // MARK: - Private methods
     
-    private func updateSafariProtectionInfo(){
-        let protectionEnabled = complexProtection.safariProtectionEnabled
-        protectionStateSwitch.isOn = protectionEnabled
-        safariProtectionStateLabel.text = protectionEnabled ? String.localizedString("on_state") : String.localizedString("off_state")
-        
-        safariIcon.tintColor = protectionEnabled ? enabledColor : disabledColor
-    }
+//    private func updateSafariProtectionInfo(){
+//        let protectionEnabled = complexProtection.safariProtectionEnabled
+//        protectionStateSwitch.isOn = protectionEnabled
+//        safariProtectionStateLabel.text = protectionEnabled ? String.localizedString("on_state") : String.localizedString("off_state")
+//        
+//        safariIcon.tintColor = protectionEnabled ? enabledColor : disabledColor
+//    }
 }
 
 extension SafariProtectionController: ThemableProtocol {

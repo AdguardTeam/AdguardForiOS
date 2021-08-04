@@ -58,7 +58,7 @@ class DnsFilterCell: UITableViewCell {
     }
 }
 
-class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFiltersChangedProtocol, AddNewFilterDelegate {
+class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFiltersChangedProtocol {
     
     @IBOutlet weak var searchView: UIView!
     @IBOutlet var searchBar: UISearchBar!
@@ -194,15 +194,7 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
         return UITableViewCell()
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == addFilterSection {
-            showAddFilterDialog()
-        } else {
-            let filter = model.filters[indexPath.row]
-            showFilterDetailsController(with: filter)
-        }
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
+   
     
     // MARK: - Actions
     
@@ -281,23 +273,7 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
     
     // MARK: - Private methods
     
-    private func showAddFilterDialog() {
-        let storyboard = UIStoryboard(name: "Filters", bundle: nil)
-        guard let controller = storyboard.instantiateViewController(withIdentifier: "AddCustomFilterController") as? AddCustomFilterController else { return }
-        controller.delegate = self
-        controller.type = .dnsCustom
-        present(controller, animated: true, completion: nil)
-    }
-    
-    private func showFilterDetailsController(with filter: FilterDetailedInterface) {
-        let storyboard = UIStoryboard(name: "Filters", bundle: nil)
-        guard let controller = storyboard.instantiateViewController(withIdentifier: filterDetailsControllerId) as? FilterDetailsController else { return }
-        controller.delegate = self
-        
-        controller.filter = filter
-        
-        navigationController?.pushViewController(controller, animated: true)
-    }
+  
     
     private func updateTextForTitle(){
         DispatchQueue.main.async {[weak self] in
