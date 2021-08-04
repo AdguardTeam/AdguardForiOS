@@ -393,6 +393,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ACLLogger.singleton()?.logLevel = ACLLDebugLevel
         #endif
         
+        AGLogger.setLevel(isDebugLogs ? .AGLL_TRACE : .AGLL_INFO)
+        AGLogger.setCallback { msg, length in
+            guard let msg = msg else { return }
+            let data = Data(bytes: msg, count: Int(length))
+            if let str = String(data: data, encoding: .utf8) {
+                DDLogInfo("(DnsLibs) \(str)")
+            }
+        }
+    
         DDLogInfo("Application started. Version: \(productInfo.buildVersion() ?? "nil")")
     }
 }

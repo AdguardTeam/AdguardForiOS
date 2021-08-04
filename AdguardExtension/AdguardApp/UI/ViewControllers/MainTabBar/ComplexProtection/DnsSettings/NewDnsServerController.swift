@@ -126,10 +126,20 @@ class NewDnsServerController: BottomAlertController {
         saveOrAddButton.isEnabled = false
         saveOrAddButton.startIndicator()
         
+        // TODO: - Make it in a proper way after refactoring
+        
         var bootstrap:[String] = []
         
         ACNIPUtils.enumerateSystemDns { (ip, _, _, _) in
             bootstrap.append(ip ?? "")
+        }
+        
+        if bootstrap.contains("198.18.0.1") {
+            bootstrap.removeAll(where: { $0 == "198.18.0.1" })
+        }
+        if bootstrap.isEmpty {
+            bootstrap.append("94.140.14.140")
+            bootstrap.append("94.140.14.141")
         }
         
         let upstream = AGDnsUpstream(address: self.upstreamsField.text, bootstrap: bootstrap, timeoutMs: 2000, serverIp: Data(), id: 0, outboundInterfaceName: nil)
