@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JHi-Bg-bgC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -233,66 +233,16 @@
             </objects>
             <point key="canvasLocation" x="3171" y="-196"/>
         </scene>
-        <!--Main Tab Bar Controller-->
-        <scene sceneID="fc9-PX-xZu">
-            <objects>
-                <tabBarController id="JHi-Bg-bgC" customClass="MainTabBarController" customModule="Adguard_Pro" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" itemPositioning="fill" id="AYN-zm-rHp">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                        <color key="selectedImageTintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="hin-Y2-xP7" kind="relationship" relationship="viewControllers" id="BLs-77-iUo"/>
-                        <segue destination="oBM-uz-5je" kind="relationship" relationship="viewControllers" id="CIh-tx-7ua"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QBf-W0-LLf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1277" y="-196"/>
-        </scene>
-        <!--Main Navigation Controller-->
-        <scene sceneID="bA7-uX-8tw">
-            <objects>
-                <navigationController id="oBM-uz-5je" customClass="MainNavigationController" customModule="Adguard_Pro" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="activity" id="o1g-zx-23d"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" shadowImage="nil" id="Tcm-Rv-cqD">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="tintColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="XXA-E1-uXi" kind="relationship" relationship="rootViewController" id="fxI-8u-lv6"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tej-sj-bMV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-162" y="526"/>
-        </scene>
-        <!--Activity-->
-        <scene sceneID="qkS-LT-a5O">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Activity" id="XXA-E1-uXi" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="Kpi-bE-zM3"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="s0h-i4-O22" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="720" y="526"/>
-        </scene>
         <!--Main Navigation Controller-->
         <scene sceneID="ekN-2o-N88">
             <objects>
                 <navigationController id="hin-Y2-xP7" customClass="MainNavigationController" customModule="Adguard_Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="adguard-small-icon" id="z6O-uu-b8f"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" shadowImage="nil" id="taq-cg-Czj">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" shadowImage="nil" id="taq-cg-Czj">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <connections>
                         <segue destination="YAE-er-zmr" kind="relationship" relationship="rootViewController" id="DaA-pk-xmQ"/>
@@ -314,7 +264,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="activity" width="24" height="25"/>
         <image name="adguard-small-icon" width="24" height="24"/>
         <image name="nil" width="16" height="16"/>
         <systemColor name="darkTextColor">
