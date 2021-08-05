@@ -153,7 +153,7 @@ class ComplexProtectionController: UITableViewController {
                         DDLogError("Received error when turning system protection on; Error: \(error.localizedDescription)")
                     }
                     DispatchQueue.main.async {
-                        AppDelegate.shared.presentHowToSetupController()
+//                        AppDelegate.shared.presentHowToSetupController()
                     }
                 }
             }

@@ -235,18 +235,7 @@ extension AESharedResourcesProtocol {
            }
        }
     
-    dynamic var blockingMode: BlockingModeSettings  {
-        get {
-            guard let value = sharedDefaults().object(forKey: BlockingMode) as? Int else {
-                return .agDefault
-            }
-            
-            return BlockingModeSettings(rawValue: value)!
-        }
-        set {
-            sharedDefaults().setValue(newValue.rawValue, forKey: BlockingMode)
-        }
-    }
+  
     
     dynamic var blockedResponseTtlSecs: Int {
         get {

@@ -246,42 +246,11 @@
                     <connections>
                         <segue destination="hin-Y2-xP7" kind="relationship" relationship="viewControllers" id="BLs-77-iUo"/>
                         <segue destination="oBM-uz-5je" kind="relationship" relationship="viewControllers" id="CIh-tx-7ua"/>
-                        <segue destination="kEy-qQ-X5z" kind="relationship" relationship="viewControllers" id="GqF-dW-tfv"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QBf-W0-LLf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1277" y="-196"/>
-        </scene>
-        <!--Main Navigation Controller-->
-        <scene sceneID="sbd-8q-qvm">
-            <objects>
-                <navigationController id="kEy-qQ-X5z" customClass="MainNavigationController" customModule="Adguard_Pro" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="advanced-settings-icon" id="rSl-EE-s3a"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" shadowImage="nil" id="lWN-o9-MaD">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="tintColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="xt3-sr-5Q1" kind="relationship" relationship="rootViewController" id="TW9-eY-3xz"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BAb-FH-pOc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-162" y="1249"/>
-        </scene>
-        <!--MainMenu-->
-        <scene sceneID="m1V-fD-xPh">
-            <objects>
-                <viewControllerPlaceholder storyboardName="MainMenu" id="xt3-sr-5Q1" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="0Hc-NT-CUk"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LND-HI-xce" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="669" y="1249"/>
         </scene>
         <!--Main Navigation Controller-->
         <scene sceneID="bA7-uX-8tw">
@@ -347,7 +316,6 @@
     <resources>
         <image name="activity" width="24" height="25"/>
         <image name="adguard-small-icon" width="24" height="24"/>
-        <image name="advanced-settings-icon" width="24" height="24"/>
         <image name="nil" width="16" height="16"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

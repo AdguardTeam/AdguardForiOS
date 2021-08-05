@@ -159,16 +159,16 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         bottomView?.layer.mask = maskLayer
     }
 
-    func tabBarController(_ tabBarController: UITabBarController, animationControllerForTransitionFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        guard let fromVCIndex = tabBarController.viewControllers?.firstIndex(of: fromVC),
-            let toVCIndex = tabBarController.viewControllers?.firstIndex(of: toVC) else {
-                return nil
-        }
-        let edge: UIRectEdge = fromVCIndex > toVCIndex ? .right : .left
-        
-        return CustomNavigationTransitionAnimator(presenting: edge == .left)
-    }
-    
+//    func tabBarController(_ tabBarController: UITabBarController, animationControllerForTransitionFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//        guard let fromVCIndex = tabBarController.viewControllers?.firstIndex(of: fromVC),
+//            let toVCIndex = tabBarController.viewControllers?.firstIndex(of: toVC) else {
+//                return nil
+//        }
+//        let edge: UIRectEdge = fromVCIndex > toVCIndex ? .right : .left
+//        
+//        return CustomNavigationTransitionAnimator(presenting: edge == .left)
+//    }
+//    
     // Set transitionCoordinator to nil to prevent controllers disappearing
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         return transitionCoordinator == nil

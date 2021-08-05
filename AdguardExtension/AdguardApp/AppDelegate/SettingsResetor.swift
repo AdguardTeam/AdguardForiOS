@@ -98,11 +98,9 @@ struct SettingsResetor: ISettingsResetor {
             // force load filters to fill database
             self.filtersService.load(refresh: true) {}
             
-            // Notify that settings were reset
-            NotificationCenter.default.post(name: .resetSettings, object: self)
             
             DispatchQueue.main.async {
-                appDelegate?.setMainPageAsCurrentAndPopToRootControllersEverywhere()
+//                appDelegate?.setMainPageAsCurrentAndPopToRootControllersEverywhere()
                 DDLogInfo("(ResetSettings) Reseting is over")
             }
         }

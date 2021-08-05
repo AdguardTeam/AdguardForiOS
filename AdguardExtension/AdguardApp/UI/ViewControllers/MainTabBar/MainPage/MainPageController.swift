@@ -228,9 +228,9 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        if let nav = navigationController as? MainNavigationController {
-            nav.addGestureRecognizer()
-        }
+//        if let nav = navigationController as? MainNavigationController {
+//            nav.addGestureRecognizer()
+//        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -285,7 +285,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
                         DDLogError("Received error when turning system protection on; Error: \(error.localizedDescription)")
                     }
                     DispatchQueue.main.async {
-                        AppDelegate.shared.presentHowToSetupController()
+//                        AppDelegate.shared.presentHowToSetupController()
                     }
                 }
             }
@@ -382,9 +382,9 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     // MARK: - Complex switch delegate
     
     func beginTracking() {
-        if let nav = navigationController as? MainNavigationController {
-            nav.removeGestureRecognizer()
-        }
+//        if let nav = navigationController as? MainNavigationController {
+//            nav.removeGestureRecognizer()
+//        }
     }
     
     // MARK: - OnboardingViewController delegate

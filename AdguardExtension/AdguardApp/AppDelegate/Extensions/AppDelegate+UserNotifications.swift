@@ -31,15 +31,15 @@ extension AppDelegate {
     }
     
     @objc private func openDnsFiltersController(notification: Notification) {
-        let success = presentDnsFiltersController()
-        DDLogInfo("Presented DnsFiltersController successfully = \(success ? "Yes" : "No")")
+//        let success = presentDnsFiltersController()
+//        DDLogInfo("Presented DnsFiltersController successfully = \(success ? "Yes" : "No")")
     }
     
     private func showCommonAlertForTopVc(_ body: String?, _ title: String?) {
         DispatchQueue.main.async {
-            if let topVC = AppDelegate.topViewController() {
-                ACSSystemUtils.showSimpleAlert(for: topVC, withTitle: body, message: title)
-            }
+//            if let topVC = AppDelegate.topViewController() {
+//                ACSSystemUtils.showSimpleAlert(for: topVC, withTitle: body, message: title)
+//            }
         }
     }
 }

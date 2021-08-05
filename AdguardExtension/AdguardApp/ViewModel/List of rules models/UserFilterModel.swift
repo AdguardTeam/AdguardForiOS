@@ -108,8 +108,8 @@ class UserFilterModel: ListOfRulesModelProtocol {
     
     private var ruleObjects: [ASDFilterRule] = [ASDFilterRule]()
     
-    private var allRules = [RuleInfo]()
-    private var searchRules = [RuleInfo]()
+//    private var allRules = [RuleInfo]()
+//    private var searchRules = [RuleInfo]()
     
     // MARK: - Initializer
     
@@ -120,11 +120,11 @@ class UserFilterModel: ListOfRulesModelProtocol {
         self.theme = theme
         self.productInfo = productInfo
         
-        ruleObjects = antibanner.rules(forFilter: ASDF_USER_FILTER_ID as NSNumber)
-        for ruleObject in ruleObjects {
-            let rule = RuleInfo(ruleObject.ruleText, false, ruleObject.isEnabled.boolValue, theme)
-            allRules.append(rule)
-        }
+//        ruleObjects = antibanner.rules(forFilter: ASDF_USER_FILTER_ID as NSNumber)
+//        for ruleObject in ruleObjects {
+//            let rule = RuleInfo(ruleObject.ruleText, false, ruleObject.isEnabled.boolValue, theme)
+//            allRules.append(rule)
+//        }
     }
     
     // MARK: - Main functions
@@ -189,44 +189,44 @@ class UserFilterModel: ListOfRulesModelProtocol {
         }
     }
     
-    func delete(rule: RuleInfo, errorHandler: @escaping (String) -> Void, completionHandler: @escaping () -> Void) {
-        
-        guard let index = allRules.firstIndex(of: rule) else { return }
-        if let indexWhileSearching = searchRules.firstIndex(of: rule){
-            searchRules.remove(at: indexWhileSearching)
-        }
-        
-        deleteRule(index: index, errorHandler: errorHandler, completionHandler: completionHandler)
-    }
+//    func delete(rule: RuleInfo, errorHandler: @escaping (String) -> Void, completionHandler: @escaping () -> Void) {
+//
+//        guard let index = allRules.firstIndex(of: rule) else { return }
+//        if let indexWhileSearching = searchRules.firstIndex(of: rule){
+//            searchRules.remove(at: indexWhileSearching)
+//        }
+//
+//        deleteRule(index: index, errorHandler: errorHandler, completionHandler: completionHandler)
+//    }
     
     func deleteSelectedRules(completionHandler: @escaping (_ rulesWereDeleted: Bool) -> Void, errorHandler: @escaping (String) -> Void) {
         // Unrealized method
     }
     
-    func processRulesFromString(_ string: String, errorHandler: @escaping (_ error: String)->Void) {
-        let ruleStrings = string.components(separatedBy: .newlines)
-        
-        var newRuleObjects = [ASDFilterRule]()
-        var newRuleInfos = [RuleInfo]()
-        
-        for ruleString in ruleStrings {
-            
-            let trimmedRuleString = ruleString.trimmingCharacters(in: .whitespacesAndNewlines)
-            if trimmedRuleString.count == 0 {
-                continue
-            }
-
-            let ruleObject = ASDFilterRule(text: trimmedRuleString, enabled: true)
-  
-            let ruleInfo = RuleInfo(trimmedRuleString, false, true, theme)
-
-            newRuleObjects.append(ruleObject)
-            newRuleInfos.append(ruleInfo)
-        }
-        setNewRules(newRuleObjects, ruleInfos: newRuleInfos, completionHandler: {}) { (message) in
-            errorHandler(message)
-        }
-    }
+//    func processRulesFromString(_ string: String, errorHandler: @escaping (_ error: String)->Void) {
+//        let ruleStrings = string.components(separatedBy: .newlines)
+//        
+//        var newRuleObjects = [ASDFilterRule]()
+////        var newRuleInfos = [RuleInfo]()
+//        
+//        for ruleString in ruleStrings {
+//            
+//            let trimmedRuleString = ruleString.trimmingCharacters(in: .whitespacesAndNewlines)
+//            if trimmedRuleString.count == 0 {
+//                continue
+//            }
+//
+//            let ruleObject = ASDFilterRule(text: trimmedRuleString, enabled: true)
+//  
+////            let ruleInfo = RuleInfo(trimmedRuleString, false, true, theme)
+//
+//            newRuleObjects.append(ruleObject)
+//            newRuleInfos.append(ruleInfo)
+//        }
+//        setNewRules(newRuleObjects, ruleInfos: newRuleInfos, completionHandler: {}) { (message) in
+//            errorHandler(message)
+//        }
+//    }
     
     // MARK: - Private methods
     
@@ -259,74 +259,74 @@ class UserFilterModel: ListOfRulesModelProtocol {
             }
             
             var newRuleObjects = Array(strongSelf.ruleObjects)
-            var newRuleInfos = Array(strongSelf.allRules)
+//            var newRuleInfos = Array(strongSelf.allRules)
             
-            newRuleInfos.append(contentsOf: ruleTextsToAdd.map({ (rule) -> RuleInfo in RuleInfo(rule, false, true, strongSelf.theme) }))
+//            newRuleInfos.append(contentsOf: ruleTextsToAdd.map({ (rule) -> RuleInfo in RuleInfo(rule, false, true, strongSelf.theme) }))
             newRuleObjects.append(contentsOf: rulesToAdd)
             
             strongSelf.setNewRules(newRuleObjects, ruleInfos: newRuleInfos, completionHandler: completionHandler, errorHandler: errorHandler)
         }
     }
     
-    private func setNewRules(_ newRuleObjects: [ASDFilterRule], ruleInfos: [RuleInfo], completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
-    
-        let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
-        
-        DispatchQueue.main.async { [weak self] in
-            guard let strongSelf = self else { return }
-            
-            let rulesCopy = strongSelf.allRules
-            let objectsCopy = strongSelf.ruleObjects
-            
-            strongSelf.allRules = ruleInfos
-            strongSelf.ruleObjects = newRuleObjects
-            
-            strongSelf.delegate?.listOfRulesChanged()
-            
-            DispatchQueue.global().async { [weak self] in
-                guard let strongSelf = self else { return }
-                if let error = strongSelf.contentBlockerService.replaceUserFilter(newRuleObjects) {
-                    DispatchQueue.main.async {
-                        strongSelf.allRules = rulesCopy
-                        strongSelf.ruleObjects = objectsCopy
-                        strongSelf.delegate?.listOfRulesChanged()
-                        errorHandler(error.localizedDescription)
-                    }
-                }
-                completionHandler()
-                
-                strongSelf.contentBlockerService.reloadJsons(backgroundUpdate: false) { (error) in
-                    
-                    if error != nil {
-                        DDLogError("(UserFilterModel) Error occured during content blocker reloading - \(error!.localizedDescription)")
-                        // do not rollback changes and do not show any alert to user in this case
-                        // https://github.com/AdguardTeam/AdguardForiOS/issues/1174
-                    }
-                    UIApplication.shared.endBackgroundTask(backgroundTaskId)
-                }
-            }
-        }
-    }
-    
-    private func deleteRule(index: Int, errorHandler: @escaping (_ error: String)->Void, completionHandler: @escaping ()->Void) {
-        
-        let rule = self.allRules[index]
-        guard let index = allRules.firstIndex(of: rule) else { return }
-        
-        let ruleObject = ruleObjects[index]
-        
-        let filteredRules = allRules.filter({$0 != rule})
-        let filteredRuleObjects = ruleObjects.filter({$0 != ruleObject})
-        
-        setNewRules(filteredRuleObjects, ruleInfos: filteredRules, completionHandler: completionHandler, errorHandler: errorHandler)
-    }
+//    private func setNewRules(_ newRuleObjects: [ASDFilterRule], ruleInfos: [RuleInfo], completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
+//
+//        let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
+//
+//        DispatchQueue.main.async { [weak self] in
+//            guard let strongSelf = self else { return }
+//
+////            let rulesCopy = strongSelf.allRules
+//            let objectsCopy = strongSelf.ruleObjects
+//
+////            strongSelf.allRules = ruleInfos
+//            strongSelf.ruleObjects = newRuleObjects
+//
+//            strongSelf.delegate?.listOfRulesChanged()
+//
+//            DispatchQueue.global().async { [weak self] in
+//                guard let strongSelf = self else { return }
+//                if let error = strongSelf.contentBlockerService.replaceUserFilter(newRuleObjects) {
+//                    DispatchQueue.main.async {
+////                        strongSelf.allRules = rulesCopy
+//                        strongSelf.ruleObjects = objectsCopy
+//                        strongSelf.delegate?.listOfRulesChanged()
+//                        errorHandler(error.localizedDescription)
+//                    }
+//                }
+//                completionHandler()
+//
+//                strongSelf.contentBlockerService.reloadJsons(backgroundUpdate: false) { (error) in
+//
+//                    if error != nil {
+//                        DDLogError("(UserFilterModel) Error occured during content blocker reloading - \(error!.localizedDescription)")
+//                        // do not rollback changes and do not show any alert to user in this case
+//                        // https://github.com/AdguardTeam/AdguardForiOS/issues/1174
+//                    }
+//                    UIApplication.shared.endBackgroundTask(backgroundTaskId)
+//                }
+//            }
+//        }
+//    }
+//
+//    private func deleteRule(index: Int, errorHandler: @escaping (_ error: String)->Void, completionHandler: @escaping ()->Void) {
+//
+//        let rule = self.allRules[index]
+//        guard let index = allRules.firstIndex(of: rule) else { return }
+//
+//        let ruleObject = ruleObjects[index]
+//
+//        let filteredRules = allRules.filter({$0 != rule})
+//        let filteredRuleObjects = ruleObjects.filter({$0 != ruleObject})
+//
+//        setNewRules(filteredRuleObjects, ruleInfos: filteredRules, completionHandler: completionHandler, errorHandler: errorHandler)
+//    }
     
     /**
      retuns all rules from list of rules as a plain text
      */
-    private func plainText() -> String {
-        return allRules.map({ $0.rule }).joined(separator: "\n")
-    }
+//    private func plainText() -> String {
+//        return allRules.map({ $0.rule }).joined(separator: "\n")
+//    }
     
     /**
      parse plain text to array of rules. Save it to list of rules and reload safari content blockers
@@ -336,7 +336,7 @@ class UserFilterModel: ListOfRulesModelProtocol {
         let ruleStrings = plainText.components(separatedBy: .newlines)
         
         var newRuleObjects = [ASDFilterRule]()
-        var newRuleInfos = [RuleInfo]()
+//        var newRuleInfos = [RuleInfo]()
         
         for ruleString in ruleStrings {
             
@@ -347,11 +347,11 @@ class UserFilterModel: ListOfRulesModelProtocol {
     
             let ruleObject = ASDFilterRule(text: trimmedRuleString, enabled: true)
             
-            let ruleInfo = RuleInfo(trimmedRuleString, false, true, theme)
-            newRuleObjects.append(ruleObject)
-            newRuleInfos.append(ruleInfo)
+//            let ruleInfo = RuleInfo(trimmedRuleString, false, true, theme)
+//            newRuleObjects.append(ruleObject)
+//            newRuleInfos.append(ruleInfo)
         }
-        setNewRules(newRuleObjects, ruleInfos: newRuleInfos, completionHandler: {
+//        setNewRules(newRuleObjects, ruleInfos: newRuleInfos, completionHandler: {
             
         }) { (message) in
             errorHandler(message)

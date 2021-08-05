@@ -114,27 +114,27 @@ class ActivityViewController: UITableViewController {
         activityImage.tintColor = UIColor.AdGuardColor.lightGreen1
         updateTheme()
         setupTableView()
-        dateTypeChanged(dateType: resources.activityStatisticsType)
+//        dateTypeChanged(dateType: resources.activityStatisticsType)
         addObservers()
         filterButton.isHidden = !configuration.advancedMode
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if let nav = navigationController as? MainNavigationController {
-            nav.currentSwipeRecognizer?.delegate = self
-        }
+//
+//        if let nav = navigationController as? MainNavigationController {
+//            nav.currentSwipeRecognizer?.delegate = self
+//        }
         
         tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        if let nav = navigationController as? MainNavigationController {
-            nav.currentSwipeRecognizer?.delegate = nil
-        }
+//
+//        if let nav = navigationController as? MainNavigationController {
+//            nav.currentSwipeRecognizer?.delegate = nil
+//        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -151,12 +151,12 @@ class ActivityViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == showDnsContainerSegueId, let controller = segue.destination as? DnsContainerController {
-            controller.logRecord = selectedRecord
-        } else if segue.identifier == showMostActiveCompaniesSegueId, let controller = segue.destination as? MostActiveCompaniesController {
-            controller.mostRequestedCompanies = mostRequestedCompanies
-            controller.chartDateType = resources.activityStatisticsType
-        }
+//        if segue.identifier == showDnsContainerSegueId, let controller = segue.destination as? DnsContainerController {
+//            controller.logRecord = selectedRecord
+//        } else if segue.identifier == showMostActiveCompaniesSegueId, let controller = segue.destination as? MostActiveCompaniesController {
+//            controller.mostRequestedCompanies = mostRequestedCompanies
+//            controller.chartDateType = resources.activityStatisticsType
+//        }
     }
     
     // MARK: - Actions
@@ -197,7 +197,7 @@ class ActivityViewController: UITableViewController {
     }
     
     @IBAction func changeRequestsTypeAction(_ sender: UIButton) {
-        showGroupsAlert(sender)
+//        showGroupsAlert(sender)
     }
     
     // MARK: - Tableview Datasource and Delegate
@@ -254,14 +254,14 @@ class ActivityViewController: UITableViewController {
         swipedIndexPath = indexPath
         swipedRecord = record
         let availableTypes = record.logRecord.getButtons()
-        for buttonType in availableTypes {
-            if buttonType == .addDomainToWhitelist {
-                return createSwipeAction(forButtonType: buttonType, record: record)
-            }
-            if buttonType == .removeDomainFromWhitelist {
-                return createSwipeAction(forButtonType: buttonType, record: record)
-            }
-        }
+//        for buttonType in availableTypes {
+//            if buttonType == .addDomainToWhitelist {
+//                return createSwipeAction(forButtonType: buttonType, record: record)
+//            }
+//            if buttonType == .removeDomainFromWhitelist {
+//                return createSwipeAction(forButtonType: buttonType, record: record)
+//            }
+//        }
         return UISwipeActionsConfiguration(actions: [])
     }
     
@@ -272,14 +272,14 @@ class ActivityViewController: UITableViewController {
         swipedIndexPath = indexPath
         swipedRecord = record
         let availableTypes = record.logRecord.getButtons()
-        for buttonType in availableTypes {
-            if buttonType == .addRuleToUserFlter {
-                return createSwipeAction(forButtonType: buttonType, record: record)
-            }
-            if buttonType == .removeRuleFromUserFilter {
-                return createSwipeAction(forButtonType: buttonType, record: record)
-            }
-        }
+//        for buttonType in availableTypes {
+//            if buttonType == .addRuleToUserFlter {
+//                return createSwipeAction(forButtonType: buttonType, record: record)
+//            }
+//            if buttonType == .removeRuleFromUserFilter {
+//                return createSwipeAction(forButtonType: buttonType, record: record)
+//            }
+//        }
         return UISwipeActionsConfiguration(actions: [])
     }
     
@@ -327,42 +327,42 @@ class ActivityViewController: UITableViewController {
         present(alert, animated: true)
     }
     
-    private func showGroupsAlert(_ sender: UIButton) {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .deviceAlertStyle)
-        
-        let allRequestsAction = UIAlertAction(title: String.localizedString("all_requests_alert_action"), style: .default) {[weak self] _ in
-            guard let self = self else { return }
-            self.requestsModel?.displayedStatisticsType = .allRequests
-            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
-            alert.dismiss(animated: true, completion: nil)
-        }
-        
-        let blockedOnlyAction = UIAlertAction(title: String.localizedString("blocked_only_alert_action"), style: .default) {[weak self] _ in
-            guard let self = self else { return }
-            self.requestsModel?.displayedStatisticsType = .blockedRequests
-            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
-            alert.dismiss(animated: true, completion: nil)
-        }
-        
-        let allowedOnlyAction = UIAlertAction(title: String.localizedString("allowed_only_alert_action"), style: .default) {[weak self] _ in
-            guard let self = self else { return }
-            self.requestsModel?.displayedStatisticsType = .allowedRequests
-            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
-            alert.dismiss(animated: true, completion: nil)
-        }
-        
-        let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel) { _ in
-            alert.dismiss(animated: true, completion: nil)
-        }
-        
-        alert.addAction(allRequestsAction)
-        alert.addAction(blockedOnlyAction)
-        alert.addAction(allowedOnlyAction)
-        alert.addAction(cancelAction)
-        
-        present(alert, animated: true)
-    }
-    
+//    private func showGroupsAlert(_ sender: UIButton) {
+//        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .deviceAlertStyle)
+//
+////        let allRequestsAction = UIAlertAction(title: String.localizedString("all_requests_alert_action"), style: .default) {[weak self] _ in
+////            guard let self = self else { return }
+////            self.requestsModel?.displayedStatisticsType = .allRequests
+////            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
+////            alert.dismiss(animated: true, completion: nil)
+////        }
+////
+////        let blockedOnlyAction = UIAlertAction(title: String.localizedString("blocked_only_alert_action"), style: .default) {[weak self] _ in
+////            guard let self = self else { return }
+////            self.requestsModel?.displayedStatisticsType = .blockedRequests
+////            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
+////            alert.dismiss(animated: true, completion: nil)
+////        }
+////
+////        let allowedOnlyAction = UIAlertAction(title: String.localizedString("allowed_only_alert_action"), style: .default) {[weak self] _ in
+////            guard let self = self else { return }
+////            self.requestsModel?.displayedStatisticsType = .allowedRequests
+////            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
+////            alert.dismiss(animated: true, completion: nil)
+////        }
+//
+//        let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel) { _ in
+//            alert.dismiss(animated: true, completion: nil)
+//        }
+//
+//        alert.addAction(allRequestsAction)
+//        alert.addAction(blockedOnlyAction)
+//        alert.addAction(allowedOnlyAction)
+//        alert.addAction(cancelAction)
+//
+//        present(alert, animated: true)
+//    }
+//
     /**
      Presents ChartDateTypeController
      */
@@ -376,7 +376,7 @@ class ActivityViewController: UITableViewController {
     private func setupTableView(){
         let nib = UINib.init(nibName: "ActivityTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: activityTableViewCellReuseId)
-        refreshControl?.addTarget(self, action: #selector(updateTableView(sender:)), for: .valueChanged)
+//        refreshControl?.addTarget(self, action: #selector(updateTableView(sender:)), for: .valueChanged)
     }
     
     private func keyboardWillShow() {
@@ -401,14 +401,14 @@ class ActivityViewController: UITableViewController {
             self?.observeAdvancedMode()
         }
         
-        resetStatisticsToken = NotificationCenter.default.observe(name: NSNotification.resetStatistics, object: nil, queue: .main) { [weak self] (notification) in
-            self?.dateTypeChanged(dateType: self?.resources.activityStatisticsType ?? .day)
-        }
-        
-        resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] (notification) in
-            self?.dateTypeChanged(dateType: self?.resources.activityStatisticsType ?? .day)
-        }
-        
+//        resetStatisticsToken = NotificationCenter.default.observe(name: NSNotification.resetStatistics, object: nil, queue: .main) { [weak self] (notification) in
+//            self?.dateTypeChanged(dateType: self?.resources.activityStatisticsType ?? .day)
+//        }
+//
+//        resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] (notification) in
+//            self?.dateTypeChanged(dateType: self?.resources.activityStatisticsType ?? .day)
+//        }
+//
         requestsModel?.recordsObserver = { [weak self] (records) in
             DispatchQueue.main.async {[weak self] in
                 guard let self = self else { return }
@@ -420,57 +420,57 @@ class ActivityViewController: UITableViewController {
         }
     }
     
-    private func createSwipeAction(forButtonType buttonType: DnsLogButtonType, record: DnsLogRecordExtended) -> UISwipeActionsConfiguration {
-        var buttonColor: UIColor
-        switch buttonType {
-        case .addDomainToWhitelist:
-            buttonColor = UIColor.AdGuardColor.lightGreen1
-        case .addRuleToUserFlter:
-            buttonColor = UIColor(hexString: "#c23814")
-        default:
-            buttonColor = UIColor(hexString: "#888888")
-        }
-        let buttonAction = UIContextualAction(style: .normal, title: buttonType.buttonTitle) { [weak self] (action, view, success:(Bool) -> Void) in
-            guard let self = self else { return }
-            switch buttonType {
-            case .addDomainToWhitelist, .addRuleToUserFlter:
-                self.presentBlockRequestController(with: record.logRecord.domain, type: buttonType, delegate: self)
-            case .removeRuleFromUserFilter:
-                self.removeRuleFromUserFilter(record: record.logRecord)
-            case .removeDomainFromWhitelist:
-                self.removeDomainFromWhitelist(record: record.logRecord)
-            }
-            success(true)
-        }
-        buttonAction.backgroundColor = buttonColor
-        return UISwipeActionsConfiguration(actions: [buttonAction])
-    }
+//    private func createSwipeAction(forButtonType buttonType: DnsLogButtonType, record: DnsLogRecordExtended) -> UISwipeActionsConfiguration {
+//        var buttonColor: UIColor
+//        switch buttonType {
+//        case .addDomainToWhitelist:
+//            buttonColor = UIColor.AdGuardColor.lightGreen1
+//        case .addRuleToUserFlter:
+//            buttonColor = UIColor(hexString: "#c23814")
+//        default:
+//            buttonColor = UIColor(hexString: "#888888")
+//        }
+//        let buttonAction = UIContextualAction(style: .normal, title: buttonType.buttonTitle) { [weak self] (action, view, success:(Bool) -> Void) in
+//            guard let self = self else { return }
+//            switch buttonType {
+//            case .addDomainToWhitelist, .addRuleToUserFlter:
+//                self.presentBlockRequestController(with: record.logRecord.domain, type: buttonType, delegate: self)
+//            case .removeRuleFromUserFilter:
+//                self.removeRuleFromUserFilter(record: record.logRecord)
+//            case .removeDomainFromWhitelist:
+//                self.removeDomainFromWhitelist(record: record.logRecord)
+//            }
+//            success(true)
+//        }
+//        buttonAction.backgroundColor = buttonColor
+//        return UISwipeActionsConfiguration(actions: [buttonAction])
+//    }
+//
+//    private func removeRuleFromUserFilter(record: DnsLogRecord) {
+//        let isOriginalRecord = record.userStatus == .none || record.userStatus == .modified
+//        let rules = isOriginalRecord ? record.blockRules : [record.userRule ?? ""]
+//
+//        dnsFiltersService.removeUserRules(rules ?? [])
+//        set(record.userStatus == .movedToBlacklist ? .modified : .removedFromBlacklist)
+//    }
     
-    private func removeRuleFromUserFilter(record: DnsLogRecord) {
-        let isOriginalRecord = record.userStatus == .none || record.userStatus == .modified
-        let rules = isOriginalRecord ? record.blockRules : [record.userRule ?? ""]
-        
-        dnsFiltersService.removeUserRules(rules ?? [])
-        set(record.userStatus == .movedToBlacklist ? .modified : .removedFromBlacklist)
-    }
+//    private func removeDomainFromWhitelist(record: DnsLogRecord) {
+//        let userDomain = domainsConverter.whitelistRuleFromDomain(record.userRule ?? "")
+//        let isOriginalRecord = record.userStatus == .none || record.userStatus == .modified
+//        let rules = isOriginalRecord ? record.blockRules : [userDomain]
+//
+//        dnsFiltersService.removeWhitelistRules(rules ?? [])
+//        set(record.userStatus == .movedToWhitelist ? .modified : .removedFromWhitelist)
+//    }
     
-    private func removeDomainFromWhitelist(record: DnsLogRecord) {
-        let userDomain = domainsConverter.whitelistRuleFromDomain(record.userRule ?? "")
-        let isOriginalRecord = record.userStatus == .none || record.userStatus == .modified
-        let rules = isOriginalRecord ? record.blockRules : [userDomain]
-
-        dnsFiltersService.removeWhitelistRules(rules ?? [])
-        set(record.userStatus == .movedToWhitelist ? .modified : .removedFromWhitelist)
-    }
-    
-    @objc func updateTableView(sender: UIRefreshControl) {
-        dateTypeChanged(dateType: resources.activityStatisticsType)
-        statisticsModel.obtainStatistics(true) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {[weak self] in
-                self?.refreshControl?.endRefreshing()
-            }
-        }
-    }
+//    @objc func updateTableView(sender: UIRefreshControl) {
+//        dateTypeChanged(dateType: resources.activityStatisticsType)
+//        statisticsModel.obtainStatistics(true) {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {[weak self] in
+//                self?.refreshControl?.endRefreshing()
+//            }
+//        }
+//    }
 }
 
 // MARK: - UISearchBarDelegate
@@ -519,7 +519,7 @@ extension ActivityViewController: DnsRequestsDelegateProtocol {
 
 extension ActivityViewController: DateTypeChangedProtocol {
     func dateTypeChanged(dateType: ChartDateType) {
-        resources.activityStatisticsType = dateType
+        //resources.activityStatisticsType = dateType
         changePeriodTypeButton.setTitle(dateType.getDateTypeString(), for: .normal)
         statisticsModel.chartDateTypeActivity = dateType
         
@@ -590,29 +590,29 @@ extension ActivityViewController: UIGestureRecognizerDelegate {
     }
 }
 
-extension ActivityViewController: AddDomainToListDelegate {
-    func add(domain: String, needsCorrecting: Bool, by type: DnsLogButtonType) {
-        guard let swipedRecord = swipedRecord else { return }
-        if type == .addDomainToWhitelist {
-            let rule = needsCorrecting ? domainsConverter.whitelistRuleFromDomain(domain) : domain
-            swipedRecord.logRecord.userRule = rule
-            dnsFiltersService.addWhitelistRule(rule)
-            set(swipedRecord.logRecord.userStatus == .removedFromWhitelist ? .modified : .movedToWhitelist, rule)
-        } else if type == .addRuleToUserFlter {
-            let rule = needsCorrecting ? domainsConverter.blacklistRuleFromDomain(domain) : domain
-            swipedRecord.logRecord.userRule = rule
-            dnsFiltersService.addBlacklistRule(rule)
-            set(swipedRecord.logRecord.userStatus == .removedFromBlacklist ? .modified : .movedToBlacklist, rule)
-        }
-    }
-    
-    private func set(_ status: DnsLogRecordUserStatus, _ rule: String? = nil) {
-        guard let swipedRecord = swipedRecord, let swipedIndexPath = swipedIndexPath else { return }
-        dnsLogService.set(rowId: swipedRecord.logRecord.rowid!, status: status, userRule: rule)
-        swipedRecord.logRecord.userStatus = status
-        tableView.reloadRows(at: [swipedIndexPath], with: .fade)
-    }
-}
+//extension ActivityViewController: AddDomainToListDelegate {
+//    func add(domain: String, needsCorrecting: Bool, by type: DnsLogButtonType) {
+//        guard let swipedRecord = swipedRecord else { return }
+//        if type == .addDomainToWhitelist {
+//            let rule = needsCorrecting ? domainsConverter.whitelistRuleFromDomain(domain) : domain
+//            swipedRecord.logRecord.userRule = rule
+//            dnsFiltersService.addWhitelistRule(rule)
+//            set(swipedRecord.logRecord.userStatus == .removedFromWhitelist ? .modified : .movedToWhitelist, rule)
+//        } else if type == .addRuleToUserFlter {
+//            let rule = needsCorrecting ? domainsConverter.blacklistRuleFromDomain(domain) : domain
+//            swipedRecord.logRecord.userRule = rule
+//            dnsFiltersService.addBlacklistRule(rule)
+//            set(swipedRecord.logRecord.userStatus == .removedFromBlacklist ? .modified : .movedToBlacklist, rule)
+//        }
+//    }
+//
+//    private func set(_ status: DnsLogRecordUserStatus, _ rule: String? = nil) {
+//        guard let swipedRecord = swipedRecord, let swipedIndexPath = swipedIndexPath else { return }
+//        dnsLogService.set(rowId: swipedRecord.logRecord.rowid!, status: status, userRule: rule)
+//        swipedRecord.logRecord.userStatus = status
+//        tableView.reloadRows(at: [swipedIndexPath], with: .fade)
+//    }
+//}
 
 extension ActivityViewController: ThemableProtocol {
     func updateTheme(){

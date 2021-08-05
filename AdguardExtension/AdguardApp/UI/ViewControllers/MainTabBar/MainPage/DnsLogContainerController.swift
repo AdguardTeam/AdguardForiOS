@@ -45,9 +45,9 @@ class DnsLogContainerController: UIViewController {
         
         updateTheme()
         
-        resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] (notification) in
-            self?.setCurrentContainerView()
-        }
+//        resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] (notification) in
+//            self?.setCurrentContainerView()
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

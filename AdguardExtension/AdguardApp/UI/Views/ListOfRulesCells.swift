@@ -165,11 +165,11 @@ class NormalRuleCell: UITableViewCell {
     
     var isBigScreen: Bool?
     
-    var rule: RuleInfo? {
-        didSet{
-            ruleNameLabel.text = rule?.rule
-        }
-    }
+//    var rule: RuleInfo? {
+//        didSet{
+//            ruleNameLabel.text = rule?.rule
+//        }
+//    }
     
     var type: RulesType? {
         didSet{

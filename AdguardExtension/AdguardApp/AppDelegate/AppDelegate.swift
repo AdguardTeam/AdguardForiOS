@@ -124,12 +124,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //------------- Preparing for start application. Stage 1. -----------------
         
-        startAntibannerController()
+//        startAntibannerController()
         
         fetchPerformer?.setBackgroundStatusToDefault()
         activateWithOpenUrl = false
         
-        initLogger()
+//        initLogger()
         DDLogInfo("(AppDelegate) Preparing for start application. Stage 1.")
         
         //------------ Interface Tuning -----------------------------------
@@ -149,7 +149,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DDLogInfo("(AppDelegate) Preparing for start application. Stage 2.")
         
         AppDelegate.setPeriodForCheckingFilters()
-        subscribeToNotifications()
+//        subscribeToNotifications()
         
         return true
     }
@@ -178,7 +178,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // If theme mode is System Default gets current style
         setAppInterfaceStyle()
-        updateAntibannerContoller()
+//        updateAntibannerContoller()
     }
     
     
@@ -188,24 +188,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        addPurchaseStatusObserver()
+//        addPurchaseStatusObserver()
         fetchPerformer?.performFetch(with: completionHandler)
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        DDLogError("(AppDelegate) application Open URL.")
-        activateWithOpenUrl = true
-        
-        if setappService.openUrl(url, options: options) {
-            return true
-        }
-        
-        let urlParser: IURLSchemeParser = URLSchemeParser(executor: self,
-                                                          configurationService: configuration,
-                                                          purchaseService: purchaseService)
-        
-        return urlParser.parse(url: url)
-    }
+//    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+//        DDLogError("(AppDelegate) application Open URL.")
+//        activateWithOpenUrl = true
+//
+//        if setappService.openUrl(url, options: options) {
+//            return true
+//        }
+//
+////        let urlParser: IURLSchemeParser = URLSchemeParser(executor: self,
+////                                                          configurationService: configuration,
+////                                                          purchaseService: purchaseService)
+//
+////        return urlParser.parse(url: url)
+//    }
     
     //MARK: - Public methods
     
@@ -253,130 +253,130 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func prepareControllers() {
         setappService.start()
         
-        guard let mainPageController = getMainPageController() else {
-            DDLogError("mainPageController is nil")
-            return
-        }
+//        guard let mainPageController = getMainPageController() else {
+//            DDLogError("mainPageController is nil")
+//            return
+//        }
         
-        mainPageController.onReady = { [weak self] in
+//        mainPageController.onReady = { [weak self] in
             // request permission for user notifications posting
-            self?.userNotificationService.requestPermissions()
+//            self?.userNotificationService.requestPermissions()
         }
         
-        guard let dnsLogContainerVC = getDnsLogContainerController() else {
-            DDLogError("dnsLogContainerVC is nil")
-            return
-        }
+//        guard let dnsLogContainerVC = getDnsLogContainerController() else {
+//            DDLogError("dnsLogContainerVC is nil")
+//            return
+//        }
         /**
          To quickly show stats in ActivityViewController, we load ViewController when app starts
          */
-        dnsLogContainerVC.loadViewIfNeeded()
+//        dnsLogContainerVC.loadViewIfNeeded()
     }
     
     
     private func postDnsFiltersOverlimitNotificationIfNedeed(){
-        let rulesNumberString = String.simpleThousandsFormatting(NSNumber(integerLiteral: dnsFiltersService.enabledRulesCount))
-        let title = String.localizedString("dns_filters_notification_title")
-        let body = String(format: String.localizedString("dns_filters_overlimit_title"), rulesNumberString)
-        let userInfo: [String : Int] = [PushNotificationCommands.command : PushNotificationCommands.openDnsFiltersController.rawValue]
-        userNotificationService.postNotification(title: title, body: body, userInfo: userInfo)
+//        let rulesNumberString = String.simpleThousandsFormatting(NSNumber(integerLiteral: dnsFiltersService.enabledRulesCount))
+//        let title = String.localizedString("dns_filters_notification_title")
+//        let body = String(format: String.localizedString("dns_filters_overlimit_title"), rulesNumberString)
+//        let userInfo: [String : Int] = [PushNotificationCommands.command : PushNotificationCommands.openDnsFiltersController.rawValue]
+//        userNotificationService.postNotification(title: title, body: body, userInfo: userInfo)
     }
     
    
     
-    private func startAntibannerController() {
-        antibannerController.start()
-        
-        antibannerController.onReady { [weak self] (_) in
-            guard let self = self else { return }
-            guard let fetchPerformer = self.fetchPerformer else { return }
-            if (self.firstRun) {
-                self.migrationService.install()
-                self.purchaseService.checkLicenseStatus()
-                self.firstRun = false
-            }
-            
-            self.migrationService.migrateIfNeeded(inBackground: fetchPerformer.isBackground)
-        }
-    }
-    
-    private func updateAntibannerContoller() {
-        antibannerController.onReady { antibanner in
-            antibanner.repairUpdateState { [weak self] in
-                guard let self = self else { return }
-                if self.activateWithOpenUrl {
-                    self.activateWithOpenUrl = false
-                    DDLogInfo("(AppDelegate - applicationDidBecomeActive) Update process did not start because app activated with open URL.")
-                    return
-                }
-                
-                if antibanner.updatesRightNow {
-                    DDLogInfo("(AppDelegate - applicationDidBecomeActive) Update process did not start because it is performed right now.")
-                    return
-                }
-                
-                self.fetchPerformer?.invalidateAntibannerIfNeeded()
-            }
-        }
-    }
-    
-    private func addPurchaseStatusObserver() {
-         if purchaseObservation == nil {
-             purchaseObservation = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: nil, queue: nil) { (notification) in
-                 guard let type =  notification.userInfo?[PurchaseService.kPSNotificationTypeKey] as? String else { return }
-                 
-                 DDLogInfo("(AppDelegate) - Received notification type = \(type)")
-                 
-                 if type == PurchaseService.kPSNotificationPremiumExpired {
-                     self.userNotificationService.postNotification(title: ACLocalizedString("premium_expired_title", nil), body: ACLocalizedString("premium_expired_message", nil), userInfo: nil)
-                 }
-             }
-         }
-         
-         if proStatusObservation == nil {
-             proStatusObservation = configuration.observe(\.proStatus) { [weak self] (_, _) in
-                 guard let self = self else { return }
-                 if !self.configuration.proStatus && self.vpnManager.vpnInstalled {
-                     DDLogInfo("(AppDelegate) Remove vpn configuration")
-                     self.vpnManager.removeVpnConfiguration { (error) in
-                         if error != nil {
-                             DDLogError("(AppDelegate) Remove vpn configuration failed: \(error!)")
-                         }
-                     }
-                 }
-             }
-         }
-     }
-    
-    private func subscribeToNotifications() {
-        subscribeToUserNotificationServiceNotifications()
-        
-        resources.sharedDefaults().addObserver(self, forKeyPath: TunnelErrorCode, options: .new, context: nil)
-        
-        subscribeToThemeChangeNotification()
-        
-        setappObservation = NotificationCenter.default.observe(name: .setappDeviceLimitReched, object: nil, queue: OperationQueue.main) { _ in
-            if let vc = Self.topViewController() {
-                    ACSSystemUtils.showSimpleAlert(for: vc, withTitle: String.localizedString("common_error_title"), message: String.localizedString("setapp_device_limit_reached"))
-                    
-            }
-        }
-    }
+//    private func startAntibannerController() {
+//        antibannerController.start()
+//
+//        antibannerController.onReady { [weak self] (_) in
+//            guard let self = self else { return }
+//            guard let fetchPerformer = self.fetchPerformer else { return }
+//            if (self.firstRun) {
+//                self.migrationService.install()
+//                self.purchaseService.checkLicenseStatus()
+//                self.firstRun = false
+//            }
+//
+//            self.migrationService.migrateIfNeeded(inBackground: fetchPerformer.isBackground)
+//        }
+//    }
+//
+//    private func updateAntibannerContoller() {
+//        antibannerController.onReady { antibanner in
+//            antibanner.repairUpdateState { [weak self] in
+//                guard let self = self else { return }
+//                if self.activateWithOpenUrl {
+//                    self.activateWithOpenUrl = false
+//                    DDLogInfo("(AppDelegate - applicationDidBecomeActive) Update process did not start because app activated with open URL.")
+//                    return
+//                }
+//
+//                if antibanner.updatesRightNow {
+//                    DDLogInfo("(AppDelegate - applicationDidBecomeActive) Update process did not start because it is performed right now.")
+//                    return
+//                }
+//
+//                self.fetchPerformer?.invalidateAntibannerIfNeeded()
+//            }
+//        }
+//    }
+//
+//    private func addPurchaseStatusObserver() {
+//         if purchaseObservation == nil {
+//             purchaseObservation = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: nil, queue: nil) { (notification) in
+//                 guard let type =  notification.userInfo?[PurchaseService.kPSNotificationTypeKey] as? String else { return }
+//
+//                 DDLogInfo("(AppDelegate) - Received notification type = \(type)")
+//
+//                 if type == PurchaseService.kPSNotificationPremiumExpired {
+//                     self.userNotificationService.postNotification(title: ACLocalizedString("premium_expired_title", nil), body: ACLocalizedString("premium_expired_message", nil), userInfo: nil)
+//                 }
+//             }
+//         }
+//
+//         if proStatusObservation == nil {
+//             proStatusObservation = configuration.observe(\.proStatus) { [weak self] (_, _) in
+//                 guard let self = self else { return }
+//                 if !self.configuration.proStatus && self.vpnManager.vpnInstalled {
+//                     DDLogInfo("(AppDelegate) Remove vpn configuration")
+//                     self.vpnManager.removeVpnConfiguration { (error) in
+//                         if error != nil {
+//                             DDLogError("(AppDelegate) Remove vpn configuration failed: \(error!)")
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//     }
+//
+//    private func subscribeToNotifications() {
+//        subscribeToUserNotificationServiceNotifications()
+//
+//        resources.sharedDefaults().addObserver(self, forKeyPath: TunnelErrorCode, options: .new, context: nil)
+//
+//        subscribeToThemeChangeNotification()
+//
+//        setappObservation = NotificationCenter.default.observe(name: .setappDeviceLimitReched, object: nil, queue: OperationQueue.main) { _ in
+//            if let vc = Self.topViewController() {
+//                    ACSSystemUtils.showSimpleAlert(for: vc, withTitle: String.localizedString("common_error_title"), message: String.localizedString("setapp_device_limit_reached"))
+//                    
+//            }
+//        }
+//    }
     
     //MARK: - Init logger
     
-    private func initLogger() {
-        let isDebugLogs = resources.sharedDefaults().bool(forKey: AEDefaultsDebugLogs)
-        DDLogInfo("(AppDelegate) Init app with loglevel %s", level: isDebugLogs ? .debug : .all)
-        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
-        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
-        
-        #if DEBUG
-        ACLLogger.singleton()?.logLevel = ACLLDebugLevel
-        #endif
-        
-        DDLogInfo("Application started. Version: \(productInfo.buildVersion() ?? "nil")")
-    }
-}
+//    private func initLogger() {
+//        let isDebugLogs = resources.sharedDefaults().bool(forKey: AEDefaultsDebugLogs)
+//        DDLogInfo("(AppDelegate) Init app with loglevel %s", level: isDebugLogs ? .debug : .all)
+//        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
+//        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
+//
+//        #if DEBUG
+//        ACLLogger.singleton()?.logLevel = ACLLDebugLevel
+//        #endif
+//
+//        DDLogInfo("Application started. Version: \(productInfo.buildVersion() ?? "nil")")
+//    }
+//}
 
 

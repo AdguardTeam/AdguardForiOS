@@ -39,7 +39,7 @@ protocol ListOfRulesModelProtocol {
     var delegate: ListOfRulesModelDelegate? { get set }
     
     /* Variables */
-    var rules: [RuleInfo] { get }
+//    var rules: [RuleInfo] { get }
     var type: RulesType { get }
     var enabled: Bool { get set }
     var searchString: String? { get set }
@@ -50,8 +50,8 @@ protocol ListOfRulesModelProtocol {
     func addRule(ruleText: String, errorHandler: @escaping (_ error: String)->Void, completionHandler: @escaping ()->Void)
     func selectAllRules()
     func deleteSelectedRules(completionHandler: @escaping (_ rulesWereDeleted: Bool)->Void, errorHandler: @escaping (_ error: String)->Void)
-    func delete(rule: RuleInfo, errorHandler: @escaping (_ error: String)->Void, completionHandler: @escaping ()->Void)
-    func changeRule(rule: RuleInfo, newText: String, errorHandler: @escaping (_ error: String)->Void, completionHandler: @escaping ()->Void) 
+//    func delete(rule: RuleInfo, errorHandler: @escaping (_ error: String)->Void, completionHandler: @escaping ()->Void)
+//    func changeRule(rule: RuleInfo, newText: String, errorHandler: @escaping (_ error: String)->Void, completionHandler: @escaping ()->Void) 
     func processRulesFromString(_ string: String, errorHandler: @escaping (_ error: String)->Void)
     
     /* Titles variables */

@@ -105,8 +105,8 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
     /* Variables */
     private let fileName = "dns_allowlist.txt"
     
-    private var allRules = [RuleInfo]()
-    private var searchRules = [RuleInfo]()
+//    private var allRules = [RuleInfo]()
+//    private var searchRules = [RuleInfo]()
     
     // MARK: - Initializer
     
@@ -116,7 +116,7 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
         self.theme = theme
         self.vpnManager = vpnManager
         
-        allRules = dnsFiltersService.whitelistRules.map { RuleInfo(domainsConverter.whitelistDomainFromRule($0), false, true, theme) }
+//        allRules = dnsFiltersService.whitelistRules.map { RuleInfo(domainsConverter.whitelistDomainFromRule($0), false, true, theme) }
     }
     
     // MARK: - Main functions

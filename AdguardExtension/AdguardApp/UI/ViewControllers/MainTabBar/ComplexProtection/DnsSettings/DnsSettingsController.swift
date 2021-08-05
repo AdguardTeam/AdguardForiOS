@@ -210,7 +210,7 @@ class DnsSettingsController : UITableViewController {
         }
         
         if indexPath.section == menuSection && indexPath.row == howToSetupRow && resources.dnsImplementation == .native {
-            AppDelegate.shared.presentHowToSetupController()
+//            AppDelegate.shared.presentHowToSetupController()
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -242,7 +242,7 @@ class DnsSettingsController : UITableViewController {
                         DDLogError("Received error when turning system protection on; Error: \(error.localizedDescription)")
                     }
                     DispatchQueue.main.async {
-                        AppDelegate.shared.presentHowToSetupController()
+//                        AppDelegate.shared.presentHowToSetupController()
                     }
                 }
             }

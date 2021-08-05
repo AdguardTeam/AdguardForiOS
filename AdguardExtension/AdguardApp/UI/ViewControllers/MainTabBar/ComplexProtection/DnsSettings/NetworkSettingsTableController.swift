@@ -18,7 +18,7 @@
 
 import UIKit
 
-class NetworkSettingsTableController: UITableViewController, AddRuleControllerDelegate, RuleDetailsControllerDelegate, NetworkSettingsChangedDelegate {
+class NetworkSettingsTableController: UITableViewController, NetworkSettingsChangedDelegate {
     
     /* Cell reuse ids */
     private let networkSettingsTitleCellId = "NetworkSettingsTitleCell"
@@ -121,19 +121,19 @@ class NetworkSettingsTableController: UITableViewController, AddRuleControllerDe
         }
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.section {
-        case filterDataSection:
-            setupFilterDataAction(indexPath: indexPath)
-        case addExceptionSection:
-            addExceptionAction()
-        case exceptionsSection:
-            exceptionSelected(row: indexPath.row)
-        default:
-            break
-        }
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        switch indexPath.section {
+//        case filterDataSection:
+//            setupFilterDataAction(indexPath: indexPath)
+//        case addExceptionSection:
+//            addExceptionAction()
+//        case exceptionsSection:
+//            exceptionSelected(row: indexPath.row)
+//        default:
+//            break
+//        }
+//        tableView.deselectRow(at: indexPath, animated: true)
+//    }
     
     // MARK: - AddRuleControllerDelegate method
     
@@ -143,13 +143,13 @@ class NetworkSettingsTableController: UITableViewController, AddRuleControllerDe
     
     // MARK: - RuleDetailsControllerDelegate
     
-    func removeRule(rule: RuleInfo) {
-        model?.delete(rule: rule.rule)
-    }
-    
-    func changeRule(rule: RuleInfo, newText: String) {
-        model?.change(rule: rule.rule, newRule: newText)
-    }
+//    func removeRule(rule: RuleInfo) {
+//        model?.delete(rule: rule.rule)
+//    }
+//
+//    func changeRule(rule: RuleInfo, newText: String) {
+//        model?.change(rule: rule.rule, newRule: newText)
+//    }
     
     // MARK: - NetworkSettingsChangedDelegate method
     
@@ -236,28 +236,28 @@ class NetworkSettingsTableController: UITableViewController, AddRuleControllerDe
         }
     }
     
-    private func addExceptionAction() {
-        let storyboard = UIStoryboard(name: "UserFilter", bundle: nil)
-        guard let controller = storyboard.instantiateViewController(withIdentifier: "AddRuleController") as? AddRuleController else { return }
-        controller.delegate = self
-        controller.type = .wifiExceptions
-            
-        present(controller, animated: true, completion: nil)
-    }
-    
-    private func exceptionSelected(row: Int){
-        let storyboard = UIStoryboard(name: "UserFilter", bundle: nil)
-        guard let controller = storyboard.instantiateViewController(withIdentifier: "RuleDetailsController") as? RuleDetailsController else { return }
-        guard let exception = model?.exceptions[row] else { return }
-        
-        let rule = RuleInfo(exception.rule, false, true, theme)
-        controller.rule = rule
-        controller.delegate = self
-        controller.rule = rule
-        controller.type = .wifiExceptions
-            
-        present(controller, animated: true, completion: nil)
-    }
+//    private func addExceptionAction() {
+//        let storyboard = UIStoryboard(name: "UserFilter", bundle: nil)
+//        guard let controller = storyboard.instantiateViewController(withIdentifier: "AddRuleController") as? AddRuleController else { return }
+//        controller.delegate = self
+//        controller.type = .wifiExceptions
+//
+//        present(controller, animated: true, completion: nil)
+//    }
+//
+//    private func exceptionSelected(row: Int){
+//        let storyboard = UIStoryboard(name: "UserFilter", bundle: nil)
+//        guard let controller = storyboard.instantiateViewController(withIdentifier: "RuleDetailsController") as? RuleDetailsController else { return }
+//        guard let exception = model?.exceptions[row] else { return }
+//
+//        let rule = RuleInfo(exception.rule, false, true, theme)
+//        controller.rule = rule
+//        controller.delegate = self
+//        controller.rule = rule
+//        controller.type = .wifiExceptions
+//
+//        present(controller, animated: true, completion: nil)
+//    }
 }
 
 extension NetworkSettingsTableController: ThemableProtocol {

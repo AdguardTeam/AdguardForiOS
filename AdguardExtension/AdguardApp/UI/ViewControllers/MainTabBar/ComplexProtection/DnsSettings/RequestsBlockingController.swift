@@ -45,17 +45,17 @@ class RequestsBlockingController: UITableViewController {
         
         let dnsFilterService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
         
-        if segue.identifier == dnsBlacklistSegue {
-            if let controller = segue.destination as? ListOfRulesController {
-                let model: ListOfRulesModelProtocol = SystemBlacklistModel(resources: resources, dnsFiltersService: dnsFilterService, theme: theme, vpnManager: vpnManager, productInfo: productInfo)
-                controller.model = model
-            }
-        } else if segue.identifier == dnsWhitelistSegue {
-            if let controller = segue.destination as? ListOfRulesController {
-                let model: ListOfRulesModelProtocol = SystemWhitelistModel(dnsFiltersService: dnsFilterService, resources: resources, theme: theme, vpnManager: vpnManager)
-                controller.model = model
-            }
-        }
+//        if segue.identifier == dnsBlacklistSegue {
+//            if let controller = segue.destination as? ListOfRulesController {
+//                let model: ListOfRulesModelProtocol = SystemBlacklistModel(resources: resources, dnsFiltersService: dnsFilterService, theme: theme, vpnManager: vpnManager, productInfo: productInfo)
+//                controller.model = model
+//            }
+//        } else if segue.identifier == dnsWhitelistSegue {
+//            if let controller = segue.destination as? ListOfRulesController {
+//                let model: ListOfRulesModelProtocol = SystemWhitelistModel(dnsFiltersService: dnsFilterService, resources: resources, theme: theme, vpnManager: vpnManager)
+//                controller.model = model
+//            }
+//        }
     }
     
     override func viewDidLoad() {

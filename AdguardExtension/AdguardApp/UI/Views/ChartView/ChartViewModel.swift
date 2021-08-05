@@ -253,10 +253,10 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
     }
     
     private func addObservers() {
-        resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] (notification) in
-            self?.obtainStatistics(false) {}
-        }
-        
+//        resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] (notification) in
+//            self?.obtainStatistics(false) {}
+//        }
+//
         resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequests, options: .new, context: nil)
         
         resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsEncryptedRequests, options: .new, context: nil)

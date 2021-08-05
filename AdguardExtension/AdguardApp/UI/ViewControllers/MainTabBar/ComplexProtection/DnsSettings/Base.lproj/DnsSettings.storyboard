@@ -1330,9 +1330,6 @@
                                                 <constraint firstItem="cxk-WO-v4N" firstAttribute="centerY" secondItem="3iO-7B-KIS" secondAttribute="centerY" id="sjP-j1-yxM"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="m0U-wC-ci8" kind="show" identifier="dnsBlacklistSegue" id="5mX-Yl-NLK"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="iI3-sy-nfa">
                                         <rect key="frame" x="0.0" y="349.50000034679067" width="414" height="94"/>
@@ -1410,9 +1407,6 @@
                                                 <constraint firstItem="NOn-Jw-xUm" firstAttribute="leading" secondItem="Wml-J6-ced" secondAttribute="trailing" constant="24" id="rGk-Au-InU"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="m0U-wC-ci8" kind="show" identifier="dnsWhitelistSegue" id="FZs-v2-XaS"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -1437,16 +1431,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qSY-14-hFI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="8.6956521739130448" y="-1266.2946428571429"/>
-        </scene>
-        <!--UserFilter-->
-        <scene sceneID="Gkt-PZ-ORu">
-            <objects>
-                <viewControllerPlaceholder storyboardName="UserFilter" id="m0U-wC-ci8" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="ghu-tn-8x3"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="t8w-fU-0wa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1288" y="-1877"/>
         </scene>
         <!--Dns Providers Controller-->
         <scene sceneID="dNS-fY-mTh">
@@ -3201,9 +3185,6 @@
             <point key="canvasLocation" x="5631.884057971015" y="-137.27678571428569"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="5mX-Yl-NLK"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="Dnsblocking" width="24" height="24"/>
         <image name="arrow_right" width="24" height="24"/>

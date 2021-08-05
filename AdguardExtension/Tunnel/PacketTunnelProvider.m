@@ -691,28 +691,8 @@
     
     NSArray<NSString*> *customFallbacks = [_resources.sharedDefaults valueForKey:CustomFallbackServers];
     NSArray<NSString*> *customBootstraps = [_resources.sharedDefaults valueForKey:CustomBootstrapServers];
-    BlockingModeSettings blockingModeSettings = [_resources.sharedDefaults integerForKey: BlockingMode];
     NSInteger blockedResponseTtlSecs = [_resources.sharedDefaults integerForKey: BlockedResponseTtlSecs];
     AGBlockingMode blockingMode;
-    
-    switch (blockingModeSettings) {
-        case BlockingModeSettingsAgDefault:
-            blockingMode = AGBM_DEFAULT;
-            break;
-        case BlockingModeSettingsAgRefused:
-            blockingMode = AGBM_REFUSED;
-            break;
-        case BlockingModeSettingsAgNxdomain:
-            blockingMode = AGBM_NXDOMAIN;
-            break;
-        case BlockingModeSettingsAgUnspecifiedAddress:
-            blockingMode = AGBM_UNSPECIFIED_ADDRESS;
-            break;
-        case BlockingModeSettingsAgCustomAddress:
-            blockingMode = AGBM_CUSTOM_ADDRESS;
-            break;
-    }
-    
     NSArray<NSString *> *customBlockingIp;
     NSString *customBlockingIpv4;
     NSString *customBlockingIpv6;

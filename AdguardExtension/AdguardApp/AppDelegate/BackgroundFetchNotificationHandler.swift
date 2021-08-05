@@ -59,29 +59,29 @@ final class BackgroundFetchNotificationHandler: IBackgroundFetchNotificationHand
     
     @objc private func antibannerNotify(notification: Notification) {
         
-        switch notification.name {
-        case .ASAntibannerUpdateFilterRules:
-            // Update filter rules
-            antibannerUpdateFilterRules()
-        case .ASAntibannerStartedUpdate:
-            // Update started
-            antibannerStartedUpdate()
-        case .ASAntibannerDidntStartUpdate:
-            // Update did not start
-            antibannerDidntStartUpdate()
-        case .ASAntibannerFinishedUpdate:
-            // Update performed
-            antibannerFinishedUpdate(notification: notification)
-        case .ASAntibannerFailuredUpdate:
-            // Update failed
-            antibannerFailuredUpdate()
-        case .ASAntibannerUpdatePartCompleted:
-            DDLogInfo("(BackgroundFetchNotificationHandler) Antibanner update PART notification.")
-        case .ASAntibannerInstalled:
-            antibannerInstalled()
-        default:
-            break
-        }
+//        switch notification.name {
+//        case .ASAntibannerUpdateFilterRules:
+//            // Update filter rules
+//            antibannerUpdateFilterRules()
+//        case .ASAntibannerStartedUpdate:
+//            // Update started
+////            antibannerStartedUpdate()
+//        case .ASAntibannerDidntStartUpdate:
+//            // Update did not start
+////            antibannerDidntStartUpdate()
+//        case .ASAntibannerFinishedUpdate:
+//            // Update performed
+////            antibannerFinishedUpdate(notification: notification)
+//        case .ASAntibannerFailuredUpdate:
+//            // Update failed
+////            antibannerFailuredUpdate()
+//        case .ASAntibannerUpdatePartCompleted:
+//            DDLogInfo("(BackgroundFetchNotificationHandler) Antibanner update PART notification.")
+//        case .ASAntibannerInstalled:
+////            antibannerInstalled()
+//        default:
+//            break
+//        }
     }
     
     //MARK: - antibannerNotify cases
@@ -102,7 +102,7 @@ final class BackgroundFetchNotificationHandler: IBackgroundFetchNotificationHand
                 // Success antibanner updated from backend
                 self.resources.sharedDefaults().setValue(Date(), forKey: AEDefaultsCheckFiltersLastDate)
                 DDLogInfo("(BackgroundFetchNotificationHandler) End of the Update Transaction from ASAntibannerUpdateFilterRulesNotification.")
-                self.updateFinishedNotify(filtersUpdated: false)
+//                self.updateFinishedNotify(filtersUpdated: false)
             }
         }
     }
@@ -111,14 +111,14 @@ final class BackgroundFetchNotificationHandler: IBackgroundFetchNotificationHand
         self.antibanner.rollbackTransaction()
         DDLogInfo("(BackgroundFetchNotificationHandler) Rollback of the Update Transaction from ASAntibannerUpdateFilterRulesNotification.")
         
-        self.updateFailuredNotify()
+//        self.updateFailuredNotify()
         
         DispatchQueue.main.async {
-            guard let nav = self.getNavigationController() else { return }
-            if let topViewController = nav.topViewController, UIApplication.shared.applicationState != .background {
-                ACSSystemUtils.showSimpleAlert(for: topViewController,
-                                               withTitle: ACLocalizedString("common_error_title", "(AEUISubscriptionController) Alert title. When converting rules process finished in foreground updating."),
-                                               message: ACLocalizedString("load_to_safari_error", "(BackgroundFetchNotificationHandler) Alert message. When converting rules process finished in foreground updating."))
+//            guard let nav = self.getNavigationController() else { return }
+//            if let topViewController = nav.topViewController, UIApplication.shared.applicationState != .background {
+//                ACSSystemUtils.showSimpleAlert(for: topViewController,
+//                                               withTitle: ACLocalizedString("common_error_title", "(AEUISubscriptionController) Alert title. When converting rules process finished in foreground updating."),
+//                                               message: ACLocalizedString("load_to_safari_error", "(BackgroundFetchNotificationHandler) Alert message. When converting rules process finished in foreground updating."))
             }
         }
     }
@@ -126,89 +126,89 @@ final class BackgroundFetchNotificationHandler: IBackgroundFetchNotificationHand
     
     //MARK: - AntibannerStartedUpdate
     
-    private func antibannerStartedUpdate() {
-        guard let isBackground = self.fetchPerformer?.isBackground else { return }
-        if !isBackground {
-            // turn on network activity indicator
-            UIApplication.shared.isNetworkActivityIndicatorVisible = true
-            self.updateStartedNotify()
-        }
-    }
+//    private func antibannerStartedUpdate() {
+//        guard let isBackground = self.fetchPerformer?.isBackground else { return }
+//        if !isBackground {
+//            // turn on network activity indicator
+//            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+//            self.updateStartedNotify()
+//        }
+//    }
     
     //MARK: - AntibannerDidntStartUpdate
     
-    private func antibannerDidntStartUpdate() {
-        self.updateDidNotStartNotify()
-        
-        if antibanner.inTransaction() {
-            antibanner.rollbackTransaction()
-            DDLogInfo("(BackgroundFetchNotificationHandler) Rollback of the Update Transaction from ASAntibannerDidntStartUpdateNotification.")
-        }
-        // Special update case.
-        self.fetchPerformer?.fetchState = .notStarted
-        self.fetchPerformer?.antibanerUpdateFinished(result: .updateFailed)
-    }
+//    private func antibannerDidntStartUpdate() {
+//        self.updateDidNotStartNotify()
+//
+//        if antibanner.inTransaction() {
+//            antibanner.rollbackTransaction()
+//            DDLogInfo("(BackgroundFetchNotificationHandler) Rollback of the Update Transaction from ASAntibannerDidntStartUpdateNotification.")
+//        }
+//        // Special update case.
+//        self.fetchPerformer?.fetchState = .notStarted
+//        self.fetchPerformer?.antibanerUpdateFinished(result: .updateFailed)
+//    }
     
     //MARK: - AntibannerFinishedUpdate
     
-    private func antibannerFinishedUpdate(notification: Notification) {
-        guard let isBackground = self.fetchPerformer?.isBackground else { return }
-        if isBackground {
-            self.fetchPerformer?.fetchState = .filtersupdated
-            antibanner.endTransaction()
-            self.fetchPerformer?.antibanerUpdateFinished(result: .updateNewData)
-            return
-        }
-        
-        if let updatedFilters = notification.userInfo?[ASAntibannerUpdatedFiltersKey] as? [ASDFilterMetadata] {
-            self.updatedFilters = updatedFilters
-        }
-        
-        reloadContentBlockerJson()
-        // turn off network activity indicator
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-    }
+//    private func antibannerFinishedUpdate(notification: Notification) {
+//        guard let isBackground = self.fetchPerformer?.isBackground else { return }
+//        if isBackground {
+//            self.fetchPerformer?.fetchState = .filtersupdated
+//            antibanner.endTransaction()
+//            self.fetchPerformer?.antibanerUpdateFinished(result: .updateNewData)
+//            return
+//        }
+//
+//        if let updatedFilters = notification.userInfo?[ASAntibannerUpdatedFiltersKey] as? [ASDFilterMetadata] {
+//            self.updatedFilters = updatedFilters
+//        }
+//
+//        reloadContentBlockerJson()
+//        // turn off network activity indicator
+//        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+//    }
     
-    private func reloadContentBlockerJson() {
-        contentBlockerService.reloadJsons(backgroundUpdate: true) { [weak self] _ in
-            guard let self = self else { return }
-            if self.antibanner.inTransaction() {
-                // Success antibanner updated from backend
-                self.resources.sharedDefaults().setValue(Date(), forKey: AEDefaultsCheckFiltersLastDate)
-                self.antibanner.endTransaction()
-                DDLogInfo("(BackgroundFetchNotificationHandler) End of the Update Transaction from ASAntibannerFinishedUpdateNotification.")
-                self.updateFinishedNotify(filtersUpdated: true)
-            }
-            
-            // Special update case (in background).
-            self.fetchPerformer?.antibanerUpdateFinished(result: .updateNewData)
-        }
-    }
+//    private func reloadContentBlockerJson() {
+//        contentBlockerService.reloadJsons(backgroundUpdate: true) { [weak self] _ in
+//            guard let self = self else { return }
+//            if self.antibanner.inTransaction() {
+//                // Success antibanner updated from backend
+//                self.resources.sharedDefaults().setValue(Date(), forKey: AEDefaultsCheckFiltersLastDate)
+//                self.antibanner.endTransaction()
+//                DDLogInfo("(BackgroundFetchNotificationHandler) End of the Update Transaction from ASAntibannerFinishedUpdateNotification.")
+//                self.updateFinishedNotify(filtersUpdated: true)
+//            }
+//
+//            // Special update case (in background).
+//            self.fetchPerformer?.antibanerUpdateFinished(result: .updateNewData)
+//        }
+//    }
     
     //MARK: - AntibannerFailuredUpdate
-    private func antibannerFailuredUpdate() {
-        if antibanner.inTransaction() {
-            antibanner.rollbackTransaction()
-            DDLogInfo("(BackgroundFetchNotificationHandler) Rollback of the Update Transaction from ASAntibannerFailuredUpdateNotification.")
-        }
-        
-        self.updateFailuredNotify()
-        
-        // Special update case.
-        self.fetchPerformer?.fetchState = .notStarted
-        self.fetchPerformer?.antibanerUpdateFinished(result: .updateFailed)
-        
-        // turn off network activity indicator
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-    }
-    
+//    private func antibannerFailuredUpdate() {
+//        if antibanner.inTransaction() {
+//            antibanner.rollbackTransaction()
+//            DDLogInfo("(BackgroundFetchNotificationHandler) Rollback of the Update Transaction from ASAntibannerFailuredUpdateNotification.")
+//        }
+//
+//        self.updateFailuredNotify()
+//
+//        // Special update case.
+//        self.fetchPerformer?.fetchState = .notStarted
+//        self.fetchPerformer?.antibanerUpdateFinished(result: .updateFailed)
+//
+//        // turn off network activity indicator
+//        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+//    }
+//
     //MARK: - ASAntibannerInstalled
     
-    private func antibannerInstalled() {
-        contentBlockerService.reloadJsons(backgroundUpdate: true) { _ in
-            DDLogInfo("(BackgroundFetchNotificationHandler) content blocker reloaded after antibanner notification ASAntibannerInstalledNotification")
-        }
-    }
+//    private func antibannerInstalled() {
+//        contentBlockerService.reloadJsons(backgroundUpdate: true) { _ in
+//            DDLogInfo("(BackgroundFetchNotificationHandler) content blocker reloaded after antibanner notification ASAntibannerInstalledNotification")
+//        }
+//    }
     
     
     //MARK: - UpdateNotify methods
@@ -217,52 +217,52 @@ final class BackgroundFetchNotificationHandler: IBackgroundFetchNotificationHand
             let appState = UIApplication.shared.applicationState
             DDLogInfo("(BackgroundFetchNotificationHandler) Started update process. AppState = \(appState.rawValue)")
             
-            NotificationCenter.default.post(name: .appDelegateStartedUpdateNotification, object: self)
+//            NotificationCenter.default.post(name: .appDelegateStartedUpdateNotification, object: self)
         }
     }
     
-    private func updateDidNotStartNotify() {
-        ACSSystemUtils.call { [weak self] in
-            let appState = UIApplication.shared.applicationState
-            DDLogInfo("(BackgroundFetchNotificationHandler) Did not started update process. AppState = \(appState.rawValue)")
-            
-            NotificationCenter.default.post(name: .appDelegateUpdateDidNotStartedNotification, object: self)
-        }
-    }
+//    private func updateDidNotStartNotify() {
+//        ACSSystemUtils.call { [weak self] in
+//            let appState = UIApplication.shared.applicationState
+//            DDLogInfo("(BackgroundFetchNotificationHandler) Did not started update process. AppState = \(appState.rawValue)")
+//
+//            NotificationCenter.default.post(name: .appDelegateUpdateDidNotStartedNotification, object: self)
+//        }
+//    }
     
-    private func updateFailuredNotify() {
-        ACSSystemUtils.call { [weak self] in
-            let appState = UIApplication.shared.applicationState
-            DDLogInfo("(BackgroundFetchNotificationHandler) Failured update process. AppState = \(appState.rawValue)")
-            
-            NotificationCenter.default.post(name: .appDelegateFailuredUpdateNotification, object: self)
-        }
-    }
+//    private func updateFailuredNotify() {
+//        ACSSystemUtils.call { [weak self] in
+//            let appState = UIApplication.shared.applicationState
+//            DDLogInfo("(BackgroundFetchNotificationHandler) Failured update process. AppState = \(appState.rawValue)")
+//
+//            NotificationCenter.default.post(name: .appDelegateFailuredUpdateNotification, object: self)
+//        }
+//    }
     
     private func updateFinishedNotify(filtersUpdated: Bool) {
         DDLogInfo("(BackgroundFetchNotificationHandler) Finished update process.")
         
         var metas = [ASDFilterMetadata]()
+//
+//        if filtersUpdated {
+//            metas = updatedFilters
+//            updatedFilters.removeAll()
+//        }
         
-        if filtersUpdated {
-            metas = updatedFilters
-            updatedFilters.removeAll()
-        }
-        
-        ACSSystemUtils.call { [weak self] in
-            let appState = UIApplication.shared.applicationState
-            DDLogInfo("(BackgroundFetchNotificationHandler) Finished update process, updated filters = \(metas.count). AppState = \(appState.rawValue)")
-            
-            let userInfo = [Notification.Name.appDelegateUpdatedFiltersKey: metas.count]
-            NotificationCenter.default.post(name: .appDelegateFinishedUpdateNotification, object: self, userInfo: userInfo)
-        }
+//        ACSSystemUtils.call { [weak self] in
+//            let appState = UIApplication.shared.applicationState
+//            DDLogInfo("(BackgroundFetchNotificationHandler) Finished update process, updated filters = \(metas.count). AppState = \(appState.rawValue)")
+//
+//            let userInfo = [Notification.Name.appDelegateUpdatedFiltersKey: metas.count]
+//            NotificationCenter.default.post(name: .appDelegateFinishedUpdateNotification, object: self, userInfo: userInfo)
+//        }
     }
     
-    private func getNavigationController() -> UINavigationController? {
-        guard let nav = AppDelegate.topViewController() as? UINavigationController else { return nil }
-        return nav
-    }
-}
+//    private func getNavigationController() -> UINavigationController? {
+////        guard let nav = AppDelegate.topViewController() as? UINavigationController else { return nil }
+////        return nav
+//    }
+//}
 
 extension Notification.Name {
     static let appDelegateStartedUpdateNotification = Notification.Name("AppDelegateStartedUpdateNotification")
