@@ -155,15 +155,6 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
             }
             return
         }
-        
-        for delegate in chartPointsChangedDelegates {
-            if delegate is MainPageController {
-                delegate.numberOfRequestsChanged(requestsCount: requestsMain, encryptedCount: encryptedMain, averageElapsed: averageElapsedMain)
-            }
-            else if delegate is ActivityViewController {
-                delegate.numberOfRequestsChanged(requestsCount: requestsActivity, encryptedCount: encryptedActivity, averageElapsed: averageElapsedActivity)
-            }
-        }
     }
     
     // MARK: - private methods
@@ -203,9 +194,7 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
             self.requestsMain = requestsInfo.requestsNumber
             self.encryptedMain = requestsInfo.encryptedNumber
             self.averageElapsedMain = requestsInfo.averageElapsedTime
-            
-            let delegate = self.chartPointsChangedDelegates.first(where: { $0 is MainPageController })
-            delegate?.numberOfRequestsChanged(requestsCount: requestsInfo.requestsNumber, encryptedCount: requestsInfo.encryptedNumber, averageElapsed: requestsInfo.averageElapsedTime)
+
             
             completion()
         }
