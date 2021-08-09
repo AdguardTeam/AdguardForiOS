@@ -57,262 +57,85 @@
 		D049EEA326B2F35B00B8088B /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = D049EEA226B2F35B00B8088B /* Zip */; };
 		D07256F726BD5D2E00654177 /* SafariJsonProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256F626BD5D2E00654177 /* SafariJsonProvider.swift */; };
 		D09B6EE526B9E0CE00AC3BE7 /* schema.sql in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E47726B16E70005344D2 /* schema.sql */; };
-		D0A0E4BE26B16E71005344D2 /* UserRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E48F26B16E70005344D2 /* UserRule.swift */; };
 		D0A0E4BF26B16E71005344D2 /* UserRulesManagersProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E44326B16E6F005344D2 /* UserRulesManagersProvider.swift */; };
-		D0A0E4C026B16E71005344D2 /* UserRulesManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E49726B16E70005344D2 /* UserRulesManagerProtocol.swift */; };
-		D0A0E4C126B16E71005344D2 /* UserRulesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4B926B16E71005344D2 /* UserRulesManager.swift */; };
-		D0A0E4C226B16E71005344D2 /* UserRulesManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4B826B16E71005344D2 /* UserRulesManagerProtocol.swift */; };
-		D0A0E4C326B16E71005344D2 /* UserRulesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E49826B16E70005344D2 /* UserRulesManager.swift */; };
-		D0A0E4C426B16E71005344D2 /* AllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4BD26B16E71005344D2 /* AllowlistRuleConverter.swift */; };
 		D0A0E4C526B16E71005344D2 /* InvertedAllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4BA26B16E71005344D2 /* InvertedAllowlistRuleConverter.swift */; };
-		D0A0E4C626B16E71005344D2 /* BlocklistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4BC26B16E71005344D2 /* BlocklistRuleConverter.swift */; };
-		D0A0E4C726B16E71005344D2 /* BlocklistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E49A26B16E70005344D2 /* BlocklistRuleConverter.swift */; };
 		D0A0E4C826B16E71005344D2 /* UserRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E49B26B16E70005344D2 /* UserRuleConverter.swift */; };
-		D0A0E4C926B16E71005344D2 /* InvertedAllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E49C26B16E70005344D2 /* InvertedAllowlistRuleConverter.swift */; };
-		D0A0E4CA26B16E71005344D2 /* UserRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4BB26B16E71005344D2 /* UserRuleConverter.swift */; };
-		D0A0E4CB26B16E71005344D2 /* AllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E49D26B16E70005344D2 /* AllowlistRuleConverter.swift */; };
 		D0A0E4CC26B16E71005344D2 /* BlocklistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E44526B16E6F005344D2 /* BlocklistRuleConverter.swift */; };
-		D0A0E4CD26B16E71005344D2 /* UserRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E44626B16E6F005344D2 /* UserRuleConverter.swift */; };
-		D0A0E4CE26B16E71005344D2 /* InvertedAllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E44726B16E6F005344D2 /* InvertedAllowlistRuleConverter.swift */; };
 		D0A0E4CF26B16E71005344D2 /* AllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E44826B16E6F005344D2 /* AllowlistRuleConverter.swift */; };
-		D0A0E4D026B16E71005344D2 /* UserRulesManagersProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E49026B16E70005344D2 /* UserRulesManagersProvider.swift */; };
-		D0A0E4D126B16E71005344D2 /* InvertedAllowlistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E44A26B16E6F005344D2 /* InvertedAllowlistRulesStorage.swift */; };
-		D0A0E4D226B16E71005344D2 /* AllowlistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E44B26B16E6F005344D2 /* AllowlistRulesStorage.swift */; };
-		D0A0E4D326B16E71005344D2 /* BlocklistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E44C26B16E6F005344D2 /* BlocklistRulesStorage.swift */; };
-		D0A0E4D426B16E71005344D2 /* UserRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E44D26B16E6F005344D2 /* UserRulesStorage.swift */; };
 		D0A0E4D526B16E71005344D2 /* UserRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4B626B16E70005344D2 /* UserRulesStorage.swift */; };
 		D0A0E4D626B16E71005344D2 /* AllowlistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4B526B16E70005344D2 /* AllowlistRulesStorage.swift */; };
-		D0A0E4D726B16E71005344D2 /* InvertedAllowlistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E49226B16E70005344D2 /* InvertedAllowlistRulesStorage.swift */; };
 		D0A0E4D826B16E71005344D2 /* InvertedAllowlistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4B726B16E70005344D2 /* InvertedAllowlistRulesStorage.swift */; };
-		D0A0E4D926B16E71005344D2 /* BlocklistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4B426B16E70005344D2 /* BlocklistRulesStorage.swift */; };
-		D0A0E4DA26B16E71005344D2 /* AllowlistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E49326B16E70005344D2 /* AllowlistRulesStorage.swift */; };
 		D0A0E4DB26B16E71005344D2 /* BlocklistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E49426B16E70005344D2 /* BlocklistRulesStorage.swift */; };
-		D0A0E4DC26B16E71005344D2 /* UserRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E49526B16E70005344D2 /* UserRulesStorage.swift */; };
-		D0A0E4DD26B16E71005344D2 /* UserRulesManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E44F26B16E6F005344D2 /* UserRulesManagerProtocol.swift */; };
-		D0A0E4DE26B16E71005344D2 /* UserRulesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E45026B16E6F005344D2 /* UserRulesManager.swift */; };
 		D0A0E4DF26B16E71005344D2 /* UserRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E45126B16E6F005344D2 /* UserRule.swift */; };
 		D0A0E4E026B16E71005344D2 /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3FE26B16E6E005344D2 /* URL+Utils.swift */; };
-		D0A0E4E126B16E71005344D2 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E45826B16E6F005344D2 /* Atomic.swift */; };
-		D0A0E4E226B16E71005344D2 /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E45726B16E6F005344D2 /* URL+Utils.swift */; };
-		D0A0E4E326B16E71005344D2 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3FF26B16E6E005344D2 /* Atomic.swift */; };
-		D0A0E4E426B16E71005344D2 /* schema.sql in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E3A226B16E6E005344D2 /* schema.sql */; };
-		D0A0E4E526B16E71005344D2 /* update0.100.sql in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E3A326B16E6E005344D2 /* update0.100.sql */; };
-		D0A0E4E626B16E71005344D2 /* update0.101.sql in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E3A426B16E6E005344D2 /* update0.101.sql */; };
 		D0A0E4E726B16E71005344D2 /* update0.102.sql in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E3A526B16E6E005344D2 /* update0.102.sql */; };
-		D0A0E4E826B16E71005344D2 /* schema0.101.sql in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E3A626B16E6E005344D2 /* schema0.101.sql */; };
-		D0A0E4E926B16E71005344D2 /* schema0.100.sql in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E3A726B16E6E005344D2 /* schema0.100.sql */; };
 		D0A0E4EA26B16E71005344D2 /* schema0.102.sql in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E3A826B16E6E005344D2 /* schema0.102.sql */; };
-		D0A0E4EB26B16E71005344D2 /* ApiMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E41326B16E6E005344D2 /* ApiMethods.swift */; };
-		D0A0E4EC26B16E71005344D2 /* ParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3AB26B16E6E005344D2 /* ParserProtocol.swift */; };
 		D0A0E4ED26B16E71005344D2 /* FiltersMetadataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3AC26B16E6E005344D2 /* FiltersMetadataParser.swift */; };
-		D0A0E4EE26B16E71005344D2 /* FiltersLocalizationsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3AD26B16E6E005344D2 /* FiltersLocalizationsParser.swift */; };
 		D0A0E4EF26B16E71005344D2 /* RequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3AE26B16E6E005344D2 /* RequestSender.swift */; };
-		D0A0E4F026B16E71005344D2 /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3B026B16E6E005344D2 /* RequestProtocol.swift */; };
-		D0A0E4F126B16E71005344D2 /* FiltersLocalizationsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3B126B16E6E005344D2 /* FiltersLocalizationsRequest.swift */; };
 		D0A0E4F226B16E71005344D2 /* FiltersMetadataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3B226B16E6E005344D2 /* FiltersMetadataRequest.swift */; };
 		D0A0E4F326B16E71005344D2 /* RequestsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3B326B16E6E005344D2 /* RequestsFactory.swift */; };
 		D0A0E4F426B16E71005344D2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E42E26B16E6F005344D2 /* Result.swift */; };
 		D0A0E4F526B16E71005344D2 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E41426B16E6E005344D2 /* CommonError.swift */; };
 		D0A0E4F626B16E71005344D2 /* ResetableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3FC26B16E6E005344D2 /* ResetableProtocol.swift */; };
 		D0A0E4F726B16E71005344D2 /* ApiMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3B426B16E6E005344D2 /* ApiMethods.swift */; };
-		D0A0E4F826B16E71005344D2 /* schema.sql in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E42626B16E6F005344D2 /* schema.sql */; };
 		D0A0E4F926B16E71005344D2 /* schema0.101.sql in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E47A26B16E70005344D2 /* schema0.101.sql */; };
-		D0A0E4FA26B16E71005344D2 /* schema0.102.sql in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E47826B16E70005344D2 /* schema0.102.sql */; };
-		D0A0E4FB26B16E71005344D2 /* update0.100.sql in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E42726B16E6F005344D2 /* update0.100.sql */; };
 		D0A0E4FC26B16E71005344D2 /* update0.100.sql in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E47626B16E70005344D2 /* update0.100.sql */; };
 		D0A0E4FD26B16E71005344D2 /* update0.101.sql in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E42826B16E6F005344D2 /* update0.101.sql */; };
-		D0A0E4FE26B16E71005344D2 /* update0.102.sql in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E47C26B16E70005344D2 /* update0.102.sql */; };
-		D0A0E4FF26B16E71005344D2 /* update0.101.sql in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E47B26B16E70005344D2 /* update0.101.sql */; };
-		D0A0E50026B16E71005344D2 /* update0.102.sql in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E42926B16E6F005344D2 /* update0.102.sql */; };
-		D0A0E50126B16E71005344D2 /* schema0.100.sql in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E47926B16E70005344D2 /* schema0.100.sql */; };
-		D0A0E50226B16E71005344D2 /* schema0.101.sql in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E42A26B16E6F005344D2 /* schema0.101.sql */; };
 		D0A0E50326B16E71005344D2 /* schema.sql in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E47726B16E70005344D2 /* schema.sql */; };
 		D0A0E50426B16E71005344D2 /* schema0.100.sql in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E42B26B16E6F005344D2 /* schema0.100.sql */; };
-		D0A0E50526B16E71005344D2 /* schema0.102.sql in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E42C26B16E6F005344D2 /* schema0.102.sql */; };
 		D0A0E50626B16E71005344D2 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3B626B16E6E005344D2 /* Logger.swift */; };
 		D0A0E50926B16E71005344D2 /* AffinityRulesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3B826B16E6E005344D2 /* AffinityRulesParser.swift */; };
 		D0A0E50A26B16E71005344D2 /* FiltersConverterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3B926B16E6E005344D2 /* FiltersConverterService.swift */; };
-		D0A0E50B26B16E71005344D2 /* QuickAllowlistClipper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3BA26B16E6E005344D2 /* QuickAllowlistClipper.swift */; };
-		D0A0E50C26B16E71005344D2 /* FiltersConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3BB26B16E6E005344D2 /* FiltersConverter.swift */; };
-		D0A0E50D26B16E71005344D2 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3BC26B16E6E005344D2 /* CommonError.swift */; };
 		D0A0E50E26B16E71005344D2 /* FiltersConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E46626B16E6F005344D2 /* FiltersConverter.swift */; };
-		D0A0E50F26B16E71005344D2 /* AffinityRulesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E46826B16E6F005344D2 /* AffinityRulesParser.swift */; };
-		D0A0E51026B16E71005344D2 /* AffinityRulesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E40F26B16E6E005344D2 /* AffinityRulesParser.swift */; };
 		D0A0E51126B16E71005344D2 /* QuickAllowlistClipper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E46726B16E6F005344D2 /* QuickAllowlistClipper.swift */; };
-		D0A0E51226B16E71005344D2 /* FiltersConverterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E41026B16E6E005344D2 /* FiltersConverterService.swift */; };
-		D0A0E51326B16E71005344D2 /* QuickAllowlistClipper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E41126B16E6E005344D2 /* QuickAllowlistClipper.swift */; };
-		D0A0E51426B16E71005344D2 /* FiltersConverterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E46526B16E6F005344D2 /* FiltersConverterService.swift */; };
-		D0A0E51526B16E71005344D2 /* FiltersConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E41226B16E6E005344D2 /* FiltersConverter.swift */; };
-		D0A0E51626B16E71005344D2 /* ExtendedFiltersMetaLocalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3BE26B16E6E005344D2 /* ExtendedFiltersMetaLocalizations.swift */; };
-		D0A0E51726B16E71005344D2 /* MetaStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3C026B16E6E005344D2 /* MetaStorage.swift */; };
-		D0A0E51826B16E71005344D2 /* MetaStorage+Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3C126B16E6E005344D2 /* MetaStorage+Tags.swift */; };
 		D0A0E51926B16E71005344D2 /* MetaStorage+GroupLocalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3C226B16E6E005344D2 /* MetaStorage+GroupLocalizations.swift */; };
 		D0A0E51A26B16E71005344D2 /* MetaStorage+FiltersLocalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3C326B16E6E005344D2 /* MetaStorage+FiltersLocalizations.swift */; };
-		D0A0E51B26B16E71005344D2 /* DefaultDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3C426B16E6E005344D2 /* DefaultDatabaseManager.swift */; };
-		D0A0E51C26B16E71005344D2 /* ProductionDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3C526B16E6E005344D2 /* ProductionDatabaseManager.swift */; };
-		D0A0E51D26B16E71005344D2 /* MetaStorage+FitlerRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3C626B16E6E005344D2 /* MetaStorage+FitlerRules.swift */; };
-		D0A0E51E26B16E71005344D2 /* MetaStorage+Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3C726B16E6E005344D2 /* MetaStorage+Filters.swift */; };
-		D0A0E51F26B16E71005344D2 /* MetaStorage+Langs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3C826B16E6E005344D2 /* MetaStorage+Langs.swift */; };
 		D0A0E52026B16E71005344D2 /* MetaStorage+Groups.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3C926B16E6E005344D2 /* MetaStorage+Groups.swift */; };
-		D0A0E52126B16E71005344D2 /* CustomFilterMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3CB26B16E6E005344D2 /* CustomFilterMeta.swift */; };
-		D0A0E52226B16E71005344D2 /* CustomFilterMetaParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3CC26B16E6E005344D2 /* CustomFilterMetaParser.swift */; };
-		D0A0E52326B16E71005344D2 /* FilterMetaProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3CD26B16E6E005344D2 /* FilterMetaProtocol.swift */; };
 		D0A0E52426B16E71005344D2 /* GroupMetaProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3CE26B16E6E005344D2 /* GroupMetaProtocol.swift */; };
-		D0A0E52526B16E71005344D2 /* ExtendedFiltersMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3CF26B16E6E005344D2 /* ExtendedFiltersMeta.swift */; };
-		D0A0E52626B16E71005344D2 /* UserDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E47426B16E6F005344D2 /* UserDefaultsStorage.swift */; };
-		D0A0E52726B16E71005344D2 /* FilterFilesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E47526B16E70005344D2 /* FilterFilesStorage.swift */; };
-		D0A0E52826B16E71005344D2 /* FilterFilesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E42326B16E6E005344D2 /* FilterFilesStorage.swift */; };
-		D0A0E52926B16E71005344D2 /* UserDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E42426B16E6E005344D2 /* UserDefaultsStorage.swift */; };
 		D0A0E52E26B16E71005344D2 /* FilterMetaProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E48226B16E70005344D2 /* FilterMetaProtocol.swift */; };
-		D0A0E52F26B16E71005344D2 /* GroupMetaProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E48126B16E70005344D2 /* GroupMetaProtocol.swift */; };
-		D0A0E53026B16E71005344D2 /* ExtendedFiltersMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E48026B16E70005344D2 /* ExtendedFiltersMeta.swift */; };
-		D0A0E53126B16E71005344D2 /* ExtendedFiltersMetaLocalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E48E26B16E70005344D2 /* ExtendedFiltersMetaLocalizations.swift */; };
 		D0A0E53226B16E71005344D2 /* ExtendedFiltersMetaLocalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E43026B16E6F005344D2 /* ExtendedFiltersMetaLocalizations.swift */; };
-		D0A0E53326B16E71005344D2 /* MetaStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E43226B16E6F005344D2 /* MetaStorage.swift */; };
 		D0A0E53426B16E71005344D2 /* MetaStorage+Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E43326B16E6F005344D2 /* MetaStorage+Tags.swift */; };
-		D0A0E53526B16E71005344D2 /* MetaStorage+GroupLocalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E43426B16E6F005344D2 /* MetaStorage+GroupLocalizations.swift */; };
-		D0A0E53626B16E71005344D2 /* MetaStorage+FiltersLocalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E43526B16E6F005344D2 /* MetaStorage+FiltersLocalizations.swift */; };
 		D0A0E53726B16E71005344D2 /* DefaultDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E43626B16E6F005344D2 /* DefaultDatabaseManager.swift */; };
 		D0A0E53826B16E71005344D2 /* ProductionDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E43726B16E6F005344D2 /* ProductionDatabaseManager.swift */; };
 		D0A0E53926B16E71005344D2 /* MetaStorage+FitlerRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E43826B16E6F005344D2 /* MetaStorage+FitlerRules.swift */; };
 		D0A0E53A26B16E71005344D2 /* MetaStorage+Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E43926B16E6F005344D2 /* MetaStorage+Filters.swift */; };
 		D0A0E53B26B16E71005344D2 /* MetaStorage+Langs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E43A26B16E6F005344D2 /* MetaStorage+Langs.swift */; };
-		D0A0E53C26B16E71005344D2 /* MetaStorage+Groups.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E43B26B16E6F005344D2 /* MetaStorage+Groups.swift */; };
-		D0A0E53D26B16E71005344D2 /* ProductionDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4B026B16E70005344D2 /* ProductionDatabaseManager.swift */; };
 		D0A0E53E26B16E71005344D2 /* MetaStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E48426B16E70005344D2 /* MetaStorage.swift */; };
-		D0A0E53F26B16E71005344D2 /* MetaStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4B126B16E70005344D2 /* MetaStorage.swift */; };
-		D0A0E54026B16E71005344D2 /* MetaStorage+Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4AC26B16E70005344D2 /* MetaStorage+Filters.swift */; };
-		D0A0E54126B16E71005344D2 /* MetaStorage+Groups.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4AB26B16E70005344D2 /* MetaStorage+Groups.swift */; };
-		D0A0E54226B16E71005344D2 /* MetaStorage+Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E48526B16E70005344D2 /* MetaStorage+Tags.swift */; };
-		D0A0E54326B16E71005344D2 /* MetaStorage+Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4B226B16E70005344D2 /* MetaStorage+Tags.swift */; };
-		D0A0E54426B16E71005344D2 /* MetaStorage+Langs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4AD26B16E70005344D2 /* MetaStorage+Langs.swift */; };
-		D0A0E54526B16E71005344D2 /* MetaStorage+GroupLocalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E48626B16E70005344D2 /* MetaStorage+GroupLocalizations.swift */; };
-		D0A0E54626B16E71005344D2 /* MetaStorage+GroupLocalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4B326B16E70005344D2 /* MetaStorage+GroupLocalizations.swift */; };
-		D0A0E54726B16E71005344D2 /* MetaStorage+FiltersLocalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E48726B16E70005344D2 /* MetaStorage+FiltersLocalizations.swift */; };
-		D0A0E54826B16E71005344D2 /* MetaStorage+FitlerRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4AF26B16E70005344D2 /* MetaStorage+FitlerRules.swift */; };
-		D0A0E54926B16E71005344D2 /* DefaultDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E48826B16E70005344D2 /* DefaultDatabaseManager.swift */; };
-		D0A0E54A26B16E71005344D2 /* DefaultDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4AA26B16E70005344D2 /* DefaultDatabaseManager.swift */; };
-		D0A0E54B26B16E71005344D2 /* ProductionDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E48926B16E70005344D2 /* ProductionDatabaseManager.swift */; };
-		D0A0E54C26B16E71005344D2 /* MetaStorage+FiltersLocalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4AE26B16E70005344D2 /* MetaStorage+FiltersLocalizations.swift */; };
-		D0A0E54D26B16E71005344D2 /* MetaStorage+FitlerRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E48A26B16E70005344D2 /* MetaStorage+FitlerRules.swift */; };
-		D0A0E54E26B16E71005344D2 /* MetaStorage+Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E48B26B16E70005344D2 /* MetaStorage+Filters.swift */; };
-		D0A0E54F26B16E71005344D2 /* MetaStorage+Langs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E48C26B16E70005344D2 /* MetaStorage+Langs.swift */; };
-		D0A0E55026B16E71005344D2 /* MetaStorage+Groups.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E48D26B16E70005344D2 /* MetaStorage+Groups.swift */; };
-		D0A0E55126B16E71005344D2 /* CustomFilterMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E43D26B16E6F005344D2 /* CustomFilterMeta.swift */; };
-		D0A0E55226B16E71005344D2 /* CustomFilterMetaParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E43E26B16E6F005344D2 /* CustomFilterMetaParser.swift */; };
 		D0A0E55326B16E71005344D2 /* CustomFilterMetaParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4A826B16E70005344D2 /* CustomFilterMetaParser.swift */; };
-		D0A0E55426B16E71005344D2 /* CustomFilterMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4A926B16E70005344D2 /* CustomFilterMeta.swift */; };
 		D0A0E55526B16E71005344D2 /* CustomFilterMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E47E26B16E70005344D2 /* CustomFilterMeta.swift */; };
-		D0A0E55626B16E71005344D2 /* CustomFilterMetaParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E47F26B16E70005344D2 /* CustomFilterMetaParser.swift */; };
-		D0A0E55726B16E71005344D2 /* FilterMetaProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E43F26B16E6F005344D2 /* FilterMetaProtocol.swift */; };
-		D0A0E55826B16E71005344D2 /* GroupMetaProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E44026B16E6F005344D2 /* GroupMetaProtocol.swift */; };
 		D0A0E55926B16E71005344D2 /* ExtendedFiltersMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E44126B16E6F005344D2 /* ExtendedFiltersMeta.swift */; };
-		D0A0E55A26B16E71005344D2 /* ContentBlockersInfoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3D626B16E6E005344D2 /* ContentBlockersInfoStorage.swift */; };
 		D0A0E55B26B16E71005344D2 /* ContentBlockerJsonProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3D726B16E6E005344D2 /* ContentBlockerJsonProvider.swift */; };
 		D0A0E55C26B16E71005344D2 /* ContentBlockersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3D826B16E6E005344D2 /* ContentBlockersManager.swift */; };
-		D0A0E55D26B16E71005344D2 /* ContentBlockerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3D926B16E6E005344D2 /* ContentBlockerService.swift */; };
 		D0A0E55E26B16E71005344D2 /* ContentBlockersInfoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E45326B16E6F005344D2 /* ContentBlockersInfoStorage.swift */; };
-		D0A0E55F26B16E71005344D2 /* ContentBlockersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4A026B16E70005344D2 /* ContentBlockersManager.swift */; };
-		D0A0E56026B16E71005344D2 /* ContentBlockerJsonProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E45426B16E6F005344D2 /* ContentBlockerJsonProvider.swift */; };
-		D0A0E56126B16E71005344D2 /* ContentBlockersInfoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4A126B16E70005344D2 /* ContentBlockersInfoStorage.swift */; };
-		D0A0E56226B16E71005344D2 /* ContentBlockerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E49F26B16E70005344D2 /* ContentBlockerService.swift */; };
-		D0A0E56326B16E71005344D2 /* ContentBlockersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E45526B16E6F005344D2 /* ContentBlockersManager.swift */; };
-		D0A0E56426B16E71005344D2 /* ContentBlockerJsonProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E49E26B16E70005344D2 /* ContentBlockerJsonProvider.swift */; };
 		D0A0E56526B16E71005344D2 /* ContentBlockerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E45626B16E6F005344D2 /* ContentBlockerService.swift */; };
-		D0A0E56726B16E71005344D2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3DA26B16E6E005344D2 /* Result.swift */; };
-		D0A0E56826B16E71005344D2 /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3DC26B16E6E005344D2 /* URL+Utils.swift */; };
 		D0A0E56926B16E71005344D2 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3DD26B16E6E005344D2 /* Atomic.swift */; };
-		D0A0E56A26B16E71005344D2 /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E47026B16E6F005344D2 /* RequestProtocol.swift */; };
-		D0A0E56B26B16E71005344D2 /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4A626B16E70005344D2 /* RequestProtocol.swift */; };
-		D0A0E56C26B16E71005344D2 /* FiltersLocalizationsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E47126B16E6F005344D2 /* FiltersLocalizationsRequest.swift */; };
-		D0A0E56D26B16E71005344D2 /* FiltersLocalizationsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4A726B16E70005344D2 /* FiltersLocalizationsRequest.swift */; };
-		D0A0E56E26B16E71005344D2 /* FiltersMetadataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4A526B16E70005344D2 /* FiltersMetadataRequest.swift */; };
-		D0A0E56F26B16E71005344D2 /* FiltersMetadataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E47226B16E6F005344D2 /* FiltersMetadataRequest.swift */; };
-		D0A0E57026B16E71005344D2 /* ParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E41726B16E6E005344D2 /* ParserProtocol.swift */; };
-		D0A0E57126B16E71005344D2 /* FiltersMetadataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E41826B16E6E005344D2 /* FiltersMetadataParser.swift */; };
 		D0A0E57226B16E71005344D2 /* FiltersLocalizationsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E41926B16E6E005344D2 /* FiltersLocalizationsParser.swift */; };
-		D0A0E57326B16E71005344D2 /* RequestsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E46A26B16E6F005344D2 /* RequestsFactory.swift */; };
-		D0A0E57426B16E71005344D2 /* RequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E41A26B16E6E005344D2 /* RequestSender.swift */; };
-		D0A0E57526B16E71005344D2 /* RequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E46926B16E6F005344D2 /* RequestSender.swift */; };
 		D0A0E57626B16E71005344D2 /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E41C26B16E6E005344D2 /* RequestProtocol.swift */; };
 		D0A0E57726B16E71005344D2 /* FiltersLocalizationsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E41D26B16E6E005344D2 /* FiltersLocalizationsRequest.swift */; };
-		D0A0E57826B16E71005344D2 /* FiltersMetadataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E41E26B16E6E005344D2 /* FiltersMetadataRequest.swift */; };
-		D0A0E57926B16E71005344D2 /* ParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E46C26B16E6F005344D2 /* ParserProtocol.swift */; };
 		D0A0E57A26B16E71005344D2 /* ParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4A426B16E70005344D2 /* ParserProtocol.swift */; };
-		D0A0E57B26B16E71005344D2 /* FiltersLocalizationsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4A326B16E70005344D2 /* FiltersLocalizationsParser.swift */; };
-		D0A0E57C26B16E71005344D2 /* FiltersMetadataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E46D26B16E6F005344D2 /* FiltersMetadataParser.swift */; };
-		D0A0E57D26B16E71005344D2 /* FiltersLocalizationsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E46E26B16E6F005344D2 /* FiltersLocalizationsParser.swift */; };
-		D0A0E57E26B16E71005344D2 /* FiltersMetadataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E4A226B16E70005344D2 /* FiltersMetadataParser.swift */; };
-		D0A0E57F26B16E71005344D2 /* RequestsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E41F26B16E6E005344D2 /* RequestsFactory.swift */; };
 		D0A0E58026B16E71005344D2 /* SafariProtection+UserRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E45C26B16E6F005344D2 /* SafariProtection+UserRules.swift */; };
 		D0A0E58126B16E71005344D2 /* SafariProtection+ContentBlockers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E40126B16E6E005344D2 /* SafariProtection+ContentBlockers.swift */; };
 		D0A0E58226B16E71005344D2 /* SafariProtection+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E45E26B16E6F005344D2 /* SafariProtection+Configuration.swift */; };
-		D0A0E58326B16E71005344D2 /* SafariProtection+Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E45B26B16E6F005344D2 /* SafariProtection+Filters.swift */; };
-		D0A0E58426B16E71005344D2 /* SafariProtection+UserRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E40226B16E6E005344D2 /* SafariProtection+UserRules.swift */; };
 		D0A0E58526B16E71005344D2 /* SafariProtection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E45D26B16E6F005344D2 /* SafariProtection.swift */; };
-		D0A0E58626B16E71005344D2 /* SafariProtection+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E40326B16E6E005344D2 /* SafariProtection+Configuration.swift */; };
-		D0A0E58726B16E71005344D2 /* SafariProtection+ContentBlockers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E46026B16E6F005344D2 /* SafariProtection+ContentBlockers.swift */; };
-		D0A0E58826B16E71005344D2 /* SafariProtection+BackgroundFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E40426B16E6E005344D2 /* SafariProtection+BackgroundFetch.swift */; };
-		D0A0E58926B16E71005344D2 /* SafariProtection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E40526B16E6E005344D2 /* SafariProtection.swift */; };
 		D0A0E58A26B16E71005344D2 /* SafariProtection+Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E40626B16E6E005344D2 /* SafariProtection+Filters.swift */; };
 		D0A0E58B26B16E71005344D2 /* SafariProtection+BackgroundFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E45F26B16E6F005344D2 /* SafariProtection+BackgroundFetch.swift */; };
-		D0A0E58C26B16E71005344D2 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E45A26B16E6F005344D2 /* Configuration.swift */; };
 		D0A0E58D26B16E71005344D2 /* ServicesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E40726B16E6E005344D2 /* ServicesStorage.swift */; };
 		D0A0E58E26B16E71005344D2 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E40826B16E6E005344D2 /* Configuration.swift */; };
-		D0A0E58F26B16E71005344D2 /* ServicesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E45926B16E6F005344D2 /* ServicesStorage.swift */; };
 		D0A0E59026B16E71005344D2 /* FilterFilesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3DF26B16E6E005344D2 /* FilterFilesStorage.swift */; };
 		D0A0E59126B16E71005344D2 /* UserDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3E026B16E6E005344D2 /* UserDefaultsStorage.swift */; };
-		D0A0E59A26B16E71005344D2 /* ResetableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3EA26B16E6E005344D2 /* ResetableProtocol.swift */; };
 		D0A0E59B26B16E71005344D2 /* FiltersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E46426B16E6F005344D2 /* FiltersService.swift */; };
 		D0A0E59C26B16E71005344D2 /* SafariGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E46326B16E6F005344D2 /* SafariGroup.swift */; };
-		D0A0E59D26B16E71005344D2 /* SafariGroup+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E46226B16E6F005344D2 /* SafariGroup+Filter.swift */; };
 		D0A0E59E26B16E71005344D2 /* SafariGroup+GroupType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E40A26B16E6E005344D2 /* SafariGroup+GroupType.swift */; };
-		D0A0E59F26B16E71005344D2 /* SafariGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E40B26B16E6E005344D2 /* SafariGroup.swift */; };
 		D0A0E5A026B16E71005344D2 /* SafariGroup+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E40C26B16E6E005344D2 /* SafariGroup+Filter.swift */; };
-		D0A0E5A126B16E71005344D2 /* SafariGroup+GroupType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E46126B16E6F005344D2 /* SafariGroup+GroupType.swift */; };
-		D0A0E5A326B16E71005344D2 /* UserRulesManagersProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3EC26B16E6E005344D2 /* UserRulesManagersProvider.swift */; };
-		D0A0E5A426B16E71005344D2 /* BlocklistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3EE26B16E6E005344D2 /* BlocklistRuleConverter.swift */; };
-		D0A0E5A526B16E71005344D2 /* UserRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3EF26B16E6E005344D2 /* UserRuleConverter.swift */; };
-		D0A0E5A626B16E71005344D2 /* InvertedAllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3F026B16E6E005344D2 /* InvertedAllowlistRuleConverter.swift */; };
-		D0A0E5A726B16E71005344D2 /* AllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3F126B16E6E005344D2 /* AllowlistRuleConverter.swift */; };
-		D0A0E5A826B16E71005344D2 /* InvertedAllowlistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3F326B16E6E005344D2 /* InvertedAllowlistRulesStorage.swift */; };
-		D0A0E5A926B16E71005344D2 /* AllowlistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3F426B16E6E005344D2 /* AllowlistRulesStorage.swift */; };
-		D0A0E5AA26B16E71005344D2 /* BlocklistRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3F526B16E6E005344D2 /* BlocklistRulesStorage.swift */; };
-		D0A0E5AB26B16E71005344D2 /* UserRulesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3F626B16E6E005344D2 /* UserRulesStorage.swift */; };
 		D0A0E5AC26B16E71005344D2 /* UserRulesManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3F826B16E6E005344D2 /* UserRulesManagerProtocol.swift */; };
 		D0A0E5AD26B16E71005344D2 /* UserRulesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3F926B16E6E005344D2 /* UserRulesManager.swift */; };
-		D0A0E5AE26B16E71005344D2 /* UserRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0E3FA26B16E6E005344D2 /* UserRule.swift */; };
-		D0A0E67A26B16E89005344D2 /* default.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E5B826B16E87005344D2 /* default.db.zip */; };
 		D0A0E67F26B16E89005344D2 /* AdGuardSDKTests-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = D0A0E63426B16E88005344D2 /* AdGuardSDKTests-Bridging-Header.h */; };
-		D0A0E69E26B16E89005344D2 /* default.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E64726B16E88005344D2 /* default.db.zip */; };
-		D0A0E6A126B16E89005344D2 /* default.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E60726B16E87005344D2 /* default.db.zip */; };
-		D0A0E6B726B16E89005344D2 /* AdGuardSDNSFilterTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E66126B16E89005344D2 /* AdGuardSDNSFilterTest.txt */; };
-		D0A0E6B826B16E89005344D2 /* AdGuardSDNSFilterTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E67126B16E89005344D2 /* AdGuardSDNSFilterTest.txt */; };
-		D0A0E6B926B16E89005344D2 /* AdGuardSDNSFilterTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E66D26B16E89005344D2 /* AdGuardSDNSFilterTest.txt */; };
-		D0A0E6BA26B16E89005344D2 /* AdGuardBaseFilterTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E66926B16E89005344D2 /* AdGuardBaseFilterTest.txt */; };
-		D0A0E6BB26B16E89005344D2 /* AdGuardBaseFilterTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E66E26B16E89005344D2 /* AdGuardBaseFilterTest.txt */; };
-		D0A0E6BC26B16E89005344D2 /* AdblockIcelandicFilterTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E66A26B16E89005344D2 /* AdblockIcelandicFilterTest.txt */; };
 		D0A0E6BD26B16E89005344D2 /* EasyListTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E67026B16E89005344D2 /* EasyListTest.txt */; };
-		D0A0E6BE26B16E89005344D2 /* AdblockIcelandicFilterTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E66F26B16E89005344D2 /* AdblockIcelandicFilterTest.txt */; };
-		D0A0E6BF26B16E89005344D2 /* EasyListTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E66B26B16E89005344D2 /* EasyListTest.txt */; };
-		D0A0E6C026B16E89005344D2 /* AdGuardBaseFilterTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E66326B16E89005344D2 /* AdGuardBaseFilterTest.txt */; };
-		D0A0E6C126B16E89005344D2 /* AdblockIcelandicFilterTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E66426B16E89005344D2 /* AdblockIcelandicFilterTest.txt */; };
-		D0A0E6C226B16E89005344D2 /* EasyListTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E66526B16E89005344D2 /* EasyListTest.txt */; };
-		D0A0E6C326B16E89005344D2 /* AdGuardSDNSFilterTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E62B26B16E88005344D2 /* AdGuardSDNSFilterTest.txt */; };
 		D0A0E6C426B16E89005344D2 /* AdGuardBaseFilterTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E62D26B16E88005344D2 /* AdGuardBaseFilterTest.txt */; };
-		D0A0E6C526B16E89005344D2 /* AdblockIcelandicFilterTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E62E26B16E88005344D2 /* AdblockIcelandicFilterTest.txt */; };
-		D0A0E6C626B16E89005344D2 /* EasyListTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E62F26B16E88005344D2 /* EasyListTest.txt */; };
-		D0A0E6CA26B16E89005344D2 /* AdGuardSDKTests-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = D0A0E5D726B16E87005344D2 /* AdGuardSDKTests-Bridging-Header.h */; };
 		D0A0E6E326B16E89005344D2 /* filters_i18n_test.json in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E5D926B16E87005344D2 /* filters_i18n_test.json */; };
-		D0A0E6E826B16E89005344D2 /* filters_i18n_test.json in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E63226B16E88005344D2 /* filters_i18n_test.json */; };
-		D0A0E6EA26B16E89005344D2 /* filters_i18n_test.json in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E66626B16E89005344D2 /* filters_i18n_test.json */; };
-		D0A0E6EC26B16E89005344D2 /* filters_test.json in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E5DE26B16E87005344D2 /* filters_test.json */; };
-		D0A0E6EE26B16E8A005344D2 /* filters_test.json in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E62226B16E87005344D2 /* filters_test.json */; };
 		D0A0E6F026B16E8A005344D2 /* filters_test.json in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E65926B16E89005344D2 /* filters_test.json */; };
 		D0A0E6F326B16E8A005344D2 /* AdGuardSDNSFilterTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E5E326B16E87005344D2 /* AdGuardSDNSFilterTest.txt */; };
-		D0A0E6F426B16E8A005344D2 /* AdGuardBaseFilterTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E5E526B16E87005344D2 /* AdGuardBaseFilterTest.txt */; };
 		D0A0E6F526B16E8A005344D2 /* AdblockIcelandicFilterTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E5E626B16E87005344D2 /* AdblockIcelandicFilterTest.txt */; };
-		D0A0E6F626B16E8A005344D2 /* EasyListTest.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0A0E5E726B16E87005344D2 /* EasyListTest.txt */; };
 		D0B01EF426B1753A00F67AD2 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = D0B01EF326B1753A00F67AD2 /* SQLite */; };
 		D0B01EF726B1770600F67AD2 /* ContentBlockerConverter in Frameworks */ = {isa = PBXBuildFile; productRef = D0B01EF626B1770600F67AD2 /* ContentBlockerConverter */; };
 /* End PBXBuildFile section */
@@ -1816,7 +1639,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0A0E67F26B16E89005344D2 /* AdGuardSDKTests-Bridging-Header.h in Headers */,
-				D0A0E6CA26B16E89005344D2 /* AdGuardSDKTests-Bridging-Header.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1926,53 +1748,16 @@
 				D0A0E6C426B16E89005344D2 /* AdGuardBaseFilterTest.txt in Resources */,
 				D0A0E50326B16E71005344D2 /* schema.sql in Resources */,
 				D0A0E6F526B16E8A005344D2 /* AdblockIcelandicFilterTest.txt in Resources */,
-				D0A0E6BB26B16E89005344D2 /* AdGuardBaseFilterTest.txt in Resources */,
-				D0A0E6BE26B16E89005344D2 /* AdblockIcelandicFilterTest.txt in Resources */,
 				D0A0E4EA26B16E71005344D2 /* schema0.102.sql in Resources */,
-				D0A0E50026B16E71005344D2 /* update0.102.sql in Resources */,
-				D0A0E4F826B16E71005344D2 /* schema.sql in Resources */,
-				D0A0E6EE26B16E8A005344D2 /* filters_test.json in Resources */,
 				D0A0E6BD26B16E89005344D2 /* EasyListTest.txt in Resources */,
-				D0A0E4E426B16E71005344D2 /* schema.sql in Resources */,
-				D0A0E6C026B16E89005344D2 /* AdGuardBaseFilterTest.txt in Resources */,
 				D0A0E6F326B16E8A005344D2 /* AdGuardSDNSFilterTest.txt in Resources */,
 				D0A0E6E326B16E89005344D2 /* filters_i18n_test.json in Resources */,
-				D0A0E6B726B16E89005344D2 /* AdGuardSDNSFilterTest.txt in Resources */,
 				D0A0E50426B16E71005344D2 /* schema0.100.sql in Resources */,
 				D0A0E4FD26B16E71005344D2 /* update0.101.sql in Resources */,
-				D0A0E69E26B16E89005344D2 /* default.db.zip in Resources */,
-				D0A0E6A126B16E89005344D2 /* default.db.zip in Resources */,
 				D0A0E6F026B16E8A005344D2 /* filters_test.json in Resources */,
-				D0A0E4FA26B16E71005344D2 /* schema0.102.sql in Resources */,
-				D0A0E6B926B16E89005344D2 /* AdGuardSDNSFilterTest.txt in Resources */,
-				D0A0E67A26B16E89005344D2 /* default.db.zip in Resources */,
 				D0A0E4E726B16E71005344D2 /* update0.102.sql in Resources */,
-				D0A0E6C626B16E89005344D2 /* EasyListTest.txt in Resources */,
-				D0A0E6EA26B16E89005344D2 /* filters_i18n_test.json in Resources */,
-				D0A0E4E526B16E71005344D2 /* update0.100.sql in Resources */,
-				D0A0E4FE26B16E71005344D2 /* update0.102.sql in Resources */,
-				D0A0E6C526B16E89005344D2 /* AdblockIcelandicFilterTest.txt in Resources */,
-				D0A0E4FB26B16E71005344D2 /* update0.100.sql in Resources */,
-				D0A0E6F626B16E8A005344D2 /* EasyListTest.txt in Resources */,
 				D0A0E4F926B16E71005344D2 /* schema0.101.sql in Resources */,
-				D0A0E6F426B16E8A005344D2 /* AdGuardBaseFilterTest.txt in Resources */,
-				D0A0E6BA26B16E89005344D2 /* AdGuardBaseFilterTest.txt in Resources */,
-				D0A0E4E626B16E71005344D2 /* update0.101.sql in Resources */,
-				D0A0E50526B16E71005344D2 /* schema0.102.sql in Resources */,
-				D0A0E50126B16E71005344D2 /* schema0.100.sql in Resources */,
-				D0A0E6C126B16E89005344D2 /* AdblockIcelandicFilterTest.txt in Resources */,
-				D0A0E6E826B16E89005344D2 /* filters_i18n_test.json in Resources */,
-				D0A0E4E826B16E71005344D2 /* schema0.101.sql in Resources */,
-				D0A0E50226B16E71005344D2 /* schema0.101.sql in Resources */,
-				D0A0E6EC26B16E89005344D2 /* filters_test.json in Resources */,
-				D0A0E4E926B16E71005344D2 /* schema0.100.sql in Resources */,
-				D0A0E6B826B16E89005344D2 /* AdGuardSDNSFilterTest.txt in Resources */,
 				D0A0E4FC26B16E71005344D2 /* update0.100.sql in Resources */,
-				D0A0E6BC26B16E89005344D2 /* AdblockIcelandicFilterTest.txt in Resources */,
-				D0A0E4FF26B16E71005344D2 /* update0.101.sql in Resources */,
-				D0A0E6C226B16E89005344D2 /* EasyListTest.txt in Resources */,
-				D0A0E6BF26B16E89005344D2 /* EasyListTest.txt in Resources */,
-				D0A0E6C326B16E89005344D2 /* AdGuardSDNSFilterTest.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2031,213 +1816,74 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0A0E55A26B16E71005344D2 /* ContentBlockersInfoStorage.swift in Sources */,
-				D0A0E54526B16E71005344D2 /* MetaStorage+GroupLocalizations.swift in Sources */,
-				D0A0E59A26B16E71005344D2 /* ResetableProtocol.swift in Sources */,
 				D0A0E53E26B16E71005344D2 /* MetaStorage.swift in Sources */,
-				D0A0E4DA26B16E71005344D2 /* AllowlistRulesStorage.swift in Sources */,
-				D0A0E56026B16E71005344D2 /* ContentBlockerJsonProvider.swift in Sources */,
-				D0A0E58F26B16E71005344D2 /* ServicesStorage.swift in Sources */,
-				D0A0E59F26B16E71005344D2 /* SafariGroup.swift in Sources */,
 				D0A0E53826B16E71005344D2 /* ProductionDatabaseManager.swift in Sources */,
 				D0A0E4EF26B16E71005344D2 /* RequestSender.swift in Sources */,
 				D0A0E4D526B16E71005344D2 /* UserRulesStorage.swift in Sources */,
 				D0A0E5AC26B16E71005344D2 /* UserRulesManagerProtocol.swift in Sources */,
-				D0A0E57926B16E71005344D2 /* ParserProtocol.swift in Sources */,
 				D0A0E4ED26B16E71005344D2 /* FiltersMetadataParser.swift in Sources */,
 				D0A0E58E26B16E71005344D2 /* Configuration.swift in Sources */,
-				D0A0E57C26B16E71005344D2 /* FiltersMetadataParser.swift in Sources */,
 				D0A0E4CF26B16E71005344D2 /* AllowlistRuleConverter.swift in Sources */,
-				D0A0E4EB26B16E71005344D2 /* ApiMethods.swift in Sources */,
-				D0A0E57126B16E71005344D2 /* FiltersMetadataParser.swift in Sources */,
-				D0A0E51426B16E71005344D2 /* FiltersConverterService.swift in Sources */,
-				D0A0E56426B16E71005344D2 /* ContentBlockerJsonProvider.swift in Sources */,
-				D0A0E50C26B16E71005344D2 /* FiltersConverter.swift in Sources */,
-				D0A0E53F26B16E71005344D2 /* MetaStorage.swift in Sources */,
-				D0A0E57426B16E71005344D2 /* RequestSender.swift in Sources */,
 				D0A0E4F426B16E71005344D2 /* Result.swift in Sources */,
-				D0A0E4F126B16E71005344D2 /* FiltersLocalizationsRequest.swift in Sources */,
-				D0A0E50D26B16E71005344D2 /* CommonError.swift in Sources */,
 				D0A0E57226B16E71005344D2 /* FiltersLocalizationsParser.swift in Sources */,
-				D0A0E54726B16E71005344D2 /* MetaStorage+FiltersLocalizations.swift in Sources */,
 				D0A0E5A026B16E71005344D2 /* SafariGroup+Filter.swift in Sources */,
-				D0A0E53326B16E71005344D2 /* MetaStorage.swift in Sources */,
-				D0A0E51826B16E71005344D2 /* MetaStorage+Tags.swift in Sources */,
-				D0A0E56E26B16E71005344D2 /* FiltersMetadataRequest.swift in Sources */,
 				D0A0E53726B16E71005344D2 /* DefaultDatabaseManager.swift in Sources */,
 				D0A0E4CC26B16E71005344D2 /* BlocklistRuleConverter.swift in Sources */,
-				D0A0E51C26B16E71005344D2 /* ProductionDatabaseManager.swift in Sources */,
 				D0A0E4E026B16E71005344D2 /* URL+Utils.swift in Sources */,
-				D0A0E58826B16E71005344D2 /* SafariProtection+BackgroundFetch.swift in Sources */,
-				D0A0E58426B16E71005344D2 /* SafariProtection+UserRules.swift in Sources */,
-				D0A0E58926B16E71005344D2 /* SafariProtection.swift in Sources */,
-				D0A0E4D126B16E71005344D2 /* InvertedAllowlistRulesStorage.swift in Sources */,
 				D0A0E53A26B16E71005344D2 /* MetaStorage+Filters.swift in Sources */,
 				D0A0E55326B16E71005344D2 /* CustomFilterMetaParser.swift in Sources */,
-				D0A0E5A326B16E71005344D2 /* UserRulesManagersProvider.swift in Sources */,
-				D0A0E55F26B16E71005344D2 /* ContentBlockersManager.swift in Sources */,
-				D0A0E55826B16E71005344D2 /* GroupMetaProtocol.swift in Sources */,
-				D0A0E4CD26B16E71005344D2 /* UserRuleConverter.swift in Sources */,
-				D0A0E4C726B16E71005344D2 /* BlocklistRuleConverter.swift in Sources */,
-				D0A0E57326B16E71005344D2 /* RequestsFactory.swift in Sources */,
-				D0A0E4C326B16E71005344D2 /* UserRulesManager.swift in Sources */,
 				D0A0E56526B16E71005344D2 /* ContentBlockerService.swift in Sources */,
-				D0A0E55426B16E71005344D2 /* CustomFilterMeta.swift in Sources */,
-				D0A0E54626B16E71005344D2 /* MetaStorage+GroupLocalizations.swift in Sources */,
 				D0A0E4D826B16E71005344D2 /* InvertedAllowlistRulesStorage.swift in Sources */,
 				D049EB9626B17C0A00B8088B /* Dictionary+Utils.swift in Sources */,
 				D0A0E53926B16E71005344D2 /* MetaStorage+FitlerRules.swift in Sources */,
-				D0A0E51E26B16E71005344D2 /* MetaStorage+Filters.swift in Sources */,
 				D0A0E55E26B16E71005344D2 /* ContentBlockersInfoStorage.swift in Sources */,
-				D0A0E58726B16E71005344D2 /* SafariProtection+ContentBlockers.swift in Sources */,
 				D0A0E4F526B16E71005344D2 /* CommonError.swift in Sources */,
 				D0A0E4F226B16E71005344D2 /* FiltersMetadataRequest.swift in Sources */,
-				D0A0E4C226B16E71005344D2 /* UserRulesManagerProtocol.swift in Sources */,
-				D0A0E57526B16E71005344D2 /* RequestSender.swift in Sources */,
 				D0A0E51926B16E71005344D2 /* MetaStorage+GroupLocalizations.swift in Sources */,
-				D0A0E56726B16E71005344D2 /* Result.swift in Sources */,
 				D0A0E52026B16E71005344D2 /* MetaStorage+Groups.swift in Sources */,
-				D0A0E57F26B16E71005344D2 /* RequestsFactory.swift in Sources */,
-				D0A0E55D26B16E71005344D2 /* ContentBlockerService.swift in Sources */,
-				D0A0E55626B16E71005344D2 /* CustomFilterMetaParser.swift in Sources */,
-				D0A0E51526B16E71005344D2 /* FiltersConverter.swift in Sources */,
 				D0A0E52E26B16E71005344D2 /* FilterMetaProtocol.swift in Sources */,
 				D0A0E59E26B16E71005344D2 /* SafariGroup+GroupType.swift in Sources */,
-				D0A0E5A526B16E71005344D2 /* UserRuleConverter.swift in Sources */,
-				D0A0E52226B16E71005344D2 /* CustomFilterMetaParser.swift in Sources */,
-				D0A0E54226B16E71005344D2 /* MetaStorage+Tags.swift in Sources */,
 				D0A0E59126B16E71005344D2 /* UserDefaultsStorage.swift in Sources */,
 				D0A0E59026B16E71005344D2 /* FilterFilesStorage.swift in Sources */,
-				D0A0E57E26B16E71005344D2 /* FiltersMetadataParser.swift in Sources */,
-				D0A0E57826B16E71005344D2 /* FiltersMetadataRequest.swift in Sources */,
-				D0A0E56226B16E71005344D2 /* ContentBlockerService.swift in Sources */,
 				D0A0E4F726B16E71005344D2 /* ApiMethods.swift in Sources */,
-				D0A0E5A626B16E71005344D2 /* InvertedAllowlistRuleConverter.swift in Sources */,
-				D0A0E54826B16E71005344D2 /* MetaStorage+FitlerRules.swift in Sources */,
 				D0A0E58D26B16E71005344D2 /* ServicesStorage.swift in Sources */,
-				D0A0E51D26B16E71005344D2 /* MetaStorage+FitlerRules.swift in Sources */,
-				D0A0E51B26B16E71005344D2 /* DefaultDatabaseManager.swift in Sources */,
-				D0A0E4D926B16E71005344D2 /* BlocklistRulesStorage.swift in Sources */,
-				D0A0E4BE26B16E71005344D2 /* UserRule.swift in Sources */,
-				D0A0E4DE26B16E71005344D2 /* UserRulesManager.swift in Sources */,
-				D0A0E5AE26B16E71005344D2 /* UserRule.swift in Sources */,
 				D0A0E4C526B16E71005344D2 /* InvertedAllowlistRuleConverter.swift in Sources */,
 				D0A0E58A26B16E71005344D2 /* SafariProtection+Filters.swift in Sources */,
-				D0A0E51226B16E71005344D2 /* FiltersConverterService.swift in Sources */,
-				D0A0E56826B16E71005344D2 /* URL+Utils.swift in Sources */,
-				D0A0E4D226B16E71005344D2 /* AllowlistRulesStorage.swift in Sources */,
 				D0A0E4BF26B16E71005344D2 /* UserRulesManagersProvider.swift in Sources */,
-				D0A0E54B26B16E71005344D2 /* ProductionDatabaseManager.swift in Sources */,
 				D0A0E4DB26B16E71005344D2 /* BlocklistRulesStorage.swift in Sources */,
-				D0A0E4DD26B16E71005344D2 /* UserRulesManagerProtocol.swift in Sources */,
-				D0A0E4D726B16E71005344D2 /* InvertedAllowlistRulesStorage.swift in Sources */,
 				D0A0E53226B16E71005344D2 /* ExtendedFiltersMetaLocalizations.swift in Sources */,
-				D0A0E54E26B16E71005344D2 /* MetaStorage+Filters.swift in Sources */,
-				D0A0E54026B16E71005344D2 /* MetaStorage+Filters.swift in Sources */,
-				D0A0E54A26B16E71005344D2 /* DefaultDatabaseManager.swift in Sources */,
 				D0A0E55926B16E71005344D2 /* ExtendedFiltersMeta.swift in Sources */,
-				D0A0E4EE26B16E71005344D2 /* FiltersLocalizationsParser.swift in Sources */,
-				D0A0E59D26B16E71005344D2 /* SafariGroup+Filter.swift in Sources */,
-				D0A0E54F26B16E71005344D2 /* MetaStorage+Langs.swift in Sources */,
 				D0A0E58126B16E71005344D2 /* SafariProtection+ContentBlockers.swift in Sources */,
-				D0A0E53D26B16E71005344D2 /* ProductionDatabaseManager.swift in Sources */,
 				D0A0E57A26B16E71005344D2 /* ParserProtocol.swift in Sources */,
-				D0A0E52F26B16E71005344D2 /* GroupMetaProtocol.swift in Sources */,
-				D0A0E4D026B16E71005344D2 /* UserRulesManagersProvider.swift in Sources */,
-				D0A0E55026B16E71005344D2 /* MetaStorage+Groups.swift in Sources */,
-				D0A0E51726B16E71005344D2 /* MetaStorage.swift in Sources */,
-				D0A0E53C26B16E71005344D2 /* MetaStorage+Groups.swift in Sources */,
-				D0A0E55126B16E71005344D2 /* CustomFilterMeta.swift in Sources */,
-				D0A0E53526B16E71005344D2 /* MetaStorage+GroupLocalizations.swift in Sources */,
-				D0A0E53126B16E71005344D2 /* ExtendedFiltersMetaLocalizations.swift in Sources */,
 				D0A0E58526B16E71005344D2 /* SafariProtection.swift in Sources */,
-				D0A0E52326B16E71005344D2 /* FilterMetaProtocol.swift in Sources */,
-				D0A0E57026B16E71005344D2 /* ParserProtocol.swift in Sources */,
-				D0A0E57D26B16E71005344D2 /* FiltersLocalizationsParser.swift in Sources */,
-				D0A0E55226B16E71005344D2 /* CustomFilterMetaParser.swift in Sources */,
 				D0A0E50E26B16E71005344D2 /* FiltersConverter.swift in Sources */,
-				D0A0E53026B16E71005344D2 /* ExtendedFiltersMeta.swift in Sources */,
 				D0A0E56926B16E71005344D2 /* Atomic.swift in Sources */,
 				D0A0E59B26B16E71005344D2 /* FiltersService.swift in Sources */,
 				D0A0E52426B16E71005344D2 /* GroupMetaProtocol.swift in Sources */,
 				D049EB6B26B17B7A00B8088B /* NotificationService+Utils.swift in Sources */,
 				D0A0E5AD26B16E71005344D2 /* UserRulesManager.swift in Sources */,
-				D0A0E57B26B16E71005344D2 /* FiltersLocalizationsParser.swift in Sources */,
-				D0A0E4CB26B16E71005344D2 /* AllowlistRuleConverter.swift in Sources */,
-				D0A0E4E226B16E71005344D2 /* URL+Utils.swift in Sources */,
-				D0A0E4C126B16E71005344D2 /* UserRulesManager.swift in Sources */,
 				D0A0E57726B16E71005344D2 /* FiltersLocalizationsRequest.swift in Sources */,
-				D0A0E52926B16E71005344D2 /* UserDefaultsStorage.swift in Sources */,
-				D0A0E56126B16E71005344D2 /* ContentBlockersInfoStorage.swift in Sources */,
 				D0A0E55C26B16E71005344D2 /* ContentBlockersManager.swift in Sources */,
-				D0A0E4CE26B16E71005344D2 /* InvertedAllowlistRuleConverter.swift in Sources */,
-				D0A0E56A26B16E71005344D2 /* RequestProtocol.swift in Sources */,
-				D0A0E51626B16E71005344D2 /* ExtendedFiltersMetaLocalizations.swift in Sources */,
 				D0A0E53B26B16E71005344D2 /* MetaStorage+Langs.swift in Sources */,
-				D0A0E4C626B16E71005344D2 /* BlocklistRuleConverter.swift in Sources */,
 				D0A0E50626B16E71005344D2 /* Logger.swift in Sources */,
-				D0A0E58C26B16E71005344D2 /* Configuration.swift in Sources */,
-				D0A0E54C26B16E71005344D2 /* MetaStorage+FiltersLocalizations.swift in Sources */,
 				D0A0E53426B16E71005344D2 /* MetaStorage+Tags.swift in Sources */,
-				D0A0E58626B16E71005344D2 /* SafariProtection+Configuration.swift in Sources */,
-				D0A0E4E326B16E71005344D2 /* Atomic.swift in Sources */,
-				D0A0E4D426B16E71005344D2 /* UserRulesStorage.swift in Sources */,
 				D0A0E51126B16E71005344D2 /* QuickAllowlistClipper.swift in Sources */,
-				D0A0E56C26B16E71005344D2 /* FiltersLocalizationsRequest.swift in Sources */,
-				D0A0E4C026B16E71005344D2 /* UserRulesManagerProtocol.swift in Sources */,
 				D0A0E4C826B16E71005344D2 /* UserRuleConverter.swift in Sources */,
-				D0A0E52126B16E71005344D2 /* CustomFilterMeta.swift in Sources */,
 				D0A0E50A26B16E71005344D2 /* FiltersConverterService.swift in Sources */,
-				D0A0E51326B16E71005344D2 /* QuickAllowlistClipper.swift in Sources */,
-				D0A0E52626B16E71005344D2 /* UserDefaultsStorage.swift in Sources */,
-				D0A0E5AB26B16E71005344D2 /* UserRulesStorage.swift in Sources */,
-				D0A0E54D26B16E71005344D2 /* MetaStorage+FitlerRules.swift in Sources */,
-				D0A0E5A426B16E71005344D2 /* BlocklistRuleConverter.swift in Sources */,
 				D07256F726BD5D2E00654177 /* SafariJsonProvider.swift in Sources */,
-				D0A0E52726B16E71005344D2 /* FilterFilesStorage.swift in Sources */,
 				D0A0E58B26B16E71005344D2 /* SafariProtection+BackgroundFetch.swift in Sources */,
 				D0A0E59C26B16E71005344D2 /* SafariGroup.swift in Sources */,
-				D0A0E5A926B16E71005344D2 /* AllowlistRulesStorage.swift in Sources */,
-				D0A0E4E126B16E71005344D2 /* Atomic.swift in Sources */,
 				D049EB9526B17C0A00B8088B /* CharacterSet+Utils.swift in Sources */,
 				D0A0E4F626B16E71005344D2 /* ResetableProtocol.swift in Sources */,
-				D0A0E4CA26B16E71005344D2 /* UserRuleConverter.swift in Sources */,
-				D0A0E4D326B16E71005344D2 /* BlocklistRulesStorage.swift in Sources */,
 				D0A0E57626B16E71005344D2 /* RequestProtocol.swift in Sources */,
 				D0A0E50926B16E71005344D2 /* AffinityRulesParser.swift in Sources */,
-				D0A0E4C426B16E71005344D2 /* AllowlistRuleConverter.swift in Sources */,
-				D0A0E54326B16E71005344D2 /* MetaStorage+Tags.swift in Sources */,
 				D0A0E4DF26B16E71005344D2 /* UserRule.swift in Sources */,
-				D0A0E52526B16E71005344D2 /* ExtendedFiltersMeta.swift in Sources */,
-				D0A0E4F026B16E71005344D2 /* RequestProtocol.swift in Sources */,
 				D0A0E4D626B16E71005344D2 /* AllowlistRulesStorage.swift in Sources */,
-				D0A0E56D26B16E71005344D2 /* FiltersLocalizationsRequest.swift in Sources */,
-				D0A0E4DC26B16E71005344D2 /* UserRulesStorage.swift in Sources */,
-				D0A0E58326B16E71005344D2 /* SafariProtection+Filters.swift in Sources */,
-				D0A0E56326B16E71005344D2 /* ContentBlockersManager.swift in Sources */,
-				D0A0E5AA26B16E71005344D2 /* BlocklistRulesStorage.swift in Sources */,
-				D0A0E54426B16E71005344D2 /* MetaStorage+Langs.swift in Sources */,
-				D0A0E51F26B16E71005344D2 /* MetaStorage+Langs.swift in Sources */,
-				D0A0E51026B16E71005344D2 /* AffinityRulesParser.swift in Sources */,
 				D0A0E4F326B16E71005344D2 /* RequestsFactory.swift in Sources */,
-				D0A0E56F26B16E71005344D2 /* FiltersMetadataRequest.swift in Sources */,
-				D0A0E54926B16E71005344D2 /* DefaultDatabaseManager.swift in Sources */,
-				D0A0E4EC26B16E71005344D2 /* ParserProtocol.swift in Sources */,
-				D0A0E5A126B16E71005344D2 /* SafariGroup+GroupType.swift in Sources */,
-				D0A0E54126B16E71005344D2 /* MetaStorage+Groups.swift in Sources */,
-				D0A0E50B26B16E71005344D2 /* QuickAllowlistClipper.swift in Sources */,
 				D0A0E51A26B16E71005344D2 /* MetaStorage+FiltersLocalizations.swift in Sources */,
-				D0A0E55726B16E71005344D2 /* FilterMetaProtocol.swift in Sources */,
-				D0A0E52826B16E71005344D2 /* FilterFilesStorage.swift in Sources */,
 				D0A0E55526B16E71005344D2 /* CustomFilterMeta.swift in Sources */,
 				D0A0E58026B16E71005344D2 /* SafariProtection+UserRules.swift in Sources */,
-				D0A0E5A826B16E71005344D2 /* InvertedAllowlistRulesStorage.swift in Sources */,
-				D0A0E56B26B16E71005344D2 /* RequestProtocol.swift in Sources */,
-				D0A0E5A726B16E71005344D2 /* AllowlistRuleConverter.swift in Sources */,
 				D0A0E55B26B16E71005344D2 /* ContentBlockerJsonProvider.swift in Sources */,
-				D0A0E53626B16E71005344D2 /* MetaStorage+FiltersLocalizations.swift in Sources */,
-				D0A0E50F26B16E71005344D2 /* AffinityRulesParser.swift in Sources */,
-				D0A0E4C926B16E71005344D2 /* InvertedAllowlistRuleConverter.swift in Sources */,
 				D0A0E58226B16E71005344D2 /* SafariProtection+Configuration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

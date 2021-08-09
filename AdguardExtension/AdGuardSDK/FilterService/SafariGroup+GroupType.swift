@@ -19,7 +19,7 @@
 import Foundation
 
 public extension SafariGroup {
-    public enum GroupType: Int, Equatable {
+    enum GroupType: Int, Equatable {
         case ads = 1
         case privacy = 2
         case socialWidgets = 3
