@@ -19,12 +19,6 @@
 /* Alert title. On error. */
 "common_error_title" = "Kesalahan";
 
-/* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Penyaring tidak dapat dimuat ke Safari. Oleh karena itu, perubahan terkini Anda tidak diterapkan.";
-
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Penyaring tidak dapat dimuat ke Safari. Cobalah untuk menghapus aturan Anda dan daftar putih, atau ubah set penyaring yang digunakan.";
-
 /* NO Button caption in alert */
 "common_action_no" = "TIDAK";
 
@@ -97,14 +91,8 @@
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Terjadi kesalahan saat mencoba memulihkan pembelian.";
 
-/* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "Pembelian telah dipulihkan! Versi premium AdGuard untuk iOS telah diaktifkan.";
-
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "Tidak ada pembelian untuk dipulihkan";
-
-/* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "Pembelian telah berhasil diselesaikan! Versi premium AdGuard untuk iOS telah diaktifkan.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "Terjadi kesalahan saat memproses pembelian Anda.";
@@ -121,9 +109,6 @@
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Masukkan aturan kustom Anda di sini<br>Baca <a href=\"%@\">catatan mengenai aturan syntax</a>.";
 
-/* (UserFilterController) whitelist description */
-"whitelist_text" = "Masukkan nama domain di sini. AdGuard akan menonaktifkan pemfilteran di Safari untuk situs-situs web ini.";
-
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Masukkan nama domain di sini. AdGuard akan mengaktifkan pemfilteran di Safari untuk situs-situs web ini.";
 
@@ -135,12 +120,6 @@
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Memperbarui...";
-
-/* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "Tambah aturan";
-
-/* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "Tambah domain";
 
 /* (UserFilterController) add wifi name placeholder */
 "add_wifi_name_placeholder" = "Nama Wi-Fi Anda";
@@ -247,14 +226,8 @@
 /* (AdvancedSettingsController) Reset button title */
 "reset_title" = "Reset";
 
-/* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Buang";
-
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Hapus profil VPN";
-
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Anda yakin ingin menghapus profil VPN Anda dan mematikan perlindungan DNS?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Terjadi kesalahan";
@@ -493,15 +466,6 @@
 /*(MainScreen) "all time" chart date type */
 "chart_alltime" = "Semua waktu";
 
-/*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "Pemblokir konten sedang diperbarui ...";
-
-/*(FiltersService) notification about filters laoding  */
-"loading_filters" = "Memuat penyaring ...";
-
-/*(ContentBlockerService) notification about converting rules  */
-"converting_rules" = "Aturan sedang dikonversi  ...";
-
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "Kustom filter baru";
 
@@ -582,9 +546,6 @@
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "Ketuk <b>Safari</b> dan pilih item menu <b>\"Pemblokir konten\"</b>";
-
-/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Nyalakan semua pemblokir konten</b> dan kembali ke aplikasi kami!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "Sistem DNS";

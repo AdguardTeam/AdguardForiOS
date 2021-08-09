@@ -20,10 +20,10 @@
 "common_error_title" = "Ошибка";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Фильтры не загрузились в Safari, поэтому последние изменения были отменены.";
+"safari_filters_loading_error" = "Фильтры не загрузились в Safari, поэтому последние изменения не были применены.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Фильтры не загрузились в Safari. Попробуйте очистить свои правила и белый список, или измените набор используемых фильтров.";
+"load_to_safari_error" = "Фильтры не загрузились в Safari. Попробуйте очистить свои правила и белый список или измените набор используемых фильтров.";
 
 /* NO Button caption in alert */
 "common_action_no" = "НЕТ";
@@ -38,13 +38,13 @@
 "ms_unit" = "%@ мс";
 
 /* (MainPageController) Text for seconds units (s) seconds */
-"s_unit" = "%@ с";
+"s_unit" = "%@ с.";
 
 /* (MainPageController) Text for data units (M) Millions */
-"millions_unit" = "%@млн";
+"millions_unit" = "%@ млн";
 
 /* (MainPageController) Text for data units (K) Kilo, Thousands */
-"thousands_unit" = "%@тыс.";
+"thousands_unit" = "%@ тыс.";
 
 /* (MainPageController) Text for data units 100000000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "hundred_millions_unit" = "%@100M";
@@ -143,7 +143,7 @@
 "blacklist_text_format" = "Введите ваши собственные правила здесь<br>Прочтите эту <a href=\"%@\">заметку о синтаксисе правил</a>.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Введите доменные имена здесь. AdGuard не будет блокировать доступ к этим доменам, игнорируя остальные настройки.";
+"whitelist_text" = "Введите здесь домены, которые вы не хотите, чтобы AdGuard фильтровал. Этот список приоритетнее других настроек.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Введите доменные имена здесь. AdGuard включит фильтрацию в Safari только для этих сайтов.";
@@ -284,13 +284,13 @@
 "reset_title" = "Сбросить";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Удалить";
+"delete_title" = "Удалить";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Удалить VPN-профиль";
 
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Вы уверены, что хотите удалить VPN-профиль и отключить защиту от отслеживания?";
+/* (AdvancedSettingsController) Delete Vpn profile message */
+"delete_vpn_profile_message" = "Вы уверены, что хотите удалить VPN-профиль и отключить DNS-защиту?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Произошла ошибка";
@@ -431,13 +431,13 @@
 "remove_from_whitelist" = "Удалить из белого списка";
 
 /*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
-"remove_from_blacklist" = "Удалить из чёрного списка";
+"remove_from_blacklist" = "Удалить из черного списка";
 
 /*(LogRecord) "ADD TO ALLOWLIST" button title */
 "add_to_whitelist" = "Добавить в белый список";
 
 /*(LogRecord) "ADD TO BLOCKLIST" button title */
-"add_to_blacklist" = "Добавить в чёрный список";
+"add_to_blacklist" = "Добавить в черный список";
 
 /*(GroupsController) Security description without premium  */
 "security_description" = "Позволяют блокировать фишинговые сайты и другие опасные домены. Доступен пользователям Премиум-подписки";
@@ -536,7 +536,7 @@
 "loading_filters" = "Загрузка фильтров...";
 
 /*(ContentBlockerService) notification about converting rules  */
-"converting_rules" = "Конвертация правил ...";
+"converting_rules" = "Конвертация правил...";
 
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "Добавить свой фильтр";
@@ -648,6 +648,24 @@
 
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ пока не поддерживается iOS. Попробуйте добавить другой upstream.";
+
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "Сохранить и выбрать";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "Сохранить";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "Отмена";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "Удалить";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "Добавить свой DNS-сервер";
+
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "Изменить пользовательский DNS-сервер";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Общий черный список";
@@ -927,3 +945,41 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "Отвечает с вручную настроенным IP-адресом";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Фильтры";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "DNS-фильтры";
+
+/* (LowLevelSettingsController) - title for unsupported options */
+"unsupported_setting" = "Эта опция несовместима с нативным DNS";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "Вы подключили максимальное количество устройств в аккаунте Setapp.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_safari" = "Вы знали, что YouTube изменил алгоритмы, чтобы показывать вам больше рекламы?<br><br>Чтобы заблокировать её:<br><br>1. Откройте <a href=\"%@\">Safari</a>.<br><br>2. Откройте youtube.com.<br><br>3. Нажмите на %@ кнопку \"Поделиться\".<br><br> 4. Нажмите \"Блокировать рекламу на YouTube (от AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
+"block_youtube_ads_instructions" = "Вы знали, что YouTube изменил алгоритмы, чтобы показывать вам больше рекламы? Чтобы заблокировать её:<br><br>1. Откройте <a href=\"%@\">youtube.com</a> в Safari.<br><br>2. Нажмите на %@ кнопку \"Поделиться\".<br><br>3. Нажмите \"Блокировать рекламу на YouTube (от AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "Готово! Теперь вы можете смотреть YouTube без рекламы.\n\nКогда расширение включено, рядом с логотипом YouTube отображается надпись “with AdGuard”.<br><br><b>Если вы перезагрузите страницу, вам нужно будет повторить шаги 3 и 4.</b>";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "Готово! Теперь вы можете смотреть YouTube без рекламы.\n\nКогда расширение включено, рядом с логотипом YouTube отображается надпись “with AdGuard”.<br><br><b>Если вы перезагрузите страницу, вам нужно будет повторить шаги 2 и 3.</b>";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "Теперь YouTube без рекламы! Обратите внимание, что вам нужно будет заново включить расширение, если вы перезагрузите страницу";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "Это расширение предназначено для использования только на YouTube";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
+"youtube_script_already_executed_title" = "Это расширение уже выполнено";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "При удалении рекламы на YouTube произошла неизвестная ошибка";

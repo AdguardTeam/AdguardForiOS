@@ -17,7 +17,7 @@
 "common_error_title" = "Napaka";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "V Safariju ni mogoče naložiti filtrov. Zato nedavne spremembe niso bile uporabljene.";
+"safari_filters_loading_error" = "Filtrov ni mogoče naložiti v Safari, zato vaše nedavne spremembe niso bile uporabljene.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "Ni mogoče naložiti filtrov v Safari. Poskusite počistiti svoja pravila in seznam dovoljenih ali spremenite nabor uporabljenih filtrov.";
@@ -140,7 +140,7 @@
 "blacklist_text_format" = "Tukaj lahko dodate lastna pravila po meri. <br>Preberite to<a href=\"%@\">opombo o sintaksi pravil </a>.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Tukaj vnesite imena domen. AdGuard ne bo onemogočil dostop do teh domen in bo prezrl vse druge nastavitve.";
+"whitelist_text" = "Sem vnesite domene, za katere ne želite, da jih AdGuard filtrira. Ta seznam ima prednost pred drugimi nastavitvami.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Tukaj vnesite imena domen. AdGuard bo omogočil filtriranje v Safariju samo za te spletne strani.";
@@ -155,10 +155,10 @@
 "update_filter_start_message" = "Posodabljanje...";
 
 /* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "Dodaj pravilo";
+"add_blacklist_rule_title" = "Dodaj novo pravilo";
 
 /* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "Vnesi domeno";
+"add_whitelist_domain_title" = "Dodaj domeno";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||primer.org^";
@@ -281,13 +281,13 @@
 "reset_title" = "Ponastavi";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Odstrani";
+"delete_title" = "Izbriši";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Odstrani profil VPN";
 
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Ali ste prepričani, da želite odstraniti svoj profil VPN in onemogočiti zaščito DNS?";
+/* (AdvancedSettingsController) Delete Vpn profile message */
+"delete_vpn_profile_message" = "Ali ste prepričani, da želite izbrisati svoj profil VPN in onemogočiti zaščito DNS?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Prišlo je do napake";
@@ -617,7 +617,7 @@
 "onboarding_second_step_text" = "Tapnite na <b>Safari</b> in izberite menijski vnos <b>\"Zaviralci vsebine\"</b>";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Preklopite na vse zaviralce vsebine</b> in se vrnite v našo aplikacijo!";
+"onboarding_third_step_text" = "<b>Preklopite na vse zaviralce vsebine</b> in se vrnite v aplikacijo!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "Sistemski DNS";
@@ -645,6 +645,24 @@
 
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "iOS še ne podpira %@. poskusite dodati drugačen tok.";
+
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "Shrani in izberi";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "Shrani";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "Prekliči";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "Izbriši";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "Dodaj strežnik DNS po meri";
+
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "Uredi strežnik DNS po meri";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Sistemski seznam nedovoljenih";
@@ -924,3 +942,41 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "Odgovori z ročno nastavljenim naslovom IP";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Filtri";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "Filtri DNS";
+
+/* (LowLevelSettingsController) - title for unsupported options */
+"unsupported_setting" = "Ta možnost ni združljiva z izvornim načinom DNS";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "V svoj račun Setapp ste povezali največje dovojeno število naprav.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_safari" = "Ali ste vedeli, da je YouTube spremenil svoje algoritme, da vam prikazuje več oglasov?<br><br>Zdaj, da jih onemogočite, morate:<br><br>1. Odprite <a href=\"%@\">Safari</a>.<br><br>2. Odprite youtube.com<br><br>Tapnite %@ Deli.<br><br>4. Tapnite \"Onemogoči oglase YouTube (z AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
+"block_youtube_ads_instructions" = "Ali ste vedeli, da je YouTube spremenil svoje algoritme, da vam prikazuje več oglasov?<br><br>Zdaj, da jih onemogočitee, morate::<br><br>1. Odprite <a href=\"%@\">youtube.com</a> v Safariju.<br><br>2. Tapnite %@ Deli.<br><br>3. Tapnite \"Onemogoči oglase YouTube (z AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "Končano! Zdaj lahko YouTube gledate brez oglasov.\n\nKo je razširitev omogočena, se poleg logotipa YouTube prikaže napis \"z AdGuard\".<br><br><b> Če znova naložite stran, boste morali znova izvesti 3. in 4. korak.</b>";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "Končano! Zdaj lahko YouTube gledate brez oglasov.\n\nKo je razširitev omogočena, se poleg logotipa YouTube prikaže napis \"z AdGuard\".<br><br><b> Če znova naložite stran, boste morali znova izvesti 2. in 3. korak.</b>";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "YouTube je zdaj brez oglasov! Če znova naložite stran, morate to razširitev znova zagnati";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "Ta razširitev naj bi se izvajala samo v YouTubu";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
+"youtube_script_already_executed_title" = "Razširitev je že izvedena";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "Med odstranjevanjem oglasov v YouTubu je prišlo do neznane napake";

@@ -20,10 +20,10 @@
 "common_error_title" = "Error";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Filters cannot be loaded into Safari. Therefore, your recent changes were not applied.";
+"safari_filters_loading_error" = "Filters couldn't be loaded into Safari, so your recent changes were not applied.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Filters cannot be loaded into Safari. Try to clear your rules and the Allowlist, or change the set of used filters.";
+"load_to_safari_error" = "Filters couldn't be loaded into Safari. Try clearing your rules and Allowlist, or change the set of used filters.";
 
 /* NO Button caption in alert */
 "common_action_no" = "NO";
@@ -53,10 +53,10 @@
 "ten_thousands_unit" = "%@10K";
 
 /* (MainPageController) Native DNS is working title */
-"native_dns_working" = "Native DNS is working";
+"native_dns_working" = "Native DNS is operating";
 
 /* (MainPageController) Native DNS is not working title */
-"native_dns_not_working" = "Native DNS is not working";
+"native_dns_not_working" = "Native DNS is not operating";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "User rules";
@@ -119,13 +119,13 @@
 "restore_purchases_failure_message" = "An error occurred while trying to restore the purchase.";
 
 /* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "The purchase has been restored! The Premium version of AdGuard for iOS has been activated.";
+"restore_success_message" = "Purchase restored! The Premium version of AdGuard for iOS has been activated.";
 
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "No purchases to restore";
 
 /* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "The purchase has been successfully completed! The Premium version of AdGuard for iOS has been activated.";
+"purchase_success_message" = "Purchase successfully completed! The Premium version of AdGuard for iOS has been activated.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "An error occurred while processing your purchase.";
@@ -143,7 +143,7 @@
 "blacklist_text_format" = "You can add your own rules here.<br>Read this <a href=\"%@\">note about the rule syntax</a>.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Enter here the domain names. AdGuard will not block access to these domains ignoring all other settings.";
+"whitelist_text" = "Enter here the domains you don't want AdGuard to filter. This list takes precedence over other settings.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Enter the domain names here. AdGuard will enable filtering in Safari for these websites only.";
@@ -530,13 +530,13 @@
 "chart_alltime" = "All time";
 
 /*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "Content blockers are being updated ...";
+"loading_content_blockers" = "Content blockers are being updated...";
 
 /*(FiltersService) notification about filters laoding  */
-"loading_filters" = "Loading filters ...";
+"loading_filters" = "Loading filters...";
 
 /*(ContentBlockerService) notification about converting rules  */
-"converting_rules" = "Rules are being converted  ...";
+"converting_rules" = "Rules are being converted...";
 
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "New custom filter";
@@ -620,7 +620,7 @@
 "onboarding_second_step_text" = "Tap on <b>Safari</b> and choose the <b>\"Content blockers\"</b> menu item";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Switch on all content blockers</b> and come back to our app!";
+"onboarding_third_step_text" = "<b>Switch on all content blockers</b> and return to the app!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "System DNS";
@@ -957,3 +957,29 @@
 
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "You have connected the maximum number of devices to your Setapp account.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_safari" = "Did you know that YouTube has changed its algorithms to show you more ads?<br><br>Now, to block them you need to:<br><br>1. Open <a href=\"%@\">Safari</a>.<br><br>2. Open youtube.com.<br><br>3. Tap %@ Share.<br><br> 4. Tap \"Block YouTube Ads (by AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
+"block_youtube_ads_instructions" = "Did you know that YouTube has changed its algorithms to show you more ads?<br><br>Now, to block them you need to:<br><br>1. Open <a href=\"%@\">youtube.com</a> in Safari.<br><br>2. Tap %@ Share.<br><br>3. Tap \"Block YouTube Ads (by AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "Done! Now you can watch YouTube without ads.\n\nWhen the extension is enabled, the caption “with AdGuard” is displayed next to the YouTube logo.<br><br><b>If you reload the page, you’ll need to perform steps 3 and 4 again.</b>";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "Done! Now you can watch YouTube without ads.\n\nWhen the extension is enabled, the caption “with AdGuard” is displayed next to the YouTube logo.<br><br><b>If you reload the page, you’ll need to perform steps 2 and 3 again.</b>";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "YouTube is now ad-free! Please note that you need to run this extension again if you reload the page";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "This extension is intended to be run on YouTube only";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
+"youtube_script_already_executed_title" = "The extension has already been executed";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "Unknown error occurred while removing YouTube ads";

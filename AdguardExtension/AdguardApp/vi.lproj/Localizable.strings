@@ -16,12 +16,6 @@
 /* Alert title. On error. */
 "common_error_title" = "Lỗi";
 
-/* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Bộ lọc không thể tải vào Safari. Vì vậy, những thay đổi gần đây của bạn không được áp dụng.";
-
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Bộ lọc không thể tải vào Safari. Hãy thử xóa các quy tắc của bạn và danh sách cho phép, hoặc thay đổi những bộ lọc đã dùng.";
-
 /* NO Button caption in alert */
 "common_action_no" = "Không";
 
@@ -48,12 +42,6 @@
 
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
-
-/* (MainPageController) Native DNS is working title */
-"native_dns_working" = "DNS gốc đang hoạt động";
-
-/* (MainPageController) Native DNS is not working title */
-"native_dns_not_working" = "DNS gốc hiện không hoạt động";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Quy tắc người dùng";
@@ -115,14 +103,8 @@
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Một lỗi đã xảy ra khi đang khôi phục lại mua sắm.";
 
-/* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "Mua sắm đã được khôi phục! Phiên bản AdGuard cao cấp cho iOS đã được kích hoạt.";
-
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "Không có mua sắm nào để khôi phục";
-
-/* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "Mua sắm đã hoàn tất! Phiên bản AdGuard cao cấp cho iOS đã được kích hoạt.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "Đã xảy ra lỗi khi tiến hành thanh toán cho bạn.";
@@ -138,9 +120,6 @@
 
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Bạn có thể thêm quy tắc của bạn tại đây <br>Đọc <a href=\"%@\"> ghi chú này về cú pháp quy tắc</a>.";
-
-/* (UserFilterController) whitelist description */
-"whitelist_text" = "Nhập tên miền tại đây. AdGuard sẽ không chặn kết nối tới những tên miền này bất chấp các cài đặt khác.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Nhập tên miền tại đây. AdGuard sẽ áp dụng lọc chỉ những trang web này trong Safari.";
@@ -275,13 +254,13 @@
 "reset_title" = "Đặt lại";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Xoá";
+"delete_title" = "Xoá";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Xoá hồ sơ VPN";
 
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Bạn có chắc muốn xoá hồ sơ VPN và tắt trình bảo vệ theo dõi?";
+/* (AdvancedSettingsController) Delete Vpn profile message */
+"delete_vpn_profile_message" = "Bạn có chắc muốn xoá hồ sơ VPN và tắt trình bảo vệ DNS?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Có lỗi xảy ra";
@@ -520,15 +499,6 @@
 /*(MainScreen) "all time" chart date type */
 "chart_alltime" = "Mọi lúc";
 
-/*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "Trình chặn nội dung đang được cập nhật...";
-
-/*(FiltersService) notification about filters laoding  */
-"loading_filters" = "Đang mở bộ lọc ...";
-
-/*(ContentBlockerService) notification about converting rules  */
-"converting_rules" = "Các quy tắc đang được chuyển đổi...";
-
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "Bộ lọc tuỳ chỉnh mới";
 
@@ -610,9 +580,6 @@
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "Nhấn vào <b>Safari</b> và chọn <b> \"Bộ chặn thành phần\"</b> mục bảng chọn";
 
-/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Mở tất cả bộ chặn thành phần</b> và trở lại với ứng dụng của chúng tôi!";
-
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "DNS hệ thống";
 
@@ -639,6 +606,24 @@
 
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ chưa được iOS hỗ trợ. Hãy thêm địa chỉ ngược dòng khác.";
+
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "Lưu và chọn";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "Lưu";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "Huỷ";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "Xoá";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "Thêm một máy chủ DNS tùy chỉnh";
+
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "Chỉnh sửa máy chủ DNS tuỳ chỉnh";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Danh sách đen hệ thống";
@@ -918,3 +903,15 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "Phản hồi với địa chỉ IP đã được tiết lập";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Bộ lọc";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "Bộ lọc DNS";
+
+/* (LowLevelSettingsController) - title for unsupported options */
+"unsupported_setting" = "Tùy chọn này không tương thích với chế độ DNS gốc";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "Bạn đã có tối đa số lượng thiết bị được kết nối hãy tới cài đặt tài khoản của bạn.";

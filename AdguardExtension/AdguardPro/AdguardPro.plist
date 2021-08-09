@@ -75,6 +75,7 @@
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>youtube</string>
 		<string>adguard-vpn</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>

@@ -142,18 +142,8 @@ extension AESharedResourcesProtocol {
             }
             return value
         }
-        
         set {
             sharedDefaults().set(newValue, forKey: AEDefaultsRestartByReachability)
-        }
-    }
-    
-    dynamic var isDebugLogs: Bool {
-        get {
-            return sharedDefaults().bool(forKey: AEDefaultsDebugLogs)
-        }
-        set {
-            sharedDefaults().set(newValue, forKey: AEDefaultsDebugLogs)
         }
     }
     
@@ -165,7 +155,6 @@ extension AESharedResourcesProtocol {
             
             return value
         }
-        
         set {
             sharedDefaults().set(newValue, forKey: AEComplexProtectionEnabled)
         }

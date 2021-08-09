@@ -28,8 +28,8 @@
 /* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "OpB-AR-Og7"; Note = "(AddCustomFilterController) cancel button"; */
 "OpB-AR-Og7.normalTitle" = "CANCELAR";
 
-/* Class = "UILabel"; text = "This module blocks ads and tracking on websites opened in Safari"; ObjectID = "QHZ-sJ-wTL"; */
-"QHZ-sJ-wTL.text" = "Este módulo bloqueia anúncios e rastreamento em sites que foram abertos no Safari";
+/* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "QHZ-sJ-wTL"; */
+"QHZ-sJ-wTL.text" = "Bloqueia anúncios e rastreadores em sites abertos no Safari";
 
 /* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
 "RJU-32-r8h.text" = "Quantidade de regras: ";

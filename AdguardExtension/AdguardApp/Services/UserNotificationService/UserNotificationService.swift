@@ -36,6 +36,12 @@ protocol UserNotificationServiceProtocol {
      Method to post notifications which come while app is in background
      **/
     func postNotification(title: String, body: String, userInfo: [AnyHashable : Any]?)
+    
+    /**
+     Posts notification without badge (red circle in the top right corner of app icon)
+     */
+    func postNotificationWithoutBadge(title: String?, body: String?, onNotificationSent: @escaping () -> Void)
+    
     func removeNotifications()
     
     /*
@@ -69,6 +75,22 @@ class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUser
             else {
                 self?.badgeAndSound()
             }
+        }
+    }
+    
+    func postNotificationWithoutBadge(title: String?, body: String?, onNotificationSent: @escaping () -> Void) {
+        let center = UNUserNotificationCenter.current()
+    
+        center.getNotificationSettings { [weak self] settings in
+            if settings.authorizationStatus != .authorized {
+                onNotificationSent()
+                return
+            }
+            
+            if settings.alertSetting == .enabled {
+                self?.alertNotification(title: title, body: body, badge: nil, userInfo: nil)
+            }
+            onNotificationSent()
         }
     }
     
@@ -115,14 +137,14 @@ class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUser
     
     // MARK: - private methods
     
-    private func alertNotification(title: String?, body: String?, userInfo: [AnyHashable : Any]?) {
+    private func alertNotification(title: String?, body: String?, badge: NSNumber? = 1, userInfo: [AnyHashable : Any]?) {
         let content = UNMutableNotificationContent()
         
         content.title = title ?? ""
         content.body = body ?? ""
         content.userInfo = userInfo ?? [:]
         
-        content.badge = 1
+        content.badge = badge
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         
@@ -133,7 +155,9 @@ class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUser
         center.delegate = self
         
         center.add(request) { (error) in
-            if error != nil { DDLogError("(UserNotificationService) - alertNotification error : \(error!)") }
+            if let error = error {
+                DDLogError("(UserNotificationService) - alertNotification error : \(error)")
+            }
         }
     }
     

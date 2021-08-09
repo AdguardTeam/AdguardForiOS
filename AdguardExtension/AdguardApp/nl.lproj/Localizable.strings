@@ -17,7 +17,7 @@
 "common_error_title" = "Fout";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Filters kunnen niet in Safari ingelezen worden. De recente wijzigingen zijn daarom niet toegepast.";
+"safari_filters_loading_error" = "Filters kunnen niet in Safari ingelezen worden. Je recente wijzigingen zijn daarom niet toegepast.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "Filters kunnen niet in Safari ingelezen worden. Probeer de regels en de toestemmingslijst te wissen of pas de gebruikte filters aan.";
@@ -50,10 +50,10 @@
 "ten_thousands_unit" = "%@10K";
 
 /* (MainPageController) Native DNS is working title */
-"native_dns_working" = "Oorspronkelijke DNS werkt";
+"native_dns_working" = "Oorspronkelijke DNS is actief";
 
 /* (MainPageController) Native DNS is not working title */
-"native_dns_not_working" = "Oorspronkelijke DNS werkt niet";
+"native_dns_not_working" = "Oorspronkelijke DNS is niet actief";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Gebruikersfilter";
@@ -140,7 +140,7 @@
 "blacklist_text_format" = "Eigen regels kunnen hier toegevoegd worden<br>Lees deze <a href=\"%@\">informatie over de opbouw van regels</a>.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Voer de domein namen hier in. AdGuard zal het filter uitschakelen voor deze websites.";
+"whitelist_text" = "Voer hier de domeinnamen in waarvan je niet wil dat AdGuard ze filtert. Deze lijst gaat voor op andere instellingen.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Voer de domein namen hier in. AdGuard zal het filter alleen inschakelen voor deze websites.";
@@ -155,7 +155,7 @@
 "update_filter_start_message" = "Bijwerken...";
 
 /* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "Regel toevoegen";
+"add_blacklist_rule_title" = "Een nieuwe regel toevoegen";
 
 /* (UserFilterController) add whitelist domain button title */
 "add_whitelist_domain_title" = "Domein toevoegen";
@@ -275,13 +275,13 @@
 "reset_title" = "Herstel";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Verwijderen";
+"delete_title" = "Verwijderen";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "VPN-profiel verwijderen";
 
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Het VPN-profiel daadwerkelijk verwijderen en de DNS bescherming uitschakelen?";
+/* (AdvancedSettingsController) Delete Vpn profile message */
+"delete_vpn_profile_message" = "Weet je zeker dat je jouw VPN-profiel wilt verwijderen en de DNS-bescherming wilt uitschakelen?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Er is een fout opgetreden";
@@ -521,10 +521,10 @@
 "chart_alltime" = "Totaal";
 
 /*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "Content blockers worden bijgewerkt...";
+"loading_content_blockers" = "Inhoudblokkeerders worden bijgewerkt...";
 
 /*(FiltersService) notification about filters laoding  */
-"loading_filters" = "Filters inlezen...";
+"loading_filters" = "Filters laden...";
 
 /*(ContentBlockerService) notification about converting rules  */
 "converting_rules" = "Regels worden geconverteerd...";
@@ -611,7 +611,7 @@
 "onboarding_second_step_text" = "Tik op <b> Safari </b> en kies de <b> \"Content blockers\" </b> menu-item";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b> Schakel alle content blockers in </b> en keer terug naar onze app!";
+"onboarding_third_step_text" = "<b>Alle inhoudblokkeerders inschakelen</b> en teruggaan naar de app!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "Systeem DNS";
@@ -639,6 +639,24 @@
 
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ wordt nog niet ondersteund door iOS. Probeer andere upstream toe te voegen.";
+
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "Bewaren en selecteren";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "Bewaren";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "Annuleren";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "Verwijderen";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "Aangepaste DNS-server toevoegen";
+
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "Aangepaste DNS-server bewerken";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Systeem blokkeerlijst";
@@ -918,3 +936,41 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "Reageren met een handmatig ingesteld IP-adres";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Filters";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "DNS-filters";
+
+/* (LowLevelSettingsController) - title for unsupported options */
+"unsupported_setting" = "Deze optie is niet compatibel met de oorspronkelijke DNS-modus";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "Je hebt het maximale aantal apparaten aan je account gekoppeld.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_safari" = "Weet je dat YouTube zijn algoritmes gewijzigd heeft om je meer advertenties te tonen?<br><br>Wel, om ze te blokkeren:<br><br>1. Open <a href=\"%@\">Safari</a>.<br><br>2. Open youtube.com.<br><br>3. Klik %@ Delen knop.<br><br>4. Klik \"YouTube-advertenties blokkeren (door AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
+"block_youtube_ads_instructions" = "Weet je dat YouTube zijn algoritmes gewijzigd heeft om je meer advertenties te tonen?<br><br>Wel, om ze te blokkeren moet je:<br><br>1. <a href=\"%@\">youtube.com</a> openen in Safari.<br><br>2. Klik %@ Delen knop.<br><br>3. Klik \"YouTube-advertenties blokkeren (door AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "Gedaan! Nu kun je YouTube bekijken zonder advertenties.\n\nAls de uitbreiding is ingeschakeld, wordt het bijschrift \"met AdGuard\" weergegeven naast het YouTube-logo.<br><br><b>Als je de pagina opnieuw laadt, moet je stap 3 en 4 opnieuw uitvoeren.</b>";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "Gedaan! Nu kun je YouTube bekijken zonder advertenties.\n\nAls de uitbreiding is ingeschakeld, wordt het bijschrift \"met AdGuard\" weergegeven naast het YouTube-logo.<br><br><b>Als je de pagina opnieuw laadt, moet je stap 2 en 3 opnieuw uitvoeren.</b>";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "YouTube is nu advertentievrij! Houd er rekening mee dat je deze uitbreiding opnieuw moet uitvoeren als je de pagina herlaad";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "Deze uitbreiding zou alleen op YouTube moeten worden gestart";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
+"youtube_script_already_executed_title" = "De uitbreiding is al uitgevoerd";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "Er is een onbekende fout opgetreden bij het verwijderen van YouTube-advertenties";

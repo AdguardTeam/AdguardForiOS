@@ -7,15 +7,6 @@
 /* Class = "UITextField"; placeholder = "Name"; ObjectID = "3BA-9g-I6J"; Note = "(Add Custom Filter) url hint"; */
 "3BA-9g-I6J.placeholder" = "Nom";
 
-/* Class = "UILabel"; text = "Set custom DNS settings"; ObjectID = "3lB-T7-fSO"; */
-"3lB-T7-fSO.text" = "Établir des paramètres personnels du DNS";
-
-/* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "6Tx-Oh-hyu"; Note = "(Add Custom Filter) url hint"; */
-"6Tx-Oh-hyu.placeholder" = "IP, sdns://, https:// ou tls://";
-
-/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "6e9-sP-YMb"; */
-"6e9-sP-YMb.normalTitle" = "SAUVEGARDER";
-
 /* Class = "UILabel"; text = "How to set it up?"; ObjectID = "7H8-Df-Igr"; */
 "7H8-Df-Igr.text" = "Comment le mettre en place ?";
 
@@ -24,9 +15,6 @@
 
 /* Class = "UILabel"; text = "AdGuard will block the domains from this list"; ObjectID = "AOm-kV-l4z"; */
 "AOm-kV-l4z.text" = "AdGuard va bloquer les domaines sur cette liste";
-
-/* Class = "UIButton"; normalTitle = "SAVE AND SELECT"; ObjectID = "B2l-7z-M2N"; */
-"B2l-7z-M2N.normalTitle" = "ENREGISTRER ET SÉLECTIONNER";
 
 /* Class = "UIButton"; normalTitle = "DNS-over-HTTPS"; ObjectID = "DrO-hc-ilW"; */
 "DrO-hc-ilW.normalTitle" = "DNS-over-HTTPS";
@@ -43,8 +31,8 @@
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
 "NX4-vI-1WP.text" = "Ajouter un filtre";
 
-/* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
-"PFY-Cq-NFN.text" = "Activez ce module pour renforcer la confidentialité de votre navigation en chiffrant vos requêtes DNS";
+/* Class = "UILabel"; text = "Blocks ads and trackers on the domain level and enhances your privacy by encrypting your DNS queries"; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
+"PFY-Cq-NFN.text" = "Bloque les publicités et le suivi au niveau de domaines et améliore votre confidentialité en chiffrant vos requêtes DNS";
 
 /* Class = "UIButton"; normalTitle = "DNS-over-QUIC (experimental)"; ObjectID = "PYL-vX-Dge"; */
 "PYL-vX-Dge.normalTitle" = "DNS-over-QUIC (expérimental)";
@@ -64,9 +52,6 @@
 /* Class = "UILabel"; text = "DNS implementation"; ObjectID = "Xa6-wl-aOE"; */
 "Xa6-wl-aOE.text" = "Implémentation DNS";
 
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
-"ZdD-yx-6ph.normalTitle" = "ANNULER";
-
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "ZgC-4d-Peb"; Note = "(Add Custom Filter) url hint"; */
 "ZgC-4d-Peb.placeholder" = "IP, sdns://, https:// or tls://";
 
@@ -85,12 +70,6 @@
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "dW3-zk-BPr"; */
 "dW3-zk-BPr.text" = "Adresse du serveur DNS";
 
-/* Class = "UILabel"; text = "Server name"; ObjectID = "e4h-eF-AOa"; */
-"e4h-eF-AOa.text" = "Nom du serveur";
-
-/* Class = "UILabel"; text = "Edit custom DNS settings"; ObjectID = "f57-S8-QfF"; */
-"f57-S8-QfF.text" = "Modifier les paramètres DNS personnalisés";
-
 /* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
 "hh1-EV-7KD.normalTitle" = "DNSCrypt";
 
@@ -103,23 +82,14 @@
 /* Class = "UILabel"; text = "Blocklist"; ObjectID = "ihd-7R-RfE"; */
 "ihd-7R-RfE.text" = "Liste Noire";
 
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
-"ks4-fm-Ctr.normalTitle" = "ANNULER";
-
 /* Class = "UILabel"; text = "Works as a local \"pseudo\" VPN. Supports any DNS protocol, allows you to inspect your device DNS activity."; ObjectID = "lEg-oH-oxd"; */
 "lEg-oH-oxd.text" = "Fonctionne comme un \"pseudo\" VPN local. Prend en charge tout protocole DNS, vous permet d'inspecter l'activité DNS de votre appareil.";
-
-/* Class = "UITextField"; placeholder = "Name"; ObjectID = "mBR-7g-DjT"; Note = "(Add Custom Filter) url hint"; */
-"mBR-7g-DjT.placeholder" = "Nom";
 
 /* Class = "UILabel"; text = "Website"; ObjectID = "mN8-Uh-sLQ"; */
 "mN8-Uh-sLQ.text" = "Site Web";
 
 /* Class = "UIButton"; normalTitle = "OK"; ObjectID = "o1z-O6-Bk9"; */
 "o1z-O6-Bk9.normalTitle" = "OK";
-
-/* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "oSP-2V-qCA"; Note = "(AddCustomFilterController) cancel button"; */
-"oSP-2V-qCA.normalTitle" = "SUPPRIMER";
 
 /* Class = "UILabel"; text = "DNS filtering"; ObjectID = "pC4-RU-DaD"; */
 "pC4-RU-DaD.text" = "Filtrage DNS";
@@ -142,17 +112,14 @@
 /* Class = "UILabel"; text = "Native"; ObjectID = "sQQ-5p-EfW"; */
 "sQQ-5p-EfW.text" = "Natif";
 
-/* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
-"seX-mS-3mU.text" = "Adresse du serveur DNS";
-
 /* Class = "UIBarButtonItem"; title = "Select"; ObjectID = "uCw-Mi-HiJ"; */
 "uCw-Mi-HiJ.title" = "Sélectionner";
 
 /* Class = "UILabel"; text = "DNS filtering"; ObjectID = "vDF-5j-uJn"; */
 "vDF-5j-uJn.text" = "Filtrage DNS";
 
-/* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
-"vJt-Jd-BI2.text" = "Sélectionnez le protocole";
+/* Class = "UILabel"; text = "Protocol"; ObjectID = "vJt-Jd-BI2"; */
+"vJt-Jd-BI2.text" = "Protocole";
 
 /* Class = "UILabel"; text = "Implementation"; ObjectID = "xgN-x2-EfQ"; */
 "xgN-x2-EfQ.text" = "Implémentation";

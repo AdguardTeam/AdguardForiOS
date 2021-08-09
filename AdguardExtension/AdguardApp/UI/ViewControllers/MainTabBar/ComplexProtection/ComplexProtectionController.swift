@@ -27,63 +27,59 @@ class ComplexProtectionController: UITableViewController {
     // MARK: - Safari protection outlets
     
     @IBOutlet weak var safariIcon: UIImageView!
-    @IBOutlet weak var freeTextView: UITextView! {
+    @IBOutlet weak var freeLabel: EdgeInsetLabel! {
         didSet{
-            freeTextView.text = freeTextView.text.uppercased()
-            freeTextView.textContainerInset = UIEdgeInsets(top: 2.0, left: 2.0, bottom: 2.0, right: 2.0)
+            freeLabel.text = freeLabel.text?.uppercased()
             
-            freeTextView.layer.borderColor = UIColor(hexString: "#5a9c69").cgColor
-            freeTextView.layer.borderWidth = 1.0
+            freeLabel.layer.borderColor = UIColor(hexString: "#5a9c69").cgColor
+            freeLabel.layer.borderWidth = 1.0
             
-            freeTextView.clipsToBounds = true
-            freeTextView.layer.cornerRadius = 4.0
+            freeLabel.clipsToBounds = true
+            freeLabel.layer.cornerRadius = 4.0
         }
     }
     @IBOutlet weak var safariProtectionLabel: ThemableLabel!
     @IBOutlet weak var safariDescriptionLabel: ThemableLabel!
     @IBOutlet weak var safariProtectionSwitch: UISwitch!
     
-    @IBOutlet weak var freeTextViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var freeTextViewSpacing: NSLayoutConstraint!
+    @IBOutlet weak var freeLabelHeight: NSLayoutConstraint!
+    @IBOutlet weak var freeLabelSpacing: NSLayoutConstraint!
     
     
     // MARK: - System protection outlets
     
     @IBOutlet weak var systemIcon: UIImageView!
-    @IBOutlet weak var premiumTextView: UITextView! {
+    @IBOutlet weak var premiumLabel: EdgeInsetLabel! {
         didSet{
-            premiumTextView.text = premiumTextView.text.uppercased()
-            premiumTextView.textContainerInset = UIEdgeInsets(top: 2.0, left: 2.0, bottom: 2.0, right: 2.0)
-            
-            premiumTextView.clipsToBounds = true
-            premiumTextView.layer.cornerRadius = 4.0
+            premiumLabel.text = premiumLabel.text?.uppercased()
+            premiumLabel.clipsToBounds = true
+            premiumLabel.layer.cornerRadius = 4.0
         }
     }
     @IBOutlet weak var systemProtectionLabel: ThemableLabel!
     @IBOutlet weak var systemDescriptionLabel: ThemableLabel!
     @IBOutlet weak var systemProtectionSwitch: UISwitch!
     
-    @IBOutlet weak var premiumTextViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var premiumTextViewSpacing: NSLayoutConstraint!
+    @IBOutlet weak var premiumLabelHeight: NSLayoutConstraint!
+    @IBOutlet weak var premiumLabelSpacing: NSLayoutConstraint!
     
     // MARK: - AdGuard VPN upsell outlets
     
     @IBOutlet weak var adguardVpnIcon: UIImageView!
-    @IBOutlet weak var notIntalledTextView: UITextView! {
+    @IBOutlet weak var notInstalledLabel: EdgeInsetLabel! {
         didSet{
-            notIntalledTextView.text = notIntalledTextView.text.uppercased()
-            notIntalledTextView.textContainerInset = UIEdgeInsets(top: 2.0, left: 2.0, bottom: 2.0, right: 2.0)
+            notInstalledLabel.text = notInstalledLabel.text?.uppercased()
             
-            notIntalledTextView.layer.borderColor = UIColor(hexString: "#a4a4a4").cgColor
-            notIntalledTextView.layer.borderWidth = 1.0
+            notInstalledLabel.layer.borderColor = UIColor.AdGuardColor.lightGray4.cgColor
+            notInstalledLabel.layer.borderWidth = 1.0
             
-            notIntalledTextView.clipsToBounds = true
-            notIntalledTextView.layer.cornerRadius = 4.0
+            notInstalledLabel.clipsToBounds = true
+            notInstalledLabel.layer.cornerRadius = 4.0
         }
     }
     
-    @IBOutlet weak var notInstalledTextViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var notInstalledTextViewSpacing: NSLayoutConstraint!
+    @IBOutlet weak var notInstalledLabelHeight: NSLayoutConstraint!
+    @IBOutlet weak var notInstalledLabelSpacing: NSLayoutConstraint!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
@@ -114,7 +110,8 @@ class ComplexProtectionController: UITableViewController {
     
     private let safariProtectionCell = 0
     private let systemProtectionCell = 1
-    private let adguardVpnCell = 2
+    private let advancedYouTubeAdsBlockingCell = 2
+    private let adguardVpnCell = 3
 
     private let showTrackingProtectionSegue = "showTrackingProtection"
     private let showLicenseSegue = "ShowLicenseSegueId"
@@ -131,8 +128,8 @@ class ComplexProtectionController: UITableViewController {
         
         resources.sharedDefaults().addObserver(self, forKeyPath: SafariProtectionState, options: .new, context: nil)
         
-        freeTextView.text = freeTextView.text.uppercased()
-        premiumTextView.text = premiumTextView.text.uppercased()
+        freeLabel.text = freeLabel.text?.uppercased()
+        premiumLabel.text = premiumLabel.text?.uppercased()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -267,11 +264,11 @@ class ComplexProtectionController: UITableViewController {
             let isBigScreen = self.traitCollection.verticalSizeClass == .regular && self.traitCollection.horizontalSizeClass == .regular
             let height: CGFloat = isBigScreen ? 26.0 : 18.0
             
-            self.freeTextViewHeight.constant = self.proStatus ? 0.0 : height
-            self.premiumTextViewHeight.constant = self.proStatus ? 0.0 : height
+            self.freeLabelHeight.constant = self.proStatus ? 0.0 : height
+            self.premiumLabelHeight.constant = self.proStatus ? 0.0 : height
             
-            self.freeTextViewSpacing.constant = self.proStatus ? 0.0 : 12.0
-            self.premiumTextViewSpacing.constant = self.proStatus ? 0.0 : 12.0
+            self.freeLabelSpacing.constant = self.proStatus ? 0.0 : 12.0
+            self.premiumLabelSpacing.constant = self.proStatus ? 0.0 : 12.0
             
             self.tableView.reloadData()
         }
@@ -300,8 +297,8 @@ class ComplexProtectionController: UITableViewController {
         let isBigScreen = self.traitCollection.verticalSizeClass == .regular && self.traitCollection.horizontalSizeClass == .regular
         let height: CGFloat = isBigScreen ? 26.0 : 18.0
         
-        notInstalledTextViewHeight.constant = installed ? 0.0 : height
-        notInstalledTextViewSpacing.constant = installed ? 0.0 : 12.0
+        notInstalledLabelHeight.constant = installed ? 0.0 : height
+        notInstalledLabelSpacing.constant = installed ? 0.0 : 12.0
         
         tableView.reloadData()
     }
@@ -310,8 +307,8 @@ class ComplexProtectionController: UITableViewController {
 extension ComplexProtectionController: ThemableProtocol {
     func updateTheme(){
         view.backgroundColor = theme.backgroundColor
-        premiumTextView.backgroundColor = theme.invertedBackgroundColor
-        premiumTextView.textColor = theme.backgroundColor
+        premiumLabel.backgroundColor = theme.invertedBackgroundColor
+        premiumLabel.textColor = theme.backgroundColor
 
         theme.setupSwitch(safariProtectionSwitch)
         theme.setupSwitch(systemProtectionSwitch)

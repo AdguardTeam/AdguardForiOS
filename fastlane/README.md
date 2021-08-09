@@ -30,6 +30,11 @@ fastlane generate
 fastlane auth
 ```
 
+### upload_dsym
+```
+fastlane upload_dsym
+```
+
 
 ----
 

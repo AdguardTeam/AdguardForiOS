@@ -19,6 +19,17 @@
 import Foundation
 
 extension NSMutableAttributedString {
+    enum AttachmentSize {
+        case defaultSize
+        case customSize(width: CGFloat, height: CGFloat)
+    }
+
+    struct AttachmentSettings {
+        let image: UIImage
+        let topEdge: CGFloat
+        let leftEdge: CGFloat
+        let size: AttachmentSize
+    }
     
     func alignCenter(){
         let paragraph = NSMutableParagraphStyle()
@@ -28,29 +39,45 @@ extension NSMutableAttributedString {
         self.addAttributes(attributes, range: NSRange(location: 0, length: length))
     }
     
-    static func fromHtml(_ html: String, fontSize: CGFloat, color: UIColor, attachmentImage: UIImage?, textAlignment: NSTextAlignment = .left) -> NSMutableAttributedString? {
+    static func fromHtml(_ html: String, fontSize: CGFloat, color: UIColor, attachmentSettings: AttachmentSettings? = nil, textAlignment: NSTextAlignment = .left, lineBreakMode: NSLineBreakMode = .byWordWrapping) -> NSMutableAttributedString? {
         
         let style = NSMutableParagraphStyle()
         style.alignment = textAlignment
+        style.lineBreakMode = lineBreakMode
         
         let format = NSMutableString(string: html)
         let wrapped = "<span style=\"font-family: -apple-system; font-size: \(fontSize); color: \(color.hex())\">\(format)</span>"
         guard let htmlData = wrapped.data(using: .utf8) else { return nil}
         
         guard let resultText = try? NSMutableAttributedString(
-            data: htmlData,
-            options: [.documentType: NSAttributedString.DocumentType.html,
-                      .characterEncoding:NSNumber(value:String.Encoding.utf8.rawValue)],
-            documentAttributes: nil) else { return nil }
+                data: htmlData,
+                options: [.documentType: NSAttributedString.DocumentType.html,
+                          .characterEncoding:NSNumber(value:String.Encoding.utf8.rawValue)],
+                documentAttributes: nil) else { return nil }
         
-        if attachmentImage != nil {
+        if let settings = attachmentSettings {
             
             let imageRange = resultText.mutableString.range(of: "%@")
             resultText.replaceCharacters(in: imageRange, with: "")
             
             let attachment = NSTextAttachment()
-            attachment.image = attachmentImage
-            attachment.bounds = CGRect(x: 0, y: -5, width: Double(attachmentImage!.cgImage!.width) / 2.5, height: Double(attachmentImage!.cgImage!.height) / 2.5)
+            attachment.image = settings.image
+            
+            let x = settings.leftEdge
+            let y = -settings.topEdge
+            let width: CGFloat
+            let height: CGFloat
+            switch settings.size {
+            case .defaultSize:
+                width = CGFloat(settings.image.cgImage!.width) / 2.5
+                height = CGFloat(settings.image.cgImage!.height) / 2.5
+            case .customSize(let w, let h):
+                width = w
+                height = h
+            }
+            
+            
+            attachment.bounds = CGRect(x: x, y: y, width: width, height: height)
             
             let attachmentString = NSAttributedString(attachment: attachment)
             resultText.insert(attachmentString, at: imageRange.location)

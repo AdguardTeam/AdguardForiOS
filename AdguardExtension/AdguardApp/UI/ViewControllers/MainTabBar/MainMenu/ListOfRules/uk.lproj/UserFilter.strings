@@ -13,11 +13,8 @@
 /* Class = "UIButton"; normalTitle = "Select"; ObjectID = "HFf-Yp-hjB"; */
 "HFf-Yp-hjB.normalTitle" = "Обрати";
 
-/* Class = "UIButton"; normalTitle = "REMOVE"; ObjectID = "Tei-uI-6Gr"; */
-"Tei-uI-6Gr.normalTitle" = "ВИЛУЧИТИ";
-
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "U2P-9b-f6k"; Note = "(RuleDetailsController) cancel button"; */
-"U2P-9b-f6k.normalTitle" = "СКАСУВАТИ";
+/* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "Tei-uI-6Gr"; */
+"Tei-uI-6Gr.normalTitle" = "ВИДАЛИТИ";
 
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "fCd-gA-rXS"; */
 "fCd-gA-rXS.normalTitle" = "ДОДАТИ";

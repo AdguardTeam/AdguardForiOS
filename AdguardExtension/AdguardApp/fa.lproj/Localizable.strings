@@ -19,9 +19,6 @@
 /* Alert title. On error. */
 "common_error_title" = "خطا";
 
-/* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "فیلترها را نمیتوان در سافاری بارگیری کرد.پس،تغییرات اخیر شما اِعمال نخواهد شد.";
-
 /* NO Button caption in alert */
 "common_action_no" = "خیر";
 
@@ -67,14 +64,8 @@
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "یک خطا حین بازگرداندن خرید رخ داده است.";
 
-/* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "خرید بازگردانده شد! نسخه پریمیوم AdGuard for iOS فعال شد.";
-
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "خریدی برای بازگرداندن وجود ندارد";
-
-/* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "خرید با موفقیت کامل شد!نسخه پریمیوم AdGuard for iOS فعال شد.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "یک خطا حین پردازش خرید شما رخ داد.";
@@ -91,20 +82,11 @@
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "دستورات دستی خود را اینجا وارد کنید<br>این نکته <a href=\"%@\">درباره نحو دستور را بخوانید</a>.";
 
-/* (UserFilterController) whitelist description */
-"whitelist_text" = "نام دامنه را اینجا وارد کنید. AdGuard فیلترینگ را در سافاری برای این وبسایت ها غیر فعال می کند.";
-
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "نام دامنه را اینجا وارد کنید.AdGuard فیلترینگ را در سافاری فقط برای این وبسایت ها فعال می کند.";
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "بروز رسانی...";
-
-/* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "افزودن یک دستور";
-
-/* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "افزودن یک دامنه";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";

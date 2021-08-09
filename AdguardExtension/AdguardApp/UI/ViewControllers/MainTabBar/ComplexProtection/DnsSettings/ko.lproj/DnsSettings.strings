@@ -7,15 +7,6 @@
 /* Class = "UITextField"; placeholder = "Name"; ObjectID = "3BA-9g-I6J"; Note = "(Add Custom Filter) url hint"; */
 "3BA-9g-I6J.placeholder" = "이름";
 
-/* Class = "UILabel"; text = "Set custom DNS settings"; ObjectID = "3lB-T7-fSO"; */
-"3lB-T7-fSO.text" = "사용자 정의 DNS 설정";
-
-/* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "6Tx-Oh-hyu"; Note = "(Add Custom Filter) url hint"; */
-"6Tx-Oh-hyu.placeholder" = "IP 주소, sdns://, https:// 또는 tls://";
-
-/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "6e9-sP-YMb"; */
-"6e9-sP-YMb.normalTitle" = "저장";
-
 /* Class = "UILabel"; text = "How to set it up?"; ObjectID = "7H8-Df-Igr"; */
 "7H8-Df-Igr.text" = "어떻게 설정하나요?";
 
@@ -24,9 +15,6 @@
 
 /* Class = "UILabel"; text = "AdGuard will block the domains from this list"; ObjectID = "AOm-kV-l4z"; */
 "AOm-kV-l4z.text" = "AdGuard가 이 목록에서 도메인을 차단합니다";
-
-/* Class = "UIButton"; normalTitle = "SAVE AND SELECT"; ObjectID = "B2l-7z-M2N"; */
-"B2l-7z-M2N.normalTitle" = "저장 및 선택";
 
 /* Class = "UIButton"; normalTitle = "DNS-over-HTTPS"; ObjectID = "DrO-hc-ilW"; */
 "DrO-hc-ilW.normalTitle" = "DNS-over-HTTPS";
@@ -43,8 +31,8 @@
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
 "NX4-vI-1WP.text" = "필터 추가";
 
-/* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
-"PFY-Cq-NFN.text" = "이 모듈을 활성화하면 DNS 트래픽을 암호화하여 개인정보 보호 기능을 향상시킬 수 있습니다.";
+/* Class = "UILabel"; text = "Blocks ads and trackers on the domain level and enhances your privacy by encrypting your DNS queries"; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
+"PFY-Cq-NFN.text" = "도메인 수준에서 광고 및 추적기를 차단하고 DNS 쿼리를 암호화하여 개인 정보를 강화합니다";
 
 /* Class = "UIButton"; normalTitle = "DNS-over-QUIC (experimental)"; ObjectID = "PYL-vX-Dge"; */
 "PYL-vX-Dge.normalTitle" = "DNS-over-QUIC (실험용)";
@@ -64,9 +52,6 @@
 /* Class = "UILabel"; text = "DNS implementation"; ObjectID = "Xa6-wl-aOE"; */
 "Xa6-wl-aOE.text" = "DNS 구현";
 
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ZdD-yx-6ph"; Note = "(AddCustomFilterController) cancel button"; */
-"ZdD-yx-6ph.normalTitle" = "취소";
-
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "ZgC-4d-Peb"; Note = "(Add Custom Filter) url hint"; */
 "ZgC-4d-Peb.placeholder" = "IP 주소, sdns://, https:// 또는 tls://";
 
@@ -85,12 +70,6 @@
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "dW3-zk-BPr"; */
 "dW3-zk-BPr.text" = "DNS 서버 주소";
 
-/* Class = "UILabel"; text = "Server name"; ObjectID = "e4h-eF-AOa"; */
-"e4h-eF-AOa.text" = "서버 이름";
-
-/* Class = "UILabel"; text = "Edit custom DNS settings"; ObjectID = "f57-S8-QfF"; */
-"f57-S8-QfF.text" = "사용자 정의 DNS 설정";
-
 /* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
 "hh1-EV-7KD.normalTitle" = "DNSCrypt";
 
@@ -103,23 +82,14 @@
 /* Class = "UILabel"; text = "Blocklist"; ObjectID = "ihd-7R-RfE"; */
 "ihd-7R-RfE.text" = "차단 목록";
 
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "ks4-fm-Ctr"; Note = "(AddCustomFilterController) cancel button"; */
-"ks4-fm-Ctr.normalTitle" = "취소";
-
 /* Class = "UILabel"; text = "Works as a local \"pseudo\" VPN. Supports any DNS protocol, allows you to inspect your device DNS activity."; ObjectID = "lEg-oH-oxd"; */
 "lEg-oH-oxd.text" = "로컬 '가짜' VPN으로 작동합니다. 모든 DNS 프로토콜을 지원하며, 기기 DNS 활동을 검사할 수 있습니다.";
-
-/* Class = "UITextField"; placeholder = "Name"; ObjectID = "mBR-7g-DjT"; Note = "(Add Custom Filter) url hint"; */
-"mBR-7g-DjT.placeholder" = "이름";
 
 /* Class = "UILabel"; text = "Website"; ObjectID = "mN8-Uh-sLQ"; */
 "mN8-Uh-sLQ.text" = "웹사이트";
 
 /* Class = "UIButton"; normalTitle = "OK"; ObjectID = "o1z-O6-Bk9"; */
 "o1z-O6-Bk9.normalTitle" = "확인";
-
-/* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "oSP-2V-qCA"; Note = "(AddCustomFilterController) cancel button"; */
-"oSP-2V-qCA.normalTitle" = "삭제";
 
 /* Class = "UILabel"; text = "DNS filtering"; ObjectID = "pC4-RU-DaD"; */
 "pC4-RU-DaD.text" = "DNS 필터링";
@@ -142,16 +112,13 @@
 /* Class = "UILabel"; text = "Native"; ObjectID = "sQQ-5p-EfW"; */
 "sQQ-5p-EfW.text" = "기본";
 
-/* Class = "UILabel"; text = "DNS server address"; ObjectID = "seX-mS-3mU"; */
-"seX-mS-3mU.text" = "DNS 서버 주소";
-
 /* Class = "UIBarButtonItem"; title = "Select"; ObjectID = "uCw-Mi-HiJ"; */
 "uCw-Mi-HiJ.title" = "선택";
 
 /* Class = "UILabel"; text = "DNS filtering"; ObjectID = "vDF-5j-uJn"; */
 "vDF-5j-uJn.text" = "DNS 필터링";
 
-/* Class = "UILabel"; text = "Select protocol"; ObjectID = "vJt-Jd-BI2"; */
+/* Class = "UILabel"; text = "Protocol"; ObjectID = "vJt-Jd-BI2"; */
 "vJt-Jd-BI2.text" = "프로토콜 선택";
 
 /* Class = "UILabel"; text = "Implementation"; ObjectID = "xgN-x2-EfQ"; */

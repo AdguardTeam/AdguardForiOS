@@ -186,6 +186,8 @@ class RequestDetailsCell: UITableViewCell, CopiableCellInfo {
         let categoryImage = UIImage.getCategoryImage(withId: model.categoryId)
         categoryImageView.isHidden = categoryImage == nil
         categoryImageView.image = categoryImage
+        self.setNeedsLayout()
+        self.layoutIfNeeded()
     }
     
     private func updateTheme(_ theme: ThemeServiceProtocol?){

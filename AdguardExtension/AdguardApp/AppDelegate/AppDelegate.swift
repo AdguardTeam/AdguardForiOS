@@ -16,8 +16,8 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
 import AdGuardSDK
+import Sentry
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -112,6 +112,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        
+        SentrySDK.start { options in
+            options.dsn = SentryConst.dsnUrl
+            options.enableAutoSessionTracking = false
+        }
+        
         prepareControllers()
         
         //------------- Preparing for start application. Stage 2. -----------------
@@ -315,6 +321,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ACLLogger.singleton()?.logLevel = ACLLDebugLevel
         #endif
         
+        AGLogger.setLevel(isDebugLogs ? .AGLL_TRACE : .AGLL_INFO)
+        AGLogger.setCallback { msg, length in
+            guard let msg = msg else { return }
+            let data = Data(bytes: msg, count: Int(length))
+            if let str = String(data: data, encoding: .utf8) {
+                DDLogInfo("(DnsLibs) \(str)")
+            }
+        }
+    
         DDLogInfo("Application started. Version: \(productInfo.buildVersion() ?? "nil")")
         
         Logger.logDebug = { msg in

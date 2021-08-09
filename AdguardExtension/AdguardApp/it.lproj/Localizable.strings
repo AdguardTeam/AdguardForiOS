@@ -20,7 +20,7 @@
 "common_error_title" = "Errore";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "I filtri non possono essere caricati in Safari. Di conseguenza, i tuoi cambiamenti recenti non sono stati applicati.";
+"safari_filters_loading_error" = "I filtri non possono essere caricati in Safari. Quindi, i suoi cambiamenti recenti non sono stati applicati.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "I filtri non possono essere caricati in Safari. Prova a rimuovere le tue regole e la Lista bianca, o cambia la lista dei filtri utilizzati.";
@@ -119,13 +119,13 @@
 "restore_purchases_failure_message" = "Si è verificato un errore durante il tentativo di ripristinare l'acquisto.";
 
 /* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "L'acquisto è stato ripristinato! La versione premium di AdGuard per iOS è stata attivata.";
+"restore_success_message" = "L\'acquisto è stato ripristinato! La versione Premium di AdGuard per iOS è stata attivata.";
 
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "Nessun acquisto da ripristinare";
 
 /* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "L'acquisto è stato completato con successo! La versione premium di AdGuard per iOS è stata attivata.";
+"purchase_success_message" = "L\'acquisto è stato completato correttamente! La versione Premium di AdGuard per iOS è stata attivata.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "Si è verificato un errore durante l'elaborazione dell'acquisto.";
@@ -143,7 +143,7 @@
 "blacklist_text_format" = "Puoi insere le tue regole personalizzate qui<br>Leggi questa <a href=\"%@\">nota sulla sintassi delle regole</a>.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Inserisci qui i nomi di dominio. AdGuard disabiliterà il filtro in Safari per questi siti web.";
+"whitelist_text" = "Inserisci qui i domini che non vuoi che AdGuard filtri. Questo elenco ha la precedenza sulle altre impostazioni.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Inserisci qui i nomi di dominio. AdGuard abiliterà il filtraggio in Safari solo per questi siti web.";
@@ -158,10 +158,10 @@
 "update_filter_start_message" = "Aggiornamento...";
 
 /* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "Aggiungi una regola";
+"add_blacklist_rule_title" = "Aggiungi una nuova regola";
 
 /* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "Inserisci un dominio";
+"add_whitelist_domain_title" = "Aggiungi un dominio";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||esempio.org^";
@@ -284,13 +284,13 @@
 "reset_title" = "Reimposta";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Rimuovi";
+"delete_title" = "Elimina";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Rimuovi profilo VPN";
 
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Sei sicuro di voler rimuovere il tuo profilo VPN e disattivare la protezione DNS?";
+/* (AdvancedSettingsController) Delete Vpn profile message */
+"delete_vpn_profile_message" = "Sei sicuro di voler rimuovere il tuo profilo VPN e disattivare la protezione DNS?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Si è verificato un errore";
@@ -347,7 +347,7 @@
 "off_state" = "DISATTIVATO";
 
 /* (NewCustomFilterDetailedController) homepage string */
-"homepage_title" = "Pagina iniziale:";
+"homepage_title" = "Pagina principale:";
 
 /* (FilterDetailsController) delete filter title */
 "delete_filter_title" = "Elimina filtro";
@@ -626,7 +626,7 @@
 "default_dns_server_name" = "DNS di sistema";
 
 /* (DnsProvidersController) default systen dns server description */
-"default_dns_server_description" = "Utilizzare i server DNS di default del sistema forniti dal proprio fornitore di servizi Internet";
+"default_dns_server_description" = "Utilizzare i server DNS predefiniti di sistema rilasciati dal proprio fornitore di servizi Internet";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "Bloccare richiesta";
@@ -648,6 +648,24 @@
 
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ non è ancora supportato da iOS. Prova ad aggiungere un upstream differente.";
+
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "Salva e seleziona";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "Salva";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "Annulla";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "Elimina";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "Aggiungi un server DNS personalizzato";
+
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "Modifica server DNS personalizzato";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Lista nera di sistema";
@@ -734,7 +752,7 @@
 "bug_report_title" = "Segnala un bug";
 
 /* (BugReportController) title for leaving feedback */
-"leave_feedback_title" = "Invia feedback";
+"leave_feedback_title" = "Lascia feedback";
 
 /* (BugReportController) description for bug report */
 "bug_report_description" = "Si prega di includere la descrizione del problema (è iniziato dopo un aggiornamento?) e le informazioni su altri software in tuo possesso (VPN/AV/estensione)";
@@ -746,7 +764,7 @@
 "bug_report_button_title" = "Invia segnalazione";
 
 /* (BugReportController) button title for leaving feedback */
-"leave_feedback_button_title" = "Invia feedback";
+"leave_feedback_button_title" = "Lascia feedback";
 
 /* (IntroductionOnboardingController) - License agreement text */
 "introduction_license_agreement" = "Proseguendo con l\'utilizzo, accetterai i <a href=%2$@>Termini e condizioni</a> e la <a href=%1$@>Politica sulla riservatezza</a>";
@@ -906,7 +924,7 @@
 "low_level_bootstraps_placeholder" = "Elenco server DNS semplici, da utilizzare per risolvere i nomi host DOH/DOT (se presenti)";
 
 /* (LowLevelSettingsController) Low level fallbacks placeholder */
-"low_level_fallbacks_placeholder" = "Quando il server configurato non è disponibile verrà utilizzato un fallback DNS resolver. Con la stringa 'nessuno' verrà utilizzato il DNS preimpostato come fallback.";
+"low_level_fallbacks_placeholder" = "Quando il server configurato non è disponibile verrà utilizzato un risolutore DNS di fallback. Con la stringa 'nessuno' verrà utilizzato il DNS preimpostato come fallback.";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstrap servers";
 
@@ -927,3 +945,41 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "Restituisci sempre indirizzo IP impostato manualmente";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Filtri";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "Filtri DNS";
+
+/* (LowLevelSettingsController) - title for unsupported options */
+"unsupported_setting" = "Questa opzione è incompatibile con la modalità DNS nativa";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "Hai collegato il numero massimo di dispositivi al tuo profilo Setapp.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_safari" = "Sapevi che YouTube ha cambiato i suoi algoritmi per mostrarti più annunci?<br><br>Ora, per bloccarli devi:<br><br>1. Aprire <a href=\"%@\">Safari</a>.<br><br> 2. Accedere youtube.com.<br><br> 3. Cliccare sul pulsante %@ Condividi.<br><br> 4. Fare clic su \"Blocca annunci YouTube (da AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
+"block_youtube_ads_instructions" = "Sapevi che YouTube ha cambiato i suoi algoritmi per mostrarti più annunci<br><br>Ora, per bloccarli devi:<br><br>1. Accedi a <a href=\"%@\">youtube.com</a> in Safari.<br><br> 2. Clicca %@ sul pulsante Condividi.<br><br> 3. Fare clic su \"Blocca annunci YouTube (da AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "Ecco fatto! Ora puoi guardare YouTube senza pubblicità.\n\nQuando l'estensione è abilitata, la legenda \"con AdGuard\" viene visualizzata accanto al logo di YouTube.<br><br><b>Se ricarichi la pagina, dovrai eseguire nuovamente i passi 3 e 4.</b>";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "Ecco fatto! Ora puoi guardare YouTube senza pubblicità.\n\nQuando l'estensione è abilitata, la legenda \"con AdGuard\" viene visualizzata accanto al logo di YouTube.<br><br><b>Se ricarichi la pagina, dovrai eseguire nuovamente i passi 2 e 3.</b>";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "YouTube è ora privo di pubblicità! Tieni presente che dovrai eseguire nuovamente questa estensione se ricaricherai la pagina";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "Questa estensione dovrebbe essere eseguita solo su YouTube";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
+"youtube_script_already_executed_title" = "L\'estensione è già stata eseguita";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "Si è verificato un errore sconosciuto durante la rimozione degli annunci YouTube";

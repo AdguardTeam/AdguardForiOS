@@ -19,12 +19,6 @@
 /* Alert title. On error. */
 "common_error_title" = "Eroare";
 
-/* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Safari nu poate încărca filtrele. De aceea modificările dvs. recente nu s-au aplicat.";
-
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Safari nu poate încărca filtrele. Încercați să goliți regulile și lista autorizărilor sau înlocuiți setul de filtre utilizat.";
-
 /* NO Button caption in alert */
 "common_action_no" = "NU";
 
@@ -51,12 +45,6 @@
 
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
-
-/* (MainPageController) Native DNS is working title */
-"native_dns_working" = "DNS nativ funcționează";
-
-/* (MainPageController) Native DNS is not working title */
-"native_dns_not_working" = "DNS nativ nu funcționează";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Reguli utilizator";
@@ -118,14 +106,8 @@
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Eroare la încercarea de restaurare a achiziției.";
 
-/* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "Achiziția a fost restaurată! Versiunea Premium de AdGuard pentru iOS a fost activată.";
-
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "Nicio achiziție de restaurat";
-
-/* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "Achiziția a fost finalizată cu succes! Versiunea Premium de AdGuard pentru iOS a fost activată.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "A apărut o eroare la procesarea achiziției.";
@@ -142,9 +124,6 @@
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Puteți adăuga propriile reguli aici.<br>Citiți<a href=\"%@\">nota despre sintaxa regulii</a>.";
 
-/* (UserFilterController) whitelist description */
-"whitelist_text" = "Introduceți aici numele de domenii. AdGuard nu va bloca accesul la ele ignorând toate celelalte setări.";
-
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Introduceți aici numele de domenii. AdGuard va filtra în Safari doar pe aceste site-uri web.";
 
@@ -156,12 +135,6 @@
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Actualizăm...";
-
-/* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "Regulă nouă";
-
-/* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "Domeniu nou";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||exemplu.org^";
@@ -283,14 +256,8 @@
 /* (AdvancedSettingsController) Reset button title */
 "reset_title" = "Resetare";
 
-/* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Elimină";
-
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Eliminare profil VPN";
-
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Sigur doriți să eliminați profilul dvs. VPN și să dezactivați protecția DNS?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "A apărut o eroare";
@@ -529,15 +496,6 @@
 /*(MainScreen) "all time" chart date type */
 "chart_alltime" = "Tot timpul";
 
-/*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "Actualizăm blocantele de conținut...";
-
-/*(FiltersService) notification about filters laoding  */
-"loading_filters" = "Încărcăm filtrele...";
-
-/*(ContentBlockerService) notification about converting rules  */
-"converting_rules" = "Regulile se convertesc...";
-
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "Nou filtru personalizat";
 
@@ -618,9 +576,6 @@
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "Tapați pe <b>Safari</b> și alegeți <b>\"Blocant de conținut\"</b> în meniu";
-
-/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Porniți toate blocante de conținut</b> și reveniți la aplicația noastră!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "Sistem DNS";

@@ -19,8 +19,8 @@
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "95J-h1-QgG"; */
 "95J-h1-QgG.normalTitle" = "保存";
 
-/* Class = "UILabel"; text = "Remove VPN profile"; ObjectID = "9hH-ca-VHY"; */
-"9hH-ca-VHY.text" = "移除VPN 配置文件";
+/* Class = "UILabel"; text = "Delete VPN profile"; ObjectID = "9hH-ca-VHY"; */
+"9hH-ca-VHY.text" = "删除 VPN 配置文件";
 
 /* Class = "UILabel"; text = "Bootstrap IP address"; ObjectID = "A89-2M-jqd"; */
 "A89-2M-jqd.text" = "Bootstrap IP 地址";
@@ -44,10 +44,10 @@
 "EbM-k3-HW8.text" = "不兼容其它 VPN 应用";
 
 /* Class = "UILabel"; text = "Dark"; ObjectID = "FzS-e3-CK1"; */
-"FzS-e3-CK1.text" = "暗黑";
+"FzS-e3-CK1.text" = "深色";
 
 /* Class = "UILabel"; text = "Don't change them unless you know what you're doing"; ObjectID = "GBd-dx-t46"; */
-"GBd-dx-t46.text" = "这有多难搞？";
+"GBd-dx-t46.text" = "除非您知道自己在做什么，否则请不要更改它们";
 
 /* Class = "UILabel"; text = "AdGuard will write more details to the logfile. Don't enable unless you need to track down a bug"; ObjectID = "GFO-xu-Bir"; */
 "GFO-xu-Bir.text" = "AdGuard将要在日志文件中写入更多详细信息。除非您需要跟踪错误，否则请勿启用该功能";
@@ -64,8 +64,8 @@
 /* Class = "UILabel"; text = "Bootstrap servers"; ObjectID = "JQH-8J-wY8"; */
 "JQH-8J-wY8.text" = "Bootstrap 服务器";
 
-/* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
-"Jnb-4w-9NY.text" = "这个要移除您的VPN配置文件并禁用DNS防护";
+/* Class = "UILabel"; text = "This will delete your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
+"Jnb-4w-9NY.text" = "这将删除您的 VPN 配置文件并禁用 DNS 保护";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "Lig-ju-iTI"; */
 "Lig-ju-iTI.text" = "高级设置";
@@ -146,7 +146,7 @@
 "nPj-OI-Pcb.text" = "内容拦截器";
 
 /* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
-"ocH-QT-NRZ.text" = "明亮";
+"ocH-QT-NRZ.text" = "浅色";
 
 /* Class = "UILabel"; text = "Enables additional settings for advanced users"; ObjectID = "qUy-uy-QiF"; */
 "qUy-uy-QiF.text" = "为高级用户启用额外设置";

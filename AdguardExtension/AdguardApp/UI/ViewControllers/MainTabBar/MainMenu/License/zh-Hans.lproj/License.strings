@@ -5,7 +5,7 @@
 "6P7-a5-VLL.text" = "安全过滤器";
 
 /* Class = "UIBarButtonItem"; title = "Logout"; ObjectID = "70b-CS-wqh"; */
-"70b-CS-wqh.title" = "注销";
+"70b-CS-wqh.title" = "登出";
 
 /* Class = "UILabel"; text = "All Premium features are available"; ObjectID = "FLH-Qd-Atk"; */
 "FLH-Qd-Atk.text" = "所有高级版特性是可用的";

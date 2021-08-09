@@ -10,9 +10,6 @@
 /* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
 "8jT-85-XFp.text" = "Nije kompatibilan sa drugim VPN aplikacijama, \nnestabilno";
 
-/* Class = "UILabel"; text = "Remove VPN profile"; ObjectID = "9hH-ca-VHY"; */
-"9hH-ca-VHY.text" = "Ukloni VPn profil";
-
 /* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "BOT-Ej-15M"; */
 "BOT-Ej-15M.text" = "Dozvoli prikazivanje statusa preuzimanja filtera i tok zaštite";
 
@@ -36,9 +33,6 @@
 
 /* Class = "UILabel"; text = "Enable this option if you experience issues with the Internet connection while AdGuard is running"; ObjectID = "H3Q-H6-YV0"; */
 "H3Q-H6-YV0.text" = "Uključite ovo ako imate poteškoća sa internet vezom dok AdGuard radi";
-
-/* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
-"Jnb-4w-9NY.text" = "Ovo će ukloniti vaš trenutni VPN profil i isključiti DNS zaštitu";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "Lig-ju-iTI"; */
 "Lig-ju-iTI.text" = "Napredne postavke";

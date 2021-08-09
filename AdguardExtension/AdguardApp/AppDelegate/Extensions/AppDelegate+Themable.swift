@@ -46,7 +46,9 @@ extension AppDelegate {
         guard let children = children, !children.isEmpty else { return }
         children.forEach {
             recursiveChildrenThemeUpdate(children: $0.children)
-            ($0 as? ThemableProtocol)?.updateTheme()
+            if $0.isViewLoaded {
+                ($0 as? ThemableProtocol)?.updateTheme()
+            }
         }
     }
 }

@@ -7,9 +7,6 @@
 /* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
 "8jT-85-XFp.text" = "Не стасуем з іншымі VPN-дадаткамі, нестабільны";
 
-/* Class = "UILabel"; text = "Remove VPN profile"; ObjectID = "9hH-ca-VHY"; */
-"9hH-ca-VHY.text" = "Выдаліць VPN-профіль";
-
 /* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "BOT-Ej-15M"; */
 "BOT-Ej-15M.text" = "Паказваць індыкатар абнаўленняў фільтраў";
 
@@ -30,9 +27,6 @@
 
 /* Class = "UILabel"; text = "Enable this option if you experience issues with the Internet connection while AdGuard is running"; ObjectID = "H3Q-H6-YV0"; */
 "H3Q-H6-YV0.text" = "Уключыце гэту опцыю, калі падчас працы AdGuard паўстануць праблемы з падлучэннем";
-
-/* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
-"Jnb-4w-9NY.text" = "Выдаленне вашага VPN-профіля дэактывуе абарону ад асочвання";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "Lig-ju-iTI"; */
 "Lig-ju-iTI.text" = "Пашыраныя налады";
