@@ -18,7 +18,7 @@
 
 import Foundation
 import Zip
-import SQLite
+@_implementationOnly import SQLite
 
 protocol DefaultDatabaseManagerProtocol {
     // default.db file URL
