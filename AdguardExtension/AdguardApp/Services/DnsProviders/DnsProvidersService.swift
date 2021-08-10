@@ -94,7 +94,8 @@ import Foundation
         
         super.init()
         
-        self.migrateActiveServerIfNeeded()
+        // TODO: - Remove?
+        //self.migrateActiveServerIfNeeded()
     }
     
     @objc var predefinedProviders: [DnsProviderInfo] {

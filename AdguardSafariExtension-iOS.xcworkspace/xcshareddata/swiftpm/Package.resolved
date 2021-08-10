@@ -38,6 +38,15 @@
         }
       },
       {
+        "package": "Sentry",
+        "repositoryURL": "https://github.com/getsentry/sentry-cocoa",
+        "state": {
+          "branch": null,
+          "revision": "d9b37a6664cf2467efda861e1383ec806a221b18",
+          "version": "7.1.4"
+        }
+      },
+      {
         "package": "Setapp",
         "repositoryURL": "https://github.com/MacPaw/Setapp-framework.git",
         "state": {
