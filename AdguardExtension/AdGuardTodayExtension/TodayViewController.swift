@@ -91,7 +91,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         ACLLogger.singleton()?.flush()
         
         // todo:
-        let configuration = Configuration(currentLanguage: "", proStatus: true, safariProtectionEnabled: true, blocklistIsEnabled: true, allowlistIsEnbaled: true, allowlistIsInverted: true, updateOverWifiOnly: true, appBundleId: "", appProductVersion: "", appId: "", cid: "")
+        let configuration = SafariConfiguration(currentLanguage: "", proStatus: true, safariProtectionEnabled: true, blocklistIsEnabled: true, allowlistIsEnbaled: true, allowlistIsInverted: true, appBundleId: "", appProductVersion: "", appId: "", cid: "")
         safariProtection = try! SafariProtection(configuration: configuration, defaultConfiguration: configuration, filterFilesDirectoryUrl: URL(string: "")!, dbContainerUrl: URL(string: "")!, jsonStorageUrl: URL(string: "")!, userDefaults: UserDefaults(suiteName: "")!)
         
         productInfo = ADProductInfo()

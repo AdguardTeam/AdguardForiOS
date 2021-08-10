@@ -17,7 +17,7 @@
 */
 
 import UIKit
-import AdGuardSDK
+import SafariAdGuardSDK
 
 class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfRequestsChangedDelegate, ComplexSwitchDelegate, OnboardingControllerDelegate, GetProControllerDelegate, MainPageModelDelegate {
     

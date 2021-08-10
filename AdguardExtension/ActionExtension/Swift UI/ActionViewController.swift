@@ -75,8 +75,8 @@ class ActionViewController: UIViewController {
     // MARK: - View Controller LifeCycle
     
     required init?(coder: NSCoder) {
-        // todo:
-        let sdkConfiguration = Configuration(currentLanguage: "", proStatus: true, safariProtectionEnabled: true, blocklistIsEnabled: true, allowlistIsEnbaled: true, allowlistIsInverted: true, updateOverWifiOnly: true, appBundleId: "", appProductVersion: "", appId: "", cid: "")
+        // TODO
+        let sdkConfiguration = SafariConfiguration(currentLanguage: "", proStatus: true, safariProtectionEnabled: true, blocklistIsEnabled: true, allowlistIsEnbaled: true, allowlistIsInverted: true, appBundleId: "", appProductVersion: "", appId: "", cid: "")
         safariProtection = try! SafariProtection(configuration: sdkConfiguration, defaultConfiguration: sdkConfiguration, filterFilesDirectoryUrl: URL(string: "")!, dbContainerUrl: URL(string: "")!, jsonStorageUrl: URL(string: "")!, userDefaults: UserDefaults(suiteName: "")!)
         
         configuration = SimpleConfigurationSwift(withResources: sharedResources, systemAppearenceIsDark: true)

@@ -17,7 +17,7 @@
  */
 
 import Foundation
-import AdGuardSDK
+import SafariAdGuardSDK
 
 class AddCustomFilterController: BottomAlertController {
     
@@ -138,7 +138,8 @@ class AddCustomFilterController: BottomAlertController {
             controller.addDelegate = self.delegate
             
             if let title = self.openTitle {
-                controller.filter?.name = title
+                // TODO
+                //controller.filter?.name = title
             }
             
             presenter?.present(controller, animated: true, completion: nil)

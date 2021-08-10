@@ -17,7 +17,7 @@
  */
 
 import UIKit
-import AdGuardSDK
+import SafariAdGuardSDK
 
 class FiltersMasterController: UIViewController {
     @IBOutlet weak var searchContainerView: UIView!

@@ -17,7 +17,7 @@
  */
 
 import Foundation
-import AdGuardSDK
+import SafariAdGuardSDK
 
 protocol AddNewFilterDelegate {
     func addCustomFilter(filter: ExtendedCustomFilterMetaProtocol)
@@ -94,7 +94,8 @@ class NewCustomFilterDetailsController : BottomAlertController {
     // MARK: - Actions
     @IBAction func AddAction(_ sender: Any) {
         if controllerModeType == .addingFilter {
-            filter?.name = ((name.text == nil || name.text == "") ? filter?.name : name.text) ?? ""
+            // TODO
+            //filter?.name = ((name.text == nil || name.text == "") ? filter?.name : name.text) ?? ""
             addDelegate?.addCustomFilter(filter: filter!)
         } else if controllerModeType == .editingFilter {
             if let newName = (name.text == nil || name.text == "") ? model?.name : name.text {

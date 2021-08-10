@@ -25,11 +25,11 @@ import Foundation
  If you want to get more info about filters or groups themselves you can searh them by filter or group id respectively
  */
 public struct FiltersUpdateResult {
-    var updatedFilterIds: [Int] = [] // Identifiers of filters that were successfully updated
-    var failedFilterIds: [Int] = [] // Identifiers of filters that failed to update
-    var addedFilterIds: [Int] = [] // Identifiers of filters that were successfully added while updating
-    var removedFiltersIds: [Int] = [] // Identifiers of filters that were successfully removed
-    var error: Error? // If this object exists and was passed till SafariProtection the only step where error can occur is Reloading CBs
+    public var updatedFilterIds: [Int] = [] // Identifiers of filters that were successfully updated
+    public var failedFilterIds: [Int] = [] // Identifiers of filters that failed to update
+    public var addedFilterIds: [Int] = [] // Identifiers of filters that were successfully added while updating
+    public var removedFiltersIds: [Int] = [] // Identifiers of filters that were successfully removed
+    public var error: Error? // If this object exists and was passed till SafariProtection the only step where error can occur is Reloading CBs
 }
 
 // MARK: - FiltersService
@@ -136,12 +136,12 @@ final class FiltersService: FiltersServiceProtocol {
     private let completionQueue = DispatchQueue.main
     
     /* Services */
-    private let configuration: SafariConfigurationProtocol
-    private let filterFilesStorage: FilterFilesStorageProtocol
-    private let metaStorage: MetaStorageProtocol
-    private let userDefaultsStorage: UserDefaultsStorageProtocol
-    private let metaParser: CustomFilterMetaParserProtocol
-    private let apiMethods: SafariProtectionApiMethodsProtocol
+    let configuration: SafariConfigurationProtocol
+    let filterFilesStorage: FilterFilesStorageProtocol
+    let metaStorage: MetaStorageProtocol
+    let userDefaultsStorage: UserDefaultsStorageProtocol
+    let metaParser: CustomFilterMetaParserProtocol
+    let apiMethods: SafariProtectionApiMethodsProtocol
     
     // MARK: - Initialization
     
@@ -468,7 +468,7 @@ final class FiltersService: FiltersServiceProtocol {
      It's a wrapper for **addFilter** function to add multiple filters syncroniously
      - Returns ids of filters that were successfully added to our storage
      */
-    private func add(filters: [ExtendedFilterMetaProtocol]) -> [Int] {
+    func add(filters: [ExtendedFilterMetaProtocol]) -> [Int] {
         Logger.logInfo("(FiltersService) - addFilters; Trying to add \(filters.count) filters")
         
         @Atomic var addedFiltersIds: [Int] = []
@@ -571,6 +571,12 @@ final class FiltersService: FiltersServiceProtocol {
         
         let group = DispatchGroup()
         let allFilters = groupsAtomic.flatMap { $0.filters }
+        
+        guard allFilters.count > 0 else {
+            onFilesUpdated(([], []))
+            return
+        }
+        
         allFilters.forEach { filter in
             group.enter()
             

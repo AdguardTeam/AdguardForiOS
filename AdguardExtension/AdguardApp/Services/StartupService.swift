@@ -18,7 +18,7 @@
 
 import Foundation
 import Accounts
-import AdGuardSDK
+import SafariAdGuardSDK
 
 /**
  this service initializes all shared services and put them into ServiceLocator
@@ -51,7 +51,7 @@ class StartupService : NSObject{
         purchaseService.start()
         locator.addService(service: purchaseService)
         
-        let safariProtectionConfiguration = Configuration(currentLanguage: "en", proStatus: purchaseService.isProPurchased, safariProtectionEnabled: sharedResources.safariProtectionEnabled, blocklistIsEnabled: sharedResources.safariUserFilterEnabled, allowlistIsEnbaled: sharedResources.safariWhitelistEnabled, allowlistIsInverted: sharedResources.invertedWhitelist, updateOverWifiOnly: sharedResources.wifiOnlyUpdates, appBundleId: Bundle.main.bundleIdentifier ?? "", appProductVersion: "", appId: "", cid: "")
+        let safariProtectionConfiguration = SafariConfiguration(currentLanguage: "en", proStatus: purchaseService.isProPurchased, safariProtectionEnabled: sharedResources.safariProtectionEnabled, blocklistIsEnabled: sharedResources.safariUserFilterEnabled, allowlistIsEnbaled: sharedResources.safariWhitelistEnabled, allowlistIsInverted: sharedResources.invertedWhitelist, appBundleId: Bundle.main.bundleIdentifier ?? "", appProductVersion: "", appId: "", cid: "")
         
         let safariProtection: SafariProtectionProtocol = try! SafariProtection(configuration: safariProtectionConfiguration, defaultConfiguration: safariProtectionConfiguration, filterFilesDirectoryUrl: sharedResources.sharedResuorcesURL(), dbContainerUrl: sharedResources.sharedResuorcesURL(), jsonStorageUrl: sharedResources.sharedResuorcesURL(), userDefaults: sharedResources.sharedDefaults())
         

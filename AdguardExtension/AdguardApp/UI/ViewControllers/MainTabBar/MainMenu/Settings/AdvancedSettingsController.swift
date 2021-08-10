@@ -18,7 +18,7 @@
 
 
 import UIKit
-import AdGuardSDK
+import SafariAdGuardSDK
 
 class AdvancedSettingsController: UITableViewController {
 

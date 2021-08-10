@@ -17,7 +17,7 @@
  */
 
 import UIKit
-import AdGuardSDK
+import SafariAdGuardSDK
 
 class FilterTagsView: UIView, FilterTagsViewModel {
     

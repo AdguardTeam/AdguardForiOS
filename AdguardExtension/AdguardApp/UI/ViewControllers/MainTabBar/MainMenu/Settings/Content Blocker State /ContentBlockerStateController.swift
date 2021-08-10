@@ -17,7 +17,7 @@
  */
 
 import UIKit
-import AdGuardSDK
+import SafariAdGuardSDK
 
 class ContentBlockerTitleCell: UITableViewCell {
     @IBOutlet weak var titleLabel: ThemableLabel!

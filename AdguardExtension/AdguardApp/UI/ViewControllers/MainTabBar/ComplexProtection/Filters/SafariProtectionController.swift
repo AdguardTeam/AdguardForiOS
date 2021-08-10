@@ -16,7 +16,7 @@
       along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 import UIKit
-import AdGuardSDK
+import SafariAdGuardSDK
 
 class SafariProtectionController: UITableViewController {
 

@@ -17,7 +17,7 @@
 */
 
 import Foundation
-import AdGuardSDK
+import SafariAdGuardSDK
 
 protocol MigrationServiceProtocol {
     func install()

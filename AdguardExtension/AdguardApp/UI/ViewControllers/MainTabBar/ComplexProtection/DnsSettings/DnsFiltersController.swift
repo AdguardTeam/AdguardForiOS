@@ -17,7 +17,7 @@
 */
 
 import UIKit
-import AdGuardSDK
+import SafariAdGuardSDK
 
 protocol DnsFiltersControllerDelegate: AnyObject {
     func filtersStateWasChanged()

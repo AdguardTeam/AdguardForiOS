@@ -18,7 +18,7 @@
 
 import Foundation
 import Zip
-import AdGuardSDK
+import SafariAdGuardSDK
 
 protocol SupportServiceProtocol {
     func exportLogs() -> URL?

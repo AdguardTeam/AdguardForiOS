@@ -61,7 +61,8 @@ public struct SafariGroup: SafariGroupProtocol {
         self.groupId = dbGroup.groupId
         self.filters = filters
         self.isEnabled = dbGroup.isEnabled
-        self.groupType = GroupType(rawValue: dbGroup.groupId)!
+        // TODO: - This is wrong
+        self.groupType = GroupType(rawValue: dbGroup.groupId) ?? .ads
         self.groupName = dbGroup.name
         self.displayNumber = dbGroup.displayNumber
     }

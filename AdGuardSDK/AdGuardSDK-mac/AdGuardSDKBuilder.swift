@@ -3,12 +3,12 @@ import Foundation
 
 public protocol AdGuardSDKBuilderProtocol {
     /// loads metadata and all filters synchronously and store them in urls sent to constructor
-    func loadAll() -> Bool
+    func loadAll() throws
 }
 
 public class AdGuardSDKBuilder: AdGuardSDKBuilderProtocol {
 
-    let filtersService: FiltersServiceProtocol
+    let filtersService: FiltersServiceForBuilderProtocol
     public init (filtersStorageUrl: URL, dbUrl: URL) {
         let configuration = SafariConfiguration(currentLanguage: "en", proStatus: false, safariProtectionEnabled: true, blocklistIsEnabled: true, allowlistIsEnbaled: true, allowlistIsInverted: false, appBundleId: Bundle.main.bundleIdentifier ?? "", appProductVersion: "", appId: "builder", cid: "")
         
@@ -24,37 +24,23 @@ public class AdGuardSDKBuilder: AdGuardSDKBuilderProtocol {
         filtersService = try! FiltersService(configuration: configuration, filterFilesStorage: filtersStorage, metaStorage: metaStorage, userDefaultsStorage: defaults, apiMethods: api)
     }
     
-    public func loadAll() -> Bool {
-        
-        var result = false
-        let group = DispatchGroup()
-        group.enter()
-        filtersService.updateAllMeta(forcibly: true) { updateResult in
-            
-            switch (updateResult) {
-            case .success(_):
-                result = true
-            
-            case .error(_):
-                result = false
-            }
-            
-            group.leave()
-        }
-        
-        group.wait()
-        
-        return result
+    public func loadAll() throws {
+        try filtersService.downloadAndSaveFiltersMeta()
     }
 }
 
-class BuilderDbManager: ProductionDatabaseManagerProtocol {
+fileprivate final class BuilderDbManager: ProductionDatabaseManagerProtocol {
     
     let filtersDb: Connection
     
     init(dbContainerFolderUrl: URL) {
         let dbPath = dbContainerFolderUrl.appendingPathComponent("default.db").absoluteString
-        try? FileManager.default.removeItem(atPath: dbPath)
+        
+        let filePaths = try! FileManager.default.contentsOfDirectory(atPath: dbContainerFolderUrl.path)
+        for filePath in filePaths {
+            try! FileManager.default.removeItem(atPath: dbContainerFolderUrl.appendingPathComponent(filePath).path)
+        }
+        
         filtersDb = try! Connection(dbPath)
         
         let schemaUrl = Bundle(for: type(of: self)).url(forResource: "schema", withExtension: "sql")!

@@ -24,7 +24,7 @@ struct FiltersMetadataParser: ParserProtocol {
     typealias Model = ExtendedFiltersMeta
     
     func parse(data: Data, response: URLResponse?) -> Model? {
-        guard let response = response as? HTTPURLResponse, response.statusCode != 200 else {
+        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
             Logger.logError("(FiltersMetadataParser) bad response")
             return nil
         }

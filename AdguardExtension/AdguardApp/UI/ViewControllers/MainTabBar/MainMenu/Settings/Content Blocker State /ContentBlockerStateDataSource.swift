@@ -17,7 +17,7 @@
  */
 
 import Foundation
-import AdGuardSDK
+import SafariAdGuardSDK
 
 enum ContentBlockerState {
     case disabled, enabled, updating, overLimited, failedUpdating

@@ -18,7 +18,7 @@
 
 import Foundation
 import UIKit
-import AdGuardSDK
+import SafariAdGuardSDK
 
 class GroupsTitleCell: UITableViewCell {
     @IBOutlet weak var groupsTitleLabel: ThemableLabel!

@@ -17,7 +17,7 @@
  */
 
 import Foundation
-import AdGuardSDK
+import SafariAdGuardSDK
 
 /** this class is responsible for applying the imported settings */
 protocol ImportSettingsServiceProtocol {

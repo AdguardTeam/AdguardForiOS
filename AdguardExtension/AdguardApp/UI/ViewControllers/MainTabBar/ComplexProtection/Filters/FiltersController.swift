@@ -18,7 +18,7 @@
 
 import Foundation
 import UIKit
-import AdGuardSDK
+import SafariAdGuardSDK
 
 
 // MARK: - FiltersController

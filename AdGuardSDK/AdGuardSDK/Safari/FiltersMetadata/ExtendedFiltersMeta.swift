@@ -245,9 +245,9 @@ public extension ExtendedFiltersMeta {
             }
         }
         
-        let tagId: Int
-        let tagType: TagType
-        let tagName: String
+        public let tagId: Int
+        public let tagType: TagType
+        public let tagName: String
         
         enum CodingKeys: String, CodingKey {
             case tagId
