@@ -465,7 +465,7 @@
 		7E6E801A26C299DE00925F96 /* AdblockIcelandicFilterTest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AdblockIcelandicFilterTest.txt; sourceTree = "<group>"; };
 		7E6E801B26C299DE00925F96 /* EasyListTest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = EasyListTest.txt; sourceTree = "<group>"; };
 		7E6E801C26C299DE00925F96 /* CustomFilterMetaParserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFilterMetaParserTest.swift; sourceTree = "<group>"; };
-		7E6E805D26C2A03600925F96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = AdGuardSDK/Info.plist; sourceTree = SOURCE_ROOT; };
+		7E6E805D26C2A03600925F96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = AdGuardSDK/Info.plist; sourceTree = SOURCE_ROOT; };
 		7E6E805E26C2A03600925F96 /* AdGuardSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AdGuardSDK.h; path = AdGuardSDK/AdGuardSDK.h; sourceTree = SOURCE_ROOT; };
 		7E6E806026C2A04100925F96 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7E6E806126C2A04100925F96 /* FilterFilesStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterFilesStorage.swift; sourceTree = "<group>"; };
@@ -1223,6 +1223,19 @@
 			path = DnsProvidersManager;
 			sourceTree = "<group>";
 		};
+		7EAD351E26C2BD46001AFB3A /* AdGuardSDK */ = {
+			isa = PBXGroup;
+			children = (
+				7E6E80B526C2A04900925F96 /* Utils */,
+				7E6E805F26C2A04100925F96 /* Shared */,
+				7E6E80CA26C2A05200925F96 /* Safari */,
+				7E6E817026C2A05A00925F96 /* DNS */,
+				7E6E805E26C2A03600925F96 /* AdGuardSDK.h */,
+				7E6E805D26C2A03600925F96 /* Info.plist */,
+			);
+			path = AdGuardSDK;
+			sourceTree = "<group>";
+		};
 		D049E9D126B17B7800B8088B /* Libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -1273,8 +1286,8 @@
 			children = (
 				D049EB9326B17C0A00B8088B /* CharacterSet+Utils.swift */,
 				D049EB9426B17C0A00B8088B /* Dictionary+Utils.swift */,
+				7EAD351E26C2BD46001AFB3A /* AdGuardSDK */,
 				D049E9D126B17B7800B8088B /* Libs */,
-				D0A0E3A026B16E6E005344D2 /* AdGuardSDK */,
 				D049EBA126B1868200B8088B /* AdGuardSDK-mac */,
 				7E6E7FC226C299AB00925F96 /* AdGuardSDKTests */,
 				D0A0E39626B16B03005344D2 /* Products */,
@@ -1291,20 +1304,6 @@
 				7E6E7FC126C299AB00925F96 /* AdGuardSDKTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		D0A0E3A026B16E6E005344D2 /* AdGuardSDK */ = {
-			isa = PBXGroup;
-			children = (
-				7E6E80B526C2A04900925F96 /* Utils */,
-				7E6E805F26C2A04100925F96 /* Shared */,
-				7E6E80CA26C2A05200925F96 /* Safari */,
-				7E6E817026C2A05A00925F96 /* DNS */,
-				7E6E805E26C2A03600925F96 /* AdGuardSDK.h */,
-				7E6E805D26C2A03600925F96 /* Info.plist */,
-			);
-			name = AdGuardSDK;
-			path = ../AdguardExtension/AdGuardSDK;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
