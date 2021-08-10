@@ -17,7 +17,7 @@
  */
 
 import Foundation
-import AdGuardSDK
+import SafariAdGuardSDK
 
 /**
  ConfigurationService - the service is responsible for current application configuration

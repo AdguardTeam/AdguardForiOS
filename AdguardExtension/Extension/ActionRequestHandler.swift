@@ -17,7 +17,7 @@
 */
 
 import Foundation
-import AdGuardSDK
+import SafariAdGuardSDK
 
 class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
     func beginRequest(with context: NSExtensionContext) {
@@ -30,12 +30,31 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
         
         DDLogInfo("ActionRequestHandler start request")
         
-        let configuration = SafariConfiguration(safariProtectionEnabled: resources.safariProtectionEnabled)
-        let jsonProvider = SafariJsonProvider(bundleId: Bundle.main.bundleIdentifier ?? "", mainAppBundleId: Bundle.main.hostAppBundleId, jsonStorageUrl: resources.sharedResuorcesURL(), userDefaults: resources.sharedDefaults(), configuration: configuration as! SafariConfigurationProtocol)
+        guard let cbBundleId = Bundle.main.bundleIdentifier else {
+            DDLogError("ActionRequestHandler received nil bundle id")
+            context.completeRequest(returningItems: nil, completionHandler: nil)
+            return
+        }
         
-        guard let url = jsonProvider.jsonUrl(),
-              let attachment = NSItemProvider(contentsOf: url) else {
-            DDLogError("can not init attachment")
+        let jsonProvider = ContentBlockerJsonProvider(
+            cbBundleId: cbBundleId,
+            mainAppBundleId: Bundle.main.hostAppBundleId,
+            jsonStorageUrl: resources.sharedResuorcesURL(),
+            userDefaults: resources.sharedDefaults()
+        )
+        
+        let url: URL
+        
+        do {
+            url = try jsonProvider.getJsonUrl(resources.safariProtectionEnabled)
+        } catch {
+            DDLogError("ActionRequestHandler error getting JSON URL; Error: \(error)")
+            context.completeRequest(returningItems: nil, completionHandler: nil)
+            return
+        }
+        
+        guard let attachment = NSItemProvider(contentsOf: url) else {
+            DDLogError("ActionRequestHandler Can't init attachment")
             context.completeRequest(returningItems: nil, completionHandler: nil)
             return
         }
@@ -45,6 +64,5 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
         
         DDLogInfo("ActionRequestHandler complete request")
         context.completeRequest(returningItems: [item], completionHandler: nil)
-        return
     }
 }

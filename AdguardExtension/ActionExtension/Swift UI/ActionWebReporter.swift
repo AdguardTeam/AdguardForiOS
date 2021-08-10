@@ -16,7 +16,7 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import AdGuardSDK
+import SafariAdGuardSDK
 
 protocol ActionWebReporterProtocol {
     func composeWebReportUrl(_ site: URL?) -> URL

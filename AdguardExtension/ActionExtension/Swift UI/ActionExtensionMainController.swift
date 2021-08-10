@@ -18,7 +18,7 @@
 
 import UIKit
 import CoreServices
-import AdGuardSDK
+import SafariAdGuardSDK
 
 @objcMembers
 class ActionExtensionMainController: UITableViewController {

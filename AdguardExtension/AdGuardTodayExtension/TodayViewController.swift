@@ -19,7 +19,7 @@
 import UIKit
 import NotificationCenter
 import NetworkExtension
-import AdGuardSDK
+import SafariAdGuardSDK
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     

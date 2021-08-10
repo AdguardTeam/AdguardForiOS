@@ -18,7 +18,7 @@
 
 import Foundation
 import NetworkExtension
-import AdGuardSDK
+import SafariAdGuardSDK
 
 
 // MARK: - Complex protection Interface -
