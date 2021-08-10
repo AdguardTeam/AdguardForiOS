@@ -1,0 +1,639 @@
+{
+    "providers": [
+        {
+            "name": "System default", 
+            "servers": [
+                {
+                    "features": [], 
+                    "upstreams": [], 
+                    "providerId": 10000, 
+                    "type": "dns", 
+                    "id": 0, 
+                    "name": "System"
+                }
+            ], 
+            "providerId": 10000, 
+            "logo": "", 
+            "homepage": "", 
+            "description": "Use system default DNS servers provided by your ISP (Internet Service Provider)"
+        }, 
+        {
+            "name": "AdGuard DNS", 
+            "servers": [
+                {
+                    "features": [
+                        "ad_blocking", 
+                        "secure", 
+                        "no_logs"
+                    ], 
+                    "upstreams": [
+                        "94.140.14.14", 
+                        "94.140.15.15"
+                    ], 
+                    "providerId": 10001, 
+                    "type": "dns", 
+                    "id": 1, 
+                    "name": "AdGuard DNS"
+                }, 
+                {
+                    "features": [
+                        "ad_blocking", 
+                        "secure", 
+                        "no_logs", 
+                        "encryption"
+                    ], 
+                    "upstreams": [
+                        "sdns://AQIAAAAAAAAAFDE3Ni4xMDMuMTMwLjEzMDo1NDQzINErR_JS3PLCu_iZEIbq95zkSV2LFsigxDIuUso_OQhzIjIuZG5zY3J5cHQuZGVmYXVsdC5uczEuYWRndWFyZC5jb20"
+                    ], 
+                    "providerId": 10001, 
+                    "type": "dnscrypt", 
+                    "id": 2, 
+                    "name": "AdGuard DNS dnscrypt"
+                }, 
+                {
+                    "features": [
+                        "ad_blocking", 
+                        "secure", 
+                        "no_logs", 
+                        "encryption"
+                    ], 
+                    "upstreams": [
+                        "https://dns.adguard.com/dns-query"
+                    ], 
+                    "providerId": 10001, 
+                    "type": "doh", 
+                    "id": 3, 
+                    "name": "AdGuard DNS doh"
+                }, 
+                {
+                    "features": [
+                        "ad_blocking", 
+                        "secure", 
+                        "no_logs", 
+                        "encryption"
+                    ], 
+                    "upstreams": [
+                        "tls://dns.adguard.com"
+                    ], 
+                    "providerId": 10001, 
+                    "type": "dot", 
+                    "id": 4, 
+                    "name": "AdGuard DNS dot"
+                }, 
+                {
+                    "features": [
+                        "ad_blocking", 
+                        "secure", 
+                        "no_logs", 
+                        "encryption"
+                    ], 
+                    "upstreams": [
+                        "quic://dns.adguard.com"
+                    ], 
+                    "providerId": 10001, 
+                    "type": "doq", 
+                    "id": 33, 
+                    "name": "AdGuard DNS doq"
+                }
+            ], 
+            "providerId": 10001, 
+            "logo": "adguard_dns_logo", 
+            "homepage": "https://adguard.com/adguard-dns/overview.html", 
+            "description": "Removes ads and protects your device from malware"
+        }, 
+        {
+            "name": "AdGuard DNS Family Protection", 
+            "servers": [
+                {
+                    "features": [
+                        "ad_blocking", 
+                        "secure", 
+                        "no_logs", 
+                        "adult_content_blocking", 
+                        "safe_search"
+                    ], 
+                    "upstreams": [
+                        "94.140.14.15", 
+                        "94.140.15.16"
+                    ], 
+                    "providerId": 10005, 
+                    "type": "dns", 
+                    "id": 5, 
+                    "name": "AdGuard DNS family"
+                }, 
+                {
+                    "features": [
+                        "ad_blocking", 
+                        "secure", 
+                        "no_logs", 
+                        "encryption", 
+                        "adult_content_blocking", 
+                        "safe_search"
+                    ], 
+                    "upstreams": [
+                        "sdns://AQIAAAAAAAAAFDE3Ni4xMDMuMTMwLjEzMjo1NDQzILgxXdexS27jIKRw3C7Wsao5jMnlhvhdRUXWuMm1AFq6ITIuZG5zY3J5cHQuZmFtaWx5Lm5zMS5hZGd1YXJkLmNvbQ"
+                    ], 
+                    "providerId": 10005, 
+                    "type": "dnscrypt", 
+                    "id": 6, 
+                    "name": "AdGuard DNS family dnscrypt"
+                }, 
+                {
+                    "features": [
+                        "ad_blocking", 
+                        "secure", 
+                        "no_logs", 
+                        "encryption", 
+                        "adult_content_blocking", 
+                        "safe_search"
+                    ], 
+                    "upstreams": [
+                        "https://dns-family.adguard.com/dns-query"
+                    ], 
+                    "providerId": 10005, 
+                    "type": "doh", 
+                    "id": 7, 
+                    "name": "AdGuard DNS family doh"
+                }, 
+                {
+                    "features": [
+                        "ad_blocking", 
+                        "secure", 
+                        "no_logs", 
+                        "encryption", 
+                        "adult_content_blocking", 
+                        "safe_search"
+                    ], 
+                    "upstreams": [
+                        "tls://dns-family.adguard.com"
+                    ], 
+                    "providerId": 10005, 
+                    "type": "dot", 
+                    "id": 8, 
+                    "name": "AdGuard DNS family dot"
+                }, 
+                {
+                    "features": [
+                        "ad_blocking", 
+                        "secure", 
+                        "no_logs", 
+                        "encryption", 
+                        "adult_content_blocking", 
+                        "safe_search"
+                    ], 
+                    "upstreams": [
+                        "quic://dns-family.adguard.com"
+                    ], 
+                    "providerId": 10005, 
+                    "type": "doq", 
+                    "id": 34, 
+                    "name": "AdGuard DNS family doq"
+                }
+            ], 
+            "providerId": 10005, 
+            "logo": "adguard_dns_family_logo", 
+            "homepage": "https://adguard.com/adguard-dns/overview.html", 
+            "description": "AdGuard DNS + SafeSearch and adult content blocking"
+        }, 
+        {
+            "name": "AdGuard DNS Non-filtered", 
+            "servers": [
+                {
+                    "features": [
+                        "no_logs"
+                    ], 
+                    "upstreams": [
+                        "94.140.14.140", 
+                        "94.140.14.141"
+                    ], 
+                    "providerId": 10028, 
+                    "type": "dns", 
+                    "id": 28, 
+                    "name": "AdGuard DNS non-filtered"
+                }, 
+                {
+                    "features": [
+                        "no_logs", 
+                        "encryption"
+                    ], 
+                    "upstreams": [
+                        "sdns://AQcAAAAAAAAAFDE3Ni4xMDMuMTMwLjEzNjo1NDQzILXoRNa4Oj4-EmjraB--pw3jxfpo29aIFB2_LsBmstr6JTIuZG5zY3J5cHQudW5maWx0ZXJlZC5uczEuYWRndWFyZC5jb20"
+                    ], 
+                    "providerId": 10028, 
+                    "type": "dnscrypt", 
+                    "id": 29, 
+                    "name": "AdGuard DNS non-filtered dnscrypt"
+                }, 
+                {
+                    "features": [
+                        "no_logs", 
+                        "encryption"
+                    ], 
+                    "upstreams": [
+                        "https://dns-unfiltered.adguard.com/dns-query"
+                    ], 
+                    "providerId": 10028, 
+                    "type": "doh", 
+                    "id": 30, 
+                    "name": "AdGuard DNS non-filtered doh"
+                }, 
+                {
+                    "features": [
+                        "no_logs", 
+                        "encryption"
+                    ], 
+                    "upstreams": [
+                        "tls://dns-unfiltered.adguard.com"
+                    ], 
+                    "providerId": 10028, 
+                    "type": "dot", 
+                    "id": 31, 
+                    "name": "AdGuard DNS non-filtered dot"
+                }, 
+                {
+                    "features": [
+                        "no_logs", 
+                        "encryption"
+                    ], 
+                    "upstreams": [
+                        "quic://dns-unfiltered.adguard.com"
+                    ], 
+                    "providerId": 10028, 
+                    "type": "doq", 
+                    "id": 35, 
+                    "name": "AdGuard DNS non-filtered doq"
+                }
+            ], 
+            "providerId": 10028, 
+            "logo": "adguard_dns_unfiltered_logo", 
+            "homepage": "https://adguard.com/adguard-dns/overview.html", 
+            "description": "Provides a secure and reliable connection, but doesn't filter anything"
+        }, 
+        {
+            "name": "Google DNS", 
+            "servers": [
+                {
+                    "features": [], 
+                    "upstreams": [
+                        "8.8.8.8", 
+                        "8.8.4.4"
+                    ], 
+                    "providerId": 10009, 
+                    "type": "dns", 
+                    "id": 9, 
+                    "name": "Google DNS"
+                }, 
+                {
+                    "features": [
+                        "encryption"
+                    ], 
+                    "upstreams": [
+                        "https://dns.google/dns-query"
+                    ], 
+                    "providerId": 10009, 
+                    "type": "doh", 
+                    "id": 10, 
+                    "name": "Google DNS doh"
+                }, 
+                {
+                    "features": [
+                        "encryption"
+                    ], 
+                    "upstreams": [
+                        "tls://dns.google"
+                    ], 
+                    "providerId": 10009, 
+                    "type": "dot", 
+                    "id": 11, 
+                    "name": "Google DNS dot"
+                }
+            ], 
+            "providerId": 10009, 
+            "logo": "google_dns_logo", 
+            "homepage": "https://developers.google.com/speed/public-dns/", 
+            "description": "Free alternative DNS service by Google"
+        }, 
+        {
+            "name": "Cloudflare DNS", 
+            "servers": [
+                {
+                    "features": [
+                        "no_logs"
+                    ], 
+                    "upstreams": [
+                        "1.1.1.1", 
+                        "1.0.0.1"
+                    ], 
+                    "providerId": 10012, 
+                    "type": "dns", 
+                    "id": 12, 
+                    "name": "Cloudflare DNS"
+                }, 
+                {
+                    "features": [
+                        "no_logs", 
+                        "encryption"
+                    ], 
+                    "upstreams": [
+                        "https://dns.cloudflare.com/dns-query"
+                    ], 
+                    "providerId": 10012, 
+                    "type": "doh", 
+                    "id": 13, 
+                    "name": "Cloudflare DNS doh"
+                }, 
+                {
+                    "features": [], 
+                    "upstreams": [
+                        "tls://1.1.1.1"
+                    ], 
+                    "providerId": 10012, 
+                    "type": "dot", 
+                    "id": 14, 
+                    "name": "Cloudflare DNS dot"
+                }
+            ], 
+            "providerId": 10012, 
+            "logo": "cloudflare_dns_logo", 
+            "homepage": "https://www.cloudflare.com/dns/", 
+            "description": "Free DNS service by Cloudflare"
+        }, 
+        {
+            "name": "Cloudflare Anti-malware DNS", 
+            "servers": [
+                {
+                    "features": [
+                        "secure", 
+                        "no_logs"
+                    ], 
+                    "upstreams": [
+                        "1.1.1.2", 
+                        "1.0.0.2"
+                    ], 
+                    "providerId": 10024, 
+                    "type": "dns", 
+                    "id": 24, 
+                    "name": "Cloudflare Anti-malware DNS"
+                }, 
+                {
+                    "features": [
+                        "secure", 
+                        "no_logs", 
+                        "encryption"
+                    ], 
+                    "upstreams": [
+                        "https://security.cloudflare-dns.com/dns-query"
+                    ], 
+                    "providerId": 10024, 
+                    "type": "doh", 
+                    "id": 25, 
+                    "name": "Cloudflare Anti-malware DNS doh"
+                }
+            ], 
+            "providerId": 10024, 
+            "logo": "cloudflare_dns_anti_malware_logo", 
+            "homepage": "https://www.cloudflare.com/dns/", 
+            "description": "Anti-malware DNS server by Cloudflare that blocks malicious domains"
+        }, 
+        {
+            "name": "Cloudflare Family DNS", 
+            "servers": [
+                {
+                    "features": [
+                        "adult_content_blocking", 
+                        "secure", 
+                        "no_logs"
+                    ], 
+                    "upstreams": [
+                        "1.1.1.3", 
+                        "1.0.0.3"
+                    ], 
+                    "providerId": 10026, 
+                    "type": "dns", 
+                    "id": 26, 
+                    "name": "Cloudflare Family DNS"
+                }, 
+                {
+                    "features": [
+                        "adult_content_blocking", 
+                        "secure", 
+                        "no_logs", 
+                        "encryption"
+                    ], 
+                    "upstreams": [
+                        "https://family.cloudflare-dns.com/dns-query"
+                    ], 
+                    "providerId": 10026, 
+                    "type": "doh", 
+                    "id": 27, 
+                    "name": "Cloudflare Family DNS doh"
+                }
+            ], 
+            "providerId": 10026, 
+            "logo": "cloudflare_dns_family_logo", 
+            "homepage": "https://www.cloudflare.com/dns/", 
+            "description": "Cloudflare's blocking server that restricts access to malicious and 'adult' domains"
+        }, 
+        {
+            "name": "Cisco OpenDNS", 
+            "servers": [
+                {
+                    "features": [
+                        "secure"
+                    ], 
+                    "upstreams": [
+                        "208.67.222.222", 
+                        "208.67.220.220"
+                    ], 
+                    "providerId": 10015, 
+                    "type": "dns", 
+                    "id": 15, 
+                    "name": "Cisco OpenDNS"
+                }, 
+                {
+                    "features": [
+                        "secure", 
+                        "encryption"
+                    ], 
+                    "upstreams": [
+                        "sdns://AQAAAAAAAAAADjIwOC42Ny4yMjAuMjIwILc1EUAgbyJdPivYItf9aR6hwzzI1maNDL4Ev6vKQ_t5GzIuZG5zY3J5cHQtY2VydC5vcGVuZG5zLmNvbQ"
+                    ], 
+                    "providerId": 10015, 
+                    "type": "dnscrypt", 
+                    "id": 16, 
+                    "name": "Cisco OpenDNS dnscrypt"
+                }, 
+                {
+                    "features": [
+                        "secure", 
+                        "encryption"
+                    ], 
+                    "upstreams": [
+                        "https://doh.opendns.com/dns-query"
+                    ], 
+                    "providerId": 10015, 
+                    "type": "doh", 
+                    "id": 22, 
+                    "name": "Cisco OpenDNS doh"
+                }
+            ], 
+            "providerId": 10015, 
+            "logo": "open_dns_logo", 
+            "homepage": "https://www.opendns.com/", 
+            "description": "DNS server that protects your device from malware"
+        }, 
+        {
+            "name": "Cisco OpenDNS with Family Shield", 
+            "servers": [
+                {
+                    "features": [
+                        "secure", 
+                        "adult_content_blocking", 
+                        "safe_search"
+                    ], 
+                    "upstreams": [
+                        "208.67.222.123", 
+                        "208.67.220.123"
+                    ], 
+                    "providerId": 10017, 
+                    "type": "dns", 
+                    "id": 17, 
+                    "name": "Cisco OpenDNS with Family Shield"
+                }, 
+                {
+                    "features": [
+                        "secure", 
+                        "adult_content_blocking", 
+                        "safe_search", 
+                        "encryption"
+                    ], 
+                    "upstreams": [
+                        "sdns://AQEAAAAAAAAADjIwOC42Ny4yMjAuMTIzILc1EUAgbyJdPivYItf9aR6hwzzI1maNDL4Ev6vKQ_t5GzIuZG5zY3J5cHQtY2VydC5vcGVuZG5zLmNvbQ"
+                    ], 
+                    "providerId": 10017, 
+                    "type": "dnscrypt", 
+                    "id": 18, 
+                    "name": "Cisco OpenDNS with Family Shield dnscrypt"
+                }, 
+                {
+                    "features": [
+                        "secure", 
+                        "adult_content_blocking", 
+                        "safe_search", 
+                        "encryption"
+                    ], 
+                    "upstreams": [
+                        "https://doh.familyshield.opendns.com/dns-query"
+                    ], 
+                    "providerId": 10017, 
+                    "type": "doh", 
+                    "id": 23, 
+                    "name": "Cisco OpenDNS with Family Shield doh"
+                }
+            ], 
+            "providerId": 10017, 
+            "logo": "open_dns_family_logo", 
+            "homepage": "https://www.opendns.com/", 
+            "description": "OpenDNS server with adult content blocking"
+        }, 
+        {
+            "name": "Quad9", 
+            "servers": [
+                {
+                    "features": [
+                        "secure"
+                    ], 
+                    "upstreams": [
+                        "9.9.9.9", 
+                        "149.112.112.112"
+                    ], 
+                    "providerId": 10019, 
+                    "type": "dns", 
+                    "id": 19, 
+                    "name": "Quad9 DNS"
+                }, 
+                {
+                    "features": [
+                        "secure", 
+                        "encryption"
+                    ], 
+                    "upstreams": [
+                        "sdns://AQMAAAAAAAAADDkuOS45Ljk6ODQ0MyBnyEe4yHWM0SAkVUO-dWdG3zTfHYTAC4xHA2jfgh2GPhkyLmRuc2NyeXB0LWNlcnQucXVhZDkubmV0"
+                    ], 
+                    "providerId": 10019, 
+                    "type": "dnscrypt", 
+                    "id": 20, 
+                    "name": "Quad9 DNS dnscrypt"
+                }, 
+                {
+                    "features": [
+                        "secure", 
+                        "encryption"
+                    ], 
+                    "upstreams": [
+                        "https://dns9.quad9.net:443/dns-query"
+                    ], 
+                    "providerId": 10019, 
+                    "type": "doh", 
+                    "id": 21, 
+                    "name": "Quad9 DNS doh"
+                }, 
+                {
+                    "features": [
+                        "secure", 
+                        "encryption"
+                    ], 
+                    "upstreams": [
+                        "tls://dns.quad9.net"
+                    ], 
+                    "providerId": 10019, 
+                    "type": "dot", 
+                    "id": 32, 
+                    "name": "Quad9 DNS dot"
+                }
+            ], 
+            "providerId": 10019, 
+            "logo": "quad_9_dns_logo", 
+            "homepage": "http://quad9.net/", 
+            "description": "Free alternative DNS service with protection from phishing and spyware"
+        }
+    ],
+    "features": [
+        {
+            "logo": "ad_blocking_feature_logo", 
+            "type": "ad_blocking", 
+            "name": "Ad blocking", 
+            "description": "Blocks ads and tracking servers"
+        }, 
+        {
+            "logo": "encryption_feature_logo", 
+            "type": "encryption", 
+            "name": "Encryption", 
+            "description": "Does not let third-parties spy on your browsing activity"
+        }, 
+        {
+            "logo": "secure_feature_logo", 
+            "type": "secure", 
+            "name": "Secure", 
+            "description": "Blocks known malware and phishing domains"
+        }, 
+        {
+            "logo": "adult_content_blocking_feature_logo", 
+            "type": "adult_content_blocking", 
+            "name": "Adult content blocking", 
+            "description": "Blocks websites with adult content"
+        }, 
+        {
+            "logo": "no_logs_feature_logo", 
+            "type": "no_logs", 
+            "name": "No logs", 
+            "description": "Does not store your DNS queries logs"
+        }, 
+        {
+            "logo": "safe_search_feature_logo", 
+            "type": "safe_search", 
+            "name": "Safe search", 
+            "description": "Enforces safe search for popular search engines and YouTube"
+        }
+    ]
+}

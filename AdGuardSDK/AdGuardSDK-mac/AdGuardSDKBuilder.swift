@@ -2,24 +2,24 @@ import Foundation
 @_implementationOnly import SQLite
 
 public protocol AdGuardSDKBuilderProtocol {
-    /** load metadata and all filters synchronously and store them in urls sent to constructor */
-    func loadAll()->Bool
+    /// loads metadata and all filters synchronously and store them in urls sent to constructor
+    func loadAll() -> Bool
 }
 
 public class AdGuardSDKBuilder: AdGuardSDKBuilderProtocol {
 
     let filtersService: FiltersServiceProtocol
     public init (filtersStorageUrl: URL, dbUrl: URL) {
-        let configuration = Configuration(currentLanguage: "en", proStatus: false, safariProtectionEnabled: true, blocklistIsEnabled: true, allowlistIsEnbaled: true, allowlistIsInverted: false, updateOverWifiOnly: false, appBundleId: Bundle.main.bundleIdentifier ?? "", appProductVersion: "", appId: "builder", cid: "")
+        let configuration = SafariConfiguration(currentLanguage: "en", proStatus: false, safariProtectionEnabled: true, blocklistIsEnabled: true, allowlistIsEnbaled: true, allowlistIsInverted: false, appBundleId: Bundle.main.bundleIdentifier ?? "", appProductVersion: "", appId: "builder", cid: "")
         
         let filtersStorage = try! FilterFilesStorage(filterFilesDirectoryUrl: filtersStorageUrl)
         
-        let dbManager = BulderDbManager(dbContainerFolderUrl: dbUrl)
+        let dbManager = BuilderDbManager(dbContainerFolderUrl: dbUrl)
         let metaStorage = MetaStorage(productionDbManager: dbManager)
         
         let defaults = UserDefaultsStorage(storage: UserDefaults())
         
-        let api = ApiMethods()
+        let api = SafariProtectionApiMethods()
         
         filtersService = try! FiltersService(configuration: configuration, filterFilesStorage: filtersStorage, metaStorage: metaStorage, userDefaultsStorage: defaults, apiMethods: api)
     }
@@ -48,7 +48,7 @@ public class AdGuardSDKBuilder: AdGuardSDKBuilderProtocol {
     }
 }
 
-class BulderDbManager: ProductionDatabaseManagerProtocol {
+class BuilderDbManager: ProductionDatabaseManagerProtocol {
     
     let filtersDb: Connection
     
