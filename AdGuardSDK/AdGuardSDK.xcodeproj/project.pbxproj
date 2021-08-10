@@ -380,8 +380,9 @@
 		7EAD351926C2B929001AFB3A /* FiltersLocalizationsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E80D626C2A05200925F96 /* FiltersLocalizationsParser.swift */; };
 		7EAD351A26C2B941001AFB3A /* FiltersMetadataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E80DB26C2A05200925F96 /* FiltersMetadataRequest.swift */; };
 		7EAD351B26C2B946001AFB3A /* FiltersLocalizationsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E80DA26C2A05200925F96 /* FiltersLocalizationsRequest.swift */; };
-		D049EBA426B1868200B8088B /* AdGuardSDK_mac.h in Headers */ = {isa = PBXBuildFile; fileRef = D049EBA226B1868200B8088B /* AdGuardSDK_mac.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D049EE7326B2A00700B8088B /* AdGuardSDKBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049EE7226B2A00700B8088B /* AdGuardSDKBuilder.swift */; };
+		7EAD352326C2C1C1001AFB3A /* AdGuardSDK_mac.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EAD352026C2C1C0001AFB3A /* AdGuardSDK_mac.h */; };
+		7EAD352426C2C1C1001AFB3A /* AdGuardSDKBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAD352126C2C1C0001AFB3A /* AdGuardSDKBuilder.swift */; };
+		7EAD352526C2C1C1001AFB3A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EAD352226C2C1C0001AFB3A /* Info.plist */; };
 		D049EE8726B2F23B00B8088B /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = D049EE8626B2F23B00B8088B /* SQLite */; };
 		D049EE9B26B2F31A00B8088B /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049EB9426B17C0A00B8088B /* Dictionary+Utils.swift */; };
 		D049EE9E26B2F33200B8088B /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049EB9326B17C0A00B8088B /* CharacterSet+Utils.swift */; };
@@ -585,13 +586,13 @@
 		7E6E81FD26C2AC0E00925F96 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.0.sdk/usr/lib/libresolv.tbd; sourceTree = DEVELOPER_DIR; };
 		7E966AF526C27B93006B57BD /* SafariAdGuardSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SafariAdGuardSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E966B0126C27BA9006B57BD /* DnsAdGuardSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DnsAdGuardSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EAD352026C2C1C0001AFB3A /* AdGuardSDK_mac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdGuardSDK_mac.h; sourceTree = "<group>"; };
+		7EAD352126C2C1C0001AFB3A /* AdGuardSDKBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdGuardSDKBuilder.swift; sourceTree = "<group>"; };
+		7EAD352226C2C1C0001AFB3A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D049EA9626B17B7900B8088B /* NotificationCenter+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+Utils.swift"; sourceTree = "<group>"; };
 		D049EB9326B17C0A00B8088B /* CharacterSet+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CharacterSet+Utils.swift"; path = "../Libs/Utils/CharacterSet+Utils.swift"; sourceTree = "<group>"; };
 		D049EB9426B17C0A00B8088B /* Dictionary+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Dictionary+Utils.swift"; path = "../Libs/Utils/Dictionary+Utils.swift"; sourceTree = "<group>"; };
 		D049EBA026B1868200B8088B /* AdGuardSDK_mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AdGuardSDK_mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D049EBA226B1868200B8088B /* AdGuardSDK_mac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdGuardSDK_mac.h; sourceTree = "<group>"; };
-		D049EBA326B1868200B8088B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D049EE7226B2A00700B8088B /* AdGuardSDKBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdGuardSDKBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -917,6 +918,7 @@
 		7E6E80B526C2A04900925F96 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				D049EA9626B17B7900B8088B /* NotificationCenter+Utils.swift */,
 				7E6E80B626C2A04900925F96 /* DateInterval+Utils.swift */,
 				7E6E80B726C2A04900925F96 /* URL+Utils.swift */,
 				7E6E80B826C2A04900925F96 /* Connection+Utils.swift */,
@@ -1236,37 +1238,12 @@
 			path = AdGuardSDK;
 			sourceTree = "<group>";
 		};
-		D049E9D126B17B7800B8088B /* Libs */ = {
+		7EAD351F26C2C1C0001AFB3A /* AdGuardSDK-mac */ = {
 			isa = PBXGroup;
 			children = (
-				D049EA5026B17B7900B8088B /* ACommons */,
-			);
-			name = Libs;
-			path = ../Libs;
-			sourceTree = "<group>";
-		};
-		D049EA5026B17B7900B8088B /* ACommons */ = {
-			isa = PBXGroup;
-			children = (
-				D049EA6626B17B7900B8088B /* Lang */,
-			);
-			path = ACommons;
-			sourceTree = "<group>";
-		};
-		D049EA6626B17B7900B8088B /* Lang */ = {
-			isa = PBXGroup;
-			children = (
-				D049EA9626B17B7900B8088B /* NotificationCenter+Utils.swift */,
-			);
-			path = Lang;
-			sourceTree = "<group>";
-		};
-		D049EBA126B1868200B8088B /* AdGuardSDK-mac */ = {
-			isa = PBXGroup;
-			children = (
-				D049EBA226B1868200B8088B /* AdGuardSDK_mac.h */,
-				D049EBA326B1868200B8088B /* Info.plist */,
-				D049EE7226B2A00700B8088B /* AdGuardSDKBuilder.swift */,
+				7EAD352026C2C1C0001AFB3A /* AdGuardSDK_mac.h */,
+				7EAD352126C2C1C0001AFB3A /* AdGuardSDKBuilder.swift */,
+				7EAD352226C2C1C0001AFB3A /* Info.plist */,
 			);
 			path = "AdGuardSDK-mac";
 			sourceTree = "<group>";
@@ -1286,9 +1263,8 @@
 			children = (
 				D049EB9326B17C0A00B8088B /* CharacterSet+Utils.swift */,
 				D049EB9426B17C0A00B8088B /* Dictionary+Utils.swift */,
+				7EAD351F26C2C1C0001AFB3A /* AdGuardSDK-mac */,
 				7EAD351E26C2BD46001AFB3A /* AdGuardSDK */,
-				D049E9D126B17B7800B8088B /* Libs */,
-				D049EBA126B1868200B8088B /* AdGuardSDK-mac */,
 				7E6E7FC226C299AB00925F96 /* AdGuardSDKTests */,
 				D0A0E39626B16B03005344D2 /* Products */,
 				D049EE8526B2F23B00B8088B /* Frameworks */,
@@ -1328,7 +1304,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D049EBA426B1868200B8088B /* AdGuardSDK_mac.h in Headers */,
+				7EAD352326C2C1C1001AFB3A /* AdGuardSDK_mac.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1530,6 +1506,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EAD352526C2C1C1001AFB3A /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1859,11 +1836,11 @@
 				7EAD350426C2B7B6001AFB3A /* GroupMetaProtocol.swift in Sources */,
 				7EAD34F626C2B469001AFB3A /* MetaStorage.swift in Sources */,
 				7EAD351026C2B83E001AFB3A /* RequestsFactory+Safari.swift in Sources */,
+				7EAD352426C2C1C1001AFB3A /* AdGuardSDKBuilder.swift in Sources */,
 				7EAD350926C2B7E5001AFB3A /* RequestsFactory.swift in Sources */,
 				7EAD350F26C2B837001AFB3A /* MetaStorage+Langs.swift in Sources */,
 				7EAD34FB26C2B4F3001AFB3A /* DefaultDatabaseManager.swift in Sources */,
 				7EAD350626C2B7C2001AFB3A /* SafariGroup+GroupType.swift in Sources */,
-				D049EE7326B2A00700B8088B /* AdGuardSDKBuilder.swift in Sources */,
 				7EAD34F826C2B486001AFB3A /* SafariProtectionApiMethods.swift in Sources */,
 				7EAD350E26C2B817001AFB3A /* MetaStorage+Tags.swift in Sources */,
 				7EAD351A26C2B941001AFB3A /* FiltersMetadataRequest.swift in Sources */,
