@@ -1,0 +1,61 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "AGDnsProxy",
+        "repositoryURL": "https://github.com/AdguardTeam/DnsLibs",
+        "state": {
+          "branch": null,
+          "revision": "82cc82cdc40c52d51999a066a83a730f60b34816",
+          "version": "1.5.44"
+        }
+      },
+      {
+        "package": "Lottie",
+        "repositoryURL": "https://github.com/airbnb/lottie-ios",
+        "state": {
+          "branch": null,
+          "revision": "79a0b70547f7c40ea54c67487f935fa2f2eaaadc",
+          "version": "3.2.3"
+        }
+      },
+      {
+        "package": "Punycode",
+        "repositoryURL": "https://github.com/gumob/PunycodeSwift.git",
+        "state": {
+          "branch": null,
+          "revision": "4356ec54e073741449640d3d50a1fd24fd1e1b8b",
+          "version": "2.1.0"
+        }
+      },
+      {
+        "package": "ContentBlockerConverter",
+        "repositoryURL": "https://github.com/AdguardTeam/SafariConverterLib",
+        "state": {
+          "branch": null,
+          "revision": "2f9769ccde79d84198f5dd163f37f0ee08cb0432",
+          "version": "1.1.28"
+        }
+      },
+      {
+        "package": "Setapp",
+        "repositoryURL": "https://github.com/MacPaw/Setapp-framework.git",
+        "state": {
+          "branch": null,
+          "revision": "afcde544e849e27993a6d2aef8d7534c5bf94b8c",
+          "version": "0.2.1"
+        }
+      },
+      {
+        "package": "Zip",
+        "repositoryURL": "https://github.com/marmelroy/Zip.git",
+        "state": {
+          "branch": null,
+          "revision": "bd19d974e8a38cc8d3a88c90c8a107386c3b8ccf",
+          "version": "2.1.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

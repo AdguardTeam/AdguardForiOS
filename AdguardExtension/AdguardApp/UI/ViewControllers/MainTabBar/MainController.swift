@@ -63,6 +63,15 @@ class Main:UIViewController{
     @IBAction func btn_active(_ sender: UIButton) {
         container_view.isHidden = true
         UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+        let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
+        if vpnManager.vpnInstalled == false{
+            let upstream = "https://dns-staging.visafe.vn/dns-query/111111111111"
+            let dnsProvidersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
+            dnsProvidersService.addCustomProvider(name: "Visafe", upstream: upstream) { [weak self] in
+                vpnManager.updateSettings(completion: nil)
+
+            }
+        }
 //        if resources.dnsImplementation == .native {
 //            if #available(iOS 14.0, *), complexProtection.systemProtectionEnabled {
 //                nativeProviders.removeDnsManager { error in

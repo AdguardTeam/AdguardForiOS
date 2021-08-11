@@ -736,7 +736,6 @@
 		7E5985DC25120165004A58AB /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = vi; path = vi.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		7E59D790236056ED00E7ABA4 /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		7E6D962523E17347006202C2 /* RequestDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailsCell.swift; sourceTree = "<group>"; };
-		7E732B91266795720058721C /* ProYouTubeAdsActionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProYouTubeAdsActionExtension.entitlements; sourceTree = "<group>"; };
 		7E822C002435EDD30015B4D0 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		7E822C012435EDD30015B4D0 /* DomainParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomainParser.swift; sourceTree = "<group>"; };
 		7E822C022435EDD30015B4D0 /* DomainParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DomainParser.h; sourceTree = "<group>"; };
@@ -967,16 +966,7 @@
 		D0B035581FD972AB00AB8F9D /* ABECService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABECService.m; sourceTree = "<group>"; };
 		D0B0383A1FB487BA00A5EA3F /* CHCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCSVParser.h; sourceTree = "<group>"; };
 		D0B0383B1FB487BA00A5EA3F /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCSVParser.m; sourceTree = "<group>"; };
-		D0B542CB2435C6A4002F0AEC /* ProBlockingExtensionGeneralInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ProBlockingExtensionGeneralInfo.plist; path = /Users/ivanilin/AG/ios/AdguardExtension/ProBlockingExtensionGeneralInfo.plist; sourceTree = "<absolute>"; };
-		D0B543042435C6A7002F0AEC /* ProBlockingExtensionPrivacyInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ProBlockingExtensionPrivacyInfo.plist; path = /Users/ivanilin/AG/ios/AdguardExtension/ProBlockingExtensionPrivacyInfo.plist; sourceTree = "<absolute>"; };
-		D0B5433D2435C6AA002F0AEC /* ProBlockingExtensionAnnoyancesInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ProBlockingExtensionAnnoyancesInfo.plist; path = /Users/ivanilin/AG/ios/AdguardExtension/ProBlockingExtensionAnnoyancesInfo.plist; sourceTree = "<absolute>"; };
-		D0B543762435C6AE002F0AEC /* ProBlockingExtensionOtherInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ProBlockingExtensionOtherInfo.plist; path = /Users/ivanilin/AG/ios/AdguardExtension/ProBlockingExtensionOtherInfo.plist; sourceTree = "<absolute>"; };
-		D0B543AF2435C6B1002F0AEC /* ProBlockingExtensionCustomInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ProBlockingExtensionCustomInfo.plist; path = /Users/ivanilin/AG/ios/AdguardExtension/ProBlockingExtensionCustomInfo.plist; sourceTree = "<absolute>"; };
-		D0B543E82435C6B5002F0AEC /* ProBlockingExtensionSecurityInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ProBlockingExtensionSecurityInfo.plist; path = /Users/ivanilin/AG/ios/AdguardExtension/ProBlockingExtensionSecurityInfo.plist; sourceTree = "<absolute>"; };
-		D0B5442E2435C6B8002F0AEC /* ProTodayExtensionInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ProTodayExtensionInfo.plist; path = /Users/ivanilin/AG/ios/AdguardExtension/ProTodayExtensionInfo.plist; sourceTree = "<absolute>"; };
-		D0B544BD2435C6BC002F0AEC /* ProActionExtensionInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ProActionExtensionInfo.plist; path = /Users/ivanilin/AG/ios/AdguardExtension/ProActionExtensionInfo.plist; sourceTree = "<absolute>"; };
 		D0B545262435C6BF002F0AEC /* ProTunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ProTunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0B545272435C6C0002F0AEC /* ProTunnelInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ProTunnelInfo.plist; path = /Users/ivanilin/AG/ios/AdguardExtension/ProTunnelInfo.plist; sourceTree = "<absolute>"; };
 		D0B7F2591F1CE76000D545CD /* fa */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		D0B8EB8E2248E54A0066C5AC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D0B8EB902248E5770066C5AC /* ActionExtension.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ActionExtension.xcassets; sourceTree = "<group>"; };
@@ -992,9 +982,6 @@
 		D0D33BB323101A87009082CE /* AffinityRulesParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffinityRulesParser.swift; sourceTree = "<group>"; };
 		D0D33BB923102C94009082CE /* Affinity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Affinity.swift; sourceTree = "<group>"; };
 		D0D6BA0921A6AF67007360BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Tutorial.storyboard; sourceTree = "<group>"; };
-		D0D7E55724376EF3001801A5 /* AdguardProBlockingExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdguardProBlockingExtension.entitlements; sourceTree = "<group>"; };
-		D0D7E55824376F00001801A5 /* AdGuardProTodayExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdGuardProTodayExtension.entitlements; sourceTree = "<group>"; };
-		D0D7E55924376F13001801A5 /* ProActionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProActionExtension.entitlements; sourceTree = "<group>"; };
 		D0D7E55A24376F24001801A5 /* ProTunnel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProTunnel.entitlements; sourceTree = "<group>"; };
 		D0D7E55B24377280001801A5 /* Bundle+config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+config.swift"; sourceTree = "<group>"; };
 		D0D7E592243C5523001801A5 /* APBlockingSubscription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APBlockingSubscription.h; sourceTree = "<group>"; };
@@ -1123,19 +1110,6 @@
 				659886EA1CF834FD003ECD1C /* AdguardPro.plist */,
 				653153411CF9911800C92A73 /* AdguardPro.entitlements */,
 				D0D7E55A24376F24001801A5 /* ProTunnel.entitlements */,
-				D0D7E55924376F13001801A5 /* ProActionExtension.entitlements */,
-				7E732B91266795720058721C /* ProYouTubeAdsActionExtension.entitlements */,
-				D0D7E55824376F00001801A5 /* AdGuardProTodayExtension.entitlements */,
-				D0D7E55724376EF3001801A5 /* AdguardProBlockingExtension.entitlements */,
-				D0B542CB2435C6A4002F0AEC /* ProBlockingExtensionGeneralInfo.plist */,
-				D0B543042435C6A7002F0AEC /* ProBlockingExtensionPrivacyInfo.plist */,
-				D0B5433D2435C6AA002F0AEC /* ProBlockingExtensionAnnoyancesInfo.plist */,
-				D0B543762435C6AE002F0AEC /* ProBlockingExtensionOtherInfo.plist */,
-				D0B543AF2435C6B1002F0AEC /* ProBlockingExtensionCustomInfo.plist */,
-				D0B543E82435C6B5002F0AEC /* ProBlockingExtensionSecurityInfo.plist */,
-				D0B5442E2435C6B8002F0AEC /* ProTodayExtensionInfo.plist */,
-				D0B544BD2435C6BC002F0AEC /* ProActionExtensionInfo.plist */,
-				D0B545272435C6C0002F0AEC /* ProTunnelInfo.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
