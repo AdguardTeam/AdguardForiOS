@@ -18,7 +18,7 @@
 
 import UIKit
 
-protocol DateTypeChangedProtocol: class {
+protocol DateTypeChangedProtocol: AnyObject {
     func dateTypeChanged(dateType: ChartDateType)
 }
 

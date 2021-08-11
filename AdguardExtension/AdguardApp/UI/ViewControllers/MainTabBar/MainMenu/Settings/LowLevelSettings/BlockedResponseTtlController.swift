@@ -18,7 +18,7 @@
 
 import UIKit
 
-protocol BlockedResponseTtlDelegate: class {
+protocol BlockedResponseTtlDelegate: AnyObject {
     func setTtlDescription(ttl: String)
 }
 

@@ -18,7 +18,7 @@
 
 import UIKit
 
-protocol ActivityViewControllerDelegate: class {
+protocol ActivityViewControllerDelegate: AnyObject {
     func hideTitle()
     func showTitle()
 }

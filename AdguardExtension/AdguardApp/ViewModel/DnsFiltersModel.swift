@@ -35,7 +35,7 @@ protocol DnsFiltersModelProtocol {
     func refreshFilters()
 }
 
-protocol DnsFiltersChangedProtocol: class {
+protocol DnsFiltersChangedProtocol: AnyObject {
     /** must be called on main queue */
     func filtersChanged()
 }

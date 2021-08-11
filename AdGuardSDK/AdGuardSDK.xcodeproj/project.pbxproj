@@ -935,13 +935,13 @@
 		7E6E80CA26C2A05200925F96 /* Safari */ = {
 			isa = PBXGroup;
 			children = (
+				7E6E80FB26C2A05200925F96 /* SafariProtection */,
 				7E6E80CB26C2A05200925F96 /* SQLScripts */,
 				7E6E80D326C2A05200925F96 /* ApiMethods */,
 				7E6E80DC26C2A05200925F96 /* FiltersConvertation */,
 				7E6E80E126C2A05200925F96 /* FiltersMetadata */,
 				7E6E80F126C2A05200925F96 /* FilterService */,
 				7E6E80F626C2A05200925F96 /* ContentBlockers */,
-				7E6E80FB26C2A05200925F96 /* SafariProtection */,
 				7E6E810426C2A05200925F96 /* UserRules */,
 			);
 			name = Safari;
@@ -1057,11 +1057,11 @@
 		7E6E80FB26C2A05200925F96 /* SafariProtection */ = {
 			isa = PBXGroup;
 			children = (
+				7E6E810026C2A05200925F96 /* SafariProtection.swift */,
 				7E6E80FC26C2A05200925F96 /* SafariProtection+ContentBlockers.swift */,
 				7E6E80FD26C2A05200925F96 /* SafariProtection+UserRules.swift */,
 				7E6E80FE26C2A05200925F96 /* SafariProtection+Configuration.swift */,
 				7E6E80FF26C2A05200925F96 /* SafariProtection+BackgroundFetch.swift */,
-				7E6E810026C2A05200925F96 /* SafariProtection.swift */,
 				7E6E810126C2A05200925F96 /* SafariProtection+Filters.swift */,
 				7E6E810226C2A05200925F96 /* ServicesStorage.swift */,
 				7E6E810326C2A05200925F96 /* SafariConfiguration.swift */,
@@ -2325,7 +2325,7 @@
 			repositoryURL = "https://github.com/AdguardTeam/DnsLibs";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 1.6.22;
+				minimumVersion = 1.6.25;
 			};
 		};
 		D049E9CE26B17B2100B8088B /* XCRemoteSwiftPackageReference "Zip" */ = {

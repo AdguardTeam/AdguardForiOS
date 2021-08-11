@@ -18,7 +18,7 @@
 
 import UIKit
 
-protocol UpstreamsControllerDelegate: class {
+protocol UpstreamsControllerDelegate: AnyObject {
     func updateDescriptionLabel(type: UpstreamType, text: String)
 }
 

@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol NewDnsServerControllerDelegate: class {
+protocol NewDnsServerControllerDelegate: AnyObject {
     func providerAdded()
     func providerDeleted()
     func providerChanged()

@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol ImportSettingsCellDelegate: class {
+protocol ImportSettingsCellDelegate: AnyObject {
     func stateChanged(tag: Int, state: Bool)
 }
 

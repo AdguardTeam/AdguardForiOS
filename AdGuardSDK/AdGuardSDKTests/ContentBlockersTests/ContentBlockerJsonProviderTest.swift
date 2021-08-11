@@ -2,15 +2,13 @@ import XCTest
 
 class ContentBlockerJsonProviderTest: XCTestCase {
     var jsonStorage: ContentBlockersInfoStorageMock!
-    var configuration: SafariConfigurationMock!
     var jsonProvider: ContentBlockerJsonProviderProtocol!
     
     override func setUp() {
         TestsFileManager.deleteTestFolder()
         TestsFileManager.clearRootDirectory()
         jsonStorage = ContentBlockersInfoStorageMock()
-        configuration = SafariConfigurationMock()
-        jsonProvider = ContentBlockerJsonProvider(jsonStorage: jsonStorage, configuration: configuration)
+        jsonProvider = ContentBlockerJsonProvider(jsonStorage: jsonStorage, type: .privacy)
     }
     
     override func tearDown() {
@@ -21,7 +19,7 @@ class ContentBlockerJsonProviderTest: XCTestCase {
     func testGetJsonUrlWithJsonStorageThrowsError() {
         let error = NSError(domain: "test", code: 1, userInfo: nil)
         jsonStorage.getEmptyRuleJsonUrlResult = .error(error)
-        XCTAssertThrowsError(try jsonProvider.getJsonUrl(for: .privacy)) { receivedError in
+        XCTAssertThrowsError(try jsonProvider.getJsonUrl(true)) { receivedError in
             XCTAssertEqual(receivedError as NSError, error)
         }
     }
@@ -32,11 +30,10 @@ class ContentBlockerJsonProviderTest: XCTestCase {
         let emptyRuleUrl = TestsFileManager.workingUrl.appendingPathComponent("empty_rule.json")
         try! "".write(to: testJsonResultUrl, atomically: true, encoding: .utf8)
         try! "".write(to: emptyRuleUrl, atomically: true, encoding: .utf8)
-        configuration.safariProtectionEnabled = true
         
         jsonStorage.getEmptyRuleJsonUrlResult = .success(emptyRuleUrl)
         jsonStorage.getInfoResult = ConverterResult(contentBlockerType: .privacy, totalRules: 20, totalConverted: 10, overlimit: false, jsonUrl: testJsonResultUrl)
-        let url = try! jsonProvider.getJsonUrl(for: .privacy)
+        let url = try! jsonProvider.getJsonUrl(true)
         XCTAssertEqual(url, testJsonResultUrl)
     }
     
@@ -46,11 +43,10 @@ class ContentBlockerJsonProviderTest: XCTestCase {
         let emptyRuleUrl = TestsFileManager.workingUrl.appendingPathComponent("empty_rule.json")
         try! "".write(to: testJsonResultUrl, atomically: true, encoding: .utf8)
         try! "".write(to: emptyRuleUrl, atomically: true, encoding: .utf8)
-        configuration.safariProtectionEnabled = false
         
         jsonStorage.getEmptyRuleJsonUrlResult = .success(emptyRuleUrl)
         jsonStorage.getInfoResult = ConverterResult(contentBlockerType: .privacy, totalRules: 20, totalConverted: 10, overlimit: false, jsonUrl: testJsonResultUrl)
-        let url = try! jsonProvider.getJsonUrl(for: .privacy)
+        let url = try! jsonProvider.getJsonUrl(false)
         XCTAssertEqual(url, emptyRuleUrl)
     }
     
@@ -60,11 +56,10 @@ class ContentBlockerJsonProviderTest: XCTestCase {
         let emptyRuleUrl = TestsFileManager.workingUrl.appendingPathComponent("empty_rule.json")
         try! "".write(to: testJsonResultUrl, atomically: true, encoding: .utf8)
         try! "".write(to: emptyRuleUrl, atomically: true, encoding: .utf8)
-        configuration.safariProtectionEnabled = true
         
         jsonStorage.getEmptyRuleJsonUrlResult = .success(emptyRuleUrl)
         jsonStorage.getInfoResult = nil
-        let url = try! jsonProvider.getJsonUrl(for: .privacy)
+        let url = try! jsonProvider.getJsonUrl(true)
         XCTAssertEqual(url, emptyRuleUrl)
     }
 }

@@ -26,7 +26,7 @@ enum ControllerState {
     case normal, editing, searching
 }
 
-protocol ListOfRulesModelDelegate: class{
+protocol ListOfRulesModelDelegate: AnyObject{
     func listOfRulesChanged()
 }
 

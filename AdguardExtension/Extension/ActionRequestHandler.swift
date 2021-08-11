@@ -36,16 +36,15 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
             return
         }
         
-        let jsonProvider = ContentBlockerJsonProvider(
-            cbBundleId: cbBundleId,
-            mainAppBundleId: Bundle.main.hostAppBundleId,
-            jsonStorageUrl: resources.sharedResuorcesURL(),
-            userDefaults: resources.sharedDefaults()
-        )
-        
         let url: URL
         
         do {
+            let jsonProvider = try ContentBlockerJsonProvider(
+                cbBundleId: cbBundleId,
+                mainAppBundleId: Bundle.main.hostAppBundleId,
+                jsonStorageUrl: resources.sharedResuorcesURL(),
+                userDefaults: resources.sharedDefaults()
+            )
             url = try jsonProvider.getJsonUrl(resources.safariProtectionEnabled)
         } catch {
             DDLogError("ActionRequestHandler error getting JSON URL; Error: \(error)")

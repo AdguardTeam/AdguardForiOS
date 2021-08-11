@@ -13,18 +13,22 @@ public protocol ContentBlockerJsonProviderProtocol {
 /// This class should be used in Content Blocker's extensions to get appropriate JSON
 public final class ContentBlockerJsonProvider: ContentBlockerJsonProviderProtocol {
     
-    private let userDefaults: UserDefaultsStorageProtocol
-    private let jsonStorageUrl: URL
+    private let jsonStorage: ContentBlockersInfoStorageProtocol
     private let type: ContentBlockerType
     
-    public init(cbBundleId: String, mainAppBundleId: String, jsonStorageUrl: URL, userDefaults: UserDefaults) {
-        self.userDefaults = UserDefaultsStorage(storage: userDefaults)
-        self.jsonStorageUrl = jsonStorageUrl
+    public init(cbBundleId: String, mainAppBundleId: String, jsonStorageUrl: URL, userDefaults: UserDefaults) throws {
+        let userDefaultsStorage = UserDefaultsStorage(storage: userDefaults)
+        self.jsonStorage = try ContentBlockersInfoStorage(jsonStorageUrl: jsonStorageUrl, userDefaultsStorage: userDefaultsStorage)
         self.type = Self.typeForBundleId(cbBundleId, mainAppBundleId: mainAppBundleId)
     }
     
+    /// Initializer for tests
+    init(jsonStorage: ContentBlockersInfoStorageProtocol, type: ContentBlockerType) {
+        self.jsonStorage = jsonStorage
+        self.type = type
+    }
+    
     public func getJsonUrl(_ safariProtectionIsEnabled: Bool) throws -> URL {
-        let jsonStorage = try ContentBlockersInfoStorage(jsonStorageUrl: jsonStorageUrl, userDefaultsStorage: userDefaults)
         let emptyJsonUrl = try jsonStorage.getEmptyRuleJsonUrl()
         
         guard safariProtectionIsEnabled else {

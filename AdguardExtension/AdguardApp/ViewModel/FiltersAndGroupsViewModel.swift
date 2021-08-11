@@ -19,7 +19,7 @@
 import Foundation
 import SafariAdGuardSDK
 
-protocol FiltersAndGroupsViewModelProtocol: class {
+protocol FiltersAndGroupsViewModelProtocol: AnyObject {
     
     /* Indicates whether you need to work only with single group, otherwise it is nil */
     var currentGroup: SafariGroupProtocol? { get set }
