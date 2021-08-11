@@ -99,7 +99,6 @@
 		659886A21CF74DE9003ECD1C /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0971B8632DD00319AA3 /* libsqlite3.tbd */; };
 		659886A31CF74DE9003ECD1C /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F3986D1B7C894000ABCD39 /* SafariServices.framework */; };
 		659886A51CF74DE9003ECD1C /* defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65711E551B8C670A00C8C4E7 /* defaults.plist */; };
-		659886A61CF74DE9003ECD1C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F398221B7B684700ABCD39 /* LaunchScreen.storyboard */; };
 		659886A91CF74DE9003ECD1C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659E59751BC6D82700FA2384 /* Localizable.strings */; };
 		659886AC1CF74DE9003ECD1C /* stringUIResources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65B40D391BDE807400A9C595 /* stringUIResources.plist */; };
 		65B4F0341D5C829200893BA0 /* ADBTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACAD1D3CD24B00E316EA /* ADBTable.m */; };
@@ -139,6 +138,14 @@
 		7ED595DA259B263C00608222 /* DnsResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED595D8259B263C00608222 /* DnsResolver.swift */; };
 		A5E02631261E330900198396 /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = A5E02630261E330900198396 /* AGDnsProxy */; };
 		A5E02633261E331E00198396 /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = A5E02632261E331E00198396 /* AGDnsProxy */; };
+		C0A8593D26C376020083E103 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A8593526C376010083E103 /* MainController.swift */; };
+		C0A8593E26C376020083E103 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A8593626C376010083E103 /* TabBarController.swift */; };
+		C0A8593F26C376020083E103 /* ViSafeData.plist in Resources */ = {isa = PBXBuildFile; fileRef = C0A8593726C376020083E103 /* ViSafeData.plist */; };
+		C0A8594026C376020083E103 /* DetailModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A8593826C376020083E103 /* DetailModeView.swift */; };
+		C0A8594126C376020083E103 /* StoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A8593926C376020083E103 /* StoreData.swift */; };
+		C0A8594226C376020083E103 /* TurnOffVisafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A8593A26C376020083E103 /* TurnOffVisafe.swift */; };
+		C0A8594326C376020083E103 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0A8593B26C376020083E103 /* Main.storyboard */; };
+		C0A8594426C376020083E103 /* PulseAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A8593C26C376020083E103 /* PulseAnimation.swift */; };
 		D004F1FA1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
 		D00E448A25650084002DDE98 /* ImportSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00E448825650084002DDE98 /* ImportSettingsService.swift */; };
 		D0116CEF20627E58009598B1 /* ACNCidrRange.m in Sources */ = {isa = PBXBuildFile; fileRef = D0116CED20627E58009598B1 /* ACNCidrRange.m */; };
@@ -384,9 +391,6 @@
 		D0D7E583243B1C14001801A5 /* adguard.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E12D50023EA9AAF0009108D /* adguard.json */; };
 		D0D7E584243B1C14001801A5 /* whotracksme.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E12D4FE23EA9A7B0009108D /* whotracksme.json */; };
 		D0D7E585243B1C4F001801A5 /* PTMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D02B550722EED8740039BC48 /* PTMono-Regular.ttf */; };
-		D0D7E58B243B1CBA001801A5 /* safari_tracking_protection_step3.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E252217240821BE00743648 /* safari_tracking_protection_step3.json */; };
-		D0D7E58E243B1CC2001801A5 /* safari_protection_step1.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E252218240821BE00743648 /* safari_protection_step1.json */; };
-		D0D7E58F243B1CC3001801A5 /* safari_protection_step2.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E252219240821BF00743648 /* safari_protection_step2.json */; };
 		D0D7E598243C5523001801A5 /* APBlockingSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E593243C5523001801A5 /* APBlockingSubscription.m */; };
 		D0D7E59B243C5EF3001801A5 /* ProSubscriptionsMigrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E599243C5EF3001801A5 /* ProSubscriptionsMigrationService.swift */; };
 		D0D7E5A2243C84F1001801A5 /* APDnsServerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E5A0243C84F1001801A5 /* APDnsServerObject.m */; };
@@ -692,9 +696,6 @@
 		7E1E41592424C01100567C8D /* MostActiveCompaniesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostActiveCompaniesCell.swift; sourceTree = "<group>"; };
 		7E21CBA725F918FA00A5A735 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		7E21CBDD25F91B3000A5A735 /* AdGuardVpnOperatingMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdGuardVpnOperatingMode.swift; sourceTree = "<group>"; };
-		7E252217240821BE00743648 /* safari_tracking_protection_step3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = safari_tracking_protection_step3.json; sourceTree = "<group>"; };
-		7E252218240821BE00743648 /* safari_protection_step1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = safari_protection_step1.json; sourceTree = "<group>"; };
-		7E252219240821BF00743648 /* safari_protection_step2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = safari_protection_step2.json; sourceTree = "<group>"; };
 		7E2D978B24499E58000366B3 /* public_suffix_list.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = public_suffix_list.dat; sourceTree = "<group>"; };
 		7E31217124DC028300642879 /* BottomAlertTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAlertTransition.swift; sourceTree = "<group>"; };
 		7E3B38082512029C0005EB9F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/DnsSettings.strings; sourceTree = "<group>"; };
@@ -803,6 +804,14 @@
 		7EF6AF86233D11B000D29B36 /* RequestsBlockingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsBlockingController.swift; sourceTree = "<group>"; };
 		7EF75A6C234B6010006ED3E5 /* DnsTrackerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsTrackerService.swift; sourceTree = "<group>"; };
 		C0A2241426BA3D3F0089531D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C0A8593526C376010083E103 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		C0A8593626C376010083E103 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		C0A8593726C376020083E103 /* ViSafeData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ViSafeData.plist; sourceTree = "<group>"; };
+		C0A8593826C376020083E103 /* DetailModeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailModeView.swift; sourceTree = "<group>"; };
+		C0A8593926C376020083E103 /* StoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreData.swift; sourceTree = "<group>"; };
+		C0A8593A26C376020083E103 /* TurnOffVisafe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurnOffVisafe.swift; sourceTree = "<group>"; };
+		C0A8593B26C376020083E103 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		C0A8593C26C376020083E103 /* PulseAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PulseAnimation.swift; sourceTree = "<group>"; };
 		D004F1F81F16338400F75A4B /* ACNIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNIPUtils.h; sourceTree = "<group>"; };
 		D004F1F91F16338400F75A4B /* ACNIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNIPUtils.m; sourceTree = "<group>"; };
 		D00509682201D730006BC10C /* DnsProvidersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersService.swift; sourceTree = "<group>"; };
@@ -983,7 +992,6 @@
 		D0D33BB323101A87009082CE /* AffinityRulesParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffinityRulesParser.swift; sourceTree = "<group>"; };
 		D0D33BB923102C94009082CE /* Affinity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Affinity.swift; sourceTree = "<group>"; };
 		D0D6BA0921A6AF67007360BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Tutorial.storyboard; sourceTree = "<group>"; };
-		D0D6BB5121A6C62B007360BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D0D7E55724376EF3001801A5 /* AdguardProBlockingExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdguardProBlockingExtension.entitlements; sourceTree = "<group>"; };
 		D0D7E55824376F00001801A5 /* AdGuardProTodayExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdGuardProTodayExtension.entitlements; sourceTree = "<group>"; };
 		D0D7E55924376F13001801A5 /* ProActionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProActionExtension.entitlements; sourceTree = "<group>"; };
@@ -1579,7 +1587,6 @@
 				652F89EE1B92E064002E0601 /* UI */,
 				65F398711B7C9C5000ABCD39 /* Adguard.entitlements */,
 				7ED595D7259B25EC00608222 /* AppDelegate */,
-				65F398221B7B684700ABCD39 /* LaunchScreen.storyboard */,
 				655AACD41D4233A000E316EA /* ProLaunchScreen.storyboard */,
 				65F398141B7B684700ABCD39 /* Supporting Files */,
 				65F3986F1B7C8A2000ABCD39 /* Linked Frameworks/Libraries */,
@@ -1734,6 +1741,14 @@
 		7E8AC81523A7BF2700669C75 /* MainTabBar */ = {
 			isa = PBXGroup;
 			children = (
+				C0A8593826C376020083E103 /* DetailModeView.swift */,
+				C0A8593B26C376020083E103 /* Main.storyboard */,
+				C0A8593526C376010083E103 /* MainController.swift */,
+				C0A8593C26C376020083E103 /* PulseAnimation.swift */,
+				C0A8593926C376020083E103 /* StoreData.swift */,
+				C0A8593626C376010083E103 /* TabBarController.swift */,
+				C0A8593A26C376020083E103 /* TurnOffVisafe.swift */,
+				C0A8593726C376020083E103 /* ViSafeData.plist */,
 				7E8AC81A23A7C41700669C75 /* MainTabBarController.swift */,
 				7EF4285823AB766500948B65 /* ComplexProtection */,
 				7E902ADF23CCB4E700215B33 /* Activity */,
@@ -2048,9 +2063,6 @@
 		D0CB3465212C31CC003B650E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				7E252218240821BE00743648 /* safari_protection_step1.json */,
-				7E252219240821BF00743648 /* safari_protection_step2.json */,
-				7E252217240821BE00743648 /* safari_tracking_protection_step3.json */,
 				D02B550722EED8740039BC48 /* PTMono-Regular.ttf */,
 				D005096A2201DA2F006BC10C /* providers.json */,
 				D06E30AD253F3181008BBD2D /* providers_i18n.json */,
@@ -2351,13 +2363,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0A8594326C376020083E103 /* Main.storyboard in Resources */,
 				D098B44924497764003BA4DA /* ActivityTableViewCell.xib in Resources */,
 				D0D7E55024371C8C001801A5 /* Tutorial.storyboard in Resources */,
 				659886A51CF74DE9003ECD1C /* defaults.plist in Resources */,
-				659886A61CF74DE9003ECD1C /* LaunchScreen.storyboard in Resources */,
 				655AACD61D4233A000E316EA /* ProLaunchScreen.storyboard in Resources */,
 				D0D7E57E243B15DF001801A5 /* Localizable.stringsdict in Resources */,
-				D0D7E58E243B1CC2001801A5 /* safari_protection_step1.json in Resources */,
 				D06E30B0253F3182008BBD2D /* providers_i18n.json in Resources */,
 				D0D7E583243B1C14001801A5 /* adguard.json in Resources */,
 				D0D7E584243B1C14001801A5 /* whotracksme.json in Resources */,
@@ -2365,11 +2376,10 @@
 				D0D7E57F243B1BF5001801A5 /* providers.json in Resources */,
 				D0D7E585243B1C4F001801A5 /* PTMono-Regular.ttf in Resources */,
 				D0D891B8246520E40098487A /* public_suffix_list.dat in Resources */,
-				D0D7E58B243B1CBA001801A5 /* safari_tracking_protection_step3.json in Resources */,
 				D0D7E54624371C8C001801A5 /* DnsSettings.storyboard in Resources */,
 				659886A91CF74DE9003ECD1C /* Localizable.strings in Resources */,
-				D0D7E58F243B1CC3001801A5 /* safari_protection_step2.json in Resources */,
 				D0D7E55124373E89001801A5 /* Assets.xcassets in Resources */,
+				C0A8593F26C376020083E103 /* ViSafeData.plist in Resources */,
 				659886AC1CF74DE9003ECD1C /* stringUIResources.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2506,6 +2516,7 @@
 				D0B545732435D5D2002F0AEC /* SuccessFailureParser.swift in Sources */,
 				658E439B1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
 				247CB5B22600B9940047974C /* OpenDnsSettingsControllerParser.swift in Sources */,
+				C0A8594226C376020083E103 /* TurnOffVisafe.swift in Sources */,
 				24BD32FF2603592000CC12F3 /* FiltersUpdatesConstants.swift in Sources */,
 				D0B545A92435D640002F0AEC /* NewDnsServerController.swift in Sources */,
 				D0D7E5D924444D63001801A5 /* ChartDateType.swift in Sources */,
@@ -2564,6 +2575,7 @@
 				659886721CF74DE9003ECD1C /* ACLFileLogger.m in Sources */,
 				D0D7E61A244456B0001801A5 /* DomainsParserService.swift in Sources */,
 				D0B5458B2435D630002F0AEC /* FileShareService.swift in Sources */,
+				C0A8594026C376020083E103 /* DetailModeView.swift in Sources */,
 				D018672D203C86050003110A /* MGSwipeTableCell.m in Sources */,
 				D0B545972435D630002F0AEC /* UserNotificationService.swift in Sources */,
 				D0B545A62435D640002F0AEC /* DnsProviderDetailsController.swift in Sources */,
@@ -2588,9 +2600,11 @@
 				D0B545922435D630002F0AEC /* RateAppService.swift in Sources */,
 				659886771CF74DE9003ECD1C /* NSString+Utils.m in Sources */,
 				D0B545AD2435D640002F0AEC /* SystemProtectionEnablerController.swift in Sources */,
+				C0A8593D26C376020083E103 /* MainController.swift in Sources */,
 				D0B545FC2435D6CB002F0AEC /* NotificationService+Utils.swift in Sources */,
 				D0D7E615244455CA001801A5 /* ThemableButton.swift in Sources */,
 				659886791CF74DE9003ECD1C /* ABECRequest.m in Sources */,
+				C0A8593E26C376020083E103 /* TabBarController.swift in Sources */,
 				D0B545A42435D640002F0AEC /* (null) in Sources */,
 				D0B545E02435D69B002F0AEC /* ThemeableImageView.swift in Sources */,
 				6518BD861DABBE6900FDD1F3 /* AEBlacklistDomainObject.m in Sources */,
@@ -2645,6 +2659,7 @@
 				7E31217324DC028300642879 /* BottomAlertTransition.swift in Sources */,
 				D0E3A8591F94EC5700F0970B /* AEInvertedWhitelistDomainsObject.m in Sources */,
 				D0B545BC2435D659002F0AEC /* BlockRequestController.swift in Sources */,
+				C0A8594126C376020083E103 /* StoreData.swift in Sources */,
 				D0D7E52B24371859001801A5 /* (null) in Sources */,
 				247432DF261731C00025C7B8 /* UIAlerController+Style.swift in Sources */,
 				651F5E0F1E2563A400E22157 /* ACNUrlUtils.m in Sources */,
@@ -2669,6 +2684,7 @@
 				D0B545892435D630002F0AEC /* DnsLogRecordsService.swift in Sources */,
 				D0B545D92435D69B002F0AEC /* StackElementView.swift in Sources */,
 				6598868D1CF74DE9003ECD1C /* NSDate+Utils.m in Sources */,
+				C0A8594426C376020083E103 /* PulseAnimation.swift in Sources */,
 				D018672B203C86050003110A /* MGSwipeButton.m in Sources */,
 				24F66A8626033C9D0097B426 /* OpenDnsSettingsControllerWithLaunchScreenParser.swift in Sources */,
 				247CB5532600AF710047974C /* IURLSchemeExecutor.swift in Sources */,
@@ -2907,14 +2923,6 @@
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
-		65F398221B7B684700ABCD39 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D0D6BB5121A6C62B007360BC /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 		7EC35AAF230D8EC100D9B959 /* Localizable.stringsdict */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -3033,7 +3041,7 @@
 				ADGUARD_SHARED_RESOURCES_GROUP = group.vn.visafe;
 				AE_SHARED_SUBSCRIPTIOSN_GROUP = group.vn.visafe.subscriptions;
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = ProAppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = AdguardPro/AdguardPro.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -3063,7 +3071,7 @@
 				ADGUARD_SHARED_RESOURCES_GROUP = group.vn.visafe;
 				AE_SHARED_SUBSCRIPTIOSN_GROUP = group.vn.visafe.subscriptions;
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = ProAppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = AdguardPro/AdguardPro.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>isLogined</key>
+	<false/>
+	<key>token_login</key>
+	<string></string>
+	<key>groupId</key>
+	<string></string>
+	<key>time_expire</key>
+	<integer>0</integer>
+	<key>uuid</key>
+	<string></string>
+	<key>status_code_token</key>
+	<integer>0</integer>
+	<key>domain_vip</key>
+	<string></string>
+	<key>switch_vip</key>
+	<false/>
+	<key>deviceName</key>
+	<string></string>
+	<key>msg</key>
+	<string></string>
+	<key>status_code</key>
+	<integer>0</integer>
+	<key>check_passcode</key>
+	<false/>
+	<key>active</key>
+	<string>2021-05-12T07:26:45Z</string>
+	<key>status</key>
+	<string></string>
+	<key>resolverEnabled</key>
+	<false/>
+	<key>first_setting</key>
+	<integer>0</integer>
+	<key>switch_status</key>
+	<false/>
+	<key>userid</key>
+	<string></string>
+	<key>first_use</key>
+	<false/>
+</dict>
+</plist>

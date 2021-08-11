@@ -1,116 +1,116 @@
 {
   "images" : [
     {
-      "size" : "20x20",
+      "filename" : "Visafe final_icon app đen (40).png",
       "idiom" : "iphone",
-      "filename" : "40.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "20x20"
     },
     {
-      "size" : "20x20",
+      "filename" : "Visafe final_icon app đen (60).png",
       "idiom" : "iphone",
-      "filename" : "60.png",
-      "scale" : "3x"
+      "scale" : "3x",
+      "size" : "20x20"
     },
     {
-      "size" : "29x29",
+      "filename" : "Visafe final_icon app đen (58).png",
       "idiom" : "iphone",
-      "filename" : "58.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "29x29"
     },
     {
-      "size" : "29x29",
+      "filename" : "Visafe final_icon app đen (87).png",
       "idiom" : "iphone",
-      "filename" : "87.png",
-      "scale" : "3x"
+      "scale" : "3x",
+      "size" : "29x29"
     },
     {
-      "size" : "40x40",
+      "filename" : "Visafe final_icon app đen (80).png",
       "idiom" : "iphone",
-      "filename" : "80.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "40x40"
     },
     {
-      "size" : "40x40",
+      "filename" : "Visafe final_icon app đen (120).png",
       "idiom" : "iphone",
-      "filename" : "120.png",
-      "scale" : "3x"
+      "scale" : "3x",
+      "size" : "40x40"
     },
     {
-      "size" : "60x60",
+      "filename" : "Visafe final_icon app đen (120)-1.png",
       "idiom" : "iphone",
-      "filename" : "120-1.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "60x60"
     },
     {
-      "size" : "60x60",
+      "filename" : "Visafe final_icon app đen (180).png",
       "idiom" : "iphone",
-      "filename" : "180.png",
-      "scale" : "3x"
+      "scale" : "3x",
+      "size" : "60x60"
     },
     {
-      "size" : "20x20",
+      "filename" : "Visafe final_icon app đen (20).png",
       "idiom" : "ipad",
-      "filename" : "20.png",
-      "scale" : "1x"
+      "scale" : "1x",
+      "size" : "20x20"
     },
     {
-      "size" : "20x20",
+      "filename" : "Visafe final_icon app đen (40)-1.png",
       "idiom" : "ipad",
-      "filename" : "40-1.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "20x20"
     },
     {
-      "size" : "29x29",
+      "filename" : "Visafe final_icon app đen (29).png",
       "idiom" : "ipad",
-      "filename" : "29.png",
-      "scale" : "1x"
+      "scale" : "1x",
+      "size" : "29x29"
     },
     {
-      "size" : "29x29",
+      "filename" : "Visafe final_icon app đen (58)-1.png",
       "idiom" : "ipad",
-      "filename" : "58-1.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "29x29"
     },
     {
-      "size" : "40x40",
+      "filename" : "Visafe final_icon app đen (40)-2.png",
       "idiom" : "ipad",
-      "filename" : "40-2.png",
-      "scale" : "1x"
+      "scale" : "1x",
+      "size" : "40x40"
     },
     {
-      "size" : "40x40",
+      "filename" : "Visafe final_icon app đen (80)-1.png",
       "idiom" : "ipad",
-      "filename" : "80-1.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "40x40"
     },
     {
-      "size" : "76x76",
+      "filename" : "Visafe final_icon app đen (76).png",
       "idiom" : "ipad",
-      "filename" : "76.png",
-      "scale" : "1x"
+      "scale" : "1x",
+      "size" : "76x76"
     },
     {
-      "size" : "76x76",
+      "filename" : "Visafe final_icon app đen (152).png",
       "idiom" : "ipad",
-      "filename" : "152.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "76x76"
     },
     {
-      "size" : "83.5x83.5",
+      "filename" : "Visafe final_icon app đen (167).png",
       "idiom" : "ipad",
-      "filename" : "167.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "83.5x83.5"
     },
     {
-      "size" : "1024x1024",
+      "filename" : "Visafe final_icon app đen (1024).png",
       "idiom" : "ios-marketing",
-      "filename" : "1024.png",
-      "scale" : "1x"
+      "scale" : "1x",
+      "size" : "1024x1024"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

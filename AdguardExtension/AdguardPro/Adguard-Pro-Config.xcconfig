@@ -19,7 +19,7 @@
 #include "Common-Config.xcconfig"
 
 // Global product settings
-AG_PRODUCT = AdGuard Pro
+AG_PRODUCT = Visafe
 
 AG_GIT_TAG_SUFIX = pro
 
