@@ -177,16 +177,16 @@ class ComplexProtectionController: UITableViewController {
                 }
             }
         }
-        let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
-        if vpnManager.vpnInstalled == false{
-            let upstream = "https://dns-staging.visafe.vn/dns-query/111111111111"
-            let dnsProvidersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
-            dnsProvidersService.addCustomProvider(name: "Visafe", upstream: upstream) { [weak self] in
-                vpnManager.updateSettings(completion: nil)
-
-            }
-        }
-        
+//        let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
+//        if vpnManager.vpnInstalled == false{
+//            let upstream = "https://dns-staging.visafe.vn/dns-query/111111111111"
+//            let dnsProvidersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
+//            dnsProvidersService.addCustomProvider(name: "Visafe", upstream: upstream) { [weak self] in
+//                vpnManager.updateSettings(completion: nil)
+//
+//            }
+//        }
+//
         updateVpnInfo()
     }
     

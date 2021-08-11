@@ -256,14 +256,12 @@ class DnsSettingsController : UITableViewController {
                 self?.updateVpnInfo()
             }
         }
-//        let upstream = "https://dns-staging.visafe.vn/dns-query/111111111111"
-//        let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
-//        let dnsProvidersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
-//        dnsProvidersService.addCustomProvider(name: "Visafe", upstream: upstream) { [weak self] in
-//            vpnManager.updateSettings(completion: nil)
-//
-//        }
-        updateVpnInfo()
+        let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
+        let upstream = "https://dns.visafe.vn/dns-query/111111111111"
+        let dnsProvidersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
+        dnsProvidersService.addCustomProvider(name: "Visafe", upstream: upstream) { [weak self] in
+        vpnManager.updateSettings(completion: nil)
+        }
     }
     
     // MARK: private methods

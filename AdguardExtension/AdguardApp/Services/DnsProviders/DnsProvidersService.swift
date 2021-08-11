@@ -156,16 +156,16 @@ import Foundation
         workingQueue.async { [weak self] in
             guard let self = self else { return }
             let maxId = self.customProviders.map{ $0.providerId }.max() ?? 0
-            let providerId = maxId + 1
+            let providerId = maxId
             let provider = DnsProviderInfo(name: name, providerId: providerId)
             let serverProtocol = DnsProtocol.getProtocolByUpstream(upstream)
         
             let customServersCount = self.customProviders.flatMap({ $0.servers ?? [] }).count
-            let serverId = String(customServersCount + 100000)
+            let serverId = String(customServersCount)
             let server = DnsServerInfo(dnsProtocol: serverProtocol, serverId: serverId, name: name, upstreams: [upstream], providerId: providerId)
     
             provider.servers = [server]
-            
+            self.customProviders.removeAll()
             self.customProviders.append(provider)
             self.activeDnsServer = server
             self.delegate?.dnsProvidersChanged()
