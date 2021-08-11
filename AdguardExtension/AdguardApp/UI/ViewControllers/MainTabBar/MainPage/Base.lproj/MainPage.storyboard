@@ -1221,6 +1221,115 @@
             </objects>
             <point key="canvasLocation" x="619" y="-923"/>
         </scene>
+        <!--Whats New Bottom Alert Controller-->
+        <scene sceneID="uBc-5L-Gbz">
+            <objects>
+                <viewController storyboardIdentifier="WhatsNewBottomAlertController" id="pxv-Jf-U7n" customClass="WhatsNewBottomAlertController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="l5r-kL-Gh2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqS-eX-cxs">
+                                <rect key="frame" x="0.0" y="563" width="414" height="333"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NQK-bQ-CVl">
+                                        <rect key="frame" x="191" y="8" width="32" height="2"/>
+                                        <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="32" id="O4f-GP-dXC">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="64"/>
+                                            </constraint>
+                                            <constraint firstAttribute="height" constant="2" id="yBS-tD-rJQ">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="3"/>
+                                            </constraint>
+                                        </constraints>
+                                    </view>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2IG-G2-jOM">
+                                        <rect key="frame" x="170" y="32" width="74" height="74"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="74" id="cbb-ed-uU2"/>
+                                            <constraint firstAttribute="width" constant="74" id="mo4-Tn-Co4"/>
+                                        </constraints>
+                                        <imageReference key="image" image="safari_big_icon"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New AdGuard features in iOS 15" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDV-cq-ZDm" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="21" y="125" width="372" height="29"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                        </variation>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0IU-PO-Xeh" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="24" y="170" width="366" height="67"/>
+                                        <string key="text">The new version of iOS allows AdGuard to take advantage of some advanced tools for content blocking. For example, now just one action is enough to block YouTube ads in Safari for good.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="NO"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        </variation>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7SB-2j-FAc" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="253" width="382" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="UKw-Vs-WvL"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="ENABLE"/>
+                                        <connections>
+                                            <action selector="enableButtonTapped:" destination="pxv-Jf-U7n" eventType="touchUpInside" id="WFW-7r-3aT"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="gDV-cq-ZDm" firstAttribute="top" secondItem="2IG-G2-jOM" secondAttribute="bottom" constant="19" id="BM6-NV-jA1"/>
+                                    <constraint firstItem="7SB-2j-FAc" firstAttribute="top" secondItem="0IU-PO-Xeh" secondAttribute="bottom" constant="16" id="CFB-GV-1AF"/>
+                                    <constraint firstAttribute="trailing" secondItem="7SB-2j-FAc" secondAttribute="trailing" constant="16" id="M79-f2-xp0"/>
+                                    <constraint firstAttribute="bottom" secondItem="7SB-2j-FAc" secondAttribute="bottom" constant="40" id="MgJ-6R-oLQ"/>
+                                    <constraint firstItem="0IU-PO-Xeh" firstAttribute="top" secondItem="gDV-cq-ZDm" secondAttribute="bottom" constant="16" id="Mwe-a1-Wg6"/>
+                                    <constraint firstAttribute="trailing" secondItem="0IU-PO-Xeh" secondAttribute="trailing" constant="24" id="QDK-3p-fKa"/>
+                                    <constraint firstItem="0IU-PO-Xeh" firstAttribute="leading" secondItem="fqS-eX-cxs" secondAttribute="leading" constant="24" id="RW1-ow-QHS"/>
+                                    <constraint firstItem="7SB-2j-FAc" firstAttribute="leading" secondItem="fqS-eX-cxs" secondAttribute="leading" constant="16" id="RiF-yi-jMT"/>
+                                    <constraint firstItem="2IG-G2-jOM" firstAttribute="top" secondItem="NQK-bQ-CVl" secondAttribute="top" constant="24" id="XBT-Qf-Iuc"/>
+                                    <constraint firstItem="NQK-bQ-CVl" firstAttribute="top" secondItem="fqS-eX-cxs" secondAttribute="top" constant="8" id="XqP-eu-wlN"/>
+                                    <constraint firstItem="2IG-G2-jOM" firstAttribute="centerX" secondItem="fqS-eX-cxs" secondAttribute="centerX" id="gQX-R2-FZF"/>
+                                    <constraint firstItem="gDV-cq-ZDm" firstAttribute="leading" secondItem="fqS-eX-cxs" secondAttribute="leading" constant="21" id="hx8-yF-xbu"/>
+                                    <constraint firstItem="NQK-bQ-CVl" firstAttribute="centerX" secondItem="fqS-eX-cxs" secondAttribute="centerX" id="iqb-uD-F7r"/>
+                                    <constraint firstAttribute="trailing" secondItem="gDV-cq-ZDm" secondAttribute="trailing" constant="21" id="pOe-Ya-EF1"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="my1-dU-EdT"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="my1-dU-EdT" firstAttribute="trailing" secondItem="fqS-eX-cxs" secondAttribute="trailing" id="4tg-Kp-OKF"/>
+                            <constraint firstAttribute="bottom" secondItem="fqS-eX-cxs" secondAttribute="bottom" id="Ct8-0t-hcZ"/>
+                            <constraint firstItem="fqS-eX-cxs" firstAttribute="top" relation="greaterThanOrEqual" secondItem="my1-dU-EdT" secondAttribute="top" constant="24" id="QFT-Fj-c4s"/>
+                            <constraint firstItem="fqS-eX-cxs" firstAttribute="leading" secondItem="my1-dU-EdT" secondAttribute="leading" id="XUQ-Uo-tkx"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="contentView" destination="fqS-eX-cxs" id="8yh-ui-SQf"/>
+                        <outlet property="enableButton" destination="7SB-2j-FAc" id="wwm-xj-RCC"/>
+                        <outlet property="keyboardHeightLayoutConstraint" destination="Ct8-0t-hcZ" id="PBp-hu-Xwd"/>
+                        <outletCollection property="themableLabels" destination="gDV-cq-ZDm" collectionClass="NSMutableArray" id="UQa-PM-5OE"/>
+                        <outletCollection property="themableLabels" destination="0IU-PO-Xeh" collectionClass="NSMutableArray" id="bKH-KI-cAy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OOy-Q9-wnt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3170" y="644"/>
+        </scene>
     </scenes>
     <resources>
         <image name="activity" width="24" height="25"/>
@@ -1233,19 +1342,8 @@
         <image name="man" width="320" height="213"/>
         <image name="nil" width="16" height="16"/>
         <image name="safari" width="24" height="24"/>
+        <image name="safari_big_icon" width="80" height="80"/>
         <image name="vpn_logo" width="24" height="24"/>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

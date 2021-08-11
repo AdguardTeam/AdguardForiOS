@@ -129,6 +129,8 @@
 		24BC54CB26E7A58800F680ED /* SharedAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		24BD32ED2603588F00CC12F3 /* FiltersUpdatesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */; };
 		24BD32FF2603592000CC12F3 /* FiltersUpdatesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */; };
+		24C49DBD26C40AC900790CB3 /* WhatsNewPopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C49DBC26C40AC900790CB3 /* WhatsNewPopUpController.swift */; };
+		24C49DBE26C40AC900790CB3 /* WhatsNewPopUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C49DBC26C40AC900790CB3 /* WhatsNewPopUpController.swift */; };
 		24CBA66225939CC200E28308 /* CustomSchemeURLParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */; };
 		24D6A9E125FB698A00674D11 /* StatusBarWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6A9E025FB698A00674D11 /* StatusBarWindow.swift */; };
 		24D6A9E225FB698A00674D11 /* StatusBarWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6A9E025FB698A00674D11 /* StatusBarWindow.swift */; };
@@ -2862,6 +2864,7 @@
 		24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SharedAdGuardSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersUpdatesConstants.swift; sourceTree = "<group>"; };
 		24C03C4525FF73790062DEED /* URLSchemeExecutorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSchemeExecutorMock.swift; sourceTree = "<group>"; };
+		24C49DBC26C40AC900790CB3 /* WhatsNewPopUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewPopUpController.swift; sourceTree = "<group>"; };
 		24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSchemeURLParserTest.swift; sourceTree = "<group>"; };
 		24D6A9E025FB698A00674D11 /* StatusBarWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarWindow.swift; sourceTree = "<group>"; };
 		24D6A9F425FB7A6300674D11 /* SettingsResetor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsResetor.swift; sourceTree = "<group>"; };
@@ -6066,6 +6069,7 @@
 				7E9D31C123A11BB60040AE4B /* ComplexProtectionSwitch.swift */,
 				7E3BDEDF23A15709009492CE /* GetProDialogView.swift */,
 				7ECF38BA23AA43A300A39094 /* DnsLogContainerController.swift */,
+				24C49DBC26C40AC900790CB3 /* WhatsNewPopUpController.swift */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -8422,6 +8426,7 @@
 				7ED595DA259B263C00608222 /* DnsResolver.swift in Sources */,
 				D0B545982435D630002F0AEC /* VpnManager.swift in Sources */,
 				6598866E1CF74DE9003ECD1C /* NSURL+Utils.m in Sources */,
+				24C49DBE26C40AC900790CB3 /* WhatsNewPopUpController.swift in Sources */,
 				D0B545EB2435D6A4002F0AEC /* ChartViewModel.swift in Sources */,
 				D0B5458E2435D630002F0AEC /* LoginResponseParser.swift in Sources */,
 				D031A140219EFC99002C17D9 /* DDMultiFormatter.m in Sources */,
@@ -8941,6 +8946,7 @@
 				7E5101912355A71900935FE9 /* NetworkSettingsCells.swift in Sources */,
 				7E94743026CA83090031B8F4 /* SafariGroup.GroupType+IconImage.swift in Sources */,
 				7E3FEFAB26CCFCD20080EC03 /* AllSafariGroupsFiltersModel.swift in Sources */,
+				24C49DBD26C40AC900790CB3 /* WhatsNewPopUpController.swift in Sources */,
 				65EC9CAC1BB9824C00F53F3B /* FMStatementQuotedRecogniser.m in Sources */,
 				7EAD352726C2C657001AFB3A /* NotificationCenter+Utils.swift in Sources */,
 				7EB5526D24224755000498CC /* ActivityViewController.swift in Sources */,
