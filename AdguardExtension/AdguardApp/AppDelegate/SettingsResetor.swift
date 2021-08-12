@@ -32,9 +32,6 @@ struct SettingsResetor: ISettingsResetor {
     private let vpnManager: VpnManagerProtocol
     private let resources: AESharedResourcesProtocol
     private let purchaseService: PurchaseServiceProtocol
-    private let activityStatisticsService: ActivityStatisticsServiceProtocol
-    private let dnsStatisticsService: DnsStatisticsServiceProtocol
-    private let dnsLogRecordsService: DnsLogRecordsServiceProtocol
     private let safariProtection: SafariProtectionProtocol
     
     //MARK: - Init
@@ -44,9 +41,6 @@ struct SettingsResetor: ISettingsResetor {
          vpnManager: VpnManagerProtocol,
          resources: AESharedResourcesProtocol,
          purchaseService: PurchaseServiceProtocol,
-         activityStatisticsService: ActivityStatisticsServiceProtocol,
-         dnsStatisticsService: DnsStatisticsServiceProtocol,
-         dnsLogRecordsService: DnsLogRecordsServiceProtocol,
          safariProtection: SafariProtectionProtocol) {
         
         self.appDelegate = appDelegate
@@ -54,9 +48,6 @@ struct SettingsResetor: ISettingsResetor {
         self.vpnManager = vpnManager
         self.resources = resources
         self.purchaseService = purchaseService
-        self.activityStatisticsService = activityStatisticsService
-        self.dnsStatisticsService = dnsStatisticsService
-        self.dnsLogRecordsService = dnsLogRecordsService
         self.safariProtection = safariProtection
     }
     
@@ -109,8 +100,6 @@ struct SettingsResetor: ISettingsResetor {
     
     private func resetStatistics(){
         /* Reseting statistics Start*/
-        self.activityStatisticsService.stopDb()
-        self.dnsStatisticsService.stopDb()
         
         // delete database file
         let url = self.resources.sharedResuorcesURL().appendingPathComponent("dns-statistics.db")
@@ -120,12 +109,6 @@ struct SettingsResetor: ISettingsResetor {
         } catch {
             DDLogInfo("(ResetSettings) Statistics removing error: \(error.localizedDescription)")
         }
-        
-        /* Reseting statistics end */
-        self.activityStatisticsService.startDb()
-        self.dnsStatisticsService.startDb()
-        
-        self.dnsLogRecordsService.reset()
     }
     
     private func presentAlert() {

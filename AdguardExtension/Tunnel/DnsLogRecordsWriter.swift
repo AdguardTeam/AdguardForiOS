@@ -27,11 +27,8 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     var server = ""
     
     weak var dnsProxyService: DnsProxyServiceProtocol?
-    
-    private let dnsLogService: DnsLogRecordsServiceProtocol
+
     private let resources: AESharedResourcesProtocol
-    private let activityStatisticsService: ActivityStatisticsServiceWriterProtocol
-    private let dnsStatisticsService: DnsStatisticsServiceProtocol
     
     private var records = [DnsLogRecord]()
     private var activityStatisticsRecords = [String: ActivityStatisticsRecord]()
@@ -39,24 +36,13 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
     
     private let saveRecordsMinimumTime = 3.0 // seconds
     private let saveActivityRecordsMinimumTime = 10.0 // seconds
-    private var nextSaveTime: Double
-    private var nextStatisticsSaveTime: Double
-    private var nextActivityStatisticsSaveTime: Double
-    
+
     private let recordsQueue = DispatchQueue(label: "DnsLogRecordsWriter records queue")
     private let statisticsQueue = DispatchQueue(label: "DnsLogRecordsWriter statistics queue")
     private let activityStatisticsQueue = DispatchQueue(label: "DnsLogRecordsWriter activity statistics queue")
     
-    @objc init(resources: AESharedResourcesProtocol, dnsLogService: DnsLogRecordsServiceProtocol, activityStatisticsService: ActivityStatisticsServiceWriterProtocol) {
+    @objc init(resources: AESharedResourcesProtocol) {
         self.resources = resources
-        self.dnsStatisticsService = DnsStatisticsService(resources: resources)
-        self.dnsLogService = dnsLogService
-        self.activityStatisticsService = activityStatisticsService
-        
-        nextSaveTime = Date().timeIntervalSince1970 + saveRecordsMinimumTime
-        nextStatisticsSaveTime = Date().timeIntervalSince1970 + dnsStatisticsService.minimumStatisticSaveTime
-        nextActivityStatisticsSaveTime = Date().timeIntervalSince1970 + saveActivityRecordsMinimumTime
-        
         super.init()
         
         self.loadStatisticsHead()
@@ -137,11 +123,6 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
                 self.resources.tempEncryptedRequestsCount += 1
                 self.dnsStatisticsRecord.encrypted += 1
             }
-            
-            let now = Date().timeIntervalSince1970
-            if now > self.nextStatisticsSaveTime{
-                self.saveStatistics()
-            }
         }
     }
     
@@ -164,49 +145,27 @@ class DnsLogRecordsWriter: NSObject, DnsLogRecordsWriterProtocol {
                 let activityRecord = ActivityStatisticsRecord(date: Date(), domain: domain, requests: 1, encrypted: isEncrypted ? 1 : 0, elapsedSumm: elapsed)
                 self.activityStatisticsRecords[domain] = activityRecord
             }
-            
-            if now > self.nextActivityStatisticsSaveTime{
-                self.saveActivityStatistics()
-            }
         }
     }
     
     private func addRecord(record: DnsLogRecord) {
-        
-        let now = Date().timeIntervalSince1970
-        
         recordsQueue.async { [weak self] in
             guard let self = self else { return }
             
             self.records.append(record)
-            
-            if now < self.nextSaveTime{
-                return
-            }
-            
-            self.save()
-            self.nextSaveTime = now + self.saveRecordsMinimumTime
         }
     }
     
     private func save() {
-        dnsLogService.writeRecords(records)
         records.removeAll()
     }
     
     private func saveStatistics(){
-        let now = Date().timeIntervalSince1970
-        dnsStatisticsService.writeRecord(dnsStatisticsRecord)
         reinitializeStatistics()
-        nextStatisticsSaveTime = now + dnsStatisticsService.minimumStatisticSaveTime
     }
     
     private func saveActivityStatistics(){
-        let now = Date().timeIntervalSince1970
         let recordsArray = Array(activityStatisticsRecords.values)
-        activityStatisticsService.writeRecords(recordsArray)
-        activityStatisticsRecords.removeAll()
-        nextActivityStatisticsSaveTime = now + saveActivityRecordsMinimumTime
     }
     
     private func loadStatisticsHead() {

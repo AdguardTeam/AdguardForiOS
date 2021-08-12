@@ -24,8 +24,6 @@ class SettingsController: UITableViewController {
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private let statisticsService: DnsStatisticsServiceProtocol = ServiceLocator.shared.getService()!
-    private let activityStatisticsService: ActivityStatisticsServiceProtocol = ServiceLocator.shared.getService()!
     private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     
     @IBOutlet weak var wifiUpdateSwitch: UISwitch!
@@ -156,8 +154,6 @@ class SettingsController: UITableViewController {
         
         let yesAction = UIAlertAction(title: String.localizedString("reset_title").uppercased(), style: .destructive) { [weak self] _ in
             alert.dismiss(animated: true, completion: nil)
-            self?.statisticsService.deleteAllRecords()
-            self?.activityStatisticsService.deleteAllRecords()
             NotificationCenter.default.post(name: NSNotification.resetStatistics, object: self)
         }
         

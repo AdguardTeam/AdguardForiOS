@@ -129,7 +129,6 @@
     
     DnsTrackerService* _dnsTrackerService;
     AESharedResources* _resources;
-    id<ActivityStatisticsServiceWriterProtocol> _activityStatisticsService;
     
     id<DnsLogRecordsWriterProtocol> _logWriter;
     DnsProvidersService* _providersService;
@@ -170,15 +169,13 @@
         
         _dnsTrackerService = [DnsTrackerService new];
         _providersService = [[DnsProvidersService alloc] initWithResources:_resources];
-        _activityStatisticsService = [[ActivityStatisticsService alloc] initWithResources:_resources];
         
         _reachabilityHandler = [Reachability reachabilityForInternetConnection];
         
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachNotify:) name:kReachabilityChangedNotification object:nil];
         
-        id<DnsLogRecordsServiceProtocol> logService = [[DnsLogRecordsService alloc] initWithResources:_resources];
-        id<DnsLogRecordsWriterProtocol> logWriter = [[DnsLogRecordsWriter alloc] initWithResources:_resources dnsLogService:logService activityStatisticsService:_activityStatisticsService];
+        id<DnsLogRecordsWriterProtocol> logWriter = [[DnsLogRecordsWriter alloc] initWithResources:_resources];
         self.dnsProxy = [[DnsProxyService alloc] initWithLogWriter:logWriter resources:_resources dnsProvidersService:_providersService];
         logWriter.dnsProxyService = self.dnsProxy;
         self.connectionHandler = [[APTunnelConnectionsHandler alloc] initWithProvider:self dnsProxy:self.dnsProxy];

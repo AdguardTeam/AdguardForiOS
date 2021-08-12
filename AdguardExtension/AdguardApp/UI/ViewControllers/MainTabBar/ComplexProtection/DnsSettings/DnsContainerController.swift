@@ -41,7 +41,6 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
-    private let dnsLogService: DnsLogRecordsServiceProtocol = ServiceLocator.shared.getService()!
     private let domainsConverter: DomainsConverterProtocol = DomainsConverter()
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
@@ -92,7 +91,6 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
     // MARK: - private methods
     
     private func set(_ status: DnsLogRecordUserStatus, _ rule: String? = nil) {
-        dnsLogService.set(rowId: self.logRecord.logRecord.rowid!, status: status, userRule: rule)
         logRecord.logRecord.userStatus = status
         detailsController?.updateStatusLabel()
         updateButtons()

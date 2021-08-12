@@ -44,7 +44,6 @@ class CompanyDetailedController: UITableViewController {
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
-    private let dnsLogService: DnsLogRecordsServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsTrackersService: DnsTrackerServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
     private let domainsParserService: DomainsParserServiceProtocol = ServiceLocator.shared.getService()!
@@ -71,7 +70,7 @@ class CompanyDetailedController: UITableViewController {
     //var model:
     
     required init?(coder: NSCoder) {
-        requestsModel = DnsRequestLogViewModel(dnsLogService: dnsLogService, dnsTrackerService: dnsTrackersService, dnsFiltersService: dnsFiltersService)
+        requestsModel = DnsRequestLogViewModel(dnsTrackerService: dnsTrackersService, dnsFiltersService: dnsFiltersService)
         super.init(coder: coder)
     }
     

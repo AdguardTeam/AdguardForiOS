@@ -18,7 +18,6 @@
 #import <AGDnsProxy/AGDnsProxy.h>
 #import "ADBTableRow.h"
 #import "ADBTable.h"
-#import "APDnsLogTable.h"
 #import "ACNIPUtils.h"
 #import "ADLocales.h"
 #import "APCommonSharedResources.h"

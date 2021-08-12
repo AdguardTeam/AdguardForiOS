@@ -44,14 +44,12 @@ protocol ActivityStatisticsModelProtocol {
 
 class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
     
-    private let activityStatisticsService: ActivityStatisticsServiceProtocol
     private let dnsTrackersService: DnsTrackerServiceProtocol
     private let domainsParserService: DomainsParserServiceProtocol
     
     private let workingQueue = DispatchQueue(label: "ActivityStatisticsModel queue", qos: .userInitiated)
     
-    init(activityStatisticsService: ActivityStatisticsServiceProtocol, dnsTrackersService: DnsTrackerServiceProtocol, domainsParserService: DomainsParserServiceProtocol) {
-        self.activityStatisticsService = activityStatisticsService
+    init(dnsTrackersService: DnsTrackerServiceProtocol, domainsParserService: DomainsParserServiceProtocol) {
         self.dnsTrackersService = dnsTrackersService
         self.domainsParserService = domainsParserService
     }
@@ -60,40 +58,39 @@ class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
         workingQueue.async {[weak self] in
             
             guard let self = self else { return }
-            let records = self.activityStatisticsService.getRecords(by: type)
             var recordsByCompanies: [String : CompanyRequestsRecord] = [:]
             var companiesNumber = 0
             let parser = self.domainsParserService.domainsParser
-                
-            for record in records {
-                let company = self.dnsTrackersService.getTrackerInfo(by: record.domain)?.name
-                let domain = parser?.parse(host: record.domain)?.domain ?? record.domain
-                let key = company ?? domain
-                
-                if let existingRecord = recordsByCompanies[key] {
-                    existingRecord.requests += record.requests
-                    existingRecord.encrypted += record.encrypted
-                    existingRecord.domains.insert(record.domain)
-                } else {
-                    let requestRecord = CompanyRequestsRecord(company: company, key: key, requests: record.requests, encrypted: record.encrypted)
-                    requestRecord.domains.insert(record.domain)
-                    recordsByCompanies[key] = requestRecord
-                    
-                    /* We count unique domains as companies if a company wasn't found by domain */
-                    companiesNumber += 1
-                }
-            }
-                
-            let recordsArray = Array(recordsByCompanies.values)
-            let mostRequested = recordsArray.sorted(by: {
-                if $0.requests != $1.requests {
-                    return $0.requests > $1.requests
-                } else {
-                    return $0.key < $1.key
-                }
-            })
-                
-            let info = CompaniesInfo(mostRequested: mostRequested, companiesNumber: companiesNumber)
+//
+//            for record in records {
+//                let company = self.dnsTrackersService.getTrackerInfo(by: record.domain)?.name
+//                let domain = parser?.parse(host: record.domain)?.domain ?? record.domain
+//                let key = company ?? domain
+//
+//                if let existingRecord = recordsByCompanies[key] {
+//                    existingRecord.requests += record.requests
+//                    existingRecord.encrypted += record.encrypted
+//                    existingRecord.domains.insert(record.domain)
+//                } else {
+//                    let requestRecord = CompanyRequestsRecord(company: company, key: key, requests: record.requests, encrypted: record.encrypted)
+//                    requestRecord.domains.insert(record.domain)
+//                    recordsByCompanies[key] = requestRecord
+//
+//                    /* We count unique domains as companies if a company wasn't found by domain */
+//                    companiesNumber += 1
+//                }
+//            }
+//
+//            let recordsArray = Array(recordsByCompanies.values)
+//            let mostRequested = recordsArray.sorted(by: {
+//                if $0.requests != $1.requests {
+//                    return $0.requests > $1.requests
+//                } else {
+//                    return $0.key < $1.key
+//                }
+//            })
+//
+            let info = CompaniesInfo(mostRequested: [], companiesNumber: 0)
             completion(info)
         }
     }

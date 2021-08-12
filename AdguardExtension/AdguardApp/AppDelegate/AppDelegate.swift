@@ -56,9 +56,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var userNotificationService: UserNotificationServiceProtocol
     private var vpnManager: VpnManagerProtocol
     private var setappService: SetappServiceProtocol
-    private var activityStatisticsService: ActivityStatisticsServiceProtocol
-    private var dnsStatisticsService: DnsStatisticsServiceProtocol
-    private var dnsLogRecordsService: DnsLogRecordsServiceProtocol
     private var rateService: RateAppServiceProtocol
     private var complexProtection: ComplexProtectionServiceProtocol
     private var themeService: ThemeServiceProtocol
@@ -76,9 +73,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.userNotificationService = ServiceLocator.shared.getService()!
         self.vpnManager = ServiceLocator.shared.getService()!
         self.setappService = ServiceLocator.shared.getService()!
-        self.activityStatisticsService = ServiceLocator.shared.getService()!
-        self.dnsStatisticsService = ServiceLocator.shared.getService()!
-        self.dnsLogRecordsService = ServiceLocator.shared.getService()!
         self.rateService = ServiceLocator.shared.getService()!
         self.complexProtection = ServiceLocator.shared.getService()!
         self.themeService = ServiceLocator.shared.getService()!
@@ -187,9 +181,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                              vpnManager: vpnManager,
                                              resources: resources,
                                              purchaseService: purchaseService,
-                                             activityStatisticsService: activityStatisticsService,
-                                             dnsStatisticsService: dnsStatisticsService,
-                                             dnsLogRecordsService: dnsLogRecordsService,
                                              safariProtection: safariProtection)
         resetProcessor.resetAllSettings()
     }

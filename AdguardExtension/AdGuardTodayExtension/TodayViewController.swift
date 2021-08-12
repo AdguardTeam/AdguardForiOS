@@ -63,14 +63,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     private var complexProtection: ComplexProtectionServiceProtocol
     private let networkService = ACNNetworking()
     private var purchaseService: PurchaseServiceProtocol
-    private let dnsStatisticsService: DnsStatisticsServiceProtocol
     private let dnsProvidersService: DnsProvidersServiceProtocol
     private let productInfo: ADProductInfoProtocol
     
     private var requestNumber = 0
     private var encryptedNumber = 0
-    
-    private var counters: DnsCounters?
     
     // MARK: View Controller lifecycle
     
@@ -98,7 +95,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         purchaseService = PurchaseService(network: networkService, resources: resources, productInfo: productInfo)
         let oldConfiguration = ConfigurationService(purchaseService: purchaseService, resources: resources, safariProtection: safariProtection)
         dnsProvidersService = DnsProvidersService(resources: resources)
-        dnsStatisticsService = DnsStatisticsService(resources: resources)
         let vpnManager = VpnManager(resources: resources, configuration: oldConfiguration, networkSettings: NetworkSettingsService(resources: resources), dnsProviders: dnsProvidersService as! DnsProvidersService)
         
         let networkSettings = NetworkSettingsService(resources: resources)
@@ -121,8 +117,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         extensionContext?.widgetLargestAvailableDisplayMode = .expanded
         
-        counters = dnsStatisticsService.getAllCounters()
-        changeTextForButton(counters: counters)
+        // TODO: - Refactor it
+        changeTextForButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -134,17 +130,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         removeStatisticsObservers()
-    }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        
-        DDLogInfo("(TodayViewController) - observeValue")
-        
-        if keyPath == LastStatisticsSaveTime {
-            counters = dnsStatisticsService.getAllCounters()
-        }
-        
-        changeTextForButton(counters: counters)
     }
         
     // MARK: - NCWidgetProviding methods
@@ -383,13 +368,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     /**
      Changes number of requests for specific button
      */
-    private func changeTextForButton(counters: DnsCounters?){
+    private func changeTextForButton(){
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             
-            let requests = counters?.totalRequests ?? 0
-            let encrypted = counters?.encrypted ?? 0
-            let elapsedSumm = counters?.totalTime ?? 0
+            let requests = 0
+            let encrypted = 0
+            let elapsedSumm = 0
             
             let requestsNumber = self.resources.tempRequestsCount + requests
             self.requestsLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsNumber))

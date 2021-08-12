@@ -141,16 +141,7 @@ final class StartupService : NSObject{
 
         let userNotificationService: UserNotificationServiceProtocol = UserNotificationService()
         locator.addService(service: userNotificationService)
-        
-        let dnsLogService: DnsLogRecordsServiceProtocol = DnsLogRecordsService(resources: sharedResources)
-        locator.addService(service: dnsLogService)
-        
-        let dnsStatisticsService: DnsStatisticsServiceProtocol = DnsStatisticsService(resources: sharedResources)
-        locator.addService(service: dnsStatisticsService)
-        
-        let activityStatisticsService: ActivityStatisticsServiceProtocol = ActivityStatisticsService(resources: sharedResources)
-        locator.addService(service: activityStatisticsService)
-        
+    
         let dnsTrackerService: DnsTrackerServiceProtocol = DnsTrackerService()
         locator.addService(service: dnsTrackerService)
         
@@ -163,7 +154,7 @@ final class StartupService : NSObject{
 //        let migrationService: MigrationServiceProtocol = MigrationService(vpnManager: vpnManager, dnsProvidersService: dnsProviders, resources: sharedResources, antibanner: antibanner, dnsFiltersService: dnsFiltersService, networking: networkService, activityStatisticsService: activityStatisticsService, dnsStatisticsService: dnsStatisticsService, dnsLogService: dnsLogService, configuration: configuration, filtersService: filtersService, productInfo: productInfo, contentBlockerService: contentBlockerService, nativeProviders: nativeProviders, filtersStorage: filtersStorage, safariProtection: safariProtection)
 //        locator.addService(service: migrationService)
         
-        let chartViewModel: ChartViewModelProtocol = ChartViewModel(dnsStatisticsService, resources: sharedResources)
+        let chartViewModel: ChartViewModelProtocol = ChartViewModel(resources: sharedResources)
         locator.addService(service: chartViewModel)
         
         let setappService: SetappServiceProtocol = SetappService(purchaseService: purchaseService, resources: sharedResources)
