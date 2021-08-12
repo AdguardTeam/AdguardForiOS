@@ -62,11 +62,11 @@ class LoginControllerReplace:UIViewController,UITextFieldDelegate
                 self.LoginSocial(url:DOMAIN_LOGIN_WITH_FACEBOOK,token: (AccessToken.current?.tokenString)!)
             }
         }
-//        GIDSignIn.sharedInstance()?.presentingViewController = self
-//        NotificationCenter.default.addObserver(self,
-//                                               selector: #selector(userDidSignInGoogle(_:)),
-//                                               name: .signInGoogleCompleted,
-//                                               object: nil)
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(userDidSignInGoogle(_:)),
+                                               name: .signInGoogleCompleted,
+                                               object: nil)
     }
     @IBAction func btn_register(_ sender: UIButton) {
         let secondVC = self.storyboard?.instantiateViewController(withIdentifier: "register_controller")
@@ -123,8 +123,18 @@ class LoginControllerReplace:UIViewController,UITextFieldDelegate
     }
     
     @objc func tapGmailFunction (sender:UITapGestureRecognizer) {
-//        GIDSignIn.sharedInstance.delegate = self
-//        GIDSignIn.sharedInstance.signIn()
+//        GIDSignIn.sharedInstance().delegate = self
+//        GIDSignIn.sharedInstance()?.signIn()
+        let signInConfig = GIDConfiguration.init(clientID: "364533202921-h0510keg49fuo2okdgopo48mato4905d.apps.googleusercontent.com")
+        GIDSignIn.sharedInstance.signIn(
+            with: signInConfig,
+            presenting: self
+        ) { user, error in
+            guard error == nil else { return }
+            guard let user = user else { return }
+            let idToken = user.authentication.idToken // Safe to send to the server
+            self.LoginSocial(url:DOMAIN_LOGIN_WITH_GMAIL,token: idToken!)
+        }
     }
     @objc private func userDidSignInGoogle(_ notification: Notification) {
            // Update screen after user successfully signed in

@@ -79,13 +79,10 @@ class LoginController:UIViewController, UITextFieldDelegate
                 self.LoginWithFacebook(url:DOMAIN_LOGIN_WITH_FACEBOOK,token: (AccessToken.current?.tokenString)!)
             }
         }
-//        GIDSignIn.sharedInstance()?.presentingViewController = self
-//               
-//       // Register notification to update screen after user successfully signed in
-//       NotificationCenter.default.addObserver(self,
-//                                              selector: #selector(userDidSignInGoogle(_:)),
-//                                              name: .signInGoogleCompleted,
-//                                              object: nil)
+       NotificationCenter.default.addObserver(self,
+                                              selector: #selector(userDidSignInGoogle(_:)),
+                                              name: .signInGoogleCompleted,
+                                              object: nil)
         
        
     }
@@ -96,8 +93,8 @@ class LoginController:UIViewController, UITextFieldDelegate
         self.present(secondVC!, animated: true,completion: nil)
     }
     @objc private func userDidSignInGoogle(_ notification: Notification) {
-           // Update screen after user successfully signed in
            print("Login gmail successfully")
+            
        }
     @objc func tapFacebookFunction (sender:UITapGestureRecognizer) {
         let loginManager = LoginManager()
@@ -121,6 +118,16 @@ class LoginController:UIViewController, UITextFieldDelegate
     @objc func tapGmailFunction (sender:UITapGestureRecognizer) {
 //        GIDSignIn.sharedInstance().delegate = self
 //        GIDSignIn.sharedInstance()?.signIn()
+        let signInConfig = GIDConfiguration.init(clientID: "364533202921-h0510keg49fuo2okdgopo48mato4905d.apps.googleusercontent.com")
+        GIDSignIn.sharedInstance.signIn(
+            with: signInConfig,
+            presenting: self
+        ) { user, error in
+            guard error == nil else { return }
+            guard let user = user else { return }
+            let idToken = user.authentication.idToken // Safe to send to the server
+            self.LoginWithFacebook(url:DOMAIN_LOGIN_WITH_GMAIL,token: idToken!)
+        }
     }
 
     @objc func tapAppleFunction (sender:UITapGestureRecognizer) {
@@ -415,7 +422,7 @@ extension UIViewController: ASAuthorizationControllerDelegate, ASAuthorizationCo
                         if httpResponse.statusCode == 200{
                            let new_token = json["token"]
                             Core.shared.setIsNotNewUser()
-                           StoreData.saveMyPlist(key: "token_login", value: new_token)
+                            StoreData.saveMyPlist(key: "token_login", value: new_token)
                             let storyboard = UIStoryboard(name: "Main", bundle: nil)
                             let vc = storyboard.instantiateViewController(withIdentifier: "tabbar_main") as! TabBarController
                             vc.modalPresentationStyle = .fullScreen
