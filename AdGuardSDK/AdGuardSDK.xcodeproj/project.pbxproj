@@ -385,6 +385,10 @@
 		7EAD354E26C2DAA1001AFB3A /* schema.sql in Resources */ = {isa = PBXBuildFile; fileRef = 7E6E80CC26C2A05200925F96 /* schema.sql */; };
 		7EAD355026C2E293001AFB3A /* FiltersService+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAD354F26C2E293001AFB3A /* FiltersService+Builder.swift */; };
 		7EAD355126C2E293001AFB3A /* FiltersService+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAD354F26C2E293001AFB3A /* FiltersService+Builder.swift */; };
+		7ED0B19D26C4269600B0CE7B /* Constants+Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B19C26C4269600B0CE7B /* Constants+Files.swift */; };
+		7ED0B19E26C4269600B0CE7B /* Constants+Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B19C26C4269600B0CE7B /* Constants+Files.swift */; };
+		7ED0B19F26C4269600B0CE7B /* Constants+Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B19C26C4269600B0CE7B /* Constants+Files.swift */; };
+		7ED0B1A026C426C500B0CE7B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E806026C2A04100925F96 /* Constants.swift */; };
 		D049EE8726B2F23B00B8088B /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = D049EE8626B2F23B00B8088B /* SQLite */; };
 		D049EE9B26B2F31A00B8088B /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049EB9426B17C0A00B8088B /* Dictionary+Utils.swift */; };
 		D049EE9E26B2F33200B8088B /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049EB9326B17C0A00B8088B /* CharacterSet+Utils.swift */; };
@@ -592,6 +596,7 @@
 		7EAD352126C2C1C0001AFB3A /* AdGuardSDKBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdGuardSDKBuilder.swift; sourceTree = "<group>"; };
 		7EAD352226C2C1C0001AFB3A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7EAD354F26C2E293001AFB3A /* FiltersService+Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FiltersService+Builder.swift"; sourceTree = "<group>"; };
+		7ED0B19C26C4269600B0CE7B /* Constants+Files.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+Files.swift"; sourceTree = "<group>"; };
 		D049EA9626B17B7900B8088B /* NotificationCenter+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+Utils.swift"; sourceTree = "<group>"; };
 		D049EB9326B17C0A00B8088B /* CharacterSet+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CharacterSet+Utils.swift"; path = "../Libs/Utils/CharacterSet+Utils.swift"; sourceTree = "<group>"; };
 		D049EB9426B17C0A00B8088B /* Dictionary+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Dictionary+Utils.swift"; path = "../Libs/Utils/Dictionary+Utils.swift"; sourceTree = "<group>"; };
@@ -1065,6 +1070,7 @@
 				7E6E810126C2A05200925F96 /* SafariProtection+Filters.swift */,
 				7E6E810226C2A05200925F96 /* ServicesStorage.swift */,
 				7E6E810326C2A05200925F96 /* SafariConfiguration.swift */,
+				7ED0B19C26C4269600B0CE7B /* Constants+Files.swift */,
 			);
 			path = SafariProtection;
 			sourceTree = "<group>";
@@ -1618,6 +1624,7 @@
 				7E6E815D26C2A05300925F96 /* SafariProtection+Configuration.swift in Sources */,
 				7E6E816326C2A05300925F96 /* SafariProtection+Filters.swift in Sources */,
 				7E6E816B26C2A05300925F96 /* InvertedAllowlistRuleConverter.swift in Sources */,
+				7ED0B19F26C4269600B0CE7B /* Constants+Files.swift in Sources */,
 				7E6E81E426C2A05B00925F96 /* CustomDnsProvidersStorage.swift in Sources */,
 				7E6E812F26C2A05300925F96 /* MetaStorage.swift in Sources */,
 				7E6E812126C2A05300925F96 /* FiltersLocalizationsRequest.swift in Sources */,
@@ -1739,6 +1746,7 @@
 				7E6E815426C2A05300925F96 /* ContentBlockersManager.swift in Sources */,
 				7E6E814E26C2A05300925F96 /* FiltersService.swift in Sources */,
 				7E6E816A26C2A05300925F96 /* InvertedAllowlistRuleConverter.swift in Sources */,
+				7ED0B19D26C4269600B0CE7B /* Constants+Files.swift in Sources */,
 				7E6E815C26C2A05300925F96 /* SafariProtection+Configuration.swift in Sources */,
 				7E6E812C26C2A05300925F96 /* ExtendedFiltersMetaLocalizations.swift in Sources */,
 				7E6E813A26C2A05300925F96 /* MetaStorage+FitlerRules.swift in Sources */,
@@ -1845,6 +1853,7 @@
 				7EAD350926C2B7E5001AFB3A /* RequestsFactory.swift in Sources */,
 				7EAD350F26C2B837001AFB3A /* MetaStorage+Langs.swift in Sources */,
 				7EAD34FB26C2B4F3001AFB3A /* DefaultDatabaseManager.swift in Sources */,
+				7ED0B19E26C4269600B0CE7B /* Constants+Files.swift in Sources */,
 				7EAD355026C2E293001AFB3A /* FiltersService+Builder.swift in Sources */,
 				7EAD350626C2B7C2001AFB3A /* SafariGroup+GroupType.swift in Sources */,
 				7EAD34F826C2B486001AFB3A /* SafariProtectionApiMethods.swift in Sources */,
@@ -1866,6 +1875,7 @@
 				D049EE9E26B2F33200B8088B /* CharacterSet+Utils.swift in Sources */,
 				7EAD350D26C2B80F001AFB3A /* MetaStorage+FiltersLocalizations.swift in Sources */,
 				7EAD350526C2B7BB001AFB3A /* SafariGroup+Filter.swift in Sources */,
+				7ED0B1A026C426C500B0CE7B /* Constants.swift in Sources */,
 				7EAD350026C2B51C001AFB3A /* CustomFilterMetaParser.swift in Sources */,
 				7EAD34FA26C2B4DF001AFB3A /* Logger.swift in Sources */,
 				7EAD34F526C2B456001AFB3A /* ProductionDatabaseManager.swift in Sources */,
@@ -2105,7 +2115,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MACOSX_DEPLOYMENT_TARGET = 11.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.adguard.AdGuardSDK-mac";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;
@@ -2133,7 +2143,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MACOSX_DEPLOYMENT_TARGET = 11.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.adguard.AdGuardSDK-mac";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;

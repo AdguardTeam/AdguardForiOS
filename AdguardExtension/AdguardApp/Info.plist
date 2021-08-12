@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>SharedResourcesGroup</key>
+	<string>$(ADGUARD_SHARED_RESOURCES_GROUP)</string>
 	<key>CFBundleDisplayName</key>
 	<string>$(AG_PRODUCT)</string>
 	<key>CFBundleExecutable</key>

@@ -69,25 +69,25 @@ class UserFilterModel: ListOfRulesModelProtocol {
     // MARK: - Titles variables
     var title: String {
         get {
-            return ACLocalizedString("safari_userfilter_title", nil)
+            return String.localizedString("safari_userfilter_title")
         }
     }
     
     var leftButtonTitle: String {
         get {
-            return ACLocalizedString("common_clear", nil)
+            return String.localizedString("common_clear")
         }
     }
     
     var middleButtonTitle: String {
         get {
-            return ACLocalizedString("common_save", nil)
+            return String.localizedString("common_save")
         }
     }
 
     var helperLabelText: String {
         get {
-            return ACLocalizedString("user_filter_helper", nil)
+            return String.localizedString("user_filter_helper")
         }
     }
     

@@ -34,7 +34,7 @@ fileprivate final class BuilderDbManager: ProductionDatabaseManagerProtocol {
     let filtersDb: Connection
     
     init(dbContainerFolderUrl: URL) {
-        let dbPath = dbContainerFolderUrl.appendingPathComponent("default.db").absoluteString
+        let dbPath = dbContainerFolderUrl.appendingPathComponent(Constants.Files.defaultDbFileName).absoluteString
         
         let filePaths = try! FileManager.default.contentsOfDirectory(atPath: dbContainerFolderUrl.path)
         for filePath in filePaths {

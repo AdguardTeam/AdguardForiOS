@@ -18,7 +18,7 @@
 
 import Foundation
 
-extension URL {
+public extension URL {
     // Return true if URL is directory and if it exists
     var isDirectory: Bool {
         var urlIsDirectory = ObjCBool(true)

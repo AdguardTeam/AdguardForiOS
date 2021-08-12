@@ -75,11 +75,9 @@ extension FiltersService: FiltersServiceForBuilderProtocol {
         let allFiltersMeta = meta.filters
         
         // Update Groups meta
-        if !allGroupsMeta.isEmpty {
-            try metaStorage.update(groups: allGroupsMeta)
-        }
-        
-        let _ = add(filters: allFiltersMeta)
+        try metaStorage.add(groups: allGroupsMeta)
+        let addedIds = add(filters: allFiltersMeta)
+        assert(addedIds.count == allFiltersMeta.count, "Feels like some filters failed to load")
     }
     
     /* Updates filters and groups localizations in database that were downloaded */

@@ -18,5 +18,13 @@
 
 import Foundation
 
-public struct Constants {
+extension FileManager {
+    /// Native method `copyItem` throws an error if file already exists
+    /// So this method is a workaround for this problem
+    func copyOrReplace(at srcURL: URL, to dstURL: URL) throws {
+        if self.fileExists(atPath: dstURL.path) {
+            try self.removeItem(at: dstURL)
+        }
+        try copyItem(at: srcURL, to: dstURL)
+    }
 }

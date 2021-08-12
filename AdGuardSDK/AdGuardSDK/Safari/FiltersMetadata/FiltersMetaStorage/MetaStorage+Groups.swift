@@ -17,7 +17,7 @@
 */
 
 import Foundation
-import SQLite
+@_implementationOnly import SQLite
 
 /* FilterGroupsTable; filter_groups table */
 struct FilterGroupsTable: Equatable {
@@ -67,6 +67,7 @@ protocol GroupsMetaStorageProtocol {
     func setGroup(withId id: Int, enabled: Bool) throws
     func update(group: GroupMetaProtocol) throws
     func update(groups: [GroupMetaProtocol]) throws
+    func add(groups: [GroupMetaProtocol]) throws
 }
 
 extension MetaStorage: GroupsMetaStorageProtocol {
@@ -112,5 +113,19 @@ extension MetaStorage: GroupsMetaStorageProtocol {
     // Updates passed groups meta
     func update(groups: [GroupMetaProtocol]) throws {
         try groups.forEach { try update(group: $0) }
+    }
+    
+    /// Adds group to DB
+    /// This methods should be used only in `Builder`
+    func add(groups: [GroupMetaProtocol]) throws {
+        try groups.forEach {
+            let query = FilterGroupsTable.table.insert(or: .replace, [
+                FilterGroupsTable.groupId <- $0.groupId,
+                FilterGroupsTable.name <- $0.groupName,
+                FilterGroupsTable.displayNumber <- $0.displayNumber,
+                FilterGroupsTable.isEnabled <- false
+            ])
+            try filtersDb.run(query)
+        }
     }
 }

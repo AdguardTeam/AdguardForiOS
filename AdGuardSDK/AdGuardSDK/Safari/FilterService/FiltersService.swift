@@ -572,6 +572,7 @@ final class FiltersService: FiltersServiceProtocol {
         let group = DispatchGroup()
         let allFilters = groupsAtomic.flatMap { $0.filters }
         
+        // TODO: - Write tests for it
         guard allFilters.count > 0 else {
             onFilesUpdated(([], []))
             return

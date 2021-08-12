@@ -45,6 +45,8 @@ final class ServicesStorage: ServicesStorageProtocol {
          jsonStorageUrl: URL) throws
     {
         let filterFilesStorage = try FilterFilesStorage(filterFilesDirectoryUrl: filterFilesDirectoryUrl)
+        try filterFilesStorage.unzipPredefinedFiltersIfNeeded()
+        
         let productionDbManager = try ProductionDatabaseManager(dbContainerUrl: dbContainerUrl)
         let metaStorage = MetaStorage(productionDbManager: productionDbManager)
         let apiMethods = SafariProtectionApiMethods()

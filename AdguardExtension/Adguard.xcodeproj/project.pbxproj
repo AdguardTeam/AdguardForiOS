@@ -665,6 +665,9 @@
 		7EB55270242247E2000498CC /* ActivityStatisticsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB5526F242247E2000498CC /* ActivityStatisticsModel.swift */; };
 		7EB6286E235DED7B00E3FCC1 /* NetworkSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */; };
 		7EB638E023462E5600260A3C /* DnsContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB638DF23462E5600260A3C /* DnsContainerController.swift */; };
+		7EB89CB026C50C5F00E7C8A1 /* FileManager+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB89CAF26C50C5F00E7C8A1 /* FileManager+Utils.swift */; };
+		7EB89CB126C50C5F00E7C8A1 /* FileManager+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB89CAF26C50C5F00E7C8A1 /* FileManager+Utils.swift */; };
+		7EB89CB226C50C5F00E7C8A1 /* FileManager+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB89CAF26C50C5F00E7C8A1 /* FileManager+Utils.swift */; };
 		7EBEC6DE25501A89004A753D /* DnsProvidersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBEC6DD25501A89004A753D /* DnsProvidersModel.swift */; };
 		7EBEC6DF25501A89004A753D /* DnsProvidersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBEC6DD25501A89004A753D /* DnsProvidersModel.swift */; };
 		7EC1F9E32391175600210959 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */; };
@@ -723,6 +726,14 @@
 		7ECD9C63238E6E2E0065E88D /* ADLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8C1BB9824C00F53F3B /* ADLocations.m */; };
 		7ECEBEF22359D0210007D0C1 /* NetworkSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */; };
 		7ECF38BB23AA43A300A39094 /* DnsLogContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECF38BA23AA43A300A39094 /* DnsLogContainerController.swift */; };
+		7ED0B19626C40DCA00B0CE7B /* Setapp in Frameworks */ = {isa = PBXBuildFile; productRef = D093AA5F25344B4E0015351F /* Setapp */; };
+		7ED0B19726C40DCA00B0CE7B /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = A5E02630261E330900198396 /* AGDnsProxy */; };
+		7ED0B19926C4220900B0CE7B /* PreloadedFilesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B19826C4220900B0CE7B /* PreloadedFilesManager.swift */; };
+		7ED0B19A26C4220900B0CE7B /* PreloadedFilesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B19826C4220900B0CE7B /* PreloadedFilesManager.swift */; };
+		7ED0B19B26C4220900B0CE7B /* PreloadedFilesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B19826C4220900B0CE7B /* PreloadedFilesManager.swift */; };
+		7ED0B1A226C4334D00B0CE7B /* SharedStorageUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B1A126C4334D00B0CE7B /* SharedStorageUrls.swift */; };
+		7ED0B1A326C4334D00B0CE7B /* SharedStorageUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B1A126C4334D00B0CE7B /* SharedStorageUrls.swift */; };
+		7ED0B1A426C4334D00B0CE7B /* SharedStorageUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B1A126C4334D00B0CE7B /* SharedStorageUrls.swift */; };
 		7ED0D64D23D593D2004D9E7C /* UIButton+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0D64C23D593D2004D9E7C /* UIButton+Utils.swift */; };
 		7ED0D64F23D59797004D9E7C /* UIButton+UtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0D64E23D59797004D9E7C /* UIButton+UtilsTest.swift */; };
 		7ED0D65023D598A1004D9E7C /* UIButton+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0D64C23D593D2004D9E7C /* UIButton+Utils.swift */; };
@@ -3269,6 +3280,7 @@
 		7EB5526C24224755000498CC /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		7EB5526F242247E2000498CC /* ActivityStatisticsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStatisticsModel.swift; sourceTree = "<group>"; };
 		7EB638DF23462E5600260A3C /* DnsContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsContainerController.swift; sourceTree = "<group>"; };
+		7EB89CAF26C50C5F00E7C8A1 /* FileManager+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Utils.swift"; sourceTree = "<group>"; };
 		7EBEC6DD25501A89004A753D /* DnsProvidersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersModel.swift; sourceTree = "<group>"; };
 		7EC3318C234738E400229194 /* BottomShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomShadowView.swift; sourceTree = "<group>"; };
 		7EC35AAE230D8EC100D9B959 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
@@ -3280,6 +3292,8 @@
 		7ECCCC1C2372D33500FA651F /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
 		7ECD9C59238D6E980065E88D /* AdGuardTodayExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AdGuardTodayExtension.entitlements; sourceTree = "<group>"; };
 		7ECF38BA23AA43A300A39094 /* DnsLogContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsLogContainerController.swift; sourceTree = "<group>"; };
+		7ED0B19826C4220900B0CE7B /* PreloadedFilesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreloadedFilesManager.swift; sourceTree = "<group>"; };
+		7ED0B1A126C4334D00B0CE7B /* SharedStorageUrls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStorageUrls.swift; sourceTree = "<group>"; };
 		7ED0D64C23D593D2004D9E7C /* UIButton+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Utils.swift"; sourceTree = "<group>"; };
 		7ED0D64E23D59797004D9E7C /* UIButton+UtilsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+UtilsTest.swift"; sourceTree = "<group>"; };
 		7ED3D36D23CCD5480014734A /* BlockRequestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockRequestController.swift; sourceTree = "<group>"; };
@@ -3753,8 +3767,7 @@
 				655AAC9E1D379E9C00E316EA /* libresolv.tbd in Frameworks */,
 				6598869D1CF74DE9003ECD1C /* AVKit.framework in Frameworks */,
 				6598869E1CF74DE9003ECD1C /* MessageUI.framework in Frameworks */,
-				A5E02631261E330900198396,
-				D04820B125402270000FA31A,
+				7ED0B19626C40DCA00B0CE7B /* Setapp in Frameworks */,
 				6598869F1CF74DE9003ECD1C /* Social.framework in Frameworks */,
 				D0D7E53224371896001801A5 /* Security.framework in Frameworks */,
 				65D829501EDDA92A008F7F30 /* NetworkExtension.framework in Frameworks */,
@@ -3762,6 +3775,7 @@
 				D0D7E53124371892001801A5 /* libiconv.tbd in Frameworks */,
 				D0B546042435D740002F0AEC /* Lottie in Frameworks */,
 				7EAD353026C2C8C8001AFB3A /* SafariAdGuardSDK.framework in Frameworks */,
+				7ED0B19726C40DCA00B0CE7B /* AGDnsProxy in Frameworks */,
 				659886A01CF74DE9003ECD1C /* JavaScriptCore.framework in Frameworks */,
 				659886A11CF74DE9003ECD1C /* libz.tbd in Frameworks */,
 				7EF5C56426C26AC0001851D6 /* Sentry in Frameworks */,
@@ -4997,6 +5011,15 @@
 			path = ChartView;
 			sourceTree = "<group>";
 		};
+		7ED0B1A526C4335700B0CE7B /* NewObjects */ = {
+			isa = PBXGroup;
+			children = (
+				7ED0B19826C4220900B0CE7B /* PreloadedFilesManager.swift */,
+				7ED0B1A126C4334D00B0CE7B /* SharedStorageUrls.swift */,
+			);
+			path = NewObjects;
+			sourceTree = "<group>";
+		};
 		7ED595D7259B25EC00608222 /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -5146,6 +5169,7 @@
 				D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */,
 				247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */,
 				24ED98C5259B78DF00A73B17 /* Array+Utils.swift */,
+				7EB89CAF26C50C5F00E7C8A1 /* FileManager+Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -5434,6 +5458,7 @@
 				7E8576752435F57F0055F63D /* DomainsParserService.swift */,
 				7EA216392444847700393949 /* MigrationService.swift */,
 				D0984F992608866900703DB2 /* MigrationService+AntibannerMigration.swift */,
+				7ED0B1A526C4335700B0CE7B /* NewObjects */,
 				7EC67FB5254843B300FEEEE2 /* NativeDnsService */,
 			);
 			path = Services;
@@ -6190,11 +6215,11 @@
 			mainGroup = 65F398081B7B684700ABCD39;
 			packageReferences = (
 				7E2522122408201700743648 /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */,
-				7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */,
+				D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */,
+				7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */,
 				A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */,
 				D0BDB5F6263073C8007D9BC6 /* XCRemoteSwiftPackageReference "SafariConverterLib" */,
-				D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */,
+				D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */,
 				7EF5C55E26C269D6001851D6 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 			);
 			productRefGroup = 65F398121B7B684700ABCD39 /* Products */;
@@ -6519,7 +6544,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "\nRESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\n\n#find \"${BUILDER_RESOURCES_DIR}\" -name \"schema*.sql\" | xargs -J % cp % \"${RESOURCES}\"\necho \"Attempting find DB update script and coping.. \"\nfind \"${BUILDER_RESOURCES_DIR}\" -name \"update*.sql\" -depth 1 -print0 | xargs -0 -J % cp -v \"%\" \"${RESOURCES}\"\necho \"Done\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/schema.sql\" \"${RESOURCES}\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/default.db.gz\" \"${RESOURCES}\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/\"*.txt \"${RESOURCES}\"\n";
+			shellScript = "set -x\nRESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\n\necho \"Copying DB and filters files to ${RESOURCES}\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/default.db.zip\" \"${RESOURCES}\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/filters.zip\" \"${RESOURCES}\"\n\necho \"DB and filters files were successfully copied to ${RESOURCES}\"\n";
 		};
 		659C60D71B8B514D0081EBE3 /* Copy DB Resources (Custom Script) */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -6533,7 +6558,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "set -x\nRESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\n\necho \"Attempting find DB update script and coping.. \"\nfind \"${BUILDER_RESOURCES_DIR}\" -name \"update*.sql\" -depth 1 -print0 | xargs -0 -J % cp -v \"%\" \"${RESOURCES}\"\necho \"Done\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/schema.sql\" \"${RESOURCES}\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/default.db.gz\" \"${RESOURCES}\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/\"*.txt \"${RESOURCES}\"\n";
+			shellScript = "set -x\nRESOURCES=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}\"\n\necho \"Copying DB and filters files to ${RESOURCES}\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/default.db.zip\" \"${RESOURCES}\"\n\ncp -v \"${BUILDER_RESOURCES_DIR}/filters.zip\" \"${RESOURCES}\"\n\necho \"DB and filters files were successfully copied to ${RESOURCES}\"\n";
 		};
 		65D04F7E1C873029001A9A02 /* Build javascript components */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -6851,6 +6876,7 @@
 				D031A178219EFC99002C17D9 /* DDFileLogger.m in Sources */,
 				D0B545A22435D640002F0AEC /* NetworkSettingsTableController.swift in Sources */,
 				D0B545712435D5CD002F0AEC /* NetworkSettingsModel.swift in Sources */,
+				7ED0B19A26C4220900B0CE7B /* PreloadedFilesManager.swift in Sources */,
 				D0B545B32435D650002F0AEC /* FiltersMasterController.swift in Sources */,
 				D0D7E5EB24444ED5001801A5 /* RulesParser.swift in Sources */,
 				24AD872E260A247B0034D402 /* RadioButton.swift in Sources */,
@@ -6959,6 +6985,7 @@
 				D0D7E598243C5523001801A5 /* APBlockingSubscription.m in Sources */,
 				D06E6BD525E8F6000069013C /* VpnConfigurationStatus.swift in Sources */,
 				24D6A9F625FB7A6300674D11 /* SettingsResetor.swift in Sources */,
+				7EB89CB126C50C5F00E7C8A1 /* FileManager+Utils.swift in Sources */,
 				655611771E5C485000F39A7C /* NSData+GZIP.m in Sources */,
 				D0B545C62435D663002F0AEC /* ContentBlockerStateDataSource.swift in Sources */,
 				D0D7E53324371A63001801A5 /* ACDnsUtils.m in Sources */,
@@ -6988,6 +7015,7 @@
 				6598867D1CF74DE9003ECD1C /* FMResultSet.m in Sources */,
 				7E8D423D258CC52100B6300E /* DnsProviders+Migrations.swift in Sources */,
 				D0B5459F2435D63D002F0AEC /* GetProDialogView.swift in Sources */,
+				7ED0B1A326C4334D00B0CE7B /* SharedStorageUrls.swift in Sources */,
 				D0B5458D2435D630002F0AEC /* KeychainService.swift in Sources */,
 				7E4CC01A2577DE47005ADBCA /* BugReportController.swift in Sources */,
 				D0B5459C2435D63D002F0AEC /* MainPageModel.swift in Sources */,
@@ -7348,6 +7376,7 @@
 				D031A147219EFC99002C17D9 /* DDLog.m in Sources */,
 				7EF75A6D234B6010006ED3E5 /* DnsTrackerService.swift in Sources */,
 				655A027F1C6B7686000F00D7 /* NSString+Utils.m in Sources */,
+				7ED0B1A226C4334D00B0CE7B /* SharedStorageUrls.swift in Sources */,
 				D0F91167212EDE7C006DF0D3 /* FiltersController.swift in Sources */,
 				7E0B226125DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift in Sources */,
 				D0319FA021947808002C17D9 /* BottomAlertController.swift in Sources */,
@@ -7468,6 +7497,7 @@
 				D031A12B219EFC99002C17D9 /* DDDispatchQueueLogFormatter.m in Sources */,
 				7EB55270242247E2000498CC /* ActivityStatisticsModel.swift in Sources */,
 				7ED595D9259B263C00608222 /* DnsResolver.swift in Sources */,
+				7EB89CB026C50C5F00E7C8A1 /* FileManager+Utils.swift in Sources */,
 				7EF005E3239929FC00047073 /* ComplexProtectionService.swift in Sources */,
 				7E1022CE23E1655A00604C90 /* DnsRequestDetailsController.swift in Sources */,
 				7E1E415A2424C01100567C8D /* MostActiveCompaniesCell.swift in Sources */,
@@ -7489,6 +7519,7 @@
 				7EA2163A2444847700393949 /* MigrationService.swift in Sources */,
 				D03E532D21B6A3B400C62152 /* ConfigurationServiceProtocol.swift in Sources */,
 				655A02A31C6B7686000F00D7 /* Reachability.m in Sources */,
+				7ED0B19926C4220900B0CE7B /* PreloadedFilesManager.swift in Sources */,
 				24AD872D260A247B0034D402 /* RadioButton.swift in Sources */,
 				7E5FC206234F8395008E383D /* ListOfRulesTableController.swift in Sources */,
 				24D9225B2604B28B002F368B /* AppDelegate+UserNotifications.swift in Sources */,
@@ -7640,6 +7671,7 @@
 				D0288F42230699CF00A4EBEF /* DDLoggerNames.m in Sources */,
 				D0F911932136DAB0006DF0D3 /* PurchaseService.swift in Sources */,
 				D0B27BC3207372CD0073E13C /* ACNUrlUtilsTest.m in Sources */,
+				7ED0B1A426C4334D00B0CE7B /* SharedStorageUrls.swift in Sources */,
 				D0288F372306984A00A4EBEF /* ACLExecuteBlockDelayed.m in Sources */,
 				D0C37ECD22A687980004337D /* DnsLogRecordsWriterProtocol.swift in Sources */,
 				7EE715CB2316765800C03DE9 /* String+UtilsTest.swift in Sources */,
@@ -7661,11 +7693,13 @@
 				D0D7E62A2444C2D1001801A5 /* Bundle+config.swift in Sources */,
 				D0288F3D2306995800A4EBEF /* ACLLogger.m in Sources */,
 				7EF5C55226C26226001851D6 /* SharedResources+Statistics.swift in Sources */,
+				7ED0B19B26C4220900B0CE7B /* PreloadedFilesManager.swift in Sources */,
 				D0D7E62D2444C412001801A5 /* ACSSystemUtils.m in Sources */,
 				D02C080621BEAB2900796714 /* SafariServiceMock.swift in Sources */,
 				D0288F402306998600A4EBEF /* DDTTYLogger.m in Sources */,
 				249E125E2600FFA3003A5FBD /* URLSchemeExecutorMock.swift in Sources */,
 				7E5844D823FD87E900BAD052 /* RateAppServiceTest.swift in Sources */,
+				7EB89CB226C50C5F00E7C8A1 /* FileManager+Utils.swift in Sources */,
 				D0D5949B23AA3CB40033CAF3 /* ADBTableRow.m in Sources */,
 				7E1AB64625824A6600519B2B /* SupportService+Feedback.swift in Sources */,
 				D0C940E623EAE3E4008B85EC /* NetworkSettingsService.swift in Sources */,
@@ -11414,7 +11448,7 @@
 				minimumVersion = 3.1.6;
 			};
 		};
-		7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */ = {
+		7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/marmelroy/Zip.git";
 			requirement = {
@@ -11438,7 +11472,7 @@
 				version = 1.6.25;
 			};
 		};
-		D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */ = {
+		D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MacPaw/Setapp-framework.git";
 			requirement = {
@@ -11446,7 +11480,7 @@
 				minimumVersion = 0.0.3;
 			};
 		};
-		D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */ = {
+		D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
 			requirement = {
@@ -11522,12 +11556,12 @@
 		};
 		D024973D25714928000EED34 /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
 			productName = Setapp;
 		};
 		D06E9BCE268CBD3400E5AB5C /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */;
+			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
 		};
 		D06E9BD5268CC2AD00E5AB5C /* AGDnsProxy */ = {
@@ -11537,212 +11571,212 @@
 		};
 		D06E9BD7268CC2C000E5AB5C /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
 			productName = Setapp;
 		};
 		D06E9BF726906B1F00E5AB5C /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */;
+			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
 		};
 		D06E9BFB26906C6500E5AB5C /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */;
+			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
 		};
 		D06E9BFD26906C6D00E5AB5C /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */;
+			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
 		};
 		D06E9BFF26906C7600E5AB5C /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */;
+			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
 		};
 		D06E9C0126906C7D00E5AB5C /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */;
+			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
 		};
 		D06E9C0326906C8200E5AB5C /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */;
+			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
 		};
 		D06E9C0526906C8700E5AB5C /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */;
+			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
 		};
 		D06E9C0726906C9200E5AB5C /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */;
+			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
 		};
 		D06E9C09269070FE00E5AB5C /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */;
+			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 		D06E9C0D2690717800E5AB5C /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */;
+			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 		D06E9C112690718C00E5AB5C /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */;
+			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 		D06E9C152690719700E5AB5C /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */;
+			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 		D06E9C19269071A100E5AB5C /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */;
+			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 		D06E9C1D269071C200E5AB5C /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */;
+			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 		D06E9C21269071C800E5AB5C /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */;
+			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 		D06E9C25269071D100E5AB5C /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */;
+			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 		D06E9C29269071DE00E5AB5C /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */;
+			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 		D06E9C2D269071DF00E5AB5C /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */;
+			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
 		};
 		D06E9C2F269072B500E5AB5C /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */;
+			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 		D07256AA26BC13AB00654177 /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */;
+			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
 		};
 		D07256AE26BC13CA00654177 /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */;
+			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 		D07256B026BC13F800654177 /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */;
+			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
 		};
 		D07256B226BC140D00654177 /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */;
+			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 		D07256B526BC151900654177 /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */;
+			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
 		};
 		D07256B726BC155300654177 /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */;
+			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
 		};
 		D07256B926BC155900654177 /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */;
+			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
 		};
 		D07256BB26BC155E00654177 /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */;
+			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
 		};
 		D07256BD26BC156500654177 /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */;
+			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
 		};
 		D07256BF26BC156B00654177 /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */;
+			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
 		};
 		D07256C126BC157200654177 /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */;
+			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
 		};
 		D07256C326BC157900654177 /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */;
+			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */;
 			productName = SQLite;
 		};
 		D07256C526BC15B800654177 /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */;
+			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 		D07256C726BC15BF00654177 /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */;
+			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 		D07256C926BC15C900654177 /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */;
+			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 		D07256CB26BC15CD00654177 /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */;
+			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 		D07256CD26BC15D200654177 /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */;
+			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 		D07256CF26BC15D700654177 /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */;
+			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 		D07256D126BC15DB00654177 /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */;
+			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 		D07256D326BC15E000654177 /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */;
+			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 		D093AA5F25344B4E0015351F /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
 			productName = Setapp;
 		};
 		D09E271A2541D00B002D6BC0 /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
 			productName = Setapp;
 		};
 		D0B546032435D740002F0AEC /* Lottie */ = {

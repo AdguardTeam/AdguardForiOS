@@ -17,13 +17,12 @@
  */
 
 import Foundation
-import Accounts
 import SafariAdGuardSDK
 
 /**
  this service initializes all shared services and put them into ServiceLocator
  */
-class StartupService : NSObject{
+final class StartupService : NSObject{
     
     @objc
     static func start() {
@@ -50,13 +49,58 @@ class StartupService : NSObject{
         let purchaseService:PurchaseServiceProtocol = PurchaseService(network: networkService, resources: sharedResources, productInfo: productInfo)
         purchaseService.start()
         locator.addService(service: purchaseService)
+    
+        let sharedUrls = SharedStorageUrls()
+        let preloadedFilesManager = PreloadedFilesManager(sharedStorageUrls: sharedUrls)
+        try! preloadedFilesManager.processPreloadedFiles()
         
-        let safariProtectionConfiguration = SafariConfiguration(currentLanguage: "en", proStatus: purchaseService.isProPurchased, safariProtectionEnabled: sharedResources.safariProtectionEnabled, blocklistIsEnabled: sharedResources.safariUserFilterEnabled, allowlistIsEnbaled: sharedResources.safariWhitelistEnabled, allowlistIsInverted: sharedResources.invertedWhitelist, appBundleId: Bundle.main.bundleIdentifier ?? "", appProductVersion: "", appId: "", cid: "")
+        /* Initializing SDK */
+        let appBundleId = Bundle.main.bundleIdentifier ?? ""
+        let appProductVersion = productInfo.version() ?? ""
+        let currentLanguage = "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")"
+        let appId = Bundle.main.isPro ? "ios_pro" : "ios"
+        let cid = UIDevice.current.identifierForVendor?.uuidString ?? ""
         
-        let safariProtection: SafariProtectionProtocol = try! SafariProtection(configuration: safariProtectionConfiguration, defaultConfiguration: safariProtectionConfiguration, filterFilesDirectoryUrl: sharedResources.sharedResuorcesURL(), dbContainerUrl: sharedResources.sharedResuorcesURL(), jsonStorageUrl: sharedResources.sharedResuorcesURL(), userDefaults: sharedResources.sharedDefaults())
+        let safariProtectionConfiguration = SafariConfiguration(
+            currentLanguage: currentLanguage,
+            proStatus: purchaseService.isProPurchased,
+            safariProtectionEnabled: sharedResources.safariProtectionEnabled,
+            blocklistIsEnabled: sharedResources.safariUserFilterEnabled,
+            allowlistIsEnbaled: sharedResources.safariWhitelistEnabled,
+            allowlistIsInverted: sharedResources.invertedWhitelist,
+            appBundleId: appBundleId,
+            appProductVersion: appProductVersion,
+            appId: appId,
+            cid: cid
+        )
+        
+        let defaultConfiguration = SafariConfiguration(
+            currentLanguage: currentLanguage,
+            proStatus: false,
+            safariProtectionEnabled: true,
+            blocklistIsEnabled: false,
+            allowlistIsEnbaled: false,
+            allowlistIsInverted: false,
+            appBundleId: appBundleId,
+            appProductVersion: appProductVersion,
+            appId: appId,
+            cid: cid
+        )
+        
+        // TODO: - try! is bad
+        let safariProtection: SafariProtectionProtocol = try! SafariProtection(
+            configuration: safariProtectionConfiguration,
+            defaultConfiguration: defaultConfiguration,
+            filterFilesDirectoryUrl: sharedUrls.filtersFolderUrl,
+            dbContainerUrl: sharedUrls.dbFolderUrl,
+            jsonStorageUrl: sharedUrls.cbJsonsFolderUrl,
+            userDefaults: sharedResources.sharedDefaults()
+        )
         
         locator.addService(service: safariProtection)
-    
+        
+        /* End of initializing SDK */
+        
         let configuration: ConfigurationService = ConfigurationService(purchaseService: purchaseService, resources: sharedResources, safariProtection: safariProtection)
         locator.addService(service: configuration)
         
@@ -86,11 +130,6 @@ class StartupService : NSObject{
         let themeService: ThemeServiceProtocol = ThemeService(configuration)
         locator.addService(service: themeService)
         
-        let version = productInfo.version() ?? ""
-        let lang = "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")"
-        let id = Bundle.main.isPro ? "ios_pro" : "ios"
-        let cid = UIDevice.current.identifierForVendor?.uuidString ?? ""
-
         let dnsFiltersService : DnsFiltersServiceProtocol = DnsFiltersService(resources: sharedResources, vpnManager: vpnManager, configuration: configuration, complexProtection: complexProtection)
         locator.addService(service: dnsFiltersService)
         
