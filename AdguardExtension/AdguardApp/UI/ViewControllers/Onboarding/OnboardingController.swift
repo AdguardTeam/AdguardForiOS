@@ -36,7 +36,7 @@ class OnboardingController: UIViewController {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
-    private var contenBlockerObservation: NSKeyValueObservation?
+    private var contenBlockerObserver: NotificationToken?
     
     private let showLicenseSegue = "ShowLicenseSegue"
     private let onboardingCellId = "OnboardingCellId"
@@ -58,9 +58,9 @@ class OnboardingController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        contenBlockerObservation = configuration.observe(\.contentBlockerEnabled) {[weak self] (_, _) in
+        contenBlockerObserver = NotificationCenter.default.observe(name: .contentBlockersStateChanged, object: nil, queue: .main, using: { [weak self] _ in
             self?.observeContentBlockersState()
-        }
+        })
         
         watchManualButtonIpad.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.lightGreen1)
         setupLabels()

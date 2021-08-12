@@ -42,7 +42,7 @@ class DnsRequestDetailsController: UITableViewController {
     private let activityTitleCellId = "ActivityTitleCell"
     
     // MARK: - Notifications
-    private var configurationToken: NSKeyValueObservation?
+    private var advancedModeObserver: NotificationToken?
     
     // MARK: - Services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -78,11 +78,10 @@ class DnsRequestDetailsController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configurationToken = configuration.observe(\.advancedMode) {[weak self] (_, _) in
-            guard let self = self else { return }
-            self.createCellModels()
-            self.tableView.reloadData()
-        }
+        advancedModeObserver = NotificationCenter.default.observe(name: .advancedModeChanged, object: nil, queue: .main, using: { [weak self] _ in
+            self?.createCellModels()
+            self?.tableView.reloadData()
+        })
         
         updateTheme()
     }

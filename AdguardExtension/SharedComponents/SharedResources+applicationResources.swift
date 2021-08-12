@@ -19,6 +19,43 @@
 import Foundation
 
 extension AESharedResourcesProtocol {
+    
+    /// User theme mode of app UI
+    dynamic var themeMode: ThemeMode {
+        get {
+            guard let themeMode = sharedDefaults().object(forKey: AEDefaultsDarkTheme) as? Int else {
+                if #available(iOS 13.0, *){
+                    return .systemDefault
+                } else {
+                    return .light
+                }
+            }
+            return ThemeMode(rawValue: themeMode) ?? .light
+        }
+        set {
+            sharedDefaults().set(newValue.rawValue, forKey: AEDefaultsDarkTheme)
+        }
+    }
+    
+    /// System appearence style
+    dynamic var systemAppearenceIsDark: Bool {
+        get {
+            sharedDefaults().bool(forKey: AEDefaultsSystemAppearenceStyle)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsSystemAppearenceStyle)
+        }
+    }
+    
+    /// Advanced mode state
+    var advancedMode: Bool {
+        get {
+            sharedDefaults().bool(forKey: AEDefaultsDeveloperMode)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsDeveloperMode)
+        }
+    }
 
     dynamic var dnsImplementation: DnsImplementation {
         get {

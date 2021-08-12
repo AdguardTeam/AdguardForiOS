@@ -23,8 +23,8 @@ protocol ThemableProtocol {
 extension AppDelegate {
     
     func subscribeToThemeChangeNotification() {
-        let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: ConfigurationService.themeChangeNotification), object: nil, queue: nil) { [weak self] _ in
+        NotificationCenter.default.addObserver(forName: .themeChanged, object: nil, queue: .main) { [weak self] _ in
+            let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
             self?.window?.backgroundColor = themeService.backgroundColor
             self?.themeChange()
         }

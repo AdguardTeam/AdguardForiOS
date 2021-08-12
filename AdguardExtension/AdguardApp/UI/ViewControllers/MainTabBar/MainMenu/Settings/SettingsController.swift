@@ -248,14 +248,9 @@ class SettingsController: UITableViewController {
     private func updateUI() {
         themeButtons.forEach({ $0.isSelected = false })
         switch configuration.userThemeMode {
-        case AESystemDefaultThemeMode:
-            themeButtons[systemDefault].isSelected = true
-        case AELightThemeMode:
-            themeButtons[light].isSelected = true
-        case AEDarkThemeMode:
-            themeButtons[dark].isSelected = true
-        default:
-            themeButtons[light].isSelected = true
+        case .systemDefault: themeButtons[systemDefault].isSelected = true
+        case .light: themeButtons[light].isSelected = true
+        case .dark: themeButtons[dark].isSelected = true
         }
     }
     
@@ -283,14 +278,10 @@ class SettingsController: UITableViewController {
         themeButtons.forEach({$0.isSelected = false})
         button.isSelected = true
         switch tag {
-        case systemDefault:
-            configuration.userThemeMode = AESystemDefaultThemeMode
-        case dark:
-            configuration.userThemeMode = AEDarkThemeMode
-        case light:
-            configuration.userThemeMode = AELightThemeMode
-        default:
-            configuration.userThemeMode = AELightThemeMode
+        case systemDefault: configuration.userThemeMode = .systemDefault
+        case dark: configuration.userThemeMode = .dark
+        case light: configuration.userThemeMode = .light
+        default: configuration.userThemeMode = .light
         }
         updateTheme()
     }

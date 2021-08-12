@@ -130,7 +130,7 @@ final class StartupService : NSObject{
         let themeService: ThemeServiceProtocol = ThemeService(configuration)
         locator.addService(service: themeService)
         
-        let dnsFiltersService : DnsFiltersServiceProtocol = DnsFiltersService(resources: sharedResources, vpnManager: vpnManager, configuration: configuration, complexProtection: complexProtection)
+        let dnsFiltersService : DnsFiltersServiceProtocol = DnsFiltersService(resources: sharedResources, vpnManager: vpnManager, complexProtection: complexProtection)
         locator.addService(service: dnsFiltersService)
         
         let keyChainService: KeychainServiceProtocol = KeychainService(resources: sharedResources)

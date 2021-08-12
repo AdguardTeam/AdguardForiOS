@@ -26,15 +26,15 @@ class SimpleConfigurationSwift: NSObject, ConfigurationServiceProtocol{
     
     var appRated: Bool = false
     
-    var userThemeMode: AEThemeMode {
-        guard let themeMode = resources.sharedDefaults().object(forKey: AEDefaultsDarkTheme) as? UInt else {
+    var userThemeMode: ThemeMode {
+        guard let themeMode = resources.sharedDefaults().object(forKey: AEDefaultsDarkTheme) as? Int else {
             if #available(iOS 13.0, *) {
-                return AESystemDefaultThemeMode
+                return .systemDefault
             } else {
-                return AELightThemeMode
+                return .light
             }
         }
-        return AEThemeMode.init(themeMode)
+        return ThemeMode(rawValue: themeMode) ?? .light
     }
     
     var systemAppearenceIsDark: Bool = false
@@ -44,14 +44,9 @@ class SimpleConfigurationSwift: NSObject, ConfigurationServiceProtocol{
     
     var darkTheme: Bool {
         switch userThemeMode {
-        case AESystemDefaultThemeMode:
-            return systemAppearenceIsDark
-        case AELightThemeMode:
-            return false
-        case AEDarkThemeMode:
-            return true
-        default:
-            return false
+        case .systemDefault: return systemAppearenceIsDark
+        case .light: return false
+        case .dark: return true
         }
     }
     

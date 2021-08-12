@@ -206,16 +206,13 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     
     private let resources: AESharedResourcesProtocol
     private let vpnManager: VpnManagerProtocol?
-    private let configuration: ConfigurationServiceProtocol
-//    private let parser = AASFilterSubscriptionParser()
     private let complexProtection: ComplexProtectionServiceProtocol?
     
     private let workingQueue = DispatchQueue(label: "Dns filtres queue")
         
-    init(resources: AESharedResourcesProtocol, vpnManager: VpnManagerProtocol?, configuration: ConfigurationServiceProtocol, complexProtection: ComplexProtectionServiceProtocol?) {
+    init(resources: AESharedResourcesProtocol, vpnManager: VpnManagerProtocol?, complexProtection: ComplexProtectionServiceProtocol?) {
         self.resources = resources
         self.vpnManager = vpnManager
-        self.configuration = configuration
         self.complexProtection = complexProtection
         super.init()
         readFiltersMeta()
@@ -383,11 +380,11 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     }
     
     func updateFilters(networking: ACNNetworkingProtocol, callback: (()->Void)?){
-        
-        if !configuration.proStatus {
-            callback?()
-            return
-        }
+        // TODO: - This is bad
+//        if !configuration.proStatus {
+//            callback?()
+//            return
+//        }
         
         DispatchQueue(label: "update dns filters").async { [weak self] in
             

@@ -51,7 +51,7 @@ class CompanyDetailedController: UITableViewController {
     
     // MARK: - Notifications
     
-    private var advancedModeToken: NSKeyValueObservation?
+    private var advancedModeObserver: NotificationToken?
     private var keyboardShowToken: NotificationToken?
     
     // MARK: - Public variables
@@ -96,10 +96,6 @@ class CompanyDetailedController: UITableViewController {
         
         requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
         encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedCount))
-        
-        advancedModeToken = configuration.observe(\.advancedMode) {[weak self] (_, _) in
-            self?.observeAdvancedMode()
-        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -213,9 +209,9 @@ class CompanyDetailedController: UITableViewController {
             self?.keyboardWillShow()
         }
         
-        advancedModeToken = configuration.observe(\.advancedMode) {[weak self] (_, _) in
+        advancedModeObserver = NotificationCenter.default.observe(name: .advancedModeChanged, object: nil, queue: .main, using: { [weak self] _ in
             self?.observeAdvancedMode()
-        }
+        })
         
         requestsModel.recordsObserver = { [weak self] (records) in
             DispatchQueue.main.async {[weak self] in

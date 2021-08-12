@@ -33,7 +33,7 @@ class RequestsBlockingController: UITableViewController {
     private let dnsBlacklistSegue = "dnsBlacklistSegue"
     private let dnsWhitelistSegue = "dnsWhitelistSegue"
     
-    private var configurationToken: NSKeyValueObservation?
+    private var advancedModeObserver: NotificationToken?
     
     private let headerSection = 0
     
@@ -61,10 +61,9 @@ class RequestsBlockingController: UITableViewController {
         
         updateTheme()
         
-        configurationToken = configuration.observe(\.advancedMode) {[weak self] (_, _) in
-            guard let self = self else { return }
-            self.tableView.reloadData()
-        }
+        advancedModeObserver = NotificationCenter.default.observe(name: .advancedModeChanged, object: nil, queue: .main, using: { [weak self] _ in
+            self?.tableView.reloadData()
+        })
         
         setupBackButton()
     }

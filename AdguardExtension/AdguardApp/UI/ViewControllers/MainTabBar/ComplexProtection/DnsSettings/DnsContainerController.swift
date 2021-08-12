@@ -45,7 +45,7 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
     private let domainsConverter: DomainsConverterProtocol = DomainsConverter()
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     
-    private var advancedModeToken: NSKeyValueObservation?
+    private var advancedModeObserver: NotificationToken?
     
     private var detailsController: DnsRequestDetailsController?
     
@@ -63,11 +63,9 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        advancedModeToken = configuration.observe(\.advancedMode) {[weak self] (_, _) in
-            DispatchQueue.main.async {[weak self] in
-                self?.updateButtons()
-            }
-        }
+        advancedModeObserver = NotificationCenter.default.observe(name: .advancedModeChanged, object: nil, queue: .main, using: { [weak self] _ in
+            self?.updateButtons()
+        })
         
         updateButtons()
         

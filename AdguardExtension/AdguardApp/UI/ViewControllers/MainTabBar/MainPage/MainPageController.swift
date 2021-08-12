@@ -140,9 +140,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     private var iconButton: UIButton? = nil
     private let getProSegueId = "getProSegue"
     
-    private var proStatus: Bool {
-        return configuration.proStatus
-    }
+    private var proStatus: Bool { configuration.proStatus }
     private var contentBlockersGestureRecognizer: UIPanGestureRecognizer? = nil
     
     // We change constraints only for iphone SE - like devices
@@ -178,10 +176,10 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     
     // MARK: - Observers
     private var appWillEnterForeground: NotificationToken?
-    private var observations: [NSKeyValueObservation] = []
     private var vpnConfigurationObserver: NotificationToken!
     private var dnsImplementationObserver: NotificationToken?
     private var currentDnsServerObserver: NotificationToken?
+    private var proStatusObserver: NotificationToken?
     
     // MARK: - View Controller life cycle
     
@@ -576,10 +574,8 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
             self?.checkAdGuardVpnIsInstalled()
         })
         
-        let proObservation = configuration.observe(\.proStatus) { [weak self] (_, _) in
-            DispatchQueue.main.async {
-                self?.processState()
-            }
+        proStatusObserver = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
+            self?.processState()
         }
         
         // todo: handle notifications from sdk
@@ -601,8 +597,6 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         currentDnsServerObserver = NotificationCenter.default.observe(name: .currentDnsServerChanged, object: nil, queue: .main) { [weak self] _ in
             self?.processDnsServerChange()
         }
-
-        observations.append(proObservation)
 //        observations.append(contenBlockerObservation)
     }
     

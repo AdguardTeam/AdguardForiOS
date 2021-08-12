@@ -72,7 +72,7 @@ class ActivityViewController: UITableViewController {
     // MARK: - Notifications
     private var keyboardShowToken: NotificationToken?
     private var resetStatisticsToken: NotificationToken?
-    private var advancedModeToken: NSKeyValueObservation?
+    private var advancedModeObserver: NotificationToken?
     private var resetSettingsToken: NotificationToken?
     
     // MARK: - Public variables
@@ -397,9 +397,9 @@ class ActivityViewController: UITableViewController {
             self?.keyboardWillShow()
         }
         
-        advancedModeToken = configuration.observe(\.advancedMode) {[weak self] (_, _) in
+        advancedModeObserver = NotificationCenter.default.observe(name: .advancedModeChanged, object: nil, queue: .main, using: { [weak self] _ in
             self?.observeAdvancedMode()
-        }
+        })
         
         resetStatisticsToken = NotificationCenter.default.observe(name: NSNotification.resetStatistics, object: nil, queue: .main) { [weak self] (notification) in
             self?.dateTypeChanged(dateType: self?.resources.activityStatisticsType ?? .day)

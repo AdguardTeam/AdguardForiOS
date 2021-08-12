@@ -83,7 +83,7 @@ class ActionViewController: UIViewController {
         
         productInfo = ADProductInfo()
         
-        let dnsFiltersService = DnsFiltersService(resources: sharedResources, vpnManager: nil, configuration: configuration, complexProtection: nil)
+        let dnsFiltersService = DnsFiltersService(resources: sharedResources, vpnManager: nil, complexProtection: nil)
         
         let dnsProviders = DnsProvidersService(resources: sharedResources)
         

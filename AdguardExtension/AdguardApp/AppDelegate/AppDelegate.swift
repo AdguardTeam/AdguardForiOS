@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var orientationChangeNotification: NotificationToken?
     // AppDelegate addPurchaseStatusObserver notifications
     private var purchaseObservation: NotificationToken?
-    private var proStatusObservation: NSKeyValueObservation?
+    private var proStatusObservation: NotificationToken?
     private var setappObservation: NotificationToken?
     
     private var firstRun: Bool {
@@ -274,14 +274,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                  DDLogInfo("(AppDelegate) - Received notification type = \(type)")
                  
                  if type == PurchaseService.kPSNotificationPremiumExpired {
-                     self.userNotificationService.postNotification(title: ACLocalizedString("premium_expired_title", nil), body: ACLocalizedString("premium_expired_message", nil), userInfo: nil)
+                     self.userNotificationService.postNotification(title: String.localizedString("premium_expired_title"), body: String.localizedString("premium_expired_message"), userInfo: nil)
                  }
              }
          }
          
          if proStatusObservation == nil {
-             proStatusObservation = configuration.observe(\.proStatus) { [weak self] (_, _) in
+             proStatusObservation = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
                  guard let self = self else { return }
+                 
                  if !self.configuration.proStatus && self.vpnManager.vpnInstalled {
                      DDLogInfo("(AppDelegate) Remove vpn configuration")
                      self.vpnManager.removeVpnConfiguration { (error) in

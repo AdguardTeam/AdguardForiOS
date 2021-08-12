@@ -58,7 +58,7 @@ class GetProTableController: UITableViewController {
     
     // MARK: - private fields
     
-    var proObservation: NSKeyValueObservation?
+    var proStatusObserver: NotificationToken?
     
     private let notPurchasedLogoRow = 0
     private let purchasedLogoRow = 1
@@ -78,12 +78,10 @@ class GetProTableController: UITableViewController {
         selectedProduct = purchaseService.standardProduct
               
         setPrice()
-        
-        proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
-            DispatchQueue.main.async {
-                self?.updateTheme()
-                self?.setPrice()
-            }
+
+        proStatusObserver = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
+            self?.updateTheme()
+            self?.setPrice()
         }
         
         upgradeButton.makeTitleTextUppercased()

@@ -45,14 +45,14 @@ class DnsSettingsController : UITableViewController {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private var dnsProviders: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
-    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
     private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
     private let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
     
     private var vpnChangeObservation: NotificationToken?
     private var didBecomeActiveNotification: NotificationToken?
-    private var proObservation: NSKeyValueObservation?
+    private var proStatusObservation: NotificationToken?
     
     private var proStatus: Bool {
         return configuration.proStatus
@@ -86,9 +86,8 @@ class DnsSettingsController : UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
-            guard let self = self else { return }
-            self.observeProStatus()
+        proStatusObservation = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
+            self?.observeProStatus()
         }
         
         vpnChangeObservation = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: OperationQueue.main) { [weak self] (note) in

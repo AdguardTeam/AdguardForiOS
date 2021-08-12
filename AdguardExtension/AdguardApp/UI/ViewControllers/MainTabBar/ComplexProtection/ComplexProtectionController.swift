@@ -95,7 +95,7 @@ class ComplexProtectionController: UITableViewController {
     
     // Observers
     private var vpnChangeObservation: NotificationToken?
-    private var proObservation: NSKeyValueObservation?
+    private var proObservation: NotificationToken?
     private var appWillEnterForegroundObservation: NotificationToken?
     
     private var proStatus: Bool {
@@ -103,7 +103,7 @@ class ComplexProtectionController: UITableViewController {
     }
     
     private let enabledColor = UIColor.AdGuardColor.lightGreen1
-    private let disabledColor = UIColor(hexString: "#D8D8D8")
+    private let disabledColor = UIColor.AdGuardColor.lightGray5
     
     private let titleSection = 0
     private let protectionSection = 1
@@ -240,9 +240,8 @@ class ComplexProtectionController: UITableViewController {
     
     private func addObservers() {
         
-        proObservation = configuration.observe(\.proStatus) {[weak self] _, _ in
-            guard let self = self else { return }
-            self.observeProStatus()
+        proObservation = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
+            self?.observeProStatus()
         }
         
         vpnChangeObservation = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: .main) { [weak self] _ in

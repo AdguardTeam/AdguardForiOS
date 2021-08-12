@@ -692,9 +692,8 @@
     DDLogInfo(@"(PacketTunnelProvider) start DNS Proxy with upstreams: %@ systemDns: %@", upstreams, systemDnsServersString);
     
     BOOL ipv6Available = [ACNIPUtils isIpv6Available];
-    SimpleConfigurationSwift* configuration = [[SimpleConfigurationSwift alloc] initWithResources:_resources systemAppearenceIsDark:false];
-
-    DnsFiltersService *dnsFiltersService = [[DnsFiltersService alloc] initWithResources:_resources vpnManager:nil configuration:configuration complexProtection:nil];
+    
+    DnsFiltersService *dnsFiltersService = [[DnsFiltersService alloc] initWithResources:_resources vpnManager:nil complexProtection:nil];
     NSString* filtersJson = [dnsFiltersService filtersJson];
     long userFilterId = DnsFilter.userFilterId;
     long whitelistFilterId = DnsFilter.whitelistFilterId;

@@ -45,7 +45,7 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     private let ruleReuseId = "ruleCell"
     private let selectRuleReuseId = "selectRuleCell"
     
-    private var conficurationObservation: NSKeyValueObservation?
+    private var advancedModeObserver: NotificationToken?
     
     private var timer: Timer?
     
@@ -75,9 +75,9 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        conficurationObservation = configuration.observe(\.advancedMode) { [weak self] (_, _) in
+        advancedModeObserver = NotificationCenter.default.observe(name: .advancedModeChanged, object: nil, queue: .main, using: { [weak self] _ in
             self?.tableView.reloadData()
-        }
+        })
         
         tableView.setNeedsLayout()
         tableView.layoutIfNeeded()
