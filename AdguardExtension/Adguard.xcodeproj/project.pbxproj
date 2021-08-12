@@ -397,7 +397,6 @@
 		D0D7E52C24371871001801A5 /* AASFilterSubscriptionParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D0BDDD13215933D6000C85F1 /* AASFilterSubscriptionParser.m */; };
 		D0D7E53324371A63001801A5 /* ACDnsUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D07AA06C220833A10065779F /* ACDnsUtils.m */; };
 		D0D7E54624371C8C001801A5 /* DnsSettings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D07BC7CE223BBF2400C6B48C /* DnsSettings.storyboard */; };
-		D0D7E55024371C8C001801A5 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0D6BA0A21A6AF67007360BC /* Tutorial.storyboard */; };
 		D0D7E55124373E89001801A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 		D0D7E55D243772E6001801A5 /* Bundle+config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E55B24377280001801A5 /* Bundle+config.swift */; };
 		D0D7E57C243B1179001801A5 /* Bundle+config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E55B24377280001801A5 /* Bundle+config.swift */; };
@@ -1011,7 +1010,6 @@
 		D0CDD5692344E066000584EF /* DnsFiltersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsFiltersService.swift; sourceTree = "<group>"; };
 		D0D33BB323101A87009082CE /* AffinityRulesParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffinityRulesParser.swift; sourceTree = "<group>"; };
 		D0D33BB923102C94009082CE /* Affinity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Affinity.swift; sourceTree = "<group>"; };
-		D0D6BA0921A6AF67007360BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Tutorial.storyboard; sourceTree = "<group>"; };
 		D0D7E55A24376F24001801A5 /* ProTunnel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProTunnel.entitlements; sourceTree = "<group>"; };
 		D0D7E55B24377280001801A5 /* Bundle+config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+config.swift"; sourceTree = "<group>"; };
 		D0D7E592243C5523001801A5 /* APBlockingSubscription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APBlockingSubscription.h; sourceTree = "<group>"; };
@@ -2137,7 +2135,6 @@
 		D0EDE45422A9288E00086C00 /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
-				D0D6BA0A21A6AF67007360BC /* Tutorial.storyboard */,
 				655E94941BBEB31400286FBE /* AEUIPlayerViewController.h */,
 				655E94951BBEB31400286FBE /* AEUIPlayerViewController.m */,
 			);
@@ -2432,7 +2429,6 @@
 			files = (
 				C0A8594326C376020083E103 /* Main.storyboard in Resources */,
 				D098B44924497764003BA4DA /* ActivityTableViewCell.xib in Resources */,
-				D0D7E55024371C8C001801A5 /* Tutorial.storyboard in Resources */,
 				659886A51CF74DE9003ECD1C /* defaults.plist in Resources */,
 				655AACD61D4233A000E316EA /* ProLaunchScreen.storyboard in Resources */,
 				D0D7E57E243B15DF001801A5 /* Localizable.stringsdict in Resources */,
@@ -3074,14 +3070,6 @@
 				7E3B385825120FA80005EB9F /* be */,
 			);
 			name = DnsSettings.storyboard;
-			sourceTree = "<group>";
-		};
-		D0D6BA0A21A6AF67007360BC /* Tutorial.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D0D6BA0921A6AF67007360BC /* Base */,
-			);
-			name = Tutorial.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

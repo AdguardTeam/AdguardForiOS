@@ -69,7 +69,6 @@ class Main:UIViewController{
         let dnsProvidersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
         dnsProvidersService.addVisafeVPN(name: "Visafe", upstream: upstream) { [weak self] in
             vpnManager.updateSettings(completion: nil)
-
         }
 
 //        if resources.dnsImplementation == .native {
@@ -102,74 +101,73 @@ class Main:UIViewController{
 //            }
 //        }
 //        updateVpnInfo()
-            if status_btn == 0
-               {
-                    if StoreData.getMyPlist(key: "passcode") != nil
-                    {
-                        let secondVC = self.storyboard?.instantiateViewController(withIdentifier: "confirm_passcode") as! TurnOffVisafeController
-                        _ = navigationController?.popViewController(animated: true)
-                        self.navigationController?.pushViewController(secondVC, animated: false)
-                    }
-                    else
-                    {
-                        let alertController = UIAlertController (title: "", message: "Bạn chắc chắn muốn ngắt \n tính năng bảo vệ của Visafe?", preferredStyle: .actionSheet)
-                        let until_turn_on = UIAlertAction(title: "Đồng ý", style: .default) { (_) -> Void in
-                            self.complexProtection.switchSystemProtection(state: false, for: self) { [weak self] _ in
-                            DispatchQueue.main.async {
-                                self?.updateVpnInfo()
-                                }
-                            }
-                            self.active_background.image = UIImage(named: "Group 6042.png")
-                            self.status_btn = 1
-                            StoreData.saveMyPlist(key: "status", value: "0")
-                            self.appear_time = 1
-                            let content = UNMutableNotificationContent()
-                            content.title = "Bạn đã tắt chế độ bảo vệ!"
-                            content.body = "Thiết bị của bạn có thể bị ảnh hưởng bởi tấn công mạng "
-                            content.sound = UNNotificationSound.default
-                            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-                            let request = UNNotificationRequest(identifier: "TestIdentifier", content: content, trigger: trigger)
-                            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        
+        if complexProtection.systemProtectionEnabled == true
+       {
+            if StoreData.getMyPlist(key: "passcode") != nil
+            {
+                let secondVC = self.storyboard?.instantiateViewController(withIdentifier: "confirm_passcode") as! TurnOffVisafeController
+                _ = navigationController?.popViewController(animated: true)
+                self.navigationController?.pushViewController(secondVC, animated: false)
+            }
+            else
+            {
+                let alertController = UIAlertController (title: "", message: "Bạn chắc chắn muốn ngắt \n tính năng bảo vệ của Visafe?", preferredStyle: .actionSheet)
+                let until_turn_on = UIAlertAction(title: "Đồng ý", style: .default) { (_) -> Void in
+                    self.complexProtection.switchSystemProtection(state: false, for: self) { [weak self] _ in
+                    DispatchQueue.main.async {
+                        self?.updateVpnInfo()
                         }
+                    }
+                    self.active_background.image = UIImage(named: "Group 6042.png")
+                    StoreData.saveMyPlist(key: "status", value: "0")
+                    self.appear_time = 1
+                    let content = UNMutableNotificationContent()
+                    content.title = "Bạn đã tắt chế độ bảo vệ!"
+                    content.body = "Thiết bị của bạn có thể bị ảnh hưởng bởi tấn công mạng "
+                    content.sound = UNNotificationSound.default
+                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+                    let request = UNNotificationRequest(identifier: "TestIdentifier", content: content, trigger: trigger)
+                    UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+                }
 
-                        let cancel = UIAlertAction(title: "Hủy bỏ", style: .default) { (_) -> Void in
-                            self.dismiss(animated: true, completion: nil)
+                let cancel = UIAlertAction(title: "Hủy bỏ", style: .default) { (_) -> Void in
+                    self.dismiss(animated: true, completion: nil)
+                }
+                alertController.addAction(until_turn_on)
+                cancel.setValue(UIColor.red, forKey: "titleTextColor")
+               alertController.addAction(cancel)
+
+               present(alertController, animated: true, completion: nil)
+            }
+       }
+       else
+       {
+                self.active_background.image=UIImage(named: "Group 6043.png")
+                container_view.isHidden = false
+                    let pulse = PulseAnimation(numberOfPulse: 3, radius: 100, postion: sender.center)
+                    pulse.animationDuration = 1
+                    pulse.backgroundColor = #colorLiteral(red: 0.9764705882, green: 0.9058823529, blue: 0.2549019608, alpha: 1)
+                    self.view.layer.insertSublayer(pulse, below: self.view.layer)
+                    let seconds = 2.3
+                    self.complexProtection.switchSystemProtection(state: true, for: self) { [weak self] _ in
+                    DispatchQueue.main.async {
+                        self?.updateVpnInfo()
                         }
-                        alertController.addAction(until_turn_on)
-                        cancel.setValue(UIColor.red, forKey: "titleTextColor")
-                       alertController.addAction(cancel)
-
-                       present(alertController, animated: true, completion: nil)
                     }
-               }
-               else
-               {
-                        self.active_background.image=UIImage(named: "Group 6043.png")
-                        container_view.isHidden = false
-                            let pulse = PulseAnimation(numberOfPulse: 3, radius: 100, postion: sender.center)
-                            pulse.animationDuration = 1
-                            pulse.backgroundColor = #colorLiteral(red: 0.9764705882, green: 0.9058823529, blue: 0.2549019608, alpha: 1)
-                            self.view.layer.insertSublayer(pulse, below: self.view.layer)
-                            let seconds = 2.3
-                            DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
-                                self.active_background.image=UIImage(named: "Group 6041.png")
-                                self.status_btn = 0
-                                StoreData.saveMyPlist(key: "status", value: "1")
-                                self.complexProtection.switchSystemProtection(state: true, for: self) { [weak self] _ in
-                                DispatchQueue.main.async {
-                                    self?.updateVpnInfo()
-                                    }
-                                }
-                                self.container_view.isHidden = true
-                                let content = UNMutableNotificationContent()
-                                content.title = "Đã kích hoạt chế độ bảo vệ!"
-                                content.body = "Chế độ chống lừa đảo, mã độc, tấn công mạng đã được kích hoạt!"
-                                content.sound = UNNotificationSound.default
-                                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-                                let request = UNNotificationRequest(identifier: "TestIdentifier", content: content, trigger: trigger)
-                                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+                        self.active_background.image=UIImage(named: "Group 6041.png")
+                        StoreData.saveMyPlist(key: "status", value: "1")
+                        self.container_view.isHidden = true
+                        let content = UNMutableNotificationContent()
+                        content.title = "Đã kích hoạt chế độ bảo vệ!"
+                        content.body = "Chế độ chống lừa đảo, mã độc, tấn công mạng đã được kích hoạt!"
+                        content.sound = UNNotificationSound.default
+                        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+                        let request = UNNotificationRequest(identifier: "TestIdentifier", content: content, trigger: trigger)
+                        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
                     }
-                 }
+         }
     }
     private func updateVpnInfo() {
         let enabled = complexProtection.systemProtectionEnabled
