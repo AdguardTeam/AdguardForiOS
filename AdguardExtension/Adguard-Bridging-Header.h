@@ -12,7 +12,6 @@
 #import "DDLogMacros.h"
 #import "ACNUrlUtils.h"
 #import "Constants.h"
-#import "AERDomainFilterRule.h"
 #import "ASDatabase.h"
 #import "Reachability.h"
 #import <AGDnsProxy/AGDnsProxy.h>
@@ -21,7 +20,5 @@
 #import "ACNIPUtils.h"
 #import "ADLocales.h"
 #import "APCommonSharedResources.h"
-#import "APBlockingSubscription.h"
-#import "APDnsServerObject.h"
 #import "ACNCidrRange.h"
 #import "ABECRequest.h"
