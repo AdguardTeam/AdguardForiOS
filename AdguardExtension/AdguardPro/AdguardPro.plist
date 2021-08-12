@@ -86,7 +86,7 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>To scan QR code</string>
+	<string>To scan QR code to join group</string>
 	<key>Pro Application</key>
 	<true/>
 	<key>UIBackgroundModes</key>
@@ -112,5 +112,39 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>fb545622383516478</string>
+            </array>
+        </dict>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>com.googleusercontent.apps.364533202921-h0510keg49fuo2okdgopo48mato4905d</string>
+            </array>
+        </dict>
+    </array>
+    <key>CFBundleVersion</key>
+    <string>$(CURRENT_PROJECT_VERSION)</string>
+    <key>FacebookAppID</key>
+    <string>545622383516478</string>
+    <key>FacebookClientToken</key>
+    <string>Visafe</string>
+    <key>FacebookDisplayName</key>
+    <string>Visafe-Internet an toàn</string>
+    <key>LSApplicationCategoryType</key>
+    <string>Visafe-Internet an toàn</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>fbapi</string>
+        <string>fb-messenger-share-api</string>
+        <string>fbauth2</string>
+        <string>fbshareextension</string>
+    </array>
 </dict>
 </plist>

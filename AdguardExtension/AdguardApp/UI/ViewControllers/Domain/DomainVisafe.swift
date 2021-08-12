@@ -27,7 +27,7 @@ import Foundation
         public let DOMAIN_RESET_PASSWORD_WITH_OTP = "https://app.visafe.vn/api/v1/reset-password"
         public let DOMAIN_LOGIN_WITH_FACEBOOK = "https://app.visafe.vn/api/v1/login/facebook"
         public let DOMAIN_LOGIN_WITH_GMAIL = "https://app.visafe.vn/api/v1/login/google"
-
+        public let DOMAIN_LOGIN_WITH_APPLE = "https://app.visafe.vn/api/v1/login/apple"
 
 //STAGING
 //
