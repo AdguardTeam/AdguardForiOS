@@ -70,38 +70,6 @@ class Main:UIViewController{
         dnsProvidersService.addVisafeVPN(name: "Visafe", upstream: upstream) { [weak self] in
             vpnManager.updateSettings(completion: nil)
         }
-
-//        if resources.dnsImplementation == .native {
-//            if #available(iOS 14.0, *), complexProtection.systemProtectionEnabled {
-//                nativeProviders.removeDnsManager { error in
-//                    DDLogError("Error removing dns manager: \(error.debugDescription)")
-//                    DispatchQueue.main.async { [weak self] in
-//                        sender = self?.complexProtection.systemProtectionEnabled ?? false
-//                    }
-//                }
-//            } else if #available(iOS 14.0, *) {
-//                sender.isOn = complexProtection.systemProtectionEnabled
-//                nativeProviders.saveDnsManager { error in
-//                    if let error = error {
-//                        DDLogError("Received error when turning system protection on; Error: \(error.localizedDescription)")
-//                    }
-//                    DispatchQueue.main.async {
-////                        AppDelegate.shared.presentHowToSetupController()
-//                    }
-//                }
-//            }
-//            return
-//        }
-//
-//        let enabled = sender.isOn
-//
-//        complexProtection.switchSystemProtection(state: enabled, for: self) { [weak self] _ in
-//            DispatchQueue.main.async {
-//                self?.updateVpnInfo()
-//            }
-//        }
-//        updateVpnInfo()
-        
         if complexProtection.systemProtectionEnabled == true
        {
             if StoreData.getMyPlist(key: "passcode") != nil
@@ -114,13 +82,6 @@ class Main:UIViewController{
             {
                 let alertController = UIAlertController (title: "", message: "Bạn chắc chắn muốn ngắt \n tính năng bảo vệ của Visafe?", preferredStyle: .actionSheet)
                 let until_turn_on = UIAlertAction(title: "Đồng ý", style: .default) { (_) -> Void in
-                    self.complexProtection.switchSystemProtection(state: false, for: self) { [weak self] _ in
-                    DispatchQueue.main.async {
-                        self?.updateVpnInfo()
-                        }
-                    }
-                    self.active_background.image = UIImage(named: "Group 6042.png")
-                    StoreData.saveMyPlist(key: "status", value: "0")
                     self.appear_time = 1
                     let content = UNMutableNotificationContent()
                     content.title = "Bạn đã tắt chế độ bảo vệ!"
@@ -129,6 +90,13 @@ class Main:UIViewController{
                     let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
                     let request = UNNotificationRequest(identifier: "TestIdentifier", content: content, trigger: trigger)
                     UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+                    self.complexProtection.switchSystemProtection(state: false, for: self) { [weak self] _ in
+                    DispatchQueue.main.async {
+                        self?.updateVpnInfo()
+                        }
+                    }
+                    self.active_background.image = UIImage(named: "Group 6042.png")
+                    StoreData.saveMyPlist(key: "status", value: "0")
                 }
 
                 let cancel = UIAlertAction(title: "Hủy bỏ", style: .default) { (_) -> Void in

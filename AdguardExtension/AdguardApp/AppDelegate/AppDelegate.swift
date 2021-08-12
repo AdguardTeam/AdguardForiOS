@@ -19,7 +19,7 @@
 import Foundation
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
     //MARK: - Properties
     let statusBarWindow: IStatusBarWindow
@@ -164,10 +164,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         AppDelegate.setPeriodForCheckingFilters()
 //        subscribeToNotifications()
-        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, err) in
+                print("granted: \(granted)")
+            }
+        UNUserNotificationCenter.current().delegate = self
         return true
     }
-    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
+    }
     
     //MARK: - Application Delegate Methods
     
