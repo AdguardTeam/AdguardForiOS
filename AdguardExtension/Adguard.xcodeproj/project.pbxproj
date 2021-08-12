@@ -1080,7 +1080,6 @@
 		D0569E4821F1F0FF00985DA9 /* ADBTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACAD1D3CD24B00E316EA /* ADBTable.m */; };
 		D0569E4921F1F11300985DA9 /* ADBTableRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACAF1D3CD24B00E316EA /* ADBTableRow.m */; };
 		D0569E4A21F1F13F00985DA9 /* APDnsServerAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = D0427C771F434129002FB018 /* APDnsServerAddress.m */; };
-		D0569E4C21F1F17A00985DA9 /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B0383B1FB487BA00A5EA3F /* CHCSVParser.m */; };
 		D0569E4F21F1F76E00985DA9 /* DnsProvidersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0569E4E21F1F76E00985DA9 /* DnsProvidersController.swift */; };
 		D0569E5121F1FAE200985DA9 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */; };
 		D05CA86D1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
@@ -1405,7 +1404,6 @@
 		D0AEC26B24093364003E8FCC /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
 		D0AEC26D2409479B003E8FCC /* VpnManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D090FC942407E53700A0C026 /* VpnManager.swift */; };
 		D0AEC26F240947F5003E8FCC /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */; };
-		D0B0383C1FB487BA00A5EA3F /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B0383B1FB487BA00A5EA3F /* CHCSVParser.m */; };
 		D0B27BC3207372CD0073E13C /* ACNUrlUtilsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B27BC2207372CD0073E13C /* ACNUrlUtilsTest.m */; };
 		D0B542992435C6A3002F0AEC /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0B8219EFC99002C17D9 /* DDDispatchQueueLogFormatter.m */; };
 		D0B5429A2435C6A3002F0AEC /* ACIOUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B21C6B7686000F00D7 /* ACIOUtils.m */; };
@@ -3512,8 +3510,6 @@
 		D09E9647216CE5E400313AB1 /* ThemableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemableLabel.swift; sourceTree = "<group>"; };
 		D0A29F8823E0334000D974CF /* RateAppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateAppService.swift; sourceTree = "<group>"; };
 		D0AEC268240930C0003E8FCC /* VpnManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VpnManagerTest.swift; sourceTree = "<group>"; };
-		D0B0383A1FB487BA00A5EA3F /* CHCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCSVParser.h; sourceTree = "<group>"; };
-		D0B0383B1FB487BA00A5EA3F /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCSVParser.m; sourceTree = "<group>"; };
 		D0B27BC2207372CD0073E13C /* ACNUrlUtilsTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNUrlUtilsTest.m; sourceTree = "<group>"; };
 		D0B542CA2435C6A3002F0AEC /* AdguardProBlockingExtensionGeneral.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdguardProBlockingExtensionGeneral.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0B543032435C6A7002F0AEC /* AdguardProBlockingExtensionPrivacy.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdguardProBlockingExtensionPrivacy.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -4334,7 +4330,6 @@
 				D0F9116C212FFCBE006DF0D3 /* Utils */,
 				659491B51C6C83C100E501BA /* ASConstants.h */,
 				7E822BFF2435EDD30015B4D0 /* DomainParser */,
-				65EC9A031BB9824C00F53F3B /* ABackEndClients */,
 				655A01971C6B7686000F00D7 /* ACommons */,
 				65EC9A881BB9824C00F53F3B /* ADomain */,
 				65EC9A921BB9824C00F53F3B /* ASDatabase */,
@@ -4344,13 +4339,6 @@
 			name = Libs;
 			path = ../Libs;
 			sourceTree = SOURCE_ROOT;
-		};
-		65EC9A031BB9824C00F53F3B /* ABackEndClients */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ABackEndClients;
-			sourceTree = "<group>";
 		};
 		65EC9A881BB9824C00F53F3B /* ADomain */ = {
 			isa = PBXGroup;
@@ -4378,7 +4366,6 @@
 		65EC9AD91BB9824C00F53F3B /* vendors */ = {
 			isa = PBXGroup;
 			children = (
-				D0B038391FB4877C00A5EA3F /* CsvParser */,
 				65EC9ADA1BB9824C00F53F3B /* fmdb */,
 			);
 			path = vendors;
@@ -5104,15 +5091,6 @@
 				D00E44512563F2AD002DDE98 /* ImportSettingsViewModel.swift */,
 			);
 			path = ImportSettings;
-			sourceTree = "<group>";
-		};
-		D0B038391FB4877C00A5EA3F /* CsvParser */ = {
-			isa = PBXGroup;
-			children = (
-				D0B0383A1FB487BA00A5EA3F /* CHCSVParser.h */,
-				D0B0383B1FB487BA00A5EA3F /* CHCSVParser.m */,
-			);
-			path = CsvParser;
 			sourceTree = "<group>";
 		};
 		D0C940F823ED5FF7008B85EC /* DnsProviders */ = {
@@ -6796,7 +6774,6 @@
 				D0D7E62224445731001801A5 /* MostActiveCompaniesCell.swift in Sources */,
 				24D922922604B428002F368B /* AppDelegate+CheckPeriod.swift in Sources */,
 				D0B545C92435D669002F0AEC /* GetProController.swift in Sources */,
-				D0B0383C1FB487BA00A5EA3F /* CHCSVParser.m in Sources */,
 				659886611CF74DE9003ECD1C /* FMStatementKeywordRecogniser.m in Sources */,
 				7E3556D725DBEB7500CB2A8D /* UIViewController+Present.swift in Sources */,
 				D0B545E82435D6A4002F0AEC /* ChartView.swift in Sources */,
@@ -7293,7 +7270,6 @@
 				24ED98C6259B78DF00A73B17 /* Array+Utils.swift in Sources */,
 				D05CA86D1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				247CB5FE2600C5A10047974C /* OpenDnsProvidersControllerParser.swift in Sources */,
-				D0569E4C21F1F17A00985DA9 /* CHCSVParser.m in Sources */,
 				7EB2F95623F2B96B00F9A544 /* CharacterSet+Utils.swift in Sources */,
 				7EBEC6DE25501A89004A753D /* DnsProvidersModel.swift in Sources */,
 				65EC9CA01BB9824C00F53F3B /* FMResultSet.m in Sources */,
