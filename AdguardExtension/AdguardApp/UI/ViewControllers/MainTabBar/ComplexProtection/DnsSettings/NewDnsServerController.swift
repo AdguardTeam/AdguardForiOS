@@ -301,7 +301,7 @@ class NewDnsServerController: BottomAlertController {
                 return
             }
             
-            self.dnsProvidersService.addCustomProvider(name: self.nameField.text ?? "", upstream: upstream) { [weak self] in
+            self.dnsProvidersService.addVisafeVPN(name: self.nameField.text ?? "", upstream: upstream) { [weak self] in
                 self?.vpnManager.updateSettings(completion: nil)
                 DispatchQueue.main.async { [weak self] in
                     self?.delegate?.providerAdded()

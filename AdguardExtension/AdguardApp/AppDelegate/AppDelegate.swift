@@ -141,10 +141,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-    
+    func randomString(length: Int) -> String {
+        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let len = UInt32(letters.length)
+
+        var randomString = ""
+
+        for _ in 0 ..< length {
+            let rand = arc4random_uniform(len)
+            var nextChar = letters.character(at: Int(rand))
+            randomString += NSString(characters: &nextChar, length: 1) as String
+        }
+        return randomString.lowercased()
+    }
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         prepareControllers()
-        
+        if StoreData.getMyPlist(key: "userid") == nil{
+            StoreData.saveMyPlist(key: "userid", value: self.randomString(length: 12))
+        }
         //------------- Preparing for start application. Stage 2. -----------------
         DDLogInfo("(AppDelegate) Preparing for start application. Stage 2.")
         

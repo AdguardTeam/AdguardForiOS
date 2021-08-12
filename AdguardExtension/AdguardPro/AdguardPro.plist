@@ -85,6 +85,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>To scan QR code</string>
 	<key>Pro Application</key>
 	<true/>
 	<key>UIBackgroundModes</key>

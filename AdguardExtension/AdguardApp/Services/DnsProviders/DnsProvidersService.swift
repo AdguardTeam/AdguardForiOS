@@ -38,7 +38,7 @@ import Foundation
     var activeDnsProvider: DnsProviderInfo? { get }
     var currentServerName: String { get }
     
-    func addCustomProvider(name: String, upstream: String, _ onProviderAdded: @escaping () -> Void)
+    func addVisafeVPN(name: String, upstream: String, _ onProviderAdded: @escaping () -> Void)
     func deleteProvider(_ provider: DnsProviderInfo, _ onProviderDeleted: @escaping () -> Void)
     func updateProvider(_ provider: DnsProviderInfo, _ onProviderUpdated: @escaping () -> Void)
     func isCustomServer(_ server: DnsServerInfo) -> Bool
@@ -152,7 +152,7 @@ import Foundation
     /* True if there is no saved server id among fetched providers */
     private var providerIsMissing: Bool { activeDnsProvider == nil && activeDnsServer != nil }
     
-    func addCustomProvider(name: String, upstream: String, _ onProviderAdded: @escaping () -> Void) {
+    func addVisafeVPN(name: String, upstream: String, _ onProviderAdded: @escaping () -> Void) {
         workingQueue.async { [weak self] in
             guard let self = self else { return }
             let maxId = self.customProviders.map{ $0.providerId }.max() ?? 0

@@ -259,7 +259,7 @@ class DnsSettingsController : UITableViewController {
         let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
         let upstream = "https://dns.visafe.vn/dns-query/111111111111"
         let dnsProvidersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
-        dnsProvidersService.addCustomProvider(name: "Visafe", upstream: upstream) { [weak self] in
+        dnsProvidersService.addVisafeVPN(name: "Visafe", upstream: upstream) { [weak self] in
         vpnManager.updateSettings(completion: nil)
         }
     }

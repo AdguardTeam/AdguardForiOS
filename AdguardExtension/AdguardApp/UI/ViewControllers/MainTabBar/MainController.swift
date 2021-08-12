@@ -64,10 +64,12 @@ class Main:UIViewController{
         container_view.isHidden = true
         UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
         let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
-        let upstream = "https://dns.visafe.vn/dns-query/111111111111"
+        let userid = StoreData.getMyPlist(key: "userid") as! String
+        let upstream = DOMAIN_NORMAL + userid
         let dnsProvidersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
-        dnsProvidersService.addCustomProvider(name: "Visafe", upstream: upstream) { [weak self] in
+        dnsProvidersService.addVisafeVPN(name: "Visafe", upstream: upstream) { [weak self] in
             vpnManager.updateSettings(completion: nil)
+
         }
 
 //        if resources.dnsImplementation == .native {
