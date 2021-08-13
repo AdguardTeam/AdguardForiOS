@@ -175,6 +175,7 @@
 		C0DB78D726C51ACC003C7900 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = C0DB78D626C51ACC003C7900 /* FacebookLogin */; };
 		C0DB78D926C51ACC003C7900 /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = C0DB78D826C51ACC003C7900 /* FacebookShare */; };
 		C0DB78DC26C51AF6003C7900 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = C0DB78DB26C51AF6003C7900 /* GoogleSignIn */; };
+		C0DB78DE26C537EC003C7900 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DB78DD26C537EC003C7900 /* IntroViewController.swift */; };
 		D004F1FA1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
 		D00E448A25650084002DDE98 /* ImportSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00E448825650084002DDE98 /* ImportSettingsService.swift */; };
 		D0116CEF20627E58009598B1 /* ACNCidrRange.m in Sources */ = {isa = PBXBuildFile; fileRef = D0116CED20627E58009598B1 /* ACNCidrRange.m */; };
@@ -276,7 +277,6 @@
 		D0B544FF2435C6BF002F0AEC /* ABECRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A081BB9824C00F53F3B /* ABECRequest.m */; };
 		D0B545002435C6BF002F0AEC /* ADBTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 655AACAD1D3CD24B00E316EA /* ADBTable.m */; };
 		D0B545012435C6BF002F0AEC /* ACNCidrRange.m in Sources */ = {isa = PBXBuildFile; fileRef = D0116CED20627E58009598B1 /* ACNCidrRange.m */; };
-		D0B545022435C6BF002F0AEC /* SafariService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093718A21B0414A004A24F1 /* SafariService.swift */; };
 		D0B545032435C6BF002F0AEC /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD3BBA1B7CB15400004A02 /* AESharedResources.m */; };
 		D0B545042435C6BF002F0AEC /* NotificationService+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DE8DAE23607A010073B163 /* NotificationService+Utils.swift */; };
 		D0B545052435C6BF002F0AEC /* ABECFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A061BB9824C00F53F3B /* ABECFilter.m */; };
@@ -332,7 +332,6 @@
 		D0B545852435D62A002F0AEC /* ComplexProtectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF005E2239929FC00047073 /* ComplexProtectionService.swift */; };
 		D0B545862435D62A002F0AEC /* SafariProtectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D081FC2A2418EB38000A10DA /* SafariProtectionService.swift */; };
 		D0B545872435D630002F0AEC /* ConfigurationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CB347A212DD1AB003B650E /* ConfigurationService.swift */; };
-		D0B545882435D630002F0AEC /* ContentBlockerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D067D8D821412D4D00ECDE6D /* ContentBlockerService.swift */; };
 		D0B545892435D630002F0AEC /* DnsLogRecordsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06BB37D238BC2030000075E /* DnsLogRecordsService.swift */; };
 		D0B5458A2435D630002F0AEC /* DnsStatisticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0EC86BF23A8D15B00EDF107 /* DnsStatisticsService.swift */; };
 		D0B5458B2435D630002F0AEC /* FileShareService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0702B3E2188859D0051669A /* FileShareService.swift */; };
@@ -342,8 +341,6 @@
 		D0B5458F2435D630002F0AEC /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08187C92264C89400E961B5 /* LoginService.swift */; };
 		D0B545902435D630002F0AEC /* NetworkSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */; };
 		D0B545912435D630002F0AEC /* PurchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F91179213422E1006DF0D3 /* PurchaseService.swift */; };
-		D0B545922435D630002F0AEC /* RateAppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A29F8823E0334000D974CF /* RateAppService.swift */; };
-		D0B545932435D630002F0AEC /* SafariService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D093718A21B0414A004A24F1 /* SafariService.swift */; };
 		D0B545942435D630002F0AEC /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9117521303E4C006DF0D3 /* ServiceLocator.swift */; };
 		D0B545952435D630002F0AEC /* StartupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1104F822DE27C700720501 /* StartupService.swift */; };
 		D0B545962435D630002F0AEC /* ThemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E9643216CB14A00313AB1 /* ThemeService.swift */; };
@@ -637,8 +634,8 @@
 		658E43A51E892CD3008DAA59 /* AEFilterRuleSyntaxConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AEFilterRuleSyntaxConstants.h; sourceTree = "<group>"; };
 		659491B51C6C83C100E501BA /* ASConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASConstants.h; sourceTree = "<group>"; };
 		65982AE81BA02D6800770EA9 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		659886B91CF74DE9003ECD1C /* Adguard Pro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Adguard Pro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		659886EA1CF834FD003ECD1C /* AdguardPro.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AdguardPro.plist; sourceTree = "<group>"; };
+		659886B91CF74DE9003ECD1C /* Visafe Pro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Visafe Pro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		659886EA1CF834FD003ECD1C /* VisafePro.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = VisafePro.plist; sourceTree = "<group>"; };
 		659887711CF83A72003ECD1C /* project.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = project.xcconfig; sourceTree = "<group>"; };
 		659887791CF841F4003ECD1C /* macro-definitions.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "macro-definitions.xcconfig"; sourceTree = "<group>"; };
 		6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Adguard-Config.xcconfig"; sourceTree = "<group>"; };
@@ -861,6 +858,7 @@
 		C0DB78CA26C5148E003C7900 /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		C0DB78CB26C5148E003C7900 /* ResetPasswordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordController.swift; sourceTree = "<group>"; };
 		C0DB78CC26C5148E003C7900 /* ConfirmPhoneNumberController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmPhoneNumberController.swift; sourceTree = "<group>"; };
+		C0DB78DD26C537EC003C7900 /* IntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		D004F1F81F16338400F75A4B /* ACNIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNIPUtils.h; sourceTree = "<group>"; };
 		D004F1F91F16338400F75A4B /* ACNIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNIPUtils.m; sourceTree = "<group>"; };
 		D00509682201D730006BC10C /* DnsProvidersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersService.swift; sourceTree = "<group>"; };
@@ -933,7 +931,6 @@
 		D05CA86B1F3B6455006DFD7F /* APCommonSharedResources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APCommonSharedResources.h; sourceTree = "<group>"; };
 		D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APCommonSharedResources.m; sourceTree = "<group>"; };
 		D067D8D42140020A00ECDE6D /* GroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
-		D067D8D821412D4D00ECDE6D /* ContentBlockerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerService.swift; sourceTree = "<group>"; };
 		D06ACB6E2146AF1700D2A37D /* LongLabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongLabelCell.swift; sourceTree = "<group>"; };
 		D06BB37D238BC2030000075E /* DnsLogRecordsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsLogRecordsService.swift; sourceTree = "<group>"; };
 		D06DE02B2347769200A70D85 /* AntibannerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntibannerController.swift; sourceTree = "<group>"; };
@@ -981,8 +978,6 @@
 		D08C96CE1FE3C459002456B3 /* ABECSubscription.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABECSubscription.m; sourceTree = "<group>"; };
 		D090FC942407E53700A0C026 /* VpnManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VpnManager.swift; sourceTree = "<group>"; };
 		D0923EA0220A017A009AA5F5 /* Dns64Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dns64Utils.swift; sourceTree = "<group>"; };
-		D093718A21B0414A004A24F1 /* SafariService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariService.swift; sourceTree = "<group>"; };
-		D093AA18253447940015351F /* setappPublicKey.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = setappPublicKey.pem; sourceTree = "<group>"; };
 		D0977A6B221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLLogFileManagerDefault.swift; sourceTree = "<group>"; };
 		D099DADE228D812E007987F8 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DnsSettings.strings; sourceTree = "<group>"; };
 		D099DADF228D813E007987F8 /* ru */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/DnsSettings.strings; sourceTree = "<group>"; };
@@ -1010,21 +1005,19 @@
 		D09E9643216CB14A00313AB1 /* ThemeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeService.swift; sourceTree = "<group>"; };
 		D09E9645216CE10F00313AB1 /* ThemeableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeableImageView.swift; sourceTree = "<group>"; };
 		D09E9647216CE5E400313AB1 /* ThemableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemableLabel.swift; sourceTree = "<group>"; };
-		D0A29F8823E0334000D974CF /* RateAppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateAppService.swift; sourceTree = "<group>"; };
 		D0B035571FD972AB00AB8F9D /* ABECService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABECService.h; sourceTree = "<group>"; };
 		D0B035581FD972AB00AB8F9D /* ABECService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABECService.m; sourceTree = "<group>"; };
 		D0B0383A1FB487BA00A5EA3F /* CHCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCSVParser.h; sourceTree = "<group>"; };
 		D0B0383B1FB487BA00A5EA3F /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCSVParser.m; sourceTree = "<group>"; };
 		D0B545262435C6BF002F0AEC /* ProTunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ProTunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0B7F2591F1CE76000D545CD /* fa */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/MainInterface.strings; sourceTree = "<group>"; };
-		D0B8EB8E2248E54A0066C5AC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D0B8EB902248E5770066C5AC /* ActionExtension.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ActionExtension.xcassets; sourceTree = "<group>"; };
 		D0BDDD12215933D6000C85F1 /* AASFilterSubscriptionParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AASFilterSubscriptionParser.h; sourceTree = "<group>"; };
 		D0BDDD13215933D6000C85F1 /* AASFilterSubscriptionParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AASFilterSubscriptionParser.m; sourceTree = "<group>"; };
 		D0BDDD24215A884D000C85F1 /* CustomFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFilterCell.swift; sourceTree = "<group>"; };
 		D0C37EB922A673B40004337D /* DnsLogRecordsWriterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsLogRecordsWriterProtocol.swift; sourceTree = "<group>"; };
 		D0C940F923ED6073008B85EC /* DnsProviderInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProviderInfo.swift; sourceTree = "<group>"; };
-		D0CB3476212DCE21003B650E /* Adguard-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Adguard-Bridging-Header.h"; sourceTree = "<group>"; };
+		D0CB3476212DCE21003B650E /* Visafe-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Visafe-Bridging-Header.h"; sourceTree = "<group>"; };
 		D0CB347A212DD1AB003B650E /* ConfigurationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationService.swift; sourceTree = "<group>"; };
 		D0CDAEA42191C9540028001B /* String+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Utils.swift"; sourceTree = "<group>"; };
 		D0CDD5692344E066000584EF /* DnsFiltersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsFiltersService.swift; sourceTree = "<group>"; };
@@ -1162,7 +1155,7 @@
 			isa = PBXGroup;
 			children = (
 				659887711CF83A72003ECD1C /* project.xcconfig */,
-				659886EA1CF834FD003ECD1C /* AdguardPro.plist */,
+				659886EA1CF834FD003ECD1C /* VisafePro.plist */,
 				653153411CF9911800C92A73 /* AdguardPro.entitlements */,
 				D0D7E55A24376F24001801A5 /* ProTunnel.entitlements */,
 			);
@@ -1582,12 +1575,10 @@
 			isa = PBXGroup;
 			children = (
 				C0DB78BC26C4D5D6003C7900 /* VisafeDebug.entitlements */,
-				D093AA18253447940015351F /* setappPublicKey.pem */,
-				D0B8EB8E2248E54A0066C5AC /* Default-568h@2x.png */,
-				D0CB3476212DCE21003B650E /* Adguard-Bridging-Header.h */,
+				D0CB3476212DCE21003B650E /* Visafe-Bridging-Header.h */,
 				6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */,
 				D00E674E2472EA2D00161A74 /* Common-Config.xcconfig */,
-				65F398131B7B684700ABCD39 /* AdguardApp */,
+				65F398131B7B684700ABCD39 /* VisafeApp */,
 				659886E91CF8315F003ECD1C /* AdguardPro */,
 				65F3985F1B7B6A5300ABCD39 /* Extension */,
 				65C52B371B906105003AF42F /* ActionExtension */,
@@ -1602,13 +1593,13 @@
 		65F398121B7B684700ABCD39 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				659886B91CF74DE9003ECD1C /* Adguard Pro.app */,
+				659886B91CF74DE9003ECD1C /* Visafe Pro.app */,
 				D0B545262435C6BF002F0AEC /* ProTunnel.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		65F398131B7B684700ABCD39 /* AdguardApp */ = {
+		65F398131B7B684700ABCD39 /* VisafeApp */ = {
 			isa = PBXGroup;
 			children = (
 				C0DB78C426C50D42003C7900 /* GoogleService-Info.plist */,
@@ -1622,7 +1613,7 @@
 				65F398141B7B684700ABCD39 /* Supporting Files */,
 				65F3986F1B7C8A2000ABCD39 /* Linked Frameworks/Libraries */,
 			);
-			path = AdguardApp;
+			path = VisafeApp;
 			sourceTree = "<group>";
 		};
 		65F398141B7B684700ABCD39 /* Supporting Files */ = {
@@ -2030,6 +2021,14 @@
 			path = LoginAndRegister;
 			sourceTree = "<group>";
 		};
+		C0DB78DF26C537F1003C7900 /* IntroScreen */ = {
+			isa = PBXGroup;
+			children = (
+				C0DB78DD26C537EC003C7900 /* IntroViewController.swift */,
+			);
+			path = IntroScreen;
+			sourceTree = "<group>";
+		};
 		D031A0A6219EFC99002C17D9 /* Lumberjack */ = {
 			isa = PBXGroup;
 			children = (
@@ -2090,7 +2089,6 @@
 			children = (
 				D06DE02B2347769200A70D85 /* AntibannerController.swift */,
 				D03398052431927200F6B9DE /* BackgroundFetchState.swift */,
-				D067D8D821412D4D00ECDE6D /* ContentBlockerService.swift */,
 			);
 			path = ContentBlockers;
 			sourceTree = "<group>";
@@ -2224,6 +2222,7 @@
 		D0F91165212EDE45006DF0D3 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				C0DB78DF26C537F1003C7900 /* IntroScreen */,
 				C0DB78C626C5148E003C7900 /* LoginAndRegister */,
 				C0DB78B526C4B740003C7900 /* VisafePlusTabBar */,
 				C0DB789E26C4B737003C7900 /* Setting */,
@@ -2268,8 +2267,6 @@
 				D08187C92264C89400E961B5 /* LoginService.swift */,
 				7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */,
 				D0F91179213422E1006DF0D3 /* PurchaseService.swift */,
-				D0A29F8823E0334000D974CF /* RateAppService.swift */,
-				D093718A21B0414A004A24F1 /* SafariService.swift */,
 				D0F9117521303E4C006DF0D3 /* ServiceLocator.swift */,
 				D09E2D2F255D6AFF002D6BC0 /* SettingsParser.swift */,
 				D09E2BCE25558075002D6BC0 /* SetappService.swift */,
@@ -2320,9 +2317,9 @@
 /* End PBXLegacyTarget section */
 
 /* Begin PBXNativeTarget section */
-		659886481CF74DE9003ECD1C /* Adguard Pro */ = {
+		659886481CF74DE9003ECD1C /* Visafe Pro */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 659886B61CF74DE9003ECD1C /* Build configuration list for PBXNativeTarget "Adguard Pro" */;
+			buildConfigurationList = 659886B61CF74DE9003ECD1C /* Build configuration list for PBXNativeTarget "Visafe Pro" */;
 			buildPhases = (
 				659886511CF74DE9003ECD1C /* Sources */,
 				6598869C1CF74DE9003ECD1C /* Frameworks */,
@@ -2340,7 +2337,7 @@
 				659886491CF74DE9003ECD1C /* PBXTargetDependency */,
 				6598864B1CF74DE9003ECD1C /* PBXTargetDependency */,
 			);
-			name = "Adguard Pro";
+			name = "Visafe Pro";
 			packageProductDependencies = (
 				D0B546032435D740002F0AEC /* Lottie */,
 				D093AA5F25344B4E0015351F /* Setapp */,
@@ -2356,7 +2353,7 @@
 				C0DB78DB26C51AF6003C7900 /* GoogleSignIn */,
 			);
 			productName = AdguardExtension;
-			productReference = 659886B91CF74DE9003ECD1C /* Adguard Pro.app */;
+			productReference = 659886B91CF74DE9003ECD1C /* Visafe Pro.app */;
 			productType = "com.apple.product-type.application";
 		};
 		D0B544BE2435C6BF002F0AEC /* ProTunnel */ = {
@@ -2408,7 +2405,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 65F3980C1B7B684700ABCD39 /* Build configuration list for PBXProject "Adguard" */;
+			buildConfigurationList = 65F3980C1B7B684700ABCD39 /* Build configuration list for PBXProject "Visafe" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -2458,7 +2455,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				659886481CF74DE9003ECD1C /* Adguard Pro */,
+				659886481CF74DE9003ECD1C /* Visafe Pro */,
 				D0B544BE2435C6BF002F0AEC /* ProTunnel */,
 				65B40D2A1BDE520500A9C595 /* Run Builder */,
 				65423D951C89B7C900DD1224 /* Clean Script */,
@@ -2595,7 +2592,6 @@
 				C0DB78BB26C4B740003C7900 /* IntroDashboardCoontroller.swift in Sources */,
 				D0D7E61D244456D2001801A5 /* ActivityViewController.swift in Sources */,
 				D0B5457C2435D5ED002F0AEC /* DnsTrackerService.swift in Sources */,
-				D0B545882435D630002F0AEC /* ContentBlockerService.swift in Sources */,
 				6598865C1CF74DE9003ECD1C /* FMDatabasePool.m in Sources */,
 				D09E2D31255D6AFF002D6BC0 /* SettingsParser.swift in Sources */,
 				6598865D1CF74DE9003ECD1C /* ASDFilterObjects.m in Sources */,
@@ -2711,7 +2707,6 @@
 				D0B545DF2435D69B002F0AEC /* RoundrectView.swift in Sources */,
 				D0B545D72435D697002F0AEC /* BottomAlertController.swift in Sources */,
 				D0B545782435D5DE002F0AEC /* RequestFactory.swift in Sources */,
-				D0B545922435D630002F0AEC /* RateAppService.swift in Sources */,
 				659886771CF74DE9003ECD1C /* NSString+Utils.m in Sources */,
 				D0B545AD2435D640002F0AEC /* SystemProtectionEnablerController.swift in Sources */,
 				C0A8593D26C376020083E103 /* MainController.swift in Sources */,
@@ -2770,6 +2765,7 @@
 				7EA4551A254ABEDE002B69C6 /* AppDelegate+PresentController.swift in Sources */,
 				D0B545F92435D6CB002F0AEC /* ACLLogFileManagerDefault.swift in Sources */,
 				D0B545902435D630002F0AEC /* NetworkSettingsService.swift in Sources */,
+				C0DB78DE26C537EC003C7900 /* IntroViewController.swift in Sources */,
 				659886881CF74DE9003ECD1C /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				D0B545E22435D69B002F0AEC /* UIViewController+Utils.swift in Sources */,
 				C0DB78B126C4B737003C7900 /* ChangePasscodeController.swift in Sources */,
@@ -2801,7 +2797,6 @@
 				D0B545F32435D6C4002F0AEC /* UIColorUtils.swift in Sources */,
 				D0B5457D2435D62A002F0AEC /* RulesProcessor.swift in Sources */,
 				D0D891B724651E400098487A /* SupportService.swift in Sources */,
-				D0B545932435D630002F0AEC /* SafariService.swift in Sources */,
 				247CB6272600CA5B0047974C /* OpenFiltersMasterControllerParser.swift in Sources */,
 				D0D7E5E824444ECA001801A5 /* Rule.swift in Sources */,
 				D09981201FAB254700290D90 /* AERDomainFilterRule.m in Sources */,
@@ -2945,7 +2940,6 @@
 				D0B544FF2435C6BF002F0AEC /* ABECRequest.m in Sources */,
 				D0B545002435C6BF002F0AEC /* ADBTable.m in Sources */,
 				D0B545012435C6BF002F0AEC /* ACNCidrRange.m in Sources */,
-				D0B545022435C6BF002F0AEC /* SafariService.swift in Sources */,
 				D0B545032435C6BF002F0AEC /* AESharedResources.m in Sources */,
 				D0B545042435C6BF002F0AEC /* NotificationService+Utils.swift in Sources */,
 				D0D7E5FC24444F88001801A5 /* Constant.swift in Sources */,
@@ -3165,18 +3159,21 @@
 				CODE_SIGN_ENTITLEMENTS = VisafeDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = PPZ8Y7NW8F;
 				HEADER_SEARCH_PATHS = $inherited;
-				INFOPLIST_FILE = "$(SRCROOT)/AdguardPro/AdguardPro.plist";
+				INFOPLIST_FILE = AdguardPro/VisafePro.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = $inherited;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.visafe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Visafe-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -3196,18 +3193,21 @@
 				CODE_SIGN_ENTITLEMENTS = AdguardPro/AdguardPro.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = PPZ8Y7NW8F;
 				HEADER_SEARCH_PATHS = $inherited;
-				INFOPLIST_FILE = "$(SRCROOT)/AdguardPro/AdguardPro.plist";
+				INFOPLIST_FILE = AdguardPro/VisafePro.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = $inherited;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.visafe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Visafe-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -3312,7 +3312,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Visafe-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = $SRCROOT/../Libs;
 				WARNING_CFLAGS = "-Wno-nullability-completeness";
@@ -3381,7 +3381,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Visafe-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = $SRCROOT/../Libs;
 				VALIDATE_PRODUCT = YES;
@@ -3422,7 +3422,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Visafe-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -3455,11 +3455,11 @@
 				);
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_SWIFT_FLAGS = "-DAPP_EXTENSION";
-				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardPro.tunnel;
+				PRODUCT_BUNDLE_IDENTIFIER = vn.visafe.tunnel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Visafe-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_VERSION = 5.0;
 				USER_HEADER_SEARCH_PATHS = $SRCROOT/../Libs;
@@ -3478,7 +3478,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		659886B61CF74DE9003ECD1C /* Build configuration list for PBXNativeTarget "Adguard Pro" */ = {
+		659886B61CF74DE9003ECD1C /* Build configuration list for PBXNativeTarget "Visafe Pro" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				659886B71CF74DE9003ECD1C /* Debug */,
@@ -3496,7 +3496,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		65F3980C1B7B684700ABCD39 /* Build configuration list for PBXProject "Adguard" */ = {
+		65F3980C1B7B684700ABCD39 /* Build configuration list for PBXProject "Visafe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				65F3983C1B7B684700ABCD39 /* Debug */,
