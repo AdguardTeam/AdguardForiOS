@@ -853,7 +853,7 @@
 		C0DB78B626C4B740003C7900 /* DashboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardController.swift; sourceTree = "<group>"; };
 		C0DB78B726C4B740003C7900 /* VisafePlusController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisafePlusController.swift; sourceTree = "<group>"; };
 		C0DB78B826C4B740003C7900 /* IntroDashboardCoontroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroDashboardCoontroller.swift; sourceTree = "<group>"; };
-		C0DB78BC26C4D5D6003C7900 /* Adguard ProDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Adguard ProDebug.entitlements"; sourceTree = "<group>"; };
+		C0DB78BC26C4D5D6003C7900 /* VisafeDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VisafeDebug.entitlements; sourceTree = "<group>"; };
 		C0DB78C426C50D42003C7900 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C0DB78C726C5148E003C7900 /* LoginControllerReplace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginControllerReplace.swift; sourceTree = "<group>"; };
 		C0DB78C826C5148E003C7900 /* OTPController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPController.swift; sourceTree = "<group>"; };
@@ -1581,7 +1581,7 @@
 		65F398081B7B684700ABCD39 = {
 			isa = PBXGroup;
 			children = (
-				C0DB78BC26C4D5D6003C7900 /* Adguard ProDebug.entitlements */,
+				C0DB78BC26C4D5D6003C7900 /* VisafeDebug.entitlements */,
 				D093AA18253447940015351F /* setappPublicKey.pem */,
 				D0B8EB8E2248E54A0066C5AC /* Default-568h@2x.png */,
 				D0CB3476212DCE21003B650E /* Adguard-Bridging-Header.h */,
@@ -3162,7 +3162,7 @@
 				AE_SHARED_SUBSCRIPTIOSN_GROUP = group.vn.visafe.subscriptions;
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Adguard ProDebug.entitlements";
+				CODE_SIGN_ENTITLEMENTS = VisafeDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PPZ8Y7NW8F;
