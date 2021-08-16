@@ -26,7 +26,7 @@ class MainMenuController: UITableViewController {
     private let support: SupportServiceProtocol = ServiceLocator.shared.getService()!
     private var dnsProviders: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
 
-    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!

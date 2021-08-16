@@ -27,8 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     // AppDelegate+StatusBarWindow notifications
-    var showStatusBarNotification: NotificationToken?
-    var hideStatusBarNotification: NotificationToken?
+    var filtersUpdateStarted: SafariAdGuardSDK.NotificationToken?
+    var filtersUpdateFinished: SafariAdGuardSDK.NotificationToken?
+    var contentBlockersUpdateStarted: SafariAdGuardSDK.NotificationToken?
+    var contentBlockersUpdateFinished: SafariAdGuardSDK.NotificationToken?
     var orientationChangeNotification: NotificationToken?
     // AppDelegate addPurchaseStatusObserver notifications
     private var purchaseObservation: NotificationToken?
@@ -51,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var purchaseService: PurchaseServiceProtocol
     private var dnsFiltersService: DnsFiltersServiceProtocol
     private var networking: ACNNetworking
-    private var configuration: ConfigurationService
+    private var configuration: ConfigurationServiceProtocol
     private var productInfo: ADProductInfoProtocol
     private var userNotificationService: UserNotificationServiceProtocol
     private var vpnManager: VpnManagerProtocol

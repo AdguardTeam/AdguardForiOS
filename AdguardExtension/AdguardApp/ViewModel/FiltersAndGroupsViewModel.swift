@@ -97,7 +97,7 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
     var constantAllGroups: [SafariGroupProtocol] = []
     
     private var groupsObserver: ((_ index: Int)->Void)?
-    private var configurationService: ConfigurationService
+    private var configurationService: ConfigurationServiceProtocol
     private var resources: AESharedResourcesProtocol
     private var safariProtection: SafariProtectionProtocol
     
@@ -111,7 +111,7 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
     
     // MARK: - initializers
     
-    init(configurationService: ConfigurationService, resources: AESharedResourcesProtocol, safariProtection: SafariProtectionProtocol) {
+    init(configurationService: ConfigurationServiceProtocol, resources: AESharedResourcesProtocol, safariProtection: SafariProtectionProtocol) {
         self.configurationService = configurationService
         self.resources = resources
         self.safariProtection = safariProtection
@@ -218,32 +218,32 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
     }
     
     func set(filter: SafariFilterProtocol, enabled: Bool) {
-        safariProtection.setFilter(withId: filter.filterId, filter.group.groupId, enabled: enabled) { _ in
-            // todo:
-        }
+//        safariProtection.setFilter(withId: filter.filterId, filter.group.groupId, enabled: enabled) { _ in
+//            // todo:
+//        }
     }
     
     func set(groupId: Int, enabled: Bool) {
-        safariProtection.setGroup(SafariGroup.GroupType(rawValue: groupId)! , enabled: enabled) { error in
-            // todo:
-        }
+//        safariProtection.setGroup(SafariGroup.GroupType(rawValue: groupId)! , enabled: enabled) { error in
+//            // todo:
+//        }
 //        guard let group = getGroupFromSearchGroups(by: groupId) else { return }
 //        group.enabled = enabled
     }
 
     func load(_ completion: @escaping () -> Void) {
         
-        safariProtection.updateFiltersMetaAndLocalizations(false) { _ in
-            completion()
-        }
+//        safariProtection.updateFiltersMetaAndLocalizations(false) { _ in
+//            completion()
+//        }
     }
     
     func refresh(_ completion: @escaping () -> Void) {
-        safariProtection.updateFiltersMetaAndLocalizations(true) { [weak self] _ in
-            self?.updateAllGroups()
-            self?.updateCurrentGroup()
-            completion()
-        }
+//        safariProtection.updateFiltersMetaAndLocalizations(true) { [weak self] _ in
+//            self?.updateAllGroups()
+//            self?.updateCurrentGroup()
+//            completion()
+//        }
     }
 
     func bind(groupChanged: @escaping (Int) -> Void) {
@@ -251,11 +251,11 @@ final class FiltersAndGroupsViewModel: NSObject, FiltersAndGroupsViewModelProtoc
     }
     
     func addCustomFilter(filter: ExtendedCustomFilterMetaProtocol, completion: @escaping (Bool) -> Void) {
-        safariProtection.add(customFilter: filter, enabled: true) {[weak self] _ in
-            self?.updateAllGroups()
-            completion(true)
-            self?.callAllCallbacks()
-        }
+//        safariProtection.add(customFilter: filter, enabled: true) {[weak self] _ in
+//            self?.updateAllGroups()
+//            completion(true)
+//            self?.callAllCallbacks()
+//        }
     }
     
     func updateCurrentGroup(){

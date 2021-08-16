@@ -16,26 +16,38 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
+import UIKit
 
-public extension SafariGroup {
-    enum GroupType: Int, Equatable {
-        case ads = 1
-        case privacy = 2
-        case socialWidgets = 3
-        case annoyances = 4
-        case security = 5
-        case other = 6
-        case languageSpecific = 7
-        case custom = 101
-        
-        public var id: Int { self.rawValue }
-        
-        public var proOnly: Bool {
-            switch self {
-            case .security, .custom: return true
-            default: return false
-            }
+final class TitleTableViewCell: UITableViewCell, Reusable {
+    // MARK: - Outlets
+    @IBOutlet weak var titleLabel: ThemableLabel!
+    
+    // MARK: - Services
+    private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+
+    // MARK: - Properties
+    private var themeObserver: NotificationToken?
+    
+    var title: String? {
+        didSet {
+            titleLabel.text = title
         }
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        selectionStyle = .none
+        updateTheme()
+        
+        themeObserver = NotificationCenter.default.observe(name: .themeChanged, object: nil, queue: .main) { [weak self] _ in
+            self?.updateTheme()
+        }
+    }
+}
+
+extension TitleTableViewCell: ThemableProtocol {
+    func updateTheme() {
+        themeService.setupTableCell(self)
+        themeService.setupLabel(titleLabel)
     }
 }

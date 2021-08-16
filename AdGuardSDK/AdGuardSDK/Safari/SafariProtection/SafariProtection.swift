@@ -158,12 +158,18 @@ public final class SafariProtection: SafariProtectionProtocol {
     // MARK: - Internal methods
     
     /* Executes block that leads to CB JSON files changes, after that reloads CBs */
-    func executeBlockAndReloadCbs(block: () throws -> Void, onCbReloaded: @escaping (_ error: Error?) -> Void) {
+    func executeBlockAndReloadCbs(
+        block: () throws -> Void,
+        onBlockExecuted: (_ error: Error?) -> Void,
+        onCbReloaded: @escaping (_ error: Error?) -> Void
+    ) {
         do {
             try block()
+            onBlockExecuted(nil)
         }
         catch {
             Logger.logError("(SafariProtection) - createNewCbJsonsAndReloadCbs; Error: \(error)")
+            onBlockExecuted(error)
             onCbReloaded(error)
             return
         }

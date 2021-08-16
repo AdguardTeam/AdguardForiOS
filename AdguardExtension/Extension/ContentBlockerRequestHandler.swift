@@ -19,7 +19,7 @@
 import Foundation
 import SafariAdGuardSDK
 
-class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
+class ContentBlockerRequestHandler: NSObject, NSExtensionRequestHandling {
     func beginRequest(with context: NSExtensionContext) {
         
         let resources = AESharedResources()

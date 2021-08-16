@@ -27,7 +27,7 @@ class SignInController: UIViewController {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let notificationService: UserNotificationServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
     
     private var notificationSignInObserver: NotificationToken?

@@ -88,7 +88,7 @@ class ComplexProtectionController: UITableViewController {
     
     // Services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
     private let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!

@@ -38,7 +38,7 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
     private let embedTableSegue = "embedTableSegue"
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsFiltersService:DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
     private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResources = ServiceLocator.shared.getService()!
@@ -108,9 +108,9 @@ class FilterDetailsController : UIViewController, FilterDetailsControllerAnimati
             guard let self = self else { return }
             
             if let customFilter = self.filter {
-                self.safariProtection.deleteCustomFilter(withId: customFilter.filterId) { _ in
-                    // todo: proces error
-                }
+//                self.safariProtection.deleteCustomFilter(withId: customFilter.filterId) { _ in
+//                    // todo: proces error
+//                }
             }
             
             if let dnsFilter = self.filter as? DnsFilter {
@@ -312,9 +312,9 @@ class FilterDetailsTableCotroller : UITableViewController {
     
     @IBAction func toggleEnableSwitch(_ sender: UISwitch) {
         
-        safariProtection.setFilter(withId: filter.filterId, filter.group.groupId, enabled: sender.isOn) { error in
-            // todo: process error
-        }
+//        safariProtection.setFilter(withId: filter.filterId, filter.group.groupId, enabled: sender.isOn) { error in
+//            // todo: process error
+//        }
 
         // todo: change it when dnsProtection will be implemented
 //        if let dnsFilter = filter as? DnsFilter {

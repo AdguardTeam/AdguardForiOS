@@ -237,21 +237,21 @@ class SafariWhitelistModel: ListOfRulesModelProtocol {
                
             self.delegate?.listOfRulesChanged()
            
-            self.safariProtection.add(rule: UserRule(ruleText: domain), for: .allowlist, override: true) { [weak self] (error) in
-                DispatchQueue.main.async {
-                    if error == nil {
-                        completionHandler()
-                    } else {
-                        self?.allRules = rulesCopy
-                        self?.ruleObjects = objectsCopy
-                        self?.delegate?.listOfRulesChanged()
-                          
-                        errorHandler(error!.localizedDescription)
-                    }
-                       
-                    UIApplication.shared.endBackgroundTask(backgroundTaskId)
-                }
-            }
+//            self.safariProtection.add(rule: UserRule(ruleText: domain), for: .allowlist, override: true) { [weak self] (error) in
+//                DispatchQueue.main.async {
+//                    if error == nil {
+//                        completionHandler()
+//                    } else {
+//                        self?.allRules = rulesCopy
+//                        self?.ruleObjects = objectsCopy
+//                        self?.delegate?.listOfRulesChanged()
+//                          
+//                        errorHandler(error!.localizedDescription)
+//                    }
+//                       
+//                    UIApplication.shared.endBackgroundTask(backgroundTaskId)
+//                }
+//            }
         }
     }
     
@@ -266,22 +266,22 @@ class SafariWhitelistModel: ListOfRulesModelProtocol {
             
         let backgroundTaskId = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
             
-        safariProtection.removeRule(withText: domain, for: .allowlist) { (error) in
-                
-            DispatchQueue.main.async {[weak self] in
-                if error == nil {
-                    completionHandler()
-                }
-                else {
-                    self?.allRules = oldRules
-                    self?.ruleObjects = oldRuleObjects
-                    self?.delegate?.listOfRulesChanged()
-                    errorHandler(error?.localizedDescription ?? "")
-                }
-                
-                UIApplication.shared.endBackgroundTask(backgroundTaskId)
-            }
-        }
+//        safariProtection.removeRule(withText: domain, for: .allowlist) { (error) in
+//
+//            DispatchQueue.main.async {[weak self] in
+//                if error == nil {
+//                    completionHandler()
+//                }
+//                else {
+//                    self?.allRules = oldRules
+//                    self?.ruleObjects = oldRuleObjects
+//                    self?.delegate?.listOfRulesChanged()
+//                    errorHandler(error?.localizedDescription ?? "")
+//                }
+//
+//                UIApplication.shared.endBackgroundTask(backgroundTaskId)
+//            }
+//        }
     }
     
     private func setNewRules(_ newRuleObjects: [UserRuleProtocol], ruleInfos: [RuleInfo], completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
@@ -299,16 +299,16 @@ class SafariWhitelistModel: ListOfRulesModelProtocol {
             DispatchQueue.global().async { [weak self] in
                 guard let self = self else { return }
                 
-                self.safariProtection.add(rules: self.ruleObjects, for: .allowlist, override: true) { (error) in
-                    
-                    if error != nil {
-                        DDLogError("(SafariWhitelistModel) Error occured during content blocker reloading - \(error!.localizedDescription)")
-                        // do not rollback changes and do not show any alert to user in this case
-                        // https://github.com/AdguardTeam/AdguardForiOS/issues/1174
-                    }
-                    UIApplication.shared.endBackgroundTask(backgroundTaskId)
-                    completionHandler()
-                }
+//                self.safariProtection.add(rules: self.ruleObjects, for: .allowlist, override: true) { (error) in
+//
+//                    if error != nil {
+//                        DDLogError("(SafariWhitelistModel) Error occured during content blocker reloading - \(error!.localizedDescription)")
+//                        // do not rollback changes and do not show any alert to user in this case
+//                        // https://github.com/AdguardTeam/AdguardForiOS/issues/1174
+//                    }
+//                    UIApplication.shared.endBackgroundTask(backgroundTaskId)
+//                    completionHandler()
+//                }
             }
         }
     }
@@ -357,18 +357,18 @@ class SafariWhitelistModel: ListOfRulesModelProtocol {
         let oldRuleObject = ruleObjects[index]
         let oldRule = allRules[index]
         
-        safariProtection.modifyRule(allRules[index].rule, UserRule(ruleText: text), for: .allowlist) { (error) in
-            oldRule.rule = text
-            
-            oldRule.enabled = enabled
-            
-            // todo:
-//            oldRuleObject.isEnabled = NSNumber(booleanLiteral: enabled)
-//            oldRuleObject.ruleText = text
-            
-            completionHandler()
-            UIApplication.shared.endBackgroundTask(backgroundTaskId)
-        }
+//        safariProtection.modifyRule(allRules[index].rule, UserRule(ruleText: text), for: .allowlist) { (error) in
+//            oldRule.rule = text
+//            
+//            oldRule.enabled = enabled
+//            
+//            // todo:
+////            oldRuleObject.isEnabled = NSNumber(booleanLiteral: enabled)
+////            oldRuleObject.ruleText = text
+//            
+//            completionHandler()
+//            UIApplication.shared.endBackgroundTask(backgroundTaskId)
+//        }
     }
     
     private func searchRule(){

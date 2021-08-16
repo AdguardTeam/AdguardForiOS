@@ -32,7 +32,7 @@ class GetProController: UIViewController {
     private var notificationToken: NotificationToken?
     
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
-    private let configurationService: ConfigurationService = ServiceLocator.shared.getService()!
+    private let configurationService: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
     

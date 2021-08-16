@@ -46,7 +46,7 @@ class DnsRequestDetailsController: UITableViewController {
     
     // MARK: - Services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - Sections & Rows
     private let titleSection = 0

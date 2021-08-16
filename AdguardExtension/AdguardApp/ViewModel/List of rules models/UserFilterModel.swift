@@ -284,16 +284,16 @@ class UserFilterModel: ListOfRulesModelProtocol {
             
             DispatchQueue.global().async { [weak self] in
                 guard let self = self else { return }
-                self.safariProtection.add(rules: newRuleObjects, for: .blocklist, override: true) { error in
-                    DispatchQueue.main.async {
-                        self.allRules = rulesCopy
-                        self.ruleObjects = objectsCopy
-                        self.delegate?.listOfRulesChanged()
-                        if let error = error {
-                            errorHandler(error.localizedDescription)
-                        }
-                    }
-                }
+//                self.safariProtection.add(rules: newRuleObjects, for: .blocklist, override: true) { error in
+//                    DispatchQueue.main.async {
+//                        self.allRules = rulesCopy
+//                        self.ruleObjects = objectsCopy
+//                        self.delegate?.listOfRulesChanged()
+//                        if let error = error {
+//                            errorHandler(error.localizedDescription)
+//                        }
+//                    }
+//                }
                 
                 completionHandler()
             }

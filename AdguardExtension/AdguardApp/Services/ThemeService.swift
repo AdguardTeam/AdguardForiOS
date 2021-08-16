@@ -303,6 +303,9 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     func setupTable(_ table: UITableView) {
+        if #available(iOS 15.0, *) {
+            table.sectionHeaderTopPadding = 0.0
+        }
         table.separatorColor = separatorColor
         table.tableFooterView?.backgroundColor = backgroundColor
     }

@@ -564,6 +564,18 @@
 		7E8D4299258CCF1700B6300E /* DnsProvidersMigrationsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8D4298258CCF1700B6300E /* DnsProvidersMigrationsTest.swift */; };
 		7E9082082549D5430048C4B0 /* HowToSetupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9082072549D5430048C4B0 /* HowToSetupController.swift */; };
 		7E9082092549D5430048C4B0 /* HowToSetupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9082072549D5430048C4B0 /* HowToSetupController.swift */; };
+		7E92753826C67A1D007B2C80 /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E92753626C67A1D007B2C80 /* TitleTableViewCell.swift */; };
+		7E92753926C67A1D007B2C80 /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E92753626C67A1D007B2C80 /* TitleTableViewCell.swift */; };
+		7E92753A26C67A1D007B2C80 /* TitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E92753726C67A1D007B2C80 /* TitleTableViewCell.xib */; };
+		7E92753B26C67A1D007B2C80 /* TitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E92753726C67A1D007B2C80 /* TitleTableViewCell.xib */; };
+		7E92753F26C67ABA007B2C80 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E92753E26C67ABA007B2C80 /* Reusable.swift */; };
+		7E92754026C67ABA007B2C80 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E92753E26C67ABA007B2C80 /* Reusable.swift */; };
+		7E92754226C67CA6007B2C80 /* SafariGroupTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E92754126C67CA6007B2C80 /* SafariGroupTableController.swift */; };
+		7E92754326C67CA6007B2C80 /* SafariGroupTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E92754126C67CA6007B2C80 /* SafariGroupTableController.swift */; };
+		7E92754526C67FCD007B2C80 /* SafariGroupsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E92754426C67FCD007B2C80 /* SafariGroupsModel.swift */; };
+		7E92754626C67FCD007B2C80 /* SafariGroupsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E92754426C67FCD007B2C80 /* SafariGroupsModel.swift */; };
+		7E92754B26C6C02F007B2C80 /* DispatchQueue+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E92754A26C6C02F007B2C80 /* DispatchQueue+Utils.swift */; };
+		7E92754C26C6C02F007B2C80 /* DispatchQueue+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E92754A26C6C02F007B2C80 /* DispatchQueue+Utils.swift */; };
 		7E952E9023D5FF8500D89AE0 /* MainPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E952E9223D5FF8500D89AE0 /* MainPage.storyboard */; };
 		7E952E9723D5FFB400D89AE0 /* Protection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E952E9923D5FFB400D89AE0 /* Protection.storyboard */; };
 		7E952E9A23D5FFBA00D89AE0 /* Activity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E952E9C23D5FFBA00D89AE0 /* Activity.storyboard */; };
@@ -614,6 +626,10 @@
 		7EA7834D2578E54500CA8889 /* SupportService+Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA7834A2578E54500CA8889 /* SupportService+Feedback.swift */; };
 		7EA783DB2578E93600CA8889 /* SupportService+Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA7834A2578E54500CA8889 /* SupportService+Feedback.swift */; };
 		7EA783ED2578E93700CA8889 /* SupportService+Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA7834A2578E54500CA8889 /* SupportService+Feedback.swift */; };
+		7EA7DCBE26C674FE0032AD5C /* SafariProtectionGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA7DCBC26C674FE0032AD5C /* SafariProtectionGroupCell.swift */; };
+		7EA7DCBF26C674FE0032AD5C /* SafariProtectionGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA7DCBC26C674FE0032AD5C /* SafariProtectionGroupCell.swift */; };
+		7EA7DCC026C674FE0032AD5C /* SafariProtectionGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EA7DCBD26C674FE0032AD5C /* SafariProtectionGroupCell.xib */; };
+		7EA7DCC126C674FE0032AD5C /* SafariProtectionGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EA7DCBD26C674FE0032AD5C /* SafariProtectionGroupCell.xib */; };
 		7EA887E9237D290E00E1043D /* CustomNavigationTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA887E8237D290E00E1043D /* CustomNavigationTransition.swift */; };
 		7EAA63992341E8A60040F3A0 /* RuleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA63982341E8A60040F3A0 /* RuleInfo.swift */; };
 		7EABA5F22578F5BC001E52BC /* ParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F93F23F2B64400F9A544 /* ParserProtocol.swift */; };
@@ -1252,20 +1268,20 @@
 		D07256D026BC15D700654177 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = D07256CF26BC15D700654177 /* Zip */; };
 		D07256D226BC15DB00654177 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = D07256D126BC15DB00654177 /* Zip */; };
 		D07256D426BC15E000654177 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = D07256D326BC15E000654177 /* Zip */; };
-		D07256DB26BD556200654177 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ActionRequestHandler.swift */; };
-		D07256DC26BD556300654177 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ActionRequestHandler.swift */; };
-		D07256DD26BD556300654177 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ActionRequestHandler.swift */; };
-		D07256DE26BD556300654177 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ActionRequestHandler.swift */; };
-		D07256DF26BD556400654177 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ActionRequestHandler.swift */; };
-		D07256E026BD556500654177 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ActionRequestHandler.swift */; };
-		D07256E126BD556500654177 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ActionRequestHandler.swift */; };
-		D07256E226BD556600654177 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ActionRequestHandler.swift */; };
-		D07256E326BD556700654177 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ActionRequestHandler.swift */; };
-		D07256E426BD556800654177 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ActionRequestHandler.swift */; };
-		D07256E526BD556900654177 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ActionRequestHandler.swift */; };
-		D07256E626BD556900654177 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ActionRequestHandler.swift */; };
-		D07256E726BD556A00654177 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ActionRequestHandler.swift */; };
-		D07256E826BD556A00654177 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ActionRequestHandler.swift */; };
+		D07256DB26BD556200654177 /* ContentBlockerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ContentBlockerRequestHandler.swift */; };
+		D07256DC26BD556300654177 /* ContentBlockerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ContentBlockerRequestHandler.swift */; };
+		D07256DD26BD556300654177 /* ContentBlockerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ContentBlockerRequestHandler.swift */; };
+		D07256DE26BD556300654177 /* ContentBlockerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ContentBlockerRequestHandler.swift */; };
+		D07256DF26BD556400654177 /* ContentBlockerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ContentBlockerRequestHandler.swift */; };
+		D07256E026BD556500654177 /* ContentBlockerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ContentBlockerRequestHandler.swift */; };
+		D07256E126BD556500654177 /* ContentBlockerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ContentBlockerRequestHandler.swift */; };
+		D07256E226BD556600654177 /* ContentBlockerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ContentBlockerRequestHandler.swift */; };
+		D07256E326BD556700654177 /* ContentBlockerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ContentBlockerRequestHandler.swift */; };
+		D07256E426BD556800654177 /* ContentBlockerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ContentBlockerRequestHandler.swift */; };
+		D07256E526BD556900654177 /* ContentBlockerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ContentBlockerRequestHandler.swift */; };
+		D07256E626BD556900654177 /* ContentBlockerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ContentBlockerRequestHandler.swift */; };
+		D07256E726BD556A00654177 /* ContentBlockerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ContentBlockerRequestHandler.swift */; };
+		D07256E826BD556A00654177 /* ContentBlockerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07256D926BD552700654177 /* ContentBlockerRequestHandler.swift */; };
 		D07256E926BD578F00654177 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
 		D07256EA26BD578F00654177 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
 		D07256EB26BD579000654177 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
@@ -3074,6 +3090,12 @@
 		7E8D423B258CC52100B6300E /* DnsProviders+Migrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DnsProviders+Migrations.swift"; sourceTree = "<group>"; };
 		7E8D4298258CCF1700B6300E /* DnsProvidersMigrationsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersMigrationsTest.swift; sourceTree = "<group>"; };
 		7E9082072549D5430048C4B0 /* HowToSetupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToSetupController.swift; sourceTree = "<group>"; };
+		7E92753626C67A1D007B2C80 /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
+		7E92753726C67A1D007B2C80 /* TitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleTableViewCell.xib; sourceTree = "<group>"; };
+		7E92753E26C67ABA007B2C80 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		7E92754126C67CA6007B2C80 /* SafariGroupTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariGroupTableController.swift; sourceTree = "<group>"; };
+		7E92754426C67FCD007B2C80 /* SafariGroupsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariGroupsModel.swift; sourceTree = "<group>"; };
+		7E92754A26C6C02F007B2C80 /* DispatchQueue+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Utils.swift"; sourceTree = "<group>"; };
 		7E952E9123D5FF8500D89AE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainPage.storyboard; sourceTree = "<group>"; };
 		7E952E9823D5FFB400D89AE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Protection.storyboard; sourceTree = "<group>"; };
 		7E952E9B23D5FFBA00D89AE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Activity.storyboard; sourceTree = "<group>"; };
@@ -3207,6 +3229,8 @@
 		7EA45504254AB249002B69C6 /* ActivityNativeDnsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityNativeDnsController.swift; sourceTree = "<group>"; };
 		7EA45518254ABEDE002B69C6 /* AppDelegate+PresentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+PresentController.swift"; sourceTree = "<group>"; };
 		7EA7834A2578E54500CA8889 /* SupportService+Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SupportService+Feedback.swift"; sourceTree = "<group>"; };
+		7EA7DCBC26C674FE0032AD5C /* SafariProtectionGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariProtectionGroupCell.swift; sourceTree = "<group>"; };
+		7EA7DCBD26C674FE0032AD5C /* SafariProtectionGroupCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SafariProtectionGroupCell.xib; sourceTree = "<group>"; };
 		7EA887E8237D290E00E1043D /* CustomNavigationTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationTransition.swift; sourceTree = "<group>"; };
 		7EAA63982341E8A60040F3A0 /* RuleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleInfo.swift; sourceTree = "<group>"; };
 		7EABA8962578FEE6001E52BC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/RateApp.strings"; sourceTree = "<group>"; };
@@ -3424,7 +3448,7 @@
 		D06ACB6E2146AF1700D2A37D /* LongLabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongLabelCell.swift; sourceTree = "<group>"; };
 		D06E6BD225E8F6000069013C /* VpnConfigurationStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VpnConfigurationStatus.swift; sourceTree = "<group>"; };
 		D0702B3E2188859D0051669A /* FileShareService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileShareService.swift; sourceTree = "<group>"; };
-		D07256D926BD552700654177 /* ActionRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionRequestHandler.swift; sourceTree = "<group>"; };
+		D07256D926BD552700654177 /* ContentBlockerRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerRequestHandler.swift; sourceTree = "<group>"; };
 		D077D5F0213974FC00D3D5B3 /* GetProController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProController.swift; sourceTree = "<group>"; };
 		D077D5F42139774E00D3D5B3 /* RoundRectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundRectButton.swift; sourceTree = "<group>"; };
 		D07A164121678EA5008BB432 /* RoundrectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundrectView.swift; sourceTree = "<group>"; };
@@ -4036,6 +4060,7 @@
 				D0F91161212EDD51006DF0D3 /* Views */,
 				6578E3821BC5082000E2DFFD /* vendors */,
 				7E0B227425DBBB4300AF88BB /* Utils */,
+				7E92753D26C67A2E007B2C80 /* GenericCells */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -4273,6 +4298,7 @@
 				65AD3BBA1B7CB15400004A02 /* AESharedResources.m */,
 				65AD3BB91B7CB15400004A02 /* AESharedResources.h */,
 				7EF5C50D26C261AF001851D6 /* SharedResources */,
+				7E92754A26C6C02F007B2C80 /* DispatchQueue+Utils.swift */,
 			);
 			path = SharedComponents;
 			sourceTree = "<group>";
@@ -4548,7 +4574,7 @@
 				7E06B63622FB0313006859AC /* AdguardBlockingExtensionOther.plist */,
 				7E06B63822FB0313006859AC /* AdguardBlockingExtensionPrivacy.plist */,
 				7E06B65F22FB04CD006859AC /* AdguardBlockingExtensionSecurity.plist */,
-				D07256D926BD552700654177 /* ActionRequestHandler.swift */,
+				D07256D926BD552700654177 /* ContentBlockerRequestHandler.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -4777,6 +4803,24 @@
 			path = Activity;
 			sourceTree = "<group>";
 		};
+		7E92753C26C67A26007B2C80 /* TitleTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				7E92753626C67A1D007B2C80 /* TitleTableViewCell.swift */,
+				7E92753726C67A1D007B2C80 /* TitleTableViewCell.xib */,
+			);
+			path = TitleTableViewCell;
+			sourceTree = "<group>";
+		};
+		7E92753D26C67A2E007B2C80 /* GenericCells */ = {
+			isa = PBXGroup;
+			children = (
+				7E92753E26C67ABA007B2C80 /* Reusable.swift */,
+				7E92753C26C67A26007B2C80 /* TitleTableViewCell */,
+			);
+			path = GenericCells;
+			sourceTree = "<group>";
+		};
 		7E9B37F4239175FD00053972 /* DetailedFilter */ = {
 			isa = PBXGroup;
 			children = (
@@ -4801,6 +4845,25 @@
 				7EA7834A2578E54500CA8889 /* SupportService+Feedback.swift */,
 			);
 			path = Support;
+			sourceTree = "<group>";
+		};
+		7EA7DCC226C675060032AD5C /* SafariProtectionGroupCell */ = {
+			isa = PBXGroup;
+			children = (
+				7EA7DCBC26C674FE0032AD5C /* SafariProtectionGroupCell.swift */,
+				7EA7DCBD26C674FE0032AD5C /* SafariProtectionGroupCell.xib */,
+			);
+			path = SafariProtectionGroupCell;
+			sourceTree = "<group>";
+		};
+		7EA7DCC326C675BF0032AD5C /* SafariProtection */ = {
+			isa = PBXGroup;
+			children = (
+				7EA7DCC226C675060032AD5C /* SafariProtectionGroupCell */,
+				7E92754126C67CA6007B2C80 /* SafariGroupTableController.swift */,
+				7E92754426C67FCD007B2C80 /* SafariGroupsModel.swift */,
+			);
+			path = SafariProtection;
 			sourceTree = "<group>";
 		};
 		7EB2F93D23F2B64400F9A544 /* Networking */ = {
@@ -5297,6 +5360,7 @@
 				D0EDE45422A9288E00086C00 /* Tutorial */,
 				7E31217024DC024E00642879 /* BottomAlertController */,
 				7E0B223D25DBB3D200AF88BB /* UpsellViewController */,
+				7EA7DCC326C675BF0032AD5C /* SafariProtection */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -5939,7 +6003,7 @@
 		65F398091B7B684700ABCD39 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1250;
+				LastSwiftUpdateCheck = 1300;
 				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = Performiks;
 				TargetAttributes = {
@@ -6140,6 +6204,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E92753B26C67A1D007B2C80 /* TitleTableViewCell.xib in Resources */,
 				D0D7E54524371C8C001801A5 /* MainPage.storyboard in Resources */,
 				D098B44924497764003BA4DA /* ActivityTableViewCell.xib in Resources */,
 				D0D7E54C24371C8C001801A5 /* About.storyboard in Resources */,
@@ -6162,6 +6227,7 @@
 				D0D7E585243B1C4F001801A5 /* PTMono-Regular.ttf in Resources */,
 				D024968A256F9DFC000EED34 /* ImportSettings.storyboard in Resources */,
 				D0D7E54A24371C8C001801A5 /* MainMenu.storyboard in Resources */,
+				7EA7DCC126C674FE0032AD5C /* SafariProtectionGroupCell.xib in Resources */,
 				D0D891B8246520E40098487A /* public_suffix_list.dat in Resources */,
 				D0D7E58B243B1CBA001801A5 /* safari_tracking_protection_step3.json in Resources */,
 				D0D7E54624371C8C001801A5 /* DnsSettings.storyboard in Resources */,
@@ -6199,6 +6265,7 @@
 				D0D6B9F621A6AF40007360BC /* About.storyboard in Resources */,
 				7E536C7B238D3A9400A83A79 /* Assets.xcassets in Resources */,
 				7E12D4FF23EA9A7B0009108D /* whotracksme.json in Resources */,
+				7EA7DCC026C674FE0032AD5C /* SafariProtectionGroupCell.xib in Resources */,
 				D0D6BA0B21A6AF6C007360BC /* UserFilter.storyboard in Resources */,
 				7EA2B3262424FE8F00FD3304 /* ActivityTableViewCell.xib in Resources */,
 				D02B550822EED8740039BC48 /* PTMono-Regular.ttf in Resources */,
@@ -6213,6 +6280,7 @@
 				7E12D50123EA9AAF0009108D /* adguard.json in Resources */,
 				D0F7B86822202C5A00F629C4 /* LaunchScreen.storyboard in Resources */,
 				7E25221C240821BF00743648 /* safari_protection_step2.json in Resources */,
+				7E92753A26C67A1D007B2C80 /* TitleTableViewCell.xib in Resources */,
 				65B40D3B1BDE808E00A9C595 /* stringUIResources.plist in Resources */,
 				7E952E9023D5FF8500D89AE0 /* MainPage.storyboard in Resources */,
 				D0D6BA0521A6AF63007360BC /* Settings.storyboard in Resources */,
@@ -6787,6 +6855,7 @@
 				D0D7E6202444570F001801A5 /* ActivityTableViewCell.swift in Sources */,
 				D0B545BB2435D655002F0AEC /* RequestDetailsCell.swift in Sources */,
 				D0B545D02435D692002F0AEC /* RuleInfo.swift in Sources */,
+				7E92754326C67CA6007B2C80 /* SafariGroupTableController.swift in Sources */,
 				D031A124219EFC99002C17D9 /* DDContextFilterLogFormatter.m in Sources */,
 				D0B545E52435D69B002F0AEC /* NetworkSettingsCells.swift in Sources */,
 				D0B545AE2435D646002F0AEC /* NewCustomFilterDetailsController.swift in Sources */,
@@ -6869,11 +6938,13 @@
 				D0B545922435D630002F0AEC /* RateAppService.swift in Sources */,
 				D0450F84263C2A1800CA2110 /* NSString+Utils.m in Sources */,
 				D0B545AD2435D640002F0AEC /* SystemProtectionEnablerController.swift in Sources */,
+				7E92754026C67ABA007B2C80 /* Reusable.swift in Sources */,
 				7EF5C51E26C261CC001851D6 /* SharedResources+DebugLogs.swift in Sources */,
 				D0D7E615244455CA001801A5 /* ThemableButton.swift in Sources */,
 				D0B545BE2435D65C002F0AEC /* MainNavigationController.swift in Sources */,
 				D0B545E02435D69B002F0AEC /* ThemeableImageView.swift in Sources */,
 				D031A108219EFC99002C17D9 /* CLIColor.m in Sources */,
+				7E92754626C67FCD007B2C80 /* SafariGroupsModel.swift in Sources */,
 				24D9226D2604B3DD002F368B /* AppDelegate+UserNotifications.swift in Sources */,
 				24ED98CA259B78DF00A73B17 /* Array+Utils.swift in Sources */,
 				7EE8AC1726C595350070D477 /* ThemeMode.swift in Sources */,
@@ -6907,6 +6978,7 @@
 				247CB57C2600B8030047974C /* OpenUserFilterControllerParser.swift in Sources */,
 				D0B545B02435D649002F0AEC /* FiltersController.swift in Sources */,
 				D0B545702435D5CD002F0AEC /* FiltersAndGroupsViewModel.swift in Sources */,
+				7E92754C26C6C02F007B2C80 /* DispatchQueue+Utils.swift in Sources */,
 				D0B545BF2435D65C002F0AEC /* MainMenuController.swift in Sources */,
 				659886811CF74DE9003ECD1C /* FMDatabaseAdditions.m in Sources */,
 				240E4DA126203EA1007E8C66 /* ActionWebReporter.swift in Sources */,
@@ -6930,6 +7002,7 @@
 				D0B545902435D630002F0AEC /* NetworkSettingsService.swift in Sources */,
 				D0B545D42435D697002F0AEC /* OnboardingController.swift in Sources */,
 				659886881CF74DE9003ECD1C /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
+				7E92753926C67A1D007B2C80 /* TitleTableViewCell.swift in Sources */,
 				D0B545E22435D69B002F0AEC /* UIViewController+Utils.swift in Sources */,
 				659886891CF74DE9003ECD1C /* FMSQLStatementSplitter.m in Sources */,
 				D0B545A12435D63D002F0AEC /* GetProPageController.swift in Sources */,
@@ -6975,6 +7048,7 @@
 				659886911CF74DE9003ECD1C /* ACLExecuteBlockDelayed.m in Sources */,
 				D0B545FD2435D6D2002F0AEC /* Dns64Utils.swift in Sources */,
 				D0B545A02435D63D002F0AEC /* DnsLogContainerController.swift in Sources */,
+				7EA7DCBF26C674FE0032AD5C /* SafariProtectionGroupCell.swift in Sources */,
 				7EAD352D26C2C821001AFB3A /* ACNIPUtils.m in Sources */,
 				659886941CF74DE9003ECD1C /* ACSSystemUtils.m in Sources */,
 				D0B545EE2435D6AB002F0AEC /* LoaderSegue.swift in Sources */,
@@ -7113,6 +7187,7 @@
 				D0D7E55C24377280001801A5 /* Bundle+config.swift in Sources */,
 				D0218FBA22674574002BE017 /* DnsLogRecord.swift in Sources */,
 				655A02311C6B7686000F00D7 /* ACLFileLocker.m in Sources */,
+				7E92754226C67CA6007B2C80 /* SafariGroupTableController.swift in Sources */,
 				242B9145258A0D3E00A39E19 /* SignInController.swift in Sources */,
 				D0227DD4244D4A08009B7579 /* SupportService.swift in Sources */,
 				24F66A8526033C9D0097B426 /* OpenDnsSettingsControllerWithLaunchScreenParser.swift in Sources */,
@@ -7197,6 +7272,7 @@
 				7E1C5839234DE3D600D8F419 /* ListOfRulesController.swift in Sources */,
 				D09E9644216CB14A00313AB1 /* ThemeService.swift in Sources */,
 				7E3F11902350624900D1D17E /* UserFilterModel.swift in Sources */,
+				7E92754526C67FCD007B2C80 /* SafariGroupsModel.swift in Sources */,
 				7EF5C56F26C26D3A001851D6 /* UserNotificationService.swift in Sources */,
 				7E5FC201234F71F0008E383D /* ListOfRulesCells.swift in Sources */,
 				D00E43F12562A484002DDE98 /* ImportSettingsController.swift in Sources */,
@@ -7212,6 +7288,7 @@
 				D0F9117A213422E1006DF0D3 /* PurchaseService.swift in Sources */,
 				7E2522162408207A00743648 /* OnboardingAnimationsController.swift in Sources */,
 				7EAD353F26C2D5F9001AFB3A /* LocalizedDnsProviders.swift in Sources */,
+				7E92754B26C6C02F007B2C80 /* DispatchQueue+Utils.swift in Sources */,
 				7ECF38BB23AA43A300A39094 /* DnsLogContainerController.swift in Sources */,
 				7E473B7725559469006F8345 /* DnsProviderCell.swift in Sources */,
 				D04B4A1F263AF7CE00815F30 /* SharedResources+applicationResources.swift in Sources */,
@@ -7267,6 +7344,7 @@
 				7EF16CBB2350C86C007E0863 /* InvertedSafariWhitelistModel.swift in Sources */,
 				7E9082082549D5430048C4B0 /* HowToSetupController.swift in Sources */,
 				65AD3BBB1B7CB15400004A02 /* AESharedResources.m in Sources */,
+				7EA7DCBE26C674FE0032AD5C /* SafariProtectionGroupCell.swift in Sources */,
 				24ED98C6259B78DF00A73B17 /* Array+Utils.swift in Sources */,
 				D05CA86D1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				247CB5FE2600C5A10047974C /* OpenDnsProvidersControllerParser.swift in Sources */,
@@ -7296,6 +7374,7 @@
 				D0CDD56A2344E066000584EF /* DnsFiltersService.swift in Sources */,
 				D0D0CAFA268A27CC00AD427E /* ACObject.m in Sources */,
 				D067D9AD214693E200ECDE6D /* EmailSignInController.swift in Sources */,
+				7E92753F26C67ABA007B2C80 /* Reusable.swift in Sources */,
 				D0F9116E212FFCD6006DF0D3 /* UIColorUtils.swift in Sources */,
 				7EEF93F32360373F00F5856A /* ListOfRulesModel.swift in Sources */,
 				7E9C0BB925627B5500F1999D /* RateAppController.swift in Sources */,
@@ -7313,6 +7392,7 @@
 				D0569E4821F1F0FF00985DA9 /* ADBTable.m in Sources */,
 				247CB5052600A3220047974C /* URLSchemeParser.swift in Sources */,
 				2425D6A8258F8C430037AEBE /* Dictionary+Utils.swift in Sources */,
+				7E92753826C67A1D007B2C80 /* TitleTableViewCell.swift in Sources */,
 				7EA7834B2578E54500CA8889 /* SupportService+Feedback.swift in Sources */,
 				D07AA067220823670065779F /* ChooseProtocolController.swift in Sources */,
 				7E5101912355A71900935FE9 /* NetworkSettingsCells.swift in Sources */,
@@ -7594,7 +7674,7 @@
 				655A024D1C6B7686000F00D7 /* ACLWildcard.m in Sources */,
 				7E9C0C1D256292DE00F1999D /* UIColor+Utils.swift in Sources */,
 				655A02351C6B7686000F00D7 /* ACLFileLogger.m in Sources */,
-				D07256DB26BD556200654177 /* ActionRequestHandler.swift in Sources */,
+				D07256DB26BD556200654177 /* ContentBlockerRequestHandler.swift in Sources */,
 				655A022F1C6B7686000F00D7 /* ACLExecuteBlockDelayed.m in Sources */,
 				655A027A1C6B7686000F00D7 /* NSException+Utils.m in Sources */,
 				655A02921C6B7686000F00D7 /* ACNNetworking.m in Sources */,
@@ -7649,7 +7729,7 @@
 				7E9C0C33256292E100F1999D /* UIColor+Utils.swift in Sources */,
 				7E06B67022FB1606006859AC /* ACLFileLogger.m in Sources */,
 				7E06B67122FB1606006859AC /* ACLExecuteBlockDelayed.m in Sources */,
-				D07256E026BD556500654177 /* ActionRequestHandler.swift in Sources */,
+				D07256E026BD556500654177 /* ContentBlockerRequestHandler.swift in Sources */,
 				7E06B67222FB1606006859AC /* NSException+Utils.m in Sources */,
 				7E06B67322FB1606006859AC /* ACNNetworking.m in Sources */,
 				7E06B67422FB1606006859AC /* DDLoggerNames.m in Sources */,
@@ -7768,7 +7848,7 @@
 				7ECD9C42238D65650065E88D /* AESharedResources.m in Sources */,
 				D081FC352418EB8E000A10DA /* SafariProtectionService.swift in Sources */,
 				7EC635BA239EB2D2003A5CE4 /* LoginService.swift in Sources */,
-				D07256E126BD556500654177 /* ActionRequestHandler.swift in Sources */,
+				D07256E126BD556500654177 /* ContentBlockerRequestHandler.swift in Sources */,
 				7ECD9C46238D65BE0065E88D /* ADBTableRow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -7911,7 +7991,7 @@
 				D067D8E821428AA900ECDE6D /* ACLWildcard.m in Sources */,
 				D067D8E921428AA900ECDE6D /* ACLFileLogger.m in Sources */,
 				7E9C0C2F256292DF00F1999D /* UIColor+Utils.swift in Sources */,
-				D07256DC26BD556300654177 /* ActionRequestHandler.swift in Sources */,
+				D07256DC26BD556300654177 /* ContentBlockerRequestHandler.swift in Sources */,
 				D067D8EA21428AA900ECDE6D /* ACLExecuteBlockDelayed.m in Sources */,
 				D067D8EB21428AA900ECDE6D /* NSException+Utils.m in Sources */,
 				D067D8EC21428AA900ECDE6D /* ACNNetworking.m in Sources */,
@@ -7966,7 +8046,7 @@
 				7E9C0C30256292DF00F1999D /* UIColor+Utils.swift in Sources */,
 				D067D91A21428B4600ECDE6D /* ACLFileLogger.m in Sources */,
 				D067D91B21428B4600ECDE6D /* ACLExecuteBlockDelayed.m in Sources */,
-				D07256DD26BD556300654177 /* ActionRequestHandler.swift in Sources */,
+				D07256DD26BD556300654177 /* ContentBlockerRequestHandler.swift in Sources */,
 				D067D91C21428B4600ECDE6D /* NSException+Utils.m in Sources */,
 				D067D91D21428B4600ECDE6D /* ACNNetworking.m in Sources */,
 				D031A158219EFC99002C17D9 /* DDLoggerNames.m in Sources */,
@@ -8021,7 +8101,7 @@
 				7E9C0C31256292E000F1999D /* UIColor+Utils.swift in Sources */,
 				D067D94B21428B9100ECDE6D /* ACLFileLogger.m in Sources */,
 				D067D94C21428B9100ECDE6D /* ACLExecuteBlockDelayed.m in Sources */,
-				D07256DE26BD556300654177 /* ActionRequestHandler.swift in Sources */,
+				D07256DE26BD556300654177 /* ContentBlockerRequestHandler.swift in Sources */,
 				D067D94D21428B9100ECDE6D /* NSException+Utils.m in Sources */,
 				D067D94E21428B9100ECDE6D /* ACNNetworking.m in Sources */,
 				D031A159219EFC99002C17D9 /* DDLoggerNames.m in Sources */,
@@ -8076,7 +8156,7 @@
 				7E9C0C32256292E000F1999D /* UIColor+Utils.swift in Sources */,
 				D067D97C21428BB500ECDE6D /* ACLFileLogger.m in Sources */,
 				D067D97D21428BB500ECDE6D /* ACLExecuteBlockDelayed.m in Sources */,
-				D07256DF26BD556400654177 /* ActionRequestHandler.swift in Sources */,
+				D07256DF26BD556400654177 /* ContentBlockerRequestHandler.swift in Sources */,
 				D067D97E21428BB500ECDE6D /* NSException+Utils.m in Sources */,
 				D067D97F21428BB500ECDE6D /* ACNNetworking.m in Sources */,
 				D031A15A219EFC99002C17D9 /* DDLoggerNames.m in Sources */,
@@ -8131,7 +8211,7 @@
 				D0B542A02435C6A3002F0AEC /* DDFileLogger.m in Sources */,
 				D0B542A12435C6A3002F0AEC /* ACLWildcard.m in Sources */,
 				D0B542A22435C6A3002F0AEC /* ACLFileLogger.m in Sources */,
-				D07256E226BD556600654177 /* ActionRequestHandler.swift in Sources */,
+				D07256E226BD556600654177 /* ContentBlockerRequestHandler.swift in Sources */,
 				D0B542A32435C6A3002F0AEC /* ACLExecuteBlockDelayed.m in Sources */,
 				D0B542A42435C6A3002F0AEC /* NSException+Utils.m in Sources */,
 				D0B542A62435C6A3002F0AEC /* ACNNetworking.m in Sources */,
@@ -8186,7 +8266,7 @@
 				7E9C0C39256292E500F1999D /* UIColor+Utils.swift in Sources */,
 				D0B542D92435C6A7002F0AEC /* ACLWildcard.m in Sources */,
 				D0B542DA2435C6A7002F0AEC /* ACLFileLogger.m in Sources */,
-				D07256E326BD556700654177 /* ActionRequestHandler.swift in Sources */,
+				D07256E326BD556700654177 /* ContentBlockerRequestHandler.swift in Sources */,
 				D0B542DB2435C6A7002F0AEC /* ACLExecuteBlockDelayed.m in Sources */,
 				D0B542DC2435C6A7002F0AEC /* NSException+Utils.m in Sources */,
 				D0B542DD2435C6A7002F0AEC /* ACNNetworking.m in Sources */,
@@ -8241,7 +8321,7 @@
 				D0B543122435C6AA002F0AEC /* DDFileLogger.m in Sources */,
 				D0B543132435C6AA002F0AEC /* ACLWildcard.m in Sources */,
 				D0B543142435C6AA002F0AEC /* ACLFileLogger.m in Sources */,
-				D07256E426BD556800654177 /* ActionRequestHandler.swift in Sources */,
+				D07256E426BD556800654177 /* ContentBlockerRequestHandler.swift in Sources */,
 				D0B543152435C6AA002F0AEC /* ACLExecuteBlockDelayed.m in Sources */,
 				D0B543162435C6AA002F0AEC /* NSException+Utils.m in Sources */,
 				D0B543182435C6AA002F0AEC /* ACNNetworking.m in Sources */,
@@ -8296,7 +8376,7 @@
 				D0B5434B2435C6AE002F0AEC /* DDFileLogger.m in Sources */,
 				D0B5434C2435C6AE002F0AEC /* ACLWildcard.m in Sources */,
 				D0B5434D2435C6AE002F0AEC /* ACLFileLogger.m in Sources */,
-				D07256E526BD556900654177 /* ActionRequestHandler.swift in Sources */,
+				D07256E526BD556900654177 /* ContentBlockerRequestHandler.swift in Sources */,
 				D0B5434E2435C6AE002F0AEC /* ACLExecuteBlockDelayed.m in Sources */,
 				D0B5434F2435C6AE002F0AEC /* NSException+Utils.m in Sources */,
 				D0B543512435C6AE002F0AEC /* ACNNetworking.m in Sources */,
@@ -8351,7 +8431,7 @@
 				7EF5C54E26C26223001851D6 /* SharedResources+DebugLogs.swift in Sources */,
 				D0B543852435C6B1002F0AEC /* ACLWildcard.m in Sources */,
 				D0B543862435C6B1002F0AEC /* ACLFileLogger.m in Sources */,
-				D07256E626BD556900654177 /* ActionRequestHandler.swift in Sources */,
+				D07256E626BD556900654177 /* ContentBlockerRequestHandler.swift in Sources */,
 				D0B543872435C6B1002F0AEC /* ACLExecuteBlockDelayed.m in Sources */,
 				D0B543882435C6B1002F0AEC /* NSException+Utils.m in Sources */,
 				D0B5438A2435C6B1002F0AEC /* ACNNetworking.m in Sources */,
@@ -8406,7 +8486,7 @@
 				D0B543BD2435C6B5002F0AEC /* DDFileLogger.m in Sources */,
 				D0B543BE2435C6B5002F0AEC /* ACLWildcard.m in Sources */,
 				D0B543BF2435C6B5002F0AEC /* ACLFileLogger.m in Sources */,
-				D07256E726BD556A00654177 /* ActionRequestHandler.swift in Sources */,
+				D07256E726BD556A00654177 /* ContentBlockerRequestHandler.swift in Sources */,
 				D0B543C02435C6B5002F0AEC /* ACLExecuteBlockDelayed.m in Sources */,
 				D0B543C12435C6B5002F0AEC /* NSException+Utils.m in Sources */,
 				D0B543C32435C6B5002F0AEC /* ACNNetworking.m in Sources */,
@@ -8476,7 +8556,7 @@
 				D0D7E5FF24444F95001801A5 /* DnsStatisticsRecord.swift in Sources */,
 				D0D7E5FD24444F89001801A5 /* Constant.swift in Sources */,
 				7EC67FEF254843F900FEEEE2 /* DnsImplementation.swift in Sources */,
-				D07256E826BD556A00654177 /* ActionRequestHandler.swift in Sources */,
+				D07256E826BD556A00654177 /* ContentBlockerRequestHandler.swift in Sources */,
 				D0D7E5FA24444F08001801A5 /* RuleLabel.swift in Sources */,
 				7EF5C55526C2638B001851D6 /* SharedResources+applicationResources.swift in Sources */,
 				D0B544042435C6B8002F0AEC /* DDFileLogger.m in Sources */,
@@ -9846,6 +9926,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_VERSION = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = $SRCROOT/../Libs;
 				WARNING_CFLAGS = "-Wno-nullability-completeness";
@@ -9913,6 +9994,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_VERSION = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = $SRCROOT/../Libs;
 				VALIDATE_PRODUCT = YES;

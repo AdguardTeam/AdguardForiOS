@@ -16,26 +16,22 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
+protocol Reusable: AnyObject {
+    static var reuseIdentifier: String { get }
+}
 
-public extension SafariGroup {
-    enum GroupType: Int, Equatable {
-        case ads = 1
-        case privacy = 2
-        case socialWidgets = 3
-        case annoyances = 4
-        case security = 5
-        case other = 6
-        case languageSpecific = 7
-        case custom = 101
-        
-        public var id: Int { self.rawValue }
-        
-        public var proOnly: Bool {
-            switch self {
-            case .security, .custom: return true
-            default: return false
-            }
-        }
+extension Reusable {
+    static var reuseIdentifier: String { return "\(self)" }
+    
+    static func registerNibCell(forTableView tableView: UITableView) {
+        tableView.register(UINib(nibName: reuseIdentifier, bundle: nil), forCellReuseIdentifier: reuseIdentifier)
+    }
+    
+    static func registerCell(forTableView tableView: UITableView) {
+        tableView.register(self, forCellReuseIdentifier: reuseIdentifier)
+    }
+    
+    static func getCell(forTableView tableView: UITableView) -> Self {
+        tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as! Self
     }
 }

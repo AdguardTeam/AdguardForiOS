@@ -135,45 +135,45 @@ class ActionExtensionMainController: UITableViewController {
                 group.enter()
                 // disable filtering == remove from inverted whitelist
                 if inverted && self.domainEnabled{
-                    self.safariProtection?.removeRule(withText: self.domainName!, for: .invertedAllowlist) {[weak self] (error) in
-                        self?.domainEnabled = false
-                        group.leave()
-                    }
+//                    self.safariProtection?.removeRule(withText: self.domainName!, for: .invertedAllowlist) {[weak self] (error) in
+//                        self?.domainEnabled = false
+//                        group.leave()
+//                    }
                 }
                 // enable filtering == add to inverted whitelist
                 else if (inverted && !(self.domainEnabled)) {
-                    self.safariProtection?.add(rule: UserRule(ruleText: self.domainName!), for: .invertedAllowlist, override: true) {[weak self] (error) in
-                        self?.domainEnabled = true
-                        group.leave()
-                    }
+//                    self.safariProtection?.add(rule: UserRule(ruleText: self.domainName!), for: .invertedAllowlist, override: true) {[weak self] (error) in
+//                        self?.domainEnabled = true
+//                        group.leave()
+//                    }
                 }
                 // disable filtering (add to whitelist)
                 else if self.domainEnabled{
-                    self.safariProtection?.add(rule: UserRule(ruleText: self.domainName!), for: .allowlist, override: true) { [weak self] (error) in
-                        guard let sSelf = self else { return }
-                        DispatchQueue.main.async {
-                            if error != nil {
-                                sSelf.enabledSwitch.isOn = sSelf.domainEnabled
-                            } else {
-                                sSelf.domainEnabled = newEnabled
-                            }
-                            group.leave()
-                        }
-                    }
+//                    self.safariProtection?.add(rule: UserRule(ruleText: self.domainName!), for: .allowlist, override: true) { [weak self] (error) in
+//                        guard let sSelf = self else { return }
+//                        DispatchQueue.main.async {
+//                            if error != nil {
+//                                sSelf.enabledSwitch.isOn = sSelf.domainEnabled
+//                            } else {
+//                                sSelf.domainEnabled = newEnabled
+//                            }
+//                            group.leave()
+//                        }
+//                    }
                 }
                 // enable filtering (remove from whitelist)
                 else {
-                    self.safariProtection?.removeRule(withText: self.domainName!, for: .allowlist) {[weak self] (error) in
-                        guard let sSelf = self else { return }
-                        DispatchQueue.main.async {
-                            if error != nil {
-                                sSelf.enabledSwitch.isOn = sSelf.domainEnabled
-                            } else {
-                                sSelf.domainEnabled = newEnabled
-                            }
-                            group.leave()
-                        }
-                    }
+//                    self.safariProtection?.removeRule(withText: self.domainName!, for: .allowlist) {[weak self] (error) in
+//                        guard let sSelf = self else { return }
+//                        DispatchQueue.main.async {
+//                            if error != nil {
+//                                sSelf.enabledSwitch.isOn = sSelf.domainEnabled
+//                            } else {
+//                                sSelf.domainEnabled = newEnabled
+//                            }
+//                            group.leave()
+//                        }
+//                    }
                 }
                 
                 group.wait()

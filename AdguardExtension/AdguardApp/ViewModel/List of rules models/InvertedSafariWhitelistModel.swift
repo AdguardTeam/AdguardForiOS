@@ -228,18 +228,18 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
         allRules = domains
         delegate?.listOfRulesChanged()
         
-        safariProtection.add(rule: UserRule(ruleText: ruleText), for: .invertedAllowlist, override: false) { [weak self] error in
-            if error == nil {
-                completionHandler()
-                self?.allRules = domains
-                self?.delegate?.listOfRulesChanged()
-            }
-            else {
-                errorHandler(error?.localizedDescription ?? "")
-            }
-            
-            UIApplication.shared.endBackgroundTask(backgroundTaskId)
-        }
+//        safariProtection.add(rule: UserRule(ruleText: ruleText), for: .invertedAllowlist, override: false) { [weak self] error in
+//            if error == nil {
+//                completionHandler()
+//                self?.allRules = domains
+//                self?.delegate?.listOfRulesChanged()
+//            }
+//            else {
+//                errorHandler(error?.localizedDescription ?? "")
+//            }
+//
+//            UIApplication.shared.endBackgroundTask(backgroundTaskId)
+//        }
     }
     
     /**
@@ -284,16 +284,16 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
                 guard let self = self else { return }
 
                 let objects = self.rulesToObjectsConverter(rules: self.allRules)
-                self.safariProtection.add(rules: objects, for: .invertedAllowlist, override: true) { error in
-                    
-                    if error != nil {
-                        DDLogError("(invertedSafariWhitelistModel) Error occured during content blocker reloading - \(error!.localizedDescription)")
-                        // do not rollback changes and do not show any alert to user in this case
-                        // https://github.com/AdguardTeam/AdguardForiOS/issues/1174
-                    }
-                    UIApplication.shared.endBackgroundTask(backgroundTaskId)
-                    completionHandler()
-                }
+//                self.safariProtection.add(rules: objects, for: .invertedAllowlist, override: true) { error in
+//                    
+//                    if error != nil {
+//                        DDLogError("(invertedSafariWhitelistModel) Error occured during content blocker reloading - \(error!.localizedDescription)")
+//                        // do not rollback changes and do not show any alert to user in this case
+//                        // https://github.com/AdguardTeam/AdguardForiOS/issues/1174
+//                    }
+//                    UIApplication.shared.endBackgroundTask(backgroundTaskId)
+//                    completionHandler()
+//                }
             }
         }
     }
@@ -308,13 +308,13 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
         delegate?.listOfRulesChanged()
         
         let objects = rulesToObjectsConverter(rules: allRules)
-        safariProtection.add(rules: objects, for: .invertedAllowlist, override: true) { error in
-            if error != nil {
-                DDLogError("(InvertedSafariWhitelistModel) changeInvertedSafariWhitelistRule - Error occured during content blocker reloading - \(error!.localizedDescription)")
-                // do not rollback changes and do not show any alert to user in this case
-                // https://github.com/AdguardTeam/AdguardForiOS/issues/1174
-            }
-        }
+//        safariProtection.add(rules: objects, for: .invertedAllowlist, override: true) { error in
+//            if error != nil {
+//                DDLogError("(InvertedSafariWhitelistModel) changeInvertedSafariWhitelistRule - Error occured during content blocker reloading - \(error!.localizedDescription)")
+//                // do not rollback changes and do not show any alert to user in this case
+//                // https://github.com/AdguardTeam/AdguardForiOS/issues/1174
+//            }
+//        }
     }
     
     private func deleteInvertedSafariWhitelistRule(index: Int, completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
@@ -327,16 +327,16 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
         allRules = newAllRules
         delegate?.listOfRulesChanged()
         
-        safariProtection.removeRule(withText: rule.rule, for: .invertedAllowlist) { [weak self] error in
-            if error == nil {
-                completionHandler()
-            }
-            else {
-                self?.allRules = oldRules
-                self?.delegate?.listOfRulesChanged()
-                errorHandler(error?.localizedDescription ?? "")
-            }
-        }
+//        safariProtection.removeRule(withText: rule.rule, for: .invertedAllowlist) { [weak self] error in
+//            if error == nil {
+//                completionHandler()
+//            }
+//            else {
+//                self?.allRules = oldRules
+//                self?.delegate?.listOfRulesChanged()
+//                errorHandler(error?.localizedDescription ?? "")
+//            }
+//        }
     }
     
     private func searchRule(){
