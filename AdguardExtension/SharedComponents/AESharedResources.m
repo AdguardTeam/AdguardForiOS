@@ -124,6 +124,14 @@ NSString *BlockIpv6 = @"BlockIpv6";
 
 NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
 
+NSString* AdvancedProtection = @"AdvancedProtection";
+
+NSString* AdvancedProtectionPermissionsGranted = @"AdvancedProtectionPermissionsGranted";
+
+NSString* AdvancedProtectionExtensionInstalled = @"AdvancedProtectionExtensionInstalled";
+
+NSString* AdvancedProtectionWhatsNewScreenShown = @"AdvancedProtectionWhatsNewScreenShown";
+
 #define AES_HOST_APP_USERDEFAULTS               @"host-app-userdefaults.data"
 
 /////////////////////////////////////////////////////////////////////

@@ -37,6 +37,7 @@ final class OnboardingContentView: UIView {
     //MARK: - Init
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        setup(with: onboardingType)
     }
     
     init(onboardingType: OnboardingType) {

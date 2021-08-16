@@ -55,8 +55,6 @@ final class OnboardingController: UIViewController {
         })
         
         watchManualButtonIpad.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.lightGreen1)
-        setupLabels()
-        updateTheme()
         
         if #available(iOS 15.0, *) {
             onboardingContentViewTopConstraint.constant = 48.0
@@ -64,6 +62,10 @@ final class OnboardingController: UIViewController {
         } else {
             onboardingContentViewTopConstraint.constant = 30.0
             onboardingContentView.onboardingType = .withoutAdvancedProtection
+        }
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.updateTheme()            
         }
     }
     
@@ -140,7 +142,7 @@ extension OnboardingController: ThemableProtocol {
     func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
-        onboardingContentView.updateTheme()
         setupLabels()
+        onboardingContentView.updateTheme()
     }
 }

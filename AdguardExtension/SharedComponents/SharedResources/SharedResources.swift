@@ -370,6 +370,42 @@ extension AESharedResourcesProtocol {
             sharedDefaults().set(newValue, forKey: setAppUsedKey)
         }
     }
+    
+    dynamic var advancedProtection: Bool {
+        get {
+            sharedDefaults().bool(forKey: AdvancedProtection)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AdvancedProtection)
+        }
+    }
+    
+    dynamic var advancedProtectionPermissionsGranted: Bool {
+        get {
+            sharedDefaults().bool(forKey: AdvancedProtectionPermissionsGranted)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AdvancedProtectionPermissionsGranted)
+        }
+    }
+    
+    dynamic var advancedProtectionExtensionInstalled: Bool {
+        get {
+            sharedDefaults().bool(forKey: AdvancedProtectionExtensionInstalled)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AdvancedProtectionExtensionInstalled)
+        }
+    }
+    
+    dynamic var advancedProtectionWhatsNewScreenShown: Bool {
+        get {
+            sharedDefaults().bool(forKey: AdvancedProtectionWhatsNewScreenShown)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AdvancedProtectionWhatsNewScreenShown)
+        }
+    }
 }
 
 fileprivate extension AESharedResourcesProtocol {

@@ -49,7 +49,8 @@ final class OnboardingAdvancedProtectionView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        setupConstraints()
     }
     
     //MARK: - Private methods
@@ -60,29 +61,27 @@ final class OnboardingAdvancedProtectionView: UIView {
         self.addSubview(safariIcon)
         self.addSubview(attributedLabel)
         
-        let isIpad = traitCollection.horizontalSizeClass == .regular && traitCollection.verticalSizeClass == .regular
-        
         let heightWidthConst = isIpad ? 36.0 : 24.0
         
         safariIcon.heightAnchor.constraint(equalToConstant: heightWidthConst).isActive = true
         safariIcon.widthAnchor.constraint(equalToConstant: heightWidthConst).isActive = true
         safariIcon.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        safariIcon.trailingAnchor.constraint(equalTo: attributedLabel.leadingAnchor, constant: -6.0).isActive = true
+        safariIcon.trailingAnchor.constraint(equalTo: attributedLabel.leadingAnchor, constant: -7.0).isActive = true
         safariIcon.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         
         attributedLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         attributedLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        attributedLabel.bottomAnchor.constraint(lessThanOrEqualTo: self.bottomAnchor).isActive = true
     }
     
     private func processAttributes(with string: String) {
         guard let image = UIImage(named: "share_green") else { return }
-        let attachmentSetttings = NSMutableAttributedString.AttachmentSettings(image: image,
+        let attachmentSettings = NSMutableAttributedString.AttachmentSettings(image: image,
                                                                                topEdge: 7.5,
                                                                                leftEdge: 5,
                                                                                size: .customSize(width: image.size.width, height: image.size.height))
         
-        let isIpad = traitCollection.horizontalSizeClass == .regular && traitCollection.verticalSizeClass == .regular
-        let attributedText = NSMutableAttributedString.fromHtml(string, fontSize: isIpad ? 24.0 : 16.0, color: themeService.grayTextColor, attachmentSettings: attachmentSetttings, textAlignment: .left)
+        let attributedText = NSMutableAttributedString.fromHtml(string, fontSize: isIpad ? 24.0 : 16.0, color: themeService.grayTextColor, attachmentSettings: attachmentSettings, textAlignment: .left)
         attributedLabel.attributedText = attributedText
     }
 }

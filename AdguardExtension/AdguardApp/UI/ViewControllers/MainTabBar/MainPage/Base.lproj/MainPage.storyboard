@@ -687,8 +687,8 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IU2-ER-A7n">
                                 <rect key="frame" x="513" y="673" width="239" height="194"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oe6-9O-dBB">
-                                        <rect key="frame" x="16" y="118" width="207" height="60"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oe6-9O-dBB">
+                                        <rect key="frame" x="16" y="89.5" width="339" height="60"/>
                                         <color key="backgroundColor" red="0.87450980389999999" green="0.21960784310000001" blue="0.070588235289999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="FLa-5q-NBp"/>
@@ -701,14 +701,14 @@
                                             <action selector="fixItTapped:" destination="T6V-s9-cBk" eventType="touchUpInside" id="eqb-KA-yAD"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Some Safari content blockers are disabled" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvv-CS-LMQ">
-                                        <rect key="frame" x="16" y="16" width="175" height="86"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some Safari content blockers are disabled" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvv-CS-LMQ">
+                                        <rect key="frame" x="16" y="16" width="307" height="57.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <color key="textColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QXI-1p-YgS">
-                                        <rect key="frame" x="207" y="9" width="24" height="24"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QXI-1p-YgS">
+                                        <rect key="frame" x="339" y="9" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="Gcc-vo-9JB"/>
                                             <constraint firstAttribute="width" constant="24" id="UV9-rY-GgZ"/>
@@ -1283,8 +1283,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="UKw-Vs-WvL"/>
                                         </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="ENABLE"/>
+                                        <state key="normal" title="ENABLED"/>
                                         <connections>
                                             <action selector="enableButtonTapped:" destination="pxv-Jf-U7n" eventType="touchUpInside" id="WFW-7r-3aT"/>
                                         </connections>
@@ -1295,9 +1294,11 @@
                                     <constraint firstItem="gDV-cq-ZDm" firstAttribute="top" secondItem="2IG-G2-jOM" secondAttribute="bottom" constant="19" id="BM6-NV-jA1"/>
                                     <constraint firstItem="7SB-2j-FAc" firstAttribute="top" secondItem="0IU-PO-Xeh" secondAttribute="bottom" constant="16" id="CFB-GV-1AF"/>
                                     <constraint firstAttribute="trailing" secondItem="7SB-2j-FAc" secondAttribute="trailing" constant="16" id="M79-f2-xp0"/>
+                                    <constraint firstItem="7SB-2j-FAc" firstAttribute="width" secondItem="fqS-eX-cxs" secondAttribute="width" multiplier="0.203125" id="MBE-eb-G6p"/>
                                     <constraint firstAttribute="bottom" secondItem="7SB-2j-FAc" secondAttribute="bottom" constant="40" id="MgJ-6R-oLQ"/>
                                     <constraint firstItem="0IU-PO-Xeh" firstAttribute="top" secondItem="gDV-cq-ZDm" secondAttribute="bottom" constant="16" id="Mwe-a1-Wg6"/>
                                     <constraint firstAttribute="trailing" secondItem="0IU-PO-Xeh" secondAttribute="trailing" constant="24" id="QDK-3p-fKa"/>
+                                    <constraint firstItem="7SB-2j-FAc" firstAttribute="centerX" secondItem="fqS-eX-cxs" secondAttribute="centerX" id="RQ7-C9-OZe"/>
                                     <constraint firstItem="0IU-PO-Xeh" firstAttribute="leading" secondItem="fqS-eX-cxs" secondAttribute="leading" constant="24" id="RW1-ow-QHS"/>
                                     <constraint firstItem="7SB-2j-FAc" firstAttribute="leading" secondItem="fqS-eX-cxs" secondAttribute="leading" constant="16" id="RiF-yi-jMT"/>
                                     <constraint firstItem="2IG-G2-jOM" firstAttribute="top" secondItem="NQK-bQ-CVl" secondAttribute="top" constant="24" id="XBT-Qf-Iuc"/>
@@ -1307,6 +1308,20 @@
                                     <constraint firstItem="NQK-bQ-CVl" firstAttribute="centerX" secondItem="fqS-eX-cxs" secondAttribute="centerX" id="iqb-uD-F7r"/>
                                     <constraint firstAttribute="trailing" secondItem="gDV-cq-ZDm" secondAttribute="trailing" constant="21" id="pOe-Ya-EF1"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="MBE-eb-G6p"/>
+                                        <exclude reference="RQ7-C9-OZe"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <mask key="constraints">
+                                        <exclude reference="M79-f2-xp0"/>
+                                        <include reference="MBE-eb-G6p"/>
+                                        <include reference="RQ7-C9-OZe"/>
+                                        <exclude reference="RiF-yi-jMT"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="my1-dU-EdT"/>
@@ -1328,7 +1343,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OOy-Q9-wnt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3170" y="644"/>
+            <point key="canvasLocation" x="3169.921875" y="643.92386530014642"/>
         </scene>
     </scenes>
     <resources>

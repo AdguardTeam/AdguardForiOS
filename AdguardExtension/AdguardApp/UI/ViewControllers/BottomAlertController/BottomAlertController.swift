@@ -74,6 +74,7 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var keyboardHeightLayoutConstraint: NSLayoutConstraint!
     
+    var onDismissSwipeDownCompletion: (() -> Void)?
     private var keyboardMover: KeyboardMover!
     
     private var statusBarHeight: CGFloat {
@@ -159,7 +160,7 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
                     self?.view.layoutIfNeeded()
                 }
             } else {
-                dismiss(animated: true, completion: nil)
+                dismiss(animated: true, completion: onDismissSwipeDownCompletion)
             }
         }
     }

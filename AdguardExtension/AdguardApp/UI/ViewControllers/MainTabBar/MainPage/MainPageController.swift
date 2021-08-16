@@ -258,8 +258,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     
     private func processContentBlockersHelper() {
         if !configuration.someContentBlockersEnabled && !contentBlockerHelperWasShown {
-            showContentBlockersHelper()
-            contentBlockerHelperWasShown = true
+            showPopUpControllersAfterStart()
         } else {
             ready = true
             callOnready()
@@ -828,7 +827,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         }
     }
     
-    private func showContentBlockersHelper(){
+    private func showContentBlockersHelper() {
         DispatchQueue.main.async { [weak self] in
             let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
             if let navController = storyboard.instantiateViewController(withIdentifier: "OnboardingNavigationController") as? UINavigationController, let controller = storyboard.instantiateViewController(withIdentifier: "OnboardingController") as? OnboardingController{
@@ -836,6 +835,17 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
                 controller.delegate = self
                 controller.needsShowingPremium = false
                 self?.present(navController, animated: true)
+            }
+        }
+    }
+    
+    private func showWhatsNewWithAdvancedProtectionInfo(_ completion: (() -> Void)?) {
+        DispatchQueue.main.async { [weak self] in
+            let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
+            if let controller = storyboard.instantiateViewController(withIdentifier: "WhatsNewBottomAlertController") as? WhatsNewBottomAlertController {
+                controller.onDismissSwipeDownCompletion = completion
+                self?.resources.advancedProtectionWhatsNewScreenShown = true
+                self?.present(controller, animated: true)
             }
         }
     }
@@ -918,6 +928,18 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         
         importController.settings = settings
         present(importController, animated: true, completion: nil)
+    }
+    
+    private func showPopUpControllersAfterStart() {
+        if #available(iOS 15, *) {
+            showWhatsNewWithAdvancedProtectionInfo { [weak self] in
+                self?.showContentBlockersHelper()
+            }
+        } else {
+            showContentBlockersHelper()
+        }
+        
+        contentBlockerHelperWasShown = true
     }
 }
 

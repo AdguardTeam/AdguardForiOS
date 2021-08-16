@@ -739,6 +739,7 @@
                                 <exclude reference="GOu-4j-RcN"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="6Mx-M2-zzt"/>
                                 <exclude reference="76E-lx-42G"/>
                                 <exclude reference="Fgb-Lb-Xmi"/>
                                 <exclude reference="POA-qW-Z3L"/>
@@ -751,7 +752,6 @@
                                 <exclude reference="uE7-2j-2TS"/>
                                 <exclude reference="08u-Mf-dCM"/>
                                 <exclude reference="Hda-xU-RSf"/>
-                                <exclude reference="6Mx-M2-zzt"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -773,12 +773,12 @@
                                 <include reference="GOu-4j-RcN"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="6Mx-M2-zzt"/>
                                 <include reference="0b4-jd-Npx"/>
                                 <include reference="8XT-dZ-Wao"/>
                                 <include reference="uE7-2j-2TS"/>
                                 <include reference="08u-Mf-dCM"/>
                                 <include reference="Hda-xU-RSf"/>
-                                <include reference="6Mx-M2-zzt"/>
                             </mask>
                         </variation>
                     </view>

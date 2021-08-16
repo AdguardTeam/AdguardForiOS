@@ -56,12 +56,27 @@ final class ComplexProtectionController: UITableViewController {
             premiumLabel.layer.cornerRadius = 4.0
         }
     }
-    @IBOutlet weak var systemProtectionLabel: ThemableLabel!
-    @IBOutlet weak var systemDescriptionLabel: ThemableLabel!
+    
     @IBOutlet weak var systemProtectionSwitch: UISwitch!
     
     @IBOutlet weak var premiumLabelHeight: NSLayoutConstraint!
     @IBOutlet weak var premiumLabelSpacing: NSLayoutConstraint!
+    
+    
+    //MARK: - Advanced protection outlets
+    @IBOutlet weak var advancedProtectionIcon: UIImageView!
+    @IBOutlet weak var advancedProtectionLabel: EdgeInsetLabel! {
+        didSet {
+            advancedProtectionLabel.text = advancedProtectionLabel.text?.uppercased()
+            advancedProtectionLabel.clipsToBounds = true
+            advancedProtectionLabel.layer.cornerRadius = 4.0
+        }
+    }
+    @IBOutlet weak var advancedProtectionSwitch: UISwitch!
+    
+    @IBOutlet weak var premiumAdvancedProtectionLabelHeight: NSLayoutConstraint!
+    @IBOutlet weak var premiumAdvancedProtectionLabelSpacing: NSLayoutConstraint!
+    
     
     // MARK: - AdGuard VPN upsell outlets
     
@@ -111,7 +126,8 @@ final class ComplexProtectionController: UITableViewController {
     private let safariProtectionCell = 0
     private let systemProtectionCell = 1
     private let advancedYouTubeAdsBlockingCell = 2
-    private let adguardVpnCell = 3
+    private let advancedProtectionCell = 3
+    private let adguardVpnCell = 4
 
     private let showTrackingProtectionSegue = "showTrackingProtection"
     private let showLicenseSegue = "ShowLicenseSegueId"
@@ -130,11 +146,13 @@ final class ComplexProtectionController: UITableViewController {
         
         freeLabel.text = freeLabel.text?.uppercased()
         premiumLabel.text = premiumLabel.text?.uppercased()
+        advancedProtectionLabel.text = advancedProtectionLabel.text?.uppercased()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateSafariProtectionInfo()
+        updateAdvancedProtectionInfo()
         observeProStatus()
         updateVpnInfo()
     }
@@ -200,6 +218,11 @@ final class ComplexProtectionController: UITableViewController {
         updateVpnInfo()
     }
     
+    @IBAction func advancedProtectionChanged(_ sender: UISwitch) {
+        resources.advancedProtection = sender.isOn
+        updateAdvancedProtectionInfo()
+    }
+    
     // MARK: - Table view delegates and dataSource methods
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -235,6 +258,40 @@ final class ComplexProtectionController: UITableViewController {
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard indexPath.section == protectionSection else { return }
+        
+        if #available(iOS 15, *) {
+            if indexPath.row == advancedYouTubeAdsBlockingCell {
+                cell.isHidden = true
+            }
+        } else {
+            if indexPath.row == advancedProtectionCell {
+                cell.isHidden = true
+            }
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard indexPath.section == protectionSection else {
+            return super.tableView(tableView, heightForRowAt: indexPath)
+        }
+        
+        if #available(iOS 15, *) {
+            if indexPath.row == advancedYouTubeAdsBlockingCell {
+                return 0
+            }
+        } else {
+            if indexPath.row == advancedProtectionCell {
+                return 0
+            }
+        }
+        
+        return super.tableView(tableView, heightForRowAt: indexPath)
+    }
+    
+    
     
     // MARK: - Observer
     
@@ -273,9 +330,11 @@ final class ComplexProtectionController: UITableViewController {
             
             self.freeLabelHeight.constant = self.proStatus ? 0.0 : height
             self.premiumLabelHeight.constant = self.proStatus ? 0.0 : height
+            self.premiumAdvancedProtectionLabelHeight.constant = self.proStatus ? 0.0 : height
             
             self.freeLabelSpacing.constant = self.proStatus ? 0.0 : 12.0
             self.premiumLabelSpacing.constant = self.proStatus ? 0.0 : 12.0
+            self.premiumAdvancedProtectionLabelSpacing.constant = self.proStatus ? 0.0 : 12.0
             
             self.tableView.reloadData()
         }
@@ -297,6 +356,12 @@ final class ComplexProtectionController: UITableViewController {
         safariIcon.tintColor = protectionEnabled ? enabledColor : disabledColor
     }
     
+    private func updateAdvancedProtectionInfo() {
+        let protectionEnabled = resources.advancedProtection
+        advancedProtectionSwitch.isOn = protectionEnabled
+        advancedProtectionIcon.tintColor = protectionEnabled ? enabledColor : disabledColor
+    }
+    
     private func updateAdGuardVpnStatus() {
         let installed = UIApplication.adGuardVpnIsInstalled
         adguardVpnIcon.tintColor = installed ? enabledColor : disabledColor
@@ -316,6 +381,9 @@ extension ComplexProtectionController: ThemableProtocol {
         view.backgroundColor = theme.backgroundColor
         premiumLabel.backgroundColor = theme.invertedBackgroundColor
         premiumLabel.textColor = theme.backgroundColor
+        
+        advancedProtectionLabel.backgroundColor = theme.invertedBackgroundColor
+        advancedProtectionLabel.textColor = theme.backgroundColor
 
         theme.setupSwitch(safariProtectionSwitch)
         theme.setupSwitch(systemProtectionSwitch)

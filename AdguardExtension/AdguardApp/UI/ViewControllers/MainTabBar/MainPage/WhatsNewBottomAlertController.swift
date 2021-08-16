@@ -24,10 +24,9 @@ final class WhatsNewBottomAlertController: BottomAlertController {
     @IBOutlet weak var enableButton: UIButton!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
-    //MARK: - Properties
-    var completion: (() -> Void)?
     //MARK: - Services
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let resoruces: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     //MARK: - ViewController lifecycle
     
     override func viewDidLoad() {
@@ -39,14 +38,14 @@ final class WhatsNewBottomAlertController: BottomAlertController {
     //MARK: - Actions
     
     @IBAction func enableButtonTapped(_ sender: UIButton) {
-        //TODO: Add in resources field advancedProtection
-        dismiss(animated: true, completion: completion)
+        resoruces.advancedProtection = true
+        dismiss(animated: true, completion: onDismissSwipeDownCompletion)
     }
 }
 
 extension WhatsNewBottomAlertController: ThemableProtocol {
     func updateTheme() {
         themeService.setupLabels(themableLabels)
-        view.backgroundColor = themeService.backgroundColor
+        self.contentView.backgroundColor = themeService.popupBackgroundColor
     }
 }

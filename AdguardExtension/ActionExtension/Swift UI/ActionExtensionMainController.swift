@@ -229,6 +229,57 @@ class ActionExtensionMainController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    override func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
+        return 50.0
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return createInfoView()
+    }
+    
+    
+    private func createInfoView() -> UIView {
+        let view = UIView()
+        let containerView = UIView()
+        let label = ThemableLabel()
+        
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(containerView)
+        containerView.addSubview(label)
+        
+        containerView.backgroundColor = theme?.selectedCellColor
+        containerView.layer.cornerRadius = 4
+        label.greyText = true
+        label.lightGreyText = false
+        label.font = .systemFont(ofSize: isIpad ? 24.0 : 16.0)
+        theme?.setupLabel(label)
+        label.numberOfLines = 0
+        
+        if #available(iOS 15, *) {
+            label.text = String.localizedString("action_extension_obsolete_info")
+        } else {
+            label.text = String.localizedString("action_extension_new_version_info")
+        }
+    
+        label.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 12.0).isActive = true
+        label.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 12.0).isActive = true
+        label.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -12.0).isActive = true
+        label.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -12.0).isActive = true
+        
+        containerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8.0).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8.0).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8.0).isActive = true
+        
+        return view
+    }
+    
 // MARK: - Private Methods
     
     @objc private func openWithUrl(_ url: URL?) {
