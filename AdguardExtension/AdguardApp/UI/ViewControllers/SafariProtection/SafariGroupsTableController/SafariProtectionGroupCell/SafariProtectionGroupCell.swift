@@ -69,21 +69,6 @@ extension SafariProtectionGroupCellModel {
     }
 }
 
-fileprivate extension SafariGroup.GroupType {
-    var iconImage: UIImage {
-        switch self {
-        case .ads: return UIImage(named: "ads-group-icon")!
-        case .privacy: return UIImage(named: "prvacy-group-icon")!
-        case .socialWidgets: return UIImage(named: "social-group-icon")!
-        case .annoyances: return UIImage(named: "annoyances-group-icon")!
-        case .security: return UIImage(named: "security-group-icon")!
-        case .other: return UIImage(named: "other-group-icon")!
-        case .languageSpecific: return UIImage(named: "language-group-icon")!
-        case .custom: return UIImage(named: "custom-group-icon")!
-        }
-    }
-}
-
 // MARK: - SafariProtectionGroupCell
 
 protocol SafariProtectionGroupCellDelegate: AnyObject {

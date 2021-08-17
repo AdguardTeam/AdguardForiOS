@@ -46,6 +46,7 @@ import Foundation
     var logSelectedCellColor: UIColor { get }
     var ruleTextColor: UIColor { get }
     var textFieldTextColor: UIColor { get }
+    var tagColor: UIColor { get }
     
     var indicatorStyle: UIActivityIndicatorView.Style { get }
     
@@ -69,7 +70,6 @@ import Foundation
     func setupTableCell(_ cell: UITableViewCell)
     func setupLogTableCell(_ cell: UITableViewCell, blocked: Bool)
     func statusbarStyle()->UIStatusBarStyle
-    func setupTagButton(_ button: RoundRectButton)
     func setubBarButtonItem(_ button: UIBarButtonItem)
     func setupSwitch(_ switch: UISwitch)
     func setupSegmentedControl(_ segmentedControl: UISegmentedControl)
@@ -178,10 +178,7 @@ class ThemeService : NSObject, ThemeServiceProtocol {
         return configuration.darkTheme ? .white : .darkGray
     }
     
-    func setupTagButton(_ button: RoundRectButton) {
-        button.customBackgroundColor = configuration.darkTheme ? UIColor.AdGuardColor.lightGray6  : UIColor.AdGuardColor.lightGray2
-        button.setTitleColor(configuration.darkTheme ? UIColor.AdGuardColor.lightGray2 : UIColor.AdGuardColor.lightGray5, for: .normal)
-    }
+    var tagColor: UIColor { configuration.darkTheme ? UIColor.AdGuardColor.lightGray6  : UIColor.AdGuardColor.lightGray2 }
     
     func setupImage(_ imageView: ThemeableImageView) {
         imageView.image = configuration.darkTheme ? imageView.darkThemeImage : imageView.lightThemeImage

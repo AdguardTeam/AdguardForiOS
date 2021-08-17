@@ -663,12 +663,11 @@
                     </tableView>
                     <connections>
                         <segue destination="Llu-1A-iPX" kind="show" identifier="showFiltersSegue" id="3B2-aA-sGN"/>
-                        <segue destination="2G0-bK-cL2" kind="show" identifier="getProSegue" id="CG6-qH-Zv4"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6NH-fh-Bob" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1426" y="92"/>
+            <point key="canvasLocation" x="2778" y="100"/>
         </scene>
         <!--Filters Controller-->
         <scene sceneID="AfJ-Ey-Jpw">
@@ -977,7 +976,7 @@
                     </connections>
                 </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="2436" y="92"/>
+            <point key="canvasLocation" x="3788" y="100"/>
         </scene>
         <!--Safari Group Table Controller-->
         <scene sceneID="ahc-7p-vb1">
@@ -994,13 +993,37 @@
                             <outlet property="delegate" destination="azc-By-W8n" id="7kD-9t-RYm"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <connections>
                         <segue destination="2G0-bK-cL2" kind="show" identifier="licenseSegueId" id="d6m-5x-qtS"/>
+                        <segue destination="lx9-oR-qrN" kind="show" identifier="groupSegueId" id="uvu-Q2-pQj"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xnf-vN-wy5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="59" y="73"/>
+        </scene>
+        <!--Safari Group Filters Table Controller-->
+        <scene sceneID="blP-to-oYP">
+            <objects>
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="lx9-oR-qrN" customClass="SafariGroupFiltersTableController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Hg2-by-uXP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="separatorColor" systemColor="separatorColor"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <connections>
+                            <outlet property="dataSource" destination="lx9-oR-qrN" id="f2J-vF-OGl"/>
+                            <outlet property="delegate" destination="lx9-oR-qrN" id="ppj-xp-2DM"/>
+                        </connections>
+                    </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                    <navigationItem key="navigationItem" id="8md-LG-sBi"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w4d-8e-bq5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1057" y="74"/>
         </scene>
         <!--License-->
         <scene sceneID="868-Cx-006">
@@ -1806,8 +1829,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="filterCellID" id="0tQ-9p-9tM" customClass="FilterCell" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="40.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="filterCellID" rowHeight="124" id="0tQ-9p-9tM" customClass="FilterCell" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="124"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0tQ-9p-9tM" id="gnA-Kf-bfZ">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="40.5"/>
@@ -2156,8 +2179,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="TId-KC-mZ0"/>
-        <segue reference="u0d-JL-uIG"/>
-        <segue reference="d6m-5x-qtS"/>
+        <segue reference="6Ap-Zj-DX8"/>
         <segue reference="3mI-tN-g7J"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -2168,6 +2190,9 @@
         <image name="safari" width="24" height="24"/>
         <image name="thumbsup" width="18" height="21"/>
         <image name="user" width="22" height="19"/>
+        <systemColor name="separatorColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

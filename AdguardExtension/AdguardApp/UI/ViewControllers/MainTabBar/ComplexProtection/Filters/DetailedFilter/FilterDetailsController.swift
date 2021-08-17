@@ -227,7 +227,7 @@ class FilterDetailsTableCotroller : UITableViewController {
         
         tagsView.highlightIsOn = false
         
-        tagsView.filter = filter
+        //tagsView.filter = filter
         
         updateTheme()
         setupBackButton()

@@ -29,7 +29,7 @@ class FilterCell: UITableViewCell {
     
     var filter: SafariFilterProtocol? {
         didSet{
-            filterTagsView.filter = filter
+            //filterTagsView.filter = filter
             // todo: make view model data type for filter
 //            if filter?.searchAttributedString != nil {
 //                name.attributedText = filter?.searchAttributedString

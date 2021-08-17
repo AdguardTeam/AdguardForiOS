@@ -24,6 +24,9 @@ final class SafariGroupTableController: UITableViewController {
     // MARK: - Private properties
     
     private let licenseSegueId = "licenseSegueId"
+    private let groupSegueId = "groupSegueId"
+    
+    private var selectedGroupType = SafariGroup.GroupType.ads
     
     private let titleSection = 0
     private let groupsSection = 1
@@ -51,6 +54,13 @@ final class SafariGroupTableController: UITableViewController {
         updateTheme()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destinationVC = segue.destination as? SafariGroupFiltersTableController, segue.identifier == groupSegueId else {
+            return
+        }
+        destinationVC.groupType = selectedGroupType
+    }
+    
     // MARK: - Private methods
     
     private func setupTableView() {
@@ -73,7 +83,8 @@ extension SafariGroupTableController {
             if !groupModel.isAccessible {
                 performSegue(withIdentifier: licenseSegueId, sender: self)
             } else {
-                // TODO: - Redirect to detailed filter page
+                selectedGroupType = groupModel.groupType
+                performSegue(withIdentifier: groupSegueId, sender: self)
             }
         }
     }
