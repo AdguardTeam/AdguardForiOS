@@ -5937,7 +5937,6 @@
 				7E86A9B626CBB591000B395F /* UITraitEnvironment+Utils.swift */,
 				7E3FEFB326CD3AB60080EC03 /* UITableView+Utils.swift */,
 				242A07AD26C6757C00181D35 /* UITraitCollection+deviceCheck.swift */,
-				242A07B326C6B43700181D35 /* Atomic.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";

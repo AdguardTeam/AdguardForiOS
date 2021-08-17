@@ -34,6 +34,7 @@ final class AdvancedProtectionController: UIViewController {
     @IBOutlet var themableLabels: [ThemableLabel]!
     
     //MARK: - Properties
+    private let showLicenseSegue = "ShowLicenseSegueId"
     private var advancedProtectionViewHeightConstraintConst = 0.0
     private var isAdvancedProtectionIsHidden: Bool? {
         didSet {
@@ -77,6 +78,12 @@ final class AdvancedProtectionController: UIViewController {
     //MARK: - Actions
     
     @IBAction func switchValueChanged(_ sender: UISwitch) {
+        if sender.isOn && !configurationService.proStatus {
+            performSegue(withIdentifier: self.showLicenseSegue, sender: self)
+            sender.setOn(false, animated: false)
+            return
+        }
+        
         resources.advancedProtection = sender.isOn
         onOffLabel.text = sender.isOn ? String.localizedString("on_state") : String.localizedString("off_state")
     }
@@ -122,5 +129,6 @@ extension AdvancedProtectionController: ThemableProtocol {
         contentView.backgroundColor = themeService.backgroundColor
         advancedProtectionView.updateTheme()
         themeService.setupLabels(themableLabels)
+        themeService.setupSwitch(uiSwitch)
     }
 }

@@ -219,6 +219,11 @@ final class ComplexProtectionController: UITableViewController {
     }
     
     @IBAction func advancedProtectionChanged(_ sender: UISwitch) {
+        if sender.isOn && !configuration.proStatus {
+            performSegue(withIdentifier: self.showLicenseSegue, sender: self)
+            return
+        }
+        
         resources.advancedProtection = sender.isOn
         updateAdvancedProtectionInfo()
     }

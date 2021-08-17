@@ -943,7 +943,7 @@
                                                     <color key="baseForegroundColor" systemColor="systemBackgroundColor"/>
                                                 </buttonConfiguration>
                                                 <connections>
-                                                    <segue destination="J4w-JZ-q8A" kind="show" id="tqk-Tx-Td7"/>
+                                                    <segue destination="J4w-JZ-q8A" kind="show" identifier="ShowLicenseSegueId" id="tqk-Tx-Td7"/>
                                                 </connections>
                                             </button>
                                         </subviews>
