@@ -347,9 +347,9 @@ extern NSString* _Nonnull AdvancedProtection;
 extern NSString* _Nonnull AdvancedProtectionPermissionsGranted;
 
 /**
- User defaults key for advanced protection extension installed state
+ User defaults key for safari web extension is on state
  */
-extern NSString* _Nonnull AdvancedProtectionExtensionInstalled;
+extern NSString* _Nonnull SafariWebExtensionIsOn;
 
 /**
  User defaults key for advanced protection whats new info screen shown

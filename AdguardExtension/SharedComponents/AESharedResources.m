@@ -128,7 +128,7 @@ NSString* AdvancedProtection = @"AdvancedProtection";
 
 NSString* AdvancedProtectionPermissionsGranted = @"AdvancedProtectionPermissionsGranted";
 
-NSString* AdvancedProtectionExtensionInstalled = @"AdvancedProtectionExtensionInstalled";
+NSString* SafariWebExtensionIsOn = @"SafariWebExtensionIsOn";
 
 NSString* AdvancedProtectionWhatsNewScreenShown = @"AdvancedProtectionWhatsNewScreenShown";
 

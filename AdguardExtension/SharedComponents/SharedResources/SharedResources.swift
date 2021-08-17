@@ -370,7 +370,7 @@ extension AESharedResourcesProtocol {
             sharedDefaults().set(newValue, forKey: setAppUsedKey)
         }
     }
-    
+    /* Advanced protection state */
     dynamic var advancedProtection: Bool {
         get {
             sharedDefaults().bool(forKey: AdvancedProtection)
@@ -379,7 +379,7 @@ extension AESharedResourcesProtocol {
             sharedDefaults().set(newValue, forKey: AdvancedProtection)
         }
     }
-    
+    /* Advanced protection permission granted for Safari Web Extension */
     dynamic var advancedProtectionPermissionsGranted: Bool {
         get {
             sharedDefaults().bool(forKey: AdvancedProtectionPermissionsGranted)
@@ -388,13 +388,13 @@ extension AESharedResourcesProtocol {
             sharedDefaults().set(newValue, forKey: AdvancedProtectionPermissionsGranted)
         }
     }
-    
-    dynamic var advancedProtectionExtensionInstalled: Bool {
+    /* Safari Web Extension in enabled */
+    dynamic var safariWebExtensionIsOn: Bool {
         get {
-            sharedDefaults().bool(forKey: AdvancedProtectionExtensionInstalled)
+            sharedDefaults().bool(forKey: SafariWebExtensionIsOn)
         }
         set {
-            sharedDefaults().set(newValue, forKey: AdvancedProtectionExtensionInstalled)
+            sharedDefaults().set(newValue, forKey: SafariWebExtensionIsOn)
         }
     }
     

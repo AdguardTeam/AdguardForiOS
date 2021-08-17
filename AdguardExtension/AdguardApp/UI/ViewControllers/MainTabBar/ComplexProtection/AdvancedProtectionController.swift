@@ -36,10 +36,9 @@ final class AdvancedProtectionController: UIViewController {
     //MARK: - Properties
     private let showLicenseSegue = "ShowLicenseSegueId"
     private var advancedProtectionViewHeightConstraintConst = 0.0
-    private var isAdvancedProtectionIsHidden: Bool? {
+    private var advancedProtectionIsHidden: Bool = false {
         didSet {
-            guard let isHidden = isAdvancedProtectionIsHidden else { return }
-            if isHidden {
+            if advancedProtectionIsHidden {
                 hideAdvancedProtectionView()
             } else {
                 showAdvancedProtectionView()
@@ -70,7 +69,7 @@ final class AdvancedProtectionController: UIViewController {
         
         proStatusObserver = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification),
                                                                object: nil,
-                                                               queue: nil) { [weak self] _ in
+                                                               queue: .main) { [weak self] _ in
             self?.configureScreenContent()
         }
     }
@@ -109,17 +108,9 @@ final class AdvancedProtectionController: UIViewController {
     }
     
     private func configureScreenContent() {
-        
-        if !configurationService.proStatus && !resources.advancedProtectionExtensionInstalled {
-            purchaseButton.isHidden = false
-            isAdvancedProtectionIsHidden = true
-        } else if configurationService.proStatus && !resources.advancedProtectionExtensionInstalled {
-            purchaseButton.isHidden = true
-            isAdvancedProtectionIsHidden = false
-        } else if configurationService.proStatus && resources.advancedProtectionPermissionsGranted {
-            purchaseButton.isHidden = true
-            isAdvancedProtectionIsHidden = true
-        }
+        purchaseButton.isHidden = configurationService.proStatus
+        let hideView = resources.safariWebExtensionIsOn && resources.advancedProtectionPermissionsGranted
+        advancedProtectionIsHidden =  hideView || !configurationService.proStatus
     }
 }
 
