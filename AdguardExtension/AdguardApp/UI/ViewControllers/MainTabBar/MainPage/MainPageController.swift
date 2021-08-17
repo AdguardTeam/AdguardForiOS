@@ -844,7 +844,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
             let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
             if let controller = storyboard.instantiateViewController(withIdentifier: "WhatsNewBottomAlertController") as? WhatsNewBottomAlertController {
                 controller.onDismissCompletion = completion
-                self?.resources.advancedProtectionWhatsNewScreenShown = true
+                controller.delegate = self
                 self?.present(controller, animated: true)
             }
         }
@@ -956,5 +956,15 @@ extension MainPageController: ThemableProtocol {
         
         contentBlockerViewIphone.backgroundColor = theme.notificationWindowColor
         nativeDnsView.backgroundColor = theme.backgroundColor
+    }
+}
+
+extension MainPageController: WhatsNewBottomAlertControllerDelegate {
+    func enableButtonForNonProTapped() {
+        if configuration.proStatus { return }
+        self.dismiss(animated: true) { [weak self] in
+            guard let self = self else { return }
+            self.performSegue(withIdentifier: self.getProSegueId, sender: nil)
+        }
     }
 }

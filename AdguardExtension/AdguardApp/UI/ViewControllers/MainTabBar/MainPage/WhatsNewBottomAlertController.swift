@@ -18,15 +18,22 @@
 
 import UIKit
 
+protocol WhatsNewBottomAlertControllerDelegate: AnyObject {
+    func enableButtonForNonProTapped()
+}
+
 final class WhatsNewBottomAlertController: BottomAlertController {
     
     //MARK: - Outlets
     @IBOutlet weak var enableButton: UIButton!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
+    //MARK: - Properties
+    weak var delegate: WhatsNewBottomAlertControllerDelegate?
     //MARK: - Services
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resoruces: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     //MARK: - ViewController lifecycle
     
     override func viewDidLoad() {
@@ -38,6 +45,11 @@ final class WhatsNewBottomAlertController: BottomAlertController {
     //MARK: - Actions
     
     @IBAction func enableButtonTapped(_ sender: UIButton) {
+        if !configuration.proStatus {
+            delegate?.enableButtonForNonProTapped()
+            return
+        }
+        
         resoruces.advancedProtection = true
         dismiss(animated: true, completion: onDismissCompletion)
     }
