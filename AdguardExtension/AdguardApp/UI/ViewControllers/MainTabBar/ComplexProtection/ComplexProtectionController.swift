@@ -392,6 +392,7 @@ extension ComplexProtectionController: ThemableProtocol {
 
         theme.setupSwitch(safariProtectionSwitch)
         theme.setupSwitch(systemProtectionSwitch)
+        theme.setupSwitch(advancedProtectionSwitch)
         theme.setupTable(tableView)
         theme.setupNavigationBar(navigationController?.navigationBar)
         theme.setupLabels(themableLabels)
