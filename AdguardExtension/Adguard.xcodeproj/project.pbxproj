@@ -37,6 +37,8 @@
 		242A07AF26C6757C00181D35 /* UITraitCollection+deviceCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A07AD26C6757C00181D35 /* UITraitCollection+deviceCheck.swift */; };
 		242A07B126C677D900181D35 /* AdvancedProtectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A07B026C677D900181D35 /* AdvancedProtectionController.swift */; };
 		242A07B226C677D900181D35 /* AdvancedProtectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A07B026C677D900181D35 /* AdvancedProtectionController.swift */; };
+		242A07B426C6B43700181D35 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A07B326C6B43700181D35 /* Atomic.swift */; };
+		242A07B526C6B43700181D35 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A07B326C6B43700181D35 /* Atomic.swift */; };
 		242B9145258A0D3E00A39E19 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B9144258A0D3E00A39E19 /* SignInController.swift */; };
 		242B9146258A0D3E00A39E19 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B9144258A0D3E00A39E19 /* SignInController.swift */; };
 		242C7FF026E6536B00A01B10 /* DnsUserRulesTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242C7FEF26E6536B00A01B10 /* DnsUserRulesTableModel.swift */; };
@@ -2849,6 +2851,7 @@
 		2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Utils.swift"; sourceTree = "<group>"; };
 		242A07AD26C6757C00181D35 /* UITraitCollection+deviceCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITraitCollection+deviceCheck.swift"; sourceTree = "<group>"; };
 		242A07B026C677D900181D35 /* AdvancedProtectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedProtectionController.swift; sourceTree = "<group>"; };
+		242A07B326C6B43700181D35 /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		242B9144258A0D3E00A39E19 /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
 		242C7FEF26E6536B00A01B10 /* DnsUserRulesTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsUserRulesTableModel.swift; sourceTree = "<group>"; };
 		2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowLevelSettingsController.swift; sourceTree = "<group>"; };
@@ -5934,6 +5937,7 @@
 				7E86A9B626CBB591000B395F /* UITraitEnvironment+Utils.swift */,
 				7E3FEFB326CD3AB60080EC03 /* UITableView+Utils.swift */,
 				242A07AD26C6757C00181D35 /* UITraitCollection+deviceCheck.swift */,
+				242A07B326C6B43700181D35 /* Atomic.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -8419,6 +8423,7 @@
 				D0D7E5D924444D63001801A5 /* ChartDateType.swift in Sources */,
 				D0D7E6202444570F001801A5 /* ActivityTableViewCell.swift in Sources */,
 				D0B545BB2435D655002F0AEC /* RequestDetailsCell.swift in Sources */,
+				242A07B526C6B43700181D35 /* Atomic.swift in Sources */,
 				D0B545D02435D692002F0AEC /* RuleInfo.swift in Sources */,
 				7E92754326C67CA6007B2C80 /* SafariGroupTableController.swift in Sources */,
 				7E4EFB0E26DFE6DE00116762 /* UserRulesModelsProvider.swift in Sources */,
@@ -9100,6 +9105,7 @@
 				D02C080821BEAB5C00796714 /* AntibannerMock.swift in Sources */,
 				7E85765F2435F1EC0055F63D /* DomainParser.swift in Sources */,
 				D0288F3A230698DB00A4EBEF /* ACNNetworking.m in Sources */,
+				2452496C26CB9B4C0034EDBA /* Atomic.swift in Sources */,
 				D0AEC269240930C0003E8FCC /* VpnManagerTest.swift in Sources */,
 				2425D6DE258F8C710037AEBE /* Dictionary+Utils.swift in Sources */,
 				7E4FEA7E259B348F008CF061 /* DnsResolver.swift in Sources */,
@@ -9581,6 +9587,7 @@
 				247521F52594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */,
 				7E85766A2435F1FB0055F63D /* RulesParser.swift in Sources */,
 				D081FC342418EB76000A10DA /* SafariProtectionService.swift in Sources */,
+				2452496826CB9B3F0034EDBA /* Atomic.swift in Sources */,
 				D0569D6C21F1C0A800985DA9 /* ACLLogger.m in Sources */,
 				D0569D6D21F1C0A800985DA9 /* FMDatabaseAdditions.m in Sources */,
 				D0569D7121F1C0A800985DA9 /* DDLog.m in Sources */,
@@ -10334,6 +10341,7 @@
 				D0B5444B2435C6BC002F0AEC /* DDLog.m in Sources */,
 				D0B5444C2435C6BC002F0AEC /* ACLWildcard.m in Sources */,
 				D0B5444D2435C6BC002F0AEC /* NSStringPunycodeAdditions.m in Sources */,
+				2452496626CB9B390034EDBA /* Atomic.swift in Sources */,
 				D0B5444E2435C6BC002F0AEC /* DDAbstractDatabaseLogger.m in Sources */,
 				D0B544512435C6BC002F0AEC /* ThemeableImageView.swift in Sources */,
 				D0B544522435C6BC002F0AEC /* ACLFileLocker.m in Sources */,

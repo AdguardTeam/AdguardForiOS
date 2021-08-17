@@ -227,7 +227,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     private let productInfo: ADProductInfoProtocol
 
     private var productRequest: SKProductsRequest?
-    private var productsToPurchase = [SKProduct]()
+    private var productsToPurchase: Atomic<[SKProduct]> = Atomic(wrappedValue: [SKProduct]())
     private var nonConsumableProduct: SKProduct?
     private var refreshRequest: SKReceiptRefreshRequest?
 
@@ -277,7 +277,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     
     var products: [Product] {
         var products = [Product]()
-        for product in productsToPurchase {
+        for product in productsToPurchase.wrappedValue {
             var type: ProductType!
             
             switch product.productIdentifier {
@@ -326,7 +326,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     }
     
     func requestPurchase(productId: String) {
-        for product in productsToPurchase {
+        for product in productsToPurchase.wrappedValue {
             if product.productIdentifier == productId {
                 requestPurchase(product: product)
                 return
@@ -632,21 +632,21 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         
         DDLogInfo("(PurchaseService)productsRequest didReceive products count: \(response.products.count) ")
-        productsToPurchase.removeAll()
+        productsToPurchase.mutate { $0.removeAll() }
         
         for product in response.products {
             
             switch product.productIdentifier {
             case annualSubscriptionProductID, monthlySubscriptionProductID:
-                productsToPurchase.append(product)
+                productsToPurchase.mutate { $0.append(product) }
             case lifetimeProductID:
                 // chose what product use for lifetime license.
                 if !isDiscountCurrencyLocale(locale: product.priceLocale.identifier) {
-                    productsToPurchase.append(product)
+                    productsToPurchase.mutate { $0.append(product) }
                 }
             case lifetimeAlternateProductID:
                 if isDiscountCurrencyLocale(locale: product.priceLocale.identifier) {
-                    productsToPurchase.append(product)
+                    productsToPurchase.mutate { $0.append(product) }
                 }
             default:
                 DDLogError("(PurchaseService) productsRequest didReceive error. Unknown productId \(product.productIdentifier)")
@@ -654,7 +654,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
             }
         }
         
-        if productsToPurchase.count > 0 {
+        if productsToPurchase.wrappedValue.count > 0 {
             postNotification(PurchaseService.kPSNotificationReadyToPurchase)
             productRequest = nil
         }

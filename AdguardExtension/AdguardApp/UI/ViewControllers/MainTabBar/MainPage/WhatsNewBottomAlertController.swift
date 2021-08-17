@@ -39,7 +39,7 @@ final class WhatsNewBottomAlertController: BottomAlertController {
     
     @IBAction func enableButtonTapped(_ sender: UIButton) {
         resoruces.advancedProtection = true
-        dismiss(animated: true, completion: onDismissSwipeDownCompletion)
+        dismiss(animated: true, completion: onDismissCompletion)
     }
 }
 

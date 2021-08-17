@@ -1283,7 +1283,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="UKw-Vs-WvL"/>
                                         </constraints>
-                                        <state key="normal" title="ENABLED"/>
+                                        <state key="normal" title="ENABLE"/>
                                         <connections>
                                             <action selector="enableButtonTapped:" destination="pxv-Jf-U7n" eventType="touchUpInside" id="WFW-7r-3aT"/>
                                         </connections>

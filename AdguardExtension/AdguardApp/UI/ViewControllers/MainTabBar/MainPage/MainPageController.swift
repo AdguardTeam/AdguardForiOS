@@ -843,7 +843,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         DispatchQueue.main.async { [weak self] in
             let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
             if let controller = storyboard.instantiateViewController(withIdentifier: "WhatsNewBottomAlertController") as? WhatsNewBottomAlertController {
-                controller.onDismissSwipeDownCompletion = completion
+                controller.onDismissCompletion = completion
                 self?.resources.advancedProtectionWhatsNewScreenShown = true
                 self?.present(controller, animated: true)
             }
@@ -931,8 +931,9 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     }
     
     private func showPopUpControllersAfterStart() {
-        if #available(iOS 15, *) {
+        if #available(iOS 15, *), !resources.advancedProtectionWhatsNewScreenShown {
             showWhatsNewWithAdvancedProtectionInfo { [weak self] in
+                self?.resources.advancedProtectionWhatsNewScreenShown = true
                 self?.showContentBlockersHelper()
             }
         } else {
