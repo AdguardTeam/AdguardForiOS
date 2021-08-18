@@ -440,6 +440,10 @@
 		7E3DB9A22407AD3E0053D666 /* NetworkSettingsServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3DB9A12407AD3E0053D666 /* NetworkSettingsServiceTest.swift */; };
 		7E3F118E2350622600D1D17E /* SystemWhitelistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3F118D2350622600D1D17E /* SystemWhitelistModel.swift */; };
 		7E3F11902350624900D1D17E /* UserFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3F118F2350624900D1D17E /* UserFilterModel.swift */; };
+		7E3FEFA826CCFC8D0080EC03 /* OneSafariGroupFiltersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FEFA726CCFC8D0080EC03 /* OneSafariGroupFiltersModel.swift */; };
+		7E3FEFA926CCFC8D0080EC03 /* OneSafariGroupFiltersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FEFA726CCFC8D0080EC03 /* OneSafariGroupFiltersModel.swift */; };
+		7E3FEFAB26CCFCD20080EC03 /* AllSafariGroupsFiltersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FEFAA26CCFCD20080EC03 /* AllSafariGroupsFiltersModel.swift */; };
+		7E3FEFAC26CCFCD20080EC03 /* AllSafariGroupsFiltersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FEFAA26CCFCD20080EC03 /* AllSafariGroupsFiltersModel.swift */; };
 		7E407995231E7A52007EFB26 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E407994231E7A52007EFB26 /* ActionViewController.swift */; };
 		7E407997231E7A87007EFB26 /* LoaderSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E407996231E7A87007EFB26 /* LoaderSegue.swift */; };
 		7E407999231E7CA3007EFB26 /* SimpleConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E407998231E7CA3007EFB26 /* SimpleConfiguration.swift */; };
@@ -649,8 +653,8 @@
 		7EAA0D8426CA8950007208E5 /* ExtendedTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EAA0D8026CA8950007208E5 /* ExtendedTitleTableViewCell.xib */; };
 		7EAA0D8726CA8E8C007208E5 /* UITextView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA0D8626CA8E8C007208E5 /* UITextView+Utils.swift */; };
 		7EAA0D8826CA8E8C007208E5 /* UITextView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA0D8626CA8E8C007208E5 /* UITextView+Utils.swift */; };
-		7EAA0D8A26CA9B35007208E5 /* SafariGroupFiltersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA0D8926CA9B35007208E5 /* SafariGroupFiltersModel.swift */; };
-		7EAA0D8B26CA9B35007208E5 /* SafariGroupFiltersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA0D8926CA9B35007208E5 /* SafariGroupFiltersModel.swift */; };
+		7EAA0D8A26CA9B35007208E5 /* SafariGroupFiltersModelsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA0D8926CA9B35007208E5 /* SafariGroupFiltersModelsProvider.swift */; };
+		7EAA0D8B26CA9B35007208E5 /* SafariGroupFiltersModelsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA0D8926CA9B35007208E5 /* SafariGroupFiltersModelsProvider.swift */; };
 		7EAA63992341E8A60040F3A0 /* RuleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA63982341E8A60040F3A0 /* RuleInfo.swift */; };
 		7EABA5F22578F5BC001E52BC /* ParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F93F23F2B64400F9A544 /* ParserProtocol.swift */; };
 		7EABA6042578F5BD001E52BC /* ParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F93F23F2B64400F9A544 /* ParserProtocol.swift */; };
@@ -3009,6 +3013,8 @@
 		7E3DB9A12407AD3E0053D666 /* NetworkSettingsServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsServiceTest.swift; sourceTree = "<group>"; };
 		7E3F118D2350622600D1D17E /* SystemWhitelistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemWhitelistModel.swift; sourceTree = "<group>"; };
 		7E3F118F2350624900D1D17E /* UserFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFilterModel.swift; sourceTree = "<group>"; };
+		7E3FEFA726CCFC8D0080EC03 /* OneSafariGroupFiltersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneSafariGroupFiltersModel.swift; sourceTree = "<group>"; };
+		7E3FEFAA26CCFCD20080EC03 /* AllSafariGroupsFiltersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSafariGroupsFiltersModel.swift; sourceTree = "<group>"; };
 		7E407994231E7A52007EFB26 /* ActionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
 		7E407996231E7A87007EFB26 /* LoaderSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderSegue.swift; sourceTree = "<group>"; };
 		7E407998231E7CA3007EFB26 /* SimpleConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleConfiguration.swift; sourceTree = "<group>"; };
@@ -3261,7 +3267,7 @@
 		7EAA0D7F26CA8950007208E5 /* ExtendedTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedTitleTableViewCell.swift; sourceTree = "<group>"; };
 		7EAA0D8026CA8950007208E5 /* ExtendedTitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExtendedTitleTableViewCell.xib; sourceTree = "<group>"; };
 		7EAA0D8626CA8E8C007208E5 /* UITextView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Utils.swift"; sourceTree = "<group>"; };
-		7EAA0D8926CA9B35007208E5 /* SafariGroupFiltersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariGroupFiltersModel.swift; sourceTree = "<group>"; };
+		7EAA0D8926CA9B35007208E5 /* SafariGroupFiltersModelsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariGroupFiltersModelsProvider.swift; sourceTree = "<group>"; };
 		7EAA63982341E8A60040F3A0 /* RuleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleInfo.swift; sourceTree = "<group>"; };
 		7EABA8962578FEE6001E52BC /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/RateApp.strings"; sourceTree = "<group>"; };
 		7EAD352626C2C657001AFB3A /* NotificationCenter+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+Utils.swift"; sourceTree = "<group>"; };
@@ -4932,7 +4938,9 @@
 			isa = PBXGroup;
 			children = (
 				7E94743326CA83C30031B8F4 /* SafariGroupFiltersTableController.swift */,
-				7EAA0D8926CA9B35007208E5 /* SafariGroupFiltersModel.swift */,
+				7E3FEFA726CCFC8D0080EC03 /* OneSafariGroupFiltersModel.swift */,
+				7E3FEFAA26CCFCD20080EC03 /* AllSafariGroupsFiltersModel.swift */,
+				7EAA0D8926CA9B35007208E5 /* SafariGroupFiltersModelsProvider.swift */,
 				7E9E10C826CC1108007A4B8A /* SafariGroupStateHeaderView.swift */,
 			);
 			path = SafariGroupFiltersTableController;
@@ -6896,6 +6904,7 @@
 				D09E2D31255D6AFF002D6BC0 /* SettingsParser.swift in Sources */,
 				D0D7E61224445085001801A5 /* ActivityStatisticsRecord.swift in Sources */,
 				D031A178219EFC99002C17D9 /* DDFileLogger.m in Sources */,
+				7E3FEFA926CCFC8D0080EC03 /* OneSafariGroupFiltersModel.swift in Sources */,
 				D0B545A22435D640002F0AEC /* NetworkSettingsTableController.swift in Sources */,
 				D0B545712435D5CD002F0AEC /* NetworkSettingsModel.swift in Sources */,
 				7ED0B19A26C4220900B0CE7B /* PreloadedFilesManager.swift in Sources */,
@@ -6937,7 +6946,7 @@
 				D0B545AE2435D646002F0AEC /* NewCustomFilterDetailsController.swift in Sources */,
 				D0B5456A2435D5C9002F0AEC /* UserFilterModel.swift in Sources */,
 				7EA45506254AB249002B69C6 /* ActivityNativeDnsController.swift in Sources */,
-				7EAA0D8B26CA9B35007208E5 /* SafariGroupFiltersModel.swift in Sources */,
+				7EAA0D8B26CA9B35007208E5 /* SafariGroupFiltersModelsProvider.swift in Sources */,
 				247521F62594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */,
 				247CB5EB2600C1B10047974C /* OpenLoginControllerParser.swift in Sources */,
 				D0D7E61E244456F2001801A5 /* ActivityStatisticsModel.swift in Sources */,
@@ -7138,6 +7147,7 @@
 				7E4CC02E2577DE93005ADBCA /* TextFieldIndicatorView.swift in Sources */,
 				D0B545AC2435D640002F0AEC /* DnsFiltersController.swift in Sources */,
 				7E94743126CA83090031B8F4 /* SafariGroup.GroupType+IconImage.swift in Sources */,
+				7E3FEFAC26CCFCD20080EC03 /* AllSafariGroupsFiltersModel.swift in Sources */,
 				D0B545AB2435D640002F0AEC /* RequestsBlockingController.swift in Sources */,
 				D0B5456F2435D5CD002F0AEC /* DnsRequestLogModel.swift in Sources */,
 				7EBEC6DF25501A89004A753D /* DnsProvidersModel.swift in Sources */,
@@ -7359,6 +7369,7 @@
 				D09E9644216CB14A00313AB1 /* ThemeService.swift in Sources */,
 				7E3F11902350624900D1D17E /* UserFilterModel.swift in Sources */,
 				7E92754526C67FCD007B2C80 /* SafariGroupsModel.swift in Sources */,
+				7E3FEFA826CCFC8D0080EC03 /* OneSafariGroupFiltersModel.swift in Sources */,
 				7EF5C56F26C26D3A001851D6 /* UserNotificationService.swift in Sources */,
 				7E5FC201234F71F0008E383D /* ListOfRulesCells.swift in Sources */,
 				D00E43F12562A484002DDE98 /* ImportSettingsController.swift in Sources */,
@@ -7487,6 +7498,7 @@
 				7E5101912355A71900935FE9 /* NetworkSettingsCells.swift in Sources */,
 				7E94743026CA83090031B8F4 /* SafariGroup.GroupType+IconImage.swift in Sources */,
 				D067D8D52140020A00ECDE6D /* GroupCell.swift in Sources */,
+				7E3FEFAB26CCFCD20080EC03 /* AllSafariGroupsFiltersModel.swift in Sources */,
 				65EC9CAC1BB9824C00F53F3B /* FMStatementQuotedRecogniser.m in Sources */,
 				7EAD352726C2C657001AFB3A /* NotificationCenter+Utils.swift in Sources */,
 				7EB5526D24224755000498CC /* ActivityViewController.swift in Sources */,
@@ -7553,7 +7565,7 @@
 				7ED0B19926C4220900B0CE7B /* PreloadedFilesManager.swift in Sources */,
 				24AD872D260A247B0034D402 /* RadioButton.swift in Sources */,
 				7E5FC206234F8395008E383D /* ListOfRulesTableController.swift in Sources */,
-				7EAA0D8A26CA9B35007208E5 /* SafariGroupFiltersModel.swift in Sources */,
+				7EAA0D8A26CA9B35007208E5 /* SafariGroupFiltersModelsProvider.swift in Sources */,
 				24D9225B2604B28B002F368B /* AppDelegate+UserNotifications.swift in Sources */,
 				D09E2A98254AC0D5002D6BC0 /* Bundle+Utils.swift in Sources */,
 				D09E9646216CE10F00313AB1 /* ThemeableImageView.swift in Sources */,

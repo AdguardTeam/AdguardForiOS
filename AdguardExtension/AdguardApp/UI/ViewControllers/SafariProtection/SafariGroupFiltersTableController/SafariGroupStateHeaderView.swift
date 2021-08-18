@@ -50,15 +50,7 @@ protocol SafariGroupStateHeaderDelegate: AnyObject {
 
 final class SafariGroupStateHeaderView: UIView {
     
-    
     weak var delegate: SafariGroupStateHeaderDelegate?
-    
-    static func height(isIpadTrait: Bool) -> CGFloat {
-        let topInset: CGFloat = 14.0
-        let bottomInset: CGFloat = 14.0
-        let iconHeight: CGFloat = isIpadTrait ? 32.0 : 24.0
-        return topInset + iconHeight + bottomInset
-    }
     
     // MARK: - UI Elements
     
@@ -134,9 +126,9 @@ final class SafariGroupStateHeaderView: UIView {
         NSLayoutConstraint.activate([
             iconImageView.widthAnchor.constraint(equalToConstant: 24.0),
             iconImageView.heightAnchor.constraint(equalToConstant: 24.0),
-            iconImageView.topAnchor.constraint(equalTo: topAnchor, constant: 14.0),
+            iconImageView.topAnchor.constraint(equalTo: topAnchor, constant: 30.0),
             iconImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
-            iconImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -14.0),
+            iconImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30.0),
             
             groupNameLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 16.0),
             groupNameLabel.centerYAnchor.constraint(equalTo: iconImageView.centerYAnchor),

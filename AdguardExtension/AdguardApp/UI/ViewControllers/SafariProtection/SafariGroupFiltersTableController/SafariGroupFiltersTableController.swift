@@ -21,7 +21,12 @@ import SafariAdGuardSDK
 
 final class SafariGroupFiltersTableController: UITableViewController {
     
-    var displayType: SafariGroupFiltersModel.DisplayType!
+    var displayType: DisplayType!
+    
+    enum DisplayType {
+        case one(groupType: SafariGroup.GroupType)
+        case all
+    }
     
     // MARK: - Private properties
     
@@ -29,111 +34,31 @@ final class SafariGroupFiltersTableController: UITableViewController {
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
-    private var model: SafariGroupFiltersModel!
+    private var model: SafariGroupFiltersModelProtocol!
         
     // MARK: - UITableViewController lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        model = SafariGroupFiltersModel(displayType: displayType, safariProtection: safariProtection, configuration: configuration)
-        model.delegate = self
-        
-        setupTableView()
+        switch displayType {
+        case .one(let groupType):
+            model = OneSafariGroupFiltersModel(groupType: groupType, safariProtection: safariProtection, configuration: configuration)
+        case .all:
+            model = AllSafariGroupsFiltersModel(safariProtection: safariProtection, configuration: configuration)
+        case .none:
+            break
+        }
+        tableView.delegate = model
+        tableView.dataSource = model
+        model.setup(tableView: tableView)
         updateTheme()
         setupBackButton()
     }
-    
-    // MARK: - Private methods
-    
-    private func setupTableView() {
-        TitleTableViewCell.registerNibCell(forTableView: tableView)
-        SafariFilterCell.registerCell(forTableView: tableView)
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
 }
 
-// MARK: - Table view delegate
+// MARK: - SafariGroupFiltersTableController +
 
 extension SafariGroupFiltersTableController {
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-}
-
-// MARK: - Table view data source
-
-extension SafariGroupFiltersTableController {
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerModel: SafariGroupStateHeaderModel
-        if case .one(_) = displayType {
-            if section == 0 {
-                return UIView()
-            }
-            headerModel = model.models[0].0
-        } else {
-            headerModel = model.models[section].0
-        }
-        let header = SafariGroupStateHeaderView(model: headerModel)
-        return header
-    }
-    
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return SafariGroupStateHeaderView.height(isIpadTrait: isIpadTrait)
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.01
-    }
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        switch displayType {
-        case .one(groupType: _): return 2
-        case .all: return model.models.count
-        case .none: return 0
-        }
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch displayType {
-        case .one(groupType: _):
-            if section == 0 {
-                return 1
-            } else {
-                return model.models[0].1.count
-            }
-        case .all: return model.models[section].1.count
-        case .none: return 0
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if case .one(_) = displayType {
-            if indexPath.section == 0 {
-                let cell = TitleTableViewCell.getCell(forTableView: tableView)
-                cell.title = model.models[0].0.groupName
-                return cell
-            } else {
-                let cell = SafariFilterCell.getCell(forTableView: tableView)
-                cell.model = model.models[0].1[indexPath.row]
-                return cell
-            }
-        }
-        let cell = SafariFilterCell.getCell(forTableView: tableView)
-        cell.model = model.models[indexPath.section].1[indexPath.row]
-        return cell
-    }
-}
-
-// MARK: - SafariGroupFiltersTableController + SafariGroupFiltersModelDelegate
-
-extension SafariGroupFiltersTableController: SafariGroupFiltersModelDelegate {
     func modelsChanged() {
         tableView.reloadData()
     }

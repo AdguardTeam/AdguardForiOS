@@ -30,7 +30,7 @@ final class SafariGroupTableController: UITableViewController {
     private let licenseSegueId = "licenseSegueId"
     private let groupSegueId = "groupSegueId"
     
-    private var selectedDisplayType = SafariGroupFiltersModel.DisplayType.one(groupType: .ads)
+    private var selectedDisplayType = SafariGroupFiltersTableController.DisplayType.one(groupType: .ads)
     
     private let titleSection = 0
     private let groupsSection = 1
