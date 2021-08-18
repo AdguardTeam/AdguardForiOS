@@ -21,6 +21,13 @@ import SafariAdGuardSDK
 
 final class SafariGroupFiltersTableController: UITableViewController {
     
+    // MARK: - UI Elements
+    
+    @IBOutlet var searchButton: UIBarButtonItem!
+    @IBOutlet var cancelButton: UIBarButtonItem!
+    
+    // MARK: - Public properties
+    
     var displayType: DisplayType!
     
     enum DisplayType {
@@ -40,11 +47,13 @@ final class SafariGroupFiltersTableController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         switch displayType {
         case .one(let groupType):
             model = OneSafariGroupFiltersModel(groupType: groupType, safariProtection: safariProtection, configuration: configuration)
         case .all:
             model = AllSafariGroupsFiltersModel(safariProtection: safariProtection, configuration: configuration)
+            title = String.localizedString("navigation_item_filters_title")
         case .none:
             break
         }
@@ -53,6 +62,17 @@ final class SafariGroupFiltersTableController: UITableViewController {
         model.setup(tableView: tableView)
         updateTheme()
         setupBackButton()
+        navigationItem.rightBarButtonItems = [searchButton]
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func searchButtonTapped(_ sender: UIBarButtonItem) {
+        navigationItem.rightBarButtonItems = [cancelButton]
+    }
+    
+    @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
+        navigationItem.rightBarButtonItems = [searchButton]
     }
 }
 

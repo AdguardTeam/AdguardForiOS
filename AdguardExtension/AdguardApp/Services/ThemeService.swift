@@ -47,6 +47,7 @@ import Foundation
     var ruleTextColor: UIColor { get }
     var textFieldTextColor: UIColor { get }
     var tagColor: UIColor { get }
+    var textFieldIndicatorBorderColor: UIColor { get }
     
     var indicatorStyle: UIActivityIndicatorView.Style { get }
     
@@ -176,6 +177,10 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     
     var textFieldTextColor: UIColor {
         return configuration.darkTheme ? .white : .darkGray
+    }
+    
+    var textFieldIndicatorBorderColor: UIColor {
+        return configuration.darkTheme ? UIColor.AdGuardColor.lightGray5 : UIColor.AdGuardColor.lightGray2
     }
     
     var tagColor: UIColor { configuration.darkTheme ? UIColor.AdGuardColor.lightGray6  : UIColor.AdGuardColor.lightGray2 }

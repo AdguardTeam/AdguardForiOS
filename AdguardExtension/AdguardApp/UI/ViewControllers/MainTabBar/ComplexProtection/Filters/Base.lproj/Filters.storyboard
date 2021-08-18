@@ -1013,8 +1013,22 @@
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" id="8md-LG-sBi"/>
+                    <connections>
+                        <outlet property="cancelButton" destination="B2q-Qh-Hrn" id="iyY-Nj-Ih3"/>
+                        <outlet property="searchButton" destination="SvP-jt-7Cn" id="oia-iZ-iRS"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w4d-8e-bq5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <barButtonItem style="plain" systemItem="search" id="SvP-jt-7Cn" userLabel="search button">
+                    <connections>
+                        <action selector="searchButtonTapped:" destination="lx9-oR-qrN" id="70J-Qg-Ts7"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem style="plain" systemItem="cancel" id="B2q-Qh-Hrn">
+                    <connections>
+                        <action selector="cancelButtonTapped:" destination="lx9-oR-qrN" id="BLJ-aR-rUT"/>
+                    </connections>
+                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="-541" y="-307"/>
         </scene>
