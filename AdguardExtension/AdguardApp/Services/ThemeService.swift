@@ -303,6 +303,7 @@ class ThemeService : NSObject, ThemeServiceProtocol {
         if #available(iOS 15.0, *) {
             table.sectionHeaderTopPadding = 0.0
         }
+        table.separatorInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
         table.separatorColor = separatorColor
         table.tableFooterView?.backgroundColor = backgroundColor
     }

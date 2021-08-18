@@ -75,6 +75,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.distribution = .fillProportionally
+        stackView.spacing = 2.0
         return stackView
     }()
     
@@ -90,7 +91,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
     private lazy var stateSwitch: UISwitch = {
         let stateSwitch = UISwitch()
         stateSwitch.translatesAutoresizingMaskIntoConstraints = false
-        stateSwitch.onTintColor = UIColor.AdGuardColor.green
+        stateSwitch.onTintColor = UIColor.AdGuardColor.lightGreen1
         stateSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
         return stateSwitch
     }()
@@ -116,18 +117,19 @@ final class SafariFilterCell: UITableViewCell, Reusable {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.lastFrame = frame
-        setupUI()
+        setupUiWithTags()
         setupTheme()
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.lastFrame = frame
-        setupUI()
+        setupUiWithTags()
         setupTheme()
     }
     
     override func layoutSubviews() {
+        super.layoutSubviews()
         if frame != lastFrame {
             lastFrame = frame
             processModel()
@@ -144,25 +146,42 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         }
     }
     
-    /// Sets constraints to all views in cell
-    private func setupUI() {
-        addSubview(stateSwitch)
-        addSubview(stackView)
-        addSubview(tagsStackView)
+    private func setupUiWithTags() {
+        contentView.subviews.forEach { $0.removeFromSuperview() }
+        contentView.addSubview(stateSwitch)
+        contentView.addSubview(stackView)
+        contentView.addSubview(tagsStackView)
         
         NSLayoutConstraint.activate([
-            stateSwitch.topAnchor.constraint(equalTo: topAnchor, constant: topBottomInset),
-            stateSwitch.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -sideInset),
+            stateSwitch.topAnchor.constraint(equalTo: contentView.topAnchor, constant: topBottomInset),
+            stateSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -sideInset),
             stateSwitch.widthAnchor.constraint(equalToConstant: switchWidth),
             
             stackView.topAnchor.constraint(equalTo: stateSwitch.topAnchor),
             stackView.trailingAnchor.constraint(equalTo: stateSwitch.leadingAnchor, constant: -sideInset),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: sideInset),
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: sideInset),
             
             tagsStackView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
             tagsStackView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             tagsStackView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 8.0),
-            tagsStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -topBottomInset)
+            tagsStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -topBottomInset)
+        ])
+    }
+    
+    private func setupUiWithoutTags() {
+        contentView.subviews.forEach { $0.removeFromSuperview() }
+        contentView.addSubview(stateSwitch)
+        contentView.addSubview(stackView)
+        
+        NSLayoutConstraint.activate([
+            stateSwitch.topAnchor.constraint(equalTo: contentView.topAnchor, constant: topBottomInset),
+            stateSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -sideInset),
+            stateSwitch.widthAnchor.constraint(equalToConstant: switchWidth),
+            
+            stackView.topAnchor.constraint(equalTo: stateSwitch.topAnchor),
+            stackView.trailingAnchor.constraint(equalTo: stateSwitch.leadingAnchor, constant: -sideInset),
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: sideInset),
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -topBottomInset)
         ])
     }
     
@@ -171,6 +190,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         tagsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
         stateSwitch.isOn = model.isEnabled
+        
         titleLabel.text = model.filterName
         stackView.addArrangedSubview(titleLabel)
         
@@ -189,8 +209,12 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         }
         
         if !model.tags.isEmpty {
+            setupUiWithTags()
             processTags()
+        } else {
+            setupUiWithoutTags()
         }
+        layoutIfNeeded()
     }
     
     private func processTags() {
@@ -226,6 +250,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         label.lightGreyText = true
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
+        label.heightAnchor.constraint(equalToConstant: 16.0).isActive = true
         label.textAlignment = .left
         label.text = text
         themeService.setupLabel(label)

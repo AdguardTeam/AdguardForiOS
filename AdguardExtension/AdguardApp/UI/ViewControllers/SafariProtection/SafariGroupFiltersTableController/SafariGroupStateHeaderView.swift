@@ -74,7 +74,7 @@ final class SafariGroupStateHeaderView: UIView {
     private lazy var stateSwitch: UISwitch = {
         let stateSwitch = UISwitch()
         stateSwitch.translatesAutoresizingMaskIntoConstraints = false
-        stateSwitch.onTintColor = UIColor.AdGuardColor.green
+        stateSwitch.onTintColor = UIColor.AdGuardColor.lightGreen1
         stateSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
         return stateSwitch
     }()

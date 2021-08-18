@@ -49,6 +49,8 @@ final class AllSafariGroupsFiltersModel: NSObject, SafariGroupFiltersModelProtoc
         tableView.sectionHeaderHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 84.0
         tableView.sectionFooterHeight = 0.01
+        tableView.estimatedRowHeight = 105.0
+        tableView.rowHeight = UITableView.automaticDimension
     }
 }
 

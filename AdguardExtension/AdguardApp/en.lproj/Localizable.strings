@@ -194,7 +194,7 @@
 "filters_updated_format" = "Filters updated: %lu ";
 
 /* (FiltersController) Filter Version format */
-"filter_version_format" = "version %@";
+"filter_version_format" = "Version %@";
 
 /* (DnsSettingController) split tunel mode description */
 "tunnel_mode_split_description" = "Split-Tunnel, compatible with “Personal VPN” apps";
