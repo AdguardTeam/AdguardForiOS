@@ -107,7 +107,6 @@ final class SafariProtectionGroupCell: UITableViewCell, Reusable {
     }
     
     @IBAction func switchTapped(_ sender: UISwitch) {
-        descriptionLabel.text = model.description
         delegate?.stateChanged(for: model.groupType, newState: !model.isEnabled)
     }
     

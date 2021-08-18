@@ -21,12 +21,16 @@ import SafariAdGuardSDK
 
 final class SafariGroupTableController: UITableViewController {
 
+    // MARK: - UI Elements
+    
+    @IBOutlet var searchButton: UIBarButtonItem!
+    
     // MARK: - Private properties
     
     private let licenseSegueId = "licenseSegueId"
     private let groupSegueId = "groupSegueId"
     
-    private var selectedGroupType = SafariGroup.GroupType.ads
+    private var selectedDisplayType = SafariGroupFiltersModel.DisplayType.one(groupType: .ads)
     
     private let titleSection = 0
     private let groupsSection = 1
@@ -44,21 +48,30 @@ final class SafariGroupTableController: UITableViewController {
         super.init(coder: coder)
     }
     
+    // MARK: - Actions
+    
+    @IBAction func searchButtonTapped(_ sender: Any) {
+        selectedDisplayType = .all
+        performSegue(withIdentifier: groupSegueId, sender: self)
+    }
+    
     // MARK: - UITableViewController lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.rightBarButtonItems = [searchButton]
         model.delegate = self
         
         setupTableView()
         updateTheme()
+        setupBackButton()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let destinationVC = segue.destination as? SafariGroupFiltersTableController, segue.identifier == groupSegueId else {
             return
         }
-        destinationVC.groupType = selectedGroupType
+        destinationVC.displayType = selectedDisplayType
     }
     
     // MARK: - Private methods
@@ -83,7 +96,7 @@ extension SafariGroupTableController {
             if !groupModel.isAccessible {
                 performSegue(withIdentifier: licenseSegueId, sender: self)
             } else {
-                selectedGroupType = groupModel.groupType
+                selectedDisplayType = .one(groupType: groupModel.groupType)
                 performSegue(withIdentifier: groupSegueId, sender: self)
             }
         }
@@ -160,5 +173,6 @@ extension SafariGroupTableController: ThemableProtocol {
         view.backgroundColor = themeService.backgroundColor
         themeService.setupTable(tableView)
         tableView.reloadData()
+        themeService.setubBarButtonItem(searchButton)
     }
 }

@@ -36,5 +36,4 @@ extension UIView {
             layer.removeAnimation(forKey: "rotationAnimation")
         }
     }
-    
 }

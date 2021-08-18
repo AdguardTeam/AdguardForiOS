@@ -227,7 +227,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="KSi-tR-JOw" kind="show" id="ug8-kT-B9h"/>
+                                            <segue destination="azc-By-W8n" kind="show" id="vZh-Ab-0kW"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Ryf-wQ-Ozf">
@@ -453,10 +453,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b5J-Zq-AfJ">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
-                                <connections>
-                                    <segue destination="azc-By-W8n" kind="embed" id="rDR-Q7-vK4"/>
-                                </connections>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wCi-oD-nbf">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
@@ -479,25 +476,14 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="cancelButton" destination="I3a-Pl-KzM" id="QO4-rf-xh7"/>
                         <outlet property="groupsContainerView" destination="b5J-Zq-AfJ" id="Xk6-5b-pb2"/>
                         <outlet property="searchButton" destination="Gfo-3w-cFv" id="GDx-6v-ZXR"/>
                         <outlet property="searchContainerView" destination="wCi-oD-nbf" id="ued-je-5cK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f6f-a3-94w" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <barButtonItem style="plain" systemItem="search" id="Gfo-3w-cFv" userLabel="search button">
-                    <connections>
-                        <action selector="searchButtonTapped:" destination="KSi-tR-JOw" id="WRB-g2-AHB"/>
-                    </connections>
-                </barButtonItem>
-                <barButtonItem style="plain" systemItem="cancel" id="I3a-Pl-KzM" userLabel="cancel button">
-                    <connections>
-                        <action selector="cancelButtonTapped:" destination="KSi-tR-JOw" id="Qzp-uq-Igo"/>
-                    </connections>
-                </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="-1255" y="-319"/>
+            <point key="canvasLocation" x="-643" y="-1056"/>
         </scene>
         <!--Groups Controller-->
         <scene sceneID="Ou6-t2-Alq">
@@ -994,14 +980,21 @@
                         </connections>
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                    <navigationItem key="navigationItem" id="2Vc-UH-T4o"/>
                     <connections>
+                        <outlet property="searchButton" destination="Gfo-3w-cFv" id="Gel-3i-h07"/>
                         <segue destination="2G0-bK-cL2" kind="show" identifier="licenseSegueId" id="d6m-5x-qtS"/>
                         <segue destination="lx9-oR-qrN" kind="show" identifier="groupSegueId" id="uvu-Q2-pQj"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xnf-vN-wy5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <barButtonItem style="plain" systemItem="search" id="Gfo-3w-cFv" userLabel="search button">
+                    <connections>
+                        <action selector="searchButtonTapped:" destination="azc-By-W8n" id="858-i0-1tl"/>
+                    </connections>
+                </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="59" y="73"/>
+            <point key="canvasLocation" x="-1539" y="-307"/>
         </scene>
         <!--Safari Group Filters Table Controller-->
         <scene sceneID="blP-to-oYP">
@@ -1023,7 +1016,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w4d-8e-bq5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1057" y="74"/>
+            <point key="canvasLocation" x="-541" y="-307"/>
         </scene>
         <!--License-->
         <scene sceneID="868-Cx-006">
@@ -1033,7 +1026,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Rc-Ca-gCb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="486" y="590"/>
+            <point key="canvasLocation" x="-1538" y="134"/>
         </scene>
         <!--Filter Details Controller-->
         <scene sceneID="P2a-VB-LUA">
