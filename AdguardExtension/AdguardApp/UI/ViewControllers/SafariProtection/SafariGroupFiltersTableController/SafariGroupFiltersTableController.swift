@@ -101,7 +101,7 @@ final class SafariGroupFiltersTableController: UITableViewController {
 // MARK: - SafariGroupFiltersTableController + AGSearchViewDelegate
 
 extension SafariGroupFiltersTableController: AGSearchViewDelegate {
-    func textChanged(to newText: String?) {
+    func textChanged(to newText: String) {
         print(newText)
     }
 }

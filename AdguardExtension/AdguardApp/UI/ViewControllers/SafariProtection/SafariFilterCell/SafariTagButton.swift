@@ -17,17 +17,27 @@
  */
 
 import UIKit
+import SafariAdGuardSDK
+
+struct SafariTagButtonModel {
+    let tagName: String
+    let isLang: Bool
+    let isSelected: Bool
+}
+
+extension SafariTagButtonModel {
+    init() {
+        self.tagName = ""
+        self.isLang = false
+        self.isSelected = false
+    }
+}
 
 final class SafariTagButton: UIButton {
 
     // MARK: - Public properties
     
-    let tagName: String
-    let isLang: Bool
-    
-    override var isSelected: Bool {
-        didSet { alpha = isSelected ? 1.0 : 0.3 }
-    }
+    let model: SafariTagButtonModel
     
     // MARK: - Private properties
     
@@ -56,30 +66,27 @@ final class SafariTagButton: UIButton {
     // MARK: - Initialization
     
     required init?(coder: NSCoder) {
-        self.tagName = ""
-        self.isLang = false
+        self.model = SafariTagButtonModel()
         super.init(coder: coder)
         initializeTag()
     }
     
     override init(frame: CGRect) {
-        self.tagName = ""
-        self.isLang = false
+        self.model = SafariTagButtonModel()
         super.init(frame: frame)
         initializeTag()
     }
     
-    init(tagName: String, isLang: Bool) {
-        self.tagName = tagName
-        self.isLang = isLang
+    init(model: SafariTagButtonModel) {
+        self.model = model
         super.init(frame: .zero)
-        isLang ? initializeLang() : initializeTag()
+        model.isLang ? initializeLang() : initializeTag()
     }
     
     // MARK: - Public methods
     
     func updateTheme(_ themeService: ThemeServiceProtocol) {
-        if !isLang {
+        if !model.isLang {
             backgroundColor = themeService.tagColor
             setTitleColor(themeService.placeholderTextColor, for: .normal)
         }
@@ -88,12 +95,14 @@ final class SafariTagButton: UIButton {
     // MARK: - Private methods
     
     private func initializeTag() {
-        setTitle(tagName, for: .normal)
-        setTitle(tagName, for: .selected)
+        setTitle(model.tagName, for: .normal)
+        setTitle(model.tagName, for: .selected)
         
         titleLabel?.font = tagFont
         layer.cornerRadius = tagCornerRadius
         layer.masksToBounds = true
+    
+        alpha = model.isSelected ? 1.0 : 0.3
         
         var desiredFrame = sizeThatFits(CGSize(width: .greatestFiniteMagnitude, height: buttonHeight))
         titleEdgeInsets = UIEdgeInsets(top: 2.0, left: buttonTextInset, bottom: 2.0, right: buttonTextInset)
@@ -103,7 +112,7 @@ final class SafariTagButton: UIButton {
     }
     
     private func initializeLang() {
-        var flag = langFlags[tagName] ?? tagName
+        var flag = langFlags[model.tagName] ?? model.tagName
         if flag.starts(with: "#") {
             flag = String(flag.dropFirst())
         }
@@ -114,6 +123,8 @@ final class SafariTagButton: UIButton {
         
         layer.cornerRadius = tagCornerRadius
         layer.masksToBounds = true
+        
+        alpha = model.isSelected ? 1.0 : 0.3
         
         frame.size.height = buttonHeight
         frame.size.width = langButtonWidth

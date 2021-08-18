@@ -25,7 +25,7 @@ struct SafariFilterCellModel {
     let isEnabled: Bool // Filter state
     let version: String? // Filter version. Filter content always changes by it's authors, so we store the version of filter to identify it
     let lastUpdateDate: Date? // The last time the filter was updated
-    let tags: [ExtendedFiltersMeta.Tag] // Some tags that filters can be grouped by
+    let tags: [SafariTagButtonModel] // Some tags that filters can be grouped by
 }
 
 extension SafariFilterCellModel {
@@ -222,7 +222,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         var currentStackWidth: CGFloat = 0.0
         
         for tag in model.tags {
-            let button = SafariTagButton(tagName: tag.tagName, isLang: tag.tagType == .lang)
+            let button = SafariTagButton(model: tag)
             button.updateTheme(themeService)
             let width = button.frame.width
             button.translatesAutoresizingMaskIntoConstraints = false

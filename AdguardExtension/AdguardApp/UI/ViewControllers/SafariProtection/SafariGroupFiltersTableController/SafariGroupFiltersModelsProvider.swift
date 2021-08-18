@@ -28,14 +28,15 @@ struct SafariGroupFiltersModelsProvider {
     static func models(for groups: [SafariGroup], proStatus: Bool) -> [SafariGroupFiltersModel] {
         return groups.map { group in
             let groupModel = SafariGroupStateHeaderModel(group: group, proStatus: proStatus)
-            let filtersModel = group.filters.map { filter in
+            let filtersModel = group.filters.map { filter -> SafariFilterCellModel in
+                let tagsModels = filter.tags.map { SafariTagButtonModel(tagName: $0.tagName, isLang: $0.tagType == .lang, isSelected: true) }
                 return SafariFilterCellModel(
                     filterId: filter.filterId,
                     filterName: filter.name ?? "",
                     isEnabled: filter.isEnabled,
                     version: filter.version,
                     lastUpdateDate: filter.lastUpdateDate,
-                    tags: filter.tags
+                    tags: tagsModels
                 )
             }
             return (groupModel, filtersModel)
