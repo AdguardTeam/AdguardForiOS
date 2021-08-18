@@ -51,9 +51,12 @@ final class SafariGroupFiltersTableController: UITableViewController {
         switch displayType {
         case .one(let groupType):
             model = OneSafariGroupFiltersModel(groupType: groupType, safariProtection: safariProtection, configuration: configuration)
+            navigationItem.rightBarButtonItems = [searchButton]
         case .all:
             model = AllSafariGroupsFiltersModel(safariProtection: safariProtection, configuration: configuration)
             title = String.localizedString("navigation_item_filters_title")
+            navigationItem.rightBarButtonItems = [cancelButton]
+            addTableHeaderView()
         case .none:
             break
         }
@@ -62,17 +65,44 @@ final class SafariGroupFiltersTableController: UITableViewController {
         model.setup(tableView: tableView)
         updateTheme()
         setupBackButton()
-        navigationItem.rightBarButtonItems = [searchButton]
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.layoutTableHeaderView()
     }
     
     // MARK: - Actions
     
     @IBAction func searchButtonTapped(_ sender: UIBarButtonItem) {
         navigationItem.rightBarButtonItems = [cancelButton]
+        addTableHeaderView()
     }
     
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
         navigationItem.rightBarButtonItems = [searchButton]
+        removeTableHeaderView()
+    }
+    
+    // MARK: - Private methods
+    
+    private func addTableHeaderView() {
+        let headerView = AGSearchView()
+        headerView.delegate = self
+        tableView.tableHeaderView = headerView
+        
+    }
+    
+    private func removeTableHeaderView() {
+        tableView.tableHeaderView = nil
+    }
+}
+
+// MARK: - SafariGroupFiltersTableController + AGSearchViewDelegate
+
+extension SafariGroupFiltersTableController: AGSearchViewDelegate {
+    func textChanged(to newText: String?) {
+        print(newText)
     }
 }
 

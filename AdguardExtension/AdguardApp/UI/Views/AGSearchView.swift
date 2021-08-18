@@ -18,10 +18,20 @@
 
 import UIKit
 
+protocol AGSearchViewDelegate: AnyObject {
+    func textChanged(to newText: String)
+}
+
 final class AGSearchView: UIView {
 
-    private let textField: AGTextField = {
+    weak var delegate: AGSearchViewDelegate?
+    
+    let textField: AGTextField = {
         let textField = AGTextField()
+        textField.leftTextAreaOffset = 16.0
+        textField.rightTextAreaOffset = 16.0
+        textField.textFieldType = .normal
+        textField.placeholder = String.localizedString("search_view_placeholder")
         return textField
     }()
     
@@ -40,13 +50,22 @@ final class AGSearchView: UIView {
         customInit()
     }
     
+    init() {
+        super.init(frame: .zero)
+        customInit()
+    }
+    
     // MARK: - Private methods
     
     private func customInit() {
+        textField.delegate = self
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.rightView?.isHidden = true
         addSubview(textField)
         
         NSLayoutConstraint.activate([
-            textField.topAnchor.constraint(equalTo: topAnchor),
+            textField.heightAnchor.constraint(equalToConstant: 48.0),
+            textField.topAnchor.constraint(equalTo: topAnchor, constant: 2.0),
             textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
             textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
             textField.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16.0)
@@ -59,10 +78,42 @@ final class AGSearchView: UIView {
     }
 }
 
+extension AGSearchView: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        
+        delegate?.textChanged(to: updatedText)
+        
+        self.textField.borderState = .enabled
+        self.textField.rightView?.isHidden = updatedText.isEmpty
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.textField.borderState = .enabled
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.textField.borderState = .disabled
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.textField.resignFirstResponder()
+        self.textField.borderState = .disabled
+        return true
+    }
+}
+
 extension AGSearchView: ThemableProtocol {
     func updateTheme() {
         backgroundColor = themeService.backgroundColor
         textField.themeChanged()
+        textField.tintColor = themeService.grayTextColor
+        textField.backgroundColor = themeService.bottomBarBackgroundColor
+        textField.textColor = themeService.grayTextColor
     }
 }
 

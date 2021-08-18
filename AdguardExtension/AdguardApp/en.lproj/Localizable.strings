@@ -866,6 +866,8 @@
 /* (MainPageController) saved data size for VoiceOver*/
 "elapsed_time_voiceover" = "Average time to process a DNS request";
 
+/* (AGSearchView) Placeholder text for search bar */
+"search_view_placeholder" = "Search";
 
 // MARK: - SystemProtectionEnablerController
 /* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
