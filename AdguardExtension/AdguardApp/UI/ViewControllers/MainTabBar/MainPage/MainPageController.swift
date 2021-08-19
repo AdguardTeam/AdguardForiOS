@@ -257,11 +257,13 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     }
     
     private func processContentBlockersHelper() {
-        if !configuration.someContentBlockersEnabled && !contentBlockerHelperWasShown {
-            showPopUpControllersAfterStart()
+        if #available(iOS 15, *), !resources.advancedProtectionWhatsNewScreenShown {
+            showWhatsNewWithAdvancedProtectionInfo { [weak self] in
+                self?.resources.advancedProtectionWhatsNewScreenShown = true
+                self?.showContentBlockersHelperIfNeeded()
+            }
         } else {
-            ready = true
-            callOnready()
+            showContentBlockersHelperIfNeeded()
         }
     }
 
@@ -930,17 +932,14 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         present(importController, animated: true, completion: nil)
     }
     
-    private func showPopUpControllersAfterStart() {
-        if #available(iOS 15, *), !resources.advancedProtectionWhatsNewScreenShown {
-            showWhatsNewWithAdvancedProtectionInfo { [weak self] in
-                self?.resources.advancedProtectionWhatsNewScreenShown = true
-                self?.showContentBlockersHelper()
-            }
-        } else {
+    private func showContentBlockersHelperIfNeeded() {
+        if !configuration.someContentBlockersEnabled && !contentBlockerHelperWasShown {
             showContentBlockersHelper()
+            contentBlockerHelperWasShown = true
+        } else {
+            ready = true
+            callOnready()
         }
-        
-        contentBlockerHelperWasShown = true
     }
 }
 
