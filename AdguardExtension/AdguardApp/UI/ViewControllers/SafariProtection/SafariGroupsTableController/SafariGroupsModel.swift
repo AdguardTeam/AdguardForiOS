@@ -22,6 +22,7 @@ import SafariServices
 import UIKit
 
 protocol SafariGroupsModelDelegate: AnyObject {
+    func modelChanged(_ rowToChange: Int)
     func modelsChanged()
 }
 
@@ -61,12 +62,9 @@ final class SafariGroupsModel {
                 DDLogError("(SafariGroupsModel) - setGroup; DB error when changing group=\(groupType) to state=\(enabled); Error: \(error)")
             }
             
+            let row = self?.groups.firstIndex(where: { $0.groupType == groupType }) ?? 0
             self?.createModels()
-            
-            // This delay is done for smooth switch animation
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
-                self?.delegate?.modelsChanged()
-            }
+            self?.delegate?.modelChanged(row)
         } onCbReloaded: { error in
             if let error = error {
                 DDLogError("(SafariGroupsModel) - setGroup; Reload CB error when changing group=\(groupType) to state=\(enabled); Error: \(error)")

@@ -21,6 +21,7 @@ import SafariAdGuardSDK
 
 struct SafariFilterCellModel {
     let filterId: Int // Filter unique identifier
+    let groupType: SafariGroup.GroupType // Filter group type
     let filterName: String // Filter name
     let isEnabled: Bool // Filter state
     let version: String? // Filter version. Filter content always changes by it's authors, so we store the version of filter to identify it
@@ -33,6 +34,7 @@ struct SafariFilterCellModel {
 extension SafariFilterCellModel {
     init() {
         self.filterId = 0
+        self.groupType = .ads
         self.filterName = ""
         self.isEnabled = false
         self.version = nil
@@ -44,7 +46,7 @@ extension SafariFilterCellModel {
 }
 
 protocol SafariFilterCellDelegate: AnyObject {
-    func safariFilterStateChanged(_ filterId: Int, _ newState: Bool)
+    func safariFilterStateChanged(_ filterId: Int, _ groupType: SafariGroup.GroupType, _ newState: Bool)
     func tagTapped(_ tagName: String)
 }
 
@@ -294,7 +296,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
     
     /// Switch action handler
     @objc private final func switchValueChanged() {
-        delegate?.safariFilterStateChanged(model.filterId, !model.isEnabled)
+        delegate?.safariFilterStateChanged(model.filterId, model.groupType, !model.isEnabled)
     }
     
     @objc private final func tagButtonTapped(_ sender: SafariTagButton) {

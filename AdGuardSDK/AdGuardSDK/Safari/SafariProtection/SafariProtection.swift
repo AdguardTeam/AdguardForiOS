@@ -30,7 +30,11 @@ public final class SafariProtection: SafariProtectionProtocol {
     // MARK: - Internal variables
     
     // Serial queue to avoid races in services
-    let workingQueue = DispatchQueue(label: "AdGuardSDK.SafariProtection.workingQueue")
+    let workingQueue = DispatchQueue(label: "SafariAdGuardSDK.SafariProtection.workingQueue")
+    
+    // Serial queue for converting Content Blockers to avoid working queue load
+    let cbQueue = DispatchQueue(label: "SafariAdGuardSDK.SafariProtection.cbQueue", qos: .background)
+    
     // Queue to call completion handlers
     let completionQueue = DispatchQueue.main
     
@@ -174,7 +178,9 @@ public final class SafariProtection: SafariProtectionProtocol {
             return
         }
         
-        reloadContentBlockers(onCbReloaded: onCbReloaded)
+        cbQueue.async { [weak self] in
+            self?.reloadContentBlockers(onCbReloaded: onCbReloaded)
+        }
     }
     
     /* Creates JSON files for Content blockers and reloads CBs to apply new JSONs */

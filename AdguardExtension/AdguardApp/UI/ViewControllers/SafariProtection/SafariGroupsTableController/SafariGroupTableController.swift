@@ -158,6 +158,11 @@ extension SafariGroupTableController {
 // MARK: - SafariGroupTableController + SafariGroupsModelDelegate
 
 extension SafariGroupTableController: SafariGroupsModelDelegate {
+    
+    func modelChanged(_ rowToChange: Int) {
+        tableView.reloadRows(at: [IndexPath(row: rowToChange, section: groupsSection)], with: .automatic)
+    }
+    
     func modelsChanged() {
         tableView.reloadData()
     }

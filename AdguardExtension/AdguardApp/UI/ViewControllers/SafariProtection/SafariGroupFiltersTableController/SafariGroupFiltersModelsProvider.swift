@@ -61,6 +61,7 @@ final class SafariGroupFiltersModelsProvider {
                 let tagsModels = filter.tags.map { SafariTagButtonModel(tagName: "#" + $0.tagName, isLang: $0.tagType == .lang, isSelected: true) }
                 return SafariFilterCellModel(
                     filterId: filter.filterId,
+                    groupType: group.groupType,
                     filterName: filter.name ?? "",
                     isEnabled: filter.isEnabled,
                     version: filter.version,
@@ -123,6 +124,7 @@ final class SafariGroupFiltersModelsProvider {
         if highlightedOccurancies != nil || !matchedTags.isEmpty {
             return SafariFilterCellModel(
                 filterId: filter.filterId,
+                groupType: filter.groupType,
                 filterName: filter.filterName,
                 isEnabled: filter.isEnabled,
                 version: filter.version,
