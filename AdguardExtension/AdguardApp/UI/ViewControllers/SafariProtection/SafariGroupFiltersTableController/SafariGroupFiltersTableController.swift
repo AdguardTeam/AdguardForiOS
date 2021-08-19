@@ -36,7 +36,9 @@ final class SafariGroupFiltersTableController: UITableViewController {
     }
     
     // MARK: - Private properties
-    
+
+    private var headerView: AGSearchView?
+
     /* Services */
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
@@ -48,6 +50,7 @@ final class SafariGroupFiltersTableController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Setup view model
         switch displayType {
         case .one(let groupType):
             model = OneSafariGroupFiltersModel(groupType: groupType, safariProtection: safariProtection, configuration: configuration)
@@ -63,6 +66,9 @@ final class SafariGroupFiltersTableController: UITableViewController {
         tableView.delegate = model
         tableView.dataSource = model
         model.setup(tableView: tableView)
+        model.tableView = tableView
+        model.delegate = self
+        
         updateTheme()
         setupBackButton()
     }
@@ -82,19 +88,45 @@ final class SafariGroupFiltersTableController: UITableViewController {
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
         navigationItem.rightBarButtonItems = [searchButton]
         removeTableHeaderView()
+        model.searchString = nil
     }
     
     // MARK: - Private methods
     
     private func addTableHeaderView() {
-        let headerView = AGSearchView()
-        headerView.delegate = self
+        headerView = AGSearchView()
+        headerView?.delegate = self
         tableView.tableHeaderView = headerView
         
     }
     
     private func removeTableHeaderView() {
+        headerView = nil
         tableView.tableHeaderView = nil
+    }
+}
+
+// MARK: - SafariGroupFiltersTableController + SafariGroupFiltersModelDelegate
+
+extension SafariGroupFiltersTableController: SafariGroupFiltersModelDelegate {
+    func tagTapped(_ tagName: String) {
+        if headerView == nil {
+            addTableHeaderView()
+        }
+        
+        let searchText = headerView?.textField.text ?? ""
+        
+        if !searchText.isEmpty {
+            headerView?.textField.text = searchText + " " + tagName
+        } else {
+            headerView?.textField.text = tagName
+        }
+        model.searchString = headerView?.textField.text
+        
+        headerView?.textField.rightView?.isHidden = false
+        headerView?.textField.borderState = .enabled
+        headerView?.textField.becomeFirstResponder()
+        navigationItem.rightBarButtonItems = [cancelButton]
     }
 }
 
@@ -102,15 +134,7 @@ final class SafariGroupFiltersTableController: UITableViewController {
 
 extension SafariGroupFiltersTableController: AGSearchViewDelegate {
     func textChanged(to newText: String) {
-        print(newText)
-    }
-}
-
-// MARK: - SafariGroupFiltersTableController +
-
-extension SafariGroupFiltersTableController {
-    func modelsChanged() {
-        tableView.reloadData()
+        model.searchString = newText
     }
 }
 

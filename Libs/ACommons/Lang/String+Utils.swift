@@ -111,25 +111,26 @@ extension String {
         return String((0..<length).map{ _ in letters.randomElement()! })
     }
     
-    /* Func used in Filters to highlight search string */
-    func highlight(search strings: [String?]?) -> NSAttributedString? {
-        guard let searchStrings = strings else { return nil }
+    /// Returns attributed string with highlighted occurancies or nil if nothing was found
+    func highlight(occuranciesOf strings: Set<String>) -> NSAttributedString? {
+        guard !strings.isEmpty else { return nil }
         
         let attributedString = NSMutableAttributedString(string: self)
         let highlightColor = UIColor.AdGuardColor.lightGreen1
         
-        for string in searchStrings {
-            guard let searchString = string else { continue }
-            let nsRanges = ranges(of: searchString, options: [.caseInsensitive])
+        var foundCount = 0
+        for string in strings {
+            let nsRanges = ranges(of: string, options: [.caseInsensitive])
             nsRanges.forEach {
+                foundCount += 1
                 attributedString.addAttribute(NSAttributedString.Key.backgroundColor, value: highlightColor, range: $0)
             }
         }
         
-        return attributedString
+        return foundCount == 0 ? nil : attributedString
     }
     
-    // NSRanges of all substring in string
+    /// Returns NSRanges of all occurancies of substring in string
     func ranges(of substring: String, options: CompareOptions = [], locale: Locale? = nil) -> [NSRange] {
         var searchRange: Range<Index>?
         var result = [NSRange]()

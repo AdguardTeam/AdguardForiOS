@@ -26,6 +26,8 @@ struct SafariFilterCellModel {
     let version: String? // Filter version. Filter content always changes by it's authors, so we store the version of filter to identify it
     let lastUpdateDate: Date? // The last time the filter was updated
     let tags: [SafariTagButtonModel] // Some tags that filters can be grouped by
+    let groupIsEnabled: Bool // Every filter belongs to group. If group is disabled cell alpha will be 0.5
+    let searchAttrString: NSAttributedString? // Higlighted search string
 }
 
 extension SafariFilterCellModel {
@@ -36,11 +38,14 @@ extension SafariFilterCellModel {
         self.version = nil
         self.lastUpdateDate = nil
         self.tags = []
+        self.groupIsEnabled = false
+        self.searchAttrString = nil
     }
 }
 
 protocol SafariFilterCellDelegate: AnyObject {
     func safariFilterStateChanged(_ filterId: Int, _ newState: Bool)
+    func tagTapped(_ tagName: String)
 }
 
 // MARK: - SafariFilterCell
@@ -191,7 +196,11 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         
         stateSwitch.isOn = model.isEnabled
         
-        titleLabel.text = model.filterName
+        if let highlitghtedString = model.searchAttrString {
+            titleLabel.attributedText = highlitghtedString
+        } else {
+            titleLabel.text = model.filterName
+        }
         stackView.addArrangedSubview(titleLabel)
         
         if let version = model.version {
@@ -214,6 +223,9 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         } else {
             setupUiWithoutTags()
         }
+        
+        alpha = model.groupIsEnabled ? 1.0 : 0.5
+        
         layoutIfNeeded()
     }
     
@@ -223,6 +235,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         
         for tag in model.tags {
             let button = SafariTagButton(model: tag)
+            button.addTarget(self, action: #selector(tagButtonTapped(_:)), for: .touchUpInside)
             button.updateTheme(themeService)
             let width = button.frame.width
             button.translatesAutoresizingMaskIntoConstraints = false
@@ -281,6 +294,10 @@ final class SafariFilterCell: UITableViewCell, Reusable {
     /// Switch action handler
     @objc private final func switchValueChanged() {
         delegate?.safariFilterStateChanged(model.filterId, !model.isEnabled)
+    }
+    
+    @objc private final func tagButtonTapped(_ sender: SafariTagButton) {
+        delegate?.tagTapped(sender.model.tagName)
     }
 }
 

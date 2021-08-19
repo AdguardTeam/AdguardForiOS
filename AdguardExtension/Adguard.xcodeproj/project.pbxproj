@@ -4950,8 +4950,8 @@
 				7E94743326CA83C30031B8F4 /* SafariGroupFiltersTableController.swift */,
 				7E3FEFA726CCFC8D0080EC03 /* OneSafariGroupFiltersModel.swift */,
 				7E3FEFAA26CCFCD20080EC03 /* AllSafariGroupsFiltersModel.swift */,
-				7EAA0D8926CA9B35007208E5 /* SafariGroupFiltersModelsProvider.swift */,
 				7E9E10C826CC1108007A4B8A /* SafariGroupStateHeaderView.swift */,
+				7EAA0D8926CA9B35007208E5 /* SafariGroupFiltersModelsProvider.swift */,
 			);
 			path = SafariGroupFiltersTableController;
 			sourceTree = "<group>";

@@ -19,7 +19,14 @@
 import SafariAdGuardSDK
 import SwiftUI
 
-protocol SafariGroupFiltersModelProtocol: UITableViewDelegate, UITableViewDataSource {
+protocol SafariGroupFiltersModelDelegate: AnyObject {
+    func tagTapped(_ tagName: String)
+}
+
+protocol SafariGroupFiltersModelProtocol: UITableViewDelegate, UITableViewDataSource, SafariFilterCellDelegate {
+    var searchString: String? { get set }
+    var tableView: UITableView? { get set }
+    var delegate: SafariGroupFiltersModelDelegate? { get set }
     func setup(tableView: UITableView)
 }
 
@@ -27,29 +34,44 @@ final class OneSafariGroupFiltersModel: NSObject, SafariGroupFiltersModelProtoco
     
     // MARK: - Public properties
     
+    var searchString: String? {
+        didSet {
+            processSearchString()
+        }
+    }
+    
+    weak var tableView: UITableView?
+    weak var delegate: SafariGroupFiltersModelDelegate?
     
     // MARK: - Private properties
     
-    private let groupType: SafariGroup.GroupType
+    private let group: SafariGroup
     private var groupModel: SafariGroupStateHeaderModel
-    private var filtersModels: [SafariFilterCellModel]
+    private var filtersModels: [SafariFilterCellModel] { modelsProvider.filtersModels.first ?? [] }
     
     /* Services */
     private let safariProtection: SafariProtectionProtocol
     private let configuration: ConfigurationServiceProtocol
+    private var modelsProvider: SafariGroupFiltersModelsProvider
+    
+    private var proStatusObserver: NotificationToken?
     
     // MARK: - Initialization
     
     init(groupType: SafariGroup.GroupType, safariProtection: SafariProtectionProtocol, configuration: ConfigurationServiceProtocol) {
-        self.groupType = groupType
         self.safariProtection = safariProtection
         self.configuration = configuration
-        
-        let group = safariProtection.groups.first(where: { $0.groupType == groupType })!
-        let model = SafariGroupFiltersModelsProvider.model(for: group as! SafariGroup, proStatus: configuration.proStatus)
-        self.groupModel = model.groupModel
-        self.filtersModels = model.filtersModel
+        self.group = safariProtection.groups.first(where: { $0.groupType == groupType })! as! SafariGroup
+        self.modelsProvider = SafariGroupFiltersModelsProvider(sdkModels: [group], proStatus: configuration.proStatus)
+        self.groupModel = modelsProvider.groupModels.first!
         super.init()
+        
+        self.proStatusObserver = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
+            guard let self = self else { return }
+            self.modelsProvider = SafariGroupFiltersModelsProvider(sdkModels: [self.group], proStatus: self.configuration.proStatus)
+            self.groupModel = self.modelsProvider.groupModels.first!
+            self.tableView?.reloadData()
+        }
     }
     
     // MARK: - Public methods
@@ -62,6 +84,21 @@ final class OneSafariGroupFiltersModel: NSObject, SafariGroupFiltersModelProtoco
         tableView.sectionFooterHeight = 0.01
         tableView.estimatedRowHeight = 105.0
         tableView.rowHeight = UITableView.automaticDimension
+    }
+    
+    func safariFilterStateChanged(_ filterId: Int, _ newState: Bool) {
+        
+    }
+    
+    func tagTapped(_ tagName: String) {
+        delegate?.tagTapped(tagName)
+    }
+    
+    // MARK: - Private methods
+    
+    private func processSearchString() {
+        modelsProvider.searchString = searchString
+        tableView?.reloadData()
     }
 }
 
@@ -106,6 +143,7 @@ extension OneSafariGroupFiltersModel {
         case .filters:
             let cell = SafariFilterCell.getCell(forTableView: tableView)
             cell.model = filtersModels[indexPath.row]
+            cell.delegate = self
             return cell
         }
     }
