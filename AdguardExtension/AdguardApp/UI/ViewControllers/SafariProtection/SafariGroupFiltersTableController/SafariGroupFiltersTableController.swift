@@ -60,6 +60,7 @@ final class SafariGroupFiltersTableController: UITableViewController {
             title = String.localizedString("navigation_item_filters_title")
             navigationItem.rightBarButtonItems = [cancelButton]
             addTableHeaderView()
+            headerView?.textField.becomeFirstResponder()
         case .none:
             break
         }
@@ -83,6 +84,7 @@ final class SafariGroupFiltersTableController: UITableViewController {
     @IBAction func searchButtonTapped(_ sender: UIBarButtonItem) {
         navigationItem.rightBarButtonItems = [cancelButton]
         addTableHeaderView()
+        headerView?.textField.becomeFirstResponder()
     }
     
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
