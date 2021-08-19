@@ -225,6 +225,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         }
         
         contentView.alpha = model.groupIsEnabled ? 1.0 : 0.5
+        contentView.isUserInteractionEnabled = model.groupIsEnabled
         
         layoutIfNeeded()
     }

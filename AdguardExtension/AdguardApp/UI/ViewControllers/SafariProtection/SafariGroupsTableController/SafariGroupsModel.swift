@@ -27,7 +27,7 @@ protocol SafariGroupsModelDelegate: AnyObject {
 
 final class SafariGroupsModel {
     
-    var groups: [SafariProtectionGroupCellModel] = []
+    private(set) var groups: [SafariProtectionGroupCellModel] = []
     weak var delegate: SafariGroupsModelDelegate?
     
     // MARK: - Private properties
@@ -56,13 +56,15 @@ final class SafariGroupsModel {
     func setGroup(_ groupType: SafariGroup.GroupType, enabled: Bool) {
         DDLogInfo("(SafariGroupsModel) - setGroup; Trying to change group=\(groupType) to state=\(enabled)")
         
-        safariProtection.setGroup(groupType, enabled: enabled) { error in
+        safariProtection.setGroup(groupType, enabled: enabled) { [weak self] error in
             if let error = error {
                 DDLogError("(SafariGroupsModel) - setGroup; DB error when changing group=\(groupType) to state=\(enabled); Error: \(error)")
             }
+            
+            self?.createModels()
+            
             // This delay is done for smooth switch animation
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
-                self?.createModels()
                 self?.delegate?.modelsChanged()
             }
         } onCbReloaded: { error in
@@ -70,6 +72,11 @@ final class SafariGroupsModel {
                 DDLogError("(SafariGroupsModel) - setGroup; Reload CB error when changing group=\(groupType) to state=\(enabled); Error: \(error)")
             }
         }
+    }
+    
+    func updateModels() {
+        createModels()
+        delegate?.modelsChanged()
     }
     
     // MARK: - Private methods

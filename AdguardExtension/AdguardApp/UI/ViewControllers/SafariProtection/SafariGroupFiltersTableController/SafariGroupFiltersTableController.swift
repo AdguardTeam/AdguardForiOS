@@ -124,7 +124,6 @@ extension SafariGroupFiltersTableController: SafariGroupFiltersModelDelegate {
         model.searchString = headerView?.textField.text
         
         headerView?.textField.rightView?.isHidden = false
-        headerView?.textField.borderState = .enabled
         headerView?.textField.becomeFirstResponder()
         navigationItem.rightBarButtonItems = [cancelButton]
     }

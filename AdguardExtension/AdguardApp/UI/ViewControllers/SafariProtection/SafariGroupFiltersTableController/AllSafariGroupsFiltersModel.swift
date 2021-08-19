@@ -85,6 +85,35 @@ final class AllSafariGroupsFiltersModel: NSObject, SafariGroupFiltersModelProtoc
     }
 }
 
+// MARK: - AllSafariGroupsFiltersModel + SafariGroupStateHeaderDelegate
+
+extension AllSafariGroupsFiltersModel {
+    func stateChanged(for groupType: SafariGroup.GroupType, newState: Bool) {
+        DDLogInfo("(AllSafariGroupsFiltersModel) - setGroup; Trying to change group=\(groupType) to state=\(newState)")
+        
+        safariProtection.setGroup(groupType, enabled: newState) { [weak self] error in
+            guard let self = self else { return }
+            if let error = error {
+                DDLogError("(AllSafariGroupsFiltersModel) - setGroup; DB error when changing group=\(groupType) to state=\(newState); Error: \(error)")
+            }
+            
+            self.modelsProvider = SafariGroupFiltersModelsProvider(sdkModels: self.safariProtection.groups as! [SafariGroup], proStatus: self.configuration.proStatus)
+            self.modelsProvider.searchString = self.searchString
+            
+            // This delay is done for smooth switch animation
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                guard let self = self else { return }
+                let sectionToReloadIndex = self.groupModels.firstIndex(where: { $0.groupType == groupType })!
+                self.tableView?.reloadSections(IndexSet(integer: sectionToReloadIndex), with: .automatic)
+            }
+        } onCbReloaded: { error in
+            if let error = error {
+                DDLogError("(AllSafariGroupsFiltersModel) - setGroup; Reload CB error when changing group=\(groupType) to state=\(newState); Error: \(error)")
+            }
+        }
+    }
+}
+
 // MARK: - AllSafariGroupsFiltersModel + UITableViewDelegate
 
 extension AllSafariGroupsFiltersModel {
@@ -116,6 +145,7 @@ extension AllSafariGroupsFiltersModel {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let groupModel = groupModels[section]
         let headerView = SafariGroupStateHeaderView(model: groupModel)
+        headerView.delegate = self
         return headerView
     }
     

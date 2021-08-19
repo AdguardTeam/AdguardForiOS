@@ -23,7 +23,7 @@ protocol SafariGroupFiltersModelDelegate: AnyObject {
     func tagTapped(_ tagName: String)
 }
 
-protocol SafariGroupFiltersModelProtocol: UITableViewDelegate, UITableViewDataSource, SafariFilterCellDelegate {
+protocol SafariGroupFiltersModelProtocol: UITableViewDelegate, UITableViewDataSource, SafariFilterCellDelegate, SafariGroupStateHeaderDelegate {
     var searchString: String? { get set }
     var tableView: UITableView? { get set }
     var delegate: SafariGroupFiltersModelDelegate? { get set }
@@ -45,7 +45,7 @@ final class OneSafariGroupFiltersModel: NSObject, SafariGroupFiltersModelProtoco
     
     // MARK: - Private properties
     
-    private let group: SafariGroup
+    private var group: SafariGroup
     private var groupModel: SafariGroupStateHeaderModel
     private var filtersModels: [SafariFilterCellModel] { modelsProvider.filtersModels.first ?? [] }
     
@@ -102,6 +102,35 @@ final class OneSafariGroupFiltersModel: NSObject, SafariGroupFiltersModelProtoco
     }
 }
 
+// MARK: - OneSafariGroupFiltersModel + SafariGroupStateHeaderDelegate
+
+extension OneSafariGroupFiltersModel {
+    func stateChanged(for groupType: SafariGroup.GroupType, newState: Bool) {
+        DDLogInfo("(OneSafariGroupFiltersModel) - setGroup; Trying to change group=\(groupType) to state=\(newState)")
+        
+        safariProtection.setGroup(groupType, enabled: newState) { [weak self] error in
+            guard let self = self else { return }
+            if let error = error {
+                DDLogError("(OneSafariGroupFiltersModel) - setGroup; DB error when changing group=\(groupType) to state=\(newState); Error: \(error)")
+            }
+            
+            self.group = self.safariProtection.groups.first(where: { $0.groupType == groupType })! as! SafariGroup
+            self.modelsProvider = SafariGroupFiltersModelsProvider(sdkModels: [self.group], proStatus: self.configuration.proStatus)
+            self.modelsProvider.searchString = self.searchString
+            self.groupModel = self.modelsProvider.groupModels.first!
+            
+            // This delay is done for smooth switch animation
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                self?.tableView?.reloadSections(IndexSet(integer: Section.filters.rawValue), with: .automatic)
+            }
+        } onCbReloaded: { error in
+            if let error = error {
+                DDLogError("(OneSafariGroupFiltersModel) - setGroup; Reload CB error when changing group=\(groupType) to state=\(newState); Error: \(error)")
+            }
+        }
+    }
+}
+
 fileprivate extension OneSafariGroupFiltersModel {
     enum Section: Int, CaseIterable {
         case title = 0
@@ -155,6 +184,7 @@ extension OneSafariGroupFiltersModel {
             return UIView()
         case .filters:
             let headerView = SafariGroupStateHeaderView(model: groupModel)
+            headerView.delegate = self
             return headerView
         }
     }

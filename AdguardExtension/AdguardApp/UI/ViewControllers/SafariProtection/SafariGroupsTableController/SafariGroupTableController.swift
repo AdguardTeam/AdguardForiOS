@@ -67,6 +67,11 @@ final class SafariGroupTableController: UITableViewController {
         setupBackButton()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        model.updateModels()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let destinationVC = segue.destination as? SafariGroupFiltersTableController, segue.identifier == groupSegueId else {
             return
