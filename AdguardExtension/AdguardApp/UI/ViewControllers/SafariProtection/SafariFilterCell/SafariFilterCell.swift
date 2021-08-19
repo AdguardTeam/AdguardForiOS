@@ -224,7 +224,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
             setupUiWithoutTags()
         }
         
-        alpha = model.groupIsEnabled ? 1.0 : 0.5
+        contentView.alpha = model.groupIsEnabled ? 1.0 : 0.5
         
         layoutIfNeeded()
     }

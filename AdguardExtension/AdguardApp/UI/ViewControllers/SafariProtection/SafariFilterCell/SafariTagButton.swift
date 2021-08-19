@@ -112,10 +112,11 @@ final class SafariTagButton: UIButton {
     }
     
     private func initializeLang() {
-        var flag = langFlags[model.tagName] ?? model.tagName
+        var flag = model.tagName
         if flag.starts(with: "#") {
             flag = String(flag.dropFirst())
         }
+        flag = langFlags[flag] ?? flag
         let flagImage = UIImage(named: flag)
         setImage(flagImage, for: .normal)
         setImage(flagImage, for: .selected)
