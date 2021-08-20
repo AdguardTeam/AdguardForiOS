@@ -415,6 +415,7 @@ class TurnOffVisafeController:UIViewController
                 let okAction = UIAlertAction(title: "Xác nhận", style:
                     UIAlertAction.Style.default) {
                    UIAlertAction in
+                        self.navigationController?.popViewController(animated: true)
                     }
                    // add an action (button)
                    alert.addAction(okAction)

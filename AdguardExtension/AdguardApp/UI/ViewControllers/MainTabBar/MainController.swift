@@ -315,41 +315,19 @@ class Main:UIViewController{
             }
         }
         
-//        if StoreData.getMyPlist(key: "check_passcode") == nil
-//        {
-//            StoreData.saveMyPlist(key: "check_passcode", value: false)
-//            self.navigationController?.popViewController(animated: true)
-//
-//        }else if StoreData.getMyPlist(key: "check_passcode") as! Bool == true
-//        {
-//
-//            let alertController = UIAlertController (title: "", message: "Bạn chắc chắn muốn ngắt tính năng bảo vệ của Visafe?", preferredStyle: .actionSheet)
-//            let until_turn_on = UIAlertAction(title: "Đồng ý", style: .default) { (_) -> Void in
-//                self.applyDoH_G()
-//                self.active_background.image = UIImage(named: "Group 6042.png")
-//                self.status_btn = 1
-//                StoreData.saveMyPlist(key: "status", value: "0")
-//                self.appear_time = 1
-//                let content = UNMutableNotificationContent()
-//                content.title = "Bạn đã tắt chế độ bảo vệ!"
-//                content.body = "Thiết bị của bạn có thể bị ảnh hưởng bởi tấn công mạng "
-//                content.sound = UNNotificationSound.default
-//                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-//                let request = UNNotificationRequest(identifier: "TestIdentifier", content: content, trigger: trigger)
-//                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-//            }
-//
-//            let cancel = UIAlertAction(title: "Hủy bỏ", style: .default) { (_) -> Void in
-//                    self.active_background.image=UIImage(named: "Group 6041.png")
-//                    self.dismiss(animated: true, completion: nil)
-//                }
-//                cancel.setValue(UIColor.red, forKey: "titleTextColor")
-//               alertController.addAction(until_turn_on)
-//               alertController.addAction(cancel)
-//
-//               present(alertController, animated: true, completion: nil)
-//            StoreData.saveMyPlist(key: "check_passcode", value: false)
-//        }
+        if StoreData.getMyPlist(key: "check_passcode") == nil
+        {
+            StoreData.saveMyPlist(key: "check_passcode", value: false)
+            self.navigationController?.popViewController(animated: true)
+        }
+        else if StoreData.getMyPlist(key: "check_passcode") as! Bool == true
+        {
+            self.complexProtection.switchSystemProtection(state: false, for: self) { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.updateVpnInfo()
+                }
+            }
+        }
     }
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
