@@ -83,6 +83,7 @@ final class SafariGroupFiltersTableController: UITableViewController {
             return
         }
         destinationVC.filterMeta = selectedFilter
+        destinationVC.delegate = model
     }
     
     override func viewDidLayoutSubviews() {

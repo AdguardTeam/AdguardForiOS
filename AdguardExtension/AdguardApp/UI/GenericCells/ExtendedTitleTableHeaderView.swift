@@ -78,7 +78,7 @@ final class ExtendedTitleTableHeaderView: UIView {
         super.init(frame: .zero)
         setupUI()
         setupTheme()
-        setNormalTitle(title)
+        setNormalTitle(normalDescription)
     }
     
     init(title: String, htmlDescription: String) {
@@ -115,11 +115,13 @@ final class ExtendedTitleTableHeaderView: UIView {
             titleLabel.topAnchor.constraint(equalTo: topAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: isIpadTrait ? 24.0 : 16.0),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: isIpadTrait ? -24.0 : -16.0),
+            titleLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: titleLabel.font.pointSize + 2.0),
             
             descriptionTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: isIpadTrait ? 16.0 : 8.0),
             descriptionTextView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: isIpadTrait ? 24.0 : 16.0),
             descriptionTextView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: isIpadTrait ? -24.0 : -16.0),
-            descriptionTextView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: isIpadTrait ? -24.0 : -16.0)
+            descriptionTextView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: isIpadTrait ? -24.0 : -16.0),
+            descriptionTextView.heightAnchor.constraint(greaterThanOrEqualToConstant: descriptionTextView.font!.pointSize + 2.0),
         ])
     }
     

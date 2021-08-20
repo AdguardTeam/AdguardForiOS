@@ -75,6 +75,60 @@ final class AllSafariGroupsFiltersModel: NSObject, SafariGroupFiltersModelProtoc
         modelsProvider.searchString = searchString
         tableView?.reloadData()
     }
+    
+    private func reinit() {
+        modelsProvider = SafariGroupFiltersModelsProvider(sdkModels: safariProtection.groups as! [SafariGroup], proStatus: configuration.proStatus)
+        modelsProvider.searchString = searchString
+    }
+}
+
+// MARK: - AllSafariGroupsFiltersModel + FilterDetailsViewControllerDelegate
+
+extension AllSafariGroupsFiltersModel {
+    func deleteFilter(with groupId: Int, filterId: Int, onFilterDeleted: @escaping () -> Void) {
+        let groupType = SafariGroup.GroupType(rawValue: groupId)!
+        safariProtection.deleteCustomFilter(withId: filterId) { [weak self] error in
+            guard let self = self else { return }
+            if let error = error {
+                DDLogError("(AllSafariGroupsFiltersModel) - deleteFilter; DB error when removing filter with id=\(filterId) group=\(groupType); Error: \(error)")
+            }
+            let section = self.groupModels.firstIndex(where: { $0.groupType == groupType })!
+            let row = self.filtersModels[section].firstIndex(where: { $0.filterId == filterId })!
+            self.reinit()
+            self.tableView?.deleteRows(at: [IndexPath(row: row, section: section)], with: .automatic)
+            onFilterDeleted()
+        } onCbReloaded: { error in
+            if let error = error {
+                DDLogError("(AllSafariGroupsFiltersModel) - deleteFilter; Reload CB error when removing filter with id=\(filterId) group=\(groupType); Error: \(error)")
+            }
+        }
+    }
+    
+    func editFilter(with groupId: Int, filterId: Int, onFilterEdited: @escaping (SafariFilterProtocol) -> Void) {
+        // TODO: - implement
+    }
+    
+    func setFilter(with groupId: Int, filterId: Int, enabled: Bool, onFilterSet: @escaping (SafariFilterProtocol) -> Void) {
+        let groupType = SafariGroup.GroupType(rawValue: groupId)!
+        safariProtection.setFilter(withId: filterId, groupId, enabled: enabled) { [weak self] error in
+            guard let self = self else { return }
+            if let error = error {
+                DDLogError("(AllSafariGroupsFiltersModel) - setFilter; DB error when setting filter with id=\(filterId) group=\(groupType) to state=\(enabled); Error: \(error)")
+            }
+            self.reinit()
+            let section = self.groupModels.firstIndex(where: { $0.groupType == groupType })!
+            let row = self.filtersModels[section].firstIndex(where: { $0.filterId == filterId })!
+            self.tableView?.reloadRows(at: [IndexPath(row: row, section: section)], with: .automatic)
+            
+            let group = self.safariProtection.groups.first(where: { $0.groupType == groupType })!
+            let newFilterMeta = group.filters.first(where: { $0.filterId == filterId })!
+            onFilterSet(newFilterMeta)
+        } onCbReloaded: { error in
+            if let error = error {
+                DDLogError("(AllSafariGroupsFiltersModel) - setFilter; Reload CB error when changing group=\(groupType) to state=\(enabled); Error: \(error)")
+            }
+        }
+    }
 }
 
 // MARK: - AllSafariGroupsFiltersModel + SafariGroupStateHeaderDelegate
@@ -107,22 +161,7 @@ extension AllSafariGroupsFiltersModel {
 
 extension AllSafariGroupsFiltersModel {
     func safariFilterStateChanged(_ filterId: Int, _ groupType: SafariGroup.GroupType, _ newState: Bool) {
-        safariProtection.setFilter(withId: filterId, groupType.id, enabled: newState) { [weak self] error in
-            guard let self = self else { return }
-            if let error = error {
-                DDLogError("(AllSafariGroupsFiltersModel) - setFilter; DB error when setting filter with id=\(filterId) group=\(groupType) to state=\(newState); Error: \(error)")
-            }
-            self.modelsProvider = SafariGroupFiltersModelsProvider(sdkModels: self.safariProtection.groups as! [SafariGroup], proStatus: self.configuration.proStatus)
-            self.modelsProvider.searchString = self.searchString
-            
-            let section = self.groupModels.firstIndex(where: { $0.groupType == groupType })!
-            let row = self.filtersModels[section].firstIndex(where: { $0.filterId == filterId })!
-            self.tableView?.reloadRows(at: [IndexPath(row: row, section: section)], with: .none)
-        } onCbReloaded: { error in
-            if let error = error {
-                DDLogError("(AllSafariGroupsFiltersModel) - setFilter; Reload CB error when setting filter with id=\(filterId) group=\(groupType) to state=\(newState); Error: \(error)")
-            }
-        }
+        setFilter(with: groupType.id, filterId: filterId, enabled: newState) { _ in }
     }
     
     func tagTapped(_ tagName: String) {

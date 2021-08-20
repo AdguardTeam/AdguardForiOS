@@ -24,7 +24,7 @@ protocol SafariGroupFiltersModelDelegate: AnyObject {
     func tagTapped(_ tagName: String)
 }
 
-protocol SafariGroupFiltersModelProtocol: UITableViewDelegate, UITableViewDataSource, SafariFilterCellDelegate, SafariGroupStateHeaderDelegate {
+protocol SafariGroupFiltersModelProtocol: UITableViewDelegate, UITableViewDataSource, SafariFilterCellDelegate, SafariGroupStateHeaderDelegate, FilterDetailsViewControllerDelegate {
     var searchString: String? { get set }
     var tableView: UITableView? { get set }
     var delegate: SafariGroupFiltersModelDelegate? { get set }
@@ -93,29 +93,64 @@ final class OneSafariGroupFiltersModel: NSObject, SafariGroupFiltersModelProtoco
         modelsProvider.searchString = searchString
         tableView?.reloadData()
     }
+    
+    private func reinit() {
+        group = safariProtection.groups.first(where: { $0.groupType == group.groupType })! as! SafariGroup
+        modelsProvider = SafariGroupFiltersModelsProvider(sdkModels: [group], proStatus: configuration.proStatus)
+        modelsProvider.searchString = searchString
+        groupModel = modelsProvider.groupModels.first!
+    }
+}
+
+// MARK: - OneSafariGroupFiltersModel + FilterDetailsViewControllerDelegate
+
+extension OneSafariGroupFiltersModel {
+    func deleteFilter(with groupId: Int, filterId: Int, onFilterDeleted: @escaping () -> Void) {
+        safariProtection.deleteCustomFilter(withId: filterId) { [weak self] error in
+            guard let self = self else { return }
+            if let error = error {
+                DDLogError("(OneSafariGroupFiltersModel) - deleteFilter; DB error when removing filter with id=\(filterId) groupId=\(groupId); Error: \(error)")
+            }
+            let row = self.filtersModels.firstIndex(where: { $0.filterId == filterId })!
+            self.reinit()
+            self.tableView?.deleteRows(at: [IndexPath(row: row, section: Section.filters.rawValue)], with: .automatic)
+            onFilterDeleted()
+        } onCbReloaded: { error in
+            if let error = error {
+                DDLogError("(OneSafariGroupFiltersModel) - deleteFilter; Reload CB error when removing filter with id=\(filterId) groupId=\(groupId); Error: \(error)")
+            }
+        }
+    }
+    
+    func editFilter(with groupId: Int, filterId: Int, onFilterEdited: @escaping (SafariFilterProtocol) -> Void) {
+        // TODO: - implement
+    }
+    
+    func setFilter(with groupId: Int, filterId: Int, enabled: Bool, onFilterSet: @escaping (SafariFilterProtocol) -> Void) {
+        safariProtection.setFilter(withId: filterId, groupId, enabled: enabled) { [weak self] error in
+            guard let self = self else { return }
+            if let error = error {
+                DDLogError("(OneSafariGroupFiltersModel) - setFilter; DB error when setting filter with id=\(filterId) groupId=\(groupId) to state=\(enabled); Error: \(error)")
+            }
+            self.reinit()
+            let row = self.filtersModels.firstIndex(where: { $0.filterId == filterId })!
+            self.tableView?.reloadRows(at: [IndexPath(row: row, section: Section.filters.rawValue)], with: .automatic)
+            
+            let newFilterMeta = self.group.filters.first(where: { $0.filterId == filterId })!
+            onFilterSet(newFilterMeta)
+        } onCbReloaded: { error in
+            if let error = error {
+                DDLogError("(OneSafariGroupFiltersModel) - setFilter; Reload CB error when setting filter with id=\(filterId) groupId=\(groupId) to state=\(enabled); Error: \(error)")
+            }
+        }
+    }
 }
 
 // MARK: - OneSafariGroupFiltersModel + SafariFilterCellDelegate
 
 extension OneSafariGroupFiltersModel {
     func safariFilterStateChanged(_ filterId: Int, _ groupType: SafariGroup.GroupType, _ newState: Bool) {
-        safariProtection.setFilter(withId: filterId, groupType.id, enabled: newState) { [weak self] error in
-            guard let self = self else { return }
-            if let error = error {
-                DDLogError("(OneSafariGroupFiltersModel) - setFilter; DB error when setting filter with id=\(filterId) group=\(groupType) to state=\(newState); Error: \(error)")
-            }
-            self.group = self.safariProtection.groups.first(where: { $0.groupType == groupType })! as! SafariGroup
-            self.modelsProvider = SafariGroupFiltersModelsProvider(sdkModels: [self.group], proStatus: self.configuration.proStatus)
-            self.modelsProvider.searchString = self.searchString
-            self.groupModel = self.modelsProvider.groupModels.first!
-            
-            let row = self.filtersModels.firstIndex(where: { $0.filterId == filterId })!
-            self.tableView?.reloadRows(at: [IndexPath(row: row, section: Section.filters.rawValue)], with: .none)
-        } onCbReloaded: { error in
-            if let error = error {
-                DDLogError("(OneSafariGroupFiltersModel) - setFilter; Reload CB error when setting filter with id=\(filterId) group=\(groupType) to state=\(newState); Error: \(error)")
-            }
-        }
+        setFilter(with: groupType.id, filterId: filterId, enabled: newState) { _ in }
     }
     
     func tagTapped(_ tagName: String) {
@@ -134,12 +169,7 @@ extension OneSafariGroupFiltersModel {
             if let error = error {
                 DDLogError("(OneSafariGroupFiltersModel) - setGroup; DB error when changing group=\(groupType) to state=\(newState); Error: \(error)")
             }
-            
-            self.group = self.safariProtection.groups.first(where: { $0.groupType == groupType })! as! SafariGroup
-            self.modelsProvider = SafariGroupFiltersModelsProvider(sdkModels: [self.group], proStatus: self.configuration.proStatus)
-            self.modelsProvider.searchString = self.searchString
-            self.groupModel = self.modelsProvider.groupModels.first!
-            
+            self.reinit()
             self.tableView?.reloadSections(IndexSet(integer: Section.filters.rawValue), with: .automatic)
         } onCbReloaded: { error in
             if let error = error {

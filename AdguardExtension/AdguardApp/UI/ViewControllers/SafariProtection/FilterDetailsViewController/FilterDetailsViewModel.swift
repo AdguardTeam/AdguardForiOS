@@ -17,9 +17,10 @@
  */
 
 import SafariAdGuardSDK
-import SwiftUI
 
 final class FilterDetailsViewModel: NSObject {
+    
+    weak var delegate: SwitchTableViewCellDelegate?
     
     fileprivate enum Section {
         case state
@@ -145,6 +146,7 @@ extension FilterDetailsViewModel: UITableViewDataSource {
             cell.selectionStyle = .none
             cell.switchIsOn = filterMeta.isEnabled
             cell.updateTheme(themeService)
+            cell.delegate = delegate
             return cell
         case .meta:
             let model = metaRows[indexPath.row]
