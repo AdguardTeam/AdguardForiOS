@@ -13,6 +13,7 @@ import SafariServices
 import WebKit
 import AudioToolbox
 import UserNotifications
+
 class Main:UIViewController{
     
     @IBOutlet var view_main: UIView!
@@ -28,7 +29,6 @@ class Main:UIViewController{
     private let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
     @IBOutlet weak var btn_active_main: UIButton!
     @IBOutlet weak var image_status_mode: UIImageView!
-
     func randomString(length: Int) -> String {
 
         let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -223,6 +223,24 @@ class Main:UIViewController{
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         image_status_mode.isUserInteractionEnabled = true
         image_status_mode.addGestureRecognizer(tapGestureRecognizer)
+        
+        let monitor = NWPathMonitor()
+        monitor.start(queue: .global())
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                DispatchQueue.main.async {
+                    self.active_background.image=UIImage(named: "Group 6041.png")
+                    self.container_view.isHidden = true
+                }
+            }
+            else
+            {
+                DispatchQueue.main.async {
+                    self.active_background.image=UIImage(named: "Group 6043.png")
+                    self.container_view.isHidden = false
+                }
+            }
+        }
     }
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
@@ -237,53 +255,6 @@ class Main:UIViewController{
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    //sua khi moi vap tu dong on khi set la off
-//    func statusDidChange(status: Network.NWPath.Status) {
-//
-//        if status == .satisfied
-//        {
-//            if NEDNSSettingsManager.shared().isEnabled == true && count == 1
-//                {
-//                    active_background.image=UIImage(named: "Group 6041.png")
-//                    status_btn = 0
-//                    StoreData.saveMyPlist(key: "status", value: "1")
-//                    applyDoH()
-//                    container_view.isHidden = true
-//                 }
-//                else
-//                {
-//                    status_btn = 1
-//                    StoreData.saveMyPlist(key: "status", value: "0")
-//                    active_background.image=UIImage(named: "Group 6042.png")
-//                    applyDoH_G()
-//                    container_view.isHidden = true
-//                }
-//        }
-//        else
-//        {
-//            let alert = UIAlertController(title: "Thông báo", message: "Kiểm tra kết nối Internet" , preferredStyle: UIAlertController.Style.alert)
-//            let okAction = UIAlertAction(title: "Xác nhận", style:
-//            UIAlertAction.Style.default) {
-//               UIAlertAction in
-//                }
-//               // add an action (button)
-//               alert.addAction(okAction)
-//               // show the alert
-//            self.present(alert, animated: true, completion: nil)
-//            status_btn = 1
-////            StoreData.saveMyPlist(key: "status", value: "0")
-//            self.active_background.image=UIImage(named: "Group 6043.png")
-//            container_view.isHidden = false
-//        }
-//        if StoreData.getMyPlist(key: "status") as! String == "0"
-//        {
-//            status_btn = 1
-//            StoreData.saveMyPlist(key: "status", value: "0")
-//            active_background.image=UIImage(named: "Group 6042.png")
-//            applyDoH_G()
-//            container_view.isHidden = true
-//        }
-//    }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if Core.shared.isNewUser() {
