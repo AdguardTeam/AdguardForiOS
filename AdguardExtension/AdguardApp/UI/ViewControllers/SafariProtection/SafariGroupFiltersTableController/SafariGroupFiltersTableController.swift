@@ -37,6 +37,8 @@ final class SafariGroupFiltersTableController: UITableViewController {
     
     // MARK: - Private properties
 
+    private let filterDetailsSegueId = "FilterDetailsSegueId"
+    private var selectedFilter: SafariFilterProtocol!
     private var headerView: AGSearchView?
 
     /* Services */
@@ -72,6 +74,15 @@ final class SafariGroupFiltersTableController: UITableViewController {
         
         updateTheme()
         setupBackButton()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        guard let destinationVC = segue.destination as? FilterDetailsViewController else {
+            return
+        }
+        destinationVC.filterMeta = selectedFilter
     }
     
     override func viewDidLayoutSubviews() {
@@ -111,6 +122,12 @@ final class SafariGroupFiltersTableController: UITableViewController {
 // MARK: - SafariGroupFiltersTableController + SafariGroupFiltersModelDelegate
 
 extension SafariGroupFiltersTableController: SafariGroupFiltersModelDelegate {
+    
+    func filterTapped(_ filter: SafariFilterProtocol) {
+        selectedFilter = filter
+        performSegue(withIdentifier: filterDetailsSegueId, sender: self)
+    }
+    
     func tagTapped(_ tagName: String) {
         if headerView == nil {
             addTableHeaderView()

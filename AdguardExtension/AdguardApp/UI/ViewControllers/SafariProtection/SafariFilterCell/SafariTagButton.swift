@@ -26,6 +26,14 @@ struct SafariTagButtonModel {
 }
 
 extension SafariTagButtonModel {
+    init(tag: ExtendedFiltersMeta.Tag, isSelected: Bool) {
+        self.tagName = "#" + tag.tagName
+        self.isLang = tag.tagType == .lang
+        self.isSelected = isSelected
+    }
+}
+
+extension SafariTagButtonModel {
     init() {
         self.tagName = ""
         self.isLang = false

@@ -39,6 +39,11 @@ public protocol SafariFilterProtocol {
     var rulesCount: Int? { get } // Number of rules in the filter. But this variable is approximate. The very exact result will give the Converter Lib
 }
 
+public extension SafariFilterProtocol {
+    var removable: Bool { filterId >= CustomFilterMeta.baseCustomFilterId }
+    var editable: Bool { filterId >= CustomFilterMeta.baseCustomFilterId  }
+}
+
 public extension SafariGroup {
     struct Filter: SafariFilterProtocol {
         public let name: String?

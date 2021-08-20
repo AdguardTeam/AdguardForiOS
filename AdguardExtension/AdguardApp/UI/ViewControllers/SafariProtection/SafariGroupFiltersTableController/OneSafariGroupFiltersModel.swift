@@ -20,6 +20,7 @@ import SafariAdGuardSDK
 import SwiftUI
 
 protocol SafariGroupFiltersModelDelegate: AnyObject {
+    func filterTapped(_ filter: SafariFilterProtocol)
     func tagTapped(_ tagName: String)
 }
 
@@ -159,6 +160,12 @@ fileprivate extension OneSafariGroupFiltersModel {
 
 extension OneSafariGroupFiltersModel {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == Section.title.rawValue {
+            return
+        }
+        let filterId = filtersModels[indexPath.row].filterId
+        let filter = group.filters.first(where: { $0.filterId == filterId })!
+        delegate?.filterTapped(filter)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

@@ -22,12 +22,6 @@ final class TitleTableViewCell: UITableViewCell, Reusable {
     // MARK: - Outlets
     @IBOutlet weak var titleLabel: ThemableLabel!
     
-    // MARK: - Services
-    private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-
-    // MARK: - Properties
-    private var themeObserver: NotificationToken?
-    
     var title: String? {
         didSet {
             titleLabel.text = title
@@ -37,16 +31,9 @@ final class TitleTableViewCell: UITableViewCell, Reusable {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
-        updateTheme()
-        
-        themeObserver = NotificationCenter.default.observe(name: .themeChanged, object: nil, queue: .main) { [weak self] _ in
-            self?.updateTheme()
-        }
     }
-}
-
-extension TitleTableViewCell: ThemableProtocol {
-    func updateTheme() {
+    
+    func updateTheme(_ themeService: ThemeServiceProtocol) {
         themeService.setupTableCell(self)
         themeService.setupLabel(titleLabel)
     }

@@ -134,6 +134,12 @@ extension AllSafariGroupsFiltersModel {
 
 extension AllSafariGroupsFiltersModel {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let groupType = groupModels[indexPath.section].groupType
+        let group = safariProtection.groups.first(where: { $0.groupType == groupType })!
+        
+        let filterId = filtersModels[indexPath.section][indexPath.row].filterId
+        let filter = group.filters.first(where: { $0.filterId == filterId })!
+        delegate?.filterTapped(filter)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

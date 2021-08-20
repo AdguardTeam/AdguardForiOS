@@ -58,7 +58,7 @@ final class SafariGroupFiltersModelsProvider {
             self.initialGroupModels.append(groupModel)
             
             let filtersModels = group.filters.map { filter -> SafariFilterCellModel in
-                let tagsModels = filter.tags.map { SafariTagButtonModel(tagName: "#" + $0.tagName, isLang: $0.tagType == .lang, isSelected: true) }
+                let tagsModels = filter.tags.map { SafariTagButtonModel(tag: $0, isSelected: true) }
                 return SafariFilterCellModel(
                     filterId: filter.filterId,
                     groupType: group.groupType,
