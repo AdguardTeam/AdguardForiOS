@@ -287,24 +287,26 @@ extension AppDelegate {
             return false
         }
         
-        guard let filtersMasterController = filtersStoryboard.instantiateViewController(withIdentifier: "FiltersMasterController") as? FiltersMasterController else {
-            DDLogError("Filters.storyboard doesnt't have FiltersMasterController")
-            return false
-        }
-        filtersMasterController.loadViewIfNeeded()
-    
-        guard let groupsController = filtersMasterController.children.first(where: { $0 is GroupsController }) as? GroupsController else {
-            DDLogError("FiltersMasterController doesnt't have GroupsController")
-            return false
-        }
-        groupsController.openUrl = url
-        groupsController.openTitle = title
-        groupsController.loadViewIfNeeded()
+        // TODO: - Let user subscribe for filter
         
-        navController.viewControllers = [mainMenuController, safariProtectionController, filtersMasterController]
-        tabBar.selectedViewController = navController
-        window?.rootViewController = tabBar
-        
+//        guard let filtersMasterController = filtersStoryboard.instantiateViewController(withIdentifier: "FiltersMasterController") as? FiltersMasterController else {
+//            DDLogError("Filters.storyboard doesnt't have FiltersMasterController")
+//            return false
+//        }
+//        filtersMasterController.loadViewIfNeeded()
+//
+//        guard let groupsController = filtersMasterController.children.first(where: { $0 is GroupsController }) as? GroupsController else {
+//            DDLogError("FiltersMasterController doesnt't have GroupsController")
+//            return false
+//        }
+//        groupsController.openUrl = url
+//        groupsController.openTitle = title
+//        groupsController.loadViewIfNeeded()
+//
+//        navController.viewControllers = [mainMenuController, safariProtectionController, filtersMasterController]
+//        tabBar.selectedViewController = navController
+//        window?.rootViewController = tabBar
+//
         return true
     }
     
