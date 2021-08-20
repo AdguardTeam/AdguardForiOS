@@ -3159,7 +3159,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisafeDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = PPZ8Y7NW8F;
 				HEADER_SEARCH_PATHS = $inherited;
 				INFOPLIST_FILE = AdguardPro/VisafePro.plist;
@@ -3193,7 +3193,7 @@
 				CODE_SIGN_ENTITLEMENTS = AdguardPro/AdguardPro.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = PPZ8Y7NW8F;
 				HEADER_SEARCH_PATHS = $inherited;
 				INFOPLIST_FILE = AdguardPro/VisafePro.plist;
@@ -3403,6 +3403,7 @@
 				CODE_SIGN_ENTITLEMENTS = AdguardPro/ProTunnel.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = PPZ8Y7NW8F;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -3444,6 +3445,7 @@
 				CODE_SIGN_ENTITLEMENTS = AdguardPro/ProTunnel.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = PPZ8Y7NW8F;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "APP_EXTENSION=1";

@@ -70,75 +70,82 @@ class Main:UIViewController{
         dnsProvidersService.addVisafeVPN(name: "Visafe", upstream: upstream) { [weak self] in
             vpnManager.updateSettings(completion: nil)
         }
-        if complexProtection.systemProtectionEnabled == true
-       {
-            if StoreData.getMyPlist(key: "passcode") != nil
-            {
-                let secondVC = self.storyboard?.instantiateViewController(withIdentifier: "confirm_passcode") as! TurnOffVisafeController
-                _ = navigationController?.popViewController(animated: true)
-                self.navigationController?.pushViewController(secondVC, animated: false)
-            }
-            else
-            {
-                let alertController = UIAlertController (title: "", message: "Bạn chắc chắn muốn ngắt \n tính năng bảo vệ của Visafe?", preferredStyle: .actionSheet)
-                let until_turn_on = UIAlertAction(title: "Đồng ý", style: .default) { (_) -> Void in
-                    self.appear_time = 1
-                    let content = UNMutableNotificationContent()
-                    content.title = "Bạn đã tắt chế độ bảo vệ!"
-                    content.body = "Thiết bị của bạn có thể bị ảnh hưởng bởi tấn công mạng "
-                    content.sound = UNNotificationSound.default
-                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-                    let request = UNNotificationRequest(identifier: "TestIdentifier", content: content, trigger: trigger)
-                    UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        if status_btn == 0{
+            
+            let alertController = UIAlertController (title: "", message: "Bạn chắc chắn muốn ngắt \n tính năng bảo vệ của Visafe?", preferredStyle: .actionSheet)
+            let until_turn_on = UIAlertAction(title: "Đồng ý", style: .default) { (_) -> Void in
+                if StoreData.getMyPlist(key: "passcode") != nil
+                {
+                    let secondVC = self.storyboard?.instantiateViewController(withIdentifier: "confirm_passcode") as! TurnOffVisafeController
+                    _ = self.navigationController?.popViewController(animated: true)
+                    self.navigationController?.pushViewController(secondVC, animated: false)
+                }
+                else
+                {
+                    self.status_btn = 1
                     self.complexProtection.switchSystemProtection(state: false, for: self) { [weak self] _ in
                     DispatchQueue.main.async {
                         self?.updateVpnInfo()
                         }
                     }
-                    self.active_background.image = UIImage(named: "Group 6042.png")
-                    StoreData.saveMyPlist(key: "status", value: "0")
                 }
-
-                let cancel = UIAlertAction(title: "Hủy bỏ", style: .default) { (_) -> Void in
-                    self.dismiss(animated: true, completion: nil)
-                }
-                alertController.addAction(until_turn_on)
-                cancel.setValue(UIColor.red, forKey: "titleTextColor")
-               alertController.addAction(cancel)
-
-               present(alertController, animated: true, completion: nil)
             }
-       }
-       else
-       {
-                self.active_background.image=UIImage(named: "Group 6043.png")
-                container_view.isHidden = false
-                    let pulse = PulseAnimation(numberOfPulse: 3, radius: 100, postion: sender.center)
-                    pulse.animationDuration = 1
-                    pulse.backgroundColor = #colorLiteral(red: 0.9764705882, green: 0.9058823529, blue: 0.2549019608, alpha: 1)
-                    self.view.layer.insertSublayer(pulse, below: self.view.layer)
-                    let seconds = 2.3
-                    self.complexProtection.switchSystemProtection(state: true, for: self) { [weak self] _ in
-                    DispatchQueue.main.async {
-                        self?.updateVpnInfo()
-                        }
-                    }
+            let cancel = UIAlertAction(title: "Hủy bỏ", style: .default) { (_) -> Void in
+                self.dismiss(animated: true, completion: nil)
+            }
+            alertController.addAction(until_turn_on)
+            cancel.setValue(UIColor.red, forKey: "titleTextColor")
+            alertController.addAction(cancel)
+            present(alertController, animated: true, completion: nil)
+        }
+        else
+        {
+            status_btn = 0
+            self.complexProtection.switchSystemProtection(state: true, for: self) { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.container_view.isHidden = false
+                self?.active_background.image=UIImage(named: "Group 6043.png")
+                let seconds = 2.0
                     DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
-                        self.active_background.image=UIImage(named: "Group 6041.png")
-                        StoreData.saveMyPlist(key: "status", value: "1")
-                        self.container_view.isHidden = true
-                        let content = UNMutableNotificationContent()
-                        content.title = "Đã kích hoạt chế độ bảo vệ!"
-                        content.body = "Chế độ chống lừa đảo, mã độc, tấn công mạng đã được kích hoạt!"
-                        content.sound = UNNotificationSound.default
-                        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-                        let request = UNNotificationRequest(identifier: "TestIdentifier", content: content, trigger: trigger)
-                        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+                        self?.updateVpnInfo()
                     }
-         }
+                }
+            }
+        }
     }
     private func updateVpnInfo() {
         let enabled = complexProtection.systemProtectionEnabled
+        if enabled == true{
+            self.active_background.image=UIImage(named: "Group 6041.png")
+            self.status_btn = 0
+            StoreData.saveMyPlist(key: "status", value: "1")
+            container_view.isHidden = true
+            // notification
+            let content = UNMutableNotificationContent()
+            content.title = "Đã kích hoạt chế độ bảo vệ!"
+            content.body = "Chế độ chống lừa đảo, mã độc, tấn công mạng đã được kích hoạt!"
+            content.sound = UNNotificationSound.default
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+            let request = UNNotificationRequest(identifier: "TestIdentifier", content: content, trigger: trigger)
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            
+        }
+        else
+        {
+            self.active_background.image = UIImage(named: "Group 6042.png")
+            StoreData.saveMyPlist(key: "status", value: "0")
+            self.status_btn = 1
+            //notification
+            let content = UNMutableNotificationContent()
+            content.title = "Bạn đã tắt chế độ bảo vệ!"
+            content.body = "Thiết bị của bạn có thể bị ảnh hưởng bởi tấn công mạng "
+            content.sound = UNNotificationSound.default
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+            let request = UNNotificationRequest(identifier: "TestIdentifier", content: content, trigger: trigger)
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+           
+            
+        }
     }
     @IBOutlet weak var background_dot: UIImageView!
     @IBOutlet weak var advertise: UIImageView!
@@ -281,10 +288,10 @@ class Main:UIViewController{
         super.viewDidLayoutSubviews()
         if Core.shared.isNewUser() {
             StoreData.saveMyPlist(key: "status", value: "0")
-//            let secondVC = self.storyboard?.instantiateViewController(withIdentifier: "login_controller")
-//            secondVC?.modalTransitionStyle = .crossDissolve
-//            secondVC?.modalPresentationStyle = .fullScreen
-//            self.present(secondVC!, animated: true)
+            let secondVC = self.storyboard?.instantiateViewController(withIdentifier: "login_controller")
+            secondVC?.modalTransitionStyle = .crossDissolve
+            secondVC?.modalPresentationStyle = .fullScreen
+            self.present(secondVC!, animated: true)
         }
     }
     

@@ -391,24 +391,17 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
             let message: String = String.localizedString("vpn_confirm_message")
             let okTitle: String = String.localizedString("common_action_ok")
             let cancelTitle: String = String.localizedString("common_action_cancel")
-            let privacyTitle: String = String.localizedString("privacy_policy_action")
             
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             
             let okAction = UIAlertAction(title: okTitle, style: .default) {(alert) in
                 confirmed(true)
             }
-            
-            let privacyAction = UIAlertAction(title: privacyTitle, style: .default) { (alert) in
-                UIApplication.shared.openAdguardUrl(action: "privacy", from: "DnsSettingsController", buildVersion: self.productInfo.buildVersion())
-                confirmed(false)
-            }
             let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel) { (alert) in
                 confirmed(false)
             }
             
             alert.addAction(okAction)
-            alert.addAction(privacyAction)
             alert.addAction(cancelAction)
             
             alert.preferredAction = okAction

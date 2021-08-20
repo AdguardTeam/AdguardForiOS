@@ -226,7 +226,6 @@ class DnsSettingsController : UITableViewController {
     
     // MARK: Actions
     @IBAction func toggleEnableSwitch(_ sender: UISwitch) {
-        //nativeProviders.currentServer?.upstreams = ["https://dns.visafe.vn/dns-query/111111111111"]
         if resources.dnsImplementation == .native {
             if #available(iOS 14.0, *), complexProtection.systemProtectionEnabled {
                 nativeProviders.removeDnsManager { error in
