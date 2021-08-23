@@ -164,9 +164,9 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
                 let cbFilter = allFilters.first { $0.filterId == filter.id }
                 
                 if cbFilter != nil {
-                    safariProtection.setFilter(withId: cbFilter!.filterId, cbFilter!.group.groupId, enabled: filter.enable) { error in
-                        //todo:
-                    }
+//                    safariProtection.setFilter(withId: cbFilter!.filterId, cbFilter!.group.groupId, enabled: filter.enable) { error in
+//                        //todo:
+//                    }
                     filter.status = .successful
                 }
                 else {
@@ -274,9 +274,9 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
     func applyCbRules(_ rules: [String]?, override: Bool) {
         
         let agRules = (rules ?? []).map { UserRule(ruleText: $0)}
-        safariProtection.add(rules: agRules, for: .blocklist, override: override) { error in
-            // todo:
-        }
+//        safariProtection.add(rules: agRules, for: .blocklist, override: override) { error in
+//            // todo:
+//        }
     }
     
     private func uniqueCustomFilterSettings(filters: [SafariFilterProtocol], filterSettings: [CustomCBFilterSettings] ) -> [Any] {

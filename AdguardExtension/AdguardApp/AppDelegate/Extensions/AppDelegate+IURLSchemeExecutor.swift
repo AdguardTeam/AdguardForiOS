@@ -64,7 +64,7 @@ extension AppDelegate: IURLSchemeExecutor {
     }
     
     func openTunnelModeController(showLaunchScreen: Bool) -> Bool {
-        let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+        let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
         configuration.advancedMode = true
         return self.presentTunnelModeController(showLaunchScreen: showLaunchScreen)
     }

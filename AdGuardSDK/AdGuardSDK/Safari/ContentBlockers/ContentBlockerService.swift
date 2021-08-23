@@ -104,7 +104,7 @@ final class ContentBlockerService: ContentBlockerServiceProtocol {
         var resultError: Error?
         let group = DispatchGroup()
         
-        for cb in ContentBlockerType.allCases {
+        for cb in [ContentBlockerType.custom] {
             group.enter()
             reloadContentBlocker(for: cb) { error in
                 if let error = error {
@@ -112,8 +112,8 @@ final class ContentBlockerService: ContentBlockerServiceProtocol {
                 }
                 group.leave()
             }
-            group.wait()
         }
+        group.wait()
         
         return resultError
     }
@@ -179,13 +179,13 @@ fileprivate extension NotificationCenter {
 }
 
 public extension NotificationCenter {
-    func contentBlockersUpdateStart(handler: @escaping () -> Void, queue: OperationQueue? = nil) -> NotificationToken {
+    func contentBlockersUpdateStart(queue: OperationQueue? = .main, handler: @escaping () -> Void) -> NotificationToken {
         return self.observe(name: .contentBlockersUpdateStarted, object: nil, queue: queue) { _ in
             handler()
         }
     }
     
-    func contentBlockersUpdateFinished(handler: @escaping () -> Void, queue: OperationQueue? = nil) -> NotificationToken {
+    func contentBlockersUpdateFinished(queue: OperationQueue? = .main, handler: @escaping () -> Void) -> NotificationToken {
         return self.observe(name: .contentBlockersUpdateFinished, object: nil, queue: queue) { _ in
             handler()
         }

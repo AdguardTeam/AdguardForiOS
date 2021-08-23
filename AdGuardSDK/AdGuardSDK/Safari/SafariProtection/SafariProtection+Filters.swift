@@ -26,28 +26,47 @@ public protocol SafariProtectionFiltersProtocol {
     
     /**
      Enables or disables group by **group type**
-     - Parameter type: type of the group that should be enabled/disabled
+     - Parameter groupType: type of the group that should be enabled/disabled
      - Parameter enabled: new group state
-     - Parameter onGroupSet: closure to handle error if exists
+     - Parameter onGroupSetToDB: Closure that is called when group state is set in DB
+     - Parameter onCbReloaded: Closure to handle errors when reloading Content Blockers
      */
-    func setGroup(_ groupType: SafariGroup.GroupType, enabled: Bool, onGroupSet: @escaping (_ error: Error?) -> Void)
+    func setGroup(
+        _ groupType: SafariGroup.GroupType,
+        enabled: Bool,
+        onGroupSetToDB: @escaping (_ error: Error?) -> Void,
+        onCbReloaded: @escaping (_ error: Error?) -> Void
+    )
     
     /**
      Enables or disables filter by **filter id** and **group id**
      - Parameter id: id of the filter that should be enabled/disabled
      - Parameter groupId: id of the group that filter belongs
      - Parameter enabled: new filter state
-     - Parameter onFilterSet: closure to handle error if exists
+     - Parameter onFilterSetToDB: Closure that is called when filter state is set in DB
+     - Parameter onCbReloaded: Closure to handle errors when reloading Content Blockers
      */
-    func setFilter(withId id: Int, _ groupId: Int, enabled: Bool, _ onFilterSet: @escaping (_ error: Error?) -> Void)
+    func setFilter(
+        withId id: Int,
+        _ groupId: Int,
+        enabled: Bool,
+        onFilterSetToDB: @escaping (_ error: Error?) -> Void,
+        onCbReloaded: @escaping (_ error: Error?) -> Void
+    )
     
     /**
      Adds **customFilter**
      - Parameter customFilter: Meta data of filter
      - Parameter enabled: new filter state
-     - Parameter onFilterAdded: closure to handle error if exists
+     - Parameter onFilterAddedToDb: Closure that is called when filter is added to DB
+     - Parameter onCbReloaded: Closure to handle errors when reloading Content Blockers
      */
-    func add(customFilter: ExtendedCustomFilterMetaProtocol, enabled: Bool, _ onFilterAdded: @escaping (_ error: Error?) -> Void)
+    func add(
+        customFilter: ExtendedCustomFilterMetaProtocol,
+        enabled: Bool,
+        onFilterAddedToDb: @escaping (_ error: Error?) -> Void,
+        onCbReloaded: @escaping (_ error: Error?) -> Void
+    )
     
     /**
      Renames filter with **id** to **name**
@@ -60,16 +79,26 @@ public protocol SafariProtectionFiltersProtocol {
     /**
      Deletes filter with **id**
      - Parameter id: id of the filter that should be deleted
-     - Parameter onFilterDeleted: closure to handle error if exists
+     - Parameter onFilterDeletedFromDb: Closure that is called when filter was deleted from DB
+     - Parameter onCbReloaded: Closure to handle errors when reloading Content Blockers
      */
-    func deleteCustomFilter(withId id: Int, _ onFilterDeleted: @escaping (_ error: Error?) -> Void)
+    func deleteCustomFilter(
+        withId id: Int,
+        onFilterDeletedFromDb: @escaping (_ error: Error?) -> Void,
+        onCbReloaded: @escaping (_ error: Error?) -> Void
+    )
     
     /**
      Checks update conditions for meta and updates them if needed
      - Parameter forcibly: ignores update conditions and immediately updates filters
-     - Parameter onFiltersUpdated: closure to handle update **error**
+     - Parameter onFiltersUpdated: Closure that is called when filters data was saved after update
+     - Parameter onCbReloaded: Closure to handle errors when reloading Content Blockers
      */
-    func updateFiltersMetaAndLocalizations(_ forcibly: Bool, _ onFiltersUpdated: @escaping (_ error: Result<FiltersUpdateResult>) -> Void)
+    func updateFiltersMetaAndLocalizations(
+        _ forcibly: Bool,
+        onFiltersUpdated: @escaping (_ error: Result<FiltersUpdateResult>) -> Void,
+        onCbReloaded: @escaping (_ error: Error?) -> Void
+    )
 }
 
 /* Extension is used to interact with filters and groups object and properly process operations with them */
@@ -85,21 +114,28 @@ extension SafariProtection {
     
     // MARK: - Public methods
     
-    public func setGroup(_ groupType: SafariGroup.GroupType, enabled: Bool, onGroupSet: @escaping (_ error: Error?) -> Void) {
+    public func setGroup(
+        _ groupType: SafariGroup.GroupType,
+        enabled: Bool,
+        onGroupSetToDB: @escaping (_ error: Error?) -> Void,
+        onCbReloaded: @escaping (_ error: Error?) -> Void
+    ) {
         workingQueue.async { [weak self] in
             guard let self = self else {
                 Logger.logError("(SafariProtection+Filters) - setGroup; self is missing!")
-                DispatchQueue.main.async { onGroupSet(CommonError.missingSelf) }
+                DispatchQueue.main.async { onGroupSetToDB(CommonError.missingSelf); onCbReloaded(CommonError.missingSelf) }
                 return
             }
             
             self.executeBlockAndReloadCbs {
                 Logger.logInfo("(SafariProtection+Filters) - setGroup; Setting group with id=\(groupType.id) to enabled=\(enabled)")
                 try self.filters.setGroup(withId: groupType.id, enabled: enabled)
+            } onBlockExecuted: { error in
+                self.completionQueue.async { onGroupSetToDB(error) }
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Filters) - setGroup.onCbReloaded; self is missing!")
-                    DispatchQueue.main.async { onGroupSet(CommonError.missingSelf) }
+                    DispatchQueue.main.async { onCbReloaded(CommonError.missingSelf) }
                     return
                 }
                 
@@ -108,26 +144,34 @@ extension SafariProtection {
                 } else {
                     Logger.logInfo("(SafariProtection+Filters) - setGroup; Successfully reloaded CBs after setting group with id=\(groupType.id) to enabled=\(enabled)")
                 }
-                self.completionQueue.async { onGroupSet(error) }
+                self.completionQueue.async { onCbReloaded(error) }
             }
         }
     }
     
-    public func setFilter(withId id: Int, _ groupId: Int, enabled: Bool, _ onFilterSet: @escaping (_ error: Error?) -> Void) {
+    public func setFilter(
+        withId id: Int,
+        _ groupId: Int,
+        enabled: Bool,
+        onFilterSetToDB: @escaping (_ error: Error?) -> Void,
+        onCbReloaded: @escaping (_ error: Error?) -> Void
+    ) {
         workingQueue.async { [weak self] in
             guard let self = self else {
                 Logger.logError("(SafariProtection+Filters) - setFilter; self is missing!")
-                DispatchQueue.main.async { onFilterSet(CommonError.missingSelf) }
+                DispatchQueue.main.async { onFilterSetToDB(CommonError.missingSelf); onCbReloaded(CommonError.missingSelf) }
                 return
             }
             
             self.executeBlockAndReloadCbs {
                 Logger.logInfo("(SafariProtection+Filters) - setFilter; Setting filter with id=\(id), group id=\(groupId) to enabled=\(enabled)")
                 try self.filters.setFilter(withId: id, groupId, enabled: enabled)
+            } onBlockExecuted: { error in
+                self.completionQueue.async { onFilterSetToDB(error) }
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Filters) - setFilter.onCbReloaded; self is missing!")
-                    DispatchQueue.main.async { onFilterSet(CommonError.missingSelf) }
+                    DispatchQueue.main.async { onCbReloaded(CommonError.missingSelf) }
                     return
                 }
                 
@@ -136,16 +180,21 @@ extension SafariProtection {
                 } else {
                     Logger.logInfo("(SafariProtection+Filters) - setFilter; Successfully reloaded CBs after setting filter with id=\(id), group id=\(groupId) to enabled=\(enabled)")
                 }
-                self.completionQueue.async { onFilterSet(error) }
+                self.completionQueue.async { onCbReloaded(error) }
             }
         }
     }
     
-    public func add(customFilter: ExtendedCustomFilterMetaProtocol, enabled: Bool, _ onFilterAdded: @escaping (_ error: Error?) -> Void) {
+    public func add(
+        customFilter: ExtendedCustomFilterMetaProtocol,
+        enabled: Bool,
+        onFilterAddedToDb: @escaping (_ error: Error?) -> Void,
+        onCbReloaded: @escaping (_ error: Error?) -> Void
+    ) {
         workingQueue.async { [weak self] in
             guard let self = self else {
                 Logger.logError("(SafariProtection+Filters) - addCustomFilter; self is missing!")
-                DispatchQueue.main.async { onFilterAdded(CommonError.missingSelf) }
+                DispatchQueue.main.async { onFilterAddedToDb(CommonError.missingSelf); onCbReloaded(CommonError.missingSelf) }
                 return
             }
             
@@ -161,14 +210,15 @@ extension SafariProtection {
             
             if let addError = addError {
                 Logger.logError("(SafariProtection+Filters) - addCustomFilter; Error adding custom filter: \(customFilter) to storage, error: \(addError)")
-                self.completionQueue.async { onFilterAdded(addError) }
+                self.completionQueue.async { onFilterAddedToDb(addError); onCbReloaded(addError) }
                 return
             }
+            self.completionQueue.async { onFilterAddedToDb(nil) }
             
             self.reloadContentBlockers { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Filters) - addCustomFilter.reloadContentBlockers; self is missing!")
-                    DispatchQueue.main.async { onFilterAdded(CommonError.missingSelf) }
+                    DispatchQueue.main.async { onCbReloaded(CommonError.missingSelf) }
                     return
                 }
                 
@@ -177,26 +227,33 @@ extension SafariProtection {
                 } else {
                     Logger.logInfo("(SafariProtection+Filters) - addCustomFilter; Successfully reloaded CBs after adding custom filter: \(customFilter)")
                 }
-                self.completionQueue.async { onFilterAdded(error) }
+                self.completionQueue.async { onCbReloaded(error) }
             }
         }
     }
     
-    public func deleteCustomFilter(withId id: Int, _ onFilterDeleted: @escaping (_ error: Error?) -> Void) {
+    public func deleteCustomFilter(
+        withId id: Int,
+        onFilterDeletedFromDb: @escaping (_ error: Error?) -> Void,
+        onCbReloaded: @escaping (_ error: Error?) -> Void
+    ) {
         workingQueue.async { [weak self] in
             guard let self = self else {
                 Logger.logError("(SafariProtection+Filters) - deleteCustomFilter; self is missing!")
-                DispatchQueue.main.async { onFilterDeleted(CommonError.missingSelf) }
+                DispatchQueue.main.async { onFilterDeletedFromDb(CommonError.missingSelf); onCbReloaded(CommonError.missingSelf) }
                 return
             }
             
             self.executeBlockAndReloadCbs {
                 Logger.logInfo("(SafariProtection+Filters) - deleteCustomFilter; Delete custom filter with id=\(id)")
                 try self.filters.deleteCustomFilter(withId: id)
-            } onCbReloaded: { [weak self] error in
+            } onBlockExecuted: { error in
+                self.completionQueue.async { onFilterDeletedFromDb(error) }
+            }
+            onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Filters) - deleteCustomFilter.onCbReloaded; self is missing!")
-                    DispatchQueue.main.async { onFilterDeleted(CommonError.missingSelf) }
+                    DispatchQueue.main.async { onCbReloaded(CommonError.missingSelf) }
                     return
                 }
                 
@@ -205,7 +262,7 @@ extension SafariProtection {
                 } else {
                     Logger.logInfo("(SafariProtection+Filters) - deleteCustomFilter; Successfully reloaded CBs after deleting custom filter with id=\(id)")
                 }
-                self.completionQueue.async { onFilterDeleted(error) }
+                self.completionQueue.async { onCbReloaded(error) }
             }
         }
     }
@@ -222,11 +279,15 @@ extension SafariProtection {
         }
     }
     
-    public func updateFiltersMetaAndLocalizations(_ forcibly: Bool, _ onFiltersUpdated: @escaping (_ error: Result<FiltersUpdateResult>) -> Void) {
+    public func updateFiltersMetaAndLocalizations(
+        _ forcibly: Bool,
+        onFiltersUpdated: @escaping (_ error: Result<FiltersUpdateResult>) -> Void,
+        onCbReloaded: @escaping (_ error: Error?) -> Void
+    ) {
         workingQueue.async { [weak self] in
             guard let self = self else {
                 Logger.logError("(SafariProtection+Filters) - updateFiltersMetaAndLocalizations; self is missing!")
-                DispatchQueue.main.async { onFiltersUpdated(.error(CommonError.missingSelf)) }
+                DispatchQueue.main.async { onFiltersUpdated(.error(CommonError.missingSelf)); onCbReloaded(CommonError.missingSelf) }
                 return
             }
             
@@ -235,9 +296,10 @@ extension SafariProtection {
             self.filters.updateAllMeta(forcibly: forcibly) { [weak self] result in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Filters) - updateFiltersMetaAndLocalizations.updateAllMeta; self is missing!")
-                    DispatchQueue.main.async { onFiltersUpdated(.error(CommonError.missingSelf)) }
+                    DispatchQueue.main.async { onFiltersUpdated(.error(CommonError.missingSelf)); onCbReloaded(CommonError.missingSelf) }
                     return
                 }
+                self.completionQueue.async { onFiltersUpdated(result) }
                 
                 self.workingQueue.sync {
                     

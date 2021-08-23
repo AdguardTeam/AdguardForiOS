@@ -276,7 +276,7 @@ class SystemBlacklistModel: ListOfRulesModelProtocol {
         
         for rule in allRules {
             if checkRule(rule: rule, components: components) {
-                rule.attributedString = rule.rule.highlight(search: searchStrings)
+                rule.attributedString = rule.rule.highlight(occuranciesOf: Set(searchStrings))
                 searchRules.append(rule)
             }
         }

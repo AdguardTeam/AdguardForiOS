@@ -19,7 +19,10 @@
 import UIKit
 import SafariAdGuardSDK
 
-class FilterTagsView: UIView, FilterTagsViewModel {
+final class FilterTagsView: UIView, FilterTagsViewModel {
+    
+    var tags: [ExtendedFiltersMeta.Tag] = []
+    var languages: [String] = []
     
     var highlightIsOn = true
     
@@ -28,61 +31,25 @@ class FilterTagsView: UIView, FilterTagsViewModel {
     
     private var viewHeight: NSLayoutConstraint?
     
-    var filter: SafariFilterProtocol?{
-        didSet{
-            setupUI()
-            layoutIfNeeded()
-        }
-    }
-    
     private var leftInset: CGFloat = 0.0
     private var currentYposition: CGFloat = 0.0
     
     
     // MARK: - Variables to distinguish iPad and iPhone
     
-    private var isBigScreen: Bool {
-        get {
-            return traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular
-        }
-    }
+    private var isBigScreen: Bool { traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular }
     
-    private var tagCornerRadius: CGFloat {
-        get {
-            return isBigScreen ? 5.0 : 3.0
-        }
-    }
+    private var tagCornerRadius: CGFloat { isBigScreen ? 5.0 : 3.0 }
     
-    private var buttonHeight: CGFloat {
-        get {
-            return isBigScreen ? 32.0 : 22.0
-        }
-    }
+    private var buttonHeight: CGFloat { isBigScreen ? 32.0 : 22.0 }
     
-    private var langButtonWidth: CGFloat {
-        get {
-            return isBigScreen ? 40.0 : 30.0
-        }
-    }
+    private var langButtonWidth: CGFloat { isBigScreen ? 40.0 : 30.0 }
     
-    private var inset: CGFloat {
-        get {
-            return isBigScreen ? 16.0 : 8.0
-        }
-    }
+    private var inset: CGFloat { isBigScreen ? 16.0 : 8.0 }
     
-    private var tagFont: UIFont {
-        get {
-            return isBigScreen ? UIFont.systemFont(ofSize: 18.0, weight: .regular) : UIFont.systemFont(ofSize: 12.0, weight: .regular)
-        }
-    }
-    
-    private var buttonTextInset: CGFloat {
-        get {
-            return isBigScreen ? 12.0 : 6.0
-        }
-    }
-    
+    private var tagFont: UIFont { UIFont.systemFont(ofSize: isBigScreen ? 18.0 : 12.0, weight: .regular) }
+
+    private var buttonTextInset: CGFloat { isBigScreen ? 12.0 : 6.0 }
     
     var width: CGFloat = 0.0
     var height: CGFloat = 0.0
@@ -103,14 +70,13 @@ class FilterTagsView: UIView, FilterTagsViewModel {
     }
     
     override func layoutSubviews() {
-        
         leftInset = 0.0
         currentYposition = 0.0
         height = 0.0
         
-        guard let filter = self.filter else { return }
+        setupUI()
         
-        if (filter.languages.count > 0 || filter.tags.count > 0) {
+        if languages.count > 0 || tags.count > 0 {
             height += buttonHeight + inset
             currentYposition += inset
         }
@@ -124,6 +90,7 @@ class FilterTagsView: UIView, FilterTagsViewModel {
     }
     
     private func customInit(){
+        backgroundColor = .clear
         translatesAutoresizingMaskIntoConstraints = false
         viewHeight = heightAnchor.constraint(equalToConstant: height)
         viewHeight?.isActive = true
@@ -133,19 +100,13 @@ class FilterTagsView: UIView, FilterTagsViewModel {
         subviews.forEach({ $0.removeFromSuperview() })
         
         width = frame.width
-        
-        backgroundColor = theme.backgroundColor
-        
-        guard let filter = self.filter else { return }
-        
-        for lang in filter.languages {
+
+        for lang in languages {
             setupLangButton(lang: (lang, false))
         }
-        for tag in filter.tags {
+        for tag in tags {
             setupTagButton(tag: (tag.tagName, false))
         }
-        
-        setNeedsLayout()
     }
     
     private func setupLangButton(lang: (name: String, highlighted: Bool)){
@@ -182,7 +143,6 @@ class FilterTagsView: UIView, FilterTagsViewModel {
             tagButton.alpha = tag.highlighted ? 0.3 : 1.0
         }
         tagButton.name = tag.name
-        theme.setupTagButton(tagButton)
         
         tagButton.frame.size.height = buttonHeight
         var size = tagButton.sizeThatFits(CGSize(width: 1000, height: tagButton.frame.height))
@@ -194,7 +154,7 @@ class FilterTagsView: UIView, FilterTagsViewModel {
     }
     
     private func replaceButton(_ sender: UIButton) {
-        if (leftInset + sender.frame.size.width) > width {
+        if leftInset + sender.frame.size.width > width {
             height += sender.frame.size.height + inset
             currentYposition += sender.frame.size.height + inset
             leftInset = 0.0
@@ -205,4 +165,3 @@ class FilterTagsView: UIView, FilterTagsViewModel {
         leftInset += sender.frame.size.width + inset
     }
 }
-

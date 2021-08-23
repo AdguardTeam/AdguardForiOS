@@ -161,7 +161,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     
     // MARK: - Services
     
-    private lazy var configuration: ConfigurationService = { ServiceLocator.shared.getService()! }()
+    private lazy var configuration: ConfigurationServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var resources: AESharedResourcesProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var complexProtection: ComplexProtectionServiceProtocol = { ServiceLocator.shared.getService()! }()

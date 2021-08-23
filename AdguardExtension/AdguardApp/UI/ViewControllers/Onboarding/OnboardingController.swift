@@ -34,7 +34,7 @@ class OnboardingController: UIViewController {
     
     // MARK: - services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     
     private var contenBlockerObserver: NotificationToken?
     

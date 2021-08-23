@@ -30,7 +30,11 @@ public final class SafariProtection: SafariProtectionProtocol {
     // MARK: - Internal variables
     
     // Serial queue to avoid races in services
-    let workingQueue = DispatchQueue(label: "AdGuardSDK.SafariProtection.workingQueue")
+    let workingQueue = DispatchQueue(label: "SafariAdGuardSDK.SafariProtection.workingQueue")
+    
+    // Serial queue for converting Content Blockers to avoid working queue load
+    let cbQueue = DispatchQueue(label: "SafariAdGuardSDK.SafariProtection.cbQueue", qos: .background)
+    
     // Queue to call completion handlers
     let completionQueue = DispatchQueue.main
     
@@ -158,17 +162,25 @@ public final class SafariProtection: SafariProtectionProtocol {
     // MARK: - Internal methods
     
     /* Executes block that leads to CB JSON files changes, after that reloads CBs */
-    func executeBlockAndReloadCbs(block: () throws -> Void, onCbReloaded: @escaping (_ error: Error?) -> Void) {
+    func executeBlockAndReloadCbs(
+        block: () throws -> Void,
+        onBlockExecuted: (_ error: Error?) -> Void,
+        onCbReloaded: @escaping (_ error: Error?) -> Void
+    ) {
         do {
             try block()
+            onBlockExecuted(nil)
         }
         catch {
             Logger.logError("(SafariProtection) - createNewCbJsonsAndReloadCbs; Error: \(error)")
+            onBlockExecuted(error)
             onCbReloaded(error)
             return
         }
         
-        reloadContentBlockers(onCbReloaded: onCbReloaded)
+        cbQueue.async { [weak self] in
+            self?.reloadContentBlockers(onCbReloaded: onCbReloaded)
+        }
     }
     
     /* Creates JSON files for Content blockers and reloads CBs to apply new JSONs */

@@ -802,13 +802,13 @@ fileprivate extension NotificationCenter {
 }
 
 public extension NotificationCenter {
-    func filtersUpdateStart(handler: @escaping () -> Void, queue: OperationQueue? = .main) -> NotificationToken {
+    func filtersUpdateStart(queue: OperationQueue? = .main, handler: @escaping () -> Void) -> NotificationToken {
         return self.observe(name: .filtersUpdateStarted, object: nil, queue: queue) { _ in
             handler()
         }
     }
     
-    func filtersUpdateFinished(handler: @escaping () -> Void, queue: OperationQueue? = .main) -> NotificationToken {
+    func filtersUpdateFinished(queue: OperationQueue? = .main, handler: @escaping () -> Void) -> NotificationToken {
         return self.observe(name: .filtersUpdateFinished, object: nil, queue: queue) { _ in
             handler()
         }

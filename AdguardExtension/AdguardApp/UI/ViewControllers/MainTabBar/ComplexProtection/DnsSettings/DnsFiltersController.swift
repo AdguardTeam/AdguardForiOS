@@ -67,7 +67,7 @@ class DnsFiltersController: UITableViewController, UISearchBarDelegate, DnsFilte
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var searchButton: UIBarButtonItem!
     
-    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     

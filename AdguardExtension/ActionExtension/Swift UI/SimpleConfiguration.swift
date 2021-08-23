@@ -27,14 +27,19 @@ class SimpleConfigurationSwift: NSObject, ConfigurationServiceProtocol{
     var appRated: Bool = false
     
     var userThemeMode: ThemeMode {
-        guard let themeMode = resources.sharedDefaults().object(forKey: AEDefaultsDarkTheme) as? Int else {
-            if #available(iOS 13.0, *) {
-                return .systemDefault
-            } else {
-                return .light
+        get {
+            guard let themeMode = resources.sharedDefaults().object(forKey: AEDefaultsDarkTheme) as? Int else {
+                if #available(iOS 13.0, *) {
+                    return .systemDefault
+                } else {
+                    return .light
+                }
             }
+            return ThemeMode(rawValue: themeMode) ?? .light
         }
-        return ThemeMode(rawValue: themeMode) ?? .light
+        set {
+            
+        }
     }
     
     var systemAppearenceIsDark: Bool = false
@@ -77,4 +82,8 @@ class SimpleConfigurationSwift: NSObject, ConfigurationServiceProtocol{
     var allContentBlockersEnabled: Bool = true
     
     var someContentBlockersEnabled: Bool = true
+    
+    func checkContentBlockerEnabled() {
+        
+    }
 }
