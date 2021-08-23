@@ -46,6 +46,8 @@ import Foundation
     var logSelectedCellColor: UIColor { get }
     var ruleTextColor: UIColor { get }
     var textFieldTextColor: UIColor { get }
+    var tagColor: UIColor { get }
+    var textFieldIndicatorBorderColor: UIColor { get }
     
     var indicatorStyle: UIActivityIndicatorView.Style { get }
     
@@ -69,7 +71,6 @@ import Foundation
     func setupTableCell(_ cell: UITableViewCell)
     func setupLogTableCell(_ cell: UITableViewCell, blocked: Bool)
     func statusbarStyle()->UIStatusBarStyle
-    func setupTagButton(_ button: RoundRectButton)
     func setubBarButtonItem(_ button: UIBarButtonItem)
     func setupSwitch(_ switch: UISwitch)
     func setupSegmentedControl(_ segmentedControl: UISegmentedControl)
@@ -178,10 +179,11 @@ class ThemeService : NSObject, ThemeServiceProtocol {
         return configuration.darkTheme ? .white : .darkGray
     }
     
-    func setupTagButton(_ button: RoundRectButton) {
-        button.customBackgroundColor = configuration.darkTheme ? UIColor.AdGuardColor.lightGray6  : UIColor.AdGuardColor.lightGray2
-        button.setTitleColor(configuration.darkTheme ? UIColor.AdGuardColor.lightGray2 : UIColor.AdGuardColor.lightGray5, for: .normal)
+    var textFieldIndicatorBorderColor: UIColor {
+        return configuration.darkTheme ? UIColor.AdGuardColor.lightGray5 : UIColor.AdGuardColor.lightGray2
     }
+    
+    var tagColor: UIColor { configuration.darkTheme ? UIColor.AdGuardColor.lightGray6  : UIColor.AdGuardColor.lightGray2 }
     
     func setupImage(_ imageView: ThemeableImageView) {
         imageView.image = configuration.darkTheme ? imageView.darkThemeImage : imageView.lightThemeImage
@@ -303,6 +305,10 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     }
     
     func setupTable(_ table: UITableView) {
+        if #available(iOS 15.0, *) {
+            table.sectionHeaderTopPadding = 0.0
+        }
+        table.separatorInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
         table.separatorColor = separatorColor
         table.tableFooterView?.backgroundColor = backgroundColor
     }

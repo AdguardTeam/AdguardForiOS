@@ -90,7 +90,7 @@ protocol DnsFiltersServiceProtocol {
 
 @objc(DnsFilter)
 @objcMembers
-class DnsFilter: NSObject, NSCoding, FilterDetailedInterface {
+class DnsFilter: NSObject, NSCoding {
     
     static let userFilterId = 1
     static let whitelistFilterId = 2
@@ -206,16 +206,13 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     
     private let resources: AESharedResourcesProtocol
     private let vpnManager: VpnManagerProtocol?
-    private let configuration: ConfigurationServiceProtocol
-    private let parser = AASFilterSubscriptionParser()
     private let complexProtection: ComplexProtectionServiceProtocol?
     
     private let workingQueue = DispatchQueue(label: "Dns filtres queue")
         
-    init(resources: AESharedResourcesProtocol, vpnManager: VpnManagerProtocol?, configuration: ConfigurationServiceProtocol, complexProtection: ComplexProtectionServiceProtocol?) {
+    init(resources: AESharedResourcesProtocol, vpnManager: VpnManagerProtocol?, complexProtection: ComplexProtectionServiceProtocol?) {
         self.resources = resources
         self.vpnManager = vpnManager
-        self.configuration = configuration
         self.complexProtection = complexProtection
         super.init()
         readFiltersMeta()
@@ -383,11 +380,11 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     }
     
     func updateFilters(networking: ACNNetworkingProtocol, callback: (()->Void)?){
-        
-        if !configuration.proStatus {
-            callback?()
-            return
-        }
+        // TODO: - This is bad
+//        if !configuration.proStatus {
+//            callback?()
+//            return
+//        }
         
         DispatchQueue(label: "update dns filters").async { [weak self] in
             
@@ -559,21 +556,22 @@ class DnsFiltersService: NSObject, DnsFiltersServiceProtocol {
     }
     
     private func getDnsFilter(name: String?, url: URL, enabled:Bool, networking: ACNNetworkingProtocol, callback: @escaping ((DnsFilter?, Data?) -> Void)) {
-        self.parser.parse(from: url, networking: networking) { (result, error) in
-            var filter: DnsFilter? = nil
-            
-            if let parserError = error {
-                callback(nil, nil)
-                DDLogError("Failed updating dns filters with error: \(parserError)")
-                return
-            }
-            if let parserResult = result {
-                let meta = parserResult.meta
-                filter = DnsFilter(subscriptionUrl: meta.subscriptionUrl, name: name ?? meta.name, date: meta.updateDate ?? Date(), enabled: enabled, desc: meta.descr, importantDesc: "", version: meta.version, rulesCount: parserResult.rules.count, homepage: meta.homepage)
-                    
-                callback(filter, parserResult.filtersData)
-                return
-            }
-        }
+            //todo: move this logic to sdk
+//        self.parser.parse(from: url, networking: networking) { (result, error) in
+//            var filter: DnsFilter? = nil
+//
+//            if let parserError = error {
+//                callback(nil, nil)
+//                DDLogError("Failed updating dns filters with error: \(parserError)")
+//                return
+//            }
+//            if let parserResult = result {
+//                let meta = parserResult.meta
+//                filter = DnsFilter(subscriptionUrl: meta.subscriptionUrl, name: name ?? meta.name, date: meta.updateDate ?? Date(), enabled: enabled, desc: meta.descr, importantDesc: "", version: meta.version, rulesCount: parserResult.rules.count, homepage: meta.homepage)
+//
+//                callback(filter, parserResult.filtersData)
+//                return
+//            }
+//        }
     }
 }

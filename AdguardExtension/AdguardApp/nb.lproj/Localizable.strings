@@ -19,12 +19,6 @@
 /* Alert title. On error. */
 "common_error_title" = "Feil";
 
-/* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Filtrene kan ikke lastes inn i Safari. Derfor ble de siste endringene dine ikke lagret.";
-
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Filtrene kan ikke lastes inn i Safari. Prøv å tømme reglene og hvitelisten, eller endre settet av brukte filtre.";
-
 /* NO Button caption in alert */
 "common_action_no" = "NEI";
 
@@ -51,9 +45,6 @@
 
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10T";
-
-/* (MainPageController) Native DNS is working title */
-"native_dns_working" = "Standard DNS fungerer";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Brukerfiltre";
@@ -121,17 +112,8 @@
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Du kan legge til dine egne regler her.<br>Les dette <a href=\"%@\">notatet om regelsyntaksen</a> .";
 
-/* (UserFilterController) whitelist description */
-"whitelist_text" = "Skriv inn domenenavnene her. AdGuard vil ikke blokkere tilgang til disse domenene, og hopper dermed over alle andre innstillinger.";
-
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Oppdaterer…";
-
-/* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "Legg til en oppføring";
-
-/* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "Skriv inn et domene";
 
 /* (UserFilterController) add wifi name placeholder */
 "add_wifi_name_placeholder" = "Navnet på ditt Wi-Fi";
@@ -242,13 +224,10 @@
 "reset_title" = "Tilbakestill";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Slett";
+"delete_title" = "Slett";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Fjern VPN-profil";
-
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Er du sikke på at du vil fjerne din VPN-profil og skru av DNS-beskyttelse?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "En feil oppstod";
@@ -457,15 +436,6 @@
 /*(MainScreen) "all time" chart date type */
 "chart_alltime" = "Til alle tider";
 
-/*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "Innholdsblokkerere blir oppdatert …";
-
-/*(FiltersService) notification about filters laoding  */
-"loading_filters" = "Laster inn filtre …";
-
-/*(ContentBlockerService) notification about converting rules  */
-"converting_rules" = "Reglene blir konvertert  …";
-
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "Nytt selvvalgt filter";
 
@@ -558,6 +528,21 @@
 
 /* (NewDnsServerController) error title when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_title" = "Ugyldig DNS-protokoll";
+
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "Lagre og velg";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "Save";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "Avbryt";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "Slett";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "Legg til en selvvalgt DNS-tjener";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Systemets blokkeringsliste";
@@ -765,9 +750,20 @@
 
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "Legg til DNS-brukerregler";
+/* (UpstreamsController) bootstraps title */
+"upstreams_bootstraps_title" = "Bootstrap-DNS-tjenere";
+
+/* (UpstreamsController) bootstraps description */
+"upstreams_bootstraps_description" = "Bootstrap-IP-adresse";
 
 /* (UpstreamsController) Fallbacks description */
 "upstreams_description" = "Oppstrømsadresse";
 
 /* (UpstreamsController) Custom address description */
 "upstreams_custom_address_description" = "IP-adresse";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Filtre";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "DNS-filtre";

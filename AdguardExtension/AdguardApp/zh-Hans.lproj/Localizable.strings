@@ -20,10 +20,10 @@
 "common_error_title" = "错误";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "无法加载过滤器到 Safari。因此，无法应用您的最近更新。";
+"safari_filters_loading_error" = "无法将过滤器加载到 Safari。因此，无法应用您的最近更新。";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "无法把过滤器加载到 Safari。请尝试清除您的规则和白名单或更改使用过滤器的设置。";
+"load_to_safari_error" = "无法将过滤器加载到 Safari。请尝试清除您的规则和白名单或更改已使用的过滤器列表。";
 
 /* NO Button caption in alert */
 "common_action_no" = "否";
@@ -119,13 +119,13 @@
 "restore_purchases_failure_message" = "在试图恢复该购买时出现错误。";
 
 /* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "购买已经恢复！iOS 高级版的 AdGuard 已经被激活。";
+"restore_success_message" = "购买已恢复！适用于 iOS 的 Adguard 高级版已经被激活。";
 
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "没有可以恢复的购买";
 
 /* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "该购买已经成功完成！ AdGuard for iOS 的高级版本已经启用.";
+"purchase_success_message" = "该购买已经成功完成！适用于 iOS 的 AdGuard 高级版已启用.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "在处理购买过程中发生错误。";
@@ -143,7 +143,7 @@
 "blacklist_text_format" = "输入您的自定义规则于此<br>阅读此<a href=\"%@\">注意事项以获规则语法</a>。";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "在这里输入域名。AdGuard 将在 Safari 中禁用这些网站的过滤。";
+"whitelist_text" = "在此输入 AdGuard 不要过滤的域名。此列表优先于其他设置。";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "在这里输入域名。AdGuard将仅在Safari中对这些网站进行过滤。";
@@ -158,10 +158,10 @@
 "update_filter_start_message" = "更新...";
 
 /* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "添加规则";
+"add_blacklist_rule_title" = "添加新规则";
 
 /* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "输入域";
+"add_whitelist_domain_title" = "添加域名";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
@@ -284,13 +284,13 @@
 "reset_title" = "重置";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "移除";
+"delete_title" = "删除";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "移除VPN 配置文件";
 
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "确定您想移除VPN 配置文件并禁用DNS防护吗？";
+/* (AdvancedSettingsController) Delete Vpn profile message */
+"delete_vpn_profile_message" = "您确定要删除 VPN 配置文件并禁用 DNS 保护吗？";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "发生错误";
@@ -362,7 +362,7 @@
 "copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\n保留所有版权。AdGuard.com";
 
 /* (AboutViewController) Logout title */
-"common_logout" = "注销";
+"common_logout" = "登出";
 
 /* (AboutViewController) Login title */
 "common_license" = "许可";
@@ -470,7 +470,7 @@
 "social_media" = "社交媒体";
 
 /*(LogCategory) miscellaneous category*/
-"misc" = "杂项";
+"misc" = "其它";
 
 /*(LogCategory) DNS category*/
 "cdn" = "内容分发网络";
@@ -530,13 +530,13 @@
 "chart_alltime" = "全时段";
 
 /*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "内容拦截器更新中…";
+"loading_content_blockers" = "内容拦截器更新中...";
 
 /*(FiltersService) notification about filters laoding  */
-"loading_filters" = "过滤器加载中…";
+"loading_filters" = "过滤器加载中...";
 
 /*(ContentBlockerService) notification about converting rules  */
-"converting_rules" = "规则已反转…";
+"converting_rules" = "规则已反转...";
 
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "新建自定义过滤器";
@@ -620,7 +620,7 @@
 "onboarding_second_step_text" = "点击 <b>Safari浏览器</b>，选择 <b>\"内容拦截器\"</b> 菜单项";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>开启 所有内容拦截器</b>后返回AdGuard 应用！";
+"onboarding_third_step_text" = "<b>开启所有内容拦截器</b>后，返回应用程序！";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "系统DNS";
@@ -648,6 +648,24 @@
 
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "iOS 尚未支持 %@。请尝试添加其他上游。";
+
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "保存并选择";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "保存";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "取消";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "删除";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "添加自定义 DNS 服务器";
+
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "编辑自定义 DNS 服务器";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "系统黑名单";
@@ -906,7 +924,7 @@
 "low_level_bootstraps_placeholder" = "用于解析 DOH/DOT 主机名字（如有的话）的本机 DNS 服务器列表";
 
 /* (LowLevelSettingsController) Low level fallbacks placeholder */
-"low_level_fallbacks_placeholder" = "后备 DNS 解析器是在配置的服务器不可用时使用。空字符串表示系统的 DNS 将作为后备。“无”字符串即表示无后备。";
+"low_level_fallbacks_placeholder" = "后备 DNS 解析器是在配置的服务器不可用时被使用。空字符串表示系统的 DNS 将作为后备。“none” 字符串即表示无后备。";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstrap 服务器";
 
@@ -927,3 +945,41 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "以手动设置的 IP 地址响应";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "过滤器";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "DNS 过滤器";
+
+/* (LowLevelSettingsController) - title for unsupported options */
+"unsupported_setting" = "此选项与本地 DNS 模式无法兼容";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "您连接至 Setapp 账号的设备数量已达到上限。";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_safari" = "您是否知道 YouTube 已更改其算法以向您展示更多广告？<br><br>现在，要阻止它们，您需要：<br><br>1. 打开 <a href=\"%@\">Safari</a>.<br><br>2. 访问 youtube.com.<br><br>3. 点击 %@ 分享.<br><br> 4. 点击 \"拦截 YouTube 的广告 (由 AdGuard 创建)\"。";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
+"block_youtube_ads_instructions" = "您听没听说过，YouTube 推出新的显示更多广告的算法？<br><br>现在为了拦截广告您需要：<br><br>1. 在 Safari 中打开<a href=\"%@\"> youtube.com</a>。<br><br>2. 点击 %@ “分享”按钮。<br><br>3. 点击“拦截 YouTube 广告（由 AdGuard 创建）”。";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "完成！现在，您可以观看没有广告的 YouTube。\n\n启用扩展后，YouTube 徽标旁边会显示“使用 AdGuard”标题。<br><br><b>如果您重新加载页面，则需要再次执行第 3 步和第 4 步。</b>";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "完成！现在，您可以观看没有广告的 YouTube。\n\n启用扩展后，YouTube 徽标旁边会显示标题“使用 AdGuard”。<br><br><b>如果您重新加载页面，则需要再次执行第 2 步和第 3 步。</b>";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "YouTube 现在无广告！请注意，如果重新加载页面，则需要再次运行此扩展";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "此扩展应该仅在 YouTube 页面上启动";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
+"youtube_script_already_executed_title" = "此扩展已被执行";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "删除 YouTube 广告时发生未知错误";

@@ -10,11 +10,5 @@
 /* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "gratis";
 
-/* Class = "UILabel"; text = "This module allows you to use a custom DNS server and enhances your privacy by encrypting your DNS queries."; ObjectID = "teo-vm-NRJ"; */
-"teo-vm-NRJ.text" = "Modul ini mengijinkan Anda untuk memakai server DNS khusus dan meningkatkan privasi Anda dengan mengenkripsi permintaan DNS Anda.";
-
-/* Class = "UILabel"; text = "This module blocks ads and trackers on websites opened in Safari. You can choose among different filter lists or add your own in the settings below"; ObjectID = "vlx-BS-A2y"; */
-"vlx-BS-A2y.text" = "Modul ini memblokir iklan dan pelacak di situs yang dibuka Safari. Anda dapat memilih daftar penyaring berbeda atau menambah milik Anda dalam pengaturan di bawah";
-
 /* Class = "UILabel"; text = "Protection"; ObjectID = "wyK-CX-EwT"; */
 "wyK-CX-EwT.text" = "Perlindungan";

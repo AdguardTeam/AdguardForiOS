@@ -20,10 +20,10 @@
 "common_error_title" = "Fejl";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Filtre kunne ikke indlæses i Safari, og dine seneste ændringer derfor ikke effektueret.";
+"safari_filters_loading_error" = "Filtre kunne ikke indlæses i Safari, og dine seneste ændringer er derfor ikke effektueret.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Filtre kan ikke indlæses i Safari. Prøv at rydde dine regler og Hvidliste eller ændre det sæt af filtre, der bruges.";
+"load_to_safari_error" = "Filtre kunne ikke indlæses i Safari. Prøv at rydde dine regler og Hvidliste eller ændre det sæt af filtre, der bruges.";
 
 /* NO Button caption in alert */
 "common_action_no" = "NEJ";
@@ -53,10 +53,10 @@
 "ten_thousands_unit" = "%@10 K";
 
 /* (MainPageController) Native DNS is working title */
-"native_dns_working" = "Indbyggede DNS i drift";
+"native_dns_working" = "Indbygget DNS i drift";
 
 /* (MainPageController) Native DNS is not working title */
-"native_dns_not_working" = "Indbyggede DNS ikke i drift";
+"native_dns_not_working" = "Indbygget DNS ikke i drift";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Brugerregler";
@@ -143,7 +143,7 @@
 "blacklist_text_format" = "Du kan tilføje egne tilpassede regler her<br>Læs dette <a href=\"%@\">notat om regelsyntaks</a>.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Angiv domænenavne her. AdGuard blokerer ikke adgang til disse domæner og ignorerer alle øvrige indstillinger.";
+"whitelist_text" = "Domæner, du ikke ønsker skal filtreres af AdGuard, kan tilføjes hér. Denne liste har forrang over andre indstillinger.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Angiv domænenavnene her. AdGuard aktiverer kun filtrering i Safari for disse websteder.";
@@ -158,10 +158,10 @@
 "update_filter_start_message" = "Opdaterer...";
 
 /* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "Tilføj en regel";
+"add_blacklist_rule_title" = "Tilføj en ny regel";
 
 /* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "Angiv et domæne";
+"add_whitelist_domain_title" = "Tilføj et domæne";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||eksempel.dk^";
@@ -284,13 +284,13 @@
 "reset_title" = "Nulstil";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Fjern";
+"delete_title" = "Slet";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Fjern VPN-profil";
 
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Sikker på, at du vil fjerne din VPN-profil og deaktivere DNS-beskyttelse?";
+/* (AdvancedSettingsController) Delete Vpn profile message */
+"delete_vpn_profile_message" = "Sikker på, at du vil slette din VPN-profil og deaktivere DNS-beskyttelsen?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "En fejl opstod";
@@ -323,7 +323,7 @@
 "content_blocker_disabled_format" = "Bemærk, at Indholdsblockeren er deaktiveret. Det betyder, at annoncer ikke filtreres uanset AdGuards indstillinger. Aktivér AdGuard Indholdsblocker i Safari-indstillingerne for at starte filtreringen.";
 
 /* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
-"hostname_obtaining_error" = "Værtsnavnet blev ikke opnået. Måske er siden ikke blevet indlæst endnu.";
+"hostname_obtaining_error" = "Værtsnavnet ikke hentet. Siden er måske endnu ikke indlæst.";
 
 /* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
 "assistant_launching_unable" = "Webstedets sikkerhedspolitik tillader ikke AdGuard Assistent at starte.";
@@ -649,6 +649,24 @@
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ understøttes ikke af iOS endnu. Prøv at tilføje en anden upstream.";
 
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "Gem og vælg";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "Gem";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "Afbryd";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "Slet";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "Tilføj en tilpasset DNS-server";
+
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "Redigere tilpasset DNS-server";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Systemsortliste";
 
@@ -927,3 +945,41 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "Svar med en manuelt indstillet IP-adresse";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Filtre";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "DNS-filtre";
+
+/* (LowLevelSettingsController) - title for unsupported options */
+"unsupported_setting" = "Denne indstilling er inkompatibel med den indbygget DNS-tilstand";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "Du har det maksimale antal enheder forbundet til din Setapp-konto.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_safari" = "Vidste du, at YouTube har ændret sine algoritmer for at vise dig flere annoncer?<br><br>For at blokere dem skal du nu:<br><br> 1. Åbne <a href=\"%@\">youtube.com</a> i Safari.<br><br>2. Åbne youtube.com.<br><br>3. Trykke på %@ Del.<br><br>3. Trykke på \"Blokér YouTube-annoncer (fra AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
+"block_youtube_ads_instructions" = "Vidste du, at YouTube har ændret sine algoritmer for at vise dig flere annoncer?<br><br>For at blokere dem skal du nu:<br><br> 1. Åbne <a href=\"%@\">youtube.com</a> i Safari.<br><br>2. Trykke på %@ Del.<br><br>3. Trykke på \"Blokér YouTube-annoncer (fra AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "Færdig! Nu kan du kigge YouTube uden annoncer.\n\nNår udvidelsen er aktiveret, vises billedteksten \"med AdGuard\" ved siden af YouTube-logoet.<br><br><b>Genindlæses siden, skal du udføre trin 3 og 4 igen.</b >";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "Færdig! Nu kan du kigge YouTube uden annoncer.\n\nNår udvidelsen er aktiveret, vises billedteksten \"med AdGuard\" ved siden af YouTube-logoet.<br><br><b>Ved genindlæsning af siden, skal du udføre trin 2 og 3 igen.</b >";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "YouTube er nu annoncefrit! Bemærk, at denne udvidelse skal eksekveres igen, hvis siden genindlæses";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "Denne udvidelse er beregnet til kun at blive eksekveret på YouTube";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
+"youtube_script_already_executed_title" = "Udvidelse er allerede eksekveret";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "Unkendt fejl opstod under fjernelse af YouTube-annoncer";

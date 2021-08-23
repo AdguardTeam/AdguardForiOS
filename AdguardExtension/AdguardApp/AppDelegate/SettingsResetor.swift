@@ -16,6 +16,8 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import SafariAdGuardSDK
+
 protocol ISettingsResetor {
     func resetAllSettings()
 }
@@ -27,40 +29,25 @@ struct SettingsResetor: ISettingsResetor {
     
     private weak var appDelegate: AppDelegate?
     private let dnsFiltersService: DnsFiltersServiceProtocol
-    private let filtersService: FiltersServiceProtocol
-    private let antibannerController: AntibannerControllerProtocol
     private let vpnManager: VpnManagerProtocol
     private let resources: AESharedResourcesProtocol
     private let purchaseService: PurchaseServiceProtocol
-    private let activityStatisticsService: ActivityStatisticsServiceProtocol
-    private let dnsStatisticsService: DnsStatisticsServiceProtocol
-    private let dnsLogRecordsService: DnsLogRecordsServiceProtocol
-    private let safariProtection: SafariProtectionServiceProtocol
+    private let safariProtection: SafariProtectionProtocol
     
     //MARK: - Init
     
     init(appDelegate: AppDelegate,
          dnsFiltersService: DnsFiltersServiceProtocol,
-         filtersService: FiltersServiceProtocol,
-         antibannerController: AntibannerControllerProtocol,
          vpnManager: VpnManagerProtocol,
          resources: AESharedResourcesProtocol,
          purchaseService: PurchaseServiceProtocol,
-         activityStatisticsService: ActivityStatisticsServiceProtocol,
-         dnsStatisticsService: DnsStatisticsServiceProtocol,
-         dnsLogRecordsService: DnsLogRecordsServiceProtocol,
-         safariProtection: SafariProtectionServiceProtocol) {
+         safariProtection: SafariProtectionProtocol) {
         
         self.appDelegate = appDelegate
         self.dnsFiltersService = dnsFiltersService
-        self.filtersService = filtersService
-        self.antibannerController = antibannerController
         self.vpnManager = vpnManager
         self.resources = resources
         self.purchaseService = purchaseService
-        self.activityStatisticsService = activityStatisticsService
-        self.dnsStatisticsService = dnsStatisticsService
-        self.dnsLogRecordsService = dnsLogRecordsService
         self.safariProtection = safariProtection
     }
     
@@ -72,8 +59,9 @@ struct SettingsResetor: ISettingsResetor {
         DispatchQueue(label: "reset_queue").async {
             DDLogInfo("(ResetSettings) resetAllSettings")
 
-            self.filtersService.reset()
-            self.antibannerController.reset()
+            self.safariProtection.reset { _ in
+                // todo: process error
+            }
             self.vpnManager.removeVpnConfiguration { _ in }
             self.resources.reset()
             resetStatistics()
@@ -98,9 +86,6 @@ struct SettingsResetor: ISettingsResetor {
                 nativeProviders.reset()
             }
             
-            // force load filters to fill database
-            self.filtersService.load(refresh: true, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.safariUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertedWhitelist: resources.invertedWhitelist) {_,_ in }
-            
             // Notify that settings were reset
             NotificationCenter.default.post(name: .resetSettings, object: self)
             
@@ -115,8 +100,6 @@ struct SettingsResetor: ISettingsResetor {
     
     private func resetStatistics(){
         /* Reseting statistics Start*/
-        self.activityStatisticsService.stopDb()
-        self.dnsStatisticsService.stopDb()
         
         // delete database file
         let url = self.resources.sharedResuorcesURL().appendingPathComponent("dns-statistics.db")
@@ -126,12 +109,6 @@ struct SettingsResetor: ISettingsResetor {
         } catch {
             DDLogInfo("(ResetSettings) Statistics removing error: \(error.localizedDescription)")
         }
-        
-        /* Reseting statistics end */
-        self.activityStatisticsService.startDb()
-        self.dnsStatisticsService.startDb()
-        
-        self.dnsLogRecordsService.reset()
     }
     
     private func presentAlert() {

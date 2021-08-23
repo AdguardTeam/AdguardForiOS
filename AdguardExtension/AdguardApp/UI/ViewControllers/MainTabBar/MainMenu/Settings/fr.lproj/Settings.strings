@@ -19,7 +19,7 @@
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "95J-h1-QgG"; */
 "95J-h1-QgG.normalTitle" = "SAUVEGARDER";
 
-/* Class = "UILabel"; text = "Remove VPN profile"; ObjectID = "9hH-ca-VHY"; */
+/* Class = "UILabel"; text = "Delete VPN profile"; ObjectID = "9hH-ca-VHY"; */
 "9hH-ca-VHY.text" = "Supprimer le profil VPN";
 
 /* Class = "UILabel"; text = "Bootstrap IP address"; ObjectID = "A89-2M-jqd"; */
@@ -64,7 +64,7 @@
 /* Class = "UILabel"; text = "Bootstrap servers"; ObjectID = "JQH-8J-wY8"; */
 "JQH-8J-wY8.text" = "Bootstrap servers";
 
-/* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
+/* Class = "UILabel"; text = "This will delete your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
 "Jnb-4w-9NY.text" = "Ceci supprimera votre profil VPN et désactivera la protection DNS";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "Lig-ju-iTI"; */

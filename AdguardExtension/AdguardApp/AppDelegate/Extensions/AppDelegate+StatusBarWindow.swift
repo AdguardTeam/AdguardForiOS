@@ -23,16 +23,21 @@ extension AppDelegate {
         statusBarWindow.createStatusBarWindow()
         statusBarWindow.statusBarWindowIsHidden = true
         
-        showStatusBarNotification = NotificationCenter.default.observe(name: .ShowStatusView, object: nil, queue: nil, using: { [weak self] (notification) in
-            guard let self = self else { return }
-            guard let text = notification.userInfo?[AEDefaultsShowStatusViewInfo] as? String else { return }
-            self.statusBarWindow.showStatusViewIfNeeded(text: text)
-        })
+        filtersUpdateStarted = NotificationCenter.default.filtersUpdateStart { [weak self] in
+            self?.statusBarWindow.showStatusViewIfNeeded(text: "loading_filters")
+        }
         
-        hideStatusBarNotification = NotificationCenter.default.observe(name: .HideStatusView, object: nil, queue: nil, using: { [weak self] (notification) in
-            guard let self = self else { return }
-            self.statusBarWindow.hideStatusViewIfNeeded()
-        })
+        filtersUpdateFinished = NotificationCenter.default.filtersUpdateFinished { [weak self] in
+            self?.statusBarWindow.hideStatusViewIfNeeded()
+        }
+        
+        contentBlockersUpdateStarted = NotificationCenter.default.contentBlockersUpdateStart { [weak self] in
+            self?.statusBarWindow.showStatusViewIfNeeded(text: "loading_content_blockers")
+        }
+        
+        contentBlockersUpdateFinished = NotificationCenter.default.contentBlockersUpdateFinished { [weak self] in
+            self?.statusBarWindow.hideStatusViewIfNeeded()
+        }
         
         orientationChangeNotification = NotificationCenter.default.observe(name: UIDevice.orientationDidChangeNotification, object: nil, queue: nil, using: { [weak self] (notification) in
             self?.statusBarWindow.changeOrientation()

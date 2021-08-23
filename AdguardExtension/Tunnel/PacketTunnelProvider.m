@@ -39,6 +39,7 @@
 #include <resolv.h>
 #include <dns.h>
 #include <net/if.h>
+#include <Sentry.h>
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - PacketTunnelProvider Constants
@@ -128,7 +129,6 @@
     
     DnsTrackerService* _dnsTrackerService;
     AESharedResources* _resources;
-    id<ActivityStatisticsServiceWriterProtocol> _activityStatisticsService;
     
     id<DnsLogRecordsWriterProtocol> _logWriter;
     DnsProvidersService* _providersService;
@@ -154,19 +154,28 @@
                 @autoreleasepool {
                     DDLogInfo(@"(DnsLibs) %.*s", (int)length, msg);
                 }
-            }];
+        }];
+        
+        [SentrySDK startWithConfigureOptions:^(SentryOptions *options) {
+            options.dsn = SentryConst.dsnUrl;
+            options.enableAutoSessionTracking = NO;
+            
+        }];
+        
+        [SentrySDK configureScope:^(SentryScope * _Nonnull scope) {
+            [scope setTagValue: AGDnsProxy.libraryVersion forKey:@"dnslibs.version"];
+            [scope setTagValue: isDebugLogs ? @"true" : @"false" forKey:@"dnslibs.debuglogs"];
+        }];
         
         _dnsTrackerService = [DnsTrackerService new];
         _providersService = [[DnsProvidersService alloc] initWithResources:_resources];
-        _activityStatisticsService = [[ActivityStatisticsService alloc] initWithResources:_resources];
         
         _reachabilityHandler = [Reachability reachabilityForInternetConnection];
         
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachNotify:) name:kReachabilityChangedNotification object:nil];
         
-        id<DnsLogRecordsServiceProtocol> logService = [[DnsLogRecordsService alloc] initWithResources:_resources];
-        id<DnsLogRecordsWriterProtocol> logWriter = [[DnsLogRecordsWriter alloc] initWithResources:_resources dnsLogService:logService activityStatisticsService:_activityStatisticsService];
+        id<DnsLogRecordsWriterProtocol> logWriter = [[DnsLogRecordsWriter alloc] initWithResources:_resources];
         self.dnsProxy = [[DnsProxyService alloc] initWithLogWriter:logWriter resources:_resources dnsProvidersService:_providersService];
         logWriter.dnsProxyService = self.dnsProxy;
         self.connectionHandler = [[APTunnelConnectionsHandler alloc] initWithProvider:self dnsProxy:self.dnsProxy];
@@ -680,9 +689,8 @@
     DDLogInfo(@"(PacketTunnelProvider) start DNS Proxy with upstreams: %@ systemDns: %@", upstreams, systemDnsServersString);
     
     BOOL ipv6Available = [ACNIPUtils isIpv6Available];
-    SimpleConfigurationSwift* configuration = [[SimpleConfigurationSwift alloc] initWithResources:_resources systemAppearenceIsDark:false];
-
-    DnsFiltersService *dnsFiltersService = [[DnsFiltersService alloc] initWithResources:_resources vpnManager:nil configuration:configuration complexProtection:nil];
+    
+    DnsFiltersService *dnsFiltersService = [[DnsFiltersService alloc] initWithResources:_resources vpnManager:nil complexProtection:nil];
     NSString* filtersJson = [dnsFiltersService filtersJson];
     long userFilterId = DnsFilter.userFilterId;
     long whitelistFilterId = DnsFilter.whitelistFilterId;
@@ -693,23 +701,29 @@
     NSArray<NSString*> *customBootstraps = [_resources.sharedDefaults valueForKey:CustomBootstrapServers];
     BlockingModeSettings blockingModeSettings = [_resources.sharedDefaults integerForKey: BlockingMode];
     NSInteger blockedResponseTtlSecs = [_resources.sharedDefaults integerForKey: BlockedResponseTtlSecs];
-    AGBlockingMode blockingMode;
+    AGBlockingMode rulesBlockingMode;
+    AGBlockingMode hostsBlockingMode;
     
     switch (blockingModeSettings) {
         case BlockingModeSettingsAgDefault:
-            blockingMode = AGBM_DEFAULT;
+            rulesBlockingMode = AGDnsProxyConfig.getDefault.adblockRulesBlockingMode;
+            hostsBlockingMode = AGDnsProxyConfig.getDefault.hostsRulesBlockingMode;
             break;
         case BlockingModeSettingsAgRefused:
-            blockingMode = AGBM_REFUSED;
+            rulesBlockingMode = AGBM_REFUSED;
+            hostsBlockingMode = AGBM_REFUSED;
             break;
         case BlockingModeSettingsAgNxdomain:
-            blockingMode = AGBM_NXDOMAIN;
+            rulesBlockingMode = AGBM_NXDOMAIN;
+            hostsBlockingMode = AGBM_NXDOMAIN;
             break;
         case BlockingModeSettingsAgUnspecifiedAddress:
-            blockingMode = AGBM_UNSPECIFIED_ADDRESS;
+            rulesBlockingMode = AGBM_ADDRESS;
+            hostsBlockingMode = AGBM_ADDRESS;
             break;
         case BlockingModeSettingsAgCustomAddress:
-            blockingMode = AGBM_CUSTOM_ADDRESS;
+            rulesBlockingMode = AGBM_ADDRESS;
+            hostsBlockingMode = AGBM_ADDRESS;
             break;
     }
     
@@ -717,8 +731,14 @@
     NSString *customBlockingIpv4;
     NSString *customBlockingIpv6;
     
-    if (blockingMode == AGBM_CUSTOM_ADDRESS) {
-        customBlockingIp = [_resources.sharedDefaults valueForKey: CustomBlockingIp]? :@[@"127.0.0.1", @"::1"];
+    if (rulesBlockingMode == AGBM_ADDRESS) {
+        if (blockingModeSettings == BlockingModeSettingsAgUnspecifiedAddress) {
+            customBlockingIp = @[@"0.0.0.0", @"::"];
+        }
+        else {
+            customBlockingIp = [_resources.sharedDefaults valueForKey: CustomBlockingIp]? :@[@"127.0.0.1", @"::1"];
+        }
+        
         for (NSString* ip in customBlockingIp) {
             if ([ACNUrlUtils isIPv4:ip]) {
                 customBlockingIpv4 = ip;
@@ -740,11 +760,12 @@
                                 userFilterId:userFilterId
                            whitelistFilterId:whitelistFilterId
                                ipv6Available:ipv6Available
-                                blockingMode:blockingMode
+                           rulesBlockingMode:rulesBlockingMode
+                           hostsBlockingMode:hostsBlockingMode
                       blockedResponseTtlSecs:blockedResponseTtlSecs
                           customBlockingIpv4:customBlockingIpv4
                           customBlockingIpv6:customBlockingIpv6
-                                   blockIpv6: blockIpv6];
+                                   blockIpv6:blockIpv6];
 }
 
 @end

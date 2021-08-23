@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/AdguardTeam/DnsLibs",
         "state": {
           "branch": null,
-          "revision": "4ebcbe6f4e21242f1a921b6f0c740c312d729748",
-          "version": "1.5.7"
+          "revision": "8dc882c15f5b1f0d8d277befe6c4c19e6b80e372",
+          "version": "1.6.25"
         }
       },
       {
@@ -35,6 +35,15 @@
           "branch": null,
           "revision": "2f9769ccde79d84198f5dd163f37f0ee08cb0432",
           "version": "1.1.28"
+        }
+      },
+      {
+        "package": "Sentry",
+        "repositoryURL": "https://github.com/getsentry/sentry-cocoa",
+        "state": {
+          "branch": null,
+          "revision": "d9b37a6664cf2467efda861e1383ec806a221b18",
+          "version": "7.1.4"
         }
       },
       {

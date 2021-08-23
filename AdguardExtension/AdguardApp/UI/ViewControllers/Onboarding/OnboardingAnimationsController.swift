@@ -37,7 +37,7 @@ class OnboardingAnimationsController: UIViewController {
     
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private var orientationChangeNotification: NotificationToken?
     
     private var currentStep = 1

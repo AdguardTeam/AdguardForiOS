@@ -17,16 +17,14 @@
  */
 
 import Foundation
+import SafariAdGuardSDK
 
 class SettingsController: UITableViewController {
     
-    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
-    private let statisticsService: DnsStatisticsServiceProtocol = ServiceLocator.shared.getService()!
-    private let activityStatisticsService: ActivityStatisticsServiceProtocol = ServiceLocator.shared.getService()!
-    private let safariProtection: SafariProtectionServiceProtocol = ServiceLocator.shared.getService()!
+    private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     
     @IBOutlet weak var wifiUpdateSwitch: UISwitch!
     @IBOutlet weak var invertedSwitch: UISwitch!
@@ -156,8 +154,6 @@ class SettingsController: UITableViewController {
         
         let yesAction = UIAlertAction(title: String.localizedString("reset_title").uppercased(), style: .destructive) { [weak self] _ in
             alert.dismiss(animated: true, completion: nil)
-            self?.statisticsService.deleteAllRecords()
-            self?.activityStatisticsService.deleteAllRecords()
             NotificationCenter.default.post(name: NSNotification.resetStatistics, object: self)
         }
         
@@ -248,14 +244,9 @@ class SettingsController: UITableViewController {
     private func updateUI() {
         themeButtons.forEach({ $0.isSelected = false })
         switch configuration.userThemeMode {
-        case AESystemDefaultThemeMode:
-            themeButtons[systemDefault].isSelected = true
-        case AELightThemeMode:
-            themeButtons[light].isSelected = true
-        case AEDarkThemeMode:
-            themeButtons[dark].isSelected = true
-        default:
-            themeButtons[light].isSelected = true
+        case .systemDefault: themeButtons[systemDefault].isSelected = true
+        case .light: themeButtons[light].isSelected = true
+        case .dark: themeButtons[dark].isSelected = true
         }
     }
     
@@ -283,21 +274,15 @@ class SettingsController: UITableViewController {
         themeButtons.forEach({$0.isSelected = false})
         button.isSelected = true
         switch tag {
-        case systemDefault:
-            configuration.userThemeMode = AESystemDefaultThemeMode
-        case dark:
-            configuration.userThemeMode = AEDarkThemeMode
-        case light:
-            configuration.userThemeMode = AELightThemeMode
-        default:
-            configuration.userThemeMode = AELightThemeMode
+        case systemDefault: configuration.userThemeMode = .systemDefault
+        case dark: configuration.userThemeMode = .dark
+        case light: configuration.userThemeMode = .light
+        default: configuration.userThemeMode = .light
         }
         updateTheme()
     }
     
     private func invertWhitelist() {
-        
-        let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
         
         let oldValue = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
         let newValue = invertedSwitch.isOn
@@ -305,15 +290,13 @@ class SettingsController: UITableViewController {
         if oldValue != newValue {
             resources.sharedDefaults().set(newValue, forKey: AEDefaultsInvertedWhitelist)
             
-            contentBlockerService.reloadJsons(backgroundUpdate: false, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.safariUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertWhitelist: resources.invertedWhitelist) { [weak self] (error) in
+            safariProtection.update(allowlistIsInverted: newValue) { [weak self] error in
                 if error != nil {
                     self?.resources.sharedDefaults().set(oldValue, forKey: AEDefaultsInvertedWhitelist)
                     DispatchQueue.main.async {
                         self?.invertedSwitch.setOn(oldValue, animated: true)
                     }
                 }
-                
-                UIApplication.shared.endBackgroundTask(backgroundTaskId)
             }
         }
     }

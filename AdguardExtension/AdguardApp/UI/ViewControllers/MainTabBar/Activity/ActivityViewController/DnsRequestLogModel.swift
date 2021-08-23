@@ -181,7 +181,6 @@ class DnsRequestLogViewModel {
     
     // MARK: - private fields
     
-    private let dnsLogService: DnsLogRecordsServiceProtocol
     private let dnsTrackerService: DnsTrackerServiceProtocol
     private let dnsFiltersService: DnsFiltersServiceProtocol
     
@@ -191,8 +190,7 @@ class DnsRequestLogViewModel {
     private let workingQueue = DispatchQueue(label: "DnsRequestLogViewModel queue")
     
     // MARK: - init
-    init(dnsLogService: DnsLogRecordsServiceProtocol, dnsTrackerService: DnsTrackerServiceProtocol, dnsFiltersService: DnsFiltersServiceProtocol) {
-        self.dnsLogService = dnsLogService
+    init(dnsTrackerService: DnsTrackerServiceProtocol, dnsFiltersService: DnsFiltersServiceProtocol) {
         self.dnsTrackerService = dnsTrackerService
         self.dnsFiltersService = dnsFiltersService
         self.searchString = ""
@@ -210,7 +208,6 @@ class DnsRequestLogViewModel {
     
     func clearRecords(){
         workingQueue.sync { [weak self] in
-            self?.dnsLogService.clearLog()
             self?.allRecords = []
             self?.searchRecords = []
         }
@@ -222,43 +219,42 @@ class DnsRequestLogViewModel {
         let firstDate = intervalTime.begin
         let lastDate = intervalTime.end
         
-        let logRecords = dnsLogService.readRecords()
         allRecords = [DnsLogRecordExtended]()
         
-        for logRecord in logRecords.reversed() {
-            if let domains = domains, !domains.contains(logRecord.domain) {
-                continue
-            }
-            
-            if !(logRecord.date <= firstDate && logRecord.date >= lastDate) {
-                continue
-            }
-            
-            if displayedStatisticsType == .blockedRequests {
-                if !(logRecord.status == .blacklistedByOtherFilter || logRecord.status == .blacklistedByUserFilter) {
-                    continue
-                }
-            }
-            
-            if displayedStatisticsType == .allowedRequests {
-                if logRecord.status == .blacklistedByOtherFilter || logRecord.status == .blacklistedByUserFilter {
-                    continue
-                }
-            }
-            
-            
-            let info = dnsTrackerService.getTrackerInfo(by: logRecord.domain)
-            
-            var categoryName: String? = nil
-            if let categoryKey = info?.categoryKey {
-                categoryName = String.localizedString(categoryKey)
-            }
-            
-            let category = DnsLogRecordCategory(category: categoryName, categoryId: info?.categoryId, name: info?.name, url: info?.url, isAdguardJson: info?.isAdguardJson ?? false)
-            
-            let record = DnsLogRecordExtended(record: logRecord, category: category, dnsFiltersService: dnsFiltersService)
-            allRecords.append(record)
-        }
+//        for logRecord in [DnsLogRecordExtended]() {
+//            if let domains = domains, !domains.contains(logRecord.domain) {
+//                continue
+//            }
+//
+//            if !(logRecord.date <= firstDate && logRecord.date >= lastDate) {
+//                continue
+//            }
+//
+//            if displayedStatisticsType == .blockedRequests {
+//                if !(logRecord.status == .blacklistedByOtherFilter || logRecord.status == .blacklistedByUserFilter) {
+//                    continue
+//                }
+//            }
+//
+//            if displayedStatisticsType == .allowedRequests {
+//                if logRecord.status == .blacklistedByOtherFilter || logRecord.status == .blacklistedByUserFilter {
+//                    continue
+//                }
+//            }
+//
+//
+//            let info = dnsTrackerService.getTrackerInfo(by: logRecord.domain)
+//
+//            var categoryName: String? = nil
+//            if let categoryKey = info?.categoryKey {
+//                categoryName = String.localizedString(categoryKey)
+//            }
+//
+//            let category = DnsLogRecordCategory(category: categoryName, categoryId: info?.categoryId, name: info?.name, url: info?.url, isAdguardJson: info?.isAdguardJson ?? false)
+//
+//            let record = DnsLogRecordExtended(record: logRecord, category: category, dnsFiltersService: dnsFiltersService)
+//            allRecords.append(record)
+//        }
         
         recordsObserver?(allRecords)
     }

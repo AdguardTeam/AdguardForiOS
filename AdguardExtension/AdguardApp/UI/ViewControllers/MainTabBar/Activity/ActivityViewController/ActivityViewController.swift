@@ -18,7 +18,7 @@
 
 import UIKit
 
-protocol ActivityViewControllerDelegate: class {
+protocol ActivityViewControllerDelegate: AnyObject {
     func hideTitle()
     func showTitle()
 }
@@ -60,19 +60,17 @@ class ActivityViewController: UITableViewController {
     // MARK: - Services
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private let activityStatisticsService: ActivityStatisticsServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsTrackersService: DnsTrackerServiceProtocol = ServiceLocator.shared.getService()!
     private let domainsParserService: DomainsParserServiceProtocol = ServiceLocator.shared.getService()!
     private let domainsConverter: DomainsConverterProtocol = DomainsConverter()
     private let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
-    private let dnsLogService: DnsLogRecordsServiceProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - Notifications
     private var keyboardShowToken: NotificationToken?
     private var resetStatisticsToken: NotificationToken?
-    private var advancedModeToken: NSKeyValueObservation?
+    private var advancedModeObserver: NotificationToken?
     private var resetSettingsToken: NotificationToken?
     
     // MARK: - Public variables
@@ -101,7 +99,7 @@ class ActivityViewController: UITableViewController {
     // MARK: - ViewController life cycle
     
     required init?(coder: NSCoder) {
-        activityModel = ActivityStatisticsModel(activityStatisticsService: activityStatisticsService, dnsTrackersService: dnsTrackersService, domainsParserService: domainsParserService)
+        activityModel = ActivityStatisticsModel(dnsTrackersService: dnsTrackersService, domainsParserService: domainsParserService)
         super.init(coder: coder)
     }
     
@@ -397,9 +395,9 @@ class ActivityViewController: UITableViewController {
             self?.keyboardWillShow()
         }
         
-        advancedModeToken = configuration.observe(\.advancedMode) {[weak self] (_, _) in
+        advancedModeObserver = NotificationCenter.default.observe(name: .advancedModeChanged, object: nil, queue: .main, using: { [weak self] _ in
             self?.observeAdvancedMode()
-        }
+        })
         
         resetStatisticsToken = NotificationCenter.default.observe(name: NSNotification.resetStatistics, object: nil, queue: .main) { [weak self] (notification) in
             self?.dateTypeChanged(dateType: self?.resources.activityStatisticsType ?? .day)
@@ -608,7 +606,6 @@ extension ActivityViewController: AddDomainToListDelegate {
     
     private func set(_ status: DnsLogRecordUserStatus, _ rule: String? = nil) {
         guard let swipedRecord = swipedRecord, let swipedIndexPath = swipedIndexPath else { return }
-        dnsLogService.set(rowId: swipedRecord.logRecord.rowid!, status: status, userRule: rule)
         swipedRecord.logRecord.userStatus = status
         tableView.reloadRows(at: [swipedIndexPath], with: .fade)
     }

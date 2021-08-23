@@ -16,8 +16,9 @@
       along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 import UIKit
+import SafariAdGuardSDK
 
-class SafariProtectionController: UITableViewController {
+final class SafariProtectionController: UITableViewController {
 
     @IBOutlet weak var safariProtectionStateLabel: UILabel!
     @IBOutlet weak var numberOfFiltersLabel: UILabel!
@@ -30,17 +31,11 @@ class SafariProtectionController: UITableViewController {
     
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let filtersService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
-    private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
-    private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
     private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
-    private let safariProtection: SafariProtectionServiceProtocol = ServiceLocator.shared.getService()!
-    
-    private var filtersCountObservation: Any?
-    private var activeFiltersCountObservation: Any?
+    private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     
     private let descriptionSection = 0
     private let descriptionCell = 0
@@ -52,14 +47,18 @@ class SafariProtectionController: UITableViewController {
     private let blackListSegue = "blackListSegue"
     
     private let enabledColor = UIColor.AdGuardColor.lightGreen1
-    private let disabledColor = UIColor(hexString: "#888888")
+    private let disabledColor = UIColor.AdGuardColor.lightGray3
     
     private let blacklistModel: ListOfRulesModelProtocol
+    
+    private var activeFiltersCount: Int {
+        return safariProtection.groups.flatMap { $0.filters }.filter { $0.isEnabled }.count
+    }
     
     // MARK: - view controler life cycle
     
     required init?(coder: NSCoder) {
-        blacklistModel = UserFilterModel(resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme, productInfo: productInfo, safariProtection: safariProtection)
+        blacklistModel = UserFilterModel(resources: resources, theme: theme, productInfo: productInfo, safariProtection: safariProtection)
         super.init(coder: coder)
     }
     
@@ -67,7 +66,7 @@ class SafariProtectionController: UITableViewController {
         if segue.identifier == whiteListSegue {
             if let controller = segue.destination as? ListOfRulesController{
                 let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
-                let model: ListOfRulesModelProtocol = inverted ? InvertedSafariWhitelistModel(resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme, safariProtection: safariProtection) : SafariWhitelistModel(resources: resources, contentBlockerService: contentBlockerService, antibanner: antibanner, theme: theme, safariProtection: safariProtection)
+                let model: ListOfRulesModelProtocol = inverted ? InvertedSafariWhitelistModel(resources: resources, theme: theme, safariProtection: safariProtection) : SafariWhitelistModel(resources: resources, theme: theme, safariProtection: safariProtection)
                 controller.model = model
             }
         } else if segue.identifier == blackListSegue {
@@ -79,24 +78,8 @@ class SafariProtectionController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupBackButton()
-        
-        let updateFilters: ()->() = { [weak self] in
-            guard let self = self else { return }
-            let safariFiltersTextFormat = String.localizedString("safari_filters_format")
-            self.numberOfFiltersLabel.text = String.localizedStringWithFormat(safariFiltersTextFormat, self.filtersService.activeFiltersCount)
-        }
-        
-        activeFiltersCountObservation = (filtersService as! FiltersService).observe(\.activeFiltersCount) { (_, _) in
-            updateFilters()
-        }
-        
-        resources.sharedDefaults().addObserver(self, forKeyPath: SafariProtectionState, options: .new, context: nil)
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEComplexProtectionEnabled, options: .new, context: nil)
-        
-        updateSafariProtectionInfo()
-        updateFilters()
+        updateTheme()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -110,22 +93,10 @@ class SafariProtectionController: UITableViewController {
         let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
         whitelistLabel.text = inverted ? String.localizedString("inverted_whitelist_title") : String.localizedString("whitelist_title")
         
-        updateTheme()
+        updateFiltersCountLabel()
+        updateSafariProtectionInfo()
     }
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == SafariProtectionState || keyPath == AEComplexProtectionEnabled {
-            updateSafariProtectionInfo()
-        }
-    }
-    
-    deinit {
-        if isViewLoaded{
-            resources.sharedDefaults().removeObserver(self, forKeyPath: SafariProtectionState)
-            resources.sharedDefaults().removeObserver(self, forKeyPath: AEComplexProtectionEnabled)
-        }
-    }
-
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -158,6 +129,11 @@ class SafariProtectionController: UITableViewController {
         
         safariIcon.tintColor = protectionEnabled ? enabledColor : disabledColor
     }
+    
+    private func updateFiltersCountLabel() {
+        let safariFiltersTextFormat = String.localizedString("safari_filters_format")
+        numberOfFiltersLabel.text = String.localizedStringWithFormat(safariFiltersTextFormat, activeFiltersCount)
+    }
 }
 
 extension SafariProtectionController: ThemableProtocol {
@@ -167,9 +143,6 @@ extension SafariProtectionController: ThemableProtocol {
         theme.setupTable(tableView)
         theme.setupLabels(themableLabels)
         theme.setupSeparators(separators)
-        DispatchQueue.main.async { [weak self] in
-            guard let sSelf = self else { return }
-            sSelf.tableView.reloadData()
-        }
+        tableView.reloadData()
     }
 }

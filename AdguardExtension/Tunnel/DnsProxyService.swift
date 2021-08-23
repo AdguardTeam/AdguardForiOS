@@ -32,7 +32,7 @@ import Foundation
 protocol DnsProxyServiceProtocol : NSObjectProtocol {
     var upstreamsById: [Int: DnsProxyUpstream] { get }
     
-    func start(upstreams: [String], bootstrapDns: [String], fallbacks: [String], serverName: String, filtersJson: String, userFilterId:Int, whitelistFilterId:Int, ipv6Available: Bool, blockingMode: AGBlockingMode, blockedResponseTtlSecs: Int, customBlockingIpv4: String?, customBlockingIpv6: String?, blockIpv6: Bool) -> Bool
+    func start(upstreams: [String], bootstrapDns: [String], fallbacks: [String], serverName: String, filtersJson: String, userFilterId:Int, whitelistFilterId:Int, ipv6Available: Bool, rulesBlockingMode: AGBlockingMode, hostsBlockingMode: AGBlockingMode, blockedResponseTtlSecs: Int, customBlockingIpv4: String?, customBlockingIpv6: String?, blockIpv6: Bool) -> Bool
     func stop(callback:@escaping ()->Void)
     func resolve(dnsRequest:Data, callback:  @escaping (_ dnsResponse: Data?)->Void);
 }
@@ -71,9 +71,9 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
     
     var agproxy: AGDnsProxy?
     
-    @objc func start(upstreams: [String], bootstrapDns: [String], fallbacks: [String], serverName: String, filtersJson: String, userFilterId:Int, whitelistFilterId:Int, ipv6Available: Bool, blockingMode: AGBlockingMode, blockedResponseTtlSecs: Int, customBlockingIpv4: String?, customBlockingIpv6: String?, blockIpv6: Bool) -> Bool {
+    @objc func start(upstreams: [String], bootstrapDns: [String], fallbacks: [String], serverName: String, filtersJson: String, userFilterId:Int, whitelistFilterId:Int, ipv6Available: Bool, rulesBlockingMode: AGBlockingMode, hostsBlockingMode: AGBlockingMode, blockedResponseTtlSecs: Int, customBlockingIpv4: String?, customBlockingIpv6: String?, blockIpv6: Bool) -> Bool {
         resolveQueue.sync(flags: .barrier) {
-            return self.startInternal(upstreams: upstreams, bootstrapDns: bootstrapDns, fallbacks: fallbacks, serverName: serverName, filtersJson: filtersJson, userFilterId: userFilterId, whitelistFilterId: whitelistFilterId, ipv6Available: ipv6Available, blockingMode: blockingMode, blockedResponseTtlSecs: blockedResponseTtlSecs, customBlockingIpv4: customBlockingIpv4, customBlockingIpv6: customBlockingIpv6, blockIpv6: blockIpv6)
+            return self.startInternal(upstreams: upstreams, bootstrapDns: bootstrapDns, fallbacks: fallbacks, serverName: serverName, filtersJson: filtersJson, userFilterId: userFilterId, whitelistFilterId: whitelistFilterId, ipv6Available: ipv6Available, rulesBlockingMode: rulesBlockingMode, hostsBlockingMode: hostsBlockingMode, blockedResponseTtlSecs: blockedResponseTtlSecs, customBlockingIpv4: customBlockingIpv4, customBlockingIpv6: customBlockingIpv6, blockIpv6: blockIpv6)
         }
     }
     
@@ -104,7 +104,7 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
         return false
     }
     
-    private func startInternal(upstreams: [String], bootstrapDns: [String], fallbacks: [String], serverName: String, filtersJson: String, userFilterId:Int, whitelistFilterId:Int, ipv6Available: Bool, blockingMode: AGBlockingMode, blockedResponseTtlSecs: Int, customBlockingIpv4: String?, customBlockingIpv6: String?, blockIpv6: Bool) -> Bool {
+    private func startInternal(upstreams: [String], bootstrapDns: [String], fallbacks: [String], serverName: String, filtersJson: String, userFilterId:Int, whitelistFilterId:Int, ipv6Available: Bool, rulesBlockingMode: AGBlockingMode, hostsBlockingMode: AGBlockingMode, blockedResponseTtlSecs: Int, customBlockingIpv4: String?, customBlockingIpv6: String?, blockIpv6: Bool) -> Bool {
         
         let isCrypto = upstreamIsCrypto()
         let agUpstreams = upstreams.map {(upstream) -> AGDnsUpstream in
@@ -173,21 +173,26 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
         let agFilters = filters.compactMap { AGDnsFilterParams(id: Int($0.key), data: $0.value, inMemory: false) }
         
         let dns64Settings = AGDns64Settings(upstreams: ipv6Upstreams, maxTries: 2, waitTimeMs: timeout)
+        let defaultConfig = AGDnsProxyConfig.getDefault()!
         let config = AGDnsProxyConfig(upstreams: agUpstreams,
                                       fallbacks: agFallbacks,
-                                      handleDNSSuffixes: true,
-                                      userDNSSuffixes: nil,
+                                      fallbackDomains: defaultConfig.fallbackDomains,
+                                      detectSearchDomains: defaultConfig.detectSearchDomains,
                                       filters: agFilters,
                                       blockedResponseTtlSecs: blockedResponseTtlSecs,
                                       dns64Settings: dns64Settings,
                                       listeners: nil,
+                                      outboundProxy: defaultConfig.outboundProxy,
                                       ipv6Available: ipv6Available,
                                       blockIpv6: blockIpv6,
-                                      blockingMode: blockingMode,
+                                      adblockRulesBlockingMode: rulesBlockingMode,
+                                      hostsRulesBlockingMode: hostsBlockingMode,
                                       customBlockingIpv4: customBlockingIpv4,
                                       customBlockingIpv6: customBlockingIpv6,
                                       dnsCacheSize: 128,
                                       optimisticCache: false,
+                                      enableDNSSECOK: false,
+                                      enableRetransmissionHandling: true,
                                       helperPath: nil)
 
         var error: NSError?

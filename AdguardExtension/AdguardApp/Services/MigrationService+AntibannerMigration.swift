@@ -22,7 +22,7 @@ import Foundation
 extension MigrationService {
     
     // todo: move it to sdk?
-    func migrateFilterRulesIfNeeded(antibanner: AESAntibannerProtocol, storage: FiltersStorageProtocol) {
+//    func migrateFilterRulesIfNeeded(antibanner: AESAntibannerProtocol, storage: FiltersStorageProtocol) {
 //
 //        let activeFilterIds = antibanner.activeFilterIDs()
 //        for filterId in activeFilterIds {
@@ -48,5 +48,5 @@ extension MigrationService {
 //            // remove rules from database
 //            antibanner.removeRules(forFilter: filterId)
 //        }
-    }
+//    }
 }

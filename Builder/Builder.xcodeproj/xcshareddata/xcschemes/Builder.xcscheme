@@ -14,7 +14,21 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "659C5FC71B8B4DC90081EBE3"
+               BlueprintIdentifier = "D049EB9F26B1868200B8088B"
+               BuildableName = "AdGuardSDK_mac.framework"
+               BlueprintName = "AdGuardSDK-mac"
+               ReferencedContainer = "container:../AdGuardSDK/AdGuardSDK.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D049EBAF26B18B7B00B8088B"
                BuildableName = "Builder"
                BlueprintName = "Builder"
                ReferencedContainer = "container:Builder.xcodeproj">
@@ -30,7 +44,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "659C5FC71B8B4DC90081EBE3"
+            BlueprintIdentifier = "D049EBAF26B18B7B00B8088B"
             BuildableName = "Builder"
             BlueprintName = "Builder"
             ReferencedContainer = "container:Builder.xcodeproj">
@@ -53,7 +67,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "659C5FC71B8B4DC90081EBE3"
+            BlueprintIdentifier = "D049EBAF26B18B7B00B8088B"
             BuildableName = "Builder"
             BlueprintName = "Builder"
             ReferencedContainer = "container:Builder.xcodeproj">
@@ -80,7 +94,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "659C5FC71B8B4DC90081EBE3"
+            BlueprintIdentifier = "D049EBAF26B18B7B00B8088B"
             BuildableName = "Builder"
             BlueprintName = "Builder"
             ReferencedContainer = "container:Builder.xcodeproj">

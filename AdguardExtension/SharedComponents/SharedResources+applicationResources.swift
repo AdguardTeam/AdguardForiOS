@@ -20,40 +20,40 @@ import Foundation
 
 extension AESharedResourcesProtocol {
     
-    dynamic var activityStatisticsType: ChartDateType {
+    /// User theme mode of app UI
+    dynamic var themeMode: ThemeMode {
         get {
-            let periodType = sharedDefaults().object(forKey: ActivityStatisticsPeriodType) as? Int
-            let rawValue = periodType ?? ChartDateType.day.rawValue
-            return ChartDateType(rawValue: rawValue) ?? .day
+            guard let themeMode = sharedDefaults().object(forKey: AEDefaultsDarkTheme) as? Int else {
+                if #available(iOS 13.0, *){
+                    return .systemDefault
+                } else {
+                    return .light
+                }
+            }
+            return ThemeMode(rawValue: themeMode) ?? .light
         }
         set {
-            let rawValue = newValue.rawValue
-            sharedDefaults().set(rawValue, forKey: ActivityStatisticsPeriodType)
+            sharedDefaults().set(newValue.rawValue, forKey: AEDefaultsDarkTheme)
         }
     }
     
-    dynamic var chartDateType: ChartDateType {
+    /// System appearence style
+    dynamic var systemAppearenceIsDark: Bool {
         get {
-            let periodType = sharedDefaults().object(forKey: StatisticsPeriodType) as? Int
-            let rawValue = periodType ?? ChartDateType.day.rawValue
-            return ChartDateType(rawValue: rawValue) ?? .day
+            sharedDefaults().bool(forKey: AEDefaultsSystemAppearenceStyle)
         }
         set {
-            let rawValue = newValue.rawValue
-            sharedDefaults().set(rawValue, forKey: StatisticsPeriodType)
+            sharedDefaults().set(newValue, forKey: AEDefaultsSystemAppearenceStyle)
         }
     }
-
-    dynamic var backgroundFetchState: BackgroundFetchState {
+    
+    /// Advanced mode state
+    var advancedMode: Bool {
         get {
-            guard let value = sharedDefaults().object(forKey: BackgroundFetchStateKey) as? Int else {
-                return .notStarted
-            }
-            return BackgroundFetchState(rawValue: value)!
+            sharedDefaults().bool(forKey: AEDefaultsDeveloperMode)
         }
         set {
-            DDLogInfo("(SharedResources) set background fetch state: \(newValue.rawValue)")
-            sharedDefaults().set(newValue.rawValue, forKey: BackgroundFetchStateKey)
+            sharedDefaults().set(newValue, forKey: AEDefaultsDeveloperMode)
         }
     }
 

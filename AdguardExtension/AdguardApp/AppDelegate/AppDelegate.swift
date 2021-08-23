@@ -16,7 +16,8 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
+import SafariAdGuardSDK
+import Sentry
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,16 +27,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     // AppDelegate+StatusBarWindow notifications
-    var showStatusBarNotification: NotificationToken?
-    var hideStatusBarNotification: NotificationToken?
+    var filtersUpdateStarted: SafariAdGuardSDK.NotificationToken?
+    var filtersUpdateFinished: SafariAdGuardSDK.NotificationToken?
+    var contentBlockersUpdateStarted: SafariAdGuardSDK.NotificationToken?
+    var contentBlockersUpdateFinished: SafariAdGuardSDK.NotificationToken?
     var orientationChangeNotification: NotificationToken?
     // AppDelegate addPurchaseStatusObserver notifications
     private var purchaseObservation: NotificationToken?
-    private var proStatusObservation: NSKeyValueObservation?
+    private var proStatusObservation: NotificationToken?
     private var setappObservation: NotificationToken?
     
-    private var fetchPerformer: IBackgroundFetchPerformer?
-    private var fetchNotificationHandler: BackgroundFetchNotificationHandler?
     private var firstRun: Bool {
         get {
             resources.firstRun
@@ -48,75 +49,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     //MARK: - Services
     private var resources: AESharedResourcesProtocol
-    private var antibannerController: AntibannerControllerProtocol
-    private var contentBlockerService: ContentBlockerService
+    private var safariProtection: SafariProtectionProtocol
     private var purchaseService: PurchaseServiceProtocol
-    private var antibanner: AESAntibannerProtocol
     private var dnsFiltersService: DnsFiltersServiceProtocol
     private var networking: ACNNetworking
-    private var configuration: ConfigurationService
-    private var safariService: SafariService
+    private var configuration: ConfigurationServiceProtocol
     private var productInfo: ADProductInfoProtocol
-    private var migrationService: MigrationServiceProtocol
     private var userNotificationService: UserNotificationServiceProtocol
     private var vpnManager: VpnManagerProtocol
     private var setappService: SetappServiceProtocol
-    private var activityStatisticsService: ActivityStatisticsServiceProtocol
-    private var dnsStatisticsService: DnsStatisticsServiceProtocol
-    private var dnsLogRecordsService: DnsLogRecordsServiceProtocol
     private var rateService: RateAppServiceProtocol
     private var complexProtection: ComplexProtectionServiceProtocol
-    private var safariProtection: SafariProtectionService
     private var themeService: ThemeServiceProtocol
-    private var filtersService: FiltersServiceProtocol
     
     //MARK: - Application init
     override init() {
         StartupService.start()
         self.resources = ServiceLocator.shared.getService()!
-        self.antibannerController = ServiceLocator.shared.getService()!
-        self.contentBlockerService = ServiceLocator.shared.getService()!
+        self.safariProtection = ServiceLocator.shared.getService()!
         self.purchaseService = ServiceLocator.shared.getService()!
-        self.antibanner = ServiceLocator.shared.getService()!
         self.dnsFiltersService = ServiceLocator.shared.getService()!
         self.networking = ServiceLocator.shared.getService()!
         self.configuration = ServiceLocator.shared.getService()!
-        self.safariService = ServiceLocator.shared.getService()!
         self.productInfo = ServiceLocator.shared.getService()!
-        self.migrationService = ServiceLocator.shared.getService()!
         self.userNotificationService = ServiceLocator.shared.getService()!
         self.vpnManager = ServiceLocator.shared.getService()!
         self.setappService = ServiceLocator.shared.getService()!
-        self.activityStatisticsService = ServiceLocator.shared.getService()!
-        self.dnsStatisticsService = ServiceLocator.shared.getService()!
-        self.dnsLogRecordsService = ServiceLocator.shared.getService()!
         self.rateService = ServiceLocator.shared.getService()!
         self.complexProtection = ServiceLocator.shared.getService()!
         self.themeService = ServiceLocator.shared.getService()!
-        self.filtersService = ServiceLocator.shared.getService()!
         self.safariProtection = ServiceLocator.shared.getService()!
         
         self.statusBarWindow = StatusBarWindow(configuration: configuration)
         super.init()
-        
-        self.fetchPerformer = BackgroundFetchPerformer(resources: resources,
-                                                   purchaseService: purchaseService,
-                                                   configuration: configuration,
-                                                   vpnManager: vpnManager,
-                                                   userNotificationService: userNotificationService,
-                                                   contentBlockerService: contentBlockerService,
-                                                   antibanner: antibanner,
-                                                   complexProtection: complexProtection,
-                                                   safariProtection: safariProtection,
-                                                   dnsFiltersService: dnsFiltersService,
-                                                   safariService: safariService,
-                                                   networking: networking,
-                                                   antibannerController: antibannerController)
-        
-        self.fetchNotificationHandler = BackgroundFetchNotificationHandler(fetchPerformer: fetchPerformer!,
-                                                                           antibanner: antibanner,
-                                                                           contentBlockerService: contentBlockerService,
-                                                                           resources: resources)
     }
     
     deinit {
@@ -127,9 +92,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //------------- Preparing for start application. Stage 1. -----------------
         
-        startAntibannerController()
-        
-        fetchPerformer?.setBackgroundStatusToDefault()
         activateWithOpenUrl = false
         
         initLogger()
@@ -146,6 +108,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        
+        SentrySDK.start { options in
+            options.dsn = SentryConst.dsnUrl
+            options.enableAutoSessionTracking = false
+        }
+        
         prepareControllers()
         
         //------------- Preparing for start application. Stage 2. -----------------
@@ -171,7 +139,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         DDLogInfo("(AppDelegate) applicationWillEnterForeground.")
-        antibanner.applicationWillEnterForeground()
         configuration.checkContentBlockerEnabled()
     }
     
@@ -181,7 +148,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // If theme mode is System Default gets current style
         setAppInterfaceStyle()
-        updateAntibannerContoller()
     }
     
     
@@ -192,7 +158,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         addPurchaseStatusObserver()
-        fetchPerformer?.performFetch(with: completionHandler)
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -215,14 +180,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func resetAllSettings() {
         let resetProcessor = SettingsResetor(appDelegate: self,
                                              dnsFiltersService: dnsFiltersService,
-                                             filtersService: filtersService,
-                                             antibannerController: antibannerController,
                                              vpnManager: vpnManager,
                                              resources: resources,
                                              purchaseService: purchaseService,
-                                             activityStatisticsService: activityStatisticsService,
-                                             dnsStatisticsService: dnsStatisticsService,
-                                             dnsLogRecordsService: dnsLogRecordsService,
                                              safariProtection: safariProtection)
         resetProcessor.resetAllSettings()
     }
@@ -299,39 +259,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    private func startAntibannerController() {
-        antibannerController.start()
-        
-        antibannerController.onReady { [weak self] (_) in
-            guard let self = self else { return }
-            guard let fetchPerformer = self.fetchPerformer else { return }
-            if (self.firstRun) {
-                self.migrationService.install()
-                self.purchaseService.checkLicenseStatus()
-                self.firstRun = false
-            }
-            
-            self.migrationService.migrateIfNeeded(inBackground: fetchPerformer.isBackground)
-        }
-    }
-    
-    private func updateAntibannerContoller() {
-        antibannerController.onReady { antibanner in
-            if self.activateWithOpenUrl {
-                self.activateWithOpenUrl = false
-                DDLogInfo("(AppDelegate - applicationDidBecomeActive) Update process did not start because app activated with open URL.")
-                return
-            }
-            
-            if antibanner.updatesRightNow {
-                DDLogInfo("(AppDelegate - applicationDidBecomeActive) Update process did not start because it is performed right now.")
-                return
-            }
-            
-            self.fetchPerformer?.invalidateAntibannerIfNeeded()
-        }
-    }
-    
     private func addPurchaseStatusObserver() {
          if purchaseObservation == nil {
              purchaseObservation = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: nil, queue: nil) { (notification) in
@@ -340,14 +267,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                  DDLogInfo("(AppDelegate) - Received notification type = \(type)")
                  
                  if type == PurchaseService.kPSNotificationPremiumExpired {
-                     self.userNotificationService.postNotification(title: ACLocalizedString("premium_expired_title", nil), body: ACLocalizedString("premium_expired_message", nil), userInfo: nil)
+                     self.userNotificationService.postNotification(title: String.localizedString("premium_expired_title"), body: String.localizedString("premium_expired_message"), userInfo: nil)
                  }
              }
          }
          
          if proStatusObservation == nil {
-             proStatusObservation = configuration.observe(\.proStatus) { [weak self] (_, _) in
+             proStatusObservation = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
                  guard let self = self else { return }
+                 
                  if !self.configuration.proStatus && self.vpnManager.vpnInstalled {
                      DDLogInfo("(AppDelegate) Remove vpn configuration")
                      self.vpnManager.removeVpnConfiguration { (error) in
@@ -387,7 +315,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ACLLogger.singleton()?.logLevel = ACLLDebugLevel
         #endif
         
+        AGLogger.setLevel(isDebugLogs ? .AGLL_TRACE : .AGLL_INFO)
+        AGLogger.setCallback { msg, length in
+            guard let msg = msg else { return }
+            let data = Data(bytes: msg, count: Int(length))
+            if let str = String(data: data, encoding: .utf8) {
+                DDLogInfo("(DnsLibs) \(str)")
+            }
+        }
+    
         DDLogInfo("Application started. Version: \(productInfo.buildVersion() ?? "nil")")
+        
+        Logger.logDebug = { msg in
+            DDLogDebug(msg)
+        }
+        
+        Logger.logInfo = { msg in
+            DDLogInfo(msg)
+        }
+        
+        Logger.logError = { msg in
+            DDLogError(msg)
+        }
     }
 }
 

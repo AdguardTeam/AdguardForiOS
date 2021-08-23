@@ -17,12 +17,12 @@
  */
 
 import Foundation
-import Accounts
+import SafariAdGuardSDK
 
 /**
  this service initializes all shared services and put them into ServiceLocator
  */
-class StartupService : NSObject{
+final class StartupService : NSObject{
     
     @objc
     static func start() {
@@ -49,11 +49,59 @@ class StartupService : NSObject{
         let purchaseService:PurchaseServiceProtocol = PurchaseService(network: networkService, resources: sharedResources, productInfo: productInfo)
         purchaseService.start()
         locator.addService(service: purchaseService)
-        
-        let safariService = SafariService(mainAppBundleId: Bundle.main.bundleIdentifier!)
-        locator.addService(service: safariService)
     
-        let configuration: ConfigurationService = ConfigurationService(purchaseService: purchaseService, resources: sharedResources, safariService: safariService)
+        let sharedUrls = SharedStorageUrls()
+        let preloadedFilesManager = PreloadedFilesManager(sharedStorageUrls: sharedUrls)
+        try! preloadedFilesManager.processPreloadedFiles()
+        
+        /* Initializing SDK */
+        let appBundleId = Bundle.main.bundleIdentifier ?? ""
+        let appProductVersion = productInfo.version() ?? ""
+        let currentLanguage = "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")"
+        let appId = Bundle.main.isPro ? "ios_pro" : "ios"
+        let cid = UIDevice.current.identifierForVendor?.uuidString ?? ""
+        
+        let safariProtectionConfiguration = SafariConfiguration(
+            currentLanguage: currentLanguage,
+            proStatus: purchaseService.isProPurchased,
+            safariProtectionEnabled: sharedResources.safariProtectionEnabled,
+            blocklistIsEnabled: sharedResources.safariUserFilterEnabled,
+            allowlistIsEnbaled: sharedResources.safariWhitelistEnabled,
+            allowlistIsInverted: sharedResources.invertedWhitelist,
+            appBundleId: appBundleId,
+            appProductVersion: appProductVersion,
+            appId: appId,
+            cid: cid
+        )
+        
+        let defaultConfiguration = SafariConfiguration(
+            currentLanguage: currentLanguage,
+            proStatus: false,
+            safariProtectionEnabled: true,
+            blocklistIsEnabled: false,
+            allowlistIsEnbaled: false,
+            allowlistIsInverted: false,
+            appBundleId: appBundleId,
+            appProductVersion: appProductVersion,
+            appId: appId,
+            cid: cid
+        )
+        
+        // TODO: - try! is bad
+        let safariProtection: SafariProtectionProtocol = try! SafariProtection(
+            configuration: safariProtectionConfiguration,
+            defaultConfiguration: defaultConfiguration,
+            filterFilesDirectoryUrl: sharedUrls.filtersFolderUrl,
+            dbContainerUrl: sharedUrls.dbFolderUrl,
+            jsonStorageUrl: sharedUrls.cbJsonsFolderUrl,
+            userDefaults: sharedResources.sharedDefaults()
+        )
+        
+        locator.addService(service: safariProtection)
+        
+        /* End of initializing SDK */
+        
+        let configuration: ConfigurationServiceProtocol = ConfigurationService(purchaseService: purchaseService, resources: sharedResources, safariProtection: safariProtection)
         locator.addService(service: configuration)
         
         let dnsProviders: DnsProvidersServiceProtocol = DnsProvidersService(resources: sharedResources)
@@ -70,10 +118,10 @@ class StartupService : NSObject{
         locator.addService(service: vpnManager as VpnManagerProtocol)
         dnsProviders.vpnManager = vpnManager
         
-        let safariProtection =  SafariProtectionService(resources: sharedResources)
-        locator.addService(service: safariProtection)
+        let safariProtectionState =  SafariProtectionService(resources: sharedResources)
+        locator.addService(service: safariProtectionState)
         
-        let complexProtection: ComplexProtectionServiceProtocol = ComplexProtectionService(resources: sharedResources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtection, productInfo: productInfo, nativeProvidersService: nativeProviders)
+        let complexProtection: ComplexProtectionServiceProtocol = ComplexProtectionService(resources: sharedResources, configuration: configuration, vpnManager: vpnManager, productInfo: productInfo, nativeProvidersService: nativeProviders, safariProtection: safariProtection)
         locator.addService(service: complexProtection)
         
         vpnManager.complexProtection = complexProtection
@@ -82,52 +130,18 @@ class StartupService : NSObject{
         let themeService: ThemeServiceProtocol = ThemeService(configuration)
         locator.addService(service: themeService)
         
-        let antibanner: AESAntibannerProtocol = AESAntibanner(resources: sharedResources)
-        locator.addService(service: antibanner)
-        
-        let antibannerController: AntibannerControllerProtocol = AntibannerController(antibanner: antibanner, version: productInfo.version())
-        locator.addService(service: antibannerController)
-        
-        let filtersStorage: FiltersStorageProtocol = FiltersStorage()
-        locator.addService(service: filtersStorage)
-        
-        let sdkResources = Resources(contentFolder: sharedResources.sharedResuorcesURL())
-        let contentBlockerService = ContentBlockerService(resources: sdkResources, safariService: safariService, antibanner: antibanner, filtersStorage: filtersStorage)
-        locator.addService(service: contentBlockerService)
-        
-        let httpRequestService: HttpRequestServiceProtocol = HttpRequestService()
-        locator.addService(service: httpRequestService)
-        
-        let version = productInfo.version() ?? ""
-        let lang = "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")"
-        let id = Bundle.main.isPro ? "ios_pro" : "ios"
-        let cid = UIDevice.current.identifierForVendor?.uuidString ?? ""
-
-        let filtersService: FiltersServiceProtocol = FiltersService(resources: sdkResources, antibannerController: antibannerController, contentBlocker: contentBlockerService, httpRequestService: httpRequestService, filtersStorage: filtersStorage, version: version, id: id, cid: cid, lang: lang, protectionEnabled: sharedResources.safariProtectionEnabled, userFilterEnabled: sharedResources.safariUserFilterEnabled, whitelistEnabled: sharedResources.safariWhitelistEnabled, invertedWhitelist: sharedResources.invertedWhitelist)
-        
-        locator.addService(service: filtersService)
-        
-        let dnsFiltersService : DnsFiltersServiceProtocol = DnsFiltersService(resources: sharedResources, vpnManager: vpnManager, configuration: configuration, complexProtection: complexProtection)
+        let dnsFiltersService : DnsFiltersServiceProtocol = DnsFiltersService(resources: sharedResources, vpnManager: vpnManager, complexProtection: complexProtection)
         locator.addService(service: dnsFiltersService)
         
         let keyChainService: KeychainServiceProtocol = KeychainService(resources: sharedResources)
         locator.addService(service: keyChainService)
         
-        let supportService: SupportServiceProtocol = SupportService(resources: sharedResources, configuration: configuration, complexProtection: complexProtection, dnsProviders: dnsProviders, networkSettings: networkSettingsService, dnsFilters: dnsFiltersService, productInfo: productInfo, antibanner: antibanner, requestsService: httpRequestService, keyChainService: keyChainService, safariService: safariService)
+        let supportService: SupportServiceProtocol = SupportService(resources: sharedResources, configuration: configuration, complexProtection: complexProtection, dnsProviders: dnsProviders, dnsFilters: dnsFiltersService, productInfo: productInfo, keyChainService: keyChainService, safariProtection: safariProtection, networkSettings: networkSettingsService)
         locator.addService(service: supportService)
 
         let userNotificationService: UserNotificationServiceProtocol = UserNotificationService()
         locator.addService(service: userNotificationService)
-        
-        let dnsLogService: DnsLogRecordsServiceProtocol = DnsLogRecordsService(resources: sharedResources)
-        locator.addService(service: dnsLogService)
-        
-        let dnsStatisticsService: DnsStatisticsServiceProtocol = DnsStatisticsService(resources: sharedResources)
-        locator.addService(service: dnsStatisticsService)
-        
-        let activityStatisticsService: ActivityStatisticsServiceProtocol = ActivityStatisticsService(resources: sharedResources)
-        locator.addService(service: activityStatisticsService)
-        
+    
         let dnsTrackerService: DnsTrackerServiceProtocol = DnsTrackerService()
         locator.addService(service: dnsTrackerService)
         
@@ -137,19 +151,19 @@ class StartupService : NSObject{
         let domainsParserService: DomainsParserServiceProtocol = DomainsParserService()
         locator.addService(service: domainsParserService)
         
-        let migrationService: MigrationServiceProtocol = MigrationService(vpnManager: vpnManager, dnsProvidersService: dnsProviders, resources: sharedResources, antibanner: antibanner, dnsFiltersService: dnsFiltersService, networking: networkService, activityStatisticsService: activityStatisticsService, dnsStatisticsService: dnsStatisticsService, dnsLogService: dnsLogService, configuration: configuration, filtersService: filtersService, productInfo: productInfo, contentBlockerService: contentBlockerService, nativeProviders: nativeProviders, filtersStorage: filtersStorage, safariProtection: safariProtection)
-        locator.addService(service: migrationService)
+//        let migrationService: MigrationServiceProtocol = MigrationService(vpnManager: vpnManager, dnsProvidersService: dnsProviders, resources: sharedResources, antibanner: antibanner, dnsFiltersService: dnsFiltersService, networking: networkService, activityStatisticsService: activityStatisticsService, dnsStatisticsService: dnsStatisticsService, dnsLogService: dnsLogService, configuration: configuration, filtersService: filtersService, productInfo: productInfo, contentBlockerService: contentBlockerService, nativeProviders: nativeProviders, filtersStorage: filtersStorage, safariProtection: safariProtection)
+//        locator.addService(service: migrationService)
         
-        let chartViewModel: ChartViewModelProtocol = ChartViewModel(dnsStatisticsService, resources: sharedResources)
+        let chartViewModel: ChartViewModelProtocol = ChartViewModel(resources: sharedResources)
         locator.addService(service: chartViewModel)
         
         let setappService: SetappServiceProtocol = SetappService(purchaseService: purchaseService, resources: sharedResources)
         locator.addService(service: setappService)
         
-        let importSettings: ImportSettingsServiceProtocol = ImportSettingsService(antibanner: antibanner, networking: networkService, filtersService: filtersService, dnsFiltersService: dnsFiltersService, dnsProvidersService: dnsProviders, purchaseService: purchaseService, contentBlockerService: contentBlockerService, resources: sharedResources, safariProtection: safariProtection)
+        let importSettings: ImportSettingsServiceProtocol = ImportSettingsService(networking: networkService, dnsFiltersService: dnsFiltersService, dnsProvidersService: dnsProviders, purchaseService: purchaseService, resources: sharedResources, safariProtection: safariProtection)
         locator.addService(service: importSettings)
         
-        let webReporter: ActionWebReporterProtocol = ActionWebReporter(productInfo: productInfo, antibanner: antibanner, complexProtection: complexProtection, dnsProviders: dnsProviders, configuration: configuration, dnsFilters: dnsFiltersService)
+        let webReporter: ActionWebReporterProtocol = ActionWebReporter(productInfo: productInfo, complexProtection: complexProtection, dnsProviders: dnsProviders, configuration: configuration, dnsFilters: dnsFiltersService, safariProtection: safariProtection)
         locator.addService(service: webReporter)
     }
 }

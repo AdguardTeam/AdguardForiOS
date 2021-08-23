@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>SharedResourcesGroup</key>
+	<string>$(ADGUARD_SHARED_RESOURCES_GROUP)</string>
 	<key>CFBundleDisplayName</key>
 	<string>$(AG_PRODUCT)</string>
 	<key>CFBundleExecutable</key>
@@ -77,6 +79,7 @@
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>youtube</string>
 		<string>adguard-vpn</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>

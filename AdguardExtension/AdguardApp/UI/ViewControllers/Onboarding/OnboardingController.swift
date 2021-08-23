@@ -34,9 +34,9 @@ class OnboardingController: UIViewController {
     
     // MARK: - services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     
-    private var contenBlockerObservation: NSKeyValueObservation?
+    private var contenBlockerObserver: NotificationToken?
     
     private let showLicenseSegue = "ShowLicenseSegue"
     private let onboardingCellId = "OnboardingCellId"
@@ -58,9 +58,9 @@ class OnboardingController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        contenBlockerObservation = configuration.observe(\.contentBlockerEnabled) {[weak self] (_, _) in
+        contenBlockerObserver = NotificationCenter.default.observe(name: .contentBlockersStateChanged, object: nil, queue: .main, using: { [weak self] _ in
             self?.observeContentBlockersState()
-        }
+        })
         
         watchManualButtonIpad.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.lightGreen1)
         setupLabels()
@@ -104,11 +104,11 @@ class OnboardingController: UIViewController {
     // MARK: - Private methods
     
     private func setupLabels() {
-        settingsLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_first_step_text"), fontSize: settingsLabel.font!.pointSize, color: theme.grayTextColor, attachmentImage: nil)
+        settingsLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_first_step_text"), fontSize: settingsLabel.font!.pointSize, color: theme.grayTextColor)
         
-        safariLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_second_step_text"), fontSize: safariLabel.font!.pointSize, color: theme.grayTextColor, attachmentImage: nil)
+        safariLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_second_step_text"), fontSize: safariLabel.font!.pointSize, color: theme.grayTextColor)
         
-        switchLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_third_step_text"), fontSize: switchLabel.font!.pointSize, color: theme.grayTextColor, attachmentImage: nil)
+        switchLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_third_step_text"), fontSize: switchLabel.font!.pointSize, color: theme.grayTextColor)
     }
     
     private func observeContentBlockersState(){

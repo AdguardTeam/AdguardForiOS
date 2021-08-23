@@ -81,7 +81,6 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
     
     private var timer: Timer?
     
-    private let dnsStatisticsService: DnsStatisticsServiceProtocol
     private let resources: AESharedResourcesProtocol
     
     /* Observers */
@@ -90,8 +89,7 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
     private let statisticsQueue = DispatchQueue(label: "statistics queue", qos: .userInitiated)
     
     // MARK: - init
-    init(_ dnsStatisticsService: DnsStatisticsServiceProtocol, resources: AESharedResourcesProtocol) {
-        self.dnsStatisticsService = dnsStatisticsService
+    init(resources: AESharedResourcesProtocol) {
         self.resources = resources
         super.init()
         
@@ -117,8 +115,7 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
                  Update from UI is only available from ActivityViewController
                  To speed up loading data from database we load only current type
                  */
-                let records = self.dnsStatisticsService.getRecords(by: self.chartDateTypeActivity)
-                self.recordsByType[self.chartDateTypeActivity] = records
+                self.recordsByType[self.chartDateTypeActivity] = []
                 
             } else {
                 /*
@@ -126,19 +123,18 @@ class ChartViewModel: NSObject, ChartViewModelProtocol {
                  be able quikly change chart when user wants
                 */
                 for type in ChartDateType.allCases {
-                    let records = self.dnsStatisticsService.getRecords(by: type)
-                    self.recordsByType[type] = records
+                    self.recordsByType[type] = []
                 }
             }
             
             self.changeChart {
                 completion()
             }
-            DispatchQueue.main.async {
-                self.timer = Timer.scheduledTimer(withTimeInterval: self.dnsStatisticsService.minimumStatisticSaveTime, repeats: true, block: {[weak self] (timer) in
-                    self?.obtainStatistics(false) {}
-                })
-            }
+//            DispatchQueue.main.async {
+//                self.timer = Timer.scheduledTimer(withTimeInterval: minimumStatisticSaveTime, repeats: true, block: {[weak self] (timer) in
+//                    self?.obtainStatistics(false) {}
+//                })
+//            }
         }
     }
     

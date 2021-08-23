@@ -505,28 +505,6 @@ class VpnManagerMigration: NSObject {
                     DDLogInfo("(VpnManagerMigration) save activeDnsServerOld in resources")
                     dnsProviders.activeDnsServer = activeDnsServerOld
                 }
-                else if let activeDnsServerOld = oldServer as? APDnsServerObject {
-                    // we used APDnsServerObject in old pro app v <= 2.1.2
-                    DDLogInfo("(VpnManagerMigration) map old dns server from pro to new format")
-                    
-                    let adguardServer = activeDnsServerOld.uuid == VpnManagerMigration.oldAdguardUUID || activeDnsServerOld.dnsCryptId == VpnManagerMigration.oldAdguardDnsCryptIdIpv4 || activeDnsServerOld.dnsCryptId == VpnManagerMigration.oldAdguardDnsCryptIdIpv6
-                    
-                    let adguardFamily = activeDnsServerOld.uuid == VpnManagerMigration.oldAdguardFamilyUUID || activeDnsServerOld.dnsCryptId == VpnManagerMigration.oldAdguardFamilyDnsCryptIdIpv4 || activeDnsServerOld.dnsCryptId == VpnManagerMigration.oldAdguardFamilyDnsCryptIdIpv6
-                    
-                    let activeServer: DnsServerInfo?
-                    
-                    if adguardServer {
-                        activeServer = dnsProviders.adguardDohServer
-                    }
-                    else if adguardFamily {
-                        activeServer = dnsProviders.adguardFamilyDohServer
-                    }
-                    else {
-                        activeServer = nil
-                    }
-                    
-                    dnsProviders.activeDnsServer = activeServer
-                }
             }
         }
     }

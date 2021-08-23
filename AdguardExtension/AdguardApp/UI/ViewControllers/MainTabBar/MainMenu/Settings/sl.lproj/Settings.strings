@@ -19,8 +19,8 @@
 /* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "95J-h1-QgG"; */
 "95J-h1-QgG.normalTitle" = "SHRANI";
 
-/* Class = "UILabel"; text = "Remove VPN profile"; ObjectID = "9hH-ca-VHY"; */
-"9hH-ca-VHY.text" = "Odstrani profil VPN";
+/* Class = "UILabel"; text = "Delete VPN profile"; ObjectID = "9hH-ca-VHY"; */
+"9hH-ca-VHY.text" = "Izbriši profil VPN";
 
 /* Class = "UILabel"; text = "Bootstrap IP address"; ObjectID = "A89-2M-jqd"; */
 "A89-2M-jqd.text" = "Naslov IP zagonskega traku";
@@ -64,8 +64,8 @@
 /* Class = "UILabel"; text = "Bootstrap servers"; ObjectID = "JQH-8J-wY8"; */
 "JQH-8J-wY8.text" = "Zagonski strežniki";
 
-/* Class = "UILabel"; text = "This will remove your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
-"Jnb-4w-9NY.text" = "S tem boste odstranili vaš dejanski profil VPN in onemogočili zaščito DNS";
+/* Class = "UILabel"; text = "This will delete your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
+"Jnb-4w-9NY.text" = "S tem boste izbrisali svoj dejanski profil VPN in onemogočili zaščito DNS";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "Lig-ju-iTI"; */
 "Lig-ju-iTI.text" = "Napredne nastavitve";

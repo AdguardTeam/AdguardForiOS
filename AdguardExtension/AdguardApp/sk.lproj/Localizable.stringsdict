@@ -2,6 +2,46 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
+    <key>trial_description_days</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@days@</string>
+      <key>days</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Začať s jedno-dennou skúšobnou verziou</string>
+        <key>few</key>
+        <string>Začať s %d-dennou skúšobnou verziou</string>
+        <key>many</key>
+        <string>Začať s %d-dennou skúšobnou verziou</string>
+        <key>other</key>
+        <string>Začať s %d-dennou skúšobnou verziou</string>
+      </dict>
+    </dict>
+    <key>trial_description_weeks</key>
+    <dict>
+      <key>NSStringLocalizedFormatKey</key>
+      <string>%#@weeks@</string>
+      <key>weeks</key>
+      <dict>
+        <key>NSStringFormatSpecTypeKey</key>
+        <string>NSStringPluralRuleType</string>
+        <key>NSStringFormatValueTypeKey</key>
+        <string>d</string>
+        <key>one</key>
+        <string>Začať s 1-týždennou skúšobnou verziou</string>
+        <key>few</key>
+        <string>Začať s %d-týždennou skúšobnou verziou</string>
+        <key>many</key>
+        <string>Začať s %d-týždennou skúšobnou verziou</string>
+        <key>other</key>
+        <string>Začať s %d-týždennou skúšobnou verziou</string>
+      </dict>
+    </dict>
     <key>trial_description_months</key>
     <dict>
       <key>NSStringLocalizedFormatKey</key>

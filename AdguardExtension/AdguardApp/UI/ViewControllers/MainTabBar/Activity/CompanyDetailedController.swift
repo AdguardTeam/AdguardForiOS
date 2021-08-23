@@ -43,15 +43,14 @@ class CompanyDetailedController: UITableViewController {
     // MARK: - Services
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
-    private let dnsLogService: DnsLogRecordsServiceProtocol = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsTrackersService: DnsTrackerServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
     private let domainsParserService: DomainsParserServiceProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - Notifications
     
-    private var advancedModeToken: NSKeyValueObservation?
+    private var advancedModeObserver: NotificationToken?
     private var keyboardShowToken: NotificationToken?
     
     // MARK: - Public variables
@@ -71,7 +70,7 @@ class CompanyDetailedController: UITableViewController {
     //var model:
     
     required init?(coder: NSCoder) {
-        requestsModel = DnsRequestLogViewModel(dnsLogService: dnsLogService, dnsTrackerService: dnsTrackersService, dnsFiltersService: dnsFiltersService)
+        requestsModel = DnsRequestLogViewModel(dnsTrackerService: dnsTrackersService, dnsFiltersService: dnsFiltersService)
         super.init(coder: coder)
     }
     
@@ -96,10 +95,6 @@ class CompanyDetailedController: UITableViewController {
         
         requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
         encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedCount))
-        
-        advancedModeToken = configuration.observe(\.advancedMode) {[weak self] (_, _) in
-            self?.observeAdvancedMode()
-        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -213,9 +208,9 @@ class CompanyDetailedController: UITableViewController {
             self?.keyboardWillShow()
         }
         
-        advancedModeToken = configuration.observe(\.advancedMode) {[weak self] (_, _) in
+        advancedModeObserver = NotificationCenter.default.observe(name: .advancedModeChanged, object: nil, queue: .main, using: { [weak self] _ in
             self?.observeAdvancedMode()
-        }
+        })
         
         requestsModel.recordsObserver = { [weak self] (records) in
             DispatchQueue.main.async {[weak self] in

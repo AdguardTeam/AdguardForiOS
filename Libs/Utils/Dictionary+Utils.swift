@@ -32,7 +32,6 @@ extension Dictionary {
     /*
      Concatenates url string and params string with "?" symbol
      */
-    
     func constructLink(url: String) -> String? {
         guard let data = self.percentEncoded() else { return nil }
         guard let params = String(data: data, encoding: .utf8) else { return nil }

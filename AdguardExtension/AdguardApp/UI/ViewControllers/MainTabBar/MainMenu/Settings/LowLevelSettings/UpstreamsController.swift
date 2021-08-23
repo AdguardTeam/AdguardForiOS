@@ -18,7 +18,7 @@
 
 import UIKit
 
-protocol UpstreamsControllerDelegate: class {
+protocol UpstreamsControllerDelegate: AnyObject {
     func updateDescriptionLabel(type: UpstreamType, text: String)
 }
 
@@ -187,7 +187,7 @@ class UpstreamsController: BottomAlertController {
             guard let self = self else { return }
             
             let errors = upstreams.compactMap {
-                AGDnsUtils.test($0)
+                AGDnsUtils.test($0, ipv6Available: ACNIPUtils.isIpv6Available())
             }
             
             DispatchQueue.main.async {

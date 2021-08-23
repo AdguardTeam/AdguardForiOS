@@ -30,6 +30,7 @@ extension UIColor {
         
         static let black1: UIColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)           //hex = 000000
         static let black2: UIColor = #colorLiteral(red: 0.1333333333, green: 0.1333333333, blue: 0.1333333333, alpha: 1)           //hex = 222222
+        static let black3: UIColor = #colorLiteral(red: 0.1568627451, green: 0.1529411765, blue: 0.1607843137, alpha: 1)           //hex = 282729
         static let darkBackground: UIColor = #colorLiteral(red: 0.07450980392, green: 0.07450980392, blue: 0.07450980392, alpha: 1) //hex = #131313
         static let lightGray1: UIColor = #colorLiteral(red: 0.1647058824, green: 0.1647058824, blue: 0.1647058824, alpha: 1)      //hex = #2a2a2a
         static let lightGray2: UIColor = #colorLiteral(red: 0.3019607843, green: 0.3019607843, blue: 0.3019607843, alpha: 1)      //hex = #4d4d4d

@@ -112,7 +112,7 @@ class NativeProvidersService: NativeProvidersServiceProtocol {
     private var dnsManagerStatusObserver: NotificationToken?
     private var appWillEnterForeground: NotificationToken?
     private var dnsImplementationObserver: NotificationToken?
-    private var proObservation: NSKeyValueObservation?
+    private var proObservation: NotificationToken?
     
     // MARK: - Services
     private let dnsProvidersService: DnsProvidersServiceProtocol
@@ -334,21 +334,19 @@ extension NativeProvidersService {
             }
         }
         
-        if let config = configuration as? ConfigurationService {
-            proObservation = config.observe(\.proStatus) {[weak self] (_, _) in
-                guard let self = self else { return }
-                if !self.configuration.proStatus {
-                    self.removeDnsManager({ error in
-                        if let error = error {
-                            DDLogError("(NativeProvidersService)  DnsManagerSaveError : \(error.localizedDescription)")
-                        }
-                    })
-                } else if self.resources.dnsImplementation == .native && self.configuration.proStatus {
-                    self.saveDnsManager({ error in
-                        if let error = error {
-                            DDLogError("(NativeProvidersService)  DnsManagerRemoveError : \(error.localizedDescription)")
-                        }
-                    })
+        proObservation = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
+            guard let self = self else { return }
+            if !self.configuration.proStatus {
+                self.removeDnsManager({ error in
+                    if let error = error {
+                        DDLogError("(NativeProvidersService)  DnsManagerSaveError : \(error.localizedDescription)")
+                    }
+                })
+            } else if self.resources.dnsImplementation == .native && self.configuration.proStatus {
+                self.saveDnsManager { error in
+                    if let error = error {
+                        DDLogError("(NativeProvidersService)  DnsManagerRemoveError: \(error.localizedDescription)")
+                    }
                 }
             }
         }

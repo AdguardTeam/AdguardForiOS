@@ -35,7 +35,7 @@ protocol DnsFiltersModelProtocol {
     func refreshFilters()
 }
 
-protocol DnsFiltersChangedProtocol: class {
+protocol DnsFiltersChangedProtocol: AnyObject {
     /** must be called on main queue */
     func filtersChanged()
 }
@@ -126,7 +126,7 @@ class DnsFiltersModel: DnsFiltersModelProtocol {
         
         for filter in allFilters {
             if checkFilter(filter: filter, searchString: searchStrings) {
-                filter.attributedString = filter.name?.highlight(search: searchStrings)
+                filter.attributedString = filter.name?.highlight(occuranciesOf: Set(searchStrings))
                 searchFilters.append(filter)
             }
         }

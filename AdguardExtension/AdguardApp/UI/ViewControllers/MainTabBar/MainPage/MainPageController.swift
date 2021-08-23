@@ -17,6 +17,7 @@
 */
 
 import UIKit
+import SafariAdGuardSDK
 
 class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfRequestsChangedDelegate, ComplexSwitchDelegate, OnboardingControllerDelegate, GetProControllerDelegate, MainPageModelDelegate {
     
@@ -139,9 +140,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     private var iconButton: UIButton? = nil
     private let getProSegueId = "getProSegue"
     
-    private var proStatus: Bool {
-        return configuration.proStatus
-    }
+    private var proStatus: Bool { configuration.proStatus }
     private var contentBlockersGestureRecognizer: UIPanGestureRecognizer? = nil
     
     // We change constraints only for iphone SE - like devices
@@ -162,27 +161,25 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     
     // MARK: - Services
     
-    private lazy var configuration: ConfigurationService = { ServiceLocator.shared.getService()! }()
-    private lazy var antibanner: AESAntibannerProtocol = { ServiceLocator.shared.getService()! }()
+    private lazy var configuration: ConfigurationServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var resources: AESharedResourcesProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var complexProtection: ComplexProtectionServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var dnsFiltersService: DnsFiltersServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var nativeProviders: NativeProvidersServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var importSettingsService: ImportSettingsServiceProtocol = { ServiceLocator.shared.getService()! }()
-    private lazy var filtersService: FiltersServiceProtocol = { ServiceLocator.shared.getService()! }()
-    private lazy var safariProtection: SafariProtectionService = { ServiceLocator.shared.getService()! }()
+    private lazy var safariProtection: SafariProtectionProtocol = { ServiceLocator.shared.getService()! }()
     
     // MARK: - View models
-    private lazy var mainPageModel: MainPageModelProtocol = { MainPageModel(resource: resources, filtersService: filtersService, safariProtection: safariProtection) }()
+    private lazy var mainPageModel: MainPageModelProtocol = { MainPageModel(resource: resources, safariProtection: safariProtection) }()
     private lazy var chartModel: ChartViewModelProtocol = { ServiceLocator.shared.getService()! }()
     
     // MARK: - Observers
     private var appWillEnterForeground: NotificationToken?
-    private var observations: [NSKeyValueObservation] = []
     private var vpnConfigurationObserver: NotificationToken!
     private var dnsImplementationObserver: NotificationToken?
     private var currentDnsServerObserver: NotificationToken?
+    private var proStatusObserver: NotificationToken?
     
     // MARK: - View Controller life cycle
     
@@ -577,16 +574,15 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
             self?.checkAdGuardVpnIsInstalled()
         })
         
-        let proObservation = configuration.observe(\.proStatus) { [weak self] (_, _) in
-            DispatchQueue.main.async {
-                self?.processState()
-            }
+        proStatusObserver = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
+            self?.processState()
         }
         
-        let contenBlockerObservation = configuration.observe(\.contentBlockerEnabled) {[weak self] (_, _) in
-            guard let self = self else { return }
-            self.observeContentBlockersState()
-        }
+        // todo: handle notifications from sdk
+//        let contenBlockerObservation = configuration.observe(\.contentBlockerEnabled) {[weak self] (_, _) in
+//            guard let self = self else { return }
+//            self.observeContentBlockersState()
+//        }
         
         vpnConfigurationObserver = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: .main) { [weak self] _ in
             self?.updateProtectionStates()
@@ -601,9 +597,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         currentDnsServerObserver = NotificationCenter.default.observe(name: .currentDnsServerChanged, object: nil, queue: .main) { [weak self] _ in
             self?.processDnsServerChange()
         }
-
-        observations.append(proObservation)
-        observations.append(contenBlockerObservation)
+//        observations.append(contenBlockerObservation)
     }
     
     /**

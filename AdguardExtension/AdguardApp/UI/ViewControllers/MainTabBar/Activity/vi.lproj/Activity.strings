@@ -5,7 +5,7 @@
 "1rj-wD-aeH.normalTitle" = "THÊM";
 
 /* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "4IJ-xy-hky"; */
-"4IJ-xy-hky.normalTitle" = "được mã hóa";
+"4IJ-xy-hky.normalTitle" = "đã chặn";
 
 /* Class = "UILabel"; text = "Activity"; ObjectID = "5bV-zZ-4dr"; */
 "5bV-zZ-4dr.text" = "Hoạt động";
@@ -20,16 +20,13 @@
 "Asq-k8-hi1.text" = "Công ty nhiều hoạt động nhất";
 
 /* Class = "UILabel"; text = "No recent activity tracked (we store only the last 1500 requests)"; ObjectID = "DCy-so-G1C"; */
-"DCy-so-G1C.text" = "Không có hoạt động gần đây được theo dõi (chúng tôi chỉ lưu trữ 1500 yêu cầu gần nhất)";
+"DCy-so-G1C.text" = "Không có hoạt động theo dõi nào gần đây (chúng tôi chỉ lưu 1500 yêu cầu gần nhất)";
 
 /* Class = "UILabel"; text = "No recent activity tracked (we store only the last 1500 requests)"; ObjectID = "Epn-q1-BdL"; */
 "Epn-q1-BdL.text" = "Không có hoạt động gần đây được theo dõi (chúng tôi chỉ lưu trữ 1500 yêu cầu gần nhất)";
 
 /* Class = "UILabel"; text = "Activity"; ObjectID = "Hbu-Bm-HWZ"; */
-"Hbu-Bm-HWZ.text" = "Hoạt động";
-
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "KXe-VX-Rq9"; Note = "(AddCustomFilterController) cancel button"; */
-"KXe-VX-Rq9.normalTitle" = "Đóng";
+"Hbu-Bm-HWZ.text" = "Đang hoạt động";
 
 /* Class = "UILabel"; text = "Domain name:"; ObjectID = "M4r-q5-RXv"; */
 "M4r-q5-RXv.text" = "Tên miền:";
@@ -38,10 +35,10 @@
 "T0y-mr-Zwa.text" = "Bạn có thể xem ai cố gắng theo dõi bạn, xem số liệu thống kê và nhật ký chặn yêu cầu DNS";
 
 /* Class = "UILabel"; text = "DNS protection is disabled"; ObjectID = "X1F-2p-Xpe"; */
-"X1F-2p-Xpe.text" = "Bảo vệ qua DNS bị vô hiệu hóa";
+"X1F-2p-Xpe.text" = "Bảo vệ DNS đang tắt";
 
 /* Class = "UIButton"; normalTitle = "ENABLE"; ObjectID = "XYE-JT-WSH"; */
-"XYE-JT-WSH.normalTitle" = "CHO PHÉP";
+"XYE-JT-WSH.normalTitle" = "KÍCH HOẠT";
 
 /* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "Xgg-jX-hwe"; */
 "Xgg-jX-hwe.normalTitle" = "Đã sao chép";

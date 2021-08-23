@@ -19,12 +19,6 @@
 /* Alert title. On error. */
 "common_error_title" = "Greška";
 
-/* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Filteri ne mogu da se učitaju u Safari, tako da vaša pravila nisu primenjena.";
-
-/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Filteri ne mogu da budu učitani u Safari. Pokušajte da očistite vaša pravila ili belu listu, ili promenite skup korišćenih filtera.";
-
 /* NO Button caption in alert */
 "common_action_no" = "Ne";
 
@@ -97,14 +91,8 @@
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Dogodila se greška prilikom pokušaja oporavka kupovine.";
 
-/* (AEUIGetProViewController) message that appears when purchase successfully restored */
-"restore_success_message" = "Kupovina je oporavljena! Premium verzija AdGuard-a za iOS je aktivirana.";
-
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "Nema kupovina koje se mogu oporaviti";
-
-/* (AEUIGetProViewController) message that appears when the purchase is successful */
-"purchase_success_message" = "Kupovina je uspešno dovršena! Premium verzija AdGuard-a za iOS je aktivirana.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "Dogodila se greška prilikom obrade vaše kupovine.";
@@ -121,9 +109,6 @@
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Ovde možete dodati vaša pravila<br>Pročitajte ovu <a href=\"%@\">napomenu o sintaksi pravila</a>.";
 
-/* (UserFilterController) whitelist description */
-"whitelist_text" = "Ovde unesite imena domena. AdGuard će isključiti filtriranje u Safariju za ove sajtove.";
-
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Ovde unesite domen. AdGuard će uključiti filtriranje u Safariju samo za te sajtove.";
 
@@ -135,12 +120,6 @@
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Ažuriram...";
-
-/* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "Dodaj pravilo";
-
-/* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "Dodaj domen";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
@@ -256,14 +235,8 @@
 /* (AdvancedSettingsController) Reset button title */
 "reset_title" = "Resetuj";
 
-/* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Ukloni";
-
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Ukloni VPn profil";
-
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Jeste li sigurni da želite da uklonite vaš VPN profil i isključite DNS zaštitu?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Došlo je do greške";
@@ -502,15 +475,6 @@
 /*(MainScreen) "all time" chart date type */
 "chart_alltime" = "Sve vreme";
 
-/*(SafariService) notification about loading content blockers  */
-"loading_content_blockers" = "Blokatori sadržaja se ažuriraju...";
-
-/*(FiltersService) notification about filters laoding  */
-"loading_filters" = "Učitavanje filtera...";
-
-/*(ContentBlockerService) notification about converting rules  */
-"converting_rules" = "Pravila se pretvaraju...";
-
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "Novi korisnički filter";
 
@@ -591,9 +555,6 @@
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "Dodirnite <b>Safari</b> i izaberite <b>\"blokatori sadržaja\"</b>";
-
-/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Uključite sve blokatore sadržaja</b> pa se vratite u našu aplikaciju!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "Sistemski DNS";

@@ -20,6 +20,9 @@ app_identifier(["com.adguard.AdguardExtension",
                 "com.adguard.AdguardPro.extensionSecurity", 
                 "com.adguard.AdguardPro.todayExtension",
                 "com.adguard.AdguardPro.ActionExtension", 
-                "com.adguard.AdguardPro.tunnel"])
+                "com.adguard.AdguardPro.tunnel",
+                "com.adguard.AdguardPro.ProYouTubeAdsActionExtension",
+                "com.adguard.AdguardExtension.YouTubeAdsActionExtension"
+                ])
 username("apple-dev@adguard.com")
 team_id("N33TQXN8C7")

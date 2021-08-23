@@ -18,6 +18,7 @@
 
 
 import UIKit
+import SafariAdGuardSDK
 
 class AdvancedSettingsController: UITableViewController {
 
@@ -31,12 +32,9 @@ class AdvancedSettingsController: UITableViewController {
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private let safariService: SafariService = ServiceLocator.shared.getService()!
-    private let filterService: FiltersServiceProtocol = ServiceLocator.shared.getService()!
-    private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
-    private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
-    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
+    private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     
     private let segueIdentifier = "contentBlockersScreen"
     
@@ -67,7 +65,7 @@ class AdvancedSettingsController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueIdentifier{
-            let contentBlockersDataSource = ContentBlockersDataSource(safariService: safariService, resources: resources, filterService: filterService, antibanner: antibanner, contentBlockerService: contentBlockerService)
+            let contentBlockersDataSource = ContentBlockersDataSource(resources: resources, safariProtection: safariProtection)
             let destinationVC = segue.destination as? ContentBlockerStateController
             destinationVC?.contentBlockersDataSource = contentBlockersDataSource
             destinationVC?.theme = theme
@@ -93,6 +91,7 @@ class AdvancedSettingsController: UITableViewController {
         resources.isDebugLogs = isDebugLogs
         DDLogInfo("Log level changed to \(isDebugLogs ? "DEBUG" : "Normal")")
         ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
+        AGLogger.setLevel(isDebugLogs ? .AGLL_TRACE : .AGLL_INFO)
         vpnManager.updateSettings(completion: nil) // restart tunnel to apply new log level
     }
     

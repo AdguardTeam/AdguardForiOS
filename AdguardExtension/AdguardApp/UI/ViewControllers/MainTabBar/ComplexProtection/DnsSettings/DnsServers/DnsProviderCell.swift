@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol DnsProviderCellDelegate: class {
+protocol DnsProviderCellDelegate: AnyObject {
     func selectedProvider(withTag tag: Int)
 }
 

@@ -31,7 +31,7 @@
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.Safari.content-blocker</string>
 		<key>NSExtensionPrincipalClass</key>
-		<string>ActionRequestHandler</string>
+		<string>$(PRODUCT_MODULE_NAME).ContentBlockerRequestHandler</string>
 	</dict>
 	<key>NSHumanReadableDescription</key>
 	<string>Adguard - Adblock and Privacy Protection for the Web.</string>

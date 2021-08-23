@@ -18,7 +18,7 @@
 
 import UIKit
 
-protocol ChooseDnsImplementationControllerDelegate: class {
+protocol ChooseDnsImplementationControllerDelegate: AnyObject {
     func currentImplementationChanged()
 }
 

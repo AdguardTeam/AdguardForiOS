@@ -2352,6 +2352,7 @@
                         <outletCollection property="buttons" destination="nnh-6A-cMg" collectionClass="NSMutableArray" id="HIy-6h-3cI"/>
                         <outletCollection property="buttons" destination="r90-Gc-4wu" collectionClass="NSMutableArray" id="zfa-FU-q56"/>
                         <outletCollection property="buttons" destination="TTo-Hp-fRU" collectionClass="NSMutableArray" id="YqE-SD-5Tx"/>
+                        <outletCollection property="themableLabels" destination="ESe-CM-On1" collectionClass="NSMutableArray" id="GhD-hs-thF"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iqR-Qa-C7v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

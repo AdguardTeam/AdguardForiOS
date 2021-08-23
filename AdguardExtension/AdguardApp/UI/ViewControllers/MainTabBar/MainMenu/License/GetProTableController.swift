@@ -52,13 +52,13 @@ class GetProTableController: UITableViewController {
     // MARK: - services
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
     private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - private fields
     
-    var proObservation: NSKeyValueObservation?
+    var proStatusObserver: NotificationToken?
     
     private let notPurchasedLogoRow = 0
     private let purchasedLogoRow = 1
@@ -78,12 +78,10 @@ class GetProTableController: UITableViewController {
         selectedProduct = purchaseService.standardProduct
               
         setPrice()
-        
-        proObservation = configuration.observe(\.proStatus) {[weak self] (_, _) in
-            DispatchQueue.main.async {
-                self?.updateTheme()
-                self?.setPrice()
-            }
+
+        proStatusObserver = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
+            self?.updateTheme()
+            self?.setPrice()
         }
         
         upgradeButton.makeTitleTextUppercased()

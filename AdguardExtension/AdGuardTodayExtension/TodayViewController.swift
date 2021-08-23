@@ -19,6 +19,7 @@
 import UIKit
 import NotificationCenter
 import NetworkExtension
+import SafariAdGuardSDK
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     
@@ -58,19 +59,15 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     
     private let resources: AESharedResources = AESharedResources()
-    private var safariService: SafariService
+    private var safariProtection: SafariProtectionProtocol
     private var complexProtection: ComplexProtectionServiceProtocol
     private let networkService = ACNNetworking()
     private var purchaseService: PurchaseServiceProtocol
-    private var configuration: ConfigurationService
-    private let dnsStatisticsService: DnsStatisticsServiceProtocol
     private let dnsProvidersService: DnsProvidersServiceProtocol
     private let productInfo: ADProductInfoProtocol
     
     private var requestNumber = 0
     private var encryptedNumber = 0
-    
-    private var counters: DnsCounters?
     
     // MARK: View Controller lifecycle
     
@@ -91,19 +88,18 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         ACLLogger.singleton()?.flush()
         
         // todo:
-        safariService = SafariService(mainAppBundleId: Bundle.main.hostAppBundleId)
+        let configuration = SafariConfiguration(currentLanguage: "", proStatus: true, safariProtectionEnabled: true, blocklistIsEnabled: true, allowlistIsEnbaled: true, allowlistIsInverted: true, appBundleId: "", appProductVersion: "", appId: "", cid: "")
+        safariProtection = try! SafariProtection(configuration: configuration, defaultConfiguration: configuration, filterFilesDirectoryUrl: URL(string: "")!, dbContainerUrl: URL(string: "")!, jsonStorageUrl: URL(string: "")!, userDefaults: UserDefaults(suiteName: "")!)
         
         productInfo = ADProductInfo()
         purchaseService = PurchaseService(network: networkService, resources: resources, productInfo: productInfo)
-        configuration = ConfigurationService(purchaseService: purchaseService, resources: resources, safariService: safariService)
+        let oldConfiguration = ConfigurationService(purchaseService: purchaseService, resources: resources, safariProtection: safariProtection)
         dnsProvidersService = DnsProvidersService(resources: resources)
-        dnsStatisticsService = DnsStatisticsService(resources: resources)
-        let vpnManager = VpnManager(resources: resources, configuration: configuration, networkSettings: NetworkSettingsService(resources: resources), dnsProviders: dnsProvidersService as! DnsProvidersService)
+        let vpnManager = VpnManager(resources: resources, configuration: oldConfiguration, networkSettings: NetworkSettingsService(resources: resources), dnsProviders: dnsProvidersService as! DnsProvidersService)
         
-        let safariProtection = SafariProtectionService(resources: resources)
         let networkSettings = NetworkSettingsService(resources: resources)
-        let nativeProviders = NativeProvidersService(dnsProvidersService: dnsProvidersService, networkSettingsService: networkSettings, resources: resources, configuration: configuration)
-        complexProtection = ComplexProtectionService(resources: resources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtection, productInfo: productInfo, nativeProvidersService: nativeProviders)
+        let nativeProviders = NativeProvidersService(dnsProvidersService: dnsProvidersService, networkSettingsService: networkSettings, resources: resources, configuration: oldConfiguration)
+        complexProtection = ComplexProtectionService(resources: resources, configuration: oldConfiguration, vpnManager: vpnManager, productInfo: productInfo, nativeProvidersService: nativeProviders, safariProtection: safariProtection)
         
         super.init(coder: coder)
         
@@ -121,8 +117,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         extensionContext?.widgetLargestAvailableDisplayMode = .expanded
         
-        counters = dnsStatisticsService.getAllCounters()
-        changeTextForButton(counters: counters)
+        // TODO: - Refactor it
+        changeTextForButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -134,17 +130,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         removeStatisticsObservers()
-    }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        
-        DDLogInfo("(TodayViewController) - observeValue")
-        
-        if keyPath == LastStatisticsSaveTime {
-            counters = dnsStatisticsService.getAllCounters()
-        }
-        
-        changeTextForButton(counters: counters)
     }
         
     // MARK: - NCWidgetProviding methods
@@ -383,13 +368,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     /**
      Changes number of requests for specific button
      */
-    private func changeTextForButton(counters: DnsCounters?){
+    private func changeTextForButton(){
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             
-            let requests = counters?.totalRequests ?? 0
-            let encrypted = counters?.encrypted ?? 0
-            let elapsedSumm = counters?.totalTime ?? 0
+            let requests = 0
+            let encrypted = 0
+            let elapsedSumm = 0
             
             let requestsNumber = self.resources.tempRequestsCount + requests
             self.requestsLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsNumber))

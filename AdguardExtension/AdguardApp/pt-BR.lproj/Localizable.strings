@@ -20,10 +20,10 @@
 "common_error_title" = "Erro";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Não foi possível carregar os filtros no Safari. Portanto, as alterações recentes não foram aplicadas.";
+"safari_filters_loading_error" = "Não foi possível carregar os filtros no Safari, portanto, suas alterações recentes não foram aplicadas.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
-"load_to_safari_error" = "Os filtros não podem ser carregados no Safari. Tente limpar as suas regras e a lista de permissões, ou alterar o conjunto de filtros utilizados.";
+"load_to_safari_error" = "Os filtros não podem ser carregados no Safari. Tente limpar suas regras e lista de permissões ou altere o conjunto de filtros usados.";
 
 /* NO Button caption in alert */
 "common_action_no" = "NÃO";
@@ -53,10 +53,10 @@
 "ten_thousands_unit" = "%@10K";
 
 /* (MainPageController) Native DNS is working title */
-"native_dns_working" = "DNS nativo está funcionando";
+"native_dns_working" = "DNS nativo está operando";
 
 /* (MainPageController) Native DNS is not working title */
-"native_dns_not_working" = "DNS nativo não está funcionando";
+"native_dns_not_working" = "DNS nativo não está operando";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Regras de usuário";
@@ -107,13 +107,13 @@
 "premium_expired_title" = "Atenção";
 
 /* (AEUIGetProViewController) message that appears if the account is not premium */
-"not_premium_message" = "Você efetuou login com êxito na conta do AdGuard, mas não há chaves de licença para ativar a versão premium.";
+"not_premium_message" = "Você entrou com êxito na conta do AdGuard, mas não há chaves de licença para ativar a versão premium.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in */
 "login_success_message" = "Você efetuou login com êxito na conta do AdGuard! A versão premium do AdGuard para iOS foi ativada.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
-"login_premium_expired_message" = "Você efetuou login com êxito na conta do AdGuard, mas as chaves de licença que permitem ativar a versão premium expiraram.";
+"login_premium_expired_message" = "Você entrou com êxito na conta do AdGuard, mas as chaves de licença que permitem ativar a versão premium expiraram.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Ocorreu um erro ao tentar restaurar a compra.";
@@ -143,7 +143,7 @@
 "blacklist_text_format" = "Insira suas regras personalizadas aqui.<br>Leia essa<a href=\"%@\">nota sobre a sintaxe de regras</a>.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Digite aqui os nomes de domínio. O AdGuard não irá bloquear o acesso para esses domínios, ignorando todas as outras configurações.";
+"whitelist_text" = "Digite aqui os domínios que você não deseja que o AdGuard filtre. Esta lista tem precedência sobre outras configurações.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Digite aqui os nomes de domínio. O AdGuard irá ativar a filtragem no Safari somente para estes sites.";
@@ -158,10 +158,10 @@
 "update_filter_start_message" = "Atualizando...";
 
 /* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "Adicionar regra";
+"add_blacklist_rule_title" = "Adicionar nova regra";
 
 /* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "Digite um domínio";
+"add_whitelist_domain_title" = "Adicionar um domínio";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||exemplo.org^";
@@ -239,7 +239,7 @@
 "support_vpn_configuration_problem" = "Houve um problema na configuração da conexão VPN, entre em contato com nossa equipe de suporte.";
 
 /* login error message */
-"login_error_message" = "Ocorreu um erro ao iniciar a sessão";
+"login_error_message" = "Ocorreu um erro ao entrar";
 
 /* purchase secription format */
 "purchase_description_format" = "Sobre a assinatura do AdGuard:<br><br>• O pagamento será debitado na sua conta do iTunes na confirmação da compra.<br><br>• A assinatura é renovada automaticamente a menos que a renovação automática seja desativada 24 horas antes da renovação.<br><br>• A taxa de renovação da assinatura será cobrada nas 24 horas anteriores ao final do período atual.<br><br>As suas assinaturas podem ser gerenciadas e a sua renovação automática pode ser desativada nas configurações da sua conta do iTunes.<br><br><a href=%2$@>Termos e condições</a> e <a href=%1$@>Política de privacidade</a>";
@@ -284,13 +284,13 @@
 "reset_title" = "Redefinir";
 
 /* (AdvancedSettingsController) Remove button title */
-"remove_title" = "Remover";
+"delete_title" = "Excluir";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Remover perfil de VPN";
 
-/* (AdvancedSettingsController) Remove Vpn profile message */
-"remove_vpn_profile_message" = "Você tem certeza de que deseja remover seu perfil de VPN e desativar a proteção de DNS?";
+/* (AdvancedSettingsController) Delete Vpn profile message */
+"delete_vpn_profile_message" = "Você tem certeza de que excluir remover seu perfil de VPN e desativar a proteção de DNS?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Ocorreu um erro";
@@ -649,6 +649,24 @@
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ ainda não é compatível com iOS. Tente adicionar um servidor DNS primário diferente.";
 
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "Salvar e selecionar";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "Salvar";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "Cancelar";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "Excluir";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "Adicionar servidor DNS personalizado";
+
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "Editar servidor DNS personalizado";
+
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Lista de bloqueio do sistema";
 
@@ -927,3 +945,41 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "Responder com um endereço IP definido manualmente";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Filtros";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "Filtros DNS";
+
+/* (LowLevelSettingsController) - title for unsupported options */
+"unsupported_setting" = "Esta opção é incompatível com o modo DNS nativo";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "Você conectou o número máximo de dispositivos à sua conta Setapp.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_safari" = "Você sabia que o YouTube mudou seus algoritmos para mostrar a você mais anúncios?<br><br>Agora, para bloqueá-los, você precisa:<br><br>1. Abrir o <a href=\"%@\">Safari</a>.<br><br>2. Abrir o youtube.com.<br><br>3. Tocar %@ em Compartilhar.<br><br> 4. Tocar em \"Bloquear anúncios no YouTube (por AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
+"block_youtube_ads_instructions" = "Você sabia que o YouTube mudou seus algoritmos para mostrar a você mais anúncios?<br><br>Agora, para bloqueá-los, você precisa:<br><br>1. Abra o <a href=\"%@\">youtube.com</a> no Safari.<br><br>2. Toque em %@ no botão de Compartilhar.<br><br>3. Toque em \"Bloquear anúncios no YouTube (por AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "Feito! Agora você pode assistir o YouTube sem anúncios.\n\nQuando a extensão está ativida, a legenda “com AdGuard” é exibido ao lado do logotipo do YouTube.<br><br><b>Se você recarregar a página, precisará realizar as etapas 3 e 4 novamente.</b>";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "Feito! Agora você pode assistir o YouTube sem anúncios.\n\nQuando a extensão está ativida, a legenda “com AdGuard” é exibido ao lado do logotipo do YouTube.<br><br><b>Se você recarregar a página, precisará realizar as etapas 2 e 3 novamente.</b>";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "O YouTube agora está livre de anúncios! Observe que você precisa executar esta extensão novamente se recarregar a página";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "Esta extensão deve ser iniciada apenas no YouTube";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
+"youtube_script_already_executed_title" = "A extensão já foi executado";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "Ocorreu um erro desconhecido ao remover anúncios do YouTube";

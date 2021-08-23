@@ -35,7 +35,7 @@
 "YIm-R8-cxj.text" = "Bloquea phishing, estafa y minado de criptomonedas";
 
 /* Class = "UILabel"; text = "Log in with your AdGuard account or with connected social networks"; ObjectID = "ZuM-Nn-uXv"; */
-"ZuM-Nn-uXv.text" = "Inicia sesión con tu cuenta AdGuard o con las redes sociales conectadas";
+"ZuM-Nn-uXv.text" = "Inicia sesión con tu cuenta AdGuard o con las redes sociales";
 
 /* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "INICIAR SESIÓN";

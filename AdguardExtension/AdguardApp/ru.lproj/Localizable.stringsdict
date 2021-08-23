@@ -13,13 +13,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Начните c пробного периода на один день</string>
+        <string>Начните с пробного периода на один день</string>
         <key>few</key>
-        <string>Начните c пробного периода на %d дня</string>
+        <string>Начните с пробного периода на %d дня</string>
         <key>many</key>
-        <string>Начните c пробного периода на %d дней</string>
+        <string>Начните с пробного периода на %d дней</string>
         <key>other</key>
-        <string>Начните c пробного периода на %d дней</string>
+        <string>Начните с пробного периода на %d дней</string>
       </dict>
     </dict>
     <key>trial_description_weeks</key>
@@ -33,7 +33,7 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Начните c пробного периода на одну неделю</string>
+        <string>Начните с пробного периода на одну неделю</string>
         <key>few</key>
         <string>Начните c пробного периода на %d недели</string>
         <key>many</key>
@@ -53,13 +53,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Начните c пробного периода на один месяц</string>
+        <string>Начните с пробного периода на один месяц </string>
         <key>few</key>
-        <string>Начните c пробного периода на %d месяца</string>
+        <string>Начните с пробного периода на %d месяца </string>
         <key>many</key>
-        <string>Начните c пробного периода на %d месяцев</string>
+        <string>Начните с пробного периода на %d месяцев </string>
         <key>other</key>
-        <string>Начните c пробного периода на %d месяцев</string>
+        <string>Начните с пробного периода на %d месяцев </string>
       </dict>
     </dict>
     <key>trial_description_years</key>
@@ -73,13 +73,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Начните c пробного периода на один год</string>
+        <string>Начните с пробного периода на один год </string>
         <key>few</key>
-        <string>Начните c пробного периода на %d года</string>
+        <string>Начните с пробного периода на %d года </string>
         <key>many</key>
-        <string>Начните c пробного периода на %d лет</string>
+        <string>Начните с пробного периода на %d лет </string>
         <key>other</key>
-        <string>Начните c пробного периода на %d лет</string>
+        <string>Начните с пробного периода на %d лет </string>
       </dict>
     </dict>
     <key>user_rules_format</key>

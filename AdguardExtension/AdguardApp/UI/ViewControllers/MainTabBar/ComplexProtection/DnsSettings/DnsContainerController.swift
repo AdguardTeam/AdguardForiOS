@@ -41,11 +41,10 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
-    private let dnsLogService: DnsLogRecordsServiceProtocol = ServiceLocator.shared.getService()!
     private let domainsConverter: DomainsConverterProtocol = DomainsConverter()
-    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     
-    private var advancedModeToken: NSKeyValueObservation?
+    private var advancedModeObserver: NotificationToken?
     
     private var detailsController: DnsRequestDetailsController?
     
@@ -63,11 +62,9 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        advancedModeToken = configuration.observe(\.advancedMode) {[weak self] (_, _) in
-            DispatchQueue.main.async {[weak self] in
-                self?.updateButtons()
-            }
-        }
+        advancedModeObserver = NotificationCenter.default.observe(name: .advancedModeChanged, object: nil, queue: .main, using: { [weak self] _ in
+            self?.updateButtons()
+        })
         
         updateButtons()
         
@@ -94,7 +91,6 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
     // MARK: - private methods
     
     private func set(_ status: DnsLogRecordUserStatus, _ rule: String? = nil) {
-        dnsLogService.set(rowId: self.logRecord.logRecord.rowid!, status: status, userRule: rule)
         logRecord.logRecord.userStatus = status
         detailsController?.updateStatusLabel()
         updateButtons()

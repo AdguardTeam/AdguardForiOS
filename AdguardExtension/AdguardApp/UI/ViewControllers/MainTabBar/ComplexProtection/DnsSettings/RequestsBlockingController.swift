@@ -25,17 +25,15 @@ class RequestsBlockingController: UITableViewController {
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private let contentBlockerService: ContentBlockerService = ServiceLocator.shared.getService()!
-    private let antibanner: AESAntibannerProtocol = ServiceLocator.shared.getService()!
     private let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
-    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
     
     private let dnsBlacklistSegue = "dnsBlacklistSegue"
     private let dnsWhitelistSegue = "dnsWhitelistSegue"
     
-    private var configurationToken: NSKeyValueObservation?
+    private var advancedModeObserver: NotificationToken?
     
     private let headerSection = 0
     
@@ -63,10 +61,9 @@ class RequestsBlockingController: UITableViewController {
         
         updateTheme()
         
-        configurationToken = configuration.observe(\.advancedMode) {[weak self] (_, _) in
-            guard let self = self else { return }
-            self.tableView.reloadData()
-        }
+        advancedModeObserver = NotificationCenter.default.observe(name: .advancedModeChanged, object: nil, queue: .main, using: { [weak self] _ in
+            self?.tableView.reloadData()
+        })
         
         setupBackButton()
     }

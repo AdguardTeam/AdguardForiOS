@@ -35,7 +35,6 @@ class HowToSetupController: BottomAlertController {
         openSettingsButton.applyStandardGreenStyle()
         
         updateTheme()
-        setupLabels()
     }
     
     // MARK: - Actions
@@ -48,12 +47,12 @@ class HowToSetupController: BottomAlertController {
     
     private func setupLabels() {
         let titleFormat = String.localizedString("native_dns_setup_title")
-        let title = String(format: titleFormat, Bundle.main.applicationName ?? "AdGuard")
+        let title = String(format: titleFormat, Bundle.main.applicationName)
         titleLabel.text = title
         
         let descriptionFormat = String.localizedString("native_dns_setup_description")
-        let description = String(format: descriptionFormat, Bundle.main.applicationName ?? "AdGuard")
-        descriptionLabel.attributedText = NSMutableAttributedString.fromHtml(description, fontSize: descriptionLabel.font!.pointSize, color: theme.grayTextColor, attachmentImage: nil, textAlignment: .center)
+        let description = String(format: descriptionFormat, Bundle.main.applicationName)
+        descriptionLabel.attributedText = NSMutableAttributedString.fromHtml(description, fontSize: descriptionLabel.font!.pointSize, color: theme.grayTextColor, textAlignment: .center)
     }
 }
 
@@ -62,5 +61,6 @@ extension HowToSetupController: ThemableProtocol {
         titleLabel.textColor = theme.popupTitleTextColor
         contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupLabels(themableLabels)
+        setupLabels()
     }
 }
