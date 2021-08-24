@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import UIKit
 
 extension NSMutableAttributedString {
     enum AttachmentSize {
@@ -111,13 +112,14 @@ extension String {
         return String((0..<length).map{ _ in letters.randomElement()! })
     }
     
-    /// Returns attributed string with highlighted occurancies or nil if nothing was found
-    func highlight(occuranciesOf strings: Set<String>) -> NSAttributedString? {
-        guard !strings.isEmpty else { return nil }
-        
+    /// Returns tuple with attributed string that highlight passed occurancies and `found` flag
+    /// It is true if any occurancies were found
+    func highlight(occuranciesOf strings: Set<String>) -> (NSAttributedString, Bool) {
         let attributedString = NSMutableAttributedString(string: self)
-        let highlightColor = UIColor.AdGuardColor.lightGreen1
+        attributedString.addAttribute(NSAttributedString.Key.backgroundColor, value: UIColor.clear, range: NSRange(location: 0, length: self.count))
+        guard !strings.isEmpty else { return (attributedString, false) }
         
+        let highlightColor = UIColor.AdGuardColor.lightGreen1
         var foundCount = 0
         for string in strings {
             let nsRanges = ranges(of: string, options: [.caseInsensitive])
@@ -127,7 +129,7 @@ extension String {
             }
         }
         
-        return foundCount == 0 ? nil : attributedString
+        return (attributedString, foundCount != 0)
     }
     
     /// Returns NSRanges of all occurancies of substring in string

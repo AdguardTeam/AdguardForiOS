@@ -79,6 +79,7 @@ final class AllSafariGroupsFiltersModel: NSObject, SafariGroupFiltersModelProtoc
     private func reinit() {
         modelsProvider = SafariGroupFiltersModelsProvider(sdkModels: safariProtection.groups as! [SafariGroup], proStatus: configuration.proStatus)
         modelsProvider.searchString = searchString
+        tableView?.reloadData()
     }
 }
 
@@ -88,24 +89,16 @@ extension AllSafariGroupsFiltersModel {
     func deleteFilter(with groupId: Int, filterId: Int, onFilterDeleted: @escaping () -> Void) {
         let groupType = SafariGroup.GroupType(rawValue: groupId)!
         safariProtection.deleteCustomFilter(withId: filterId) { [weak self] error in
-            guard let self = self else { return }
             if let error = error {
                 DDLogError("(AllSafariGroupsFiltersModel) - deleteFilter; DB error when removing filter with id=\(filterId) group=\(groupType); Error: \(error)")
             }
-            let section = self.groupModels.firstIndex(where: { $0.groupType == groupType })!
-            let row = self.filtersModels[section].firstIndex(where: { $0.filterId == filterId })!
-            self.reinit()
-            self.tableView?.deleteRows(at: [IndexPath(row: row, section: section)], with: .automatic)
+            self?.reinit()
             onFilterDeleted()
         } onCbReloaded: { error in
             if let error = error {
                 DDLogError("(AllSafariGroupsFiltersModel) - deleteFilter; Reload CB error when removing filter with id=\(filterId) group=\(groupType); Error: \(error)")
             }
         }
-    }
-    
-    func editFilter(with groupId: Int, filterId: Int, onFilterEdited: @escaping (SafariFilterProtocol) -> Void) {
-        // TODO: - implement
     }
     
     func setFilter(with groupId: Int, filterId: Int, enabled: Bool, onFilterSet: @escaping (SafariFilterProtocol) -> Void) {
@@ -116,9 +109,6 @@ extension AllSafariGroupsFiltersModel {
                 DDLogError("(AllSafariGroupsFiltersModel) - setFilter; DB error when setting filter with id=\(filterId) group=\(groupType) to state=\(enabled); Error: \(error)")
             }
             self.reinit()
-            let section = self.groupModels.firstIndex(where: { $0.groupType == groupType })!
-            let row = self.filtersModels[section].firstIndex(where: { $0.filterId == filterId })!
-            self.tableView?.reloadRows(at: [IndexPath(row: row, section: section)], with: .automatic)
             
             let group = self.safariProtection.groups.first(where: { $0.groupType == groupType })!
             let newFilterMeta = group.filters.first(where: { $0.filterId == filterId })!
@@ -128,6 +118,27 @@ extension AllSafariGroupsFiltersModel {
                 DDLogError("(AllSafariGroupsFiltersModel) - setFilter; Reload CB error when changing group=\(groupType) to state=\(enabled); Error: \(error)")
             }
         }
+    }
+    
+    func addCustomFilter(_ meta: ExtendedCustomFilterMetaProtocol, _ onFilterAdded: @escaping (Error?) -> Void) {
+        safariProtection.add(customFilter: meta, enabled: true) { error in
+            DispatchQueue.asyncSafeMain { [weak self] in
+                self?.reinit()
+                onFilterAdded(error)
+            }
+        } onCbReloaded: { error in
+            if let error = error {
+                DDLogError("(AllSafariGroupsFiltersModel) - addCustomFilter; Reload CB error when adding custom filter with url=\(meta.filterDownloadPage ?? "nil"); Error: \(error)")
+            }
+        }
+    }
+    
+    func renameFilter(withId filterId: Int, to newName: String) throws -> SafariFilterProtocol {
+        try safariProtection.renameCustomFilter(withId: filterId, to: newName)
+        reinit()
+        let group = safariProtection.groups.first(where: { $0.groupType == .custom })!
+        let newFilterMeta = group.filters.first(where: { $0.filterId == filterId })!
+        return newFilterMeta
     }
 }
 
@@ -200,6 +211,7 @@ extension AllSafariGroupsFiltersModel {
         let cell = SafariFilterCell.getCell(forTableView: tableView)
         cell.model = model
         cell.delegate = self
+        cell.updateTheme()
         return cell
     }
     
@@ -212,5 +224,19 @@ extension AllSafariGroupsFiltersModel {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
+    }
+}
+
+// MARK: - AllSafariGroupsFiltersModel + UITableViewDataSource
+
+extension AllSafariGroupsFiltersModel: NewCustomFilterDetailsControllerDelegate {
+    func customFilterWasAdded() {
+        reinit()
+        tableView?.reloadData()
+    }
+    
+    func customFilterWasRenamed(_ toName: String) {
+        reinit()
+        tableView?.reloadData()
     }
 }

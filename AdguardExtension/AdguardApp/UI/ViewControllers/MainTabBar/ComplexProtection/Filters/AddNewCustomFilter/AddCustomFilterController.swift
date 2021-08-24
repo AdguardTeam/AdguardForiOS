@@ -16,14 +16,15 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
+import UIKit
 import SafariAdGuardSDK
 
-class AddCustomFilterController: BottomAlertController {
+final class AddCustomFilterController: BottomAlertController {
     
     var type: NewFilterType = .safariCustom
     var openUrl: String?
     var openTitle: String?
+    weak var delegate: NewCustomFilterDetailsControllerDelegate?
     
     private let detailsSegueId = "showFilterDetailsSegue"
     
@@ -36,11 +37,8 @@ class AddCustomFilterController: BottomAlertController {
     @IBOutlet var themableLabels: [ThemableLabel]!
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let networking: ACNNetworking = ServiceLocator.shared.getService()!
+    private var themeObserver: NotificationToken?
     private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
-    
-    private var filter : ExtendedCustomFilterMetaProtocol?
-    var delegate: AddNewFilterDelegate?
     
     // MARK: - View Controller life cycle
     
@@ -61,12 +59,11 @@ class AddCustomFilterController: BottomAlertController {
             urlTextField.becomeFirstResponder()
         }
         
-        updateTheme()
         ruleTextChanged(urlTextField)
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
+        updateTheme()
+        themeObserver = NotificationCenter.default.observe(name: .themeChanged, object: nil, queue: .main) { [weak self] _ in
+            self?.updateTheme()
+        }
     }
     
     @IBAction func ruleTextChanged(_ sender: UITextField) {
@@ -85,9 +82,9 @@ class AddCustomFilterController: BottomAlertController {
     // MARK: - Actions
     
     @IBAction func continueAction(_ sender: Any) {
-        
         nextButton.startIndicator()
         nextButton.isEnabled = false
+        
         guard let urlString = urlTextField?.text else {
             nextButton.isEnabled = true
             nextButton.stopIndicator()
@@ -99,27 +96,15 @@ class AddCustomFilterController: BottomAlertController {
             return
         }
         
-        // todo: add this functionality to sdk
-//        let parser = AASFilterSubscriptionParser()
-//        parser.parse(from: url, networking: networking) { [weak self]  (result, error) in
-//            guard let self = self else { return }
-//            DispatchQueue.main.async {
-//                if let parserError = error {
-//                    ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: parserError.localizedDescription)
-//                    self.nextButton.isEnabled = true
-//                    self.nextButton.stopIndicator()
-//                    return
-//                }
-//
-//                if let parserResult = result {
-//                    self.filter = parserResult
-//                    self.nextButton.isEnabled = true
-//                    self.nextButton.stopIndicator()
-//                    self.presentNewCustomFilterDetailsController()
-//                    return
-//                }
-//            }
-//        }
+        let parser = CustomFilterMetaParser()
+        do {
+            let meta = try parser.getMetaFrom(url: url, for: .safari)
+            presentNewCustomFilterDetailsController(meta)
+        } catch {
+            presentSimpleAlert(title: nil, message: error.localizedDescription, onOkButtonTapped: nil)
+        }
+        nextButton.isEnabled = true
+        nextButton.stopIndicator()
     }
     
     @IBAction func cancelAction(_ sender: Any) {
@@ -128,37 +113,27 @@ class AddCustomFilterController: BottomAlertController {
     
     // MARK: - private method
     
-    private func presentNewCustomFilterDetailsController() {
+    private func presentNewCustomFilterDetailsController(_ meta: ExtendedCustomFilterMetaProtocol) {
         let presenter = presentingViewController
-        dismiss(animated: true) {[weak self] in
-            guard let self = self else { return }
-            guard let controller = self.storyboard?.instantiateViewController(withIdentifier: "NewCustomFilterDetailsController") as? NewCustomFilterDetailsController else { return }
-            controller.filterType = self.type
-            controller.filter = self.filter
-            controller.addDelegate = self.delegate
+        dismiss(animated: true) { [weak self] in
+            guard let self = self,
+                  let controller = self.storyboard?.instantiateViewController(withIdentifier: "NewCustomFilterDetailsController") as? NewCustomFilterDetailsController
+            else { return }
             
-            if let title = self.openTitle {
-                // TODO
-                //controller.filter?.name = title
-            }
-            
+            controller.delegate = self.delegate
+            let model = NewCustomFilterModel(
+                filterName: meta.name ?? "",
+                filterType: .safariCustom,
+                meta: meta
+            )
+            controller.newFilterModel = model
             presenter?.present(controller, animated: true, completion: nil)
         }
-        
     }
 }
 
 enum NewFilterType {
     case safariCustom, dnsCustom
-    
-    func getTitleText() -> String {
-        switch self {
-        case .safariCustom:
-            return String.localizedString("new_filter_title")
-        case .dnsCustom:
-            return String.localizedString("new_dns_filter_title")
-        }
-    }
 }
 
 extension AddCustomFilterController: ThemableProtocol {

@@ -62,13 +62,12 @@ final class SafariGroupFiltersModelsProvider {
                 return SafariFilterCellModel(
                     filterId: filter.filterId,
                     groupType: group.groupType,
-                    filterName: filter.name ?? "",
+                    filterNameAttrString: (filter.name ?? "").highlight(occuranciesOf: []).0,
                     isEnabled: filter.isEnabled,
                     version: filter.version,
                     lastUpdateDate: filter.lastUpdateDate,
                     tags: tagsModels,
-                    groupIsEnabled: group.isEnabled,
-                    searchAttrString: nil
+                    groupIsEnabled: group.isEnabled
                 )
             }
             self.initialFiltersModels.append(filtersModels)
@@ -120,18 +119,17 @@ final class SafariGroupFiltersModelsProvider {
             SafariTagButtonModel(tagName: $0.tagName, isLang: $0.isLang, isSelected: matchedTags.contains($0.tagName))
         }
         
-        let highlightedOccurancies = filter.filterName.highlight(occuranciesOf: words)
-        if highlightedOccurancies != nil || !matchedTags.isEmpty {
+        let highlightedOccurancies = filter.filterNameAttrString.string.highlight(occuranciesOf: words)
+        if highlightedOccurancies.1 || !matchedTags.isEmpty {
             return SafariFilterCellModel(
                 filterId: filter.filterId,
                 groupType: filter.groupType,
-                filterName: filter.filterName,
+                filterNameAttrString: highlightedOccurancies.0,
                 isEnabled: filter.isEnabled,
                 version: filter.version,
                 lastUpdateDate: filter.lastUpdateDate,
                 tags: tagModels,
-                groupIsEnabled: filter.groupIsEnabled,
-                searchAttrString: highlightedOccurancies
+                groupIsEnabled: filter.groupIsEnabled
             )
         } else {
             return nil

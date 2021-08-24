@@ -55,7 +55,7 @@ final class SafariGroupFiltersTableController: UITableViewController {
         // Setup view model
         switch displayType {
         case .one(let groupType):
-            model = OneSafariGroupFiltersModel(groupType: groupType, safariProtection: safariProtection, configuration: configuration)
+            model = OneSafariGroupFiltersModel(groupType: groupType, safariProtection: safariProtection, configuration: configuration, themeService: themeService)
             navigationItem.rightBarButtonItems = [searchButton]
         case .all:
             model = AllSafariGroupsFiltersModel(safariProtection: safariProtection, configuration: configuration)
@@ -146,6 +146,17 @@ extension SafariGroupFiltersTableController: SafariGroupFiltersModelDelegate {
         headerView?.textField.rightView?.isHidden = false
         headerView?.textField.becomeFirstResponder()
         navigationItem.rightBarButtonItems = [cancelButton]
+    }
+    
+    func addNewFilterTapped() {
+        let storyboard = UIStoryboard(name: "Filters", bundle: nil)
+        guard let controller = storyboard.instantiateViewController(withIdentifier: "AddCustomFilterController") as? AddCustomFilterController else {
+            return
+        }
+        
+        controller.type = .safariCustom
+        controller.delegate = model
+        present(controller, animated: true, completion: nil)
     }
 }
 

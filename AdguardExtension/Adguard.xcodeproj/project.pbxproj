@@ -387,6 +387,8 @@
 		7E1022CE23E1655A00604C90 /* DnsRequestDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1022CD23E1655A00604C90 /* DnsRequestDetailsController.swift */; };
 		7E103A4B23B60B7800C0C67E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 		7E1104F922DE27C700720501 /* StartupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1104F822DE27C700720501 /* StartupService.swift */; };
+		7E11568B26D38723000ADC3B /* AddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E11568A26D38723000ADC3B /* AddTableViewCell.swift */; };
+		7E11568C26D38723000ADC3B /* AddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E11568A26D38723000ADC3B /* AddTableViewCell.swift */; };
 		7E12D4FF23EA9A7B0009108D /* whotracksme.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E12D4FE23EA9A7B0009108D /* whotracksme.json */; };
 		7E12D50123EA9AAF0009108D /* adguard.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E12D50023EA9AAF0009108D /* adguard.json */; };
 		7E15720522DF2162007060D7 /* ContentBlockerStateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15720422DF2162007060D7 /* ContentBlockerStateController.swift */; };
@@ -2888,6 +2890,7 @@
 		7E0B226025DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+AdGuardVpn.swift"; sourceTree = "<group>"; };
 		7E1022CD23E1655A00604C90 /* DnsRequestDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsRequestDetailsController.swift; sourceTree = "<group>"; };
 		7E1104F822DE27C700720501 /* StartupService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartupService.swift; sourceTree = "<group>"; };
+		7E11568A26D38723000ADC3B /* AddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTableViewCell.swift; sourceTree = "<group>"; };
 		7E12D4FE23EA9A7B0009108D /* whotracksme.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = whotracksme.json; sourceTree = "<group>"; };
 		7E12D50023EA9AAF0009108D /* adguard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = adguard.json; sourceTree = "<group>"; };
 		7E15720422DF2162007060D7 /* ContentBlockerStateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerStateController.swift; sourceTree = "<group>"; };
@@ -4855,6 +4858,7 @@
 				7E92753E26C67ABA007B2C80 /* Reusable.swift */,
 				7EBDFE8C26CFA44300CCE8CC /* SwitchTableViewCell.swift */,
 				7E3FEFBF26CEBAE80080EC03 /* ExtendedTitleTableHeaderView.swift */,
+				7E11568A26D38723000ADC3B /* AddTableViewCell.swift */,
 				7E92753C26C67A26007B2C80 /* TitleTableViewCell */,
 			);
 			path = GenericCells;
@@ -7033,6 +7037,7 @@
 				247CB51A2600ADD30047974C /* IURLSchemeParametersParser.swift in Sources */,
 				D0D7E5FB24444F83001801A5 /* Constant.swift in Sources */,
 				659886801CF74DE9003ECD1C /* AEUILongLabelViewCell.m in Sources */,
+				7E11568C26D38723000ADC3B /* AddTableViewCell.swift in Sources */,
 				7E86A9BB26CBB84E000B395F /* SafariTagButton.swift in Sources */,
 				D0B545CB2435D669002F0AEC /* Confirm2FaController.swift in Sources */,
 				7EAD353C26C2D5E4001AFB3A /* DnsProviders.swift in Sources */,
@@ -7445,6 +7450,7 @@
 				65EBC2511BC2D25E00788D98 /* AEUILongLabelViewCell.m in Sources */,
 				7E3FEFB126CD37750080EC03 /* AGSearchView.swift in Sources */,
 				7E822C112435EDD30015B4D0 /* ParsedHost.swift in Sources */,
+				7E11568B26D38723000ADC3B /* AddTableViewCell.swift in Sources */,
 				65EC9C941BB9824C00F53F3B /* FMDatabaseAdditions.m in Sources */,
 				D0F9115C212DDCD3006DF0D3 /* StackElementView.swift in Sources */,
 				7EF16CB92350C7AF007E0863 /* SafariWhitelistModel.swift in Sources */,

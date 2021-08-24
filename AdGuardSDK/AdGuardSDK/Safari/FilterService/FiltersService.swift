@@ -533,7 +533,7 @@ final class FiltersService: FiltersServiceProtocol {
         let localizedFiltersMeta = try metaStorage.getLocalizedFiltersForGroup(withId: group.groupId, forLanguage: configuration.currentLanguage)
         return try localizedFiltersMeta.map { dbFilter in
             // TODO: - Maybe we should store rulesCount in database
-            let meta = getMetaForFilter(withId: dbFilter.filterId)
+            let meta = getMetaForFilter(withId: dbFilter.filterId, filterDownloadPage: dbFilter.subscriptionUrl)
             let languages = try metaStorage.getLangsForFilter(withId: dbFilter.filterId)
             let tags = try metaStorage.getTagsForFilter(withId: dbFilter.filterId)
             return SafariGroup.Filter(dbFilter: dbFilter,
@@ -546,14 +546,14 @@ final class FiltersService: FiltersServiceProtocol {
     }
     
     /* Gets filter file content, parses it's meta and returns it */
-    private func getMetaForFilter(withId id: Int) -> ExtendedCustomFilterMetaProtocol? {
+    private func getMetaForFilter(withId id: Int, filterDownloadPage: String?) -> ExtendedCustomFilterMetaProtocol? {
         guard let filterContent = filterFilesStorage.getFilterContentForFilter(withId: id) else {
             Logger.logError("(FiltersService) - getRulesCountForFilter; received nil for filter with id=\(id)")
             return nil
         }
         
         do {
-            return try metaParser.parse(filterContent, for: .safari)
+            return try metaParser.parse(filterContent, for: .safari, filterDownloadPage: filterDownloadPage)
         } catch {
             Logger.logError("(FiltersService) - getRulesCountForFilter; received error for filter with id=\(id); error: \(error)")
             return nil

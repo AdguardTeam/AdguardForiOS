@@ -112,7 +112,7 @@ extension AGSearchView: ThemableProtocol {
         backgroundColor = themeService.backgroundColor
         textField.themeChanged()
         textField.tintColor = themeService.grayTextColor
-        textField.backgroundColor = themeService.bottomBarBackgroundColor
+        textField.backgroundColor = themeService.selectedCellColor
         textField.textColor = themeService.grayTextColor
     }
 }

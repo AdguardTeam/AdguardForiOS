@@ -20,6 +20,20 @@ import Foundation
 
 extension UIViewController {
     
+    /* Presents Alert with provided title and message */
+    func presentSimpleAlert(title: String?, message: String?, onOkButtonTapped: (() -> Void)? = nil) {
+        DispatchQueue.asyncSafeMain { [weak self] in
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: String.localizedString("common_action_ok"), style: .default) { _ in
+                onOkButtonTapped?()
+            }
+            alert.addAction(okAction)
+            
+            self?.present(alert, animated: true, completion: nil)
+        }
+    }
+    
     func showVideoTutorial(){
         DispatchQueue.main.async { [weak self] in
             let storyboard = UIStoryboard(name: "Tutorial", bundle: nil)
