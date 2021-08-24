@@ -158,8 +158,6 @@ extension OneSafariGroupFiltersModel {
     func renameFilter(withId filterId: Int, to newName: String) throws -> SafariFilterProtocol {
         try safariProtection.renameCustomFilter(withId: filterId, to: newName)
         reinit()
-        tableView?.reloadSections(IndexSet(integer: Section.filters.rawValue), with: .automatic)
-        
         let newFilterMeta = group.filters.first(where: { $0.filterId == filterId })!
         return newFilterMeta
     }

@@ -232,11 +232,9 @@ extension AllSafariGroupsFiltersModel {
 extension AllSafariGroupsFiltersModel: NewCustomFilterDetailsControllerDelegate {
     func customFilterWasAdded() {
         reinit()
-        tableView?.reloadData()
     }
     
     func customFilterWasRenamed(_ toName: String) {
         reinit()
-        tableView?.reloadData()
     }
 }
