@@ -16,7 +16,7 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import SQLite
+@_implementationOnly import SQLite
 
 extension Connection {
     /// Returns number of records in the specified `table`

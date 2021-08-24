@@ -17,7 +17,7 @@
 */
 
 import Foundation
-import SQLite
+@_implementationOnly import SQLite
 
 /* FilterTagsTable; filter_tags table */
 struct FilterTagsTable {
