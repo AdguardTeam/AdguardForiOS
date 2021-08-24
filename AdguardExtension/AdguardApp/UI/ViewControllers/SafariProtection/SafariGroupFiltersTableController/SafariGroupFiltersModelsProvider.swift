@@ -62,7 +62,7 @@ final class SafariGroupFiltersModelsProvider {
                 return SafariFilterCellModel(
                     filterId: filter.filterId,
                     groupType: group.groupType,
-                    filterNameAttrString: (filter.name ?? "").highlight(occuranciesOf: []).0,
+                    filterNameAttrString: (filter.name ?? "").highlight(occuranciesOf: []).attrString,
                     isEnabled: filter.isEnabled,
                     version: filter.version,
                     lastUpdateDate: filter.lastUpdateDate,
@@ -120,11 +120,11 @@ final class SafariGroupFiltersModelsProvider {
         }
         
         let highlightedOccurancies = filter.filterNameAttrString.string.highlight(occuranciesOf: words)
-        if highlightedOccurancies.1 || !matchedTags.isEmpty {
+        if highlightedOccurancies.matchesFound || !matchedTags.isEmpty {
             return SafariFilterCellModel(
                 filterId: filter.filterId,
                 groupType: filter.groupType,
-                filterNameAttrString: highlightedOccurancies.0,
+                filterNameAttrString: highlightedOccurancies.attrString,
                 isEnabled: filter.isEnabled,
                 version: filter.version,
                 lastUpdateDate: filter.lastUpdateDate,

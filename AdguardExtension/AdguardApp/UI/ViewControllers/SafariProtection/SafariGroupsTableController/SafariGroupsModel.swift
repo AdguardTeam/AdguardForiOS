@@ -82,7 +82,7 @@ final class SafariGroupsModel {
     private func createModels() {
         let groupsFromSDK = safariProtection.groups
         self.groups = groupsFromSDK.map {
-            return SafariProtectionGroupCellModel(group: $0 as! SafariGroup, proStatus: configuration.proStatus)
+            return SafariProtectionGroupCellModel(group: $0, proStatus: configuration.proStatus)
         }
     }
 }

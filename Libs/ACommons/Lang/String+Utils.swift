@@ -114,7 +114,7 @@ extension String {
     
     /// Returns tuple with attributed string that highlight passed occurancies and `found` flag
     /// It is true if any occurancies were found
-    func highlight(occuranciesOf strings: Set<String>) -> (NSAttributedString, Bool) {
+    func highlight(occuranciesOf strings: Set<String>) -> (attrString: NSAttributedString, matchesFound: Bool) {
         let attributedString = NSMutableAttributedString(string: self)
         attributedString.addAttribute(NSAttributedString.Key.backgroundColor, value: UIColor.clear, range: NSRange(location: 0, length: self.count))
         guard !strings.isEmpty else { return (attributedString, false) }
