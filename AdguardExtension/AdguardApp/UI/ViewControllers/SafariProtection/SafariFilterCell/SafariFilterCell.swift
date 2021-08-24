@@ -22,26 +22,24 @@ import SafariAdGuardSDK
 struct SafariFilterCellModel {
     let filterId: Int // Filter unique identifier
     let groupType: SafariGroup.GroupType // Filter group type
-    let filterName: String // Filter name
+    let filterNameAttrString: NSAttributedString // Filter name
     let isEnabled: Bool // Filter state
     let version: String? // Filter version. Filter content always changes by it's authors, so we store the version of filter to identify it
     let lastUpdateDate: Date? // The last time the filter was updated
     let tags: [SafariTagButtonModel] // Some tags that filters can be grouped by
     let groupIsEnabled: Bool // Every filter belongs to group. If group is disabled cell alpha will be 0.5
-    let searchAttrString: NSAttributedString? // Higlighted search string
 }
 
 extension SafariFilterCellModel {
     init() {
         self.filterId = 0
         self.groupType = .ads
-        self.filterName = ""
+        self.filterNameAttrString = NSAttributedString(string: "")
         self.isEnabled = false
         self.version = nil
         self.lastUpdateDate = nil
         self.tags = []
         self.groupIsEnabled = false
-        self.searchAttrString = nil
     }
 }
 
@@ -71,7 +69,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 16.0, weight: .regular)
         label.textAlignment = .left
-        label.text = model.filterName
+        label.attributedText = model.filterNameAttrString
         return label
     }()
     
@@ -125,14 +123,12 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         super.init(coder: coder)
         self.lastFrame = frame
         setupUiWithTags()
-        setupTheme()
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.lastFrame = frame
         setupUiWithTags()
-        setupTheme()
     }
     
     override func layoutSubviews() {
@@ -143,16 +139,15 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         }
     }
     
-    // MARK: - Private methods
-    
-    private func setupTheme() {
-        updateTheme()
-        
-        themeObserver = NotificationCenter.default.observe(name: .themeChanged, object: nil, queue: .main) { [weak self] _ in
-            self?.updateTheme()
-        }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        titleLabel.text = nil
+        titleLabel.attributedText = nil
+        descriptionLabels.forEach { $0.text = nil }
     }
     
+    // MARK: - Private methods
+
     private func setupUiWithTags() {
         contentView.subviews.forEach { $0.removeFromSuperview() }
         contentView.addSubview(stateSwitch)
@@ -198,11 +193,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         
         stateSwitch.isOn = model.isEnabled
         
-        if let highlitghtedString = model.searchAttrString {
-            titleLabel.attributedText = highlitghtedString
-        } else {
-            titleLabel.text = model.filterName
-        }
+        titleLabel.attributedText = model.filterNameAttrString
         stackView.addArrangedSubview(titleLabel)
         
         if let version = model.version {

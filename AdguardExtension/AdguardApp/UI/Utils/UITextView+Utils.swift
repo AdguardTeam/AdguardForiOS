@@ -32,7 +32,7 @@ extension UITextView {
         textAlignment: NSTextAlignment = .left,
         lineBreakMode: NSLineBreakMode = .byWordWrapping
     ) {
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.asyncSafeMain { [weak self] in
             let text = NSMutableAttributedString.fromHtml(
                 html,
                 fontSize: fontSize,

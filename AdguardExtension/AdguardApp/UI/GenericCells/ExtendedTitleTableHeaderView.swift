@@ -76,18 +76,18 @@ final class ExtendedTitleTableHeaderView: UIView {
         self.title = title
         self.descr = normalDescription
         super.init(frame: .zero)
+        setNormalTitle(normalDescription)
         setupUI()
         setupTheme()
-        setNormalTitle(normalDescription)
     }
     
     init(title: String, htmlDescription: String) {
         self.title = title
         self.descr = htmlDescription
         super.init(frame: .zero)
+        setAttributedTitle(htmlDescription)
         setupUI()
         setupTheme()
-        setAttributedTitle(htmlDescription)
     }
     
     // MARK: - Public methods
@@ -133,6 +133,7 @@ final class ExtendedTitleTableHeaderView: UIView {
     }
     
     private func setupTextView() {
+        descriptionTextView.backgroundColor = .clear
         descriptionTextView.setAttributedTitle(
             descr,
             fontSize: descriptionTextView.font!.pointSize,

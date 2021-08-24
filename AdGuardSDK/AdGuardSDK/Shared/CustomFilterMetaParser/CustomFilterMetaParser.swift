@@ -45,13 +45,13 @@ public protocol CustomFilterMetaParserProtocol {
      - Throws: Throws an error if parsing fails
      - Returns: FilterMetadata object
      */
-    func parse(_ filterFileContentString: String, for parserType: CustomFilterMetaParserType) throws -> ExtendedCustomFilterMetaProtocol
+    func parse(_ filterFileContentString: String, for parserType: CustomFilterMetaParserType, filterDownloadPage: String?) throws -> ExtendedCustomFilterMetaProtocol
 }
 
 // MARK: - CustomFilterMetaParserProtocol + default implementation
 
-extension CustomFilterMetaParserProtocol {
-    func parse(_ filterFileContentString: String, for parserType: CustomFilterMetaParserType) throws -> ExtendedCustomFilterMetaProtocol {
+public extension CustomFilterMetaParserProtocol {
+    func parse(_ filterFileContentString: String, for parserType: CustomFilterMetaParserType, filterDownloadPage: String?) throws -> ExtendedCustomFilterMetaProtocol {
         
         // Check if file's content is valid
         guard !isInvalid(content: filterFileContentString) else {
@@ -72,7 +72,7 @@ extension CustomFilterMetaParserProtocol {
         var licensePage: String?
         var issuesReportPage: String?
         var communityPage: String?
-        var filterDownloadPage: String?
+        var filterDownloadPageInternal: String?
         var rulesCount: Int = 0
         
         // Iterating over file's content line by line
@@ -95,7 +95,7 @@ extension CustomFilterMetaParserProtocol {
                               &licensePage,
                               &issuesReportPage,
                               &communityPage,
-                              &filterDownloadPage)
+                              &filterDownloadPageInternal)
                 return
             }
             
@@ -122,17 +122,19 @@ extension CustomFilterMetaParserProtocol {
         }
         
         // Return result object when all lines are parsed
-        return CustomFilterMeta(name: name,
-                              description: description,
-                              version: version,
-                              lastUpdateDate: lastUpdateDate,
-                              updateFrequency: updateFrequency,
-                              homePage: homePage,
-                              licensePage: licensePage,
-                              issuesReportPage: issuesReportPage,
-                              communityPage: communityPage,
-                              filterDownloadPage: filterDownloadPage,
-                              rulesCount: rulesCount)
+        return CustomFilterMeta(
+            name: name,
+            description: description,
+            version: version,
+            lastUpdateDate: lastUpdateDate,
+            updateFrequency: updateFrequency,
+            homePage: homePage,
+            licensePage: licensePage,
+            issuesReportPage: issuesReportPage,
+            communityPage: communityPage,
+            filterDownloadPage: filterDownloadPage ?? filterDownloadPageInternal,
+            rulesCount: rulesCount
+        )
     }
     
     
@@ -253,11 +255,13 @@ public extension CustomFilterMetaParserProtocol {
      */
     func getMetaFrom(url: URL, for parserType: CustomFilterMetaParserType) throws -> ExtendedCustomFilterMetaProtocol {
         let filterContent = try String(contentsOf: url)
-        return try parse(filterContent, for: parserType)
+        return try parse(filterContent, for: parserType, filterDownloadPage: url.absoluteString)
     }
 }
 
 
 // MARK: - FilterMetadataParser
 
-struct CustomFilterMetaParser: CustomFilterMetaParserProtocol {}
+public struct CustomFilterMetaParser: CustomFilterMetaParserProtocol {
+    public init() {}
+}

@@ -19,9 +19,8 @@
 import UIKit
 import SafariAdGuardSDK
 
-protocol FilterDetailsViewControllerDelegate: AnyObject {
+protocol FilterDetailsViewControllerDelegate: NewCustomFilterDetailsControllerDelegate {
     func deleteFilter(with groupId: Int, filterId: Int, onFilterDeleted: @escaping () -> Void)
-    func editFilter(with groupId: Int, filterId: Int, onFilterEdited: @escaping (_ newFilterMeta: SafariFilterProtocol) -> Void)
     func setFilter(with groupId: Int, filterId: Int, enabled: Bool, onFilterSet: @escaping  (_ newFilterMeta: SafariFilterProtocol) -> Void)
 }
 
@@ -34,7 +33,7 @@ final class FilterDetailsViewController: UIViewController {
     @IBOutlet weak var stackViewHeightConstraint: NSLayoutConstraint!
     // MARK: - Public properties
     
-    weak var delegate: FilterDetailsViewControllerDelegate?
+    weak var delegate: FilterDetailsViewControllerDelegate!
     var filterMeta: SafariFilterProtocol!
     
     // MARK: - Private properties
@@ -50,6 +49,7 @@ final class FilterDetailsViewController: UIViewController {
         
         processBottomButtons()
         setupBackButton()
+        
         updateTheme()
         setupTableView()
         tableView.tableHeaderView = ExtendedTitleTableHeaderView(title: filterMeta.name ?? "", normalDescription: filterMeta.description ?? "")
@@ -69,7 +69,7 @@ final class FilterDetailsViewController: UIViewController {
     private func setupTableView() {
         model = FilterDetailsViewModel(filterMeta: filterMeta, themeService: themeService)
         model.delegate = self
-        
+        tableView.backgroundColor = .clear
         tableView.delegate = model
         tableView.dataSource = model
         tableView.separatorStyle = .none
@@ -85,7 +85,7 @@ final class FilterDetailsViewController: UIViewController {
             let button = button(withTitle: title)
             button.applyStandardOpaqueStyle()
             button.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
-            button.addTarget(self, action: #selector(editButtonTapped), for: .touchUpOutside)
+            button.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
             
             buttonsStackView.addArrangedSubview(button)
             stackViewHeightConstraint.constant = 40.0
@@ -96,7 +96,7 @@ final class FilterDetailsViewController: UIViewController {
             let button = button(withTitle: title)
             button.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.red)
             button.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
-            button.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpOutside)
+            button.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
             
             buttonsStackView.addArrangedSubview(button)
             if buttonsStackView.arrangedSubviews.isEmpty {
@@ -115,19 +115,38 @@ final class FilterDetailsViewController: UIViewController {
     }
     
     @objc private final func editButtonTapped() {
-        delegate?.editFilter(with: filterMeta.group.groupId, filterId: filterMeta.filterId) { newFilterMeta in
-            DispatchQueue.asyncSafeMain { [weak self] in
-                self?.filterMeta = newFilterMeta
-                self?.setupTableView()
-                self?.tableView.reloadData()
-            }
+        let storyboard = UIStoryboard(name: "Filters", bundle: nil)
+        guard let controller = storyboard.instantiateViewController(withIdentifier: "NewCustomFilterDetailsController") as? NewCustomFilterDetailsController else {
+            return
         }
+        let model = EditCustomFilterModel(
+            filterName: filterMeta.name ?? "",
+            filterId: filterMeta.filterId,
+            rulesCount: filterMeta.rulesCount ?? 0,
+            homePage: filterMeta.homePage
+        )
+        controller.editFilterModel = model
+        controller.delegate = self
+        present(controller, animated: true, completion: nil)
     }
     
     @objc private final func deleteButtonTapped() {
         delegate?.deleteFilter(with: filterMeta.group.groupId, filterId: filterMeta.filterId) {
             DispatchQueue.asyncSafeMain { [weak self] in
                 self?.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+    
+    private func apply(newFilterMeta: SafariFilterProtocol) {
+        DispatchQueue.asyncSafeMain { [weak self] in
+            self?.filterMeta = newFilterMeta
+            self?.setupTableView()
+            self?.tableView.reloadData()
+            if let header = self?.tableView.tableHeaderView as? ExtendedTitleTableHeaderView {
+                header.title = newFilterMeta.name ?? ""
+                header.setNormalTitle(newFilterMeta.description ?? "")
+                self?.tableView.layoutTableHeaderView()
             }
         }
     }
@@ -138,18 +157,24 @@ final class FilterDetailsViewController: UIViewController {
 
 extension FilterDetailsViewController: SwitchTableViewCellDelegate {
     func switchStateChanged(to enabled: Bool) {
-        delegate?.setFilter(with: filterMeta.group.groupId, filterId: filterMeta.filterId, enabled: enabled) { newFilterMeta in
-            DispatchQueue.asyncSafeMain { [weak self] in
-                self?.filterMeta = newFilterMeta
-                self?.setupTableView()
-                self?.tableView.reloadData()
-                if let header = self?.tableView.tableHeaderView as? ExtendedTitleTableHeaderView {
-                    header.title = newFilterMeta.name ?? ""
-                    header.setNormalTitle(newFilterMeta.description ?? "")
-                    self?.tableView.layoutTableHeaderView()
-                }
-            }
+        delegate.setFilter(with: filterMeta.group.groupId, filterId: filterMeta.filterId, enabled: enabled) { [weak self] newFilterMeta in
+            self?.apply(newFilterMeta: newFilterMeta)
         }
+    }
+}
+
+// MARK: - FilterDetailsViewController + NewCustomFilterDetailsControllerDelegate
+
+extension FilterDetailsViewController: NewCustomFilterDetailsControllerDelegate {
+    
+    func addCustomFilter(_ meta: ExtendedCustomFilterMetaProtocol, _ onFilterAdded: @escaping (Error?) -> Void) {
+        delegate.addCustomFilter(meta, onFilterAdded)
+    }
+    
+    func renameFilter(withId filterId: Int, to newName: String) throws -> SafariFilterProtocol {
+        let newFilterMeta = try delegate.renameFilter(withId: filterId, to: newName)
+        apply(newFilterMeta: newFilterMeta)
+        return newFilterMeta
     }
 }
 
@@ -159,5 +184,6 @@ extension FilterDetailsViewController: ThemableProtocol {
     func updateTheme() {
         view.backgroundColor = themeService.backgroundColor
         themeService.setupTable(tableView)
+        tableView.reloadData()
     }
 }

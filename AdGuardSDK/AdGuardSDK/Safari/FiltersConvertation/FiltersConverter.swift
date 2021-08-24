@@ -150,7 +150,7 @@ struct FiltersConverter: FiltersConverterProtocol {
     
         for (cbType, rules) in filters {
             guard let result = converter.convertArray(rules: rules, limit: contentBlockerRulesLimit, optimize: false, advancedBlocking: false, cbType: cbType) else {
-                Logger.logError("FiltersCoverter error - can not convert filter with type: \(cbType)")
+                Logger.logError("FiltersConverter error - can not convert filter with type: \(cbType)")
                 continue
             }
             Logger.logInfo("FiltersCoverter result: \(result.message)")

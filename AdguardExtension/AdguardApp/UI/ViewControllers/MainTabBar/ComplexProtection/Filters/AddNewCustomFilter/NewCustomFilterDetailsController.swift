@@ -19,42 +19,35 @@
 import Foundation
 import SafariAdGuardSDK
 
-protocol AddNewFilterDelegate {
-    func addCustomFilter(filter: ExtendedCustomFilterMetaProtocol)
-}
-
-protocol EditFilterDelegate {
-    func renameFilter(newName: String)
+protocol NewCustomFilterDetailsControllerDelegate: AnyObject {
+    func addCustomFilter(_ meta: ExtendedCustomFilterMetaProtocol, _ onFilterAdded: @escaping (Error?) -> Void)
+    func renameFilter(withId filterId: Int, to newName: String) throws -> SafariFilterProtocol
 }
 
 enum ControllerModeType {
     case addingFilter, editingFilter
 }
 
-protocol NewCustomFilterDetailsControllerInterface {
-    var name: String? { get }
-    var rulesCount: Int? { get }
-    var homepage: String? { get }
+struct NewCustomFilterModel {
+    let filterName: String
+    let filterType: NewFilterType
+    let meta: ExtendedCustomFilterMetaProtocol
 }
 
-struct NewCustomFilterDetailsControllerModel: NewCustomFilterDetailsControllerInterface {
-    var name: String?
-    var rulesCount: Int?
-    var homepage: String?
+struct EditCustomFilterModel {
+    let filterName: String
+    let filterId: Int
+    let rulesCount: Int
+    let homePage: String?
 }
 
-class NewCustomFilterDetailsController : BottomAlertController {
+final class NewCustomFilterDetailsController: BottomAlertController {
     
-    var filterType: NewFilterType = .safariCustom
-    var controllerModeType: ControllerModeType = .addingFilter
+    var newFilterModel: NewCustomFilterModel?
+    var editFilterModel: EditCustomFilterModel?
     
-    var model: NewCustomFilterDetailsControllerInterface? = nil
-    var filter : ExtendedCustomFilterMetaProtocol?
+    weak var delegate: NewCustomFilterDetailsControllerDelegate?
     
-    var addDelegate : AddNewFilterDelegate?
-    var editDelegate: EditFilterDelegate?
-    
-    private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
     private var homepageLink: String?
@@ -78,10 +71,12 @@ class NewCustomFilterDetailsController : BottomAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if controllerModeType == .addingFilter {
-            setupAddingNewFilter()
+        if let newFilterModel = newFilterModel {
+            setupAddingNewFilter(newFilterModel)
+        } else if let editFilterModel = editFilterModel {
+            setupEditingFilter(editFilterModel)
         } else {
-            setupEditingFilter()
+            return
         }
         
         updateTheme()
@@ -92,17 +87,15 @@ class NewCustomFilterDetailsController : BottomAlertController {
     }
     
     // MARK: - Actions
-    @IBAction func AddAction(_ sender: Any) {
-        if controllerModeType == .addingFilter {
-            // TODO
-            //filter?.name = ((name.text == nil || name.text == "") ? filter?.name : name.text) ?? ""
-            addDelegate?.addCustomFilter(filter: filter!)
-        } else if controllerModeType == .editingFilter {
-            if let newName = (name.text == nil || name.text == "") ? model?.name : name.text {
-                editDelegate?.renameFilter(newName: newName)
-            }
+    @IBAction func addAction(_ sender: Any) {
+        addButton.isEnabled = false
+        if let newFilterModel = newFilterModel {
+            addCustomFilter(newFilterModel)
+        } else if let editFilterModel = editFilterModel {
+            editFilter(editFilterModel)
+        } else {
+            return
         }
-        dismiss(animated: true)
     }
     
     @IBAction func cancelAction(_ sender: Any) {
@@ -121,7 +114,7 @@ class NewCustomFilterDetailsController : BottomAlertController {
         let currentText = textField.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-        if  updatedText.count >= textFieldCharectersLimit {
+        if updatedText.count >= textFieldCharectersLimit {
             textField.text = String(updatedText.prefix(textFieldCharectersLimit))
             return false
         }
@@ -138,14 +131,59 @@ class NewCustomFilterDetailsController : BottomAlertController {
     
     // MARK: - private methods
     
-    private func setupAddingNewFilter() {
-        newFilterTitle.text = filterType.getTitleText()
+    private func addCustomFilter(_ model: NewCustomFilterModel) {
+        guard let filterName = name.text, !filterName.isEmpty else {
+            return
+        }
         
-        name.text = String(filter?.name?.prefix(textFieldCharectersLimit) ?? "")
-        let count: Int = filter?.rulesCount ?? 0
-        rulesCount.text = String(count)
+        let meta = CustomFilterMeta(
+            name: filterName,
+            description: model.meta.description,
+            version: model.meta.version,
+            lastUpdateDate: model.meta.lastUpdateDate,
+            updateFrequency: model.meta.updateFrequency,
+            homePage: model.meta.homePage,
+            licensePage: model.meta.licensePage,
+            issuesReportPage: model.meta.issuesReportPage,
+            communityPage: model.meta.communityPage,
+            filterDownloadPage: model.meta.filterDownloadPage,
+            rulesCount: model.meta.rulesCount
+        )
+        delegate?.addCustomFilter(meta) { [weak self] error in
+            if let error = error {
+                DDLogError("(NewCustomFilterDetailsController) - addCustomFilter; Error adding custom filter to DB; Error: \(error)")
+                self?.showErrorAlert()
+                self?.addButton.isEnabled = true
+                return
+            }
+            DispatchQueue.asyncSafeMain { [weak self] in
+                self?.dismiss(animated: true)
+            }
+        }
+    }
+    
+    private func editFilter(_ model: EditCustomFilterModel) {
+        guard let filterName = name.text, !filterName.isEmpty else {
+            return
+        }
         
-        if let homepageUrl = filter?.homePage, homepageUrl.count > 0 {
+        do {
+            let _ = try delegate?.renameFilter(withId: model.filterId, to: filterName)
+            addButton.isEnabled = true
+            dismiss(animated: true)
+        } catch {
+            DDLogError("(NewCustomFilterDetailsController) - addAction; Error renaming filter; Error: \(error)")
+            showErrorAlert()
+        }
+    }
+    
+    private func setupAddingNewFilter(_ model: NewCustomFilterModel) {
+        newFilterTitle.text = model.filterType.title
+        
+        name.text = model.filterName
+        rulesCount.text = String(model.meta.rulesCount)
+        
+        if let homepageUrl = model.meta.homePage, homepageUrl.count > 0 {
             homepageLink = homepageUrl
             homepage.attributedText = makeAttributedLink(with: homepageUrl)
             homepageTopConstraint.constant = 52.0
@@ -158,12 +196,12 @@ class NewCustomFilterDetailsController : BottomAlertController {
         addButton.setTitle(String.localizedString("common_add").uppercased(), for: .normal)
     }
     
-    private func setupEditingFilter() {
+    private func setupEditingFilter(_ model: EditCustomFilterModel) {
         newFilterTitle.text = String.localizedString("edit_custom_filter_title")
-        name.text = String(model?.name?.prefix(textFieldCharectersLimit) ?? "")
-        rulesCount.text = String(model?.rulesCount ?? 0)
+        name.text = model.filterName
+        rulesCount.text = String(model.rulesCount)
         
-        if let homepageUrl = model?.homepage, homepageUrl.count > 0 {
+        if let homepageUrl = model.homePage, homepageUrl.count > 0 {
             homepageLink = homepageUrl
             homepage.attributedText = makeAttributedLink(with: homepageUrl)
             homepageTopConstraint.constant = 52.0
@@ -177,7 +215,7 @@ class NewCustomFilterDetailsController : BottomAlertController {
     }
     
     private func makeAttributedLink(with url: String) -> NSAttributedString {
-        let homepageString = ACLocalizedString("homepage_title", nil) + "  "
+        let homepageString = String.localizedString("homepage_title")
         
         let homepageAttributedString = NSAttributedString(string: homepageString)
         let urlAttributedString = NSMutableAttributedString(string: url)
@@ -196,6 +234,12 @@ class NewCustomFilterDetailsController : BottomAlertController {
         
         return returnString
     }
+    
+    private func showErrorAlert() {
+        let title = String.localizedString("common_error_title")
+        let message = String.localizedString("unknown_error_description")
+        presentSimpleAlert(title: title, message: message, onOkButtonTapped: nil)
+    }
 }
 
 extension NewCustomFilterDetailsController: ThemableProtocol {
@@ -204,5 +248,16 @@ extension NewCustomFilterDetailsController: ThemableProtocol {
         contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupTextField(name)
         theme.setupPopupLabels(themableLabels)
+    }
+}
+
+fileprivate extension NewFilterType {
+    var title: String {
+        switch self {
+        case .safariCustom:
+            return String.localizedString("new_filter_title")
+        case .dnsCustom:
+            return String.localizedString("new_dns_filter_title")
+        }
     }
 }

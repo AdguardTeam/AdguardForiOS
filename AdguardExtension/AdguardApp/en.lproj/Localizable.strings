@@ -19,6 +19,9 @@
 /* Alert title. On error. */
 "common_error_title" = "Error";
 
+/* Unknown error desription */
+"unknown_error_description" = "An unknown error occurred";
+
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Filters couldn't be loaded into Safari, so your recent changes were not applied.";
 
@@ -504,6 +507,9 @@
 
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "Add a new rule";
+
+/* (OneSafariGroupFiltersModel) Add new filter title */
+"add_new_filter" = "Add a filter";
 
 /* confirm reset lert text */
 "confirm_reset_text" = "All settings, including user rules, DNS protection, interface and authorization settings, will be reset. This operation cannot be undone. Reset the settings?";

@@ -144,6 +144,7 @@ extension SafariGroupTableController {
         if indexPath.section == titleSection {
             let cell = TitleTableViewCell.getCell(forTableView: tableView)
             cell.title = String.localizedString("navigation_item_filters_title")
+            cell.updateTheme(themeService)
             return cell
         } else {
             let cell = SafariProtectionGroupCell.getCell(forTableView: tableView)

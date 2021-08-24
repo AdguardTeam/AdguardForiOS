@@ -29,16 +29,30 @@ public extension ExtendedCustomFilterMetaProtocol {
     static var baseCustomFilterId: Int { 100_000 }
 }
 
-struct CustomFilterMeta: ExtendedCustomFilterMetaProtocol {
-    let name: String? // key: 'Title'
-    let description: String? // key: 'Description'
-    let version: String? // key: 'Version'; Filter version
-    let lastUpdateDate: Date? // keys: 'Last Modified', 'TimeUpdated'; The date when the filter was last updated on the server-side
-    let updateFrequency: Int? // key: 'Expires' Filter update frequency in seconds, shows how often we should update it
-    let homePage: String? // key: 'Homepage'
-    let licensePage: String? // keys: 'Licence', 'License'
-    let issuesReportPage: String? // key: 'Reporting Issues'
-    let communityPage: String? // key: 'Community'
-    let filterDownloadPage: String? // key: 'Download'
-    let rulesCount: Int
+public struct CustomFilterMeta: ExtendedCustomFilterMetaProtocol {
+    public let name: String? // key: 'Title'
+    public let description: String? // key: 'Description'
+    public let version: String? // key: 'Version'; Filter version
+    public let lastUpdateDate: Date? // keys: 'Last Modified', 'TimeUpdated'; The date when the filter was last updated on the server-side
+    public let updateFrequency: Int? // key: 'Expires' Filter update frequency in seconds, shows how often we should update it
+    public let homePage: String? // key: 'Homepage'
+    public let licensePage: String? // keys: 'Licence', 'License'
+    public let issuesReportPage: String? // key: 'Reporting Issues'
+    public let communityPage: String? // key: 'Community'
+    public let filterDownloadPage: String? // key: 'Download'
+    public let rulesCount: Int
+    
+    public init(name: String?, description: String?, version: String?, lastUpdateDate: Date?, updateFrequency: Int?, homePage: String?, licensePage: String?, issuesReportPage: String?, communityPage: String?, filterDownloadPage: String?, rulesCount: Int) {
+        self.name = name
+        self.description = description
+        self.version = version
+        self.lastUpdateDate = lastUpdateDate
+        self.updateFrequency = updateFrequency
+        self.homePage = homePage
+        self.licensePage = licensePage
+        self.issuesReportPage = issuesReportPage
+        self.communityPage = communityPage
+        self.filterDownloadPage = filterDownloadPage
+        self.rulesCount = rulesCount
+    }
 }

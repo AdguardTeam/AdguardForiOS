@@ -17,7 +17,7 @@
 */
 
 import Foundation
-import SQLite
+@_implementationOnly import SQLite
 
 // MARK: - FiltersMetaStorageProtocol + Filters methods
 
@@ -46,17 +46,17 @@ struct FiltersTable: Equatable {
     static let filterId = Expression<Int>("filter_id")
     static let groupId = Expression<Int>("group_id")
     static let isEnabled = Expression<Bool>("is_enabled")
-    static let version = Expression<String>("version")
+    static let version = Expression<String?>("version")
     static let lastUpdateTime = Expression<Date>("last_update_time")
     static let lastCheckTime = Expression<Date>("last_check_time")
     static let editable = Expression<Bool>("editable")
     static let displayNumber = Expression<Int>("display_number")
-    static let name = Expression<String>("name")
-    static let description = Expression<String>("description")
-    static let homePage = Expression<String>("homepage")
+    static let name = Expression<String?>("name")
+    static let description = Expression<String?>("description")
+    static let homePage = Expression<String?>("homepage")
     static let removable = Expression<Bool>("removable")
-    static let expires = Expression<Int>("expires")
-    static let subscriptionUrl = Expression<String>("subscriptionUrl")
+    static let expires = Expression<Int?>("expires")
+    static let subscriptionUrl = Expression<String?>("subscriptionUrl")
     
     // Localized initializer
     init(dbFilter: Row, localizedName: String, localizedDescription: String) {
@@ -86,8 +86,8 @@ struct FiltersTable: Equatable {
         self.lastCheckTime = dbFilter[FiltersTable.lastCheckTime]
         self.editable = dbFilter[FiltersTable.editable]
         self.displayNumber = dbFilter[FiltersTable.displayNumber]
-        self.name = dbFilter[FiltersTable.name]
-        self.description = dbFilter[FiltersTable.description]
+        self.name = dbFilter[FiltersTable.name] ?? ""
+        self.description = dbFilter[FiltersTable.description] ?? ""
         self.homePage = dbFilter[FiltersTable.homePage]
         self.removable = dbFilter[FiltersTable.removable]
         self.expires = dbFilter[FiltersTable.expires]
@@ -117,38 +117,23 @@ struct FiltersTable: Equatable {
 
 fileprivate extension ExtendedFilterMetaProtocol {
     var updateSetters: [Setter] {
-        var sttrs: [Setter] = [FiltersTable.groupId <- self.group.groupId,
-                               FiltersTable.displayNumber <- self.displayNumber]
-        
-        if let version = self.version {
-            sttrs.append(FiltersTable.version <- version)
-        }
-        if let name =  self.name {
-            sttrs.append(FiltersTable.name <- name)
-        }
-        if let description = self.description {
-            sttrs.append(FiltersTable.description <- description)
-        }
-        if let homePage = self.homePage {
-            sttrs.append(FiltersTable.homePage <- homePage)
-        }
-        if let expires = self.updateFrequency {
-            sttrs.append(FiltersTable.expires <- expires)
-        }
-        if let subscriptionUrl = self.filterDownloadPage {
-            sttrs.append(FiltersTable.subscriptionUrl <- subscriptionUrl)
-        }
-        
+        let sttrs: [Setter] = [
+            FiltersTable.groupId <- self.group.groupId,
+            FiltersTable.displayNumber <- self.displayNumber,
+            FiltersTable.version <- self.version,
+            FiltersTable.name <- self.name,
+            FiltersTable.description <- self.description,
+            FiltersTable.homePage <- self.homePage,
+            FiltersTable.expires <- self.updateFrequency,
+            FiltersTable.subscriptionUrl <- self.filterDownloadPage
+        ]
         return sttrs
     }
     
-    func getDbAddSetters(isEnabled: Bool?) -> [Setter] {
+    func getDbAddSetters(isEnabled: Bool) -> [Setter] {
         var sttrs: [Setter] = updateSetters
         sttrs.append(FiltersTable.filterId <- self.filterId)
-        
-        if let isEnabled = isEnabled {
-            sttrs.append(FiltersTable.isEnabled <- isEnabled)
-        }
+        sttrs.append(FiltersTable.isEnabled <- isEnabled)
         
         return sttrs
     }

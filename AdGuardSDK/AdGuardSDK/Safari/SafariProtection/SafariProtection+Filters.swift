@@ -22,7 +22,7 @@ public protocol SafariProtectionFiltersProtocol {
     /**
      Returns all Groups objects
      */
-    var groups: [SafariGroupProtocol] { get }
+    var groups: [SafariGroup] { get }
     
     /**
      Enables or disables group by **group type**
@@ -106,7 +106,7 @@ extension SafariProtection {
     
     // MARK: - Public variables
     
-    public var groups: [SafariGroupProtocol] {
+    public var groups: [SafariGroup] {
         return workingQueue.sync {
             return filters.groups
         }

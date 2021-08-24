@@ -104,7 +104,7 @@ final class ContentBlockerService: ContentBlockerServiceProtocol {
         var resultError: Error?
         let group = DispatchGroup()
         
-        for cb in [ContentBlockerType.custom] {
+        for cb in ContentBlockerType.allCases {
             group.enter()
             reloadContentBlocker(for: cb) { error in
                 if let error = error {

@@ -652,7 +652,7 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         </variation>
                                                         <connections>
-                                                            <action selector="AddAction:" destination="iY4-7b-KHH" eventType="touchUpInside" id="crv-TP-0kG"/>
+                                                            <action selector="addAction:" destination="iY4-7b-KHH" eventType="touchUpInside" id="Qdi-j7-epy"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -1013,7 +1013,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="l2h-MZ-O2t">
                                 <rect key="frame" x="16" y="814" width="382" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="h7B-Ow-vPH"/>
+                                    <constraint firstAttribute="height" id="h7B-Ow-vPH"/>
                                 </constraints>
                             </stackView>
                         </subviews>
