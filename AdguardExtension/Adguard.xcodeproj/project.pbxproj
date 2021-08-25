@@ -415,6 +415,16 @@
 		7E25221B240821BF00743648 /* safari_protection_step1.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E252218240821BE00743648 /* safari_protection_step1.json */; };
 		7E25221C240821BF00743648 /* safari_protection_step2.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E252219240821BF00743648 /* safari_protection_step2.json */; };
 		7E279F5B243C9C09006AF0D6 /* DnsStatisticsServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E279F5A243C9C08006AF0D6 /* DnsStatisticsServiceTest.swift */; };
+		7E2A09CD26BD82B9006CD879 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4AC01D26BD796800DF5CF0 /* SafariWebExtensionHandler.swift */; };
+		7E2A09CE26BD82C6006CD879 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4AC01D26BD796800DF5CF0 /* SafariWebExtensionHandler.swift */; };
+		7E2A09CF26BD82E0006CD879 /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = 7E4ABFFF26BD75E700DF5CF0 /* _locales */; };
+		7E2A09D026BD82E6006CD879 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 7E4AC00126BD75E700DF5CF0 /* images */; };
+		7E2A09D126BD82E9006CD879 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E4AC00326BD75E700DF5CF0 /* manifest.json */; };
+		7E2A09D226BD82EC006CD879 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 7E4AC00526BD75E700DF5CF0 /* background.js */; };
+		7E2A09D326BD82EE006CD879 /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = 7E4AC00726BD75E700DF5CF0 /* content.js */; };
+		7E2A09D426BD82F1006CD879 /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = 7E4AC00926BD75E700DF5CF0 /* popup.html */; };
+		7E2A09D526BD82F4006CD879 /* popup.css in Resources */ = {isa = PBXBuildFile; fileRef = 7E4AC00B26BD75E700DF5CF0 /* popup.css */; };
+		7E2A09D626BD82F9006CD879 /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = 7E4AC00D26BD75E700DF5CF0 /* popup.js */; };
 		7E2D05B223CE22F8006A141C /* DomainsConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9F3E0F23CE08E300A7BDA2 /* DomainsConverter.swift */; };
 		7E2D978C24499E58000366B3 /* public_suffix_list.dat in Resources */ = {isa = PBXBuildFile; fileRef = 7E2D978B24499E58000366B3 /* public_suffix_list.dat */; };
 		7E31217224DC028300642879 /* BottomAlertTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E31217124DC028300642879 /* BottomAlertTransition.swift */; };
@@ -481,7 +491,16 @@
 		7E49EB5C2442435D00911AB1 /* UIBezierPath+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E49EB5B2442435D00911AB1 /* UIBezierPath+Utils.swift */; };
 		7E4AAD37242BBFFF00957122 /* ChartDateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4AAD36242BBFFF00957122 /* ChartDateType.swift */; };
 		7E4AAD38242BC02100957122 /* ChartDateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4AAD36242BBFFF00957122 /* ChartDateType.swift */; };
-		7E4AAD3A242CA82D00957122 /* ChartDateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4AAD36242BBFFF00957122 /* ChartDateType.swift */; };
+		7E4AC00026BD75E700DF5CF0 /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = 7E4ABFFF26BD75E700DF5CF0 /* _locales */; };
+		7E4AC00226BD75E700DF5CF0 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 7E4AC00126BD75E700DF5CF0 /* images */; };
+		7E4AC00426BD75E700DF5CF0 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E4AC00326BD75E700DF5CF0 /* manifest.json */; };
+		7E4AC00626BD75E700DF5CF0 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 7E4AC00526BD75E700DF5CF0 /* background.js */; };
+		7E4AC00826BD75E700DF5CF0 /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = 7E4AC00726BD75E700DF5CF0 /* content.js */; };
+		7E4AC00A26BD75E700DF5CF0 /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = 7E4AC00926BD75E700DF5CF0 /* popup.html */; };
+		7E4AC00C26BD75E700DF5CF0 /* popup.css in Resources */ = {isa = PBXBuildFile; fileRef = 7E4AC00B26BD75E700DF5CF0 /* popup.css */; };
+		7E4AC00E26BD75E700DF5CF0 /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = 7E4AC00D26BD75E700DF5CF0 /* popup.js */; };
+		7E4AC01226BD75E700DF5CF0 /* SafariWebExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7E4ABFFA26BD75E700DF5CF0 /* SafariWebExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		7E4AC03326BD796800DF5CF0 /* ProSafariWebExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7E4AC01B26BD796800DF5CF0 /* ProSafariWebExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7E4B0EDE258CF9CC00A52099 /* DnsProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00509682201D730006BC10C /* DnsProvidersService.swift */; };
 		7E4B0EDF258CF9D600A52099 /* DnsProviders+Migrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8D423B258CC52100B6300E /* DnsProviders+Migrations.swift */; };
 		7E4CC0192577DE47005ADBCA /* BugReportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4CC0182577DE47005ADBCA /* BugReportController.swift */; };
@@ -2298,6 +2317,20 @@
 			remoteGlobalIDString = 7E06B66122FB1606006859AC;
 			remoteInfo = AdguardBlockingExtensionSecurity;
 		};
+		7E4AC01026BD75E700DF5CF0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7E4ABFF926BD75E700DF5CF0;
+			remoteInfo = SafariWebExtension;
+		};
+		7E4AC03126BD796800DF5CF0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7E4AC01A26BD796800DF5CF0;
+			remoteInfo = ProSafariWebExtension;
+		};
 		7E536C6F238D2AC400A83A79 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
@@ -2527,6 +2560,7 @@
 				D0B5453A2435C7B9002F0AEC /* AdguardProBlockingExtensionGeneral.appex in Embed App Extensions */,
 				D0B5453B2435C7B9002F0AEC /* AdguardProBlockingExtensionPrivacy.appex in Embed App Extensions */,
 				D0B5453C2435C7B9002F0AEC /* AdguardProBlockingExtensionAnnoyances.appex in Embed App Extensions */,
+				7E4AC03326BD796800DF5CF0 /* ProSafariWebExtension.appex in Embed App Extensions */,
 				D0B5453D2435C7B9002F0AEC /* AdguardProBlockingExtensionOther.appex in Embed App Extensions */,
 				D0B5453E2435C7B9002F0AEC /* AdguardProBlockingExtensionCustom.appex in Embed App Extensions */,
 				7E6081EA26D55C6A00D778F4 /* ProYouTubeAdsActionExtension.appex in Embed App Extensions */,
@@ -2545,6 +2579,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				7E06B69B22FB1955006859AC /* AdguardBlockingExtensionSecurity.appex in Embed App Extensions */,
+				7E4AC01226BD75E700DF5CF0 /* SafariWebExtension.appex in Embed App Extensions */,
 				7E6081A926D55BCD00D778F4 /* YouTubeAdsActionExtension.appex in Embed App Extensions */,
 				D0569E3D21F1CD9E00985DA9 /* Tunnel.appex in Embed App Extensions */,
 				D067D9A82142A20000ECDE6D /* AdguardBlockingExtensionPrivacy.appex in Embed App Extensions */,
@@ -3096,6 +3131,19 @@
 		7E49DBBB22DDC25000027E93 /* Constants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		7E49EB5B2442435D00911AB1 /* UIBezierPath+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Utils.swift"; sourceTree = "<group>"; };
 		7E4AAD36242BBFFF00957122 /* ChartDateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDateType.swift; sourceTree = "<group>"; };
+		7E4ABFFA26BD75E700DF5CF0 /* SafariWebExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SafariWebExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E4ABFFF26BD75E700DF5CF0 /* _locales */ = {isa = PBXFileReference; lastKnownFileType = folder; path = _locales; sourceTree = "<group>"; };
+		7E4AC00126BD75E700DF5CF0 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
+		7E4AC00326BD75E700DF5CF0 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
+		7E4AC00526BD75E700DF5CF0 /* background.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = background.js; sourceTree = "<group>"; };
+		7E4AC00726BD75E700DF5CF0 /* content.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = content.js; sourceTree = "<group>"; };
+		7E4AC00926BD75E700DF5CF0 /* popup.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = popup.html; sourceTree = "<group>"; };
+		7E4AC00B26BD75E700DF5CF0 /* popup.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = popup.css; sourceTree = "<group>"; };
+		7E4AC00D26BD75E700DF5CF0 /* popup.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = popup.js; sourceTree = "<group>"; };
+		7E4AC00F26BD75E700DF5CF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7E4AC01626BD793B00DF5CF0 /* SafariWebExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SafariWebExtension.entitlements; sourceTree = "<group>"; };
+		7E4AC01B26BD796800DF5CF0 /* ProSafariWebExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ProSafariWebExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E4AC01D26BD796800DF5CF0 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
 		7E4CC0182577DE47005ADBCA /* BugReportController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BugReportController.swift; sourceTree = "<group>"; };
 		7E4CC02C2577DE93005ADBCA /* TextFieldIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldIndicatorView.swift; sourceTree = "<group>"; };
 		7E4CC0512577E8C1005ADBCA /* HideKeyboardTapGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboardTapGestureRecognizer.swift; sourceTree = "<group>"; };
@@ -3174,6 +3222,7 @@
 		7E6081D226D55C0100D778F4 /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7E6081DE26D55C6A00D778F4 /* ProYouTubeAdsActionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ProYouTubeAdsActionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E60821D26D56CEB00D778F4 /* ProYouTubeAdsActionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ProYouTubeAdsActionExtension.entitlements; path = ../../../../Downloads/ProYouTubeAdsActionExtension.entitlements; sourceTree = "<group>"; };
+		7E6D5E1A26C12C3F001127A8 /* ProSafariWebExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProSafariWebExtension.entitlements; sourceTree = "<group>"; };
 		7E6D962523E17347006202C2 /* RequestDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailsCell.swift; sourceTree = "<group>"; };
 		7E74FCAB239F9BF7006C0990 /* MainPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageController.swift; sourceTree = "<group>"; };
 		7E74FCAF239F9C96006C0990 /* MainPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageModel.swift; sourceTree = "<group>"; };
@@ -3953,6 +4002,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7E4ABFF726BD75E700DF5CF0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E4AC01826BD796800DF5CF0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7E536C63238D2AC400A83A79 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -4235,6 +4298,7 @@
 				D0D7E55824376F00001801A5 /* AdGuardProTodayExtension.entitlements */,
 				D0D7E55724376EF3001801A5 /* AdguardProBlockingExtension.entitlements */,
 				7E60821D26D56CEB00D778F4 /* ProYouTubeAdsActionExtension.entitlements */,
+				7E6D5E1A26C12C3F001127A8 /* ProSafariWebExtension.entitlements */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -4603,6 +4667,7 @@
 				D0288F4A23069D7200A4EBEF /* TestHostApp */,
 				7E536C68238D2AC400A83A79 /* AdGuardTodayExtension */,
 				7E6081AD26D55C0000D778F4 /* YouTubeAdsActionExtension */,
+				7E4ABFFB26BD75E700DF5CF0 /* SafariWebExtension */,
 				65F398121B7B684700ABCD39 /* Products */,
 				65D8294D1EDDA905008F7F30 /* Frameworks */,
 			);
@@ -4635,6 +4700,8 @@
 				D0B545262435C6BF002F0AEC /* ProTunnel.appex */,
 				7E60819B26D55BCD00D778F4 /* YouTubeAdsActionExtension.appex */,
 				7E6081DE26D55C6A00D778F4 /* ProYouTubeAdsActionExtension.appex */,
+				7E4ABFFA26BD75E700DF5CF0 /* SafariWebExtension.appex */,
+				7E4AC01B26BD796800DF5CF0 /* ProSafariWebExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -4834,6 +4901,32 @@
 				245464BE261F5F4100A96613 /* ActionWebReporter.swift */,
 			);
 			path = "Swift UI";
+			sourceTree = "<group>";
+		};
+		7E4ABFFB26BD75E700DF5CF0 /* SafariWebExtension */ = {
+			isa = PBXGroup;
+			children = (
+				7E4AC01626BD793B00DF5CF0 /* SafariWebExtension.entitlements */,
+				7E4AC01D26BD796800DF5CF0 /* SafariWebExtensionHandler.swift */,
+				7E4AC00F26BD75E700DF5CF0 /* Info.plist */,
+				7E4ABFFE26BD75E700DF5CF0 /* Resources */,
+			);
+			path = SafariWebExtension;
+			sourceTree = "<group>";
+		};
+		7E4ABFFE26BD75E700DF5CF0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7E4ABFFF26BD75E700DF5CF0 /* _locales */,
+				7E4AC00126BD75E700DF5CF0 /* images */,
+				7E4AC00326BD75E700DF5CF0 /* manifest.json */,
+				7E4AC00526BD75E700DF5CF0 /* background.js */,
+				7E4AC00726BD75E700DF5CF0 /* content.js */,
+				7E4AC00926BD75E700DF5CF0 /* popup.html */,
+				7E4AC00B26BD75E700DF5CF0 /* popup.css */,
+				7E4AC00D26BD75E700DF5CF0 /* popup.js */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		7E536C68238D2AC400A83A79 /* AdGuardTodayExtension */ = {
@@ -5667,6 +5760,9 @@
 				D08AB2B026BA5D010065221C /* PBXTargetDependency */,
 				D08AB2B226BA5D010065221C /* PBXTargetDependency */,
 				7E6081E926D55C6A00D778F4 /* PBXTargetDependency */,
+				6598864B1CF74DE9003ECD1C /* PBXTargetDependency */,
+				7E69C5D7265BE6E100EA9DBA /* PBXTargetDependency */,
+				7E4AC03226BD796800DF5CF0 /* PBXTargetDependency */,
 			);
 			name = "Adguard Pro";
 			packageProductDependencies = (
@@ -5735,6 +5831,8 @@
 				651318301BDE448D008DCFF9 /* PBXTargetDependency */,
 				7E536C70238D2AC400A83A79 /* PBXTargetDependency */,
 				7E6081A826D55BCD00D778F4 /* PBXTargetDependency */,
+				7E69C53A265BA53400EA9DBA /* PBXTargetDependency */,
+				7E4AC01126BD75E700DF5CF0 /* PBXTargetDependency */,
 			);
 			name = Adguard;
 			packageProductDependencies = (
@@ -5817,6 +5915,40 @@
 			);
 			productName = extension;
 			productReference = 7E06B69322FB1606006859AC /* AdguardBlockingExtensionSecurity.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		7E4ABFF926BD75E700DF5CF0 /* SafariWebExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7E4AC01526BD75E700DF5CF0 /* Build configuration list for PBXNativeTarget "SafariWebExtension" */;
+			buildPhases = (
+				7E4ABFF626BD75E700DF5CF0 /* Sources */,
+				7E4ABFF726BD75E700DF5CF0 /* Frameworks */,
+				7E4ABFF826BD75E700DF5CF0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SafariWebExtension;
+			productName = SafariWebExtension;
+			productReference = 7E4ABFFA26BD75E700DF5CF0 /* SafariWebExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		7E4AC01A26BD796800DF5CF0 /* ProSafariWebExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7E4AC03426BD796800DF5CF0 /* Build configuration list for PBXNativeTarget "ProSafariWebExtension" */;
+			buildPhases = (
+				7E4AC01726BD796800DF5CF0 /* Sources */,
+				7E4AC01826BD796800DF5CF0 /* Frameworks */,
+				7E4AC01926BD796800DF5CF0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ProSafariWebExtension;
+			productName = ProSafariWebExtension;
+			productReference = 7E4AC01B26BD796800DF5CF0 /* ProSafariWebExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		7E536C65238D2AC400A83A79 /* AdGuardTodayExtension */ = {
@@ -6310,6 +6442,12 @@
 						LastSwiftMigration = 1130;
 						ProvisioningStyle = Manual;
 					};
+					7E4ABFF926BD75E700DF5CF0 = {
+						CreatedOnToolsVersion = 13.0;
+					};
+					7E4AC01A26BD796800DF5CF0 = {
+						CreatedOnToolsVersion = 13.0;
+					};
 					7E536C65238D2AC400A83A79 = {
 						CreatedOnToolsVersion = 11.2.1;
 						DevelopmentTeam = N33TQXN8C7;
@@ -6434,6 +6572,8 @@
 				D0288F4823069D7200A4EBEF /* TestHostApp */,
 				7E60819A26D55BCD00D778F4 /* YouTubeAdsActionExtension */,
 				7E6081DD26D55C6A00D778F4 /* ProYouTubeAdsActionExtension */,
+				7E4ABFF926BD75E700DF5CF0 /* SafariWebExtension */,
+				7E4AC01A26BD796800DF5CF0 /* ProSafariWebExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -6559,6 +6699,36 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E06B68E22FB1606006859AC /* Extension.entitlements in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E4ABFF826BD75E700DF5CF0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E4AC00626BD75E700DF5CF0 /* background.js in Resources */,
+				7E4AC00C26BD75E700DF5CF0 /* popup.css in Resources */,
+				7E4AC00A26BD75E700DF5CF0 /* popup.html in Resources */,
+				7E4AC00226BD75E700DF5CF0 /* images in Resources */,
+				7E4AC00426BD75E700DF5CF0 /* manifest.json in Resources */,
+				7E4AC00026BD75E700DF5CF0 /* _locales in Resources */,
+				7E4AC00826BD75E700DF5CF0 /* content.js in Resources */,
+				7E4AC00E26BD75E700DF5CF0 /* popup.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E4AC01926BD796800DF5CF0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E2A09D226BD82EC006CD879 /* background.js in Resources */,
+				7E2A09D526BD82F4006CD879 /* popup.css in Resources */,
+				7E2A09D426BD82F1006CD879 /* popup.html in Resources */,
+				7E2A09D026BD82E6006CD879 /* images in Resources */,
+				7E2A09D126BD82E9006CD879 /* manifest.json in Resources */,
+				7E2A09CF26BD82E0006CD879 /* _locales in Resources */,
+				7E2A09D326BD82EE006CD879 /* content.js in Resources */,
+				7E2A09D626BD82F9006CD879 /* popup.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8053,6 +8223,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7E4ABFF626BD75E700DF5CF0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E2A09CD26BD82B9006CD879 /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E4AC01726BD796800DF5CF0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E2A09CE26BD82C6006CD879 /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7E536C62238D2AC400A83A79 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -9218,6 +9404,16 @@
 			isa = PBXTargetDependency;
 			target = 7E06B66122FB1606006859AC /* AdguardBlockingExtensionSecurity */;
 			targetProxy = 7E06B69922FB193C006859AC /* PBXContainerItemProxy */;
+		};
+		7E4AC01126BD75E700DF5CF0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7E4ABFF926BD75E700DF5CF0 /* SafariWebExtension */;
+			targetProxy = 7E4AC01026BD75E700DF5CF0 /* PBXContainerItemProxy */;
+		};
+		7E4AC03226BD796800DF5CF0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7E4AC01A26BD796800DF5CF0 /* ProSafariWebExtension */;
+			targetProxy = 7E4AC03126BD796800DF5CF0 /* PBXContainerItemProxy */;
 		};
 		7E536C70238D2AC400A83A79 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -10592,6 +10788,194 @@
 			};
 			name = Release;
 		};
+		7E4AC01326BD75E700DF5CF0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = SafariWebExtension/SafariWebExtension.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N33TQXN8C7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SafariWebExtension/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardExtension.SafariWebExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardExtension.SafariWebExtension";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7E4AC01426BD75E700DF5CF0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = SafariWebExtension/SafariWebExtension.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N33TQXN8C7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SafariWebExtension/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardExtension.SafariWebExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardExtension.SafariWebExtension";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		7E4AC03526BD796800DF5CF0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = AdguardPro/ProSafariWebExtension.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N33TQXN8C7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SafariWebExtension/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardPro.ProSafariWebExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardPro.ProSafariWebExtension";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7E4AC03626BD796800DF5CF0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6598877B1CF84766003ECD1C /* Adguard-Pro-Config.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = AdguardPro/ProSafariWebExtension.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N33TQXN8C7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SafariWebExtension/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardPro.ProSafariWebExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardPro.ProSafariWebExtension";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		7E536C72238D2AC400A83A79 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6598877A1CF842C3003ECD1C /* Adguard-Config.xcconfig */;
@@ -11776,6 +12160,24 @@
 			buildConfigurations = (
 				7E06B69122FB1606006859AC /* Debug */,
 				7E06B69222FB1606006859AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7E4AC01526BD75E700DF5CF0 /* Build configuration list for PBXNativeTarget "SafariWebExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E4AC01326BD75E700DF5CF0 /* Debug */,
+				7E4AC01426BD75E700DF5CF0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7E4AC03426BD796800DF5CF0 /* Build configuration list for PBXNativeTarget "ProSafariWebExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E4AC03526BD796800DF5CF0 /* Debug */,
+				7E4AC03626BD796800DF5CF0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

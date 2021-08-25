@@ -1,0 +1,10 @@
+{
+    "extension_name": {
+        "message": "Localized Safari Web Extension",
+        "description": "The display name for the extension."
+    },
+    "extension_description": {
+        "message": "This is Localized SafariWebExtension. You should tell us what your extension does here.",
+        "description": "Description of what the extension does."
+    }
+}
