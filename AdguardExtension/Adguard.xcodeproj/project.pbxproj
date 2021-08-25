@@ -3221,7 +3221,7 @@
 		7E6081D126D55C0100D778F4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E6081D226D55C0100D778F4 /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7E6081DE26D55C6A00D778F4 /* ProYouTubeAdsActionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ProYouTubeAdsActionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		7E60821D26D56CEB00D778F4 /* ProYouTubeAdsActionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ProYouTubeAdsActionExtension.entitlements; path = ../../../../Downloads/ProYouTubeAdsActionExtension.entitlements; sourceTree = "<group>"; };
+		7E6BEBAB26D66F6F00C7965F /* ProYouTubeAdsActionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProYouTubeAdsActionExtension.entitlements; sourceTree = "<group>"; };
 		7E6D5E1A26C12C3F001127A8 /* ProSafariWebExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProSafariWebExtension.entitlements; sourceTree = "<group>"; };
 		7E6D962523E17347006202C2 /* RequestDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailsCell.swift; sourceTree = "<group>"; };
 		7E74FCAB239F9BF7006C0990 /* MainPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageController.swift; sourceTree = "<group>"; };
@@ -4297,7 +4297,7 @@
 				D0D7E55924376F13001801A5 /* ProActionExtension.entitlements */,
 				D0D7E55824376F00001801A5 /* AdGuardProTodayExtension.entitlements */,
 				D0D7E55724376EF3001801A5 /* AdguardProBlockingExtension.entitlements */,
-				7E60821D26D56CEB00D778F4 /* ProYouTubeAdsActionExtension.entitlements */,
+				7E6BEBAB26D66F6F00C7965F /* ProYouTubeAdsActionExtension.entitlements */,
 				7E6D5E1A26C12C3F001127A8 /* ProSafariWebExtension.entitlements */,
 			);
 			name = "Supporting Files";
@@ -5760,8 +5760,6 @@
 				D08AB2B026BA5D010065221C /* PBXTargetDependency */,
 				D08AB2B226BA5D010065221C /* PBXTargetDependency */,
 				7E6081E926D55C6A00D778F4 /* PBXTargetDependency */,
-				6598864B1CF74DE9003ECD1C /* PBXTargetDependency */,
-				7E69C5D7265BE6E100EA9DBA /* PBXTargetDependency */,
 				7E4AC03226BD796800DF5CF0 /* PBXTargetDependency */,
 			);
 			name = "Adguard Pro";
@@ -5831,7 +5829,6 @@
 				651318301BDE448D008DCFF9 /* PBXTargetDependency */,
 				7E536C70238D2AC400A83A79 /* PBXTargetDependency */,
 				7E6081A826D55BCD00D778F4 /* PBXTargetDependency */,
-				7E69C53A265BA53400EA9DBA /* PBXTargetDependency */,
 				7E4AC01126BD75E700DF5CF0 /* PBXTargetDependency */,
 			);
 			name = Adguard;
@@ -8445,7 +8442,6 @@
 				7EAD352C26C2C821001AFB3A /* ACNIPUtils.m in Sources */,
 				D0569DBF21F1C0A800985DA9 /* FMDatabasePool.m in Sources */,
 				D0569DC321F1C0A800985DA9 /* DDLoggerNames.m in Sources */,
-				7E4AAD3A242CA82D00957122 /* ChartDateType.swift in Sources */,
 				7E8576612435F1EF0055F63D /* DomainParser.swift in Sources */,
 				D0569DC621F1C0A800985DA9 /* ACLFileLocker.m in Sources */,
 				D06DE0292346296B00A70D85 /* String+Utils.swift in Sources */,
