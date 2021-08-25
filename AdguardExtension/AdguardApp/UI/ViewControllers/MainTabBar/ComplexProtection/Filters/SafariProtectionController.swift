@@ -27,8 +27,6 @@ final class SafariProtectionController: UITableViewController {
     @IBOutlet weak var whitelistLabel: ThemableLabel!
     @IBOutlet weak var safariIcon: UIImageView!
     @IBOutlet var themableLabels: [ThemableLabel]!
-    @IBOutlet var separators: [UIView]!
-    
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
@@ -49,18 +47,15 @@ final class SafariProtectionController: UITableViewController {
     private let enabledColor = UIColor.AdGuardColor.lightGreen1
     private let disabledColor = UIColor.AdGuardColor.lightGray3
     
-    private let blacklistModel: ListOfRulesModelProtocol
+    private lazy var blacklistModel: ListOfRulesModelProtocol = {
+        return UserFilterModel(resources: resources, theme: theme, productInfo: productInfo, safariProtection: safariProtection)
+    }()
     
     private var activeFiltersCount: Int {
         return safariProtection.groups.flatMap { $0.filters }.filter { $0.isEnabled }.count
     }
     
     // MARK: - view controler life cycle
-    
-    required init?(coder: NSCoder) {
-        blacklistModel = UserFilterModel(resources: resources, theme: theme, productInfo: productInfo, safariProtection: safariProtection)
-        super.init(coder: coder)
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == whiteListSegue {
@@ -99,12 +94,20 @@ final class SafariProtectionController: UITableViewController {
     
     // MARK: - Table view data source
     
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return section == 0 ? 32.0 : 0.1
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.01
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -142,7 +145,6 @@ extension SafariProtectionController: ThemableProtocol {
         theme.setupSwitch(protectionStateSwitch)
         theme.setupTable(tableView)
         theme.setupLabels(themableLabels)
-        theme.setupSeparators(separators)
         tableView.reloadData()
     }
 }

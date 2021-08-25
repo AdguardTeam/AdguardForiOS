@@ -13,7 +13,7 @@
         <scene sceneID="bbK-CB-16V">
             <objects>
                 <tableViewController storyboardIdentifier="SafariProtectionController" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="Gbg-cv-RVg" customClass="SafariProtectionController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="MdP-2F-oA0">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="MdP-2F-oA0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -28,7 +28,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="167.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blocks ads and trackers on websites opened in Safari" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QHZ-sJ-wTL" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Blocks ads and trackers on websites opened in Safari" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QHZ-sJ-wTL" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="24" y="113" width="366" height="38.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
@@ -52,7 +52,7 @@
                                                         </constraint>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Safari protection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6WB-a0-8YE" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Safari protection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6WB-a0-8YE" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="24" y="72" width="366" height="29"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                                     <nil key="textColor"/>
@@ -86,6 +86,10 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="ZIw-57-B2h">
+                                <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="bKQ-ye-sbP">
                                         <rect key="frame" x="0.0" y="212" width="414" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -152,8 +156,8 @@
                                                         </constraint>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filters" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lq2-mi-McV" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="80" y="20" width="65.5" height="2"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Filters" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lq2-mi-McV" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="56" y="16" width="46" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                     <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -164,8 +168,8 @@
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2kF-Mk-dHf" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="56" y="27.5" width="0.0" height="0.0"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2kF-Mk-dHf" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="56" y="37.5" width="0.0" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -187,32 +191,23 @@
                                                         </constraint>
                                                     </constraints>
                                                 </imageView>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TZp-yL-SJy" userLabel="separator">
-                                                    <rect key="frame" x="0.0" y="43.5" width="414" height="0.5"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="0.5" id="8Ld-W1-965"/>
-                                                    </constraints>
-                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="2kF-Mk-dHf" firstAttribute="leading" secondItem="Lq2-mi-McV" secondAttribute="leading" id="2Sf-Cv-o57"/>
-                                                <constraint firstItem="TZp-yL-SJy" firstAttribute="top" secondItem="2kF-Mk-dHf" secondAttribute="bottom" constant="16" id="7TQ-6C-gdY">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                                </constraint>
                                                 <constraint firstItem="Lq2-mi-McV" firstAttribute="top" secondItem="7ry-ou-jFL" secondAttribute="top" constant="16" id="7iS-1W-c8y">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                                 </constraint>
                                                 <constraint firstItem="g6L-S7-okS" firstAttribute="centerY" secondItem="Hjj-nz-Di8" secondAttribute="centerY" id="97F-cy-hs0"/>
-                                                <constraint firstAttribute="trailing" secondItem="TZp-yL-SJy" secondAttribute="trailing" id="BPB-49-6zj"/>
                                                 <constraint firstItem="Hjj-nz-Di8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Lq2-mi-McV" secondAttribute="trailing" constant="16" id="DCJ-Oa-wgI">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
-                                                <constraint firstAttribute="bottom" secondItem="TZp-yL-SJy" secondAttribute="bottom" id="FNn-sw-W6Y"/>
                                                 <constraint firstItem="Hjj-nz-Di8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2kF-Mk-dHf" secondAttribute="trailing" constant="16" id="Mhe-Ir-cU0">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
                                                 <constraint firstItem="Hjj-nz-Di8" firstAttribute="centerY" secondItem="7ry-ou-jFL" secondAttribute="centerY" id="SNI-6S-zwT"/>
+                                                <constraint firstAttribute="bottom" secondItem="2kF-Mk-dHf" secondAttribute="bottom" constant="16" id="V6S-kV-pj9">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
                                                 <constraint firstItem="Lq2-mi-McV" firstAttribute="leading" secondItem="g6L-S7-okS" secondAttribute="trailing" constant="16" id="b4d-oo-EoZ">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
@@ -223,7 +218,6 @@
                                                 <constraint firstAttribute="trailing" secondItem="Hjj-nz-Di8" secondAttribute="trailing" constant="16" id="nMr-99-AWj">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
-                                                <constraint firstItem="TZp-yL-SJy" firstAttribute="leading" secondItem="7ry-ou-jFL" secondAttribute="leading" id="yHr-9q-MXq"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -259,8 +253,8 @@
                                                         </constraint>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uVg-Gj-40a" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="56" y="27.5" width="0.0" height="0.0"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uVg-Gj-40a" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="56" y="37.5" width="0.0" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -271,8 +265,8 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User rules" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VCK-db-aeg" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="80" y="20" width="108" height="2"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="User rules" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VCK-db-aeg" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="56" y="16" width="76" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                     <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -283,23 +277,15 @@
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                                                     </variation>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ldy-n3-NRr" userLabel="separator">
-                                                    <rect key="frame" x="0.0" y="43.5" width="414" height="0.5"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="0.5" id="rvF-OL-Tvm"/>
-                                                    </constraints>
-                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="Ldy-n3-NRr" secondAttribute="bottom" id="1Nu-pi-gEF"/>
-                                                <constraint firstItem="Ldy-n3-NRr" firstAttribute="top" secondItem="uVg-Gj-40a" secondAttribute="bottom" constant="16" id="6N6-jP-qzN">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                                </constraint>
                                                 <constraint firstItem="UHL-hv-lGJ" firstAttribute="leading" secondItem="gd2-1t-bjw" secondAttribute="leading" constant="16" id="7Sy-OB-ou3">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
                                                 <constraint firstItem="UHL-hv-lGJ" firstAttribute="centerY" secondItem="bzc-v8-1FM" secondAttribute="centerY" id="AN8-UW-DYH"/>
+                                                <constraint firstAttribute="bottom" secondItem="uVg-Gj-40a" secondAttribute="bottom" constant="16" id="Ai5-Rz-HKn">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
                                                 <constraint firstItem="uVg-Gj-40a" firstAttribute="top" secondItem="VCK-db-aeg" secondAttribute="bottom" constant="2" id="Blm-lz-ckX"/>
                                                 <constraint firstItem="VCK-db-aeg" firstAttribute="leading" secondItem="UHL-hv-lGJ" secondAttribute="trailing" constant="16" id="Iwr-gp-cGA">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
@@ -307,7 +293,6 @@
                                                 <constraint firstItem="bzc-v8-1FM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="VCK-db-aeg" secondAttribute="trailing" constant="16" id="Nox-KZ-PjU">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
-                                                <constraint firstAttribute="trailing" secondItem="Ldy-n3-NRr" secondAttribute="trailing" id="Od3-es-c2d"/>
                                                 <constraint firstItem="bzc-v8-1FM" firstAttribute="centerY" secondItem="gd2-1t-bjw" secondAttribute="centerY" id="UCs-cE-S1k"/>
                                                 <constraint firstItem="bzc-v8-1FM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uVg-Gj-40a" secondAttribute="trailing" constant="16" id="XEB-66-DES">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
@@ -316,7 +301,6 @@
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
                                                 <constraint firstItem="uVg-Gj-40a" firstAttribute="leading" secondItem="VCK-db-aeg" secondAttribute="leading" id="gW7-2T-j74"/>
-                                                <constraint firstItem="Ldy-n3-NRr" firstAttribute="leading" secondItem="gd2-1t-bjw" secondAttribute="leading" id="tnz-dy-NVD"/>
                                                 <constraint firstItem="VCK-db-aeg" firstAttribute="top" secondItem="gd2-1t-bjw" secondAttribute="top" constant="16" id="xth-1d-sWp">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                                 </constraint>
@@ -344,7 +328,7 @@
                                                         </constraint>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Allowlist" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3z-Yh-zY2" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Allowlist" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3z-Yh-zY2" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="56" y="16" width="302" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                     <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -356,7 +340,7 @@
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AdGuard doesn’t work on the sites from this list" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gg8-4u-qvU" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="AdGuard doesn’t work on the sites from this list" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gg8-4u-qvU" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                     <rect key="frame" x="56" y="37.5" width="260.5" height="33.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -434,10 +418,8 @@
                         <outletCollection property="themableLabels" destination="VCK-db-aeg" collectionClass="NSMutableArray" id="FJK-BI-DZV"/>
                         <outletCollection property="themableLabels" destination="f3z-Yh-zY2" collectionClass="NSMutableArray" id="JgQ-zY-wEy"/>
                         <outletCollection property="themableLabels" destination="Gg8-4u-qvU" collectionClass="NSMutableArray" id="aok-eK-rHc"/>
-                        <outletCollection property="themableLabels" destination="8zX-PY-5pt" collectionClass="NSMutableArray" id="dXf-6E-LSI"/>
                         <outletCollection property="themableLabels" destination="6WB-a0-8YE" collectionClass="NSMutableArray" id="yve-Tf-DXE"/>
-                        <outletCollection property="separators" destination="TZp-yL-SJy" collectionClass="NSMutableArray" id="mrZ-wK-P41"/>
-                        <outletCollection property="separators" destination="Ldy-n3-NRr" collectionClass="NSMutableArray" id="edS-Kl-BeV"/>
+                        <outletCollection property="themableLabels" destination="8zX-PY-5pt" collectionClass="NSMutableArray" id="dXf-6E-LSI"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="npH-7c-pqz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
