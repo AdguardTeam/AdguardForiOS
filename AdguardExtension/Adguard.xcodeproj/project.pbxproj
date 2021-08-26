@@ -169,6 +169,318 @@
 		24F66A9B26033DA00097B426 /* OpenMainPageControllerControllerWithLaunchScreenParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F66A9926033DA00097B426 /* OpenMainPageControllerControllerWithLaunchScreenParser.swift */; };
 		24F66A9C26033DA00097B426 /* OpenMainPageControllerControllerWithLaunchScreenParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F66A9926033DA00097B426 /* OpenMainPageControllerControllerWithLaunchScreenParser.swift */; };
 		4020A90122C3C864009C188F /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4020A90022C3C863009C188F /* MainNavigationController.swift */; };
+		4982C1AE26D78F2A00CACBBE /* unused.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0BF26D78F2900CACBBE /* unused.ts */; };
+		4982C1AF26D78F2A00CACBBE /* unused.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0BF26D78F2900CACBBE /* unused.ts */; };
+		4982C1B026D78F2A00CACBBE /* helpers.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0C026D78F2900CACBBE /* helpers.ts */; };
+		4982C1B126D78F2A00CACBBE /* helpers.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0C026D78F2900CACBBE /* helpers.ts */; };
+		4982C1B226D78F2A00CACBBE /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0C126D78F2900CACBBE /* config.json */; };
+		4982C1B326D78F2A00CACBBE /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0C126D78F2900CACBBE /* config.json */; };
+		4982C1B426D78F2A00CACBBE /* validate.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0C226D78F2900CACBBE /* validate.ts */; };
+		4982C1B526D78F2A00CACBBE /* validate.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0C226D78F2900CACBBE /* validate.ts */; };
+		4982C1B626D78F2A00CACBBE /* types.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0C326D78F2900CACBBE /* types.ts */; };
+		4982C1B726D78F2A00CACBBE /* types.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0C326D78F2900CACBBE /* types.ts */; };
+		4982C1B826D78F2A00CACBBE /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0C426D78F2900CACBBE /* README.md */; };
+		4982C1B926D78F2A00CACBBE /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0C426D78F2900CACBBE /* README.md */; };
+		4982C1BA26D78F2A00CACBBE /* constants.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0C526D78F2900CACBBE /* constants.ts */; };
+		4982C1BB26D78F2A00CACBBE /* constants.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0C526D78F2900CACBBE /* constants.ts */; };
+		4982C1BC26D78F2A00CACBBE /* download.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0C626D78F2900CACBBE /* download.ts */; };
+		4982C1BD26D78F2A00CACBBE /* download.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0C626D78F2900CACBBE /* download.ts */; };
+		4982C1BE26D78F2A00CACBBE /* renew.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0C726D78F2900CACBBE /* renew.ts */; };
+		4982C1BF26D78F2A00CACBBE /* renew.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0C726D78F2900CACBBE /* renew.ts */; };
+		4982C1C026D78F2A00CACBBE /* log.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0C826D78F2900CACBBE /* log.ts */; };
+		4982C1C126D78F2A00CACBBE /* log.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0C826D78F2900CACBBE /* log.ts */; };
+		4982C1C226D78F2A00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0C926D78F2900CACBBE /* index.ts */; };
+		4982C1C326D78F2A00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0C926D78F2900CACBBE /* index.ts */; };
+		4982C1C426D78F2A00CACBBE /* upload.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0CA26D78F2900CACBBE /* upload.ts */; };
+		4982C1C526D78F2A00CACBBE /* upload.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0CA26D78F2900CACBBE /* upload.ts */; };
+		4982C1C626D78F2A00CACBBE /* bundle-runner.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0CC26D78F2900CACBBE /* bundle-runner.ts */; };
+		4982C1C726D78F2A00CACBBE /* bundle-runner.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0CC26D78F2900CACBBE /* bundle-runner.ts */; };
+		4982C1C826D78F2A00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0CD26D78F2900CACBBE /* index.ts */; };
+		4982C1C926D78F2A00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0CD26D78F2900CACBBE /* index.ts */; };
+		4982C1CA26D78F2A00CACBBE /* webpack.config.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0CE26D78F2900CACBBE /* webpack.config.ts */; };
+		4982C1CB26D78F2A00CACBBE /* webpack.config.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0CE26D78F2900CACBBE /* webpack.config.ts */; };
+		4982C1CC26D78F2A00CACBBE /* bundle.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0CF26D78F2900CACBBE /* bundle.ts */; };
+		4982C1CD26D78F2A00CACBBE /* bundle.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0CF26D78F2900CACBBE /* bundle.ts */; };
+		4982C1CE26D78F2A00CACBBE /* chrome.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0D226D78F2900CACBBE /* chrome.ts */; };
+		4982C1CF26D78F2A00CACBBE /* chrome.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0D226D78F2900CACBBE /* chrome.ts */; };
+		4982C1D026D78F2A00CACBBE /* .twosky.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0D326D78F2900CACBBE /* .twosky.json */; };
+		4982C1D126D78F2A00CACBBE /* .twosky.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0D326D78F2900CACBBE /* .twosky.json */; };
+		4982C1D226D78F2A00CACBBE /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0D426D78F2900CACBBE /* LICENSE */; };
+		4982C1D326D78F2A00CACBBE /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0D426D78F2900CACBBE /* LICENSE */; };
+		4982C1D426D78F2A00CACBBE /* yarn.lock in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0D526D78F2900CACBBE /* yarn.lock */; };
+		4982C1D526D78F2A00CACBBE /* yarn.lock in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0D526D78F2900CACBBE /* yarn.lock */; };
+		4982C1D626D78F2A00CACBBE /* babel.config.js in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0D626D78F2900CACBBE /* babel.config.js */; };
+		4982C1D726D78F2A00CACBBE /* babel.config.js in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0D626D78F2900CACBBE /* babel.config.js */; };
+		4982C1D826D78F2A00CACBBE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0D726D78F2900CACBBE /* .gitignore */; };
+		4982C1D926D78F2A00CACBBE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0D726D78F2900CACBBE /* .gitignore */; };
+		4982C1DA26D78F2A00CACBBE /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0D826D78F2900CACBBE /* package.json */; };
+		4982C1DB26D78F2A00CACBBE /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0D826D78F2900CACBBE /* package.json */; };
+		4982C1DC26D78F2A00CACBBE /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0D926D78F2900CACBBE /* README.md */; };
+		4982C1DD26D78F2A00CACBBE /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0D926D78F2900CACBBE /* README.md */; };
+		4982C1DE26D78F2A00CACBBE /* .eslintrc.js in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0DA26D78F2900CACBBE /* .eslintrc.js */; };
+		4982C1DF26D78F2A00CACBBE /* .eslintrc.js in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0DA26D78F2900CACBBE /* .eslintrc.js */; };
+		4982C1E026D78F2A00CACBBE /* tsconfig.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0DB26D78F2900CACBBE /* tsconfig.json */; };
+		4982C1E126D78F2A00CACBBE /* tsconfig.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0DB26D78F2900CACBBE /* tsconfig.json */; };
+		4982C1E226D78F2A00CACBBE /* .eslintignore in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0DC26D78F2900CACBBE /* .eslintignore */; };
+		4982C1E326D78F2A00CACBBE /* .eslintignore in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0DC26D78F2900CACBBE /* .eslintignore */; };
+		4982C1E426D78F2A00CACBBE /* postcss.config.js in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0DD26D78F2900CACBBE /* postcss.config.js */; };
+		4982C1E526D78F2A00CACBBE /* postcss.config.js in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0DD26D78F2900CACBBE /* postcss.config.js */; };
+		4982C1E626D78F2A00CACBBE /* jest.config.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0DE26D78F2900CACBBE /* jest.config.ts */; };
+		4982C1E726D78F2A00CACBBE /* jest.config.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0DE26D78F2900CACBBE /* jest.config.ts */; };
+		4982C1E826D78F2A00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0E226D78F2900CACBBE /* index.ts */; };
+		4982C1E926D78F2A00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0E226D78F2900CACBBE /* index.ts */; };
+		4982C1EA26D78F2A00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0E426D78F2900CACBBE /* index.ts */; };
+		4982C1EB26D78F2A00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0E426D78F2900CACBBE /* index.ts */; };
+		4982C1EC26D78F2A00CACBBE /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0E626D78F2900CACBBE /* index.html */; };
+		4982C1ED26D78F2A00CACBBE /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0E626D78F2900CACBBE /* index.html */; };
+		4982C1EE26D78F2A00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0E726D78F2900CACBBE /* index.ts */; };
+		4982C1EF26D78F2A00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0E726D78F2900CACBBE /* index.ts */; };
+		4982C1F026D78F2A00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0E926D78F2900CACBBE /* index.ts */; };
+		4982C1F126D78F2A00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0E926D78F2900CACBBE /* index.ts */; };
+		4982C1F226D78F2A00CACBBE /* toolbar-icon-19.png in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0EB26D78F2900CACBBE /* toolbar-icon-19.png */; };
+		4982C1F326D78F2A00CACBBE /* toolbar-icon-19.png in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0EB26D78F2900CACBBE /* toolbar-icon-19.png */; };
+		4982C1F426D78F2A00CACBBE /* toolbar-icon-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0EC26D78F2900CACBBE /* toolbar-icon-32.png */; };
+		4982C1F526D78F2A00CACBBE /* toolbar-icon-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0EC26D78F2900CACBBE /* toolbar-icon-32.png */; };
+		4982C1F626D78F2A00CACBBE /* icon-256.png in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0ED26D78F2900CACBBE /* icon-256.png */; };
+		4982C1F726D78F2A00CACBBE /* icon-256.png in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0ED26D78F2900CACBBE /* icon-256.png */; };
+		4982C1F826D78F2A00CACBBE /* icon-48.png in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0EE26D78F2900CACBBE /* icon-48.png */; };
+		4982C1F926D78F2A00CACBBE /* icon-48.png in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0EE26D78F2900CACBBE /* icon-48.png */; };
+		4982C1FA26D78F2A00CACBBE /* icon-64.png in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0EF26D78F2900CACBBE /* icon-64.png */; };
+		4982C1FB26D78F2A00CACBBE /* icon-64.png in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0EF26D78F2900CACBBE /* icon-64.png */; };
+		4982C1FC26D78F2A00CACBBE /* icon-96.png in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0F026D78F2900CACBBE /* icon-96.png */; };
+		4982C1FD26D78F2A00CACBBE /* icon-96.png in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0F026D78F2900CACBBE /* icon-96.png */; };
+		4982C1FE26D78F2A00CACBBE /* toolbar-icon-38.png in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0F126D78F2900CACBBE /* toolbar-icon-38.png */; };
+		4982C1FF26D78F2A00CACBBE /* toolbar-icon-38.png in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0F126D78F2900CACBBE /* toolbar-icon-38.png */; };
+		4982C20026D78F2A00CACBBE /* icon-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0F226D78F2900CACBBE /* icon-128.png */; };
+		4982C20126D78F2A00CACBBE /* icon-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0F226D78F2900CACBBE /* icon-128.png */; };
+		4982C20226D78F2A00CACBBE /* toolbar-icon-16.png in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0F326D78F2900CACBBE /* toolbar-icon-16.png */; };
+		4982C20326D78F2A00CACBBE /* toolbar-icon-16.png in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0F326D78F2900CACBBE /* toolbar-icon-16.png */; };
+		4982C20426D78F2A00CACBBE /* icon-512.png in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0F426D78F2900CACBBE /* icon-512.png */; };
+		4982C20526D78F2A00CACBBE /* icon-512.png in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0F426D78F2900CACBBE /* icon-512.png */; };
+		4982C20626D78F2A00CACBBE /* vars.pcss in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0F526D78F2900CACBBE /* vars.pcss */; };
+		4982C20726D78F2A00CACBBE /* vars.pcss in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0F526D78F2900CACBBE /* vars.pcss */; };
+		4982C20826D78F2A00CACBBE /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0F626D78F2900CACBBE /* manifest.json */; };
+		4982C20926D78F2A00CACBBE /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0F626D78F2900CACBBE /* manifest.json */; };
+		4982C20A26D78F2A00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0F926D78F2900CACBBE /* messages.json */; };
+		4982C20B26D78F2A00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0F926D78F2900CACBBE /* messages.json */; };
+		4982C20C26D78F2A00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0FB26D78F2900CACBBE /* messages.json */; };
+		4982C20D26D78F2A00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0FB26D78F2900CACBBE /* messages.json */; };
+		4982C20E26D78F2A00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0FD26D78F2900CACBBE /* messages.json */; };
+		4982C20F26D78F2A00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0FD26D78F2900CACBBE /* messages.json */; };
+		4982C21026D78F2A00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0FF26D78F2900CACBBE /* messages.json */; };
+		4982C21126D78F2A00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C0FF26D78F2900CACBBE /* messages.json */; };
+		4982C21226D78F2A00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C10126D78F2900CACBBE /* messages.json */; };
+		4982C21326D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C10126D78F2900CACBBE /* messages.json */; };
+		4982C21426D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C10326D78F2900CACBBE /* messages.json */; };
+		4982C21526D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C10326D78F2900CACBBE /* messages.json */; };
+		4982C21626D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C10526D78F2900CACBBE /* messages.json */; };
+		4982C21726D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C10526D78F2900CACBBE /* messages.json */; };
+		4982C21826D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C10726D78F2900CACBBE /* messages.json */; };
+		4982C21926D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C10726D78F2900CACBBE /* messages.json */; };
+		4982C21A26D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C10926D78F2900CACBBE /* messages.json */; };
+		4982C21B26D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C10926D78F2900CACBBE /* messages.json */; };
+		4982C21C26D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C10B26D78F2900CACBBE /* messages.json */; };
+		4982C21D26D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C10B26D78F2900CACBBE /* messages.json */; };
+		4982C21E26D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C10D26D78F2900CACBBE /* messages.json */; };
+		4982C21F26D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C10D26D78F2900CACBBE /* messages.json */; };
+		4982C22026D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C10F26D78F2900CACBBE /* messages.json */; };
+		4982C22126D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C10F26D78F2900CACBBE /* messages.json */; };
+		4982C22226D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C11126D78F2900CACBBE /* messages.json */; };
+		4982C22326D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C11126D78F2900CACBBE /* messages.json */; };
+		4982C22426D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C11326D78F2900CACBBE /* messages.json */; };
+		4982C22526D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C11326D78F2900CACBBE /* messages.json */; };
+		4982C22626D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C11526D78F2900CACBBE /* messages.json */; };
+		4982C22726D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C11526D78F2900CACBBE /* messages.json */; };
+		4982C22826D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C11726D78F2900CACBBE /* messages.json */; };
+		4982C22926D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C11726D78F2900CACBBE /* messages.json */; };
+		4982C22A26D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C11926D78F2900CACBBE /* messages.json */; };
+		4982C22B26D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C11926D78F2900CACBBE /* messages.json */; };
+		4982C22C26D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C11B26D78F2900CACBBE /* messages.json */; };
+		4982C22D26D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C11B26D78F2900CACBBE /* messages.json */; };
+		4982C22E26D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C11D26D78F2900CACBBE /* messages.json */; };
+		4982C22F26D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C11D26D78F2900CACBBE /* messages.json */; };
+		4982C23026D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C11F26D78F2900CACBBE /* messages.json */; };
+		4982C23126D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C11F26D78F2900CACBBE /* messages.json */; };
+		4982C23226D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C12126D78F2900CACBBE /* messages.json */; };
+		4982C23326D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C12126D78F2900CACBBE /* messages.json */; };
+		4982C23426D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C12326D78F2900CACBBE /* messages.json */; };
+		4982C23526D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C12326D78F2900CACBBE /* messages.json */; };
+		4982C23626D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C12526D78F2900CACBBE /* messages.json */; };
+		4982C23726D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C12526D78F2900CACBBE /* messages.json */; };
+		4982C23826D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C12726D78F2900CACBBE /* messages.json */; };
+		4982C23926D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C12726D78F2900CACBBE /* messages.json */; };
+		4982C23A26D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C12926D78F2900CACBBE /* messages.json */; };
+		4982C23B26D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C12926D78F2900CACBBE /* messages.json */; };
+		4982C23C26D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C12B26D78F2900CACBBE /* messages.json */; };
+		4982C23D26D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C12B26D78F2900CACBBE /* messages.json */; };
+		4982C23E26D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C12D26D78F2900CACBBE /* messages.json */; };
+		4982C23F26D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C12D26D78F2900CACBBE /* messages.json */; };
+		4982C24026D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C12F26D78F2900CACBBE /* messages.json */; };
+		4982C24126D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C12F26D78F2900CACBBE /* messages.json */; };
+		4982C24226D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C13126D78F2900CACBBE /* messages.json */; };
+		4982C24326D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C13126D78F2900CACBBE /* messages.json */; };
+		4982C24426D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C13326D78F2A00CACBBE /* messages.json */; };
+		4982C24526D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C13326D78F2A00CACBBE /* messages.json */; };
+		4982C24626D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C13526D78F2A00CACBBE /* messages.json */; };
+		4982C24726D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C13526D78F2A00CACBBE /* messages.json */; };
+		4982C24826D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C13726D78F2A00CACBBE /* messages.json */; };
+		4982C24926D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C13726D78F2A00CACBBE /* messages.json */; };
+		4982C24A26D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C13926D78F2A00CACBBE /* messages.json */; };
+		4982C24B26D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C13926D78F2A00CACBBE /* messages.json */; };
+		4982C24C26D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C13B26D78F2A00CACBBE /* messages.json */; };
+		4982C24D26D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C13B26D78F2A00CACBBE /* messages.json */; };
+		4982C24E26D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C13D26D78F2A00CACBBE /* messages.json */; };
+		4982C24F26D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C13D26D78F2A00CACBBE /* messages.json */; };
+		4982C25026D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C13F26D78F2A00CACBBE /* messages.json */; };
+		4982C25126D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C13F26D78F2A00CACBBE /* messages.json */; };
+		4982C25226D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C14126D78F2A00CACBBE /* messages.json */; };
+		4982C25326D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C14126D78F2A00CACBBE /* messages.json */; };
+		4982C25426D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C14326D78F2A00CACBBE /* messages.json */; };
+		4982C25526D78F2B00CACBBE /* messages.json in Resources */ = {isa = PBXBuildFile; fileRef = 4982C14326D78F2A00CACBBE /* messages.json */; };
+		4982C25626D78F2B00CACBBE /* permissions.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C14626D78F2A00CACBBE /* permissions.ts */; };
+		4982C25726D78F2B00CACBBE /* permissions.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C14626D78F2A00CACBBE /* permissions.ts */; };
+		4982C25826D78F2B00CACBBE /* app.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C14726D78F2A00CACBBE /* app.ts */; };
+		4982C25926D78F2B00CACBBE /* app.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C14726D78F2A00CACBBE /* app.ts */; };
+		4982C25A26D78F2B00CACBBE /* Storage.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C14926D78F2A00CACBBE /* Storage.ts */; };
+		4982C25B26D78F2B00CACBBE /* Storage.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C14926D78F2A00CACBBE /* Storage.ts */; };
+		4982C25C26D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C14A26D78F2A00CACBBE /* index.ts */; };
+		4982C25D26D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C14A26D78F2A00CACBBE /* index.ts */; };
+		4982C25E26D78F2B00CACBBE /* background.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C14B26D78F2A00CACBBE /* background.ts */; };
+		4982C25F26D78F2B00CACBBE /* background.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C14B26D78F2A00CACBBE /* background.ts */; };
+		4982C26026D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C14C26D78F2A00CACBBE /* index.ts */; };
+		4982C26126D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C14C26D78F2A00CACBBE /* index.ts */; };
+		4982C26226D78F2B00CACBBE /* NativeHost.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C14E26D78F2A00CACBBE /* NativeHost.ts */; };
+		4982C26326D78F2B00CACBBE /* NativeHost.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C14E26D78F2A00CACBBE /* NativeHost.ts */; };
+		4982C26426D78F2B00CACBBE /* nativeHostMock.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C14F26D78F2A00CACBBE /* nativeHostMock.ts */; };
+		4982C26526D78F2B00CACBBE /* nativeHostMock.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C14F26D78F2A00CACBBE /* nativeHostMock.ts */; };
+		4982C26626D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C15026D78F2A00CACBBE /* index.ts */; };
+		4982C26726D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C15026D78F2A00CACBBE /* index.ts */; };
+		4982C26826D78F2B00CACBBE /* index.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C15226D78F2A00CACBBE /* index.tsx */; };
+		4982C26926D78F2B00CACBBE /* index.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C15226D78F2A00CACBBE /* index.tsx */; };
+		4982C26A26D78F2B00CACBBE /* PopupStore.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C15426D78F2A00CACBBE /* PopupStore.ts */; };
+		4982C26B26D78F2B00CACBBE /* PopupStore.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C15426D78F2A00CACBBE /* PopupStore.ts */; };
+		4982C26C26D78F2B00CACBBE /* image-utils.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C15526D78F2A00CACBBE /* image-utils.ts */; };
+		4982C26D26D78F2B00CACBBE /* image-utils.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C15526D78F2A00CACBBE /* image-utils.ts */; };
+		4982C26E26D78F2B00CACBBE /* Icon.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C15826D78F2A00CACBBE /* Icon.tsx */; };
+		4982C26F26D78F2B00CACBBE /* Icon.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C15826D78F2A00CACBBE /* Icon.tsx */; };
+		4982C27026D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C15A26D78F2A00CACBBE /* index.ts */; };
+		4982C27126D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C15A26D78F2A00CACBBE /* index.ts */; };
+		4982C27226D78F2B00CACBBE /* boldText.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C15B26D78F2A00CACBBE /* boldText.tsx */; };
+		4982C27326D78F2B00CACBBE /* boldText.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C15B26D78F2A00CACBBE /* boldText.tsx */; };
+		4982C27426D78F2B00CACBBE /* Switcher.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C15D26D78F2A00CACBBE /* Switcher.tsx */; };
+		4982C27526D78F2B00CACBBE /* Switcher.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C15D26D78F2A00CACBBE /* Switcher.tsx */; };
+		4982C27626D78F2B00CACBBE /* switcher.pcss in Resources */ = {isa = PBXBuildFile; fileRef = 4982C15E26D78F2A00CACBBE /* switcher.pcss */; };
+		4982C27726D78F2B00CACBBE /* switcher.pcss in Resources */ = {isa = PBXBuildFile; fileRef = 4982C15E26D78F2A00CACBBE /* switcher.pcss */; };
+		4982C27826D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C15F26D78F2A00CACBBE /* index.ts */; };
+		4982C27926D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C15F26D78F2A00CACBBE /* index.ts */; };
+		4982C27A26D78F2B00CACBBE /* Popup.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C16126D78F2A00CACBBE /* Popup.tsx */; };
+		4982C27B26D78F2B00CACBBE /* Popup.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C16126D78F2A00CACBBE /* Popup.tsx */; };
+		4982C27C26D78F2B00CACBBE /* popup.pcss in Resources */ = {isa = PBXBuildFile; fileRef = 4982C16226D78F2A00CACBBE /* popup.pcss */; };
+		4982C27D26D78F2B00CACBBE /* popup.pcss in Resources */ = {isa = PBXBuildFile; fileRef = 4982C16226D78F2A00CACBBE /* popup.pcss */; };
+		4982C27E26D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C16326D78F2A00CACBBE /* index.ts */; };
+		4982C27F26D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C16326D78F2A00CACBBE /* index.ts */; };
+		4982C28026D78F2B00CACBBE /* Loader.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C16526D78F2A00CACBBE /* Loader.tsx */; };
+		4982C28126D78F2B00CACBBE /* Loader.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C16526D78F2A00CACBBE /* Loader.tsx */; };
+		4982C28226D78F2B00CACBBE /* loader.pcss in Resources */ = {isa = PBXBuildFile; fileRef = 4982C16626D78F2A00CACBBE /* loader.pcss */; };
+		4982C28326D78F2B00CACBBE /* loader.pcss in Resources */ = {isa = PBXBuildFile; fileRef = 4982C16626D78F2A00CACBBE /* loader.pcss */; };
+		4982C28426D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C16726D78F2A00CACBBE /* index.ts */; };
+		4982C28526D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C16726D78F2A00CACBBE /* index.ts */; };
+		4982C28626D78F2B00CACBBE /* Button.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C16926D78F2A00CACBBE /* Button.tsx */; };
+		4982C28726D78F2B00CACBBE /* Button.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C16926D78F2A00CACBBE /* Button.tsx */; };
+		4982C28826D78F2B00CACBBE /* button.pcss in Resources */ = {isa = PBXBuildFile; fileRef = 4982C16A26D78F2A00CACBBE /* button.pcss */; };
+		4982C28926D78F2B00CACBBE /* button.pcss in Resources */ = {isa = PBXBuildFile; fileRef = 4982C16A26D78F2A00CACBBE /* button.pcss */; };
+		4982C28A26D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C16B26D78F2A00CACBBE /* index.ts */; };
+		4982C28B26D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C16B26D78F2A00CACBBE /* index.ts */; };
+		4982C28C26D78F2B00CACBBE /* support.pcss in Resources */ = {isa = PBXBuildFile; fileRef = 4982C16D26D78F2A00CACBBE /* support.pcss */; };
+		4982C28D26D78F2B00CACBBE /* support.pcss in Resources */ = {isa = PBXBuildFile; fileRef = 4982C16D26D78F2A00CACBBE /* support.pcss */; };
+		4982C28E26D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C16E26D78F2A00CACBBE /* index.ts */; };
+		4982C28F26D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C16E26D78F2A00CACBBE /* index.ts */; };
+		4982C29026D78F2B00CACBBE /* Support.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C16F26D78F2A00CACBBE /* Support.tsx */; };
+		4982C29126D78F2B00CACBBE /* Support.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C16F26D78F2A00CACBBE /* Support.tsx */; };
+		4982C29226D78F2B00CACBBE /* Modals.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C17126D78F2A00CACBBE /* Modals.tsx */; };
+		4982C29326D78F2B00CACBBE /* Modals.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C17126D78F2A00CACBBE /* Modals.tsx */; };
+		4982C29426D78F2B00CACBBE /* UpgradeModal.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C17326D78F2A00CACBBE /* UpgradeModal.tsx */; };
+		4982C29526D78F2B00CACBBE /* UpgradeModal.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C17326D78F2A00CACBBE /* UpgradeModal.tsx */; };
+		4982C29626D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C17426D78F2A00CACBBE /* index.ts */; };
+		4982C29726D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C17426D78F2A00CACBBE /* index.ts */; };
+		4982C29826D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C17626D78F2A00CACBBE /* index.ts */; };
+		4982C29926D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C17626D78F2A00CACBBE /* index.ts */; };
+		4982C29A26D78F2B00CACBBE /* SitesAllowedModal.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C17726D78F2A00CACBBE /* SitesAllowedModal.tsx */; };
+		4982C29B26D78F2B00CACBBE /* SitesAllowedModal.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C17726D78F2A00CACBBE /* SitesAllowedModal.tsx */; };
+		4982C29C26D78F2B00CACBBE /* modal.pcss in Resources */ = {isa = PBXBuildFile; fileRef = 4982C17926D78F2A00CACBBE /* modal.pcss */; };
+		4982C29D26D78F2B00CACBBE /* modal.pcss in Resources */ = {isa = PBXBuildFile; fileRef = 4982C17926D78F2A00CACBBE /* modal.pcss */; };
+		4982C29E26D78F2B00CACBBE /* Modal.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C17A26D78F2A00CACBBE /* Modal.tsx */; };
+		4982C29F26D78F2B00CACBBE /* Modal.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C17A26D78F2A00CACBBE /* Modal.tsx */; };
+		4982C2A026D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C17B26D78F2A00CACBBE /* index.ts */; };
+		4982C2A126D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C17B26D78F2A00CACBBE /* index.ts */; };
+		4982C2A226D78F2B00CACBBE /* protection-disabled.pcss in Resources */ = {isa = PBXBuildFile; fileRef = 4982C17D26D78F2A00CACBBE /* protection-disabled.pcss */; };
+		4982C2A326D78F2B00CACBBE /* protection-disabled.pcss in Resources */ = {isa = PBXBuildFile; fileRef = 4982C17D26D78F2A00CACBBE /* protection-disabled.pcss */; };
+		4982C2A426D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C17E26D78F2A00CACBBE /* index.ts */; };
+		4982C2A526D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C17E26D78F2A00CACBBE /* index.ts */; };
+		4982C2A626D78F2B00CACBBE /* ProtectionDisabledModal.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C17F26D78F2A00CACBBE /* ProtectionDisabledModal.tsx */; };
+		4982C2A726D78F2B00CACBBE /* ProtectionDisabledModal.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C17F26D78F2A00CACBBE /* ProtectionDisabledModal.tsx */; };
+		4982C2A826D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C18026D78F2A00CACBBE /* index.ts */; };
+		4982C2A926D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C18026D78F2A00CACBBE /* index.ts */; };
+		4982C2AA26D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C18326D78F2A00CACBBE /* index.ts */; };
+		4982C2AB26D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C18326D78F2A00CACBBE /* index.ts */; };
+		4982C2AC26D78F2B00CACBBE /* ProtectionToggle.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C18426D78F2A00CACBBE /* ProtectionToggle.tsx */; };
+		4982C2AD26D78F2B00CACBBE /* ProtectionToggle.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C18426D78F2A00CACBBE /* ProtectionToggle.tsx */; };
+		4982C2AE26D78F2B00CACBBE /* BlockElement.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C18626D78F2A00CACBBE /* BlockElement.tsx */; };
+		4982C2AF26D78F2B00CACBBE /* BlockElement.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C18626D78F2A00CACBBE /* BlockElement.tsx */; };
+		4982C2B026D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C18726D78F2A00CACBBE /* index.ts */; };
+		4982C2B126D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C18726D78F2A00CACBBE /* index.ts */; };
+		4982C2B226D78F2B00CACBBE /* action.pcss in Resources */ = {isa = PBXBuildFile; fileRef = 4982C18926D78F2A00CACBBE /* action.pcss */; };
+		4982C2B326D78F2B00CACBBE /* action.pcss in Resources */ = {isa = PBXBuildFile; fileRef = 4982C18926D78F2A00CACBBE /* action.pcss */; };
+		4982C2B426D78F2B00CACBBE /* Action.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C18A26D78F2A00CACBBE /* Action.tsx */; };
+		4982C2B526D78F2B00CACBBE /* Action.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C18A26D78F2A00CACBBE /* Action.tsx */; };
+		4982C2B626D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C18B26D78F2A00CACBBE /* index.ts */; };
+		4982C2B726D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C18B26D78F2A00CACBBE /* index.ts */; };
+		4982C2B826D78F2B00CACBBE /* DeleteUserRules.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C18D26D78F2A00CACBBE /* DeleteUserRules.tsx */; };
+		4982C2B926D78F2B00CACBBE /* DeleteUserRules.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C18D26D78F2A00CACBBE /* DeleteUserRules.tsx */; };
+		4982C2BA26D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C18E26D78F2A00CACBBE /* index.ts */; };
+		4982C2BB26D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C18E26D78F2A00CACBBE /* index.ts */; };
+		4982C2BC26D78F2B00CACBBE /* actions.pcss in Resources */ = {isa = PBXBuildFile; fileRef = 4982C18F26D78F2A00CACBBE /* actions.pcss */; };
+		4982C2BD26D78F2B00CACBBE /* actions.pcss in Resources */ = {isa = PBXBuildFile; fileRef = 4982C18F26D78F2A00CACBBE /* actions.pcss */; };
+		4982C2BE26D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C19026D78F2A00CACBBE /* index.ts */; };
+		4982C2BF26D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C19026D78F2A00CACBBE /* index.ts */; };
+		4982C2C026D78F2B00CACBBE /* CurrentSite.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C19226D78F2A00CACBBE /* CurrentSite.tsx */; };
+		4982C2C126D78F2B00CACBBE /* CurrentSite.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C19226D78F2A00CACBBE /* CurrentSite.tsx */; };
+		4982C2C226D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C19326D78F2A00CACBBE /* index.ts */; };
+		4982C2C326D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C19326D78F2A00CACBBE /* index.ts */; };
+		4982C2C426D78F2B00CACBBE /* Actions.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C19426D78F2A00CACBBE /* Actions.tsx */; };
+		4982C2C526D78F2B00CACBBE /* Actions.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C19426D78F2A00CACBBE /* Actions.tsx */; };
+		4982C2C626D78F2B00CACBBE /* useFullscreen.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C19626D78F2A00CACBBE /* useFullscreen.ts */; };
+		4982C2C726D78F2B00CACBBE /* useFullscreen.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C19626D78F2A00CACBBE /* useFullscreen.ts */; };
+		4982C2C826D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C19926D78F2A00CACBBE /* index.ts */; };
+		4982C2C926D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C19926D78F2A00CACBBE /* index.ts */; };
+		4982C2CA26D78F2B00CACBBE /* content.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C19A26D78F2A00CACBBE /* content.ts */; };
+		4982C2CB26D78F2B00CACBBE /* content.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C19A26D78F2A00CACBBE /* content.ts */; };
+		4982C2CC26D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C19B26D78F2A00CACBBE /* index.ts */; };
+		4982C2CD26D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C19B26D78F2A00CACBBE /* index.ts */; };
+		4982C2CE26D78F2B00CACBBE /* translator.js in Resources */ = {isa = PBXBuildFile; fileRef = 4982C19E26D78F2A00CACBBE /* translator.js */; };
+		4982C2CF26D78F2B00CACBBE /* translator.js in Resources */ = {isa = PBXBuildFile; fileRef = 4982C19E26D78F2A00CACBBE /* translator.js */; };
+		4982C2D026D78F2B00CACBBE /* reactTranslator.js in Resources */ = {isa = PBXBuildFile; fileRef = 4982C19F26D78F2A00CACBBE /* reactTranslator.js */; };
+		4982C2D126D78F2B00CACBBE /* reactTranslator.js in Resources */ = {isa = PBXBuildFile; fileRef = 4982C19F26D78F2A00CACBBE /* reactTranslator.js */; };
+		4982C2D226D78F2B00CACBBE /* i18n.js in Resources */ = {isa = PBXBuildFile; fileRef = 4982C1A026D78F2A00CACBBE /* i18n.js */; };
+		4982C2D326D78F2B00CACBBE /* i18n.js in Resources */ = {isa = PBXBuildFile; fileRef = 4982C1A026D78F2A00CACBBE /* i18n.js */; };
+		4982C2D426D78F2B00CACBBE /* icons.pcss in Resources */ = {isa = PBXBuildFile; fileRef = 4982C1A326D78F2A00CACBBE /* icons.pcss */; };
+		4982C2D526D78F2B00CACBBE /* icons.pcss in Resources */ = {isa = PBXBuildFile; fileRef = 4982C1A326D78F2A00CACBBE /* icons.pcss */; };
+		4982C2D626D78F2B00CACBBE /* Icons.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C1A426D78F2A00CACBBE /* Icons.tsx */; };
+		4982C2D726D78F2B00CACBBE /* Icons.tsx in Resources */ = {isa = PBXBuildFile; fileRef = 4982C1A426D78F2A00CACBBE /* Icons.tsx */; };
+		4982C2D826D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C1A526D78F2A00CACBBE /* index.ts */; };
+		4982C2D926D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C1A526D78F2A00CACBBE /* index.ts */; };
+		4982C2DA26D78F2B00CACBBE /* url.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C1A726D78F2A00CACBBE /* url.ts */; };
+		4982C2DB26D78F2B00CACBBE /* url.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C1A726D78F2A00CACBBE /* url.ts */; };
+		4982C2DC26D78F2B00CACBBE /* Messenger.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C1A926D78F2A00CACBBE /* Messenger.ts */; };
+		4982C2DD26D78F2B00CACBBE /* Messenger.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C1A926D78F2A00CACBBE /* Messenger.ts */; };
+		4982C2DE26D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C1AA26D78F2A00CACBBE /* index.ts */; };
+		4982C2DF26D78F2B00CACBBE /* index.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C1AA26D78F2A00CACBBE /* index.ts */; };
+		4982C2E026D78F2B00CACBBE /* constants.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C1AB26D78F2A00CACBBE /* constants.ts */; };
+		4982C2E126D78F2B00CACBBE /* constants.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C1AB26D78F2A00CACBBE /* constants.ts */; };
+		4982C2E226D78F2B00CACBBE /* log.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C1AC26D78F2A00CACBBE /* log.ts */; };
+		4982C2E326D78F2B00CACBBE /* log.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C1AC26D78F2A00CACBBE /* log.ts */; };
+		4982C2E426D78F2B00CACBBE /* logNative.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C1AD26D78F2A00CACBBE /* logNative.ts */; };
+		4982C2E526D78F2B00CACBBE /* logNative.ts in Resources */ = {isa = PBXBuildFile; fileRef = 4982C1AD26D78F2A00CACBBE /* logNative.ts */; };
 		6513182E1BDE448D008DCFF9 /* ActionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 65C52B361B906105003AF42F /* ActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6517EE761C86F46E00E055D2 /* ActionExtension.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 651D67931BB02B44007F00FA /* ActionExtension.entitlements */; };
 		6517EE771C86F47C00E055D2 /* Adguard.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 65F398711B7C9C5000ABCD39 /* Adguard.entitlements */; };
@@ -2834,6 +3146,162 @@
 		24F66A8426033C9D0097B426 /* OpenDnsSettingsControllerWithLaunchScreenParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDnsSettingsControllerWithLaunchScreenParser.swift; sourceTree = "<group>"; };
 		24F66A9926033DA00097B426 /* OpenMainPageControllerControllerWithLaunchScreenParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenMainPageControllerControllerWithLaunchScreenParser.swift; sourceTree = "<group>"; };
 		4020A90022C3C863009C188F /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
+		4982C0BF26D78F2900CACBBE /* unused.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = unused.ts; sourceTree = "<group>"; };
+		4982C0C026D78F2900CACBBE /* helpers.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = helpers.ts; sourceTree = "<group>"; };
+		4982C0C126D78F2900CACBBE /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
+		4982C0C226D78F2900CACBBE /* validate.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = validate.ts; sourceTree = "<group>"; };
+		4982C0C326D78F2900CACBBE /* types.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = types.ts; sourceTree = "<group>"; };
+		4982C0C426D78F2900CACBBE /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		4982C0C526D78F2900CACBBE /* constants.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = constants.ts; sourceTree = "<group>"; };
+		4982C0C626D78F2900CACBBE /* download.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = download.ts; sourceTree = "<group>"; };
+		4982C0C726D78F2900CACBBE /* renew.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = renew.ts; sourceTree = "<group>"; };
+		4982C0C826D78F2900CACBBE /* log.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = log.ts; sourceTree = "<group>"; };
+		4982C0C926D78F2900CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C0CA26D78F2900CACBBE /* upload.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = upload.ts; sourceTree = "<group>"; };
+		4982C0CC26D78F2900CACBBE /* bundle-runner.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "bundle-runner.ts"; sourceTree = "<group>"; };
+		4982C0CD26D78F2900CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C0CE26D78F2900CACBBE /* webpack.config.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = webpack.config.ts; sourceTree = "<group>"; };
+		4982C0CF26D78F2900CACBBE /* bundle.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bundle.ts; sourceTree = "<group>"; };
+		4982C0D226D78F2900CACBBE /* chrome.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chrome.ts; sourceTree = "<group>"; };
+		4982C0D326D78F2900CACBBE /* .twosky.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = .twosky.json; sourceTree = "<group>"; };
+		4982C0D426D78F2900CACBBE /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		4982C0D526D78F2900CACBBE /* yarn.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = yarn.lock; sourceTree = "<group>"; };
+		4982C0D626D78F2900CACBBE /* babel.config.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = babel.config.js; sourceTree = "<group>"; };
+		4982C0D726D78F2900CACBBE /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		4982C0D826D78F2900CACBBE /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
+		4982C0D926D78F2900CACBBE /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		4982C0DA26D78F2900CACBBE /* .eslintrc.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = .eslintrc.js; sourceTree = "<group>"; };
+		4982C0DB26D78F2900CACBBE /* tsconfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tsconfig.json; sourceTree = "<group>"; };
+		4982C0DC26D78F2900CACBBE /* .eslintignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .eslintignore; sourceTree = "<group>"; };
+		4982C0DD26D78F2900CACBBE /* postcss.config.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = postcss.config.js; sourceTree = "<group>"; };
+		4982C0DE26D78F2900CACBBE /* jest.config.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = jest.config.ts; sourceTree = "<group>"; };
+		4982C0E226D78F2900CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C0E426D78F2900CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C0E626D78F2900CACBBE /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		4982C0E726D78F2900CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C0E926D78F2900CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C0EB26D78F2900CACBBE /* toolbar-icon-19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar-icon-19.png"; sourceTree = "<group>"; };
+		4982C0EC26D78F2900CACBBE /* toolbar-icon-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar-icon-32.png"; sourceTree = "<group>"; };
+		4982C0ED26D78F2900CACBBE /* icon-256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-256.png"; sourceTree = "<group>"; };
+		4982C0EE26D78F2900CACBBE /* icon-48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-48.png"; sourceTree = "<group>"; };
+		4982C0EF26D78F2900CACBBE /* icon-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-64.png"; sourceTree = "<group>"; };
+		4982C0F026D78F2900CACBBE /* icon-96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-96.png"; sourceTree = "<group>"; };
+		4982C0F126D78F2900CACBBE /* toolbar-icon-38.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar-icon-38.png"; sourceTree = "<group>"; };
+		4982C0F226D78F2900CACBBE /* icon-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-128.png"; sourceTree = "<group>"; };
+		4982C0F326D78F2900CACBBE /* toolbar-icon-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar-icon-16.png"; sourceTree = "<group>"; };
+		4982C0F426D78F2900CACBBE /* icon-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-512.png"; sourceTree = "<group>"; };
+		4982C0F526D78F2900CACBBE /* vars.pcss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vars.pcss; sourceTree = "<group>"; };
+		4982C0F626D78F2900CACBBE /* manifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
+		4982C0F926D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C0FB26D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C0FD26D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C0FF26D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C10126D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C10326D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C10526D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C10726D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C10926D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C10B26D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C10D26D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C10F26D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C11126D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C11326D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C11526D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C11726D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C11926D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C11B26D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C11D26D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C11F26D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C12126D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C12326D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C12526D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C12726D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C12926D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C12B26D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C12D26D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C12F26D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C13126D78F2900CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C13326D78F2A00CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C13526D78F2A00CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C13726D78F2A00CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C13926D78F2A00CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C13B26D78F2A00CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C13D26D78F2A00CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C13F26D78F2A00CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C14126D78F2A00CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C14326D78F2A00CACBBE /* messages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = messages.json; sourceTree = "<group>"; };
+		4982C14626D78F2A00CACBBE /* permissions.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = permissions.ts; sourceTree = "<group>"; };
+		4982C14726D78F2A00CACBBE /* app.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = app.ts; sourceTree = "<group>"; };
+		4982C14926D78F2A00CACBBE /* Storage.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Storage.ts; sourceTree = "<group>"; };
+		4982C14A26D78F2A00CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C14B26D78F2A00CACBBE /* background.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = background.ts; sourceTree = "<group>"; };
+		4982C14C26D78F2A00CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C14E26D78F2A00CACBBE /* NativeHost.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NativeHost.ts; sourceTree = "<group>"; };
+		4982C14F26D78F2A00CACBBE /* nativeHostMock.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nativeHostMock.ts; sourceTree = "<group>"; };
+		4982C15026D78F2A00CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C15226D78F2A00CACBBE /* index.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.tsx; sourceTree = "<group>"; };
+		4982C15426D78F2A00CACBBE /* PopupStore.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PopupStore.ts; sourceTree = "<group>"; };
+		4982C15526D78F2A00CACBBE /* image-utils.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "image-utils.ts"; sourceTree = "<group>"; };
+		4982C15826D78F2A00CACBBE /* Icon.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Icon.tsx; sourceTree = "<group>"; };
+		4982C15A26D78F2A00CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C15B26D78F2A00CACBBE /* boldText.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = boldText.tsx; sourceTree = "<group>"; };
+		4982C15D26D78F2A00CACBBE /* Switcher.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Switcher.tsx; sourceTree = "<group>"; };
+		4982C15E26D78F2A00CACBBE /* switcher.pcss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = switcher.pcss; sourceTree = "<group>"; };
+		4982C15F26D78F2A00CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C16126D78F2A00CACBBE /* Popup.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Popup.tsx; sourceTree = "<group>"; };
+		4982C16226D78F2A00CACBBE /* popup.pcss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = popup.pcss; sourceTree = "<group>"; };
+		4982C16326D78F2A00CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C16526D78F2A00CACBBE /* Loader.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Loader.tsx; sourceTree = "<group>"; };
+		4982C16626D78F2A00CACBBE /* loader.pcss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = loader.pcss; sourceTree = "<group>"; };
+		4982C16726D78F2A00CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C16926D78F2A00CACBBE /* Button.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Button.tsx; sourceTree = "<group>"; };
+		4982C16A26D78F2A00CACBBE /* button.pcss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = button.pcss; sourceTree = "<group>"; };
+		4982C16B26D78F2A00CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C16D26D78F2A00CACBBE /* support.pcss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = support.pcss; sourceTree = "<group>"; };
+		4982C16E26D78F2A00CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C16F26D78F2A00CACBBE /* Support.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Support.tsx; sourceTree = "<group>"; };
+		4982C17126D78F2A00CACBBE /* Modals.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Modals.tsx; sourceTree = "<group>"; };
+		4982C17326D78F2A00CACBBE /* UpgradeModal.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UpgradeModal.tsx; sourceTree = "<group>"; };
+		4982C17426D78F2A00CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C17626D78F2A00CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C17726D78F2A00CACBBE /* SitesAllowedModal.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SitesAllowedModal.tsx; sourceTree = "<group>"; };
+		4982C17926D78F2A00CACBBE /* modal.pcss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = modal.pcss; sourceTree = "<group>"; };
+		4982C17A26D78F2A00CACBBE /* Modal.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Modal.tsx; sourceTree = "<group>"; };
+		4982C17B26D78F2A00CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C17D26D78F2A00CACBBE /* protection-disabled.pcss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "protection-disabled.pcss"; sourceTree = "<group>"; };
+		4982C17E26D78F2A00CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C17F26D78F2A00CACBBE /* ProtectionDisabledModal.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ProtectionDisabledModal.tsx; sourceTree = "<group>"; };
+		4982C18026D78F2A00CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C18326D78F2A00CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C18426D78F2A00CACBBE /* ProtectionToggle.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ProtectionToggle.tsx; sourceTree = "<group>"; };
+		4982C18626D78F2A00CACBBE /* BlockElement.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BlockElement.tsx; sourceTree = "<group>"; };
+		4982C18726D78F2A00CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C18926D78F2A00CACBBE /* action.pcss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = action.pcss; sourceTree = "<group>"; };
+		4982C18A26D78F2A00CACBBE /* Action.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Action.tsx; sourceTree = "<group>"; };
+		4982C18B26D78F2A00CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C18D26D78F2A00CACBBE /* DeleteUserRules.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DeleteUserRules.tsx; sourceTree = "<group>"; };
+		4982C18E26D78F2A00CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C18F26D78F2A00CACBBE /* actions.pcss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = actions.pcss; sourceTree = "<group>"; };
+		4982C19026D78F2A00CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C19226D78F2A00CACBBE /* CurrentSite.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CurrentSite.tsx; sourceTree = "<group>"; };
+		4982C19326D78F2A00CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C19426D78F2A00CACBBE /* Actions.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Actions.tsx; sourceTree = "<group>"; };
+		4982C19626D78F2A00CACBBE /* useFullscreen.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = useFullscreen.ts; sourceTree = "<group>"; };
+		4982C19926D78F2A00CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C19A26D78F2A00CACBBE /* content.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = content.ts; sourceTree = "<group>"; };
+		4982C19B26D78F2A00CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C19E26D78F2A00CACBBE /* translator.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = translator.js; sourceTree = "<group>"; };
+		4982C19F26D78F2A00CACBBE /* reactTranslator.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = reactTranslator.js; sourceTree = "<group>"; };
+		4982C1A026D78F2A00CACBBE /* i18n.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = i18n.js; sourceTree = "<group>"; };
+		4982C1A326D78F2A00CACBBE /* icons.pcss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = icons.pcss; sourceTree = "<group>"; };
+		4982C1A426D78F2A00CACBBE /* Icons.tsx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Icons.tsx; sourceTree = "<group>"; };
+		4982C1A526D78F2A00CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C1A726D78F2A00CACBBE /* url.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = url.ts; sourceTree = "<group>"; };
+		4982C1A926D78F2A00CACBBE /* Messenger.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Messenger.ts; sourceTree = "<group>"; };
+		4982C1AA26D78F2A00CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
+		4982C1AB26D78F2A00CACBBE /* constants.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = constants.ts; sourceTree = "<group>"; };
+		4982C1AC26D78F2A00CACBBE /* log.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = log.ts; sourceTree = "<group>"; };
+		4982C1AD26D78F2A00CACBBE /* logNative.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = logNative.ts; sourceTree = "<group>"; };
 		65040D251E11652A00DE25D1 /* ExternalLibsSources.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ExternalLibsSources.js; sourceTree = "<group>"; };
 		65163CBD1BE7BA01000A3575 /* it */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		65163CC11BE7BA03000A3575 /* it */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
@@ -4282,6 +4750,849 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		4982C0BC26D78F2900CACBBE /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				4982C0DF26D78F2900CACBBE /* src */,
+				4982C0BD26D78F2900CACBBE /* tools */,
+				4982C0D026D78F2900CACBBE /* tests */,
+				4982C0D326D78F2900CACBBE /* .twosky.json */,
+				4982C0D426D78F2900CACBBE /* LICENSE */,
+				4982C0D526D78F2900CACBBE /* yarn.lock */,
+				4982C0D626D78F2900CACBBE /* babel.config.js */,
+				4982C0D726D78F2900CACBBE /* .gitignore */,
+				4982C0D826D78F2900CACBBE /* package.json */,
+				4982C0D926D78F2900CACBBE /* README.md */,
+				4982C0DA26D78F2900CACBBE /* .eslintrc.js */,
+				4982C0DB26D78F2900CACBBE /* tsconfig.json */,
+				4982C0DC26D78F2900CACBBE /* .eslintignore */,
+				4982C0DD26D78F2900CACBBE /* postcss.config.js */,
+				4982C0DE26D78F2900CACBBE /* jest.config.ts */,
+			);
+			path = extension;
+			sourceTree = "<group>";
+		};
+		4982C0BD26D78F2900CACBBE /* tools */ = {
+			isa = PBXGroup;
+			children = (
+				4982C0BE26D78F2900CACBBE /* locales */,
+				4982C0CB26D78F2900CACBBE /* bundle */,
+			);
+			path = tools;
+			sourceTree = "<group>";
+		};
+		4982C0BE26D78F2900CACBBE /* locales */ = {
+			isa = PBXGroup;
+			children = (
+				4982C0BF26D78F2900CACBBE /* unused.ts */,
+				4982C0C026D78F2900CACBBE /* helpers.ts */,
+				4982C0C126D78F2900CACBBE /* config.json */,
+				4982C0C226D78F2900CACBBE /* validate.ts */,
+				4982C0C326D78F2900CACBBE /* types.ts */,
+				4982C0C426D78F2900CACBBE /* README.md */,
+				4982C0C526D78F2900CACBBE /* constants.ts */,
+				4982C0C626D78F2900CACBBE /* download.ts */,
+				4982C0C726D78F2900CACBBE /* renew.ts */,
+				4982C0C826D78F2900CACBBE /* log.ts */,
+				4982C0C926D78F2900CACBBE /* index.ts */,
+				4982C0CA26D78F2900CACBBE /* upload.ts */,
+			);
+			path = locales;
+			sourceTree = "<group>";
+		};
+		4982C0CB26D78F2900CACBBE /* bundle */ = {
+			isa = PBXGroup;
+			children = (
+				4982C0CC26D78F2900CACBBE /* bundle-runner.ts */,
+				4982C0CD26D78F2900CACBBE /* index.ts */,
+				4982C0CE26D78F2900CACBBE /* webpack.config.ts */,
+				4982C0CF26D78F2900CACBBE /* bundle.ts */,
+			);
+			path = bundle;
+			sourceTree = "<group>";
+		};
+		4982C0D026D78F2900CACBBE /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				4982C0D126D78F2900CACBBE /* __setups__ */,
+			);
+			path = tests;
+			sourceTree = "<group>";
+		};
+		4982C0D126D78F2900CACBBE /* __setups__ */ = {
+			isa = PBXGroup;
+			children = (
+				4982C0D226D78F2900CACBBE /* chrome.ts */,
+			);
+			path = __setups__;
+			sourceTree = "<group>";
+		};
+		4982C0DF26D78F2900CACBBE /* src */ = {
+			isa = PBXGroup;
+			children = (
+				4982C0E026D78F2900CACBBE /* targets */,
+				4982C0EA26D78F2900CACBBE /* images */,
+				4982C0F526D78F2900CACBBE /* vars.pcss */,
+				4982C0F626D78F2900CACBBE /* manifest.json */,
+				4982C0F726D78F2900CACBBE /* _locales */,
+				4982C14426D78F2A00CACBBE /* pages */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		4982C0E026D78F2900CACBBE /* targets */ = {
+			isa = PBXGroup;
+			children = (
+				4982C0E126D78F2900CACBBE /* background */,
+				4982C0E326D78F2900CACBBE /* assistant */,
+				4982C0E526D78F2900CACBBE /* popup */,
+				4982C0E826D78F2900CACBBE /* content */,
+			);
+			path = targets;
+			sourceTree = "<group>";
+		};
+		4982C0E126D78F2900CACBBE /* background */ = {
+			isa = PBXGroup;
+			children = (
+				4982C0E226D78F2900CACBBE /* index.ts */,
+			);
+			path = background;
+			sourceTree = "<group>";
+		};
+		4982C0E326D78F2900CACBBE /* assistant */ = {
+			isa = PBXGroup;
+			children = (
+				4982C0E426D78F2900CACBBE /* index.ts */,
+			);
+			path = assistant;
+			sourceTree = "<group>";
+		};
+		4982C0E526D78F2900CACBBE /* popup */ = {
+			isa = PBXGroup;
+			children = (
+				4982C0E626D78F2900CACBBE /* index.html */,
+				4982C0E726D78F2900CACBBE /* index.ts */,
+			);
+			path = popup;
+			sourceTree = "<group>";
+		};
+		4982C0E826D78F2900CACBBE /* content */ = {
+			isa = PBXGroup;
+			children = (
+				4982C0E926D78F2900CACBBE /* index.ts */,
+			);
+			path = content;
+			sourceTree = "<group>";
+		};
+		4982C0EA26D78F2900CACBBE /* images */ = {
+			isa = PBXGroup;
+			children = (
+				4982C0EB26D78F2900CACBBE /* toolbar-icon-19.png */,
+				4982C0EC26D78F2900CACBBE /* toolbar-icon-32.png */,
+				4982C0ED26D78F2900CACBBE /* icon-256.png */,
+				4982C0EE26D78F2900CACBBE /* icon-48.png */,
+				4982C0EF26D78F2900CACBBE /* icon-64.png */,
+				4982C0F026D78F2900CACBBE /* icon-96.png */,
+				4982C0F126D78F2900CACBBE /* toolbar-icon-38.png */,
+				4982C0F226D78F2900CACBBE /* icon-128.png */,
+				4982C0F326D78F2900CACBBE /* toolbar-icon-16.png */,
+				4982C0F426D78F2900CACBBE /* icon-512.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		4982C0F726D78F2900CACBBE /* _locales */ = {
+			isa = PBXGroup;
+			children = (
+				4982C0F826D78F2900CACBBE /* sl */,
+				4982C0FA26D78F2900CACBBE /* sk */,
+				4982C0FC26D78F2900CACBBE /* pl */,
+				4982C0FE26D78F2900CACBBE /* vi */,
+				4982C10026D78F2900CACBBE /* sv */,
+				4982C10226D78F2900CACBBE /* ms */,
+				4982C10426D78F2900CACBBE /* hy */,
+				4982C10626D78F2900CACBBE /* be */,
+				4982C10826D78F2900CACBBE /* da */,
+				4982C10A26D78F2900CACBBE /* ja */,
+				4982C10C26D78F2900CACBBE /* el */,
+				4982C10E26D78F2900CACBBE /* it */,
+				4982C11026D78F2900CACBBE /* ca */,
+				4982C11226D78F2900CACBBE /* cs */,
+				4982C11426D78F2900CACBBE /* ru */,
+				4982C11626D78F2900CACBBE /* ro */,
+				4982C11826D78F2900CACBBE /* sr-Latn */,
+				4982C11A26D78F2900CACBBE /* uk */,
+				4982C11C26D78F2900CACBBE /* ar */,
+				4982C11E26D78F2900CACBBE /* hr */,
+				4982C12026D78F2900CACBBE /* hu */,
+				4982C12226D78F2900CACBBE /* nl */,
+				4982C12426D78F2900CACBBE /* bg */,
+				4982C12626D78F2900CACBBE /* nb */,
+				4982C12826D78F2900CACBBE /* de */,
+				4982C12A26D78F2900CACBBE /* ko */,
+				4982C12C26D78F2900CACBBE /* fi */,
+				4982C12E26D78F2900CACBBE /* zh_TW */,
+				4982C13026D78F2900CACBBE /* id */,
+				4982C13226D78F2A00CACBBE /* fr */,
+				4982C13426D78F2A00CACBBE /* es */,
+				4982C13626D78F2A00CACBBE /* en */,
+				4982C13826D78F2A00CACBBE /* fa */,
+				4982C13A26D78F2A00CACBBE /* lt */,
+				4982C13C26D78F2A00CACBBE /* pt_BR */,
+				4982C13E26D78F2A00CACBBE /* zh_CN */,
+				4982C14026D78F2A00CACBBE /* pt_PT */,
+				4982C14226D78F2A00CACBBE /* tr */,
+			);
+			path = _locales;
+			sourceTree = "<group>";
+		};
+		4982C0F826D78F2900CACBBE /* sl */ = {
+			isa = PBXGroup;
+			children = (
+				4982C0F926D78F2900CACBBE /* messages.json */,
+			);
+			path = sl;
+			sourceTree = "<group>";
+		};
+		4982C0FA26D78F2900CACBBE /* sk */ = {
+			isa = PBXGroup;
+			children = (
+				4982C0FB26D78F2900CACBBE /* messages.json */,
+			);
+			path = sk;
+			sourceTree = "<group>";
+		};
+		4982C0FC26D78F2900CACBBE /* pl */ = {
+			isa = PBXGroup;
+			children = (
+				4982C0FD26D78F2900CACBBE /* messages.json */,
+			);
+			path = pl;
+			sourceTree = "<group>";
+		};
+		4982C0FE26D78F2900CACBBE /* vi */ = {
+			isa = PBXGroup;
+			children = (
+				4982C0FF26D78F2900CACBBE /* messages.json */,
+			);
+			path = vi;
+			sourceTree = "<group>";
+		};
+		4982C10026D78F2900CACBBE /* sv */ = {
+			isa = PBXGroup;
+			children = (
+				4982C10126D78F2900CACBBE /* messages.json */,
+			);
+			path = sv;
+			sourceTree = "<group>";
+		};
+		4982C10226D78F2900CACBBE /* ms */ = {
+			isa = PBXGroup;
+			children = (
+				4982C10326D78F2900CACBBE /* messages.json */,
+			);
+			path = ms;
+			sourceTree = "<group>";
+		};
+		4982C10426D78F2900CACBBE /* hy */ = {
+			isa = PBXGroup;
+			children = (
+				4982C10526D78F2900CACBBE /* messages.json */,
+			);
+			path = hy;
+			sourceTree = "<group>";
+		};
+		4982C10626D78F2900CACBBE /* be */ = {
+			isa = PBXGroup;
+			children = (
+				4982C10726D78F2900CACBBE /* messages.json */,
+			);
+			path = be;
+			sourceTree = "<group>";
+		};
+		4982C10826D78F2900CACBBE /* da */ = {
+			isa = PBXGroup;
+			children = (
+				4982C10926D78F2900CACBBE /* messages.json */,
+			);
+			path = da;
+			sourceTree = "<group>";
+		};
+		4982C10A26D78F2900CACBBE /* ja */ = {
+			isa = PBXGroup;
+			children = (
+				4982C10B26D78F2900CACBBE /* messages.json */,
+			);
+			path = ja;
+			sourceTree = "<group>";
+		};
+		4982C10C26D78F2900CACBBE /* el */ = {
+			isa = PBXGroup;
+			children = (
+				4982C10D26D78F2900CACBBE /* messages.json */,
+			);
+			path = el;
+			sourceTree = "<group>";
+		};
+		4982C10E26D78F2900CACBBE /* it */ = {
+			isa = PBXGroup;
+			children = (
+				4982C10F26D78F2900CACBBE /* messages.json */,
+			);
+			path = it;
+			sourceTree = "<group>";
+		};
+		4982C11026D78F2900CACBBE /* ca */ = {
+			isa = PBXGroup;
+			children = (
+				4982C11126D78F2900CACBBE /* messages.json */,
+			);
+			path = ca;
+			sourceTree = "<group>";
+		};
+		4982C11226D78F2900CACBBE /* cs */ = {
+			isa = PBXGroup;
+			children = (
+				4982C11326D78F2900CACBBE /* messages.json */,
+			);
+			path = cs;
+			sourceTree = "<group>";
+		};
+		4982C11426D78F2900CACBBE /* ru */ = {
+			isa = PBXGroup;
+			children = (
+				4982C11526D78F2900CACBBE /* messages.json */,
+			);
+			path = ru;
+			sourceTree = "<group>";
+		};
+		4982C11626D78F2900CACBBE /* ro */ = {
+			isa = PBXGroup;
+			children = (
+				4982C11726D78F2900CACBBE /* messages.json */,
+			);
+			path = ro;
+			sourceTree = "<group>";
+		};
+		4982C11826D78F2900CACBBE /* sr-Latn */ = {
+			isa = PBXGroup;
+			children = (
+				4982C11926D78F2900CACBBE /* messages.json */,
+			);
+			path = "sr-Latn";
+			sourceTree = "<group>";
+		};
+		4982C11A26D78F2900CACBBE /* uk */ = {
+			isa = PBXGroup;
+			children = (
+				4982C11B26D78F2900CACBBE /* messages.json */,
+			);
+			path = uk;
+			sourceTree = "<group>";
+		};
+		4982C11C26D78F2900CACBBE /* ar */ = {
+			isa = PBXGroup;
+			children = (
+				4982C11D26D78F2900CACBBE /* messages.json */,
+			);
+			path = ar;
+			sourceTree = "<group>";
+		};
+		4982C11E26D78F2900CACBBE /* hr */ = {
+			isa = PBXGroup;
+			children = (
+				4982C11F26D78F2900CACBBE /* messages.json */,
+			);
+			path = hr;
+			sourceTree = "<group>";
+		};
+		4982C12026D78F2900CACBBE /* hu */ = {
+			isa = PBXGroup;
+			children = (
+				4982C12126D78F2900CACBBE /* messages.json */,
+			);
+			path = hu;
+			sourceTree = "<group>";
+		};
+		4982C12226D78F2900CACBBE /* nl */ = {
+			isa = PBXGroup;
+			children = (
+				4982C12326D78F2900CACBBE /* messages.json */,
+			);
+			path = nl;
+			sourceTree = "<group>";
+		};
+		4982C12426D78F2900CACBBE /* bg */ = {
+			isa = PBXGroup;
+			children = (
+				4982C12526D78F2900CACBBE /* messages.json */,
+			);
+			path = bg;
+			sourceTree = "<group>";
+		};
+		4982C12626D78F2900CACBBE /* nb */ = {
+			isa = PBXGroup;
+			children = (
+				4982C12726D78F2900CACBBE /* messages.json */,
+			);
+			path = nb;
+			sourceTree = "<group>";
+		};
+		4982C12826D78F2900CACBBE /* de */ = {
+			isa = PBXGroup;
+			children = (
+				4982C12926D78F2900CACBBE /* messages.json */,
+			);
+			path = de;
+			sourceTree = "<group>";
+		};
+		4982C12A26D78F2900CACBBE /* ko */ = {
+			isa = PBXGroup;
+			children = (
+				4982C12B26D78F2900CACBBE /* messages.json */,
+			);
+			path = ko;
+			sourceTree = "<group>";
+		};
+		4982C12C26D78F2900CACBBE /* fi */ = {
+			isa = PBXGroup;
+			children = (
+				4982C12D26D78F2900CACBBE /* messages.json */,
+			);
+			path = fi;
+			sourceTree = "<group>";
+		};
+		4982C12E26D78F2900CACBBE /* zh_TW */ = {
+			isa = PBXGroup;
+			children = (
+				4982C12F26D78F2900CACBBE /* messages.json */,
+			);
+			path = zh_TW;
+			sourceTree = "<group>";
+		};
+		4982C13026D78F2900CACBBE /* id */ = {
+			isa = PBXGroup;
+			children = (
+				4982C13126D78F2900CACBBE /* messages.json */,
+			);
+			path = id;
+			sourceTree = "<group>";
+		};
+		4982C13226D78F2A00CACBBE /* fr */ = {
+			isa = PBXGroup;
+			children = (
+				4982C13326D78F2A00CACBBE /* messages.json */,
+			);
+			path = fr;
+			sourceTree = "<group>";
+		};
+		4982C13426D78F2A00CACBBE /* es */ = {
+			isa = PBXGroup;
+			children = (
+				4982C13526D78F2A00CACBBE /* messages.json */,
+			);
+			path = es;
+			sourceTree = "<group>";
+		};
+		4982C13626D78F2A00CACBBE /* en */ = {
+			isa = PBXGroup;
+			children = (
+				4982C13726D78F2A00CACBBE /* messages.json */,
+			);
+			path = en;
+			sourceTree = "<group>";
+		};
+		4982C13826D78F2A00CACBBE /* fa */ = {
+			isa = PBXGroup;
+			children = (
+				4982C13926D78F2A00CACBBE /* messages.json */,
+			);
+			path = fa;
+			sourceTree = "<group>";
+		};
+		4982C13A26D78F2A00CACBBE /* lt */ = {
+			isa = PBXGroup;
+			children = (
+				4982C13B26D78F2A00CACBBE /* messages.json */,
+			);
+			path = lt;
+			sourceTree = "<group>";
+		};
+		4982C13C26D78F2A00CACBBE /* pt_BR */ = {
+			isa = PBXGroup;
+			children = (
+				4982C13D26D78F2A00CACBBE /* messages.json */,
+			);
+			path = pt_BR;
+			sourceTree = "<group>";
+		};
+		4982C13E26D78F2A00CACBBE /* zh_CN */ = {
+			isa = PBXGroup;
+			children = (
+				4982C13F26D78F2A00CACBBE /* messages.json */,
+			);
+			path = zh_CN;
+			sourceTree = "<group>";
+		};
+		4982C14026D78F2A00CACBBE /* pt_PT */ = {
+			isa = PBXGroup;
+			children = (
+				4982C14126D78F2A00CACBBE /* messages.json */,
+			);
+			path = pt_PT;
+			sourceTree = "<group>";
+		};
+		4982C14226D78F2A00CACBBE /* tr */ = {
+			isa = PBXGroup;
+			children = (
+				4982C14326D78F2A00CACBBE /* messages.json */,
+			);
+			path = tr;
+			sourceTree = "<group>";
+		};
+		4982C14426D78F2A00CACBBE /* pages */ = {
+			isa = PBXGroup;
+			children = (
+				4982C14526D78F2A00CACBBE /* background */,
+				4982C15126D78F2A00CACBBE /* popup */,
+				4982C19726D78F2A00CACBBE /* content */,
+				4982C19C26D78F2A00CACBBE /* common */,
+			);
+			path = pages;
+			sourceTree = "<group>";
+		};
+		4982C14526D78F2A00CACBBE /* background */ = {
+			isa = PBXGroup;
+			children = (
+				4982C14626D78F2A00CACBBE /* permissions.ts */,
+				4982C14726D78F2A00CACBBE /* app.ts */,
+				4982C14826D78F2A00CACBBE /* storage */,
+				4982C14B26D78F2A00CACBBE /* background.ts */,
+				4982C14C26D78F2A00CACBBE /* index.ts */,
+				4982C14D26D78F2A00CACBBE /* native-host */,
+			);
+			path = background;
+			sourceTree = "<group>";
+		};
+		4982C14826D78F2A00CACBBE /* storage */ = {
+			isa = PBXGroup;
+			children = (
+				4982C14926D78F2A00CACBBE /* Storage.ts */,
+				4982C14A26D78F2A00CACBBE /* index.ts */,
+			);
+			path = storage;
+			sourceTree = "<group>";
+		};
+		4982C14D26D78F2A00CACBBE /* native-host */ = {
+			isa = PBXGroup;
+			children = (
+				4982C14E26D78F2A00CACBBE /* NativeHost.ts */,
+				4982C14F26D78F2A00CACBBE /* nativeHostMock.ts */,
+				4982C15026D78F2A00CACBBE /* index.ts */,
+			);
+			path = "native-host";
+			sourceTree = "<group>";
+		};
+		4982C15126D78F2A00CACBBE /* popup */ = {
+			isa = PBXGroup;
+			children = (
+				4982C15226D78F2A00CACBBE /* index.tsx */,
+				4982C15326D78F2A00CACBBE /* stores */,
+				4982C15526D78F2A00CACBBE /* image-utils.ts */,
+				4982C15626D78F2A00CACBBE /* components */,
+				4982C19526D78F2A00CACBBE /* hooks */,
+			);
+			path = popup;
+			sourceTree = "<group>";
+		};
+		4982C15326D78F2A00CACBBE /* stores */ = {
+			isa = PBXGroup;
+			children = (
+				4982C15426D78F2A00CACBBE /* PopupStore.ts */,
+			);
+			path = stores;
+			sourceTree = "<group>";
+		};
+		4982C15626D78F2A00CACBBE /* components */ = {
+			isa = PBXGroup;
+			children = (
+				4982C15726D78F2A00CACBBE /* ui */,
+				4982C15C26D78F2A00CACBBE /* Switcher */,
+				4982C16026D78F2A00CACBBE /* Popup */,
+				4982C16426D78F2A00CACBBE /* Loader */,
+				4982C16826D78F2A00CACBBE /* Button */,
+				4982C16C26D78F2A00CACBBE /* Support */,
+				4982C17026D78F2A00CACBBE /* Modals */,
+				4982C18126D78F2A00CACBBE /* Actions */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
+		4982C15726D78F2A00CACBBE /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				4982C15826D78F2A00CACBBE /* Icon.tsx */,
+				4982C15926D78F2A00CACBBE /* formatting */,
+			);
+			path = ui;
+			sourceTree = "<group>";
+		};
+		4982C15926D78F2A00CACBBE /* formatting */ = {
+			isa = PBXGroup;
+			children = (
+				4982C15A26D78F2A00CACBBE /* index.ts */,
+				4982C15B26D78F2A00CACBBE /* boldText.tsx */,
+			);
+			path = formatting;
+			sourceTree = "<group>";
+		};
+		4982C15C26D78F2A00CACBBE /* Switcher */ = {
+			isa = PBXGroup;
+			children = (
+				4982C15D26D78F2A00CACBBE /* Switcher.tsx */,
+				4982C15E26D78F2A00CACBBE /* switcher.pcss */,
+				4982C15F26D78F2A00CACBBE /* index.ts */,
+			);
+			path = Switcher;
+			sourceTree = "<group>";
+		};
+		4982C16026D78F2A00CACBBE /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+				4982C16126D78F2A00CACBBE /* Popup.tsx */,
+				4982C16226D78F2A00CACBBE /* popup.pcss */,
+				4982C16326D78F2A00CACBBE /* index.ts */,
+			);
+			path = Popup;
+			sourceTree = "<group>";
+		};
+		4982C16426D78F2A00CACBBE /* Loader */ = {
+			isa = PBXGroup;
+			children = (
+				4982C16526D78F2A00CACBBE /* Loader.tsx */,
+				4982C16626D78F2A00CACBBE /* loader.pcss */,
+				4982C16726D78F2A00CACBBE /* index.ts */,
+			);
+			path = Loader;
+			sourceTree = "<group>";
+		};
+		4982C16826D78F2A00CACBBE /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				4982C16926D78F2A00CACBBE /* Button.tsx */,
+				4982C16A26D78F2A00CACBBE /* button.pcss */,
+				4982C16B26D78F2A00CACBBE /* index.ts */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		4982C16C26D78F2A00CACBBE /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				4982C16D26D78F2A00CACBBE /* support.pcss */,
+				4982C16E26D78F2A00CACBBE /* index.ts */,
+				4982C16F26D78F2A00CACBBE /* Support.tsx */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		4982C17026D78F2A00CACBBE /* Modals */ = {
+			isa = PBXGroup;
+			children = (
+				4982C17126D78F2A00CACBBE /* Modals.tsx */,
+				4982C17226D78F2A00CACBBE /* UpgradeModal */,
+				4982C17526D78F2A00CACBBE /* SitesAllowedModal */,
+				4982C17826D78F2A00CACBBE /* Modal */,
+				4982C17C26D78F2A00CACBBE /* ProtectionDisabledModal */,
+				4982C18026D78F2A00CACBBE /* index.ts */,
+			);
+			path = Modals;
+			sourceTree = "<group>";
+		};
+		4982C17226D78F2A00CACBBE /* UpgradeModal */ = {
+			isa = PBXGroup;
+			children = (
+				4982C17326D78F2A00CACBBE /* UpgradeModal.tsx */,
+				4982C17426D78F2A00CACBBE /* index.ts */,
+			);
+			path = UpgradeModal;
+			sourceTree = "<group>";
+		};
+		4982C17526D78F2A00CACBBE /* SitesAllowedModal */ = {
+			isa = PBXGroup;
+			children = (
+				4982C17626D78F2A00CACBBE /* index.ts */,
+				4982C17726D78F2A00CACBBE /* SitesAllowedModal.tsx */,
+			);
+			path = SitesAllowedModal;
+			sourceTree = "<group>";
+		};
+		4982C17826D78F2A00CACBBE /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				4982C17926D78F2A00CACBBE /* modal.pcss */,
+				4982C17A26D78F2A00CACBBE /* Modal.tsx */,
+				4982C17B26D78F2A00CACBBE /* index.ts */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
+		4982C17C26D78F2A00CACBBE /* ProtectionDisabledModal */ = {
+			isa = PBXGroup;
+			children = (
+				4982C17D26D78F2A00CACBBE /* protection-disabled.pcss */,
+				4982C17E26D78F2A00CACBBE /* index.ts */,
+				4982C17F26D78F2A00CACBBE /* ProtectionDisabledModal.tsx */,
+			);
+			path = ProtectionDisabledModal;
+			sourceTree = "<group>";
+		};
+		4982C18126D78F2A00CACBBE /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				4982C18226D78F2A00CACBBE /* ProtectionToggle */,
+				4982C18526D78F2A00CACBBE /* BlockElement */,
+				4982C18826D78F2A00CACBBE /* Action */,
+				4982C18C26D78F2A00CACBBE /* DeleteUserRules */,
+				4982C18F26D78F2A00CACBBE /* actions.pcss */,
+				4982C19026D78F2A00CACBBE /* index.ts */,
+				4982C19126D78F2A00CACBBE /* CurrentSite */,
+				4982C19426D78F2A00CACBBE /* Actions.tsx */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		4982C18226D78F2A00CACBBE /* ProtectionToggle */ = {
+			isa = PBXGroup;
+			children = (
+				4982C18326D78F2A00CACBBE /* index.ts */,
+				4982C18426D78F2A00CACBBE /* ProtectionToggle.tsx */,
+			);
+			path = ProtectionToggle;
+			sourceTree = "<group>";
+		};
+		4982C18526D78F2A00CACBBE /* BlockElement */ = {
+			isa = PBXGroup;
+			children = (
+				4982C18626D78F2A00CACBBE /* BlockElement.tsx */,
+				4982C18726D78F2A00CACBBE /* index.ts */,
+			);
+			path = BlockElement;
+			sourceTree = "<group>";
+		};
+		4982C18826D78F2A00CACBBE /* Action */ = {
+			isa = PBXGroup;
+			children = (
+				4982C18926D78F2A00CACBBE /* action.pcss */,
+				4982C18A26D78F2A00CACBBE /* Action.tsx */,
+				4982C18B26D78F2A00CACBBE /* index.ts */,
+			);
+			path = Action;
+			sourceTree = "<group>";
+		};
+		4982C18C26D78F2A00CACBBE /* DeleteUserRules */ = {
+			isa = PBXGroup;
+			children = (
+				4982C18D26D78F2A00CACBBE /* DeleteUserRules.tsx */,
+				4982C18E26D78F2A00CACBBE /* index.ts */,
+			);
+			path = DeleteUserRules;
+			sourceTree = "<group>";
+		};
+		4982C19126D78F2A00CACBBE /* CurrentSite */ = {
+			isa = PBXGroup;
+			children = (
+				4982C19226D78F2A00CACBBE /* CurrentSite.tsx */,
+				4982C19326D78F2A00CACBBE /* index.ts */,
+			);
+			path = CurrentSite;
+			sourceTree = "<group>";
+		};
+		4982C19526D78F2A00CACBBE /* hooks */ = {
+			isa = PBXGroup;
+			children = (
+				4982C19626D78F2A00CACBBE /* useFullscreen.ts */,
+			);
+			path = hooks;
+			sourceTree = "<group>";
+		};
+		4982C19726D78F2A00CACBBE /* content */ = {
+			isa = PBXGroup;
+			children = (
+				4982C19826D78F2A00CACBBE /* assistant */,
+				4982C19A26D78F2A00CACBBE /* content.ts */,
+				4982C19B26D78F2A00CACBBE /* index.ts */,
+			);
+			path = content;
+			sourceTree = "<group>";
+		};
+		4982C19826D78F2A00CACBBE /* assistant */ = {
+			isa = PBXGroup;
+			children = (
+				4982C19926D78F2A00CACBBE /* index.ts */,
+			);
+			path = assistant;
+			sourceTree = "<group>";
+		};
+		4982C19C26D78F2A00CACBBE /* common */ = {
+			isa = PBXGroup;
+			children = (
+				4982C19D26D78F2A00CACBBE /* translators */,
+				4982C1A126D78F2A00CACBBE /* ui */,
+				4982C1A626D78F2A00CACBBE /* utils */,
+				4982C1A826D78F2A00CACBBE /* messenger */,
+				4982C1AB26D78F2A00CACBBE /* constants.ts */,
+				4982C1AC26D78F2A00CACBBE /* log.ts */,
+				4982C1AD26D78F2A00CACBBE /* logNative.ts */,
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
+		4982C19D26D78F2A00CACBBE /* translators */ = {
+			isa = PBXGroup;
+			children = (
+				4982C19E26D78F2A00CACBBE /* translator.js */,
+				4982C19F26D78F2A00CACBBE /* reactTranslator.js */,
+				4982C1A026D78F2A00CACBBE /* i18n.js */,
+			);
+			path = translators;
+			sourceTree = "<group>";
+		};
+		4982C1A126D78F2A00CACBBE /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				4982C1A226D78F2A00CACBBE /* Icons */,
+			);
+			path = ui;
+			sourceTree = "<group>";
+		};
+		4982C1A226D78F2A00CACBBE /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				4982C1A326D78F2A00CACBBE /* icons.pcss */,
+				4982C1A426D78F2A00CACBBE /* Icons.tsx */,
+				4982C1A526D78F2A00CACBBE /* index.ts */,
+			);
+			path = Icons;
+			sourceTree = "<group>";
+		};
+		4982C1A626D78F2A00CACBBE /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				4982C1A726D78F2A00CACBBE /* url.ts */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
+		4982C1A826D78F2A00CACBBE /* messenger */ = {
+			isa = PBXGroup;
+			children = (
+				4982C1A926D78F2A00CACBBE /* Messenger.ts */,
+				4982C1AA26D78F2A00CACBBE /* index.ts */,
+			);
+			path = messenger;
+			sourceTree = "<group>";
+		};
 		652F89EE1B92E064002E0601 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -4923,6 +6234,7 @@
 		7E4ABFFB26BD75E700DF5CF0 /* SafariWebExtension */ = {
 			isa = PBXGroup;
 			children = (
+				4982C0BC26D78F2900CACBBE /* extension */,
 				7E4AC01626BD793B00DF5CF0 /* SafariWebExtension.entitlements */,
 				7EBDD97C26D6A1D0009531FA /* SafariWebExtensionHandler.swift */,
 				7EBDD97B26D6A1CF009531FA /* SafariWebExtensionMessageProcessor.swift */,
@@ -6723,15 +8035,171 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4982C1DA26D78F2A00CACBBE /* package.json in Resources */,
+				4982C26626D78F2B00CACBBE /* index.ts in Resources */,
+				4982C24426D78F2B00CACBBE /* messages.json in Resources */,
+				4982C28C26D78F2B00CACBBE /* support.pcss in Resources */,
+				4982C22226D78F2B00CACBBE /* messages.json in Resources */,
+				4982C23C26D78F2B00CACBBE /* messages.json in Resources */,
+				4982C1B626D78F2A00CACBBE /* types.ts in Resources */,
+				4982C28026D78F2B00CACBBE /* Loader.tsx in Resources */,
+				4982C2C826D78F2B00CACBBE /* index.ts in Resources */,
+				4982C20C26D78F2A00CACBBE /* messages.json in Resources */,
+				4982C2AC26D78F2B00CACBBE /* ProtectionToggle.tsx in Resources */,
+				4982C1E226D78F2A00CACBBE /* .eslintignore in Resources */,
+				4982C28226D78F2B00CACBBE /* loader.pcss in Resources */,
+				4982C2E226D78F2B00CACBBE /* log.ts in Resources */,
+				4982C21426D78F2B00CACBBE /* messages.json in Resources */,
+				4982C2D626D78F2B00CACBBE /* Icons.tsx in Resources */,
+				4982C2C226D78F2B00CACBBE /* index.ts in Resources */,
+				4982C27C26D78F2B00CACBBE /* popup.pcss in Resources */,
+				4982C29E26D78F2B00CACBBE /* Modal.tsx in Resources */,
+				4982C1FE26D78F2A00CACBBE /* toolbar-icon-38.png in Resources */,
+				4982C27A26D78F2B00CACBBE /* Popup.tsx in Resources */,
+				4982C2E426D78F2B00CACBBE /* logNative.ts in Resources */,
+				4982C29026D78F2B00CACBBE /* Support.tsx in Resources */,
+				4982C1F026D78F2A00CACBBE /* index.ts in Resources */,
+				4982C21626D78F2B00CACBBE /* messages.json in Resources */,
+				4982C26E26D78F2B00CACBBE /* Icon.tsx in Resources */,
+				4982C27826D78F2B00CACBBE /* index.ts in Resources */,
+				4982C24E26D78F2B00CACBBE /* messages.json in Resources */,
 				7EBDD9D626D6A809009531FA /* images in Resources */,
+				4982C2CA26D78F2B00CACBBE /* content.ts in Resources */,
+				4982C2A426D78F2B00CACBBE /* index.ts in Resources */,
+				4982C2CE26D78F2B00CACBBE /* translator.js in Resources */,
 				7EBDD9CC26D6A77E009531FA /* popup.html in Resources */,
+				4982C22626D78F2B00CACBBE /* messages.json in Resources */,
+				4982C25C26D78F2B00CACBBE /* index.ts in Resources */,
+				4982C1EA26D78F2A00CACBBE /* index.ts in Resources */,
+				4982C2D826D78F2B00CACBBE /* index.ts in Resources */,
+				4982C21826D78F2B00CACBBE /* messages.json in Resources */,
+				4982C1C426D78F2A00CACBBE /* upload.ts in Resources */,
+				4982C21A26D78F2B00CACBBE /* messages.json in Resources */,
+				4982C2B226D78F2B00CACBBE /* action.pcss in Resources */,
+				4982C20426D78F2A00CACBBE /* icon-512.png in Resources */,
+				4982C2A226D78F2B00CACBBE /* protection-disabled.pcss in Resources */,
+				4982C25826D78F2B00CACBBE /* app.ts in Resources */,
+				4982C1AE26D78F2A00CACBBE /* unused.ts in Resources */,
+				4982C2AE26D78F2B00CACBBE /* BlockElement.tsx in Resources */,
 				7EBDD9CA26D6A77E009531FA /* background.js in Resources */,
+				4982C1E426D78F2A00CACBBE /* postcss.config.js in Resources */,
+				4982C27626D78F2B00CACBBE /* switcher.pcss in Resources */,
+				4982C1C226D78F2A00CACBBE /* index.ts in Resources */,
+				4982C23226D78F2B00CACBBE /* messages.json in Resources */,
+				4982C1C826D78F2A00CACBBE /* index.ts in Resources */,
+				4982C24026D78F2B00CACBBE /* messages.json in Resources */,
+				4982C1DC26D78F2A00CACBBE /* README.md in Resources */,
+				4982C2B826D78F2B00CACBBE /* DeleteUserRules.tsx in Resources */,
+				4982C1FA26D78F2A00CACBBE /* icon-64.png in Resources */,
+				4982C25626D78F2B00CACBBE /* permissions.ts in Resources */,
+				4982C2CC26D78F2B00CACBBE /* index.ts in Resources */,
+				4982C2B426D78F2B00CACBBE /* Action.tsx in Resources */,
+				4982C23826D78F2B00CACBBE /* messages.json in Resources */,
+				4982C2B026D78F2B00CACBBE /* index.ts in Resources */,
+				4982C23426D78F2B00CACBBE /* messages.json in Resources */,
+				4982C26026D78F2B00CACBBE /* index.ts in Resources */,
 				7EBDD9D326D6A7FF009531FA /* _locales in Resources */,
+				4982C2BE26D78F2B00CACBBE /* index.ts in Resources */,
+				4982C1B226D78F2A00CACBBE /* config.json in Resources */,
+				4982C1D226D78F2A00CACBBE /* LICENSE in Resources */,
 				7E7D636726D6A91B0002EE6A /* popup.js in Resources */,
+				4982C29826D78F2B00CACBBE /* index.ts in Resources */,
+				4982C1D826D78F2A00CACBBE /* .gitignore in Resources */,
+				4982C22A26D78F2B00CACBBE /* messages.json in Resources */,
+				4982C1F826D78F2A00CACBBE /* icon-48.png in Resources */,
+				4982C26A26D78F2B00CACBBE /* PopupStore.ts in Resources */,
+				4982C25426D78F2B00CACBBE /* messages.json in Resources */,
+				4982C22C26D78F2B00CACBBE /* messages.json in Resources */,
+				4982C2D026D78F2B00CACBBE /* reactTranslator.js in Resources */,
+				4982C29226D78F2B00CACBBE /* Modals.tsx in Resources */,
+				4982C1E626D78F2A00CACBBE /* jest.config.ts in Resources */,
+				4982C1F626D78F2A00CACBBE /* icon-256.png in Resources */,
+				4982C1C626D78F2A00CACBBE /* bundle-runner.ts in Resources */,
+				4982C1B426D78F2A00CACBBE /* validate.ts in Resources */,
+				4982C20826D78F2A00CACBBE /* manifest.json in Resources */,
+				4982C1D626D78F2A00CACBBE /* babel.config.js in Resources */,
+				4982C25226D78F2B00CACBBE /* messages.json in Resources */,
 				7EBDD9AE26D6A77E009531FA /* manifest.json in Resources */,
+				4982C2DC26D78F2B00CACBBE /* Messenger.ts in Resources */,
+				4982C29426D78F2B00CACBBE /* UpgradeModal.tsx in Resources */,
+				4982C2AA26D78F2B00CACBBE /* index.ts in Resources */,
+				4982C23626D78F2B00CACBBE /* messages.json in Resources */,
+				4982C2A826D78F2B00CACBBE /* index.ts in Resources */,
+				4982C1B026D78F2A00CACBBE /* helpers.ts in Resources */,
+				4982C2BC26D78F2B00CACBBE /* actions.pcss in Resources */,
+				4982C27E26D78F2B00CACBBE /* index.ts in Resources */,
+				4982C2B626D78F2B00CACBBE /* index.ts in Resources */,
+				4982C25A26D78F2B00CACBBE /* Storage.ts in Resources */,
+				4982C2D226D78F2B00CACBBE /* i18n.js in Resources */,
+				4982C26826D78F2B00CACBBE /* index.tsx in Resources */,
+				4982C1E026D78F2A00CACBBE /* tsconfig.json in Resources */,
+				4982C24C26D78F2B00CACBBE /* messages.json in Resources */,
+				4982C2DE26D78F2B00CACBBE /* index.ts in Resources */,
+				4982C22E26D78F2B00CACBBE /* messages.json in Resources */,
 				7EBDD9C426D6A77E009531FA /* assistant.js in Resources */,
+				4982C1CE26D78F2A00CACBBE /* chrome.ts in Resources */,
+				4982C26426D78F2B00CACBBE /* nativeHostMock.ts in Resources */,
+				4982C1BE26D78F2A00CACBBE /* renew.ts in Resources */,
+				4982C27426D78F2B00CACBBE /* Switcher.tsx in Resources */,
+				4982C28E26D78F2B00CACBBE /* index.ts in Resources */,
+				4982C29626D78F2B00CACBBE /* index.ts in Resources */,
+				4982C1CC26D78F2A00CACBBE /* bundle.ts in Resources */,
+				4982C27226D78F2B00CACBBE /* boldText.tsx in Resources */,
+				4982C21C26D78F2B00CACBBE /* messages.json in Resources */,
+				4982C26226D78F2B00CACBBE /* NativeHost.ts in Resources */,
+				4982C24226D78F2B00CACBBE /* messages.json in Resources */,
+				4982C2C626D78F2B00CACBBE /* useFullscreen.ts in Resources */,
+				4982C2DA26D78F2B00CACBBE /* url.ts in Resources */,
+				4982C1BC26D78F2A00CACBBE /* download.ts in Resources */,
+				4982C2A026D78F2B00CACBBE /* index.ts in Resources */,
+				4982C20026D78F2A00CACBBE /* icon-128.png in Resources */,
+				4982C28626D78F2B00CACBBE /* Button.tsx in Resources */,
+				4982C1B826D78F2A00CACBBE /* README.md in Resources */,
+				4982C21026D78F2A00CACBBE /* messages.json in Resources */,
+				4982C22826D78F2B00CACBBE /* messages.json in Resources */,
+				4982C28A26D78F2B00CACBBE /* index.ts in Resources */,
+				4982C21226D78F2A00CACBBE /* messages.json in Resources */,
+				4982C29C26D78F2B00CACBBE /* modal.pcss in Resources */,
+				4982C21E26D78F2B00CACBBE /* messages.json in Resources */,
+				4982C29A26D78F2B00CACBBE /* SitesAllowedModal.tsx in Resources */,
 				7EBDD9D026D6A77E009531FA /* popup.css in Resources */,
+				4982C26C26D78F2B00CACBBE /* image-utils.ts in Resources */,
+				4982C1D026D78F2A00CACBBE /* .twosky.json in Resources */,
+				4982C23026D78F2B00CACBBE /* messages.json in Resources */,
+				4982C25026D78F2B00CACBBE /* messages.json in Resources */,
+				4982C23A26D78F2B00CACBBE /* messages.json in Resources */,
+				4982C20626D78F2A00CACBBE /* vars.pcss in Resources */,
+				4982C20226D78F2A00CACBBE /* toolbar-icon-16.png in Resources */,
+				4982C22026D78F2B00CACBBE /* messages.json in Resources */,
+				4982C24A26D78F2B00CACBBE /* messages.json in Resources */,
+				4982C1D426D78F2A00CACBBE /* yarn.lock in Resources */,
+				4982C2E026D78F2B00CACBBE /* constants.ts in Resources */,
+				4982C20E26D78F2A00CACBBE /* messages.json in Resources */,
+				4982C1BA26D78F2A00CACBBE /* constants.ts in Resources */,
+				4982C25E26D78F2B00CACBBE /* background.ts in Resources */,
 				7EBDD9CE26D6A77E009531FA /* content.js in Resources */,
+				4982C2D426D78F2B00CACBBE /* icons.pcss in Resources */,
+				4982C1DE26D78F2A00CACBBE /* .eslintrc.js in Resources */,
+				4982C24826D78F2B00CACBBE /* messages.json in Resources */,
+				4982C2A626D78F2B00CACBBE /* ProtectionDisabledModal.tsx in Resources */,
+				4982C1F226D78F2A00CACBBE /* toolbar-icon-19.png in Resources */,
+				4982C27026D78F2B00CACBBE /* index.ts in Resources */,
+				4982C1F426D78F2A00CACBBE /* toolbar-icon-32.png in Resources */,
+				4982C2C026D78F2B00CACBBE /* CurrentSite.tsx in Resources */,
+				4982C28826D78F2B00CACBBE /* button.pcss in Resources */,
+				4982C1FC26D78F2A00CACBBE /* icon-96.png in Resources */,
+				4982C2BA26D78F2B00CACBBE /* index.ts in Resources */,
+				4982C1EE26D78F2A00CACBBE /* index.ts in Resources */,
+				4982C1C026D78F2A00CACBBE /* log.ts in Resources */,
+				4982C1E826D78F2A00CACBBE /* index.ts in Resources */,
+				4982C20A26D78F2A00CACBBE /* messages.json in Resources */,
+				4982C1CA26D78F2A00CACBBE /* webpack.config.ts in Resources */,
+				4982C1EC26D78F2A00CACBBE /* index.html in Resources */,
+				4982C24626D78F2B00CACBBE /* messages.json in Resources */,
+				4982C22426D78F2B00CACBBE /* messages.json in Resources */,
+				4982C2C426D78F2B00CACBBE /* Actions.tsx in Resources */,
+				4982C28426D78F2B00CACBBE /* index.ts in Resources */,
+				4982C23E26D78F2B00CACBBE /* messages.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6739,15 +8207,171 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4982C1DB26D78F2A00CACBBE /* package.json in Resources */,
+				4982C26726D78F2B00CACBBE /* index.ts in Resources */,
+				4982C24526D78F2B00CACBBE /* messages.json in Resources */,
+				4982C28D26D78F2B00CACBBE /* support.pcss in Resources */,
+				4982C22326D78F2B00CACBBE /* messages.json in Resources */,
+				4982C23D26D78F2B00CACBBE /* messages.json in Resources */,
+				4982C1B726D78F2A00CACBBE /* types.ts in Resources */,
+				4982C28126D78F2B00CACBBE /* Loader.tsx in Resources */,
+				4982C2C926D78F2B00CACBBE /* index.ts in Resources */,
+				4982C20D26D78F2A00CACBBE /* messages.json in Resources */,
+				4982C2AD26D78F2B00CACBBE /* ProtectionToggle.tsx in Resources */,
+				4982C1E326D78F2A00CACBBE /* .eslintignore in Resources */,
+				4982C28326D78F2B00CACBBE /* loader.pcss in Resources */,
+				4982C2E326D78F2B00CACBBE /* log.ts in Resources */,
+				4982C21526D78F2B00CACBBE /* messages.json in Resources */,
+				4982C2D726D78F2B00CACBBE /* Icons.tsx in Resources */,
+				4982C2C326D78F2B00CACBBE /* index.ts in Resources */,
+				4982C27D26D78F2B00CACBBE /* popup.pcss in Resources */,
+				4982C29F26D78F2B00CACBBE /* Modal.tsx in Resources */,
+				4982C1FF26D78F2A00CACBBE /* toolbar-icon-38.png in Resources */,
+				4982C27B26D78F2B00CACBBE /* Popup.tsx in Resources */,
+				4982C2E526D78F2B00CACBBE /* logNative.ts in Resources */,
+				4982C29126D78F2B00CACBBE /* Support.tsx in Resources */,
+				4982C1F126D78F2A00CACBBE /* index.ts in Resources */,
+				4982C21726D78F2B00CACBBE /* messages.json in Resources */,
+				4982C26F26D78F2B00CACBBE /* Icon.tsx in Resources */,
+				4982C27926D78F2B00CACBBE /* index.ts in Resources */,
+				4982C24F26D78F2B00CACBBE /* messages.json in Resources */,
 				7EBDD9D726D6A809009531FA /* images in Resources */,
+				4982C2CB26D78F2B00CACBBE /* content.ts in Resources */,
+				4982C2A526D78F2B00CACBBE /* index.ts in Resources */,
+				4982C2CF26D78F2B00CACBBE /* translator.js in Resources */,
 				7EBDD9CD26D6A77E009531FA /* popup.html in Resources */,
+				4982C22726D78F2B00CACBBE /* messages.json in Resources */,
+				4982C25D26D78F2B00CACBBE /* index.ts in Resources */,
+				4982C1EB26D78F2A00CACBBE /* index.ts in Resources */,
+				4982C2D926D78F2B00CACBBE /* index.ts in Resources */,
+				4982C21926D78F2B00CACBBE /* messages.json in Resources */,
+				4982C1C526D78F2A00CACBBE /* upload.ts in Resources */,
+				4982C21B26D78F2B00CACBBE /* messages.json in Resources */,
+				4982C2B326D78F2B00CACBBE /* action.pcss in Resources */,
+				4982C20526D78F2A00CACBBE /* icon-512.png in Resources */,
+				4982C2A326D78F2B00CACBBE /* protection-disabled.pcss in Resources */,
+				4982C25926D78F2B00CACBBE /* app.ts in Resources */,
+				4982C1AF26D78F2A00CACBBE /* unused.ts in Resources */,
+				4982C2AF26D78F2B00CACBBE /* BlockElement.tsx in Resources */,
 				7EBDD9CB26D6A77E009531FA /* background.js in Resources */,
+				4982C1E526D78F2A00CACBBE /* postcss.config.js in Resources */,
+				4982C27726D78F2B00CACBBE /* switcher.pcss in Resources */,
+				4982C1C326D78F2A00CACBBE /* index.ts in Resources */,
+				4982C23326D78F2B00CACBBE /* messages.json in Resources */,
+				4982C1C926D78F2A00CACBBE /* index.ts in Resources */,
+				4982C24126D78F2B00CACBBE /* messages.json in Resources */,
+				4982C1DD26D78F2A00CACBBE /* README.md in Resources */,
+				4982C2B926D78F2B00CACBBE /* DeleteUserRules.tsx in Resources */,
+				4982C1FB26D78F2A00CACBBE /* icon-64.png in Resources */,
+				4982C25726D78F2B00CACBBE /* permissions.ts in Resources */,
+				4982C2CD26D78F2B00CACBBE /* index.ts in Resources */,
+				4982C2B526D78F2B00CACBBE /* Action.tsx in Resources */,
+				4982C23926D78F2B00CACBBE /* messages.json in Resources */,
+				4982C2B126D78F2B00CACBBE /* index.ts in Resources */,
+				4982C23526D78F2B00CACBBE /* messages.json in Resources */,
+				4982C26126D78F2B00CACBBE /* index.ts in Resources */,
 				7EBDD9D426D6A7FF009531FA /* _locales in Resources */,
+				4982C2BF26D78F2B00CACBBE /* index.ts in Resources */,
+				4982C1B326D78F2A00CACBBE /* config.json in Resources */,
+				4982C1D326D78F2A00CACBBE /* LICENSE in Resources */,
 				7E7D636826D6A91B0002EE6A /* popup.js in Resources */,
+				4982C29926D78F2B00CACBBE /* index.ts in Resources */,
+				4982C1D926D78F2A00CACBBE /* .gitignore in Resources */,
+				4982C22B26D78F2B00CACBBE /* messages.json in Resources */,
+				4982C1F926D78F2A00CACBBE /* icon-48.png in Resources */,
+				4982C26B26D78F2B00CACBBE /* PopupStore.ts in Resources */,
+				4982C25526D78F2B00CACBBE /* messages.json in Resources */,
+				4982C22D26D78F2B00CACBBE /* messages.json in Resources */,
+				4982C2D126D78F2B00CACBBE /* reactTranslator.js in Resources */,
+				4982C29326D78F2B00CACBBE /* Modals.tsx in Resources */,
+				4982C1E726D78F2A00CACBBE /* jest.config.ts in Resources */,
+				4982C1F726D78F2A00CACBBE /* icon-256.png in Resources */,
+				4982C1C726D78F2A00CACBBE /* bundle-runner.ts in Resources */,
+				4982C1B526D78F2A00CACBBE /* validate.ts in Resources */,
+				4982C20926D78F2A00CACBBE /* manifest.json in Resources */,
+				4982C1D726D78F2A00CACBBE /* babel.config.js in Resources */,
+				4982C25326D78F2B00CACBBE /* messages.json in Resources */,
 				7EBDD9AF26D6A77E009531FA /* manifest.json in Resources */,
+				4982C2DD26D78F2B00CACBBE /* Messenger.ts in Resources */,
+				4982C29526D78F2B00CACBBE /* UpgradeModal.tsx in Resources */,
+				4982C2AB26D78F2B00CACBBE /* index.ts in Resources */,
+				4982C23726D78F2B00CACBBE /* messages.json in Resources */,
+				4982C2A926D78F2B00CACBBE /* index.ts in Resources */,
+				4982C1B126D78F2A00CACBBE /* helpers.ts in Resources */,
+				4982C2BD26D78F2B00CACBBE /* actions.pcss in Resources */,
+				4982C27F26D78F2B00CACBBE /* index.ts in Resources */,
+				4982C2B726D78F2B00CACBBE /* index.ts in Resources */,
+				4982C25B26D78F2B00CACBBE /* Storage.ts in Resources */,
+				4982C2D326D78F2B00CACBBE /* i18n.js in Resources */,
+				4982C26926D78F2B00CACBBE /* index.tsx in Resources */,
+				4982C1E126D78F2A00CACBBE /* tsconfig.json in Resources */,
+				4982C24D26D78F2B00CACBBE /* messages.json in Resources */,
+				4982C2DF26D78F2B00CACBBE /* index.ts in Resources */,
+				4982C22F26D78F2B00CACBBE /* messages.json in Resources */,
 				7EBDD9C526D6A77E009531FA /* assistant.js in Resources */,
+				4982C1CF26D78F2A00CACBBE /* chrome.ts in Resources */,
+				4982C26526D78F2B00CACBBE /* nativeHostMock.ts in Resources */,
+				4982C1BF26D78F2A00CACBBE /* renew.ts in Resources */,
+				4982C27526D78F2B00CACBBE /* Switcher.tsx in Resources */,
+				4982C28F26D78F2B00CACBBE /* index.ts in Resources */,
+				4982C29726D78F2B00CACBBE /* index.ts in Resources */,
+				4982C1CD26D78F2A00CACBBE /* bundle.ts in Resources */,
+				4982C27326D78F2B00CACBBE /* boldText.tsx in Resources */,
+				4982C21D26D78F2B00CACBBE /* messages.json in Resources */,
+				4982C26326D78F2B00CACBBE /* NativeHost.ts in Resources */,
+				4982C24326D78F2B00CACBBE /* messages.json in Resources */,
+				4982C2C726D78F2B00CACBBE /* useFullscreen.ts in Resources */,
+				4982C2DB26D78F2B00CACBBE /* url.ts in Resources */,
+				4982C1BD26D78F2A00CACBBE /* download.ts in Resources */,
+				4982C2A126D78F2B00CACBBE /* index.ts in Resources */,
+				4982C20126D78F2A00CACBBE /* icon-128.png in Resources */,
+				4982C28726D78F2B00CACBBE /* Button.tsx in Resources */,
+				4982C1B926D78F2A00CACBBE /* README.md in Resources */,
+				4982C21126D78F2A00CACBBE /* messages.json in Resources */,
+				4982C22926D78F2B00CACBBE /* messages.json in Resources */,
+				4982C28B26D78F2B00CACBBE /* index.ts in Resources */,
+				4982C21326D78F2B00CACBBE /* messages.json in Resources */,
+				4982C29D26D78F2B00CACBBE /* modal.pcss in Resources */,
+				4982C21F26D78F2B00CACBBE /* messages.json in Resources */,
+				4982C29B26D78F2B00CACBBE /* SitesAllowedModal.tsx in Resources */,
 				7EBDD9D126D6A77E009531FA /* popup.css in Resources */,
+				4982C26D26D78F2B00CACBBE /* image-utils.ts in Resources */,
+				4982C1D126D78F2A00CACBBE /* .twosky.json in Resources */,
+				4982C23126D78F2B00CACBBE /* messages.json in Resources */,
+				4982C25126D78F2B00CACBBE /* messages.json in Resources */,
+				4982C23B26D78F2B00CACBBE /* messages.json in Resources */,
+				4982C20726D78F2A00CACBBE /* vars.pcss in Resources */,
+				4982C20326D78F2A00CACBBE /* toolbar-icon-16.png in Resources */,
+				4982C22126D78F2B00CACBBE /* messages.json in Resources */,
+				4982C24B26D78F2B00CACBBE /* messages.json in Resources */,
+				4982C1D526D78F2A00CACBBE /* yarn.lock in Resources */,
+				4982C2E126D78F2B00CACBBE /* constants.ts in Resources */,
+				4982C20F26D78F2A00CACBBE /* messages.json in Resources */,
+				4982C1BB26D78F2A00CACBBE /* constants.ts in Resources */,
+				4982C25F26D78F2B00CACBBE /* background.ts in Resources */,
 				7EBDD9CF26D6A77E009531FA /* content.js in Resources */,
+				4982C2D526D78F2B00CACBBE /* icons.pcss in Resources */,
+				4982C1DF26D78F2A00CACBBE /* .eslintrc.js in Resources */,
+				4982C24926D78F2B00CACBBE /* messages.json in Resources */,
+				4982C2A726D78F2B00CACBBE /* ProtectionDisabledModal.tsx in Resources */,
+				4982C1F326D78F2A00CACBBE /* toolbar-icon-19.png in Resources */,
+				4982C27126D78F2B00CACBBE /* index.ts in Resources */,
+				4982C1F526D78F2A00CACBBE /* toolbar-icon-32.png in Resources */,
+				4982C2C126D78F2B00CACBBE /* CurrentSite.tsx in Resources */,
+				4982C28926D78F2B00CACBBE /* button.pcss in Resources */,
+				4982C1FD26D78F2A00CACBBE /* icon-96.png in Resources */,
+				4982C2BB26D78F2B00CACBBE /* index.ts in Resources */,
+				4982C1EF26D78F2A00CACBBE /* index.ts in Resources */,
+				4982C1C126D78F2A00CACBBE /* log.ts in Resources */,
+				4982C1E926D78F2A00CACBBE /* index.ts in Resources */,
+				4982C20B26D78F2A00CACBBE /* messages.json in Resources */,
+				4982C1CB26D78F2A00CACBBE /* webpack.config.ts in Resources */,
+				4982C1ED26D78F2A00CACBBE /* index.html in Resources */,
+				4982C24726D78F2B00CACBBE /* messages.json in Resources */,
+				4982C22526D78F2B00CACBBE /* messages.json in Resources */,
+				4982C2C526D78F2B00CACBBE /* Actions.tsx in Resources */,
+				4982C28526D78F2B00CACBBE /* index.ts in Resources */,
+				4982C23F26D78F2B00CACBBE /* messages.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
