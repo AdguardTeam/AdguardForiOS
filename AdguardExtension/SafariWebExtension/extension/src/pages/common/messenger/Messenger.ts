@@ -57,4 +57,10 @@ export class Messenger {
             { url },
         );
     };
+
+    handleUpgrade = () => {
+        return this.sendMessage(
+            MessagesToBackgroundPage.UpgradeClicked,
+        );
+    };
 }

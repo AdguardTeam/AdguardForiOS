@@ -95,6 +95,10 @@ const handleMessages = () => {
                 const { url } = data;
                 return nativeHost.reportProblem(url);
             }
+            case MessagesToBackgroundPage.UpgradeClicked: {
+                await nativeHost.upgradeMe();
+                break;
+            }
             default:
                 break;
         }

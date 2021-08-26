@@ -78,4 +78,8 @@ export class NativeHost {
 
         return this.sendNativeMessage(MessagesToNativeApp.AreContentBlockersEnabled);
     }
+
+    upgradeMe() {
+        return this.sendNativeMessage(MessagesToNativeApp.UpgradeMe);
+    }
 }
