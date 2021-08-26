@@ -10,6 +10,7 @@ export enum MessagesToNativeApp {
     ReportProblem = 'reportProblem',
     IsPremium = 'isPremium',
     AreContentBlockersEnabled = 'areContentBlockersEnabled',
+    UpgradeMe = 'upgradeMe',
 }
 
 export enum MessagesToBackgroundPage {
@@ -21,6 +22,7 @@ export enum MessagesToBackgroundPage {
     SetProtectionStatus = 'set_protection_status',
     DeleteUserRulesByUrl = 'delete_user_rules_by_url',
     ReportProblem = 'report_problem',
+    UpgradeClicked = 'upgrade_clicked',
 }
 
 export enum MessagesToContentScript {

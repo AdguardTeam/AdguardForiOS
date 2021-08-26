@@ -5,6 +5,7 @@ import { translator } from '../../../../common/translators/translator';
 import { popupStore } from '../../../stores/PopupStore';
 import { Button } from '../../Button';
 import { Modal } from '../Modal';
+import { messenger } from '../../../../common/messenger';
 
 export const UpgradeModal = observer(() => {
     const store = useContext(popupStore);
@@ -13,8 +14,9 @@ export const UpgradeModal = observer(() => {
         store.closeUpgradeModal();
     };
 
-    const handleClick = () => {
-        // TODO handle upgrade click button
+    const handleClick = async () => {
+        await messenger.handleUpgrade();
+        window.close();
     };
 
     return (
