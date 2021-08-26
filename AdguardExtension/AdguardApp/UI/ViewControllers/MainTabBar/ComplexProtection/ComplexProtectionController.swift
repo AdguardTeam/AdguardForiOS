@@ -18,7 +18,7 @@
 
 import UIKit
 
-class ComplexProtectionController: UITableViewController {
+final class ComplexProtectionController: UITableViewController {
     
     // MARK: - Title Outlets
     
@@ -209,8 +209,16 @@ class ComplexProtectionController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
     }
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
