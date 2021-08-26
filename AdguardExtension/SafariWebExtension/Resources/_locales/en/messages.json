@@ -1,11 +1,9 @@
 {
     "extension_name": {
-        "message": "SampleAdBlocker Extension",
-        "description": "The display name for the extension."
+        "message": "AdGuard"
     },
     "extension_description": {
-        "message": "This is SampleAdBlocker Extension. You should tell us what your extension does here.",
-        "description": "Description of what the extension does."
+        "message": "AdGuard Safari Web Extension"
     },
     "popup_action_safari_protection_title": {
         "message": "Safari protection"
@@ -31,22 +29,22 @@
     "popup_action_current_site_desc_basic_only": {
         "message": "basic protection only"
     },
-    "popup_modal_title_enhanced_performance": {
+    "popup_modal_all_sites_allowed_title": {
         "message": "Enhanced performance"
     },
-    "popup_modal_desc_enhanced_performance": {
+    "popup_modal_all_sites_allowed_desc": {
         "message": "Good job! Now AdGuard will block even more ads, dealing with the most difficult challenges!"
     },
-    "popup_modal_btn_enhanced_performance": {
+    "popup_modal_all_sites_allowed_button": {
         "message": "Let magic begin"
     },
-    "popup_modal_title_almost_there": {
+    "popup_modal_not_all_sites_allowed_title": {
         "message": "Almost there"
     },
-    "popup_modal_desc_almost_there": {
+    "popup_modal_not_all_sites_allowed_desc": {
         "message": "You've allowed AdGuard to work only on this website, which means that it won't block ads on other websites unless you grant the permission next time."
     },
-    "popup_modal_btn_almost_there": {
+    "popup_modal_not_all_sites_allowed_button": {
         "message": "Okay"
     },
     "popup_modal_title_free": {
@@ -58,28 +56,28 @@
     "popup_modal_btn_free": {
         "message": "Upgrade"
     },
-    "support_swipe_title": {
+    "popup_fullscreen_support_title": {
         "message": "Uh-oh, was that a swipe up?"
     },
-    "support_swipe_desc": {
+    "popup_fullscreen_support_desc": {
         "message": "If anything's wrong, let us know and we will fix it."
     },
-    "support_desc": {
+    "popup_protection_disabled_support_desc": {
         "message": "Uh-oh, looks like you've disabled the protection... Is something wrong? We can fix it!"
     },
-    "support_link": {
+    "popup_support_button_text": {
         "message": "Report a problem"
     },
     "modal_protection_off_title": {
         "message": "To use protection:"
     },
     "modal_protection_off_settings": {
-        "message": "Open <b>Settings</b>"
+        "message": "Open <b>Settings<\/b>"
     },
     "modal_protection_off_extensions": {
-        "message": "Tap on <b>Safari</b> and choose the <b>Extensions</b> menu item"
+        "message": "Tap on <b>Safari<\/b> and choose the <b>Extensions<\/b> menu item"
     },
     "modal_protection_off_switch": {
-        "message": "<b>Switch on</b> all AdGuard ones"
+        "message": "<b>Switch on<\/b> all AdGuard ones"
     }
 }

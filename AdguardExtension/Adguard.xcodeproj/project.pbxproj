@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -6940,6 +6940,7 @@
 			buildPhases = (
 				7E4ABFF626BD75E700DF5CF0 /* Sources */,
 				7E4ABFF726BD75E700DF5CF0 /* Frameworks */,
+				4982C2F926D79F9500CACBBE /* ShellScript */,
 				7E4ABFF826BD75E700DF5CF0 /* Resources */,
 			);
 			buildRules = (
@@ -6957,6 +6958,7 @@
 			buildPhases = (
 				7E4AC01726BD796800DF5CF0 /* Sources */,
 				7E4AC01826BD796800DF5CF0 /* Frameworks */,
+				4982C2F826D79E9000CACBBE /* ShellScript */,
 				7E4AC01926BD796800DF5CF0 /* Resources */,
 			);
 			buildRules = (
@@ -7906,6 +7908,42 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		4982C2F826D79E9000CACBBE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "JS_SOURCES=\"${SRCROOT}/SafariWebExtension/extension\"\nRESOURCES=\"${SRCROOT}/SafariWebExtension/Resources\"\ncd \"${JS_SOURCES}\" && yarn install && yarn build && cp -r build/* \"${RESOURCES}\"\n";
+		};
+		4982C2F926D79F9500CACBBE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "JS_SOURCES=\"${SRCROOT}/SafariWebExtension/extension\"\nRESOURCES=\"${SRCROOT}/SafariWebExtension/Resources\"\ncd \"${JS_SOURCES}\" && yarn install && yarn build && cp -r build/* \"${RESOURCES}\"\n";
+		};
 		6506CC2B1BD853140020F31E /* Setting Required device capabilities */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
