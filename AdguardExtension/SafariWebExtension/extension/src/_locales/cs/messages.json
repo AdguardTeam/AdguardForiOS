@@ -1,10 +1,20 @@
 {
+    "popup_action_safari_protection_title": {
+        "message": "Ochrana Safari"
+    },
+    "popup_action_current_site_status_desc_enabled": {
+        "message": "ochrana zapnuta"
+    },
+    "popup_action_block_element": {
+        "message": "Zablokovat prvek na stránce"
+    },
+    "popup_action_delete_user_rules": {
+        "message": "Vymazat všechna uživatelská pravidla pro tuto stránku"
+    },
     "extension_name": {
-        "message": "SampleAdBlocker Extension",
-        "description": "The display name for the extension."
+        "message": "AdGuard"
     },
     "extension_description": {
-        "message": "This is SampleAdBlocker Extension. You should tell us what your extension does here.",
-        "description": "Description of what the extension does."
+        "message": "AdGuard Safari Web Extension"
     }
 }

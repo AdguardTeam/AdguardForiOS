@@ -1,10 +1,83 @@
 {
+    "popup_action_safari_protection_title": {
+        "message": "Ochrana Safari"
+    },
+    "popup_action_safari_protection_description": {
+        "message": "pre túto stránku"
+    },
+    "popup_action_current_site_status_desc_enabled": {
+        "message": "ochrana je zapnutá"
+    },
+    "popup_action_block_element": {
+        "message": "Blokovať prvok na tejto stránke"
+    },
+    "popup_action_delete_user_rules": {
+        "message": "Vymazať všetky používateľské pravidlá pre túto stránku"
+    },
+    "popup_action_current_site_desc_starting": {
+        "message": "prosím čakajte, spúšťa sa ochrana..."
+    },
+    "popup_action_current_site_desc_allowlisted": {
+        "message": "stránka je na zozname povolení"
+    },
+    "popup_action_current_site_desc_basic_only": {
+        "message": "len základná ochrana"
+    },
+    "popup_modal_all_sites_allowed_title": {
+        "message": "Vylepšený výkon"
+    },
+    "popup_modal_all_sites_allowed_desc": {
+        "message": "Dobrá práca! Teraz bude AdGuard blokovať ešte viac reklám, vrátane najzložitejších prípadov!"
+    },
+    "popup_modal_all_sites_allowed_button": {
+        "message": "Začíname"
+    },
+    "popup_modal_not_all_sites_allowed_title": {
+        "message": "Sme takmer v cieli"
+    },
+    "popup_modal_not_all_sites_allowed_desc": {
+        "message": "Umožnili ste službe AdGuard pracovať iba na týchto webových stránkach, čo znamená, že pokiaľ nabudúce neudelíte povolenie, nebude blokovať reklamy na iných webových stránkach."
+    },
+    "popup_modal_not_all_sites_allowed_button": {
+        "message": "O. K."
+    },
+    "popup_modal_title_free": {
+        "message": "Veľmi dobre, ale..."
+    },
+    "popup_modal_desc_free": {
+        "message": "Majte na pamäti, že Vám chýba pokročilá ochrana, ktorá nie je k dispozícii v bezplatnej verzii. Pomáha vysporiadať sa s väčším počtom reklám, vrátane reklám na YouTube v prehliadači Safari."
+    },
+    "popup_modal_btn_free": {
+        "message": "Upgradovať"
+    },
+    "popup_fullscreen_support_title": {
+        "message": "Hmm, bolo to potiahnutie nahor?"
+    },
+    "popup_fullscreen_support_desc": {
+        "message": "Ak je niečo v neporiadku, dajte nám vedieť a my to napravíme."
+    },
+    "popup_protection_disabled_support_desc": {
+        "message": "Zdá sa, že ste deaktivovali ochranu... Deje sa niečo? Môžeme to napraviť!"
+    },
+    "popup_support_button_text": {
+        "message": "Nahlásiť problém"
+    },
+    "modal_protection_off_title": {
+        "message": "Pre zapnutie ochrany:"
+    },
+    "modal_protection_off_settings": {
+        "message": "Otvorte <b>Nastavenia<\/b>"
+    },
+    "modal_protection_off_extensions": {
+        "message": "Ťuknite na <b>Safari<\/b> a vyberte položku ponuky <b>Rozšírenia<\/b>"
+    },
+    "modal_protection_off_switch": {
+        "message": "<b>Zapnite<\/b> všetky AdGuard položky"
+    },
     "extension_name": {
-        "message": "SampleAdBlocker Extension",
-        "description": "The display name for the extension."
+        "message": "AdGuard"
     },
     "extension_description": {
-        "message": "This is SampleAdBlocker Extension. You should tell us what your extension does here.",
-        "description": "Description of what the extension does."
+        "message": "AdGuard Safari Web Extension"
     }
 }
