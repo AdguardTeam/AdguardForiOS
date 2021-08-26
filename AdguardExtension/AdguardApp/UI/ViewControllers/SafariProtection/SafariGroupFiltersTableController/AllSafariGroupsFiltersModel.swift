@@ -52,9 +52,7 @@ final class AllSafariGroupsFiltersModel: NSObject, SafariGroupFiltersModelProtoc
         super.init()
         
         self.proStatusObserver = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
-            guard let self = self else { return }
-            self.modelsProvider = SafariGroupFiltersModelsProvider(sdkModels: self.safariProtection.groups, proStatus: self.configuration.proStatus)
-            self.tableView?.reloadData()
+            self?.reinit()
         }
     }
     
@@ -86,49 +84,28 @@ final class AllSafariGroupsFiltersModel: NSObject, SafariGroupFiltersModelProtoc
 // MARK: - AllSafariGroupsFiltersModel + FilterDetailsViewControllerDelegate
 
 extension AllSafariGroupsFiltersModel {
-    func deleteFilter(with groupId: Int, filterId: Int, onFilterDeleted: @escaping () -> Void) {
-        guard let groupType = SafariGroup.GroupType(rawValue: groupId) else {
-            assertionFailure("SafariGroup.GroupType initialized with wrong rawValue=\(groupId)")
-            onFilterDeleted()
-            return
-        }
-        safariProtection.deleteCustomFilter(withId: filterId) { [weak self] error in
-            if let error = error {
-                DDLogError("(AllSafariGroupsFiltersModel) - deleteFilter; DB error when removing filter with id=\(filterId) group=\(groupType); Error: \(error)")
-            }
-            self?.reinit()
-            onFilterDeleted()
-        } onCbReloaded: { error in
-            if let error = error {
-                DDLogError("(AllSafariGroupsFiltersModel) - deleteFilter; Reload CB error when removing filter with id=\(filterId) group=\(groupType); Error: \(error)")
-            }
-        }
+    
+    func deleteFilter(filterId: Int) throws {
+        try safariProtection.deleteCustomFilter(withId: filterId, onCbReloaded: nil)
+        reinit()
     }
     
-    func setFilter(with groupId: Int, filterId: Int, enabled: Bool, onFilterSet: @escaping (SafariFilterProtocol) -> Void) {
+    func setFilter(with groupId: Int, filterId: Int, enabled: Bool) throws -> SafariFilterProtocol {
         guard let groupType = SafariGroup.GroupType(rawValue: groupId) else {
             assertionFailure("SafariGroup.GroupType initialized with wrong rawValue=\(groupId)")
-            return
+            throw CommonError.missingData
         }
-        safariProtection.setFilter(withId: filterId, groupId, enabled: enabled) { [weak self] error in
-            guard let self = self else { return }
-            if let error = error {
-                DDLogError("(AllSafariGroupsFiltersModel) - setFilter; DB error when setting filter with id=\(filterId) group=\(groupType) to state=\(enabled); Error: \(error)")
-            }
-            self.reinit()
-            
-            guard let group = self.safariProtection.groups.first(where: { $0.groupType == groupType }),
-                  let newFilterMeta = group.filters.first(where: { $0.filterId == filterId })
-            else {
-                assertionFailure("Failed to find filter with groupType=\(groupType) filterId=\(filterId)")
-                return
-            }
-            onFilterSet(newFilterMeta)
-        } onCbReloaded: { error in
-            if let error = error {
-                DDLogError("(AllSafariGroupsFiltersModel) - setFilter; Reload CB error when changing group=\(groupType) to state=\(enabled); Error: \(error)")
-            }
+        
+        try safariProtection.setFilter(withId: filterId, groupId, enabled: enabled, onCbReloaded: nil)
+        reinit()
+        
+        guard let group = self.safariProtection.groups.first(where: { $0.groupType == groupType }),
+              let newFilterMeta = group.filters.first(where: { $0.filterId == filterId })
+        else {
+            assertionFailure("Failed to find filter with groupType=\(groupType) filterId=\(filterId)")
+            throw CommonError.missingData
         }
+        return newFilterMeta
     }
     
     func addCustomFilter(_ meta: ExtendedCustomFilterMetaProtocol, _ onFilterAdded: @escaping (Error?) -> Void) {
@@ -163,25 +140,21 @@ extension AllSafariGroupsFiltersModel {
     func stateChanged(for groupType: SafariGroup.GroupType, newState: Bool) {
         DDLogInfo("(AllSafariGroupsFiltersModel) - setGroup; Trying to change group=\(groupType) to state=\(newState)")
         
-        safariProtection.setGroup(groupType, enabled: newState) { [weak self] error in
-            guard let self = self else { return }
-            if let error = error {
-                DDLogError("(AllSafariGroupsFiltersModel) - setGroup; DB error when changing group=\(groupType) to state=\(newState); Error: \(error)")
-            }
-            
-            self.modelsProvider = SafariGroupFiltersModelsProvider(sdkModels: self.safariProtection.groups, proStatus: self.configuration.proStatus)
-            self.modelsProvider.searchString = self.searchString
-            
-            guard let sectionToReloadIndex = self.groupModels.firstIndex(where: { $0.groupType == groupType }) else {
-                assertionFailure("Failed to find group with groupType=\(groupType)")
-                return
-            }
-            self.tableView?.reloadSections(IndexSet(integer: sectionToReloadIndex), with: .automatic)
-        } onCbReloaded: { error in
-            if let error = error {
-                DDLogError("(AllSafariGroupsFiltersModel) - setGroup; Reload CB error when changing group=\(groupType) to state=\(newState); Error: \(error)")
-            }
+        do {
+            try safariProtection.setGroup(groupType, enabled: newState, onCbReloaded: nil)
         }
+        catch {
+            DDLogError("(AllSafariGroupsFiltersModel) - setGroup; DB error when changing group=\(groupType) to state=\(newState); Error: \(error)")
+        }
+        
+        modelsProvider = SafariGroupFiltersModelsProvider(sdkModels: safariProtection.groups, proStatus: configuration.proStatus)
+        modelsProvider.searchString = searchString
+        
+        guard let sectionToReloadIndex = groupModels.firstIndex(where: { $0.groupType == groupType }) else {
+            assertionFailure("Failed to find group with groupType=\(groupType)")
+            return
+        }
+        tableView?.reloadSections(IndexSet(integer: sectionToReloadIndex), with: .automatic)
     }
 }
 
@@ -190,7 +163,12 @@ extension AllSafariGroupsFiltersModel {
 
 extension AllSafariGroupsFiltersModel {
     func safariFilterStateChanged(_ filterId: Int, _ groupType: SafariGroup.GroupType, _ newState: Bool) {
-        setFilter(with: groupType.id, filterId: filterId, enabled: newState) { _ in }
+        do {
+            _ = try setFilter(with: groupType.id, filterId: filterId, enabled: newState)
+        }
+        catch {
+            DDLogError("(OneSafariGroupFiltersModel) - safariFilterStateChanged; Error changing safari filter state; Error: \(error)")
+        }
     }
     
     func tagTapped(_ tagName: String) {

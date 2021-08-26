@@ -54,6 +54,10 @@ final class SafariGroupFiltersModelsProvider {
     init(sdkModels: [SafariGroup], proStatus: Bool) {
         self.proStatus = proStatus
         sdkModels.forEach { group in
+            if group.groupType.proOnly && !proStatus {
+                return
+            }
+            
             let groupModel = SafariGroupStateHeaderModel(group: group, proStatus: proStatus)
             self.initialGroupModels.append(groupModel)
             

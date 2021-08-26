@@ -23,12 +23,14 @@ public enum CommonError: Error, CustomDebugStringConvertible {
     case missingSelf
     case missingData
     case missingFile(filename: String)
+    case dataDidNotChange
     
     public var debugDescription: String {
         switch self {
         case .missingSelf: return "self object is nil"
         case .missingData: return "The required data is missing"
         case .missingFile(filename: let fileName): return "The file with name=\(fileName) is missing"
+        case .dataDidNotChange: return "Data did not change"
         }
     }
 }

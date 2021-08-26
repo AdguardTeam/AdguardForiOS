@@ -162,47 +162,47 @@ public final class SafariProtection: SafariProtectionProtocol {
     // MARK: - Internal methods
     
     /* Executes block that leads to CB JSON files changes, after that reloads CBs */
-    func executeBlockAndReloadCbs(
-        block: () throws -> Void,
-        onBlockExecuted: (_ error: Error?) -> Void,
-        onCbReloaded: @escaping (_ error: Error?) -> Void
-    ) {
+    func executeBlockAndReloadCbs(block: () throws -> Void, onCbReloaded: @escaping (_ error: Error?) -> Void) rethrows {
         do {
             try block()
-            onBlockExecuted(nil)
         }
         catch {
             Logger.logError("(SafariProtection) - createNewCbJsonsAndReloadCbs; Error: \(error)")
-            onBlockExecuted(error)
             onCbReloaded(error)
-            return
+            throw error
         }
         
-        cbQueue.async { [weak self] in
-            self?.reloadContentBlockers(onCbReloaded: onCbReloaded)
-        }
+        reloadContentBlockers(onCbReloaded: onCbReloaded)
     }
     
     /* Creates JSON files for Content blockers and reloads CBs to apply new JSONs */
     func reloadContentBlockers(onCbReloaded: @escaping (_ error: Error?) -> Void) {
-        do {
-            let convertedfilters = try converter.convertFiltersAndUserRulesToJsons()
-            try cbStorage.save(cbInfos: convertedfilters)
-        }
-        catch {
-            Logger.logError("(SafariProtection) - createNewCbJsonsAndReloadCbs; Error conveerting filters: \(error)")
-            onCbReloaded(error)
-            return
-        }
-        
-        cbService.updateContentBlockers { [weak self] error in
+        cbQueue.async { [weak self] in
             guard let self = self else {
                 Logger.logError("(SafariProtection) - reloadContentBlockers; self is missing!")
                 onCbReloaded(CommonError.missingSelf)
                 return
             }
             
-            self.workingQueue.sync { onCbReloaded(error) }
+            do {
+                let convertedfilters = try self.converter.convertFiltersAndUserRulesToJsons()
+                try self.cbStorage.save(cbInfos: convertedfilters)
+            }
+            catch {
+                Logger.logError("(SafariProtection) - createNewCbJsonsAndReloadCbs; Error conveerting filters: \(error)")
+                onCbReloaded(error)
+                return
+            }
+            
+            self.cbService.updateContentBlockers { [weak self] error in
+                guard let self = self else {
+                    Logger.logError("(SafariProtection) - reloadContentBlockers; self is missing!")
+                    onCbReloaded(CommonError.missingSelf)
+                    return
+                }
+                
+                self.workingQueue.sync { onCbReloaded(error) }
+            }
         }
     }
 }

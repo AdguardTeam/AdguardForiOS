@@ -20,8 +20,8 @@ import UIKit
 import SafariAdGuardSDK
 
 protocol FilterDetailsViewControllerDelegate: NewCustomFilterDetailsControllerDelegate {
-    func deleteFilter(with groupId: Int, filterId: Int, onFilterDeleted: @escaping () -> Void)
-    func setFilter(with groupId: Int, filterId: Int, enabled: Bool, onFilterSet: @escaping  (_ newFilterMeta: SafariFilterProtocol) -> Void)
+    func deleteFilter(filterId: Int) throws
+    func setFilter(with groupId: Int, filterId: Int, enabled: Bool) throws -> SafariFilterProtocol
 }
 
 final class FilterDetailsViewController: UIViewController {
@@ -131,10 +131,15 @@ final class FilterDetailsViewController: UIViewController {
     }
     
     @objc private final func deleteButtonTapped() {
-        delegate?.deleteFilter(with: filterMeta.group.groupId, filterId: filterMeta.filterId) {
+        do {
+            try delegate.deleteFilter(filterId: filterMeta.filterId)
             DispatchQueue.asyncSafeMain { [weak self] in
                 self?.navigationController?.popViewController(animated: true)
             }
+        }
+        catch {
+            DDLogError("(FilterDetailsViewController) - deleteButtonTapped; Error deleting custom filter with id=\(filterMeta.filterId); Error: \(error)")
+            showUnknownErrorAlert()
         }
     }
     
@@ -157,8 +162,13 @@ final class FilterDetailsViewController: UIViewController {
 
 extension FilterDetailsViewController: SwitchTableViewCellDelegate {
     func switchStateChanged(to enabled: Bool) {
-        delegate.setFilter(with: filterMeta.group.groupId, filterId: filterMeta.filterId, enabled: enabled) { [weak self] newFilterMeta in
-            self?.apply(newFilterMeta: newFilterMeta)
+        do {
+            let newFilterMeta = try delegate.setFilter(with: filterMeta.group.groupId, filterId: filterMeta.filterId, enabled: enabled)
+            apply(newFilterMeta: newFilterMeta)
+        }
+        catch {
+            DDLogError("(FilterDetailsViewController) - switchStateChanged; Error changing state for filter with id=\(filterMeta.filterId), group id=\(filterMeta.group.groupId); Error: \(error)")
+            showUnknownErrorAlert()
         }
     }
 }
