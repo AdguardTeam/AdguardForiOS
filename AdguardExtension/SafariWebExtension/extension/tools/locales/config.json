@@ -1,0 +1,28 @@
+{
+    "twosky_config_path": "../../.twosky.json",
+    "api_url": "https://twosky.adtidy.org/api/v1",
+    "source_relative_path": "../../src",
+    "supported_source_filename_extensions": [
+        ".ts",
+        ".tsx"
+    ],
+    "persistent_messages": [
+        "extension_name",
+        "extension_description"
+    ],
+    "locales_relative_path": "../../src/_locales",
+    "locales_data_format": "chrome",
+    "locales_data_filename": "messages.json",
+    "required_locales": [
+        "ru",
+        "de",
+        "fr",
+        "it",
+        "es",
+        "ja",
+        "ko",
+        "zh_CN",
+        "zh_TW"
+    ],
+    "threshold_percentage": 100
+}

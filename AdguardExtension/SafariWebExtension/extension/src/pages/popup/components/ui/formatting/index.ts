@@ -1,0 +1,1 @@
+export { boldText } from './boldText';
