@@ -29,7 +29,8 @@ final class ConfigurationService: ConfigurationServiceProtocol {
     private var resources: AESharedResourcesProtocol
     private var safariProtection: SafariProtectionProtocol
     
-    private let purchaseServiceObserver: NotificationToken
+    // Pro status observer
+    private var purchaseServiceObserver: NotificationToken?
     
     // MARK: - Initialization
     
@@ -44,10 +45,13 @@ final class ConfigurationService: ConfigurationServiceProtocol {
             name: notificationName,
             object: nil,
             queue: nil)
-        { note in
+        { [weak self] note in
+            guard let self = self else { return }
+            
             let command = note.userInfo?[PurchaseService.kPSNotificationTypeKey] as! String
             if  command == PurchaseService.kPSNotificationPremiumStatusChanged {
-                Self.proStatusChanged()
+                self.safariProtection.update(proStatus: self.proStatus, onCbReloaded: nil)
+                self.proStatusChanged()
             }
         }
     }
@@ -145,7 +149,7 @@ final class ConfigurationService: ConfigurationServiceProtocol {
     
     // MARK: - Private methods
     
-    private static func proStatusChanged() {
+    private func proStatusChanged() {
         NotificationCenter.default.post(name: .proStatusChanged, object: self)
     }
     

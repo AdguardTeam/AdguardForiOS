@@ -152,7 +152,7 @@ final class NewCustomFilterDetailsController: BottomAlertController {
         delegate?.addCustomFilter(meta) { [weak self] error in
             if let error = error {
                 DDLogError("(NewCustomFilterDetailsController) - addCustomFilter; Error adding custom filter to DB; Error: \(error)")
-                self?.showErrorAlert()
+                self?.showUnknownErrorAlert()
                 self?.addButton.isEnabled = true
                 return
             }
@@ -173,7 +173,7 @@ final class NewCustomFilterDetailsController: BottomAlertController {
             dismiss(animated: true)
         } catch {
             DDLogError("(NewCustomFilterDetailsController) - addAction; Error renaming filter; Error: \(error)")
-            showErrorAlert()
+            showUnknownErrorAlert()
         }
     }
     
@@ -233,12 +233,6 @@ final class NewCustomFilterDetailsController: BottomAlertController {
         returnString.append(urlAttributedString)
         
         return returnString
-    }
-    
-    private func showErrorAlert() {
-        let title = String.localizedString("common_error_title")
-        let message = String.localizedString("unknown_error_description")
-        presentSimpleAlert(title: title, message: message, onOkButtonTapped: nil)
     }
 }
 

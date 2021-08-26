@@ -34,6 +34,12 @@ extension UIViewController {
         }
     }
     
+    func showUnknownErrorAlert() {
+        let title = String.localizedString("common_error_title")
+        let message = String.localizedString("unknown_error_description")
+        presentSimpleAlert(title: title, message: message, onOkButtonTapped: nil)
+    }
+    
     func showVideoTutorial(){
         DispatchQueue.main.async { [weak self] in
             let storyboard = UIStoryboard(name: "Tutorial", bundle: nil)

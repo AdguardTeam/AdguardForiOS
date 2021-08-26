@@ -57,18 +57,14 @@ final class SafariGroupsModel {
     func setGroup(_ groupType: SafariGroup.GroupType, enabled: Bool) {
         DDLogInfo("(SafariGroupsModel) - setGroup; Trying to change group=\(groupType) to state=\(enabled)")
         
-        safariProtection.setGroup(groupType, enabled: enabled) { [weak self] error in
-            if let error = error {
-                DDLogError("(SafariGroupsModel) - setGroup; DB error when changing group=\(groupType) to state=\(enabled); Error: \(error)")
-            }
-            
-            let row = self?.groups.firstIndex(where: { $0.groupType == groupType }) ?? 0
-            self?.createModels()
-            self?.delegate?.modelChanged(row)
-        } onCbReloaded: { error in
-            if let error = error {
-                DDLogError("(SafariGroupsModel) - setGroup; Reload CB error when changing group=\(groupType) to state=\(enabled); Error: \(error)")
-            }
+        do {
+            try safariProtection.setGroup(groupType, enabled: enabled, onCbReloaded: nil)
+            let row = groups.firstIndex(where: { $0.groupType == groupType }) ?? 0
+            createModels()
+            delegate?.modelChanged(row)
+        }
+        catch {
+            DDLogError("(SafariGroupsModel) - setGroup; DB error when changing group=\(groupType) to state=\(enabled); Error: \(error)")
         }
     }
     
