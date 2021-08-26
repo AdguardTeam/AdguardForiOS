@@ -190,14 +190,14 @@ public final class SafariProtection: SafariProtectionProtocol {
             }
             catch {
                 Logger.logError("(SafariProtection) - createNewCbJsonsAndReloadCbs; Error conveerting filters: \(error)")
-                onCbReloaded(error)
+                self.workingQueue.sync { onCbReloaded(error) }
                 return
             }
             
             self.cbService.updateContentBlockers { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection) - reloadContentBlockers; self is missing!")
-                    onCbReloaded(CommonError.missingSelf)
+                    self?.workingQueue.sync { onCbReloaded(CommonError.missingSelf) }
                     return
                 }
                 
