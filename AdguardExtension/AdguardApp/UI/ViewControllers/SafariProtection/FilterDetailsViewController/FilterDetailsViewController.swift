@@ -122,7 +122,7 @@ final class FilterDetailsViewController: UIViewController {
         let model = EditCustomFilterModel(
             filterName: filterMeta.name ?? "",
             filterId: filterMeta.filterId,
-            rulesCount: filterMeta.rulesCount ?? 0,
+            rulesCount: filterMeta.rulesCount,
             homePage: filterMeta.homePage
         )
         controller.editFilterModel = model

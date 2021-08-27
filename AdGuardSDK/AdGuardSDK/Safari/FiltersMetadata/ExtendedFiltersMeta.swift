@@ -98,6 +98,7 @@ extension ExtendedFiltersMeta {
         let lastUpdateDate: Date?
         let languages: [String]
         let tags: [Tag]
+        let rulesCount: Int
         
         enum CodingKeys: String, CodingKey {
             case filterId
@@ -150,9 +151,10 @@ extension ExtendedFiltersMeta {
         
             self.timeAdded = dateFormatter.date(from: timeAddedString)
             self.lastUpdateDate = dateFormatter.date(from: lastUpdateDateString)
+            self.rulesCount = 0
         }
         
-        init(filterId: Int, name: String?, description: String?, timeAdded: Date?, homePage: String?, updateFrequency: Int?, displayNumber: Int, group: GroupMetaProtocol, filterDownloadPage: String?, trustLevel: ExtendedFiltersMeta.TrustLevel, version: String?, lastUpdateDate: Date?, languages: [String], tags: [ExtendedFiltersMeta.Tag]) {
+        init(filterId: Int, name: String?, description: String?, timeAdded: Date?, homePage: String?, updateFrequency: Int?, displayNumber: Int, group: GroupMetaProtocol, filterDownloadPage: String?, trustLevel: ExtendedFiltersMeta.TrustLevel, version: String?, lastUpdateDate: Date?, languages: [String], tags: [ExtendedFiltersMeta.Tag], rulesCount: Int) {
             self.filterId = filterId
             self.name = name
             self.description = description
@@ -167,6 +169,7 @@ extension ExtendedFiltersMeta {
             self.lastUpdateDate = lastUpdateDate
             self.languages = languages
             self.tags = tags
+            self.rulesCount = rulesCount
         }
         
         // Initializer for custom filter
@@ -185,6 +188,7 @@ extension ExtendedFiltersMeta {
             self.languages = []
             self.tags = []
             self.group = group
+            self.rulesCount = customFilterMeta.rulesCount
         }
     }
 }

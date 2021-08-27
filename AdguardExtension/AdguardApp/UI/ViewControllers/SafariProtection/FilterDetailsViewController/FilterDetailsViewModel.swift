@@ -62,14 +62,12 @@ final class FilterDetailsViewModel: NSObject {
             metaRows.append(model)
         }
         
-        if let rulesCount = filterMeta.rulesCount {
-            let model = FilterDetailsCellModel(
-                title: String.localizedString("detailed_filter_info_rules_count_subtitle"),
-                description: String(rulesCount),
-                isLink: false
-            )
-            metaRows.append(model)
-        }
+        let model = FilterDetailsCellModel(
+            title: String.localizedString("detailed_filter_info_rules_count_subtitle"),
+            description: String(filterMeta.rulesCount),
+            isLink: false
+        )
+        metaRows.append(model)
         
         if let website = filterMeta.homePage {
             let model = FilterDetailsCellModel(

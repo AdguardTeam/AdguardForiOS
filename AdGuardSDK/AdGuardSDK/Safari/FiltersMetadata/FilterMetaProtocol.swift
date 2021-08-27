@@ -26,4 +26,5 @@ public protocol FilterMetaProtocol {
     var updateFrequency: Int? { get }
     var homePage: String? { get }
     var filterDownloadPage: String? { get }
+    var rulesCount: Int { get }
 }
