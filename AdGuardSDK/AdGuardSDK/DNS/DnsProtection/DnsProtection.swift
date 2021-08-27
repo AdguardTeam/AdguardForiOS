@@ -19,6 +19,7 @@
 import Foundation
 
 typealias DnsProtectionProtocol = DnsProtectionConfigurationProtocol
+                                & ResetableSyncProtocol
 
 public final class DnsProtection: DnsProtectionProtocol {
     
@@ -28,17 +29,25 @@ public final class DnsProtection: DnsProtectionProtocol {
     let completionQueue = DispatchQueue.main
     
     /* Services */
-    let configuration: DnsConfigurationProtocol
+    var configuration: DnsConfigurationProtocol
+    let defaultConfiguration: DnsConfigurationProtocol
     let dnsProvidersManager: DnsProvidersManagerProtocol
     
-    public init(configuration: DnsConfigurationProtocol,
-                userDefaults: UserDefaults) throws {
-        
-        let services = try DnsProtectionServiceStorage(configuration: configuration,
-                                         userDefaults: userDefaults)
-        
+    public init(
+        configuration: DnsConfigurationProtocol,
+        defaultConfiguration: DnsConfigurationProtocol,
+        userDefaults: UserDefaults
+    ) throws {
+        let services = try DnsProtectionServiceStorage(configuration: configuration, userDefaults: userDefaults)
         self.configuration = configuration
+        self.defaultConfiguration = defaultConfiguration
         self.dnsProvidersManager = services.dnsProvidersManager
     }
     
+    public func reset() throws {
+        try workingQueue.sync {
+            try dnsProvidersManager.reset()
+            configuration = defaultConfiguration.copy
+        }
+    }
 }

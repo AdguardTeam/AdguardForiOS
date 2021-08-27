@@ -101,13 +101,20 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
     /* Services */
     private let userDefaults: UserDefaultsStorageProtocol
     private let filterFilesStorage: CustomFilterFilesStorageProtocol
+    private let configuration: DnsConfigurationProtocol
     private let metaParser: CustomFilterMetaParserProtocol
     
     // MARK: - Initialization
     
-    init(userDefaults: UserDefaultsStorageProtocol, filterFilesStorage: CustomFilterFilesStorageProtocol, metaParser: CustomFilterMetaParserProtocol) {
+    init(
+        userDefaults: UserDefaultsStorageProtocol,
+        filterFilesStorage: CustomFilterFilesStorageProtocol,
+        configuration: DnsConfigurationProtocol,
+        metaParser: CustomFilterMetaParserProtocol = CustomFilterMetaParser()
+    ) {
         self.userDefaults = userDefaults
         self.filterFilesStorage = filterFilesStorage
+        self.configuration = configuration
         self.metaParser = metaParser
     }
     
@@ -229,7 +236,12 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
     }
     
     func getDnsLibsFilters() -> [Int: String] {
-        Logger.logInfo("(DnsFiltersService) - getDnsLibsFilters; Start")
+        Logger.logInfo("(DnsFiltersService) - getDnsLibsFilters; DnsFiltering is enabled=\(configuration.dnsFilteringIsEnabled)")
+        
+        guard configuration.dnsFilteringIsEnabled else {
+            return [:]
+        }
+        
         let enabledFiltersIds = filters.compactMap { $0.isEnabled ? $0.filterId : nil }
         
         var pathById: [Int: String] = [:]

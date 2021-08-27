@@ -1103,9 +1103,9 @@
 			isa = PBXGroup;
 			children = (
 				7E6E819426C2A05A00925F96 /* DnsAdguardSDK-Bridging-Header.h */,
+				7E6E818C26C2A05A00925F96 /* DnsProtection */,
 				7E6E817126C2A05A00925F96 /* Statistics */,
 				7E6E818426C2A05A00925F96 /* FilteringRules */,
-				7E6E818C26C2A05A00925F96 /* DnsProtection */,
 				7E6E819126C2A05A00925F96 /* Utils */,
 				7E6E819526C2A05A00925F96 /* DnsProviders */,
 			);
@@ -1117,12 +1117,12 @@
 			isa = PBXGroup;
 			children = (
 				7E6E817226C2A05A00925F96 /* DnsRequestProcessedEvent.swift */,
-				7E6E817326C2A05A00925F96 /* ChartStatistics */,
 				7E6E817826C2A05A00925F96 /* AGDnsRequestProcessedEventWrapper.swift */,
 				7E6E817926C2A05A00925F96 /* DnsRequestProcessedEventHandler.swift */,
 				7E6E817A26C2A05A00925F96 /* Expression+Utils.swift */,
 				7E6E817B26C2A05A00925F96 /* Constants+Statistics.swift */,
 				7E6E817C26C2A05A00925F96 /* StatisticsPeriod.swift */,
+				7E6E817326C2A05A00925F96 /* ChartStatistics */,
 				7E6E817D26C2A05A00925F96 /* ActivityStatistics */,
 				7E6E818126C2A05A00925F96 /* DnsLogStatistics */,
 			);
@@ -1190,10 +1190,10 @@
 		7E6E818C26C2A05A00925F96 /* DnsProtection */ = {
 			isa = PBXGroup;
 			children = (
+				7E6E819026C2A05A00925F96 /* DnsProtectionServiceStorage.swift */,
 				7E6E818D26C2A05A00925F96 /* DnsProtection.swift */,
 				7E6E818E26C2A05A00925F96 /* DnsProtection+Configuration.swift */,
 				7E6E818F26C2A05A00925F96 /* DnsConfiguration.swift */,
-				7E6E819026C2A05A00925F96 /* DnsProtectionServiceStorage.swift */,
 			);
 			path = DnsProtection;
 			sourceTree = "<group>";

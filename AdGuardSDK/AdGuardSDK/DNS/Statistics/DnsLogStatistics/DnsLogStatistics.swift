@@ -17,10 +17,9 @@
 
  */
 
-import Foundation
-import SQLite
+@_implementationOnly import SQLite
 
-protocol DnsLogStatisticsProtocol: ResetableSyncProtocol {
+public protocol DnsLogStatisticsProtocol: ResetableSyncProtocol {
     /// Saves passed `event` to DB
     func process(event: DnsRequestProcessedEvent)
     
@@ -30,13 +29,13 @@ protocol DnsLogStatisticsProtocol: ResetableSyncProtocol {
 
 /// This object is responsible for saving and getting statistics about DNS requests and responses
 /// It stores the last 1500 objects of log, if it is overflowed that it will purge the oldest 500 records
-final class DnsLogStatistics: DnsLogStatisticsProtocol {
+final public class DnsLogStatistics: DnsLogStatisticsProtocol {
     
     // MARK: - Private properties
     
     private let statisticsDb: Connection
         
-    init(statisticsDbContainerUrl: URL) throws {
+    public init(statisticsDbContainerUrl: URL) throws {
         let dbName = Constants.Statistics.StatisticsType.dnsLog.dbFileName
         statisticsDb = try Connection(statisticsDbContainerUrl.appendingPathComponent(dbName).path)
         dateFormatter.dateFormat = Constants.Statistics.dbDateFormat
@@ -46,7 +45,7 @@ final class DnsLogStatistics: DnsLogStatisticsProtocol {
     // MARK: - Public methods
     
     /// Tries to save `event` to `DNS_log_statistics.db`
-    func process(event: DnsRequestProcessedEvent) {
+    public func process(event: DnsRequestProcessedEvent) {
         do {
             try add(record: event)
             try purgeDnsLogIfNeeded()
@@ -56,7 +55,7 @@ final class DnsLogStatistics: DnsLogStatisticsProtocol {
     }
     
     /// Returns all available records from `DNS_log_statistics.db`
-    func getDnsLogRecords() throws -> [DnsRequestProcessedEvent] {
+    public func getDnsLogRecords() throws -> [DnsRequestProcessedEvent] {
         Logger.logInfo("(DnsLogStatistics) - getDnsLogRecords called")
         let query = DnsLogTable.table.order(DnsLogTable.startDate.desc)
         let all: [DnsRequestProcessedEvent] = try statisticsDb.prepare(query).map {
@@ -67,7 +66,7 @@ final class DnsLogStatistics: DnsLogStatisticsProtocol {
     }
 
     /// Removes all records from `DNS_log_statistics.db`
-    func reset() throws {
+    public func reset() throws {
         Logger.logInfo("(DnsLogStatistics) - reset called")
         
         let resetQuery = DnsLogTable.table.delete()

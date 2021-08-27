@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol DnsProvidersManagerProtocol: ResetableSyncProtocol {
+public protocol DnsProvidersManagerProtocol: ResetableSyncProtocol {
     /* Providers */
     var allProviders: [DnsProviderMetaProtocol] { get }
     var predefinedProviders: [DnsProviderProtocol] { get }
@@ -76,16 +76,16 @@ protocol DnsProvidersManagerProtocol: ResetableSyncProtocol {
     func removeCustomProvider(withId id: Int) throws
 }
 
-final class DnsProvidersManager: DnsProvidersManagerProtocol {
+final public class DnsProvidersManager: DnsProvidersManagerProtocol {
     
     // MARK: - Internal variables
     
-    var allProviders: [DnsProviderMetaProtocol] { predefinedProviders + customProviders }
-    var predefinedProviders: [DnsProviderProtocol]
-    var customProviders: [CustomDnsProviderProtocol]
+    public var allProviders: [DnsProviderMetaProtocol] { predefinedProviders + customProviders }
+    public var predefinedProviders: [DnsProviderProtocol]
+    public var customProviders: [CustomDnsProviderProtocol]
     
-    var activeDnsProvider: DnsProviderMetaProtocol
-    var activeDnsServer: DnsServerMetaProtocol
+    public var activeDnsProvider: DnsProviderMetaProtocol
+    public var activeDnsServer: DnsServerMetaProtocol
     
     // MARK: - Private variables
     
@@ -97,6 +97,25 @@ final class DnsProvidersManager: DnsProvidersManagerProtocol {
     
     // MARK: - Initialization
     
+    public init(
+        configuration: DnsConfigurationProtocol,
+        userDefaults: UserDefaults
+    ) throws {
+        self.configuration = configuration
+        self.userDefaults = UserDefaultsStorage(storage: userDefaults)
+        self.customProvidersStorage = CustomDnsProvidersStorage(userDefaults: self.userDefaults)
+        let predefinedDnsProviders = try PredefinedDnsProvidersDecoder(currentLanguage: configuration.currentLanguage)
+        self.providersVendor = DnsProvidersVendor(predefinedProviders: predefinedDnsProviders, customProvidersStorage: self.customProvidersStorage)
+        
+        let providersWithState = providersVendor.getProvidersWithState(for: configuration.dnsImplementation, activeDns: self.userDefaults.activeDnsInfo)
+    
+        self.predefinedProviders = providersWithState.predefined
+        self.customProviders = providersWithState.custom
+        self.activeDnsProvider = providersWithState.activeDnsProvider
+        self.activeDnsServer = providersWithState.activeDnsServer
+    }
+     
+    // Init for tests
     init(configuration: DnsConfigurationProtocol,
          userDefaults: UserDefaultsStorageProtocol,
          customProvidersStorage: CustomDnsProvidersStorageProtocol,
@@ -107,8 +126,7 @@ final class DnsProvidersManager: DnsProvidersManagerProtocol {
         self.customProvidersStorage = customProvidersStorage
         self.providersVendor = DnsProvidersVendor(predefinedProviders: predefinedProviders, customProvidersStorage: self.customProvidersStorage)
         
-        let providersWithState = providersVendor.getProvidersWithState(for: configuration.dnsImplementation,
-                                                                       activeDns: userDefaults.activeDnsInfo)
+        let providersWithState = providersVendor.getProvidersWithState(for: configuration.dnsImplementation, activeDns: userDefaults.activeDnsInfo)
         
         self.predefinedProviders = providersWithState.predefined
         self.customProviders = providersWithState.custom
@@ -118,12 +136,12 @@ final class DnsProvidersManager: DnsProvidersManagerProtocol {
     
     // MARK: - Public methods
     
-    func dnsImplementationChanged() {
+    public func dnsImplementationChanged() {
         Logger.logInfo("(DnsProvidersManager) - dnsImplementationChanged; Changed to \(configuration.dnsImplementation)")
         reinitializeProviders()
     }
     
-    func selectProvider(withId id: Int, serverId: Int) throws {
+    public func selectProvider(withId id: Int, serverId: Int) throws {
         Logger.logInfo("(DnsProvidersManager) - selectProvider; Selecting provider with id=\(id) serverId=\(serverId)")
         
         guard let provider = allProviders.first(where: { $0.providerId == id }) else {
@@ -141,7 +159,7 @@ final class DnsProvidersManager: DnsProvidersManagerProtocol {
         Logger.logInfo("(DnsProvidersManager) - selectProvider; Selected provider with id=\(id) serverId=\(serverId)")
     }
     
-    func addCustomProvider(name: String, upstreams: [String], selectAsCurrent: Bool) throws {
+    public func addCustomProvider(name: String, upstreams: [String], selectAsCurrent: Bool) throws {
         Logger.logInfo("(DnsProvidersManager) - addCustomProvider; Trying to add custom provider with name=\(name), upstreams=\(upstreams.joined(separator: "; ")) selectAsCurrent=\(selectAsCurrent)")
         
         let ids = try customProvidersStorage.addCustomProvider(name: name, upstreams: upstreams)
@@ -153,7 +171,7 @@ final class DnsProvidersManager: DnsProvidersManagerProtocol {
         Logger.logInfo("(DnsProvidersManager) - addCustomProvider; Added custom provider with name=\(name), upstreams=\(upstreams.joined(separator: "; ")) selectAsCurrent=\(selectAsCurrent)")
     }
     
-    func updateCustomProvider(withId id: Int, newName: String, newUpstreams: [String], selectAsCurrent: Bool) throws {
+    public func updateCustomProvider(withId id: Int, newName: String, newUpstreams: [String], selectAsCurrent: Bool) throws {
         Logger.logInfo("(DnsProvidersManager) - updateCustomProvider; Trying to update custom provider with id=\(id) name=\(newName), upstreams=\(newUpstreams.joined(separator: "; ")) selectAsCurrent=\(selectAsCurrent)")
         
         try customProvidersStorage.updateCustomProvider(withId: id, newName: newName, newUpstreams: newUpstreams)
@@ -165,7 +183,7 @@ final class DnsProvidersManager: DnsProvidersManagerProtocol {
         Logger.logInfo("(DnsProvidersManager) - updateCustomProvider; Updated custom provider with id=\(id) name=\(newName), upstreams=\(newUpstreams.joined(separator: "; ")) selectAsCurrent=\(selectAsCurrent)")
     }
     
-    func removeCustomProvider(withId id: Int) throws {
+    public func removeCustomProvider(withId id: Int) throws {
         Logger.logInfo("(DnsProvidersManager) - removeCustomProvider; Trying to remove provider with id=\(id)")
         
         try customProvidersStorage.removeCustomProvider(withId: id)
@@ -181,7 +199,7 @@ final class DnsProvidersManager: DnsProvidersManagerProtocol {
         Logger.logInfo("(DnsProvidersManager) - removeCustomProvider; Removed provider with id=\(id)")
     }
     
-    func reset() throws {
+    public func reset() throws {
         Logger.logInfo("(DnsProvidersManager) - reset; Start")
         
         let defaultProviderId = PredefinedDnsProvider.systemDefaultProviderId
