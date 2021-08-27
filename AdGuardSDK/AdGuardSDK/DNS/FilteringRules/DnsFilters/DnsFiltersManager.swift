@@ -155,7 +155,7 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
             
             var filterMeta: ExtendedCustomFilterMetaProtocol?
             if let filterContent = self.filterFilesStorage.getFilterContentForFilter(withId: filterId) {
-                filterMeta = try? self.metaParser.parse(filterContent, for: .system)
+                filterMeta = try? self.metaParser.parse(filterContent, for: .system, filterDownloadPage: url.absoluteString)
             }
             let filter = DnsFilter(meta: filterMeta, name: name, filterId: filterId, subscriptionUrl: url, isEnabled: isEnabled)
             self.filters.append(filter)
@@ -193,7 +193,7 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
             
             var filterMeta: ExtendedCustomFilterMetaProtocol?
             if let filterContent = self.filterFilesStorage.getFilterContentForFilter(withId: dnsFilter.filterId) {
-                filterMeta = try? self.metaParser.parse(filterContent, for: .system)
+                filterMeta = try? self.metaParser.parse(filterContent, for: .system, filterDownloadPage: dnsFilter.subscriptionUrl.absoluteString)
             }
             
             let newFilter = DnsFilter(meta: filterMeta, name: dnsFilter.name ?? "", filterId: dnsFilter.filterId, subscriptionUrl: dnsFilter.subscriptionUrl, isEnabled: dnsFilter.isEnabled)

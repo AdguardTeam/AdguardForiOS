@@ -392,6 +392,7 @@ final class FiltersService: FiltersServiceProtocol {
             do {
                 try self.metaStorage.reset()
                 try self.filterFilesStorage.reset()
+                try self.filterFilesStorage.unzipPredefinedFiltersIfNeeded()
             }
             catch {
                 Logger.logInfo("(FiltersService) - reset; Error: \(error)")
