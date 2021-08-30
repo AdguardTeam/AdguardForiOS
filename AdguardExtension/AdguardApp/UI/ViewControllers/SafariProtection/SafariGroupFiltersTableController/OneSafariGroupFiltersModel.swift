@@ -20,7 +20,7 @@ import SafariAdGuardSDK
 import SwiftUI
 
 protocol SafariGroupFiltersModelDelegate: AnyObject {
-    func filterTapped(_ filter: SafariFilterProtocol)
+    func filterTapped(_ filter: SafariGroup.Filter)
     func tagTapped(_ tagName: String)
     func addNewFilterTapped()
 }
@@ -125,7 +125,12 @@ extension OneSafariGroupFiltersModel {
         reinit()
     }
     
-    func setFilter(with groupId: Int, filterId: Int, enabled: Bool) throws -> SafariFilterProtocol {
+    func setFilter(with groupId: Int?, filterId: Int, enabled: Bool) throws -> FilterDetailsProtocol {
+        guard let groupId = groupId else {
+            assertionFailure("Group id is nil")
+            throw CommonError.missingData
+        }
+
         try safariProtection.setFilter(withId: filterId, groupId, enabled: enabled, onCbReloaded: nil)
         reinit()
         
@@ -149,7 +154,7 @@ extension OneSafariGroupFiltersModel {
         }
     }
     
-    func renameFilter(withId filterId: Int, to newName: String) throws -> SafariFilterProtocol {
+    func renameFilter(withId filterId: Int, to newName: String) throws -> FilterDetailsProtocol {
         try safariProtection.renameCustomFilter(withId: filterId, to: newName)
         reinit()
         guard let newFilterMeta = group.filters.first(where: { $0.filterId == filterId }) else {

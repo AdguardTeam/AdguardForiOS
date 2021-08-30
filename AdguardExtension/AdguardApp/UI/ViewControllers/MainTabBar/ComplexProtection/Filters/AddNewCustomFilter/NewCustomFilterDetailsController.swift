@@ -21,7 +21,7 @@ import SafariAdGuardSDK
 
 protocol NewCustomFilterDetailsControllerDelegate: AnyObject {
     func addCustomFilter(_ meta: ExtendedCustomFilterMetaProtocol, _ onFilterAdded: @escaping (Error?) -> Void)
-    func renameFilter(withId filterId: Int, to newName: String) throws -> SafariFilterProtocol
+    func renameFilter(withId filterId: Int, to newName: String) throws -> FilterDetailsProtocol
 }
 
 enum ControllerModeType {

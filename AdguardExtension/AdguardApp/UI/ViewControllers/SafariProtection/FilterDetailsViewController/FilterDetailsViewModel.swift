@@ -32,10 +32,10 @@ final class FilterDetailsViewModel: NSObject {
     private let metaRows: [FilterDetailsCellModel]
     private let tagModels: [SafariTagButtonModel]
     
-    private let filterMeta: SafariFilterProtocol
+    private let filterMeta: FilterDetailsProtocol
     private let themeService: ThemeServiceProtocol
     
-    init(filterMeta: SafariFilterProtocol, themeService: ThemeServiceProtocol) {
+    init(filterMeta: FilterDetailsProtocol, themeService: ThemeServiceProtocol) {
         self.filterMeta = filterMeta
         self.themeService = themeService
         
@@ -69,7 +69,7 @@ final class FilterDetailsViewModel: NSObject {
         )
         metaRows.append(model)
         
-        if let website = filterMeta.homePage {
+        if let website = filterMeta.homepage {
             let model = FilterDetailsCellModel(
                 title: String.localizedString("detailed_filter_info_website_subtitle"),
                 description: website,

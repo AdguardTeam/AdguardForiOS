@@ -38,7 +38,7 @@ final class SafariGroupFiltersTableController: UITableViewController {
     // MARK: - Private properties
 
     private let filterDetailsSegueId = "FilterDetailsSegueId"
-    private var selectedFilter: SafariFilterProtocol!
+    private var selectedFilter: SafariGroup.Filter!
     private var headerView: AGSearchView?
 
     /* Services */
@@ -133,7 +133,7 @@ final class SafariGroupFiltersTableController: UITableViewController {
 
 extension SafariGroupFiltersTableController: SafariGroupFiltersModelDelegate {
     
-    func filterTapped(_ filter: SafariFilterProtocol) {
+    func filterTapped(_ filter: SafariGroup.Filter) {
         selectedFilter = filter
         performSegue(withIdentifier: filterDetailsSegueId, sender: self)
     }

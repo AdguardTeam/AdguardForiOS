@@ -18,21 +18,21 @@
 
 import Foundation
 
-struct DnsFilter: ExtendedCustomFilterMetaProtocol, Codable, Equatable {
-    let filterId: Int
-    let subscriptionUrl: URL
-    var isEnabled: Bool
-    var name: String?
-    let description: String?
-    let version: String?
-    let lastUpdateDate: Date?
-    let updateFrequency: Int?
-    let homePage: String?
-    let licensePage: String?
-    let issuesReportPage: String?
-    let communityPage: String?
-    let filterDownloadPage: String?
-    let rulesCount: Int
+public struct DnsFilter: ExtendedCustomFilterMetaProtocol, Codable, Equatable {
+    public let filterId: Int
+    public let subscriptionUrl: URL
+    public var isEnabled: Bool
+    public var name: String?
+    public let description: String?
+    public let version: String?
+    public let lastUpdateDate: Date?
+    public let updateFrequency: Int?
+    public let homePage: String?
+    public let licensePage: String?
+    public let issuesReportPage: String?
+    public let communityPage: String?
+    public let filterDownloadPage: String?
+    public let rulesCount: Int
     
     init(filterId: Int, subscriptionUrl: URL, isEnabled: Bool, name: String?, description: String?, version: String?, lastUpdateDate: Date?, updateFrequency: Int?, homePage: String?, licensePage: String?, issuesReportPage: String?, communityPage: String?, filterDownloadPage: String?, rulesCount: Int) {
         self.filterId = filterId

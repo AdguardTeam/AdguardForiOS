@@ -82,3 +82,6 @@ xcuserdata/
 *.moved-aside
 *.xccheckout
 *.xcscmblueprint
+
+# -------------- JS resources -------------------
+AdguardExtension/SafariWebExtension/Resources/

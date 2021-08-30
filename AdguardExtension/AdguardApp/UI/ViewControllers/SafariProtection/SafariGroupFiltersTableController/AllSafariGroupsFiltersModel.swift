@@ -90,9 +90,9 @@ extension AllSafariGroupsFiltersModel {
         reinit()
     }
     
-    func setFilter(with groupId: Int, filterId: Int, enabled: Bool) throws -> SafariFilterProtocol {
-        guard let groupType = SafariGroup.GroupType(rawValue: groupId) else {
-            assertionFailure("SafariGroup.GroupType initialized with wrong rawValue=\(groupId)")
+    func setFilter(with groupId: Int?, filterId: Int, enabled: Bool) throws -> FilterDetailsProtocol {
+        guard let groupId = groupId, let groupType = SafariGroup.GroupType(rawValue: groupId) else {
+            assertionFailure("SafariGroup.GroupType initialized with wrong rawValue=\(groupId ?? -1)")
             throw CommonError.missingData
         }
         
@@ -121,7 +121,7 @@ extension AllSafariGroupsFiltersModel {
         }
     }
     
-    func renameFilter(withId filterId: Int, to newName: String) throws -> SafariFilterProtocol {
+    func renameFilter(withId filterId: Int, to newName: String) throws -> FilterDetailsProtocol {
         try safariProtection.renameCustomFilter(withId: filterId, to: newName)
         reinit()
         guard let group = safariProtection.groups.first(where: { $0.groupType == .custom }),
@@ -228,17 +228,5 @@ extension AllSafariGroupsFiltersModel {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
-    }
-}
-
-// MARK: - AllSafariGroupsFiltersModel + UITableViewDataSource
-
-extension AllSafariGroupsFiltersModel: NewCustomFilterDetailsControllerDelegate {
-    func customFilterWasAdded() {
-        reinit()
-    }
-    
-    func customFilterWasRenamed(_ toName: String) {
-        reinit()
     }
 }
