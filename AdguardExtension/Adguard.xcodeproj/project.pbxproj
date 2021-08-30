@@ -175,7 +175,6 @@
 		4982C2E926D7973700CACBBE /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 7EBDD9AA26D6A77B009531FA /* background.js */; };
 		4982C2EA26D7973700CACBBE /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = 7EBDD9AC26D6A77D009531FA /* content.js */; };
 		4982C2EB26D7973700CACBBE /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EBDD99926D6A777009531FA /* manifest.json */; };
-		4982C2EC26D7973700CACBBE /* popup.css in Resources */ = {isa = PBXBuildFile; fileRef = 7EBDD9AD26D6A77E009531FA /* popup.css */; };
 		4982C2ED26D7973700CACBBE /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = 7EBDD9AB26D6A77D009531FA /* popup.html */; };
 		4982C2EE26D7973700CACBBE /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = 7E7D636626D6A91A0002EE6A /* popup.js */; };
 		4982C2EF26D7973F00CACBBE /* images in Resources */ = {isa = PBXBuildFile; fileRef = 7EBDD9D526D6A809009531FA /* images */; };
@@ -184,7 +183,6 @@
 		4982C2F226D7973F00CACBBE /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 7EBDD9AA26D6A77B009531FA /* background.js */; };
 		4982C2F326D7973F00CACBBE /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = 7EBDD9AC26D6A77D009531FA /* content.js */; };
 		4982C2F426D7973F00CACBBE /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EBDD99926D6A777009531FA /* manifest.json */; };
-		4982C2F526D7973F00CACBBE /* popup.css in Resources */ = {isa = PBXBuildFile; fileRef = 7EBDD9AD26D6A77E009531FA /* popup.css */; };
 		4982C2F626D7973F00CACBBE /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = 7EBDD9AB26D6A77D009531FA /* popup.html */; };
 		4982C2F726D7973F00CACBBE /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = 7E7D636626D6A91A0002EE6A /* popup.js */; };
 		6513182E1BDE448D008DCFF9 /* ActionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 65C52B361B906105003AF42F /* ActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -588,6 +586,8 @@
 		7E70265026DD086E00F8FC25 /* DnsAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7E70264E26DD086E00F8FC25 /* DnsAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7E70265226DD087B00F8FC25 /* DnsAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E70265126DD087B00F8FC25 /* DnsAdGuardSDK.framework */; };
 		7E70265326DD087B00F8FC25 /* DnsAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7E70265126DD087B00F8FC25 /* DnsAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7E70265926DD163A00F8FC25 /* popup.css in Resources */ = {isa = PBXBuildFile; fileRef = 7E70265726DD163900F8FC25 /* popup.css */; };
+		7E70265A26DD16A900F8FC25 /* popup.css in Resources */ = {isa = PBXBuildFile; fileRef = 7E70265726DD163900F8FC25 /* popup.css */; };
 		7E74FCAC239F9BF7006C0990 /* MainPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74FCAB239F9BF7006C0990 /* MainPageController.swift */; };
 		7E74FCB0239F9C96006C0990 /* MainPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74FCAF239F9C96006C0990 /* MainPageModel.swift */; };
 		7E77144D2445F35A0078CD6B /* ActivityStatisticsServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E77144C2445F35A0078CD6B /* ActivityStatisticsServiceMock.swift */; };
@@ -3394,6 +3394,7 @@
 		7E6D962523E17347006202C2 /* RequestDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailsCell.swift; sourceTree = "<group>"; };
 		7E70264E26DD086E00F8FC25 /* DnsAdGuardSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DnsAdGuardSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E70265126DD087B00F8FC25 /* DnsAdGuardSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DnsAdGuardSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E70265726DD163900F8FC25 /* popup.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = popup.css; sourceTree = "<group>"; };
 		7E74FCAB239F9BF7006C0990 /* MainPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageController.swift; sourceTree = "<group>"; };
 		7E74FCAF239F9C96006C0990 /* MainPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageModel.swift; sourceTree = "<group>"; };
 		7E77144C2445F35A0078CD6B /* ActivityStatisticsServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStatisticsServiceMock.swift; sourceTree = "<group>"; };
@@ -3623,7 +3624,6 @@
 		7EBDD9AA26D6A77B009531FA /* background.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = background.js; sourceTree = "<group>"; };
 		7EBDD9AB26D6A77D009531FA /* popup.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = popup.html; sourceTree = "<group>"; };
 		7EBDD9AC26D6A77D009531FA /* content.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = content.js; sourceTree = "<group>"; };
-		7EBDD9AD26D6A77E009531FA /* popup.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = popup.css; sourceTree = "<group>"; };
 		7EBDD9D226D6A7FF009531FA /* _locales */ = {isa = PBXFileReference; lastKnownFileType = folder; path = _locales; sourceTree = "<group>"; };
 		7EBDD9D526D6A809009531FA /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 		7EBDFE8926CF92EB00CCE8CC /* FilterDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -5957,7 +5957,7 @@
 				7EBDD9AA26D6A77B009531FA /* background.js */,
 				7EBDD9AC26D6A77D009531FA /* content.js */,
 				7EBDD99926D6A777009531FA /* manifest.json */,
-				7EBDD9AD26D6A77E009531FA /* popup.css */,
+				7E70265726DD163900F8FC25 /* popup.css */,
 				7EBDD9AB26D6A77D009531FA /* popup.html */,
 				7E7D636626D6A91A0002EE6A /* popup.js */,
 			);
@@ -7746,8 +7746,8 @@
 				4982C2F126D7973F00CACBBE /* assistant.js in Resources */,
 				4982C2F226D7973F00CACBBE /* background.js in Resources */,
 				4982C2F326D7973F00CACBBE /* content.js in Resources */,
+				7E70265A26DD16A900F8FC25 /* popup.css in Resources */,
 				4982C2F426D7973F00CACBBE /* manifest.json in Resources */,
-				4982C2F526D7973F00CACBBE /* popup.css in Resources */,
 				4982C2F626D7973F00CACBBE /* popup.html in Resources */,
 				4982C2F726D7973F00CACBBE /* popup.js in Resources */,
 			);
@@ -7762,8 +7762,8 @@
 				4982C2E826D7973700CACBBE /* assistant.js in Resources */,
 				4982C2E926D7973700CACBBE /* background.js in Resources */,
 				4982C2EA26D7973700CACBBE /* content.js in Resources */,
+				7E70265926DD163A00F8FC25 /* popup.css in Resources */,
 				4982C2EB26D7973700CACBBE /* manifest.json in Resources */,
-				4982C2EC26D7973700CACBBE /* popup.css in Resources */,
 				4982C2ED26D7973700CACBBE /* popup.html in Resources */,
 				4982C2EE26D7973700CACBBE /* popup.js in Resources */,
 			);

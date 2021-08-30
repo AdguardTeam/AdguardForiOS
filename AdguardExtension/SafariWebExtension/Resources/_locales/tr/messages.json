@@ -1,0 +1,65 @@
+{
+    "extension_name": {
+        "message": "AdGuard"
+    },
+    "popup_action_safari_protection_title": {
+        "message": "Safari koruması"
+    },
+    "popup_action_safari_protection_description": {
+        "message": "bu site için"
+    },
+    "popup_action_current_site_status_desc_enabled": {
+        "message": "koruma etkin"
+    },
+    "popup_action_block_element": {
+        "message": "Sayfadaki öğeyi engelle"
+    },
+    "popup_action_delete_user_rules": {
+        "message": "Bu site için tüm kullanıcı kurallarını sil"
+    },
+    "popup_action_current_site_desc_starting": {
+        "message": "lütfen bekleyin, koruma başlatılıyor..."
+    },
+    "popup_action_current_site_desc_basic_only": {
+        "message": "sadece temel koruma"
+    },
+    "popup_modal_all_sites_allowed_title": {
+        "message": "İyileştirilmiş performans"
+    },
+    "popup_modal_all_sites_allowed_desc": {
+        "message": "Aferin! Artık AdGuard, en zorlu zorluklarla uğraşarak daha da fazla reklamı engelleyecek!"
+    },
+    "popup_modal_not_all_sites_allowed_title": {
+        "message": "Neredeyse hazır"
+    },
+    "popup_modal_not_all_sites_allowed_desc": {
+        "message": "AdGuard'ın yalnızca bu sitede çalışmasına izin verdiniz; bu, bir dahaki sefere izin vermediğiniz sürece diğer sitelerdeki reklamları engellemeyeceği anlamına gelir."
+    },
+    "popup_modal_not_all_sites_allowed_button": {
+        "message": "Tamam"
+    },
+    "popup_modal_btn_free": {
+        "message": "Yükselt"
+    },
+    "popup_fullscreen_support_desc": {
+        "message": "Bir sorun varsa bize haber verin, düzeltelim."
+    },
+    "popup_support_button_text": {
+        "message": "Bir sorun bildir"
+    },
+    "modal_protection_off_title": {
+        "message": "Korumayı kullanmak için:"
+    },
+    "modal_protection_off_settings": {
+        "message": "<b>Ayarları<\/b> açın"
+    },
+    "modal_protection_off_extensions": {
+        "message": "<b>Safari'ye<\/b> dokunun ve <b>Eklentiler<\/b> menü öğesini seçin"
+    },
+    "modal_protection_off_switch": {
+        "message": "Tüm AdGuard'ları <b>açın<\/b>"
+    },
+    "extension_description": {
+        "message": "AdGuard Safari Web Extension"
+    }
+}
