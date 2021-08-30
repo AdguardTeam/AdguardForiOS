@@ -1,10 +1,8 @@
 {
     "extension_name": {
-        "message": "SampleAdBlocker Extension",
-        "description": "The display name for the extension."
+        "message": "AdGuard"
     },
     "extension_description": {
-        "message": "This is SampleAdBlocker Extension. You should tell us what your extension does here.",
-        "description": "Description of what the extension does."
+        "message": "Розширення AdGuard для Safari"
     }
 }

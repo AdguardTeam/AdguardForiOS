@@ -21,22 +21,37 @@ import Foundation
 protocol DnsLibsRulesProviderProtocol {
     var enabledDnsFiltersIds: [Int] { get }
     var dnsFiltersPaths: [String] { get }
-    var blocklistFilterPath: String { get }
-    var allowlistFilterPath: String { get }
+    var blocklistFilterPath: String? { get }
+    var allowlistFilterPath: String? { get }
 }
 
-struct DnsLibsRulesProvider: DnsLibsRulesProviderProtocol {
+final class DnsLibsRulesProvider: DnsLibsRulesProviderProtocol {
     
     var enabledDnsFiltersIds: [Int] { dnsFiltersManager.getDnsLibsFilters().map { $0.key } }
     var dnsFiltersPaths: [String] { dnsFiltersManager.getDnsLibsFilters().map { $0.value } }
-    var blocklistFilterPath: String { filterFilesStorage.getUrlForFilter(withId: DnsUserRuleType.blocklist.enabledRulesFilterId).path }
-    var allowlistFilterPath: String { filterFilesStorage.getUrlForFilter(withId: DnsUserRuleType.allowlist.enabledRulesFilterId).path }
+    
+    var blocklistFilterPath: String? {
+        if configuration.blocklistIsEnabled {
+            return filterFilesStorage.getUrlForFilter(withId: DnsUserRuleType.blocklist.enabledRulesFilterId).path
+        } else {
+            return nil
+        }
+    }
+    var allowlistFilterPath: String? {
+        if configuration.allowlistIsEnbaled {
+            return filterFilesStorage.getUrlForFilter(withId: DnsUserRuleType.allowlist.enabledRulesFilterId).path
+        } else {
+            return nil
+        }
+    }
     
     private let dnsFiltersManager: DnsFiltersManagerProtocol
     private let filterFilesStorage: CustomFilterFilesStorageProtocol
+    private let configuration: DnsConfigurationProtocol
     
-    init(dnsFiltersManager: DnsFiltersManagerProtocol, filterFilesStorage: CustomFilterFilesStorageProtocol) {
+    init(dnsFiltersManager: DnsFiltersManagerProtocol, filterFilesStorage: CustomFilterFilesStorageProtocol, configuration: DnsConfigurationProtocol) {
         self.dnsFiltersManager = dnsFiltersManager
         self.filterFilesStorage = filterFilesStorage
+        self.configuration = configuration
     }
 }

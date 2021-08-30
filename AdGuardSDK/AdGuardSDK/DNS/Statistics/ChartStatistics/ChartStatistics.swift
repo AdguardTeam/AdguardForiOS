@@ -16,10 +16,9 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
-import SQLite
+@_implementationOnly import SQLite
 
-protocol ChartStatisticsProtocol: ResetableSyncProtocol {
+public protocol ChartStatisticsProtocol: ResetableSyncProtocol {
     /// Adds the `record` obtained from DNS-libs in the Tunnel to the DB
     func process(record: ChartStatisticsRecord)
     
@@ -36,11 +35,11 @@ protocol ChartStatisticsProtocol: ResetableSyncProtocol {
 }
 
 /// This object is responsible for managing statistics that is used to build charts
-final class ChartStatistics: ChartStatisticsProtocol {
+final public class ChartStatistics: ChartStatisticsProtocol {
     
     let statisticsDb: Connection
     
-    init(statisticsDbContainerUrl: URL) throws {
+    public init(statisticsDbContainerUrl: URL) throws {
         let dbName = Constants.Statistics.StatisticsType.chart.dbFileName
         statisticsDb = try Connection(statisticsDbContainerUrl.appendingPathComponent(dbName).path)
         dateFormatter.dateFormat = Constants.Statistics.dbDateFormat
@@ -61,7 +60,7 @@ final class ChartStatistics: ChartStatisticsProtocol {
         try statisticsDb.run(addQuery)
     }
     
-    func process(record: ChartStatisticsRecord) {
+    public func process(record: ChartStatisticsRecord) {
         do {
             try add(record: record)
             try compressTableIfNeeded()
@@ -91,7 +90,7 @@ final class ChartStatistics: ChartStatisticsProtocol {
         return records
     }
 
-    func getPoints(for chartType: ChartType, for period: StatisticsPeriod) throws -> ChartRecords {
+    public func getPoints(for chartType: ChartType, for period: StatisticsPeriod) throws -> ChartRecords {
         Logger.logDebug("(ChartStatistics) - getPoints for chartType=\(chartType) for period=\(period.debugDescription)")
         
         /// Intervals for points. Each interval will contain 1 aggregated point
@@ -127,7 +126,7 @@ final class ChartStatistics: ChartStatisticsProtocol {
     }
 
     /// Removes all records from the table
-    func reset() throws {
+    public func reset() throws {
         Logger.logInfo("(ChartStatistics) - reset called")
         
         let resetQuery = ChartStatisticsTable.table.delete()

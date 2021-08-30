@@ -16,8 +16,7 @@
     along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
-import SQLite
+@_implementationOnly import SQLite
 
 /// Extension with table compression methods
 /// These methods are not part of Interface, do not use them directly

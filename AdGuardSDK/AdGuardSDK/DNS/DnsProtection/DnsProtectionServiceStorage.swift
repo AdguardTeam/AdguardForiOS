@@ -23,11 +23,13 @@ protocol DnsProtectionServiceStorageProtocol {
 }
 
 final class DnsProtectionServiceStorage: DnsProtectionServiceStorageProtocol {
+    
     let dnsProvidersManager: DnsProvidersManagerProtocol
     
-    init(configuration: DnsConfigurationProtocol,
-         userDefaults: UserDefaults) throws {
-        
+    init(
+        configuration: DnsConfigurationProtocol,
+        userDefaults: UserDefaults
+    ) throws {
         let configuration = configuration
         let userDefaults = UserDefaultsStorage(storage: userDefaults)
         let customDnsProvidersStorage = CustomDnsProvidersStorage(userDefaults: userDefaults)

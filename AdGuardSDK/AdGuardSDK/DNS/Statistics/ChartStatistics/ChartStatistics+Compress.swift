@@ -16,8 +16,7 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
-import SQLite
+@_implementationOnly import SQLite
 
 extension ChartStatistics {
     /// Compresses table if there are more than 1000 records

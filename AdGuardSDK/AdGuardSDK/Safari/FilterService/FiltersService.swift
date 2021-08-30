@@ -392,6 +392,7 @@ final class FiltersService: FiltersServiceProtocol {
             do {
                 try self.metaStorage.reset()
                 try self.filterFilesStorage.reset()
+                try self.filterFilesStorage.unzipPredefinedFiltersIfNeeded()
             }
             catch {
                 Logger.logInfo("(FiltersService) - reset; Error: \(error)")
@@ -538,7 +539,7 @@ final class FiltersService: FiltersServiceProtocol {
             let tags = try metaStorage.getTagsForFilter(withId: dbFilter.filterId)
             return SafariGroup.Filter(dbFilter: dbFilter,
                                       group: group,
-                                      rulesCount: meta?.rulesCount,
+                                      rulesCount: meta?.rulesCount ?? 0,
                                       languages: languages,
                                       tags: tags,
                                       filterDownloadPage: dbFilter.subscriptionUrl)

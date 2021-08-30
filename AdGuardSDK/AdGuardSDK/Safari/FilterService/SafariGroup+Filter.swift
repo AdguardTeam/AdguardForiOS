@@ -22,7 +22,7 @@ import Foundation
  All filters that we store have their own meta and rules
  This object represents all filters information we're able to find
  */
-public protocol SafariFilterProtocol {
+public protocol SafariFilterProtocol: FilterMetaProtocol {
     var name: String? { get } // Filter name
     var description: String? { get } // Filter description
     var isEnabled: Bool { get set } // Filter state. We won't use rules from disabled filters.
@@ -36,7 +36,6 @@ public protocol SafariFilterProtocol {
     var displayNumber: Int { get } // It's an order that filters will be displayed in. A filter with the lowest one will be dispalyed first
     var languages: [String] { get } // Languages that filter is related to
     var tags: [ExtendedFiltersMeta.Tag] { get } // Some tags that filters can be grouped by
-    var rulesCount: Int? { get } // Number of rules in the filter. But this variable is approximate. The very exact result will give the Converter Lib
 }
 
 public extension SafariFilterProtocol {
@@ -59,11 +58,11 @@ public extension SafariGroup {
         public let tags: [ExtendedFiltersMeta.Tag]
         public let homePage: String?
         public let filterDownloadPage: String?
-        public let rulesCount: Int?
+        public let rulesCount: Int
         
         // MARK: - Initialization
         
-        init(name: String?, description: String?, isEnabled: Bool, filterId: Int, version: String?, lastUpdateDate: Date?, updateFrequency: Int?, group: GroupMetaProtocol, displayNumber: Int, languages: [String], tags: [ExtendedFiltersMeta.Tag], homePage: String?, filterDownloadPage: String?, rulesCount: Int?) {
+        init(name: String?, description: String?, isEnabled: Bool, filterId: Int, version: String?, lastUpdateDate: Date?, updateFrequency: Int?, group: GroupMetaProtocol, displayNumber: Int, languages: [String], tags: [ExtendedFiltersMeta.Tag], homePage: String?, filterDownloadPage: String?, rulesCount: Int) {
             self.name = name
             self.description = description
             self.isEnabled = isEnabled
@@ -80,7 +79,7 @@ public extension SafariGroup {
             self.rulesCount = rulesCount
         }
         
-        init(dbFilter: FiltersTable, group: GroupMetaProtocol, rulesCount: Int?, languages: [String], tags: [FilterTagsTable], filterDownloadPage: String?) {
+        init(dbFilter: FiltersTable, group: GroupMetaProtocol, rulesCount: Int, languages: [String], tags: [FilterTagsTable], filterDownloadPage: String?) {
             self.name = dbFilter.name
             self.description = dbFilter.description
             self.isEnabled = dbFilter.isEnabled

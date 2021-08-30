@@ -16,10 +16,9 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
-import SQLite
+@_implementationOnly import SQLite
 
-protocol ActivityStatisticsProtocol: ResetableSyncProtocol {
+public protocol ActivityStatisticsProtocol: ResetableSyncProtocol {
     /// Adds the `record` obtained from DNS-libs in the Tunnel to the DB
     func process(record: ActivityStatisticsRecord)
       
@@ -42,11 +41,11 @@ protocol ActivityStatisticsProtocol: ResetableSyncProtocol {
 /// This object is responsible for counters statistics
 /// It stores and manages data for counters
 /// If data appears to be big it can compress it
-final class ActivityStatistics: ActivityStatisticsProtocol {
+final public class ActivityStatistics: ActivityStatisticsProtocol {
 
     let statisticsDb: Connection
     
-    init(statisticsDbContainerUrl: URL) throws {
+    public init(statisticsDbContainerUrl: URL) throws {
         let dbName = Constants.Statistics.StatisticsType.activity.dbFileName
         self.statisticsDb = try Connection(statisticsDbContainerUrl.appendingPathComponent(dbName).path)
         dateFormatter.dateFormat = Constants.Statistics.dbDateFormat
@@ -56,7 +55,7 @@ final class ActivityStatistics: ActivityStatisticsProtocol {
 
     // MARK: - Public methods
 
-    func process(record: ActivityStatisticsRecord) {
+    public func process(record: ActivityStatisticsRecord) {
         do {
             try add(record: record)
         } catch {
@@ -86,7 +85,7 @@ final class ActivityStatistics: ActivityStatisticsProtocol {
         return records
     }
     
-    func getDomains(for period: StatisticsPeriod) throws -> [DomainsStatisticsRecord] {
+    public func getDomains(for period: StatisticsPeriod) throws -> [DomainsStatisticsRecord] {
         Logger.logDebug("(ActivityStatistics) - getDomains for period=\(period.debugDescription)")
         
         let interval = period.interval
@@ -106,7 +105,7 @@ final class ActivityStatistics: ActivityStatisticsProtocol {
         return result
     }
     
-    func getCounters(for period: StatisticsPeriod) throws -> CountersStatisticsRecord {
+    public func getCounters(for period: StatisticsPeriod) throws -> CountersStatisticsRecord {
         Logger.logDebug("(ActivityStatistics) - getCounters for period=\(period.debugDescription)")
         
         let interval = period.interval
@@ -129,7 +128,7 @@ final class ActivityStatistics: ActivityStatisticsProtocol {
         }
     }
     
-    func reset() throws {
+    public func reset() throws {
         Logger.logInfo("(ActivityStatistics) - reset called")
         
         let resetQuery = ActivityStatisticsTable.table.delete()

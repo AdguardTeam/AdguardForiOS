@@ -17,7 +17,6 @@
 */
 
 import Foundation
-import Zip
 
 protocol CustomFilterFilesStorageProtocol: ResetableSyncProtocol {
     /**
@@ -52,6 +51,10 @@ protocol CustomFilterFilesStorageProtocol: ResetableSyncProtocol {
 }
 
 protocol FilterFilesStorageProtocol: CustomFilterFilesStorageProtocol {
+    
+    /// URL of directory where all filters are stored
+    var filterFilesDirectoryUrl: URL { get }
+    
     /**
      Updates filter file with specified **id**
      - Parameter id: Filter unique id
@@ -73,16 +76,13 @@ protocol FilterFilesStorageProtocol: CustomFilterFilesStorageProtocol {
      - Throws: Some Foundation methods can throw while writing string to file
      */
     func saveFilter(withId id: Int, filterContent: String) throws
-    
-    /**
-     Unzips `filters.zip` archive and saves all filters from it.
-     - Throws an error if there are any other files except `filters.zip`
-     */
-    func unzipPredefinedFiltersIfNeeded() throws
 }
 
 /* This class manages filters text files */
 final class FilterFilesStorage: FilterFilesStorageProtocol {
+    
+    // URL of directory where all filters are stored
+    let filterFilesDirectoryUrl: URL
     
     // MARK: - Private properties
     
@@ -90,9 +90,6 @@ final class FilterFilesStorage: FilterFilesStorageProtocol {
     
     // Concurrent queue for downloading filter files
     private let filtersDownloadQueue = DispatchQueue(label: "AdguardSDK.FilterFilesStorage.filtersDownloadQueue", qos: .background, attributes: .concurrent)
-    
-    // URL of directory where all filters are stored
-    private let filterFilesDirectoryUrl: URL
     
     // MARK: - Initialization
     
@@ -170,23 +167,7 @@ final class FilterFilesStorage: FilterFilesStorageProtocol {
                 try fileManager.removeItem(at: filterUrl)
             }
         }
-        
-        // Restore predefined filters after reset
-        try unzipPredefinedFiltersIfNeeded()
-        
         Logger.logInfo("(FilterFilesStorage) - reset; Successfully deleted directory with filters")
-    }
-    
-    // TODO: - Write tests
-    func unzipPredefinedFiltersIfNeeded() throws {
-        let fm = FileManager.default
-        let filtersZipUrl = filterFilesDirectoryUrl.appendingPathComponent(Constants.Files.filtersZipFileName)
-        let filtersUrls = try fm.contentsOfDirectory(at: filterFilesDirectoryUrl, includingPropertiesForKeys: nil, options: [])
-        // There must be only filters.zip file
-        guard filtersUrls.count == 1 else {
-            return
-        }
-        try Zip.unzipFile(filtersZipUrl, destination: filterFilesDirectoryUrl, overwrite: true, password: nil)
     }
     
     // MARK: - Private methods

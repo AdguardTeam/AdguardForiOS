@@ -21,7 +21,7 @@ import SafariAdGuardSDK
 
 protocol FilterDetailsViewControllerDelegate: NewCustomFilterDetailsControllerDelegate {
     func deleteFilter(filterId: Int) throws
-    func setFilter(with groupId: Int, filterId: Int, enabled: Bool) throws -> SafariFilterProtocol
+    func setFilter(with groupId: Int?, filterId: Int, enabled: Bool) throws -> FilterDetailsProtocol
 }
 
 final class FilterDetailsViewController: UIViewController {
@@ -34,7 +34,7 @@ final class FilterDetailsViewController: UIViewController {
     // MARK: - Public properties
     
     weak var delegate: FilterDetailsViewControllerDelegate!
-    var filterMeta: SafariFilterProtocol!
+    var filterMeta: FilterDetailsProtocol!
     
     // MARK: - Private properties
     
@@ -52,7 +52,7 @@ final class FilterDetailsViewController: UIViewController {
         
         updateTheme()
         setupTableView()
-        tableView.tableHeaderView = ExtendedTitleTableHeaderView(title: filterMeta.name ?? "", normalDescription: filterMeta.description ?? "")
+        tableView.tableHeaderView = ExtendedTitleTableHeaderView(title: filterMeta.filterName, normalDescription: filterMeta.description ?? "")
         
         themeObserver = NotificationCenter.default.observe(name: .themeChanged, object: nil, queue: .main) { [weak self] _ in
             self?.updateTheme()
@@ -120,10 +120,10 @@ final class FilterDetailsViewController: UIViewController {
             return
         }
         let model = EditCustomFilterModel(
-            filterName: filterMeta.name ?? "",
+            filterName: filterMeta.filterName,
             filterId: filterMeta.filterId,
-            rulesCount: filterMeta.rulesCount ?? 0,
-            homePage: filterMeta.homePage
+            rulesCount: filterMeta.rulesCount,
+            homePage: filterMeta.homepage
         )
         controller.editFilterModel = model
         controller.delegate = self
@@ -143,13 +143,13 @@ final class FilterDetailsViewController: UIViewController {
         }
     }
     
-    private func apply(newFilterMeta: SafariFilterProtocol) {
+    private func apply(newFilterMeta: FilterDetailsProtocol) {
         DispatchQueue.asyncSafeMain { [weak self] in
             self?.filterMeta = newFilterMeta
             self?.setupTableView()
             self?.tableView.reloadData()
             if let header = self?.tableView.tableHeaderView as? ExtendedTitleTableHeaderView {
-                header.title = newFilterMeta.name ?? ""
+                header.title = newFilterMeta.filterName
                 header.setNormalTitle(newFilterMeta.description ?? "")
                 self?.tableView.layoutTableHeaderView()
             }
@@ -163,11 +163,11 @@ final class FilterDetailsViewController: UIViewController {
 extension FilterDetailsViewController: SwitchTableViewCellDelegate {
     func switchStateChanged(to enabled: Bool) {
         do {
-            let newFilterMeta = try delegate.setFilter(with: filterMeta.group.groupId, filterId: filterMeta.filterId, enabled: enabled)
+            let newFilterMeta = try delegate.setFilter(with: filterMeta.groupId, filterId: filterMeta.filterId, enabled: enabled)
             apply(newFilterMeta: newFilterMeta)
         }
         catch {
-            DDLogError("(FilterDetailsViewController) - switchStateChanged; Error changing state for filter with id=\(filterMeta.filterId), group id=\(filterMeta.group.groupId); Error: \(error)")
+            DDLogError("(FilterDetailsViewController) - switchStateChanged; Error changing state for filter with id=\(filterMeta.filterId), group id=\(filterMeta.groupId.debugDescription); Error: \(error)")
             showUnknownErrorAlert()
         }
     }
@@ -181,7 +181,7 @@ extension FilterDetailsViewController: NewCustomFilterDetailsControllerDelegate 
         delegate.addCustomFilter(meta, onFilterAdded)
     }
     
-    func renameFilter(withId filterId: Int, to newName: String) throws -> SafariFilterProtocol {
+    func renameFilter(withId filterId: Int, to newName: String) throws -> FilterDetailsProtocol {
         let newFilterMeta = try delegate.renameFilter(withId: filterId, to: newName)
         apply(newFilterMeta: newFilterMeta)
         return newFilterMeta

@@ -22,7 +22,6 @@ public protocol ExtendedCustomFilterMetaProtocol: FilterMetaProtocol {
     var licensePage: String? { get }
     var issuesReportPage: String? { get }
     var communityPage: String? { get }
-    var rulesCount: Int { get }
 }
 
 public extension ExtendedCustomFilterMetaProtocol {

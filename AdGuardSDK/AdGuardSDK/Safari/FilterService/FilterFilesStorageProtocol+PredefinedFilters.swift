@@ -17,14 +17,21 @@
  */
 
 import Foundation
+import Zip
 
-public protocol FilterMetaProtocol {
-    var name: String? { get }
-    var description: String? { get }
-    var version: String? { get }
-    var lastUpdateDate: Date? { get }
-    var updateFrequency: Int? { get }
-    var homePage: String? { get }
-    var filterDownloadPage: String? { get }
-    var rulesCount: Int { get }
+extension FilterFilesStorageProtocol {
+    /**
+     Unzips `filters.zip` archive and saves all filters from it.
+     - Throws an error if there are any other files except `filters.zip`
+     */
+    func unzipPredefinedFiltersIfNeeded() throws {
+        let fm = FileManager.default
+        let filtersZipUrl = filterFilesDirectoryUrl.appendingPathComponent(Constants.Files.filtersZipFileName)
+        let filtersUrls = try fm.contentsOfDirectory(at: filterFilesDirectoryUrl, includingPropertiesForKeys: nil, options: [])
+        // There must be only filters.zip file
+        guard filtersUrls.count == 1 else {
+            return
+        }
+        try Zip.unzipFile(filtersZipUrl, destination: filterFilesDirectoryUrl, overwrite: true, password: nil)
+    }
 }

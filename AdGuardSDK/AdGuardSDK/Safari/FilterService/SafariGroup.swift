@@ -24,14 +24,14 @@ import Foundation
  Filters rules are not always grouped by Content Blockers directly. For more information you can look here **AffinityRulesParser.swift**
  */
 public protocol SafariGroupProtocol: GroupMetaProtocol {
-    var filters: [SafariFilterProtocol] { get } // Filters that belong to this group
+    var filters: [SafariGroup.Filter] { get } // Filters that belong to this group
     var isEnabled: Bool { get set } // State of the group. If group is disabled we won't use it's filters
     var groupType: SafariGroup.GroupType { get } // Type of the group. We use it when sending filters to the Content Blockers and some other operations
 }
 
 public struct SafariGroup: SafariGroupProtocol {
     public let groupId: Int
-    public var filters: [SafariFilterProtocol]
+    public var filters: [SafariGroup.Filter]
     public var isEnabled: Bool
     public let groupType: SafariGroup.GroupType
     public let groupName: String
@@ -39,7 +39,7 @@ public struct SafariGroup: SafariGroupProtocol {
     
     // MARK: Initialization
     
-    init(filters: [SafariFilterProtocol], isEnabled: Bool, groupId: Int, groupName: String, displayNumber: Int) {
+    init(filters: [SafariGroup.Filter], isEnabled: Bool, groupId: Int, groupName: String, displayNumber: Int) {
         self.groupId = groupId
         self.filters = filters
         self.isEnabled = isEnabled
@@ -48,7 +48,7 @@ public struct SafariGroup: SafariGroupProtocol {
         self.displayNumber = displayNumber
     }
     
-    init(filters: [SafariFilterProtocol], isEnabled: Bool, groupType: SafariGroup.GroupType, groupName: String, displayNumber: Int) {
+    init(filters: [SafariGroup.Filter], isEnabled: Bool, groupType: SafariGroup.GroupType, groupName: String, displayNumber: Int) {
         self.groupId = groupType.id
         self.filters = filters
         self.isEnabled = isEnabled
@@ -57,7 +57,7 @@ public struct SafariGroup: SafariGroupProtocol {
         self.displayNumber = displayNumber
     }
     
-    init(dbGroup: FilterGroupsTable, filters: [SafariFilterProtocol]) {
+    init(dbGroup: FilterGroupsTable, filters: [SafariGroup.Filter]) {
         self.groupId = dbGroup.groupId
         self.filters = filters
         self.isEnabled = dbGroup.isEnabled

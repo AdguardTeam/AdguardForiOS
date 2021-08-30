@@ -1,10 +1,83 @@
 {
     "extension_name": {
-        "message": "SampleAdBlocker Extension",
-        "description": "The display name for the extension."
+        "message": "AdGuard"
     },
     "extension_description": {
-        "message": "This is SampleAdBlocker Extension. You should tell us what your extension does here.",
-        "description": "Description of what the extension does."
+        "message": "AdGuard Estensione Web Safari"
+    },
+    "popup_action_safari_protection_title": {
+        "message": "Protezione Safari"
+    },
+    "popup_action_safari_protection_description": {
+        "message": "per questo sito web"
+    },
+    "popup_action_current_site_status_desc_enabled": {
+        "message": "protezione attiva"
+    },
+    "popup_action_block_element": {
+        "message": "Blocca l'\\elemento sulla pagina"
+    },
+    "popup_action_delete_user_rules": {
+        "message": "Elimina tutte le regole utente per questo sito"
+    },
+    "popup_action_current_site_desc_starting": {
+        "message": "attendere prego, avvio protezione in corso..."
+    },
+    "popup_action_current_site_desc_allowlisted": {
+        "message": "il sito web è stato aggiunto alla lista bianca"
+    },
+    "popup_action_current_site_desc_basic_only": {
+        "message": "solo protezione base"
+    },
+    "popup_modal_all_sites_allowed_title": {
+        "message": "Prestazioni migliorate"
+    },
+    "popup_modal_all_sites_allowed_desc": {
+        "message": "Ottimo lavoro! Ora AdGuard bloccherà molti più annunci, affrontando le sfide più difficili!"
+    },
+    "popup_modal_all_sites_allowed_button": {
+        "message": "Che la magia abbia inizio"
+    },
+    "popup_modal_not_all_sites_allowed_title": {
+        "message": "Quasi fatto"
+    },
+    "popup_modal_not_all_sites_allowed_desc": {
+        "message": "Hai consentito ad AdGuard di funzionare solo su questo sito web, il che significa che non bloccherà gli annunci su altri siti web a meno che tu non conceda l\\'autorizzazione la prossima volta."
+    },
+    "popup_modal_not_all_sites_allowed_button": {
+        "message": "Ok"
+    },
+    "popup_modal_title_free": {
+        "message": "Molto buono ma..."
+    },
+    "popup_modal_desc_free": {
+        "message": "Tieni a mente che così facendo perderai la protezione avanzata non disponibile nella versione gratuita. Questa ti aiuterà a gestire più annunci, inclusi gli annunci di YouTube in Safari."
+    },
+    "popup_modal_btn_free": {
+        "message": "Aggiorna"
+    },
+    "popup_fullscreen_support_title": {
+        "message": "Uh-oh, è stato uno scorrimento verso l\\'alto?"
+    },
+    "popup_fullscreen_support_desc": {
+        "message": "Se qualcosa fosse andato storto, faccelo sapere e lo sistemeremo."
+    },
+    "popup_protection_disabled_support_desc": {
+        "message": "Uh-oh, sembra che tu abbia disattivato la protezione... Qualcosa non va? Possiamo sistemarlo!"
+    },
+    "popup_support_button_text": {
+        "message": "Segnala un problema"
+    },
+    "modal_protection_off_title": {
+        "message": "Per utilizzare la protezione:"
+    },
+    "modal_protection_off_settings": {
+        "message": "Apri <b>Impostazioni<\/b>"
+    },
+    "modal_protection_off_extensions": {
+        "message": "Clicca su <b>Safari<\/b> e scegli la voce <b>Estensioni<\/b> dal menù"
+    },
+    "modal_protection_off_switch": {
+        "message": "<b>Passa su<\/b> tutti quelli di AdGuard"
     }
 }

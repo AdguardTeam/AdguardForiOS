@@ -23,6 +23,9 @@ public protocol DnsConfigurationProtocol: ConfigurationProtocol {
     var allowlistIsEnbaled: Bool { get set }
     var dnsFilteringIsEnabled: Bool { get set }
     var dnsImplementation: DnsImplementation { get set }
+    
+    // New object created from self
+    var copy: Self { get }
 }
 
 public final class DnsConfiguration: DnsConfigurationProtocol {
@@ -32,6 +35,17 @@ public final class DnsConfiguration: DnsConfigurationProtocol {
     public var dnsImplementation: DnsImplementation
     public var blocklistIsEnabled: Bool
     public var allowlistIsEnbaled: Bool
+    
+    public var copy: DnsConfiguration {
+        DnsConfiguration(
+            currentLanguage: currentLanguage,
+            proStatus: proStatus,
+            dnsFilteringIsEnabled: dnsFilteringIsEnabled,
+            dnsImplementation: dnsImplementation,
+            blocklistIsEnabled: blocklistIsEnabled,
+            allowlistIsEnbaled: allowlistIsEnbaled
+        )
+    }
     
     public init(currentLanguage: String, proStatus: Bool, dnsFilteringIsEnabled: Bool, dnsImplementation: DnsImplementation, blocklistIsEnabled: Bool, allowlistIsEnbaled: Bool) {
         self.currentLanguage = currentLanguage

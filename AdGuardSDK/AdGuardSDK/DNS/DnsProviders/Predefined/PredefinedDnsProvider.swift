@@ -17,7 +17,6 @@
 */
 
 import UIKit.UIImage
-import SQLite
 
 // MARK: - DnsProviders
 struct PredefinedDnsProviders: Decodable, Equatable {

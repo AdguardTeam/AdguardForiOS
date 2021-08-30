@@ -16,7 +16,7 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import SQLite
+@_implementationOnly import SQLite
 
 /// Object representation of DB table `DNS_log_statistics.db`
 struct DnsLogTable: Equatable {

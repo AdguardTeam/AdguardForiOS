@@ -101,13 +101,20 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
     /* Services */
     private let userDefaults: UserDefaultsStorageProtocol
     private let filterFilesStorage: CustomFilterFilesStorageProtocol
+    private let configuration: DnsConfigurationProtocol
     private let metaParser: CustomFilterMetaParserProtocol
     
     // MARK: - Initialization
     
-    init(userDefaults: UserDefaultsStorageProtocol, filterFilesStorage: CustomFilterFilesStorageProtocol, metaParser: CustomFilterMetaParserProtocol) {
+    init(
+        userDefaults: UserDefaultsStorageProtocol,
+        filterFilesStorage: CustomFilterFilesStorageProtocol,
+        configuration: DnsConfigurationProtocol,
+        metaParser: CustomFilterMetaParserProtocol = CustomFilterMetaParser()
+    ) {
         self.userDefaults = userDefaults
         self.filterFilesStorage = filterFilesStorage
+        self.configuration = configuration
         self.metaParser = metaParser
     }
     
@@ -155,7 +162,7 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
             
             var filterMeta: ExtendedCustomFilterMetaProtocol?
             if let filterContent = self.filterFilesStorage.getFilterContentForFilter(withId: filterId) {
-                filterMeta = try? self.metaParser.parse(filterContent, for: .system)
+                filterMeta = try? self.metaParser.parse(filterContent, for: .system, filterDownloadPage: url.absoluteString)
             }
             let filter = DnsFilter(meta: filterMeta, name: name, filterId: filterId, subscriptionUrl: url, isEnabled: isEnabled)
             self.filters.append(filter)
@@ -193,7 +200,7 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
             
             var filterMeta: ExtendedCustomFilterMetaProtocol?
             if let filterContent = self.filterFilesStorage.getFilterContentForFilter(withId: dnsFilter.filterId) {
-                filterMeta = try? self.metaParser.parse(filterContent, for: .system)
+                filterMeta = try? self.metaParser.parse(filterContent, for: .system, filterDownloadPage: dnsFilter.subscriptionUrl.absoluteString)
             }
             
             let newFilter = DnsFilter(meta: filterMeta, name: dnsFilter.name ?? "", filterId: dnsFilter.filterId, subscriptionUrl: dnsFilter.subscriptionUrl, isEnabled: dnsFilter.isEnabled)
@@ -229,7 +236,12 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
     }
     
     func getDnsLibsFilters() -> [Int: String] {
-        Logger.logInfo("(DnsFiltersService) - getDnsLibsFilters; Start")
+        Logger.logInfo("(DnsFiltersService) - getDnsLibsFilters; DnsFiltering is enabled=\(configuration.dnsFilteringIsEnabled)")
+        
+        guard configuration.dnsFilteringIsEnabled else {
+            return [:]
+        }
+        
         let enabledFiltersIds = filters.compactMap { $0.isEnabled ? $0.filterId : nil }
         
         var pathById: [Int: String] = [:]
