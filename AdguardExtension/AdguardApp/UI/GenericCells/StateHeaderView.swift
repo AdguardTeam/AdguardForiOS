@@ -19,55 +19,39 @@
 import UIKit
 import SafariAdGuardSDK
 
-struct SafariGroupStateHeaderModel {
-    let iconImage: UIImage
-    let groupName: String
-    let isEnabled: Bool
-    let groupType: SafariGroup.GroupType
+struct StateHeaderViewModel<ObjectIdType: Equatable>: IdentifiableObject {
+    let iconImage: UIImage?
+    let title: String
+    var isEnabled: Bool
+    var id: ObjectIdType
 }
 
-extension SafariGroupStateHeaderModel {
-    init() {
-        self.iconImage = UIImage()
-        self.groupName = ""
-        self.isEnabled = false
-        self.groupType = .ads
-    }
+final class StateHeaderView<ModelIdType: Equatable>: UIView, IdentifiableObjectProtocol {
     
-    init(group: SafariGroup, proStatus: Bool) {
-        self.iconImage = group.groupType.iconImage
-        self.groupName = group.groupName
-        self.isEnabled = group.isEnabled
-        self.groupType = group.groupType
+    var config: IdentifiableViewConfig<StateHeaderViewModel<ModelIdType>>! {
+        didSet {
+            iconImageView.image = config.model.iconImage
+            titleLabel.text = config.model.title
+            stateSwitch.isOn = config.model.isEnabled
+        }
     }
-}
-
-// MARK: - SafariGroupStateTableCell
-
-protocol SafariGroupStateHeaderDelegate: AnyObject {
-    func stateChanged(for groupType: SafariGroup.GroupType, newState: Bool)
-}
-
-final class SafariGroupStateHeaderView: UIView {
-    
-    weak var delegate: SafariGroupStateHeaderDelegate?
     
     // MARK: - UI Elements
     
     private lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
-    private lazy var groupNameLabel: ThemableLabel = {
+    private lazy var titleLabel: ThemableLabel = {
         let label = ThemableLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.greyText = true
         label.numberOfLines = 1
         label.font = UIFont.systemFont(ofSize: 16.0, weight: .regular)
         label.textAlignment = .left
-        label.text = model.groupName
         return label
     }()
     
@@ -81,46 +65,34 @@ final class SafariGroupStateHeaderView: UIView {
     
     // MARK: - Services
     
-    private let model: SafariGroupStateHeaderModel
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
 
     // MARK: - Properties
     private var themeObserver: NotificationToken?
     
     required init?(coder: NSCoder) {
-        self.model = SafariGroupStateHeaderModel()
         super.init(coder: coder)
         setupUI()
-        process(model: model)
         setupTheme()
     }
     
     override init(frame: CGRect) {
-        self.model = SafariGroupStateHeaderModel()
         super.init(frame: frame)
         setupUI()
-        process(model: model)
-        setupTheme()
-    }
-    
-    init(model: SafariGroupStateHeaderModel) {
-        self.model = model
-        super.init(frame: .zero)
-        setupUI()
-        process(model: model)
         setupTheme()
     }
     
     /// Switch action handler
     @objc private final func switchValueChanged() {
-        delegate?.stateChanged(for: model.groupType, newState: !model.isEnabled)
+        config.model.isEnabled = !config.model.isEnabled
+        config.delegate?.modelChanged(config.model)
     }
     
     // MARK: - Private methods
     
     private func setupUI() {
         addSubview(iconImageView)
-        addSubview(groupNameLabel)
+        addSubview(titleLabel)
         addSubview(stateSwitch)
         
         NSLayoutConstraint.activate([
@@ -130,22 +102,16 @@ final class SafariGroupStateHeaderView: UIView {
             iconImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
             iconImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30.0),
             
-            groupNameLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 16.0),
-            groupNameLabel.centerYAnchor.constraint(equalTo: iconImageView.centerYAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 16.0),
+            titleLabel.centerYAnchor.constraint(equalTo: iconImageView.centerYAnchor),
             
-            stateSwitch.leadingAnchor.constraint(equalTo: groupNameLabel.trailingAnchor, constant: 16.0),
+            stateSwitch.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 16.0),
             stateSwitch.widthAnchor.constraint(equalToConstant: 50.0),
             stateSwitch.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
-            stateSwitch.centerYAnchor.constraint(equalTo: groupNameLabel.centerYAnchor)
+            stateSwitch.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor)
         ])
     }
-    
-    private func process(model: SafariGroupStateHeaderModel) {
-        self.iconImageView.image = model.iconImage
-        self.groupNameLabel.text = model.groupName
-        self.stateSwitch.isOn = model.isEnabled
-    }
-    
+
     private func setupTheme() {
         iconImageView.tintColor = UIColor.AdGuardColor.green
         updateTheme()
@@ -158,9 +124,9 @@ final class SafariGroupStateHeaderView: UIView {
 
 // MARK: - SafariGroupStateHeaderView + ThemableProtocol
 
-extension SafariGroupStateHeaderView: ThemableProtocol {
+extension StateHeaderView: ThemableProtocol {
     func updateTheme() {
         backgroundColor = themeService.backgroundColor
-        themeService.setupLabel(groupNameLabel)
+        themeService.setupLabel(titleLabel)
     }
 }

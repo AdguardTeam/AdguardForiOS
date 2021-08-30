@@ -58,16 +58,15 @@ final class SafariProtectionController: UITableViewController {
     // MARK: - view controler life cycle
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destinationVC = segue.destination as? UserRulesTableController else {
+            return
+        }
         if segue.identifier == whiteListSegue {
-            if let controller = segue.destination as? ListOfRulesController{
-                let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
-                let model: ListOfRulesModelProtocol = inverted ? InvertedSafariWhitelistModel(resources: resources, theme: theme, safariProtection: safariProtection) : SafariWhitelistModel(resources: resources, theme: theme, safariProtection: safariProtection)
-                controller.model = model
-            }
-        } else if segue.identifier == blackListSegue {
-            if let controller = segue.destination as? ListOfRulesController{
-                controller.model = blacklistModel
-            }
+            let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
+            destinationVC.rulesType = inverted ? .invertedAllowlist : .allowlist
+        }
+        else if segue.identifier == blackListSegue {
+            destinationVC.rulesType = .blocklist
         }
     }
     

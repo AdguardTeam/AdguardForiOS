@@ -35,6 +35,7 @@ final class ExtendedTitleTableHeaderView: UIView {
     private lazy var descriptionTextView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.isEditable = false
         textView.textContainerInset = .zero
         textView.textAlignment = .center
         textView.isScrollEnabled = false
@@ -140,6 +141,7 @@ final class ExtendedTitleTableHeaderView: UIView {
             color: themeService.grayTextColor,
             textAlignment: .center
         )
+        descriptionTextView.tintColor = themeService.grayTextColor
     }
 }
 

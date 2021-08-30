@@ -25,7 +25,7 @@ protocol SafariGroupFiltersModelDelegate: AnyObject {
     func addNewFilterTapped()
 }
 
-protocol SafariGroupFiltersModelProtocol: UITableViewDelegate, UITableViewDataSource, SafariFilterCellDelegate, SafariGroupStateHeaderDelegate, FilterDetailsViewControllerDelegate {
+protocol SafariGroupFiltersModelProtocol: UITableViewDelegate, UITableViewDataSource, SafariFilterCellDelegate, IdentifiableObjectDelegate, FilterDetailsViewControllerDelegate {
     var searchString: String? { get set }
     var tableView: UITableView? { get set }
     var delegate: SafariGroupFiltersModelDelegate? { get set }
@@ -51,7 +51,7 @@ final class OneSafariGroupFiltersModel: NSObject, SafariGroupFiltersModelProtoco
     private lazy var isCustom: Bool = { group.groupType == .custom }()
     private var isSearching: Bool { modelsProvider.isSearching }
     private var addButtonIsDisplayed: Bool { isCustom && !isSearching }
-    private var groupModel: SafariGroupStateHeaderModel
+    private var groupModel: StateHeaderViewModel<SafariGroup.GroupType>
     private var filtersModels: [SafariFilterCellModel] { modelsProvider.filtersModels.first ?? [] }
     
     /* Services */
@@ -181,23 +181,26 @@ extension OneSafariGroupFiltersModel {
     }
 }
 
-// MARK: - OneSafariGroupFiltersModel + SafariGroupStateHeaderDelegate
+// MARK: - OneSafariGroupFiltersModel + IdentifiableObjectDelegate
 
 extension OneSafariGroupFiltersModel {
-    func stateChanged(for groupType: SafariGroup.GroupType, newState: Bool) {
-        DDLogInfo("(OneSafariGroupFiltersModel) - setGroup; Trying to change group=\(groupType) to state=\(newState)")
+    func modelChanged<Model: IdentifiableObject>(_ newModel: Model) {
+        guard let newModel = newModel as? StateHeaderViewModel<SafariGroup.GroupType> else { return }
+        
+        let groupType = newModel.id
+        DDLogInfo("(OneSafariGroupFiltersModel) - setGroup; Trying to change group=\(groupType) to state=\(newModel.isEnabled)")
         
         do {
-            try safariProtection.setGroup(groupType, enabled: newState, onCbReloaded: nil)
+            try safariProtection.setGroup(groupType, enabled: newModel.isEnabled, onCbReloaded: nil)
         } catch {
-            DDLogError("(OneSafariGroupFiltersModel) - setGroup; DB error when changing group=\(groupType) to state=\(newState); Error: \(error)")
+            DDLogError("(OneSafariGroupFiltersModel) - setGroup; DB error when changing group=\(groupType) to state=\(newModel.isEnabled); Error: \(error)")
         }
         
-        groupModel = SafariGroupStateHeaderModel(
+        groupModel = StateHeaderViewModel(
             iconImage: groupModel.iconImage,
-            groupName: groupModel.groupName,
-            isEnabled: newState,
-            groupType: groupModel.groupType
+            title: groupModel.title,
+            isEnabled: newModel.isEnabled,
+            id: groupModel.id
         )
         reinit()
     }
@@ -254,7 +257,7 @@ extension OneSafariGroupFiltersModel {
         switch sct {
         case .title:
             let cell = TitleTableViewCell.getCell(forTableView: tableView)
-            cell.title = groupModel.groupName
+            cell.title = groupModel.title
             cell.updateTheme(themeService)
             return cell
         case .filters:
@@ -282,8 +285,8 @@ extension OneSafariGroupFiltersModel {
         case .title:
             return UIView()
         case .filters:
-            let headerView = SafariGroupStateHeaderView(model: groupModel)
-            headerView.delegate = self
+            let headerView = StateHeaderView<SafariGroup.GroupType>(frame: .zero)
+            headerView.config = IdentifiableViewConfig(model: groupModel, delegate: self)
             return headerView
         }
     }
