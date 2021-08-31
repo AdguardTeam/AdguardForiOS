@@ -27,6 +27,7 @@ protocol UserRulesTableModelProtocol: UserRuleTableViewCellDelegate, AddRuleCont
     var title: String { get }
     var description: String { get }
     var isEnabled: Bool { get set }
+    var isEditing: Bool { get set }
     var rulesModels: [UserRuleCellModel] { get }
     var icon: UIImage? { get }
 }

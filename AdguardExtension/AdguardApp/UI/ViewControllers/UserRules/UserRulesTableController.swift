@@ -64,17 +64,6 @@ final class UserRulesTableController: UIViewController {
         tableView.layoutTableHeaderView()
     }
     
-    override func setEditing(_ editing: Bool, animated: Bool) {
-        guard editing != isEditing else { return }
-        super.setEditing(editing, animated: animated)
-        
-        if editing {
-            goToEditingMode()
-        } else {
-            goToNormalMode()
-        }
-    }
-    
     // MARK: - Actions
     
     @IBAction func deleteButtonTapped(_ sender: UIButton) {
@@ -87,7 +76,7 @@ final class UserRulesTableController: UIViewController {
     }
     
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
-        setEditing(false, animated: true)
+        goToNormalMode()
     }
     
     @IBAction func searchButtonTapped(_ sender: UIBarButtonItem) {
@@ -174,7 +163,7 @@ final class UserRulesTableController: UIViewController {
     }
     
     private func select() {
-        setEditing(true, animated: true)
+        goToEditingMode()
     }
     
     private func importRules() {
@@ -200,18 +189,22 @@ final class UserRulesTableController: UIViewController {
     }
     
     private func goToEditingMode() {
+        model.isEditing = true
         buttonsStackView.isHidden = false
         UIView.animate(withDuration: 0.2) { [unowned self] in
             buttonsStackView.alpha = 1.0
             stackViewHeightConstraint.constant = 40.0
             view.layoutIfNeeded()
         }
-        
-        tableView.isEditing = true
         navigationItem.rightBarButtonItems = [searchButton]
+        if !model.rulesModels.isEmpty {
+            let indexPaths = (1...model.rulesModels.count).map { IndexPath(row: $0, section: 0) }
+            tableView.reloadRows(at: indexPaths, with: .right)
+        }
     }
     
     private func goToNormalMode() {
+        model.isEditing = false
         UIView.animate(withDuration: 0.2) { [unowned self] in
             buttonsStackView.alpha = 0.0
             stackViewHeightConstraint.constant = 0.0
@@ -219,9 +212,11 @@ final class UserRulesTableController: UIViewController {
         } completion: { [unowned self] _ in
             buttonsStackView.isHidden = true
         }
-        
-        tableView.isEditing = false
         navigationItem.rightBarButtonItems = [editButton, searchButton]
+        if !model.rulesModels.isEmpty {
+            let indexPaths = (1...model.rulesModels.count).map { IndexPath(row: $0, section: 0) }
+            tableView.reloadRows(at: indexPaths, with: .right)
+        }
     }
 }
 
@@ -237,7 +232,7 @@ extension UserRulesTableController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return nil
+        return UIView()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -271,7 +266,12 @@ extension UserRulesTableController: UITableViewDelegate {
         if indexPath.row == 0 {
             presentAddRuleController()
         }
-        tableView.deselectRow(at: indexPath, animated: true)
+        if model.isEditing {
+            let cell = tableView.cellForRow(at: indexPath)
+            cell?.setSelected(true, animated: true)
+        } else {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
 }
 

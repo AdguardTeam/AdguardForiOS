@@ -26,6 +26,7 @@ struct UserRuleCellModel {
     let rule: String
     var isEnabled: Bool
     var isSelected: Bool
+    var isEditing: Bool
 }
 
 final class UserRuleTableViewCell: UITableViewCell, Reusable {
@@ -33,16 +34,17 @@ final class UserRuleTableViewCell: UITableViewCell, Reusable {
     weak var delegate: UserRuleTableViewCellDelegate?
     var model: UserRuleCellModel! {
         didSet {
-            stateButton.isSelected = model.isEnabled
+            stateButton.isSelected = model.isEditing ? model.isSelected : model.isEnabled
             ruleLabel.text = model.rule
+            
+            stateButton.setImage(UIImage(named: model.isEditing ? "box_normal" : "check-off"), for: .normal)
+            stateButton.setImage(UIImage(named: model.isEditing ? "box_selected" : "check-on"), for: .selected)
         }
     }
     
     private lazy var stateButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "check-off"), for: .normal)
-        button.setImage(UIImage(named: "check-on"), for: .selected)
         button.addTarget(self, action: #selector(ruleStateChanged(_:)), for: .touchUpInside)
         return button
     }()
@@ -66,6 +68,13 @@ final class UserRuleTableViewCell: UITableViewCell, Reusable {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        guard model.isEditing else { return }
+        
+        model.isSelected = isSelected
     }
     
     private func setupUI() {

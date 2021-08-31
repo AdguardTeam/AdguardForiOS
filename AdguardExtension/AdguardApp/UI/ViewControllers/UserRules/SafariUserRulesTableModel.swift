@@ -43,6 +43,15 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
         }
     }
     
+    var isEditing: Bool = false {
+        didSet {
+            guard isEditing != oldValue else { return }
+            for i in 0..<rulesModels.count {
+                rulesModels[i].isEditing = isEditing
+            }
+        }
+    }
+    
     var icon: UIImage? { type.icon }
     
     var rulesModels: [UserRuleCellModel]
@@ -59,7 +68,7 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
         self.type = type
         self.safariProtection = safariProtection
         self.resources = resources
-        self.rulesModels = safariProtection.allRules(for: type).map { UserRuleCellModel(rule: $0.ruleText, isEnabled: $0.isEnabled, isSelected: false) }
+        self.rulesModels = safariProtection.allRules(for: type).map { UserRuleCellModel(rule: $0.ruleText, isEnabled: $0.isEnabled, isSelected: false, isEditing: false) }
     }
     
     // MARK: - Internal methods
@@ -67,7 +76,7 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
     func addRule(_ ruleText: String) throws {
         let rule = UserRule(ruleText: ruleText, isEnabled: true)
         try safariProtection.add(rule: rule, for: type, override: false, onCbReloaded: nil)
-        let model = UserRuleCellModel(rule: ruleText, isEnabled: true, isSelected: false)
+        let model = UserRuleCellModel(rule: ruleText, isEnabled: true, isSelected: false, isEditing: isEditing)
         rulesModels.append(model)
         delegate?.ruleSuccessfullyAdded()
     }
