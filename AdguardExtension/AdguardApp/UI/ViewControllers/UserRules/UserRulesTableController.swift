@@ -82,6 +82,7 @@ final class UserRulesTableController: UIViewController {
     }
     
     @IBAction func editButtonTapped(_ sender: UIBarButtonItem) {
+        presentAlert()
     }
     
     // MARK: - Private methods
@@ -111,7 +112,64 @@ final class UserRulesTableController: UIViewController {
         tableView.sectionFooterHeight = 0.01
         tableView.estimatedRowHeight = 48.0
         tableView.rowHeight = UITableView.automaticDimension
+        
         AddTableViewCell.registerCell(forTableView: tableView)
+        UserRuleTableViewCell.registerCell(forTableView: tableView)
+    }
+    
+    private final func presentAlert() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .deviceAlertStyle)
+        
+        let selectAction = UIAlertAction(title: String.localizedString("common_select"), style: .default) { [weak self] _ in
+            self?.select()
+        }
+        alert.addAction(selectAction)
+        
+        let importAction = UIAlertAction(title: String.localizedString("import"), style: .default) { [weak self] _ in
+            self?.importRules()
+        }
+        alert.addAction(importAction)
+        
+        let exportAction = UIAlertAction(title: String.localizedString("export"), style: .default) { [weak self] _ in
+            self?.exportRules()
+        }
+        alert.addAction(exportAction)
+        
+        let cancelAction = UIAlertAction(title: String.localizedString("cancel_button_title"), style: .cancel) { _ in
+            alert.dismiss(animated: true, completion: nil)
+        }
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @available(iOS 14.0, *)
+    private func createMenu() -> UIMenu {
+        let selectAction = UIAction(title: String.localizedString("common_select"), image: UIImage(systemName: "checkmark.circle")) { [weak self] a in
+            print(a)
+            self?.select()
+        }
+        let importAction = UIAction(title: String.localizedString("import"), image: UIImage(systemName: "square.and.arrow.down")) { [weak self] _ in
+            self?.importRules()
+        }
+        let exportAction = UIAction(title: String.localizedString("export"), image: UIImage(systemName: "square.and.arrow.up")) { [weak self] _ in
+            self?.exportRules()
+        }
+        
+        let menu = UIMenu(children: [selectAction, importAction, exportAction])
+        return menu
+    }
+    
+    private func select() {
+        
+    }
+    
+    private func importRules() {
+        
+    }
+    
+    private func exportRules() {
+        
     }
 }
 
@@ -144,8 +202,13 @@ extension UserRulesTableController: UITableViewDataSource {
             cell.addTitle = String.localizedString("add_new_rule")
             cell.updateTheme(themeService)
             return cell
+        } else {
+            let cell = UserRuleTableViewCell.getCell(forTableView: tableView)
+            cell.model = model.rulesModels[indexPath.row - 1]
+            cell.delegate = model
+            cell.updateTheme(themeService)
+            return cell
         }
-        return UITableViewCell()
     }
 }
 

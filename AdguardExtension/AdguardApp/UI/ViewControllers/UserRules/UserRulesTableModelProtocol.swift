@@ -19,10 +19,10 @@
 import Foundation
 import UIKit
 
-protocol UserRulesTableModelProtocol: AnyObject {
+protocol UserRulesTableModelProtocol: UserRuleTableViewCellDelegate {
     var title: String { get }
     var description: String { get }
     var isEnabled: Bool { get set }
-    var rulesModels: [String] { get }
+    var rulesModels: [UserRuleCellModel] { get }
     var icon: UIImage? { get }
 }

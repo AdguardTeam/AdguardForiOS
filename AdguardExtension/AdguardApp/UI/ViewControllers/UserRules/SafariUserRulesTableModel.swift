@@ -43,7 +43,7 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
     
     var icon: UIImage? { type.icon }
     
-    var rulesModels: [String] { [] }
+    var rulesModels: [UserRuleCellModel] { [UserRuleCellModel(rule: "rule", isEnabled: true, isSelected: false)] }
     
     // MARK: - Private properties
     
@@ -60,6 +60,10 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
     }
     
     // MARK: - Internal methods
+    
+    func ruleStateChanged(_ rule: String, newState: Bool) {
+        
+    }
 }
 
 // MARK: - SafariUserRuleType + helper variables

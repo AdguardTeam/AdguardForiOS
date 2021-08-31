@@ -595,7 +595,7 @@
                 </barButtonItem>
                 <barButtonItem image="edit" style="plain" changesSelectionAsPrimaryAction="YES" id="62v-mE-Bld">
                     <connections>
-                        <action selector="editButtonTapped:" destination="eSV-Hx-Rg2" id="Ncu-D9-sNK"/>
+                        <action selector="editButtonTapped:" destination="eSV-Hx-Rg2" id="wE4-0J-4VJ"/>
                     </connections>
                 </barButtonItem>
             </objects>

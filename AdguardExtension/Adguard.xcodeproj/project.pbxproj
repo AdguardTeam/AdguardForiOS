@@ -596,6 +596,8 @@
 		7E70266426DD29A500F8FC25 /* UserRulesTableModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70266226DD29A500F8FC25 /* UserRulesTableModelProtocol.swift */; };
 		7E70266626DD412600F8FC25 /* IdentifiableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70266526DD412600F8FC25 /* IdentifiableObject.swift */; };
 		7E70266726DD412600F8FC25 /* IdentifiableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70266526DD412600F8FC25 /* IdentifiableObject.swift */; };
+		7E70266926DE462D00F8FC25 /* UserRuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70266826DE462D00F8FC25 /* UserRuleTableViewCell.swift */; };
+		7E70266A26DE462D00F8FC25 /* UserRuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70266826DE462D00F8FC25 /* UserRuleTableViewCell.swift */; };
 		7E74FCAC239F9BF7006C0990 /* MainPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74FCAB239F9BF7006C0990 /* MainPageController.swift */; };
 		7E74FCB0239F9C96006C0990 /* MainPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74FCAF239F9C96006C0990 /* MainPageModel.swift */; };
 		7E77144D2445F35A0078CD6B /* ActivityStatisticsServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E77144C2445F35A0078CD6B /* ActivityStatisticsServiceMock.swift */; };
@@ -3407,6 +3409,7 @@
 		7E70265F26DD28C600F8FC25 /* SafariUserRulesTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariUserRulesTableModel.swift; sourceTree = "<group>"; };
 		7E70266226DD29A500F8FC25 /* UserRulesTableModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRulesTableModelProtocol.swift; sourceTree = "<group>"; };
 		7E70266526DD412600F8FC25 /* IdentifiableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableObject.swift; sourceTree = "<group>"; };
+		7E70266826DE462D00F8FC25 /* UserRuleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRuleTableViewCell.swift; sourceTree = "<group>"; };
 		7E74FCAB239F9BF7006C0990 /* MainPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageController.swift; sourceTree = "<group>"; };
 		7E74FCAF239F9C96006C0990 /* MainPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageModel.swift; sourceTree = "<group>"; };
 		7E77144C2445F35A0078CD6B /* ActivityStatisticsServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStatisticsServiceMock.swift; sourceTree = "<group>"; };
@@ -6045,6 +6048,7 @@
 				7E70265B26DD23D700F8FC25 /* UserRulesTableController.swift */,
 				7E70266226DD29A500F8FC25 /* UserRulesTableModelProtocol.swift */,
 				7E70265F26DD28C600F8FC25 /* SafariUserRulesTableModel.swift */,
+				7E70266826DE462D00F8FC25 /* UserRuleTableViewCell.swift */,
 			);
 			path = UserRules;
 			sourceTree = "<group>";
@@ -8530,6 +8534,7 @@
 				7E86A9B826CBB591000B395F /* UITraitEnvironment+Utils.swift in Sources */,
 				D0B545902435D630002F0AEC /* NetworkSettingsService.swift in Sources */,
 				D0B545D42435D697002F0AEC /* OnboardingController.swift in Sources */,
+				7E70266A26DE462D00F8FC25 /* UserRuleTableViewCell.swift in Sources */,
 				659886881CF74DE9003ECD1C /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				7EBDFE8B26CF92EB00CCE8CC /* FilterDetailsViewModel.swift in Sources */,
 				7E92753926C67A1D007B2C80 /* TitleTableViewCell.swift in Sources */,
@@ -9018,6 +9023,7 @@
 				7E70266326DD29A500F8FC25 /* UserRulesTableModelProtocol.swift in Sources */,
 				D09E9646216CE10F00313AB1 /* ThemeableImageView.swift in Sources */,
 				7E822C0D2435EDD30015B4D0 /* Rule.swift in Sources */,
+				7E70266926DE462D00F8FC25 /* UserRuleTableViewCell.swift in Sources */,
 				7E74FCAC239F9BF7006C0990 /* MainPageController.swift in Sources */,
 				D031A155219EFC99002C17D9 /* DDLoggerNames.m in Sources */,
 				7E3556D625DBEB7500CB2A8D /* UIViewController+Present.swift in Sources */,
