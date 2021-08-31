@@ -64,6 +64,17 @@ final class UserRulesTableController: UIViewController {
         tableView.layoutTableHeaderView()
     }
     
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        guard editing != isEditing else { return }
+        super.setEditing(editing, animated: animated)
+        
+        if editing {
+            goToEditingMode()
+        } else {
+            goToNormalMode()
+        }
+    }
+    
     // MARK: - Actions
     
     @IBAction func deleteButtonTapped(_ sender: UIButton) {
@@ -76,6 +87,7 @@ final class UserRulesTableController: UIViewController {
     }
     
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
+        setEditing(false, animated: true)
     }
     
     @IBAction func searchButtonTapped(_ sender: UIBarButtonItem) {
@@ -162,7 +174,7 @@ final class UserRulesTableController: UIViewController {
     }
     
     private func select() {
-        
+        setEditing(true, animated: true)
     }
     
     private func importRules() {
@@ -185,6 +197,31 @@ final class UserRulesTableController: UIViewController {
         case .dnsAllowlist: controller.type = .systemWhitelist
         }
         present(controller, animated: true, completion: nil)
+    }
+    
+    private func goToEditingMode() {
+        buttonsStackView.isHidden = false
+        UIView.animate(withDuration: 0.2) { [unowned self] in
+            buttonsStackView.alpha = 1.0
+            stackViewHeightConstraint.constant = 40.0
+            view.layoutIfNeeded()
+        }
+        
+        tableView.isEditing = true
+        navigationItem.rightBarButtonItems = [searchButton]
+    }
+    
+    private func goToNormalMode() {
+        UIView.animate(withDuration: 0.2) { [unowned self] in
+            buttonsStackView.alpha = 0.0
+            stackViewHeightConstraint.constant = 0.0
+            view.layoutIfNeeded()
+        } completion: { [unowned self] _ in
+            buttonsStackView.isHidden = true
+        }
+        
+        tableView.isEditing = false
+        navigationItem.rightBarButtonItems = [editButton, searchButton]
     }
 }
 
@@ -253,6 +290,10 @@ extension UserRulesTableController: ThemableProtocol {
         view.backgroundColor = themeService.backgroundColor
         buttonsStackView.backgroundColor = themeService.notificationWindowColor
         themeService.setupTable(tableView)
+        deleteButton.setTitleColor(UIColor.AdGuardColor.red, for: .normal)
+        enableButton.setTitleColor(themeService.grayTextColor, for: .normal)
+        disableButton.setTitleColor(themeService.grayTextColor, for: .normal)
+        cancelButton.setTitleColor(themeService.lightGrayTextColor, for: .normal)
         tableView.reloadData()
     }
 }
