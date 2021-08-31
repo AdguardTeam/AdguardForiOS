@@ -3,7 +3,7 @@
     "experimentalDecorators": true,
     "target": "esnext",
     "lib": ["esnext", "dom"],
-    "module": "commonjs",
+    "module": "esnext",
     "allowJs": true,
     "strict": true,
     "noImplicitAny": true,
@@ -12,5 +12,11 @@
     "forceConsistentCasingInFileNames": false,
     "jsx": "react",
     "resolveJsonModule": true,
+    "moduleResolution": "node",
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
   }
 }

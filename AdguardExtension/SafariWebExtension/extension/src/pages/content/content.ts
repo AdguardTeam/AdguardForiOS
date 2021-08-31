@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import { browser } from 'webextension-polyfill-ts';
 import ExtendedCss from 'extended-css';
-import scriptlets from 'scriptlets';
 
 import { MessagesToBackgroundPage } from '../common/constants';
 
@@ -9,7 +8,6 @@ interface SelectorsAndScripts {
     scripts: string[],
     cssInject: string[],
     cssExtended: string[],
-    scriptlets: string[],
 }
 
 /**
@@ -37,12 +35,7 @@ const getSelectorsAndScripts = async (): Promise<SelectorsAndScripts | null> => 
         return null;
     }
 
-    try {
-        return JSON.parse(response) as SelectorsAndScripts;
-    } catch (e) {
-        console.log('AG: error occurred on selectors and script json parse', e);
-        return null;
-    }
+    return response as SelectorsAndScripts;
 };
 
 /**
@@ -51,12 +44,14 @@ const getSelectorsAndScripts = async (): Promise<SelectorsAndScripts | null> => 
  */
 const executeScripts = (scripts: string[]) => {
     // Wrap with try catch
-    scripts.unshift('( function () { try {');
-    scripts.push("} catch (ex) { console.error('Error executing AG js: ' + ex); } })();");
+    const start = '( function () { try {';
+    const end = "} catch (ex) { console.error('Error executing AG js: ' + ex); } })();";
+
+    const updated = [start, ...scripts, end];
 
     const scriptTag = document.createElement('script');
     scriptTag.setAttribute('type', 'text/javascript');
-    scriptTag.textContent = scripts.join('\r\n');
+    scriptTag.textContent = updated.join('\r\n');
 
     const parent = document.head || document.documentElement;
     parent.appendChild(scriptTag);
@@ -143,12 +138,9 @@ const protectStyleElementContent = (protectStyleEl: Node) => {
  * @param verbose logging
  */
 const applyCss = (styleSelectors: string[], verbose: boolean) => {
-    console.log(styleSelectors);
     if (!styleSelectors || !styleSelectors.length) {
         return;
     }
-
-    console.log(styleSelectors);
 
     logMessage(verbose, `css length: ${styleSelectors.length}`);
 
@@ -157,7 +149,6 @@ const applyCss = (styleSelectors: string[], verbose: boolean) => {
     (document.head || document.documentElement).appendChild(styleElement);
 
     const selectors = styleSelectors.map((s) => s.trim());
-    console.log(selectors);
     selectors.forEach((selector) => {
         styleElement.sheet!.insertRule(selector);
     });
@@ -188,36 +179,6 @@ const applyExtendedCss = (extendedCss: string[], verbose: boolean) => {
 };
 
 /**
- * Applies scriptlets
- *
- * @param scriptletsData Array with scriptlets data
- * @param verbose logging
- */
-const applyScriptlets = (scriptletsData: string[], verbose: boolean) => {
-    if (!scriptletsData || !scriptletsData.length) {
-        return;
-    }
-
-    logMessage(verbose, `scriptlets length: ${scriptletsData.length}`);
-    const scriptletExecutableScripts = scriptletsData
-        .map((s) => {
-            const param = JSON.parse(s);
-            param.engine = 'safari-extension';
-            if (verbose) {
-                param.verbose = true;
-            }
-
-            const code = scriptlets && scriptlets.invoke(param);
-            return code || '';
-        });
-
-    console.log(scriptletExecutableScripts);
-    executeScripts(scriptletExecutableScripts);
-    // @ts-ignore
-    console.log(window.adg);
-};
-
-/**
  * Applies injected script and css
  *
  * @param selectorsAndScripts
@@ -230,7 +191,6 @@ const applyAdvancedBlockingData = (selectorsAndScripts: SelectorsAndScripts, ver
     applyScripts(selectorsAndScripts.scripts, verbose);
     applyCss(selectorsAndScripts.cssInject, verbose);
     applyExtendedCss(selectorsAndScripts.cssExtended, verbose);
-    applyScriptlets(selectorsAndScripts.scriptlets, verbose);
 
     logMessage(verbose, 'Applying scripts and css - done');
 };
@@ -242,6 +202,7 @@ const init = async () => {
             let selectorsAndScripts;
             try {
                 selectorsAndScripts = await getSelectorsAndScripts();
+                console.log(selectorsAndScripts);
             } catch (e) {
                 console.log(e);
             }
