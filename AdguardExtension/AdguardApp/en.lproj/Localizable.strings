@@ -844,6 +844,9 @@
 /* (FilterDetailsViewController) Subscription URL subtitle for detailed filter info */
 "detailed_filter_info_subscription_subtitle" = "Subscription URL";
 
+/* (AddRuleController) Error description when adding rule that already exists */
+"user_rule_exists_error" = "You're trying to add the rule, which is already in the list";
+
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
 /* (MainTabBarController) Main page tab for VoiceOver*/

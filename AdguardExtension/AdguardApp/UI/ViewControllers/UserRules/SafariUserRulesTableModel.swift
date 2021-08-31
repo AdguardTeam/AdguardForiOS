@@ -22,6 +22,8 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
     
     // MARK: - Internal properties
     
+    weak var delegate: UserRulesTableModelDelegate?
+    
     var title: String { type.title }
     
     var description: String { type.description }
@@ -43,7 +45,7 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
     
     var icon: UIImage? { type.icon }
     
-    var rulesModels: [UserRuleCellModel] { [UserRuleCellModel(rule: "rule", isEnabled: true, isSelected: false)] }
+    var rulesModels: [UserRuleCellModel]
     
     // MARK: - Private properties
     
@@ -57,9 +59,18 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
         self.type = type
         self.safariProtection = safariProtection
         self.resources = resources
+        self.rulesModels = safariProtection.allRules(for: type).map { UserRuleCellModel(rule: $0.ruleText, isEnabled: $0.isEnabled, isSelected: false) }
     }
     
     // MARK: - Internal methods
+    
+    func addRule(_ ruleText: String) throws {
+        let rule = UserRule(ruleText: ruleText, isEnabled: true)
+        try safariProtection.add(rule: rule, for: type, override: false, onCbReloaded: nil)
+        let model = UserRuleCellModel(rule: ruleText, isEnabled: true, isSelected: false)
+        rulesModels.append(model)
+        delegate?.ruleSuccessfullyAdded()
+    }
     
     func ruleStateChanged(_ rule: String, newState: Bool) {
         

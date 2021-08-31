@@ -16,15 +16,19 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
+import SafariAdGuardSDK
 
-protocol AddRuleControllerDelegate {
-    func addRule(rule: String)
+enum RulesType {
+    case safariWhitelist, invertedSafariWhitelist, systemWhitelist, systemBlacklist, safariUserfilter, wifiExceptions
 }
 
-class AddRuleController: BottomAlertController, UITextViewDelegate {
+protocol AddRuleControllerDelegate: AnyObject {
+    func addRule(_ ruleText: String) throws
+}
+
+final class AddRuleController: BottomAlertController, UITextViewDelegate {
     
-    var delegate : AddRuleControllerDelegate?
+    weak var delegate : AddRuleControllerDelegate?
     var type: RulesType = .safariUserfilter
     
     @IBOutlet weak var ruleTextView: UITextView!
@@ -37,21 +41,14 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
-    let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    
+    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let textViewCharectersLimit = 50
     
     // MARK: - View Controller life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.keyboardNotification(notification:)),
-                                               name:
-            UIResponder.keyboardWillChangeFrameNotification,
-                                               object: nil)
-        
-        titleLabel.text = getTitleText()
-        editCaption.text = getEditCaptionText()
+        titleLabel.text = type.title
+        editCaption.text = type.captionText
         
         addButton.isEnabled = false
         
@@ -78,43 +75,17 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
         addButton.applyStandardGreenStyle()
         cancelButton.applyStandardOpaqueStyle()
     }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         ruleTextView.becomeFirstResponder()
-        rulePlaceholderLabel.text = getPlaceholderText()
-    }
-    
-    @objc func keyboardNotification(notification: NSNotification) {
-        if let userInfo = notification.userInfo {
-            let endFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-            let endFrameY = endFrame?.origin.y ?? 0
-            let duration:TimeInterval = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
-            let animationCurveRawNSN = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
-            let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIView.AnimationOptions.curveEaseInOut.rawValue
-            let animationCurve:UIView.AnimationOptions = UIView.AnimationOptions(rawValue: animationCurveRaw)
-            if endFrameY >= UIScreen.main.bounds.size.height {
-                self.keyboardHeightLayoutConstraint?.constant = 0.0
-            } else {
-                self.keyboardHeightLayoutConstraint?.constant = endFrame?.size.height ?? 0.0
-            }
-            UIView.animate(withDuration: duration,
-                           delay: TimeInterval(0),
-                           options: animationCurve,
-                           animations: { self.view.layoutIfNeeded() },
-                           completion: nil)
-        }
+        rulePlaceholderLabel.text = type.placeholderText
     }
     
     // MARK: - Actions
     
     @IBAction func saveAction(_ sender: Any) {
-        delegate?.addRule(rule: ruleTextView.text!)
-        dismiss(animated: true, completion: nil)
+        addRuleInternal()
     }
     
     @IBAction func cancelAction(_ sender: Any) {
@@ -167,62 +138,10 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
         }
     }
     
-    private func getTitleText() -> String {
-        switch type {
-        case .safariUserfilter:
-            return ACLocalizedString("add_blacklist_rule_title", nil)
-        case .systemBlacklist:
-            return ACLocalizedString("add_blacklist_rule_title", nil)
-        case .systemWhitelist:
-            return ACLocalizedString("add_whitelist_domain_title", nil)
-        case .safariWhitelist:
-            return ACLocalizedString("add_whitelist_domain_title", nil)
-        case .invertedSafariWhitelist:
-            return ACLocalizedString("add_whitelist_domain_title", nil)
-        case .wifiExceptions:
-            return ACLocalizedString("add_wifi_name_placeholder", nil)
-        }
-    }
-    
-    private func getEditCaptionText() -> String {
-        switch type {
-        case .safariUserfilter:
-            return ACLocalizedString("add_blacklist_rule_caption", nil)
-        case .systemBlacklist:
-            return ACLocalizedString("add_blacklist_rule_caption", nil)
-        case .systemWhitelist:
-            return ACLocalizedString("add_whitelist_domain_caption", nil)
-        case .safariWhitelist:
-            return ACLocalizedString("add_whitelist_domain_caption", nil)
-        case .invertedSafariWhitelist:
-            return ACLocalizedString("add_whitelist_domain_caption", nil)
-        case .wifiExceptions:
-            return ACLocalizedString("add_wifi_name_caption", nil)
-        }
-    }
-    
-    private func getPlaceholderText() -> String {
-        switch type {
-        case .safariUserfilter:
-            return ACLocalizedString("add_blacklist_rule_placeholder", nil)
-        case .systemBlacklist:
-            return ACLocalizedString("add_blacklist_rule_placeholder", nil)
-        case .systemWhitelist:
-            return ACLocalizedString("add_whitelist_domain_placeholder", nil)
-        case .safariWhitelist:
-            return ACLocalizedString("add_whitelist_domain_placeholder", nil)
-        case .invertedSafariWhitelist:
-            return ACLocalizedString("add_whitelist_domain_placeholder", nil)
-        case .wifiExceptions:
-            return ACLocalizedString("add_wifi_name_placeholder", nil)
-        }
-    }
-    
     private func saveIfNeeded(text: String) {
         if !text.isEmpty, type == .wifiExceptions {
             ruleTextView.resignFirstResponder()
-            delegate?.addRule(rule: text)
-            dismiss(animated: true, completion: nil)
+            addRuleInternal()
         }
     }
     
@@ -231,7 +150,72 @@ class AddRuleController: BottomAlertController, UITextViewDelegate {
             ruleTextView.returnKeyType = .done
         }
     }
+    
+    private func addRuleInternal() {
+        
+        do {
+            try delegate?.addRule(ruleTextView.text!)
+            dismiss(animated: true, completion: nil)
+        }
+        catch {
+            if case UserRulesStorageError.ruleAlreadyExists(ruleString: _) = error {
+                showRuleExistsAlert()
+            } else {
+                showUnknownErrorAlert()
+            }
+        }
+    }
+    
+    private func showRuleExistsAlert() {
+        let title = String.localizedString("common_error_title")
+        let message = String.localizedString("user_rule_exists_error")
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: String.localizedString("common_action_ok"), style: .default) { _ in
+            alert.dismiss(animated: true, completion: nil)
+        }
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
 }
+
+// MARK: - AddRuleController + ThemableProtocol
+
+fileprivate extension RulesType {
+    var title: String {
+        switch self {
+        case .safariUserfilter: return String.localizedString("add_blacklist_rule_title")
+        case .systemBlacklist: return String.localizedString("add_blacklist_rule_title")
+        case .systemWhitelist: return String.localizedString("add_whitelist_domain_title")
+        case .safariWhitelist: return String.localizedString("add_whitelist_domain_title")
+        case .invertedSafariWhitelist: return String.localizedString("add_whitelist_domain_title")
+        case .wifiExceptions: return String.localizedString("add_wifi_name_placeholder")
+        }
+    }
+    
+    var captionText: String {
+        switch self {
+        case .safariUserfilter: return String.localizedString("add_blacklist_rule_caption")
+        case .systemBlacklist: return String.localizedString("add_blacklist_rule_caption")
+        case .systemWhitelist: return String.localizedString("add_whitelist_domain_caption")
+        case .safariWhitelist: return String.localizedString("add_whitelist_domain_caption")
+        case .invertedSafariWhitelist: return String.localizedString("add_whitelist_domain_caption")
+        case .wifiExceptions: return String.localizedString("add_wifi_name_caption")
+        }
+    }
+    
+    var placeholderText: String {
+        switch self {
+        case .safariUserfilter: return String.localizedString("add_blacklist_rule_placeholder")
+        case .systemBlacklist: return String.localizedString("add_blacklist_rule_placeholder")
+        case .systemWhitelist: return String.localizedString("add_whitelist_domain_placeholder")
+        case .safariWhitelist: return String.localizedString("add_whitelist_domain_placeholder")
+        case .invertedSafariWhitelist: return String.localizedString("add_whitelist_domain_placeholder")
+        case .wifiExceptions: return String.localizedString("add_wifi_name_placeholder")
+        }
+    }
+}
+
+// MARK: - AddRuleController + ThemableProtocol
 
 extension AddRuleController: ThemableProtocol {
     func updateTheme() {

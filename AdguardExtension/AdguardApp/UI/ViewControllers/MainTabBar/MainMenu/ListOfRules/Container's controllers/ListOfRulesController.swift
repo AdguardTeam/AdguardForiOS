@@ -88,7 +88,7 @@ class ListOfRulesController: UIViewController {
         listOfRulesContainer.isHidden = true
         
         if newRuleText != nil && newRuleText!.count > 0 {
-            tableController?.addRule(rule: newRuleText!)
+            tableController?.addRule(newRuleText!)
             showRuleAddedDialog()
         }
         

@@ -137,7 +137,7 @@ class NetworkSettingsTableController: UITableViewController, AddRuleControllerDe
     
     // MARK: - AddRuleControllerDelegate method
     
-    func addRule(rule: String) {
+    func addRule(_ rule: String) {
         model?.addException(rule: rule)
     }
     

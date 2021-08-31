@@ -100,6 +100,7 @@ final class UserRulesTableController: UIViewController {
         case .dnsAllowlist:
             return
         }
+        model.delegate = self
         
         tableView.backgroundColor = .clear
         tableView.allowsSelection = true
@@ -171,6 +172,20 @@ final class UserRulesTableController: UIViewController {
     private func exportRules() {
         
     }
+    
+    private func presentAddRuleController() {
+        let storyboard = UIStoryboard(name: "UserFilter", bundle: nil)
+        guard let controller = storyboard.instantiateViewController(withIdentifier: "AddRuleController") as? AddRuleController else { return }
+        controller.delegate = model
+        switch rulesType {
+        case .blocklist: controller.type = .safariUserfilter
+        case .allowlist: controller.type = .safariWhitelist
+        case .invertedAllowlist: controller.type = .invertedSafariWhitelist
+        case .dnsBlocklist: controller.type = .systemBlacklist
+        case .dnsAllowlist: controller.type = .systemWhitelist
+        }
+        present(controller, animated: true, completion: nil)
+    }
 }
 
 // MARK: - UserRulesTableController + UITableViewDatasource
@@ -216,7 +231,18 @@ extension UserRulesTableController: UITableViewDataSource {
 
 extension UserRulesTableController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            presentAddRuleController()
+        }
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+// MARK: - UserRulesTableController + UserRulesTableModelDelegate
+
+extension UserRulesTableController: UserRulesTableModelDelegate {
+    func ruleSuccessfullyAdded() {
+        tableView.insertRows(at: [IndexPath(row: model.rulesModels.count, section: 0)], with: .left)
     }
 }
 

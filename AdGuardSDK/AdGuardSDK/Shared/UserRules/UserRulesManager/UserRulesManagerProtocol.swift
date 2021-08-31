@@ -18,12 +18,12 @@
 
 import Foundation
 
-enum UserRulesStorageError: Error, CustomDebugStringConvertible {
+public enum UserRulesStorageError: Error, CustomDebugStringConvertible {
     case ruleAlreadyExists(ruleString: String)
     case rulesAlreadyExist(rulesStrings: [String])
     case ruleDoesNotExist(ruleString: String)
     
-    var debugDescription: String {
+    public var debugDescription: String {
         switch self {
         case .ruleAlreadyExists(let rule): return "Rule '\(rule)' already exists in rules list"
         case .rulesAlreadyExist(rulesStrings: let rules): return "Rules '\(rules.joined(separator: ";"))' already exists in rules list"

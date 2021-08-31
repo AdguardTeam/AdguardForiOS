@@ -16,10 +16,14 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
 import UIKit
 
-protocol UserRulesTableModelProtocol: UserRuleTableViewCellDelegate {
+protocol UserRulesTableModelDelegate: AnyObject {
+    func ruleSuccessfullyAdded()
+}
+
+protocol UserRulesTableModelProtocol: UserRuleTableViewCellDelegate, AddRuleControllerDelegate {
+    var delegate: UserRulesTableModelDelegate? { get set }
     var title: String { get }
     var description: String { get }
     var isEnabled: Bool { get set }

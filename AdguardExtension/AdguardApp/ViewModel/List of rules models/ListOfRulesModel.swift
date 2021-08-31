@@ -18,10 +18,6 @@
 
 import Foundation
 
-enum RulesType{
-    case safariWhitelist, invertedSafariWhitelist, systemWhitelist, systemBlacklist, safariUserfilter, wifiExceptions
-}
-
 enum ControllerState {
     case normal, editing, searching
 }

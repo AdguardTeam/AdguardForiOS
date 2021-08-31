@@ -208,7 +208,7 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     }
     // MARK: - AddRuleController delegate
     
-    func addRule(rule: String) {
+    func addRule(_ rule: String) {
         model?.addRule(ruleText: rule, errorHandler: { [weak self] (error) in
             guard let strongSelf = self else { return }
             DispatchQueue.main.async {
