@@ -73,7 +73,13 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
     }
     
     func ruleStateChanged(_ rule: String, newState: Bool) {
-        
+        do {
+            let newRule = UserRule(ruleText: rule, isEnabled: newState)
+            try safariProtection.modifyRule(rule, newRule, for: type, onCbReloaded: nil)
+        }
+        catch {
+            DDLogError("(SafariUserRulesTableModel) - ruleStateChanged; Error: \(error)")
+        }
     }
 }
 
