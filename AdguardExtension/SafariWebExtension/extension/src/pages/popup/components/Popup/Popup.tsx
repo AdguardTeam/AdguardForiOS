@@ -9,8 +9,6 @@ import { Support } from '../Support';
 import { Loader } from '../Loader';
 import { useFullscreen } from '../../hooks/useFullscreen';
 
-// TODO CSS: can we import vars.pcss in popup.css?
-import '../../../../vars.pcss';
 import './popup.pcss';
 
 export const Popup = observer(() => {

@@ -46,8 +46,7 @@ export const Action = ({
     let icon;
 
     if (iconDataUrl) {
-        // TODO CSS: fix styles for icons received from favicon urls
-        icon = <img src={iconDataUrl} alt="favicon" />;
+        icon = <img className="icon" src={iconDataUrl} alt="favicon" />;
     } else {
         icon = <Icon iconId={iconId} color={iconColor} />;
     }
