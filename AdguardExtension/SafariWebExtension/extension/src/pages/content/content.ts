@@ -3,12 +3,7 @@ import { browser } from 'webextension-polyfill-ts';
 import ExtendedCss from 'extended-css';
 
 import { MessagesToBackgroundPage } from '../common/constants';
-
-interface SelectorsAndScripts {
-    scripts: string[],
-    cssInject: string[],
-    cssExtended: string[],
-}
+import { SelectorsAndScripts } from '../common/interfaces';
 
 /**
  * Logs a message if verbose is true

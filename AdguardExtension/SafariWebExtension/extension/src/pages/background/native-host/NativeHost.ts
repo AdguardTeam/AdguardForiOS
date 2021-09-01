@@ -74,6 +74,7 @@ export class NativeHost {
     }
 
     areContentBlockersEnabled() {
+        // TODO remove
         return nativeHostMock.areContentBlockersEnabled();
 
         return this.sendNativeMessage(MessagesToNativeApp.AreContentBlockersEnabled);
@@ -81,5 +82,12 @@ export class NativeHost {
 
     upgradeMe() {
         return this.sendNativeMessage(MessagesToNativeApp.UpgradeMe);
+    }
+
+    getAdvancedRulesText() {
+        // TODO remove
+        return nativeHostMock.getAdvancedRulesText();
+
+        return this.sendNativeMessage(MessagesToNativeApp.GetAdvancedRulesText)
     }
 }

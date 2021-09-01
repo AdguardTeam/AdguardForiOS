@@ -11,6 +11,7 @@ export enum MessagesToNativeApp {
     IsPremium = 'isPremium',
     AreContentBlockersEnabled = 'areContentBlockersEnabled',
     UpgradeMe = 'upgradeMe',
+    GetAdvancedRulesText = 'getAdvancedRulesText',
 }
 
 export enum MessagesToBackgroundPage {

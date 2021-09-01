@@ -90,6 +90,15 @@ export const nativeHostMock = (() => {
         await setState(key, !state[key]);
     };
 
+    const getAdvancedRulesText = async () => {
+        // TODO on start get rules from native host
+        const rulesText = `
+example.org#$#h1 { color: pink }
+example.org#%#//scriptlet('log', 'arg1', 'arg2')
+`;
+        return withSleep(rulesText);
+    };
+
     return {
         isProtectionEnabled,
         enableProtection,
@@ -101,6 +110,7 @@ export const nativeHostMock = (() => {
         getState,
         toggleContentBlockersState,
         areContentBlockersEnabled,
+        getAdvancedRulesText,
     };
 })();
 

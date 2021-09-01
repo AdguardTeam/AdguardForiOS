@@ -13,6 +13,7 @@ import { nativeHost } from './native-host';
 import { Engine } from './engine';
 import { getDomain } from '../common/utils/url';
 import { buildStyleSheet } from './css-service';
+import { SelectorsAndScripts } from '../common/interfaces';
 
 interface Message {
     type: string,
@@ -20,15 +21,11 @@ interface Message {
 }
 
 const getEngine = (() => {
-    // TODO on start get rules from native host
-    const rulesText = `
-example.org#$#h1 { color: pink }
-example.org#%#//scriptlet('log', 'arg1', 'arg2')
-`;
     const engine = new Engine();
     let startPromise: Promise<Engine>;
 
     const start = async () => {
+        const rulesText = await nativeHost.getAdvancedRulesText();
         await engine.start(rulesText);
         return engine;
     };
@@ -41,6 +38,51 @@ example.org#%#//scriptlet('log', 'arg1', 'arg2')
     };
 })();
 
+const getScriptsAndSelectors = async (url: string): Promise<SelectorsAndScripts> => {
+    const engine = await getEngine();
+
+    const hostname = getDomain(url);
+    const cosmeticResult = engine.getCosmeticResult(hostname);
+
+    const injectCssRules = [
+        ...cosmeticResult.CSS.generic,
+        ...cosmeticResult.CSS.specific,
+    ];
+
+    const elementHidingExtCssRules = [
+        ...cosmeticResult.elementHiding.genericExtCss,
+        ...cosmeticResult.elementHiding.specificExtCss,
+    ];
+
+    const injectExtCssRules = [
+        ...cosmeticResult.CSS.genericExtCss,
+        ...cosmeticResult.CSS.specificExtCss,
+    ];
+
+    const cssInject = buildStyleSheet([], injectCssRules, true);
+    const cssExtended = buildStyleSheet(
+        elementHidingExtCssRules,
+        injectExtCssRules,
+        false,
+    );
+
+    const scriptRules = cosmeticResult.getScriptRules();
+
+    const debug = true;
+    const scripts = scriptRules
+        .map((scriptRule) => scriptRule.getScript(debug))
+        .filter((script): script is string => script !== null);
+
+    // remove repeating scripts
+    const uniqueScripts = [...new Set(scripts)];
+
+    return {
+        scripts: uniqueScripts,
+        cssInject,
+        cssExtended,
+    };
+};
+
 const handleMessages = () => {
     browser.runtime.onMessage.addListener(async (message: Message) => {
         // @ts-ignore
@@ -49,49 +91,11 @@ const handleMessages = () => {
         switch (type) {
             case MessagesToBackgroundPage.GetScriptsAndSelectors: {
                 const { url } = data;
-                const engine = await getEngine();
-
-                const hostname = getDomain(url);
-                const cosmeticResult = engine.getCosmeticResult(hostname);
-
-                const injectCssRules = [
-                    ...cosmeticResult.CSS.generic,
-                    ...cosmeticResult.CSS.specific,
-                ];
-
-                const elementHidingExtCssRules = [
-                    ...cosmeticResult.elementHiding.genericExtCss,
-                    ...cosmeticResult.elementHiding.specificExtCss,
-                ];
-
-                const injectExtCssRules = [
-                    ...cosmeticResult.CSS.genericExtCss,
-                    ...cosmeticResult.CSS.specificExtCss,
-                ];
-
-                const cssInject = buildStyleSheet([], injectCssRules, true);
-                const cssExtended = buildStyleSheet(
-                    elementHidingExtCssRules,
-                    injectExtCssRules,
-                    false,
-                );
-
-                const scriptRules = cosmeticResult.getScriptRules();
-
-                const debug = true;
-                const scripts = scriptRules.map((scriptRule) => scriptRule.getScript(debug));
-                // remove repeating scripts
-                const uniqueScripts = [...new Set(scripts)];
-
-                const result = {
-                    scripts: uniqueScripts,
-                    cssInject,
-                    cssExtended,
-                };
-
-                return result;
+                const scriptsAndSelectors = await getScriptsAndSelectors(url);
+                return scriptsAndSelectors as SelectorsAndScripts;
             }
             case MessagesToBackgroundPage.AddRule: {
+                // TODO move to native-host module
                 await browser.runtime.sendNativeMessage('application_id', {
                     type: MessagesToNativeApp.AddToUserRules,
                     data: data.ruleText,
