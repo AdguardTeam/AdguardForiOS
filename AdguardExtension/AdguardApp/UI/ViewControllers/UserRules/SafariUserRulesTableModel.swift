@@ -37,8 +37,12 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
         }
         set {
             switch type {
-            case .blocklist: resources.safariUserFilterEnabled = newValue
-            case .allowlist, .invertedAllowlist: resources.safariWhitelistEnabled = newValue
+            case .blocklist:
+                resources.safariUserFilterEnabled = newValue
+                safariProtection.update(blocklistIsEnabled: newValue, onCbReloaded: nil)
+            case .allowlist, .invertedAllowlist:
+                resources.safariWhitelistEnabled = newValue
+                safariProtection.update(allowlistIsEnbaled: newValue, onCbReloaded: nil)
             }
         }
     }

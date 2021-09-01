@@ -301,9 +301,10 @@ extension UserRulesTableController: ThemableProtocol {
 // MARK: - UserRulesTableController + IdentifiableObjectDelegate
 
 extension UserRulesTableController: IdentifiableObjectDelegate {
-    // TODO: - Implement
     func modelChanged<Model: IdentifiableObject>(_ newModel: Model) {
-        guard let newModel = newModel as? StateHeaderViewModel<Bool> else { return }
-        model.isEnabled = newModel.isEnabled
+        guard let changedModel = newModel as? StateHeaderViewModel<Bool> else {
+            return
+        }
+        model.isEnabled = changedModel.isEnabled
     }
 }
