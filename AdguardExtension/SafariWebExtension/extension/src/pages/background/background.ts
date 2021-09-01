@@ -95,11 +95,7 @@ const handleMessages = () => {
                 return scriptsAndSelectors as SelectorsAndScripts;
             }
             case MessagesToBackgroundPage.AddRule: {
-                // TODO move to native-host module
-                await browser.runtime.sendNativeMessage('application_id', {
-                    type: MessagesToNativeApp.AddToUserRules,
-                    data: data.ruleText,
-                });
+                await nativeHost.addToUserRules(data.ruleText);
                 break;
             }
             case MessagesToBackgroundPage.OpenAssistant: {

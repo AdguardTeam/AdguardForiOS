@@ -21,6 +21,10 @@ export class NativeHost {
         return browser.runtime.sendNativeMessage(this.APP_ID, message);
     }
 
+    addToUserRules(ruleText: string) {
+        return this.sendNativeMessage(MessagesToNativeApp.AddToUserRules, { ruleText });
+    }
+
     isProtectionEnabled(url: string): Promise<boolean> {
         // TODO remove
         return nativeHostMock.isProtectionEnabled(url);
@@ -88,6 +92,6 @@ export class NativeHost {
         // TODO remove
         return nativeHostMock.getAdvancedRulesText();
 
-        return this.sendNativeMessage(MessagesToNativeApp.GetAdvancedRulesText)
+        return this.sendNativeMessage(MessagesToNativeApp.GetAdvancedRulesText);
     }
 }

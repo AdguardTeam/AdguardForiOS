@@ -197,7 +197,6 @@ const init = async () => {
             let selectorsAndScripts;
             try {
                 selectorsAndScripts = await getSelectorsAndScripts();
-                console.log(selectorsAndScripts);
             } catch (e) {
                 console.log(e);
             }
