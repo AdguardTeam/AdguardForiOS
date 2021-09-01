@@ -84,7 +84,7 @@ const validateMessage = (
         validator.isTranslationValid(baseMessageValue, localeMessageValue);
         return undefined;
     } catch (error) {
-        return { key: baseKey, error };
+        return { key: baseKey, error: error as string };
     }
 };
 

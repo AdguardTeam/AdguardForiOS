@@ -35,7 +35,7 @@ const downloadMessagesByUrl = async (url: string) => {
         log.info(`Downloading url: ${url}...`);
         response = await axios.get(url, { responseType: 'arraybuffer' });
         log.info(`Downloaded: ${url}`);
-    } catch (e) {
+    } catch (e: any) {
         let errorMessage;
         if (e.response && e.response.data) {
             const decoder = new TextDecoder();
@@ -101,7 +101,7 @@ const downloadLocales = async (locales: string[]) => {
 const saveFile = async (path: string, data: string) => {
     try {
         await fs.promises.writeFile(path, data);
-    } catch (e) {
+    } catch (e: any) {
         log.error(`Was unable do save data in path: ${path}. Error: ${e.message}`);
     }
 };

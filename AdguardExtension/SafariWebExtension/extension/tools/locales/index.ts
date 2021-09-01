@@ -15,7 +15,7 @@ const download = async (locales: string[]) => {
     try {
         await downloadAndSave(locales);
         log.success('Download was successful');
-    } catch (e) {
+    } catch (e: any) {
         log.error(e.message);
         process.exit(1);
     }
@@ -27,7 +27,7 @@ const uploadBaseLocale = async () => {
         await checkUnusedMessages();
         const result = await upload();
         log.success(`Upload was successful with response: ${JSON.stringify(result)}`);
-    } catch (e) {
+    } catch (e: any) {
         log.error(e.message);
         process.exit(1);
     }
@@ -36,7 +36,7 @@ const uploadBaseLocale = async () => {
 const renewLocales = async () => {
     try {
         await renew();
-    } catch (e) {
+    } catch (e: any) {
         log.error(e.message);
         process.exit(1);
     }
@@ -45,7 +45,7 @@ const renewLocales = async () => {
 const validate = async (locales: string[], isMinimum?: boolean) => {
     try {
         await checkTranslations(locales, { isMinimum });
-    } catch (e) {
+    } catch (e: any) {
         log.error(e.message);
         process.exit(1);
     }
@@ -54,7 +54,7 @@ const validate = async (locales: string[], isMinimum?: boolean) => {
 const summary = async (isInfo: boolean) => {
     try {
         await checkTranslations(LOCALES, { isInfo });
-    } catch (e) {
+    } catch (e: any) {
         log.error(e.message);
         process.exit(1);
     }
@@ -63,7 +63,7 @@ const summary = async (isInfo: boolean) => {
 const unused = async () => {
     try {
         await checkUnusedMessages();
-    } catch (e) {
+    } catch (e: any) {
         log.error(e.message);
         process.exit(1);
     }
