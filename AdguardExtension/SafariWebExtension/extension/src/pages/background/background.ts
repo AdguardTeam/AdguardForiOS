@@ -65,7 +65,7 @@ const handleMessages = () => {
                 return app.setPermissionsModalViewed();
             }
             case MessagesToBackgroundPage.GetPopupData: {
-                const { url } = data;
+                const { url, value } = data;
 
                 const allSitesAllowed = await permissions.areAllSitesAllowed();
                 const permissionsModalViewed = await app.isPermissionsModalViewed();
@@ -73,6 +73,7 @@ const handleMessages = () => {
                 const protectionEnabled = await nativeHost.isProtectionEnabled(url);
                 const hasUserRules = await nativeHost.hasUserRulesBySite(url);
                 const premiumApp = await nativeHost.isPremiumApp();
+                const appearanceTheme = await nativeHost.appearanceTheme(value);
                 const contentBlockersEnabled = await nativeHost.areContentBlockersEnabled();
 
                 return {
@@ -81,6 +82,7 @@ const handleMessages = () => {
                     protectionEnabled,
                     hasUserRules,
                     premiumApp,
+                    appearanceTheme,
                     contentBlockersEnabled,
                 };
             }
