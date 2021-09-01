@@ -20,9 +20,11 @@ import UIKit
 
 protocol UserRulesTableModelDelegate: AnyObject {
     func ruleSuccessfullyAdded()
+    func ruleChanged(at indexPath: IndexPath)
+    func ruleRemoved(at indexPath: IndexPath)
 }
 
-protocol UserRulesTableModelProtocol: UserRuleTableViewCellDelegate, AddRuleControllerDelegate {
+protocol UserRulesTableModelProtocol: UserRuleTableViewCellDelegate, AddRuleControllerDelegate, RuleDetailsControllerDelegate {
     var delegate: UserRulesTableModelDelegate? { get set }
     var title: String { get }
     var description: String { get }

@@ -200,11 +200,11 @@ extension SafariProtection {
     }
     
     public func removeAllRules(for type: SafariUserRuleType, onCbReloaded: ((Error?) -> Void)?) throws {
-        try workingQueue.sync {
+        workingQueue.sync {
             Logger.logInfo("(SafariProtection+UserRules) - removeAllRules; Removing all rules for type=\(type)")
             
             let provider = getProvider(for: type)
-            try executeBlockAndReloadCbs {
+            executeBlockAndReloadCbs {
                 provider.removeAllRules()
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {

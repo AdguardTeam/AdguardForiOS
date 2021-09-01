@@ -1,22 +1,41 @@
+/**
+       This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
+       Copyright © Adguard Software Limited. All rights reserved.
+ 
+       Adguard for iOS is free software: you can redistribute it and/or modify
+       it under the terms of the GNU General Public License as published by
+       the Free Software Foundation, either version 3 of the License, or
+       (at your option) any later version.
+ 
+       Adguard for iOS is distributed in the hope that it will be useful,
+       but WITHOUT ANY WARRANTY; without even the implied warranty of
+       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+       GNU General Public License for more details.
+ 
+       You should have received a copy of the GNU General Public License
+       along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-import Foundation
+import SafariAdGuardSDK
+import UIKit
 
 protocol RuleDetailsControllerDelegate {
-    func removeRule(rule: RuleInfo)
-    func changeRule(rule: RuleInfo, newText: String)
+    func removeRule(_ ruleText: String, at indexPath: IndexPath) throws
+    func modifyRule(_ oldRuleText: String, newRule: UserRule, at indexPath: IndexPath) throws
 }
 
-class RuleDetailsController : BottomAlertController, UITextViewDelegate {
+final class RuleDetailsController: BottomAlertController, UITextViewDelegate {
     
-    let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    struct Context {
+        let rule: UserRule
+        let ruleIndexPath: IndexPath
+        let delegate: RuleDetailsControllerDelegate
+        let ruleType: RulesType
+    }
     
-    let enabledLineColor = UIColor(hexString: "#4D4D4D")
-    let disabledLineColor = UIColor(hexString: "#D8D8D8")
-
-    var rule: RuleInfo?
-    var delegate : RuleDetailsControllerDelegate?
+    // MARK: - Internal properties
     
-    var type: RulesType = .safariUserfilter
+    var context: Context!
     
     // MARK: IB outlets
     
@@ -28,6 +47,11 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var domainOrRuleLabel: ThemableLabel!
     
+    // MARK: - Private properties
+    
+    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let enabledLineColor = UIColor.AdGuardColor.lightGray2
+    private let disabledLineColor = UIColor.AdGuardColor.lightGray5
     private let textViewCharectersLimit = 50
     
     // MARK: - View controller life cycle
@@ -35,19 +59,17 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        domainOrRuleLabel.text = getEditCaptionText()
-
-        
-        ruleTextView.text = type == .wifiExceptions ? String(rule?.rule.prefix(textViewCharectersLimit) ?? "") : rule?.rule
+        domainOrRuleLabel.text = context.ruleType.editCaptionText
+        ruleTextView.text = context.ruleType == .wifiExceptions ? String(context.rule.ruleText.prefix(textViewCharectersLimit)) : context.rule.ruleText
         
         ruleTextView.textContainer.lineFragmentPadding = 0
         ruleTextView.textContainerInset = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
         
-        if (type == .safariWhitelist || type == .invertedSafariWhitelist || type == .systemWhitelist){
+        if context.ruleType == .safariWhitelist || context.ruleType == .invertedSafariWhitelist || context.ruleType == .systemWhitelist {
             ruleTextView.keyboardType = .URL
         }
         
-        if type == .safariUserfilter {
+        if context.ruleType == .safariUserfilter {
             ruleTextView.font = UIFont(name: "PTMono-Regular", size: 14.0)
         }
                 
@@ -60,41 +82,45 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
         deleteButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.red)
         
         ruleTextView.becomeFirstResponder()
-
     }
     
     // MARK: - Actions
     @IBAction func saveAction(_ sender: Any) {
-        
         let ruleText = ruleTextView.text ?? ""
-        delegate?.changeRule(rule: rule!, newText: ruleText)
-        dismiss(animated: true, completion: nil)
+        do {
+            let newRule = UserRule(ruleText: ruleText, isEnabled: context.rule.isEnabled)
+            try context.delegate.modifyRule(context.rule.ruleText, newRule: newRule, at: context.ruleIndexPath)
+            dismiss(animated: true, completion: nil)
+        } catch {
+            if case UserRulesStorageError.ruleAlreadyExists(ruleString: _) = error {
+                showRuleExistsAlert()
+            } else {
+                showUnknownErrorAlert()
+            }
+        }
     }
     
     @IBAction func removeAction(_ sender: Any) {
-        
-        delegate?.removeRule(rule: rule!)
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func cancelAction(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        do {
+            try context.delegate.removeRule(context.rule.ruleText, at: context.ruleIndexPath)
+            dismiss(animated: true, completion: nil)
+        }
+        catch {
+            DDLogError("(RuleDetailsController) - removeAction; Error removing rule: \(error)")
+            showUnknownErrorAlert()
+        }
     }
     
     // MARK: - UITextViewDelegate
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        guard text != "\n" else {
-            saveIfNeeded(text: textView.text)
-            return false
-        }
         let currentText = textView.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
     
         saveButton.isEnabled = updatedText.count > 0
         
-        if type != .wifiExceptions { return true }
+        if context.ruleType != .wifiExceptions { return true }
     
         if updatedText.count >= textViewCharectersLimit {
             textView.text = String(updatedText.prefix(textViewCharectersLimit))
@@ -113,37 +139,40 @@ class RuleDetailsController : BottomAlertController, UITextViewDelegate {
     
     // MARK: - private methods
     
-    private func getEditCaptionText() -> String {
-        switch type {
-        case .safariUserfilter:
-            return ACLocalizedString("add_blacklist_rule_caption", nil)
-        case .systemBlacklist:
-            return ACLocalizedString("add_blacklist_rule_caption", nil)
-        case .systemWhitelist:
-            return ACLocalizedString("add_whitelist_domain_caption", nil)
-        case .safariWhitelist:
-            return ACLocalizedString("add_whitelist_domain_caption", nil)
-        case .invertedSafariWhitelist:
-            return ACLocalizedString("add_whitelist_domain_caption", nil)
-        case .wifiExceptions:
-            return ACLocalizedString("add_wifi_name_caption", nil)
-        }
-    }
-    
-    private func saveIfNeeded(text: String) {
-        if !text.isEmpty, type == .wifiExceptions {
-            ruleTextView.resignFirstResponder()
-            delegate?.changeRule(rule: rule!, newText: text)
-            dismiss(animated: true, completion: nil)
-        }
-    }
-    
     private func changeKeyboardReturnKeyTypeIfNeeded() {
-        if type == .wifiExceptions {
+        if context.ruleType == .wifiExceptions {
             ruleTextView.returnKeyType = .done
         }
     }
+    
+    private func showRuleExistsAlert() {
+        let title = String.localizedString("common_error_title")
+        let message = String.localizedString("user_rule_exists_error")
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: String.localizedString("common_action_ok"), style: .default) { _ in
+            alert.dismiss(animated: true, completion: nil)
+        }
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
 }
+
+// MARK: - RulesType + Strings
+
+fileprivate extension RulesType {
+    var editCaptionText: String {
+        switch self {
+        case .safariUserfilter: return String.localizedString("add_blacklist_rule_caption")
+        case .systemBlacklist: return String.localizedString("add_blacklist_rule_caption")
+        case .systemWhitelist: return String.localizedString("add_whitelist_domain_caption")
+        case .safariWhitelist: return String.localizedString("add_whitelist_domain_caption")
+        case .invertedSafariWhitelist: return String.localizedString("add_whitelist_domain_caption")
+        case .wifiExceptions: return String.localizedString("add_wifi_name_caption")
+        }
+    }
+}
+
+// MARK: - RuleDetailsController + ThemableProtocol
 
 extension RuleDetailsController: ThemableProtocol {
     func updateTheme() {

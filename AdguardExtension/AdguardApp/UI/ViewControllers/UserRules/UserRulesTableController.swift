@@ -185,7 +185,30 @@ final class UserRulesTableController: UIViewController {
         case .dnsBlocklist: controller.type = .systemBlacklist
         case .dnsAllowlist: controller.type = .systemWhitelist
         }
-        present(controller, animated: true, completion: nil)
+        present(controller, animated: true)
+    }
+    
+    private func presentDetailsController(rule: UserRule, indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "UserFilter", bundle: nil)
+        guard let controller = storyboard.instantiateViewController(withIdentifier: "RuleDetailsController") as? RuleDetailsController else { return }
+        
+        let type: RulesType
+        switch rulesType {
+        case .blocklist: type = .safariUserfilter
+        case .allowlist: type = .safariWhitelist
+        case .invertedAllowlist: type = .invertedSafariWhitelist
+        case .dnsBlocklist: type = .systemBlacklist
+        case .dnsAllowlist: type = .systemWhitelist
+        }
+        
+        let context = RuleDetailsController.Context(
+            rule: rule,
+            ruleIndexPath: indexPath,
+            delegate: model,
+            ruleType: type
+        )
+        controller.context = context
+        present(controller, animated: true)
     }
     
     private func goToEditingMode() {
@@ -197,10 +220,7 @@ final class UserRulesTableController: UIViewController {
             view.layoutIfNeeded()
         }
         navigationItem.rightBarButtonItems = [searchButton]
-        if !model.rulesModels.isEmpty {
-            let indexPaths = (1...model.rulesModels.count).map { IndexPath(row: $0, section: 0) }
-            tableView.reloadRows(at: indexPaths, with: .right)
-        }
+        tableView.reloadSections([0], with: .automatic)
     }
     
     private func goToNormalMode() {
@@ -213,9 +233,14 @@ final class UserRulesTableController: UIViewController {
             buttonsStackView.isHidden = true
         }
         navigationItem.rightBarButtonItems = [editButton, searchButton]
-        if !model.rulesModels.isEmpty {
-            let indexPaths = (1...model.rulesModels.count).map { IndexPath(row: $0, section: 0) }
-            tableView.reloadRows(at: indexPaths, with: .right)
+        tableView.reloadSections([0], with: .automatic)
+    }
+    
+    private func model(for row: Int) -> UserRuleCellModel {
+        if model.isEditing {
+            return model.rulesModels[row]
+        } else {
+            return model.rulesModels[row - 1]
         }
     }
 }
@@ -240,18 +265,18 @@ extension UserRulesTableController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.rulesModels.count + 1
+        return model.isEditing ? model.rulesModels.count : model.rulesModels.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
+        if indexPath.row == 0 && !model.isEditing {
             let cell = AddTableViewCell.getCell(forTableView: tableView)
             cell.addTitle = String.localizedString("add_new_rule")
             cell.updateTheme(themeService)
             return cell
         } else {
             let cell = UserRuleTableViewCell.getCell(forTableView: tableView)
-            cell.model = model.rulesModels[indexPath.row - 1]
+            cell.model = model(for: indexPath.row)
             cell.delegate = model
             cell.updateTheme(themeService)
             return cell
@@ -263,13 +288,19 @@ extension UserRulesTableController: UITableViewDataSource {
 
 extension UserRulesTableController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
+        if indexPath.row == 0 && !model.isEditing {
             presentAddRuleController()
+            tableView.deselectRow(at: indexPath, animated: true)
+            return
         }
+        
         if model.isEditing {
             let cell = tableView.cellForRow(at: indexPath)
             cell?.setSelected(true, animated: true)
         } else {
+            let ruleModel = model(for: indexPath.row)
+            let userRule = UserRule(ruleText: ruleModel.rule, isEnabled: ruleModel.isEnabled)
+            presentDetailsController(rule: userRule, indexPath: indexPath)
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }
@@ -278,8 +309,16 @@ extension UserRulesTableController: UITableViewDelegate {
 // MARK: - UserRulesTableController + UserRulesTableModelDelegate
 
 extension UserRulesTableController: UserRulesTableModelDelegate {
+    func ruleChanged(at indexPath: IndexPath) {
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+    }
+    
+    func ruleRemoved(at indexPath: IndexPath) {
+        tableView.deleteRows(at: [indexPath], with: .left)
+    }
+    
     func ruleSuccessfullyAdded() {
-        tableView.insertRows(at: [IndexPath(row: model.rulesModels.count, section: 0)], with: .left)
+        tableView.insertRows(at: [IndexPath(row: model.rulesModels.count, section: 0)], with: .automatic)
     }
 }
 

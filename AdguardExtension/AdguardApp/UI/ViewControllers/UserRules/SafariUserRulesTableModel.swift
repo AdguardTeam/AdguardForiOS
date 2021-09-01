@@ -94,6 +94,23 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
             DDLogError("(SafariUserRulesTableModel) - ruleStateChanged; Error: \(error)")
         }
     }
+    
+    func removeRule(_ ruleText: String, at indexPath: IndexPath) throws {
+        try safariProtection.removeRule(withText: ruleText, for: type, onCbReloaded: nil)
+        if let removedRuleIndex = rulesModels.firstIndex(where: { $0.rule == ruleText }) {
+            rulesModels.remove(at: removedRuleIndex)
+        }
+        delegate?.ruleRemoved(at: indexPath)
+    }
+    
+    func modifyRule(_ oldRuleText: String, newRule: UserRule, at indexPath: IndexPath) throws {
+        try safariProtection.modifyRule(oldRuleText, newRule, for: type, onCbReloaded: nil)
+        if let modifiedRuleIndex = rulesModels.firstIndex(where: { $0.rule == oldRuleText }) {
+            rulesModels[modifiedRuleIndex].rule = newRule.ruleText
+            rulesModels[modifiedRuleIndex].isEnabled = newRule.isEnabled
+        }
+        delegate?.ruleChanged(at: indexPath)
+    }
 }
 
 // MARK: - SafariUserRuleType + helper variables

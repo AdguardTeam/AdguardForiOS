@@ -18,7 +18,7 @@
 
 import UIKit
 
-class NetworkSettingsTableController: UITableViewController, AddRuleControllerDelegate, RuleDetailsControllerDelegate, NetworkSettingsChangedDelegate {
+class NetworkSettingsTableController: UITableViewController, AddRuleControllerDelegate, NetworkSettingsChangedDelegate {
     
     /* Cell reuse ids */
     private let networkSettingsTitleCellId = "NetworkSettingsTitleCell"
@@ -251,10 +251,7 @@ class NetworkSettingsTableController: UITableViewController, AddRuleControllerDe
         guard let exception = model?.exceptions[row] else { return }
         
         let rule = RuleInfo(exception.rule, false, true, theme)
-        controller.rule = rule
-        controller.delegate = self
-        controller.rule = rule
-        controller.type = .wifiExceptions
+        
             
         present(controller, animated: true, completion: nil)
     }

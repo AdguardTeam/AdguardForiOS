@@ -23,7 +23,7 @@ protocol UserRuleTableViewCellDelegate: AnyObject {
 }
 
 struct UserRuleCellModel {
-    let rule: String
+    var rule: String
     var isEnabled: Bool
     var isSelected: Bool
     var isEditing: Bool

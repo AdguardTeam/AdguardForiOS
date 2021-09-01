@@ -18,7 +18,7 @@
 
 import UIKit
 
-class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegate, AddRuleControllerDelegate, RuleDetailsControllerDelegate, UISearchBarDelegate {
+class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegate, AddRuleControllerDelegate, UISearchBarDelegate {
 
     @IBOutlet var searchView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -346,9 +346,7 @@ class ListOfRulesTableController: UITableViewController, ListOfRulesModelDelegat
     private func showRuleDetails(indexPath: IndexPath) {
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "RuleDetailsController") as? RuleDetailsController else { return }
         guard let rule = model?.rules[indexPath.row] else { return }
-        controller.delegate = self
-        controller.rule = rule
-        controller.type = model?.type ?? .safariUserfilter
+        
         
         present(controller, animated: true, completion: nil)
     }
