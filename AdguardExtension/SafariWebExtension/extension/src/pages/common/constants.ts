@@ -9,7 +9,7 @@ export enum MessagesToNativeApp {
     RemoveUserRulesBySite = 'removeUserRulesBySite',
     ReportProblem = 'reportProblem',
     IsPremium = 'isPremium',
-    AppearanceTheme = 'appearanceTheme',
+    GetAppearanceTheme = 'getAppearanceTheme',
     AreContentBlockersEnabled = 'areContentBlockersEnabled',
     UpgradeMe = 'upgradeMe',
 }
@@ -31,10 +31,10 @@ export enum MessagesToContentScript {
     InitAssistant = 'init_assistant',
 }
 
-export enum APPEARANCE_THEMES {
-    SYSTEM = 'SYSTEM',
-    DARK = 'DARK',
-    LIGHT = 'LIGHT',
+export enum AppearanceTheme {
+    System = 'system',
+    Dark = 'dark',
+    Light = 'light',
 }
 
-export const APPEARANCE_THEME_DEFAULT = APPEARANCE_THEMES.SYSTEM;
+export const APPEARANCE_THEME_DEFAULT = AppearanceTheme.System;

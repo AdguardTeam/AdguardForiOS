@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import { browser } from 'webextension-polyfill-ts';
 
-import {APPEARANCE_THEMES, MessagesToNativeApp} from '../../common/constants';
+import { MessagesToNativeApp } from '../../common/constants';
 import { nativeHostMock } from './nativeHostMock';
 
 interface NativeHostMessage {
@@ -73,13 +73,15 @@ export class NativeHost {
         return this.sendNativeMessage(MessagesToNativeApp.IsPremium);
     }
 
-    appearanceTheme(value: APPEARANCE_THEMES) {
-        return nativeHostMock.setAppearanceTheme(value);
+    getAppearanceTheme() {
+        // TODO remove
+        return nativeHostMock.getAppearanceTheme();
 
-        return this.sendNativeMessage(MessagesToNativeApp.AppearanceTheme);
+        return this.sendNativeMessage(MessagesToNativeApp.GetAppearanceTheme);
     }
 
     areContentBlockersEnabled() {
+        // TODO remove
         return nativeHostMock.areContentBlockersEnabled();
 
         return this.sendNativeMessage(MessagesToNativeApp.AreContentBlockersEnabled);

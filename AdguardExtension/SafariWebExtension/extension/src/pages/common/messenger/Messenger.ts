@@ -1,6 +1,6 @@
 import { browser } from 'webextension-polyfill-ts';
 
-import { MessagesToBackgroundPage, APPEARANCE_THEMES } from '../constants';
+import { MessagesToBackgroundPage, AppearanceTheme } from '../constants';
 import { log } from '../log';
 
 interface Message {

@@ -1,9 +1,9 @@
 import throttle from 'lodash/throttle';
 import { useLayoutEffect } from 'react';
 
-import { APPEARANCE_THEMES } from './constants';
+import { APPEARANCE_THEME_DEFAULT, AppearanceTheme } from '../constants';
 
-export const useAppearanceTheme = (appearanceTheme) => {
+export const useAppearanceTheme = (appearanceTheme?: AppearanceTheme) => {
     useLayoutEffect(() => {
         const STORAGE_KEY = 'appearance_theme';
         const DARK_THEME_CLASS = 'dark-mode';
@@ -15,27 +15,38 @@ export const useAppearanceTheme = (appearanceTheme) => {
         }, SET_TO_STORAGE_TIMEOUT);
 
         let theme = appearanceTheme;
+
         if (!theme) {
-            theme = localStorage.getItem(STORAGE_KEY);
+            const storedTheme = localStorage.getItem(STORAGE_KEY);
+
+            if (storedTheme
+                && Object.values(AppearanceTheme).includes(storedTheme as AppearanceTheme)) {
+                theme = storedTheme as AppearanceTheme;
+            } else {
+                theme = APPEARANCE_THEME_DEFAULT;
+            }
         } else {
             throttledSetToStorage(theme);
         }
 
         switch (theme) {
-            case APPEARANCE_THEMES.DARK: {
+            case AppearanceTheme.Dark: {
                 document.documentElement.classList.add(DARK_THEME_CLASS);
                 document.documentElement.classList.remove(LIGHT_THEME_CLASS);
                 break;
             }
-            case APPEARANCE_THEMES.LIGHT: {
+            case AppearanceTheme.Light: {
                 document.documentElement.classList.add(LIGHT_THEME_CLASS);
                 document.documentElement.classList.remove(DARK_THEME_CLASS);
                 break;
             }
-            default: {
+            case AppearanceTheme.System: {
                 document.documentElement.classList.remove(DARK_THEME_CLASS);
                 document.documentElement.classList.remove(LIGHT_THEME_CLASS);
+                break;
             }
+            default:
+                throw new Error(`Impossible theme value: ${theme}`);
         }
     }, [appearanceTheme]);
 };
