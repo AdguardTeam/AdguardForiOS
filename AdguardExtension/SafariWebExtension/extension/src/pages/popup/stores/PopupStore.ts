@@ -14,7 +14,7 @@ import { translator } from '../../common/translators/translator';
 import { messenger } from '../../common/messenger';
 import { toDataUrl } from '../image-utils';
 import { log } from '../../common/log';
-import { AppearanceTheme, APPEARANCE_THEME_DEFAULT } from '../../common/constants';
+import { AppearanceTheme } from '../../common/constants';
 
 // Do not allow property change outside of store actions
 configure({ enforceActions: 'observed' });
