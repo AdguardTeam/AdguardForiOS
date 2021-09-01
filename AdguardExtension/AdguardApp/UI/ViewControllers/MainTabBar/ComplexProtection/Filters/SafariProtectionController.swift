@@ -80,8 +80,7 @@ final class SafariProtectionController: UITableViewController {
         super.viewWillAppear(animated)
         
         let userFilterTextFormat = String.localizedString("user_rules_format")
-        let enabledRules = blacklistModel.rules.filter({ $0.enabled })
-        let userRulesNumber = enabledRules.count
+        let userRulesNumber = safariProtection.allRules(for: .blocklist).reduce(0, { $1.isEnabled ? $0 + 1 : $0 })
         userFilterStateLabel.text = String.localizedStringWithFormat(userFilterTextFormat, userRulesNumber)
         
         let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)

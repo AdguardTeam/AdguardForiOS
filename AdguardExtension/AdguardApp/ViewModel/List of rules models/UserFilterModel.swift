@@ -108,7 +108,7 @@ class UserFilterModel: ListOfRulesModelProtocol {
     private let productInfo: ADProductInfoProtocol
     private let safariProtection: SafariProtectionProtocol
     
-    private var ruleObjects = [UserRuleProtocol]()
+    private var ruleObjects = [UserRule]()
     
     private var allRules = [RuleInfo]()
     private var searchRules = [RuleInfo]()
@@ -207,7 +207,7 @@ class UserFilterModel: ListOfRulesModelProtocol {
     func processRulesFromString(_ string: String, errorHandler: @escaping (_ error: String)->Void) {
         let ruleStrings = string.components(separatedBy: .newlines)
         
-        var newRuleObjects = [UserRuleProtocol]()
+        var newRuleObjects = [UserRule]()
         var newRuleInfos = [RuleInfo]()
         for ruleString in ruleStrings {
             
@@ -235,7 +235,7 @@ class UserFilterModel: ListOfRulesModelProtocol {
         DispatchQueue.global().async { [weak self] in
             guard let strongSelf = self else { return }
             
-            var rulesToAdd = [UserRuleProtocol]()
+            var rulesToAdd = [UserRule]()
             var ruleTextsToAdd = [String]()
             for ruleText in ruleTexts {
             
@@ -269,7 +269,7 @@ class UserFilterModel: ListOfRulesModelProtocol {
         }
     }
     
-    private func setNewRules(_ newRuleObjects: [UserRuleProtocol], ruleInfos: [RuleInfo], completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
+    private func setNewRules(_ newRuleObjects: [UserRule], ruleInfos: [RuleInfo], completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
     
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -327,7 +327,7 @@ class UserFilterModel: ListOfRulesModelProtocol {
         
         let ruleStrings = plainText.components(separatedBy: .newlines)
         
-        var newRuleObjects = [UserRuleProtocol]()
+        var newRuleObjects = [UserRule]()
         var newRuleInfos = [RuleInfo]()
         
         for ruleString in ruleStrings {

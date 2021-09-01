@@ -38,7 +38,7 @@ protocol UserRulesManagerProtocol: ResetableSyncProtocol, AnyObject {
     var rulesString: String { get }
     
     /* All UserRuleProtocol objects  */
-    var allRules: [UserRuleProtocol] { get }
+    var allRules: [UserRule] { get }
     
     /**
      Adds new rule to the user rule's list
@@ -48,7 +48,7 @@ protocol UserRulesManagerProtocol: ResetableSyncProtocol, AnyObject {
      - Throws: **UserRulesStorageError.ruleAlreadyExists**
                 if **override** is false and **allRules** already contains **rule**
      */
-    func add(rule: UserRuleProtocol, override: Bool) throws
+    func add(rule: UserRule, override: Bool) throws
     
     /**
      Adds new rules to the user rule's list
@@ -58,10 +58,10 @@ protocol UserRulesManagerProtocol: ResetableSyncProtocol, AnyObject {
      - Throws: **UserRulesStorageError.rulesAlreadyExist**
                 if **override** is false and **allRules** already contains some rules from **rules**
      */
-    func add(rules: [UserRuleProtocol], override: Bool) throws
+    func add(rules: [UserRule], override: Bool) throws
     
     /* Modifies rule in the user rule's list */
-    func modifyRule(_ oldRuleText: String, _ newRule: UserRuleProtocol) throws
+    func modifyRule(_ oldRuleText: String, _ newRule: UserRule) throws
     
     /* Removes rule from the user rule's list */
     func removeRule(withText ruleText: String) throws

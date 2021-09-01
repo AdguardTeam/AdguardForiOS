@@ -270,13 +270,13 @@ class ActionViewController: UIViewController {
         return false
     }
     
-    private func domainObjectIfExistsFromContentBlockingWhitelistFor(host: String) -> UserRuleProtocol? {
+    private func domainObjectIfExistsFromContentBlockingWhitelistFor(host: String) -> UserRule? {
         DDLogDebug("(ActionViewController) domainObjectIfExistsFromContentBlockingWhitelistFor:\(host)")
         let rules = safariProtection.allRules(for: .allowlist)
         return domainObjectIfExists(host: host, rules: rules)
     }
     
-    private func domainObjectIfExists(host: String, rules: [UserRuleProtocol]) -> UserRuleProtocol? {
+    private func domainObjectIfExists(host: String, rules: [UserRule]) -> UserRule? {
         let filteredRules = rules.filter { $0.ruleText.localizedCaseInsensitiveContains(host) }
         return filteredRules.first
     }

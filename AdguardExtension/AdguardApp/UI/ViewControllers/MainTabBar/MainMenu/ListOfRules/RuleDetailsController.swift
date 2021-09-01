@@ -87,6 +87,11 @@ final class RuleDetailsController: BottomAlertController, UITextViewDelegate {
     // MARK: - Actions
     @IBAction func saveAction(_ sender: Any) {
         let ruleText = ruleTextView.text ?? ""
+        if ruleText == context.rule.ruleText {
+            dismiss(animated: true, completion: nil)
+            return
+        }
+        
         do {
             let newRule = UserRule(ruleText: ruleText, isEnabled: context.rule.isEnabled)
             try context.delegate.modifyRule(context.rule.ruleText, newRule: newRule, at: context.ruleIndexPath)

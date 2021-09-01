@@ -72,7 +72,7 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
         self.type = type
         self.safariProtection = safariProtection
         self.resources = resources
-        self.rulesModels = safariProtection.allRules(for: type).map { UserRuleCellModel(rule: $0.ruleText, isEnabled: $0.isEnabled, isSelected: false, isEditing: false) }
+        self.rulesModels = Self.reinit(safariProtection, type)
     }
     
     // MARK: - Internal methods
@@ -89,6 +89,9 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
         do {
             let newRule = UserRule(ruleText: rule, isEnabled: newState)
             try safariProtection.modifyRule(rule, newRule, for: type, onCbReloaded: nil)
+            if let modifiedRuleIndex = rulesModels.firstIndex(where: { $0.rule == rule }) {
+                rulesModels[modifiedRuleIndex].isEnabled = newRule.isEnabled
+            }
         }
         catch {
             DDLogError("(SafariUserRulesTableModel) - ruleStateChanged; Error: \(error)")
@@ -100,7 +103,7 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
         if let removedRuleIndex = rulesModels.firstIndex(where: { $0.rule == ruleText }) {
             rulesModels.remove(at: removedRuleIndex)
         }
-        delegate?.ruleRemoved(at: indexPath)
+        delegate?.rulesRemoved(at: [indexPath])
     }
     
     func modifyRule(_ oldRuleText: String, newRule: UserRule, at indexPath: IndexPath) throws {
@@ -109,7 +112,28 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
             rulesModels[modifiedRuleIndex].rule = newRule.ruleText
             rulesModels[modifiedRuleIndex].isEnabled = newRule.isEnabled
         }
-        delegate?.ruleChanged(at: indexPath)
+        delegate?.rulesChanged(at: [indexPath])
+    }
+    
+    func turn(rules: [String], for indexPaths: [IndexPath], on: Bool) {
+        safariProtection.turnRules(rules, on: on, for: type, onCbReloaded: nil)
+        self.rulesModels = Self.reinit(safariProtection, type)
+        delegate?.rulesChanged(at: indexPaths)
+    }
+    
+    func remove(rules: [String], for indexPaths: [IndexPath]) {
+        safariProtection.removeRules(rules, for: type, onCbReloaded: nil)
+        self.rulesModels = Self.reinit(safariProtection, type)
+        delegate?.rulesRemoved(at: indexPaths)
+    }
+    
+    // MARK: - Private methods
+    
+    private static func reinit(_ safariProtection: SafariProtectionProtocol, _ type: SafariUserRuleType) -> [UserRuleCellModel] {
+        let rules = safariProtection.allRules(for: type)
+        return rules.map {
+            UserRuleCellModel(rule: $0.ruleText, isEnabled: $0.isEnabled, isSelected: false, isEditing: false)
+        }
     }
 }
 

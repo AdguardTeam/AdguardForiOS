@@ -39,6 +39,7 @@ final class UserRuleTableViewCell: UITableViewCell, Reusable {
             
             stateButton.setImage(UIImage(named: model.isEditing ? "box_normal" : "check-off"), for: .normal)
             stateButton.setImage(UIImage(named: model.isEditing ? "box_selected" : "check-on"), for: .selected)
+            stateButton.isUserInteractionEnabled = !model.isEditing
         }
     }
     
@@ -72,8 +73,6 @@ final class UserRuleTableViewCell: UITableViewCell, Reusable {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        guard model.isEditing else { return }
-        
         model.isSelected = isSelected
     }
     

@@ -103,7 +103,7 @@ class SafariWhitelistModel: ListOfRulesModelProtocol {
     private let safariProtection: SafariProtectionProtocol
     
     /* Variables */
-    private var ruleObjects = [UserRuleProtocol]()
+    private var ruleObjects = [UserRule]()
     
     private var allRules = [RuleInfo]()
     private var searchRules = [RuleInfo]()
@@ -196,7 +196,7 @@ class SafariWhitelistModel: ListOfRulesModelProtocol {
     }
     
     func deleteSelectedRules(completionHandler: @escaping (_ rulesWereDeleted: Bool) -> Void, errorHandler: @escaping (String) -> Void) {
-        var newRuleObjects = [UserRuleProtocol]()
+        var newRuleObjects = [UserRule]()
         var newRuleInfos = [RuleInfo]()
         var rulesWereDeleted = false
         
@@ -284,7 +284,7 @@ class SafariWhitelistModel: ListOfRulesModelProtocol {
 //        }
     }
     
-    private func setNewRules(_ newRuleObjects: [UserRuleProtocol], ruleInfos: [RuleInfo], completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
+    private func setNewRules(_ newRuleObjects: [UserRule], ruleInfos: [RuleInfo], completionHandler: @escaping ()->Void, errorHandler: @escaping (_ error: String)->Void) {
     
         let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
         
@@ -327,7 +327,7 @@ class SafariWhitelistModel: ListOfRulesModelProtocol {
         
         let ruleStrings = plainText.components(separatedBy: .newlines)
         
-        var newRuleObjects = [UserRuleProtocol]()
+        var newRuleObjects = [UserRule]()
         var newRuleInfos = [RuleInfo]()
         
         for ruleString in ruleStrings {

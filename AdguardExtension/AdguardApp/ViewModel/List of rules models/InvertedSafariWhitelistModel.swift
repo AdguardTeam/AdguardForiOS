@@ -373,8 +373,8 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
         return false
     }
     
-    private func rulesToObjectsConverter(rules: [RuleInfo]) -> [UserRuleProtocol]{
-        var objects: [UserRuleProtocol] = []
+    private func rulesToObjectsConverter(rules: [RuleInfo]) -> [UserRule]{
+        var objects: [UserRule] = []
         for rule in rules {
             let object = UserRule(ruleText: rule.rule, isEnabled: rule.enabled)
             objects.append(object)

@@ -32,5 +32,5 @@ protocol UserRuleConverterProtocol {
     func convertRuleToDomain(_ rule: String) -> String
     
     /* Returns string representation of rules */
-    func convertRulesToString(_ rules: [UserRuleProtocol]) -> String
+    func convertRulesToString(_ rules: [UserRule]) -> String
 }

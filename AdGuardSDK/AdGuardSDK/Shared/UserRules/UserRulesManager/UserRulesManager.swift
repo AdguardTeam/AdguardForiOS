@@ -35,14 +35,14 @@ final class UserRulesManager: UserRulesManagerProtocol {
         }
     }
     
-    var allRules: [UserRuleProtocol] { rulesModificationQueue.sync { _allRules } }
+    var allRules: [UserRule] { rulesModificationQueue.sync { _allRules } }
     
     // MARK: - Private properties
     
     // Serial queue to manage rules in one and only thread. This queue guarantees thread safety.
     private let rulesModificationQueue = DispatchQueue(label: "AdGuardSDK.RulesManager.rulesModificationQueue", qos: .userInitiated)
     
-    private var _allRules: [UserRuleProtocol]
+    private var _allRules: [UserRule]
     
     // Used to quickly check domain uniqueness
     private var domainsSet: Set<String>
@@ -64,13 +64,13 @@ final class UserRulesManager: UserRulesManagerProtocol {
     
     // MARK: - Public methods
     
-    func add(rule: UserRuleProtocol, override: Bool) throws {
+    func add(rule: UserRule, override: Bool) throws {
         try rulesModificationQueue.sync { [weak self] in
             try self?.internalAdd(rule: rule, override: override)
         }
     }
     
-    func add(rules: [UserRuleProtocol], override: Bool) throws {
+    func add(rules: [UserRule], override: Bool) throws {
         try rulesModificationQueue.sync {
             let existingRules = domainsSet.intersection(rules.map { $0.ruleText })
             
@@ -90,7 +90,7 @@ final class UserRulesManager: UserRulesManagerProtocol {
         }
     }
     
-    func modifyRule(_ oldRuleText: String, _ newRule: UserRuleProtocol) throws {
+    func modifyRule(_ oldRuleText: String, _ newRule: UserRule) throws {
         try rulesModificationQueue.sync {
             guard let ruleIndex = _allRules.firstIndex(where: { $0.ruleText == oldRuleText }) else {
                 throw UserRulesStorageError.ruleDoesNotExist(ruleString: oldRuleText)
@@ -135,7 +135,7 @@ final class UserRulesManager: UserRulesManagerProtocol {
     }
     
     // This func us used to prevent deadlock in queue. Call it in rulesModificationQueue sync
-    private func internalAdd(rule: UserRuleProtocol, override: Bool) throws {
+    private func internalAdd(rule: UserRule, override: Bool) throws {
         let ruleExists = domainsSet.contains(rule.ruleText)
         if ruleExists && !override {
             throw UserRulesStorageError.ruleAlreadyExists(ruleString: rule.ruleText)

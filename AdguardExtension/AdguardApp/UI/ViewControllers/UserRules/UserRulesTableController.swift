@@ -67,12 +67,30 @@ final class UserRulesTableController: UIViewController {
     // MARK: - Actions
     
     @IBAction func deleteButtonTapped(_ sender: UIButton) {
+        guard let paths = tableView.indexPathsForSelectedRows, !paths.isEmpty else {
+            return
+        }
+        let selectedRules = paths.map { model.rulesModels[$0.row].rule }
+        model.remove(rules: selectedRules, for: paths)
+        goToNormalMode()
     }
     
     @IBAction func enableButtonTapped(_ sender: UIButton) {
+        guard let paths = tableView.indexPathsForSelectedRows, !paths.isEmpty else {
+            return
+        }
+        let selectedRules = paths.map { model.rulesModels[$0.row].rule }
+        model.turn(rules: selectedRules, for: paths, on: true)
+        goToNormalMode()
     }
     
     @IBAction func disableButtonTapped(_ sender: UIButton) {
+        guard let paths = tableView.indexPathsForSelectedRows, !paths.isEmpty else {
+            return
+        }
+        let selectedRules = paths.map { model.rulesModels[$0.row].rule }
+        model.turn(rules: selectedRules, for: paths, on: false)
+        goToNormalMode()
     }
     
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
@@ -287,6 +305,26 @@ extension UserRulesTableController: UITableViewDataSource {
 // MARK: - UserRulesTableController + UITableViewDelegate
 
 extension UserRulesTableController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if model.isEditing, let cell = tableView.cellForRow(at: indexPath) {
+            cell.setSelected(true, animated: false)
+        }
+        return indexPath
+    }
+    
+    func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
+        if model.isEditing, let cell = tableView.cellForRow(at: indexPath) {
+            cell.setSelected(false, animated: false)
+        }
+        return indexPath
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if model.isEditing, let cell = tableView.cellForRow(at: indexPath) {
+            cell.setSelected(false, animated: false)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 && !model.isEditing {
             presentAddRuleController()
@@ -294,10 +332,7 @@ extension UserRulesTableController: UITableViewDelegate {
             return
         }
         
-        if model.isEditing {
-            let cell = tableView.cellForRow(at: indexPath)
-            cell?.setSelected(true, animated: true)
-        } else {
+        if !model.isEditing {
             let ruleModel = model(for: indexPath.row)
             let userRule = UserRule(ruleText: ruleModel.rule, isEnabled: ruleModel.isEnabled)
             presentDetailsController(rule: userRule, indexPath: indexPath)
@@ -309,12 +344,12 @@ extension UserRulesTableController: UITableViewDelegate {
 // MARK: - UserRulesTableController + UserRulesTableModelDelegate
 
 extension UserRulesTableController: UserRulesTableModelDelegate {
-    func ruleChanged(at indexPath: IndexPath) {
-        tableView.reloadRows(at: [indexPath], with: .automatic)
+    func rulesChanged(at indexPaths: [IndexPath]) {
+        tableView.reloadRows(at: indexPaths, with: .automatic)
     }
     
-    func ruleRemoved(at indexPath: IndexPath) {
-        tableView.deleteRows(at: [indexPath], with: .left)
+    func rulesRemoved(at indexPaths: [IndexPath]) {
+        tableView.deleteRows(at: indexPaths, with: .left)
     }
     
     func ruleSuccessfullyAdded() {
@@ -330,9 +365,13 @@ extension UserRulesTableController: ThemableProtocol {
         buttonsStackView.backgroundColor = themeService.notificationWindowColor
         themeService.setupTable(tableView)
         deleteButton.setTitleColor(UIColor.AdGuardColor.red, for: .normal)
+        deleteButton.tintColor = UIColor.AdGuardColor.red
         enableButton.setTitleColor(themeService.grayTextColor, for: .normal)
+        enableButton.tintColor = themeService.grayTextColor
         disableButton.setTitleColor(themeService.grayTextColor, for: .normal)
+        disableButton.tintColor = themeService.grayTextColor
         cancelButton.setTitleColor(themeService.lightGrayTextColor, for: .normal)
+        cancelButton.tintColor = themeService.lightGrayTextColor
         tableView.reloadData()
     }
 }
