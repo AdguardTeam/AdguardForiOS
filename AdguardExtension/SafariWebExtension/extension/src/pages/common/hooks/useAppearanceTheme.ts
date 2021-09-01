@@ -26,6 +26,9 @@ export const useAppearanceTheme = (appearanceTheme?: AppearanceTheme) => {
                 theme = APPEARANCE_THEME_DEFAULT;
             }
         } else {
+            if (!Object.values(AppearanceTheme).includes(theme)) {
+                theme = APPEARANCE_THEME_DEFAULT;
+            }
             throttledSetToStorage(theme);
         }
 
