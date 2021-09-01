@@ -1,6 +1,5 @@
 /* eslint-disable class-methods-use-this */
 import { browser } from 'webextension-polyfill-ts';
-
 import {APPEARANCE_THEMES, MessagesToNativeApp} from '../../common/constants';
 import { nativeHostMock } from './nativeHostMock';
 
