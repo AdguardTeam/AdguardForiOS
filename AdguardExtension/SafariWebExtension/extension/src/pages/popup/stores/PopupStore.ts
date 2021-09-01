@@ -14,6 +14,7 @@ import { translator } from '../../common/translators/translator';
 import { messenger } from '../../common/messenger';
 import { toDataUrl } from '../image-utils';
 import { log } from '../../common/log';
+import { APPEARANCE_THEMES, APPEARANCE_THEME_DEFAULT } from '../../common/constants';
 
 // Do not allow property change outside of store actions
 configure({ enforceActions: 'observed' });
@@ -61,6 +62,8 @@ class PopupStore {
 
     @observable showProtectionDisabledModal: boolean = false;
 
+    @observable appearanceTheme: APPEARANCE_THEMES = APPEARANCE_THEME_DEFAULT;
+
     /**
      * Flag variable
      * - true means that app is premium (user bought it),
@@ -97,6 +100,7 @@ class PopupStore {
             this.hasUserRules = popupData.hasUserRules;
             this.premiumApp = popupData.premiumApp;
             this.showProtectionDisabledModal = !popupData.contentBlockersEnabled;
+            this.appearanceTheme = popupData.appearanceTheme;
         });
     };
 
@@ -187,6 +191,14 @@ class PopupStore {
     setShowContentBlockersEnabledModal(state: boolean) {
         this.showProtectionDisabledModal = state;
     }
+
+    @action
+    getAppearanceTheme = async () => {
+        const value = await messenger.getAppearanceTheme();
+        runInAction(() => {
+            this.appearanceTheme = value;
+        });
+    };
 }
 
 export const popupStore = createContext(new PopupStore());

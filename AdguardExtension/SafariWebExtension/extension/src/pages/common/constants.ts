@@ -9,6 +9,7 @@ export enum MessagesToNativeApp {
     RemoveUserRulesBySite = 'removeUserRulesBySite',
     ReportProblem = 'reportProblem',
     IsPremium = 'isPremium',
+    AppearanceTheme = 'appearanceTheme',
     AreContentBlockersEnabled = 'areContentBlockersEnabled',
     UpgradeMe = 'upgradeMe',
 }
@@ -23,8 +24,17 @@ export enum MessagesToBackgroundPage {
     DeleteUserRulesByUrl = 'delete_user_rules_by_url',
     ReportProblem = 'report_problem',
     UpgradeClicked = 'upgrade_clicked',
+    GetAppearanceTheme = 'get_appearance_theme',
 }
 
 export enum MessagesToContentScript {
     InitAssistant = 'init_assistant',
 }
+
+export enum APPEARANCE_THEMES {
+    SYSTEM = 'SYSTEM',
+    DARK = 'DARK',
+    LIGHT = 'LIGHT',
+}
+
+export const APPEARANCE_THEME_DEFAULT = APPEARANCE_THEMES.SYSTEM;

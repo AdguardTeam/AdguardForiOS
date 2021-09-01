@@ -1,6 +1,6 @@
 import { browser } from 'webextension-polyfill-ts';
 
-import { MessagesToBackgroundPage } from '../constants';
+import { MessagesToBackgroundPage, APPEARANCE_THEMES } from '../constants';
 import { log } from '../log';
 
 interface Message {
@@ -61,6 +61,12 @@ export class Messenger {
     handleUpgrade = () => {
         return this.sendMessage(
             MessagesToBackgroundPage.UpgradeClicked,
+        );
+    };
+
+    getAppearanceTheme = () => {
+        return this.sendMessage(
+            MessagesToBackgroundPage.GetAppearanceTheme,
         );
     };
 }
