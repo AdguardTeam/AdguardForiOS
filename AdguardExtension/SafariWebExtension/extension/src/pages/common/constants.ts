@@ -31,10 +31,10 @@ export enum MessagesToContentScript {
     InitAssistant = 'init_assistant',
 }
 
-export enum APPEARANCE_THEMES {
+export enum AppearanceThemes {
     SYSTEM = 'SYSTEM',
     DARK = 'DARK',
     LIGHT = 'LIGHT',
 }
 
-export const APPEARANCE_THEME_DEFAULT = APPEARANCE_THEMES.SYSTEM;
+export const APPEARANCE_THEME_DEFAULT = AppearanceThemes.SYSTEM;
