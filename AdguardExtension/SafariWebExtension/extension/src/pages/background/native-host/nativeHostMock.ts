@@ -1,5 +1,6 @@
 /* eslint-disable */
 import { storage } from '../storage';
+import { APPEARANCE_THEME_DEFAULT, AppearanceTheme } from '../../common/constants';
 
 const sleep = (timeout: number) => {
     return new Promise((resolve) => {
@@ -11,12 +12,14 @@ export const nativeHostMock = (() => {
     const STATE_KEY = 'state';
 
     interface State {
+        appearanceTheme: AppearanceTheme,
         protectionEnabled: boolean,
         premiumApp: boolean,
         contentBlockersEnabled: boolean,
     }
 
     const DEFAULT_STATE: State = {
+        appearanceTheme: APPEARANCE_THEME_DEFAULT,
         protectionEnabled: true,
         premiumApp: false,
         contentBlockersEnabled: true,
@@ -90,6 +93,15 @@ export const nativeHostMock = (() => {
         await setState(key, !state[key]);
     };
 
+    const getAppearanceTheme = async () => {
+        const state = await getState();
+        return withSleep(state.appearanceTheme);
+    };
+
+    const setAppearanceTheme = async (value: AppearanceTheme) => {
+        await setState('appearanceTheme', value);
+    };
+
     return {
         isProtectionEnabled,
         enableProtection,
@@ -100,7 +112,9 @@ export const nativeHostMock = (() => {
         togglePremium,
         getState,
         toggleContentBlockersState,
+        setAppearanceTheme,
         areContentBlockersEnabled,
+        getAppearanceTheme,
     };
 })();
 

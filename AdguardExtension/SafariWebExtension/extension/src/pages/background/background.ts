@@ -73,6 +73,7 @@ const handleMessages = () => {
                 const protectionEnabled = await nativeHost.isProtectionEnabled(url);
                 const hasUserRules = await nativeHost.hasUserRulesBySite(url);
                 const premiumApp = await nativeHost.isPremiumApp();
+                const appearanceTheme = await nativeHost.getAppearanceTheme();
                 const contentBlockersEnabled = await nativeHost.areContentBlockersEnabled();
 
                 return {
@@ -81,6 +82,7 @@ const handleMessages = () => {
                     protectionEnabled,
                     hasUserRules,
                     premiumApp,
+                    appearanceTheme,
                     contentBlockersEnabled,
                 };
             }

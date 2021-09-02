@@ -14,6 +14,7 @@ import { translator } from '../../common/translators/translator';
 import { messenger } from '../../common/messenger';
 import { toDataUrl } from '../image-utils';
 import { log } from '../../common/log';
+import { AppearanceTheme } from '../../common/constants';
 
 // Do not allow property change outside of store actions
 configure({ enforceActions: 'observed' });
@@ -61,6 +62,8 @@ class PopupStore {
 
     @observable showProtectionDisabledModal: boolean = false;
 
+    @observable appearanceTheme?: AppearanceTheme;
+
     /**
      * Flag variable
      * - true means that app is premium (user bought it),
@@ -97,6 +100,7 @@ class PopupStore {
             this.hasUserRules = popupData.hasUserRules;
             this.premiumApp = popupData.premiumApp;
             this.showProtectionDisabledModal = !popupData.contentBlockersEnabled;
+            this.appearanceTheme = popupData.appearanceTheme;
         });
     };
 
