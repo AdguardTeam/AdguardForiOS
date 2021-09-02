@@ -126,7 +126,7 @@ static NSDictionary *persistentProductInfo;
         NSOperatingSystemVersion version = [[NSProcessInfo processInfo] operatingSystemVersion];
         
         userAgentString = [NSString stringWithFormat:@"%@/%@ (%@; %@ %ld_%ld_%ld)",
-                           DEFAULT_PRODUCT_NAME, [ADProductInfo version], [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemName], (long)version.majorVersion, (long)version.minorVersion, (long)version.patchVersion];
+                           DEFAULT_PRODUCT_NAME, [self version], [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemName], (long)version.majorVersion, (long)version.minorVersion, (long)version.patchVersion];
         
 #elif TARGET_OS_MAC
         
@@ -139,7 +139,7 @@ static NSDictionary *persistentProductInfo;
 #pragma clang diagnostic pop
         
         userAgentString = [NSString stringWithFormat:@"%@/%@ (Macintosh; Intel Mac OS X %d_%d_%d)",
-                           DEFAULT_PRODUCT_NAME, [ADProductInfo version], major, minor, bugfix];
+                           DEFAULT_PRODUCT_NAME, [self version], major, minor, bugfix];
         
 #endif
 
