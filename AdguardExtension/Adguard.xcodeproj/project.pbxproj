@@ -416,7 +416,6 @@
 		7E1AB64625824A6600519B2B /* SupportService+Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA7834A2578E54500CA8889 /* SupportService+Feedback.swift */; };
 		7E1AB68E25824ABD00519B2B /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95523F2B96B00F9A544 /* CharacterSet+Utils.swift */; };
 		7E1BAE72233A1AFF00F1EBEB /* SafariProtectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1BAE71233A1AFF00F1EBEB /* SafariProtectionController.swift */; };
-		7E1C5839234DE3D600D8F419 /* ListOfRulesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C5838234DE3D600D8F419 /* ListOfRulesController.swift */; };
 		7E1E41572424BFD100567C8D /* MostActiveCompaniesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1E41562424BFD100567C8D /* MostActiveCompaniesController.swift */; };
 		7E1E415A2424C01100567C8D /* MostActiveCompaniesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1E41592424C01100567C8D /* MostActiveCompaniesCell.swift */; };
 		7E21CBA825F918FA00A5A735 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E21CBA725F918FA00A5A735 /* NetworkManager.swift */; };
@@ -454,8 +453,6 @@
 		7E3556EA25DD02E800CB2A8D /* UpsellViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E3556EC25DD02E800CB2A8D /* UpsellViewController.xib */; };
 		7E3BDEE023A15709009492CE /* GetProDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3BDEDF23A15709009492CE /* GetProDialogView.swift */; };
 		7E3DB9A22407AD3E0053D666 /* NetworkSettingsServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3DB9A12407AD3E0053D666 /* NetworkSettingsServiceTest.swift */; };
-		7E3F118E2350622600D1D17E /* SystemWhitelistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3F118D2350622600D1D17E /* SystemWhitelistModel.swift */; };
-		7E3F11902350624900D1D17E /* UserFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3F118F2350624900D1D17E /* UserFilterModel.swift */; };
 		7E3FEFA826CCFC8D0080EC03 /* OneSafariGroupFiltersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FEFA726CCFC8D0080EC03 /* OneSafariGroupFiltersModel.swift */; };
 		7E3FEFA926CCFC8D0080EC03 /* OneSafariGroupFiltersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FEFA726CCFC8D0080EC03 /* OneSafariGroupFiltersModel.swift */; };
 		7E3FEFAB26CCFCD20080EC03 /* AllSafariGroupsFiltersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3FEFAA26CCFCD20080EC03 /* AllSafariGroupsFiltersModel.swift */; };
@@ -479,7 +476,6 @@
 		7E40799E231E7E8C007EFB26 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E40799D231E7E8C007EFB26 /* CoreServices.framework */; };
 		7E40799F231E81C1007EFB26 /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40799A231E7E4E007EFB26 /* URL+Utils.swift */; };
 		7E4227B52375A63100865E56 /* DnsTrackerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF75A6C234B6010006ED3E5 /* DnsTrackerService.swift */; };
-		7E42BBD5235742F00095180D /* SystemBlacklistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E42BBD4235742F00095180D /* SystemBlacklistModel.swift */; };
 		7E473B0825540E52006F8345 /* NativeProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67F90254842B800FEEEE2 /* NativeProvidersService.swift */; };
 		7E473B1A25540E53006F8345 /* NativeProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67F90254842B800FEEEE2 /* NativeProvidersService.swift */; };
 		7E473B1B25540E58006F8345 /* NativeProvidersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67F90254842B800FEEEE2 /* NativeProvidersService.swift */; };
@@ -535,8 +531,6 @@
 		7E59F246255D33A40097CD97 /* LocalizedStringsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E59F245255D33A40097CD97 /* LocalizedStringsTests.swift */; };
 		7E5EA7AA239A381A00A07DE0 /* ComplexProtectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF005E2239929FC00047073 /* ComplexProtectionService.swift */; };
 		7E5FC201234F71F0008E383D /* ListOfRulesCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FC200234F71F0008E383D /* ListOfRulesCells.swift */; };
-		7E5FC203234F8128008E383D /* EditingUserFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FC202234F8128008E383D /* EditingUserFilterController.swift */; };
-		7E5FC206234F8395008E383D /* ListOfRulesTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FC205234F8394008E383D /* ListOfRulesTableController.swift */; };
 		7E6081A926D55BCD00D778F4 /* YouTubeAdsActionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7E60819B26D55BCD00D778F4 /* YouTubeAdsActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7E6081D326D55C0100D778F4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E6081AE26D55C0000D778F4 /* InfoPlist.strings */; };
 		7E6081D426D55C0100D778F4 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E6081B026D55C0000D778F4 /* Media.xcassets */; };
@@ -925,12 +919,9 @@
 		7EEC432A24290C4800F39C33 /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02B550022EED4AE0039BC48 /* Date+Utils.swift */; };
 		7EEC432F242A0DED00F39C33 /* ActivityStatisticsServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEC432E242A0DED00F39C33 /* ActivityStatisticsServiceTest.swift */; };
 		7EEF93F22360365300F5856A /* NetworkSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */; };
-		7EEF93F32360373F00F5856A /* ListOfRulesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C583A234F5A9500D8F419 /* ListOfRulesModel.swift */; };
 		7EF005E3239929FC00047073 /* ComplexProtectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF005E2239929FC00047073 /* ComplexProtectionService.swift */; };
 		7EF14476242A287D0034A727 /* ActivityStatisticsRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEC43242428EFB100F39C33 /* ActivityStatisticsRecord.swift */; };
 		7EF14477242A288D0034A727 /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02B550022EED4AE0039BC48 /* Date+Utils.swift */; };
-		7EF16CB92350C7AF007E0863 /* SafariWhitelistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF16CB82350C7AF007E0863 /* SafariWhitelistModel.swift */; };
-		7EF16CBB2350C86C007E0863 /* InvertedSafariWhitelistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF16CBA2350C86C007E0863 /* InvertedSafariWhitelistModel.swift */; };
 		7EF4285C23AB77AB00948B65 /* ComplexProtectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF4285B23AB77AB00948B65 /* ComplexProtectionController.swift */; };
 		7EF5C51126C261AF001851D6 /* SharedResources+DebugLogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF5C50E26C261AF001851D6 /* SharedResources+DebugLogs.swift */; };
 		7EF5C51226C261AF001851D6 /* SharedResources+Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF5C50F26C261AF001851D6 /* SharedResources+Statistics.swift */; };
@@ -1989,12 +1980,6 @@
 		D0B5454F2435D131002F0AEC /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0BB219EFC99002C17D9 /* DDMultiFormatter.m */; };
 		D0B545502435D131002F0AEC /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0C5219EFC99002C17D9 /* DDAbstractDatabaseLogger.m */; };
 		D0B545652435D137002F0AEC /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D031A0B4219EFC99002C17D9 /* CocoaLumberjack.swift */; };
-		D0B545682435D5C9002F0AEC /* ListOfRulesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C583A234F5A9500D8F419 /* ListOfRulesModel.swift */; };
-		D0B545692435D5C9002F0AEC /* SystemWhitelistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3F118D2350622600D1D17E /* SystemWhitelistModel.swift */; };
-		D0B5456A2435D5C9002F0AEC /* UserFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3F118F2350624900D1D17E /* UserFilterModel.swift */; };
-		D0B5456B2435D5C9002F0AEC /* SafariWhitelistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF16CB82350C7AF007E0863 /* SafariWhitelistModel.swift */; };
-		D0B5456C2435D5C9002F0AEC /* InvertedSafariWhitelistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF16CBA2350C86C007E0863 /* InvertedSafariWhitelistModel.swift */; };
-		D0B5456D2435D5C9002F0AEC /* SystemBlacklistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E42BBD4235742F00095180D /* SystemBlacklistModel.swift */; };
 		D0B5456E2435D5CD002F0AEC /* DnsFiltersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E83CA3D234351AC004E2EB8 /* DnsFiltersModel.swift */; };
 		D0B5456F2435D5CD002F0AEC /* DnsRequestLogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D020B27A21F894F90075BB8D /* DnsRequestLogModel.swift */; };
 		D0B545712435D5CD002F0AEC /* NetworkSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101922355B53700935FE9 /* NetworkSettingsModel.swift */; };
@@ -2065,9 +2050,6 @@
 		D0B545CE2435D692002F0AEC /* RuleAddedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B6B757229E7A5B00D6E84E /* RuleAddedController.swift */; };
 		D0B545CF2435D692002F0AEC /* RuleDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0319F9D21947633002C17D9 /* RuleDetailsController.swift */; };
 		D0B545D02435D692002F0AEC /* RuleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA63982341E8A60040F3A0 /* RuleInfo.swift */; };
-		D0B545D12435D692002F0AEC /* ListOfRulesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C5838234DE3D600D8F419 /* ListOfRulesController.swift */; };
-		D0B545D22435D692002F0AEC /* EditingUserFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FC202234F8128008E383D /* EditingUserFilterController.swift */; };
-		D0B545D32435D692002F0AEC /* ListOfRulesTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5FC205234F8394008E383D /* ListOfRulesTableController.swift */; };
 		D0B545D42435D697002F0AEC /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09CB60423ABBA7D008C9FF7 /* OnboardingController.swift */; };
 		D0B545D52435D697002F0AEC /* OnboardingAnimationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2522152408207A00743648 /* OnboardingAnimationsController.swift */; };
 		D0B545D62435D697002F0AEC /* IntroductionOnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA3DBC62409367B000D8D42 /* IntroductionOnboardingController.swift */; };
@@ -3186,8 +3168,6 @@
 		7E15720B22DF4C25007060D7 /* ContentBlockerStateDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerStateDataSource.swift; sourceTree = "<group>"; };
 		7E15B65C234358C20048E63F /* DnsFiltersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsFiltersController.swift; sourceTree = "<group>"; };
 		7E1BAE71233A1AFF00F1EBEB /* SafariProtectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariProtectionController.swift; sourceTree = "<group>"; };
-		7E1C5838234DE3D600D8F419 /* ListOfRulesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfRulesController.swift; sourceTree = "<group>"; };
-		7E1C583A234F5A9500D8F419 /* ListOfRulesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfRulesModel.swift; sourceTree = "<group>"; };
 		7E1E41562424BFD100567C8D /* MostActiveCompaniesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostActiveCompaniesController.swift; sourceTree = "<group>"; };
 		7E1E41592424C01100567C8D /* MostActiveCompaniesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostActiveCompaniesCell.swift; sourceTree = "<group>"; };
 		7E21CBA725F918FA00A5A735 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -3299,8 +3279,6 @@
 		7E3B386525120FAC0005EB9F /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = be; path = be.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		7E3BDEDF23A15709009492CE /* GetProDialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProDialogView.swift; sourceTree = "<group>"; };
 		7E3DB9A12407AD3E0053D666 /* NetworkSettingsServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsServiceTest.swift; sourceTree = "<group>"; };
-		7E3F118D2350622600D1D17E /* SystemWhitelistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemWhitelistModel.swift; sourceTree = "<group>"; };
-		7E3F118F2350624900D1D17E /* UserFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFilterModel.swift; sourceTree = "<group>"; };
 		7E3FEFA726CCFC8D0080EC03 /* OneSafariGroupFiltersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneSafariGroupFiltersModel.swift; sourceTree = "<group>"; };
 		7E3FEFAA26CCFCD20080EC03 /* AllSafariGroupsFiltersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSafariGroupsFiltersModel.swift; sourceTree = "<group>"; };
 		7E3FEFAD26CD33F80080EC03 /* AGTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AGTextField.swift; sourceTree = "<group>"; };
@@ -3314,7 +3292,6 @@
 		7E407998231E7CA3007EFB26 /* SimpleConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleConfiguration.swift; sourceTree = "<group>"; };
 		7E40799A231E7E4E007EFB26 /* URL+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Utils.swift"; sourceTree = "<group>"; };
 		7E40799D231E7E8C007EFB26 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
-		7E42BBD4235742F00095180D /* SystemBlacklistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemBlacklistModel.swift; sourceTree = "<group>"; };
 		7E473B7625559469006F8345 /* DnsProviderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProviderCell.swift; sourceTree = "<group>"; };
 		7E49DBA822D88ECB00027E93 /* ActionExtensionMainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionExtensionMainController.swift; sourceTree = "<group>"; };
 		7E49DBBA22DDC25000027E93 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -3364,8 +3341,6 @@
 		7E59D790236056ED00E7ABA4 /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		7E59F245255D33A40097CD97 /* LocalizedStringsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringsTests.swift; sourceTree = "<group>"; };
 		7E5FC200234F71F0008E383D /* ListOfRulesCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfRulesCells.swift; sourceTree = "<group>"; };
-		7E5FC202234F8128008E383D /* EditingUserFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingUserFilterController.swift; sourceTree = "<group>"; };
-		7E5FC205234F8394008E383D /* ListOfRulesTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfRulesTableController.swift; sourceTree = "<group>"; };
 		7E60819B26D55BCD00D778F4 /* YouTubeAdsActionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = YouTubeAdsActionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E60819C26D55BCD00D778F4 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
 		7E6081AF26D55C0000D778F4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -3702,8 +3677,6 @@
 		7EEC43242428EFB100F39C33 /* ActivityStatisticsRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStatisticsRecord.swift; sourceTree = "<group>"; };
 		7EEC432E242A0DED00F39C33 /* ActivityStatisticsServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStatisticsServiceTest.swift; sourceTree = "<group>"; };
 		7EF005E2239929FC00047073 /* ComplexProtectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexProtectionService.swift; sourceTree = "<group>"; };
-		7EF16CB82350C7AF007E0863 /* SafariWhitelistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWhitelistModel.swift; sourceTree = "<group>"; };
-		7EF16CBA2350C86C007E0863 /* InvertedSafariWhitelistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvertedSafariWhitelistModel.swift; sourceTree = "<group>"; };
 		7EF4285B23AB77AB00948B65 /* ComplexProtectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexProtectionController.swift; sourceTree = "<group>"; };
 		7EF5C50E26C261AF001851D6 /* SharedResources+DebugLogs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SharedResources+DebugLogs.swift"; sourceTree = "<group>"; };
 		7EF5C50F26C261AF001851D6 /* SharedResources+Statistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SharedResources+Statistics.swift"; sourceTree = "<group>"; };
@@ -5925,19 +5898,6 @@
 			path = BottomAlertController;
 			sourceTree = "<group>";
 		};
-		7E3F118C2350620900D1D17E /* List of rules models */ = {
-			isa = PBXGroup;
-			children = (
-				7E1C583A234F5A9500D8F419 /* ListOfRulesModel.swift */,
-				7E3F118D2350622600D1D17E /* SystemWhitelistModel.swift */,
-				7E3F118F2350624900D1D17E /* UserFilterModel.swift */,
-				7EF16CB82350C7AF007E0863 /* SafariWhitelistModel.swift */,
-				7EF16CBA2350C86C007E0863 /* InvertedSafariWhitelistModel.swift */,
-				7E42BBD4235742F00095180D /* SystemBlacklistModel.swift */,
-			);
-			path = "List of rules models";
-			sourceTree = "<group>";
-		};
 		7E49DBA722D88D9C00027E93 /* Swift UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -6001,16 +5961,6 @@
 				D081FC2A2418EB38000A10DA /* SafariProtectionService.swift */,
 			);
 			path = Protection;
-			sourceTree = "<group>";
-		};
-		7E5FC204234F812F008E383D /* Container's controllers */ = {
-			isa = PBXGroup;
-			children = (
-				7E1C5838234DE3D600D8F419 /* ListOfRulesController.swift */,
-				7E5FC202234F8128008E383D /* EditingUserFilterController.swift */,
-				7E5FC205234F8394008E383D /* ListOfRulesTableController.swift */,
-			);
-			path = "Container's controllers";
 			sourceTree = "<group>";
 		};
 		7E6081AD26D55C0000D778F4 /* YouTubeAdsActionExtension */ = {
@@ -6472,7 +6422,6 @@
 		D067D8CF213ED55100ECDE6D /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				7E3F118C2350620900D1D17E /* List of rules models */,
 				7E83CA3D234351AC004E2EB8 /* DnsFiltersModel.swift */,
 				7E5101922355B53700935FE9 /* NetworkSettingsModel.swift */,
 			);
@@ -6624,7 +6573,6 @@
 				D0B6B757229E7A5B00D6E84E /* RuleAddedController.swift */,
 				D0319F9D21947633002C17D9 /* RuleDetailsController.swift */,
 				7EAA63982341E8A60040F3A0 /* RuleInfo.swift */,
-				7E5FC204234F812F008E383D /* Container's controllers */,
 			);
 			path = ListOfRules;
 			sourceTree = "<group>";
@@ -8341,7 +8289,6 @@
 				D031A15C219EFC99002C17D9 /* DDLoggerNames.m in Sources */,
 				D0B545912435D630002F0AEC /* PurchaseService.swift in Sources */,
 				D0B545D82435D69B002F0AEC /* ListOfRulesCells.swift in Sources */,
-				D0B5456B2435D5C9002F0AEC /* SafariWhitelistModel.swift in Sources */,
 				D0B545FB2435D6CB002F0AEC /* URL+Utils.swift in Sources */,
 				D0D7E61D244456D2001801A5 /* ActivityViewController.swift in Sources */,
 				D0B5457C2435D5ED002F0AEC /* DnsTrackerService.swift in Sources */,
@@ -8392,7 +8339,6 @@
 				D031A124219EFC99002C17D9 /* DDContextFilterLogFormatter.m in Sources */,
 				D0B545E52435D69B002F0AEC /* NetworkSettingsCells.swift in Sources */,
 				D0B545AE2435D646002F0AEC /* NewCustomFilterDetailsController.swift in Sources */,
-				D0B5456A2435D5C9002F0AEC /* UserFilterModel.swift in Sources */,
 				7EA45506254AB249002B69C6 /* ActivityNativeDnsController.swift in Sources */,
 				7EAA0D8B26CA9B35007208E5 /* SafariGroupFiltersModelsProvider.swift in Sources */,
 				247521F62594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */,
@@ -8414,7 +8360,6 @@
 				D0B545872435D630002F0AEC /* ConfigurationService.swift in Sources */,
 				7EF5C53C26C2621D001851D6 /* SharedResources+Statistics.swift in Sources */,
 				D0B545832435D62A002F0AEC /* DnsFiltersService.swift in Sources */,
-				D0B545692435D5C9002F0AEC /* SystemWhitelistModel.swift in Sources */,
 				D0B545A72435D640002F0AEC /* DnsProvidersController.swift in Sources */,
 				D0B545DD2435D69B002F0AEC /* LongLabelCell.swift in Sources */,
 				D0B545BA2435D655002F0AEC /* DnsRequestDetailsController.swift in Sources */,
@@ -8431,7 +8376,6 @@
 				D0B5458E2435D630002F0AEC /* LoginResponseParser.swift in Sources */,
 				D031A140219EFC99002C17D9 /* DDMultiFormatter.m in Sources */,
 				D0B545CD2435D692002F0AEC /* ImportRulesController.swift in Sources */,
-				D0B545D12435D692002F0AEC /* ListOfRulesController.swift in Sources */,
 				D0D7E6312446E220001801A5 /* MigrationService.swift in Sources */,
 				6598866F1CF74DE9003ECD1C /* StaticDataTableViewController.m in Sources */,
 				D0B5457B2435D5E4002F0AEC /* DnsProvidersService.swift in Sources */,
@@ -8459,7 +8403,6 @@
 				D0B545F22435D6AB002F0AEC /* Constants.m in Sources */,
 				D031A14E219EFC99002C17D9 /* DDLog.m in Sources */,
 				7EC67F6D2548301000FEEEE2 /* ChooseDnsImplementationController.swift in Sources */,
-				D0B545D22435D692002F0AEC /* EditingUserFilterController.swift in Sources */,
 				D0984F9B2608866900703DB2 /* MigrationService+AntibannerMigration.swift in Sources */,
 				D0D7E55D243772E6001801A5 /* Bundle+config.swift in Sources */,
 				D06E6BD525E8F6000069013C /* VpnConfigurationStatus.swift in Sources */,
@@ -8486,7 +8429,6 @@
 				24ED98CA259B78DF00A73B17 /* Array+Utils.swift in Sources */,
 				7EE8AC1726C595350070D477 /* ThemeMode.swift in Sources */,
 				D0B5459B2435D636002F0AEC /* MainTabBarController.swift in Sources */,
-				D0B545682435D5C9002F0AEC /* ListOfRulesModel.swift in Sources */,
 				247CB5FF2600C5A10047974C /* OpenDnsProvidersControllerParser.swift in Sources */,
 				D0D7E5F724444F05001801A5 /* RuleLabel.swift in Sources */,
 				D0D7E62124445728001801A5 /* CompanyDetailedController.swift in Sources */,
@@ -8563,9 +8505,7 @@
 				247CB6132600C8870047974C /* OpenImportSettingsControllerParser.swift in Sources */,
 				D031A0DE219EFC99002C17D9 /* DDOSLogger.m in Sources */,
 				D0B545C12435D660002F0AEC /* SettingsController.swift in Sources */,
-				D0B5456C2435D5C9002F0AEC /* InvertedSafariWhitelistModel.swift in Sources */,
 				7E3FEFBE26CEB4E90080EC03 /* Bool+Utils.swift in Sources */,
-				D0B5456D2435D5C9002F0AEC /* SystemBlacklistModel.swift in Sources */,
 				D0B545862435D62A002F0AEC /* SafariProtectionService.swift in Sources */,
 				D0B545AF2435D646002F0AEC /* AddCustomFilterController.swift in Sources */,
 				D0B545F32435D6C4002F0AEC /* UIColorUtils.swift in Sources */,
@@ -8586,7 +8526,6 @@
 				D0B545952435D630002F0AEC /* StartupService.swift in Sources */,
 				247CB64F2600CD480047974C /* SocialNetworkAuthParametersParser.swift in Sources */,
 				D0D7E5FE24444F93001801A5 /* DnsStatisticsRecord.swift in Sources */,
-				D0B545D32435D692002F0AEC /* ListOfRulesTableController.swift in Sources */,
 				659886911CF74DE9003ECD1C /* ACLExecuteBlockDelayed.m in Sources */,
 				D0B545FD2435D6D2002F0AEC /* Dns64Utils.swift in Sources */,
 				D0B545A02435D63D002F0AEC /* DnsLogContainerController.swift in Sources */,
@@ -8761,11 +8700,9 @@
 				7E844C3723AA7270009EA1AE /* GetProPageController.swift in Sources */,
 				7ECCCC14237194B200FA651F /* ChartView.swift in Sources */,
 				65EC9BCC1BB9824C00F53F3B /* ADLocations.m in Sources */,
-				7E5FC203234F8128008E383D /* EditingUserFilterController.swift in Sources */,
 				7E70266626DD412600F8FC25 /* IdentifiableObject.swift in Sources */,
 				D09E2BCF25558075002D6BC0 /* SetappService.swift in Sources */,
 				7E0B222825DBB3C900AF88BB /* UpsellViewController.swift in Sources */,
-				7E3F118E2350622600D1D17E /* SystemWhitelistModel.swift in Sources */,
 				D0BA6210224A8547005CF278 /* GetProTableController.swift in Sources */,
 				65EC9C981BB9824C00F53F3B /* FMDatabasePool.m in Sources */,
 				7E8AC81B23A7C41700669C75 /* MainTabBarController.swift in Sources */,
@@ -8816,9 +8753,7 @@
 				D031A10F219EFC99002C17D9 /* CocoaLumberjack.swift in Sources */,
 				247CB6122600C8870047974C /* OpenImportSettingsControllerParser.swift in Sources */,
 				D031A0D7219EFC99002C17D9 /* DDOSLogger.m in Sources */,
-				7E1C5839234DE3D600D8F419 /* ListOfRulesController.swift in Sources */,
 				D09E9644216CB14A00313AB1 /* ThemeService.swift in Sources */,
-				7E3F11902350624900D1D17E /* UserFilterModel.swift in Sources */,
 				7E92754526C67FCD007B2C80 /* SafariGroupsModel.swift in Sources */,
 				7E3FEFA826CCFC8D0080EC03 /* OneSafariGroupFiltersModel.swift in Sources */,
 				7EBDFE8A26CF92EB00CCE8CC /* FilterDetailsViewModel.swift in Sources */,
@@ -8895,7 +8830,6 @@
 				24557DF725EFD4AE00BC5B26 /* AppDelegate.swift in Sources */,
 				7E3FEFBA26CE9E2F0080EC03 /* FilterDetailsViewController.swift in Sources */,
 				241346CC26131CA300CF8601 /* AppDelegate+Themable.swift in Sources */,
-				7EF16CBB2350C86C007E0863 /* InvertedSafariWhitelistModel.swift in Sources */,
 				7E3FEFB426CD3AB60080EC03 /* UITableView+Utils.swift in Sources */,
 				7E9082082549D5430048C4B0 /* HowToSetupController.swift in Sources */,
 				65AD3BBB1B7CB15400004A02 /* AESharedResources.m in Sources */,
@@ -8925,7 +8859,6 @@
 				7E11568B26D38723000ADC3B /* AddTableViewCell.swift in Sources */,
 				65EC9C941BB9824C00F53F3B /* FMDatabaseAdditions.m in Sources */,
 				D0F9115C212DDCD3006DF0D3 /* StackElementView.swift in Sources */,
-				7EF16CB92350C7AF007E0863 /* SafariWhitelistModel.swift in Sources */,
 				7E4CC02D2577DE93005ADBCA /* TextFieldIndicatorView.swift in Sources */,
 				7EEC43252428EFB100F39C33 /* ActivityStatisticsRecord.swift in Sources */,
 				D0CDD56A2344E066000584EF /* DnsFiltersService.swift in Sources */,
@@ -8933,7 +8866,6 @@
 				D067D9AD214693E200ECDE6D /* EmailSignInController.swift in Sources */,
 				7E92753F26C67ABA007B2C80 /* Reusable.swift in Sources */,
 				D0F9116E212FFCD6006DF0D3 /* UIColorUtils.swift in Sources */,
-				7EEF93F32360373F00F5856A /* ListOfRulesModel.swift in Sources */,
 				7E9C0BB925627B5500F1999D /* RateAppController.swift in Sources */,
 				7E4CC0192577DE47005ADBCA /* BugReportController.swift in Sources */,
 				247CB64E2600CD480047974C /* SocialNetworkAuthParametersParser.swift in Sources */,
@@ -8973,7 +8905,6 @@
 				D0CB347B212DD1AB003B650E /* ConfigurationService.swift in Sources */,
 				7E83CA3E234351AC004E2EB8 /* DnsFiltersModel.swift in Sources */,
 				7E15720C22DF4C25007060D7 /* ContentBlockerStateDataSource.swift in Sources */,
-				7E42BBD5235742F00095180D /* SystemBlacklistModel.swift in Sources */,
 				4020A90122C3C864009C188F /* MainNavigationController.swift in Sources */,
 				7EC3318D234738E400229194 /* BottomShadowView.swift in Sources */,
 				7E822C0A2435EDD30015B4D0 /* Constant.swift in Sources */,
@@ -9022,7 +8953,6 @@
 				655A02A31C6B7686000F00D7 /* Reachability.m in Sources */,
 				7ED0B19926C4220900B0CE7B /* PreloadedFilesManager.swift in Sources */,
 				24AD872D260A247B0034D402 /* RadioButton.swift in Sources */,
-				7E5FC206234F8395008E383D /* ListOfRulesTableController.swift in Sources */,
 				7EAA0D8A26CA9B35007208E5 /* SafariGroupFiltersModelsProvider.swift in Sources */,
 				24D9225B2604B28B002F368B /* AppDelegate+UserNotifications.swift in Sources */,
 				D09E2A98254AC0D5002D6BC0 /* Bundle+Utils.swift in Sources */,

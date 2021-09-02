@@ -52,49 +52,6 @@ extension AppDelegate {
     }
     
     /*
-     Presents UserFilterController
-     */
-    func presentUserFilterController(showLaunchScreen: Bool = false, _ model: ListOfRulesModelProtocol?, newRule rule: String?) {
-        guard let tabBar = getMainTabController() else {
-            DDLogError("Tab bar is nil")
-            return
-        }
-        
-        guard let navController = getNavigationController(for: .settingTab) else {
-            DDLogError("Navigation controller is nil")
-            return
-        }
-        
-        if showLaunchScreen, let launchScreen = getLaunchScreen() {
-            window?.rootViewController = launchScreen
-        }
-        
-        guard let mainMenuController = navController.viewControllers.first as? MainMenuController else {
-            DDLogError("Navigation controller first VC is not MainMenuController")
-            return
-        }
-        
-        let userFilterStoryboard = UIStoryboard(name: "UserFilter", bundle: Bundle.main)
-        guard let userFilterController = userFilterStoryboard.instantiateViewController(withIdentifier: "UserFilterController") as? ListOfRulesController else {
-            DDLogError("UserFilter.storyboard doesnt't have UserFilterController")
-            return
-        }
-        userFilterController.model = model
-        userFilterController.newRuleText = rule
-        
-        let filtersStoryboard = UIStoryboard(name: "Filters", bundle: Bundle.main)
-        guard let safariProtectionController = filtersStoryboard.instantiateViewController(withIdentifier: "SafariProtectionController") as? SafariProtectionController else {
-            DDLogError("Filters.storyboard doesnt't have SafariProtectionController")
-            return
-        }
-        safariProtectionController.loadViewIfNeeded()
-        
-        navController.viewControllers = [mainMenuController, safariProtectionController, userFilterController]
-        tabBar.selectedViewController = navController
-        window?.rootViewController = tabBar
-    }
-    
-    /*
      Presents DnsSettingsController
      Returns true on success and false otherwise
      */

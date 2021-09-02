@@ -46,11 +46,7 @@ final class SafariProtectionController: UITableViewController {
     
     private let enabledColor = UIColor.AdGuardColor.lightGreen1
     private let disabledColor = UIColor.AdGuardColor.lightGray3
-    
-    private lazy var blacklistModel: ListOfRulesModelProtocol = {
-        return UserFilterModel(resources: resources, theme: theme, productInfo: productInfo, safariProtection: safariProtection)
-    }()
-    
+   
     private var activeFiltersCount: Int {
         return safariProtection.groups.flatMap { $0.filters }.filter { $0.isEnabled }.count
     }
