@@ -99,7 +99,7 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
     private let resources: AESharedResourcesProtocol
     private let theme: ThemeServiceProtocol
     private let vpnManager: VpnManagerProtocol
-    private let fileShare: FileShareServiceProtocol = FileShareService()
+    //private let fileShare: FileShareServiceProtocol = FileShareService()
     private let domainsConverter: DomainsConverterProtocol = DomainsConverter()
     
     /* Variables */
@@ -122,22 +122,22 @@ class SystemWhitelistModel: ListOfRulesModelProtocol {
     // MARK: - Main functions
     
     func exportList(parentController: UIViewController, sourceView: UIView, sourceRect: CGRect) {
-        fileShare.exportFile(parentController: parentController, sourceView: sourceView, sourceRect: sourceRect, filename: fileName, text: plainText()) { (message) in
-        }
+//        fileShare.exportFile(parentController: parentController, sourceView: sourceView, sourceRect: sourceRect, filename: fileName, text: plainText()) { (message) in
+//        }
     }
     
     func importList(parentController: UIViewController) {
-        fileShare.importFile(parentController: parentController) { [weak self] (text, errorMessage) in
-            guard let strongSelf = self else { return }
-            if errorMessage != nil {
-                ACSSystemUtils.showSimpleAlert(for: parentController, withTitle: nil, message: errorMessage)
-            }
-            else {
-                strongSelf.importDomains(text) { errorMessage in
-                    ACSSystemUtils.showSimpleAlert(for: parentController, withTitle: nil, message: errorMessage)
-                }
-            }
-        }
+//        fileShare.importFile(parentController: parentController) { [weak self] (text, errorMessage) in
+//            guard let strongSelf = self else { return }
+//            if errorMessage != nil {
+//                ACSSystemUtils.showSimpleAlert(for: parentController, withTitle: nil, message: errorMessage)
+//            }
+//            else {
+//                strongSelf.importDomains(text) { errorMessage in
+//                    ACSSystemUtils.showSimpleAlert(for: parentController, withTitle: nil, message: errorMessage)
+//                }
+//            }
+//        }
     }
     
     

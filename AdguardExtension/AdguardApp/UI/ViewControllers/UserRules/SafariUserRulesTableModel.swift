@@ -72,14 +72,16 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
     private let type: SafariUserRuleType
     private let safariProtection: SafariProtectionProtocol
     private let resources: AESharedResourcesProtocol
+    private let fileShareHelper: FileShareHelperProtocol
     private var modelProvider: UserRulesModelsProviderProtocol
     
     // MARK: - Initialization
     
-    init(type: SafariUserRuleType, safariProtection: SafariProtectionProtocol, resources: AESharedResourcesProtocol) {
+    init(type: SafariUserRuleType, safariProtection: SafariProtectionProtocol, resources: AESharedResourcesProtocol, fileShareHelper: FileShareHelperProtocol) {
         self.type = type
         self.safariProtection = safariProtection
         self.resources = resources
+        self.fileShareHelper = fileShareHelper
         self.modelProvider = UserRulesModelsProvider(initialModels: Self.models(safariProtection, type))
     }
     
@@ -119,12 +121,14 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
     func turn(rules: [String], for indexPaths: [IndexPath], on: Bool) {
         safariProtection.turnRules(rules, on: on, for: type, onCbReloaded: nil)
         modelProvider = UserRulesModelsProvider(initialModels: Self.models(safariProtection, type))
+        modelProvider.searchString = searchString
         delegate?.rulesChanged(at: indexPaths)
     }
     
     func remove(rules: [String], for indexPaths: [IndexPath]) {
         safariProtection.removeRules(rules, for: type, onCbReloaded: nil)
         modelProvider = UserRulesModelsProvider(initialModels: Self.models(safariProtection, type))
+        modelProvider.searchString = searchString
         delegate?.rulesRemoved(at: indexPaths)
     }
     
@@ -136,8 +140,39 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
         modelProvider.deselectAll()
     }
     
+    func exportFile(for vc: UIViewController) {
+        let rulesText = safariProtection.rulesString(for: type)
+        fileShareHelper.exportFile(for: vc, filename: type.filename, text: rulesText)
+    }
+    
+    func importFile(for vc: UIViewController, _ completion: @escaping (Error?) -> Void) {
+        fileShareHelper.importFile(for: vc) { result in
+            DispatchQueue.asyncSafeMain { [weak self] in
+                switch result {
+                case .success(let text):
+                    self?.addNewRulesAfterImport(text, completion)
+                case .failure(let error):
+                    completion(error)
+                }
+            }
+        }
+    }
+    
     // MARK: - Private methods
         
+    private func addNewRulesAfterImport(_ rulesText: String, _ completion: @escaping (Error?) -> Void) {
+        let rules = rulesText.split(separator: "\n").map { UserRule(ruleText: String($0), isEnabled: true) }
+        do {
+            try safariProtection.add(rules: rules, for: type, override: true, onCbReloaded: nil)
+            modelProvider = UserRulesModelsProvider(initialModels: Self.models(safariProtection, type))
+            completion(nil)
+        }
+        catch {
+            completion(error)
+        }
+        delegate?.rulesChanged()
+    }
+    
     private static func models(_ safariProtection: SafariProtectionProtocol, _ type: SafariUserRuleType) -> [UserRuleCellModel] {
         let rules = safariProtection.allRules(for: type)
         return rules.map {
@@ -176,6 +211,14 @@ fileprivate extension SafariUserRuleType {
         switch self {
         case .blocklist: return UIImage(named: "user")
         case .allowlist, .invertedAllowlist: return UIImage(named: "thumbsup")
+        }
+    }
+    
+    var filename: String {
+        switch self {
+        case .blocklist: return "blocklist.txt"
+        case .allowlist: return "allowlist.txt"
+        case .invertedAllowlist: return "inverted_allowlist.txt"
         }
     }
 }

@@ -99,7 +99,7 @@ class SafariWhitelistModel: ListOfRulesModelProtocol {
     /* Services */
     private let resources: AESharedResourcesProtocol
     private let theme: ThemeServiceProtocol
-    private let fileShare: FileShareServiceProtocol = FileShareService()
+    //private let fileShare: FileShareServiceProtocol = FileShareService()//
     private let safariProtection: SafariProtectionProtocol
     
     /* Variables */
@@ -127,22 +127,22 @@ class SafariWhitelistModel: ListOfRulesModelProtocol {
     func exportList(parentController: UIViewController, sourceView: UIView, sourceRect: CGRect){
         let fileName = "adguard_whitelist.txt"
 
-        fileShare.exportFile(parentController: parentController, sourceView: sourceView, sourceRect: sourceRect, filename: fileName, text: plainText()) { (message) in
-        }
+//        fileShare.exportFile(parentController: parentController, sourceView: sourceView, sourceRect: sourceRect, filename: fileName, text: plainText()) { (message) in
+//        }
     }
     
     func importList(parentController: UIViewController){
-        fileShare.importFile(parentController: parentController) { [weak self] (text, errorMessage) in
-            guard let self = self else { return }
-            if errorMessage != nil {
-                ACSSystemUtils.showSimpleAlert(for: parentController, withTitle: nil, message: errorMessage)
-            }
-            else {
-                self.importRules(text) { errorMessage in
-                    ACSSystemUtils.showSimpleAlert(for: parentController, withTitle: nil, message: errorMessage)
-                }
-            }
-        }
+//        fileShare.importFile(parentController: parentController) { [weak self] (text, errorMessage) in
+//            guard let self = self else { return }
+//            if errorMessage != nil {
+//                ACSSystemUtils.showSimpleAlert(for: parentController, withTitle: nil, message: errorMessage)
+//            }
+//            else {
+//                self.importRules(text) { errorMessage in
+//                    ACSSystemUtils.showSimpleAlert(for: parentController, withTitle: nil, message: errorMessage)
+//                }
+//            }
+//        }
     }
     
     /**

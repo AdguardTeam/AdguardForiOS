@@ -98,7 +98,6 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
     /* Services */
     private let resources: AESharedResourcesProtocol
     private let theme: ThemeServiceProtocol
-    private let fileShare: FileShareServiceProtocol = FileShareService()
     private let safariProtection: SafariProtectionProtocol
     
     /* Variables */
@@ -124,22 +123,22 @@ class InvertedSafariWhitelistModel: ListOfRulesModelProtocol {
         
         let fileName = "adguard_inverted_whitelist.txt"
         
-        fileShare.exportFile(parentController: parentController, sourceView: sourceView, sourceRect: sourceRect, filename: fileName, text: plainText()) { (message) in
-        }
+//        fileShare.exportFile(parentController: parentController, sourceView: sourceView, sourceRect: sourceRect, filename: fileName, text: plainText()) { (message) in
+//        }
     }
     
     func importList(parentController: UIViewController) {
-        fileShare.importFile(parentController: parentController) { [weak self] (text, errorMessage) in
-            guard let strongSelf = self else { return }
-            if errorMessage != nil {
-                ACSSystemUtils.showSimpleAlert(for: parentController, withTitle: nil, message: errorMessage)
-            }
-            else {
-                strongSelf.importRules(text) { errorMessage in
-                    ACSSystemUtils.showSimpleAlert(for: parentController, withTitle: nil, message: errorMessage)
-                }
-            }
-        }
+//        fileShare.importFile(parentController: parentController) { [weak self] (text, errorMessage) in
+//            guard let strongSelf = self else { return }
+//            if errorMessage != nil {
+//                ACSSystemUtils.showSimpleAlert(for: parentController, withTitle: nil, message: errorMessage)
+//            }
+//            else {
+//                strongSelf.importRules(text) { errorMessage in
+//                    ACSSystemUtils.showSimpleAlert(for: parentController, withTitle: nil, message: errorMessage)
+//                }
+//            }
+//        }
     }
     
     /**

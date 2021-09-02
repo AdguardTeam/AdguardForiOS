@@ -40,4 +40,7 @@ protocol UserRulesTableModelProtocol: UserRuleTableViewCellDelegate, AddRuleCont
     func turn(rules: [String], for indexPaths: [IndexPath], on: Bool)
     func setRule(_ rule: String, selected: Bool)
     func deselectAll()
+    
+    func exportFile(for vc: UIViewController)
+    func importFile(for vc: UIViewController, _ completion: @escaping (Error?) -> Void)
 }

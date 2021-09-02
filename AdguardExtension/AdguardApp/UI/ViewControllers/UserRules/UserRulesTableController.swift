@@ -51,6 +51,7 @@ final class UserRulesTableController: UIViewController {
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     private let sharedResources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
+    private let fileShareHelper = FileShareHelper()
     private var model: UserRulesTableModelProtocol!
     
     // MARK: - ViewController lifecycle
@@ -126,11 +127,11 @@ final class UserRulesTableController: UIViewController {
     private func setupTableView() {
         switch rulesType {
         case .blocklist:
-            model = SafariUserRulesTableModel(type: .blocklist, safariProtection: safariProtection, resources: sharedResources)
+            model = SafariUserRulesTableModel(type: .blocklist, safariProtection: safariProtection, resources: sharedResources, fileShareHelper: fileShareHelper)
         case .allowlist:
-            model = SafariUserRulesTableModel(type: .allowlist, safariProtection: safariProtection, resources: sharedResources)
+            model = SafariUserRulesTableModel(type: .allowlist, safariProtection: safariProtection, resources: sharedResources, fileShareHelper: fileShareHelper)
         case .invertedAllowlist:
-            model = SafariUserRulesTableModel(type: .invertedAllowlist, safariProtection: safariProtection, resources: sharedResources)
+            model = SafariUserRulesTableModel(type: .invertedAllowlist, safariProtection: safariProtection, resources: sharedResources, fileShareHelper: fileShareHelper)
         case .dnsBlocklist:
             return
         case .dnsAllowlist:
@@ -202,11 +203,15 @@ final class UserRulesTableController: UIViewController {
     }
     
     private func importRules() {
-        
+        model.importFile(for: self) { [weak self] error in
+            if error != nil {
+                self?.showUnknownErrorAlert()
+            }
+        }
     }
     
     private func exportRules() {
-        
+        model.exportFile(for: self)
     }
     
     private func presentAddRuleController() {

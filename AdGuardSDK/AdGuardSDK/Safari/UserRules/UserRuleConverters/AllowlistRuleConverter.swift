@@ -70,6 +70,6 @@ struct AllowlistRuleConverter: UserRuleConverterProtocol {
      */
     func convertRulesToString(_ rules: [UserRule]) -> String {
         return rules.map { convertDomainToRule($0.ruleText) }
-                    .joined(separator: "/n")
+                    .joined(separator: "\n")
     }
 }
