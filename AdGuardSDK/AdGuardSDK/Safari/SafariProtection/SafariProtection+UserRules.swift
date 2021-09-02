@@ -67,7 +67,11 @@ public protocol SafariProtectionUserRulesProtocol {
     func modifyRule(_ oldRuleText: String, _ newRule: UserRule, for type: SafariUserRuleType, onCbReloaded: ((Error?) -> Void)?) throws
     
     /**
-     TODO
+     Enables or disables passed rules and reloads CBs than
+     - Parameter rules: Rules that should change their state
+     - Parameter on: New state of rules
+     - Parameter type: User rule type (blocklist / allowlist / inverted allowlist) to modify rule for
+     - Parameter onCbReloaded: Closure to handle errors when reloading Content Blockers
      */
     func turnRules(_ rules: [String], on: Bool, for type: SafariUserRuleType, onCbReloaded: ((Error?) -> Void)?)
     
@@ -80,7 +84,10 @@ public protocol SafariProtectionUserRulesProtocol {
     func removeRule(withText ruleText: String, for type: SafariUserRuleType, onCbReloaded: ((Error?) -> Void)?) throws
     
     /**
-     TODO
+     Removes passed rules and reloads CBs than
+     - Parameter rules: Rules that should be removed
+     - Parameter type: User rule type (blocklist / allowlist / inverted allowlist) to modify rule for
+     - Parameter onCbReloaded: Closure to handle errors when reloading Content Blockers
      */
     func removeRules(_ rules: [String], for type: SafariUserRuleType, onCbReloaded: ((Error?) -> Void)?)
     

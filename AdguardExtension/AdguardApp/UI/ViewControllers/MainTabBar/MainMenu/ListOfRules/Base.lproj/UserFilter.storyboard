@@ -578,6 +578,7 @@
                     <connections>
                         <outlet property="buttonsStackView" destination="cJe-ga-r0R" id="QfY-XG-vRC"/>
                         <outlet property="cancelButton" destination="UGP-Xr-H1p" id="n4d-0V-QY6"/>
+                        <outlet property="cancelFromSearchButton" destination="bUj-fV-M1b" id="jXh-jY-j6B"/>
                         <outlet property="deleteButton" destination="WEk-KB-xeG" id="xrn-lx-ly5"/>
                         <outlet property="disableButton" destination="VSR-Wf-7c8" id="aNl-bM-fl8"/>
                         <outlet property="editButton" destination="62v-mE-Bld" id="hxs-av-VkG"/>
@@ -588,6 +589,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ivZ-tf-xj3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <barButtonItem style="plain" systemItem="cancel" id="bUj-fV-M1b">
+                    <connections>
+                        <action selector="cancelFromSearchTapped:" destination="eSV-Hx-Rg2" id="87g-Zp-WK4"/>
+                    </connections>
+                </barButtonItem>
                 <barButtonItem style="plain" systemItem="search" id="Bwi-cN-sBK">
                     <connections>
                         <action selector="searchButtonTapped:" destination="eSV-Hx-Rg2" id="385-f0-faT"/>

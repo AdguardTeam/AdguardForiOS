@@ -32,12 +32,19 @@ final class UserRulesTableController: UIViewController {
     @IBOutlet weak var stackViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet var searchButton: UIBarButtonItem!
     @IBOutlet var editButton: UIBarButtonItem!
+    @IBOutlet var cancelFromSearchButton: UIBarButtonItem!
     
     // MARK: - Internal properties
     
     var rulesType: UserRuleType = .blocklist
     
     // MARK: - Private properties
+    
+    /* Headers */
+    private lazy var titleHeader: ExtendedTitleTableHeaderView = {
+        ExtendedTitleTableHeaderView(title: model.title, htmlDescription: model.description)
+    }()
+    private let searchHeader = AGSearchView()
     
     /* Services */
     private var themeObserver: NotificationToken?
@@ -54,6 +61,7 @@ final class UserRulesTableController: UIViewController {
         setupTableView()
         setupBackButton()
         updateTheme()
+        searchHeader.delegate = self
         themeObserver = NotificationCenter.default.observe(name: .themeChanged, object: nil, queue: .main) { [weak self] _ in
             self?.updateTheme()
         }
@@ -98,10 +106,19 @@ final class UserRulesTableController: UIViewController {
     }
     
     @IBAction func searchButtonTapped(_ sender: UIBarButtonItem) {
+        goToSearchMode()
     }
     
     @IBAction func editButtonTapped(_ sender: UIBarButtonItem) {
-        presentAlert()
+        if model.isSearching {
+            select()
+        } else {
+            presentAlert()
+        }
+    }
+    
+    @IBAction func cancelFromSearchTapped(_ sender: UIBarButtonItem) {
+        goToNormalMode()
     }
     
     // MARK: - Private methods
@@ -124,7 +141,7 @@ final class UserRulesTableController: UIViewController {
         tableView.backgroundColor = .clear
         tableView.allowsSelection = true
         tableView.allowsMultipleSelection = true
-        tableView.tableHeaderView = ExtendedTitleTableHeaderView(title: model.title, htmlDescription: model.description)
+        tableView.tableHeaderView = titleHeader
         tableView.delegate = self
         tableView.dataSource = self
         tableView.sectionHeaderHeight = UITableView.automaticDimension
@@ -229,6 +246,15 @@ final class UserRulesTableController: UIViewController {
         present(controller, animated: true)
     }
     
+    private func goToSearchMode() {
+        model.isSearching = true
+        navigationItem.rightBarButtonItems = model.isEditing ? [cancelFromSearchButton] : [cancelFromSearchButton, editButton]
+        tableView.tableHeaderView = searchHeader
+        searchHeader.textField.becomeFirstResponder()
+        searchHeader.textField.borderState = .enabled
+        tableView.reloadWithSelectedRows()
+    }
+    
     private func goToEditingMode() {
         model.isEditing = true
         buttonsStackView.isHidden = false
@@ -237,12 +263,17 @@ final class UserRulesTableController: UIViewController {
             stackViewHeightConstraint.constant = 40.0
             view.layoutIfNeeded()
         }
-        navigationItem.rightBarButtonItems = [searchButton]
-        tableView.reloadSections([0], with: .automatic)
+        navigationItem.rightBarButtonItems = model.isSearching ? [cancelFromSearchButton] : [cancelFromSearchButton, searchButton]
+        tableView.reloadWithSelectedRows()
     }
     
     private func goToNormalMode() {
         model.isEditing = false
+        model.isSearching = false
+        searchHeader.textField.text = nil
+        model.searchString = nil
+        model.deselectAll()
+        
         UIView.animate(withDuration: 0.2) { [unowned self] in
             buttonsStackView.alpha = 0.0
             stackViewHeightConstraint.constant = 0.0
@@ -251,11 +282,13 @@ final class UserRulesTableController: UIViewController {
             buttonsStackView.isHidden = true
         }
         navigationItem.rightBarButtonItems = [editButton, searchButton]
-        tableView.reloadSections([0], with: .automatic)
+        tableView.reloadData()
+        tableView.tableHeaderView = titleHeader
+        view.endEditing(true)
     }
     
     private func model(for row: Int) -> UserRuleCellModel {
-        if model.isEditing {
+        if model.isEditing || model.isSearching {
             return model.rulesModels[row]
         } else {
             return model.rulesModels[row - 1]
@@ -283,11 +316,11 @@ extension UserRulesTableController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.isEditing ? model.rulesModels.count : model.rulesModels.count + 1
+        return model.isEditing || model.isSearching ? model.rulesModels.count : model.rulesModels.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 && !model.isEditing {
+        if indexPath.row == 0 && !model.isEditing && !model.isSearching {
             let cell = AddTableViewCell.getCell(forTableView: tableView)
             cell.addTitle = String.localizedString("add_new_rule")
             cell.updateTheme(themeService)
@@ -306,27 +339,25 @@ extension UserRulesTableController: UITableViewDataSource {
 
 extension UserRulesTableController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        if model.isEditing, let cell = tableView.cellForRow(at: indexPath) {
+        if model.isEditing, let cell = tableView.cellForRow(at: indexPath) as? UserRuleTableViewCell {
+            model.setRule(cell.model.rule, selected: true)
+            cell.model.isSelected = true
             cell.setSelected(true, animated: false)
         }
         return indexPath
     }
     
     func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
-        if model.isEditing, let cell = tableView.cellForRow(at: indexPath) {
+        if model.isEditing, let cell = tableView.cellForRow(at: indexPath) as? UserRuleTableViewCell {
+            model.setRule(cell.model.rule, selected: false)
+            cell.model.isSelected = false
             cell.setSelected(false, animated: false)
         }
         return indexPath
     }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if model.isEditing, let cell = tableView.cellForRow(at: indexPath) {
-            cell.setSelected(false, animated: false)
-        }
-    }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 && !model.isEditing {
+        if indexPath.row == 0 && !model.isEditing && !model.isSearching {
             presentAddRuleController()
             tableView.deselectRow(at: indexPath, animated: true)
             return
@@ -344,6 +375,10 @@ extension UserRulesTableController: UITableViewDelegate {
 // MARK: - UserRulesTableController + UserRulesTableModelDelegate
 
 extension UserRulesTableController: UserRulesTableModelDelegate {
+    func rulesChanged() {
+        tableView.reloadWithSelectedRows()
+    }
+    
     func rulesChanged(at indexPaths: [IndexPath]) {
         tableView.reloadRows(at: indexPaths, with: .automatic)
     }
@@ -372,7 +407,15 @@ extension UserRulesTableController: ThemableProtocol {
         disableButton.tintColor = themeService.grayTextColor
         cancelButton.setTitleColor(themeService.lightGrayTextColor, for: .normal)
         cancelButton.tintColor = themeService.lightGrayTextColor
-        tableView.reloadData()
+        tableView.reloadWithSelectedRows()
+    }
+}
+
+// MARK: - UserRulesTableController + AGSearchViewDelegate
+
+extension UserRulesTableController: AGSearchViewDelegate {
+    func textChanged(to newText: String) {
+        model.searchString = newText
     }
 }
 
@@ -384,5 +427,19 @@ extension UserRulesTableController: IdentifiableObjectDelegate {
             return
         }
         model.isEnabled = changedModel.isEnabled
+    }
+}
+
+// MARK: - UITableView + Helper method
+
+fileprivate extension UITableView {
+    func reloadWithSelectedRows() {
+        guard let paths = indexPathsForSelectedRows, !paths.isEmpty else {
+            reloadData()
+            return
+        }
+        
+        reloadData()
+        paths.forEach { selectRow(at: $0, animated: false, scrollPosition: .none) }
     }
 }

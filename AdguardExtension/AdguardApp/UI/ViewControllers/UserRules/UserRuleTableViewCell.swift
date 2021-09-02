@@ -23,10 +23,20 @@ protocol UserRuleTableViewCellDelegate: AnyObject {
 }
 
 struct UserRuleCellModel {
-    var rule: String
+    var ruleAttrString: NSAttributedString
+    var rule: String { ruleAttrString.string }
     var isEnabled: Bool
     var isSelected: Bool
     var isEditing: Bool
+}
+
+extension UserRuleCellModel {
+    init(rule: String, isEnabled: Bool, isSelected: Bool, isEditing: Bool) {
+        self.ruleAttrString = rule.clearAttrString
+        self.isEnabled = isEnabled
+        self.isSelected = isSelected
+        self.isEditing = isEditing
+    }
 }
 
 final class UserRuleTableViewCell: UITableViewCell, Reusable {
@@ -35,7 +45,7 @@ final class UserRuleTableViewCell: UITableViewCell, Reusable {
     var model: UserRuleCellModel! {
         didSet {
             stateButton.isSelected = model.isEditing ? model.isSelected : model.isEnabled
-            ruleLabel.text = model.rule
+            ruleLabel.attributedText = model.ruleAttrString
             
             stateButton.setImage(UIImage(named: model.isEditing ? "box_normal" : "check-off"), for: .normal)
             stateButton.setImage(UIImage(named: model.isEditing ? "box_selected" : "check-on"), for: .selected)
@@ -73,7 +83,6 @@ final class UserRuleTableViewCell: UITableViewCell, Reusable {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        model.isSelected = isSelected
     }
     
     private func setupUI() {
@@ -106,6 +115,6 @@ final class UserRuleTableViewCell: UITableViewCell, Reusable {
         let newState = !sender.isSelected
         sender.isSelected = newState
         model.isEnabled = newState
-        delegate?.ruleStateChanged(model.rule, newState: newState)
+        delegate?.ruleStateChanged(model.ruleAttrString.string, newState: newState)
     }
 }

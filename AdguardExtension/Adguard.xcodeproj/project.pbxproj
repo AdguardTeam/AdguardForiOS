@@ -511,6 +511,8 @@
 		7E4D205F22D71B5B003B0E75 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4D205D22D71B2A003B0E75 /* libiconv.tbd */; };
 		7E4E411D24D80D5200250D15 /* SupportTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4E411C24D80D5200250D15 /* SupportTableViewController.swift */; };
 		7E4E411E24D80D5200250D15 /* SupportTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4E411C24D80D5200250D15 /* SupportTableViewController.swift */; };
+		7E4EFB0D26DFE6DE00116762 /* UserRulesModelsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4EFB0C26DFE6DD00116762 /* UserRulesModelsProvider.swift */; };
+		7E4EFB0E26DFE6DE00116762 /* UserRulesModelsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4EFB0C26DFE6DD00116762 /* UserRulesModelsProvider.swift */; };
 		7E4FEA7E259B348F008CF061 /* DnsResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED595D8259B263C00608222 /* DnsResolver.swift */; };
 		7E4FEA91259B3933008CF061 /* DnsResolverTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4FEA90259B3933008CF061 /* DnsResolverTest.swift */; };
 		7E50493022F07C4E0095181C /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E50492F22F07C4E0095181C /* UIView+Utils.swift */; };
@@ -3328,6 +3330,7 @@
 		7E4D205A22D71AE8003B0E75 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		7E4D205D22D71B2A003B0E75 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		7E4E411C24D80D5200250D15 /* SupportTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportTableViewController.swift; sourceTree = "<group>"; };
+		7E4EFB0C26DFE6DD00116762 /* UserRulesModelsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRulesModelsProvider.swift; sourceTree = "<group>"; };
 		7E4FEA90259B3933008CF061 /* DnsResolverTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsResolverTest.swift; sourceTree = "<group>"; };
 		7E50492F22F07C4E0095181C /* UIView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Utils.swift"; sourceTree = "<group>"; };
 		7E50493222F07FFA0095181C /* FilterTagsButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTagsButtons.swift; sourceTree = "<group>"; };
@@ -6049,6 +6052,7 @@
 				7E70266226DD29A500F8FC25 /* UserRulesTableModelProtocol.swift */,
 				7E70265F26DD28C600F8FC25 /* SafariUserRulesTableModel.swift */,
 				7E70266826DE462D00F8FC25 /* UserRuleTableViewCell.swift */,
+				7E4EFB0C26DFE6DD00116762 /* UserRulesModelsProvider.swift */,
 			);
 			path = UserRules;
 			sourceTree = "<group>";
@@ -8384,6 +8388,7 @@
 				D0B545BB2435D655002F0AEC /* RequestDetailsCell.swift in Sources */,
 				D0B545D02435D692002F0AEC /* RuleInfo.swift in Sources */,
 				7E92754326C67CA6007B2C80 /* SafariGroupTableController.swift in Sources */,
+				7E4EFB0E26DFE6DE00116762 /* UserRulesModelsProvider.swift in Sources */,
 				D031A124219EFC99002C17D9 /* DDContextFilterLogFormatter.m in Sources */,
 				D0B545E52435D69B002F0AEC /* NetworkSettingsCells.swift in Sources */,
 				D0B545AE2435D646002F0AEC /* NewCustomFilterDetailsController.swift in Sources */,
@@ -8820,6 +8825,7 @@
 				7EF5C56F26C26D3A001851D6 /* UserNotificationService.swift in Sources */,
 				7E5FC201234F71F0008E383D /* ListOfRulesCells.swift in Sources */,
 				D00E43F12562A484002DDE98 /* ImportSettingsController.swift in Sources */,
+				7E4EFB0D26DFE6DE00116762 /* UserRulesModelsProvider.swift in Sources */,
 				7E822C0B2435EDD30015B4D0 /* DomainParser.swift in Sources */,
 				7E74FCB0239F9C96006C0990 /* MainPageModel.swift in Sources */,
 				7EF6AF87233D11B000D29B36 /* RequestsBlockingController.swift in Sources */,

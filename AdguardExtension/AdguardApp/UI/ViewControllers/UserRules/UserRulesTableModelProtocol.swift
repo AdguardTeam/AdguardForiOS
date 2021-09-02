@@ -19,6 +19,7 @@
 import UIKit
 
 protocol UserRulesTableModelDelegate: AnyObject {
+    func rulesChanged()
     func ruleSuccessfullyAdded()
     func rulesChanged(at indexPaths: [IndexPath])
     func rulesRemoved(at indexPaths: [IndexPath])
@@ -30,9 +31,13 @@ protocol UserRulesTableModelProtocol: UserRuleTableViewCellDelegate, AddRuleCont
     var description: String { get }
     var isEnabled: Bool { get set }
     var isEditing: Bool { get set }
+    var isSearching: Bool { get set }
     var rulesModels: [UserRuleCellModel] { get }
     var icon: UIImage? { get }
+    var searchString: String? { get set }
     
     func remove(rules: [String], for indexPaths: [IndexPath])
     func turn(rules: [String], for indexPaths: [IndexPath], on: Bool)
+    func setRule(_ rule: String, selected: Bool)
+    func deselectAll()
 }

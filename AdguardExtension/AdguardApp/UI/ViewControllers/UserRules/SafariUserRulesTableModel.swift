@@ -50,21 +50,29 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
     var isEditing: Bool = false {
         didSet {
             guard isEditing != oldValue else { return }
-            for i in 0..<rulesModels.count {
-                rulesModels[i].isEditing = isEditing
-            }
+            modelProvider.setEditing(isEditing)
         }
     }
     
+    var isSearching: Bool = false
+    
     var icon: UIImage? { type.icon }
     
-    var rulesModels: [UserRuleCellModel]
+    var searchString: String? {
+        didSet {
+            modelProvider.searchString = searchString
+            delegate?.rulesChanged()
+        }
+    }
+    
+    var rulesModels: [UserRuleCellModel] { modelProvider.rules }
     
     // MARK: - Private properties
     
     private let type: SafariUserRuleType
     private let safariProtection: SafariProtectionProtocol
     private let resources: AESharedResourcesProtocol
+    private var modelProvider: UserRulesModelsProviderProtocol
     
     // MARK: - Initialization
     
@@ -72,7 +80,7 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
         self.type = type
         self.safariProtection = safariProtection
         self.resources = resources
-        self.rulesModels = Self.reinit(safariProtection, type)
+        self.modelProvider = UserRulesModelsProvider(initialModels: Self.models(safariProtection, type))
     }
     
     // MARK: - Internal methods
@@ -81,7 +89,7 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
         let rule = UserRule(ruleText: ruleText, isEnabled: true)
         try safariProtection.add(rule: rule, for: type, override: false, onCbReloaded: nil)
         let model = UserRuleCellModel(rule: ruleText, isEnabled: true, isSelected: false, isEditing: isEditing)
-        rulesModels.append(model)
+        modelProvider.addRuleModel(model)
         delegate?.ruleSuccessfullyAdded()
     }
     
@@ -89,9 +97,7 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
         do {
             let newRule = UserRule(ruleText: rule, isEnabled: newState)
             try safariProtection.modifyRule(rule, newRule, for: type, onCbReloaded: nil)
-            if let modifiedRuleIndex = rulesModels.firstIndex(where: { $0.rule == rule }) {
-                rulesModels[modifiedRuleIndex].isEnabled = newRule.isEnabled
-            }
+            modelProvider.modifyRule(rule, newRule: newRule)
         }
         catch {
             DDLogError("(SafariUserRulesTableModel) - ruleStateChanged; Error: \(error)")
@@ -100,36 +106,39 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
     
     func removeRule(_ ruleText: String, at indexPath: IndexPath) throws {
         try safariProtection.removeRule(withText: ruleText, for: type, onCbReloaded: nil)
-        if let removedRuleIndex = rulesModels.firstIndex(where: { $0.rule == ruleText }) {
-            rulesModels.remove(at: removedRuleIndex)
-        }
+        modelProvider.removeRule(ruleText)
         delegate?.rulesRemoved(at: [indexPath])
     }
     
     func modifyRule(_ oldRuleText: String, newRule: UserRule, at indexPath: IndexPath) throws {
         try safariProtection.modifyRule(oldRuleText, newRule, for: type, onCbReloaded: nil)
-        if let modifiedRuleIndex = rulesModels.firstIndex(where: { $0.rule == oldRuleText }) {
-            rulesModels[modifiedRuleIndex].rule = newRule.ruleText
-            rulesModels[modifiedRuleIndex].isEnabled = newRule.isEnabled
-        }
+        modelProvider.modifyRule(oldRuleText, newRule: newRule)
         delegate?.rulesChanged(at: [indexPath])
     }
     
     func turn(rules: [String], for indexPaths: [IndexPath], on: Bool) {
         safariProtection.turnRules(rules, on: on, for: type, onCbReloaded: nil)
-        self.rulesModels = Self.reinit(safariProtection, type)
+        modelProvider = UserRulesModelsProvider(initialModels: Self.models(safariProtection, type))
         delegate?.rulesChanged(at: indexPaths)
     }
     
     func remove(rules: [String], for indexPaths: [IndexPath]) {
         safariProtection.removeRules(rules, for: type, onCbReloaded: nil)
-        self.rulesModels = Self.reinit(safariProtection, type)
+        modelProvider = UserRulesModelsProvider(initialModels: Self.models(safariProtection, type))
         delegate?.rulesRemoved(at: indexPaths)
     }
     
-    // MARK: - Private methods
+    func setRule(_ rule: String, selected: Bool) {
+        modelProvider.setRule(rule, selected: selected)
+    }
     
-    private static func reinit(_ safariProtection: SafariProtectionProtocol, _ type: SafariUserRuleType) -> [UserRuleCellModel] {
+    func deselectAll() {
+        modelProvider.deselectAll()
+    }
+    
+    // MARK: - Private methods
+        
+    private static func models(_ safariProtection: SafariProtectionProtocol, _ type: SafariUserRuleType) -> [UserRuleCellModel] {
         let rules = safariProtection.allRules(for: type)
         return rules.map {
             UserRuleCellModel(rule: $0.ruleText, isEnabled: $0.isEnabled, isSelected: false, isEditing: false)
