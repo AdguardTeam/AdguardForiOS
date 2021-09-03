@@ -17,17 +17,24 @@ struct FilterFileContent: Equatable {
 
 // MARK: - ContentBlockerConverterWrapper
 
-/*
+/**
  This converter is a wrapper for ContentBlockerConverter responsible for converting rules to JSON files
  We use it in order to be able to test code in FiltersConverter
- cbType is used to differ conversion results because ConversionResult init is inaccessible
+ `cbType` is used to differ conversion results because `ConversionResult` init is inaccessible
  */
+// TODO: - Remove cbType when ConversionResult is accessible
 protocol ContentBlockerConverterProtocol {
-    func convertArray(rules: [String], safariVersion: SafariVersion, optimize: Bool, advancedBlocking: Bool) -> ConversionResult?
+    func convertArray(
+        rules: [String],
+        safariVersion: SafariVersion,
+        optimize: Bool,
+        advancedBlocking: Bool,
+        cbType: ContentBlockerType
+    ) -> ConversionResult?
 }
 
 final class ContentBlockerConverterWrapper: ContentBlockerConverterProtocol {
-    func convertArray(rules: [String], safariVersion: SafariVersion, optimize: Bool, advancedBlocking: Bool) -> ConversionResult? {
+    func convertArray(rules: [String], safariVersion: SafariVersion, optimize: Bool, advancedBlocking: Bool, cbType: ContentBlockerType) -> ConversionResult? {
         let converter = ContentBlockerConverter()
         let result = converter.convertArray(rules: rules, safariVersion: safariVersion, optimize: optimize, advancedBlocking: advancedBlocking)
         return result
@@ -150,7 +157,14 @@ struct FiltersConverter: FiltersConverterProtocol {
         var resultFilters: [Result] = []
         let safariVersion = SafariVersion(rawValue: configuration.iosVersion) ?? .safari15
         for (cbType, rules) in filters {
-            guard let result = converter.convertArray(rules: rules, safariVersion: safariVersion, optimize: false, advancedBlocking: configuration.advancedBlockingIsEnabled) else {
+            guard let result = converter.convertArray(
+                rules: rules,
+                safariVersion: safariVersion,
+                optimize: false,
+                advancedBlocking: configuration.advancedBlockingIsEnabled,
+                cbType: cbType
+            )
+            else {
                 Logger.logError("FiltersConverter error - can not convert filter with type: \(cbType)")
                 continue
             }

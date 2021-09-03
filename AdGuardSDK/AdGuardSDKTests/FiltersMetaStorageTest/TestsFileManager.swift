@@ -10,8 +10,8 @@ final class TestsFileManager {
     static let adguardDbFileWorkingUrl = workingUrl.appendingPathComponent(adguardDbFileName)
     static let defaultDbFileWorkingUrl = workingUrl.appendingPathComponent(defaultDbFileName)
     
-    static let defaultDbFileName = Constants.Files.defaultDb
-    static let defaultDbArchiveFileName = "\(Constants.Files.defaultDb).zip"
+    static let defaultDbFileName = Constants.Files.defaultDbFileName
+    static let defaultDbArchiveFileName = "\(Constants.Files.defaultDbFileName).zip"
     static let adguardDbFileName = "adguard.db"
     
     static func deleteTestFolder() {

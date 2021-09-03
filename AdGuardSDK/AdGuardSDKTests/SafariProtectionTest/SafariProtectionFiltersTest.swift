@@ -48,7 +48,7 @@ class SafariProtectionFiltersTest: XCTestCase {
     func testSetGroupWithSuccess() {
         let expectation = XCTestExpectation()
         
-        safariProtection.setGroup(.ads, enabled: true) { error in
+        try! safariProtection.setGroup(.ads, enabled: true) { error in
             XCTAssertNil(error)
             expectation.fulfill()
         }
@@ -65,7 +65,7 @@ class SafariProtectionFiltersTest: XCTestCase {
         
         let expectation = XCTestExpectation()
         
-        safariProtection.setGroup(.ads, enabled: true) { error in
+        try! safariProtection.setGroup(.ads, enabled: true) { error in
             XCTAssertEqual(error as! MetaStorageMockError, .error)
             expectation.fulfill()
         }
@@ -82,7 +82,7 @@ class SafariProtectionFiltersTest: XCTestCase {
     func testSetFilterWithSuccess() {
         let expectation = XCTestExpectation()
         
-        safariProtection.setFilter(withId: 1, 1, enabled: true) { error in
+        try! safariProtection.setFilter(withId: 1, 1, enabled: true) { error in
             XCTAssertNil(error)
             expectation.fulfill()
         }
@@ -99,7 +99,7 @@ class SafariProtectionFiltersTest: XCTestCase {
         
         let expectation = XCTestExpectation()
         
-        safariProtection.setFilter(withId: 1, 1, enabled: true) { error in
+        try! safariProtection.setFilter(withId: 1, 1, enabled: true) { error in
             XCTAssertEqual(error as! MetaStorageMockError, .error)
             expectation.fulfill()
         }
@@ -130,6 +130,8 @@ class SafariProtectionFiltersTest: XCTestCase {
         safariProtection.add(customFilter: customFilter, enabled: true) { error in
             XCTAssertNil(error)
             expectation.fulfill()
+        } onCbReloaded: { error in
+            
         }
         wait(for: [expectation], timeout: 0.5)
         
@@ -157,6 +159,8 @@ class SafariProtectionFiltersTest: XCTestCase {
         safariProtection.add(customFilter: customFilter, enabled: true) { error in
             XCTAssertEqual(error as! MetaStorageMockError, .error)
             expectation.fulfill()
+        } onCbReloaded: { error in
+            
         }
         wait(for: [expectation], timeout: 0.5)
         
@@ -171,7 +175,7 @@ class SafariProtectionFiltersTest: XCTestCase {
     func testDeleteCustomFilterWithSuccess() {
         let expectation = XCTestExpectation()
         
-        safariProtection.deleteCustomFilter(withId: 1) { error in
+        try! safariProtection.deleteCustomFilter(withId: 1) { error in
             XCTAssertNil(error)
             expectation.fulfill()
         }
@@ -187,7 +191,7 @@ class SafariProtectionFiltersTest: XCTestCase {
         filters.deleteCustomFilterError = MetaStorageMockError.error
         let expectation = XCTestExpectation()
         
-        safariProtection.deleteCustomFilter(withId: 1) { error in
+        try! safariProtection.deleteCustomFilter(withId: 1) { error in
             XCTAssertEqual(error as! MetaStorageMockError, .error)
             expectation.fulfill()
         }
@@ -232,6 +236,8 @@ class SafariProtectionFiltersTest: XCTestCase {
             case .error(_): XCTFail()
             }
             expectation.fulfill()
+        } onCbReloaded: { error in
+            
         }
         wait(for: [expectation], timeout: 0.5)
         
@@ -252,6 +258,8 @@ class SafariProtectionFiltersTest: XCTestCase {
                 XCTAssertEqual(error as! MetaStorageMockError, .error)
             }
             expectation.fulfill()
+        } onCbReloaded: { error in
+            
         }
         wait(for: [expectation], timeout: 0.5)
         
@@ -272,6 +280,8 @@ class SafariProtectionFiltersTest: XCTestCase {
                 XCTAssertEqual(error as! MetaStorageMockError, .error)
             }
             expectation.fulfill()
+        } onCbReloaded: { error in
+            
         }
         wait(for: [expectation], timeout: 0.5)
         
@@ -293,6 +303,8 @@ class SafariProtectionFiltersTest: XCTestCase {
                 XCTAssertEqual(error as! MetaStorageMockError, .setGroupError)
             }
             expectation.fulfill()
+        } onCbReloaded: { error in
+            
         }
         wait(for: [expectation], timeout: 0.5)
         

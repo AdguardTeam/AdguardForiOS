@@ -36,9 +36,9 @@ public enum CustomFilterMetaParserType {
 public protocol CustomFilterMetaParserProtocol {
     /**
      Parses filter's file content and converts content to FilterMetadata object.
-     ~~~
+     ```
      Filter example: https://easylist.to/easylist/easylist.txt
-     ~~~
+     ```
      
      - Parameter filterFileContentString: File content as string
      - Parameter parserType: Parsing can differ for **system** and **safary** filters
@@ -51,6 +51,7 @@ public protocol CustomFilterMetaParserProtocol {
 // MARK: - CustomFilterMetaParserProtocol + default implementation
 
 public extension CustomFilterMetaParserProtocol {
+    // TODO: - Add tests with filterDownloadPage
     func parse(_ filterFileContentString: String, for parserType: CustomFilterMetaParserType, filterDownloadPage: String?) throws -> ExtendedCustomFilterMetaProtocol {
         
         // Check if file's content is valid

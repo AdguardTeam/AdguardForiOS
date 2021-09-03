@@ -58,15 +58,15 @@ class FiltersConverterServiceTest: XCTestCase {
     
     private func getGroups() -> [SafariGroup] {
         var adsGroup = SafariGroup(filters: [], isEnabled: false, groupType: .ads, groupName: "ads", displayNumber: 1)
-        let adsFilter1 = SafariGroup.Filter(name: "adsFilter1", description: nil, isEnabled: true, filterId: 1, version: nil, lastUpdateDate: nil, updateFrequency: nil, group: adsGroup, displayNumber: 1, languages: [], tags: [], homePage: nil, filterDownloadPage: nil, rulesCount: nil)
-        let adsFilter2 = SafariGroup.Filter(name: "adsFilter2", description: nil, isEnabled: false, filterId: 2, version: nil, lastUpdateDate: nil, updateFrequency: nil, group: adsGroup, displayNumber: 2, languages: [], tags: [], homePage: nil, filterDownloadPage: nil, rulesCount: nil)
+        let adsFilter1 = SafariGroup.Filter(name: "adsFilter1", description: nil, isEnabled: true, filterId: 1, version: nil, lastUpdateDate: nil, updateFrequency: nil, group: adsGroup, displayNumber: 1, languages: [], tags: [], homePage: nil, filterDownloadPage: nil, rulesCount: 10)
+        let adsFilter2 = SafariGroup.Filter(name: "adsFilter2", description: nil, isEnabled: false, filterId: 2, version: nil, lastUpdateDate: nil, updateFrequency: nil, group: adsGroup, displayNumber: 2, languages: [], tags: [], homePage: nil, filterDownloadPage: nil, rulesCount: 20)
         adsGroup.filters = [adsFilter1, adsFilter2]
         
         
         var socialGroup = SafariGroup(filters: [], isEnabled: true, groupType: .socialWidgets, groupName: "social", displayNumber: 2)
-        let socialFilter1 = SafariGroup.Filter(name: "socialFilter1", description: nil, isEnabled: true, filterId: 3, version: nil, lastUpdateDate: nil, updateFrequency: nil, group: socialGroup, displayNumber: 1, languages: [], tags: [], homePage: nil, filterDownloadPage: nil, rulesCount: nil)
-        let socialFilter2 = SafariGroup.Filter(name: "socialFilter2", description: nil, isEnabled: false, filterId: 4, version: nil, lastUpdateDate: nil, updateFrequency: nil, group: socialGroup, displayNumber: 2, languages: [], tags: [], homePage: nil, filterDownloadPage: nil, rulesCount: nil)
-        let socialFilter3 = SafariGroup.Filter(name: "socialFilter3", description: nil, isEnabled: false, filterId: 5, version: nil, lastUpdateDate: nil, updateFrequency: nil, group: socialGroup, displayNumber: 3, languages: [], tags: [], homePage: nil, filterDownloadPage: nil, rulesCount: nil)
+        let socialFilter1 = SafariGroup.Filter(name: "socialFilter1", description: nil, isEnabled: true, filterId: 3, version: nil, lastUpdateDate: nil, updateFrequency: nil, group: socialGroup, displayNumber: 1, languages: [], tags: [], homePage: nil, filterDownloadPage: nil, rulesCount: 10)
+        let socialFilter2 = SafariGroup.Filter(name: "socialFilter2", description: nil, isEnabled: false, filterId: 4, version: nil, lastUpdateDate: nil, updateFrequency: nil, group: socialGroup, displayNumber: 2, languages: [], tags: [], homePage: nil, filterDownloadPage: nil, rulesCount: 20)
+        let socialFilter3 = SafariGroup.Filter(name: "socialFilter3", description: nil, isEnabled: false, filterId: 5, version: nil, lastUpdateDate: nil, updateFrequency: nil, group: socialGroup, displayNumber: 3, languages: [], tags: [], homePage: nil, filterDownloadPage: nil, rulesCount: 30)
         socialGroup.filters = [socialFilter1, socialFilter2, socialFilter3]
         
         return [adsGroup, socialGroup]

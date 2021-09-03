@@ -68,7 +68,7 @@ class SafariProtectionUserRulesTest: XCTestCase {
     private func testAllRules(_ mock: UserRulesManagerMock) {
         mock.allRules = [UserRule(ruleText: "rule_1", isEnabled: true),
                          UserRule(ruleText: "rule_2", isEnabled: false)]
-        XCTAssertEqual(safariProtection.allRules(for: mock.type) as! [UserRule], mock.allRules as! [UserRule])
+        XCTAssertEqual(safariProtection.allRules(for: mock.type), mock.allRules as! [UserRule])
         mock.allRules = []
         XCTAssert(safariProtection.allRules(for: mock.type).isEmpty)
     }
@@ -78,7 +78,7 @@ class SafariProtectionUserRulesTest: XCTestCase {
     func testAddRule() {
         mocks.forEach { mock in
             let method: (_ completion: @escaping (Error?) -> Void) -> Void = { completion in
-                self.safariProtection.add(rule: UserRule(ruleText: "rule"), for: mock.type, override: true) { error in
+                try! self.safariProtection.add(rule: UserRule(ruleText: "rule"), for: mock.type, override: true) { error in
                     completion(error)
                 }
             }
@@ -103,7 +103,7 @@ class SafariProtectionUserRulesTest: XCTestCase {
         mocks.forEach { mock in
             let method: (_ completion: @escaping (Error?) -> Void) -> Void = { completion in
                 let rules = [UserRule(ruleText: "rule1"), UserRule(ruleText: "rule2")]
-                self.safariProtection.add(rules: rules, for: mock.type, override: true) { error in
+                try! self.safariProtection.add(rules: rules, for: mock.type, override: true) { error in
                     completion(error)
                 }
             }
@@ -127,7 +127,7 @@ class SafariProtectionUserRulesTest: XCTestCase {
     func testModifyRule() {
         mocks.forEach { mock in
             let method: (_ completion: @escaping (Error?) -> Void) -> Void = { completion in
-                self.safariProtection.modifyRule("rule", UserRule(ruleText: "rule1"), for: mock.type) { error in
+                try! self.safariProtection.modifyRule("rule", UserRule(ruleText: "rule1"), for: mock.type) { error in
                     completion(error)
                 }
             }
@@ -151,7 +151,7 @@ class SafariProtectionUserRulesTest: XCTestCase {
     func testRemoveRule() {
         mocks.forEach { mock in
             let method: (_ completion: @escaping (Error?) -> Void) -> Void = { completion in
-                self.safariProtection.removeRule(withText: "rule", for: mock.type) { error in
+                try! self.safariProtection.removeRule(withText: "rule", for: mock.type) { error in
                     completion(error)
                 }
             }

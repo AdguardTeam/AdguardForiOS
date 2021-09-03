@@ -19,16 +19,12 @@ final class ContentBlockersManagerMock: ContentBlockersManagerProtocol {
 
 class ContentBlockerServiceTest: XCTestCase {
     
-    var configuration: SafariConfigurationMock!
-    var cbInfoStorage: ContentBlockersInfoStorageMock!
     var manager: ContentBlockersManagerMock!
     var contentBlockerService: ContentBlockerServiceProtocol!
     
     override func setUp() {
-        configuration = SafariConfigurationMock()
-        cbInfoStorage = ContentBlockersInfoStorageMock()
         manager = ContentBlockersManagerMock()
-        contentBlockerService = ContentBlockerService(configuration: configuration, jsonStorage: cbInfoStorage, contentBlockersManager: manager)
+        contentBlockerService = ContentBlockerService(appBundleId: "", contentBlockersManager: manager)
     }
     
     func testAllContentBlockersStatesWithSuccess() {

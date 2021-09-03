@@ -8,7 +8,7 @@ class CustomFilterMetaParserTest: XCTestCase {
     
     func testEasyListFilter() {
         let fileContent = getStringFromFile("EasyListTest")
-        let result = try! parser.parse(fileContent, for: .safari)
+        let result = try! parser.parse(fileContent, for: .safari, filterDownloadPage: nil)
         
         XCTAssertEqual(result.name, "EasyList")
         XCTAssertNil(result.description)
@@ -25,7 +25,7 @@ class CustomFilterMetaParserTest: XCTestCase {
     
     func testAdblockIcelandicFilter() {
         let fileContent = getStringFromFile("AdblockIcelandicFilterTest")
-        let result = try! parser.parse(fileContent, for: .safari)
+        let result = try! parser.parse(fileContent, for: .safari, filterDownloadPage: nil)
         
         XCTAssertNil(result.name)
         XCTAssertNil(result.description)
@@ -42,7 +42,7 @@ class CustomFilterMetaParserTest: XCTestCase {
     
     func testAdGuardBaseFilter() {
         let fileContent = getStringFromFile("AdGuardBaseFilterTest")
-        let result = try! parser.parse(fileContent, for: .safari)
+        let result = try! parser.parse(fileContent, for: .safari, filterDownloadPage: nil)
         
         XCTAssertEqual(result.name, "AdGuard Base filter")
         XCTAssertEqual(result.description, "EasyList + AdGuard English filter. This filter is necessary for quality ad blocking.")
@@ -58,7 +58,7 @@ class CustomFilterMetaParserTest: XCTestCase {
     }
     
     func testEmptyFileContent() {
-        XCTAssertThrowsError(try parser.parse("", for: .safari)) { error in
+        XCTAssertThrowsError(try parser.parse("", for: .safari, filterDownloadPage: nil)) { error in
             XCTAssertEqual(error as! CustomFilterMetaParserError, CustomFilterMetaParserError.invalidFileContent)
         }
     }
@@ -72,7 +72,7 @@ class CustomFilterMetaParserTest: XCTestCase {
                         </body>
                         </html>
                         """
-        XCTAssertThrowsError(try parser.parse(htmlContent, for: .safari)) { error in
+        XCTAssertThrowsError(try parser.parse(htmlContent, for: .safari, filterDownloadPage: nil)) { error in
             XCTAssertEqual(error as! CustomFilterMetaParserError, CustomFilterMetaParserError.invalidFileContent)
         }
     }
@@ -81,7 +81,7 @@ class CustomFilterMetaParserTest: XCTestCase {
     
     func testAdGuardSDNSFilter() {
         let fileContent = getStringFromFile("AdGuardSDNSFilterTest")
-        let result = try! parser.parse(fileContent, for: .system)
+        let result = try! parser.parse(fileContent, for: .system, filterDownloadPage: nil)
         
         XCTAssertEqual(result.name, "AdGuard DNS filter")
         XCTAssertEqual(result.description, "Filter composed of several other filters (AdGuard Base filter, Social media filter, Tracking Protection filter, Mobile ads filter, EasyList, EasyPrivacy, etc) and simplified specifically to be better compatible with DNS-level ad blocking.")

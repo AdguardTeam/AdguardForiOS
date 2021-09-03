@@ -31,7 +31,8 @@ class FitlerServiceTest: XCTestCase {
                                             version: filter.version,
                                             lastUpdateDate: filter.lastUpdateTime,
                                             languages: [],
-                                            tags: [])
+                                            tags: [],
+                                            rulesCount: 0)
         }
         return ExtendedFiltersMeta(groups: groups,
                                    tags: tags,
@@ -250,7 +251,8 @@ class FitlerServiceTest: XCTestCase {
                                                   version: modifiedFilter.version! + "1",
                                                   lastUpdateDate: modifiedFilter.lastUpdateDate,
                                                   languages: [],
-                                                  tags: [])
+                                                  tags: [],
+                                                  rulesCount: 0)
         let modifiedFilterIndex = modifiedFilters.firstIndex(where: { $0.filterId == modifiedFilterId })!
         modifiedFilters[modifiedFilterIndex] = modifiedFilter
         
@@ -268,7 +270,8 @@ class FitlerServiceTest: XCTestCase {
                                                  version: "1.1.1.1",
                                                  lastUpdateDate: Date(),
                                                  languages: [],
-                                                 tags: [])
+                                                 tags: [],
+                                                 rulesCount: 0)
         modifiedFilters.append(newFilter)
     
         let newMeta = ExtendedFiltersMeta(groups: mockFiltersMeta.groups, tags: mockFiltersMeta.tags, filters: modifiedFilters)

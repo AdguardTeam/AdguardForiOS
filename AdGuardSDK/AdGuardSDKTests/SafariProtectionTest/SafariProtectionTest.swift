@@ -152,7 +152,7 @@ class SafariProtectionTest: XCTestCase {
         let expectation = XCTestExpectation()
         let sp = safariProtection as! SafariProtection
         
-        sp.executeBlockAndReloadCbs {
+        try! sp.executeBlockAndReloadCbs {
             throw MetaStorageMockError.error
         } onCbReloaded: { error in
             expectation.fulfill()

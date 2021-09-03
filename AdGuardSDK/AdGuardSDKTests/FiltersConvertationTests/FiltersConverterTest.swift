@@ -5,20 +5,28 @@ final class ContentBlockerConverterMock: ContentBlockerConverterProtocol {
     
     var result: [ContentBlockerType: [String]] = [:]
     
-    func convertArray(rules: [String], limit: Int, optimize: Bool, advancedBlocking: Bool, cbType: ContentBlockerType) -> ConversionResult? {
+    func convertArray(
+        rules: [String],
+        safariVersion: SafariVersion,
+        optimize: Bool,
+        advancedBlocking: Bool,
+        cbType: ContentBlockerType
+    ) -> ConversionResult? {
         result[cbType] = rules
         return nil
     }
 }
 
 class FiltersConverterTest: XCTestCase {
-    
+    // TODO: - write tests after new converter added
     var converterMock: ContentBlockerConverterMock!
+    var configuaration: SafariConfigurationMock!
     var converter: FiltersConverterProtocol!
     
     override func setUp() {
         converterMock = ContentBlockerConverterMock()
-        converter = FiltersConverter(converter: converterMock)
+        configuaration = SafariConfigurationMock()
+        converter = FiltersConverter(configuration: configuaration, converter: converterMock)
     }
     
     // MARK: - Parts of different filters to test

@@ -5,13 +5,20 @@ class DnsFiltersManagerTest: XCTestCase {
     var userDefaults: UserDefaultsStorageMock!
     var filtersStorage: FilterFilesStorageMock!
     var metaParser: MetaParserMock!
+    var configuration: DnsConfigurationMock!
     var manager: DnsFiltersManagerProtocol!
     
     override func setUp() {
         userDefaults = UserDefaultsStorageMock()
         filtersStorage = FilterFilesStorageMock()
         metaParser = MetaParserMock()
-        manager = DnsFiltersManager(userDefaults: userDefaults, filterFilesStorage: filtersStorage, metaParser: metaParser)
+        configuration = DnsConfigurationMock()
+        manager = DnsFiltersManager(
+            userDefaults: userDefaults,
+            filterFilesStorage: filtersStorage,
+            configuration: configuration,
+            metaParser: metaParser
+        )
     }
     
     let filters: [DnsFilter] = {

@@ -4,12 +4,18 @@ class DnsLibsRulesProviderTest: XCTestCase {
    
     var filesStorage: FilterFilesStorageMock!
     var dnsFiltersManager: DnsFiltersManagerMock!
+    var configuration: DnsConfigurationMock!
     var dnsLibsRulesProvider: DnsLibsRulesProviderProtocol!
     
     override func setUp() {
         filesStorage = FilterFilesStorageMock()
         dnsFiltersManager = DnsFiltersManagerMock()
-        dnsLibsRulesProvider = DnsLibsRulesProvider(dnsFiltersManager: dnsFiltersManager, filterFilesStorage: filesStorage)
+        configuration = DnsConfigurationMock()
+        dnsLibsRulesProvider = DnsLibsRulesProvider(
+            dnsFiltersManager: dnsFiltersManager,
+            filterFilesStorage: filesStorage,
+            configuration: configuration
+        )
     }
     
     func testDnsFiltersPaths() {
