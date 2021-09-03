@@ -33,4 +33,10 @@ final class TestsFileManager {
             }
         } catch {}
     }
+    
+    static func putDbFileToDirectory(_ bundle: Bundle) {
+        let dbFileUrl = bundle.url(forResource: "default.db", withExtension: "zip")!
+        try! FileManager.default.createDirectory(at: TestsFileManager.workingUrl, withIntermediateDirectories: false, attributes: nil)
+        try! FileManager.default.copyItem(at: dbFileUrl, to: TestsFileManager.workingUrl.appendingPathComponent(defaultDbArchiveFileName))
+    }
 }

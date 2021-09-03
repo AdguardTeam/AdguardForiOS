@@ -11,7 +11,7 @@ enum FilterFilesStorageMockError: Error {
 class FilterFilesStorageMock: FilterFilesStorageProtocol {
     
     // TODO: - Check if tests needed
-    var filterFilesDirectoryUrl: URL = URL(string: "")!
+    var filterFilesDirectoryUrl: URL = URL(string: "https://domain.com")!
     
     var updateFilterCalledCount = 0
     var updateFilterResultError: Error?

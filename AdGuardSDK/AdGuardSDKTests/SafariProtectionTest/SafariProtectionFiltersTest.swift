@@ -64,11 +64,18 @@ class SafariProtectionFiltersTest: XCTestCase {
         filters.setGroupError = MetaStorageMockError.error
         
         let expectation = XCTestExpectation()
-        
-        try! safariProtection.setGroup(.ads, enabled: true) { error in
-            XCTAssertEqual(error as! MetaStorageMockError, .error)
-            expectation.fulfill()
+    
+        do {
+            try safariProtection.setGroup(.ads, enabled: true) { error in
+                XCTAssertEqual(error as! MetaStorageMockError, .error)
+                expectation.fulfill()
+            }
+            XCTFail()
         }
+        catch {
+            XCTAssertEqual(error as! MetaStorageMockError, .error)
+        }
+        
         wait(for: [expectation], timeout: 0.5)
         
         XCTAssertEqual(filters.setGroupCalledCount, 1)
@@ -99,10 +106,16 @@ class SafariProtectionFiltersTest: XCTestCase {
         
         let expectation = XCTestExpectation()
         
-        try! safariProtection.setFilter(withId: 1, 1, enabled: true) { error in
-            XCTAssertEqual(error as! MetaStorageMockError, .error)
-            expectation.fulfill()
+        do {
+            try safariProtection.setFilter(withId: 1, 1, enabled: true) { error in
+                XCTAssertEqual(error as! MetaStorageMockError, .error)
+                expectation.fulfill()
+            }
         }
+        catch {
+            XCTAssertEqual(error as! MetaStorageMockError, .error)
+        }
+        
         wait(for: [expectation], timeout: 0.5)
         
         XCTAssertEqual(filters.setFilterCalledCount, 1)
@@ -191,10 +204,16 @@ class SafariProtectionFiltersTest: XCTestCase {
         filters.deleteCustomFilterError = MetaStorageMockError.error
         let expectation = XCTestExpectation()
         
-        try! safariProtection.deleteCustomFilter(withId: 1) { error in
-            XCTAssertEqual(error as! MetaStorageMockError, .error)
-            expectation.fulfill()
+        do {
+            try safariProtection.deleteCustomFilter(withId: 1) { error in
+                XCTAssertEqual(error as! MetaStorageMockError, .error)
+                expectation.fulfill()
+            }
         }
+        catch {
+            XCTAssertEqual(error as! MetaStorageMockError, .error)
+        }
+        
         wait(for: [expectation], timeout: 0.5)
         
         XCTAssertEqual(filters.deleteCustomFilterCalledCount, 1)

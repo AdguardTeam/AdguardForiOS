@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7E667A6626E26B890013B1D5 /* ContentBlockerConverter in Frameworks */ = {isa = PBXBuildFile; productRef = 7E667A6526E26B890013B1D5 /* ContentBlockerConverter */; };
+		7E667A6826E29D970013B1D5 /* default.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = 7E667A6726E29D970013B1D5 /* default.db.zip */; };
 		7E6E7FC526C299AB00925F96 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E966AF526C27B93006B57BD /* SafariAdGuardSDK.framework */; };
 		7E6E801D26C299DE00925F96 /* DnsFiltersManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E7FCC26C299DA00925F96 /* DnsFiltersManagerTest.swift */; };
 		7E6E801E26C299DE00925F96 /* CustomDnsProvidersStorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E7FCE26C299DA00925F96 /* CustomDnsProvidersStorageTest.swift */; };
@@ -25,7 +26,6 @@
 		7E6E802B26C299DE00925F96 /* LangsMetaStorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E7FDD26C299DB00925F96 /* LangsMetaStorageTest.swift */; };
 		7E6E802C26C299DE00925F96 /* FiltersLocalizationsMetaStorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E7FDE26C299DB00925F96 /* FiltersLocalizationsMetaStorageTest.swift */; };
 		7E6E802D26C299DE00925F96 /* DefaultDatabaseManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E7FDF26C299DB00925F96 /* DefaultDatabaseManagerTest.swift */; };
-		7E6E802E26C299DE00925F96 /* default.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = 7E6E7FE026C299DB00925F96 /* default.db.zip */; };
 		7E6E802F26C299DE00925F96 /* TestsFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E7FE126C299DB00925F96 /* TestsFileManager.swift */; };
 		7E6E803026C299DE00925F96 /* FiltersMetaStorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E7FE226C299DB00925F96 /* FiltersMetaStorageTest.swift */; };
 		7E6E803226C299DE00925F96 /* TagsMetaStorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E7FE426C299DB00925F96 /* TagsMetaStorageTest.swift */; };
@@ -411,6 +411,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7E667A6726E29D970013B1D5 /* default.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = default.db.zip; sourceTree = "<group>"; };
 		7E6E7FC126C299AB00925F96 /* AdGuardSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdGuardSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E6E7FCC26C299DA00925F96 /* DnsFiltersManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DnsFiltersManagerTest.swift; sourceTree = "<group>"; };
 		7E6E7FCE26C299DA00925F96 /* CustomDnsProvidersStorageTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDnsProvidersStorageTest.swift; sourceTree = "<group>"; };
@@ -429,7 +430,6 @@
 		7E6E7FDD26C299DB00925F96 /* LangsMetaStorageTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LangsMetaStorageTest.swift; sourceTree = "<group>"; };
 		7E6E7FDE26C299DB00925F96 /* FiltersLocalizationsMetaStorageTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersLocalizationsMetaStorageTest.swift; sourceTree = "<group>"; };
 		7E6E7FDF26C299DB00925F96 /* DefaultDatabaseManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultDatabaseManagerTest.swift; sourceTree = "<group>"; };
-		7E6E7FE026C299DB00925F96 /* default.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = default.db.zip; sourceTree = "<group>"; };
 		7E6E7FE126C299DB00925F96 /* TestsFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestsFileManager.swift; sourceTree = "<group>"; };
 		7E6E7FE226C299DB00925F96 /* FiltersMetaStorageTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersMetaStorageTest.swift; sourceTree = "<group>"; };
 		7E6E7FE426C299DB00925F96 /* TagsMetaStorageTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsMetaStorageTest.swift; sourceTree = "<group>"; };
@@ -656,11 +656,11 @@
 		7E6E7FC226C299AB00925F96 /* AdGuardSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				7E6E7FCB26C299DA00925F96 /* DNS_SDK_PART_TESTS */,
 				7E6E7FD726C299DA00925F96 /* Info.plist */,
 				7E6E7FFB26C299DC00925F96 /* AdGuardSDKTests-Bridging-Header.h */,
 				7E6E7FD826C299DB00925F96 /* URL+UtilsTest.swift */,
 				7E6E800226C299DD00925F96 /* ContentBlockersTests */,
-				7E6E7FCB26C299DA00925F96 /* DNS_SDK_PART_TESTS */,
 				7E6E7FF626C299DC00925F96 /* ExtendedFiltersMetaLocalizationsTest */,
 				7E6E800A26C299DE00925F96 /* ExtendedFiltersMetaTest */,
 				7E6E7FF926C299DC00925F96 /* FilterFilesStorageTest */,
@@ -716,7 +716,7 @@
 				7E6E7FDD26C299DB00925F96 /* LangsMetaStorageTest.swift */,
 				7E6E7FDE26C299DB00925F96 /* FiltersLocalizationsMetaStorageTest.swift */,
 				7E6E7FDF26C299DB00925F96 /* DefaultDatabaseManagerTest.swift */,
-				7E6E7FE026C299DB00925F96 /* default.db.zip */,
+				7E667A6726E29D970013B1D5 /* default.db.zip */,
 				7E6E7FE126C299DB00925F96 /* TestsFileManager.swift */,
 				7E6E7FE226C299DB00925F96 /* FiltersMetaStorageTest.swift */,
 				7E6E7FE426C299DB00925F96 /* TagsMetaStorageTest.swift */,
@@ -1474,7 +1474,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E6E802E26C299DE00925F96 /* default.db.zip in Resources */,
 				7E6E805826C299DF00925F96 /* AdGuardSDNSFilterTest.txt in Resources */,
 				7EA5109426C2B2CB00207781 /* update0.100.sql in Resources */,
 				7E6E805926C299DF00925F96 /* AdGuardBaseFilterTest.txt in Resources */,
@@ -1486,6 +1485,7 @@
 				7EA5109626C2B2CB00207781 /* schema0.102.sql in Resources */,
 				7E6E805B26C299DF00925F96 /* EasyListTest.txt in Resources */,
 				7EA5109326C2B2CB00207781 /* update0.101.sql in Resources */,
+				7E667A6826E29D970013B1D5 /* default.db.zip in Resources */,
 				7EA5109526C2B2CB00207781 /* schema0.101.sql in Resources */,
 				7E6E805A26C299DF00925F96 /* AdblockIcelandicFilterTest.txt in Resources */,
 				7EA5109726C2B2CB00207781 /* schema0.100.sql in Resources */,
