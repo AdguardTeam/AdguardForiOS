@@ -46,11 +46,7 @@ final class SafariProtectionController: UITableViewController {
     
     private let enabledColor = UIColor.AdGuardColor.lightGreen1
     private let disabledColor = UIColor.AdGuardColor.lightGray3
-    
-    private lazy var blacklistModel: ListOfRulesModelProtocol = {
-        return UserFilterModel(resources: resources, theme: theme, productInfo: productInfo, safariProtection: safariProtection)
-    }()
-    
+   
     private var activeFiltersCount: Int {
         return safariProtection.groups.flatMap { $0.filters }.filter { $0.isEnabled }.count
     }
@@ -58,16 +54,15 @@ final class SafariProtectionController: UITableViewController {
     // MARK: - view controler life cycle
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destinationVC = segue.destination as? UserRulesTableController else {
+            return
+        }
         if segue.identifier == whiteListSegue {
-            if let controller = segue.destination as? ListOfRulesController{
-                let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
-                let model: ListOfRulesModelProtocol = inverted ? InvertedSafariWhitelistModel(resources: resources, theme: theme, safariProtection: safariProtection) : SafariWhitelistModel(resources: resources, theme: theme, safariProtection: safariProtection)
-                controller.model = model
-            }
-        } else if segue.identifier == blackListSegue {
-            if let controller = segue.destination as? ListOfRulesController{
-                controller.model = blacklistModel
-            }
+            let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
+            destinationVC.rulesType = inverted ? .invertedAllowlist : .allowlist
+        }
+        else if segue.identifier == blackListSegue {
+            destinationVC.rulesType = .blocklist
         }
     }
     
@@ -81,8 +76,7 @@ final class SafariProtectionController: UITableViewController {
         super.viewWillAppear(animated)
         
         let userFilterTextFormat = String.localizedString("user_rules_format")
-        let enabledRules = blacklistModel.rules.filter({ $0.enabled })
-        let userRulesNumber = enabledRules.count
+        let userRulesNumber = safariProtection.allRules(for: .blocklist).reduce(0, { $1.isEnabled ? $0 + 1 : $0 })
         userFilterStateLabel.text = String.localizedStringWithFormat(userFilterTextFormat, userRulesNumber)
         
         let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)

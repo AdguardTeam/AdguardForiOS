@@ -22,15 +22,7 @@ extension AppDelegate: IURLSchemeExecutor {
 
     
     func openUserFilterController(rule: String) -> Bool {
-        let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-        let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
-        let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-        let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
-        
-        let model: ListOfRulesModelProtocol = UserFilterModel(resources: resources, theme: themeService, productInfo: productInfo, safariProtection: safariProtection)
-        
-        self.presentUserFilterController(showLaunchScreen: true, model, newRule: rule)
-        
+        // TODO: - Implement later
         return true
     }
     

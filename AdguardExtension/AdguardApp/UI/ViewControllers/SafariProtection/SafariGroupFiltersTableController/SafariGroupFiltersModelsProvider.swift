@@ -18,10 +18,10 @@
 
 import SafariAdGuardSDK
 
-typealias SafariGroupFiltersModel = (groupModel: SafariGroupStateHeaderModel, filtersModel: [SafariFilterCellModel])
+typealias SafariGroupFiltersModel = (groupModel: StateHeaderViewModel<SafariGroup.GroupType>, filtersModel: [SafariFilterCellModel])
 final class SafariGroupFiltersModelsProvider {
     
-    var groupModels: [SafariGroupStateHeaderModel] { isSearching ? searchGroupModels : initialGroupModels }
+    var groupModels: [StateHeaderViewModel<SafariGroup.GroupType>] { isSearching ? searchGroupModels : initialGroupModels }
     var filtersModels: [[SafariFilterCellModel]] { isSearching ? searchFiltersModels : initialFiltersModels }
     
     var searchString: String? {
@@ -43,10 +43,10 @@ final class SafariGroupFiltersModelsProvider {
     
     // MARK: - Models
     
-    private var searchGroupModels: [SafariGroupStateHeaderModel] = []
+    private var searchGroupModels: [StateHeaderViewModel<SafariGroup.GroupType>] = []
     private var searchFiltersModels: [[SafariFilterCellModel]] = []
     
-    private var initialGroupModels: [SafariGroupStateHeaderModel] = []
+    private var initialGroupModels: [StateHeaderViewModel<SafariGroup.GroupType>] = []
     private var initialFiltersModels: [[SafariFilterCellModel]] = []
     
     // MARK: - Initialization
@@ -58,7 +58,7 @@ final class SafariGroupFiltersModelsProvider {
                 return
             }
             
-            let groupModel = SafariGroupStateHeaderModel(group: group, proStatus: proStatus)
+            let groupModel = StateHeaderViewModel(iconImage: group.groupType.iconImage, title: group.groupName, isEnabled: group.isEnabled, id: group.groupType)
             self.initialGroupModels.append(groupModel)
             
             let filtersModels = group.filters.map { filter -> SafariFilterCellModel in

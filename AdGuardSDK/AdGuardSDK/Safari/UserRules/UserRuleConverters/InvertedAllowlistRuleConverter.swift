@@ -56,7 +56,7 @@ struct InvertedAllowlistRuleConverter: UserRuleConverterProtocol {
      So the result looks like: @@||*$document,domain=~domain1|~domain2|~domain3
      If rules are empty the result rule will look like this: @@||*$document
      */
-    func convertRulesToString(_ rules: [UserRuleProtocol]) -> String {
+    func convertRulesToString(_ rules: [UserRule]) -> String {
         if rules.isEmpty {
             return "@@||*$document"
         } else {

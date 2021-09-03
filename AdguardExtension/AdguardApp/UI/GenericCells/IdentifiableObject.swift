@@ -18,6 +18,21 @@
 
 import Foundation
 
-protocol UserRulesStorageProtocol: AnyObject {
-    var rules: [UserRule] { get set }
+protocol IdentifiableObject {
+    associatedtype IdentifiableObject
+    var id: IdentifiableObject { get set }
+}
+
+protocol IdentifiableObjectProtocol: AnyObject {
+    associatedtype Model: IdentifiableObject
+    var config: IdentifiableViewConfig<Model>! { get set }
+}
+
+protocol IdentifiableObjectDelegate: AnyObject {
+    func modelChanged<Model: IdentifiableObject>(_ newModel: Model)
+}
+
+struct IdentifiableViewConfig<Model: IdentifiableObject> {
+    var model: Model
+    weak var delegate: IdentifiableObjectDelegate?
 }
