@@ -17,6 +17,7 @@
 */
 
 import Foundation
+import DnsAdGuardSDK
 
 extension AESharedResourcesProtocol {
     
@@ -134,13 +135,13 @@ extension AESharedResourcesProtocol {
         }
     }
     
-    dynamic var tunnelMode: APVpnManagerTunnelMode {
+    dynamic var tunnelMode: TunnelMode {
         get {
             guard let value = sharedDefaults().object(forKey: AEDefaultsVPNTunnelMode) as? UInt else {
-                return APVpnManagerTunnelModeSplit
+                return .split
             }
             
-            return APVpnManagerTunnelMode(value)
+            return TunnelMode(rawValue:  Int(value)) ?? .split
         }
         set {
             sharedDefaults().set(newValue.rawValue, forKey: AEDefaultsVPNTunnelMode)

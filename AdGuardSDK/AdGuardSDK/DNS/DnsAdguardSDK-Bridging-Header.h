@@ -3,4 +3,7 @@
 //
 
 #import <AGDnsProxy/AGDnsProxy.h>
+#import "ACNCidrRange.h"
+#import "ACNIPUtils.h"
+#import "ACNUrlUtils.h"
 #include <resolv.h>

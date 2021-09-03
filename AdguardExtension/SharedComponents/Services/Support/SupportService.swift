@@ -19,6 +19,7 @@
 import Foundation
 import Zip
 import SafariAdGuardSDK
+import DnsAdGuardSDK
 
 protocol SupportServiceProtocol {
     func exportLogs() -> URL?
@@ -168,11 +169,11 @@ class SupportService: SupportServiceProtocol {
         
         let tunnelMode: String
         switch resources.tunnelMode {
-        case APVpnManagerTunnelModeSplit:
+        case .split:
             tunnelMode = "SPLIT"
-        case APVpnManagerTunnelModeFull:
+        case .full:
             tunnelMode = "FULL"
-        case APVpnManagerTunnelModeFullWithoutVPNIcon:
+        case .fullWithoutVpnIcon:
             tunnelMode = "WITHOUT_VPN_ICON"
         default:
             tunnelMode = "UNKNOWN"

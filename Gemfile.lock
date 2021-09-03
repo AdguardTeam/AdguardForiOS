@@ -99,6 +99,7 @@ GEM
       xcodeproj (>= 1.13.0, < 2.0.0)
       xcpretty (~> 0.3.0)
       xcpretty-travis-formatter (>= 0.0.3)
+    fastlane-plugin-sentry (1.8.3)
     gh_inspector (1.1.3)
     google-apis-androidpublisher_v3 (0.10.0)
       google-apis-core (>= 0.4, < 2.a)
@@ -206,6 +207,7 @@ PLATFORMS
 
 DEPENDENCIES
   fastlane
+  fastlane-plugin-sentry
 
 BUNDLED WITH
    2.1.4

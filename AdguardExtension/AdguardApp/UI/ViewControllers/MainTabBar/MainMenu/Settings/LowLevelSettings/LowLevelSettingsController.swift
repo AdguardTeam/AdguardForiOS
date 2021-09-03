@@ -18,6 +18,7 @@
 
 import Foundation
 import UIKit
+import DnsAdGuardSDK
 
 class LowLevelSettingsController: UITableViewController {
     
@@ -119,11 +120,11 @@ class LowLevelSettingsController: UITableViewController {
     
     private func setTunnelModeDescription() {
         switch resources.tunnelMode {
-        case APVpnManagerTunnelModeSplit:
+        case .split:
             tunnelModeDescription.text = String.localizedString("tunnel_mode_split_description")
-        case APVpnManagerTunnelModeFull:
+        case .full:
             tunnelModeDescription.text = String.localizedString("tunnel_mode_full_description")
-        case APVpnManagerTunnelModeFullWithoutVPNIcon:
+        case .fullWithoutVpnIcon:
             tunnelModeDescription.text = String.localizedString("tunnel_mode_full_without_icon_description")
         default:
             break

@@ -102,7 +102,7 @@ final class StartupService : NSObject{
             userDefaults: sharedResources.sharedDefaults()
         )
         
-        let sdkDnsImplementation: DnsAdGuardSDK.DnsImplementation = sharedResources.dnsImplementation == .adGuard ? .adguard : .native
+        let sdkDnsImplementation: DnsAdGuardSDK.DnsImplementation = sharedResources.dnsImplementation == .adGuard ? .adGuard : .native
         
         
         let dnsProtectionConfiguration = DnsConfiguration(currentLanguage: currentLanguage,
@@ -110,14 +110,30 @@ final class StartupService : NSObject{
                                                           dnsFilteringIsEnabled: sharedResources.systemProtectionEnabled,
                                                           dnsImplementation: sdkDnsImplementation,
                                                           blocklistIsEnabled: sharedResources.systemUserFilterEnabled,
-                                                          allowlistIsEnabled: sharedResources.systemWhitelistEnabled)
+                                                          allowlistIsEnabled: sharedResources.systemWhitelistEnabled,
+                                                          tunnelMode: sharedResources.tunnelMode,
+                                                          fallbackServers: sharedResources.customFallbackServers,
+                                                          bootstrapServers: sharedResources.customBootstrapServers,
+                                                          blockingMode: sharedResources.blockingMode,
+                                                          blockingIp: sharedResources.customBlockingIp,
+                                                          blockedTtl: sharedResources.blockedResponseTtlSecs,
+                                                          blockIpv6: sharedResources.blockIpv6,
+                                                          restartByReachability: sharedResources.restartByReachability)
         
         let defaultDnsProtectionConfiguration = DnsConfiguration(currentLanguage: currentLanguage,
-                                                                 proStatus: false,
-                                                                 dnsFilteringIsEnabled: false,
-                                                                 dnsImplementation: .adguard,
-                                                                 blocklistIsEnabled: false,
-                                                                 allowlistIsEnabled: false)
+                                                                 proStatus: true,
+                                                                 dnsFilteringIsEnabled: true,
+                                                                 dnsImplementation: .adGuard,
+                                                                 blocklistIsEnabled: true,
+                                                                 allowlistIsEnabled: true,
+                                                                 tunnelMode: .split,
+                                                                 fallbackServers: nil,
+                                                                 bootstrapServers: nil,
+                                                                 blockingMode: .default,
+                                                                 blockingIp: nil,
+                                                                 blockedTtl: 120,
+                                                                 blockIpv6: true,
+                                                                 restartByReachability: true)
         // TODO: - try! is bad
         let dnsProtection: DnsProtectionProtocol = try! DnsProtection(configuration: dnsProtectionConfiguration,
                                           defaultConfiguration: defaultDnsProtectionConfiguration,

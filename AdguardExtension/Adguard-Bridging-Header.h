@@ -14,7 +14,6 @@
 #import "Constants.h"
 #import "ASDatabase.h"
 #import "Reachability.h"
-#import <AGDnsProxy/AGDnsProxy.h>
 #import "ADBTableRow.h"
 #import "ADBTable.h"
 #import "ACNIPUtils.h"

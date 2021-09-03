@@ -490,7 +490,7 @@ class VpnManagerMigration: NSObject {
             DDLogInfo("(VpnManagerMigration) there are not new settings in shared resources. Try to read it from protocol configuration")
             if tunnelModeOld != nil {
                 DDLogInfo("(VpnManagerMigration) save tunnelModeOld in resources")
-                resources.tunnelMode = APVpnManagerTunnelMode(tunnelModeOld!)
+//                resources.tunnelMode = APVpnManagerTunnelMode(tunnelModeOld!)
             }
             
             if restartOld != nil {

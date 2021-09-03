@@ -17,6 +17,7 @@
 */
 
 import Foundation
+import DnsAdGuardSDK
 
 extension AESharedResourcesProtocol {
     
@@ -59,26 +60,26 @@ extension AESharedResourcesProtocol {
 
     dynamic var dnsImplementation: DnsImplementation {
         get {
-            if let savedImplementation = sharedDefaults().object(forKey: DnsImplementationKey) as? Int {
-                return DnsImplementation(rawValue: savedImplementation) ?? .adGuard
+            if let savedImplementation = sharedDefaults().object(forKey: DnsImplementationKey) as? DnsImplementation {
+                return savedImplementation
             }
             return .adGuard
         }
         set {
             if dnsImplementation != newValue {
-                sharedDefaults().set(newValue.rawValue, forKey: DnsImplementationKey)
+                sharedDefaults().set(newValue, forKey: DnsImplementationKey)
                 NotificationCenter.default.post(name: .dnsImplementationChanged, object: nil)
             }
         }
     }
 
-    dynamic var blockingMode: BlockingModeSettings  {
+    dynamic var blockingMode: BlockingMode  {
         get {
             guard let value = sharedDefaults().object(forKey: BlockingMode) as? Int else {
-                return .agDefault
+                return .default
             }
             
-            return BlockingModeSettings(rawValue: value)!
+            return BlockingMode(rawValue: value)!
         }
         set {
             sharedDefaults().setValue(newValue.rawValue, forKey: BlockingMode)

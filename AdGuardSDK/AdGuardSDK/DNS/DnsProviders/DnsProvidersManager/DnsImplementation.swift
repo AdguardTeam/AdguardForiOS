@@ -26,12 +26,12 @@ import Foundation
         Provided by the OS itself. Supports only DoH, DoT and regular DNS. Impossible to inspect DNS activity
  */
 public enum DnsImplementation {
-    case adguard
+    case adGuard
     case native
     
     var supportedProtocols: [DnsProtocol] {
         switch self {
-        case .adguard: return DnsProtocol.allCases
+        case .adGuard: return DnsProtocol.allCases
         case .native: return [.doh, .dot, .dns]
         }
     }

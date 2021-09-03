@@ -253,7 +253,6 @@
 		7E6E81FC26C2ABFA00925F96 /* NetworkUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E819326C2A05A00925F96 /* NetworkUtils.swift */; };
 		7E6E81FE26C2AC0E00925F96 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6E81FD26C2AC0E00925F96 /* libresolv.tbd */; };
 		7E6E820026C2AF9600925F96 /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = 7E6E81FF26C2AF9600925F96 /* AGDnsProxy */; };
-		7E966B8D26C27E7E006B57BD /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = 7E966B8C26C27E7E006B57BD /* AGDnsProxy */; };
 		7E966B8F26C27F06006B57BD /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 7E966B8E26C27F06006B57BD /* SQLite */; };
 		7E966B9326C27F0D006B57BD /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 7E966B9226C27F0D006B57BD /* Zip */; };
 		7E966B9526C27F18006B57BD /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 7E966B9426C27F18006B57BD /* SQLite */; };
@@ -377,6 +376,13 @@
 		D049EE9B26B2F31A00B8088B /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049EB9426B17C0A00B8088B /* Dictionary+Utils.swift */; };
 		D049EE9E26B2F33200B8088B /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049EB9326B17C0A00B8088B /* CharacterSet+Utils.swift */; };
 		D049EEA326B2F35B00B8088B /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = D049EEA226B2F35B00B8088B /* Zip */; };
+		D0A3CF9226E7AADE006E90AD /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = D0A3CF9126E7AADE006E90AD /* Reachability */; };
+		D0A3CF9426E7AC95006E90AD /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A3CF9326E7AC95006E90AD /* PacketTunnelProvider.swift */; };
+		D0A3CF9626E7ADEC006E90AD /* DnsProxyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A3CF9526E7ADEB006E90AD /* DnsProxyService.swift */; };
+		D0A3CF9926E7AF32006E90AD /* ACNCidrRange.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A3CF9826E7AF31006E90AD /* ACNCidrRange.m */; };
+		D0A3CF9C26E7B69F006E90AD /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A3CF9A26E7B69F006E90AD /* ACNIPUtils.m */; };
+		D0A3CF9E26E90E1C006E90AD /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = D0A3CF9D26E90E1C006E90AD /* AGDnsProxy */; };
+		D0A3CFA126E90F12006E90AD /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A3CF9F26E90F10006E90AD /* ACNUrlUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -624,6 +630,14 @@
 		D049EB9326B17C0A00B8088B /* CharacterSet+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CharacterSet+Utils.swift"; path = "../Libs/Utils/CharacterSet+Utils.swift"; sourceTree = "<group>"; };
 		D049EB9426B17C0A00B8088B /* Dictionary+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Dictionary+Utils.swift"; path = "../Libs/Utils/Dictionary+Utils.swift"; sourceTree = "<group>"; };
 		D049EBA026B1868200B8088B /* AdGuardSDK_mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AdGuardSDK_mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0A3CF9326E7AC95006E90AD /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
+		D0A3CF9526E7ADEB006E90AD /* DnsProxyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProxyService.swift; sourceTree = "<group>"; };
+		D0A3CF9726E7AF30006E90AD /* ACNCidrRange.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNCidrRange.h; sourceTree = "<group>"; };
+		D0A3CF9826E7AF31006E90AD /* ACNCidrRange.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNCidrRange.m; sourceTree = "<group>"; };
+		D0A3CF9A26E7B69F006E90AD /* ACNIPUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACNIPUtils.m; sourceTree = "<group>"; };
+		D0A3CF9B26E7B69F006E90AD /* ACNIPUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACNIPUtils.h; sourceTree = "<group>"; };
+		D0A3CF9F26E90F10006E90AD /* ACNUrlUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACNUrlUtils.m; sourceTree = "<group>"; };
+		D0A3CFA026E90F11006E90AD /* ACNUrlUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACNUrlUtils.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -654,7 +668,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E966B9526C27F18006B57BD /* SQLite in Frameworks */,
-				7E966B8D26C27E7E006B57BD /* AGDnsProxy in Frameworks */,
+				D0A3CF9E26E90E1C006E90AD /* AGDnsProxy in Frameworks */,
+				D0A3CF9226E7AADE006E90AD /* Reachability in Frameworks */,
 				7E6E81F026C2A41400925F96 /* libresolv.tbd in Frameworks */,
 				7EC8A3C126E76BA8005244CF /* SharedAdGuardSDK.framework in Frameworks */,
 			);
@@ -1147,6 +1162,7 @@
 			isa = PBXGroup;
 			children = (
 				7EC8A3C826E772A9005244CF /* Import.swift */,
+				D0A3CF8D26E7A87D006E90AD /* PacketTunnelProvider */,
 				7E6E819426C2A05A00925F96 /* DnsAdguardSDK-Bridging-Header.h */,
 				7E6E818C26C2A05A00925F96 /* DnsProtection */,
 				7E6E817126C2A05A00925F96 /* Statistics */,
@@ -1357,6 +1373,21 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		D0A3CF8D26E7A87D006E90AD /* PacketTunnelProvider */ = {
+			isa = PBXGroup;
+			children = (
+				D0A3CF9326E7AC95006E90AD /* PacketTunnelProvider.swift */,
+				D0A3CF9526E7ADEB006E90AD /* DnsProxyService.swift */,
+				D0A3CF9B26E7B69F006E90AD /* ACNIPUtils.h */,
+				D0A3CF9A26E7B69F006E90AD /* ACNIPUtils.m */,
+				D0A3CF9726E7AF30006E90AD /* ACNCidrRange.h */,
+				D0A3CF9826E7AF31006E90AD /* ACNCidrRange.m */,
+				D0A3CFA026E90F11006E90AD /* ACNUrlUtils.h */,
+				D0A3CF9F26E90F10006E90AD /* ACNUrlUtils.m */,
+			);
+			path = PacketTunnelProvider;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1457,8 +1488,9 @@
 			);
 			name = DnsAdGuardSDK;
 			packageProductDependencies = (
-				7E966B8C26C27E7E006B57BD /* AGDnsProxy */,
 				7E966B9426C27F18006B57BD /* SQLite */,
+				D0A3CF9126E7AADE006E90AD /* Reachability */,
+				D0A3CF9D26E90E1C006E90AD /* AGDnsProxy */,
 			);
 			productName = DnsAdGuardSDK;
 			productReference = 7E966B0126C27BA9006B57BD /* DnsAdGuardSDK.framework */;
@@ -1546,6 +1578,7 @@
 				D049E9CE26B17B2100B8088B /* XCRemoteSwiftPackageReference "Zip" */,
 				7E966B8926C27E68006B57BD /* XCRemoteSwiftPackageReference "DnsLibs" */,
 				7E667A6426E26B890013B1D5 /* XCRemoteSwiftPackageReference "SafariConverterLib" */,
+				D0A3CF9026E7AADE006E90AD /* XCRemoteSwiftPackageReference "Reachability" */,
 			);
 			productRefGroup = D0A0E39626B16B03005344D2 /* Products */;
 			projectDirPath = "";
@@ -1859,6 +1892,7 @@
 				7E6E81D026C2A05B00925F96 /* DnsProtectionServiceStorage.swift in Sources */,
 				7E6E81AC26C2A05B00925F96 /* AGDnsRequestProcessedEventWrapper.swift in Sources */,
 				7E4A132726E4FD1400728BDE /* CompaniesStatisticsRecord.swift in Sources */,
+				D0A3CF9426E7AC95006E90AD /* PacketTunnelProvider.swift in Sources */,
 				7E6E81B826C2A05B00925F96 /* ActivityStatistics.swift in Sources */,
 				7E6E81D726C2A05B00925F96 /* PredefinedDnsProvider.swift in Sources */,
 				7E6E81B426C2A05B00925F96 /* StatisticsPeriod.swift in Sources */,
@@ -1870,12 +1904,16 @@
 				7E6E81A426C2A05B00925F96 /* ChartType.swift in Sources */,
 				7E6E81C426C2A05B00925F96 /* DnsFilter.swift in Sources */,
 				7E6E81AE26C2A05B00925F96 /* DnsRequestProcessedEventHandler.swift in Sources */,
+				D0A3CFA126E90F12006E90AD /* ACNUrlUtils.m in Sources */,
 				7E6E81E526C2A05B00925F96 /* DnsProvidersVendor.swift in Sources */,
+				D0A3CF9926E7AF32006E90AD /* ACNCidrRange.m in Sources */,
+				D0A3CF9626E7ADEC006E90AD /* DnsProxyService.swift in Sources */,
 				7E6E81C226C2A05B00925F96 /* DnsFiltersManager.swift in Sources */,
 				7E6E81E726C2A05B00925F96 /* DnsProvider.swift in Sources */,
 				7E667A6A26E389320013B1D5 /* DnsTrackersProvider.swift in Sources */,
 				7E6E81C826C2A05B00925F96 /* DnsUserRulesStorage.swift in Sources */,
 				7E6E81E126C2A05B00925F96 /* DnsProvidersManager.swift in Sources */,
+				D0A3CF9C26E7B69F006E90AD /* ACNIPUtils.m in Sources */,
 				7E6E81B626C2A05B00925F96 /* ActivityStatistics+ActivityStatisticsTable.swift in Sources */,
 				7E6E81CA26C2A05B00925F96 /* DnsProtection.swift in Sources */,
 				7E6E81BE26C2A05B00925F96 /* DnsLogStatistics+DnsLogTable.swift in Sources */,
@@ -2525,6 +2563,14 @@
 				minimumVersion = 2.1.1;
 			};
 		};
+		D0A3CF9026E7AADE006E90AD /* XCRemoteSwiftPackageReference "Reachability" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		D0B01EF226B1753A00F67AD2 /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
@@ -2556,11 +2602,6 @@
 			package = 7E966B8926C27E68006B57BD /* XCRemoteSwiftPackageReference "DnsLibs" */;
 			productName = AGDnsProxy;
 		};
-		7E966B8C26C27E7E006B57BD /* AGDnsProxy */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7E966B8926C27E68006B57BD /* XCRemoteSwiftPackageReference "DnsLibs" */;
-			productName = AGDnsProxy;
-		};
 		7E966B8E26C27F06006B57BD /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D0B01EF226B1753A00F67AD2 /* XCRemoteSwiftPackageReference "SQLite.swift" */;
@@ -2585,6 +2626,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D049E9CE26B17B2100B8088B /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
+		};
+		D0A3CF9126E7AADE006E90AD /* Reachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0A3CF9026E7AADE006E90AD /* XCRemoteSwiftPackageReference "Reachability" */;
+			productName = Reachability;
+		};
+		D0A3CF9D26E90E1C006E90AD /* AGDnsProxy */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7E966B8926C27E68006B57BD /* XCRemoteSwiftPackageReference "DnsLibs" */;
+			productName = AGDnsProxy;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
