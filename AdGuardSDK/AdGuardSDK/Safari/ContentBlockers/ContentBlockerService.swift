@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol ContentBlockerServiceProtocol {
+public protocol ContentBlockerServiceProtocol {
     /* Returns every content blocker state */
     var allContentBlockersStates: [ContentBlockerType: Bool] { get }
     
@@ -34,10 +34,10 @@ protocol ContentBlockerServiceProtocol {
 }
 
 /* This class is responsible for updating Safari content blockers */
-final class ContentBlockerService: ContentBlockerServiceProtocol {
+final public class ContentBlockerService: ContentBlockerServiceProtocol {
     // MARK: - Internal properties
     
-    var allContentBlockersStates: [ContentBlockerType : Bool] {
+    public var allContentBlockersStates: [ContentBlockerType : Bool] {
         var result: [ContentBlockerType : Bool] = [:]
         ContentBlockerType.allCases.forEach { result[$0] = getState(for: $0) }
         return result
@@ -49,24 +49,22 @@ final class ContentBlockerService: ContentBlockerServiceProtocol {
     private let updateQueue = DispatchQueue(label: "AdGuardSDK.ContentBlockerService.updateQueue", qos: .background)
     
     /* Services */
-    private let configuration: SafariConfigurationProtocol
-    private let jsonStorage: ContentBlockersInfoStorageProtocol
+    private let appBundleId: String
     private let contentBlockersManager: ContentBlockersManagerProtocol
     
     // MARK: - Initialization
     
-    init(configuration: SafariConfigurationProtocol,
-         jsonStorage: ContentBlockersInfoStorageProtocol,
-         contentBlockersManager: ContentBlockersManagerProtocol = ContentBlockersManager())
-    {
-        self.configuration = configuration
-        self.jsonStorage = jsonStorage
+    public init(
+        appBundleId: String,
+        contentBlockersManager: ContentBlockersManagerProtocol = ContentBlockersManager()
+    ) {
+        self.appBundleId = appBundleId
         self.contentBlockersManager = contentBlockersManager
     }
     
     // MARK: - Internal methods
     
-    func updateContentBlockers(onContentBlockersUpdated: @escaping (_ error: Error?) -> Void) {
+    public func updateContentBlockers(onContentBlockersUpdated: @escaping (_ error: Error?) -> Void) {
         updateQueue.async { [weak self] in
             NotificationCenter.default.contentBlockersUpdateStarted()
             let updateError = self?.updateContentBlockersSync()
@@ -75,9 +73,9 @@ final class ContentBlockerService: ContentBlockerServiceProtocol {
         }
     }
     
-    func getState(for cbType: ContentBlockerType) -> Bool {
+    public func getState(for cbType: ContentBlockerType) -> Bool {
         let group = DispatchGroup()
-        let cbBundleId = cbType.contentBlockerBundleId(configuration.appBundleId)
+        let cbBundleId = cbType.contentBlockerBundleId(appBundleId)
         var isEnabled = false
         group.enter()
         contentBlockersManager.getStateOfContentBlocker(withId: cbBundleId) { result in
@@ -120,7 +118,7 @@ final class ContentBlockerService: ContentBlockerServiceProtocol {
     
     // Reloads safari content blocker. If fails for the first reload than tries to reload it once more
     private func reloadContentBlocker(for cbType: ContentBlockerType, firstTry: Bool = true, _ onContentBlockerReloaded: @escaping (_ error: Error?) -> Void) {
-        let cbBundleId = cbType.contentBlockerBundleId(configuration.appBundleId)
+        let cbBundleId = cbType.contentBlockerBundleId(appBundleId)
         
         // Try to reload content blocker
         contentBlockersManager.reloadContentBlocker(withId: cbBundleId) { [weak self] error in

@@ -54,7 +54,7 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
          filtersService: FiltersServiceProtocol,
          filterFilesStorage: FilterFilesStorageProtocol,
          safariManagers: SafariUserRulesManagersProviderProtocol,
-         filtersConverter: FiltersConverterProtocol = FiltersConverter())
+         filtersConverter: FiltersConverterProtocol)
     {
         self.configuration = configuration
         self.filtersService = filtersService
