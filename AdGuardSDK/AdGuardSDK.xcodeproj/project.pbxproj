@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		7E667A6626E26B890013B1D5 /* ContentBlockerConverter in Frameworks */ = {isa = PBXBuildFile; productRef = 7E667A6526E26B890013B1D5 /* ContentBlockerConverter */; };
 		7E667A6826E29D970013B1D5 /* default.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = 7E667A6726E29D970013B1D5 /* default.db.zip */; };
+		7E667A6A26E389320013B1D5 /* DnsTrackersProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E667A6926E389320013B1D5 /* DnsTrackersProvider.swift */; };
+		7E667A6B26E389320013B1D5 /* DnsTrackersProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E667A6926E389320013B1D5 /* DnsTrackersProvider.swift */; };
+		7E667A6F26E3896D0013B1D5 /* adguard.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E667A6D26E3896D0013B1D5 /* adguard.json */; };
+		7E667A7026E3896D0013B1D5 /* adguard.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E667A6D26E3896D0013B1D5 /* adguard.json */; };
+		7E667A7126E3896D0013B1D5 /* whotracksme.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E667A6E26E3896D0013B1D5 /* whotracksme.json */; };
+		7E667A7226E3896D0013B1D5 /* whotracksme.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E667A6E26E3896D0013B1D5 /* whotracksme.json */; };
+		7E667A7426E389A00013B1D5 /* DnsTrackers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E667A7326E389A00013B1D5 /* DnsTrackers.swift */; };
+		7E667A7526E389A00013B1D5 /* DnsTrackers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E667A7326E389A00013B1D5 /* DnsTrackers.swift */; };
+		7E667A7726E38C670013B1D5 /* DnsTrackersProviderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E667A7626E38C670013B1D5 /* DnsTrackersProviderTest.swift */; };
 		7E6E7FC526C299AB00925F96 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E966AF526C27B93006B57BD /* SafariAdGuardSDK.framework */; };
 		7E6E801D26C299DE00925F96 /* DnsFiltersManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E7FCC26C299DA00925F96 /* DnsFiltersManagerTest.swift */; };
 		7E6E801E26C299DE00925F96 /* CustomDnsProvidersStorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E7FCE26C299DA00925F96 /* CustomDnsProvidersStorageTest.swift */; };
@@ -412,6 +421,11 @@
 
 /* Begin PBXFileReference section */
 		7E667A6726E29D970013B1D5 /* default.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = default.db.zip; sourceTree = "<group>"; };
+		7E667A6926E389320013B1D5 /* DnsTrackersProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsTrackersProvider.swift; sourceTree = "<group>"; };
+		7E667A6D26E3896D0013B1D5 /* adguard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = adguard.json; sourceTree = "<group>"; };
+		7E667A6E26E3896D0013B1D5 /* whotracksme.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = whotracksme.json; sourceTree = "<group>"; };
+		7E667A7326E389A00013B1D5 /* DnsTrackers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsTrackers.swift; sourceTree = "<group>"; };
+		7E667A7626E38C670013B1D5 /* DnsTrackersProviderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsTrackersProviderTest.swift; sourceTree = "<group>"; };
 		7E6E7FC126C299AB00925F96 /* AdGuardSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdGuardSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E6E7FCC26C299DA00925F96 /* DnsFiltersManagerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DnsFiltersManagerTest.swift; sourceTree = "<group>"; };
 		7E6E7FCE26C299DA00925F96 /* CustomDnsProvidersStorageTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDnsProvidersStorageTest.swift; sourceTree = "<group>"; };
@@ -653,6 +667,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7E667A6C26E389530013B1D5 /* DnsTrackers */ = {
+			isa = PBXGroup;
+			children = (
+				7E667A6926E389320013B1D5 /* DnsTrackersProvider.swift */,
+				7E667A7326E389A00013B1D5 /* DnsTrackers.swift */,
+				7E667A6D26E3896D0013B1D5 /* adguard.json */,
+				7E667A6E26E3896D0013B1D5 /* whotracksme.json */,
+			);
+			path = DnsTrackers;
+			sourceTree = "<group>";
+		};
 		7E6E7FC226C299AB00925F96 /* AdGuardSDKTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -703,6 +728,7 @@
 				7E6E7FD326C299DA00925F96 /* DnsLogStatisticsTest.swift */,
 				7E6E7FD426C299DA00925F96 /* ActivityStatisticsTest.swift */,
 				7E6E7FD526C299DA00925F96 /* ChartStatisticsTest.swift */,
+				7E667A7626E38C670013B1D5 /* DnsTrackersProviderTest.swift */,
 			);
 			path = StatisticsTest;
 			sourceTree = "<group>";
@@ -1126,6 +1152,7 @@
 				7E6E817326C2A05A00925F96 /* ChartStatistics */,
 				7E6E817D26C2A05A00925F96 /* ActivityStatistics */,
 				7E6E818126C2A05A00925F96 /* DnsLogStatistics */,
+				7E667A6C26E389530013B1D5 /* DnsTrackers */,
 			);
 			path = Statistics;
 			sourceTree = "<group>";
@@ -1486,9 +1513,11 @@
 				7E6E805B26C299DF00925F96 /* EasyListTest.txt in Resources */,
 				7EA5109326C2B2CB00207781 /* update0.101.sql in Resources */,
 				7E667A6826E29D970013B1D5 /* default.db.zip in Resources */,
+				7E667A7026E3896D0013B1D5 /* adguard.json in Resources */,
 				7EA5109526C2B2CB00207781 /* schema0.101.sql in Resources */,
 				7E6E805A26C299DF00925F96 /* AdblockIcelandicFilterTest.txt in Resources */,
 				7EA5109726C2B2CB00207781 /* schema0.100.sql in Resources */,
+				7E667A7226E3896D0013B1D5 /* whotracksme.json in Resources */,
 				7E6E804326C299DE00925F96 /* filters_i18n_test.json in Resources */,
 				7E6E81DE26C2A05B00925F96 /* providers_i18n.json in Resources */,
 			);
@@ -1512,8 +1541,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E667A6F26E3896D0013B1D5 /* adguard.json in Resources */,
 				7E6E81D926C2A05B00925F96 /* providers.json in Resources */,
 				7E6E81DD26C2A05B00925F96 /* providers_i18n.json in Resources */,
+				7E667A7126E3896D0013B1D5 /* whotracksme.json in Resources */,
 				7E6E81DB26C2A05B00925F96 /* DnsProvidersAssets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1562,6 +1593,7 @@
 				7E6E81E826C2A05B00925F96 /* DnsProvider.swift in Sources */,
 				7E6E807E26C2A04100925F96 /* FilterFilesStorage.swift in Sources */,
 				7E6E81A326C2A05B00925F96 /* DnsRequestProcessedEvent.swift in Sources */,
+				7E667A7526E389A00013B1D5 /* DnsTrackers.swift in Sources */,
 				7E6E81C526C2A05B00925F96 /* DnsFilter.swift in Sources */,
 				7E6E802726C299DE00925F96 /* URL+UtilsTest.swift in Sources */,
 				7E6E80BD26C2A04900925F96 /* DateInterval+Utils.swift in Sources */,
@@ -1571,12 +1603,14 @@
 				7E6E815326C2A05300925F96 /* ContentBlockerJsonProvider.swift in Sources */,
 				7E6E802426C299DE00925F96 /* ChartStatisticsTest.swift in Sources */,
 				7E6E814326C2A05300925F96 /* FilterMetaProtocol.swift in Sources */,
+				7E667A7726E38C670013B1D5 /* DnsTrackersProviderTest.swift in Sources */,
 				7E6E814126C2A05300925F96 /* MetaStorage+Groups.swift in Sources */,
 				7E6E804F26C299DE00925F96 /* FiltersConverterServiceTest.swift in Sources */,
 				7E6E803E26C299DE00925F96 /* FiltersServiceMock.swift in Sources */,
 				7E6E803D26C299DE00925F96 /* FiltersConverterServiceMock.swift in Sources */,
 				7E6E80C026C2A04900925F96 /* URL+Utils.swift in Sources */,
 				7E6E816F26C2A05300925F96 /* SafariUserRulesManagersProvider.swift in Sources */,
+				7E667A6B26E389320013B1D5 /* DnsTrackersProvider.swift in Sources */,
 				7E6E815526C2A05300925F96 /* ContentBlockersManager.swift in Sources */,
 				7E6E80B426C2A04100925F96 /* Configuration.swift in Sources */,
 				7E6E804C26C299DE00925F96 /* ContentBlockerJsonProviderTest.swift in Sources */,
@@ -1833,6 +1867,7 @@
 				7E6E80AD26C2A04100925F96 /* UserRule.swift in Sources */,
 				7E6E80A126C2A04100925F96 /* UserRuleConverter.swift in Sources */,
 				7E6E80BC26C2A04900925F96 /* DateInterval+Utils.swift in Sources */,
+				7E667A6A26E389320013B1D5 /* DnsTrackersProvider.swift in Sources */,
 				7E6E81C826C2A05B00925F96 /* DnsUserRulesStorage.swift in Sources */,
 				7E6E80C826C2A04900925F96 /* Atomic.swift in Sources */,
 				7E6E808026C2A04100925F96 /* ParserProtocol.swift in Sources */,
@@ -1845,6 +1880,7 @@
 				7E6E81BE26C2A05B00925F96 /* DnsLogStatistics+DnsLogTable.swift in Sources */,
 				7E6E80BF26C2A04900925F96 /* URL+Utils.swift in Sources */,
 				7E6E81CE26C2A05B00925F96 /* DnsConfiguration.swift in Sources */,
+				7E667A7426E389A00013B1D5 /* DnsTrackers.swift in Sources */,
 				7E6E81BC26C2A05B00925F96 /* DnsLogStatistics.swift in Sources */,
 				7E6E81D426C2A05B00925F96 /* NetworkUtils.swift in Sources */,
 				7E6E81D226C2A05B00925F96 /* Value+Types.swift in Sources */,
