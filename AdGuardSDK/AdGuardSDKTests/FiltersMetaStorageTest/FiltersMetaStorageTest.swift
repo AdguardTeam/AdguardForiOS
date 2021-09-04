@@ -8,12 +8,12 @@ class FiltersMetaStorageTest: XCTestCase {
     var productionDbManager: ProductionDatabaseManager!
     var metaStorage: MetaStorage!
     
-    override func setUpWithError() throws {
+    override func setUp() {
         TestsFileManager.deleteTestFolder()
         TestsFileManager.clearRootDirectory()
-        
-        productionDbManager = try ProductionDatabaseManager(dbContainerUrl: workingUrl)
-        try productionDbManager?.updateDatabaseIfNeeded()
+        TestsFileManager.putDbFileToDirectory(Bundle(for: type(of: self)))
+        productionDbManager = try! ProductionDatabaseManager(dbContainerUrl: workingUrl)
+        try! productionDbManager?.updateDatabaseIfNeeded()
         metaStorage = MetaStorage(productionDbManager: productionDbManager!)
     }
     
@@ -23,17 +23,9 @@ class FiltersMetaStorageTest: XCTestCase {
     }
     
     func testCustomGroupExists() {
-        TestsFileManager.deleteTestFolder()
-        TestsFileManager.clearRootDirectory()
-        
-        productionDbManager = try! ProductionDatabaseManager(dbContainerUrl: workingUrl)
-        try! productionDbManager?.updateDatabaseIfNeeded()
-        var count = try! productionDbManager.filtersDb.scalar("SELECT count(*) FROM filter_groups WHERE group_id = \(SafariGroup.GroupType.custom.rawValue)") as! Int64
-        XCTAssertEqual(count, 0)
-        
         metaStorage = MetaStorage(productionDbManager: productionDbManager)
         
-        count = try! productionDbManager.filtersDb.scalar("SELECT count(*) FROM filter_groups WHERE group_id = \(SafariGroup.GroupType.custom.rawValue)") as! Int64
+        let count = try! productionDbManager.filtersDb.scalar("SELECT count(*) FROM filter_groups WHERE group_id = \(SafariGroup.GroupType.custom.rawValue)") as! Int64
         XCTAssertEqual(count, 1)
     }
 

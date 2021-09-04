@@ -12,7 +12,7 @@ class ActivityStatisticsTest: XCTestCase {
         statistics = try! ActivityStatistics(statisticsDbContainerUrl: TestsFileManager.workingUrl)
     }
     
-    override class func tearDown() {
+    override func tearDown() {
         TestsFileManager.deleteTestFolder()
         TestsFileManager.clearRootDirectory()
     }

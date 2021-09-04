@@ -281,7 +281,8 @@ class DnsFiltersManagerTest: XCTestCase {
     
     // MARK: - Test getDnsLibsFilters
     
-    func testGetDnsLibsFilters() {
+    func testGetDnsLibsFiltersWithDnsFilteringEnabled() {
+        configuration.dnsFilteringIsEnabled = true
         set(filters)
         XCTAssertEqual(manager.filters, filters)
         
@@ -292,6 +293,19 @@ class DnsFiltersManagerTest: XCTestCase {
         
         XCTAssertEqual(filters.count, 1)
         XCTAssertNotNil(filters[1])
+    }
+    
+    func testGetDnsLibsFiltersWithDnsFilteringDisabled() {
+        configuration.dnsFilteringIsEnabled = false
+        set(filters)
+        XCTAssertEqual(manager.filters, filters)
+        
+        let url = URL(string: "https://filters.com")!
+        filtersStorage.stubbedGetUrlForFilterResult = url
+        
+        let filters = manager.getDnsLibsFilters()
+        
+        XCTAssert(filters.isEmpty)
     }
     
     // MARK: - Test reset

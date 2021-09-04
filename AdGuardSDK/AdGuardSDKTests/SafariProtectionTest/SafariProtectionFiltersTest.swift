@@ -127,7 +127,8 @@ class SafariProtectionFiltersTest: XCTestCase {
     // MARK: - Test addCustomFilter
     
     func testAddCustomFilterWithSuccess() {
-        let expectation = XCTestExpectation()
+        let expectation1 = XCTestExpectation()
+        let expectation2 = XCTestExpectation()
         
         let customFilter = CustomFilterMeta(name: "name",
                                             description: "desc",
@@ -142,11 +143,12 @@ class SafariProtectionFiltersTest: XCTestCase {
                                             rulesCount: 199)
         safariProtection.add(customFilter: customFilter, enabled: true) { error in
             XCTAssertNil(error)
-            expectation.fulfill()
+            expectation1.fulfill()
         } onCbReloaded: { error in
-            
+            XCTAssertNil(error)
+            expectation2.fulfill()
         }
-        wait(for: [expectation], timeout: 0.5)
+        wait(for: [expectation1, expectation2], timeout: 0.5)
         
         XCTAssertEqual(filters.addCustomFilterCalledCount, 1)
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
@@ -292,17 +294,17 @@ class SafariProtectionFiltersTest: XCTestCase {
         cbService.updateContentBlockersError = MetaStorageMockError.error
         
         let expectation = XCTestExpectation()
+        let expectation2 = XCTestExpectation()
         safariProtection.updateFiltersMetaAndLocalizations(true) { result in
             switch result {
-            case .success(_): XCTFail()
-            case .error(let error):
-                XCTAssertEqual(error as! MetaStorageMockError, .error)
+            case .success(_): expectation.fulfill()
+            case .error(_): XCTFail()
             }
-            expectation.fulfill()
         } onCbReloaded: { error in
-            
+            XCTAssertEqual(error as! MetaStorageMockError, .error)
+            expectation2.fulfill()
         }
-        wait(for: [expectation], timeout: 0.5)
+        wait(for: [expectation, expectation2], timeout: 1.0)
         
         XCTAssertEqual(filters.updateAllMetaCalledCount, 1)
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
@@ -311,8 +313,8 @@ class SafariProtectionFiltersTest: XCTestCase {
     }
     
     func testUpdateFiltersMetaAndLocalizationsWithUpdateAllMetaAndReloadCbFailure() {
-        filters.updateAllMetaResult = .error(MetaStorageMockError.error)
-        cbService.updateContentBlockersError = MetaStorageMockError.setGroupError
+        filters.updateAllMetaResult = .error(MetaStorageMockError.setGroupError)
+        cbService.updateContentBlockersError = MetaStorageMockError.error
         
         let expectation = XCTestExpectation()
         safariProtection.updateFiltersMetaAndLocalizations(true) { result in
@@ -323,7 +325,7 @@ class SafariProtectionFiltersTest: XCTestCase {
             }
             expectation.fulfill()
         } onCbReloaded: { error in
-            
+            XCTAssertEqual(error as! MetaStorageMockError, .error)
         }
         wait(for: [expectation], timeout: 0.5)
         

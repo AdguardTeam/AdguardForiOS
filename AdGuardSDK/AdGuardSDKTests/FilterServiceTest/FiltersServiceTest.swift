@@ -859,24 +859,6 @@ class FitlerServiceTest: XCTestCase {
         XCTAssertEqual(metaStorage.renameFilterCalledCount, 0)
     }
     
-    func testResetWithSuccess() {
-        let expectation = XCTestExpectation()
-        let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: filtersUpdateFinishedNoteName)
-        let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name: filtersUpdateStartedNoteName)
-        
-        apiMethods.loadFiltersMetadataResult = mockFiltersMeta
-        apiMethods.loadFiltersLocalizationsResult = mockFiltersLocalizations
-        
-        filterService.reset { error in
-            XCTAssertNil(error)
-            expectation.fulfill()
-        }
-        wait(for: [expectation, filtersUpdateFinishedExpectation, filtersUpdateStartedExpectation], timeout: 1.0)
-        
-        XCTAssertEqual(metaStorage.resetCalledCount, 1)
-        XCTAssertEqual(filterFileStorage.resetCalledCount, 1)
-    }
-    
     func testResetWithMetaStorageError() {
         let expectation = XCTestExpectation()
         let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: filtersUpdateFinishedNoteName)

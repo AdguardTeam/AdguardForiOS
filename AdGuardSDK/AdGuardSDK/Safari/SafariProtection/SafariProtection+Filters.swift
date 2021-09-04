@@ -243,25 +243,10 @@ extension SafariProtection {
                     self.reloadContentBlockers { [weak self] error in
                         guard let self = self else {
                             Logger.logError("(SafariProtection+Filters) - updateFiltersMetaAndLocalizations.reloadContentBlockers; self is missing!")
-                            DispatchQueue.main.async { onFiltersUpdated(.error(CommonError.missingSelf)) }
+                            DispatchQueue.main.async { onCbReloaded(CommonError.missingSelf) }
                             return
                         }
-                        
-                        if let error = error {
-                            Logger.logError("(SafariProtection+Filters) - updateFiltersMetaAndLocalizations; Error reloading CBs when updating filters meta forcibly=\(forcibly): \(error)")
-                            self.completionQueue.async { onFiltersUpdated(.error(error)) }
-                            return
-                        } else {
-                            Logger.logInfo("(SafariProtection+Filters) - updateFiltersMetaAndLocalizations; Successfully reloaded CBs after updating filters meta forcibly=\(forcibly)")
-                        }
-                        
-                        switch result {
-                        case .success(var filtersUpdateResult):
-                            filtersUpdateResult.error = error
-                            self.completionQueue.async { onFiltersUpdated(.success(filtersUpdateResult)) }
-                        case .error(let updateError):
-                            self.completionQueue.async { onFiltersUpdated(.error(updateError)) }
-                        }
+                        self.completionQueue.async { onCbReloaded(error) }
                     }
                 }
             }
