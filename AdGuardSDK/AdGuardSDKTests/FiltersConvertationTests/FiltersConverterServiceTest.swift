@@ -54,7 +54,47 @@ class FiltersConverterServiceTest: XCTestCase {
         }
     }
     
-    // TODO: - Add more tests for premium groups and disabled safari protection
+    func testWithDisabledSafariProtection() {
+        configuration.safariProtectionEnabled = false
+        let _ = try! converterService.convertFiltersAndUserRulesToJsons()
+        XCTAssertEqual(filtersConverter.convertCalledCount, 1)
+        XCTAssert(filtersConverter.passedFilters!.isEmpty)
+        XCTAssertNil(filtersConverter.passedBlocklistRules)
+        XCTAssertNil(filtersConverter.passedAllowlistRules)
+    }
+    
+    func testProGroupsOnlyWithoutProStatus() {
+        var groups = getGroups()
+        
+        var securityGroup = SafariGroup(filters: [], isEnabled: true, groupType: .security, groupName: "social", displayNumber: 3)
+        let securityFilter = SafariGroup.Filter(name: "securityFilter", description: nil, isEnabled: true, filterId: 103, version: nil, lastUpdateDate: nil, updateFrequency: nil, group: securityGroup, displayNumber: 10, languages: [], tags: [], homePage: nil, filterDownloadPage: nil, rulesCount: 0)
+        securityGroup.filters = [securityFilter]
+        groups.append(securityGroup)
+        
+        filtersService.groups = groups
+        filesStorage.getFilterResultHandler = { return "testFilter_\($0)" }
+        configuration.allowlistIsInverted = false
+        configuration.safariProtectionEnabled = true
+        
+        let blockRules = [UserRule(ruleText: "block_rule_1", isEnabled: true), UserRule(ruleText: "block_rule_2", isEnabled: false)]
+        (safariManagers.blocklistRulesManager as! BlocklistRulesManagerMock).allRules = blockRules
+        
+        let allowRules = [UserRule(ruleText: "allow_rule_1", isEnabled: false), UserRule(ruleText: "allow_rule_2", isEnabled: true)]
+        (safariManagers.allowlistRulesManager as! AllowlistRulesManagerMock).allRules = allowRules
+        
+        let invAllowRules = [UserRule(ruleText: "inv_allow_rule_1", isEnabled: false), UserRule(ruleText: "inv_allow_rule_2", isEnabled: true)]
+        (safariManagers.invertedAllowlistRulesManager as! InvertedAllowlistRulesManagerMock).allRules = invAllowRules
+        
+        filtersConverter.resultFilters = []
+        let _ = try! converterService.convertFiltersAndUserRulesToJsons()
+        
+        XCTAssertEqual(filtersConverter.convertCalledCount, 1)
+        
+        let expectedFilters = [FilterFileContent(text: "testFilter_3", group: .socialWidgets)]
+        XCTAssertEqual(expectedFilters, filtersConverter.passedFilters)
+        XCTAssertEqual(["block_rule_1"], filtersConverter.passedBlocklistRules)
+        XCTAssertEqual(["allow_rule_2"], filtersConverter.passedAllowlistRules)
+    }
     
     private func getGroups() -> [SafariGroup] {
         var adsGroup = SafariGroup(filters: [], isEnabled: false, groupType: .ads, groupName: "ads", displayNumber: 1)

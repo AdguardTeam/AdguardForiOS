@@ -112,14 +112,14 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
         }
         
         // Run converter with all enabled rules
-        if let safariFilters = filtersConverter.convert(filters: filesContent,
-                                                     blocklistRules: enabledBlockListRules,
-                                                     allowlistRules: enabledAllowlistRules,
-                                                     invertedAllowlistRulesString: enabledInvertedAllowlistRulesString)
-        {
+        if let safariFilters = filtersConverter.convert(
+            filters: filesContent,
+            blocklistRules: enabledBlockListRules,
+            allowlistRules: enabledAllowlistRules,
+            invertedAllowlistRulesString: enabledInvertedAllowlistRulesString
+        ) {
             return safariFilters
-        }
-        else {
+        } else {
             throw ConvertionError.failedToConvertRules
         }
     }

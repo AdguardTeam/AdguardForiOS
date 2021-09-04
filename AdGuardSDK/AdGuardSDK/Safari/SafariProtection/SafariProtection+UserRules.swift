@@ -18,8 +18,6 @@
 
 import Foundation
 
-// TODO: - Write tests for new scheme with errors
-
 public protocol SafariProtectionUserRulesProtocol {
     /**
      Returns String representation of all enabled rules for specified rules type

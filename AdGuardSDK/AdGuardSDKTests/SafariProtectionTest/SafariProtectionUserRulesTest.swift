@@ -178,6 +178,31 @@ class SafariProtectionUserRulesTest: XCTestCase {
         }
     }
     
+    // MARK: - Test turnAllRules
+    
+    func testTurnAllRules() {
+        mocks.forEach { mock in
+            let method: Method = { completion in
+                self.safariProtection.turnRules(["rule1", "rule2"], on: true, for: mock.type) { error in
+                    completion(error)
+                }
+            }
+            
+            mock.modifyRuleCalledCount = 0
+            testMethodWithSuccess() { completion in
+                try method(completion)
+            }
+            XCTAssertEqual(mock.modifyRuleCalledCount, 2)
+            
+            
+            mock.modifyRuleCalledCount = 0
+            testMethodWithCbReloadError() { completion in
+                try method(completion)
+            }
+            XCTAssertEqual(mock.modifyRuleCalledCount, 2)
+        }
+    }
+    
     // MARK: - Test removeRule
     
     func testRemoveRule() {
@@ -209,6 +234,31 @@ class SafariProtectionUserRulesTest: XCTestCase {
                 try method(completion)
             }
             XCTAssertEqual(mock.removeRuleCalledCount, 1)
+        }
+    }
+    
+    // MARK: - Test removeRules
+    
+    func testRemoveRules() {
+        mocks.forEach { mock in
+            let method: Method = { completion in
+                self.safariProtection.removeRules(["rule1", "rule2"], for: mock.type) { error in
+                    completion(error)
+                }
+            }
+            
+            mock.removeRuleCalledCount = 0
+            testMethodWithSuccess() { completion in
+                try method(completion)
+            }
+            XCTAssertEqual(mock.removeRuleCalledCount, 2)
+                        
+            
+            mock.removeRuleCalledCount = 0
+            testMethodWithCbReloadError() { completion in
+                try method(completion)
+            }
+            XCTAssertEqual(mock.removeRuleCalledCount, 2)
         }
     }
     

@@ -51,7 +51,7 @@ public protocol CustomFilterMetaParserProtocol {
 // MARK: - CustomFilterMetaParserProtocol + default implementation
 
 public extension CustomFilterMetaParserProtocol {
-    // TODO: - Add tests with filterDownloadPage
+    
     func parse(_ filterFileContentString: String, for parserType: CustomFilterMetaParserType, filterDownloadPage: String?) throws -> ExtendedCustomFilterMetaProtocol {
         
         // Check if file's content is valid

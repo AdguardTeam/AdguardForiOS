@@ -23,6 +23,24 @@ class CustomFilterMetaParserTest: XCTestCase {
         XCTAssertEqual(result.rulesCount, 48)
     }
     
+    func testEasyListFilterWithPassedUrl() {
+        let url = "https://domain.com"
+        let fileContent = getStringFromFile("EasyListTest")
+        let result = try! parser.parse(fileContent, for: .safari, filterDownloadPage: url)
+        
+        XCTAssertEqual(result.name, "EasyList")
+        XCTAssertNil(result.description)
+        XCTAssertEqual(result.version, "202105121116")
+        XCTAssertNotNil(result.lastUpdateDate)
+        XCTAssertEqual(result.updateFrequency, 345600)
+        XCTAssertEqual(result.homePage, "https://easylist.to/")
+        XCTAssertEqual(result.licensePage, "https://easylist.to/pages/licence.html")
+        XCTAssertNil(result.issuesReportPage)
+        XCTAssertNil(result.communityPage)
+        XCTAssertEqual(result.filterDownloadPage, url)
+        XCTAssertEqual(result.rulesCount, 48)
+    }
+    
     func testAdblockIcelandicFilter() {
         let fileContent = getStringFromFile("AdblockIcelandicFilterTest")
         let result = try! parser.parse(fileContent, for: .safari, filterDownloadPage: nil)
