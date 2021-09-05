@@ -20,15 +20,10 @@ import Foundation
 
 // MARK: - DnsTrackers
 struct DnsTrackers: Decodable {
-    let jsonType: JsonType
+    let jsonType: DnsTracker.JsonType
     let categories: [DnsTracker.Category]
-    let trackers: [String: DnsTracker]
+    private(set) var trackers: [String: DnsTracker]
     let trackerDomains: [String: String]
-    
-    enum JsonType: String, Decodable {
-        case adGuard = "adguard"
-        case whoTracksMe = "whotracksme"
-    }
     
     enum CodingKeys: String, CodingKey {
         case jsonType
@@ -40,7 +35,7 @@ struct DnsTrackers: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        self.jsonType = try container.decode(JsonType.self, forKey: .jsonType)
+        self.jsonType = try container.decode(DnsTracker.JsonType.self, forKey: .jsonType)
         let categoriesDict = try container.decode([String: String].self, forKey: .categories)
         self.categories = categoriesDict.keys.compactMap { idStr in
             if let id = Int(idStr) {
@@ -48,17 +43,31 @@ struct DnsTrackers: Decodable {
             }
             return nil
         }
+        self.trackerDomains = try container.decode([String: String].self, forKey: .trackerDomains)
         
         self.trackers = try container.decode([String: DnsTracker].self, forKey: .trackers)
-        self.trackerDomains = try container.decode([String: String].self, forKey: .trackerDomains)
+        self.trackers.keys.forEach { self.trackers[$0]?.jsonType = jsonType }
+    }
+    
+    func getTracker(by domain: String) -> DnsTracker? {
+        guard let trackerKey = trackerDomains[domain], let tracker = trackers[trackerKey] else {
+            return nil
+        }
+        return tracker
     }
 }
 
 // MARK: - DnsTracker
 struct DnsTracker: Decodable {
+    fileprivate(set) var jsonType: JsonType = .adGuard
     let name: String
     let category: Category
     let url: String?
+    
+    enum JsonType: String, Decodable {
+        case adGuard = "adguard"
+        case whoTracksMe = "whotracksme"
+    }
     
     enum CodingKeys: String, CodingKey {
         case name

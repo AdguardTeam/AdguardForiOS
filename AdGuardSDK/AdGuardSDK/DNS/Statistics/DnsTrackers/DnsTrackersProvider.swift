@@ -18,17 +18,27 @@
 
 import Foundation
 
+protocol DnsTrackersProviderProtocol: AnyObject {
+    /// Returns tracker object by domain if found in json or nil otherwise
+    func getTracker(by domain: String) -> DnsTracker?
+}
+
 /**
- This file is downloaded from https://github.com/AdguardTeam/AdGuardHome/tree/master/client/src/helpers/trackers
+ This class is responsible for providing tracker information by domain
+ There are 2 json files with trackers information: `adguard.json` and `whotracksme.json`
+ Trackers information from `adguard.json` has a higher priority than from `whotracksme.json`
+ If tracker is not found in `adguard.json` we're trying to find it in `whotracksme.json`
  */
-final class DnsTrackersProvider {
+final class DnsTrackersProvider: DnsTrackersProviderProtocol {
     private let whoTracksMeTrackers: DnsTrackers
     private let adguardTrackers: DnsTrackers
     
     init() throws {
         let bundle = Bundle(for: type(of: self))
-        guard let whotracksmeUrl = bundle.url(forResource: DnsTrackers.JsonType.whoTracksMe.rawValue, withExtension: "json"),
-              let adguardUrl = bundle.url(forResource: DnsTrackers.JsonType.adGuard.rawValue, withExtension: "json")
+        
+        /// These files can be found here https://github.com/AdguardTeam/AdGuardHome/tree/master/client/src/helpers/trackers
+        guard let whotracksmeUrl = bundle.url(forResource: DnsTracker.JsonType.whoTracksMe.rawValue, withExtension: "json"),
+              let adguardUrl = bundle.url(forResource: DnsTracker.JsonType.adGuard.rawValue, withExtension: "json")
         else {
             throw CommonError.missingFile(filename: "whotracksme.json||adguard.json")
         }
@@ -38,5 +48,19 @@ final class DnsTrackersProvider {
         
         self.whoTracksMeTrackers = try JSONDecoder().decode(DnsTrackers.self, from: whotracksmeData)
         self.adguardTrackers = try JSONDecoder().decode(DnsTrackers.self, from: adguardData)
+    }
+    
+    func getTracker(by domain: String) -> DnsTracker? {
+        guard !domain.isEmpty else {
+            return nil
+        }
+        
+        if let adguardTracker = adguardTrackers.getTracker(by: domain) {
+            return adguardTracker
+        }
+        if let whotracksmeTracker = whoTracksMeTrackers.getTracker(by: domain) {
+            return whotracksmeTracker
+        }
+        return nil
     }
 }
