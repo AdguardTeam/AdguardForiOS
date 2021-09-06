@@ -20,10 +20,10 @@
   resolved "https://registry.yarnpkg.com/@adguard/translate/-/translate-0.2.3.tgz#f30ef9000a3073ea0c24860cd0bf685b16de063b"
   integrity sha512-I0XcTSKrrRryD1PGd8kPKHB5SIY45+gTEAMqhpo2lDyUNMkW9MdhrNeAuoejJ+BuqU2TT+jK7KCNe33r7IsSjw==
 
-"@adguard/tsurlfilter@^0.5.28":
-  version "0.5.28"
-  resolved "https://registry.yarnpkg.com/@adguard/tsurlfilter/-/tsurlfilter-0.5.28.tgz#53c8fe6d2ca9315b42620ee9b7725b5846c0b691"
-  integrity sha512-AndfpB3EwyEWAWVPe8fXc6seBRJOY4tzLrajpiIYEs/v/wey8urkn/iBPCPg0nMIu/I7N8Zd/mjnRo8EwLRq6w==
+"@adguard/tsurlfilter@^0.6.1":
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/@adguard/tsurlfilter/-/tsurlfilter-0.6.1.tgz#26e6f5a8ebf933c07d22d866e84f457a5da8c8cc"
+  integrity sha512-cR5KiDJNi6BRHCEP3cQGsD6brgExh1i0z0exAqctx20ypeEtFIR2VAgC7SNLceMU0vAQp4GNyiUZC1uny56/fw==
   dependencies:
     "@adguard/scriptlets" "^1.4.4"
     "@types/ip6addr" "^0.2.3"
@@ -34,6 +34,7 @@
     ip6addr "^0.2.3"
     is-cidr "^4.0.2"
     is-ip "^3.1.0"
+    lru_map "^0.4.1"
     netmask "^2.0.2"
     punycode "^2.1.1"
     text-encoding "git+https://github.com/AdguardTeam/text-encoding.git#v0.7.1"
@@ -4673,6 +4674,11 @@ lru-cache@^6.0.0:
   integrity sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==
   dependencies:
     yallist "^4.0.0"
+
+lru_map@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/lru_map/-/lru_map-0.4.1.tgz#f7b4046283c79fb7370c36f8fca6aee4324b0a98"
+  integrity sha512-I+lBvqMMFfqaV8CJCISjI3wbjmwVu/VyOoU7+qtu9d7ioW5klMgsTTiUOUp+DJvfTTzKXoPbyC6YfgkNcyPSOg==
 
 make-dir@^3.0.0, make-dir@^3.0.2, make-dir@^3.1.0:
   version "3.1.0"

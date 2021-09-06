@@ -68,7 +68,7 @@ const getScriptsAndSelectors = async (url: string): Promise<SelectorsAndScripts>
 
     const scriptRules = cosmeticResult.getScriptRules();
 
-    const debug = true;
+    const debug = false;
     const scripts = scriptRules
         .map((scriptRule) => scriptRule.getScript(debug))
         .filter((script): script is string => script !== null);
