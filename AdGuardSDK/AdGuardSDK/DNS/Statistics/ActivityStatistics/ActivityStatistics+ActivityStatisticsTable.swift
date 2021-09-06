@@ -123,9 +123,8 @@ public struct CountersStatisticsRecord: Equatable {
     let encrypted: Int
     let blocked: Int
     let averageElapsed: Int
-}
-
-extension CountersStatisticsRecord {
+    let elapsedSumm: Int
+    
     init(dbRecord: SQLite.Statement.Element) {
         let requests = dbRecord[0] as? Int64 ?? 0
         let encrypted = dbRecord[1] as? Int64 ?? 0
@@ -138,11 +137,21 @@ extension CountersStatisticsRecord {
         self.requests = requests
         self.encrypted = encrypted
         self.blocked = blocked
+        self.elapsedSumm = elapsedSumm
         
         if requests == 0 {
             self.averageElapsed = 0
         } else {
             self.averageElapsed = Int(elapsedSumm / requests)
         }
+    }
+    
+    static func +(left: CountersStatisticsRecord, right: CountersStatisticsRecord) -> CountersStatisticsRecord {
+        return CountersStatisticsRecord(
+            requests: left.requests + right.requests,
+            encrypted: left.encrypted + right.encrypted,
+            blocked: left.blocked + right.blocked,
+            elapsedSumm: left.elapsedSumm + right.elapsedSumm
+        )
     }
 }
