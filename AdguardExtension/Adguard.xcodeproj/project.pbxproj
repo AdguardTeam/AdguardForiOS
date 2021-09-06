@@ -411,6 +411,18 @@
 		7E15720C22DF4C25007060D7 /* ContentBlockerStateDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15720B22DF4C25007060D7 /* ContentBlockerStateDataSource.swift */; };
 		7E15B65D234358C20048E63F /* DnsFiltersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15B65C234358C20048E63F /* DnsFiltersController.swift */; };
 		7E15B65E2343B39A0048E63F /* AdvancedSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3094A233B4E5E006C6EC1 /* AdvancedSettingsController.swift */; };
+		7E15DFD726E63A460020247E /* UIDevice+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15DFD626E63A460020247E /* UIDevice+Utils.swift */; };
+		7E15DFD926E63AE30020247E /* UIDevice+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15DFD626E63A460020247E /* UIDevice+Utils.swift */; };
+		7E15DFDA26E63AE40020247E /* UIDevice+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15DFD626E63A460020247E /* UIDevice+Utils.swift */; };
+		7E15DFDB26E63AE50020247E /* UIDevice+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15DFD626E63A460020247E /* UIDevice+Utils.swift */; };
+		7E15DFDC26E63AE70020247E /* UIDevice+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15DFD626E63A460020247E /* UIDevice+Utils.swift */; };
+		7E15DFDD26E63AE70020247E /* UIDevice+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15DFD626E63A460020247E /* UIDevice+Utils.swift */; };
+		7E15DFE026E63AEF0020247E /* UIDevice+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15DFD626E63A460020247E /* UIDevice+Utils.swift */; };
+		7E15DFE126E63AF20020247E /* UIDevice+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15DFD626E63A460020247E /* UIDevice+Utils.swift */; };
+		7E15DFE626E648120020247E /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E15DFE526E648120020247E /* SafariAdGuardSDK.framework */; };
+		7E15DFE726E648120020247E /* SafariAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7E15DFE526E648120020247E /* SafariAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7E15DFE926E6481A0020247E /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E15DFE826E6481A0020247E /* SafariAdGuardSDK.framework */; };
+		7E15DFEA26E6481A0020247E /* SafariAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7E15DFE826E6481A0020247E /* SafariAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7E18952723FD8E6D006FB241 /* RateAppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A29F8823E0334000D974CF /* RateAppService.swift */; };
 		7E1AB61025824A0200519B2B /* ParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F93F23F2B64400F9A544 /* ParserProtocol.swift */; };
 		7E1AB64625824A6600519B2B /* SupportService+Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA7834A2578E54500CA8889 /* SupportService+Feedback.swift */; };
@@ -579,7 +591,6 @@
 		7E60821A26D5639200D778F4 /* ACLFileLocker.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01BA1C6B7686000F00D7 /* ACLFileLocker.m */; };
 		7E60821B26D56A7600D778F4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659E59751BC6D82700FA2384 /* Localizable.strings */; };
 		7E60821C26D56A7600D778F4 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659E59751BC6D82700FA2384 /* Localizable.strings */; };
-		7E667A6326E26B760013B1D5 /* ContentBlockerConverter in Frameworks */ = {isa = PBXBuildFile; productRef = 7E667A6226E26B750013B1D5 /* ContentBlockerConverter */; };
 		7E6D962623E17347006202C2 /* RequestDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6D962523E17347006202C2 /* RequestDetailsCell.swift */; };
 		7E70264F26DD086E00F8FC25 /* DnsAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E70264E26DD086E00F8FC25 /* DnsAdGuardSDK.framework */; };
 		7E70265026DD086E00F8FC25 /* DnsAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7E70264E26DD086E00F8FC25 /* DnsAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -2610,6 +2621,17 @@
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7E15DFEB26E6481A0020247E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7E15DFEA26E6481A0020247E /* SafariAdGuardSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7EAD353226C2C8C8001AFB3A /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2688,6 +2710,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				7E15DFE726E648120020247E /* SafariAdGuardSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3170,6 +3193,9 @@
 		7E15720822DF32E3007060D7 /* ContentBlockerStateCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentBlockerStateCell.xib; sourceTree = "<group>"; };
 		7E15720B22DF4C25007060D7 /* ContentBlockerStateDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerStateDataSource.swift; sourceTree = "<group>"; };
 		7E15B65C234358C20048E63F /* DnsFiltersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsFiltersController.swift; sourceTree = "<group>"; };
+		7E15DFD626E63A460020247E /* UIDevice+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Utils.swift"; sourceTree = "<group>"; };
+		7E15DFE526E648120020247E /* SafariAdGuardSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SafariAdGuardSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E15DFE826E6481A0020247E /* SafariAdGuardSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SafariAdGuardSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E1BAE71233A1AFF00F1EBEB /* SafariProtectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariProtectionController.swift; sourceTree = "<group>"; };
 		7E1E41562424BFD100567C8D /* MostActiveCompaniesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostActiveCompaniesController.swift; sourceTree = "<group>"; };
 		7E1E41592424C01100567C8D /* MostActiveCompaniesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostActiveCompaniesCell.swift; sourceTree = "<group>"; };
@@ -4144,7 +4170,6 @@
 				D07256AB26BC13AB00654177 /* SQLite in Frameworks */,
 				D020B28121F8B71D0075BB8D /* libresolv.tbd in Frameworks */,
 				7EF5C56026C269D6001851D6 /* Sentry in Frameworks */,
-				7E667A6326E26B760013B1D5 /* ContentBlockerConverter in Frameworks */,
 				7E8CA29826C2F7F400F674F1 /* SafariAdGuardSDK.framework in Frameworks */,
 				7E4D205B22D71AE8003B0E75 /* Security.framework in Frameworks */,
 				7E4D205E22D71B3E003B0E75 /* libiconv.tbd in Frameworks */,
@@ -4206,6 +4231,7 @@
 				7E536C67238D2AC400A83A79 /* NotificationCenter.framework in Frameworks */,
 				D07256C826BC15BF00654177 /* Zip in Frameworks */,
 				7EC1F9E32391175600210959 /* NetworkExtension.framework in Frameworks */,
+				7E15DFE626E648120020247E /* SafariAdGuardSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4354,6 +4380,7 @@
 				D06E9C0E2690717800E5AB5C /* Zip in Frameworks */,
 				D06E9BF826906B1F00E5AB5C /* SQLite in Frameworks */,
 				D06E9BD8268CC2C000E5AB5C /* Setapp in Frameworks */,
+				7E15DFE926E6481A0020247E /* SafariAdGuardSDK.framework in Frameworks */,
 				D06E9BD6268CC2AD00E5AB5C /* AGDnsProxy in Frameworks */,
 				D0B544242435C6B8002F0AEC /* NotificationCenter.framework in Frameworks */,
 				D0B544252435C6B8002F0AEC /* NetworkExtension.framework in Frameworks */,
@@ -5577,6 +5604,8 @@
 		65D8294D1EDDA905008F7F30 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7E15DFE826E6481A0020247E /* SafariAdGuardSDK.framework */,
+				7E15DFE526E648120020247E /* SafariAdGuardSDK.framework */,
 				7E70265126DD087B00F8FC25 /* DnsAdGuardSDK.framework */,
 				7E70264E26DD086E00F8FC25 /* DnsAdGuardSDK.framework */,
 				7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */,
@@ -6444,6 +6473,7 @@
 				24ED98C5259B78DF00A73B17 /* Array+Utils.swift */,
 				7EB89CAF26C50C5F00E7C8A1 /* FileManager+Utils.swift */,
 				7E3FEFBC26CEB4E90080EC03 /* Bool+Utils.swift */,
+				7E15DFD626E63A460020247E /* UIDevice+Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -6861,7 +6891,6 @@
 				D07256AA26BC13AB00654177 /* SQLite */,
 				D07256AE26BC13CA00654177 /* Zip */,
 				7EF5C55F26C269D6001851D6 /* Sentry */,
-				7E667A6226E26B750013B1D5 /* ContentBlockerConverter */,
 			);
 			productName = AdguardExtension;
 			productReference = 65F398111B7B684700ABCD39 /* Adguard.app */;
@@ -7320,6 +7349,7 @@
 				D0B543EA2435C6B8002F0AEC /* Sources */,
 				D0B544232435C6B8002F0AEC /* Frameworks */,
 				D0B544262435C6B8002F0AEC /* Resources */,
+				7E15DFEB26E6481A0020247E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -7564,7 +7594,6 @@
 				A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */,
 				D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */,
 				7EF5C55E26C269D6001851D6 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
-				7E667A6126E26B750013B1D5 /* XCRemoteSwiftPackageReference "SafariConverterLib" */,
 			);
 			productRefGroup = 65F398121B7B684700ABCD39 /* Products */;
 			projectDirPath = "";
@@ -8471,6 +8500,7 @@
 				7EF5C57326C26E18001851D6 /* EdgeInsetLabel.swift in Sources */,
 				7E9C0BCE25627E8D00F1999D /* UIColor+Utils.swift in Sources */,
 				D0B5456E2435D5CD002F0AEC /* DnsFiltersModel.swift in Sources */,
+				7E15DFDB26E63AE50020247E /* UIDevice+Utils.swift in Sources */,
 				D0B545DB2435D69B002F0AEC /* RoundRectButton.swift in Sources */,
 				244339722580D8AB00AB4F26 /* BlockingModeController.swift in Sources */,
 				7E70266126DD28C600F8FC25 /* SafariUserRulesTableModel.swift in Sources */,
@@ -8585,6 +8615,7 @@
 				D08CE42A240D38A000A70089 /* LoginService.swift in Sources */,
 				655A022A1C6B7686000F00D7 /* ACIOUtils.m in Sources */,
 				D03E533121B6A49000C62152 /* RoundRectButton.swift in Sources */,
+				7E15DFD926E63AE30020247E /* UIDevice+Utils.swift in Sources */,
 				7E407995231E7A52007EFB26 /* ActionViewController.swift in Sources */,
 				D08CE428240D37E300A70089 /* PurchaseService.swift in Sources */,
 				24ED98C8259B78DF00A73B17 /* Array+Utils.swift in Sources */,
@@ -8879,6 +8910,7 @@
 				655E94961BBEB31400286FBE /* AEUIPlayerViewController.m in Sources */,
 				658E43981E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
 				D031A139219EFC99002C17D9 /* DDMultiFormatter.m in Sources */,
+				7E15DFD726E63A460020247E /* UIDevice+Utils.swift in Sources */,
 				7E822C0E2435EDD30015B4D0 /* RulesParser.swift in Sources */,
 				65EC9C8C1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				247432DE261731C00025C7B8 /* UIAlerController+Style.swift in Sources */,
@@ -9363,6 +9395,7 @@
 				7E334028239034CB00C39F62 /* ACLExecuteBlockDelayed.m in Sources */,
 				7ECD9C63238E6E2E0065E88D /* ADLocations.m in Sources */,
 				7EF5C53926C2621C001851D6 /* SharedResources.swift in Sources */,
+				7E15DFE126E63AF20020247E /* UIDevice+Utils.swift in Sources */,
 				D0D7E5A8243C9558001801A5 /* APDnsServerAddress.m in Sources */,
 				7EE8AC1E26C595F70070D477 /* ThemeMode.swift in Sources */,
 				7ECD9C43238D65720065E88D /* FMDatabase.m in Sources */,
@@ -9546,6 +9579,7 @@
 				7EE8AC1B26C595F30070D477 /* ThemeMode.swift in Sources */,
 				D020B28E21FA12FE0075BB8D /* DnsProxyService.swift in Sources */,
 				D0569E0821F1C0A800985DA9 /* DDContextFilterLogFormatter.m in Sources */,
+				7E15DFDA26E63AE40020247E /* UIDevice+Utils.swift in Sources */,
 				7E9C0C35256292E100F1999D /* UIColor+Utils.swift in Sources */,
 				7EAD353526C2D378001AFB3A /* NotificationCenter+Utils.swift in Sources */,
 				D0569E0921F1C0A800985DA9 /* CLIColor.m in Sources */,
@@ -10122,6 +10156,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0B543EB2435C6B8002F0AEC /* DDLog.m in Sources */,
+				7E15DFE026E63AEF0020247E /* UIDevice+Utils.swift in Sources */,
 				D0B543EC2435C6B8002F0AEC /* Date+Utils.swift in Sources */,
 				2425D73B258F8D1E0037AEBE /* CharacterSet+Utils.swift in Sources */,
 				D0B543ED2435C6B8002F0AEC /* DnsLogRecord.swift in Sources */,
@@ -10226,6 +10261,7 @@
 				D0F5F85225E8FA0C004E4A82 /* VpnConfigurationStatus.swift in Sources */,
 				D0B544412435C6BC002F0AEC /* ACFFileUtils.m in Sources */,
 				D0B544462435C6BC002F0AEC /* LoginService.swift in Sources */,
+				7E15DFDC26E63AE70020247E /* UIDevice+Utils.swift in Sources */,
 				24ED98CC259B78DF00A73B17 /* Array+Utils.swift in Sources */,
 				D0B544472435C6BC002F0AEC /* ACIOUtils.m in Sources */,
 				D0B544482435C6BC002F0AEC /* RoundRectButton.swift in Sources */,
@@ -10402,6 +10438,7 @@
 				D0B545072435C6BF002F0AEC /* VpnManager.swift in Sources */,
 				D0B545082435C6BF002F0AEC /* ACLExecuteBlockDelayed.m in Sources */,
 				D0B545092435C6BF002F0AEC /* DnsLogRecord.swift in Sources */,
+				7E15DFDD26E63AE70020247E /* UIDevice+Utils.swift in Sources */,
 				D0B5450A2435C6BF002F0AEC /* APCommonSharedResources.m in Sources */,
 				D0B5450C2435C6BF002F0AEC /* DnsProxyService.swift in Sources */,
 				D0B5450D2435C6BF002F0AEC /* DDContextFilterLogFormatter.m in Sources */,
@@ -13430,14 +13467,6 @@
 				minimumVersion = 3.1.6;
 			};
 		};
-		7E667A6126E26B750013B1D5 /* XCRemoteSwiftPackageReference "SafariConverterLib" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AdguardTeam/SafariConverterLib";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.3;
-			};
-		};
 		7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/marmelroy/Zip.git";
@@ -13485,11 +13514,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7E2522122408201700743648 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
-		};
-		7E667A6226E26B750013B1D5 /* ContentBlockerConverter */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7E667A6126E26B750013B1D5 /* XCRemoteSwiftPackageReference "SafariConverterLib" */;
-			productName = ContentBlockerConverter;
 		};
 		7EF5C55F26C269D6001851D6 /* Sentry */ = {
 			isa = XCSwiftPackageProductDependency;
