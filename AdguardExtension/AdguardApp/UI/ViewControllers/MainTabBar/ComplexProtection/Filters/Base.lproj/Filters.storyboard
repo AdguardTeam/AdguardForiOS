@@ -404,6 +404,7 @@
                             <outlet property="delegate" destination="Gbg-cv-RVg" id="yg2-Nv-w4Y"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <connections>
                         <outlet property="numberOfFiltersLabel" destination="2kF-Mk-dHf" id="Yn1-hr-EjL"/>
                         <outlet property="protectionStateSwitch" destination="T8x-Ho-7mV" id="BrR-ha-I06"/>
@@ -943,7 +944,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1hm-g5-e5o" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1752" y="-54"/>
+            <point key="canvasLocation" x="-1941" y="198"/>
         </scene>
         <!--Safari Group Filters Table Controller-->
         <scene sceneID="hf8-sm-Ckb">

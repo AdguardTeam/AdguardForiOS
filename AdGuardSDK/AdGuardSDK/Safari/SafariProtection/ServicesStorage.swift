@@ -57,21 +57,28 @@ final class ServicesStorage: ServicesStorageProtocol {
         
         self.safariManagers = SafariUserRulesManagersProvider(userDefaultsStorage: self.userDefaults)
         
-        self.cbStorage = try ContentBlockersInfoStorage(jsonStorageUrl: jsonStorageUrl,
-                                                        userDefaultsStorage: self.userDefaults)
+        self.cbStorage = try ContentBlockersInfoStorage(
+            jsonStorageUrl: jsonStorageUrl,
+            userDefaultsStorage: self.userDefaults
+        )
         
-        self.cbService = ContentBlockerService(configuration: self.configuration,
-                                               jsonStorage: self.cbStorage)
+        self.cbService = ContentBlockerService(appBundleId: configuration.appBundleId)
         
-        self.filters = try FiltersService(configuration: self.configuration,
-                                          filterFilesStorage: filterFilesStorage,
-                                          metaStorage: metaStorage,
-                                          userDefaultsStorage: self.userDefaults,
-                                          apiMethods: apiMethods)
+        self.filters = try FiltersService(
+            configuration: self.configuration,
+            filterFilesStorage: filterFilesStorage,
+            metaStorage: metaStorage,
+            userDefaultsStorage: self.userDefaults,
+            apiMethods: apiMethods
+        )
         
-        self.converter = FiltersConverterService(configuration: self.configuration,
-                                                 filtersService: self.filters,
-                                                 filterFilesStorage: filterFilesStorage,
-                                                 safariManagers: safariManagers)
+        let filtersConverter = FiltersConverter(configuration: configuration)
+        self.converter = FiltersConverterService(
+            configuration: configuration,
+            filtersService: filters,
+            filterFilesStorage: filterFilesStorage,
+            safariManagers: safariManagers,
+            filtersConverter: filtersConverter
+        )
     }
 }

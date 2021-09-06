@@ -31,6 +31,7 @@ final class FilterDetailsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var buttonsStackView: UIStackView!
     @IBOutlet weak var stackViewHeightConstraint: NSLayoutConstraint!
+    
     // MARK: - Public properties
     
     weak var delegate: FilterDetailsViewControllerDelegate!

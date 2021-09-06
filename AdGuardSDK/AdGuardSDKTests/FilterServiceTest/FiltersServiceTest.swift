@@ -31,7 +31,8 @@ class FitlerServiceTest: XCTestCase {
                                             version: filter.version,
                                             lastUpdateDate: filter.lastUpdateTime,
                                             languages: [],
-                                            tags: [])
+                                            tags: [],
+                                            rulesCount: 0)
         }
         return ExtendedFiltersMeta(groups: groups,
                                    tags: tags,
@@ -250,7 +251,8 @@ class FitlerServiceTest: XCTestCase {
                                                   version: modifiedFilter.version! + "1",
                                                   lastUpdateDate: modifiedFilter.lastUpdateDate,
                                                   languages: [],
-                                                  tags: [])
+                                                  tags: [],
+                                                  rulesCount: 0)
         let modifiedFilterIndex = modifiedFilters.firstIndex(where: { $0.filterId == modifiedFilterId })!
         modifiedFilters[modifiedFilterIndex] = modifiedFilter
         
@@ -268,7 +270,8 @@ class FitlerServiceTest: XCTestCase {
                                                  version: "1.1.1.1",
                                                  lastUpdateDate: Date(),
                                                  languages: [],
-                                                 tags: [])
+                                                 tags: [],
+                                                 rulesCount: 0)
         modifiedFilters.append(newFilter)
     
         let newMeta = ExtendedFiltersMeta(groups: mockFiltersMeta.groups, tags: mockFiltersMeta.tags, filters: modifiedFilters)
@@ -854,24 +857,6 @@ class FitlerServiceTest: XCTestCase {
             }
         }
         XCTAssertEqual(metaStorage.renameFilterCalledCount, 0)
-    }
-    
-    func testResetWithSuccess() {
-        let expectation = XCTestExpectation()
-        let filtersUpdateFinishedExpectation = XCTNSNotificationExpectation(name: filtersUpdateFinishedNoteName)
-        let filtersUpdateStartedExpectation = XCTNSNotificationExpectation(name: filtersUpdateStartedNoteName)
-        
-        apiMethods.loadFiltersMetadataResult = mockFiltersMeta
-        apiMethods.loadFiltersLocalizationsResult = mockFiltersLocalizations
-        
-        filterService.reset { error in
-            XCTAssertNil(error)
-            expectation.fulfill()
-        }
-        wait(for: [expectation, filtersUpdateFinishedExpectation, filtersUpdateStartedExpectation], timeout: 1.0)
-        
-        XCTAssertEqual(metaStorage.resetCalledCount, 1)
-        XCTAssertEqual(filterFileStorage.resetCalledCount, 1)
     }
     
     func testResetWithMetaStorageError() {

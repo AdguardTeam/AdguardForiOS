@@ -20,7 +20,7 @@ import Foundation
 
 final class DnsUserRulesStorage: UserRulesStorageProtocol {
     
-    var rules: [UserRuleProtocol] {
+    var rules: [UserRule] {
         get {
             let allRules = getAllRules()
             let enabledRules = getEnabledRules()

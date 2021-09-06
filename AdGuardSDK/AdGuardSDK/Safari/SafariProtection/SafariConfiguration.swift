@@ -21,7 +21,9 @@ import Foundation
 // MARK: - ConfigurationProtocol
 
 public protocol SafariConfigurationProtocol: ConfigurationProtocol {
+    var iosVersion: Int { get set } // iOS version is used in SafariConverter lib, it can be obtained with UIDevice.current.systemVersion
     var safariProtectionEnabled: Bool { get set }
+    var advancedBlockingIsEnabled: Bool { get set } // Feature is available since iOS 15
     var blocklistIsEnabled: Bool { get set }
     var allowlistIsEnbaled: Bool { get set }
     var allowlistIsInverted: Bool { get set }
@@ -39,10 +41,11 @@ public protocol SafariConfigurationProtocol: ConfigurationProtocol {
 // MARK: - Configuration
 
 public final class SafariConfiguration: SafariConfigurationProtocol {
+    public var iosVersion: Int
     public let currentLanguage: String
-    
     public var proStatus: Bool
     public var safariProtectionEnabled: Bool
+    public var advancedBlockingIsEnabled: Bool
     public var blocklistIsEnabled: Bool
     public var allowlistIsEnbaled: Bool
     public var allowlistIsInverted: Bool
@@ -53,22 +56,41 @@ public final class SafariConfiguration: SafariConfigurationProtocol {
     public let cid: String
     
     public var copy: SafariConfiguration {
-        return SafariConfiguration(currentLanguage: currentLanguage,
-                             proStatus: proStatus,
-                             safariProtectionEnabled: safariProtectionEnabled,
-                             blocklistIsEnabled: blocklistIsEnabled,
-                             allowlistIsEnbaled: allowlistIsEnbaled,
-                             allowlistIsInverted: allowlistIsInverted,
-                             appBundleId: appBundleId,
-                             appProductVersion: appProductVersion,
-                             appId: appId,
-                             cid: cid)
+        return SafariConfiguration(
+            iosVersion: iosVersion,
+            currentLanguage: currentLanguage,
+            proStatus: proStatus,
+            safariProtectionEnabled: safariProtectionEnabled,
+            advancedBlockingIsEnabled: advancedBlockingIsEnabled,
+            blocklistIsEnabled: blocklistIsEnabled,
+            allowlistIsEnbaled: allowlistIsEnbaled,
+            allowlistIsInverted: allowlistIsInverted,
+            appBundleId: appBundleId,
+            appProductVersion: appProductVersion,
+            appId: appId,
+            cid: cid
+        )
     }
     
-    public init(currentLanguage: String, proStatus: Bool, safariProtectionEnabled: Bool, blocklistIsEnabled: Bool, allowlistIsEnbaled: Bool, allowlistIsInverted: Bool, appBundleId: String, appProductVersion: String, appId: String, cid: String) {
+    public init(
+        iosVersion: Int,
+        currentLanguage: String,
+        proStatus: Bool,
+        safariProtectionEnabled: Bool,
+        advancedBlockingIsEnabled: Bool,
+        blocklistIsEnabled: Bool,
+        allowlistIsEnbaled: Bool,
+        allowlistIsInverted: Bool,
+        appBundleId: String,
+        appProductVersion: String,
+        appId: String,
+        cid: String
+    ) {
+        self.iosVersion = iosVersion
         self.currentLanguage = currentLanguage
         self.proStatus = proStatus
         self.safariProtectionEnabled = safariProtectionEnabled
+        self.advancedBlockingIsEnabled = advancedBlockingIsEnabled
         self.blocklistIsEnabled = blocklistIsEnabled
         self.allowlistIsEnbaled = allowlistIsEnbaled
         self.allowlistIsInverted = allowlistIsInverted

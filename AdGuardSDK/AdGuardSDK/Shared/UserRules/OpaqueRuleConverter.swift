@@ -35,8 +35,8 @@ struct OpaqueRuleConverter: UserRuleConverterProtocol {
     }
     
     /* Returns all converted rules joined by new line */
-    func convertRulesToString(_ rules: [UserRuleProtocol]) -> String {
+    func convertRulesToString(_ rules: [UserRule]) -> String {
         return rules.map { $0.ruleText }
-                    .joined(separator: "/n")
+                    .joined(separator: "\n")
     }
 }

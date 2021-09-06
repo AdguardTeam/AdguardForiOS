@@ -33,7 +33,7 @@ final class AllSafariGroupsFiltersModel: NSObject, SafariGroupFiltersModelProtoc
     
     // MARK: - Private properties
     
-    private var groupModels: [SafariGroupStateHeaderModel] { modelsProvider.groupModels }
+    private var groupModels: [StateHeaderViewModel<SafariGroup.GroupType>] { modelsProvider.groupModels }
     private var filtersModels: [[SafariFilterCellModel]] { modelsProvider.filtersModels }
     
     /* Services */
@@ -137,20 +137,23 @@ extension AllSafariGroupsFiltersModel {
 // MARK: - AllSafariGroupsFiltersModel + SafariGroupStateHeaderDelegate
 
 extension AllSafariGroupsFiltersModel {
-    func stateChanged(for groupType: SafariGroup.GroupType, newState: Bool) {
-        DDLogInfo("(AllSafariGroupsFiltersModel) - setGroup; Trying to change group=\(groupType) to state=\(newState)")
+    func modelChanged<Model>(_ newModel: Model) where Model : IdentifiableObject {
+        guard let newModel = newModel as? StateHeaderViewModel<SafariGroup.GroupType> else { return }
+        
+        let groupType = newModel.id
+        DDLogInfo("(AllSafariGroupsFiltersModel) - setGroup; Trying to change group=\(groupType) to state=\(newModel.isEnabled)")
         
         do {
-            try safariProtection.setGroup(groupType, enabled: newState, onCbReloaded: nil)
+            try safariProtection.setGroup(groupType, enabled: newModel.isEnabled, onCbReloaded: nil)
         }
         catch {
-            DDLogError("(AllSafariGroupsFiltersModel) - setGroup; DB error when changing group=\(groupType) to state=\(newState); Error: \(error)")
+            DDLogError("(AllSafariGroupsFiltersModel) - setGroup; DB error when changing group=\(groupType) to state=\(newModel.isEnabled); Error: \(error)")
         }
         
         modelsProvider = SafariGroupFiltersModelsProvider(sdkModels: safariProtection.groups, proStatus: configuration.proStatus)
         modelsProvider.searchString = searchString
         
-        guard let sectionToReloadIndex = groupModels.firstIndex(where: { $0.groupType == groupType }) else {
+        guard let sectionToReloadIndex = groupModels.firstIndex(where: { $0.id == groupType }) else {
             assertionFailure("Failed to find group with groupType=\(groupType)")
             return
         }
@@ -180,7 +183,7 @@ extension AllSafariGroupsFiltersModel {
 
 extension AllSafariGroupsFiltersModel {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let groupType = groupModels[indexPath.section].groupType
+        let groupType = groupModels[indexPath.section].id
         let group = safariProtection.groups.first(where: { $0.groupType == groupType })
         
         let filterId = filtersModels[indexPath.section][indexPath.row].filterId
@@ -221,8 +224,8 @@ extension AllSafariGroupsFiltersModel {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let groupModel = groupModels[section]
-        let headerView = SafariGroupStateHeaderView(model: groupModel)
-        headerView.delegate = self
+        let headerView = StateHeaderView<SafariGroup.GroupType>(frame: .zero)
+        headerView.config = IdentifiableViewConfig(model: groupModel, delegate: self)
         return headerView
     }
     

@@ -47,10 +47,3 @@ private struct FilterRulesTable {
         self.affinity = dbFilterRule[Self.affinity]
     }
 }
-
-//TODO: Remove this service if it would not be used
-// MARK: - MetaStorage + Filter rules
-
-extension MetaStorage {
-    
-}

@@ -124,7 +124,7 @@ final public class ActivityStatistics: ActivityStatisticsProtocol {
             return records.first!
         } else {
             Logger.logDebug("(ActivityStatistics) - getCounters; Return zero CountersStatisticsRecord for period=\(period.debugDescription)")
-            return CountersStatisticsRecord(requests: 0, encrypted: 0, blocked: 0, averageElapsed: 0)
+            return CountersStatisticsRecord(requests: 0, encrypted: 0, blocked: 0, elapsedSumm: 0)
         }
     }
     

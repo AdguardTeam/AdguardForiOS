@@ -77,6 +77,13 @@ export class NativeHost {
         return this.sendNativeMessage(MessagesToNativeApp.IsPremium);
     }
 
+    getAppearanceTheme() {
+        // TODO remove
+        return nativeHostMock.getAppearanceTheme();
+
+        return this.sendNativeMessage(MessagesToNativeApp.GetAppearanceTheme);
+    }
+
     areContentBlockersEnabled() {
         // TODO remove
         return nativeHostMock.areContentBlockersEnabled();

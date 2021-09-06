@@ -25,11 +25,11 @@ class UserRulesManagerMock: UserRulesManagerProtocol {
     
     var rulesString: String = ""
     
-    var allRules: [UserRuleProtocol] = []
+    var allRules: [UserRule] = []
     
     var addRuleCalledCount = 0
     var addRuleError: Error?
-    func add(rule: UserRuleProtocol, override: Bool) throws {
+    func add(rule: UserRule, override: Bool) throws {
         addRuleCalledCount += 1
         if let error = addRuleError {
             throw error
@@ -38,7 +38,7 @@ class UserRulesManagerMock: UserRulesManagerProtocol {
     
     var addRulesCalledCount = 0
     var addRulesError: Error?
-    func add(rules: [UserRuleProtocol], override: Bool) throws {
+    func add(rules: [UserRule], override: Bool) throws {
         addRulesCalledCount += 1
         if let error = addRulesError {
             throw error
@@ -47,7 +47,7 @@ class UserRulesManagerMock: UserRulesManagerProtocol {
     
     var modifyRuleCalledCount = 0
     var modifyRuleError: Error?
-    func modifyRule(_ oldRuleText: String, _ newRule: UserRuleProtocol) throws {
+    func modifyRule(_ oldRuleText: String, _ newRule: UserRule) throws {
         modifyRuleCalledCount += 1
         if let error = modifyRuleError {
             throw error

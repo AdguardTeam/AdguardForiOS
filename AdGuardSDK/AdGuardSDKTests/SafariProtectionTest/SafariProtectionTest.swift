@@ -152,11 +152,18 @@ class SafariProtectionTest: XCTestCase {
         let expectation = XCTestExpectation()
         let sp = safariProtection as! SafariProtection
         
-        sp.executeBlockAndReloadCbs {
-            throw MetaStorageMockError.error
-        } onCbReloaded: { error in
-            expectation.fulfill()
+        do {
+            try sp.executeBlockAndReloadCbs {
+                throw MetaStorageMockError.error
+            } onCbReloaded: { error in
+                XCTAssertEqual(error as! MetaStorageMockError, .error)
+                expectation.fulfill()
+            }
         }
+        catch {
+            XCTAssertEqual(error as! MetaStorageMockError, .error)
+        }
+        
         wait(for: [expectation], timeout: 0.5)
         
         XCTAssertEqual(converter.convertFiltersCalledCount, 0)

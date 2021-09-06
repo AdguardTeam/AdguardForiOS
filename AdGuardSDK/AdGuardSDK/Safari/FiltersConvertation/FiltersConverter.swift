@@ -17,19 +17,26 @@ struct FilterFileContent: Equatable {
 
 // MARK: - ContentBlockerConverterWrapper
 
-/*
+/**
  This converter is a wrapper for ContentBlockerConverter responsible for converting rules to JSON files
  We use it in order to be able to test code in FiltersConverter
- cbType is used to differ conversion results because ConversionResult init is inaccessible
+ `cbType` is used to differ conversion results because `ConversionResult` init is inaccessible
  */
+// TODO: - Remove cbType when ConversionResult is accessible
 protocol ContentBlockerConverterProtocol {
-    func convertArray(rules: [String], limit: Int, optimize: Bool, advancedBlocking: Bool, cbType: ContentBlockerType) -> ConversionResult?
+    func convertArray(
+        rules: [String],
+        safariVersion: SafariVersion,
+        optimize: Bool,
+        advancedBlocking: Bool,
+        cbType: ContentBlockerType
+    ) -> ConversionResult?
 }
 
 final class ContentBlockerConverterWrapper: ContentBlockerConverterProtocol {
-    func convertArray(rules: [String], limit: Int, optimize: Bool, advancedBlocking: Bool, cbType: ContentBlockerType) -> ConversionResult? {
+    func convertArray(rules: [String], safariVersion: SafariVersion, optimize: Bool, advancedBlocking: Bool, cbType: ContentBlockerType) -> ConversionResult? {
         let converter = ContentBlockerConverter()
-        let result = converter.convertArray(rules: rules, limit: limit, optimize: optimize, advancedBlocking: advancedBlocking)
+        let result = converter.convertArray(rules: rules, safariVersion: safariVersion, optimize: optimize, advancedBlocking: advancedBlocking)
         return result
     }
 }
@@ -62,10 +69,11 @@ struct FiltersConverter: FiltersConverterProtocol {
         let overlimit: Bool // Is true if totalRules is greater than 'contentBlockerRulesLimit' rules
     }
     
-    private let contentBlockerRulesLimit = 50000
+    private let configuration: SafariConfigurationProtocol
     private let converter: ContentBlockerConverterProtocol
     
-    init(converter: ContentBlockerConverterProtocol = ContentBlockerConverterWrapper()) {
+    init(configuration: SafariConfigurationProtocol, converter: ContentBlockerConverterProtocol = ContentBlockerConverterWrapper()) {
+        self.configuration = configuration
         self.converter = converter
     }
     
@@ -147,9 +155,16 @@ struct FiltersConverter: FiltersConverterProtocol {
     // Converts all rules to jsons
     private func convert(filters: [ContentBlockerType: [String]]) -> [Result] {
         var resultFilters: [Result] = []
-    
+        let safariVersion = SafariVersion(rawValue: configuration.iosVersion) ?? .safari15
         for (cbType, rules) in filters {
-            guard let result = converter.convertArray(rules: rules, limit: contentBlockerRulesLimit, optimize: false, advancedBlocking: false, cbType: cbType) else {
+            guard let result = converter.convertArray(
+                rules: rules,
+                safariVersion: safariVersion,
+                optimize: false,
+                advancedBlocking: configuration.advancedBlockingIsEnabled,
+                cbType: cbType
+            )
+            else {
                 Logger.logError("FiltersConverter error - can not convert filter with type: \(cbType)")
                 continue
             }

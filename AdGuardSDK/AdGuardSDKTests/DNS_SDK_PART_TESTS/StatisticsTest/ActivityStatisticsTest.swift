@@ -12,7 +12,7 @@ class ActivityStatisticsTest: XCTestCase {
         statistics = try! ActivityStatistics(statisticsDbContainerUrl: TestsFileManager.workingUrl)
     }
     
-    override class func tearDown() {
+    override func tearDown() {
         TestsFileManager.deleteTestFolder()
         TestsFileManager.clearRootDirectory()
     }
@@ -129,10 +129,10 @@ class ActivityStatisticsTest: XCTestCase {
             ActivityStatisticsRecord(timeStamp: monthInterval.end - 100, domain: "lenta.ru", requests: 4, encrypted: 0, blocked: 3, elapsedSumm: 63),
             ActivityStatisticsRecord(timeStamp: monthInterval.end - 300, domain: "ya.ru", requests: 9, encrypted: 2, blocked: 0, elapsedSumm: 12)
         ]
-        let expectedMonthCountersStatistics = CountersStatisticsRecord(requests: 169, encrypted: 50, blocked: 47, elapsedSumm: 398)
+        let expectedMonthCountersStatistics = CountersStatisticsRecord(requests: 169, encrypted: 50, blocked: 47, elapsedSumm: 379)
         let expectedMonthDomainsStatistics = [ // Sums up with expectedWeekDomainsStatistics
             DomainsStatisticsRecord(domain: "google.com", counters: CountersStatisticsRecord(requests: 61, encrypted: 17, blocked: 19, elapsedSumm: 103)),
-            DomainsStatisticsRecord(domain: "ya.ru", counters: CountersStatisticsRecord(requests: 32, encrypted: 8, blocked: 9, elapsedSumm: 58)),
+            DomainsStatisticsRecord(domain: "ya.ru", counters: CountersStatisticsRecord(requests: 32, encrypted: 8, blocked: 9, elapsedSumm: 39)),
             DomainsStatisticsRecord(domain: "yahoo.net", counters: CountersStatisticsRecord(requests: 24, encrypted: 8, blocked: 4, elapsedSumm: 20)),
             DomainsStatisticsRecord(domain: "adguard.com", counters: CountersStatisticsRecord(requests: 19, encrypted: 4, blocked: 6, elapsedSumm: 14)),
             DomainsStatisticsRecord(domain: "amazon.com", counters: CountersStatisticsRecord(requests: 14, encrypted: 9, blocked: 2, elapsedSumm: 45)),

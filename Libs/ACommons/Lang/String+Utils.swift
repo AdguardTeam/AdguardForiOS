@@ -128,7 +128,6 @@ extension String {
                 attributedString.addAttribute(NSAttributedString.Key.backgroundColor, value: highlightColor, range: $0)
             }
         }
-        
         return (attributedString, foundCount != 0)
     }
     
@@ -141,6 +140,12 @@ extension String {
             result.append(self.nsRange(from: range))
         }
         return result
+    }
+    
+    var clearAttrString: NSAttributedString {
+        let attributedString = NSMutableAttributedString(string: self)
+        attributedString.addAttribute(NSAttributedString.Key.backgroundColor, value: UIColor.clear, range: NSRange(location: 0, length: self.count))
+        return attributedString
     }
     
     // Adds space every 3 symbols

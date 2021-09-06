@@ -92,8 +92,7 @@ struct NetworkUtils: NetworkUtilsProtocol {
         
         let dnsUpstream = AGDnsUpstream(address: upstream, bootstrap: bootstraps, timeoutMs: 2000, serverIp: Data(), id: 0, outboundInterfaceName: nil)
         
-        // TODO: - find ipv6Available somewhere
-        if let error = AGDnsUtils.test(dnsUpstream, ipv6Available: false) {
+        if let error = AGDnsUtils.test(dnsUpstream, ipv6Available: isIpv6Available) {
             Logger.logError("(NetworkUtils) - upstreamIsValid; Error: \(error)")
             return false
         } else {

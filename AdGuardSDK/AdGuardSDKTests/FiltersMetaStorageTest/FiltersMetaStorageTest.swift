@@ -8,12 +8,12 @@ class FiltersMetaStorageTest: XCTestCase {
     var productionDbManager: ProductionDatabaseManager!
     var metaStorage: MetaStorage!
     
-    override func setUpWithError() throws {
+    override func setUp() {
         TestsFileManager.deleteTestFolder()
         TestsFileManager.clearRootDirectory()
-        
-        productionDbManager = try ProductionDatabaseManager(dbContainerUrl: workingUrl)
-        try productionDbManager?.updateDatabaseIfNeeded()
+        TestsFileManager.putDbFileToDirectory(Bundle(for: type(of: self)))
+        productionDbManager = try! ProductionDatabaseManager(dbContainerUrl: workingUrl)
+        try! productionDbManager?.updateDatabaseIfNeeded()
         metaStorage = MetaStorage(productionDbManager: productionDbManager!)
     }
     
@@ -23,17 +23,9 @@ class FiltersMetaStorageTest: XCTestCase {
     }
     
     func testCustomGroupExists() {
-        TestsFileManager.deleteTestFolder()
-        TestsFileManager.clearRootDirectory()
-        
-        productionDbManager = try! ProductionDatabaseManager(dbContainerUrl: workingUrl)
-        try! productionDbManager?.updateDatabaseIfNeeded()
-        var count = try! productionDbManager.filtersDb.scalar("SELECT count(*) FROM filter_groups WHERE group_id = \(SafariGroup.GroupType.custom.rawValue)") as! Int64
-        XCTAssertEqual(count, 0)
-        
         metaStorage = MetaStorage(productionDbManager: productionDbManager)
         
-        count = try! productionDbManager.filtersDb.scalar("SELECT count(*) FROM filter_groups WHERE group_id = \(SafariGroup.GroupType.custom.rawValue)") as! Int64
+        let count = try! productionDbManager.filtersDb.scalar("SELECT count(*) FROM filter_groups WHERE group_id = \(SafariGroup.GroupType.custom.rawValue)") as! Int64
         XCTAssertEqual(count, 1)
     }
 
@@ -141,7 +133,8 @@ class FiltersMetaStorageTest: XCTestCase {
                                                       version: "2.2.2.2",
                                                       lastUpdateDate: filterToModify.lastUpdateTime,
                                                       languages: [],
-                                                      tags: [])
+                                                      tags: [],
+                                                      rulesCount: 0)
         
         let isUpdated = try! metaStorage.update(filter: modifiedFilter)
         XCTAssert(isUpdated)
@@ -174,7 +167,8 @@ class FiltersMetaStorageTest: XCTestCase {
                                                           version: filterToModify.version,
                                                           lastUpdateDate: filterToModify.lastUpdateTime,
                                                           languages: [],
-                                                          tags: [])
+                                                          tags: [],
+                                                          rulesCount: 0)
             
             let isUpdated = try! metaStorage.update(filter: modifiedFilter)
             XCTAssertFalse(isUpdated)
@@ -211,7 +205,8 @@ class FiltersMetaStorageTest: XCTestCase {
                                                       version: filterToModify.version! + "dddd",
                                                       lastUpdateDate: filterToModify.lastUpdateTime,
                                                       languages: [],
-                                                      tags: [])
+                                                      tags: [],
+                                                      rulesCount: 0)
         // Filter version is not modified
         let filterThatShouldNotChange = ExtendedFiltersMeta.Meta(filterId: freshFilter.filterId,
                                                                  name: "newName112",
@@ -226,7 +221,8 @@ class FiltersMetaStorageTest: XCTestCase {
                                                                  version: freshFilter.version!,
                                                                  lastUpdateDate: freshFilter.lastUpdateTime,
                                                                  languages: [],
-                                                                 tags: [])
+                                                                 tags: [],
+                                                                 rulesCount: 0)
         
         let updatedFilterIds = try! metaStorage.update(filters: [modifiedFilter, filterThatShouldNotChange])
         XCTAssertEqual(updatedFilterIds, [filterToModify.filterId])
@@ -302,7 +298,8 @@ class FiltersMetaStorageTest: XCTestCase {
                                                     version: "1.1.1",
                                                     lastUpdateDate: nil,
                                                     languages: [],
-                                                    tags: [])
+                                                    tags: [],
+                                                    rulesCount: 0)
         
         try! metaStorage.add(filter: customFilter, enabled: true)
         
@@ -338,7 +335,8 @@ class FiltersMetaStorageTest: XCTestCase {
                                                     version: "1.1.1",
                                                     lastUpdateDate: nil,
                                                     languages: [],
-                                                    tags: [])
+                                                    tags: [],
+                                                    rulesCount: 0)
         try! metaStorage.add(filter: customFilter, enabled: true)
         filters = try! metaStorage.getLocalizedFiltersForGroup(withId: customGroupId, forLanguage: "en")
         XCTAssertEqual(filters.count, 1)

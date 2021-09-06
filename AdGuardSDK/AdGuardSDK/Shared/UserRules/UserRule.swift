@@ -40,22 +40,7 @@ public enum DnsUserRuleType {
     case allowlist
 }
 
-public protocol UserRuleProtocol: Codable {
-    /* Rule is a string that user did enter in the rule field */
-    var ruleText: String { get }
-    
-    /* State of rule */
-    var isEnabled: Bool { get set }
-    
-    /*
-     Validates rule
-     Returns true if rule can be converted to safari content blocker rule by converter
-     Returns false for unsupported rules
-     */
-    static func isValid(rule: String) -> Bool
-}
-
-public struct UserRule: UserRuleProtocol, Equatable {
+public struct UserRule: Codable, Equatable {
     public var ruleText: String
     public var isEnabled: Bool
     

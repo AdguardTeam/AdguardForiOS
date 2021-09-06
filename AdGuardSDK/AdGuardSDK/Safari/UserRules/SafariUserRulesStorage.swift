@@ -20,7 +20,7 @@ import Foundation
 
 final class SafariUserRulesStorage: UserRulesStorageProtocol {
     
-    var rules: [UserRuleProtocol] {
+    var rules: [UserRule] {
         get {
             if let savedRulesData = userDefaults.storage.data(forKey: type.key) {
                 let decoder = JSONDecoder()

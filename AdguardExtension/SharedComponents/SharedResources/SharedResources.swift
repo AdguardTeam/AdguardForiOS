@@ -79,7 +79,10 @@ extension AESharedResourcesProtocol {
     
     dynamic var safariWhitelistEnabled: Bool {
         get {
-            filterEnabled(defaultsKey: AEDefaultsSafariWhitelistEnabled)
+            if let boolObject = sharedDefaults().value(forKey: AEDefaultsSafariWhitelistEnabled) as? Bool {
+                return boolObject
+            }
+            return true
         }
         set {
             sharedDefaults().set(newValue, forKey: AEDefaultsSafariWhitelistEnabled)
@@ -97,7 +100,10 @@ extension AESharedResourcesProtocol {
     
     dynamic var safariUserFilterEnabled: Bool {
         get {
-            filterEnabled(defaultsKey: AEDefaultsUserFilterEnabled)
+            if let boolObject = sharedDefaults().value(forKey: AEDefaultsUserFilterEnabled) as? Bool {
+                return boolObject
+            }
+            return true
         }
         set {
             sharedDefaults().set(newValue, forKey: AEDefaultsUserFilterEnabled)
@@ -106,7 +112,10 @@ extension AESharedResourcesProtocol {
     
     dynamic var systemUserFilterEnabled: Bool {
         get {
-            filterEnabled(defaultsKey: AEDefaultsDnsBlacklistEnabled)
+            if let boolObject = sharedDefaults().value(forKey: AEDefaultsDnsBlacklistEnabled) as? Bool {
+                return boolObject
+            }
+            return true
         }
         set {
             sharedDefaults().set(newValue, forKey: AEDefaultsDnsBlacklistEnabled)
@@ -115,7 +124,10 @@ extension AESharedResourcesProtocol {
     
     dynamic var systemWhitelistEnabled: Bool {
         get {
-            filterEnabled(defaultsKey: AEDefaultsDnsWhitelistEnabled)
+            if let boolObject = sharedDefaults().value(forKey: AEDefaultsDnsWhitelistEnabled) as? Bool {
+                return boolObject
+            }
+            return true
         }
         set {
             sharedDefaults().set(newValue, forKey: AEDefaultsDnsWhitelistEnabled)
@@ -357,25 +369,6 @@ extension AESharedResourcesProtocol {
         set {
             sharedDefaults().set(newValue, forKey: setAppUsedKey)
         }
-    }
-    
-    // MARK: - private methods
-    
-    private func filterEnabled(defaultsKey: String)->Bool {
-        let defaultValue = true
-        guard let value = sharedDefaults().object(forKey: defaultsKey) as? Bool else {
-            return defaultValue
-        }
-        
-        guard let advancedMode = sharedDefaults().object(forKey: AEDefaultsDeveloperMode) as? Bool else {
-            return defaultValue
-        }
-        
-        if !advancedMode {
-            return defaultValue
-        }
-        
-        return value
     }
 }
 

@@ -1,6 +1,10 @@
 import Foundation
 
 final class SafariConfigurationMock: SafariConfigurationProtocol {
+    var iosVersion: Int = 11
+    
+    var advancedBlockingIsEnabled: Bool = false
+    
     var currentLanguage: String = "en"
     
     var proStatus: Bool = false

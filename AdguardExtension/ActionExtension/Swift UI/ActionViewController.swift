@@ -76,7 +76,7 @@ class ActionViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         // TODO
-        let sdkConfiguration = SafariConfiguration(currentLanguage: "", proStatus: true, safariProtectionEnabled: true, blocklistIsEnabled: true, allowlistIsEnbaled: true, allowlistIsInverted: true, appBundleId: "", appProductVersion: "", appId: "", cid: "")
+        let sdkConfiguration = SafariConfiguration(iosVersion: UIDevice.current.iosVersion, currentLanguage: "", proStatus: true, safariProtectionEnabled: true, advancedBlockingIsEnabled: true, blocklistIsEnabled: true, allowlistIsEnbaled: true, allowlistIsInverted: true, appBundleId: "", appProductVersion: "", appId: "", cid: "")
         safariProtection = try! SafariProtection(configuration: sdkConfiguration, defaultConfiguration: sdkConfiguration, filterFilesDirectoryUrl: URL(string: "")!, dbContainerUrl: URL(string: "")!, jsonStorageUrl: URL(string: "")!, userDefaults: UserDefaults(suiteName: "")!)
         
         configuration = SimpleConfigurationSwift(withResources: sharedResources, systemAppearenceIsDark: true)
@@ -270,13 +270,13 @@ class ActionViewController: UIViewController {
         return false
     }
     
-    private func domainObjectIfExistsFromContentBlockingWhitelistFor(host: String) -> UserRuleProtocol? {
+    private func domainObjectIfExistsFromContentBlockingWhitelistFor(host: String) -> UserRule? {
         DDLogDebug("(ActionViewController) domainObjectIfExistsFromContentBlockingWhitelistFor:\(host)")
         let rules = safariProtection.allRules(for: .allowlist)
         return domainObjectIfExists(host: host, rules: rules)
     }
     
-    private func domainObjectIfExists(host: String, rules: [UserRuleProtocol]) -> UserRuleProtocol? {
+    private func domainObjectIfExists(host: String, rules: [UserRule]) -> UserRule? {
         let filteredRules = rules.filter { $0.ruleText.localizedCaseInsensitiveContains(host) }
         return filteredRules.first
     }
