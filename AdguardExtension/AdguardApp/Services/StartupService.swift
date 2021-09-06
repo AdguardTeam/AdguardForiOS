@@ -62,9 +62,11 @@ final class StartupService : NSObject{
         let cid = UIDevice.current.identifierForVendor?.uuidString ?? ""
         
         let safariProtectionConfiguration = SafariConfiguration(
+            iosVersion: UIDevice.current.iosVersion,
             currentLanguage: currentLanguage,
             proStatus: purchaseService.isProPurchased,
             safariProtectionEnabled: sharedResources.safariProtectionEnabled,
+            advancedBlockingIsEnabled: true, // TODO: - Don't forget to change
             blocklistIsEnabled: sharedResources.safariUserFilterEnabled,
             allowlistIsEnbaled: sharedResources.safariWhitelistEnabled,
             allowlistIsInverted: sharedResources.invertedWhitelist,
@@ -75,9 +77,11 @@ final class StartupService : NSObject{
         )
         
         let defaultConfiguration = SafariConfiguration(
+            iosVersion: UIDevice.current.iosVersion,
             currentLanguage: currentLanguage,
             proStatus: false,
             safariProtectionEnabled: true,
+            advancedBlockingIsEnabled: true, // TODO: - Don't forget to change
             blocklistIsEnabled: false,
             allowlistIsEnbaled: false,
             allowlistIsInverted: false,

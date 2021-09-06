@@ -7,9 +7,10 @@ class ProductionDatabaseManagerTest: XCTestCase {
     let workingUrl = TestsFileManager.workingUrl
     let fileManager = FileManager.default
     
-    override class func setUp() {
+    override func setUp() {
         TestsFileManager.deleteTestFolder()
         TestsFileManager.clearRootDirectory()
+        TestsFileManager.putDbFileToDirectory(Bundle(for: type(of: self)))
     }
 
     override func tearDown() {

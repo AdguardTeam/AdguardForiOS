@@ -20,6 +20,7 @@ enum MetaStorageMockError: Error {
 }
 
 class MetaStorageMock: MetaStorageProtocol {
+    
     var groupsTableMock = [
         FilterGroupsTable(groupId: SafariGroup.GroupType.ads.id, name: "Ad Blocking", displayNumber: 1, isEnabled: false),
         FilterGroupsTable(groupId: SafariGroup.GroupType.privacy.id, name: "Privacy", displayNumber: 2, isEnabled: false),
@@ -200,6 +201,15 @@ class MetaStorageMock: MetaStorageProtocol {
     func update(groups: [GroupMetaProtocol]) throws {
         updateGroupsCalledCount += 1
         if let error = updateGroupsResultError {
+            throw error
+        }
+    }
+    
+    var addGroupsCelledCount = 0
+    var addGroupsError: Error?
+    func add(groups: [GroupMetaProtocol]) throws {
+        addGroupsCelledCount += 1
+        if let error = addGroupsError {
             throw error
         }
     }

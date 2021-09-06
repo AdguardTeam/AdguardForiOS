@@ -45,10 +45,10 @@ class UserRuleConverterTest: XCTestCase {
         XCTAssertEqual(domain, exampleDomain)
         
         var domains = converter.convertRulesToString(exampleRules)
-        XCTAssertEqual(domains, "@@||example1.org^$document/n@@||example2.org^$document/n@@||example3.org^$document")
+        XCTAssertEqual(domains, "@@||example1.org^$document\n@@||example2.org^$document\n@@||example3.org^$document")
         
         domains = converter.convertRulesToString(exampleRulesWithoutPrefixAndSufix)
-        XCTAssertEqual(domains, "@@||example1.org^$document/n@@||example2.org^$document/n@@||example3.org^$document")
+        XCTAssertEqual(domains, "@@||example1.org^$document\n@@||example2.org^$document\n@@||example3.org^$document")
         
         domains = converter.convertRulesToString([])
         XCTAssertEqual(domains, "")
@@ -108,10 +108,10 @@ class UserRuleConverterTest: XCTestCase {
         XCTAssertEqual(domain, prefix + exampleDomain + suffix)
         
         var domains = converter.convertRulesToString(exampleRules)
-        XCTAssertEqual(domains, "@@||example1.org^$document/n@@||example2.org^$document/n@@||example3.org^$document")
+        XCTAssertEqual(domains, "@@||example1.org^$document\n@@||example2.org^$document\n@@||example3.org^$document")
         
         domains = converter.convertRulesToString(exampleRulesWithoutPrefixAndSufix)
-        XCTAssertEqual(domains, "example1.org/nexample2.org/nexample3.org")
+        XCTAssertEqual(domains, "example1.org\nexample2.org\nexample3.org")
         
         domains = converter.convertRulesToString([])
         XCTAssertEqual(domains, "")

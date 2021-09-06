@@ -37,7 +37,7 @@ protocol UserRulesManagerProtocol: ResetableSyncProtocol, AnyObject {
     /* String representation of all enabled rules */
     var rulesString: String { get }
     
-    /* All UserRuleProtocol objects  */
+    /* All UserRule objects  */
     var allRules: [UserRule] { get }
     
     /**

@@ -10,8 +10,8 @@ final class TestsFileManager {
     static let adguardDbFileWorkingUrl = workingUrl.appendingPathComponent(adguardDbFileName)
     static let defaultDbFileWorkingUrl = workingUrl.appendingPathComponent(defaultDbFileName)
     
-    static let defaultDbFileName = Constants.Files.defaultDb
-    static let defaultDbArchiveFileName = "\(Constants.Files.defaultDb).zip"
+    static let defaultDbFileName = Constants.Files.defaultDbFileName
+    static let defaultDbArchiveFileName = "\(Constants.Files.defaultDbFileName).zip"
     static let adguardDbFileName = "adguard.db"
     
     static func deleteTestFolder() {
@@ -32,5 +32,11 @@ final class TestsFileManager {
                 try fileManager.removeItem(at: rootDirectory.appendingPathComponent(adguardDbFileName))
             }
         } catch {}
+    }
+    
+    static func putDbFileToDirectory(_ bundle: Bundle) {
+        let dbFileUrl = bundle.url(forResource: "default.db", withExtension: "zip")!
+        try! FileManager.default.createDirectory(at: TestsFileManager.workingUrl, withIntermediateDirectories: false, attributes: nil)
+        try! FileManager.default.copyItem(at: dbFileUrl, to: TestsFileManager.workingUrl.appendingPathComponent(defaultDbArchiveFileName))
     }
 }

@@ -9,7 +9,9 @@ enum FilterFilesStorageMockError: Error {
 }
 
 class FilterFilesStorageMock: FilterFilesStorageProtocol {
-
+    
+    var filterFilesDirectoryUrl: URL = URL(string: "https://domain.com")!
+    
     var updateFilterCalledCount = 0
     var updateFilterResultError: Error?
     func updateFilter(withId id: Int, onFilterUpdated: @escaping (Error?) -> Void) {

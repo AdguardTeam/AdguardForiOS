@@ -9,19 +9,12 @@ class GroupsMetaStorageTest: XCTestCase {
     var productionDbManager: ProductionDatabaseManager!
     var metaStorage: MetaStorage!
     
-    override func setUpWithError() throws {
-        productionDbManager = try ProductionDatabaseManager(dbContainerUrl: workingUrl)
+    override func setUp() {
+        TestsFileManager.deleteTestFolder()
+        TestsFileManager.clearRootDirectory()
+        TestsFileManager.putDbFileToDirectory(Bundle(for: type(of: self)))
+        productionDbManager = try! ProductionDatabaseManager(dbContainerUrl: workingUrl)
         metaStorage = MetaStorage(productionDbManager: productionDbManager!)
-    }
-    
-    override class func setUp() {
-        TestsFileManager.deleteTestFolder()
-        TestsFileManager.clearRootDirectory()
-    }
-    
-    override class func tearDown() {
-        TestsFileManager.deleteTestFolder()
-        TestsFileManager.clearRootDirectory()
     }
     
     override func tearDown() {

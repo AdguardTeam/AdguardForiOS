@@ -115,6 +115,7 @@ extension MetaStorage: GroupsMetaStorageProtocol {
         try groups.forEach { try update(group: $0) }
     }
     
+    // TODO: - Needs tests
     /// Adds group to DB
     /// This methods should be used only in `Builder`
     func add(groups: [GroupMetaProtocol]) throws {

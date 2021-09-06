@@ -23,18 +23,20 @@ import SafariServices
  This manager is a wrapper for SafariService responsible for Content blockers
  We use it in order to be able to test code in ContentBlockerService
  */
-protocol ContentBlockersManagerProtocol {
+public protocol ContentBlockersManagerProtocol {
     func reloadContentBlocker(withId id: String, _ onContentBlockerReloaded: @escaping (_ error: Error?) -> Void)
     func getStateOfContentBlocker(withId id: String, _ onContentBlockerStateRevealed: @escaping (_ result: Result<Bool>) -> Void)
 }
 
-struct ContentBlockersManager: ContentBlockersManagerProtocol {
+public struct ContentBlockersManager: ContentBlockersManagerProtocol {
     
-    func reloadContentBlocker(withId id: String, _ onContentBlockerReloaded: @escaping (_ error: Error?) -> Void) {
+    public init() {}
+    
+    public func reloadContentBlocker(withId id: String, _ onContentBlockerReloaded: @escaping (_ error: Error?) -> Void) {
         SFContentBlockerManager.reloadContentBlocker(withIdentifier: id, completionHandler: onContentBlockerReloaded)
     }
     
-    func getStateOfContentBlocker(withId id: String, _ onContentBlockerStateRevealed: @escaping (Result<Bool>) -> Void) {
+    public func getStateOfContentBlocker(withId id: String, _ onContentBlockerStateRevealed: @escaping (Result<Bool>) -> Void) {
         SFContentBlockerManager.getStateOfContentBlocker(withIdentifier: id) { state, error in
             if let error = error {
                 onContentBlockerStateRevealed(.error(error))
