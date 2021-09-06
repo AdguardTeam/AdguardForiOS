@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E15DFD126E603040020247E /* CompaniesStatisticsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15DFD026E603040020247E /* CompaniesStatisticsTest.swift */; };
+		7E15DFD326E604920020247E /* ActivityStatisticsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15DFD226E604920020247E /* ActivityStatisticsMock.swift */; };
+		7E15DFD526E606E60020247E /* DnsTrackersProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15DFD426E606E60020247E /* DnsTrackersProviderMock.swift */; };
 		7E4A132326E4F40D00728BDE /* CompaniesStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4A132226E4F40D00728BDE /* CompaniesStatistics.swift */; };
 		7E4A132426E4F40D00728BDE /* CompaniesStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4A132226E4F40D00728BDE /* CompaniesStatistics.swift */; };
 		7E4A132726E4FD1400728BDE /* CompaniesStatisticsRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4A132626E4FD1400728BDE /* CompaniesStatisticsRecord.swift */; };
@@ -424,6 +427,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7E15DFD026E603040020247E /* CompaniesStatisticsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesStatisticsTest.swift; sourceTree = "<group>"; };
+		7E15DFD226E604920020247E /* ActivityStatisticsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStatisticsMock.swift; sourceTree = "<group>"; };
+		7E15DFD426E606E60020247E /* DnsTrackersProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsTrackersProviderMock.swift; sourceTree = "<group>"; };
 		7E4A132226E4F40D00728BDE /* CompaniesStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesStatistics.swift; sourceTree = "<group>"; };
 		7E4A132626E4FD1400728BDE /* CompaniesStatisticsRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesStatisticsRecord.swift; sourceTree = "<group>"; };
 		7E667A6726E29D970013B1D5 /* default.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = default.db.zip; sourceTree = "<group>"; };
@@ -744,6 +750,7 @@
 				7E6E7FD426C299DA00925F96 /* ActivityStatisticsTest.swift */,
 				7E6E7FD526C299DA00925F96 /* ChartStatisticsTest.swift */,
 				7E667A7626E38C670013B1D5 /* DnsTrackersProviderTest.swift */,
+				7E15DFD026E603040020247E /* CompaniesStatisticsTest.swift */,
 			);
 			path = StatisticsTest;
 			sourceTree = "<group>";
@@ -784,6 +791,8 @@
 				7E6E7FF326C299DB00925F96 /* ApiMethodsMock.swift */,
 				7E6E7FF426C299DB00925F96 /* ContentBlockerServiceMock.swift */,
 				7E6E7FF526C299DB00925F96 /* UserDefaultsStorageMock.swift */,
+				7E15DFD226E604920020247E /* ActivityStatisticsMock.swift */,
+				7E15DFD426E606E60020247E /* DnsTrackersProviderMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -1607,6 +1616,7 @@
 				7E6E802B26C299DE00925F96 /* LangsMetaStorageTest.swift in Sources */,
 				7E6E805C26C299DF00925F96 /* CustomFilterMetaParserTest.swift in Sources */,
 				7E6E81E826C2A05B00925F96 /* DnsProvider.swift in Sources */,
+				7E15DFD126E603040020247E /* CompaniesStatisticsTest.swift in Sources */,
 				7E6E807E26C2A04100925F96 /* FilterFilesStorage.swift in Sources */,
 				7E6E81A326C2A05B00925F96 /* DnsRequestProcessedEvent.swift in Sources */,
 				7E667A7526E389A00013B1D5 /* DnsTrackers.swift in Sources */,
@@ -1685,6 +1695,7 @@
 				7ED0B19F26C4269600B0CE7B /* Constants+Files.swift in Sources */,
 				7E6E81E426C2A05B00925F96 /* CustomDnsProvidersStorage.swift in Sources */,
 				7E6E812F26C2A05300925F96 /* MetaStorage.swift in Sources */,
+				7E15DFD526E606E60020247E /* DnsTrackersProviderMock.swift in Sources */,
 				7E6E812126C2A05300925F96 /* FiltersLocalizationsRequest.swift in Sources */,
 				7E6E81A726C2A05B00925F96 /* ChartStatistics+ChartStatisticsTable.swift in Sources */,
 				7E6E814726C2A05300925F96 /* ExtendedFiltersMeta.swift in Sources */,
@@ -1694,6 +1705,7 @@
 				7E6E81D126C2A05B00925F96 /* DnsProtectionServiceStorage.swift in Sources */,
 				7E6E81D326C2A05B00925F96 /* Value+Types.swift in Sources */,
 				7E6E803826C299DE00925F96 /* SafariConfigurationMock.swift in Sources */,
+				7E15DFD326E604920020247E /* ActivityStatisticsMock.swift in Sources */,
 				7E6E81E026C2A05B00925F96 /* PredefinedDnsProvidersDecoder.swift in Sources */,
 				7E6E81C126C2A05B00925F96 /* DnsLibsRulesProvider.swift in Sources */,
 				7E6E801E26C299DE00925F96 /* CustomDnsProvidersStorageTest.swift in Sources */,

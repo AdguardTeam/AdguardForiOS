@@ -58,7 +58,7 @@ struct DnsTrackers: Decodable {
 }
 
 // MARK: - DnsTracker
-public struct DnsTracker: Decodable {
+public struct DnsTracker: Equatable, Decodable {
     fileprivate(set) var jsonType: JsonType = .adGuard
     let name: String
     let category: Category

@@ -18,7 +18,7 @@
 
 import Foundation
 
-public struct CompaniesStatisticsRecord {
+public struct CompaniesStatisticsRecord: Equatable {
     let company: String // Company name that domain is attached to. If company was not found than it is domain
     let tracker: DnsTracker? // DNS tracker information, associated with this company
     let counters: CountersStatisticsRecord // Different counters for company
