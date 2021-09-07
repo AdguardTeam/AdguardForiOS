@@ -363,7 +363,6 @@
 		7ED0B19D26C4269600B0CE7B /* Constants+Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B19C26C4269600B0CE7B /* Constants+Files.swift */; };
 		7ED0B19E26C4269600B0CE7B /* Constants+Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B19C26C4269600B0CE7B /* Constants+Files.swift */; };
 		7ED0B19F26C4269600B0CE7B /* Constants+Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B19C26C4269600B0CE7B /* Constants+Files.swift */; };
-		7EE9F63026D8E12900646D62 /* Constants+Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B19C26C4269600B0CE7B /* Constants+Files.swift */; };
 		7EE9F63226D8E1DB00646D62 /* FilterFilesStorageProtocol+PredefinedFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE9F63126D8E1DB00646D62 /* FilterFilesStorageProtocol+PredefinedFilters.swift */; };
 		7EE9F63426D8E1DB00646D62 /* FilterFilesStorageProtocol+PredefinedFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE9F63126D8E1DB00646D62 /* FilterFilesStorageProtocol+PredefinedFilters.swift */; };
 		7EE9F63B26D9198B00646D62 /* FiltersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E80F526C2A05200925F96 /* FiltersService.swift */; };
@@ -1828,7 +1827,6 @@
 				7E6E81A226C2A05B00925F96 /* DnsRequestProcessedEvent.swift in Sources */,
 				7E6E81B226C2A05B00925F96 /* Constants+Statistics.swift in Sources */,
 				7E6E81E326C2A05B00925F96 /* CustomDnsProvidersStorage.swift in Sources */,
-				7EE9F63026D8E12900646D62 /* Constants+Files.swift in Sources */,
 				7E6E81DF26C2A05B00925F96 /* PredefinedDnsProvidersDecoder.swift in Sources */,
 				7E6E81C626C2A05B00925F96 /* DnsUserRulesManagersProvider.swift in Sources */,
 				7E4A132326E4F40D00728BDE /* CompaniesStatistics.swift in Sources */,
