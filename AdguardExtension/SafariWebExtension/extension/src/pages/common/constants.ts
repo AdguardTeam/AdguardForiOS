@@ -1,16 +1,7 @@
 export enum MessagesToNativeApp {
     WriteInNativeLog = 'writeInNativeLog',
-    GetBlockingData = 'getBlockingData',
-    AddToUserRules = 'addToUserRules',
-    IsProtectionEnabled = 'isProtectionEnabled',
-    EnableProtection = 'enableProtection',
-    DisableProtection = 'disableProtection',
-    HasUserRulesBySite = 'hasUserRulesBySite',
-    RemoveUserRulesBySite = 'removeUserRulesBySite',
+    // TODO remove if not necessary
     ReportProblem = 'reportProblem',
-    IsPremium = 'isPremium',
-    GetAppearanceTheme = 'getAppearanceTheme',
-    AreContentBlockersEnabled = 'areContentBlockersEnabled',
     UpgradeMe = 'upgradeMe',
     GetAdvancedRulesText = 'get_advanced_rules_text',
     GetInitData = 'get_init_data',

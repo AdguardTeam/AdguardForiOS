@@ -2,7 +2,6 @@
 import { browser } from 'webextension-polyfill-ts';
 
 import { MessagesToNativeApp } from '../../common/constants';
-import { nativeHostMock } from './nativeHostMock';
 import { getDomain } from '../../common/utils/url';
 
 interface NativeHostMessage {
@@ -10,10 +9,17 @@ interface NativeHostMessage {
     data?: unknown
 }
 
+interface ActionLinks {
+    addToAllowlistLink: string,
+    addToBlocklistLink: string,
+    removeAllBlocklistRulesLink: string,
+    removeFromAllowlistLink: string,
+}
+
 export class NativeHost {
     APP_ID = 'application_id';
 
-    links = {};
+    links: ActionLinks | null = null;
 
     private async sendNativeMessage(type: MessagesToNativeApp, data?: unknown) {
         const message: NativeHostMessage = { type };
@@ -24,61 +30,51 @@ export class NativeHost {
         return browser.runtime.sendNativeMessage(this.APP_ID, message);
     }
 
-    // @ts-ignore
-    setLinks(links) {
+    setLinks(links: ActionLinks) {
         this.links = links;
     }
 
-    addToUserRules(ruleText: string) {
-        return this.sendNativeMessage(MessagesToNativeApp.AddToUserRules, { ruleText });
-    }
+    async addToUserRules(ruleText: string) {
+        if (!this.links) {
+            return;
+        }
 
-    isProtectionEnabled(url: string): Promise<boolean> {
-        // TODO remove
-        return nativeHostMock.isProtectionEnabled(url);
-
-        return this.sendNativeMessage(MessagesToNativeApp.IsProtectionEnabled, { url });
+        const linkWithDomain = this.links.addToBlocklistLink + ruleText;
+        await browser.tabs.create({ url: linkWithDomain });
     }
 
     async enableProtection(url: string): Promise<void> {
-        const domain = getDomain(url);
-        // @ts-ignore
-        const linkWithDomain = this.links.removeFromAllowlistLink + domain;
-        console.log(linkWithDomain);
-        await browser.tabs.create({ url: linkWithDomain });
+        if (!this.links) {
+            return;
+        }
 
-        // // TODO remove
-        // return nativeHostMock.enableProtection();
-        //
-        // return this.sendNativeMessage(MessagesToNativeApp.EnableProtection);
+        const domain = getDomain(url);
+        const linkWithDomain = this.links.removeFromAllowlistLink + domain;
+        await browser.tabs.create({ url: linkWithDomain });
     }
 
     async disableProtection(url: string): Promise<void> {
+        if (!this.links) {
+            return;
+        }
+
         const domain = getDomain(url);
-        // @ts-ignore
         const linkWithDomain = this.links.addToAllowlistLink + domain;
-        console.log(linkWithDomain);
         await browser.tabs.create({ url: linkWithDomain });
-        // // TODO remove
-        // return nativeHostMock.disableProtection();
-        //
-        // return this.sendNativeMessage(MessagesToNativeApp.DisableProtection);
     }
 
-    hasUserRulesBySite(url: string) {
-        // TODO remove
-        return nativeHostMock.hasUserRulesBySite(url);
+    async removeUserRulesBySite(url: string) {
+        if (!this.links) {
+            return;
+        }
 
-        return this.sendNativeMessage(MessagesToNativeApp.HasUserRulesBySite, { url });
+        const domain = getDomain(url);
+        // TODO shouldn't here to be provided url, not domain
+        const linkWithDomain = this.links.removeAllBlocklistRulesLink + domain;
+        await browser.tabs.create({ url: linkWithDomain });
     }
 
-    removeUserRulesBySite(url: string) {
-        // TODO remove
-        return nativeHostMock.removeUserRulesBySite(url);
-
-        return this.sendNativeMessage(MessagesToNativeApp.RemoveUserRulesBySite, { url });
-    }
-
+    // TODO get link from native host
     reportProblem(url?: string) {
         const type = MessagesToNativeApp.ReportProblem;
 
@@ -89,59 +85,28 @@ export class NativeHost {
         return this.sendNativeMessage(type);
     }
 
-    isPremiumApp() {
-        // TODO remove
-        return nativeHostMock.isPremium();
-
-        return this.sendNativeMessage(MessagesToNativeApp.IsPremium);
-    }
-
-    getAppearanceTheme() {
-        // TODO remove
-        return nativeHostMock.getAppearanceTheme();
-
-        return this.sendNativeMessage(MessagesToNativeApp.GetAppearanceTheme);
-    }
-
-    areContentBlockersEnabled() {
-        // TODO remove
-        return nativeHostMock.areContentBlockersEnabled();
-
-        return this.sendNativeMessage(MessagesToNativeApp.AreContentBlockersEnabled);
-    }
-
+    // TODO get link from native host
     upgradeMe() {
         return this.sendNativeMessage(MessagesToNativeApp.UpgradeMe);
     }
 
+    // TODO add timeout and handle errors
     async getAdvancedRulesText() {
         let rulesText = '';
 
-        // eslint-disable-next-line consistent-return
         const recursiveCall = async () => {
-            console.log('send GetAdvancedRulesText');
             const response = await this.sendNativeMessage(MessagesToNativeApp.GetAdvancedRulesText);
-            console.log(response);
             if (!response) {
                 return;
             }
-            const { advanced_rules: advancedRules } = response;
-            rulesText += advancedRules;
+
+            rulesText += response.advanced_rules;
             await recursiveCall();
         };
 
-        const start = Date.now();
-        console.log('started requesting', start);
         await recursiveCall();
-        console.log('rules text received', Date.now() - start);
-
-        console.log(rulesText);
 
         return rulesText;
-        // // TODO remove
-        // return nativeHostMock.getAdvancedRulesText();
-        //
-        // return this.sendNativeMessage(MessagesToNativeApp.GetAdvancedRulesText);
     }
 
     async getInitData(url: string) {

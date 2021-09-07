@@ -30,16 +30,14 @@ const getEngine = (() => {
     };
 
     return () => {
-        // if (!startPromise) {
-        //     startPromise = start();
-        // }
-        startPromise = start();
+        if (!startPromise) {
+            startPromise = start();
+        }
         return startPromise;
     };
 })();
 
 const getScriptsAndSelectors = async (url: string): Promise<SelectorsAndScripts> => {
-    console.log('getScriptsAndSelectors', url);
     const engine = await getEngine();
 
     const hostname = getDomain(url);
@@ -86,7 +84,6 @@ const getScriptsAndSelectors = async (url: string): Promise<SelectorsAndScripts>
 
 const handleMessages = () => {
     browser.runtime.onMessage.addListener(async (message: Message) => {
-        // @ts-ignore
         const { type, data } = message;
 
         switch (type) {
