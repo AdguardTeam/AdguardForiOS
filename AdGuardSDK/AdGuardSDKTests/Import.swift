@@ -16,27 +16,6 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
-
-struct OpaqueRuleConverter: UserRuleConverterProtocol {
-    /*
-     This functions do nothing.
-     Blocklist, DNS blocklist and allowlist rules are not modified by ourselves
-     Blocklist syntax can be rather complicated and
-     we suppose that user provided the correct rule
-     */
-    
-    func convertDomainToRule(_ domain: String) -> String {
-        return domain
-    }
-    
-    func convertRuleToDomain(_ rule: String) -> String {
-        return rule
-    }
-    
-    /* Returns all converted rules joined by new line */
-    func convertRulesToString(_ rules: [UserRule]) -> String {
-        return rules.map { $0.ruleText }
-                    .joined(separator: "\n")
-    }
-}
+/// This import is used to import Shared to the entire target
+/// More info can be found here https://forums.swift.org/t/what-does-exported-import-do/35869/2
+@_exported import SharedAdGuardSDK

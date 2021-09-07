@@ -28,7 +28,7 @@ public final class NotificationToken: NSObject {
     let notificationCenter: NotificationCenter
     let token: Any
 
-    init(notificationCenter: NotificationCenter = .default, token: Any) {
+    public init(notificationCenter: NotificationCenter = .default, token: Any) {
         self.notificationCenter = notificationCenter
         self.token = token
     }
@@ -38,7 +38,7 @@ public final class NotificationToken: NSObject {
     }
 }
 
-extension NotificationCenter {
+public extension NotificationCenter {
     /// Convenience wrapper for addObserver(forName:object:queue:using:)
     /// that returns our custom NotificationToken.
     func observe(name: NSNotification.Name?, object obj: Any?,

@@ -31,7 +31,7 @@ final class SafariUserRulesStorage: UserRulesStorageProtocol {
         }
         set {
             let encoder = JSONEncoder()
-            if let rulesData = try? encoder.encode(newValue as! [UserRule]) {
+            if let rulesData = try? encoder.encode(newValue) {
                 userDefaults.storage.set(rulesData, forKey: type.key)
             } else {
                 userDefaults.storage.set(Data(), forKey: type.key)

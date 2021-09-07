@@ -22,9 +22,9 @@ import Foundation
  Descendant of this protocol construct request for `RequestSender`
  so `RequestSender` knows where to send the request
  */
-protocol RequestProtocol {
+public protocol RequestProtocol {
     var urlRequest: URLRequest? { get }
 }
-extension RequestProtocol {
+public extension RequestProtocol {
     var urlBase: String { "https://filters.adtidy.org/ios/" }
 }

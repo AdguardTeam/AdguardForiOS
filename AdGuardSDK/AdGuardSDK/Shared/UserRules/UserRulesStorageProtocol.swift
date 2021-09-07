@@ -18,6 +18,6 @@
 
 import Foundation
 
-protocol UserRulesStorageProtocol: AnyObject {
+public protocol UserRulesStorageProtocol: AnyObject {
     var rules: [UserRule] { get set }
 }

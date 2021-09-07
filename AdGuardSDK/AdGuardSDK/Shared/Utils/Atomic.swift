@@ -18,20 +18,23 @@
 
 import Foundation
 
-extension DateInterval {
-    /// Returns date between `start` and `end`
-    var middle: Date {
-        let sum = end.timeIntervalSince1970 + start.timeIntervalSince1970
-        let middle = sum / 2
-        return Date(timeIntervalSince1970: middle)
-    }
-}
+@propertyWrapper
+public final class Atomic<Value> {
 
-extension Date {
-    /// Returns date between `start` and `end`
-    /// `end` >= `start`
-    static func middleDate(between start: Date, and end: Date) -> Date {
-        let interval = DateInterval(start: start, end: end)
-        return interval.middle
+    public var wrappedValue: Value {
+        get {
+            return queue.sync { value }
+        }
+    }
+ 
+    private let queue = DispatchQueue(label: "AdGuardSDK.atomic")
+    private var value: Value
+    
+    public init(wrappedValue: Value) {
+        self.value = wrappedValue
+    }
+    
+    public func mutate(_ mutation: (inout Value) throws -> Void) rethrows {
+        return try queue.sync { try mutation(&value) }
     }
 }

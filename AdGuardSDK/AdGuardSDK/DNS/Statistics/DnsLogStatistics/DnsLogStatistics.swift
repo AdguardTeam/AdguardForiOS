@@ -99,7 +99,7 @@ final public class DnsLogStatistics: DnsLogStatisticsProtocol {
     /// Removes last 500 records if records number exceeds 1500 records
     private func purgeDnsLogIfNeeded() throws {
         let maxRecordsCount = 1500
-        let recordsCount = try statisticsDb.recordsCount(for: DnsLogTable.table)
+        let recordsCount = try statisticsDb.scalar(DnsLogTable.table.count)
         guard recordsCount >= maxRecordsCount else {
             return
         }

@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol CustomFilterFilesStorageProtocol: ResetableSyncProtocol {
+public protocol CustomFilterFilesStorageProtocol: ResetableSyncProtocol {
     /**
      Updates custom filter file with specified **id** and **subscriptionUrl**
      Filter will be created if it doesn't exist
@@ -50,7 +50,7 @@ protocol CustomFilterFilesStorageProtocol: ResetableSyncProtocol {
     func getUrlForFilter(withId id: Int) -> URL
 }
 
-protocol FilterFilesStorageProtocol: CustomFilterFilesStorageProtocol {
+public protocol FilterFilesStorageProtocol: CustomFilterFilesStorageProtocol {
     
     /// URL of directory where all filters are stored
     var filterFilesDirectoryUrl: URL { get }
@@ -79,10 +79,10 @@ protocol FilterFilesStorageProtocol: CustomFilterFilesStorageProtocol {
 }
 
 /* This class manages filters text files */
-final class FilterFilesStorage: FilterFilesStorageProtocol {
+public final class FilterFilesStorage: FilterFilesStorageProtocol {
     
     // URL of directory where all filters are stored
-    let filterFilesDirectoryUrl: URL
+    public let filterFilesDirectoryUrl: URL
     
     // MARK: - Private properties
     
@@ -93,7 +93,7 @@ final class FilterFilesStorage: FilterFilesStorageProtocol {
     
     // MARK: - Initialization
     
-    init(filterFilesDirectoryUrl: URL) throws {
+    public init(filterFilesDirectoryUrl: URL) throws {
         // We are trying to create directory if passed URL is not a valid directory
         if !filterFilesDirectoryUrl.isDirectory {
             try fileManager.createDirectory(at: filterFilesDirectoryUrl, withIntermediateDirectories: true, attributes: nil)
@@ -103,16 +103,16 @@ final class FilterFilesStorage: FilterFilesStorageProtocol {
     
     // MARK: - Public methods
     
-    func updateFilter(withId id: Int, onFilterUpdated: @escaping (Error?) -> Void) {
+    public func updateFilter(withId id: Int, onFilterUpdated: @escaping (Error?) -> Void) {
         let filterFileUrl = urlForFilter(withId: id)
         downloadFilter(withUrl: filterFileUrl, filterId: id, onFilterDownloaded: onFilterUpdated)
     }
     
-    func updateCustomFilter(withId id: Int, subscriptionUrl: URL, onFilterUpdated: @escaping (Error?) -> Void) {
+    public func updateCustomFilter(withId id: Int, subscriptionUrl: URL, onFilterUpdated: @escaping (Error?) -> Void) {
         downloadFilter(withUrl: subscriptionUrl, filterId: id, onFilterDownloaded: onFilterUpdated)
     }
     
-    func getFilterContentForFilter(withId id: Int) -> String? {
+    public func getFilterContentForFilter(withId id: Int) -> String? {
         let fileUrl = fileUrlForFilter(withId: id)
         
         guard let content = try? String.init(contentsOf: fileUrl, encoding: .utf8) else {
@@ -129,7 +129,7 @@ final class FilterFilesStorage: FilterFilesStorageProtocol {
         return content
     }
     
-    func getFiltersContentForFilters(withIds identifiers: [Int]) -> [Int : String] {
+    public func getFiltersContentForFilters(withIds identifiers: [Int]) -> [Int : String] {
         var result: [Int: String] = [:]
         
         for id in identifiers {
@@ -140,21 +140,21 @@ final class FilterFilesStorage: FilterFilesStorageProtocol {
         return result
     }
     
-    func saveFilter(withId id: Int, filterContent: String) throws {
+    public func saveFilter(withId id: Int, filterContent: String) throws {
         let filterFileUrl = fileUrlForFilter(withId: id)
         try filterContent.write(to: filterFileUrl, atomically: true, encoding: .utf8)
     }
     
-    func deleteFilter(withId id: Int) throws {
+    public func deleteFilter(withId id: Int) throws {
         let filterFileUrl = fileUrlForFilter(withId: id)
         try fileManager.removeItem(at: filterFileUrl)
     }
     
-    func getUrlForFilter(withId id: Int) -> URL {
+    public func getUrlForFilter(withId id: Int) -> URL {
         return fileUrlForFilter(withId: id)
     }
     
-    func reset() throws {
+    public func reset() throws {
         Logger.logInfo("(FilterFilesStorage) - reset start")
         
         // Delete all custom filters files

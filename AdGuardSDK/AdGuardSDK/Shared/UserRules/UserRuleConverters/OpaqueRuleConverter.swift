@@ -17,21 +17,29 @@
  */
 
 import Foundation
-import Zip
 
-public extension FilterFilesStorageProtocol {
-    /**
-     Unzips `filters.zip` archive and saves all filters from it.
-     - Throws an error if there are any other files except `filters.zip`
+public struct OpaqueRuleConverter: UserRuleConverterProtocol {
+    
+    public init() {}
+    
+    /*
+     This functions do nothing.
+     Blocklist, DNS blocklist and allowlist rules are not modified by ourselves
+     Blocklist syntax can be rather complicated and
+     we suppose that user provided the correct rule
      */
-    func unzipPredefinedFiltersIfNeeded() throws {
-        let fm = FileManager.default
-        let filtersZipUrl = filterFilesDirectoryUrl.appendingPathComponent(Constants.Files.filtersZipFileName)
-        let filtersUrls = try fm.contentsOfDirectory(at: filterFilesDirectoryUrl, includingPropertiesForKeys: nil, options: [])
-        // There must be only filters.zip file
-        guard filtersUrls.count == 1 else {
-            return
-        }
-        try Zip.unzipFile(filtersZipUrl, destination: filterFilesDirectoryUrl, overwrite: true, password: nil)
+    
+    public func convertDomainToRule(_ domain: String) -> String {
+        return domain
+    }
+    
+    public func convertRuleToDomain(_ rule: String) -> String {
+        return rule
+    }
+    
+    /* Returns all converted rules joined by new line */
+    public func convertRulesToString(_ rules: [UserRule]) -> String {
+        return rules.map { $0.ruleText }
+                    .joined(separator: "\n")
     }
 }

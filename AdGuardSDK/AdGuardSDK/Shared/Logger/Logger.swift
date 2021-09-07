@@ -20,7 +20,7 @@ import Foundation
 
 public typealias LogMessage = (_ message: String) -> Void
 
-public class Logger {
+public final class Logger {
     public static var logInfo: LogMessage = { _ in }
     public static var logError: LogMessage = { _ in }
     public static var logDebug: LogMessage = { _ in }

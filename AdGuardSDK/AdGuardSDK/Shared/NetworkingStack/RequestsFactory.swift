@@ -21,4 +21,4 @@ import Foundation
 /// Configurations for `RequestSender`
 /// To properly devide API calls methods between targets it is better to extend this struct
 /// Add method here only if some API call is used in both Safari and DNS protection
-struct RequestsFactory {}
+public struct RequestsFactory {}

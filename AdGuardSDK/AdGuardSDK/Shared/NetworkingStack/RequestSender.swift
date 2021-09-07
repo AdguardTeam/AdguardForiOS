@@ -20,14 +20,19 @@ import Foundation
 
 // MARK: - RequestConfig
 
-struct RequestConfig<Parser> where Parser: ParserProtocol {
+public struct RequestConfig<Parser> where Parser: ParserProtocol {
     let request: RequestProtocol
     let parser: Parser
+    
+    public init(request: RequestProtocol, parser: Parser) {
+        self.request = request
+        self.parser = parser
+    }
 }
 
 // MARK: - RequestSenderError
 
-enum RequestSenderError: Error {
+public enum RequestSenderError: Error {
     case stringToUrlError
     case receivedDataParsingError
     
@@ -43,7 +48,7 @@ enum RequestSenderError: Error {
 
 // MARK: - RequestSenderProtocol
 
-protocol RequestSenderProtocol {
+public protocol RequestSenderProtocol {
     func send<Parser>(requestConfig: RequestConfig<Parser>,
                       completion: @escaping(Result<Parser.Model>) -> Void)
 }
@@ -55,7 +60,7 @@ protocol RequestSenderProtocol {
  `send` method accepts `requestConfig` with `Parser` so it knows
  where to send request and how to parse the data from request's response
  */
-final class RequestSender: RequestSenderProtocol{
+public final class RequestSender: RequestSenderProtocol{
     
     private let session: URLSession
     
@@ -64,13 +69,13 @@ final class RequestSender: RequestSenderProtocol{
     
     // MARK: - Initialization
     
-    init(session: URLSession = URLSession.shared) {
+    public init(session: URLSession = URLSession.shared) {
         self.session = session
     }
     
     // MARK: - Internal method
     
-    func send<Parser>(requestConfig: RequestConfig<Parser>, completion: @escaping (Result<Parser.Model>) -> Void) where Parser : ParserProtocol {
+    public func send<Parser>(requestConfig: RequestConfig<Parser>, completion: @escaping (Result<Parser.Model>) -> Void) where Parser : ParserProtocol {
         let group = DispatchGroup()
         
         #if os(OSX)

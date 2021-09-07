@@ -18,15 +18,17 @@
 
 import Foundation
 
-struct InvertedAllowlistRuleConverter: UserRuleConverterProtocol {
+public struct InvertedAllowlistRuleConverter: UserRuleConverterProtocol {
     
     private static let invertedAllowlistPrefix = "~"
+    
+    public init() {}
     
     /*
      This function converts domain to inverted allowlist rule ~domain
      If passed domain already contains '~' it won't be repeated
      */
-    func convertDomainToRule(_ domain: String) -> String {
+    public func convertDomainToRule(_ domain: String) -> String {
         var rule = domain
         
         if !rule.hasPrefix(Self.invertedAllowlistPrefix) {
@@ -40,7 +42,7 @@ struct InvertedAllowlistRuleConverter: UserRuleConverterProtocol {
      This function converts rule with ~domain format to domain
      If passed rule doesn't contain '~' prefix the function will return rule without modifying it
      */
-    func convertRuleToDomain(_ rule: String) -> String {
+    public func convertRuleToDomain(_ rule: String) -> String {
         var domain = rule
         
         if domain.hasPrefix(Self.invertedAllowlistPrefix) {
@@ -56,7 +58,7 @@ struct InvertedAllowlistRuleConverter: UserRuleConverterProtocol {
      So the result looks like: @@||*$document,domain=~domain1|~domain2|~domain3
      If rules are empty the result rule will look like this: @@||*$document
      */
-    func convertRulesToString(_ rules: [UserRule]) -> String {
+    public func convertRulesToString(_ rules: [UserRule]) -> String {
         if rules.isEmpty {
             return "@@||*$document"
         } else {
