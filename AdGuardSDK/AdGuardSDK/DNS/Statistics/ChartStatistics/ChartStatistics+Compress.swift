@@ -21,7 +21,7 @@
 extension ChartStatistics {
     /// Compresses table if there are more than 1000 records
     func compressTableIfNeeded() throws {
-        let recordsCount = try statisticsDb.recordsCount(for: ChartStatisticsTable.table)
+        let recordsCount = try statisticsDb.scalar(ChartStatisticsTable.table.count)
         if recordsCount >= 1000 {
             Logger.logInfo("(ChartStatistics) - compressTableIfNeeded; Number of records is greater 1500, compress now")
             try compressTable()
@@ -31,7 +31,7 @@ extension ChartStatistics {
     func compressTable() throws {
         Logger.logInfo("(ChartStatistics) - compressTable; Trying to compress the table")
         
-        let recordsCountBeforeCompression = try statisticsDb.recordsCount(for: ChartStatisticsTable.table)
+        let recordsCountBeforeCompression = try statisticsDb.scalar(ChartStatisticsTable.table.count)
         let compressedRecords = try getCompressedRecords()
         try reset()
         try compressedRecords.forEach { try add(record: $0) }

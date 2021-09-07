@@ -16,9 +16,6 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
-
-/// Configurations for `RequestSender`
-/// To properly devide API calls methods between targets it is better to extend this struct
-/// Add method here only if some API call is used in both Safari and DNS protection
-struct RequestsFactory {}
+/// This import is used to import Shared to the entire target
+/// More info can be found here https://forums.swift.org/t/what-does-exported-import-do/35869/2
+@_exported import SharedAdGuardSDK

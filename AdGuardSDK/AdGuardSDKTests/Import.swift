@@ -16,12 +16,6 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
-
-/**
- Descendant of this protocol parse data from response and return Model objects
- */
-protocol ParserProtocol {
-    associatedtype Model
-    func parse(data: Data, response: URLResponse?) -> Model?
-}
+/// This import is used to import Shared to the entire target
+/// More info can be found here https://forums.swift.org/t/what-does-exported-import-do/35869/2
+@_exported import SharedAdGuardSDK

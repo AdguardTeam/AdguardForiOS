@@ -18,7 +18,7 @@
 
 import Foundation
 
-extension Array where Element: Equatable {
+public extension Array where Element: Equatable {
     /// Returns true if all elements are equal
     var allElementsAreEqual: Bool {
         if let firstElem = self.first {

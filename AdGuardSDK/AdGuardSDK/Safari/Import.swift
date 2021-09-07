@@ -16,8 +16,6 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
-
-protocol UserRulesStorageProtocol: AnyObject {
-    var rules: [UserRule] { get set }
-}
+/// This import is used to import Shared to the entire target
+/// More info can be found here https://forums.swift.org/t/what-does-exported-import-do/35869/2
+@_exported import SharedAdGuardSDK

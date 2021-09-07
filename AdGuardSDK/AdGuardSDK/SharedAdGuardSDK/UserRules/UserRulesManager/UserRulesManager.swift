@@ -23,18 +23,18 @@ import Foundation
  It can manage all types of user rules (allowlist / inverted allowlist / blocklist)
  To make it work you just need to pass appropriate storage and rules converter types
  */
-final class UserRulesManager: UserRulesManagerProtocol {
+public final class UserRulesManager: UserRulesManagerProtocol {
     
     // MARK: - Public properties
     
-    var rulesString: String {
+    public var rulesString: String {
         rulesModificationQueue.sync {
             let enabledRules = _allRules.filter { $0.isEnabled }
             return converter.convertRulesToString(enabledRules)
         }
     }
     
-    var allRules: [UserRule] { rulesModificationQueue.sync { _allRules } }
+    public var allRules: [UserRule] { rulesModificationQueue.sync { _allRules } }
     
     // MARK: - Private properties
     
@@ -54,7 +54,7 @@ final class UserRulesManager: UserRulesManagerProtocol {
     
     // MARK: - Initialization
     
-    init(type: UserRuleType, storage: UserRulesStorageProtocol) {
+    public init(type: UserRuleType, storage: UserRulesStorageProtocol) {
         self.storage = storage
         self.converter = type.converter
         self._allRules = storage.rules
@@ -63,13 +63,13 @@ final class UserRulesManager: UserRulesManagerProtocol {
     
     // MARK: - Public methods
     
-    func add(rule: UserRule, override: Bool) throws {
+    public func add(rule: UserRule, override: Bool) throws {
         try rulesModificationQueue.sync { [weak self] in
             try self?.internalAdd(rule: rule, override: override)
         }
     }
     
-    func add(rules: [UserRule], override: Bool) throws {
+    public func add(rules: [UserRule], override: Bool) throws {
         try rulesModificationQueue.sync {
             let existingRules = domainsSet.intersection(rules.map { $0.ruleText })
             
@@ -89,7 +89,7 @@ final class UserRulesManager: UserRulesManagerProtocol {
         }
     }
     
-    func modifyRule(_ oldRuleText: String, _ newRule: UserRule) throws {
+    public func modifyRule(_ oldRuleText: String, _ newRule: UserRule) throws {
         try rulesModificationQueue.sync {
             guard let ruleIndex = _allRules.firstIndex(where: { $0.ruleText == oldRuleText }) else {
                 throw UserRulesStorageError.ruleDoesNotExist(ruleString: oldRuleText)
@@ -109,7 +109,7 @@ final class UserRulesManager: UserRulesManagerProtocol {
         }
     }
     
-    func removeRule(withText ruleText: String) throws {
+    public func removeRule(withText ruleText: String) throws {
         try rulesModificationQueue.sync {
             guard let ruleIndex = _allRules.firstIndex(where: { $0.ruleText == ruleText }) else {
                 throw UserRulesStorageError.ruleDoesNotExist(ruleString: ruleText)
@@ -121,7 +121,7 @@ final class UserRulesManager: UserRulesManagerProtocol {
         }
     }
     
-    func removeAllRules() {
+    public func removeAllRules() {
         rulesModificationQueue.sync {
             _allRules.removeAll()
             domainsSet.removeAll()
@@ -129,7 +129,7 @@ final class UserRulesManager: UserRulesManagerProtocol {
         }
     }
     
-    func reset() throws {
+    public func reset() throws {
         removeAllRules()
     }
     

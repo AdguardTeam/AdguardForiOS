@@ -32,7 +32,7 @@ public enum UserRulesStorageError: Error, CustomDebugStringConvertible {
     }
 }
 
-protocol UserRulesManagerProtocol: ResetableSyncProtocol, AnyObject {
+public protocol UserRulesManagerProtocol: ResetableSyncProtocol, AnyObject {
     
     /* String representation of all enabled rules */
     var rulesString: String { get }

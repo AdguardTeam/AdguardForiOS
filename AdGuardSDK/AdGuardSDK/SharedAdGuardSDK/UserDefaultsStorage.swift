@@ -18,13 +18,13 @@
 
 import Foundation
 
-protocol UserDefaultsStorageProtocol: AnyObject {
+public protocol UserDefaultsStorageProtocol: AnyObject {
     var storage: UserDefaults { get }
 }
 
-final class UserDefaultsStorage: UserDefaultsStorageProtocol {
+public final class UserDefaultsStorage: UserDefaultsStorageProtocol {
     
-    let storage: UserDefaults
+    public let storage: UserDefaults
     
     public init(storage: UserDefaults) {
         self.storage = storage

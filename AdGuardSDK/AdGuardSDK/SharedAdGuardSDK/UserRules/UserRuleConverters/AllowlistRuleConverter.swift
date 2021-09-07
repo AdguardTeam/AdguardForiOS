@@ -18,16 +18,18 @@
 
 import Foundation
 
-struct AllowlistRuleConverter: UserRuleConverterProtocol {
+public struct AllowlistRuleConverter: UserRuleConverterProtocol {
     
     private static let allowlistPrefix = "@@||"
     private static let allowlistSuffix = "^$document"
+    
+    public init() {}
     
     /*
      This function converts domain to allowlist rule @@||domain^$document
      If passed domain already contains '@@||' or '^$document' they won't be repeated
      */
-    func convertDomainToRule(_ domain: String) -> String {
+    public func convertDomainToRule(_ domain: String) -> String {
         var rule = domain
         
         if !rule.hasPrefix(Self.allowlistPrefix) {
@@ -46,7 +48,7 @@ struct AllowlistRuleConverter: UserRuleConverterProtocol {
      If passed rule doesn't contain '@@||' or '^$document'
      the function will return rule without modifying it
      */
-    func convertRuleToDomain(_ ruleText: String) -> String {
+    public func convertRuleToDomain(_ ruleText: String) -> String {
         var domain = ruleText
         
         if domain.hasPrefix(Self.allowlistPrefix) {
@@ -68,7 +70,7 @@ struct AllowlistRuleConverter: UserRuleConverterProtocol {
      @@||domain2^$document
      @@||domain3^$document
      */
-    func convertRulesToString(_ rules: [UserRule]) -> String {
+    public func convertRulesToString(_ rules: [UserRule]) -> String {
         return rules.map { convertDomainToRule($0.ruleText) }
                     .joined(separator: "\n")
     }

@@ -20,7 +20,7 @@ import Foundation
 
 // MARK: - CustomFilterMetaParserError
 
-enum CustomFilterMetaParserError: Error {
+public enum CustomFilterMetaParserError: Error {
     case invalidFileContent
 }
 

@@ -17,21 +17,8 @@
  */
 
 import Foundation
-import Zip
 
-public extension FilterFilesStorageProtocol {
-    /**
-     Unzips `filters.zip` archive and saves all filters from it.
-     - Throws an error if there are any other files except `filters.zip`
-     */
-    func unzipPredefinedFiltersIfNeeded() throws {
-        let fm = FileManager.default
-        let filtersZipUrl = filterFilesDirectoryUrl.appendingPathComponent(Constants.Files.filtersZipFileName)
-        let filtersUrls = try fm.contentsOfDirectory(at: filterFilesDirectoryUrl, includingPropertiesForKeys: nil, options: [])
-        // There must be only filters.zip file
-        guard filtersUrls.count == 1 else {
-            return
-        }
-        try Zip.unzipFile(filtersZipUrl, destination: filterFilesDirectoryUrl, overwrite: true, password: nil)
-    }
-}
+/// Configurations for `RequestSender`
+/// To properly devide API calls methods between targets it is better to extend this struct
+/// Add method here only if some API call is used in both Safari and DNS protection
+public struct RequestsFactory {}

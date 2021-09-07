@@ -19,9 +19,9 @@
 import Foundation
 
 @propertyWrapper
-class Atomic<Value> {
+public final class Atomic<Value> {
 
-    var wrappedValue: Value {
+    public var wrappedValue: Value {
         get {
             return queue.sync { value }
         }
@@ -30,11 +30,11 @@ class Atomic<Value> {
     private let queue = DispatchQueue(label: "AdGuardSDK.atomic")
     private var value: Value
     
-    init(wrappedValue: Value) {
+    public init(wrappedValue: Value) {
         self.value = wrappedValue
     }
     
-    func mutate(_ mutation: (inout Value) throws -> Void) rethrows {
+    public func mutate(_ mutation: (inout Value) throws -> Void) rethrows {
         return try queue.sync { try mutation(&value) }
     }
 }
