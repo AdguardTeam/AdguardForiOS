@@ -150,6 +150,6 @@ export const renew = async () => {
             log.warning(` - ${removedKeys.join('\n - ')}`);
         }
     } catch (e) {
-        log.error(e);
+        log.error(e as string);
     }
 };

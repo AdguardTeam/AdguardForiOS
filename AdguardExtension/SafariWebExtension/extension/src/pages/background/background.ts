@@ -7,15 +7,81 @@ import {
     MessagesToNativeApp,
 } from '../common/constants';
 import { permissions } from './permissions';
-import { logNative } from '../common/logNative';
 import { log } from '../common/log';
 import { app } from './app';
 import { nativeHost } from './native-host';
+import { Engine } from './engine';
+import { getDomain } from '../common/utils/url';
+import { buildStyleSheet } from './css-service';
+import { SelectorsAndScripts } from '../common/interfaces';
 
 interface Message {
     type: string,
     data?: any,
 }
+
+const getEngine = (() => {
+    const engine = new Engine();
+    let startPromise: Promise<Engine>;
+
+    const start = async () => {
+        const rulesText = await nativeHost.getAdvancedRulesText();
+        await engine.start(rulesText);
+        return engine;
+    };
+
+    return () => {
+        if (!startPromise) {
+            startPromise = start();
+        }
+        return startPromise;
+    };
+})();
+
+const getScriptsAndSelectors = async (url: string): Promise<SelectorsAndScripts> => {
+    const engine = await getEngine();
+
+    const hostname = getDomain(url);
+    const cosmeticResult = engine.getCosmeticResult(hostname);
+
+    const injectCssRules = [
+        ...cosmeticResult.CSS.generic,
+        ...cosmeticResult.CSS.specific,
+    ];
+
+    const elementHidingExtCssRules = [
+        ...cosmeticResult.elementHiding.genericExtCss,
+        ...cosmeticResult.elementHiding.specificExtCss,
+    ];
+
+    const injectExtCssRules = [
+        ...cosmeticResult.CSS.genericExtCss,
+        ...cosmeticResult.CSS.specificExtCss,
+    ];
+
+    const cssInject = buildStyleSheet([], injectCssRules, true);
+    const cssExtended = buildStyleSheet(
+        elementHidingExtCssRules,
+        injectExtCssRules,
+        false,
+    );
+
+    const scriptRules = cosmeticResult.getScriptRules();
+
+    const debug = false;
+    const scripts = scriptRules
+        .map((scriptRule) => scriptRule.getScript(debug))
+        .filter((script): script is string => script !== null);
+
+    // remove repeating scripts
+    const uniqueScripts = [...new Set(scripts)];
+
+    return {
+        scripts: uniqueScripts,
+        cssInject,
+        cssExtended,
+    };
+};
 
 const handleMessages = () => {
     browser.runtime.onMessage.addListener(async (message: Message) => {
@@ -24,20 +90,12 @@ const handleMessages = () => {
 
         switch (type) {
             case MessagesToBackgroundPage.GetScriptsAndSelectors: {
-                // return handleScriptsAndSelectorsGeneration(data.url);
-                const start = Date.now();
-                const response = await browser.runtime.sendNativeMessage('application_id', {
-                    type: MessagesToNativeApp.GetBlockingData,
-                    data: data.url,
-                });
-                logNative(`AG: Time to get blocking data from native host app: ${Date.now() - start} ms`);
-                return response.data;
+                const { url } = data;
+                const scriptsAndSelectors = await getScriptsAndSelectors(url);
+                return scriptsAndSelectors as SelectorsAndScripts;
             }
             case MessagesToBackgroundPage.AddRule: {
-                await browser.runtime.sendNativeMessage('application_id', {
-                    type: MessagesToNativeApp.AddToUserRules,
-                    data: data.ruleText,
-                });
+                await nativeHost.addToUserRules(data.ruleText);
                 break;
             }
             case MessagesToBackgroundPage.OpenAssistant: {
@@ -108,7 +166,6 @@ const handleMessages = () => {
 };
 
 export const background = () => {
-    // logNative(`application started ${Date.now()}`);
     // Message listener should be on the upper level to wake up background page
     // when it is necessary
     handleMessages();
