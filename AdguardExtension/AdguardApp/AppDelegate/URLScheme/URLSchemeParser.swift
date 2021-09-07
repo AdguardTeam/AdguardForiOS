@@ -28,7 +28,7 @@
  6. <adguardScheme>://apply_settings?json=<JSON>                    <--- Import settings
  7. abp://subscribe?location=<LOCATION URL>&title=<TITLE>           <--- Subscribe to custom safari filter
  8. <adguardScheme>://openTunnelModeSettings                        <--- Open Tunnel Mode settings
- 9. adguard://auth#access_token=<TOKEN>&token_type=<TOKEN TYPE>&state=<STATE>&expires_in=<EXPIRES IN>   <--- Log in by social networks
+ 9. <adguardScheme>://auth#access_token=<TOKEN>&token_type=<TOKEN TYPE>&state=<STATE>&expires_in=<EXPIRES IN>   <--- Log in by social networks
  10. <adguardScheme>://safariWebExtension?action=<ACTION>&domain=<DOMAIN> <--- Open with safari web extension action
     <ACTION> = removeFromAllowlist or addToAllowlist or addToBlocklist or removeAllBlocklistRules
  */

@@ -41,4 +41,6 @@ extension Bundle {
         // do not foget to add "HostAppBundleId" key to target info.plist file
         return Bundle.main.infoDictionary?["HostAppBundleId"] as? String ?? "com.adguard.AdguardExtension"
     }
+    
+    var appScheme: String { isPro ? "adguard-pro" : "adguard" }
 }

@@ -516,7 +516,7 @@ extension AppDelegate {
         return true
     }
     
-    func presentUserRulesRedirectController(for action: UserRulesRedirectController.Action) -> Bool {
+    func presentUserRulesRedirectController(for action: UserRulesRedirectAction) -> Bool {
         guard let topVC = Self.topViewController() else {
             DDLogError("Failed to get top view controller")
             return false

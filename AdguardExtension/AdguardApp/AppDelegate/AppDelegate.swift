@@ -230,10 +230,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self?.showRateAppDialogIfNedeed()
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
-//            self?.presentUserRulesRedirectController(for: .addToBlocklist(domain: "some.com"))
-        }
-        
         guard let dnsLogContainerVC = getDnsLogContainerController() else {
             DDLogError("dnsLogContainerVC is nil")
             return

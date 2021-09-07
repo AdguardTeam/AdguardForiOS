@@ -20,8 +20,8 @@ import SafariServices
 
 class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
 
-    private let resources: AESharedResources = AESharedResources()
-    private let processor: SafariWebExtensionMessageProcessorProtocol = SafariWebExtensionMessageProcessor()
+    private let resources = Services.shared.resources
+    private let processor = Services.shared.processor
     
     override init() {
         super.init()

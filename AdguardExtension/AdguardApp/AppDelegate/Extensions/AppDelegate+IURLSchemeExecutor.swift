@@ -67,7 +67,7 @@ extension AppDelegate: IURLSchemeExecutor {
         return true
     }
     
-    func openUserRulesRedirectController(for action: UserRulesRedirectController.Action) -> Bool {
+    func openUserRulesRedirectController(for action: UserRulesRedirectAction) -> Bool {
         DDLogInfo("(AppDelegate) - open UserRulesRedirectController with action = \(action)")
         return self.presentUserRulesRedirectController(for: action)
     }

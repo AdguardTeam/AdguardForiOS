@@ -20,46 +20,12 @@ import UIKit
 
 final class UserRulesRedirectController: BottomAlertController {
 
-    var action: Action = .addToAllowlist(domain: "domain.com")
+    var action: UserRulesRedirectAction = .addToAllowlist(domain: "domain.com")
     var state: State = .processing
-    
-    enum Action {
-        case removeFromAllowlist(domain: String)
-        case addToAllowlist(domain: String)
-        case addToBlocklist(domain: String)
-        case removeAllBlocklistRules(domain: String)
-        
-        fileprivate var title: String {
-            switch self {
-            case .removeFromAllowlist(let domain): return domain
-            case .addToAllowlist(let domain): return domain
-            case .addToBlocklist(let domain): return domain
-            case .removeAllBlocklistRules(let domain): return domain
-            }
-        }
-        
-        fileprivate var description: String {
-            switch self {
-            case .removeFromAllowlist(let domain): return "Waiting for content \(domain)"
-            case .addToAllowlist(let domain): return "Waiting for content \(domain)"
-            case .addToBlocklist(let domain): return "Waiting for content \(domain)"
-            case .removeAllBlocklistRules(let domain): return "Waiting for content \(domain)"
-            }
-        }
-        
-        fileprivate var icon: UIImage? {
-            switch self {
-            case .removeFromAllowlist(_): return UIImage(named: "kill_switch")
-            case .addToAllowlist(_): return UIImage(named: "thumbsup")
-            case .addToBlocklist(_): return UIImage(named: "ad_blocking_feature_logo")
-            case .removeAllBlocklistRules(_): return UIImage(named: "kill_switch")
-            }
-        }
-    }
     
     enum State {
         case processing
-        case done(action: Action)
+        case done(action: UserRulesRedirectAction)
         
         fileprivate var title: String {
             switch self {
@@ -146,11 +112,44 @@ final class UserRulesRedirectController: BottomAlertController {
     }
 }
 
+// MARK: - UserRulesRedirectAction + ThemableProtocol
+
 extension UserRulesRedirectController: ThemableProtocol {
     func updateTheme() {
         contentView.backgroundColor = themeService.popupBackgroundColor
         themeService.setupLabel(titleLabel)
         themeService.setupLabel(descriptionLabel)
         activityIndicator.style = themeService.indicatorStyle
+    }
+}
+
+// MARK: - UserRulesRedirectAction + Helper variables
+
+fileprivate extension UserRulesRedirectAction {
+    var title: String {
+        switch self {
+        case .removeFromAllowlist(let domain): return domain
+        case .addToAllowlist(let domain): return domain
+        case .addToBlocklist(let domain): return domain
+        case .removeAllBlocklistRules(let domain): return domain
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case .removeFromAllowlist(let domain): return "Waiting for content \(domain)"
+        case .addToAllowlist(let domain): return "Waiting for content \(domain)"
+        case .addToBlocklist(let domain): return "Waiting for content \(domain)"
+        case .removeAllBlocklistRules(let domain): return "Waiting for content \(domain)"
+        }
+    }
+    
+    var icon: UIImage? {
+        switch self {
+        case .removeFromAllowlist(_): return UIImage(named: "kill_switch")
+        case .addToAllowlist(_): return UIImage(named: "thumbsup")
+        case .addToBlocklist(_): return UIImage(named: "ad_blocking_feature_logo")
+        case .removeAllBlocklistRules(_): return UIImage(named: "kill_switch")
+        }
     }
 }
