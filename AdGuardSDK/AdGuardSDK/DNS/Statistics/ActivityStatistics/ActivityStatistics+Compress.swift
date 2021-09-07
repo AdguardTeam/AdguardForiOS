@@ -26,7 +26,7 @@ extension ActivityStatistics {
     func compressTable() throws {
         Logger.logInfo("(ActivityStatistics) - compressTable; Trying to compress the table")
         
-        let recordsCountBeforeCompression = try statisticsDb.recordsCount(for: ActivityStatisticsTable.table)
+        let recordsCountBeforeCompression = try statisticsDb.scalar(ActivityStatisticsTable.table.count)
         let compressedRecords = try getCompressedRecords()
         try reset()
         try compressedRecords.forEach { try add(record: $0) }

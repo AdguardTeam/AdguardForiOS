@@ -1,5 +1,5 @@
 import Foundation
-import SQLite
+@_implementationOnly import SQLite
 
 enum MetaStorageMockError: Error {
     case updateAllGroupsError
@@ -88,7 +88,7 @@ class MetaStorageMock: MetaStorageProtocol {
     // MARK: - FiltersMetaStorageProtocol + Filters methods
 
     var getLocalizedFiltersForGroupCalledCount = 0
-    var getAllLocalizaedFiltersResult: Result<[FiltersTable]>?
+    var getAllLocalizaedFiltersResult: SharedAdGuardSDK.Result<[FiltersTable]>?
     func getLocalizedFiltersForGroup(withId id: Int, forLanguage lang: String) throws -> [FiltersTable] {
         getLocalizedFiltersForGroupCalledCount += 1
         
@@ -112,7 +112,7 @@ class MetaStorageMock: MetaStorageProtocol {
     }
     
     var updateFilterCalledCount = 0
-    var updateFilterResult: Result<Bool> = .success(true)
+    var updateFilterResult: SharedAdGuardSDK.Result<Bool> = .success(true)
     func update(filter: ExtendedFilterMetaProtocol) throws -> Bool {
         updateFilterCalledCount += 1
         switch updateFilterResult {
@@ -122,7 +122,7 @@ class MetaStorageMock: MetaStorageProtocol {
     }
     
     var updateFiltersCalledCount = 0
-    var updateFiltersResult: Result<[Int]> = .success([])
+    var updateFiltersResult: SharedAdGuardSDK.Result<[Int]> = .success([])
     func update(filters: [ExtendedFilterMetaProtocol]) throws -> [Int] {
         updateFiltersCalledCount += 1
         switch updateFiltersResult {
@@ -169,7 +169,7 @@ class MetaStorageMock: MetaStorageProtocol {
     
     // MARK: - FiltersMetaStorageProtocol + Groups methods
     var getAllLocalizedGroupsCalledCount = 0
-    var getAllLocalizedGroupsResult: Result<[FilterGroupsTable]> = .success([])
+    var getAllLocalizedGroupsResult: SharedAdGuardSDK.Result<[FilterGroupsTable]> = .success([])
     func getAllLocalizedGroups(forLanguage lang: String) throws -> [FilterGroupsTable] {
         getAllLocalizedGroupsCalledCount += 1
         switch getAllLocalizedGroupsResult {

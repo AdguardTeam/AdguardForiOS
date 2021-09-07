@@ -32,6 +32,7 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
         let item = context.inputItems[0] as! NSExtensionItem
         
         let messageDict = item.userInfo?[SFExtensionMessageKey] as! [String: Any]
+
         guard let message = Message(message: messageDict) else {
             DDLogInfo("Received unknown message: \(messageDict)")
             context.completeRequest(returningItems: nil, completionHandler: nil)

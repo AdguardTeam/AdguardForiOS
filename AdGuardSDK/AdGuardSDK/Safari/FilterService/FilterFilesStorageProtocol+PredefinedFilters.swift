@@ -19,7 +19,7 @@
 import Foundation
 import Zip
 
-extension FilterFilesStorageProtocol {
+public extension FilterFilesStorageProtocol {
     /**
      Unzips `filters.zip` archive and saves all filters from it.
      - Throws an error if there are any other files except `filters.zip`
