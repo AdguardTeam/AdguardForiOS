@@ -516,6 +516,23 @@ extension AppDelegate {
         return true
     }
     
+    func presentUserRulesRedirectController() {
+        guard let topVC = Self.topViewController() else {
+            DDLogError("Failed to get top view controller")
+            return
+        }
+        let userFilterStoryboard = UIStoryboard(name: "UserFilter", bundle: nil)
+        guard let userRulesRedirectVC = userFilterStoryboard.instantiateViewController(withIdentifier: "UserRulesRedirectController") as? UserRulesRedirectController else {
+            DDLogError("UserFilter.storyboard doesnt't have UserRulesRedirectController")
+            return
+        }
+        // Check if VC does not present any controller
+        if topVC.presentedViewController == nil {
+            topVC.present(userRulesRedirectVC, animated: true)
+            return
+        }
+    }
+    
     /* Returns top view controller for controller  */
     static func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
         if let navigationController = controller as? UINavigationController {

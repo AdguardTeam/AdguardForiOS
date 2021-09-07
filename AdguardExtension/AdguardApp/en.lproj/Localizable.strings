@@ -847,6 +847,14 @@
 /* (AddRuleController) Error description when adding rule that already exists */
 "user_rule_exists_error" = "You're trying to add the rule, which is already in the list";
 
+// MARK: - Strings for UserRulesRedirectController
+
+/* (UserRulesRedirectController) - Processing state title */
+"user_rules_processing_title" = "Processing...";
+
+/* (UserRulesRedirectController) - Processing state description */
+"user_rules_processing_desct" = "Please, wait a second...";
+
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
 /* (MainTabBarController) Main page tab for VoiceOver*/

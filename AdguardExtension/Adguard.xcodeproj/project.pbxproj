@@ -870,6 +870,8 @@
 		7EC6801F2548440100FEEEE2 /* DnsImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67FC7254843CA00FEEEE2 /* DnsImplementation.swift */; };
 		7EC680312548440100FEEEE2 /* DnsImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67FC7254843CA00FEEEE2 /* DnsImplementation.swift */; };
 		7EC680322548440200FEEEE2 /* DnsImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC67FC7254843CA00FEEEE2 /* DnsImplementation.swift */; };
+		7EC8A37826E658F5005244CF /* UserRulesRedirectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8A37726E658F4005244CF /* UserRulesRedirectController.swift */; };
+		7EC8A37926E658F5005244CF /* UserRulesRedirectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8A37726E658F4005244CF /* UserRulesRedirectController.swift */; };
 		7ECCCC14237194B200FA651F /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC13237194B200FA651F /* ChartView.swift */; };
 		7ECCCC1B2372CA1900FA651F /* ChartDateTypeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC1A2372CA1900FA651F /* ChartDateTypeController.swift */; };
 		7ECCCC1D2372D33500FA651F /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC1C2372D33500FA651F /* ChartViewModel.swift */; };
@@ -2061,7 +2063,6 @@
 		D0B545CB2435D669002F0AEC /* Confirm2FaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0953E7A231FF83900AE80DB /* Confirm2FaController.swift */; };
 		D0B545CC2435D692002F0AEC /* AddRuleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D044AF742183098A00CD9E06 /* AddRuleController.swift */; };
 		D0B545CD2435D692002F0AEC /* ImportRulesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D044AF7621831A8F00CD9E06 /* ImportRulesController.swift */; };
-		D0B545CE2435D692002F0AEC /* RuleAddedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B6B757229E7A5B00D6E84E /* RuleAddedController.swift */; };
 		D0B545CF2435D692002F0AEC /* RuleDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0319F9D21947633002C17D9 /* RuleDetailsController.swift */; };
 		D0B545D02435D692002F0AEC /* RuleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA63982341E8A60040F3A0 /* RuleInfo.swift */; };
 		D0B545D42435D697002F0AEC /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09CB60423ABBA7D008C9FF7 /* OnboardingController.swift */; };
@@ -2097,7 +2098,6 @@
 		D0B545FF2435D6D2002F0AEC /* ConfigurationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03E532C21B6A3B400C62152 /* ConfigurationServiceProtocol.swift */; };
 		D0B546012435D6D2002F0AEC /* DnsLogRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08187C12260ABD600E961B5 /* DnsLogRecord.swift */; };
 		D0B546042435D740002F0AEC /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = D0B546032435D740002F0AEC /* Lottie */; };
-		D0B6B758229E7A5B00D6E84E /* RuleAddedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B6B757229E7A5B00D6E84E /* RuleAddedController.swift */; };
 		D0B8EB912248E5770066C5AC /* ActionExtension.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0B8EB902248E5770066C5AC /* ActionExtension.xcassets */; };
 		D0BA6210224A8547005CF278 /* GetProTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BA620F224A8547005CF278 /* GetProTableController.swift */; };
 		D0BDDD27215AAF43000C85F1 /* AddCustomFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BDDD26215AAF43000C85F1 /* AddCustomFilterController.swift */; };
@@ -3659,6 +3659,7 @@
 		7EC67F6B2548301000FEEEE2 /* ChooseDnsImplementationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseDnsImplementationController.swift; sourceTree = "<group>"; };
 		7EC67F90254842B800FEEEE2 /* NativeProvidersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeProvidersService.swift; sourceTree = "<group>"; };
 		7EC67FC7254843CA00FEEEE2 /* DnsImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsImplementation.swift; sourceTree = "<group>"; };
+		7EC8A37726E658F4005244CF /* UserRulesRedirectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRulesRedirectController.swift; sourceTree = "<group>"; };
 		7ECCCC13237194B200FA651F /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		7ECCCC1A2372CA1900FA651F /* ChartDateTypeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDateTypeController.swift; sourceTree = "<group>"; };
 		7ECCCC1C2372D33500FA651F /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
@@ -3938,7 +3939,6 @@
 		D0B5442D2435C6B8002F0AEC /* AdGuardProTodayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdGuardProTodayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0B544BC2435C6BC002F0AEC /* ProActionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ProActionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0B545262435C6BF002F0AEC /* ProTunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ProTunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0B6B757229E7A5B00D6E84E /* RuleAddedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleAddedController.swift; sourceTree = "<group>"; };
 		D0B7F2591F1CE76000D545CD /* fa */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		D0B7F25C1F1CE76000D545CD /* fa */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0B8EB8E2248E54A0066C5AC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -6038,6 +6038,7 @@
 				7E70265F26DD28C600F8FC25 /* SafariUserRulesTableModel.swift */,
 				7E70266826DE462D00F8FC25 /* UserRuleTableViewCell.swift */,
 				7E4EFB0C26DFE6DD00116762 /* UserRulesModelsProvider.swift */,
+				7EC8A37726E658F4005244CF /* UserRulesRedirectController.swift */,
 			);
 			path = UserRules;
 			sourceTree = "<group>";
@@ -6606,7 +6607,6 @@
 				D0D6BA0D21A6AF6C007360BC /* UserFilter.storyboard */,
 				D044AF742183098A00CD9E06 /* AddRuleController.swift */,
 				D044AF7621831A8F00CD9E06 /* ImportRulesController.swift */,
-				D0B6B757229E7A5B00D6E84E /* RuleAddedController.swift */,
 				D0319F9D21947633002C17D9 /* RuleDetailsController.swift */,
 				7EAA63982341E8A60040F3A0 /* RuleInfo.swift */,
 			);
@@ -8485,6 +8485,7 @@
 				7E11568C26D38723000ADC3B /* AddTableViewCell.swift in Sources */,
 				7E86A9BB26CBB84E000B395F /* SafariTagButton.swift in Sources */,
 				D0B545CB2435D669002F0AEC /* Confirm2FaController.swift in Sources */,
+				7EC8A37926E658F5005244CF /* UserRulesRedirectController.swift in Sources */,
 				7EAD353C26C2D5E4001AFB3A /* DnsProviders.swift in Sources */,
 				7EF5C56926C26BD0001851D6 /* Constants.swift in Sources */,
 				7E21CBA925F918FA00A5A735 /* NetworkManager.swift in Sources */,
@@ -8504,7 +8505,6 @@
 				D0B545DB2435D69B002F0AEC /* RoundRectButton.swift in Sources */,
 				244339722580D8AB00AB4F26 /* BlockingModeController.swift in Sources */,
 				7E70266126DD28C600F8FC25 /* SafariUserRulesTableModel.swift in Sources */,
-				D0B545CE2435D692002F0AEC /* RuleAddedController.swift in Sources */,
 				247CB5062600A3220047974C /* URLSchemeParser.swift in Sources */,
 				D0B545FE2435D6D2002F0AEC /* UIApplication+OpenAdguardUrl.swift in Sources */,
 				240F1E5F2595D03000580102 /* RateAppProblemController.swift in Sources */,
@@ -8713,7 +8713,6 @@
 				242B9145258A0D3E00A39E19 /* SignInController.swift in Sources */,
 				D0227DD4244D4A08009B7579 /* SupportService.swift in Sources */,
 				24F66A8526033C9D0097B426 /* OpenDnsSettingsControllerWithLaunchScreenParser.swift in Sources */,
-				D0B6B758229E7A5B00D6E84E /* RuleAddedController.swift in Sources */,
 				D07AA06D220833A10065779F /* ACDnsUtils.m in Sources */,
 				655A02791C6B7686000F00D7 /* NSException+Utils.m in Sources */,
 				7EF9189222F05F8A00427A61 /* FilterTagsView.swift in Sources */,
@@ -8770,6 +8769,7 @@
 				249606E2258B832100C747BA /* SocialSignInButton.swift in Sources */,
 				7EAA0D7A26CA8785007208E5 /* SafariFilterCell.swift in Sources */,
 				D044AF7721831A8F00CD9E06 /* ImportRulesController.swift in Sources */,
+				7EC8A37826E658F5005244CF /* UserRulesRedirectController.swift in Sources */,
 				7EC67FC8254843CA00FEEEE2 /* DnsImplementation.swift in Sources */,
 				D077D5F1213974FC00D3D5B3 /* GetProController.swift in Sources */,
 				D00509692201D730006BC10C /* DnsProvidersService.swift in Sources */,
