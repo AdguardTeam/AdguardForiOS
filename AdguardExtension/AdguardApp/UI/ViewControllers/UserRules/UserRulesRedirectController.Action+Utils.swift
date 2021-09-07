@@ -26,10 +26,10 @@ enum UserRulesRedirectAction {
     
     var scheme: String {
         switch self {
-        case .removeFromAllowlist(let domain): return "\(Bundle.main.appScheme)://safariWebExtension?action=removeFromAllowlist&domain=\(domain)"
-        case .addToAllowlist(let domain): return "\(Bundle.main.appScheme)://safariWebExtension?action=addToAllowlist&domain=\(domain)"
-        case .addToBlocklist(let domain): return "\(Bundle.main.appScheme)://safariWebExtension?action=addToBlocklist&domain=\(domain)"
-        case .removeAllBlocklistRules(let domain): return "\(Bundle.main.appScheme)://safariWebExtension?action=removeAllBlocklistRules&domain=\(domain)"
+        case .removeFromAllowlist(_): return "\(Bundle.main.appScheme)://safariWebExtension?action=removeFromAllowlist&domain="
+        case .addToAllowlist(_): return "\(Bundle.main.appScheme)://safariWebExtension?action=addToAllowlist&domain="
+        case .addToBlocklist(_): return "\(Bundle.main.appScheme)://safariWebExtension?action=addToBlocklist&domain="
+        case .removeAllBlocklistRules(_): return "\(Bundle.main.appScheme)://safariWebExtension?action=removeAllBlocklistRules&domain="
         }
     }
     

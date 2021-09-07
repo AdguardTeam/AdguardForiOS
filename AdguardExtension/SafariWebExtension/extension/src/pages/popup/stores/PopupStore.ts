@@ -157,7 +157,8 @@ class PopupStore {
         const prevState = this.protectionEnabled;
         this.protectionEnabled = !this.protectionEnabled;
         try {
-            await messenger.setProtectionStatus(this.protectionEnabled);
+            // @ts-ignore
+            await messenger.setProtectionStatus(this.protectionEnabled, this.currentSiteUrl);
         } catch (e) {
             runInAction(() => {
                 this.protectionEnabled = prevState;

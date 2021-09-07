@@ -3,6 +3,7 @@ import { browser } from 'webextension-polyfill-ts';
 
 import { MessagesToNativeApp } from '../../common/constants';
 import { nativeHostMock } from './nativeHostMock';
+import { getDomain } from '../../common/utils/url';
 
 interface NativeHostMessage {
     type: MessagesToNativeApp,
@@ -12,6 +13,8 @@ interface NativeHostMessage {
 export class NativeHost {
     APP_ID = 'application_id';
 
+    links = {};
+
     private async sendNativeMessage(type: MessagesToNativeApp, data?: unknown) {
         const message: NativeHostMessage = { type };
         if (data) {
@@ -19,6 +22,11 @@ export class NativeHost {
         }
 
         return browser.runtime.sendNativeMessage(this.APP_ID, message);
+    }
+
+    // @ts-ignore
+    setLinks(links) {
+        this.links = links;
     }
 
     addToUserRules(ruleText: string) {
@@ -32,18 +40,29 @@ export class NativeHost {
         return this.sendNativeMessage(MessagesToNativeApp.IsProtectionEnabled, { url });
     }
 
-    enableProtection(): Promise<void> {
-        // TODO remove
-        return nativeHostMock.enableProtection();
+    async enableProtection(url: string): Promise<void> {
+        const domain = getDomain(url);
+        // @ts-ignore
+        const linkWithDomain = this.links.removeFromAllowlistLink + domain;
+        console.log(linkWithDomain);
+        await browser.tabs.create({ url: linkWithDomain });
 
-        return this.sendNativeMessage(MessagesToNativeApp.EnableProtection);
+        // // TODO remove
+        // return nativeHostMock.enableProtection();
+        //
+        // return this.sendNativeMessage(MessagesToNativeApp.EnableProtection);
     }
 
-    disableProtection(): Promise<void> {
-        // TODO remove
-        return nativeHostMock.disableProtection();
-
-        return this.sendNativeMessage(MessagesToNativeApp.DisableProtection);
+    async disableProtection(url: string): Promise<void> {
+        const domain = getDomain(url);
+        // @ts-ignore
+        const linkWithDomain = this.links.addToAllowlistLink + domain;
+        console.log(linkWithDomain);
+        await browser.tabs.create({ url: linkWithDomain });
+        // // TODO remove
+        // return nativeHostMock.disableProtection();
+        //
+        // return this.sendNativeMessage(MessagesToNativeApp.DisableProtection);
     }
 
     hasUserRulesBySite(url: string) {
@@ -95,10 +114,61 @@ export class NativeHost {
         return this.sendNativeMessage(MessagesToNativeApp.UpgradeMe);
     }
 
-    getAdvancedRulesText() {
-        // TODO remove
-        return nativeHostMock.getAdvancedRulesText();
+    async getAdvancedRulesText() {
+        let rulesText = '';
 
-        return this.sendNativeMessage(MessagesToNativeApp.GetAdvancedRulesText);
+        // eslint-disable-next-line consistent-return
+        const recursiveCall = async () => {
+            console.log('send GetAdvancedRulesText');
+            const response = await this.sendNativeMessage(MessagesToNativeApp.GetAdvancedRulesText);
+            console.log(response);
+            if (!response) {
+                return;
+            }
+            const { advanced_rules: advancedRules } = response;
+            rulesText += advancedRules;
+            await recursiveCall();
+        };
+
+        const start = Date.now();
+        console.log('started requesting', start);
+        await recursiveCall();
+        console.log('rules text received', Date.now() - start);
+
+        console.log(rulesText);
+
+        return rulesText;
+        // // TODO remove
+        // return nativeHostMock.getAdvancedRulesText();
+        //
+        // return this.sendNativeMessage(MessagesToNativeApp.GetAdvancedRulesText);
+    }
+
+    async getInitData(url: string) {
+        const result = await this.sendNativeMessage(MessagesToNativeApp.GetInitData, url);
+
+        const {
+            add_to_allowlist_link: addToAllowlistLink,
+            add_to_blocklist_link: addToBlocklistLink,
+            appearance_theme: appearanceTheme,
+            content_blockers_enabled: contentBlockersEnabled,
+            has_user_rules: hasUserRules,
+            premium_app: premiumApp,
+            protection_enabled: protectionEnabled,
+            remove_all_blocklist_rules_link: removeAllBlocklistRulesLink,
+            remove_from_allowlist_link: removeFromAllowlistLink,
+        } = result;
+
+        return {
+            addToAllowlistLink,
+            addToBlocklistLink,
+            appearanceTheme,
+            contentBlockersEnabled,
+            hasUserRules,
+            premiumApp,
+            protectionEnabled,
+            removeAllBlocklistRulesLink,
+            removeFromAllowlistLink,
+        };
     }
 }

@@ -19,17 +19,21 @@
 import Foundation
 
 protocol SafariWebExtensionMessageProcessorProtocol {
-    func process(message: Message) -> [String: String]
+    func process(message: Message) -> [String: Any]?
 }
 
 struct SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcessorProtocol {
-    
-    func process(message: Message) -> [String: String]  {
+
+    private let fileReader: ChunkFileReader
+
+    init(advancedRulesFileUrl: URL) {
+        self.fileReader = ChunkFileReader(fileUrl: advancedRulesFileUrl)!
+    }
+
+    func process(message: Message) -> [String: Any]?  {
         switch message.type {
-        case .getJsonRules: return getJsonRules()
-        case .getBlockingData: return getBlockingData()
-        case .writeToLog: return writeToLog(message.data)
-        case .addToUserRules: return addToUserRules(message.data)
+        case .getInitData: return getInitData(message.data)
+        case .getAdvancedRules: return getAdvancedRules()
         default:
             DDLogError("Received bad case")
             return [Message.messageTypeKey: MessageType.error.rawValue]
@@ -37,21 +41,27 @@ struct SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcessorPro
     }
     
     // MARK: - Private methods
-    
-    private func getJsonRules() -> [String: String] {
-        return [Message.messageTypeKey: MessageType.success.rawValue]
+
+    private func getInitData(_ url: String?) -> [String: Any] {
+        return [
+            Message.appearanceTheme: "dark",
+            Message.contentBlockersEnabled: true,
+            Message.hasUserRules: false,
+            Message.premiumApp: true,
+            Message.protectionEnabled: true,
+
+            Message.removeFromAllowlistLink: UserRulesRedirectAction.removeFromAllowlist(domain: "").scheme,
+            Message.addToAllowlistLink: UserRulesRedirectAction.addToAllowlist(domain: "").scheme,
+            Message.addToBlocklistLink: UserRulesRedirectAction.addToBlocklist(domain: "").scheme,
+            Message.removeAllBlocklistRulesLink: UserRulesRedirectAction.removeAllBlocklistRules(domain: "").scheme
+        ]
     }
-    
-    private func getBlockingData() -> [String: String] {
-        return [Message.messageTypeKey: MessageType.success.rawValue]
-    }
-    
-    private func writeToLog(_ message: String) -> [String: String] {
-        DDLogInfo(message)
-        return [Message.messageTypeKey: MessageType.success.rawValue]
-    }
-    
-    private func addToUserRules(_ rule: String) -> [String: String] {
-        return [Message.messageTypeKey: MessageType.success.rawValue]
+
+    private func getAdvancedRules() -> [String: Any]? {
+        if let chunk = fileReader.nextChunk() {
+            return [Message.advancedRulesKey: chunk]
+        } else {
+            return nil
+        }
     }
 }

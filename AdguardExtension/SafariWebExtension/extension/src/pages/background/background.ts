@@ -4,7 +4,6 @@ import { browser } from 'webextension-polyfill-ts';
 import {
     MessagesToBackgroundPage,
     MessagesToContentScript,
-    MessagesToNativeApp,
 } from '../common/constants';
 import { permissions } from './permissions';
 import { log } from '../common/log';
@@ -31,14 +30,16 @@ const getEngine = (() => {
     };
 
     return () => {
-        if (!startPromise) {
-            startPromise = start();
-        }
+        // if (!startPromise) {
+        //     startPromise = start();
+        // }
+        startPromise = start();
         return startPromise;
     };
 })();
 
 const getScriptsAndSelectors = async (url: string): Promise<SelectorsAndScripts> => {
+    console.log('getScriptsAndSelectors', url);
     const engine = await getEngine();
 
     const hostname = getDomain(url);
@@ -127,12 +128,25 @@ const handleMessages = () => {
 
                 const allSitesAllowed = await permissions.areAllSitesAllowed();
                 const permissionsModalViewed = await app.isPermissionsModalViewed();
-                // TODO consider possibility to join native host calls
-                const protectionEnabled = await nativeHost.isProtectionEnabled(url);
-                const hasUserRules = await nativeHost.hasUserRulesBySite(url);
-                const premiumApp = await nativeHost.isPremiumApp();
-                const appearanceTheme = await nativeHost.getAppearanceTheme();
-                const contentBlockersEnabled = await nativeHost.areContentBlockersEnabled();
+
+                const {
+                    protectionEnabled,
+                    hasUserRules,
+                    premiumApp,
+                    appearanceTheme,
+                    contentBlockersEnabled,
+                    removeFromAllowlistLink,
+                    addToAllowlistLink,
+                    addToBlocklistLink,
+                    removeAllBlocklistRulesLink,
+                } = await nativeHost.getInitData(url);
+
+                nativeHost.setLinks({
+                    removeFromAllowlistLink,
+                    addToAllowlistLink,
+                    addToBlocklistLink,
+                    removeAllBlocklistRulesLink,
+                });
 
                 return {
                     allSitesAllowed,
@@ -145,11 +159,11 @@ const handleMessages = () => {
                 };
             }
             case MessagesToBackgroundPage.SetProtectionStatus: {
-                const { enabled } = data;
+                const { enabled, url } = data;
                 if (enabled) {
-                    return nativeHost.enableProtection();
+                    return nativeHost.enableProtection(url);
                 }
-                return nativeHost.disableProtection();
+                return nativeHost.disableProtection(url);
             }
             case MessagesToBackgroundPage.ReportProblem: {
                 const { url } = data;

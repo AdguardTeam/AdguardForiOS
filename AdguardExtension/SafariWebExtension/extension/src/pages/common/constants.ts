@@ -12,7 +12,8 @@ export enum MessagesToNativeApp {
     GetAppearanceTheme = 'getAppearanceTheme',
     AreContentBlockersEnabled = 'areContentBlockersEnabled',
     UpgradeMe = 'upgradeMe',
-    GetAdvancedRulesText = 'getAdvancedRulesText',
+    GetAdvancedRulesText = 'get_advanced_rules_text',
+    GetInitData = 'get_init_data',
 }
 
 export enum MessagesToBackgroundPage {

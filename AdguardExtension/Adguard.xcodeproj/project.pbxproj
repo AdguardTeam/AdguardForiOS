@@ -172,6 +172,8 @@
 		24F67F5926E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F67F5726E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift */; };
 		24F67F5A26E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F67F5726E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift */; };
 		4020A90122C3C864009C188F /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4020A90022C3C863009C188F /* MainNavigationController.swift */; };
+		494E0BBA26E7AF49005C21C4 /* SharedStorageUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B1A126C4334D00B0CE7B /* SharedStorageUrls.swift */; };
+		494E0BBB26E7AF4A005C21C4 /* SharedStorageUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B1A126C4334D00B0CE7B /* SharedStorageUrls.swift */; };
 		4982C2E626D7973700CACBBE /* images in Resources */ = {isa = PBXBuildFile; fileRef = 7EBDD9D526D6A809009531FA /* images */; };
 		4982C2E726D7973700CACBBE /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = 7EBDD9D226D6A7FF009531FA /* _locales */; };
 		4982C2E826D7973700CACBBE /* assistant.js in Resources */ = {isa = PBXBuildFile; fileRef = 7EBDD9A526D6A779009531FA /* assistant.js */; };
@@ -9334,6 +9336,7 @@
 				7EBDD98226D6A1F2009531FA /* Message.swift in Sources */,
 				7EBDD98E26D6A318009531FA /* ACLFileLocker.m in Sources */,
 				7EBDD99326D6A351009531FA /* ACLFileLogger.m in Sources */,
+				494E0BBB26E7AF4A005C21C4 /* SharedStorageUrls.swift in Sources */,
 				7E497E1A26E202E90072BDE1 /* ChunkFileReader.swift in Sources */,
 				7EBDD98C26D6A2FA009531FA /* ACLLogger.m in Sources */,
 				7EC8A41026E7998F005244CF /* Services.swift in Sources */,
@@ -9359,6 +9362,7 @@
 				7EBDD98326D6A1F2009531FA /* Message.swift in Sources */,
 				7EBDD98D26D6A318009531FA /* ACLFileLocker.m in Sources */,
 				7EBDD99426D6A352009531FA /* ACLFileLogger.m in Sources */,
+				494E0BBA26E7AF49005C21C4 /* SharedStorageUrls.swift in Sources */,
 				7E497E1B26E202E90072BDE1 /* ChunkFileReader.swift in Sources */,
 				7EBDD98B26D6A2FA009531FA /* ACLLogger.m in Sources */,
 				7EC8A41126E7998F005244CF /* Services.swift in Sources */,

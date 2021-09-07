@@ -37,10 +37,10 @@ export class Messenger {
         return this.sendMessage(MessagesToBackgroundPage.SetPermissionsModalViewed);
     };
 
-    setProtectionStatus = (protectionStatus: boolean) => {
+    setProtectionStatus = (protectionStatus: boolean, url: string) => {
         return this.sendMessage(
             MessagesToBackgroundPage.SetProtectionStatus,
-            { enabled: protectionStatus },
+            { enabled: protectionStatus, url },
         );
     };
 

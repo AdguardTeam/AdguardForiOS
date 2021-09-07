@@ -21,6 +21,13 @@ import Foundation
 final class Services {
     static let shared = Services()
     
-    let resources: AESharedResourcesProtocol = AESharedResources()
-    let processor: SafariWebExtensionMessageProcessorProtocol = SafariWebExtensionMessageProcessor()
+    let resources: AESharedResourcesProtocol
+    let urlsStorage: SharedStorageUrlsProtocol
+    let processor: SafariWebExtensionMessageProcessorProtocol
+
+    init() {
+        self.resources = AESharedResources()
+        self.urlsStorage = SharedStorageUrls()
+        self.processor = SafariWebExtensionMessageProcessor(advancedRulesFileUrl: urlsStorage.filtersFolderUrl.appendingPathComponent("1.txt"))
+    }
 }
