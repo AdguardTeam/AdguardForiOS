@@ -168,6 +168,9 @@
 		24F66A9A26033DA00097B426 /* OpenMainPageControllerControllerWithLaunchScreenParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F66A9926033DA00097B426 /* OpenMainPageControllerControllerWithLaunchScreenParser.swift */; };
 		24F66A9B26033DA00097B426 /* OpenMainPageControllerControllerWithLaunchScreenParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F66A9926033DA00097B426 /* OpenMainPageControllerControllerWithLaunchScreenParser.swift */; };
 		24F66A9C26033DA00097B426 /* OpenMainPageControllerControllerWithLaunchScreenParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F66A9926033DA00097B426 /* OpenMainPageControllerControllerWithLaunchScreenParser.swift */; };
+		24F67F5826E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F67F5726E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift */; };
+		24F67F5926E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F67F5726E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift */; };
+		24F67F5A26E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F67F5726E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift */; };
 		4020A90122C3C864009C188F /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4020A90022C3C863009C188F /* MainNavigationController.swift */; };
 		4982C2E626D7973700CACBBE /* images in Resources */ = {isa = PBXBuildFile; fileRef = 7EBDD9D526D6A809009531FA /* images */; };
 		4982C2E726D7973700CACBBE /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = 7EBDD9D226D6A7FF009531FA /* _locales */; };
@@ -2861,6 +2864,7 @@
 		24ED98C5259B78DF00A73B17 /* Array+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Utils.swift"; sourceTree = "<group>"; };
 		24F66A8426033C9D0097B426 /* OpenDnsSettingsControllerWithLaunchScreenParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDnsSettingsControllerWithLaunchScreenParser.swift; sourceTree = "<group>"; };
 		24F66A9926033DA00097B426 /* OpenMainPageControllerControllerWithLaunchScreenParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenMainPageControllerControllerWithLaunchScreenParser.swift; sourceTree = "<group>"; };
+		24F67F5726E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionParametersParser.swift; sourceTree = "<group>"; };
 		4020A90022C3C863009C188F /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		4982C0BF26D78F2900CACBBE /* unused.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = unused.ts; sourceTree = "<group>"; };
 		4982C0C026D78F2900CACBBE /* helpers.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = helpers.ts; sourceTree = "<group>"; };
@@ -4446,6 +4450,7 @@
 				247CB6252600CA5B0047974C /* OpenFiltersMasterControllerParser.swift */,
 				247CB6392600CBE40047974C /* OpenTunnelModeControllerParser.swift */,
 				247CB64D2600CD480047974C /* SocialNetworkAuthParametersParser.swift */,
+				24F67F5726E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift */,
 			);
 			path = Parsers;
 			sourceTree = "<group>";
@@ -8302,6 +8307,7 @@
 				7E3FEFC126CEBAE80080EC03 /* ExtendedTitleTableHeaderView.swift in Sources */,
 				24F66A9B26033DA00097B426 /* OpenMainPageControllerControllerWithLaunchScreenParser.swift in Sources */,
 				7E9C0BBA25627B5500F1999D /* RateAppController.swift in Sources */,
+				24F67F5926E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift in Sources */,
 				D0B545F82435D6CB002F0AEC /* Date+Utils.swift in Sources */,
 				659886551CF74DE9003ECD1C /* ACNHttpUtils.m in Sources */,
 				D0B545962435D630002F0AEC /* ThemeService.swift in Sources */,
@@ -8765,6 +8771,7 @@
 				24D6A9E125FB698A00674D11 /* StatusBarWindow.swift in Sources */,
 				65EC9CA81BB9824C00F53F3B /* FMStatementKeywordRecogniser.m in Sources */,
 				65EC9C901BB9824C00F53F3B /* FMDatabase.m in Sources */,
+				24F67F5826E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift in Sources */,
 				655A02251C6B7686000F00D7 /* ACIOStream.m in Sources */,
 				249606E2258B832100C747BA /* SocialSignInButton.swift in Sources */,
 				7EAA0D7A26CA8785007208E5 /* SafariFilterCell.swift in Sources */,
@@ -9077,6 +9084,7 @@
 				D0EFBF5E22BB6BAC00D2D391 /* LoginResponseParser.swift in Sources */,
 				7E8D423E258CC52100B6300E /* DnsProviders+Migrations.swift in Sources */,
 				7E8576632435F1F70055F63D /* RuleLabel.swift in Sources */,
+				24F67F5A26E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift in Sources */,
 				D081FC16241250D9000A10DA /* ComplexProtectionServiceTest.swift in Sources */,
 				241819FD2594D76900380A8A /* QueryParametersFromURLStringTest.swift in Sources */,
 				D0288F31230697C800A4EBEF /* ACLFileLocker.m in Sources */,

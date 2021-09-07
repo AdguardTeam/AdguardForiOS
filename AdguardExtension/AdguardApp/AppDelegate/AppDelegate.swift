@@ -231,7 +231,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
-            self?.presentUserRulesRedirectController()
+//            self?.presentUserRulesRedirectController(for: .addToBlocklist(domain: "some.com"))
         }
         
         guard let dnsLogContainerVC = getDnsLogContainerController() else {

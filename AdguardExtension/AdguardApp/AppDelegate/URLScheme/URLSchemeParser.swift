@@ -29,7 +29,8 @@
  7. abp://subscribe?location=<LOCATION URL>&title=<TITLE>           <--- Subscribe to custom safari filter
  8. <adguardScheme>://openTunnelModeSettings                        <--- Open Tunnel Mode settings
  9. adguard://auth#access_token=<TOKEN>&token_type=<TOKEN TYPE>&state=<STATE>&expires_in=<EXPIRES IN>   <--- Log in by social networks
- 
+ 10. <adguardScheme>://safariWebExtension?action=<ACTION>&domain=<DOMAIN> <--- Open with safari web extension action
+    <ACTION> = removeFromAllowlist or addToAllowlist or addToBlocklist or removeAllBlocklistRules
  */
 
 protocol IURLSchemeParser {
@@ -47,7 +48,8 @@ fileprivate enum StringConstants: String {
     case sdnsScheme = "sdns"
     case urlScheme = "adguardScheme"
     case urlSchemeCommandAdd = "add"
-    
+    case urlSchemeSafariWebExtension = "safariWebExtension"
+
     static func getStringConstant(string: String?) -> StringConstants? {
         guard let string = string else { return nil }
         
@@ -151,6 +153,11 @@ struct URLSchemeParser: IURLSchemeParser {
             let processor = SocialNetworkAuthParametersParser(executor: executor)
             return processor.parse(url)
             
+        // Open with safari web extension action
+        case (.urlScheme, .urlSchemeSafariWebExtension):
+            DDLogInfo("(URLSchemeParser) openurl - open with safari web extension action")
+            let processor = SafariWebExtensionParametersParser(executor: executor)
+            return processor.parse(url)
         default: return false
         }
     }

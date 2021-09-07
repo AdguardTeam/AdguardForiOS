@@ -66,4 +66,9 @@ extension AppDelegate: IURLSchemeExecutor {
         purchaseService.login(withAccessToken: withAccessToken, state: state)
         return true
     }
+    
+    func openUserRulesRedirectController(for action: UserRulesRedirectController.Action) -> Bool {
+        DDLogInfo("(AppDelegate) - open UserRulesRedirectController with action = \(action)")
+        return self.presentUserRulesRedirectController(for: action)
+    }
 }
