@@ -44,9 +44,9 @@ struct SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcessorPro
 
     private func getInitData(_ url: String?) -> [String: Any] {
         return [
-            Message.appearanceTheme: "dark",
+            Message.appearanceTheme: "system",
             Message.contentBlockersEnabled: true,
-            Message.hasUserRules: false,
+            Message.hasUserRules: true,
             Message.premiumApp: true,
             Message.protectionEnabled: true,
 

@@ -1,9 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 export const useFullscreen = (cb: (state: boolean) => void) => {
+    const requestRef = useRef<number>();
+
     useEffect(() => {
         let min = 0;
         let max = 0;
+
         const resizeHandler = () => {
             const FULLSCREEN_RATIO = 1.6;
 
@@ -22,12 +25,18 @@ export const useFullscreen = (cb: (state: boolean) => void) => {
             } else {
                 cb(false);
             }
+            requestRef.current = requestAnimationFrame(resizeHandler);
         };
 
-        window.addEventListener('resize', resizeHandler);
-
+        /**
+         * window.onresize event doesn't fire reliable on real device
+         * that is why we use here requestAnimationFrame
+         */
+        requestRef.current = requestAnimationFrame(resizeHandler);
         return () => {
-            window.removeEventListener('resize', resizeHandler);
+            if (requestRef.current !== undefined) {
+                cancelAnimationFrame(requestRef.current);
+            }
         };
     }, []);
 };
