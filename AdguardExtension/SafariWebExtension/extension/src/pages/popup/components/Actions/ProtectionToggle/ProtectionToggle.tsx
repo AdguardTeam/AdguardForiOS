@@ -16,18 +16,20 @@ export const ProtectionToggle = observer(() => {
     };
 
     return (
-        <Action
-            iconId="compass"
-            iconColor="green"
-            title={translator.getMessage('popup_action_safari_protection_title')}
-            titleMod="light"
-            description={translator.getMessage('popup_action_safari_protection_description')}
-            // TODO yellow if all blockers are disabled
-            descriptionMod="gray"
-        >
-            <div className="actions__control">
-                <Switcher onChange={toggleProtection} enabled={protectionEnabled} />
-            </div>
-        </Action>
+        <label className="action-label">
+            <Action
+                iconId="compass"
+                iconColor="green"
+                title={translator.getMessage('popup_action_safari_protection_title')}
+                titleMod="light"
+                description={translator.getMessage('popup_action_safari_protection_description')}
+                // TODO yellow if all blockers are disabled
+                descriptionMod="gray"
+            >
+                <div className="actions__control">
+                    <Switcher onChange={toggleProtection} enabled={protectionEnabled} />
+                </div>
+            </Action>
+        </label>
     );
 });
