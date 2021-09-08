@@ -76,7 +76,7 @@ class ActionViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         // TODO
-        let sdkConfiguration = SafariConfiguration(iosVersion: UIDevice.current.iosVersion, currentLanguage: "", proStatus: true, safariProtectionEnabled: true, advancedBlockingIsEnabled: true, blocklistIsEnabled: true, allowlistIsEnbaled: true, allowlistIsInverted: true, appBundleId: "", appProductVersion: "", appId: "", cid: "")
+        let sdkConfiguration = SafariConfiguration(iosVersion: UIDevice.current.iosVersion, currentLanguage: "", proStatus: true, safariProtectionEnabled: true, advancedBlockingIsEnabled: true, blocklistIsEnabled: true, allowlistIsEnabled: true, allowlistIsInverted: true, appBundleId: "", appProductVersion: "", appId: "", cid: "")
         safariProtection = try! SafariProtection(configuration: sdkConfiguration, defaultConfiguration: sdkConfiguration, filterFilesDirectoryUrl: URL(string: "")!, dbContainerUrl: URL(string: "")!, jsonStorageUrl: URL(string: "")!, userDefaults: UserDefaults(suiteName: "")!)
         
         configuration = SimpleConfigurationSwift(withResources: sharedResources, systemAppearenceIsDark: true)

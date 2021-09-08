@@ -44,7 +44,8 @@ struct PredefinedDnsProvidersDecoder: PredefinedDnsProvidersDecoderProtocol {
                                "zh-Hans": "zh-CN",
                                "zh-Hant": "zh-TW"]
     
-    init(currentLanguage: String, bundle: Bundle = .main) throws {
+    //Init bundle with DnsProtection class type as default value
+    init(currentLanguage: String, bundle: Bundle = .init(for: DnsProtection.self) ) throws {
         self.currentLanguage = currentLanguage
         self.bundle = bundle
         try initializeDnsProviders()

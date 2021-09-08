@@ -146,7 +146,7 @@ public final class SafariProtection: SafariProtectionProtocol {
                 return
             }
             
-            self.configuration = self.defaultConfiguration.copy
+            self.configuration.updateConfig(with: self.defaultConfiguration.copy)
             
             self.reloadContentBlockers { error in
                 if let error = error {

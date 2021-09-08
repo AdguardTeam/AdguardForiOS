@@ -25,35 +25,37 @@ public protocol SafariConfigurationProtocol: ConfigurationProtocol {
     var safariProtectionEnabled: Bool { get set }
     var advancedBlockingIsEnabled: Bool { get set } // Feature is available since iOS 15
     var blocklistIsEnabled: Bool { get set }
-    var allowlistIsEnbaled: Bool { get set }
+    var allowlistIsEnabled: Bool { get set }
     var allowlistIsInverted: Bool { get set }
     
     // Application information
-    var appBundleId: String { get } // Application bundle identifier
-    var appProductVersion: String { get } // Application product version for example 4.1.1 for AdGuard
-    var appId: String { get } // Application id for example "ios_pro" or "ios"
-    var cid: String { get } // UIDevice.current.identifierForVendor?.uuidString should be passed
+    var appBundleId: String { get set } // Application bundle identifier
+    var appProductVersion: String { get set } // Application product version for example 4.1.1 for AdGuard
+    var appId: String { get set } // Application id for example "ios_pro" or "ios"
+    var cid: String { get set } // UIDevice.current.identifierForVendor?.uuidString should be passed
     
     // New object created from self
     var copy: Self { get }
+    
+    func updateConfig(with newConfig: SafariConfigurationProtocol)
 }
 
 // MARK: - Configuration
 
 public final class SafariConfiguration: SafariConfigurationProtocol {
     public var iosVersion: Int
-    public let currentLanguage: String
+    public var currentLanguage: String
     public var proStatus: Bool
     public var safariProtectionEnabled: Bool
     public var advancedBlockingIsEnabled: Bool
     public var blocklistIsEnabled: Bool
-    public var allowlistIsEnbaled: Bool
+    public var allowlistIsEnabled: Bool
     public var allowlistIsInverted: Bool
     
-    public let appBundleId: String
-    public let appProductVersion: String
-    public let appId: String
-    public let cid: String
+    public var appBundleId: String
+    public var appProductVersion: String
+    public var appId: String
+    public var cid: String
     
     public var copy: SafariConfiguration {
         return SafariConfiguration(
@@ -63,7 +65,7 @@ public final class SafariConfiguration: SafariConfigurationProtocol {
             safariProtectionEnabled: safariProtectionEnabled,
             advancedBlockingIsEnabled: advancedBlockingIsEnabled,
             blocklistIsEnabled: blocklistIsEnabled,
-            allowlistIsEnbaled: allowlistIsEnbaled,
+            allowlistIsEnabled: allowlistIsEnabled,
             allowlistIsInverted: allowlistIsInverted,
             appBundleId: appBundleId,
             appProductVersion: appProductVersion,
@@ -79,7 +81,7 @@ public final class SafariConfiguration: SafariConfigurationProtocol {
         safariProtectionEnabled: Bool,
         advancedBlockingIsEnabled: Bool,
         blocklistIsEnabled: Bool,
-        allowlistIsEnbaled: Bool,
+        allowlistIsEnabled: Bool,
         allowlistIsInverted: Bool,
         appBundleId: String,
         appProductVersion: String,
@@ -92,11 +94,26 @@ public final class SafariConfiguration: SafariConfigurationProtocol {
         self.safariProtectionEnabled = safariProtectionEnabled
         self.advancedBlockingIsEnabled = advancedBlockingIsEnabled
         self.blocklistIsEnabled = blocklistIsEnabled
-        self.allowlistIsEnbaled = allowlistIsEnbaled
+        self.allowlistIsEnabled = allowlistIsEnabled
         self.allowlistIsInverted = allowlistIsInverted
         self.appBundleId = appBundleId
         self.appProductVersion = appProductVersion
         self.appId = appId
         self.cid = cid
+    }
+    
+    public func updateConfig(with newConfig: SafariConfigurationProtocol) {
+        self.currentLanguage = newConfig.currentLanguage
+        self.proStatus = newConfig.proStatus
+        self.iosVersion = newConfig.iosVersion
+        self.safariProtectionEnabled = newConfig.safariProtectionEnabled
+        self.advancedBlockingIsEnabled = newConfig.advancedBlockingIsEnabled
+        self.blocklistIsEnabled = newConfig.blocklistIsEnabled
+        self.allowlistIsEnabled = newConfig.allowlistIsEnabled
+        self.allowlistIsInverted = newConfig.allowlistIsInverted
+        self.appBundleId = newConfig.appBundleId
+        self.appProductVersion = newConfig.appProductVersion
+        self.appId = newConfig.appId
+        self.cid = newConfig.cid
     }
 }

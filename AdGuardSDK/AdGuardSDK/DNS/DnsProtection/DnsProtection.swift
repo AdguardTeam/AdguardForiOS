@@ -18,7 +18,8 @@
 
 import Foundation
 
-typealias DnsProtectionProtocol = DnsProtectionConfigurationProtocol
+public typealias DnsProtectionProtocol = DnsProtectionConfigurationProtocol
+                                & DnsProtectionUserRulesManagerProtocol
                                 & ResetableSyncProtocol
 
 public final class DnsProtection: DnsProtectionProtocol {
@@ -32,22 +33,32 @@ public final class DnsProtection: DnsProtectionProtocol {
     var configuration: DnsConfigurationProtocol
     let defaultConfiguration: DnsConfigurationProtocol
     let dnsProvidersManager: DnsProvidersManagerProtocol
+    let dnsUserRulesManagerProvider: DnsUserRulesManagersProviderProtocol
+    let dnsFiltersManager: DnsFiltersManagerProtocol
+    let filterFilesStorage: FilterFilesStorageProtocol
     
     public init(
         configuration: DnsConfigurationProtocol,
         defaultConfiguration: DnsConfigurationProtocol,
-        userDefaults: UserDefaults
-    ) throws {
-        let services = try DnsProtectionServiceStorage(configuration: configuration, userDefaults: userDefaults)
+        userDefaults: UserDefaults,
+        filterFilesDirectoryUrl: URL) throws {
+        let services = try DnsProtectionServiceStorage(configuration: configuration, userDefaults: userDefaults, filterFilesDirectoryUrl: filterFilesDirectoryUrl)
         self.configuration = configuration
         self.defaultConfiguration = defaultConfiguration
+        
         self.dnsProvidersManager = services.dnsProvidersManager
+        self.dnsUserRulesManagerProvider = services.dnsUserRulesManager
+        self.dnsFiltersManager = services.dnsFiltersManager
+        self.filterFilesStorage = services.filterFilesStorage
     }
     
     public func reset() throws {
         try workingQueue.sync {
             try dnsProvidersManager.reset()
-            configuration = defaultConfiguration.copy
+            try dnsUserRulesManagerProvider.reset()
+            try dnsFiltersManager.reset()
+            try filterFilesStorage.reset()
+            configuration.updateConfig(with: defaultConfiguration.copy)
         }
     }
 }

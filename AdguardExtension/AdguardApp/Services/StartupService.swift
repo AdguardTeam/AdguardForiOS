@@ -18,6 +18,7 @@
 
 import Foundation
 import SafariAdGuardSDK
+import DnsAdGuardSDK
 
 /**
  this service initializes all shared services and put them into ServiceLocator
@@ -68,7 +69,7 @@ final class StartupService : NSObject{
             safariProtectionEnabled: sharedResources.safariProtectionEnabled,
             advancedBlockingIsEnabled: true, // TODO: - Don't forget to change
             blocklistIsEnabled: sharedResources.safariUserFilterEnabled,
-            allowlistIsEnbaled: sharedResources.safariWhitelistEnabled,
+            allowlistIsEnabled: sharedResources.safariWhitelistEnabled,
             allowlistIsInverted: sharedResources.invertedWhitelist,
             appBundleId: appBundleId,
             appProductVersion: appProductVersion,
@@ -83,7 +84,7 @@ final class StartupService : NSObject{
             safariProtectionEnabled: true,
             advancedBlockingIsEnabled: true, // TODO: - Don't forget to change
             blocklistIsEnabled: false,
-            allowlistIsEnbaled: false,
+            allowlistIsEnabled: false,
             allowlistIsInverted: false,
             appBundleId: appBundleId,
             appProductVersion: appProductVersion,
@@ -101,7 +102,30 @@ final class StartupService : NSObject{
             userDefaults: sharedResources.sharedDefaults()
         )
         
+        let sdkDnsImplementation: DnsAdGuardSDK.DnsImplementation = sharedResources.dnsImplementation == .adGuard ? .adguard : .native
+        
+        
+        let dnsProtectionConfiguration = DnsConfiguration(currentLanguage: currentLanguage,
+                                                          proStatus: purchaseService.isProPurchased,
+                                                          dnsFilteringIsEnabled: sharedResources.systemProtectionEnabled,
+                                                          dnsImplementation: sdkDnsImplementation,
+                                                          blocklistIsEnabled: sharedResources.systemUserFilterEnabled,
+                                                          allowlistIsEnabled: sharedResources.systemWhitelistEnabled)
+        
+        let defaultDnsProtectionConfiguration = DnsConfiguration(currentLanguage: currentLanguage,
+                                                                 proStatus: false,
+                                                                 dnsFilteringIsEnabled: false,
+                                                                 dnsImplementation: .adguard,
+                                                                 blocklistIsEnabled: false,
+                                                                 allowlistIsEnabled: false)
+        // TODO: - try! is bad
+        let dnsProtection: DnsProtectionProtocol = try! DnsProtection(configuration: dnsProtectionConfiguration,
+                                          defaultConfiguration: defaultDnsProtectionConfiguration,
+                                          userDefaults: sharedResources.sharedDefaults(),
+                                          filterFilesDirectoryUrl: sharedUrls.dnsFiltersFolderUrl)
+        
         locator.addService(service: safariProtection)
+        locator.addService(service: dnsProtection)
         
         /* End of initializing SDK */
         

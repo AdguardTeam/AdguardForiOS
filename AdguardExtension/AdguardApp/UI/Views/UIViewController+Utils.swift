@@ -131,7 +131,7 @@ extension UIViewController {
         view.addGestureRecognizer(tap)
     }
     
-    @objc func dismissKeyboard() {
+    @objc final func dismissKeyboard() {
         view.endEditing(true)
     }
 }

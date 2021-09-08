@@ -18,6 +18,7 @@
 
 import UIKit
 import SafariAdGuardSDK
+import DnsAdGuardSDK
 
 final class UserRulesTableController: UIViewController {
     
@@ -31,12 +32,17 @@ final class UserRulesTableController: UIViewController {
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var stackViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet var searchButton: UIBarButtonItem!
-    @IBOutlet var editButton: UIBarButtonItem!
     @IBOutlet var cancelFromSearchButton: UIBarButtonItem!
     
     // MARK: - Internal properties
     
     var rulesType: UserRuleType = .blocklist
+    
+    //MARK: - Private properties
+    
+    private var editButton: UIBarButtonItem {
+        return generateBarButtonItem()
+    }
     
     // MARK: - Private properties
     
@@ -50,6 +56,7 @@ final class UserRulesTableController: UIViewController {
     private var themeObserver: NotificationToken?
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
+    private let dnsProtection: DnsProtectionProtocol = ServiceLocator.shared.getService()!
     private let sharedResources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let fileShareHelper = FileShareHelper()
     private var model: UserRulesTableModelProtocol!
@@ -58,19 +65,37 @@ final class UserRulesTableController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.rightBarButtonItems = [editButton, searchButton]
         setupTableView()
+        navigationItem.rightBarButtonItems = [editButton, searchButton]
         setupBackButton()
         updateTheme()
         searchHeader.delegate = self
         themeObserver = NotificationCenter.default.observe(name: .themeChanged, object: nil, queue: .main) { [weak self] _ in
             self?.updateTheme()
         }
+        
+        setupToHideKeyboardOnTapOnView(ignoringViews: [])
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.layoutTableHeaderView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let nav = navigationController as? MainNavigationController {
+            nav.currentSwipeRecognizer?.delegate = self
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if let nav = navigationController as? MainNavigationController {
+            nav.currentSwipeRecognizer?.delegate = nil
+        }
     }
     
     // MARK: - Actions
@@ -110,14 +135,6 @@ final class UserRulesTableController: UIViewController {
         goToSearchMode()
     }
     
-    @IBAction func editButtonTapped(_ sender: UIBarButtonItem) {
-        if model.isSearching {
-            select()
-        } else {
-            presentAlert()
-        }
-    }
-    
     @IBAction func cancelFromSearchTapped(_ sender: UIBarButtonItem) {
         goToNormalMode()
     }
@@ -133,9 +150,9 @@ final class UserRulesTableController: UIViewController {
         case .invertedAllowlist:
             model = SafariUserRulesTableModel(type: .invertedAllowlist, safariProtection: safariProtection, resources: sharedResources, fileShareHelper: fileShareHelper)
         case .dnsBlocklist:
-            return
+            model = DnsUserRulesTableModel(type: .blocklist, dnsProtection: dnsProtection, resources: sharedResources, fileShareHelper: fileShareHelper)
         case .dnsAllowlist:
-            return
+            model = DnsUserRulesTableModel(type: .allowlist, dnsProtection: dnsProtection, resources: sharedResources, fileShareHelper: fileShareHelper)
         }
         model.delegate = self
         
@@ -253,7 +270,7 @@ final class UserRulesTableController: UIViewController {
     
     private func goToSearchMode() {
         model.isSearching = true
-        navigationItem.rightBarButtonItems = model.isEditing ? [cancelFromSearchButton] : [cancelFromSearchButton, editButton]
+        navigationItem.rightBarButtonItems = model.isEditing ? [cancelFromSearchButton] : [editButton, cancelFromSearchButton]
         tableView.tableHeaderView = searchHeader
         searchHeader.textField.becomeFirstResponder()
         searchHeader.textField.borderState = .enabled
@@ -299,6 +316,29 @@ final class UserRulesTableController: UIViewController {
             return model.rulesModels[row - 1]
         }
     }
+    
+    @objc
+    private func editButtonTapped(_ sender: UIBarButtonItem) {
+        presentAlert()
+    }
+
+    @objc
+    private func editButtonTappedForSelection(_ sender: UIBarButtonItem) {
+        select()
+    }
+    
+    private func generateBarButtonItem() -> UIBarButtonItem {
+        let image = UIImage(named: "edit")
+        
+        if model.isSearching {
+            return UIBarButtonItem(image: image, style: .done, target: self, action: #selector(editButtonTappedForSelection(_:)))
+        } else if #available(iOS 14.0, *) {
+            let menu = createMenu()
+            return UIBarButtonItem(image: image, menu: menu)
+        } else {
+            return UIBarButtonItem(image: image, style: .done, target: self, action: #selector(editButtonTapped(_:)))
+        }
+    }
 }
 
 // MARK: - UserRulesTableController + UITableViewDatasource
@@ -338,6 +378,11 @@ extension UserRulesTableController: UITableViewDataSource {
             return cell
         }
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        //indexPath.row == 0 - it is "Add new rule cell"
+        return (model.isEditing || model.isSearching) ? true : indexPath.row > 0
+    }
 }
 
 // MARK: - UserRulesTableController + UITableViewDelegate
@@ -374,6 +419,23 @@ extension UserRulesTableController: UITableViewDelegate {
             presentDetailsController(rule: userRule, indexPath: indexPath)
             tableView.deselectRow(at: indexPath, animated: true)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let title = String.localizedString("delete_swipe_action").capitalized
+        let deleteAction = UIContextualAction(style: .destructive, title: title) { [weak self] (_, _, success: (Bool) -> Void) in
+            guard let self = self else { success(false); return }
+            //indexPath.row == 0 - it is "Add new rule cell"
+            let canSwipe = (self.model.isEditing || self.model.isSearching) ? true : indexPath.row > 0
+            guard canSwipe else { success(false); return }
+            let selectedRule = self.model(for: indexPath.row).rule
+            
+            self.model.remove(rules: [selectedRule], for: [indexPath])
+            success(true)
+        }
+        deleteAction.backgroundColor = UIColor.AdGuardColor.red
+        let swipeActionConfig = UISwipeActionsConfiguration(actions: [deleteAction])
+        return swipeActionConfig
     }
 }
 
@@ -446,5 +508,19 @@ fileprivate extension UITableView {
         
         reloadData()
         paths.forEach { selectRow(at: $0, animated: false, scrollPosition: .none) }
+    }
+}
+
+// MARK: - UserRulesTableController + UIGestureRecognizerDelegate
+
+extension UserRulesTableController: UIGestureRecognizerDelegate {
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard let panGesture = gestureRecognizer as? UIPanGestureRecognizer else {
+            return false
+        }
+
+        let translation = panGesture.translation(in: tableView)
+        return translation.x > 0
     }
 }

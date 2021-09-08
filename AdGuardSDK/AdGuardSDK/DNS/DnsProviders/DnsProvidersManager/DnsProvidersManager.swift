@@ -99,10 +99,10 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
     
     public init(
         configuration: DnsConfigurationProtocol,
-        userDefaults: UserDefaults
+        userDefaults: UserDefaultsStorageProtocol
     ) throws {
         self.configuration = configuration
-        self.userDefaults = UserDefaultsStorage(storage: userDefaults)
+        self.userDefaults = userDefaults
         self.customProvidersStorage = CustomDnsProvidersStorage(userDefaults: self.userDefaults)
         let predefinedDnsProviders = try PredefinedDnsProvidersDecoder(currentLanguage: configuration.currentLanguage)
         self.providersVendor = DnsProvidersVendor(predefinedProviders: predefinedDnsProviders, customProvidersStorage: self.customProvidersStorage)

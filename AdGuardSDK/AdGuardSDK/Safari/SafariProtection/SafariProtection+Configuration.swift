@@ -31,7 +31,7 @@ public protocol SafariProtectionConfigurationProtocol {
     var blocklistIsEnabled: Bool { get }
     
     /* State of the list that is responsible for the rules that cancel blocklist rules actions */
-    var allowlistIsEnbaled: Bool { get }
+    var allowlistIsEnabled: Bool { get }
     
     /* Allowlist rules can be inverted. That means that blocklist rules will work on all sites except the sites from the inverted allowlist  */
     var allowlistIsInverted: Bool { get }
@@ -46,7 +46,7 @@ public protocol SafariProtectionConfigurationProtocol {
     func update(blocklistIsEnabled: Bool, onCbReloaded: ((_ error: Error?) -> Void)?)
     
     /* Updates allow list state and reloads content blockers */
-    func update(allowlistIsEnbaled: Bool, onCbReloaded: ((_ error: Error?) -> Void)?)
+    func update(allowlistIsEnabled: Bool, onCbReloaded: ((_ error: Error?) -> Void)?)
     
     /* Updates state of allowlist invertion and reloads content blockers */
     func update(allowlistIsInverted: Bool, onCbReloaded: ((_ error: Error?) -> Void)?)
@@ -66,8 +66,8 @@ extension SafariProtection {
         return workingQueue.sync { return configuration.blocklistIsEnabled }
     }
     
-    public var allowlistIsEnbaled: Bool {
-        return workingQueue.sync { return configuration.allowlistIsEnbaled }
+    public var allowlistIsEnabled: Bool {
+        return workingQueue.sync { return configuration.allowlistIsEnabled }
     }
     
     public var allowlistIsInverted: Bool {
@@ -156,27 +156,27 @@ extension SafariProtection {
         }
     }
     
-    public func update(allowlistIsEnbaled: Bool, onCbReloaded: ((_ error: Error?) -> Void)?) {
+    public func update(allowlistIsEnabled: Bool, onCbReloaded: ((_ error: Error?) -> Void)?) {
         workingQueue.sync {
-            Logger.logInfo("(SafariProtection+Configuration) - updateAllowlistIsEnbaled; Updating allowlist state from=\(self.configuration.allowlistIsEnbaled) to=\(allowlistIsEnbaled)")
+            Logger.logInfo("(SafariProtection+Configuration) - updateAllowlistIsEnabled; Updating allowlist state from=\(self.configuration.allowlistIsEnabled) to=\(allowlistIsEnabled)")
 
             try? executeBlockAndReloadCbs {
-                if configuration.allowlistIsEnbaled != allowlistIsEnbaled {
-                    configuration.allowlistIsEnbaled = allowlistIsEnbaled
+                if configuration.allowlistIsEnabled != allowlistIsEnabled {
+                    configuration.allowlistIsEnabled = allowlistIsEnabled
                 } else {
                     throw CommonError.dataDidNotChange
                 }
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
-                    Logger.logError("(SafariProtection+Configuration) - update.allowlistIsEnbaled.reloadContentBlockers; self is missing!")
+                    Logger.logError("(SafariProtection+Configuration) - update.allowlistIsEnabled.reloadContentBlockers; self is missing!")
                     DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
                     return
                 }
                 
                 if let error = error {
-                    Logger.logError("(SafariProtection+Configuration) - updateAllowlistIsEnbaled; Error reloading CBs when updating allowlist state; Error: \(error)")
+                    Logger.logError("(SafariProtection+Configuration) - updateAllowlistIsEnabled; Error reloading CBs when updating allowlist state; Error: \(error)")
                 } else {
-                    Logger.logInfo("(SafariProtection+Configuration) - updateAllowlistIsEnbaled; Successfully reloaded CBs after updating allowlist state")
+                    Logger.logInfo("(SafariProtection+Configuration) - updateAllowlistIsEnabled; Successfully reloaded CBs after updating allowlist state")
                 }
                 self.completionQueue.async { onCbReloaded?(error) }
             }
@@ -201,9 +201,9 @@ extension SafariProtection {
                 }
                 
                 if let error = error {
-                    Logger.logError("(SafariProtection+Configuration) - updateAllowlistIsEnbaled; Error reloading CBs when updating allowlist invertion; Error: \(error)")
+                    Logger.logError("(SafariProtection+Configuration) - updateAllowlistIsEnabled; Error reloading CBs when updating allowlist invertion; Error: \(error)")
                 } else {
-                    Logger.logInfo("(SafariProtection+Configuration) - updateAllowlistIsEnbaled; Successfully reloaded CBs after updating allowlist invertion")
+                    Logger.logInfo("(SafariProtection+Configuration) - updateAllowlistIsEnabled; Successfully reloaded CBs after updating allowlist invertion")
                 }
                 self.completionQueue.async { onCbReloaded?(error) }
             }

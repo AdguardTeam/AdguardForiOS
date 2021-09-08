@@ -40,15 +40,14 @@ class RequestsBlockingController: UITableViewController {
     // MARK: - View controller life cycle
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destinationVC = segue.destination as? UserRulesTableController else {
+            return
+        }
         
-        let dnsFilterService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
-        
-        
-        // TODO: - Implement later
         if segue.identifier == dnsBlacklistSegue {
-            
+            destinationVC.rulesType = .dnsBlocklist
         } else if segue.identifier == dnsWhitelistSegue {
-            
+            destinationVC.rulesType = .allowlist
         }
     }
     

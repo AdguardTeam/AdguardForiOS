@@ -20,12 +20,14 @@ import Foundation
 
 public protocol DnsConfigurationProtocol: ConfigurationProtocol {
     var blocklistIsEnabled: Bool { get set }
-    var allowlistIsEnbaled: Bool { get set }
+    var allowlistIsEnabled: Bool { get set }
     var dnsFilteringIsEnabled: Bool { get set }
     var dnsImplementation: DnsImplementation { get set }
     
     // New object created from self
     var copy: Self { get }
+    
+    func updateConfig(with newConfig: DnsConfigurationProtocol)
 }
 
 public final class DnsConfiguration: DnsConfigurationProtocol {
@@ -34,7 +36,7 @@ public final class DnsConfiguration: DnsConfigurationProtocol {
     public var dnsFilteringIsEnabled: Bool
     public var dnsImplementation: DnsImplementation
     public var blocklistIsEnabled: Bool
-    public var allowlistIsEnbaled: Bool
+    public var allowlistIsEnabled: Bool
     
     public var copy: DnsConfiguration {
         DnsConfiguration(
@@ -43,16 +45,25 @@ public final class DnsConfiguration: DnsConfigurationProtocol {
             dnsFilteringIsEnabled: dnsFilteringIsEnabled,
             dnsImplementation: dnsImplementation,
             blocklistIsEnabled: blocklistIsEnabled,
-            allowlistIsEnbaled: allowlistIsEnbaled
+            allowlistIsEnabled: allowlistIsEnabled
         )
     }
     
-    public init(currentLanguage: String, proStatus: Bool, dnsFilteringIsEnabled: Bool, dnsImplementation: DnsImplementation, blocklistIsEnabled: Bool, allowlistIsEnbaled: Bool) {
+    public init(currentLanguage: String, proStatus: Bool, dnsFilteringIsEnabled: Bool, dnsImplementation: DnsImplementation, blocklistIsEnabled: Bool, allowlistIsEnabled: Bool) {
         self.currentLanguage = currentLanguage
         self.proStatus = proStatus
         self.dnsFilteringIsEnabled = dnsFilteringIsEnabled
         self.dnsImplementation = dnsImplementation
         self.blocklistIsEnabled = blocklistIsEnabled
-        self.allowlistIsEnbaled = allowlistIsEnbaled
+        self.allowlistIsEnabled = allowlistIsEnabled
+    }
+    
+    public func updateConfig(with newConfig: DnsConfigurationProtocol) {
+        self.currentLanguage = newConfig.currentLanguage
+        self.proStatus = newConfig.proStatus
+        self.dnsFilteringIsEnabled = newConfig.dnsFilteringIsEnabled
+        self.dnsImplementation = newConfig.dnsImplementation
+        self.blocklistIsEnabled = newConfig.blocklistIsEnabled
+        self.allowlistIsEnabled = newConfig.allowlistIsEnabled
     }
 }

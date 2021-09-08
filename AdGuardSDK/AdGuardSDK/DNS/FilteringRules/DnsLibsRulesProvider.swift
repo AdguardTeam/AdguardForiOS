@@ -38,7 +38,7 @@ final class DnsLibsRulesProvider: DnsLibsRulesProviderProtocol {
         }
     }
     var allowlistFilterPath: String? {
-        if configuration.allowlistIsEnbaled {
+        if configuration.allowlistIsEnabled {
             return filterFilesStorage.getUrlForFilter(withId: DnsUserRuleType.allowlist.enabledRulesFilterId).path
         } else {
             return nil
