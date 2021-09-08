@@ -33,17 +33,6 @@ public final class DnsConfiguration: DnsConfigurationProtocol {
     public var blocklistIsEnabled: Bool
     public var allowlistIsEnabled: Bool
     
-    public var copy: DnsConfiguration {
-        DnsConfiguration(
-            currentLanguage: currentLanguage,
-            proStatus: proStatus,
-            dnsFilteringIsEnabled: dnsFilteringIsEnabled,
-            dnsImplementation: dnsImplementation,
-            blocklistIsEnabled: blocklistIsEnabled,
-            allowlistIsEnabled: allowlistIsEnabled
-        )
-    }
-    
     public init(currentLanguage: String, proStatus: Bool, dnsFilteringIsEnabled: Bool, dnsImplementation: DnsImplementation, blocklistIsEnabled: Bool, allowlistIsEnabled: Bool) {
         self.currentLanguage = currentLanguage
         self.proStatus = proStatus
