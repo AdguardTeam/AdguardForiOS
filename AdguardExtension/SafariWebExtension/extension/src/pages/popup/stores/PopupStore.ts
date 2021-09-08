@@ -86,7 +86,7 @@ class PopupStore {
 
         const popupData = await messenger.getPopupData(currentTab.url);
 
-        const currentSiteFaviconDataUrl = await this.getFaviconDataUrl(currentTab.favIconUrl);
+        const currentSiteFaviconDataUrl = await this.getFaviconDataUrl(currentTab.url);
 
         runInAction(() => {
             this.popupDataLoadingState = PopupDataLoadingState.Done;
@@ -109,15 +109,30 @@ class PopupStore {
             return null;
         }
 
+        let domain;
+        try {
+            domain = (new URL(url)).hostname;
+        } catch (e) {
+            return null;
+        }
+
+        if (!domain) {
+            return null;
+        }
+
+        // TODO change to our proxy service when will be ready
+        const duckDuckGoFavIconServiceUrl = 'https://icons.duckduckgo.com/ip3/';
+        const favIconUrl = `${duckDuckGoFavIconServiceUrl}${domain}.ico`;
+
         const TIMEOUT_MS = 500;
         const timeoutPromise = new Promise((resolve) => {
             setTimeout(() => { resolve(null); }, TIMEOUT_MS);
         });
 
         // eslint-disable-next-line @typescript-eslint/no-shadow
-        const toDataUrlPromise = async (url: string): Promise<string | null> => {
+        const toDataUrlPromise = async (favIconUrl: string): Promise<string | null> => {
             try {
-                return await toDataUrl(url);
+                return await toDataUrl(favIconUrl);
             } catch (e) {
                 log.error('Unable to get favicon data url', e);
                 return null;
@@ -126,7 +141,7 @@ class PopupStore {
 
         return (await Promise.race([
             timeoutPromise,
-            toDataUrlPromise(url),
+            toDataUrlPromise(favIconUrl),
         ])) as Promise<string | null>;
     };
 
