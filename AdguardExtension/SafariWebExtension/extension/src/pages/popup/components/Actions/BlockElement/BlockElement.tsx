@@ -5,7 +5,6 @@ import { Action } from '../Action';
 import { translator } from '../../../../common/translators/translator';
 import { MessagesToBackgroundPage } from '../../../../common/constants';
 
-// TODO persist current tab in the popup store
 const handleBlock = async () => {
     const [currentTab] = await browser.tabs.query({
         active: true,

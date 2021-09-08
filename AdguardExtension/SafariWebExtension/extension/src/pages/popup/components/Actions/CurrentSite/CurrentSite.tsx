@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 

@@ -15,10 +15,10 @@
         "message": "protection enabled"
     },
     "popup_action_block_element": {
-        "message": "Block element on the page"
+        "message": "Block elements on this page"
     },
     "popup_action_delete_user_rules": {
-        "message": "Delete all user rules for this site"
+        "message": "Delete all user rules for this website"
     },
     "popup_action_current_site_desc_starting": {
         "message": "please wait, starting protection..."
