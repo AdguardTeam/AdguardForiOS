@@ -8,9 +8,9 @@ import { popupStore } from '../../../stores/PopupStore';
 export const DeleteUserRules = observer(() => {
     const store = useContext(popupStore);
 
-    const { hasUserRules, protectionEnabled } = store;
+    const { hasUserRules, protectionEnabled, contentBlockersEnabled } = store;
 
-    if (!hasUserRules || !protectionEnabled) {
+    if (!hasUserRules || !protectionEnabled || !contentBlockersEnabled) {
         return null;
     }
 

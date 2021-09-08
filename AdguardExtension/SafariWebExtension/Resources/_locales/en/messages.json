@@ -11,8 +11,14 @@
     "popup_action_safari_protection_description": {
         "message": "for this website"
     },
+    "popup_action_safari_protection_description_disabled": {
+        "message": "disabled"
+    },
     "popup_action_current_site_status_desc_enabled": {
         "message": "protection enabled"
+    },
+    "popup_action_current_site_status_desc_disabled": {
+        "message": "protection disabled"
     },
     "popup_action_block_element": {
         "message": "Block elements on this page"

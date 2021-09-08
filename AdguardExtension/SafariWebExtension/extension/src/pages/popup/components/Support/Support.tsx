@@ -22,7 +22,12 @@ export const Support = observer(() => {
         },
     };
 
+    if (!store.contentBlockersEnabled) {
+        return null;
+    }
+
     let mode;
+
     if (!store.protectionEnabled) {
         mode = supportMap.protectionDisabled;
     } else if (store.isFullscreen) {

@@ -24,7 +24,19 @@ const handleBlock = async () => {
 export const BlockElement = observer(() => {
     const store = useContext(popupStore);
 
-    if (!store.protectionEnabled) {
+    let show = true;
+    let disabled = false;
+
+    if (store.protectionEnabled) {
+        show = false;
+    }
+
+    if (!store.contentBlockersEnabled) {
+        show = true;
+        disabled = true;
+    }
+
+    if (!show) {
         return null;
     }
 
@@ -34,6 +46,7 @@ export const BlockElement = observer(() => {
             iconColor="red"
             title={translator.getMessage('popup_action_block_element')}
             onClick={handleBlock}
+            disable={disabled}
         />
     );
 });

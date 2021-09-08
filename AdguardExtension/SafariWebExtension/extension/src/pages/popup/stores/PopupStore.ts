@@ -15,6 +15,7 @@ import { messenger } from '../../common/messenger';
 import { toDataUrl } from '../image-utils';
 import { log } from '../../common/log';
 import { AppearanceTheme } from '../../common/constants';
+import { popup } from '../index';
 
 // Do not allow property change outside of store actions
 configure({ enforceActions: 'observed' });
@@ -62,6 +63,8 @@ class PopupStore {
 
     @observable showProtectionDisabledModal: boolean = false;
 
+    @observable contentBlockersEnabled: boolean = false;
+
     @observable appearanceTheme?: AppearanceTheme;
 
     /**
@@ -99,6 +102,7 @@ class PopupStore {
             this.protectionEnabled = popupData.protectionEnabled;
             this.hasUserRules = popupData.hasUserRules;
             this.premiumApp = popupData.premiumApp;
+            this.contentBlockersEnabled = popupData.contentBlockersEnabled;
             this.showProtectionDisabledModal = !popupData.contentBlockersEnabled;
             this.appearanceTheme = popupData.appearanceTheme;
         });
