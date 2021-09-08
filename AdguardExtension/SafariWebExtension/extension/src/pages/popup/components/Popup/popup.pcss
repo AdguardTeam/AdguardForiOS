@@ -15,6 +15,16 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+input:is([type="button"],
+[type="submit"],
+[type="reset"]),
+input[type="file"]::file-selector-button,
+button {
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    text-align: left;
+}
+
 .popup {
     min-width: 320px;
     padding: 11px 0;
