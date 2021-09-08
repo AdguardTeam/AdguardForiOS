@@ -17,7 +17,6 @@
  */
 
 import DnsAdGuardSDK
-import struct SafariAdGuardSDK.UserRule
 
 final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
     // MARK: - Internal properties

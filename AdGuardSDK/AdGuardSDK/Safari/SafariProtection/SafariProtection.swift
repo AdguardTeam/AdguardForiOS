@@ -74,7 +74,7 @@ public final class SafariProtection: SafariProtectionProtocol {
                                           jsonStorageUrl: jsonStorageUrl)
         
         self.configuration = configuration
-        self.defaultConfiguration = defaultConfiguration.copy
+        self.defaultConfiguration = defaultConfiguration
         self.userDefaults = services.userDefaults
         self.filters = services.filters
         self.converter = services.converter
@@ -105,7 +105,7 @@ public final class SafariProtection: SafariProtectionProtocol {
     
     // MARK: - Public method
     
-    /* Resets all sdk to default configuration. Deletes all stored filters, filters meta ans user rules */
+    /* Resets all sdk to default configuration. Deletes all stored filters, filters meta and user rules */
     public func reset(_ onResetFinished: @escaping (Error?) -> Void) {
         workingQueue.async { [weak self] in
             guard let self = self else {
@@ -116,6 +116,9 @@ public final class SafariProtection: SafariProtectionProtocol {
             
             Logger.logInfo("(SafariProtection) - reset start")
             
+            //Update config with default configuration
+            self.configuration.updateConfig(with: self.defaultConfiguration)
+
             // Update filters meta
             var filtersError: Error?
             let group = DispatchGroup()
@@ -145,9 +148,7 @@ public final class SafariProtection: SafariProtectionProtocol {
                 self.completionQueue.async { onResetFinished(error) }
                 return
             }
-            
-            self.configuration.updateConfig(with: self.defaultConfiguration.copy)
-            
+                        
             self.reloadContentBlockers { error in
                 if let error = error {
                     Logger.logError("(SafariProtection) - reset; Error reloading CBs after reset; Error: \(error)")

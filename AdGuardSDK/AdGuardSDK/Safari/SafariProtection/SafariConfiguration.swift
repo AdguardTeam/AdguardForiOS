@@ -33,11 +33,6 @@ public protocol SafariConfigurationProtocol: ConfigurationProtocol {
     var appProductVersion: String { get set } // Application product version for example 4.1.1 for AdGuard
     var appId: String { get set } // Application id for example "ios_pro" or "ios"
     var cid: String { get set } // UIDevice.current.identifierForVendor?.uuidString should be passed
-    
-    // New object created from self
-    var copy: Self { get }
-    
-    func updateConfig(with newConfig: SafariConfigurationProtocol)
 }
 
 // MARK: - Configuration
@@ -56,23 +51,6 @@ public final class SafariConfiguration: SafariConfigurationProtocol {
     public var appProductVersion: String
     public var appId: String
     public var cid: String
-    
-    public var copy: SafariConfiguration {
-        return SafariConfiguration(
-            iosVersion: iosVersion,
-            currentLanguage: currentLanguage,
-            proStatus: proStatus,
-            safariProtectionEnabled: safariProtectionEnabled,
-            advancedBlockingIsEnabled: advancedBlockingIsEnabled,
-            blocklistIsEnabled: blocklistIsEnabled,
-            allowlistIsEnabled: allowlistIsEnabled,
-            allowlistIsInverted: allowlistIsInverted,
-            appBundleId: appBundleId,
-            appProductVersion: appProductVersion,
-            appId: appId,
-            cid: cid
-        )
-    }
     
     public init(
         iosVersion: Int,
@@ -101,8 +79,10 @@ public final class SafariConfiguration: SafariConfigurationProtocol {
         self.appId = appId
         self.cid = cid
     }
-    
-    public func updateConfig(with newConfig: SafariConfigurationProtocol) {
+}
+
+extension SafariConfigurationProtocol {
+    internal func updateConfig(with newConfig: SafariConfigurationProtocol) {
         self.currentLanguage = newConfig.currentLanguage
         self.proStatus = newConfig.proStatus
         self.iosVersion = newConfig.iosVersion

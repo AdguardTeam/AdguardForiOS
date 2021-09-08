@@ -318,12 +318,12 @@ final class UserRulesTableController: UIViewController {
     }
     
     @objc
-    private func editButtonTapped(_ sender: UIBarButtonItem) {
+    private final func editButtonTapped(_ sender: UIBarButtonItem) {
         presentAlert()
     }
 
     @objc
-    private func editButtonTappedForSelection(_ sender: UIBarButtonItem) {
+    private final func editButtonTappedForSelection(_ sender: UIBarButtonItem) {
         select()
     }
     
@@ -422,12 +422,9 @@ extension UserRulesTableController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let title = String.localizedString("delete_swipe_action").capitalized
+        let title = String.localizedString("delete_title").capitalized
         let deleteAction = UIContextualAction(style: .destructive, title: title) { [weak self] (_, _, success: (Bool) -> Void) in
             guard let self = self else { success(false); return }
-            //indexPath.row == 0 - it is "Add new rule cell"
-            let canSwipe = (self.model.isEditing || self.model.isSearching) ? true : indexPath.row > 0
-            guard canSwipe else { success(false); return }
             let selectedRule = self.model(for: indexPath.row).rule
             
             self.model.remove(rules: [selectedRule], for: [indexPath])
@@ -515,6 +512,9 @@ fileprivate extension UITableView {
 
 extension UserRulesTableController: UIGestureRecognizerDelegate {
     
+    /**
+     This method is needed to avoid collisions between table view swipe gesture and navigation controller swipes
+     */
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         guard let panGesture = gestureRecognizer as? UIPanGestureRecognizer else {
             return false

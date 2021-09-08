@@ -23,11 +23,6 @@ public protocol DnsConfigurationProtocol: ConfigurationProtocol {
     var allowlistIsEnabled: Bool { get set }
     var dnsFilteringIsEnabled: Bool { get set }
     var dnsImplementation: DnsImplementation { get set }
-    
-    // New object created from self
-    var copy: Self { get }
-    
-    func updateConfig(with newConfig: DnsConfigurationProtocol)
 }
 
 public final class DnsConfiguration: DnsConfigurationProtocol {
@@ -58,7 +53,11 @@ public final class DnsConfiguration: DnsConfigurationProtocol {
         self.allowlistIsEnabled = allowlistIsEnabled
     }
     
-    public func updateConfig(with newConfig: DnsConfigurationProtocol) {
+
+}
+
+extension DnsConfigurationProtocol {
+    internal func updateConfig(with newConfig: DnsConfigurationProtocol) {
         self.currentLanguage = newConfig.currentLanguage
         self.proStatus = newConfig.proStatus
         self.dnsFilteringIsEnabled = newConfig.dnsFilteringIsEnabled

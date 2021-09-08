@@ -1009,6 +1009,3 @@
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
 "youtube_script_error_title" = "Unknown error occurred while removing YouTube ads";
-
-/* (UserRulesTableController) - Delete swipe action title */
-"delete_swipe_action" = "Delete";

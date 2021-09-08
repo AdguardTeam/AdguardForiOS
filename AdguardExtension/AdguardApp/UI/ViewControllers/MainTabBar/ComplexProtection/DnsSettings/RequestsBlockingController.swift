@@ -47,7 +47,7 @@ class RequestsBlockingController: UITableViewController {
         if segue.identifier == dnsBlacklistSegue {
             destinationVC.rulesType = .dnsBlocklist
         } else if segue.identifier == dnsWhitelistSegue {
-            destinationVC.rulesType = .allowlist
+            destinationVC.rulesType = .dnsAllowlist
         }
     }
     

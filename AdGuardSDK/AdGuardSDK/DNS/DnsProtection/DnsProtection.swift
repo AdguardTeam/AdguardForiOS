@@ -54,11 +54,11 @@ public final class DnsProtection: DnsProtectionProtocol {
     
     public func reset() throws {
         try workingQueue.sync {
+            configuration.updateConfig(with: defaultConfiguration)
             try dnsProvidersManager.reset()
             try dnsUserRulesManagerProvider.reset()
             try dnsFiltersManager.reset()
             try filterFilesStorage.reset()
-            configuration.updateConfig(with: defaultConfiguration.copy)
         }
     }
 }
