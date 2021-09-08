@@ -20,24 +20,32 @@ import Foundation
 
 protocol DnsProtectionServiceStorageProtocol {
     var dnsProvidersManager: DnsProvidersManagerProtocol { get }
+    var dnsUserRulesManager: DnsUserRulesManagersProviderProtocol { get }
+    var dnsFiltersManager: DnsFiltersManagerProtocol { get }
+    var filterFilesStorage: FilterFilesStorageProtocol { get }
 }
 
 final class DnsProtectionServiceStorage: DnsProtectionServiceStorageProtocol {
     
     let dnsProvidersManager: DnsProvidersManagerProtocol
+    let dnsUserRulesManager: DnsUserRulesManagersProviderProtocol
+    let dnsFiltersManager: DnsFiltersManagerProtocol
+    let filterFilesStorage: FilterFilesStorageProtocol
     
     init(
         configuration: DnsConfigurationProtocol,
-        userDefaults: UserDefaults
-    ) throws {
-        let configuration = configuration
-        let userDefaults = UserDefaultsStorage(storage: userDefaults)
-        let customDnsProvidersStorage = CustomDnsProvidersStorage(userDefaults: userDefaults)
-        let predefinedProviders = try PredefinedDnsProvidersDecoder(currentLanguage: configuration.currentLanguage)
-        
-        self.dnsProvidersManager = DnsProvidersManager(configuration: configuration,
-                                                       userDefaults: userDefaults,
-                                                       customProvidersStorage: customDnsProvidersStorage,
-                                                       predefinedProviders: predefinedProviders)
+        userDefaults: UserDefaults,
+        filterFilesDirectoryUrl: URL) throws {
+            let configuration = configuration
+            let userDefaults = UserDefaultsStorage(storage: userDefaults)
+            self.filterFilesStorage = try FilterFilesStorage(filterFilesDirectoryUrl: filterFilesDirectoryUrl)
+            
+            self.dnsProvidersManager = try DnsProvidersManager(configuration: configuration,
+                                                           userDefaults: userDefaults)
+            
+            self.dnsUserRulesManager = DnsUserRulesManagersProvider(fileStorage: filterFilesStorage)
+            self.dnsFiltersManager = DnsFiltersManager(userDefaults: userDefaults,
+                                                       filterFilesStorage: filterFilesStorage,
+                                                       configuration: configuration)
     }
 }
