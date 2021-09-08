@@ -16,7 +16,7 @@ export const ProtectionToggle = observer(() => {
     };
 
     return (
-        <label>
+        <label className="action-label">
             <Action
                 iconId="compass"
                 iconColor="green"
