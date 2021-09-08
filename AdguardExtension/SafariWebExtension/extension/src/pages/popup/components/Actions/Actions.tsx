@@ -12,7 +12,9 @@ export const Actions = observer(() => {
     return (
         <div className="actions">
             <CurrentSite />
-            <ProtectionToggle />
+            <label className="actions__label">
+                <ProtectionToggle />
+            </label>
             <BlockElement />
             <DeleteUserRules />
         </div>
