@@ -17,6 +17,7 @@
  */
 
 import Foundation
+@_implementationOnly import ContentBlockerConverter
 
 // MARK: - ContentBlockerType
 
@@ -44,37 +45,30 @@ public enum ContentBlockerType: Int, CaseIterable, Codable {
 
 /**
  This struct is used to represent the convertation result of Converter lib.
- It is practically the same as **FiltersConverter.Result** but instead of storing JSON file string it stores JSON file URL.
+ It is practically the same as **FiltersConverterResult** but instead of storing JSON file string it stores JSON file URL.
  It is more convenient to use URLs because Content Blockers are waiting JSON URL with converted rules.
  */
 public struct ConverterResult: Codable, Equatable {
-    let contentBlockerType: ContentBlockerType // Content blocker type the result is related with
-    let totalRules: Int // Total valis rules number, because some rules that we pass can be invalid
-    let totalConverted: Int // The result number of rules with Content blockers limit of 'contentBlockerRulesLimit' rules
-    let overlimit: Bool // Is true if totalRules is greater than 'contentBlockerRulesLimit' rules
-    let jsonUrl: URL // URL where JSON with converted rules is stored 
+    let result: FiltersConverterResult // Converter result obtained from ConverterLib
+    let jsonUrl: URL // URL where JSON with converted rules is stored
+    
+    init(result: FiltersConverterResult, jsonUrl: URL) {
+        self.result = result
+        self.jsonUrl = jsonUrl
+    }
 }
 
 // MARK: - ContentBlockersInfoStorage
 
 protocol ContentBlockersInfoStorageProtocol: ResetableSyncProtocol {
     /* Returns all content blocker conversion results and JSONs urls */
-    var allCbInfo: [ContentBlockerType: ConverterResult] { get }
-
-    /* Saves filters convertion info and JSON file to storage */
-    func save(cbInfo: FiltersConverter.Result) throws
+    var allConverterResults: [ConverterResult] { get }
 
     /* Saves filters convertion info and JSON files to storage */
-    func save(cbInfos: [FiltersConverter.Result]) throws
-
-    /* Loads filters convertion result and JSON file url for specified content blocker type */
-    func getInfo(for cbType: ContentBlockerType) -> ConverterResult?
+    func save(converterResults: [FiltersConverterResult]) throws
     
-    /**
-     Safari Content Blocker can return an error if we pass empty json
-     So we just pass json with empty rule to avoid this error
-     */
-    func getEmptyRuleJsonUrl() throws -> URL
+    /* Loads filters convertion result and JSON file url for specified content blocker type */
+    func getConverterResult(for cbType: ContentBlockerType) -> ConverterResult
 }
 
 /* This class is responsible for managing JSON files for every content blocker */
@@ -82,7 +76,7 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
         
     // MARK: - Public properties
     
-    var allCbInfo: [ContentBlockerType: ConverterResult] { userDefaultsStorage.allCbInfo }
+    var allConverterResults: [ConverterResult] { userDefaultsStorage.allCbInfo }
     
     // MARK: - Private properties
     
@@ -105,42 +99,21 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
     
     // MARK: - Internal methods
     
-    func save(cbInfo: FiltersConverter.Result) throws {
-        let urlToSave = urlForJson(withType: cbInfo.type)
-        try cbInfo.jsonString.write(to: urlToSave, atomically: true, encoding: .utf8)
+    func save(converterResults: [FiltersConverterResult]) throws {
+        Logger.logInfo("(ContentBlockersJSONStorage) - save cbJsons; Trying to save \(converterResults.count) jsons")
         
-        // Save filters convertion result
-        let converterResult = ConverterResult(contentBlockerType: cbInfo.type,
-                                              totalRules: cbInfo.totalRules,
-                                              totalConverted: cbInfo.totalConverted,
-                                              overlimit: cbInfo.overlimit,
-                                              jsonUrl: urlToSave)
-        userDefaultsStorage.allCbInfo[cbInfo.type] = converterResult
-        userDefaultsStorage.allCbInfo = allCbInfo
-    }
-    
-    func save(cbInfos: [FiltersConverter.Result]) throws {
-        Logger.logInfo("(ContentBlockersJSONStorage) - save cbJsons; Trying to save \(cbInfos.count) jsons")
-        try cbInfos.forEach { try save(cbInfo: $0) }
-    }
-    
-    func getInfo(for cbType: ContentBlockerType) -> ConverterResult? {
-        return userDefaultsStorage.allCbInfo[cbType]
-    }
-    
-    func getEmptyRuleJsonUrl() throws -> URL {
-        let fm = FileManager.default
-        let emptyRuleJsonUrl = jsonStorageUrl.appendingPathComponent("empty_rule.json")
-        if fm.fileExists(atPath: emptyRuleJsonUrl.absoluteString) {
-            Logger.logDebug("(ContentBlockersJSONStorage) - getEmptyRuleJsonUrl; empty_rule.json exists returning it's URL")
-            return emptyRuleJsonUrl
-        } else {
-            Logger.logDebug("(ContentBlockersJSONStorage) - getEmptyRuleJsonUrl; empty_rule.json missing create it now")
-            // TODO: - It'll be in converter, remove it later
-            let emptyRule = "[{\"trigger\": {\"url-filter\": \".*\",\"if-domain\": [\"domain.com\"]},\"action\":{\"type\": \"ignore-previous-rules\"}}]"
-            try emptyRule.write(to: emptyRuleJsonUrl, atomically: true, encoding: .utf8)
-            return emptyRuleJsonUrl
+        let result: [ConverterResult] = try converterResults.map {
+            let urlToSave = urlForJson(withType: $0.type)
+            try $0.jsonString.write(to: urlToSave, atomically: true, encoding: .utf8)
+            return ConverterResult(result: $0, jsonUrl: urlToSave)
         }
+        userDefaultsStorage.allCbInfo = result
+    }
+    
+    func getConverterResult(for cbType: ContentBlockerType) -> ConverterResult {
+        Logger.logInfo("(ContentBlockersJSONStorage) - getConverterResult; Result request for \(cbType)")
+        let allResults = userDefaultsStorage.allCbInfo
+        return allResults.first(where: { $0.result.type == cbType })!
     }
     
     func reset() throws {
@@ -153,7 +126,7 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
         try fileManager.createDirectory(at: jsonStorageUrl, withIntermediateDirectories: true, attributes: nil)
         
         // Clear user defaults
-        userDefaultsStorage.allCbInfo = [:]
+        userDefaultsStorage.allCbInfo = []
         
         Logger.logInfo("(ContentBlockersJSONStorage) - reset; Successfully deleted directory with CBs JSONs")
     }
@@ -186,14 +159,14 @@ fileprivate extension UserDefaultsStorageProtocol {
     
     private var allCbInfoKey: String { "AdGuardSDK.allCbInfoKey" }
     
-    var allCbInfo: [ContentBlockerType: ConverterResult] {
+    var allCbInfo: [ConverterResult] {
         get {
             if let savedCbData = storage.data(forKey: allCbInfoKey) {
                 let decoder = JSONDecoder()
-                let cbInfo = try? decoder.decode([ContentBlockerType: ConverterResult].self, from: savedCbData)
-                return cbInfo ?? [:]
+                let cbInfo = try? decoder.decode([ConverterResult].self, from: savedCbData)
+                return cbInfo ?? []
             }
-            return [:]
+            return []
         }
         set {
             let encoder = JSONEncoder()

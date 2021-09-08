@@ -17,6 +17,7 @@
  */
 
 import Foundation
+@_implementationOnly import ContentBlockerConverter
 
 protocol QuickAllowlistClipperProtocol {
     

@@ -185,8 +185,8 @@ public final class SafariProtection: SafariProtectionProtocol {
             }
             
             do {
-                let convertedfilters = try self.converter.convertFiltersAndUserRulesToJsons()
-                try self.cbStorage.save(cbInfos: convertedfilters)
+                let convertedfilters = self.converter.convertFiltersAndUserRulesToJsons()
+                try self.cbStorage.save(converterResults: convertedfilters)
             }
             catch {
                 Logger.logError("(SafariProtection) - createNewCbJsonsAndReloadCbs; Error conveerting filters: \(error)")

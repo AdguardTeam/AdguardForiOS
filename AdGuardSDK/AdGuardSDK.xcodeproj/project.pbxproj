@@ -14,6 +14,8 @@
 		7E4A132426E4F40D00728BDE /* CompaniesStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4A132226E4F40D00728BDE /* CompaniesStatistics.swift */; };
 		7E4A132726E4FD1400728BDE /* CompaniesStatisticsRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4A132626E4FD1400728BDE /* CompaniesStatisticsRecord.swift */; };
 		7E4A132826E4FD1400728BDE /* CompaniesStatisticsRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4A132626E4FD1400728BDE /* CompaniesStatisticsRecord.swift */; };
+		7E5A6ED926E8B6CC00B7EF6A /* FiltersConverterResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5A6ED826E8B6CC00B7EF6A /* FiltersConverterResult.swift */; };
+		7E5A6EDA26E8B6CC00B7EF6A /* FiltersConverterResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5A6ED826E8B6CC00B7EF6A /* FiltersConverterResult.swift */; };
 		7E667A6626E26B890013B1D5 /* ContentBlockerConverter in Frameworks */ = {isa = PBXBuildFile; productRef = 7E667A6526E26B890013B1D5 /* ContentBlockerConverter */; };
 		7E667A6826E29D970013B1D5 /* default.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = 7E667A6726E29D970013B1D5 /* default.db.zip */; };
 		7E667A6A26E389320013B1D5 /* DnsTrackersProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E667A6926E389320013B1D5 /* DnsTrackersProvider.swift */; };
@@ -410,6 +412,7 @@
 		7E15DFD426E606E60020247E /* DnsTrackersProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsTrackersProviderMock.swift; sourceTree = "<group>"; };
 		7E4A132226E4F40D00728BDE /* CompaniesStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesStatistics.swift; sourceTree = "<group>"; };
 		7E4A132626E4FD1400728BDE /* CompaniesStatisticsRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesStatisticsRecord.swift; sourceTree = "<group>"; };
+		7E5A6ED826E8B6CC00B7EF6A /* FiltersConverterResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersConverterResult.swift; sourceTree = "<group>"; };
 		7E667A6726E29D970013B1D5 /* default.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = default.db.zip; sourceTree = "<group>"; };
 		7E667A6926E389320013B1D5 /* DnsTrackersProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsTrackersProvider.swift; sourceTree = "<group>"; };
 		7E667A6D26E3896D0013B1D5 /* adguard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = adguard.json; sourceTree = "<group>"; };
@@ -1038,6 +1041,7 @@
 				7E6E80DE26C2A05200925F96 /* FiltersConverterService.swift */,
 				7E6E80DF26C2A05200925F96 /* QuickAllowlistClipper.swift */,
 				7E6E80E026C2A05200925F96 /* FiltersConverter.swift */,
+				7E5A6ED826E8B6CC00B7EF6A /* FiltersConverterResult.swift */,
 			);
 			path = FiltersConvertation;
 			sourceTree = "<group>";
@@ -1733,6 +1737,7 @@
 				7E6E81A526C2A05B00925F96 /* ChartType.swift in Sources */,
 				7E6E802F26C299DE00925F96 /* TestsFileManager.swift in Sources */,
 				7E6E816926C2A05300925F96 /* SafariUserRulesStorage.swift in Sources */,
+				7E5A6EDA26E8B6CC00B7EF6A /* FiltersConverterResult.swift in Sources */,
 				7E6E81AF26C2A05B00925F96 /* DnsRequestProcessedEventHandler.swift in Sources */,
 				7E6E804526C299DE00925F96 /* FilterFilesStorageTest.swift in Sources */,
 				7E6E814B26C2A05300925F96 /* SafariGroup.swift in Sources */,
@@ -1794,6 +1799,7 @@
 				7E6E811E26C2A05300925F96 /* SafariProtectionApiMethods.swift in Sources */,
 				7E6E816E26C2A05300925F96 /* SafariUserRulesManagersProvider.swift in Sources */,
 				7E6E815E26C2A05300925F96 /* SafariProtection+BackgroundFetch.swift in Sources */,
+				7E5A6ED926E8B6CC00B7EF6A /* FiltersConverterResult.swift in Sources */,
 				7E6E813226C2A05300925F96 /* MetaStorage+GroupLocalizations.swift in Sources */,
 				7E6E812826C2A05300925F96 /* QuickAllowlistClipper.swift in Sources */,
 				7E6E816226C2A05300925F96 /* SafariProtection+Filters.swift in Sources */,
@@ -2486,7 +2492,7 @@
 			repositoryURL = "https://github.com/AdguardTeam/SafariConverterLib";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.3;
+				minimumVersion = 2.0.8;
 			};
 		};
 		7E966B8926C27E68006B57BD /* XCRemoteSwiftPackageReference "DnsLibs" */ = {
