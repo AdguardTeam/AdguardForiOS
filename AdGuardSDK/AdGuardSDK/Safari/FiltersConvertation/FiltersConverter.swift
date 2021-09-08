@@ -103,7 +103,7 @@ final class FiltersConverter: FiltersConverterProtocol {
     // MARK: - private methods
     
     // Sorts all filters and rules by content blockers
-    func sortRulesByContentBlockers(_ filters: [FilterFileContent],
+    private func sortRulesByContentBlockers(_ filters: [FilterFileContent],
                                     _ blocklistRules: [String]?,
                                     _ allowlistRules: [String]?,
                                     _ invertedAllowlistRulesString: String?) -> [ContentBlockerType: [String]]

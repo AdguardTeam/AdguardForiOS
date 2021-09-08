@@ -68,7 +68,7 @@ protocol ContentBlockersInfoStorageProtocol: ResetableSyncProtocol {
     func save(converterResults: [FiltersConverterResult]) throws
     
     /* Loads filters convertion result and JSON file url for specified content blocker type */
-    func getConverterResult(for cbType: ContentBlockerType) -> ConverterResult
+    func getConverterResult(for cbType: ContentBlockerType) -> ConverterResult?
 }
 
 /* This class is responsible for managing JSON files for every content blocker */
@@ -100,6 +100,10 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
     // MARK: - Internal methods
     
     func save(converterResults: [FiltersConverterResult]) throws {
+        guard converterResults.count == ContentBlockerType.allCases.count else {
+            throw CommonError.error(message: "Received \(converterResults.count) results, but expecting \(ContentBlockerType.allCases.count)")
+        }
+        
         Logger.logInfo("(ContentBlockersJSONStorage) - save cbJsons; Trying to save \(converterResults.count) jsons")
         
         let result: [ConverterResult] = try converterResults.map {
@@ -110,10 +114,10 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
         userDefaultsStorage.allCbInfo = result
     }
     
-    func getConverterResult(for cbType: ContentBlockerType) -> ConverterResult {
+    func getConverterResult(for cbType: ContentBlockerType) -> ConverterResult? {
         Logger.logInfo("(ContentBlockersJSONStorage) - getConverterResult; Result request for \(cbType)")
         let allResults = userDefaultsStorage.allCbInfo
-        return allResults.first(where: { $0.result.type == cbType })!
+        return allResults.first(where: { $0.result.type == cbType })
     }
     
     func reset() throws {

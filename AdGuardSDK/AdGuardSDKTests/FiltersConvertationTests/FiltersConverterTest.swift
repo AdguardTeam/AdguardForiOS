@@ -3,17 +3,18 @@ import XCTest
 
 final class ContentBlockerConverterMock: ContentBlockerConverterProtocol {
     
-    var result: [ContentBlockerType: [String]] = [:]
-    
+    var convertArrayCalledCount = 0
+    var passedRules: [[String]] = []
+    var convertArrayResult: ConversionResult?
     func convertArray(
         rules: [String],
         safariVersion: SafariVersion,
         optimize: Bool,
-        advancedBlocking: Bool,
-        cbType: ContentBlockerType
+        advancedBlocking: Bool
     ) -> ConversionResult? {
-        result[cbType] = rules
-        return nil
+        convertArrayCalledCount += 1
+        passedRules.append(rules)
+        return convertArrayResult
     }
 }
 
@@ -74,9 +75,15 @@ class FiltersConverterTest: XCTestCase {
         let blocklistRules = ["/adtwee/*", "ya.ru", "google.com"]
         let allowlistRules = ["mail.com"]
         
-        let _ = converter.convert(filters: filters, blocklistRules: blocklistRules, allowlistRules: allowlistRules, invertedAllowlistRulesString: nil)
+        converterMock.convertArrayResult = ConversionResult(totalConvertedCount: 0, convertedCount: 0, errorsCount: 0, overLimit: true, converted: "", message: "")
+        let results = converter.convert(filters: filters, blocklistRules: blocklistRules, allowlistRules: allowlistRules, invertedAllowlistRulesString: nil)
         
-        for (cbType, rules) in converterMock.result {
+        XCTAssertEqual(converterMock.passedRules.count, ContentBlockerType.allCases.count)
+        var i = 0
+        for res in results {
+            let cbType = res.type
+            let rules = converterMock.passedRules[i]
+            i += 1
             switch cbType {
             case .general:
                 XCTAssertEqual(rules.count, 9)
@@ -132,9 +139,16 @@ class FiltersConverterTest: XCTestCase {
     func testWithInvertedAllowlistRules() {
         let filters = [adGuardDutchFilter, webAnnoyancesUltralist]
         let invertedAllowlistRules = "@@||*$document,domain=~ya.ru|~vk.com|~mail.ru"
-        let _ = converter.convert(filters: filters, blocklistRules: nil, allowlistRules: nil, invertedAllowlistRulesString: invertedAllowlistRules)
         
-        for (cbType, rules) in converterMock.result {
+        converterMock.convertArrayResult = ConversionResult(totalConvertedCount: 0, convertedCount: 0, errorsCount: 0, overLimit: true, converted: "", message: "")
+        let results = converter.convert(filters: filters, blocklistRules: nil, allowlistRules: nil, invertedAllowlistRulesString: invertedAllowlistRules)
+        
+        XCTAssertEqual(converterMock.passedRules.count, ContentBlockerType.allCases.count)
+        var i = 0
+        for res in results {
+            let cbType = res.type
+            let rules = converterMock.passedRules[i]
+            i += 1
             switch cbType {
             case .general:
                 XCTAssertEqual(rules.count, 3)

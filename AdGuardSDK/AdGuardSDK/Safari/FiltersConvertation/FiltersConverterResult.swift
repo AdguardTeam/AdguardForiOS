@@ -32,7 +32,20 @@ public struct FiltersConverterResult: Codable, Equatable {
     let advancedBlockingText: String? // Text of advanced content blocker rules
     let message: String // Result message
     
-    init(type: ContentBlockerType, conversionResult: ConversionResult) {
+    public init(type: ContentBlockerType, jsonString: String, totalRules: Int, totalConverted: Int, overlimit: Bool, errorsCount: Int, advancedBlockingConvertedCount: Int, advancedBlockingJson: String?, advancedBlockingText: String?, message: String) {
+        self.type = type
+        self.jsonString = jsonString
+        self.totalRules = totalRules
+        self.totalConverted = totalConverted
+        self.overlimit = overlimit
+        self.errorsCount = errorsCount
+        self.advancedBlockingConvertedCount = advancedBlockingConvertedCount
+        self.advancedBlockingJson = advancedBlockingJson
+        self.advancedBlockingText = advancedBlockingText
+        self.message = message
+    }
+    
+    public init(type: ContentBlockerType, conversionResult: ConversionResult) {
         self.type = type
         self.jsonString = conversionResult.converted
         self.totalRules = conversionResult.totalConvertedCount

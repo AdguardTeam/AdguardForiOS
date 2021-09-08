@@ -48,12 +48,14 @@ class SafariProtectionContnetBlockersTest: XCTestCase {
     
     func testAllContentBlockersInfo() {
         let someUrl = TestsFileManager.workingUrl
-        cbStorage.allCbInfo = [.custom: ConverterResult(contentBlockerType: .custom, totalRules: 0, totalConverted: 10, overlimit: true, jsonUrl: someUrl),
-                               .general: ConverterResult(contentBlockerType: .general, totalRules: 100, totalConverted: 50, overlimit: false, jsonUrl: someUrl)]
-        XCTAssertEqual(cbStorage.allCbInfo, safariProtection.allContentBlockersInfo)
+        cbStorage.stubbedAllConverterResults = [
+            ConverterResult(result: FiltersConverterResult(type: .general, jsonString: "jsonString", totalRules: 100, totalConverted: 20, overlimit: false, errorsCount: 2, advancedBlockingConvertedCount: 20, advancedBlockingJson: "advancedBlockingJson", advancedBlockingText: "advancedBlockingText", message: "message"), jsonUrl: someUrl)
+        ]
         
-        cbStorage.allCbInfo = [:]
-        XCTAssert(safariProtection.allContentBlockersInfo.isEmpty)
+        XCTAssertEqual(cbStorage.allConverterResults, safariProtection.allConverterResults)
+        
+        cbStorage.stubbedAllConverterResults = []
+        XCTAssert(safariProtection.allConverterResults.isEmpty)
     }
     
     func testGetState() {

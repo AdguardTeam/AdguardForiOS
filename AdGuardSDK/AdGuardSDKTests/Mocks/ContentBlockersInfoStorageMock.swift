@@ -1,49 +1,39 @@
 import Foundation
 
 final class ContentBlockersInfoStorageMock: ContentBlockersInfoStorageProtocol {
-    
-    var allCbInfo: [ContentBlockerType : ConverterResult] = [:]
-    
-    var saveCbInfoCalledCount = 0
-    var saveCbInfoError: Error?
-    func save(cbInfo: FiltersConverter.Result) throws {
-        saveCbInfoCalledCount += 1
-        if let error = saveCbInfoError {
+
+    var invokedAllConverterResultsGetterCount = 0
+    var stubbedAllConverterResults: [ConverterResult] = []
+    var allConverterResults: [ConverterResult] {
+        invokedAllConverterResultsGetterCount += 1
+        return stubbedAllConverterResults
+    }
+
+    var invokedSaveCount = 0
+    var invokedSaveParameter = [FiltersConverterResult]()
+    var stubbedSaveError: Error?
+    func save(converterResults: [FiltersConverterResult]) throws {
+        invokedSaveCount += 1
+        invokedSaveParameter = converterResults
+        if let error = stubbedSaveError {
             throw error
         }
     }
-    
-    var saveCbInfosCalledCount = 0
-    var saveCbInfosError: Error?
-    func save(cbInfos: [FiltersConverter.Result]) throws {
-        saveCbInfosCalledCount += 1
-        if let error = saveCbInfosError {
-            throw error
-        }
+
+    var invokedGetConverterResultCount = 0
+    var invokedGetConverterResultParameter: ContentBlockerType?
+    var stubbedGetConverterResultResult: ConverterResult!
+    func getConverterResult(for cbType: ContentBlockerType) -> ConverterResult? {
+        invokedGetConverterResultCount += 1
+        invokedGetConverterResultParameter = cbType
+        return stubbedGetConverterResultResult
     }
-    
-    var getInfoCalledCount = 0
-    var getInfoResult: ConverterResult?
-    func getInfo(for cbType: ContentBlockerType) -> ConverterResult? {
-        getInfoCalledCount += 1
-        return getInfoResult
-    }
-    
-    var getEmptyRuleJsonUrlCalledCount = 0
-    var getEmptyRuleJsonUrlResult: Result<URL> = .error(NSError(domain: "test", code: 1, userInfo: nil))
-    func getEmptyRuleJsonUrl() throws -> URL {
-        getEmptyRuleJsonUrlCalledCount += 1
-        switch getEmptyRuleJsonUrlResult {
-        case .success(let url): return url
-        case .error(let error): throw error
-        }
-    }
-    
-    var resetCalledCount = 0
-    var resetError: Error?
+
+    var invokedResetCount = 0
+    var stubbedResetError: Error?
     func reset() throws {
-        resetCalledCount += 1
-        if let error = resetError {
+        invokedResetCount += 1
+        if let error = stubbedResetError {
             throw error
         }
     }

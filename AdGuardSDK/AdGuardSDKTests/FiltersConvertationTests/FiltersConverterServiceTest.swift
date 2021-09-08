@@ -34,7 +34,7 @@ class FiltersConverterServiceTest: XCTestCase {
         (safariManagers.invertedAllowlistRulesManager as! InvertedAllowlistRulesManagerMock).allRules = invAllowRules
         
         filtersConverter.resultFilters = []
-        let _ = try! converterService.convertFiltersAndUserRulesToJsons()
+        let _ = converterService.convertFiltersAndUserRulesToJsons()
         
         XCTAssertEqual(filtersConverter.convertCalledCount, 1)
         
@@ -44,19 +44,9 @@ class FiltersConverterServiceTest: XCTestCase {
         XCTAssertEqual(["allow_rule_2"], filtersConverter.passedAllowlistRules)
     }
     
-    func testConversionWithFailure() {
-        filtersConverter.resultFilters = nil
-        configuration.safariProtectionEnabled = true
-        
-        XCTAssertThrowsError(try converterService.convertFiltersAndUserRulesToJsons()) { error in
-            XCTAssertEqual(error as! FiltersConverterService.ConvertionError, .failedToConvertRules)
-            XCTAssertEqual(filtersConverter.convertCalledCount, 1)
-        }
-    }
-    
     func testWithDisabledSafariProtection() {
         configuration.safariProtectionEnabled = false
-        let _ = try! converterService.convertFiltersAndUserRulesToJsons()
+        let _ = converterService.convertFiltersAndUserRulesToJsons()
         XCTAssertEqual(filtersConverter.convertCalledCount, 1)
         XCTAssert(filtersConverter.passedFilters!.isEmpty)
         XCTAssertNil(filtersConverter.passedBlocklistRules)
