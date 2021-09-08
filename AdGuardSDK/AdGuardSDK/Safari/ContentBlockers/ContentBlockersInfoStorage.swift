@@ -60,7 +60,11 @@ public struct ConverterResult: Codable, Equatable {
 
 // MARK: - ContentBlockersInfoStorage
 
-protocol ContentBlockersInfoStorageProtocol: ResetableSyncProtocol {
+public protocol ContentBlockersInfoStorageProtocol: ResetableSyncProtocol {
+    
+    /* We save advanced rules to the file and pass them to Safari Web Extension */
+    var advancedRulesFileUrl: URL { get }
+    
     /* Returns all content blocker conversion results and JSONs urls */
     var allConverterResults: [ConverterResult] { get }
 
@@ -72,11 +76,13 @@ protocol ContentBlockersInfoStorageProtocol: ResetableSyncProtocol {
 }
 
 /* This class is responsible for managing JSON files for every content blocker */
-final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
+final public class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
         
     // MARK: - Public properties
     
-    var allConverterResults: [ConverterResult] { userDefaultsStorage.allCbInfo }
+    public var advancedRulesFileUrl: URL { jsonStorageUrl.appendingPathComponent(Constants.Files.advancedRulesFileName) }
+    
+    public var allConverterResults: [ConverterResult] { userDefaultsStorage.allCbInfo }
     
     // MARK: - Private properties
     
@@ -99,7 +105,7 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
     
     // MARK: - Internal methods
     
-    func save(converterResults: [FiltersConverterResult]) throws {
+    public func save(converterResults: [FiltersConverterResult]) throws {
         guard converterResults.count == ContentBlockerType.allCases.count else {
             throw CommonError.error(message: "Received \(converterResults.count) results, but expecting \(ContentBlockerType.allCases.count)")
         }
@@ -112,15 +118,16 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
             return ConverterResult(result: $0, jsonUrl: urlToSave)
         }
         userDefaultsStorage.allCbInfo = result
+        try saveAdvancedRules(from: converterResults)
     }
     
-    func getConverterResult(for cbType: ContentBlockerType) -> ConverterResult? {
+    public func getConverterResult(for cbType: ContentBlockerType) -> ConverterResult? {
         Logger.logInfo("(ContentBlockersJSONStorage) - getConverterResult; Result request for \(cbType)")
         let allResults = userDefaultsStorage.allCbInfo
         return allResults.first(where: { $0.result.type == cbType })
     }
     
-    func reset() throws {
+    public func reset() throws {
         Logger.logInfo("(ContentBlockersJSONStorage) - reset start")
         
         // Remove all converted JSON fils
@@ -139,6 +146,19 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
     
     private func urlForJson(withType cbType: ContentBlockerType) -> URL {
         return jsonStorageUrl.appendingPathComponent(cbType.fileName)
+    }
+    
+    private func saveAdvancedRules(from results: [FiltersConverterResult]) throws {
+        // Advanced rules from every Content Blocker in one string
+        let bigRule = results.reduce("", { $0 + "\n" + ($1.advancedBlockingText ?? "") })
+        
+        // Unique rules from all rules
+        let rules = Set(bigRule.split(separator: "\n"))
+        
+        // String from unique rules
+        let uniqueRulesText = rules.joined(separator: "\n")
+        
+        try uniqueRulesText.write(to: advancedRulesFileUrl, atomically: true, encoding: .utf8)
     }
 }
 

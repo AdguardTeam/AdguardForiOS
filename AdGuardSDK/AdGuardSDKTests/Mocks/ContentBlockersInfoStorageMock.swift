@@ -2,6 +2,8 @@ import Foundation
 
 final class ContentBlockersInfoStorageMock: ContentBlockersInfoStorageProtocol {
 
+    var advancedRulesFileUrl: URL = URL(string: "/User/folder/file.txt")!
+    
     var invokedAllConverterResultsGetterCount = 0
     var stubbedAllConverterResults: [ConverterResult] = []
     var allConverterResults: [ConverterResult] {

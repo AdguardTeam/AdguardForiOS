@@ -17,9 +17,9 @@
  */
 
 import Foundation
-@_implementationOnly import ContentBlockerConverter
+@_implementationOnly import class ContentBlockerConverter.QuickAllowlistClipper
 
-protocol QuickAllowlistClipperProtocol {
+public protocol UserRulesClipperProtocol {
     
 }
 
@@ -27,7 +27,7 @@ protocol QuickAllowlistClipperProtocol {
  This class is responsible for performing operations for allowlist / inverted allowlist rules
  It performs operations directly with JSONs files so we don't need to run converter after performing operations
  */
-final class QuickAllowlistClipper: QuickAllowlistClipperProtocol {
+final public class UserRulesClipper: UserRulesClipperProtocol {
     
     // MARK: - Services
     
@@ -37,7 +37,13 @@ final class QuickAllowlistClipper: QuickAllowlistClipperProtocol {
     
     init(jsonStorage: ContentBlockersInfoStorageProtocol) {
         self.jsonStorage = jsonStorage
+        
     }
     
-    // MARK: - Internal methods
+    // MARK: - Public methods
+    
+    public func addAllowlistRule(by domain: String) {
+        
+       
+    }
 }

@@ -12,6 +12,30 @@ class ContentBlockersInfoStorageTest: XCTestCase {
         infoStorage = try ContentBlockersInfoStorage(jsonStorageUrl: TestsFileManager.workingUrl, userDefaultsStorage: userDefaultsStorage)
     }
     
+    func testAdvancedRulesFileUrl() {
+        TestsFileManager.clearRootDirectory()
+        let advancedRules = [
+            "unique_rule\nunique_rule1\n\nunique_rule2",
+            "unique_rule\nunique_rule1\nunique_rule3",
+            "unique_rule\nunique_rule1\nunique_rule4",
+            "unique_rule\nunique_rule1\nunique_rule5",
+            "unique_rule\nunique_rule1\nunique_rule6",
+            "unique_rule\nunique_rule1"
+        ]
+        let results = getFilterConvertionResultsForAdvancedRules(advancedRules)
+        try! infoStorage.save(converterResults: results)
+        
+        let rulesString = try! String(contentsOf: infoStorage.advancedRulesFileUrl)
+        let rules = rulesString.split(separator: "\n")
+        XCTAssertEqual(rules.count, 7)
+        
+        let rulesSet = Set(advancedRules.reduce("", { $0 + "\n" + $1 }).split(separator: "\n"))
+        XCTAssertEqual(rulesSet.count, 7)
+        rules.forEach {
+            XCTAssert(rulesSet.contains($0))
+        }
+    }
+    
     func testAllConverterResults() {
         fillStorage()
     }
@@ -81,6 +105,18 @@ class ContentBlockersInfoStorageTest: XCTestCase {
             FiltersConverterResult(type: .other, jsonString: "some_string_3", totalRules: 80, totalConverted: 32, overlimit: false, errorsCount: 1, advancedBlockingConvertedCount: 21, advancedBlockingJson: "some_json_2", advancedBlockingText: "some_text_3", message: "message_3"),
             FiltersConverterResult(type: .custom, jsonString: "some_string_4", totalRules: 130, totalConverted: 45, overlimit: true, errorsCount: 3, advancedBlockingConvertedCount: 89, advancedBlockingJson: nil, advancedBlockingText: "some_text_4", message: "message_4"),
             FiltersConverterResult(type: .security, jsonString: "some_string_5", totalRules: 400, totalConverted: 68, overlimit: false, errorsCount: 9, advancedBlockingConvertedCount: 1, advancedBlockingJson: nil, advancedBlockingText: "some_text_5", message: "message_5")
+        ]
+        return results
+    }
+    
+    private func getFilterConvertionResultsForAdvancedRules(_ advancedRules: [String]) -> [FiltersConverterResult] {
+        let results = [
+            FiltersConverterResult(type: .general, jsonString: "", totalRules: 0, totalConverted: 0, overlimit: false, errorsCount: 0, advancedBlockingConvertedCount: 0, advancedBlockingJson: "", advancedBlockingText: advancedRules[0], message: ""),
+            FiltersConverterResult(type: .privacy, jsonString: "", totalRules: 0, totalConverted: 0, overlimit: false, errorsCount: 0, advancedBlockingConvertedCount: 0, advancedBlockingJson: "", advancedBlockingText: advancedRules[1], message: ""),
+            FiltersConverterResult(type: .socialWidgetsAndAnnoyances, jsonString: "", totalRules: 0, totalConverted: 0, overlimit: false, errorsCount: 0, advancedBlockingConvertedCount: 0, advancedBlockingJson: "", advancedBlockingText: advancedRules[2], message: ""),
+            FiltersConverterResult(type: .other, jsonString: "", totalRules: 0, totalConverted: 0, overlimit: false, errorsCount: 0, advancedBlockingConvertedCount: 0, advancedBlockingJson: "", advancedBlockingText: advancedRules[3], message: ""),
+            FiltersConverterResult(type: .custom, jsonString: "", totalRules: 0, totalConverted: 0, overlimit: false, errorsCount: 0, advancedBlockingConvertedCount: 0, advancedBlockingJson: "", advancedBlockingText: advancedRules[4], message: ""),
+            FiltersConverterResult(type: .security, jsonString: "", totalRules: 0, totalConverted: 0, overlimit: false, errorsCount: 0, advancedBlockingConvertedCount: 0, advancedBlockingJson: "", advancedBlockingText: advancedRules[5], message: "")
         ]
         return results
     }

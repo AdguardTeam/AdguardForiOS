@@ -60,7 +60,6 @@ public struct FiltersConverterResult: Codable, Equatable {
 }
 
 public extension ConversionResult {
-    // TODO: - missing advancedBlockingText in init
     init(converterResult: FiltersConverterResult) {
         self.init(
             totalConvertedCount: converterResult.totalRules,
@@ -70,6 +69,7 @@ public extension ConversionResult {
             converted: converterResult.jsonString,
             advancedBlockingConvertedCount: converterResult.advancedBlockingConvertedCount,
             advancedBlocking: converterResult.advancedBlockingJson,
+            advancedBlockingText: converterResult.advancedBlockingText,
             message: converterResult.message
         )
     }
