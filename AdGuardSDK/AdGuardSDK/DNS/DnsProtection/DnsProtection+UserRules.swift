@@ -18,6 +18,7 @@
 
 import Foundation
 
+//TODO: Need tests
 public protocol DnsProtectionUserRulesManagerProtocol {
     
     /**

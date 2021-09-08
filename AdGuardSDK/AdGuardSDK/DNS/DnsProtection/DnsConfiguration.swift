@@ -57,7 +57,9 @@ public final class DnsConfiguration: DnsConfigurationProtocol {
 }
 
 extension DnsConfigurationProtocol {
-    internal func updateConfig(with newConfig: DnsConfigurationProtocol) {
+    
+    //TODO: Need tests
+    func updateConfig(with newConfig: DnsConfigurationProtocol) {
         self.currentLanguage = newConfig.currentLanguage
         self.proStatus = newConfig.proStatus
         self.dnsFilteringIsEnabled = newConfig.dnsFilteringIsEnabled
