@@ -47,8 +47,8 @@ struct SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcessorPro
             Message.appearanceTheme: "system",
             Message.contentBlockersEnabled: true,
             Message.hasUserRules: true,
-            Message.premiumApp: true,
-            Message.protectionEnabled: true,
+            Message.premiumApp: false,
+            Message.protectionEnabled: false,
 
             Message.removeFromAllowlistLink: UserRulesRedirectAction.removeFromAllowlist(domain: "").scheme,
             Message.addToAllowlistLink: UserRulesRedirectAction.addToAllowlist(domain: "").scheme,
