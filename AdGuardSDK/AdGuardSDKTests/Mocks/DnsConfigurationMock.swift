@@ -5,7 +5,7 @@ final class DnsConfigurationMock: DnsConfigurationProtocol {
     
     var blocklistIsEnabled: Bool = false
     
-    var allowlistIsEnbaled: Bool = false
+    var allowlistIsEnabled: Bool = false
     
     var dnsFilteringIsEnabled: Bool = false
     

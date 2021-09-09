@@ -138,10 +138,10 @@ final class ExtendedTitleTableHeaderView: UIView {
         descriptionTextView.setAttributedTitle(
             descr,
             fontSize: descriptionTextView.font!.pointSize,
-            color: themeService.grayTextColor,
+            color: themeService.lightGrayTextColor,
             textAlignment: .center
         )
-        descriptionTextView.tintColor = themeService.grayTextColor
+        descriptionTextView.tintColor = UIColor.AdGuardColor.lightGreen2 //link color
     }
 }
 

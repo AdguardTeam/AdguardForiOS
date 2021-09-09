@@ -55,12 +55,12 @@ class SafariProtectionConfigurationTest: XCTestCase {
         XCTAssertFalse(safariProtection.blocklistIsEnabled)
     }
     
-    func testAllowlistIsEnbaled() {
-        configuration.allowlistIsEnbaled = true
-        XCTAssert(safariProtection.allowlistIsEnbaled)
+    func testAllowlistIsEnabled() {
+        configuration.allowlistIsEnabled = true
+        XCTAssert(safariProtection.allowlistIsEnabled)
         
-        configuration.allowlistIsEnbaled = false
-        XCTAssertFalse(safariProtection.allowlistIsEnbaled)
+        configuration.allowlistIsEnabled = false
+        XCTAssertFalse(safariProtection.allowlistIsEnabled)
     }
     
     func testAllowlistIsInverted() {
@@ -239,12 +239,12 @@ class SafariProtectionConfigurationTest: XCTestCase {
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
     }
     
-    // MARK: - updateAllowlistIsEnbaled
+    // MARK: - updateAllowlistIsEnabled
     
-    func testUpdateAllowlistIsEnbaledWithSameValue() {
+    func testUpdateAllowlistIsEnabledWithSameValue() {
         let expectation = XCTestExpectation()
-        let sameValue = configuration.allowlistIsEnbaled
-        safariProtection.update(allowlistIsEnbaled: sameValue) { error in
+        let sameValue = configuration.allowlistIsEnabled
+        safariProtection.update(allowlistIsEnabled: sameValue) { error in
             if case CommonError.dataDidNotChange = error as! CommonError {}
             else {
                 XCTFail()
@@ -254,42 +254,42 @@ class SafariProtectionConfigurationTest: XCTestCase {
         wait(for: [expectation], timeout: 0.5)
         
         let sp = safariProtection as! SafariProtection
-        XCTAssertEqual(sp.configuration.allowlistIsEnbaled, sameValue)
+        XCTAssertEqual(sp.configuration.allowlistIsEnabled, sameValue)
         XCTAssertEqual(converter.convertFiltersCalledCount, 0)
         XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 0)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
     }
     
-    func testUpdateAllowlistIsEnbaledWithDifferentValue() {
+    func testUpdateAllowlistIsEnabledWithDifferentValue() {
         let expectation = XCTestExpectation()
-        let differentValue = !configuration.allowlistIsEnbaled
-        safariProtection.update(allowlistIsEnbaled: differentValue) { error in
+        let differentValue = !configuration.allowlistIsEnabled
+        safariProtection.update(allowlistIsEnabled: differentValue) { error in
             XCTAssertNil(error)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.5)
         
         let sp = safariProtection as! SafariProtection
-        XCTAssertEqual(sp.configuration.allowlistIsEnbaled, differentValue)
+        XCTAssertEqual(sp.configuration.allowlistIsEnabled, differentValue)
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
         XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
     }
     
-    func testUpdateAllowlistIsEnbaledWithError() {
+    func testUpdateAllowlistIsEnabledWithError() {
         let expectation = XCTestExpectation()
-        let differentValue = !configuration.allowlistIsEnbaled
+        let differentValue = !configuration.allowlistIsEnabled
         
         cbService.updateContentBlockersError = MetaStorageMockError.error
         
-        safariProtection.update(allowlistIsEnbaled: differentValue) { error in
+        safariProtection.update(allowlistIsEnabled: differentValue) { error in
             XCTAssertEqual(error as! MetaStorageMockError, .error)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.5)
         
         let sp = safariProtection as! SafariProtection
-        XCTAssertEqual(sp.configuration.allowlistIsEnbaled, differentValue)
+        XCTAssertEqual(sp.configuration.allowlistIsEnabled, differentValue)
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
         XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)

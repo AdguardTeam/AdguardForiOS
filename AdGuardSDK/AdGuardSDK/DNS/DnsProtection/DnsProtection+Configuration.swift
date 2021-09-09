@@ -29,7 +29,7 @@ public protocol DnsProtectionConfigurationProtocol {
     var blocklistIsEnabled: Bool { get }
     
     /* State of the list that is responsible for the rules that cancel blocklist rules actions */
-    var allowlistIsEnbaled: Bool { get }
+    var allowlistIsEnabled: Bool { get }
     
     /* Updates pro status in configuration */
     func update(proStatus: Bool)
@@ -41,7 +41,7 @@ public protocol DnsProtectionConfigurationProtocol {
     func update(blocklistIsEnabled: Bool)
     
     /* Updates allow list state */
-    func update(allowlistIsEnbaled: Bool)
+    func update(allowlistIsEnabled: Bool)
     
     /* Updates dns implementation state*/
     func update(dnsImplementation: DnsImplementation)
@@ -60,8 +60,8 @@ extension DnsProtection {
         return workingQueue.sync { return configuration.blocklistIsEnabled }
     }
     
-    public var allowlistIsEnbaled: Bool {
-        return workingQueue.sync { return configuration.allowlistIsEnbaled }
+    public var allowlistIsEnabled: Bool {
+        return workingQueue.sync { return configuration.allowlistIsEnabled }
     }
     
     public func update(proStatus: Bool) {
@@ -82,9 +82,9 @@ extension DnsProtection {
         }
     }
     
-    public func update(allowlistIsEnbaled: Bool) {
+    public func update(allowlistIsEnabled: Bool) {
         workingQueue.sync {
-            self.configuration.allowlistIsEnbaled = allowlistIsEnbaled
+            self.configuration.allowlistIsEnabled = allowlistIsEnabled
         }
     }
     

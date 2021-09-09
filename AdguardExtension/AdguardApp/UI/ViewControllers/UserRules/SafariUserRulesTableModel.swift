@@ -42,7 +42,7 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
                 safariProtection.update(blocklistIsEnabled: newValue, onCbReloaded: nil)
             case .allowlist, .invertedAllowlist:
                 resources.safariWhitelistEnabled = newValue
-                safariProtection.update(allowlistIsEnbaled: newValue, onCbReloaded: nil)
+                safariProtection.update(allowlistIsEnabled: newValue, onCbReloaded: nil)
             }
         }
     }

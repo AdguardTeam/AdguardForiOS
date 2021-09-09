@@ -27,7 +27,7 @@ export const BlockElement = observer(() => {
     let show = true;
     let disabled = false;
 
-    if (store.protectionEnabled) {
+    if (!store.protectionEnabled) {
         show = false;
     }
 

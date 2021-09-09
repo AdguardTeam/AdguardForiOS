@@ -22,6 +22,7 @@ protocol SharedStorageUrlsProtocol {
     var sharedContainerUrl: URL { get }
     var dbFolderUrl: URL { get }
     var filtersFolderUrl: URL { get }
+    var dnsFiltersFolderUrl: URL { get }
     var cbJsonsFolderUrl: URL { get }
 }
 
@@ -31,6 +32,7 @@ struct SharedStorageUrls: SharedStorageUrlsProtocol {
     let sharedContainerUrl: URL
     let dbFolderUrl: URL
     let filtersFolderUrl: URL
+    let dnsFiltersFolderUrl: URL
     let cbJsonsFolderUrl: URL
     
     private static let sharedResourcesGroup = Bundle.main.infoDictionary!["SharedResourcesGroup"] as! String
@@ -41,6 +43,7 @@ extension SharedStorageUrls {
         self.sharedContainerUrl = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Self.sharedResourcesGroup)!
         self.dbFolderUrl = sharedContainerUrl.appendingPathComponent("db_files", isDirectory: true)
         self.filtersFolderUrl = sharedContainerUrl.appendingPathComponent("filters", isDirectory: true)
+        self.dnsFiltersFolderUrl = sharedContainerUrl.appendingPathComponent("dns_filters", isDirectory: true)
         self.cbJsonsFolderUrl = sharedContainerUrl.appendingPathComponent("cb_jsons", isDirectory: true)
     }
 }
