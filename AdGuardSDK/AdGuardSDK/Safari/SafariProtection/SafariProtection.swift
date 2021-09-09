@@ -25,7 +25,6 @@ public typealias SafariProtectionProtocol = SafariProtectionFiltersProtocol
                                             & SafariProtectionConfigurationProtocol
                                             & SafariProtectionContentBlockersProtocol
                                             & SafariProtectionBackgroundFetchProtocol
-                                            & SafariProtectionUserRulesClipperProtocol
                                             & ResetableAsyncProtocol
     
 public final class SafariProtection: SafariProtectionProtocol {
