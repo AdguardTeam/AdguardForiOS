@@ -17,6 +17,7 @@
  */
 
 import SafariAdGuardSDK
+import DnsAdGuardSDK
 import Sentry
 
 @UIApplicationMain
@@ -50,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //MARK: - Services
     private var resources: AESharedResourcesProtocol
     private var safariProtection: SafariProtectionProtocol
+    private var dnsProtection: DnsProtectionProtocol
     private var purchaseService: PurchaseServiceProtocol
     private var dnsFiltersService: DnsFiltersServiceProtocol
     private var networking: ACNNetworking
@@ -79,6 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.complexProtection = ServiceLocator.shared.getService()!
         self.themeService = ServiceLocator.shared.getService()!
         self.safariProtection = ServiceLocator.shared.getService()!
+        self.dnsProtection = ServiceLocator.shared.getService()!
         
         self.statusBarWindow = StatusBarWindow(configuration: configuration)
         super.init()
@@ -140,6 +143,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         DDLogInfo("(AppDelegate) applicationWillEnterForeground.")
         configuration.checkContentBlockerEnabled()
+        let safariConfig = Bundle.main.createSafariSDKConfig(proStatus: purchaseService.isProPurchased, resources: resources)
+        let dnsConfig = Bundle.main.createDnsSDKConfig(proStatus: purchaseService.isProPurchased, resources: resources)
+        safariProtection.updateConfig(with: safariConfig)
+        dnsProtection.updateConfig(with: dnsConfig)
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {

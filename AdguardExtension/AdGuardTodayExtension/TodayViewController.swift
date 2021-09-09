@@ -18,7 +18,6 @@
 
 import UIKit
 import NotificationCenter
-import NetworkExtension
 import SafariAdGuardSDK
 import DnsAdGuardSDK
 
@@ -59,14 +58,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var complexStatisticsLabel: UILabel!
     
     
-    private let resources: AESharedResources = AESharedResources()
+    private let resources: AESharedResourcesProtocol = AESharedResources()
     private var safariProtection: SafariProtectionProtocol
     private var complexProtection: ComplexProtectionServiceProtocol
-    private let networkService = ACNNetworking()
+    private let networkService: ACNNetworkingProtocol
     private var purchaseService: PurchaseServiceProtocol
     private let dnsProvidersService: DnsProvidersServiceProtocol
     private let productInfo: ADProductInfoProtocol
-    private let dnsLogStatistics: DnsLogStatisticsProtocol?
+    private let activityStatistics: ActivityStatisticsProtocol
     
     private var prevRequestNumber = 0
     private var requestNumber = 0
@@ -92,49 +91,15 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         DDLogInfo("(TodayViewController) - init start")
         ACLLogger.singleton()?.flush()
         
-        productInfo = ADProductInfo()
-        
-        let appBundleId = Bundle.main.bundleIdentifier ?? ""
-        let appProductVersion = productInfo.version() ?? ""
-        let currentLanguage = "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")"
-        let appId = Bundle.main.isPro ? "ios_pro" : "ios" //TODO: Check it
-        let cid = UIDevice.current.identifierForVendor?.uuidString ?? ""
-        
-        let sharedStorageUrls = SharedStorageUrls()
-        let dbFileUrl = sharedStorageUrls.dbFolderUrl
-        
-        dnsLogStatistics = try? DnsLogStatistics(statisticsDbContainerUrl: dbFileUrl)
-        
-        purchaseService = PurchaseService(network: networkService, resources: resources, productInfo: productInfo)
-        
-        let configuration = SafariConfiguration(
-            iosVersion: UIDevice.current.iosVersion,
-            currentLanguage: currentLanguage,
-            proStatus: purchaseService.isProPurchased,
-            safariProtectionEnabled: resources.safariProtectionEnabled,
-            advancedBlockingIsEnabled: true, // TODO: - Don't forget to change
-            blocklistIsEnabled: resources.safariUserFilterEnabled,
-            allowlistIsEnabled: resources.safariWhitelistEnabled,
-            allowlistIsInverted: resources.invertedWhitelist,
-            appBundleId: appBundleId,
-            appProductVersion: appProductVersion,
-            appId: appId,
-            cid: cid)
-        
-        safariProtection = try! SafariProtection(configuration: configuration,
-                                                 defaultConfiguration: configuration,
-                                                 filterFilesDirectoryUrl: sharedStorageUrls.filtersFolderUrl,
-                                                 dbContainerUrl: sharedStorageUrls.dbFolderUrl,
-                                                 jsonStorageUrl: sharedStorageUrls.cbJsonsFolderUrl,
-                                                 userDefaults: resources.sharedDefaults())
-        
-        let oldConfiguration = ConfigurationService(purchaseService: purchaseService, resources: resources, safariProtection: safariProtection)
-        dnsProvidersService = DnsProvidersService(resources: resources)
-        let vpnManager = VpnManager(resources: resources, configuration: oldConfiguration, networkSettings: NetworkSettingsService(resources: resources), dnsProviders: dnsProvidersService as! DnsProvidersService)
-        
-        let networkSettings = NetworkSettingsService(resources: resources)
-        let nativeProviders = NativeProvidersService(dnsProvidersService: dnsProvidersService, networkSettingsService: networkSettings, resources: resources, configuration: oldConfiguration)
-        complexProtection = ComplexProtectionService(resources: resources, configuration: oldConfiguration, vpnManager: vpnManager, productInfo: productInfo, nativeProvidersService: nativeProviders, safariProtection: safariProtection)
+        // Services initialising
+        let initialiser = ServiceInitialiser(resources: resources)
+        self.safariProtection = initialiser.safariProtection
+        self.complexProtection = initialiser.complexProtection
+        self.networkService = initialiser.networkService
+        self.purchaseService = initialiser.purchaseService
+        self.dnsProvidersService = initialiser.dnsProvidersService
+        self.productInfo = initialiser.productInfo
+        self.activityStatistics = initialiser.activityStatistics
         
         super.init(coder: coder)
         
@@ -152,7 +117,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         extensionContext?.widgetLargestAvailableDisplayMode = .expanded
         
-        initTimer(timeInterval: 0.5)
+        initTimer(timeInterval: 1.0)
     }
         
     // MARK: - NCWidgetProviding methods
@@ -254,12 +219,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             self.changeTextForButton()
 
             guard self.prevRequestNumber < self.requestNumber else { return }
-            var timeInterval: TimeInterval = 0.5
+            var timeInterval: TimeInterval = 0.0
             
             if self.requestNumber >= 10000 {
                 timeInterval = 60.0
             } else if self.requestNumber >= 100 {
                 timeInterval = 2.0
+            } else {
+                timeInterval = 1.0
             }
             
             self.timer?.invalidate()
@@ -419,17 +386,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     private func changeTextForButton(){
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
-            let records = try? self.dnsLogStatistics?.getDnsLogRecords()
+            let statisticRecord = try? self.activityStatistics.getCounters(for: .all)
             
-            let requests = records?.count ?? 0
-            
-            let encrypted = records?.reduce(0) { partialResult, record in
-                record.isEncrypted ? partialResult + 1 : partialResult
-            } ?? 0
-            
-            let elapsedSumm = records?.reduce(0) { partialResult, record in
-                partialResult + record.elapsed
-            } ?? 0
+            let requests = statisticRecord?.requests ?? 0
+            let encrypted = statisticRecord?.encrypted ?? 0
+            let elapsedSumm = statisticRecord?.elapsedSumm ?? 0
             
             let requestsNumber = self.resources.tempRequestsCount + requests
             self.requestsLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsNumber))

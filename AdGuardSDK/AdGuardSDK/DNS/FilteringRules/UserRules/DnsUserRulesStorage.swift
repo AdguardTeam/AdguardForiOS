@@ -60,7 +60,7 @@ final class DnsUserRulesStorage: UserRulesStorageProtocol {
         guard let rules = fileStorage.getFilterContentForFilter(withId: type.allRulesFilterId) else {
             return []
         }
-        return rules.components(separatedBy: .newlines)
+        return rules.isEmpty ? [] : rules.components(separatedBy: .newlines)
     }
     
     private func saveAllRules(_ rules: [String]) {

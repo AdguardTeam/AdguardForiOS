@@ -50,6 +50,10 @@ public protocol SafariProtectionConfigurationProtocol {
     
     /* Updates state of allowlist invertion and reloads content blockers */
     func update(allowlistIsInverted: Bool, onCbReloaded: ((_ error: Error?) -> Void)?)
+    
+    //TODO: Need tests
+    /* Update configuration with new one */
+    func updateConfig(with newConfig: SafariConfigurationProtocol)
 }
 
 /* Extension is used to properly process all configuration changes */
@@ -207,6 +211,13 @@ extension SafariProtection {
                 }
                 self.completionQueue.async { onCbReloaded?(error) }
             }
+        }
+    }
+    
+    public func updateConfig(with newConfig: SafariConfigurationProtocol) {
+        workingQueue.sync {
+            Logger.logInfo("(SafariProtection+Configuration) - updateConfig;")
+            configuration.updateConfig(with: newConfig)
         }
     }
 }
