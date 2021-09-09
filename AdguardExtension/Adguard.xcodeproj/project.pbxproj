@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		24037B0625874F7000C4F195 /* DNSSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24037B0525874F7000C4F195 /* DNSSettings.swift */; };
 		24037B0725874F7000C4F195 /* DNSSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24037B0525874F7000C4F195 /* DNSSettings.swift */; };
+		24055F6426E8FBBD00E6E47E /* SharedStorageUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B1A126C4334D00B0CE7B /* SharedStorageUrls.swift */; };
+		24055F6526E8FBBE00E6E47E /* SharedStorageUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B1A126C4334D00B0CE7B /* SharedStorageUrls.swift */; };
 		240E4D7D26203E94007E8C66 /* ActionWebReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245464BE261F5F4100A96613 /* ActionWebReporter.swift */; };
 		240E4D8F26203EA0007E8C66 /* ActionWebReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245464BE261F5F4100A96613 /* ActionWebReporter.swift */; };
 		240E4DA126203EA1007E8C66 /* ActionWebReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245464BE261F5F4100A96613 /* ActionWebReporter.swift */; };
@@ -9367,6 +9369,7 @@
 				7ECD9C44238D65960065E88D /* DDLog.m in Sources */,
 				D0450F81263C2A1400CA2110 /* NSString+Utils.m in Sources */,
 				7EC635B3239EB177003A5CE4 /* Date+Utils.swift in Sources */,
+				24055F6426E8FBBD00E6E47E /* SharedStorageUrls.swift in Sources */,
 				2425D728258F8D1A0037AEBE /* CharacterSet+Utils.swift in Sources */,
 				7E9A487B23A2810B00B89540 /* DnsLogRecord.swift in Sources */,
 				D0D7E5A9243C9592001801A5 /* ACSSystemUtils.m in Sources */,
@@ -10200,6 +10203,7 @@
 				D0D7E5FD24444F89001801A5 /* Constant.swift in Sources */,
 				7EC67FEF254843F900FEEEE2 /* DnsImplementation.swift in Sources */,
 				D07256E826BD556A00654177 /* ContentBlockerRequestHandler.swift in Sources */,
+				24055F6526E8FBBE00E6E47E /* SharedStorageUrls.swift in Sources */,
 				D0D7E5FA24444F08001801A5 /* RuleLabel.swift in Sources */,
 				7EF5C55526C2638B001851D6 /* SharedResources+applicationResources.swift in Sources */,
 				D0B544042435C6B8002F0AEC /* DDFileLogger.m in Sources */,

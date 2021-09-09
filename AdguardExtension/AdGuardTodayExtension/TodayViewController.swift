@@ -20,6 +20,7 @@ import UIKit
 import NotificationCenter
 import NetworkExtension
 import SafariAdGuardSDK
+import DnsAdGuardSDK
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     
@@ -65,9 +66,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     private var purchaseService: PurchaseServiceProtocol
     private let dnsProvidersService: DnsProvidersServiceProtocol
     private let productInfo: ADProductInfoProtocol
+    private let dnsLogStatistics: DnsLogStatisticsProtocol?
     
+    private var prevRequestNumber = 0
     private var requestNumber = 0
     private var encryptedNumber = 0
+    
+    private var timer: Timer?
     
     // MARK: View Controller lifecycle
     
@@ -87,12 +92,42 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         DDLogInfo("(TodayViewController) - init start")
         ACLLogger.singleton()?.flush()
         
-        // todo:
-        let configuration = SafariConfiguration(iosVersion: UIDevice.current.iosVersion, currentLanguage: "", proStatus: true, safariProtectionEnabled: true, advancedBlockingIsEnabled: true, blocklistIsEnabled: true, allowlistIsEnabled: true, allowlistIsInverted: true, appBundleId: "", appProductVersion: "", appId: "", cid: "")
-        safariProtection = try! SafariProtection(configuration: configuration, defaultConfiguration: configuration, filterFilesDirectoryUrl: URL(string: "")!, dbContainerUrl: URL(string: "")!, jsonStorageUrl: URL(string: "")!, userDefaults: UserDefaults(suiteName: "")!)
-        
         productInfo = ADProductInfo()
+        
+        let appBundleId = Bundle.main.bundleIdentifier ?? ""
+        let appProductVersion = productInfo.version() ?? ""
+        let currentLanguage = "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")"
+        let appId = Bundle.main.isPro ? "ios_pro" : "ios" //TODO: Check it
+        let cid = UIDevice.current.identifierForVendor?.uuidString ?? ""
+        
+        let sharedStorageUrls = SharedStorageUrls()
+        let dbFileUrl = sharedStorageUrls.dbFolderUrl
+        
+        dnsLogStatistics = try? DnsLogStatistics(statisticsDbContainerUrl: dbFileUrl)
+        
         purchaseService = PurchaseService(network: networkService, resources: resources, productInfo: productInfo)
+        
+        let configuration = SafariConfiguration(
+            iosVersion: UIDevice.current.iosVersion,
+            currentLanguage: currentLanguage,
+            proStatus: purchaseService.isProPurchased,
+            safariProtectionEnabled: resources.safariProtectionEnabled,
+            advancedBlockingIsEnabled: true, // TODO: - Don't forget to change
+            blocklistIsEnabled: resources.safariUserFilterEnabled,
+            allowlistIsEnabled: resources.safariWhitelistEnabled,
+            allowlistIsInverted: resources.invertedWhitelist,
+            appBundleId: appBundleId,
+            appProductVersion: appProductVersion,
+            appId: appId,
+            cid: cid)
+        
+        safariProtection = try! SafariProtection(configuration: configuration,
+                                                 defaultConfiguration: configuration,
+                                                 filterFilesDirectoryUrl: sharedStorageUrls.filtersFolderUrl,
+                                                 dbContainerUrl: sharedStorageUrls.dbFolderUrl,
+                                                 jsonStorageUrl: sharedStorageUrls.cbJsonsFolderUrl,
+                                                 userDefaults: resources.sharedDefaults())
+        
         let oldConfiguration = ConfigurationService(purchaseService: purchaseService, resources: resources, safariProtection: safariProtection)
         dnsProvidersService = DnsProvidersService(resources: resources)
         let vpnManager = VpnManager(resources: resources, configuration: oldConfiguration, networkSettings: NetworkSettingsService(resources: resources), dnsProviders: dnsProvidersService as! DnsProvidersService)
@@ -117,19 +152,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         extensionContext?.widgetLargestAvailableDisplayMode = .expanded
         
-        // TODO: - Refactor it
-        changeTextForButton()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        DDLogInfo("(TodayViewController) - viewWillAppear")
-        super.viewWillAppear(animated)
-        addStatisticsObservers()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        removeStatisticsObservers()
+        initTimer(timeInterval: 0.5)
     }
         
     // MARK: - NCWidgetProviding methods
@@ -217,6 +240,31 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             })
         } else {
             DDLogError("Error redirecting to app from Today Extension")
+        }
+    }
+    
+    private func initTimer(timeInterval: TimeInterval) {
+        timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) { [weak self] _ in
+            guard let self = self else {
+                self?.timer?.invalidate()
+                self?.timer = nil
+                return
+            }
+            
+            self.changeTextForButton()
+
+            guard self.prevRequestNumber < self.requestNumber else { return }
+            var timeInterval: TimeInterval = 0.5
+            
+            if self.requestNumber >= 10000 {
+                timeInterval = 60.0
+            } else if self.requestNumber >= 100 {
+                timeInterval = 2.0
+            }
+            
+            self.timer?.invalidate()
+            self.timer = nil
+            self.initTimer(timeInterval: timeInterval)
         }
     }
     
@@ -371,13 +419,21 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     private func changeTextForButton(){
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
+            let records = try? self.dnsLogStatistics?.getDnsLogRecords()
             
-            let requests = 0
-            let encrypted = 0
-            let elapsedSumm = 0
+            let requests = records?.count ?? 0
+            
+            let encrypted = records?.reduce(0) { partialResult, record in
+                record.isEncrypted ? partialResult + 1 : partialResult
+            } ?? 0
+            
+            let elapsedSumm = records?.reduce(0) { partialResult, record in
+                partialResult + record.elapsed
+            } ?? 0
             
             let requestsNumber = self.resources.tempRequestsCount + requests
             self.requestsLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsNumber))
+            self.prevRequestNumber = self.requestNumber
             self.requestNumber = requestsNumber
             
             let encryptedNumber = self.resources.tempEncryptedRequestsCount + encrypted
@@ -387,17 +443,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             let averageElapsed = requests == 0 ? 0 : Double(elapsedSumm) / Double(requests)
             self.elapsedLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: averageElapsed))
         }
-    }
-    
-    private func addStatisticsObservers() {
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequests, options: .new, context: nil)
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsEncryptedRequests, options: .new, context: nil)
-        resources.sharedDefaults().addObserver(self, forKeyPath: LastStatisticsSaveTime, options: .new, context: nil)
-    }
-    
-    private func removeStatisticsObservers() {
-        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsRequests, context: nil)
-        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsEncryptedRequests, context: nil)
     }
 }
 
