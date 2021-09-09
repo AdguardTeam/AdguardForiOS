@@ -36,7 +36,7 @@ class ContentBlockerRequestHandler: NSObject, NSExtensionRequestHandling {
             return
         }
         
-        let url: URL
+        let url: URL?
         
         do {
             let jsonProvider = try ContentBlockerJsonProvider(
@@ -45,14 +45,14 @@ class ContentBlockerRequestHandler: NSObject, NSExtensionRequestHandling {
                 jsonStorageUrl: resources.sharedResuorcesURL(),
                 userDefaults: resources.sharedDefaults()
             )
-            url = try jsonProvider.getJsonUrl(resources.safariProtectionEnabled)
+            url = jsonProvider.jsonUrl
         } catch {
             DDLogError("ActionRequestHandler error getting JSON URL; Error: \(error)")
             context.completeRequest(returningItems: nil, completionHandler: nil)
             return
         }
         
-        guard let attachment = NSItemProvider(contentsOf: url) else {
+        guard let url = url, let attachment = NSItemProvider(contentsOf: url) else {
             DDLogError("ActionRequestHandler Can't init attachment")
             context.completeRequest(returningItems: nil, completionHandler: nil)
             return

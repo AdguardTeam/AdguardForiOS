@@ -28,7 +28,8 @@ class SafariProtectionFiltersTest: XCTestCase {
                                             converter: converter,
                                             cbStorage: cbStorage,
                                             cbService: cbService,
-                                            safariManagers: safariManagers)
+                                            safariManagers: safariManagers,
+                                            userRulesClipper: UserRulesClipperMock())
     }
     
     
@@ -56,7 +57,7 @@ class SafariProtectionFiltersTest: XCTestCase {
         
         XCTAssertEqual(filters.setGroupCalledCount, 1)
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 1)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
     }
     
@@ -80,7 +81,7 @@ class SafariProtectionFiltersTest: XCTestCase {
         
         XCTAssertEqual(filters.setGroupCalledCount, 1)
         XCTAssertEqual(converter.convertFiltersCalledCount, 0)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 0)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 0)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
     }
     
@@ -97,7 +98,7 @@ class SafariProtectionFiltersTest: XCTestCase {
         
         XCTAssertEqual(filters.setFilterCalledCount, 1)
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 1)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
     }
     
@@ -120,7 +121,7 @@ class SafariProtectionFiltersTest: XCTestCase {
         
         XCTAssertEqual(filters.setFilterCalledCount, 1)
         XCTAssertEqual(converter.convertFiltersCalledCount, 0)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 0)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 0)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
     }
     
@@ -152,7 +153,7 @@ class SafariProtectionFiltersTest: XCTestCase {
         
         XCTAssertEqual(filters.addCustomFilterCalledCount, 1)
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 1)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
     }
     
@@ -181,7 +182,7 @@ class SafariProtectionFiltersTest: XCTestCase {
         
         XCTAssertEqual(filters.addCustomFilterCalledCount, 1)
         XCTAssertEqual(converter.convertFiltersCalledCount, 0)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 0)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 0)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
     }
     
@@ -198,7 +199,7 @@ class SafariProtectionFiltersTest: XCTestCase {
         
         XCTAssertEqual(filters.deleteCustomFilterCalledCount, 1)
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 1)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
     }
     
@@ -220,7 +221,7 @@ class SafariProtectionFiltersTest: XCTestCase {
         
         XCTAssertEqual(filters.deleteCustomFilterCalledCount, 1)
         XCTAssertEqual(converter.convertFiltersCalledCount, 0)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 0)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 0)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
     }
     
@@ -231,7 +232,7 @@ class SafariProtectionFiltersTest: XCTestCase {
         
         XCTAssertEqual(filters.renameCustomFilterCalledCount, 1)
         XCTAssertEqual(converter.convertFiltersCalledCount, 0)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 0)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 0)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
     }
     
@@ -243,50 +244,54 @@ class SafariProtectionFiltersTest: XCTestCase {
         
         XCTAssertEqual(filters.renameCustomFilterCalledCount, 1)
         XCTAssertEqual(converter.convertFiltersCalledCount, 0)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 0)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 0)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
     }
     
     // MARK: - Test updateFiltersMetaAndLocalizations
     
     func testUpdateFiltersMetaAndLocalizationsWithUpdateAllMetaAndReloadCbSuccess() {
-        let expectation = XCTestExpectation()
+        let expectation1 = XCTestExpectation()
+        let expectation2 = XCTestExpectation()
         safariProtection.updateFiltersMetaAndLocalizations(true) { result in
             switch result {
             case .success(_): break
             case .error(_): XCTFail()
             }
-            expectation.fulfill()
+            expectation1.fulfill()
         } onCbReloaded: { error in
-            
+            XCTAssertNil(error)
+            expectation2.fulfill()
         }
-        wait(for: [expectation], timeout: 0.5)
+        wait(for: [expectation1, expectation2], timeout: 0.5)
         
         XCTAssertEqual(filters.updateAllMetaCalledCount, 1)
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 1)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
     }
     
     func testUpdateFiltersMetaAndLocalizationsWithUpdateAllMetaFailureAndReloadCbSuccess() {
         filters.updateAllMetaResult = .error(MetaStorageMockError.error)
     
-        let expectation = XCTestExpectation()
+        let expectation1 = XCTestExpectation()
+        let expectation2 = XCTestExpectation()
         safariProtection.updateFiltersMetaAndLocalizations(true) { result in
             switch result {
             case .success(_): XCTFail()
             case .error(let error):
                 XCTAssertEqual(error as! MetaStorageMockError, .error)
             }
-            expectation.fulfill()
+            expectation1.fulfill()
         } onCbReloaded: { error in
-            
+            XCTAssertNil(error)
+            expectation2.fulfill()
         }
-        wait(for: [expectation], timeout: 0.5)
+        wait(for: [expectation1, expectation2], timeout: 0.5)
         
         XCTAssertEqual(filters.updateAllMetaCalledCount, 1)
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 1)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
     }
     
@@ -308,7 +313,7 @@ class SafariProtectionFiltersTest: XCTestCase {
         
         XCTAssertEqual(filters.updateAllMetaCalledCount, 1)
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 1)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
     }
     
@@ -316,22 +321,24 @@ class SafariProtectionFiltersTest: XCTestCase {
         filters.updateAllMetaResult = .error(MetaStorageMockError.setGroupError)
         cbService.updateContentBlockersError = MetaStorageMockError.error
         
-        let expectation = XCTestExpectation()
+        let expectation1 = XCTestExpectation()
+        let expectation2 = XCTestExpectation()
         safariProtection.updateFiltersMetaAndLocalizations(true) { result in
             switch result {
             case .success(_): XCTFail()
             case .error(let error):
                 XCTAssertEqual(error as! MetaStorageMockError, .setGroupError)
             }
-            expectation.fulfill()
+            expectation1.fulfill()
         } onCbReloaded: { error in
             XCTAssertEqual(error as! MetaStorageMockError, .error)
+            expectation2.fulfill()
         }
-        wait(for: [expectation], timeout: 0.5)
+        wait(for: [expectation1, expectation2], timeout: 0.5)
         
         XCTAssertEqual(filters.updateAllMetaCalledCount, 1)
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 1)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
     }
 }

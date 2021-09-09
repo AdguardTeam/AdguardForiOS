@@ -6,12 +6,14 @@ public protocol ContentBlockerJsonProviderProtocol {
      - Parameter safariProtectionIsEnabled: Current state of Safari protection
      - throws: Can throw an error if error occured while getting JSON file
      */
-    func getJsonUrl(_ safariProtectionIsEnabled: Bool) throws -> URL
+    var jsonUrl: URL? { get }
 }
 
 
 /// This class should be used in Content Blocker's extensions to get appropriate JSON
 public final class ContentBlockerJsonProvider: ContentBlockerJsonProviderProtocol {
+    
+    public var jsonUrl: URL? { jsonStorage.getConverterResult(for: type)?.jsonUrl }
     
     private let jsonStorage: ContentBlockersInfoStorageProtocol
     private let type: ContentBlockerType
@@ -26,18 +28,6 @@ public final class ContentBlockerJsonProvider: ContentBlockerJsonProviderProtoco
     init(jsonStorage: ContentBlockersInfoStorageProtocol, type: ContentBlockerType) {
         self.jsonStorage = jsonStorage
         self.type = type
-    }
-    
-    public func getJsonUrl(_ safariProtectionIsEnabled: Bool) throws -> URL {
-        let emptyJsonUrl = try jsonStorage.getEmptyRuleJsonUrl()
-        
-        guard safariProtectionIsEnabled else {
-            Logger.logInfo("(ContentBlockerJsonProvider) - getJsonUrl; Safari protection is disabled")
-            return emptyJsonUrl
-        }
-        
-        let cbInfo = jsonStorage.getInfo(for: type)
-        return cbInfo?.jsonUrl ?? emptyJsonUrl
     }
     
     private static func typeForBundleId(_ cbBundleId: String, mainAppBundleId: String)->ContentBlockerType {

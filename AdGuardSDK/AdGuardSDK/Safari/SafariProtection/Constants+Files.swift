@@ -23,5 +23,6 @@ public extension Constants {
         public static let defaultDbFileName = "default.db"
         public static let defaultDbZipFileName = "default.db.zip"
         public static let filtersZipFileName = "filters.zip"
+        public static let advancedRulesFileName = "advanced_rules.txt"
     }
 }

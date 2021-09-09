@@ -147,8 +147,8 @@ extension SafariProtection {
         
         return workingQueue.sync {
             do {
-                let convertedfilters = try converter.convertFiltersAndUserRulesToJsons()
-                try cbStorage.save(cbInfos: convertedfilters)
+                let convertedfilters = converter.convertFiltersAndUserRulesToJsons()
+                try cbStorage.save(converterResults: convertedfilters)
                 currentBackgroundFetchState = .reloadContentBlockers
                 Logger.logInfo("(SafariProtection+BackgroundFetch) - convertFiltersInBackground; background=\(background); Successfully converted all filters to JSONs")
                 return (.newData, nil)
