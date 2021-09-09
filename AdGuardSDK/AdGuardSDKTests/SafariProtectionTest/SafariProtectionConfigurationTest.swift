@@ -28,7 +28,8 @@ class SafariProtectionConfigurationTest: XCTestCase {
                                             converter: converter,
                                             cbStorage: cbStorage,
                                             cbService: cbService,
-                                            safariManagers: safariManagers)
+                                            safariManagers: safariManagers,
+                                            userRulesClipper: UserRulesClipperMock())
     }
     
     func testProStatus() {
@@ -88,7 +89,7 @@ class SafariProtectionConfigurationTest: XCTestCase {
         let sp = safariProtection as! SafariProtection
         XCTAssertEqual(sp.configuration.proStatus, sameValue)
         XCTAssertEqual(converter.convertFiltersCalledCount, 0)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 0)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 0)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
     }
     
@@ -104,27 +105,8 @@ class SafariProtectionConfigurationTest: XCTestCase {
         let sp = safariProtection as! SafariProtection
         XCTAssertEqual(sp.configuration.proStatus, differentValue)
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 1)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
-    }
-    
-    func testUpdateProStatusWithError() {
-        let expectation = XCTestExpectation()
-        let differentValue = !configuration.safariProtectionEnabled
-        
-        converter.convertFiltersResult = .error(MetaStorageMockError.error)
-        
-        safariProtection.update(safariProtectionEnabled: differentValue) { error in
-            XCTAssertEqual(error as! MetaStorageMockError, .error)
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 0.5)
-        
-        let sp = safariProtection as! SafariProtection
-        XCTAssertEqual(sp.configuration.safariProtectionEnabled, differentValue)
-        XCTAssertEqual(converter.convertFiltersCalledCount, 1)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 0)
-        XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
     }
     
     // MARK: - Test updateSafariProtectionEnabled
@@ -144,7 +126,7 @@ class SafariProtectionConfigurationTest: XCTestCase {
         let sp = safariProtection as! SafariProtection
         XCTAssertEqual(sp.configuration.safariProtectionEnabled, sameValue)
         XCTAssertEqual(converter.convertFiltersCalledCount, 0)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 0)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 0)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
     }
     
@@ -160,7 +142,7 @@ class SafariProtectionConfigurationTest: XCTestCase {
         let sp = safariProtection as! SafariProtection
         XCTAssertEqual(sp.configuration.safariProtectionEnabled, differentValue)
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 1)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
     }
     
@@ -168,7 +150,7 @@ class SafariProtectionConfigurationTest: XCTestCase {
         let expectation = XCTestExpectation()
         let differentValue = !configuration.safariProtectionEnabled
         
-        cbStorage.saveCbInfosError = MetaStorageMockError.error
+        cbStorage.stubbedSaveError = MetaStorageMockError.error
         
         safariProtection.update(safariProtectionEnabled: differentValue) { error in
             XCTAssertEqual(error as! MetaStorageMockError, .error)
@@ -179,7 +161,7 @@ class SafariProtectionConfigurationTest: XCTestCase {
         let sp = safariProtection as! SafariProtection
         XCTAssertEqual(sp.configuration.safariProtectionEnabled, differentValue)
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 1)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
     }
     
@@ -200,7 +182,7 @@ class SafariProtectionConfigurationTest: XCTestCase {
         let sp = safariProtection as! SafariProtection
         XCTAssertEqual(sp.configuration.blocklistIsEnabled, sameValue)
         XCTAssertEqual(converter.convertFiltersCalledCount, 0)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 0)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 0)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
     }
     
@@ -216,7 +198,7 @@ class SafariProtectionConfigurationTest: XCTestCase {
         let sp = safariProtection as! SafariProtection
         XCTAssertEqual(sp.configuration.blocklistIsEnabled, differentValue)
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 1)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
     }
     
@@ -224,7 +206,7 @@ class SafariProtectionConfigurationTest: XCTestCase {
         let expectation = XCTestExpectation()
         let differentValue = !configuration.blocklistIsEnabled
         
-        cbStorage.saveCbInfosError = MetaStorageMockError.error
+        cbStorage.stubbedSaveError = MetaStorageMockError.error
         
         safariProtection.update(blocklistIsEnabled: differentValue) { error in
             XCTAssertEqual(error as! MetaStorageMockError, .error)
@@ -235,7 +217,7 @@ class SafariProtectionConfigurationTest: XCTestCase {
         let sp = safariProtection as! SafariProtection
         XCTAssertEqual(sp.configuration.blocklistIsEnabled, differentValue)
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 1)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
     }
     
@@ -256,7 +238,7 @@ class SafariProtectionConfigurationTest: XCTestCase {
         let sp = safariProtection as! SafariProtection
         XCTAssertEqual(sp.configuration.allowlistIsEnabled, sameValue)
         XCTAssertEqual(converter.convertFiltersCalledCount, 0)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 0)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 0)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
     }
     
@@ -272,7 +254,7 @@ class SafariProtectionConfigurationTest: XCTestCase {
         let sp = safariProtection as! SafariProtection
         XCTAssertEqual(sp.configuration.allowlistIsEnabled, differentValue)
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 1)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
     }
     
@@ -291,7 +273,7 @@ class SafariProtectionConfigurationTest: XCTestCase {
         let sp = safariProtection as! SafariProtection
         XCTAssertEqual(sp.configuration.allowlistIsEnabled, differentValue)
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 1)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
     }
     
@@ -312,7 +294,7 @@ class SafariProtectionConfigurationTest: XCTestCase {
         let sp = safariProtection as! SafariProtection
         XCTAssertEqual(sp.configuration.allowlistIsInverted, sameValue)
         XCTAssertEqual(converter.convertFiltersCalledCount, 0)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 0)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 0)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
     }
     
@@ -328,7 +310,7 @@ class SafariProtectionConfigurationTest: XCTestCase {
         let sp = safariProtection as! SafariProtection
         XCTAssertEqual(sp.configuration.allowlistIsInverted, differentValue)
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 1)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
     }
     
@@ -347,7 +329,7 @@ class SafariProtectionConfigurationTest: XCTestCase {
         let sp = safariProtection as! SafariProtection
         XCTAssertEqual(sp.configuration.allowlistIsInverted, differentValue)
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 1)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
     }
 }

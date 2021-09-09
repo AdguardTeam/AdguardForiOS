@@ -29,7 +29,8 @@ class SafariProtectionUserRulesTest: XCTestCase {
                                             converter: converter,
                                             cbStorage: cbStorage,
                                             cbService: cbService,
-                                            safariManagers: safariManagers)
+                                            safariManagers: safariManagers,
+                                            userRulesClipper: UserRulesClipperMock())
         
         mocks = [safariManagers.blocklistRulesManagerMock,
                  safariManagers.allowlistRulesManagerMock,
@@ -291,7 +292,7 @@ class SafariProtectionUserRulesTest: XCTestCase {
     
     private func testMethodWithSuccess(methodToTest: Method) {
         converter.convertFiltersCalledCount = 0
-        cbStorage.saveCbInfosCalledCount = 0
+        cbStorage.invokedSaveCount = 0
         cbService.updateContentBlockersCalledCount = 0
         
         let expectation = XCTestExpectation()
@@ -302,13 +303,13 @@ class SafariProtectionUserRulesTest: XCTestCase {
         wait(for: [expectation], timeout: 0.5)
         
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 1)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
     }
     
     private func testMethodWithError(methodToTest: Method) {
         converter.convertFiltersCalledCount = 0
-        cbStorage.saveCbInfosCalledCount = 0
+        cbStorage.invokedSaveCount = 0
         cbService.updateContentBlockersCalledCount = 0
         
         let expectation = XCTestExpectation()
@@ -327,13 +328,13 @@ class SafariProtectionUserRulesTest: XCTestCase {
         wait(for: [expectation], timeout: 0.5)
         
         XCTAssertEqual(converter.convertFiltersCalledCount, 0)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 0)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 0)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
     }
     
     private func testMethodWithCbReloadError(methodToTest: Method) {
         converter.convertFiltersCalledCount = 0
-        cbStorage.saveCbInfosCalledCount = 0
+        cbStorage.invokedSaveCount = 0
         cbService.updateContentBlockersCalledCount = 0
         
         cbService.updateContentBlockersError = MetaStorageMockError.error
@@ -352,7 +353,7 @@ class SafariProtectionUserRulesTest: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
         
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
-        XCTAssertEqual(cbStorage.saveCbInfosCalledCount, 1)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
         
         cbService.updateContentBlockersError = nil

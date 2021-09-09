@@ -80,12 +80,12 @@ class SupportService: SupportServiceProtocol {
         try? fileManager.createDirectory(atPath: targetsUrlString, withIntermediateDirectories: true, attributes: nil)
         
         /// Get jsons for content blockers and append them to base directory
-        let contentBlockingInfo = safariProtection.allContentBlockersInfo
-        contentBlockingInfo.forEach { (_, cbInfo) in
-            // todo: copy file
+//        let contentBlockingInfo = safariProtection.allContentBlockersInfo
+//        contentBlockingInfo.forEach { (_, cbInfo) in
+//            // todo: copy file
 //            let fileUrl = URL(fileURLWithPath: cbUrlString + fileName)
 //            try? jsonData.write(to: fileUrl)
-        }
+//        }
         
         /// Get application state info and save it as state.txt to base directory
         let appStateData = createApplicationStateInfo().data(using: .utf8)

@@ -3,12 +3,9 @@ import Foundation
 final class FiltersConverterServiceMock: FiltersConverterServiceProtocol {
     
     var convertFiltersCalledCount = 0
-    var convertFiltersResult: Result<[FiltersConverter.Result]> = .success([])
-    func convertFiltersAndUserRulesToJsons() throws -> [FiltersConverter.Result] {
+    var convertFiltersResult: [FiltersConverterResult] = []
+    func convertFiltersAndUserRulesToJsons() -> [FiltersConverterResult] {
         convertFiltersCalledCount += 1
-        switch convertFiltersResult {
-        case .success(let result): return result
-        case .error(let error): throw error
-        }
+        return convertFiltersResult
     }
 }

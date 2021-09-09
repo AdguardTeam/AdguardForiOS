@@ -17,29 +17,18 @@
  */
 
 import Foundation
+@_implementationOnly import ContentBlockerConverter
 
 protocol FiltersConverterServiceProtocol {
     /* Converts enabled filters and user rules to jsons objects for every content blocker */
-    func convertFiltersAndUserRulesToJsons() throws -> [FiltersConverter.Result]
+    func convertFiltersAndUserRulesToJsons() -> [FiltersConverterResult]
 }
 
 /**
  This class is responsible for converting all enabled filters and user rules (blocklist / allowlist / inverted allowlist) to jsons objects
  */
 final class FiltersConverterService: FiltersConverterServiceProtocol {
-    
-    // MARK: - ConvertionError
-    
-    enum ConvertionError: Error, CustomDebugStringConvertible {
-        case failedToConvertRules
-        
-        var debugDescription: String {
-            switch self {
-            case .failedToConvertRules: return "An error occured while converting rules to jsons"
-            }
-        }
-    }
-    
+  
     // MARK: - Services
     
     private let configuration: SafariConfigurationProtocol
@@ -65,11 +54,10 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
     
     // MARK: - Internal methods
     
-    func convertFiltersAndUserRulesToJsons() throws -> [FiltersConverter.Result] {
+    func convertFiltersAndUserRulesToJsons() -> [FiltersConverterResult] {
         // Run converter with empty data if Safari protection is disabled
         guard configuration.safariProtectionEnabled else {
-            let emptySafatiFilters = filtersConverter.convert(filters: [], blocklistRules: nil, allowlistRules: nil, invertedAllowlistRulesString: nil)
-            return emptySafatiFilters ?? []
+            return filtersConverter.convert(filters: [], blocklistRules: nil, allowlistRules: nil, invertedAllowlistRulesString: nil)
         }
         
         // Get active filters info. It is an array of tuples [(filter id, group type)]
@@ -112,16 +100,13 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
         }
         
         // Run converter with all enabled rules
-        if let safariFilters = filtersConverter.convert(
+        let safariFilters = filtersConverter.convert(
             filters: filesContent,
             blocklistRules: enabledBlockListRules,
             allowlistRules: enabledAllowlistRules,
             invertedAllowlistRulesString: enabledInvertedAllowlistRulesString
-        ) {
-            return safariFilters
-        } else {
-            throw ConvertionError.failedToConvertRules
-        }
+        )
+        return safariFilters
     }
 }
 
