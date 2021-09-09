@@ -19,18 +19,14 @@
 import Foundation
 
 protocol SafariWebExtensionMessageProcessorProtocol {
-    func process(message: Message) -> [String: Any]?
+    func process(message: Message) -> [String: Any?]
 }
 
-struct SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcessorProtocol {
+final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcessorProtocol {
 
-    private let fileReader: ChunkFileReader
+    private var fileReader: ChunkFileReader?
 
-    init(advancedRulesFileUrl: URL) {
-        self.fileReader = ChunkFileReader(fileUrl: advancedRulesFileUrl)!
-    }
-
-    func process(message: Message) -> [String: Any]?  {
+    func process(message: Message) -> [String: Any?]  {
         switch message.type {
         case .getInitData: return getInitData(message.data)
         case .getAdvancedRules: return getAdvancedRules()
@@ -57,11 +53,17 @@ struct SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcessorPro
         ]
     }
 
-    private func getAdvancedRules() -> [String: Any]? {
-        if let chunk = fileReader.nextChunk() {
+    private func getAdvancedRules() -> [String: Any?] {
+        let advancedRulesFileUrl = SharedStorageUrls().advancedRulesFileUrl
+        if fileReader == nil {
+            fileReader = ChunkFileReader(fileUrl: advancedRulesFileUrl)
+        }
+        if let chunk = fileReader?.nextChunk() {
             return [Message.advancedRulesKey: chunk]
         } else {
-            return nil
+            fileReader?.close()
+            fileReader = nil
+            return [Message.advancedRulesKey: nil]
         }
     }
 }

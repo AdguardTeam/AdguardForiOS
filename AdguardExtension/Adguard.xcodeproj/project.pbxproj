@@ -125,8 +125,6 @@
 		24AD872E260A247B0034D402 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD872C260A247B0034D402 /* RadioButton.swift */; };
 		24BC54C826E7A56B00F680ED /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */; };
 		24BC54C926E7A56B00F680ED /* SharedAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		24BC54CA26E7A58800F680ED /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */; };
-		24BC54CB26E7A58800F680ED /* SharedAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		24BD32ED2603588F00CC12F3 /* FiltersUpdatesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */; };
 		24BD32FF2603592000CC12F3 /* FiltersUpdatesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */; };
 		24CBA66225939CC200E28308 /* CustomSchemeURLParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */; };
@@ -3627,6 +3625,7 @@
 		7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
 		7E9D31C123A11BB60040AE4B /* ComplexProtectionSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexProtectionSwitch.swift; sourceTree = "<group>"; };
 		7E9E10C826CC1108007A4B8A /* StateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateHeaderView.swift; sourceTree = "<group>"; };
+		7E9EBDD026EA4A6E00B5FEC3 /* ProSafariWebExtensionInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ProSafariWebExtensionInfo.plist; sourceTree = "<group>"; };
 		7E9F3E0F23CE08E300A7BDA2 /* DomainsConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainsConverter.swift; sourceTree = "<group>"; };
 		7EA216392444847700393949 /* MigrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationService.swift; sourceTree = "<group>"; };
 		7EA2163B24449EA700393949 /* MigrationServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationServiceTest.swift; sourceTree = "<group>"; };
@@ -5761,6 +5760,7 @@
 				7E4ABFFB26BD75E700DF5CF0 /* SafariWebExtension */,
 				65F398121B7B684700ABCD39 /* Products */,
 				65D8294D1EDDA905008F7F30 /* Frameworks */,
+				7E9EBDCF26EA370300B5FEC3 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -5992,6 +5992,7 @@
 				7E497E1926E202E90072BDE1 /* ChunkFileReader.swift */,
 				7EC8A40F26E7998F005244CF /* Services.swift */,
 				7EBDD98426D6A204009531FA /* Info.plist */,
+				7E9EBDD026EA4A6E00B5FEC3 /* ProSafariWebExtensionInfo.plist */,
 				7E4ABFFE26BD75E700DF5CF0 /* Resources */,
 			);
 			path = SafariWebExtension;
@@ -6187,6 +6188,14 @@
 				7EA7DCC226C675060032AD5C /* SafariProtectionGroupCell */,
 			);
 			path = SafariGroupsTableController;
+			sourceTree = "<group>";
+		};
+		7E9EBDCF26EA370300B5FEC3 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		7E9F3E0E23CE08C100A7BDA2 /* DnsFilterService */ = {
@@ -12071,7 +12080,7 @@
 					"$(inherited)",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SafariWebExtension/Info.plist;
+				INFOPLIST_FILE = SafariWebExtension/ProSafariWebExtensionInfo.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -12118,7 +12127,7 @@
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SafariWebExtension/Info.plist;
+				INFOPLIST_FILE = SafariWebExtension/ProSafariWebExtensionInfo.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (

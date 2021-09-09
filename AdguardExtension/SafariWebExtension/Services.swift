@@ -28,6 +28,6 @@ final class Services {
     init() {
         self.resources = AESharedResources()
         self.urlsStorage = SharedStorageUrls()
-        self.processor = SafariWebExtensionMessageProcessor(advancedRulesFileUrl: urlsStorage.filtersFolderUrl.appendingPathComponent("1.txt"))
+        self.processor = SafariWebExtensionMessageProcessor()
     }
 }

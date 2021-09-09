@@ -34,6 +34,7 @@ struct SharedStorageUrls: SharedStorageUrlsProtocol {
     let filtersFolderUrl: URL
     let dnsFiltersFolderUrl: URL
     let cbJsonsFolderUrl: URL
+    let advancedRulesFileUrl: URL
     
     private static let sharedResourcesGroup = Bundle.main.infoDictionary!["SharedResourcesGroup"] as! String
 }
@@ -45,5 +46,6 @@ extension SharedStorageUrls {
         self.filtersFolderUrl = sharedContainerUrl.appendingPathComponent("filters", isDirectory: true)
         self.dnsFiltersFolderUrl = sharedContainerUrl.appendingPathComponent("dns_filters", isDirectory: true)
         self.cbJsonsFolderUrl = sharedContainerUrl.appendingPathComponent("cb_jsons", isDirectory: true)
+        self.advancedRulesFileUrl = cbJsonsFolderUrl.appendingPathComponent("advanced_rules.txt")
     }
 }
