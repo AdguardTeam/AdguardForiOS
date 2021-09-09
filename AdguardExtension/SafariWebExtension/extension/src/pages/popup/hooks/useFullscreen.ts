@@ -1,10 +1,14 @@
 import { useEffect, useRef } from 'react';
 
+const isAboutHalfSize = (fullSize: number, size: number) => {
+    const HALF_SIZE_MIN_RATIO = 0.4;
+    const HALF_SIZE_MAX_RATIO = 0.6;
+    const ratio = size / fullSize;
+    return ratio > HALF_SIZE_MIN_RATIO && ratio < HALF_SIZE_MAX_RATIO;
+};
+
 export const useFullscreen = (cb: (state: boolean) => void) => {
     const requestRef = useRef<number>();
-    // We start detect min size of popup after an small timeout,
-    // otherwise min size value can be too small
-    const START_RESIZE_DETECT_TIMEOUT_MS = 100;
 
     useEffect(() => {
         let min = 0;
@@ -14,8 +18,9 @@ export const useFullscreen = (cb: (state: boolean) => void) => {
             const FULLSCREEN_RATIO = 1.6;
 
             const currentHeight = window.innerHeight;
+            const screenHeight = window.screen.height;
 
-            if (!min) {
+            if (!min && isAboutHalfSize(screenHeight, currentHeight)) {
                 min = currentHeight;
             } else if (currentHeight < min) {
                 min = currentHeight;
@@ -31,19 +36,13 @@ export const useFullscreen = (cb: (state: boolean) => void) => {
             requestRef.current = requestAnimationFrame(resizeHandler);
         };
 
-        const timeoutId = setTimeout(() => {
-            /**
-             * window.onresize event doesn't fire reliable on real device, during swipes
-             * that is why we use here requestAnimationFrame
-             */
-            requestRef.current = requestAnimationFrame(resizeHandler);
-        }, START_RESIZE_DETECT_TIMEOUT_MS);
+        /**
+         * window.onresize event doesn't fire reliable on real device, during swipes
+         * that is why we use here requestAnimationFrame
+         */
+        requestRef.current = requestAnimationFrame(resizeHandler);
 
         return () => {
-            if (timeoutId) {
-                clearTimeout(timeoutId);
-            }
-
             if (requestRef.current !== undefined) {
                 cancelAnimationFrame(requestRef.current);
             }
