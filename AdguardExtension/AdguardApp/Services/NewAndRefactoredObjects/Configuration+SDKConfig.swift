@@ -19,14 +19,14 @@
 import SafariAdGuardSDK
 import DnsAdGuardSDK
 
-extension Bundle {
-    var appBundleId: String { Bundle.main.bundleIdentifier ?? "" }
-    var appProductVersion: String  { ADProductInfo().version() ?? "" }
-    var currentLanguage: String { "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")" }
-    var appId: String { Bundle.main.isPro ? "ios_pro" : "ios" }
-    var cid: String { UIDevice.current.identifierForVendor?.uuidString ?? "" }
+extension ConfigurationService {
+    static var appBundleId: String { Bundle.main.bundleIdentifier ?? "" }
+    static var appProductVersion: String  { ADProductInfo().version() ?? "" }
+    static var currentLanguage: String { "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")" }
+    static var appId: String { Bundle.main.isPro ? "ios_pro" : "ios" }
+    static var cid: String { UIDevice.current.identifierForVendor?.uuidString ?? "" }
     
-    func createSafariSDKConfig(proStatus: Bool, resources: AESharedResourcesProtocol) -> SafariConfigurationProtocol {
+    static func createSafariSDKConfig(proStatus: Bool, resources: AESharedResourcesProtocol) -> SafariConfigurationProtocol {
         return SafariConfiguration(iosVersion: UIDevice.current.iosVersion,
                                    currentLanguage: currentLanguage,
                                    proStatus: proStatus,
@@ -41,7 +41,7 @@ extension Bundle {
                                    cid: cid)
     }
     
-    func createDefaultSafariSDKConfig() -> SafariConfigurationProtocol {
+    static func createDefaultSafariSDKConfig() -> SafariConfigurationProtocol {
         return SafariConfiguration(iosVersion: UIDevice.current.iosVersion,
                                    currentLanguage: currentLanguage,
                                    proStatus: false,
@@ -56,7 +56,7 @@ extension Bundle {
                                    cid: cid)
     }
     
-    func createDnsSDKConfig(proStatus: Bool, resources: AESharedResourcesProtocol) -> DnsConfigurationProtocol {
+    static func createDnsSDKConfig(proStatus: Bool, resources: AESharedResourcesProtocol) -> DnsConfigurationProtocol {
         let sdkDnsImplementation: DnsAdGuardSDK.DnsImplementation = resources.dnsImplementation == .adGuard ? .adguard : .native
         
         return DnsConfiguration(currentLanguage: currentLanguage,
@@ -67,7 +67,7 @@ extension Bundle {
                                 allowlistIsEnabled: resources.systemWhitelistEnabled)
     }
     
-    func createDefaultDnsSDKConfig() -> DnsConfigurationProtocol {
+    static func createDefaultDnsSDKConfig() -> DnsConfigurationProtocol {
         return DnsConfiguration(currentLanguage: currentLanguage,
                                 proStatus: false,
                                 dnsFilteringIsEnabled: false,

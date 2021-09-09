@@ -19,7 +19,18 @@
 import SafariAdGuardSDK
 import DnsAdGuardSDK
 
-struct ServiceInitialiser {
+protocol ServiceInitialiserProtocol  {
+    var networkService: ACNNetworkingProtocol { get }
+    var productInfo: ADProductInfoProtocol { get }
+    
+    var purchaseService: PurchaseServiceProtocol { get }
+    var safariProtection: SafariProtectionProtocol { get }
+    var complexProtection: ComplexProtectionServiceProtocol { get }
+    var dnsProvidersService: DnsProvidersServiceProtocol { get }
+    var activityStatistics: ActivityStatisticsProtocol { get }
+}
+
+final class ServiceInitialiser: ServiceInitialiserProtocol {
     let networkService: ACNNetworkingProtocol = ACNNetworking()
     let productInfo: ADProductInfoProtocol = ADProductInfo()
     
@@ -29,7 +40,7 @@ struct ServiceInitialiser {
     let dnsProvidersService: DnsProvidersServiceProtocol
     let activityStatistics: ActivityStatisticsProtocol
     
-    init(resources: AESharedResourcesProtocol) {
+    init(resources: AESharedResourcesProtocol) throws {
         //MARK: - PurchaseService
         self.purchaseService = PurchaseService(network: networkService,
                                                resources: resources,
@@ -39,8 +50,8 @@ struct ServiceInitialiser {
         
         //MARK: - SafariProtection
         let sharedStorageUrls = SharedStorageUrls()
-        let safariConfiguration = Bundle.main.createSafariSDKConfig(proStatus: purchaseService.isProPurchased, resources: resources)
-        self.safariProtection = try! SafariProtection(configuration: safariConfiguration,
+        let safariConfiguration = ConfigurationService.createSafariSDKConfig(proStatus: purchaseService.isProPurchased, resources: resources)
+        self.safariProtection = try SafariProtection(configuration: safariConfiguration,
                                                       defaultConfiguration: safariConfiguration,
                                                       filterFilesDirectoryUrl: sharedStorageUrls.filtersFolderUrl,
                                                       dbContainerUrl: sharedStorageUrls.dbFolderUrl,
@@ -62,6 +73,6 @@ struct ServiceInitialiser {
                                  safariProtection: safariProtection)
         
         //MARK: - ActivityStatistics
-        self.activityStatistics = try! ActivityStatistics(statisticsDbContainerUrl: sharedStorageUrls.dbFolderUrl)
+        self.activityStatistics = try ActivityStatistics(statisticsDbContainerUrl: sharedStorageUrls.dbFolderUrl)
     }
 }

@@ -143,8 +143,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         DDLogInfo("(AppDelegate) applicationWillEnterForeground.")
         configuration.checkContentBlockerEnabled()
-        let safariConfig = Bundle.main.createSafariSDKConfig(proStatus: purchaseService.isProPurchased, resources: resources)
-        let dnsConfig = Bundle.main.createDnsSDKConfig(proStatus: purchaseService.isProPurchased, resources: resources)
+        let safariConfig = ConfigurationService.createSafariSDKConfig(proStatus: configuration.proStatus, resources: resources)
+        let dnsConfig = ConfigurationService.createDnsSDKConfig(proStatus: configuration.proStatus, resources: resources)
         safariProtection.updateConfig(with: safariConfig)
         dnsProtection.updateConfig(with: dnsConfig)
     }

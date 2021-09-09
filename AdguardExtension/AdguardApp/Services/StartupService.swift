@@ -57,14 +57,14 @@ final class StartupService : NSObject{
         
         /* Initializing SDK */
         
-        let safariProtectionConfiguration = Bundle.main.createSafariSDKConfig(proStatus: purchaseService.isProPurchased,
+        let safariProtectionConfiguration = ConfigurationService.createSafariSDKConfig(proStatus: purchaseService.isProPurchased,
                                                                               resources: sharedResources)
-        let defaultConfiguration = Bundle.main.createDefaultSafariSDKConfig()
+        let defaultConfiguration = ConfigurationService.createDefaultSafariSDKConfig()
         
-        let dnsProtectionConfiguration = Bundle.main.createDnsSDKConfig(proStatus: purchaseService.isProPurchased,
+        let dnsProtectionConfiguration = ConfigurationService.createDnsSDKConfig(proStatus: purchaseService.isProPurchased,
                                                                         resources: sharedResources)
         
-        let defaultDnsProtectionConfiguration = Bundle.main.createDefaultDnsSDKConfig()
+        let defaultDnsProtectionConfiguration = ConfigurationService.createDefaultDnsSDKConfig()
            
         // TODO: - try! is bad
         let safariProtection: SafariProtectionProtocol = try! SafariProtection(
