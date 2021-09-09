@@ -732,6 +732,10 @@
 		7E9D31C223A11BB60040AE4B /* ComplexProtectionSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9D31C123A11BB60040AE4B /* ComplexProtectionSwitch.swift */; };
 		7E9E10CA26CC1108007A4B8A /* StateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9E10C826CC1108007A4B8A /* StateHeaderView.swift */; };
 		7E9E10CB26CC1108007A4B8A /* StateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9E10C826CC1108007A4B8A /* StateHeaderView.swift */; };
+		7E9EBDD226EA6E0900B5FEC3 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E9EBDD126EA6E0900B5FEC3 /* SafariAdGuardSDK.framework */; };
+		7E9EBDD326EA6E0900B5FEC3 /* SafariAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7E9EBDD126EA6E0900B5FEC3 /* SafariAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7E9EBDD626EA6E0F00B5FEC3 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E9EBDD526EA6E0F00B5FEC3 /* SafariAdGuardSDK.framework */; };
+		7E9EBDD726EA6E0F00B5FEC3 /* SafariAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7E9EBDD526EA6E0F00B5FEC3 /* SafariAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7E9F3E1023CE08E300A7BDA2 /* DomainsConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9F3E0F23CE08E300A7BDA2 /* DomainsConverter.swift */; };
 		7E9F3E1123CE0FA700A7BDA2 /* DomainsConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9F3E0F23CE08E300A7BDA2 /* DomainsConverter.swift */; };
 		7EA2163A2444847700393949 /* MigrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA216392444847700393949 /* MigrationService.swift */; };
@@ -887,10 +891,10 @@
 		7EC8A40626E78D77005244CF /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
 		7EC8A40726E78DB4005244CF /* Bundle+config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E55B24377280001801A5 /* Bundle+config.swift */; };
 		7EC8A40926E78DB5005244CF /* Bundle+config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D7E55B24377280001801A5 /* Bundle+config.swift */; };
-		7EC8A40B26E7919D005244CF /* UserRulesRedirectController.Action+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8A40A26E7919D005244CF /* UserRulesRedirectController.Action+Utils.swift */; };
-		7EC8A40C26E7919D005244CF /* UserRulesRedirectController.Action+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8A40A26E7919D005244CF /* UserRulesRedirectController.Action+Utils.swift */; };
-		7EC8A40D26E7919D005244CF /* UserRulesRedirectController.Action+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8A40A26E7919D005244CF /* UserRulesRedirectController.Action+Utils.swift */; };
-		7EC8A40E26E7919D005244CF /* UserRulesRedirectController.Action+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8A40A26E7919D005244CF /* UserRulesRedirectController.Action+Utils.swift */; };
+		7EC8A40B26E7919D005244CF /* UserRulesRedirectAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8A40A26E7919D005244CF /* UserRulesRedirectAction.swift */; };
+		7EC8A40C26E7919D005244CF /* UserRulesRedirectAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8A40A26E7919D005244CF /* UserRulesRedirectAction.swift */; };
+		7EC8A40D26E7919D005244CF /* UserRulesRedirectAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8A40A26E7919D005244CF /* UserRulesRedirectAction.swift */; };
+		7EC8A40E26E7919D005244CF /* UserRulesRedirectAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8A40A26E7919D005244CF /* UserRulesRedirectAction.swift */; };
 		7EC8A41026E7998F005244CF /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8A40F26E7998F005244CF /* Services.swift */; };
 		7EC8A41126E7998F005244CF /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8A40F26E7998F005244CF /* Services.swift */; };
 		7ECCCC14237194B200FA651F /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC13237194B200FA651F /* ChartView.swift */; };
@@ -2653,6 +2657,28 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7E9EBDD426EA6E0900B5FEC3 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7E9EBDD326EA6E0900B5FEC3 /* SafariAdGuardSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E9EBDD826EA6E0F00B5FEC3 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7E9EBDD726EA6E0F00B5FEC3 /* SafariAdGuardSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7EAD353226C2C8C8001AFB3A /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3626,6 +3652,8 @@
 		7E9D31C123A11BB60040AE4B /* ComplexProtectionSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexProtectionSwitch.swift; sourceTree = "<group>"; };
 		7E9E10C826CC1108007A4B8A /* StateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateHeaderView.swift; sourceTree = "<group>"; };
 		7E9EBDD026EA4A6E00B5FEC3 /* ProSafariWebExtensionInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ProSafariWebExtensionInfo.plist; sourceTree = "<group>"; };
+		7E9EBDD126EA6E0900B5FEC3 /* SafariAdGuardSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SafariAdGuardSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E9EBDD526EA6E0F00B5FEC3 /* SafariAdGuardSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SafariAdGuardSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E9F3E0F23CE08E300A7BDA2 /* DomainsConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainsConverter.swift; sourceTree = "<group>"; };
 		7EA216392444847700393949 /* MigrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationService.swift; sourceTree = "<group>"; };
 		7EA2163B24449EA700393949 /* MigrationServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationServiceTest.swift; sourceTree = "<group>"; };
@@ -3688,7 +3716,7 @@
 		7EC67F90254842B800FEEEE2 /* NativeProvidersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeProvidersService.swift; sourceTree = "<group>"; };
 		7EC67FC7254843CA00FEEEE2 /* DnsImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsImplementation.swift; sourceTree = "<group>"; };
 		7EC8A37726E658F4005244CF /* UserRulesRedirectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRulesRedirectController.swift; sourceTree = "<group>"; };
-		7EC8A40A26E7919D005244CF /* UserRulesRedirectController.Action+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserRulesRedirectController.Action+Utils.swift"; sourceTree = "<group>"; };
+		7EC8A40A26E7919D005244CF /* UserRulesRedirectAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRulesRedirectAction.swift; sourceTree = "<group>"; };
 		7EC8A40F26E7998F005244CF /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		7ECCCC13237194B200FA651F /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		7ECCCC1A2372CA1900FA651F /* ChartDateTypeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDateTypeController.swift; sourceTree = "<group>"; };
@@ -4245,6 +4273,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E9EBDD226EA6E0900B5FEC3 /* SafariAdGuardSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4252,6 +4281,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E9EBDD626EA6E0F00B5FEC3 /* SafariAdGuardSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5637,6 +5667,8 @@
 		65D8294D1EDDA905008F7F30 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7E9EBDD526EA6E0F00B5FEC3 /* SafariAdGuardSDK.framework */,
+				7E9EBDD126EA6E0900B5FEC3 /* SafariAdGuardSDK.framework */,
 				494E0BD526E8D31F005C21C4 /* SharedAdGuardSDK.framework */,
 				7E15DFE826E6481A0020247E /* SafariAdGuardSDK.framework */,
 				7E15DFE526E648120020247E /* SafariAdGuardSDK.framework */,
@@ -6077,7 +6109,7 @@
 				7E70266826DE462D00F8FC25 /* UserRuleTableViewCell.swift */,
 				7E4EFB0C26DFE6DD00116762 /* UserRulesModelsProvider.swift */,
 				7EC8A37726E658F4005244CF /* UserRulesRedirectController.swift */,
-				7EC8A40A26E7919D005244CF /* UserRulesRedirectController.Action+Utils.swift */,
+				7EC8A40A26E7919D005244CF /* UserRulesRedirectAction.swift */,
 			);
 			path = UserRules;
 			sourceTree = "<group>";
@@ -7021,6 +7053,7 @@
 				7E4ABFF726BD75E700DF5CF0 /* Frameworks */,
 				4982C2F926D79F9500CACBBE /* ShellScript */,
 				7E4ABFF826BD75E700DF5CF0 /* Resources */,
+				7E9EBDD426EA6E0900B5FEC3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -7039,6 +7072,7 @@
 				7E4AC01826BD796800DF5CF0 /* Frameworks */,
 				4982C2F826D79E9000CACBBE /* ShellScript */,
 				7E4AC01926BD796800DF5CF0 /* Resources */,
+				7E9EBDD826EA6E0F00B5FEC3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -8612,7 +8646,7 @@
 				D0B545952435D630002F0AEC /* StartupService.swift in Sources */,
 				247CB64F2600CD480047974C /* SocialNetworkAuthParametersParser.swift in Sources */,
 				D0D7E5FE24444F93001801A5 /* DnsStatisticsRecord.swift in Sources */,
-				7EC8A40C26E7919D005244CF /* UserRulesRedirectController.Action+Utils.swift in Sources */,
+				7EC8A40C26E7919D005244CF /* UserRulesRedirectAction.swift in Sources */,
 				659886911CF74DE9003ECD1C /* ACLExecuteBlockDelayed.m in Sources */,
 				D0B545FD2435D6D2002F0AEC /* Dns64Utils.swift in Sources */,
 				D0B545A02435D63D002F0AEC /* DnsLogContainerController.swift in Sources */,
@@ -8776,7 +8810,7 @@
 				D00E448925650084002DDE98 /* ImportSettingsService.swift in Sources */,
 				7EE3427224D84A7600A8C0E6 /* AboutViewController.swift in Sources */,
 				655A023D1C6B7686000F00D7 /* ACLLogger.m in Sources */,
-				7EC8A40B26E7919D005244CF /* UserRulesRedirectController.Action+Utils.swift in Sources */,
+				7EC8A40B26E7919D005244CF /* UserRulesRedirectAction.swift in Sources */,
 				7E1104F922DE27C700720501 /* StartupService.swift in Sources */,
 				7EB2F94823F2B64500F9A544 /* ParserProtocol.swift in Sources */,
 				D0DB1B062148DB35006EB991 /* SettingsController.swift in Sources */,
@@ -9374,7 +9408,7 @@
 				7EBDD99526D6A36C009531FA /* DDLoggerNames.m in Sources */,
 				7EBDD97D26D6A1D0009531FA /* SafariWebExtensionMessageProcessor.swift in Sources */,
 				7EBDD97F26D6A1D0009531FA /* SafariWebExtensionHandler.swift in Sources */,
-				7EC8A40D26E7919D005244CF /* UserRulesRedirectController.Action+Utils.swift in Sources */,
+				7EC8A40D26E7919D005244CF /* UserRulesRedirectAction.swift in Sources */,
 				7EBDD99126D6A344009531FA /* DDOSLogger.m in Sources */,
 				7EBDD99026D6A32F009531FA /* DDFileLogger.m in Sources */,
 				7EBDD98826D6A2E2009531FA /* AESharedResources.m in Sources */,
@@ -9400,7 +9434,7 @@
 				7EBDD99626D6A36C009531FA /* DDLoggerNames.m in Sources */,
 				7EBDD97E26D6A1D0009531FA /* SafariWebExtensionMessageProcessor.swift in Sources */,
 				7EBDD98026D6A1D0009531FA /* SafariWebExtensionHandler.swift in Sources */,
-				7EC8A40E26E7919D005244CF /* UserRulesRedirectController.Action+Utils.swift in Sources */,
+				7EC8A40E26E7919D005244CF /* UserRulesRedirectAction.swift in Sources */,
 				7EBDD99226D6A345009531FA /* DDOSLogger.m in Sources */,
 				7EBDD98F26D6A32F009531FA /* DDFileLogger.m in Sources */,
 				7EBDD98726D6A2E2009531FA /* AESharedResources.m in Sources */,

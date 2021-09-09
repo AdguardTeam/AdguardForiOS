@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import SafariAdGuardSDK
 
 protocol SafariWebExtensionMessageProcessorProtocol {
     func process(message: Message) -> [String: Any?]
@@ -39,9 +40,11 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
     // MARK: - Private methods
 
     private func getInitData(_ url: String?) -> [String: Any] {
+        let cbService = ContentBlockerService(appBundleId: Bundle.main.bundleIdentifier ?? "")
+        let allContentBlockersEnabled = cbService.allContentBlockersStates.values.reduce(true, { $0 && $1 })
         return [
             Message.appearanceTheme: "system",
-            Message.contentBlockersEnabled: true,
+            Message.contentBlockersEnabled: allContentBlockersEnabled,
             Message.hasUserRules: false,
             Message.premiumApp: false,
             Message.protectionEnabled: true,
