@@ -51,7 +51,6 @@ public protocol SafariProtectionConfigurationProtocol {
     /* Updates state of allowlist invertion and reloads content blockers */
     func update(allowlistIsInverted: Bool, onCbReloaded: ((_ error: Error?) -> Void)?)
     
-    //TODO: Need tests
     /* Update configuration with new one */
     func updateConfig(with newConfig: SafariConfigurationProtocol)
 }

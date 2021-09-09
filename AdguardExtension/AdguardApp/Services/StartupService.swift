@@ -56,16 +56,14 @@ final class StartupService : NSObject{
         try! preloadedFilesManager.processPreloadedFiles()
         
         /* Initializing SDK */
-        let proStatus = Bundle.main.isPro ? true : purchaseService.isProPurchased
         
-        let safariProtectionConfiguration = ConfigurationService.createSafariSDKConfig(proStatus: proStatus,
-                                                                                       resources: sharedResources)
-        let defaultConfiguration = ConfigurationService.createDefaultSafariSDKConfig()
+        let safariProtectionConfiguration = SafariConfiguration(resources: sharedResources,
+                                                                isProPurchased: purchaseService.isProPurchased)
+        let defaultConfiguration = SafariConfiguration()
         
-        let dnsProtectionConfiguration = ConfigurationService.createDnsSDKConfig(proStatus: proStatus,
-                                                                                 resources: sharedResources)
-        
-        let defaultDnsProtectionConfiguration = ConfigurationService.createDefaultDnsSDKConfig()
+        let dnsProtectionConfiguration = DnsConfiguration(resources: sharedResources,
+                                                          isProPurchased: purchaseService.isProPurchased)
+        let defaultDnsProtectionConfiguration = DnsConfiguration()
            
         // TODO: - try! is bad
         let safariProtection: SafariProtectionProtocol = try! SafariProtection(

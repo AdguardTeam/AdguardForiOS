@@ -19,61 +19,58 @@
 import SafariAdGuardSDK
 import DnsAdGuardSDK
 
-extension ConfigurationService {
-    static var appBundleId: String { Bundle.main.bundleIdentifier ?? "" }
-    static var appProductVersion: String  { ADProductInfo().version() ?? "" }
-    static var currentLanguage: String { "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")" }
-    static var appId: String { Bundle.main.isPro ? "ios_pro" : "ios" }
-    static var cid: String { UIDevice.current.identifierForVendor?.uuidString ?? "" }
-    
-    static func createSafariSDKConfig(proStatus: Bool, resources: AESharedResourcesProtocol) -> SafariConfigurationProtocol {
-        return SafariConfiguration(iosVersion: UIDevice.current.iosVersion,
-                                   currentLanguage: currentLanguage,
-                                   proStatus: proStatus,
-                                   safariProtectionEnabled: resources.safariProtectionEnabled,
-                                   advancedBlockingIsEnabled: true, // TODO: - Don't forget to change
-                                   blocklistIsEnabled: resources.safariUserFilterEnabled,
-                                   allowlistIsEnabled: resources.safariWhitelistEnabled,
-                                   allowlistIsInverted: resources.invertedWhitelist,
-                                   appBundleId: appBundleId,
-                                   appProductVersion: appProductVersion,
-                                   appId: appId,
-                                   cid: cid)
+extension SafariConfiguration {
+    convenience init(bundle: Bundle = .main, resources: AESharedResourcesProtocol, isProPurchased: Bool) {
+        self.init(iosVersion: UIDevice.current.iosVersion,
+                  currentLanguage: "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")",
+                  proStatus: bundle.isPro ? true : isProPurchased,
+                  safariProtectionEnabled: resources.safariProtectionEnabled,
+                  advancedBlockingIsEnabled: true,
+                  blocklistIsEnabled: resources.safariUserFilterEnabled,
+                  allowlistIsEnabled: resources.safariWhitelistEnabled,
+                  allowlistIsInverted: resources.invertedWhitelist,
+                  appBundleId: bundle.bundleIdentifier ?? "",
+                  appProductVersion: ADProductInfo().version() ?? "",
+                  appId: bundle.isPro ? "ios_pro" : "ios",
+                  cid: UIDevice.current.identifierForVendor?.uuidString ?? "")
     }
     
-    static func createDefaultSafariSDKConfig() -> SafariConfigurationProtocol {
-        return SafariConfiguration(iosVersion: UIDevice.current.iosVersion,
-                                   currentLanguage: currentLanguage,
-                                   proStatus: false,
-                                   safariProtectionEnabled: true,
-                                   advancedBlockingIsEnabled: true, // TODO: - Don't forget to change
-                                   blocklistIsEnabled: false,
-                                   allowlistIsEnabled: false,
-                                   allowlistIsInverted: false,
-                                   appBundleId: appBundleId,
-                                   appProductVersion: appProductVersion,
-                                   appId: appId,
-                                   cid: cid)
-    }
-    
-    static func createDnsSDKConfig(proStatus: Bool, resources: AESharedResourcesProtocol) -> DnsConfigurationProtocol {
-        let sdkDnsImplementation: DnsAdGuardSDK.DnsImplementation = resources.dnsImplementation == .adGuard ? .adguard : .native
-        
-        return DnsConfiguration(currentLanguage: currentLanguage,
-                                proStatus: proStatus,
-                                dnsFilteringIsEnabled: resources.systemProtectionEnabled,
-                                dnsImplementation: sdkDnsImplementation,
-                                blocklistIsEnabled: resources.systemUserFilterEnabled,
-                                allowlistIsEnabled: resources.systemWhitelistEnabled)
-    }
-    
-    static func createDefaultDnsSDKConfig() -> DnsConfigurationProtocol {
-        return DnsConfiguration(currentLanguage: currentLanguage,
-                                proStatus: false,
-                                dnsFilteringIsEnabled: false,
-                                dnsImplementation: .adguard,
-                                blocklistIsEnabled: false,
-                                allowlistIsEnabled: false)
+    //Init default config
+    convenience init(bundle: Bundle = .main) {
+        self.init(iosVersion: UIDevice.current.iosVersion,
+                  currentLanguage: "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")",
+                  proStatus: false,
+                  safariProtectionEnabled: true,
+                  advancedBlockingIsEnabled: true, // TODO: - Don't forget to change
+                  blocklistIsEnabled: false,
+                  allowlistIsEnabled: false,
+                  allowlistIsInverted: false,
+                  appBundleId: bundle.bundleIdentifier ?? "",
+                  appProductVersion: ADProductInfo().version() ?? "",
+                  appId: bundle.isPro ? "ios_pro" : "ios",
+                  cid: UIDevice.current.identifierForVendor?.uuidString ?? "")
     }
 }
 
+
+extension DnsConfiguration {
+    convenience init(bundle: Bundle = .main, resources: AESharedResourcesProtocol, isProPurchased: Bool) {
+        let sdkDnsImplementation: DnsAdGuardSDK.DnsImplementation = resources.dnsImplementation == .adGuard ? .adguard : .native
+        self.init(currentLanguage: "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")",
+                  proStatus: bundle.isPro ? true : isProPurchased,
+                  dnsFilteringIsEnabled: resources.systemProtectionEnabled,
+                  dnsImplementation: sdkDnsImplementation,
+                  blocklistIsEnabled: resources.systemUserFilterEnabled,
+                  allowlistIsEnabled: resources.systemWhitelistEnabled)
+    }
+    
+    //Init default config
+    convenience init(bundle: Bundle = .main) {
+        self.init(currentLanguage: "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")",
+                  proStatus: false,
+                  dnsFilteringIsEnabled: false,
+                  dnsImplementation: .adguard,
+                  blocklistIsEnabled: false,
+                  allowlistIsEnabled: false)
+    }
+}

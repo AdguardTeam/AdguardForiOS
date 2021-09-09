@@ -50,7 +50,8 @@ final class ServiceInitialiser: ServiceInitialiserProtocol {
         
         //MARK: - SafariProtection
         let sharedStorageUrls = SharedStorageUrls()
-        let safariConfiguration = ConfigurationService.createSafariSDKConfig(proStatus: purchaseService.isProPurchased, resources: resources)
+        
+        let safariConfiguration = SafariConfiguration(resources: resources, isProPurchased: purchaseService.isProPurchased)
         self.safariProtection = try SafariProtection(configuration: safariConfiguration,
                                                       defaultConfiguration: safariConfiguration,
                                                       filterFilesDirectoryUrl: sharedStorageUrls.filtersFolderUrl,
