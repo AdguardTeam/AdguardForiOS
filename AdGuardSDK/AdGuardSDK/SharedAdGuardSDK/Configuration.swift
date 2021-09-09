@@ -19,6 +19,6 @@
 import Foundation
 
 public protocol ConfigurationProtocol: AnyObject {
-    var currentLanguage: String { get } // Language preferred by user
+    var currentLanguage: String { get set } // Language preferred by user
     var proStatus: Bool { get set } // Shows if user has Premium app version
 }

@@ -13,7 +13,7 @@ final class SafariConfigurationMock: SafariConfigurationProtocol {
     
     var blocklistIsEnabled: Bool = false
     
-    var allowlistIsEnbaled: Bool = false
+    var allowlistIsEnabled: Bool = false
     
     var allowlistIsInverted: Bool = false
     

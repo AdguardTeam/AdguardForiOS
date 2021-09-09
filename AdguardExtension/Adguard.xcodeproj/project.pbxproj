@@ -33,6 +33,8 @@
 		2425D73C258F8D1F0037AEBE /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95523F2B96B00F9A544 /* CharacterSet+Utils.swift */; };
 		242B9145258A0D3E00A39E19 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B9144258A0D3E00A39E19 /* SignInController.swift */; };
 		242B9146258A0D3E00A39E19 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B9144258A0D3E00A39E19 /* SignInController.swift */; };
+		242C7FF026E6536B00A01B10 /* DnsUserRulesTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242C7FEF26E6536B00A01B10 /* DnsUserRulesTableModel.swift */; };
+		242C7FF126E6536B00A01B10 /* DnsUserRulesTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242C7FEF26E6536B00A01B10 /* DnsUserRulesTableModel.swift */; };
 		2443394C2580C13600AB4F26 /* LowLevelSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */; };
 		2443394D2580C13600AB4F26 /* LowLevelSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */; };
 		244339712580D8AB00AB4F26 /* BlockingModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244339702580D8AB00AB4F26 /* BlockingModeController.swift */; };
@@ -121,6 +123,10 @@
 		249E125E2600FFA3003A5FBD /* URLSchemeExecutorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C03C4525FF73790062DEED /* URLSchemeExecutorMock.swift */; };
 		24AD872D260A247B0034D402 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD872C260A247B0034D402 /* RadioButton.swift */; };
 		24AD872E260A247B0034D402 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD872C260A247B0034D402 /* RadioButton.swift */; };
+		24BC54C826E7A56B00F680ED /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */; };
+		24BC54C926E7A56B00F680ED /* SharedAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		24BC54CA26E7A58800F680ED /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */; };
+		24BC54CB26E7A58800F680ED /* SharedAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		24BD32ED2603588F00CC12F3 /* FiltersUpdatesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */; };
 		24BD32FF2603592000CC12F3 /* FiltersUpdatesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */; };
 		24CBA66225939CC200E28308 /* CustomSchemeURLParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */; };
@@ -2657,6 +2663,7 @@
 			files = (
 				7E70265326DD087B00F8FC25 /* DnsAdGuardSDK.framework in Embed Frameworks */,
 				7EAD353126C2C8C8001AFB3A /* SafariAdGuardSDK.framework in Embed Frameworks */,
+				24BC54C926E7A56B00F680ED /* SharedAdGuardSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2842,6 +2849,7 @@
 		241819FC2594D76900380A8A /* QueryParametersFromURLStringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParametersFromURLStringTest.swift; sourceTree = "<group>"; };
 		2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Utils.swift"; sourceTree = "<group>"; };
 		242B9144258A0D3E00A39E19 /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
+		242C7FEF26E6536B00A01B10 /* DnsUserRulesTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsUserRulesTableModel.swift; sourceTree = "<group>"; };
 		2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowLevelSettingsController.swift; sourceTree = "<group>"; };
 		244339702580D8AB00AB4F26 /* BlockingModeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockingModeController.swift; sourceTree = "<group>"; };
 		244339A62580EA2600AB4F26 /* BlockedResponseTtlController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedResponseTtlController.swift; sourceTree = "<group>"; };
@@ -2868,6 +2876,7 @@
 		249606AB258B82AD00C747BA /* SocialSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSignInButton.swift; sourceTree = "<group>"; };
 		24AD872C260A247B0034D402 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		24B2F12F25FF4DD500CE46C8 /* URLSchemeParcerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSchemeParcerTest.swift; sourceTree = "<group>"; };
+		24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SharedAdGuardSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersUpdatesConstants.swift; sourceTree = "<group>"; };
 		24C03C4525FF73790062DEED /* URLSchemeExecutorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSchemeExecutorMock.swift; sourceTree = "<group>"; };
 		24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSchemeURLParserTest.swift; sourceTree = "<group>"; };
@@ -4151,6 +4160,7 @@
 				D0B546042435D740002F0AEC /* Lottie in Frameworks */,
 				7EAD353026C2C8C8001AFB3A /* SafariAdGuardSDK.framework in Frameworks */,
 				7ED0B19726C40DCA00B0CE7B /* AGDnsProxy in Frameworks */,
+				24BC54C826E7A56B00F680ED /* SharedAdGuardSDK.framework in Frameworks */,
 				659886A01CF74DE9003ECD1C /* JavaScriptCore.framework in Frameworks */,
 				659886A11CF74DE9003ECD1C /* libz.tbd in Frameworks */,
 				7EF5C56426C26AC0001851D6 /* Sentry in Frameworks */,
@@ -6062,6 +6072,7 @@
 				7E70265B26DD23D700F8FC25 /* UserRulesTableController.swift */,
 				7E70266226DD29A500F8FC25 /* UserRulesTableModelProtocol.swift */,
 				7E70265F26DD28C600F8FC25 /* SafariUserRulesTableModel.swift */,
+				242C7FEF26E6536B00A01B10 /* DnsUserRulesTableModel.swift */,
 				7E70266826DE462D00F8FC25 /* UserRuleTableViewCell.swift */,
 				7E4EFB0C26DFE6DD00116762 /* UserRulesModelsProvider.swift */,
 				7EC8A37726E658F4005244CF /* UserRulesRedirectController.swift */,
@@ -8484,6 +8495,7 @@
 				7E92754026C67ABA007B2C80 /* Reusable.swift in Sources */,
 				7EF5C51E26C261CC001851D6 /* SharedResources+DebugLogs.swift in Sources */,
 				D0D7E615244455CA001801A5 /* ThemableButton.swift in Sources */,
+				242C7FF126E6536B00A01B10 /* DnsUserRulesTableModel.swift in Sources */,
 				7E3FEFAF26CD33F80080EC03 /* AGTextField.swift in Sources */,
 				D0B545BE2435D65C002F0AEC /* MainNavigationController.swift in Sources */,
 				D0B545E02435D69B002F0AEC /* ThemeableImageView.swift in Sources */,
@@ -8980,6 +8992,7 @@
 				7E822C0A2435EDD30015B4D0 /* Constant.swift in Sources */,
 				7EA887E9237D290E00E1043D /* CustomNavigationTransition.swift in Sources */,
 				7E5101932355B53700935FE9 /* NetworkSettingsModel.swift in Sources */,
+				242C7FF026E6536B00A01B10 /* DnsUserRulesTableModel.swift in Sources */,
 				65EC9C9C1BB9824C00F53F3B /* FMDatabaseQueue.m in Sources */,
 				D0569E4A21F1F13F00985DA9 /* APDnsServerAddress.m in Sources */,
 				7E49EB5C2442435D00911AB1 /* UIBezierPath+Utils.swift in Sources */,

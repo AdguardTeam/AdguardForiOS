@@ -16,7 +16,7 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import SafariAdGuardSDK
+import struct SharedAdGuardSDK.UserRule
 
 protocol UserRulesModelsProviderProtocol {
     var searchString: String? { get set }

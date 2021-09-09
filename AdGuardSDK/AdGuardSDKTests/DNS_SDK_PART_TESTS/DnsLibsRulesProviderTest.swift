@@ -52,7 +52,7 @@ class DnsLibsRulesProviderTest: XCTestCase {
     }
     
     func testAllowlistFilterPathWithAllowlistEnabled() {
-        configuration.allowlistIsEnbaled = true
+        configuration.allowlistIsEnabled = true
         let url = URL(string: "https://filters.com")!
         filesStorage.stubbedGetUrlForFilterResult = url
         
@@ -62,7 +62,7 @@ class DnsLibsRulesProviderTest: XCTestCase {
     }
     
     func testAllowlistFilterPathWithAllowlistDisabled() {
-        configuration.allowlistIsEnbaled = false
+        configuration.allowlistIsEnabled = false
         let url = URL(string: "https://filters.com")!
         filesStorage.stubbedGetUrlForFilterResult = url
         
