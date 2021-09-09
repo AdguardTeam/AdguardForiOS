@@ -45,10 +45,10 @@ struct SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcessorPro
     private func getInitData(_ url: String?) -> [String: Any] {
         return [
             Message.appearanceTheme: "system",
-            Message.contentBlockersEnabled: false,
-            Message.hasUserRules: true,
+            Message.contentBlockersEnabled: true,
+            Message.hasUserRules: false,
             Message.premiumApp: false,
-            Message.protectionEnabled: false,
+            Message.protectionEnabled: true,
 
             Message.removeFromAllowlistLink: UserRulesRedirectAction.removeFromAllowlist(domain: "").scheme,
             Message.addToAllowlistLink: UserRulesRedirectAction.addToAllowlist(domain: "").scheme,
