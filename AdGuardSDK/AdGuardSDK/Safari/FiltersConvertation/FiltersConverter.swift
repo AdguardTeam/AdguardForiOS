@@ -46,11 +46,11 @@ protocol ContentBlockerConverterProtocol {
         safariVersion: SafariVersion,
         optimize: Bool,
         advancedBlocking: Bool
-    ) -> ConversionResult?
+    ) -> ConversionResult
 }
 
 final class ContentBlockerConverterWrapper: ContentBlockerConverterProtocol {
-    func convertArray(rules: [String], safariVersion: SafariVersion, optimize: Bool, advancedBlocking: Bool) -> ConversionResult? {
+    func convertArray(rules: [String], safariVersion: SafariVersion, optimize: Bool, advancedBlocking: Bool) -> ConversionResult {
         let converter = ContentBlockerConverter()
         let result = converter.convertArray(rules: rules, safariVersion: safariVersion, optimize: optimize, advancedBlocking: advancedBlocking)
         return result
@@ -80,8 +80,7 @@ final class FiltersConverter: FiltersConverterProtocol {
      */
     private lazy var emptyRuleJsonResult: ConversionResult = {
         let safariVersion = SafariVersion(rawValue: configuration.iosVersion) ?? .safari15
-        // TODO: - Remove optional when Converter is fixed
-        return converter.convertArray(rules: [], safariVersion: safariVersion, optimize: false, advancedBlocking: false)!
+        return converter.convertArray(rules: [], safariVersion: safariVersion, optimize: false, advancedBlocking: false)
     }()
         
     private let configuration: SafariConfigurationProtocol
@@ -177,7 +176,7 @@ final class FiltersConverter: FiltersConverterProtocol {
                 safariVersion: safariVersion,
                 optimize: false,
                 advancedBlocking: configuration.advancedBlockingIsEnabled
-            ) ?? emptyRuleJsonResult
+            )
             Logger.logInfo("FiltersCoverter result: \(result.message)")
             
             // Just take the info we need

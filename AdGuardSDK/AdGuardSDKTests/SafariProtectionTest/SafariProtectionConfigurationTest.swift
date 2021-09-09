@@ -28,7 +28,8 @@ class SafariProtectionConfigurationTest: XCTestCase {
                                             converter: converter,
                                             cbStorage: cbStorage,
                                             cbService: cbService,
-                                            safariManagers: safariManagers)
+                                            safariManagers: safariManagers,
+                                            userRulesClipper: UserRulesClipperMock())
     }
     
     func testProStatus() {

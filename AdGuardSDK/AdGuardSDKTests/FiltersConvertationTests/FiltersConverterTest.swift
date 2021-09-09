@@ -5,13 +5,13 @@ final class ContentBlockerConverterMock: ContentBlockerConverterProtocol {
     
     var convertArrayCalledCount = 0
     var passedRules: [[String]] = []
-    var convertArrayResult: ConversionResult?
+    var convertArrayResult: ConversionResult!
     func convertArray(
         rules: [String],
         safariVersion: SafariVersion,
         optimize: Bool,
         advancedBlocking: Bool
-    ) -> ConversionResult? {
+    ) -> ConversionResult {
         convertArrayCalledCount += 1
         passedRules.append(rules)
         return convertArrayResult
