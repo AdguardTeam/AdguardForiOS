@@ -22,7 +22,6 @@ import Reachability
 
 open class PacketTunnelProvider: NEPacketTunnelProvider {
     
-    private let userDefaults: UserDefaultsStorageProtocol
     private let reachabilityHandler: Reachability
     private let dnsProxy: DnsProxyServiceProtocol
     private var providersManager: DnsProvidersManager
@@ -41,10 +40,10 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
     let V_DNS_IPV6_ADDRESS = "2001:ad00:ad00::ad00"
     let V_DNS_IPV4_ADDRESS = "198.18.0.1"
 
-    public init(userDefaults: UserDefaults, debugLoggs: Bool, dnsConfiguration: DnsConfigurationProtocol, filterStorageUrl: URL, statisticsDbContainerUrl: URL) {
+    public init(userDefaults: UserDefaults, debugLoggs: Bool, dnsConfiguration: DnsConfigurationProtocol, filterStorageUrl: URL, statisticsDbContainerUrl: URL) throws {
 
         self.configuration = dnsConfiguration
-        self.userDefaults = UserDefaultsStorage(storage: userDefaults)
+        let userDefaultsStorage = UserDefaultsStorage(storage: userDefaults)
 
         // init dns libs logger
         AGLogger.setLevel( debugLoggs ? .AGLL_DEBUG : .AGLL_WARN )
@@ -55,21 +54,21 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
         }
     
         // dnsProviders manager
-        providersManager = try! DnsProvidersManager(configuration: dnsConfiguration, userDefaults: self.userDefaults)
-        let filtersStorage = try! FilterFilesStorage(filterFilesDirectoryUrl: filterStorageUrl)
-        dnsFilters = DnsFiltersManager(userDefaults: self.userDefaults, filterFilesStorage: filtersStorage, configuration: dnsConfiguration)
+        providersManager = try DnsProvidersManager(configuration: dnsConfiguration, userDefaults: userDefaultsStorage)
+        let filtersStorage = try FilterFilesStorage(filterFilesDirectoryUrl: filterStorageUrl)
+        dnsFilters = DnsFiltersManager(userDefaults: userDefaultsStorage, filterFilesStorage: filtersStorage, configuration: dnsConfiguration)
 
         // init dnsProxy
         let rulesProvider = DnsLibsRulesProvider(dnsFiltersManager: dnsFilters, filterFilesStorage: filtersStorage, configuration: dnsConfiguration)
         
-        let activityStatistics = try! ActivityStatistics(statisticsDbContainerUrl: statisticsDbContainerUrl)
-        let chartsStatistics = try! ChartStatistics(statisticsDbContainerUrl: statisticsDbContainerUrl)
-        let logStatistics = try! DnsLogStatistics(statisticsDbContainerUrl: statisticsDbContainerUrl)
+        let activityStatistics = try ActivityStatistics(statisticsDbContainerUrl: statisticsDbContainerUrl)
+        let chartsStatistics = try ChartStatistics(statisticsDbContainerUrl: statisticsDbContainerUrl)
+        let logStatistics = try DnsLogStatistics(statisticsDbContainerUrl: statisticsDbContainerUrl)
         let eventHandler = DnsRequestProcessedEventHandler(providersManager: providersManager, dnsLibsRulesProvider: rulesProvider, activityStatistics: activityStatistics, chartStatistics: chartsStatistics, dnsLogStatistics: logStatistics)
         dnsProxy = DnsProxyService(eventHandler: eventHandler, dnsProvidersManager: providersManager)
 
         // init reachability
-        reachabilityHandler = try! Reachability()
+        reachabilityHandler = try Reachability()
         
         super.init()
 
@@ -86,7 +85,12 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
 
         Logger.logInfo("(PacketTunnelProvider) startTunnel ")
 
-        try? reachabilityHandler.startNotifier()
+        do {
+            try reachabilityHandler.startNotifier()
+        }
+        catch {
+            Logger.logError("eachability handler start error: \(error)")
+        }
 
         self.upadateSettings { [weak self] (systemDnsIps) in
             self?.startPacketHandling()
@@ -164,7 +168,8 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
 
         let upstreams = currentServer != nil && currentServer!.upstreams.count > 0 ? currentServer?.upstreams.map{ $0.upstream } : systemServers
 
-        let ipv6Available = ACNIPUtils.isIpv6Available()
+        let network = NetworkUtils()
+        let ipv6Available = network.isIpv6Available
 
         // todo: magic numbers
         let userfilterId = 1
@@ -175,10 +180,10 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
 
         // low level settings
 
-        let customFallbacks = configuration.fallbackServers
-        let customBootstraps = configuration.bootstrapServers
-        let blockingMode = configuration.blockingMode
-        let blockedTtl = configuration.blockedTtl
+        let customFallbacks = configuration.lowLevelConfiguration.fallbackServers
+        let customBootstraps = configuration.lowLevelConfiguration.bootstrapServers
+        let blockingMode = configuration.lowLevelConfiguration.blockingMode
+        let blockedTtl = configuration.lowLevelConfiguration.blockedTtl
 
         let rulesBlockingMode: AGBlockingMode
         let hostsBlockingMode: AGBlockingMode
@@ -206,11 +211,11 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
         var customBlockingIpv6: String?
 
         if rulesBlockingMode == .AGBM_ADDRESS {
-            if blockingMode == .unspecifiedAddress || configuration.blockingIp == nil {
+            if blockingMode == .unspecifiedAddress || configuration.lowLevelConfiguration.blockingIp == nil {
                 customBlockingIp = ["0.0.0.0", "::"]
             }
             else {
-                customBlockingIp = configuration.blockingIp!
+                customBlockingIp = configuration.lowLevelConfiguration.blockingIp!
             }
         }
         else {
@@ -226,7 +231,7 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
             }
         }
 
-        let blockIpv6 = configuration.blockIpv6
+        let blockIpv6 = configuration.lowLevelConfiguration.blockIpv6
 
         dnsProxy.start(upstreams: upstreams ?? [],
                        bootstrapDns: customBootstraps ?? [],
@@ -249,8 +254,8 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
     private func updateTunnelSettings(completion: @escaping (Error?, [String])->Void) {
         self.readSettings()
 
-        if configuration.fallbackServers?.count ?? 0 > 0 &&
-            configuration.bootstrapServers?.count ?? 0 > 0 &&
+        if configuration.lowLevelConfiguration.fallbackServers?.count ?? 0 > 0 &&
+            configuration.lowLevelConfiguration.bootstrapServers?.count ?? 0 > 0 &&
             currentServer?.upstreams.count ?? 0 > 0 {
             Logger.logInfo("We don't need to read system settings")
 
@@ -276,9 +281,10 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
             // Perhaps this will eliminate the situation with an empty dns list
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-                let systemIps = self?.getSystemDnsIps()
+                let network = NetworkUtils()
+                let systemIps = network.systemDnsServers
                 self?.updateTunnelSettingsInternal { (error) in
-                    completion(error, systemIps ?? [])
+                    completion(error, systemIps)
                 }
             }
         }
@@ -287,24 +293,9 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
     private func updateTunnelSettingsInternal(completion: @escaping (Error?)->Void) {
         Logger.logInfo("updateTunnelSettingsInternal")
 
-        var full = false
-        var withoutIcon = false
-
-        var modeName = ""
-
-        switch tunnelMode {
-        case .split:
-            modeName = "SPLIT"
-        case .full:
-            modeName = "FULL"
-            full = true
-        case .fullWithoutVpnIcon:
-            modeName = "FULL without VPN icon"
-            full = true
-            withoutIcon = true
-        default:
-            break
-        }
+        var full = tunnelMode != .split
+        var withoutIcon = tunnelMode == .fullWithoutVpnIcon
+        var modeName = tunnelMode?.name
 
         Logger.logInfo("Start Tunnel mode: \(modeName)")
 
@@ -322,8 +313,9 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
 
         let settings = NEPacketTunnelNetworkSettings()
 
-        let ipv4Available = ACNIPUtils.isIpv4Available()
-        let ipv6Available = ACNIPUtils.isIpv6Available()
+        let network = NetworkUtils()
+        let ipv4Available = network.isIpv4Available
+        let ipv6Available = network.isIpv6Available
 
         Logger.logInfo("create tunnel settings. ipv4: \(ipv4Available ? "true": "false") ipv6: \(ipv6Available ? "true": "false")")
 
@@ -455,49 +447,10 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
     private func readSettings() {
         currentServer = providersManager.activeDnsServer
         currentProvider = providersManager.activeDnsProvider
-        tunnelMode = configuration.tunnelMode
-        restartByReachability = configuration.restartByReachability
+        tunnelMode = configuration.lowLevelConfiguration.tunnelMode
+        restartByReachability = configuration.lowLevelConfiguration.restartByReachability
 
         Logger.logInfo("(PacketTunnelProvider) Start Tunnel with server: \(currentServer?.predefined.name ?? "system default")")
-    }
-
-
-    private func getSystemDnsIps()->[String] {
-
-        let addresses = self.getDNSServers()
-
-        var ips = [String] ()
-
-        for addr in addresses.ipv4 {
-            ips.append(addr.ip)
-        }
-
-        for addr in addresses.ipv6 {
-            ips.append(addr.ip)
-        }
-
-        return ips
-    }
-
-    private func getDNSServers()->(ipv4:[ServerAddress], ipv6: [ServerAddress]) {
-        var ipv4s = [ServerAddress]()
-        var ipv6s = [ServerAddress]()
-
-        ACNIPUtils.enumerateSystemDns { ip, port, ipv4, stop in
-            if ipv4 {
-                ipv4s.append(ServerAddress(ip: ip!, port: port))
-            }
-            else {
-                let components = ip?.components(separatedBy: ":")
-                if components?.first == "fe80" {
-                    // skip link-local
-                    return
-                }
-                ipv6s.append(ServerAddress(ip: ip!, port: port))
-            }
-        }
-
-        return (ipv4s, ipv6s)
     }
     
     private func reachNotify() {

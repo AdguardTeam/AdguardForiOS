@@ -79,7 +79,7 @@ extension AESharedResourcesProtocol {
                 return .default
             }
             
-            return BlockingMode(rawValue: value)!
+            return BlockingMode(rawValue: value) ?? .default
         }
         set {
             sharedDefaults().setValue(newValue.rawValue, forKey: BlockingMode)

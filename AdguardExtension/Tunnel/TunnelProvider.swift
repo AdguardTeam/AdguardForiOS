@@ -16,7 +16,6 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
 import NetworkExtension
 import DnsAdGuardSDK
 import SafariAdGuardSDK
@@ -24,7 +23,7 @@ import Sentry
 
 class TunnelProvider: PacketTunnelProvider {
     
-    init() {
+    init() throws {
         // init logger
         let resources = AESharedResources()
         let debugLoggs = resources.isDebugLogs
@@ -55,16 +54,15 @@ class TunnelProvider: PacketTunnelProvider {
                                              dnsImplementation: resources.dnsImplementation,
                                              blocklistIsEnabled: true,
                                              allowlistIsEnabled: true,
-                                             tunnelMode: resources.tunnelMode,
-                                             fallbackServers: resources.customFallbackServers,
-                                             bootstrapServers: resources.customBootstrapServers,
-                                             blockingMode: resources.blockingMode,
-                                             blockingIp: resources.customBlockingIp,
-                                             blockedTtl: resources.blockedResponseTtlSecs,
-                                             blockIpv6: resources.blockIpv6,
-                                             restartByReachability: resources.restartByReachability)
+                                             lowLevelConfiguration: LowLevelDnsConfiguration.fromResources(resources))
         
-        super.init(userDefaults: resources.sharedDefaults(), debugLoggs: debugLoggs, dnsConfiguration: configuration, filterStorageUrl: filterStorageUrl, statisticsDbContainerUrl: statisticsUrl)
+        try super.init(userDefaults: resources.sharedDefaults(), debugLoggs: debugLoggs, dnsConfiguration: configuration, filterStorageUrl: filterStorageUrl, statisticsDbContainerUrl: statisticsUrl)
     }
 
+}
+
+extension LowLevelDnsConfiguration {
+    static func fromResources(_ resources: AESharedResourcesProtocol)->LowLevelDnsConfiguration {
+        return LowLevelDnsConfiguration(tunnelMode: resources.tunnelMode, blockingMode: resources.blockingMode, blockedTtl: resources.blockedResponseTtlSecs, blockIpv6: resources.blockIpv6, restartByReachability: resources.restartByReachability)
+    }
 }

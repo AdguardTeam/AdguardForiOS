@@ -380,7 +380,6 @@
 		D0A3CF9426E7AC95006E90AD /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A3CF9326E7AC95006E90AD /* PacketTunnelProvider.swift */; };
 		D0A3CF9626E7ADEC006E90AD /* DnsProxyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A3CF9526E7ADEB006E90AD /* DnsProxyService.swift */; };
 		D0A3CF9926E7AF32006E90AD /* ACNCidrRange.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A3CF9826E7AF31006E90AD /* ACNCidrRange.m */; };
-		D0A3CF9C26E7B69F006E90AD /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A3CF9A26E7B69F006E90AD /* ACNIPUtils.m */; };
 		D0A3CF9E26E90E1C006E90AD /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = D0A3CF9D26E90E1C006E90AD /* AGDnsProxy */; };
 		D0A3CFA126E90F12006E90AD /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A3CF9F26E90F10006E90AD /* ACNUrlUtils.m */; };
 /* End PBXBuildFile section */
@@ -634,8 +633,6 @@
 		D0A3CF9526E7ADEB006E90AD /* DnsProxyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProxyService.swift; sourceTree = "<group>"; };
 		D0A3CF9726E7AF30006E90AD /* ACNCidrRange.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNCidrRange.h; sourceTree = "<group>"; };
 		D0A3CF9826E7AF31006E90AD /* ACNCidrRange.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNCidrRange.m; sourceTree = "<group>"; };
-		D0A3CF9A26E7B69F006E90AD /* ACNIPUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACNIPUtils.m; sourceTree = "<group>"; };
-		D0A3CF9B26E7B69F006E90AD /* ACNIPUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACNIPUtils.h; sourceTree = "<group>"; };
 		D0A3CF9F26E90F10006E90AD /* ACNUrlUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACNUrlUtils.m; sourceTree = "<group>"; };
 		D0A3CFA026E90F11006E90AD /* ACNUrlUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACNUrlUtils.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1378,8 +1375,6 @@
 			children = (
 				D0A3CF9326E7AC95006E90AD /* PacketTunnelProvider.swift */,
 				D0A3CF9526E7ADEB006E90AD /* DnsProxyService.swift */,
-				D0A3CF9B26E7B69F006E90AD /* ACNIPUtils.h */,
-				D0A3CF9A26E7B69F006E90AD /* ACNIPUtils.m */,
 				D0A3CF9726E7AF30006E90AD /* ACNCidrRange.h */,
 				D0A3CF9826E7AF31006E90AD /* ACNCidrRange.m */,
 				D0A3CFA026E90F11006E90AD /* ACNUrlUtils.h */,
@@ -1913,7 +1908,6 @@
 				7E667A6A26E389320013B1D5 /* DnsTrackersProvider.swift in Sources */,
 				7E6E81C826C2A05B00925F96 /* DnsUserRulesStorage.swift in Sources */,
 				7E6E81E126C2A05B00925F96 /* DnsProvidersManager.swift in Sources */,
-				D0A3CF9C26E7B69F006E90AD /* ACNIPUtils.m in Sources */,
 				7E6E81B626C2A05B00925F96 /* ActivityStatistics+ActivityStatisticsTable.swift in Sources */,
 				7E6E81CA26C2A05B00925F96 /* DnsProtection.swift in Sources */,
 				7E6E81BE26C2A05B00925F96 /* DnsLogStatistics+DnsLogTable.swift in Sources */,

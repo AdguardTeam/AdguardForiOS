@@ -59,14 +59,7 @@ public protocol DnsConfigurationProtocol: ConfigurationProtocol {
     var dnsImplementation: DnsImplementation { get set }
     
     // low level settings
-    var tunnelMode: TunnelMode { get set }
-    var fallbackServers: [String]? { get set }
-    var bootstrapServers: [String]? { get set}
-    var blockingMode: BlockingMode { get set }
-    var blockingIp: [String]? { get set }
-    var blockedTtl: Int { get set}
-    var blockIpv6: Bool { get set }
-    var restartByReachability: Bool { get set }
+    var lowLevelConfiguration: LowLevelDnsConfiguration { get set }
 }
 
 public final class DnsConfiguration: DnsConfigurationProtocol {
@@ -77,7 +70,21 @@ public final class DnsConfiguration: DnsConfigurationProtocol {
     public var dnsImplementation: DnsImplementation
     public var blocklistIsEnabled: Bool
     public var allowlistIsEnabled: Bool
+    public var lowLevelConfiguration: LowLevelDnsConfiguration
     
+    
+    public init(currentLanguage: String, proStatus: Bool, dnsFilteringIsEnabled: Bool, dnsImplementation: DnsImplementation, blocklistIsEnabled: Bool, allowlistIsEnabled: Bool, lowLevelConfiguration: LowLevelDnsConfiguration) {
+        self.currentLanguage = currentLanguage
+        self.proStatus = proStatus
+        self.dnsFilteringIsEnabled = dnsFilteringIsEnabled
+        self.dnsImplementation = dnsImplementation
+        self.blocklistIsEnabled = blocklistIsEnabled
+        self.allowlistIsEnabled = allowlistIsEnabled
+        self.lowLevelConfiguration = lowLevelConfiguration
+    }
+}
+
+public struct LowLevelDnsConfiguration {
     public var tunnelMode: TunnelMode
     public var fallbackServers: [String]?
     public var bootstrapServers: [String]?
@@ -87,14 +94,7 @@ public final class DnsConfiguration: DnsConfigurationProtocol {
     public var blockIpv6: Bool
     public var restartByReachability: Bool
     
-    
-    public init(currentLanguage: String, proStatus: Bool, dnsFilteringIsEnabled: Bool, dnsImplementation: DnsImplementation, blocklistIsEnabled: Bool, allowlistIsEnabled: Bool, tunnelMode: TunnelMode, fallbackServers: [String]?, bootstrapServers: [String]?, blockingMode: BlockingMode, blockingIp: [String]?, blockedTtl: Int, blockIpv6: Bool, restartByReachability: Bool) {
-        self.currentLanguage = currentLanguage
-        self.proStatus = proStatus
-        self.dnsFilteringIsEnabled = dnsFilteringIsEnabled
-        self.dnsImplementation = dnsImplementation
-        self.blocklistIsEnabled = blocklistIsEnabled
-        self.allowlistIsEnabled = allowlistIsEnabled
+    public init(tunnelMode: TunnelMode, fallbackServers: [String]? = nil, bootstrapServers: [String]? = nil, blockingMode: BlockingMode, blockingIp: [String]? = nil, blockedTtl: Int, blockIpv6: Bool, restartByReachability: Bool) {
         self.tunnelMode = tunnelMode
         self.fallbackServers = fallbackServers
         self.bootstrapServers = bootstrapServers
@@ -104,8 +104,6 @@ public final class DnsConfiguration: DnsConfigurationProtocol {
         self.blockIpv6 = blockIpv6
         self.restartByReachability = restartByReachability
     }
-    
-
 }
 
 extension DnsConfigurationProtocol {

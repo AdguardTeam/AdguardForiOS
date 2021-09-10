@@ -137,11 +137,11 @@ extension AESharedResourcesProtocol {
     
     dynamic var tunnelMode: TunnelMode {
         get {
-            guard let value = sharedDefaults().object(forKey: AEDefaultsVPNTunnelMode) as? UInt else {
+            guard let value = sharedDefaults().object(forKey: AEDefaultsVPNTunnelMode) as? Int else {
                 return .split
             }
             
-            return TunnelMode(rawValue:  Int(value)) ?? .split
+            return TunnelMode(rawValue:  value) ?? .split
         }
         set {
             sharedDefaults().set(newValue.rawValue, forKey: AEDefaultsVPNTunnelMode)
