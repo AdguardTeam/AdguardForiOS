@@ -376,6 +376,7 @@
 		D049EE9B26B2F31A00B8088B /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049EB9426B17C0A00B8088B /* Dictionary+Utils.swift */; };
 		D049EE9E26B2F33200B8088B /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049EB9326B17C0A00B8088B /* CharacterSet+Utils.swift */; };
 		D049EEA326B2F35B00B8088B /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = D049EEA226B2F35B00B8088B /* Zip */; };
+		D09E32C026EB85FA00B5417A /* PacketTunnelProviderSettingsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E32BF26EB85FA00B5417A /* PacketTunnelProviderSettingsBuilder.swift */; };
 		D0A3CF9226E7AADE006E90AD /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = D0A3CF9126E7AADE006E90AD /* Reachability */; };
 		D0A3CF9426E7AC95006E90AD /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A3CF9326E7AC95006E90AD /* PacketTunnelProvider.swift */; };
 		D0A3CF9626E7ADEC006E90AD /* DnsProxyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A3CF9526E7ADEB006E90AD /* DnsProxyService.swift */; };
@@ -629,6 +630,7 @@
 		D049EB9326B17C0A00B8088B /* CharacterSet+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CharacterSet+Utils.swift"; path = "../Libs/Utils/CharacterSet+Utils.swift"; sourceTree = "<group>"; };
 		D049EB9426B17C0A00B8088B /* Dictionary+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Dictionary+Utils.swift"; path = "../Libs/Utils/Dictionary+Utils.swift"; sourceTree = "<group>"; };
 		D049EBA026B1868200B8088B /* AdGuardSDK_mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AdGuardSDK_mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D09E32BF26EB85FA00B5417A /* PacketTunnelProviderSettingsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProviderSettingsBuilder.swift; sourceTree = "<group>"; };
 		D0A3CF9326E7AC95006E90AD /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
 		D0A3CF9526E7ADEB006E90AD /* DnsProxyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProxyService.swift; sourceTree = "<group>"; };
 		D0A3CF9726E7AF30006E90AD /* ACNCidrRange.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNCidrRange.h; sourceTree = "<group>"; };
@@ -1375,6 +1377,7 @@
 			children = (
 				D0A3CF9326E7AC95006E90AD /* PacketTunnelProvider.swift */,
 				D0A3CF9526E7ADEB006E90AD /* DnsProxyService.swift */,
+				D09E32BF26EB85FA00B5417A /* PacketTunnelProviderSettingsBuilder.swift */,
 				D0A3CF9726E7AF30006E90AD /* ACNCidrRange.h */,
 				D0A3CF9826E7AF31006E90AD /* ACNCidrRange.m */,
 				D0A3CFA026E90F11006E90AD /* ACNUrlUtils.h */,
@@ -1884,6 +1887,7 @@
 				7E6E81E926C2A05B00925F96 /* DnsImplementation.swift in Sources */,
 				7E6E81A626C2A05B00925F96 /* ChartStatistics+ChartStatisticsTable.swift in Sources */,
 				7E6E81CC26C2A05B00925F96 /* DnsProtection+Configuration.swift in Sources */,
+				D09E32C026EB85FA00B5417A /* PacketTunnelProviderSettingsBuilder.swift in Sources */,
 				7E6E81D026C2A05B00925F96 /* DnsProtectionServiceStorage.swift in Sources */,
 				7E6E81AC26C2A05B00925F96 /* AGDnsRequestProcessedEventWrapper.swift in Sources */,
 				7E4A132726E4FD1400728BDE /* CompaniesStatisticsRecord.swift in Sources */,

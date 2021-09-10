@@ -56,9 +56,6 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
         Logger.logInfo("(DnsProxyService) initializing")
         self.eventHandler = eventHandler
         self.dnsProvidersManager = dnsProvidersManager
-//        dnsRecordsWriter = logWriter
-//        self.resources = resources
-//        self.dnsProvidersService = dnsProvidersService
         self.events = AGDnsProxyEvents()
 
         super.init()
@@ -69,7 +66,6 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
             }
         }
     }
-
 
     func start(upstreams: [String], bootstrapDns: [String], fallbacks: [String], serverName: String, filtersManager: DnsFiltersManagerProtocol , userFilterId:Int, whitelistFilterId:Int, ipv6Available: Bool, rulesBlockingMode: AGBlockingMode, hostsBlockingMode: AGBlockingMode, blockedResponseTtlSecs: Int, customBlockingIpv4: String?, customBlockingIpv6: String?, blockIpv6: Bool) -> Bool {
         resolveQueue.sync(flags: .barrier) {
