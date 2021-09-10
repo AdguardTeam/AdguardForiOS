@@ -37,8 +37,6 @@
 		242A07AF26C6757C00181D35 /* UITraitCollection+deviceCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A07AD26C6757C00181D35 /* UITraitCollection+deviceCheck.swift */; };
 		242A07B126C677D900181D35 /* AdvancedProtectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A07B026C677D900181D35 /* AdvancedProtectionController.swift */; };
 		242A07B226C677D900181D35 /* AdvancedProtectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A07B026C677D900181D35 /* AdvancedProtectionController.swift */; };
-		242A07B426C6B43700181D35 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A07B326C6B43700181D35 /* Atomic.swift */; };
-		242A07B526C6B43700181D35 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A07B326C6B43700181D35 /* Atomic.swift */; };
 		242B9145258A0D3E00A39E19 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B9144258A0D3E00A39E19 /* SignInController.swift */; };
 		242B9146258A0D3E00A39E19 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B9144258A0D3E00A39E19 /* SignInController.swift */; };
 		242C7FF026E6536B00A01B10 /* DnsUserRulesTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242C7FEF26E6536B00A01B10 /* DnsUserRulesTableModel.swift */; };
@@ -115,6 +113,43 @@
 		248448BD259383ED00D52DE0 /* SignInFailureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248448BB259383ED00D52DE0 /* SignInFailureHandler.swift */; };
 		249606CF258B831100C747BA /* SocialSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249606AB258B82AD00C747BA /* SocialSignInButton.swift */; };
 		249606E2258B832100C747BA /* SocialSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249606AB258B82AD00C747BA /* SocialSignInButton.swift */; };
+		249D0B4226EB864F00E74704 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; };
+		249D0B4326EB864F00E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		249D0B4426EB865700E74704 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; };
+		249D0B4526EB865700E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		249D0B4626EB865B00E74704 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; };
+		249D0B4726EB865B00E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		249D0B4826EB866D00E74704 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; };
+		249D0B4926EB866D00E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		249D0B4A26EB867500E74704 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; };
+		249D0B4B26EB867500E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		249D0B4C26EB868A00E74704 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; };
+		249D0B4D26EB868A00E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		249D0B4F26EB86A300E74704 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; };
+		249D0B5026EB86A300E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		249D0B5226EB86A800E74704 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; };
+		249D0B5326EB86A800E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		249D0B5426EB86AD00E74704 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; };
+		249D0B5526EB86AD00E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		249D0B5626EB86B100E74704 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; };
+		249D0B5726EB86B100E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		249D0B5826EB86B600E74704 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; };
+		249D0B5926EB86B600E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		249D0B5A26EB86BB00E74704 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; };
+		249D0B5B26EB86BB00E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		249D0B5C26EB86C000E74704 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; };
+		249D0B5D26EB86C000E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		249D0B5E26EB86D200E74704 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; };
+		249D0B5F26EB86D200E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		249D0B6226EB87A500E74704 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249D0B6126EB87A500E74704 /* Atomic.swift */; };
+		249D0B6426EB87EB00E74704 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249D0B6126EB87A500E74704 /* Atomic.swift */; };
+		249D0B6526EB87EC00E74704 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249D0B6126EB87A500E74704 /* Atomic.swift */; };
+		249D0B6626EB87EC00E74704 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249D0B6126EB87A500E74704 /* Atomic.swift */; };
+		249D0B6726EB87ED00E74704 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249D0B6126EB87A500E74704 /* Atomic.swift */; };
+		249D0B6826EB87EE00E74704 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249D0B6126EB87A500E74704 /* Atomic.swift */; };
+		249D0B6926EB87EE00E74704 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249D0B6126EB87A500E74704 /* Atomic.swift */; };
+		249D0B6A26EB87EF00E74704 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249D0B6126EB87A500E74704 /* Atomic.swift */; };
+		249D0B6B26EB885900E74704 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249D0B6126EB87A500E74704 /* Atomic.swift */; };
 		249DF84D26CAA3DB002814B4 /* UITraitCollection+deviceCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A07AD26C6757C00181D35 /* UITraitCollection+deviceCheck.swift */; };
 		249DF84E26CAA3DC002814B4 /* UITraitCollection+deviceCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A07AD26C6757C00181D35 /* UITraitCollection+deviceCheck.swift */; };
 		249E10DA2600D187003A5FBD /* URLSchemeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB5042600A3220047974C /* URLSchemeParser.swift */; };
@@ -133,14 +168,14 @@
 		249E125E2600FFA3003A5FBD /* URLSchemeExecutorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C03C4525FF73790062DEED /* URLSchemeExecutorMock.swift */; };
 		24AD872D260A247B0034D402 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD872C260A247B0034D402 /* RadioButton.swift */; };
 		24AD872E260A247B0034D402 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD872C260A247B0034D402 /* RadioButton.swift */; };
-		24BC54C826E7A56B00F680ED /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */; };
-		24BC54C926E7A56B00F680ED /* SharedAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		24BC54CA26E7A58800F680ED /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */; };
-		24BC54CB26E7A58800F680ED /* SharedAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		24B33CFD26C5073700499281 /* OnboardingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B33CFC26C5073700499281 /* OnboardingContentView.swift */; };
 		24B33CFE26C50DF600499281 /* OnboardingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B33CFC26C5073700499281 /* OnboardingContentView.swift */; };
 		24B33CFF26C50E0300499281 /* OnboardingContentBlockerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2414089A26C4226000741F32 /* OnboardingContentBlockerCell.swift */; };
 		24B33D0026C50E0600499281 /* OnboardingAdvancedProtectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2414089C26C42E6700741F32 /* OnboardingAdvancedProtectionView.swift */; };
+		24BC54C826E7A56B00F680ED /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */; };
+		24BC54C926E7A56B00F680ED /* SharedAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		24BC54CA26E7A58800F680ED /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */; };
+		24BC54CB26E7A58800F680ED /* SharedAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		24BD32ED2603588F00CC12F3 /* FiltersUpdatesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */; };
 		24BD32FF2603592000CC12F3 /* FiltersUpdatesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */; };
 		24C49DBD26C40AC900790CB3 /* WhatsNewBottomAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C49DBC26C40AC900790CB3 /* WhatsNewBottomAlertController.swift */; };
@@ -2601,6 +2636,39 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		249D0B4E26EB868A00E74704 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				249D0B4D26EB868A00E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		249D0B5126EB86A400E74704 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				249D0B5026EB86A300E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		249D0B6026EB86D300E74704 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				249D0B5F26EB86D200E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		659886B31CF74DE9003ECD1C /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2667,22 +2735,13 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D04B49C42639A0CE00815F30 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D04B49C92639A0D200815F30 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				249D0B4926EB866D00E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2693,6 +2752,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				249D0B4B26EB867500E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2703,6 +2763,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				249D0B4726EB865B00E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2713,6 +2774,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				249D0B4526EB865700E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2723,6 +2785,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				249D0B4326EB864F00E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2754,6 +2817,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				249D0B5326EB86A800E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2764,6 +2828,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				249D0B5526EB86AD00E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2774,6 +2839,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				249D0B5726EB86B100E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2784,6 +2850,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				249D0B5926EB86B600E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2794,6 +2861,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				249D0B5B26EB86BB00E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2804,6 +2872,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				249D0B5D26EB86C000E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2851,7 +2920,6 @@
 		2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Utils.swift"; sourceTree = "<group>"; };
 		242A07AD26C6757C00181D35 /* UITraitCollection+deviceCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITraitCollection+deviceCheck.swift"; sourceTree = "<group>"; };
 		242A07B026C677D900181D35 /* AdvancedProtectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedProtectionController.swift; sourceTree = "<group>"; };
-		242A07B326C6B43700181D35 /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		242B9144258A0D3E00A39E19 /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
 		242C7FEF26E6536B00A01B10 /* DnsUserRulesTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsUserRulesTableModel.swift; sourceTree = "<group>"; };
 		2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowLevelSettingsController.swift; sourceTree = "<group>"; };
@@ -2878,10 +2946,11 @@
 		247CB64D2600CD480047974C /* SocialNetworkAuthParametersParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialNetworkAuthParametersParser.swift; sourceTree = "<group>"; };
 		248448BB259383ED00D52DE0 /* SignInFailureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInFailureHandler.swift; sourceTree = "<group>"; };
 		249606AB258B82AD00C747BA /* SocialSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSignInButton.swift; sourceTree = "<group>"; };
+		249D0B6126EB87A500E74704 /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		24AD872C260A247B0034D402 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		24B2F12F25FF4DD500CE46C8 /* URLSchemeParcerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSchemeParcerTest.swift; sourceTree = "<group>"; };
-		24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SharedAdGuardSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		24B33CFC26C5073700499281 /* OnboardingContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContentView.swift; sourceTree = "<group>"; };
+		24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SharedAdGuardSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersUpdatesConstants.swift; sourceTree = "<group>"; };
 		24C03C4525FF73790062DEED /* URLSchemeExecutorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSchemeExecutorMock.swift; sourceTree = "<group>"; };
 		24C49DBC26C40AC900790CB3 /* WhatsNewBottomAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewBottomAlertController.swift; sourceTree = "<group>"; };
@@ -4230,6 +4299,7 @@
 			files = (
 				D07256D426BC15E000654177 /* Zip in Frameworks */,
 				D07256BA26BC155900654177 /* SQLite in Frameworks */,
+				249D0B4F26EB86A300E74704 /* SafariAdGuardSDK.framework in Frameworks */,
 				65EC9CFD1BB9850300F53F3B /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4240,6 +4310,7 @@
 			files = (
 				D07256CA26BC15C900654177 /* Zip in Frameworks */,
 				D07256C226BC157200654177 /* SQLite in Frameworks */,
+				249D0B4226EB864F00E74704 /* SafariAdGuardSDK.framework in Frameworks */,
 				7E06B68C22FB1606006859AC /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4297,6 +4368,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				249D0B5E26EB86D200E74704 /* SafariAdGuardSDK.framework in Frameworks */,
 				D07256B326BC140D00654177 /* Zip in Frameworks */,
 				D07256B126BC13F800654177 /* SQLite in Frameworks */,
 				7EF5C56226C26AB3001851D6 /* Sentry in Frameworks */,
@@ -4314,6 +4386,7 @@
 			files = (
 				D07256D226BC15DB00654177 /* Zip in Frameworks */,
 				D07256BC26BC155E00654177 /* SQLite in Frameworks */,
+				249D0B4826EB866D00E74704 /* SafariAdGuardSDK.framework in Frameworks */,
 				D067D90221428AA900ECDE6D /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4324,6 +4397,7 @@
 			files = (
 				D07256D026BC15D700654177 /* Zip in Frameworks */,
 				D07256BE26BC156500654177 /* SQLite in Frameworks */,
+				249D0B4A26EB867500E74704 /* SafariAdGuardSDK.framework in Frameworks */,
 				D067D93321428B4600ECDE6D /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4334,6 +4408,7 @@
 			files = (
 				D07256CE26BC15D200654177 /* Zip in Frameworks */,
 				D07256C026BC156B00654177 /* SQLite in Frameworks */,
+				249D0B4626EB865B00E74704 /* SafariAdGuardSDK.framework in Frameworks */,
 				D067D96421428B9100ECDE6D /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4344,6 +4419,7 @@
 			files = (
 				D07256CC26BC15CD00654177 /* Zip in Frameworks */,
 				D07256B826BC155300654177 /* SQLite in Frameworks */,
+				249D0B4426EB865700E74704 /* SafariAdGuardSDK.framework in Frameworks */,
 				D067D99521428BB500ECDE6D /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4354,6 +4430,7 @@
 			files = (
 				D06E9BFC26906C6500E5AB5C /* SQLite in Frameworks */,
 				D06E9C26269071D100E5AB5C /* Zip in Frameworks */,
+				249D0B5226EB86A800E74704 /* SafariAdGuardSDK.framework in Frameworks */,
 				D0B542C32435C6A3002F0AEC /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4364,6 +4441,7 @@
 			files = (
 				D06E9BFE26906C6D00E5AB5C /* SQLite in Frameworks */,
 				D06E9C22269071C800E5AB5C /* Zip in Frameworks */,
+				249D0B5426EB86AD00E74704 /* SafariAdGuardSDK.framework in Frameworks */,
 				D0B542FC2435C6A7002F0AEC /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4374,6 +4452,7 @@
 			files = (
 				D06E9C0026906C7600E5AB5C /* SQLite in Frameworks */,
 				D06E9C1E269071C200E5AB5C /* Zip in Frameworks */,
+				249D0B5626EB86B100E74704 /* SafariAdGuardSDK.framework in Frameworks */,
 				D0B543352435C6AA002F0AEC /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4384,6 +4463,7 @@
 			files = (
 				D06E9C0226906C7D00E5AB5C /* SQLite in Frameworks */,
 				D06E9C1A269071A100E5AB5C /* Zip in Frameworks */,
+				249D0B5826EB86B600E74704 /* SafariAdGuardSDK.framework in Frameworks */,
 				D0B5436E2435C6AE002F0AEC /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4394,6 +4474,7 @@
 			files = (
 				D06E9C0426906C8200E5AB5C /* SQLite in Frameworks */,
 				D06E9C162690719700E5AB5C /* Zip in Frameworks */,
+				249D0B5A26EB86BB00E74704 /* SafariAdGuardSDK.framework in Frameworks */,
 				D0B543A72435C6B1002F0AEC /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4404,6 +4485,7 @@
 			files = (
 				D06E9C0626906C8700E5AB5C /* SQLite in Frameworks */,
 				D06E9C122690718C00E5AB5C /* Zip in Frameworks */,
+				249D0B5C26EB86C000E74704 /* SafariAdGuardSDK.framework in Frameworks */,
 				D0B543E02435C6B5002F0AEC /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4448,6 +4530,7 @@
 				D0B5451B2435C6BF002F0AEC /* libz.tbd in Frameworks */,
 				D0B5451D2435C6BF002F0AEC /* NetworkExtension.framework in Frameworks */,
 				A5E02633261E331E00198396 /* AGDnsProxy in Frameworks */,
+				249D0B4C26EB868A00E74704 /* SafariAdGuardSDK.framework in Frameworks */,
 				D0B5451F2435C6BF002F0AEC /* libresolv.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4493,6 +4576,14 @@
 				247CB64D2600CD480047974C /* SocialNetworkAuthParametersParser.swift */,
 			);
 			path = Parsers;
+			sourceTree = "<group>";
+		};
+		249D0B3F26EB85CF00E74704 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				242A07B326C6B43700181D35 /* Atomic.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		24D6A9CB25FB60A200674D11 /* URLScheme */ = {
@@ -5772,6 +5863,7 @@
 				7E4ABFFB26BD75E700DF5CF0 /* SafariWebExtension */,
 				65F398121B7B684700ABCD39 /* Products */,
 				65D8294D1EDDA905008F7F30 /* Frameworks */,
+				249D0B3F26EB85CF00E74704 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -6404,7 +6496,6 @@
 				D0EDE44F22A927D700086C00 /* Filters */,
 				7E952E9923D5FFB400D89AE0 /* Protection.storyboard */,
 				7EF4285B23AB77AB00948B65 /* ComplexProtectionController.swift */,
-				2459DFB6265BAE4000551657 /* AdvancedYouTubeBlockingController.swift */,
 				242A07B026C677D900181D35 /* AdvancedProtectionController.swift */,
 			);
 			path = ComplexProtection;
@@ -6521,6 +6612,7 @@
 				7E49EB5B2442435D00911AB1 /* UIBezierPath+Utils.swift */,
 				D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */,
 				247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */,
+				249D0B6126EB87A500E74704 /* Atomic.swift */,
 				24ED98C5259B78DF00A73B17 /* Array+Utils.swift */,
 				7EB89CAF26C50C5F00E7C8A1 /* FileManager+Utils.swift */,
 				7E3FEFBC26CEB4E90080EC03 /* Bool+Utils.swift */,
@@ -6978,7 +7070,7 @@
 				65F3985B1B7B6A5300ABCD39 /* Frameworks */,
 				65F3985C1B7B6A5300ABCD39 /* Resources */,
 				6506CC2B1BD853140020F31E /* Setting Required device capabilities */,
-				D04B49C42639A0CE00815F30 /* Embed Frameworks */,
+				249D0B5126EB86A400E74704 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -7138,6 +7230,7 @@
 				D0569D3321F1C0A800985DA9 /* Sources */,
 				D0569E2121F1C0A800985DA9 /* Frameworks */,
 				D0569E2821F1C0A800985DA9 /* Resources */,
+				249D0B6026EB86D300E74704 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -7448,6 +7541,7 @@
 				D0B544BF2435C6BF002F0AEC /* Sources */,
 				D0B5451A2435C6BF002F0AEC /* Frameworks */,
 				D0B545202435C6BF002F0AEC /* Resources */,
+				249D0B4E26EB868A00E74704 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -8422,7 +8516,6 @@
 				D0D7E5D924444D63001801A5 /* ChartDateType.swift in Sources */,
 				D0D7E6202444570F001801A5 /* ActivityTableViewCell.swift in Sources */,
 				D0B545BB2435D655002F0AEC /* RequestDetailsCell.swift in Sources */,
-				242A07B526C6B43700181D35 /* Atomic.swift in Sources */,
 				D0B545D02435D692002F0AEC /* RuleInfo.swift in Sources */,
 				7E92754326C67CA6007B2C80 /* SafariGroupTableController.swift in Sources */,
 				7E4EFB0E26DFE6DE00116762 /* UserRulesModelsProvider.swift in Sources */,
@@ -8651,6 +8744,7 @@
 				D0B545F12435D6AB002F0AEC /* SimpleConfiguration.swift in Sources */,
 				7EAD352826C2C657001AFB3A /* NotificationCenter+Utils.swift in Sources */,
 				D031A16A219EFC99002C17D9 /* DDAbstractDatabaseLogger.m in Sources */,
+				249D0B6B26EB885900E74704 /* Atomic.swift in Sources */,
 				D0B545E32435D69B002F0AEC /* BottomShadowView.swift in Sources */,
 				7EAA0D7B26CA8785007208E5 /* SafariFilterCell.swift in Sources */,
 			);
@@ -8704,6 +8798,7 @@
 				655A02271C6B7686000F00D7 /* ACIOStream.m in Sources */,
 				D06E9BF1269064DC00E5AB5C /* ABECRequest.m in Sources */,
 				D0C9410223ED60B1008B85EC /* DnsProviderInfo.swift in Sources */,
+				249D0B6526EB87EC00E74704 /* Atomic.swift in Sources */,
 				7E407997231E7A87007EFB26 /* LoaderSegue.swift in Sources */,
 				7EF5C52A26C261E5001851D6 /* SharedResources.swift in Sources */,
 				7EB6286E235DED7B00E3FCC1 /* NetworkSettingsService.swift in Sources */,
@@ -8974,6 +9069,7 @@
 				655E94961BBEB31400286FBE /* AEUIPlayerViewController.m in Sources */,
 				658E43981E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
 				D031A139219EFC99002C17D9 /* DDMultiFormatter.m in Sources */,
+				249D0B6226EB87A500E74704 /* Atomic.swift in Sources */,
 				7E15DFD726E63A460020247E /* UIDevice+Utils.swift in Sources */,
 				7E822C0E2435EDD30015B4D0 /* RulesParser.swift in Sources */,
 				65EC9C8C1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
@@ -9104,7 +9200,6 @@
 				D02C080821BEAB5C00796714 /* AntibannerMock.swift in Sources */,
 				7E85765F2435F1EC0055F63D /* DomainParser.swift in Sources */,
 				D0288F3A230698DB00A4EBEF /* ACNNetworking.m in Sources */,
-				2452496C26CB9B4C0034EDBA /* Atomic.swift in Sources */,
 				D0AEC269240930C0003E8FCC /* VpnManagerTest.swift in Sources */,
 				2425D6DE258F8C710037AEBE /* Dictionary+Utils.swift in Sources */,
 				7E4FEA7E259B348F008CF061 /* DnsResolver.swift in Sources */,
@@ -9178,6 +9273,7 @@
 				65EC9BC91BB9824C00F53F3B /* ADLocales.m in Sources */,
 				D0D5949A23AA3CAD0033CAF3 /* ADBTable.m in Sources */,
 				249E11102600D382003A5FBD /* OpenDnsSettingsControllerParser.swift in Sources */,
+				249D0B6A26EB87EF00E74704 /* Atomic.swift in Sources */,
 				24F66A8726033C9D0097B426 /* OpenDnsSettingsControllerWithLaunchScreenParser.swift in Sources */,
 				D04CDE84250679BF00A6D2CC /* ProductInfoMock.swift in Sources */,
 				7EE567B823D0A28B00CC10DB /* DomainsConverterTest.swift in Sources */,
@@ -9420,6 +9516,7 @@
 				7ECD9C44238D65960065E88D /* DDLog.m in Sources */,
 				D0450F81263C2A1400CA2110 /* NSString+Utils.m in Sources */,
 				7EC635B3239EB177003A5CE4 /* Date+Utils.swift in Sources */,
+				249D0B6626EB87EC00E74704 /* Atomic.swift in Sources */,
 				2425D728258F8D1A0037AEBE /* CharacterSet+Utils.swift in Sources */,
 				7E9A487B23A2810B00B89540 /* DnsLogRecord.swift in Sources */,
 				D0D7E5A9243C9592001801A5 /* ACSSystemUtils.m in Sources */,
@@ -9586,7 +9683,6 @@
 				247521F52594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */,
 				7E85766A2435F1FB0055F63D /* RulesParser.swift in Sources */,
 				D081FC342418EB76000A10DA /* SafariProtectionService.swift in Sources */,
-				2452496826CB9B3F0034EDBA /* Atomic.swift in Sources */,
 				D0569D6C21F1C0A800985DA9 /* ACLLogger.m in Sources */,
 				D0569D6D21F1C0A800985DA9 /* FMDatabaseAdditions.m in Sources */,
 				D0569D7121F1C0A800985DA9 /* DDLog.m in Sources */,
@@ -9617,6 +9713,7 @@
 				7EAD353B26C2D5E4001AFB3A /* DnsProviders.swift in Sources */,
 				D0569DB321F1C0A800985DA9 /* ADBTableRow.m in Sources */,
 				D08CE42E240D3AC500A70089 /* LoginService.swift in Sources */,
+				249D0B6426EB87EB00E74704 /* Atomic.swift in Sources */,
 				7EAD352C26C2C821001AFB3A /* ACNIPUtils.m in Sources */,
 				D0569DBF21F1C0A800985DA9 /* FMDatabasePool.m in Sources */,
 				D0569DC321F1C0A800985DA9 /* DDLoggerNames.m in Sources */,
@@ -10229,6 +10326,7 @@
 				7E15DFE026E63AEF0020247E /* UIDevice+Utils.swift in Sources */,
 				D0B543EC2435C6B8002F0AEC /* Date+Utils.swift in Sources */,
 				2425D73B258F8D1E0037AEBE /* CharacterSet+Utils.swift in Sources */,
+				249D0B6926EB87EE00E74704 /* Atomic.swift in Sources */,
 				D0B543ED2435C6B8002F0AEC /* DnsLogRecord.swift in Sources */,
 				D0D7E5E624444EBE001801A5 /* ParsedHost.swift in Sources */,
 				D0B543F02435C6B8002F0AEC /* ACLLogger.m in Sources */,
@@ -10340,7 +10438,6 @@
 				D0B5444B2435C6BC002F0AEC /* DDLog.m in Sources */,
 				D0B5444C2435C6BC002F0AEC /* ACLWildcard.m in Sources */,
 				D0B5444D2435C6BC002F0AEC /* NSStringPunycodeAdditions.m in Sources */,
-				2452496626CB9B390034EDBA /* Atomic.swift in Sources */,
 				D0B5444E2435C6BC002F0AEC /* DDAbstractDatabaseLogger.m in Sources */,
 				D0B544512435C6BC002F0AEC /* ThemeableImageView.swift in Sources */,
 				D0B544522435C6BC002F0AEC /* ACLFileLocker.m in Sources */,
@@ -10361,6 +10458,7 @@
 				D0B544672435C6BC002F0AEC /* DDOSLogger.m in Sources */,
 				D06E9BEF269064DB00E5AB5C /* ABECRequest.m in Sources */,
 				D0B544682435C6BC002F0AEC /* ACIOStream.m in Sources */,
+				249D0B6826EB87EE00E74704 /* Atomic.swift in Sources */,
 				D0B5446B2435C6BC002F0AEC /* DnsProviderInfo.swift in Sources */,
 				7EF5C52B26C261E6001851D6 /* SharedResources.swift in Sources */,
 				D0B5446C2435C6BC002F0AEC /* LoaderSegue.swift in Sources */,
@@ -10478,6 +10576,7 @@
 				24F5528C258753F300AF1D3B /* DNSSettings.swift in Sources */,
 				7E4B0EDE258CF9CC00A52099 /* DnsProvidersService.swift in Sources */,
 				D0B544EA2435C6BF002F0AEC /* ADBTableRow.m in Sources */,
+				249D0B6726EB87ED00E74704 /* Atomic.swift in Sources */,
 				7E4B0EDF258CF9D600A52099 /* DnsProviders+Migrations.swift in Sources */,
 				24ED98CD259B78DF00A73B17 /* Array+Utils.swift in Sources */,
 				D0D7E5F824444F06001801A5 /* RuleLabel.swift in Sources */,

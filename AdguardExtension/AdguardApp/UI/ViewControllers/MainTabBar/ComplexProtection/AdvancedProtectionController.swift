@@ -50,7 +50,7 @@ final class AdvancedProtectionController: UIViewController {
     
     //MARK: - Services
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let configurationService: ConfigurationService = ServiceLocator.shared.getService()!
+    private let configurationService: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     //MARK: - ViewController lifecycle
     
