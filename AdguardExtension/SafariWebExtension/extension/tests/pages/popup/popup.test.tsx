@@ -59,7 +59,7 @@ describe('popup screen', () => {
         expect(await screen.findByText('popup_action_delete_user_rules')).not.toBeInTheDocument();
     });
 
-    it('This and example how to use react testing library with Context.Provider', async () => {
+    it('This is an example how to use react testing library with Context.Provider', async () => {
         popupStoreValue.hasUserRules = true;
         popupStoreValue.protectionEnabled = true;
         popupStoreValue.contentBlockersEnabled = true;
