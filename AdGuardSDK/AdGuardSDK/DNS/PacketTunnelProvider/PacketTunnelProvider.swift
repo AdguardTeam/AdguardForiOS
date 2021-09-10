@@ -36,13 +36,12 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
     private var currentProvider: DnsProviderMetaProtocol?
     private var tunnelMode: TunnelMode?
     private var restartByReachability: Bool?
+    private var addresses: Addresses
 
-    let V_DNS_IPV6_ADDRESS = "2001:ad00:ad00::ad00"
-    let V_DNS_IPV4_ADDRESS = "198.18.0.1"
-
-    public init(userDefaults: UserDefaults, debugLoggs: Bool, dnsConfiguration: DnsConfigurationProtocol, filterStorageUrl: URL, statisticsDbContainerUrl: URL) throws {
+    public init(userDefaults: UserDefaults, debugLoggs: Bool, dnsConfiguration: DnsConfigurationProtocol, addresses: Addresses, filterStorageUrl: URL, statisticsDbContainerUrl: URL) throws {
 
         self.configuration = dnsConfiguration
+        self.addresses = addresses
         let userDefaultsStorage = UserDefaultsStorage(storage: userDefaults)
 
         // init dns libs logger
@@ -163,7 +162,7 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
 
         if systemDnsIps.count == 0 {
             Logger.logError("(PacketTunnelProvider) - startDnsProxy error. There is no system dns servers")
-            systemServers = ["9.9.9.9", "149.112.112.112", "2620:fe::fe", "2620:fe::9"]
+            systemServers = addresses.defaultSystemDnsServers
         }
 
         let upstreams = currentServer != nil && currentServer!.upstreams.count > 0 ? currentServer?.upstreams.map{ $0.upstream } : systemServers
@@ -176,8 +175,7 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
         let whitelistFilterId = 2
 
         let serverName = currentProvider?.name ?? "Default"
-        // todo: String.localizedString("default_dns_server_name")
-
+        
         // low level settings
 
         let customFallbacks = configuration.lowLevelConfiguration.fallbackServers
@@ -293,9 +291,9 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
     private func updateTunnelSettingsInternal(completion: @escaping (Error?)->Void) {
         Logger.logInfo("updateTunnelSettingsInternal")
 
-        var full = tunnelMode != .split
-        var withoutIcon = tunnelMode == .fullWithoutVpnIcon
-        var modeName = tunnelMode?.name
+        let full = tunnelMode != .split
+        let withoutIcon = tunnelMode == .fullWithoutVpnIcon
+        let modeName = tunnelMode?.name ?? "none"
 
         Logger.logInfo("Start Tunnel mode: \(modeName)")
 
@@ -319,31 +317,14 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
 
         Logger.logInfo("create tunnel settings. ipv4: \(ipv4Available ? "true": "false") ipv6: \(ipv6Available ? "true": "false")")
 
-        let localDnsAddress = ipv4Available ? V_DNS_IPV4_ADDRESS : V_DNS_IPV6_ADDRESS
+        let localDnsAddress = ipv4Available ? addresses.localDnsIpv4 : addresses.localDnsIpv6
         let dns = NEDNSSettings(servers: [localDnsAddress])
 
         dns.matchDomains = [""]
         settings.dnsSettings = dns
 
-        var interfaceIpv4: String = ""
-        var interfaceIpv6: String = ""
-
-        switch(tunnelMode!) {
-        case .full:
-            interfaceIpv4 = "172.16.209.3"
-            interfaceIpv6 = "fd12:1:1:1::3"
-        case .fullWithoutVpnIcon:
-            interfaceIpv4 = "172.16.209.4"
-            interfaceIpv6 = "fd12:1:1:1::4"
-        case .split:
-            interfaceIpv4 = "172.16.209.5"
-            interfaceIpv6 = "fd12:1:1:1::5"
-        default:
-            assertionFailure("unknown tunnelMode")
-        }
-
-        let ipv4 = NEIPv4Settings(addresses: [interfaceIpv4], subnetMasks: ["255.255.255.252"])
-        let ipv6 = NEIPv6Settings(addresses: [interfaceIpv6], networkPrefixLengths: [64])
+        let ipv4 = NEIPv4Settings(addresses: [addresses.interfaceIpv4], subnetMasks: ["255.255.255.252"])
+        let ipv6 = NEIPv6Settings(addresses: [addresses.interfaceIpv6], networkPrefixLengths: [64])
 
         // exclude/include routes
 
@@ -356,11 +337,11 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
         }
         else {
             if ipv4Available {
-                let dnsProxyIpv4Route = NEIPv4Route(destinationAddress: V_DNS_IPV4_ADDRESS, subnetMask: "255.255.255.255")
+                let dnsProxyIpv4Route = NEIPv4Route(destinationAddress: addresses.localDnsIpv4, subnetMask: "255.255.255.255")
                 ipv4.includedRoutes = [dnsProxyIpv4Route]
             }
             else {
-                let dnsProxyIpv6Route = NEIPv6Route(destinationAddress: V_DNS_IPV6_ADDRESS, networkPrefixLength: 64)
+                let dnsProxyIpv6Route = NEIPv6Route(destinationAddress: addresses.localDnsIpv6, networkPrefixLength: 64)
                 ipv6.includedRoutes = [dnsProxyIpv6Route]
             }
 
@@ -395,7 +376,7 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
     func ipv4ExcludedRoutes(withoutVPNIcon: Bool)->[NEIPv4Route] {
 
         let defaultRoute = ACNCidrRange(cidrString: "0.0.0.0/0")
-        var dnsRanges:[ACNCidrRange] = [ACNCidrRange(cidrString: V_DNS_IPV4_ADDRESS)]
+        var dnsRanges:[ACNCidrRange] = [ACNCidrRange(cidrString: addresses.localDnsIpv4)]
 
         if !withoutVPNIcon {
             dnsRanges.append(ACNCidrRange(cidrString: "0.0.0.0/31"))
@@ -413,7 +394,7 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
 
     func ipv6ExcludedRoutes(withoutVPNIcon: Bool)->[NEIPv6Route] {
         let defaultRoute = ACNCidrRange(cidrString: "::/0")
-        var dnsRanges:[ACNCidrRange] = [ACNCidrRange(cidrString: V_DNS_IPV6_ADDRESS)]
+        var dnsRanges:[ACNCidrRange] = [ACNCidrRange(cidrString: addresses.localDnsIpv6)]
 
         if !withoutVPNIcon {
             dnsRanges.append(ACNCidrRange(cidrString: "::/127"))
@@ -455,6 +436,22 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
     
     private func reachNotify() {
         // todo:
+    }
+    
+    public struct Addresses {
+        let interfaceIpv4: String
+        let interfaceIpv6: String
+        let localDnsIpv4: String
+        let localDnsIpv6: String
+        let defaultSystemDnsServers: [String]
+        
+        public init(interfaceIpv4: String, interfaceIpv6: String, localDnsIpv4: String, localDnsIpv6: String, defaultSystemDnsServers: [String]) {
+            self.interfaceIpv4 = interfaceIpv4
+            self.interfaceIpv6 = interfaceIpv6
+            self.localDnsIpv4 = localDnsIpv4
+            self.localDnsIpv6 = localDnsIpv6
+            self.defaultSystemDnsServers = defaultSystemDnsServers
+        }
     }
 }
 

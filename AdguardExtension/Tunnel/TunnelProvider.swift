@@ -23,6 +23,16 @@ import Sentry
 
 class TunnelProvider: PacketTunnelProvider {
     
+    static let localDnsIpv4 = "2001:ad00:ad00::ad00"
+    static let localDnsIpv6 = "198.18.0.1"
+    static let defaultSystemDnsServers = ["9.9.9.9", "149.112.112.112", "2620:fe::fe", "2620:fe::9"]
+    static let interfaceFullIpv4 = "172.16.209.3"
+    static let interfaceFullIpv6 = "fd12:1:1:1::3"
+    static let interfaceFullWithoutIconIpv4 = "172.16.209.4"
+    static let interfaceFullWithoutIconIpv6 = "fd12:1:1:1::4"
+    static let interfaceSplitIpv4 = "172.16.209.5"
+    static let interfaceSplitIpv6 = "fd12:1:1:1::5"
+    
     init() throws {
         // init logger
         let resources = AESharedResources()
@@ -56,7 +66,34 @@ class TunnelProvider: PacketTunnelProvider {
                                              allowlistIsEnabled: true,
                                              lowLevelConfiguration: LowLevelDnsConfiguration.fromResources(resources))
         
-        try super.init(userDefaults: resources.sharedDefaults(), debugLoggs: debugLoggs, dnsConfiguration: configuration, filterStorageUrl: filterStorageUrl, statisticsDbContainerUrl: statisticsUrl)
+        try super.init(userDefaults: resources.sharedDefaults(),
+                       debugLoggs: debugLoggs,
+                       dnsConfiguration: configuration,
+                       addresses: TunnelProvider.getAddresses(mode: resources.tunnelMode),
+                       filterStorageUrl: filterStorageUrl,
+                       statisticsDbContainerUrl: statisticsUrl)
     }
 
+    static func getAddresses(mode: TunnelMode)-> PacketTunnelProvider.Addresses {
+        let interfaceIpv4: String
+        let interfaceIpv6: String
+        
+        switch mode {
+        case .full:
+            interfaceIpv4 = interfaceFullIpv4
+            interfaceIpv6 = interfaceFullIpv6
+        case .fullWithoutVpnIcon:
+            interfaceIpv4 = interfaceFullWithoutIconIpv4
+            interfaceIpv6 = interfaceFullWithoutIconIpv6
+        case .split:
+            interfaceIpv4 = interfaceSplitIpv4
+            interfaceIpv6 = interfaceSplitIpv6
+        }
+        
+        return Addresses(interfaceIpv4: interfaceIpv4,
+                         interfaceIpv6: interfaceIpv6,
+                         localDnsIpv4: localDnsIpv4,
+                         localDnsIpv6: localDnsIpv6,
+                         defaultSystemDnsServers: defaultSystemDnsServers)
+    }
 }
