@@ -59,7 +59,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     
     private let resources: AESharedResourcesProtocol = AESharedResources()
-    private let serviceInitialiser: ServiceInitialiserProtocol
+    private let serviceInitializer: ServiceInitializerProtocol
     
     private var prevRequestNumber = 0
     private var requestNumber = 0
@@ -87,7 +87,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         // Services initialising
         do {
-            self.serviceInitialiser = try ServiceInitialiser(resources: resources)
+            self.serviceInitializer = try ServiceInitializer(resources: resources)
         } catch {
             DDLogError("(TodayViewController) - init; error - \(error)")
             return nil
@@ -144,7 +144,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
     @IBAction func safariSwitch(_ sender: UISwitch) {
         let enabled = sender.isOn
-        serviceInitialiser.complexProtection.switchSafariProtection(state: enabled, for: self) { (error) in
+        serviceInitializer.complexProtection.switchSafariProtection(state: enabled, for: self) { (error) in
             if error != nil {
                 DDLogError("Error invalidating json from Today Extension")
             } else {
@@ -168,7 +168,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     @IBAction func complexSwitch(_ sender: UISwitch) {
-        let complexProtection = serviceInitialiser.complexProtection
+        let complexProtection = serviceInitializer.complexProtection
         let enabled = sender.isOn
         
         let systemEnabledOldValue = complexProtection.systemProtectionEnabled
@@ -232,7 +232,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
      Updates safari protection view
      */
     private func updateWidgetSafari(){
-        let safariEnabled = serviceInitialiser.complexProtection.safariProtectionEnabled
+        let safariEnabled = serviceInitializer.complexProtection.safariProtectionEnabled
         
         let alpha: CGFloat = safariEnabled ? 1.0 : 0.5
         safariImageView.alpha = alpha
@@ -252,7 +252,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
      */
     private func updateWidgetSystem(){
             
-        let vpnEnabled = serviceInitialiser.complexProtection.systemProtectionEnabled
+        let vpnEnabled = serviceInitializer.complexProtection.systemProtectionEnabled
         
         let alpha: CGFloat = vpnEnabled ? 1.0 : 0.5
         self.systemSwitchOutlet.isOn = vpnEnabled
@@ -267,7 +267,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
      Updates complex protection view
      */
     private func updateWidgetComplex() {
-        let complexProtection = serviceInitialiser.complexProtection
+        let complexProtection = serviceInitializer.complexProtection
         let safariEnabled = complexProtection.safariProtectionEnabled
         let systemEnabled = complexProtection.systemProtectionEnabled
         let complexEnabled = complexProtection.complexProtectionEnabled
@@ -362,13 +362,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     private func getServerName() -> String {
         
         if resources.dnsImplementation == .native {
-            return serviceInitialiser.complexProtection.systemProtectionEnabled ? String.localizedString("native_dns_working") : String.localizedString("native_dns_not_working")
+            return serviceInitializer.complexProtection.systemProtectionEnabled ? String.localizedString("native_dns_working") : String.localizedString("native_dns_not_working")
         }
-        guard let server = serviceInitialiser.dnsProvidersService.activeDnsServer else {
+        guard let server = serviceInitializer.dnsProvidersService.activeDnsServer else {
             return String.localizedString("system_dns_server")
         }
         
-        let provider = serviceInitialiser.dnsProvidersService.activeDnsProvider
+        let provider = serviceInitializer.dnsProvidersService.activeDnsProvider
         let protocolName = String.localizedString(DnsProtocol.stringIdByProtocol[server.dnsProtocol]!)
         
         return "\(provider?.name ?? server.name) (\(protocolName))"
@@ -380,7 +380,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     private func changeTextForButton(){
         DispatchQueue.asyncSafeMain { [weak self] in
             guard let self = self else { return }
-            let statisticRecord = try? self.serviceInitialiser.activityStatistics.getCounters(for: .all)
+            let statisticRecord = try? self.serviceInitializer.activityStatistics.getCounters(for: .all)
             
             let requests = statisticRecord?.requests ?? 0
             let encrypted = statisticRecord?.encrypted ?? 0

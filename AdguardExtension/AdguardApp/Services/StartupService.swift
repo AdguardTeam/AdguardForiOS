@@ -59,11 +59,11 @@ final class StartupService : NSObject{
         
         let safariProtectionConfiguration = SafariConfiguration(resources: sharedResources,
                                                                 isProPurchased: purchaseService.isProPurchased)
-        let defaultConfiguration = SafariConfiguration()
+        let defaultConfiguration = SafariConfiguration.defaultConfiguration()
         
         let dnsProtectionConfiguration = DnsConfiguration(resources: sharedResources,
                                                           isProPurchased: purchaseService.isProPurchased)
-        let defaultDnsProtectionConfiguration = DnsConfiguration()
+        let defaultDnsProtectionConfiguration = DnsConfiguration.defaultConfiguration()
            
         // TODO: - try! is bad
         let safariProtection: SafariProtectionProtocol = try! SafariProtection(

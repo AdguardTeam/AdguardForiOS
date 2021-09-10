@@ -19,7 +19,7 @@
 import SafariAdGuardSDK
 import DnsAdGuardSDK
 
-protocol ServiceInitialiserProtocol  {
+protocol ServiceInitializerProtocol  {
     var networkService: ACNNetworkingProtocol { get }
     var productInfo: ADProductInfoProtocol { get }
     
@@ -30,7 +30,7 @@ protocol ServiceInitialiserProtocol  {
     var activityStatistics: ActivityStatisticsProtocol { get }
 }
 
-final class ServiceInitialiser: ServiceInitialiserProtocol {
+final class ServiceInitializer: ServiceInitializerProtocol {
     let networkService: ACNNetworkingProtocol = ACNNetworking()
     let productInfo: ADProductInfoProtocol = ADProductInfo()
     

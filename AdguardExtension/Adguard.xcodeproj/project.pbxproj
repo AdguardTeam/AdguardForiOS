@@ -134,7 +134,7 @@
 		249E11B22600D3CD003A5FBD /* IURLSchemeParametersParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB5182600ADD30047974C /* IURLSchemeParametersParser.swift */; };
 		249E124C2600FF73003A5FBD /* URLSchemeParcerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B2F12F25FF4DD500CE46C8 /* URLSchemeParcerTest.swift */; };
 		249E125E2600FFA3003A5FBD /* URLSchemeExecutorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C03C4525FF73790062DEED /* URLSchemeExecutorMock.swift */; };
-		24A8423B26EA2A5B0051B4E6 /* ServiceInitialiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D7367826EA1895003EE3EC /* ServiceInitialiser.swift */; };
+		24A8423B26EA2A5B0051B4E6 /* ServiceInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D7367826EA1895003EE3EC /* ServiceInitializer.swift */; };
 		24AD872D260A247B0034D402 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD872C260A247B0034D402 /* RadioButton.swift */; };
 		24AD872E260A247B0034D402 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD872C260A247B0034D402 /* RadioButton.swift */; };
 		24BC54C826E7A56B00F680ED /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */; };
@@ -148,7 +148,7 @@
 		24D6A9E225FB698A00674D11 /* StatusBarWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6A9E025FB698A00674D11 /* StatusBarWindow.swift */; };
 		24D6A9F525FB7A6300674D11 /* SettingsResetor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6A9F425FB7A6300674D11 /* SettingsResetor.swift */; };
 		24D6A9F625FB7A6300674D11 /* SettingsResetor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6A9F425FB7A6300674D11 /* SettingsResetor.swift */; };
-		24D7367926EA1895003EE3EC /* ServiceInitialiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D7367826EA1895003EE3EC /* ServiceInitialiser.swift */; };
+		24D7367926EA1895003EE3EC /* ServiceInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D7367826EA1895003EE3EC /* ServiceInitializer.swift */; };
 		24D9225B2604B28B002F368B /* AppDelegate+UserNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D9225A2604B28B002F368B /* AppDelegate+UserNotifications.swift */; };
 		24D9226D2604B3DD002F368B /* AppDelegate+UserNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D9225A2604B28B002F368B /* AppDelegate+UserNotifications.swift */; };
 		24D922802604B41C002F368B /* AppDelegate+CheckPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D9227F2604B41C002F368B /* AppDelegate+CheckPeriod.swift */; };
@@ -2881,7 +2881,7 @@
 		24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSchemeURLParserTest.swift; sourceTree = "<group>"; };
 		24D6A9E025FB698A00674D11 /* StatusBarWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarWindow.swift; sourceTree = "<group>"; };
 		24D6A9F425FB7A6300674D11 /* SettingsResetor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsResetor.swift; sourceTree = "<group>"; };
-		24D7367826EA1895003EE3EC /* ServiceInitialiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceInitialiser.swift; sourceTree = "<group>"; };
+		24D7367826EA1895003EE3EC /* ServiceInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceInitializer.swift; sourceTree = "<group>"; };
 		24D9225A2604B28B002F368B /* AppDelegate+UserNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+UserNotifications.swift"; sourceTree = "<group>"; };
 		24D9227F2604B41C002F368B /* AppDelegate+CheckPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+CheckPeriod.swift"; sourceTree = "<group>"; };
 		24D922B52604B496002F368B /* AppDelegate+StatusBarWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+StatusBarWindow.swift"; sourceTree = "<group>"; };
@@ -6012,7 +6012,7 @@
 			children = (
 				7ECD9C59238D6E980065E88D /* AdGuardTodayExtension.entitlements */,
 				7E536C69238D2AC400A83A79 /* TodayViewController.swift */,
-				24D7367826EA1895003EE3EC /* ServiceInitialiser.swift */,
+				24D7367826EA1895003EE3EC /* ServiceInitializer.swift */,
 				7E536C6B238D2AC400A83A79 /* TodayExtension.storyboard */,
 				7E536C6E238D2AC400A83A79 /* Info.plist */,
 				7E3340112390076800C39F62 /* todayExtensionAssets.xcassets */,
@@ -9439,7 +9439,7 @@
 				7E15DFE126E63AF20020247E /* UIDevice+Utils.swift in Sources */,
 				D0D7E5A8243C9558001801A5 /* APDnsServerAddress.m in Sources */,
 				7EE8AC1E26C595F70070D477 /* ThemeMode.swift in Sources */,
-				24D7367926EA1895003EE3EC /* ServiceInitialiser.swift in Sources */,
+				24D7367926EA1895003EE3EC /* ServiceInitializer.swift in Sources */,
 				7ECD9C43238D65720065E88D /* FMDatabase.m in Sources */,
 				D06E9BDF268EFA3400E5AB5C /* ABECRequest.m in Sources */,
 				246388A926EA4CD9004FBA9E /* DispatchQueue+Utils.swift in Sources */,
@@ -10280,7 +10280,7 @@
 				D0B5441F2435C6B8002F0AEC /* AESharedResources.m in Sources */,
 				D0B544202435C6B8002F0AEC /* SafariProtectionService.swift in Sources */,
 				D0B544212435C6B8002F0AEC /* LoginService.swift in Sources */,
-				24A8423B26EA2A5B0051B4E6 /* ServiceInitialiser.swift in Sources */,
+				24A8423B26EA2A5B0051B4E6 /* ServiceInitializer.swift in Sources */,
 				D0D7E5E424444D84001801A5 /* BasicRulesParser.swift in Sources */,
 				D0D7E5BA24444CD2001801A5 /* DomainParser.swift in Sources */,
 				D0B544222435C6B8002F0AEC /* ADBTableRow.m in Sources */,

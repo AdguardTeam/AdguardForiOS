@@ -35,20 +35,19 @@ extension SafariConfiguration {
                   cid: UIDevice.current.identifierForVendor?.uuidString ?? "")
     }
     
-    //Init default config
-    convenience init(bundle: Bundle = .main) {
-        self.init(iosVersion: UIDevice.current.iosVersion,
-                  currentLanguage: "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")",
-                  proStatus: false,
-                  safariProtectionEnabled: true,
-                  advancedBlockingIsEnabled: true, // TODO: - Don't forget to change
-                  blocklistIsEnabled: false,
-                  allowlistIsEnabled: false,
-                  allowlistIsInverted: false,
-                  appBundleId: bundle.bundleIdentifier ?? "",
-                  appProductVersion: ADProductInfo().version() ?? "",
-                  appId: bundle.isPro ? "ios_pro" : "ios",
-                  cid: UIDevice.current.identifierForVendor?.uuidString ?? "")
+    static func defaultConfiguration(bundle: Bundle = .main) -> SafariConfiguration {
+        return SafariConfiguration(iosVersion: UIDevice.current.iosVersion,
+                                   currentLanguage: "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")",
+                                   proStatus: false,
+                                   safariProtectionEnabled: true,
+                                   advancedBlockingIsEnabled: true, // TODO: - Don't forget to change
+                                   blocklistIsEnabled: false,
+                                   allowlistIsEnabled: false,
+                                   allowlistIsInverted: false,
+                                   appBundleId: bundle.bundleIdentifier ?? "",
+                                   appProductVersion: ADProductInfo().version() ?? "",
+                                   appId: bundle.isPro ? "ios_pro" : "ios",
+                                   cid: UIDevice.current.identifierForVendor?.uuidString ?? "")
     }
 }
 
@@ -64,9 +63,8 @@ extension DnsConfiguration {
                   allowlistIsEnabled: resources.systemWhitelistEnabled)
     }
     
-    //Init default config
-    convenience init(bundle: Bundle = .main) {
-        self.init(currentLanguage: "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")",
+    static func defaultConfiguration() -> DnsConfiguration {
+        return DnsConfiguration(currentLanguage: "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")",
                   proStatus: false,
                   dnsFilteringIsEnabled: false,
                   dnsImplementation: .adguard,
