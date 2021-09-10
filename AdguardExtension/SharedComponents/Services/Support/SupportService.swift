@@ -16,7 +16,6 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
 import Zip
 import SafariAdGuardSDK
 import DnsAdGuardSDK
@@ -167,17 +166,7 @@ class SupportService: SupportServiceProtocol {
 //            return filtersString + metaString + "\n"
 //        }
         
-        let tunnelMode: String
-        switch resources.tunnelMode {
-        case .split:
-            tunnelMode = "SPLIT"
-        case .full:
-            tunnelMode = "FULL"
-        case .fullWithoutVpnIcon:
-            tunnelMode = "WITHOUT_VPN_ICON"
-        default:
-            tunnelMode = "UNKNOWN"
-        }
+        let tunnelMode = resources.tunnelMode.name
         
         let customBootstraps = resources.customBootstrapServers?.joined(separator: ", ") ?? ""
         let customFallbacks = resources.customFallbackServers?.joined(separator: ", ") ?? ""

@@ -16,7 +16,6 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
 import DnsAdGuardSDK
 
 class DnsModeController: UITableViewController {
@@ -59,8 +58,6 @@ class DnsModeController: UITableViewController {
             selectedCell = 0
         case .fullWithoutVpnIcon:
             selectedCell = 1
-        default:
-            break
         }
         
         updateButtons()

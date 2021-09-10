@@ -27,4 +27,9 @@ class SentryConst: NSObject {
     static let dsnUrl = "https://c7ddc70397fe47198302226c5baab7df@s10.adtidy.org/214"
 }
 
+class LocalDnsAddresses {
+    static let ipv4 = "198.18.0.1"
+    static let ipv6 = "2001:ad00:ad00::ad00"
+}
+
 

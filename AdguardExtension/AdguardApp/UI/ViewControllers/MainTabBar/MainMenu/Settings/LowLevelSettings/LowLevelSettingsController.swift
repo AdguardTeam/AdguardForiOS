@@ -16,7 +16,6 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
 import UIKit
 import DnsAdGuardSDK
 
@@ -126,8 +125,6 @@ class LowLevelSettingsController: UITableViewController {
             tunnelModeDescription.text = String.localizedString("tunnel_mode_full_description")
         case .fullWithoutVpnIcon:
             tunnelModeDescription.text = String.localizedString("tunnel_mode_full_without_icon_description")
-        default:
-            break
         }
     }
     

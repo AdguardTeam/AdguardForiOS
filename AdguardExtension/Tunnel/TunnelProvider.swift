@@ -23,9 +23,6 @@ import Sentry
 
 class TunnelProvider: PacketTunnelProvider {
     
-    static let localDnsIpv4 = "2001:ad00:ad00::ad00"
-    static let localDnsIpv6 = "198.18.0.1"
-    
     static let defaultSystemDnsServers = ["9.9.9.9", "149.112.112.112", "2620:fe::fe", "2620:fe::9"]
     
     // These addresses are meaningful and must not be changed. We use it in VPN application to determine in what mode the packet tunnel is running.
@@ -95,8 +92,8 @@ class TunnelProvider: PacketTunnelProvider {
         
         return Addresses(interfaceIpv4: interfaceIpv4,
                          interfaceIpv6: interfaceIpv6,
-                         localDnsIpv4: localDnsIpv4,
-                         localDnsIpv6: localDnsIpv6,
+                         localDnsIpv4: LocalDnsAddresses.ipv4,
+                         localDnsIpv6: LocalDnsAddresses.ipv6,
                          defaultSystemDnsServers: defaultSystemDnsServers)
     }
 }

@@ -1563,6 +1563,8 @@
 		D0A3CF8C26E28705006E90AD /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = D0A3CF8B26E28705006E90AD /* Zip */; };
 		D0A3CFA326EA353E006E90AD /* SharedStorageUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B1A126C4334D00B0CE7B /* SharedStorageUrls.swift */; };
 		D0A3CFA426EA3540006E90AD /* SharedStorageUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B1A126C4334D00B0CE7B /* SharedStorageUrls.swift */; };
+		D0A614ED26EBA18B00793922 /* BootstrapsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A614EC26EBA18B00793922 /* BootstrapsHelper.swift */; };
+		D0A614EE26EBA18B00793922 /* BootstrapsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A614EC26EBA18B00793922 /* BootstrapsHelper.swift */; };
 		D0AEC269240930C0003E8FCC /* VpnManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AEC268240930C0003E8FCC /* VpnManagerTest.swift */; };
 		D0AEC26A2409323C003E8FCC /* VpnManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D090FC942407E53700A0C026 /* VpnManager.swift */; };
 		D0AEC26B24093364003E8FCC /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
@@ -3939,6 +3941,7 @@
 		D09E9645216CE10F00313AB1 /* ThemeableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeableImageView.swift; sourceTree = "<group>"; };
 		D09E9647216CE5E400313AB1 /* ThemableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemableLabel.swift; sourceTree = "<group>"; };
 		D0A29F8823E0334000D974CF /* RateAppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateAppService.swift; sourceTree = "<group>"; };
+		D0A614EC26EBA18B00793922 /* BootstrapsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootstrapsHelper.swift; sourceTree = "<group>"; };
 		D0AEC268240930C0003E8FCC /* VpnManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VpnManagerTest.swift; sourceTree = "<group>"; };
 		D0B27BC2207372CD0073E13C /* ACNUrlUtilsTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNUrlUtilsTest.m; sourceTree = "<group>"; };
 		D0B542CA2435C6A3002F0AEC /* AdguardProBlockingExtensionGeneral.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdguardProBlockingExtensionGeneral.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -6761,6 +6764,7 @@
 				D0984F992608866900703DB2 /* MigrationService+AntibannerMigration.swift */,
 				7ED0B1A526C4335700B0CE7B /* NewAndRefactoredObjects */,
 				7EC67FB5254843B300FEEEE2 /* NativeDnsService */,
+				D0A614EC26EBA18B00793922 /* BootstrapsHelper.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -8377,6 +8381,7 @@
 				659886611CF74DE9003ECD1C /* FMStatementKeywordRecogniser.m in Sources */,
 				7E3556D725DBEB7500CB2A8D /* UIViewController+Present.swift in Sources */,
 				D0B545E82435D6A4002F0AEC /* ChartView.swift in Sources */,
+				D0A614EE26EBA18B00793922 /* BootstrapsHelper.swift in Sources */,
 				7E70266726DD412600F8FC25 /* IdentifiableObject.swift in Sources */,
 				D09E2C48255956B4002D6BC0 /* SetappService.swift in Sources */,
 				D0B545652435D137002F0AEC /* CocoaLumberjack.swift in Sources */,
@@ -8904,6 +8909,7 @@
 				7E15720522DF2162007060D7 /* ContentBlockerStateController.swift in Sources */,
 				7E59D791236056ED00E7ABA4 /* StatusView.swift in Sources */,
 				7E15720922DF32E3007060D7 /* ContentBlockerStateCell.swift in Sources */,
+				D0A614ED26EBA18B00793922 /* BootstrapsHelper.swift in Sources */,
 				7EC67F6C2548301000FEEEE2 /* ChooseDnsImplementationController.swift in Sources */,
 				D031A0C9219EFC99002C17D9 /* DDTTYLogger.m in Sources */,
 				65EBC2511BC2D25E00788D98 /* AEUILongLabelViewCell.m in Sources */,
