@@ -33,8 +33,6 @@
 		2425D73A258F8D1A0037AEBE /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95523F2B96B00F9A544 /* CharacterSet+Utils.swift */; };
 		2425D73B258F8D1E0037AEBE /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95523F2B96B00F9A544 /* CharacterSet+Utils.swift */; };
 		2425D73C258F8D1F0037AEBE /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95523F2B96B00F9A544 /* CharacterSet+Utils.swift */; };
-		242A07AE26C6757C00181D35 /* UITraitCollection+deviceCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A07AD26C6757C00181D35 /* UITraitCollection+deviceCheck.swift */; };
-		242A07AF26C6757C00181D35 /* UITraitCollection+deviceCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A07AD26C6757C00181D35 /* UITraitCollection+deviceCheck.swift */; };
 		242A07B126C677D900181D35 /* AdvancedProtectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A07B026C677D900181D35 /* AdvancedProtectionController.swift */; };
 		242A07B226C677D900181D35 /* AdvancedProtectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A07B026C677D900181D35 /* AdvancedProtectionController.swift */; };
 		242B9145258A0D3E00A39E19 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B9144258A0D3E00A39E19 /* SignInController.swift */; };
@@ -150,8 +148,6 @@
 		249D0B6926EB87EE00E74704 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249D0B6126EB87A500E74704 /* Atomic.swift */; };
 		249D0B6A26EB87EF00E74704 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249D0B6126EB87A500E74704 /* Atomic.swift */; };
 		249D0B6B26EB885900E74704 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249D0B6126EB87A500E74704 /* Atomic.swift */; };
-		249DF84D26CAA3DB002814B4 /* UITraitCollection+deviceCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A07AD26C6757C00181D35 /* UITraitCollection+deviceCheck.swift */; };
-		249DF84E26CAA3DC002814B4 /* UITraitCollection+deviceCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A07AD26C6757C00181D35 /* UITraitCollection+deviceCheck.swift */; };
 		249E10DA2600D187003A5FBD /* URLSchemeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB5042600A3220047974C /* URLSchemeParser.swift */; };
 		249E10FE2600D380003A5FBD /* OpenUserFilterControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB57A2600B8030047974C /* OpenUserFilterControllerParser.swift */; };
 		249E11102600D382003A5FBD /* OpenDnsSettingsControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB5B02600B9940047974C /* OpenDnsSettingsControllerParser.swift */; };
@@ -225,6 +221,8 @@
 		24F66A9A26033DA00097B426 /* OpenMainPageControllerControllerWithLaunchScreenParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F66A9926033DA00097B426 /* OpenMainPageControllerControllerWithLaunchScreenParser.swift */; };
 		24F66A9B26033DA00097B426 /* OpenMainPageControllerControllerWithLaunchScreenParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F66A9926033DA00097B426 /* OpenMainPageControllerControllerWithLaunchScreenParser.swift */; };
 		24F66A9C26033DA00097B426 /* OpenMainPageControllerControllerWithLaunchScreenParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F66A9926033DA00097B426 /* OpenMainPageControllerControllerWithLaunchScreenParser.swift */; };
+		24FB8B1326EB9C330031ED4D /* UITraitEnvironment+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E86A9B626CBB591000B395F /* UITraitEnvironment+Utils.swift */; };
+		24FB8B1426EB9C370031ED4D /* UITraitEnvironment+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E86A9B626CBB591000B395F /* UITraitEnvironment+Utils.swift */; };
 		4020A90122C3C864009C188F /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4020A90022C3C863009C188F /* MainNavigationController.swift */; };
 		4982C2E626D7973700CACBBE /* images in Resources */ = {isa = PBXBuildFile; fileRef = 7EBDD9D526D6A809009531FA /* images */; };
 		4982C2E726D7973700CACBBE /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = 7EBDD9D226D6A7FF009531FA /* _locales */; };
@@ -2918,7 +2916,6 @@
 		2414089C26C42E6700741F32 /* OnboardingAdvancedProtectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAdvancedProtectionView.swift; sourceTree = "<group>"; };
 		241819FC2594D76900380A8A /* QueryParametersFromURLStringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParametersFromURLStringTest.swift; sourceTree = "<group>"; };
 		2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Utils.swift"; sourceTree = "<group>"; };
-		242A07AD26C6757C00181D35 /* UITraitCollection+deviceCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITraitCollection+deviceCheck.swift"; sourceTree = "<group>"; };
 		242A07B026C677D900181D35 /* AdvancedProtectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedProtectionController.swift; sourceTree = "<group>"; };
 		242B9144258A0D3E00A39E19 /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
 		242C7FEF26E6536B00A01B10 /* DnsUserRulesTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsUserRulesTableModel.swift; sourceTree = "<group>"; };
@@ -4581,7 +4578,6 @@
 		249D0B3F26EB85CF00E74704 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				242A07B326C6B43700181D35 /* Atomic.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -6028,7 +6024,6 @@
 				7EAA0D8626CA8E8C007208E5 /* UITextView+Utils.swift */,
 				7E86A9B626CBB591000B395F /* UITraitEnvironment+Utils.swift */,
 				7E3FEFB326CD3AB60080EC03 /* UITableView+Utils.swift */,
-				242A07AD26C6757C00181D35 /* UITraitCollection+deviceCheck.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -8702,7 +8697,6 @@
 				D0D7E5E824444ECA001801A5 /* Rule.swift in Sources */,
 				6598868C1CF74DE9003ECD1C /* FMStatementQuotedRecogniser.m in Sources */,
 				D0B545B82435D650002F0AEC /* SafariProtectionController.swift in Sources */,
-				242A07AF26C6757C00181D35 /* UITraitCollection+deviceCheck.swift in Sources */,
 				D0B545D92435D69B002F0AEC /* StackElementView.swift in Sources */,
 				6598868D1CF74DE9003ECD1C /* NSDate+Utils.m in Sources */,
 				D018672B203C86050003110A /* MGSwipeButton.m in Sources */,
@@ -8821,6 +8815,7 @@
 				655A02A51C6B7686000F00D7 /* Reachability.m in Sources */,
 				655A027B1C6B7686000F00D7 /* NSException+Utils.m in Sources */,
 				65EC9BD31BB9824C00F53F3B /* ADProductInfo.m in Sources */,
+				24FB8B1326EB9C330031ED4D /* UITraitEnvironment+Utils.swift in Sources */,
 				655A02781C6B7686000F00D7 /* NSDate+Utils.m in Sources */,
 				24F55278258753F000AF1D3B /* DNSSettings.swift in Sources */,
 				65EC9C8F1BB9824C00F53F3B /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
@@ -8853,7 +8848,6 @@
 				65EC9C971BB9824C00F53F3B /* FMDatabaseAdditions.m in Sources */,
 				7EAD354826C2D615001AFB3A /* DnsProviders.swift in Sources */,
 				D031A107219EFC99002C17D9 /* CLIColor.m in Sources */,
-				249DF84D26CAA3DB002814B4 /* UITraitCollection+deviceCheck.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8962,7 +8956,6 @@
 				7EF5C51226C261AF001851D6 /* SharedResources+Statistics.swift in Sources */,
 				655A02911C6B7686000F00D7 /* ACNNetworking.m in Sources */,
 				247CB57B2600B8030047974C /* OpenUserFilterControllerParser.swift in Sources */,
-				242A07AE26C6757C00181D35 /* UITraitCollection+deviceCheck.swift in Sources */,
 				D02B550122EED4AF0039BC48 /* Date+Utils.swift in Sources */,
 				7E50493322F07FFA0095181C /* FilterTagsButtons.swift in Sources */,
 				7EBDFE9126CFAE2B00CCE8CC /* FilterDetailsCell.swift in Sources */,
@@ -10481,6 +10474,7 @@
 				D0B5447A2435C6BC002F0AEC /* ACLExecuteBlockDelayed.m in Sources */,
 				D0B5447B2435C6BC002F0AEC /* FMDatabaseQueue.m in Sources */,
 				D0B5447D2435C6BC002F0AEC /* Reachability.m in Sources */,
+				24FB8B1426EB9C370031ED4D /* UITraitEnvironment+Utils.swift in Sources */,
 				D0B5447F2435C6BC002F0AEC /* NSException+Utils.m in Sources */,
 				D0B544802435C6BC002F0AEC /* ADProductInfo.m in Sources */,
 				24F5528B258753F200AF1D3B /* DNSSettings.swift in Sources */,
@@ -10513,7 +10507,6 @@
 				D0B544A22435C6BC002F0AEC /* FMDatabaseAdditions.m in Sources */,
 				7EAD354626C2D614001AFB3A /* DnsProviders.swift in Sources */,
 				D0B544A32435C6BC002F0AEC /* CLIColor.m in Sources */,
-				249DF84E26CAA3DC002814B4 /* UITraitCollection+deviceCheck.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

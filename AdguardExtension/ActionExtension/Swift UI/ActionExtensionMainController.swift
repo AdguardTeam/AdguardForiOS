@@ -257,7 +257,7 @@ class ActionExtensionMainController: UITableViewController {
         containerView.layer.cornerRadius = 4
         label.greyText = true
         label.lightGreyText = false
-        label.font = .systemFont(ofSize: isIpad ? 24.0 : 16.0)
+        label.font = .systemFont(ofSize: isIpadTrait ? 24.0 : 16.0)
         theme?.setupLabel(label)
         label.numberOfLines = 0
         
