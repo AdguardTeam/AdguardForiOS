@@ -1,5 +1,5 @@
 /* eslint-disable consistent-return */
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 import {
     MessagesToBackgroundPage,

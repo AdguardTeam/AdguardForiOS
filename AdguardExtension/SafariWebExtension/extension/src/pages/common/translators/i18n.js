@@ -1,5 +1,5 @@
 // TODO convert to ts
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 export const i18n = {
     getMessage: browser.i18n.getMessage,
