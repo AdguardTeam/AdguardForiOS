@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import DnsAdGuardSDK
 
 protocol NewDnsServerControllerDelegate: AnyObject {
     func providerAdded()
@@ -128,11 +129,8 @@ class NewDnsServerController: BottomAlertController {
         
         // TODO: - Make it in a proper way after refactoring
         
-        var bootstraps: [String] = []
-        
-        ACNIPUtils.enumerateSystemDns { (ip, _, _, _) in
-            bootstraps.append(ip ?? "")
-        }
+        let networkUtils = NetworkUtils();
+        var bootstraps = networkUtils.systemDnsServers
         
         // If our Tunnel appears in system bootstraps we should remove it
         let tunnelIpV4 = "198.18.0.1"
@@ -153,7 +151,7 @@ class NewDnsServerController: BottomAlertController {
         DispatchQueue(label: "save dns queue").async { [weak self] in
             guard let self = self else { return }
             
-            let isIpv6Available = ACNIPUtils.isIpv6Available()
+            let isIpv6Available = networkUtils.isIpv6Available
             
             DDLogInfo("(NewDnsServerController) test upstream: \(upstream?.address ?? "nil") bootstrap: \(upstream?.bootstrap ?? []) ipv6: \(isIpv6Available)")
             

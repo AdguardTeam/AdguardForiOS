@@ -35,9 +35,9 @@ protocol NetworkUtilsProtocol {
     func upstreamIsValid(_ upstream: String) -> Bool
 }
 
-struct NetworkUtils: NetworkUtilsProtocol {
+public struct NetworkUtils: NetworkUtilsProtocol {
     
-    var systemDnsServers: [String] {
+    public var systemDnsServers: [String] {
         var state = __res_9_state()
         res_9_ninit(&state)
         
@@ -54,7 +54,7 @@ struct NetworkUtils: NetworkUtilsProtocol {
         return addrs.map { convertAddrToString($0) }
     }
     
-    var isIpv4Available: Bool {
+    public var isIpv4Available: Bool {
         var result = false
         enumerateNetworkInterfaces { (cursor) -> Bool in
             if cursor.pointee.ifa_addr.pointee.sa_family == AF_INET {
@@ -66,7 +66,7 @@ struct NetworkUtils: NetworkUtilsProtocol {
         return result
     }
     
-    var isIpv6Available: Bool {
+    public var isIpv6Available: Bool {
         var result = false
         enumerateNetworkInterfaces { (cursor) -> Bool in
             if cursor.pointee.ifa_addr.pointee.sa_family == AF_INET6 {
@@ -77,6 +77,8 @@ struct NetworkUtils: NetworkUtilsProtocol {
         }
         return result
     }
+    
+    public init() {}
     
     func getProtocol(from upstream: String) throws -> DnsProtocol {
         var error: NSError?

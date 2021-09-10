@@ -105,20 +105,23 @@ final class StartupService : NSObject{
         let sdkDnsImplementation: DnsAdGuardSDK.DnsImplementation = sharedResources.dnsImplementation == .adGuard ? .adGuard : .native
         
         
+        let lowLevelConfiguration = LowLevelDnsConfiguration.fromResources(sharedResources)
         let dnsProtectionConfiguration = DnsConfiguration(currentLanguage: currentLanguage,
                                                           proStatus: purchaseService.isProPurchased,
                                                           dnsFilteringIsEnabled: sharedResources.systemProtectionEnabled,
                                                           dnsImplementation: sdkDnsImplementation,
                                                           blocklistIsEnabled: sharedResources.systemUserFilterEnabled,
                                                           allowlistIsEnabled: sharedResources.systemWhitelistEnabled,
-                                                          tunnelMode: sharedResources.tunnelMode,
-                                                          fallbackServers: sharedResources.customFallbackServers,
-                                                          bootstrapServers: sharedResources.customBootstrapServers,
-                                                          blockingMode: sharedResources.blockingMode,
-                                                          blockingIp: sharedResources.customBlockingIp,
-                                                          blockedTtl: sharedResources.blockedResponseTtlSecs,
-                                                          blockIpv6: sharedResources.blockIpv6,
-                                                          restartByReachability: sharedResources.restartByReachability)
+                                                          lowLevelConfiguration: lowLevelConfiguration)
+        
+        let defaultLowLevelConfiguration = LowLevelDnsConfiguration(tunnelMode: .split,
+                                                                    fallbackServers: nil,
+                                                                    bootstrapServers: nil,
+                                                                    blockingMode: .default,
+                                                                    blockingIp: nil,
+                                                                    blockedTtl: 120,
+                                                                    blockIpv6: true,
+                                                                    restartByReachability: true)
         
         let defaultDnsProtectionConfiguration = DnsConfiguration(currentLanguage: currentLanguage,
                                                                  proStatus: true,
@@ -126,14 +129,7 @@ final class StartupService : NSObject{
                                                                  dnsImplementation: .adGuard,
                                                                  blocklistIsEnabled: true,
                                                                  allowlistIsEnabled: true,
-                                                                 tunnelMode: .split,
-                                                                 fallbackServers: nil,
-                                                                 bootstrapServers: nil,
-                                                                 blockingMode: .default,
-                                                                 blockingIp: nil,
-                                                                 blockedTtl: 120,
-                                                                 blockIpv6: true,
-                                                                 restartByReachability: true)
+                                                                 lowLevelConfiguration: defaultLowLevelConfiguration)
         // TODO: - try! is bad
         let dnsProtection: DnsProtectionProtocol = try! DnsProtection(configuration: dnsProtectionConfiguration,
                                           defaultConfiguration: defaultDnsProtectionConfiguration,

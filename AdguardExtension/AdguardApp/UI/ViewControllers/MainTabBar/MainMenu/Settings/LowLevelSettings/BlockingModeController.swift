@@ -112,7 +112,7 @@ class BlockingModeController: UITableViewController {
         let mode: BlockingMode
         switch index {
         case defaultMode:
-            mode = .`default`
+            mode = .default
         case refusedMode:
             mode = .refused
         case nxDomainMode:

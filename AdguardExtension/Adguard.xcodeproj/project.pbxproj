@@ -1435,6 +1435,10 @@
 		D073739A26EA38F3007366F8 /* SafariAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D073739C26EA3927007366F8 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; };
 		D073739D26EA3927007366F8 /* SafariAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D07373A226EB5F0A007366F8 /* LowLevelDnsConfiguration+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07373A126EB5F0A007366F8 /* LowLevelDnsConfiguration+Utils.swift */; };
+		D07373A326EB5F0A007366F8 /* LowLevelDnsConfiguration+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07373A126EB5F0A007366F8 /* LowLevelDnsConfiguration+Utils.swift */; };
+		D07373A426EB5F0A007366F8 /* LowLevelDnsConfiguration+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07373A126EB5F0A007366F8 /* LowLevelDnsConfiguration+Utils.swift */; };
+		D07373A526EB5F0A007366F8 /* LowLevelDnsConfiguration+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07373A126EB5F0A007366F8 /* LowLevelDnsConfiguration+Utils.swift */; };
 		D077D5ED2137EE2400D3D5B3 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9117521303E4C006DF0D3 /* ServiceLocator.swift */; };
 		D077D5F1213974FC00D3D5B3 /* GetProController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D077D5F0213974FC00D3D5B3 /* GetProController.swift */; };
 		D077D5F52139774E00D3D5B3 /* RoundRectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D077D5F42139774E00D3D5B3 /* RoundRectButton.swift */; };
@@ -3850,6 +3854,7 @@
 		D06E6BD225E8F6000069013C /* VpnConfigurationStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VpnConfigurationStatus.swift; sourceTree = "<group>"; };
 		D0702B3E2188859D0051669A /* FileShareHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileShareHelper.swift; sourceTree = "<group>"; };
 		D07256D926BD552700654177 /* ContentBlockerRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerRequestHandler.swift; sourceTree = "<group>"; };
+		D07373A126EB5F0A007366F8 /* LowLevelDnsConfiguration+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LowLevelDnsConfiguration+Utils.swift"; sourceTree = "<group>"; };
 		D077D5F0213974FC00D3D5B3 /* GetProController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProController.swift; sourceTree = "<group>"; };
 		D077D5F42139774E00D3D5B3 /* RoundRectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundRectButton.swift; sourceTree = "<group>"; };
 		D07A164121678EA5008BB432 /* RoundrectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundrectView.swift; sourceTree = "<group>"; };
@@ -5574,6 +5579,7 @@
 				65AD3BB91B7CB15400004A02 /* AESharedResources.h */,
 				7EF5C50D26C261AF001851D6 /* SharedResources */,
 				7E92754A26C6C02F007B2C80 /* DispatchQueue+Utils.swift */,
+				D07373A126EB5F0A007366F8 /* LowLevelDnsConfiguration+Utils.swift */,
 			);
 			path = SharedComponents;
 			sourceTree = "<group>";
@@ -8481,6 +8487,7 @@
 				247CB5FF2600C5A10047974C /* OpenDnsProvidersControllerParser.swift in Sources */,
 				D0D7E5F724444F05001801A5 /* RuleLabel.swift in Sources */,
 				D0D7E62124445728001801A5 /* CompanyDetailedController.swift in Sources */,
+				D07373A426EB5F0A007366F8 /* LowLevelDnsConfiguration+Utils.swift in Sources */,
 				6598867B1CF74DE9003ECD1C /* ACFFileUtils.m in Sources */,
 				6598867C1CF74DE9003ECD1C /* AESharedResources.m in Sources */,
 				7EF5C52826C261E2001851D6 /* SharedResources.swift in Sources */,
@@ -8955,6 +8962,7 @@
 				4020A90122C3C864009C188F /* MainNavigationController.swift in Sources */,
 				7EC3318D234738E400229194 /* BottomShadowView.swift in Sources */,
 				7E822C0A2435EDD30015B4D0 /* Constant.swift in Sources */,
+				D07373A226EB5F0A007366F8 /* LowLevelDnsConfiguration+Utils.swift in Sources */,
 				7EA887E9237D290E00E1043D /* CustomNavigationTransition.swift in Sources */,
 				7E5101932355B53700935FE9 /* NetworkSettingsModel.swift in Sources */,
 				242C7FF026E6536B00A01B10 /* DnsUserRulesTableModel.swift in Sources */,
@@ -9506,6 +9514,7 @@
 				D0569D5321F1C0A800985DA9 /* ACIOUtils.m in Sources */,
 				D0CA61812203489A005CAAA4 /* DnsProvidersService.swift in Sources */,
 				D0569D5521F1C0A800985DA9 /* NSException+Utils.m in Sources */,
+				D07373A326EB5F0A007366F8 /* LowLevelDnsConfiguration+Utils.swift in Sources */,
 				D0C9410323ED60B2008B85EC /* DnsProviderInfo.swift in Sources */,
 				D0569D5921F1C0A800985DA9 /* DDTTYLogger.m in Sources */,
 				7ECEBEF22359D0210007D0C1 /* NetworkSettingsService.swift in Sources */,
@@ -10345,6 +10354,7 @@
 				D0B544C62435C6BF002F0AEC /* ACLWildcard.m in Sources */,
 				D0B544C72435C6BF002F0AEC /* ACIOUtils.m in Sources */,
 				D0B544C92435C6BF002F0AEC /* NSException+Utils.m in Sources */,
+				D07373A526EB5F0A007366F8 /* LowLevelDnsConfiguration+Utils.swift in Sources */,
 				D0B544CA2435C6BF002F0AEC /* DnsProviderInfo.swift in Sources */,
 				D0D7E5E724444EC1001801A5 /* ParsedHost.swift in Sources */,
 				D0B544CC2435C6BF002F0AEC /* DDTTYLogger.m in Sources */,
