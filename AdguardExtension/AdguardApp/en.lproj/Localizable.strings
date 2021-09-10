@@ -557,10 +557,10 @@
 "common_add" = "Add";
 
 /*(TodayViewController) Protection is disabled title  */
-"protection_disabled" = "Protection is disabled";
+"protection_disabled" = "Protection is OFF";
 
 /*(TodayViewController) Protection is enabled title  */
-"protection_enabled" = "Protection is enabled";
+"protection_enabled" = "Protection is ON";
 
 /*(TodayViewController) Complex protection is enabled text  */
 "complex_enabled" = "Safari and DNS protection";
@@ -620,19 +620,25 @@
 "dns_request_user_status_removed_from_blacklist" = "removed from the Blocklist";
 
 /* (OnboardingController) first step text*/
-"onboarding_first_step_text" = "Open the <b>settings</b>";
+"onboarding_first_step_text" = "Open <b>Settings.</b>";
+
+/* (OnboardingController) first step with advanced protection text*/
+"advanced_protection_onboarding_first_step_text" = "Tap <b>Settings.</b>";
 
 /* (OnboardingController) second step text */
-"onboarding_second_step_text" = "Tap on <b>Safari</b> and choose the <b>Content blockers</b> menu item";
+"onboarding_second_step_text" = "Tap <b>Safari</b>, swipe down, and tap <b>Content blockers.</b>";
 
-/* (OnboardingController) second step text */
-"advanced_protection_onboarding_second_step_text" = "Tap on <b>Safari</b> and choose the <b>Extensions</b> menu item";
+/* (OnboardingController) second step with advanced protection text */
+"advanced_protection_onboarding_second_step_text" = "Go to <b>Safari > Extensions.</b>";
 
 /* (OnboardingController) third step text */
-"onboarding_third_step_text" = "<b>Switch on</b> all AdGuard ones";
+"onboarding_third_step_text" = "<b>Enable</b> all AdGuard extensions.";
+
+/* (OnboardingController) third step with advanced protection text */
+"advanced_protection_onboarding_third_step_text" = "Set all AdGuard toggles to <b>On.</b> You`re good to go!";
 
 /* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
-"onboarding_fours_step_text" = "For <b>Advanced</b> protection in the Safari app, tap %@ then tap <b>AdGuard</b> and confirm all permissions.";
+"onboarding_fours_step_text" = "For <b>Advanced</b> protection, open the Safari app, tap the <b>aA</b> icon on the left side of the URL field,<br><br> %@ <br><br>then tap <b>AdGuard</b> and confirm all permissions.";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "System DNS";

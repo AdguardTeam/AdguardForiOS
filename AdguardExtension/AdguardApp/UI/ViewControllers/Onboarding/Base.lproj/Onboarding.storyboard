@@ -25,7 +25,7 @@
                                     </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="NEXT">
+                                <state key="normal" title="Continue">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -227,8 +227,8 @@
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="38"/>
                                                         </variation>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AdGuard excels at blocking ads on any website in Safari, so you can browse ad-freely and fast." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r3n-Il-Qe8" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="24" y="42.333333333333371" width="366" height="40.666666666666657"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AdGuard blocks ads in Safari on most websites. Enjoy faster web surfing without ads!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r3n-Il-Qe8" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="24" y="42.5" width="272" height="61"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -259,10 +259,11 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x8j-Ba-Gwf">
-                                                <rect key="frame" x="414" y="0.0" width="414" height="256"/>
+                                                <rect key="frame" x="320" y="0.0" width="320" height="256"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AdGuard is able to filter any type of content, and you can tune the filtering to exactly suit your needs." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thP-lV-BhN" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="24" y="42.5" width="272" height="61"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thP-lV-BhN" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="24" y="42.5" width="272" height="81.5"/>
+                                                        <string key="text">Use our collection of flexible filters to remove any type of content. Tune the filtering to your liking and surf the web your way. </string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -301,10 +302,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5V8-7K-3Aa">
-                                                <rect key="frame" x="856" y="0.0" width="428" height="256"/>
+                                                <rect key="frame" x="640" y="0.0" width="320" height="256"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Block Tracking" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FDG-As-HDY" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="24" y="0.0" width="380" height="26.333333333333332"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Block Trackers" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FDG-As-HDY" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="24" y="0.0" width="272" height="26.5"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -315,8 +316,8 @@
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="38"/>
                                                         </variation>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AdGuard fights thousands of corporations that track your every click and makes sure your privacy is safe." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mzf-WJ-CpC" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="24" y="42.333333333333371" width="366" height="61"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stop thousands of corporations from tracking your every move. Regain control of your online privacy." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mzf-WJ-CpC" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="24" y="42.5" width="272" height="81.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -383,7 +384,7 @@
                                     </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="NEXT">
+                                <state key="normal" title="Continue">
                                     <color key="titleColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 </state>
                                 <variation key="heightClass=regular-widthClass=regular">
@@ -496,7 +497,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Watch manual" image="icon_play">
+                                <state key="normal" title="Video guide" image="icon_play">
                                     <color key="titleColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 </state>
                                 <variation key="heightClass=regular-widthClass=regular">
@@ -521,8 +522,8 @@
                                     <action selector="closeAction:" destination="eQY-Hl-hIc" eventType="touchUpInside" id="wOx-y6-MFr"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To use AdGuard protection in Safari, follow a few easy steps" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F7O-MB-LHu" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="24" y="72" width="248" height="72"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable AdGuard for Safari" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F7O-MB-LHu" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="24" y="72" width="248" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>

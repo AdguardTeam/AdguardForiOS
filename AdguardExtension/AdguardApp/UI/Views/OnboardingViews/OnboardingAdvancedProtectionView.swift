@@ -75,7 +75,7 @@ final class OnboardingAdvancedProtectionView: UIView {
     }
     
     private func processAttributes(with string: String) {
-        guard let image = UIImage(named: "share_green") else { return }
+        guard let image = UIImage(named: "advancedSafariProtection") else { return }
         let attachmentSettings = NSMutableAttributedString.AttachmentSettings(image: image,
                                                                                topEdge: 7.5,
                                                                                leftEdge: 5,

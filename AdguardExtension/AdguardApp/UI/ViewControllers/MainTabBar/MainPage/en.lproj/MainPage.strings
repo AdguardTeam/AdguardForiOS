@@ -1,5 +1,5 @@
-/* Class = "UILabel"; text = "The new version of iOS allows AdGuard to take advantage of some advanced tools for content blocking. For example, now just one action is enough to block YouTube ads in Safari for good."; ObjectID = "0IU-PO-Xeh"; */
-"0IU-PO-Xeh.text" = "The new version of iOS allows AdGuard to take advantage of some advanced tools for content blocking. For example, now just one action is enough to block YouTube ads in Safari for good.";
+/* Class = "UILabel"; text = "AdGuard uses the iOS 15 new anti-distraction tools for even better content blocking. For example, you  need only one action to block YouTube ads in Safari for good!"; ObjectID = "0IU-PO-Xeh"; */
+"0IU-PO-Xeh.text" = "AdGuard uses the iOS 15 new anti-distraction tools for even better content blocking. For example, you  need only one action to block YouTube ads in Safari for good!";
 
 /* Class = "UILabel"; text = "Get stronger with PREMIUM!"; ObjectID = "3qN-uj-pOb"; */
 "3qN-uj-pOb.text" = "Get stronger with PREMIUM!";
@@ -13,8 +13,8 @@
 /* Class = "UILabel"; text = "Period"; ObjectID = "5pX-mg-2fq"; */
 "5pX-mg-2fq.text" = "Period";
 
-/* Class = "UIButton"; normalTitle = "ENABLE"; ObjectID = "7SB-2j-FAc"; */
-"7SB-2j-FAc.normalTitle" = "ENABLE";
+/* Class = "UIButton"; normalTitle = "Turn ON"; ObjectID = "7SB-2j-FAc"; */
+"7SB-2j-FAc.normalTitle" = "Turn ON";
 
 /* Class = "UILabel"; text = "Native DNS is operating"; ObjectID = "8Z0-0U-Hfk"; */
 "8Z0-0U-Hfk.text" = "Native DNS is operating";
