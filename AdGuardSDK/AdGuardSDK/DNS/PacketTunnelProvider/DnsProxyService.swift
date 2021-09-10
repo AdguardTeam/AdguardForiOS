@@ -18,17 +18,12 @@
 
 import Foundation
 
-class DnsProxyUpstream: NSObject {
+struct DnsProxyUpstream {
     let upstream: String
     let isCrypto: Bool
-    
-    init(upstream: String, isCrypto: Bool) {
-        self.upstream = upstream
-        self.isCrypto = isCrypto
-    }
 }
 
-protocol DnsProxyServiceProtocol : NSObjectProtocol {
+protocol DnsProxyServiceProtocol {
     var upstreamsById: [Int: DnsProxyUpstream] { get }
 
     func start(upstreams: [String], bootstrapDns: [String], fallbacks: [String], serverName: String, filtersManager: DnsFiltersManagerProtocol , userFilterId:Int, whitelistFilterId:Int, ipv6Available: Bool, rulesBlockingMode: AGBlockingMode, hostsBlockingMode: AGBlockingMode, blockedResponseTtlSecs: Int, customBlockingIpv4: String?, customBlockingIpv6: String?, blockIpv6: Bool) -> Bool
@@ -36,7 +31,7 @@ protocol DnsProxyServiceProtocol : NSObjectProtocol {
     func resolve(dnsRequest:Data, callback:  @escaping (_ dnsResponse: Data?)->Void);
 }
 
-class DnsProxyService : NSObject, DnsProxyServiceProtocol {
+class DnsProxyService : DnsProxyServiceProtocol {
     var upstreamsById: [Int : DnsProxyUpstream] = [:]
 
     // set it to 2000 to make sure we will quickly fallback if needed
@@ -57,8 +52,6 @@ class DnsProxyService : NSObject, DnsProxyServiceProtocol {
         self.eventHandler = eventHandler
         self.dnsProvidersManager = dnsProvidersManager
         self.events = AGDnsProxyEvents()
-
-        super.init()
 
         self.events.onRequestProcessed = { [weak self] (event) in
             if event != nil {

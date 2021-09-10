@@ -351,8 +351,3 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
         }
     }
 }
-
-struct ServerAddress {
-    let ip: String
-    let port: String?
-}
