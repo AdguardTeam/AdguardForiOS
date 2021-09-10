@@ -41,9 +41,6 @@ protocol VpnManagerProtocol {
     
     /** returns actual state of vpn configuration */
     func getConfigurationStatus(callback: @escaping (VpnConfigurationStatus)->Void)
-    
-    /** migrate settings pro 2.1.2 and freee 3.0 settings to universal app v4.0 */
-    func migrateOldVpnSettings(completion: @escaping (Error?)->Void)
 }
 
 enum VpnManagerError: Error {
@@ -248,22 +245,6 @@ class VpnManager: VpnManagerProtocol {
         }
     }
     
-    func migrateOldVpnSettings(completion: @escaping (Error?) -> Void) {
-        DDLogInfo("(VpnManager) migrateOldVpnSettings called")
-        
-        workingQueue.async { [weak self] in
-            guard let self = self else { return }
-            
-            // get manager from system preferences
-            let (manager, error) = self.loadManager()
-            if let providerConfiguration = (manager?.protocolConfiguration as? NETunnelProviderProtocol)?.providerConfiguration {
-                VpnManagerMigration.migrateSettingsIfNeeded(resources: self.resources, dnsProviders: self.dnsProviders, providerConfiguration: providerConfiguration)
-            }
-            
-            completion(error)
-        }
-    }
-    
     // MARK: - private methods
     
     private func updateSettingsInternal(completion: ((Error?) -> Void)?) {
@@ -465,48 +446,3 @@ class VpnManager: VpnManagerProtocol {
         }
     }
 }
-
-@objc
-class VpnManagerMigration: NSObject {
-    
-    private static let oldAdguardUUID = "AGDEF01"
-    private static let oldAdguardFamilyUUID = "AGDEF02"
-    private static let oldAdguardDnsCryptIdIpv4 = "adguard-dns"
-    private static let oldAdguardDnsCryptIdIpv6 = "adguard-dns-ipv6"
-    private static let oldAdguardFamilyDnsCryptIdIpv4 = "adguard-dns-family"
-    private static let oldAdguardFamilyDnsCryptIdIpv6 = "adguard-dns-family-ipv6"
-
-    @objc
-    class func migrateSettingsIfNeeded(resources: AESharedResourcesProtocol, dnsProviders: DnsProvidersServiceProtocol, providerConfiguration: [String : Any]) {
-        // in app version below 4.0.0 we stored tunnel settings(activeDnsServer, tunnelMode, restartByReachability) in protocol configuration.
-        // now we store it in shared defaults
-        
-        let tunnelModeOld = providerConfiguration[APVpnManagerParameterTunnelMode] as? UInt
-        let restartOld = providerConfiguration[APVpnManagerRestartByReachability] as? Bool
-        let activeDnsServerData = providerConfiguration[APVpnManagerParameterRemoteDnsServer] as? Data
-        
-        if tunnelModeOld != nil || activeDnsServerData != nil || restartOld != nil {
-            
-            DDLogInfo("(VpnManagerMigration) there are not new settings in shared resources. Try to read it from protocol configuration")
-            if tunnelModeOld != nil {
-                DDLogInfo("(VpnManagerMigration) save tunnelModeOld in resources")
-//                resources.tunnelMode = APVpnManagerTunnelMode(tunnelModeOld!)
-            }
-            
-            if restartOld != nil {
-                DDLogInfo("(VpnManagerMigration) save restartOld in resources")
-                resources.restartByReachability = restartOld!
-            }
-            
-            if activeDnsServerData != nil {
-                
-                let oldServer = NSKeyedUnarchiver.unarchiveObject(with: activeDnsServerData!)
-                if let activeDnsServerOld = oldServer as? DnsServerInfo {
-                    DDLogInfo("(VpnManagerMigration) save activeDnsServerOld in resources")
-                    dnsProviders.activeDnsServer = activeDnsServerOld
-                }
-            }
-        }
-    }
-}
-
