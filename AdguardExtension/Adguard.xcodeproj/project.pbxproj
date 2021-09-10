@@ -138,6 +138,7 @@
 		7ED595DA259B263C00608222 /* DnsResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED595D8259B263C00608222 /* DnsResolver.swift */; };
 		A5E02631261E330900198396 /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = A5E02630261E330900198396 /* AGDnsProxy */; };
 		A5E02633261E331E00198396 /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = A5E02632261E331E00198396 /* AGDnsProxy */; };
+		C05427F226E6675700F3A50B /* IntroScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05427F126E6675700F3A50B /* IntroScreenViewController.swift */; };
 		C0A8593D26C376020083E103 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A8593526C376010083E103 /* MainController.swift */; };
 		C0A8593E26C376020083E103 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A8593626C376010083E103 /* TabBarController.swift */; };
 		C0A8593F26C376020083E103 /* ViSafeData.plist in Resources */ = {isa = PBXBuildFile; fileRef = C0A8593726C376020083E103 /* ViSafeData.plist */; };
@@ -826,6 +827,7 @@
 		7EF4285B23AB77AB00948B65 /* ComplexProtectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexProtectionController.swift; sourceTree = "<group>"; };
 		7EF6AF86233D11B000D29B36 /* RequestsBlockingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsBlockingController.swift; sourceTree = "<group>"; };
 		7EF75A6C234B6010006ED3E5 /* DnsTrackerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsTrackerService.swift; sourceTree = "<group>"; };
+		C05427F126E6675700F3A50B /* IntroScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroScreenViewController.swift; sourceTree = "<group>"; };
 		C0A2241426BA3D3F0089531D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C0A8593526C376010083E103 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		C0A8593626C376010083E103 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -2025,6 +2027,7 @@
 			isa = PBXGroup;
 			children = (
 				C0DB78DD26C537EC003C7900 /* IntroViewController.swift */,
+				C05427F126E6675700F3A50B /* IntroScreenViewController.swift */,
 			);
 			path = IntroScreen;
 			sourceTree = "<group>";
@@ -2569,6 +2572,7 @@
 				659886551CF74DE9003ECD1C /* ACNHttpUtils.m in Sources */,
 				D0B545962435D630002F0AEC /* ThemeService.swift in Sources */,
 				24D922C82604B4A3002F368B /* AppDelegate+StatusBarWindow.swift in Sources */,
+				C05427F226E6675700F3A50B /* IntroScreenViewController.swift in Sources */,
 				659886571CF74DE9003ECD1C /* ADLocales.m in Sources */,
 				247CB63B2600CBE40047974C /* OpenTunnelModeControllerParser.swift in Sources */,
 				D0D7E6302446E186001801A5 /* UIBezierPath+Utils.swift in Sources */,
@@ -3159,7 +3163,7 @@
 				CODE_SIGN_ENTITLEMENTS = VisafeDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = PPZ8Y7NW8F;
 				HEADER_SEARCH_PATHS = $inherited;
 				INFOPLIST_FILE = AdguardPro/VisafePro.plist;
@@ -3169,7 +3173,7 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = $inherited;
-				MARKETING_VERSION = 1.5.0;
+				MARKETING_VERSION = 1.5.1;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.visafe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3190,10 +3194,10 @@
 				AE_SHARED_SUBSCRIPTIOSN_GROUP = group.vn.visafe.subscriptions;
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = AdguardPro/AdguardPro.entitlements;
+				CODE_SIGN_ENTITLEMENTS = VisafeDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = PPZ8Y7NW8F;
 				HEADER_SEARCH_PATHS = $inherited;
 				INFOPLIST_FILE = AdguardPro/VisafePro.plist;
@@ -3203,7 +3207,8 @@
 					"@executable_path/Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = $inherited;
-				MARKETING_VERSION = 1.5.0;
+				MARKETING_VERSION = 1.5.1;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.visafe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3403,7 +3408,7 @@
 				CODE_SIGN_ENTITLEMENTS = AdguardPro/ProTunnel.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = PPZ8Y7NW8F;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -3418,6 +3423,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "";
+				MARKETING_VERSION = 1.5.1;
 				OTHER_SWIFT_FLAGS = "-DAPP_EXTENSION";
 				PRODUCT_BUNDLE_IDENTIFIER = vn.visafe.tunnel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3445,7 +3451,7 @@
 				CODE_SIGN_ENTITLEMENTS = AdguardPro/ProTunnel.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = PPZ8Y7NW8F;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "APP_EXTENSION=1";
@@ -3456,6 +3462,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = "";
+				MARKETING_VERSION = 1.5.1;
 				OTHER_SWIFT_FLAGS = "-DAPP_EXTENSION";
 				PRODUCT_BUNDLE_IDENTIFIER = vn.visafe.tunnel;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -19,7 +19,6 @@
 import Foundation
 import NetworkExtension
 
-
 // MARK: - Complex protection Interface -
 
 @objc
@@ -217,7 +216,7 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     
     private func updateProtections(safari:Bool, system: Bool, vc: UIViewController?, completion: @escaping (_ safariError: Error?, _ systemError: Error?)->Void) {
         
-        DispatchQueue(label: "complex protection queue").async { [weak self] in
+        DispatchQueue(label: "complexA protection queue").async { [weak self] in
             guard let self = self else { return }
             
             var safariError: Error?
@@ -400,9 +399,9 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
             let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel) { (alert) in
                 confirmed(false)
             }
-            
-            alert.addAction(okAction)
             alert.addAction(cancelAction)
+            alert.addAction(okAction)
+
             
             alert.preferredAction = okAction
             

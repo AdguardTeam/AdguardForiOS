@@ -144,23 +144,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //        GIDSignIn.sharedInstance()?.restorePreviousSignIn()
         return true
     }
-    func randomString(length: Int) -> String {
-        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        let len = UInt32(letters.length)
-
-        var randomString = ""
-
-        for _ in 0 ..< length {
-            let rand = arc4random_uniform(len)
-            var nextChar = letters.character(at: Int(rand))
-            randomString += NSString(characters: &nextChar, length: 1) as String
+    static func GetUserID(){
+        let url = URL(string: DOMAIN_TO_GET_USER_ID)
+        guard let requestUrl = url else { fatalError() }
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "GET"
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("Error took place \(error)")
+                return
+            }
+            guard let data = data else {return}
+            do{
+                let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! [String: Any]
+                DispatchQueue.main.async {
+                    if let httpResponse = response as? HTTPURLResponse{
+                        if httpResponse.statusCode == 200{
+                            StoreData.saveMyPlist(key: "userid", value: json["deviceId"] as! String)
+                        }
+                    }
+                }
+            }catch _{
+                
+            }
         }
-        return randomString.lowercased()
+        task.resume()
     }
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         prepareControllers()
         if StoreData.getMyPlist(key: "userid") == nil{
-            StoreData.saveMyPlist(key: "userid", value: self.randomString(length: 12))
+            AppDelegate.GetUserID()
         }
         //------------- Preparing for start application. Stage 2. -----------------
         DDLogInfo("(AppDelegate) Preparing for start application. Stage 2.")
@@ -198,7 +211,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         if StoreData.getMyPlist(key: "userid") == nil{
-            StoreData.saveMyPlist(key: "userid", value: self.randomString(length: 12))
+            AppDelegate.GetUserID()
         }
         if StoreData.getMyPlist(key: "userid") != nil
         {
@@ -209,7 +222,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             else{
                 if StoreData.getMyPlist(key: "status_code_vip") as! Int != 1
                 {
-                    self.postRequestSendToken(deviceId: StoreData.getMyPlist(key: "userid") as! String, token: fcmToken!)
+                    self.postRequestSendToken(deviceId: (StoreData.getMyPlist(key: "userid") as! String).lowercased(), token: fcmToken!)
                 }
             }
         }
@@ -229,6 +242,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         let request_json = RequestData(
             deviceId: deviceId, token:token )
+        print("tokenfire")
+        print((request_json))
         let jsonData = try? JSONEncoder().encode(request_json)
         request.httpBody = jsonData
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in

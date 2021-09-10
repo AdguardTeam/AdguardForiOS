@@ -61,11 +61,14 @@ class Main:UIViewController{
         }
     }
     @IBAction func btn_active(_ sender: UIButton) {
+        if StoreData.getMyPlist(key: "userid") == nil{
+            AppDelegate.GetUserID()
+        }
         container_view.isHidden = true
         UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
         let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
         let userid = StoreData.getMyPlist(key: "userid") as! String
-        let upstream = DOMAIN_NORMAL + userid
+        let upstream = DOMAIN_NORMAL + userid.lowercased()
         let dnsProvidersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
         dnsProvidersService.addVisafeVPN(name: "Visafe", upstream: upstream) { [weak self] in
             vpnManager.updateSettings(completion: nil)
@@ -114,8 +117,12 @@ class Main:UIViewController{
         }
     }
     private func updateVpnInfo() {
+        
         let enabled = complexProtection.systemProtectionEnabled
-        if enabled == true{
+        print("abc")
+        print(complexProtection.systemProtectionEnabled)
+        print(complexProtection.complexProtectionEnabled)
+        if enabled == true && complexProtection.complexProtectionEnabled == true{
             self.active_background.image=UIImage(named: "Group 6041.png")
             self.status_btn = 0
             StoreData.saveMyPlist(key: "status", value: "1")
@@ -132,6 +139,7 @@ class Main:UIViewController{
         }
         else
         {
+            container_view.isHidden = true
             self.active_background.image = UIImage(named: "Group 6042.png")
             StoreData.saveMyPlist(key: "status", value: "0")
             self.status_btn = 1
@@ -143,8 +151,6 @@ class Main:UIViewController{
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
             let request = UNNotificationRequest(identifier: "TestIdentifier", content: content, trigger: trigger)
             UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-           
-            
         }
     }
     @IBOutlet weak var background_dot: UIImageView!
@@ -154,6 +160,7 @@ class Main:UIViewController{
     }
    
     override func viewDidLoad() {
+       
         if StoreData.getMyPlist(key: "uuid") == nil
         {
             StoreData.saveMyPlist(key: "uuid", value: UUID().uuidString)
@@ -189,8 +196,7 @@ class Main:UIViewController{
         view_main.bringSubviewToFront(advertise)
         view_main.bringSubviewToFront(container_view)
         super.viewDidLoad()
-//        //doan code xu ly
-//        //1. Load lai trang thai cu
+        
         if (StoreData.getMyPlist(key: "status") as? String == nil)
         {
             status_btn = 1
@@ -202,14 +208,12 @@ class Main:UIViewController{
                 status_btn = 1
                 StoreData.saveMyPlist(key: "status", value: "0")
                 active_background.image=UIImage(named: "Group 6042.png")
-                //applyDoH_G()
             }
             else
             {
                 status_btn = 0
                 StoreData.saveMyPlist(key: "status", value: "1")
                 active_background.image=UIImage(named: "Group 6041.png")
-                //applyDoH()
             }
         }
         first_use = 1
@@ -223,24 +227,6 @@ class Main:UIViewController{
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         image_status_mode.isUserInteractionEnabled = true
         image_status_mode.addGestureRecognizer(tapGestureRecognizer)
-        
-        let monitor = NWPathMonitor()
-        monitor.start(queue: .global())
-        monitor.pathUpdateHandler = { path in
-            if path.status == .satisfied {
-                DispatchQueue.main.async {
-                    self.active_background.image=UIImage(named: "Group 6041.png")
-                    self.container_view.isHidden = true
-                }
-            }
-            else
-            {
-                DispatchQueue.main.async {
-                    self.active_background.image=UIImage(named: "Group 6043.png")
-                    self.container_view.isHidden = false
-                }
-            }
-        }
     }
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
@@ -255,11 +241,11 @@ class Main:UIViewController{
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    override func viewDidLayoutSubviews() {
+    override func viewWillLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if Core.shared.isNewUser() {
             StoreData.saveMyPlist(key: "status", value: "0")
-            let secondVC = self.storyboard?.instantiateViewController(withIdentifier: "login_controller")
+            let secondVC = self.storyboard?.instantiateViewController(withIdentifier: "intro_screen")
             secondVC?.modalTransitionStyle = .crossDissolve
             secondVC?.modalPresentationStyle = .fullScreen
             self.present(secondVC!, animated: true)

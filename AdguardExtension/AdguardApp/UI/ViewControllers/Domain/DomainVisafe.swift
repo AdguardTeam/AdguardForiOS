@@ -19,6 +19,7 @@ import Foundation
         public let DOMAIN_SEND_VIP_AUTHENTICATION:String = "https://app.visafe.vn/api/v1/device/active-vip";
         public let DOMAIN_CHECK_STATUS_DEVICE = "https://app.visafe.vn/api/v1/device/check"
         public let DOMAIN_SEND_TOKEN = "https://app.visafe.vn/api/v1/device/register";
+//        public let DOMAIN_SEND_TOKEN = "https://notification.visafe.vn/api/receiveToken"
         public let DOMAIN_TO_LOGIN = "https://app.visafe.vn/api/v1/login"
         public let DOMAIN_TO_REGISTER = "https://app.visafe.vn/api/v1/register"
         public let DOMAIN_TO_OTP = "https://app.visafe.vn/api/v1/activate-account"
@@ -28,7 +29,7 @@ import Foundation
         public let DOMAIN_LOGIN_WITH_FACEBOOK = "https://app.visafe.vn/api/v1/login/facebook"
         public let DOMAIN_LOGIN_WITH_GMAIL = "https://app.visafe.vn/api/v1/login/google"
         public let DOMAIN_LOGIN_WITH_APPLE = "https://app.visafe.vn/api/v1/login/apple"
-
+        public let DOMAIN_TO_GET_USER_ID = "http://app.visafe.vn/api/v1/control/gen-device-id"
 //STAGING
 //
 //    public let DOMAIN_NORMAL:String = "https://dns-staging.visafe.vn/dns-query/";
@@ -49,5 +50,5 @@ import Foundation
 //    public let DOMAIN_RESET_PASSWORD_WITH_OTP = "https://staging.visafe.vn/api/v1/reset-password"
 //    public let DOMAIN_LOGIN_WITH_FACEBOOK = "https://staging.visafe.vn/api/v1/login/facebook"
 //    public let DOMAIN_LOGIN_WITH_GMAIL = "https://staging.visafe.vn/api/v1/login/google"
-
+//    public let DOMAIN_TO_GET_USER_ID = "http://staging.visafe.vn/api/v1/control/gen-device-id"
 
