@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import {
     action,
     computed,
@@ -15,7 +15,6 @@ import { messenger } from '../../common/messenger';
 import { toDataUrl } from '../image-utils';
 import { log } from '../../common/log';
 import { AppearanceTheme } from '../../common/constants';
-import { popup } from '../index';
 
 // Do not allow property change outside of store actions
 configure({ enforceActions: 'observed' });
@@ -216,4 +215,6 @@ class PopupStore {
     }
 }
 
-export const popupStore = createContext(new PopupStore());
+export const popupStoreValue = new PopupStore();
+export const PopupStoreContext = createContext(popupStoreValue);
+export const popupStore = PopupStoreContext;

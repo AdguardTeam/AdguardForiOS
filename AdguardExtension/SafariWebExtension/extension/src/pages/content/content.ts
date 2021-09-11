@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import ExtendedCss from 'extended-css';
 
 import { MessagesToBackgroundPage } from '../common/constants';

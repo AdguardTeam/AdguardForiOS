@@ -1,5 +1,5 @@
 import { adguardAssistant, Assistant } from '@adguard/assistant';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 import { MessagesToContentScript } from '../../common/constants';
 import { log } from '../../common/log';

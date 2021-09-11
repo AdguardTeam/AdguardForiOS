@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import { observer } from 'mobx-react';
 
 import { Action } from '../Action';

@@ -1,4 +1,4 @@
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 import { MessagesToBackgroundPage } from '../constants';
 import { log } from '../log';
