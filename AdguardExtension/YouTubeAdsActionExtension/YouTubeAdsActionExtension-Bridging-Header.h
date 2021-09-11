@@ -6,5 +6,4 @@
 #import "ACLLogger.h"
 #import "NSString+Utils.h"
 
-
 #endif /* YouTubeAdsActionExtension_Bridging_Header_h */

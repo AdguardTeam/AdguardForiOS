@@ -192,7 +192,6 @@
 		4982C2F626D7973F00CACBBE /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = 7EBDD9AB26D6A77D009531FA /* popup.html */; };
 		4982C2F726D7973F00CACBBE /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = 7E7D636626D6A91A0002EE6A /* popup.js */; };
 		6513182E1BDE448D008DCFF9 /* ActionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 65C52B361B906105003AF42F /* ActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		6517EE771C86F47C00E055D2 /* Adguard.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 65F398711B7C9C5000ABCD39 /* Adguard.entitlements */; };
 		651F5E0C1E2563A400E22157 /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E0B1E2563A400E22157 /* ACNUrlUtils.m */; };
 		651F5E0D1E2563A400E22157 /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E0B1E2563A400E22157 /* ACNUrlUtils.m */; };
 		651F5E0E1E2563A400E22157 /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 651F5E0B1E2563A400E22157 /* ACNUrlUtils.m */; };
@@ -1265,7 +1264,6 @@
 		D0569E2521F1C0A800985DA9 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */; };
 		D0569E2621F1C0A800985DA9 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0971B8632DD00319AA3 /* libsqlite3.tbd */; };
 		D0569E2721F1C0A800985DA9 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C98AA21D3661B500E4B57D /* libresolv.tbd */; };
-		D0569E2B21F1C0A800985DA9 /* tunnel.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 658237361D07FE6700B824F4 /* tunnel.entitlements */; };
 		D0569E3921F1C7C400985DA9 /* AESharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 65AD3BBA1B7CB15400004A02 /* AESharedResources.m */; };
 		D0569E3D21F1CD9E00985DA9 /* Tunnel.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D0569E2F21F1C0A800985DA9 /* Tunnel.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D0569E4421F1EBF200985DA9 /* DnsSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0569E4221F1EBEB00985DA9 /* DnsSettingsController.swift */; };
@@ -2002,7 +2000,6 @@
 		D0B5451B2435C6BF002F0AEC /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0991B8632F600319AA3 /* libz.tbd */; };
 		D0B5451D2435C6BF002F0AEC /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */; };
 		D0B5451F2435C6BF002F0AEC /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C98AA21D3661B500E4B57D /* libresolv.tbd */; };
-		D0B545212435C6BF002F0AEC /* tunnel.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 658237361D07FE6700B824F4 /* tunnel.entitlements */; };
 		D0B5453A2435C7B9002F0AEC /* AdguardProBlockingExtensionGeneral.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D0B542CA2435C6A3002F0AEC /* AdguardProBlockingExtensionGeneral.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D0B5453B2435C7B9002F0AEC /* AdguardProBlockingExtensionPrivacy.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D0B543032435C6A7002F0AEC /* AdguardProBlockingExtensionPrivacy.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D0B5453C2435C7B9002F0AEC /* AdguardProBlockingExtensionAnnoyances.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D0B5433C2435C6AA002F0AEC /* AdguardProBlockingExtensionAnnoyances.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -3297,6 +3294,9 @@
 		7E70266226DD29A500F8FC25 /* UserRulesTableModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRulesTableModelProtocol.swift; sourceTree = "<group>"; };
 		7E70266526DD412600F8FC25 /* IdentifiableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableObject.swift; sourceTree = "<group>"; };
 		7E70266826DE462D00F8FC25 /* UserRuleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRuleTableViewCell.swift; sourceTree = "<group>"; };
+		7E74789426EC9EA8008DC25C /* Extension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Extension-Bridging-Header.h"; sourceTree = "<group>"; };
+		7E74789526ECA06C008DC25C /* AdGuardTodayExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AdGuardTodayExtension-Bridging-Header.h"; sourceTree = "<group>"; };
+		7E74789626ECA455008DC25C /* SafariWebExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SafariWebExtension-Bridging-Header.h"; sourceTree = "<group>"; };
 		7E74FCAB239F9BF7006C0990 /* MainPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageController.swift; sourceTree = "<group>"; };
 		7E74FCAF239F9C96006C0990 /* MainPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageModel.swift; sourceTree = "<group>"; };
 		7E77144C2445F35A0078CD6B /* ActivityStatisticsServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStatisticsServiceMock.swift; sourceTree = "<group>"; };
@@ -3563,7 +3563,6 @@
 		7ED68E3526EABA2A00929E57 /* SafariAdGuardSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SafariAdGuardSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ED68E3826EABA2F00929E57 /* SafariAdGuardSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SafariAdGuardSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ED68E3B26EABA3400929E57 /* SafariAdGuardSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SafariAdGuardSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7ED68E4326EB96F100929E57 /* SafariWebExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SafariWebExtension-Bridging-Header.h"; sourceTree = "<group>"; };
 		7ED68E4426EB98E200929E57 /* YouTubeAdsActionExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YouTubeAdsActionExtension-Bridging-Header.h"; sourceTree = "<group>"; };
 		7EDAC08122F1DF5200F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/About.strings; sourceTree = "<group>"; };
 		7EDAC08222F1DF5200F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/DnsSettings.strings; sourceTree = "<group>"; };
@@ -5787,6 +5786,7 @@
 				7E06B63822FB0313006859AC /* AdguardBlockingExtensionPrivacy.plist */,
 				7E06B65F22FB04CD006859AC /* AdguardBlockingExtensionSecurity.plist */,
 				D07256D926BD552700654177 /* ContentBlockerRequestHandler.swift */,
+				7E74789426EC9EA8008DC25C /* Extension-Bridging-Header.h */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -5891,8 +5891,8 @@
 				7EBDD98126D6A1F1009531FA /* Message.swift */,
 				7E497E1926E202E90072BDE1 /* ChunkFileReader.swift */,
 				7EBDD98426D6A204009531FA /* Info.plist */,
+				7E74789626ECA455008DC25C /* SafariWebExtension-Bridging-Header.h */,
 				7E4ABFFE26BD75E700DF5CF0 /* Resources */,
-				7ED68E4326EB96F100929E57 /* SafariWebExtension-Bridging-Header.h */,
 			);
 			path = SafariWebExtension;
 			sourceTree = "<group>";
@@ -5921,6 +5921,7 @@
 				7E536C6B238D2AC400A83A79 /* TodayExtension.storyboard */,
 				7E536C6E238D2AC400A83A79 /* Info.plist */,
 				7E3340112390076800C39F62 /* todayExtensionAssets.xcassets */,
+				7E74789526ECA06C008DC25C /* AdGuardTodayExtension-Bridging-Header.h */,
 			);
 			path = AdGuardTodayExtension;
 			sourceTree = "<group>";
@@ -7647,7 +7648,6 @@
 				7E7F9908241A98E400FC89DC /* RateApp.storyboard in Resources */,
 				7E15720A22DF32E3007060D7 /* ContentBlockerStateCell.xib in Resources */,
 				D0D6B9FF21A6AF5B007360BC /* MainMenu.storyboard in Resources */,
-				6517EE771C86F47C00E055D2 /* Adguard.entitlements in Resources */,
 				7E952E9723D5FFB400D89AE0 /* Protection.storyboard in Resources */,
 				D0D6B9F921A6AF4F007360BC /* Filters.storyboard in Resources */,
 				7E2D978C24499E58000366B3 /* public_suffix_list.dat in Resources */,
@@ -7755,7 +7755,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0569E2B21F1C0A800985DA9 /* tunnel.entitlements in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7858,7 +7857,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0B545212435C6BF002F0AEC /* tunnel.entitlements in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -11744,7 +11742,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardExtension.extension";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Extension/Extension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -11769,7 +11767,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardExtension.extension";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Extension/Extension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -11794,7 +11792,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardExtension.extensionSecurity";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Extension/Extension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -11819,7 +11817,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardExtension.extensionSecurity";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Extension/Extension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -12055,7 +12053,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardExtension.todayExtension";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "AdGuardTodayExtension/AdGuardTodayExtension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -12091,7 +12089,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardExtension.todayExtension";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "AdGuardTodayExtension/AdGuardTodayExtension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -12446,7 +12444,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardExtension.extensionPrivacy";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Extension/Extension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -12471,7 +12469,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardExtension.extensionPrivacy";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Extension/Extension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -12496,7 +12494,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardExtension.extensionAnnoyances";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Extension/Extension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -12521,7 +12519,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardExtension.extensionAnnoyances";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Extension/Extension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -12546,7 +12544,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardExtension.extensionOther";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Extension/Extension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -12571,7 +12569,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardExtension.extensionOther";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Extension/Extension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -12596,7 +12594,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardExtension.extensionCustom";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Extension/Extension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -12621,7 +12619,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardExtension.extensionCustom";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Extension/Extension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -12646,7 +12644,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardPro.extension";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Extension/Extension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -12671,7 +12669,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardPro.extension";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Extension/Extension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -12696,7 +12694,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardPro.extensionPrivacy";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Extension/Extension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -12721,7 +12719,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardPro.extensionPrivacy";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Extension/Extension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -12746,7 +12744,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardPro.extensionAnnoyances";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Extension/Extension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -12771,7 +12769,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardPro.extensionAnnoyances";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Extension/Extension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -12796,7 +12794,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardPro.extensionOther";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Extension/Extension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -12821,7 +12819,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardPro.extensionOther";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Extension/Extension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -12846,7 +12844,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardPro.extensionCustom";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Extension/Extension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -12871,7 +12869,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardPro.extensionCustom";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Extension/Extension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -12896,7 +12894,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardPro.extensionSecurity";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Extension/Extension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -12921,7 +12919,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardPro.extensionSecurity";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Extension/Extension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_VERSION = 5.0;
 			};
@@ -12961,7 +12959,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardPro.todayExtension";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "AdGuardTodayExtension/AdGuardTodayExtension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -12997,7 +12995,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardPro.todayExtension";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "AdGuardTodayExtension/AdGuardTodayExtension-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
