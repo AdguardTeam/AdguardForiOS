@@ -179,7 +179,7 @@ class UpstreamsController: BottomAlertController {
         let bootstraps = BootstrapsHelper.bootstraps
         
         let upstreams = upstreams.map {
-            AGDnsUpstream(address: $0, bootstrap: bootstraps, timeoutMs: 2000, serverIp: Data(), id: 0, outboundInterfaceName: nil)
+            AGDnsUpstream(address: $0, bootstrap: bootstraps, timeoutMs: AGDnsUpstream.defaultTimeoutMs, serverIp: Data(), id: 0, outboundInterfaceName: nil)
         }
         
         DispatchQueue(label: "save dns upstreams queue").async { [weak self] in

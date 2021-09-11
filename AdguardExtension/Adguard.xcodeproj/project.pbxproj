@@ -6762,9 +6762,9 @@
 				7E8576752435F57F0055F63D /* DomainsParserService.swift */,
 				7EA216392444847700393949 /* MigrationService.swift */,
 				D0984F992608866900703DB2 /* MigrationService+AntibannerMigration.swift */,
+				D0A614EC26EBA18B00793922 /* BootstrapsHelper.swift */,
 				7ED0B1A526C4335700B0CE7B /* NewAndRefactoredObjects */,
 				7EC67FB5254843B300FEEEE2 /* NativeDnsService */,
-				D0A614EC26EBA18B00793922 /* BootstrapsHelper.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";

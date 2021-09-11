@@ -34,8 +34,7 @@ protocol DnsProxyServiceProtocol {
 class DnsProxyService : DnsProxyServiceProtocol {
     var upstreamsById: [Int : DnsProxyUpstream] = [:]
 
-    // set it to 2000 to make sure we will quickly fallback if needed
-    private let timeout = 2000
+    private let timeout = AGDnsUpstream.defaultTimeoutMs
 
     private var nextUpstreamId: Int { upstreamsById.count }
 

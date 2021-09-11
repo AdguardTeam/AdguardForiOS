@@ -92,7 +92,7 @@ public struct NetworkUtils: NetworkUtilsProtocol {
     func upstreamIsValid(_ upstream: String) -> Bool {
         let bootstraps = systemDnsServers
         
-        let dnsUpstream = AGDnsUpstream(address: upstream, bootstrap: bootstraps, timeoutMs: 2000, serverIp: Data(), id: 0, outboundInterfaceName: nil)
+        let dnsUpstream = AGDnsUpstream(address: upstream, bootstrap: bootstraps, timeoutMs: AGDnsUpstream.defaultTimeoutMs, serverIp: Data(), id: 0, outboundInterfaceName: nil)
         
         if let error = AGDnsUtils.test(dnsUpstream, ipv6Available: isIpv6Available) {
             Logger.logError("(NetworkUtils) - upstreamIsValid; Error: \(error)")
@@ -147,4 +147,9 @@ extension AGStampProtoType {
         @unknown default: return .dns
         }
     }
+}
+
+public extension AGDnsUpstream {
+    // set it to 2000 to make sure we will quickly fallback if needed
+    static let defaultTimeoutMs = 2000
 }

@@ -131,7 +131,7 @@ class NewDnsServerController: BottomAlertController {
         let networkUtils = NetworkUtils();
         let bootstraps = BootstrapsHelper.bootstraps
         
-        let upstream = AGDnsUpstream(address: self.upstreamsField.text, bootstrap: bootstraps, timeoutMs: 2000, serverIp: Data(), id: 0, outboundInterfaceName: nil)
+        let upstream = AGDnsUpstream(address: self.upstreamsField.text, bootstrap: bootstraps, timeoutMs: AGDnsUpstream.defaultTimeoutMs, serverIp: Data(), id: 0, outboundInterfaceName: nil)
         
         DispatchQueue(label: "save dns queue").async { [weak self] in
             guard let self = self else { return }
