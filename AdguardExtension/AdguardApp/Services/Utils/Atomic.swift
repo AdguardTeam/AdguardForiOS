@@ -19,7 +19,7 @@
 import Foundation
 
 @propertyWrapper
-class Atomic<Value> {
+final class Atomic<Value> {
 
     var wrappedValue: Value {
         get {
