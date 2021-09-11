@@ -21,20 +21,6 @@
                ReferencedContainer = "container:Adguard.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "659886481CF74DE9003ECD1C"
-               BuildableName = "Adguard Pro.app"
-               BlueprintName = "Adguard Pro"
-               ReferencedContainer = "container:Adguard.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -57,16 +43,6 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "2">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "659886481CF74DE9003ECD1C"
-            BuildableName = "Adguard Pro.app"
-            BlueprintName = "Adguard Pro"
-            ReferencedContainer = "container:Adguard.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -75,16 +51,15 @@
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES"
       launchAutomaticallySubstyle = "2">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "659886481CF74DE9003ECD1C"
-            BuildableName = "Adguard Pro.app"
-            BlueprintName = "Adguard Pro"
+            BlueprintIdentifier = "7E4AC01A26BD796800DF5CF0"
+            BuildableName = "ProSafariWebExtension.appex"
+            BlueprintName = "ProSafariWebExtension"
             ReferencedContainer = "container:Adguard.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

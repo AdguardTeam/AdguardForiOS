@@ -38,16 +38,18 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
     }
     
     // MARK: - Private methods
-
+    
+    // TODO: - We need to passs domain here
     private func getInitData(_ url: String?) -> [String: Any] {
-        let cbService = ContentBlockerService(appBundleId: Bundle.main.bundleIdentifier ?? "")
+        let cbService = ContentBlockerService(appBundleId: Bundle.main.hostAppBundleId)
         let allContentBlockersEnabled = cbService.allContentBlockersStates.values.reduce(true, { $0 && $1 })
+        
         return [
             Message.appearanceTheme: "system",
             Message.contentBlockersEnabled: allContentBlockersEnabled,
             Message.hasUserRules: false,
             Message.premiumApp: false,
-            Message.protectionEnabled: true,
+            Message.protectionEnabled: isSafariProtectionEnabled(for: url),
 
             Message.removeFromAllowlistLink: UserRulesRedirectAction.removeFromAllowlist(domain: "").scheme,
             Message.addToAllowlistLink: UserRulesRedirectAction.addToAllowlist(domain: "").scheme,
@@ -68,5 +70,19 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
             fileReader = nil
             return [Message.advancedRulesKey: nil]
         }
+    }
+    
+    private func isSafariProtectionEnabled(for domain: String?) -> Bool {
+        guard let domain = domain else { return false }
+        
+        let resources = AESharedResources()
+        let isAllowlistInverted = resources.invertedWhitelist
+        let safariUserRulesStorage = SafariUserRulesStorage(
+            userDefaults: resources.sharedDefaults(),
+            rulesType: isAllowlistInverted ? .invertedAllowlist : .allowlist
+        )
+        let rules = safariUserRulesStorage.rules.map { $0.ruleText }
+        let isDomainInRules = rules.contains(domain)
+        return isAllowlistInverted ? isDomainInRules : !isDomainInRules
     }
 }
