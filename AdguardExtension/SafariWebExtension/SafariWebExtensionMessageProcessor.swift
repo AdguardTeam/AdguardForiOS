@@ -39,16 +39,22 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
     
     // MARK: - Private methods
     
-    // TODO: - We need to passs domain here
+    // TODO: - We need to pass domain here
     private func getInitData(_ url: String?) -> [String: Any] {
         let cbService = ContentBlockerService(appBundleId: Bundle.main.hostAppBundleId)
+        
+        // Safari Content Blockers states
         let allContentBlockersEnabled = cbService.allContentBlockersStates.values.reduce(true, { $0 && $1 })
+        
+        // User Pro status
+        let isPro = Bundle.main.isPro ? true : AESharedResources().isProPurchased
         
         return [
             Message.appearanceTheme: "system",
             Message.contentBlockersEnabled: allContentBlockersEnabled,
+            // TODO: - Implement when Converter is released
             Message.hasUserRules: false,
-            Message.premiumApp: false,
+            Message.premiumApp: isPro,
             Message.protectionEnabled: isSafariProtectionEnabled(for: url),
 
             Message.removeFromAllowlistLink: UserRulesRedirectAction.removeFromAllowlist(domain: "").scheme,

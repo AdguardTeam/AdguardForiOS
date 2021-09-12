@@ -172,7 +172,7 @@ extension PurchaseService {
 }
 
 // MARK: - service implementation -
-class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionObserver, SKProductsRequestDelegate {
+final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionObserver, SKProductsRequestDelegate {
     
     // MARK: constants -
     // store kit constants
@@ -251,24 +251,12 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
     // MARK: - public properties
     
     var isProPurchased: Bool {
-        return isProPurchasedInternal
+        purchasedThroughInApp || resources.purchasedThroughSetapp || loginService.hasActiveLicense
     }
     
-    var purchasedThroughLogin: Bool {
-        get {
-            return loginService.loggedIn
-        }
-    }
+    var purchasedThroughLogin: Bool { loginService.loggedIn }
     
-    var purchasedThroughSetapp: Bool {
-        return resources.purchasedThroughSetapp
-    }
-    
-    @objc dynamic var isProPurchasedInternal: Bool {
-        get {
-            return purchasedThroughInApp || resources.purchasedThroughSetapp || loginService.hasActiveLicense;
-        }
-    }
+    var purchasedThroughSetapp: Bool { resources.purchasedThroughSetapp }
     
     var standardProduct: Product? {
         let pr = products.first(where: { $0.productId == annualSubscriptionProductID })
@@ -344,7 +332,7 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         self.resources = resources
         self.keychain = KeychainService(resources: resources)
         self.productInfo = productInfo
-        loginService = LoginService(defaults: resources.sharedDefaults(), network: network, keychain: keychain, productInfo: productInfo)
+        loginService = LoginService(resources: resources, network: network, keychain: keychain, productInfo: productInfo)
         
         super.init()
         
@@ -384,7 +372,6 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         productRequest?.start()
     }
     
-    @objc
     func login(withAccessToken token: String?, state: String?) {
         
         let expectedState = resources.sharedDefaults().string(forKey: AEDefaultsAuthStateString)
@@ -491,7 +478,6 @@ class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionOb
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
     
-    @objc
     func checkPremiumStatusChanged() {
         
         DDLogInfo("(PurchaseService) checkPremiumExpired")
