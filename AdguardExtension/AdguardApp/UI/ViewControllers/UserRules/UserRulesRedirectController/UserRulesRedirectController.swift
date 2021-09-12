@@ -83,23 +83,14 @@ final class UserRulesRedirectController: BottomAlertController {
     
     private func setNormal() {
         state = .done(action: action)
+        imageView.isHidden = false
         UIView.animate(withDuration: 0.3) {
+            self.activityIndicator.alpha = 0.0
+            self.imageView.alpha = 1.0
             self.setTexts()
-        }
-        activityIndicator.fadeOut(0.3, 0.0) { success in
+        } completion: { _ in
             self.activityIndicator.stopAnimating()
-            self.imageView.fadeIn(0.3, 0.0, onCompletion: nil)
-        }
-    }
-    
-    private func setProcessing() {
-        state = .processing
-        UIView.animate(withDuration: 0.3) {
-            self.setTexts()
-        }
-        imageView.fadeOut(0.3, 0.0) { success in
-            self.activityIndicator.startAnimating()
-            self.activityIndicator.fadeIn(0.3, 0.0, onCompletion: nil)
+            self.activityIndicator.isHidden = true
         }
     }
     
