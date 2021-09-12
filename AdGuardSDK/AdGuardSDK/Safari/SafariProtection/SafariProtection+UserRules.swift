@@ -294,9 +294,9 @@ extension SafariProtection {
         }
     }
     
-    // MARK: - Internal methods
+    // MARK: - Private methods
     
-    func getProvider(for type: SafariUserRuleType) -> UserRulesManagerProtocol {
+    private func getProvider(for type: SafariUserRuleType) -> UserRulesManagerProtocol {
         switch type {
         case .blocklist: return safariManagers.blocklistRulesManager
         case .allowlist: return safariManagers.allowlistRulesManager
