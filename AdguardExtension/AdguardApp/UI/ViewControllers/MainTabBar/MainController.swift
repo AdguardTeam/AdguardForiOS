@@ -75,7 +75,7 @@ class Main:UIViewController{
         }
         if status_btn == 0{
             
-            let alertController = UIAlertController (title: "", message: "Bạn chắc chắn muốn ngắt \n tính năng bảo vệ của Visafe?", preferredStyle: .actionSheet)
+            let alertController = UIAlertController (title: "", message: "Bạn chắc chắn muốn ngắt \n tính năng bảo vệ của Visafe?", preferredStyle: .deviceAlertStyle)
             let until_turn_on = UIAlertAction(title: "Đồng ý", style: .default) { (_) -> Void in
                 if StoreData.getMyPlist(key: "passcode") != nil
                 {
