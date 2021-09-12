@@ -2973,7 +2973,7 @@
 		658E43A61E89348E008DAA59 /* AERDomainFilterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AERDomainFilterTest.m; sourceTree = "<group>"; };
 		659491B51C6C83C100E501BA /* ASConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASConstants.h; sourceTree = "<group>"; };
 		65982AE81BA02D6800770EA9 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		659886B91CF74DE9003ECD1C /* Adguard Pro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Adguard Pro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		659886B91CF74DE9003ECD1C /* AdguardPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdguardPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		659886EA1CF834FD003ECD1C /* AdguardPro.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AdguardPro.plist; sourceTree = "<group>"; };
 		659887711CF83A72003ECD1C /* project.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = project.xcconfig; sourceTree = "<group>"; };
 		659887791CF841F4003ECD1C /* macro-definitions.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "macro-definitions.xcconfig"; sourceTree = "<group>"; };
@@ -5670,7 +5670,7 @@
 				65F3982A1B7B684700ABCD39 /* AdguardTests.xctest */,
 				65F3985E1B7B6A5300ABCD39 /* AdguardBlockingExtensionGeneral.appex */,
 				65C52B361B906105003AF42F /* ActionExtension.appex */,
-				659886B91CF74DE9003ECD1C /* Adguard Pro.app */,
+				659886B91CF74DE9003ECD1C /* AdguardPro.app */,
 				D067D90B21428AA900ECDE6D /* AdguardBlockingExtensionPrivacy.appex */,
 				D067D93C21428B4600ECDE6D /* AdguardBlockingExtensionAnnoyances.appex */,
 				D067D96D21428B9100ECDE6D /* AdguardBlockingExtensionOther.appex */,
@@ -6722,9 +6722,9 @@
 /* End PBXLegacyTarget section */
 
 /* Begin PBXNativeTarget section */
-		659886481CF74DE9003ECD1C /* Adguard Pro */ = {
+		659886481CF74DE9003ECD1C /* AdguardPro */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 659886B61CF74DE9003ECD1C /* Build configuration list for PBXNativeTarget "Adguard Pro" */;
+			buildConfigurationList = 659886B61CF74DE9003ECD1C /* Build configuration list for PBXNativeTarget "AdguardPro" */;
 			buildPhases = (
 				659886511CF74DE9003ECD1C /* Sources */,
 				6598869C1CF74DE9003ECD1C /* Frameworks */,
@@ -6753,7 +6753,7 @@
 				7E6081E926D55C6A00D778F4 /* PBXTargetDependency */,
 				7E4AC03226BD796800DF5CF0 /* PBXTargetDependency */,
 			);
-			name = "Adguard Pro";
+			name = AdguardPro;
 			packageProductDependencies = (
 				D0B546032435D740002F0AEC /* Lottie */,
 				D093AA5F25344B4E0015351F /* Setapp */,
@@ -6763,7 +6763,7 @@
 				7EF5C56326C26AC0001851D6 /* Sentry */,
 			);
 			productName = AdguardExtension;
-			productReference = 659886B91CF74DE9003ECD1C /* Adguard Pro.app */;
+			productReference = 659886B91CF74DE9003ECD1C /* AdguardPro.app */;
 			productType = "com.apple.product-type.application";
 		};
 		65C52B351B906105003AF42F /* ActionExtension */ = {
@@ -7537,7 +7537,7 @@
 				7E536C65238D2AC400A83A79 /* AdGuardTodayExtension */,
 				65C52B351B906105003AF42F /* ActionExtension */,
 				D0569D2E21F1C0A800985DA9 /* Tunnel */,
-				659886481CF74DE9003ECD1C /* Adguard Pro */,
+				659886481CF74DE9003ECD1C /* AdguardPro */,
 				D0B542932435C6A3002F0AEC /* AdguardProBlockingExtensionGeneral */,
 				D0B542CC2435C6A7002F0AEC /* AdguardProBlockingExtensionPrivacy */,
 				D0B543052435C6AA002F0AEC /* AdguardProBlockingExtensionAnnoyances */,
@@ -13139,7 +13139,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		659886B61CF74DE9003ECD1C /* Build configuration list for PBXNativeTarget "Adguard Pro" */ = {
+		659886B61CF74DE9003ECD1C /* Build configuration list for PBXNativeTarget "AdguardPro" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				659886B71CF74DE9003ECD1C /* Debug */,
