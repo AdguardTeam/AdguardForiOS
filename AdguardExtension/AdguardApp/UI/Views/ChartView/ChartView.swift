@@ -17,17 +17,10 @@
 */
 
 import UIKit
+import struct DnsAdGuardSDK.Point
+import enum DnsAdGuardSDK.ChartType
 
-struct Point: Equatable {
-    var x: CGFloat
-    var y: CGFloat
-    
-    static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.x == rhs.x && lhs.y == rhs.y
-    }
-}
-
-class ChartView: UIView {
+final class ChartView: UIView {
     
     var isEnabled: Bool = true {
         didSet{
@@ -35,7 +28,7 @@ class ChartView: UIView {
         }
     }
     
-    var activeChart: ChartRequestType = .requests {
+    var activeChart: ChartType = .requests {
         didSet {
             drawChart()
         }
@@ -43,14 +36,14 @@ class ChartView: UIView {
     
     var chartPoints: (requests: [Point], encrypted: [Point]) = ([], []) {
         didSet {
-            let maxXrequests = chartPoints.requests.map({ $0.x }).max() ?? 0.0
-            let maxYrequests = chartPoints.requests.map({ $0.y }).max() ?? 0.0
+            let maxXrequests = chartPoints.requests.map({ $0.x }).max() ?? 0
+            let maxYrequests = chartPoints.requests.map({ $0.y }).max() ?? 0
             
-            let maxXblocked = chartPoints.encrypted.map({ $0.x }).max() ?? 0.0
-            let maxYblocked = chartPoints.encrypted.map({ $0.y }).max() ?? 0.0
+            let maxXblocked = chartPoints.encrypted.map({ $0.x }).max() ?? 0
+            let maxYblocked = chartPoints.encrypted.map({ $0.y }).max() ?? 0
             
-            maxXelement = max(maxXrequests, maxXblocked)
-            maxYelement = max(maxYrequests, maxYblocked)
+            maxXelement = CGFloat(max(maxXrequests, maxXblocked))
+            maxYelement = CGFloat(max(maxYrequests, maxYblocked))
             
             DispatchQueue.main.async {[weak self] in
                 self?.drawChart()
@@ -238,12 +231,12 @@ class ChartView: UIView {
         
         if requestPoints.count < 3 {
             maxXelement = 10.0
-            requestPoints = convertPoints(points: [Point(x: 0.0, y: 0.0), Point(x: 10.0, y: 0.0)])
+            requestPoints = convertPoints(points: [Point(x: 0, y: 0), Point(x: 10, y: 0)])
         }
         
         if encryptedPoints.count < 3 {
             maxXelement = 10.0
-            encryptedPoints = convertPoints(points: [Point(x: 0.0, y: 0.0), Point(x: 10.0, y: 0.0)])
+            encryptedPoints = convertPoints(points: [Point(x: 0, y: 0), Point(x: 10, y: 0)])
         }
         
         guard let requestsPath = UIBezierPath(quadCurve: requestPoints),
@@ -293,11 +286,11 @@ class ChartView: UIView {
         var newPoints = [CGPoint]()
                 
         for point in preparedPoints {
-            let ratioY: CGFloat = maxYelement == 0.0 ? 0.0 : (point.y / maxYelement) * 0.7
+            let ratioY: CGFloat = maxYelement == 0.0 ? 0.0 : (CGFloat(point.y) / maxYelement) * 0.7
 
             let newY = (frame.height - frame.height * ratioY) - frame.height * 0.15
             
-            let newPoint = CGPoint(x: point.x, y: newY)
+            let newPoint = CGPoint(x: CGFloat(point.x), y: newY)
             newPoints.append(newPoint)
         }
         
@@ -314,19 +307,19 @@ class ChartView: UIView {
         var newPoints = [Point]()
         
         for point in points {
-            let ratioX: CGFloat = maxXelement == 0.0 ? 0.0 : point.x / maxXelement
-            let newX = (frame.width * ratioX)
+            let ratioX: CGFloat = maxXelement == 0.0 ? 0.0 : CGFloat(point.x) / maxXelement
+            let newX = frame.width * ratioX
             
-            var lastPoint = newPoints.last ?? Point(x: 0.0, y: 0.0)
-            if  newX - lastPoint.x < minimumSpacing && points.last != point {
+            var lastPoint = newPoints.last ?? Point(x: 0, y: 0)
+            if  newX - CGFloat(lastPoint.x) < minimumSpacing && points.last != point {
                 newPoints = newPoints.dropLast()
-                lastPoint.y = lastPoint.y + point.y
+                lastPoint = Point(x: lastPoint.x, y: lastPoint.y + point.y)
                 newPoints.append(lastPoint)
-                if lastPoint.y > maxYelement {
-                    maxYelement = lastPoint.y
+                if CGFloat(lastPoint.y) > maxYelement {
+                    maxYelement = CGFloat(lastPoint.y)
                 }
             } else {
-                newPoints.append(Point(x: newX, y: point.y))
+                newPoints.append(Point(x: Int(newX), y: point.y))
             }
         }
         

@@ -32,6 +32,11 @@ public protocol ChartStatisticsProtocol: ResetableSyncProtocol {
      - Throws: error if an error occurred in DB
      */
     func getPoints(for chartType: ChartType, for period: StatisticsPeriod) throws -> ChartRecords
+    
+    /**
+     Returns oldest record timeStamp or nil if DB is empty
+     */
+    func getOldestRecordDate() -> Date?
 }
 
 /// This object is responsible for managing statistics that is used to build charts
@@ -133,6 +138,17 @@ final public class ChartStatistics: ChartStatisticsProtocol {
         try statisticsDb.run(resetQuery)
         
         Logger.logInfo("(ChartStatistics) - reset successfully finished")
+    }
+    
+    /// Returns oldest record timeStamp or nil if DB is empty
+     public func getOldestRecordDate() -> Date? {
+        let query = ChartStatisticsTable.table
+            .select(ChartStatisticsTable.timeStamp)
+            .order(ChartStatisticsTable.timeStamp)
+            .limit(1)
+        let dbDate = try? statisticsDb.pluck(query)
+        let date = dbDate?[ChartStatisticsTable.timeStamp]
+        return date
     }
     
     // MARK: - Private methods

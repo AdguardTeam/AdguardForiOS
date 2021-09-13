@@ -58,7 +58,7 @@ extension ChartStatistics {
                     interval = DateInterval(start: oldestDate, end: Date())
                 }
             } else {
-                /// If there is no records in db - set interval as the biggerst one
+                /// If there is no records in db - set interval as the biggest one
                 interval = monthInterval
             }
         } else {
@@ -123,16 +123,5 @@ extension ChartStatistics {
             }
         }
         return compressedRecords
-    }
-    
-    /// Returns oldest record timeStamp or nil if DB is empty
-    private func getOldestRecordDate() -> Date? {
-        let query = ChartStatisticsTable.table
-            .select(ChartStatisticsTable.timeStamp)
-            .order(ChartStatisticsTable.timeStamp)
-            .limit(1)
-        let dbDate = try? statisticsDb.pluck(query)
-        let date = dbDate?[ChartStatisticsTable.timeStamp]
-        return date
     }
 }

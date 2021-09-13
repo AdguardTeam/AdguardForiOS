@@ -16,253 +16,131 @@
    along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
+import DnsAdGuardSDK
+
+protocol ChartViewModelDelegate: AnyObject {
+    func numberOfRequestsChanged(with records: [ChartRecords],
+                          countersStatisticsRecord: CountersStatisticsRecord?,
+                          firstFormattedDate: String,
+                          lastFormattedDate: String)
+}
 
 protocol ChartViewModelProtocol {
-    var chartView: ChartView? { get set }
-    var chartDateType: ChartDateType { get set }
-    var chartDateTypeActivity: ChartDateType { get set }
-    var chartRequestType: ChartRequestType { get set }
-    
-    var chartPointsChangedDelegates: [NumberOfRequestsChangedDelegate] { get set }
-    
-    func obtainStatistics(_ fromUI: Bool, _ completion: @escaping ()->())
+    var statisticsInfo: CountersStatisticsRecord? { get }
+    var statisticsPeriod: StatisticsPeriod { get set }
+    var chartType: ChartType { get set }
+    var delegate: ChartViewModelDelegate? { get set }
+    func startChartStatisticsAutoUpdate(seconds: TimeInterval)
 }
 
-protocol NumberOfRequestsChangedDelegate: AnyObject {
-    func numberOfRequestsChanged(requestsCount: Int, encryptedCount: Int, averageElapsed: Double)
-}
-
-enum ChartRequestType {
-    case requests, encrypted
-}
-
-class ChartViewModel: NSObject, ChartViewModelProtocol {
+final class ChartViewModel: ChartViewModelProtocol {
+    //MARK: - Properties
+    weak var delegate: ChartViewModelDelegate?
     
-    var chartView: ChartView? {
-        didSet {
-            changeChart {}
-        }
+    var statisticsInfo: CountersStatisticsRecord? {
+        return try? activityStatistics.getCounters(for: statisticsPeriod)
     }
-    var chartPointsChangedDelegates: [NumberOfRequestsChangedDelegate] = []
-
-    var chartDateType: ChartDateType = .alltime {
+    
+    var statisticsPeriod: StatisticsPeriod {
         didSet {
-            changeChart {}
+            guard isStarted else { return }
+            startChartStatisticsAutoUpdate(seconds: repeatTime)
         }
     }
     
-    var chartDateTypeActivity: ChartDateType = .alltime {
+    var chartType: ChartType = .requests {
         didSet {
-            countInfoNumbers()
+            guard isStarted else { return }
+            startChartStatisticsAutoUpdate(seconds: repeatTime)
         }
     }
     
-    var chartRequestType: ChartRequestType = .requests {
-        didSet {
-            changeChart{}
-        }
-    }
-    
-    /**
-     Saved statistics numbers for dynamic numbers change, otherwise it must be counted
-     */
-    private var requestsMain = 0
-    private var encryptedMain = 0
-    private var averageElapsedMain: Double = 0.0
-    
-    private var requestsActivity = 0
-    private var encryptedActivity = 0
-    private var averageElapsedActivity: Double = 0.0
-    
-    private var recordsByType: [ChartDateType: [DnsStatisticsRecord]] = [:]
-    
-    private let dateFormatter = DateFormatter()
-    
+    //MARK: - Private properties
+    private let chartStatistics: ChartStatisticsProtocol
+    private let activityStatistics: ActivityStatisticsProtocol
+    private var isStarted: Bool = false
     private var timer: Timer?
+    private var repeatTime: TimeInterval = 5.0
     
-    private let resources: AESharedResourcesProtocol
+    private var firstFormattedDate: String = ""
+    private var lastFormattedDate: String = ""
     
-    /* Observers */
-    private var resetSettingsToken: NotificationToken?
-    
-    private let statisticsQueue = DispatchQueue(label: "statistics queue", qos: .userInitiated)
-    
-    // MARK: - init
-    init(resources: AESharedResourcesProtocol) {
-        self.resources = resources
-        super.init()
-        
-        addObservers()
-        
-        /* Waiting when statistics is obtained, to show ready statistics on main page, without redrawing it */
-        let group = DispatchGroup()
-        group.enter()
-        obtainStatistics(false) { group.leave() }
-        group.wait()
+    //MARK: - Init
+    init(statisticsPeriod: StatisticsPeriod, statisticsDbContainerUrl: URL) throws {
+        self.statisticsPeriod = statisticsPeriod
+        self.chartStatistics = try ChartStatistics(statisticsDbContainerUrl: statisticsDbContainerUrl)
+        self.activityStatistics = try ActivityStatistics(statisticsDbContainerUrl: statisticsDbContainerUrl)
     }
     
-    func obtainStatistics(_ fromUI: Bool, _ completion: @escaping ()->()) {
-        statisticsQueue.async { [weak self] in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.timer?.invalidate()
-                self.timer = nil
-            }
-            
-            if fromUI {
-                /*
-                 Update from UI is only available from ActivityViewController
-                 To speed up loading data from database we load only current type
-                 */
-                self.recordsByType[self.chartDateTypeActivity] = []
-                
-            } else {
-                /*
-                 When updating data not from UI, we load data for all types to
-                 be able quikly change chart when user wants
-                */
-                for type in ChartDateType.allCases {
-                    self.recordsByType[type] = []
-                }
-            }
-            
-            self.changeChart {
-                completion()
-            }
-//            DispatchQueue.main.async {
-//                self.timer = Timer.scheduledTimer(withTimeInterval: minimumStatisticSaveTime, repeats: true, block: {[weak self] (timer) in
-//                    self?.obtainStatistics(false) {}
-//                })
-//            }
+    func startChartStatisticsAutoUpdate(seconds: TimeInterval) {
+        isStarted = true
+        timer?.invalidate()
+        timer = nil
+        repeatTime = seconds
+        chartStatisticUpdate()
+        timer = Timer.scheduledTimer(withTimeInterval: repeatTime, repeats: true, block: { [weak self] _ in
+            self?.chartStatisticUpdate()
+        })
+    }
+    
+    //MARK: - Private methods
+    private func chartStatisticUpdate() {
+        guard let info = self.statisticsInfo else { return }
+        let records = self.getChartRecords(for: self.statisticsPeriod)
+        self.delegate?.numberOfRequestsChanged(with: records, countersStatisticsRecord: info, firstFormattedDate: firstFormattedDate, lastFormattedDate: lastFormattedDate)
+    }
+    
+    private func getChartRecords(for period: StatisticsPeriod) -> [ChartRecords] {
+        var result: [ChartRecords] = []
+        if let requests = try? chartStatistics.getPoints(for: .requests, for: period) {
+            let preparedRequests = prepareRecords(records: requests)
+            result.append(preparedRequests)
         }
-    }
-    
-    deinit {
-        removeObservers()
-    }
-    
-    // MARK: - Observing Values from User Defaults
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == LastStatisticsSaveTime {
-            obtainStatistics(false) {[weak self] in
-                self?.countInfoNumbers()
-            }
-            return
+        if let encrypted = try? chartStatistics.getPoints(for: .encrypted, for: period) {
+            let preparedEncrypted = prepareRecords(records: encrypted)
+            result.append(preparedEncrypted)
         }
         
-        for delegate in chartPointsChangedDelegates {
-            if delegate is MainPageController {
-                delegate.numberOfRequestsChanged(requestsCount: requestsMain, encryptedCount: encryptedMain, averageElapsed: averageElapsedMain)
-            }
-            else if delegate is ActivityViewController {
-                delegate.numberOfRequestsChanged(requestsCount: requestsActivity, encryptedCount: encryptedActivity, averageElapsed: averageElapsedActivity)
-            }
-        }
+        let oldestDate = chartStatistics.getOldestRecordDate()
+        prepareDateIntervals(oldestRecordDate: oldestDate)
+        return result
     }
     
-    // MARK: - private methods
-    
-    private func countInfoNumbers() {
-        statisticsQueue.async { [weak self] in
-            guard let self = self, let records = self.recordsByType[self.chartDateTypeActivity] else { return }
-            
-            var requestsNumber: Int = 0
-            var encryptedNumber = 0
-            var elapsedSumm: Int = 0
-            
-            for record in records {
-                requestsNumber += record.requests
-                encryptedNumber += record.encrypted
-                elapsedSumm += record.elapsedSumm
-            }
-            
-            let averageElapsedTime = requestsNumber == 0 ? 0.0 : Double(elapsedSumm) / Double(requestsNumber)
-            
-            self.requestsActivity = requestsNumber
-            self.encryptedActivity = encryptedNumber
-            self.averageElapsedActivity = averageElapsedTime
-            
-            let delegate = self.chartPointsChangedDelegates.first(where: { $0 is ActivityViewController })
-            delegate?.numberOfRequestsChanged(requestsCount: requestsNumber, encryptedCount: encryptedNumber, averageElapsed: averageElapsedTime)
+    private func prepareRecords(records: ChartRecords) -> ChartRecords {
+        let first = records.points.first?.x ?? 0
+        var points: [Point] = []
+        
+        for point in records.points {
+            let xPosition = point.x - first
+            points.append(Point(x: xPosition, y: point.y))
         }
+        
+        return ChartRecords(chartType: records.chartType, points: points)
     }
     
-    private func changeChart(_ completion: @escaping ()->()){
-        statisticsQueue.async { [weak self] in
-            guard let self = self, let records = self.recordsByType[self.chartDateType] else { return }
-            let requestsInfo = self.getInfo(from: records)
+    private func prepareDateIntervals(oldestRecordDate: Date?) {
+        let intervalBounds = statisticsPeriod.getIntervalBoundsStrings(oldestRecordDate)
+        firstFormattedDate = intervalBounds.start
+        lastFormattedDate = intervalBounds.end
+    }
+}
 
-            self.chartView?.chartPoints = (requestsInfo.requestsPoints, requestsInfo.encryptedPoints)
-            
-            self.requestsMain = requestsInfo.requestsNumber
-            self.encryptedMain = requestsInfo.encryptedNumber
-            self.averageElapsedMain = requestsInfo.averageElapsedTime
-            
-            let delegate = self.chartPointsChangedDelegates.first(where: { $0 is MainPageController })
-            delegate?.numberOfRequestsChanged(requestsCount: requestsInfo.requestsNumber, encryptedCount: requestsInfo.encryptedNumber, averageElapsed: requestsInfo.averageElapsedTime)
-            
-            completion()
+fileprivate extension StatisticsPeriod {
+    func getInterval(_ oldestRecordDate: Date?) -> DateInterval {
+        switch self {
+        case .today, .day, .week, .month:
+            return self.interval
+        case .all:
+            let now = Date()
+            let oldest: Date = oldestRecordDate ?? now
+            return DateInterval(start: oldest, end: now)
         }
     }
-    
-    private func getInfo(from records: [DnsStatisticsRecord]) -> (requestsPoints: [Point], requestsNumber: Int, encryptedPoints: [Point], encryptedNumber: Int, averageElapsedTime: Double){
-        var requestsPoints: [Point] = []
-        var requestsNumber: Int = 0
-        
-        var encryptedPoints: [Point] = []
-        var encryptedNumber = 0
-        
-        var elapsedSumm: Int = 0
-                    
-        let firstDate = records.first?.date ?? Date()
-        let lastDate = records.last?.date ?? Date()
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.chartView?.leftDateLabelText = self?.chartDateType.getFormatterString(from: firstDate)
-            self?.chartView?.rightDateLabelText = self?.chartDateType.getFormatterString(from: lastDate)
-        }
-        
-        if records.count < 2 {
-            return ([], 0, [], 0, 0.0)
-        }
-        
-        let firstDateSecondsFromReferenceDate: CGFloat = CGFloat(firstDate.timeIntervalSinceReferenceDate)
-        for record in records {
-            let xPosition: CGFloat = CGFloat(record.date.timeIntervalSinceReferenceDate) - firstDateSecondsFromReferenceDate
-            
-            let requestPoint = Point(x: xPosition, y: CGFloat(integerLiteral: record.requests))
-            requestsPoints.append(requestPoint)
-            requestsNumber += record.requests
-            
-            let encryptedPoint = Point(x: xPosition, y: CGFloat(integerLiteral: record.encrypted))
-            encryptedPoints.append(encryptedPoint)
-            encryptedNumber += record.encrypted
-            
-            elapsedSumm += record.elapsedSumm
-        }
-        
-        let averageElapsedTime = requestsNumber == 0 ? 0 : Double(elapsedSumm) / Double(requestsNumber)
 
-        return (requestsPoints, requestsNumber, encryptedPoints, encryptedNumber, averageElapsedTime)
-    }
-    
-    private func addObservers() {
-        resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] (notification) in
-            self?.obtainStatistics(false) {}
-        }
-        
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequests, options: .new, context: nil)
-        
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsEncryptedRequests, options: .new, context: nil)
-        
-        resources.sharedDefaults().addObserver(self, forKeyPath: LastStatisticsSaveTime, options: .new, context: nil)
-    }
-    
-    private func removeObservers() {
-        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsRequests)
-        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsEncryptedRequests)
-        resources.sharedDefaults().removeObserver(self, forKeyPath: LastStatisticsSaveTime)
+    func getIntervalBoundsStrings(_ oldestRecordDate: Date?) -> (start: String, end: String) {
+        let interval = getInterval(oldestRecordDate)
+        let start = self.getFormatterString(from: interval.start)
+        let end = self.getFormatterString(from: interval.end)
+        return (start, end)
     }
 }

@@ -273,6 +273,27 @@ class ChartStatisticsTest: XCTestCase {
         XCTAssert(recordsFromDb.isEmpty)
     }
     
+    func testGetOldestRecordDate() {
+        XCTAssertNil(statistics.getOldestRecordDate())
+        
+        let now = Date()
+        let calendar = Calendar.current
+        let date = calendar.date(byAdding: .year, value: -1, to: now)!
+        
+        let record1 = ChartStatisticsRecord(timeStamp: date, requests: 10, encrypted: 2, blocked: 3, elapsedSumm: 120)
+        let record2 = ChartStatisticsRecord(timeStamp: Date(), requests: 20, encrypted: 3, blocked: 5, elapsedSumm: 230)
+        let record3 = ChartStatisticsRecord(timeStamp: Date(), requests: 20, encrypted: 3, blocked: 5, elapsedSumm: 230)
+        
+        statistics.process(record: record1)
+        statistics.process(record: record2)
+        statistics.process(record: record3)
+        
+        let oldDate = statistics.getOldestRecordDate()!
+        
+        let dateDiff = oldDate.timeIntervalSince1970 - date.timeIntervalSince1970
+        XCTAssert(abs(dateDiff) < 1) // date are equal
+    }
+    
     private func check(points: ChartRecords, chartType: ChartType, sum: Int) {
         XCTAssertEqual(points.chartType, chartType)
         XCTAssertEqual(points.points.count, 100)
