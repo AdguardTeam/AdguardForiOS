@@ -24,10 +24,6 @@ interface NativeHostInitData {
     hasUserRules: boolean,
     premiumApp: boolean,
     protectionEnabled: boolean,
-    addToBlocklistLink: string,
-    addToAllowlistLink: string,
-    removeAllBlocklistRulesLink: string,
-    removeFromAllowlistLink: string,
 }
 
 export interface NativeHostInterface {
@@ -56,6 +52,10 @@ export class NativeHost implements NativeHostInterface {
         return browser.runtime.sendNativeMessage(this.APP_ID, message);
     }
 
+    /**
+     * Save action links received from native host
+     * @param links
+     */
     setLinks(links: ActionLinks) {
         this.links = links;
     }
@@ -101,7 +101,7 @@ export class NativeHost implements NativeHostInterface {
     }
 
     // TODO get link from native host
-    reportProblem(url?: string) {
+    async reportProblem(url?: string) {
         const type = MessagesToNativeApp.ReportProblem;
 
         if (url) {
@@ -112,7 +112,7 @@ export class NativeHost implements NativeHostInterface {
     }
 
     // TODO get link from native host
-    upgradeMe() {
+    async upgradeMe() {
         return this.sendNativeMessage(MessagesToNativeApp.UpgradeMe);
     }
 
@@ -139,27 +139,31 @@ export class NativeHost implements NativeHostInterface {
         const result = await this.sendNativeMessage(MessagesToNativeApp.GetInitData, url);
 
         const {
-            add_to_allowlist_link: addToAllowlistLink,
-            add_to_blocklist_link: addToBlocklistLink,
             appearance_theme: appearanceTheme,
             content_blockers_enabled: contentBlockersEnabled,
             has_user_rules: hasUserRules,
             premium_app: premiumApp,
             protection_enabled: protectionEnabled,
+
+            add_to_blocklist_link: addToBlocklistLink,
+            add_to_allowlist_link: addToAllowlistLink,
             remove_all_blocklist_rules_link: removeAllBlocklistRulesLink,
             remove_from_allowlist_link: removeFromAllowlistLink,
         } = result;
 
-        return {
-            addToAllowlistLink,
+        this.setLinks({
             addToBlocklistLink,
+            addToAllowlistLink,
+            removeAllBlocklistRulesLink,
+            removeFromAllowlistLink,
+        });
+
+        return {
             appearanceTheme,
             contentBlockersEnabled,
             hasUserRules,
             premiumApp,
             protectionEnabled,
-            removeAllBlocklistRulesLink,
-            removeFromAllowlistLink,
         };
     }
 }

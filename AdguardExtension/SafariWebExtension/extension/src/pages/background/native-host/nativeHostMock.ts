@@ -143,9 +143,3 @@ example.org#%#//scriptlet('log', 'arg1', 'arg2')
 }
 
 export const nativeHostMock = new NativeHostMock();
-
-// TODO remove
-// @ts-ignore
-global.adguard = {
-    nativeHostMock,
-};

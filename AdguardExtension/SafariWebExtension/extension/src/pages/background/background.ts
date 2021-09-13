@@ -8,11 +8,11 @@ import {
 import { permissions } from './permissions';
 import { log } from '../common/log';
 import { app } from './app';
-import { nativeHost } from './native-host';
 import { Engine } from './engine';
 import { getDomain } from '../common/utils/url';
 import { buildStyleSheet } from './css-service';
 import { SelectorsAndScripts } from '../common/interfaces';
+import { adguard } from './adguard';
 
 interface Message {
     type: string,
@@ -24,7 +24,7 @@ const getEngine = (() => {
     let startPromise: Promise<Engine>;
 
     const start = async () => {
-        const rulesText = await nativeHost.getAdvancedRulesText();
+        const rulesText = await adguard.nativeHost.getAdvancedRulesText();
         await engine.start(rulesText);
         return engine;
     };
@@ -93,7 +93,7 @@ const handleMessages = () => {
                 return scriptsAndSelectors as SelectorsAndScripts;
             }
             case MessagesToBackgroundPage.AddRule: {
-                await nativeHost.addToUserRules(data.ruleText);
+                await adguard.nativeHost.addToUserRules(data.ruleText);
                 break;
             }
             case MessagesToBackgroundPage.OpenAssistant: {
@@ -132,18 +132,7 @@ const handleMessages = () => {
                     premiumApp,
                     appearanceTheme,
                     contentBlockersEnabled,
-                    removeFromAllowlistLink,
-                    addToAllowlistLink,
-                    addToBlocklistLink,
-                    removeAllBlocklistRulesLink,
-                } = await nativeHost.getInitData(url);
-
-                nativeHost.setLinks({
-                    removeFromAllowlistLink,
-                    addToAllowlistLink,
-                    addToBlocklistLink,
-                    removeAllBlocklistRulesLink,
-                });
+                } = await adguard.nativeHost.getInitData(url);
 
                 return {
                     allSitesAllowed,
@@ -158,16 +147,16 @@ const handleMessages = () => {
             case MessagesToBackgroundPage.SetProtectionStatus: {
                 const { enabled, url } = data;
                 if (enabled) {
-                    return nativeHost.enableProtection(url);
+                    return adguard.nativeHost.enableProtection(url);
                 }
-                return nativeHost.disableProtection(url);
+                return adguard.nativeHost.disableProtection(url);
             }
             case MessagesToBackgroundPage.ReportProblem: {
                 const { url } = data;
-                return nativeHost.reportProblem(url);
+                return adguard.nativeHost.reportProblem(url);
             }
             case MessagesToBackgroundPage.UpgradeClicked: {
-                await nativeHost.upgradeMe();
+                await adguard.nativeHost.upgradeMe();
                 break;
             }
             default:
