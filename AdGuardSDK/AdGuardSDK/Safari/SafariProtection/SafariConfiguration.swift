@@ -82,7 +82,6 @@ public final class SafariConfiguration: SafariConfigurationProtocol {
 }
 
 extension SafariConfigurationProtocol {
-    //TODO: Need tests
     func updateConfig(with newConfig: SafariConfigurationProtocol) {
         self.currentLanguage = newConfig.currentLanguage
         self.proStatus = newConfig.proStatus
