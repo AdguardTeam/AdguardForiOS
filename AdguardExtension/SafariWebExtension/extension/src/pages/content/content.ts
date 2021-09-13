@@ -200,7 +200,9 @@ const init = async () => {
             } catch (e) {
                 console.log(e);
             }
+
             console.log(`Time to get selectors and scripts from native page to content script: ${Date.now() - startGettingScripts} ms`);
+
             if (selectorsAndScripts) {
                 applyAdvancedBlockingData(selectorsAndScripts, false);
             }

@@ -14,6 +14,7 @@ interface State {
     protectionEnabled: boolean,
     premiumApp: boolean,
     contentBlockersEnabled: boolean,
+    hasUserRules: boolean,
 }
 
 class NativeHostMock implements NativeHostInterface {
@@ -24,6 +25,7 @@ class NativeHostMock implements NativeHostInterface {
         protectionEnabled: true,
         premiumApp: false,
         contentBlockersEnabled: true,
+        hasUserRules: false,
     };
 
     links?: ActionLinks;
@@ -106,10 +108,19 @@ class NativeHostMock implements NativeHostInterface {
     };
 
     getAdvancedRulesText = async () => {
-        const rulesText = `
-example.org#$#h1 { color: pink }
-example.org#%#//scriptlet('log', 'arg1', 'arg2')
-`;
+        const rulesText = `!
+! Title: Rules for jsinject rules test
+!
+! Filter to be used for testing purposes
+! https://testcases.adguard.com
+!
+! Hide warning
+testcases.adguard.com,surge.sh###subscribe-to-test-jsinject-rules-filter
+!
+! Case 1
+testcases.adguard.com,surge.sh#%#document.__jsinjectTest = true;
+@@||testcases.adguard.com^$jsinject
+@@||surge.sh^$jsinject`;
         return this.withSleep(rulesText);
     };
 
@@ -117,13 +128,14 @@ example.org#%#//scriptlet('log', 'arg1', 'arg2')
         this.links = links;
     }
 
-    getInitData(url: string) {
+    async getInitData(url: string) {
+        const state = await this.getState();
         return this.withSleep({
-            appearanceTheme: 'light',
-            contentBlockersEnabled: false,
-            hasUserRules: true,
-            premiumApp: false,
-            protectionEnabled: false,
+            appearanceTheme: state.appearanceTheme,
+            contentBlockersEnabled: state.contentBlockersEnabled,
+            hasUserRules: state.hasUserRules,
+            premiumApp: state.premiumApp,
+            protectionEnabled: state.protectionEnabled,
             addToBlocklistLink: '',
             addToAllowlistLink: '',
             removeAllBlocklistRulesLink: '',
