@@ -365,6 +365,8 @@
 		7ED0B19D26C4269600B0CE7B /* Constants+Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B19C26C4269600B0CE7B /* Constants+Files.swift */; };
 		7ED0B19E26C4269600B0CE7B /* Constants+Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B19C26C4269600B0CE7B /* Constants+Files.swift */; };
 		7ED0B19F26C4269600B0CE7B /* Constants+Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B19C26C4269600B0CE7B /* Constants+Files.swift */; };
+		7ED68E3E26EABBFA00929E57 /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC8A37F26E7697C005244CF /* SharedAdGuardSDK.framework */; };
+		7ED68E3F26EABBFA00929E57 /* SharedAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC8A37F26E7697C005244CF /* SharedAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7EE4B22226E9FF42008F0BF0 /* UserRulesClipperMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE4B22126E9FF42008F0BF0 /* UserRulesClipperMock.swift */; };
 		7EE9F63226D8E1DB00646D62 /* FilterFilesStorageProtocol+PredefinedFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE9F63126D8E1DB00646D62 /* FilterFilesStorageProtocol+PredefinedFilters.swift */; };
 		7EE9F63426D8E1DB00646D62 /* FilterFilesStorageProtocol+PredefinedFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE9F63126D8E1DB00646D62 /* FilterFilesStorageProtocol+PredefinedFilters.swift */; };
@@ -391,6 +393,13 @@
 			remoteGlobalIDString = 7EC8A37E26E7697C005244CF;
 			remoteInfo = SharedAdGuardSDK;
 		};
+		7ED68E4026EABBFA00929E57 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0A0E38C26B16B03005344D2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7EC8A37E26E7697C005244CF;
+			remoteInfo = SharedAdGuardSDK;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -401,6 +410,17 @@
 			dstSubfolderSpec = 10;
 			files = (
 				7EC8A3C226E76BA8005244CF /* SharedAdGuardSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7ED68E4226EABBFB00929E57 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7ED68E3F26EABBFA00929E57 /* SharedAdGuardSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -641,6 +661,7 @@
 				7E966B9326C27F0D006B57BD /* Zip in Frameworks */,
 				7E966B8F26C27F06006B57BD /* SQLite in Frameworks */,
 				7E667A6626E26B890013B1D5 /* ContentBlockerConverter in Frameworks */,
+				7ED68E3E26EABBFA00929E57 /* SharedAdGuardSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1418,10 +1439,12 @@
 				7E966AF126C27B93006B57BD /* Sources */,
 				7E966AF226C27B93006B57BD /* Frameworks */,
 				7E966AF326C27B93006B57BD /* Resources */,
+				7ED68E4226EABBFB00929E57 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				7ED68E4126EABBFA00929E57 /* PBXTargetDependency */,
 			);
 			name = SafariAdGuardSDK;
 			packageProductDependencies = (
@@ -1989,6 +2012,11 @@
 			target = 7EC8A37E26E7697C005244CF /* SharedAdGuardSDK */;
 			targetProxy = 7EC8A3C326E76BA8005244CF /* PBXContainerItemProxy */;
 		};
+		7ED68E4126EABBFA00929E57 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7EC8A37E26E7697C005244CF /* SharedAdGuardSDK */;
+			targetProxy = 7ED68E4026EABBFA00929E57 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -2252,6 +2280,7 @@
 		D049EBA626B1868200B8088B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2280,6 +2309,7 @@
 		D049EBA726B1868200B8088B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2421,7 +2451,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
