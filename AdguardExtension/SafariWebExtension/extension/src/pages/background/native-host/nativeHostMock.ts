@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { storage } from '../storage';
 import { APPEARANCE_THEME_DEFAULT, AppearanceTheme } from '../../common/constants';
+import { ActionLinks, NativeHostInterface } from './NativeHost';
 
 const sleep = (timeout: number) => {
     return new Promise((resolve) => {
@@ -8,125 +9,140 @@ const sleep = (timeout: number) => {
     });
 };
 
-export const nativeHostMock = (() => {
-    const STATE_KEY = 'state';
+interface State {
+    appearanceTheme: AppearanceTheme,
+    protectionEnabled: boolean,
+    premiumApp: boolean,
+    contentBlockersEnabled: boolean,
+}
 
-    interface State {
-        appearanceTheme: AppearanceTheme,
-        protectionEnabled: boolean,
-        premiumApp: boolean,
-        contentBlockersEnabled: boolean,
-    }
+class NativeHostMock implements NativeHostInterface {
+    STATE_KEY = 'state';
 
-    const DEFAULT_STATE: State = {
+    DEFAULT_STATE: State = {
         appearanceTheme: APPEARANCE_THEME_DEFAULT,
         protectionEnabled: true,
         premiumApp: false,
         contentBlockersEnabled: true,
     };
 
-    const getState = async (): Promise<State> => {
-        const currentState = await storage.get(STATE_KEY) as State;
-        return currentState || DEFAULT_STATE;
+    links?: ActionLinks;
+
+    getState = async (): Promise<State> => {
+        const currentState = await storage.get(this.STATE_KEY) as State;
+        return currentState || this.DEFAULT_STATE;
     };
 
-    const setState = async (key: string, value: unknown) => {
-        const prevState = await getState();
+    setState = async (key: string, value: unknown) => {
+        const prevState = await this.getState();
         const newState = { ...prevState, [key]: value };
         console.log('new state:', newState);
         await storage.set('state', newState);
     };
 
-    const withSleep = async (result?: any) => {
+    withSleep = async (result?: any) => {
         await sleep(1000);
         return result;
     };
 
-    const isProtectionEnabled = async (url: string): Promise<boolean> => {
+    isProtectionEnabled = async (url: string): Promise<boolean> => {
         console.log('isProtectionEnabled', url);
-        const currentState = await getState();
-        return withSleep(currentState.protectionEnabled);
+        const currentState = await this.getState();
+        return this.withSleep(currentState.protectionEnabled);
     };
 
-    const enableProtection = async (): Promise<void> => {
+    enableProtection = async (): Promise<void> => {
         console.log('enableProtection');
-        await setState('protectionEnabled', true);
-        return withSleep();
+        await this.setState('protectionEnabled', true);
+        return this.withSleep();
     };
 
-    const disableProtection = async (): Promise<void> => {
+    disableProtection = async (): Promise<void> => {
         console.log('disableProtection');
-        await setState('protectionEnabled', false);
-        return withSleep();
+        await this.setState('protectionEnabled', false);
+        return this.withSleep();
     };
 
-    const hasUserRulesBySite = async (url: string) => {
+    hasUserRulesBySite = async (url: string) => {
         console.log('hasUserRulesBySite', url);
-        return withSleep(true);
+        return this.withSleep(true);
     };
 
-    const removeUserRulesBySite = async (url: string) => {
+    removeUserRulesBySite = async (url: string) => {
         console.log('removeUserRulesBySite', url);
-        return withSleep();
+        return this.withSleep();
     };
 
-    const isPremium = async () => {
+    isPremium = async () => {
         console.log('isPremium');
-        const state = await getState();
-        return withSleep(state.premiumApp);
+        const state = await this.getState();
+        return this.withSleep(state.premiumApp);
     };
 
-    const togglePremium = async () => {
-        const state = await getState();
-        await setState('premiumApp', !state.premiumApp);
+     togglePremium = async () => {
+        const state = await this.getState();
+        await this.setState('premiumApp', !state.premiumApp);
     };
 
-    const areContentBlockersEnabled = async () => {
+    areContentBlockersEnabled = async () => {
         console.log('areContentBlockersEnabled');
-        const state = await getState();
-        return withSleep(state.contentBlockersEnabled);
+        const state = await this.getState();
+        return this.withSleep(state.contentBlockersEnabled);
     };
 
-    const toggleContentBlockersState = async () => {
+    toggleContentBlockersState = async () => {
         const key = 'contentBlockersEnabled';
-        const state = await getState();
-        await setState(key, !state[key]);
+        const state = await this.getState();
+        await this.setState(key, !state[key]);
     };
 
-    const getAppearanceTheme = async () => {
-        const state = await getState();
-        return withSleep(state.appearanceTheme);
+    getAppearanceTheme = async () => {
+        const state = await this.getState();
+        return this.withSleep(state.appearanceTheme);
     };
 
-    const setAppearanceTheme = async (value: AppearanceTheme) => {
-        await setState('appearanceTheme', value);
+    setAppearanceTheme = async (value: AppearanceTheme) => {
+        await this.setState('appearanceTheme', value);
     };
 
-    const getAdvancedRulesText = async () => {
-        // TODO on start get rules from native host
+    getAdvancedRulesText = async () => {
         const rulesText = `
 example.org#$#h1 { color: pink }
 example.org#%#//scriptlet('log', 'arg1', 'arg2')
 `;
-        return withSleep(rulesText);
+        return this.withSleep(rulesText);
     };
 
-    return {
-        isProtectionEnabled,
-        enableProtection,
-        disableProtection,
-        hasUserRulesBySite,
-        removeUserRulesBySite,
-        isPremium,
-        togglePremium,
-        getState,
-        toggleContentBlockersState,
-        setAppearanceTheme,
-        areContentBlockersEnabled,
-        getAppearanceTheme,
-        getAdvancedRulesText,
-    };
-})();
+    setLinks(links: ActionLinks) {
+        this.links = links;
+    }
+
+    getInitData(url: string) {
+        return this.withSleep({
+            appearanceTheme: 'light',
+            contentBlockersEnabled: false,
+            hasUserRules: true,
+            premiumApp: false,
+            protectionEnabled: false,
+            addToBlocklistLink: '',
+            addToAllowlistLink: '',
+            removeAllBlocklistRulesLink: '',
+            removeFromAllowlistLink: '',
+        })
+    }
+
+    addToUserRules(ruleText: string): Promise<void> {
+        throw new Error('Method not implemented.');
+    }
+    reportProblem(url: string): Promise<void> {
+        throw new Error('Method not implemented.');
+    }
+    upgradeMe(): void {
+        throw new Error('Method not implemented.');
+    }
+}
+
+export const nativeHostMock = new NativeHostMock();
 
 // TODO remove
 // @ts-ignore

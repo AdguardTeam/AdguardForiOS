@@ -9,14 +9,40 @@ interface NativeHostMessage {
     data?: unknown
 }
 
-interface ActionLinks {
+export interface ActionLinks {
     addToAllowlistLink: string,
     addToBlocklistLink: string,
     removeAllBlocklistRulesLink: string,
     removeFromAllowlistLink: string,
 }
 
-export class NativeHost {
+type AppearanceTheme = 'system' | 'dark' | 'light';
+
+interface NativeHostInitData {
+    appearanceTheme: AppearanceTheme,
+    contentBlockersEnabled: boolean,
+    hasUserRules: boolean,
+    premiumApp: boolean,
+    protectionEnabled: boolean,
+    addToBlocklistLink: string,
+    addToAllowlistLink: string,
+    removeAllBlocklistRulesLink: string,
+    removeFromAllowlistLink: string,
+}
+
+export interface NativeHostInterface {
+    getInitData(url: string): Promise<NativeHostInitData>
+    setLinks(links: ActionLinks): void
+    addToUserRules(ruleText: string): Promise<void>
+    enableProtection(url: string): Promise<void>
+    disableProtection(url: string): Promise<void>
+    removeUserRulesBySite(url: string): Promise<void>
+    reportProblem(url: string): Promise<void>
+    upgradeMe(): void
+    getAdvancedRulesText(): Promise<string | void>
+}
+
+export class NativeHost implements NativeHostInterface {
     APP_ID = 'application_id';
 
     links: ActionLinks | null = null;
@@ -109,7 +135,7 @@ export class NativeHost {
         return rulesText;
     }
 
-    async getInitData(url: string) {
+    async getInitData(url: string): Promise<NativeHostInitData> {
         const result = await this.sendNativeMessage(MessagesToNativeApp.GetInitData, url);
 
         const {
