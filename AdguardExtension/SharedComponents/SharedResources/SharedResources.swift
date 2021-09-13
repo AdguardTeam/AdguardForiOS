@@ -370,6 +370,55 @@ extension AESharedResourcesProtocol {
             sharedDefaults().set(newValue, forKey: setAppUsedKey)
         }
     }
+    
+    // TODO: - This shit is awful, but there is no time now to rewrite it
+    // MARK: - Pro status variables
+    
+    /* PurchaseService variables */
+    
+    var isProPurchased: Bool {
+        purchasedThroughInApp || purchasedThroughSetapp || hasActiveLicense
+    }
+    
+    /* LoginService variables */
+    
+    var hasActiveLicense: Bool {
+        loggedIn && userHasPremiumLicense && licenseIsActive
+    }
+    
+    var licenseExpirationDate: Date? {
+        get {
+            return sharedDefaults().object(forKey: AEDefaultsPremiumExpirationDate) as? Date
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsPremiumExpirationDate)
+        }
+    }
+    
+    var userHasPremiumLicense: Bool {
+        get {
+            return sharedDefaults().bool(forKey: AEDefaultsHasPremiumLicense)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsHasPremiumLicense)
+        }
+    }
+    
+    var loggedIn: Bool {
+        get {
+            return sharedDefaults().bool(forKey: AEDefaultsIsProPurchasedThroughLogin)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsIsProPurchasedThroughLogin)
+        }
+    }
+    
+    var licenseIsActive: Bool {
+        if let licenseExpirationDate = licenseExpirationDate {
+            return licenseExpirationDate > Date()
+        }
+        return false
+    }
 }
 
 fileprivate extension AESharedResourcesProtocol {

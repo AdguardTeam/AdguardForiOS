@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import SafariAdGuardSDK
 
 protocol SafariWebExtensionMessageProcessorProtocol {
     func process(message: Message) -> [String: Any?]
@@ -37,14 +38,24 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
     }
     
     // MARK: - Private methods
-
+    
+    // TODO: - We need to pass domain here
     private func getInitData(_ url: String?) -> [String: Any] {
+        let cbService = ContentBlockerService(appBundleId: Bundle.main.hostAppBundleId)
+        
+        // Safari Content Blockers states
+        let allContentBlockersEnabled = cbService.allContentBlockersStates.values.reduce(true, { $0 && $1 })
+        
+        // User Pro status
+        let isPro = Bundle.main.isPro ? true : AESharedResources().isProPurchased
+        
         return [
             Message.appearanceTheme: "system",
-            Message.contentBlockersEnabled: true,
+            Message.contentBlockersEnabled: allContentBlockersEnabled,
+            // TODO: - Implement when Converter is released
             Message.hasUserRules: false,
-            Message.premiumApp: false,
-            Message.protectionEnabled: true,
+            Message.premiumApp: isPro,
+            Message.protectionEnabled: isSafariProtectionEnabled(for: url),
 
             Message.removeFromAllowlistLink: UserRulesRedirectAction.removeFromAllowlist(domain: "").scheme,
             Message.addToAllowlistLink: UserRulesRedirectAction.addToAllowlist(domain: "").scheme,
@@ -65,5 +76,19 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
             fileReader = nil
             return [Message.advancedRulesKey: nil]
         }
+    }
+    
+    private func isSafariProtectionEnabled(for domain: String?) -> Bool {
+        guard let domain = domain else { return false }
+        
+        let resources = AESharedResources()
+        let isAllowlistInverted = resources.invertedWhitelist
+        let safariUserRulesStorage = SafariUserRulesStorage(
+            userDefaults: resources.sharedDefaults(),
+            rulesType: isAllowlistInverted ? .invertedAllowlist : .allowlist
+        )
+        let rules = safariUserRulesStorage.rules.map { $0.ruleText }
+        let isDomainInRules = rules.contains(domain)
+        return isAllowlistInverted ? isDomainInRules : !isDomainInRules
     }
 }

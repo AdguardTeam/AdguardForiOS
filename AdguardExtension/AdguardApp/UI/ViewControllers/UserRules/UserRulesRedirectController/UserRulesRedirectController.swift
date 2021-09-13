@@ -17,29 +17,20 @@
  */
 
 import UIKit
+import SafariAdGuardSDK
 
 final class UserRulesRedirectController: BottomAlertController {
 
     var action: UserRulesRedirectAction = .addToAllowlist(domain: "domain.com")
-    var state: State = .processing
+    var state: State = .processing {
+        didSet {
+            model.state = state
+        }
+    }
     
     enum State {
         case processing
         case done(action: UserRulesRedirectAction)
-        
-        fileprivate var title: String {
-            switch self {
-            case .processing: return String.localizedString("user_rules_processing_title")
-            case .done(let action): return action.title
-            }
-        }
-        
-        fileprivate var description: String {
-            switch self {
-            case .processing: return String.localizedString("user_rules_processing_desct")
-            case .done(let action): return action.description
-            }
-        }
     }
     
     // MARK: - UI Elements
@@ -51,23 +42,29 @@ final class UserRulesRedirectController: BottomAlertController {
     @IBOutlet weak var okButton: UIButton!
     
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
+    private var model: UserRulesRedirectControllerModelProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        model = UserRulesRedirectControllerModel(safariProtection: safariProtection)
+        model.action = action
         
         imageView.isHidden = true
-        imageView.image = action.icon
+        imageView.image = model.icon
         activityIndicator.isHidden = false
         activityIndicator.hidesWhenStopped = true
         activityIndicator.startAnimating()
-        titleLabel.text = state.title
-        descriptionLabel.text = state.description
+        titleLabel.text = model.title
+        descriptionLabel.text = model.description
         
         setupOkButton()
         updateTheme()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            self.setNormal()
+        model.processAction { error in
+            DispatchQueue.asyncSafeMain { [weak self] in
+                self?.setNormal()
+            }
         }
     }
     
@@ -86,29 +83,20 @@ final class UserRulesRedirectController: BottomAlertController {
     
     private func setNormal() {
         state = .done(action: action)
+        imageView.isHidden = false
         UIView.animate(withDuration: 0.3) {
+            self.activityIndicator.alpha = 0.0
+            self.imageView.alpha = 1.0
             self.setTexts()
-        }
-        activityIndicator.fadeOut(0.3, 0.0) { success in
+        } completion: { _ in
             self.activityIndicator.stopAnimating()
-            self.imageView.fadeIn(0.3, 0.0, onCompletion: nil)
-        }
-    }
-    
-    private func setProcessing() {
-        state = .processing
-        UIView.animate(withDuration: 0.3) {
-            self.setTexts()
-        }
-        imageView.fadeOut(0.3, 0.0) { success in
-            self.activityIndicator.startAnimating()
-            self.activityIndicator.fadeIn(0.3, 0.0, onCompletion: nil)
+            self.activityIndicator.isHidden = true
         }
     }
     
     private func setTexts() {
-        titleLabel.text = state.title
-        descriptionLabel.text = state.description
+        titleLabel.text = model.title
+        descriptionLabel.text = model.description
     }
 }
 
@@ -120,36 +108,5 @@ extension UserRulesRedirectController: ThemableProtocol {
         themeService.setupLabel(titleLabel)
         themeService.setupLabel(descriptionLabel)
         activityIndicator.style = themeService.indicatorStyle
-    }
-}
-
-// MARK: - UserRulesRedirectAction + Helper variables
-
-fileprivate extension UserRulesRedirectAction {
-    var title: String {
-        switch self {
-        case .removeFromAllowlist(let domain): return domain
-        case .addToAllowlist(let domain): return domain
-        case .addToBlocklist(let domain): return domain
-        case .removeAllBlocklistRules(let domain): return domain
-        }
-    }
-    
-    var description: String {
-        switch self {
-        case .removeFromAllowlist(let domain): return "Waiting for content \(domain)"
-        case .addToAllowlist(let domain): return "Waiting for content \(domain)"
-        case .addToBlocklist(let domain): return "Waiting for content \(domain)"
-        case .removeAllBlocklistRules(let domain): return "Waiting for content \(domain)"
-        }
-    }
-    
-    var icon: UIImage? {
-        switch self {
-        case .removeFromAllowlist(_): return UIImage(named: "kill_switch")
-        case .addToAllowlist(_): return UIImage(named: "thumbsup")
-        case .addToBlocklist(_): return UIImage(named: "ad_blocking_feature_logo")
-        case .removeAllBlocklistRules(_): return UIImage(named: "kill_switch")
-        }
     }
 }
