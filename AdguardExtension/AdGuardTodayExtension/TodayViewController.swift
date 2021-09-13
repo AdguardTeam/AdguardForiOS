@@ -298,22 +298,22 @@ class TodayViewController: UIViewController, NCWidgetProviding {
      Must be called from NCWidgetProviding method in ios 13
      */
     private func setColorsToLabels(){
-        safariTitleLabel.textColor = .widgetTitleColor
-        safariTextLabel.textColor = .widgetTextColor
+        safariTitleLabel.textColor = widgetTitleColor
+        safariTextLabel.textColor = widgetTextColor
         
-        systemTitleLabel.textColor = .widgetTitleColor
-        systemTextLabel.textColor = .widgetTextColor
+        systemTitleLabel.textColor = widgetTitleColor
+        systemTextLabel.textColor = widgetTextColor
         
-        complexProtectionTitle.textColor = .widgetTitleColor
-        complexStatusLabel.textColor = .widgetTextColor
-        complexStatisticsLabel.textColor = .widgetTextColor
+        complexProtectionTitle.textColor = widgetTitleColor
+        complexStatusLabel.textColor = widgetTextColor
+        complexStatisticsLabel.textColor = widgetTextColor
         
-        allTimeStaisticsLabel.textColor = .widgetTitleColor
-        requestsLabel.textColor = .widgetTitleColor
-        encryptedLabel.textColor = .widgetTitleColor
-        elapsedLabel.textColor = .widgetTitleColor
+        allTimeStaisticsLabel.textColor = widgetTitleColor
+        requestsLabel.textColor = widgetTitleColor
+        encryptedLabel.textColor = widgetTitleColor
+        elapsedLabel.textColor = widgetTitleColor
         
-        labels.forEach({ $0.textColor = .widgetTextColor })
+        labels.forEach({ $0.textColor = widgetTextColor })
         
         safariSwitchOutlet.layer.cornerRadius = safariSwitchOutlet.frame.height / 2
         systemSwitchOutlet.layer.cornerRadius = systemSwitchOutlet.frame.height / 2
@@ -404,12 +404,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 /**
  Themable colors for today extension
  */
-extension UIColor {
-    @objc class var widgetTextColor: UIColor {
+
+fileprivate extension TodayViewController {
+    var widgetTextColor: UIColor {
         return UIColor(named: "widgetTextColor")!
     }
     
-    @objc class var widgetTitleColor: UIColor {
+    var widgetTitleColor: UIColor {
         return UIColor(named: "widgetTitleColor")!
     }
 }
