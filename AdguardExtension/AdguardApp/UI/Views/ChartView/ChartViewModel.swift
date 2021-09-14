@@ -160,8 +160,6 @@ final class ChartViewModel: ChartViewModelProtocol {
             return ([], [])
         }
         
-        let requestsPoints = requestsPoints
-        let encryptedPoints = encryptedPoints
         var requestsResult: [CGPoint] = []
         var encryptedResult: [CGPoint] = []
         
