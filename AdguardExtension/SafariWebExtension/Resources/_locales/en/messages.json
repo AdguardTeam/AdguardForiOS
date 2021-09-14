@@ -15,7 +15,7 @@
         "message": "disabled"
     },
     "popup_action_current_site_status_desc_enabled": {
-        "message": "protection enabled"
+        "message": "protection is ON"
     },
     "popup_action_current_site_status_desc_disabled": {
         "message": "protection disabled"
@@ -27,63 +27,63 @@
         "message": "Delete all user rules for this website"
     },
     "popup_action_current_site_desc_starting": {
-        "message": "please wait, starting protection..."
+        "message": "enabling protection"
     },
     "popup_action_current_site_desc_allowlisted": {
-        "message": "website is allowlisted"
+        "message": "added to allowlisted"
     },
     "popup_action_current_site_desc_basic_only": {
         "message": "basic protection only"
     },
     "popup_modal_all_sites_allowed_title": {
-        "message": "Enhanced performance"
+        "message": "Ultimate protection"
     },
     "popup_modal_all_sites_allowed_desc": {
-        "message": "Good job! Now AdGuard will block even more ads, dealing with the most difficult challenges!"
+        "message": "Good job! AdGuard will block nearly any ad and confront the most difficult challenges."
     },
     "popup_modal_all_sites_allowed_button": {
-        "message": "Let magic begin"
+        "message": "Let the magic begin"
     },
     "popup_modal_not_all_sites_allowed_title": {
-        "message": "Almost there"
+        "message": "Selective protection"
     },
     "popup_modal_not_all_sites_allowed_desc": {
-        "message": "You've allowed AdGuard to work only on this website, which means that it won't block ads on other websites unless you grant the permission next time."
+        "message": "You enabled AdGuard only for this website. You’ll keep seeing ads on other websites unless you give Adguard more permissions."
     },
     "popup_modal_not_all_sites_allowed_button": {
-        "message": "Okay"
+        "message": "Continue"
     },
     "popup_modal_title_free": {
-        "message": "Very good but..."
+        "message": "Be all you can be"
     },
     "popup_modal_desc_free": {
-        "message": "Mind that you miss out on advanced protection that's not available in the free version. It will help deal with more ads, including YouTube ads in Safari."
+        "message": "You still lack the advanced protection available in AdGuard Premium. Let's block even more ads such as YouTube ads in Safari?"
     },
     "popup_modal_btn_free": {
         "message": "Upgrade"
     },
     "popup_fullscreen_support_title": {
-        "message": "Uh-oh, was that a swipe up?"
+        "message": "Uh-oh, do you want to restart from beginning?"
     },
     "popup_fullscreen_support_desc": {
-        "message": "If anything's wrong, let us know and we will fix it."
+        "message": "Is something wrong? We may have a fix."
     },
     "popup_protection_disabled_support_desc": {
-        "message": "Uh-oh, looks like you've disabled the protection... Is something wrong? We can fix it!"
+        "message": "Uh-oh, protection for this website is OFF. Is something wrong? We may have a fix."
     },
     "popup_support_button_text": {
-        "message": "Report a problem"
+        "message": "Report an issue"
     },
     "modal_protection_off_title": {
-        "message": "To use protection:"
+        "message": "Enable protection"
     },
     "modal_protection_off_settings": {
         "message": "Open <b>Settings<\/b>"
     },
     "modal_protection_off_extensions": {
-        "message": "Tap on <b>Safari<\/b> and choose the <b>Extensions<\/b> menu item"
+        "message": "Tap <b>Safari<\/b>, swipe down, and tap <b>Content Blockers<\/b>"
     },
     "modal_protection_off_switch": {
-        "message": "<b>Switch on<\/b> all AdGuard ones"
+        "message": "<b>Enable<\/b> all AdGuard extensions."
     }
 }

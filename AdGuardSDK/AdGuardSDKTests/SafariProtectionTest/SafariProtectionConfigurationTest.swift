@@ -332,4 +332,37 @@ class SafariProtectionConfigurationTest: XCTestCase {
         XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
     }
+    
+    func testUpdateConfig() {
+        let protection = safariProtection as! SafariProtection
+        let newConfig = SafariConfiguration(iosVersion: 1,
+                            currentLanguage: "currentLanguage",
+                            proStatus: false,
+                            safariProtectionEnabled: true,
+                            advancedBlockingIsEnabled: false,
+                            blocklistIsEnabled: true,
+                            allowlistIsEnabled: false,
+                            allowlistIsInverted: true,
+                            appBundleId: "appBundleId",
+                            appProductVersion: "appProductVersion",
+                            appId: "appId",
+                            cid: "cid")
+        protection.updateConfig(with: newConfig)
+        protection.configuration
+        
+        XCTAssertEqual(protection.configuration.iosVersion, newConfig.iosVersion)
+        XCTAssertEqual(protection.configuration.currentLanguage, newConfig.currentLanguage)
+        XCTAssertEqual(protection.configuration.proStatus, newConfig.proStatus)
+        XCTAssertEqual(protection.configuration.safariProtectionEnabled, newConfig.safariProtectionEnabled)
+        XCTAssertEqual(protection.configuration.advancedBlockingIsEnabled, newConfig.advancedBlockingIsEnabled)
+        XCTAssertEqual(protection.configuration.blocklistIsEnabled, newConfig.blocklistIsEnabled)
+        XCTAssertEqual(protection.configuration.allowlistIsEnabled, newConfig.allowlistIsEnabled)
+        XCTAssertEqual(protection.configuration.allowlistIsInverted, newConfig.allowlistIsInverted)
+        XCTAssertEqual(protection.configuration.appBundleId, newConfig.appBundleId)
+        XCTAssertEqual(protection.configuration.appProductVersion, newConfig.appProductVersion)
+        XCTAssertEqual(protection.configuration.appId, newConfig.appId)
+        XCTAssertEqual(protection.configuration.cid, newConfig.cid)
+        XCTAssert(protection.configuration === configuration)
+        
+    }
 }

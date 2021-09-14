@@ -21,20 +21,6 @@
                ReferencedContainer = "container:Adguard.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "65F398101B7B684700ABCD39"
-               BuildableName = "Adguard.app"
-               BlueprintName = "Adguard"
-               ReferencedContainer = "container:Adguard.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -42,26 +28,7 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "65F398101B7B684700ABCD39"
-            BuildableName = "Adguard.app"
-            BlueprintName = "Adguard"
-            ReferencedContainer = "container:Adguard.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D0F911832136D2DC006DF0D3"
-               BuildableName = "AdguardSwiftTests.xctest"
-               BlueprintName = "AdguardSwiftTests"
-               ReferencedContainer = "container:Adguard.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -76,16 +43,6 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "3">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "65F398101B7B684700ABCD39"
-            BuildableName = "Adguard.app"
-            BlueprintName = "Adguard"
-            ReferencedContainer = "container:Adguard.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -94,16 +51,15 @@
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES"
       launchAutomaticallySubstyle = "2">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "65F398101B7B684700ABCD39"
-            BuildableName = "Adguard.app"
-            BlueprintName = "Adguard"
+            BlueprintIdentifier = "65C52B351B906105003AF42F"
+            BuildableName = "ActionExtension.appex"
+            BlueprintName = "ActionExtension"
             ReferencedContainer = "container:Adguard.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
