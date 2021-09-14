@@ -19,6 +19,26 @@
 import DnsAdGuardSDK
 
 extension StatisticsPeriod {
+    
+    /**
+      Title for changeStatisticsDatesButton when it is changed
+     */
+    var dateTypeString: String{
+        switch self {
+        case .day:
+            return String.localizedString("chart_24hours")
+        case .today:
+            return String.localizedString("chart_date_today")
+        case .week:
+            return String.localizedString("chart_7days")
+        case .month:
+            return String.localizedString("chart_30days")
+        case .all:
+            return String.localizedString("chart_alltime")
+        }
+    }
+    
+    
     func getFormatterString(from date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale.current
@@ -36,23 +56,5 @@ extension StatisticsPeriod {
             dateFormatter.dateFormat = "MM.yy"
         }
         return dateFormatter.string(from: date)
-    }
-    
-    /**
-     Get title for changeStatisticsDatesButton when it is changed
-     */
-    func getDateTypeString() -> String{
-        switch self {
-        case .day:
-            return String.localizedString("chart_24hours")
-        case .today:
-            return String.localizedString("chart_date_today")
-        case .week:
-            return String.localizedString("chart_7days")
-        case .month:
-            return String.localizedString("chart_30days")
-        case .all:
-            return String.localizedString("chart_alltime")
-        }
     }
 }

@@ -520,7 +520,7 @@ extension ActivityViewController: DnsRequestsDelegateProtocol {
 extension ActivityViewController: DateTypeChangedProtocol {
     func statisticsPeriodChanged(statisticsPeriod: StatisticsPeriod) {
 //        resources.activityStatisticsType = dateType TODO: Save activity statistics period
-        changePeriodTypeButton.setTitle(statisticsPeriod.getDateTypeString(), for: .normal)
+        changePeriodTypeButton.setTitle(statisticsPeriod.dateTypeString, for: .normal)
 //        statisticsModel.chartDateTypeActivity = dateType TODO: Change type
         
 //        activityModel.getCompanies(for: dateType) {[weak self] (info) in

@@ -173,7 +173,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     
     // MARK: - View models
     private lazy var mainPageModel: MainPageModelProtocol = { MainPageModel(resource: resources, safariProtection: safariProtection) }()
-    private var chartModel: ChartViewModelProtocol?
+    private var chartModel: ChartViewModelProtocol!
     
     // MARK: - Observers
     private var appWillEnterForeground: NotificationToken?
@@ -239,6 +239,9 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        chartModel.chartViewSizeChanged(frame: chartView.frame)
+        
         if isIphoneSeLike {
             setupConstraintsForIphoneSe()
         }
@@ -417,8 +420,8 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     
     func statisticsPeriodChanged(statisticsPeriod: StatisticsPeriod) {
         resources.chartDateType = statisticsPeriod
-        changeStatisticsDatesButton.setTitle(statisticsPeriod.getDateTypeString(), for: .normal)
-        chartModel?.statisticsPeriod = statisticsPeriod
+        changeStatisticsDatesButton.setTitle(statisticsPeriod.dateTypeString, for: .normal)
+        chartModel.statisticsPeriod = statisticsPeriod
     }
     
     
@@ -502,7 +505,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
      Called when "requests" button tapped
      */
     private func chooseRequest(){
-        if chartModel?.chartType == .requests {
+        if chartModel.chartType == .requests {
             let title = String.localizedString("requests_info_alert_title")
             let message = String.localizedString("requests_info_alert_message")
             presentSimpleAlert(title: title, message: message)
@@ -519,7 +522,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         if !initial {
             chartView.activeChart = .requests
         }
-        chartModel?.chartType = .requests
+        chartModel.chartType = .requests
         
         requestsNumberLabel.alpha = 1.0
         encryptedNumberLabel.alpha = 0.5
@@ -532,13 +535,13 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     Called when "blocked" button tapped
     */
     private func chooseEncrypted(){
-        if chartModel?.chartType == .encrypted {
+        if chartModel.chartType == .encrypted {
             let title = String.localizedString("encrypted_info_alert_title")
             let message = String.localizedString("encrypted_info_alert_message")
             ACSSystemUtils.showSimpleAlert(for: self, withTitle: title, message: message)
         } else {
             chartView.activeChart = .encrypted
-            chartModel?.chartType = .encrypted
+            chartModel.chartType = .encrypted
             
             requestsNumberLabel.alpha = 0.5
             encryptedNumberLabel.alpha = 1.0
@@ -920,15 +923,11 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     }
     
     private func initChartViewModel() {
-        do {
-            let url = SharedStorageUrls()
-            chartModel = try ChartViewModel(statisticsPeriod: resources.chartDateType, statisticsDbContainerUrl: url.filtersFolderUrl)
-        } catch {
-            DDLogError("(MainPageController) initChartViewModel; ChartViewModel init error: \(error)")
-        }
-
-        chartModel?.startChartStatisticsAutoUpdate(seconds: 5.0)
-        chartModel?.delegate = self
+        let url = SharedStorageUrls()
+        chartModel = ChartViewModel(statisticsPeriod: resources.chartDateType, statisticsDbContainerUrl: url.filtersFolderUrl)
+        
+        chartModel.delegate = self
+        chartModel.startChartStatisticsAutoUpdate(seconds: 5.0)
     }
 }
 
@@ -948,14 +947,17 @@ extension MainPageController: ThemableProtocol {
 }
 
 extension MainPageController: ChartViewModelDelegate {
-    func numberOfRequestsChanged(with records: [ChartRecords], countersStatisticsRecord: CountersStatisticsRecord?, firstFormattedDate: String, lastFormattedDate: String) {
-        let requests = records.first(where: { $0.chartType == .requests })
-        let encrypted = records.first(where: { $0.chartType == .encrypted })
+    func numberOfRequestsChanged(with points: (requests: [CGPoint], encrypted: [CGPoint]),
+                                 countersStatisticsRecord: CountersStatisticsRecord?,
+                                 firstFormattedDate: String,
+                                 lastFormattedDate: String,
+                                 maxRequests: Int) {
         
-        chartView.chartPoints = (requests?.points ?? [], encrypted?.points ?? [])
+        chartView.chartPoints = points
         updateTextForButtons(requestsCount: countersStatisticsRecord?.requests ?? 0, encryptedCount: countersStatisticsRecord?.encrypted ?? 0, averageElapsed: Double(countersStatisticsRecord?.averageElapsed ?? 0))
         
         chartView.leftDateLabelText = firstFormattedDate
         chartView.rightDateLabelText = lastFormattedDate
+        chartView.maxRequests = maxRequests
     }
 }

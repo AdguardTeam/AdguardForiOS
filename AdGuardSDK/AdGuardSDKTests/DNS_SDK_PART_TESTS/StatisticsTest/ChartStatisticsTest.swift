@@ -274,7 +274,7 @@ class ChartStatisticsTest: XCTestCase {
     }
     
     func testGetOldestRecordDate() {
-        XCTAssertNil(statistics.getOldestRecordDate())
+        XCTAssertNil(statistics.oldestRecordDate)
         
         let now = Date()
         let calendar = Calendar.current
@@ -288,7 +288,7 @@ class ChartStatisticsTest: XCTestCase {
         statistics.process(record: record2)
         statistics.process(record: record3)
         
-        let oldDate = statistics.getOldestRecordDate()!
+        let oldDate = statistics.oldestRecordDate!
         
         let dateDiff = oldDate.timeIntervalSince1970 - date.timeIntervalSince1970
         XCTAssert(abs(dateDiff) < 1) // date are equal

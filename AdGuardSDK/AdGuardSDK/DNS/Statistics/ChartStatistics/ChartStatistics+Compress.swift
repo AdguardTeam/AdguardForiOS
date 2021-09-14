@@ -48,7 +48,7 @@ extension ChartStatistics {
             let monthInterval = StatisticsPeriod.month.interval
             
             /// We're trying to get oldest record date from db
-            if let oldestDate = getOldestRecordDate() {
+            if let oldestDate = oldestRecordDate {
                 /// If oldestDate is older than month interval start than we should set interval as month interval
                 /// Because it is the biggest one, and month interval can't be smaller than all interval
                 if monthInterval.start < oldestDate {

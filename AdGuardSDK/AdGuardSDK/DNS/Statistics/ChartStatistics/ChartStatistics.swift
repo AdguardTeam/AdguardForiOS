@@ -19,6 +19,11 @@
 @_implementationOnly import SQLite
 
 public protocol ChartStatisticsProtocol: ResetableSyncProtocol {
+    /**
+     Returns oldest record timeStamp or nil if DB is empty
+     */
+    var oldestRecordDate: Date? { get }
+    
     /// Adds the `record` obtained from DNS-libs in the Tunnel to the DB
     func process(record: ChartStatisticsRecord)
     
@@ -32,17 +37,23 @@ public protocol ChartStatisticsProtocol: ResetableSyncProtocol {
      - Throws: error if an error occurred in DB
      */
     func getPoints(for chartType: ChartType, for period: StatisticsPeriod) throws -> ChartRecords
-    
-    /**
-     Returns oldest record timeStamp or nil if DB is empty
-     */
-    func getOldestRecordDate() -> Date?
 }
 
 /// This object is responsible for managing statistics that is used to build charts
 final public class ChartStatistics: ChartStatisticsProtocol {
     
     let statisticsDb: Connection
+    
+    /// Returns oldest record timeStamp or nil if DB is empty
+    public var oldestRecordDate: Date? {
+        let query = ChartStatisticsTable.table
+            .select(ChartStatisticsTable.timeStamp)
+            .order(ChartStatisticsTable.timeStamp)
+            .limit(1)
+        let dbDate = try? statisticsDb.pluck(query)
+        let date = dbDate?[ChartStatisticsTable.timeStamp]
+        return date
+    }
     
     public init(statisticsDbContainerUrl: URL) throws {
         let dbName = Constants.Statistics.StatisticsType.chart.dbFileName
@@ -138,17 +149,6 @@ final public class ChartStatistics: ChartStatisticsProtocol {
         try statisticsDb.run(resetQuery)
         
         Logger.logInfo("(ChartStatistics) - reset successfully finished")
-    }
-    
-    /// Returns oldest record timeStamp or nil if DB is empty
-     public func getOldestRecordDate() -> Date? {
-        let query = ChartStatisticsTable.table
-            .select(ChartStatisticsTable.timeStamp)
-            .order(ChartStatisticsTable.timeStamp)
-            .limit(1)
-        let dbDate = try? statisticsDb.pluck(query)
-        let date = dbDate?[ChartStatisticsTable.timeStamp]
-        return date
     }
     
     // MARK: - Private methods
