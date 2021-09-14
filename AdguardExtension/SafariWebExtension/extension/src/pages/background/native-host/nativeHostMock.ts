@@ -108,19 +108,47 @@ class NativeHostMock implements NativeHostInterface {
     };
 
     getAdvancedRulesText = async () => {
-        const rulesText = `!
-! Title: Rules for jsinject rules test
+        const rulesText = `
+!
+! Title: Rules for extended css rules test
 !
 ! Filter to be used for testing purposes
 ! https://testcases.adguard.com
 !
 ! Hide warning
-testcases.adguard.com,surge.sh###subscribe-to-test-jsinject-rules-filter
+testcases.adguard.com,surge.sh###subscribe-to-test-extended-css-rules-filter
 !
-! Case 1
-testcases.adguard.com,surge.sh#%#document.__jsinjectTest = true;
-@@||testcases.adguard.com^$jsinject
-@@||surge.sh^$jsinject`;
+testcases.adguard.com,surge.sh#?##case1.banner:has(a.banner-link)
+testcases.adguard.com,surge.sh#?##case2.banner:contains(Click Me!)
+testcases.adguard.com,surge.sh#?##case3.banner:matches-css(opacity: 0.9)
+testcases.adguard.com,surge.sh#?##case4.banner:matches-css-after(content: sponsored)
+testcases.adguard.com,surge.sh#?##case5.banner:matches-css-before(content: sponsored)
+testcases.adguard.com,surge.sh#?##case6.banner:has-text(You would want to click me for sure!)
+testcases.adguard.com,surge.sh#?##case7.banner:-abp-has(a.banner-link)
+testcases.adguard.com,surge.sh#?##case8.banner:contains(Click Me!)
+testcases.adguard.com,surge.sh#?##case9.banner:contains(/[aа]{20,}/)
+testcases.adguard.com,surge.sh#?##case10.banner:matches-css(background-image: /url\\(data\\:image\\/svg\\+xml;base64,[A-Za-z0-9]{100,}/)
+testcases.adguard.com,surge.sh#?##case11.banner:matches-css-after(background-image: /url\\(data\\:image\\/svg\\+xml;base64,[A-Za-z0-9]{100,}/)
+testcases.adguard.com,surge.sh#?##case12.banner:matches-css-before(background-image: /url\\(data\\:image\\/svg\\+xml;base64,[A-Za-z0-9]{100,}/)
+testcases.adguard.com,surge.sh#?#body #case13.banner[-ext-has="a.banner-link"]
+testcases.adguard.com,surge.sh#?#.container > #case14.banner[-ext-contains="/[aа]{20,}/"]
+testcases.adguard.com,surge.sh#?##case14 + #case15.banner[-ext-matches-css-after="content:sponsored"]
+testcases.adguard.com,surge.sh#?##case1 ~ #case16.banner[-ext-matches-css-before="content:sponsored"]
+testcases.adguard.com,surge.sh#?#*:contains(/absolute[\\s\\S]*-\\d{4}/) + * > .banner:contains(/а/) ~ #case17.banner:has(> div:contains(/а/):nth-child(100n + 2))
+testcases.adguard.com,surge.sh#?#.test-xpath-case18:xpath(//*[@class="test-case18-div"]/../..)
+testcases.adguard.com,surge.sh#?#.test-nth-ancestor-case19:nth-ancestor(3)
+testcases.adguard.com,surge.sh#?#.test-upward-selector:upward(#case20)
+testcases.adguard.com,surge.sh#?#.test-upward-number-case21:upward(4)
+! Case 22
+testcases.adguard.com,surge.sh#?##inframe1:has(.content)
+!
+testcases.adguard.com,surge.sh#?##case23 > div:contains(/kick me!|\\(18\\+\\)|https:\\/\\/vk.cc|testTEXT|vk.com\\/test_id/)
+testcases.adguard.com,surge.sh#?##case24 > div:matches-attr("/^data-.{4}$/"="/banner/")
+testcases.adguard.com,surge.sh#?##case25 > div:matches-property("id"="/property-match/")
+testcases.adguard.com,surge.sh#?##case26:remove()
+testcases.adguard.com,surge.sh#$?##case27:has(div) { remove: true; }
+testcases.adguard.com,surge.sh#?##case28 > :is(.case28, #main, footer, span):contains(isTest)
+        `;
         return this.withSleep(rulesText);
     };
 
