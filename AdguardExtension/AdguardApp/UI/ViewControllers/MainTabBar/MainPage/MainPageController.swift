@@ -18,7 +18,8 @@
 
 import UIKit
 import SafariAdGuardSDK
-import DnsAdGuardSDK
+import enum DnsAdGuardSDK.StatisticsPeriod
+import struct DnsAdGuardSDK.CountersStatisticsRecord
 
 final class MainPageController: UIViewController, DateTypeChangedProtocol, ComplexSwitchDelegate, OnboardingControllerDelegate, GetProControllerDelegate, MainPageModelDelegate {
     

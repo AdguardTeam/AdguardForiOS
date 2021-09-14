@@ -17,7 +17,6 @@
 */
 
 import UIKit
-import struct DnsAdGuardSDK.Point
 import enum DnsAdGuardSDK.ChartType
 
 final class ChartView: UIView {
@@ -54,7 +53,12 @@ final class ChartView: UIView {
         }
     }
     
-    var maxRequests: Int = 0
+    // Number of maximum requests for specified period 
+    var maxRequests: Int = 0 {
+        didSet {
+            self.topBorderLabel.text = "\(maxRequests)"
+        }
+    }
     
     private var leftDateLabel = UILabel()
     private var rightDateLabel = UILabel()
@@ -259,7 +263,5 @@ final class ChartView: UIView {
             layer.addSublayer(requestLineLayer)
             layer.addSublayer(encryptedLineLayer)
         }
-        
-        self.topBorderLabel.text = "\(maxRequests)"
     }
 }

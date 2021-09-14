@@ -37,7 +37,12 @@ protocol ChartViewModelProtocol {
 }
 
 final class ChartViewModel: ChartViewModelProtocol {
-    typealias ChartPoints = (requestsPoints: [CGPoint], encryptedPoints: [CGPoint])
+    private struct ChartPoints {
+        let requestsPoints: [CGPoint]
+        let encryptedPoints: [CGPoint]
+        let maxXelement: CGFloat
+        let maxYelement: CGFloat
+    }
     
     //MARK: - Properties
     weak var delegate: ChartViewModelDelegate?
@@ -75,9 +80,6 @@ final class ChartViewModel: ChartViewModelProtocol {
     
     private var firstFormattedDate: String = ""
     private var lastFormattedDate: String = ""
-    
-    private var maxXelement: CGFloat = 0
-    private var maxYelement: CGFloat = 0
     private var frame: CGRect = .zero
     
     //MARK: - Init
@@ -116,15 +118,17 @@ final class ChartViewModel: ChartViewModelProtocol {
     }
     
     //MARK: - Private methods
+    // Update chart points
     private func chartStatisticUpdate() {
         let info = self.statisticsInfo
         let records = self.getChartRecords(for: self.statisticsPeriod)
         
-        let points = findMaxElements(requestsPoints: records.requests.points, encryptedPoints: records.encrypted.points)
+        let points = getPreparedPoints(requestsPoints: records.requests.points, encryptedPoints: records.encrypted.points)
         
-        self.delegate?.numberOfRequestsChanged(with: (points.requestsPoints, points.encryptedPoints), countersStatisticsRecord: info, firstFormattedDate: firstFormattedDate, lastFormattedDate: lastFormattedDate, maxRequests: Int(maxYelement))
+        self.delegate?.numberOfRequestsChanged(with: (points.requestsPoints, points.encryptedPoints), countersStatisticsRecord: info, firstFormattedDate: firstFormattedDate, lastFormattedDate: lastFormattedDate, maxRequests: Int(points.maxYelement))
     }
     
+    // Return statistics date from SDK
     private func getChartRecords(for period: StatisticsPeriod) -> (requests: ChartRecords, encrypted: ChartRecords) {
         var resultRequests: ChartRecords!
         var resultEncrypted: ChartRecords!
@@ -146,18 +150,20 @@ final class ChartViewModel: ChartViewModelProtocol {
         return (resultRequests, resultEncrypted)
     }
     
+    // Get period borders date
     private func prepareDateIntervals(oldestRecordDate: Date?) {
         let intervalBounds = statisticsPeriod.getIntervalBoundsStrings(oldestRecordDate)
         firstFormattedDate = intervalBounds.start
         lastFormattedDate = intervalBounds.end
     }
     
-    private func findMaxElements(requestsPoints: [Point], encryptedPoints: [Point]) -> ChartPoints {
+    // Return fully prepared points
+    private func getPreparedPoints(requestsPoints: [Point], encryptedPoints: [Point]) -> ChartPoints {
         guard requestsPoints.count == encryptedPoints.count,
               !requestsPoints.isEmpty
         else {
             DDLogWarn("(ChartViewModel) findMaxElements; Number of requests points not equal to number of encrypted points or points number is zero")
-            return ([], [])
+            return ChartPoints(requestsPoints: [], encryptedPoints: [], maxXelement: 0, maxYelement: 0)
         }
         
         var requestsResult: [CGPoint] = []
@@ -176,7 +182,7 @@ final class ChartViewModel: ChartViewModelProtocol {
             var encryptedPointX = encryptedPoints[i].x
             let encryptedPointY = encryptedPoints[i].y
             
-            //Correct point x
+            //Correcting x coordinates of all points to find chart start position
             requestsPointX -= requestsPoints[0].x
             encryptedPointX -= encryptedPoints[0].x
             
@@ -186,34 +192,38 @@ final class ChartViewModel: ChartViewModelProtocol {
             requestsResult.append(requestsPoint)
             encryptedResult.append(encryptedPoint)
             
-            //Find max element
+            //Find max x element for requests
             if requestsResult[i].x > maxXRequestsElement {
                 maxXRequestsElement = CGFloat(requestsPointX)
             }
-            
+            //Find max y element for requests
             if requestsResult[i].y > maxYRequestsElement {
                 maxYRequestsElement = CGFloat(requestsPointY)
             }
             
+            //Find max x element for encrypted requests
             if encryptedResult[i].x > maxXEncryptedElement {
                 maxXEncryptedElement = CGFloat(encryptedPointX)
             }
             
+            //Find max y element for encrypted requests
             if encryptedResult[i].y > maxYEncryptedElement {
                 maxYEncryptedElement = CGFloat(encryptedPointY)
             }
         }
             
-        self.maxXelement = max(maxXRequestsElement, maxXEncryptedElement)
-        self.maxYelement = max(maxYRequestsElement, maxYEncryptedElement)
+        let maxXelement = max(maxXRequestsElement, maxXEncryptedElement)
+        let maxYelement = max(maxYRequestsElement, maxYEncryptedElement)
+        let chartPoints = ChartPoints(requestsPoints: requestsResult, encryptedPoints: encryptedResult, maxXelement: maxXelement, maxYelement: maxYelement)
         
-        return modifyCGPoints(points: (requestsResult, encryptedResult))
+        return modifyPoints(points: chartPoints)
     }
     
-    private func modifyCGPoints(points: ChartPoints) -> ChartPoints {
+    // Return modified points
+    private func modifyPoints(points: ChartPoints) -> ChartPoints {
         guard points.requestsPoints.count == points.encryptedPoints.count, !points.requestsPoints.isEmpty else {
             DDLogWarn("(ChartViewModel) modifyCGPoints;  Number of requests points not equal to number of encrypted points or points number is zero")
-            return ([], [])
+            return ChartPoints(requestsPoints: [], encryptedPoints: [], maxXelement: 0, maxYelement: 0)
         }
         
         var requestsResult: [CGPoint] = []
@@ -224,18 +234,22 @@ final class ChartViewModel: ChartViewModelProtocol {
             let requestsPoint = points.requestsPoints[i]
             let encryptedPoint = points.encryptedPoints[i]
             
-            requestsResult.append(getModifiedPoint(point: requestsPoint))
-            encryptedResult.append(getModifiedPoint(point: encryptedPoint))
+            requestsResult.append(getModifiedPoint(point: requestsPoint, maxXelement: points.maxXelement, maxYelement: points.maxYelement))
+            encryptedResult.append(getModifiedPoint(point: encryptedPoint, maxXelement: points.maxXelement, maxYelement: points.maxYelement))
         }
-        return (requestsResult, encryptedResult)
+        return ChartPoints(requestsPoints: requestsResult, encryptedPoints: encryptedResult, maxXelement: points.maxXelement, maxYelement: points.maxYelement)
     }
     
-    
-    private func getModifiedPoint(point: CGPoint) -> CGPoint {
-        let ratioY: CGFloat = maxYelement == 0 ? 0.0 : point.y / CGFloat(maxYelement) * 0.7
+    // Return modified point relative to the frame
+    private func getModifiedPoint(point: CGPoint, maxXelement: CGFloat, maxYelement: CGFloat) -> CGPoint {
+        // ratio to frame for y coordinate with height constraint
+        let ratioY: CGFloat = maxYelement == 0.0 ? 0.0 : point.y / CGFloat(maxYelement) * 0.7
+        // inverted position y for frame with space from top of chart view
         let newY = (frame.height - frame.height * ratioY) - frame.height * 0.15
         
-        let ratioX: CGFloat = maxXelement == 0 ? 0.0 : point.x / CGFloat(maxXelement)
+        //ratio to frame for x coordinate
+        let ratioX: CGFloat = maxXelement == 0.0 ? 0.0 : point.x / CGFloat(maxXelement)
+        // position x for frame
         let newX = frame.width * ratioX
         
         return CGPoint(x: newX, y: newY)
