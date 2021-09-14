@@ -131,25 +131,3 @@ public struct NetworkUtils: NetworkUtilsProtocol {
         return String(cString: hostBuffer)
     }
 }
-
-extension AGDnsStamp {
-    var dnsProtocol: DnsProtocol { proto.dnsProtocol }
-}
-
-extension AGStampProtoType {
-    var dnsProtocol: DnsProtocol {
-        switch self {
-        case .AGSPT_PLAIN: return .dns
-        case .AGSPT_DOH: return .doh
-        case .AGSPT_TLS: return .dot
-        case .AGSPT_DNSCRYPT: return .dnscrypt
-        case .AGSPT_DOQ: return .doq
-        @unknown default: return .dns
-        }
-    }
-}
-
-public extension AGDnsUpstream {
-    // set it to 2000 to make sure we will quickly fallback if needed
-    static let defaultTimeoutMs = 2000
-}

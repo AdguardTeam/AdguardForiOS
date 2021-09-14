@@ -18,38 +18,26 @@
 
 import Foundation
 
-public enum TunnelMode: Int {
-    case split, full, fullWithoutVpnIcon
+public enum TunnelMode: CustomDebugStringConvertible {
+    case split
+    case full
+    case fullWithoutVpnIcon
     
-    public var name: String {
+public var debugDescription: String {
         switch self {
-        case .split:
-            return "Split"
-        case .full:
-            return "Full"
-        case .fullWithoutVpnIcon:
-            return "Full without VPN icon"
+        case .split: return "SPLIT"
+        case .full: return "FULL"
+        case .fullWithoutVpnIcon: return "FULL WITHOUT VPN ICON"
         }
     }
 }
 
-public enum BlockingMode: Int {
-    case `default`, refused, nxdomain, unspecifiedAddress, customAddress
-    
-    public var name: String {
-        switch self {
-        case .`default`:
-            return "Default"
-        case .refused:
-            return "REFUSED"
-        case .nxdomain:
-            return "NXDOMAIN"
-        case .unspecifiedAddress:
-            return "Unspecified IP"
-        case .customAddress:
-            return "Custom IP"
-        }
-    }
+public enum DnsProxyBlockingMode {
+    case `default`
+    case refused
+    case nxdomain
+    case unspecifiedAddress
+    case customAddress
 }
     
 public protocol DnsConfigurationProtocol: ConfigurationProtocol {
@@ -88,13 +76,13 @@ public struct LowLevelDnsConfiguration {
     public var tunnelMode: TunnelMode
     public var fallbackServers: [String]?
     public var bootstrapServers: [String]?
-    public var blockingMode: BlockingMode
-    public var blockingIp: [String]?
+    public var blockingMode: DnsProxyBlockingMode
+    public var blockingIp: String?
     public var blockedTtl: Int
     public var blockIpv6: Bool
     public var restartByReachability: Bool
     
-    public init(tunnelMode: TunnelMode, fallbackServers: [String]? = nil, bootstrapServers: [String]? = nil, blockingMode: BlockingMode, blockingIp: [String]? = nil, blockedTtl: Int, blockIpv6: Bool, restartByReachability: Bool) {
+    public init(tunnelMode: TunnelMode, fallbackServers: [String]? = nil, bootstrapServers: [String]? = nil, blockingMode: DnsProxyBlockingMode, blockingIp: String? = nil, blockedTtl: Int, blockIpv6: Bool, restartByReachability: Bool) {
         self.tunnelMode = tunnelMode
         self.fallbackServers = fallbackServers
         self.bootstrapServers = bootstrapServers

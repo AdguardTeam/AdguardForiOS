@@ -18,53 +18,65 @@
 
 import Foundation
 
-protocol DnsRequestProcessedEventHandlerProtocol {
+protocol DnsRequestProcessedEventHandlerProtocol: AnyObject {
     /// Accepts event object from DNS-libs and adds it to different statistics
     func handle(event: AGDnsRequestProcessedEventWrapper)
 }
 
 /// This object is used in Tunnel to save statistics data obtained from DNS-libs
-struct DnsRequestProcessedEventHandler: DnsRequestProcessedEventHandlerProtocol {
+final class DnsRequestProcessedEventHandler: DnsRequestProcessedEventHandlerProtocol {
+    
+    // Variable to reveal the upstream that provided the answer
+    private let upstreamById: [Int: DnsProxyUpstream]
     
     private let eventQueue = DispatchQueue(label: "DnsAdGuardSDK.DnsRequestProcessedEventHandler.eventQueue", qos: .background)
     
     /* Services */
-    private let providersManager: DnsProvidersManagerProtocol
     private let dnsLibsRulesProvider: DnsLibsRulesProviderProtocol
     private let activityStatistics: ActivityStatisticsProtocol
     private let chartStatistics: ChartStatisticsProtocol
     private let dnsLogStatistics: DnsLogStatisticsProtocol
     
-    init(providersManager: DnsProvidersManagerProtocol,
-         dnsLibsRulesProvider: DnsLibsRulesProviderProtocol,
-         activityStatistics: ActivityStatisticsProtocol,
-         chartStatistics: ChartStatisticsProtocol,
-         dnsLogStatistics: DnsLogStatisticsProtocol) {
-        self.providersManager = providersManager
+    init(
+        upstreamById: [Int: DnsProxyUpstream],
+        dnsLibsRulesProvider: DnsLibsRulesProviderProtocol,
+        activityStatistics: ActivityStatisticsProtocol,
+        chartStatistics: ChartStatisticsProtocol,
+        dnsLogStatistics: DnsLogStatisticsProtocol
+    ) {
+        self.upstreamById = upstreamById
         self.dnsLibsRulesProvider = dnsLibsRulesProvider
         self.activityStatistics = activityStatistics
         self.chartStatistics = chartStatistics
         self.dnsLogStatistics = dnsLogStatistics
     }
     
-    func handle(event: AGDnsRequestProcessedEventWrapper) {
+    deinit {
         eventQueue.sync {
-            guard event.error == nil else {
-                Logger.logError("(DnsRequestProcessedEventHandler) - handleEvent; Error: \(event.error!)")
+            Logger.logInfo("(DnsRequestProcessedEventHandler) - deinit; Flush to db")
+        }
+    }
+    
+    // TODO: - Add some tests
+    func handle(event: AGDnsRequestProcessedEventWrapper) {
+        eventQueue.async { [weak self] in
+            guard let self = self, event.error == nil else {
+                Logger.logError("(DnsRequestProcessedEventHandler) - handleEvent; Error: \(event.error ?? "Missing self")")
                 return
             }
             
-            // TODO: - Upstream should be selected by event.upstreamId
-            // FIXME: - Fix when DNS lib wrapper is done
-            let activeDnsUpstreams = providersManager.activeDnsServer.upstreams.first!
+            guard let upstreamId = event.upstreamId, let activeDnsUpstream = self.upstreamById[upstreamId] else {
+                Logger.logError("(DnsRequestProcessedEventHandler) - handleEvent; event.upstreamId is nil")
+                return
+            }
             
-            let dnsFiltersIds = dnsLibsRulesProvider.enabledDnsFiltersIds
-            let processedEvent = DnsRequestProcessedEvent(event: event, upstream: activeDnsUpstreams, dnsFiltersIds: dnsFiltersIds)
+            let dnsFiltersIds = self.dnsLibsRulesProvider.enabledDnsFiltersIds
+            let processedEvent = DnsRequestProcessedEvent(event: event, upstream: activeDnsUpstream.dnsUpstreamInfo, dnsFiltersIds: dnsFiltersIds)
             
             // Add to statistics
-            activityStatistics.process(record: processedEvent.activityRecord)
-            chartStatistics.process(record: processedEvent.chartStatisticsRecord)
-            dnsLogStatistics.process(event: processedEvent)
+            self.activityStatistics.process(record: processedEvent.activityRecord)
+            self.chartStatistics.process(record: processedEvent.chartStatisticsRecord)
+            self.dnsLogStatistics.process(event: processedEvent)
         }
     }
 }

@@ -4,3 +4,4 @@
 
 #import <AGDnsProxy/AGDnsProxy.h>
 #include <resolv.h>
+#import "ACNUrlUtils.h"

@@ -109,7 +109,7 @@ class BlockingModeController: UITableViewController {
     }
     
     private func updateBlockingMode(index: Int) {
-        let mode: BlockingMode
+        let mode: DnsProxyBlockingMode
         switch index {
         case defaultMode:
             mode = .default
@@ -140,7 +140,7 @@ class BlockingModeController: UITableViewController {
         present(controller, animated: true, completion: nil)
     }
     
-    private func setupMode(mode: BlockingMode) {
+    private func setupMode(mode: DnsProxyBlockingMode) {
         resources.blockingMode = mode
         vpnManager.updateSettings(completion: nil)
         updateButtons(by: selectedCell)

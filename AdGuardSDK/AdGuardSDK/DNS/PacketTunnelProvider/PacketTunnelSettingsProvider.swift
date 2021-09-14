@@ -16,26 +16,31 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
 import NetworkExtension
 
-class PacketTunnelProviderSettingsBuilder {
+protocol PacketTunnelSettingsProviderProtocol {
+    func createSettings(full: Bool, withoutVpnIcon: Bool) -> NEPacketTunnelNetworkSettings
+}
+
+/// This object creates `NEPacketTunnelNetworkSettings` for `PacketTunnelProvider`
+/// Used to incapsulate settings creation logic
+final class PacketTunnelSettingsProvider: PacketTunnelSettingsProviderProtocol {
     
-    private let addresses:PacketTunnelProvider.Addresses
+    private let addresses: PacketTunnelProvider.Addresses
+    private let networkUtils: NetworkUtilsProtocol
     
-    init(addresses: PacketTunnelProvider.Addresses) {
+    init(addresses: PacketTunnelProvider.Addresses, networkUtils: NetworkUtilsProtocol = NetworkUtils()) {
         self.addresses = addresses
+        self.networkUtils = networkUtils
     }
     
-    func createSettings(full: Bool, wihoutVPNIcon: Bool)->NEPacketTunnelNetworkSettings {
-
+    func createSettings(full: Bool, withoutVpnIcon: Bool) -> NEPacketTunnelNetworkSettings {
         let settings = NEPacketTunnelNetworkSettings()
 
-        let network = NetworkUtils()
-        let ipv4Available = network.isIpv4Available
-        let ipv6Available = network.isIpv6Available
+        let ipv4Available = networkUtils.isIpv4Available
+        let ipv6Available = networkUtils.isIpv6Available
 
-        Logger.logInfo("create tunnel settings. ipv4: \(ipv4Available ? "true": "false") ipv6: \(ipv6Available ? "true": "false")")
+        Logger.logInfo("Create tunnel settings. ipv4: \(ipv4Available ? "true": "false") ipv6: \(ipv6Available ? "true": "false")")
 
         let localDnsAddress = ipv4Available ? addresses.localDnsIpv4 : addresses.localDnsIpv6
         let dns = NEDNSSettings(servers: [localDnsAddress])
@@ -52,8 +57,8 @@ class PacketTunnelProviderSettingsBuilder {
             ipv4.includedRoutes = [NEIPv4Route.default()]
             ipv6.includedRoutes = [NEIPv6Route.default()]
 
-            ipv4.excludedRoutes = self.ipv4ExcludedRoutes(withoutVPNIcon: wihoutVPNIcon)
-            ipv6.excludedRoutes = self.ipv6ExcludedRoutes(withoutVPNIcon: wihoutVPNIcon)
+            ipv4.excludedRoutes = ipv4ExcludedRoutes(withoutVPNIcon: withoutVpnIcon)
+            ipv6.excludedRoutes = ipv6ExcludedRoutes(withoutVPNIcon: withoutVpnIcon)
         }
         else {
             if ipv4Available {
@@ -93,8 +98,7 @@ class PacketTunnelProviderSettingsBuilder {
 
      NOTE. To show VPN icon it's enough to add either 0.0.0.0/(0-31) to ipv4 excludes or ::/(0-127) to ipv6 exclude routes.
      */
-    private func ipv4ExcludedRoutes(withoutVPNIcon: Bool)->[NEIPv4Route] {
-
+    private func ipv4ExcludedRoutes(withoutVPNIcon: Bool) -> [NEIPv4Route] {
         let defaultRoute = ACNCidrRange(cidrString: "0.0.0.0/0")
         var dnsRanges:[ACNCidrRange] = [ACNCidrRange(cidrString: addresses.localDnsIpv4)]
 
@@ -112,7 +116,7 @@ class PacketTunnelProviderSettingsBuilder {
         return ranges ?? []
     }
 
-    private func ipv6ExcludedRoutes(withoutVPNIcon: Bool)->[NEIPv6Route] {
+    private func ipv6ExcludedRoutes(withoutVPNIcon: Bool) -> [NEIPv6Route] {
         let defaultRoute = ACNCidrRange(cidrString: "::/0")
         var dnsRanges:[ACNCidrRange] = [ACNCidrRange(cidrString: addresses.localDnsIpv6)]
 
@@ -132,7 +136,7 @@ class PacketTunnelProviderSettingsBuilder {
 }
 
 extension NEIPv4Route {
-    static func routeWithCidr(_ cidr: String)->NEIPv4Route? {
+    static func routeWithCidr(_ cidr: String) -> NEIPv4Route? {
         let components = cidr.components(separatedBy: "/")
         guard components.count == 2 else { return nil }
 
@@ -148,7 +152,7 @@ extension NEIPv4Route {
 }
 
 extension NEIPv6Route {
-    static func routeWithCidr(_ cidr: String)->NEIPv6Route? {
+    static func routeWithCidr(_ cidr: String) -> NEIPv6Route? {
         let components = cidr.components(separatedBy: "/")
         guard components.count == 2 else { return nil }
 

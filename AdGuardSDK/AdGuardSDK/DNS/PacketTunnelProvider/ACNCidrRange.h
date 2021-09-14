@@ -44,7 +44,7 @@
 /**
   Exclude single range from original ranges
   @param originalRanges List of original ranges
-  @param excludedRange List of excluded ranges
+  @param excludedRanges List of excluded ranges
   @return List of resulting ranges that cover all IPs from original ranges excluding all IPs from excluded ranges
  */
 + (NSArray<ACNCidrRange*> *) excludeFrom:(NSArray<ACNCidrRange*> *)originalRanges excludedRanges:(NSArray<ACNCidrRange*> *)excludedRanges;
