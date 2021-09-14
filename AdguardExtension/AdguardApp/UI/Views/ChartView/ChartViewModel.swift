@@ -83,8 +83,20 @@ final class ChartViewModel: ChartViewModelProtocol {
     //MARK: - Init
     init(statisticsPeriod: StatisticsPeriod, statisticsDbContainerUrl: URL) {
         self.statisticsPeriod = statisticsPeriod
-        self.chartStatistics = try? ChartStatistics(statisticsDbContainerUrl: statisticsDbContainerUrl)
-        self.activityStatistics = try? ActivityStatistics(statisticsDbContainerUrl: statisticsDbContainerUrl)
+        
+        do {
+            self.chartStatistics = try ChartStatistics(statisticsDbContainerUrl: statisticsDbContainerUrl)
+        } catch {
+            DDLogError("(ChartViewModel) init; Chart statistics init error: \(error)")
+            self.chartStatistics = nil
+        }
+        
+        do {
+            self.activityStatistics = try ActivityStatistics(statisticsDbContainerUrl: statisticsDbContainerUrl)
+        } catch {
+            DDLogError("(ChartViewModel) init; Activity statistics init error: \(error)")
+            self.activityStatistics = nil
+        }
     }
     
     func startChartStatisticsAutoUpdate(seconds: TimeInterval) {
