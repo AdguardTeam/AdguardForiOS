@@ -28,7 +28,7 @@ protocol ChartViewModelDelegate: AnyObject {
 }
 
 protocol ChartViewModelProtocol {
-    var statisticsInfo: CountersStatisticsRecord? { get }
+    var statisticsInfo: CountersStatisticsRecord { get }
     var statisticsPeriod: StatisticsPeriod { get set }
     var chartType: ChartType { get set }
     var delegate: ChartViewModelDelegate? { get set }
@@ -42,9 +42,10 @@ final class ChartViewModel: ChartViewModelProtocol {
     //MARK: - Properties
     weak var delegate: ChartViewModelDelegate?
     
-    var statisticsInfo: CountersStatisticsRecord? {
+    var statisticsInfo: CountersStatisticsRecord {
         do {
-            return try activityStatistics?.getCounters(for: statisticsPeriod)
+            let record = try activityStatistics?.getCounters(for: statisticsPeriod)
+            return record ?? CountersStatisticsRecord(requests: 0, encrypted: 0, blocked: 0, elapsedSumm: 0)
         } catch {
             DDLogError("(ChartViewModel) statisticsInfo; getCounters return error: \(error)")
             return CountersStatisticsRecord(requests: 0, encrypted: 0, blocked: 0, elapsedSumm: 0)
