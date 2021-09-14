@@ -912,10 +912,7 @@
                                                     <constraint firstAttribute="height" constant="40" id="klH-ya-GOJ"/>
                                                 </constraints>
                                                 <color key="tintColor" systemColor="systemBackgroundColor"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="BUY FULL VERSION">
-                                                    <color key="baseForegroundColor" systemColor="systemBackgroundColor"/>
-                                                </buttonConfiguration>
+                                                <state key="normal" title="BUY FULL VERSION"/>
                                                 <connections>
                                                     <segue destination="J4w-JZ-q8A" kind="show" identifier="ShowLicenseSegueId" id="tqk-Tx-Td7"/>
                                                 </connections>

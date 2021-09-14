@@ -10,14 +10,23 @@
 /* Class = "UILabel"; text = "Edit"; ObjectID = "EH6-Zr-YRP"; */
 "EH6-Zr-YRP.text" = "Edit";
 
-/* Class = "UIButton"; normalTitle = "Select"; ObjectID = "HFf-Yp-hjB"; */
-"HFf-Yp-hjB.normalTitle" = "Select";
-
 /* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "Tei-uI-6Gr"; */
 "Tei-uI-6Gr.normalTitle" = "DELETE";
 
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "UGP-Xr-H1p"; */
+"UGP-Xr-H1p.normalTitle" = "Cancel";
+
+/* Class = "UIButton"; normalTitle = "Disable"; ObjectID = "VSR-Wf-7c8"; */
+"VSR-Wf-7c8.normalTitle" = "Disable";
+
+/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "WEk-KB-xeG"; */
+"WEk-KB-xeG.normalTitle" = "Delete";
+
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "fCd-gA-rXS"; */
 "fCd-gA-rXS.normalTitle" = "ADD";
+
+/* Class = "UIButton"; normalTitle = "Enable"; ObjectID = "gON-PA-nSb"; */
+"gON-PA-nSb.normalTitle" = "Enable";
 
 /* Class = "UILabel"; text = "Domain:"; ObjectID = "x7r-Ln-XiZ"; */
 "x7r-Ln-XiZ.text" = "Domain:";

@@ -1283,10 +1283,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="UKw-Vs-WvL"/>
                                         </constraints>
-                                        <state key="normal" title="ENABLE"/>
-                                        <connections>
-                                            <action selector="enableButtonTapped:" destination="pxv-Jf-U7n" eventType="touchUpInside" id="WFW-7r-3aT"/>
-                                        </connections>
+                                        <state key="normal" title="Turn ON"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
