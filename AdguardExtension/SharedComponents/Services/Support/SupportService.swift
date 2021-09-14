@@ -166,7 +166,7 @@ class SupportService: SupportServiceProtocol {
 //            return filtersString + metaString + "\n"
 //        }
         
-        let tunnelMode = resources.tunnelMode.name
+        let tunnelMode = resources.tunnelMode.debugDescription
         
         let customBootstraps = resources.customBootstrapServers?.joined(separator: ", ") ?? ""
         let customFallbacks = resources.customFallbackServers?.joined(separator: ", ") ?? ""

@@ -75,11 +75,11 @@ class BlockingModeController: UITableViewController {
         }
         updateDescriptionLabel(type: .customAddress, text: text)
         
-        defaultHeaderLabel.text = BlockingMode.default.name
-        refusedHeaderLabel.text = BlockingMode.refused.name
-        nxDomainHeaderLabel.text = BlockingMode.nxdomain.name
-        nullIPHeaderLabel.text = BlockingMode.unspecifiedAddress.name
-        customIPHeaderLabel.text = BlockingMode.customAddress.name
+        defaultHeaderLabel.text = DnsProxyBlockingMode.default.name
+        refusedHeaderLabel.text = DnsProxyBlockingMode.refused.name
+        nxDomainHeaderLabel.text = DnsProxyBlockingMode.nxdomain.name
+        nullIPHeaderLabel.text = DnsProxyBlockingMode.unspecifiedAddress.name
+        customIPHeaderLabel.text = DnsProxyBlockingMode.customAddress.name
     }
     
     // MARK: - Actions

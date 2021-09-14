@@ -185,7 +185,7 @@ extension DnsProtection {
     private func getManager(for type: DnsUserRuleType) -> UserRulesManagerProtocol {
         switch type {
         case .blocklist: return dnsUserRulesManagerProvider.blocklistRulesManager
-        case .allowlist: return dnsUserRulesManagerProvider.blocklistRulesManager
+        case .allowlist: return dnsUserRulesManagerProvider.allowlistRulesManager
         }
     }
 }

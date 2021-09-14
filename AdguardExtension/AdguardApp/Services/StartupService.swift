@@ -56,42 +56,18 @@ final class StartupService : NSObject{
         try! preloadedFilesManager.processPreloadedFiles()
         
         /* Initializing SDK */
-        let appBundleId = Bundle.main.bundleIdentifier ?? ""
-        let appProductVersion = productInfo.version() ?? ""
-        let currentLanguage = "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")"
-        let appId = Bundle.main.isPro ? "ios_pro" : "ios"
-        let cid = UIDevice.current.identifierForVendor?.uuidString ?? ""
-        
         let safariProtectionConfiguration = SafariConfiguration(
-            iosVersion: UIDevice.current.iosVersion,
-            currentLanguage: currentLanguage,
-            proStatus: purchaseService.isProPurchased,
-            safariProtectionEnabled: sharedResources.safariProtectionEnabled,
-            advancedBlockingIsEnabled: true, // TODO: - Don't forget to change
-            blocklistIsEnabled: sharedResources.safariUserFilterEnabled,
-            allowlistIsEnabled: sharedResources.safariWhitelistEnabled,
-            allowlistIsInverted: sharedResources.invertedWhitelist,
-            appBundleId: appBundleId,
-            appProductVersion: appProductVersion,
-            appId: appId,
-            cid: cid
+            resources: sharedResources,
+            isProPurchased: purchaseService.isProPurchased
         )
+        let defaultConfiguration = SafariConfiguration.defaultConfiguration()
         
-        let defaultConfiguration = SafariConfiguration(
-            iosVersion: UIDevice.current.iosVersion,
-            currentLanguage: currentLanguage,
-            proStatus: false,
-            safariProtectionEnabled: true,
-            advancedBlockingIsEnabled: true, // TODO: - Don't forget to change
-            blocklistIsEnabled: false,
-            allowlistIsEnabled: false,
-            allowlistIsInverted: false,
-            appBundleId: appBundleId,
-            appProductVersion: appProductVersion,
-            appId: appId,
-            cid: cid
+        let dnsProtectionConfiguration = DnsConfiguration(
+            resources: sharedResources,
+            isProPurchased: purchaseService.isProPurchased
         )
-        
+        let defaultDnsProtectionConfiguration = DnsConfiguration.defaultConfiguration(from: sharedResources)
+           
         // TODO: - try! is bad
         let safariProtection: SafariProtectionProtocol = try! SafariProtection(
             configuration: safariProtectionConfiguration,
@@ -102,34 +78,6 @@ final class StartupService : NSObject{
             userDefaults: sharedResources.sharedDefaults()
         )
         
-        let sdkDnsImplementation: DnsAdGuardSDK.DnsImplementation = sharedResources.dnsImplementation == .adGuard ? .adGuard : .native
-        
-        
-        let lowLevelConfiguration = LowLevelDnsConfiguration.fromResources(sharedResources)
-        let dnsProtectionConfiguration = DnsConfiguration(currentLanguage: currentLanguage,
-                                                          proStatus: purchaseService.isProPurchased,
-                                                          dnsFilteringIsEnabled: sharedResources.systemProtectionEnabled,
-                                                          dnsImplementation: sdkDnsImplementation,
-                                                          blocklistIsEnabled: sharedResources.systemUserFilterEnabled,
-                                                          allowlistIsEnabled: sharedResources.systemWhitelistEnabled,
-                                                          lowLevelConfiguration: lowLevelConfiguration)
-        
-        let defaultLowLevelConfiguration = LowLevelDnsConfiguration(tunnelMode: .split,
-                                                                    fallbackServers: nil,
-                                                                    bootstrapServers: nil,
-                                                                    blockingMode: .default,
-                                                                    blockingIp: nil,
-                                                                    blockedTtl: 120,
-                                                                    blockIpv6: true,
-                                                                    restartByReachability: true)
-        
-        let defaultDnsProtectionConfiguration = DnsConfiguration(currentLanguage: currentLanguage,
-                                                                 proStatus: true,
-                                                                 dnsFilteringIsEnabled: true,
-                                                                 dnsImplementation: .adGuard,
-                                                                 blocklistIsEnabled: true,
-                                                                 allowlistIsEnabled: true,
-                                                                 lowLevelConfiguration: defaultLowLevelConfiguration)
         // TODO: - try! is bad
         let dnsProtection: DnsProtectionProtocol = try! DnsProtection(configuration: dnsProtectionConfiguration,
                                           defaultConfiguration: defaultDnsProtectionConfiguration,

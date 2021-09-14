@@ -31,5 +31,7 @@
 	</dict>
 	<key>Pro Application</key>
 	<true/>
+	<key>SharedResourcesGroup</key>
+	<string>$(ADGUARD_SHARED_RESOURCES_GROUP)</string>
 </dict>
 </plist>

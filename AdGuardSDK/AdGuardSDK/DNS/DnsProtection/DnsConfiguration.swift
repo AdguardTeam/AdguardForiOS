@@ -18,12 +18,12 @@
 
 import Foundation
 
-public enum TunnelMode: CustomDebugStringConvertible {
-    case split
+public enum TunnelMode: Int, CustomDebugStringConvertible {
+    case split = 0
     case full
     case fullWithoutVpnIcon
-    
-public var debugDescription: String {
+
+    public var debugDescription: String {
         switch self {
         case .split: return "SPLIT"
         case .full: return "FULL"
@@ -32,8 +32,8 @@ public var debugDescription: String {
     }
 }
 
-public enum DnsProxyBlockingMode {
-    case `default`
+public enum DnsProxyBlockingMode: Int {
+    case `default` = 0
     case refused
     case nxdomain
     case unspecifiedAddress

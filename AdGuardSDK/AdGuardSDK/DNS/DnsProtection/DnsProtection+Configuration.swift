@@ -45,6 +45,10 @@ public protocol DnsProtectionConfigurationProtocol {
     
     /* Updates dns implementation state*/
     func update(dnsImplementation: DnsImplementation)
+    
+    //TODO: Need tests
+    /* Updated dns configuration with new one */
+    func updateConfig(with newConfig: DnsConfigurationProtocol)
 }
 
 extension DnsProtection {
@@ -92,6 +96,13 @@ extension DnsProtection {
         workingQueue.sync {
             self.configuration.dnsImplementation = dnsImplementation
             self.dnsProvidersManager.dnsImplementationChanged()
+        }
+    }
+    
+    public func updateConfig(with newConfig: DnsConfigurationProtocol) {
+        workingQueue.sync {
+            Logger.logInfo("(DnsProtection+Configuration) - updateConfig;")
+            self.configuration.updateConfig(with: newConfig)
         }
     }
 }

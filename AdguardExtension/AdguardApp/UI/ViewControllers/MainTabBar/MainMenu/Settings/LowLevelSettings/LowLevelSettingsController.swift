@@ -129,7 +129,7 @@ class LowLevelSettingsController: UITableViewController {
     }
     
     private func setBlockingModeDescription() {
-        blockimgModeDescription.text  = resources.blockingMode.name
+        blockimgModeDescription.text = resources.blockingMode.name
     }
     
     private func setBlockedResponseTllDescription() {
@@ -238,5 +238,17 @@ extension LowLevelSettingsController: ThemableProtocol {
         theme.setupTextView(betaChannelTextView)
         setupWarningDescriptionTextView()
         tableView.reloadData()
+    }
+}
+
+extension DnsProxyBlockingMode {
+    var name: String {
+        switch self {
+        case .`default`: return "Default"
+        case .refused: return "REFUSED"
+        case .nxdomain: return "NXDOMAIN"
+        case .unspecifiedAddress: return "Unspecified IP"
+        case .customAddress: return "Custom IP"
+        }
     }
 }

@@ -21,26 +21,26 @@ import Foundation
 /// Wrapper object for AGDnsRequestProcessedEventWrapper
 /// Here we preprocess and modify some data that we receive from DNS-libs
 public struct DnsRequestProcessedEvent {
-    let domain: String // Queried domain name
-    let startDate: Date // Time when dnsproxy started processing request
-    let elapsed: Int // Time elapsed on processing (in milliseconds)
-    let type: String // Query type
-    let answer: String // DNS Answers string representation
-    let processedStatus: ProcessedStatus // DNS answer's status
-    let originalAnswer: String // If blocked by CNAME, here will be DNS original answer's string representation
-    let upstream: DnsUpstream // The upstream that provided the answer
-    let bytesSent: Int // Number of bytes sent to a server
-    let bytesReceived: Int // Number of bytes received from a server
-    let blockRules: [String] // Filtering rules texts
-    let cacheHit: Bool // True if this response was served from the cache
+    public let domain: String // Queried domain name
+    public let startDate: Date // Time when dnsproxy started processing request
+    public let elapsed: Int // Time elapsed on processing (in milliseconds)
+    public let type: String // Query type
+    public let answer: String // DNS Answers string representation
+    public let processedStatus: ProcessedStatus // DNS answer's status
+    public let originalAnswer: String // If blocked by CNAME, here will be DNS original answer's string representation
+    public let upstream: DnsUpstream // The upstream that provided the answer
+    public let bytesSent: Int // Number of bytes sent to a server
+    public let bytesReceived: Int // Number of bytes received from a server
+    public let blockRules: [String] // Filtering rules texts
+    public let cacheHit: Bool // True if this response was served from the cache
     
-    var isBlocked: Bool {
+    public var isBlocked: Bool {
         switch processedStatus {
         case .blocklistedByDnsFilter, .blocklistedByUserFilter: return true
         default: return false
         }
     }
-    var isEncrypted: Bool { upstream.`protocol`.isCrypto }
+    public var isEncrypted: Bool { upstream.`protocol`.isCrypto }
 }
 
 /// Initializer from wrapper for DNS-libs object
@@ -103,7 +103,7 @@ extension DnsRequestProcessedEvent {
 }
 
 extension DnsRequestProcessedEvent {
-    enum ProcessedStatus: Int {
+    public enum ProcessedStatus: Int {
         // IMPORTANT: - DO NOT CHANGE RAW VALUES
         // We store this values in database
         case processed = 0
