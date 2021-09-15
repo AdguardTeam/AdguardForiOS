@@ -23,11 +23,11 @@ extension DnsProtection {
         workingQueue.async { [weak self] in
             self?.dnsFiltersManager.updateAllFilters { result in
                 if result.unupdatedFiltersIds.isEmpty {
-                    Logger.logInfo("(DnsProtection+BackgroundFetch) - updateFiltersInBackground; Filters with id = \(result.updatedFiltersIds) was updated")
+                    Logger.logInfo("(DnsProtection+BackgroundFetch) - updateFiltersInBackground; Filters with id = \(result.updatedFiltersIds) were updated")
                     onFiltersUpdate(nil)
                 } else {
-                    Logger.logError("(DnsProtection+BackgroundFetch) - updateFiltersInBackground; Some filters with id = \(result.unupdatedFiltersIds) was not updated")
-                    onFiltersUpdate(CommonError.error(message: "Some filters was not updated"))
+                    Logger.logError("(DnsProtection+BackgroundFetch) - updateFiltersInBackground; Some filters with id = \(result.unupdatedFiltersIds) were not updated")
+                    onFiltersUpdate(CommonError.error(message: "Some filters were not updated"))
                 }
             }
         }

@@ -90,10 +90,11 @@ final class DnsFiltersManagerMock: DnsFiltersManagerProtocol {
 
     var invokedUpdateAllFilters = false
     var invokedUpdateAllFiltersCount = 0
-    
-    func updateAllFilters(onFilterUpdated: @escaping (DnsFiltersManager.UpdateResult) -> Void) {
+    var invokedUpdateAllFiltersReturnResult = DnsFiltersUpdateResult(updatedFiltersIds: [1,2,3], unupdatedFiltersIds: [])
+    func updateAllFilters(onFilterUpdated: @escaping (DnsFiltersUpdateResult) -> Void) {
         invokedUpdateAllFilters = true
         invokedUpdateAllFiltersCount += 1
+        onFilterUpdated(invokedUpdateAllFiltersReturnResult)
     }
 
     var invokedGetDnsLibsFilters = false

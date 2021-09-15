@@ -2,6 +2,7 @@
 
 import Foundation
 
+// TODO: Need tests
 public protocol DnsProtectionFiltersProtocol {
     /** Returns DNS filters meta objects */
     var filters: [DnsFilter] { get }

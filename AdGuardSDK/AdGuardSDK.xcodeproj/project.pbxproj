@@ -13,6 +13,13 @@
 		241D084426F21B4A0008FD17 /* DnsProtection+Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241D084226F21B4A0008FD17 /* DnsProtection+Filters.swift */; };
 		241D084626F22DE40008FD17 /* DnsFIltersUpdateResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241D084526F22DE40008FD17 /* DnsFIltersUpdateResult.swift */; };
 		241D084726F22DE40008FD17 /* DnsFIltersUpdateResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241D084526F22DE40008FD17 /* DnsFIltersUpdateResult.swift */; };
+		241D084926F23C7F0008FD17 /* DnsProtectionBackgroundFetchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241D084826F23C7F0008FD17 /* DnsProtectionBackgroundFetchTest.swift */; };
+		241D084A26F23C7F0008FD17 /* DnsProtectionBackgroundFetchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241D084826F23C7F0008FD17 /* DnsProtectionBackgroundFetchTest.swift */; };
+		241D084C26F23ED00008FD17 /* DnsBackgroundFetchUpdaterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241D084B26F23ED00008FD17 /* DnsBackgroundFetchUpdaterMock.swift */; };
+		241D084D26F23ED00008FD17 /* DnsBackgroundFetchUpdaterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241D084B26F23ED00008FD17 /* DnsBackgroundFetchUpdaterMock.swift */; };
+		241D085026F247F10008FD17 /* DnsProvidersManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241D084F26F247F10008FD17 /* DnsProvidersManagerMock.swift */; };
+		241D085126F247F10008FD17 /* DnsProvidersManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241D084F26F247F10008FD17 /* DnsProvidersManagerMock.swift */; };
+		2456E6F726F24A2A001B1760 /* DnsUserRulesManagersProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2456E6F626F24A2A001B1760 /* DnsUserRulesManagersProviderMock.swift */; };
 		2465359726E74B7200234EA5 /* DnsProtection+UserRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2465359626E74B7200234EA5 /* DnsProtection+UserRules.swift */; };
 		2465359826E74B7200234EA5 /* DnsProtection+UserRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2465359626E74B7200234EA5 /* DnsProtection+UserRules.swift */; };
 		24D0AF3126F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D0AF3026F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift */; };
@@ -439,6 +446,10 @@
 		241D083F26F1F5620008FD17 /* DnsProtection+BackgroundFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DnsProtection+BackgroundFetch.swift"; sourceTree = "<group>"; };
 		241D084226F21B4A0008FD17 /* DnsProtection+Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DnsProtection+Filters.swift"; sourceTree = "<group>"; };
 		241D084526F22DE40008FD17 /* DnsFIltersUpdateResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsFIltersUpdateResult.swift; sourceTree = "<group>"; };
+		241D084826F23C7F0008FD17 /* DnsProtectionBackgroundFetchTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProtectionBackgroundFetchTest.swift; sourceTree = "<group>"; };
+		241D084B26F23ED00008FD17 /* DnsBackgroundFetchUpdaterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsBackgroundFetchUpdaterMock.swift; sourceTree = "<group>"; };
+		241D084F26F247F10008FD17 /* DnsProvidersManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersManagerMock.swift; sourceTree = "<group>"; };
+		2456E6F626F24A2A001B1760 /* DnsUserRulesManagersProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsUserRulesManagersProviderMock.swift; sourceTree = "<group>"; };
 		2465359626E74B7200234EA5 /* DnsProtection+UserRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DnsProtection+UserRules.swift"; sourceTree = "<group>"; };
 		24D0AF3026F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsBackgroundFetchUpdateProtocol.swift; sourceTree = "<group>"; };
 		7E15DFD026E603040020247E /* CompaniesStatisticsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesStatisticsTest.swift; sourceTree = "<group>"; };
@@ -754,6 +765,7 @@
 			isa = PBXGroup;
 			children = (
 				7E6E7FCC26C299DA00925F96 /* DnsFiltersManagerTest.swift */,
+				241D084826F23C7F0008FD17 /* DnsProtectionBackgroundFetchTest.swift */,
 				7E6E7FCD26C299DA00925F96 /* DnsProvidersTest */,
 				7E6E7FD226C299DA00925F96 /* StatisticsTest */,
 				7E6E7FD626C299DA00925F96 /* DnsLibsRulesProviderTest.swift */,
@@ -823,6 +835,9 @@
 				7E15DFD226E604920020247E /* ActivityStatisticsMock.swift */,
 				7E15DFD426E606E60020247E /* DnsTrackersProviderMock.swift */,
 				7EE4B22126E9FF42008F0BF0 /* UserRulesClipperMock.swift */,
+				241D084B26F23ED00008FD17 /* DnsBackgroundFetchUpdaterMock.swift */,
+				241D084F26F247F10008FD17 /* DnsProvidersManagerMock.swift */,
+				2456E6F626F24A2A001B1760 /* DnsUserRulesManagersProviderMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -1698,6 +1713,7 @@
 				7E6E802726C299DE00925F96 /* URL+UtilsTest.swift in Sources */,
 				7E6E804126C299DE00925F96 /* ContentBlockerServiceMock.swift in Sources */,
 				7E6E81CD26C2A05B00925F96 /* DnsProtection+Configuration.swift in Sources */,
+				241D085126F247F10008FD17 /* DnsProvidersManagerMock.swift in Sources */,
 				7E6E815326C2A05300925F96 /* ContentBlockerJsonProvider.swift in Sources */,
 				7E6E802426C299DE00925F96 /* ChartStatisticsTest.swift in Sources */,
 				7E667A7726E38C670013B1D5 /* DnsTrackersProviderTest.swift in Sources */,
@@ -1708,6 +1724,8 @@
 				7E6E816F26C2A05300925F96 /* SafariUserRulesManagersProvider.swift in Sources */,
 				7E667A6B26E389320013B1D5 /* DnsTrackersProvider.swift in Sources */,
 				7E6E815526C2A05300925F96 /* ContentBlockersManager.swift in Sources */,
+				241D084A26F23C7F0008FD17 /* DnsProtectionBackgroundFetchTest.swift in Sources */,
+				2456E6F726F24A2A001B1760 /* DnsUserRulesManagersProviderMock.swift in Sources */,
 				7E6E804C26C299DE00925F96 /* ContentBlockerJsonProviderTest.swift in Sources */,
 				7E6E81A926C2A05B00925F96 /* ChartStatistics+Compress.swift in Sources */,
 				7E6E802526C299DE00925F96 /* DnsLibsRulesProviderTest.swift in Sources */,
@@ -1756,6 +1774,7 @@
 				7E15DFD526E606E60020247E /* DnsTrackersProviderMock.swift in Sources */,
 				7E6E812126C2A05300925F96 /* FiltersLocalizationsRequest.swift in Sources */,
 				7E6E81A726C2A05B00925F96 /* ChartStatistics+ChartStatisticsTable.swift in Sources */,
+				241D084D26F23ED00008FD17 /* DnsBackgroundFetchUpdaterMock.swift in Sources */,
 				7E6E814726C2A05300925F96 /* ExtendedFiltersMeta.swift in Sources */,
 				7E6E802226C299DE00925F96 /* DnsLogStatisticsTest.swift in Sources */,
 				7E6E81E226C2A05B00925F96 /* DnsProvidersManager.swift in Sources */,
@@ -1885,6 +1904,7 @@
 				241D084626F22DE40008FD17 /* DnsFIltersUpdateResult.swift in Sources */,
 				7EC8A3C926E772A9005244CF /* Import.swift in Sources */,
 				7EAD34F226C2B397001AFB3A /* CharacterSet+Utils.swift in Sources */,
+				241D085026F247F10008FD17 /* DnsProvidersManagerMock.swift in Sources */,
 				7E6E81C026C2A05B00925F96 /* DnsLibsRulesProvider.swift in Sources */,
 				7E6E81E926C2A05B00925F96 /* DnsImplementation.swift in Sources */,
 				241D084026F1F5620008FD17 /* DnsProtection+BackgroundFetch.swift in Sources */,
@@ -1896,6 +1916,7 @@
 				7E6E81B826C2A05B00925F96 /* ActivityStatistics.swift in Sources */,
 				7E6E81D726C2A05B00925F96 /* PredefinedDnsProvider.swift in Sources */,
 				7E6E81B426C2A05B00925F96 /* StatisticsPeriod.swift in Sources */,
+				241D084926F23C7F0008FD17 /* DnsProtectionBackgroundFetchTest.swift in Sources */,
 				7E6E81AA26C2A05B00925F96 /* ChartStatistics.swift in Sources */,
 				7E6E81F226C2A45300925F96 /* Dictionary+Utils.swift in Sources */,
 				7E6E81A826C2A05B00925F96 /* ChartStatistics+Compress.swift in Sources */,
@@ -1916,6 +1937,7 @@
 				7E6E81BE26C2A05B00925F96 /* DnsLogStatistics+DnsLogTable.swift in Sources */,
 				7E6E81CE26C2A05B00925F96 /* DnsConfiguration.swift in Sources */,
 				7E667A7426E389A00013B1D5 /* DnsTrackers.swift in Sources */,
+				241D084C26F23ED00008FD17 /* DnsBackgroundFetchUpdaterMock.swift in Sources */,
 				7E6E81BC26C2A05B00925F96 /* DnsLogStatistics.swift in Sources */,
 				7E6E81D426C2A05B00925F96 /* NetworkUtils.swift in Sources */,
 				7E6E81D226C2A05B00925F96 /* Value+Types.swift in Sources */,

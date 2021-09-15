@@ -54,6 +54,22 @@ public final class DnsProtection: DnsProtectionProtocol {
         self.filterFilesStorage = services.filterFilesStorage
     }
     
+    // Initializer for tests
+    init(configuration: DnsConfigurationProtocol,
+         defaultConfiguration: DnsConfigurationProtocol,
+         dnsProvidersManager: DnsProvidersManagerProtocol,
+         dnsUserRulesManagerProvider: DnsUserRulesManagersProviderProtocol,
+         dnsFiltersManager: DnsFiltersManagerProtocol,
+         filterFilesStorage: FilterFilesStorageProtocol) {
+        
+        self.configuration = configuration
+        self.defaultConfiguration = defaultConfiguration
+        self.dnsProvidersManager = dnsProvidersManager
+        self.dnsUserRulesManagerProvider = dnsUserRulesManagerProvider
+        self.dnsFiltersManager = dnsFiltersManager
+        self.filterFilesStorage = filterFilesStorage
+    }
+    
     public func reset() throws {
         try workingQueue.sync {
             configuration.updateConfig(with: defaultConfiguration)
