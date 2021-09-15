@@ -58,6 +58,7 @@ struct PreloadedFilesManager: PreloadedFilesManagerProtocol {
         let filtersFolderUrl = sharedStorageUrls.filtersFolderUrl
         let fm = FileManager.default
         
+        // TODO: - Replace directories creation to SDK
         // Create directories if don't exist
         try fm.createDirectory(at: dbFolderUrl, withIntermediateDirectories: true, attributes: [:])
         try fm.createDirectory(at: filtersFolderUrl, withIntermediateDirectories: true, attributes: [:])

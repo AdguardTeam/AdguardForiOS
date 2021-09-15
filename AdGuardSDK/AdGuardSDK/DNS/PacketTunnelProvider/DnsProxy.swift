@@ -54,7 +54,7 @@ final class DnsProxy: DnsProxyProtocol {
     
     func start(_ systemDnsUpstreams: [DnsUpstream]) -> Error? {
         return resolveQueue.sync(flags: .barrier) { [weak self] in
-            return self?.internalStart(systemDnsUpstreams) ?? CommonError.missingData
+            return self?.internalStart(systemDnsUpstreams)
         }
     }
     
@@ -88,10 +88,8 @@ final class DnsProxy: DnsProxyProtocol {
         // Processing events config
         let hanler: DnsRequestProcessedEventHandlerProtocol
         do {
-            // Events handler; Statistics is written here
             hanler = DnsRequestProcessedEventHandler(
-                upstreamById: proxySettingsProvider.upstreamById,
-                dnsLibsRulesProvider: dnsLibsRulesProvider,
+                proxyConfigurationProvider: proxySettingsProvider,
                 activityStatistics: try ActivityStatistics(statisticsDbContainerUrl: statisticsDbContainerUrl),
                 chartStatistics: try ChartStatistics(statisticsDbContainerUrl: statisticsDbContainerUrl),
                 dnsLogStatistics: try DnsLogStatistics(statisticsDbContainerUrl: statisticsDbContainerUrl)

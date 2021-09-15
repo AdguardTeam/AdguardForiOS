@@ -79,10 +79,12 @@ final class StartupService : NSObject{
         )
         
         // TODO: - try! is bad
-        let dnsProtection: DnsProtectionProtocol = try! DnsProtection(configuration: dnsProtectionConfiguration,
-                                          defaultConfiguration: defaultDnsProtectionConfiguration,
-                                          userDefaults: sharedResources.sharedDefaults(),
-                                          filterFilesDirectoryUrl: sharedUrls.dnsFiltersFolderUrl)
+        let dnsProtection: DnsProtectionProtocol = try! DnsProtection(
+            configuration: dnsProtectionConfiguration,
+            defaultConfiguration: defaultDnsProtectionConfiguration,
+            userDefaults: sharedResources.sharedDefaults(),
+            filterFilesDirectoryUrl: sharedUrls.dnsFiltersFolderUrl
+        )
         
         locator.addService(service: safariProtection)
         locator.addService(service: dnsProtection)

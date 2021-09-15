@@ -172,7 +172,7 @@ typedef NS_ENUM(NSUInteger, DDLogLevel){
 
 static const DDLogLevel DDDefaultLogLevel = DDLogLevelAll;
 
-//NS_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Extracts just the file name, no path or extension
@@ -911,4 +911,4 @@ typedef NS_OPTIONS(NSInteger, DDLogMessageOptions){
 
 @end
 
-//NS_ASSUME_NONNULL_END
+NS_ASSUME_NONNULL_END

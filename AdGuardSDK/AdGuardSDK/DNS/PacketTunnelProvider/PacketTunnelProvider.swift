@@ -23,13 +23,22 @@ import Reachability
 open class PacketTunnelProvider: NEPacketTunnelProvider {
     
     public struct Addresses {
+        let tunnelRemoteAddress: String
         let interfaceIpv4: String
         let interfaceIpv6: String
         let localDnsIpv4: String
         let localDnsIpv6: String
         let defaultSystemDnsServers: [String]
         
-        public init(interfaceIpv4: String, interfaceIpv6: String, localDnsIpv4: String, localDnsIpv6: String, defaultSystemDnsServers: [String]) {
+        public init(
+            tunnelRemoteAddress: String,
+            interfaceIpv4: String,
+            interfaceIpv6: String,
+            localDnsIpv4: String,
+            localDnsIpv6: String,
+            defaultSystemDnsServers: [String]
+        ) {
+            self.tunnelRemoteAddress = tunnelRemoteAddress
             self.interfaceIpv4 = interfaceIpv4
             self.interfaceIpv6 = interfaceIpv6
             self.localDnsIpv4 = localDnsIpv4
@@ -38,8 +47,14 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
         }
     }
 
-    private let tunnelProxy: PacketTunnelProviderProxyProtocol
+    private var tunnelProxy: PacketTunnelProviderProxyProtocol!
     private let reachabilityHandler: Reachability
+    
+    override public init() {
+        assertionFailure("This initializer shouldn't be called")
+        self.reachabilityHandler = try! Reachability()
+        super.init()
+    }
     
     public init(
         userDefaults: UserDefaults,
@@ -60,16 +75,15 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
             configuration: dnsConfiguration
         )
         
-        let proxySettingsProvider = DnsProxyConfigurationProvider(
-            dnsProvidersManager: dnsProvidersManager,
-            filtersManager: filtersManager,
-            dnsConfiguration: dnsConfiguration
-        )
-        
         let dnsLibsRulesProvider = DnsLibsRulesProvider(
             dnsFiltersManager: filtersManager,
-            filterFilesStorage: filtersFileStorage,
-            configuration: dnsConfiguration
+            filterFilesStorage: filtersFileStorage
+        )
+        
+        let proxySettingsProvider = DnsProxyConfigurationProvider(
+            dnsProvidersManager: dnsProvidersManager,
+            dnsLibsRulesProvider: dnsLibsRulesProvider,
+            dnsConfiguration: dnsConfiguration
         )
         
         let dnsProxy = DnsProxy(
@@ -92,7 +106,9 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
         self.reachabilityHandler = try Reachability()
         
         super.init()
-
+        
+        tunnelProxy.delegate = self
+        
         NotificationCenter.default.addObserver(forName: .reachabilityChanged, object: nil, queue: nil) { [weak self] _ in
             self?.tunnelProxy.networkChanged()
         }

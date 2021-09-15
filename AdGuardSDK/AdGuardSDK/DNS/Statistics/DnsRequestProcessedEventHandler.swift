@@ -26,26 +26,21 @@ protocol DnsRequestProcessedEventHandlerProtocol: AnyObject {
 /// This object is used in Tunnel to save statistics data obtained from DNS-libs
 final class DnsRequestProcessedEventHandler: DnsRequestProcessedEventHandlerProtocol {
     
-    // Variable to reveal the upstream that provided the answer
-    private let upstreamById: [Int: DnsProxyUpstream]
-    
     private let eventQueue = DispatchQueue(label: "DnsAdGuardSDK.DnsRequestProcessedEventHandler.eventQueue", qos: .background)
     
     /* Services */
-    private let dnsLibsRulesProvider: DnsLibsRulesProviderProtocol
+    private let proxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
     private let activityStatistics: ActivityStatisticsProtocol
     private let chartStatistics: ChartStatisticsProtocol
     private let dnsLogStatistics: DnsLogStatisticsProtocol
     
     init(
-        upstreamById: [Int: DnsProxyUpstream],
-        dnsLibsRulesProvider: DnsLibsRulesProviderProtocol,
+        proxyConfigurationProvider: DnsProxyConfigurationProviderProtocol,
         activityStatistics: ActivityStatisticsProtocol,
         chartStatistics: ChartStatisticsProtocol,
         dnsLogStatistics: DnsLogStatisticsProtocol
     ) {
-        self.upstreamById = upstreamById
-        self.dnsLibsRulesProvider = dnsLibsRulesProvider
+        self.proxyConfigurationProvider = proxyConfigurationProvider
         self.activityStatistics = activityStatistics
         self.chartStatistics = chartStatistics
         self.dnsLogStatistics = dnsLogStatistics
@@ -65,13 +60,18 @@ final class DnsRequestProcessedEventHandler: DnsRequestProcessedEventHandlerProt
                 return
             }
             
-            guard let upstreamId = event.upstreamId, let activeDnsUpstream = self.upstreamById[upstreamId] else {
+            guard let upstreamId = event.upstreamId, let activeDnsUpstream = self.proxyConfigurationProvider.dnsUpstreamById[upstreamId] else {
                 Logger.logError("(DnsRequestProcessedEventHandler) - handleEvent; event.upstreamId is nil")
                 return
             }
             
-            let dnsFiltersIds = self.dnsLibsRulesProvider.enabledDnsFiltersIds
-            let processedEvent = DnsRequestProcessedEvent(event: event, upstream: activeDnsUpstream.dnsUpstreamInfo, dnsFiltersIds: dnsFiltersIds)
+            let processedEvent = DnsRequestProcessedEvent(
+                event: event,
+                upstream: activeDnsUpstream.dnsUpstreamInfo,
+                customDnsFilterIds: self.proxyConfigurationProvider.customDnsFilterIds,
+                dnsBlocklistFilterId: self.proxyConfigurationProvider.dnsBlocklistFilterId,
+                dnsAllowlistFilterId: self.proxyConfigurationProvider.dnsAllowlistFilterId
+            )
             
             // Add to statistics
             self.activityStatistics.process(record: processedEvent.activityRecord)

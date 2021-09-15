@@ -36,6 +36,9 @@ final public class DnsLogStatistics: DnsLogStatisticsProtocol {
     private let statisticsDb: Connection
         
     public init(statisticsDbContainerUrl: URL) throws {
+        // Create directory if doesn't exist
+        try FileManager.default.createDirectory(at: statisticsDbContainerUrl, withIntermediateDirectories: true, attributes: [:])
+        
         let dbName = Constants.Statistics.StatisticsType.dnsLog.dbFileName
         statisticsDb = try Connection(statisticsDbContainerUrl.appendingPathComponent(dbName).path)
         dateFormatter.dateFormat = Constants.Statistics.dbDateFormat

@@ -35,7 +35,7 @@ final class PacketTunnelSettingsProvider: PacketTunnelSettingsProviderProtocol {
     }
     
     func createSettings(full: Bool, withoutVpnIcon: Bool) -> NEPacketTunnelNetworkSettings {
-        let settings = NEPacketTunnelNetworkSettings()
+        let settings = NEPacketTunnelNetworkSettings(tunnelRemoteAddress: addresses.tunnelRemoteAddress)
 
         let ipv4Available = networkUtils.isIpv4Available
         let ipv6Available = networkUtils.isIpv6Available

@@ -24,7 +24,25 @@ protocol DnsProxyConfigurationProviderProtocol {
      We use this variable to be able to distinguish upstream that resolved the request
      The DNS-lib will return us id of the upstream and we will look up DNS upstream here
      */
-    var upstreamById: [Int: DnsProxyUpstream] { get }
+    var dnsUpstreamById: [Int: DnsProxyUpstream] { get }
+    
+    /**
+     Identifiers of custom DNS filters user did add
+     We use this variable to reveal which DNS filter rule worked when blocking/unblocking request
+     */
+    var customDnsFilterIds: [Int] { get }
+
+    /**
+     DNS blocklist rules are stored in files like custom DNS filters
+     We use this identifier to know if request was blocklisted by user rules
+     */
+    var dnsBlocklistFilterId: Int { get }
+
+    /**
+     DNS allowlist rules are stored in files like custom DNS filters
+     We use this identifier to know if request was allowlisted by user rules
+     */
+    var dnsAllowlistFilterId: Int { get }
     
     /**
      Creates and returns configuration for DNS-lib
@@ -39,26 +57,29 @@ protocol DnsProxyConfigurationProviderProtocol {
 
 final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol {
 
-    private(set) var upstreamById: [Int: DnsProxyUpstream] = [:]
-    
+    private(set) var dnsUpstreamById: [Int: DnsProxyUpstream] = [:]
+    private(set) var customDnsFilterIds: [Int] = []
+    private(set) var dnsBlocklistFilterId: Int = -1
+    private(set) var dnsAllowlistFilterId: Int = -2
+        
     // MARK: - Private variables
     
-    private var nextUpstreamId: Int { upstreamById.count }
+    private var nextUpstreamId: Int { dnsUpstreamById.count }
     
     /* Services */
     private let dnsProvidersManager: DnsProvidersManagerProtocol
-    private let filtersManager: DnsFiltersManagerProtocol
+    private let dnsLibsRulesProvider: DnsLibsRulesProviderProtocol
     private let dnsConfiguration: DnsConfigurationProtocol
     private let networkUtils: NetworkUtilsProtocol
     
     init(
         dnsProvidersManager: DnsProvidersManagerProtocol,
-        filtersManager: DnsFiltersManagerProtocol,
+        dnsLibsRulesProvider: DnsLibsRulesProviderProtocol,
         dnsConfiguration: DnsConfigurationProtocol,
         networkUtils: NetworkUtilsProtocol = NetworkUtils()
     ) {
         self.dnsProvidersManager = dnsProvidersManager
-        self.filtersManager = filtersManager
+        self.dnsLibsRulesProvider = dnsLibsRulesProvider
         self.dnsConfiguration = dnsConfiguration
         self.networkUtils = networkUtils
     }
@@ -74,7 +95,7 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
         let proxyUpstreams: [DnsProxyUpstream] = upstreams.map {
             let id = nextUpstreamId
             let dnsProxy = DnsProxyUpstream(dnsUpstreamInfo: $0, dnsBootstraps: bootstraps, id: id)
-            upstreamById[id] = dnsProxy
+            dnsUpstreamById[id] = dnsProxy
             return dnsProxy
         }
         
@@ -83,7 +104,7 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
         let proxyFallbacks: [DnsProxyUpstream] = fallbacks.map {
             let id = nextUpstreamId
             let dnsProxy = DnsProxyUpstream(dnsUpstreamInfo: $0, dnsBootstraps: bootstraps, id: id)
-            upstreamById[id] = dnsProxy
+            dnsUpstreamById[id] = dnsProxy
             return dnsProxy
         }
         
@@ -94,8 +115,16 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
         let ipv6Fallbacks = proxyFallbacks.filter { ACNUrlUtils.isIPv6($0.dnsUpstreamInfo.upstream) }
         
         // Filters for DNS-lib
-        let filters = filtersManager.getDnsLibsFilters()
-        let proxyFilters = filters.map { DnsProxyFilter(filterId: $0.key, filterPath: $0.value) }
+        var proxyFilters = dnsLibsRulesProvider.enabledCustomDnsFilters
+        customDnsFilterIds = proxyFilters.map { $0.filterId }
+        
+        let blocklistFilter = dnsLibsRulesProvider.blocklistFilter
+        proxyFilters.append(blocklistFilter)
+        dnsBlocklistFilterId = blocklistFilter.filterId
+        
+        let allowlistFilter = dnsLibsRulesProvider.allowlistFilter
+        proxyFilters.append(allowlistFilter)
+        dnsAllowlistFilterId = allowlistFilter.filterId
         
         let customBlockingIps = getCustomBlockingIps()
         return DnsProxyConfiguration(
@@ -114,7 +143,10 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
     }
     
     func reset() {
-        upstreamById.removeAll()
+        dnsUpstreamById.removeAll()
+        customDnsFilterIds = []
+        dnsBlocklistFilterId = -1
+        dnsAllowlistFilterId = -2
     }
     
     ///  Current DNS servers upstreams are empty when default one is selected

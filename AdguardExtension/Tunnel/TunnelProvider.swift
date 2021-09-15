@@ -22,8 +22,9 @@ import SafariAdGuardSDK
 import Sentry
 
 class TunnelProvider: PacketTunnelProvider {
-    
-    static let defaultSystemDnsServers = ["9.9.9.9", "149.112.112.112", "2620:fe::fe", "2620:fe::9"]
+    // AdGuard DNS Non-filtering
+    static let defaultSystemDnsServers = ["94.140.14.140", "94.140.14.141", "2a10:50c0::1:ff", "2a10:50c0::2:ff"]
+    static let tunnelRemoteAddress = "127.1.1.1"
     
     // These addresses are meaningful and must not be changed. We use it in VPN application to determine in what mode the packet tunnel is running.
     static let interfaceFullIpv4 = "172.16.209.3"
@@ -33,7 +34,7 @@ class TunnelProvider: PacketTunnelProvider {
     static let interfaceSplitIpv4 = "172.16.209.5"
     static let interfaceSplitIpv6 = "fd12:1:1:1::5"
     
-    init() throws {
+    public override init() {
         // init logger
         let resources = AESharedResources()
         let debugLoggs = resources.isDebugLogs
@@ -67,7 +68,7 @@ class TunnelProvider: PacketTunnelProvider {
                                              allowlistIsEnabled: true,
                                              lowLevelConfiguration: LowLevelDnsConfiguration.fromResources(resources))
         
-        try super.init(userDefaults: resources.sharedDefaults(),
+        try! super.init(userDefaults: resources.sharedDefaults(),
                        debugLoggs: debugLoggs,
                        dnsConfiguration: configuration,
                        addresses: TunnelProvider.getAddresses(mode: resources.tunnelMode),
@@ -91,10 +92,13 @@ class TunnelProvider: PacketTunnelProvider {
             interfaceIpv6 = interfaceSplitIpv6
         }
         
-        return Addresses(interfaceIpv4: interfaceIpv4,
-                         interfaceIpv6: interfaceIpv6,
-                         localDnsIpv4: LocalDnsAddresses.ipv4,
-                         localDnsIpv6: LocalDnsAddresses.ipv6,
-                         defaultSystemDnsServers: defaultSystemDnsServers)
+        return Addresses(
+            tunnelRemoteAddress: tunnelRemoteAddress,
+            interfaceIpv4: interfaceIpv4,
+            interfaceIpv6: interfaceIpv6,
+            localDnsIpv4: LocalDnsAddresses.ipv4,
+            localDnsIpv6: LocalDnsAddresses.ipv6,
+            defaultSystemDnsServers: defaultSystemDnsServers
+        )
     }
 }

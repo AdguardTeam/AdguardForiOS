@@ -29,6 +29,7 @@ protocol PacketTunnelProviderProxyDelegate: AnyObject {
 
 /// This methods are taken from `NEPacketTunnelProvider`, look it up for more information
 protocol PacketTunnelProviderProxyProtocol: AnyObject {
+    var delegate: PacketTunnelProviderProxyDelegate? { get set }
     func startTunnel(options: [String: NSObject]?, completionHandler: @escaping (Error?) -> Void)
     func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void)
     func sleep(completionHandler: @escaping () -> Void)

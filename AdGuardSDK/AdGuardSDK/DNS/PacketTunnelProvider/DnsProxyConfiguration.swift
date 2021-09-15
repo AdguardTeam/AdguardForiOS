@@ -42,13 +42,6 @@ struct DnsProxyUpstream {
     let id: Int
 }
 
-// MARK: - DnsProxyFilter
-
-struct DnsProxyFilter {
-    let filterId: Int
-    let filterPath: String
-}
-
 // MARK: - DnsProxyBlockingMode
 
 extension DnsProxyBlockingMode {

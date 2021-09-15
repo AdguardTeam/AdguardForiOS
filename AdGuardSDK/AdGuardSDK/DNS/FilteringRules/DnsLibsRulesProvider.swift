@@ -18,40 +18,40 @@
 
 import Foundation
 
+struct DnsProxyFilter {
+    let filterId: Int
+    let filterPath: String
+}
+
 protocol DnsLibsRulesProviderProtocol {
-    var enabledDnsFiltersIds: [Int] { get }
-    var dnsFiltersPaths: [String] { get }
-    var blocklistFilterPath: String? { get }
-    var allowlistFilterPath: String? { get }
+    var enabledCustomDnsFilters: [DnsProxyFilter] { get }
+    var blocklistFilter: DnsProxyFilter { get }
+    var allowlistFilter: DnsProxyFilter { get }
 }
 
 final class DnsLibsRulesProvider: DnsLibsRulesProviderProtocol {
     
-    var enabledDnsFiltersIds: [Int] { dnsFiltersManager.getDnsLibsFilters().map { $0.key } }
-    var dnsFiltersPaths: [String] { dnsFiltersManager.getDnsLibsFilters().map { $0.value } }
-    
-    var blocklistFilterPath: String? {
-        if configuration.blocklistIsEnabled {
-            return filterFilesStorage.getUrlForFilter(withId: DnsUserRuleType.blocklist.enabledRulesFilterId).path
-        } else {
-            return nil
-        }
+    var enabledCustomDnsFilters: [DnsProxyFilter] {
+        dnsFiltersManager.getDnsLibsFilters().map { DnsProxyFilter(filterId: $0.key, filterPath: $0.value) }
     }
-    var allowlistFilterPath: String? {
-        if configuration.allowlistIsEnabled {
-            return filterFilesStorage.getUrlForFilter(withId: DnsUserRuleType.allowlist.enabledRulesFilterId).path
-        } else {
-            return nil
-        }
+    
+    var blocklistFilter: DnsProxyFilter {
+        let filterId = DnsUserRuleType.blocklist.enabledRulesFilterId
+        let path = filterFilesStorage.getUrlForFilter(withId: filterId).path
+        return DnsProxyFilter(filterId: filterId, filterPath: path)
+    }
+    
+    var allowlistFilter: DnsProxyFilter {
+        let filterId = DnsUserRuleType.allowlist.enabledRulesFilterId
+        let path = filterFilesStorage.getUrlForFilter(withId: filterId).path
+        return DnsProxyFilter(filterId: filterId, filterPath: path)
     }
     
     private let dnsFiltersManager: DnsFiltersManagerProtocol
     private let filterFilesStorage: CustomFilterFilesStorageProtocol
-    private let configuration: DnsConfigurationProtocol
     
-    init(dnsFiltersManager: DnsFiltersManagerProtocol, filterFilesStorage: CustomFilterFilesStorageProtocol, configuration: DnsConfigurationProtocol) {
+    init(dnsFiltersManager: DnsFiltersManagerProtocol, filterFilesStorage: CustomFilterFilesStorageProtocol) {
         self.dnsFiltersManager = dnsFiltersManager
         self.filterFilesStorage = filterFilesStorage
-        self.configuration = configuration
     }
 }
