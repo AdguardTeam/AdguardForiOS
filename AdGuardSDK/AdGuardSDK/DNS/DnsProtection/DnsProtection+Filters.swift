@@ -2,7 +2,7 @@
 
 import Foundation
 
-protocol DnsProtectionFiltersProtocol {
+public protocol DnsProtectionFiltersProtocol {
     /** Returns DNS filters meta objects */
     var filters: [DnsFilter] { get }
     
