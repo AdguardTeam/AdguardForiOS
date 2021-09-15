@@ -18,7 +18,7 @@
 
 import Foundation
 
-struct DnsProxyFilter {
+struct DnsProxyFilter: Equatable {
     let filterId: Int
     let filterPath: String
 }

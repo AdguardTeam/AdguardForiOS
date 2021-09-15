@@ -4,70 +4,52 @@ class DnsLibsRulesProviderTest: XCTestCase {
    
     var filesStorage: FilterFilesStorageMock!
     var dnsFiltersManager: DnsFiltersManagerMock!
-    var configuration: DnsConfigurationMock!
     var dnsLibsRulesProvider: DnsLibsRulesProviderProtocol!
     
     override func setUp() {
         filesStorage = FilterFilesStorageMock()
         dnsFiltersManager = DnsFiltersManagerMock()
-        configuration = DnsConfigurationMock()
         dnsLibsRulesProvider = DnsLibsRulesProvider(
             dnsFiltersManager: dnsFiltersManager,
-            filterFilesStorage: filesStorage,
-            configuration: configuration
+            filterFilesStorage: filesStorage
         )
     }
     
     func testDnsFiltersPaths() {
         let paths = [1: "path1", 2: "path2"]
         dnsFiltersManager.stubbedGetDnsLibsFiltersResult = paths
-        XCTAssertEqual(dnsLibsRulesProvider.dnsFiltersPaths, paths.map { $0.value })
-        XCTAssertEqual(dnsLibsRulesProvider.enabledDnsFiltersIds, paths.map { $0.key })
-        XCTAssertEqual(dnsFiltersManager.invokedGetDnsLibsFiltersCount, 2)
+        
+        var filters = dnsLibsRulesProvider.enabledCustomDnsFilters
+        XCTAssertEqual(filters.count, 2)
+        XCTAssertEqual(filters[0], DnsProxyFilter(filterId: 1, filterPath: "path1"))
+        XCTAssertEqual(filters[1], DnsProxyFilter(filterId: 2, filterPath: "path2"))
+        XCTAssertEqual(dnsFiltersManager.invokedGetDnsLibsFiltersCount, 1)
         
         dnsFiltersManager.stubbedGetDnsLibsFiltersResult = [:]
-        XCTAssert(dnsLibsRulesProvider.dnsFiltersPaths.isEmpty)
-        XCTAssert(dnsLibsRulesProvider.enabledDnsFiltersIds.isEmpty)
-        XCTAssertEqual(dnsFiltersManager.invokedGetDnsLibsFiltersCount, 4)
+        filters = dnsLibsRulesProvider.enabledCustomDnsFilters
+        XCTAssert(filters.isEmpty)
+        XCTAssertEqual(dnsFiltersManager.invokedGetDnsLibsFiltersCount, 2)
     }
     
-    func testBlocklistFilterPathWithBlocklistEnabled() {
-        configuration.blocklistIsEnabled = true
+    func testBlocklistFilter() {
         let url = URL(string: "https://filters.com")!
         filesStorage.stubbedGetUrlForFilterResult = url
         
-        XCTAssertEqual(dnsLibsRulesProvider.blocklistFilterPath, url.path)
+        let blocklistFilter = dnsLibsRulesProvider.blocklistFilter
+        XCTAssertEqual(blocklistFilter.filterId, DnsUserRuleType.blocklist.enabledRulesFilterId)
+        XCTAssertEqual(blocklistFilter.filterPath, url.path)
         XCTAssertEqual(filesStorage.invokedGetUrlForFilterCount, 1)
         XCTAssertEqual(filesStorage.invokedGetUrlForFilterParameter, DnsUserRuleType.blocklist.enabledRulesFilterId)
     }
     
-    func testBlocklistFilterPathWithBlocklistDisabled() {
-        configuration.blocklistIsEnabled = false
+    func testAllowlistFilter() {
         let url = URL(string: "https://filters.com")!
         filesStorage.stubbedGetUrlForFilterResult = url
         
-        XCTAssertNil(dnsLibsRulesProvider.blocklistFilterPath)
-        XCTAssertEqual(filesStorage.invokedGetUrlForFilterCount, 0)
-        XCTAssertNil(filesStorage.invokedGetUrlForFilterParameter)
-    }
-    
-    func testAllowlistFilterPathWithAllowlistEnabled() {
-        configuration.allowlistIsEnabled = true
-        let url = URL(string: "https://filters.com")!
-        filesStorage.stubbedGetUrlForFilterResult = url
-        
-        XCTAssertEqual(dnsLibsRulesProvider.allowlistFilterPath, url.path)
+        let allowlistFilter = dnsLibsRulesProvider.allowlistFilter
+        XCTAssertEqual(allowlistFilter.filterId, DnsUserRuleType.allowlist.enabledRulesFilterId)
+        XCTAssertEqual(allowlistFilter.filterPath, url.path)
         XCTAssertEqual(filesStorage.invokedGetUrlForFilterCount, 1)
         XCTAssertEqual(filesStorage.invokedGetUrlForFilterParameter, DnsUserRuleType.allowlist.enabledRulesFilterId)
-    }
-    
-    func testAllowlistFilterPathWithAllowlistDisabled() {
-        configuration.allowlistIsEnabled = false
-        let url = URL(string: "https://filters.com")!
-        filesStorage.stubbedGetUrlForFilterResult = url
-        
-        XCTAssertNil(dnsLibsRulesProvider.allowlistFilterPath)
-        XCTAssertEqual(filesStorage.invokedGetUrlForFilterCount, 0)
-        XCTAssertNil(filesStorage.invokedGetUrlForFilterParameter)
     }
 }
