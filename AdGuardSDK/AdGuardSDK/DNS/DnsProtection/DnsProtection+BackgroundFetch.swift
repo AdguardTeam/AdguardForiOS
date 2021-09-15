@@ -27,10 +27,7 @@ extension DnsProtection {
                     onFiltersUpdate(nil)
                 } else {
                     Logger.logError("(DnsProtection+BackgroundFetch) - updateFiltersInBackground; Some filters with id = \(result.unupdatedFiltersIds) was not updated")
-                    let error = NSError(domain: "Some filters was not updated",
-                                        code: 1,
-                                        userInfo: ["unupdatedFiltersIds": result.unupdatedFiltersIds])
-                    onFiltersUpdate(error)
+                    onFiltersUpdate(CommonError.error(message: "Some filters was not updated"))
                 }
             }
         }

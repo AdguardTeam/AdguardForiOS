@@ -16,6 +16,10 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-public protocol DnsBackgroundFetchUpdateProtocol: AnyObject {
-    func updateFiltersInBackground(onFiltersUpdate: @escaping (_ error: Error?) -> Void)
+import Foundation
+
+// MARK: - UpdateResult
+public struct DnsFiltersUpdateResult {
+    public let updatedFiltersIds: [Int]
+    public let unupdatedFiltersIds: [Int]
 }

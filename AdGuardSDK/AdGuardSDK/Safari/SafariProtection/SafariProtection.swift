@@ -34,9 +34,6 @@ public final class SafariProtection: SafariProtectionProtocol {
     // Serial queue to avoid races in services
     let workingQueue = DispatchQueue(label: "SafariAdGuardSDK.SafariProtection.workingQueue")
     
-    // Serial queue to updating dns and safari filters in background
-    let backgroundFiltersUpdateQueue = DispatchQueue(label: "SafariAdGuardSDK.SafariProtection.backgroundFiltersUpdateQueue")
-    
     // Serial queue for converting Content Blockers to avoid working queue load
     let cbQueue = DispatchQueue(label: "SafariAdGuardSDK.SafariProtection.cbQueue", qos: .background)
     

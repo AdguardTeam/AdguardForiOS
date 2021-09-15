@@ -75,10 +75,6 @@
 		246388AE26EA4DA7004FBA9E /* Configuration+SDKConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246388AB26EA4D55004FBA9E /* Configuration+SDKConfig.swift */; };
 		246388AF26EA4DA9004FBA9E /* Configuration+SDKConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246388AB26EA4D55004FBA9E /* Configuration+SDKConfig.swift */; };
 		246388B026EA4E48004FBA9E /* Configuration+SDKConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246388AB26EA4D55004FBA9E /* Configuration+SDKConfig.swift */; };
-		246388B126EA4E49004FBA9E /* Configuration+SDKConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246388AB26EA4D55004FBA9E /* Configuration+SDKConfig.swift */; };
-		246388B226EA4E4A004FBA9E /* Configuration+SDKConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246388AB26EA4D55004FBA9E /* Configuration+SDKConfig.swift */; };
-		246388B326EA4E4B004FBA9E /* Configuration+SDKConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246388AB26EA4D55004FBA9E /* Configuration+SDKConfig.swift */; };
-		246388B426EA4E4B004FBA9E /* Configuration+SDKConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246388AB26EA4D55004FBA9E /* Configuration+SDKConfig.swift */; };
 		247432DE261731C00025C7B8 /* UIAlerController+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247432DD261731C00025C7B8 /* UIAlerController+Style.swift */; };
 		247432DF261731C00025C7B8 /* UIAlerController+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247432DD261731C00025C7B8 /* UIAlerController+Style.swift */; };
 		247521F22594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */; };
@@ -8637,7 +8633,6 @@
 				655A029F1C6B7686000F00D7 /* ACSSystemUtils.m in Sources */,
 				65EC9BCF1BB9824C00F53F3B /* ADLocations.m in Sources */,
 				655A02871C6B7686000F00D7 /* NSURL+Utils.m in Sources */,
-				246388B426EA4E4B004FBA9E /* Configuration+SDKConfig.swift in Sources */,
 				D0977A6D221D8C9700E10AC8 /* ACLLogFileManagerDefault.swift in Sources */,
 				7EAD353326C2D35E001AFB3A /* NotificationCenter+Utils.swift in Sources */,
 				65EC9C971BB9824C00F53F3B /* FMDatabaseAdditions.m in Sources */,
@@ -9450,7 +9445,6 @@
 				D0569D3621F1C0A800985DA9 /* ACNHttpUtils.m in Sources */,
 				D0569D3921F1C0A800985DA9 /* PacketTunnelProvider.m in Sources */,
 				7EF5C55326C26387001851D6 /* SharedResources+applicationResources.swift in Sources */,
-				246388B326EA4E4B004FBA9E /* Configuration+SDKConfig.swift in Sources */,
 				7E50FC19238C0A0300F11722 /* DnsFiltersService.swift in Sources */,
 				D09E2A9B254AC0D6002D6BC0 /* Bundle+Utils.swift in Sources */,
 				7EF5C52926C261E4001851D6 /* SharedResources.swift in Sources */,
@@ -10298,7 +10292,6 @@
 				D0B5449C2435C6BC002F0AEC /* ACSSystemUtils.m in Sources */,
 				D0B5449D2435C6BC002F0AEC /* ADLocations.m in Sources */,
 				D0B5449F2435C6BC002F0AEC /* NSURL+Utils.m in Sources */,
-				246388B226EA4E4A004FBA9E /* Configuration+SDKConfig.swift in Sources */,
 				D0B544A02435C6BC002F0AEC /* ACLLogFileManagerDefault.swift in Sources */,
 				7EAD353426C2D35F001AFB3A /* NotificationCenter+Utils.swift in Sources */,
 				D0B544A22435C6BC002F0AEC /* FMDatabaseAdditions.m in Sources */,
@@ -10315,7 +10308,6 @@
 				D0D7E61724445625001801A5 /* ChartDateType.swift in Sources */,
 				D0B544C02435C6BF002F0AEC /* ACNHttpUtils.m in Sources */,
 				D0B544C12435C6BF002F0AEC /* PacketTunnelProvider.m in Sources */,
-				246388B126EA4E49004FBA9E /* Configuration+SDKConfig.swift in Sources */,
 				D0D0CAFF268B135800AD427E /* ABECRequest.m in Sources */,
 				D0B544C22435C6BF002F0AEC /* DnsFiltersService.swift in Sources */,
 				D0B544C32435C6BF002F0AEC /* Dns64Utils.swift in Sources */,

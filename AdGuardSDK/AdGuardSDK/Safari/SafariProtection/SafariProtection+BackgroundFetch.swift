@@ -179,9 +179,10 @@ extension SafariProtection {
     }
     
     private func updateDnsAndSafariFilters(onStateExecutionFinished: @escaping (_ result: UIBackgroundFetchResult) -> Void) {
-        backgroundFiltersUpdateQueue.async { [weak self] in
+        
+        DispatchQueue(label: "SafariAdGuardSDK.SafariProtection.backgroundFiltersUpdateQueue").async { [weak self] in
             var safariFiltersUpdateResult: UIBackgroundFetchResult!
-            var dnsFiltersUpdateResult: Error?
+            var dnsFiltersUpdateError: Error?
             let group = DispatchGroup()
             group.enter()
             self?.updateFilters(inBackground: true) { result, _ in
@@ -191,19 +192,14 @@ extension SafariProtection {
             
             group.enter()
             self?.dnsBackgroundFetchUpdater?.updateFiltersInBackground(onFiltersUpdate:  { error in
-                dnsFiltersUpdateResult = error
+                dnsFiltersUpdateError = error
                 group.leave()
             })
             
             group.wait()
-
-            print("TEST after wait")
             
-            if dnsFiltersUpdateResult != nil || safariFiltersUpdateResult == .noData {
-                onStateExecutionFinished(.noData)
-            } else {
-                onStateExecutionFinished(safariFiltersUpdateResult)
-            }
+            let isSuccessfullyUpdated = dnsFiltersUpdateError == nil && safariFiltersUpdateResult == .newData
+            onStateExecutionFinished(isSuccessfullyUpdated ? .newData : .noData)
         }
     }
 }

@@ -66,7 +66,7 @@ protocol DnsFiltersManagerProtocol: ResetableSyncProtocol {
      Updates all filters and metas stored
      - Parameter onFilterUpdated: Closure to process update result
      */
-    func updateAllFilters(onFilterUpdated: @escaping (_ result: DnsFiltersManager.UpdateResult) -> Void)
+    func updateAllFilters(onFilterUpdated: @escaping (_ result: DnsFiltersUpdateResult) -> Void)
     
     /**
      This method is used when initializing DNS-lib to pass information about enabled DNS filters
@@ -211,7 +211,7 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
         }
     }
     
-    func updateAllFilters(onFilterUpdated: @escaping (DnsFiltersManager.UpdateResult) -> Void) {
+    func updateAllFilters(onFilterUpdated: @escaping (DnsFiltersUpdateResult) -> Void) {
         Logger.logInfo("(DnsFiltersService) - updateAllFilters; Start")
         
         let group = DispatchGroup()
@@ -231,7 +231,7 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
         }
         
         group.notify(queue: .main) {
-            onFilterUpdated(DnsFiltersManager.UpdateResult(updatedFiltersIds: updatedIds, unupdatedFiltersIds: unupdatedIds))
+            onFilterUpdated(DnsFiltersUpdateResult(updatedFiltersIds: updatedIds, unupdatedFiltersIds: unupdatedIds))
         }
     }
     
@@ -259,12 +259,6 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
 
 // MARK: - DnsFilterService + Helper objects
 extension DnsFiltersManager {
-    // MARK: - UpdateResult
-    struct UpdateResult {
-        let updatedFiltersIds: [Int]
-        let unupdatedFiltersIds: [Int]
-    }
-    
     enum DnsFilterError: Error, CustomDebugStringConvertible {
         case dnsFilterAbsent(filterId: Int)
         

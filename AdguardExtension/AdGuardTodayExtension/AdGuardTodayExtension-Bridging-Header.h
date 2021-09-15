@@ -12,5 +12,6 @@
 #import "ADBTable.h"
 #import "ABECRequest.h"
 #import "APCommonSharedResources.h"
+#import "ADLocales.h"
 
 #endif /* AdGuardTodayExtension_Bridging_Header_h */
