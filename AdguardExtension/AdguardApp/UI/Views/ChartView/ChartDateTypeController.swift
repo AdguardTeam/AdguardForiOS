@@ -17,12 +17,13 @@
 */
 
 import UIKit
+import enum DnsAdGuardSDK.StatisticsPeriod
 
 protocol DateTypeChangedProtocol: AnyObject {
-    func dateTypeChanged(dateType: ChartDateType)
+    func statisticsPeriodChanged(statisticsPeriod: StatisticsPeriod)
 }
 
-class ChartDateTypeController: BottomAlertController {
+final class ChartDateTypeController: BottomAlertController {
     
     @IBOutlet weak var periodLabel: ThemableLabel!
     @IBOutlet weak var content: UIView!
@@ -50,15 +51,15 @@ class ChartDateTypeController: BottomAlertController {
         
         switch sender.tag {
         case todayTag:
-            delegate?.dateTypeChanged(dateType: .today)
+            delegate?.statisticsPeriodChanged(statisticsPeriod: .today)
         case oneDayTag:
-            delegate?.dateTypeChanged(dateType: .day)
+            delegate?.statisticsPeriodChanged(statisticsPeriod: .day)
         case weekTag:
-            delegate?.dateTypeChanged(dateType: .week)
+            delegate?.statisticsPeriodChanged(statisticsPeriod: .week)
         case monthTag:
-            delegate?.dateTypeChanged(dateType: .month)
+            delegate?.statisticsPeriodChanged(statisticsPeriod: .month)
         case allTimeTag:
-            delegate?.dateTypeChanged(dateType: .alltime)
+            delegate?.statisticsPeriodChanged(statisticsPeriod: .all)
         default:
             break
         }
