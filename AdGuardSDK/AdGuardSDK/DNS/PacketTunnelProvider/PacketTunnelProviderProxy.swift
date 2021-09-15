@@ -273,8 +273,8 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
     private func handlePackets(_ packets: [Data], _ protocols: [NSNumber]) {
         for (index, packet) in packets.enumerated() {
             dnsProxy.resolve(dnsRequest: packet) { [weak self] reply in
-                if reply != nil {
-                    self?.delegate?.writePackets([packet], [protocols[index]])
+                if let reply = reply {
+                    self?.delegate?.writePackets([reply], [protocols[index]])
                 }
             }
         }
