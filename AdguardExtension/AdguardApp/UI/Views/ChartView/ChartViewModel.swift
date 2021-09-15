@@ -169,7 +169,7 @@ final class ChartViewModel: ChartViewModelProtocol {
         var requestsResult: [CGPoint] = []
         requestsResult.reserveCapacity(requestsPoints.count)
         var encryptedResult: [CGPoint] = []
-        encryptedResult.reserveCapacity(requestsPoints.count)
+        encryptedResult.reserveCapacity(encryptedPoints.count)
         
         var maxXRequestsElement: CGFloat = 0.0
         var maxYRequestsElement: CGFloat = 0.0
@@ -231,7 +231,7 @@ final class ChartViewModel: ChartViewModelProtocol {
         var requestsResult: [CGPoint] = []
         requestsResult.reserveCapacity(points.requestsPoints.count)
         var encryptedResult: [CGPoint] = []
-        encryptedResult.reserveCapacity(points.requestsPoints.count)
+        encryptedResult.reserveCapacity(points.encryptedPoints.count)
         
         for i in 0..<points.requestsPoints.count {
             
