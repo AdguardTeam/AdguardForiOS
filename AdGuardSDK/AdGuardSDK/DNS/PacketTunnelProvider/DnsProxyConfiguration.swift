@@ -20,7 +20,7 @@ import Foundation
 
 // MARK: - DnsProxyConfiguration
 
-struct DnsProxyConfiguration {
+struct DnsProxyConfiguration: Equatable {
     let upstreams: [DnsProxyUpstream] // DNS upstreams
     let fallbacks: [DnsProxyUpstream] // DNS fallbacks
     let dns64Upstreams: [DnsProxyUpstream] // Upstreams to use for discovery of DNS64 prefixes
@@ -36,7 +36,7 @@ struct DnsProxyConfiguration {
 
 // MARK: - DnsProxyUpstream
 
-struct DnsProxyUpstream {
+struct DnsProxyUpstream: Equatable {
     let dnsUpstreamInfo: DnsUpstream
     let dnsBootstraps: [DnsUpstream]
     let id: Int

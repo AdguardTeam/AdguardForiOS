@@ -20,6 +20,7 @@ class DnsLibsRulesProviderTest: XCTestCase {
         dnsFiltersManager.stubbedGetDnsLibsFiltersResult = paths
         
         var filters = dnsLibsRulesProvider.enabledCustomDnsFilters
+        filters.sort(by: { $0.filterId < $1.filterId })
         XCTAssertEqual(filters.count, 2)
         XCTAssertEqual(filters[0], DnsProxyFilter(filterId: 1, filterPath: "path1"))
         XCTAssertEqual(filters[1], DnsProxyFilter(filterId: 2, filterPath: "path2"))
