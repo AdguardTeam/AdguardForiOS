@@ -65,10 +65,8 @@ final class StartupService : NSObject{
                                                           isProPurchased: purchaseService.isProPurchased)
         let defaultDnsProtectionConfiguration = DnsConfiguration.defaultConfiguration()
            
-
-        
         // TODO: - try! is bad
-        let dnsProtection: DnsProtection = try! DnsProtection(configuration: dnsProtectionConfiguration,
+        let dnsProtection: DnsProtectionProtocol = try! DnsProtection(configuration: dnsProtectionConfiguration,
                                           defaultConfiguration: defaultDnsProtectionConfiguration,
                                           userDefaults: sharedResources.sharedDefaults(),
                                           filterFilesDirectoryUrl: sharedUrls.dnsFiltersFolderUrl)
@@ -84,7 +82,7 @@ final class StartupService : NSObject{
             dnsBackgroundFetchUpdater: dnsProtection)
         
         locator.addService(service: safariProtection)
-        locator.addService(service: dnsProtection as DnsProtectionProtocol)
+        locator.addService(service: dnsProtection)
         
         /* End of initializing SDK */
         

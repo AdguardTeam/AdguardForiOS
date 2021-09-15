@@ -17,14 +17,14 @@ public protocol DnsProtectionFiltersProtocol {
      - Parameter id: Unique identifier of DNS filter which state should be changed
      - Parameter enabled: New DNS filter state
      */
-    func setFilter(withId id: Int, to enabled: Bool)
+    func setFilter(withId id: Int, to enabled: Bool) throws
     
     /**
      Renames DNS filter by **id**
      - Parameter id: Unique identifier of DNS filter which state should be changed
      - Parameter name: New DNS filter name
      */
-    func renameFilter(withId id: Int, to name: String)
+    func renameFilter(withId id: Int, to name: String) throws
     
     /**
      Adds new DNS filter to the storage and saves it's meta
@@ -39,14 +39,7 @@ public protocol DnsProtectionFiltersProtocol {
      Removes DNS filter and it's meta from the storage
      - Parameter id: Unique identifier of DNS filter that should be removed
      */
-    func removeFilter(withId id: Int)
-    
-    /**
-     Removes DNS filters and it's meta from the storage
-     - Parameter ids: Unique identifiers of DNS filters that should be removed
-     */
-    func removeFilters(withIds ids: [Int])
-    
+    func removeFilter(withId id: Int) throws
     
     /**
      Updates the specified DNS filter
@@ -76,25 +69,17 @@ extension DnsProtection {
         }
     }
     
-    public func setFilter(withId id: Int, to enabled: Bool) {
-        workingQueue.sync {
-            do {
-                try dnsFiltersManager.setFilter(withId: id, to: enabled)
-                Logger.logInfo("(DnsProtection+Filters - setFilter; Enabled state for filter with id = \(id) is = \(enabled)")
-            } catch {
-                Logger.logError("(DnsProtection+Filters - setFilter; Error occurred while setting filter with id = \(id) to enabled state = \(enabled); error = \(error)")
-            }
+    public func setFilter(withId id: Int, to enabled: Bool) throws {
+        try workingQueue.sync {
+            try dnsFiltersManager.setFilter(withId: id, to: enabled)
+            Logger.logInfo("(DnsProtection+Filters - setFilter; Enabled state for filter with id = \(id) is = \(enabled)")
         }
     }
     
-    public func renameFilter(withId id: Int, to name: String) {
-        workingQueue.sync {
-            do {
-                try dnsFiltersManager.renameFilter(withId: id, to: name)
-                Logger.logInfo("(DnsProtection+Filters - renameFilter; Filter with id = \(id) was renamed to \(name)")
-            } catch {
-                Logger.logError("(DnsProtection+Filters - renameFilter; Error occurred while renaming filter with id = \(id) to name = \(name)")
-            }
+    public func renameFilter(withId id: Int, to name: String) throws {
+        try workingQueue.sync {
+            try dnsFiltersManager.renameFilter(withId: id, to: name)
+            Logger.logInfo("(DnsProtection+Filters - renameFilter; Filter with id = \(id) was renamed to \(name)")
         }
     }
     
@@ -105,19 +90,11 @@ extension DnsProtection {
         }
     }
     
-    public func removeFilter(withId id: Int) {
-        workingQueue.sync {
-            do {
-                try dnsFiltersManager.removeFilter(withId: id)
-                Logger.logInfo("(DnsProtection+Filters - removeFilter; Filter with id = \(id) was removed")
-            } catch {
-                Logger.logError("(DnsProtection+Filters - removeFilter; Error occurred while removing filter with id = \(id)")
-            }
+    public func removeFilter(withId id: Int) throws {
+        try workingQueue.sync {
+            try dnsFiltersManager.removeFilter(withId: id)
+            Logger.logInfo("(DnsProtection+Filters - removeFilter; Filter with id = \(id) was removed")
         }
-    }
-    
-    public func removeFilters(withIds ids: [Int]) {
-        ids.forEach { removeFilter(withId: $0) }
     }
 
     public func updateFilter(withId id: Int, onFilterUpdated: @escaping (_ error: Error?) -> Void) {
