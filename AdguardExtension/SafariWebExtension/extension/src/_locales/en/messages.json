@@ -30,7 +30,7 @@
         "message": "enabling protection"
     },
     "popup_action_current_site_desc_allowlisted": {
-        "message": "added to allowlisted"
+        "message": "added to allowlist"
     },
     "popup_action_current_site_desc_basic_only": {
         "message": "basic protection only"
@@ -84,6 +84,6 @@
         "message": "Tap <b>Safari<\/b>, swipe down, and tap <b>Content Blockers<\/b>"
     },
     "modal_protection_off_switch": {
-        "message": "<b>Enable<\/b> all AdGuard extensions."
+        "message": "<b>Enable<\/b> all AdGuard extensions"
     }
 }
