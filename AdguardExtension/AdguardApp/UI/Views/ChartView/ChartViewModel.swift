@@ -166,8 +166,8 @@ final class ChartViewModel: ChartViewModelProtocol {
             return ChartPoints(requestsPoints: [], encryptedPoints: [], maxXelement: 0, maxYelement: 0)
         }
         
-        var requestsResult: [CGPoint] = []
-        var encryptedResult: [CGPoint] = []
+        var requestsResult: [CGPoint] = Array<CGPoint>(unsafeUninitializedCapacity: requestsPoints.count, initializingWith: { _, _ in })
+        var encryptedResult: [CGPoint] = Array<CGPoint>(unsafeUninitializedCapacity: requestsPoints.count, initializingWith: { _, _ in })
         
         var maxXRequestsElement: CGFloat = 0.0
         var maxYRequestsElement: CGFloat = 0.0
@@ -226,8 +226,8 @@ final class ChartViewModel: ChartViewModelProtocol {
             return ChartPoints(requestsPoints: [], encryptedPoints: [], maxXelement: 0, maxYelement: 0)
         }
         
-        var requestsResult: [CGPoint] = []
-        var encryptedResult: [CGPoint] = []
+        var requestsResult: [CGPoint] = Array<CGPoint>(unsafeUninitializedCapacity: points.requestsPoints.count, initializingWith: { _, _ in })
+        var encryptedResult: [CGPoint] = Array<CGPoint>(unsafeUninitializedCapacity: points.requestsPoints.count, initializingWith: { _, _ in })
         
         for i in 0..<points.requestsPoints.count {
             
