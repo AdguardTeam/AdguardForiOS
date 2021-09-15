@@ -83,7 +83,7 @@ extension SafariProtection {
         
         switch currentBackgroundFetchState {
         case .loadAndSaveFilters, .updateFinished:
-            updateFilters(inBackground: true) { result, _ in onStateExecutionFinished(result) }
+            updateDnsAndSafariFilters(onStateExecutionFinished: onStateExecutionFinished)
         case .convertFilters:
             let (result, _) = convertFilters(inBackground: true)
             onStateExecutionFinished(result)
@@ -174,6 +174,35 @@ extension SafariProtection {
                     self?.currentBackgroundFetchState = .updateFinished
                     onCbReloaded(.newData, nil)
                 }
+            }
+        }
+    }
+    
+    private func updateDnsAndSafariFilters(onStateExecutionFinished: @escaping (_ result: UIBackgroundFetchResult) -> Void) {
+        backgroundFiltersUpdateQueue.async { [weak self] in
+            var safariFiltersUpdateResult: UIBackgroundFetchResult!
+            var dnsFiltersUpdateResult: Error?
+            let group = DispatchGroup()
+            group.enter()
+            self?.updateFilters(inBackground: true) { result, _ in
+                safariFiltersUpdateResult = result
+                group.leave()
+            }
+            
+            group.enter()
+            self?.dnsBackgroundFetchUpdater?.updateFiltersInBackground(onFiltersUpdate:  { error in
+                dnsFiltersUpdateResult = error
+                group.leave()
+            })
+            
+            group.wait()
+
+            print("TEST after wait")
+            
+            if dnsFiltersUpdateResult != nil || safariFiltersUpdateResult == .noData {
+                onStateExecutionFinished(.noData)
+            } else {
+                onStateExecutionFinished(safariFiltersUpdateResult)
             }
         }
     }

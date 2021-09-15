@@ -20,6 +20,7 @@ import Foundation
 
 public typealias DnsProtectionProtocol = DnsProtectionConfigurationProtocol
                                 & DnsProtectionUserRulesManagerProtocol
+                                & DnsBackgroundFetchUpdateProtocol
                                 & ResetableSyncProtocol
 
 public final class DnsProtection: DnsProtectionProtocol {
