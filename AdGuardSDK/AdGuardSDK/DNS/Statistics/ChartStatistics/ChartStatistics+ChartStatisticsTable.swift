@@ -34,14 +34,14 @@ struct ChartStatisticsTable: Equatable {
 // MARK: - ChartStatisticsRecord
 
 public struct ChartStatisticsRecord: Equatable {
-    let timeStamp: Date
-    let requests: Int
-    let encrypted: Int
-    let blocked: Int
-    let elapsedSumm: Int
-    let averageElapsed: Int
+    public let timeStamp: Date
+    public let requests: Int
+    public let encrypted: Int
+    public let blocked: Int
+    public let elapsedSumm: Int
+    public let averageElapsed: Int
     
-    init(timeStamp: Date, requests: Int, encrypted: Int, blocked: Int, elapsedSumm: Int) {
+    public init(timeStamp: Date, requests: Int, encrypted: Int, blocked: Int, elapsedSumm: Int) {
         self.timeStamp = timeStamp
         self.requests = requests
         self.encrypted = encrypted
@@ -107,11 +107,21 @@ extension DnsRequestProcessedEvent {
 // MARK: - ChartRecords
 
 public struct Point: Equatable {
-    let x: Int
-    let y: Int
+    public let x: Int
+    public let y: Int
+    
+    public init(x: Int, y: Int) {
+        self.x = x
+        self.y = y
+    }
 }
 
 public struct ChartRecords {
-    let chartType: ChartType
-    let points: [Point]
+    public let chartType: ChartType
+    public let points: [Point]
+    
+    public init(chartType: ChartType, points: [Point]) {
+        self.chartType = chartType
+        self.points = points
+    }
 }
