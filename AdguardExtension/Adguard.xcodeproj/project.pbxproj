@@ -47,7 +47,6 @@
 		244339A82580EA2600AB4F26 /* BlockedResponseTtlController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244339A62580EA2600AB4F26 /* BlockedResponseTtlController.swift */; };
 		244339DE2581092900AB4F26 /* UpstreamsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244339DD2581092900AB4F26 /* UpstreamsController.swift */; };
 		244339DF2581092900AB4F26 /* UpstreamsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244339DD2581092900AB4F26 /* UpstreamsController.swift */; };
-		2444013926EE2F9500FB7CE5 /* ChartType+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2444013826EE2F9500FB7CE5 /* ChartType+Utils.swift */; };
 		2444013A26EE2F9500FB7CE5 /* ChartType+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2444013826EE2F9500FB7CE5 /* ChartType+Utils.swift */; };
 		244419842614C1BC009555F3 /* String+NSRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244419832614C1BC009555F3 /* String+NSRange.swift */; };
 		244419962614C295009555F3 /* String+NSRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244419832614C1BC009555F3 /* String+NSRange.swift */; };
@@ -906,7 +905,6 @@
 		7EC8A37926E658F5005244CF /* UserRulesRedirectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8A37726E658F4005244CF /* UserRulesRedirectController.swift */; };
 		7EC8A40526E78D76005244CF /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
 		7EC8A40626E78D77005244CF /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
-		7EC8A40B26E7919D005244CF /* UserRulesRedirectAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8A40A26E7919D005244CF /* UserRulesRedirectAction.swift */; };
 		7EC8A40C26E7919D005244CF /* UserRulesRedirectAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8A40A26E7919D005244CF /* UserRulesRedirectAction.swift */; };
 		7EC8A40D26E7919D005244CF /* UserRulesRedirectAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8A40A26E7919D005244CF /* UserRulesRedirectAction.swift */; };
 		7EC8A40E26E7919D005244CF /* UserRulesRedirectAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8A40A26E7919D005244CF /* UserRulesRedirectAction.swift */; };
@@ -974,6 +972,8 @@
 		7EE3427324D84A7600A8C0E6 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE3427124D84A7600A8C0E6 /* AboutViewController.swift */; };
 		7EE567B823D0A28B00CC10DB /* DomainsConverterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE567B723D0A28B00CC10DB /* DomainsConverterTest.swift */; };
 		7EE715CB2316765800C03DE9 /* String+UtilsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE715CA2316765800C03DE9 /* String+UtilsTest.swift */; };
+		7EE740E526F35B0C0033B673 /* UserRulesRedirectAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8A40A26E7919D005244CF /* UserRulesRedirectAction.swift */; };
+		7EE740E626F35BA00033B673 /* ChartType+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2444013826EE2F9500FB7CE5 /* ChartType+Utils.swift */; };
 		7EE8AC1626C595350070D477 /* ThemeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8AC1526C595350070D477 /* ThemeMode.swift */; };
 		7EE8AC1726C595350070D477 /* ThemeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8AC1526C595350070D477 /* ThemeMode.swift */; };
 		7EE8AC1826C595350070D477 /* ThemeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE8AC1526C595350070D477 /* ThemeMode.swift */; };
@@ -8821,6 +8821,7 @@
 				655A02281C6B7686000F00D7 /* ACIOUtils.m in Sources */,
 				7E21CBA825F918FA00A5A735 /* NetworkManager.swift in Sources */,
 				7E822C0F2435EDD30015B4D0 /* BasicRulesParser.swift in Sources */,
+				7EE740E526F35B0C0033B673 /* UserRulesRedirectAction.swift in Sources */,
 				7EC67F91254842B800FEEEE2 /* NativeProvidersService.swift in Sources */,
 				24D922802604B41C002F368B /* AppDelegate+CheckPeriod.swift in Sources */,
 				655A02341C6B7686000F00D7 /* ACLFileLogger.m in Sources */,
@@ -8851,6 +8852,7 @@
 				7E40799B231E7E4E007EFB26 /* URL+Utils.swift in Sources */,
 				655A02161C6B7686000F00D7 /* ACFFileUtils.m in Sources */,
 				D08187CA2264C89400E961B5 /* LoginService.swift in Sources */,
+				7EE740E626F35BA00033B673 /* ChartType+Utils.swift in Sources */,
 				7E15B65D234358C20048E63F /* DnsFiltersController.swift in Sources */,
 				D0F7F0C82268946700592B1E /* KeychainService.swift in Sources */,
 				24557DF725EFD4AE00BC5B26 /* AppDelegate.swift in Sources */,
