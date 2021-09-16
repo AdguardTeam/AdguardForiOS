@@ -3,6 +3,30 @@
         "message": "AdGuard"
     },
     "extension_description": {
-        "message": "AdGuard Safari Web Extension"
+        "message": "AdGuard Safari 網路延伸功能"
+    },
+    "popup_action_safari_protection_title": {
+        "message": "Safari 防護"
+    },
+    "popup_action_safari_protection_description": {
+        "message": "用於此網站"
+    },
+    "popup_action_block_element": {
+        "message": "封鎖於此頁面上之元件"
+    },
+    "popup_action_delete_user_rules": {
+        "message": "刪除關於此網站之所有的使用者規則"
+    },
+    "popup_action_current_site_desc_basic_only": {
+        "message": "僅基本的防護"
+    },
+    "popup_modal_btn_free": {
+        "message": "升級"
+    },
+    "modal_protection_off_title": {
+        "message": "啟用防護"
+    },
+    "modal_protection_off_settings": {
+        "message": "開啟<b>設定<\/b>"
     }
 }

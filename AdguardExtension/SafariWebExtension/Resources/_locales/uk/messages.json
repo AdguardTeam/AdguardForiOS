@@ -4,5 +4,20 @@
     },
     "extension_description": {
         "message": "Розширення AdGuard для Safari"
+    },
+    "popup_action_safari_protection_title": {
+        "message": "Захист Safari"
+    },
+    "popup_action_safari_protection_description": {
+        "message": "для цього сайту"
+    },
+    "popup_action_current_site_desc_basic_only": {
+        "message": "лише базовий захист"
+    },
+    "popup_modal_btn_free": {
+        "message": "Покращити"
+    },
+    "modal_protection_off_settings": {
+        "message": "Відкрийте <b>Параметри<\/b>"
     }
 }

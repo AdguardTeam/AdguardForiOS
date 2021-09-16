@@ -2,64 +2,79 @@
     "extension_name": {
         "message": "AdGuard"
     },
+    "extension_description": {
+        "message": "AdGuard Safari Web Eklentisi"
+    },
     "popup_action_safari_protection_title": {
         "message": "Safari koruması"
     },
     "popup_action_safari_protection_description": {
         "message": "bu site için"
     },
+    "popup_action_safari_protection_description_disabled": {
+        "message": "devre dışı"
+    },
     "popup_action_current_site_status_desc_enabled": {
-        "message": "koruma etkin"
+        "message": "koruma AÇIK"
+    },
+    "popup_action_current_site_status_desc_disabled": {
+        "message": "koruma devre dışı"
     },
     "popup_action_block_element": {
-        "message": "Sayfadaki öğeyi engelle"
+        "message": "Bu sayfadaki öğeleri engelle"
     },
     "popup_action_delete_user_rules": {
         "message": "Bu site için tüm kullanıcı kurallarını sil"
     },
     "popup_action_current_site_desc_starting": {
-        "message": "lütfen bekleyin, koruma başlatılıyor..."
+        "message": "koruma etkinleştiriliyor"
+    },
+    "popup_action_current_site_desc_allowlisted": {
+        "message": "izin listesine eklendi"
     },
     "popup_action_current_site_desc_basic_only": {
         "message": "sadece temel koruma"
     },
     "popup_modal_all_sites_allowed_title": {
-        "message": "İyileştirilmiş performans"
+        "message": "Üst düzey koruma"
     },
     "popup_modal_all_sites_allowed_desc": {
-        "message": "Aferin! Artık AdGuard, en zorlu zorluklarla uğraşarak daha da fazla reklamı engelleyecek!"
+        "message": "Aferin! AdGuard, neredeyse tüm reklamları engelleyecek ve en zor meydan okumalarla yüzleşecektir."
+    },
+    "popup_modal_all_sites_allowed_button": {
+        "message": "Sihir başlasın"
     },
     "popup_modal_not_all_sites_allowed_title": {
-        "message": "Neredeyse hazır"
+        "message": "Seçici koruma"
     },
     "popup_modal_not_all_sites_allowed_desc": {
-        "message": "AdGuard'ın yalnızca bu sitede çalışmasına izin verdiniz; bu, bir dahaki sefere izin vermediğiniz sürece diğer sitelerdeki reklamları engellemeyeceği anlamına gelir."
+        "message": "AdGuard'ı yalnızca bu internet sitesi için etkinleştirdiniz. AdGuard'a daha fazla izin vermediğiniz sürece diğer internet sitelerinde reklam görmeye devam edeceksiniz."
     },
     "popup_modal_not_all_sites_allowed_button": {
-        "message": "Tamam"
+        "message": "Devam et"
+    },
+    "popup_modal_title_free": {
+        "message": "Olabileceğin her şey ol"
+    },
+    "popup_modal_desc_free": {
+        "message": "AdGuard Premium'da bulunan gelişmiş korumadan hâlâ yoksunsunuz. Safari'de YouTube reklamları gibi daha da fazla reklamı engelleyelim mi?"
     },
     "popup_modal_btn_free": {
         "message": "Yükselt"
-    },
-    "popup_fullscreen_support_desc": {
-        "message": "Bir sorun varsa bize haber verin, düzeltelim."
     },
     "popup_support_button_text": {
         "message": "Bir sorun bildir"
     },
     "modal_protection_off_title": {
-        "message": "Korumayı kullanmak için:"
+        "message": "Korumayı etkinleştir"
     },
     "modal_protection_off_settings": {
         "message": "<b>Ayarları<\/b> açın"
     },
     "modal_protection_off_extensions": {
-        "message": "<b>Safari'ye<\/b> dokunun ve <b>Eklentiler<\/b> menü öğesini seçin"
+        "message": "<b>Safari'ye<\/b> dokunun, aşağı kaydırın ve <b>İçerik Engelleyiciler'e<\/b> dokunun"
     },
     "modal_protection_off_switch": {
-        "message": "Tüm AdGuard'ları <b>açın<\/b>"
-    },
-    "extension_description": {
-        "message": "AdGuard Safari Web Extension"
+        "message": "Tüm AdGuard eklentilerini <b>etkinleştirin<\/b>."
     }
 }

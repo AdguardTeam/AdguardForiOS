@@ -11,6 +11,7 @@
 #import "ADBTableRow.h"
 #import "ADBTable.h"
 #import "ABECRequest.h"
+#import "ADLocales.h"
 #import "APCommonSharedResources.h"
 #import "ADLocales.h"
 

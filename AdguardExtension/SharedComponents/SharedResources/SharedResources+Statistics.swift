@@ -16,15 +16,15 @@
    along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
+import enum DnsAdGuardSDK.StatisticsPeriod
 
 extension AESharedResourcesProtocol {
     
-    dynamic var activityStatisticsType: ChartDateType {
+    dynamic var activityStatisticsType: StatisticsPeriod {
         get {
             let periodType = sharedDefaults().object(forKey: ActivityStatisticsPeriodType) as? Int
-            let rawValue = periodType ?? ChartDateType.day.rawValue
-            return ChartDateType(rawValue: rawValue) ?? .day
+            let rawValue = periodType ?? StatisticsPeriod.day.rawValue
+            return StatisticsPeriod(rawValue: rawValue) ?? .day
         }
         set {
             let rawValue = newValue.rawValue
@@ -32,11 +32,11 @@ extension AESharedResourcesProtocol {
         }
     }
     
-    dynamic var chartDateType: ChartDateType {
+    dynamic var chartDateType: StatisticsPeriod {
         get {
             let periodType = sharedDefaults().object(forKey: StatisticsPeriodType) as? Int
-            let rawValue = periodType ?? ChartDateType.day.rawValue
-            return ChartDateType(rawValue: rawValue) ?? .day
+            let rawValue = periodType ?? StatisticsPeriod.day.rawValue
+            return StatisticsPeriod(rawValue: rawValue) ?? .day
         }
         set {
             let rawValue = newValue.rawValue

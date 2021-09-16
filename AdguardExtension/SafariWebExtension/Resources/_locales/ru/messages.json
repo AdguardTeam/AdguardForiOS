@@ -3,6 +3,66 @@
         "message": "AdGuard"
     },
     "extension_description": {
-        "message": "AdGuard Safari Web Extension"
+        "message": "Расширение AdGuard для Safari"
+    },
+    "popup_action_safari_protection_title": {
+        "message": "Защита Safari"
+    },
+    "popup_action_safari_protection_description": {
+        "message": "для этого сайта"
+    },
+    "popup_action_safari_protection_description_disabled": {
+        "message": "выключено"
+    },
+    "popup_action_current_site_status_desc_enabled": {
+        "message": "защита включена"
+    },
+    "popup_action_current_site_status_desc_disabled": {
+        "message": "защита выключена"
+    },
+    "popup_action_block_element": {
+        "message": "Заблокировать элементы на этой странице"
+    },
+    "popup_action_delete_user_rules": {
+        "message": "Удалить все пользовательские правила для этого сайта"
+    },
+    "popup_action_current_site_desc_starting": {
+        "message": "включаем защиту"
+    },
+    "popup_action_current_site_desc_allowlisted": {
+        "message": "сайт в белом списке"
+    },
+    "popup_action_current_site_desc_basic_only": {
+        "message": "только базовая защита"
+    },
+    "popup_modal_all_sites_allowed_title": {
+        "message": "Максимальная защита"
+    },
+    "popup_modal_all_sites_allowed_desc": {
+        "message": "Отличная работа! Теперь AdGuard будет блокировать ещё больше рекламы и справляться с самыми сложными задачами."
+    },
+    "popup_modal_all_sites_allowed_button": {
+        "message": "Поехали!"
+    },
+    "popup_modal_not_all_sites_allowed_title": {
+        "message": "Выборочная защита"
+    },
+    "popup_modal_not_all_sites_allowed_desc": {
+        "message": "AdGuard включен только на этом сайте. Вы будете видеть рекламу на других сайтах, пока не дадите AdGuard разрешение блокировать её везде."
+    },
+    "popup_modal_btn_free": {
+        "message": "Улучшить"
+    },
+    "popup_support_button_text": {
+        "message": "Сообщить о проблеме"
+    },
+    "modal_protection_off_title": {
+        "message": "Включить защиту"
+    },
+    "modal_protection_off_settings": {
+        "message": "Откройте <b>Настройки<\/b>"
+    },
+    "modal_protection_off_switch": {
+        "message": "<b>Включите<\/b> все расширения AdGuard"
     }
 }
