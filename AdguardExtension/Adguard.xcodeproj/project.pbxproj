@@ -458,6 +458,10 @@
 		7E25221C240821BF00743648 /* safari_protection_step2.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E252219240821BF00743648 /* safari_protection_step2.json */; };
 		7E279F5B243C9C09006AF0D6 /* DnsStatisticsServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E279F5A243C9C08006AF0D6 /* DnsStatisticsServiceTest.swift */; };
 		7E2D05B223CE22F8006A141C /* DomainsConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9F3E0F23CE08E300A7BDA2 /* DomainsConverter.swift */; };
+		7E2D93F126F3A1DD00534DC5 /* DnsFiltersTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2D93F026F3A1DD00534DC5 /* DnsFiltersTableController.swift */; };
+		7E2D93F226F3A1DD00534DC5 /* DnsFiltersTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2D93F026F3A1DD00534DC5 /* DnsFiltersTableController.swift */; };
+		7E2D93F526F3A2ED00534DC5 /* DnsFiltersTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2D93F426F3A2ED00534DC5 /* DnsFiltersTableModel.swift */; };
+		7E2D93F626F3A2ED00534DC5 /* DnsFiltersTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2D93F426F3A2ED00534DC5 /* DnsFiltersTableModel.swift */; };
 		7E2D978C24499E58000366B3 /* public_suffix_list.dat in Resources */ = {isa = PBXBuildFile; fileRef = 7E2D978B24499E58000366B3 /* public_suffix_list.dat */; };
 		7E31217224DC028300642879 /* BottomAlertTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E31217124DC028300642879 /* BottomAlertTransition.swift */; };
 		7E31217324DC028300642879 /* BottomAlertTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E31217124DC028300642879 /* BottomAlertTransition.swift */; };
@@ -3096,6 +3100,8 @@
 		7E252218240821BE00743648 /* safari_protection_step1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = safari_protection_step1.json; sourceTree = "<group>"; };
 		7E252219240821BF00743648 /* safari_protection_step2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = safari_protection_step2.json; sourceTree = "<group>"; };
 		7E279F5A243C9C08006AF0D6 /* DnsStatisticsServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsStatisticsServiceTest.swift; sourceTree = "<group>"; };
+		7E2D93F026F3A1DD00534DC5 /* DnsFiltersTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsFiltersTableController.swift; sourceTree = "<group>"; };
+		7E2D93F426F3A2ED00534DC5 /* DnsFiltersTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsFiltersTableModel.swift; sourceTree = "<group>"; };
 		7E2D978B24499E58000366B3 /* public_suffix_list.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = public_suffix_list.dat; sourceTree = "<group>"; };
 		7E31217124DC028300642879 /* BottomAlertTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAlertTransition.swift; sourceTree = "<group>"; };
 		7E324447255A84C50058BCDF /* NativeProvidersServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeProvidersServiceMock.swift; sourceTree = "<group>"; };
@@ -5874,6 +5880,15 @@
 			path = AdGuardVpnIntegration;
 			sourceTree = "<group>";
 		};
+		7E2D93F326F3A1E800534DC5 /* DnsProtection */ = {
+			isa = PBXGroup;
+			children = (
+				7E2D93F026F3A1DD00534DC5 /* DnsFiltersTableController.swift */,
+				7E2D93F426F3A2ED00534DC5 /* DnsFiltersTableModel.swift */,
+			);
+			path = DnsProtection;
+			sourceTree = "<group>";
+		};
 		7E31217024DC024E00642879 /* BottomAlertController */ = {
 			isa = PBXGroup;
 			children = (
@@ -6658,6 +6673,7 @@
 				7E31217024DC024E00642879 /* BottomAlertController */,
 				7E0B223D25DBB3D200AF88BB /* UpsellViewController */,
 				7EA7DCC326C675BF0032AD5C /* SafariProtection */,
+				7E2D93F326F3A1E800534DC5 /* DnsProtection */,
 				7E70265E26DD25C100F8FC25 /* UserRules */,
 			);
 			path = ViewControllers;
@@ -8313,6 +8329,7 @@
 				D0D7E6202444570F001801A5 /* ActivityTableViewCell.swift in Sources */,
 				D0B545BB2435D655002F0AEC /* RequestDetailsCell.swift in Sources */,
 				D0B545D02435D692002F0AEC /* RuleInfo.swift in Sources */,
+				7E2D93F226F3A1DD00534DC5 /* DnsFiltersTableController.swift in Sources */,
 				7E92754326C67CA6007B2C80 /* SafariGroupTableController.swift in Sources */,
 				7E4EFB0E26DFE6DE00116762 /* UserRulesModelsProvider.swift in Sources */,
 				D031A124219EFC99002C17D9 /* DDContextFilterLogFormatter.m in Sources */,
@@ -8538,6 +8555,7 @@
 				D031A16A219EFC99002C17D9 /* DDAbstractDatabaseLogger.m in Sources */,
 				D0B545E32435D69B002F0AEC /* BottomShadowView.swift in Sources */,
 				7EAA0D7B26CA8785007208E5 /* SafariFilterCell.swift in Sources */,
+				7E2D93F626F3A2ED00534DC5 /* DnsFiltersTableModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8750,6 +8768,7 @@
 				7EF6AF87233D11B000D29B36 /* RequestsBlockingController.swift in Sources */,
 				7EF5C51226C261AF001851D6 /* SharedResources+Statistics.swift in Sources */,
 				655A02911C6B7686000F00D7 /* ACNNetworking.m in Sources */,
+				7E2D93F126F3A1DD00534DC5 /* DnsFiltersTableController.swift in Sources */,
 				247CB57B2600B8030047974C /* OpenUserFilterControllerParser.swift in Sources */,
 				D02B550122EED4AF0039BC48 /* Date+Utils.swift in Sources */,
 				7E50493322F07FFA0095181C /* FilterTagsButtons.swift in Sources */,
@@ -8776,6 +8795,7 @@
 				D0984F9A2608866900703DB2 /* MigrationService+AntibannerMigration.swift in Sources */,
 				7EBDFE8D26CFA44300CCE8CC /* SwitchTableViewCell.swift in Sources */,
 				D0702B3F2188859D0051669A /* FileShareHelper.swift in Sources */,
+				7E2D93F526F3A2ED00534DC5 /* DnsFiltersTableModel.swift in Sources */,
 				D0953E7B231FF83900AE80DB /* Confirm2FaController.swift in Sources */,
 				655A02281C6B7686000F00D7 /* ACIOUtils.m in Sources */,
 				7E21CBA825F918FA00A5A735 /* NetworkManager.swift in Sources */,
