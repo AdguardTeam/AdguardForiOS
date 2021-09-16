@@ -106,7 +106,14 @@ class OnboardingController: UIViewController {
     private func setupLabels() {
         settingsLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_first_step_text"), fontSize: settingsLabel.font!.pointSize, color: theme.grayTextColor)
         
-        safariLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_second_step_text"), fontSize: safariLabel.font!.pointSize, color: theme.grayTextColor)
+        var secondStep = ""
+        if #available(iOS 15.0, *) {
+            secondStep = String.localizedString("onboarding_second_step_text_iOS15")
+        } else {
+            secondStep =  String.localizedString("onboarding_second_step_text")
+        }
+        
+        safariLabel.attributedText = NSMutableAttributedString.fromHtml(secondStep, fontSize: safariLabel.font!.pointSize, color: theme.grayTextColor)
         
         switchLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_third_step_text"), fontSize: switchLabel.font!.pointSize, color: theme.grayTextColor)
     }
