@@ -32,7 +32,7 @@ public protocol SafariProtectionBackgroundFetchProtocol {
      3. Reload Safari Content Blockers with newely converted rules
      With this approach, the chances of a successful background fetch increases
      */
-    func updateSafariProtectionInBackground(_ onStateExecutionFinished: @escaping (_ result: UIBackgroundFetchResult) -> Void)
+    func updateSafariProtectionInBackground(_ onStateExecutionFinished: @escaping (_ result: UIBackgroundFetchResult, _ fetchState: BackgroundFetchState) -> Void)
     
     /**
      This method is neede to finish the update process that did start in the background
@@ -51,22 +51,6 @@ public protocol SafariProtectionBackgroundFetchProtocol {
 /* Extension is used to update filters while main app is in the background */
 extension SafariProtection {
     
-    fileprivate enum BackgroundFetchState: Int, CustomDebugStringConvertible {
-        case loadAndSaveFilters
-        case convertFilters
-        case reloadContentBlockers
-        case updateFinished
-        
-        var debugDescription: String {
-            switch self {
-            case .loadAndSaveFilters: return "loadAndSaveFilters"
-            case .convertFilters: return "convertFilters"
-            case .reloadContentBlockers: return "reloadContentBlockers"
-            case .updateFinished: return "updateFinished"
-            }
-        }
-    }
-    
     private var currentBackgroundFetchState: BackgroundFetchState {
         get {
             return userDefaults.currentBackgroundFetchState
@@ -78,17 +62,17 @@ extension SafariProtection {
     
     // MARK: - Public methods
     
-    public func updateSafariProtectionInBackground(_ onStateExecutionFinished: @escaping (_ result: UIBackgroundFetchResult) -> Void) {
-        Logger.logError("(SafariProtection+BackgroundFetch) - updateSafariProtectionInBackground; Start background fetch, current state = \(currentBackgroundFetchState)")
+    public func updateSafariProtectionInBackground(_ onStateExecutionFinished: @escaping (_ result: UIBackgroundFetchResult, _ fetchState: BackgroundFetchState) -> Void) {
+        Logger.logInfo("(SafariProtection+BackgroundFetch) - updateSafariProtectionInBackground; Start background fetch, current state = \(currentBackgroundFetchState)")
         
         switch currentBackgroundFetchState {
         case .loadAndSaveFilters, .updateFinished:
             updateDnsAndSafariFilters(onStateExecutionFinished: onStateExecutionFinished)
         case .convertFilters:
             let (result, _) = convertFilters(inBackground: true)
-            onStateExecutionFinished(result)
+            onStateExecutionFinished(result, .convertFilters)
         case .reloadContentBlockers:
-            reloadContentBlockers(inBackground: true) { result, _ in onStateExecutionFinished(result) }
+            reloadContentBlockers(inBackground: true) { result, _ in onStateExecutionFinished(result, .reloadContentBlockers) }
         }
     }
     
@@ -178,7 +162,7 @@ extension SafariProtection {
         }
     }
     
-    private func updateDnsAndSafariFilters(onStateExecutionFinished: @escaping (_ result: UIBackgroundFetchResult) -> Void) {
+    private func updateDnsAndSafariFilters(onStateExecutionFinished: @escaping (_ result: UIBackgroundFetchResult, _ fetchState: BackgroundFetchState) -> Void) {
         DispatchQueue(label: "SafariAdGuardSDK.SafariProtection.backgroundFiltersUpdateQueue").async { [weak self] in
             var safariFiltersUpdateResult: UIBackgroundFetchResult!
             var dnsFiltersUpdateError: Error?
@@ -198,7 +182,7 @@ extension SafariProtection {
             group.wait()
             
             let isSuccessfullyUpdated = dnsFiltersUpdateError == nil && safariFiltersUpdateResult == .newData
-            onStateExecutionFinished(isSuccessfullyUpdated ? .newData : .noData)
+            onStateExecutionFinished(isSuccessfullyUpdated ? .newData : .noData, .loadAndSaveFilters)
         }
     }
 }
@@ -209,10 +193,10 @@ fileprivate extension UserDefaultsStorageProtocol {
     
     private var currentBackgroundFetchStateKey: String { "AdGuardSDK.currentBackgroundFetchStateKey" }
     
-    var currentBackgroundFetchState: SafariProtection.BackgroundFetchState {
+    var currentBackgroundFetchState: BackgroundFetchState {
         get {
             if let intObject = storage.value(forKey: currentBackgroundFetchStateKey) as? Int {
-                return SafariProtection.BackgroundFetchState(rawValue: intObject) ?? .loadAndSaveFilters
+                return BackgroundFetchState(rawValue: intObject) ?? .loadAndSaveFilters
             }
             return .loadAndSaveFilters
         }

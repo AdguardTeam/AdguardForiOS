@@ -21,6 +21,9 @@
 		2465359826E74B7200234EA5 /* DnsProtection+UserRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2465359626E74B7200234EA5 /* DnsProtection+UserRules.swift */; };
 		24D0AF3126F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D0AF3026F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift */; };
 		24D0AF3226F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D0AF3026F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift */; };
+		24D1A89426F33164004CF2ED /* BackgroundFetchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D1A89326F33164004CF2ED /* BackgroundFetchState.swift */; };
+		24D1A89526F33164004CF2ED /* BackgroundFetchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D1A89326F33164004CF2ED /* BackgroundFetchState.swift */; };
+		24D1A89626F33164004CF2ED /* BackgroundFetchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D1A89326F33164004CF2ED /* BackgroundFetchState.swift */; };
 		7E15DFD126E603040020247E /* CompaniesStatisticsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15DFD026E603040020247E /* CompaniesStatisticsTest.swift */; };
 		7E15DFD326E604920020247E /* ActivityStatisticsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15DFD226E604920020247E /* ActivityStatisticsMock.swift */; };
 		7E15DFD526E606E60020247E /* DnsTrackersProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15DFD426E606E60020247E /* DnsTrackersProviderMock.swift */; };
@@ -449,6 +452,7 @@
 		2456E6F626F24A2A001B1760 /* DnsUserRulesManagersProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsUserRulesManagersProviderMock.swift; sourceTree = "<group>"; };
 		2465359626E74B7200234EA5 /* DnsProtection+UserRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DnsProtection+UserRules.swift"; sourceTree = "<group>"; };
 		24D0AF3026F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsBackgroundFetchUpdateProtocol.swift; sourceTree = "<group>"; };
+		24D1A89326F33164004CF2ED /* BackgroundFetchState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundFetchState.swift; sourceTree = "<group>"; };
 		7E15DFD026E603040020247E /* CompaniesStatisticsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesStatisticsTest.swift; sourceTree = "<group>"; };
 		7E15DFD226E604920020247E /* ActivityStatisticsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStatisticsMock.swift; sourceTree = "<group>"; };
 		7E15DFD426E606E60020247E /* DnsTrackersProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsTrackersProviderMock.swift; sourceTree = "<group>"; };
@@ -1158,6 +1162,7 @@
 				24D0AF3026F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift */,
 				7E6E810326C2A05200925F96 /* SafariConfiguration.swift */,
 				7ED0B19C26C4269600B0CE7B /* Constants+Files.swift */,
+				24D1A89326F33164004CF2ED /* BackgroundFetchState.swift */,
 			);
 			path = SafariProtection;
 			sourceTree = "<group>";
@@ -1685,6 +1690,7 @@
 				241D084726F22DE40008FD17 /* DnsFIltersUpdateResult.swift in Sources */,
 				7E6E802826C299DE00925F96 /* ProductionDatabaseManagerTest.swift in Sources */,
 				7E6E803C26C299DE00925F96 /* NetworkUtilsMock.swift in Sources */,
+				24D1A89626F33164004CF2ED /* BackgroundFetchState.swift in Sources */,
 				7E6E813D26C2A05300925F96 /* MetaStorage+Filters.swift in Sources */,
 				7E6E81C926C2A05B00925F96 /* DnsUserRulesStorage.swift in Sources */,
 				7E6E811D26C2A05300925F96 /* RequestsFactory+Safari.swift in Sources */,
@@ -1856,6 +1862,7 @@
 				7E6E813626C2A05300925F96 /* DefaultDatabaseManager.swift in Sources */,
 				7E6E812026C2A05300925F96 /* FiltersLocalizationsRequest.swift in Sources */,
 				7E6E816026C2A05300925F96 /* SafariProtection.swift in Sources */,
+				24D1A89426F33164004CF2ED /* BackgroundFetchState.swift in Sources */,
 				7E6E815626C2A05300925F96 /* ContentBlockerService.swift in Sources */,
 				7E6E814626C2A05300925F96 /* ExtendedFiltersMeta.swift in Sources */,
 				7E6E811E26C2A05300925F96 /* SafariProtectionApiMethods.swift in Sources */,
@@ -2009,6 +2016,7 @@
 				7EAD351126C2B84B001AFB3A /* ExtendedFiltersMetaLocalizations.swift in Sources */,
 				7EAD34F926C2B4B7001AFB3A /* SafariConfiguration.swift in Sources */,
 				7EC8A3F426E77DE0005244CF /* Logger.swift in Sources */,
+				24D1A89526F33164004CF2ED /* BackgroundFetchState.swift in Sources */,
 				7EAD350B26C2B7F4001AFB3A /* MetaStorage+Filters.swift in Sources */,
 				7EC8A3EB26E77DD6005244CF /* DateInterval+Utils.swift in Sources */,
 				D049EE9B26B2F31A00B8088B /* Dictionary+Utils.swift in Sources */,

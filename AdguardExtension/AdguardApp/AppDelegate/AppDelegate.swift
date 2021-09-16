@@ -165,7 +165,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         addPurchaseStatusObserver()
-        safariProtection.updateSafariProtectionInBackground(completionHandler)
+        safariProtection.updateSafariProtectionInBackground { [weak self] fetchResult, fetchState in
+            self?.resources.backgroundFetchState = fetchState.rawValue
+            completionHandler(fetchResult)
+        }
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
