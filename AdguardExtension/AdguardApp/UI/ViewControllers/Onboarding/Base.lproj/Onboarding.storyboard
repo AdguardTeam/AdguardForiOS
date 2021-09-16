@@ -496,7 +496,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Watch manual" image="icon_play">
+                                <state key="normal" title="Video guide" image="icon_play">
                                     <color key="titleColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 </state>
                                 <variation key="heightClass=regular-widthClass=regular">
@@ -742,7 +742,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
                                 <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <state key="normal" title="WATCH MANUAL"/>
+                                <state key="normal" title="VIDEO GUIDE"/>
                                 <connections>
                                     <action selector="videoAction:" destination="eQY-Hl-hIc" eventType="touchUpInside" id="Hst-jI-E2G"/>
                                 </connections>
