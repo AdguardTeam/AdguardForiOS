@@ -536,6 +536,36 @@ extension AppDelegate {
         return false
     }
     
+    func presentPurchaseLicenseController() -> Bool {
+        guard let tabBar = getMainTabController() else {
+            DDLogError("Tab bar is nil")
+            return false
+        }
+        
+        guard let navController = getNavigationController(for: .mainTab) else {
+            DDLogError("Navigation controller is nil")
+            return false
+        }
+        
+        let mainPageStoryboard = UIStoryboard(name: "MainPage", bundle: Bundle.main)
+        guard let mainPageController = mainPageStoryboard.instantiateViewController(withIdentifier: "MainPageController") as? MainPageController else {
+            DDLogError("MainPage.storyboard doesnt't have MainPageController")
+            return false
+        }
+        
+        let licenseStoryboard = UIStoryboard(name: "License", bundle: Bundle.main)
+        guard let getProController = licenseStoryboard.instantiateViewController(withIdentifier: "GetProController") as? GetProController else {
+            DDLogError("License.storyboard doesnt't have GetProController")
+            return false
+        }
+        
+        navController.viewControllers = [mainPageController, getProController]
+        tabBar.selectedViewController = navController
+        window?.rootViewController = tabBar
+        
+        return true
+    }
+    
     /* Returns top view controller for controller  */
     static func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
         if let navigationController = controller as? UINavigationController {

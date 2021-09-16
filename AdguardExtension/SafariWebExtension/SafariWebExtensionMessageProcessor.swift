@@ -57,7 +57,6 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
         return [
             Message.appearanceTheme: "system",
             Message.contentBlockersEnabled: allContentBlockersEnabled,
-            // TODO: - Implement when Converter is released
             Message.hasUserRules: hasUserRules,
             Message.premiumApp: isPro,
             Message.protectionEnabled: isSafariProtectionEnabled(for: domain, resources: resources),
@@ -65,7 +64,9 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
             Message.removeFromAllowlistLink: UserRulesRedirectAction.removeFromAllowlist(domain: "").scheme,
             Message.addToAllowlistLink: UserRulesRedirectAction.addToAllowlist(domain: "").scheme,
             Message.addToBlocklistLink: UserRulesRedirectAction.addToBlocklist(domain: "").scheme,
-            Message.removeAllBlocklistRulesLink: UserRulesRedirectAction.removeAllBlocklistRules(domain: "").scheme
+            Message.removeAllBlocklistRulesLink: UserRulesRedirectAction.removeAllBlocklistRules(domain: "").scheme,
+            Message.upgradeAppLink: "\(Bundle.main.appScheme)://upgradeApp",
+            Message.reportProblemLink: constructReportLink()
         ]
     }
 
@@ -94,5 +95,16 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
         let rules = safariUserRulesStorage.rules.map { $0.ruleText }
         let isDomainInRules = rules.contains(domain)
         return isAllowlistInverted ? isDomainInRules : !isDomainInRules
+    }
+    
+    private func constructReportLink() -> String {
+        let url = "https://reports.adguard.com/new_issue.html"
+        let params: [String: String] = [
+            "product_type": "iOS",
+            "product_version": ADProductInfo().version() ?? "0",
+            "browser": "Safari"
+        ]
+        let paramsString = params.constructLink(url: url)
+        return paramsString ?? ""
     }
 }

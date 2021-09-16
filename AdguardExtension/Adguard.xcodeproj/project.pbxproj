@@ -681,6 +681,10 @@
 		7E8576772435F57F0055F63D /* DomainsParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8576752435F57F0055F63D /* DomainsParserService.swift */; };
 		7E8576782435F57F0055F63D /* DomainsParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8576752435F57F0055F63D /* DomainsParserService.swift */; };
 		7E8576792435F57F0055F63D /* DomainsParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8576752435F57F0055F63D /* DomainsParserService.swift */; };
+		7E85A82326F37FBD0059BB33 /* OpenLicenseControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85A82226F37FBD0059BB33 /* OpenLicenseControllerParser.swift */; };
+		7E85A82426F37FBD0059BB33 /* OpenLicenseControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85A82226F37FBD0059BB33 /* OpenLicenseControllerParser.swift */; };
+		7E85A82526F3928E0059BB33 /* ADProductInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8F1BB9824C00F53F3B /* ADProductInfo.m */; };
+		7E85A82626F3928F0059BB33 /* ADProductInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8F1BB9824C00F53F3B /* ADProductInfo.m */; };
 		7E86A9B726CBB591000B395F /* UITraitEnvironment+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E86A9B626CBB591000B395F /* UITraitEnvironment+Utils.swift */; };
 		7E86A9B826CBB591000B395F /* UITraitEnvironment+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E86A9B626CBB591000B395F /* UITraitEnvironment+Utils.swift */; };
 		7E86A9BA26CBB84E000B395F /* SafariTagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E86A9B926CBB84E000B395F /* SafariTagButton.swift */; };
@@ -3353,6 +3357,7 @@
 		7E83CA3D234351AC004E2EB8 /* DnsFiltersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsFiltersModel.swift; sourceTree = "<group>"; };
 		7E844C3623AA7270009EA1AE /* GetProPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProPageController.swift; sourceTree = "<group>"; };
 		7E8576752435F57F0055F63D /* DomainsParserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainsParserService.swift; sourceTree = "<group>"; };
+		7E85A82226F37FBD0059BB33 /* OpenLicenseControllerParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLicenseControllerParser.swift; sourceTree = "<group>"; };
 		7E86A9B626CBB591000B395F /* UITraitEnvironment+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITraitEnvironment+Utils.swift"; sourceTree = "<group>"; };
 		7E86A9B926CBB84E000B395F /* SafariTagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariTagButton.swift; sourceTree = "<group>"; };
 		7E88A63F23E8361A00A10F3A /* SystemProtectionEnablerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemProtectionEnablerController.swift; sourceTree = "<group>"; };
@@ -4390,6 +4395,7 @@
 				247CB6392600CBE40047974C /* OpenTunnelModeControllerParser.swift */,
 				247CB64D2600CD480047974C /* SocialNetworkAuthParametersParser.swift */,
 				24F67F5726E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift */,
+				7E85A82226F37FBD0059BB33 /* OpenLicenseControllerParser.swift */,
 			);
 			path = Parsers;
 			sourceTree = "<group>";
@@ -8575,6 +8581,7 @@
 				7E9082092549D5430048C4B0 /* HowToSetupController.swift in Sources */,
 				D0D0CAFE268B058700AD427E /* ABECRequest.m in Sources */,
 				659886991CF74DE9003ECD1C /* Reachability.m in Sources */,
+				7E85A82426F37FBD0059BB33 /* OpenLicenseControllerParser.swift in Sources */,
 				D0B545F12435D6AB002F0AEC /* SimpleConfiguration.swift in Sources */,
 				7EAD352826C2C657001AFB3A /* NotificationCenter+Utils.swift in Sources */,
 				D031A16A219EFC99002C17D9 /* DDAbstractDatabaseLogger.m in Sources */,
@@ -8927,6 +8934,7 @@
 				D018672C203C86050003110A /* MGSwipeTableCell.m in Sources */,
 				D031A163219EFC99002C17D9 /* DDAbstractDatabaseLogger.m in Sources */,
 				7EF5C51326C261AF001851D6 /* SharedResources.swift in Sources */,
+				7E85A82326F37FBD0059BB33 /* OpenLicenseControllerParser.swift in Sources */,
 				D09CB60523ABBA7D008C9FF7 /* OnboardingController.swift in Sources */,
 				655A02761C6B7686000F00D7 /* NSDate+Utils.m in Sources */,
 				7E6D962623E17347006202C2 /* RequestDetailsCell.swift in Sources */,
@@ -9297,6 +9305,7 @@
 			files = (
 				7EC8A40626E78D77005244CF /* Bundle+Utils.swift in Sources */,
 				7EBDD98926D6A2E9009531FA /* DDLog.m in Sources */,
+				7E85A82626F3928F0059BB33 /* ADProductInfo.m in Sources */,
 				7EBDD98226D6A1F2009531FA /* Message.swift in Sources */,
 				7EBDD98E26D6A318009531FA /* ACLFileLocker.m in Sources */,
 				7EBDD99326D6A351009531FA /* ACLFileLogger.m in Sources */,
@@ -9324,6 +9333,7 @@
 			files = (
 				7EC8A40526E78D76005244CF /* Bundle+Utils.swift in Sources */,
 				7EBDD98A26D6A2EA009531FA /* DDLog.m in Sources */,
+				7E85A82526F3928E0059BB33 /* ADProductInfo.m in Sources */,
 				7EBDD98326D6A1F2009531FA /* Message.swift in Sources */,
 				7EBDD98D26D6A318009531FA /* ACLFileLocker.m in Sources */,
 				7EBDD99426D6A352009531FA /* ACLFileLogger.m in Sources */,
