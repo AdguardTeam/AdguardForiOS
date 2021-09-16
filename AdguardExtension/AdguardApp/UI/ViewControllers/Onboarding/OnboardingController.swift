@@ -106,7 +106,7 @@ class OnboardingController: UIViewController {
     private func setupLabels() {
         settingsLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_first_step_text"), fontSize: settingsLabel.font!.pointSize, color: theme.grayTextColor)
         
-        var secondStep = ""
+        let secondStep: String
         if #available(iOS 15.0, *) {
             secondStep = String.localizedString("onboarding_second_step_text_iOS15")
         } else {
