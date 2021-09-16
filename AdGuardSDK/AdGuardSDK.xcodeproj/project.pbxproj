@@ -18,6 +18,7 @@
 		7E4A132426E4F40D00728BDE /* CompaniesStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4A132226E4F40D00728BDE /* CompaniesStatistics.swift */; };
 		7E4A132726E4FD1400728BDE /* CompaniesStatisticsRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4A132626E4FD1400728BDE /* CompaniesStatisticsRecord.swift */; };
 		7E4A132826E4FD1400728BDE /* CompaniesStatisticsRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4A132626E4FD1400728BDE /* CompaniesStatisticsRecord.swift */; };
+		7E4F0BA226F3619E00EB5B23 /* UserRulesManagerProtocol+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4F0BA126F3619E00EB5B23 /* UserRulesManagerProtocol+Utils.swift */; };
 		7E5A6ED926E8B6CC00B7EF6A /* FiltersConverterResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5A6ED826E8B6CC00B7EF6A /* FiltersConverterResult.swift */; };
 		7E5A6EDA26E8B6CC00B7EF6A /* FiltersConverterResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5A6ED826E8B6CC00B7EF6A /* FiltersConverterResult.swift */; };
 		7E667A6626E26B890013B1D5 /* ContentBlockerConverter in Frameworks */ = {isa = PBXBuildFile; productRef = 7E667A6526E26B890013B1D5 /* ContentBlockerConverter */; };
@@ -434,6 +435,7 @@
 		7E15DFD426E606E60020247E /* DnsTrackersProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsTrackersProviderMock.swift; sourceTree = "<group>"; };
 		7E4A132226E4F40D00728BDE /* CompaniesStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesStatistics.swift; sourceTree = "<group>"; };
 		7E4A132626E4FD1400728BDE /* CompaniesStatisticsRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesStatisticsRecord.swift; sourceTree = "<group>"; };
+		7E4F0BA126F3619E00EB5B23 /* UserRulesManagerProtocol+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserRulesManagerProtocol+Utils.swift"; sourceTree = "<group>"; };
 		7E5A6ED826E8B6CC00B7EF6A /* FiltersConverterResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersConverterResult.swift; sourceTree = "<group>"; };
 		7E667A6726E29D970013B1D5 /* default.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = default.db.zip; sourceTree = "<group>"; };
 		7E667A6926E389320013B1D5 /* DnsTrackersProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsTrackersProvider.swift; sourceTree = "<group>"; };
@@ -1144,6 +1146,7 @@
 				7E6E810826C2A05200925F96 /* AllowlistRuleConverter.swift */,
 				7E6E810526C2A05200925F96 /* SafariUserRulesStorage.swift */,
 				7E6E810926C2A05200925F96 /* SafariUserRulesManagersProvider.swift */,
+				7E4F0BA126F3619E00EB5B23 /* UserRulesManagerProtocol+Utils.swift */,
 			);
 			path = UserRules;
 			sourceTree = "<group>";
@@ -1847,6 +1850,7 @@
 				7E6E813C26C2A05300925F96 /* MetaStorage+Filters.swift in Sources */,
 				7E6E812226C2A05300925F96 /* FiltersMetadataRequest.swift in Sources */,
 				7E6E814826C2A05300925F96 /* SafariGroup+GroupType.swift in Sources */,
+				7E4F0BA226F3619E00EB5B23 /* UserRulesManagerProtocol+Utils.swift in Sources */,
 				7E6E815026C2A05300925F96 /* ContentBlockersInfoStorage.swift in Sources */,
 				7EC8A3C726E771D4005244CF /* Import.swift in Sources */,
 				7E6E811826C2A05300925F96 /* FiltersMetadataParser.swift in Sources */,

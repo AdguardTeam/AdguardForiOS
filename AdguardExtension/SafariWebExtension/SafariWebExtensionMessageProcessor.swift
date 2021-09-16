@@ -40,22 +40,27 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
     // MARK: - Private methods
     
     // TODO: - We need to pass domain here
-    private func getInitData(_ url: String?) -> [String: Any] {
+    private func getInitData(_ domain: String?) -> [String: Any] {
+        let resources = AESharedResources()
         let cbService = ContentBlockerService(appBundleId: Bundle.main.hostAppBundleId)
         
         // Safari Content Blockers states
         let allContentBlockersEnabled = cbService.allContentBlockersStates.values.reduce(true, { $0 && $1 })
         
         // User Pro status
-        let isPro = Bundle.main.isPro ? true : AESharedResources().isProPurchased
+        let isPro = Bundle.main.isPro ? true : resources.isProPurchased
+        
+        // Check if there are blocklist rules associated with passed domain
+        let blocklistManager = SafariUserRulesManagersProvider(userDefaults: resources.sharedDefaults()).blocklistRulesManager
+        let hasUserRules = domain == nil ? false : blocklistManager.hasUserRules(for: domain!)
         
         return [
             Message.appearanceTheme: "system",
             Message.contentBlockersEnabled: allContentBlockersEnabled,
             // TODO: - Implement when Converter is released
-            Message.hasUserRules: false,
+            Message.hasUserRules: hasUserRules,
             Message.premiumApp: isPro,
-            Message.protectionEnabled: isSafariProtectionEnabled(for: url),
+            Message.protectionEnabled: isSafariProtectionEnabled(for: domain, resources: resources),
 
             Message.removeFromAllowlistLink: UserRulesRedirectAction.removeFromAllowlist(domain: "").scheme,
             Message.addToAllowlistLink: UserRulesRedirectAction.addToAllowlist(domain: "").scheme,
@@ -78,10 +83,9 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
         }
     }
     
-    private func isSafariProtectionEnabled(for domain: String?) -> Bool {
+    private func isSafariProtectionEnabled(for domain: String?, resources: AESharedResources) -> Bool {
         guard let domain = domain else { return false }
-        
-        let resources = AESharedResources()
+    
         let isAllowlistInverted = resources.invertedWhitelist
         let safariUserRulesStorage = SafariUserRulesStorage(
             userDefaults: resources.sharedDefaults(),

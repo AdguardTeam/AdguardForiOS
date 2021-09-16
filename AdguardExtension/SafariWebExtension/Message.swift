@@ -47,6 +47,8 @@ struct Message {
     static let addToAllowlistLink = "add_to_allowlist_link"
     static let addToBlocklistLink = "add_to_blocklist_link"
     static let removeAllBlocklistRulesLink = "remove_all_blocklist_rules_link"
+    static let upgradeAppLink = "upgrade_app_link"
+    static let reportProblemLink = "report_a_problem_link"
 
     // Advanced rules
     static let advancedRulesKey = "advanced_rules"
