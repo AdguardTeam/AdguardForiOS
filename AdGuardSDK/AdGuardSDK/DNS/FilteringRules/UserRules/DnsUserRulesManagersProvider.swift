@@ -26,12 +26,12 @@ protocol DnsUserRulesManagersProviderProtocol: ResetableSyncProtocol {
 final class DnsUserRulesManagersProvider: DnsUserRulesManagersProviderProtocol {
     private(set) lazy var blocklistRulesManager: UserRulesManagerProtocol = {
         let storage = DnsUserRulesStorage(type: .blocklist, fileStorage: fileStorage)
-        return UserRulesManager(type: .dnsBlocklist, storage: storage)
+        return UserRulesManager(type: .dnsBlocklist, storage: storage, converter: OpaqueRuleConverter())
     }()
     
     private(set) lazy var allowlistRulesManager: UserRulesManagerProtocol = {
         let storage = DnsUserRulesStorage(type: .allowlist, fileStorage: fileStorage)
-        return UserRulesManager(type: .dnsAllowlist, storage: storage)
+        return UserRulesManager(type: .dnsAllowlist, storage: storage, converter: OpaqueRuleConverter())
     }()
     
     private let fileStorage: FilterFilesStorageProtocol

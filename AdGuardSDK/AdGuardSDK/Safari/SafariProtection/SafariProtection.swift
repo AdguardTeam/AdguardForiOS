@@ -17,8 +17,6 @@
  */
 
 import Foundation
-@_implementationOnly import class ContentBlockerConverter.QuickAllowlistClipper
-@_implementationOnly import protocol ContentBlockerConverter.QuickAllowlistClipperProtocol
 
 public typealias SafariProtectionProtocol = SafariProtectionFiltersProtocol
                                             & SafariProtectionUserRulesProtocol
@@ -48,7 +46,6 @@ public final class SafariProtection: SafariProtectionProtocol {
     let cbStorage: ContentBlockersInfoStorageProtocol
     let cbService: ContentBlockerServiceProtocol
     let safariManagers: SafariUserRulesManagersProviderProtocol
-    let userRulesClipper: QuickAllowlistClipperProtocol
     private let defaultConfiguration: SafariConfigurationProtocol
     
     // MARK: - Initialization
@@ -84,7 +81,6 @@ public final class SafariProtection: SafariProtectionProtocol {
         self.cbStorage = services.cbStorage
         self.cbService = services.cbService
         self.safariManagers = services.safariManagers
-        self.userRulesClipper = QuickAllowlistClipper()
     }
     
     // Initializer for tests
@@ -95,8 +91,7 @@ public final class SafariProtection: SafariProtectionProtocol {
          converter: FiltersConverterServiceProtocol,
          cbStorage: ContentBlockersInfoStorageProtocol,
          cbService: ContentBlockerServiceProtocol,
-         safariManagers: SafariUserRulesManagersProviderProtocol,
-         userRulesClipper: QuickAllowlistClipperProtocol
+         safariManagers: SafariUserRulesManagersProviderProtocol
     )
     {
         self.configuration = configuration
@@ -107,7 +102,6 @@ public final class SafariProtection: SafariProtectionProtocol {
         self.cbStorage = cbStorage
         self.cbService = cbService
         self.safariManagers = safariManagers
-        self.userRulesClipper = userRulesClipper
     }
     
     // MARK: - Public method

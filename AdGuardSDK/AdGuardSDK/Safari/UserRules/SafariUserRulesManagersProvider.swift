@@ -27,17 +27,17 @@ protocol SafariUserRulesManagersProviderProtocol: ResetableSyncProtocol {
 final class SafariUserRulesManagersProvider: SafariUserRulesManagersProviderProtocol {
     private(set) lazy var blocklistRulesManager: UserRulesManagerProtocol = {
         let storage = SafariUserRulesStorage(userDefaults: userDefaultsStorage, rulesType: .blocklist)
-        return UserRulesManager(type: .blocklist, storage: storage)
+        return UserRulesManager(type: .blocklist, storage: storage, converter: OpaqueRuleConverter())
     }()
     
     private(set) lazy var allowlistRulesManager: UserRulesManagerProtocol = {
         let storage = SafariUserRulesStorage(userDefaults: userDefaultsStorage, rulesType: .allowlist)
-        return UserRulesManager(type: .allowlist, storage: storage)
+        return UserRulesManager(type: .allowlist, storage: storage, converter: AllowlistRuleConverter())
     }()
     
     private(set) lazy var invertedAllowlistRulesManager: UserRulesManagerProtocol = {
         let storage = SafariUserRulesStorage(userDefaults: userDefaultsStorage, rulesType: .invertedAllowlist)
-        return UserRulesManager(type: .invertedAllowlist, storage: storage)
+        return UserRulesManager(type: .invertedAllowlist, storage: storage, converter: InvertedAllowlistRuleConverter())
     }()
     
     private let userDefaultsStorage: UserDefaultsStorageProtocol

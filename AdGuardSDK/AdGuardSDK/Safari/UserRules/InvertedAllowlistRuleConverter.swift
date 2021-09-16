@@ -17,6 +17,7 @@
  */
 
 import Foundation
+@_implementationOnly import class ContentBlockerConverter.WebExtensionHelpers
 
 public struct InvertedAllowlistRuleConverter: UserRuleConverterProtocol {
     
@@ -29,13 +30,8 @@ public struct InvertedAllowlistRuleConverter: UserRuleConverterProtocol {
      If passed domain already contains '~' it won't be repeated
      */
     public func convertDomainToRule(_ domain: String) -> String {
-        var rule = domain
-        
-        if !rule.hasPrefix(Self.invertedAllowlistPrefix) {
-            rule = Self.invertedAllowlistPrefix + rule
-        }
-        
-        return rule
+        let helper = WebExtensionHelpers()
+        return helper.convertDomainToInvertedAllowlistRule(domain)
     }
     
     /*
@@ -43,13 +39,8 @@ public struct InvertedAllowlistRuleConverter: UserRuleConverterProtocol {
      If passed rule doesn't contain '~' prefix the function will return rule without modifying it
      */
     public func convertRuleToDomain(_ rule: String) -> String {
-        var domain = rule
-        
-        if domain.hasPrefix(Self.invertedAllowlistPrefix) {
-            domain.removeFirst(Self.invertedAllowlistPrefix.count)
-        }
-        
-        return domain
+        let helper = WebExtensionHelpers()
+        return helper.convertInvertedAllowlistRuleToDomain(rule)
     }
     
     /*
@@ -59,12 +50,7 @@ public struct InvertedAllowlistRuleConverter: UserRuleConverterProtocol {
      If rules are empty the result rule will look like this: @@||*$document
      */
     public func convertRulesToString(_ rules: [UserRule]) -> String {
-        if rules.isEmpty {
-            return "@@||*$document"
-        } else {
-            let rulePrefix = "@@||*$document,domain="
-            let ruleFromRules = rules.map { convertDomainToRule($0.ruleText) }.joined(separator: "|")
-            return rulePrefix + ruleFromRules
-        }
+        return rules.map { convertDomainToRule($0.ruleText) }
+                    .joined(separator: "\n")
     }
 }

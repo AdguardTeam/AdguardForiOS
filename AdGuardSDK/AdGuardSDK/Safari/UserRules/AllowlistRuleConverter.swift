@@ -17,11 +17,9 @@
  */
 
 import Foundation
+import class ContentBlockerConverter.WebExtensionHelpers
 
 public struct AllowlistRuleConverter: UserRuleConverterProtocol {
-    
-    private static let allowlistPrefix = "@@||"
-    private static let allowlistSuffix = "^$document"
     
     public init() {}
     
@@ -30,17 +28,8 @@ public struct AllowlistRuleConverter: UserRuleConverterProtocol {
      If passed domain already contains '@@||' or '^$document' they won't be repeated
      */
     public func convertDomainToRule(_ domain: String) -> String {
-        var rule = domain
-        
-        if !rule.hasPrefix(Self.allowlistPrefix) {
-            rule = Self.allowlistPrefix + rule
-        }
-        
-        if !rule.hasSuffix(Self.allowlistSuffix) {
-            rule += Self.allowlistSuffix
-        }
-        
-        return rule
+        let helper = WebExtensionHelpers()
+        return helper.convertDomainToAllowlistRule(domain)
     }
     
     /*
@@ -49,17 +38,8 @@ public struct AllowlistRuleConverter: UserRuleConverterProtocol {
      the function will return rule without modifying it
      */
     public func convertRuleToDomain(_ ruleText: String) -> String {
-        var domain = ruleText
-        
-        if domain.hasPrefix(Self.allowlistPrefix) {
-            domain.removeFirst(Self.allowlistPrefix.count)
-        }
-        
-        if domain.hasSuffix(Self.allowlistSuffix) {
-            domain.removeLast(Self.allowlistSuffix.count)
-        }
-        
-        return domain
+        let helper = WebExtensionHelpers()
+        return helper.convertAllowlistRuleToDomain(ruleText)
     }
     
     /*
