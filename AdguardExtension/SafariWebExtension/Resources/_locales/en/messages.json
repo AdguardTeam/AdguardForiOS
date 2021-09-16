@@ -12,13 +12,13 @@
         "message": "for this website"
     },
     "popup_action_safari_protection_description_disabled": {
-        "message": "disabled"
+        "message": "protection is Off"
     },
     "popup_action_current_site_status_desc_enabled": {
-        "message": "protection is ON"
+        "message": "protection is On"
     },
     "popup_action_current_site_status_desc_disabled": {
-        "message": "protection disabled"
+        "message": "protection is Off"
     },
     "popup_action_block_element": {
         "message": "Block elements on this page"
@@ -27,7 +27,7 @@
         "message": "Delete all user rules for this website"
     },
     "popup_action_current_site_desc_starting": {
-        "message": "enabling protection"
+        "message": "turning on protection..."
     },
     "popup_action_current_site_desc_allowlisted": {
         "message": "added to allowlist"
@@ -42,19 +42,19 @@
         "message": "Good job! AdGuard will block nearly any ad and confront the most difficult challenges."
     },
     "popup_modal_all_sites_allowed_button": {
-        "message": "Let the magic begin"
+        "message": "Continue"
     },
     "popup_modal_not_all_sites_allowed_title": {
         "message": "Selective protection"
     },
     "popup_modal_not_all_sites_allowed_desc": {
-        "message": "You enabled AdGuard only for this website. You’ll keep seeing ads on other websites unless you give AdGuard more permissions."
+        "message": "You enabled AdGuard only for this website. Ads may appear on other websites unless you give AdGuard more permissions."
     },
     "popup_modal_not_all_sites_allowed_button": {
         "message": "Continue"
     },
     "popup_modal_title_free": {
-        "message": "Be all you can be"
+        "message": "Reach your full potential"
     },
     "popup_modal_desc_free": {
         "message": "You still lack the advanced protection available in AdGuard Premium. Let's block even more ads such as YouTube ads in Safari?"
@@ -63,19 +63,19 @@
         "message": "Upgrade"
     },
     "popup_fullscreen_support_title": {
-        "message": "Uh-oh, do you want to restart from beginning?"
+        "message": "Uh-oh, do you need help?"
     },
     "popup_fullscreen_support_desc": {
         "message": "Is something wrong? We may have a fix."
     },
     "popup_protection_disabled_support_desc": {
-        "message": "Uh-oh, protection for this website is OFF. Is something wrong? We may have a fix."
+        "message": "Uh-oh, protection for this website is Off. Is something wrong? We may have a fix."
     },
     "popup_support_button_text": {
         "message": "Report an issue"
     },
     "modal_protection_off_title": {
-        "message": "Enable protection"
+        "message": "Enable AdGuard"
     },
     "modal_protection_off_settings": {
         "message": "Open <b>Settings<\/b>"
