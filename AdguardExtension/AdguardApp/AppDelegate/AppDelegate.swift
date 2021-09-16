@@ -125,6 +125,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppDelegate.setPeriodForCheckingFilters()
         subscribeToNotifications()
         
+        safariProtection.finishBackgroundUpdate { error in
+            if let error = error {
+                DDLogError("(AppDelegate) - didFinishLaunchingWithOptions; Finished background update with error: \(error)")
+                return
+            }
+            DDLogInfo("(AppDelegate) - didFinishLaunchingWithOptions; Finish background update successfullty")
+        }
+        
         return true
     }
     
@@ -165,10 +173,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         addPurchaseStatusObserver()
-        safariProtection.updateSafariProtectionInBackground { [weak self] fetchResult, fetchState in
-            self?.resources.backgroundFetchState = fetchState
-            completionHandler(fetchResult)
-        }
+        safariProtection.updateSafariProtectionInBackground(completionHandler)
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {

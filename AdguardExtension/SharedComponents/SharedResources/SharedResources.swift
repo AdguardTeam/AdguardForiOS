@@ -370,16 +370,6 @@ extension AESharedResourcesProtocol {
             sharedDefaults().set(newValue, forKey: setAppUsedKey)
         }
     }
-    
-    dynamic var backgroundFetchState: BackgroundFetchState {
-        get {
-            let intState = sharedDefaults().integer(forKey: BackgroundFetchFiltersUpdateState)
-            return BackgroundFetchState(rawValue: intState) ?? .updateFinished
-        }
-        set {
-            sharedDefaults().set(newValue.rawValue, forKey: BackgroundFetchFiltersUpdateState)
-        }
-    }
 }
 
 fileprivate extension AESharedResourcesProtocol {
