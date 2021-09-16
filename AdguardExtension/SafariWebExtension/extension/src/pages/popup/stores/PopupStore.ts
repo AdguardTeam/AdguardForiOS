@@ -9,6 +9,7 @@ import {
     makeObservable,
 } from 'mobx';
 
+import { getCroppedDomain } from '@adguard/tsurlfilter';
 import { getDomain } from '../../common/utils/url';
 import { translator } from '../../common/translators/translator';
 import { messenger } from '../../common/messenger';
@@ -86,9 +87,10 @@ class PopupStore {
             currentWindow: true,
         });
 
-        const popupData = await messenger.getPopupData(currentTab.url);
-
-        const currentSiteFaviconDataUrl = await this.getFaviconDataUrl(currentTab.url);
+        const [popupData, currentSiteFaviconDataUrl] = await Promise.all([
+            messenger.getPopupData(currentTab.url),
+            this.getFaviconDataUrl(currentTab.url),
+        ]);
 
         runInAction(() => {
             this.popupDataLoadingState = PopupDataLoadingState.Done;
@@ -123,19 +125,23 @@ class PopupStore {
             return null;
         }
 
-        // TODO change to our proxy service when will be ready
-        const duckDuckGoFavIconServiceUrl = 'https://icons.duckduckgo.com/ip3/';
-        const favIconUrl = `${duckDuckGoFavIconServiceUrl}${domain}.ico`;
+        domain = getCroppedDomain(domain);
 
-        const TIMEOUT_MS = 500;
+        const ADGUARD_FAVICON_SERVICE_URL = 'https://icons.adguard.org/icon?domain=';
+        const favIconUrl = `${ADGUARD_FAVICON_SERVICE_URL}${domain}`;
+
+        const TIMEOUT_MS = 1000;
         const timeoutPromise = new Promise((resolve) => {
-            setTimeout(() => { resolve(null); }, TIMEOUT_MS);
+            setTimeout(() => {
+                resolve(null);
+            }, TIMEOUT_MS);
         });
 
         // eslint-disable-next-line @typescript-eslint/no-shadow
         const toDataUrlPromise = async (favIconUrl: string): Promise<string | null> => {
             try {
-                return await toDataUrl(favIconUrl);
+                const result = await toDataUrl(favIconUrl);
+                return result;
             } catch (e) {
                 log.error('Unable to get favicon data url', e);
                 return null;
