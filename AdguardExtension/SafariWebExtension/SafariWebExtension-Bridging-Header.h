@@ -5,5 +5,6 @@
 #import "DDLogMacros.h"
 #import "ACLLogger.h"
 #import "NSString+Utils.h"
+#import "ADProductInfo.h"
 
 #endif /* SafariWebExtension_Bridging_Header_h */

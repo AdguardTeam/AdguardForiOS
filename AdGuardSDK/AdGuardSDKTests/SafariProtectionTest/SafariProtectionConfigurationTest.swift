@@ -347,7 +347,6 @@ class SafariProtectionConfigurationTest: XCTestCase {
                             appId: "appId",
                             cid: "cid")
         protection.updateConfig(with: newConfig)
-        protection.configuration
         
         XCTAssertEqual(protection.configuration.iosVersion, newConfig.iosVersion)
         XCTAssertEqual(protection.configuration.currentLanguage, newConfig.currentLanguage)

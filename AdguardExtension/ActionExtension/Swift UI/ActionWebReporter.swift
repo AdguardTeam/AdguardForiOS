@@ -22,6 +22,7 @@ protocol ActionWebReporterProtocol {
     func composeWebReportUrl(_ site: URL?) -> URL
 }
 
+// TODO: - Create universal WEB reporter for Main app and Safari WEB extension (iOS 15)
 struct ActionWebReporter: ActionWebReporterProtocol {
     
     private let reportUrl = "https://reports.adguard.com/new_issue.html"
@@ -40,7 +41,6 @@ struct ActionWebReporter: ActionWebReporterProtocol {
          dnsFilters: DnsFiltersServiceProtocol,
          safariProtection: SafariProtectionProtocol
     ) {
-        
         self.productInfo = productInfo
         self.complexProtection = complexProtection
         self.dnsProviders = dnsProviders
@@ -48,7 +48,6 @@ struct ActionWebReporter: ActionWebReporterProtocol {
         self.dnsFilters = dnsFilters
         self.safariProtection = safariProtection
     }
-    
     
     func composeWebReportUrl(_ site: URL?) -> URL {
         var params: [String: String] = [:]
