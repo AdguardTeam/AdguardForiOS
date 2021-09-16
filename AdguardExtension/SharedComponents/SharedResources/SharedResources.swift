@@ -16,7 +16,7 @@
    along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
+import SafariAdGuardSDK
 
 extension AESharedResourcesProtocol {
     
@@ -371,12 +371,13 @@ extension AESharedResourcesProtocol {
         }
     }
     
-    dynamic var backgroundFetchState: Int {
+    dynamic var backgroundFetchState: BackgroundFetchState {
         get {
-            sharedDefaults().integer(forKey: BackgroundFetchState)
+            let intState = sharedDefaults().integer(forKey: BackgroundFetchFiltersUpdateState)
+            return BackgroundFetchState(rawValue: intState) ?? .updateFinished
         }
         set {
-            sharedDefaults().set(newValue, forKey: BackgroundFetchState)
+            sharedDefaults().set(newValue.rawValue, forKey: BackgroundFetchFiltersUpdateState)
         }
     }
 }

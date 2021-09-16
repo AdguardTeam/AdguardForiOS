@@ -166,7 +166,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         addPurchaseStatusObserver()
         safariProtection.updateSafariProtectionInBackground { [weak self] fetchResult, fetchState in
-            self?.resources.backgroundFetchState = fetchState.rawValue
+            self?.resources.backgroundFetchState = fetchState
             completionHandler(fetchResult)
         }
     }

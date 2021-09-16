@@ -67,7 +67,7 @@ extension SafariProtection {
         
         switch currentBackgroundFetchState {
         case .loadAndSaveFilters, .updateFinished:
-            updateDnsAndSafariFilters(onStateExecutionFinished: onStateExecutionFinished)
+            updateDnsAndSafariFilters(fetchState: currentBackgroundFetchState, onStateExecutionFinished: onStateExecutionFinished)
         case .convertFilters:
             let (result, _) = convertFilters(inBackground: true)
             onStateExecutionFinished(result, .convertFilters)
@@ -162,7 +162,7 @@ extension SafariProtection {
         }
     }
     
-    private func updateDnsAndSafariFilters(onStateExecutionFinished: @escaping (_ result: UIBackgroundFetchResult, _ fetchState: BackgroundFetchState) -> Void) {
+    private func updateDnsAndSafariFilters(fetchState: BackgroundFetchState, onStateExecutionFinished: @escaping (_ result: UIBackgroundFetchResult, _ fetchState: BackgroundFetchState) -> Void) {
         DispatchQueue(label: "SafariAdGuardSDK.SafariProtection.backgroundFiltersUpdateQueue").async { [weak self] in
             var safariFiltersUpdateResult: UIBackgroundFetchResult!
             var dnsFiltersUpdateError: Error?
@@ -182,7 +182,7 @@ extension SafariProtection {
             group.wait()
             
             let isSuccessfullyUpdated = dnsFiltersUpdateError == nil && safariFiltersUpdateResult == .newData
-            onStateExecutionFinished(isSuccessfullyUpdated ? .newData : .noData, .loadAndSaveFilters)
+            onStateExecutionFinished(isSuccessfullyUpdated ? .newData : .noData, fetchState)
         }
     }
 }

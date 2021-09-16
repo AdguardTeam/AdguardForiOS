@@ -339,7 +339,7 @@ extern NSString* _Nonnull LastDnsFiltersUpdateTime;
 /**
     State of background fetch after executing
  */
-extern NSString* _Nonnull BackgroundFetchState;
+extern NSString* _Nonnull BackgroundFetchFiltersUpdateState;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
