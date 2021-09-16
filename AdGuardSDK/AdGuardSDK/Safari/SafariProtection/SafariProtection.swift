@@ -17,6 +17,8 @@
  */
 
 import Foundation
+@_implementationOnly import class ContentBlockerConverter.WebExtensionHelpers
+@_implementationOnly import protocol ContentBlockerConverter.WebExtensionHelpersProtocol
 
 public typealias SafariProtectionProtocol = SafariProtectionFiltersProtocol
                                             & SafariProtectionUserRulesProtocol
@@ -46,6 +48,7 @@ public final class SafariProtection: SafariProtectionProtocol {
     let cbStorage: ContentBlockersInfoStorageProtocol
     let cbService: ContentBlockerServiceProtocol
     let safariManagers: SafariUserRulesManagersProviderProtocol
+    let converterHelper: WebExtensionHelpersProtocol
     private let defaultConfiguration: SafariConfigurationProtocol
     
     // MARK: - Initialization
@@ -81,6 +84,7 @@ public final class SafariProtection: SafariProtectionProtocol {
         self.cbStorage = services.cbStorage
         self.cbService = services.cbService
         self.safariManagers = services.safariManagers
+        self.converterHelper = WebExtensionHelpers()
     }
     
     // Initializer for tests
@@ -91,7 +95,8 @@ public final class SafariProtection: SafariProtectionProtocol {
          converter: FiltersConverterServiceProtocol,
          cbStorage: ContentBlockersInfoStorageProtocol,
          cbService: ContentBlockerServiceProtocol,
-         safariManagers: SafariUserRulesManagersProviderProtocol
+         safariManagers: SafariUserRulesManagersProviderProtocol,
+         converterHelper: WebExtensionHelpersProtocol = WebExtensionHelpers()
     )
     {
         self.configuration = configuration
@@ -102,6 +107,7 @@ public final class SafariProtection: SafariProtectionProtocol {
         self.cbStorage = cbStorage
         self.cbService = cbService
         self.safariManagers = safariManagers
+        self.converterHelper = converterHelper
     }
     
     // MARK: - Public method

@@ -17,7 +17,7 @@
  */
 
 import Foundation
-import class ContentBlockerConverter.WebExtensionHelpers
+@_implementationOnly import class ContentBlockerConverter.WebExtensionHelpers
 
 public struct AllowlistRuleConverter: UserRuleConverterProtocol {
     

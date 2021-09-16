@@ -367,6 +367,7 @@
 		7EE740E026F33FCA0033B673 /* InvertedAllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E810726C2A05200925F96 /* InvertedAllowlistRuleConverter.swift */; };
 		7EE740E126F33FCA0033B673 /* AllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E810826C2A05200925F96 /* AllowlistRuleConverter.swift */; };
 		7EE740E226F33FCA0033B673 /* AllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E810826C2A05200925F96 /* AllowlistRuleConverter.swift */; };
+		7EE740E426F352210033B673 /* WebExtensionHelpersMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE740E326F352210033B673 /* WebExtensionHelpersMock.swift */; };
 		7EE9F63226D8E1DB00646D62 /* FilterFilesStorageProtocol+PredefinedFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE9F63126D8E1DB00646D62 /* FilterFilesStorageProtocol+PredefinedFilters.swift */; };
 		7EE9F63426D8E1DB00646D62 /* FilterFilesStorageProtocol+PredefinedFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE9F63126D8E1DB00646D62 /* FilterFilesStorageProtocol+PredefinedFilters.swift */; };
 		7EE9F63B26D9198B00646D62 /* FiltersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E80F526C2A05200925F96 /* FiltersService.swift */; };
@@ -633,6 +634,7 @@
 		7EC8A3E226E77D5E005244CF /* NotificationCenter+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+Utils.swift"; sourceTree = "<group>"; };
 		7EC8A3E326E77D5E005244CF /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		7ED0B19C26C4269600B0CE7B /* Constants+Files.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Constants+Files.swift"; sourceTree = "<group>"; };
+		7EE740E326F352210033B673 /* WebExtensionHelpersMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebExtensionHelpersMock.swift; sourceTree = "<group>"; };
 		7EE9F63126D8E1DB00646D62 /* FilterFilesStorageProtocol+PredefinedFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilterFilesStorageProtocol+PredefinedFilters.swift"; sourceTree = "<group>"; };
 		D049EB9326B17C0A00B8088B /* CharacterSet+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CharacterSet+Utils.swift"; path = "../Libs/Utils/CharacterSet+Utils.swift"; sourceTree = "<group>"; };
 		D049EB9426B17C0A00B8088B /* Dictionary+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Dictionary+Utils.swift"; path = "../Libs/Utils/Dictionary+Utils.swift"; sourceTree = "<group>"; };
@@ -808,6 +810,7 @@
 				7E6E7FF526C299DB00925F96 /* UserDefaultsStorageMock.swift */,
 				7E15DFD226E604920020247E /* ActivityStatisticsMock.swift */,
 				7E15DFD426E606E60020247E /* DnsTrackersProviderMock.swift */,
+				7EE740E326F352210033B673 /* WebExtensionHelpersMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -1668,6 +1671,7 @@
 				7E6E81BB26C2A05B00925F96 /* ActivityStatistics+Compress.swift in Sources */,
 				7E6E811F26C2A05300925F96 /* SafariProtectionApiMethods.swift in Sources */,
 				7E6E81CB26C2A05B00925F96 /* DnsProtection.swift in Sources */,
+				7EE740E426F352210033B673 /* WebExtensionHelpersMock.swift in Sources */,
 				7E6E802B26C299DE00925F96 /* LangsMetaStorageTest.swift in Sources */,
 				7E6E805C26C299DF00925F96 /* CustomFilterMetaParserTest.swift in Sources */,
 				7E6E81E826C2A05B00925F96 /* DnsProvider.swift in Sources */,
