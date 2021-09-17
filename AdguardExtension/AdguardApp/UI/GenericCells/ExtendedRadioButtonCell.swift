@@ -82,11 +82,6 @@ final class ExtendedRadioButtonCell: UITableViewCell, Reusable {
         addConstraints()
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        addConstraints()
-    }
-    
     //MARK: - Private methods
     
     private func addConstraints() {
@@ -96,20 +91,22 @@ final class ExtendedRadioButtonCell: UITableViewCell, Reusable {
         
         let widthHeightConst: CGFloat = isIpadTrait ? 32.0 : 24.0
         
-        titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 5.0).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -5.0).isActive = true
-        
-        descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 3.0).isActive = true
-        descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
-        descriptionLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: -24.0).isActive = true
-        descriptionLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -3.0).isActive = true
-        
-        radioButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
-        radioButton.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 24.0).isActive = true
-        radioButton.trailingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: -20.0).isActive = true
-        
-        radioButton.widthAnchor.constraint(equalToConstant: widthHeightConst).isActive = true
-        radioButton.heightAnchor.constraint(equalToConstant: widthHeightConst).isActive = true
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 5.0),
+            titleLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -5.0),
+            
+            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 3.0),
+            descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            descriptionLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: -24.0),
+            descriptionLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -3.0),
+            
+            radioButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
+            radioButton.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 24.0),
+            radioButton.trailingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: -20.0),
+            
+            radioButton.widthAnchor.constraint(equalToConstant: widthHeightConst),
+            radioButton.heightAnchor.constraint(equalToConstant: widthHeightConst)
+        ])
     }
 }
 

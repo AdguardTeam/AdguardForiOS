@@ -54,13 +54,6 @@ extension SafariProtection {
     fileprivate struct FiltersUpdateResult {
         let backgroundFetchResult: UIBackgroundFetchResult
         let dnsFiltersUpdateError: Error?
-        let commonError: Error?
-        
-        init(backgroundFetchResult: UIBackgroundFetchResult, dnsFiltersUpdateError: Error? = nil, commonError: Error? = nil) {
-            self.backgroundFetchResult = backgroundFetchResult
-            self.dnsFiltersUpdateError = dnsFiltersUpdateError
-            self.commonError = commonError
-        }
     }
     
     fileprivate enum BackgroundFetchState: Int, CustomDebugStringConvertible {
@@ -78,7 +71,7 @@ extension SafariProtection {
             }
         }
     }
-
+    
     
     private var currentBackgroundFetchState: BackgroundFetchState {
         get {
@@ -99,7 +92,7 @@ extension SafariProtection {
             complexFiltersUpdateInBackground(onStateExecutionFinished)
         case .convertFilters:
             let (result, _) = convertFilters(inBackground: true)
-            onStateExecutionFinished(result)
+            completionQueue.async { onStateExecutionFinished(result) }
         case .reloadContentBlockers:
             reloadContentBlockers(inBackground: true) { result, _ in onStateExecutionFinished(result) }
         }
@@ -112,7 +105,6 @@ extension SafariProtection {
                 onUpdateFinished(CommonError.missingSelf)
                 return
             }
-            
             Logger.logInfo("(SafariProtection+BackgroundFetch) - finishBackgroundUpdate start; Current state = \(self.currentBackgroundFetchState)")
             
             switch self.currentBackgroundFetchState {
@@ -127,16 +119,16 @@ extension SafariProtection {
             case .convertFilters:
                 let (_, error) = self.convertFilters(inBackground: false)
                 if let error = error {
-                    onUpdateFinished(error)
+                    self.completionQueue.async { onUpdateFinished(error) }
                     return
                 }
                 fallthrough
             case .reloadContentBlockers:
                 self.reloadContentBlockers(inBackground: false) { _, error in
-                    onUpdateFinished(error)
+                    self.completionQueue.async { onUpdateFinished(error) }
                 }
             case .updateFinished:
-                onUpdateFinished(nil)
+                self.completionQueue.async { onUpdateFinished(nil) }
             }
         }
     }
@@ -153,10 +145,10 @@ extension SafariProtection {
                 case .success(let updateResult):
                     self?.currentBackgroundFetchState = .convertFilters
                     Logger.logInfo("(SafariProtection+BackgroundFetch) - updateFiltersInBackground.updateAllMeta; background=\(background); Filters were successfully loaded and saved; Update result: \(updateResult)")
-                    onFiltersUpdated(.newData, nil)
+                    self?.completionQueue.async { onFiltersUpdated(.newData, nil) }
                 case .error(let error):
                     Logger.logError("(SafariProtection+BackgroundFetch) - updateFiltersInBackground.updateAllMeta; background=\(background); Error: \(error)")
-                    onFiltersUpdated(.noData, error)
+                    self?.completionQueue.async { onFiltersUpdated(.noData, error) }
                 }
             }
         }
@@ -189,77 +181,53 @@ extension SafariProtection {
             self?.cbService.updateContentBlockers { [weak self] error in
                 if let error = error {
                     Logger.logError("(SafariProtection+BackgroundFetch) - reloadContentBlockersInBackground; background=\(background); Error reloading CBs: \(error)")
-                    onCbReloaded(.noData, error)
+                    self?.completionQueue.async { onCbReloaded(.noData, error) }
                 } else {
                     Logger.logInfo("(SafariProtection+BackgroundFetch) - reloadContentBlockersInBackground; background=\(background); Successfully reloaded all CBs")
                     self?.currentBackgroundFetchState = .updateFinished
-                    onCbReloaded(.newData, nil)
+                    self?.completionQueue.async { onCbReloaded(.newData, nil) }
                 }
             }
         }
     }
     
     private func complexFiltersUpdateInBackground(_ onStateExecutionFinished: @escaping (_ result: UIBackgroundFetchResult) -> Void) {
-        DispatchQueue(label: "SafariAdGuardSDK.SafariProtection.complexFiltersUpdateInBackground").async { [weak self] in
-            guard let self = self else {
-                Logger.logError("(SafariProtection+BackgroundFetch) - complexFiltersUpdateInBackground; Missing self")
-                onStateExecutionFinished(.noData)
-                return
-            }
+        workingQueue.async {
             var updateResult: FiltersUpdateResult?
-            let group = DispatchGroup()
-            group.enter()
             self.complexFiltersUpdate(inBackground: true) { result in
                 updateResult = result
-                group.leave()
+                let isSuccessfullyUpdated = updateResult?.dnsFiltersUpdateError == nil && updateResult?.backgroundFetchResult == .newData
+                self.completionQueue.async { onStateExecutionFinished(isSuccessfullyUpdated ? .newData : .noData) }
             }
-            
-            group.wait()
-            
-            if let commonError = updateResult?.commonError {
-                Logger.logError("(SafariProtection+BackgroundFetch) - complexFiltersUpdateInBackground; Error occurred: \(commonError)")
-                onStateExecutionFinished(.noData)
-                return
-            }
-            
-            let isSuccessfullyUpdated = updateResult?.dnsFiltersUpdateError == nil && updateResult?.backgroundFetchResult == .newData
-            onStateExecutionFinished(isSuccessfullyUpdated ? .newData : .noData)
         }
     }
-
+    
     
     private func complexFiltersUpdate(inBackground: Bool, onFiltersUpdate: @escaping (FiltersUpdateResult) -> Void) {
-        DispatchQueue(label: "SafariAdGuardSDK.SafariProtection.complexFiltersUpdate").async { [weak self] in
-            guard let self = self else {
-                Logger.logError("(SafariProtection+BackgroundFetch) - complexFiltersUpdate; Missing self")
-                return onFiltersUpdate(FiltersUpdateResult(backgroundFetchResult: .noData, commonError: CommonError.missingSelf))
+        
+        var backgroundFetchResult: UIBackgroundFetchResult?
+        var dnsFiltersUpdateError: Error?
+        
+        let group = DispatchGroup()
+        group.enter()
+        self.updateFilters(inBackground: inBackground) { result, error in
+            backgroundFetchResult = result
+            if let error = error {
+                Logger.logError("(SafariProtection+BackgroundFetch) - complexFiltersUpdate; Safari filters update in background = \(inBackground); error: \(error)")
             }
-            
-            var backgroundFetchResult: UIBackgroundFetchResult?
-            var dnsFiltersUpdateError: Error?
-            
-            let group = DispatchGroup()
-            group.enter()
-            self.updateFilters(inBackground: inBackground) { result, error in
-                backgroundFetchResult = result
-                if let error = error {
-                    Logger.logError("(SafariProtection+BackgroundFetch) - complexFiltersUpdate; Safari filters update in background = \(inBackground); error: \(error)")
-                }
-                group.leave()
+            group.leave()
+        }
+        
+        group.enter()
+        self.dnsBackgroundFetchUpdater?.updateFiltersInBackground(onFiltersUpdate: { error in
+            if let error = error {
+                dnsFiltersUpdateError = error
+                Logger.logError("(SafariProtection+BackgroundFetch) - complexFiltersUpdate; Dns filters update in background = \(inBackground); error: \(error)")
             }
-            
-            group.enter()
-            self.dnsBackgroundFetchUpdater?.updateFiltersInBackground(onFiltersUpdate: { error in
-                if let error = error {
-                    dnsFiltersUpdateError = error
-                    Logger.logError("(SafariProtection+BackgroundFetch) - complexFiltersUpdate; Dns filters update in background = \(inBackground); error: \(error)")
-                }
-
-                group.leave()
-            })
-            
-            group.wait()
-            
+            group.leave()
+        })
+        
+        group.notify(queue: completionQueue) {
             let result = FiltersUpdateResult(backgroundFetchResult: backgroundFetchResult ?? .noData, dnsFiltersUpdateError: dnsFiltersUpdateError)
             onFiltersUpdate(result)
         }

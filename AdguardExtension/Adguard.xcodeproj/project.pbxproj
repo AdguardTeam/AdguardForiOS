@@ -6101,6 +6101,7 @@
 				7E3FEFBF26CEBAE80080EC03 /* ExtendedTitleTableHeaderView.swift */,
 				7E11568A26D38723000ADC3B /* AddTableViewCell.swift */,
 				7E70266526DD412600F8FC25 /* IdentifiableObject.swift */,
+				2430CE1626F360F6005A05DA /* ExtendedRadioButtonCell.swift */,
 				7E92753C26C67A26007B2C80 /* TitleTableViewCell */,
 			);
 			path = GenericCells;
@@ -6636,7 +6637,6 @@
 				7EF5C57126C26E18001851D6 /* EdgeInsetLabel.swift */,
 				24AD872C260A247B0034D402 /* RadioButton.swift */,
 				7E5FC200234F71F0008E383D /* ListOfRulesCells.swift */,
-				2430CE1626F360F6005A05DA /* ExtendedRadioButtonCell.swift */,
 				D0F9115B212DDCD3006DF0D3 /* StackElementView.swift */,
 				D077D5F42139774E00D3D5B3 /* RoundRectButton.swift */,
 				7E4CC02C2577DE93005ADBCA /* TextFieldIndicatorView.swift */,
