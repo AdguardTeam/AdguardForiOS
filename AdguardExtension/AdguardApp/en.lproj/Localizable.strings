@@ -1024,3 +1024,6 @@
 
 /* (BackgroundFetchController) - Background app refresh every 24 hours title */
 "background_fetch_twenty_four_hours_period" = "Every 24 hours";
+
+/* Background app refresh time title */
+"background_app_refresh_time_title" = "Background app refresh time";

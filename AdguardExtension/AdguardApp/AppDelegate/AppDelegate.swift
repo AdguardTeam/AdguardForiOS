@@ -130,7 +130,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 DDLogError("(AppDelegate) - didFinishLaunchingWithOptions; Finished background update with error: \(error)")
                 return
             }
-            DDLogInfo("(AppDelegate) - didFinishLaunchingWithOptions; Finish background update successfullty")
+            DDLogInfo("(AppDelegate) - didFinishLaunchingWithOptions; Finish background update successfully")
         }
         
         return true

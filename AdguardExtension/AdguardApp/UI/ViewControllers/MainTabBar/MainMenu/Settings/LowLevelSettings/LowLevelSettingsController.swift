@@ -29,6 +29,7 @@ final class LowLevelSettingsController: UITableViewController {
     @IBOutlet weak var betaChannelTextView: UITextView!
     @IBOutlet weak var fallbacksDescription: ThemableLabel!
     @IBOutlet weak var bootstrapsDescription: ThemableLabel!
+    @IBOutlet weak var backgroundFetchTitle: ThemableLabel!
     @IBOutlet weak var backgroundFetchDescription: ThemableLabel!
     
     @IBOutlet weak var lastSeparator: UIView!
@@ -54,6 +55,7 @@ final class LowLevelSettingsController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        backgroundFetchTitle.text = String.localizedString("background_app_refresh_time_title")
         lastSeparator.isHidden = true
         blockIpv6Switch.isOn = resources.blockIpv6
         setupBackButton()
@@ -160,7 +162,7 @@ final class LowLevelSettingsController: UITableViewController {
     }
     
     private func setBackgroundFethcDescription() {
-        periodSelected(periodTitle: resources.backgroundFetchUpdatePeriod.title)
+        periodSelected(period: resources.backgroundFetchUpdatePeriod)
     }
     
     private func showBlockedResponseTtlAlert() {
@@ -259,7 +261,7 @@ extension LowLevelSettingsController: ThemableProtocol {
 }
 
 extension LowLevelSettingsController: BackgroundFetchControllerDelegate {
-    func periodSelected(periodTitle: String ) {
-        backgroundFetchDescription.text = periodTitle
+    func periodSelected(period: BackgroundFetchUpdateTimePeriod) {
+        backgroundFetchDescription.text = period.title
     }
 }

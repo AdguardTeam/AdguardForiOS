@@ -20,7 +20,7 @@ import Foundation
 import UIKit
 
 protocol BackgroundFetchControllerDelegate: AnyObject {
-    func periodSelected(periodTitle: String)
+    func periodSelected(period: BackgroundFetchUpdateTimePeriod)
 }
 
 final class BackgroundFetchController: BottomAlertController {
@@ -41,6 +41,7 @@ final class BackgroundFetchController: BottomAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateTheme()
+        titleLabel.text = String.localizedString("background_app_refresh_time_title")
 
         selectedCell = resources.backgroundFetchUpdatePeriod
 
@@ -84,9 +85,8 @@ extension BackgroundFetchController: UITableViewDelegate {
         selectedCell = row
         resources.backgroundFetchUpdatePeriod = row
         tableView.deselectRow(at: indexPath, animated: true)
-        dismiss(animated: true) { [weak self] in
-            self?.delegate?.periodSelected(periodTitle: row.title)
-        }
+        delegate?.periodSelected(period: row)
+        dismiss(animated: true)
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
