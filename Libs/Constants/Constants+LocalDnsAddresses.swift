@@ -16,29 +16,14 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import DnsAdGuardSDK
+import Foundation
 
-extension LowLevelDnsConfiguration {
-    static var defaultConfiguration: LowLevelDnsConfiguration {
-        LowLevelDnsConfiguration(
-            tunnelMode: .split,
-            fallbackServers: nil,
-            bootstrapServers: nil,
-            blockingMode: .defaultMode,
-            blockingIp: nil,
-            blockedTtl: 2, // 2 seconds is more than enough to process packet record
-            blockIpv6: true,
-            restartByReachability: true
-        )
-    }
-    
-    static func fromResources(_ resources: AESharedResourcesProtocol)->LowLevelDnsConfiguration {
-        return LowLevelDnsConfiguration(
-            tunnelMode: resources.tunnelMode,
-            blockingMode: resources.blockingMode,
-            blockedTtl: resources.blockedResponseTtlSecs,
-            blockIpv6: resources.blockIpv6,
-            restartByReachability: resources.restartByReachability
-        )
+extension Constants {
+    struct LocalDnsAddresses {
+        static let ipv4 = "198.18.0.1"
+        static let ipv6 = "2001:ad00:ad00::ad00"
+        
+        // AdGuard DNS Non-filtering
+        static let defaultSystemDnsServers = ["94.140.14.140", "94.140.14.141", "2a10:50c0::1:ff", "2a10:50c0::2:ff"]
     }
 }

@@ -20,6 +20,12 @@ import Foundation
 import NetworkExtension
 import Reachability
 
+/**
+ This object gives access to a virtual network interface
+ It contains all thelogic needed for tunnel to be run
+ To make it work just subclass and initialize
+ - Seealso https://developer.apple.com/documentation/networkextension/nepackettunnelprovider
+ */
 open class PacketTunnelProvider: NEPacketTunnelProvider {
     
     public struct Addresses {

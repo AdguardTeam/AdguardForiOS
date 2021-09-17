@@ -20,18 +20,22 @@ import Foundation
 
 // MARK: - DnsProxyConfiguration
 
+/**
+ This object is a configuration for `AGDnsProxy`
+ We use this wrapper to be able to check the settings we pass to `AGDnsProxy`
+ */
 struct DnsProxyConfiguration: Equatable {
     let upstreams: [DnsProxyUpstream] // DNS upstreams
     let fallbacks: [DnsProxyUpstream] // DNS fallbacks
     let dns64Upstreams: [DnsProxyUpstream] // Upstreams to use for discovery of DNS64 prefixes
-    let filters: [DnsProxyFilter]
-    let ipv6Available: Bool
-    let rulesBlockingMode: DnsProxyBlockingMode
-    let hostsBlockingMode: DnsProxyBlockingMode
-    let blockedResponseTtlSecs: Int
-    let customBlockingIpv4: String?
-    let customBlockingIpv6: String?
-    let blockIpv6: Bool
+    let filters: [DnsProxyFilter] // Filters to pass into proxy
+    let ipv6Available: Bool // True if IPv6 is available
+    let rulesBlockingMode: DnsProxyBlockingMode // How to respond to requests blocked by AdBlock-style rules
+    let hostsBlockingMode: DnsProxyBlockingMode // How to respond to requests blocked by hosts-style rules
+    let blockedResponseTtlSecs: Int // TTL of the record for the blocked domains (in seconds)
+    let customBlockingIpv4: String? // Custom IPv4 address to return for filtered requests
+    let customBlockingIpv6: String? // Custom IPv6 address to return for filtered requests
+    let blockIpv6: Bool // Block AAAA requests
 }
 
 // MARK: - DnsProxyUpstream
@@ -47,7 +51,7 @@ struct DnsProxyUpstream: Equatable {
 extension DnsProxyBlockingMode {
     var agRulesBlockingMode: AGBlockingMode {
         switch self {
-        case .`default`: return AGDnsProxyConfig.getDefault().adblockRulesBlockingMode
+        case .defaultMode: return AGDnsProxyConfig.getDefault().adblockRulesBlockingMode
         case .refused: return .AGBM_REFUSED
         case .nxdomain: return .AGBM_NXDOMAIN
         case .unspecifiedAddress: return .AGBM_ADDRESS
@@ -57,7 +61,7 @@ extension DnsProxyBlockingMode {
     
     var agHostsRulesBlockingMode: AGBlockingMode {
         switch self {
-        case .`default`: return AGDnsProxyConfig.getDefault().hostsRulesBlockingMode
+        case .defaultMode: return AGDnsProxyConfig.getDefault().hostsRulesBlockingMode
         case .refused: return .AGBM_REFUSED
         case .nxdomain: return .AGBM_NXDOMAIN
         case .unspecifiedAddress: return .AGBM_ADDRESS

@@ -25,8 +25,8 @@ protocol DnsProxyProtocol: AnyObject {
 }
 
 /// This object is a wrapper arround `AGDnsProxy`
-/// `AGDnsProxy` is a C++ lib, we import it via SPM
-/// It is used to resolve requests that we obtain from `PacketTunnelProvider`
+/// It is used to control proxy lifecycle
+/// and to resolve requests that we obtain from `PacketTunnelProvider`
 final class DnsProxy: DnsProxyProtocol {
 
     // MARK: - Private variables

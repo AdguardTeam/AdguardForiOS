@@ -21,9 +21,12 @@ import DnsAdGuardSDK
 import SafariAdGuardSDK
 import Sentry
 
+/**
+ This object gives access to a virtual network interface
+ The main logic of this class is implemented in `DnsAdGuardSDK.PacketTunnelProvider`
+ - Seealso https://developer.apple.com/documentation/networkextension/nepackettunnelprovider
+ */
 class TunnelProvider: PacketTunnelProvider {
-    // AdGuard DNS Non-filtering
-    static let defaultSystemDnsServers = ["94.140.14.140", "94.140.14.141", "2a10:50c0::1:ff", "2a10:50c0::2:ff"]
     static let tunnelRemoteAddress = "127.1.1.1"
     
     // These addresses are meaningful and must not be changed. We use it in VPN application to determine in what mode the packet tunnel is running.
@@ -44,7 +47,7 @@ class TunnelProvider: PacketTunnelProvider {
         
         // start and configure Sentry
         SentrySDK.start { options in
-            options.dsn = SentryConst.dsnUrl
+            options.dsn = Constants.Sentry.dsnUrl
             options.enableAutoSessionTracking = false
         }
         
@@ -96,9 +99,9 @@ class TunnelProvider: PacketTunnelProvider {
             tunnelRemoteAddress: tunnelRemoteAddress,
             interfaceIpv4: interfaceIpv4,
             interfaceIpv6: interfaceIpv6,
-            localDnsIpv4: LocalDnsAddresses.ipv4,
-            localDnsIpv6: LocalDnsAddresses.ipv6,
-            defaultSystemDnsServers: defaultSystemDnsServers
+            localDnsIpv4: Constants.LocalDnsAddresses.ipv4,
+            localDnsIpv6: Constants.LocalDnsAddresses.ipv6,
+            defaultSystemDnsServers: Constants.LocalDnsAddresses.defaultSystemDnsServers
         )
     }
 }

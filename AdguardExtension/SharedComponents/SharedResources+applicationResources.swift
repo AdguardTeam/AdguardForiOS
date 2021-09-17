@@ -76,10 +76,10 @@ extension AESharedResourcesProtocol {
     dynamic var blockingMode: DnsProxyBlockingMode  {
         get {
             guard let value = sharedDefaults().object(forKey: BlockingMode) as? Int else {
-                return .default
+                return .defaultMode
             }
             
-            return DnsProxyBlockingMode(rawValue: value) ?? .default
+            return DnsProxyBlockingMode(rawValue: value) ?? .defaultMode
         }
         set {
             sharedDefaults().setValue(newValue.rawValue, forKey: BlockingMode)

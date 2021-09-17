@@ -18,8 +18,6 @@
 
 import NetworkExtension
 import SafariAdGuardSDK
-import DnsAdGuardSDK
-
 
 // MARK: - Complex protection Interface -
 

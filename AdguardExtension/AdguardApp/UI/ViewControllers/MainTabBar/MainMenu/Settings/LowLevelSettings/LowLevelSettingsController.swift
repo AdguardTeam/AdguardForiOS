@@ -19,7 +19,7 @@
 import UIKit
 import DnsAdGuardSDK
 
-class LowLevelSettingsController: UITableViewController {
+final class LowLevelSettingsController: UITableViewController {
     
     @IBOutlet weak var blockIpv6Switch: UISwitch!
     @IBOutlet weak var tunnelModeDescription: ThemableLabel!
@@ -244,7 +244,7 @@ extension LowLevelSettingsController: ThemableProtocol {
 extension DnsProxyBlockingMode {
     var name: String {
         switch self {
-        case .`default`: return "Default"
+        case .defaultMode: return "Default"
         case .refused: return "REFUSED"
         case .nxdomain: return "NXDOMAIN"
         case .unspecifiedAddress: return "Unspecified IP"

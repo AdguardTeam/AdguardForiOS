@@ -20,7 +20,7 @@ final class DnsConfigurationMock: DnsConfigurationProtocol {
         bootstrapServers: nil,
         blockingMode: .default,
         blockingIp: nil,
-        blockedTtl: 200,
+        blockedTtl: 2,
         blockIpv6: false,
         restartByReachability: true
     )

@@ -5,7 +5,6 @@
 #import "ACNNetworking.h"
 #import "DDLogMacros.h"
 #import "ADProductInfo.h"
-#import "Constants.h"
 #import "Reachability.h"
 #import <AGDnsProxy/AGDnsProxy.h>
 #import "ADBTableRow.h"

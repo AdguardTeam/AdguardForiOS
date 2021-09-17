@@ -170,6 +170,8 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
     }
     
     /// Processes the case when DNS requests are blocked with custom ip address
+    /// If `blockingIp` and `blockingMode` is not  `customAddress`
+    /// We respond with an address that is all-zeroes
     private func getCustomBlockingIps() -> (ipv4: String?, ipv6: String?) {
         let lowLevelConfiguration = dnsConfiguration.lowLevelConfiguration
         

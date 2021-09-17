@@ -367,7 +367,7 @@ class VpnManager: VpnManagerProtocol {
         manager.isEnabled = resources.dnsImplementation == .native ? false : enabled
         manager.isOnDemandEnabled = resources.dnsImplementation == .native ? false : enabled
         
-        manager.localizedDescription = Constants.aeProductName()
+        manager.localizedDescription = Bundle.main.applicationName
     }
     
     private func saveManager(_ manager: NETunnelProviderManager)->Error? {

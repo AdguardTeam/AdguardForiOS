@@ -52,7 +52,7 @@ class BlockingModeController: UITableViewController {
         let mode = resources.blockingMode
         
         switch mode {
-        case .default:
+        case .defaultMode:
             selectedCell = defaultMode
         case .refused:
             selectedCell = refusedMode
@@ -75,7 +75,7 @@ class BlockingModeController: UITableViewController {
         }
         updateDescriptionLabel(type: .customAddress, text: text)
         
-        defaultHeaderLabel.text = DnsProxyBlockingMode.default.name
+        defaultHeaderLabel.text = DnsProxyBlockingMode.defaultMode.name
         refusedHeaderLabel.text = DnsProxyBlockingMode.refused.name
         nxDomainHeaderLabel.text = DnsProxyBlockingMode.nxdomain.name
         nullIPHeaderLabel.text = DnsProxyBlockingMode.unspecifiedAddress.name
@@ -112,7 +112,7 @@ class BlockingModeController: UITableViewController {
         let mode: DnsProxyBlockingMode
         switch index {
         case defaultMode:
-            mode = .default
+            mode = .defaultMode
         case refusedMode:
             mode = .refused
         case nxDomainMode:
@@ -123,7 +123,7 @@ class BlockingModeController: UITableViewController {
             mode = .customAddress
             showCustomIPAlert()
         default:
-            mode = .default
+            mode = .defaultMode
         }
         
         selectedCell = index
