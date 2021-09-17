@@ -35,9 +35,9 @@ protocol NetworkUtilsProtocol {
     func upstreamIsValid(_ upstream: String) -> Bool
 }
 
-struct NetworkUtils: NetworkUtilsProtocol {
+public struct NetworkUtils: NetworkUtilsProtocol {
     
-    var systemDnsServers: [String] {
+    public var systemDnsServers: [String] {
         var state = __res_9_state()
         res_9_ninit(&state)
         
@@ -54,7 +54,7 @@ struct NetworkUtils: NetworkUtilsProtocol {
         return addrs.map { convertAddrToString($0) }
     }
     
-    var isIpv4Available: Bool {
+    public var isIpv4Available: Bool {
         var result = false
         enumerateNetworkInterfaces { (cursor) -> Bool in
             if cursor.pointee.ifa_addr.pointee.sa_family == AF_INET {
@@ -66,7 +66,7 @@ struct NetworkUtils: NetworkUtilsProtocol {
         return result
     }
     
-    var isIpv6Available: Bool {
+    public var isIpv6Available: Bool {
         var result = false
         enumerateNetworkInterfaces { (cursor) -> Bool in
             if cursor.pointee.ifa_addr.pointee.sa_family == AF_INET6 {
@@ -77,6 +77,8 @@ struct NetworkUtils: NetworkUtilsProtocol {
         }
         return result
     }
+    
+    public init() {}
     
     func getProtocol(from upstream: String) throws -> DnsProtocol {
         var error: NSError?
@@ -90,7 +92,7 @@ struct NetworkUtils: NetworkUtilsProtocol {
     func upstreamIsValid(_ upstream: String) -> Bool {
         let bootstraps = systemDnsServers
         
-        let dnsUpstream = AGDnsUpstream(address: upstream, bootstrap: bootstraps, timeoutMs: 2000, serverIp: Data(), id: 0, outboundInterfaceName: nil)
+        let dnsUpstream = AGDnsUpstream(address: upstream, bootstrap: bootstraps, timeoutMs: AGDnsUpstream.defaultTimeoutMs, serverIp: Data(), id: 0, outboundInterfaceName: nil)
         
         if let error = AGDnsUtils.test(dnsUpstream, ipv6Available: isIpv6Available) {
             Logger.logError("(NetworkUtils) - upstreamIsValid; Error: \(error)")
@@ -127,22 +129,5 @@ struct NetworkUtils: NetworkUtilsProtocol {
         }
 
         return String(cString: hostBuffer)
-    }
-}
-
-extension AGDnsStamp {
-    var dnsProtocol: DnsProtocol { proto.dnsProtocol }
-}
-
-extension AGStampProtoType {
-    var dnsProtocol: DnsProtocol {
-        switch self {
-        case .AGSPT_PLAIN: return .dns
-        case .AGSPT_DOH: return .doh
-        case .AGSPT_TLS: return .dot
-        case .AGSPT_DNSCRYPT: return .dnscrypt
-        case .AGSPT_DOQ: return .doq
-        @unknown default: return .dns
-        }
     }
 }

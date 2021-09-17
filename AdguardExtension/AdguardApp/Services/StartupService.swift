@@ -56,14 +56,17 @@ final class StartupService : NSObject{
         try! preloadedFilesManager.processPreloadedFiles()
         
         /* Initializing SDK */
-        
-        let safariProtectionConfiguration = SafariConfiguration(resources: sharedResources,
-                                                                isProPurchased: purchaseService.isProPurchased)
+        let safariProtectionConfiguration = SafariConfiguration(
+            resources: sharedResources,
+            isProPurchased: purchaseService.isProPurchased
+        )
         let defaultConfiguration = SafariConfiguration.defaultConfiguration()
         
-        let dnsProtectionConfiguration = DnsConfiguration(resources: sharedResources,
-                                                          isProPurchased: purchaseService.isProPurchased)
-        let defaultDnsProtectionConfiguration = DnsConfiguration.defaultConfiguration()
+        let dnsProtectionConfiguration = DnsConfiguration(
+            resources: sharedResources,
+            isProPurchased: purchaseService.isProPurchased
+        )
+        let defaultDnsProtectionConfiguration = DnsConfiguration.defaultConfiguration(from: sharedResources)
            
         // TODO: - try! is bad
         let safariProtection: SafariProtectionProtocol = try! SafariProtection(
@@ -76,10 +79,12 @@ final class StartupService : NSObject{
         )
         
         // TODO: - try! is bad
-        let dnsProtection: DnsProtectionProtocol = try! DnsProtection(configuration: dnsProtectionConfiguration,
-                                          defaultConfiguration: defaultDnsProtectionConfiguration,
-                                          userDefaults: sharedResources.sharedDefaults(),
-                                          filterFilesDirectoryUrl: sharedUrls.dnsFiltersFolderUrl)
+        let dnsProtection: DnsProtectionProtocol = try! DnsProtection(
+            configuration: dnsProtectionConfiguration,
+            defaultConfiguration: defaultDnsProtectionConfiguration,
+            userDefaults: sharedResources.sharedDefaults(),
+            filterFilesDirectoryUrl: sharedUrls.dnsFiltersFolderUrl
+        )
         
         locator.addService(service: safariProtection)
         locator.addService(service: dnsProtection)

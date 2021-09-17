@@ -16,7 +16,7 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
+import DnsAdGuardSDK
 
 protocol NewDnsServerControllerDelegate: AnyObject {
     func providerAdded()
@@ -128,32 +128,15 @@ class NewDnsServerController: BottomAlertController {
         
         // TODO: - Make it in a proper way after refactoring
         
-        var bootstraps: [String] = []
+        let networkUtils = NetworkUtils();
+        let bootstraps = BootstrapsHelper.bootstraps
         
-        ACNIPUtils.enumerateSystemDns { (ip, _, _, _) in
-            bootstraps.append(ip ?? "")
-        }
-        
-        // If our Tunnel appears in system bootstraps we should remove it
-        let tunnelIpV4 = "198.18.0.1"
-        let tunnelIpV6 = "2001:ad00:ad00::ad00"
-        bootstraps.removeAll(where: { $0 == tunnelIpV4 || $0 == tunnelIpV6 })
-        
-        // If bootstraps are empty after removing our tunnel
-        // Than we add AdGuard Non-filtering DNS
-        if bootstraps.isEmpty {
-            bootstraps.append("94.140.14.140")
-            bootstraps.append("94.140.14.141")
-            bootstraps.append("2a10:50c0::1:ff")
-            bootstraps.append("2a10:50c0::2:ff")
-        }
-        
-        let upstream = AGDnsUpstream(address: self.upstreamsField.text, bootstrap: bootstraps, timeoutMs: 2000, serverIp: Data(), id: 0, outboundInterfaceName: nil)
+        let upstream = AGDnsUpstream(address: self.upstreamsField.text, bootstrap: bootstraps, timeoutMs: AGDnsUpstream.defaultTimeoutMs, serverIp: Data(), id: 0, outboundInterfaceName: nil)
         
         DispatchQueue(label: "save dns queue").async { [weak self] in
             guard let self = self else { return }
             
-            let isIpv6Available = ACNIPUtils.isIpv6Available()
+            let isIpv6Available = networkUtils.isIpv6Available
             
             DDLogInfo("(NewDnsServerController) test upstream: \(upstream?.address ?? "nil") bootstrap: \(upstream?.bootstrap ?? []) ipv6: \(isIpv6Available)")
             

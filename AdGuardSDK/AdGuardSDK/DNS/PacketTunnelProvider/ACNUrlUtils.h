@@ -16,13 +16,20 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-@import NetworkExtension;
+#import <Foundation/Foundation.h>
 
-#import "AESharedResources.h"
+#define ACNURL_SCHEME_HTTP          @"http"
+#define ACNURL_SCHEME_HTTPS         @"https"
 
-/////////////////////////////////////////////////////////////////////
-#pragma mark - PacketTunnelProvider
+@class ACLURL;
 
-@interface PacketTunnelProvider : NEPacketTunnelProvider
+@interface ACNUrlUtils : NSObject
+
+/// Checks "candidate" that it contains IPv4 address
++ (BOOL)isIPv4:(nonnull NSString *)candidate;
+
+/// Checks "candidate" that it contains IPv6 address
+/// @warning May work incorrectly because it taken from internet
++ (BOOL)isIPv6:(nonnull NSString *)candidate;
 
 @end

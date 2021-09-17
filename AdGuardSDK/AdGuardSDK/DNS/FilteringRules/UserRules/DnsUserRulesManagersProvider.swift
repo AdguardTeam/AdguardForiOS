@@ -24,21 +24,20 @@ protocol DnsUserRulesManagersProviderProtocol: ResetableSyncProtocol {
 }
 
 final class DnsUserRulesManagersProvider: DnsUserRulesManagersProviderProtocol {
-    private(set) lazy var blocklistRulesManager: UserRulesManagerProtocol = {
-        let storage = DnsUserRulesStorage(type: .blocklist, fileStorage: fileStorage)
-        return UserRulesManager(type: .dnsBlocklist, storage: storage)
-    }()
-    
-    private(set) lazy var allowlistRulesManager: UserRulesManagerProtocol = {
-        let storage = DnsUserRulesStorage(type: .allowlist, fileStorage: fileStorage)
-        return UserRulesManager(type: .dnsAllowlist, storage: storage)
-    }()
+    let blocklistRulesManager: UserRulesManagerProtocol
+    let allowlistRulesManager: UserRulesManagerProtocol
     
     private let fileStorage: FilterFilesStorageProtocol
     
     // fileStorage should be passed as new object with unique folder to avoid filters ids collisions
     init(fileStorage: FilterFilesStorageProtocol) {
         self.fileStorage = fileStorage
+        
+        let blocklistStorage = DnsUserRulesStorage(type: .blocklist, fileStorage: fileStorage)
+        self.blocklistRulesManager = UserRulesManager(type: .dnsBlocklist, storage: blocklistStorage)
+        
+        let allowlistStorage = DnsUserRulesStorage(type: .allowlist, fileStorage: fileStorage)
+        self.allowlistRulesManager = UserRulesManager(type: .dnsAllowlist, storage: allowlistStorage)
     }
     
     func reset() throws {

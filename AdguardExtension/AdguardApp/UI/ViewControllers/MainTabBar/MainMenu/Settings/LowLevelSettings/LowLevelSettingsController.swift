@@ -16,10 +16,10 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
 import UIKit
+import DnsAdGuardSDK
 
-class LowLevelSettingsController: UITableViewController {
+final class LowLevelSettingsController: UITableViewController {
     
     @IBOutlet weak var blockIpv6Switch: UISwitch!
     @IBOutlet weak var tunnelModeDescription: ThemableLabel!
@@ -119,19 +119,17 @@ class LowLevelSettingsController: UITableViewController {
     
     private func setTunnelModeDescription() {
         switch resources.tunnelMode {
-        case APVpnManagerTunnelModeSplit:
+        case .split:
             tunnelModeDescription.text = String.localizedString("tunnel_mode_split_description")
-        case APVpnManagerTunnelModeFull:
+        case .full:
             tunnelModeDescription.text = String.localizedString("tunnel_mode_full_description")
-        case APVpnManagerTunnelModeFullWithoutVPNIcon:
+        case .fullWithoutVpnIcon:
             tunnelModeDescription.text = String.localizedString("tunnel_mode_full_without_icon_description")
-        default:
-            break
         }
     }
     
     private func setBlockingModeDescription() {
-        blockimgModeDescription.text  = resources.blockingMode.name
+        blockimgModeDescription.text = resources.blockingMode.name
     }
     
     private func setBlockedResponseTllDescription() {
@@ -240,5 +238,17 @@ extension LowLevelSettingsController: ThemableProtocol {
         theme.setupTextView(betaChannelTextView)
         setupWarningDescriptionTextView()
         tableView.reloadData()
+    }
+}
+
+extension DnsProxyBlockingMode {
+    var name: String {
+        switch self {
+        case .defaultMode: return "Default"
+        case .refused: return "REFUSED"
+        case .nxdomain: return "NXDOMAIN"
+        case .unspecifiedAddress: return "Unspecified IP"
+        case .customAddress: return "Custom IP"
+        }
     }
 }

@@ -17,13 +17,6 @@
 */
 #import <Foundation/Foundation.h>
 
-typedef enum : NSUInteger {
-    
-    APVpnManagerTunnelModeSplit = 0,
-    APVpnManagerTunnelModeFull = 1,
-    APVpnManagerTunnelModeFullWithoutVPNIcon = 2,
-} APVpnManagerTunnelMode;
-
 @class ASDFilterMetadata, ASDFilter, ABECFilterClientMetadata, ASDFilterRule, AEInvertedWhitelistDomainsObject, ABECFilterClientLocalization, DnsServerInfo;
 
 /////////////////////////////////////////////////////////////////////

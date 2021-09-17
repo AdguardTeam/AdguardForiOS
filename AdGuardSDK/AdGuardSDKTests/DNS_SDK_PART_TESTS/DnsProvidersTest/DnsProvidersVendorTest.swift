@@ -25,14 +25,14 @@ class DnsProvidersVendorTest: XCTestCase {
         
         // Test with AdGuard implementation
         customStorage.providers = [customProvider1, customProvider2]
-        let adguardProviders = vendor.getProvidersWithState(for: .adguard, activeDns: DnsProvidersManager.ActiveDnsInfo(providerId: providerId, serverId: serverId))
+        let adguardProviders = vendor.getProvidersWithState(for: .adGuard, activeDns: DnsProvidersManager.ActiveDnsInfo(providerId: providerId, serverId: serverId))
         
         let adgProviders: [DnsProviderMetaProtocol] = adguardProviders.predefined + adguardProviders.custom
         XCTAssertEqual(adguardProviders.custom.count, 2)
         XCTAssertEqual(adguardProviders.predefined.count, 11)
         XCTAssertEqual(adguardProviders.activeDnsProvider.name, "Quad9")
        
-        checkStates(adgProviders, providerId: providerId, serverId: serverId, implementation: .adguard)
+        checkStates(adgProviders, providerId: providerId, serverId: serverId, implementation: .adGuard)
         
         // Test with Native implementation
         let nativeProviders = vendor.getProvidersWithState(for: .native, activeDns: DnsProvidersManager.ActiveDnsInfo(providerId: providerId, serverId: serverId))
@@ -74,7 +74,7 @@ class DnsProvidersVendorTest: XCTestCase {
                                                 providerId: 1,
                                                 isEnabled: false)
         customStorage.providers = [customProvider]
-        let providers = vendor.getProvidersWithState(for: .adguard, activeDns: DnsProvidersManager.ActiveDnsInfo(providerId: providerId, serverId: serverId))
+        let providers = vendor.getProvidersWithState(for: .adGuard, activeDns: DnsProvidersManager.ActiveDnsInfo(providerId: providerId, serverId: serverId))
         
         XCTAssertEqual(providers.custom.count, 1)
         XCTAssertEqual(providers.predefined.count, 11)
@@ -84,7 +84,7 @@ class DnsProvidersVendorTest: XCTestCase {
         let servers = all.flatMap { $0.servers }
         XCTAssertEqual(servers.count, 37)
         
-        checkStates(all, providerId: providerId, serverId: serverId, implementation: .adguard)
+        checkStates(all, providerId: providerId, serverId: serverId, implementation: .adGuard)
     }
     
     func testNativeImplementationWithActiveCustomQuicServer() {
