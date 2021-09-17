@@ -35,7 +35,7 @@
 "T0y-mr-Zwa.text" = "Вы можете видеть, кто пытается следить за вами, просмотреть статистику и журнал блокировки DNS-запросов";
 
 /* Class = "UILabel"; text = "DNS protection is disabled"; ObjectID = "X1F-2p-Xpe"; */
-"X1F-2p-Xpe.text" = "Защита от трекинга отключена";
+"X1F-2p-Xpe.text" = "DNS-защита отключена";
 
 /* Class = "UIButton"; normalTitle = "ENABLE"; ObjectID = "XYE-JT-WSH"; */
 "XYE-JT-WSH.normalTitle" = "ВКЛЮЧИТЬ";

@@ -116,7 +116,7 @@
 "login_premium_expired_message" = "Ви успішно увійшли в обліковий запис AdGuard, але термін дії ліцензійних ключів, що дозволили б активувати преміум-версію, завершився.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
-"restore_purchases_failure_message" = "При спробі відновити покупки сталася помилка.";
+"restore_purchases_failure_message" = "Під час відновлення покупки сталася помилка.";
 
 /* (AEUIGetProViewController) message that appears when purchase successfully restored */
 "restore_success_message" = "Покупку успішно відновлено! Преміум-версію AdGuard для iOS активовано.";
@@ -128,7 +128,7 @@
 "purchase_success_message" = "Покупку успішно завершено! Преміум-версію AdGuard для iOS активовано.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
-"purchase_failure_message" = "При обробці вашої покупки сталася помилка.";
+"purchase_failure_message" = "Під час обробки вашої покупки сталася помилка.";
 
 /* (GroupsController) Custom filter group name */
 "custom_group_name" = "Власні фільтри";
@@ -235,9 +235,6 @@
 /* login error message */
 "login_error_message" = "Під час входу сталася помилка";
 
-/* purchase secription format */
-"purchase_description_format" = "Про передплату AdGuard:<br><br>• Платіж буде стягнуто з вашого облікового запису iTunes при підтвердженні покупки.<br><br>• Передплата автоматично продовжується, доки не буде вимкнена принаймні за 24 години до завершення поточного періоду.<br><br>• Оплата за продовження буде стягнута впродовж 24 годин до завершення поточного періоду.<br><br>Ви можете керувати своїми передплатами та вимкнути автоматичне продовження в налаштуваннях свого облікового запису iTunes після придбання передплати.<br><br><a href=%2$@>Умови користування</a> та <a href=%1$@>Політика приватності</a>";
-
 /* lifetime purchase secription format */
 "lifetime_purchase_description_format" = "<a href=%2$@>Умови користування</a> та <a href=%1$@>Політика приватності</a>";
 
@@ -290,7 +287,7 @@
 "remove_vpn_profile_error_title" = "Сталася помилка";
 
 /* (AdvancedSettingsController) Remove Vpn profile error message */
-"remove_vpn_profile_error_message" = "При вилученні VPN-профілю щось пішло не так";
+"remove_vpn_profile_error_message" = "Під чапс вилучення VPN-профілю щось пішло не так";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ правил використовуються";
@@ -323,7 +320,7 @@
 "assistant_launching_unable" = "Політика безпеки цього сайту не дозволяє запускати помічника AdGuard.";
 
 /* (Action Extension - ActionViewController) Some errors when starting. */
-"support_error_safari_extension" = "Сталася неочікувана помилка при ініціалізації розширення Safari. Зв'яжіться зі службою підтримки AdGuard, якщо це повториться.";
+"support_error_safari_extension" = "Сталася неочікувана помилка під час ініціалізації розширення Safari. Зв'яжіться зі службою підтримки AdGuard, якщо це повториться.";
 
 /* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
 "common_warning_title" = "Попередження";
@@ -749,7 +746,7 @@
 "leave_feedback_title" = "Залишити відгук";
 
 /* (BugReportController) description for bug report */
-"bug_report_description" = "Будь ласка, додайте опис проблеми (чи проблема з'явилася після оновлення?), а також інформацію про інші встановлені програми (VPN/антивірус/розширення)";
+"bug_report_description" = "Будь ласка, додайте опис проблеми (чи проблема з'явилася після оновлення?), а також інформацію про інші встановлені програми (VPN, антивірус, розширення тощо)";
 
 /* (BugReportController) description for leaving feedback */
 "leave_feedback_description_format" = "Розкажіть нам про свої враження від %@ — що вам подобається, а що ні, які функції ви хотіли б запропонувати";

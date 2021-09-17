@@ -62,7 +62,7 @@
 "dNj-vb-TQe.text" = "Veel gestelde vragen";
 
 /* Class = "UILabel"; text = "Submit feature requests and suggestions"; ObjectID = "fva-Rp-ExO"; */
-"fva-Rp-ExO.text" = "Functie verzoeken en suggesties indienen";
+"fva-Rp-ExO.text" = "Functieverzoeken en suggesties indienen";
 
 /* Class = "UITextField"; placeholder = "Email Address"; ObjectID = "gap-Uy-5ka"; */
 "gap-Uy-5ka.placeholder" = "E-mailadres";

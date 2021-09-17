@@ -193,9 +193,6 @@
 /* login error message */
 "login_error_message" = "Došlo je do greške prilikom prijavljivanja";
 
-/* purchase secription format */
-"purchase_description_format" = "O AdGuard pretplati:<br><br>• Naplata će biti izvršena preko vašeg iTunes naloga nnakon potvrde kupovine.<br>• Pretplata će se automatski obnavljati, ali ukoliko je automatska obnova isključena najmanje 24 časa pre isteka trenutnog perioda onda se neće obnoviti.<br>• Obnova pretplate će biti izvršena 24-časa pre isteka trenutnog perioda. Vašom pretplatom kao i automatskom obnovom možete upravljati na vašem iTunes nalogu nakon kupovine pretplate.<br><br><a href=%1$@>Politika privatnosti</a> <br><br><a href=%2$@>Uslovi korišćenja</a>";
-
 /* lifetime purchase secription format */
 "lifetime_purchase_description_format" = "<a href=%1$@>Politika privatnosti</a> <br><br><a href=%2$@>Uslovi korišćenja</a>";
 

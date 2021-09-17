@@ -128,7 +128,7 @@
 "eIa-RB-Phv.text" = "Paramétrages avancés";
 
 /* Class = "UILabel"; text = "Full-Tunnel (without VPN icon)"; ObjectID = "eiP-yl-Xb3"; */
-"eiP-yl-Xb3.text" = "Full-tunnel (sans icône VPN)";
+"eiP-yl-Xb3.text" = "Full-Tunnel (sans icône VPN)";
 
 /* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "gxl-pG-zh1"; */
 "gxl-pG-zh1.text" = "Compatible avec les applications «Personal VPN»";

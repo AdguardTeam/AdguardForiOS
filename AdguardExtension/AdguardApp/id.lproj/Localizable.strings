@@ -184,9 +184,6 @@
 /* login error message */
 "login_error_message" = "Terjadi kesalahan saat masuk";
 
-/* purchase secription format */
-"purchase_description_format" = "Tentang Berlangganan AdGuard:<br><br>• Pembayaran akan dibebankan ke Akun iTunes Anda saat konfirmasi pembelian.<br>• Langganan akan secara otomatis diperpanjang kecuali perpanjangan otomatis dimatikan setidaknya 24 jam sebelum akhir periode berjalan.<br>• Biaya perpanjang langganan akan dibebankan dalam 24 jam sebelum akhir periode berjalan. Langganan Anda dapat dikelola dan perpanjangan otomatis Anda dapat dimatikan di Pengaturan Akun iTunes Anda setelah membeli langganan.<br><br><a href=%1$@>Kebijakan privasi</a><br><br><a href=%2$@>Ketentuan Penggunaan</a>";
-
 /* lifetime purchase secription format */
 "lifetime_purchase_description_format" = "<a href=%1$@>Kebijakan Privasi</a> <br><br><a href=%2$@>Ketentuan Penggunaan</a>";
 

@@ -11,7 +11,7 @@
 "7nl-3p-BP2.text" = "Engellenen TTL yanıtı";
 
 /* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "8ad-4w-rbs"; */
-"8ad-4w-rbs.text" = "İzin verilen listesini ters çevir";
+"8ad-4w-rbs.text" = "İzin listesini ters çevir";
 
 /* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
 "8jT-85-XFp.text" = "Diğer VPN uygulamaları ile uyumsuz, kararsız";
@@ -26,7 +26,7 @@
 "A89-2M-jqd.text" = "IP adresi önyükleme";
 
 /* Class = "UILabel"; text = "Respond with REFUSED code"; ObjectID = "AtW-mH-6ja"; */
-"AtW-mH-6ja.text" = "REFUSED kod ile yanıt verin";
+"AtW-mH-6ja.text" = "REFUSED koduyla yanıt verin";
 
 /* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "BOT-Ej-15M"; */
 "BOT-Ej-15M.text" = "Filtre güncellemeleri ilerleme çubuğunu göster";
@@ -122,7 +122,7 @@
 "dLN-5K-c1N.text" = "Ağ değiştiğinde korumayı yeniden başlatın";
 
 /* Class = "UILabel"; text = "Respond with NXDOMAIN code"; ObjectID = "dsw-Ub-m4M"; */
-"dsw-Ub-m4M.text" = "NXDOMAIN kod ile yanıt verin";
+"dsw-Ub-m4M.text" = "NXDOMAIN koduyla yanıt verin";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
 "eIa-RB-Phv.text" = "Gelişmiş ayarlar";

@@ -242,7 +242,7 @@
 "login_error_message" = "Při přihlašování došlo k chybě";
 
 /* purchase secription format */
-"purchase_description_format" = "O předlpatném AdGuardu:<br><br>• Platba bude připsána na účet iTunes při potvrzení nákupu.<br><br>• Předplatné se automaticky obnoví, pokud není automatické obnovení vypnuto alespoň 24 hodin před koncem aktuálního období.<br><br>• Na účet bude účtován poplatek za obnovení do 24 hodin před koncem běžného období.<br><br>Vaše odběry můžou být spravovány v nastavení vašeho účtu iTunes a vaše automatické obnovení může být po zakoupení předplatného vypnuto.<br><br><a href=%2$@>Pravidla a podmínky</a> a <a href=%1$@>Zásady ochrany osobních údajů</a>";
+"purchase_description_format" = "O předplatném AdGuardu:<br><br>• Platba bude připsána na účet iTunes při potvrzení nákupu.<br><br>• Předplatné se automaticky obnoví, pokud není automatické obnovení vypnuto alespoň 24 hodin před koncem aktuálního období.<br><br>• Na účet bude účtován poplatek za obnovení do 24 hodin před koncem běžného období.<br><br>Vaše odběry můžou být spravovány v nastavení vašeho účtu iTunes a vaše automatické obnovení může být po zakoupení předplatného vypnuto.<br><br><a href=%2$@>Pravidla a podmínky</a> a <a href=%1$@>Zásady ochrany osobních údajů</a>";
 
 /* lifetime purchase secription format */
 "lifetime_purchase_description_format" = "<a href=%2$@>Pravidla a podmínky</a> a <a href=%1$@>Zásady ochrany osobních údajů</a>";
@@ -618,6 +618,9 @@
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "Klepněte na <b>Safari</b> a vyberte položku nabídky <b>„Blokátory obsahu“</b>";
+
+/* (OnboardingController) second step text iOS15 . '%@' will be replaced with the safari icon */
+"onboarding_second_step_text_iOS15" = "Klepněte na <b>Safari</b> a vyberte položku nabídky <b>„Rozšíření“</b>";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
 "onboarding_third_step_text" = "<b>Zapněte všechny blokátory obsahu</b> a vraťte se do aplikace!";

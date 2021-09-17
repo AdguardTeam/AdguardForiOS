@@ -29,7 +29,7 @@
 "common_action_no" = "NO";
 
 /* Main Controller. Inverted whitelist cell caption */
-"inverted_whitelist_title" = "Lista de permitido (invertida)";
+"inverted_whitelist_title" = "Lista de permitido (invertido)";
 
 /* (MainPageController) Text to indicate changes processing */
 "applying_changes" = "Aplicando cambios...";
@@ -140,7 +140,7 @@
 "filter_date_format" = "Filtros actualizados: %@";
 
 /* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "Puedes añadir tus propias reglas aquí.<br>Lea esta <a href=\"%@\">nota sobre la sintaxis de las reglas</a>.";
+"blacklist_text_format" = "Puedes añadir tus propias reglas aquí.<br>Lee esta <a href=\"%@\">nota sobre la sintaxis de las reglas</a>.";
 
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "Ingresa aquí los dominios que no deseas que AdGuard filtre. Esta lista tiene prioridad sobre otras configuraciones.";
@@ -233,7 +233,7 @@
 "doq_protocol" = "DNS mediante QUIC (experimental)";
 
 /* GetProController - confirm logout text */
-"confirm_logout_text" = "¿Está seguro de que desea cerrar sesión?";
+"confirm_logout_text" = "¿Estás seguro de que deseas cerrar sesión?";
 
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
 "support_vpn_configuration_problem" = "Ha habido un problema con la configuración de la VPN. Por favor, contacta con el soporte técnico.";
@@ -242,7 +242,7 @@
 "login_error_message" = "Se ha producido un error al iniciar sesión";
 
 /* purchase secription format */
-"purchase_description_format" = "Acerca de la suscripción a AdGuard:<br><br>• El pago se cargará a tu cuenta de iTunes en el momento de la confirmación de la compra.<br>• La suscripción se renueva automáticamente a menos que la renovación automática se desactive al menos 24 horas antes del final del período actual.<br>• La tarifa de renovación de la suscripción se cobrará dentro de las 24 horas anteriores al final del período actual. Tus suscripciones pueden ser administradas y tu renovación automática puede ser desactivada en la configuración de tu cuenta de iTunes después de comprar una suscripción.<br><br><a href=%1$@>Política de privacidad</a> <br><br><a href=%2$@>Términos de uso</a>";
+"purchase_description_format" = "Acerca de la suscripción a AdGuard:<br><br>• El pago se cargará a tu cuenta de iTunes en el momento de la confirmación de la compra.<br><br> • La suscripción se renueva automáticamente a menos que la renovación automática se desactive al menos 24 horas antes del final del período actual.<br><br>• La tarifa de renovación de la suscripción se cobrará dentro de las 24 horas anteriores al final del período actual. Tus suscripciones pueden ser administradas y tu renovación automática puede ser desactivada en la configuración de tu cuenta de iTunes después de comprar una suscripción.<br><br><a href=%1$@>Política de privacidad</a> y <a href=%2$@>Términos de uso</a>";
 
 /* lifetime purchase secription format */
 "lifetime_purchase_description_format" = "<a href=%2$@>Términos y condiciones</a> y <a href=%1$@>política de privacidad</a>";
@@ -272,7 +272,7 @@
 "content_blocker_filters" = "Filtros:";
 
 /* (AdvancedSettingsController) Restart when network changes error */
-"general_settings_restart_tunnel_error" = "Necesitas habilitar VPN primero";
+"general_settings_restart_tunnel_error" = "Necesitas habilitar la VPN primero";
 
 /* (AdvancedSettingsController) Reset statistics title */
 "reset_stat_title" = "Restablecer estadísticas";
@@ -290,7 +290,7 @@
 "remove_vpn_profile_title" = "Eliminar perfil VPN";
 
 /* (AdvancedSettingsController) Delete Vpn profile message */
-"delete_vpn_profile_message" = "¿Está seguro de que desea eliminar su perfil VPN y deshabilitar la protección DNS?";
+"delete_vpn_profile_message" = "¿Estás seguro de que deseas eliminar tu perfil VPN y deshabilitar la protección DNS?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "Se ha producido un error";
@@ -353,7 +353,7 @@
 "delete_filter_title" = "Eliminar filtro";
 
 /* (FilterDetailsController) delete filter message */
-"delete_filter_message" = "¿Está seguro de que desea eliminar este filtro?";
+"delete_filter_message" = "¿Estás seguro de que deseas eliminar este filtro?";
 
 /* (AboutViewController) current app version format */
 "about_version_format" = "Versión %@";
@@ -618,6 +618,9 @@
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "Pulse en <b>Safari</b> y elija el elemento del menú <b>\"Bloqueadores de contenido\"</b>";
+
+/* (OnboardingController) second step text iOS15 . '%@' will be replaced with the safari icon */
+"onboarding_second_step_text_iOS15" = "Toca en <b>Safari</b> y elige el elemento <b>\"Extensiones\"</b> del menú";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
 "onboarding_third_step_text" = "<b>¡Enciende todos los bloqueadores de contenido</b> y vuelve a nuestra aplicación!";

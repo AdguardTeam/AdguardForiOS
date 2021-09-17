@@ -242,7 +242,7 @@
 "login_error_message" = "ログイン中にエラーが発生しました";
 
 /* purchase secription format */
-"purchase_description_format" = "【AdGuardサブスクリプションについて】<br><br>・支払いは購入の確認時にiTunesアカウントに請求されます。<br>・サブスクリプションは、現在のサブスクリプション期間が終了する少なくとも24時間前に自動更新がオフにされない限り、自動的に更新されます。<br>・サブスクリプション更新料金は、現在の期間の終了前の24時間以内に請求されます。サブスクリプション購入後、iTunesアカウント設定においてサブスクリプション管理が可能になり、自動更新もそちらで無効にすることができます。<br><br><a href=%1$@>プライバシーポリシー</a><br><br><a href=%2$@>利用規約</a>";
+"purchase_description_format" = "【AdGuardサブスクリプションについて】<br><br>・支払いは購入の確認時にiTunesアカウントに請求されます。<br><br>・現在のサブスクリプション期間が終了する少なくとも24時間前に自動更新がオフにされない限り、サブスクリプションは、自動的に更新されます。<br><br>・サブスクリプション更新料金は、現在の期間終了前の24時間以内に請求されます。<br><br>サブスクリプション購入後、iTunesアカウント設定においてサブスクリプション管理が可能になり、自動更新もそちらで無効にすることができます。<br><br><a href=%2$@>利用規約</a>と<a href=%1$@>プライバシーポリシー</a>";
 
 /* lifetime purchase secription format */
 "lifetime_purchase_description_format" = "<a href=%1$@>プライバシーポリシー</a>と<br><br><a href=%2$@>利用規約</a>";
@@ -618,6 +618,9 @@
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "<b>Safari</b> → <b>コンテンツブロッカー</b> へ進み";
+
+/* (OnboardingController) second step text iOS15 . '%@' will be replaced with the safari icon */
+"onboarding_second_step_text_iOS15" = "<b>Safari</b> → <b>機能拡張</b> へ進み";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
 "onboarding_third_step_text" = "<b>コンテンツブロッカーのスイッチ</b>をすべて<b>オン</b>にして本アプリにお戻りください。";

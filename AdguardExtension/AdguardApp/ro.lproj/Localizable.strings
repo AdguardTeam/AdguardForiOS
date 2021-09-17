@@ -19,6 +19,12 @@
 /* Alert title. On error. */
 "common_error_title" = "Eroare";
 
+/* (AEService) Service errors descriptions */
+"safari_filters_loading_error" = "Filtrele nu au putut fi încărcate în Safari, astfel încât modificările recente nu au fost aplicate.";
+
+/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
+"load_to_safari_error" = "Filtrele nu au putut fi încărcate în Safari. Încercați să goliți regulile și lista autorizărilor sau înlocuiți setul de filtre utilizat.";
+
 /* NO Button caption in alert */
 "common_action_no" = "NU";
 
@@ -45,6 +51,12 @@
 
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
+
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "DNS-ul nativ funcționează";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "DNS-ul nativ nu funcționează";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Reguli utilizator";
@@ -106,8 +118,14 @@
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Eroare la încercarea de restaurare a achiziției.";
 
+/* (AEUIGetProViewController) message that appears when purchase successfully restored */
+"restore_success_message" = "Achiziție restaurată! Versiunea Premium de AdGuard pentru iOS a fost activată.";
+
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "Nicio achiziție de restaurat";
+
+/* (AEUIGetProViewController) message that appears when the purchase is successful */
+"purchase_success_message" = "Achiziție finalizată cu succes! Versiunea Premium de AdGuard pentru iOS a fost activată.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "A apărut o eroare la procesarea achiziției.";
@@ -124,6 +142,9 @@
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Puteți adăuga propriile reguli aici.<br>Citiți<a href=\"%@\">nota despre sintaxa regulii</a>.";
 
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "Introduceți aici domeniile pe care nu doriți ca AdGuard să le filtreze. Această listă are prioritate față de alte setări.";
+
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Introduceți aici numele de domenii. AdGuard va filtra în Safari doar pe aceste site-uri web.";
 
@@ -135,6 +156,12 @@
 
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Actualizăm...";
+
+/* (UserFilterController) add blocklist rule button title */
+"add_blacklist_rule_title" = "Adăugați o regulă nouă";
+
+/* (UserFilterController) add whitelist domain button title */
+"add_whitelist_domain_title" = "Adăugați un domeniu";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||exemplu.org^";
@@ -214,9 +241,6 @@
 /* login error message */
 "login_error_message" = "A apărut o eroare la logare";
 
-/* purchase secription format */
-"purchase_description_format" = "Despre Abonamentul AdGuard:<br><br>• Plata se va face în contul dvs. iTunes la confirmarea achiziției.<br><br>• Dacă reînnoirea automată a abonamentului nu s-a dezactivat cu cel puțin 24 de ore înainte de sfârșitul perioadei curente, acesta se reînnoiește automat.<br><br>• Taxa de reînnoire a abonamentului se va percepe în 24 de ore înainte de sfârșitul perioadei curente.\n<br><br>Vă puteți gestiona abonamentele iar reînnoirea automată se poate dezactiva în Setările contului dvs. iTunes după achiziția unui abonament.<br><br><a href=%2$@>Termeni și condiții</a> și <a href=%1$@>Politica de confidențialitate</a>";
-
 /* lifetime purchase secription format */
 "lifetime_purchase_description_format" = "<a href=%2$@>Termeni și condiții</a> și <a href=%1$@>Politica de confidențialitate</a>";
 
@@ -256,8 +280,14 @@
 /* (AdvancedSettingsController) Reset button title */
 "reset_title" = "Resetare";
 
+/* (AdvancedSettingsController) Remove button title */
+"delete_title" = "Ștergeți";
+
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Eliminare profil VPN";
+
+/* (AdvancedSettingsController) Delete Vpn profile message */
+"delete_vpn_profile_message" = "Sigur doriți să ștergeți profilul dvs. VPN și să dezactivați protecția DNS?";
 
 /* (AdvancedSettingsController) Remove Vpn profile error title */
 "remove_vpn_profile_error_title" = "A apărut o eroare";
@@ -496,6 +526,15 @@
 /*(MainScreen) "all time" chart date type */
 "chart_alltime" = "Tot timpul";
 
+/*(SafariService) notification about loading content blockers  */
+"loading_content_blockers" = "Blocantele de conținut sunt actualizate...";
+
+/*(FiltersService) notification about filters laoding  */
+"loading_filters" = "Se încarcă filtrele...";
+
+/*(ContentBlockerService) notification about converting rules  */
+"converting_rules" = "Regulile sunt convertite...";
+
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "Nou filtru personalizat";
 
@@ -577,6 +616,9 @@
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "Tapați pe <b>Safari</b> și alegeți <b>\"Blocant de conținut\"</b> în meniu";
 
+/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
+"onboarding_third_step_text" = "<b>Porniți toate blocante de conținut</b> și reveniți la aplicație!";
+
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "Sistem DNS";
 
@@ -603,6 +645,24 @@
 
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ nu este acceptat încă de iOS. Încercați să adăugați un upstream diferit.";
+
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "Salvați și selectați";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "Salvați";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "Anulați";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "Ștergeți";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "Adăugați un server DNS personalizat";
+
+/* (NewDnsServerController) edit dns server alert title */
+"edit_dns_server_alert_title" = "Editați serverul DNS personalizat";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Lista de blocări sistem";
@@ -882,3 +942,41 @@
 
 /* (BlockingModeController) Custom ip description text */
 "custom_ip_description" = "Răspunde cu o adresă IP setată manual";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Filtre";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "Filtre DNS";
+
+/* (LowLevelSettingsController) - title for unsupported options */
+"unsupported_setting" = "Această opțiune este incompatibilă cu modul DNS nativ";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "Ați conectat numărul maxim de dispozitive la contul dvs. Setapp.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_safari" = "Știați că YouTube și-a schimbat algoritmii pentru a vă arăta mai multe anunțuri?<br><br>Acum, pentru a le bloca trebuie să:<br><br>1. Deschideți <a href=\"%@\">Safari</a>.<br><br>2. Deschideți youtube.com.<br><br>3. Apăsați %@ Distribuiți.<br><br> 4. Apăsați \"Blocare de anunțuri YouTube (de AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
+"block_youtube_ads_instructions" = "Știați că YouTube și-a schimbat algoritmii pentru a vă arăta mai multe anunțuri?<br><br>Acum, pentru a le bloca trebuie să:<br><br>1. Deschideți <a href=\"%@\">youtube.com</a> în Safari.<br><br>2. Apăsați %@ Distribuiți.<br><br>3. Apăsați \"Blocare de anunțuri YouTube (de AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "Gata! Acum puteți viziona YouTube fără reclame.\n\nCând extensia este activată, titlul \"cu AdGuard\" este afișat lângă logo-ul YouTube.<br><br><b>Dacă reîncărcați pagina, va trebui să efectuați din nou pașii 3 și 4.</b>";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "Gata! Acum puteți viziona YouTube fără reclame.\n\nCând extensia este activată, titlul \"cu AdGuard\" este afișat lângă logo-ul YouTube.<br><br><b>Dacă reîncărcați pagina, va trebui să efectuați din nou pașii 2 și 3.</b>";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "YouTube este acum fără reclame! Vă rugăm să rețineți că trebuie să executați din nou această extensie dacă reîncărcați pagina";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "Această extensie este destinată să fie rulată numai pe YouTube";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
+"youtube_script_already_executed_title" = "Extensia a fost deja executată";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "A survenit o eroare necunoscută la eliminarea anunțurilor YouTube";

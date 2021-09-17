@@ -616,6 +616,9 @@
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "Tapnite na <b>Safari</b> in izberite menijski vnos <b>\"Zaviralci vsebine\"</b>";
 
+/* (OnboardingController) second step text iOS15 . '%@' will be replaced with the safari icon */
+"onboarding_second_step_text_iOS15" = "Tapnite na <b>Safari</b> in izberite menijski vnos <b>\"Razširitve\"</b>";
+
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
 "onboarding_third_step_text" = "<b>Preklopite na vse zaviralce vsebine</b> in se vrnite v aplikacijo!";
 

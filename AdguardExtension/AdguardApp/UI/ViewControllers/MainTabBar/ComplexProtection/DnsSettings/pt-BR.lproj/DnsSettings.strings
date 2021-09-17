@@ -31,8 +31,8 @@
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
 "NX4-vI-1WP.text" = "Adicionar um filtro";
 
-/* Class = "UILabel"; text = "Blocks ads and trackers on the domain level and enhances your privacy by encrypting your DNS queries"; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
-"PFY-Cq-NFN.text" = "Bloqueia anúncios e rastreadores no nível de domínio e aprimora sua privacidade criptografando suas consultas DNS";
+/* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
+"PFY-Cq-NFN.text" = "Ative este módulo para aumentar sua privacidade criptografando seu tráfego DNS.";
 
 /* Class = "UIButton"; normalTitle = "DNS-over-QUIC (experimental)"; ObjectID = "PYL-vX-Dge"; */
 "PYL-vX-Dge.normalTitle" = "DNS-sobre-QUIC (experimental)";

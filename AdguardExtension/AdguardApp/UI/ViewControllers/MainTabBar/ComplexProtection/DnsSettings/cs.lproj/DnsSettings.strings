@@ -31,8 +31,8 @@
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
 "NX4-vI-1WP.text" = "Přidat filtr";
 
-/* Class = "UILabel"; text = "Blocks ads and trackers on the domain level and enhances your privacy by encrypting your DNS queries"; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
-"PFY-Cq-NFN.text" = "Blokuje reklamy a slídiče na úrovni domény a zvyšuje vaše soukromí šifrováním vašich DNS dotazů";
+/* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
+"PFY-Cq-NFN.text" = "Zapnutím tohoto modulu zvýšíte své soukromí šifrováním DNS provozu.";
 
 /* Class = "UIButton"; normalTitle = "DNS-over-QUIC (experimental)"; ObjectID = "PYL-vX-Dge"; */
 "PYL-vX-Dge.normalTitle" = "DNS skrze QUIC (experimentální)";
@@ -44,7 +44,7 @@
 "QYv-iX-uIo.text" = "DNS ochrana";
 
 /* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "Uem-fP-tai"; */
-"Uem-fP-tai.normalTitle" = "VYZKOUŠEJTE ZDARMA";
+"Uem-fP-tai.normalTitle" = "ZKUSTE ZDARMA";
 
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
 "Wml-J6-ced.text" = "Seznam povolených";

@@ -2,7 +2,7 @@
 "1A6-DD-78f.normalTitle" = "轉換模式";
 
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "1rj-wD-aeH"; */
-"1rj-wD-aeH.normalTitle" = "增加";
+"1rj-wD-aeH.normalTitle" = "新增";
 
 /* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "4IJ-xy-hky"; */
 "4IJ-xy-hky.normalTitle" = "已加密的";
@@ -74,7 +74,7 @@
 "kwZ-Kw-f1R.text" = "封鎖該請求";
 
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "l5B-oj-DnW"; */
-"l5B-oj-DnW.normalTitle" = "增加";
+"l5B-oj-DnW.normalTitle" = "新增";
 
 /* Class = "UIButton"; normalTitle = "requests"; ObjectID = "lKJ-8V-GJi"; */
 "lKJ-8V-GJi.normalTitle" = "請求";

@@ -31,8 +31,8 @@
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
 "NX4-vI-1WP.text" = "Добавить фильтр";
 
-/* Class = "UILabel"; text = "Blocks ads and trackers on the domain level and enhances your privacy by encrypting your DNS queries"; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
-"PFY-Cq-NFN.text" = "Блокирует рекламу и трекеры на уровне домена и улучшает конфиденциальность, шифруя ваши DNS-запросы";
+/* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
+"PFY-Cq-NFN.text" = "Включите этот модуль, чтобы заблокировать отслеживающие домены и зашифровать ваш DNS-трафик.";
 
 /* Class = "UIButton"; normalTitle = "DNS-over-QUIC (experimental)"; ObjectID = "PYL-vX-Dge"; */
 "PYL-vX-Dge.normalTitle" = "DNS-over-QUIC (экспериментальный)";
@@ -41,7 +41,7 @@
 "QD7-ng-Xb6.text" = "AdGuard";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "QYv-iX-uIo"; */
-"QYv-iX-uIo.text" = "Системная защита";
+"QYv-iX-uIo.text" = "DNS-защита";
 
 /* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "Uem-fP-tai"; */
 "Uem-fP-tai.normalTitle" = "ПОПРОБОВАТЬ";
@@ -83,7 +83,7 @@
 "ihd-7R-RfE.text" = "Черный список";
 
 /* Class = "UILabel"; text = "Works as a local \"pseudo\" VPN. Supports any DNS protocol, allows you to inspect your device DNS activity."; ObjectID = "lEg-oH-oxd"; */
-"lEg-oH-oxd.text" = "Работает как локальный \"псевдо\"-VPN. Поддерживает любой DNS-протокол, позволяет проверять DNS-активность устройства.";
+"lEg-oH-oxd.text" = "Работает как локальный «псевдо-VPN». Поддерживает любой DNS-протокол, позволяет проверять DNS-активность устройства.";
 
 /* Class = "UILabel"; text = "Website"; ObjectID = "mN8-Uh-sLQ"; */
 "mN8-Uh-sLQ.text" = "Веб-сайт";

@@ -241,9 +241,6 @@
 /* login error message */
 "login_error_message" = "Wystąpił błąd podczas logowania";
 
-/* purchase secription format */
-"purchase_description_format" = "Informacje o subskrypcji AdGuard:<br><br>▪ Płatność zostanie pobrana z konta iTunes po potwierdzeniu zakupu.<br>▪ Subskrypcja zostanie automatycznie przedłużona, chyba że automatyczne odnowienie zostanie wyłączone co najmniej 24 godziny przed końcem bieżącego okresu.<br>▪ Opłata za przedłużenie subskrypcji zostanie naliczona w ciągu 24 godzin przed końcem bieżącego okresu. Twoje subskrypcje mogą być zarządzane, a automatyczne odnawianie może być wyłączone w Ustawieniach konta iTunes po zakupie subskrypcji.<br><br><a href=%1$@>Polityka prywatności</a> <br><br><a href=%2$@>Warunki użytkowania</a>";
-
 /* lifetime purchase secription format */
 "lifetime_purchase_description_format" = "<a href=%1$@>Polityka prywatności</a> <br><br><a href=%2$@>Warunki korzystania</a>";
 

@@ -1,8 +1,8 @@
 /* (AEService) The default message for an unknown error. */
-"support_unexpected_error" = "Si è verificato un errore inaspettato. Contatta il team di supporto.";
+"support_unexpected_error" = "Si è verificato un errore inaspettato. Contatta la squadra di supporto.";
 
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
-"support_rule_converting_error" = "Non è possibile convertire le regole. Si è verificato un errore imprevisto. Contatta il team di supporto.";
+"support_rule_converting_error" = "Non è possibile convertire le regole. Si è verificato un errore imprevisto. Contatta la squadra di supporto.";
 
 /* (AEService) Service errors descriptions */
 "json_converting_error" = "Impossibile inizializzare il convertitore al formato JSON!";
@@ -86,7 +86,7 @@
 "lost_password" = "Password smarrita?";
 
 /* (SignInController) user not found message */
-"user_not_found_message" = "Nessun utente é stato trovato con questa email. Si prega di iscriversi prima su %@.";
+"user_not_found_message" = "Nessun utente é stato trovato con questa email. Ti invitiamo ad iscriverti prima su %@.";
 
 /* (SignInController) SignIn via AdGuard account title */
 "sign_in_via_adguard_title" = "Utilizza profilo AdGuard";
@@ -236,7 +236,7 @@
 "confirm_logout_text" = "Sei sicuro di voler uscire?";
 
 /* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
-"support_vpn_configuration_problem" = "C\'è stato un problema con la configurazione della VPN, contatta il nostro team di supporto.";
+"support_vpn_configuration_problem" = "C\'è stato un problema con la configurazione della VPN, contatta la nostra squadra di supporto.";
 
 /* login error message */
 "login_error_message" = "Si è verificato un errore durante l'accesso";
@@ -428,13 +428,13 @@
 "disabled" = "Disattivati";
 
 /*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
-"remove_from_whitelist" = "Rimuovi dalla lista bianca";
+"remove_from_whitelist" = "Rimuovi dalla Lista bianca";
 
 /*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
 "remove_from_blacklist" = "Rimuovi dalla lista nera";
 
 /*(LogRecord) "ADD TO ALLOWLIST" button title */
-"add_to_whitelist" = "Aggiungi alla lista bianca";
+"add_to_whitelist" = "Aggiungi alla Lista bianca";
 
 /*(LogRecord) "ADD TO BLOCKLIST" button title */
 "add_to_blacklist" = "Aggiungi alla lista nera";
@@ -619,6 +619,9 @@
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "Tocchi su <b>Safari</b> e scegli la voce <b>\"Blocchi di contenuti\"</b> dal menù";
 
+/* (OnboardingController) second step text iOS15 . '%@' will be replaced with the safari icon */
+"onboarding_second_step_text_iOS15" = "Clicca su <b>Safari</b> e scegli la voce <b>\"Estensioni\"</b> dal menù";
+
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
 "onboarding_third_step_text" = "<b>Attiva tutti i blocchi di contenuti</b> e torna alla nostra app!";
 
@@ -740,13 +743,13 @@
 "bug_report_failed_message" = "Errore nell\'invio della segnalazione bug, si prega di riprovare";
 
 /* (BugReportController) Message when leaving feedback failed */
-"feedback_failed_message" = "Errore nell\'invio del feedback, si prega di riprovare";
+"feedback_failed_message" = "Impossibile inviare il feedback, si prega di riprovare";
 
 /* (BugReportController) Message when bug report successed */
 "bug_report_successed_message" = "La tua segnalazione bug è stata correttamente inviata!";
 
 /* (BugReportController) Message when feedback leaving successed */
-"feedback_successed_message" = "La tua segnalazione bug è stata correttamente inviata!";
+"feedback_successed_message" = "Il tuo feedback è stato inviato correttamente!";
 
 /* (BugReportController) title for bug report */
 "bug_report_title" = "Segnala un bug";
@@ -755,7 +758,7 @@
 "leave_feedback_title" = "Lascia feedback";
 
 /* (BugReportController) description for bug report */
-"bug_report_description" = "Si prega di includere la descrizione del problema (è iniziato dopo un aggiornamento?) e le informazioni su altri software in tuo possesso (VPN/AV/estensione)";
+"bug_report_description" = "Ti suggeriamo di includere la descrizione del problema (è iniziato dopo un aggiornamento?) e le informazioni su altri software in tuo possesso (VPN/AV/estensione)";
 
 /* (BugReportController) description for leaving feedback */
 "leave_feedback_description_format" = "Dicci cosa pensi di %@: cosa ti piace o cosa non ti piace, quali caratteristiche vorresti suggerire";

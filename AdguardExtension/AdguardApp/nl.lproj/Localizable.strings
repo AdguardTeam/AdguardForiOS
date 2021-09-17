@@ -233,7 +233,7 @@
 "login_error_message" = "Er is een fout opgetreden tijdens het aanmelden";
 
 /* purchase secription format */
-"purchase_description_format" = "Over AdGuard abonnementen:<br><br>Betalingen worden gedaan via je iTunes account wanneer je je aankoop bevestigd.<br><br> Het abonnement wordt automatisch verlengd tenzij je dit uiterlijk 24 uur voor het einde van de abonnementsperiode uitzet.<br><br>De koen van het verlengen van het abonnement worden binnen 24 uur voor het einde van de lopende periode in rekening gebracht.<br><br>Je abonnementen kunnen worden beheerd en automatische verlengingen kunnen worden uitgeschakeld in de accountinstellingen van iTunes na aankoop van een abonnement.<br><br><a href=%2$@>Voorwaarden en condities</a> en <a href=%1$@>Privacybeleid</a>";
+"purchase_description_format" = "Over AdGuard-abonnement:<br><br>• Betalingen worden gedaan via je iTunes account wanneer de aankoop wordt bevestigd.<br><br>• Het abonnement wordt automatisch verlengd tenzij je dit uiterlijk 24 uur voor het einde van de abonnementsperiode uitzet.<br><br>• De kosten van het verlengen van het abonnement worden binnen 24 uur voor het einde van de lopende periode in rekening gebracht.<br><br>• Je abonnementen kunnen worden beheerd en automatische verlengingen kunnen worden uitgeschakeld in de accountinstellingen van iTunes na aankoop van een abonnement.<br><br><a href=%2$@>Voorwaarden en condities</a> en <a href=%1$@>Privacybeleid</a>";
 
 /* lifetime purchase secription format */
 "lifetime_purchase_description_format" = "<a href=%1$@>Privacy policy</a> <br><br><a href=%2$@>Gebruiksvoorwaarden</a>";
@@ -609,6 +609,9 @@
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "Tik op <b> Safari </b> en kies de <b> \"Content blockers\" </b> menu-item";
+
+/* (OnboardingController) second step text iOS15 . '%@' will be replaced with the safari icon */
+"onboarding_second_step_text_iOS15" = "Tik op <b>Safari</b> en kies het menu-item <b>\"Uitbreidingen\"</b>";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
 "onboarding_third_step_text" = "<b>Alle inhoudblokkeerders inschakelen</b> en teruggaan naar de app!";

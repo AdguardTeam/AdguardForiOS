@@ -29,10 +29,10 @@
 "Mxf-0w-5MP.text" = "由該作業系統本身提供。於此模式下將無法檢閱 DNS 活動。\n\n";
 
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
-"NX4-vI-1WP.text" = "增加一個過濾器";
+"NX4-vI-1WP.text" = "新增一個過濾器";
 
-/* Class = "UILabel"; text = "Blocks ads and trackers on the domain level and enhances your privacy by encrypting your DNS queries"; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
-"PFY-Cq-NFN.text" = "於網域層級上封鎖廣告和追蹤器，並透過加密您的 DNS 查詢來增強您的隱私";
+/* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
+"PFY-Cq-NFN.text" = "啟用此模組以透過加密您的 DNS 流量來提升您的隱私。";
 
 /* Class = "UIButton"; normalTitle = "DNS-over-QUIC (experimental)"; ObjectID = "PYL-vX-Dge"; */
 "PYL-vX-Dge.normalTitle" = "DNS-over-QUIC（實驗性的）";
@@ -65,7 +65,7 @@
 "csw-3H-3tU.text" = "伺服器";
 
 /* Class = "UILabel"; text = "Add a custom DNS server"; ObjectID = "d1u-rO-z2K"; */
-"d1u-rO-z2K.text" = "增加一個自訂的 DNS 伺服器";
+"d1u-rO-z2K.text" = "新增一個自訂的 DNS 伺服器";
 
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "dW3-zk-BPr"; */
 "dW3-zk-BPr.text" = "DNS 伺服器位址";

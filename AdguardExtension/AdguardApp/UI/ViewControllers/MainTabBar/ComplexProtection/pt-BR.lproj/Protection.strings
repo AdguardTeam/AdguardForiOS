@@ -7,7 +7,7 @@
 /* Class = "UILabel"; text = "AdGuard VPN"; ObjectID = "Hnw-bh-Bgh"; */
 "Hnw-bh-Bgh.text" = "AdGuard VPN";
 
-/* Class = "UITextView"; text = "premium"; ObjectID = "P9C-72-GAw"; */
+/* Class = "UILabel"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "premium";
 
 /* Class = "UILabel"; text = "Safari extension that removes ads and ad leftovers and brings back autoplay on YouTube"; ObjectID = "Sry-3f-FQj"; */
@@ -22,16 +22,16 @@
 /* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "kDM-2d-bRK"; */
 "kDM-2d-bRK.text" = "Bloqueio de anúncios no YouTube";
 
-/* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
+/* Class = "UILabel"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "gratuito";
 
-/* Class = "UILabel"; text = "Works along with AdGuard ad blocker"; ObjectID = "tKQ-Yn-fgL"; */
+/* Class = "UILabel"; text = "Works alongside AdGuard ad blocker"; ObjectID = "tKQ-Yn-fgL"; */
 "tKQ-Yn-fgL.text" = "Trabalha junto com o bloqueador de anúncios do AdGuard";
 
-/* Class = "UILabel"; text = "Blocks ads and trackers on domain level and encrypts your queries"; ObjectID = "teo-vm-NRJ"; */
-"teo-vm-NRJ.text" = "Bloqueia anúncios e rastreadores no nível de domínio e criptografa suas dúvidas";
+/* Class = "UILabel"; text = "This module allows you to use a custom DNS server and enhances your privacy by encrypting your DNS queries"; ObjectID = "teo-vm-NRJ"; */
+"teo-vm-NRJ.text" = "Este módulo permite que você use um servidor DNS personalizado e melhore sua privacidade ao criptografar suas consultas de DNS";
 
-/* Class = "UITextView"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
+/* Class = "UILabel"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
 "vNo-hV-l4c.text" = "Não instalado";
 
 /* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "vlx-BS-A2y"; */

@@ -19,6 +19,12 @@
 /* Alert title. On error. */
 "common_error_title" = "Chyba";
 
+/* (AEService) Service errors descriptions */
+"safari_filters_loading_error" = "Filtre nie je možné načítať do Safari, takže Vaše posledné zmeny nebudú použité.";
+
+/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
+"load_to_safari_error" = "Filtre sa nedajú načítať do Safari. Skúste vymazať Vaše pravidlá a zoznam povolení, alebo zmeňte nastavenia použitých filtrov.";
+
 /* NO Button caption in alert */
 "common_action_no" = "NIE";
 
@@ -45,6 +51,12 @@
 
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10K";
+
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "Natívna DNS funguje";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "Natívna DNS nefunguje";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Používateľský filter";
@@ -106,8 +118,14 @@
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Pri pokuse o obnovu nákupu nastala chyba.";
 
+/* (AEUIGetProViewController) message that appears when purchase successfully restored */
+"restore_success_message" = "Nákup bol obnovený! Prémiová verzia AdGuard pre iOS bola aktivovaná.";
+
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "Nedajú sa obnoviť žiadne nákupy";
+
+/* (AEUIGetProViewController) message that appears when the purchase is successful */
+"purchase_success_message" = "Nákup bol úspešne dokončený! Prémiová verzia programu AdGuard pre iOS bola aktivovaná.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "Počas spracovania nákupu sa vyskytla chyba.";
@@ -123,6 +141,9 @@
 
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Sem zadajte svoje vlastné pravidlá<br>Prečítajte si túto  <a href=\"%@\">poznámku o syntaxe pravidiel</a>.";
+
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "Sem zadajte domény, ktoré AdGuard nemá filtrovať. Tento zoznam má prednosť pred ostatnými nastaveniami.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Sem zadajte názvy domén. AdGuard zapne filtráciu len na týchto webových stránkach v Safari";
@@ -221,7 +242,7 @@
 "login_error_message" = "Počas prihlasovania sa vyskytla chyba";
 
 /* purchase secription format */
-"purchase_description_format" = "AdGuard Premium je platená ročná služba s predplateným 2,99 USD za rok (cena sa môže líšiť podľa regiónu). Platba bude účtovaná na účet iTunes pri potvrdení nákupu. Predplatné sa automaticky obnoví, pokiaľ nie je automatické obnovenie vypnuté aspoň 24 hodín pred koncom aktuálneho obdobia. Obnovenie predplatného bude účtované do 24 hodín pred koncom aktuálneho obdobia. Vaše odbery môžu byť spravované a Vaše automatické obnovenie môže byť vypnuté tak, že prejdete na nastavenia účtu iTunes po zakúpení predplatného.<br><br><a href=%1$@>Zásady ochrany osobných údajov</a> <br><br><a href=%2$@>Zmluvné podmienky</a>";
+"purchase_description_format" = "O predplatnom AdGuard:<br><br>• Platba bude účtovaná na Váš účet iTunes pri potvrdení nákupu.<br><br>• Predplatné sa automaticky obnoví, pokiaľ nevypnete automatické obnovenie najmenej 24 hodín pred koncom aktuálneho obdobia.<br><br>• Poplatok za obnovenie predplatného bude účtovaný do 24 hodín pred koncom aktuálneho obdobia.<br><br>Vaše predplatné je možné spravovať a Vaše automatické obnovenie môže byť vypnuté v nastaveniach účtu iTunes po zakúpení predplatného.<br><br><a href=%2$@>Podmienky</a> a <a href=%1$@>Zásady ochrany osobných údajov</a>";
 
 /* lifetime purchase secription format */
 "lifetime_purchase_description_format" = "<a href=%1$@>Pravidlá ochrany súkromia</a> <br><br><a href=%2$@>Podmienky používania</a>";
@@ -508,6 +529,15 @@
 /*(MainScreen) "all time" chart date type */
 "chart_alltime" = "Celé obdobie";
 
+/*(SafariService) notification about loading content blockers  */
+"loading_content_blockers" = "Blokovače obsahu sa aktualizujú ...";
+
+/*(FiltersService) notification about filters laoding  */
+"loading_filters" = "Načítavajú sa filtre ...";
+
+/*(ContentBlockerService) notification about converting rules  */
+"converting_rules" = "Pravidlá sa konvertujú ...";
+
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "Nový vlastný filter";
 
@@ -588,6 +618,12 @@
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "Ťuknite na <b>Safari</b> a vyberte položku ponuky <b>\"Blokovače obsahu\"</b>";
+
+/* (OnboardingController) second step text iOS15 . '%@' will be replaced with the safari icon */
+"onboarding_second_step_text_iOS15" = "Ťuknite na <b>Safari</b> a vyberte položku ponuky <b>Rozšírenia</b>";
+
+/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
+"onboarding_third_step_text" = "<b>Zapnite všetky blokovače obsahu</b> a vráťte sa do našej aplikácie!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "Systémové DNS";
@@ -924,6 +960,12 @@
 
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "K Vášmu Setapp účtu ste pripojili maximálny počet zariadení.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_safari" = "Vedeli ste, že služba YouTube zmenila svoje algoritmy, aby Vám zobrazovala viac reklám?<br><br>Teraz, aby ste ich mohli zablokovať, musíte:<br><br>1. Otvorte<a href=\"%@\">Safari</a>.<br><br>2. Otvorte stránku youtube.com.<br><br>3. Kliknite na tlačidlo %@ Zdieľať.<br><br>4. Kliknite na „Blokovať reklamy na YouTube (pomocou AdGuard)“.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
+"block_youtube_ads_instructions" = "Vedeli ste, že služba YouTube zmenila svoje algoritmy, aby Vám zobrazovala viac reklám?<br><br>Teraz, aby ste ich mohli zablokovať, musíte:<br><br>1. Otvorte stránku youtube.com v prehliadači Safari.<br><br>2. Kliknite na tlačidlo %@ Zdieľať.<br><br>3. Kliknite na možnosť „Blokovať reklamy na YouTube (pomocou AdGuard)“.";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
 "block_youtube_ads_instructions_done_text_safari" = "Hotovo! Teraz môžete sledovať YouTube bez reklám.\n\nAk je rozšírenie zapnuté, vedľa loga YouTube sa zobrazuje titulok „s AdGuard“.<br><br><b>Ak stránku načítate znova, budete musieť znova vykonať kroky 3 a 4.</b>";

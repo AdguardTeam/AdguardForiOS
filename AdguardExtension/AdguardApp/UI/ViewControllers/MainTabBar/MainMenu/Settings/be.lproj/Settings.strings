@@ -7,6 +7,9 @@
 /* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
 "8jT-85-XFp.text" = "Не стасуем з іншымі VPN-дадаткамі, нестабільны";
 
+/* Class = "UILabel"; text = "Delete VPN profile"; ObjectID = "9hH-ca-VHY"; */
+"9hH-ca-VHY.text" = "Выдаліць VPN-профіль";
+
 /* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "BOT-Ej-15M"; */
 "BOT-Ej-15M.text" = "Паказваць індыкатар абнаўленняў фільтраў";
 
