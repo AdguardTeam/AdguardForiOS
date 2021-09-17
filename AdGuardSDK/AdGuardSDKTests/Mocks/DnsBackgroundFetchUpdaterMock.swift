@@ -4,10 +4,6 @@ final class DnsBackgroundFetchUpdaterMock: DnsBackgroundFetchUpdateProtocol {
     var updateFiltersInBackgroundError: Error? = nil
     func updateFiltersInBackground(onFiltersUpdate: @escaping (Error?) -> Void) {
         updateFiltersInBackgroundCalledCount += 1
-        if let error = updateFiltersInBackgroundError {
-            onFiltersUpdate(error)
-            return
-        }
-        onFiltersUpdate(nil)
+        onFiltersUpdate(updateFiltersInBackgroundError)
     }
 }

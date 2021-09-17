@@ -106,25 +106,38 @@ extension SafariProtection {
     }
     
     public func finishBackgroundUpdate(_ onUpdateFinished: @escaping (_ error: Error?) -> Void) {
-        Logger.logInfo("(SafariProtection+BackgroundFetch) - finishBackgroundUpdate start; Current state = \(self.currentBackgroundFetchState)")
-        
-        switch self.currentBackgroundFetchState {
-        case .loadAndSaveFilters:
-            complexFiltersUpdate(inBackground: false) { _ in }
-            fallthrough
-        case .convertFilters:
-            let (_, error) = self.convertFilters(inBackground: false)
-            if let error = error {
-                onUpdateFinished(error)
+        DispatchQueue(label: "SafariAdGuardSDK.SafariProtection.finishBackgroundUpdate").async { [weak self] in
+            guard let self = self else {
+                Logger.logError("(SafariProtection+BackgroundFetch) - finishBackgroundUpdate; Missing self")
+                onUpdateFinished(CommonError.missingSelf)
                 return
             }
-            fallthrough
-        case .reloadContentBlockers:
-            self.reloadContentBlockers(inBackground: false) { _, error in
-                onUpdateFinished(error)
+            
+            Logger.logInfo("(SafariProtection+BackgroundFetch) - finishBackgroundUpdate start; Current state = \(self.currentBackgroundFetchState)")
+            
+            switch self.currentBackgroundFetchState {
+            case .loadAndSaveFilters:
+                let group = DispatchGroup()
+                group.enter()
+                self.complexFiltersUpdate(inBackground: false) { _ in
+                    group.leave()
+                }
+                group.wait()
+                fallthrough
+            case .convertFilters:
+                let (_, error) = self.convertFilters(inBackground: false)
+                if let error = error {
+                    onUpdateFinished(error)
+                    return
+                }
+                fallthrough
+            case .reloadContentBlockers:
+                self.reloadContentBlockers(inBackground: false) { _, error in
+                    onUpdateFinished(error)
+                }
+            case .updateFinished:
+                onUpdateFinished(nil)
             }
-        case .updateFinished:
-            onUpdateFinished(nil)
         }
     }
     
