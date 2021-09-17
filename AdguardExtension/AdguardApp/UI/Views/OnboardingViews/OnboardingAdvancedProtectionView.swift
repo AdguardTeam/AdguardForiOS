@@ -18,6 +18,10 @@
 
 import UIKit
 
+/**
+ OnboardingAdvancedProtectionView - Custom view for onboarding screen
+ */
+
 final class OnboardingAdvancedProtectionView: UIView {
     //MARK: - Properties
     private let safariIcon: UIImageView = {

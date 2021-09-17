@@ -18,10 +18,17 @@
 
 import UIKit
 
+/**
+ WhatsNewBottomAlertControllerDelegate - Delegate protocol
+ */
 protocol WhatsNewBottomAlertControllerDelegate: AnyObject {
     func enableButtonForNonProTapped()
 }
 
+
+/**
+ WhatsNewBottomAlertController - Responsible for representation new features available in new version of app
+ */
 final class WhatsNewBottomAlertController: BottomAlertController {
     
     //MARK: - Outlets

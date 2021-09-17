@@ -18,6 +18,9 @@
 
 import UIKit
 
+/**
+  AdvancedProtectionController - Responsible for representation advanced settings for Safari Web Extension
+ */
 final class AdvancedProtectionController: UIViewController {
     //MARK: - Outlets
     @IBOutlet weak var onOffLabel: UILabel!
