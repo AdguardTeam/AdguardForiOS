@@ -242,7 +242,7 @@
 "login_error_message" = "登录时发生错误";
 
 /* purchase secription format */
-"purchase_description_format" = "AdGuard Premium 是一种年度付费服务，每年的订阅价格为 $2.99（定价可能会因区域不同而有所不同）。在购买确认时，款项会充值到 iTunes 账号。订阅会自动续订，除非在当前订阅期结束前的 24 小时内关闭自动续订。当前订阅期结束前的 24 小时内，款项会自动充值到账号。您可转到您的 iTunes 账号设置管理订阅，关闭自动续订。<br><br><a href=%1$@>隐私策略</a> <br><br><a href=%2$@>使用条款</a>";
+"purchase_description_format" = "关于 AdGuard 订阅：<br><br>• 在购买确认后，您的 iTunes 账号会直接付款。<br><br>• 订阅会自动续订，除非在当前订阅期结束前的 24 小时内关闭自动续订。<br><br>• 在当前订阅期结束前的 24 小时内，软件会自动收取续订费。<br><br>• 购买订阅后，您可转到您的 iTunes 账号设置管理订阅，关闭自动续订。 <br><br><a href=%2$@>条款与条件</a>和<a href=%1$@>隐私政策</a>";
 
 /* lifetime purchase secription format */
 "lifetime_purchase_description_format" = "<a href=%1$@>隐私政策</a> <br><br><a href=%2$@>使用条款</a>";
@@ -618,6 +618,9 @@
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "点击 <b>Safari浏览器</b>，选择 <b>\"内容拦截器\"</b> 菜单项";
+
+/* (OnboardingController) second step text iOS15 . '%@' will be replaced with the safari icon */
+"onboarding_second_step_text_iOS15" = "点击 <b>Safari</b>，选择 <b>「扩展」</b> 菜单项";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
 "onboarding_third_step_text" = "<b>开启所有内容拦截器</b>后，返回应用程序！";

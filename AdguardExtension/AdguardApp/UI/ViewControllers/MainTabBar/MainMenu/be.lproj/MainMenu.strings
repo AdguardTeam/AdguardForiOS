@@ -1,3 +1,8 @@
+/* Class = "UILabel"; text = "Email address is incorrect"; ObjectID = "5dK-DT-TDt"; */
+"5dK-DT-TDt.text" = "Няправільны адрас электроннай пошты";
+
+/* Class = "UILabel"; text = "Description:"; ObjectID = "5nl-wn-tlv"; */
+"5nl-wn-tlv.text" = "Апісанне:";
 
 /* Class = "UILabel"; text = "Support"; ObjectID = "6Z2-0N-PSp"; */
 "6Z2-0N-PSp.text" = "Падтрымка";
@@ -5,8 +10,17 @@
 /* Class = "UILabel"; text = "Rate app"; ObjectID = "B4f-Bt-0w6"; Note = "(Main Menu) Advanced Settings caption"; */
 "B4f-Bt-0w6.text" = "Ацаніць дадатак";
 
+/* Class = "UILabel"; text = "Missed ads or broken sites"; ObjectID = "Con-9Z-LDc"; */
+"Con-9Z-LDc.text" = "Прапушчаная рэклама або сайты не працуюць";
+
+/* Class = "UILabel"; text = "License"; ObjectID = "Ebc-Lf-9R1"; */
+"Ebc-Lf-9R1.text" = "Ліцэнзія";
+
 /* Class = "UILabel"; text = "Help us make AdGuard better"; ObjectID = "Em7-2h-SKs"; */
 "Em7-2h-SKs.text" = "Дапамажыце нам зрабіць AdGuard лепш!";
+
+/* Class = "UILabel"; text = "Report a bug"; ObjectID = "GA6-E3-BcJ"; Note = "(Main Menu) Advanced Settings caption"; */
+"GA6-E3-BcJ.text" = "Паведаміць пра памылку";
 
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "HiP-B6-ATJ"; */
 "HiP-B6-ATJ.text" = "Абарона Safari";

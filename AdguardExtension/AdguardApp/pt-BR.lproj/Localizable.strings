@@ -619,6 +619,9 @@
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "Toque no <b>Safari</b> e escolha no menu <b>\"bloqueadores de conteúdo\"</b>";
 
+/* (OnboardingController) second step text iOS15 . '%@' will be replaced with the safari icon */
+"onboarding_second_step_text_iOS15" = "Toque em <b>Safari</b> e escolha o item de menu <b>\"Extensões\"</b>";
+
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
 "onboarding_third_step_text" = "<b>Ative em todos os bloqueadores de conteúdo</b> e volte para o aplicativo!";
 

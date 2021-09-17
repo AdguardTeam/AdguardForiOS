@@ -242,7 +242,7 @@
 "login_error_message" = "En fejl opstod under indlogningen";
 
 /* purchase secription format */
-"purchase_description_format" = "Om AdGuard-abonnement:<br><br>Betaling opkræves fra din iTunes-konto ved købsbekræftelse.<br><br>Abonnementet fornyes automatisk, medmindre autofornyelse er deaktiveret mindst 24 timer inden udløb af den aktuelle periode.<br><br>Betalingen for abonnementsfornyelse vil blive opkrævet inden for 24 timer inden udløb af den aktuelle periode.<br><br>Dine abonnementer kan håndteres, og din autofornyelse kan slås fra ved at gå til dine iTunes-kontoindstillinger efter køb af et abonnement.<br><br><a href=%2$@>Vilkår og Betingelse</a> og <a href=%1$@>Fortrolighedspolitik</a>";
+"purchase_description_format" = "Om AdGuard-abonnement:<br><br>• Betaling opkræves fra din iTunes-konto ved købsbekræftelse.<br><br>• Abonnementet fornyes automatisk, medmindre autofornyelse er deaktiveret, mindst 24 timer inden udløb af den aktuelle periode.<br><br>• Betalingen for abonnementsfornyelse opkræves inden for 24 timer inden udløb af den aktuelle periode.<br><br>Dine abonnementer kan håndteres, og din autofornyelse kan slås fra ved at gå til dine iTunes-kontoindstillinger efter køb af et abonnement.<br><br><a href=%2$@>Vilkår og Betingelse</a> og <a href=%1$@>Fortrolighedspolitik</a>";
 
 /* lifetime purchase secription format */
 "lifetime_purchase_description_format" = "<a href=%2$@>Vilkår og Betingelser</a> and <a href=%1$@>Fortrolighedspolitik</a>";
@@ -618,6 +618,9 @@
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "Tryk på <b>Safari</b> og vælg menupunktet <b>\"Indholdsblockere\"</b>";
+
+/* (OnboardingController) second step text iOS15 . '%@' will be replaced with the safari icon */
+"onboarding_second_step_text_iOS15" = "Tryk på <b>Safari</b> og vælg menupunktet <b>Udvidelser</b>";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
 "onboarding_third_step_text" = "<b>Slå alle indholdsblockere til</b> og returnér til appen!";

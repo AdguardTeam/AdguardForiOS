@@ -242,7 +242,7 @@
 "login_error_message" = "При входе в систему произошла ошибка";
 
 /* purchase secription format */
-"purchase_description_format" = "AdGuard Премиум — это платный сервис с ежегодной подпиской. Средства спишутся с вашего аккаунта iTunes после подтверждения покупки. <br>• Подписка обновляется автоматически (и происходит списывание средств), если не будет отменена по крайней мере за 24 часа до окончания текущего периода. <br>• Управлять подписками и отменить автоматическое продление можно, перейдя в ваш аккаунт iTunes после приобретения подписки.<br><br><a href=%2$@>Условия использования</a> и <br><br><a href=%1$@>Политика конфиденциальности</a> ";
+"purchase_description_format" = "О подписке AdGuard:<br><br>• Средства спишутся с вашего аккаунта iTunes после подтверждения покупки.<br><br>• Подписка обновляется автоматически (и происходит списывание средств), если не будет отменена по крайней мере за 24 часа до окончания текущего периода.<br><br>• Управлять подписками и отменить автоматическое продление можно, перейдя в ваш аккаунт iTunes после приобретения подписки.<br><br><a href=%2$@>Условия использования</a> и <a href=%1$@>Политика конфиденциальности</a> ";
 
 /* lifetime purchase secription format */
 "lifetime_purchase_description_format" = "<br><br><a href=%2$@>Условия использования</a> и <a href=%1$@>Политика конфиденциальности</a> ";
@@ -566,7 +566,7 @@
 "complex_disabled" = "Все модули защиты выключены";
 
 /*(TodayViewController) DNS protection is enabled text  */
-"system_enabled" = "Системная защита";
+"system_enabled" = "DNS-защита";
 
 /*(TodayViewController) Statistics format text  */
 "widget_statistics" = "%1$d запросов, %2$d зашифровано";
@@ -614,10 +614,13 @@
 "dns_request_user_status_removed_from_blacklist" = "удален из черного списка";
 
 /* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "Открыть  <b>настройки</b>";
+"onboarding_first_step_text" = "Откройте <b>настройки</b>";
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "Нажмите на <b>Safari</b> и выберите раздел <b>\"Блокировщики контента\"</b>";
+"onboarding_second_step_text" = "Нажмите на <b>Safari</b> и выберите раздел <b>«Блокировщики контента»</b>";
+
+/* (OnboardingController) second step text iOS15 . '%@' will be replaced with the safari icon */
+"onboarding_second_step_text_iOS15" = "Нажмите на <b>Safari</b> и выберите раздел <b>«Расширения»</b>";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
 "onboarding_third_step_text" = "<b>Включите все блокировщики контента</b> и возвращайтесь в приложение!";
@@ -821,7 +824,7 @@
 "rate_app_description" = "Расскажите нам, довольны ли вы блокировкой рекламы";
 
 /* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
-"rate_app_problem_description" = "Убедитесь, что вы используете <b>браузер Safari.</b><br> Сейчас технически невозможно блокировать контент в других браузерах.<br> Перейдите в настройки \"Защита Safari\" и включите все необходимые фильтры.<br> Перезапустите приложение Safari: выйдите из него, а затем откройте снова.";
+"rate_app_problem_description" = "Убедитесь, что вы используете <b>браузер Safari.</b><br> Сейчас технически невозможно блокировать контент в других браузерах.<br> Перейдите в настройки «Защита Safari» и включите все необходимые фильтры.<br> Перезапустите приложение Safari: выйдите из него, а затем откройте снова.";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -924,7 +927,7 @@
 "low_level_bootstraps_placeholder" = "Список DNS-серверов, используемых для преобразования имен хоста DOH/DOT";
 
 /* (LowLevelSettingsController) Low level fallbacks placeholder */
-"low_level_fallbacks_placeholder" = "Резервный DNS-сервер, который будет использоваться, когда настроенный сервер недоступен. Пустая строка означает использование системного DNS как запасного. Строка \"none\" означает отсутствие резервного сервера.";
+"low_level_fallbacks_placeholder" = "Резервный DNS-сервер, который будет использоваться, когда настроенный сервер недоступен. Пустая строка означает использование системного DNS как запасного. Строка «none» означает отсутствие резервного сервера.";
 /* (UpstreamsController) bootstraps title */
 "upstreams_bootstraps_title" = "Bootstrap-серверы";
 
@@ -959,10 +962,10 @@
 "setapp_device_limit_reached" = "Вы подключили максимальное количество устройств в аккаунте Setapp.";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
-"block_youtube_ads_instructions_safari" = "Вы знали, что YouTube изменил алгоритмы, чтобы показывать вам больше рекламы?<br><br>Чтобы заблокировать её:<br><br>1. Откройте <a href=\"%@\">Safari</a>.<br><br>2. Откройте youtube.com.<br><br>3. Нажмите на %@ кнопку \"Поделиться\".<br><br> 4. Нажмите \"Блокировать рекламу на YouTube (от AdGuard)\".";
+"block_youtube_ads_instructions_safari" = "Вы знали, что YouTube изменил алгоритмы, чтобы показывать вам больше рекламы?<br><br>Чтобы заблокировать её:<br><br>1. Откройте <a href=\"%@\">Safari</a>.<br><br>2. Откройте youtube.com.<br><br>3. Нажмите на %@ кнопку «Поделиться».<br><br> 4. Нажмите «Блокировать рекламу на YouTube (от AdGuard)».";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
-"block_youtube_ads_instructions" = "Вы знали, что YouTube изменил алгоритмы, чтобы показывать вам больше рекламы? Чтобы заблокировать её:<br><br>1. Откройте <a href=\"%@\">youtube.com</a> в Safari.<br><br>2. Нажмите на %@ кнопку \"Поделиться\".<br><br>3. Нажмите \"Блокировать рекламу на YouTube (от AdGuard)\".";
+"block_youtube_ads_instructions" = "Вы знали, что YouTube изменил алгоритмы, чтобы показывать вам больше рекламы? Чтобы заблокировать её:<br><br>1. Откройте <a href=\"%@\">youtube.com</a> в Safari.<br><br>2. Нажмите на %@ кнопку «Поделиться».<br><br>3. Нажмите «Блокировать рекламу на YouTube (от AdGuard)».";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
 "block_youtube_ads_instructions_done_text_safari" = "Готово! Теперь вы можете смотреть YouTube без рекламы.\n\nКогда расширение включено, рядом с логотипом YouTube отображается надпись “with AdGuard”.<br><br><b>Если вы перезагрузите страницу, вам нужно будет повторить шаги 3 и 4.</b>";

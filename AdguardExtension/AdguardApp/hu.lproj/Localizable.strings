@@ -220,9 +220,6 @@
 /* login error message */
 "login_error_message" = "Hiba történt a kijelentkezés során";
 
-/* purchase secription format */
-"purchase_description_format" = "Az AdGuard előfizetésről:<br><br>• A fizetés az Ön iTunes-fiókjára kerül felszámolásra a vásárlás visszaigazolásakor.<br><br>• Az előfizetés automatikusan megújul, kivéve, ha az automatikus megújítást legalább 24 órával az aktuális időszak vége előtt kikapcsolják.<br><br>• Az előfizetés megújításának díját az aktuális időszak vége előtt 24 órán belül felszámítják.<br><br>Előfizetéseit az Tunes-fiókbeállításokban kezelheti, valamint az automatikus megújítását az előfizetés megvásárlását követően szintén itt tudja kikapcsolni.<br><br><a href=%2$@>Felhasználási feltételek</a> és <a href=%1$@>Adatvédelmi irányelvek</a>";
-
 /* lifetime purchase secription format */
 "lifetime_purchase_description_format" = "<a href=%2$@>Felhasználási feltételek</a> és <a href=%1$@>Adatvédelmi irányelvek</a>";
 

@@ -17,7 +17,7 @@
 "AOm-kV-l4z.text" = "AdGuard bu listeden alan adlarını engelleyecek";
 
 /* Class = "UIButton"; normalTitle = "DNS-over-HTTPS"; ObjectID = "DrO-hc-ilW"; */
-"DrO-hc-ilW.normalTitle" = "HTTPS üzerinden DNS";
+"DrO-hc-ilW.normalTitle" = "DNS-over-HTTPS";
 
 /* Class = "UILabel"; text = "Advanced network settings"; ObjectID = "FUx-XP-SzD"; */
 "FUx-XP-SzD.text" = "Gelişmiş ağ ayarları";
@@ -30,6 +30,9 @@
 
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
 "NX4-vI-1WP.text" = "Filtre ekle";
+
+/* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
+"PFY-Cq-NFN.text" = "DNS trafiğinizi şifreleyerek gizliliğinizi geliştirmek için bu modülü etkinleştirin.";
 
 /* Class = "UIButton"; normalTitle = "DNS-over-QUIC (experimental)"; ObjectID = "PYL-vX-Dge"; */
 "PYL-vX-Dge.normalTitle" = "DNS-over-QUIC (deneysel)";
@@ -44,7 +47,7 @@
 "Uem-fP-tai.normalTitle" = "ÜCRETSİZ DENE";
 
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
-"Wml-J6-ced.text" = "İzin verilen listesi";
+"Wml-J6-ced.text" = "İzin listesi";
 
 /* Class = "UILabel"; text = "DNS implementation"; ObjectID = "Xa6-wl-aOE"; */
 "Xa6-wl-aOE.text" = "DNS uygulaması";
@@ -77,7 +80,7 @@
 "iaJ-tk-ohH.text" = "DNS akışını şifreleyerek çevrimiçi gizliliğinizi artırabilirsiniz. Bunu yapmak için önerilen DNS sağlayıcılarından birini seçin.";
 
 /* Class = "UILabel"; text = "Blocklist"; ObjectID = "ihd-7R-RfE"; */
-"ihd-7R-RfE.text" = "Engelleme listesi";
+"ihd-7R-RfE.text" = "Engel listesi";
 
 /* Class = "UILabel"; text = "Works as a local \"pseudo\" VPN. Supports any DNS protocol, allows you to inspect your device DNS activity."; ObjectID = "lEg-oH-oxd"; */
 "lEg-oH-oxd.text" = "Yerel bir \"sözde\" VPN olarak çalışır. Herhangi bir DNS protokolünü destekler, cihazınızın DNS etkinliğini incelemenizi sağlar.";

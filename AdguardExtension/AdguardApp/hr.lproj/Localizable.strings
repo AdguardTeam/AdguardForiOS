@@ -19,6 +19,12 @@
 /* Alert title. On error. */
 "common_error_title" = "Pogreška";
 
+/* (AEService) Service errors descriptions */
+"safari_filters_loading_error" = "Filtri se ne mogu učitati u Safari. Stoga se vaše nedavne izmjene nisu primijenile.";
+
+/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
+"load_to_safari_error" = "Nije moguće učitati filtre u Safari. Pokušajte očistiti vaša pravila te popis dopuštenih ili promijenite skup korištenih filtara.";
+
 /* NO Button caption in alert */
 "common_action_no" = "NE";
 
@@ -45,6 +51,12 @@
 
 /* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
 "ten_thousands_unit" = "%@10tis";
+
+/* (MainPageController) Native DNS is working title */
+"native_dns_working" = "Nativni DNS radi";
+
+/* (MainPageController) Native DNS is not working title */
+"native_dns_not_working" = "Nativni DNS ne radi";
 
 /* (User Filter Screen) Title */
 "user_filter_title" = "Korisnička pravila";
@@ -106,8 +118,14 @@
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Došlo je do pogreške tijekom povrata kupnje.";
 
+/* (AEUIGetProViewController) message that appears when purchase successfully restored */
+"restore_success_message" = "Kupnja je obnovljena! Premium verzija AdGuarda za iOS je aktivirana.";
+
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "Nema kupnji za vratiti";
+
+/* (AEUIGetProViewController) message that appears when the purchase is successful */
+"purchase_success_message" = "Kupnja je uspješno dovršena! Premium verzija AdGuarda za iOS je uspješno aktivirana.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "Došlo je do pogreške tijekom obrade vaše kupnje.";
@@ -123,6 +141,9 @@
 
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Ovdje možete dodati svoja pravila.<br>Pročitajte <a href=\"%@\">bilješku o sintaksi za pravila</a>.";
+
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "Ovdje unesite nazive domena. AdGuard neće blokirati pristup ovim stranicama i ignorirati će sve druge postavke.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Unesite nazive domena. AdGuard će omogućiti filtriranje u Safari za ove web stranice.";
@@ -219,9 +240,6 @@
 
 /* login error message */
 "login_error_message" = "Pogreška prilikom prijave";
-
-/* purchase secription format */
-"purchase_description_format" = "O pretplati na AdGuard:<br><br>• Naplata će se teretiti na vaš iTunes račun nakon potvrde kupnje.<br><br>• Pretplata se automatski obnavlja, osim ako se automatsko obnavljanje ne isključi najmanje 24 sata prije kraja<br><br>• Naknada za obnavljanje pretplate naplatiti će se u roku od 24 sata prije kraja tekućeg razdoblja.<br><br>Pretplatama se može upravljati, a automatsko obnavljanje može biti isključeno u postavkama iTunes računa nakon kupnje pretplate.<br><br><a href=%2$@>Uvjeti korištenja</a> i <a href=%1$@>Pravila o privatnosti</a>";
 
 /* lifetime purchase secription format */
 "lifetime_purchase_description_format" = "<a href=%2$@>Uvjeti korištenja</a> i <a href=%1$@>Politika privatnosti</a>";
@@ -508,6 +526,15 @@
 /*(MainScreen) "all time" chart date type */
 "chart_alltime" = "Svo vrijeme";
 
+/*(SafariService) notification about loading content blockers  */
+"loading_content_blockers" = "Blokeri sadržaja se ažuriraju ...";
+
+/*(FiltersService) notification about filters laoding  */
+"loading_filters" = "Učitavanje filtara ...";
+
+/*(ContentBlockerService) notification about converting rules  */
+"converting_rules" = "Pravila se pretvaraju  ...";
+
 /*(NewCustomFilterDetailsController) title for new custom filter */
 "new_filter_title" = "Novi prilagođeni filtar";
 
@@ -588,6 +615,9 @@
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "Pritisnite na <b>Safari</b> i odaberite <b>\"Blokeri sadržaja\"</b> u izborniku";
+
+/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
+"onboarding_third_step_text" = "<b>Uključite sve blokere sadržaja</b> i vratite se natrag u našu aplikaciju!";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "DNS sustava";
@@ -918,3 +948,35 @@
 
 /* (DnsFiltersController) Header DNS Filters title */
 "navigation_item_dns_filters_title" = "DNS Filtri";
+
+/* (LowLevelSettingsController) - title for unsupported options */
+"unsupported_setting" = "Ova opcija je nekompatibilna s nativnim DNS načinom";
+
+/* (SetappManager) - alert message on error during login via setapp  */
+"setapp_device_limit_reached" = "Spojili ste maksimalan broj uređaja s vašim Setapp računom.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_safari" = "Jeste li znali da je YouTube promijenio svoje algoritme kako bi vam prikazao više oglasa?<br><br>Da biste ih blokirali, morate:<br><br>1 . Otvorite <a href=\"%@\">Safari</a>.<br><br>2. Otvorite youtube.com.<br><br>3. Dodirnite %@ Zajedničko korištenje.<br><br> 4. Dodirnite \"Blokiraj YouTube oglase (AdGuard)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
+"block_youtube_ads_instructions" = "Jeste li znali da je YouTube promijenio svoje algoritme kako bi vam prikazao više oglasa?<br><br>Da biste ih blokirali, morate:<br><br>1. Otvorite <a href=\"%@\">youtube.com</a> u Safariju.<br><br>2. Dodirnite %@ Zajedničko korištenje.<br><br>3. Dodirnite \"Blokiraj YouTube oglase (prema AdGuardu)\".";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "učinjeno! Sada možete gledati YouTube bez oglasa.\n\nKada je proširenje omogućeno, uz logotip YouTubea prikazuje se naslov \"s AdGuardom\".<br><br><b>Ako ponovno učitate stranicu, morat ćete ponovno izvesti korake 3 i 4.</b>";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "učinjeno! Sada možete gledati YouTube bez oglasa.\n\nKada je proširenje omogućeno, uz logotip YouTubea prikazuje se naslov \"s AdGuardom\".<br><br><b>Ako ponovno učitate stranicu, morat ćete ponovno izvesti korake 2 i 3.</b>";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "YouTube je sada bez oglasa! Imajte na umu da morate ponovno pokrenuti ovo proširenje ako ponovno učitate stranicu";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "Ovo proširenje namijenjeno je pokretanju samo na YouTubeu";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
+"youtube_script_already_executed_title" = "Proširenje je već izvršeno";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "Došlo je do nepoznate pogreške tijekom uklanjanja YouTube oglasa";

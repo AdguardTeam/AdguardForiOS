@@ -92,13 +92,13 @@
 "sign_in_via_adguard_title" = "AdGuard-Konto verwenden";
 
 /* (SignInController) SignIn via Apple account title */
-"sign_in_via_apple_title" = "Mit Apple fortfahren";
+"sign_in_via_apple_title" = "Mit Apple anmelden";
 
 /* (SignInController) SignIn via Google account title */
-"sign_in_via_google_title" = "Mit Google fortfahren";
+"sign_in_via_google_title" = "Mit Google anmelden";
 
 /* (SignInController) SignIn via Facebook account title */
-"sign_in_via_facebook_title" = "Mit Facebook fortfahren";
+"sign_in_via_facebook_title" = "Mit Facebook anmelden";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
 "premium_expired_message" = "Ihr Premium-Account ist abgelaufen";
@@ -143,7 +143,7 @@
 "blacklist_text_format" = "Geben Sie Ihre eigenen Regeln hier ein.<br>Lesen Sie diesen <a href=\"%@\">Hinweis über die Regel-Syntax</a>.";
 
 /* (UserFilterController) whitelist description */
-"whitelist_text" = "Geben Sie die Domainnamen hier ein.  AdGuard wird dort keine Anzeigen filtern und alle anderen Einstellungen ignorieren.  ";
+"whitelist_text" = "Geben Sie die Domainnamen hier ein. AdGuard wird dort keine Werbung filtern und alle anderen Einstellungen ignorieren.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Geben Sie die Domainnamen hier ein. AdGuard aktiviert die Filterung in Safari nur für diese Webseiten.";
@@ -197,7 +197,7 @@
 "filter_version_format" = "Version %@";
 
 /* (DnsSettingController) split tunel mode description */
-"tunnel_mode_split_description" = "Split-Tunnel, kompatibel mit „Personal VPN”-Apps";
+"tunnel_mode_split_description" = "„Getrennter Tunnel”, kompatibel mit „Personal VPN”-Apps";
 
 /* (DnsSettingController) Full tunel mode description */
 "tunnel_mode_full_description" = "Full-Tunnel, inkompatibel mit anderen VPN-Apps";
@@ -242,7 +242,7 @@
 "login_error_message" = "Beim Anmelden ist ein Fehler aufgetreten";
 
 /* purchase secription format */
-"purchase_description_format" = "AdGuard Premium ist ein kostenpflichtiger jährlicher Service mit Abonnementkosten von 2,99 USD pro Jahr (Preis kann je nach Region variieren). Nach der Kaufbestätigung wird dein iTunes-Konto mit dem Betrag belastet. Das Abonnement verlängert sich jährlich automatisch. Um eine Verlängerung zu vermeiden, müssen Sie die automatische Verlängerung mindestens 24 Stunden vor Ablauf Ihres Abonnements deaktivieren. Die Verlängerung des Kontos wird innerhalb von 24 Stunden vor dem Ende des aktuellen Zeitraums abgebucht. Nach dem Kauf des Abonnements können Sie die automatische Verlängerung jederzeit in den Einstellungen Ihres iTunes-Kontos deaktivieren.<br><br><a href=%2$@>Nutzungsbedingungen</a> and <br><br><a href=%1$@>Datenschutzerklärung</a>";
+"purchase_description_format" = "Über das AdGuard-Abonnement:<br><br>• Die Zahlung wird Ihrem iTunes-Konto bei der Kaufbestätigung belastet.<br><br>• Das Abonnement verlängert sich automatisch, es sei denn, die automatische Verlängerung wird mindestens 24 Stunden vor Ablauf des aktuellen Zeitraums deaktiviert.<br><br>• Die Gebühr für die Verlängerung des Abonnements wird innerhalb von 24 Stunden vor Ablauf des aktuellen Zeitraums belastet.<br><br>Ihre Abonnements können nach dem Kauf eines Abonnements in Ihren iTunes-Kontoeinstellungen verwaltet werden und Ihre automatische Verlängerung kann deaktiviert werden.<br><br><a href=%2$@>Nutzungsbedingungen</a> und <a href=%1$@>Datenschutzerklärung</a>";
 
 /* lifetime purchase secription format */
 "lifetime_purchase_description_format" = "<br><br><a href=%2$@>Nutzungsbedingungen</a> and <a href=%1$@>Datenschutzerklärung</a> ";
@@ -506,7 +506,7 @@
 "add_new_rule" = "Neue Regel hinzufügen";
 
 /* confirm reset lert text */
-"confirm_reset_text" = "Alle Einstellungen, einschließlich der Benutzerregeln, des DNS-Schutzes, der Schnittstellen- und Berechtigungseinstellungen, werden zurückgesetzt. Dieser Vorgang kann nicht rückgängig gemacht werden. Die Einstellungen zurücksetzen?";
+"confirm_reset_text" = "Alle Einstellungen, einschließlich der Benutzerregeln, des DNS-Schutzes, der Schnittstellen- und Berechtigungseinstellungen, werden zurückgesetzt. Dieser Vorgang kann nicht widerrufen werden. Die Einstellungen zurücksetzen?";
 
 /* (DnsLogContainerController) reset activity log title */
 "reset_activity_title" = "Aktivitätsprotokoll zurücksetzen\n";
@@ -618,6 +618,9 @@
 
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "Klicken Sie auf <b>Safari</b> und wählen Sie den Menüpunkt <b>\"Inhaltsblocker\"</b>";
+
+/* (OnboardingController) second step text iOS15 . '%@' will be replaced with the safari icon */
+"onboarding_second_step_text_iOS15" = "Tippen Sie auf <b>Safari</b> und wählen Sie den Menüpunkt <b>„Erweiterungen”</b>";
 
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
 "onboarding_third_step_text" = "<b>Aktivieren Sie alle Inhaltsblocker</b> und gehen Sie zurück zu unserer App!";

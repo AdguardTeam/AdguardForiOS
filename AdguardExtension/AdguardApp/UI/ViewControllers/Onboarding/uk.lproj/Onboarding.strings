@@ -1,5 +1,3 @@
-/* Class = "UIButton"; normalTitle = "Watch manual"; ObjectID = "3ju-B8-UIZ"; */
-"3ju-B8-UIZ.normalTitle" = "Переглянути інструкцію";
 
 /* Class = "UILabel"; text = "To use AdGuard in Safari follow a few easy steps"; ObjectID = "F7O-MB-LHu"; */
 "F7O-MB-LHu.text" = "Щоб активувати AdGuard в Safari, виконайте кілька простих кроків";
@@ -7,19 +5,19 @@
 /* Class = "UILabel"; text = "Block Tracking"; ObjectID = "FDG-As-HDY"; */
 "FDG-As-HDY.text" = "Блокування стеження";
 
-/* Class = "UIButton"; normalTitle = "WATCH MANUAL"; ObjectID = "GOu-4j-RcN"; */
+/* Class = "UIButton"; normalTitle = "VIDEO GUIDE"; ObjectID = "GOu-4j-RcN"; */
 "GOu-4j-RcN.normalTitle" = "ПЕРЕГЛЯНУТИ ІНСТРУКЦІЮ";
 
 /* Class = "UILabel"; text = "AdGuard fights thousands of corporations that track your every click and makes sure your privacy is safe."; ObjectID = "Mzf-WJ-CpC"; Note = "String must be less or equal 4 lines"; */
 "Mzf-WJ-CpC.text" = "AdGuard протистоїть тисячам корпорацій, які стежать за кожним вашим кліком, і захищає вашу приватність.";
 
 /* Class = "UILabel"; text = "Tap on Safari and choose the \"Content blockers\" menu item"; ObjectID = "QL3-U7-vA8"; */
-"QL3-U7-vA8.text" = "Торкніться до Safari та оберіть елемент «Блокувальники вмісту»";
+"QL3-U7-vA8.text" = "Оберіть Safari, а потім «Блокувальники вмісту»";
 
 /* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "cMV-qC-ZdE"; */
 "cMV-qC-ZdE.normalTitle" = "ДАЛІ";
 
-/* Class = "UILabel"; text = "Switch on all content blockers and come back to our app!"; ObjectID = "eyJ-Xh-OdS"; */
+/* Class = "UILabel"; text = "Switch on all content blockers and return to the app!"; ObjectID = "eyJ-Xh-OdS"; */
 "eyJ-Xh-OdS.text" = "Увімкніть всі блокувальники вмісту й повертайтеся до нашої програми!";
 
 /* Class = "UILabel"; text = "Block Ads"; ObjectID = "hXU-wD-fbI"; */

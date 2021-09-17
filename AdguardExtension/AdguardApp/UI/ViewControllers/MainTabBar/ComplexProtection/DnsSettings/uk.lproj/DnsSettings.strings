@@ -31,8 +31,8 @@
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
 "NX4-vI-1WP.text" = "Додати фільтр";
 
-/* Class = "UILabel"; text = "Blocks ads and trackers on the domain level and enhances your privacy by encrypting your DNS queries"; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
-"PFY-Cq-NFN.text" = "Блокує рекламу та стеження на рівні доменів, а також покращує вашу приватність завдяки шифруванню DNS-запитів";
+/* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
+"PFY-Cq-NFN.text" = "Модуль, що покращує вашу приватність завдяки шифруванню DNS-запитів.";
 
 /* Class = "UIButton"; normalTitle = "DNS-over-QUIC (experimental)"; ObjectID = "PYL-vX-Dge"; */
 "PYL-vX-Dge.normalTitle" = "DNS-over-QUIC (експериментальний)";
@@ -104,7 +104,7 @@
 "plc-eu-aXh.text" = "DNS-фільтри";
 
 /* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
-"pzP-ns-QSS.text" = "Ім'я сервера";
+"pzP-ns-QSS.text" = "Назва сервера";
 
 /* Class = "UILabel"; text = "Customize your DNS traffic by applying your own rules."; ObjectID = "qjN-LB-N3T"; */
 "qjN-LB-N3T.text" = "Налаштуйте свій DNS-трафік, застосувавши власні правила.";

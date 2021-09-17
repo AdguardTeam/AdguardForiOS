@@ -1,14 +1,41 @@
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "884-Hm-mb6"; */
 "884-Hm-mb6.text" = "Safari zaštita";
 
-/* Class = "UITextView"; text = "premium"; ObjectID = "P9C-72-GAw"; */
+/* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "AZY-QZ-8d9"; */
+"AZY-QZ-8d9.text" = "Blokiranje reklama na Zoutubeu";
+
+/* Class = "UILabel"; text = "AdGuard VPN"; ObjectID = "Hnw-bh-Bgh"; */
+"Hnw-bh-Bgh.text" = "AdGuard VPN";
+
+/* Class = "UILabel"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "premium";
+
+/* Class = "UILabel"; text = "Safari extension that removes ads and ad leftovers and brings back autoplay on YouTube"; ObjectID = "Sry-3f-FQj"; */
+"Sry-3f-FQj.text" = "Proširenje za Safari koje uklanja ostatke smeća na Youtube sa reklamama";
+
+/* Class = "UILabel"; text = "Block YouTube Ads (by AdGuard)"; ObjectID = "XXP-EO-M4h"; */
+"XXP-EO-M4h.text" = "Blokiranje Youtube oglasa (koristeći AdGuard)";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "cnF-td-Ba1"; */
 "cnF-td-Ba1.text" = "DNS zaštita";
 
-/* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
+/* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "kDM-2d-bRK"; */
+"kDM-2d-bRK.text" = "AdGuard VPN";
+
+/* Class = "UILabel"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "besplatno";
+
+/* Class = "UILabel"; text = "Works alongside AdGuard ad blocker"; ObjectID = "tKQ-Yn-fgL"; */
+"tKQ-Yn-fgL.text" = "Radi usporedno sa AdGuard blokatorom reklama";
+
+/* Class = "UILabel"; text = "This module allows you to use a custom DNS server and enhances your privacy by encrypting your DNS queries"; ObjectID = "teo-vm-NRJ"; */
+"teo-vm-NRJ.text" = "Ovaj modul vam omogućuje upotrebu prilagođenih DNS poslužitelja i poboljšava vašu privatnost šifriranjem vaših DNS upita.";
+
+/* Class = "UILabel"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
+"vNo-hV-l4c.text" = "Nije instalirano";
+
+/* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "vlx-BS-A2y"; */
+"vlx-BS-A2y.text" = "Ovaj modul blokira oglase i pratitelje na web stranicama otvorenim u Safari-u. Možete odabrati između različitih popisa filtara u postavkama AdGuarda";
 
 /* Class = "UILabel"; text = "Protection"; ObjectID = "wyK-CX-EwT"; */
 "wyK-CX-EwT.text" = "Zaštita";

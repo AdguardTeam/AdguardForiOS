@@ -53,7 +53,7 @@
 "GFO-xu-Bir.text" = "AdGuard fügt weitere Details in die Protokolldatei ein. Aktivieren Sie diese Option nur, wenn Sie einen Fehler identifizieren müssen.";
 
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
-"GGp-kp-YJI.text" = "Split-Tunnel";
+"GGp-kp-YJI.text" = "Getrennter Tunnel";
 
 /* Class = "UILabel"; text = "Enable this option if you experience issues with the Internet connection while AdGuard is running"; ObjectID = "H3Q-H6-YV0"; */
 "H3Q-H6-YV0.text" = "Aktivieren Sie diese Option, wenn während der Ausführung von AdGuard Probleme mit der Internetverbindung auftreten";
@@ -134,7 +134,7 @@
 "gxl-pG-zh1.text" = "Kompatibel mit \"Personal VPN\"-Apps";
 
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
-"jmQ-ze-hFG.text" = "Im Split-Tunnel-Modus ist AdGuard mit sogenannten „Personal VPN”-Anwendungen kompatibel. Bei schlechter Internet-Verbindung kann dieser Modus vom System umgangen werden.";
+"jmQ-ze-hFG.text" = "Im Modus „Getrenntes Tunneln” ist AdGuard mit sogenannten „Personal VPN”-Anwendungen kompatibel. Bei schlechter Internet-Verbindung kann dieser Modus vom System umgangen werden.";
 
 /* Class = "UILabel"; text = "Fallback servers"; ObjectID = "k0U-fn-m9X"; */
 "k0U-fn-m9X.text" = "Fallbacks";

@@ -14,7 +14,7 @@
 "rule_converting_error" = "無法轉換該過濾器規則。規則文字為無效的。";
 
 /* (AEUIUtils) User filter convertering error description. */
-"filter_rules_converting_error" = "無法對 Safari 增加這些使用者規則";
+"filter_rules_converting_error" = "無法對 Safari 新增這些使用者規則";
 
 /* Alert title. On error. */
 "common_error_title" = "錯誤";
@@ -140,7 +140,7 @@
 "filter_date_format" = "過濾器已更新於：%@";
 
 /* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "於此您可增加您自己的規則。<br>閱讀這個<a href=\"%@\">關於規則語法之註釋</a>。";
+"blacklist_text_format" = "於此您可新增您自己的規則。<br>閱讀這個<a href=\"%@\">關於規則語法之註釋</a>。";
 
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "輸入被排除在過濾之外的網域。此清單優先於其它的設定。";
@@ -158,10 +158,10 @@
 "update_filter_start_message" = "正在更新…";
 
 /* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "增加一項新規則";
+"add_blacklist_rule_title" = "新增一項新的規則";
 
 /* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "增加一個網域";
+"add_whitelist_domain_title" = "新增一個網域";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
@@ -240,9 +240,6 @@
 
 /* login error message */
 "login_error_message" = "當登入時，錯誤已發生。";
-
-/* purchase secription format */
-"purchase_description_format" = "關於 AdGuard 訂閱：<br><br>• 付款將在購買確認時被記在您的 iTunes 帳戶上。<br><br>• 除非在現行的週期結束前至少 24 小時自動續訂被關掉，否則該訂閱被自動地續訂。<br><br>• 該訂閱續訂費用將在現行的週期結束前 24 小時內被收費。<br><br>您的訂閱可被管理，且在購買訂閱後，您的自動續訂可在您的 iTunes 帳戶設定裡被關掉。<br><br><a href=%2$@>條款和條件</a>及<a href=%1$@>隱私政策</a>";
 
 /* lifetime purchase secription format */
 "lifetime_purchase_description_format" = "<a href=%2$@>條款和條件</a>及<a href=%1$@>隱私政策</a>";
@@ -386,7 +383,7 @@
 "wifi_exceptions_description" = "DNS 防護將不對下列的 Wi-Fi 網路起作用";
 
 /* (NetworkSettingsController) button title for "Add an exception" */
-"add_exception_title" = "增加一個例外";
+"add_exception_title" = "新增一個例外";
 
 /* (NetworkSettingsController) title for "Filter mobile data" */
 "filter_mobile_title" = "過濾行動數據";
@@ -443,7 +440,7 @@
 "security_description" = "允許封鎖網路釣魚網站和其它危險的網域。對於高級版用戶是可用的";
 
 /*(GroupsController) Custom filters description without premium  */
-"custom_description" = "允許增加第三方的過濾器。對於高級版用戶是可用的";
+"custom_description" = "允許新增第三方的過濾器。對於高級版用戶是可用的";
 
 /*(LogCategory) audio video player category*/
 "audio_video_player" = "影音播放器";
@@ -500,10 +497,10 @@
 "common_select_all" = "全選";
 
 /*(ListOfRules) Add domain title */
-"add_domain" = "增加一個網域";
+"add_domain" = "新增一個網域";
 
 /*(ListOfRules) Add new rule title */
-"add_new_rule" = "增加一項新的規則";
+"add_new_rule" = "新增一項新的規則";
 
 /* confirm reset lert text */
 "confirm_reset_text" = "包括使用者規則、DNS 防護、介面和授權設定之所有的設定將被重置。這操作無法被復原。重置該設定嗎？";
@@ -548,7 +545,7 @@
 "edit_custom_filter_title" = "編輯自訂的過濾器";
 
 /*(NewCustomFilterDetailsController) add button title */
-"common_add" = "增加";
+"common_add" = "新增";
 
 /*(TodayViewController) Protection is disabled title  */
 "protection_disabled" = "防護被禁用";
@@ -578,7 +575,7 @@
 "common_action_more" = "更多的";
 
 /*(DnsFiltersController) action title adding existing filter  */
-"filter_exists" = "您已嘗試增加一個重複的過濾器。此過濾器已經在該清單中。";
+"filter_exists" = "您已嘗試新增一個重複的過濾器。此過濾器已在該清單中。";
 
 /*(DnsFiltersController) DNS filters number title */
 "dns_filters_number_title" = "%@ 項規則被啟用";
@@ -619,6 +616,9 @@
 /* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
 "onboarding_second_step_text" = "向 <b>Safari</b> 輕觸並選擇<b>\"內容阻擋器\"</b>選單項目";
 
+/* (OnboardingController) second step text iOS15 . '%@' will be replaced with the safari icon */
+"onboarding_second_step_text_iOS15" = "向 <b>Safari</b> 輕觸並選擇<b>\"延伸功能\"</b>選單項目";
+
 /* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
 "onboarding_third_step_text" = "<b>打開所有的內容阻擋器</b>，然後回到該應用程式！";
 
@@ -632,7 +632,7 @@
 "block_request" = "封鎖該請求";
 
 /* (BlockRequestController) Allowlist request title */
-"whitelist_request" = "增加該網域到允許清單";
+"whitelist_request" = "新增該網域到允許清單";
 
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "視訊導覽";
@@ -647,7 +647,7 @@
 "invalid_dns_protocol_title" = "無效的 DNS 協定";
 
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
-"invalid_dns_protocol_message" = "%@ 尚未被 iOS 支援。嘗試加入不同的上游。";
+"invalid_dns_protocol_message" = "%@ 尚未被 iOS 支援。嘗試新增不同的上游。";
 
 /* (NewDnsServerController) save and select button title */
 "save_and_select_button_title" = "儲存並選擇";
@@ -662,7 +662,7 @@
 "delete_button_title" = "刪除";
 
 /* (NewDnsServerController) add dns server alert title */
-"add_dns_server_alert_title" = "增加一個自訂的 DNS 伺服器";
+"add_dns_server_alert_title" = "新增一個自訂的 DNS 伺服器";
 
 /* (NewDnsServerController) edit dns server alert title */
 "edit_dns_server_alert_title" = "編輯自訂的 DNS 伺服器";
@@ -888,10 +888,10 @@
 
 // MARK: = ImportSettingsController
 /* (ImportSettingsController) add custom content blocker filter format */
-"import_custom_cb_filter_format" = "增加自訂的內容阻擋器過濾器：%@";
+"import_custom_cb_filter_format" = "新增自訂的內容阻擋器過濾器：%@";
 
 /* (ImportSettingsController) add custom dns filter format */
-"import_dns_filter_format" = "增加自訂的 DNS 過濾器：%@";
+"import_dns_filter_format" = "新增自訂的 DNS 過濾器：%@";
 
 /* (ImportSettingsController) enable content blocker filter format */
 "enable_cb_filter_format" = "啟用過濾器：%@";
@@ -909,10 +909,10 @@
 "import_license_format" = "以 %@ 授權金鑰啟動高級版功能";
 
 /* (ImportSettingsController) add user rules title */
-"import_user_rules" = "增加使用者規則";
+"import_user_rules" = "新增使用者規則";
 
 /* (ImportSettingsController) add dns rules title */
-"import_dns_user_rules" = "增加 DNS 使用者規則";
+"import_dns_user_rules" = "新增 DNS 使用者規則";
 
 /* (LowLevelSettingsController) Low level settings description. <b style=color:#c23814ff> It is a color for WARNING! word*/
 "low_level_description" = "<b style=color:#c23814ff>警告！</b>啟用這些功能可能破壞網際網路連線或危害您的安全性及隱私。";
@@ -938,7 +938,7 @@
 "upstreams_fallbacks_title" = "應變（Fallback）伺服器";
 
 /* (UpstreamsController) Custom address title */
-"upstreams_custom_address_title" = "增加一組自訂的 IP";
+"upstreams_custom_address_title" = "新增一組自訂的 IP";
 
 /* (UpstreamsController) Custom address description */
 "upstreams_custom_address_description" = "IP 位址";

@@ -17,7 +17,7 @@
 "Tei-uI-6Gr.normalTitle" = "刪除";
 
 /* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "fCd-gA-rXS"; */
-"fCd-gA-rXS.normalTitle" = "增加";
+"fCd-gA-rXS.normalTitle" = "新增";
 
 /* Class = "UILabel"; text = "Domain:"; ObjectID = "x7r-Ln-XiZ"; */
 "x7r-Ln-XiZ.text" = "網域：";

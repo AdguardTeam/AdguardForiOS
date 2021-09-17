@@ -44,7 +44,7 @@
 "EbM-k3-HW8.text" = "Не совместим с другими VPN-приложениями";
 
 /* Class = "UILabel"; text = "Dark"; ObjectID = "FzS-e3-CK1"; */
-"FzS-e3-CK1.text" = "Темная";
+"FzS-e3-CK1.text" = "Тёмная";
 
 /* Class = "UILabel"; text = "Don't change them unless you know what you're doing"; ObjectID = "GBd-dx-t46"; */
 "GBd-dx-t46.text" = "Изменяйте настройки, только если вы уверены в том, что делаете";
@@ -134,7 +134,7 @@
 "gxl-pG-zh1.text" = "Совместим с персональными VPN-приложениями";
 
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
-"jmQ-ze-hFG.text" = "В режиме Split-Tunnel AdGuard совместим с так называемыми \"персональными VPN-приложениями\". В качестве компромисса, в этом режиме он может быть обойден системой в случае плохой связи.";
+"jmQ-ze-hFG.text" = "В режиме Split-Tunnel AdGuard совместим с так называемыми «персональными VPN-приложениями». В качестве компромисса, в этом режиме он может быть обойден системой в случае плохой связи.";
 
 /* Class = "UILabel"; text = "Fallback servers"; ObjectID = "k0U-fn-m9X"; */
 "k0U-fn-m9X.text" = "Fallback-серверы";
