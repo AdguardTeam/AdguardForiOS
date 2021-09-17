@@ -78,8 +78,8 @@ export class NativeHost implements NativeHostInterface {
             return;
         }
 
-        const linkWithDomain = this.links.addToBlocklistLink + ruleText;
-        await browser.tabs.create({ url: linkWithDomain });
+        const linkWithRule = this.links.addToBlocklistLink + encodeURIComponent(ruleText);
+        await browser.tabs.create({ url: linkWithRule });
     }
 
     async enableProtection(url: string): Promise<void> {
@@ -88,7 +88,7 @@ export class NativeHost implements NativeHostInterface {
         }
 
         const domain = getDomain(url);
-        const linkWithDomain = this.links.removeFromAllowlistLink + domain;
+        const linkWithDomain = this.links.removeFromAllowlistLink + encodeURIComponent(domain);
         await browser.tabs.create({ url: linkWithDomain });
     }
 
@@ -98,7 +98,7 @@ export class NativeHost implements NativeHostInterface {
         }
 
         const domain = getDomain(url);
-        const linkWithDomain = this.links.addToAllowlistLink + domain;
+        const linkWithDomain = this.links.addToAllowlistLink + encodeURIComponent(domain);
         await browser.tabs.create({ url: linkWithDomain });
     }
 
@@ -108,7 +108,7 @@ export class NativeHost implements NativeHostInterface {
         }
 
         const domain = getDomain(url);
-        const linkWithDomain = this.links.removeAllBlocklistRulesLink + domain;
+        const linkWithDomain = this.links.removeAllBlocklistRulesLink + encodeURIComponent(domain);
         await browser.tabs.create({ url: linkWithDomain });
     }
 
