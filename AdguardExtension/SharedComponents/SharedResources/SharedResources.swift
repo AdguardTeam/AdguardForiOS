@@ -16,8 +16,6 @@
    along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import SafariAdGuardSDK
-
 extension AESharedResourcesProtocol {
     
     dynamic var tempRequestsCount: Int {

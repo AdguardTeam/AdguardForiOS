@@ -336,6 +336,11 @@ extern NSString* _Nonnull BlockIpv6;
  */
 extern NSString* _Nonnull LastDnsFiltersUpdateTime;
 
+/**
+ Selected minimum background fetch period from low-level settings
+ */
+extern NSString* _Nonnull BackgroundFetchUpdatePeriod;
+
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
 /////////////////////////////////////////////////////////////////////

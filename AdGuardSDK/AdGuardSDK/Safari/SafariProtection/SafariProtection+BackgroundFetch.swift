@@ -51,6 +51,18 @@ public protocol SafariProtectionBackgroundFetchProtocol {
 /* Extension is used to update filters while main app is in the background */
 extension SafariProtection {
     
+    fileprivate struct FiltersUpdateResult {
+        let backgroundFetchResult: UIBackgroundFetchResult
+        let dnsFiltersUpdateError: Error?
+        let commonError: Error?
+        
+        init(backgroundFetchResult: UIBackgroundFetchResult, dnsFiltersUpdateError: Error? = nil, commonError: Error? = nil) {
+            self.backgroundFetchResult = backgroundFetchResult
+            self.dnsFiltersUpdateError = dnsFiltersUpdateError
+            self.commonError = commonError
+        }
+    }
+    
     fileprivate enum BackgroundFetchState: Int, CustomDebugStringConvertible {
         case loadAndSaveFilters
         case convertFilters
@@ -84,7 +96,7 @@ extension SafariProtection {
         
         switch currentBackgroundFetchState {
         case .loadAndSaveFilters, .updateFinished:
-            updateDnsAndSafariFilters(onStateExecutionFinished)
+            complexFiltersUpdateInBackground(onStateExecutionFinished)
         case .convertFilters:
             let (result, _) = convertFilters(inBackground: true)
             onStateExecutionFinished(result)
@@ -94,26 +106,21 @@ extension SafariProtection {
     }
     
     public func finishBackgroundUpdate(_ onUpdateFinished: @escaping (_ error: Error?) -> Void) {
-        Logger.logInfo("(SafariProtection+BackgroundFetch) - finishBackgroundUpdate start; Current state = \(currentBackgroundFetchState)")
+        Logger.logInfo("(SafariProtection+BackgroundFetch) - finishBackgroundUpdate start; Current state = \(self.currentBackgroundFetchState)")
         
-        switch currentBackgroundFetchState {
+        switch self.currentBackgroundFetchState {
         case .loadAndSaveFilters:
-            let group = DispatchGroup()
-            group.enter()
-            updateFilters(inBackground: false) { _, error in
-                group.leave()
-            }
-            group.wait()
+            complexFiltersUpdate(inBackground: false) { _ in }
             fallthrough
         case .convertFilters:
-            let (_, error) = convertFilters(inBackground: false)
+            let (_, error) = self.convertFilters(inBackground: false)
             if let error = error {
                 onUpdateFinished(error)
                 return
             }
             fallthrough
         case .reloadContentBlockers:
-            reloadContentBlockers(inBackground: false) { _, error in
+            self.reloadContentBlockers(inBackground: false) { _, error in
                 onUpdateFinished(error)
             }
         case .updateFinished:
@@ -179,27 +186,69 @@ extension SafariProtection {
         }
     }
     
-    private func updateDnsAndSafariFilters(_ onStateExecutionFinished: @escaping (_ result: UIBackgroundFetchResult) -> Void) {
-        DispatchQueue(label: "SafariAdGuardSDK.SafariProtection.backgroundFiltersUpdateQueue").async { [weak self] in
-            var safariFiltersUpdateResult: UIBackgroundFetchResult!
-            var dnsFiltersUpdateError: Error?
+    private func complexFiltersUpdateInBackground(_ onStateExecutionFinished: @escaping (_ result: UIBackgroundFetchResult) -> Void) {
+        DispatchQueue(label: "SafariAdGuardSDK.SafariProtection.complexFiltersUpdateInBackground").async { [weak self] in
+            guard let self = self else {
+                Logger.logError("(SafariProtection+BackgroundFetch) - complexFiltersUpdateInBackground; Missing self")
+                onStateExecutionFinished(.noData)
+                return
+            }
+            var updateResult: FiltersUpdateResult?
             let group = DispatchGroup()
             group.enter()
-            self?.updateFilters(inBackground: true) { result, _ in
-                safariFiltersUpdateResult = result
+            self.complexFiltersUpdate(inBackground: true) { result in
+                updateResult = result
+                group.leave()
+            }
+            
+            group.wait()
+            
+            if let commonError = updateResult?.commonError {
+                Logger.logError("(SafariProtection+BackgroundFetch) - complexFiltersUpdateInBackground; Error occurred: \(commonError)")
+                onStateExecutionFinished(.noData)
+                return
+            }
+            
+            let isSuccessfullyUpdated = updateResult?.dnsFiltersUpdateError == nil && updateResult?.backgroundFetchResult == .newData
+            onStateExecutionFinished(isSuccessfullyUpdated ? .newData : .noData)
+        }
+    }
+
+    
+    private func complexFiltersUpdate(inBackground: Bool, onFiltersUpdate: @escaping (FiltersUpdateResult) -> Void) {
+        DispatchQueue(label: "SafariAdGuardSDK.SafariProtection.complexFiltersUpdate").async { [weak self] in
+            guard let self = self else {
+                Logger.logError("(SafariProtection+BackgroundFetch) - complexFiltersUpdate; Missing self")
+                return onFiltersUpdate(FiltersUpdateResult(backgroundFetchResult: .noData, commonError: CommonError.missingSelf))
+            }
+            
+            var backgroundFetchResult: UIBackgroundFetchResult?
+            var dnsFiltersUpdateError: Error?
+            
+            let group = DispatchGroup()
+            group.enter()
+            self.updateFilters(inBackground: inBackground) { result, error in
+                backgroundFetchResult = result
+                if let error = error {
+                    Logger.logError("(SafariProtection+BackgroundFetch) - complexFiltersUpdate; Safari filters update in background = \(inBackground); error: \(error)")
+                }
                 group.leave()
             }
             
             group.enter()
-            self?.dnsBackgroundFetchUpdater?.updateFiltersInBackground(onFiltersUpdate:  { error in
-                dnsFiltersUpdateError = error
+            self.dnsBackgroundFetchUpdater?.updateFiltersInBackground(onFiltersUpdate: { error in
+                if let error = error {
+                    dnsFiltersUpdateError = error
+                    Logger.logError("(SafariProtection+BackgroundFetch) - complexFiltersUpdate; Dns filters update in background = \(inBackground); error: \(error)")
+                }
+
                 group.leave()
             })
             
             group.wait()
             
-            let isSuccessfullyUpdated = dnsFiltersUpdateError == nil && safariFiltersUpdateResult == .newData
-            onStateExecutionFinished(isSuccessfullyUpdated ? .newData : .noData)
+            let result = FiltersUpdateResult(backgroundFetchResult: backgroundFetchResult ?? .noData, dnsFiltersUpdateError: dnsFiltersUpdateError)
+            onFiltersUpdate(result)
         }
     }
 }

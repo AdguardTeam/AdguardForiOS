@@ -73,6 +73,9 @@
 /* Class = "UILabel"; text = "Block IPv6"; ObjectID = "NC2-8A-E6f"; */
 "NC2-8A-E6f.text" = "Block IPv6";
 
+/* Class = "UILabel"; text = "Background app refresh time"; ObjectID = "NTg-cH-2i2"; */
+"NTg-cH-2i2.text" = "Background app refresh time";
+
 /* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain up to 50,000 rules"; ObjectID = "ObO-g4-VHL"; */
 "ObO-g4-VHL.text" = "You have 6 content blockers, each of them can contain up to 50,000 rules";
 
@@ -99,6 +102,9 @@
 
 /* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
 "X0A-gU-hzf.text" = "Auto-update over Wi-Fi only";
+
+/* Class = "UILabel"; text = "Background app refresh time"; ObjectID = "Yue-5n-Amd"; */
+"Yue-5n-Amd.text" = "Background app refresh time";
 
 /* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "aIJ-gX-03k"; */
 "aIJ-gX-03k.text" = "Full-Tunnel";
