@@ -166,7 +166,9 @@ export class NativeHost implements NativeHostInterface {
     }
 
     async getInitData(url: string): Promise<NativeHostInitData> {
-        const result = await this.sendNativeMessage(MessagesToNativeApp.GetInitData, url);
+        const domain = getDomain(url);
+
+        const result = await this.sendNativeMessage(MessagesToNativeApp.GetInitData, domain);
 
         const {
             protection_enabled: protectionEnabled,
