@@ -119,11 +119,11 @@ extension DomainsStatisticsRecord {
 // MARK: - CountersStatistics
 
 public struct CountersStatisticsRecord: Equatable {
-    let requests: Int
-    let encrypted: Int
-    let blocked: Int
-    let averageElapsed: Int
-    let elapsedSumm: Int
+    public let requests: Int
+    public let encrypted: Int
+    public let blocked: Int
+    public let averageElapsed: Int
+    public let elapsedSumm: Int
     
     init(dbRecord: SQLite.Statement.Element) {
         let requests = dbRecord[0] as? Int64 ?? 0
@@ -133,7 +133,7 @@ public struct CountersStatisticsRecord: Equatable {
         self.init(requests: Int(requests), encrypted: Int(encrypted), blocked: Int(blocked), elapsedSumm: Int(elapsedSumm))
     }
     
-    init(requests: Int, encrypted: Int, blocked: Int, elapsedSumm: Int) {
+    public init(requests: Int, encrypted: Int, blocked: Int, elapsedSumm: Int) {
         self.requests = requests
         self.encrypted = encrypted
         self.blocked = blocked

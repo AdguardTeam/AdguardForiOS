@@ -17,17 +17,9 @@
 */
 
 import UIKit
+import enum DnsAdGuardSDK.ChartType
 
-struct Point: Equatable {
-    var x: CGFloat
-    var y: CGFloat
-    
-    static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.x == rhs.x && lhs.y == rhs.y
-    }
-}
-
-class ChartView: UIView {
+final class ChartView: UIView {
     
     var isEnabled: Bool = true {
         didSet{
@@ -35,24 +27,15 @@ class ChartView: UIView {
         }
     }
     
-    var activeChart: ChartRequestType = .requests {
+    var activeChart: ChartType = .requests {
         didSet {
             drawChart()
         }
     }
     
-    var chartPoints: (requests: [Point], encrypted: [Point]) = ([], []) {
+    var chartPoints: (requests: [CGPoint], encrypted: [CGPoint]) = ([], []) {
         didSet {
-            let maxXrequests = chartPoints.requests.map({ $0.x }).max() ?? 0.0
-            let maxYrequests = chartPoints.requests.map({ $0.y }).max() ?? 0.0
-            
-            let maxXblocked = chartPoints.encrypted.map({ $0.x }).max() ?? 0.0
-            let maxYblocked = chartPoints.encrypted.map({ $0.y }).max() ?? 0.0
-            
-            maxXelement = max(maxXrequests, maxXblocked)
-            maxYelement = max(maxYrequests, maxYblocked)
-            
-            DispatchQueue.main.async {[weak self] in
+            DispatchQueue.asyncSafeMain { [weak self] in
                 self?.drawChart()
             }
         }
@@ -67,6 +50,13 @@ class ChartView: UIView {
     var rightDateLabelText: String? = "" {
         didSet{
             rightDateLabel.text = rightDateLabelText
+        }
+    }
+    
+    // Number of maximum requests for specified period 
+    var maxRequests: Int = 0 {
+        didSet {
+            self.topBorderLabel.text = "\(maxRequests)"
         }
     }
     
@@ -89,9 +79,6 @@ class ChartView: UIView {
     private var numberOfVerticalSectors = 7
     private var numberOfHorizontalSectors = 2
     private var gridLineWidth: CGFloat = 2.0
-    
-    private var maxXelement: CGFloat = 0.0
-    private var maxYelement: CGFloat = 0.0
     
     private lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
     
@@ -232,19 +219,9 @@ class ChartView: UIView {
     private func drawChart(){
         let requestLineLayer = CAShapeLayer()
         let encryptedLineLayer = CAShapeLayer()
-        
-        var requestPoints = convertPoints(points: chartPoints.requests)
-        var encryptedPoints = convertPoints(points: chartPoints.encrypted)
-        
-        if requestPoints.count < 3 {
-            maxXelement = 10.0
-            requestPoints = convertPoints(points: [Point(x: 0.0, y: 0.0), Point(x: 10.0, y: 0.0)])
-        }
-        
-        if encryptedPoints.count < 3 {
-            maxXelement = 10.0
-            encryptedPoints = convertPoints(points: [Point(x: 0.0, y: 0.0), Point(x: 10.0, y: 0.0)])
-        }
+
+        let requestPoints = chartPoints.requests
+        let encryptedPoints = chartPoints.encrypted
         
         guard let requestsPath = UIBezierPath(quadCurve: requestPoints),
             let blockedPath = UIBezierPath(quadCurve: encryptedPoints)
@@ -286,50 +263,5 @@ class ChartView: UIView {
             layer.addSublayer(requestLineLayer)
             layer.addSublayer(encryptedLineLayer)
         }
-    }
-    
-    private func convertPoints(points: [Point]) -> [CGPoint] {
-        let preparedPoints = preparePoints(points: points)
-        var newPoints = [CGPoint]()
-                
-        for point in preparedPoints {
-            let ratioY: CGFloat = maxYelement == 0.0 ? 0.0 : (point.y / maxYelement) * 0.7
-
-            let newY = (frame.height - frame.height * ratioY) - frame.height * 0.15
-            
-            let newPoint = CGPoint(x: point.x, y: newY)
-            newPoints.append(newPoint)
-        }
-        
-        DispatchQueue.main.async {[weak self] in
-            self?.topBorderLabel.text = "\(Int(self?.maxYelement ?? 0))"
-        }
-        
-        return newPoints
-    }
-    
-    /* This function is needed to avoid points overlay */
-    private func preparePoints(points: [Point]) -> [Point] {
-        let minimumSpacing: CGFloat = 10.0
-        var newPoints = [Point]()
-        
-        for point in points {
-            let ratioX: CGFloat = maxXelement == 0.0 ? 0.0 : point.x / maxXelement
-            let newX = (frame.width * ratioX)
-            
-            var lastPoint = newPoints.last ?? Point(x: 0.0, y: 0.0)
-            if  newX - lastPoint.x < minimumSpacing && points.last != point {
-                newPoints = newPoints.dropLast()
-                lastPoint.y = lastPoint.y + point.y
-                newPoints.append(lastPoint)
-                if lastPoint.y > maxYelement {
-                    maxYelement = lastPoint.y
-                }
-            } else {
-                newPoints.append(Point(x: newX, y: point.y))
-            }
-        }
-        
-        return newPoints
     }
 }

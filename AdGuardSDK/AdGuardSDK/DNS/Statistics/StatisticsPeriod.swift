@@ -18,8 +18,8 @@
 
 import Foundation
 
-public enum StatisticsPeriod: CaseIterable, CustomDebugStringConvertible {
-    case today
+public enum StatisticsPeriod: Int,  CaseIterable, CustomDebugStringConvertible {
+    case today = 0
     case day
     case week
     case month
@@ -38,7 +38,7 @@ public enum StatisticsPeriod: CaseIterable, CustomDebugStringConvertible {
     public static var allCases = [Self.today, .day, .week,.month, .all]
     
     /// Date interval for a certain `Period`
-    var interval: DateInterval {
+    public var interval: DateInterval {
         let now = Date()
         let hour = 3600.0 // 1 hour in seconds
         
