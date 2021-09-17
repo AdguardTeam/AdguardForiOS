@@ -54,23 +54,23 @@ class MainPageModel: MainPageModelProtocol {
     func updateFilters() {
         delegate?.updateStarted()
         
-        safariProtection.updateFiltersMetaAndLocalizations(true) {  [weak delegate] result in
+        var message: String = ""
+        safariProtection.updateFiltersMetaAndLocalizations(true) { [weak delegate] result in
             switch result {
             case .error(_):
                 delegate?.updateFailed(error: String.localizedString("filter_updates_error"))
                 return
             case .success(let updateResult):
-                let message: String?
                 let filtersCount = updateResult.updatedFilterIds.count
                 if filtersCount > 0 {
-                    let format = ACLocalizedString("filters_updated_format", nil);
+                    let format = String.localizedString("filters_updated_format")
                     message = String(format: format, filtersCount)
                 } else {
-                    message = ACLocalizedString("filters_noUpdates", nil);
+                    message = String.localizedString("filters_noUpdates")
                 }
-                
-                delegate?.updateFinished(message: message)
             }
-        } onCbReloaded: { _ in }
+        } onCbReloaded: { [weak delegate] _ in
+            delegate?.updateFinished(message: message)
+        }
     }
 }

@@ -217,15 +217,17 @@ extension SafariProtection {
             }
             group.leave()
         }
-        
-        group.enter()
-        self.dnsBackgroundFetchUpdater?.updateFiltersInBackground(onFiltersUpdate: { error in
-            if let error = error {
-                dnsFiltersUpdateError = error
-                Logger.logError("(SafariProtection+BackgroundFetch) - complexFiltersUpdate; Dns filters update in background = \(inBackground); error: \(error)")
-            }
-            group.leave()
-        })
+    
+        if let dnsUpdated = self.dnsBackgroundFetchUpdater {
+            group.enter()
+            dnsUpdated.updateFiltersInBackground(onFiltersUpdate: { error in
+                if let error = error {
+                    dnsFiltersUpdateError = error
+                    Logger.logError("(SafariProtection+BackgroundFetch) - complexFiltersUpdate; Dns filters update in background = \(inBackground); error: \(error)")
+                }
+                group.leave()
+            })
+        }
         
         group.notify(queue: completionQueue) {
             let result = FiltersUpdateResult(backgroundFetchResult: backgroundFetchResult ?? .noData, dnsFiltersUpdateError: dnsFiltersUpdateError)

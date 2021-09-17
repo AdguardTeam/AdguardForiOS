@@ -60,7 +60,7 @@ public protocol DnsProtectionFiltersProtocol {
     
     /**
      Updates the specified DNS filter
-     - Parameter id: Unique identifier of DNS filter that should be removed
+     - Parameter id: Unique identifier of DNS filter that should be updated
      - Parameter onFilterUpdated: Closure to process an error if it occurs while downloading or saving new filter data
      */
     func updateFilter(withId id: Int, onFilterUpdated: @escaping (_ error: Error?) -> Void)
