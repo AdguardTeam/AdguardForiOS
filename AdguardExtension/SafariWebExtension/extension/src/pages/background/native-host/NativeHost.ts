@@ -130,21 +130,37 @@ export class NativeHost implements NativeHostInterface {
         await browser.tabs.create({ url: this.links.upgradeAppLink });
     }
 
-    // TODO add timeout and handle errors
+    /**
+     * Retrieves advanced rules text from native host by small parts,
+     * so native host won't exceed memory limit
+     */
     async getAdvancedRulesText() {
         let rulesText = '';
 
-        const recursiveCall = async () => {
-            const response = await this.sendNativeMessage(MessagesToNativeApp.GetAdvancedRulesText);
+        const recursiveCall = async (fromBeginning: boolean) => {
+            const response = await this.sendNativeMessage(
+                MessagesToNativeApp.GetAdvancedRulesText,
+                fromBeginning,
+            );
+
             if (!response) {
                 return;
             }
 
             rulesText += response.advanced_rules;
-            await recursiveCall();
+
+            /**
+             * Subsequent calls to native host are sent with fromBeginning flag = false,
+             * which means to continue return rules from the last point
+             */
+            await recursiveCall(false);
         };
 
-        await recursiveCall();
+        /**
+         * First call to native host is sent with flag = true,
+         * which means start to return rules from the beginning of the file
+         */
+        await recursiveCall(true);
 
         return rulesText;
     }
