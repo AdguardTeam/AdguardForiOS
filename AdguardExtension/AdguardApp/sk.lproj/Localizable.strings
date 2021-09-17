@@ -965,7 +965,7 @@
 "block_youtube_ads_instructions_safari" = "Vedeli ste, že služba YouTube zmenila svoje algoritmy, aby Vám zobrazovala viac reklám?<br><br>Teraz, aby ste ich mohli zablokovať, musíte:<br><br>1. Otvorte<a href=\"%@\">Safari</a>.<br><br>2. Otvorte stránku youtube.com.<br><br>3. Kliknite na tlačidlo %@ Zdieľať.<br><br>4. Kliknite na „Blokovať reklamy na YouTube (pomocou AdGuard)“.";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
-"block_youtube_ads_instructions" = "Vedeli ste, že služba YouTube zmenila svoje algoritmy, aby Vám zobrazovala viac reklám?<br><br>Teraz, aby ste ich mohli zablokovať, musíte:<br><br>1. Otvorte stránku youtube.com v prehliadači Safari.<br><br>2. Kliknite na tlačidlo %@ Zdieľať.<br><br>3. Kliknite na možnosť „Blokovať reklamy na YouTube (pomocou AdGuard)“.";
+"block_youtube_ads_instructions" = "Vedeli ste, že služba YouTube zmenila svoje algoritmy, aby Vám zobrazovala viac reklám?<br><br>Teraz, aby ste ich mohli zablokovať, musíte:<br><br>1. Otvorte stránku <a href=\"%@\">youtube.com</a> v prehliadači Safari.<br><br>2. Kliknite na tlačidlo %@ Zdieľať.<br><br>3. Kliknite na možnosť „Blokovať reklamy na YouTube (pomocou AdGuard)“.";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
 "block_youtube_ads_instructions_done_text_safari" = "Hotovo! Teraz môžete sledovať YouTube bez reklám.\n\nAk je rozšírenie zapnuté, vedľa loga YouTube sa zobrazuje titulok „s AdGuard“.<br><br><b>Ak stránku načítate znova, budete musieť znova vykonať kroky 3 a 4.</b>";
