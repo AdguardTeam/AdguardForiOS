@@ -16,7 +16,7 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
+import DnsAdGuardSDK
 
 class DnsModeController: UITableViewController {
     
@@ -52,14 +52,12 @@ class DnsModeController: UITableViewController {
         let mode = resources.tunnelMode
         
         switch mode {
-        case APVpnManagerTunnelModeSplit:
+        case .split:
             selectedCell = 2
-        case APVpnManagerTunnelModeFull:
+        case .full:
             selectedCell = 0
-        case APVpnManagerTunnelModeFullWithoutVPNIcon:
+        case .fullWithoutVpnIcon:
             selectedCell = 1
-        default:
-            break
         }
         
         updateButtons()
@@ -78,14 +76,14 @@ class DnsModeController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        var mode = APVpnManagerTunnelModeFull
+        var mode: TunnelMode = .full
         switch indexPath.row {
         case 0:
-            mode = APVpnManagerTunnelModeFull
+            mode = .full
         case 1:
-            mode = APVpnManagerTunnelModeFullWithoutVPNIcon
+            mode = .fullWithoutVpnIcon
         case 2:
-            mode = APVpnManagerTunnelModeSplit
+            mode = .split
         default:
             break
         }

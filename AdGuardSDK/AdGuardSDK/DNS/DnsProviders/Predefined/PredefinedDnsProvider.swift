@@ -204,7 +204,7 @@ public struct DnsUpstream: Equatable, Codable {
     public let upstream: String // DNS upstream
     public let `protocol`: DnsProtocol // DNS upstream protocol e.g. DoH, DoT, QUIC
     
-    init(upstream: String, protocol: DnsProtocol) {
+    public init(upstream: String, protocol: DnsProtocol) {
         self.upstream = upstream
         self.protocol = `protocol`
     }

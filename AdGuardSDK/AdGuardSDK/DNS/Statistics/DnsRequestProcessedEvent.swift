@@ -45,13 +45,19 @@ public struct DnsRequestProcessedEvent {
 
 /// Initializer from wrapper for DNS-libs object
 extension DnsRequestProcessedEvent {
-    init(event: AGDnsRequestProcessedEventWrapper, upstream: DnsUpstream, dnsFiltersIds: [Int]) {
+    init(event: AGDnsRequestProcessedEventWrapper, upstream: DnsUpstream, customDnsFilterIds: [Int], dnsBlocklistFilterId: Int, dnsAllowlistFilterId: Int) {
         self.domain = event.domain
         self.startDate = Date(timeIntervalSince1970: TimeInterval(event.startTime / 1000))
         self.elapsed = event.elapsed
         self.type = event.type
         self.answer = event.answer
-        self.processedStatus = Self.getEventStatus(event, isEncrypted: upstream.`protocol`.isCrypto, dnsFiltersIds: dnsFiltersIds)
+        self.processedStatus = Self.getEventStatus(
+            event,
+            isEncrypted: upstream.`protocol`.isCrypto,
+            customDnsFilterIds: customDnsFilterIds,
+            dnsBlocklistFilterId: dnsBlocklistFilterId,
+            dnsAllowlistFilterId: dnsAllowlistFilterId
+        )
         self.originalAnswer = event.originalAnswer
         self.upstream = upstream
         self.bytesSent = event.bytesSent
@@ -76,15 +82,21 @@ extension DnsRequestProcessedEvent {
         return isIpv4Localhost || isIpv6Localhost
     }
     
-    private static func getEventStatus(_ event: AGDnsRequestProcessedEventWrapper, isEncrypted: Bool, dnsFiltersIds: [Int]) -> ProcessedStatus {
+    private static func getEventStatus(
+        _ event: AGDnsRequestProcessedEventWrapper,
+        isEncrypted: Bool,
+        customDnsFilterIds: [Int],
+        dnsBlocklistFilterId: Int,
+        dnsAllowlistFilterId: Int
+    ) -> ProcessedStatus {
+        
         if event.whitelist {
-            let allowlistFilterId = DnsUserRuleType.allowlist.enabledRulesFilterId
-            return event.filterListIds.contains(allowlistFilterId) ? .allowlistedByUserFilter : .allowlistedByDnsFilter
+            return event.filterListIds.contains(dnsAllowlistFilterId) ? .allowlistedByUserFilter : .allowlistedByDnsFilter
         }
-        else if event.filterListIds.contains(DnsUserRuleType.blocklist.enabledRulesFilterId) {
+        else if event.filterListIds.contains(dnsBlocklistFilterId) {
             return .blocklistedByUserFilter
         }
-        else if dnsFiltersIds.contains(where: { event.filterListIds.contains($0) }) {
+        else if customDnsFilterIds.contains(where: { event.filterListIds.contains($0) }) {
             return .blocklistedByDnsFilter
         }
         else if event.status == "REFUSED" {

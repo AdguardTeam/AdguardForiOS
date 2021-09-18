@@ -56,14 +56,17 @@ final class StartupService : NSObject{
         try! preloadedFilesManager.processPreloadedFiles()
         
         /* Initializing SDK */
-        
-        let safariProtectionConfiguration = SafariConfiguration(resources: sharedResources,
-                                                                isProPurchased: purchaseService.isProPurchased)
+        let safariProtectionConfiguration = SafariConfiguration(
+            resources: sharedResources,
+            isProPurchased: purchaseService.isProPurchased
+        )
         let defaultConfiguration = SafariConfiguration.defaultConfiguration()
         
-        let dnsProtectionConfiguration = DnsConfiguration(resources: sharedResources,
-                                                          isProPurchased: purchaseService.isProPurchased)
-        let defaultDnsProtectionConfiguration = DnsConfiguration.defaultConfiguration()
+        let dnsProtectionConfiguration = DnsConfiguration(
+            resources: sharedResources,
+            isProPurchased: purchaseService.isProPurchased
+        )
+        let defaultDnsProtectionConfiguration = DnsConfiguration.defaultConfiguration(from: sharedResources)
            
         // TODO: - try! is bad
         let dnsProtection: DnsProtectionProtocol = try! DnsProtection(configuration: dnsProtectionConfiguration,
@@ -138,9 +141,6 @@ final class StartupService : NSObject{
         
 //        let migrationService: MigrationServiceProtocol = MigrationService(vpnManager: vpnManager, dnsProvidersService: dnsProviders, resources: sharedResources, antibanner: antibanner, dnsFiltersService: dnsFiltersService, networking: networkService, activityStatisticsService: activityStatisticsService, dnsStatisticsService: dnsStatisticsService, dnsLogService: dnsLogService, configuration: configuration, filtersService: filtersService, productInfo: productInfo, contentBlockerService: contentBlockerService, nativeProviders: nativeProviders, filtersStorage: filtersStorage, safariProtection: safariProtection)
 //        locator.addService(service: migrationService)
-        
-        let chartViewModel: ChartViewModelProtocol = ChartViewModel(resources: sharedResources)
-        locator.addService(service: chartViewModel)
         
         let setappService: SetappServiceProtocol = SetappService(purchaseService: purchaseService, resources: sharedResources)
         locator.addService(service: setappService)

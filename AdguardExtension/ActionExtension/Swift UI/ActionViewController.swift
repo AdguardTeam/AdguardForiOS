@@ -112,7 +112,7 @@ class ActionViewController: UIViewController {
         
         navigationController?.navigationBar.shadowImage = UIImage()
         
-        title = Constants.aeProductName()
+        title = Bundle.main.applicationName
         var errorMessage = String.localizedString("support_error_safari_extension")
         guard let item: NSExtensionItem = self.extensionContext?.inputItems.first as? NSExtensionItem else { return }
         guard let itemProvider: NSItemProvider = item.attachments?.first else { return }

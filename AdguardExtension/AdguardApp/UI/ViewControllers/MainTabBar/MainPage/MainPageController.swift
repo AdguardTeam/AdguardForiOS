@@ -20,7 +20,7 @@ import UIKit
 import SafariAdGuardSDK
 import DnsAdGuardSDK
 
-class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfRequestsChangedDelegate, ComplexSwitchDelegate, OnboardingControllerDelegate, GetProControllerDelegate, MainPageModelDelegate {
+final class MainPageController: UIViewController, DateTypeChangedProtocol, ComplexSwitchDelegate, OnboardingControllerDelegate, GetProControllerDelegate, MainPageModelDelegate {
     
     var ready = false
     var onReady: (()->Void)? {
@@ -174,7 +174,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     
     // MARK: - View models
     private lazy var mainPageModel: MainPageModelProtocol = { MainPageModel(resource: resources, safariProtection: safariProtection) }()
-    private lazy var chartModel: ChartViewModelProtocol = { ServiceLocator.shared.getService()! }()
+    private var chartModel: ChartViewModelProtocol!
     
     // MARK: - Observers
     private var appWillEnterForeground: NotificationToken?
@@ -193,17 +193,15 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         super.viewDidLoad()
         
         updateTheme()
-        chartModel.chartView = chartView
-        
+        initChartViewModel()
+        statisticsPeriodChanged(statisticsPeriod: resources.chartDateType)
         addObservers()
         setUIForRequestType(true)
         setupVoiceOverLabels()
     
-        chartModel.chartPointsChangedDelegates.append(self)
         complexProtectionSwitch.delegate = self
         mainPageModel.delegate = self
         
-        dateTypeChanged(dateType: resources.chartDateType)
         
         contentBlockersGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleContentBlockersView(_:)))
         if let recognizer = contentBlockersGestureRecognizer {
@@ -242,6 +240,9 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        chartModel.chartViewSizeChanged(frame: chartView.frame)
+        
         if isIphoneSeLike {
             setupConstraintsForIphoneSe()
         }
@@ -413,10 +414,10 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     
     // MARK: - DateTypeChangedProtocol method
     
-    func dateTypeChanged(dateType: ChartDateType) {
-        resources.chartDateType = dateType
-        changeStatisticsDatesButton.setTitle(dateType.getDateTypeString(), for: .normal)
-        chartModel.chartDateType = dateType
+    func statisticsPeriodChanged(statisticsPeriod: StatisticsPeriod) {
+        resources.chartDateType = statisticsPeriod
+        changeStatisticsDatesButton.setTitle(statisticsPeriod.dateTypeString, for: .normal)
+        chartModel.statisticsPeriod = statisticsPeriod
     }
     
     
@@ -500,10 +501,10 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
      Called when "requests" button tapped
      */
     private func chooseRequest(){
-        if chartModel.chartRequestType == .requests {
+        if chartModel.chartType == .requests {
             let title = String.localizedString("requests_info_alert_title")
             let message = String.localizedString("requests_info_alert_message")
-            ACSSystemUtils.showSimpleAlert(for: self, withTitle: title, message: message)
+            presentSimpleAlert(title: title, message: message)
         } else {
             setUIForRequestType()
         }
@@ -517,7 +518,7 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         if !initial {
             chartView.activeChart = .requests
         }
-        chartModel.chartRequestType = .requests
+        chartModel.chartType = .requests
         
         requestsNumberLabel.alpha = 1.0
         encryptedNumberLabel.alpha = 0.5
@@ -530,13 +531,13 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
     Called when "blocked" button tapped
     */
     private func chooseEncrypted(){
-        if chartModel.chartRequestType == .encrypted {
+        if chartModel.chartType == .encrypted {
             let title = String.localizedString("encrypted_info_alert_title")
             let message = String.localizedString("encrypted_info_alert_message")
             ACSSystemUtils.showSimpleAlert(for: self, withTitle: title, message: message)
         } else {
             chartView.activeChart = .encrypted
-            chartModel.chartRequestType = .encrypted
+            chartModel.chartType = .encrypted
             
             requestsNumberLabel.alpha = 0.5
             encryptedNumberLabel.alpha = 1.0
@@ -916,6 +917,14 @@ class MainPageController: UIViewController, DateTypeChangedProtocol, NumberOfReq
         importController.settings = settings
         present(importController, animated: true, completion: nil)
     }
+    
+    private func initChartViewModel() {
+        let url = SharedStorageUrls()
+        chartModel = ChartViewModel(statisticsPeriod: resources.chartDateType, statisticsDbContainerUrl: url.filtersFolderUrl)
+        
+        chartModel.delegate = self
+        chartModel.startChartStatisticsAutoUpdate(seconds: 5.0)
+    }
 }
 
 extension MainPageController: ThemableProtocol {
@@ -930,5 +939,21 @@ extension MainPageController: ThemableProtocol {
         
         contentBlockerViewIphone.backgroundColor = theme.notificationWindowColor
         nativeDnsView.backgroundColor = theme.backgroundColor
+    }
+}
+
+extension MainPageController: ChartViewModelDelegate {
+    func numberOfRequestsChanged(with points: (requests: [CGPoint], encrypted: [CGPoint]),
+                                 countersStatisticsRecord: CountersStatisticsRecord?,
+                                 firstFormattedDate: String,
+                                 lastFormattedDate: String,
+                                 maxRequests: Int) {
+        
+        chartView.chartPoints = points
+        updateTextForButtons(requestsCount: countersStatisticsRecord?.requests ?? 0, encryptedCount: countersStatisticsRecord?.encrypted ?? 0, averageElapsed: Double(countersStatisticsRecord?.averageElapsed ?? 0))
+        
+        chartView.leftDateLabelText = firstFormattedDate
+        chartView.rightDateLabelText = lastFormattedDate
+        chartView.maxRequests = maxRequests
     }
 }

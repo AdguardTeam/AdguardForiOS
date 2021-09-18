@@ -17,6 +17,7 @@
  */
 
 import UIKit
+import DnsAdGuardSDK
 
 protocol UpstreamsControllerDelegate: AnyObject {
     func updateDescriptionLabel(type: UpstreamType, text: String)
@@ -174,20 +175,18 @@ class UpstreamsController: BottomAlertController {
         saveButton?.isEnabled = false
         saveButton?.startIndicator()
         
-        var bootstrap:[String] = []
+        let networkUtils = NetworkUtils()
+        let bootstraps = BootstrapsHelper.bootstraps
         
-        ACNIPUtils.enumerateSystemDns { (ip, _, _, _) in
-            bootstrap.append(ip ?? "")
-        }
         let upstreams = upstreams.map {
-            AGDnsUpstream(address: $0, bootstrap: bootstrap, timeoutMs: 2000, serverIp: Data(), id: 0, outboundInterfaceName: nil)
+            AGDnsUpstream(address: $0, bootstrap: bootstraps, timeoutMs: AGDnsUpstream.defaultTimeoutMs, serverIp: Data(), id: 0, outboundInterfaceName: nil)
         }
         
         DispatchQueue(label: "save dns upstreams queue").async { [weak self] in
             guard let self = self else { return }
             
             let errors = upstreams.compactMap {
-                AGDnsUtils.test($0, ipv6Available: ACNIPUtils.isIpv6Available())
+                AGDnsUtils.test($0, ipv6Available: networkUtils.isIpv6Available)
             }
             
             DispatchQueue.main.async {
