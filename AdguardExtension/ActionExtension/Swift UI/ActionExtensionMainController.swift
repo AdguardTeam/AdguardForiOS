@@ -65,7 +65,7 @@ class ActionExtensionMainController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = Constants.aeProductName()
+        title = Bundle.main.applicationName
         
         configuration = SimpleConfigurationSwift(withResources: resources!, systemAppearenceIsDark: systemStyleIsDark)
         self.theme = ThemeService(configuration!)

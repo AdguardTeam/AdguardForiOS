@@ -16,10 +16,8 @@
       along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
 import NetworkExtension
 import SafariAdGuardSDK
-
 
 // MARK: - Complex protection Interface -
 

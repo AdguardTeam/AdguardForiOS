@@ -24,7 +24,7 @@ extension AppDelegate {
         statusBarWindow.statusBarWindowIsHidden = true
         
         filtersUpdateStarted = NotificationCenter.default.filtersUpdateStart { [weak self] in
-            self?.statusBarWindow.showStatusViewIfNeeded(text: "loading_filters")
+            self?.statusBarWindow.showStatusViewIfNeeded(text: String.localizedString("loading_filters"))
         }
         
         filtersUpdateFinished = NotificationCenter.default.filtersUpdateFinished { [weak self] in
@@ -32,7 +32,7 @@ extension AppDelegate {
         }
         
         contentBlockersUpdateStarted = NotificationCenter.default.contentBlockersUpdateStart { [weak self] in
-            self?.statusBarWindow.showStatusViewIfNeeded(text: "loading_content_blockers")
+            self?.statusBarWindow.showStatusViewIfNeeded(text: String.localizedString("loading_content_blockers"))
         }
         
         contentBlockersUpdateFinished = NotificationCenter.default.contentBlockersUpdateFinished { [weak self] in
