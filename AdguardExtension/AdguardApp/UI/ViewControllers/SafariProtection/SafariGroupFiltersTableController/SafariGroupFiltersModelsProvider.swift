@@ -18,11 +18,11 @@
 
 import SafariAdGuardSDK
 
-typealias SafariGroupFiltersModel = (groupModel: StateHeaderViewModel<SafariGroup.GroupType>, filtersModel: [SafariFilterCellModel])
+typealias SafariGroupFiltersModel = (groupModel: StateHeaderViewModel<SafariGroup.GroupType>, filtersModel: [FilterCellModel])
 final class SafariGroupFiltersModelsProvider {
     
     var groupModels: [StateHeaderViewModel<SafariGroup.GroupType>] { isSearching ? searchGroupModels : initialGroupModels }
-    var filtersModels: [[SafariFilterCellModel]] { isSearching ? searchFiltersModels : initialFiltersModels }
+    var filtersModels: [[FilterCellModel]] { isSearching ? searchFiltersModels : initialFiltersModels }
     
     var searchString: String? {
         didSet {
@@ -44,10 +44,10 @@ final class SafariGroupFiltersModelsProvider {
     // MARK: - Models
     
     private var searchGroupModels: [StateHeaderViewModel<SafariGroup.GroupType>] = []
-    private var searchFiltersModels: [[SafariFilterCellModel]] = []
+    private var searchFiltersModels: [[FilterCellModel]] = []
     
     private var initialGroupModels: [StateHeaderViewModel<SafariGroup.GroupType>] = []
-    private var initialFiltersModels: [[SafariFilterCellModel]] = []
+    private var initialFiltersModels: [[FilterCellModel]] = []
     
     // MARK: - Initialization
     
@@ -61,9 +61,9 @@ final class SafariGroupFiltersModelsProvider {
             let groupModel = StateHeaderViewModel(iconImage: group.groupType.iconImage, title: group.groupName, isEnabled: group.isEnabled, id: group.groupType)
             self.initialGroupModels.append(groupModel)
             
-            let filtersModels = group.filters.map { filter -> SafariFilterCellModel in
+            let filtersModels = group.filters.map { filter -> FilterCellModel in
                 let tagsModels = filter.tags.map { SafariTagButtonModel(tag: $0, isSelected: true) }
-                return SafariFilterCellModel(
+                return FilterCellModel(
                     filterId: filter.filterId,
                     groupType: group.groupType,
                     filterNameAttrString: (filter.name ?? "").highlight(occuranciesOf: []).attrString,
@@ -89,7 +89,7 @@ final class SafariGroupFiltersModelsProvider {
         
         for i in 0..<initialGroupModels.count {
             let filterModels = initialFiltersModels[i]
-            let filteredModels = filterModels.compactMap { filter -> SafariFilterCellModel? in
+            let filteredModels = filterModels.compactMap { filter -> FilterCellModel? in
                 return check(filter, matches: tags, or: words)
             }
             
@@ -116,7 +116,7 @@ final class SafariGroupFiltersModelsProvider {
         return (tags, words)
     }
     
-    private func check(_ filter: SafariFilterCellModel, matches tags: Set<String>, or words: Set<String>) -> SafariFilterCellModel? {
+    private func check(_ filter: FilterCellModel, matches tags: Set<String>, or words: Set<String>) -> FilterCellModel? {
         let filterTags = Set(filter.tags.map { $0.tagName })
         let matchedTags = filterTags.intersection(tags)
         let tagModels = filter.tags.map {
@@ -125,7 +125,7 @@ final class SafariGroupFiltersModelsProvider {
         
         let highlightedOccurancies = filter.filterNameAttrString.string.highlight(occuranciesOf: words)
         if highlightedOccurancies.matchesFound || !matchedTags.isEmpty {
-            return SafariFilterCellModel(
+            return FilterCellModel(
                 filterId: filter.filterId,
                 groupType: filter.groupType,
                 filterNameAttrString: highlightedOccurancies.attrString,

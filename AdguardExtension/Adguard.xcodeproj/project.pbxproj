@@ -774,8 +774,8 @@
 		7EA7DCC026C674FE0032AD5C /* SafariProtectionGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EA7DCBD26C674FE0032AD5C /* SafariProtectionGroupCell.xib */; };
 		7EA7DCC126C674FE0032AD5C /* SafariProtectionGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EA7DCBD26C674FE0032AD5C /* SafariProtectionGroupCell.xib */; };
 		7EA887E9237D290E00E1043D /* CustomNavigationTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA887E8237D290E00E1043D /* CustomNavigationTransition.swift */; };
-		7EAA0D7A26CA8785007208E5 /* SafariFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA0D7826CA8785007208E5 /* SafariFilterCell.swift */; };
-		7EAA0D7B26CA8785007208E5 /* SafariFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA0D7826CA8785007208E5 /* SafariFilterCell.swift */; };
+		7EAA0D7A26CA8785007208E5 /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA0D7826CA8785007208E5 /* FilterCell.swift */; };
+		7EAA0D7B26CA8785007208E5 /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA0D7826CA8785007208E5 /* FilterCell.swift */; };
 		7EAA0D8726CA8E8C007208E5 /* UITextView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA0D8626CA8E8C007208E5 /* UITextView+Utils.swift */; };
 		7EAA0D8826CA8E8C007208E5 /* UITextView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA0D8626CA8E8C007208E5 /* UITextView+Utils.swift */; };
 		7EAA0D8A26CA9B35007208E5 /* SafariGroupFiltersModelsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA0D8926CA9B35007208E5 /* SafariGroupFiltersModelsProvider.swift */; };
@@ -3514,7 +3514,7 @@
 		7EA7DCBC26C674FE0032AD5C /* SafariProtectionGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariProtectionGroupCell.swift; sourceTree = "<group>"; };
 		7EA7DCBD26C674FE0032AD5C /* SafariProtectionGroupCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SafariProtectionGroupCell.xib; sourceTree = "<group>"; };
 		7EA887E8237D290E00E1043D /* CustomNavigationTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationTransition.swift; sourceTree = "<group>"; };
-		7EAA0D7826CA8785007208E5 /* SafariFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariFilterCell.swift; sourceTree = "<group>"; };
+		7EAA0D7826CA8785007208E5 /* FilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 		7EAA0D8626CA8E8C007208E5 /* UITextView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Utils.swift"; sourceTree = "<group>"; };
 		7EAA0D8926CA9B35007208E5 /* SafariGroupFiltersModelsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariGroupFiltersModelsProvider.swift; sourceTree = "<group>"; };
 		7EAA63982341E8A60040F3A0 /* RuleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleInfo.swift; sourceTree = "<group>"; };
@@ -6107,6 +6107,7 @@
 				7E3FEFBF26CEBAE80080EC03 /* ExtendedTitleTableHeaderView.swift */,
 				7E11568A26D38723000ADC3B /* AddTableViewCell.swift */,
 				7E70266526DD412600F8FC25 /* IdentifiableObject.swift */,
+				7EAA0D7E26CA8789007208E5 /* FilterCell */,
 				7E92753C26C67A26007B2C80 /* TitleTableViewCell */,
 			);
 			path = GenericCells;
@@ -6154,19 +6155,18 @@
 			children = (
 				7E94743226CA83690031B8F4 /* SafariGroupsTableController */,
 				7EAA0D8C26CA9B3D007208E5 /* SafariGroupFiltersTableController */,
-				7EAA0D7E26CA8789007208E5 /* SafariFilterCell */,
 				7EBDFE8F26CFAE1A00CCE8CC /* FilterDetailsViewController */,
 			);
 			path = SafariProtection;
 			sourceTree = "<group>";
 		};
-		7EAA0D7E26CA8789007208E5 /* SafariFilterCell */ = {
+		7EAA0D7E26CA8789007208E5 /* FilterCell */ = {
 			isa = PBXGroup;
 			children = (
-				7EAA0D7826CA8785007208E5 /* SafariFilterCell.swift */,
+				7EAA0D7826CA8785007208E5 /* FilterCell.swift */,
 				7E86A9B926CBB84E000B395F /* SafariTagButton.swift */,
 			);
-			path = SafariFilterCell;
+			path = FilterCell;
 			sourceTree = "<group>";
 		};
 		7EAA0D8C26CA9B3D007208E5 /* SafariGroupFiltersTableController */ = {
@@ -8554,7 +8554,7 @@
 				7EAD352826C2C657001AFB3A /* NotificationCenter+Utils.swift in Sources */,
 				D031A16A219EFC99002C17D9 /* DDAbstractDatabaseLogger.m in Sources */,
 				D0B545E32435D69B002F0AEC /* BottomShadowView.swift in Sources */,
-				7EAA0D7B26CA8785007208E5 /* SafariFilterCell.swift in Sources */,
+				7EAA0D7B26CA8785007208E5 /* FilterCell.swift in Sources */,
 				7E2D93F626F3A2ED00534DC5 /* DnsFiltersTableModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -8732,7 +8732,7 @@
 				65EC9C901BB9824C00F53F3B /* FMDatabase.m in Sources */,
 				655A02251C6B7686000F00D7 /* ACIOStream.m in Sources */,
 				249606E2258B832100C747BA /* SocialSignInButton.swift in Sources */,
-				7EAA0D7A26CA8785007208E5 /* SafariFilterCell.swift in Sources */,
+				7EAA0D7A26CA8785007208E5 /* FilterCell.swift in Sources */,
 				D044AF7721831A8F00CD9E06 /* ImportRulesController.swift in Sources */,
 				7EC67FC8254843CA00FEEEE2 /* DnsImplementation.swift in Sources */,
 				D077D5F1213974FC00D3D5B3 /* GetProController.swift in Sources */,
