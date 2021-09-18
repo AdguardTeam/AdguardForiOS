@@ -18,7 +18,7 @@
 
 import UIKit
 
-class RequestsBlockingController: UITableViewController {
+final class RequestsBlockingController: UITableViewController {
 
     @IBOutlet weak var filtersLabel: ThemableLabel!
     @IBOutlet var themableLabels: [ThemableLabel]!
@@ -80,8 +80,20 @@ class RequestsBlockingController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return section == headerSection ? 0.1 : 0.0
+        return 0.01
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
     }
 }
 

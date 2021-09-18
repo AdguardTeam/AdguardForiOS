@@ -17,6 +17,7 @@
 */
 
 import UIKit
+import DnsAdGuardSDK
 
 final class DnsFiltersTableController: UITableViewController {
     
@@ -33,11 +34,12 @@ final class DnsFiltersTableController: UITableViewController {
     
     /* Services */
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let dnsProtection: DnsProtectionProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - UIViewController lifecycle
 
     required init?(coder: NSCoder) {
-        self.model = DnsFiltersTableModel()
+        self.model = DnsFiltersTableModel(dnsProtection: dnsProtection)
         super.init(coder: coder)
     }
     
@@ -75,7 +77,7 @@ final class DnsFiltersTableController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return model.isSearching ? model.cellModels.count : model.cellModels.count + 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -89,7 +91,10 @@ final class DnsFiltersTableController: UITableViewController {
     // MARK: - Table view delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        defer { tableView.deselectRow(at: indexPath, animated: true) }
+        if !model.isSearching && indexPath.row == 0 {
+            addNewFilterTapped()
+        }
     }
     
     // MARK: - Private methods
@@ -106,6 +111,17 @@ final class DnsFiltersTableController: UITableViewController {
         let format = String.localizedString("dns_filters_number_title")
         let descr = String(format: format, "0")
         tableView.tableHeaderView = ExtendedTitleTableHeaderView(title: title, normalDescription: descr)
+    }
+    
+    private func addNewFilterTapped() {
+        let storyboard = UIStoryboard(name: "Filters", bundle: nil)
+        guard let controller = storyboard.instantiateViewController(withIdentifier: "AddCustomFilterController") as? AddCustomFilterController else {
+            return
+        }
+        
+        controller.type = .dnsCustom
+        controller.delegate = model
+        present(controller, animated: true, completion: nil)
     }
 }
 
