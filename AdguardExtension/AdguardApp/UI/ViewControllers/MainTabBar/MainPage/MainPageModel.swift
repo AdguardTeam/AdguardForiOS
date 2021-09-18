@@ -54,7 +54,7 @@ final class MainPageModel: MainPageModelProtocol {
     func updateFilters() {
         delegate?.updateStarted()
         
-        var message: String = ""
+        var message: String?
         safariProtection.updateFiltersMetaAndLocalizations(true) { [weak delegate] result in
             switch result {
             case .error(_):
