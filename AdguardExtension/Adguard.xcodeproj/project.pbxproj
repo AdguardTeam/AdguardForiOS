@@ -39,6 +39,10 @@
 		242B9146258A0D3E00A39E19 /* SignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B9144258A0D3E00A39E19 /* SignInController.swift */; };
 		242C7FF026E6536B00A01B10 /* DnsUserRulesTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242C7FEF26E6536B00A01B10 /* DnsUserRulesTableModel.swift */; };
 		242C7FF126E6536B00A01B10 /* DnsUserRulesTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242C7FEF26E6536B00A01B10 /* DnsUserRulesTableModel.swift */; };
+		2430CE1426F34D78005A05DA /* BackgroungFetchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2430CE1326F34D77005A05DA /* BackgroungFetchController.swift */; };
+		2430CE1526F34D78005A05DA /* BackgroungFetchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2430CE1326F34D77005A05DA /* BackgroungFetchController.swift */; };
+		2430CE1726F360F6005A05DA /* ExtendedRadioButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2430CE1626F360F6005A05DA /* ExtendedRadioButtonCell.swift */; };
+		2430CE1826F360F6005A05DA /* ExtendedRadioButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2430CE1626F360F6005A05DA /* ExtendedRadioButtonCell.swift */; };
 		2443394C2580C13600AB4F26 /* LowLevelSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */; };
 		2443394D2580C13600AB4F26 /* LowLevelSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */; };
 		244339712580D8AB00AB4F26 /* BlockingModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244339702580D8AB00AB4F26 /* BlockingModeController.swift */; };
@@ -135,12 +139,14 @@
 		24A8423B26EA2A5B0051B4E6 /* ServiceInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D7367826EA1895003EE3EC /* ServiceInitializer.swift */; };
 		24AD872D260A247B0034D402 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD872C260A247B0034D402 /* RadioButton.swift */; };
 		24AD872E260A247B0034D402 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD872C260A247B0034D402 /* RadioButton.swift */; };
+		24B36A8F26F393F200085E7A /* SharedResources+BackgroundFetchTimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B36A8E26F393F200085E7A /* SharedResources+BackgroundFetchTimePeriod.swift */; };
+		24B36A9126F393F200085E7A /* SharedResources+BackgroundFetchTimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B36A8E26F393F200085E7A /* SharedResources+BackgroundFetchTimePeriod.swift */; };
+		24B36A9426F3948800085E7A /* BackgroundFetchUpdateInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B36A9326F3948800085E7A /* BackgroundFetchUpdateInterval.swift */; };
+		24B36A9626F3948800085E7A /* BackgroundFetchUpdateInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B36A9326F3948800085E7A /* BackgroundFetchUpdateInterval.swift */; };
 		24BC54C826E7A56B00F680ED /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */; };
 		24BC54C926E7A56B00F680ED /* SharedAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		24BC54CA26E7A58800F680ED /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */; };
 		24BC54CB26E7A58800F680ED /* SharedAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		24BD32ED2603588F00CC12F3 /* FiltersUpdatesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */; };
-		24BD32FF2603592000CC12F3 /* FiltersUpdatesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */; };
 		24CBA66225939CC200E28308 /* CustomSchemeURLParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */; };
 		24D6A9E125FB698A00674D11 /* StatusBarWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6A9E025FB698A00674D11 /* StatusBarWindow.swift */; };
 		24D6A9E225FB698A00674D11 /* StatusBarWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6A9E025FB698A00674D11 /* StatusBarWindow.swift */; };
@@ -2681,6 +2687,8 @@
 		2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Utils.swift"; sourceTree = "<group>"; };
 		242B9144258A0D3E00A39E19 /* SignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInController.swift; sourceTree = "<group>"; };
 		242C7FEF26E6536B00A01B10 /* DnsUserRulesTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsUserRulesTableModel.swift; sourceTree = "<group>"; };
+		2430CE1326F34D77005A05DA /* BackgroungFetchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroungFetchController.swift; sourceTree = "<group>"; };
+		2430CE1626F360F6005A05DA /* ExtendedRadioButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedRadioButtonCell.swift; sourceTree = "<group>"; };
 		2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowLevelSettingsController.swift; sourceTree = "<group>"; };
 		244339702580D8AB00AB4F26 /* BlockingModeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockingModeController.swift; sourceTree = "<group>"; };
 		244339A62580EA2600AB4F26 /* BlockedResponseTtlController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedResponseTtlController.swift; sourceTree = "<group>"; };
@@ -2709,8 +2717,9 @@
 		249606AB258B82AD00C747BA /* SocialSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSignInButton.swift; sourceTree = "<group>"; };
 		24AD872C260A247B0034D402 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		24B2F12F25FF4DD500CE46C8 /* URLSchemeParcerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSchemeParcerTest.swift; sourceTree = "<group>"; };
+		24B36A8E26F393F200085E7A /* SharedResources+BackgroundFetchTimePeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharedResources+BackgroundFetchTimePeriod.swift"; sourceTree = "<group>"; };
+		24B36A9326F3948800085E7A /* BackgroundFetchUpdateInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundFetchUpdateInterval.swift; sourceTree = "<group>"; };
 		24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SharedAdGuardSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersUpdatesConstants.swift; sourceTree = "<group>"; };
 		24C03C4525FF73790062DEED /* URLSchemeExecutorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSchemeExecutorMock.swift; sourceTree = "<group>"; };
 		24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSchemeURLParserTest.swift; sourceTree = "<group>"; };
 		24D6A9E025FB698A00674D11 /* StatusBarWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarWindow.swift; sourceTree = "<group>"; };
@@ -5451,6 +5460,7 @@
 				7ED544F5243B4FDE004563DA /* DnsStatisticsRecord.swift */,
 				D0D7E55B24377280001801A5 /* Bundle+config.swift */,
 				D0BA7BBC2631A9160097029B /* SharedResources+applicationResources.swift */,
+				24B36A8E26F393F200085E7A /* SharedResources+BackgroundFetchTimePeriod.swift */,
 				65AD3BBA1B7CB15400004A02 /* AESharedResources.m */,
 				65AD3BB91B7CB15400004A02 /* AESharedResources.h */,
 				7EF5C50D26C261AF001851D6 /* SharedResources */,
@@ -6060,6 +6070,7 @@
 				7E3FEFBF26CEBAE80080EC03 /* ExtendedTitleTableHeaderView.swift */,
 				7E11568A26D38723000ADC3B /* AddTableViewCell.swift */,
 				7E70266526DD412600F8FC25 /* IdentifiableObject.swift */,
+				2430CE1626F360F6005A05DA /* ExtendedRadioButtonCell.swift */,
 				7E92753C26C67A26007B2C80 /* TitleTableViewCell */,
 			);
 			path = GenericCells;
@@ -6263,7 +6274,6 @@
 			isa = PBXGroup;
 			children = (
 				24557DF625EFD4AE00BC5B26 /* AppDelegate.swift */,
-				24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */,
 				24D6A9E025FB698A00674D11 /* StatusBarWindow.swift */,
 				24D6A9F425FB7A6300674D11 /* SettingsResetor.swift */,
 				24D923212604C6D6002F368B /* Extensions */,
@@ -6509,6 +6519,8 @@
 				D0DB1B052148DB35006EB991 /* SettingsController.swift */,
 				7EB3094A233B4E5E006C6EC1 /* AdvancedSettingsController.swift */,
 				D07D41D021FF1F6400B03872 /* DnsModeController.swift */,
+				2430CE1326F34D77005A05DA /* BackgroungFetchController.swift */,
+				24B36A9326F3948800085E7A /* BackgroundFetchUpdateInterval.swift */,
 				244339CB2581085400AB4F26 /* LowLevelSettings */,
 				7E15720622DF32B7007060D7 /* Content Blocker State  */,
 			);
@@ -8255,10 +8267,12 @@
 				24AD872E260A247B0034D402 /* RadioButton.swift in Sources */,
 				247CB5672600B2F60047974C /* AppDelegate+IURLSchemeExecutor.swift in Sources */,
 				D0B545BD2435D659002F0AEC /* EditBlockRequestController.swift in Sources */,
+				24B36A9126F393F200085E7A /* SharedResources+BackgroundFetchTimePeriod.swift in Sources */,
 				6598865E1CF74DE9003ECD1C /* ADProductInfo.m in Sources */,
 				D0B545D52435D697002F0AEC /* OnboardingAnimationsController.swift in Sources */,
 				248448BD259383ED00D52DE0 /* SignInFailureHandler.swift in Sources */,
 				7EAD354126C2D5F9001AFB3A /* LocalizedDnsProviders.swift in Sources */,
+				2430CE1826F360F6005A05DA /* ExtendedRadioButtonCell.swift in Sources */,
 				24D6A9E225FB698A00674D11 /* StatusBarWindow.swift in Sources */,
 				D0D7E5E524444EBD001801A5 /* ParsedHost.swift in Sources */,
 				24037B0725874F7000C4F195 /* DNSSettings.swift in Sources */,
@@ -8278,7 +8292,6 @@
 				658E439B1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
 				7E3FEFB226CD37750080EC03 /* AGSearchView.swift in Sources */,
 				247CB5B22600B9940047974C /* OpenDnsSettingsControllerParser.swift in Sources */,
-				24BD32FF2603592000CC12F3 /* FiltersUpdatesConstants.swift in Sources */,
 				D0B545A92435D640002F0AEC /* NewDnsServerController.swift in Sources */,
 				D0D7E5D924444D63001801A5 /* ChartDateType.swift in Sources */,
 				D0D7E6202444570F001801A5 /* ActivityTableViewCell.swift in Sources */,
@@ -8425,6 +8438,7 @@
 				240F1E5F2595D03000580102 /* RateAppProblemController.swift in Sources */,
 				D0B545C02435D65C002F0AEC /* CustomNavigationTransition.swift in Sources */,
 				D0B545B92435D650002F0AEC /* ComplexProtectionController.swift in Sources */,
+				24B36A9626F3948800085E7A /* BackgroundFetchUpdateInterval.swift in Sources */,
 				247CB5C62600BB1C0047974C /* OpenMainPageControllerParser.swift in Sources */,
 				659886851CF74DE9003ECD1C /* AEUIPlayerViewController.m in Sources */,
 				7EA4551A254ABEDE002B69C6 /* AppDelegate+PresentController.swift in Sources */,
@@ -8434,6 +8448,7 @@
 				D0B545902435D630002F0AEC /* NetworkSettingsService.swift in Sources */,
 				D0B545D42435D697002F0AEC /* OnboardingController.swift in Sources */,
 				7E70266A26DE462D00F8FC25 /* UserRuleTableViewCell.swift in Sources */,
+				2430CE1526F34D78005A05DA /* BackgroungFetchController.swift in Sources */,
 				659886881CF74DE9003ECD1C /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				7EBDFE8B26CF92EB00CCE8CC /* FilterDetailsViewModel.swift in Sources */,
 				7E92753926C67A1D007B2C80 /* TitleTableViewCell.swift in Sources */,
@@ -8672,6 +8687,7 @@
 				D07D41D121FF1F6400B03872 /* DnsModeController.swift in Sources */,
 				D077D5F52139774E00D3D5B3 /* RoundRectButton.swift in Sources */,
 				24D922B62604B496002F368B /* AppDelegate+StatusBarWindow.swift in Sources */,
+				24B36A9426F3948800085E7A /* BackgroundFetchUpdateInterval.swift in Sources */,
 				7EE9F63E26DCC55300646D62 /* FilterDetailsProtocol.swift in Sources */,
 				D031A171219EFC99002C17D9 /* DDFileLogger.m in Sources */,
 				7E1BAE72233A1AFF00F1EBEB /* SafariProtectionController.swift in Sources */,
@@ -8679,6 +8695,7 @@
 				D0CDAEA52191C9540028001B /* String+Utils.swift in Sources */,
 				24D6A9E125FB698A00674D11 /* StatusBarWindow.swift in Sources */,
 				65EC9CA81BB9824C00F53F3B /* FMStatementKeywordRecogniser.m in Sources */,
+				24B36A8F26F393F200085E7A /* SharedResources+BackgroundFetchTimePeriod.swift in Sources */,
 				65EC9C901BB9824C00F53F3B /* FMDatabase.m in Sources */,
 				7E2D93FC26F4891D00534DC5 /* Constants+Sentry.swift in Sources */,
 				655A02251C6B7686000F00D7 /* ACIOStream.m in Sources */,
@@ -8737,7 +8754,7 @@
 				D0977A6C221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift in Sources */,
 				7E8C8C4224E19779000B4B9C /* UIImage+Utils.swift in Sources */,
 				651F5E0C1E2563A400E22157 /* ACNUrlUtils.m in Sources */,
-				24BD32ED2603588F00CC12F3 /* FiltersUpdatesConstants.swift in Sources */,
+				2430CE1426F34D78005A05DA /* BackgroungFetchController.swift in Sources */,
 				D07A16442168AC0A008BB432 /* NewCustomFilterDetailsController.swift in Sources */,
 				247CB6262600CA5B0047974C /* OpenFiltersMasterControllerParser.swift in Sources */,
 				248448BC259383ED00D52DE0 /* SignInFailureHandler.swift in Sources */,
@@ -8798,6 +8815,7 @@
 				247CB5B12600B9940047974C /* OpenDnsSettingsControllerParser.swift in Sources */,
 				D016FBB9224CF46B00CF3B29 /* UIApplication+OpenAdguardUrl.swift in Sources */,
 				247521F22594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */,
+				2430CE1726F360F6005A05DA /* ExtendedRadioButtonCell.swift in Sources */,
 				D028DB8921550615002E4E8E /* MainMenuController.swift in Sources */,
 				24F66A9A26033DA00097B426 /* OpenMainPageControllerControllerWithLaunchScreenParser.swift in Sources */,
 				7E15B65E2343B39A0048E63F /* AdvancedSettingsController.swift in Sources */,

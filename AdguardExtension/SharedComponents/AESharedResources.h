@@ -25,7 +25,6 @@
 
 #define AE_PRODUCT_NAME                     @AG_PRODUCT
 #define AE_HOSTAPP_ID                       @ADGUARD_BUNDLE_ID
-//#define AE_EXTENSION_ID                     @ADGUARD_EXTENSION_BUNDLE_ID
 #define AE_SHARED_RESOURCES_GROUP           @ADGUARD_SHARED_RESOURCES_GROUP
 #define AE_FILTER_UPDATES_ID                @ADGUARD_FILTER_UPDATES_ID
 
@@ -328,6 +327,11 @@ extern NSString* _Nonnull BlockIpv6;
  User defaults key for last dns filters update time
  */
 extern NSString* _Nonnull LastDnsFiltersUpdateTime;
+
+/**
+ Selected minimum background fetch period from low-level settings
+ */
+extern NSString* _Nonnull BackgroundFetchUpdatePeriod;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources

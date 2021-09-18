@@ -29,6 +29,8 @@ final class LowLevelSettingsController: UITableViewController {
     @IBOutlet weak var betaChannelTextView: UITextView!
     @IBOutlet weak var fallbacksDescription: ThemableLabel!
     @IBOutlet weak var bootstrapsDescription: ThemableLabel!
+    @IBOutlet weak var backgroundFetchTitle: ThemableLabel!
+    @IBOutlet weak var backgroundFetchDescription: ThemableLabel!
     
     @IBOutlet weak var lastSeparator: UIView!
     
@@ -46,12 +48,14 @@ final class LowLevelSettingsController: UITableViewController {
     private let blockResponseTtl = 3
     private let boostraps = 4
     private let fallbacks = 5
+    private let backgroundFetch = 6
     
     private var dnsImplementationObserver: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        backgroundFetchTitle.text = String.localizedString("background_app_refresh_time_title")
         lastSeparator.isHidden = true
         blockIpv6Switch.isOn = resources.blockIpv6
         setupBackButton()
@@ -72,6 +76,7 @@ final class LowLevelSettingsController: UITableViewController {
         setBlockedResponseTllDescription()
         setBootstrapsDescription()
         setFallbacksDescription()
+        setBackgroundFethcDescription()
         tableView.reloadData()
     }
     
@@ -103,6 +108,8 @@ final class LowLevelSettingsController: UITableViewController {
             showAlert(forType: .bootstrap)
         case fallbacks:
             showAlert(forType: .fallback)
+        case backgroundFetch:
+            showBackgroundFetchAlert()
         default:
             break
         }
@@ -152,6 +159,10 @@ final class LowLevelSettingsController: UITableViewController {
         bootstrapsDescription.text = string
     }
     
+    private func setBackgroundFethcDescription() {
+        periodSelected(period: resources.backgroundFetchUpdatePeriod)
+    }
+    
     private func showBlockedResponseTtlAlert() {
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "BlockedResponseTtlController") as? BlockedResponseTtlController else { return }
         controller.delegate = self
@@ -165,7 +176,13 @@ final class LowLevelSettingsController: UITableViewController {
         present(controller, animated: true, completion: nil)
     }
     
-    private func setupBetaChnnelTextView() {
+    private func showBackgroundFetchAlert() {
+        guard let controller = storyboard?.instantiateViewController(withIdentifier: "BackgroundFetchController") as? BackgroundFetchController else { return }
+        controller.delegate = self
+        present(controller, animated: true)
+    }
+    
+    private func setupBetaChannelTextView() {
         let betaLinkFormat = ACLocalizedString("low_level_beta_link", nil)
         let url = UIApplication.shared.adguardUrl(action: "beta_channel", from: "low_level_settings", buildVersion: productInfo.buildVersion())
         let betaLink = String(format: betaLinkFormat, url)
@@ -226,9 +243,11 @@ extension LowLevelSettingsController: UpstreamsControllerDelegate {
     }
 }
 
+// MARK: - LowLevelSettingsController + ThemableProtocol
+
 extension LowLevelSettingsController: ThemableProtocol {
     func updateTheme() {
-        setupBetaChnnelTextView()
+        setupBetaChannelTextView()
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         theme.setupNavigationBar(navigationController?.navigationBar)
@@ -240,6 +259,16 @@ extension LowLevelSettingsController: ThemableProtocol {
         tableView.reloadData()
     }
 }
+
+// MARK: - LowLevelSettingsController + BackgroundFetchControllerDelegate
+
+extension LowLevelSettingsController: BackgroundFetchControllerDelegate {
+    func periodSelected(period: BackgroundFetchUpdateInterval) {
+        backgroundFetchDescription.text = period.title
+    }
+}
+
+// MARK: - DnsProxyBlockingMode + name
 
 extension DnsProxyBlockingMode {
     var name: String {

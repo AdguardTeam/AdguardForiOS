@@ -30,7 +30,9 @@ protocol MainPageModelProtocol: AnyObject {
     var delegate: MainPageModelDelegate? { get set }
 }
 
-class MainPageModel: MainPageModelProtocol {
+/// Super old model, it should be removed
+/// Actually it was rewritten in Stories PR
+final class MainPageModel: MainPageModelProtocol {
     
     weak var delegate: MainPageModelDelegate?
     
@@ -54,24 +56,23 @@ class MainPageModel: MainPageModelProtocol {
     func updateFilters() {
         delegate?.updateStarted()
         
-//        safariProtection.updateFiltersMetaAndLocalizations(true) {  [weak delegate] result in
-//            
-//            switch result {
-//            case .error(let error):
-//                delegate?.updateFailed(error: String.localizedString("filter_updates_error"))
-//                return
-//            case .success(let updateResult):
-//                let message: String?
-//                let filtersCount = updateResult.updatedFilterIds.count
-//                if filtersCount > 0 {
-//                    let format = ACLocalizedString("filters_updated_format", nil);
-//                    message = String(format: format, filtersCount)
-//                } else {
-//                    message = ACLocalizedString("filters_noUpdates", nil);
-//                }
-//                
-//                delegate?.updateFinished(message: message)
-//            }
-//        }
+        var message: String?
+        safariProtection.updateFiltersMetaAndLocalizations(true) { [weak delegate] result in
+            switch result {
+            case .error(_):
+                delegate?.updateFailed(error: String.localizedString("filter_updates_error"))
+                return
+            case .success(let updateResult):
+                let filtersCount = updateResult.updatedFilterIds.count
+                if filtersCount > 0 {
+                    let format = String.localizedString("filters_updated_format")
+                    message = String(format: format, filtersCount)
+                } else {
+                    message = String.localizedString("filters_noUpdates")
+                }
+            }
+        } onCbReloaded: { [weak delegate] _ in
+            delegate?.updateFinished(message: message)
+        }
     }
 }
