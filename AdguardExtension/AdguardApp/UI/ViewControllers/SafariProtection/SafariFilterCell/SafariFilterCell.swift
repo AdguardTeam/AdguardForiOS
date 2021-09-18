@@ -19,7 +19,7 @@
 import UIKit
 import SafariAdGuardSDK
 
-struct FilterCellModel {
+struct SafariFilterCellModel {
     let filterId: Int // Filter unique identifier
     let groupType: SafariGroup.GroupType // Filter group type
     let filterNameAttrString: NSAttributedString // Filter name
@@ -30,7 +30,7 @@ struct FilterCellModel {
     let groupIsEnabled: Bool // Every filter belongs to group. If group is disabled cell alpha will be 0.5
 }
 
-extension FilterCellModel {
+extension SafariFilterCellModel {
     init() {
         self.filterId = 0
         self.groupType = .ads
@@ -50,11 +50,11 @@ protocol SafariFilterCellDelegate: AnyObject {
 
 // MARK: - SafariFilterCell
 
-final class FilterCell: UITableViewCell, Reusable {
+final class SafariFilterCell: UITableViewCell, Reusable {
     
     // MARK: - Public properties
     
-    var model = FilterCellModel() {
+    var model = SafariFilterCellModel() {
         didSet { processModel() }
     }
     
@@ -297,7 +297,7 @@ final class FilterCell: UITableViewCell, Reusable {
 
 // MARK: - SafariFilterCell + ThemableProtocol
 
-extension FilterCell: ThemableProtocol {
+extension SafariFilterCell: ThemableProtocol {
     func updateTheme() {
         themeService.setupTableCell(self)
         themeService.setupLabel(titleLabel)

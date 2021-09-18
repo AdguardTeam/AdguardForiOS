@@ -31,7 +31,7 @@ final class DnsFiltersTableModel {
     
     var isSearching: Bool { searchString != nil && !searchString!.isEmpty }
     
-    private(set) var cellModels: [FilterCellModel] = []
+    private(set) var cellModels: [SafariFilterCellModel] = []
     
     // MARK: - Private variables
     

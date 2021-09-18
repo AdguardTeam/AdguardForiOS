@@ -52,7 +52,7 @@ final class OneSafariGroupFiltersModel: NSObject, SafariGroupFiltersModelProtoco
     private var isSearching: Bool { modelsProvider.isSearching }
     private var addButtonIsDisplayed: Bool { isCustom && !isSearching }
     private var groupModel: StateHeaderViewModel<SafariGroup.GroupType>
-    private var filtersModels: [FilterCellModel] { modelsProvider.filtersModels.first ?? [] }
+    private var filtersModels: [SafariFilterCellModel] { modelsProvider.filtersModels.first ?? [] }
     
     /* Services */
     private let safariProtection: SafariProtectionProtocol
@@ -90,7 +90,7 @@ final class OneSafariGroupFiltersModel: NSObject, SafariGroupFiltersModelProtoco
     func setup(tableView: UITableView) {
         TitleTableViewCell.registerNibCell(forTableView: tableView)
         AddTableViewCell.registerCell(forTableView: tableView)
-        FilterCell.registerCell(forTableView: tableView)
+        SafariFilterCell.registerCell(forTableView: tableView)
         tableView.sectionHeaderHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 84.0
         tableView.sectionFooterHeight = 0.01
@@ -267,7 +267,7 @@ extension OneSafariGroupFiltersModel {
                 return cell
             }
             let index = addButtonIsDisplayed ? indexPath.row - 1 : indexPath.row
-            let cell = FilterCell.getCell(forTableView: tableView)
+            let cell = SafariFilterCell.getCell(forTableView: tableView)
             cell.model = filtersModels[index]
             cell.updateTheme()
             cell.delegate = self

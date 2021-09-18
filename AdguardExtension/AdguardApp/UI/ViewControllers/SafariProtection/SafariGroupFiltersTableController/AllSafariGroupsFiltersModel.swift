@@ -34,7 +34,7 @@ final class AllSafariGroupsFiltersModel: NSObject, SafariGroupFiltersModelProtoc
     // MARK: - Private properties
     
     private var groupModels: [StateHeaderViewModel<SafariGroup.GroupType>] { modelsProvider.groupModels }
-    private var filtersModels: [[FilterCellModel]] { modelsProvider.filtersModels }
+    private var filtersModels: [[SafariFilterCellModel]] { modelsProvider.filtersModels }
     
     /* Services */
     private let safariProtection: SafariProtectionProtocol
@@ -59,7 +59,7 @@ final class AllSafariGroupsFiltersModel: NSObject, SafariGroupFiltersModelProtoc
     // MARK: - Public methods
     
     func setup(tableView: UITableView) {
-        FilterCell.registerCell(forTableView: tableView)
+        SafariFilterCell.registerCell(forTableView: tableView)
         tableView.sectionHeaderHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 84.0
         tableView.sectionFooterHeight = 0.01
@@ -215,7 +215,7 @@ extension AllSafariGroupsFiltersModel {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = filtersModels[indexPath.section][indexPath.row]
-        let cell = FilterCell.getCell(forTableView: tableView)
+        let cell = SafariFilterCell.getCell(forTableView: tableView)
         cell.model = model
         cell.delegate = self
         cell.updateTheme()
