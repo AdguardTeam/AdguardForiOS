@@ -18,6 +18,7 @@
 
 import Foundation
 
+/// Generic cell with title and description labels and radio button that shows selected state
 final class ExtendedRadioButtonCell: UITableViewCell, Reusable {
     
     //MARK: - Properties

@@ -18,20 +18,27 @@
 
 import Foundation
 
-enum BackgroundFetchUpdateTimePeriod: Int, CaseIterable {
-    case defaultPeriod = 0 // 6 hours
+/**
+ Our app supports background fetch mode
+ These are background fetch intervals user can choose
+ - Seealso https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1623125-application
+ */
+enum BackgroundFetchUpdateInterval: Int, CaseIterable {
+    case defaultPeriod = 0
     case everyHour
     case every3Hour
     case every12Hours
     case every24Hours
     
-    var periodInterval: TimeInterval {
+    var interval: TimeInterval {
+        let hour: TimeInterval = 3600.0
+        
         switch self {
-        case .defaultPeriod: return FiltersUpdatesConstants.checkFiltersUpdatesDefaultPeriod
-        case .everyHour: return FiltersUpdatesConstants.executionPeriodTime
-        case .every3Hour: return FiltersUpdatesConstants.executionPeriodTime * 3
-        case .every12Hours: return FiltersUpdatesConstants.checkFiltersUpdatesDefaultPeriod * 2
-        case .every24Hours: return FiltersUpdatesConstants.checkFiltersUpdatesDefaultPeriod * 4
+        case .defaultPeriod: return 6 * hour
+        case .everyHour: return hour
+        case .every3Hour: return 3 * hour
+        case .every12Hours: return 12 * hour
+        case .every24Hours: return 24 * hour
         }
     }
 }

@@ -263,7 +263,7 @@ extension LowLevelSettingsController: ThemableProtocol {
 // MARK: - LowLevelSettingsController + BackgroundFetchControllerDelegate
 
 extension LowLevelSettingsController: BackgroundFetchControllerDelegate {
-    func periodSelected(period: BackgroundFetchUpdateTimePeriod) {
+    func periodSelected(period: BackgroundFetchUpdateInterval) {
         backgroundFetchDescription.text = period.title
     }
 }

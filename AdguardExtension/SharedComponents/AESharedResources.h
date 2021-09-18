@@ -25,7 +25,6 @@
 
 #define AE_PRODUCT_NAME                     @AG_PRODUCT
 #define AE_HOSTAPP_ID                       @ADGUARD_BUNDLE_ID
-//#define AE_EXTENSION_ID                     @ADGUARD_EXTENSION_BUNDLE_ID
 #define AE_SHARED_RESOURCES_GROUP           @ADGUARD_SHARED_RESOURCES_GROUP
 #define AE_FILTER_UPDATES_ID                @ADGUARD_FILTER_UPDATES_ID
 

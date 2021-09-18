@@ -141,14 +141,12 @@
 		24AD872E260A247B0034D402 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD872C260A247B0034D402 /* RadioButton.swift */; };
 		24B36A8F26F393F200085E7A /* SharedResources+BackgroundFetchTimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B36A8E26F393F200085E7A /* SharedResources+BackgroundFetchTimePeriod.swift */; };
 		24B36A9126F393F200085E7A /* SharedResources+BackgroundFetchTimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B36A8E26F393F200085E7A /* SharedResources+BackgroundFetchTimePeriod.swift */; };
-		24B36A9426F3948800085E7A /* BackgroundFetchUpdateTimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B36A9326F3948800085E7A /* BackgroundFetchUpdateTimePeriod.swift */; };
-		24B36A9626F3948800085E7A /* BackgroundFetchUpdateTimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B36A9326F3948800085E7A /* BackgroundFetchUpdateTimePeriod.swift */; };
+		24B36A9426F3948800085E7A /* BackgroundFetchUpdateInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B36A9326F3948800085E7A /* BackgroundFetchUpdateInterval.swift */; };
+		24B36A9626F3948800085E7A /* BackgroundFetchUpdateInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B36A9326F3948800085E7A /* BackgroundFetchUpdateInterval.swift */; };
 		24BC54C826E7A56B00F680ED /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */; };
 		24BC54C926E7A56B00F680ED /* SharedAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		24BC54CA26E7A58800F680ED /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */; };
 		24BC54CB26E7A58800F680ED /* SharedAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		24BD32ED2603588F00CC12F3 /* FiltersUpdatesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */; };
-		24BD32FF2603592000CC12F3 /* FiltersUpdatesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */; };
 		24CBA66225939CC200E28308 /* CustomSchemeURLParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */; };
 		24D6A9E125FB698A00674D11 /* StatusBarWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6A9E025FB698A00674D11 /* StatusBarWindow.swift */; };
 		24D6A9E225FB698A00674D11 /* StatusBarWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6A9E025FB698A00674D11 /* StatusBarWindow.swift */; };
@@ -2720,9 +2718,8 @@
 		24AD872C260A247B0034D402 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		24B2F12F25FF4DD500CE46C8 /* URLSchemeParcerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSchemeParcerTest.swift; sourceTree = "<group>"; };
 		24B36A8E26F393F200085E7A /* SharedResources+BackgroundFetchTimePeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharedResources+BackgroundFetchTimePeriod.swift"; sourceTree = "<group>"; };
-		24B36A9326F3948800085E7A /* BackgroundFetchUpdateTimePeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundFetchUpdateTimePeriod.swift; sourceTree = "<group>"; };
+		24B36A9326F3948800085E7A /* BackgroundFetchUpdateInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundFetchUpdateInterval.swift; sourceTree = "<group>"; };
 		24BC54C726E7A56B00F680ED /* SharedAdGuardSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SharedAdGuardSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersUpdatesConstants.swift; sourceTree = "<group>"; };
 		24C03C4525FF73790062DEED /* URLSchemeExecutorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSchemeExecutorMock.swift; sourceTree = "<group>"; };
 		24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSchemeURLParserTest.swift; sourceTree = "<group>"; };
 		24D6A9E025FB698A00674D11 /* StatusBarWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarWindow.swift; sourceTree = "<group>"; };
@@ -6277,7 +6274,6 @@
 			isa = PBXGroup;
 			children = (
 				24557DF625EFD4AE00BC5B26 /* AppDelegate.swift */,
-				24BD32EC2603588F00CC12F3 /* FiltersUpdatesConstants.swift */,
 				24D6A9E025FB698A00674D11 /* StatusBarWindow.swift */,
 				24D6A9F425FB7A6300674D11 /* SettingsResetor.swift */,
 				24D923212604C6D6002F368B /* Extensions */,
@@ -6524,7 +6520,7 @@
 				7EB3094A233B4E5E006C6EC1 /* AdvancedSettingsController.swift */,
 				D07D41D021FF1F6400B03872 /* DnsModeController.swift */,
 				2430CE1326F34D77005A05DA /* BackgroungFetchController.swift */,
-				24B36A9326F3948800085E7A /* BackgroundFetchUpdateTimePeriod.swift */,
+				24B36A9326F3948800085E7A /* BackgroundFetchUpdateInterval.swift */,
 				244339CB2581085400AB4F26 /* LowLevelSettings */,
 				7E15720622DF32B7007060D7 /* Content Blocker State  */,
 			);
@@ -8296,7 +8292,6 @@
 				658E439B1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */,
 				7E3FEFB226CD37750080EC03 /* AGSearchView.swift in Sources */,
 				247CB5B22600B9940047974C /* OpenDnsSettingsControllerParser.swift in Sources */,
-				24BD32FF2603592000CC12F3 /* FiltersUpdatesConstants.swift in Sources */,
 				D0B545A92435D640002F0AEC /* NewDnsServerController.swift in Sources */,
 				D0D7E5D924444D63001801A5 /* ChartDateType.swift in Sources */,
 				D0D7E6202444570F001801A5 /* ActivityTableViewCell.swift in Sources */,
@@ -8443,7 +8438,7 @@
 				240F1E5F2595D03000580102 /* RateAppProblemController.swift in Sources */,
 				D0B545C02435D65C002F0AEC /* CustomNavigationTransition.swift in Sources */,
 				D0B545B92435D650002F0AEC /* ComplexProtectionController.swift in Sources */,
-				24B36A9626F3948800085E7A /* BackgroundFetchUpdateTimePeriod.swift in Sources */,
+				24B36A9626F3948800085E7A /* BackgroundFetchUpdateInterval.swift in Sources */,
 				247CB5C62600BB1C0047974C /* OpenMainPageControllerParser.swift in Sources */,
 				659886851CF74DE9003ECD1C /* AEUIPlayerViewController.m in Sources */,
 				7EA4551A254ABEDE002B69C6 /* AppDelegate+PresentController.swift in Sources */,
@@ -8692,7 +8687,7 @@
 				D07D41D121FF1F6400B03872 /* DnsModeController.swift in Sources */,
 				D077D5F52139774E00D3D5B3 /* RoundRectButton.swift in Sources */,
 				24D922B62604B496002F368B /* AppDelegate+StatusBarWindow.swift in Sources */,
-				24B36A9426F3948800085E7A /* BackgroundFetchUpdateTimePeriod.swift in Sources */,
+				24B36A9426F3948800085E7A /* BackgroundFetchUpdateInterval.swift in Sources */,
 				7EE9F63E26DCC55300646D62 /* FilterDetailsProtocol.swift in Sources */,
 				D031A171219EFC99002C17D9 /* DDFileLogger.m in Sources */,
 				7E1BAE72233A1AFF00F1EBEB /* SafariProtectionController.swift in Sources */,
@@ -8759,7 +8754,6 @@
 				D0977A6C221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift in Sources */,
 				7E8C8C4224E19779000B4B9C /* UIImage+Utils.swift in Sources */,
 				651F5E0C1E2563A400E22157 /* ACNUrlUtils.m in Sources */,
-				24BD32ED2603588F00CC12F3 /* FiltersUpdatesConstants.swift in Sources */,
 				2430CE1426F34D78005A05DA /* BackgroungFetchController.swift in Sources */,
 				D07A16442168AC0A008BB432 /* NewCustomFilterDetailsController.swift in Sources */,
 				247CB6262600CA5B0047974C /* OpenFiltersMasterControllerParser.swift in Sources */,
@@ -10277,7 +10271,6 @@
 				D06E9BDD268EFA2500E5AB5C /* ACObject.m in Sources */,
 				D0D7E61724445625001801A5 /* ChartDateType.swift in Sources */,
 				D0B544C02435C6BF002F0AEC /* ACNHttpUtils.m in Sources */,
-				D0B544C12435C6BF002F0AEC /* PacketTunnelProvider.m in Sources */,
 				D0D0CAFF268B135800AD427E /* ABECRequest.m in Sources */,
 				D0B544C22435C6BF002F0AEC /* DnsFiltersService.swift in Sources */,
 				D0B544C32435C6BF002F0AEC /* Dns64Utils.swift in Sources */,

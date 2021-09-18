@@ -20,9 +20,10 @@ import Foundation
 import UIKit
 
 protocol BackgroundFetchControllerDelegate: AnyObject {
-    func periodSelected(period: BackgroundFetchUpdateTimePeriod)
+    func periodSelected(period: BackgroundFetchUpdateInterval)
 }
 
+/// View controller for choosing background fetch interval
 final class BackgroundFetchController: BottomAlertController {
     //MARK: - Outlets
     @IBOutlet weak var titleLabel: ThemableLabel!
@@ -30,7 +31,7 @@ final class BackgroundFetchController: BottomAlertController {
 
     //MARK: - Properties
     weak var delegate: BackgroundFetchControllerDelegate?
-    private var selectedCell: BackgroundFetchUpdateTimePeriod?
+    private var selectedCell: BackgroundFetchUpdateInterval?
     
     
     //MARK: - Services
@@ -57,7 +58,7 @@ extension BackgroundFetchController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ExtendedRadioButtonCell.reuseIdentifier, for: indexPath) as? ExtendedRadioButtonCell else { return UITableViewCell() }
-        let row = BackgroundFetchUpdateTimePeriod.allCases[indexPath.row]
+        let row = BackgroundFetchUpdateInterval.allCases[indexPath.row]
         cell.titleString = row.title
         cell.radioButtonSelected = selectedCell == row
         cell.updateTheme()
@@ -65,7 +66,7 @@ extension BackgroundFetchController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return BackgroundFetchUpdateTimePeriod.allCases.count
+        return BackgroundFetchUpdateInterval.allCases.count
     }
 }
 
@@ -80,8 +81,8 @@ extension BackgroundFetchController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let row = BackgroundFetchUpdateTimePeriod.allCases[indexPath.row]
-        UIApplication.shared.setMinimumBackgroundFetchInterval(row.periodInterval)
+        let row = BackgroundFetchUpdateInterval.allCases[indexPath.row]
+        AppDelegate.setBackgroundFetchInterval(row.interval)
         selectedCell = row
         resources.backgroundFetchUpdatePeriod = row
         tableView.deselectRow(at: indexPath, animated: true)
@@ -103,7 +104,7 @@ extension BackgroundFetchController: ThemableProtocol {
     }
 }
 
-extension BackgroundFetchUpdateTimePeriod {
+extension BackgroundFetchUpdateInterval {
      var title: String {
         switch self {
         case .defaultPeriod: return String.localizedString("background_fetch_default_period")

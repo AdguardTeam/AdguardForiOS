@@ -122,7 +122,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //------------- Preparing for start application. Stage 2. -----------------
         DDLogInfo("(AppDelegate) Preparing for start application. Stage 2.")
         
-        AppDelegate.setPeriodForCheckingFilters()
+        let interval = resources.backgroundFetchUpdatePeriod.interval
+        AppDelegate.setBackgroundFetchInterval(interval)
         subscribeToNotifications()
         
         // Background fetch consists of 3 steps, so if the update process didn't fully finish in the background than we should continue it here

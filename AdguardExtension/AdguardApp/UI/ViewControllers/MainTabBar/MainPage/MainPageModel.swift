@@ -30,6 +30,8 @@ protocol MainPageModelProtocol: AnyObject {
     var delegate: MainPageModelDelegate? { get set }
 }
 
+/// Super old model, it should be removed
+/// Actually it was rewritten in Stories PR
 final class MainPageModel: MainPageModelProtocol {
     
     weak var delegate: MainPageModelDelegate?
