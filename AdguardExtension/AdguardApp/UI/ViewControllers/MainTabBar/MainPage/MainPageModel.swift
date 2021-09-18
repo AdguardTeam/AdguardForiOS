@@ -30,7 +30,7 @@ protocol MainPageModelProtocol: AnyObject {
     var delegate: MainPageModelDelegate? { get set }
 }
 
-class MainPageModel: MainPageModelProtocol {
+final class MainPageModel: MainPageModelProtocol {
     
     weak var delegate: MainPageModelDelegate?
     

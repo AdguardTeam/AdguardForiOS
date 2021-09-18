@@ -21,10 +21,10 @@ import UIKit.UIBackgroundConfiguration
 
 /// This object contains all information about background fetch update result
 public struct BackgroundFetchUpdateResult: Equatable {
-    let backgroundFetchResult: UIBackgroundFetchResult
-    let newBackgroundFetchState: BackgroundFetchState
-    let oldBackgroundFetchState: BackgroundFetchState
-    let error: Error?
+    public let backgroundFetchResult: UIBackgroundFetchResult
+    public let newBackgroundFetchState: BackgroundFetchState
+    public let oldBackgroundFetchState: BackgroundFetchState
+    public let error: Error?
     
     public static func == (lhs: BackgroundFetchUpdateResult, rhs: BackgroundFetchUpdateResult) -> Bool {
         return lhs.backgroundFetchResult.rawValue == rhs.backgroundFetchResult.rawValue
