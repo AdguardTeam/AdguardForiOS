@@ -29,6 +29,15 @@
         }
       },
       {
+        "package": "Reachability",
+        "repositoryURL": "https://github.com/ashleymills/Reachability.swift",
+        "state": {
+          "branch": null,
+          "revision": "c01bbdf2d633cf049ae1ed1a68a2020a8bda32e2",
+          "version": "5.1.0"
+        }
+      },
+      {
         "package": "ContentBlockerConverter",
         "repositoryURL": "https://github.com/AdguardTeam/SafariConverterLib",
         "state": {
@@ -42,8 +51,8 @@
         "repositoryURL": "https://github.com/getsentry/sentry-cocoa",
         "state": {
           "branch": null,
-          "revision": "a9c1f7fb5451cdaf414c1f4e02b609fa188c730b",
-          "version": "7.2.2"
+          "revision": "97bb9a45bc1ea8390528b5fd1ce135c0ab7f174e",
+          "version": "7.2.9"
         }
       },
       {

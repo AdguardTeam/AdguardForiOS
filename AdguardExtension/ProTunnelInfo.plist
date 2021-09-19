@@ -31,9 +31,11 @@
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.networkextension.packet-tunnel</string>
 		<key>NSExtensionPrincipalClass</key>
-		<string>PacketTunnelProvider</string>
+		<string>$(PRODUCT_MODULE_NAME).TunnelProvider</string>
 	</dict>
 	<key>ProApplication</key>
 	<true/>
+	<key>SharedResourcesGroup</key>
+	<string>$(ADGUARD_SHARED_RESOURCES_GROUP)</string>
 </dict>
 </plist>

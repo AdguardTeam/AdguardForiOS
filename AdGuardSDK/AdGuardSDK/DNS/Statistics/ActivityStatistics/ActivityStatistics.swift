@@ -46,6 +46,9 @@ final public class ActivityStatistics: ActivityStatisticsProtocol {
     let statisticsDb: Connection
     
     public init(statisticsDbContainerUrl: URL) throws {
+        // Create directory if doesn't exist
+        try FileManager.default.createDirectory(at: statisticsDbContainerUrl, withIntermediateDirectories: true, attributes: [:])
+        
         let dbName = Constants.Statistics.StatisticsType.activity.dbFileName
         self.statisticsDb = try Connection(statisticsDbContainerUrl.appendingPathComponent(dbName).path)
         dateFormatter.dateFormat = Constants.Statistics.dbDateFormat

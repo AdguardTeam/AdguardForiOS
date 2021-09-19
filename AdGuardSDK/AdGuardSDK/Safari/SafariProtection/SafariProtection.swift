@@ -49,6 +49,7 @@ public final class SafariProtection: SafariProtectionProtocol {
     let cbService: ContentBlockerServiceProtocol
     let safariManagers: SafariUserRulesManagersProviderProtocol
     let converterHelper: WebExtensionHelpersProtocol
+    let dnsBackgroundFetchUpdater: DnsBackgroundFetchUpdateProtocol?
     private let defaultConfiguration: SafariConfigurationProtocol
     
     // MARK: - Initialization
@@ -68,7 +69,8 @@ public final class SafariProtection: SafariProtectionProtocol {
                 filterFilesDirectoryUrl: URL,
                 dbContainerUrl: URL,
                 jsonStorageUrl: URL,
-                userDefaults: UserDefaults) throws
+                userDefaults: UserDefaults,
+                dnsBackgroundFetchUpdater: DnsBackgroundFetchUpdateProtocol? = nil) throws
     {
         let services = try ServicesStorage(configuration: configuration,
                                           filterFilesDirectoryUrl: filterFilesDirectoryUrl,
@@ -85,6 +87,7 @@ public final class SafariProtection: SafariProtectionProtocol {
         self.cbService = services.cbService
         self.safariManagers = services.safariManagers
         self.converterHelper = WebExtensionHelpers()
+        self.dnsBackgroundFetchUpdater = dnsBackgroundFetchUpdater
     }
     
     // Initializer for tests
@@ -96,9 +99,9 @@ public final class SafariProtection: SafariProtectionProtocol {
          cbStorage: ContentBlockersInfoStorageProtocol,
          cbService: ContentBlockerServiceProtocol,
          safariManagers: SafariUserRulesManagersProviderProtocol,
-         converterHelper: WebExtensionHelpersProtocol = WebExtensionHelpers()
-    )
-    {
+         converterHelper: WebExtensionHelpersProtocol = WebExtensionHelpers(),
+         dnsBackgroundFetchUpdater: DnsBackgroundFetchUpdateProtocol? = nil
+    ) {
         self.configuration = configuration
         self.defaultConfiguration = defaultConfiguration
         self.userDefaults = userDefaults
@@ -108,6 +111,7 @@ public final class SafariProtection: SafariProtectionProtocol {
         self.cbService = cbService
         self.safariManagers = safariManagers
         self.converterHelper = converterHelper
+        self.dnsBackgroundFetchUpdater = dnsBackgroundFetchUpdater
     }
     
     // MARK: - Public method
