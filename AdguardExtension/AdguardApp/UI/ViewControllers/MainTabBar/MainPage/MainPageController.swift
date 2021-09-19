@@ -166,7 +166,6 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     private lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var resources: AESharedResourcesProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var complexProtection: ComplexProtectionServiceProtocol = { ServiceLocator.shared.getService()! }()
-    private lazy var dnsFiltersService: DnsFiltersServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var nativeProviders: NativeProvidersServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var importSettingsService: ImportSettingsServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var safariProtection: SafariProtectionProtocol = { ServiceLocator.shared.getService()! }()

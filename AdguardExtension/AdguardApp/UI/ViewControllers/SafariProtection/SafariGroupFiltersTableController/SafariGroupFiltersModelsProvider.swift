@@ -66,7 +66,7 @@ final class SafariGroupFiltersModelsProvider {
                 return SafariFilterCellModel(
                     filterId: filter.filterId,
                     groupType: group.groupType,
-                    filterNameAttrString: (filter.name ?? "").highlight(occuranciesOf: []).attrString,
+                    filterNameAttrString: (filter.name ?? "").clearAttrString,
                     isEnabled: filter.isEnabled,
                     version: filter.version,
                     lastUpdateDate: filter.lastUpdateDate,
