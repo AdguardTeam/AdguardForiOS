@@ -269,7 +269,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         dnsLogContainerVC.loadViewIfNeeded()
     }
     
-    
+    // TODO: - Change the way we show overlimit error for DNS filters and handle the error
     private func postDnsFiltersOverlimitNotificationIfNedeed(){
         let rulesNumberString = String.simpleThousandsFormatting(NSNumber(integerLiteral: 1)) // dnsFiltersService.enabledRulesCount
         let title = String.localizedString("dns_filters_notification_title")

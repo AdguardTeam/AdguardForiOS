@@ -17,6 +17,7 @@
 */
 
 import UIKit
+import DnsAdGuardSDK
 
 final class RequestsBlockingController: UITableViewController {
 
@@ -24,15 +25,13 @@ final class RequestsBlockingController: UITableViewController {
     @IBOutlet var themableLabels: [ThemableLabel]!
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
-    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
-    private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
+    private let dnsProtection: DnsProtectionProtocol = ServiceLocator.shared.getService()!
     
     private let dnsBlacklistSegue = "dnsBlacklistSegue"
     private let dnsWhitelistSegue = "dnsWhitelistSegue"
     
     private var advancedModeObserver: NotificationToken?
+    private var themeObserver: NotificationToken?
     
     private let headerSection = 0
     
@@ -52,22 +51,23 @@ final class RequestsBlockingController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         updateTheme()
+        setupBackButton()
         
         advancedModeObserver = NotificationCenter.default.observe(name: .advancedModeChanged, object: nil, queue: .main, using: { [weak self] _ in
             self?.tableView.reloadData()
         })
-        
-        setupBackButton()
+        themeObserver = NotificationCenter.default.observe(name: .themeChanged, object: nil, queue: .main) { [weak self] _ in
+            self?.updateTheme()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    
+        let enabledFiltersCount = dnsProtection.filters.filter { $0.isEnabled }.count
         let filtersDescriptionFormat = String.localizedString("safari_filters_format")
-//        let filtersDescriptionText = String.localizedStringWithFormat(filtersDescriptionFormat, dnsFiltersService.enabledFiltersCount, dnsFiltersService.enabledRulesCount)
-//        filtersLabel.text = filtersDescriptionText
+        let filtersDescriptionText = String.localizedStringWithFormat(filtersDescriptionFormat, enabledFiltersCount)
+        filtersLabel.text = filtersDescriptionText
     }
     
     // MARK: - Table view delegate methods
@@ -96,14 +96,13 @@ final class RequestsBlockingController: UITableViewController {
     }
 }
 
+// MARK: - RequestsBlockingController + ThemableProtocol
+
 extension RequestsBlockingController: ThemableProtocol {
     func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         theme.setupTable(tableView)
-        DispatchQueue.main.async { [weak self] in
-            guard let sSelf = self else { return }
-            sSelf.tableView.reloadData()
-        }
+        tableView.reloadData()
     }
 }
