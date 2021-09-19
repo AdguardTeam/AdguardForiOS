@@ -1940,8 +1940,6 @@
 		D0B544B62435C6BC002F0AEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 		D0B544B72435C6BC002F0AEC /* ActionExtension.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0B8EB902248E5770066C5AC /* ActionExtension.xcassets */; };
 		D0B544C02435C6BF002F0AEC /* ACNHttpUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01FE1C6B7686000F00D7 /* ACNHttpUtils.m */; };
-		D0B544C12435C6BF002F0AEC /* PacketTunnelProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 658237381D07FE6700B824F4 /* PacketTunnelProvider.m */; };
-		D0B544C22435C6BF002F0AEC /* DnsFiltersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDD5692344E066000584EF /* DnsFiltersService.swift */; };
 		D0B544C32435C6BF002F0AEC /* Dns64Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0923EA0220A017A009AA5F5 /* Dns64Utils.swift */; };
 		D0B544C42435C6BF002F0AEC /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F61C6B7686000F00D7 /* NSURL+Utils.m */; };
 		D0B544C52435C6BF002F0AEC /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01EC1C6B7686000F00D7 /* NSDate+Utils.m */; };
@@ -6129,7 +6127,6 @@
 				7E94743226CA83690031B8F4 /* SafariGroupsTableController */,
 				7EAA0D8C26CA9B3D007208E5 /* SafariGroupFiltersTableController */,
 				7EAA0D7E26CA8789007208E5 /* SafariFilterCell */,
-				7EBDFE8F26CFAE1A00CCE8CC /* FilterDetailsViewController */,
 			);
 			path = SafariProtection;
 			sourceTree = "<group>";
@@ -6644,6 +6641,7 @@
 				D0EDE45422A9288E00086C00 /* Tutorial */,
 				7E31217024DC024E00642879 /* BottomAlertController */,
 				7E0B223D25DBB3D200AF88BB /* UpsellViewController */,
+				7EBDFE8F26CFAE1A00CCE8CC /* FilterDetailsViewController */,
 				7EA7DCC326C675BF0032AD5C /* SafariProtection */,
 				7E2D93F326F3A1E800534DC5 /* DnsProtection */,
 				7E70265E26DD25C100F8FC25 /* UserRules */,

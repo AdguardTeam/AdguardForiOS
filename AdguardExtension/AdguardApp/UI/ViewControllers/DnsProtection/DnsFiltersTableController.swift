@@ -20,6 +20,8 @@ import UIKit
 import DnsAdGuardSDK
 
 // TODO: - Process tunnel overlimit error 'dns_filters_overlimit_title'
+
+/// Screen with DNS filters list
 final class DnsFiltersTableController: UITableViewController {
     
     // MARK: - UI elements

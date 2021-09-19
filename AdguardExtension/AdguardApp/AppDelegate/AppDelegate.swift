@@ -234,6 +234,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - Observing Values from User Defaults
     
+    // TODO: - Change the way we show overlimit error for DNS filters
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == TunnelErrorCode, resources.tunnelErrorCode == 3 {
             postDnsFiltersOverlimitNotificationIfNedeed()

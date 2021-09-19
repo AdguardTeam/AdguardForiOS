@@ -19,11 +19,14 @@
 import Foundation
 import DnsAdGuardSDK
 
+/// Delegate for model
 protocol DnsFiltersTableModelDelegate: AnyObject {
     func filterAdded()
     func modelsChanged()
 }
 
+/// Model for `DnsFiltersTableController`
+/// It encapsulates logic for working with `DnsAdGuardSDK`
 final class DnsFiltersTableModel {
     
     // MARK: - Public variables

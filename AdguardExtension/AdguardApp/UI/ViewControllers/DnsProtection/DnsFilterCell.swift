@@ -18,6 +18,7 @@
 
 import Foundation
 
+/// Model for `DnsFilterCell`
 struct DnsFilterCellModel {
     let filterId: Int // Filter unique identifier
     let filterNameAttrString: NSAttributedString // Filter name
@@ -46,6 +47,7 @@ protocol DnsFilterCellDelegate: AnyObject {
     func dnsFilterStateChanged(_ filterId: Int, newState: Bool)
 }
 
+/// Cell for displaying DnsFilter info
 final class DnsFilterCell: UITableViewCell, Reusable {
     
     // MARK: - Public variables
