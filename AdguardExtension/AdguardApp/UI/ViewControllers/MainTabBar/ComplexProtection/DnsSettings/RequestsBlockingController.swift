@@ -25,7 +25,6 @@ final class RequestsBlockingController: UITableViewController {
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
@@ -67,8 +66,8 @@ final class RequestsBlockingController: UITableViewController {
         super.viewWillAppear(animated)
     
         let filtersDescriptionFormat = String.localizedString("safari_filters_format")
-        let filtersDescriptionText = String.localizedStringWithFormat(filtersDescriptionFormat, dnsFiltersService.enabledFiltersCount, dnsFiltersService.enabledRulesCount)
-        filtersLabel.text = filtersDescriptionText
+//        let filtersDescriptionText = String.localizedStringWithFormat(filtersDescriptionFormat, dnsFiltersService.enabledFiltersCount, dnsFiltersService.enabledRulesCount)
+//        filtersLabel.text = filtersDescriptionText
     }
     
     // MARK: - Table view delegate methods

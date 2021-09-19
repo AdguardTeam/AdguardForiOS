@@ -53,7 +53,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var safariProtection: SafariProtectionProtocol
     private var dnsProtection: DnsProtectionProtocol
     private var purchaseService: PurchaseServiceProtocol
-    private var dnsFiltersService: DnsFiltersServiceProtocol
     private var networking: ACNNetworking
     private var configuration: ConfigurationServiceProtocol
     private var productInfo: ADProductInfoProtocol
@@ -70,7 +69,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.resources = ServiceLocator.shared.getService()!
         self.safariProtection = ServiceLocator.shared.getService()!
         self.purchaseService = ServiceLocator.shared.getService()!
-        self.dnsFiltersService = ServiceLocator.shared.getService()!
         self.networking = ServiceLocator.shared.getService()!
         self.configuration = ServiceLocator.shared.getService()!
         self.productInfo = ServiceLocator.shared.getService()!
@@ -210,7 +208,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func resetAllSettings() {
         let resetProcessor = SettingsResetor(appDelegate: self,
-                                             dnsFiltersService: dnsFiltersService,
                                              vpnManager: vpnManager,
                                              resources: resources,
                                              purchaseService: purchaseService,
@@ -273,7 +270,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     private func postDnsFiltersOverlimitNotificationIfNedeed(){
-        let rulesNumberString = String.simpleThousandsFormatting(NSNumber(integerLiteral: dnsFiltersService.enabledRulesCount))
+        let rulesNumberString = String.simpleThousandsFormatting(NSNumber(integerLiteral: 1)) // dnsFiltersService.enabledRulesCount
         let title = String.localizedString("dns_filters_notification_title")
         let body = String(format: String.localizedString("dns_filters_overlimit_title"), rulesNumberString)
         let userInfo: [String : Int] = [PushNotificationCommands.command : PushNotificationCommands.openDnsFiltersController.rawValue]

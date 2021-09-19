@@ -22,13 +22,13 @@ protocol ISettingsResetor {
     func resetAllSettings()
 }
 
+// TODO: - New SDK supports settings reset, this object needs changes
 // Reset statistics and settings
 struct SettingsResetor: ISettingsResetor {
     
     //MARK: - Properties
     
     private weak var appDelegate: AppDelegate?
-    private let dnsFiltersService: DnsFiltersServiceProtocol
     private let vpnManager: VpnManagerProtocol
     private let resources: AESharedResourcesProtocol
     private let purchaseService: PurchaseServiceProtocol
@@ -37,14 +37,12 @@ struct SettingsResetor: ISettingsResetor {
     //MARK: - Init
     
     init(appDelegate: AppDelegate,
-         dnsFiltersService: DnsFiltersServiceProtocol,
          vpnManager: VpnManagerProtocol,
          resources: AESharedResourcesProtocol,
          purchaseService: PurchaseServiceProtocol,
          safariProtection: SafariProtectionProtocol) {
         
         self.appDelegate = appDelegate
-        self.dnsFiltersService = dnsFiltersService
         self.vpnManager = vpnManager
         self.resources = resources
         self.purchaseService = purchaseService
@@ -73,9 +71,7 @@ struct SettingsResetor: ISettingsResetor {
                 group.leave()
             }
             group.wait()
-            
-            self.dnsFiltersService.reset()
-            
+ 
             appDelegate?.setAppInterfaceStyle()
             
             let providersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!

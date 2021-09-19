@@ -984,7 +984,7 @@
         <!--Filter Details View Controller-->
         <scene sceneID="0Lr-sc-AXy">
             <objects>
-                <viewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="wJc-Uu-t7Q" customClass="FilterDetailsViewController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FilterDetailsViewController" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="wJc-Uu-t7Q" customClass="FilterDetailsViewController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xkK-BV-Ae6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

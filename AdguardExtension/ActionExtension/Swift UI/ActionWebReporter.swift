@@ -22,6 +22,7 @@ protocol ActionWebReporterProtocol {
     func composeWebReportUrl(_ site: URL?) -> URL
 }
 
+// TODO: - Add DNS filters info here
 struct ActionWebReporter: ActionWebReporterProtocol {
     
     private let reportUrl = "https://reports.adguard.com/new_issue.html"
@@ -30,14 +31,12 @@ struct ActionWebReporter: ActionWebReporterProtocol {
     private let complexProtection: ComplexProtectionServiceProtocol
     private let dnsProviders: DnsProvidersServiceProtocol
     private let configuration: ConfigurationServiceProtocol
-    private let dnsFilters: DnsFiltersServiceProtocol
     private let safariProtection: SafariProtectionProtocol
     
     init(productInfo: ADProductInfoProtocol,
          complexProtection: ComplexProtectionServiceProtocol,
          dnsProviders: DnsProvidersServiceProtocol,
          configuration: ConfigurationServiceProtocol,
-         dnsFilters: DnsFiltersServiceProtocol,
          safariProtection: SafariProtectionProtocol
     ) {
         
@@ -45,7 +44,6 @@ struct ActionWebReporter: ActionWebReporterProtocol {
         self.complexProtection = complexProtection
         self.dnsProviders = dnsProviders
         self.configuration = configuration
-        self.dnsFilters = dnsFilters
         self.safariProtection = safariProtection
     }
     
@@ -90,11 +88,11 @@ struct ActionWebReporter: ActionWebReporterProtocol {
             
             params["dns.filters_enabled"] = filtersEnabled ? "true" : "false"
             
-            if filtersEnabled {
-                let filters = dnsFilters.filters.filter { $0.enabled }
-                let filterUrls = filters.compactMap { $0.subscriptionUrl }
-                params["dns.filters"] = filterUrls.joined(separator: ",")
-            }
+//            if filtersEnabled {
+//                let filters = dnsFilters.filters.filter { $0.enabled }
+//                let filterUrls = filters.compactMap { $0.subscriptionUrl }
+//                params["dns.filters"] = filterUrls.joined(separator: ",")
+//            }
         }
         
         let paramsString = ABECRequest.createString(fromParameters: params)

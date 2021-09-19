@@ -82,9 +82,7 @@ class ActionViewController: UIViewController {
         configuration = SimpleConfigurationSwift(withResources: sharedResources, systemAppearenceIsDark: true)
         
         productInfo = ADProductInfo()
-        
-        let dnsFiltersService = DnsFiltersService(resources: sharedResources, vpnManager: nil, complexProtection: nil)
-        
+                
         let dnsProviders = DnsProvidersService(resources: sharedResources)
         
         let networkSettings = NetworkSettingsService(resources: sharedResources)
@@ -95,7 +93,7 @@ class ActionViewController: UIViewController {
         
         let complexProtection = ComplexProtectionService(resources: sharedResources, configuration: configuration, vpnManager: vpnManager, productInfo: productInfo, nativeProvidersService: nativeProviders, safariProtection: safariProtection)
  
-        webReporter = ActionWebReporter(productInfo: productInfo, complexProtection: complexProtection, dnsProviders: dnsProviders, configuration: configuration, dnsFilters: dnsFiltersService, safariProtection: safariProtection)
+        webReporter = ActionWebReporter(productInfo: productInfo, complexProtection: complexProtection, dnsProviders: dnsProviders, configuration: configuration, safariProtection: safariProtection)
         
         super.init(coder: coder)
     }

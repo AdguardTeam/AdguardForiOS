@@ -40,7 +40,6 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
     private var blockRequestControllerId = "BlockRequestControllerId"
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
     private let domainsConverter: DomainsConverterProtocol = DomainsConverter()
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     
@@ -78,12 +77,12 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
         if type == .addDomainToWhitelist {
             let rule = needsCorrecting ? domainsConverter.whitelistRuleFromDomain(domain) : domain
             logRecord.logRecord.userRule = rule
-            dnsFiltersService.addWhitelistRule(rule)
+            //dnsFiltersService.addWhitelistRule(rule)
             set(logRecord!.logRecord.userStatus == .removedFromWhitelist ? .modified : .movedToWhitelist, rule)
         } else if type == .addRuleToUserFlter {
             let rule = needsCorrecting ? domainsConverter.blacklistRuleFromDomain(domain) : domain
             logRecord.logRecord.userRule = rule
-            dnsFiltersService.addBlacklistRule(rule)
+            //dnsFiltersService.addBlacklistRule(rule)
             set(logRecord!.logRecord.userStatus == .removedFromBlacklist ? .modified : .movedToBlacklist, rule)
         }
     }
@@ -128,7 +127,7 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
                         let isOriginalRecord = record.userStatus == .none || record.userStatus == .modified
                         let rules = isOriginalRecord ? record.blockRules : [userDomain]
 
-                        self.dnsFiltersService.removeWhitelistRules(rules ?? [])
+                        //self.dnsFiltersService.removeWhitelistRules(rules ?? [])
                         self.set(record.userStatus == .movedToWhitelist ? .modified : .removedFromWhitelist)
                     }
                 }
@@ -140,7 +139,7 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
                         let isOriginalRecord = record.userStatus == .none || record.userStatus == .modified
                         let rules = isOriginalRecord ? record.blockRules : [record.userRule ?? ""] 
 
-                        self.dnsFiltersService.removeUserRules(rules ?? [])
+                        //self.dnsFiltersService.removeUserRules(rules ?? [])
                         self.set(self.logRecord!.logRecord.userStatus == .movedToBlacklist ? .modified : .removedFromBlacklist)
                     }
                 }

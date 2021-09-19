@@ -19,44 +19,105 @@
 import Foundation
 import DnsAdGuardSDK
 
+protocol DnsFiltersTableModelDelegate: AnyObject {
+    func filterAdded()
+    func modelsChanged()
+}
+
 final class DnsFiltersTableModel {
     
     // MARK: - Public variables
     
+    weak var delegate: DnsFiltersTableModelDelegate?
+    
     var searchString: String? {
         didSet {
-            
+            modelsProvider.searchString = searchString
+            delegate?.modelsChanged()
         }
     }
     
     var isSearching: Bool { searchString != nil && !searchString!.isEmpty }
     
-    private(set) var cellModels: [SafariFilterCellModel] = []
+    var cellModels: [DnsFilterCellModel] { modelsProvider.filtersModels }
+    
+    var enabledRulesCount: Int {
+        dnsProtection.filters.reduce(0, { $1.isEnabled ? $0 + $1.rulesCount : $0 })
+    }
     
     // MARK: - Private variables
     
     private let dnsProtection: DnsProtectionProtocol
+    private var modelsProvider: DnsFiltersModelsProviderProtocol
     
     // MARK: - Initialization
     
     init(dnsProtection: DnsProtectionProtocol) {
         self.dnsProtection = dnsProtection
+        self.modelsProvider = DnsFiltersModelsProvider(sdkModels: dnsProtection.filters)
     }
     
-    // MARK: - Public methods
-    
-    
     // MARK: - Private methods
+    
+    private func updateModels() {
+        modelsProvider = DnsFiltersModelsProvider(sdkModels: dnsProtection.filters)
+        modelsProvider.searchString = searchString
+    }
 }
 
 // MARK: - DnsFiltersTableModel + NewCustomFilterDetailsControllerDelegate
 
 extension DnsFiltersTableModel: NewCustomFilterDetailsControllerDelegate {
     func addCustomFilter(_ meta: ExtendedCustomFilterMetaProtocol, _ onFilterAdded: @escaping (Error?) -> Void) {
-        
+        guard let name = meta.name, let urlString = meta.filterDownloadPage, let url = URL(string: urlString) else {
+            onFilterAdded(CommonError.missingData)
+            return
+        }
+        dnsProtection.addFilter(withName: name, url: url, isEnabled: true, onFilterAdded: { error in
+            DispatchQueue.asyncSafeMain { [weak self] in
+                self?.updateModels()
+                self?.delegate?.filterAdded()
+            }
+            onFilterAdded(error)
+        })
     }
     
     func renameFilter(withId filterId: Int, to newName: String) throws -> FilterDetailsProtocol {
+        try dnsProtection.renameFilter(withId: filterId, to: newName)
+        updateModels()
+        delegate?.modelsChanged()
+        if let filter = dnsProtection.filters.first(where: { $0.filterId == filterId }) {
+            return filter
+        }
         throw CommonError.missingData
+    }
+}
+
+// MARK: - DnsFiltersTableModel + FilterDetailsViewControllerDelegate
+
+extension DnsFiltersTableModel: FilterDetailsViewControllerDelegate {
+    func deleteFilter(filterId: Int) throws {
+        try dnsProtection.removeFilter(withId: filterId)
+        updateModels()
+        delegate?.modelsChanged()
+    }
+    
+    func setFilter(with groupId: Int?, filterId: Int, enabled: Bool) throws -> FilterDetailsProtocol {
+        try dnsProtection.setFilter(withId: filterId, to: enabled)
+        updateModels()
+        delegate?.modelsChanged()
+        
+        if let filter = dnsProtection.filters.first(where: { $0.filterId == filterId }) {
+            return filter
+        }
+        throw CommonError.missingData
+    }
+}
+
+// MARK: - DnsFiltersTableModel + DnsFilterCellDelegate
+
+extension DnsFiltersTableModel: DnsFilterCellDelegate {
+    func dnsFilterStateChanged(_ filterId: Int, newState: Bool) {
+        _ = try? setFilter(with: nil, filterId: filterId, enabled: newState)
     }
 }

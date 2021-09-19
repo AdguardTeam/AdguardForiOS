@@ -19,6 +19,7 @@
 import UIKit
 import DnsAdGuardSDK
 
+// TODO: - Process tunnel overlimit error 'dns_filters_overlimit_title'
 final class DnsFiltersTableController: UITableViewController {
     
     // MARK: - UI elements
@@ -28,11 +29,12 @@ final class DnsFiltersTableController: UITableViewController {
     
     // MARK: - Private variables
     
-    private let model: DnsFiltersTableModel
-    
+    private var headerView: AGSearchView?
+    private var selectedFilter: DnsFilter!
     private var themeObserver: NotificationToken?
     
     /* Services */
+    private let model: DnsFiltersTableModel
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsProtection: DnsProtectionProtocol = ServiceLocator.shared.getService()!
     
@@ -49,6 +51,7 @@ final class DnsFiltersTableController: UITableViewController {
         setupTableView()
         updateTheme()
         setupBackButton()
+        model.delegate = self
         
         themeObserver = NotificationCenter.default.observe(name: .themeChanged, object: nil, queue: .main) { [weak self] _ in
             self?.updateTheme()
@@ -59,15 +62,18 @@ final class DnsFiltersTableController: UITableViewController {
         super.viewDidLayoutSubviews()
         tableView.layoutTableHeaderView()
     }
-    
+
     // MARK: - Actions
     
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
         navigationItem.rightBarButtonItems = [searchButton]
+        setTitleHeaderView()
     }
     
     @IBAction func searchButtonTapped(_ sender: UIBarButtonItem) {
         navigationItem.rightBarButtonItems = [cancelButton]
+        setSearchHeaderView()
+        headerView?.textField.becomeFirstResponder()
     }
     
     // MARK: - Table view data source
@@ -81,10 +87,18 @@ final class DnsFiltersTableController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = AddTableViewCell.getCell(forTableView: tableView)
-        cell.addTitle = String.localizedString("add_new_filter")
-        cell.updateTheme(themeService)
+        if !model.isSearching && indexPath.row == 0 {
+            let cell = AddTableViewCell.getCell(forTableView: tableView)
+            cell.addTitle = String.localizedString("add_new_filter")
+            cell.updateTheme(themeService)
+            return cell
+        }
         
+        let cell = DnsFilterCell.getCell(forTableView: tableView)
+        cell.delegate = model
+        cell.updateTheme(themeService)
+        let cellModelIndex = cellModelIndex(for: indexPath.row)
+        cell.model = model.cellModels[cellModelIndex]
         return cell
     }
     
@@ -92,25 +106,27 @@ final class DnsFiltersTableController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         defer { tableView.deselectRow(at: indexPath, animated: true) }
+        
         if !model.isSearching && indexPath.row == 0 {
             addNewFilterTapped()
+            return
         }
+        
+        let filterIndex = cellModelIndex(for: indexPath.row)
+        selectedFilter = dnsProtection.filters[filterIndex]
+        filterTapped()
     }
     
     // MARK: - Private methods
     
     private func setupTableView() {
         AddTableViewCell.registerCell(forTableView: tableView)
+        DnsFilterCell.registerCell(forTableView: tableView)
         tableView.sectionHeaderHeight = 0.01
         tableView.sectionFooterHeight = 0.01
         tableView.estimatedRowHeight = 80.0
         tableView.rowHeight = UITableView.automaticDimension
-
-        let title = String.localizedString("dns_filters_title")
-        // TODO: - Process tunnel overlimit error 'dns_filters_overlimit_title'
-        let format = String.localizedString("dns_filters_number_title")
-        let descr = String(format: format, "0")
-        tableView.tableHeaderView = ExtendedTitleTableHeaderView(title: title, normalDescription: descr)
+        setTitleHeaderView()
     }
     
     private func addNewFilterTapped() {
@@ -123,6 +139,48 @@ final class DnsFiltersTableController: UITableViewController {
         controller.delegate = model
         present(controller, animated: true, completion: nil)
     }
+    
+    private func filterTapped() {
+        let storyboard = UIStoryboard(name: "Filters", bundle: .main)
+        guard let filterDetailsVC = storyboard.instantiateViewController(withIdentifier: "FilterDetailsViewController") as? FilterDetailsViewController else {
+            return
+        }
+        
+        filterDetailsVC.filterMeta = selectedFilter
+        filterDetailsVC.delegate = model
+        navigationController?.pushViewController(filterDetailsVC, animated: true)
+    }
+    
+    private func cellModelIndex(for row: Int) -> Int {
+        model.isSearching ? row : row - 1
+    }
+    
+    private func setSearchHeaderView() {
+        headerView = AGSearchView()
+        headerView?.delegate = self
+        tableView.tableHeaderView = headerView
+        
+    }
+    
+    private func setTitleHeaderView() {
+        let title = String.localizedString("dns_filters_title")
+        let format = String.localizedString("dns_filters_number_title")
+        let descr = String(format: format, "\(model.enabledRulesCount)")
+        tableView.tableHeaderView = ExtendedTitleTableHeaderView(title: title, normalDescription: descr)
+    }
+}
+
+// MARK: - DnsFiltersTableController + DnsFiltersTableModelDelegate
+
+extension DnsFiltersTableController: DnsFiltersTableModelDelegate {
+    func modelsChanged() {
+        tableView.reloadData()
+    }
+    
+    func filterAdded() {
+        let indexPath = IndexPath(row: model.cellModels.count, section: 0)
+        tableView.insertRows(at: [indexPath], with: .automatic)
+    }
 }
 
 // MARK: - DnsFiltersTableController + ThemableProtocol
@@ -132,5 +190,13 @@ extension DnsFiltersTableController: ThemableProtocol {
         view.backgroundColor = themeService.backgroundColor
         themeService.setupTable(tableView)
         tableView.reloadData()
+    }
+}
+
+// MARK: - DnsFiltersTableController + AGSearchViewDelegate
+
+extension DnsFiltersTableController: AGSearchViewDelegate {
+    func textChanged(to newText: String) {
+        model.searchString = newText
     }
 }
