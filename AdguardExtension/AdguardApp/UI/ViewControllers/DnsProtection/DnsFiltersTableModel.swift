@@ -16,7 +16,6 @@
       along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
 import DnsAdGuardSDK
 
 /// Delegate for model
@@ -51,12 +50,14 @@ final class DnsFiltersTableModel {
     // MARK: - Private variables
     
     private let dnsProtection: DnsProtectionProtocol
+    private let vpnManager: VpnManagerProtocol
     private var modelsProvider: DnsFiltersModelsProviderProtocol
     
     // MARK: - Initialization
     
-    init(dnsProtection: DnsProtectionProtocol) {
+    init(dnsProtection: DnsProtectionProtocol, vpnManager: VpnManagerProtocol) {
         self.dnsProtection = dnsProtection
+        self.vpnManager = vpnManager
         self.modelsProvider = DnsFiltersModelsProvider(sdkModels: dnsProtection.filters)
     }
     
@@ -76,11 +77,17 @@ extension DnsFiltersTableModel: NewCustomFilterDetailsControllerDelegate {
             onFilterAdded(CommonError.missingData)
             return
         }
-        dnsProtection.addFilter(withName: name, url: url, isEnabled: true, onFilterAdded: { error in
+        dnsProtection.addFilter(withName: name, url: url, isEnabled: true, onFilterAdded: { [weak self] error in
             DispatchQueue.asyncSafeMain { [weak self] in
                 self?.updateModels()
                 self?.delegate?.filterAdded()
             }
+            
+            // Restart tunnel to apply new filter
+            if error == nil {
+                self?.vpnManager.updateSettings(completion: nil)
+            }
+            
             onFilterAdded(error)
         })
     }
@@ -103,12 +110,14 @@ extension DnsFiltersTableModel: FilterDetailsViewControllerDelegate {
         try dnsProtection.removeFilter(withId: filterId)
         updateModels()
         delegate?.modelsChanged()
+        vpnManager.updateSettings(completion: nil)
     }
     
     func setFilter(with groupId: Int?, filterId: Int, enabled: Bool) throws -> FilterDetailsProtocol {
         try dnsProtection.setFilter(withId: filterId, to: enabled)
         updateModels()
         delegate?.modelsChanged()
+        vpnManager.updateSettings(completion: nil)
         
         if let filter = dnsProtection.filters.first(where: { $0.filterId == filterId }) {
             return filter

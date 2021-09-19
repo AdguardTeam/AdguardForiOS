@@ -39,11 +39,12 @@ final class DnsFiltersTableController: UITableViewController {
     private let model: DnsFiltersTableModel
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsProtection: DnsProtectionProtocol = ServiceLocator.shared.getService()!
+    private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - UIViewController lifecycle
 
     required init?(coder: NSCoder) {
-        self.model = DnsFiltersTableModel(dnsProtection: dnsProtection)
+        self.model = DnsFiltersTableModel(dnsProtection: dnsProtection, vpnManager: vpnManager)
         super.init(coder: coder)
     }
     
