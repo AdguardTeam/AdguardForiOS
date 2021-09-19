@@ -54,7 +54,7 @@ struct Message {
     static let advancedRulesKey = "advanced_rules"
 
     let type: MessageType
-    let data: String?
+    let data: Any?
 }
 
 /// Initializer from Dictionary. We receive message as dictionary from JS
@@ -65,8 +65,19 @@ extension Message {
         else {
             return nil
         }
-        let data = message[Self.messageDataKey] as? String
         self.type = type
-        self.data = data
+        self.data = message[Self.messageDataKey]
+    }
+}
+
+// MARK: - ThemeMode + messageName
+
+extension ThemeMode {
+    var messageName: String {
+        switch self {
+        case .light: return "light"
+        case .dark: return "dark"
+        case .systemDefault: return "system"
+        }
     }
 }

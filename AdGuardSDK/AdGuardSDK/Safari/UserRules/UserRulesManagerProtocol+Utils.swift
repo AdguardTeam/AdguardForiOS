@@ -19,9 +19,14 @@
 @_implementationOnly import class ContentBlockerConverter.WebExtensionHelpers
 
 public extension UserRulesManagerProtocol {
-    /// Returns true if there are some rules in `allRules` blocklist that are associated with passed `domain`
+    /// Returns true if there are some enabled rules in `allRules` blocklist that are associated with passed `domain`
     func hasUserRules(for domain: String) -> Bool {
         let helper = WebExtensionHelpers()
-        return allRules.reduce(false, { $0 || helper.userRuleIsAssociated(with: domain, $1.ruleText) })
+        for rule in allRules {
+            if helper.userRuleIsAssociated(with: domain, rule.ruleText) && rule.isEnabled {
+                return true
+            }
+        }
+        return false
     }
 }

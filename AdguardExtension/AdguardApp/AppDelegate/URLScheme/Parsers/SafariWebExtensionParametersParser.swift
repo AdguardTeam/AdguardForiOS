@@ -26,9 +26,15 @@ struct SafariWebExtensionParametersParser: IURLSchemeParametersParser {
     }
     
     func parse(_ url: URL) -> Bool {
-        guard let actionStr = url.parseUrl().params?["action"] else { return false }
-        guard let domain = url.parseUrl().params?["domain"] else { return false }
-        let action = UserRulesRedirectAction.action(from: actionStr, domain: domain)
+        guard let actionStr = url.parseUrl().params?["action"],
+              let encodedDomain = url.parseUrl().params?["domain"],
+              let decodedDomain = encodedDomain.removingPercentEncoding
+        else {
+            DDLogError("Failed to extract info from url=\(url.absoluteString)")
+            return false
+        }
+       
+        let action = UserRulesRedirectAction.action(from: actionStr, domain: decodedDomain)
         return executor.openUserRulesRedirectController(for: action)
     }
 }
