@@ -18,41 +18,7 @@
 
 import Foundation
 
-protocol DnsProviderCellDelegate: AnyObject {
-    func selectedProvider(withTag tag: Int)
-}
-
-class DnsProviderCell: UITableViewCell {
-    @IBOutlet weak var labelsStackView: UIStackView!
-    @IBOutlet weak var nameLabel: ThemableLabel!
-    @IBOutlet weak var descriptionLabel: ThemableLabel!
-    @IBOutlet weak var selectedButton: UIButton!
-    @IBOutlet weak var arrowRight: UIImageView!
-    
-    weak var delegate: DnsProviderCellDelegate?
-    
-    var themeService: ThemeServiceProtocol? {
-        didSet {
-            themeService?.setupTableCell(self)
-            themeService?.setupLabel(nameLabel)
-            themeService?.setupLabel(descriptionLabel)
-        }
-    }
-    
-    var model: DnsProviderCellModel? {
-        didSet {
-            nameLabel.text = model?.name
-            descriptionLabel?.text = model?.providerDescription
-            selectedButton.isSelected = model?.isCurrent ?? false
-            arrowRight.isHidden = model?.isDefaultProvider ?? false
-        }
-    }
-    
-    @IBAction func selectionButtonTapped(_ sender: UIButton) {
-        delegate?.selectedProvider(withTag: tag)
-    }
-}
-
+/// Provider cell model for providers table view
 struct DnsProviderCellModel {
     let name: String?
     let providerDescription: String?
@@ -60,16 +26,6 @@ struct DnsProviderCellModel {
     let providerId: Int?
     let isCurrent: Bool
     let isDefaultProvider: Bool
-    
-    
-    init(provider: DnsProviderInfo, isCurrent: Bool, isDefaultProvider: Bool) {
-        self.name = provider.name
-        self.providerDescription = provider.summary
-        self.isCustomProvider = provider.isCustomProvider
-        self.providerId = provider.providerId
-        self.isCurrent = isCurrent
-        self.isDefaultProvider = isDefaultProvider
-    }
     
     init(name: String?, description: String?, isCurrent: Bool, isDefaultProvider: Bool, isCustomProvider: Bool, providerId: Int?) {
         self.name = name

@@ -18,6 +18,7 @@
 
 import Foundation
 
+//TODO: Remove it
 // MARK: - data types -
 @objc enum DnsProtocol: Int, Codable, CaseIterable {
     case dns = 0
@@ -99,6 +100,7 @@ struct DnsProviderFeature {
     var iconId: String
 }
 
+//TODO: Remove it
 @objc(DnsServerInfo)
 @objcMembers
 class DnsServerInfo : ACObject, Codable {
@@ -144,6 +146,7 @@ class DnsServerInfo : ACObject, Codable {
     }
 }
 
+//TODO: Remove it
 @objc(DnsProviderInfo)
 @objcMembers class DnsProviderInfo : ACObject {
     var name: String

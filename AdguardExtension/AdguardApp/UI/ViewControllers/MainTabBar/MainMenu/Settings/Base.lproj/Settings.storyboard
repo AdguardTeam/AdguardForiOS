@@ -3249,16 +3249,13 @@
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Snq-9B-j9S">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="216"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="216" id="bxd-Y9-Cgm"/>
-                                                        </constraints>
                                                         <sections/>
                                                     </tableView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="Snq-9B-j9S" firstAttribute="leading" secondItem="7HT-dH-4iU" secondAttribute="leading" id="EDr-hi-Xdz"/>
-                                                    <constraint firstAttribute="bottom" secondItem="Snq-9B-j9S" secondAttribute="bottom" constant="30" id="L8L-hK-I2E"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Snq-9B-j9S" secondAttribute="bottom" constant="10" id="L8L-hK-I2E"/>
                                                     <constraint firstAttribute="trailing" secondItem="Snq-9B-j9S" secondAttribute="trailing" id="bWl-F3-oOw"/>
                                                     <constraint firstItem="Snq-9B-j9S" firstAttribute="top" secondItem="7HT-dH-4iU" secondAttribute="top" id="jHu-2a-w9z"/>
                                                 </constraints>
@@ -3280,6 +3277,7 @@
                                         <variation key="heightClass=regular-widthClass=regular" constant="48"/>
                                     </constraint>
                                     <constraint firstItem="Yue-5n-Amd" firstAttribute="leading" secondItem="bnL-IC-jxK" secondAttribute="leading" constant="24" id="3E5-dH-aF0"/>
+                                    <constraint firstItem="Snq-9B-j9S" firstAttribute="height" secondItem="bnL-IC-jxK" secondAttribute="height" multiplier="0.72" id="5tR-II-0dP"/>
                                     <constraint firstItem="f9N-gF-umX" firstAttribute="leading" secondItem="bnL-IC-jxK" secondAttribute="leading" id="CLu-n2-NKB"/>
                                     <constraint firstItem="f9N-gF-umX" firstAttribute="top" secondItem="Yue-5n-Amd" secondAttribute="bottom" constant="12" id="FCU-6w-ibi">
                                         <variation key="heightClass=regular-widthClass=regular" constant="48"/>

@@ -81,11 +81,11 @@ public struct NetworkUtils: NetworkUtilsProtocol {
     public init() {}
     
     func getProtocol(from upstream: String) throws -> DnsProtocol {
-        var error: NSError?
-        if let stamp = AGDnsStamp(string: upstream, error: &error) {
-            return stamp.dnsProtocol
-        } else {
-            throw error!
+        let upstreamProtocol = DnsProtocol.getDnsProtocol(upstream: upstream)
+        switch upstreamProtocol {
+        case .dnscrypt:
+            return try getProtocolFromSDNS(upstream: upstream)
+        default: return upstreamProtocol
         }
     }
     
@@ -129,5 +129,14 @@ public struct NetworkUtils: NetworkUtilsProtocol {
         }
 
         return String(cString: hostBuffer)
+    }
+    
+    private func getProtocolFromSDNS(upstream: String) throws -> DnsProtocol {
+        var error: NSError?
+        if let stamp = AGDnsStamp(string: upstream, error: &error) {
+            return stamp.dnsProtocol
+        } else {
+            throw error!
+        }
     }
 }

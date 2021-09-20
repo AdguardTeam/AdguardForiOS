@@ -18,10 +18,16 @@
 
 import Foundation
 
+protocol ExtendedRadioButtonCellDelegate: AnyObject {
+    func radioButtonTapped(with tag: Int)
+}
+
 /// Generic cell with title and description labels and radio button that shows selected state
 final class ExtendedRadioButtonCell: UITableViewCell, Reusable {
     
     //MARK: - Properties
+    
+    var cellTag: Int?
     
     var titleString: String = "" {
         didSet {
@@ -41,12 +47,20 @@ final class ExtendedRadioButtonCell: UITableViewCell, Reusable {
         }
     }
     
+    var isArrowRightHidden: Bool = false {
+        didSet {
+            arrowRight.isHidden = isArrowRightHidden
+        }
+    }
+    
+    weak var delegate: ExtendedRadioButtonCellDelegate?
+    
     private lazy var titleLabel: ThemableLabel = {
         let label = ThemableLabel()
         label.greyText = true
         label.lightGreyText = false
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: isIpadTrait ? 24.0 : 16.0)
+        label.font = .systemFont(ofSize: isIpadTrait ? 24.0 : 16.0, weight: .medium)
         label.numberOfLines = 0
         return label
     }()
@@ -56,7 +70,7 @@ final class ExtendedRadioButtonCell: UITableViewCell, Reusable {
         label.greyText = false
         label.lightGreyText = true
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: isIpadTrait ? 24.0 : 16.0)
+        label.font = .systemFont(ofSize: isIpadTrait ? 18.0 : 12.0)
         label.numberOfLines = 0
         return label
     }()
@@ -65,6 +79,14 @@ final class ExtendedRadioButtonCell: UITableViewCell, Reusable {
         let button = RadioButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    private var arrowRight: UIImageView = {
+        let imageView = UIImageView()
+        let image = UIImage(named: "arrow_right")
+        imageView.image = image
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
     
     //MARK: - Services
@@ -89,25 +111,39 @@ final class ExtendedRadioButtonCell: UITableViewCell, Reusable {
         self.contentView.addSubview(titleLabel)
         self.contentView.addSubview(descriptionLabel)
         self.contentView.addSubview(radioButton)
-        
+        self.contentView.addSubview(arrowRight)
+            
         let widthHeightConst: CGFloat = isIpadTrait ? 32.0 : 24.0
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 5.0),
-            titleLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -5.0),
+            titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16.0),
+            titleLabel.trailingAnchor.constraint(equalTo: descriptionLabel.trailingAnchor),
             
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 3.0),
             descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            descriptionLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: -24.0),
-            descriptionLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -3.0),
+            descriptionLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -16.0),
             
             radioButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
             radioButton.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 24.0),
             radioButton.trailingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: -20.0),
             
             radioButton.widthAnchor.constraint(equalToConstant: widthHeightConst),
-            radioButton.heightAnchor.constraint(equalToConstant: widthHeightConst)
+            radioButton.heightAnchor.constraint(equalToConstant: widthHeightConst),
+            
+            arrowRight.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
+            arrowRight.widthAnchor.constraint(equalToConstant: widthHeightConst),
+            arrowRight.heightAnchor.constraint(equalToConstant: widthHeightConst),
+            arrowRight.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -24.0),
+            arrowRight.leadingAnchor.constraint(equalTo: self.descriptionLabel.trailingAnchor, constant: 24.0)
         ])
+        
+        radioButton.addTarget(self, action: #selector(radioButtonTapped(_:)), for: .touchUpInside)
+    }
+    
+    @objc
+    private func radioButtonTapped(_ sender: RadioButton) {
+        guard let tag = cellTag else { return }
+        delegate?.radioButtonTapped(with: tag)
     }
 }
 

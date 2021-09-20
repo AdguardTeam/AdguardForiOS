@@ -439,6 +439,9 @@ class DnsProvidersManagerTest: XCTestCase {
                 XCTAssertEqual(server.isEnabled, server.id == serverId)
             }
         }
+        
+        XCTAssertEqual(providersManager.activeDnsProvider.providerId, providerId)
+        XCTAssertEqual(providersManager.activeDnsServer.id, serverId)
     }
     
     private func set(activeDns: DnsProvidersManager.ActiveDnsInfo) {

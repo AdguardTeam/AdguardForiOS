@@ -18,7 +18,7 @@ final class DnsConfigurationMock: DnsConfigurationProtocol {
         tunnelMode: .full,
         fallbackServers: nil,
         bootstrapServers: nil,
-        blockingMode: .default,
+        blockingMode: .defaultMode,
         blockingIp: nil,
         blockedTtl: 2,
         blockIpv6: false,

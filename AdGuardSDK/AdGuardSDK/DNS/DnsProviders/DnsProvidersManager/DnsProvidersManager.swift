@@ -156,6 +156,9 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
         userDefaults.activeDnsInfo = newActiveDnsInfo
         makeProviderActive(newActiveDnsInfo)
         
+        //TODO: Is it need?
+        reinitializeProviders()
+        
         Logger.logInfo("(DnsProvidersManager) - selectProvider; Selected provider with id=\(id) serverId=\(serverId)")
     }
     
