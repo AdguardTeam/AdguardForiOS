@@ -165,6 +165,11 @@ const handleMessages = () => {
                 await adguard.nativeHost.upgradeMe();
                 break;
             }
+            case MessagesToBackgroundPage.DeleteUserRulesByUrl: {
+                const { url } = data;
+                await adguard.nativeHost.removeUserRulesBySite(url);
+                break;
+            }
             default:
                 break;
         }

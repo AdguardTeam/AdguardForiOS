@@ -11,7 +11,6 @@ import {
 
 import { getCroppedDomain } from '@adguard/tsurlfilter';
 import { getDomain } from '../../common/utils/url';
-import { translator } from '../../common/translators/translator';
 import { messenger } from '../../common/messenger';
 import { toDataUrl } from '../image-utils';
 import { log } from '../../common/log';
@@ -32,13 +31,6 @@ enum SiteStatus {
     Allowlisted = 'Allowlisted',
     BasicOnly = 'BasicOnly',
 }
-
-const SiteStatusesMessages = {
-    [SiteStatus.ProtectionStarting]: translator.getMessage('popup_action_current_site_desc_starting'),
-    [SiteStatus.ProtectionEnabled]: translator.getMessage('popup_action_current_site_status_desc_enabled'),
-    [SiteStatus.Allowlisted]: translator.getMessage('popup_action_current_site_desc_allowlisted'),
-    [SiteStatus.BasicOnly]: translator.getMessage('popup_action_current_site_desc_basic_only'),
-};
 
 class PopupStore {
     @observable popupDataLoadingState = PopupDataLoadingState.Idle;
@@ -169,11 +161,6 @@ class PopupStore {
         }
 
         return getDomain(this.currentSiteUrl);
-    }
-
-    @computed
-    get currentSiteStatusMessage(): string {
-        return SiteStatusesMessages[this.currentSiteStatus];
     }
 
     @action
