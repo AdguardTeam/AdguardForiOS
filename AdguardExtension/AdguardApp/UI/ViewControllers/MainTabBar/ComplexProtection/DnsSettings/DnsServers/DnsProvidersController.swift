@@ -33,6 +33,7 @@ final class DnsProvidersController: UITableViewController {
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
+    private let dnsProvidersManager: DnsProvidersManagerProtocol!
     
     // View model
     private let model: DnsProvidersModel
@@ -49,7 +50,7 @@ final class DnsProvidersController: UITableViewController {
         let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
         let dnsProtectionConfiguration = DnsConfiguration(resources: resources,
                                                           isProPurchased: purchaseService.isProPurchased)
-        let dnsProvidersManager = try! DnsProvidersManager(configuration: dnsProtectionConfiguration, userDefaults: UserDefaultsStorage(storage: resources.sharedDefaults()))
+        dnsProvidersManager = try! DnsProvidersManager(configuration: dnsProtectionConfiguration, userDefaults: UserDefaultsStorage(storage: resources.sharedDefaults()))
         
         model = DnsProvidersModel(dnsProvidersManager: dnsProvidersManager, vpnManager: vpnManager)
         super.init(coder: coder)
@@ -172,9 +173,10 @@ final class DnsProvidersController: UITableViewController {
         switch controllerType {
         case .add:
             controller.openUrl = openUrl
-            controller.model = NewDnsServerModel()
+            controller.model = NewDnsServerModel(dnsProvidersManager: dnsProvidersManager, vpnManager: vpnManager)
         case .edit:
-            controller.model = NewDnsServerModel(provider: cellModel?.provider)
+            guard let provider = cellModel?.provider as? CustomDnsProviderProtocol else { return }
+            controller.model = NewDnsServerModel(provider: provider, dnsProvidersManager: dnsProvidersManager, vpnManager: vpnManager)
         }
         
         controller.controllerType = controllerType
@@ -194,33 +196,8 @@ final class DnsProvidersController: UITableViewController {
 
 //MARK: - DnsProvidersController + NewDnsServerControllerDelegate
 extension DnsProvidersController: NewDnsServerControllerDelegate {
-    /// Actions from new dns server controller
-    func customProviderAddTapped(info: NewDnsServerController.CustomDnsProviderInfo) {
-        do {
-            try model.addCustomProvider(name: info.name, upstream: info.upstream, selectAsCurrent: info.selectAsCurrent)
-            tableView.reloadData()
-        } catch {
-            showUnknownErrorAlert()
-        }
-    }
-    
-    func customProviderSaveTapped(info: NewDnsServerController.CustomDnsProviderInfo) {
-        do {
-            guard let provider = info.provider else { return }
-            try model.updateCustomProvider(newName: info.name, newUpstream: info.upstream, provider: provider)
-            tableView.reloadData()
-        } catch {
-            showUnknownErrorAlert()
-        }
-    }
-    
-    func customProviderDeleteTapped(provider: DnsProviderMetaProtocol) {
-        do {
-            try model.removeCustomProvider(provider: provider)
-            tableView.reloadData()
-        } catch {
-            showUnknownErrorAlert()
-        }
+    func customProviderUpdated() {
+        tableView.reloadData()
     }
 }
 

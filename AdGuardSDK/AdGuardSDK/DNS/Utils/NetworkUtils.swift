@@ -81,7 +81,7 @@ public struct NetworkUtils: NetworkUtilsProtocol {
     public init() {}
     
     func getProtocol(from upstream: String) throws -> DnsProtocol {
-        let upstreamProtocol = DnsProtocol.getDnsProtocol(upstream: upstream)
+        let upstreamProtocol = getDnsProtocol(upstream: upstream)
         switch upstreamProtocol {
         case .dnscrypt:
             return try getProtocolFromSDNS(upstream: upstream)
@@ -136,7 +136,21 @@ public struct NetworkUtils: NetworkUtilsProtocol {
         if let stamp = AGDnsStamp(string: upstream, error: &error) {
             return stamp.dnsProtocol
         } else {
-            throw error!
+            throw error ?? CustomDnsProvidersStorageError.invalidUpstream(upstream: upstream)
+        }
+    }
+    
+    private func getDnsProtocol(upstream: String) -> DnsProtocol {
+        if upstream.hasPrefix("sdns://") {
+            return .dnscrypt
+        } else if upstream.hasPrefix("https://") {
+            return .doh
+        } else if upstream.hasPrefix("tls://") {
+            return .dot
+        } else if upstream.hasPrefix("quic://") {
+            return .doq
+        } else {
+            return .dns
         }
     }
 }

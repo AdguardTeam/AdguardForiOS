@@ -65,11 +65,13 @@ final class DnsProviderHeaderCell : UITableViewCell, Reusable {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupConstraint()
+        self.selectionStyle = .none
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupConstraint()
+        self.selectionStyle = .none
     }
     
     //MARK: - Public methods
@@ -100,6 +102,5 @@ final class DnsProviderHeaderCell : UITableViewCell, Reusable {
             descriptionLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -24.0),
             descriptionLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -bottomConst)
         ])
-        self.selectionStyle = .none
     }
 }

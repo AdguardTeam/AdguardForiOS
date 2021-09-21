@@ -103,7 +103,7 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
     ) throws {
         self.configuration = configuration
         self.userDefaults = userDefaults
-        self.customProvidersStorage = CustomDnsProvidersStorage(userDefaults: self.userDefaults)
+        self.customProvidersStorage = CustomDnsProvidersStorage(userDefaults: self.userDefaults, configuration: configuration)
         let predefinedDnsProviders = try PredefinedDnsProvidersDecoder(currentLanguage: configuration.currentLanguage)
         self.providersVendor = DnsProvidersVendor(predefinedProviders: predefinedDnsProviders, customProvidersStorage: self.customProvidersStorage)
         
@@ -170,6 +170,7 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
             userDefaults.activeDnsInfo = DnsProvidersManager.ActiveDnsInfo(providerId: ids.providerId, serverId: ids.serverId)
         }
         reinitializeProviders()
+        
         
         Logger.logInfo("(DnsProvidersManager) - addCustomProvider; Added custom provider with name=\(name), upstreams=\(upstreams.joined(separator: "; ")) selectAsCurrent=\(selectAsCurrent)")
     }

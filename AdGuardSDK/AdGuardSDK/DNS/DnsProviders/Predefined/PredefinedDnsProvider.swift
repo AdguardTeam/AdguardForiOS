@@ -199,20 +199,6 @@ public enum DnsProtocol: String, Codable, CaseIterable, Equatable {
         default: return true
         }
     }
-    
-    public static func getDnsProtocol(upstream: String) -> DnsProtocol {
-        if upstream.hasPrefix("sdns://") {
-            return .dnscrypt
-        } else if upstream.hasPrefix("https://") {
-            return .doh
-        } else if upstream.hasPrefix("tls://") {
-            return .dot
-        } else if upstream.hasPrefix("quic://") {
-            return .doq
-        } else {
-            return .dns
-        }
-    }
 }
 
 // MARK: - DnsUpstream

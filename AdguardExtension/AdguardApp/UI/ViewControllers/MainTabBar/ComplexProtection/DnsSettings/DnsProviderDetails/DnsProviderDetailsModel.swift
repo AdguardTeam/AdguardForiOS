@@ -20,7 +20,7 @@ import DnsAdGuardSDK
 import UIKit
 
 /// ViewModel
-struct DnsProviderDetailsModel {
+final class DnsProviderDetailsModel {
     
     //MARK: - Public properties
     

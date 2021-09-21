@@ -63,11 +63,13 @@ final class DnsProviderActionCell: UITableViewCell, Reusable {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupConstraints()
+        self.selectionStyle = .none
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupConstraints()
+        self.selectionStyle = .none
     }
     
     //MARK: - Public methods
@@ -101,6 +103,5 @@ final class DnsProviderActionCell: UITableViewCell, Reusable {
             rightArrowImageView.heightAnchor.constraint(equalToConstant: heightWidthConst),
             rightArrowImageView.widthAnchor.constraint(equalToConstant: heightWidthConst)
         ])
-        self.selectionStyle = .none
     }
 }

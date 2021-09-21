@@ -19,7 +19,7 @@
 import DnsAdGuardSDK
 
 /// Dns providers view model
-struct DnsProvidersModel {
+final class DnsProvidersModel {
     
     //MARK: - Public properties
     let headerTitle: String = String.localizedString("dns_provider_controller_title")
@@ -43,44 +43,23 @@ struct DnsProvidersModel {
     
     //MARK: - Public methods
     func setProviderActive(provider: DnsProviderMetaProtocol) throws {
-        guard let serverId = getServerId(dnsServers: provider.dnsServers) else { return }
+        guard let serverId = provider.enabledServerId else { return }
         try dnsProvidersManager.selectProvider(withId: provider.providerId, serverId: serverId)
         vpnManager.updateSettings(completion: nil)
     }
     
-    /// Function to add custom provider
-    func addCustomProvider(name: String, upstream: String, selectAsCurrent: Bool) throws {
-        try dnsProvidersManager.addCustomProvider(name: name, upstreams: [upstream], selectAsCurrent: selectAsCurrent)
-        vpnManager.updateSettings(completion: nil)
-    }
-    
-    /// Function to update custom provider
-    func updateCustomProvider(newName: String, newUpstream: String, provider: DnsProviderMetaProtocol) throws {
-        let providerId = provider.providerId
-        try dnsProvidersManager.updateCustomProvider(withId: providerId, newName: newName, newUpstreams: [newUpstream], selectAsCurrent: false)
-        vpnManager.updateSettings(completion: nil)
-    }
-    
-    /// Function to remove custom provider
-    func removeCustomProvider(provider: DnsProviderMetaProtocol) throws {
-        let providerId = provider.providerId
-        try dnsProvidersManager.removeCustomProvider(withId: providerId)
-        vpnManager.updateSettings(completion: nil)
-    }
+
     
     //MARK: - Private methods
-    private func getCellModels(providers: [DnsProviderMetaProtocol]) -> [DnsProviderCellModel] {
-        let currentProviderId = dnsProvidersManager.activeDnsServer.providerId
-        
+    private func getCellModels(providers: [DnsProviderMetaProtocol]) -> [DnsProviderCellModel] {        
         var result: [DnsProviderCellModel] = []
         for provider in providers {
-            let isCurrent = currentProviderId == provider.providerId
-            result.append(prepareCellModel(provider: provider, isCurrent: isCurrent))
+            result.append(prepareCellModel(provider: provider))
         }
         return result
     }
     
-    private func prepareCellModel(provider: DnsProviderMetaProtocol, isCurrent: Bool) -> DnsProviderCellModel {
+    private func prepareCellModel(provider: DnsProviderMetaProtocol) -> DnsProviderCellModel {
         let name = provider.name
         var description: String?
         
@@ -90,15 +69,10 @@ struct DnsProvidersModel {
         
         return DnsProviderCellModel(name: name,
                                     description: description,
-                                    isCurrent: isCurrent,
+                                    isCurrent: provider.isEnabled,
                                     isDefaultProvider: provider.providerId == 10000, // id of system default provider
                                     isCustomProvider: provider.isCustom,
                                     providerId: provider.providerId,
                                     provider: provider)
-    }
-    
-    private func getServerId(dnsServers: [DnsServerMetaProtocol]) -> Int? {
-        let serverId = dnsServers.first { $0.isEnabled }?.id
-        return serverId ?? dnsServers.first { $0.type == .dns }?.id
     }
 }
