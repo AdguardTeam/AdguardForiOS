@@ -16,15 +16,12 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 import UIKit
 
-class LoaderSegue: UIStoryboardSegue {
-
+final class LoaderSegue: UIStoryboardSegue {
     override func perform() {
         if source.navigationController?.topViewController == source {
             source.navigationController?.setViewControllers([destination], animated: true)
         }
     }
-    
 }

@@ -12,5 +12,6 @@
 #import "ADBTable.h"
 #import "APCommonSharedResources.h"
 #import "ABECRequest.h"
+#import "ADLocales.h"
 
 #endif /* ActionExtension_Bridging_Header_h */
