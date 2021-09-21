@@ -4,12 +4,14 @@ class CustomDnsProvidersStorageTest: XCTestCase {
     
     var userDefaults: UserDefaultsStorageMock!
     var networkUtils: NetworkUtilsMock!
+    var configuration: DnsConfigurationMock!
     var storage: CustomDnsProvidersStorageProtocol!
     
     override func setUp() {
         userDefaults = UserDefaultsStorageMock()
         networkUtils = NetworkUtilsMock()
-        storage = CustomDnsProvidersStorage(userDefaults: userDefaults, networkUtils: networkUtils)
+        configuration = DnsConfigurationMock()
+        storage = CustomDnsProvidersStorage(userDefaults: userDefaults, networkUtils: networkUtils, configuration: configuration)
     }
     
     func testProviders() {
@@ -35,7 +37,7 @@ class CustomDnsProvidersStorageTest: XCTestCase {
     func testAddCustomProviderWithEmptyUpstreams() {
         XCTAssert(storage.providers.isEmpty)
         XCTAssertThrowsError(try storage.addCustomProvider(name: "name", upstreams: [])) { error in
-            if case CustomDnsProvidersStorage.CustomDnsProvidersStorageError.emptyUpstreams = error {}
+            if case CustomDnsProvidersStorageError.emptyUpstreams = error {}
             else {
                 XCTFail()
             }
@@ -60,7 +62,7 @@ class CustomDnsProvidersStorageTest: XCTestCase {
     func testAddCustomProviderWithDifferentProtocols() {
         networkUtils.getProtocolListResult = [DnsProtocol.dns, .doh].makeIterator()
         XCTAssertThrowsError(try storage.addCustomProvider(name: "name", upstreams: ["1.1.1.1", "https"])) { error in
-            if case CustomDnsProvidersStorage.CustomDnsProvidersStorageError.differentDnsProtocols(upstreams: _) = error {}
+            if case CustomDnsProvidersStorageError.differentDnsProtocols(upstreams: _) = error {}
             else {
                 XCTFail()
             }
@@ -71,7 +73,19 @@ class CustomDnsProvidersStorageTest: XCTestCase {
     func testAddCustomProviderWithUnreachableUpstream() {
         networkUtils.upstreamIsValidResult = false
         XCTAssertThrowsError(try storage.addCustomProvider(name: "name", upstreams: ["1.1.1.1", "https"])) { error in
-            if case CustomDnsProvidersStorage.CustomDnsProvidersStorageError.invalidUpstream(upstream: _) = error {}
+            if case CustomDnsProvidersStorageError.invalidUpstream(upstream: _) = error {}
+            else {
+                XCTFail()
+            }
+        }
+        XCTAssert(storage.providers.isEmpty)
+    }
+    
+    func testAddCustomProviderWithNotSupportedServerProtocol() {
+        configuration.dnsImplementation = .native
+        networkUtils.getProtocolResult = .success(.dnscrypt)
+        XCTAssertThrowsError(try storage.addCustomProvider(name: "name", upstreams: ["1.2.3.4"])) { error in
+            if case CustomDnsProvidersStorageError.notSupportedProtocol(dnsProtocol: _, implementation: _) = error {}
             else {
                 XCTFail()
             }
@@ -111,7 +125,7 @@ class CustomDnsProvidersStorageTest: XCTestCase {
     func testUpdateCustomProviderWithAbcentProvider() {
         XCTAssert(storage.providers.isEmpty)
         XCTAssertThrowsError(try storage.updateCustomProvider(withId: 1, newName: "newName", newUpstreams: ["1.1.1.1"])) { error in
-            if case CustomDnsProvidersStorage.CustomDnsProvidersStorageError.providerAbsent(providerId: _) = error {}
+            if case CustomDnsProvidersStorageError.providerAbsent(providerId: _) = error {}
             else {
                 XCTFail()
             }
@@ -126,7 +140,7 @@ class CustomDnsProvidersStorageTest: XCTestCase {
         XCTAssertEqual(storage.providers[0].server.upstreams, [DnsUpstream(upstream: "1.1.1.1", protocol: .dns)])
         
         XCTAssertThrowsError(try storage.updateCustomProvider(withId: ids.providerId, newName: "newName", newUpstreams: [])) { error in
-            if case CustomDnsProvidersStorage.CustomDnsProvidersStorageError.emptyUpstreams = error {}
+            if case CustomDnsProvidersStorageError.emptyUpstreams = error {}
             else {
                 XCTFail()
             }
@@ -164,7 +178,27 @@ class CustomDnsProvidersStorageTest: XCTestCase {
         
         networkUtils.getProtocolListResult = [DnsProtocol.dns, .doh].makeIterator()
         XCTAssertThrowsError(try storage.updateCustomProvider(withId: ids.providerId, newName: "newName", newUpstreams: ["2.2.2.2", "3.3.3.3"])) { error in
-            if case CustomDnsProvidersStorage.CustomDnsProvidersStorageError.differentDnsProtocols(upstreams: _) = error {}
+            if case CustomDnsProvidersStorageError.differentDnsProtocols(upstreams: _) = error {}
+            else {
+                XCTFail()
+            }
+        }
+        
+        XCTAssertEqual(storage.providers.count, 1)
+        XCTAssertEqual(storage.providers[0].name, "name")
+        XCTAssertEqual(storage.providers[0].server.upstreams, [DnsUpstream(upstream: "1.1.1.1", protocol: .dns)])
+    }
+    
+    func testUpdateCustomProviderWithNotSupportedServerProtocol() {
+        let ids = try! storage.addCustomProvider(name: "name", upstreams: ["1.1.1.1"])
+        XCTAssertEqual(storage.providers.count, 1)
+        XCTAssertEqual(storage.providers[0].name, "name")
+        XCTAssertEqual(storage.providers[0].server.upstreams, [DnsUpstream(upstream: "1.1.1.1", protocol: .dns)])
+        
+        configuration.dnsImplementation = .native
+        networkUtils.getProtocolResult = .success(.dnscrypt)
+        XCTAssertThrowsError(try storage.updateCustomProvider(withId: ids.providerId, newName: "newName", newUpstreams: ["1.2.3.4"])) { error in
+            if case CustomDnsProvidersStorageError.notSupportedProtocol(dnsProtocol: _, implementation: _) = error {}
             else {
                 XCTFail()
             }
@@ -183,7 +217,7 @@ class CustomDnsProvidersStorageTest: XCTestCase {
         
         networkUtils.upstreamIsValidResult = false
         XCTAssertThrowsError(try storage.updateCustomProvider(withId: ids.providerId, newName: "newName", newUpstreams: ["2.2.2.2", "3.3.3.3"])) { error in
-            if case CustomDnsProvidersStorage.CustomDnsProvidersStorageError.invalidUpstream(upstream: _) = error {}
+            if case CustomDnsProvidersStorageError.invalidUpstream(upstream: _) = error {}
             else {
                 XCTFail()
             }
@@ -229,7 +263,7 @@ class CustomDnsProvidersStorageTest: XCTestCase {
     func testRemoveCustomProviderWithMissingProvider() {
         XCTAssert(storage.providers.isEmpty)
         XCTAssertThrowsError(try storage.removeCustomProvider(withId: 1)) { error in
-            if case CustomDnsProvidersStorage.CustomDnsProvidersStorageError.providerAbsent(providerId: _) = error {}
+            if case CustomDnsProvidersStorageError.providerAbsent(providerId: _) = error {}
             else {
                 XCTFail()
             }

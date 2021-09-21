@@ -154,9 +154,6 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
         
         let newActiveDnsInfo = DnsProvidersManager.ActiveDnsInfo(providerId: id, serverId: serverId)
         userDefaults.activeDnsInfo = newActiveDnsInfo
-        makeProviderActive(newActiveDnsInfo)
-        
-        //TODO: Is it need?
         reinitializeProviders()
         
         Logger.logInfo("(DnsProvidersManager) - selectProvider; Selected provider with id=\(id) serverId=\(serverId)")
@@ -217,17 +214,6 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
     }
     
     // MARK: - Private methods
-    
-    private func makeProviderActive(_ activeDnsInfo: DnsProvidersManager.ActiveDnsInfo) {
-        for i in 0..<predefinedProviders.count {
-            let providerIsEnabled = predefinedProviders[i].providerId == activeDnsInfo.providerId
-            predefinedProviders[i].isEnabled = providerIsEnabled
-            
-            var provider = predefinedProviders[i] as! DnsProvider
-            provider.makeActiveServer(with: activeDnsInfo.serverId)
-            predefinedProviders[i] = provider
-        }
-    }
     
     private func reinitializeProviders() {
         let providersWithState = providersVendor.getProvidersWithState(for: configuration.dnsImplementation,

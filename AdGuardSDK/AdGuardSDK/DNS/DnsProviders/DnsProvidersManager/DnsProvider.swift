@@ -99,12 +99,6 @@ public struct DnsProvider: DnsProviderProtocol {
         self.homepage = provider.homepage
         self.isEnabled = isEnabled
     }
-    
-    mutating func makeActiveServer(with id: Int) {
-        for i in 0..<servers.count {
-            servers[i].isEnabled = servers[i].id == id
-        }
-    }
 }
 
 // MARK: - DnsServer

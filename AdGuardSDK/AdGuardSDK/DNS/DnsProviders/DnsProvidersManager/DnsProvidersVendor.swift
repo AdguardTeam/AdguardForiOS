@@ -107,7 +107,7 @@ final class DnsProvidersVendor: DnsProvidersVendorProtocol {
                 enabledProvider = DnsProvider(provider: pr, servers: servers, isEnabled: false)
                 for sr in servers {
                     let serverIsEnabled = sr.id == activeDns.serverId
-                    // Check if enabled server is suppported by implementation
+                    // Check if enabled server is supported by implementation
                     if serverIsEnabled && implementation.supportedProtocols.contains(sr.type) {
                         enabledServer = sr
                         break providersLoop

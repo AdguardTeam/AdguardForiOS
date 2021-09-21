@@ -135,6 +135,7 @@ final class CustomDnsProvidersStorage: CustomDnsProvidersStorageProtocol {
         
         let oldProvider = userDefaults.customProviders[providerIndex]
         let newDnsProtocol = try checkProviderInfo(name: newName, upstreams: newUpstreams)
+        try checkDnsImplementation(dnsProtocol: newDnsProtocol)
         let newDnsUpstreams = newUpstreams.map { DnsUpstream(upstream: $0, protocol: newDnsProtocol) }
         
         let customServer = CustomDnsServer(upstreams: newDnsUpstreams,
