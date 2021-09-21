@@ -104,7 +104,7 @@ struct ContextProvider {
         let isJsInjectSupported = jsInjectSupportedKey == 1 ? true : false
         
         // WebSite favicon url
-        favIconService.image(for: domain) { image in
+        favIconService.provideImage(for: domain) { image in
             let context = Context(
                 icon: image,
                 url: url,

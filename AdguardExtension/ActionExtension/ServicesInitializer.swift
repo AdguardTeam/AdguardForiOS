@@ -88,13 +88,7 @@ final class ServicesInitializer {
     private static func setupLogger(_ resources: AESharedResourcesProtocol) {
         // Init Logger
         ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
-        
-        #if DEBUG
-        let isDebugLogs = true
-        #else
         let isDebugLogs = resources.isDebugLogs
-        #endif
-        
         DDLogInfo("Start Action extension with log level: \(isDebugLogs ? "DEBUG" : "NORMAL")")
         ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
     }

@@ -24,6 +24,7 @@ protocol ActionExtensionWebReporterProtocol {
 
 struct ActionExtensionWebReporter: ActionExtensionWebReporterProtocol {
     
+    // TODO: - It should be TDS link
     private let reportUrl = "https://reports.adguard.com/new_issue.html"
     
     private let safariProtection: SafariProtectionProtocol

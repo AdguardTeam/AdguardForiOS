@@ -19,7 +19,7 @@
 import UIKit
 
 extension UIViewController {
-    /* Presents Alert with provided title and message */ 
+    /// Presents Alert with provided title and message
     func presentSimpleAlert(title: String?, message: String?, onOkButtonTapped: (() -> Void)? = nil) {
         DispatchQueue.asyncSafeMain { [weak self] in
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -33,6 +33,7 @@ extension UIViewController {
         }
     }
     
+    /// Presents native alert for unknown error. Title and message are alredy set.
     func showUnknownErrorAlert() {
         let title = String.localizedString("common_error_title")
         let message = String.localizedString("unknown_error_description")

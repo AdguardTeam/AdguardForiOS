@@ -18,28 +18,29 @@
 
 import UIKit
 
+/// Protocol that is responsible for providing fav icons
 protocol FavIconServiceProtocol {
     /// Returns URL of the icon for the specified `domain`
-    func iconUrl(for domain: String) -> URL?
+    func getIconUrl(for domain: String) -> URL?
     
-    /// Returns UIImage of the icon for the specified `domain` in `onImageObtained` closure
-    func image(for domain: String, _ onImageObtained: @escaping (_ image: UIImage?) -> Void)
+    /// Provides UIImage of the icon for the specified `domain` in `onImageObtained` closure
+    func provideImage(for domain: String, _ onImageObtained: @escaping (_ image: UIImage?) -> Void)
 }
 
-/// This object is responsible for providing fav icons
+/// Implementation of `FavIconServiceProtocol`
 /// It uses our internal service for obtaining icons
 struct FavIconService: FavIconServiceProtocol {
     
     private let urlBase = "https://icons.adguard.org/icon?domain="
     
-    func iconUrl(for domain: String) -> URL? {
+    func getIconUrl(for domain: String) -> URL? {
         let url = urlBase + domain
         return URL(string: url)
     }
     
-    func image(for domain: String, _ onImageObtained: @escaping (_ image: UIImage?) -> Void) {
+    func provideImage(for domain: String, _ onImageObtained: @escaping (_ image: UIImage?) -> Void) {
         let completionQueue = DispatchQueue.main
-        guard let url = iconUrl(for: domain) else {
+        guard let url = getIconUrl(for: domain) else {
             completionQueue.async { onImageObtained(nil) }
             return
         }
