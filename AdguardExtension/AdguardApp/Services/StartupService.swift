@@ -68,9 +68,6 @@ final class StartupService : NSObject{
         )
         let defaultDnsProtectionConfiguration = DnsConfiguration.defaultConfiguration(from: sharedResources)
         
-        // TODO: - try! is bad; removefrom DnsProtection
-        let dnsProvidersManager: DnsProvidersManagerProtocol = try! DnsProvidersManager(configuration: dnsProtectionConfiguration, userDefaults: UserDefaultsStorage(storage: sharedResources.sharedDefaults()))
-           
         // TODO: - try! is bad
         let dnsProtection: DnsProtectionProtocol = try! DnsProtection(configuration: dnsProtectionConfiguration,
                                           defaultConfiguration: defaultDnsProtectionConfiguration,
@@ -87,7 +84,6 @@ final class StartupService : NSObject{
             userDefaults: sharedResources.sharedDefaults(),
             dnsBackgroundFetchUpdater: dnsProtection)
         
-        locator.addService(service: dnsProvidersManager)
         locator.addService(service: safariProtection)
         locator.addService(service: dnsProtection)
         

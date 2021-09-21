@@ -1031,15 +1031,6 @@
 /* Background app refresh time title */
 "background_app_refresh_time_title" = "Background app refresh time";
 
-/* (NewDnsServerModel) - On add custom server error message */
-"add_custom_dns_server_error" = "Error occurred while adding custom server";
-
-/* (NewDnsServerModel) - On update custom server error message */
-"update_custom_dns_server_error" = "Error occurred while updating custom server";
-
-/* (NewDnsServerModel) - On remove custom dns server error message */
-"remove_custom_dns_server_error" = "Error occurred while removing custom dns server";
-
 /* (DnsProvidersController) - add new dns server title */
 "add_custom_dns_server_title" = "Add a custom DNS server";
 
@@ -1049,3 +1040,8 @@
 /* (DnsProvidersController) - Header description */
 "dns_provider_controller_description" = "You can enhance your online privacy by encrypting DNS traffic. To do so, choose one of the recommended DNS providers.";
 
+/* (DnsProviderDetailsController) Server title */
+"server_title" = "Server";
+
+/* (DnsProviderDetailsController) Website title */
+"website_title" = "Website";

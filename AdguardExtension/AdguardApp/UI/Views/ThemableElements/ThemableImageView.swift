@@ -16,25 +16,10 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import DnsAdGuardSDK
+import Foundation
 
-/// Provider cell model for providers table view
-struct DnsProviderCellModel {
-    let name: String?
-    let providerDescription: String?
-    let isCustomProvider: Bool
-    let providerId: Int?
-    let isCurrent: Bool
-    let isDefaultProvider: Bool
-    let provider: DnsProviderMetaProtocol
+class ThemableImageView: UIImageView {
     
-    init(name: String?, description: String?, isCurrent: Bool, isDefaultProvider: Bool, isCustomProvider: Bool, providerId: Int?, provider: DnsProviderMetaProtocol) {
-        self.name = name
-        self.providerDescription = description
-        self.isCurrent = isCurrent
-        self.providerId = providerId
-        self.isDefaultProvider = isDefaultProvider
-        self.isCustomProvider = isCustomProvider
-        self.provider = provider
-    }
+    @IBInspectable var lightThemeImage: UIImage?
+    @IBInspectable var darkThemeImage: UIImage?
 }

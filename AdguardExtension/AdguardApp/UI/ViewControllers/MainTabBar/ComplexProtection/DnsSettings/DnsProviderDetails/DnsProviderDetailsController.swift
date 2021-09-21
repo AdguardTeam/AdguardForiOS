@@ -21,7 +21,7 @@ import DnsAdGuardSDK
 
 /// Delegate for DnsProvidersController
 protocol DnsProviderDetailsControllerDelegate: AnyObject {
-    func activeServerChanged(_ newServer: DnsServerInfo)
+    func providerSelected(provider: DnsProviderProtocol)
 }
 
 /// Details controller that represent info about provider
@@ -29,7 +29,7 @@ final class DnsProviderDetailsController : UITableViewController {
     
     fileprivate enum ProviderSection: Int, CaseIterable {
         case headerSection = 0
-        case buttonsSection
+        case actionSection
         case featuresSection
     }
     
@@ -39,58 +39,56 @@ final class DnsProviderDetailsController : UITableViewController {
     }
     
     // MARK: - public fields
-    var model: DnsProviderDetailsModelProtocol?
+    var model: DnsProviderDetailsModel!
     weak var delegate: DnsProviderDetailsControllerDelegate?
-    private var selectedProtocol: DnsAdGuardSDK.DnsProtocol?
     
     // MARK: - Services
-    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let domainsParserService: DomainsParserServiceProtocol = ServiceLocator.shared.getService()!
     
-    
     // MARK: - private properties
     
-    private let sections: [ProviderSection] = ProviderSection.allCases
-    private let rows: [ProviderRow]  = ProviderRow.allCases
+    private let providerDetailSections: [ProviderSection] = ProviderSection.allCases
+    private let providerDetailRows: [ProviderRow]  = ProviderRow.allCases
     
-    private var dnsServerObservetion: NSKeyValueObservation?
     
     // MARK: - view controller life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateProtocol()
+        DnsProviderHeaderCell.registerCell(forTableView: tableView)
+        DnsProviderActionCell.registerCell(forTableView: tableView)
+        DnsProviderFeatureCell.registerCell(forTableView: tableView)
+        tableView.separatorStyle = .singleLine
+        
         updateTheme()
         setupBackButton()
     }
     
     //MARK: - UITableViewDataSource
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
+        return providerDetailSections.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let section = sections[section]
+        let section = providerDetailSections[section]
         switch section {
         case .headerSection: return 1
-        case .buttonsSection: return 2
-        case .featuresSection:
-            guard let model = model else { return 0 }
-            return model.features.count
+        case .actionSection: return 2
+        case .featuresSection: return model.features.count
         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let model = model else { return UITableViewCell() }
-        let section = sections[indexPath.section]
+        let section = providerDetailSections[indexPath.section]
         
         let cell: UITableViewCell
         switch section {
         case .headerSection:
             cell = getHeaderCell(tableView: tableView, model: model)
-        case .buttonsSection :
-            let row = rows[indexPath.row]
+        case .actionSection :
+            let row = providerDetailRows[indexPath.row]
             switch row {
             case .serverRow:
                 cell = getServerCell(tableView: tableView)
@@ -99,187 +97,130 @@ final class DnsProviderDetailsController : UITableViewController {
             }
         case .featuresSection:
             let feature = model.features[indexPath.row]
-            let isLastCell = model.features.count - 1 == indexPath.row
-            cell = getFeatureCell(tableView: tableView, feature: feature, isLastCell: isLastCell)
+            cell = getFeatureCell(tableView: tableView, feature: feature)
         }
         
-        theme.setupTableCell(cell)
         return cell
     }
     
-    //MARK: - UITableViewDlelegate
+    //MARK: - UITableViewDelegate
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let model = model,
-              sections[indexPath.section] == .buttonsSection else {
-                  return super.tableView(tableView, heightForRowAt: indexPath)
-              }
+        guard providerDetailSections[indexPath.section] == .actionSection else {
+            return super.tableView(tableView, heightForRowAt: indexPath)
+        }
         
-        let row = rows[indexPath.row]
+        let row = providerDetailRows[indexPath.row]
         // hide empty cells
         switch row {
         case .serverRow:
-            return model.dnsProtocols.isEmpty ? 0 : 60
+            return model.dnsProtocols.isEmpty ? 0 : UITableView.automaticDimension
         case .websiteRow:
-            return model.providerHomepage.isEmpty ? 0 : 60
+            return model.providerHomepage.isEmpty ? 0 : UITableView.automaticDimension
         }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         defer { tableView.deselectRow(at: indexPath, animated: true) }
-        guard sections[indexPath.section] == .buttonsSection else { return }
-        let row = rows[indexPath.row]
+        guard providerDetailSections[indexPath.section] == .actionSection else { return }
+        let row = providerDetailRows[indexPath.row]
         
         switch row {
         case .serverRow:
             showSelectServerAlert()
         case .websiteRow:
-            guard let model = model,
-                  let url = URL(string: model.providerHomepage) else { return }
+            guard let url = URL(string: model.providerHomepage) else { return }
             
             let safariController = SFSafariViewController(url: url)
             present(safariController, animated: true, completion: nil)
         }
     }
     
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return providerDetailSections[section] == .headerSection ? 0.0 : 0.01
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return providerDetailSections[section] == .headerSection ? 0.0 : 0.01
+    }
+    
     // MARK: - Actions
     
     @IBAction func selectTapped(_ sender: Any) {
-        //TODO: 
-        if let currentProtocol = selectedProtocol {
-            model?.selectServer(dnsProtocol: currentProtocol)
-//            activateServer(currentServer)
-        }
+        delegate?.providerSelected(provider: model.provider)
         navigationController?.popViewController(animated: true)
     }
     
     private func showSelectServerAlert(){
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "SelectDnsProtocolController") as? SelectDnsProtocolController else { return }
         controller.delegate = self
-        controller.availableProtocols = model?.dnsProtocols ?? []
+        controller.availableProtocols = model.dnsProtocols
+        controller.selectedProtocol = model.activeDnsProtocol
     
         present(controller, animated: true, completion: nil)
     }
     
     // MARK: - private methods
     
-    private func updateProtocol() {
-        if resources.dnsImplementation == .native {
-            //TODO: Add native
-//            selectedProtocol = nativeProviderService.currentServer?.dnsProtocol
-        } else {
-            selectedProtocol = model?.selectedDnsServer
-        }
-    }
-    
     //MARK: - Cell getters
-    private func getHeaderCell(tableView: UITableView, model: DnsProviderDetailsModelProtocol) -> UITableViewCell {
-        let headerCell = tableView.dequeueReusableCell(withIdentifier: "headerCell") as! DnsProviderHeaderCell
-        let cell = headerCell
-        
-        if let logoImage = model.providerLogo,
-           let logoImageDark = model.providerDarkLogo {
-            headerCell.logoHeightConstraint.constant = 56.0
-            headerCell.logo.lightThemeImage = logoImage
-            headerCell.logo.darkThemeImage = logoImageDark
-        } else {
-            headerCell.logoHeightConstraint.constant = 0
-        }
-
-        headerCell.summary.text = model.providerDescription
-        
-        theme.setupLabel(headerCell.summary)
-        theme.setupImage(headerCell.logo)
+    private func getHeaderCell(tableView: UITableView, model: DnsProviderDetailsModel) -> UITableViewCell {
+        let cell = DnsProviderHeaderCell.getCell(forTableView: tableView)
+        cell.logoImage = model.providerLogo
+        cell.darkLogoImage = model.providerDarkLogo
+        cell.descriptionString = model.providerDescription
+        cell.updateTheme(themeService: themeService)
         return cell
     }
-
     
     private func getServerCell(tableView: UITableView) -> UITableViewCell {
-        let serverCell = tableView.dequeueReusableCell(withIdentifier: "serverCell") as! DnsProviderServerCell
-        let cell = serverCell
-        
-        if let selectedProtocol = selectedProtocol {
-            serverCell.server.text = selectedProtocol.localizedString
-        }
-        
-        theme.setupLabels(serverCell.themableLabels)
-        serverCell.separator.backgroundColor = theme.separatorColor
+        let cell = DnsProviderActionCell.getCell(forTableView: tableView)
+        cell.actionNameTitle =  String.localizedString("server_title")
+        cell.selectedOptionTitle = model.activeDnsProtocol.localizedString
+        cell.updateTheme(themeService: themeService)
         return cell
     }
     
-    
-    private func getWebsiteCell(tableView: UITableView, model: DnsProviderDetailsModelProtocol) -> UITableViewCell {
-        let websiteCell = tableView.dequeueReusableCell(withIdentifier: "websiteCell") as! DnsProviderWebsiteCell
-        let cell = websiteCell
-        
+    private func getWebsiteCell(tableView: UITableView, model: DnsProviderDetailsModel) -> UITableViewCell {
+        let cell = DnsProviderActionCell.getCell(forTableView: tableView)
+        cell.actionNameTitle = String.localizedString("website_title")
         let host = URL(string: model.providerHomepage)?.host ?? ""
-        websiteCell.website.text = domainsParserService.domainsParser?.parse(host: host)?.domain ?? model.providerHomepage
-        theme.setupLabels(websiteCell.themableLabels)
+        let option = domainsParserService.domainsParser?.parse(host: host)?.domain ?? model.providerHomepage
+        cell.selectedOptionTitle = option
+        cell.updateTheme(themeService: themeService)
         return cell
     }
     
-    private func getFeatureCell(tableView: UITableView, feature: DnsAdGuardSDK.DnsFeature, isLastCell: Bool) -> UITableViewCell {
-        let featureCell = tableView.dequeueReusableCell(withIdentifier: "featureCell") as! DnsFeatureCell
-        let cell = featureCell
-        
-        featureCell.icon.image = feature.logo
-        featureCell.name.text = feature.name
-        featureCell.summary.text = feature.featureDescription
-        
-        theme.setupLabels(featureCell.themableLabels)
-        
-        featureCell.separator.backgroundColor = isLastCell ? .clear : theme.separatorColor
+    private func getFeatureCell(tableView: UITableView, feature: DnsAdGuardSDK.DnsFeature) -> UITableViewCell {
+        let cell = DnsProviderFeatureCell.getCell(forTableView: tableView)
+        cell.logoImage = feature.logo
+        cell.nameString = feature.name
+        cell.descriptionString = feature.featureDescription
+        cell.updateTheme(themeService: themeService)
         return cell
     }
-}
-
-// MARK: - Custom cells
-
-/// Feature cell
-final class DnsFeatureCell: UITableViewCell {
-    
-    @IBOutlet weak var icon: UIImageView!
-    @IBOutlet weak var name: ThemableLabel!
-    @IBOutlet weak var summary: ThemableLabel!
-    @IBOutlet weak var separator: UIView!
-    
-    @IBOutlet var themableLabels: [ThemableLabel]!
-}
-
-/// Header cell
-final class DnsProviderHeaderCell : UITableViewCell {
-    @IBOutlet weak var logo: ThemeableImageView!
-    @IBOutlet weak var summary: ThemableLabel!
-    @IBOutlet weak var logoHeightConstraint: NSLayoutConstraint!
-}
-
-/// Server cell
-final class DnsProviderServerCell: UITableViewCell {
-    
-    @IBOutlet weak var server: ThemableLabel!
-    @IBOutlet weak var separator: UIView!
-    
-    @IBOutlet var themableLabels: [ThemableLabel]!
-}
-
-/// Website cell
-final class DnsProviderWebsiteCell: UITableViewCell {
-    @IBOutlet weak var website: ThemableLabel!
-    @IBOutlet var themableLabels: [ThemableLabel]!
 }
 
 extension DnsProviderDetailsController: ThemableProtocol {
     func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupTable(tableView)
+        view.backgroundColor = themeService.backgroundColor
+        themeService.setupTable(tableView)
         tableView.reloadData()
     }
 }
 
+//MARK: - DnsProviderDetailsController + SelectDnsProtocolControllerDelegate
 extension DnsProviderDetailsController: SelectDnsProtocolControllerDelegate {
     func protocolSelected(protocol: DnsAdGuardSDK.DnsProtocol) {
-        //TODO: select, not activate server
+        model.activeDnsProtocol = `protocol`
+        tableView.reloadData()
     }
-
 }
 
 extension DnsAdGuardSDK.DnsProtocol {

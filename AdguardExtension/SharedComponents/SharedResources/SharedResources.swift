@@ -65,15 +65,24 @@ extension AESharedResourcesProtocol {
         }
     }
     
-    dynamic var dnsActiveProtocols: [String: Int] {
+    /// Map that store info about active protocol for specified provider. 
+    /// Map key: - Int value represent provider Id
+    /// Map value: - DnsProtocol struct
+    /// TODO: In migration remove from storage where old map is [String: Int] and keys is a providers name
+    dynamic var dnsActiveProtocols: [Int: DnsAdGuardSDK.DnsProtocol] {
         get {
-            if let protocols = sharedDefaults().value(forKey: DnsActiveProtocols) as? [String: Int]{
-                return protocols
+            if let data = sharedDefaults().object(forKey: DnsActiveProtocols) as? Data {
+                let decoder = JSONDecoder()
+                let protocols = try? decoder.decode([Int: DnsAdGuardSDK.DnsProtocol].self, from: data)
+                return protocols ?? [:]
             }
             return [:]
         }
         set {
-            sharedDefaults().set(newValue, forKey: DnsActiveProtocols)
+            let encoder = JSONEncoder()
+            if let data = try? encoder.encode(newValue) {
+                sharedDefaults().set(data, forKey: DnsActiveProtocols)
+            }
         }
     }
     

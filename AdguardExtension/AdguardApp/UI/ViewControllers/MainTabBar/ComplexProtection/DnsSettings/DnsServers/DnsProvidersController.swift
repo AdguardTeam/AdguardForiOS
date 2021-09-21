@@ -18,12 +18,6 @@
 
 import DnsAdGuardSDK
 
-/// Description cell  from DnsSettings.storyboard
-final class DescriptionCell: UITableViewCell {
-    @IBOutlet weak var titleLabel: ThemableLabel!
-    @IBOutlet weak var descriptionLabel: ThemableLabel!
-}
-
 /// Controller that represent all predefined and custom providers
 final class DnsProvidersController: UITableViewController {
     
@@ -37,30 +31,27 @@ final class DnsProvidersController: UITableViewController {
     
     // MARK: - services
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
-    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     
     // View model
-    private let model: DnsProvidersModelProtocol
+    private let model: DnsProvidersModel
     
     // MARK: Private properties
-    private var providers: [DnsProviderCellModel] { model.providers }
-    
-    private lazy var titleHeader: ExtendedTitleTableHeaderView = {
-        ExtendedTitleTableHeaderView(title: model.headerTitle, htmlDescription: model.headerDescription)
-    }()
-    
-    // MARK: - Observers
-    private var currentServerObserver: NotificationToken?
-    
-    private var providerToShowId: Int?
+    private var cellsModels: [DnsProviderCellModel] { model.providers }
+    private var providerToShow: DnsProviderProtocol?
     private let sections: [DnsProvidersSection] = DnsProvidersSection.allCases
     
     //MARK: - Init
     
     required init?(coder: NSCoder) {
-        let dnsProviderManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!
-        model = DnsProvidersModel(dnsProvidersManager: dnsProviderManager, resources: resources, vpnManager: vpnManager)
+        // TODO: - try! is bad;
+        let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
+        let dnsProtectionConfiguration = DnsConfiguration(resources: resources,
+                                                          isProPurchased: purchaseService.isProPurchased)
+        let dnsProvidersManager = try! DnsProvidersManager(configuration: dnsProtectionConfiguration, userDefaults: UserDefaultsStorage(storage: resources.sharedDefaults()))
+        
+        model = DnsProvidersModel(dnsProvidersManager: dnsProvidersManager, vpnManager: vpnManager)
         super.init(coder: coder)
     }
     
@@ -72,9 +63,7 @@ final class DnsProvidersController: UITableViewController {
         AddTableViewCell.registerCell(forTableView: tableView)
         ExtendedRadioButtonCell.registerCell(forTableView: tableView)
         
-        currentServerObserver = NotificationCenter.default.observe(name: .currentDnsServerChanged, object: nil, queue: .main, using: { [weak self] _ in
-            self?.tableView.reloadData()
-        })
+        let titleHeader = ExtendedTitleTableHeaderView(title: model.headerTitle, htmlDescription: model.headerDescription)
 
         tableView.rowHeight = UITableView.automaticDimension
         tableView.tableHeaderView = titleHeader
@@ -102,8 +91,8 @@ final class DnsProvidersController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "dnsDetailsSegue" {
             let controller = segue.destination as! DnsProviderDetailsController
-            if let providerId = providerToShowId, let model = model.modelForPredefinedProvider(providerId: providerId) {
-                controller.model = model
+            if let provider = providerToShow {
+                controller.model = DnsProviderDetailsModel(provider: provider, resources: resources)
                 controller.delegate = self
             }
         }
@@ -116,20 +105,20 @@ final class DnsProvidersController: UITableViewController {
         switch section {
         case .providerSection:
             let cell = ExtendedRadioButtonCell.getCell(forTableView: tableView)
-            let provider = providers[indexPath.row]
+            let cellModel = cellsModels[indexPath.row]
             cell.delegate = self
             cell.cellTag = indexPath.row
-            cell.titleString = provider.name ?? ""
-            cell.descriptionString = provider.providerDescription ?? ""
-            cell.radioButtonSelected = provider.isCurrent
-            cell.isArrowRightHidden = provider.isDefaultProvider
-            cell.updateTheme()
+            cell.titleString = cellModel.name ?? ""
+            cell.descriptionString = cellModel.providerDescription ?? ""
+            cell.radioButtonSelected = cellModel.isCurrent
+            cell.isArrowRightHidden = cellModel.isDefaultProvider
+            cell.updateTheme(themeService: themeService)
             return cell
             
         case .addProviderSection :
             let cell = AddTableViewCell.getCell(forTableView: tableView)
             cell.addTitle = String.localizedString("add_custom_dns_server_title")
-            theme.setupTableCell(cell)
+            cell.updateTheme(themeService)
             return cell
         }
     }
@@ -138,7 +127,7 @@ final class DnsProvidersController: UITableViewController {
         let section = sections[section]
         switch section {
         case .addProviderSection: return 1
-        case .providerSection: return providers.count
+        case .providerSection: return cellsModels.count
         }
     }
     
@@ -152,18 +141,22 @@ final class DnsProvidersController: UITableViewController {
         
         switch section {
         case .providerSection:
-            let provider = providers[indexPath.row]
+            let cellModel = cellsModels[indexPath.row]
             
-            if provider.isDefaultProvider, let providerId = provider.providerId {
-                model.setProviderActive(with: providerId)
-                tableView.reloadData()
+            if cellModel.isDefaultProvider {
+                do {
+                    try model.setProviderActive(provider: cellModel.provider)
+                    tableView.reloadData()
+                } catch {
+                    showUnknownErrorAlert()
+                }
                 return
             }
             
-            if provider.isCustomProvider {
-                presentNewDnsServerController(controllerType: .edit, provider)
+            if cellModel.isCustomProvider {
+                presentNewDnsServerController(controllerType: .edit, cellModel)
             } else {
-                providerToShowId = provider.providerId
+                providerToShow = cellModel.provider as? DnsProviderProtocol
                 performSegue(withIdentifier: "dnsDetailsSegue", sender: self)
             }
             
@@ -173,65 +166,87 @@ final class DnsProvidersController: UITableViewController {
     }
         
     // MARK: - Private methods
-    private func presentNewDnsServerController(controllerType: DnsServerControllerType, _ provider: DnsProviderCellModel?) {
+    private func presentNewDnsServerController(controllerType: DnsServerControllerType, _ cellModel: DnsProviderCellModel?) {
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "NewDnsServerController") as? NewDnsServerController else { return }
         
         switch controllerType {
         case .add:
             controller.openUrl = openUrl
-            controller.model = self.model.defaultNewDnsServerModel
+            controller.model = NewDnsServerModel()
         case .edit:
-            guard let id = provider?.providerId else { return }
-            controller.model = self.model.modelForCustomProvider(providerId: id)
+            controller.model = NewDnsServerModel(provider: cellModel?.provider)
         }
         
         controller.controllerType = controllerType
         controller.delegate = self
         present(controller, animated: true, completion: nil)
     }
+    
+    private func setProviderAndReloadTable(provider: DnsProviderMetaProtocol) {
+        do {
+            try model.setProviderActive(provider: provider)
+            tableView.reloadData()
+        } catch {
+            showUnknownErrorAlert()
+        }
+    }
 }
 
+//MARK: - DnsProvidersController + NewDnsServerControllerDelegate
 extension DnsProvidersController: NewDnsServerControllerDelegate {
-    func providerAdded() {
-        DispatchQueue.main.async { [weak self] in
-            self?.tableView.reloadData()
+    /// Actions from new dns server controller
+    func customProviderAddTapped(info: NewDnsServerController.CustomDnsProviderInfo) {
+        do {
+            try model.addCustomProvider(name: info.name, upstream: info.upstream, selectAsCurrent: info.selectAsCurrent)
+            tableView.reloadData()
+        } catch {
+            showUnknownErrorAlert()
         }
     }
     
-    func providerDeleted() {
-        DispatchQueue.main.async { [weak self] in
-            self?.tableView.reloadData()
+    func customProviderSaveTapped(info: NewDnsServerController.CustomDnsProviderInfo) {
+        do {
+            guard let provider = info.provider else { return }
+            try model.updateCustomProvider(newName: info.name, newUpstream: info.upstream, provider: provider)
+            tableView.reloadData()
+        } catch {
+            showUnknownErrorAlert()
         }
     }
     
-    func providerChanged() {
-        DispatchQueue.main.async { [weak self] in
-            self?.tableView.reloadData()
+    func customProviderDeleteTapped(provider: DnsProviderMetaProtocol) {
+        do {
+            try model.removeCustomProvider(provider: provider)
+            tableView.reloadData()
+        } catch {
+            showUnknownErrorAlert()
         }
     }
 }
 
+//MARK: - DnsProvidersController + DnsProviderDetailsControllerDelegate
 extension DnsProvidersController: DnsProviderDetailsControllerDelegate {
     /// Select active provider from details  controller
-    func activeServerChanged(_ newServer: DnsServerInfo) {
-        //TODO: change active server
+    func providerSelected(provider: DnsProviderProtocol) {
+       setProviderAndReloadTable(provider: provider)
     }
 }
 
+//MARK: - DnsProvidersController + ExtendedRadioButtonCellDelegate
 extension DnsProvidersController: ExtendedRadioButtonCellDelegate {
     /// Select active provider from selected cell
     func radioButtonTapped(with tag: Int) {
-        guard let providerId = providers[tag].providerId else { return }
-        model.setProviderActive(with: providerId)
-        tableView.reloadData()
+        let provider = cellsModels[tag].provider
+        setProviderAndReloadTable(provider: provider)
     }
 }
 
+//MARK: - DnsProvidersController + ThemableProtocol
 extension DnsProvidersController: ThemableProtocol {
     func updateTheme() {
-        view.backgroundColor = theme.backgroundColor
-        theme.setupTable(tableView)
-        theme.setupNavigationBar(navigationController?.navigationBar)
+        view.backgroundColor = themeService.backgroundColor
+        themeService.setupTable(tableView)
+        themeService.setupNavigationBar(navigationController?.navigationBar)
         tableView.reloadData()
     }
 }

@@ -20,9 +20,9 @@ import DnsAdGuardSDK
 
 /// Protocol for delegate
 protocol NewDnsServerControllerDelegate: AnyObject {
-    func providerAdded()
-    func providerDeleted()
-    func providerChanged()
+    func customProviderAddTapped(info: NewDnsServerController.CustomDnsProviderInfo)
+    func customProviderSaveTapped(info: NewDnsServerController.CustomDnsProviderInfo)
+    func customProviderDeleteTapped(provider: DnsProviderMetaProtocol)
 }
 
 /// Enum with controller states
@@ -33,9 +33,16 @@ enum DnsServerControllerType {
 /// Controller that provide managing custom providers
 final class NewDnsServerController: BottomAlertController {
     
+    struct CustomDnsProviderInfo {
+        let name: String
+        let upstream: String
+        let selectAsCurrent: Bool
+        let provider: DnsProviderMetaProtocol?
+    }
+    
     //MARK: - Properties
     var controllerType: DnsServerControllerType = .add
-    var model: NewDnsServerModelProtocol?
+    var model: NewDnsServerModel!
     var openUrl: String?
     
     weak var delegate: NewDnsServerControllerDelegate?
@@ -65,7 +72,6 @@ final class NewDnsServerController: BottomAlertController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        model?.delegate = self
         
         if openUrl != nil {
             // Native DNS implementation doesn't support port syntax
@@ -244,12 +250,13 @@ final class NewDnsServerController: BottomAlertController {
             let isValidProtocol = self.checkForValidNativeImplementationProtocol(upstream: upstream)
             
             guard isValidProtocol else { return }
-            self.model?.updateCustomProvider(newName: name, newUpstream: upstream)
+            let info = CustomDnsProviderInfo(name: name,
+                                             upstream: upstream,
+                                             selectAsCurrent: false,
+                                             provider: self.model?.provider)
+            self.delegate?.customProviderSaveTapped(info: info)
+            self.dismiss(animated: true)
         }
-    }
-    
-    private func deleteAction() {
-        model?.removeCustomProvider()
     }
     
     private func addAction() {
@@ -260,8 +267,19 @@ final class NewDnsServerController: BottomAlertController {
             let isValidProtocol = self.checkForValidNativeImplementationProtocol(upstream: upstream)
             
             guard isValidProtocol else { return }
-            self.model?.addCustomProvider(name: self.nameField.text ?? "", upstream: upstream, selectAsCurrent: true)
+            let info = CustomDnsProviderInfo(name: self.nameField.text ?? "",
+                                             upstream: upstream,
+                                             selectAsCurrent: true,
+                                             provider: self.model?.provider)
+            self.delegate?.customProviderAddTapped(info: info)
+            self.dismiss(animated: true)
         }
+    }
+    
+    private func deleteAction() {
+        guard let provider = model.provider else { return }
+        delegate?.customProviderDeleteTapped(provider: provider)
+        dismiss(animated: true)
     }
 }
 
@@ -274,33 +292,5 @@ extension NewDnsServerController: ThemableProtocol {
         theme.setupTextField(nameField)
         theme.setupTextField(upstreamsField)
         saveOrAddButton.indicatorStyle = theme.indicatorStyle
-    }
-}
-
-//MARK: - NewDnsServerController + NewDnsServerModelDelegate
-extension NewDnsServerController: NewDnsServerModelDelegate {
-    func errorOccurred(message: String) {
-        presentSimpleAlert(title: String.localizedString("common_error_title"), message: message)
-    }
-    
-    func customServerAdded() {
-        DispatchQueue.asyncSafeMain {
-            self.delegate?.providerAdded()
-            self.dismiss(animated: true)
-        }
-    }
-    
-    func customServerUpdated() {
-        DispatchQueue.asyncSafeMain {
-            self.delegate?.providerChanged()
-            self.dismiss(animated: true)
-        }
-    }
-    
-    func customServerRemoved() {
-        DispatchQueue.asyncSafeMain {
-            self.delegate?.providerDeleted()
-            self.dismiss(animated: true)
-        }
     }
 }

@@ -19,112 +19,59 @@
 import DnsAdGuardSDK
 import UIKit
 
-/// Delegate for details controller
-protocol DnsProviderDetailsModelDelegate: AnyObject {
-    func serverSelected()
-}
-
-/// Model protocol
-protocol DnsProviderDetailsModelProtocol {
-    /// Provider logo for light color theme
-    var providerLogo: UIImage? { get }
-    /// Provider logo for dark color theme
-    var providerDarkLogo: UIImage? { get }
-    /// Provider url
-    var providerHomepage: String { get }
-    /// List of provider features
-    var features: [DnsAdGuardSDK.DnsFeature] { get }
-    /// Provider description
-    var providerDescription: String { get }
-    /// List of supported  protocols by this provider
-    var dnsProtocols: [DnsAdGuardSDK.DnsProtocol] { get }
-    /// Selected dns server
-    var selectedDnsServer: DnsAdGuardSDK.DnsProtocol { get }
-    
-    /// This function select chosen server call delegate and restart vpn
-    func selectServer(dnsProtocol: DnsAdGuardSDK.DnsProtocol)
-}
-
 /// ViewModel
-final class DnsProviderDetailsModel: DnsProviderDetailsModelProtocol {
-    
+struct DnsProviderDetailsModel {
     
     //MARK: - Public properties
+    
+    /// Provider logo for light color theme
     var providerLogo: UIImage? {
         return provider.logo
     }
     
+    /// Provider logo for dark color theme
     var providerDarkLogo: UIImage? {
         //Not all providers have dark logo
         return provider.logoDark ?? providerLogo
     }
     
+    /// Provider url
     var providerHomepage: String {
         return provider.homepage
     }
     
+    /// List of provider features
     var features: [DnsAdGuardSDK.DnsFeature] {
-        var maxFeaturesIndex = 0
-        let servers = provider.servers
-        for i in 0..<servers.count {
-            if servers[i].features.count > maxFeaturesIndex {
-                maxFeaturesIndex = i
-            }
-        }
-        return servers[maxFeaturesIndex].features
+        return provider.servers.first { $0.type == activeDnsProtocol }?.features ?? []
     }
     
+    /// Provider description
     var providerDescription: String {
         return provider.providerDescription
     }
     
+    /// List of supported  protocols by this provider
     var dnsProtocols: [DnsAdGuardSDK.DnsProtocol] {
         return provider.dnsServers.map { $0.type }
     }
     
-    var selectedDnsServer: DnsAdGuardSDK.DnsProtocol {
-     //TODO: return selected server protocol
-        return .dns
+    /// active dns protocol
+    var activeDnsProtocol: DnsAdGuardSDK.DnsProtocol {
+        get {
+            return resources.dnsActiveProtocols[provider.providerId] ?? .dns
+        }
+        set {
+            resources.dnsActiveProtocols[provider.providerId] = newValue
+        }
     }
 
+    let provider: DnsProviderProtocol
+    private let resources: AESharedResourcesProtocol
     
-    weak var delegate: DnsProviderDetailsModelDelegate?
-    
-    //MARK: - Private properties
-    private let provider: DnsProviderProtocol
-    private let dnsProviderManager: DnsProvidersManagerProtocol
-    private let vpnManager: VpnManagerProtocol
     
     //MARK: - Init
-    init(provider: DnsProviderProtocol, dnsProviderManager: DnsProvidersManagerProtocol, vpnManager: VpnManagerProtocol) {
+    init(provider: DnsProviderProtocol, resources: AESharedResourcesProtocol) {
         self.provider = provider
-        self.dnsProviderManager = dnsProviderManager
-        self.vpnManager = vpnManager
-    }
-    
-    //MARK: - Public methods
-    func selectServer(dnsProtocol: DnsAdGuardSDK.DnsProtocol) {
-        do {
-            guard let serverId = getServerId(by: dnsProtocol) else { return }
-            try dnsProviderManager.selectProvider(withId: provider.providerId, serverId: serverId)
-            vpnManager.updateSettings(completion: nil)
-            delegate?.serverSelected()
-        } catch {
-            
-        }
-    }
-    
-    //MARK: - Private methods
-    private func getServerId(by dnsProtocol: DnsAdGuardSDK.DnsProtocol) -> Int? {
-        var defaultServerId: Int?
-        let server = provider.servers.first {
-            if $0.type == .dns {
-                defaultServerId = $0.id
-            }
-            
-            return $0.type == dnsProtocol
-        }
-        
-        return server?.id ?? defaultServerId
+        self.resources = resources
     }
 }

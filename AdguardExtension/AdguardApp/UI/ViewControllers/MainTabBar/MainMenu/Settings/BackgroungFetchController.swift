@@ -73,7 +73,7 @@ extension BackgroundFetchController: UITableViewDataSource {
         cell.radioButtonSelected = selectedCell == row
         cell.isArrowRightHidden = true
         cell.cellTag = indexPath.row
-        cell.updateTheme()
+        cell.updateTheme(themeService: themeService)
         return cell
     }
 

@@ -59,7 +59,7 @@ extension SelectDnsProtocolController: UITableViewDataSource {
         cell.titleString = prot.localizedString
         cell.radioButtonSelected = prot == selectedProtocol
         cell.isArrowRightHidden = true
-        cell.updateTheme()
+        cell.updateTheme(themeService: themeService)
         return cell
     }
 }

@@ -89,10 +89,6 @@ final class ExtendedRadioButtonCell: UITableViewCell, Reusable {
         return imageView
     }()
     
-    //MARK: - Services
-    
-    private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    
     //MARK: - Init
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -103,6 +99,12 @@ final class ExtendedRadioButtonCell: UITableViewCell, Reusable {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         addConstraints()
+    }
+    
+    //MARK: - Public methods
+    func updateTheme(themeService: ThemeServiceProtocol) {
+        themeService.setupTableCell(self)
+        themeService.setupLabels([titleLabel, descriptionLabel])
     }
     
     //MARK: - Private methods
@@ -141,15 +143,8 @@ final class ExtendedRadioButtonCell: UITableViewCell, Reusable {
     }
     
     @objc
-    private func radioButtonTapped(_ sender: RadioButton) {
+    private final func radioButtonTapped(_ sender: RadioButton) {
         guard let tag = cellTag else { return }
         delegate?.radioButtonTapped(with: tag)
-    }
-}
-
-extension ExtendedRadioButtonCell: ThemableProtocol {
-    func updateTheme() {
-        themeService.setupTableCell(self)
-        themeService.setupLabels([titleLabel, descriptionLabel])
     }
 }

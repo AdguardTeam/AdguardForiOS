@@ -211,13 +211,13 @@ class DnsServerInfo : ACObject, Codable {
     }
     
     func getActiveProtocol(_ resources: AESharedResourcesProtocol) -> DnsProtocol? {
-        if let protocolRawValue = resources.dnsActiveProtocols[name]{
-            return DnsProtocol(rawValue: protocolRawValue)
-        }
+//        if let protocolRawValue = resources.dnsActiveProtocols[name]{
+//            return DnsProtocol(rawValue: protocolRawValue)
+//        }
         return nil
     }
     
     func setActiveProtocol(_ resources: AESharedResourcesProtocol, protcol: DnsProtocol?) {
-        resources.dnsActiveProtocols[name] = protcol?.rawValue
+//        resources.dnsActiveProtocols[name] = protcol?.rawValue
     }
 }

@@ -51,7 +51,7 @@ import Foundation
     
     var indicatorStyle: UIActivityIndicatorView.Style { get }
     
-    func setupImage(_ imageView: ThemeableImageView)
+    func setupImage(_ imageView: ThemableImageView)
     func setupLabel(_ label: ThemableLabel)
     func setupLabelInverted(_ label: ThemableLabel)
     func setupLabels(_ labels: [ThemableLabel])
@@ -185,7 +185,7 @@ class ThemeService : NSObject, ThemeServiceProtocol {
     
     var tagColor: UIColor { configuration.darkTheme ? UIColor.AdGuardColor.lightGray6  : UIColor.AdGuardColor.lightGray2 }
     
-    func setupImage(_ imageView: ThemeableImageView) {
+    func setupImage(_ imageView: ThemableImageView) {
         imageView.image = configuration.darkTheme ? imageView.darkThemeImage : imageView.lightThemeImage
     }
     
