@@ -40,7 +40,7 @@ public enum DnsUserRuleType {
     case allowlist
 }
 
-public struct UserRule: Codable, Equatable {
+public struct UserRule: Codable, Hashable {
     public var ruleText: String
     public var isEnabled: Bool
     

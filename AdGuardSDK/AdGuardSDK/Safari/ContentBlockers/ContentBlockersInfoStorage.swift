@@ -49,8 +49,8 @@ public enum ContentBlockerType: Int, CaseIterable, Codable {
  It is more convenient to use URLs because Content Blockers are waiting JSON URL with converted rules.
  */
 public struct ConverterResult: Codable, Equatable {
-    let result: FiltersConverterResult // Converter result obtained from ConverterLib
-    let jsonUrl: URL // URL where JSON with converted rules is stored
+    public let result: FiltersConverterResult // Converter result obtained from ConverterLib
+    public let jsonUrl: URL // URL where JSON with converted rules is stored
     
     init(result: FiltersConverterResult, jsonUrl: URL) {
         self.result = result

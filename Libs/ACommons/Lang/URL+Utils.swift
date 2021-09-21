@@ -19,11 +19,15 @@
 import Foundation
 
 extension URL {
-    func hostWithPort() -> String{
-        if self.port != nil {
-            return String(format: "%@:%@", self.host ?? "", self.port ?? "")
+    var hostWithPort: String {
+        guard let host = host else {
+            return ""
+        }
+        
+        if let port = port {
+            return String(format: "%@:%@", host, port)
         } else {
-            return self.host ?? ""
+            return host
         }
     }
 }
