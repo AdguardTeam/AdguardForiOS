@@ -17,8 +17,6 @@
  */
 
 import Foundation
-@_implementationOnly import class ContentBlockerConverter.QuickAllowlistClipper
-@_implementationOnly import protocol ContentBlockerConverter.QuickAllowlistClipperProtocol
 
 public typealias SafariProtectionProtocol = SafariProtectionFiltersProtocol
                                             & SafariProtectionUserRulesProtocol
@@ -48,7 +46,6 @@ public final class SafariProtection: SafariProtectionProtocol {
     let cbStorage: ContentBlockersInfoStorageProtocol
     let cbService: ContentBlockerServiceProtocol
     let safariManagers: SafariUserRulesManagersProviderProtocol
-    let userRulesClipper: QuickAllowlistClipperProtocol
     let dnsBackgroundFetchUpdater: DnsBackgroundFetchUpdateProtocol?
     private let defaultConfiguration: SafariConfigurationProtocol
     
@@ -86,7 +83,6 @@ public final class SafariProtection: SafariProtectionProtocol {
         self.cbStorage = services.cbStorage
         self.cbService = services.cbService
         self.safariManagers = services.safariManagers
-        self.userRulesClipper = QuickAllowlistClipper()
         self.dnsBackgroundFetchUpdater = dnsBackgroundFetchUpdater
     }
     
@@ -99,7 +95,6 @@ public final class SafariProtection: SafariProtectionProtocol {
          cbStorage: ContentBlockersInfoStorageProtocol,
          cbService: ContentBlockerServiceProtocol,
          safariManagers: SafariUserRulesManagersProviderProtocol,
-         userRulesClipper: QuickAllowlistClipperProtocol,
          dnsBackgroundFetchUpdater: DnsBackgroundFetchUpdateProtocol? = nil)
     {
         self.configuration = configuration
@@ -110,7 +105,6 @@ public final class SafariProtection: SafariProtectionProtocol {
         self.cbStorage = cbStorage
         self.cbService = cbService
         self.safariManagers = safariManagers
-        self.userRulesClipper = userRulesClipper
         self.dnsBackgroundFetchUpdater = dnsBackgroundFetchUpdater
     }
     

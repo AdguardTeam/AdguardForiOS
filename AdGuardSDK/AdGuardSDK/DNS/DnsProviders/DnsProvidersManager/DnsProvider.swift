@@ -25,7 +25,6 @@ public protocol DnsProviderMetaProtocol {
     var name: String { get set } // DNS provider name e.g Google DNS
     var providerId: Int { get } // Unique identifier of the provider
     var isEnabled: Bool { get set } // State of the provider enabled/disabled
-    var enabledServerId: Int? { get } // return enabled server id. If enabled server not exists return plain dns server id and if it not exists too than return nil
 }
 
 public extension DnsProviderMetaProtocol {
@@ -72,11 +71,6 @@ public struct DnsProvider: DnsProviderProtocol {
     public let logoDark: UIImage?
     public let homepage: String
     public var isEnabled: Bool
-    
-    public var enabledServerId: Int? {
-        let serverId = servers.first { $0.isEnabled }?.id
-        return serverId ?? servers.first { $0.type == .dns }?.id
-    }
     
     init(name: String, providerDescription: String, servers: [DnsServer], providerId: Int, logo: UIImage?, logoDark: UIImage?, homepage: String, isEnabled: Bool) {
         self.name = name
