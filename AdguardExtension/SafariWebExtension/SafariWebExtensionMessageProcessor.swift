@@ -45,9 +45,10 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
     
     // MARK: - Private methods
     
-    private func getInitData(_ domain: String?) -> [String: Any] {
+    private func getInitData(_ url: String?) -> [String: Any] {
         let resources = AESharedResources()
         let cbService = ContentBlockerService(appBundleId: Bundle.main.hostAppBundleId)
+        let domain = URL(string: url ?? "")?.domain
         
         // Selected theme
         let themeName = resources.themeMode.messageName
@@ -76,7 +77,7 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
             Message.removeAllBlocklistRulesLink: UserRulesRedirectAction.removeAllBlocklistRules(domain: "").scheme,
             Message.upgradeAppLink: "\(Bundle.main.appScheme)://upgradeApp",
             Message.enableAdvancedBlockingLink: "\(Bundle.main.appScheme)://enableAdvancedProtection",
-            Message.reportProblemLink: constructReportLink(domain ?? "unknown")
+            Message.reportProblemLink: constructReportLink(url ?? "unknown")
         ]
     }
 

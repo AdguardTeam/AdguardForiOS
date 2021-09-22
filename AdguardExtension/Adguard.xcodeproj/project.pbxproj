@@ -926,6 +926,8 @@
 		7EC1F9E32391175600210959 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */; };
 		7EC1F9E42391211900210959 /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D031A0B4219EFC99002C17D9 /* CocoaLumberjack.swift */; };
 		7EC3318D234738E400229194 /* BottomShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC3318C234738E400229194 /* BottomShadowView.swift */; };
+		7EC3368D26FB9B9C002AF24A /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40799A231E7E4E007EFB26 /* URL+Utils.swift */; };
+		7EC3368E26FB9B9E002AF24A /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40799A231E7E4E007EFB26 /* URL+Utils.swift */; };
 		7EC35AAD230D8EC100D9B959 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7EC35AAF230D8EC100D9B959 /* Localizable.stringsdict */; };
 		7EC635B3239EB177003A5CE4 /* Date+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02B550022EED4AE0039BC48 /* Date+Utils.swift */; };
 		7EC635B6239EB29B003A5CE4 /* ConfigurationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CB347A212DD1AB003B650E /* ConfigurationService.swift */; };
@@ -9368,6 +9370,7 @@
 				7E9EBDD926EAA6EA00B5FEC3 /* SharedResources+DebugLogs.swift in Sources */,
 				7EBDD99526D6A36C009531FA /* DDLoggerNames.m in Sources */,
 				7EBDD97D26D6A1D0009531FA /* SafariWebExtensionMessageProcessor.swift in Sources */,
+				7EC3368E26FB9B9E002AF24A /* URL+Utils.swift in Sources */,
 				7EBDD97F26D6A1D0009531FA /* SafariWebExtensionHandler.swift in Sources */,
 				7EDACF8F26ED2B4C00C7EE63 /* SharedResources.swift in Sources */,
 				7EC8A40D26E7919D005244CF /* UserRulesRedirectAction.swift in Sources */,
@@ -9398,6 +9401,7 @@
 				7E9EBDDA26EAA6EB00B5FEC3 /* SharedResources+DebugLogs.swift in Sources */,
 				7EBDD99626D6A36C009531FA /* DDLoggerNames.m in Sources */,
 				7EBDD97E26D6A1D0009531FA /* SafariWebExtensionMessageProcessor.swift in Sources */,
+				7EC3368D26FB9B9C002AF24A /* URL+Utils.swift in Sources */,
 				7EBDD98026D6A1D0009531FA /* SafariWebExtensionHandler.swift in Sources */,
 				7EDACF8E26ED2B4A00C7EE63 /* SharedResources.swift in Sources */,
 				7EC8A40E26E7919D005244CF /* UserRulesRedirectAction.swift in Sources */,
