@@ -17,6 +17,7 @@
  */
 
 import UIKit
+import DnsAdGuardSDK
 
 class BlockingModeController: UITableViewController {
     
@@ -51,15 +52,15 @@ class BlockingModeController: UITableViewController {
         let mode = resources.blockingMode
         
         switch mode {
-        case .agDefault:
+        case .defaultMode:
             selectedCell = defaultMode
-        case .agRefused:
+        case .refused:
             selectedCell = refusedMode
-        case .agNxdomain:
+        case .nxdomain:
             selectedCell = nxDomainMode
-        case .agUnspecifiedAddress:
+        case .unspecifiedAddress:
             selectedCell = unspecifiedAddressMode
-        case .agCustomAddress:
+        case .customAddress:
             selectedCell = customAddressMode
         }
         
@@ -74,11 +75,11 @@ class BlockingModeController: UITableViewController {
         }
         updateDescriptionLabel(type: .customAddress, text: text)
         
-        defaultHeaderLabel.text = BlockingModeSettings.agDefault.name
-        refusedHeaderLabel.text = BlockingModeSettings.agRefused.name
-        nxDomainHeaderLabel.text = BlockingModeSettings.agNxdomain.name
-        nullIPHeaderLabel.text = BlockingModeSettings.agUnspecifiedAddress.name
-        customIPHeaderLabel.text = BlockingModeSettings.agCustomAddress.name
+        defaultHeaderLabel.text = DnsProxyBlockingMode.defaultMode.name
+        refusedHeaderLabel.text = DnsProxyBlockingMode.refused.name
+        nxDomainHeaderLabel.text = DnsProxyBlockingMode.nxdomain.name
+        nullIPHeaderLabel.text = DnsProxyBlockingMode.unspecifiedAddress.name
+        customIPHeaderLabel.text = DnsProxyBlockingMode.customAddress.name
     }
     
     // MARK: - Actions
@@ -108,26 +109,26 @@ class BlockingModeController: UITableViewController {
     }
     
     private func updateBlockingMode(index: Int) {
-        let mode: BlockingModeSettings
+        let mode: DnsProxyBlockingMode
         switch index {
         case defaultMode:
-            mode = .agDefault
+            mode = .defaultMode
         case refusedMode:
-            mode = .agRefused
+            mode = .refused
         case nxDomainMode:
-            mode = .agNxdomain
+            mode = .nxdomain
         case unspecifiedAddressMode:
-            mode = .agUnspecifiedAddress
+            mode = .unspecifiedAddress
         case customAddressMode:
-            mode = .agCustomAddress
+            mode = .customAddress
             showCustomIPAlert()
         default:
-            mode = .agDefault
+            mode = .defaultMode
         }
         
         selectedCell = index
         
-        if mode != .agCustomAddress {
+        if mode != .customAddress {
             setupMode(mode: mode)
         }
     }
@@ -139,7 +140,7 @@ class BlockingModeController: UITableViewController {
         present(controller, animated: true, completion: nil)
     }
     
-    private func setupMode(mode: BlockingModeSettings) {
+    private func setupMode(mode: DnsProxyBlockingMode) {
         resources.blockingMode = mode
         vpnManager.updateSettings(completion: nil)
         updateButtons(by: selectedCell)
@@ -155,8 +156,8 @@ extension BlockingModeController: UpstreamsControllerDelegate {
             if selectedCell == customAddressMode {
                 updateBlockingMode(index: defaultMode)
             }
-        } else if !text.isEmpty && selectedCell == customAddressMode && resources.blockingMode != .agCustomAddress {
-            setupMode(mode: .agCustomAddress)
+        } else if !text.isEmpty && selectedCell == customAddressMode && resources.blockingMode != .customAddress {
+            setupMode(mode: .customAddress)
         }
         customIPDescriptionLabel.text = string
     }

@@ -20,6 +20,8 @@ import Foundation
 
 public typealias DnsProtectionProtocol = DnsProtectionConfigurationProtocol
                                 & DnsProtectionUserRulesManagerProtocol
+                                & DnsBackgroundFetchUpdateProtocol
+                                & DnsProtectionFiltersProtocol
                                 & ResetableSyncProtocol
 
 public final class DnsProtection: DnsProtectionProtocol {
@@ -50,6 +52,22 @@ public final class DnsProtection: DnsProtectionProtocol {
         self.dnsUserRulesManagerProvider = services.dnsUserRulesManager
         self.dnsFiltersManager = services.dnsFiltersManager
         self.filterFilesStorage = services.filterFilesStorage
+    }
+    
+    // Initializer for tests
+    init(configuration: DnsConfigurationProtocol,
+         defaultConfiguration: DnsConfigurationProtocol,
+         dnsProvidersManager: DnsProvidersManagerProtocol,
+         dnsUserRulesManagerProvider: DnsUserRulesManagersProviderProtocol,
+         dnsFiltersManager: DnsFiltersManagerProtocol,
+         filterFilesStorage: FilterFilesStorageProtocol) {
+        
+        self.configuration = configuration
+        self.defaultConfiguration = defaultConfiguration
+        self.dnsProvidersManager = dnsProvidersManager
+        self.dnsUserRulesManagerProvider = dnsUserRulesManagerProvider
+        self.dnsFiltersManager = dnsFiltersManager
+        self.filterFilesStorage = filterFilesStorage
     }
     
     public func reset() throws {

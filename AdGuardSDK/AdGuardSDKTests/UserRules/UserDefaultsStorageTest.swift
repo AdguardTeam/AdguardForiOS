@@ -1,4 +1,5 @@
 import XCTest
+import OrderedCollections
 
 class UserDefaultsStorageTest: XCTestCase {
 
@@ -29,7 +30,7 @@ class UserDefaultsStorageTest: XCTestCase {
 
     func testAllowlistRuleStorageWithSuccess() {
         XCTAssert(allowlistRuleStorage.rules.isEmpty)
-        allowlistRuleStorage.rules = userRules
+        allowlistRuleStorage.rules = OrderedSet(userRules)
         XCTAssertEqual(allowlistRuleStorage.rules.count, 3)
         for (index,rule) in allowlistRuleStorage.rules.enumerated() {
             XCTAssert(rule.ruleText == userRules[index].ruleText)
@@ -39,7 +40,7 @@ class UserDefaultsStorageTest: XCTestCase {
     
     func testResetAllowlistRuleStorage() {
         XCTAssert(allowlistRuleStorage.rules.isEmpty)
-        allowlistRuleStorage.rules = userRules
+        allowlistRuleStorage.rules = OrderedSet(userRules)
         XCTAssertEqual(allowlistRuleStorage.rules.count, 3)
         allowlistRuleStorage.rules = []
         XCTAssert(allowlistRuleStorage.rules.isEmpty)
@@ -47,7 +48,7 @@ class UserDefaultsStorageTest: XCTestCase {
     
     func testInvertedAllowlistRulesStorageWithSuccess() {
         XCTAssert(invertedAllowlistRulesStorage.rules.isEmpty)
-        invertedAllowlistRulesStorage.rules = userRules
+        invertedAllowlistRulesStorage.rules = OrderedSet(userRules)
         XCTAssertEqual(invertedAllowlistRulesStorage.rules.count, 3)
         for (index,rule) in invertedAllowlistRulesStorage.rules.enumerated() {
             XCTAssert(rule.ruleText == userRules[index].ruleText)
@@ -57,7 +58,7 @@ class UserDefaultsStorageTest: XCTestCase {
     
     func testResetInvertedAllowlistRulesStorage() {
         XCTAssert(invertedAllowlistRulesStorage.rules.isEmpty)
-        invertedAllowlistRulesStorage.rules = userRules
+        invertedAllowlistRulesStorage.rules = OrderedSet(userRules)
         XCTAssertEqual(invertedAllowlistRulesStorage.rules.count, 3)
         invertedAllowlistRulesStorage.rules = []
         XCTAssert(invertedAllowlistRulesStorage.rules.isEmpty)
@@ -65,7 +66,7 @@ class UserDefaultsStorageTest: XCTestCase {
     
     func testBlocklistRulesStorageWithSuccess() {
         XCTAssert(blocklistRulesStorage.rules.isEmpty)
-        blocklistRulesStorage.rules = userRules
+        blocklistRulesStorage.rules = OrderedSet(userRules)
         XCTAssertEqual(blocklistRulesStorage.rules.count, 3)
         for (index,rule) in blocklistRulesStorage.rules.enumerated() {
             XCTAssert(rule.ruleText == userRules[index].ruleText)
@@ -75,7 +76,7 @@ class UserDefaultsStorageTest: XCTestCase {
     
     func testResetBlocklistRulesStorage() {
         XCTAssert(blocklistRulesStorage.rules.isEmpty)
-        blocklistRulesStorage.rules = userRules
+        blocklistRulesStorage.rules = OrderedSet(userRules)
         XCTAssertEqual(blocklistRulesStorage.rules.count, 3)
         blocklistRulesStorage.rules = []
         XCTAssert(blocklistRulesStorage.rules.isEmpty)

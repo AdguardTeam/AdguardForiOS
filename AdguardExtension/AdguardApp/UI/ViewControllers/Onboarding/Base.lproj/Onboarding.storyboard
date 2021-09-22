@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rOd-yI-7kW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19150" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rOd-yI-7kW">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19134"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -59,7 +60,7 @@
                                 </variation>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoadScreen" translatesAutoresizingMaskIntoConstraints="NO" id="kaF-eB-tBX">
-                                <rect key="frame" x="182" y="249" width="50" height="50"/>
+                                <rect key="frame" x="135" y="80" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="gQY-fI-eAC">
                                         <variation key="heightClass=regular-widthClass=regular" constant="100"/>
@@ -70,7 +71,7 @@
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ido-Ag-IK7">
-                                <rect key="frame" x="282" y="745.5" width="493" height="40"/>
+                                <rect key="frame" x="24" y="440" width="272" height="32"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <color key="textColor" systemColor="labelColor"/>
@@ -115,10 +116,10 @@
                                 <exclude reference="kqU-iI-zpx"/>
                                 <exclude reference="uvM-PD-nh6"/>
                                 <exclude reference="wFe-YT-FFj"/>
-                                <exclude reference="96H-gH-wCP"/>
                                 <exclude reference="1Iu-vQ-YEF"/>
                                 <exclude reference="p9T-sb-r3y"/>
                                 <exclude reference="y9Q-Av-vlJ"/>
+                                <exclude reference="96H-gH-wCP"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=regular">
@@ -159,25 +160,25 @@
             <objects>
                 <viewController storyboardIdentifier="OnboardingAnimationsController" modalPresentationStyle="fullScreen" id="wQn-A0-Ee1" customClass="OnboardingAnimationsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cqc-ee-WYS">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" alwaysBounceHorizontal="YES" scrollEnabled="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3T-Ho-ORm">
-                                <rect key="frame" x="0.0" y="44" width="414" height="448"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="284"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="7iu-xS-0z8">
-                                        <rect key="frame" x="0.0" y="0.0" width="1242" height="448"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="960" height="284"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aJS-Bb-0sk" customClass="AnimationView" customModule="Lottie">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="448"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="284"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V84-i9-wU7" customClass="AnimationView" customModule="Lottie">
-                                                <rect key="frame" x="414" y="0.0" width="414" height="448"/>
+                                                <rect key="frame" x="320" y="0.0" width="320" height="284"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kKE-Gt-h5X" customClass="AnimationView" customModule="Lottie">
-                                                <rect key="frame" x="828" y="0.0" width="414" height="448"/>
+                                                <rect key="frame" x="640" y="0.0" width="320" height="284"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
@@ -192,7 +193,7 @@
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhL-36-5FQ">
-                                <rect key="frame" x="8" y="60" width="24" height="24"/>
+                                <rect key="frame" x="8" y="16" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="ZiZ-Ic-vNe">
                                         <variation key="heightClass=regular-widthClass=regular" constant="32"/>
@@ -207,16 +208,16 @@
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zNS-Iy-bW2">
-                                <rect key="frame" x="0.0" y="546.33333333333337" width="428" height="256"/>
+                                <rect key="frame" x="0.0" y="322" width="320" height="256"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="4pL-oy-3Mq">
-                                        <rect key="frame" x="0.0" y="0.0" width="1284" height="256"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="960" height="256"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fH8-gi-DtH">
-                                                <rect key="frame" x="0.0" y="0.0" width="428" height="256"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="256"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Block Ads" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hXU-wD-fbI" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="24" y="0.0" width="380" height="26.333333333333332"/>
+                                                        <rect key="frame" x="24" y="0.0" width="272" height="26.5"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -278,7 +279,7 @@
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Block Annoyances" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hf9-6r-TUk" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="24" y="0.0" width="380" height="26.333333333333332"/>
+                                                        <rect key="frame" x="24" y="0.0" width="272" height="26.5"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -484,11 +485,11 @@
             <objects>
                 <viewController storyboardIdentifier="OnboardingController" modalPresentationStyle="fullScreen" id="eQY-Hl-hIc" customClass="OnboardingController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VQc-D7-UHv">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ju-B8-UIZ">
-                                <rect key="frame" x="24" y="848" width="380" height="20"/>
+                                <rect key="frame" x="24" y="524" width="272" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="oVb-1p-g0o">
                                         <variation key="heightClass=regular-widthClass=regular" constant="30"/>
@@ -535,10 +536,10 @@
                                 </variation>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EG2-SZ-8xL" userLabel="SettingsView">
-                                <rect key="frame" x="24" y="196" width="366" height="24"/>
+                                <rect key="frame" x="24" y="152" width="272" height="24"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open the settings" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsx-Ce-cc8" userLabel="Settings Label" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="32" y="0.0" width="334" height="24"/>
+                                        <rect key="frame" x="32" y="0.0" width="240" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="bKX-2F-Cwa"/>
                                         </constraints>
@@ -620,7 +621,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wcN-Rv-mji" userLabel="SwitchView">
-                                <rect key="frame" x="24" y="290.33333333333331" width="366" height="57.333333333333314"/>
+                                <rect key="frame" x="24" y="246.5" width="272" height="38.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="switch" translatesAutoresizingMaskIntoConstraints="NO" id="IoS-Qz-Db1">
                                         <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>

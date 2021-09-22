@@ -16,8 +16,8 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
+import OrderedCollections
 
 public protocol UserRulesStorageProtocol: AnyObject {
-    var rules: [UserRule] { get set }
+    var rules: OrderedSet<UserRule> { get set }
 }

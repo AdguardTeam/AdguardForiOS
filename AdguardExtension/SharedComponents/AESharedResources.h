@@ -17,13 +17,6 @@
 */
 #import <Foundation/Foundation.h>
 
-typedef enum : NSUInteger {
-    
-    APVpnManagerTunnelModeSplit = 0,
-    APVpnManagerTunnelModeFull = 1,
-    APVpnManagerTunnelModeFullWithoutVPNIcon = 2,
-} APVpnManagerTunnelMode;
-
 @class ASDFilterMetadata, ASDFilter, ABECFilterClientMetadata, ASDFilterRule, AEInvertedWhitelistDomainsObject, ABECFilterClientLocalization, DnsServerInfo;
 
 /////////////////////////////////////////////////////////////////////
@@ -32,7 +25,6 @@ typedef enum : NSUInteger {
 
 #define AE_PRODUCT_NAME                     @AG_PRODUCT
 #define AE_HOSTAPP_ID                       @ADGUARD_BUNDLE_ID
-//#define AE_EXTENSION_ID                     @ADGUARD_EXTENSION_BUNDLE_ID
 #define AE_SHARED_RESOURCES_GROUP           @ADGUARD_SHARED_RESOURCES_GROUP
 #define AE_FILTER_UPDATES_ID                @ADGUARD_FILTER_UPDATES_ID
 
@@ -355,6 +347,11 @@ extern NSString* _Nonnull SafariWebExtensionIsOn;
  User defaults key for advanced protection whats new info screen shown
  */
 extern NSString* _Nonnull AdvancedProtectionWhatsNewScreenShown;
+
+/**
+ Selected minimum background fetch period from low-level settings
+ */
+extern NSString* _Nonnull BackgroundFetchUpdatePeriod;
 
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources

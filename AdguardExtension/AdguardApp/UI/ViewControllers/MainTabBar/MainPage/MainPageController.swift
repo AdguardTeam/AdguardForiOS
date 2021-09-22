@@ -18,8 +18,7 @@
 
 import UIKit
 import SafariAdGuardSDK
-import enum DnsAdGuardSDK.StatisticsPeriod
-import struct DnsAdGuardSDK.CountersStatisticsRecord
+import DnsAdGuardSDK
 
 final class MainPageController: UIViewController, DateTypeChangedProtocol, ComplexSwitchDelegate, OnboardingControllerDelegate, GetProControllerDelegate, MainPageModelDelegate {
     
@@ -167,10 +166,10 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     private lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var resources: AESharedResourcesProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var complexProtection: ComplexProtectionServiceProtocol = { ServiceLocator.shared.getService()! }()
-    private lazy var dnsFiltersService: DnsFiltersServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var nativeProviders: NativeProvidersServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var importSettingsService: ImportSettingsServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var safariProtection: SafariProtectionProtocol = { ServiceLocator.shared.getService()! }()
+    private lazy var dnsProtection: DnsProtectionProtocol = { ServiceLocator.shared.getService()! }()
     
     // MARK: - View models
     private lazy var mainPageModel: MainPageModelProtocol = { MainPageModel(resource: resources, safariProtection: safariProtection) }()
@@ -276,17 +275,12 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     // MARK: - Nav Bar Actions
     
     @objc private func updateFilters(_ sender: Any) {
-        
-        dnsUpdateEnded = false
-        
-        dnsFiltersService.updateFilters(networking: ACNNetworking()) {
-            DispatchQueue.main.async {  [weak self] in
-                
-                self?.dnsUpdateEnded = true
-                
-                self?.safariUpdateEnded = false
-                self?.mainPageModel.updateFilters()
-            }
+        self.dnsUpdateEnded = false
+    
+        dnsProtection.updateAllFilters { [weak self] _ in
+            self?.dnsUpdateEnded = true
+            self?.safariUpdateEnded = false
+            self?.mainPageModel.updateFilters()
         }
     }
     

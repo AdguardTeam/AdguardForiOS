@@ -51,13 +51,7 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
     /// Initializes `ACLLogger`
     private func setupLogger() {
         ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
-        
-        #if DEBUG
-        let isDebugLogs = true
-        #else
         let isDebugLogs = resources.isDebugLogs
-        #endif
-        
         DDLogDebug("Safari Web Extension was initialized with log level: \(isDebugLogs ? "DEBUG" : "NORMAL")")
         ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
     }

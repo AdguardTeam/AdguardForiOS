@@ -23,27 +23,3 @@ enum UpstreamType {
     case fallback
     case customAddress
 }
-
-@objc
-enum BlockingModeSettings: Int {
-    case agDefault = 0
-    case agRefused = 1
-    case agNxdomain = 2
-    case agUnspecifiedAddress = 3
-    case agCustomAddress = 4
-    
-    dynamic var name: String {
-        switch self {
-        case .agDefault:
-            return "Default"
-        case .agRefused:
-            return "REFUSED"
-        case .agNxdomain:
-            return "NXDOMAIN"
-        case .agUnspecifiedAddress:
-            return "Null IP"
-        case .agCustomAddress:
-            return "Custom IP"
-        }
-    }
-}

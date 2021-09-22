@@ -16,9 +16,9 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
 import Zip
 import SafariAdGuardSDK
+import DnsAdGuardSDK
 
 protocol SupportServiceProtocol {
     func exportLogs() -> URL?
@@ -34,7 +34,6 @@ class SupportService: SupportServiceProtocol {
     private let complexProtection: ComplexProtectionServiceProtocol
     private let dnsProviders: DnsProvidersServiceProtocol
     private let networkSettings: NetworkSettingsServiceProtocol
-    private let dnsFilters: DnsFiltersServiceProtocol
     private let productInfo: ADProductInfoProtocol
     private let keyChainService: KeychainServiceProtocol
     private let safariProtection: SafariProtectionProtocol
@@ -53,12 +52,11 @@ class SupportService: SupportServiceProtocol {
     private var logsDirectory: URL?
     private var logsZipDirectory: URL?
     
-    init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol, complexProtection: ComplexProtectionServiceProtocol, dnsProviders: DnsProvidersServiceProtocol, dnsFilters: DnsFiltersServiceProtocol, productInfo: ADProductInfoProtocol, keyChainService: KeychainServiceProtocol, safariProtection: SafariProtectionProtocol, networkSettings: NetworkSettingsServiceProtocol) {
+    init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol, complexProtection: ComplexProtectionServiceProtocol, dnsProviders: DnsProvidersServiceProtocol, productInfo: ADProductInfoProtocol, keyChainService: KeychainServiceProtocol, safariProtection: SafariProtectionProtocol, networkSettings: NetworkSettingsServiceProtocol) {
         self.resources = resources
         self.configuration = configuration
         self.complexProtection = complexProtection
         self.dnsProviders = dnsProviders
-        self.dnsFilters = dnsFilters
         self.productInfo = productInfo
         self.keyChainService = keyChainService
         self.safariProtection = safariProtection
@@ -166,17 +164,7 @@ class SupportService: SupportServiceProtocol {
 //            return filtersString + metaString + "\n"
 //        }
         
-        let tunnelMode: String
-        switch resources.tunnelMode {
-        case APVpnManagerTunnelModeSplit:
-            tunnelMode = "SPLIT"
-        case APVpnManagerTunnelModeFull:
-            tunnelMode = "FULL"
-        case APVpnManagerTunnelModeFullWithoutVPNIcon:
-            tunnelMode = "WITHOUT_VPN_ICON"
-        default:
-            tunnelMode = "UNKNOWN"
-        }
+        let tunnelMode = resources.tunnelMode.debugDescription
         
         let customBootstraps = resources.customBootstrapServers?.joined(separator: ", ") ?? ""
         let customFallbacks = resources.customFallbackServers?.joined(separator: ", ") ?? ""
@@ -235,12 +223,12 @@ class SupportService: SupportServiceProtocol {
             }
         }
         
-        if dnsFilters.filters.count > 0 {
+        if 1 > 0 { // dnsFilters.filters.count
             resultString.append("\r\nDns filters: \r\n");
             
-            for filter in dnsFilters.filters {
-                resultString.append("name: \(filter.name ?? "UNDEFINED") id: \(filter.id) url: \(filter.subscriptionUrl ?? "UNDEFINED") enabled: \(filter.enabled)\r\n")
-            }
+//            for filter in dnsFilters.filters {
+//                resultString.append("name: \(filter.name ?? "UNDEFINED") id: \(filter.id) url: \(filter.subscriptionUrl ?? "UNDEFINED") enabled: \(filter.enabled)\r\n")
+//            }
         }
         
         return resultString

@@ -24,7 +24,9 @@ class SupportTableViewController: UITableViewController {
     
     // MARK: - Services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let webReporter: ActionWebReporterProtocol = ServiceLocator.shared.getService()!
+    
+    // TODO: - It will crash, but this object shouldn't be here; FIX IT
+    private let webReporter: ActionExtensionWebReporterProtocol = ServiceLocator.shared.getService()!
     private let support: SupportServiceProtocol = ServiceLocator.shared.getService()!
     private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
     
@@ -110,8 +112,8 @@ class SupportTableViewController: UITableViewController {
     }
     
     private func reportIncorrectBlockingRowTapped() {
-        let reportUrl = webReporter.composeWebReportUrl(nil)
-        UIApplication.shared.open(reportUrl, options: [:], completionHandler: nil)
+//        let reportUrl = webReporter.composeWebReportUrl(nil)
+//        UIApplication.shared.open(reportUrl, options: [:], completionHandler: nil)
     }
     
     private func rateAppRowTapped() {
