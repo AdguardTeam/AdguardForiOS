@@ -25,9 +25,21 @@ import Foundation
     2. Native implementation:
         Provided by the OS itself. Supports only DoH, DoT and regular DNS. Impossible to inspect DNS activity
  */
-public enum DnsImplementation {
+public enum DnsImplementation: Int {
     case adGuard
     case native
+    
+    public init?(rawValue: Int) {
+        switch rawValue {
+        case DnsImplementation.adGuard.rawValue:
+            self = .adGuard
+        case DnsImplementation.native.rawValue:
+            self = .native
+        default:
+            assertionFailure("unknown DnsImplementation value")
+            return nil
+        }
+    }
     
     var supportedProtocols: [DnsProtocol] {
         switch self {

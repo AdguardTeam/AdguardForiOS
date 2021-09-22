@@ -20,7 +20,7 @@ import Foundation
 import SystemConfiguration.CaptiveNetwork
 import NetworkExtension
 
-@objcMembers class WifiException: NSObject, Codable {
+class WifiException: NSObject, Codable {
     @objc var rule: String
     @objc var enabled: Bool
     
@@ -37,13 +37,11 @@ import NetworkExtension
     }
 }
 
-@objc
 protocol NetworkSettingsChangedDelegate {
     func settingsChanged()
 }
 
-@objc
-protocol NetworkSettingsServiceProtocol {
+protocol NetworkSettingsServiceProtocol: AnyObject {
     var exceptions: [WifiException] { get }
     var enabledExceptions: [WifiException] { get }
     var filterWifiDataEnabled: Bool { get set }
@@ -54,11 +52,20 @@ protocol NetworkSettingsServiceProtocol {
     func add(exception: WifiException)
     func delete(exception: WifiException)
     func change(oldException: WifiException, newException: WifiException)
-    func getCurrentWiFiName() ->  String?
+    func fetchCurrentWiFiName(callback: @escaping (String?)->Void)
 }
 
-@objcMembers
 class NetworkSettingsService: NetworkSettingsServiceProtocol {
+    
+    var filterWifiDataEnabled: Bool {
+        get { return resources.filterWifiDataEnabled }
+        set { resources.filterWifiDataEnabled = newValue }
+    }
+    
+    var filterMobileDataEnabled: Bool {
+        get { return resources.filterMobileDataEnabled }
+        set { resources.filterMobileDataEnabled = newValue }
+    }
     
     var delegate: NetworkSettingsChangedDelegate?
     
@@ -67,28 +74,6 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
     var enabledExceptions: [WifiException] {
         get {
             return exceptions.filter { $0.enabled }
-        }
-    }
-    
-    var filterWifiDataEnabled: Bool {
-        get {
-            return resources.sharedDefaults().object(forKey: AEDefaultsFilterWifiEnabled) as? Bool ?? true
-        }
-        set {
-            if filterWifiDataEnabled != newValue {
-                resources.sharedDefaults().set(newValue, forKey: AEDefaultsFilterWifiEnabled)
-            }
-        }
-    }
-    
-    var filterMobileDataEnabled: Bool {
-        get {
-            return resources.sharedDefaults().object(forKey: AEDefaultsFilterMobileEnabled) as? Bool ?? true
-        }
-        set {
-            if filterMobileDataEnabled != newValue {
-                resources.sharedDefaults().set(newValue, forKey: AEDefaultsFilterMobileEnabled)
-            }
         }
     }
     
@@ -129,7 +114,6 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
     
     /* Variables */
     
-    // File name is also stored in PacketTunnelProvider and AESSupport
     private let filePath = "NetworkSettings"
     
     /* Services */
@@ -164,19 +148,27 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
         }
     }
     
-    func getCurrentWiFiName() ->  String? {
-        if let interfaces = CNCopySupportedInterfaces() {
-            for i in 0..<CFArrayGetCount(interfaces){
-                let interfaceName: UnsafeRawPointer = CFArrayGetValueAtIndex(interfaces, i)
-                let rec = unsafeBitCast(interfaceName, to: AnyObject.self)
-                let unsafeInterfaceData = CNCopyCurrentNetworkInfo("\(rec)" as CFString)
-                 
-                if let unsafeInterfaceData = unsafeInterfaceData as? Dictionary<AnyHashable, Any> {
-                    return unsafeInterfaceData["SSID"] as? String
+    func fetchCurrentWiFiName(callback: @escaping (String?) -> Void) {
+        if #available(iOS 14.0, *) {
+            NEHotspotNetwork.fetchCurrent { network in
+                guard let network = network else {
+                    callback(nil)
+                    return
+                }
+                callback(network.ssid)
+            }
+        } else {
+            if let interfaces = CNCopySupportedInterfaces() as NSArray? {
+                for interface in interfaces {
+                    if let interfaceInfo = CNCopyCurrentNetworkInfo(interface as! CFString) as NSDictionary? {
+                        let ssid = interfaceInfo[kCNNetworkInfoKeySSID as String] as? String
+                        callback(ssid)
+                    }
                 }
             }
         }
-        return nil
+        
+        callback(nil)
     }
     
     // MARK: - Private methods
@@ -214,5 +206,33 @@ class NetworkSettingsService: NetworkSettingsServiceProtocol {
         saveExceptionsToFile()
         exceptions = getExceptionsFromFile()
         delegate?.settingsChanged()
+    }
+}
+
+fileprivate extension AESharedResourcesProtocol {
+    
+    var wifiExceptionsEnabledKey: String { "AEDefaultsWifiExceptionsEnabled" }
+    var filterMobileEnabledKey: String { "AEDefaultsFilterMobileEnabled" }
+
+    var filterWifiDataEnabled: Bool {
+        get {
+            return sharedDefaults().object(forKey: wifiExceptionsEnabledKey) as? Bool ?? true
+        }
+        set {
+            if filterWifiDataEnabled != newValue {
+                sharedDefaults().set(newValue, forKey: wifiExceptionsEnabledKey)
+            }
+        }
+    }
+    
+    var filterMobileDataEnabled: Bool {
+        get {
+            return sharedDefaults().object(forKey: filterMobileEnabledKey) as? Bool ?? true
+        }
+        set {
+            if filterMobileDataEnabled != newValue {
+                sharedDefaults().set(newValue, forKey: filterMobileEnabledKey)
+            }
+        }
     }
 }

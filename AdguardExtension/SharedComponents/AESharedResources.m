@@ -17,7 +17,6 @@
 */
 #import "AESharedResources.h"
 #import "ACommons/ACLang.h"
-//#import "ABECFilter.h"
 #import "NSString+Utils.h"
 
 NSString *AE_URLSCHEME = @ADGUARD_URL_SCHEME;
@@ -44,8 +43,6 @@ NSString* AEDefaultsAuthStateString = @"AEDefaultsAuthStateString";
 NSString* AEDefaultsAppIdSavedWithAccessRights = @"AEDefaultsAppIdSavedWithAccessRights";
 NSString* AEDefaultsUserFilterEnabled = @"AEDefaultsUserFilterEnabled";
 NSString* AEDefaultsSafariWhitelistEnabled = @"AEDefaultsWhitelistEnabled";
-NSString* AEDefaultsFilterWifiEnabled = @"AEDefaultsWifiExceptionsEnabled";
-NSString* AEDefaultsFilterMobileEnabled = @"AEDefaultsFilterMobileEnabled";
 NSString* AEDefaultsDnsWhitelistEnabled = @"AEDefaultsDnsWhitelistEnabled";
 NSString* AEDefaultsDnsBlacklistEnabled = @"AEDefaultsDnsBlacklistEnabled";
 

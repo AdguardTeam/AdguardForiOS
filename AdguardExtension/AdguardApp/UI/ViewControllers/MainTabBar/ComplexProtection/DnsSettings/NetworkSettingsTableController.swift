@@ -17,8 +17,9 @@
 */
 
 import UIKit
+import SharedAdGuardSDK
 
-class NetworkSettingsTableController: UITableViewController, AddRuleControllerDelegate, NetworkSettingsChangedDelegate {
+class NetworkSettingsTableController: UITableViewController, AddRuleControllerDelegate, NetworkSettingsChangedDelegate, RuleDetailsControllerDelegate {
     
     /* Cell reuse ids */
     private let networkSettingsTitleCellId = "NetworkSettingsTitleCell"
@@ -76,9 +77,8 @@ class NetworkSettingsTableController: UITableViewController, AddRuleControllerDe
     }
     
     @IBAction func exeptionStateAction(_ sender: UIButton) {
-        if let exeption = model?.exceptions[sender.tag] {
-            model?.change(rule: exeption.rule, newEnabled: !exeption.enabled)
-        }
+        let index = sender.tag
+        model?.toggleRuleEnabled(index: index)
     }
     
     // MARK: - Table view data source
@@ -143,12 +143,12 @@ class NetworkSettingsTableController: UITableViewController, AddRuleControllerDe
     
     // MARK: - RuleDetailsControllerDelegate
     
-    func removeRule(rule: RuleInfo) {
-        model?.delete(rule: rule.rule)
+    func removeRule(_ ruleText: String, at indexPath: IndexPath) throws {
+        model?.deleteRule(index: indexPath.row)
     }
     
-    func changeRule(rule: RuleInfo, newText: String) {
-        model?.change(rule: rule.rule, newRule: newText)
+    func modifyRule(_ oldRuleText: String, newRule: UserRule, at indexPath: IndexPath) throws {
+        model?.changeRule(index: indexPath.row, newRule: newRule.ruleText)
     }
     
     // MARK: - NetworkSettingsChangedDelegate method
@@ -249,9 +249,10 @@ class NetworkSettingsTableController: UITableViewController, AddRuleControllerDe
         let storyboard = UIStoryboard(name: "UserFilter", bundle: nil)
         guard let controller = storyboard.instantiateViewController(withIdentifier: "RuleDetailsController") as? RuleDetailsController else { return }
         guard let exception = model?.exceptions[row] else { return }
+
+        let rule = UserRule(ruleText: exception.rule, isEnabled: true)
         
-        let rule = RuleInfo(exception.rule, false, true, theme)
-        
+        controller.context = RuleDetailsController.Context(rule: rule, ruleIndexPath: IndexPath(row: 0, section: 0), delegate: self, ruleType: .wifiExceptions)
             
         present(controller, animated: true, completion: nil)
     }

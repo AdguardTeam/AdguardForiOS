@@ -27,9 +27,9 @@ protocol NetworkSettingsModelProtocol {
     
     /* Methods */
     func addException(rule: String)
-    func delete(rule: String)
-    func change(rule: String, newRule: String)
-    func change(rule: String, newEnabled: Bool)
+    func deleteRule(index: Int)
+    func changeRule(index: Int, newRule: String)
+    func toggleRuleEnabled(index: Int)
     
 }
 
@@ -101,34 +101,23 @@ class NetworkSettingsModel: NetworkSettingsModelProtocol {
         vpnManager.updateSettings(completion: nil)
     }
     
-    func delete(rule: String) {
-        for exception in exceptions {
-            if exception.rule == rule {
-                networkSettingsService.delete(exception: exception)
-                vpnManager.updateSettings(completion: nil)
-            }
-        }
+    func deleteRule(index: Int) {
+        let exception = exceptions[index]
+        networkSettingsService.delete(exception: exception)
+        vpnManager.updateSettings(completion: nil)
     }
     
-    func change(rule: String, newRule: String) {
-        for exception in exceptions {
-            if exception.rule == rule {
-                let newException = WifiException(rule: newRule, enabled: exception.enabled)
-                networkSettingsService.change(oldException: exception, newException: newException)
-                vpnManager.updateSettings(completion: nil)
-            }
-        }
+    func changeRule(index: Int, newRule: String) {
+        let exception = exceptions[index]
+        let newException = WifiException(rule: newRule, enabled: exception.enabled)
+        networkSettingsService.change(oldException: exception, newException: newException)
+        vpnManager.updateSettings(completion: nil)
     }
     
-    func change(rule: String, newEnabled: Bool) {
-        for exception in exceptions {
-            if exception.rule == rule {
-                let newException = WifiException(rule: exception.rule, enabled: newEnabled)
-                networkSettingsService.change(oldException: exception, newException: newException)
-                vpnManager.updateSettings(completion: nil)
-            }
-        }
+    func toggleRuleEnabled(index: Int) {
+        let exception = exceptions[index]
+        let newException = WifiException(rule: exception.rule, enabled: !exception.enabled)
+        networkSettingsService.change(oldException: exception, newException: newException)
+        vpnManager.updateSettings(completion: nil)
     }
-    
-    // MARK: - Private methods
 }
