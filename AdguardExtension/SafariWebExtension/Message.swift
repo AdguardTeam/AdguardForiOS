@@ -41,6 +41,7 @@ struct Message {
     static let premiumApp = "premium_app"
     static let appearanceTheme = "appearance_theme"
     static let contentBlockersEnabled = "content_blockers_enabled"
+    static let advancedBlockingEnabled = "advanced_blocking_enabled"
 
     // Links
     static let removeFromAllowlistLink = "remove_from_allowlist_link"
@@ -48,6 +49,7 @@ struct Message {
     static let addToBlocklistLink = "add_to_blocklist_link"
     static let removeAllBlocklistRulesLink = "remove_all_blocklist_rules_link"
     static let upgradeAppLink = "upgrade_app_link"
+    static let enableAdvancedBlockingLink = "enable_advanced_blocking_link"
     static let reportProblemLink = "report_problem_link"
 
     // Advanced rules

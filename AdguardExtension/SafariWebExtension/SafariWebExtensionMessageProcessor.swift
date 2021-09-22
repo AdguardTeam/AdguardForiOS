@@ -68,12 +68,14 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
             Message.hasUserRules: hasUserRules,
             Message.premiumApp: isPro,
             Message.protectionEnabled: isSafariProtectionEnabled(for: domain, resources: resources),
+            Message.advancedBlockingEnabled: false,
 
             Message.removeFromAllowlistLink: UserRulesRedirectAction.removeFromAllowlist(domain: "").scheme,
             Message.addToAllowlistLink: UserRulesRedirectAction.addToAllowlist(domain: "").scheme,
             Message.addToBlocklistLink: UserRulesRedirectAction.addToBlocklist(domain: "").scheme,
             Message.removeAllBlocklistRulesLink: UserRulesRedirectAction.removeAllBlocklistRules(domain: "").scheme,
             Message.upgradeAppLink: "\(Bundle.main.appScheme)://upgradeApp",
+            Message.enableAdvancedBlockingLink: "\(Bundle.main.appScheme)://enableAdvancedProtection",
             Message.reportProblemLink: constructReportLink(domain ?? "unknown")
         ]
     }

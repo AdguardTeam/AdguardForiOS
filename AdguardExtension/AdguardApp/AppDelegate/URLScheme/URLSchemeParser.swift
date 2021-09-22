@@ -16,6 +16,7 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// TODO: - We need to write links creator; Now it looks awful to construct links in different targets
 
 /* URL's that might be processed
  <adguardScheme> = adguard or adguard-pro
@@ -32,6 +33,7 @@
  10. <adguardScheme>://safariWebExtension?action=<ACTION>&domain=<DOMAIN> <--- Open with safari web extension action
     <ACTION> = removeFromAllowlist or addToAllowlist or addToBlocklist or removeAllBlocklistRules
  11. <adguardScheme>://upgradeApp <--- Open License screen
+ 12. <adguardScheme>://enableAdvancedProtection <--- Open Advanced protection screen
  */
 
 protocol IURLSchemeParser {
@@ -51,6 +53,7 @@ fileprivate enum StringConstants: String {
     case urlSchemeCommandAdd = "add"
     case urlSchemeSafariWebExtension = "safariWebExtension"
     case upgradeApp = "upgradeApp"
+    case enableAdvancedProtection = "enableAdvancedProtection"
 
     static func getStringConstant(string: String?) -> StringConstants? {
         guard let string = string else { return nil }
@@ -167,6 +170,12 @@ struct URLSchemeParser: IURLSchemeParser {
             guard !configurationService.proStatus else { return false }
                     
             let processor = OpenLicenseControllerParser(executor: executor)
+            return processor.parse(url)
+            
+            // Open license controller
+        case (.urlScheme, .enableAdvancedProtection):
+            DDLogInfo("(URLSchemeParser) openurl - open advanced protection screen; proStatus=\(configurationService.proStatus)")
+            let processor = OpenAdvancedProtectionParser(executor: executor)
             return processor.parse(url)
             
         default: return false

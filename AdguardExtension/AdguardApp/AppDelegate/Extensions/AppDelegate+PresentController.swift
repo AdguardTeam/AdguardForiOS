@@ -606,6 +606,25 @@ extension AppDelegate {
         window?.rootViewController = tabBar
     }
     
+    func presentAdvancedProtectionController() -> Bool {
+        guard let tabBar = getMainTabController() else {
+            DDLogError("Tab bar is nil")
+            return false
+        }
+        
+        guard let navController = getNavigationController(for: .protectionTab) else {
+            DDLogError("Navigation controller is nil")
+            return false
+        }
+        
+        let protectionStoryboard = UIStoryboard(name: "Protection", bundle: .main)
+        guard let complexProtectionController = protectionStoryboard.instantiateViewController(withIdentifier: "ComplexProtectionController") as? ComplexProtectionController else {
+            DDLogError("Protection.storyboard doesnt't have ComplexProtectionController")
+            return false
+        }
+        return true
+    }
+    
     /* Returns top view controller for controller  */
     static func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
         if let navigationController = controller as? UINavigationController {
