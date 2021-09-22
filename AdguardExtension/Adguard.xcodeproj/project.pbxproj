@@ -917,7 +917,6 @@
 		7ECD9C56238D67560065E88D /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0C6219EFC99002C17D9 /* DDFileLogger.m */; };
 		7ECD9C58238D67890065E88D /* ACLFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01BC1C6B7686000F00D7 /* ACLFileLogger.m */; };
 		7ECD9C63238E6E2E0065E88D /* ADLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8C1BB9824C00F53F3B /* ADLocations.m */; };
-		7ECEBEF22359D0210007D0C1 /* NetworkSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */; };
 		7ECF38BB23AA43A300A39094 /* DnsLogContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECF38BA23AA43A300A39094 /* DnsLogContainerController.swift */; };
 		7ED0B19626C40DCA00B0CE7B /* Setapp in Frameworks */ = {isa = PBXBuildFile; productRef = D093AA5F25344B4E0015351F /* Setapp */; };
 		7ED0B19726C40DCA00B0CE7B /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = A5E02630261E330900198396 /* AGDnsProxy */; };
@@ -1525,6 +1524,7 @@
 		D081FC352418EB8E000A10DA /* SafariProtectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D081FC2A2418EB38000A10DA /* SafariProtectionService.swift */; };
 		D081FC3724190CA8000A10DA /* DnsProvidersServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D081FC3624190CA8000A10DA /* DnsProvidersServiceTest.swift */; };
 		D082D50A2310047E00799D98 /* AASFilterSubscriptionParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D082D5092310047E00799D98 /* AASFilterSubscriptionParserTest.swift */; };
+		D08A21A326FB8CB700267930 /* NetworkSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */; };
 		D08CE427240D37D600A70089 /* ConfigurationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CB347A212DD1AB003B650E /* ConfigurationService.swift */; };
 		D08CE428240D37E300A70089 /* PurchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F91179213422E1006DF0D3 /* PurchaseService.swift */; };
 		D08CE429240D389800A70089 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F7F0C72268946700592B1E /* KeychainService.swift */; };
@@ -1832,7 +1832,6 @@
 		D0B543FB2435C6B8002F0AEC /* ACNHttpUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01FE1C6B7686000F00D7 /* ACNHttpUtils.m */; };
 		D0B543FE2435C6B8002F0AEC /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A020F1C6B7686000F00D7 /* Reachability.m */; };
 		D0B543FF2435C6B8002F0AEC /* ADProductInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EC9A8F1BB9824C00F53F3B /* ADProductInfo.m */; };
-		D0B544002435C6B8002F0AEC /* NetworkSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */; };
 		D0B544022435C6B8002F0AEC /* APCommonSharedResources.m in Sources */ = {isa = PBXBuildFile; fileRef = D05CA86C1F3B6455006DFD7F /* APCommonSharedResources.m */; };
 		D0B544042435C6B8002F0AEC /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0C6219EFC99002C17D9 /* DDFileLogger.m */; };
 		D0B544052435C6B8002F0AEC /* DDLoggerNames.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0C4219EFC99002C17D9 /* DDLoggerNames.m */; };
@@ -1930,7 +1929,6 @@
 		D0B544C92435C6BF002F0AEC /* NSException+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01EE1C6B7686000F00D7 /* NSException+Utils.m */; };
 		D0B544CA2435C6BF002F0AEC /* DnsProviderInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C940F923ED6073008B85EC /* DnsProviderInfo.swift */; };
 		D0B544CC2435C6BF002F0AEC /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0A7219EFC99002C17D9 /* DDTTYLogger.m */; };
-		D0B544CD2435C6BF002F0AEC /* NetworkSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */; };
 		D0B544CF2435C6BF002F0AEC /* UIColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9116D212FFCD6006DF0D3 /* UIColorUtils.swift */; };
 		D0B544D02435C6BF002F0AEC /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0C6219EFC99002C17D9 /* DDFileLogger.m */; };
 		D0B544D22435C6BF002F0AEC /* SafariProtectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D081FC2A2418EB38000A10DA /* SafariProtectionService.swift */; };
@@ -9410,7 +9408,6 @@
 				D07373A326EB5F0A007366F8 /* LowLevelDnsConfiguration+Utils.swift in Sources */,
 				D0C9410323ED60B2008B85EC /* DnsProviderInfo.swift in Sources */,
 				D0569D5921F1C0A800985DA9 /* DDTTYLogger.m in Sources */,
-				7ECEBEF22359D0210007D0C1 /* NetworkSettingsService.swift in Sources */,
 				7E85766C2435F1FB0055F63D /* ParsedHost.swift in Sources */,
 				2425D73A258F8D1A0037AEBE /* CharacterSet+Utils.swift in Sources */,
 				D06DE02A2346298900A70D85 /* UIColorUtils.swift in Sources */,
@@ -10064,7 +10061,6 @@
 				D0D7E5EA24444ECE001801A5 /* Rule.swift in Sources */,
 				D0B543FE2435C6B8002F0AEC /* Reachability.m in Sources */,
 				D0B543FF2435C6B8002F0AEC /* ADProductInfo.m in Sources */,
-				D0B544002435C6B8002F0AEC /* NetworkSettingsService.swift in Sources */,
 				D0B544022435C6B8002F0AEC /* APCommonSharedResources.m in Sources */,
 				D0D7E5FF24444F95001801A5 /* DnsStatisticsRecord.swift in Sources */,
 				D0D7E5FD24444F89001801A5 /* Constant.swift in Sources */,
@@ -10077,6 +10073,7 @@
 				7EE8AC1D26C595F60070D477 /* ThemeMode.swift in Sources */,
 				7E707F8B26F0EAE100882005 /* Configuration+SDKConfig.swift in Sources */,
 				D0B544062435C6B8002F0AEC /* ComplexProtectionService.swift in Sources */,
+				D08A21A326FB8CB700267930 /* NetworkSettingsService.swift in Sources */,
 				246388AA26EA4CDA004FBA9E /* DispatchQueue+Utils.swift in Sources */,
 				D0B544072435C6B8002F0AEC /* ACLFileLogger.m in Sources */,
 				D06E9BDE268EFA3300E5AB5C /* ABECRequest.m in Sources */,
@@ -10242,7 +10239,6 @@
 				D0B544CA2435C6BF002F0AEC /* DnsProviderInfo.swift in Sources */,
 				D0D7E5E724444EC1001801A5 /* ParsedHost.swift in Sources */,
 				D0B544CC2435C6BF002F0AEC /* DDTTYLogger.m in Sources */,
-				D0B544CD2435C6BF002F0AEC /* NetworkSettingsService.swift in Sources */,
 				7EAD353D26C2D5E4001AFB3A /* DnsProviders.swift in Sources */,
 				D0B544CF2435C6BF002F0AEC /* UIColorUtils.swift in Sources */,
 				D0B544D02435C6BF002F0AEC /* DDFileLogger.m in Sources */,

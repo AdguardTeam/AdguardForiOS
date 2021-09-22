@@ -21,26 +21,55 @@ import SystemConfiguration.CaptiveNetwork
 import NetworkExtension
 import SharedAdGuardSDK
 
+/** struct for using in NetworkSettingsTableController */
 struct WifiException: Equatable, Codable {
-    var rule: String
-    var enabled: Bool
+    // rule - ssid the цш-аш network in which the dns filtering should not work
+    let rule: String
+    
+    // state of rule
+    let enabled: Bool
 }
 
+/** delegate protocol is used for notification about chnges in view model */
 protocol NetworkSettingsChangedDelegate {
+    
+    // called on any change of model
     func settingsChanged()
 }
 
+/** The NetworkSettingsService is responsible for storing DNS Network settings
+    Also it constructs ondemand rules for vpn manager.
+ */
 protocol NetworkSettingsServiceProtocol: AnyObject {
+    // wi-fi exception rules
     var exceptions: [WifiException] { get }
+    
+    // array of active wi-fi exceptions
     var enabledExceptions: [WifiException] { get }
+    
+    // DNs filtering is enabled when connected to Wi-Fi
     var filterWifiDataEnabled: Bool { get set }
+    
+    // DNs filtering is enabled when connected to mobile network
     var filterMobileDataEnabled: Bool { get set }
+    
+    // delegate for change notifications
     var delegate: NetworkSettingsChangedDelegate? { get set }
+    
+    // ondemand rules based on network settings and used by the vpn manager
     var onDemandRules: [NEOnDemandRule] { get }
     
+    // adds an exception. Throws error if such ssid already exists in the exclusion list
     func add(exception: WifiException) throws
+    
+    // deletes an exception
     func delete(exception: WifiException)
+    
+    // changes an exception(name or state or both). Throws error if error if newException already exists in the exclusion list
     func change(oldException: WifiException, newException: WifiException) throws
+    
+    // fetches current wi-fi name. Wi-fi name returns in completionHandler asyncronously in main thread
+    // it returns nit on ios 15 due to ios bug https://developer.apple.com/forums/thread/670970
     func fetchCurrentWiFiName(_ completionHandler: @escaping (String?)->Void)
 }
 
@@ -115,7 +144,7 @@ final class NetworkSettingsService: NetworkSettingsServiceProtocol {
     }
     
     func add(exception: WifiException) throws {
-        if !exceptions.contains(exception){
+        if !exceptions.contains(where: { $0.rule == exception.rule }){
             exceptions.append(exception)
             
             saveExceptions()
@@ -131,11 +160,10 @@ final class NetworkSettingsService: NetworkSettingsServiceProtocol {
 
             saveExceptions()
         }
-        
     }
     
     func change(oldException: WifiException, newException: WifiException) throws {
-        if exceptions.contains(newException) {
+        if exceptions.contains(where: { $0.rule == newException.rule }) {
             throw UserRulesStorageError.ruleAlreadyExists(ruleString: newException.rule)
         }
         
@@ -159,7 +187,9 @@ final class NetworkSettingsService: NetworkSettingsServiceProtocol {
                 for interface in interfaces {
                     if let interfaceInfo = CNCopyCurrentNetworkInfo(interface as! CFString) as NSDictionary? {
                         let ssid = interfaceInfo[kCNNetworkInfoKeySSID as String] as? String
-                        completionHandler(ssid)
+                        DispatchQueue.asyncSafeMain {
+                            completionHandler(ssid)
+                        }
                     }
                 }
             }
