@@ -31,28 +31,26 @@ struct DnsLogRecordCategory{
 class DnsLogRecordExtended {
     let logRecord: DnsLogRecord
     let category: DnsLogRecordCategory
-    let dnsFiltersService: DnsFiltersServiceProtocol
     
-    init(record: DnsLogRecord, category: DnsLogRecordCategory, dnsFiltersService: DnsFiltersServiceProtocol) {
+    init(record: DnsLogRecord, category: DnsLogRecordCategory) {
         self.logRecord = record
         self.category = category
-        self.dnsFiltersService = dnsFiltersService
     }
     
     lazy var matchedFilters: String? = {
-        let allFilters = dnsFiltersService.filters
-        let filterNames = logRecord.matchedFilterIds?.map {(filterId) -> String in
-            if filterId == DnsFilter.userFilterId {
-                return String.localizedString("system_blacklist")
-            }
-            if filterId == DnsFilter.whitelistFilterId {
-                return String.localizedString("system_whitelist")
-            }
-            
-            let filter = allFilters.first { (filter) in filter.id == filterId }
-            return filter?.name ?? ""
-        }
-        return filterNames?.joined(separator: "\n") ?? nil
+//        let allFilters = dnsFiltersService.filters
+//        let filterNames = logRecord.matchedFilterIds?.map {(filterId) -> String in
+//            if filterId == 0 { // DnsFilter.userFilterId
+//                return String.localizedString("system_blacklist")
+//            }
+//            if filterId == 1 { // DnsFilter.whitelistFilterId
+//                return String.localizedString("system_whitelist")
+//            }
+//
+//            let filter = allFilters.first { (filter) in filter.id == filterId }
+//            return filter?.name ?? ""
+//        }
+        return nil//filterNames?.joined(separator: "\n") ?? nil
     }()
 }
 
@@ -182,7 +180,6 @@ class DnsRequestLogViewModel {
     // MARK: - private fields
     
     private let dnsTrackerService: DnsTrackerServiceProtocol
-    private let dnsFiltersService: DnsFiltersServiceProtocol
     
     private var allRecords = [DnsLogRecordExtended]()
     private var searchRecords = [DnsLogRecordExtended]()
@@ -190,9 +187,8 @@ class DnsRequestLogViewModel {
     private let workingQueue = DispatchQueue(label: "DnsRequestLogViewModel queue")
     
     // MARK: - init
-    init(dnsTrackerService: DnsTrackerServiceProtocol, dnsFiltersService: DnsFiltersServiceProtocol) {
+    init(dnsTrackerService: DnsTrackerServiceProtocol) {
         self.dnsTrackerService = dnsTrackerService
-        self.dnsFiltersService = dnsFiltersService
         self.searchString = ""
     }
     

@@ -21,7 +21,12 @@ import Foundation
 extension AESharedResourcesProtocol {
     dynamic var isDebugLogs: Bool {
         get {
-            return sharedDefaults().bool(forKey: AEDefaultsDebugLogs)
+            #if DEBUG
+            let isDebugLogs = true
+            #else
+            let isDebugLogs = sharedDefaults().bool(forKey: AEDefaultsDebugLogs)
+            #endif
+            return isDebugLogs
         }
         set {
             sharedDefaults().set(newValue, forKey: AEDefaultsDebugLogs)

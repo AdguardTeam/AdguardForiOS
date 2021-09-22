@@ -21,16 +21,16 @@ import ContentBlockerConverter
 
 /* This struct is used to represent Converted Lib result and return only usefull info */
 public struct FiltersConverterResult: Codable, Equatable {
-    let type: ContentBlockerType // Content blocker type the result is related with
-    let jsonString: String // String representation of converted JSON we receive from Converter Lib
-    let totalRules: Int // Total valis rules number, because some rules that we pass can be invalid
-    let totalConverted: Int // The result number of rules with Content blockers limit of 'contentBlockerRulesLimit' rules
-    let overlimit: Bool // Is true if totalRules is greater than 'contentBlockerRulesLimit' rules
-    let errorsCount: Int // Number of errors handled
-    let advancedBlockingConvertedCount: Int // Number of entries in advanced blocking part
-    let advancedBlockingJson: String? // Json string of advanced content blocker rules
-    let advancedBlockingText: String? // Text of advanced content blocker rules
-    let message: String // Result message
+    public let type: ContentBlockerType // Content blocker type the result is related with
+    public let jsonString: String // String representation of converted JSON we receive from Converter Lib
+    public let totalRules: Int // Total valis rules number, because some rules that we pass can be invalid
+    public let totalConverted: Int // The result number of rules with Content blockers limit of 'contentBlockerRulesLimit' rules
+    public let overlimit: Bool // Is true if totalRules is greater than 'contentBlockerRulesLimit' rules
+    public let errorsCount: Int // Number of errors handled
+    public let advancedBlockingConvertedCount: Int // Number of entries in advanced blocking part
+    public let advancedBlockingJson: String? // Json string of advanced content blocker rules
+    public let advancedBlockingText: String? // Text of advanced content blocker rules
+    public let message: String // Result message
     
     public init(type: ContentBlockerType, jsonString: String, totalRules: Int, totalConverted: Int, overlimit: Bool, errorsCount: Int, advancedBlockingConvertedCount: Int, advancedBlockingJson: String?, advancedBlockingText: String?, message: String) {
         self.type = type
