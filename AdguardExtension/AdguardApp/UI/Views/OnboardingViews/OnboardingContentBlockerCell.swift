@@ -18,10 +18,7 @@
 
 import UIKit
 
-/**
- OnboardingContentBlockerCell - Custom onboarding table view cell
- */
-
+/// OnboardingContentBlockerCell - Custom onboarding table view cell
 final class OnboardingContentBlockerCell: UITableViewCell {
     //MARK: - Properties
     private let uiSwitch: UISwitch = {

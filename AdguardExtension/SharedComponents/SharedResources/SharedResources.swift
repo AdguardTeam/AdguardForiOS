@@ -373,43 +373,47 @@ extension AESharedResourcesProtocol {
     /* Advanced protection state */
     dynamic var advancedProtection: Bool {
         get {
-            sharedDefaults().bool(forKey: AdvancedProtection)
+            sharedDefaults().bool(forKey: advancedProtectionKey)
         }
         set {
-            sharedDefaults().set(newValue, forKey: AdvancedProtection)
+            sharedDefaults().set(newValue, forKey: advancedProtectionKey)
         }
     }
     /* Advanced protection permission granted for Safari Web Extension */
     dynamic var advancedProtectionPermissionsGranted: Bool {
         get {
-            sharedDefaults().bool(forKey: AdvancedProtectionPermissionsGranted)
+            sharedDefaults().bool(forKey: advancedProtectionPermissionsGrantedKey)
         }
         set {
-            sharedDefaults().set(newValue, forKey: AdvancedProtectionPermissionsGranted)
+            sharedDefaults().set(newValue, forKey: advancedProtectionPermissionsGrantedKey)
         }
     }
     /* Safari Web Extension in enabled */
     dynamic var safariWebExtensionIsOn: Bool {
         get {
-            sharedDefaults().bool(forKey: SafariWebExtensionIsOn)
+            sharedDefaults().bool(forKey: safariWebExtensionIsOnKey)
         }
         set {
-            sharedDefaults().set(newValue, forKey: SafariWebExtensionIsOn)
+            sharedDefaults().set(newValue, forKey: safariWebExtensionIsOnKey)
         }
     }
     
     dynamic var advancedProtectionWhatsNewScreenShown: Bool {
         get {
-            sharedDefaults().bool(forKey: AdvancedProtectionWhatsNewScreenShown)
+            sharedDefaults().bool(forKey: advancedProtectionWhatsNewScreenShownKey)
         }
         set {
-            sharedDefaults().set(newValue, forKey: AdvancedProtectionWhatsNewScreenShown)
+            sharedDefaults().set(newValue, forKey: advancedProtectionWhatsNewScreenShownKey)
         }
     }
 }
 
 fileprivate extension AESharedResourcesProtocol {
     var setAppUsedKey: String { "setAppActivatedKey" }
+    var advancedProtectionKey: String  { "advancedProtectionKey" }
+    var advancedProtectionPermissionsGrantedKey: String { "advancedProtectionPermissionsGrantedKey" }
+    var safariWebExtensionIsOnKey: String { "safariWebExtensionIsOnKey" }
+    var advancedProtectionWhatsNewScreenShownKey: String { "advancedProtectionWhatsNewScreenShownKey" }
 }
 
 extension Notification.Name {

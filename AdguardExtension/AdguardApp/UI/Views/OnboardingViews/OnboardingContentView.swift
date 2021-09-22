@@ -18,10 +18,7 @@
 
 import UIKit
 
-/**
- OnboardingContentView - Custom view for Onboarding screen with changeable content
- */
-
+/// OnboardingContentView - Custom view for Onboarding screen with changeable content
 final class OnboardingContentView: UIView {
     enum OnboardingType: Int {
         case withAdvancedProtection
@@ -39,6 +36,7 @@ final class OnboardingContentView: UIView {
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
     //MARK: - Properties
+    //TODO: Make dynamic content blockers name and icon
     private let contentBlockers = ["AdGuard — Custom", "AdGuard — General", "AdGuard — Other"]
     private let cellsAlpha = [1.0, 0.6, 0.2]
     private let cellReuseId = "OnboardingContentBlockerCell"

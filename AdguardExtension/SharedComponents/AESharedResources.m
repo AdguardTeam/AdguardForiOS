@@ -124,16 +124,6 @@ NSString *BlockIpv6 = @"BlockIpv6";
 
 NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
 
-NSString* AdvancedProtection = @"AdvancedProtection";
-
-NSString* AdvancedProtectionPermissionsGranted = @"AdvancedProtectionPermissionsGranted";
-
-NSString* SafariWebExtensionIsOn = @"SafariWebExtensionIsOn";
-
-NSString* AdvancedProtectionWhatsNewScreenShown = @"AdvancedProtectionWhatsNewScreenShown";
-
-NSString* BackgroundFetchUpdatePeriod = @"BackgroundFetchUpdatePeriod";
-
 #define AES_HOST_APP_USERDEFAULTS               @"host-app-userdefaults.data"
 
 /////////////////////////////////////////////////////////////////////

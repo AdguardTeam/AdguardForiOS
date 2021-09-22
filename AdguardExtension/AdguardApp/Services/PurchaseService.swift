@@ -20,6 +20,7 @@ import Foundation
 import StoreKit
 import CommonCrypto
 import Setapp
+import class SharedAdGuardSDK.Atomic
 
 typealias Period = (unit: PurchasePeriod, numberOfUnits: Int)
 

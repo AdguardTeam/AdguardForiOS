@@ -178,6 +178,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     // MARK: - Observers
     private var appWillEnterForeground: NotificationToken?
     private var vpnConfigurationObserver: NotificationToken!
+    private var contentBlockerObserver: NotificationToken!
     private var dnsImplementationObserver: NotificationToken?
     private var currentDnsServerObserver: NotificationToken?
     private var proStatusObserver: NotificationToken?
@@ -576,11 +577,9 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             self?.processState()
         }
         
-        // todo: handle notifications from sdk
-//        let contenBlockerObservation = configuration.observe(\.contentBlockerEnabled) {[weak self] (_, _) in
-//            guard let self = self else { return }
-//            self.observeContentBlockersState()
-//        }
+        contentBlockerObserver = NotificationCenter.default.observe(name: .contentBlockersStateChanged, object: nil, queue: .main) { [weak self] _ in
+            self?.observeContentBlockersState()
+        }
         
         vpnConfigurationObserver = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: .main) { [weak self] _ in
             self?.updateProtectionStates()
@@ -595,7 +594,6 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         currentDnsServerObserver = NotificationCenter.default.observe(name: .currentDnsServerChanged, object: nil, queue: .main) { [weak self] _ in
             self?.processDnsServerChange()
         }
-//        observations.append(contenBlockerObservation)
     }
     
     /**
@@ -839,13 +837,11 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     }
     
     private func showWhatsNewWithAdvancedProtectionInfo(_ completion: (() -> Void)?) {
-        DispatchQueue.main.async { [weak self] in
-            let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
-            if let controller = storyboard.instantiateViewController(withIdentifier: "WhatsNewBottomAlertController") as? WhatsNewBottomAlertController {
-                controller.onDismissCompletion = completion
-                controller.delegate = self
-                self?.present(controller, animated: true)
-            }
+        let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
+        if let controller = storyboard.instantiateViewController(withIdentifier: "WhatsNewBottomAlertController") as? WhatsNewBottomAlertController {
+            controller.onDismissCompletion = completion
+            controller.delegate = self
+            present(controller, animated: true)
         }
     }
     

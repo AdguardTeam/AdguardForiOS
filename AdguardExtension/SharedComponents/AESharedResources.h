@@ -328,31 +328,6 @@ extern NSString* _Nonnull BlockIpv6;
  */
 extern NSString* _Nonnull LastDnsFiltersUpdateTime;
 
-/**
- User defaults key for advanced protection state
- */
-extern NSString* _Nonnull AdvancedProtection;
-
-/**
- User defaults key for advanced protection permissions granted state
- */
-extern NSString* _Nonnull AdvancedProtectionPermissionsGranted;
-
-/**
- User defaults key for safari web extension is on state
- */
-extern NSString* _Nonnull SafariWebExtensionIsOn;
-
-/**
- User defaults key for advanced protection whats new info screen shown
- */
-extern NSString* _Nonnull AdvancedProtectionWhatsNewScreenShown;
-
-/**
- Selected minimum background fetch period from low-level settings
- */
-extern NSString* _Nonnull BackgroundFetchUpdatePeriod;
-
 /////////////////////////////////////////////////////////////////////
 #pragma mark - AESharedResources
 /////////////////////////////////////////////////////////////////////
