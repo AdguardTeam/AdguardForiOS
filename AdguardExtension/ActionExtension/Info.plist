@@ -8,10 +8,6 @@
 	<string>$(AG_PRODUCT)</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
-	<key>CFBundleIcons</key>
-	<dict/>
-	<key>CFBundleIcons~ipad</key>
-	<dict/>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -22,10 +18,10 @@
 	<string>XPC!</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(AG_VERSION)</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(AG_BUILD)</string>
+	<key>HostAppBundleId</key>
+	<string>$(ADGUARD_BUNDLE_ID)</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -50,5 +46,7 @@
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.ui-services</string>
 	</dict>
+	<key>SharedResourcesGroup</key>
+	<string>$(ADGUARD_SHARED_RESOURCES_GROUP)</string>
 </dict>
 </plist>

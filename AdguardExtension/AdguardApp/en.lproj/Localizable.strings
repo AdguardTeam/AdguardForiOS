@@ -595,6 +595,9 @@
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_notification_title" = "Turn off some filters for correct work";
 
+/* (DnsFiltersTableController) - DNS filters title */
+"dns_filters_title" = "DNS filters";
+
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Blocked";
 

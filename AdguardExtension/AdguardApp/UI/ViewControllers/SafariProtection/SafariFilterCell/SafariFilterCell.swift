@@ -73,8 +73,6 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         return label
     }()
     
-    private var descriptionLabels: [ThemableLabel] = []
-    
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -143,7 +141,6 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         super.prepareForReuse()
         titleLabel.text = nil
         titleLabel.attributedText = nil
-        descriptionLabels.forEach { $0.text = nil }
     }
     
     // MARK: - Private methods
@@ -301,6 +298,5 @@ extension SafariFilterCell: ThemableProtocol {
     func updateTheme() {
         themeService.setupTableCell(self)
         themeService.setupLabel(titleLabel)
-        themeService.setupLabels(descriptionLabels)
     }
 }

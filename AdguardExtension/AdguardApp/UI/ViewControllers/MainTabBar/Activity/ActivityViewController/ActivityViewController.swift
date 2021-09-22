@@ -66,7 +66,6 @@ class ActivityViewController: UITableViewController {
     private let dnsTrackersService: DnsTrackerServiceProtocol = ServiceLocator.shared.getService()!
     private let domainsParserService: DomainsParserServiceProtocol = ServiceLocator.shared.getService()!
     private let domainsConverter: DomainsConverterProtocol = DomainsConverter()
-    private let dnsFiltersService: DnsFiltersServiceProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - Notifications
     private var keyboardShowToken: NotificationToken?
@@ -449,7 +448,7 @@ class ActivityViewController: UITableViewController {
         let isOriginalRecord = record.userStatus == .none || record.userStatus == .modified
         let rules = isOriginalRecord ? record.blockRules : [record.userRule ?? ""]
         
-        dnsFiltersService.removeUserRules(rules ?? [])
+        //dnsFiltersService.removeUserRules(rules ?? [])
         set(record.userStatus == .movedToBlacklist ? .modified : .removedFromBlacklist)
     }
     
@@ -458,7 +457,7 @@ class ActivityViewController: UITableViewController {
         let isOriginalRecord = record.userStatus == .none || record.userStatus == .modified
         let rules = isOriginalRecord ? record.blockRules : [userDomain]
 
-        dnsFiltersService.removeWhitelistRules(rules ?? [])
+        //dnsFiltersService.removeWhitelistRules(rules ?? [])
         set(record.userStatus == .movedToWhitelist ? .modified : .removedFromWhitelist)
     }
     
@@ -598,12 +597,12 @@ extension ActivityViewController: AddDomainToListDelegate {
         if type == .addDomainToWhitelist {
             let rule = needsCorrecting ? domainsConverter.whitelistRuleFromDomain(domain) : domain
             swipedRecord.logRecord.userRule = rule
-            dnsFiltersService.addWhitelistRule(rule)
+            //dnsFiltersService.addWhitelistRule(rule)
             set(swipedRecord.logRecord.userStatus == .removedFromWhitelist ? .modified : .movedToWhitelist, rule)
         } else if type == .addRuleToUserFlter {
             let rule = needsCorrecting ? domainsConverter.blacklistRuleFromDomain(domain) : domain
             swipedRecord.logRecord.userRule = rule
-            dnsFiltersService.addBlacklistRule(rule)
+            //dnsFiltersService.addBlacklistRule(rule)
             set(swipedRecord.logRecord.userStatus == .removedFromBlacklist ? .modified : .movedToBlacklist, rule)
         }
     }
