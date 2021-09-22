@@ -17,7 +17,7 @@
  */
 
 import SafariAdGuardSDK
-import UIKit.UIImage
+import UIKit
 
 protocol UserRulesRedirectControllerModelProtocol: AnyObject {
     var action: UserRulesRedirectAction { get set }
@@ -73,7 +73,7 @@ fileprivate extension UserRulesRedirectController.State {
     
     var description: String {
         switch self {
-        case .processing: return String.localizedString("user_rules_processing_desct")
+        case .processing: return String.localizedString("user_rules_processing_descr")
         case .done(let action): return action.description
         }
     }
@@ -92,12 +92,15 @@ fileprivate extension UserRulesRedirectAction {
     }
     
     var description: String {
+        let color = UIColor.AdGuardColor.lightGreen1
+        let format: String
         switch self {
-        case .removeFromAllowlist(let domain): return "removeFromAllowlist Waiting for content \(domain)"
-        case .addToAllowlist(let domain): return "addToAllowlist Waiting for content \(domain)"
-        case .addToBlocklist(let domain): return "addToBlocklist Waiting for content \(domain)"
-        case .removeAllBlocklistRules(let domain): return "removeAllBlocklistRules Waiting for content \(domain)"
+        case .removeFromAllowlist(_): format = String.localizedString("user_rules_allowlist_rule_removed")
+        case .addToAllowlist(_): format = String.localizedString("user_rules_allowlist_rule_added")
+        case .addToBlocklist(_): format = String.localizedString("user_rules_blocklist_rule_added")
+        case .removeAllBlocklistRules(_): format = String.localizedString("user_rules_blocklist_rules_removed")
         }
+        return String(format: format, color.hex())
     }
     
     var icon: UIImage? {

@@ -16,7 +16,8 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
+import UIKit
+import enum SharedAdGuardSDK.UserRuleType
 
 // TODO: - We should check all these methods because practically all the screens changed
 extension AppDelegate {
@@ -565,6 +566,44 @@ extension AppDelegate {
         window?.rootViewController = tabBar
         
         return true
+    }
+    
+    func presentUserRulesTableController(for type: UserRuleType) {
+        guard let tabBar = getMainTabController() else {
+            DDLogError("Tab bar is nil")
+            return
+        }
+        
+        guard let navController = getNavigationController(for: .protectionTab) else {
+            DDLogError("Navigation controller is nil")
+            return
+        }
+        
+        let protectionStoryboard = UIStoryboard(name: "Protection", bundle: .main)
+        guard let complexProtectionController = protectionStoryboard.instantiateViewController(withIdentifier: "ComplexProtectionController") as? ComplexProtectionController else {
+            DDLogError("Protection.storyboard doesnt't have ComplexProtectionController")
+            return
+        }
+        
+        let filtersStoryboard = UIStoryboard(name: "Filters", bundle: .main)
+        guard let safariProtectionController = filtersStoryboard.instantiateViewController(withIdentifier: "SafariProtectionController") as? SafariProtectionController else {
+            DDLogError("Filters.storyboard doesnt't have SafariProtectionController")
+            return
+        }
+        
+        let userFilterStoryboard = UIStoryboard(name: "UserFilter", bundle: .main)
+        guard let userRulesTableController = userFilterStoryboard.instantiateViewController(withIdentifier: "UserRulesTableController") as? UserRulesTableController else {
+            DDLogError("UserFilter.storyboard doesnt't have UserRulesTableController")
+            return
+        }
+        
+        userRulesTableController.rulesType = type
+        navController.viewControllers = [complexProtectionController, safariProtectionController, userRulesTableController]
+        complexProtectionController.loadViewIfNeeded()
+        safariProtectionController.loadViewIfNeeded()
+        userRulesTableController.loadViewIfNeeded()
+        tabBar.selectedViewController = navController
+        window?.rootViewController = tabBar
     }
     
     /* Returns top view controller for controller  */

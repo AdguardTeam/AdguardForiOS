@@ -41,6 +41,7 @@ final class UserRulesRedirectController: BottomAlertController {
     @IBOutlet weak var descriptionLabel: ThemableLabel!
     @IBOutlet weak var okButton: UIButton!
     
+    private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     private var model: UserRulesRedirectControllerModelProtocol!
@@ -55,9 +56,6 @@ final class UserRulesRedirectController: BottomAlertController {
         activityIndicator.isHidden = false
         activityIndicator.hidesWhenStopped = true
         activityIndicator.startAnimating()
-        titleLabel.text = model.title
-        descriptionLabel.text = model.description
-        
         setupOkButton()
         updateTheme()
         
@@ -69,6 +67,16 @@ final class UserRulesRedirectController: BottomAlertController {
     }
     
     @IBAction func okButtonTapped(_ sender: UIButton) {
+        dismiss(animated: true)
+    }
+    
+    @IBAction func labelTapped(_ sender: UIButton) {
+        switch model.action {
+        case .addToAllowlist(domain: _), .removeFromAllowlist(domain: _):
+            AppDelegate.shared.presentUserRulesTableController(for: resources.invertedWhitelist ? .invertedAllowlist : .allowlist)
+        case .addToBlocklist(domain: _), .removeAllBlocklistRules(domain: _):
+            AppDelegate.shared.presentUserRulesTableController(for: .blocklist)
+        }
         dismiss(animated: true)
     }
     
@@ -96,7 +104,14 @@ final class UserRulesRedirectController: BottomAlertController {
     
     private func setTexts() {
         titleLabel.text = model.title
-        descriptionLabel.text = model.description
+        descriptionLabel.attributedText = NSMutableAttributedString.fromHtml(
+            model.description,
+            fontSize: descriptionLabel.font.pointSize,
+            color: themeService.lightGrayTextColor,
+            attachmentSettings: nil,
+            textAlignment: .center,
+            lineBreakMode: .byWordWrapping
+        )
     }
 }
 
@@ -108,5 +123,6 @@ extension UserRulesRedirectController: ThemableProtocol {
         themeService.setupLabel(titleLabel)
         themeService.setupLabel(descriptionLabel)
         activityIndicator.style = themeService.indicatorStyle
+        setTexts()
     }
 }

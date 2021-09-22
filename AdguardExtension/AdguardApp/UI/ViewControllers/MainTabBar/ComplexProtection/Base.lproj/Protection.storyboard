@@ -12,7 +12,7 @@
         <!--Complex Protection Controller-->
         <scene sceneID="j00-rM-Rdu">
             <objects>
-                <tableViewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="1Sw-2h-d5a" customClass="ComplexProtectionController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ComplexProtectionController" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="1Sw-2h-d5a" customClass="ComplexProtectionController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" id="cTr-tf-I9c">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

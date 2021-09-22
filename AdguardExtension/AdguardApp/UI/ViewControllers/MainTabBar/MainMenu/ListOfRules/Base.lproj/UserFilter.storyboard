@@ -428,8 +428,16 @@
                                             <action selector="okButtonTapped:" destination="7DJ-Q3-45Z" eventType="touchUpInside" id="u5F-Sv-krN"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLW-y4-v4v" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="109" width="382" height="17"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcz-w0-z5w">
+                                        <rect key="frame" x="16" y="80" width="382" height="14"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title=""/>
+                                        <connections>
+                                            <action selector="labelTapped:" destination="7DJ-Q3-45Z" eventType="touchUpInside" id="Iya-ck-RK1"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLW-y4-v4v" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="80" width="382" height="14"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -437,8 +445,8 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U2M-P2-bar" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="78" width="382" height="29"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U2M-P2-bar" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="78" width="382" height="0.0"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -459,14 +467,18 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="zcz-w0-z5w" firstAttribute="top" secondItem="CLW-y4-v4v" secondAttribute="top" id="5ar-wd-JKf"/>
                                     <constraint firstAttribute="trailing" secondItem="inq-6Z-2pg" secondAttribute="trailing" constant="16" id="NZs-JQ-c0j"/>
                                     <constraint firstItem="CLW-y4-v4v" firstAttribute="leading" secondItem="U2M-P2-bar" secondAttribute="leading" id="PQP-oj-Qw5"/>
                                     <constraint firstItem="3u0-FY-E7F" firstAttribute="centerY" secondItem="qqd-eK-U6s" secondAttribute="centerY" id="QBO-HE-Nvz"/>
                                     <constraint firstItem="CLW-y4-v4v" firstAttribute="trailing" secondItem="U2M-P2-bar" secondAttribute="trailing" id="QKL-SD-Xcp"/>
+                                    <constraint firstItem="zcz-w0-z5w" firstAttribute="bottom" secondItem="CLW-y4-v4v" secondAttribute="bottom" id="RtW-wl-vR4"/>
                                     <constraint firstItem="U2M-P2-bar" firstAttribute="top" secondItem="qqd-eK-U6s" secondAttribute="bottom" constant="8" id="SBd-mv-dVA"/>
                                     <constraint firstAttribute="bottom" secondItem="inq-6Z-2pg" secondAttribute="bottom" constant="32" id="YOh-Tn-bpR"/>
                                     <constraint firstAttribute="trailing" secondItem="U2M-P2-bar" secondAttribute="trailing" constant="16" id="ZAr-IJ-LaZ"/>
+                                    <constraint firstItem="zcz-w0-z5w" firstAttribute="leading" secondItem="CLW-y4-v4v" secondAttribute="leading" id="Zki-gT-k3C"/>
                                     <constraint firstItem="inq-6Z-2pg" firstAttribute="top" secondItem="CLW-y4-v4v" secondAttribute="bottom" constant="32" id="dCA-rB-oHe"/>
+                                    <constraint firstItem="zcz-w0-z5w" firstAttribute="trailing" secondItem="CLW-y4-v4v" secondAttribute="trailing" id="dow-Yi-lf2"/>
                                     <constraint firstItem="3u0-FY-E7F" firstAttribute="height" secondItem="qqd-eK-U6s" secondAttribute="height" id="edB-eB-y71"/>
                                     <constraint firstItem="3u0-FY-E7F" firstAttribute="width" secondItem="qqd-eK-U6s" secondAttribute="width" id="ht5-kU-CtS"/>
                                     <constraint firstItem="3u0-FY-E7F" firstAttribute="centerX" secondItem="qqd-eK-U6s" secondAttribute="centerX" id="q0p-Lu-0nr"/>
@@ -517,7 +529,7 @@
         <!--User Rules Table Controller-->
         <scene sceneID="YxL-u2-mld">
             <objects>
-                <viewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="eSV-Hx-Rg2" customClass="UserRulesTableController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UserRulesTableController" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="eSV-Hx-Rg2" customClass="UserRulesTableController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mpy-ch-s6a">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
