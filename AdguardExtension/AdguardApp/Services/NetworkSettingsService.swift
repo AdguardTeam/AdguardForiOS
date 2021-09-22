@@ -19,14 +19,11 @@
 import Foundation
 import SystemConfiguration.CaptiveNetwork
 import NetworkExtension
+import SharedAdGuardSDK
 
 struct WifiException: Equatable, Codable {
     var rule: String
     var enabled: Bool
-
-    static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.rule == rhs.rule && lhs.enabled == rhs.enabled
-    }
 }
 
 protocol NetworkSettingsChangedDelegate {
@@ -41,9 +38,9 @@ protocol NetworkSettingsServiceProtocol: AnyObject {
     var delegate: NetworkSettingsChangedDelegate? { get set }
     var onDemandRules: [NEOnDemandRule] { get }
     
-    func add(exception: WifiException)
+    func add(exception: WifiException) throws
     func delete(exception: WifiException)
-    func change(oldException: WifiException, newException: WifiException)
+    func change(oldException: WifiException, newException: WifiException) throws
     func fetchCurrentWiFiName(_ completionHandler: @escaping (String?)->Void)
 }
 
@@ -117,11 +114,14 @@ final class NetworkSettingsService: NetworkSettingsServiceProtocol {
         exceptions = resources.wifiExceptions
     }
     
-    func add(exception: WifiException){
+    func add(exception: WifiException) throws {
         if !exceptions.contains(exception){
             exceptions.append(exception)
             
             saveExceptions()
+        }
+        else {
+            throw UserRulesStorageError.ruleAlreadyExists(ruleString: exception.rule)
         }
     }
     
@@ -131,9 +131,14 @@ final class NetworkSettingsService: NetworkSettingsServiceProtocol {
 
             saveExceptions()
         }
+        
     }
     
-    func change(oldException: WifiException, newException: WifiException) {
+    func change(oldException: WifiException, newException: WifiException) throws {
+        if exceptions.contains(newException) {
+            throw UserRulesStorageError.ruleAlreadyExists(ruleString: newException.rule)
+        }
+        
         if let index = exceptions.firstIndex(of: oldException){
             exceptions[index] = newException
             saveExceptions()

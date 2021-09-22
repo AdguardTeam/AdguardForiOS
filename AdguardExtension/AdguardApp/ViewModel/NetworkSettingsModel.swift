@@ -18,7 +18,7 @@
 
 import SharedAdGuardSDK
 
-class NetworkSettingsModel: RuleDetailsControllerDelegate {
+final class NetworkSettingsModel: RuleDetailsControllerDelegate {
     
     var filterWifiDataEnabled: Bool {
         get {
@@ -81,19 +81,15 @@ class NetworkSettingsModel: RuleDetailsControllerDelegate {
     // MARK: - Global methods
     
     func addException(rule: String) throws {
-        if exceptions.contains(where: { $0.rule == rule} ) {
-            throw UserRulesStorageError.ruleAlreadyExists(ruleString: rule)
-        }
-        
         let exception = WifiException(rule: rule, enabled: true)
-        networkSettingsService.add(exception: exception)
+        try networkSettingsService.add(exception: exception)
         vpnManager.updateSettings(completion: nil)
     }
     
-    func changeRule(rule: String, enabled: Bool) {
+    func changeRule(rule: String, enabled: Bool) throws {
         if let old = exceptions.first(where: { $0.rule == rule}) {
             let new = WifiException(rule: rule, enabled: enabled)
-            networkSettingsService.change(oldException: old, newException: new)
+            try networkSettingsService.change(oldException: old, newException: new)
             vpnManager.updateSettings(completion: nil)
         }
     }
@@ -107,10 +103,10 @@ class NetworkSettingsModel: RuleDetailsControllerDelegate {
     }
     
     func modifyRule(_ oldRuleText: String, newRule: UserRule, at indexPath: IndexPath) throws {
+        
         let exception = exceptions[indexPath.row]
         let newException = WifiException(rule: newRule.ruleText, enabled: exception.enabled)
-        networkSettingsService.change(oldException: exception, newException: newException)
+        try networkSettingsService.change(oldException: exception, newException: newException)
         vpnManager.updateSettings(completion: nil)
     }
-    
 }
