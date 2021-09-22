@@ -178,6 +178,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     // MARK: - Observers
     private var appWillEnterForeground: NotificationToken?
     private var vpnConfigurationObserver: NotificationToken!
+    private var contentBlockerObserver: NotificationToken!
     private var dnsImplementationObserver: NotificationToken?
     private var currentDnsServerObserver: NotificationToken?
     private var proStatusObserver: NotificationToken?
@@ -259,12 +260,13 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     }
     
     private func processContentBlockersHelper() {
-        if !configuration.someContentBlockersEnabled && !contentBlockerHelperWasShown {
-            showContentBlockersHelper()
-            contentBlockerHelperWasShown = true
+        if #available(iOS 15, *), !resources.advancedProtectionWhatsNewScreenShown {
+            showWhatsNewWithAdvancedProtectionInfo { [weak self] in
+                self?.resources.advancedProtectionWhatsNewScreenShown = true
+                self?.showContentBlockersHelperIfNeeded()
+            }
         } else {
-            ready = true
-            callOnready()
+            showContentBlockersHelperIfNeeded()
         }
     }
 
@@ -575,11 +577,9 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             self?.processState()
         }
         
-        // todo: handle notifications from sdk
-//        let contenBlockerObservation = configuration.observe(\.contentBlockerEnabled) {[weak self] (_, _) in
-//            guard let self = self else { return }
-//            self.observeContentBlockersState()
-//        }
+        contentBlockerObserver = NotificationCenter.default.observe(name: .contentBlockersStateChanged, object: nil, queue: .main) { [weak self] _ in
+            self?.observeContentBlockersState()
+        }
         
         vpnConfigurationObserver = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: .main) { [weak self] _ in
             self?.updateProtectionStates()
@@ -594,7 +594,6 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         currentDnsServerObserver = NotificationCenter.default.observe(name: .currentDnsServerChanged, object: nil, queue: .main) { [weak self] _ in
             self?.processDnsServerChange()
         }
-//        observations.append(contenBlockerObservation)
     }
     
     /**
@@ -825,7 +824,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         }
     }
     
-    private func showContentBlockersHelper(){
+    private func showContentBlockersHelper() {
         DispatchQueue.main.async { [weak self] in
             let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
             if let navController = storyboard.instantiateViewController(withIdentifier: "OnboardingNavigationController") as? UINavigationController, let controller = storyboard.instantiateViewController(withIdentifier: "OnboardingController") as? OnboardingController{
@@ -834,6 +833,15 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
                 controller.needsShowingPremium = false
                 self?.present(navController, animated: true)
             }
+        }
+    }
+    
+    private func showWhatsNewWithAdvancedProtectionInfo(_ completion: (() -> Void)?) {
+        let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
+        if let controller = storyboard.instantiateViewController(withIdentifier: "WhatsNewBottomAlertController") as? WhatsNewBottomAlertController {
+            controller.onDismissCompletion = completion
+            controller.delegate = self
+            present(controller, animated: true)
         }
     }
     
@@ -917,6 +925,16 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         present(importController, animated: true, completion: nil)
     }
     
+    private func showContentBlockersHelperIfNeeded() {
+        if !configuration.someContentBlockersEnabled && !contentBlockerHelperWasShown {
+            showContentBlockersHelper()
+            contentBlockerHelperWasShown = true
+        } else {
+            ready = true
+            callOnready()
+        }
+    }
+    
     private func initChartViewModel() {
         let url = SharedStorageUrls()
         chartModel = ChartViewModel(statisticsPeriod: resources.chartDateType, statisticsDbContainerUrl: url.filtersFolderUrl)
@@ -938,6 +956,16 @@ extension MainPageController: ThemableProtocol {
         
         contentBlockerViewIphone.backgroundColor = theme.notificationWindowColor
         nativeDnsView.backgroundColor = theme.backgroundColor
+    }
+}
+
+extension MainPageController: WhatsNewBottomAlertControllerDelegate {
+    func enableButtonForNonProTapped() {
+        if configuration.proStatus { return }
+        self.dismiss(animated: true) { [weak self] in
+            guard let self = self else { return }
+            self.performSegue(withIdentifier: self.getProSegueId, sender: nil)
+        }
     }
 }
 

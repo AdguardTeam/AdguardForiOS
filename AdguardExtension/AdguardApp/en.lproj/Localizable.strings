@@ -557,10 +557,10 @@
 "common_add" = "Add";
 
 /*(TodayViewController) Protection is disabled title  */
-"protection_disabled" = "Protection is disabled";
+"protection_disabled" = "Protection is OFF";
 
 /*(TodayViewController) Protection is enabled title  */
-"protection_enabled" = "Protection is enabled";
+"protection_enabled" = "Protection is ON";
 
 /*(TodayViewController) Complex protection is enabled text  */
 "complex_enabled" = "Safari and DNS protection";
@@ -622,14 +622,26 @@
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_removed_from_blacklist" = "removed from the Blocklist";
 
-/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "Open the <b>settings</b>";
+/* (OnboardingController) first step text*/
+"onboarding_first_step_text" = "Open <b>Settings.</b>";
 
-/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "Tap on <b>Safari</b> and choose the <b>\"Content blockers\"</b> menu item";
+/* (OnboardingController) first step with advanced protection text*/
+"advanced_protection_onboarding_first_step_text" = "Tap <b>Settings.</b>";
 
-/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Switch on all content blockers</b> and return to the app!";
+/* (OnboardingController) second step text */
+"onboarding_second_step_text" = "Tap <b>Safari</b>, swipe down, and tap <b>Content blockers.</b>";
+
+/* (OnboardingController) second step with advanced protection text */
+"advanced_protection_onboarding_second_step_text" = "Go to <b>Safari > Extensions.</b>";
+
+/* (OnboardingController) third step text */
+"onboarding_third_step_text" = "<b>Enable</b> all AdGuard extensions.";
+
+/* (OnboardingController) third step with advanced protection text */
+"advanced_protection_onboarding_third_step_text" = "Set all AdGuard toggles to <b>On.</b> You`re good to go!";
+
+/* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
+"onboarding_fours_step_text" = "For <b>Advanced</b> protection, open the Safari app, tap the <b>aA</b> icon on the left side of the URL field,<br><br> %@ <br><br>then tap <b>AdGuard</b> and confirm all permissions.";
 
 /* (DnsProvidersController) default systen dns server name */
 "default_dns_server_name" = "System DNS";
@@ -1012,6 +1024,13 @@
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
 "youtube_script_error_title" = "Unknown error occurred while removing YouTube ads";
+
+//MARK: - ActionExtensionMainController
+/* (ActionExtensionMainController) - ActionExtension info for iOS 15>= */
+"action_extension_obsolete_info" = "This AdGuard extension has become obsolete. There is a new AdGuard extension available for free, with better ad-blocking tools and UI. It can be found in the Extensions tab of the menu.";
+
+/* (ActionExtensionMainController) - ActionExtension info for iOS 14<= */
+"action_extension_new_version_info" = "There's a new version of this extension available for iOS 15, with more capabilities and a better UI. Don't forget to update!";
 
 /* (BackgroundFetchController) - Background app refresh default title */
 "background_fetch_default_period" = "Default period";
