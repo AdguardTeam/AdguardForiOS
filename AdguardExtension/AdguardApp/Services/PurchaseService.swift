@@ -20,6 +20,7 @@ import Foundation
 import StoreKit
 import CommonCrypto
 import Setapp
+import class SharedAdGuardSDK.Atomic
 
 typealias Period = (unit: PurchasePeriod, numberOfUnits: Int)
 
@@ -227,7 +228,8 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
     private let productInfo: ADProductInfoProtocol
 
     private var productRequest: SKProductsRequest?
-    private var productsToPurchase = [SKProduct]()
+    private var productsToPurchase: [SKProduct] { _atomicProductsToPurchase.wrappedValue }
+    @Atomic private var atomicProductsToPurchase: [SKProduct] = []
     private var nonConsumableProduct: SKProduct?
     private var refreshRequest: SKReceiptRefreshRequest?
 
@@ -618,21 +620,21 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         
         DDLogInfo("(PurchaseService)productsRequest didReceive products count: \(response.products.count) ")
-        productsToPurchase.removeAll()
+        _atomicProductsToPurchase.mutate { $0.removeAll() }
         
         for product in response.products {
             
             switch product.productIdentifier {
             case annualSubscriptionProductID, monthlySubscriptionProductID:
-                productsToPurchase.append(product)
+                _atomicProductsToPurchase.mutate { $0.append(product) }
             case lifetimeProductID:
                 // chose what product use for lifetime license.
                 if !isDiscountCurrencyLocale(locale: product.priceLocale.identifier) {
-                    productsToPurchase.append(product)
+                    _atomicProductsToPurchase.mutate { $0.append(product) }
                 }
             case lifetimeAlternateProductID:
                 if isDiscountCurrencyLocale(locale: product.priceLocale.identifier) {
-                    productsToPurchase.append(product)
+                    _atomicProductsToPurchase.mutate { $0.append(product) }
                 }
             default:
                 DDLogError("(PurchaseService) productsRequest didReceive error. Unknown productId \(product.productIdentifier)")

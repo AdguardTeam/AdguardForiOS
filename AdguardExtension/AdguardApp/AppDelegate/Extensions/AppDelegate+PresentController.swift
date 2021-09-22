@@ -622,6 +622,17 @@ extension AppDelegate {
             DDLogError("Protection.storyboard doesnt't have ComplexProtectionController")
             return false
         }
+        guard let advancedProtectionController = protectionStoryboard.instantiateViewController(withIdentifier: "AdvancedProtectionController") as? AdvancedProtectionController else {
+            DDLogError("Protection.storyboard doesnt't have AdvancedProtectionController")
+            return false
+        }
+        
+        navController.viewControllers = [complexProtectionController, advancedProtectionController]
+        complexProtectionController.loadViewIfNeeded()
+        advancedProtectionController.loadViewIfNeeded()
+        tabBar.selectedViewController = navController
+        window?.rootViewController = tabBar
+        
         return true
     }
     

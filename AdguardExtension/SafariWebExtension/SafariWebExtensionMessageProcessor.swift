@@ -68,7 +68,7 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
             Message.hasUserRules: hasUserRules,
             Message.premiumApp: isPro,
             Message.protectionEnabled: isSafariProtectionEnabled(for: domain, resources: resources),
-            Message.advancedBlockingEnabled: false,
+            Message.advancedBlockingEnabled: resources.advancedProtection,
 
             Message.removeFromAllowlistLink: UserRulesRedirectAction.removeFromAllowlist(domain: "").scheme,
             Message.addToAllowlistLink: UserRulesRedirectAction.addToAllowlist(domain: "").scheme,
