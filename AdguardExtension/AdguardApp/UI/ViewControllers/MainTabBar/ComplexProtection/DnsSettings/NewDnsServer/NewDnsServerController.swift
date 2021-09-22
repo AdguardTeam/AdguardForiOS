@@ -41,6 +41,7 @@ final class NewDnsServerController: BottomAlertController {
     //MARK: - Properties
     var controllerType: DnsServerControllerType = .add
     var model: NewDnsServerModel!
+    var openUrl: String?
     
     weak var delegate: NewDnsServerControllerDelegate?
     
@@ -70,7 +71,7 @@ final class NewDnsServerController: BottomAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let openUrl = model.openUrl {
+        if let openUrl = openUrl {
             // Native DNS implementation doesn't support port syntax
             upstreamsField.text = resources.dnsImplementation == .adGuard ? openUrl : openUrl.discardPortFromIpAddress()
         } else {

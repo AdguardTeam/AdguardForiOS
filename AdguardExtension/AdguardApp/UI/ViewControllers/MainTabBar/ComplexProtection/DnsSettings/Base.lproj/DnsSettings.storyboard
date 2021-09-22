@@ -2160,53 +2160,25 @@
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                         </variation>
                                     </label>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1v-cB-fxD">
-                                        <rect key="frame" x="0.0" y="76" width="414" height="286"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="djI-OP-3az" userLabel="Content View">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="286"/>
-                                                <subviews>
-                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Npf-Dz-czn">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="276"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                    </tableView>
-                                                </subviews>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="bottom" secondItem="Npf-Dz-czn" secondAttribute="bottom" constant="10" id="2ZT-gf-rpC"/>
-                                                    <constraint firstItem="Npf-Dz-czn" firstAttribute="leading" secondItem="djI-OP-3az" secondAttribute="leading" id="fnr-eE-J3y"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Npf-Dz-czn" secondAttribute="trailing" id="gYJ-wk-Y90"/>
-                                                    <constraint firstItem="Npf-Dz-czn" firstAttribute="top" secondItem="djI-OP-3az" secondAttribute="top" id="jxc-qo-wyD"/>
-                                                </constraints>
-                                            </view>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="djI-OP-3az" secondAttribute="bottom" id="3Bj-hQ-X3X"/>
-                                            <constraint firstAttribute="trailing" secondItem="djI-OP-3az" secondAttribute="trailing" id="FwH-On-bNW"/>
-                                            <constraint firstItem="djI-OP-3az" firstAttribute="height" secondItem="F1v-cB-fxD" secondAttribute="height" priority="250" id="GfH-ZJ-NRa"/>
-                                            <constraint firstItem="djI-OP-3az" firstAttribute="top" secondItem="F1v-cB-fxD" secondAttribute="top" id="f6j-pO-CWF"/>
-                                            <constraint firstItem="djI-OP-3az" firstAttribute="leading" secondItem="F1v-cB-fxD" secondAttribute="leading" id="gzV-E7-CPG"/>
-                                        </constraints>
-                                    </scrollView>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Npf-Dz-czn">
+                                        <rect key="frame" x="0.0" y="64" width="414" height="187.5"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="J4t-ME-idR" firstAttribute="top" secondItem="Eo5-vz-faM" secondAttribute="top" constant="8" id="14F-JY-oJc"/>
-                                    <constraint firstAttribute="bottom" secondItem="F1v-cB-fxD" secondAttribute="bottom" id="4KO-3x-0bJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="Npf-Dz-czn" secondAttribute="trailing" id="16p-Am-ChC"/>
+                                    <constraint firstItem="Npf-Dz-czn" firstAttribute="top" secondItem="vJt-Jd-BI2" secondAttribute="bottom" id="3et-QD-0pp"/>
                                     <constraint firstItem="J4t-ME-idR" firstAttribute="centerX" secondItem="Eo5-vz-faM" secondAttribute="centerX" id="FNk-Qa-hgS"/>
-                                    <constraint firstItem="F1v-cB-fxD" firstAttribute="leading" secondItem="Eo5-vz-faM" secondAttribute="leading" id="FeN-k6-bCP"/>
-                                    <constraint firstItem="djI-OP-3az" firstAttribute="width" secondItem="Eo5-vz-faM" secondAttribute="width" id="YeM-Ma-4AF"/>
                                     <constraint firstItem="vJt-Jd-BI2" firstAttribute="leading" secondItem="Eo5-vz-faM" secondAttribute="leading" constant="24" id="ZFB-uY-Y0u"/>
                                     <constraint firstAttribute="trailing" secondItem="vJt-Jd-BI2" secondAttribute="trailing" constant="24" id="blE-fg-2sE"/>
-                                    <constraint firstAttribute="trailing" secondItem="F1v-cB-fxD" secondAttribute="trailing" id="g9c-pw-fPV"/>
                                     <constraint firstItem="vJt-Jd-BI2" firstAttribute="top" secondItem="J4t-ME-idR" secondAttribute="bottom" constant="32" id="lus-Px-ATm">
                                         <variation key="heightClass=regular-widthClass=regular" constant="48"/>
                                     </constraint>
-                                    <constraint firstItem="F1v-cB-fxD" firstAttribute="top" secondItem="vJt-Jd-BI2" secondAttribute="bottom" constant="12" id="pt6-pM-wqN">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="48"/>
-                                    </constraint>
-                                    <constraint firstItem="Npf-Dz-czn" firstAttribute="height" secondItem="Eo5-vz-faM" secondAttribute="height" multiplier="0.762431" id="y3i-Gh-OyC"/>
+                                    <constraint firstItem="Npf-Dz-czn" firstAttribute="leading" secondItem="Eo5-vz-faM" secondAttribute="leading" id="r3q-l4-7ai"/>
+                                    <constraint firstItem="Npf-Dz-czn" firstAttribute="height" secondItem="Eo5-vz-faM" secondAttribute="height" multiplier="0.745704" id="rVc-gF-mPe"/>
+                                    <constraint firstAttribute="bottom" secondItem="Npf-Dz-czn" secondAttribute="bottom" id="zuz-Kk-UjW"/>
                                 </constraints>
                             </view>
                         </subviews>

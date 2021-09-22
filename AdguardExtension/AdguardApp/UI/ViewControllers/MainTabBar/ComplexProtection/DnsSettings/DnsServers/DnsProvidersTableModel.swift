@@ -22,7 +22,7 @@ import DnsAdGuardSDK
 final class DnsProvidersTableModel {
     let provider: DnsProviderMetaProtocol
     
-    var isDefaultProvider: Bool { return provider.isSystemDefaultProvider }
+    var isDefaultProvider: Bool { return provider.isDefault }
     var isCustomProvider: Bool { return provider.isCustom }
 
     init(provider: DnsProviderMetaProtocol) {

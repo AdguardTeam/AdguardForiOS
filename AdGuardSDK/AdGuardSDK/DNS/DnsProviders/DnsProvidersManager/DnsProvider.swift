@@ -32,7 +32,7 @@ public extension DnsProviderMetaProtocol {
     var custom: CustomDnsProviderProtocol { self as! CustomDnsProviderProtocol }
     var predefined: DnsProviderProtocol { self as! DnsProviderProtocol }
     var dnsServers: [DnsServerMetaProtocol] { isCustom ? [custom.server] : predefined.servers }
-    var isSystemDefaultProvider: Bool { self.providerId == PredefinedDnsProvider.systemDefaultProviderId }
+    var isDefault: Bool { self.providerId == PredefinedDnsProvider.systemDefaultProviderId }
 }
 
 // MARK: - DnsServerMetaProtocol
@@ -143,7 +143,6 @@ public struct CustomDnsProvider: CustomDnsProviderProtocol, Codable, Equatable {
     public var server: CustomDnsServer
     public let providerId: Int
     public var isEnabled: Bool
-    public var enabledServerId: Int? { return server.id }
     
     init(name: String, server: CustomDnsServer, providerId: Int, isEnabled: Bool) {
         self.name = name

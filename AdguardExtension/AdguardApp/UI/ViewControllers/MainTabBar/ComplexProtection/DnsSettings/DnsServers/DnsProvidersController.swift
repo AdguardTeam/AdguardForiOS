@@ -39,7 +39,6 @@ final class DnsProvidersController: UITableViewController {
     private let model: DnsProvidersModel
     
     // MARK: Private properties
-    private var tableModels: [DnsProvidersTableModel] { model.tableModels }
     private var providerToShow: DnsProviderProtocol?
     private let sections: [DnsProvidersSection] = DnsProvidersSection.allCases
     
@@ -55,7 +54,7 @@ final class DnsProvidersController: UITableViewController {
                                                           isProPurchased: purchaseService.isProPurchased)
         dnsProvidersManager = try! DnsProvidersManager(configuration: dnsProtectionConfiguration, userDefaults: UserDefaultsStorage(storage: resources.sharedDefaults()))
         
-        model = DnsProvidersModel(dnsProvidersManager: dnsProvidersManager, vpnManager: vpnManager)
+        model = DnsProvidersModel(dnsProvidersManager: dnsProvidersManager, vpnManager: vpnManager, resources: resources)
         super.init(coder: coder)
     }
     
@@ -101,7 +100,7 @@ final class DnsProvidersController: UITableViewController {
         switch section {
         case .providerSection:
             let cell = ExtendedRadioButtonCell.getCell(forTableView: tableView)
-            let tableModel = tableModels[indexPath.row]
+            let tableModel = model.tableModels[indexPath.row]
             let cellModel = tableModel.getCellModel(cellTag: indexPath.row, delegate: self)
             cell.model = cellModel
             cell.updateTheme(themeService: themeService)
@@ -119,7 +118,7 @@ final class DnsProvidersController: UITableViewController {
         let section = sections[section]
         switch section {
         case .addProviderSection: return 1
-        case .providerSection: return tableModels.count
+        case .providerSection: return model.tableModels.count
         }
     }
     
@@ -133,7 +132,7 @@ final class DnsProvidersController: UITableViewController {
         
         switch section {
         case .providerSection:
-            let tableModel = tableModels[indexPath.row]
+            let tableModel = model.tableModels[indexPath.row]
             
             if tableModel.isDefaultProvider {
                 do {
@@ -163,7 +162,8 @@ final class DnsProvidersController: UITableViewController {
         
         switch controllerType {
         case .add:
-            controller.model = NewDnsServerModel(dnsProvidersManager: dnsProvidersManager, vpnManager: vpnManager, openUrl: openUrl)
+            controller.model = NewDnsServerModel(dnsProvidersManager: dnsProvidersManager, vpnManager: vpnManager)
+            controller.openUrl = openUrl
         case .edit:
             guard let provider = tableModel?.provider.custom else { return }
             controller.model = NewDnsServerModel(dnsProvidersManager: dnsProvidersManager, vpnManager: vpnManager, provider: provider)
@@ -212,7 +212,7 @@ extension DnsProvidersController: DnsProviderDetailsControllerDelegate {
 extension DnsProvidersController: ExtendedRadioButtonCellDelegate {
     /// Select active provider from selected cell
     func radioButtonTapped(with tag: Int) {
-        let provider = tableModels[tag].provider
+        let provider = model.tableModels[tag].provider
         setProviderAndReloadTable(provider: provider)
     }
 }

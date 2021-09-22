@@ -38,20 +38,17 @@ final class NewDnsServerModel {
     
     
     let provider: CustomDnsProviderProtocol?
-    var openUrl: String?
     private let dnsProvidersManager: DnsProvidersManagerProtocol
     private let vpnManager: VpnManagerProtocol
 
     //MARK: - Init
     init(dnsProvidersManager: DnsProvidersManagerProtocol,
          vpnManager: VpnManagerProtocol,
-         provider: CustomDnsProviderProtocol? = nil,
-         openUrl: String? = nil) {
+         provider: CustomDnsProviderProtocol? = nil) {
         
         self.dnsProvidersManager = dnsProvidersManager
         self.vpnManager = vpnManager
         self.provider = provider
-        self.openUrl = openUrl
     }
     
     /// Function to add custom provider

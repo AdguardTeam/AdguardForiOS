@@ -51,7 +51,7 @@ final class DnsProviderDetailsController : UITableViewController {
     
     private let providerDetailSections: [ProviderSection] = ProviderSection.allCases
     private let providerDetailRows: [ProviderRow]  = ProviderRow.allCases
-    
+    private let selectDnsProtocolControllerIdentifier = "SelectDnsProtocolController"
     
     // MARK: - view controller life cycle
     
@@ -159,7 +159,7 @@ final class DnsProviderDetailsController : UITableViewController {
     }
     
     private func showSelectServerAlert(){
-        guard let controller = storyboard?.instantiateViewController(withIdentifier: "SelectDnsProtocolController") as? SelectDnsProtocolController else { return }
+        guard let controller = storyboard?.instantiateViewController(withIdentifier: selectDnsProtocolControllerIdentifier) as? SelectDnsProtocolController else { return }
         controller.delegate = self
         controller.availableProtocols = model.dnsProtocols
         controller.selectedProtocol = model.activeDnsProtocol

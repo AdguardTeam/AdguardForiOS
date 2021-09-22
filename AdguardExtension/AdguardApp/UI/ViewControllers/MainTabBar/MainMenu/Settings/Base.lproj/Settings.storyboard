@@ -3240,36 +3240,11 @@
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="40"/>
                                         </variation>
                                     </label>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f9N-gF-umX">
-                                        <rect key="frame" x="0.0" y="83" width="414" height="246"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7HT-dH-4iU" userLabel="Scroll Content View">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="246"/>
-                                                <subviews>
-                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Snq-9B-j9S">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="216"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                        <sections/>
-                                                    </tableView>
-                                                </subviews>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstItem="Snq-9B-j9S" firstAttribute="leading" secondItem="7HT-dH-4iU" secondAttribute="leading" id="EDr-hi-Xdz"/>
-                                                    <constraint firstAttribute="bottom" secondItem="Snq-9B-j9S" secondAttribute="bottom" constant="10" id="L8L-hK-I2E"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Snq-9B-j9S" secondAttribute="trailing" id="bWl-F3-oOw"/>
-                                                    <constraint firstItem="Snq-9B-j9S" firstAttribute="top" secondItem="7HT-dH-4iU" secondAttribute="top" id="jHu-2a-w9z"/>
-                                                </constraints>
-                                            </view>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" secondItem="7HT-dH-4iU" secondAttribute="height" priority="250" id="1ys-9P-tEQ"/>
-                                            <constraint firstItem="7HT-dH-4iU" firstAttribute="leading" secondItem="f9N-gF-umX" secondAttribute="leading" id="CZH-bH-yKw"/>
-                                            <constraint firstAttribute="bottom" secondItem="7HT-dH-4iU" secondAttribute="bottom" id="dek-11-GAa"/>
-                                            <constraint firstItem="7HT-dH-4iU" firstAttribute="top" secondItem="f9N-gF-umX" secondAttribute="top" id="eUd-rs-OqE"/>
-                                            <constraint firstAttribute="trailing" secondItem="7HT-dH-4iU" secondAttribute="trailing" id="kdF-kH-4Ks"/>
-                                        </constraints>
-                                    </scrollView>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Snq-9B-j9S">
+                                        <rect key="frame" x="0.0" y="42" width="414" height="108"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <sections/>
+                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -3277,16 +3252,13 @@
                                         <variation key="heightClass=regular-widthClass=regular" constant="48"/>
                                     </constraint>
                                     <constraint firstItem="Yue-5n-Amd" firstAttribute="leading" secondItem="bnL-IC-jxK" secondAttribute="leading" constant="24" id="3E5-dH-aF0"/>
-                                    <constraint firstItem="Snq-9B-j9S" firstAttribute="height" secondItem="bnL-IC-jxK" secondAttribute="height" multiplier="0.72" id="5tR-II-0dP"/>
-                                    <constraint firstItem="f9N-gF-umX" firstAttribute="leading" secondItem="bnL-IC-jxK" secondAttribute="leading" id="CLu-n2-NKB"/>
-                                    <constraint firstItem="f9N-gF-umX" firstAttribute="top" secondItem="Yue-5n-Amd" secondAttribute="bottom" constant="12" id="FCU-6w-ibi">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="48"/>
-                                    </constraint>
                                     <constraint firstItem="tRH-gM-893" firstAttribute="top" secondItem="bnL-IC-jxK" secondAttribute="top" constant="8" id="FiR-8E-Fb4"/>
-                                    <constraint firstAttribute="bottom" secondItem="f9N-gF-umX" secondAttribute="bottom" id="Zhx-H0-g5c"/>
-                                    <constraint firstAttribute="trailing" secondItem="f9N-gF-umX" secondAttribute="trailing" id="ks1-W9-O5a"/>
-                                    <constraint firstItem="7HT-dH-4iU" firstAttribute="width" secondItem="bnL-IC-jxK" secondAttribute="width" id="mDZ-YT-sal"/>
+                                    <constraint firstAttribute="trailing" secondItem="Snq-9B-j9S" secondAttribute="trailing" id="WGn-as-ywe"/>
+                                    <constraint firstAttribute="bottom" secondItem="Snq-9B-j9S" secondAttribute="bottom" id="fSe-qR-XFS"/>
+                                    <constraint firstItem="Snq-9B-j9S" firstAttribute="height" secondItem="bnL-IC-jxK" secondAttribute="height" multiplier="0.719912" id="k1o-zO-e8S"/>
+                                    <constraint firstItem="Snq-9B-j9S" firstAttribute="leading" secondItem="bnL-IC-jxK" secondAttribute="leading" id="rm4-bI-LjE"/>
                                     <constraint firstItem="tRH-gM-893" firstAttribute="centerX" secondItem="bnL-IC-jxK" secondAttribute="centerX" id="wSO-Qf-5jR"/>
+                                    <constraint firstItem="Snq-9B-j9S" firstAttribute="top" secondItem="Yue-5n-Amd" secondAttribute="bottom" id="xu9-ut-aS0"/>
                                     <constraint firstAttribute="trailing" secondItem="Yue-5n-Amd" secondAttribute="trailing" constant="24" id="ywk-Pz-2Ct"/>
                                 </constraints>
                             </view>

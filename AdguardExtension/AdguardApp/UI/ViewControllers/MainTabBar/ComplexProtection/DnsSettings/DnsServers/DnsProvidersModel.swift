@@ -34,31 +34,34 @@ final class DnsProvidersModel {
     //MARK: - Private properties
     private let dnsProvidersManager: DnsProvidersManagerProtocol
     private let vpnManager: VpnManagerProtocol
+    private let resources: AESharedResourcesProtocol
     
     //MARK: - Init
-    init(dnsProvidersManager: DnsProvidersManagerProtocol, vpnManager: VpnManagerProtocol) {
+    init(dnsProvidersManager: DnsProvidersManagerProtocol, vpnManager: VpnManagerProtocol, resources: AESharedResourcesProtocol) {
         self.dnsProvidersManager = dnsProvidersManager
         self.vpnManager = vpnManager
+        self.resources = resources
     }
     
     //MARK: - Public methods
     func setProviderActive(provider: DnsProviderMetaProtocol) throws {
-        let serverId = getServerId(provider: provider)
+        let serverId = getActiveServerId(provider: provider)
         try dnsProvidersManager.selectProvider(withId: provider.providerId, serverId: serverId)
         vpnManager.updateSettings(completion: nil)
     }
     
     //MARK: - Private methods
     
-    /// Return enabled server id. If enabled server doesn't exists than return id of first server from `dnsServers` array.
+    /// Return enabled server id. If enabled server doesn't exists then return id of first server from `dnsServers` array.
     /// `dnsServers` - is array of provider DNS servers and it is not empty for all  providers
-    private func getServerId(provider: DnsProviderMetaProtocol) -> Int {
+    private func getActiveServerId(provider: DnsProviderMetaProtocol) -> Int {
         if provider.isCustom { return provider.custom.server.id }
         
-        let result = provider.dnsServers.first {
-            return $0.isEnabled
+        if let activeDnsProtocol = resources.dnsActiveProtocols[provider.providerId] {
+            let serverId = provider.dnsServers.first { $0.type == activeDnsProtocol }?.id
+            return serverId ?? provider.dnsServers.first!.id
         }
         
-        return result?.id ?? provider.dnsServers.first!.id
+        return provider.dnsServers.first!.id
     }
 }
