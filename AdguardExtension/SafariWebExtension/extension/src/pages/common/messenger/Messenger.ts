@@ -64,9 +64,9 @@ export class Messenger {
         );
     };
 
-    turnOnAdvancedBlocking = () => {
+    enableAdvancedBlocking = () => {
         return this.sendMessage(
-            MessagesToBackgroundPage.TurnOnAdvancedBlocking,
+            MessagesToBackgroundPage.EnableAdvancedBlocking,
         );
     };
 }

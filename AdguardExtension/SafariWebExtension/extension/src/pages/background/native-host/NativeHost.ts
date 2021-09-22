@@ -16,7 +16,7 @@ export interface ActionLinks {
     removeFromAllowlistLink: string,
     upgradeAppLink: string,
     reportProblemLink: string,
-    turnOnAdvancedBlocking: string,
+    enableAdvancedBlockingLink: string,
 }
 
 type AppearanceTheme = 'system' | 'dark' | 'light';
@@ -40,7 +40,7 @@ export interface NativeHostInterface {
     reportProblem(url: string): Promise<void>
     upgradeMe(): Promise<void>
     getAdvancedRulesText(): Promise<string | void>
-    turnOnAdvancedBlocking(): Promise<void>
+    enableAdvancedBlocking(): Promise<void>
 }
 
 export class NativeHost implements NativeHostInterface {
@@ -133,12 +133,12 @@ export class NativeHost implements NativeHostInterface {
         await browser.tabs.create({ url: this.links.upgradeAppLink });
     }
 
-    async turnOnAdvancedBlocking() {
-        if (!this.links?.turnOnAdvancedBlocking) {
+    async enableAdvancedBlocking() {
+        if (!this.links?.enableAdvancedBlockingLink) {
             return;
         }
 
-        await browser.tabs.create({ url: this.links.turnOnAdvancedBlocking });
+        await browser.tabs.create({ url: this.links.enableAdvancedBlockingLink });
     }
 
     /**
@@ -202,8 +202,8 @@ export class NativeHost implements NativeHostInterface {
             upgrade_app_link: upgradeAppLink,
             // e.g. "https://reports.adguard.com/new_issue.html?browser=Safari&product_version=4.2.1&product_type=iOS"
             report_problem_link: reportProblemLink,
-            // e.g. "adguard://turnOnAdvancedBlocking"
-            turn_on_advanced_blocking_link: turnOnAdvancedBlocking,
+            // e.g. "adguard://enableAdvancedBlocking"
+            enable_advanced_blocking_link: enableAdvancedBlockingLink,
         } = result;
 
         this.setLinks({
@@ -213,7 +213,7 @@ export class NativeHost implements NativeHostInterface {
             removeFromAllowlistLink,
             upgradeAppLink,
             reportProblemLink,
-            turnOnAdvancedBlocking,
+            enableAdvancedBlockingLink,
         });
 
         return {

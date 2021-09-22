@@ -183,7 +183,7 @@ testcases.adguard.com,surge.sh#?##case28 > :is(.case28, #main, footer, span):con
     upgradeMe(): Promise<void> {
         throw new Error('Method not implemented.');
     }
-    turnOnAdvancedBlocking(): Promise<void> {
+    enableAdvancedBlocking(): Promise<void> {
         throw new Error('Method not implemented.');
     }
 }

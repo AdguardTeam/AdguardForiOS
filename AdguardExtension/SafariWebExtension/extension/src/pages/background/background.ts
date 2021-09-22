@@ -167,8 +167,8 @@ const handleMessages = () => {
                 await adguard.nativeHost.upgradeMe();
                 break;
             }
-            case MessagesToBackgroundPage.TurnOnAdvancedBlocking: {
-                await adguard.nativeHost.turnOnAdvancedBlocking();
+            case MessagesToBackgroundPage.EnableAdvancedBlocking: {
+                await adguard.nativeHost.enableAdvancedBlocking();
                 break;
             }
             case MessagesToBackgroundPage.DeleteUserRulesByUrl: {

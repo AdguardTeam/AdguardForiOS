@@ -15,7 +15,7 @@ export const AdvancedBlockingDisabledModal = observer(() => {
     };
 
     const handleClick = async () => {
-        await messenger.turnOnAdvancedBlocking();
+        await messenger.enableAdvancedBlocking();
         window.close();
     };
 
