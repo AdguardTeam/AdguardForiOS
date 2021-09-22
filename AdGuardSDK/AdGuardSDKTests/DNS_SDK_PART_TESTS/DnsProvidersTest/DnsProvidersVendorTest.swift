@@ -153,7 +153,12 @@ class DnsProvidersVendorTest: XCTestCase {
     
     private func checkDefaultServer(_ providers: [DnsProviderMetaProtocol], matching: Int) {
         var counter = 0
-        providers.forEach { if $0.isDefault { counter += 1 } }
+        providers.forEach {
+            if $0.isDefault {
+                XCTAssertEqual($0.providerId, PredefinedDnsProvider.systemDefaultProviderId)
+                counter += 1
+            } 
+        }
         XCTAssertEqual(counter, matching)
     }
 }
