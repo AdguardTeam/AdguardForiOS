@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@adguard/assistant@^4.3.48":
-  version "4.3.48"
-  resolved "https://registry.yarnpkg.com/@adguard/assistant/-/assistant-4.3.48.tgz#c4f0d4f53608921eb0f29c992f9c22aaefb097aa"
-  integrity sha512-TbvDPKlUERU4/d9iAr10mTK4+lgwEimne4j1jDJnuKdqwY/In7BlTXvsqp1495p2tFcRGQct2DFNh7SgUdi6NQ==
+"@adguard/assistant@^4.3.51":
+  version "4.3.51"
+  resolved "https://registry.yarnpkg.com/@adguard/assistant/-/assistant-4.3.51.tgz#836ae2d1abf6334e091ba509d12a1f2c23ccac2e"
+  integrity sha512-LS01LaahRnjcdjYczUu7nEpWW27t8TSP22J4om2dXyWHvl3HkYRfHkJ8kyuuwGMzE0l3bPLs2uT0lWYYq/LRTQ==
 
 "@adguard/scriptlets@^1.4.4":
   version "1.4.4"
