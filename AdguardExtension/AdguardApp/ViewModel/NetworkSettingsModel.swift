@@ -16,24 +16,9 @@
       along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
+import SharedAdGuardSDK
 
-protocol NetworkSettingsModelProtocol {
-    /* Variables */
-    var exceptions: [WifiException] { get }
-    var delegate: NetworkSettingsChangedDelegate? { get set }
-    var filterWifiDataEnabled: Bool { get set }
-    var filterMobileDataEnabled: Bool { get set }
-    
-    /* Methods */
-    func addException(rule: String)
-    func deleteRule(index: Int)
-    func changeRule(index: Int, newRule: String)
-    func toggleRuleEnabled(index: Int)
-    
-}
-
-class NetworkSettingsModel: NetworkSettingsModelProtocol {
+class NetworkSettingsModel: RuleDetailsControllerDelegate {
     
     var filterWifiDataEnabled: Bool {
         get {
@@ -95,29 +80,37 @@ class NetworkSettingsModel: NetworkSettingsModelProtocol {
     
     // MARK: - Global methods
     
-    func addException(rule: String) {
+    func addException(rule: String) throws {
+        if exceptions.contains(where: { $0.rule == rule} ) {
+            throw UserRulesStorageError.ruleAlreadyExists(ruleString: rule)
+        }
+        
         let exception = WifiException(rule: rule, enabled: true)
         networkSettingsService.add(exception: exception)
         vpnManager.updateSettings(completion: nil)
     }
     
-    func deleteRule(index: Int) {
-        let exception = exceptions[index]
+    func changeRule(rule: String, enabled: Bool) {
+        if let old = exceptions.first(where: { $0.rule == rule}) {
+            let new = WifiException(rule: rule, enabled: enabled)
+            networkSettingsService.change(oldException: old, newException: new)
+            vpnManager.updateSettings(completion: nil)
+        }
+    }
+    
+    // MARK: - RuleDetailsControllerDelegate methods
+    
+    func removeRule(_ ruleText: String, at indexPath: IndexPath) throws {
+        let exception = exceptions[indexPath.row]
         networkSettingsService.delete(exception: exception)
         vpnManager.updateSettings(completion: nil)
     }
     
-    func changeRule(index: Int, newRule: String) {
-        let exception = exceptions[index]
-        let newException = WifiException(rule: newRule, enabled: exception.enabled)
+    func modifyRule(_ oldRuleText: String, newRule: UserRule, at indexPath: IndexPath) throws {
+        let exception = exceptions[indexPath.row]
+        let newException = WifiException(rule: newRule.ruleText, enabled: exception.enabled)
         networkSettingsService.change(oldException: exception, newException: newException)
         vpnManager.updateSettings(completion: nil)
     }
     
-    func toggleRuleEnabled(index: Int) {
-        let exception = exceptions[index]
-        let newException = WifiException(rule: exception.rule, enabled: !exception.enabled)
-        networkSettingsService.change(oldException: exception, newException: newException)
-        vpnManager.updateSettings(completion: nil)
-    }
 }

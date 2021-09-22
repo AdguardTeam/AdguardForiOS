@@ -140,39 +140,3 @@ class AddExceptionCell: UITableViewCell {
         theme?.setupTableCell(self)
     }
 }
-
-class WifiExceptionsCell: UITableViewCell {
-    
-    @IBOutlet weak var wifiExceptionNameLabel: ThemableLabel!
-    @IBOutlet weak var stateImage: UIImageView!
-    @IBOutlet weak var exceptionStateButton: UIButton!
-    @IBOutlet weak var sepator: UIView!
-    
-    private let enabledImage: UIImage = UIImage(named: "logocheck") ?? UIImage()
-    private let disabledImage: UIImage = UIImage(named: "cross") ?? UIImage()
-    
-    var theme: ThemeServiceProtocol? {
-        didSet{
-            updateTheme()
-        }
-    }
-    
-    var exceptionName: String? {
-        didSet {
-            wifiExceptionNameLabel.text = exceptionName
-        }
-    }
-    
-    var enabled: Bool? {
-        didSet{
-            let safeEnabled: Bool = enabled ?? false
-            stateImage.image = safeEnabled ? enabledImage : disabledImage
-        }
-    }
-    
-    private func updateTheme(){
-        theme?.setupLabel(wifiExceptionNameLabel)
-        theme?.setupTableCell(self)
-        sepator.backgroundColor = theme?.separatorColor
-    }
-}

@@ -19,14 +19,13 @@
 import UIKit
 import SharedAdGuardSDK
 
-class NetworkSettingsTableController: UITableViewController, AddRuleControllerDelegate, NetworkSettingsChangedDelegate, RuleDetailsControllerDelegate {
+class NetworkSettingsTableController: UITableViewController, AddRuleControllerDelegate, NetworkSettingsChangedDelegate, UserRuleTableViewCellDelegate {
     
     /* Cell reuse ids */
     private let networkSettingsTitleCellId = "NetworkSettingsTitleCell"
     private let filterDataCellReuseId = "FilterDataCell"
     private let networkSettingsDescriptionCellReuseId = "NetworkSettingsDescriptionCell"
     private let addExceptionCellReuseId = "AddExceptionCell"
-    private let wifiExceptionsCellReuseId = "WifiExceptionsCell"
     
     /* Sections */
     private let titleSection = 0
@@ -46,14 +45,14 @@ class NetworkSettingsTableController: UITableViewController, AddRuleControllerDe
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
     
-    private var model: NetworkSettingsModelProtocol? = nil
+    private var model: NetworkSettingsModel!
 
     // MARK: - ViewController Lifecycle
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         model = NetworkSettingsModel(networkSettingsService: networkSettingsService, vpnManager: vpnManager, resources: resources, nativeProviders: nativeProviders)
-        model?.delegate = self
+        model.delegate = self
     }
     
     override func viewDidLoad() {
@@ -61,6 +60,7 @@ class NetworkSettingsTableController: UITableViewController, AddRuleControllerDe
         
         updateTheme()
         setupBackButton()
+        UserRuleTableViewCell.registerCell(forTableView: tableView)
     }
     
     // MARK: - Actions
@@ -70,17 +70,12 @@ class NetworkSettingsTableController: UITableViewController, AddRuleControllerDe
         let enabled = sender.isOn
         
         if tag == mobileDataRow {
-            model?.filterMobileDataEnabled = enabled
+            model.filterMobileDataEnabled = enabled
         } else {
-            model?.filterWifiDataEnabled = enabled
+            model.filterWifiDataEnabled = enabled
         }
     }
-    
-    @IBAction func exeptionStateAction(_ sender: UIButton) {
-        let index = sender.tag
-        model?.toggleRuleEnabled(index: index)
-    }
-    
+        
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -137,18 +132,8 @@ class NetworkSettingsTableController: UITableViewController, AddRuleControllerDe
     
     // MARK: - AddRuleControllerDelegate method
     
-    func addRule(_ rule: String) {
-        model?.addException(rule: rule)
-    }
-    
-    // MARK: - RuleDetailsControllerDelegate
-    
-    func removeRule(_ ruleText: String, at indexPath: IndexPath) throws {
-        model?.deleteRule(index: indexPath.row)
-    }
-    
-    func modifyRule(_ oldRuleText: String, newRule: UserRule, at indexPath: IndexPath) throws {
-        model?.changeRule(index: indexPath.row, newRule: newRule.ruleText)
+    func addRule(_ rule: String) throws {
+        try model?.addException(rule: rule)
     }
     
     // MARK: - NetworkSettingsChangedDelegate method
@@ -209,21 +194,15 @@ class NetworkSettingsTableController: UITableViewController, AddRuleControllerDe
     }
     
     private func setupWifiExceptionsCell(row: Int) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: wifiExceptionsCellReuseId) as? WifiExceptionsCell {
-            cell.theme = theme
+        let cell = UserRuleTableViewCell.getCell(forTableView: self.tableView)
             
-            let exception = model?.exceptions[row]
-            cell.exceptionName = exception?.rule
-            cell.enabled = exception?.enabled
-            
-            let count = model?.exceptions.count
-            cell.sepator.isHidden = count == row + 1
-            
-            cell.exceptionStateButton.tag = row
-            
-            return cell
-        }
-        return UITableViewCell()
+        let exception = model.exceptions[row]
+        cell.model = UserRuleCellModel(rule: exception.rule, isEnabled: exception.enabled, isSelected: false, isEditing: false)
+        
+        cell.delegate = self
+        cell.updateTheme(theme)
+        
+        return cell
     }
     
     // MARK: - Cells Actions
@@ -250,12 +229,17 @@ class NetworkSettingsTableController: UITableViewController, AddRuleControllerDe
         guard let controller = storyboard.instantiateViewController(withIdentifier: "RuleDetailsController") as? RuleDetailsController else { return }
         guard let exception = model?.exceptions[row] else { return }
 
-        let rule = UserRule(ruleText: exception.rule, isEnabled: true)
+        let rule = UserRule(ruleText: exception.rule, isEnabled: exception.enabled)
         
-        controller.context = RuleDetailsController.Context(rule: rule, ruleIndexPath: IndexPath(row: 0, section: 0), delegate: self, ruleType: .wifiExceptions)
+        controller.context = RuleDetailsController.Context(rule: rule, ruleIndexPath: IndexPath(row: row, section: 0), delegate: model, ruleType: .wifiExceptions)
             
         present(controller, animated: true, completion: nil)
     }
+    
+    func ruleStateChanged(_ rule: String, newState: Bool) {
+        model.changeRule(rule: rule, enabled: newState)
+    }
+    
 }
 
 extension NetworkSettingsTableController: ThemableProtocol {
