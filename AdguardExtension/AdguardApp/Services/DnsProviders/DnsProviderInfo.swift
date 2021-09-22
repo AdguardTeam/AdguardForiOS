@@ -18,6 +18,7 @@
 
 import Foundation
 
+//TODO: Remove DnsProtocol, with SDK we will be use DnsAdGuardSDK DnsProtocol enum
 // MARK: - data types -
 @objc enum DnsProtocol: Int, Codable, CaseIterable {
     case dns = 0
@@ -92,6 +93,7 @@ import Foundation
     }
 }
 
+//TODO: Remove DnsProviderFeature, with SDK we would't be use it
 struct DnsProviderFeature {
     var name: String
     var title: String
@@ -99,6 +101,7 @@ struct DnsProviderFeature {
     var iconId: String
 }
 
+//TODO: Remove DnsServerInfo, with SDK we would't be use it
 @objc(DnsServerInfo)
 @objcMembers
 class DnsServerInfo : ACObject, Codable {
@@ -144,6 +147,7 @@ class DnsServerInfo : ACObject, Codable {
     }
 }
 
+//TODO: Remove DnsProviderInfo, with SDK we would't be use it
 @objc(DnsProviderInfo)
 @objcMembers class DnsProviderInfo : ACObject {
     var name: String
@@ -208,13 +212,13 @@ class DnsServerInfo : ACObject, Codable {
     }
     
     func getActiveProtocol(_ resources: AESharedResourcesProtocol) -> DnsProtocol? {
-        if let protocolRawValue = resources.dnsActiveProtocols[name]{
-            return DnsProtocol(rawValue: protocolRawValue)
-        }
+//        if let protocolRawValue = resources.dnsActiveProtocols[name]{
+//            return DnsProtocol(rawValue: protocolRawValue)
+//        }
         return nil
     }
     
     func setActiveProtocol(_ resources: AESharedResourcesProtocol, protcol: DnsProtocol?) {
-        resources.dnsActiveProtocols[name] = protcol?.rawValue
+//        resources.dnsActiveProtocols[name] = protcol?.rawValue
     }
 }

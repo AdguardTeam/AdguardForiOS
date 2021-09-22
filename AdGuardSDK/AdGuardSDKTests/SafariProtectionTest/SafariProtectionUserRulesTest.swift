@@ -29,8 +29,7 @@ class SafariProtectionUserRulesTest: XCTestCase {
                                             converter: converter,
                                             cbStorage: cbStorage,
                                             cbService: cbService,
-                                            safariManagers: safariManagers,
-                                            userRulesClipper: UserRulesClipperMock())
+                                            safariManagers: safariManagers)
         
         mocks = [safariManagers.blocklistRulesManagerMock,
                  safariManagers.allowlistRulesManagerMock,

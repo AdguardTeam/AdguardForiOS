@@ -17,6 +17,7 @@
 */
 
 import UIKit.UIImage
+import struct SharedAdGuardSDK.Constants
 
 // MARK: - DnsProviders
 struct PredefinedDnsProviders: Decodable, Equatable {
@@ -55,6 +56,7 @@ struct PredefinedDnsProvider: Decodable, Equatable {
     let servers: [PredefinedDnsServer]
     let providerId: Int
     let logo: UIImage?
+    let logoDark: UIImage?
     let homepage: String
 
     enum CodingKeys: String, CodingKey {
@@ -66,12 +68,13 @@ struct PredefinedDnsProvider: Decodable, Equatable {
         case providerDescription = "description"
     }
     
-    init(name: String, providerDescription: String, servers: [PredefinedDnsServer], providerId: Int, logo: UIImage?, homepage: String) {
+    init(name: String, providerDescription: String, servers: [PredefinedDnsServer], providerId: Int, logo: UIImage?, logoDark: UIImage?, homepage: String) {
         self.name = name
         self.providerDescription = providerDescription
         self.servers = servers
         self.providerId = providerId
         self.logo = logo
+        self.logoDark = logoDark
         self.homepage = homepage
     }
     
@@ -92,6 +95,7 @@ struct PredefinedDnsProvider: Decodable, Equatable {
         self.providerId = try container.decode(Int.self, forKey: .providerId)
         let logoImageName = try container.decode(String.self, forKey: .logo)
         self.logo = UIImage(named: logoImageName, in: Bundle.current, compatibleWith: nil)
+        self.logoDark = UIImage(named: logoImageName + "_dark", in: Bundle.current, compatibleWith: nil)
         self.homepage = try container.decode(String.self, forKey: .homepage)
         self.providerDescription = try container.decode(String.self, forKey: .providerDescription)
     }
@@ -103,10 +107,10 @@ struct PredefinedDnsProvider: Decodable, Equatable {
 
 // MARK: - DnsFeature
 public struct DnsFeature: Decodable, Equatable {
-    let logo: UIImage
-    let type: DnsFeatureType
-    let name: String
-    let featureDescription: String
+    public let logo: UIImage
+    public let type: DnsFeatureType
+    public let name: String
+    public let featureDescription: String
     
     enum CodingKeys: String, CodingKey {
         case logo

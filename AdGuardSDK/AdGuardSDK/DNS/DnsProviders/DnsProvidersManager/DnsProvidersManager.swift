@@ -103,7 +103,7 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
     ) throws {
         self.configuration = configuration
         self.userDefaults = userDefaults
-        self.customProvidersStorage = CustomDnsProvidersStorage(userDefaults: self.userDefaults)
+        self.customProvidersStorage = CustomDnsProvidersStorage(userDefaults: self.userDefaults, configuration: configuration)
         let predefinedDnsProviders = try PredefinedDnsProvidersDecoder(currentLanguage: configuration.currentLanguage)
         self.providersVendor = DnsProvidersVendor(predefinedProviders: predefinedDnsProviders, customProvidersStorage: self.customProvidersStorage)
         
@@ -154,7 +154,7 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
         
         let newActiveDnsInfo = DnsProvidersManager.ActiveDnsInfo(providerId: id, serverId: serverId)
         userDefaults.activeDnsInfo = newActiveDnsInfo
-        makeProviderActive(newActiveDnsInfo)
+        reinitializeProviders()
         
         Logger.logInfo("(DnsProvidersManager) - selectProvider; Selected provider with id=\(id) serverId=\(serverId)")
     }
@@ -167,6 +167,7 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
             userDefaults.activeDnsInfo = DnsProvidersManager.ActiveDnsInfo(providerId: ids.providerId, serverId: ids.serverId)
         }
         reinitializeProviders()
+        
         
         Logger.logInfo("(DnsProvidersManager) - addCustomProvider; Added custom provider with name=\(name), upstreams=\(upstreams.joined(separator: "; ")) selectAsCurrent=\(selectAsCurrent)")
     }
@@ -213,17 +214,6 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
     }
     
     // MARK: - Private methods
-    
-    private func makeProviderActive(_ activeDnsInfo: DnsProvidersManager.ActiveDnsInfo) {
-        for i in 0..<predefinedProviders.count {
-            let providerIsEnabled = predefinedProviders[i].providerId == activeDnsInfo.providerId
-            predefinedProviders[i].isEnabled = providerIsEnabled
-            
-            var provider = predefinedProviders[i] as! DnsProvider
-            provider.makeActiveServer(with: activeDnsInfo.serverId)
-            predefinedProviders[i] = provider
-        }
-    }
     
     private func reinitializeProviders() {
         let providersWithState = providersVendor.getProvidersWithState(for: configuration.dnsImplementation,

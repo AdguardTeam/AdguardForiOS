@@ -33,7 +33,8 @@ class DnsProvidersVendorTest: XCTestCase {
         XCTAssertEqual(adguardProviders.activeDnsProvider.name, "Quad9")
        
         checkStates(adgProviders, providerId: providerId, serverId: serverId, implementation: .adGuard)
-        
+        checkDefaultServer(adgProviders, matching: 1)
+
         // Test with Native implementation
         let nativeProviders = vendor.getProvidersWithState(for: .native, activeDns: DnsProvidersManager.ActiveDnsInfo(providerId: providerId, serverId: serverId))
         
@@ -43,6 +44,7 @@ class DnsProvidersVendorTest: XCTestCase {
         XCTAssertEqual(nativeProviders.activeDnsProvider.name, "AdGuard DNS")
         
         checkStates(natProviders, providerId: PredefinedDnsProvider.adguardDnsProviderId, serverId: PredefinedDnsServer.adguardDohServerId, implementation: .native)
+        checkDefaultServer(natProviders, matching: 0)
     }
     
     func testNativeImplementationWithActiveAdguardDoh() {
@@ -59,6 +61,7 @@ class DnsProvidersVendorTest: XCTestCase {
         XCTAssertEqual(servers.count, 26)
         
         checkStates(all, providerId: PredefinedDnsProvider.adguardDnsProviderId, serverId: PredefinedDnsServer.adguardDohServerId, implementation: .native)
+        checkDefaultServer(all, matching: 0)
     }
     
     func testAdguardImplementationWithActiveCustomServer() {
@@ -85,6 +88,7 @@ class DnsProvidersVendorTest: XCTestCase {
         XCTAssertEqual(servers.count, 37)
         
         checkStates(all, providerId: providerId, serverId: serverId, implementation: .adGuard)
+        checkDefaultServer(all, matching: 1)
     }
     
     func testNativeImplementationWithActiveCustomQuicServer() {
@@ -111,6 +115,7 @@ class DnsProvidersVendorTest: XCTestCase {
         XCTAssertEqual(servers.count, 26)
         
         checkStates(all, providerId: PredefinedDnsProvider.adguardDnsProviderId, serverId: PredefinedDnsServer.adguardDohServerId, implementation: .native)
+        checkDefaultServer(all, matching: 0)
     }
     
     func testNativeImplementationWithActiveSystemDefaultServer() {
@@ -127,6 +132,7 @@ class DnsProvidersVendorTest: XCTestCase {
         XCTAssertEqual(servers.count, 26)
         
         checkStates(all, providerId: PredefinedDnsProvider.adguardDnsProviderId, serverId: PredefinedDnsServer.adguardDohServerId, implementation: .native)
+        checkDefaultServer(all, matching: 0)
     }
     
     private func checkStates(_ providers: [DnsProviderMetaProtocol], providerId: Int, serverId: Int, implementation: DnsImplementation) {
@@ -143,6 +149,17 @@ class DnsProvidersVendorTest: XCTestCase {
         let allProtocolsDecoded = servers.map { $0.type }
         let allProtocolsAvailable = DnsImplementation.native.supportedProtocols
         allProtocolsAvailable.forEach { XCTAssert(allProtocolsDecoded.contains($0)) }
+    }
+    
+    private func checkDefaultServer(_ providers: [DnsProviderMetaProtocol], matching: Int) {
+        var counter = 0
+        providers.forEach {
+            if $0.isDefault {
+                XCTAssertEqual($0.providerId, PredefinedDnsProvider.systemDefaultProviderId)
+                counter += 1
+            } 
+        }
+        XCTAssertEqual(counter, matching)
     }
 }
 

@@ -31,7 +31,6 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
                                             cbStorage: cbStorage,
                                             cbService: cbService,
                                             safariManagers: safariManagers,
-                                            userRulesClipper: UserRulesClipperMock(),
                                             dnsBackgroundFetchUpdater: dnsBackgroundFetchUpdater)
     }
     

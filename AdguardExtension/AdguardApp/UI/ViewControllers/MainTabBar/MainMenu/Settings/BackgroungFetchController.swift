@@ -51,6 +51,15 @@ final class BackgroundFetchController: BottomAlertController {
         tableView.delegate = self
         tableView.separatorStyle = .none
     }
+    
+    //MARK: - Private methods
+    
+    private func applySelectedOption(row: BackgroundFetchUpdateInterval) {
+        AppDelegate.setBackgroundFetchInterval(row.interval)
+        selectedCell = row
+        resources.backgroundFetchUpdatePeriod = row
+        delegate?.periodSelected(period: row)
+    }
 }
 
 //MARK: - BackgroundFetchController + UITableViewDataSource
@@ -59,9 +68,12 @@ extension BackgroundFetchController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ExtendedRadioButtonCell.reuseIdentifier, for: indexPath) as? ExtendedRadioButtonCell else { return UITableViewCell() }
         let row = BackgroundFetchUpdateInterval.allCases[indexPath.row]
+        cell.delegate = self
         cell.titleString = row.title
         cell.radioButtonSelected = selectedCell == row
-        cell.updateTheme()
+        cell.isArrowRightHidden = true
+        cell.cellTag = indexPath.row
+        cell.updateTheme(themeService: themeService)
         return cell
     }
 
@@ -82,16 +94,21 @@ extension BackgroundFetchController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = BackgroundFetchUpdateInterval.allCases[indexPath.row]
-        AppDelegate.setBackgroundFetchInterval(row.interval)
-        selectedCell = row
-        resources.backgroundFetchUpdatePeriod = row
+        applySelectedOption(row: row)
         tableView.deselectRow(at: indexPath, animated: true)
-        delegate?.periodSelected(period: row)
         dismiss(animated: true)
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50.0
+        return UITableView.automaticDimension
+    }
+}
+
+extension BackgroundFetchController: ExtendedRadioButtonCellDelegate {
+    func radioButtonTapped(with tag: Int) {
+        let row = BackgroundFetchUpdateInterval.allCases[tag]
+        applySelectedOption(row: row)
+        dismiss(animated: true)
     }
 }
 
