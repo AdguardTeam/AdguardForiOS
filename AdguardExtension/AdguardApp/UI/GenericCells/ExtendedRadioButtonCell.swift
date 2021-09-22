@@ -31,7 +31,13 @@ struct ExtendedRadioButtonCellModel {
     let isArrowRightHidden: Bool
     let delegate: ExtendedRadioButtonCellDelegate?
     
-    init(cellTag: Int, titleString: String, descriptionString: String, radioButtonSelected: Bool, isArrowRightHidden: Bool, delegate: ExtendedRadioButtonCellDelegate?) {
+    init(cellTag: Int = 0,
+         titleString: String = "",
+         descriptionString: String = "",
+         radioButtonSelected: Bool = false,
+         isArrowRightHidden: Bool = false,
+         delegate: ExtendedRadioButtonCellDelegate? = nil) {
+        
         self.cellTag = cellTag
         self.titleString = titleString
         self.descriptionString = descriptionString
@@ -39,17 +45,6 @@ struct ExtendedRadioButtonCellModel {
         self.isArrowRightHidden = isArrowRightHidden
         self.delegate = delegate
     }
-    
-    //Init with default values
-    init() {
-        self.cellTag = -1
-        self.titleString = ""
-        self.descriptionString = ""
-        self.radioButtonSelected = false
-        self.isArrowRightHidden = false
-        self.delegate = nil
-    }
-    
 }
 
 /// Generic cell with title and description labels and radio button that shows selected state
