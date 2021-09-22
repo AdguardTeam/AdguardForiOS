@@ -89,7 +89,7 @@ final class DnsProvidersController: UITableViewController {
               let provider = providerToShow
         else { return }
         
-        controller.model = DnsProviderDetailsModel(provider: provider, resources: resources)
+        controller.provider = provider
         controller.delegate = self
     }
     
@@ -134,7 +134,7 @@ final class DnsProvidersController: UITableViewController {
         case .providerSection:
             let tableModel = model.tableModels[indexPath.row]
             
-            if tableModel.isDefaultProvider {
+            if tableModel.provider.isDefault {
                 do {
                     try model.setProviderActive(provider: tableModel.provider)
                     tableView.reloadData()
@@ -144,11 +144,11 @@ final class DnsProvidersController: UITableViewController {
                 return
             }
             
-            if tableModel.isCustomProvider {
+            if tableModel.provider.isCustom {
                 presentNewDnsServerController(controllerType: .edit, tableModel)
             } else {
                 providerToShow = tableModel.provider.predefined
-                performSegue(withIdentifier: dnsDetailsSegueConst, sender: self)
+                self.performSegue(withIdentifier: dnsDetailsSegueConst, sender: self)
             }
             
         case .addProviderSection: presentNewDnsServerController(controllerType: .add, nil)
@@ -162,13 +162,14 @@ final class DnsProvidersController: UITableViewController {
         
         switch controllerType {
         case .add:
-            controller.model = NewDnsServerModel(dnsProvidersManager: dnsProvidersManager, vpnManager: vpnManager)
+            controller.dnsProviderManager = dnsProvidersManager
             controller.openUrl = openUrl
         case .edit:
             guard let provider = tableModel?.provider.custom else { return }
-            controller.model = NewDnsServerModel(dnsProvidersManager: dnsProvidersManager, vpnManager: vpnManager, provider: provider)
+            controller.customDnsProvider = provider
         }
         
+        controller.dnsProviderManager = dnsProvidersManager
         controller.controllerType = controllerType
         controller.delegate = self
         present(controller, animated: true, completion: nil)

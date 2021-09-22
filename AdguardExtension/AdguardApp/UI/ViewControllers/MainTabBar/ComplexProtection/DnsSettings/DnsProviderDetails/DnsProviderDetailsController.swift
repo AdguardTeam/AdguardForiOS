@@ -39,7 +39,7 @@ final class DnsProviderDetailsController : UITableViewController {
     }
     
     // MARK: - public fields
-    var model: DnsProviderDetailsModel!
+    var provider: DnsProviderProtocol!
     weak var delegate: DnsProviderDetailsControllerDelegate?
     
     // MARK: - Services
@@ -48,7 +48,9 @@ final class DnsProviderDetailsController : UITableViewController {
     private let domainsParserService: DomainsParserServiceProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - private properties
-    
+    private lazy var model: DnsProviderDetailsModel = {
+        return DnsProviderDetailsModel(provider: provider, resources: resources)
+    }()
     private let providerDetailSections: [ProviderSection] = ProviderSection.allCases
     private let providerDetailRows: [ProviderRow]  = ProviderRow.allCases
     private let selectDnsProtocolControllerIdentifier = "SelectDnsProtocolController"
@@ -154,7 +156,7 @@ final class DnsProviderDetailsController : UITableViewController {
     // MARK: - Actions
     
     @IBAction func selectTapped(_ sender: Any) {
-        delegate?.providerSelected(provider: model.provider)
+        delegate?.providerSelected(provider: provider)
         navigationController?.popViewController(animated: true)
     }
     

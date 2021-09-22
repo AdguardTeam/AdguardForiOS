@@ -40,7 +40,8 @@ final class NewDnsServerController: BottomAlertController {
     
     //MARK: - Properties
     var controllerType: DnsServerControllerType = .add
-    var model: NewDnsServerModel!
+    var dnsProviderManager: DnsProvidersManagerProtocol!
+    var customDnsProvider: CustomDnsProviderProtocol?
     var openUrl: String?
     
     weak var delegate: NewDnsServerControllerDelegate?
@@ -60,11 +61,16 @@ final class NewDnsServerController: BottomAlertController {
     
     @IBOutlet weak var scrollContentView: UIView!
     
-    private let textFieldCharectersLimit = 50
-    
     // MARK: - Services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
+    
+    //MARK: - Private properties
+    private let textFieldCharectersLimit = 50
+    private lazy var model: NewDnsServerModel = {
+        return NewDnsServerModel(dnsProvidersManager: dnsProviderManager, vpnManager: vpnManager, provider: customDnsProvider)
+    }()
     
     // MARK: - ViewController lifecycle
     
@@ -75,8 +81,8 @@ final class NewDnsServerController: BottomAlertController {
             // Native DNS implementation doesn't support port syntax
             upstreamsField.text = resources.dnsImplementation == .adGuard ? openUrl : openUrl.discardPortFromIpAddress()
         } else {
-            nameField.text = model?.providerName
-            upstreamsField.text = model?.providerUpstream
+            nameField.text = model.providerName
+            upstreamsField.text = model.providerUpstream
         }
         
         nameField.becomeFirstResponder()

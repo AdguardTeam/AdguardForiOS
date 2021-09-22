@@ -72,7 +72,7 @@ final class DnsProviderDetailsModel {
         }
     }
 
-    let provider: DnsProviderProtocol
+    private let provider: DnsProviderProtocol
     private let resources: AESharedResourcesProtocol
     
     

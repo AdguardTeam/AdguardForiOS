@@ -20,21 +20,21 @@ import DnsAdGuardSDK
 
 /// Providers table model for providers table view
 final class DnsProvidersTableModel {
+    //MARK: - Properties
     let provider: DnsProviderMetaProtocol
-    
-    var isDefaultProvider: Bool { return provider.isDefault }
-    var isCustomProvider: Bool { return provider.isCustom }
 
+    //MARK: - Init
     init(provider: DnsProviderMetaProtocol) {
         self.provider = provider
     }
     
+    //MARK: - Public methods
     func getCellModel(cellTag: Int, delegate: ExtendedRadioButtonCellDelegate? = nil) -> ExtendedRadioButtonCellModel {
         return ExtendedRadioButtonCellModel(cellTag: cellTag,
                                             titleString: provider.name,
                                             descriptionString: provider.isCustom ? "" : provider.predefined.providerDescription,
                                             radioButtonSelected: provider.isEnabled,
-                                            isArrowRightHidden: isDefaultProvider,
+                                            isArrowRightHidden: provider.isDefault,
                                             delegate: delegate)
     }
 }
