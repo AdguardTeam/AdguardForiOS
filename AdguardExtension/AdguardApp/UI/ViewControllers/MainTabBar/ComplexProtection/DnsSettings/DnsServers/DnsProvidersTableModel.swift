@@ -16,14 +16,13 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import SharedAdGuardSDK
 import DnsAdGuardSDK
 
 /// Providers table model for providers table view
 final class DnsProvidersTableModel {
     let provider: DnsProviderMetaProtocol
     
-    var isDefaultProvider: Bool { return SharedAdGuardSDK.Constants.systemDefaultProviderId == provider.providerId }
+    var isDefaultProvider: Bool { return provider.isSystemDefaultProvider }
     var isCustomProvider: Bool { return provider.isCustom }
 
     init(provider: DnsProviderMetaProtocol) {

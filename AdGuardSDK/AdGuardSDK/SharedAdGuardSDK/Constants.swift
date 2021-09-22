@@ -18,7 +18,4 @@
 
 import Foundation
 
-public struct Constants {
-    public static let systemDefaultProviderId = 10_000
-    static let systemDefaultServerId = 0
-}
+public struct Constants {}

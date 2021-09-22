@@ -48,7 +48,7 @@ struct PredefinedDnsProviders: Decodable, Equatable {
 
 // MARK: - PredefinedDnsProvider
 struct PredefinedDnsProvider: Decodable, Equatable {
-    static let systemDefaultProviderId = Constants.systemDefaultProviderId
+    static let systemDefaultProviderId = 10000
     static let adguardDnsProviderId = 10001
     
     let name: String
