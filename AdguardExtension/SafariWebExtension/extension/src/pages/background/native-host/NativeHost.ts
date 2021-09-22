@@ -64,6 +64,15 @@ export class NativeHost implements NativeHostInterface {
     }
 
     /**
+     * Opens tabs with special links, which are intercepted by ios app
+     * @param link
+     * @private
+     */
+    private static async openNativeLink(link: string) {
+        await browser.tabs.create({ url: link });
+    }
+
+    /**
      * Saves action links received from native host
      * @param links
      */
@@ -82,7 +91,7 @@ export class NativeHost implements NativeHostInterface {
         }
 
         const linkWithRule = this.links.addToBlocklistLink + encodeURIComponent(ruleText);
-        await browser.tabs.create({ url: linkWithRule });
+        await NativeHost.openNativeLink(linkWithRule);
     }
 
     async enableProtection(url: string): Promise<void> {
@@ -92,7 +101,7 @@ export class NativeHost implements NativeHostInterface {
 
         const domain = getDomain(url);
         const linkWithDomain = this.links.removeFromAllowlistLink + encodeURIComponent(domain);
-        await browser.tabs.create({ url: linkWithDomain });
+        await NativeHost.openNativeLink(linkWithDomain);
     }
 
     async disableProtection(url: string): Promise<void> {
@@ -102,7 +111,7 @@ export class NativeHost implements NativeHostInterface {
 
         const domain = getDomain(url);
         const linkWithDomain = this.links.addToAllowlistLink + encodeURIComponent(domain);
-        await browser.tabs.create({ url: linkWithDomain });
+        await NativeHost.openNativeLink(linkWithDomain);
     }
 
     async removeUserRulesBySite(url: string) {
@@ -112,7 +121,7 @@ export class NativeHost implements NativeHostInterface {
 
         const domain = getDomain(url);
         const linkWithDomain = this.links.removeAllBlocklistRulesLink + encodeURIComponent(domain);
-        await browser.tabs.create({ url: linkWithDomain });
+        await NativeHost.openNativeLink(linkWithDomain);
     }
 
     // FIXME shouldn't here provided url?
@@ -122,7 +131,7 @@ export class NativeHost implements NativeHostInterface {
             return;
         }
 
-        await browser.tabs.create({ url: this.links.reportProblemLink });
+        await NativeHost.openNativeLink(this.links.reportProblemLink);
     }
 
     async upgradeMe() {
@@ -130,7 +139,7 @@ export class NativeHost implements NativeHostInterface {
             return;
         }
 
-        await browser.tabs.create({ url: this.links.upgradeAppLink });
+        await NativeHost.openNativeLink(this.links.upgradeAppLink);
     }
 
     async enableAdvancedBlocking() {
@@ -138,7 +147,7 @@ export class NativeHost implements NativeHostInterface {
             return;
         }
 
-        await browser.tabs.create({ url: this.links.enableAdvancedBlockingLink });
+        await NativeHost.openNativeLink(this.links.enableAdvancedBlockingLink);
     }
 
     /**
