@@ -18,16 +18,11 @@
 
 import Foundation
 
-class OnboardingCell: UITableViewCell {
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var separator: UIView!
-}
-
 protocol OnboardingControllerDelegate {
     func onboardingDidFinish()
 }
 
-class OnboardingController: UIViewController {
+final class OnboardingController: UIViewController {
     
     var delegate: OnboardingControllerDelegate?
     var needsShowingPremium: Bool?
@@ -39,16 +34,13 @@ class OnboardingController: UIViewController {
     private var contenBlockerObserver: NotificationToken?
     
     private let showLicenseSegue = "ShowLicenseSegue"
-    private let onboardingCellId = "OnboardingCellId"
-    
-    private let contentBlockers = ["AdGuard — Custom", "AdGuard — General", "AdGuard — Other", "AdGuard — Privacy"]
-    private let cellsAlpha: [CGFloat] = [1.0, 0.7, 0.4, 0.1]
     
     // MARK: - outlets
     @IBOutlet weak var settingsLabel: ThemableLabel!
     @IBOutlet weak var safariLabel: ThemableLabel!
     @IBOutlet weak var switchLabel: ThemableLabel!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var onboardingContentView: OnboardingContentView!
+    @IBOutlet weak var onboardingContentViewTopConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var watchManualButtonIpad: UIButton!
     @IBOutlet var themableLabels: [ThemableLabel]!
@@ -63,8 +55,16 @@ class OnboardingController: UIViewController {
         })
         
         watchManualButtonIpad.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.lightGreen1)
-        setupLabels()
-        updateTheme()
+        
+        if #available(iOS 15.0, *) {
+            onboardingContentViewTopConstraint.constant = 48.0
+            onboardingContentView.onboardingType = .withAdvancedProtection
+        } else {
+            onboardingContentViewTopConstraint.constant = 30.0
+            onboardingContentView.onboardingType = .withoutAdvancedProtection
+        }
+        
+        self.updateTheme()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -104,11 +104,20 @@ class OnboardingController: UIViewController {
     // MARK: - Private methods
     
     private func setupLabels() {
-        settingsLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_first_step_text"), fontSize: settingsLabel.font!.pointSize, color: theme.grayTextColor)
-        
-        safariLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_second_step_text"), fontSize: safariLabel.font!.pointSize, color: theme.grayTextColor)
-        
-        switchLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_third_step_text"), fontSize: switchLabel.font!.pointSize, color: theme.grayTextColor)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            switch self.onboardingContentView.onboardingType {
+            case .withAdvancedProtection:
+                self.safariLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("advanced_protection_onboarding_second_step_text"), fontSize: self.safariLabel.font!.pointSize, color: self.theme.grayTextColor)
+                
+            case .withoutAdvancedProtection:
+                self.safariLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_second_step_text"), fontSize: self.safariLabel.font!.pointSize, color: self.theme.grayTextColor)
+            }
+            
+            self.settingsLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_first_step_text"), fontSize: self.settingsLabel.font!.pointSize, color: self.theme.grayTextColor)
+            
+            self.switchLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_third_step_text"), fontSize: self.switchLabel.font!.pointSize, color: self.theme.grayTextColor)
+        }
     }
     
     private func observeContentBlockersState(){
@@ -130,32 +139,11 @@ class OnboardingController: UIViewController {
     }
 }
 
-extension OnboardingController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contentBlockers.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: onboardingCellId) as? OnboardingCell {
-            cell.titleLabel.text = contentBlockers[indexPath.row]
-            cell.separator.isHidden = indexPath.row == contentBlockers.count - 1
-            
-            theme.setupTableCell(cell)
-            theme.setupSeparator(cell.separator)
-            cell.titleLabel.textColor = configuration.darkTheme ? .white : .black
-            cell.contentView.alpha = cellsAlpha[indexPath.row]
-            return cell
-        }
-        return UITableViewCell()
-    }
-}
-
 extension OnboardingController: ThemableProtocol {
     func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
-        theme.setupTable(tableView)
-        tableView.reloadData()
         setupLabels()
+        onboardingContentView.updateTheme()
     }
 }

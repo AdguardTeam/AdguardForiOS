@@ -36,8 +36,8 @@ final class StartupService : NSObject{
         locator.addService(service: sharedResources)
         
         // Registering standard Defaults
-        if  let path = Bundle.main.path(forResource: "defaults", ofType: "plist"),
-            let defs = NSDictionary(contentsOfFile: path)  as? [String : Any] {
+        if let path = Bundle.main.path(forResource: "defaults", ofType: "plist"),
+            let defs = NSDictionary(contentsOfFile: path)  as? [String: Any] {
             sharedResources.sharedDefaults().register(defaults: defs)
         }
         
@@ -144,8 +144,5 @@ final class StartupService : NSObject{
         
         let importSettings: ImportSettingsServiceProtocol = ImportSettingsService(networking: networkService, dnsProvidersService: dnsProviders, purchaseService: purchaseService, resources: sharedResources, safariProtection: safariProtection)
         locator.addService(service: importSettings)
-        
-        let webReporter: ActionWebReporterProtocol = ActionWebReporter(productInfo: productInfo, complexProtection: complexProtection, dnsProviders: dnsProviders, configuration: configuration, safariProtection: safariProtection)
-        locator.addService(service: webReporter)
     }
 }

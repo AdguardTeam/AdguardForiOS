@@ -1,5 +1,8 @@
-/* Class = "UILabel"; text = "Get stronger with PREMIUM!"; ObjectID = "3qN-uj-pOb"; */
-"3qN-uj-pOb.text" = "Get stronger with PREMIUM!";
+/* Class = "UILabel"; text = "AdGuard uses the iOS 15 new anti-distraction tools for even better content blocking. For example, you can block YouTube ads in Safari in one move!"; ObjectID = "0IU-PO-Xeh"; */
+"0IU-PO-Xeh.text" = "AdGuard uses the iOS 15 new anti-distraction tools for even better content blocking. For example, you can block YouTube ads in Safari in one move!";
+
+/* Class = "UILabel"; text = "Get stronger with Premium!"; ObjectID = "3qN-uj-pOb"; */
+"3qN-uj-pOb.text" = "Get stronger with Premium!";
 
 /* Class = "UIButton"; normalTitle = "FIX IT"; ObjectID = "46F-Jh-wHm"; */
 "46F-Jh-wHm.normalTitle" = "FIX IT";
@@ -9,6 +12,9 @@
 
 /* Class = "UILabel"; text = "Period"; ObjectID = "5pX-mg-2fq"; */
 "5pX-mg-2fq.text" = "Period";
+
+/* Class = "UIButton"; normalTitle = "Turn On"; ObjectID = "7SB-2j-FAc"; */
+"7SB-2j-FAc.normalTitle" = "Turn On";
 
 /* Class = "UILabel"; text = "Native DNS is operating"; ObjectID = "8Z0-0U-Hfk"; */
 "8Z0-0U-Hfk.text" = "Native DNS is operating";
@@ -39,6 +45,9 @@
 
 /* Class = "UILabel"; text = "Some Safari content blockers are disabled"; ObjectID = "cvv-CS-LMQ"; */
 "cvv-CS-LMQ.text" = "Some Safari content blockers are disabled";
+
+/* Class = "UILabel"; text = "New AdGuard features in iOS 15"; ObjectID = "gDV-cq-ZDm"; */
+"gDV-cq-ZDm.text" = "New AdGuard features in iOS 15";
 
 /* Class = "UIButton"; normalTitle = "All time"; ObjectID = "gDb-ep-jQg"; */
 "gDb-ep-jQg.normalTitle" = "All time";

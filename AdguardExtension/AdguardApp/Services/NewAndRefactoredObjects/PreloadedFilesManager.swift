@@ -17,7 +17,6 @@
  */
 
 import Foundation
-import Zip
 import SafariAdGuardSDK
 
 // TODO: - Write tests
@@ -39,17 +38,18 @@ protocol PreloadedFilesManagerProtocol {
  */
 struct PreloadedFilesManager: PreloadedFilesManagerProtocol {
     
-    private let bundle = Bundle.main
+    private let bundle: Bundle
     private let sharedStorageUrls: SharedStorageUrls
     
     /// `URL` where to save preloaded files
-    init(sharedStorageUrls: SharedStorageUrls = SharedStorageUrls()) {
+    init(sharedStorageUrls: SharedStorageUrls = SharedStorageUrls(), bundle: Bundle = .main) {
         self.sharedStorageUrls = sharedStorageUrls
+        self.bundle = bundle
     }
     
     func processPreloadedFiles() throws {
-        guard let dbZipUrlInBundle = Bundle.main.url(forResource: SafariAdGuardSDK.Constants.Files.defaultDbFileName, withExtension: "zip"),
-              let filtersZipUrlInBundle = Bundle.main.url(forResource: "filters", withExtension: "zip")
+        guard let dbZipUrlInBundle = bundle.url(forResource: SafariAdGuardSDK.Constants.Files.defaultDbFileName, withExtension: "zip"),
+              let filtersZipUrlInBundle = bundle.url(forResource: "filters", withExtension: "zip")
         else {
             throw CommonError.missingFile(filename: SafariAdGuardSDK.Constants.Files.defaultDbZipFileName)
         }

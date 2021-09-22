@@ -28,23 +28,13 @@ public final class UserRulesManager: UserRulesManagerProtocol {
     // MARK: - Public properties
     
     public var rulesString: String {
-        rulesModificationQueue.sync {
-            let enabledRules = _allRules.filter { $0.isEnabled }
-            return converter.convertRulesToString(enabledRules)
-        }
+        let enabledRules = allRules.filter { $0.isEnabled }
+        return converter.convertRulesToString(enabledRules)
     }
     
-    public var allRules: [UserRule] { rulesModificationQueue.sync { _allRules } }
+    public var allRules: [UserRule] { storage.rules.elements }
     
     // MARK: - Private properties
-    
-    // Serial queue to manage rules in one and only thread. This queue guarantees thread safety.
-    private let rulesModificationQueue = DispatchQueue(label: "AdGuardSDK.RulesManager.rulesModificationQueue", qos: .userInitiated)
-    
-    private var _allRules: [UserRule]
-    
-    // Used to quickly check domain uniqueness
-    private var domainsSet: Set<String>
     
     // Place where all rules are stored
     private let storage: UserRulesStorageProtocol
@@ -57,76 +47,53 @@ public final class UserRulesManager: UserRulesManagerProtocol {
     public init(type: UserRuleType, storage: UserRulesStorageProtocol) {
         self.storage = storage
         self.converter = type.converter
-        self._allRules = storage.rules
-        self.domainsSet = Set(_allRules.map { $0.ruleText })
     }
     
     // MARK: - Public methods
     
     public func add(rule: UserRule, override: Bool) throws {
-        try rulesModificationQueue.sync { [weak self] in
-            try self?.internalAdd(rule: rule, override: override)
-        }
+        try internalAdd(rule: rule, override: override)
     }
     
     public func add(rules: [UserRule], override: Bool) throws {
-        try rulesModificationQueue.sync {
-            let existingRules = domainsSet.intersection(rules.map { $0.ruleText })
-            
-            if !existingRules.isEmpty && !override {
-                throw UserRulesStorageError.rulesAlreadyExist(rulesStrings: Array(existingRules))
-            }
-            
-            if existingRules.isEmpty {
-                _allRules.append(contentsOf: rules)
-                domainsSet = Set<String>(rules.map { $0.ruleText })
-                self.storage.rules.append(contentsOf: rules)
-            } else {
-                try rules.forEach {
-                    try internalAdd(rule: $0, override: override)
-                }
+        let rulesTextSet = Set(storage.rules.map { $0.ruleText })
+        let existingRules = rulesTextSet.intersection(rules.map { $0.ruleText })
+        
+        if !existingRules.isEmpty && !override {
+            throw UserRulesStorageError.rulesAlreadyExist(rulesStrings: Array(existingRules))
+        }
+        
+        if existingRules.isEmpty {
+            storage.rules.append(contentsOf: rules)
+        } else {
+            try rules.forEach {
+                try internalAdd(rule: $0, override: override)
             }
         }
     }
     
     public func modifyRule(_ oldRuleText: String, _ newRule: UserRule) throws {
-        try rulesModificationQueue.sync {
-            guard let ruleIndex = _allRules.firstIndex(where: { $0.ruleText == oldRuleText }) else {
-                throw UserRulesStorageError.ruleDoesNotExist(ruleString: oldRuleText)
-            }
-            
-            guard _allRules[ruleIndex].ruleText != newRule.ruleText || _allRules[ruleIndex].isEnabled != newRule.isEnabled else {
-                throw UserRulesStorageError.ruleAlreadyExists(ruleString: newRule.ruleText)
-            }
-            
-            if _allRules[ruleIndex].ruleText != newRule.ruleText {
-                domainsSet.remove(oldRuleText)
-                domainsSet.insert(newRule.ruleText)
-            }
-            
-            _allRules[ruleIndex] = newRule
-            storage.rules[ruleIndex] = newRule
+        guard let ruleIndex = allRules.firstIndex(where: { $0.ruleText == oldRuleText }) else {
+            throw UserRulesStorageError.ruleDoesNotExist(ruleString: oldRuleText)
         }
+        
+        guard storage.rules[ruleIndex].ruleText != newRule.ruleText || storage.rules[ruleIndex].isEnabled != newRule.isEnabled else {
+            throw UserRulesStorageError.ruleAlreadyExists(ruleString: newRule.ruleText)
+        }
+        
+        storage.rules.remove(at: ruleIndex)
+        storage.rules.insert(newRule, at: ruleIndex)
     }
     
     public func removeRule(withText ruleText: String) throws {
-        try rulesModificationQueue.sync {
-            guard let ruleIndex = _allRules.firstIndex(where: { $0.ruleText == ruleText }) else {
-                throw UserRulesStorageError.ruleDoesNotExist(ruleString: ruleText)
-            }
-            
-            _allRules.remove(at: ruleIndex)
-            domainsSet.remove(ruleText)
-            storage.rules.remove(at: ruleIndex)
+        guard let ruleIndex = storage.rules.firstIndex(where: { $0.ruleText == ruleText }) else {
+            throw UserRulesStorageError.ruleDoesNotExist(ruleString: ruleText)
         }
+        storage.rules.remove(at: ruleIndex)
     }
     
     public func removeAllRules() {
-        rulesModificationQueue.sync {
-            _allRules.removeAll()
-            domainsSet.removeAll()
-            storage.rules.removeAll()
-        }
+        storage.rules.removeAll()
     }
     
     public func reset() throws {
@@ -135,19 +102,16 @@ public final class UserRulesManager: UserRulesManagerProtocol {
     
     // This func us used to prevent deadlock in queue. Call it in rulesModificationQueue sync
     private func internalAdd(rule: UserRule, override: Bool) throws {
-        let ruleExists = domainsSet.contains(rule.ruleText)
-        if ruleExists && !override {
+        let ruleIndex = storage.rules.firstIndex(where: { $0.ruleText == rule.ruleText })
+        if ruleIndex != nil, !override {
             throw UserRulesStorageError.ruleAlreadyExists(ruleString: rule.ruleText)
         }
         
-        if ruleExists {
-            let ruleIndex = _allRules.firstIndex(where: { $0.ruleText == rule.ruleText })!
-            _allRules[ruleIndex] = rule
-            self.storage.rules[ruleIndex] = rule
+        if let ruleIndex = ruleIndex {
+            storage.rules.remove(at: ruleIndex)
+            storage.rules.insert(rule, at: ruleIndex)
         } else {
-            _allRules.append(rule)
-            domainsSet.insert(rule.ruleText)
-            self.storage.rules.append(rule)
+            storage.rules.append(rule)
         }
     }
 }

@@ -26,7 +26,7 @@
                                     </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="NEXT">
+                                <state key="normal" title="Continue">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -228,7 +228,7 @@
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="38"/>
                                                         </variation>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AdGuard excels at blocking ads on any website in Safari, so you can browse ad-freely and fast." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r3n-Il-Qe8" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AdGuard blocks ads in Safari on most websites. Enjoy faster web surfing without ads!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r3n-Il-Qe8" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                         <rect key="frame" x="24" y="42.5" width="272" height="61"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
@@ -262,8 +262,9 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x8j-Ba-Gwf">
                                                 <rect key="frame" x="320" y="0.0" width="320" height="256"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AdGuard is able to filter any type of content, and you can tune the filtering to exactly suit your needs." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thP-lV-BhN" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="24" y="42.5" width="272" height="61"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thP-lV-BhN" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="24" y="42.5" width="272" height="81.5"/>
+                                                        <string key="text">Use our collection of flexible filters to remove any type of content. Tune the filtering to your liking and surf the web your way. </string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -304,7 +305,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5V8-7K-3Aa">
                                                 <rect key="frame" x="640" y="0.0" width="320" height="256"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Block Tracking" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FDG-As-HDY" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Block Trackers" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FDG-As-HDY" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                         <rect key="frame" x="24" y="0.0" width="272" height="26.5"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                         <nil key="textColor"/>
@@ -316,7 +317,7 @@
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="38"/>
                                                         </variation>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AdGuard fights thousands of corporations that track your every click and makes sure your privacy is safe." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mzf-WJ-CpC" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stop thousands of corporations from tracking your every move. Regain control of your online privacy." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mzf-WJ-CpC" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                         <rect key="frame" x="24" y="42.5" width="272" height="81.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
@@ -384,7 +385,7 @@
                                     </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="NEXT">
+                                <state key="normal" title="Continue">
                                     <color key="titleColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 </state>
                                 <variation key="heightClass=regular-widthClass=regular">
@@ -497,7 +498,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Watch manual" image="icon_play">
+                                <state key="normal" title="Video guide" image="icon_play">
                                     <color key="titleColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 </state>
                                 <variation key="heightClass=regular-widthClass=regular">
@@ -522,8 +523,8 @@
                                     <action selector="closeAction:" destination="eQY-Hl-hIc" eventType="touchUpInside" id="wOx-y6-MFr"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To use AdGuard in Safari follow a few easy steps" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F7O-MB-LHu" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="24" y="72" width="248" height="48"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable AdGuard for Safari" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F7O-MB-LHu" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="24" y="72" width="248" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -549,7 +550,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <variation key="heightClass=regular-widthClass=regular">
-                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         </variation>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settings" translatesAutoresizingMaskIntoConstraints="NO" id="XU8-ej-FCF">
@@ -577,9 +578,9 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HDL-Gb-Dgk" userLabel="SafariView">
-                                <rect key="frame" x="24" y="192" width="272" height="38.5"/>
+                                <rect key="frame" x="24" y="216" width="272" height="38.5"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="safari_onboarding" translatesAutoresizingMaskIntoConstraints="NO" id="kwR-8g-Weq">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kwR-8g-Weq">
                                         <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="24" id="LSn-vH-yRq">
@@ -589,6 +590,7 @@
                                                 <variation key="heightClass=regular-widthClass=regular" constant="36"/>
                                             </constraint>
                                         </constraints>
+                                        <imageReference key="image" image="safari_onboarding"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap on Safari and choose the &quot;Content blockers&quot; menu item" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QL3-U7-vA8" userLabel="Safari Label" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                         <rect key="frame" x="32" y="0.0" width="240" height="38.5"/>
@@ -602,7 +604,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <variation key="heightClass=regular-widthClass=regular">
-                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         </variation>
                                     </label>
                                 </subviews>
@@ -644,7 +646,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <variation key="heightClass=regular-widthClass=regular">
-                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         </variation>
                                     </label>
                                 </subviews>
@@ -661,83 +663,19 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="252" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="ozX-K8-cJW">
-                                <rect key="frame" x="272" y="120" width="40" height="44"/>
+                                <rect key="frame" x="272" y="144" width="40" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="IIr-y4-Ltq">
                                         <variation key="heightClass=regular-widthClass=regular" constant="60"/>
                                     </constraint>
                                 </constraints>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zYS-ll-8qM">
-                                <rect key="frame" x="24" y="301" width="272" height="199"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="OnboardingCellId" id="oDz-2T-f0t" customClass="OnboardingCell" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="272" height="43"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oDz-2T-f0t" id="VEE-oR-6Uc">
-                                            <rect key="frame" x="0.0" y="0.0" width="272" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoadScreen" translatesAutoresizingMaskIntoConstraints="NO" id="Arj-Dz-JlV">
-                                                    <rect key="frame" x="0.0" y="9.5" width="24" height="24"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="24" id="NTy-hX-zJj"/>
-                                                        <constraint firstAttribute="height" constant="24" id="zVp-lA-ijH"/>
-                                                    </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <integer key="value" value="5"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </imageView>
-                                                <switch opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Keu-2G-S9X">
-                                                    <rect key="frame" x="221" y="6" width="51" height="31"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="49" id="OWG-kp-XgM"/>
-                                                    </constraints>
-                                                </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yxa-u7-rMy">
-                                                    <rect key="frame" x="40" y="21.5" width="165" height="0.0"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="61s-tG-RMz">
-                                                    <rect key="frame" x="40" y="42.5" width="232" height="0.5"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="0.5" id="gQy-JZ-2ZY"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="yxa-u7-rMy" firstAttribute="centerY" secondItem="VEE-oR-6Uc" secondAttribute="centerY" id="8BW-g4-MTw"/>
-                                                <constraint firstItem="61s-tG-RMz" firstAttribute="leading" secondItem="yxa-u7-rMy" secondAttribute="leading" id="HgO-Gl-H68"/>
-                                                <constraint firstAttribute="trailing" secondItem="Keu-2G-S9X" secondAttribute="trailing" constant="2" id="Jd9-DO-UgN"/>
-                                                <constraint firstAttribute="trailing" secondItem="61s-tG-RMz" secondAttribute="trailing" id="Nyb-6O-dH7"/>
-                                                <constraint firstAttribute="bottom" secondItem="Keu-2G-S9X" secondAttribute="bottom" constant="6" id="VKy-Ta-nLE"/>
-                                                <constraint firstItem="Keu-2G-S9X" firstAttribute="leading" secondItem="yxa-u7-rMy" secondAttribute="trailing" constant="16" id="Wxz-Wn-VGK"/>
-                                                <constraint firstItem="Arj-Dz-JlV" firstAttribute="centerY" secondItem="VEE-oR-6Uc" secondAttribute="centerY" id="bOe-Pl-cKv"/>
-                                                <constraint firstItem="Keu-2G-S9X" firstAttribute="top" secondItem="VEE-oR-6Uc" secondAttribute="top" constant="6" id="dEr-g8-gaB"/>
-                                                <constraint firstItem="Arj-Dz-JlV" firstAttribute="leading" secondItem="VEE-oR-6Uc" secondAttribute="leading" id="kxr-oB-2Zh"/>
-                                                <constraint firstItem="yxa-u7-rMy" firstAttribute="leading" secondItem="Arj-Dz-JlV" secondAttribute="trailing" constant="16" id="nqq-kt-tkm"/>
-                                                <constraint firstAttribute="bottom" secondItem="61s-tG-RMz" secondAttribute="bottom" id="vms-LH-rvv"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="separator" destination="61s-tG-RMz" id="8Ij-18-Tic"/>
-                                            <outlet property="titleLabel" destination="yxa-u7-rMy" id="v8S-Rc-Pnv"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="eQY-Hl-hIc" id="VIf-xG-Qru"/>
-                                    <outlet property="delegate" destination="eQY-Hl-hIc" id="QMV-co-vJv"/>
-                                </connections>
-                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UcV-VY-HPY" customClass="OnboardingContentView" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="24" y="325" width="272" height="175"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GOu-4j-RcN">
-                                <rect key="frame" x="192" y="713" width="384" height="60"/>
+                                <rect key="frame" x="256" y="702" width="512" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="idP-YW-8wV"/>
                                 </constraints>
@@ -753,13 +691,14 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="EG2-SZ-8xL" firstAttribute="trailing" secondItem="F7O-MB-LHu" secondAttribute="trailing" id="08u-Mf-dCM"/>
-                            <constraint firstItem="GOu-4j-RcN" firstAttribute="top" secondItem="zYS-ll-8qM" secondAttribute="bottom" constant="40" id="0Fe-Ne-WG8"/>
                             <constraint firstItem="F7O-MB-LHu" firstAttribute="width" secondItem="VQc-D7-UHv" secondAttribute="width" multiplier="0.5" id="0b4-jd-Npx"/>
                             <constraint firstItem="HDL-Gb-Dgk" firstAttribute="leading" secondItem="F7O-MB-LHu" secondAttribute="leading" id="0m5-zW-TP1"/>
                             <constraint firstAttribute="trailing" secondItem="F7O-MB-LHu" secondAttribute="trailing" constant="48" id="0uO-OG-9XN"/>
+                            <constraint firstItem="3ju-B8-UIZ" firstAttribute="leading" secondItem="UcV-VY-HPY" secondAttribute="leading" id="4fE-2E-vsq"/>
                             <constraint firstItem="fd3-xK-PyV" firstAttribute="top" secondItem="sqA-SS-pYR" secondAttribute="top" constant="16" id="6GS-jI-He5">
                                 <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                             </constraint>
+                            <constraint firstItem="GOu-4j-RcN" firstAttribute="top" secondItem="UcV-VY-HPY" secondAttribute="bottom" constant="40" id="6Mx-M2-zzt"/>
                             <constraint firstItem="EG2-SZ-8xL" firstAttribute="top" secondItem="F7O-MB-LHu" secondAttribute="bottom" constant="32" id="6ex-EX-QfA">
                                 <variation key="heightClass=regular-widthClass=regular" constant="40"/>
                             </constraint>
@@ -770,30 +709,27 @@
                             <constraint firstItem="fd3-xK-PyV" firstAttribute="leading" secondItem="sqA-SS-pYR" secondAttribute="leading" constant="8" id="9NY-dN-GoO">
                                 <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                             </constraint>
+                            <constraint firstItem="UcV-VY-HPY" firstAttribute="leading" secondItem="F7O-MB-LHu" secondAttribute="leading" id="BPJ-FP-J5j"/>
+                            <constraint firstItem="GOu-4j-RcN" firstAttribute="trailing" secondItem="UcV-VY-HPY" secondAttribute="trailing" id="DjD-fS-yuS"/>
+                            <constraint firstItem="GOu-4j-RcN" firstAttribute="leading" secondItem="UcV-VY-HPY" secondAttribute="leading" id="DyA-Ij-MGA"/>
                             <constraint firstItem="sqA-SS-pYR" firstAttribute="trailing" secondItem="EG2-SZ-8xL" secondAttribute="trailing" constant="24" id="Fgb-Lb-Xmi"/>
                             <constraint firstItem="HDL-Gb-Dgk" firstAttribute="top" secondItem="EG2-SZ-8xL" secondAttribute="bottom" constant="16" id="Gqa-OW-uTO">
                                 <variation key="heightClass=regular-widthClass=regular" constant="40"/>
                             </constraint>
-                            <constraint firstItem="3ju-B8-UIZ" firstAttribute="trailing" secondItem="zYS-ll-8qM" secondAttribute="trailing" id="IX0-I2-taI"/>
+                            <constraint firstItem="UcV-VY-HPY" firstAttribute="height" secondItem="VQc-D7-UHv" secondAttribute="height" multiplier="0.171303" id="Hda-xU-RSf"/>
                             <constraint firstItem="HDL-Gb-Dgk" firstAttribute="trailing" secondItem="EG2-SZ-8xL" secondAttribute="trailing" id="Lmo-DT-GsS"/>
-                            <constraint firstItem="3ju-B8-UIZ" firstAttribute="top" secondItem="zYS-ll-8qM" secondAttribute="bottom" constant="24" id="Ni1-wJ-ITP"/>
+                            <constraint firstItem="3ju-B8-UIZ" firstAttribute="trailing" secondItem="UcV-VY-HPY" secondAttribute="trailing" id="MVu-CL-bUb"/>
                             <constraint firstItem="sqA-SS-pYR" firstAttribute="trailing" secondItem="ozX-K8-cJW" secondAttribute="trailing" constant="8" id="POA-qW-Z3L"/>
+                            <constraint firstItem="UcV-VY-HPY" firstAttribute="trailing" secondItem="eyJ-Xh-OdS" secondAttribute="trailing" id="Q11-HI-6s2"/>
+                            <constraint firstItem="3ju-B8-UIZ" firstAttribute="top" secondItem="UcV-VY-HPY" secondAttribute="bottom" constant="24" id="UPz-7K-YMc"/>
                             <constraint firstItem="wcN-Rv-mji" firstAttribute="leading" secondItem="HDL-Gb-Dgk" secondAttribute="leading" id="WS7-3W-j8c"/>
                             <constraint firstItem="ozX-K8-cJW" firstAttribute="top" secondItem="F7O-MB-LHu" secondAttribute="bottom" id="XRU-1x-aqM"/>
-                            <constraint firstItem="3ju-B8-UIZ" firstAttribute="top" secondItem="zYS-ll-8qM" secondAttribute="bottom" constant="40" id="aco-9j-jpc"/>
-                            <constraint firstItem="zYS-ll-8qM" firstAttribute="leading" secondItem="F7O-MB-LHu" secondAttribute="leading" id="fze-0A-iua"/>
+                            <constraint firstItem="UcV-VY-HPY" firstAttribute="top" secondItem="wcN-Rv-mji" secondAttribute="bottom" constant="16" id="kII-tZ-q2T"/>
                             <constraint firstItem="ozX-K8-cJW" firstAttribute="leading" secondItem="F7O-MB-LHu" secondAttribute="trailing" id="kln-PK-h0A"/>
                             <constraint firstItem="3ju-B8-UIZ" firstAttribute="leading" secondItem="F7O-MB-LHu" secondAttribute="leading" id="nIO-S6-UTH"/>
-                            <constraint firstItem="zYS-ll-8qM" firstAttribute="top" secondItem="eyJ-Xh-OdS" secondAttribute="bottom" constant="16" id="nhP-pu-sar">
-                                <variation key="heightClass=regular-widthClass=regular" constant="32"/>
-                            </constraint>
-                            <constraint firstItem="GOu-4j-RcN" firstAttribute="trailing" secondItem="zYS-ll-8qM" secondAttribute="trailing" id="od4-34-QOr"/>
                             <constraint firstItem="EG2-SZ-8xL" firstAttribute="leading" secondItem="F7O-MB-LHu" secondAttribute="leading" id="pOA-Wx-8WJ"/>
-                            <constraint firstItem="GOu-4j-RcN" firstAttribute="leading" secondItem="zYS-ll-8qM" secondAttribute="leading" id="q2T-vY-bFu"/>
-                            <constraint firstItem="zYS-ll-8qM" firstAttribute="height" secondItem="VQc-D7-UHv" secondAttribute="height" multiplier="0.2" id="rvi-4W-fTr"/>
                             <constraint firstItem="sqA-SS-pYR" firstAttribute="trailing" secondItem="3ju-B8-UIZ" secondAttribute="trailing" constant="24" id="t3E-iQ-vw0"/>
                             <constraint firstItem="F7O-MB-LHu" firstAttribute="top" secondItem="sqA-SS-pYR" secondAttribute="top" constant="100" id="uE7-2j-2TS"/>
-                            <constraint firstItem="zYS-ll-8qM" firstAttribute="trailing" secondItem="wcN-Rv-mji" secondAttribute="trailing" id="uSo-R9-N0J"/>
                             <constraint firstItem="wcN-Rv-mji" firstAttribute="trailing" secondItem="HDL-Gb-Dgk" secondAttribute="trailing" id="vZR-re-ePN"/>
                             <constraint firstItem="wcN-Rv-mji" firstAttribute="top" secondItem="HDL-Gb-Dgk" secondAttribute="bottom" constant="16" id="zXt-nI-t21">
                                 <variation key="heightClass=regular-widthClass=regular" constant="40"/>
@@ -805,6 +741,7 @@
                                 <exclude reference="GOu-4j-RcN"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="6Mx-M2-zzt"/>
                                 <exclude reference="76E-lx-42G"/>
                                 <exclude reference="Fgb-Lb-Xmi"/>
                                 <exclude reference="POA-qW-Z3L"/>
@@ -816,10 +753,7 @@
                                 <exclude reference="8XT-dZ-Wao"/>
                                 <exclude reference="uE7-2j-2TS"/>
                                 <exclude reference="08u-Mf-dCM"/>
-                                <exclude reference="rvi-4W-fTr"/>
-                                <exclude reference="IX0-I2-taI"/>
-                                <exclude reference="Ni1-wJ-ITP"/>
-                                <exclude reference="aco-9j-jpc"/>
+                                <exclude reference="Hda-xU-RSf"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -834,7 +768,6 @@
                                 <include reference="0uO-OG-9XN"/>
                                 <include reference="7qa-wa-a9X"/>
                                 <include reference="8LC-Jz-LHE"/>
-                                <include reference="Ni1-wJ-ITP"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
@@ -842,22 +775,22 @@
                                 <include reference="GOu-4j-RcN"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="6Mx-M2-zzt"/>
                                 <include reference="0b4-jd-Npx"/>
                                 <include reference="8XT-dZ-Wao"/>
                                 <include reference="uE7-2j-2TS"/>
                                 <include reference="08u-Mf-dCM"/>
-                                <include reference="rvi-4W-fTr"/>
-                                <include reference="IX0-I2-taI"/>
-                                <include reference="aco-9j-jpc"/>
+                                <include reference="Hda-xU-RSf"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="d4E-Zt-F4L"/>
                     <connections>
+                        <outlet property="onboardingContentView" destination="UcV-VY-HPY" id="Ljr-xN-58u"/>
+                        <outlet property="onboardingContentViewTopConstraint" destination="kII-tZ-q2T" id="EHh-6P-G7t"/>
                         <outlet property="safariLabel" destination="QL3-U7-vA8" id="i53-1Y-aRK"/>
                         <outlet property="settingsLabel" destination="tsx-Ce-cc8" id="oSv-VA-ASX"/>
                         <outlet property="switchLabel" destination="eyJ-Xh-OdS" id="SUU-NP-2XH"/>
-                        <outlet property="tableView" destination="zYS-ll-8qM" id="UPO-hq-bO7"/>
                         <outlet property="watchManualButtonIpad" destination="GOu-4j-RcN" id="GcB-qt-Kfa"/>
                         <outletCollection property="themableLabels" destination="F7O-MB-LHu" collectionClass="NSMutableArray" id="eIt-3Z-pZR"/>
                         <segue destination="CxR-gs-ONl" kind="show" identifier="ShowLicenseSegue" id="0vG-94-8fw"/>
@@ -897,7 +830,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ugT-pj-gtx"/>
+        <segue reference="0vG-94-8fw"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="LoadScreen" width="64" height="64"/>

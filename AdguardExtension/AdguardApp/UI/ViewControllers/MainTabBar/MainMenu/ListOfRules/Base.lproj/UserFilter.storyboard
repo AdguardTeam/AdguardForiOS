@@ -517,40 +517,28 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WEk-KB-xeG">
                                         <rect key="frame" x="0.0" y="0.0" width="99.5" height="0.0"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Delete" titleAlignment="center">
-                                            <fontDescription key="titleFontDescription" type="system" pointSize="16"/>
-                                        </buttonConfiguration>
+                                        <state key="normal" title="Delete"/>
                                         <connections>
                                             <action selector="deleteButtonTapped:" destination="eSV-Hx-Rg2" eventType="touchUpInside" id="TlP-iT-UoR"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gON-PA-nSb">
                                         <rect key="frame" x="99.5" y="0.0" width="102" height="0.0"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Enable" titleAlignment="center">
-                                            <fontDescription key="titleFontDescription" type="system" pointSize="16"/>
-                                        </buttonConfiguration>
+                                        <state key="normal" title="Enable"/>
                                         <connections>
                                             <action selector="enableButtonTapped:" destination="eSV-Hx-Rg2" eventType="touchUpInside" id="5Ne-Ln-cN4"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VSR-Wf-7c8">
                                         <rect key="frame" x="201.5" y="0.0" width="109" height="0.0"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Disable" titleAlignment="center">
-                                            <fontDescription key="titleFontDescription" type="system" pointSize="16"/>
-                                        </buttonConfiguration>
+                                        <state key="normal" title="Disable"/>
                                         <connections>
                                             <action selector="disableButtonTapped:" destination="eSV-Hx-Rg2" eventType="touchUpInside" id="iNE-r2-ced"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UGP-Xr-H1p">
                                         <rect key="frame" x="310.5" y="0.0" width="103.5" height="0.0"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Cancel" titleAlignment="center">
-                                            <fontDescription key="titleFontDescription" type="system" pointSize="16"/>
-                                        </buttonConfiguration>
+                                        <state key="normal" title="Cancel"/>
                                         <connections>
                                             <action selector="cancelButtonTapped:" destination="eSV-Hx-Rg2" eventType="touchUpInside" id="01v-U9-TZ8"/>
                                         </connections>

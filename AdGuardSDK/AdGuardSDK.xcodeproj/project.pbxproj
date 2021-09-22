@@ -26,6 +26,8 @@
 		7E15DFD126E603040020247E /* CompaniesStatisticsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15DFD026E603040020247E /* CompaniesStatisticsTest.swift */; };
 		7E15DFD326E604920020247E /* ActivityStatisticsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15DFD226E604920020247E /* ActivityStatisticsMock.swift */; };
 		7E15DFD526E606E60020247E /* DnsTrackersProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15DFD426E606E60020247E /* DnsTrackersProviderMock.swift */; };
+		7E16F29826FA0E5E00383410 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 7E16F29726FA0E5E00383410 /* OrderedCollections */; };
+		7E16F29A26FA194100383410 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 7E16F29926FA194100383410 /* OrderedCollections */; };
 		7E3CF75C26EF900900BD2FFB /* PacketTunnelProviderProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3CF75B26EF900900BD2FFB /* PacketTunnelProviderProxy.swift */; };
 		7E40D00B26F2471B0045C33D /* DnsProxyConfigurationProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40D00A26F2471B0045C33D /* DnsProxyConfigurationProviderMock.swift */; };
 		7E40D00D26F24BAA0045C33D /* DnsProxyMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40D00C26F24BAA0045C33D /* DnsProxyMock.swift */; };
@@ -751,6 +753,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E16F29826FA0E5E00383410 /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -760,6 +763,7 @@
 			files = (
 				D049EEA326B2F35B00B8088B /* Zip in Frameworks */,
 				D049EE8726B2F23B00B8088B /* SQLite in Frameworks */,
+				7E16F29A26FA194100383410 /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1610,6 +1614,9 @@
 			dependencies = (
 			);
 			name = SharedAdGuardSDK;
+			packageProductDependencies = (
+				7E16F29726FA0E5E00383410 /* OrderedCollections */,
+			);
 			productName = SharedAdGuardSDK;
 			productReference = 7EC8A37F26E7697C005244CF /* SharedAdGuardSDK.framework */;
 			productType = "com.apple.product-type.framework";
@@ -1631,6 +1638,7 @@
 			packageProductDependencies = (
 				D049EE8626B2F23B00B8088B /* SQLite */,
 				D049EEA226B2F35B00B8088B /* Zip */,
+				7E16F29926FA194100383410 /* OrderedCollections */,
 			);
 			productName = "AdGuardSDK-mac";
 			productReference = D049EBA026B1868200B8088B /* AdGuardSDK_mac.framework */;
@@ -1679,6 +1687,7 @@
 				7E966B8926C27E68006B57BD /* XCRemoteSwiftPackageReference "DnsLibs" */,
 				7E667A6426E26B890013B1D5 /* XCRemoteSwiftPackageReference "SafariConverterLib" */,
 				D0A3CF9026E7AADE006E90AD /* XCRemoteSwiftPackageReference "Reachability" */,
+				7E16F29626FA0E5E00383410 /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = D0A0E39626B16B03005344D2 /* Products */;
 			projectDirPath = "";
@@ -2678,6 +2687,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		7E16F29626FA0E5E00383410 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
 		7E667A6426E26B890013B1D5 /* XCRemoteSwiftPackageReference "SafariConverterLib" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AdguardTeam/SafariConverterLib";
@@ -2721,6 +2738,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7E16F29726FA0E5E00383410 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7E16F29626FA0E5E00383410 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
+		7E16F29926FA194100383410 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7E16F29626FA0E5E00383410 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
 		7E667A6526E26B890013B1D5 /* ContentBlockerConverter */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7E667A6426E26B890013B1D5 /* XCRemoteSwiftPackageReference "SafariConverterLib" */;
