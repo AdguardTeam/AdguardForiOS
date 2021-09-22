@@ -217,8 +217,8 @@ extension DnsProviderDetailsController: ThemableProtocol {
 
 //MARK: - DnsProviderDetailsController + SelectDnsProtocolControllerDelegate
 extension DnsProviderDetailsController: SelectDnsProtocolControllerDelegate {
-    func protocolSelected(protocol: DnsAdGuardSDK.DnsProtocol) {
-        model.activeDnsProtocol = `protocol`
+    func protocolSelected(dnsProtocol: DnsAdGuardSDK.DnsProtocol) {
+        model.activeDnsProtocol = dnsProtocol
         tableView.reloadData()
     }
 }

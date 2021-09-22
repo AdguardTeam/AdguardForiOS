@@ -41,7 +41,6 @@ final class NewDnsServerController: BottomAlertController {
     //MARK: - Properties
     var controllerType: DnsServerControllerType = .add
     var model: NewDnsServerModel!
-    var openUrl: String?
     
     weak var delegate: NewDnsServerControllerDelegate?
     
@@ -71,9 +70,9 @@ final class NewDnsServerController: BottomAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if openUrl != nil {
+        if let openUrl = model.openUrl {
             // Native DNS implementation doesn't support port syntax
-            upstreamsField.text = resources.dnsImplementation == .adGuard ? openUrl : openUrl?.discardPortFromIpAddress()
+            upstreamsField.text = resources.dnsImplementation == .adGuard ? openUrl : openUrl.discardPortFromIpAddress()
         } else {
             nameField.text = model?.providerName
             upstreamsField.text = model?.providerUpstream
@@ -224,7 +223,7 @@ final class NewDnsServerController: BottomAlertController {
         let upstream = self.upstreamsField.text ?? ""
         
         do {
-            try self.model.addCustomProvider(name: self.nameField.text ?? "", upstream: upstream, selectAsCurrent: true)
+            try self.model.addCustomProvider(name: self.nameField.text ?? "", upstream: upstream)
             self.delegate?.customProviderUpdated()
             self.dismiss(animated: true)
         } catch {

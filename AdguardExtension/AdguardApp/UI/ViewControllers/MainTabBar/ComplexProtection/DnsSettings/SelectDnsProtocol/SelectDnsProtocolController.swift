@@ -20,7 +20,7 @@ import DnsAdGuardSDK
 
 /// Delegate protocol for DnsProviderDetailsController
 protocol SelectDnsProtocolControllerDelegate: AnyObject {
-    func protocolSelected(protocol: DnsAdGuardSDK.DnsProtocol)
+    func protocolSelected(dnsProtocol: DnsAdGuardSDK.DnsProtocol)
 }
 
 /// Controller that represent dns protocol picker
@@ -69,7 +69,7 @@ extension SelectDnsProtocolController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedProtocol = availableProtocols[indexPath.row]
         tableView.deselectRow(at: indexPath, animated: true)
-        delegate?.protocolSelected(protocol: selectedProtocol)
+        delegate?.protocolSelected(dnsProtocol: selectedProtocol)
         dismiss(animated: true)
     }
     

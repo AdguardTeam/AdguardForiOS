@@ -17,6 +17,7 @@
 */
 
 import UIKit.UIImage
+import struct SharedAdGuardSDK.Constants
 
 // MARK: - DnsProviders
 struct PredefinedDnsProviders: Decodable, Equatable {
@@ -47,7 +48,7 @@ struct PredefinedDnsProviders: Decodable, Equatable {
 
 // MARK: - PredefinedDnsProvider
 struct PredefinedDnsProvider: Decodable, Equatable {
-    static let systemDefaultProviderId = 10000
+    static let systemDefaultProviderId = Constants.systemDefaultProviderId
     static let adguardDnsProviderId = 10001
     
     let name: String

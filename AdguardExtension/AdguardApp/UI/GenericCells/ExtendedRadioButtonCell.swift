@@ -22,6 +22,17 @@ protocol ExtendedRadioButtonCellDelegate: AnyObject {
     func radioButtonTapped(with tag: Int)
 }
 
+
+// Cell model
+struct ExtendedRadioButtonCellModel {
+    let cellTag: Int
+    let titleString: String
+    let descriptionString: String
+    let radioButtonSelected: Bool
+    let isArrowRightHidden: Bool
+    let delegate: ExtendedRadioButtonCellDelegate?
+}
+
 /// Generic cell with title and description labels and radio button that shows selected state
 final class ExtendedRadioButtonCell: UITableViewCell, Reusable {
     
@@ -50,6 +61,18 @@ final class ExtendedRadioButtonCell: UITableViewCell, Reusable {
     var isArrowRightHidden: Bool = false {
         didSet {
             arrowRight.isHidden = isArrowRightHidden
+        }
+    }
+    
+    var model: ExtendedRadioButtonCellModel? {
+        didSet {
+            guard let model = model else { return }
+            cellTag = model.cellTag
+            titleString = model .titleString
+            descriptionString = model.descriptionString
+            radioButtonSelected = model.radioButtonSelected
+            isArrowRightHidden = model.isArrowRightHidden
+            delegate = model.delegate
         }
     }
     

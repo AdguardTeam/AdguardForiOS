@@ -36,20 +36,27 @@ final class NewDnsServerModel {
         return upstream
     }
     
+    
     let provider: CustomDnsProviderProtocol?
+    var openUrl: String?
     private let dnsProvidersManager: DnsProvidersManagerProtocol
     private let vpnManager: VpnManagerProtocol
 
     //MARK: - Init
-    init(provider: CustomDnsProviderProtocol? = nil, dnsProvidersManager: DnsProvidersManagerProtocol, vpnManager: VpnManagerProtocol) {
-        self.provider = provider
+    init(dnsProvidersManager: DnsProvidersManagerProtocol,
+         vpnManager: VpnManagerProtocol,
+         provider: CustomDnsProviderProtocol? = nil,
+         openUrl: String? = nil) {
+        
         self.dnsProvidersManager = dnsProvidersManager
         self.vpnManager = vpnManager
+        self.provider = provider
+        self.openUrl = openUrl
     }
     
     /// Function to add custom provider
-    func addCustomProvider(name: String, upstream: String, selectAsCurrent: Bool) throws {
-        try dnsProvidersManager.addCustomProvider(name: name, upstreams: [upstream], selectAsCurrent: selectAsCurrent)
+    func addCustomProvider(name: String, upstream: String) throws {
+        try dnsProvidersManager.addCustomProvider(name: name, upstreams: [upstream], selectAsCurrent: true)
         vpnManager.updateSettings(completion: nil)
     }
     

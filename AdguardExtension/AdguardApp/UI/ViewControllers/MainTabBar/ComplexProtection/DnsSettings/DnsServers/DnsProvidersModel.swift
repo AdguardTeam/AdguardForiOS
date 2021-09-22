@@ -26,9 +26,9 @@ final class DnsProvidersModel {
     
     let headerDescription: String = String.localizedString("dns_provider_controller_description")
     
-    var providers: [DnsProviderCellModel] {
+    var tableModels: [DnsProvidersTableModel] {
         let allProviders = dnsProvidersManager.allProviders
-        return getCellModels(providers: allProviders)
+        return allProviders.map { DnsProvidersTableModel(provider: $0) }
     }
     
     //MARK: - Private properties
@@ -43,36 +43,22 @@ final class DnsProvidersModel {
     
     //MARK: - Public methods
     func setProviderActive(provider: DnsProviderMetaProtocol) throws {
-        guard let serverId = provider.enabledServerId else { return }
+        let serverId = getServerId(provider: provider)
         try dnsProvidersManager.selectProvider(withId: provider.providerId, serverId: serverId)
         vpnManager.updateSettings(completion: nil)
     }
     
-
-    
     //MARK: - Private methods
-    private func getCellModels(providers: [DnsProviderMetaProtocol]) -> [DnsProviderCellModel] {        
-        var result: [DnsProviderCellModel] = []
-        for provider in providers {
-            result.append(prepareCellModel(provider: provider))
-        }
-        return result
-    }
     
-    private func prepareCellModel(provider: DnsProviderMetaProtocol) -> DnsProviderCellModel {
-        let name = provider.name
-        var description: String?
+    /// Return enabled server id. If enabled server doesn't exists than return id of first server from `dnsServers` array.
+    /// `dnsServers` - is array of provider DNS servers and it is not empty for all  providers
+    private func getServerId(provider: DnsProviderMetaProtocol) -> Int {
+        if provider.isCustom { return provider.custom.server.id }
         
-        if let predefined = provider as? DnsProviderProtocol {
-            description = predefined.providerDescription
+        let result = provider.dnsServers.first {
+            return $0.isEnabled
         }
         
-        return DnsProviderCellModel(name: name,
-                                    description: description,
-                                    isCurrent: provider.isEnabled,
-                                    isDefaultProvider: provider.providerId == 10000, // id of system default provider
-                                    isCustomProvider: provider.isCustom,
-                                    providerId: provider.providerId,
-                                    provider: provider)
+        return result?.id ?? provider.dnsServers.first!.id
     }
 }

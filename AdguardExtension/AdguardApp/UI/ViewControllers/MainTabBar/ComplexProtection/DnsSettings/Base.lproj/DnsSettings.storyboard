@@ -776,14 +776,14 @@
         <!--Network Settings Table Controller-->
         <scene sceneID="iFQ-F6-2Bo">
             <objects>
-                <tableViewController modalPresentationStyle="fullScreen" id="VPy-oh-0aX" customClass="NetworkSettingsTableController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="VPy-oh-0aX" customClass="NetworkSettingsTableController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cci-XU-doa">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="NetworkSettingsTitleCell" id="2nc-jd-3lk" customClass="NetworkSettingsTitleCell" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="53"/>
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="53"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2nc-jd-3lk" id="NCe-Od-t9Y">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="53"/>
@@ -1102,6 +1102,7 @@
                             <outlet property="delegate" destination="VPy-oh-0aX" id="u0c-Jj-MQ3"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Txh-42-O0v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1456,7 +1457,7 @@
         <!--Dns Providers Controller-->
         <scene sceneID="dNS-fY-mTh">
             <objects>
-                <tableViewController storyboardIdentifier="DnsProvidersController" modalPresentationStyle="fullScreen" id="5ol-3D-VBk" customClass="DnsProvidersController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="DnsProvidersController" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="5ol-3D-VBk" customClass="DnsProvidersController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="v87-SU-fOl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1473,6 +1474,7 @@
                             <outlet property="delegate" destination="5ol-3D-VBk" id="BL3-Ul-ACP"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <connections>
                         <segue destination="JvQ-vh-qHA" kind="show" identifier="dnsDetailsSegue" id="7xR-Zq-t5u"/>
                     </connections>
@@ -1520,9 +1522,9 @@
         <!--Dns Provider Details Controller-->
         <scene sceneID="vjE-jp-Ycf">
             <objects>
-                <tableViewController modalPresentationStyle="fullScreen" id="JvQ-vh-qHA" customClass="DnsProviderDetailsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="JvQ-vh-qHA" customClass="DnsProviderDetailsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="D1O-nG-Eql">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <connections>
@@ -1530,6 +1532,7 @@
                             <outlet property="delegate" destination="JvQ-vh-qHA" id="2gK-HD-p8p"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Kdk-wE-xDs">
                         <barButtonItem key="rightBarButtonItem" title="Select" id="uCw-Mi-HiJ">
