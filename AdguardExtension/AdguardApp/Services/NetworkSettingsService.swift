@@ -238,7 +238,7 @@ fileprivate extension AESharedResourcesProtocol {
     // in v4.2 Wi-Fi exceptions were saved in the json file. We now store them in user defaults.
     var wifiExceptions: [WifiException] {
         get {
-            guard let decoded = sharedDefaults().object(forKey: wifiExceptionsKey) as? Data  else {
+            guard let decoded = sharedDefaults().object(forKey: wifiExceptionsKey) as? Data else {
                 return []
             }
             
