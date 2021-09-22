@@ -138,6 +138,7 @@ const handleMessages = () => {
                     premiumApp,
                     appearanceTheme,
                     contentBlockersEnabled,
+                    advancedBlockingEnabled,
                 } = await adguard.nativeHost.getInitData(url);
 
                 return {
@@ -148,6 +149,7 @@ const handleMessages = () => {
                     premiumApp,
                     appearanceTheme,
                     contentBlockersEnabled,
+                    advancedBlockingEnabled,
                 };
             }
             case MessagesToBackgroundPage.SetProtectionStatus: {
@@ -163,6 +165,10 @@ const handleMessages = () => {
             }
             case MessagesToBackgroundPage.UpgradeClicked: {
                 await adguard.nativeHost.upgradeMe();
+                break;
+            }
+            case MessagesToBackgroundPage.TurnOnAdvancedBlocking: {
+                await adguard.nativeHost.turnOnAdvancedBlocking();
                 break;
             }
             case MessagesToBackgroundPage.DeleteUserRulesByUrl: {

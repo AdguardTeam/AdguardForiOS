@@ -2,8 +2,7 @@ import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 
 import { Action } from '../Action';
-import { Button } from '../../Button';
-import { Icon } from '../../ui/Icon';
+import { InfoButton } from './InfoButton';
 import { popupStore } from '../../../stores/PopupStore';
 import { translator } from '../../../../common/translators/translator';
 
@@ -26,21 +25,12 @@ const SiteStatusesMessages = {
 export const CurrentSite = observer(() => {
     const store = useContext(popupStore);
 
-    let button;
-    if (!store.premiumApp) {
-        const handleInfoTouch = () => {
-            store.showUpgradeModal();
-        };
-
-        button = (
-            <Button onClick={handleInfoTouch} classNames="actions__control">
-                <Icon color="yellow" iconId="info" />
-            </Button>
-        );
-    }
-
     let description = SiteStatusesMessages[SiteStatus.ProtectionEnabled];
     let descriptionColor = 'gray';
+
+    if (!store.premiumApp || !store.advancedBlockingEnabled) {
+        description = SiteStatusesMessages[SiteStatus.BasicOnly];
+    }
 
     if (!store.protectionEnabled) {
         description = SiteStatusesMessages[SiteStatus.Allowlisted];
@@ -49,7 +39,6 @@ export const CurrentSite = observer(() => {
     if (!store.contentBlockersEnabled) {
         description = SiteStatusesMessages[SiteStatus.ProtectionDisabled];
         descriptionColor = 'yellow';
-        button = undefined;
     }
 
     return (
@@ -62,7 +51,7 @@ export const CurrentSite = observer(() => {
             description={description}
             descriptionMod={descriptionColor}
         >
-            {button}
+            <InfoButton />
         </Action>
     );
 });

@@ -32,7 +32,7 @@ enum SiteStatus {
     BasicOnly = 'BasicOnly',
 }
 
-class PopupStore {
+export class PopupStore {
     @observable popupDataLoadingState = PopupDataLoadingState.Idle;
 
     @observable currentSiteStatus = SiteStatus.ProtectionEnabled;
@@ -58,6 +58,10 @@ class PopupStore {
     @observable contentBlockersEnabled: boolean = false;
 
     @observable appearanceTheme?: AppearanceTheme;
+
+    @observable advancedBlockingEnabled: boolean = false;
+
+    @observable advancedBlockingDisabledModalVisible: boolean = false;
 
     /**
      * Flag variable
@@ -98,6 +102,7 @@ class PopupStore {
             this.contentBlockersEnabled = popupData.contentBlockersEnabled;
             this.showProtectionDisabledModal = !popupData.contentBlockersEnabled;
             this.appearanceTheme = popupData.appearanceTheme;
+            this.advancedBlockingEnabled = popupData.advancedBlockingEnabled;
         });
     };
 
@@ -193,8 +198,18 @@ class PopupStore {
     }
 
     @action
-    closeUpgradeModal() {
+    hideUpgradeModal() {
         this.upgradeModalVisible = false;
+    }
+
+    @action
+    showAdvancedBlockingDisabledModal() {
+        this.advancedBlockingDisabledModalVisible = true;
+    }
+
+    @action
+    hideAdvancedBlockingDisabledModal() {
+        this.advancedBlockingDisabledModalVisible = false;
     }
 
     @action

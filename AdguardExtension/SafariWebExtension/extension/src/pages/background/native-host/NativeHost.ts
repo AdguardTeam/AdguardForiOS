@@ -16,6 +16,7 @@ export interface ActionLinks {
     removeFromAllowlistLink: string,
     upgradeAppLink: string,
     reportProblemLink: string,
+    turnOnAdvancedBlocking: string,
 }
 
 type AppearanceTheme = 'system' | 'dark' | 'light';
@@ -26,6 +27,7 @@ interface NativeHostInitData {
     hasUserRules: boolean,
     premiumApp: boolean,
     protectionEnabled: boolean,
+    advancedBlockingEnabled: boolean,
 }
 
 export interface NativeHostInterface {
@@ -36,8 +38,9 @@ export interface NativeHostInterface {
     disableProtection(url: string): Promise<void>
     removeUserRulesBySite(url: string): Promise<void>
     reportProblem(url: string): Promise<void>
-    upgradeMe(): void
+    upgradeMe(): Promise<void>
     getAdvancedRulesText(): Promise<string | void>
+    turnOnAdvancedBlocking(): Promise<void>
 }
 
 export class NativeHost implements NativeHostInterface {
@@ -130,6 +133,14 @@ export class NativeHost implements NativeHostInterface {
         await browser.tabs.create({ url: this.links.upgradeAppLink });
     }
 
+    async turnOnAdvancedBlocking() {
+        if (!this.links?.turnOnAdvancedBlocking) {
+            return;
+        }
+
+        await browser.tabs.create({ url: this.links.turnOnAdvancedBlocking });
+    }
+
     /**
      * Retrieves advanced rules text from native host by small parts,
      * so native host won't exceed memory limit
@@ -176,6 +187,7 @@ export class NativeHost implements NativeHostInterface {
             premium_app: premiumApp,
             appearance_theme: appearanceTheme,
             content_blockers_enabled: contentBlockersEnabled,
+            advanced_blocking_enabled: advancedBlockingEnabled,
 
             // links
             // e.g. "adguard://safariWebExtension?action=removeFromAllowlist&domain="
@@ -190,6 +202,8 @@ export class NativeHost implements NativeHostInterface {
             upgrade_app_link: upgradeAppLink,
             // e.g. "https://reports.adguard.com/new_issue.html?browser=Safari&product_version=4.2.1&product_type=iOS"
             report_problem_link: reportProblemLink,
+            // e.g. "adguard://turnOnAdvancedBlocking"
+            turn_on_advanced_blocking_link: turnOnAdvancedBlocking,
         } = result;
 
         this.setLinks({
@@ -199,6 +213,7 @@ export class NativeHost implements NativeHostInterface {
             removeFromAllowlistLink,
             upgradeAppLink,
             reportProblemLink,
+            turnOnAdvancedBlocking,
         });
 
         return {
@@ -207,6 +222,7 @@ export class NativeHost implements NativeHostInterface {
             hasUserRules,
             premiumApp,
             protectionEnabled,
+            advancedBlockingEnabled,
         };
     }
 }

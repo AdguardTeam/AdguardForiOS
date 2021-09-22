@@ -15,6 +15,7 @@ interface State {
     premiumApp: boolean,
     contentBlockersEnabled: boolean,
     hasUserRules: boolean,
+    advancedBlockingEnabled: boolean,
 }
 
 class NativeHostMock implements NativeHostInterface {
@@ -23,9 +24,10 @@ class NativeHostMock implements NativeHostInterface {
     DEFAULT_STATE: State = {
         appearanceTheme: APPEARANCE_THEME_DEFAULT,
         protectionEnabled: true,
-        premiumApp: false,
+        premiumApp: true,
         contentBlockersEnabled: true,
-        hasUserRules: false,
+        hasUserRules: true,
+        advancedBlockingEnabled: false,
     };
 
     links?: ActionLinks;
@@ -164,6 +166,7 @@ testcases.adguard.com,surge.sh#?##case28 > :is(.case28, #main, footer, span):con
             hasUserRules: state.hasUserRules,
             premiumApp: state.premiumApp,
             protectionEnabled: state.protectionEnabled,
+            advancedBlockingEnabled: state.advancedBlockingEnabled,
             addToBlocklistLink: '',
             addToAllowlistLink: '',
             removeAllBlocklistRulesLink: '',
@@ -177,7 +180,10 @@ testcases.adguard.com,surge.sh#?##case28 > :is(.case28, #main, footer, span):con
     reportProblem(url: string): Promise<void> {
         throw new Error('Method not implemented.');
     }
-    upgradeMe(): void {
+    upgradeMe(): Promise<void> {
+        throw new Error('Method not implemented.');
+    }
+    turnOnAdvancedBlocking(): Promise<void> {
         throw new Error('Method not implemented.');
     }
 }

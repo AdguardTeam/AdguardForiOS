@@ -7,29 +7,29 @@ import { Button } from '../../Button';
 import { Modal } from '../Modal';
 import { messenger } from '../../../../common/messenger';
 
-export const UpgradeModal = observer(() => {
+export const AdvancedBlockingDisabledModal = observer(() => {
     const store = useContext(popupStore);
 
     const handleClose = () => {
-        store.hideUpgradeModal();
+        store.hideAdvancedBlockingDisabledModal();
     };
 
     const handleClick = async () => {
-        await messenger.handleUpgrade();
+        await messenger.turnOnAdvancedBlocking();
         window.close();
     };
 
     return (
         <Modal
-            title={translator.getMessage('popup_modal_title_free')}
-            description={translator.getMessage('popup_modal_desc_free')}
+            title={translator.getMessage('popup_modal_advanced_blocking_disabled_title')}
+            description={translator.getMessage('popup_modal_advanced_blocking_disabled_description')}
             close={handleClose}
         >
             <Button
                 onClick={handleClick}
                 classNames="button--green button--l button--bottom"
             >
-                {translator.getMessage('popup_modal_btn_free')}
+                {translator.getMessage('popup_modal_advanced_blocking_disabled_button')}
             </Button>
         </Modal>
     );

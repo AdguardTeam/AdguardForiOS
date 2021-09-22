@@ -63,4 +63,10 @@ export class Messenger {
             MessagesToBackgroundPage.UpgradeClicked,
         );
     };
+
+    turnOnAdvancedBlocking = () => {
+        return this.sendMessage(
+            MessagesToBackgroundPage.TurnOnAdvancedBlocking,
+        );
+    };
 }

@@ -17,6 +17,7 @@ export enum MessagesToBackgroundPage {
     DeleteUserRulesByUrl = 'delete_user_rules_by_url',
     ReportProblem = 'report_problem',
     UpgradeClicked = 'upgrade_clicked',
+    TurnOnAdvancedBlocking = 'turn_on_advanced_blocking',
 }
 
 export enum MessagesToContentScript {

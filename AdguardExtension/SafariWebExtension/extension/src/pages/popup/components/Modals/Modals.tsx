@@ -5,6 +5,7 @@ import { popupStore } from '../../stores/PopupStore';
 import { SitesAllowedModal } from './SitesAllowedModal';
 import { UpgradeModal } from './UpgradeModal';
 import { ProtectionDisabledModal } from './ProtectionDisabledModal';
+import { AdvancedBlockingDisabledModal } from './AdvancedBlockingDisabledModal';
 
 export const Modals = observer(() => {
     const store = useContext(popupStore);
@@ -15,6 +16,10 @@ export const Modals = observer(() => {
 
     if (store.upgradeModalVisible) {
         return <UpgradeModal />;
+    }
+
+    if (store.advancedBlockingDisabledModalVisible) {
+        return <AdvancedBlockingDisabledModal />;
     }
 
     if (store.showProtectionDisabledModal) {
