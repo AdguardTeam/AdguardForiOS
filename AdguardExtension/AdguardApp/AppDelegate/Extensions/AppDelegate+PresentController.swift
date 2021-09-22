@@ -18,6 +18,7 @@
 
 import Foundation
 
+// TODO: - We should check all these methods because practically all the screens changed
 extension AppDelegate {
     
     static let shared = UIApplication.shared.delegate as! AppDelegate
@@ -273,46 +274,46 @@ extension AppDelegate {
      */
     func presentDnsFiltersController(showLaunchScreen: Bool = false) -> Bool {
         
-        guard let tabBar = getMainTabController() else {
-            DDLogError("Tab bar is nil")
-            return false
-        }
-        
-        guard let navController = getNavigationController(for: .protectionTab) else {
-            DDLogError("Navigation controller is nil")
-            return false
-        }
-        
-        if showLaunchScreen, let launchScreen = getLaunchScreen() {
-            window?.rootViewController = launchScreen
-        }
-        
-        guard let complexProtectionController = navController.viewControllers.first as? ComplexProtectionController else {
-            DDLogError("Navigation controller first VC is not ComplexProtectionController")
-            return false
-        }
-        
-        let dnsSettingsStoryboard = UIStoryboard(name: "DnsSettings", bundle: nil)
-        guard let dnsSettingsController = dnsSettingsStoryboard.instantiateViewController(withIdentifier: "DnsSettingsController") as? DnsSettingsController else {
-            DDLogError("DnsSettings.storyboard doesnt't have DnsSettingsController")
-            return false
-        }
-        
-        guard let requestsBlockingController = dnsSettingsStoryboard.instantiateViewController(withIdentifier: "RequestsBlockingController") as? RequestsBlockingController else {
-            DDLogError("DnsSettings.storyboard doesnt't have RequestsBlockingController")
-            return false
-        }
-        
-        guard let dnsFiltersController = dnsSettingsStoryboard.instantiateViewController(withIdentifier: "DnsFiltersController") as? DnsFiltersController else {
-            DDLogError("DnsSettings.storyboard doesnt't have DnsFiltersController")
-            return false
-        }
-        dnsFiltersController.loadViewIfNeeded()
-        
-        navController.viewControllers = [complexProtectionController, dnsSettingsController, requestsBlockingController, dnsFiltersController]
-        tabBar.selectedViewController = navController
-        window?.rootViewController = tabBar
-        
+//        guard let tabBar = getMainTabController() else {
+//            DDLogError("Tab bar is nil")
+//            return false
+//        }
+//
+//        guard let navController = getNavigationController(for: .protectionTab) else {
+//            DDLogError("Navigation controller is nil")
+//            return false
+//        }
+//
+//        if showLaunchScreen, let launchScreen = getLaunchScreen() {
+//            window?.rootViewController = launchScreen
+//        }
+//
+//        guard let complexProtectionController = navController.viewControllers.first as? ComplexProtectionController else {
+//            DDLogError("Navigation controller first VC is not ComplexProtectionController")
+//            return false
+//        }
+//
+//        let dnsSettingsStoryboard = UIStoryboard(name: "DnsSettings", bundle: nil)
+//        guard let dnsSettingsController = dnsSettingsStoryboard.instantiateViewController(withIdentifier: "DnsSettingsController") as? DnsSettingsController else {
+//            DDLogError("DnsSettings.storyboard doesnt't have DnsSettingsController")
+//            return false
+//        }
+//
+//        guard let requestsBlockingController = dnsSettingsStoryboard.instantiateViewController(withIdentifier: "RequestsBlockingController") as? RequestsBlockingController else {
+//            DDLogError("DnsSettings.storyboard doesnt't have RequestsBlockingController")
+//            return false
+//        }
+//
+//        guard let dnsFiltersController = dnsSettingsStoryboard.instantiateViewController(withIdentifier: "DnsFiltersController") as? DnsFiltersController else {
+//            DDLogError("DnsSettings.storyboard doesnt't have DnsFiltersController")
+//            return false
+//        }
+//        dnsFiltersController.loadViewIfNeeded()
+//
+//        navController.viewControllers = [complexProtectionController, dnsSettingsController, requestsBlockingController, dnsFiltersController]
+//        tabBar.selectedViewController = navController
+//        window?.rootViewController = tabBar
+//
         return true
     }
     
@@ -534,6 +535,36 @@ extension AppDelegate {
         }
         
         return false
+    }
+    
+    func presentPurchaseLicenseController() -> Bool {
+        guard let tabBar = getMainTabController() else {
+            DDLogError("Tab bar is nil")
+            return false
+        }
+        
+        guard let navController = getNavigationController(for: .mainTab) else {
+            DDLogError("Navigation controller is nil")
+            return false
+        }
+        
+        let mainPageStoryboard = UIStoryboard(name: "MainPage", bundle: Bundle.main)
+        guard let mainPageController = mainPageStoryboard.instantiateViewController(withIdentifier: "MainPageController") as? MainPageController else {
+            DDLogError("MainPage.storyboard doesnt't have MainPageController")
+            return false
+        }
+        
+        let licenseStoryboard = UIStoryboard(name: "License", bundle: Bundle.main)
+        guard let getProController = licenseStoryboard.instantiateViewController(withIdentifier: "GetProController") as? GetProController else {
+            DDLogError("License.storyboard doesnt't have GetProController")
+            return false
+        }
+        
+        navController.viewControllers = [mainPageController, getProController]
+        tabBar.selectedViewController = navController
+        window?.rootViewController = tabBar
+        
+        return true
     }
     
     /* Returns top view controller for controller  */

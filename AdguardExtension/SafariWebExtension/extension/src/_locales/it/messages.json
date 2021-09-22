@@ -11,73 +11,79 @@
     "popup_action_safari_protection_description": {
         "message": "per questo sito web"
     },
+    "popup_action_safari_protection_description_disabled": {
+        "message": "disattivata"
+    },
     "popup_action_current_site_status_desc_enabled": {
-        "message": "protezione attiva"
+        "message": "la protezione è ATTIVA"
+    },
+    "popup_action_current_site_status_desc_disabled": {
+        "message": "protezione disattivata"
     },
     "popup_action_block_element": {
-        "message": "Blocca l'\\elemento sulla pagina"
+        "message": "Blocca elementi su questa pagina"
     },
     "popup_action_delete_user_rules": {
-        "message": "Elimina tutte le regole utente per questo sito"
+        "message": "Elimina tutte le regole utente per questo sito web"
     },
     "popup_action_current_site_desc_starting": {
-        "message": "attendere prego, avvio protezione in corso..."
+        "message": "attivazione protezione in corso"
     },
     "popup_action_current_site_desc_allowlisted": {
-        "message": "il sito web è stato aggiunto alla lista bianca"
+        "message": "aggiunto alla lista bianca"
     },
     "popup_action_current_site_desc_basic_only": {
         "message": "solo protezione base"
     },
     "popup_modal_all_sites_allowed_title": {
-        "message": "Prestazioni migliorate"
+        "message": "Protezione definitiva"
     },
     "popup_modal_all_sites_allowed_desc": {
-        "message": "Ottimo lavoro! Ora AdGuard bloccherà molti più annunci, affrontando le sfide più difficili!"
+        "message": "Ottimo lavoro! AdGuard bloccherà quasi tutti gli annunci ed affronterà le sfide più difficili."
     },
     "popup_modal_all_sites_allowed_button": {
         "message": "Che la magia abbia inizio"
     },
     "popup_modal_not_all_sites_allowed_title": {
-        "message": "Quasi fatto"
+        "message": "Protezione selettiva"
     },
     "popup_modal_not_all_sites_allowed_desc": {
-        "message": "Hai consentito ad AdGuard di funzionare solo su questo sito web, il che significa che non bloccherà gli annunci su altri siti web a meno che tu non conceda l\\'autorizzazione la prossima volta."
+        "message": "Hai attivato AdGuard solo per questo sito web. Continuerai a visualizzare gli annunci su altri siti web a meno che tu non conceda più autorizzazioni ad AdGuard."
     },
     "popup_modal_not_all_sites_allowed_button": {
-        "message": "Ok"
+        "message": "Continua"
     },
     "popup_modal_title_free": {
-        "message": "Molto buono ma..."
+        "message": "Sii tutto ciò che puoi essere"
     },
     "popup_modal_desc_free": {
-        "message": "Tieni a mente che così facendo perderai la protezione avanzata non disponibile nella versione gratuita. Questa ti aiuterà a gestire più annunci, inclusi gli annunci di YouTube in Safari."
+        "message": "Non sei ancora in possesso della protezione avanzata disponibile in AdGuard Premium. Vorresti bloccare più annunci su YouTube in Safari?"
     },
     "popup_modal_btn_free": {
         "message": "Aggiorna"
     },
     "popup_fullscreen_support_title": {
-        "message": "Uh-oh, è stato uno scorrimento verso l\\'alto?"
+        "message": "Uh-oh, vorresti ricominciare da capo?"
     },
     "popup_fullscreen_support_desc": {
-        "message": "Se qualcosa fosse andato storto, faccelo sapere e lo sistemeremo."
+        "message": "Qualcosa è andato storto? Potremmo sistemarlo."
     },
     "popup_protection_disabled_support_desc": {
-        "message": "Uh-oh, sembra che tu abbia disattivato la protezione... Qualcosa non va? Possiamo sistemarlo!"
+        "message": "Uh-oh, la protezione per questo sito web è DISATTIVATA. Qualcosa è andato storto? Potremmo sistemarlo."
     },
     "popup_support_button_text": {
         "message": "Segnala un problema"
     },
     "modal_protection_off_title": {
-        "message": "Per utilizzare la protezione:"
+        "message": "Attiva protezione"
     },
     "modal_protection_off_settings": {
         "message": "Apri <b>Impostazioni<\/b>"
     },
     "modal_protection_off_extensions": {
-        "message": "Clicca su <b>Safari<\/b> e scegli la voce <b>Estensioni<\/b> dal menù"
+        "message": "Clicca su <b>Safari<\/b>, scorri verso il basso, e clicca su <b>Blocchi dei Contenuti<\/b>"
     },
     "modal_protection_off_switch": {
-        "message": "<b>Passa su<\/b> tutti quelli di AdGuard"
+        "message": "<b>Attiva<\/b> tutte le estensioni di AdGuard."
     }
 }

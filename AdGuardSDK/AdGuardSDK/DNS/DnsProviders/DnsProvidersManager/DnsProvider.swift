@@ -44,7 +44,7 @@ public protocol DnsServerMetaProtocol {
     var isEnabled: Bool { get set } // State of the provider enabled/disabled
 }
 
-extension DnsServerMetaProtocol {
+public extension DnsServerMetaProtocol {
     var isPredefined: Bool { self is DnsServerProtocol }
     var predefined: DnsServerProtocol { self as! DnsServerProtocol }
     var type: DnsProtocol { upstreams.first?.`protocol` ?? .dns } // Upstreams are empty for system default server

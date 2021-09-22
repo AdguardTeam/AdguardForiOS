@@ -124,6 +124,8 @@ NSString *BlockIpv6 = @"BlockIpv6";
 
 NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
 
+NSString* BackgroundFetchUpdatePeriod = @"BackgroundFetchUpdatePeriod";
+
 #define AES_HOST_APP_USERDEFAULTS               @"host-app-userdefaults.data"
 
 /////////////////////////////////////////////////////////////////////

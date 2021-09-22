@@ -133,7 +133,7 @@ public struct CountersStatisticsRecord: Equatable {
         self.init(requests: Int(requests), encrypted: Int(encrypted), blocked: Int(blocked), elapsedSumm: Int(elapsedSumm))
     }
     
-    init(requests: Int, encrypted: Int, blocked: Int, elapsedSumm: Int) {
+    public init(requests: Int, encrypted: Int, blocked: Int, elapsedSumm: Int) {
         self.requests = requests
         self.encrypted = encrypted
         self.blocked = blocked

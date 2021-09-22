@@ -12,6 +12,7 @@ module.exports = {
         'import/no-extraneous-dependencies': 0,
         'arrow-body-style': 0,
         'react/require-default-props': 0,
+        'react/prop-types': 0,
 
         "import/extensions": [
             "error",

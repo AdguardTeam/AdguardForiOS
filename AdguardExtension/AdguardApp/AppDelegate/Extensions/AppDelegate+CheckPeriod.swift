@@ -18,13 +18,14 @@
 
 // Set period for minimum background fetch interval
 extension AppDelegate {
-    static func setPeriodForCheckingFilters() {
-        var interval: TimeInterval = TimeInterval(FiltersUpdatesConstants.fetchUpdateStatusPeriod)
-        if (interval < UIApplication.backgroundFetchIntervalMinimum) {
-            interval = UIApplication.backgroundFetchIntervalMinimum
+    static func setBackgroundFetchInterval(_ interval: TimeInterval) {
+        guard interval >= UIApplication.backgroundFetchIntervalMinimum else {
+            UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
+            DDLogError("(AppDelegate) - setBackgroundFetchInterval; Background fetch period=\(interval) is to low")
+            return
         }
         
         UIApplication.shared.setMinimumBackgroundFetchInterval(interval)
-        DDLogInfo("(AppDelegate) Set background fetch interval: \(interval)")
+        DDLogInfo("(AppDelegate) Set background fetch interval=\(interval)")
     }
 }

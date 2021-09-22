@@ -31,6 +31,7 @@
  9. <adguardScheme>://auth#access_token=<TOKEN>&token_type=<TOKEN TYPE>&state=<STATE>&expires_in=<EXPIRES IN>   <--- Log in by social networks
  10. <adguardScheme>://safariWebExtension?action=<ACTION>&domain=<DOMAIN> <--- Open with safari web extension action
     <ACTION> = removeFromAllowlist or addToAllowlist or addToBlocklist or removeAllBlocklistRules
+ 11. <adguardScheme>://upgradeApp <--- Open License screen
  */
 
 protocol IURLSchemeParser {
@@ -49,6 +50,7 @@ fileprivate enum StringConstants: String {
     case urlScheme = "adguardScheme"
     case urlSchemeCommandAdd = "add"
     case urlSchemeSafariWebExtension = "safariWebExtension"
+    case upgradeApp = "upgradeApp"
 
     static func getStringConstant(string: String?) -> StringConstants? {
         guard let string = string else { return nil }
@@ -158,6 +160,15 @@ struct URLSchemeParser: IURLSchemeParser {
             DDLogInfo("(URLSchemeParser) openurl - open with safari web extension action")
             let processor = SafariWebExtensionParametersParser(executor: executor)
             return processor.parse(url)
+            
+        // Open license controller
+        case (.urlScheme, .upgradeApp):
+            DDLogInfo("(URLSchemeParser) openurl - open license screen; proStatus=\(configurationService.proStatus)")
+            guard !configurationService.proStatus else { return false }
+                    
+            let processor = OpenLicenseControllerParser(executor: executor)
+            return processor.parse(url)
+            
         default: return false
         }
     }

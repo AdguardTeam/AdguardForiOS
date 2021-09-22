@@ -9,8 +9,8 @@ import {
     makeObservable,
 } from 'mobx';
 
+import { getCroppedDomain } from '@adguard/tsurlfilter';
 import { getDomain } from '../../common/utils/url';
-import { translator } from '../../common/translators/translator';
 import { messenger } from '../../common/messenger';
 import { toDataUrl } from '../image-utils';
 import { log } from '../../common/log';
@@ -32,14 +32,7 @@ enum SiteStatus {
     BasicOnly = 'BasicOnly',
 }
 
-const SiteStatusesMessages = {
-    [SiteStatus.ProtectionStarting]: translator.getMessage('popup_action_current_site_desc_starting'),
-    [SiteStatus.ProtectionEnabled]: translator.getMessage('popup_action_current_site_status_desc_enabled'),
-    [SiteStatus.Allowlisted]: translator.getMessage('popup_action_current_site_desc_allowlisted'),
-    [SiteStatus.BasicOnly]: translator.getMessage('popup_action_current_site_desc_basic_only'),
-};
-
-class PopupStore {
+export class PopupStore {
     @observable popupDataLoadingState = PopupDataLoadingState.Idle;
 
     @observable currentSiteStatus = SiteStatus.ProtectionEnabled;
@@ -66,6 +59,10 @@ class PopupStore {
 
     @observable appearanceTheme?: AppearanceTheme;
 
+    @observable advancedBlockingEnabled: boolean = false;
+
+    @observable advancedBlockingDisabledModalVisible: boolean = false;
+
     /**
      * Flag variable
      * - true means that app is premium (user bought it),
@@ -86,9 +83,10 @@ class PopupStore {
             currentWindow: true,
         });
 
-        const popupData = await messenger.getPopupData(currentTab.url);
-
-        const currentSiteFaviconDataUrl = await this.getFaviconDataUrl(currentTab.url);
+        const [popupData, currentSiteFaviconDataUrl] = await Promise.all([
+            messenger.getPopupData(currentTab.url),
+            this.getFaviconDataUrl(currentTab.url),
+        ]);
 
         runInAction(() => {
             this.popupDataLoadingState = PopupDataLoadingState.Done;
@@ -104,6 +102,7 @@ class PopupStore {
             this.contentBlockersEnabled = popupData.contentBlockersEnabled;
             this.showProtectionDisabledModal = !popupData.contentBlockersEnabled;
             this.appearanceTheme = popupData.appearanceTheme;
+            this.advancedBlockingEnabled = popupData.advancedBlockingEnabled;
         });
     };
 
@@ -123,19 +122,23 @@ class PopupStore {
             return null;
         }
 
-        // TODO change to our proxy service when will be ready
-        const duckDuckGoFavIconServiceUrl = 'https://icons.duckduckgo.com/ip3/';
-        const favIconUrl = `${duckDuckGoFavIconServiceUrl}${domain}.ico`;
+        domain = getCroppedDomain(domain);
 
-        const TIMEOUT_MS = 500;
+        const ADGUARD_FAVICON_SERVICE_URL = 'https://icons.adguard.org/icon?domain=';
+        const favIconUrl = `${ADGUARD_FAVICON_SERVICE_URL}${domain}`;
+
+        const TIMEOUT_MS = 1000;
         const timeoutPromise = new Promise((resolve) => {
-            setTimeout(() => { resolve(null); }, TIMEOUT_MS);
+            setTimeout(() => {
+                resolve(null);
+            }, TIMEOUT_MS);
         });
 
         // eslint-disable-next-line @typescript-eslint/no-shadow
         const toDataUrlPromise = async (favIconUrl: string): Promise<string | null> => {
             try {
-                return await toDataUrl(favIconUrl);
+                const result = await toDataUrl(favIconUrl);
+                return result;
             } catch (e) {
                 log.error('Unable to get favicon data url', e);
                 return null;
@@ -163,11 +166,6 @@ class PopupStore {
         }
 
         return getDomain(this.currentSiteUrl);
-    }
-
-    @computed
-    get currentSiteStatusMessage(): string {
-        return SiteStatusesMessages[this.currentSiteStatus];
     }
 
     @action
@@ -200,8 +198,18 @@ class PopupStore {
     }
 
     @action
-    closeUpgradeModal() {
+    hideUpgradeModal() {
         this.upgradeModalVisible = false;
+    }
+
+    @action
+    showAdvancedBlockingDisabledModal() {
+        this.advancedBlockingDisabledModalVisible = true;
+    }
+
+    @action
+    hideAdvancedBlockingDisabledModal() {
+        this.advancedBlockingDisabledModalVisible = false;
     }
 
     @action

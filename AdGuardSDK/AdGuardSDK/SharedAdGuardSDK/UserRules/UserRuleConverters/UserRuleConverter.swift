@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol UserRuleConverterProtocol {
+public protocol UserRuleConverterProtocol {
     /*
      Converts domain to rule
      If passed domain is already a rule that returns itself

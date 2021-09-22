@@ -16,16 +16,16 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
+import OrderedCollections
 
 final public class SafariUserRulesStorage: UserRulesStorageProtocol {
     
-    public var rules: [UserRule] {
+    public var rules: OrderedSet<UserRule> {
         get {
             if let savedRulesData = userDefaults.storage.data(forKey: type.key) {
                 let decoder = JSONDecoder()
-                let rules = try? decoder.decode([UserRule].self, from: savedRulesData)
-                return rules ?? []
+                let rules = try? decoder.decode(OrderedSet<UserRule>.self, from: savedRulesData)
+                return rules ?? OrderedSet<UserRule>([])
             }
             return []
         }

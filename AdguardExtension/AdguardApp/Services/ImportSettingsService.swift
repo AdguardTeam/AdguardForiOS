@@ -28,18 +28,18 @@ protocol ImportSettingsServiceDelegate {
     func applySettingsFinished()
 }
 
+
+// TODO: - Refactor it
 class ImportSettingsService: ImportSettingsServiceProtocol {
     
     private let networking: ACNNetworkingProtocol
-    private let dnsFiltersService: DnsFiltersServiceProtocol
     private let dnsProvidersService: DnsProvidersServiceProtocol
     private let purchaseService: PurchaseServiceProtocol
     private let resources: AESharedResourcesProtocol
     private let safariProtection: SafariProtectionProtocol
     
-    init(networking: ACNNetworkingProtocol, dnsFiltersService: DnsFiltersServiceProtocol, dnsProvidersService: DnsProvidersServiceProtocol, purchaseService: PurchaseServiceProtocol, resources: AESharedResourcesProtocol, safariProtection: SafariProtectionProtocol) {
+    init(networking: ACNNetworkingProtocol, dnsProvidersService: DnsProvidersServiceProtocol, purchaseService: PurchaseServiceProtocol, resources: AESharedResourcesProtocol, safariProtection: SafariProtectionProtocol) {
         self.networking = networking
-        self.dnsFiltersService = dnsFiltersService
         self.dnsProvidersService = dnsProvidersService
         self.purchaseService = purchaseService
         self.resources = resources
@@ -68,7 +68,6 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
         
         // todo: add to sdk
         let customFilters = [SafariFilterProtocol]() //filtersService.groups.filter { $0.groupId == AdGuardFilterGroup.custom.rawValue }.flatMap { $0.filters }
-        let customDnsFilters = dnsFiltersService.filters
         
         let customCbFilters = settings.customCbFilters?.uniqueElements { $0.url }
         let dnsCustomFilters = settings.dnsFilters?.uniqueElements { $0.url }
@@ -214,7 +213,7 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
     private func applyDnsFilters(_ filters: [DnsFilterSettings], override: Bool)->[DnsFilterSettings] {
         
         if override {
-            dnsFiltersService.disableAllFilters()
+            
         }
         
         var resultDnsFilters: [DnsFilterSettings] = []
@@ -247,9 +246,6 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
             callback(false)
             return
         }
-        dnsFiltersService.addFilter(name: filter.name, url: url, networking: networking) { (success) in
-            callback(success)
-        }
     }
     
     private func setDnsServer(serverId: Int) {
@@ -261,12 +257,12 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
     func applyDnsRules(_ rules: [String]?, override: Bool) {
         
         if override {
-            dnsFiltersService.userRules = []
+            
         }
         
         if let dnsRules = rules {
             for rule in dnsRules {
-                dnsFiltersService.addBlacklistRule(rule)
+                
             }
         }
     }

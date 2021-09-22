@@ -19,6 +19,11 @@
 @_implementationOnly import SQLite
 
 public protocol ChartStatisticsProtocol: ResetableSyncProtocol {
+    /**
+     Returns oldest record timeStamp or nil if DB is empty
+     */
+    var oldestRecordDate: Date? { get }
+    
     /// Adds the `record` obtained from DNS-libs in the Tunnel to the DB
     func process(record: ChartStatisticsRecord)
     
@@ -39,7 +44,21 @@ final public class ChartStatistics: ChartStatisticsProtocol {
     
     let statisticsDb: Connection
     
+    /// Returns oldest record timeStamp or nil if DB is empty
+    public var oldestRecordDate: Date? {
+        let query = ChartStatisticsTable.table
+            .select(ChartStatisticsTable.timeStamp)
+            .order(ChartStatisticsTable.timeStamp)
+            .limit(1)
+        let dbDate = try? statisticsDb.pluck(query)
+        let date = dbDate?[ChartStatisticsTable.timeStamp]
+        return date
+    }
+    
     public init(statisticsDbContainerUrl: URL) throws {
+        // Create directory if doesn't exist
+        try FileManager.default.createDirectory(at: statisticsDbContainerUrl, withIntermediateDirectories: true, attributes: [:])
+        
         let dbName = Constants.Statistics.StatisticsType.chart.dbFileName
         statisticsDb = try Connection(statisticsDbContainerUrl.appendingPathComponent(dbName).path)
         dateFormatter.dateFormat = Constants.Statistics.dbDateFormat

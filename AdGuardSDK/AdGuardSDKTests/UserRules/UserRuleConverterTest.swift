@@ -4,7 +4,7 @@ class UserRuleConverterTest: XCTestCase {
     
     let prefix = "@@||"
     let suffix = "^$document"
-    let invertedAllowlistPrefix = "~"
+    let invertedAllowlistPrefix = "@@||*$document,domain=~"
     
     let exampleRule = "@@||example.org^$document"
     let exampleDomain = "example.org"
@@ -71,13 +71,13 @@ class UserRuleConverterTest: XCTestCase {
         XCTAssertEqual(domain, exampleDomain)
         
         var domains = converter.convertRulesToString(exampleRules)
-        XCTAssertEqual(domains, "@@||*$document,domain=~@@||example1.org^$document|~@@||example2.org^$document|~@@||example3.org^$document")
+        XCTAssertEqual(domains, "@@||*$document,domain=~@@||example1.org^$document\n@@||*$document,domain=~@@||example2.org^$document\n@@||*$document,domain=~@@||example3.org^$document")
         
         domains = converter.convertRulesToString(exampleRulesWithoutPrefixAndSufix)
-        XCTAssertEqual(domains, "@@||*$document,domain=~example1.org|~example2.org|~example3.org")
+        XCTAssertEqual(domains, "@@||*$document,domain=~example1.org\n@@||*$document,domain=~example2.org\n@@||*$document,domain=~example3.org")
         
         domains = converter.convertRulesToString([])
-        XCTAssertEqual(domains, "@@||*$document")
+        XCTAssertEqual(domains, "")
     }
     
     func testOpaqueRuleConverter() {

@@ -56,8 +56,7 @@ final class UserRulesRedirectControllerModel: UserRulesRedirectControllerModelPr
             let rule = UserRule(ruleText: domain, isEnabled: true)
             try? safariProtection.add(rule: rule, for: .blocklist, override: true, onCbReloaded: onCbReloaded)
         case .removeAllBlocklistRules(let domain):
-            // TODO: - Implement when converter method is done
-            break
+            safariProtection.removeAllUserRulesAssociatedWith(domain: domain, onCbReloaded: onCbReloaded)
         }
     }
 }

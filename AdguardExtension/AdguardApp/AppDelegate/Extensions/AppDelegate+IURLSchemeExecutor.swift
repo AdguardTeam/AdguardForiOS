@@ -71,4 +71,9 @@ extension AppDelegate: IURLSchemeExecutor {
         DDLogInfo("(AppDelegate) - open UserRulesRedirectController with action = \(action)")
         return self.presentUserRulesRedirectController(for: action)
     }
+    
+    func openPurchaseLicenseController() -> Bool {
+        DDLogInfo("(AppDelegate) - open PurchaseLicenseController")
+        return self.presentPurchaseLicenseController()
+    }
 }

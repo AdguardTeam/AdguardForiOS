@@ -25,4 +25,16 @@ extension UITraitEnvironment {
         }
         return UIDevice.current.userInterfaceIdiom == .pad
     }
+    
+    var systemStyleIsDark: Bool {
+        if #available(iOS 13.0, *) {
+            switch traitCollection.userInterfaceStyle {
+            case .light, .unspecified: return false
+            case .dark: return true
+            @unknown default: return false
+            }
+        } else {
+            return false
+        }
+    }
 }

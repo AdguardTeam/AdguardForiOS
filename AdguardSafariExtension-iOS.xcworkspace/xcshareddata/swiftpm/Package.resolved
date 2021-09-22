@@ -29,12 +29,21 @@
         }
       },
       {
+        "package": "Reachability",
+        "repositoryURL": "https://github.com/ashleymills/Reachability.swift",
+        "state": {
+          "branch": null,
+          "revision": "c01bbdf2d633cf049ae1ed1a68a2020a8bda32e2",
+          "version": "5.1.0"
+        }
+      },
+      {
         "package": "ContentBlockerConverter",
         "repositoryURL": "https://github.com/AdguardTeam/SafariConverterLib",
         "state": {
           "branch": null,
-          "revision": "f54649638d12d6036cd93465f09c4582dc78d305",
-          "version": "2.0.10"
+          "revision": "2f480c350d9c6b7515367173e4dc3f7340c792ac",
+          "version": "2.0.12"
         }
       },
       {
@@ -42,8 +51,8 @@
         "repositoryURL": "https://github.com/getsentry/sentry-cocoa",
         "state": {
           "branch": null,
-          "revision": "a9c1f7fb5451cdaf414c1f4e02b609fa188c730b",
-          "version": "7.2.2"
+          "revision": "97bb9a45bc1ea8390528b5fd1ce135c0ab7f174e",
+          "version": "7.2.9"
         }
       },
       {
@@ -71,6 +80,15 @@
           "branch": null,
           "revision": "6b2aa2748a7881eebb9f84fb10c01293e15b52ca",
           "version": "0.5.0"
+        }
+      },
+      {
+        "package": "swift-collections",
+        "repositoryURL": "https://github.com/apple/swift-collections.git",
+        "state": {
+          "branch": null,
+          "revision": "2d33a0ea89c961dcb2b3da2157963d9c0370347e",
+          "version": "1.0.1"
         }
       },
       {

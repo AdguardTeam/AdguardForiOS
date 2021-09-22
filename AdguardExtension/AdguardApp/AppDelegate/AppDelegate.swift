@@ -53,7 +53,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var safariProtection: SafariProtectionProtocol
     private var dnsProtection: DnsProtectionProtocol
     private var purchaseService: PurchaseServiceProtocol
-    private var dnsFiltersService: DnsFiltersServiceProtocol
     private var networking: ACNNetworking
     private var configuration: ConfigurationServiceProtocol
     private var productInfo: ADProductInfoProtocol
@@ -70,7 +69,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.resources = ServiceLocator.shared.getService()!
         self.safariProtection = ServiceLocator.shared.getService()!
         self.purchaseService = ServiceLocator.shared.getService()!
-        self.dnsFiltersService = ServiceLocator.shared.getService()!
         self.networking = ServiceLocator.shared.getService()!
         self.configuration = ServiceLocator.shared.getService()!
         self.productInfo = ServiceLocator.shared.getService()!
@@ -113,7 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
         SentrySDK.start { options in
-            options.dsn = SentryConst.dsnUrl
+            options.dsn = Constants.Sentry.dsnUrl
             options.enableAutoSessionTracking = false
         }
         
@@ -122,8 +120,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //------------- Preparing for start application. Stage 2. -----------------
         DDLogInfo("(AppDelegate) Preparing for start application. Stage 2.")
         
-        AppDelegate.setPeriodForCheckingFilters()
+        let interval = resources.backgroundFetchUpdatePeriod.interval
+        AppDelegate.setBackgroundFetchInterval(interval)
         subscribeToNotifications()
+        
+        // Background fetch consists of 3 steps, so if the update process didn't fully finish in the background than we should continue it here
+        safariProtection.finishBackgroundUpdate { error in
+            if let error = error {
+                DDLogError("(AppDelegate) - didFinishLaunchingWithOptions; Finished background update with error: \(error)")
+                return
+            }
+            DDLogInfo("(AppDelegate) - didFinishLaunchingWithOptions; Finish background update successfully")
+        }
         
         return true
     }
@@ -157,7 +165,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setAppInterfaceStyle()
     }
     
-    
     func applicationWillTerminate(_ application: UIApplication) {
         DDLogInfo("(AppDelegate) applicationWillTerminate.")
         resources.synchronizeSharedDefaults()
@@ -165,6 +172,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         addPurchaseStatusObserver()
+        purchaseService.checkLicenseStatus()
+        
+        // Update filters in background
+        safariProtection.updateSafariProtectionInBackground { [weak self] result in
+            if let error = result.error {
+                DDLogError("(AppDelegate) - backgroundFetch; Received error from SDK: \(error)")
+                completionHandler(result.backgroundFetchResult)
+            }
+            // If there was a fase with donwloading filters, than we need to restart tunnel to apply newest ones
+            else if result.oldBackgroundFetchState == .updateFinished || result.oldBackgroundFetchState == .loadAndSaveFilters {
+                self?.vpnManager.updateSettings { _ in
+                    completionHandler(result.backgroundFetchResult)
+                }
+            }
+        }
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -186,7 +208,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func resetAllSettings() {
         let resetProcessor = SettingsResetor(appDelegate: self,
-                                             dnsFiltersService: dnsFiltersService,
                                              vpnManager: vpnManager,
                                              resources: resources,
                                              purchaseService: purchaseService,
@@ -213,6 +234,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - Observing Values from User Defaults
     
+    // TODO: - Change the way we show overlimit error for DNS filters
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == TunnelErrorCode, resources.tunnelErrorCode == 3 {
             postDnsFiltersOverlimitNotificationIfNedeed()
@@ -247,9 +269,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         dnsLogContainerVC.loadViewIfNeeded()
     }
     
-    
+    // TODO: - Change the way we show overlimit error for DNS filters and handle the error
     private func postDnsFiltersOverlimitNotificationIfNedeed(){
-        let rulesNumberString = String.simpleThousandsFormatting(NSNumber(integerLiteral: dnsFiltersService.enabledRulesCount))
+        let rulesNumberString = String.simpleThousandsFormatting(NSNumber(integerLiteral: 1)) // dnsFiltersService.enabledRulesCount
         let title = String.localizedString("dns_filters_notification_title")
         let body = String(format: String.localizedString("dns_filters_overlimit_title"), rulesNumberString)
         let userInfo: [String : Int] = [PushNotificationCommands.command : PushNotificationCommands.openDnsFiltersController.rawValue]
@@ -333,6 +355,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
         DDLogInfo("Application started. Version: \(productInfo.buildVersion() ?? "nil")")
         
+        // TODO: - Add this to all extensions that use AdGuarSDK
         Logger.logDebug = { msg in
             DDLogDebug(msg)
         }
@@ -346,5 +369,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 }
-
-

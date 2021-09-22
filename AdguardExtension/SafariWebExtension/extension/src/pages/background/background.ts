@@ -1,5 +1,6 @@
 /* eslint-disable consistent-return */
 import browser from 'webextension-polyfill';
+import * as TSUrlFilter from '@adguard/tsurlfilter';
 
 import {
     MessagesToBackgroundPage,
@@ -25,7 +26,10 @@ const getEngine = (() => {
 
     const start = async () => {
         const rulesText = await adguard.nativeHost.getAdvancedRulesText();
-        await engine.start(rulesText);
+
+        const convertedRulesText = TSUrlFilter.RuleConverter.convertRules(rulesText);
+        await engine.start(convertedRulesText);
+
         return engine;
     };
 
@@ -41,7 +45,9 @@ const getScriptsAndSelectors = async (url: string): Promise<SelectorsAndScripts>
     const engine = await getEngine();
 
     const hostname = getDomain(url);
-    const cosmeticResult = engine.getCosmeticResult(hostname);
+
+    const cosmeticOption = engine.getCosmeticOption(url);
+    const cosmeticResult = engine.getCosmeticResult(hostname, cosmeticOption);
 
     const injectCssRules = [
         ...cosmeticResult.CSS.generic,
@@ -132,6 +138,7 @@ const handleMessages = () => {
                     premiumApp,
                     appearanceTheme,
                     contentBlockersEnabled,
+                    advancedBlockingEnabled,
                 } = await adguard.nativeHost.getInitData(url);
 
                 return {
@@ -142,6 +149,7 @@ const handleMessages = () => {
                     premiumApp,
                     appearanceTheme,
                     contentBlockersEnabled,
+                    advancedBlockingEnabled,
                 };
             }
             case MessagesToBackgroundPage.SetProtectionStatus: {
@@ -157,6 +165,15 @@ const handleMessages = () => {
             }
             case MessagesToBackgroundPage.UpgradeClicked: {
                 await adguard.nativeHost.upgradeMe();
+                break;
+            }
+            case MessagesToBackgroundPage.EnableAdvancedBlocking: {
+                await adguard.nativeHost.enableAdvancedBlocking();
+                break;
+            }
+            case MessagesToBackgroundPage.DeleteUserRulesByUrl: {
+                const { url } = data;
+                await adguard.nativeHost.removeUserRulesBySite(url);
                 break;
             }
             default:

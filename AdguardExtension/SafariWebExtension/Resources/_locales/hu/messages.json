@@ -1,4 +1,37 @@
 {
+    "popup_action_safari_protection_title": {
+        "message": "Safari védelem"
+    },
+    "popup_action_safari_protection_description": {
+        "message": "ehhez a webhelyhez"
+    },
+    "popup_action_safari_protection_description_disabled": {
+        "message": "kikapcsolva"
+    },
+    "popup_action_current_site_status_desc_enabled": {
+        "message": "védelem BEKAPCSOLVA"
+    },
+    "popup_action_current_site_status_desc_disabled": {
+        "message": "védelem kikapcsolva"
+    },
+    "popup_action_block_element": {
+        "message": "Elemek blokkolása ezen az oldalon"
+    },
+    "popup_action_delete_user_rules": {
+        "message": "Felhasználó szabályok törlése ennél a webhelynél"
+    },
+    "popup_action_current_site_desc_starting": {
+        "message": "védelem bekapcsolása"
+    },
+    "popup_action_current_site_desc_allowlisted": {
+        "message": "hozzáadva a kivételekhez"
+    },
+    "popup_action_current_site_desc_basic_only": {
+        "message": "csak alapvető védelem"
+    },
+    "popup_modal_all_sites_allowed_title": {
+        "message": "Magas védelem"
+    },
     "extension_name": {
         "message": "AdGuard"
     },

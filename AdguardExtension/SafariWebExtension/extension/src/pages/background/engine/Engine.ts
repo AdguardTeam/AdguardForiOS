@@ -1,4 +1,5 @@
 import * as TSUrlFilter from '@adguard/tsurlfilter';
+import { CosmeticOption, RequestType } from '@adguard/tsurlfilter';
 
 import { app } from '../app';
 
@@ -41,15 +42,37 @@ export class Engine {
         return this.engine;
     }
 
+    getMatchingResult = (url: string) => {
+        if (!this.engine) {
+            return new TSUrlFilter.MatchingResult([], null);
+        }
+
+        const request = new TSUrlFilter.Request(
+            url,
+            url,
+            RequestType.Document,
+        );
+
+        // TODO should here to be generated allowlist rule if necessary?
+        const frameRule = null;
+
+        return this.engine.matchRequest(request, frameRule);
+    };
+
+    getCosmeticOption(url: string) {
+        const matchingResult = this.getMatchingResult(url);
+        return matchingResult.getCosmeticOption();
+    }
+
     /**
      * Gets cosmetic result for the specified hostname and cosmetic options
      */
-    getCosmeticResult = (hostname: string) => {
+    getCosmeticResult = (hostname: string, cosmeticOption: CosmeticOption) => {
         if (!this.engine) {
             return new TSUrlFilter.CosmeticResult();
         }
 
         const request = new TSUrlFilter.Request(hostname, null, TSUrlFilter.RequestType.Document);
-        return this.engine.getCosmeticResult(request, TSUrlFilter.CosmeticOption.CosmeticOptionAll);
+        return this.engine.getCosmeticResult(request, cosmeticOption);
     };
 }

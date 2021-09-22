@@ -16,18 +16,19 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
+import OrderedCollections
 
 final class DnsUserRulesStorage: UserRulesStorageProtocol {
     
-    var rules: [UserRule] {
+    var rules: OrderedSet<UserRule> {
         get {
             let allRules = getAllRules()
             let enabledRules = getEnabledRules()
-            return allRules.map {
+            let rulesObjects: [UserRule] = allRules.map {
                 let isEnabled = enabledRules.contains($0)
                 return UserRule(ruleText: $0, isEnabled: isEnabled)
             }
+            return OrderedSet(rulesObjects)
         }
         set {
             var allRules: [String] = []
@@ -52,6 +53,24 @@ final class DnsUserRulesStorage: UserRulesStorageProtocol {
     init(type: DnsUserRuleType, fileStorage: FilterFilesStorageProtocol) {
         self.type = type
         self.fileStorage = fileStorage
+        
+        // Create empty file if doesn't exist for all rules
+        if fileStorage.getFilterContentForFilter(withId: type.allRulesFilterId) == nil {
+            do {
+                try fileStorage.saveFilter(withId: type.allRulesFilterId, filterContent: "")
+            } catch {
+                Logger.logError("(DnsUserRulesStorage) - init; Failed to create empty file with id=\(type.allRulesFilterId). It can lead to various errors")
+            }
+        }
+        
+        // Create empty file if doesn't exist for enabled rules
+        if fileStorage.getFilterContentForFilter(withId: type.enabledRulesFilterId) == nil {
+            do {
+                try fileStorage.saveFilter(withId: type.enabledRulesFilterId, filterContent: "")
+            } catch {
+                Logger.logError("(DnsUserRulesStorage) - init; Failed to create empty file with id=\(type.enabledRulesFilterId). It can lead to various errors")
+            }
+        }
     }
     
     // MARK: - Private methods

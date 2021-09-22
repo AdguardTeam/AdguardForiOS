@@ -2,23 +2,8 @@
     "extension_name": {
         "message": "AdGuard"
     },
-    "popup_modal_all_sites_allowed_title": {
-        "message": "Förbättrad prestanda"
-    },
-    "popup_modal_all_sites_allowed_button": {
-        "message": "Låt magin börja"
-    },
-    "popup_modal_not_all_sites_allowed_button": {
-        "message": "Okej"
-    },
     "popup_modal_btn_free": {
         "message": "Uppgradera"
-    },
-    "popup_fullscreen_support_desc": {
-        "message": "Om något är fel, säg till oss så fixar vi det."
-    },
-    "popup_support_button_text": {
-        "message": "Rapportera ett problem"
     },
     "modal_protection_off_settings": {
         "message": "Öppna <b>Inställningar<\/b>"

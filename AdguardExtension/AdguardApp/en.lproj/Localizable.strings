@@ -595,6 +595,9 @@
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_notification_title" = "Turn off some filters for correct work";
 
+/* (DnsFiltersTableController) - DNS filters title */
+"dns_filters_title" = "DNS filters";
+
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Blocked";
 
@@ -1017,3 +1020,21 @@
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
 "youtube_script_error_title" = "Unknown error occurred while removing YouTube ads";
+
+/* (BackgroundFetchController) - Background app refresh default title */
+"background_fetch_default_period" = "Default period";
+
+/* (BackgroundFetchController) - Background app refresh every 1 hour title */
+"background_fetch_hour_period" = "Every 1 hour";
+
+/* (BackgroundFetchController) - Background app refresh every 3 hours title */
+"background_fetch_tree_hours_period" = "Every 3 hours";
+
+/* (BackgroundFetchController) - Background app refresh every 12 hours title */
+"background_fetch_twelve_hours_period" = "Every 12 hours";
+
+/* (BackgroundFetchController) - Background app refresh every 24 hours title */
+"background_fetch_twenty_four_hours_period" = "Every 24 hours";
+
+/* Background app refresh time title */
+"background_app_refresh_time_title" = "Background app refresh time";

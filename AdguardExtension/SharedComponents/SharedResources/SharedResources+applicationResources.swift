@@ -1,0 +1,60 @@
+/**
+   This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
+   Copyright © Adguard Software Limited. All rights reserved.
+
+   Adguard for iOS is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Adguard for iOS is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+import Foundation
+import DnsAdGuardSDK
+
+extension AESharedResourcesProtocol {    
+    /// Advanced mode state
+    var advancedMode: Bool {
+        get {
+            sharedDefaults().bool(forKey: AEDefaultsDeveloperMode)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsDeveloperMode)
+        }
+    }
+
+    dynamic var dnsImplementation: DnsImplementation {
+        get {
+            if let savedImplementation = sharedDefaults().object(forKey: DnsImplementationKey) as? DnsImplementation {
+                return savedImplementation
+            }
+            return .adGuard
+        }
+        set {
+            if dnsImplementation != newValue {
+                sharedDefaults().set(newValue, forKey: DnsImplementationKey)
+                NotificationCenter.default.post(name: .dnsImplementationChanged, object: nil)
+            }
+        }
+    }
+
+    dynamic var blockingMode: DnsProxyBlockingMode  {
+        get {
+            guard let value = sharedDefaults().object(forKey: BlockingMode) as? Int else {
+                return .defaultMode
+            }
+            
+            return DnsProxyBlockingMode(rawValue: value) ?? .defaultMode
+        }
+        set {
+            sharedDefaults().setValue(newValue.rawValue, forKey: BlockingMode)
+        }
+    }
+}

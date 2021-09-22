@@ -16,21 +16,21 @@ class DnsProvidersManagerTest: XCTestCase {
     // MARK: - Initialization test
     
     func testInitializationWithoutCustomProvidersWithAdguardImplementation() {
-        configuration.dnsImplementation = .adguard
+        configuration.dnsImplementation = .adGuard
         initialize()
-        checkVariables(custom: 0, predefined: 11, servers: 36, providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId, dnsImp: .adguard)
+        checkVariables(custom: 0, predefined: 11, servers: 36, providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId, dnsImp: .adGuard)
         checkEnabledProvider(providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId)
     }
     
     func testInitializationWithCustomProvidersWithAdguardImplementation() {
-        configuration.dnsImplementation = .adguard
+        configuration.dnsImplementation = .adGuard
         
         let customServer = CustomDnsServer(upstreams: [], providerId: 1, type: .dnscrypt, id: 10, isEnabled: true)
         let customProvider = CustomDnsProvider(name: "name", server: customServer, providerId: 1, isEnabled: true)
         customProviders.providers = [customProvider]
         initialize()
 
-        checkVariables(custom: 1, predefined: 11, servers: 37, providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId, dnsImp: .adguard)
+        checkVariables(custom: 1, predefined: 11, servers: 37, providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId, dnsImp: .adGuard)
         checkEnabledProvider(providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId)
     }
     
@@ -63,26 +63,26 @@ class DnsProvidersManagerTest: XCTestCase {
         checkVariables(custom: 0, predefined: 10, servers: 26, providerId: PredefinedDnsProvider.adguardDnsProviderId, serverId: PredefinedDnsServer.adguardDohServerId, dnsImp: .native)
         checkEnabledProvider(providerId: PredefinedDnsProvider.adguardDnsProviderId, serverId: PredefinedDnsServer.adguardDohServerId)
         
-        configuration.dnsImplementation = .adguard
+        configuration.dnsImplementation = .adGuard
         providersManager.dnsImplementationChanged()
         
-        checkVariables(custom: 0, predefined: 11, servers: 36, providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId, dnsImp: .adguard)
+        checkVariables(custom: 0, predefined: 11, servers: 36, providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId, dnsImp: .adGuard)
         checkEnabledProvider(providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId)
     }
     
     func testDnsImplementationChangedFromAdguardToNative() {
         let activeDns = DnsProvidersManager.ActiveDnsInfo(providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId)
         set(activeDns: activeDns)
-        configuration.dnsImplementation = .adguard
+        configuration.dnsImplementation = .adGuard
         initialize()
         
-        checkVariables(custom: 0, predefined: 11, servers: 36, providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId, dnsImp: .adguard)
+        checkVariables(custom: 0, predefined: 11, servers: 36, providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId, dnsImp: .adGuard)
         checkEnabledProvider(providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId)
         
         configuration.dnsImplementation = .native
         providersManager.dnsImplementationChanged()
         
-        checkVariables(custom: 0, predefined: 10, servers: 26, providerId: PredefinedDnsProvider.adguardDnsProviderId, serverId: PredefinedDnsServer.adguardDohServerId, dnsImp: .adguard)
+        checkVariables(custom: 0, predefined: 10, servers: 26, providerId: PredefinedDnsProvider.adguardDnsProviderId, serverId: PredefinedDnsServer.adguardDohServerId, dnsImp: .adGuard)
         checkEnabledProvider(providerId: PredefinedDnsProvider.adguardDnsProviderId, serverId: PredefinedDnsServer.adguardDohServerId)
     }
     
@@ -95,10 +95,10 @@ class DnsProvidersManagerTest: XCTestCase {
         checkVariables(custom: 0, predefined: 10, servers: 26, providerId: PredefinedDnsProvider.adguardDnsProviderId, serverId: PredefinedDnsServer.adguardDohServerId, dnsImp: .native)
         checkEnabledProvider(providerId: PredefinedDnsProvider.adguardDnsProviderId, serverId: PredefinedDnsServer.adguardDohServerId)
         
-        configuration.dnsImplementation = .adguard
+        configuration.dnsImplementation = .adGuard
         providersManager.dnsImplementationChanged()
         
-        checkVariables(custom: 0, predefined: 11, servers: 36, providerId: PredefinedDnsProvider.adguardDnsProviderId, serverId: PredefinedDnsServer.adguardDohServerId, dnsImp: .adguard)
+        checkVariables(custom: 0, predefined: 11, servers: 36, providerId: PredefinedDnsProvider.adguardDnsProviderId, serverId: PredefinedDnsServer.adguardDohServerId, dnsImp: .adGuard)
         checkEnabledProvider(providerId: PredefinedDnsProvider.adguardDnsProviderId, serverId: PredefinedDnsServer.adguardDohServerId)
     }
     
@@ -112,10 +112,10 @@ class DnsProvidersManagerTest: XCTestCase {
         let activeDns = DnsProvidersManager.ActiveDnsInfo(providerId: providerId, serverId: serverId)
         set(activeDns: activeDns)
         
-        configuration.dnsImplementation = .adguard
+        configuration.dnsImplementation = .adGuard
         initialize()
         
-        checkVariables(custom: 1, predefined: 11, servers: 37, providerId: providerId, serverId: serverId, dnsImp: .adguard)
+        checkVariables(custom: 1, predefined: 11, servers: 37, providerId: providerId, serverId: serverId, dnsImp: .adGuard)
         checkEnabledProvider(providerId: providerId, serverId: serverId)
         
         configuration.dnsImplementation = .native
@@ -128,7 +128,7 @@ class DnsProvidersManagerTest: XCTestCase {
     // MARK: - test selectProvider
     
     func testSelectProviderWithInvalidProviderWithAdguardImplementation() {
-        configuration.dnsImplementation = .adguard
+        configuration.dnsImplementation = .adGuard
         initialize()
         checkEnabledProvider(providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId)
         
@@ -158,7 +158,7 @@ class DnsProvidersManagerTest: XCTestCase {
     }
     
     func testSelectProviderWithInvalidCombinationOfProviderAndServerWithAdguardImplementation() {
-        configuration.dnsImplementation = .adguard
+        configuration.dnsImplementation = .adGuard
         initialize()
         
         checkEnabledProvider(providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId)
@@ -191,7 +191,7 @@ class DnsProvidersManagerTest: XCTestCase {
     }
     
     func testSelectProviderWithSuccessWithAdguardImplementation() {
-        configuration.dnsImplementation = .adguard
+        configuration.dnsImplementation = .adGuard
         initialize()
         checkEnabledProvider(providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId)
         
@@ -236,12 +236,12 @@ class DnsProvidersManagerTest: XCTestCase {
         customProviders.providers = [customProvider]
         customProviders.addCustomProviderResult = .success((1, 100010))
         initialize()
-        checkVariables(custom: 1, predefined: 11, servers: 37, providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId, dnsImp: .adguard)
+        checkVariables(custom: 1, predefined: 11, servers: 37, providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId, dnsImp: .adGuard)
         checkEnabledProvider(providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId)
         
         XCTAssertNoThrow(try providersManager.addCustomProvider(name: "name", upstreams: ["1.1.1.1"], selectAsCurrent: true))
         
-        checkVariables(custom: 1, predefined: 11, servers: 37, providerId: 1, serverId: 100010, dnsImp: .adguard)
+        checkVariables(custom: 1, predefined: 11, servers: 37, providerId: 1, serverId: 100010, dnsImp: .adGuard)
         checkEnabledProvider(providerId: 1, serverId: 100010)
     }
     
@@ -252,12 +252,12 @@ class DnsProvidersManagerTest: XCTestCase {
         customProviders.providers = [customProvider]
         customProviders.addCustomProviderResult = .success((1, 100010))
         initialize()
-        checkVariables(custom: 1, predefined: 11, servers: 37, providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId, dnsImp: .adguard)
+        checkVariables(custom: 1, predefined: 11, servers: 37, providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId, dnsImp: .adGuard)
         checkEnabledProvider(providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId)
         
         XCTAssertNoThrow(try providersManager.addCustomProvider(name: "name", upstreams: ["1.1.1.1"], selectAsCurrent: false))
         
-        checkVariables(custom: 1, predefined: 11, servers: 37, providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId, dnsImp: .adguard)
+        checkVariables(custom: 1, predefined: 11, servers: 37, providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId, dnsImp: .adGuard)
         checkEnabledProvider(providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId)
     }
     
@@ -355,7 +355,7 @@ class DnsProvidersManagerTest: XCTestCase {
         set(activeDns: activeDns)
         initialize()
         
-        checkVariables(custom: 1, predefined: 11, servers: 37, providerId: 1, serverId: 100010, dnsImp: .adguard)
+        checkVariables(custom: 1, predefined: 11, servers: 37, providerId: 1, serverId: 100010, dnsImp: .adGuard)
         checkEnabledProvider(providerId: 1, serverId: 100010)
         
         // Imitate provider removal
@@ -363,7 +363,7 @@ class DnsProvidersManagerTest: XCTestCase {
         
         XCTAssertNoThrow(try providersManager.removeCustomProvider(withId: 1))
         
-        checkVariables(custom: 0, predefined: 11, servers: 36, providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId, dnsImp: .adguard)
+        checkVariables(custom: 0, predefined: 11, servers: 36, providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId, dnsImp: .adGuard)
         checkEnabledProvider(providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId)
     }
     
@@ -377,7 +377,7 @@ class DnsProvidersManagerTest: XCTestCase {
         set(activeDns: activeDns)
         initialize()
         
-        checkVariables(custom: 1, predefined: 11, servers: 37, providerId: 10012, serverId: 12, dnsImp: .adguard)
+        checkVariables(custom: 1, predefined: 11, servers: 37, providerId: 10012, serverId: 12, dnsImp: .adGuard)
         checkEnabledProvider(providerId: 10012, serverId: 12)
         
         // Imitate provider removal
@@ -385,7 +385,7 @@ class DnsProvidersManagerTest: XCTestCase {
         
         XCTAssertNoThrow(try providersManager.removeCustomProvider(withId: 1))
         
-        checkVariables(custom: 0, predefined: 11, servers: 36, providerId: 10012, serverId: 12, dnsImp: .adguard)
+        checkVariables(custom: 0, predefined: 11, servers: 36, providerId: 10012, serverId: 12, dnsImp: .adGuard)
         checkEnabledProvider(providerId: 10012, serverId: 12)
     }
 
@@ -399,7 +399,7 @@ class DnsProvidersManagerTest: XCTestCase {
         try! providersManager.reset()
         XCTAssertEqual(customProviders.resetCalledCount, 1)
         
-        checkVariables(custom: 0, predefined: 11, servers: 36, providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId, dnsImp: .adguard)
+        checkVariables(custom: 0, predefined: 11, servers: 36, providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId, dnsImp: .adGuard)
         checkEnabledProvider(providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId)
     }
     

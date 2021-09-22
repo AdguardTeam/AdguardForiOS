@@ -69,7 +69,7 @@ protocol FiltersConverterProtocol {
      Note that one of **allowlistRules** and **invertedAllowlistRulesString** should be nil
      - Returns: ContentBlockerConverter result for each content blocker
      */
-    func convert(filters: [FilterFileContent], blocklistRules: [String]?, allowlistRules: [String]?, invertedAllowlistRulesString: String?) -> [FiltersConverterResult]
+    func convert(filters: [FilterFileContent], blocklistRules: [String]?, allowlistRules: [String]?, invertedAllowlistRules: [String]?) -> [FiltersConverterResult]
 }
 
 final class FiltersConverter: FiltersConverterProtocol {
@@ -93,8 +93,8 @@ final class FiltersConverter: FiltersConverterProtocol {
     
     // MARK: - Internal method
     
-    func convert(filters: [FilterFileContent], blocklistRules: [String]?, allowlistRules: [String]?, invertedAllowlistRulesString: String?) -> [FiltersConverterResult] {
-        let sortedRules = sortRulesByContentBlockers(filters, blocklistRules, allowlistRules, invertedAllowlistRulesString)
+    func convert(filters: [FilterFileContent], blocklistRules: [String]?, allowlistRules: [String]?, invertedAllowlistRules: [String]?) -> [FiltersConverterResult] {
+        let sortedRules = sortRulesByContentBlockers(filters, blocklistRules, allowlistRules, invertedAllowlistRules)
         let safariFilters = convert(filters: sortedRules)
         return safariFilters
     }
@@ -105,12 +105,12 @@ final class FiltersConverter: FiltersConverterProtocol {
     private func sortRulesByContentBlockers(_ filters: [FilterFileContent],
                                     _ blocklistRules: [String]?,
                                     _ allowlistRules: [String]?,
-                                    _ invertedAllowlistRulesString: String?) -> [ContentBlockerType: [String]]
+                                    _ invertedAllowlistRules: [String]?) -> [ContentBlockerType: [String]]
     {
         var filterRules = parse(filters: filters)
         addUserRules(blocklistRules: blocklistRules,
                      allowlistRules: allowlistRules,
-                     invertedAllowlistRulesString: invertedAllowlistRulesString,
+                     invertedAllowlistRules: invertedAllowlistRules,
                      filters: &filterRules)
         return filterRules
     }
@@ -147,7 +147,7 @@ final class FiltersConverter: FiltersConverterProtocol {
     }
     
     // Adds all types of user rules to all content blockers
-    private func addUserRules(blocklistRules: [String]?, allowlistRules: [String]?, invertedAllowlistRulesString: String?, filters: inout [ContentBlockerType: [String]]) {
+    private func addUserRules(blocklistRules: [String]?, allowlistRules: [String]?, invertedAllowlistRules: [String]?, filters: inout [ContentBlockerType: [String]]) {
         // add blacklist rules
         if let blocklistRules = blocklistRules {
             filters.keys.forEach { filters[$0]?.append(contentsOf: blocklistRules) }
@@ -160,9 +160,11 @@ final class FiltersConverter: FiltersConverterProtocol {
             filters.keys.forEach { filters[$0]?.append(contentsOf: properAllowlistRules) }
         }
         
-        // add inverted allowlist rules string
-        if let invertedAllowlistRulesString = invertedAllowlistRulesString {
-            filters.keys.forEach { filters[$0]?.append(invertedAllowlistRulesString) }
+        // add inverted allowlist rules
+        if let invertedAllowlistRules = invertedAllowlistRules {
+            let converter = InvertedAllowlistRuleConverter()
+            let properInvertedallowlistRules = invertedAllowlistRules.map { converter.convertDomainToRule($0) }
+            filters.keys.forEach { filters[$0]?.append(contentsOf: properInvertedallowlistRules) }
         }
     }
     

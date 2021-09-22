@@ -15,7 +15,7 @@
   "dependencies": {
     "@adguard/assistant": "^4.3.48",
     "@adguard/translate": "^0.2.3",
-    "@adguard/tsurlfilter": "^0.6.1",
+    "@adguard/tsurlfilter": "^0.7.1",
     "@babel/runtime": "^7.14.6",
     "axios": "^0.21.1",
     "classnames": "^2.3.1",
@@ -36,6 +36,7 @@
     "@babel/preset-typescript": "^7.15.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
+    "@testing-library/user-event": "^13.2.1",
     "@types/copy-webpack-plugin": "^8.0.1",
     "@types/jest": "^26.0.23",
     "@types/lodash": "^4.14.172",
@@ -70,7 +71,7 @@
     "sinon-chrome": "^3.0.1",
     "style-loader": "^3.1.0",
     "ts-node": "^10.0.0",
-    "typescript": "^4.4.2",
+    "typescript": "^4.4.3",
     "webpack": "^5.45.1",
     "webpack-cli": "^4.7.2"
   }
