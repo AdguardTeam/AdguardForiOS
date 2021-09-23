@@ -57,7 +57,7 @@
         "message": "Advanced protection is off"
     },
     "popup_modal_advanced_blocking_disabled_description": {
-        "message": "Userscripts and blocking ads in Youtube are not activated."
+        "message": "Userscripts and YouTube ad blocking are not activated."
     },
     "popup_modal_advanced_blocking_disabled_button": {
         "message": "Turn on"
