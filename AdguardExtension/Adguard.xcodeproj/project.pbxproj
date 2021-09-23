@@ -479,6 +479,10 @@
 		7E18443D26F774DF0085CDE3 /* SharedResources+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E18443426F773470085CDE3 /* SharedResources+Theme.swift */; };
 		7E18443E26F774E20085CDE3 /* SharedResources+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E18443426F773470085CDE3 /* SharedResources+Theme.swift */; };
 		7E18952723FD8E6D006FB241 /* RateAppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A29F8823E0334000D974CF /* RateAppService.swift */; };
+		7E1A8F5326FCD2C200BA98D5 /* toolbar-icon-38.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E1A8F4F26FCD2C000BA98D5 /* toolbar-icon-38.png */; };
+		7E1A8F5426FCD2C200BA98D5 /* toolbar-icon-16.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E1A8F5026FCD2C100BA98D5 /* toolbar-icon-16.png */; };
+		7E1A8F5526FCD2C200BA98D5 /* toolbar-icon-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E1A8F5126FCD2C100BA98D5 /* toolbar-icon-32.png */; };
+		7E1A8F5626FCD2C200BA98D5 /* toolbar-icon-19.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E1A8F5226FCD2C200BA98D5 /* toolbar-icon-19.png */; };
 		7E1AB61025824A0200519B2B /* ParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F93F23F2B64400F9A544 /* ParserProtocol.swift */; };
 		7E1AB64625824A6600519B2B /* SupportService+Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA7834A2578E54500CA8889 /* SupportService+Feedback.swift */; };
 		7E1AB68E25824ABD00519B2B /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95523F2B96B00F9A544 /* CharacterSet+Utils.swift */; };
@@ -2815,15 +2819,11 @@
 		4982C0E626D78F2900CACBBE /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		4982C0E726D78F2900CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
 		4982C0E926D78F2900CACBBE /* index.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = index.ts; sourceTree = "<group>"; };
-		4982C0EB26D78F2900CACBBE /* toolbar-icon-19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar-icon-19.png"; sourceTree = "<group>"; };
-		4982C0EC26D78F2900CACBBE /* toolbar-icon-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar-icon-32.png"; sourceTree = "<group>"; };
 		4982C0ED26D78F2900CACBBE /* icon-256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-256.png"; sourceTree = "<group>"; };
 		4982C0EE26D78F2900CACBBE /* icon-48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-48.png"; sourceTree = "<group>"; };
 		4982C0EF26D78F2900CACBBE /* icon-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-64.png"; sourceTree = "<group>"; };
 		4982C0F026D78F2900CACBBE /* icon-96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-96.png"; sourceTree = "<group>"; };
-		4982C0F126D78F2900CACBBE /* toolbar-icon-38.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar-icon-38.png"; sourceTree = "<group>"; };
 		4982C0F226D78F2900CACBBE /* icon-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-128.png"; sourceTree = "<group>"; };
-		4982C0F326D78F2900CACBBE /* toolbar-icon-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar-icon-16.png"; sourceTree = "<group>"; };
 		4982C0F426D78F2900CACBBE /* icon-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-512.png"; sourceTree = "<group>"; };
 		4982C0F526D78F2900CACBBE /* vars.pcss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vars.pcss; sourceTree = "<group>"; };
 		4982C0F626D78F2900CACBBE /* manifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
@@ -3112,6 +3112,10 @@
 		7E15DFE826E6481A0020247E /* SafariAdGuardSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SafariAdGuardSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E16F29D26FA204200383410 /* ActionExtensionWebReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionExtensionWebReporter.swift; sourceTree = "<group>"; };
 		7E18443426F773470085CDE3 /* SharedResources+Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharedResources+Theme.swift"; sourceTree = "<group>"; };
+		7E1A8F4F26FCD2C000BA98D5 /* toolbar-icon-38.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar-icon-38.png"; sourceTree = "<group>"; };
+		7E1A8F5026FCD2C100BA98D5 /* toolbar-icon-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar-icon-16.png"; sourceTree = "<group>"; };
+		7E1A8F5126FCD2C100BA98D5 /* toolbar-icon-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar-icon-32.png"; sourceTree = "<group>"; };
+		7E1A8F5226FCD2C200BA98D5 /* toolbar-icon-19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar-icon-19.png"; sourceTree = "<group>"; };
 		7E1BAE71233A1AFF00F1EBEB /* SafariProtectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariProtectionController.swift; sourceTree = "<group>"; };
 		7E1E41562424BFD100567C8D /* MostActiveCompaniesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostActiveCompaniesController.swift; sourceTree = "<group>"; };
 		7E1E41592424C01100567C8D /* MostActiveCompaniesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostActiveCompaniesCell.swift; sourceTree = "<group>"; };
@@ -4645,16 +4649,16 @@
 		4982C0EA26D78F2900CACBBE /* images */ = {
 			isa = PBXGroup;
 			children = (
-				4982C0EB26D78F2900CACBBE /* toolbar-icon-19.png */,
-				4982C0EC26D78F2900CACBBE /* toolbar-icon-32.png */,
 				4982C0ED26D78F2900CACBBE /* icon-256.png */,
 				4982C0EE26D78F2900CACBBE /* icon-48.png */,
 				4982C0EF26D78F2900CACBBE /* icon-64.png */,
 				4982C0F026D78F2900CACBBE /* icon-96.png */,
-				4982C0F126D78F2900CACBBE /* toolbar-icon-38.png */,
 				4982C0F226D78F2900CACBBE /* icon-128.png */,
-				4982C0F326D78F2900CACBBE /* toolbar-icon-16.png */,
 				4982C0F426D78F2900CACBBE /* icon-512.png */,
+				7E1A8F5026FCD2C100BA98D5 /* toolbar-icon-16.png */,
+				7E1A8F5226FCD2C200BA98D5 /* toolbar-icon-19.png */,
+				7E1A8F5126FCD2C100BA98D5 /* toolbar-icon-32.png */,
+				7E1A8F4F26FCD2C000BA98D5 /* toolbar-icon-38.png */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -7853,10 +7857,14 @@
 				4982C2EF26D7973F00CACBBE /* images in Resources */,
 				4982C2F026D7973F00CACBBE /* _locales in Resources */,
 				4982C2F126D7973F00CACBBE /* assistant.js in Resources */,
+				7E1A8F5326FCD2C200BA98D5 /* toolbar-icon-38.png in Resources */,
+				7E1A8F5626FCD2C200BA98D5 /* toolbar-icon-19.png in Resources */,
 				4982C2F226D7973F00CACBBE /* background.js in Resources */,
 				4982C2F326D7973F00CACBBE /* content.js in Resources */,
 				7E70265A26DD16A900F8FC25 /* popup.css in Resources */,
 				4982C2F426D7973F00CACBBE /* manifest.json in Resources */,
+				7E1A8F5426FCD2C200BA98D5 /* toolbar-icon-16.png in Resources */,
+				7E1A8F5526FCD2C200BA98D5 /* toolbar-icon-32.png in Resources */,
 				4982C2F626D7973F00CACBBE /* popup.html in Resources */,
 				4982C2F726D7973F00CACBBE /* popup.js in Resources */,
 			);

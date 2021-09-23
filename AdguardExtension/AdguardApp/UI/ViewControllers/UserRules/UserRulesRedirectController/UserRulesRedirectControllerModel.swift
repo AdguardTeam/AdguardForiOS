@@ -51,10 +51,10 @@ final class UserRulesRedirectControllerModel: UserRulesRedirectControllerModelPr
         switch action {
         case .disableSiteProtection(let domain):
             if resources.invertedWhitelist {
-                try? safariProtection.removeRule(withText: domain, for: .invertedAllowlist, onCbReloaded: nil)
+                try? safariProtection.removeRule(withText: domain, for: .invertedAllowlist, onCbReloaded: onCbReloaded)
             } else {
                 let rule = UserRule(ruleText: domain, isEnabled: true)
-                try? safariProtection.add(rule: rule, for: .allowlist, override: true, onCbReloaded: nil)
+                try? safariProtection.add(rule: rule, for: .allowlist, override: true, onCbReloaded: onCbReloaded)
             }
         case .enableSiteProtection(let domain):
             if resources.invertedWhitelist {
