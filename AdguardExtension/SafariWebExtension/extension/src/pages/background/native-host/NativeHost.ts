@@ -10,10 +10,10 @@ interface NativeHostMessage {
 }
 
 export interface ActionLinks {
-    addToAllowlistLink: string,
+    disableSiteProtectionLink: string,
     addToBlocklistLink: string,
     removeAllBlocklistRulesLink: string,
-    removeFromAllowlistLink: string,
+    enableSiteProtectionLink: string,
     upgradeAppLink: string,
     reportProblemLink: string,
     enableAdvancedBlockingLink: string,
@@ -120,22 +120,22 @@ export class NativeHost implements NativeHostInterface {
     }
 
     async enableProtection(url: string): Promise<void> {
-        if (!this.links?.removeFromAllowlistLink) {
+        if (!this.links?.enableSiteProtectionLink) {
             return;
         }
 
         const domain = getDomain(url);
-        const linkWithDomain = this.links.removeFromAllowlistLink + encodeURIComponent(domain);
+        const linkWithDomain = this.links.enableSiteProtectionLink + encodeURIComponent(domain);
         await this.openNativeLink(linkWithDomain);
     }
 
     async disableProtection(url: string): Promise<void> {
-        if (!this.links?.addToAllowlistLink) {
+        if (!this.links?.disableSiteProtectionLink) {
             return;
         }
 
         const domain = getDomain(url);
-        const linkWithDomain = this.links.addToAllowlistLink + encodeURIComponent(domain);
+        const linkWithDomain = this.links.disableSiteProtectionLink + encodeURIComponent(domain);
         await this.openNativeLink(linkWithDomain);
     }
 
@@ -149,7 +149,7 @@ export class NativeHost implements NativeHostInterface {
         await this.openNativeLink(linkWithDomain);
     }
 
-    // FIXME shouldn't here provided url?
+    // FIXME shouldn't here to be provided url?
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async reportProblem(url?: string) {
         if (!this.links?.reportProblemLink) {
@@ -223,9 +223,9 @@ export class NativeHost implements NativeHostInterface {
 
             // links
             // e.g. "adguard://safariWebExtension?action=removeFromAllowlist&domain="
-            remove_from_allowlist_link: removeFromAllowlistLink,
+            enable_site_protection_link: enableSiteProtectionLink,
             // e.g. "adguard://safariWebExtension?action=addToAllowlist&domain="
-            add_to_allowlist_link: addToAllowlistLink,
+            disable_site_protection_link: disableSiteProtectionLink,
             // e.g. "adguard://safariWebExtension?action=addToBlocklist&domain="
             add_to_blocklist_link: addToBlocklistLink,
             // e.g. "adguard://safariWebExtension?action=removeAllBlocklistRules&domain="
@@ -240,9 +240,9 @@ export class NativeHost implements NativeHostInterface {
 
         this.setLinks({
             addToBlocklistLink,
-            addToAllowlistLink,
+            disableSiteProtectionLink,
             removeAllBlocklistRulesLink,
-            removeFromAllowlistLink,
+            enableSiteProtectionLink,
             upgradeAppLink,
             reportProblemLink,
             enableAdvancedBlockingLink,

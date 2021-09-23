@@ -28,7 +28,7 @@ export const ProtectionToggle = observer(() => {
         descriptionColor = 'yellow';
 
         const handleInfoTouch = () => {
-            store.setShowContentBlockersEnabledModal(true);
+            store.setProtectionModalVisibleState(true);
         };
 
         button = (

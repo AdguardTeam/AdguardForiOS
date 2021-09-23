@@ -8,13 +8,13 @@ import { Modal } from '../Modal';
 import { translator } from '../../../../common/translators/translator';
 import { popupStore } from '../../../stores/PopupStore';
 
-import './protection-disabled.pcss';
+import './protection-modal.pcss';
 
-export const ProtectionDisabledModal = observer(() => {
+export const ProtectionModal = observer(() => {
     const store = useContext(popupStore);
 
     const handleClose = () => {
-        store.setShowContentBlockersEnabledModal(false);
+        store.setProtectionModalVisibleState(false);
     };
 
     return (

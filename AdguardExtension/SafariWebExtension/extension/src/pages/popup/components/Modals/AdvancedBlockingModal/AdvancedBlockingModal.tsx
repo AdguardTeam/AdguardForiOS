@@ -7,11 +7,11 @@ import { Button } from '../../Button';
 import { Modal } from '../Modal';
 import { messenger } from '../../../../common/messenger';
 
-export const AdvancedBlockingDisabledModal = observer(() => {
+export const AdvancedBlockingModal = observer(() => {
     const store = useContext(popupStore);
 
     const handleClose = () => {
-        store.hideAdvancedBlockingDisabledModal();
+        store.hideAdvancedBlockingModal();
     };
 
     const handleClick = async () => {

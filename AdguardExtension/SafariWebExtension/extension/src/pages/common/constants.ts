@@ -1,8 +1,5 @@
 export enum MessagesToNativeApp {
     WriteInNativeLog = 'writeInNativeLog',
-    // TODO remove if not necessary
-    ReportProblem = 'reportProblem',
-    UpgradeMe = 'upgradeMe',
     GetAdvancedRulesText = 'get_advanced_rules_text',
     GetInitData = 'get_init_data',
 }

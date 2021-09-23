@@ -5,14 +5,7 @@ import { Action } from '../Action';
 import { InfoButton } from './InfoButton';
 import { popupStore } from '../../../stores/PopupStore';
 import { translator } from '../../../../common/translators/translator';
-
-enum SiteStatus {
-    ProtectionStarting = 'ProtectionStarting',
-    ProtectionEnabled = 'ProtectionEnabled',
-    ProtectionDisabled = 'ProtectionDisabled',
-    Allowlisted = 'Allowlisted',
-    BasicOnly = 'BasicOnly',
-}
+import { SiteStatus } from '../../../constants';
 
 const SiteStatusesMessages = {
     [SiteStatus.ProtectionStarting]: translator.getMessage('popup_action_current_site_desc_starting'),

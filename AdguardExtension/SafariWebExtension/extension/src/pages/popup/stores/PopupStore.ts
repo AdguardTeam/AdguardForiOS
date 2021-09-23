@@ -9,12 +9,12 @@ import {
     makeObservable,
 } from 'mobx';
 
-import { getCroppedDomain } from '@adguard/tsurlfilter';
 import { getDomain } from '../../common/utils/url';
 import { messenger } from '../../common/messenger';
 import { toDataUrl } from '../image-utils';
 import { log } from '../../common/log';
 import { AppearanceTheme } from '../../common/constants';
+import { SiteStatus } from '../constants';
 
 // Do not allow property change outside of store actions
 configure({ enforceActions: 'observed' });
@@ -23,13 +23,6 @@ export enum PopupDataLoadingState {
     Idle = 'Idle',
     Loading = 'Loading',
     Done = 'Done',
-}
-
-enum SiteStatus {
-    ProtectionStarting = 'ProtectionStarting',
-    ProtectionEnabled = 'ProtectionEnabled',
-    Allowlisted = 'Allowlisted',
-    BasicOnly = 'BasicOnly',
 }
 
 export class PopupStore {
@@ -53,7 +46,7 @@ export class PopupStore {
 
     @observable isFullscreen: boolean = false;
 
-    @observable showProtectionDisabledModal: boolean = false;
+    @observable protectionModalVisible: boolean = false;
 
     @observable contentBlockersEnabled: boolean = false;
 
@@ -61,7 +54,7 @@ export class PopupStore {
 
     @observable advancedBlockingEnabled: boolean = false;
 
-    @observable advancedBlockingDisabledModalVisible: boolean = false;
+    @observable advancedBlockingModalVisible: boolean = false;
 
     /**
      * Flag variable
@@ -100,7 +93,7 @@ export class PopupStore {
             this.hasUserRules = popupData.hasUserRules;
             this.premiumApp = popupData.premiumApp;
             this.contentBlockersEnabled = popupData.contentBlockersEnabled;
-            this.showProtectionDisabledModal = !popupData.contentBlockersEnabled;
+            this.protectionModalVisible = !popupData.contentBlockersEnabled;
             this.appearanceTheme = popupData.appearanceTheme;
             this.advancedBlockingEnabled = popupData.advancedBlockingEnabled;
         });
@@ -111,18 +104,11 @@ export class PopupStore {
             return null;
         }
 
-        let domain;
-        try {
-            domain = (new URL(url)).hostname;
-        } catch (e) {
-            return null;
-        }
+        const domain = getDomain(url);
 
         if (!domain) {
             return null;
         }
-
-        domain = getCroppedDomain(domain);
 
         const ADGUARD_FAVICON_SERVICE_URL = 'https://icons.adguard.org/icon?domain=';
         const favIconUrl = `${ADGUARD_FAVICON_SERVICE_URL}${domain}`;
@@ -204,12 +190,12 @@ export class PopupStore {
 
     @action
     showAdvancedBlockingDisabledModal() {
-        this.advancedBlockingDisabledModalVisible = true;
+        this.advancedBlockingModalVisible = true;
     }
 
     @action
-    hideAdvancedBlockingDisabledModal() {
-        this.advancedBlockingDisabledModalVisible = false;
+    hideAdvancedBlockingModal() {
+        this.advancedBlockingModalVisible = false;
     }
 
     @action
@@ -218,8 +204,8 @@ export class PopupStore {
     }
 
     @action
-    setShowContentBlockersEnabledModal(state: boolean) {
-        this.showProtectionDisabledModal = state;
+    setProtectionModalVisibleState(state: boolean) {
+        this.protectionModalVisible = state;
     }
 }
 
