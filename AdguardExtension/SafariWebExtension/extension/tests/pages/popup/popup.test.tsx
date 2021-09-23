@@ -1,10 +1,10 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '../../test-utils';
 
 import { Popup } from '../../../src/pages/popup/components/Popup';
 import { messenger } from '../../../src/pages/common/messenger';
-import { PopupStoreContext, popupStoreValue } from '../../../src/pages/popup/stores/PopupStore';
 import { DeleteUserRules } from '../../../src/pages/popup/components/Actions/DeleteUserRules';
+import { waitFor } from '@testing-library/react';
 
 jest.mock('webextension-polyfill', () => {
     return {
@@ -56,21 +56,19 @@ describe('popup screen', () => {
 
         render(<Popup />);
 
-        expect(await screen.findByText('popup_action_delete_user_rules')).not.toBeInTheDocument();
+        await waitFor(() => {
+            expect(screen.queryByText('popup_action_delete_user_rules')).not.toBeInTheDocument();
+        });
     });
 
-    it('This is an example how to use react testing library with Context.Provider', async () => {
-        popupStoreValue.hasUserRules = true;
-        popupStoreValue.protectionEnabled = true;
-        popupStoreValue.contentBlockersEnabled = true;
+    it('Tests separate component with custom store', async () => {
+        const store = {
+            hasUserRules: true,
+            protectionEnabled: true,
+            contentBlockersEnabled: true,
+        };
 
-        // TODO find way to clone popupStoreValue and provide it required values
-
-        render(
-            <PopupStoreContext.Provider value={popupStoreValue}>
-                <DeleteUserRules />
-            </PopupStoreContext.Provider>,
-        );
+        render(<DeleteUserRules />, { store });
 
         expect(await screen.findByText('popup_action_delete_user_rules')).toBeInTheDocument();
     });

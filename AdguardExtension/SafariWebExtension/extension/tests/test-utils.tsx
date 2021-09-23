@@ -7,7 +7,7 @@ const customRender = (
     {
         store = new PopupStore(),
         ...options
-    } = {},
+    }: { store?: any } = {},
 ) => {
     const Wrapper: FC = ({ children }) => {
         return (
