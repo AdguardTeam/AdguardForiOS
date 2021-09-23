@@ -87,11 +87,8 @@ final class NetworkSettingsModel: RuleDetailsControllerDelegate {
     }
     
     func changeRule(rule: String, enabled: Bool) throws {
-        if let old = exceptions.first(where: { $0.rule == rule}) {
-            let new = WifiException(rule: rule, enabled: enabled)
-            try networkSettingsService.change(oldException: old, newException: new)
-            vpnManager.updateSettings(completion: nil)
-        }
+        try networkSettingsService.changeState(name: rule, enabled: enabled)
+        vpnManager.updateSettings(completion: nil)
     }
     
     // MARK: - RuleDetailsControllerDelegate methods
@@ -103,10 +100,7 @@ final class NetworkSettingsModel: RuleDetailsControllerDelegate {
     }
     
     func modifyRule(_ oldRuleText: String, newRule: UserRule, at indexPath: IndexPath) throws {
-        
-        let exception = exceptions[indexPath.row]
-        let newException = WifiException(rule: newRule.ruleText, enabled: exception.enabled)
-        try networkSettingsService.change(oldException: exception, newException: newException)
+        try networkSettingsService.rename(oldName: oldRuleText, newName: newRule.ruleText)
         vpnManager.updateSettings(completion: nil)
     }
 }

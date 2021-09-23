@@ -65,8 +65,11 @@ protocol NetworkSettingsServiceProtocol: AnyObject {
     // deletes an exception
     func delete(exception: WifiException)
     
-    // changes an exception(name or state or both). Throws error if error if newException already exists in the exclusion list
-    func change(oldException: WifiException, newException: WifiException) throws
+    // changes name of exception. Throws error if error if newName already exists in the exclusion list
+    func rename(oldName: String, newName: String) throws
+    
+    // changes enabled state of exception with name
+    func changeState(name: String, enabled: Bool)
     
     // fetches current wi-fi name. Wi-fi name returns in completionHandler asyncronously in main thread
     // it returns nil on ios 15 due to ios bug https://developer.apple.com/forums/thread/670970
@@ -162,12 +165,21 @@ final class NetworkSettingsService: NetworkSettingsServiceProtocol {
         }
     }
     
-    func change(oldException: WifiException, newException: WifiException) throws {
-        if exceptions.contains(where: { $0.rule == newException.rule }) {
-            throw UserRulesStorageError.ruleAlreadyExists(ruleString: newException.rule)
+    func rename(oldName: String, newName: String) throws {
+        if exceptions.contains(where: { $0.rule == newName }) {
+            throw UserRulesStorageError.ruleAlreadyExists(ruleString: newName)
         }
         
-        if let index = exceptions.firstIndex(of: oldException){
+        if let index = exceptions.firstIndex(where: { $0.rule == oldName }){
+            let newException = WifiException(rule: newName, enabled: exceptions[index].enabled)
+            exceptions[index] = newException
+            saveExceptions()
+        }
+    }
+    
+    func changeState(name: String, enabled: Bool) {
+        if let index = exceptions.firstIndex(where: { $0.rule == name }){
+            let newException = WifiException(rule: name, enabled: enabled)
             exceptions[index] = newException
             saveExceptions()
         }
