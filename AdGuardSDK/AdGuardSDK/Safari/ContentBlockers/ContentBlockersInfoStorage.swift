@@ -61,6 +61,8 @@ public struct ConverterResult: Codable, Equatable {
 // MARK: - ContentBlockersInfoStorage
 
 protocol ContentBlockersInfoStorageProtocol: ResetableSyncProtocol {
+    /* Number of advanced rules that will be passed to Safari Web Extension */
+    var advancedRulesCount: Int { get }
     
     /* We save advanced rules to the file and pass them to Safari Web Extension */
     var advancedRulesFileUrl: URL { get }
@@ -79,6 +81,8 @@ protocol ContentBlockersInfoStorageProtocol: ResetableSyncProtocol {
 final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
         
     // MARK: - Public properties
+    
+    var advancedRulesCount: Int { userDefaultsStorage.advancedRulesCount }
     
     var advancedRulesFileUrl: URL { jsonStorageUrl.appendingPathComponent(Constants.Files.advancedRulesFileName) }
     
@@ -159,6 +163,7 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
         let uniqueRulesText = rules.joined(separator: "\n")
         
         try uniqueRulesText.write(to: advancedRulesFileUrl, atomically: true, encoding: .utf8)
+        userDefaultsStorage.advancedRulesCount = rules.count
     }
 }
 
@@ -182,6 +187,7 @@ fileprivate extension ContentBlockerType {
 fileprivate extension UserDefaultsStorageProtocol {
     
     private var allCbInfoKey: String { "AdGuardSDK.allCbInfoKey" }
+    private var advancedRulesCountKey: String { "AdGuardSDK.advancedRulesCountKey" }
     
     var allCbInfo: [ConverterResult] {
         get {
@@ -199,6 +205,15 @@ fileprivate extension UserDefaultsStorageProtocol {
             } else {
                 storage.set(Date(), forKey: allCbInfoKey)
             }
+        }
+    }
+    
+    var advancedRulesCount: Int {
+        get {
+            return storage.integer(forKey: advancedRulesCountKey)
+        }
+        set {
+            storage.set(newValue, forKey: advancedRulesCountKey)
         }
     }
 }

@@ -36,6 +36,14 @@ class SafariProtectionContnetBlockersTest: XCTestCase {
                  safariManagers.invertedAllowlistRulesManagerMock]
     }
     
+    func testAdvancedRulesCount() {
+        cbStorage.advancedRulesCount = 0
+        XCTAssertEqual(safariProtection.advancedRulesCount, 0)
+        
+        cbStorage.advancedRulesCount = 10
+        XCTAssertEqual(safariProtection.advancedRulesCount, 10)
+    }
+    
     func testAllContentBlockersStates() {
         cbService.allContentBlockersStates = [.custom: true,
                                               .general: false,

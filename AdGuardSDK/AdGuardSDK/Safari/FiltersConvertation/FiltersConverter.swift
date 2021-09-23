@@ -52,7 +52,13 @@ protocol ContentBlockerConverterProtocol {
 final class ContentBlockerConverterWrapper: ContentBlockerConverterProtocol {
     func convertArray(rules: [String], safariVersion: SafariVersion, optimize: Bool, advancedBlocking: Bool) -> ConversionResult {
         let converter = ContentBlockerConverter()
-        let result = converter.convertArray(rules: rules, safariVersion: safariVersion, optimize: optimize, advancedBlocking: advancedBlocking)
+        let result = converter.convertArray(
+            rules: rules,
+            safariVersion: safariVersion,
+            optimize: optimize,
+            advancedBlocking: advancedBlocking,
+            advancedBlockingFormat: .txt
+        )
         return result
     }
 }
@@ -170,6 +176,9 @@ final class FiltersConverter: FiltersConverterProtocol {
     
     // Converts all rules to jsons
     private func convert(filters: [ContentBlockerType: [String]]) -> [FiltersConverterResult] {
+        // TODO: - converter.convertArray is very long operation and we need to call it 6 times in a row
+        // Would be great to do it in different threads; Needs to be discussed!
+        
         var conversionResult: [FiltersConverterResult] = []
         let safariVersion = SafariVersion(rawValue: configuration.iosVersion) ?? .safari15
         for (cbType, rules) in filters {
