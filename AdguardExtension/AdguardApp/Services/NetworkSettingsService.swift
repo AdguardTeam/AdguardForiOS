@@ -187,6 +187,8 @@ final class NetworkSettingsService: NetworkSettingsServiceProtocol {
                 for interface in interfaces {
                     if let interfaceInfo = CNCopyCurrentNetworkInfo(interface as! CFString) as NSDictionary? {
                         let ssid = interfaceInfo[kCNNetworkInfoKeySSID as String] as? String
+                        // NEHotspotNetwork.fetchCurrent callback called on main queue.
+                        // Here we call the completionHandler on the main queue for consistency
                         DispatchQueue.asyncSafeMain {
                             completionHandler(ssid)
                         }

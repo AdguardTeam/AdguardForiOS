@@ -1525,6 +1525,10 @@
 		D081FC3724190CA8000A10DA /* DnsProvidersServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D081FC3624190CA8000A10DA /* DnsProvidersServiceTest.swift */; };
 		D082D50A2310047E00799D98 /* AASFilterSubscriptionParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D082D5092310047E00799D98 /* AASFilterSubscriptionParserTest.swift */; };
 		D08A21A326FB8CB700267930 /* NetworkSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */; };
+		D08A21A426FC526F00267930 /* NetworkSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */; };
+		D08A21A526FC527000267930 /* NetworkSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */; };
+		D08A21A626FC541900267930 /* DispatchQueue+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E92754A26C6C02F007B2C80 /* DispatchQueue+Utils.swift */; };
+		D08A21A726FC541A00267930 /* DispatchQueue+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E92754A26C6C02F007B2C80 /* DispatchQueue+Utils.swift */; };
 		D08CE427240D37D600A70089 /* ConfigurationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CB347A212DD1AB003B650E /* ConfigurationService.swift */; };
 		D08CE428240D37E300A70089 /* PurchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F91179213422E1006DF0D3 /* PurchaseService.swift */; };
 		D08CE429240D389800A70089 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F7F0C72268946700592B1E /* KeychainService.swift */; };
@@ -9392,6 +9396,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D08A21A626FC541900267930 /* DispatchQueue+Utils.swift in Sources */,
 				7EAD354026C2D5F9001AFB3A /* LocalizedDnsProviders.swift in Sources */,
 				D0569D3621F1C0A800985DA9 /* ACNHttpUtils.m in Sources */,
 				7EF5C55326C26387001851D6 /* SharedResources+applicationResources.swift in Sources */,
@@ -9443,6 +9448,7 @@
 				7EAD353B26C2D5E4001AFB3A /* DnsProviders.swift in Sources */,
 				D0569DB321F1C0A800985DA9 /* ADBTableRow.m in Sources */,
 				D08CE42E240D3AC500A70089 /* LoginService.swift in Sources */,
+				D08A21A426FC526F00267930 /* NetworkSettingsService.swift in Sources */,
 				D0569DBF21F1C0A800985DA9 /* FMDatabasePool.m in Sources */,
 				D0569DC321F1C0A800985DA9 /* DDLoggerNames.m in Sources */,
 				7E8576612435F1EF0055F63D /* DomainParser.swift in Sources */,
@@ -10221,6 +10227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D08A21A726FC541A00267930 /* DispatchQueue+Utils.swift in Sources */,
 				D06E9BDD268EFA2500E5AB5C /* ACObject.m in Sources */,
 				D0D7E61724445625001801A5 /* ChartDateType.swift in Sources */,
 				D0B544C02435C6BF002F0AEC /* ACNHttpUtils.m in Sources */,
@@ -10272,6 +10279,7 @@
 				7E4B0EDE258CF9CC00A52099 /* DnsProvidersService.swift in Sources */,
 				D0B544EA2435C6BF002F0AEC /* ADBTableRow.m in Sources */,
 				7E4B0EDF258CF9D600A52099 /* DnsProviders+Migrations.swift in Sources */,
+				D08A21A526FC527000267930 /* NetworkSettingsService.swift in Sources */,
 				24ED98CD259B78DF00A73B17 /* Array+Utils.swift in Sources */,
 				D0D7E5F824444F06001801A5 /* RuleLabel.swift in Sources */,
 				D0B544EB2435C6BF002F0AEC /* LoginService.swift in Sources */,
