@@ -86,8 +86,8 @@ final class NetworkSettingsModel: RuleDetailsControllerDelegate {
         vpnManager.updateSettings(completion: nil)
     }
     
-    func changeRule(rule: String, enabled: Bool) throws {
-        try networkSettingsService.changeState(name: rule, enabled: enabled)
+    func changeState(rule: String, enabled: Bool) {
+        networkSettingsService.changeState(name: rule, enabled: enabled)
         vpnManager.updateSettings(completion: nil)
     }
     

@@ -90,7 +90,11 @@ final class NetworkSettingsService: NetworkSettingsServiceProtocol {
     
     var delegate: NetworkSettingsChangedDelegate?
     
-    var exceptions: [WifiException] = []
+    var exceptions: [WifiException] = [] {
+        didSet {
+            saveExceptions()
+        }
+    }
     
     var enabledExceptions: [WifiException] {
         get {
@@ -149,8 +153,6 @@ final class NetworkSettingsService: NetworkSettingsServiceProtocol {
     func add(exception: WifiException) throws {
         if !exceptions.contains(where: { $0.rule == exception.rule }){
             exceptions.append(exception)
-            
-            saveExceptions()
         }
         else {
             throw UserRulesStorageError.ruleAlreadyExists(ruleString: exception.rule)
@@ -160,8 +162,6 @@ final class NetworkSettingsService: NetworkSettingsServiceProtocol {
     func delete(exception: WifiException) {
         if let index = exceptions.firstIndex(of: exception){
             exceptions.remove(at: index)
-
-            saveExceptions()
         }
     }
     
@@ -173,7 +173,6 @@ final class NetworkSettingsService: NetworkSettingsServiceProtocol {
         if let index = exceptions.firstIndex(where: { $0.rule == oldName }){
             let newException = WifiException(rule: newName, enabled: exceptions[index].enabled)
             exceptions[index] = newException
-            saveExceptions()
         }
     }
     
@@ -181,7 +180,6 @@ final class NetworkSettingsService: NetworkSettingsServiceProtocol {
         if let index = exceptions.firstIndex(where: { $0.rule == name }){
             let newException = WifiException(rule: name, enabled: enabled)
             exceptions[index] = newException
-            saveExceptions()
         }
     }
     
