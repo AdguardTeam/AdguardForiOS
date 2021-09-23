@@ -188,7 +188,7 @@ export class NativeHost implements NativeHostInterface {
                 fromBeginning,
             );
 
-            if (!response) {
+            if (!response?.advanced_rules) {
                 return;
             }
 
