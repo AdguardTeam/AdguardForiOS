@@ -31,8 +31,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
                                             cbStorage: cbStorage,
                                             cbService: cbService,
                                             safariManagers: safariManagers,
-                                            dnsBackgroundFetchUpdater: dnsBackgroundFetchUpdater
-        )
+                                            dnsBackgroundFetchUpdater: dnsBackgroundFetchUpdater)
     }
     
     func testUpdateSafariProtectionInBackgroundExecutesInRightSequence() {

@@ -72,11 +72,12 @@ struct PredefinedDnsProvidersDecoder: PredefinedDnsProvidersDecoderProtocol {
             let localized = localizationsForProvider(provider, providersJson)
             let servers = localizationsForFeatures(provider, featuresJson)
             return PredefinedDnsProvider(name: localized.name,
-                               providerDescription: localized.desc,
-                               servers: servers,
-                               providerId: provider.providerId,
-                               logo: provider.logo,
-                               homepage: provider.homepage)
+                                         providerDescription: localized.desc,
+                                         servers: servers,
+                                         providerId: provider.providerId,
+                                         logo: provider.logo,
+                                         logoDark: provider.logoDark,
+                                         homepage: provider.homepage)
         }
     }
     

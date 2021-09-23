@@ -40,8 +40,8 @@
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                 </variation>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="636-Zz-5HO" customClass="ThemeableImageView" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="88" y="172.66666666666663" width="199" height="162.33333333333337"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="636-Zz-5HO" customClass="ThemableImageView" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="88" y="148" width="199" height="162.66666666666663"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="636-Zz-5HO" secondAttribute="height" multiplier="163:133" id="iwd-yg-0pZ"/>
                                 </constraints>

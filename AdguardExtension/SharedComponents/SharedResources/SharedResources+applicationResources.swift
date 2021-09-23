@@ -32,14 +32,14 @@ extension AESharedResourcesProtocol {
 
     dynamic var dnsImplementation: DnsImplementation {
         get {
-            if let savedImplementation = sharedDefaults().object(forKey: DnsImplementationKey) as? DnsImplementation {
-                return savedImplementation
+            if let savedImplementation = sharedDefaults().object(forKey: DnsImplementationKey) as? Int {
+                return DnsImplementation(rawValue: savedImplementation) ?? .adGuard
             }
             return .adGuard
         }
         set {
             if dnsImplementation != newValue {
-                sharedDefaults().set(newValue, forKey: DnsImplementationKey)
+                sharedDefaults().set(newValue.rawValue, forKey: DnsImplementationKey)
                 NotificationCenter.default.post(name: .dnsImplementationChanged, object: nil)
             }
         }

@@ -31,7 +31,7 @@ class GetProTableController: UITableViewController {
     @IBOutlet weak var subscribedView: UIView!
     
     @IBOutlet var themableLabels: [ThemableLabel]!
-    @IBOutlet weak var logoImage: ThemeableImageView!
+    @IBOutlet weak var logoImage: ThemableImageView!
     
     @IBOutlet weak var notPurchasedLogoCell: UITableViewCell!
     @IBOutlet weak var purchasedLogoCell: UITableViewCell!

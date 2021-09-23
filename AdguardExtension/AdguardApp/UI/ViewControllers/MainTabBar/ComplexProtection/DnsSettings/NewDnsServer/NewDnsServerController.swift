@@ -18,20 +18,30 @@
 
 import DnsAdGuardSDK
 
+/// Protocol for delegate
 protocol NewDnsServerControllerDelegate: AnyObject {
-    func providerAdded()
-    func providerDeleted()
-    func providerChanged()
+    func customProviderUpdated()
 }
 
+/// Enum with controller states
 enum DnsServerControllerType {
     case add, edit
 }
 
-class NewDnsServerController: BottomAlertController {
+/// Controller that provide managing custom providers
+final class NewDnsServerController: BottomAlertController {
     
+    struct CustomDnsProviderInfo {
+        let name: String
+        let upstream: String
+        let selectAsCurrent: Bool
+        let provider: CustomDnsProviderProtocol?
+    }
+    
+    //MARK: - Properties
     var controllerType: DnsServerControllerType = .add
-    var provider: DnsProviderInfo?
+    var dnsProviderManager: DnsProvidersManagerProtocol!
+    var customDnsProvider: CustomDnsProviderProtocol?
     var openUrl: String?
     
     weak var delegate: NewDnsServerControllerDelegate?
@@ -43,7 +53,6 @@ class NewDnsServerController: BottomAlertController {
     @IBOutlet weak var saveOrAddButton: RoundRectButton!
     @IBOutlet weak var cancelOrDeleteButton: RoundRectButton!
     
-    
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var upstreamsField: UITextField!
     
@@ -52,32 +61,28 @@ class NewDnsServerController: BottomAlertController {
     
     @IBOutlet weak var scrollContentView: UIView!
     
-    private let textFieldCharectersLimit = 50
-    
-    // MARK: - services
-    
+    // MARK: - Services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
-    private let dnsProvidersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     
-    // MARK: - view controller lifecycle
+    //MARK: - Private properties
+    private let textFieldCharectersLimit = 50
+    private lazy var model: NewDnsServerModel = {
+        return NewDnsServerModel(dnsProvidersManager: dnsProviderManager, vpnManager: vpnManager, provider: customDnsProvider)
+    }()
+    
+    // MARK: - ViewController lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if provider != nil {
-            nameField.text = String(provider?.name.prefix(textFieldCharectersLimit) ?? "")
-            upstreamsField.text = provider?.servers?.first?.upstreams.first ?? ""
-        }
-        else if openUrl != nil {
-            if resources.dnsImplementation == .adGuard {
-                upstreamsField.text = openUrl
-            } else {
-                // Native DNS implementation doesn't support port syntax
-                upstreamsField.text = openUrl?.discardPortFromIpAddress()
-            }
+        
+        if let openUrl = openUrl {
+            // Native DNS implementation doesn't support port syntax
+            upstreamsField.text = resources.dnsImplementation == .adGuard ? openUrl : openUrl.discardPortFromIpAddress()
+        } else {
+            nameField.text = model.providerName
+            upstreamsField.text = model.providerUpstream
         }
         
         nameField.becomeFirstResponder()
@@ -104,65 +109,11 @@ class NewDnsServerController: BottomAlertController {
             deleteAction()
         }
     }
-    
-    private func checkForValidNativeImplementationProtocol(upstream: String) -> Bool {
-        if resources.dnsImplementation == .adGuard { return true }
-        
-        let dnsProtocol = DnsProtocol.getProtocolByUpstream(upstream)
-        if NativeProvidersService.supportedProtocols.contains(dnsProtocol) {
-            return true
-        } else {
-            let title = String.localizedString("invalid_dns_protocol_title")
-            let messageFormat = String.localizedString("invalid_dns_protocol_message")
-            let dnsProtocolString = String.localizedString(DnsProtocol.stringIdByProtocol[dnsProtocol]!)
-            let message = String(format: messageFormat, dnsProtocolString)
-            ACSSystemUtils.showSimpleAlert(for: self, withTitle: title, message: message)
-            return false
-        }
-    }
-    
-    private func checkUpstream(success:@escaping ()->Void) {
-        
-        saveOrAddButton.isEnabled = false
-        saveOrAddButton.startIndicator()
-        
-        // TODO: - Make it in a proper way after refactoring
-        
-        let networkUtils = NetworkUtils();
-        let bootstraps = BootstrapsHelper.bootstraps
-        
-        let upstream = AGDnsUpstream(address: self.upstreamsField.text, bootstrap: bootstraps, timeoutMs: AGDnsUpstream.defaultTimeoutMs, serverIp: Data(), id: 0, outboundInterfaceName: nil)
-        
-        DispatchQueue(label: "save dns queue").async { [weak self] in
-            guard let self = self else { return }
-            
-            let isIpv6Available = networkUtils.isIpv6Available
-            
-            DDLogInfo("(NewDnsServerController) test upstream: \(upstream?.address ?? "nil") bootstrap: \(upstream?.bootstrap ?? []) ipv6: \(isIpv6Available)")
-            
-            let error = AGDnsUtils.test(upstream, ipv6Available: isIpv6Available)
-            
-            DispatchQueue.main.async {
-                
-                self.saveOrAddButton.isEnabled = true
-                self.saveOrAddButton.stopIndicator()
-                
-                if error == nil {
-                    success()
-                }
-                else {
-                    DDLogError("(NewDnsServerController) saveAction error - \(error!)")
-                    ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("common_error_title"), message: String.localizedString("invalid_upstream_message"))
-                }
-            }
-        }
-    }
-    
-    // MARK: - textfield delegate methods
-    
     @IBAction func editingChanged(_ sender: Any) {
         updateSaveButton()
     }
+    
+    // MARK: - textfield delegate methods
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField != nameField { return true }
@@ -194,7 +145,14 @@ class NewDnsServerController: BottomAlertController {
     }
 
     
-    // MARK: - private methods
+    // MARK: - Private methods
+    private func showWrongProtocolAlert(dnsProtocol: DnsAdGuardSDK.DnsProtocol) {
+        let title = String.localizedString("invalid_dns_protocol_title")
+        let messageFormat = String.localizedString("invalid_dns_protocol_message")
+        let dnsProtocolString = dnsProtocol.localizedString
+        let message = String(format: messageFormat, dnsProtocolString)
+        presentSimpleAlert(title: title, message: message)
+    }
     
     private func updateSaveButton() {
         let dnsName = nameField.text ?? ""
@@ -239,82 +197,92 @@ class NewDnsServerController: BottomAlertController {
 
     }
     
-    
-    //MARK: Button actions
+    //MARK: - Button actions
     
     private func saveAction() {
-        checkUpstream { [weak self] in
-            guard let self = self else { return }
-            
-            guard let provider = self.provider, let server = self.provider?.servers?.first else { return }
-            
-            let upstream = self.upstreamsField.text ?? ""
-            provider.name = self.nameField.text ?? ""
-            server.upstreams = [upstream]
-            server.name = self.provider!.name
-            server.dnsProtocol = DnsProtocol.getProtocolByUpstream(upstream)
-            
-            let isValidProtocol = self.checkForValidNativeImplementationProtocol(upstream: upstream)
-            
-            if !isValidProtocol {
-                return
-            }
-            
-            self.dnsProvidersService.updateProvider(provider) { [weak self] in
-                guard let self = self else { return }
-                
-                if self.dnsProvidersService.isActiveProvider(provider) {
-                    self.dnsProvidersService.activeDnsServer = provider.servers?.first
-                    self.vpnManager.updateSettings(completion: nil)
-                }
-                
-                DispatchQueue.main.async { [weak self] in
-                    self?.delegate?.providerChanged()
-                    self?.dismiss(animated: true, completion: nil)
-                }
-            }
-        }
-    }
-    
-    private func deleteAction() {
-        guard let provider = self.provider else { return }
+        saveOrAddButton.isEnabled = false
+        saveOrAddButton.startIndicator()
         
-        dnsProvidersService.deleteProvider(provider) { [weak self] in
-            guard let self = self else { return }
-            if self.dnsProvidersService.isActiveProvider(provider) {
-                self.dnsProvidersService.activeDnsServer = nil
-                self.vpnManager.updateSettings(completion: nil)
-            }
-            
-            DispatchQueue.main.async { [weak self] in
-                self?.delegate?.providerDeleted()
-                self?.dismiss(animated: true)
+        let name = self.nameField.text ?? ""
+        let upstream = self.upstreamsField.text ?? ""
+        
+        guard let provider = self.model.provider else { return }
+        
+        do {
+            try self.model.updateCustomProvider(newName: name, newUpstream: upstream, provider: provider)
+            self.dismiss(animated: true)
+            self.delegate?.customProviderUpdated()
+        } catch {
+            if let error = error as? CustomDnsProvidersStorageError {
+                self.processError(error: error)
+            } else {
+                self.showUnknownErrorAlert()
             }
         }
+        
+        saveOrAddButton.isEnabled = true
+        saveOrAddButton.stopIndicator()
     }
     
     private func addAction() {
-        checkUpstream { [weak self] in
-            guard let self = self else { return }
-            
-            let upstream = self.upstreamsField.text ?? ""
-            let isValidProtocol = self.checkForValidNativeImplementationProtocol(upstream: upstream)
-            
-            if !isValidProtocol {
-                return
+        saveOrAddButton.isEnabled = false
+        saveOrAddButton.startIndicator()
+        let upstream = self.upstreamsField.text ?? ""
+        
+        do {
+            try self.model.addCustomProvider(name: self.nameField.text ?? "", upstream: upstream)
+            self.delegate?.customProviderUpdated()
+            self.dismiss(animated: true)
+        } catch {
+            if let error = error as? CustomDnsProvidersStorageError {
+                self.processError(error: error)
+            } else {
+                self.showUnknownErrorAlert()
             }
-            
-            self.dnsProvidersService.addCustomProvider(name: self.nameField.text ?? "", upstream: upstream) { [weak self] in
-                self?.vpnManager.updateSettings(completion: nil)
-                DispatchQueue.main.async { [weak self] in
-                    self?.delegate?.providerAdded()
-                    self?.dismiss(animated: true)
-                }
+        }
+        
+        saveOrAddButton.isEnabled = true
+        saveOrAddButton.stopIndicator()
+    }
+    
+    private func deleteAction() {
+        saveOrAddButton.isEnabled = false
+        saveOrAddButton.startIndicator()
+        
+        guard let provider = model.provider else { return }
+        do {
+            try self.model.removeCustomProvider(provider: provider)
+            self.delegate?.customProviderUpdated()
+            self.dismiss(animated: true)
+        } catch {
+            if let error = error as? CustomDnsProvidersStorageError {
+                processError(error: error)
+            } else {
+                showUnknownErrorAlert()
             }
+        }
+        
+        saveOrAddButton.isEnabled = true
+        saveOrAddButton.stopIndicator()
+    }
+    
+    private func processError(error: CustomDnsProvidersStorageError) {
+        switch error {
+        case .providerAbsent(let providerId): break
+            //TODO: Show alert
+        case .invalidUpstream(let upstream):
+            presentSimpleAlert(title: String.localizedString("common_error_title"), message: String.localizedString("invalid_upstream_message"))
+        case .differentDnsProtocols(let upstreams): break
+            //TODO: Show alert
+        case .emptyUpstreams: break
+            //TODO: Show alert
+        case .notSupportedProtocol(let dnsProtocol, _):
+            showWrongProtocolAlert(dnsProtocol: dnsProtocol)
         }
     }
 }
 
+//MARK: - NewDnsServerController + ThemableProtocol
 extension NewDnsServerController: ThemableProtocol {
     func updateTheme() {
         contentView.backgroundColor = theme.popupBackgroundColor

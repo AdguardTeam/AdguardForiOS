@@ -18,7 +18,7 @@
 
 import Foundation
 
-class ThemeableImageView: UIImageView {
+class ThemableImageView: UIImageView {
     
     @IBInspectable var lightThemeImage: UIImage?
     @IBInspectable var darkThemeImage: UIImage?

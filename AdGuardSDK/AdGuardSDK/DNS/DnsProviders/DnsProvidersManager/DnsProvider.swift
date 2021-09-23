@@ -32,6 +32,7 @@ public extension DnsProviderMetaProtocol {
     var custom: CustomDnsProviderProtocol { self as! CustomDnsProviderProtocol }
     var predefined: DnsProviderProtocol { self as! DnsProviderProtocol }
     var dnsServers: [DnsServerMetaProtocol] { isCustom ? [custom.server] : predefined.servers }
+    var isDefault: Bool { self.providerId == PredefinedDnsProvider.systemDefaultProviderId }
 }
 
 // MARK: - DnsServerMetaProtocol
@@ -58,6 +59,7 @@ public protocol DnsProviderProtocol: DnsProviderMetaProtocol {
     var providerDescription: String { get } // DNS provider description
     var servers: [DnsServer] { get } // Available DNS servers user can use
     var logo: UIImage? { get } // Logo image of the DNS provider. It is nil only for system default
+    var logoDark: UIImage? { get } // Dark logo image of the DNS provider. It is nil only for system default
     var homepage: String { get } // Web site of the DNS provider
 }
 
@@ -67,15 +69,17 @@ public struct DnsProvider: DnsProviderProtocol {
     public var servers: [DnsServer]
     public let providerId: Int
     public let logo: UIImage?
+    public let logoDark: UIImage?
     public let homepage: String
     public var isEnabled: Bool
     
-    init(name: String, providerDescription: String, servers: [DnsServer], providerId: Int, logo: UIImage?, homepage: String, isEnabled: Bool) {
+    init(name: String, providerDescription: String, servers: [DnsServer], providerId: Int, logo: UIImage?, logoDark: UIImage?, homepage: String, isEnabled: Bool) {
         self.name = name
         self.providerDescription = providerDescription
         self.servers = servers
         self.providerId = providerId
         self.logo = logo
+        self.logoDark = logoDark
         self.homepage = homepage
         self.isEnabled = isEnabled
     }
@@ -86,14 +90,9 @@ public struct DnsProvider: DnsProviderProtocol {
         self.servers = servers
         self.providerId = provider.providerId
         self.logo = provider.logo
+        self.logoDark = provider.logoDark
         self.homepage = provider.homepage
         self.isEnabled = isEnabled
-    }
-    
-    mutating func makeActiveServer(with id: Int) {
-        for i in 0..<servers.count {
-            servers[i].isEnabled = servers[i].id == id
-        }
     }
 }
 

@@ -48,6 +48,24 @@ protocol CustomDnsProvidersStorageProtocol: ResetableSyncProtocol {
     func removeCustomProvider(withId id: Int) throws
 }
 
+public enum CustomDnsProvidersStorageError: Error, CustomDebugStringConvertible {
+    case providerAbsent(providerId: Int)
+    case invalidUpstream(upstream: String)
+    case differentDnsProtocols(upstreams: [String])
+    case emptyUpstreams
+    case notSupportedProtocol(dnsProtocol: DnsProtocol, implementation: DnsImplementation)
+    
+    public var debugDescription: String {
+        switch self {
+        case .providerAbsent(let providerId): return "Custom provider with id=\(providerId) is absent"
+        case .invalidUpstream(let upstream): return "Invalid upstream=\(upstream)"
+        case .differentDnsProtocols(let upstreams): return "Upstreams with different protocols are forbidden; Upstreams: \(upstreams.joined(separator: "; "))"
+        case .emptyUpstreams: return "Upstreams list is empty"
+        case .notSupportedProtocol(let dnsProtocol, let implementation): return "Protocol \(dnsProtocol) not supported for implementation \(implementation)"
+        }
+    }
+}
+
 /**
  This object stores Custom DNS providers
  Also it is responsible for adding new providers and removing existing ones
@@ -56,21 +74,7 @@ final class CustomDnsProvidersStorage: CustomDnsProvidersStorageProtocol {
     
     // MARK: - CustomDnsProvidersStorageError
     
-    enum CustomDnsProvidersStorageError: Error, CustomDebugStringConvertible {
-        case providerAbsent(providerId: Int)
-        case invalidUpstream(upstream: String)
-        case differentDnsProtocols(upstreams: [String])
-        case emptyUpstreams
-        
-        var debugDescription: String {
-            switch self {
-            case .providerAbsent(let providerId): return "Custom provider with id=\(providerId) is absent"
-            case .invalidUpstream(let upstream): return "Invalid upstream=\(upstream)"
-            case .differentDnsProtocols(let upstreams): return "Upstreams with different protocols are forbidden; Upstreams: \(upstreams.joined(separator: "; "))"
-            case .emptyUpstreams: return "Upstreams list is empty"
-            }
-        }
-    }
+
     
     // MARK: - Internal variables
     
@@ -99,18 +103,21 @@ final class CustomDnsProvidersStorage: CustomDnsProvidersStorageProtocol {
     /* Services */
     private let userDefaults: UserDefaultsStorageProtocol
     private let networkUtils: NetworkUtilsProtocol
+    private let configuration: DnsConfigurationProtocol
     
     // MARK: - Initialization
     
-    init(userDefaults: UserDefaultsStorageProtocol, networkUtils: NetworkUtilsProtocol = NetworkUtils()) {
+    init(userDefaults: UserDefaultsStorageProtocol, networkUtils: NetworkUtilsProtocol = NetworkUtils(), configuration: DnsConfigurationProtocol) {
         self.userDefaults = userDefaults
         self.networkUtils = networkUtils
+        self.configuration = configuration
     }
     
     // MARK: - Internal methods
 
     func addCustomProvider(name: String, upstreams: [String]) throws -> (providerId: Int, serverId: Int) {
         let dnsProtocol = try checkProviderInfo(name: name, upstreams: upstreams)
+        try checkDnsImplementation(dnsProtocol: dnsProtocol)
         let dnsUpstreams = upstreams.map { DnsUpstream(upstream: $0, protocol: dnsProtocol) }
         
         let ids = nextCustomIds
@@ -128,6 +135,7 @@ final class CustomDnsProvidersStorage: CustomDnsProvidersStorageProtocol {
         
         let oldProvider = userDefaults.customProviders[providerIndex]
         let newDnsProtocol = try checkProviderInfo(name: newName, upstreams: newUpstreams)
+        try checkDnsImplementation(dnsProtocol: newDnsProtocol)
         let newDnsUpstreams = newUpstreams.map { DnsUpstream(upstream: $0, protocol: newDnsProtocol) }
         
         let customServer = CustomDnsServer(upstreams: newDnsUpstreams,
@@ -172,6 +180,13 @@ final class CustomDnsProvidersStorage: CustomDnsProvidersStorageProtocol {
             }
         }
         return protocols.first!
+    }
+    
+    private func checkDnsImplementation(dnsProtocol: DnsProtocol) throws {
+        if !configuration.dnsImplementation.supportedProtocols.contains(dnsProtocol) {
+            throw CustomDnsProvidersStorageError.notSupportedProtocol(dnsProtocol: dnsProtocol,
+                                                                      implementation: configuration.dnsImplementation)
+        }
     }
     
 }

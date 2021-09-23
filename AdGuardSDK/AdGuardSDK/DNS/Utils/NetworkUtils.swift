@@ -81,11 +81,21 @@ public struct NetworkUtils: NetworkUtilsProtocol {
     public init() {}
     
     func getProtocol(from upstream: String) throws -> DnsProtocol {
-        var error: NSError?
-        if let stamp = AGDnsStamp(string: upstream, error: &error) {
-            return stamp.dnsProtocol
+        if upstream.hasPrefix("sdns://") {
+            return try getDnsProtocol(from: upstream)
+        }
+        
+        if upstream.hasPrefix("https://") {
+            return .doh
+        } else if upstream.hasPrefix("tls://") {
+            return .dot
+        } else if upstream.hasPrefix("quic://") {
+            return .doq
         } else {
-            throw error!
+            if ACNUrlUtils.isIPv4(upstream) || ACNUrlUtils.isIPv6(upstream) {
+                return .dns
+            }
+            throw CustomDnsProvidersStorageError.invalidUpstream(upstream: upstream)
         }
     }
     
@@ -129,5 +139,14 @@ public struct NetworkUtils: NetworkUtilsProtocol {
         }
 
         return String(cString: hostBuffer)
+    }
+    
+    private func getDnsProtocol(from sdnsUpstream: String) throws -> DnsProtocol {
+        var error: NSError?
+        if let stamp = AGDnsStamp(string: sdnsUpstream, error: &error) {
+            return stamp.dnsProtocol
+        } else {
+            throw error ?? CustomDnsProvidersStorageError.invalidUpstream(upstream: sdnsUpstream)
+        }
     }
 }

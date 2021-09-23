@@ -74,6 +74,6 @@ final class ServiceInitializer: ServiceInitializerProtocol {
                                  safariProtection: safariProtection)
         
         //MARK: - ActivityStatistics
-        self.activityStatistics = try ActivityStatistics(statisticsDbContainerUrl: sharedStorageUrls.dbFolderUrl)
+        self.activityStatistics = try ActivityStatistics(statisticsDbContainerUrl: sharedStorageUrls.statisticsFolderUrl)
     }
 }
