@@ -21,7 +21,7 @@ import SafariAdGuardSDK
 
 final class UserRulesRedirectController: BottomAlertController {
 
-    var action: UserRulesRedirectAction = .addToAllowlist(domain: "domain.com")
+    var action: UserRulesRedirectAction = .disableSiteProtection(domain: "domain.com")
     var state: State = .processing {
         didSet {
             model.state = state
@@ -40,6 +40,7 @@ final class UserRulesRedirectController: BottomAlertController {
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var descriptionLabel: ThemableLabel!
     @IBOutlet weak var okButton: UIButton!
+    @IBOutlet weak var labelButton: UIButton!
     
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -48,7 +49,8 @@ final class UserRulesRedirectController: BottomAlertController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        model = UserRulesRedirectControllerModel(safariProtection: safariProtection)
+        labelButton.isEnabled = false
+        model = UserRulesRedirectControllerModel(safariProtection: safariProtection, resources: resources)
         model.action = action
         
         imageView.isHidden = true
@@ -72,7 +74,7 @@ final class UserRulesRedirectController: BottomAlertController {
     
     @IBAction func labelTapped(_ sender: UIButton) {
         switch model.action {
-        case .addToAllowlist(domain: _), .removeFromAllowlist(domain: _):
+        case .enableSiteProtection(domain: _), .disableSiteProtection(domain: _):
             AppDelegate.shared.presentUserRulesTableController(for: resources.invertedWhitelist ? .invertedAllowlist : .allowlist)
         case .addToBlocklist(domain: _), .removeAllBlocklistRules(domain: _):
             AppDelegate.shared.presentUserRulesTableController(for: .blocklist)
@@ -99,6 +101,7 @@ final class UserRulesRedirectController: BottomAlertController {
         } completion: { _ in
             self.activityIndicator.stopAnimating()
             self.activityIndicator.isHidden = true
+            self.labelButton.isEnabled = true
         }
     }
     

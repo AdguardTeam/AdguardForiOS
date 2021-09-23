@@ -32,26 +32,37 @@ protocol UserRulesRedirectControllerModelProtocol: AnyObject {
 
 final class UserRulesRedirectControllerModel: UserRulesRedirectControllerModelProtocol {
     
-    var action: UserRulesRedirectAction = .addToAllowlist(domain: "domain.com")
+    var action: UserRulesRedirectAction = .disableSiteProtection(domain: "domain.com")
     var state: UserRulesRedirectController.State = .processing
     
     var title: String { state.title }
-    var description: String { state.description }
-    var icon: UIImage? { action.icon }
+    var description: String { state.getDescription(resources.invertedWhitelist) }
+    var icon: UIImage? { action.getIcon(resources.invertedWhitelist) }
     
     private let safariProtection: SafariProtectionProtocol
+    private let resources: AESharedResourcesProtocol
     
-    init(safariProtection: SafariProtectionProtocol) {
+    init(safariProtection: SafariProtectionProtocol, resources: AESharedResourcesProtocol) {
         self.safariProtection = safariProtection
+        self.resources = resources
     }
     
     func processAction(_ onCbReloaded: @escaping (Error?) -> Void) {
         switch action {
-        case .removeFromAllowlist(let domain):
-            try? safariProtection.removeRule(withText: domain, for: .allowlist, onCbReloaded: onCbReloaded)
-        case .addToAllowlist(let domain):
-            let rule = UserRule(ruleText: domain, isEnabled: true)
-            try? safariProtection.add(rule: rule, for: .allowlist, override: true, onCbReloaded: onCbReloaded)
+        case .disableSiteProtection(let domain):
+            if resources.invertedWhitelist {
+                try? safariProtection.removeRule(withText: domain, for: .invertedAllowlist, onCbReloaded: nil)
+            } else {
+                let rule = UserRule(ruleText: domain, isEnabled: true)
+                try? safariProtection.add(rule: rule, for: .allowlist, override: true, onCbReloaded: nil)
+            }
+        case .enableSiteProtection(let domain):
+            if resources.invertedWhitelist {
+                let rule = UserRule(ruleText: domain, isEnabled: true)
+                try? safariProtection.add(rule: rule, for: .invertedAllowlist, override: true, onCbReloaded: onCbReloaded)
+            } else {
+                try? safariProtection.removeRule(withText: domain, for: .allowlist, onCbReloaded: onCbReloaded)
+            }
         case .addToBlocklist(let domain):
             let rule = UserRule(ruleText: domain, isEnabled: true)
             try? safariProtection.add(rule: rule, for: .blocklist, override: true, onCbReloaded: onCbReloaded)
@@ -71,10 +82,10 @@ fileprivate extension UserRulesRedirectController.State {
         }
     }
     
-    var description: String {
+    func getDescription(_ allowlistIsInverted: Bool) -> String {
         switch self {
         case .processing: return String.localizedString("user_rules_processing_descr")
-        case .done(let action): return action.description
+        case .done(let action): return action.getDescription(allowlistIsInverted)
         }
     }
 }
@@ -84,31 +95,51 @@ fileprivate extension UserRulesRedirectController.State {
 fileprivate extension UserRulesRedirectAction {
     var title: String {
         switch self {
-        case .removeFromAllowlist(let domain): return domain
-        case .addToAllowlist(let domain): return domain
+        case .disableSiteProtection(let domain): return domain
+        case .enableSiteProtection(let domain): return domain
         case .addToBlocklist(let domain): return domain
         case .removeAllBlocklistRules(let domain): return domain
         }
     }
     
-    var description: String {
+    func getIcon(_ allowlistIsInverted: Bool) -> UIImage? {
+        switch self {
+        case .disableSiteProtection(_):
+            if allowlistIsInverted {
+                return UIImage(named: "kill_switch")
+            } else {
+                return UIImage(named: "thumbsup")
+            }
+        case .enableSiteProtection(_):
+            if allowlistIsInverted {
+                return UIImage(named: "thumbsup")
+            } else {
+                return UIImage(named: "kill_switch")
+            }
+        case .addToBlocklist(_): return UIImage(named: "ad_blocking_feature_logo")
+        case .removeAllBlocklistRules(_): return UIImage(named: "kill_switch")
+        }
+    }
+    
+    func getDescription(_ allowlistIsInverted: Bool) -> String {
         let color = UIColor.AdGuardColor.lightGreen1
         let format: String
         switch self {
-        case .removeFromAllowlist(_): format = String.localizedString("user_rules_allowlist_rule_removed")
-        case .addToAllowlist(_): format = String.localizedString("user_rules_allowlist_rule_added")
+        case .disableSiteProtection(_):
+            if allowlistIsInverted {
+                format = String.localizedString("user_rules_allowlist_rule_removed")
+            } else {
+                format = String.localizedString("user_rules_allowlist_rule_added")
+            }
+        case .enableSiteProtection(_):
+            if allowlistIsInverted {
+                format = String.localizedString("user_rules_allowlist_rule_added")
+            } else {
+                format = String.localizedString("user_rules_allowlist_rule_removed")
+            }
         case .addToBlocklist(_): format = String.localizedString("user_rules_blocklist_rule_added")
         case .removeAllBlocklistRules(_): format = String.localizedString("user_rules_blocklist_rules_removed")
         }
         return String(format: format, color.hex())
-    }
-    
-    var icon: UIImage? {
-        switch self {
-        case .removeFromAllowlist(_): return UIImage(named: "kill_switch")
-        case .addToAllowlist(_): return UIImage(named: "thumbsup")
-        case .addToBlocklist(_): return UIImage(named: "ad_blocking_feature_logo")
-        case .removeAllBlocklistRules(_): return UIImage(named: "kill_switch")
-        }
     }
 }

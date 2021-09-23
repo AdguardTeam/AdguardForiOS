@@ -71,8 +71,8 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
             Message.protectionEnabled: isSafariProtectionEnabled(for: domain, resources: resources),
             Message.advancedBlockingEnabled: resources.advancedProtection,
 
-            Message.removeFromAllowlistLink: UserRulesRedirectAction.removeFromAllowlist(domain: "").scheme,
-            Message.addToAllowlistLink: UserRulesRedirectAction.addToAllowlist(domain: "").scheme,
+            Message.enableSiteProtectionLink: UserRulesRedirectAction.enableSiteProtection(domain: "").scheme,
+            Message.disableSiteProtectionLink: UserRulesRedirectAction.disableSiteProtection(domain: "").scheme,
             Message.addToBlocklistLink: UserRulesRedirectAction.addToBlocklist(domain: "").scheme,
             Message.removeAllBlocklistRulesLink: UserRulesRedirectAction.removeAllBlocklistRules(domain: "").scheme,
             Message.upgradeAppLink: "\(Bundle.main.appScheme)://upgradeApp",

@@ -44,8 +44,8 @@ struct Message {
     static let advancedBlockingEnabled = "advanced_blocking_enabled"
 
     // Links
-    static let removeFromAllowlistLink = "remove_from_allowlist_link"
-    static let addToAllowlistLink = "add_to_allowlist_link"
+    static let enableSiteProtectionLink = "enable_site_protection_link"
+    static let disableSiteProtectionLink = "disable_site_protection_link"
     static let addToBlocklistLink = "add_to_blocklist_link"
     static let removeAllBlocklistRulesLink = "remove_all_blocklist_rules_link"
     static let upgradeAppLink = "upgrade_app_link"

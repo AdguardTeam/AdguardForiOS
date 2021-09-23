@@ -19,15 +19,15 @@
 import Foundation
 
 enum UserRulesRedirectAction {
-    case removeFromAllowlist(domain: String)
-    case addToAllowlist(domain: String)
+    case enableSiteProtection(domain: String)
+    case disableSiteProtection(domain: String)
     case addToBlocklist(domain: String)
     case removeAllBlocklistRules(domain: String)
     
     var scheme: String {
         switch self {
-        case .removeFromAllowlist(_): return "\(Bundle.main.appScheme)://safariWebExtension?action=removeFromAllowlist&domain="
-        case .addToAllowlist(_): return "\(Bundle.main.appScheme)://safariWebExtension?action=addToAllowlist&domain="
+        case .enableSiteProtection(_): return "\(Bundle.main.appScheme)://safariWebExtension?action=enableSiteProtection&domain="
+        case .disableSiteProtection(_): return "\(Bundle.main.appScheme)://safariWebExtension?action=disableSiteProtection&domain="
         case .addToBlocklist(_): return "\(Bundle.main.appScheme)://safariWebExtension?action=addToBlocklist&domain="
         case .removeAllBlocklistRules(_): return "\(Bundle.main.appScheme)://safariWebExtension?action=removeAllBlocklistRules&domain="
         }
@@ -35,13 +35,13 @@ enum UserRulesRedirectAction {
     
     static func action(from actionString: String, domain: String) -> Self {
         switch actionString {
-        case "removeFromAllowlist": return .removeFromAllowlist(domain: domain)
-        case "addToAllowlist": return .addToAllowlist(domain: domain)
+        case "enableSiteProtection": return .enableSiteProtection(domain: domain)
+        case "disableSiteProtection": return .disableSiteProtection(domain: domain)
         case "addToBlocklist": return .addToBlocklist(domain: domain)
         case "removeAllBlocklistRules": return .removeAllBlocklistRules(domain: domain)
         default:
             assertionFailure("Undefined action=\(actionString) in scheme")
-            return .removeFromAllowlist(domain: "")
+            return .enableSiteProtection(domain: "")
         }
     }
 }

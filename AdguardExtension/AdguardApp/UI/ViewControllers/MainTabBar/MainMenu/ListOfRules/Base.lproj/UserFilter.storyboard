@@ -518,7 +518,8 @@
                         <outlet property="descriptionLabel" destination="CLW-y4-v4v" id="UiD-21-ohn"/>
                         <outlet property="imageView" destination="qqd-eK-U6s" id="ayB-TU-DUb"/>
                         <outlet property="keyboardHeightLayoutConstraint" destination="4qq-HU-zL7" id="UGw-Nx-oag"/>
-                        <outlet property="okButton" destination="inq-6Z-2pg" id="UuL-XJ-908"/>
+                        <outlet property="labelButton" destination="zcz-w0-z5w" id="MFh-2B-fny"/>
+                        <outlet property="okButton" destination="inq-6Z-2pg" id="0Ee-RB-R2B"/>
                         <outlet property="titleLabel" destination="U2M-P2-bar" id="Qfc-Ns-vKj"/>
                     </connections>
                 </viewController>
