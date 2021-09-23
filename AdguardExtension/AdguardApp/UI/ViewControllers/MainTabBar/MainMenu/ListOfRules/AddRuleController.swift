@@ -128,13 +128,14 @@ final class AddRuleController: BottomAlertController, UITextViewDelegate {
     
     private func fillTextViewWithCurrentWiFiName() {
         let networkSettingsService: NetworkSettingsServiceProtocol = ServiceLocator.shared.getService()!
-        let ssid = networkSettingsService.getCurrentWiFiName()
-        
-        if let ssid = ssid, ssid.count <= textViewCharectersLimit {
-            ruleTextView.text = ssid
-            ruleTextView.selectAll(self)
-            rulePlaceholderLabel.isHidden = true
-            addButton.isEnabled = true
+        networkSettingsService.fetchCurrentWiFiName { [weak self] ssid in
+            guard let self = self else { return }
+            if let ssid = ssid, ssid.count <= self.textViewCharectersLimit {
+                self.ruleTextView.text = ssid
+                self.ruleTextView.selectAll(self)
+                self.rulePlaceholderLabel.isHidden = true
+                self.addButton.isEnabled = true
+            }
         }
     }
     
