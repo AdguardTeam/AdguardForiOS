@@ -4,8 +4,8 @@ import { observer } from 'mobx-react';
 import { popupStore } from '../../stores/PopupStore';
 import { SitesAllowedModal } from './SitesAllowedModal';
 import { UpgradeModal } from './UpgradeModal';
-import { ProtectionDisabledModal } from './ProtectionDisabledModal';
-import { AdvancedBlockingDisabledModal } from './AdvancedBlockingDisabledModal';
+import { ProtectionModal } from './ProtectionModal';
+import { AdvancedBlockingModal } from './AdvancedBlockingModal';
 
 export const Modals = observer(() => {
     const store = useContext(popupStore);
@@ -18,12 +18,12 @@ export const Modals = observer(() => {
         return <UpgradeModal />;
     }
 
-    if (store.advancedBlockingDisabledModalVisible) {
-        return <AdvancedBlockingDisabledModal />;
+    if (store.advancedBlockingModalVisible) {
+        return <AdvancedBlockingModal />;
     }
 
-    if (store.showProtectionDisabledModal) {
-        return <ProtectionDisabledModal />;
+    if (store.protectionModalVisible) {
+        return <ProtectionModal />;
     }
 
     return null;
