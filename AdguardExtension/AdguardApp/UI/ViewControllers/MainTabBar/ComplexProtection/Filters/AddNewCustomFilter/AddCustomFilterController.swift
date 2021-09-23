@@ -46,6 +46,9 @@ final class AddCustomFilterController: BottomAlertController {
         super.viewDidLoad()
         
         nextButton.isEnabled = false
+        nextButton.makeTitleTextCapitalized()
+        cancelButton.makeTitleTextCapitalized()
+        
         nextButton.applyStandardGreenStyle()
         cancelButton.applyStandardOpaqueStyle()
 

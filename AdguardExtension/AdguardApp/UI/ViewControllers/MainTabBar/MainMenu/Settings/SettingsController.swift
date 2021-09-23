@@ -152,7 +152,7 @@ class SettingsController: UITableViewController {
     private func resetStatistics(_ indexPath: IndexPath){
         let alert = UIAlertController(title: String.localizedString("reset_stat_title"), message: String.localizedString("reset_stat_descr"), preferredStyle: .deviceAlertStyle)
         
-        let yesAction = UIAlertAction(title: String.localizedString("reset_title"), style: .destructive) { [weak self] _ in
+        let yesAction = UIAlertAction(title: String.localizedString("reset_title").capitalized, style: .destructive) { [weak self] _ in
             alert.dismiss(animated: true, completion: nil)
             NotificationCenter.default.post(name: NSNotification.resetStatistics, object: self)
         }

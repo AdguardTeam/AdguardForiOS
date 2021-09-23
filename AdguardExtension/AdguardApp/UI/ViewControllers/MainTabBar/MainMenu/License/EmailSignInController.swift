@@ -87,6 +87,7 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
         }
         updateTheme()
         
+        loginButton.makeTitleTextCapitalized()
         loginButton.applyStandardGreenStyle()
         
         nameEdit.accessibilityLabel = String.localizedString("enter_email_voiceover")

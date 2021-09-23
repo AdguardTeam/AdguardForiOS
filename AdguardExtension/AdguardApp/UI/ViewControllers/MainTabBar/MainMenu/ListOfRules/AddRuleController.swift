@@ -68,6 +68,8 @@ final class AddRuleController: BottomAlertController, UITextViewDelegate {
         ruleTextView.textContainerInset = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
         
         updateTheme()
+        addButton.makeTitleTextCapitalized()
+        cancelButton.makeTitleTextCapitalized()
         
         changeKeyboardReturnKeyTypeIfNeeded()
         addButton.applyStandardGreenStyle()

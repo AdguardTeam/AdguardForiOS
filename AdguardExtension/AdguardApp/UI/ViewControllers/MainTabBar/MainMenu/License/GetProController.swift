@@ -77,6 +77,8 @@ class GetProController: UIViewController {
         updateViews()
         updateTheme()
         
+        myAccountButton.makeTitleTextCapitalized()
+        
         if needsShowingExitButton {
             navigationItem.leftBarButtonItems = [exitButton]
         } else {

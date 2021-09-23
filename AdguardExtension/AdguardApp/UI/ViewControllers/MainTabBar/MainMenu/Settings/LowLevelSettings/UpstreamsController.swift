@@ -52,8 +52,9 @@ class UpstreamsController: BottomAlertController {
         upstreamsTextField.becomeFirstResponder()
         
         updateTheme()
-        
+        cancelButton.makeTitleTextCapitalized()
         cancelButton.applyStandardOpaqueStyle()
+        saveButton.makeTitleTextCapitalized()
         saveButton.applyStandardGreenStyle()
     }
     

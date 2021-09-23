@@ -84,8 +84,9 @@ class GetProTableController: UITableViewController {
             self?.setPrice()
         }
         
+        upgradeButton.makeTitleTextCapitalized()
         upgradeButton.applyStandardGreenStyle()
-        
+        titleLabel.text = titleLabel.text?.capitalized
         periodButton.accessibilityLabel = String.localizedString("choose_sub_voiceover")
         
         trackingProtectionImageView.image = UIImage(named: "ic_adguard")
@@ -157,6 +158,7 @@ class GetProTableController: UITableViewController {
         
         upgradeButton.setTitle(String.localizedString(lifetime ? "upgrade_lifetime_button_title" : "upgrade_button_title"), for: .normal)
         
+        upgradeButton.makeTitleTextCapitalized()
         setCellsVisibility()
         
         tableView.reloadData()

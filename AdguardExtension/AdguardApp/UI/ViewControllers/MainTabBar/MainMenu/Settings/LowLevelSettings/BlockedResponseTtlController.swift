@@ -49,8 +49,10 @@ class BlockedResponseTtlController: BottomAlertController {
         
         updateSaveButton()
         updateTheme()
-        
+        saveButton.makeTitleTextCapitalized()
         saveButton.applyStandardGreenStyle()
+        
+        cancelButton.makeTitleTextCapitalized()
         cancelButton.applyStandardOpaqueStyle()
     }
     

@@ -49,6 +49,8 @@ class EditBlockRequestController: BottomAlertController {
         
         updateTheme()
         
+        addButton.makeTitleTextCapitalized()
+        backButton.makeTitleTextCapitalized()
         addButton.applyStandardGreenStyle()
         backButton.applyStandardOpaqueStyle()
     }

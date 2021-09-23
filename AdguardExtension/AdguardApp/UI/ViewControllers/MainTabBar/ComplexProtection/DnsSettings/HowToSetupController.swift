@@ -31,6 +31,7 @@ class HowToSetupController: BottomAlertController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        openSettingsButton.makeTitleTextCapitalized()
         openSettingsButton.applyStandardGreenStyle()
         
         updateTheme()

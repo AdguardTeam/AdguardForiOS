@@ -29,6 +29,7 @@ class RuleAddedController: BottomAlertController {
         
         super.viewDidLoad()
         updateTheme()
+        okButton.makeTitleTextCapitalized()
         okButton.applyStandardGreenStyle()
     }
     
