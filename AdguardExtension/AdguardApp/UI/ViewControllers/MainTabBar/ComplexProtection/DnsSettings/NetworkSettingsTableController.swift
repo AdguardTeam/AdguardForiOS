@@ -19,13 +19,12 @@
 import UIKit
 import SharedAdGuardSDK
 
-class NetworkSettingsTableController: UITableViewController, AddRuleControllerDelegate, NetworkSettingsChangedDelegate, UserRuleTableViewCellDelegate {
+final class NetworkSettingsTableController: UITableViewController, AddRuleControllerDelegate, NetworkSettingsChangedDelegate, UserRuleTableViewCellDelegate {
     
     /* Cell reuse ids */
     private let networkSettingsTitleCellId = "NetworkSettingsTitleCell"
     private let filterDataCellReuseId = "FilterDataCell"
     private let networkSettingsDescriptionCellReuseId = "NetworkSettingsDescriptionCell"
-    private let addExceptionCellReuseId = "AddExceptionCell"
     
     /* Sections */
     private let titleSection = 0
@@ -61,6 +60,7 @@ class NetworkSettingsTableController: UITableViewController, AddRuleControllerDe
         updateTheme()
         setupBackButton()
         UserRuleTableViewCell.registerCell(forTableView: tableView)
+        AddTableViewCell.registerCell(forTableView: tableView)
     }
     
     // MARK: - Actions
@@ -177,20 +177,18 @@ class NetworkSettingsTableController: UITableViewController, AddRuleControllerDe
     private func setupNetworkSettingsDescriptionCell() -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: networkSettingsDescriptionCellReuseId) as? NetworkSettingsDescriptionCell {
             cell.theme = theme
-            cell.wifiExceptionsTitle = ACLocalizedString("wifi_exceptions_title", nil)
-            cell.wifiExceptionsDescription = ACLocalizedString("wifi_exceptions_description", nil)
+            cell.wifiExceptionsTitle = String.localizedString("wifi_exceptions_title")
+            cell.wifiExceptionsDescription = String.localizedString("wifi_exceptions_description")
             return cell
         }
         return UITableViewCell()
     }
     
     private func setupAddExceptionCell() -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: addExceptionCellReuseId) as? AddExceptionCell {
-            cell.theme = theme
-            cell.exceptionLabelTitle = ACLocalizedString("add_exception_title", nil)
-            return cell
-        }
-        return UITableViewCell()
+        let cell = AddTableViewCell.getCell(forTableView: tableView)
+        cell.addTitle = String.localizedString("add_exception_title")
+        cell.updateTheme(theme)
+        return cell
     }
     
     private func setupWifiExceptionsCell(row: Int) -> UITableViewCell {

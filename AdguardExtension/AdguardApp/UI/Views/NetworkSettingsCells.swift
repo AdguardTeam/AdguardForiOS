@@ -119,24 +119,3 @@ class NetworkSettingsDescriptionCell: UITableViewCell {
         theme?.setupTableCell(self)
     }
 }
-
-class AddExceptionCell: UITableViewCell {
-    
-    @IBOutlet weak var addExceptionLabel: UILabel!
-    
-    var theme: ThemeServiceProtocol? {
-        didSet{
-           updateTheme()
-        }
-    }
-    
-    var exceptionLabelTitle: String? {
-        didSet {
-            addExceptionLabel.text = exceptionLabelTitle
-        }
-    }
-    
-    private func updateTheme(){
-        theme?.setupTableCell(self)
-    }
-}

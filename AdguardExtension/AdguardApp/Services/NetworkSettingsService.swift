@@ -23,7 +23,7 @@ import SharedAdGuardSDK
 
 /** struct for using in NetworkSettingsTableController */
 struct WifiException: Equatable, Codable {
-    // rule - ssid the цш-аш network in which the dns filtering should not work
+    // rule - ssid the wi-fi network in which the dns filtering should not work
     let rule: String
     
     // state of rule
@@ -47,10 +47,10 @@ protocol NetworkSettingsServiceProtocol: AnyObject {
     // array of active wi-fi exceptions
     var enabledExceptions: [WifiException] { get }
     
-    // DNs filtering is enabled when connected to Wi-Fi
+    // DNS filtering is enabled when connected to Wi-Fi
     var filterWifiDataEnabled: Bool { get set }
     
-    // DNs filtering is enabled when connected to mobile network
+    // DNS filtering is enabled when connected to mobile network
     var filterMobileDataEnabled: Bool { get set }
     
     // delegate for change notifications
@@ -69,7 +69,7 @@ protocol NetworkSettingsServiceProtocol: AnyObject {
     func change(oldException: WifiException, newException: WifiException) throws
     
     // fetches current wi-fi name. Wi-fi name returns in completionHandler asyncronously in main thread
-    // it returns nit on ios 15 due to ios bug https://developer.apple.com/forums/thread/670970
+    // it returns nil on ios 15 due to ios bug https://developer.apple.com/forums/thread/670970
     func fetchCurrentWiFiName(_ completionHandler: @escaping (String?)->Void)
 }
 
