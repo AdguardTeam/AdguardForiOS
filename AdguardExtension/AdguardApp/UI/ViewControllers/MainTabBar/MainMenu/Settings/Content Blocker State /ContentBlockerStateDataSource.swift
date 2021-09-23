@@ -128,7 +128,7 @@ class ContentBlockersDataSource {
     
     private func getUserFilterStringIfNedeed() -> String {
         var result = ""
-        let userTitleString = ACLocalizedString("user_filter_title", nil)
+        let userTitleString = String.localizedString("user_filter_title")
         let blacklistRuleObjects = safariProtection.allRules(for: .blocklist)
         let whitelistRuleObjects = safariProtection.allRules(for: .allowlist)
         let userFilterEnabled = resources.safariUserFilterEnabled

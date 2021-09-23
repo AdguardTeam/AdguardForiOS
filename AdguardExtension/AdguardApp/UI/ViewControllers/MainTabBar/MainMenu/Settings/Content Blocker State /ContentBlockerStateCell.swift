@@ -92,7 +92,7 @@ class ContentBlockerStateCell: UITableViewCell {
         
         let numberOfRules = String.formatSringNumber(number: blockerState?.numberOfRules ?? 0)
 
-        self.currentFilterStateLabel.text = String(format: ACLocalizedString("enabled_current_content_blocker_state_label", nil), numberOfRules)
+        self.currentFilterStateLabel.text = String(format: String.localizedString("enabled_current_content_blocker_state_label"), numberOfRules)
         self.currentFilterStateLabel.textColor = theme.lightGrayTextColor
         
         hideFilterListIfNeeded()
@@ -103,7 +103,7 @@ class ContentBlockerStateCell: UITableViewCell {
     private func disabledUISetup(){
         self.stateImage.image = disabledImage
         
-        self.currentFilterStateLabel.text = ACLocalizedString("disabled_current_state_label", nil)
+        self.currentFilterStateLabel.text = String.localizedString("disabled_current_state_label")
         self.currentFilterStateLabel.textColor = theme.lightGrayTextColor
         
         hideFilterListIfNeeded()
@@ -114,7 +114,7 @@ class ContentBlockerStateCell: UITableViewCell {
     private func updatingUISetup(){
         self.stateImage.image = updatingImage
 
-        self.currentFilterStateLabel.text = ACLocalizedString("update_current_state_label", nil)
+        self.currentFilterStateLabel.text = String.localizedString("update_current_state_label")
         self.currentFilterStateLabel.textColor = theme.lightGrayTextColor
         
         hideFilterListIfNeeded()
@@ -132,7 +132,7 @@ class ContentBlockerStateCell: UITableViewCell {
         
         let limit = String.formatSringNumber(number: resources.sharedDefaults().integer(forKey: AEDefaultsJSONMaximumConvertedRules))
         
-        self.currentFilterStateLabel.text = String(format: ACLocalizedString("over_limit_current_state_label", nil), limit, limit, firstString, secondString)
+        self.currentFilterStateLabel.text = String(format: String.localizedString("over_limit_current_state_label"), limit, limit, firstString, secondString)
         self.currentFilterStateLabel.textColor = theme.errorRedColor
         
         hideFilterListIfNeeded()
@@ -143,7 +143,7 @@ class ContentBlockerStateCell: UITableViewCell {
     private func failedUpdatingUISetup(){
         self.stateImage.image = errorImage
 
-        self.currentFilterStateLabel.text = ACLocalizedString("failed_updating_current_state_label", nil)
+        self.currentFilterStateLabel.text = String.localizedString("failed_updating_current_state_label")
         self.currentFilterStateLabel.textColor = theme.errorRedColor
         
         hideFilterListIfNeeded()

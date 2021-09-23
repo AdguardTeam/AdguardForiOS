@@ -133,7 +133,6 @@ class BugReportController: UIViewController {
         
         sendButton.setTitle(reportType == .bugReport ? String.localizedString("bug_report_button_title") : String.localizedString("leave_feedback_button_title"), for: .normal)
 
-        sendButton.makeTitleTextUppercased()
         sendButton.applyStandardGreenStyle()
         
         detailedInfoButton.isSelected = reportType == .bugReport

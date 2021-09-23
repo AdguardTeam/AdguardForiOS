@@ -84,9 +84,7 @@ class GetProTableController: UITableViewController {
             self?.setPrice()
         }
         
-        upgradeButton.makeTitleTextUppercased()
         upgradeButton.applyStandardGreenStyle()
-        titleLabel.text = titleLabel.text?.uppercased()
         
         periodButton.accessibilityLabel = String.localizedString("choose_sub_voiceover")
         
@@ -157,8 +155,7 @@ class GetProTableController: UITableViewController {
         
         setPurchaseDescription()
         
-        upgradeButton.setTitle(ACLocalizedString(lifetime ? "upgrade_lifetime_button_title" : "upgrade_button_title", nil), for: .normal)
-        upgradeButton.makeTitleTextUppercased()
+        upgradeButton.setTitle(String.localizedString(lifetime ? "upgrade_lifetime_button_title" : "upgrade_button_title"), for: .normal)
         
         setCellsVisibility()
         
@@ -192,7 +189,7 @@ class GetProTableController: UITableViewController {
             actionSheet.addAction(action)
         }
         
-        let cancelAction = UIAlertAction(title: ACLocalizedString("common_action_cancel", nil), style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel, handler: nil)
         actionSheet.addAction(cancelAction)
         
         self.present(actionSheet, animated: true, completion: nil)
@@ -204,7 +201,7 @@ class GetProTableController: UITableViewController {
     private func setPurchaseDescription() {
         
         let stringKey = selectedProduct?.type == .some(.lifetime) ? "lifetime_purchase_description_format" : "purchase_description_format"
-        let format = ACLocalizedString(stringKey, nil)
+        let format = String.localizedString(stringKey)
         let privacy = UIApplication.shared.adguardUrl(action: "privacy", from: "license", buildVersion: productInfo.buildVersion())
         let eula = UIApplication.shared.adguardUrl(action: "eula", from: "license", buildVersion: productInfo.buildVersion())
         
@@ -240,17 +237,17 @@ class GetProTableController: UITableViewController {
         
         switch period.unit {
         case .day:
-            formatString = ACLocalizedString("trial_description_days", nil)
+            formatString = String.localizedString("trial_description_days")
         case .week:
             if period.numberOfUnits == 1 {
-                formatString = ACLocalizedString("trial_description_days", nil)
+                formatString = String.localizedString("trial_description_days")
                 return String.localizedStringWithFormat(formatString, 7)
             }
-            formatString = ACLocalizedString("trial_description_weeks", nil)
+            formatString = String.localizedString("trial_description_weeks")
         case .month:
-            formatString = ACLocalizedString("trial_description_months", nil)
+            formatString = String.localizedString("trial_description_months")
         case .year:
-            formatString = ACLocalizedString("trial_description_years", nil)
+            formatString = String.localizedString("trial_description_years")
         }
         
         let resultString : String = String.localizedStringWithFormat(formatString, period.numberOfUnits)
@@ -261,13 +258,13 @@ class GetProTableController: UITableViewController {
     private func getPeriodString(product: Product?) -> String {
         
         if product == nil {
-            let formatString = ACLocalizedString("trial_period_years", nil)
+            let formatString = String.localizedString("trial_period_years")
             let resultString : String = String.localizedStringWithFormat(formatString, 1)
             return resultString
         }
         
         if product!.type == .lifetime {
-            return ACLocalizedString("permanent_subscription_title", nil)
+            return String.localizedString("permanent_subscription_title")
         }
         
         guard let period = product?.period else { return "" }
@@ -276,17 +273,17 @@ class GetProTableController: UITableViewController {
         
         switch period.unit {
         case .day:
-            formatString = ACLocalizedString("trial_period_days", nil)
+            formatString = String.localizedString("trial_period_days")
         case .week:
             if period.numberOfUnits == 1 {
-                formatString = ACLocalizedString("trial_period_days", nil)
+                formatString = String.localizedString("trial_period_days")
                 return String.localizedStringWithFormat(formatString, 7)
             }
-            formatString = ACLocalizedString("trial_period_weeks", nil)
+            formatString = String.localizedString("trial_period_weeks")
         case .month:
-            formatString = ACLocalizedString("trial_period_months", nil)
+            formatString = String.localizedString("trial_period_months")
         case .year:
-            formatString = ACLocalizedString("trial_period_years", nil)
+            formatString = String.localizedString("trial_period_years")
         }
         
         let resultString : String = String.localizedStringWithFormat(formatString, period.numberOfUnits)

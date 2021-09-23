@@ -36,7 +36,7 @@ struct SignInFailureHandler: SignInFailureHandlerProtocol {
             // unknown error
             let errorDescription = error?.localizedDescription ?? "nil"
             DDLogError("(LoginController) processLoginResponse - unknown error: \(errorDescription)")
-            let message = ACLocalizedString("login_error_message", nil)
+            let message = String.localizedString("login_error_message")
             
             notificationService.postNotificationInForeground(body: message, title: "")
             return nil

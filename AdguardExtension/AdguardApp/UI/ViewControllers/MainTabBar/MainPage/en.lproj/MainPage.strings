@@ -4,11 +4,11 @@
 /* Class = "UILabel"; text = "Get stronger with Premium!"; ObjectID = "3qN-uj-pOb"; */
 "3qN-uj-pOb.text" = "Get stronger with Premium!";
 
-/* Class = "UIButton"; normalTitle = "FIX IT"; ObjectID = "46F-Jh-wHm"; */
-"46F-Jh-wHm.normalTitle" = "FIX IT";
+/* Class = "UIButton"; normalTitle = "Fix it"; ObjectID = "46F-Jh-wHm"; */
+"46F-Jh-wHm.normalTitle" = "Fix it";
 
-/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "4Ft-5h-4Jd"; */
-"4Ft-5h-4Jd.normalTitle" = "TRY FOR FREE";
+/* Class = "UIButton"; normalTitle = "Try for free"; ObjectID = "4Ft-5h-4Jd"; */
+"4Ft-5h-4Jd.normalTitle" = "Try for free";
 
 /* Class = "UILabel"; text = "Period"; ObjectID = "5pX-mg-2fq"; */
 "5pX-mg-2fq.text" = "Period";
@@ -55,8 +55,5 @@
 /* Class = "UIButton"; normalTitle = "30 days"; ObjectID = "gu3-as-BZN"; */
 "gu3-as-BZN.normalTitle" = "30 days";
 
-/* Class = "UIButton"; normalTitle = "All time"; ObjectID = "kfe-5H-fB1"; */
-"kfe-5H-fB1.normalTitle" = "All time";
-
-/* Class = "UIButton"; normalTitle = "FIX IT"; ObjectID = "oe6-9O-dBB"; */
-"oe6-9O-dBB.normalTitle" = "FIX IT";
+/* Class = "UIButton"; normalTitle = "Fix it"; ObjectID = "oe6-9O-dBB"; */
+"oe6-9O-dBB.normalTitle" = "Fix it";

@@ -69,8 +69,6 @@ final class AddRuleController: BottomAlertController, UITextViewDelegate {
         
         updateTheme()
         
-        addButton.makeTitleTextUppercased()
-        cancelButton.makeTitleTextUppercased()
         changeKeyboardReturnKeyTypeIfNeeded()
         addButton.applyStandardGreenStyle()
         cancelButton.applyStandardOpaqueStyle()

@@ -1,17 +1,17 @@
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "5eU-q4-Xed"; Note = "(AddRuleController) cancel button"; */
-"5eU-q4-Xed.normalTitle" = "CANCEL";
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "5eU-q4-Xed"; Note = "(AddRuleController) cancel button"; */
+"5eU-q4-Xed.normalTitle" = "Cancel";
 
-/* Class = "UILabel"; text = "The rule has been added to the User rules"; ObjectID = "BfI-YN-iXe"; */
-"BfI-YN-iXe.text" = "The rule has been added to the User rules";
+/* Class = "UILabel"; text = "The rule was added to User rules"; ObjectID = "BfI-YN-iXe"; */
+"BfI-YN-iXe.text" = "The rule was added to User rules";
 
-/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "Bvs-mI-vEr"; */
-"Bvs-mI-vEr.normalTitle" = "SAVE";
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "Bvs-mI-vEr"; */
+"Bvs-mI-vEr.normalTitle" = "Save";
 
 /* Class = "UILabel"; text = "Edit"; ObjectID = "EH6-Zr-YRP"; */
 "EH6-Zr-YRP.text" = "Edit";
 
-/* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "Tei-uI-6Gr"; */
-"Tei-uI-6Gr.normalTitle" = "DELETE";
+/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "Tei-uI-6Gr"; */
+"Tei-uI-6Gr.normalTitle" = "Delete";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "UGP-Xr-H1p"; */
 "UGP-Xr-H1p.normalTitle" = "Cancel";
@@ -22,8 +22,8 @@
 /* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "WEk-KB-xeG"; */
 "WEk-KB-xeG.normalTitle" = "Delete";
 
-/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "fCd-gA-rXS"; */
-"fCd-gA-rXS.normalTitle" = "ADD";
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "fCd-gA-rXS"; */
+"fCd-gA-rXS.normalTitle" = "Add";
 
 /* Class = "UIButton"; normalTitle = "Enable"; ObjectID = "gON-PA-nSb"; */
 "gON-PA-nSb.normalTitle" = "Enable";
@@ -31,5 +31,5 @@
 /* Class = "UILabel"; text = "Domain:"; ObjectID = "x7r-Ln-XiZ"; */
 "x7r-Ln-XiZ.text" = "Domain:";
 
-/* Class = "UIButton"; normalTitle = "OK"; ObjectID = "zRm-I7-37E"; */
-"zRm-I7-37E.normalTitle" = "OK";
+/* Class = "UIButton"; normalTitle = "Ok"; ObjectID = "zRm-I7-37E"; */
+"zRm-I7-37E.normalTitle" = "Ok";

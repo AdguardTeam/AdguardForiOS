@@ -10,8 +10,8 @@
 /* Class = "UITextField"; placeholder = "https://example.com"; ObjectID = "Fwl-LI-5Fu"; Note = "(Add Custom Filter) url hint"; */
 "Fwl-LI-5Fu.placeholder" = "https://example.com";
 
-/* Class = "UILabel"; text = "AdGuard doesn’t work on the sites from this list"; ObjectID = "Gg8-4u-qvU"; */
-"Gg8-4u-qvU.text" = "AdGuard doesn’t work on the sites from this list";
+/* Class = "UILabel"; text = "AdGuard is disabled for the websites from this list"; ObjectID = "Gg8-4u-qvU"; */
+"Gg8-4u-qvU.text" = "AdGuard is disabled for the websites from this list";
 
 /* Class = "UILabel"; text = "Filters"; ObjectID = "Lq2-mi-McV"; */
 "Lq2-mi-McV.text" = "Filters";
@@ -19,14 +19,14 @@
 /* Class = "UILabel"; text = "New custom filter"; ObjectID = "NsT-wt-1hd"; Note = "(New Custom Filter Details)"; */
 "NsT-wt-1hd.text" = "New custom filter";
 
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "OpB-AR-Og7"; Note = "(AddCustomFilterController) cancel button"; */
-"OpB-AR-Og7.normalTitle" = "CANCEL";
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "OpB-AR-Og7"; Note = "(AddCustomFilterController) cancel button"; */
+"OpB-AR-Og7.normalTitle" = "Cancel";
 
 /* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "QHZ-sJ-wTL"; */
 "QHZ-sJ-wTL.text" = "Blocks ads and trackers on websites opened in Safari";
 
-/* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
-"RJU-32-r8h.text" = "Rules count: ";
+/* Class = "UILabel"; text = "Rule count:"; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
+"RJU-32-r8h.text" = "Rule count:";
 
 /* Class = "UILabel"; text = "User rules"; ObjectID = "VCK-db-aeg"; */
 "VCK-db-aeg.text" = "User rules";
@@ -37,17 +37,17 @@
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "f3z-Yh-zY2"; */
 "f3z-Yh-zY2.text" = "Allowlist";
 
-/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "kCb-lJ-BLL"; */
-"kCb-lJ-BLL.normalTitle" = "ADD";
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "kCb-lJ-BLL"; */
+"kCb-lJ-BLL.normalTitle" = "Add";
 
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "mEm-ll-QZR"; Note = "(NewCustomFilterDetailsController) CANCEL button"; */
-"mEm-ll-QZR.normalTitle" = "CANCEL";
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "mEm-ll-QZR"; Note = "(NewCustomFilterDetailsController) CANCEL button"; */
+"mEm-ll-QZR.normalTitle" = "Cancel";
 
-/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "nch-wu-mKC"; */
-"nch-wu-mKC.normalTitle" = "NEXT";
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "nch-wu-mKC"; */
+"nch-wu-mKC.normalTitle" = "Next";
 
 /* Class = "UILabel"; text = "Homepage: "; ObjectID = "t8x-PU-hFK"; */
 "t8x-PU-hFK.text" = "Homepage: ";
 
-/* Class = "UITextField"; placeholder = "Enter filter name:"; ObjectID = "zcB-eh-Ou4"; Note = "(Add Custom Filter) url hint"; */
-"zcB-eh-Ou4.placeholder" = "Enter filter name:";
+/* Class = "UITextField"; placeholder = "Name of the filter:"; ObjectID = "zcB-eh-Ou4"; Note = "(Add Custom Filter) url hint"; */
+"zcB-eh-Ou4.placeholder" = "Name of the filter:";

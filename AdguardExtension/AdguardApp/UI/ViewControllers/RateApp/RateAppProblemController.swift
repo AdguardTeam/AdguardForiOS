@@ -33,10 +33,8 @@ class RateAppProblemController: BottomAlertController {
         
         setupDescriptionTextView()
         
-        problemIsDoneButton.makeTitleTextUppercased()
         problemIsDoneButton.applyStandardGreenStyle()
         
-        problemRemainsButton.makeTitleTextUppercased()
         problemRemainsButton.applyStandardOpaqueStyle()
         
         updateTheme()

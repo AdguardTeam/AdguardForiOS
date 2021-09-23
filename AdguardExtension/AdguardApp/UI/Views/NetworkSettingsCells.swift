@@ -67,8 +67,8 @@ class FilterDataCell: UITableViewCell {
     }
     
     private func setupMobileData(){
-        let title = ACLocalizedString("filter_mobile_title", nil)
-        let description = ACLocalizedString("mobile_data_description", nil)
+        let title = String.localizedString("filter_mobile_title")
+        let description = String.localizedString("mobile_data_description")
         let image = UIImage(named: "mobiledata") ?? UIImage()
         
         filterDataImage.image = image
@@ -77,8 +77,8 @@ class FilterDataCell: UITableViewCell {
     }
     
     private func setupWifiData(){
-        let title = ACLocalizedString("filter_wifi_title", nil)
-        let description = ACLocalizedString("wifi_data_description", nil)
+        let title = String.localizedString("filter_wifi_title")
+        let description = String.localizedString("wifi_data_description")
         let image = UIImage(named: "wi-fi") ?? UIImage()
         
         filterDataImage.image = image

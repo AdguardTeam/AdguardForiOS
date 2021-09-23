@@ -35,10 +35,8 @@ class RateAppController: BottomAlertController {
         
         descriptionLabel.text = String.localizedString("rate_app_description")
         
-        rateAppButton.makeTitleTextUppercased()
         rateAppButton.applyStandardGreenStyle()
         
-        haveAProblemButton.makeTitleTextUppercased()
         haveAProblemButton.applyStandardOpaqueStyle()
         
         updateTheme()

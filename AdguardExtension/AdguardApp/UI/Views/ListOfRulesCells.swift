@@ -61,7 +61,7 @@ class EnableListOfRulesCell: UITableViewCell {
     var serviceState: Bool? {
         didSet{
             let state: Bool = serviceState ?? false
-            serviceStateLabel.text = state ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
+            serviceStateLabel.text = state ? String.localizedString("on_state") : String.localizedString("off_state")
             serviceStateSwitch.isOn = state
         }
     }
@@ -131,7 +131,7 @@ class AddRuleCell: UITableViewCell {
         let fontSize = addRuleLabel.font.pointSize
         if type == .safariUserfilter {
             addRuleLabel.font = UIFont(name: "PTMono-Regular", size: fontSize)
-            addRuleLabel.text = ACLocalizedString("add_new_rule", nil)
+            addRuleLabel.text = String.localizedString("add_new_rule")
         } else {
             addRuleLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .medium)
             addRuleLabel.text = type == .systemBlacklist ? String.localizedString("add_new_rule") : String.localizedString("add_domain")

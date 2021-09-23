@@ -68,7 +68,7 @@
 "user_filter_helper" = "Enter your own rules here, separated by line breaks";
 
 /* YES Button caption in alert */
-"common_action_yes" = "YES";
+"common_action_yes" = "Yes";
 
 /* (MainController) login status caption on main screen */
 "protection_enabled_caption" = "Protection is enabled";
@@ -83,7 +83,7 @@
 "upgrade_button_title" = "Subscribe";
 
 /* (GetProTableController) upgrade button title for lifetime license */
-"upgrade_lifetime_button_title" = "PURCHASE";
+"upgrade_lifetime_button_title" = "Purchase";
 
 /* (LoginController) lost password button title */
 "lost_password" = "Lost password?";
@@ -251,7 +251,7 @@
 "lifetime_purchase_description_format" = "<a href=%2$@>Terms and conditions</a> and <a href=%1$@>Privacy policy</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
-"common_action_ok" = "OK";
+"common_action_ok" = "Ok";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "privacy_policy_action" = "Privacy Policy";
@@ -557,10 +557,10 @@
 "common_add" = "Add";
 
 /*(TodayViewController) Protection is disabled title  */
-"protection_disabled" = "Protection is OFF";
+"protection_disabled" = "Protection is Off";
 
 /*(TodayViewController) Protection is enabled title  */
-"protection_enabled" = "Protection is ON";
+"protection_enabled" = "Protection is On";
 
 /*(TodayViewController) Complex protection is enabled text  */
 "complex_enabled" = "Safari and DNS protection";
@@ -614,13 +614,13 @@
 "dns_request_user_status_added_to_whitelist" = "added to the Allowlist";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_blacklist" = "added to the Blocklist";
+"dns_request_user_status_added_to_blacklist" = "added to the blocklist";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "removed from the Allowlist";
+"dns_request_user_status_removed_from_whitelist" = "removed from the allowlist";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "removed from the Blocklist";
+"dns_request_user_status_removed_from_blacklist" = "removed from the blocklist";
 
 /* (OnboardingController) first step text*/
 "onboarding_first_step_text" = "Open <b>Settings.</b>";
@@ -1014,23 +1014,23 @@
 // MARK: - YouTubeAdsRequestHandler
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
 
-"youtube_script_success_title" = "YouTube is now ad-free! Please note that you need to run this extension again if you reload the page";
+"youtube_script_success_title" = "YouTube is now ad-free! You'll have to re-run this extension every time you reload the page.";
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
-"youtube_script_wrong_domain_title" = "This extension is intended to be run on YouTube only";
+"youtube_script_wrong_domain_title" = "This extension works only for YouTube.";
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
 "youtube_script_already_executed_title" = "The extension has already been executed";
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
-"youtube_script_error_title" = "Unknown error occurred while removing YouTube ads";
+"youtube_script_error_title" = "An unknown error occurred while removing YouTube ads";
 
 //MARK: - ActionExtensionMainController
 /* (ActionExtensionMainController) - ActionExtension info for iOS 15>= */
-"action_extension_obsolete_info" = "This AdGuard extension has become obsolete. There is a new AdGuard extension available for free, with better ad-blocking tools and UI. It can be found in the Extensions tab of the menu.";
+"action_extension_obsolete_info" = "This AdGuard extension is out of date. Check the Extensions tab of the menu for an updated free AdGuard extension with improved UI and ad-blocking tools.";
 
 /* (ActionExtensionMainController) - ActionExtension info for iOS 14<= */
-"action_extension_new_version_info" = "There's a new version of this extension available for iOS 15, with more capabilities and a better UI. Don't forget to update!";
+"action_extension_new_version_info" = "A new version of this extension is available for iOS 15. It has more capabilities and an improved UI. Remember to update!";
 
 /* (BackgroundFetchController) - Background app refresh default title */
 "background_fetch_default_period" = "Default period";

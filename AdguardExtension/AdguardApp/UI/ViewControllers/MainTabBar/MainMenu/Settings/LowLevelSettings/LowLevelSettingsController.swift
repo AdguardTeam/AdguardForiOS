@@ -183,14 +183,14 @@ final class LowLevelSettingsController: UITableViewController {
     }
     
     private func setupBetaChannelTextView() {
-        let betaLinkFormat = ACLocalizedString("low_level_beta_link", nil)
+        let betaLinkFormat = String.localizedString("low_level_beta_link")
         let url = UIApplication.shared.adguardUrl(action: "beta_channel", from: "low_level_settings", buildVersion: productInfo.buildVersion())
         let betaLink = String(format: betaLinkFormat, url)
         setBetaChannelLink(betaLink)
     }
     
     private func setupWarningDescriptionTextView() {
-        let warningDescriptionFormat = ACLocalizedString("low_level_description", nil)
+        let warningDescriptionFormat = String.localizedString("low_level_description")
         let warningDescription = String(format: warningDescriptionFormat)
         warningTextView.attributedText = NSMutableAttributedString.fromHtml(warningDescription, fontSize: warningTextView.font!.pointSize, color: theme.blackTextColor, textAlignment: .center)
     }

@@ -142,6 +142,8 @@
 		249E125E2600FFA3003A5FBD /* URLSchemeExecutorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C03C4525FF73790062DEED /* URLSchemeExecutorMock.swift */; };
 		249EC92126F772F300BEF8F0 /* SelectDnsProtocolController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249EC92026F772F300BEF8F0 /* SelectDnsProtocolController.swift */; };
 		249EC92226F772F300BEF8F0 /* SelectDnsProtocolController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249EC92026F772F300BEF8F0 /* SelectDnsProtocolController.swift */; };
+		24A6021426FCB0AE0049A329 /* AdvancedYouTubeBlockingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A6021326FCB0AD0049A329 /* AdvancedYouTubeBlockingController.swift */; };
+		24A6021526FCB0AE0049A329 /* AdvancedYouTubeBlockingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A6021326FCB0AD0049A329 /* AdvancedYouTubeBlockingController.swift */; };
 		24A8423B26EA2A5B0051B4E6 /* ServiceInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D7367826EA1895003EE3EC /* ServiceInitializer.swift */; };
 		24AD872D260A247B0034D402 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD872C260A247B0034D402 /* RadioButton.swift */; };
 		24AD872E260A247B0034D402 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AD872C260A247B0034D402 /* RadioButton.swift */; };
@@ -2739,6 +2741,7 @@
 		2491F74026F63AF5006CF561 /* DnsProviderDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProviderDetailsModel.swift; sourceTree = "<group>"; };
 		249606AB258B82AD00C747BA /* SocialSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSignInButton.swift; sourceTree = "<group>"; };
 		249EC92026F772F300BEF8F0 /* SelectDnsProtocolController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDnsProtocolController.swift; sourceTree = "<group>"; };
+		24A6021326FCB0AD0049A329 /* AdvancedYouTubeBlockingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvancedYouTubeBlockingController.swift; sourceTree = "<group>"; };
 		24AD872C260A247B0034D402 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		24B2F12F25FF4DD500CE46C8 /* URLSchemeParcerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSchemeParcerTest.swift; sourceTree = "<group>"; };
 		24B33CFC26C5073700499281 /* OnboardingContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContentView.swift; sourceTree = "<group>"; };
@@ -6385,6 +6388,7 @@
 				7E952E9923D5FFB400D89AE0 /* Protection.storyboard */,
 				7EF4285B23AB77AB00948B65 /* ComplexProtectionController.swift */,
 				242A07B026C677D900181D35 /* AdvancedProtectionController.swift */,
+				24A6021326FCB0AD0049A329 /* AdvancedYouTubeBlockingController.swift */,
 			);
 			path = ComplexProtection;
 			sourceTree = "<group>";
@@ -8493,6 +8497,7 @@
 				D0D7E615244455CA001801A5 /* ThemableButton.swift in Sources */,
 				242C7FF126E6536B00A01B10 /* DnsUserRulesTableModel.swift in Sources */,
 				7E3FEFAF26CD33F80080EC03 /* AGTextField.swift in Sources */,
+				24A6021526FCB0AE0049A329 /* AdvancedYouTubeBlockingController.swift in Sources */,
 				D0B545BE2435D65C002F0AEC /* MainNavigationController.swift in Sources */,
 				D0B545E02435D69B002F0AEC /* ThemableImageView.swift in Sources */,
 				D031A108219EFC99002C17D9 /* CLIColor.m in Sources */,
@@ -8909,6 +8914,7 @@
 				65AD3BBB1B7CB15400004A02 /* AESharedResources.m in Sources */,
 				7EA7DCBE26C674FE0032AD5C /* SafariProtectionGroupCell.swift in Sources */,
 				24ED98C6259B78DF00A73B17 /* Array+Utils.swift in Sources */,
+				24A6021426FCB0AE0049A329 /* AdvancedYouTubeBlockingController.swift in Sources */,
 				D05CA86D1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
 				247CB5FE2600C5A10047974C /* OpenDnsProvidersControllerParser.swift in Sources */,
 				7EB2F95623F2B96B00F9A544 /* CharacterSet+Utils.swift in Sources */,

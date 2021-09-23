@@ -46,8 +46,6 @@ final class AddCustomFilterController: BottomAlertController {
         super.viewDidLoad()
         
         nextButton.isEnabled = false
-        nextButton.makeTitleTextUppercased()
-        cancelButton.makeTitleTextUppercased()
         nextButton.applyStandardGreenStyle()
         cancelButton.applyStandardOpaqueStyle()
 

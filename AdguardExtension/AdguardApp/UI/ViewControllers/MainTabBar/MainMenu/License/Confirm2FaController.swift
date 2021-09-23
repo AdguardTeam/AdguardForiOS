@@ -63,8 +63,6 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
         setupBackButton()
         confirmButton.applyStandardGreenStyle()
         
-        confirmButton.makeTitleTextUppercased()
-        
         super.viewDidLoad()
     }
     

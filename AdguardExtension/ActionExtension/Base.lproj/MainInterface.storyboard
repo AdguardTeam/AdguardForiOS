@@ -238,7 +238,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fxW-Cr-iPW">
                                 <rect key="frame" x="50" y="548" width="314" height="30"/>
-                                <state key="normal" title="CLOSE">
+                                <state key="normal" title="Close">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>

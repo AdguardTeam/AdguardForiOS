@@ -53,8 +53,6 @@ class UpstreamsController: BottomAlertController {
         
         updateTheme()
         
-        cancelButton?.makeTitleTextUppercased()
-        saveButton?.makeTitleTextUppercased()
         cancelButton.applyStandardOpaqueStyle()
         saveButton.applyStandardGreenStyle()
     }
