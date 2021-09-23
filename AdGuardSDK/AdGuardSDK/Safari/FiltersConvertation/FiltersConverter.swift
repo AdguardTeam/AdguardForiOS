@@ -177,7 +177,7 @@ final class FiltersConverter: FiltersConverterProtocol {
                 rules: rules,
                 safariVersion: safariVersion,
                 optimize: false,
-                advancedBlocking: configuration.advancedBlockingIsEnabled
+                advancedBlocking: configuration.advancedBlockingIsEnabled && configuration.proStatus
             )
             Logger.logInfo("FiltersCoverter result: \(result.message)")
             
