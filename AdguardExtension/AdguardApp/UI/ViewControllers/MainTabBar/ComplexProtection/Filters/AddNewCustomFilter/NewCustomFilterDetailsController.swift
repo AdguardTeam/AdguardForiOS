@@ -80,7 +80,9 @@ final class NewCustomFilterDetailsController: BottomAlertController {
         }
         
         updateTheme()
+        addButton.makeTitleTextCapitalized()
         addButton.applyStandardGreenStyle()
+        cancelButton.makeTitleTextCapitalized()
         cancelButton.applyStandardOpaqueStyle()
     }
     
