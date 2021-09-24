@@ -112,7 +112,7 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
 
 // MARK: - SafariGroup.GroupType + contentBlockerType
 
-extension SafariGroup.GroupType {
+public extension SafariGroup.GroupType {
     var contentBlockerType: ContentBlockerType {
         switch self {
         case .ads: return .general

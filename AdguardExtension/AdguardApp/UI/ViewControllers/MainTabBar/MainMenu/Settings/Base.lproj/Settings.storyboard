@@ -9,7 +9,7 @@
         <!--Settings Controller-->
         <scene sceneID="Shu-SB-yFL">
             <objects>
-                <tableViewController storyboardIdentifier="SettingsController" id="oKf-oS-AAR" customClass="SettingsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SettingsController" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="oKf-oS-AAR" customClass="SettingsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="40" sectionFooterHeight="28" id="pFi-uK-8SF">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -615,6 +615,7 @@
                             <outlet property="delegate" destination="oKf-oS-AAR" id="8pU-qP-5Ve"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -649,7 +650,7 @@
         <!--Advanced Settings Controller-->
         <scene sceneID="499-3e-VKK">
             <objects>
-                <tableViewController storyboardIdentifier="AdvancedSettingsController" id="71r-k4-iOF" customClass="AdvancedSettingsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="AdvancedSettingsController" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="71r-k4-iOF" customClass="AdvancedSettingsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ZZo-Eo-LOq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -996,7 +997,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="uQx-bh-2Ni" kind="show" identifier="contentBlockersScreen" id="QVu-nw-mAX"/>
+                                            <segue destination="aym-7d-Ukb" kind="show" id="ap2-gm-hoy"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ZVC-2c-cJi">
@@ -1137,6 +1138,7 @@
                             <outlet property="delegate" destination="71r-k4-iOF" id="2U0-zd-Vzn"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <connections>
                         <outlet property="debugLogsSwitch" destination="BZ8-9j-arQ" id="n2t-W8-cfy"/>
                         <outlet property="lastSeparator" destination="8OZ-ef-mbG" id="3pL-P2-ZfY"/>
@@ -1218,7 +1220,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ft5-pR-8we" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1590" y="-715"/>
+            <point key="canvasLocation" x="2630" y="-657"/>
         </scene>
         <!--Low Level Settings Controller-->
         <scene sceneID="w7o-KK-pPn">
@@ -3284,6 +3286,28 @@
             </objects>
             <point key="canvasLocation" x="-457.97101449275368" y="1481.9196428571429"/>
         </scene>
+        <!--Content Blockers Table Controller-->
+        <scene sceneID="Oht-8H-rpP">
+            <objects>
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="aym-7d-Ukb" customClass="ContentBlockersTableController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="bjz-lS-bsx">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="separatorColor" systemColor="separatorColor"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <connections>
+                            <outlet property="dataSource" destination="aym-7d-Ukb" id="FU5-WV-z58"/>
+                            <outlet property="delegate" destination="aym-7d-Ukb" id="9rR-zO-dke"/>
+                        </connections>
+                    </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                    <navigationItem key="navigationItem" id="tDP-9f-q6G"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vqH-de-L7c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1590" y="-637"/>
+        </scene>
     </scenes>
     <resources>
         <image name="arrow_right" width="24" height="24"/>
@@ -3291,6 +3315,9 @@
         <image name="bulletnone" width="24" height="24"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="separatorColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

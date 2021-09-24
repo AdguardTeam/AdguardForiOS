@@ -118,10 +118,13 @@ final public class ContentBlockerService: ContentBlockerServiceProtocol {
     
     // Reloads safari content blocker. If fails for the first reload than tries to reload it once more
     private func reloadContentBlocker(for cbType: ContentBlockerType, firstTry: Bool = true, _ onContentBlockerReloaded: @escaping (_ error: Error?) -> Void) {
+        NotificationCenter.default.standaloneContentBlockerUpdateStarted(cbType)
         let cbBundleId = cbType.contentBlockerBundleId(appBundleId)
         
         // Try to reload content blocker
         contentBlockersManager.reloadContentBlocker(withId: cbBundleId) { [weak self] error in
+            defer { NotificationCenter.default.standaloneContentBlockerUpdateFinished(cbType) }
+            
             guard let self = self else {
                 Logger.logError("(ContentBlockerService) - reloadContentBlocker; сontentBlockersManager.reloadContentBlocker self is missing!")
                 onContentBlockerReloaded(CommonError.missingSelf)
@@ -161,9 +164,18 @@ extension ContentBlockerType {
 
 // MARK: - NotificationCenter + Content blockers reload events
 
+fileprivate extension ContentBlockerType {
+    // String constant for user info
+    static let contentBlockerType = "contentBlockerType"
+}
+
 fileprivate extension NSNotification.Name {
     static var contentBlockersUpdateStarted: NSNotification.Name { .init(rawValue: "AdGuardSDK.contentBlockersUpdateStarted") }
     static var contentBlockersUpdateFinished: NSNotification.Name { .init(rawValue: "AdGuardSDK.contentBlockersUpdateFinished") }
+    
+    // Notifications for every Content Blocker
+    static var standaloneContentBlockerUpdateStarted: NSNotification.Name { .init(rawValue: "AdGuardSDK.standaloneContentBlockerUpdateStarted") }
+    static var standaloneContentBlockerUpdateFinished: NSNotification.Name { .init(rawValue: "AdGuardSDK.standaloneContentBlockerUpdateStarted") }
 }
 
 fileprivate extension NotificationCenter {
@@ -173,6 +185,16 @@ fileprivate extension NotificationCenter {
     
     func contentBlockersUpdateFinished() {
         self.post(name: .contentBlockersUpdateFinished, object: self, userInfo: nil)
+    }
+    
+    func standaloneContentBlockerUpdateStarted(_ cbType: ContentBlockerType) {
+        let userInfo = [ContentBlockerType.contentBlockerType: cbType]
+        self.post(name: .standaloneContentBlockerUpdateStarted, object: nil, userInfo: userInfo)
+    }
+    
+    func standaloneContentBlockerUpdateFinished(_ cbType: ContentBlockerType) {
+        let userInfo = [ContentBlockerType.contentBlockerType: cbType]
+        self.post(name: .standaloneContentBlockerUpdateFinished, object: nil, userInfo: userInfo)
     }
 }
 
@@ -186,6 +208,22 @@ public extension NotificationCenter {
     func contentBlockersUpdateFinished(queue: OperationQueue? = .main, handler: @escaping () -> Void) -> NotificationToken {
         return self.observe(name: .contentBlockersUpdateFinished, object: nil, queue: queue) { _ in
             handler()
+        }
+    }
+    
+    func standaloneContentBlockerUpdateStarted(queue: OperationQueue? = .main, handler: @escaping (_ cbType: ContentBlockerType) -> Void) -> NotificationToken {
+        return self.observe(name: .standaloneContentBlockerUpdateStarted, object: nil, queue: queue) { note in
+            let userInfo = note.userInfo!
+            let cbType = userInfo[ContentBlockerType.contentBlockerType] as! ContentBlockerType
+            handler(cbType)
+        }
+    }
+    
+    func standaloneContentBlockerUpdateFinished(queue: OperationQueue? = .main, handler: @escaping (_ cbType: ContentBlockerType) -> Void) -> NotificationToken {
+        return self.observe(name: .standaloneContentBlockerUpdateStarted, object: nil, queue: queue) { note in
+            let userInfo = note.userInfo!
+            let cbType = userInfo[ContentBlockerType.contentBlockerType] as! ContentBlockerType
+            handler(cbType)
         }
     }
 }
