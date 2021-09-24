@@ -36,15 +36,28 @@ final class ContentBlockersTableModel {
     /* Services */
     private let safariProtection: SafariProtectionProtocol
     
+    /* Observers */
+    private var filtersConvertionStartObserver: SafariAdGuardSDK.NotificationToken?
+    private var filtersConvertionEndObserver: SafariAdGuardSDK.NotificationToken?
+    private var standaloneContentBlockerReloadStartObserver: SafariAdGuardSDK.NotificationToken?
+    private var standaloneContentBlockerReloadEndObserver: SafariAdGuardSDK.NotificationToken?
+    
     init(safariProtection: SafariProtectionProtocol) {
         self.safariProtection = safariProtection
         self.cbModels = getCbModels()
+        addObservers()
     }
     
     private func getCbModels() -> [ContentBlockerTableViewCellModel] {
+        // Enabled filters names for all Content Blockers
         let enabledFiltersByCB = getEnabledFiltersByCb()
+        
+        // Converter lib results
         let converterResults = safariProtection.allConverterResults
+        
+        // State of each Content Blocker enabled/disabled
         let cbStates = safariProtection.allContentBlockersStates
+        
         return converterResults.map {
             let cbType = $0.result.type
             return ContentBlockerTableViewCellModel(
@@ -57,6 +70,7 @@ final class ContentBlockersTableModel {
         }
     }
     
+    /// Returns enabled filters names for all Content Blockers
     private func getEnabledFiltersByCb() -> [ContentBlockerType: [String]] {
         var enabledFiltersByCB: [ContentBlockerType: [String]] = [:]
         ContentBlockerType.allCases.forEach { enabledFiltersByCB[$0] = [] }
@@ -72,5 +86,23 @@ final class ContentBlockersTableModel {
             enabledFiltersByCB[cbType] = enabledFiltersNames
         }
         return enabledFiltersByCB
+    }
+    
+    private func addObservers() {
+        filtersConvertionStartObserver = NotificationCenter.default.filtersConvertionStarted {
+            print("🔥 START FILTERS CONVERTION")
+        }
+        
+        filtersConvertionEndObserver = NotificationCenter.default.filtersConvertionFinished {
+            print("🔥 END FILTERS CONVERTION")
+        }
+        
+        standaloneContentBlockerReloadStartObserver = NotificationCenter.default.standaloneContentBlockerUpdateStarted { cbType in
+            print("🔥 START RELOADING \(cbType)")
+        }
+        
+        standaloneContentBlockerReloadEndObserver = NotificationCenter.default.standaloneContentBlockerUpdateFinished { cbType in
+            print("🔥 END RELOADING \(cbType)")
+        }
     }
 }

@@ -72,7 +72,7 @@ struct ContentBlockerTableViewCellModel {
             self.filtersString = nil
         } else {
             let filtersString = String.localizedString("content_blocker_filters")
-            self.filtersString = filtersString + cbFilterNames.joined(separator: "\n")
+            self.filtersString = filtersString + "\n" + cbFilterNames.joined(separator: "\n")
         }
     }
     

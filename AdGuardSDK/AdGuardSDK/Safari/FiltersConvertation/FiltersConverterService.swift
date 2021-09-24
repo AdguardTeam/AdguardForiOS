@@ -55,6 +55,9 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
     // MARK: - Internal methods
     
     func convertFiltersAndUserRulesToJsons() -> [FiltersConverterResult] {
+        NotificationCenter.default.filtersConvertionStarted()
+        defer { NotificationCenter.default.filtersConvertionFinished() }
+        
         // Run converter with empty data if Safari protection is disabled
         guard configuration.safariProtectionEnabled else {
             return filtersConverter.convert(filters: [], blocklistRules: nil, allowlistRules: nil, invertedAllowlistRules: nil)
@@ -124,6 +127,37 @@ public extension SafariGroup.GroupType {
         case .other: return .other
         case .languageSpecific: return .general
         case .custom: return .custom
+        }
+    }
+}
+
+// MARK: - NotificationCenter + Filters convertion notifications
+
+fileprivate extension NSNotification.Name {
+    static var filtersConvertionStarted: NSNotification.Name { .init(rawValue: "AdGuardSDK.filtersConvertionStarted") }
+    static var filtersConvertionFinished: NSNotification.Name { .init(rawValue: "AdGuardSDK.filtersConvertionFinished") }
+}
+
+fileprivate extension NotificationCenter {
+    func filtersConvertionStarted() {
+        self.post(name: .filtersConvertionStarted, object: self, userInfo: nil)
+    }
+    
+    func filtersConvertionFinished() {
+        self.post(name: .filtersConvertionFinished, object: self, userInfo: nil)
+    }
+}
+
+public extension NotificationCenter {
+    func filtersConvertionStarted(queue: OperationQueue? = .main, handler: @escaping () -> Void) -> NotificationToken {
+        return self.observe(name: .filtersConvertionStarted, object: nil, queue: queue) { _ in
+            handler()
+        }
+    }
+    
+    func filtersConvertionFinished(queue: OperationQueue? = .main, handler: @escaping () -> Void) -> NotificationToken {
+        return self.observe(name: .filtersConvertionFinished, object: nil, queue: queue) { _ in
+            handler()
         }
     }
 }

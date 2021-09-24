@@ -118,16 +118,19 @@ final public class ContentBlockerService: ContentBlockerServiceProtocol {
     
     // Reloads safari content blocker. If fails for the first reload than tries to reload it once more
     private func reloadContentBlocker(for cbType: ContentBlockerType, firstTry: Bool = true, _ onContentBlockerReloaded: @escaping (_ error: Error?) -> Void) {
-        NotificationCenter.default.standaloneContentBlockerUpdateStarted(cbType)
+        // Notify CB started to reload
+        if firstTry {
+            NotificationCenter.default.standaloneContentBlockerUpdateStarted(cbType)
+        }
+        
         let cbBundleId = cbType.contentBlockerBundleId(appBundleId)
         
         // Try to reload content blocker
         contentBlockersManager.reloadContentBlocker(withId: cbBundleId) { [weak self] error in
-            defer { NotificationCenter.default.standaloneContentBlockerUpdateFinished(cbType) }
-            
             guard let self = self else {
                 Logger.logError("(ContentBlockerService) - reloadContentBlocker; сontentBlockersManager.reloadContentBlocker self is missing!")
                 onContentBlockerReloaded(CommonError.missingSelf)
+                NotificationCenter.default.standaloneContentBlockerUpdateFinished(cbType)
                 return
             }
             
@@ -135,12 +138,15 @@ final public class ContentBlockerService: ContentBlockerServiceProtocol {
                 Logger.logError("(ContentBlockerService) - reloadContentBlocker; Error reloadind content blocker; Error: \(userInfo)")
                 // Sometimes Safari fails to register a content blocker because of inner race conditions, so we try to reload it second time
                 if firstTry {
+                    // Do not notify when CB finished to reload if it was first try and there will be second relaod
                     self.reloadContentBlocker(for: cbType, firstTry: false, onContentBlockerReloaded)
                 } else {
+                    NotificationCenter.default.standaloneContentBlockerUpdateFinished(cbType)
                     onContentBlockerReloaded(error)
                 }
             }
             else {
+                NotificationCenter.default.standaloneContentBlockerUpdateFinished(cbType)
                 onContentBlockerReloaded(nil)
             }
         }
@@ -175,7 +181,7 @@ fileprivate extension NSNotification.Name {
     
     // Notifications for every Content Blocker
     static var standaloneContentBlockerUpdateStarted: NSNotification.Name { .init(rawValue: "AdGuardSDK.standaloneContentBlockerUpdateStarted") }
-    static var standaloneContentBlockerUpdateFinished: NSNotification.Name { .init(rawValue: "AdGuardSDK.standaloneContentBlockerUpdateStarted") }
+    static var standaloneContentBlockerUpdateFinished: NSNotification.Name { .init(rawValue: "AdGuardSDK.standaloneContentBlockerUpdateFinished") }
 }
 
 fileprivate extension NotificationCenter {
