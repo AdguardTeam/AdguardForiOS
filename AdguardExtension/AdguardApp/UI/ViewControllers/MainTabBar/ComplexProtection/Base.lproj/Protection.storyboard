@@ -632,7 +632,7 @@
         <!--Advanced You Tube Blocking Controller-->
         <scene sceneID="zT9-s4-4gV">
             <objects>
-                <viewController id="kUB-Vc-kDM" customClass="AdvancedYouTubeBlockingController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" id="kUB-Vc-kDM" customClass="AdvancedYouTubeBlockingController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZNN-4X-abc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -749,6 +749,7 @@
                             <constraint firstAttribute="trailing" secondItem="W0f-Zc-b7O" secondAttribute="trailing" id="yI3-tU-Hhc"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" id="UCn-ql-VKD"/>
                     <connections>
                         <outlet property="blockYouTubeView" destination="evM-3E-PdJ" id="MLO-Un-x2S"/>
@@ -766,7 +767,7 @@
         <!--Advanced Protection Controller-->
         <scene sceneID="x4n-9i-O6M">
             <objects>
-                <viewController storyboardIdentifier="AdvancedProtectionController" id="MRv-Uu-M4m" customClass="AdvancedProtectionController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AdvancedProtectionController" extendedLayoutIncludesOpaqueBars="YES" id="MRv-Uu-M4m" customClass="AdvancedProtectionController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pdV-uu-C05">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -866,9 +867,6 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WNs-Mf-o2E" customClass="OnboardingAdvancedProtectionView" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="17" y="214.5" width="365" height="122"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="122" id="xK2-j0-hfh"/>
-                                                </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Works even on websites that detect and circumvent regular ad blocking" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rm0-Ip-riS" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="54" y="423" width="344" height="38.5"/>
@@ -1008,8 +1006,8 @@
                                 <constraints>
                                     <constraint firstItem="cIW-ej-Mu3" firstAttribute="top" secondItem="HRj-Lj-WWg" secondAttribute="top" id="DC1-H9-68o"/>
                                     <constraint firstItem="cIW-ej-Mu3" firstAttribute="trailing" secondItem="HRj-Lj-WWg" secondAttribute="trailing" id="ILX-VY-XQs"/>
+                                    <constraint firstItem="cIW-ej-Mu3" firstAttribute="bottom" secondItem="HRj-Lj-WWg" secondAttribute="bottom" id="M5E-SH-mtk"/>
                                     <constraint firstItem="cIW-ej-Mu3" firstAttribute="leading" secondItem="HRj-Lj-WWg" secondAttribute="leading" id="oVM-DK-W9A"/>
-                                    <constraint firstItem="cIW-ej-Mu3" firstAttribute="bottom" secondItem="HRj-Lj-WWg" secondAttribute="bottom" id="oXu-Bo-7zd"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="HRj-Lj-WWg"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="h9Y-1J-Xxk"/>
@@ -1018,7 +1016,7 @@
                         <viewLayoutGuide key="safeArea" id="YP6-Fs-z3O"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="cIW-ej-Mu3" firstAttribute="height" secondItem="pdV-uu-C05" secondAttribute="height" priority="250" id="Amc-xM-RsT"/>
+                            <constraint firstItem="cIW-ej-Mu3" firstAttribute="height" secondItem="YP6-Fs-z3O" secondAttribute="height" priority="250" id="8Ol-An-ktJ"/>
                             <constraint firstItem="cIW-ej-Mu3" firstAttribute="width" secondItem="pdV-uu-C05" secondAttribute="width" id="FTd-gv-fG1"/>
                             <constraint firstItem="dHt-xX-w9c" firstAttribute="leading" secondItem="YP6-Fs-z3O" secondAttribute="leading" id="Tel-ey-kMW"/>
                             <constraint firstItem="dHt-xX-w9c" firstAttribute="top" secondItem="YP6-Fs-z3O" secondAttribute="top" id="X81-1E-CXL"/>
@@ -1026,6 +1024,7 @@
                             <constraint firstItem="dHt-xX-w9c" firstAttribute="bottom" secondItem="YP6-Fs-z3O" secondAttribute="bottom" id="jGu-KB-yNe"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" id="bsk-cy-Q82"/>
                     <connections>
                         <outlet property="advancedProtectionView" destination="WNs-Mf-o2E" id="KcM-hd-dp3"/>

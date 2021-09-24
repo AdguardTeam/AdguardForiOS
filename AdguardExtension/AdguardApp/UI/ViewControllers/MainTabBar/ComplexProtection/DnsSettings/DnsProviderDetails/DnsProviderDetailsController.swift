@@ -146,11 +146,11 @@ final class DnsProviderDetailsController : UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return providerDetailSections[section] == .headerSection ? 0.0 : 0.01
+        return 0.01
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return providerDetailSections[section] == .headerSection ? 0.0 : 0.01
+        return 0.01
     }
     
     // MARK: - Actions
