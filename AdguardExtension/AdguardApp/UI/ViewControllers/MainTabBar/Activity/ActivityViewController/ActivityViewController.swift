@@ -17,7 +17,7 @@
 */
 
 import UIKit
-import enum DnsAdGuardSDK.StatisticsPeriod
+import DnsAdGuardSDK
 
 protocol ActivityViewControllerDelegate: AnyObject {
     func hideTitle()
@@ -99,7 +99,8 @@ class ActivityViewController: UITableViewController {
     // MARK: - ViewController life cycle
     
     required init?(coder: NSCoder) {
-        activityModel = ActivityStatisticsModel(dnsTrackersService: dnsTrackersService, domainsParserService: domainsParserService)
+        let activityStatistics: ActivityStatisticsProtocol = ServiceLocator.shared.getService()!
+        activityModel = ActivityStatisticsModel(dnsTrackersService: dnsTrackersService, domainsParserService: domainsParserService, activityStatistics: activityStatistics)
         super.init(coder: coder)
     }
     
@@ -107,8 +108,7 @@ class ActivityViewController: UITableViewController {
         super.viewDidLoad()
         
         requestsModel?.delegate = self
-//        statisticsModel.chartPointsChangedDelegates.append(self) //TODO: Fix it
-        
+
         activityImage.tintColor = UIColor.AdGuardColor.lightGreen1
         updateTheme()
         setupTableView()
@@ -124,6 +124,7 @@ class ActivityViewController: UITableViewController {
             nav.currentSwipeRecognizer?.delegate = self
         }
         
+        updateTextForButtons()
         tableView.reloadData()
     }
     
@@ -518,15 +519,15 @@ extension ActivityViewController: DnsRequestsDelegateProtocol {
 
 extension ActivityViewController: DateTypeChangedProtocol {
     func statisticsPeriodChanged(statisticsPeriod: StatisticsPeriod) {
-//        resources.activityStatisticsType = dateType TODO: Save activity statistics period
+        activityModel.period = statisticsPeriod
         changePeriodTypeButton.setTitle(statisticsPeriod.dateTypeString, for: .normal)
-//        statisticsModel.chartDateTypeActivity = dateType TODO: Change type
-        
+
+        // TODO: update companies counter
 //        activityModel.getCompanies(for: dateType) {[weak self] (info) in
 //            self?.processCompaniesInfo(info)
 //        }
-//        requestsModel?.obtainRecords(for: dateType)
-  
+        
+        updateTextForButtons()
     }
     
     private func processCompaniesInfo(_ companiesInfo: CompaniesInfo) {
@@ -558,31 +559,23 @@ extension ActivityViewController: DateTypeChangedProtocol {
 
 // MARK: - NumberOfRequestsChangedDelegate
 
-// TODO: Add model delegate
-//extension ActivityViewController: NumberOfRequestsChangedDelegate {
-//    func numberOfRequestsChanged(requestsCount: Int, encryptedCount: Int, averageElapsed: Double) {
-//        updateTextForButtons(requestsCount: requestsCount, encryptedCount: encryptedCount, averageElapsed: averageElapsed)
-//    }
-//
-//    /**
-//    Changes number of requests for all buttons
-//    */
-//    private func updateTextForButtons(requestsCount: Int, encryptedCount: Int, averageElapsed: Double){
-//        DispatchQueue.main.async {[weak self] in
-//            guard let self = self else { return }
-//
-//            let requestsNumberDefaults = self.resources.tempRequestsCount
-//            let requestsNumber = requestsCount + requestsNumberDefaults
-//
-//            let ecnryptedNumberDefaults = self.resources.tempEncryptedRequestsCount
-//            let ecnryptedNumber = encryptedCount + ecnryptedNumberDefaults
-//
-//            self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsNumber))
-//            self.encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: ecnryptedNumber))
-//            self.dataSavedLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: averageElapsed))
-//        }
-//    }
-//}
+extension ActivityViewController {
+    
+    /**
+    Changes number of requests for all buttons
+    */
+    private func updateTextForButtons(){
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else { return }
+            
+            let counters = self.activityModel.counters
+            
+            self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(value: counters.requests))
+            self.encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(value: counters.encrypted))
+            self.dataSavedLabel.text = String.simpleSecondsFormatter(NSNumber(value: counters.averageElapsed))
+        }
+    }
+}
 
 extension ActivityViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
