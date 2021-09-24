@@ -149,14 +149,16 @@ export class NativeHost implements NativeHostInterface {
         await this.openNativeLink(linkWithDomain);
     }
 
-    // FIXME shouldn't here to be provided url?
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    async reportProblem(url?: string) {
+    /**
+     * Opens tab with report problem link
+     * reportProblemLink already contains url to the website
+     */
+    async reportProblem() {
         if (!this.links?.reportProblemLink) {
             return;
         }
 
-        await this.openNativeLink(this.links.reportProblemLink);
+        await browser.tabs.create({ url: this.links.reportProblemLink });
     }
 
     async upgradeMe() {
