@@ -72,7 +72,7 @@ final class OnboardingAdvancedProtectionView: UIView {
         
         attributedLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         attributedLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        attributedLabel.bottomAnchor.constraint(lessThanOrEqualTo: self.bottomAnchor).isActive = true
+        attributedLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
     
     private func processAttributes(with string: String) {
