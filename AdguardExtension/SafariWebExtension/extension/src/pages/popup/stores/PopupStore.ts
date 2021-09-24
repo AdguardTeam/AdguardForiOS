@@ -11,8 +11,7 @@ import {
 
 import { getDomain } from '../../common/utils/url';
 import { messenger } from '../../common/messenger';
-import { toDataUrl } from '../image-utils';
-import { log } from '../../common/log';
+import { getFaviconDataUrl } from '../image-utils';
 import { AppearanceTheme } from '../../common/constants';
 import { SiteStatus } from '../constants';
 
@@ -78,7 +77,7 @@ export class PopupStore {
 
         const [popupData, currentSiteFaviconDataUrl] = await Promise.all([
             messenger.getPopupData(currentTab.url),
-            this.getFaviconDataUrl(currentTab.url),
+            getFaviconDataUrl(currentTab.url),
         ]);
 
         runInAction(() => {
@@ -97,44 +96,6 @@ export class PopupStore {
             this.appearanceTheme = popupData.appearanceTheme;
             this.advancedBlockingEnabled = popupData.advancedBlockingEnabled;
         });
-    };
-
-    getFaviconDataUrl = async (url?: string): Promise<string | null> => {
-        if (!url) {
-            return null;
-        }
-
-        const domain = getDomain(url);
-
-        if (!domain) {
-            return null;
-        }
-
-        const ADGUARD_FAVICON_SERVICE_URL = 'https://icons.adguard.org/icon?domain=';
-        const favIconUrl = `${ADGUARD_FAVICON_SERVICE_URL}${domain}`;
-
-        const TIMEOUT_MS = 1000;
-        const timeoutPromise = new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(null);
-            }, TIMEOUT_MS);
-        });
-
-        // eslint-disable-next-line @typescript-eslint/no-shadow
-        const toDataUrlPromise = async (favIconUrl: string): Promise<string | null> => {
-            try {
-                const result = await toDataUrl(favIconUrl);
-                return result;
-            } catch (e) {
-                log.error('Unable to get favicon data url', e);
-                return null;
-            }
-        };
-
-        return (await Promise.race([
-            timeoutPromise,
-            toDataUrlPromise(favIconUrl),
-        ])) as Promise<string | null>;
     };
 
     @action
