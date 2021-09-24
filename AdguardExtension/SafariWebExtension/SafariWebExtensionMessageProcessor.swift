@@ -54,7 +54,7 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
         let themeName = resources.themeMode.messageName
         
         // Safari Content Blockers states
-        let allContentBlockersEnabled = cbService.allContentBlockersStates.values.reduce(true, { $0 && $1 })
+        let someContentBlockersEnabled = cbService.allContentBlockersStates.values.reduce(false, { $0 || $1 })
         
         // User Pro status
         let isPro = Bundle.main.isPro ? true : resources.isProPurchased
@@ -65,7 +65,7 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
         
         return [
             Message.appearanceTheme: themeName,
-            Message.contentBlockersEnabled: allContentBlockersEnabled,
+            Message.contentBlockersEnabled: someContentBlockersEnabled,
             Message.hasUserRules: hasUserRules,
             Message.premiumApp: isPro,
             Message.protectionEnabled: isSafariProtectionEnabled(for: domain, resources: resources),
@@ -121,13 +121,13 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
         return isAllowlistInverted ? isDomainInRules : !isDomainInRules
     }
     
-    private func constructReportLink(_ domain: String) -> String {
+    private func constructReportLink(_ url: String) -> String {
         let url = "https://reports.adguard.com/new_issue.html"
         let params: [String: String] = [
             "product_type": "iOS",
             "product_version": ADProductInfo().version() ?? "0",
             "browser": "Safari",
-            "url": domain
+            "url": url
         ]
         let paramsString = params.constructLink(url: url)
         return paramsString ?? ""

@@ -18,6 +18,8 @@
 
 import Foundation
 
+/// This object is responsible for obtaining parameters from app scheme links
+/// And performing an action considering these parameters
 struct SafariWebExtensionParametersParser: IURLSchemeParametersParser {
     private let executor: IURLSchemeExecutor
     

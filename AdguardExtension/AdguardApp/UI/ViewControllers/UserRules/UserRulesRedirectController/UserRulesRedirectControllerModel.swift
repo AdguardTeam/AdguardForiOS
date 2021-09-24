@@ -20,7 +20,6 @@ import SafariAdGuardSDK
 import UIKit
 
 protocol UserRulesRedirectControllerModelProtocol: AnyObject {
-    var action: UserRulesRedirectAction { get set }
     var state: UserRulesRedirectController.State { get set }
     
     var title: String { get }
@@ -32,17 +31,19 @@ protocol UserRulesRedirectControllerModelProtocol: AnyObject {
 
 final class UserRulesRedirectControllerModel: UserRulesRedirectControllerModelProtocol {
     
-    var action: UserRulesRedirectAction = .disableSiteProtection(domain: "domain.com")
     var state: UserRulesRedirectController.State = .processing
     
     var title: String { state.title }
     var description: String { state.getDescription(resources.invertedWhitelist) }
     var icon: UIImage? { action.getIcon(resources.invertedWhitelist) }
     
+    private let action: UserRulesRedirectAction
+    
     private let safariProtection: SafariProtectionProtocol
     private let resources: AESharedResourcesProtocol
     
-    init(safariProtection: SafariProtectionProtocol, resources: AESharedResourcesProtocol) {
+    init(action: UserRulesRedirectAction, safariProtection: SafariProtectionProtocol, resources: AESharedResourcesProtocol) {
+        self.action = action
         self.safariProtection = safariProtection
         self.resources = resources
     }

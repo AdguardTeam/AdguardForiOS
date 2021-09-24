@@ -21,7 +21,7 @@ import SafariAdGuardSDK
 
 final class UserRulesRedirectController: BottomAlertController {
 
-    var action: UserRulesRedirectAction = .disableSiteProtection(domain: "domain.com")
+    var action: UserRulesRedirectAction!
     var state: State = .processing {
         didSet {
             model.state = state
@@ -50,8 +50,7 @@ final class UserRulesRedirectController: BottomAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
         labelButton.isEnabled = false
-        model = UserRulesRedirectControllerModel(safariProtection: safariProtection, resources: resources)
-        model.action = action
+        model = UserRulesRedirectControllerModel(action: action, safariProtection: safariProtection, resources: resources)
         
         imageView.isHidden = true
         imageView.image = model.icon
@@ -73,11 +72,13 @@ final class UserRulesRedirectController: BottomAlertController {
     }
     
     @IBAction func labelTapped(_ sender: UIButton) {
-        switch model.action {
+        switch action {
         case .enableSiteProtection(domain: _), .disableSiteProtection(domain: _):
             AppDelegate.shared.presentUserRulesTableController(for: resources.invertedWhitelist ? .invertedAllowlist : .allowlist)
         case .addToBlocklist(domain: _), .removeAllBlocklistRules(domain: _):
             AppDelegate.shared.presentUserRulesTableController(for: .blocklist)
+        case .none:
+            break
         }
         dismiss(animated: true)
     }
