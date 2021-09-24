@@ -50,10 +50,10 @@ final class ChartViewModel: ChartViewModelProtocol {
     var statisticsInfo: CountersStatisticsRecord {
         do {
             let record = try activityStatistics.getCounters(for: statisticsPeriod)
-            return record ?? CountersStatisticsRecord(requests: 0, encrypted: 0, blocked: 0, elapsedSumm: 0)
+            return record
         } catch {
             DDLogError("(ChartViewModel) statisticsInfo; getCounters return error: \(error)")
-            return CountersStatisticsRecord(requests: 0, encrypted: 0, blocked: 0, elapsedSumm: 0)
+            return CountersStatisticsRecord.emptyRecord()
         }
     }
     

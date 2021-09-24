@@ -55,16 +55,16 @@ class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
     
     private let workingQueue = DispatchQueue(label: "ActivityStatisticsModel queue", qos: .userInitiated)
     
+    var period: StatisticsPeriod = .all
+    
+    var counters: CountersStatisticsRecord {
+        return (try? activityStatistics.getCounters(for: period)) ?? CountersStatisticsRecord.emptyRecord()
+    }
+    
     init(dnsTrackersService: DnsTrackerServiceProtocol, domainsParserService: DomainsParserServiceProtocol, activityStatistics: ActivityStatisticsProtocol) {
         self.dnsTrackersService = dnsTrackersService
         self.domainsParserService = domainsParserService
         self.activityStatistics = activityStatistics
-    }
-    
-    var period: StatisticsPeriod = .all
-    
-    var counters: CountersStatisticsRecord {
-        return (try? activityStatistics.getCounters(for: period)) ?? CountersStatisticsRecord(requests: 0, encrypted: 0, blocked: 0, elapsedSumm: 0)
     }
     
     func getCompanies(for type: ChartDateType, _ completion: @escaping (_ info: CompaniesInfo)->()) {

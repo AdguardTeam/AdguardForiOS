@@ -193,7 +193,7 @@ class ActivityStatisticsTest: XCTestCase {
     
     func testGetCountersWithEmptyDb() {
         let countersFromDb = try! statistics.getCounters(for: .all)
-        XCTAssertEqual(countersFromDb, CountersStatisticsRecord(requests: 0, encrypted: 0, blocked: 0, elapsedSumm: 0))
+        XCTAssertEqual(countersFromDb, CountersStatisticsRecord.emptyRecord())
     }
     
     func testGetDomainsWithEmptyDb() {
