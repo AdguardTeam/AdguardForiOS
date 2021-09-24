@@ -122,13 +122,6 @@
 		248448BD259383ED00D52DE0 /* SignInFailureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248448BB259383ED00D52DE0 /* SignInFailureHandler.swift */; };
 		2491F74126F63AF5006CF561 /* DnsProviderDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2491F74026F63AF5006CF561 /* DnsProviderDetailsModel.swift */; };
 		2491F74226F63AF5006CF561 /* DnsProviderDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2491F74026F63AF5006CF561 /* DnsProviderDetailsModel.swift */; };
-		24929E3226FDEDC100A32702 /* DnsSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24929E3126FDEDC100A32702 /* DnsSettingsManager.swift */; };
-		24929E3326FDEDC100A32702 /* DnsSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24929E3126FDEDC100A32702 /* DnsSettingsManager.swift */; };
-		24929E3426FDEDC100A32702 /* DnsSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24929E3126FDEDC100A32702 /* DnsSettingsManager.swift */; };
-		24929E3526FDEDC100A32702 /* DnsSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24929E3126FDEDC100A32702 /* DnsSettingsManager.swift */; };
-		24929E3626FDEDC100A32702 /* DnsSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24929E3126FDEDC100A32702 /* DnsSettingsManager.swift */; };
-		24929E3726FDEDC100A32702 /* DnsSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24929E3126FDEDC100A32702 /* DnsSettingsManager.swift */; };
-		24929E3826FDEDC100A32702 /* DnsSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24929E3126FDEDC100A32702 /* DnsSettingsManager.swift */; };
 		249606CF258B831100C747BA /* SocialSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249606AB258B82AD00C747BA /* SocialSignInButton.swift */; };
 		249606E2258B832100C747BA /* SocialSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249606AB258B82AD00C747BA /* SocialSignInButton.swift */; };
 		249D0B4D26EB868A00E74704 /* SafariAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD352F26C2C8C8001AFB3A /* SafariAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -2744,7 +2737,6 @@
 		247CB64D2600CD480047974C /* SocialNetworkAuthParametersParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialNetworkAuthParametersParser.swift; sourceTree = "<group>"; };
 		248448BB259383ED00D52DE0 /* SignInFailureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInFailureHandler.swift; sourceTree = "<group>"; };
 		2491F74026F63AF5006CF561 /* DnsProviderDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProviderDetailsModel.swift; sourceTree = "<group>"; };
-		24929E3126FDEDC100A32702 /* DnsSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsSettingsManager.swift; sourceTree = "<group>"; };
 		249606AB258B82AD00C747BA /* SocialSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSignInButton.swift; sourceTree = "<group>"; };
 		249EC92026F772F300BEF8F0 /* SelectDnsProtocolController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDnsProtocolController.swift; sourceTree = "<group>"; };
 		24AD872C260A247B0034D402 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
@@ -6335,7 +6327,6 @@
 			isa = PBXGroup;
 			children = (
 				7EC67F90254842B800FEEEE2 /* NativeProvidersService.swift */,
-				24929E3126FDEDC100A32702 /* DnsSettingsManager.swift */,
 			);
 			path = NativeDnsService;
 			sourceTree = "<group>";
@@ -8424,7 +8415,6 @@
 				7E0B226225DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift in Sources */,
 				7E303C1F26F632A900EBACD1 /* DnsFilterCell.swift in Sources */,
 				D0B545CA2435D669002F0AEC /* GetProTableController.swift in Sources */,
-				24929E3526FDEDC100A32702 /* DnsSettingsManager.swift in Sources */,
 				D0D7E61F24445707001801A5 /* MostActiveCompaniesController.swift in Sources */,
 				D0B5458F2435D630002F0AEC /* LoginService.swift in Sources */,
 				D0B545EA2435D6A4002F0AEC /* ChartDateTypeController.swift in Sources */,
@@ -8841,7 +8831,6 @@
 				7EF5C56F26C26D3A001851D6 /* UserNotificationService.swift in Sources */,
 				7E5FC201234F71F0008E383D /* ListOfRulesCells.swift in Sources */,
 				D00E43F12562A484002DDE98 /* ImportSettingsController.swift in Sources */,
-				24929E3226FDEDC100A32702 /* DnsSettingsManager.swift in Sources */,
 				7E4EFB0D26DFE6DE00116762 /* UserRulesModelsProvider.swift in Sources */,
 				7E822C0B2435EDD30015B4D0 /* DomainParser.swift in Sources */,
 				7E74FCB0239F9C96006C0990 /* MainPageModel.swift in Sources */,
@@ -9168,7 +9157,6 @@
 				7E8576662435F1F70055F63D /* BasicRulesParser.swift in Sources */,
 				D09E2D32255D6AFF002D6BC0 /* SettingsParser.swift in Sources */,
 				246388B026EA4E48004FBA9E /* Configuration+SDKConfig.swift in Sources */,
-				24929E3826FDEDC100A32702 /* DnsSettingsManager.swift in Sources */,
 				D0C37ECF22A687B30004337D /* DnsProvidersService.swift in Sources */,
 				D04C2B78240FA462009330A8 /* UIApplication+OpenAdguardUrl.swift in Sources */,
 				D081FC3724190CA8000A10DA /* DnsProvidersServiceTest.swift in Sources */,
@@ -9401,7 +9389,6 @@
 			files = (
 				7E80BF5824E18381002C6CDB /* DnsProvidersService.swift in Sources */,
 				7ECD9C44238D65960065E88D /* DDLog.m in Sources */,
-				24929E3326FDEDC100A32702 /* DnsSettingsManager.swift in Sources */,
 				D0450F81263C2A1400CA2110 /* NSString+Utils.m in Sources */,
 				7EC635B3239EB177003A5CE4 /* Date+Utils.swift in Sources */,
 				24055F6426E8FBBD00E6E47E /* SharedStorageUrls.swift in Sources */,
@@ -9546,7 +9533,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24929E3426FDEDC100A32702 /* DnsSettingsManager.swift in Sources */,
 				D08A21A626FC541900267930 /* DispatchQueue+Utils.swift in Sources */,
 				7EAD354026C2D5F9001AFB3A /* LocalizedDnsProviders.swift in Sources */,
 				D0569D3621F1C0A800985DA9 /* ACNHttpUtils.m in Sources */,
@@ -10219,7 +10205,6 @@
 				D0B543FE2435C6B8002F0AEC /* Reachability.m in Sources */,
 				D0B543FF2435C6B8002F0AEC /* ADProductInfo.m in Sources */,
 				D0B544022435C6B8002F0AEC /* APCommonSharedResources.m in Sources */,
-				24929E3626FDEDC100A32702 /* DnsSettingsManager.swift in Sources */,
 				D0D7E5FF24444F95001801A5 /* DnsStatisticsRecord.swift in Sources */,
 				D0D7E5FD24444F89001801A5 /* Constant.swift in Sources */,
 				D07256E826BD556A00654177 /* ContentBlockerRequestHandler.swift in Sources */,
@@ -10380,7 +10365,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24929E3726FDEDC100A32702 /* DnsSettingsManager.swift in Sources */,
 				D08A21A726FC541A00267930 /* DispatchQueue+Utils.swift in Sources */,
 				D06E9BDD268EFA2500E5AB5C /* ACObject.m in Sources */,
 				D0D7E61724445625001801A5 /* ChartDateType.swift in Sources */,
