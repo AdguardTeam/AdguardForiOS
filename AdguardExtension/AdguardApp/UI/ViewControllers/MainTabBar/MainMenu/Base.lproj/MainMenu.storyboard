@@ -606,6 +606,7 @@
                             <outlet property="delegate" destination="bEE-nS-r3u" id="WpS-OU-N0B"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" id="d4x-ny-PdI"/>
                     <connections>
                         <outlet property="LicenseCell" destination="dbl-aZ-sRL" id="c0d-Cl-Lse"/>
@@ -663,7 +664,7 @@
         <!--Support Table View Controller-->
         <scene sceneID="lAH-2R-Hza">
             <objects>
-                <tableViewController storyboardIdentifier="SupportTableViewController" modalPresentationStyle="fullScreen" id="GpD-ZM-hwF" customClass="SupportTableViewController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SupportTableViewController" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="GpD-ZM-hwF" customClass="SupportTableViewController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="V8c-lo-uNd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1266,6 +1267,7 @@
                             <outlet property="delegate" destination="GpD-ZM-hwF" id="ANh-Z9-ZDd"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <connections>
                         <outletCollection property="themableLabels" destination="cOi-GX-KAC" collectionClass="NSMutableArray" id="gGT-Io-tRQ"/>
                         <outletCollection property="themableLabels" destination="yDj-tf-86u" collectionClass="NSMutableArray" id="qbb-qD-o3O"/>
@@ -1312,7 +1314,7 @@
         <!--Bug Report Controller-->
         <scene sceneID="O2t-gj-22N">
             <objects>
-                <viewController storyboardIdentifier="BugReportController" modalPresentationStyle="fullScreen" id="dW7-TV-Sn0" customClass="BugReportController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BugReportController" extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="dW7-TV-Sn0" customClass="BugReportController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e2D-cR-18i">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1545,6 +1547,7 @@
                             <constraint firstAttribute="trailing" secondItem="g06-tX-ung" secondAttribute="trailing" id="oCX-0D-pTj"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <connections>
                         <outlet property="descriptionLabel" destination="pJU-2c-JHy" id="wcj-fd-eBf"/>
                         <outlet property="descriptionTextView" destination="rYd-R5-7TJ" id="iP6-pU-fNn"/>
