@@ -937,7 +937,9 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     
     private func initChartViewModel() {
         let url = SharedStorageUrls()
-        chartModel = ChartViewModel(statisticsPeriod: resources.chartDateType, statisticsDbContainerUrl: url.filtersFolderUrl)
+        let chartStatistics: ChartStatisticsProtocol = ServiceLocator.shared.getService()!
+        let activityStatistics: ActivityStatisticsProtocol = ServiceLocator.shared.getService()!
+        chartModel = ChartViewModel(statisticsPeriod: resources.chartDateType, activityStatistics: activityStatistics, chartStatistics: chartStatistics)
         
         chartModel.delegate = self
         chartModel.startChartStatisticsAutoUpdate(seconds: 5.0)

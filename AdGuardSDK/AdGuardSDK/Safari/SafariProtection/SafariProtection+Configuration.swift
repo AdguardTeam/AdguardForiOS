@@ -27,6 +27,9 @@ public protocol SafariProtectionConfigurationProtocol {
     /* State of the whole Safari protection. If it is false nothing will be filtered */
     var safariProtectionEnabled: Bool { get }
     
+    /* State of advanced protection. If it is true than there will be added extra rules for more precise safari blocking */
+    var advancedProtectionIsEnabled: Bool { get }
+    
     /* State of the list that is responsible for blocking rules. In UI it is called User rules */
     var blocklistIsEnabled: Bool { get }
     
@@ -41,6 +44,9 @@ public protocol SafariProtectionConfigurationProtocol {
     
     /* Updates Safari protection state and reloads content blockers */
     func update(safariProtectionEnabled: Bool, onCbReloaded: ((_ error: Error?) -> Void)?)
+    
+    /* Updates Advanced protection state and reloads content blockers */
+    func update(advancedProtectionEnabled: Bool, onCbReloaded: ((_ error: Error?) -> Void)?)
     
     /* Updates block list state and reloads content blockers */
     func update(blocklistIsEnabled: Bool, onCbReloaded: ((_ error: Error?) -> Void)?)
@@ -63,6 +69,10 @@ extension SafariProtection {
     
     public var safariProtectionEnabled: Bool {
         return workingQueue.sync { return configuration.safariProtectionEnabled }
+    }
+    
+    public var advancedProtectionIsEnabled: Bool {
+        return workingQueue.sync { return configuration.advancedBlockingIsEnabled }
     }
     
     public var blocklistIsEnabled: Bool {
@@ -126,6 +136,33 @@ extension SafariProtection {
                     Logger.logError("(SafariProtection+Configuration) - updateSafariProtection; Error reloading CBs when updating safariProtection; Error: \(error)")
                 } else {
                     Logger.logInfo("(SafariProtection+Configuration) - updateSafariProtection; Successfully reloaded CBs after updating safariProtection")
+                }
+                self.completionQueue.async { onCbReloaded?(error) }
+            }
+        }
+    }
+    
+    public func update(advancedProtectionEnabled: Bool, onCbReloaded: ((Error?) -> Void)?) {
+        workingQueue.sync {
+            Logger.logInfo("(SafariProtection+Configuration) - updateAdvancedProtection; Updating updateAdvancedProtection from=\(self.configuration.advancedBlockingIsEnabled) to=\(advancedProtectionEnabled)")
+            
+            try? executeBlockAndReloadCbs {
+                if configuration.advancedBlockingIsEnabled != advancedProtectionEnabled {
+                    configuration.advancedBlockingIsEnabled = advancedProtectionEnabled
+                } else {
+                    throw CommonError.dataDidNotChange
+                }
+            } onCbReloaded: { [weak self] error in
+                guard let self = self else {
+                    Logger.logError("(SafariProtection+Configuration) - update.advancedProtection.reloadContentBlockers; self is missing!")
+                    DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
+                    return
+                }
+                
+                if let error = error {
+                    Logger.logError("(SafariProtection+Configuration) - updateAdvancedProtection; Error reloading CBs when updating advancedProtection; Error: \(error)")
+                } else {
+                    Logger.logInfo("(SafariProtection+Configuration) - updateAdvancedProtection; Successfully reloaded CBs after updating advancedProtection")
                 }
                 self.completionQueue.async { onCbReloaded?(error) }
             }

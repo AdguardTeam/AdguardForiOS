@@ -1,18 +1,7 @@
 export enum MessagesToNativeApp {
     WriteInNativeLog = 'writeInNativeLog',
-    GetBlockingData = 'getBlockingData',
-    AddToUserRules = 'addToUserRules',
-    IsProtectionEnabled = 'isProtectionEnabled',
-    EnableProtection = 'enableProtection',
-    DisableProtection = 'disableProtection',
-    HasUserRulesBySite = 'hasUserRulesBySite',
-    RemoveUserRulesBySite = 'removeUserRulesBySite',
-    ReportProblem = 'reportProblem',
-    IsPremium = 'isPremium',
-    GetAppearanceTheme = 'getAppearanceTheme',
-    AreContentBlockersEnabled = 'areContentBlockersEnabled',
-    UpgradeMe = 'upgradeMe',
-    GetAdvancedRulesText = 'getAdvancedRulesText',
+    GetAdvancedRulesText = 'get_advanced_rules_text',
+    GetInitData = 'get_init_data',
 }
 
 export enum MessagesToBackgroundPage {
@@ -25,6 +14,7 @@ export enum MessagesToBackgroundPage {
     DeleteUserRulesByUrl = 'delete_user_rules_by_url',
     ReportProblem = 'report_problem',
     UpgradeClicked = 'upgrade_clicked',
+    EnableAdvancedBlocking = 'enable_advanced_blocking',
 }
 
 export enum MessagesToContentScript {

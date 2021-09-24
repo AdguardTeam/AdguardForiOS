@@ -16,31 +16,17 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
+@_implementationOnly import class ContentBlockerConverter.WebExtensionHelpers
 
-class RuleAddedController: BottomAlertController {
-    
-    @IBOutlet weak var titleLable: UILabel!
-    @IBOutlet weak var okButton: UIButton!
-    
-    let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        updateTheme()
-        okButton.makeTitleTextUppercased()
-        okButton.applyStandardGreenStyle()
-    }
-    
-    @IBAction func okAction(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-}
-
-extension RuleAddedController: ThemableProtocol {
-    func updateTheme() {
-        contentView.backgroundColor = theme.popupBackgroundColor
-        titleLable.textColor = theme.popupTitleTextColor
+public extension UserRulesManagerProtocol {
+    /// Returns true if there are some enabled rules in `allRules` blocklist that are associated with passed `domain`
+    func hasUserRules(for domain: String) -> Bool {
+        let helper = WebExtensionHelpers()
+        for rule in allRules {
+            if helper.userRuleIsAssociated(with: domain, rule.ruleText) && rule.isEnabled {
+                return true
+            }
+        }
+        return false
     }
 }

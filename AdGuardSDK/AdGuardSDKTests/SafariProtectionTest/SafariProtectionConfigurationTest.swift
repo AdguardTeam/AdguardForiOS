@@ -47,6 +47,14 @@ class SafariProtectionConfigurationTest: XCTestCase {
         XCTAssertFalse(safariProtection.safariProtectionEnabled)
     }
     
+    func testAdvancedProtectionEnabled() {
+        configuration.advancedBlockingIsEnabled = true
+        XCTAssert(safariProtection.advancedProtectionIsEnabled)
+        
+        configuration.advancedBlockingIsEnabled = false
+        XCTAssertFalse(safariProtection.advancedProtectionIsEnabled)
+    }
+    
     func testBlocklistIsEnabled() {
         configuration.blocklistIsEnabled = true
         XCTAssert(safariProtection.blocklistIsEnabled)
@@ -159,6 +167,62 @@ class SafariProtectionConfigurationTest: XCTestCase {
         
         let sp = safariProtection as! SafariProtection
         XCTAssertEqual(sp.configuration.safariProtectionEnabled, differentValue)
+        XCTAssertEqual(converter.convertFiltersCalledCount, 1)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 1)
+        XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
+    }
+    
+    // MARK: - Test updateAdvancedProtectionEnabled
+    
+    func testUpdateAdvancedProtectionEnabledWithSameValue() {
+        let expectation = XCTestExpectation()
+        let sameValue = configuration.advancedBlockingIsEnabled
+        safariProtection.update(advancedProtectionEnabled: sameValue) { error in
+            if case CommonError.dataDidNotChange = error as! CommonError {}
+            else {
+                XCTFail()
+            }
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.5)
+        
+        let sp = safariProtection as! SafariProtection
+        XCTAssertEqual(sp.configuration.advancedBlockingIsEnabled, sameValue)
+        XCTAssertEqual(converter.convertFiltersCalledCount, 0)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 0)
+        XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
+    }
+    
+    func testUpdateAdvancedProtectionEnabledWithDifferentValue() {
+        let expectation = XCTestExpectation()
+        let differentValue = !configuration.advancedBlockingIsEnabled
+        safariProtection.update(advancedProtectionEnabled: differentValue) { error in
+            XCTAssertNil(error)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.5)
+        
+        let sp = safariProtection as! SafariProtection
+        XCTAssertEqual(sp.configuration.advancedBlockingIsEnabled, differentValue)
+        XCTAssertEqual(converter.convertFiltersCalledCount, 1)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 1)
+        XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
+    }
+    
+    func testUpdateAdvancedProtectionEnabledWithError() {
+        let expectation = XCTestExpectation()
+        let differentValue = !configuration.advancedBlockingIsEnabled
+        
+        cbStorage.stubbedSaveError = MetaStorageMockError.error
+        
+        safariProtection.update(advancedProtectionEnabled: differentValue) { error in
+            XCTAssertEqual(error as! MetaStorageMockError, .error)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.5)
+        
+        let sp = safariProtection as! SafariProtection
+        XCTAssertEqual(sp.configuration.advancedBlockingIsEnabled, differentValue)
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
         XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
@@ -347,7 +411,6 @@ class SafariProtectionConfigurationTest: XCTestCase {
                             appId: "appId",
                             cid: "cid")
         protection.updateConfig(with: newConfig)
-        protection.configuration
         
         XCTAssertEqual(protection.configuration.iosVersion, newConfig.iosVersion)
         XCTAssertEqual(protection.configuration.currentLanguage, newConfig.currentLanguage)

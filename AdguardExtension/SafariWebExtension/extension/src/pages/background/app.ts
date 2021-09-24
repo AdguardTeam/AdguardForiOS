@@ -1,5 +1,5 @@
 /* eslint-disable class-methods-use-this */
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 import { storage } from './storage';
 

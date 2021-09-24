@@ -1,4 +1,4 @@
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 import { MessagesToBackgroundPage } from '../constants';
 import { log } from '../log';
@@ -37,10 +37,10 @@ export class Messenger {
         return this.sendMessage(MessagesToBackgroundPage.SetPermissionsModalViewed);
     };
 
-    setProtectionStatus = (protectionStatus: boolean) => {
+    setProtectionStatus = (protectionStatus: boolean, url: string) => {
         return this.sendMessage(
             MessagesToBackgroundPage.SetProtectionStatus,
-            { enabled: protectionStatus },
+            { enabled: protectionStatus, url },
         );
     };
 
@@ -61,6 +61,12 @@ export class Messenger {
     handleUpgrade = () => {
         return this.sendMessage(
             MessagesToBackgroundPage.UpgradeClicked,
+        );
+    };
+
+    enableAdvancedBlocking = () => {
+        return this.sendMessage(
+            MessagesToBackgroundPage.EnableAdvancedBlocking,
         );
     };
 }

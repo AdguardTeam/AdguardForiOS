@@ -18,26 +18,26 @@
 
 import Foundation
 
-protocol SafariUserRulesManagersProviderProtocol: ResetableSyncProtocol {
+public protocol SafariUserRulesManagersProviderProtocol: ResetableSyncProtocol {
     var blocklistRulesManager: UserRulesManagerProtocol { get }
     var allowlistRulesManager: UserRulesManagerProtocol { get }
     var invertedAllowlistRulesManager: UserRulesManagerProtocol { get }
 }
 
-final class SafariUserRulesManagersProvider: SafariUserRulesManagersProviderProtocol {
-    private(set) lazy var blocklistRulesManager: UserRulesManagerProtocol = {
+final public class SafariUserRulesManagersProvider: SafariUserRulesManagersProviderProtocol {
+    private(set) lazy public var blocklistRulesManager: UserRulesManagerProtocol = {
         let storage = SafariUserRulesStorage(userDefaults: userDefaultsStorage, rulesType: .blocklist)
-        return UserRulesManager(type: .blocklist, storage: storage)
+        return UserRulesManager(type: .blocklist, storage: storage, converter: OpaqueRuleConverter())
     }()
     
-    private(set) lazy var allowlistRulesManager: UserRulesManagerProtocol = {
+    private(set) lazy public var allowlistRulesManager: UserRulesManagerProtocol = {
         let storage = SafariUserRulesStorage(userDefaults: userDefaultsStorage, rulesType: .allowlist)
-        return UserRulesManager(type: .allowlist, storage: storage)
+        return UserRulesManager(type: .allowlist, storage: storage, converter: AllowlistRuleConverter())
     }()
     
-    private(set) lazy var invertedAllowlistRulesManager: UserRulesManagerProtocol = {
+    private(set) lazy public var invertedAllowlistRulesManager: UserRulesManagerProtocol = {
         let storage = SafariUserRulesStorage(userDefaults: userDefaultsStorage, rulesType: .invertedAllowlist)
-        return UserRulesManager(type: .invertedAllowlist, storage: storage)
+        return UserRulesManager(type: .invertedAllowlist, storage: storage, converter: InvertedAllowlistRuleConverter())
     }()
     
     private let userDefaultsStorage: UserDefaultsStorageProtocol
@@ -46,7 +46,11 @@ final class SafariUserRulesManagersProvider: SafariUserRulesManagersProviderProt
         self.userDefaultsStorage = userDefaultsStorage
     }
     
-    func reset() throws {
+    public init(userDefaults: UserDefaults) {
+        self.userDefaultsStorage = UserDefaultsStorage(storage: userDefaults)
+    }
+    
+    public func reset() throws {
         Logger.logInfo("(UserRulesManagersProvider) - reset start")
         
         try blocklistRulesManager.reset()

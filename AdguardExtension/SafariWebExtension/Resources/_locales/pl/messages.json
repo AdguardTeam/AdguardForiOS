@@ -11,70 +11,79 @@
     "popup_action_safari_protection_description": {
         "message": "dla tej witryny"
     },
+    "popup_action_safari_protection_description_disabled": {
+        "message": "wyłączona"
+    },
     "popup_action_current_site_status_desc_enabled": {
-        "message": "ochrona włączona"
+        "message": "ochrona jest WŁĄCZONA"
+    },
+    "popup_action_current_site_status_desc_disabled": {
+        "message": "ochrona wyłączona"
     },
     "popup_action_block_element": {
-        "message": "Zablokuj element na stronie"
+        "message": "Zablokuj elementy na tej stronie"
     },
     "popup_action_delete_user_rules": {
         "message": "Usuń wszystkie reguły użytkownika dla tej strony"
     },
     "popup_action_current_site_desc_starting": {
-        "message": "proszę czekać, uruchamiam ochronę..."
+        "message": "włączanie ochrony"
     },
     "popup_action_current_site_desc_allowlisted": {
-        "message": "strona jest na liście dozwolonych"
+        "message": "dodano do listy dozwolonych"
     },
     "popup_action_current_site_desc_basic_only": {
         "message": "tylko podstawowa ochrona"
     },
     "popup_modal_all_sites_allowed_title": {
-        "message": "Zwiększona wydajność"
+        "message": "Najwyższa ochrona"
     },
     "popup_modal_all_sites_allowed_desc": {
-        "message": "Dobra robota! Teraz AdGuard będzie blokował jeszcze więcej reklam, radząc sobie z najtrudniejszymi wyzwaniami!"
+        "message": "Dobra robota! AdGuard zablokuje niemal każdą reklamę i stawi czoła najtrudniejszym wyzwaniom."
     },
     "popup_modal_all_sites_allowed_button": {
-        "message": "Niech magia się zacznie"
+        "message": "Niech zacznie się magia"
     },
     "popup_modal_not_all_sites_allowed_title": {
-        "message": "Już prawie"
+        "message": "Ochrona selektywna"
     },
     "popup_modal_not_all_sites_allowed_desc": {
-        "message": "Zezwoliłeś AdGuard na działanie tylko na tej stronie, co oznacza, że nie będzie on blokował reklam na innych stronach, chyba że następnym razem wyrazisz na to zgodę."
+        "message": "Włączyłeś AdGuard tylko dla tej witryny. Będziesz nadal widzieć reklamy w innych witrynach, chyba że udzielisz AdGuard dodatkowych uprawnień."
     },
     "popup_modal_not_all_sites_allowed_button": {
-        "message": "Ok"
+        "message": "Kontynuuj"
     },
     "popup_modal_title_free": {
-        "message": "Bardzo dobrze, ale..."
+        "message": "Bądź tym, kim możesz być"
     },
     "popup_modal_desc_free": {
-        "message": "Pamiętaj, że tracisz zaawansowaną ochronę, która nie jest dostępna w bezpłatnej wersji. Pomoże Ci ona uporać się z większą liczbą reklam, w tym z reklamami YouTube w Safari."
+        "message": "Nadal brakuje Ci zaawansowanej ochrony dostępnej w AdGuard Premium. Zablokujmy jeszcze więcej reklam, takich jak reklamy YouTube w Safari?"
     },
     "popup_modal_btn_free": {
         "message": "Ulepsz"
     },
+    "popup_fullscreen_support_title": {
+        "message": "Ojej, czy chcesz zacząć od początku?"
+    },
     "popup_fullscreen_support_desc": {
-        "message": "Jeśli coś jest nie tak, daj nam znać, a my to naprawimy."
+        "message": "Czy coś jest nie tak? Być może mamy rozwiązanie."
     },
     "popup_protection_disabled_support_desc": {
-        "message": "Ojej, wygląda na to, że wyłączyłeś ochronę... Czy coś jest nie tak? Możemy to naprawić!"
+        "message": "Ojej, ochrona tej strony jest WYŁĄCZONA. Czy coś jest nie tak? Być może mamy rozwiązanie."
     },
     "popup_support_button_text": {
         "message": "Zgłoś problem"
     },
     "modal_protection_off_title": {
-        "message": "Aby skorzystać z ochrony:"
+        "message": "Włącz ochronę"
     },
     "modal_protection_off_settings": {
         "message": "Otwórz <b>Ustawienia<\/b>"
     },
     "modal_protection_off_extensions": {
-        "message": "Stuknij w <b>Safari<\/b> i wybierz element menu <b>Rozszerzenia<\/b>"
+        "message": "Stuknij w <b>Safari<\/b>, przesuń palcem w dół i kliknij <b>Blokery treści<\/b>"
     },
     "modal_protection_off_switch": {
-        "message": "<b>Włącz<\/b> wszystkie AdGuard"
+        "message": "<b>Włącz<\/b> wszystkie rozszerzenia AdGuard."
     }
 }

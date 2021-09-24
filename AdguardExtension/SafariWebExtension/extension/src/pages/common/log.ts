@@ -1,17 +1,9 @@
-// TODO switch to a less verbose level later
-const CURRENT_LEVEL = 'DEBUG';
+/* eslint-disable class-methods-use-this,no-console */
 
-declare global {
-    interface Console {
-        [key: string]: ConsoleMethod;
-    }
-}
-
-const LEVELS = {
-    ERROR: 1,
-    INFO: 2,
-    DEBUG: 3,
-} as const;
+/**
+ * Redefine if you need it
+ */
+const CURRENT_LEVEL: Level = 'DEBUG';
 
 type Level = keyof typeof LEVELS;
 
@@ -23,29 +15,78 @@ const CONSOLE_METHODS = {
 
 type ConsoleMethod = typeof CONSOLE_METHODS[keyof typeof CONSOLE_METHODS];
 
-const print = (level: Level, method: ConsoleMethod, args: string[]) => {
-    // check log level
-    if (LEVELS[CURRENT_LEVEL] < LEVELS[level]) {
-        return;
+const LEVELS = {
+    ERROR: 1,
+    INFO: 2,
+    DEBUG: 3,
+} as const;
+
+/**
+ * Simple logger with log levels
+ */
+class Log {
+    /**
+     * Pretty-print javascript error
+     */
+    errorToString(error: Error) {
+        return `${error.toString()}\nStack trace:\n${error.stack}`;
     }
 
-    const now = new Date();
-    const formatted = `${now.toISOString()}:`;
-    // eslint-disable-next-line no-console
-    console[method](formatted, ...args);
-};
+    /**
+     * Formats date to local time string
+     * @param date
+     */
+    getLocalTimeString(date: Date) {
+        const ONE_MINUTE_MS = 60 * 1000;
+        const timeZoneOffsetMs = date.getTimezoneOffset() * ONE_MINUTE_MS;
+        const localTime = new Date(date.getTime() - timeZoneOffsetMs);
+        return localTime.toISOString().replace('Z', '');
+    }
 
-// TODO make possible to log objects or another complicated objects like errors
-export const log = {
+    /**
+     * Prints log message
+     */
+    print(level: Level, method: ConsoleMethod, args: any[]) {
+        // check log level
+        if (LEVELS[CURRENT_LEVEL] < LEVELS[level]) {
+            return;
+        }
+        if (!args || args.length === 0 || !args[0]) {
+            return;
+        }
+
+        let formatted = args.map((arg) => {
+            if (typeof arg !== 'undefined') {
+                let value = arg;
+                if (value instanceof Error) {
+                    value = this.errorToString(value);
+                } else if (value && value.message) {
+                    value = value.message;
+                } else if (typeof value === 'object') {
+                    value = JSON.stringify(value, null, 4);
+                }
+                return value;
+            }
+
+            return arg;
+        }).join(' ');
+
+        formatted = `${this.getLocalTimeString(new Date())}: ${formatted}`;
+
+        console[method](formatted);
+    }
+
     debug(...args: any[]) {
-        print('DEBUG', 'log', args);
-    },
+        this.print('DEBUG', 'log', args);
+    }
 
     info(...args: any[]) {
-        print('INFO', 'info', args);
-    },
+        this.print('INFO', 'info', args);
+    }
 
     error(...args: any[]) {
-        print('ERROR', 'error', args);
-    },
-};
+        this.print('ERROR', 'error', args);
+    }
+}
+
+export const log = new Log();

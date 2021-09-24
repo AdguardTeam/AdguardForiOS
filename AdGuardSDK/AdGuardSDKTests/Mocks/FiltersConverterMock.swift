@@ -7,14 +7,13 @@ final class FiltersConverterMock: FiltersConverterProtocol {
     var passedFilters: [FilterFileContent]?
     var passedBlocklistRules: [String]?
     var passedAllowlistRules: [String]?
-    var passedInvertedAllowlistRulesString: String?
-    
-    func convert(filters: [FilterFileContent], blocklistRules: [String]?, allowlistRules: [String]?, invertedAllowlistRulesString: String?) -> [FiltersConverterResult] {
+    var passedInvertedAllowlistRules: [String]?
+    func convert(filters: [FilterFileContent], blocklistRules: [String]?, allowlistRules: [String]?, invertedAllowlistRules: [String]?) -> [FiltersConverterResult] {
         convertCalledCount += 1
         passedFilters = filters
         passedBlocklistRules = blocklistRules
         passedAllowlistRules = allowlistRules
-        passedInvertedAllowlistRulesString = invertedAllowlistRulesString
+        passedInvertedAllowlistRules = invertedAllowlistRules
         return resultFilters
     }
 }

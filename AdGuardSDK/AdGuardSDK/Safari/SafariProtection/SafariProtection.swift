@@ -17,6 +17,8 @@
  */
 
 import Foundation
+@_implementationOnly import class ContentBlockerConverter.WebExtensionHelpers
+@_implementationOnly import protocol ContentBlockerConverter.WebExtensionHelpersProtocol
 
 public typealias SafariProtectionProtocol = SafariProtectionFiltersProtocol
                                             & SafariProtectionUserRulesProtocol
@@ -46,6 +48,7 @@ public final class SafariProtection: SafariProtectionProtocol {
     let cbStorage: ContentBlockersInfoStorageProtocol
     let cbService: ContentBlockerServiceProtocol
     let safariManagers: SafariUserRulesManagersProviderProtocol
+    let converterHelper: WebExtensionHelpersProtocol
     let dnsBackgroundFetchUpdater: DnsBackgroundFetchUpdateProtocol?
     private let defaultConfiguration: SafariConfigurationProtocol
     
@@ -83,6 +86,7 @@ public final class SafariProtection: SafariProtectionProtocol {
         self.cbStorage = services.cbStorage
         self.cbService = services.cbService
         self.safariManagers = services.safariManagers
+        self.converterHelper = WebExtensionHelpers()
         self.dnsBackgroundFetchUpdater = dnsBackgroundFetchUpdater
     }
     
@@ -95,8 +99,9 @@ public final class SafariProtection: SafariProtectionProtocol {
          cbStorage: ContentBlockersInfoStorageProtocol,
          cbService: ContentBlockerServiceProtocol,
          safariManagers: SafariUserRulesManagersProviderProtocol,
-         dnsBackgroundFetchUpdater: DnsBackgroundFetchUpdateProtocol? = nil)
-    {
+         converterHelper: WebExtensionHelpersProtocol = WebExtensionHelpers(),
+         dnsBackgroundFetchUpdater: DnsBackgroundFetchUpdateProtocol? = nil
+    ) {
         self.configuration = configuration
         self.defaultConfiguration = defaultConfiguration
         self.userDefaults = userDefaults
@@ -105,6 +110,7 @@ public final class SafariProtection: SafariProtectionProtocol {
         self.cbStorage = cbStorage
         self.cbService = cbService
         self.safariManagers = safariManagers
+        self.converterHelper = converterHelper
         self.dnsBackgroundFetchUpdater = dnsBackgroundFetchUpdater
     }
     

@@ -1,4 +1,4 @@
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 export class Storage {
     get = async (key: string): Promise<unknown> => {
