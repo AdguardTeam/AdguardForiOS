@@ -144,5 +144,11 @@ final class StartupService : NSObject{
         
         let importSettings: ImportSettingsServiceProtocol = ImportSettingsService(networking: networkService, dnsProvidersService: dnsProviders, purchaseService: purchaseService, resources: sharedResources, safariProtection: safariProtection)
         locator.addService(service: importSettings)
+        
+        let activityStatistics: ActivityStatisticsProtocol = try! ActivityStatistics(statisticsDbContainerUrl: sharedUrls.statisticsFolderUrl)
+        locator.addService(service: activityStatistics)
+        
+        let chartStatistics: ChartStatisticsProtocol = try! ChartStatistics(statisticsDbContainerUrl: sharedUrls.statisticsFolderUrl)
+        locator.addService(service: chartStatistics)
     }
 }

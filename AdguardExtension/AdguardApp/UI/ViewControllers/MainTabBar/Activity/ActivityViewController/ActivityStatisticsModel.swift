@@ -17,6 +17,7 @@
 */
 
 import Foundation
+import DnsAdGuardSDK
 
 class CompanyRequestsRecord {
     var domains = Set<String>()
@@ -38,7 +39,11 @@ struct CompaniesInfo {
     let companiesNumber: Int
 }
 
-protocol ActivityStatisticsModelProtocol {
+protocol ActivityStatisticsModelProtocol: AnyObject {
+    
+    var period: StatisticsPeriod { get set }
+    var counters: CountersStatisticsRecord { get }
+    
     func getCompanies(for type: ChartDateType, _ completion: @escaping (_ info: CompaniesInfo)->())
 }
 
@@ -46,12 +51,20 @@ class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
     
     private let dnsTrackersService: DnsTrackerServiceProtocol
     private let domainsParserService: DomainsParserServiceProtocol
+    private let activityStatistics: ActivityStatisticsProtocol
     
     private let workingQueue = DispatchQueue(label: "ActivityStatisticsModel queue", qos: .userInitiated)
     
-    init(dnsTrackersService: DnsTrackerServiceProtocol, domainsParserService: DomainsParserServiceProtocol) {
+    init(dnsTrackersService: DnsTrackerServiceProtocol, domainsParserService: DomainsParserServiceProtocol, activityStatistics: ActivityStatisticsProtocol) {
         self.dnsTrackersService = dnsTrackersService
         self.domainsParserService = domainsParserService
+        self.activityStatistics = activityStatistics
+    }
+    
+    var period: StatisticsPeriod = .all
+    
+    var counters: CountersStatisticsRecord {
+        return (try? activityStatistics.getCounters(for: period)) ?? CountersStatisticsRecord(requests: 0, encrypted: 0, blocked: 0, elapsedSumm: 0)
     }
     
     func getCompanies(for type: ChartDateType, _ completion: @escaping (_ info: CompaniesInfo)->()) {

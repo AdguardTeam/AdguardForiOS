@@ -86,9 +86,9 @@ final class DnsProxy: DnsProxyProtocol {
         let agConfig = AGDnsProxyConfig(from: configurtion)
         
         // Processing events config
-        let hanler: DnsRequestProcessedEventHandlerProtocol
+        let handler: DnsRequestProcessedEventHandlerProtocol
         do {
-            hanler = DnsRequestProcessedEventHandler(
+            handler = DnsRequestProcessedEventHandler(
                 proxyConfigurationProvider: proxySettingsProvider,
                 activityStatistics: try ActivityStatistics(statisticsDbContainerUrl: statisticsDbContainerUrl),
                 chartStatistics: try ChartStatistics(statisticsDbContainerUrl: statisticsDbContainerUrl),
@@ -101,9 +101,9 @@ final class DnsProxy: DnsProxyProtocol {
         }
         
         let agEvents = AGDnsProxyEvents()
-        agEvents.onRequestProcessed = { [hanler] event in
+        agEvents.onRequestProcessed = { [handler] event in
             if let event = event {
-                hanler.handle(event: AGDnsRequestProcessedEventWrapper(event: event))
+                handler.handle(event: AGDnsRequestProcessedEventWrapper(event: event))
             }
         }
         

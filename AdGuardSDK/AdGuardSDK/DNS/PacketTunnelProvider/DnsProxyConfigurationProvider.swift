@@ -88,7 +88,10 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
         let lowLevelConfiguration = dnsConfiguration.lowLevelConfiguration
         
         // Reveal DNS bootstraps
-        let bootstraps = getDnsUpstreams(from: lowLevelConfiguration.bootstrapServers ?? [])
+        var bootstraps = getDnsUpstreams(from: lowLevelConfiguration.bootstrapServers ?? [])
+        if bootstraps.count == 0 {
+            bootstraps = systemDnsUpstreams
+        }
         
         // DNS upstreams
         let upstreams = getUpstreams(systemDnsUpstreams)
