@@ -19,6 +19,9 @@
 import Foundation
 
 public protocol SafariProtectionContentBlockersProtocol {
+    /* Number of advanced rules that will be passed to Safari Web Extension */
+    var advancedRulesCount: Int { get }
+    
     /* Returns every content blocker state */
     var allContentBlockersStates: [ContentBlockerType: Bool] { get }
     
@@ -31,6 +34,10 @@ public protocol SafariProtectionContentBlockersProtocol {
 
 /* Extension is used get information about Safari Content Blockers and JSON files they use */
 extension SafariProtection {
+    public var advancedRulesCount: Int {
+        return workingQueue.sync { return cbStorage.advancedRulesCount }
+    }
+    
     public var allContentBlockersStates: [ContentBlockerType : Bool] {
         return workingQueue.sync { return cbService.allContentBlockersStates }
     }

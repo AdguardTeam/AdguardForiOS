@@ -57,7 +57,7 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
     func convertFiltersAndUserRulesToJsons() -> [FiltersConverterResult] {
         // Run converter with empty data if Safari protection is disabled
         guard configuration.safariProtectionEnabled else {
-            return filtersConverter.convert(filters: [], blocklistRules: nil, allowlistRules: nil, invertedAllowlistRulesString: nil)
+            return filtersConverter.convert(filters: [], blocklistRules: nil, allowlistRules: nil, invertedAllowlistRules: nil)
         }
         
         // Get active filters info. It is an array of tuples [(filter id, group type)]
@@ -86,13 +86,14 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
         let blocklistRulesManager = safariManagers.blocklistRulesManager
         let enabledBlockListRules = blocklistRulesManager.allRules.filter { $0.isEnabled }
                                                                   .map { $0.ruleText }
+        
         // Get either allowlist rules or inverted allowlist rules (they aren't working at the same time)
         var enabledAllowlistRules: [String]?
-        var enabledInvertedAllowlistRulesString: String?
+        var enabledInvertedAllowlistRules: [String]?
         if configuration.allowlistIsInverted {
-            // Inverted allowlist rules are composed to the single rule that contains all of them
             let invertedAllowlistRulesManager = safariManagers.invertedAllowlistRulesManager
-            enabledInvertedAllowlistRulesString = invertedAllowlistRulesManager.rulesString
+            enabledInvertedAllowlistRules = invertedAllowlistRulesManager.allRules.filter { $0.isEnabled }
+                                                                                  .map { $0.ruleText }
         } else {
             let allowlistRulesManager = safariManagers.allowlistRulesManager
             enabledAllowlistRules = allowlistRulesManager.allRules.filter { $0.isEnabled }
@@ -104,7 +105,7 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
             filters: filesContent,
             blocklistRules: enabledBlockListRules,
             allowlistRules: enabledAllowlistRules,
-            invertedAllowlistRulesString: enabledInvertedAllowlistRulesString
+            invertedAllowlistRules: enabledInvertedAllowlistRules
         )
         return safariFilters
     }

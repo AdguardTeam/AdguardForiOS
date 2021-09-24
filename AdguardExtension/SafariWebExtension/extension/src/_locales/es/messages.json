@@ -3,6 +3,33 @@
         "message": "AdGuard"
     },
     "extension_description": {
-        "message": "AdGuard Safari Web Extension"
+        "message": "Extensión web AdGuard para Safari"
+    },
+    "popup_action_safari_protection_title": {
+        "message": "Protección para Safari"
+    },
+    "popup_action_safari_protection_description": {
+        "message": "para este sitio web"
+    },
+    "popup_action_block_element": {
+        "message": "Bloquear un elemento en esta página"
+    },
+    "popup_action_delete_user_rules": {
+        "message": "Eliminar todas las reglas del usuario para este sitio"
+    },
+    "popup_action_current_site_desc_basic_only": {
+        "message": "solo protección básica"
+    },
+    "popup_modal_btn_free": {
+        "message": "Mejorar"
+    },
+    "modal_protection_off_title": {
+        "message": "Activar la protección"
+    },
+    "modal_protection_off_settings": {
+        "message": "Abre <b>Configuración<\/b>"
+    },
+    "modal_protection_off_switch": {
+        "message": "<b>Enciende<\/b> todos los de AdGuard"
     }
 }

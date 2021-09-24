@@ -44,6 +44,8 @@ import Foundation
  */
 final class ChunkFileReader {
     
+    // TODO: - write tests
+    
     private let chunkSize: UInt64
     private var fileHandle: FileHandle?
     private var offset: UInt64 = 0
@@ -78,6 +80,21 @@ final class ChunkFileReader {
         } catch {
             DDLogError("(ChunkFileReader) - nextChunk; Error reading file: \(error)")
             return nil
+        }
+    }
+    
+    func rewind() -> Bool {
+        guard let fileHandle = fileHandle else {
+            DDLogError("(ChunkFileReader) - rewind; Attempt to rewind with closed file")
+            return false
+        }
+        
+        do {
+            try fileHandle.seek(toOffset: 0)
+            return true
+        } catch {
+            DDLogError("(ChunkFileReader) - rewind; Error when rewinding: \(error)")
+            return false
         }
     }
     

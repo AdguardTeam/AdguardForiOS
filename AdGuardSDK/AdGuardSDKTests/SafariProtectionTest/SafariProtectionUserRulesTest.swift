@@ -9,6 +9,7 @@ class SafariProtectionUserRulesTest: XCTestCase {
     var cbStorage: ContentBlockersInfoStorageMock!
     var cbService: ContentBlockerServiceMock!
     var safariManagers: SafariUserRulesManagersProviderMock!
+    var converterHelperMock: WebExtensionHelpersMock!
     
     var safariProtection: SafariProtectionProtocol!
     var mocks: [UserRulesManagerMock] = []
@@ -22,6 +23,7 @@ class SafariProtectionUserRulesTest: XCTestCase {
         cbStorage = ContentBlockersInfoStorageMock()
         cbService = ContentBlockerServiceMock()
         safariManagers = SafariUserRulesManagersProviderMock()
+        converterHelperMock = WebExtensionHelpersMock()
         safariProtection = SafariProtection(configuration: configuration,
                                             defaultConfiguration: defaultConfiguration,
                                             userDefaults: userDefaults,
@@ -29,7 +31,9 @@ class SafariProtectionUserRulesTest: XCTestCase {
                                             converter: converter,
                                             cbStorage: cbStorage,
                                             cbService: cbService,
-                                            safariManagers: safariManagers)
+                                            safariManagers: safariManagers,
+                                            converterHelper: converterHelperMock
+        )
         
         mocks = [safariManagers.blocklistRulesManagerMock,
                  safariManagers.allowlistRulesManagerMock,
@@ -285,6 +289,64 @@ class SafariProtectionUserRulesTest: XCTestCase {
             }
             XCTAssertEqual(mock.removeAllRulesCalledCount, 1)
         }
+    }
+    
+    // MARK: - Test removeAllUserRulesAssociatedWith
+    
+    func testRemoveAllUserRulesAssociatedWith() {
+        let managerMock = safariManagers.blocklistRulesManagerMock
+        managerMock.allRules = [
+            UserRule(ruleText: "rule1", isEnabled: true),
+            UserRule(ruleText: "rule2", isEnabled: true),
+            UserRule(ruleText: "rule3", isEnabled: false),
+            UserRule(ruleText: "rule4", isEnabled: false)
+        ]
+        
+        converterHelperMock.userRuleIsAssociatedResultHandler = { _, rule in
+            return rule == "rule2" || rule == "rule4"
+        }
+        
+        let expectation = XCTestExpectation()
+        safariProtection.removeAllUserRulesAssociatedWith(domain: "domain") { error in
+            XCTAssertNil(error)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.5)
+        
+        XCTAssertEqual(managerMock.removeRuleCalledCount, 2)
+        XCTAssertEqual(managerMock.invokedRemoveRuleParameters, ["rule2", "rule4"])
+        XCTAssertEqual(converter.convertFiltersCalledCount, 1)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 1)
+        XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
+    }
+    
+    func testRemoveAllUserRulesAssociatedWithCbReloadError() {
+        let managerMock = safariManagers.blocklistRulesManagerMock
+        managerMock.allRules = [
+            UserRule(ruleText: "rule1", isEnabled: true),
+            UserRule(ruleText: "rule2", isEnabled: true),
+            UserRule(ruleText: "rule3", isEnabled: false),
+            UserRule(ruleText: "rule4", isEnabled: false)
+        ]
+        
+        converterHelperMock.userRuleIsAssociatedResultHandler = { _, rule in
+            return rule == "rule2" || rule == "rule4"
+        }
+        
+        cbService.updateContentBlockersError = MetaStorageMockError.error
+        
+        let expectation = XCTestExpectation()
+        safariProtection.removeAllUserRulesAssociatedWith(domain: "domain") { error in
+            XCTAssertEqual(error as! MetaStorageMockError, .error)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.5)
+        
+        XCTAssertEqual(managerMock.removeRuleCalledCount, 2)
+        XCTAssertEqual(managerMock.invokedRemoveRuleParameters, ["rule2", "rule4"])
+        XCTAssertEqual(converter.convertFiltersCalledCount, 1)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 1)
+        XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
     }
     
     // MARK: - Methods to help testing

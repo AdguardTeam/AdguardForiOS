@@ -44,9 +44,9 @@ public final class UserRulesManager: UserRulesManagerProtocol {
     
     // MARK: - Initialization
     
-    public init(type: UserRuleType, storage: UserRulesStorageProtocol) {
+    public init(type: UserRuleType, storage: UserRulesStorageProtocol, converter: UserRuleConverterProtocol) {
         self.storage = storage
-        self.converter = type.converter
+        self.converter = converter
     }
     
     // MARK: - Public methods
@@ -112,16 +112,6 @@ public final class UserRulesManager: UserRulesManagerProtocol {
             storage.rules.insert(rule, at: ruleIndex)
         } else {
             storage.rules.append(rule)
-        }
-    }
-}
-
-extension UserRuleType {
-    var converter: UserRuleConverterProtocol {
-        switch self {
-        case .allowlist: return AllowlistRuleConverter()
-        case .invertedAllowlist: return InvertedAllowlistRuleConverter()
-        default: return OpaqueRuleConverter()
         }
     }
 }

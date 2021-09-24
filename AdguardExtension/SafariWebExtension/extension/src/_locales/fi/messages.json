@@ -1,74 +1,86 @@
 {
+    "extension_name": {
+        "message": "AdGuard"
+    },
+    "extension_description": {
+        "message": "AdGuard Safari Web-laajennus"
+    },
     "popup_action_safari_protection_title": {
         "message": "Safarin suojaus"
     },
     "popup_action_safari_protection_description": {
         "message": "tälle sivustolle"
     },
+    "popup_action_safari_protection_description_disabled": {
+        "message": "ei käytössä"
+    },
     "popup_action_current_site_status_desc_enabled": {
         "message": "suojaus on käytössä"
     },
+    "popup_action_current_site_status_desc_disabled": {
+        "message": "suojaus ei ole käytössä"
+    },
     "popup_action_block_element": {
-        "message": "Estä elementti tältä sivulta"
+        "message": "Estä elementtejä tältä sivulta"
     },
     "popup_action_delete_user_rules": {
-        "message": "Tyhjennä sivustolle luodut käyttäjän säännöt"
+        "message": "Poista sivustolle luodut käyttäjän säännöt"
     },
     "popup_action_current_site_desc_starting": {
-        "message": "odota, suojaus käynnistyy..."
+        "message": "suojaus aloitetaan"
     },
     "popup_action_current_site_desc_allowlisted": {
-        "message": "sivusto on sallittujen listalla"
+        "message": "lisätty sallittujen listalle"
     },
     "popup_action_current_site_desc_basic_only": {
         "message": "vain perussuojaus"
     },
     "popup_modal_all_sites_allowed_title": {
-        "message": "Tehostettu suorituskyky"
+        "message": "Äärimmäinen suojaus"
     },
     "popup_modal_all_sites_allowed_desc": {
-        "message": "Hienoa! Nyt AdGuard estää entistäkin enemmän mainoksia, käsitellen vaikeimmatkin haasteet!"
+        "message": "Hienoa! Nyt AdGuard estää entistäkin enemmän mainoksia, kohdaten vaikeimmatkin haasteet."
+    },
+    "popup_modal_all_sites_allowed_button": {
+        "message": "Anna taikuuden alkaa"
     },
     "popup_modal_not_all_sites_allowed_title": {
-        "message": "Melkein valmista"
+        "message": "Valikoiva suojaus"
     },
     "popup_modal_not_all_sites_allowed_desc": {
-        "message": "Olet sallinut AdGuardin toiminnan vain tällä sivustolla, eli se ei estä mainoksia muilla sivustoilla ellet myönnä käyttöoikeutta seuraavalla kerralla."
+        "message": "Olet sallinut AdGuardin toiminnan vain tällä sivustolla. Näet mainoksia edelleen muilla sivustoilla ellet laajenna AdGuardin oikeuksia."
     },
     "popup_modal_not_all_sites_allowed_button": {
-        "message": "Ok"
+        "message": "Jatka"
     },
     "popup_modal_desc_free": {
-        "message": "Huomio, että jäät paitsi edistyneistä suojausominaisuuksista, jotka eivät sisälly ilmaisversioon. Se auttaa käsittelemään enemmän mainoksia, mukaan lukien YouTuben mainokset Safarissa."
+        "message": "Jäät edelleen paitsi AdGuard Premiumin edistyneistä suojausominaisuuksista. Eikö estetä vielä enemmän mainoksia, kuten YouTuben mainokset Safarissa?"
     },
     "popup_modal_btn_free": {
         "message": "Päivitä"
     },
     "popup_fullscreen_support_title": {
-        "message": "Hups, oliko tuo pyyhkäisy ylös?"
+        "message": "Hups, haluatko aloittaa alusta?"
     },
     "popup_fullscreen_support_desc": {
-        "message": "Jos jokin on pielessä, kerro meille niin korjaamme sen."
+        "message": "Onko jokin on pielessä? Meiltä saattaa löytyä korjaus."
     },
     "popup_protection_disabled_support_desc": {
-        "message": "Hups! Näyttää siltä, että olet poistanut suojauksen käytöstä... Onko jokin pielessä? Voimme korjata sen!"
+        "message": "Hups! Suojaus on poistettu käytöstä tällä sivustolla. Onko jokin on pielessä? Meiltä saattaa löytyä korjaus."
     },
     "popup_support_button_text": {
-        "message": "Ilmoita ongelma"
+        "message": "Ilmoita ongelmasta"
     },
     "modal_protection_off_title": {
-        "message": "Käyttääksesi suojausta:"
+        "message": "Ota suojaus käyttöön"
     },
     "modal_protection_off_settings": {
         "message": "Avaa <b>Asetukset<\/b>"
     },
     "modal_protection_off_extensions": {
-        "message": "Napauta <b>Safari<\/b> ja valitse valikosta <b>Laajennukset<\/b>"
+        "message": "Napauta <b>Safari<\/b>, pyyhkäise alas ja napauta <b>Sisällön estäjät<\/b>"
     },
-    "extension_name": {
-        "message": "AdGuard"
-    },
-    "extension_description": {
-        "message": "AdGuard Safari Web Extension"
+    "modal_protection_off_switch": {
+        "message": "<b>Käytä<\/b> kaikkia AdGuardin laajennuksia."
     }
 }

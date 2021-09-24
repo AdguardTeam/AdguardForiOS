@@ -36,6 +36,7 @@
 		7E4A132426E4F40D00728BDE /* CompaniesStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4A132226E4F40D00728BDE /* CompaniesStatistics.swift */; };
 		7E4A132726E4FD1400728BDE /* CompaniesStatisticsRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4A132626E4FD1400728BDE /* CompaniesStatisticsRecord.swift */; };
 		7E4A132826E4FD1400728BDE /* CompaniesStatisticsRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4A132626E4FD1400728BDE /* CompaniesStatisticsRecord.swift */; };
+		7E4F0BA226F3619E00EB5B23 /* UserRulesManagerProtocol+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4F0BA126F3619E00EB5B23 /* UserRulesManagerProtocol+Utils.swift */; };
 		7E5A6ED926E8B6CC00B7EF6A /* FiltersConverterResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5A6ED826E8B6CC00B7EF6A /* FiltersConverterResult.swift */; };
 		7E5A6EDA26E8B6CC00B7EF6A /* FiltersConverterResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5A6ED826E8B6CC00B7EF6A /* FiltersConverterResult.swift */; };
 		7E6062F526F0C43500D453E0 /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A3CF9F26E90F10006E90AD /* ACNUrlUtils.m */; };
@@ -351,8 +352,6 @@
 		7EC8A3A026E769DB005244CF /* UserRulesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E807426C2A04100925F96 /* UserRulesManager.swift */; };
 		7EC8A3A126E769DB005244CF /* UserRulesStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E807526C2A04100925F96 /* UserRulesStorageProtocol.swift */; };
 		7EC8A3A226E769DB005244CF /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E807826C2A04100925F96 /* Configuration.swift */; };
-		7EC8A3A926E76A82005244CF /* InvertedAllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E810726C2A05200925F96 /* InvertedAllowlistRuleConverter.swift */; };
-		7EC8A3AA26E76A82005244CF /* AllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E810826C2A05200925F96 /* AllowlistRuleConverter.swift */; };
 		7EC8A3BB26E76B4E005244CF /* FilterMetaProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E80EE26C2A05200925F96 /* FilterMetaProtocol.swift */; };
 		7EC8A3C126E76BA8005244CF /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC8A37F26E7697C005244CF /* SharedAdGuardSDK.framework */; };
 		7EC8A3C226E76BA8005244CF /* SharedAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC8A37F26E7697C005244CF /* SharedAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -384,10 +383,8 @@
 		7EC8A3F926E77DE6005244CF /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E806C26C2A04100925F96 /* CommonError.swift */; };
 		7EC8A3FA26E77DE6005244CF /* UserDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E806E26C2A04100925F96 /* UserDefaultsStorage.swift */; };
 		7EC8A3FB26E77DE6005244CF /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E806D26C2A04100925F96 /* Result.swift */; };
-		7EC8A3FC26E77DE9005244CF /* InvertedAllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E810726C2A05200925F96 /* InvertedAllowlistRuleConverter.swift */; };
 		7EC8A3FD26E77DE9005244CF /* UserRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E807126C2A04100925F96 /* UserRuleConverter.swift */; };
 		7EC8A3FE26E77DE9005244CF /* OpaqueRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E807726C2A04100925F96 /* OpaqueRuleConverter.swift */; };
-		7EC8A3FF26E77DE9005244CF /* AllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E810826C2A05200925F96 /* AllowlistRuleConverter.swift */; };
 		7EC8A40026E77DED005244CF /* UserRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E807626C2A04100925F96 /* UserRule.swift */; };
 		7EC8A40126E77DED005244CF /* UserRulesManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E807326C2A04100925F96 /* UserRulesManagerProtocol.swift */; };
 		7EC8A40226E77DED005244CF /* UserRulesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E807426C2A04100925F96 /* UserRulesManager.swift */; };
@@ -400,6 +397,11 @@
 		7ED2009126EE66ED001E8422 /* AGDnsProxy+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2009026EE66ED001E8422 /* AGDnsProxy+Extension.swift */; };
 		7ED2009426EE67D6001E8422 /* DnsProxyConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2009326EE67D6001E8422 /* DnsProxyConfiguration.swift */; };
 		7ED2009726EE808D001E8422 /* DnsProxyConfigurationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED2009626EE808D001E8422 /* DnsProxyConfigurationProvider.swift */; };
+		7EE740DF26F33FCA0033B673 /* InvertedAllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E810726C2A05200925F96 /* InvertedAllowlistRuleConverter.swift */; };
+		7EE740E026F33FCA0033B673 /* InvertedAllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E810726C2A05200925F96 /* InvertedAllowlistRuleConverter.swift */; };
+		7EE740E126F33FCA0033B673 /* AllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E810826C2A05200925F96 /* AllowlistRuleConverter.swift */; };
+		7EE740E226F33FCA0033B673 /* AllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E810826C2A05200925F96 /* AllowlistRuleConverter.swift */; };
+		7EE740E426F352210033B673 /* WebExtensionHelpersMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE740E326F352210033B673 /* WebExtensionHelpersMock.swift */; };
 		7ED68E3E26EABBFA00929E57 /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC8A37F26E7697C005244CF /* SharedAdGuardSDK.framework */; };
 		7ED68E3F26EABBFA00929E57 /* SharedAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC8A37F26E7697C005244CF /* SharedAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7EE9F63226D8E1DB00646D62 /* FilterFilesStorageProtocol+PredefinedFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE9F63126D8E1DB00646D62 /* FilterFilesStorageProtocol+PredefinedFilters.swift */; };
@@ -423,6 +425,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		494E0BD226E8CF68005C21C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0A0E38C26B16B03005344D2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7EC8A37E26E7697C005244CF;
+			remoteInfo = SharedAdGuardSDK;
+		};
 		7E6E7FC626C299AB00925F96 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D0A0E38C26B16B03005344D2 /* Project object */;
@@ -437,16 +446,20 @@
 			remoteGlobalIDString = 7EC8A37E26E7697C005244CF;
 			remoteInfo = SharedAdGuardSDK;
 		};
-		7ED68E4026EABBFA00929E57 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0A0E38C26B16B03005344D2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7EC8A37E26E7697C005244CF;
-			remoteInfo = SharedAdGuardSDK;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		494E0BD426E8CF68005C21C4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				494E0BD126E8CF68005C21C4 /* SharedAdGuardSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7EC8A3C526E76BA8005244CF /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -454,17 +467,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				7EC8A3C226E76BA8005244CF /* SharedAdGuardSDK.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7ED68E4226EABBFB00929E57 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				7ED68E3F26EABBFA00929E57 /* SharedAdGuardSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -490,6 +492,7 @@
 		7E40D00E26F24D240045C33D /* PacketTunnelSettingsProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelSettingsProviderMock.swift; sourceTree = "<group>"; };
 		7E4A132226E4F40D00728BDE /* CompaniesStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesStatistics.swift; sourceTree = "<group>"; };
 		7E4A132626E4FD1400728BDE /* CompaniesStatisticsRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesStatisticsRecord.swift; sourceTree = "<group>"; };
+		7E4F0BA126F3619E00EB5B23 /* UserRulesManagerProtocol+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserRulesManagerProtocol+Utils.swift"; sourceTree = "<group>"; };
 		7E5A6ED826E8B6CC00B7EF6A /* FiltersConverterResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersConverterResult.swift; sourceTree = "<group>"; };
 		7E667A6726E29D970013B1D5 /* default.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = default.db.zip; sourceTree = "<group>"; };
 		7E667A6926E389320013B1D5 /* DnsTrackersProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsTrackersProvider.swift; sourceTree = "<group>"; };
@@ -696,6 +699,7 @@
 		7ED2009026EE66ED001E8422 /* AGDnsProxy+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AGDnsProxy+Extension.swift"; sourceTree = "<group>"; };
 		7ED2009326EE67D6001E8422 /* DnsProxyConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProxyConfiguration.swift; sourceTree = "<group>"; };
 		7ED2009626EE808D001E8422 /* DnsProxyConfigurationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProxyConfigurationProvider.swift; sourceTree = "<group>"; };
+		7EE740E326F352210033B673 /* WebExtensionHelpersMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebExtensionHelpersMock.swift; sourceTree = "<group>"; };
 		7EE9F63126D8E1DB00646D62 /* FilterFilesStorageProtocol+PredefinedFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilterFilesStorageProtocol+PredefinedFilters.swift"; sourceTree = "<group>"; };
 		7EFA0F6326F2201600EBCD99 /* PacketTunnelProviderProxyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProviderProxyTest.swift; sourceTree = "<group>"; };
 		7EFA0F6626F2205500EBCD99 /* DnsProxyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProxyTest.swift; sourceTree = "<group>"; };
@@ -733,7 +737,7 @@
 				7E966B9326C27F0D006B57BD /* Zip in Frameworks */,
 				7E966B8F26C27F06006B57BD /* SQLite in Frameworks */,
 				7E667A6626E26B890013B1D5 /* ContentBlockerConverter in Frameworks */,
-				7ED68E3E26EABBFA00929E57 /* SharedAdGuardSDK.framework in Frameworks */,
+				494E0BD026E8CF68005C21C4 /* SharedAdGuardSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -887,6 +891,7 @@
 				7E6E7FF526C299DB00925F96 /* UserDefaultsStorageMock.swift */,
 				7E15DFD226E604920020247E /* ActivityStatisticsMock.swift */,
 				7E15DFD426E606E60020247E /* DnsTrackersProviderMock.swift */,
+				7EE740E326F352210033B673 /* WebExtensionHelpersMock.swift */,
 				241D084B26F23ED00008FD17 /* DnsBackgroundFetchUpdaterMock.swift */,
 				241D084F26F247F10008FD17 /* DnsProvidersManagerMock.swift */,
 				2456E6F626F24A2A001B1760 /* DnsUserRulesManagersProviderMock.swift */,
@@ -1225,8 +1230,11 @@
 		7E6E810426C2A05200925F96 /* UserRules */ = {
 			isa = PBXGroup;
 			children = (
+				7E6E810726C2A05200925F96 /* InvertedAllowlistRuleConverter.swift */,
+				7E6E810826C2A05200925F96 /* AllowlistRuleConverter.swift */,
 				7E6E810526C2A05200925F96 /* SafariUserRulesStorage.swift */,
 				7E6E810926C2A05200925F96 /* SafariUserRulesManagersProvider.swift */,
+				7E4F0BA126F3619E00EB5B23 /* UserRulesManagerProtocol+Utils.swift */,
 			);
 			path = UserRules;
 			sourceTree = "<group>";
@@ -1235,8 +1243,6 @@
 			isa = PBXGroup;
 			children = (
 				7E6E807126C2A04100925F96 /* UserRuleConverter.swift */,
-				7E6E810726C2A05200925F96 /* InvertedAllowlistRuleConverter.swift */,
-				7E6E810826C2A05200925F96 /* AllowlistRuleConverter.swift */,
 				7E6E807726C2A04100925F96 /* OpaqueRuleConverter.swift */,
 			);
 			path = UserRuleConverters;
@@ -1558,12 +1564,12 @@
 				7E966AF126C27B93006B57BD /* Sources */,
 				7E966AF226C27B93006B57BD /* Frameworks */,
 				7E966AF326C27B93006B57BD /* Resources */,
-				7ED68E4226EABBFB00929E57 /* Embed Frameworks */,
+				494E0BD426E8CF68005C21C4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				7ED68E4126EABBFA00929E57 /* PBXTargetDependency */,
+				494E0BD326E8CF68005C21C4 /* PBXTargetDependency */,
 			);
 			name = SafariAdGuardSDK;
 			packageProductDependencies = (
@@ -1799,6 +1805,7 @@
 				7E6E81BB26C2A05B00925F96 /* ActivityStatistics+Compress.swift in Sources */,
 				7E6E811F26C2A05300925F96 /* SafariProtectionApiMethods.swift in Sources */,
 				7E6E81CB26C2A05B00925F96 /* DnsProtection.swift in Sources */,
+				7EE740E426F352210033B673 /* WebExtensionHelpersMock.swift in Sources */,
 				7E6E802B26C299DE00925F96 /* LangsMetaStorageTest.swift in Sources */,
 				7E6E805C26C299DF00925F96 /* CustomFilterMetaParserTest.swift in Sources */,
 				7E9B1DF326F229450003EB0E /* PacketTunnelSettingsProvider.swift in Sources */,
@@ -1830,6 +1837,7 @@
 				7E6E81B126C2A05B00925F96 /* Expression+Utils.swift in Sources */,
 				7E6E81F526C2A68C00925F96 /* Dictionary+Utils.swift in Sources */,
 				7E6E805726C299DF00925F96 /* SafariProtectionTest.swift in Sources */,
+				7EE740DF26F33FCA0033B673 /* InvertedAllowlistRuleConverter.swift in Sources */,
 				7E6E81B726C2A05B00925F96 /* ActivityStatistics+ActivityStatisticsTable.swift in Sources */,
 				7E6E804026C299DE00925F96 /* ApiMethodsMock.swift in Sources */,
 				7E6E801D26C299DE00925F96 /* DnsFiltersManagerTest.swift in Sources */,
@@ -1881,6 +1889,7 @@
 				7E6E81A726C2A05B00925F96 /* ChartStatistics+ChartStatisticsTable.swift in Sources */,
 				241D084D26F23ED00008FD17 /* DnsBackgroundFetchUpdaterMock.swift in Sources */,
 				7E6E814726C2A05300925F96 /* ExtendedFiltersMeta.swift in Sources */,
+				7EE740E126F33FCA0033B673 /* AllowlistRuleConverter.swift in Sources */,
 				7E6E802226C299DE00925F96 /* DnsLogStatisticsTest.swift in Sources */,
 				7E6E81E226C2A05B00925F96 /* DnsProvidersManager.swift in Sources */,
 				7E6E803526C299DE00925F96 /* DnsConfigurationMock.swift in Sources */,
@@ -1971,6 +1980,7 @@
 				7E6E813626C2A05300925F96 /* DefaultDatabaseManager.swift in Sources */,
 				7E6E812026C2A05300925F96 /* FiltersLocalizationsRequest.swift in Sources */,
 				7E6E816026C2A05300925F96 /* SafariProtection.swift in Sources */,
+				7EE740E226F33FCA0033B673 /* AllowlistRuleConverter.swift in Sources */,
 				7E6E815626C2A05300925F96 /* ContentBlockerService.swift in Sources */,
 				7E6E814626C2A05300925F96 /* ExtendedFiltersMeta.swift in Sources */,
 				7E6E811E26C2A05300925F96 /* SafariProtectionApiMethods.swift in Sources */,
@@ -1994,10 +2004,12 @@
 				7E6E813C26C2A05300925F96 /* MetaStorage+Filters.swift in Sources */,
 				7E6E812226C2A05300925F96 /* FiltersMetadataRequest.swift in Sources */,
 				7E6E814826C2A05300925F96 /* SafariGroup+GroupType.swift in Sources */,
+				7E4F0BA226F3619E00EB5B23 /* UserRulesManagerProtocol+Utils.swift in Sources */,
 				7E6E815026C2A05300925F96 /* ContentBlockersInfoStorage.swift in Sources */,
 				7EC8A3C726E771D4005244CF /* Import.swift in Sources */,
 				7E6E811826C2A05300925F96 /* FiltersMetadataParser.swift in Sources */,
 				7E6E813426C2A05300925F96 /* MetaStorage+FiltersLocalizations.swift in Sources */,
+				7EE740E026F33FCA0033B673 /* InvertedAllowlistRuleConverter.swift in Sources */,
 				7E6E811A26C2A05300925F96 /* FiltersLocalizationsParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2085,13 +2097,11 @@
 				7EC8A3A126E769DB005244CF /* UserRulesStorageProtocol.swift in Sources */,
 				7EC8A38B26E769B4005244CF /* RequestProtocol.swift in Sources */,
 				7EC8A39726E769D3005244CF /* UserRuleConverter.swift in Sources */,
-				7EC8A3A926E76A82005244CF /* InvertedAllowlistRuleConverter.swift in Sources */,
 				7EC8A3A026E769DB005244CF /* UserRulesManager.swift in Sources */,
 				7EC8A3E626E77D5E005244CF /* Array+Utils.swift in Sources */,
 				7EC8A38C26E769BA005244CF /* Logger.swift in Sources */,
 				7EC8A3BB26E76B4E005244CF /* FilterMetaProtocol.swift in Sources */,
 				7EC8A39F26E769DB005244CF /* UserRule.swift in Sources */,
-				7EC8A3AA26E76A82005244CF /* AllowlistRuleConverter.swift in Sources */,
 				7EC8A39426E769CA005244CF /* ResetableProtocol.swift in Sources */,
 				7EC8A38A26E769B4005244CF /* ParserProtocol.swift in Sources */,
 				7EC8A3E726E77D5E005244CF /* NotificationCenter+Utils.swift in Sources */,
@@ -2138,13 +2148,11 @@
 				7EAD350B26C2B7F4001AFB3A /* MetaStorage+Filters.swift in Sources */,
 				7EC8A3EB26E77DD6005244CF /* DateInterval+Utils.swift in Sources */,
 				D049EE9B26B2F31A00B8088B /* Dictionary+Utils.swift in Sources */,
-				7EC8A3FC26E77DE9005244CF /* InvertedAllowlistRuleConverter.swift in Sources */,
 				7EAD351326C2B861001AFB3A /* MetaStorage+GroupLocalizations.swift in Sources */,
 				7EC8A40226E77DED005244CF /* UserRulesManager.swift in Sources */,
 				24D0AF3226F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift in Sources */,
 				D049EE9E26B2F33200B8088B /* CharacterSet+Utils.swift in Sources */,
 				7EAD350D26C2B80F001AFB3A /* MetaStorage+FiltersLocalizations.swift in Sources */,
-				7EC8A3FF26E77DE9005244CF /* AllowlistRuleConverter.swift in Sources */,
 				7EC8A3EF26E77DDA005244CF /* FilterFilesStorage.swift in Sources */,
 				7EC8A3F526E77DE3005244CF /* CustomFilterMetaParser.swift in Sources */,
 				7EC8A3F126E77DDE005244CF /* ParserProtocol.swift in Sources */,
@@ -2168,6 +2176,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		494E0BD326E8CF68005C21C4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7EC8A37E26E7697C005244CF /* SharedAdGuardSDK */;
+			targetProxy = 494E0BD226E8CF68005C21C4 /* PBXContainerItemProxy */;
+		};
 		7E6E7FC726C299AB00925F96 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 7E966AF426C27B93006B57BD /* SafariAdGuardSDK */;
@@ -2177,11 +2190,6 @@
 			isa = PBXTargetDependency;
 			target = 7EC8A37E26E7697C005244CF /* SharedAdGuardSDK */;
 			targetProxy = 7EC8A3C326E76BA8005244CF /* PBXContainerItemProxy */;
-		};
-		7ED68E4126EABBFA00929E57 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7EC8A37E26E7697C005244CF /* SharedAdGuardSDK */;
-			targetProxy = 7ED68E4026EABBFA00929E57 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2700,7 +2708,7 @@
 			repositoryURL = "https://github.com/AdguardTeam/SafariConverterLib";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.10;
+				minimumVersion = 2.0.12;
 			};
 		};
 		7E966B8926C27E68006B57BD /* XCRemoteSwiftPackageReference "DnsLibs" */ = {

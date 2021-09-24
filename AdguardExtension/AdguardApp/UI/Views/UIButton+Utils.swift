@@ -37,6 +37,7 @@ extension UIButton {
         self.layer.cornerRadius = 8.0
         self.backgroundColor = greenColor
         self.setTitleColor(.white, for: .normal)
+        self.tintColor = .white
         self.layer.borderWidth = 0.0
         self.layer.borderColor = UIColor.clear.cgColor
     }
@@ -50,6 +51,7 @@ extension UIButton {
         self.layer.cornerRadius = 8.0
         self.backgroundColor = greenColor
         self.setTitleColor(.white, for: .normal)
+        self.tintColor = .white
         self.layer.borderWidth = 0.0
         self.layer.borderColor = UIColor.clear.cgColor
     }
@@ -62,6 +64,7 @@ extension UIButton {
         self.layer.cornerRadius = 8.0
         self.backgroundColor = .clear
         self.setTitleColor(color, for: .normal)
+        self.tintColor = color
         self.layer.borderWidth = 1.0
         self.layer.borderColor = color.cgColor
     }

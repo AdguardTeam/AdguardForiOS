@@ -46,7 +46,7 @@
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.ui-services</string>
 	</dict>
-	<key>Pro Application</key>
+	<key>ProApplication</key>
 	<true/>
 	<key>SharedResourcesGroup</key>
 	<string>$(ADGUARD_SHARED_RESOURCES_GROUP)</string>

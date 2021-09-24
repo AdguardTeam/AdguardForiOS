@@ -19,6 +19,7 @@ export const Button = ({ onClick, children, classNames }: ButtonProps) => {
 
     return (
         <button
+            type="button"
             className={buttonClass}
             onClick={handleClick}
         >

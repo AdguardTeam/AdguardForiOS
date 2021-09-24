@@ -11,7 +11,7 @@ export const UpgradeModal = observer(() => {
     const store = useContext(popupStore);
 
     const handleClose = () => {
-        store.closeUpgradeModal();
+        store.hideUpgradeModal();
     };
 
     const handleClick = async () => {

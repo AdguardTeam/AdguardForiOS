@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7E4ABFF926BD75E700DF5CF0"
-               BuildableName = "SafariWebExtension.appex"
-               BlueprintName = "SafariWebExtension"
+               BlueprintIdentifier = "7E4AC01A26BD796800DF5CF0"
+               BuildableName = "ProSafariWebExtension.appex"
+               BlueprintName = "ProSafariWebExtension"
                ReferencedContainer = "container:Adguard.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -51,6 +51,15 @@
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES"
       launchAutomaticallySubstyle = "2">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "7E4AC01A26BD796800DF5CF0"
+            BuildableName = "ProSafariWebExtension.appex"
+            BlueprintName = "ProSafariWebExtension"
+            ReferencedContainer = "container:Adguard.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

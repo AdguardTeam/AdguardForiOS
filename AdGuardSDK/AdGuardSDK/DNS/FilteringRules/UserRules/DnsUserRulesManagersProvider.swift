@@ -34,10 +34,10 @@ final class DnsUserRulesManagersProvider: DnsUserRulesManagersProviderProtocol {
         self.fileStorage = fileStorage
         
         let blocklistStorage = DnsUserRulesStorage(type: .blocklist, fileStorage: fileStorage)
-        self.blocklistRulesManager = UserRulesManager(type: .dnsBlocklist, storage: blocklistStorage)
+        self.blocklistRulesManager = UserRulesManager(type: .dnsBlocklist, storage: blocklistStorage, converter: OpaqueRuleConverter())
         
         let allowlistStorage = DnsUserRulesStorage(type: .allowlist, fileStorage: fileStorage)
-        self.allowlistRulesManager = UserRulesManager(type: .dnsAllowlist, storage: allowlistStorage)
+        self.allowlistRulesManager = UserRulesManager(type: .dnsAllowlist, storage: allowlistStorage, converter: OpaqueRuleConverter())
     }
     
     func reset() throws {
