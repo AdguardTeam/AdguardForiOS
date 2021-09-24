@@ -55,6 +55,7 @@ extension AGDnsRequestProcessedEventWrapper {
         self.filterListIds = event.filterListIds.map { $0.intValue }
         self.whitelist = event.whitelist
         self.cacheHit = event.cacheHit
-        self.error = event.error
+        // dnslibs returns empty string instead of nil
+        self.error = event.error == "" ? nil : event.error
     }
 }

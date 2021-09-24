@@ -235,7 +235,7 @@ final class NetworkSettingsTableController: UITableViewController, AddRuleContro
     }
     
     func ruleStateChanged(_ rule: String, newState: Bool) {
-        try? model.changeRule(rule: rule, enabled: newState)
+        model.changeState(rule: rule, enabled: newState)
     }
     
 }

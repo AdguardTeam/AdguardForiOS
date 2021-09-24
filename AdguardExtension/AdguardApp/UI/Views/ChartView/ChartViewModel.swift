@@ -49,11 +49,11 @@ final class ChartViewModel: ChartViewModelProtocol {
     
     var statisticsInfo: CountersStatisticsRecord {
         do {
-            let record = try activityStatistics?.getCounters(for: statisticsPeriod)
-            return record ?? CountersStatisticsRecord(requests: 0, encrypted: 0, blocked: 0, elapsedSumm: 0)
+            let record = try activityStatistics.getCounters(for: statisticsPeriod)
+            return record
         } catch {
             DDLogError("(ChartViewModel) statisticsInfo; getCounters return error: \(error)")
-            return CountersStatisticsRecord(requests: 0, encrypted: 0, blocked: 0, elapsedSumm: 0)
+            return CountersStatisticsRecord.emptyRecord()
         }
     }
     
@@ -72,8 +72,8 @@ final class ChartViewModel: ChartViewModelProtocol {
     }
     
     //MARK: - Private properties
-    private let chartStatistics: ChartStatisticsProtocol?
-    private let activityStatistics: ActivityStatisticsProtocol?
+    private let chartStatistics: ChartStatisticsProtocol
+    private let activityStatistics: ActivityStatisticsProtocol
     private var isStarted: Bool = false
     private var timer: Timer?
     private var repeatTime: TimeInterval = 5.0
@@ -83,22 +83,10 @@ final class ChartViewModel: ChartViewModelProtocol {
     private var frame: CGRect = .zero
     
     //MARK: - Init
-    init(statisticsPeriod: StatisticsPeriod, statisticsDbContainerUrl: URL) {
+    init(statisticsPeriod: StatisticsPeriod, activityStatistics: ActivityStatisticsProtocol, chartStatistics: ChartStatisticsProtocol) {
         self.statisticsPeriod = statisticsPeriod
-        
-        do {
-            self.chartStatistics = try ChartStatistics(statisticsDbContainerUrl: statisticsDbContainerUrl)
-        } catch {
-            DDLogError("(ChartViewModel) init; Chart statistics init error: \(error)")
-            self.chartStatistics = nil
-        }
-        
-        do {
-            self.activityStatistics = try ActivityStatistics(statisticsDbContainerUrl: statisticsDbContainerUrl)
-        } catch {
-            DDLogError("(ChartViewModel) init; Activity statistics init error: \(error)")
-            self.activityStatistics = nil
-        }
+        self.chartStatistics = chartStatistics
+        self.activityStatistics = activityStatistics
     }
     
     func startChartStatisticsAutoUpdate(seconds: TimeInterval) {
@@ -133,19 +121,19 @@ final class ChartViewModel: ChartViewModelProtocol {
         var resultRequests: ChartRecords!
         var resultEncrypted: ChartRecords!
         
-        if let requests = try? chartStatistics?.getPoints(for: .requests, for: period) {
+        if let requests = try? chartStatistics.getPoints(for: .requests, for: period) {
             resultRequests = requests
         } else {
             resultRequests = ChartRecords(chartType: .requests, points: [])
         }
         
-        if let encrypted = try? chartStatistics?.getPoints(for: .encrypted, for: period) {
+        if let encrypted = try? chartStatistics.getPoints(for: .encrypted, for: period) {
             resultEncrypted = encrypted
         } else {
             resultRequests = ChartRecords(chartType: .encrypted, points: [])
         }
         
-        let oldestDate = chartStatistics?.oldestRecordDate
+        let oldestDate = chartStatistics.oldestRecordDate
         prepareDateIntervals(oldestRecordDate: oldestDate)
         return (resultRequests, resultEncrypted)
     }
