@@ -73,12 +73,12 @@ final class ConfigurationService: ConfigurationServiceProtocol {
         }
         set {
             if newValue != isAdvancedProtectionEnabled {
-                Self.advancedProtectionStateChanged()
                 if proStatus {
                     resources.advancedProtection = newValue
                 } else {
                     resources.advancedProtection = false
                 }
+                Self.advancedProtectionStateChanged()
             }
         }
     }
