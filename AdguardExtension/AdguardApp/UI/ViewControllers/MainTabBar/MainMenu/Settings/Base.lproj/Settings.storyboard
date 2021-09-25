@@ -1168,61 +1168,6 @@
             </objects>
             <point key="canvasLocation" x="440.57971014492756" y="-333.48214285714283"/>
         </scene>
-        <!--Content Blocker State Controller-->
-        <scene sceneID="nqL-Vr-iCv">
-            <objects>
-                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="uQx-bh-2Ni" customClass="ContentBlockerStateController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="n1d-dG-f44">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ContentBlockerTitleCell" id="uUV-3G-Dhv" customClass="ContentBlockerTitleCell" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="53.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uUV-3G-Dhv" id="yw5-M1-FaO">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="53.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content blockers" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nPj-OI-Pcb" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="24" y="0.0" width="366" height="29.5"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                            </userDefinedRuntimeAttributes>
-                                            <variation key="heightClass=regular-widthClass=regular">
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
-                                            </variation>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="nPj-OI-Pcb" firstAttribute="top" secondItem="yw5-M1-FaO" secondAttribute="top" id="Kl0-Uh-25c"/>
-                                        <constraint firstAttribute="trailing" secondItem="nPj-OI-Pcb" secondAttribute="trailing" constant="24" id="RJ4-ee-qU5"/>
-                                        <constraint firstItem="nPj-OI-Pcb" firstAttribute="leading" secondItem="yw5-M1-FaO" secondAttribute="leading" constant="24" id="dFT-6Z-UQr"/>
-                                        <constraint firstAttribute="bottom" secondItem="nPj-OI-Pcb" secondAttribute="bottom" constant="24" id="q3E-nE-pkJ">
-                                            <variation key="heightClass=regular-widthClass=regular" constant="40"/>
-                                        </constraint>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="titleLabel" destination="nPj-OI-Pcb" id="Hbh-KZ-gpg"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <sections/>
-                        <connections>
-                            <outlet property="dataSource" destination="uQx-bh-2Ni" id="lMJ-Zg-RHd"/>
-                            <outlet property="delegate" destination="uQx-bh-2Ni" id="EWx-AB-9m5"/>
-                        </connections>
-                    </tableView>
-                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ft5-pR-8we" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2630" y="-657"/>
-        </scene>
         <!--Low Level Settings Controller-->
         <scene sceneID="w7o-KK-pPn">
             <objects>
