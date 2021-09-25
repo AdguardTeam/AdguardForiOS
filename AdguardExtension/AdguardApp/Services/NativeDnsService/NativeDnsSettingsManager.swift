@@ -20,21 +20,20 @@ import NetworkExtension
 import DnsAdGuardSDK
 
 @available(iOS 14.0, *)
-protocol NativeDnsSettingManagerProtocol {
-    /// State of saved dns manager
-    var dnsManagerIsEnabled: Bool { get }
-    
-    /// Save dns manager with active provider into system preferences
+protocol NativeDnsSettingsManagerProtocol {
+    /// State of saved dns manager config
+    var dnsConfigIsEnabled: Bool { get }
+    /// Save dns manager config with active provider into system preferences
     func saveDnsManager(_ onErrorReceived: @escaping (_ error: Error?) -> Void)
-    /// Remove dns manager from system preferences
+    /// Remove dns manager config from system preferences
     func removeDnsManager(_ onErrorReceived: @escaping (_ error: Error?) -> Void)
-    /// Reset dns manager
+    /// Reset dns manager config
     func reset()
 }
 
-/// Manager that control state of dns manager
+/// DNS settings manager is responsible for controlling and providing actual state of DNS mobile config that can be found here
 @available(iOS 14.0, *)
-final class NativeDnsSettingManager: NativeDnsSettingManagerProtocol {
+final class NativeDnsSettingsManager: NativeDnsSettingsManagerProtocol {
     
     private struct ManagerStatus {
         let isInstalled: Bool
@@ -52,12 +51,12 @@ final class NativeDnsSettingManager: NativeDnsSettingManagerProtocol {
     }
     
     //MARK: - Properties
-    var dnsManagerIsEnabled: Bool = false
+    var dnsConfigIsEnabled: Bool = false
     
     private var dnsImplementationObserver: NotificationToken?
     private var dnsManagerStatusObserver: NotificationToken?
-    private var appWillEnterForeground: NotificationToken?
-    private var proObservation: NotificationToken?
+    private var appWillEnterForegroundObserver: NotificationToken?
+    private var proStatusObserver: NotificationToken?
 
     private let networkSettingsService: NetworkSettingsServiceProtocol
     private let dnsProvidersManager: DnsProvidersManagerProtocol
@@ -77,7 +76,7 @@ final class NativeDnsSettingManager: NativeDnsSettingManagerProtocol {
         addObservers()
         
         getDnsManagerStatus { [weak self] status in
-            self?.dnsManagerIsEnabled = status.isInstalled && status.isEnabled
+            self?.dnsConfigIsEnabled = status.isInstalled && status.isEnabled
         }
     }
     
@@ -88,35 +87,35 @@ final class NativeDnsSettingManager: NativeDnsSettingManagerProtocol {
         
         loadDnsManager { [weak self] dnsManager in
             guard let manager = dnsManager else {
-                DDLogError("(NativeDnsSettingManager) - saveDnsManager; Received nil DNS manager")
+                DDLogError("(NativeDnsSettingsManager) - saveDnsManager; Received nil DNS manager")
                 onErrorReceived(NativeDnsProviderError.failedToLoadManager)
                 return
             }
             
-            self?.saveDnsManagerInternal(dnsManager: manager, dnsProtocol: server.type, upstreams: server.upstreams, onErrorReceived)
+            self?.saveDnsManagerInternal(dnsManager: manager, server: server, onErrorReceived)
         }
     }
     
     func removeDnsManager(_ onErrorReceived: @escaping (_ error: Error?) -> Void) {
         loadDnsManager { [weak self] dnsManager in
             guard let dnsManager = dnsManager else {
-                DDLogError("(NativeDnsSettingManager) - removeDnsManager; Received nil DNS manager")
+                DDLogError("(NativeDnsSettingsManager) - removeDnsManager; Received nil DNS manager")
                 onErrorReceived(NativeDnsProviderError.failedToLoadManager)
                 return
             }
             
             dnsManager.removeFromPreferences(completionHandler: onErrorReceived)
             // Check manager status after delete
-            self?.getDnsManagerStatus({ [weak self] status in
-                self?.dnsManagerIsEnabled = status.isInstalled && status.isEnabled
-            })
+            self?.getDnsManagerStatus { [weak self] status in
+                self?.dnsConfigIsEnabled = status.isInstalled && status.isEnabled
+            }
         }
     }
     
     func reset() {
         removeDnsManager { error in
             if let error = error {
-                DDLogError("(NativeDnsSettingManager) - reset; Error when resetting settings; Error: \(error)")
+                DDLogError("(NativeDnsSettingsManager) - reset; Error when resetting settings; Error: \(error)")
             }
         }
     }
@@ -127,7 +126,7 @@ final class NativeDnsSettingManager: NativeDnsSettingManagerProtocol {
         let dnsManager = NEDNSSettingsManager.shared()
         dnsManager.loadFromPreferences { error in
             if let error = error {
-                DDLogError("(NativeDnsSettingManager) - loadDnsManager; Loading error: \(error)")
+                DDLogError("(NativeDnsSettingsManager) - loadDnsManager; Loading error: \(error)")
                 onManagerLoaded(nil)
                 return
             }
@@ -138,7 +137,7 @@ final class NativeDnsSettingManager: NativeDnsSettingManagerProtocol {
     private func getDnsManagerStatus(_ onStatusReceived: @escaping (_ status: ManagerStatus) -> Void) {
         loadDnsManager { dnsManager in
             guard let manager = dnsManager else {
-                DDLogError("(NativeDnsSettingManager) - getDnsManagerStatus; Received nil DNS manager")
+                DDLogError("(NativeDnsSettingsManager) - getDnsManagerStatus; Received nil DNS manager")
                 onStatusReceived(ManagerStatus())
                 return
             }
@@ -151,18 +150,28 @@ final class NativeDnsSettingManager: NativeDnsSettingManagerProtocol {
         dnsManager.onDemandRules = onDemandRules
     }
     
-    private func saveDnsManagerInternal(dnsManager: NEDNSSettingsManager, dnsProtocol: DnsAdGuardSDK.DnsProtocol, upstreams: [DnsUpstream], _ onErrorReceived: @escaping (_ error: Error?) -> Void) {
+    private func saveDnsManagerInternal(dnsManager: NEDNSSettingsManager, server: DnsServerMetaProtocol, _ onErrorReceived: @escaping (_ error: Error?) -> Void) {
         setupDnsManager(dnsManager: dnsManager)
-        let upstreams = upstreams.map { $0.upstream }
+        let upstreams = server.upstreams.map { $0.upstream }
         let settings: NEDNSSettings
-        switch dnsProtocol {
+        switch server.type {
         case .dns: settings = NEDNSSettings(servers: upstreams)
-        case .doh, .dot:
+        case .doh:
             guard upstreams.count == 1, let serverUrl = upstreams.first else {
                 onErrorReceived(NativeDnsProviderError.invalidUpstreamsNumber)
                 return
             }
-           settings = processSecuredProtocols(dnsProtocol: dnsProtocol, serverUrl: serverUrl)
+            
+            settings = getDOHSettings(serverUrl: serverUrl)
+            
+        case .dot:
+            guard upstreams.count == 1, let serverUrl = upstreams.first else {
+                onErrorReceived(NativeDnsProviderError.invalidUpstreamsNumber)
+                return
+            }
+            
+            settings = getDOTSettings(serverUrl: serverUrl)
+
         default:
             onErrorReceived(NativeDnsProviderError.unsupportedDnsProtocol)
             return
@@ -172,24 +181,19 @@ final class NativeDnsSettingManager: NativeDnsSettingManagerProtocol {
         dnsManager.localizedDescription = Bundle.main.applicationName
         dnsManager.saveToPreferences(completionHandler: onErrorReceived)
     }
+
+    private func getDOHSettings(serverUrl: String) -> NEDNSSettings {
+        let dohSettings = NEDNSOverHTTPSSettings(servers: [])
+        dohSettings.serverURL = URL(string: serverUrl)
+        return dohSettings
+    }
     
-    private func processSecuredProtocols(dnsProtocol: DnsAdGuardSDK.DnsProtocol, serverUrl: String) -> NEDNSSettings {
-        let settings: NEDNSSettings
-        if dnsProtocol == .doh {
-            let dohSettings = NEDNSOverHTTPSSettings(servers: [])
-            dohSettings.serverURL = URL(string: serverUrl)
-            settings = dohSettings
-        } else {
-            var url = serverUrl
-            let dotSettings = NEDNSOverTLSSettings(servers: [])
-            if let range = url.range(of: "tls://") {
-                url.removeSubrange(range)
-            }
-            dotSettings.serverName = url
-            settings = dotSettings
-        }
-        
-        return settings
+    private func getDOTSettings(serverUrl: String) -> NEDNSSettings {
+        var url = serverUrl
+        let dotSettings = NEDNSOverTLSSettings(servers: [])
+        if let range = url.range(of: "tls://") { url.removeSubrange(range) }
+        dotSettings.serverName = url
+        return dotSettings
     }
     
     //MARK: - Observers
@@ -198,13 +202,13 @@ final class NativeDnsSettingManager: NativeDnsSettingManagerProtocol {
             if self?.resources.dnsImplementation == .native {
                 self?.saveDnsManager({ error in
                     if let error = error {
-                        DDLogError("(NativeDnsSettingManager) - dnsImplementationObserver; Saving dns manager error: \(error)")
+                        DDLogError("(NativeDnsSettingsManager) - dnsImplementationObserver; Saving dns manager error: \(error)")
                     }
                 })
             } else {
                 self?.removeDnsManager({ error in
                     if let error = error {
-                        DDLogError("(NativeDnsSettingManager) - dnsImplementationObserver; Removing dns manager error: \(error)")
+                        DDLogError("(NativeDnsSettingsManager) - dnsImplementationObserver; Removing dns manager error: \(error)")
                     }
                 })
             }
@@ -212,28 +216,28 @@ final class NativeDnsSettingManager: NativeDnsSettingManagerProtocol {
         
         dnsManagerStatusObserver = NotificationCenter.default.observe(name: .NEDNSSettingsConfigurationDidChange, object: nil, queue: .main) { [weak self] notification in
             if let dnsManager = notification.object as? NEDNSSettingsManager {
-                self?.dnsManagerIsEnabled = dnsManager.isEnabled
+                self?.dnsConfigIsEnabled = dnsManager.isEnabled
             }
         }
         
-        appWillEnterForeground = NotificationCenter.default.observe(name: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] notification in
+        appWillEnterForegroundObserver = NotificationCenter.default.observe(name: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] notification in
             self?.getDnsManagerStatus( { [weak self] status in
-                self?.dnsManagerIsEnabled = status.isInstalled && status.isEnabled
+                self?.dnsConfigIsEnabled = status.isInstalled && status.isEnabled
             })
         }
         
-        proObservation = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
+        proStatusObserver = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
             guard let self = self else { return }
             if !self.configuration.proStatus {
                 self.removeDnsManager{ error in
                     if let error = error {
-                        DDLogError("(NativeDnsSettingManager) - proObservation; Removing dns manager error: \(error)")
+                        DDLogError("(NativeDnsSettingsManager) - proObservation; Removing dns manager error: \(error)")
                     }
                 }
             } else if self.resources.dnsImplementation == .native && self.configuration.proStatus {
                 self.saveDnsManager { error in
                     if let error = error {
-                        DDLogError("(NativeDnsSettingManager) - proObservation; Saving dns manager error: \(error)")
+                        DDLogError("(NativeDnsSettingsManager) - proObservation; Saving dns manager error: \(error)")
                     }
                 }
             }
