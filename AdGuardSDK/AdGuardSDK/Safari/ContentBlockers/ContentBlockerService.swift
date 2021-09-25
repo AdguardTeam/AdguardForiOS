@@ -19,6 +19,9 @@
 import Foundation
 
 public protocol ContentBlockerServiceProtocol {
+    /* Returns every content blocker reloading state */
+    var reloadingContentBlockers: [ContentBlockerType: Bool] { get }
+    
     /* Returns every content blocker state */
     var allContentBlockersStates: [ContentBlockerType: Bool] { get }
     
@@ -35,9 +38,12 @@ public protocol ContentBlockerServiceProtocol {
 
 /* This class is responsible for updating Safari content blockers */
 final public class ContentBlockerService: ContentBlockerServiceProtocol {
-    // MARK: - Internal properties
     
-    public var allContentBlockersStates: [ContentBlockerType : Bool] {
+    // MARK: - Public  properties
+    
+    public private(set) var reloadingContentBlockers: [ContentBlockerType: Bool]
+    
+    public var allContentBlockersStates: [ContentBlockerType: Bool] {
         var result: [ContentBlockerType : Bool] = [:]
         ContentBlockerType.allCases.forEach { result[$0] = getState(for: $0) }
         return result
@@ -54,12 +60,19 @@ final public class ContentBlockerService: ContentBlockerServiceProtocol {
     
     // MARK: - Initialization
     
-    public init(
+    public init(appBundleId: String) {
+        self.appBundleId = appBundleId
+        self.contentBlockersManager = ContentBlockersManager()
+        self.reloadingContentBlockers = Self.emptyReloadingStates()
+    }
+    
+    init(
         appBundleId: String,
         contentBlockersManager: ContentBlockersManagerProtocol = ContentBlockersManager()
     ) {
         self.appBundleId = appBundleId
         self.contentBlockersManager = contentBlockersManager
+        self.reloadingContentBlockers = Self.emptyReloadingStates()
     }
     
     // MARK: - Internal methods
@@ -92,6 +105,15 @@ final public class ContentBlockerService: ContentBlockerServiceProtocol {
     }
     
     // MARK: - Private methods
+    
+    /// Helper function to avoid duplicate code in init
+    private static func emptyReloadingStates() -> [ContentBlockerType: Bool] {
+        var reloadingStates: [ContentBlockerType: Bool] = [:]
+        ContentBlockerType.allCases.forEach {
+            reloadingStates[$0] = false
+        }
+        return reloadingStates
+    }
     
     /*
      Updates all content blockers syncroniously.

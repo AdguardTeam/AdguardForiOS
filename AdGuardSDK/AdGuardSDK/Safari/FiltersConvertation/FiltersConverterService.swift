@@ -20,6 +20,9 @@ import Foundation
 @_implementationOnly import ContentBlockerConverter
 
 protocol FiltersConverterServiceProtocol {
+    /* Returns true if filters are converting now */
+    var filtersAreConverting: Bool { get }
+    
     /* Converts enabled filters and user rules to jsons objects for every content blocker */
     func convertFiltersAndUserRulesToJsons() -> [FiltersConverterResult]
 }
@@ -29,6 +32,16 @@ protocol FiltersConverterServiceProtocol {
  */
 final class FiltersConverterService: FiltersConverterServiceProtocol {
   
+    private(set) var filtersAreConverting: Bool = false {
+        didSet {
+            if filtersAreConverting {
+                NotificationCenter.default.filtersConvertionStarted()
+            } else {
+                NotificationCenter.default.filtersConvertionFinished()
+            }
+        }
+    }
+    
     // MARK: - Services
     
     private let configuration: SafariConfigurationProtocol
@@ -55,8 +68,8 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
     // MARK: - Internal methods
     
     func convertFiltersAndUserRulesToJsons() -> [FiltersConverterResult] {
-        NotificationCenter.default.filtersConvertionStarted()
-        defer { NotificationCenter.default.filtersConvertionFinished() }
+        filtersAreConverting = true
+        defer { filtersAreConverting = false }
         
         // Run converter with empty data if Safari protection is disabled
         guard configuration.safariProtectionEnabled else {

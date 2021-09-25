@@ -227,7 +227,7 @@ final class ComplexProtectionController: UITableViewController {
         }
         
         let newAdvancedProtectionState = sender.isOn
-        resources.advancedProtection = newAdvancedProtectionState
+        configuration.isAdvancedProtectionEnabled = newAdvancedProtectionState
         safariProtection.update(advancedProtectionEnabled: newAdvancedProtectionState, onCbReloaded: nil)
         updateAdvancedProtectionInfo()
     }
@@ -366,7 +366,7 @@ final class ComplexProtectionController: UITableViewController {
     }
     
     private func updateAdvancedProtectionInfo() {
-        let protectionEnabled = resources.advancedProtection
+        let protectionEnabled = configuration.isAdvancedProtectionEnabled
         advancedProtectionSwitch.isOn = protectionEnabled
         advancedProtectionIcon.tintColor = protectionEnabled ? enabledColor : disabledColor
     }

@@ -19,65 +19,95 @@
 import UIKit
 import SafariAdGuardSDK
 
+/// This enum represents all Safari Content Blocker states to display for user
 enum ContentBlockerCellState {
-    case enabled
-    case disabled
+    case enabled(rulesCount: Int, filterNames: [String])
+    case disabled(isAdvancedProtection: Bool)
     case convertingFilters
     case updatingContentBlockers
-    case overlimited
-    case failedUpdating
+    case overlimited(overlimitRulesCount: Int)
     
     fileprivate var image: UIImage? {
         switch self {
         case .enabled: return UIImage(named: "logocheck")
         case .disabled: return UIImage(named: "attention")
         case .convertingFilters, .updatingContentBlockers: return UIImage(named: "loading")
-        case .failedUpdating, .overlimited: return UIImage(named: "errorAttention")
+        case .overlimited: return UIImage(named: "errorAttention")
         }
     }
     
-    fileprivate func getDescription(_ rulesCount: Int, _ overLimitRulesCount: Int) -> String {
+    fileprivate var description: String {
         switch self {
-        case .enabled:
+        case .enabled(let rulesCount, filterNames: _):
             let format = String.localizedString("enabled_current_content_blocker_state_label")
             return String(format: format, String(rulesCount))
-        case .disabled:
-            return String.localizedString("disabled_current_state_label")
+        case .disabled(let isAdvancedProtection):
+            if isAdvancedProtection {
+                return String.localizedString("disabled_current_state_advanced_protection")
+            } else {
+                return String.localizedString("disabled_current_state_label")
+            }
         case .convertingFilters:
             return String.localizedString("converting_rules")
         case .updatingContentBlockers:
             return String.localizedString("update_current_state_label")
-        case .overlimited:
+        case .overlimited(let overLimitRulesCount):
             let format = String.localizedString("over_limit_current_state_label")
             return String(format: format, overLimitRulesCount)
-        case .failedUpdating:
-            return String.localizedString("failed_updating_current_state_label")
+        }
+    }
+    
+    fileprivate var filtersDescription: String? {
+        switch self {
+        case .enabled(rulesCount: _, filterNames: let filterNames):
+            if filterNames.isEmpty { return nil }
+            
+            let filtersString = String.localizedString("content_blocker_filters")
+            return filtersString + "\n" + filterNames.joined(separator: "\n")
+        default:
+            return nil
+        }
+    }
+    
+    fileprivate var shouldRotateImage: Bool {
+        switch self {
+        case .updatingContentBlockers, .convertingFilters: return true
+        default: return false
         }
     }
 }
 
 // MARK: - ContentBlockerTableViewCellModel
 
+/// This object is a view model for `ContentBlockerTableViewCell`
 struct ContentBlockerTableViewCellModel {
     let image: UIImage?
+    let shouldRotateImage: Bool
     let name: String
     let description: String
     let filtersString: String?
     
-    init(state: ContentBlockerCellState, cbType: ContentBlockerType, rulesCount: Int, cbFilterNames: [String], overLimitRulesCount: Int) {
+    /// Intializer for Content Blocker
+    init(state: ContentBlockerCellState, cbType: ContentBlockerType) {
         self.image = state.image
+        self.shouldRotateImage = state.shouldRotateImage
         self.name = cbType.localizedName
-        self.description = state.getDescription(rulesCount, overLimitRulesCount)
-        if cbFilterNames.isEmpty {
-            self.filtersString = nil
-        } else {
-            let filtersString = String.localizedString("content_blocker_filters")
-            self.filtersString = filtersString + "\n" + cbFilterNames.joined(separator: "\n")
-        }
+        self.description = state.description
+        self.filtersString = state.filtersDescription
+    }
+    
+    /// Initializer for Advanced Protection
+    init(state: ContentBlockerCellState, name: String) {
+        self.image = state.image
+        self.shouldRotateImage = state.shouldRotateImage
+        self.name = name
+        self.description = state.description
+        self.filtersString = nil
     }
     
     init() {
         self.image = nil
+        self.shouldRotateImage = false
         self.name = ""
         self.description = ""
         self.filtersString = nil

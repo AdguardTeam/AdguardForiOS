@@ -36,6 +36,14 @@ class SafariProtectionContnetBlockersTest: XCTestCase {
                  safariManagers.invertedAllowlistRulesManagerMock]
     }
     
+    func testReloadingContentBlockers() {
+        cbService.reloadingContentBlockers = [.general: true]
+        XCTAssertEqual(safariProtection.reloadingContentBlockers, cbService.reloadingContentBlockers)
+        
+        cbService.reloadingContentBlockers = [:]
+        XCTAssert(safariProtection.reloadingContentBlockers.isEmpty)
+    }
+    
     func testAdvancedRulesCount() {
         cbStorage.advancedRulesCount = 0
         XCTAssertEqual(safariProtection.advancedRulesCount, 0)

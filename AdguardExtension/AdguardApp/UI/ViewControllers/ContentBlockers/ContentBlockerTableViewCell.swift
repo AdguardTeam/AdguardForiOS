@@ -18,6 +18,7 @@
 
 import UIKit
 
+/// This cell is responsible for displaying info about certain Safari Content Blocker
 final class ContentBlockerTableViewCell: UITableViewCell, Reusable {
 
     // MARK: - Public properties
@@ -69,6 +70,10 @@ final class ContentBlockerTableViewCell: UITableViewCell, Reusable {
     
     // MARK: - Private properties
     
+    // We use this constraint to reduce cell size when filters are empty
+    private var cbFiltersLabelBottomConstraint: NSLayoutConstraint!
+    private var cbDescriptionLabelBottomConstraint: NSLayoutConstraint!
+    
     // MARK: - Initialization
     
     required init?(coder: NSCoder) {
@@ -87,7 +92,15 @@ final class ContentBlockerTableViewCell: UITableViewCell, Reusable {
         contentView.addSubview(stateImageView)
         contentView.addSubview(cbNameLabel)
         contentView.addSubview(cbDescriptionLabel)
-        contentView.addSubview(cbFiltersLabel)
+        
+        cbDescriptionLabelBottomConstraint = cbDescriptionLabel.bottomAnchor.constraint(
+            equalTo: contentView.bottomAnchor,
+            constant: isIpadTrait ? -24.0 : -16.0
+        )
+        cbFiltersLabelBottomConstraint = cbFiltersLabel.bottomAnchor.constraint(
+            equalTo: contentView.bottomAnchor,
+            constant: isIpadTrait ? -24.0 : -16.0
+        )
         
         NSLayoutConstraint.activate([
             stateImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: isIpadTrait ? 24.0 : 16.0),
@@ -101,12 +114,22 @@ final class ContentBlockerTableViewCell: UITableViewCell, Reusable {
             
             cbDescriptionLabel.leadingAnchor.constraint(equalTo: cbNameLabel.leadingAnchor),
             cbDescriptionLabel.trailingAnchor.constraint(equalTo: cbNameLabel.trailingAnchor),
-            cbDescriptionLabel.topAnchor.constraint(equalTo: cbNameLabel.bottomAnchor, constant: -2.0),
-            
+            cbDescriptionLabel.topAnchor.constraint(equalTo: cbNameLabel.bottomAnchor, constant: -2.0)
+        ])
+        
+        layoutFiltersLabel()
+    }
+    
+    private func layoutFiltersLabel() {
+        cbDescriptionLabelBottomConstraint.isActive = false
+        cbFiltersLabel.removeFromSuperview()
+        contentView.addSubview(cbFiltersLabel)
+        
+        NSLayoutConstraint.activate([
             cbFiltersLabel.leadingAnchor.constraint(equalTo: cbDescriptionLabel.leadingAnchor),
             cbFiltersLabel.trailingAnchor.constraint(equalTo: cbDescriptionLabel.trailingAnchor),
             cbFiltersLabel.topAnchor.constraint(equalTo: cbDescriptionLabel.bottomAnchor, constant: isIpadTrait ? 40.0 : 20.0),
-            cbFiltersLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: isIpadTrait ? -24.0 : -16.0)
+            cbFiltersLabelBottomConstraint
         ])
     }
     
@@ -124,5 +147,15 @@ final class ContentBlockerTableViewCell: UITableViewCell, Reusable {
         cbNameLabel.text = model.name
         cbDescriptionLabel.text = model.description
         cbFiltersLabel.text = model.filtersString
+        
+        if model.filtersString == nil {
+            cbFiltersLabelBottomConstraint.isActive = false
+            cbFiltersLabel.removeFromSuperview()
+            cbDescriptionLabelBottomConstraint.isActive = true
+        } else {
+            layoutFiltersLabel()
+        }
+        
+        stateImageView.rotateImage(isNedeed: model.shouldRotateImage)
     }
 }

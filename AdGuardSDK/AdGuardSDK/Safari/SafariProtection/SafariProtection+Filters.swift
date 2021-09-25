@@ -19,9 +19,10 @@
 import Foundation
 
 public protocol SafariProtectionFiltersProtocol {
-    /**
-     Returns all Groups objects
-     */
+    /// Returns true if filters are converting now
+    var filtersAreConverting: Bool { get }
+    
+    /// Returns all Safari Groups objects
     var groups: [SafariGroup] { get }
         
     /**
@@ -88,11 +89,9 @@ extension SafariProtection {
     
     // MARK: - Public variables
     
-    public var groups: [SafariGroup] {
-        return workingQueue.sync {
-            return filters.groups
-        }
-    }
+    public var filtersAreConverting: Bool { workingQueue.sync { converter.filtersAreConverting } }
+    
+    public var groups: [SafariGroup] { workingQueue.sync { filters.groups } }
     
     // MARK: - Public methods
     

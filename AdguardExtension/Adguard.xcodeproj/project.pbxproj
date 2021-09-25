@@ -722,6 +722,8 @@
 		7E707F8D26F0EBE300882005 /* LowLevelDnsConfiguration+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07373A126EB5F0A007366F8 /* LowLevelDnsConfiguration+Utils.swift */; };
 		7E74FCAC239F9BF7006C0990 /* MainPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74FCAB239F9BF7006C0990 /* MainPageController.swift */; };
 		7E74FCB0239F9C96006C0990 /* MainPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74FCAF239F9C96006C0990 /* MainPageModel.swift */; };
+		7E7702A226FF5113004A8616 /* TitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7702A126FF5113004A8616 /* TitleHeaderView.swift */; };
+		7E7702A326FF5113004A8616 /* TitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7702A126FF5113004A8616 /* TitleHeaderView.swift */; };
 		7E77144D2445F35A0078CD6B /* ActivityStatisticsServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E77144C2445F35A0078CD6B /* ActivityStatisticsServiceMock.swift */; };
 		7E77144F2445F3670078CD6B /* DnsStatisticsServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E77144E2445F3670078CD6B /* DnsStatisticsServiceMock.swift */; };
 		7E7F9908241A98E400FC89DC /* RateApp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E7F990A241A98E400FC89DC /* RateApp.storyboard */; };
@@ -3346,6 +3348,7 @@
 		7E74789626ECA455008DC25C /* SafariWebExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SafariWebExtension-Bridging-Header.h"; sourceTree = "<group>"; };
 		7E74FCAB239F9BF7006C0990 /* MainPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageController.swift; sourceTree = "<group>"; };
 		7E74FCAF239F9C96006C0990 /* MainPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageModel.swift; sourceTree = "<group>"; };
+		7E7702A126FF5113004A8616 /* TitleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleHeaderView.swift; sourceTree = "<group>"; };
 		7E77144C2445F35A0078CD6B /* ActivityStatisticsServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStatisticsServiceMock.swift; sourceTree = "<group>"; };
 		7E77144E2445F3670078CD6B /* DnsStatisticsServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsStatisticsServiceMock.swift; sourceTree = "<group>"; };
 		7E7D636626D6A91A0002EE6A /* popup.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = popup.js; sourceTree = "<group>"; };
@@ -5974,6 +5977,7 @@
 			children = (
 				7E9E10C826CC1108007A4B8A /* StateHeaderView.swift */,
 				7E3FEFBF26CEBAE80080EC03 /* ExtendedTitleTableHeaderView.swift */,
+				7E7702A126FF5113004A8616 /* TitleHeaderView.swift */,
 			);
 			path = GenericTableHeaders;
 			sourceTree = "<group>";
@@ -8449,6 +8453,7 @@
 				D09E2D31255D6AFF002D6BC0 /* SettingsParser.swift in Sources */,
 				D0D7E61224445085001801A5 /* ActivityStatisticsRecord.swift in Sources */,
 				D031A178219EFC99002C17D9 /* DDFileLogger.m in Sources */,
+				7E7702A326FF5113004A8616 /* TitleHeaderView.swift in Sources */,
 				7E3FEFA926CCFC8D0080EC03 /* OneSafariGroupFiltersModel.swift in Sources */,
 				D0B545A22435D640002F0AEC /* NetworkSettingsTableController.swift in Sources */,
 				D0B545712435D5CD002F0AEC /* NetworkSettingsModel.swift in Sources */,
@@ -8876,6 +8881,7 @@
 				D034DDAD22CA23030007641A /* UIViewController+Utils.swift in Sources */,
 				D018672A203C86050003110A /* MGSwipeButton.m in Sources */,
 				65EC9BD01BB9824C00F53F3B /* ADProductInfo.m in Sources */,
+				7E7702A226FF5113004A8616 /* TitleHeaderView.swift in Sources */,
 				D090FC952407E53700A0C026 /* VpnManager.swift in Sources */,
 				7E822C0C2435EDD30015B4D0 /* RuleLabel.swift in Sources */,
 				7EF4285C23AB77AB00948B65 /* ComplexProtectionController.swift in Sources */,

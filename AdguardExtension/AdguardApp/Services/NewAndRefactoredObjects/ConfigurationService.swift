@@ -51,6 +51,7 @@ final class ConfigurationService: ConfigurationServiceProtocol {
             let command = note.userInfo?[PurchaseService.kPSNotificationTypeKey] as! String
             if  command == PurchaseService.kPSNotificationPremiumStatusChanged {
                 self.safariProtection.update(proStatus: self.proStatus, onCbReloaded: nil)
+                self.resources.advancedProtection = false
                 self.proStatusChanged()
             }
         }
@@ -63,6 +64,24 @@ final class ConfigurationService: ConfigurationServiceProtocol {
     
     /// This flag indicates that pro status was purchased on our site
     var purchasedThroughLogin: Bool { purchaseService.purchasedThroughLogin }
+    
+    /// This flag indicated whether advanced protection is enabled. Note that this feature is pro only
+    var isAdvancedProtectionEnabled: Bool {
+        get {
+            if !proStatus { return false }
+            return resources.advancedProtection
+        }
+        set {
+            if newValue != isAdvancedProtectionEnabled {
+                Self.advancedProtectionStateChanged()
+                if proStatus {
+                    resources.advancedProtection = newValue
+                } else {
+                    resources.advancedProtection = false
+                }
+            }
+        }
+    }
     
     /// Every Content Blocker state
     var contentBlockerEnabled: [ContentBlockerType: Bool]
@@ -164,6 +183,10 @@ final class ConfigurationService: ConfigurationServiceProtocol {
     private static func contentBlockersStateChanged() {
         NotificationCenter.default.post(name: .contentBlockersStateChanged, object: self)
     }
+    
+    private static func advancedProtectionStateChanged() {
+        NotificationCenter.default.post(name: .advancedProtectionStateChanged, object: self)
+    }
 }
 
 extension Notification.Name {
@@ -171,5 +194,6 @@ extension Notification.Name {
     static var proStatusChanged: Notification.Name { return .init(rawValue: "proStatusChanged") }
     static var advancedModeChanged: Notification.Name { return .init(rawValue: "advancedModeChanged") }
     static var contentBlockersStateChanged: Notification.Name { return .init(rawValue: "contentBlockersStateChanged") }
+    static var advancedProtectionStateChanged: Notification.Name { return .init(rawValue: "advancedProtectionStateChanged") }
 }
 

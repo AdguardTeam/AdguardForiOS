@@ -47,6 +47,9 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
     
     private func getInitData(_ url: String?) -> [String: Any] {
         let resources = AESharedResources()
+        // We set it to be sure the user opened Extension
+        resources.safariWebExtensionIsOn = true
+        
         let cbService = ContentBlockerService(appBundleId: Bundle.main.hostAppBundleId)
         let domain = URL(string: url ?? "")?.domain
         

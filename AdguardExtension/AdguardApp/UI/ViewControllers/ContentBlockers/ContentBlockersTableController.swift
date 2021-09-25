@@ -19,6 +19,7 @@
 import UIKit
 import typealias SafariAdGuardSDK.SafariProtectionProtocol
 
+/// This screen is responsible for displaying All Safari Content Blockers information
 final class ContentBlockersTableController: UITableViewController {
 
     // MARK: - Private properties
@@ -26,22 +27,21 @@ final class ContentBlockersTableController: UITableViewController {
     private let model: ContentBlockersTableModel
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - UITableViewController lifecycle
     
     required init?(coder: NSCoder) {
-        model = ContentBlockersTableModel(safariProtection: safariProtection)
+        model = ContentBlockersTableModel(safariProtection: safariProtection, configuration: configuration)
         super.init(coder: coder)
+        model.delegate = self
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTableView()
         updateTheme()
         setupBackButton()
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        ContentBlockerTableViewCell.registerCell(forTableView: tableView)
     }
     
     override func viewDidLayoutSubviews() {
@@ -82,8 +82,23 @@ final class ContentBlockersTableController: UITableViewController {
         return cell
     }
     
-    // MARK: - Table view delegate
+    // MARK: - Private methods
     
+    private func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        let title = String.localizedString("cb_screen_content_blockers_title")
+        tableView.tableHeaderView = TitleTableHeaderView(title: title)
+        ContentBlockerTableViewCell.registerCell(forTableView: tableView)
+    }
+}
+
+// MARK: - ContentBlockersTableController + ContentBlockersTableModelDelegate
+
+extension ContentBlockersTableController: ContentBlockersTableModelDelegate {
+    func cbStatesChanged() {
+        tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+    }
 }
 
 // MARK: - ContentBlockersTableController + ThemableProtocol
@@ -93,5 +108,8 @@ extension ContentBlockersTableController: ThemableProtocol {
         view.backgroundColor = themeService.backgroundColor
         themeService.setupTable(tableView)
         tableView.reloadData()
+        if let header = tableView.tableHeaderView as? TitleTableHeaderView {
+            header.updateTheme(themeService)
+        }
     }
 }
