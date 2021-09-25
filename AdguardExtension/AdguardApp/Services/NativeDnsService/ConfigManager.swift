@@ -23,9 +23,9 @@ protocol ConfigManagerProtocol {
     /// State of saved dns config
     var dnsConfigIsEnabled: Bool { get }
     /// Save dns config with active provider into system preferences
-    func saveDnsManager(_ onErrorReceived: @escaping (_ error: Error?) -> Void)
+    func saveDnsConfig(_ onErrorReceived: @escaping (_ error: Error?) -> Void)
     /// Remove dns config from system preferences
-    func removeDnsManager(_ onErrorReceived: @escaping (_ error: Error?) -> Void)
+    func removeDnsConfig(_ onErrorReceived: @escaping (_ error: Error?) -> Void)
     /// Reset dns config
     func reset()
 }
@@ -80,7 +80,7 @@ final class ConfigManager: ConfigManagerProtocol {
     }
     
     //MARK: - Public methods
-    func saveDnsManager(_ onErrorReceived: @escaping (_ error: Error?) -> Void) {
+    func saveDnsConfig(_ onErrorReceived: @escaping (_ error: Error?) -> Void) {
        
         let server = dnsProvidersManager.activeDnsServer
         
@@ -91,11 +91,11 @@ final class ConfigManager: ConfigManagerProtocol {
                 return
             }
             
-            self?.saveDnsManagerInternal(dnsManager: manager, server: server, onErrorReceived)
+            self?.saveDnsConfigInternal(dnsManager: manager, server: server, onErrorReceived)
         }
     }
     
-    func removeDnsManager(_ onErrorReceived: @escaping (_ error: Error?) -> Void) {
+    func removeDnsConfig(_ onErrorReceived: @escaping (_ error: Error?) -> Void) {
         loadDnsManager { [weak self] dnsManager in
             guard let dnsManager = dnsManager else {
                 DDLogError("(ConfigManager) - removeDnsManager; Received nil DNS manager")
@@ -112,7 +112,7 @@ final class ConfigManager: ConfigManagerProtocol {
     }
     
     func reset() {
-        removeDnsManager { error in
+        removeDnsConfig { error in
             if let error = error {
                 DDLogError("(ConfigManager) - reset; Error when resetting settings; Error: \(error)")
             }
@@ -149,7 +149,7 @@ final class ConfigManager: ConfigManagerProtocol {
         dnsManager.onDemandRules = onDemandRules
     }
     
-    private func saveDnsManagerInternal(dnsManager: NEDNSSettingsManager, server: DnsServerMetaProtocol, _ onErrorReceived: @escaping (_ error: Error?) -> Void) {
+    private func saveDnsConfigInternal(dnsManager: NEDNSSettingsManager, server: DnsServerMetaProtocol, _ onErrorReceived: @escaping (_ error: Error?) -> Void) {
         setupDnsManager(dnsManager: dnsManager)
         let upstreams = server.upstreams.map { $0.upstream }
         let settings: NEDNSSettings
@@ -199,13 +199,13 @@ final class ConfigManager: ConfigManagerProtocol {
     private func addObservers() {
         dnsImplementationObserver = NotificationCenter.default.observe(name: .dnsImplementationChanged, object: nil, queue: .main) { [weak self] _ in
             if self?.resources.dnsImplementation == .native {
-                self?.saveDnsManager({ error in
+                self?.saveDnsConfig({ error in
                     if let error = error {
                         DDLogError("(ConfigManager) - dnsImplementationObserver; Saving dns manager error: \(error)")
                     }
                 })
             } else {
-                self?.removeDnsManager({ error in
+                self?.removeDnsConfig({ error in
                     if let error = error {
                         DDLogError("(ConfigManager) - dnsImplementationObserver; Removing dns manager error: \(error)")
                     }
@@ -228,13 +228,13 @@ final class ConfigManager: ConfigManagerProtocol {
         proStatusObserver = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
             guard let self = self else { return }
             if !self.configuration.proStatus {
-                self.removeDnsManager{ error in
+                self.removeDnsConfig{ error in
                     if let error = error {
                         DDLogError("(ConfigManager) - proObservation; Removing dns manager error: \(error)")
                     }
                 }
             } else if self.resources.dnsImplementation == .native && self.configuration.proStatus {
-                self.saveDnsManager { error in
+                self.saveDnsConfig { error in
                     if let error = error {
                         DDLogError("(ConfigManager) - proObservation; Saving dns manager error: \(error)")
                     }
