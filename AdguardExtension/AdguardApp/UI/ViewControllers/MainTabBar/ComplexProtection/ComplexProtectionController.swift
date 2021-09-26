@@ -356,9 +356,11 @@ final class ComplexProtectionController: UITableViewController {
     }
     
     private func updateSafariProtectionInfo(){
-        let protectionEnabled = complexProtection.safariProtectionEnabled
-        safariProtectionSwitch.isOn = protectionEnabled
-        safariIcon.tintColor = protectionEnabled ? enabledColor : disabledColor
+        DispatchQueue.asyncSafeMain { [weak self] in
+            let protectionEnabled = self?.complexProtection.safariProtectionEnabled ?? false
+            self?.safariProtectionSwitch.isOn = protectionEnabled
+            self?.safariIcon.tintColor = protectionEnabled ? self?.enabledColor : self?.disabledColor
+        }
     }
     
     private func updateAdvancedProtectionInfo() {

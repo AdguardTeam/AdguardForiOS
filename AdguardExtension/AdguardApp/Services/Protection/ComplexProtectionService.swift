@@ -220,11 +220,13 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
             
             let group = DispatchGroup()
             
-            group.enter()
-            self.safariProtection.update(safariProtectionEnabled: safari) { error in
-                safariError = error
-                DDLogInfo("(ComplexProtectionService) - Ending updating safari protection with error - \(error?.localizedDescription ?? "nil")")
-                group.leave()
+            if safari {
+                group.enter()
+                self.safariProtection.update(safariProtectionEnabled: self.resources.safariProtectionEnabled ) { error in
+                    safariError = error
+                    DDLogInfo("(ComplexProtectionService) - Ending updating safari protection with error - \(error?.localizedDescription ?? "nil")")
+                    group.leave()
+                }
             }
             
             if system {
