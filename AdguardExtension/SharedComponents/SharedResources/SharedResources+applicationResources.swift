@@ -57,4 +57,37 @@ extension AESharedResourcesProtocol {
             sharedDefaults().setValue(newValue.rawValue, forKey: BlockingMode)
         }
     }
+    
+    /// Map that store info about active protocol for specified provider.
+    /// Map key: - Int value represent provider Id
+    /// Map value: - Selected DNS protocol for specified provider
+    dynamic var dnsActiveProtocols: [Int: DnsAdGuardSDK.DnsProtocol] {
+        get {
+            if let data = sharedDefaults().object(forKey: DnsActiveProtocols) as? Data {
+                let decoder = JSONDecoder()
+                let protocols = try? decoder.decode([Int: DnsAdGuardSDK.DnsProtocol].self, from: data)
+                return protocols ?? [:]
+            }
+            return [:]
+        }
+        set {
+            let encoder = JSONEncoder()
+            if let data = try? encoder.encode(newValue) {
+                sharedDefaults().set(data, forKey: DnsActiveProtocols)
+            }
+        }
+    }
+    
+    dynamic var tunnelMode: TunnelMode {
+        get {
+            guard let value = sharedDefaults().object(forKey: AEDefaultsVPNTunnelMode) as? Int else {
+                return .split
+            }
+            
+            return TunnelMode(rawValue:  value) ?? .split
+        }
+        set {
+            sharedDefaults().set(newValue.rawValue, forKey: AEDefaultsVPNTunnelMode)
+        }
+    }
 }

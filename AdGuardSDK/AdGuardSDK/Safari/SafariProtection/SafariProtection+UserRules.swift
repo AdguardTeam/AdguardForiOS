@@ -91,7 +91,6 @@ public protocol SafariProtectionUserRulesProtocol {
      - Parameter type: User rule type (blocklist / allowlist / inverted allowlist) to modify rule for
      - Parameter onCbReloaded: Closure to handle errors when reloading Content Blockers
      */
-    // TODO: - Tests missing
     func removeRules(_ rules: [String], for type: SafariUserRuleType, onCbReloaded: ((Error?) -> Void)?)
     
     /**

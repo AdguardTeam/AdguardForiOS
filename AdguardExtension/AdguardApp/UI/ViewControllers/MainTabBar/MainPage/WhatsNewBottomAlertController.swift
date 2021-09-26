@@ -38,7 +38,7 @@ final class WhatsNewBottomAlertController: BottomAlertController {
     //MARK: - Services
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resoruces: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     //MARK: - ViewController lifecycle
     
     override func viewDidLoad() {
