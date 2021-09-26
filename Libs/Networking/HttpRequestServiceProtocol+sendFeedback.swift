@@ -19,26 +19,14 @@
 import Foundation
 
 extension HttpRequestServiceProtocol {
-    func loadFiltersMetadata(version: String, id: String, cid: String, lang: String, completion: @escaping (_ filterMeta: ExtendedFiltersMeta?) -> Void) {
-        let config = RequestFactory.loadFiltersMetadataConfig(version: version, id: id, cid: cid, lang: lang)
-        requestSender.send(requestConfig: config) { result in
-            switch result {
-            case .success(let metadata):
-                completion(metadata)
+    func sendFeedback(_ feedback: FeedBackProtocol, completion: @escaping (_ success: Bool)->()) {
+        let config = RequestFactory.sendFeedbackConfig(feedback)
+        requestSender.send(requestConfig: config) { (result: RequestResult<Bool>) in
+            switch result{
+            case .success(let isSuccess):
+                completion(isSuccess)
             case .error:
-                completion(nil)
-            }
-        }
-    }
-    
-    func loadFiltersLocalizations(completion: @escaping (_ filterMetaLocalization: ExtendedFiltersMetaLocalizations?) -> Void) {
-        let config = RequestFactory.loadFiltersLocalizationsConfig()
-        requestSender.send(requestConfig: config) { result in
-            switch result {
-            case .success(let localizations):
-                completion(localizations)
-            case .error:
-                completion(nil)
+                completion(false)
             }
         }
     }

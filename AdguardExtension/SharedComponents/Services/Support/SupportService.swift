@@ -21,22 +21,33 @@ import SafariAdGuardSDK
 import DnsAdGuardSDK
 
 protocol SupportServiceProtocol {
+    /// Preparing logs archive to sharing. Return archive file URL in temporary directory
     func exportLogs() -> URL?
+    /// Delete log archive and other log files from temporary directory. Call it after sharing archive of logs
     func deleteLogsFiles()
+    /// Sending feedback data to our backend
     func sendFeedback(_ email: String, description: String, reportType: ReportType, sendLogs: Bool, _ completion: @escaping (_ logsSentSuccessfully: Bool) -> Void)
 }
 
-class SupportService: SupportServiceProtocol {
+/// Support service assemble app state info
+final class SupportService: SupportServiceProtocol {
+    
+    fileprivate struct DnsServerInfo {
+        let serverName: String
+        let serverId: Int
+        let upstreams: String
+    }
     
     // Services
     private let resources: AESharedResourcesProtocol
     private let configuration: ConfigurationServiceProtocol
     private let complexProtection: ComplexProtectionServiceProtocol
-    private let dnsProviders: DnsProvidersServiceProtocol
     private let networkSettings: NetworkSettingsServiceProtocol
     private let productInfo: ADProductInfoProtocol
     private let keyChainService: KeychainServiceProtocol
     private let safariProtection: SafariProtectionProtocol
+    private let dnsProvidersManager: DnsProvidersManagerProtocol
+    private let dnsProtection: DnsProtectionProtocol
 
     // Helper variable
     private let reportUrl = "https://reports.adguard.com/new_issue.html"
@@ -52,15 +63,16 @@ class SupportService: SupportServiceProtocol {
     private var logsDirectory: URL?
     private var logsZipDirectory: URL?
     
-    init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol, complexProtection: ComplexProtectionServiceProtocol, dnsProviders: DnsProvidersServiceProtocol, productInfo: ADProductInfoProtocol, keyChainService: KeychainServiceProtocol, safariProtection: SafariProtectionProtocol, networkSettings: NetworkSettingsServiceProtocol) {
+    init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol, complexProtection: ComplexProtectionServiceProtocol, productInfo: ADProductInfoProtocol, keyChainService: KeychainServiceProtocol, safariProtection: SafariProtectionProtocol, networkSettings: NetworkSettingsServiceProtocol, dnsProvidersManager: DnsProvidersManagerProtocol, dnsProtection: DnsProtectionProtocol) {
         self.resources = resources
         self.configuration = configuration
         self.complexProtection = complexProtection
-        self.dnsProviders = dnsProviders
         self.productInfo = productInfo
         self.keyChainService = keyChainService
         self.safariProtection = safariProtection
         self.networkSettings = networkSettings
+        self.dnsProvidersManager = dnsProvidersManager
+        self.dnsProtection = dnsProtection
     }
     
     func exportLogs() -> URL? {
@@ -78,12 +90,7 @@ class SupportService: SupportServiceProtocol {
         try? fileManager.createDirectory(atPath: targetsUrlString, withIntermediateDirectories: true, attributes: nil)
         
         /// Get jsons for content blockers and append them to base directory
-//        let contentBlockingInfo = safariProtection.allContentBlockersInfo
-//        contentBlockingInfo.forEach { (_, cbInfo) in
-//            // todo: copy file
-//            let fileUrl = URL(fileURLWithPath: cbUrlString + fileName)
-//            try? jsonData.write(to: fileUrl)
-//        }
+        appendCBJsonsIntoTemporaryDirectory(cbUrlString: cbUrlString)
         
         /// Get application state info and save it as state.txt to base directory
         let appStateData = createApplicationStateInfo().data(using: .utf8)
@@ -147,22 +154,25 @@ class SupportService: SupportServiceProtocol {
         let applicationState = createApplicationStateInfo()
         let debugInfo = sendLogs ? createDebugInfo() : ""
         let feedback: FeedBackProtocol = FeedBack(applicationId: appId, version: version, email: email, language: language, subject: subject, description: description, applicationState: applicationState, debugInfo: debugInfo)
-        // todo: do something with reqest service
-//        requestsService.sendFeedback(feedback) { logsSentSuccessfully in
-//            completion(logsSentSuccessfully)
-//        }
+        
+        let httpRequestService = HttpRequestService()
+        httpRequestService.sendFeedback(feedback) { success in
+            completion(success)
+        }
     }
     
     private func createApplicationStateInfo() -> String {
-        let server = dnsProviders.activeDnsServer
+        let serverInfo = collectDnsServerInfo()
+        
         let device = UIDevice.current
         
-        // todo:
-        let filters = [String]()
-//        let filters = antibanner.activeFilters().reduce("") { filtersString, meta -> String in
-//            let metaString = "ID=\(meta.filterId) Name=\"\(meta.name)\" Version=\(meta.version ?? "-") Enabled=\(meta.enabled)"
-//            return filtersString + metaString + "\n"
-//        }
+        let filters = safariProtection.groups
+            .filter { $0.isEnabled }
+            .flatMap { $0.filters }
+            .reduce("") { filtersString, filter in
+                let metaString = "ID=\(filter.filterId) Name=\"\(filter.name ?? "-")\" Version=\(filter.version ?? "-") Enabled=\(filter.isEnabled)\n"
+                return filtersString + metaString
+            }
         
         let tunnelMode = resources.tunnelMode.debugDescription
         
@@ -197,12 +207,12 @@ class SupportService: SupportServiceProtocol {
         Safari protection enabled: \(complexProtection.safariProtectionEnabled)
         System protection enabled: \(complexProtection.systemProtectionEnabled)
         Tunnel mode \(tunnelMode)
-        DNS server: \(server?.name ?? "System default")
+        DNS server: \(serverInfo.serverName)
         Restart when network changes: \(resources.restartByReachability)
         Filter mobile data: \(networkSettings.filterMobileDataEnabled)
         Filter wi-fi data: \(networkSettings.filterWifiDataEnabled)
 
-        Dns server id: \(server?.serverId ?? "")
+        Dns server id: \(serverInfo.serverId)
         Dns custom bootstrap servers: \(customBootstraps)"
         Dns custom fallback servers: \(customFallbacks)"
 
@@ -212,9 +222,7 @@ class SupportService: SupportServiceProtocol {
         AdGuard VPN tunnel is running: \(UIApplication.adGuardVpnIsActive)
         """
         
-        for upstream in server?.upstreams ?? [] {
-            resultString.append("\r\nDns upstream: \(upstream)")
-        }
+        resultString.append("\r\nDns upstream: \(serverInfo.upstreams)")
         
         if networkSettings.exceptions.count > 0 {
             resultString.append("\r\n\r\nWi-Fi exceptions:")
@@ -223,13 +231,10 @@ class SupportService: SupportServiceProtocol {
             }
         }
         
-        if 1 > 0 { // dnsFilters.filters.count
-            resultString.append("\r\nDns filters: \r\n");
-            
-//            for filter in dnsFilters.filters {
-//                resultString.append("name: \(filter.name ?? "UNDEFINED") id: \(filter.id) url: \(filter.subscriptionUrl ?? "UNDEFINED") enabled: \(filter.enabled)\r\n")
-//            }
-        }
+        let filtersString = collectDnsFilters()
+        guard !filtersString.isEmpty else { return resultString }
+        resultString.append("\r\nDns filters: \r\n");
+        resultString.append(filtersString)
         
         return resultString
     }
@@ -280,5 +285,34 @@ class SupportService: SupportServiceProtocol {
         delimeter += "LOG FILE: \(fileName)"
         delimeter += "\r\n-------------------------------------------------------------\r\n"
         return delimeter
+    }
+    
+    private func appendCBJsonsIntoTemporaryDirectory(cbUrlString: String) {
+        safariProtection.allConverterResults.forEach { converterResult in
+            let fileUrl = converterResult.jsonUrl
+            let fileManager = FileManager.default
+            try? fileManager.copyItem(atPath: fileUrl.path, toPath: cbUrlString + fileUrl.lastPathComponent)
+        }
+    }
+    
+    private func collectDnsServerInfo() -> DnsServerInfo {
+        let provider = dnsProvidersManager.activeDnsProvider
+        let server = dnsProvidersManager.activeDnsServer
+        let serverName = server.isPredefined ? server.predefined.name : provider.name
+        let serverId = server.id
+        let upstreams = server.upstreams.reduce("") { partialResult, upstream in
+            partialResult + "\(upstream.upstream)\n"
+        }
+        return DnsServerInfo(serverName: serverName,
+                             serverId: serverId,
+                             upstreams: upstreams)
+    }
+    
+    private func collectDnsFilters() -> String {
+        return dnsProtection.filters.reduce("") { partialResult, filter in
+            guard filter.isEnabled else { return partialResult }
+            let filterString = "ID=\(filter.filterId) Name=\"\(filter.name ?? "UNDEFINED")\" Url=\(filter.filterDownloadPage ?? "UNDEFINED") Enabled=\(filter.isEnabled)\r\n"
+            return partialResult + filterString
+        }
     }
 }

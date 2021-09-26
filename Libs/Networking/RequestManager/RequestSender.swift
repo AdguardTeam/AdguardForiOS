@@ -22,26 +22,26 @@ public final class RequestSender: RequestSenderProtocol{
     
     let session = URLSession.shared
     
-    public func send<Parser>(requestConfig: RequestConfig<Parser>, completionHandler: @escaping (Result<Parser.Model>) -> Void) where Parser : ParserProtocol {
+    public func send<Parser>(requestConfig: RequestConfig<Parser>, completionHandler: @escaping (RequestResult<Parser.Model>) -> Void) where Parser : ParserProtocol {
         
         guard let urlRequest = requestConfig.request.urlRequest else {
-            completionHandler(Result.error(RequestSenderErrors.stringToUrlError))
+            completionHandler(RequestResult.error(RequestSenderErrors.stringToUrlError))
             return
         }
         
         let task = session.dataTask(with: urlRequest) { (data: Data?, response: URLResponse?, error: Error?) in
             if let error = error {
-                completionHandler(Result.error(error))
+                completionHandler(RequestResult.error(error))
                 return
             }
             guard let data = data,
                 let parsedModel: Parser.Model = requestConfig.parser.parse(data: data, response: response)
                 else {
-                    completionHandler(Result.error(RequestSenderErrors.receivedDataParsingError))
+                    completionHandler(RequestResult.error(RequestSenderErrors.receivedDataParsingError))
                     return
             }
             
-            completionHandler(Result.success(parsedModel))
+            completionHandler(RequestResult.success(parsedModel))
         }
         
         task.resume()

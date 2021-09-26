@@ -33,12 +33,12 @@ public enum RequestSenderErrors: Error {
     case receivedDataParsingError
 }
 
-public enum Result<Model> {
+public enum RequestResult<Model> {
     case success(Model)
     case error(Error)
 }
 
 public protocol RequestSenderProtocol {
     func send<Parser>(requestConfig: RequestConfig<Parser>,
-                      completionHandler: @escaping(Result<Parser.Model>) -> Void)
+                      completionHandler: @escaping(RequestResult<Parser.Model>) -> Void)
 }

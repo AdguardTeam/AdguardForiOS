@@ -16,10 +16,10 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
+protocol WebReporterWrapperProtocol {
+   func collectParams() -> [String: String]
+}
 
-extension RequestFactory {
-    static func sendFeedbackConfig(_ feedback: FeedBackProtocol) -> RequestConfig<SuccessFailureParser> {
-        return RequestConfig<SuccessFailureParser>(request: SendFeedbackRequest(feedback), parser: SuccessFailureParser())
-    }
+protocol WebReporterProtocol {
+    func createUrl() -> URL
 }
