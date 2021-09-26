@@ -70,7 +70,6 @@ class VpnManager: VpnManagerProtocol {
     
     private var configurationObserver: NotificationToken?
     private var configurationObserver2: NotificationToken?
-    private var dnsProviders: DnsProvidersServiceProtocol
     
     weak var complexProtection: ComplexProtectionServiceProtocol?
     
@@ -83,11 +82,10 @@ class VpnManager: VpnManagerProtocol {
             
     // MARK: - initialize
     
-    init(resources: AESharedResourcesProtocol ,configuration: ConfigurationServiceProtocol, networkSettings: NetworkSettingsServiceProtocol, dnsProviders: DnsProvidersServiceProtocol) {
+    init(resources: AESharedResourcesProtocol ,configuration: ConfigurationServiceProtocol, networkSettings: NetworkSettingsServiceProtocol) {
         self.resources = resources
         self.appConfiguration = configuration
         self.networkSettings = networkSettings
-        self.dnsProviders = dnsProviders
         
         configurationObserver = NotificationCenter.default.observe(name: NSNotification.Name.NEVPNStatusDidChange, object: nil, queue: nil) { [weak self] note in
             guard let self = self else { return }

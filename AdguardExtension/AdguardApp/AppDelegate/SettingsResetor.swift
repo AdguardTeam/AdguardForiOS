@@ -17,6 +17,7 @@
  */
 
 import SafariAdGuardSDK
+import DnsAdGuardSDK
 
 protocol ISettingsResetor {
     func resetAllSettings()
@@ -74,12 +75,12 @@ struct SettingsResetor: ISettingsResetor {
  
             appDelegate?.setAppInterfaceStyle()
             
-            let providersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
-            providersService.reset()
+            let dnsProvidersManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!
+            try? dnsProvidersManager.reset()
             
             if #available(iOS 14.0, *) {
-                let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
-                nativeProviders.reset()
+                let nativeDnsManager: NativeDnsSettingsManagerProtocol = ServiceLocator.shared.getService()!
+                nativeDnsManager.reset()
             }
             
             // Notify that settings were reset

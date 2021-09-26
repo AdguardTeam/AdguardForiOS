@@ -30,7 +30,7 @@ final class NetworkSettingsModel: RuleDetailsControllerDelegate {
                 vpnManager.updateSettings(completion: nil)
             } else {
                 if #available(iOS 14.0, *) {
-                    nativeProviders.saveDnsManager { _ in }
+                    nativeDnsManager.saveDnsConfig { _ in }
                 }
             }
         }
@@ -46,7 +46,7 @@ final class NetworkSettingsModel: RuleDetailsControllerDelegate {
                 vpnManager.updateSettings(completion: nil)
             } else {
                 if #available(iOS 14.0, *) {
-                    nativeProviders.saveDnsManager { _ in }
+                    nativeDnsManager.saveDnsConfig { _ in }
                 }
             }
         }
@@ -69,13 +69,13 @@ final class NetworkSettingsModel: RuleDetailsControllerDelegate {
     private let networkSettingsService: NetworkSettingsServiceProtocol
     private let vpnManager: VpnManagerProtocol
     private let resources: AESharedResourcesProtocol
-    private let nativeProviders: NativeProvidersServiceProtocol
+    private let nativeDnsManager: NativeDnsSettingsManagerProtocol
     
-    init(networkSettingsService: NetworkSettingsServiceProtocol, vpnManager: VpnManagerProtocol, resources: AESharedResourcesProtocol, nativeProviders: NativeProvidersServiceProtocol) {
+    init(networkSettingsService: NetworkSettingsServiceProtocol, vpnManager: VpnManagerProtocol, resources: AESharedResourcesProtocol, nativeDnsManager: NativeDnsSettingsManagerProtocol) {
         self.networkSettingsService = networkSettingsService
         self.vpnManager = vpnManager
         self.resources = resources
-        self.nativeProviders = nativeProviders
+        self.nativeDnsManager = nativeDnsManager
     }
     
     // MARK: - Global methods

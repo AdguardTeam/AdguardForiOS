@@ -52,7 +52,7 @@ final class DnsProvidersController: UITableViewController {
         let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
         let dnsProtectionConfiguration = DnsConfiguration(resources: resources,
                                                           isProPurchased: purchaseService.isProPurchased)
-        dnsProvidersManager = try! DnsProvidersManager(configuration: dnsProtectionConfiguration, userDefaults: UserDefaultsStorage(storage: resources.sharedDefaults()))
+        dnsProvidersManager = try! DnsProvidersManager(configuration: dnsProtectionConfiguration, userDefaults: resources.sharedDefaults())
         
         model = DnsProvidersModel(dnsProvidersManager: dnsProvidersManager, vpnManager: vpnManager, resources: resources)
         super.init(coder: coder)

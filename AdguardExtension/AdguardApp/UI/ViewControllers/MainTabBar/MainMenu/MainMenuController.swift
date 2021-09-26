@@ -16,20 +16,20 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
+import UIKit
 import SafariAdGuardSDK
+import DnsAdGuardSDK
 
-class MainMenuController: UITableViewController {
+final class MainMenuController: UITableViewController {
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
 
     private let support: SupportServiceProtocol = ServiceLocator.shared.getService()!
-    private var dnsProviders: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
-
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
+    private let nativeDnsManager: NativeDnsSettingsManagerProtocol = ServiceLocator.shared.getService()!
+    private let dnsProvidersManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!
     
     @IBOutlet weak var settingsImageView: UIImageView!
     @IBOutlet weak var safariProtectionLabel: ThemableLabel!
@@ -115,11 +115,7 @@ class MainMenuController: UITableViewController {
     
     private func updateServerName() {
         if proStatus {
-            if resources.dnsImplementation == .adGuard {
-                systemProtectionLabel.text = dnsProviders.currentServerName
-            } else {
-                systemProtectionLabel.text = nativeProviders.serverName
-            }
+            systemProtectionLabel.text = dnsProvidersManager.activeDnsProvider.activeServerName
         } else {
             systemProtectionLabel.text = String.localizedString("system_dns_server")
         }

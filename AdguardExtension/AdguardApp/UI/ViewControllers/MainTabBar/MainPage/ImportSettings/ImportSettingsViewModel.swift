@@ -16,8 +16,8 @@
       along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
 import SafariAdGuardSDK
+import DnsAdGuardSDK
 
 enum ImportRowType {
     case cbFilter
@@ -85,14 +85,14 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
     
     private var settings: Settings
     private let importService: ImportSettingsServiceProtocol
-    private let dnsProvidersService: DnsProvidersServiceProtocol
+    private let dnsProvidersManager: DnsProvidersManagerProtocol
     private let safariProtection: SafariProtectionProtocol
     
-    init(settings: Settings, importSettingsService: ImportSettingsServiceProtocol, dnsProvidersService: DnsProvidersServiceProtocol, safariProtection: SafariProtectionProtocol) {
+    init(settings: Settings, importSettingsService: ImportSettingsServiceProtocol, dnsProvidersManager: DnsProvidersManagerProtocol, safariProtection: SafariProtectionProtocol) {
         self.settings = settings
         self.importService = importSettingsService
         self.safariProtection = safariProtection
-        self.dnsProvidersService = dnsProvidersService
+        self.dnsProvidersManager = dnsProvidersManager
         
         rows = []
         fillRows(imported: false)
@@ -200,9 +200,9 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
             var row = SettingRow(type: .dnsSettings, index: 0)
             
             let format = String.localizedString("import_dns_settings_format")
-            let serverName = serverId == 0 ? String.localizedString("default_dns_server_name") : dnsProvidersService.getServerName(serverId: serverId)
+            let provider = dnsProvidersManager.allProviders.first { $0.dnsServers.contains(where: { $0.id == serverId }) }
             
-            row.title = String(format:format, serverName ?? "")
+            row.title = String(format:format, provider?.activeServerName ?? "")
             row.imported = imported
             row.enabled = settings.dnsStatus == .enabled
             row.setImportStatus(imported: imported, status: settings.dnsStatus)
