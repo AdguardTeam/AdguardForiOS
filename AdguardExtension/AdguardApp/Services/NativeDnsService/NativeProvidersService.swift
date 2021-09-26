@@ -19,6 +19,8 @@
 import Foundation
 import NetworkExtension
 
+// TODO: - Obsolete object; Remove it
+
 enum NativeDnsProviderError: Error {
     case unsupportedDnsProtocol
     case failedToLoadManager

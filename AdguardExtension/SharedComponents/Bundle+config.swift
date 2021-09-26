@@ -20,7 +20,7 @@ import Foundation
 
 
 extension Bundle {
-    @objc dynamic var isPro: Bool {
+    var isPro: Bool {
         return self.infoDictionary?["Pro Application"] as? Bool ?? false
     }
 }

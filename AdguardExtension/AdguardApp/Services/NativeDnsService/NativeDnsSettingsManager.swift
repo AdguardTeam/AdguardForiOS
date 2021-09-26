@@ -19,20 +19,23 @@
 import NetworkExtension
 import DnsAdGuardSDK
 
-protocol NativeDnsConfigManagerProtocol {
+protocol NativeDnsSettingsManagerProtocol {
     /// State of saved dns config
     var dnsConfigIsEnabled: Bool { get }
+    
     /// Save dns config with active provider into system preferences
     func saveDnsConfig(_ onErrorReceived: @escaping (_ error: Error?) -> Void)
+    
     /// Remove dns config from system preferences
     func removeDnsConfig(_ onErrorReceived: @escaping (_ error: Error?) -> Void)
+    
     /// Reset dns config
     func reset()
 }
 
 /// Config Manager is responsible for controlling and providing actual state of DNS mobile config that can be found here
 @available(iOS 14.0, *)
-final class NativeDnsConfigManager: NativeDnsConfigManagerProtocol {
+final class NativeDnsSettingsManager: NativeDnsSettingsManagerProtocol {
     
     private struct ManagerStatus {
         let isInstalled: Bool
@@ -79,7 +82,8 @@ final class NativeDnsConfigManager: NativeDnsConfigManagerProtocol {
         }
     }
     
-    //MARK: - Public methods
+    //MARK: - Internal methods
+    
     func saveDnsConfig(_ onErrorReceived: @escaping (_ error: Error?) -> Void) {
        
         let server = dnsProvidersManager.activeDnsServer
@@ -196,6 +200,7 @@ final class NativeDnsConfigManager: NativeDnsConfigManagerProtocol {
     }
     
     //MARK: - Observers
+    
     private func addObservers() {
         dnsImplementationObserver = NotificationCenter.default.observe(name: .dnsImplementationChanged, object: nil, queue: .main) { [weak self] _ in
             if self?.resources.dnsImplementation == .native {

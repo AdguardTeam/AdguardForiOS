@@ -26,7 +26,7 @@ extension Bundle {
         script code = Hans
      preferredLocaleCode = zh-Hans
      */
-    dynamic var preferredLocaleCode: String {
+    var preferredLocaleCode: String {
         if let localeCode = self.preferredLocalizations.first {
             return localeCode
         }
@@ -34,12 +34,12 @@ extension Bundle {
     }
     
     var applicationName: String {
-        return Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "AdGuard"
+        return infoDictionary?["CFBundleName"] as? String ?? "AdGuard"
     }
     
     var hostAppBundleId: String {
         // do not foget to add "HostAppBundleId" key to target info.plist file
-        return Bundle.main.infoDictionary?["HostAppBundleId"] as? String ?? "com.adguard.AdguardExtension"
+        return infoDictionary?["HostAppBundleId"] as? String ?? "com.adguard.AdguardExtension"
     }
     
     /// We use different app schemes for pro and normal adguard
