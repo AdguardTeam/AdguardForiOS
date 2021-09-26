@@ -1,7 +1,10 @@
 import Foundation
 
 final class ContentBlockerServiceMock: ContentBlockerServiceProtocol {
-    var allContentBlockersStates: [ContentBlockerType : Bool] = [:]
+    
+    var reloadingContentBlockers: [ContentBlockerType: Bool] = [:]
+    
+    var allContentBlockersStates: [ContentBlockerType: Bool] = [:]
     
     var updateContentBlockersCalledCount = 0
     var updateContentBlockersError: Error?

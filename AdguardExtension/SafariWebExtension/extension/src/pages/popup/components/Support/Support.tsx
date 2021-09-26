@@ -22,16 +22,21 @@ export const Support = observer(() => {
         },
     };
 
-    let mode;
-    if (!store.protectionEnabled) {
-        mode = supportMap.protectionDisabled;
+    let supportType = null;
+
+    const protectionDisabledVisible = !store.protectionEnabled && store.contentBlockersEnabled;
+
+    if (protectionDisabledVisible) {
+        supportType = supportMap.protectionDisabled;
     } else if (store.isFullscreen) {
-        mode = supportMap.popupFullscreen;
-    } else {
+        supportType = supportMap.popupFullscreen;
+    }
+
+    if (!supportType) {
         return null;
     }
 
-    const supportClass = cn('support', mode.class);
+    const supportClass = cn('support', supportType.class);
 
     const handleReportTouch = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -40,13 +45,13 @@ export const Support = observer(() => {
 
     return (
         <div className={supportClass}>
-            {mode.title && (
+            {supportType.title && (
                 <div className="support__title">
-                    {mode.title}
+                    {supportType.title}
                 </div>
             )}
             <div className="support__description">
-                {mode.desc}
+                {supportType.desc}
             </div>
             <button type="button" className="support__link" onClick={handleReportTouch}>
                 {translator.getMessage('popup_support_button_text')}

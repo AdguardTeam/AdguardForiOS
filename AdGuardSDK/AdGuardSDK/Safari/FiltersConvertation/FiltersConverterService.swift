@@ -20,6 +20,9 @@ import Foundation
 @_implementationOnly import ContentBlockerConverter
 
 protocol FiltersConverterServiceProtocol {
+    /* Returns true if filters are converting now */
+    var filtersAreConverting: Bool { get }
+    
     /* Converts enabled filters and user rules to jsons objects for every content blocker */
     func convertFiltersAndUserRulesToJsons() -> [FiltersConverterResult]
 }
@@ -29,6 +32,16 @@ protocol FiltersConverterServiceProtocol {
  */
 final class FiltersConverterService: FiltersConverterServiceProtocol {
   
+    private(set) var filtersAreConverting: Bool = false {
+        didSet {
+            if filtersAreConverting {
+                NotificationCenter.default.filtersConvertionStarted()
+            } else {
+                NotificationCenter.default.filtersConvertionFinished()
+            }
+        }
+    }
+    
     // MARK: - Services
     
     private let configuration: SafariConfigurationProtocol
@@ -55,9 +68,12 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
     // MARK: - Internal methods
     
     func convertFiltersAndUserRulesToJsons() -> [FiltersConverterResult] {
+        filtersAreConverting = true
+        defer { filtersAreConverting = false }
+        
         // Run converter with empty data if Safari protection is disabled
         guard configuration.safariProtectionEnabled else {
-            return filtersConverter.convert(filters: [], blocklistRules: nil, allowlistRules: nil, invertedAllowlistRulesString: nil)
+            return filtersConverter.convert(filters: [], blocklistRules: nil, allowlistRules: nil, invertedAllowlistRules: nil)
         }
         
         // Get active filters info. It is an array of tuples [(filter id, group type)]
@@ -86,13 +102,14 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
         let blocklistRulesManager = safariManagers.blocklistRulesManager
         let enabledBlockListRules = blocklistRulesManager.allRules.filter { $0.isEnabled }
                                                                   .map { $0.ruleText }
+        
         // Get either allowlist rules or inverted allowlist rules (they aren't working at the same time)
         var enabledAllowlistRules: [String]?
-        var enabledInvertedAllowlistRulesString: String?
+        var enabledInvertedAllowlistRules: [String]?
         if configuration.allowlistIsInverted {
-            // Inverted allowlist rules are composed to the single rule that contains all of them
             let invertedAllowlistRulesManager = safariManagers.invertedAllowlistRulesManager
-            enabledInvertedAllowlistRulesString = invertedAllowlistRulesManager.rulesString
+            enabledInvertedAllowlistRules = invertedAllowlistRulesManager.allRules.filter { $0.isEnabled }
+                                                                                  .map { $0.ruleText }
         } else {
             let allowlistRulesManager = safariManagers.allowlistRulesManager
             enabledAllowlistRules = allowlistRulesManager.allRules.filter { $0.isEnabled }
@@ -104,7 +121,7 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
             filters: filesContent,
             blocklistRules: enabledBlockListRules,
             allowlistRules: enabledAllowlistRules,
-            invertedAllowlistRulesString: enabledInvertedAllowlistRulesString
+            invertedAllowlistRules: enabledInvertedAllowlistRules
         )
         return safariFilters
     }
@@ -112,7 +129,7 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
 
 // MARK: - SafariGroup.GroupType + contentBlockerType
 
-extension SafariGroup.GroupType {
+public extension SafariGroup.GroupType {
     var contentBlockerType: ContentBlockerType {
         switch self {
         case .ads: return .general
@@ -123,6 +140,37 @@ extension SafariGroup.GroupType {
         case .other: return .other
         case .languageSpecific: return .general
         case .custom: return .custom
+        }
+    }
+}
+
+// MARK: - NotificationCenter + Filters convertion notifications
+
+fileprivate extension NSNotification.Name {
+    static var filtersConvertionStarted: NSNotification.Name { .init(rawValue: "AdGuardSDK.filtersConvertionStarted") }
+    static var filtersConvertionFinished: NSNotification.Name { .init(rawValue: "AdGuardSDK.filtersConvertionFinished") }
+}
+
+fileprivate extension NotificationCenter {
+    func filtersConvertionStarted() {
+        self.post(name: .filtersConvertionStarted, object: self, userInfo: nil)
+    }
+    
+    func filtersConvertionFinished() {
+        self.post(name: .filtersConvertionFinished, object: self, userInfo: nil)
+    }
+}
+
+public extension NotificationCenter {
+    func filtersConvertionStarted(queue: OperationQueue? = .main, handler: @escaping () -> Void) -> NotificationToken {
+        return self.observe(name: .filtersConvertionStarted, object: nil, queue: queue) { _ in
+            handler()
+        }
+    }
+    
+    func filtersConvertionFinished(queue: OperationQueue? = .main, handler: @escaping () -> Void) -> NotificationToken {
+        return self.observe(name: .filtersConvertionFinished, object: nil, queue: queue) { _ in
+            handler()
         }
     }
 }

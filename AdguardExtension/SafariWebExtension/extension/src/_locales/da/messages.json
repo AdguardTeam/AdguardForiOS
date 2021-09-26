@@ -2,82 +2,88 @@
     "extension_name": {
         "message": "AdGuard"
     },
+    "extension_description": {
+        "message": "AdGuard Safari Web-udvidelse"
+    },
     "popup_action_safari_protection_title": {
         "message": "Safari-beskyttelse"
     },
     "popup_action_safari_protection_description": {
         "message": "til dette websted"
     },
+    "popup_action_safari_protection_description_disabled": {
+        "message": "deaktiveret"
+    },
     "popup_action_current_site_status_desc_enabled": {
-        "message": "beskyttelse aktiveret"
+        "message": "beskyttelse er TIL"
+    },
+    "popup_action_current_site_status_desc_disabled": {
+        "message": "beskyttelse deaktiveret"
     },
     "popup_action_block_element": {
-        "message": "Blokér et element på denne side"
+        "message": "Blokér elementer på denne side"
     },
     "popup_action_delete_user_rules": {
         "message": "Slet alle brugerregler for dette websted"
     },
     "popup_action_current_site_desc_starting": {
-        "message": "afvent venligst, starter beskyttelse..."
+        "message": "aktiverer beskyttelse"
     },
     "popup_action_current_site_desc_allowlisted": {
-        "message": "websted er hvidlistet"
+        "message": "føjet til hvidliste"
     },
     "popup_action_current_site_desc_basic_only": {
         "message": "kun basisbeskyttelse"
     },
     "popup_modal_all_sites_allowed_title": {
-        "message": "Forbedret ydeevne"
+        "message": "Ultimativ beskyttelse"
     },
     "popup_modal_all_sites_allowed_desc": {
-        "message": "Godt gået! Nu vil AdGuard blokere endnu flere annoncer og håndtere de sværeste udfordringer!"
+        "message": "Godt gået! AdGuard vil blokere næsten alle annoncer og imødegå de sværeste udfordringer."
     },
     "popup_modal_all_sites_allowed_button": {
         "message": "Lad magien begynde"
     },
     "popup_modal_not_all_sites_allowed_title": {
-        "message": "Næsten færdig"
+        "message": "Selektiv beskyttelse"
     },
     "popup_modal_not_all_sites_allowed_desc": {
-        "message": "Du har tilladt AdGuard kun at fungere på dette websted, og den vil ikke blokerer annoncer på andre websteder, medmindre du giver tilladelsen næste gang."
+        "message": "AdGuard er kun aktiveret for dette websted. Annoncer vises stadig på andre websteder, medmindre AdGuard tildeles yderligere tilladelser."
     },
     "popup_modal_not_all_sites_allowed_button": {
-        "message": "OK"
+        "message": "Fortsæt"
     },
     "popup_modal_title_free": {
-        "message": "Meget fint, men..."
+        "message": "Vær alt, hvad du kan være"
     },
     "popup_modal_desc_free": {
-        "message": "Husk, at du går glip af avanceret beskyttelse, der er utilgængelig i gratisversionen. Det hjælper med at håndtere flere annoncer, herunder YouTube-annoncer i Safari."
+        "message": "Yderligere avanceret beskyttelse i AdGuard er stadig ikke aktiveret. Hvad med at blokere endnu mere, såsom YouTube-annoncer i Safari?"
     },
     "popup_modal_btn_free": {
         "message": "Opgradér"
     },
     "popup_fullscreen_support_title": {
-        "message": "Hmm, var det et stryg opad?"
+        "message": "Ups, ville du starte igen fra begyndelsen?"
     },
     "popup_fullscreen_support_desc": {
-        "message": "Er der noget galt, så lad os vide det, så ordner vi det."
+        "message": "Er der noget galt? Vi har måske en løsning."
     },
     "popup_protection_disabled_support_desc": {
-        "message": "Hmm, ser ud til at du har deaktiveret beskyttelsen... Er der noget galt? Vi kan ordne det!"
+        "message": "Hmm, beskyttelse for dette websted er FRA. Er der noget galt? Vi har måske en løsning."
     },
     "popup_support_button_text": {
         "message": "Anmeld et problem"
     },
     "modal_protection_off_title": {
-        "message": "For brug af beskyttelse:"
+        "message": "Aktivere beskyttelse"
     },
     "modal_protection_off_settings": {
         "message": "Åbn <b>Indstillinger<\/b>"
     },
     "modal_protection_off_extensions": {
-        "message": "Tryk på <b>Safari<\/b> og vælg menupunktet <b>Udvidelser<\/b>"
+        "message": "Tryk på <b>Safari<\/b>, stryg nedad og tryk på <b>Indholdsblockere<\/b>"
     },
     "modal_protection_off_switch": {
-        "message": "Slå alle AdGuard-valgmuligheder <b>Til<\/b>"
-    },
-    "extension_description": {
-        "message": "AdGuard Safari Web Extension"
+        "message": "<b>Aktivér<\/b> alle AdGuard-tilføjelser."
     }
 }

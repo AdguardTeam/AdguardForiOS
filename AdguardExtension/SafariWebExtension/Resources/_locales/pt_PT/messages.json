@@ -1,68 +1,89 @@
 {
+    "extension_name": {
+        "message": "AdGuard"
+    },
+    "extension_description": {
+        "message": "Extensão do AdGuard para Safari Web"
+    },
     "popup_action_safari_protection_title": {
         "message": "Proteção do Safari"
     },
     "popup_action_safari_protection_description": {
         "message": "para este sítio"
     },
+    "popup_action_safari_protection_description_disabled": {
+        "message": "desativada"
+    },
     "popup_action_current_site_status_desc_enabled": {
-        "message": "proteção ativada"
+        "message": "proteção está ligada"
+    },
+    "popup_action_current_site_status_desc_disabled": {
+        "message": "proteção desativada"
     },
     "popup_action_block_element": {
-        "message": "Bloquear elemento na página"
+        "message": "Bloquear elementos nessa página"
     },
     "popup_action_delete_user_rules": {
         "message": "Apagar todas as regras do usuário para este sítio"
     },
     "popup_action_current_site_desc_starting": {
-        "message": "por favor aguarde, a iniciar proteção..."
+        "message": "a ativar a protecção"
     },
     "popup_action_current_site_desc_allowlisted": {
-        "message": "o sítio está na lista de permissões"
+        "message": "adicionado na lista de permissões"
+    },
+    "popup_action_current_site_desc_basic_only": {
+        "message": "somente protecção básica"
     },
     "popup_modal_all_sites_allowed_title": {
-        "message": "Desempenho aprimorado"
+        "message": "Protecção extrema"
     },
     "popup_modal_all_sites_allowed_desc": {
-        "message": "Bom trabalho! Agora o AdGuard bloqueará ainda mais anúncios, lidando com os desafios mais difíceis!"
+        "message": "Bom trabalho! O AdGuard bloqueará quase qualquer anúncio e enfrentará os desafios mais difíceis."
     },
     "popup_modal_all_sites_allowed_button": {
         "message": "Deixe a magia começar"
     },
     "popup_modal_not_all_sites_allowed_title": {
-        "message": "Quase lá"
+        "message": "Protecção seletiva"
     },
     "popup_modal_not_all_sites_allowed_desc": {
-        "message": "Você permitiu que o AdGuard funcionasse apenas neste sítio, o que significa que ele não bloqueará anúncios em outros sítios, a menos que você conceda a permissão na próxima vez."
+        "message": "Você ativou o AdGuard apenas para este sítio. Você continuará vendo anúncios em outros sites, a menos que conceda mais permissões ao AdGuard."
     },
     "popup_modal_not_all_sites_allowed_button": {
-        "message": "Ok"
+        "message": "Continuar"
     },
     "popup_modal_title_free": {
-        "message": "Muito bom mas..."
+        "message": "Seja tudo o que você pode ser"
     },
     "popup_modal_desc_free": {
-        "message": "Lembre-se de que você perde a proteção avançada que não está disponível na versão gratuita. Isso ajudará a lidar com mais anúncios, incluindo anúncios do YouTube no Safari."
+        "message": "Você ainda não possui a proteção avançada disponível no AdGuard Premium. Vamos bloquear ainda mais anúncios, como anúncios do YouTube no Safari?"
     },
     "popup_modal_btn_free": {
         "message": "Atualizar"
     },
+    "popup_fullscreen_support_title": {
+        "message": "Opa, deseja recomeçar?"
+    },
     "popup_fullscreen_support_desc": {
-        "message": "Se houver alguma coisa errada, avise-nos e nós resolveremos."
+        "message": "Algo está errado? Podemos ter uma solução."
     },
     "popup_protection_disabled_support_desc": {
-        "message": "Ops, parece que você desativou a proteção... Algo errado? Podemos consertá-lo!"
+        "message": "Ops, a proteção para este site está DESLIGADA. Algo está errado? Podemos ter uma solução."
     },
     "popup_support_button_text": {
         "message": "Informar um problema"
     },
+    "modal_protection_off_title": {
+        "message": "Ativar protecção"
+    },
+    "modal_protection_off_settings": {
+        "message": "Abrir <b>Definições<\/b>"
+    },
     "modal_protection_off_extensions": {
-        "message": "Toque em <b>Safari<\/b> e escolha o item de menu <b>Extensões<\/b>"
+        "message": "Toque em <b>Safari<\/b> e escolha o item de menu <b>Bloqueadores de conteúdo<\/b>"
     },
-    "extension_name": {
-        "message": "AdGuard"
-    },
-    "extension_description": {
-        "message": "AdGuard Safari Web Extension"
+    "modal_protection_off_switch": {
+        "message": "<b>Ativar<\/b> todas as extensões do AdGuard."
     }
 }

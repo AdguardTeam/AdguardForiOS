@@ -48,7 +48,7 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
     static let systemProtectionChangeNotification = Notification.Name(rawValue: "systemProtectionChangeNotification")
     
     var safariProtectionEnabled: Bool {
-        return safariProtection.safariProtectionEnabled
+        return resources.safariProtectionEnabled && resources.complexProtectionEnabled
     }
     
     var systemProtectionEnabled: Bool {
@@ -222,7 +222,7 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
             
             if safari {
                 group.enter()
-                self.safariProtection.update(safariProtectionEnabled: self.resources.safariProtectionEnabled ) { error in
+                self.safariProtection.update(safariProtectionEnabled: self.safariProtectionEnabled ) { error in
                     safariError = error
                     DDLogInfo("(ComplexProtectionService) - Ending updating safari protection with error - \(error?.localizedDescription ?? "nil")")
                     group.leave()

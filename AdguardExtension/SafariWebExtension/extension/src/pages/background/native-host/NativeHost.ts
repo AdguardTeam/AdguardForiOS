@@ -1,17 +1,59 @@
 /* eslint-disable class-methods-use-this */
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 
 import { MessagesToNativeApp } from '../../common/constants';
-import { nativeHostMock } from './nativeHostMock';
+import { getDomain } from '../../common/utils/url';
 
 interface NativeHostMessage {
     type: MessagesToNativeApp,
     data?: unknown
 }
 
-export class NativeHost {
+export interface ActionLinks {
+    disableSiteProtectionLink: string,
+    addToBlocklistLink: string,
+    removeAllBlocklistRulesLink: string,
+    enableSiteProtectionLink: string,
+    upgradeAppLink: string,
+    reportProblemLink: string,
+    enableAdvancedBlockingLink: string,
+}
+
+type AppearanceTheme = 'system' | 'dark' | 'light';
+
+interface NativeHostInitData {
+    appearanceTheme: AppearanceTheme,
+    contentBlockersEnabled: boolean,
+    hasUserRules: boolean,
+    premiumApp: boolean,
+    protectionEnabled: boolean,
+    advancedBlockingEnabled: boolean,
+}
+
+export interface NativeHostInterface {
+    getInitData(url: string): Promise<NativeHostInitData>
+    setLinks(links: ActionLinks): void
+    addToUserRules(ruleText: string): Promise<void>
+    enableProtection(url: string): Promise<void>
+    disableProtection(url: string): Promise<void>
+    removeUserRulesBySite(url: string): Promise<void>
+    reportProblem(url: string): Promise<void>
+    upgradeMe(): Promise<void>
+    getAdvancedRulesText(): Promise<string | void>
+    enableAdvancedBlocking(): Promise<void>
+}
+
+export class NativeHost implements NativeHostInterface {
     APP_ID = 'application_id';
 
+    links: ActionLinks | null = null;
+
+    /**
+     * Sends message to the native messaging host
+     * @param type
+     * @param data
+     * @private
+     */
     private async sendNativeMessage(type: MessagesToNativeApp, data?: unknown) {
         const message: NativeHostMessage = { type };
         if (data) {
@@ -21,84 +63,200 @@ export class NativeHost {
         return browser.runtime.sendNativeMessage(this.APP_ID, message);
     }
 
-    addToUserRules(ruleText: string) {
-        return this.sendNativeMessage(MessagesToNativeApp.AddToUserRules, { ruleText });
+    /**
+     * Return to the tab where user called an action
+     * Without this method browser will move to the last open tab in the safari
+     * @param tabIdToObserve - tab id which will be intercepted by ios app
+     * @param tabIdToReturn - tab id where to return
+     * @private
+     */
+    private returnWhenTabIsIntercepted(tabIdToObserve: number, tabIdToReturn: number) {
+        const removeHandler = async (tabId: number) => {
+            if (tabId === tabIdToObserve) {
+                await browser.tabs.update(tabIdToReturn, { active: true });
+                browser.tabs.onRemoved.removeListener(removeHandler);
+            }
+        };
+
+        browser.tabs.onRemoved.addListener(removeHandler);
     }
 
-    isProtectionEnabled(url: string): Promise<boolean> {
-        // TODO remove
-        return nativeHostMock.isProtectionEnabled(url);
+    /**
+     * Opens tabs with special links, which are intercepted by ios app
+     * @param link
+     * @private
+     */
+    private async openNativeLink(link: string) {
+        const [currentTab] = await browser.tabs.query({ currentWindow: true, active: true });
+        const tab = await browser.tabs.create({ url: link });
 
-        return this.sendNativeMessage(MessagesToNativeApp.IsProtectionEnabled, { url });
+        const tabIdToReturn = currentTab?.id;
+        const tabIdToObserver = tab?.id;
+        if (tabIdToReturn && tabIdToObserver) {
+            this.returnWhenTabIsIntercepted(tabIdToObserver, tabIdToReturn);
+        }
     }
 
-    enableProtection(): Promise<void> {
-        // TODO remove
-        return nativeHostMock.enableProtection();
-
-        return this.sendNativeMessage(MessagesToNativeApp.EnableProtection);
+    /**
+     * Saves action links received from native host
+     * @param links
+     */
+    setLinks(links: ActionLinks) {
+        this.links = links;
     }
 
-    disableProtection(): Promise<void> {
-        // TODO remove
-        return nativeHostMock.disableProtection();
-
-        return this.sendNativeMessage(MessagesToNativeApp.DisableProtection);
-    }
-
-    hasUserRulesBySite(url: string) {
-        // TODO remove
-        return nativeHostMock.hasUserRulesBySite(url);
-
-        return this.sendNativeMessage(MessagesToNativeApp.HasUserRulesBySite, { url });
-    }
-
-    removeUserRulesBySite(url: string) {
-        // TODO remove
-        return nativeHostMock.removeUserRulesBySite(url);
-
-        return this.sendNativeMessage(MessagesToNativeApp.RemoveUserRulesBySite, { url });
-    }
-
-    reportProblem(url?: string) {
-        const type = MessagesToNativeApp.ReportProblem;
-
-        if (url) {
-            return this.sendNativeMessage(type, { url });
+    /**
+     * Appends ruleText to the action link sent by native host,
+     * and opens new tab with this link
+     * @param ruleText
+     */
+    async addToUserRules(ruleText: string) {
+        if (!this.links?.addToBlocklistLink) {
+            return;
         }
 
-        return this.sendNativeMessage(type);
+        const linkWithRule = this.links.addToBlocklistLink + encodeURIComponent(ruleText);
+        await this.openNativeLink(linkWithRule);
     }
 
-    isPremiumApp() {
-        // TODO remove
-        return nativeHostMock.isPremium();
+    async enableProtection(url: string): Promise<void> {
+        if (!this.links?.enableSiteProtectionLink) {
+            return;
+        }
 
-        return this.sendNativeMessage(MessagesToNativeApp.IsPremium);
+        const domain = getDomain(url);
+        const linkWithDomain = this.links.enableSiteProtectionLink + encodeURIComponent(domain);
+        await this.openNativeLink(linkWithDomain);
     }
 
-    getAppearanceTheme() {
-        // TODO remove
-        return nativeHostMock.getAppearanceTheme();
+    async disableProtection(url: string): Promise<void> {
+        if (!this.links?.disableSiteProtectionLink) {
+            return;
+        }
 
-        return this.sendNativeMessage(MessagesToNativeApp.GetAppearanceTheme);
+        const domain = getDomain(url);
+        const linkWithDomain = this.links.disableSiteProtectionLink + encodeURIComponent(domain);
+        await this.openNativeLink(linkWithDomain);
     }
 
-    areContentBlockersEnabled() {
-        // TODO remove
-        return nativeHostMock.areContentBlockersEnabled();
+    async removeUserRulesBySite(url: string) {
+        if (!this.links?.removeAllBlocklistRulesLink) {
+            return;
+        }
 
-        return this.sendNativeMessage(MessagesToNativeApp.AreContentBlockersEnabled);
+        const domain = getDomain(url);
+        const linkWithDomain = this.links.removeAllBlocklistRulesLink + encodeURIComponent(domain);
+        await this.openNativeLink(linkWithDomain);
     }
 
-    upgradeMe() {
-        return this.sendNativeMessage(MessagesToNativeApp.UpgradeMe);
+    /**
+     * Opens tab with report problem link
+     * reportProblemLink already contains url to the website
+     */
+    async reportProblem() {
+        if (!this.links?.reportProblemLink) {
+            return;
+        }
+
+        await browser.tabs.create({ url: this.links.reportProblemLink });
     }
 
-    getAdvancedRulesText() {
-        // TODO remove
-        return nativeHostMock.getAdvancedRulesText();
+    async upgradeMe() {
+        if (!this.links?.upgradeAppLink) {
+            return;
+        }
 
-        return this.sendNativeMessage(MessagesToNativeApp.GetAdvancedRulesText);
+        await this.openNativeLink(this.links.upgradeAppLink);
+    }
+
+    async enableAdvancedBlocking() {
+        if (!this.links?.enableAdvancedBlockingLink) {
+            return;
+        }
+
+        await this.openNativeLink(this.links.enableAdvancedBlockingLink);
+    }
+
+    /**
+     * Retrieves advanced rules text from native host by small parts,
+     * so native host won't exceed memory limit
+     */
+    async getAdvancedRulesText() {
+        let rulesText = '';
+
+        const recursiveCall = async (fromBeginning: boolean) => {
+            const response = await this.sendNativeMessage(
+                MessagesToNativeApp.GetAdvancedRulesText,
+                fromBeginning,
+            );
+
+            if (!response?.advanced_rules) {
+                return;
+            }
+
+            rulesText += response.advanced_rules;
+
+            /**
+             * Subsequent calls to native host are sent with fromBeginning flag = false,
+             * which means to continue return rules from the last point
+             */
+            await recursiveCall(false);
+        };
+
+        /**
+         * First call to native host is sent with flag = true,
+         * which means start to return rules from the beginning of the file
+         */
+        await recursiveCall(true);
+
+        return rulesText;
+    }
+
+    async getInitData(url: string): Promise<NativeHostInitData> {
+        const result = await this.sendNativeMessage(MessagesToNativeApp.GetInitData, url);
+
+        const {
+            protection_enabled: protectionEnabled,
+            has_user_rules: hasUserRules,
+            premium_app: premiumApp,
+            appearance_theme: appearanceTheme,
+            content_blockers_enabled: contentBlockersEnabled,
+            advanced_blocking_enabled: advancedBlockingEnabled,
+
+            // links
+            // e.g. "adguard://safariWebExtension?action=removeFromAllowlist&domain="
+            enable_site_protection_link: enableSiteProtectionLink,
+            // e.g. "adguard://safariWebExtension?action=addToAllowlist&domain="
+            disable_site_protection_link: disableSiteProtectionLink,
+            // e.g. "adguard://safariWebExtension?action=addToBlocklist&domain="
+            add_to_blocklist_link: addToBlocklistLink,
+            // e.g. "adguard://safariWebExtension?action=removeAllBlocklistRules&domain="
+            remove_all_blocklist_rules_link: removeAllBlocklistRulesLink,
+            // e.g. "adguard://upgradeApp"
+            upgrade_app_link: upgradeAppLink,
+            // e.g. "https://reports.adguard.com/new_issue.html?browser=Safari&product_version=4.2.1&product_type=iOS"
+            report_problem_link: reportProblemLink,
+            // e.g. "adguard://enableAdvancedBlocking"
+            enable_advanced_blocking_link: enableAdvancedBlockingLink,
+        } = result;
+
+        this.setLinks({
+            addToBlocklistLink,
+            disableSiteProtectionLink,
+            removeAllBlocklistRulesLink,
+            enableSiteProtectionLink,
+            upgradeAppLink,
+            reportProblemLink,
+            enableAdvancedBlockingLink,
+        });
+
+        return {
+            appearanceTheme,
+            contentBlockersEnabled,
+            hasUserRules,
+            premiumApp,
+            protectionEnabled,
+            advancedBlockingEnabled,
+        };
     }
 }

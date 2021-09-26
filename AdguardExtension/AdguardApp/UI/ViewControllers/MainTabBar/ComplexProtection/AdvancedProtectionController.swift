@@ -17,12 +17,13 @@
 */
 
 import UIKit
+import SafariAdGuardSDK
 
-/**
-  AdvancedProtectionController - Responsible for representation advanced settings for Safari Web Extension
- */
+/// AdvancedProtectionController - Responsible for representation advanced settings for Safari Web Extension
 final class AdvancedProtectionController: UIViewController {
+    
     //MARK: - Outlets
+    
     @IBOutlet weak var onOffLabel: UILabel!
     @IBOutlet weak var uiSwitch: UISwitch!
     @IBOutlet weak var advancedProtectionView: OnboardingAdvancedProtectionView!
@@ -36,7 +37,8 @@ final class AdvancedProtectionController: UIViewController {
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
-    //MARK: - Properties
+    //MARK: - Private properties
+    
     private let showLicenseSegue = "ShowLicenseSegueId"
     private var advancedProtectionViewHeightConstraintConst = 0.0
     private var advancedProtectionIsHidden: Bool = false {
@@ -52,16 +54,19 @@ final class AdvancedProtectionController: UIViewController {
     private var proStatusObserver: NotificationToken?
     
     //MARK: - Services
+    
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configurationService: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
+    private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
+    
     //MARK: - ViewController lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         advancedProtectionView.labelString = String.localizedString("onboarding_fours_step_text")
         
-        uiSwitch.isOn = resources.advancedProtection
+        uiSwitch.isOn = configurationService.isAdvancedProtectionEnabled
         onOffLabel.text = uiSwitch.isOn ? String.localizedString("on_state") : String.localizedString("off_state")
         
         purchaseButton.applyStandardGreenStyle()
@@ -70,9 +75,7 @@ final class AdvancedProtectionController: UIViewController {
         
         configureScreenContent()
         
-        proStatusObserver = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification),
-                                                               object: nil,
-                                                               queue: .main) { [weak self] _ in
+        proStatusObserver = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
             self?.configureScreenContent()
         }
     }
@@ -86,12 +89,14 @@ final class AdvancedProtectionController: UIViewController {
             return
         }
         
-        resources.advancedProtection = sender.isOn
+        let newAdvancedProtection = sender.isOn
+        configurationService.isAdvancedProtectionEnabled = newAdvancedProtection
         onOffLabel.text = sender.isOn ? String.localizedString("on_state") : String.localizedString("off_state")
+        safariProtection.update(advancedProtectionEnabled: newAdvancedProtection, onCbReloaded: nil)
     }
     
-    
     //MARK: - Private methods
+    
     private func hideAdvancedProtectionView() {
         advancedProtectionView.isHidden = true
         

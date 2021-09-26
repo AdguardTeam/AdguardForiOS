@@ -18,7 +18,7 @@
 
 import Foundation
 
-extension Dictionary {
+public extension Dictionary {
     func percentEncoded() -> Data? {
         return map { key, value in
             let escapedKey = "\(key)".addingPercentEncoding(withAllowedCharacters: .urlQueryValueAllowed) ?? ""

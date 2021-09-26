@@ -21,10 +21,8 @@ import Foundation
 /// `MessageType` is a type of message that we receive from JS
 /// Knowing the `Message.type` tells us what to do with `Message.data`
 enum MessageType: String {
-    case getJsonRules = "get_json_rules"
-    case getBlockingData = "get_blocking_data"
-    case writeToLog = "write_in_native_log"
-    case addToUserRules = "add_to_userrules"
+    case getInitData = "get_init_data"
+    case getAdvancedRules = "get_advanced_rules_text"
 
     // Response cases
     case success = "success"
@@ -37,22 +35,51 @@ enum MessageType: String {
 struct Message {
     static let messageTypeKey = "type"
     static let messageDataKey = "data"
-    
+
+    static let protectionEnabled = "protection_enabled"
+    static let hasUserRules = "has_user_rules"
+    static let premiumApp = "premium_app"
+    static let appearanceTheme = "appearance_theme"
+    static let contentBlockersEnabled = "content_blockers_enabled"
+    static let advancedBlockingEnabled = "advanced_blocking_enabled"
+
+    // Links
+    static let enableSiteProtectionLink = "enable_site_protection_link"
+    static let disableSiteProtectionLink = "disable_site_protection_link"
+    static let addToBlocklistLink = "add_to_blocklist_link"
+    static let removeAllBlocklistRulesLink = "remove_all_blocklist_rules_link"
+    static let upgradeAppLink = "upgrade_app_link"
+    static let enableAdvancedBlockingLink = "enable_advanced_blocking_link"
+    static let reportProblemLink = "report_problem_link"
+
+    // Advanced rules
+    static let advancedRulesKey = "advanced_rules"
+
     let type: MessageType
-    let data: String
+    let data: Any?
 }
 
 /// Initializer from Dictionary. We receive message as dictionary from JS
 extension Message {
     init?(message: [String: Any]) {
         guard let typeString = message[Self.messageTypeKey] as? String,
-              let type = MessageType(rawValue: typeString),
-              let data = message[Self.messageDataKey] as? String
+              let type = MessageType(rawValue: typeString)
         else {
             return nil
         }
-        
         self.type = type
-        self.data = data
+        self.data = message[Self.messageDataKey]
+    }
+}
+
+// MARK: - ThemeMode + messageName
+
+extension ThemeMode {
+    var messageName: String {
+        switch self {
+        case .light: return "light"
+        case .dark: return "dark"
+        case .systemDefault: return "system"
+        }
     }
 }

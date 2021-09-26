@@ -363,7 +363,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         let enabled = sender.isOn
         applyingChangesStarted()
         complexProtection.switchComplexProtection(state: enabled, for: self) { [weak self] (safariError, systemError) in
-            DispatchQueue.main.async {
+            DispatchQueue.asyncSafeMain { [weak self] in
                 guard let self = self else { return }
                 self.applyingChangesEnded()
                 
@@ -667,7 +667,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         
         if resources.dnsImplementation == .native {
             dnsProviderNameLabel.text = dnsProvidersManager.activeDnsProvider.activeServerName
-            dnsProtocolNameLabel.text = dnsProvidersManager.activeDnsServer.type.name
+            dnsProtocolNameLabel.text = dnsProvidersManager.activeDnsServer.type.localizedName
         } else {
             dnsProviderNameLabel.text = nil
             dnsProtocolNameLabel.text = nil
@@ -988,8 +988,8 @@ extension MainPageController: ChartViewModelDelegate {
     }
 }
 
-fileprivate extension DnsProtocol {
-    var name: String {
+extension DnsProtocol {
+    var localizedName: String {
         switch self {
         case .dns: return String.localizedString("regular_dns_protocol")
         case .dnscrypt: return String.localizedString("dns_crypt_protocol")

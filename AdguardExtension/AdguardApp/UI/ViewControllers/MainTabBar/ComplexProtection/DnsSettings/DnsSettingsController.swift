@@ -19,7 +19,7 @@
 import UIKit
 import DnsAdGuardSDK
 
-class DnsSettingsController : UITableViewController {
+final class DnsSettingsController : UITableViewController {
     
     //MARK: - IB Outlets
     
@@ -54,6 +54,7 @@ class DnsSettingsController : UITableViewController {
     private var vpnChangeObservation: NotificationToken?
     private var didBecomeActiveNotification: NotificationToken?
     private var proStatusObservation: NotificationToken?
+    private var currentDnsServerObserver: NotificationToken?
     
     private var proStatus: Bool {
         return configuration.proStatus
@@ -98,6 +99,10 @@ class DnsSettingsController : UITableViewController {
         didBecomeActiveNotification = NotificationCenter.default.observe(name: UIApplication.didBecomeActiveNotification, object: nil, queue: .main, using: { [weak self] _ in
             self?.updateVpnInfo()
         })
+        
+        currentDnsServerObserver = NotificationCenter.default.observe(name: .currentDnsServerChanged, object: nil, queue: .main) { [weak self] _ in
+            self?.updateServerName()
+        }
         
         let product = purchaseService.standardProduct
         getPtoTitleLabel.text = getTitleString(product: product).uppercased()
@@ -316,10 +321,8 @@ class DnsSettingsController : UITableViewController {
 
 extension DnsSettingsController: ChooseDnsImplementationControllerDelegate {
     func currentImplementationChanged() {
-        DispatchQueue.main.async { [weak self] in
-            self?.processCurrentImplementation()
-            self?.tableView.reloadData()
-        }
+        processCurrentImplementation()
+        tableView.reloadData()
     }
     
     private func processCurrentImplementation() {

@@ -4,5 +4,14 @@ if (!chrome.runtime.id) {
     chrome.runtime.id = 'test';
 }
 
-// @ts-ignore
+declare global {
+    namespace NodeJS {
+        interface Global {
+            chrome: any;
+        }
+    }
+}
+
 global.chrome = chrome;
+
+export {};

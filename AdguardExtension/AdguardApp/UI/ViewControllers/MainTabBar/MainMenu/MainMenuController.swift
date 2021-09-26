@@ -38,9 +38,6 @@ final class MainMenuController: UITableViewController {
     @IBOutlet weak var LicenseCell: UITableViewCell!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
-    private var filtersCountObservation: Any?
-    private var activeFiltersCountObservation: Any?
-    
     private var proStatus: Bool {
         return configuration.proStatus
     }
@@ -49,38 +46,15 @@ final class MainMenuController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateTheme()
+        updateFilters()
         updateServerName()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        updateTheme()
         settingsImageView.image = UIImage(named: "advanced-settings-icon")
-        
-        let updateFilters: ()->() = { [weak self] in
-            guard let self = self else { return }
-            let safariFiltersTextFormat = String.localizedString("safari_filters_format")
-            // todo: move it to SDK
-            var filtersCount = 0
-            for group in self.safariProtection.groups {
-                if !group.isEnabled { continue }
-                for filter in group.filters {
-                    if !filter.isEnabled { continue }
-                    filtersCount += 1
-                }
-            }
-            
-            self.safariProtectionLabel.text = String.localizedStringWithFormat(safariFiltersTextFormat, filtersCount)
-        }
-
-        // todo: add update notification
-//        activeFiltersCountObservation = (filtersService as! FiltersService).observe(\.activeFiltersCount) { (_, _) in
-//            updateFilters()
-//        }
-        
-        updateFilters()
-        
+                
         if Bundle.main.isPro {
             LicenseCell.isHidden = true
         }
@@ -120,6 +94,13 @@ final class MainMenuController: UITableViewController {
             systemProtectionLabel.text = String.localizedString("system_dns_server")
         }
     }
+    
+    private func updateFilters() {
+        let safariFiltersTextFormat = String.localizedString("safari_filters_format")
+        let enabledGroups = safariProtection.groups.filter { $0.isEnabled }
+        let enabledFilters = enabledGroups.flatMap { $0.filters }.filter { $0.isEnabled }
+        safariProtectionLabel.text = String.localizedStringWithFormat(safariFiltersTextFormat, enabledFilters.count)
+    }
 }
 
 extension MainMenuController: ThemableProtocol {
@@ -128,9 +109,6 @@ extension MainMenuController: ThemableProtocol {
         theme.setupLabels(themableLabels)
         theme.setupNavigationBar(navigationController?.navigationBar)
         theme.setupTable(tableView)
-        DispatchQueue.main.async { [weak self] in
-            guard let sSelf = self else { return }
-            sSelf.tableView.reloadData()
-        }
+        tableView.reloadData()
     }
 }

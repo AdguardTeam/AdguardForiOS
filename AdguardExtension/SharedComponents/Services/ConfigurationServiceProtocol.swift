@@ -6,6 +6,7 @@ protocol ConfigurationServiceProtocol: AnyObject {
     var userThemeMode: ThemeMode { get set }
     var systemAppearenceIsDark: Bool { get set }
     var proStatus : Bool { get }
+    var isAdvancedProtectionEnabled: Bool { get set }
     var purchasedThroughLogin: Bool { get }
     var advancedMode: Bool { get  set }
     var showStatusBar: Bool { get set }

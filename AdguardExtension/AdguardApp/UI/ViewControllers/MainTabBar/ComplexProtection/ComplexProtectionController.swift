@@ -17,6 +17,7 @@
 */
 
 import UIKit
+import SafariAdGuardSDK
 
 final class ComplexProtectionController: UITableViewController {
     
@@ -107,6 +108,7 @@ final class ComplexProtectionController: UITableViewController {
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
     private let nativeDnsManager: NativeDnsSettingsManagerProtocol = ServiceLocator.shared.getService()!
+    private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     
     // Observers
     private var vpnChangeObservation: NotificationToken?
@@ -224,7 +226,9 @@ final class ComplexProtectionController: UITableViewController {
             return
         }
         
-        resources.advancedProtection = sender.isOn
+        let newAdvancedProtectionState = sender.isOn
+        configuration.isAdvancedProtectionEnabled = newAdvancedProtectionState
+        safariProtection.update(advancedProtectionEnabled: newAdvancedProtectionState, onCbReloaded: nil)
         updateAdvancedProtectionInfo()
     }
     
@@ -364,7 +368,7 @@ final class ComplexProtectionController: UITableViewController {
     }
     
     private func updateAdvancedProtectionInfo() {
-        let protectionEnabled = resources.advancedProtection
+        let protectionEnabled = configuration.isAdvancedProtectionEnabled
         advancedProtectionSwitch.isOn = protectionEnabled
         advancedProtectionIcon.tintColor = protectionEnabled ? enabledColor : disabledColor
     }

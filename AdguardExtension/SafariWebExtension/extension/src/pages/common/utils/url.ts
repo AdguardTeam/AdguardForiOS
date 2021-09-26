@@ -1,4 +1,4 @@
-const getCroppedDomain = (hostname: string) => {
+export const getCroppedDomain = (hostname: string) => {
     return hostname.startsWith('www.') ? hostname.substring(4) : hostname;
 };
 
