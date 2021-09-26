@@ -32,7 +32,6 @@ class SupportService: SupportServiceProtocol {
     private let resources: AESharedResourcesProtocol
     private let configuration: ConfigurationServiceProtocol
     private let complexProtection: ComplexProtectionServiceProtocol
-    private let dnsProviders: DnsProvidersServiceProtocol
     private let networkSettings: NetworkSettingsServiceProtocol
     private let productInfo: ADProductInfoProtocol
     private let keyChainService: KeychainServiceProtocol
@@ -52,11 +51,10 @@ class SupportService: SupportServiceProtocol {
     private var logsDirectory: URL?
     private var logsZipDirectory: URL?
     
-    init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol, complexProtection: ComplexProtectionServiceProtocol, dnsProviders: DnsProvidersServiceProtocol, productInfo: ADProductInfoProtocol, keyChainService: KeychainServiceProtocol, safariProtection: SafariProtectionProtocol, networkSettings: NetworkSettingsServiceProtocol) {
+    init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol, complexProtection: ComplexProtectionServiceProtocol, productInfo: ADProductInfoProtocol, keyChainService: KeychainServiceProtocol, safariProtection: SafariProtectionProtocol, networkSettings: NetworkSettingsServiceProtocol) {
         self.resources = resources
         self.configuration = configuration
         self.complexProtection = complexProtection
-        self.dnsProviders = dnsProviders
         self.productInfo = productInfo
         self.keyChainService = keyChainService
         self.safariProtection = safariProtection
@@ -154,7 +152,7 @@ class SupportService: SupportServiceProtocol {
     }
     
     private func createApplicationStateInfo() -> String {
-        let server = dnsProviders.activeDnsServer
+        let server = ""
         let device = UIDevice.current
         
         // todo:
@@ -197,12 +195,12 @@ class SupportService: SupportServiceProtocol {
         Safari protection enabled: \(complexProtection.safariProtectionEnabled)
         System protection enabled: \(complexProtection.systemProtectionEnabled)
         Tunnel mode \(tunnelMode)
-        DNS server: \(server?.name ?? "System default")
+        DNS server: \(server)
         Restart when network changes: \(resources.restartByReachability)
         Filter mobile data: \(networkSettings.filterMobileDataEnabled)
         Filter wi-fi data: \(networkSettings.filterWifiDataEnabled)
 
-        Dns server id: \(server?.serverId ?? "")
+        Dns server id: \(-1)
         Dns custom bootstrap servers: \(customBootstraps)"
         Dns custom fallback servers: \(customFallbacks)"
 
@@ -212,7 +210,7 @@ class SupportService: SupportServiceProtocol {
         AdGuard VPN tunnel is running: \(UIApplication.adGuardVpnIsActive)
         """
         
-        for upstream in server?.upstreams ?? [] {
+        for upstream in [String]() {
             resultString.append("\r\nDns upstream: \(upstream)")
         }
         

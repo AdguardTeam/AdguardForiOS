@@ -166,10 +166,11 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     private lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var resources: AESharedResourcesProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var complexProtection: ComplexProtectionServiceProtocol = { ServiceLocator.shared.getService()! }()
-    private lazy var nativeProviders: NativeProvidersServiceProtocol = { ServiceLocator.shared.getService()! }()
+    private lazy var nativeDnsManager: NativeDnsSettingsManagerProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var importSettingsService: ImportSettingsServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var safariProtection: SafariProtectionProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var dnsProtection: DnsProtectionProtocol = { ServiceLocator.shared.getService()! }()
+    private lazy var dnsProvidersManager: DnsProvidersManagerProtocol = { ServiceLocator.shared.getService()! }()
     
     // MARK: - View models
     private lazy var mainPageModel: MainPageModelProtocol = { MainPageModel(resource: resources, safariProtection: safariProtection) }()
@@ -308,12 +309,12 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         if resources.dnsImplementation == .native {
             if systemProtectionButton.buttonIsOn {
                 if #available(iOS 14.0, *) {
-                    nativeProviders.removeDnsManager { error in
+                    nativeDnsManager.removeDnsConfig { error in
                         DDLogError("Error removing dns manager: \(error.debugDescription)")
                     }
                 }
             } else if #available(iOS 14.0, *) {
-                nativeProviders.saveDnsManager { error in
+                nativeDnsManager.saveDnsConfig { error in
                     if let error = error {
                         DDLogError("Received error when turning system protection on; Error: \(error.localizedDescription)")
                     }
@@ -362,7 +363,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         let enabled = sender.isOn
         applyingChangesStarted()
         complexProtection.switchComplexProtection(state: enabled, for: self) { [weak self] (safariError, systemError) in
-            DispatchQueue.main.async {
+            DispatchQueue.asyncSafeMain { [weak self] in
                 guard let self = self else { return }
                 self.applyingChangesEnded()
                 
@@ -663,9 +664,10 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         guard resources.dnsImplementation == .native else {
             return
         }
-        if let provider = nativeProviders.currentProvider, let dnsProtocol = nativeProviders.currentServer?.dnsProtocol {
-            dnsProviderNameLabel.text = provider.name
-            dnsProtocolNameLabel.text = String.localizedString(DnsProtocol.stringIdByProtocol[dnsProtocol]!)
+        
+        if resources.dnsImplementation == .native {
+            dnsProviderNameLabel.text = dnsProvidersManager.activeDnsProvider.activeServerName
+            dnsProtocolNameLabel.text = dnsProvidersManager.activeDnsServer.type.localizedName
         } else {
             dnsProviderNameLabel.text = nil
             dnsProtocolNameLabel.text = nil
@@ -936,7 +938,6 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     }
     
     private func initChartViewModel() {
-        let url = SharedStorageUrls()
         let chartStatistics: ChartStatisticsProtocol = ServiceLocator.shared.getService()!
         let activityStatistics: ActivityStatisticsProtocol = ServiceLocator.shared.getService()!
         chartModel = ChartViewModel(statisticsPeriod: resources.chartDateType, activityStatistics: activityStatistics, chartStatistics: chartStatistics)
@@ -984,5 +985,17 @@ extension MainPageController: ChartViewModelDelegate {
         chartView.leftDateLabelText = firstFormattedDate
         chartView.rightDateLabelText = lastFormattedDate
         chartView.maxRequests = maxRequests
+    }
+}
+
+extension DnsProtocol {
+    var localizedName: String {
+        switch self {
+        case .dns: return String.localizedString("regular_dns_protocol")
+        case .dnscrypt: return String.localizedString("dns_crypt_protocol")
+        case .doh: return String.localizedString("doh_protocol")
+        case .dot: return String.localizedString("dot_protocol")
+        case .doq: return String.localizedString("doq_protocol")
+        }
     }
 }

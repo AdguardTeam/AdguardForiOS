@@ -21,7 +21,6 @@ import SafariAdGuardSDK
 
 // MARK: - Complex protection Interface -
 
-@objc
 protocol ComplexProtectionServiceProtocol: AnyObject {
     
     // Turns on/off complex protection
@@ -44,12 +43,12 @@ enum ComplexProtectionError: Error {
 }
 
 // MARK: - Complex protection class -
-class ComplexProtectionService: ComplexProtectionServiceProtocol{
+final class ComplexProtectionService: ComplexProtectionServiceProtocol{
     
     static let systemProtectionChangeNotification = Notification.Name(rawValue: "systemProtectionChangeNotification")
     
     var safariProtectionEnabled: Bool {
-        return safariProtection.safariProtectionEnabled
+        return resources.safariProtectionEnabled && resources.complexProtectionEnabled
     }
     
     var systemProtectionEnabled: Bool {
@@ -59,7 +58,7 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
                 && resources.complexProtectionEnabled
                 && vpnManager.vpnInstalled
         } else {
-            return nativeProvidersService.managerIsEnabled
+            return nativeDnsSettingsManager.dnsConfigIsEnabled
         }
     }
     
@@ -71,7 +70,7 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
     private let configuration: ConfigurationServiceProtocol
     private let vpnManager: VpnManagerProtocol
     private let productInfo: ADProductInfoProtocol
-    private let nativeProvidersService: NativeProvidersServiceProtocol
+    private let nativeDnsSettingsManager: NativeDnsSettingsManagerProtocol
     private let safariProtection: SafariProtectionProtocol
     
     private var vpnConfigurationObserver: NotificationToken!
@@ -82,15 +81,15 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         return configuration.proStatus
     }
     
-    init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol, vpnManager: VpnManagerProtocol, productInfo: ADProductInfoProtocol, nativeProvidersService: NativeProvidersServiceProtocol, safariProtection: SafariProtectionProtocol) {
+    init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol, vpnManager: VpnManagerProtocol, productInfo: ADProductInfoProtocol, nativeDnsSettingsManager: NativeDnsSettingsManagerProtocol, safariProtection: SafariProtectionProtocol) {
         self.resources = resources
         self.configuration = configuration
         self.vpnManager = vpnManager
         self.productInfo = productInfo
-        self.nativeProvidersService = nativeProvidersService
+        self.nativeDnsSettingsManager = nativeDnsSettingsManager
         self.safariProtection = safariProtection
         
-        nativeProvidersService.delegate = self
+        nativeDnsSettingsManager.delegate = self
         
         addObservers()
         checkVpnInstalled()
@@ -118,9 +117,9 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
         if #available(iOS 14.0, *) {
             if resources.dnsImplementation == .native {
                 if enabled {
-                    nativeProvidersService.saveDnsManager { _ in }
+                    nativeDnsSettingsManager.saveDnsConfig { _ in }
                 } else {
-                    nativeProvidersService.removeDnsManager { _ in }
+                    nativeDnsSettingsManager.removeDnsConfig { _ in }
                 }
             }
         }
@@ -221,11 +220,13 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
             
             let group = DispatchGroup()
             
-            group.enter()
-            self.safariProtection.update(safariProtectionEnabled: safari) { error in
-                safariError = error
-                DDLogInfo("(ComplexProtectionService) - Ending updating safari protection with error - \(error?.localizedDescription ?? "nil")")
-                group.leave()
+            if safari {
+                group.enter()
+                self.safariProtection.update(safariProtectionEnabled: self.safariProtectionEnabled ) { error in
+                    safariError = error
+                    DDLogInfo("(ComplexProtectionService) - Ending updating safari protection with error - \(error?.localizedDescription ?? "nil")")
+                    group.leave()
+                }
             }
             
             if system {
@@ -340,7 +341,7 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
                         DDLogError("Failed to turn off system protection, error: \(error.localizedDescription)")
                     }
                 
-                    let managerIsEnabled = self.nativeProvidersService.managerIsEnabled
+                    let managerIsEnabled = self.nativeDnsSettingsManager.dnsConfigIsEnabled
                     let _ = self.updateSystemProtectionResources(toEnabledState: managerIsEnabled)
                     NotificationCenter.default.post(name: ComplexProtectionService.systemProtectionChangeNotification, object: self)
                 }
@@ -399,10 +400,10 @@ class ComplexProtectionService: ComplexProtectionServiceProtocol{
 #endif
 }
 
-extension ComplexProtectionService: NativeProvidersServiceDelegate {
+extension ComplexProtectionService: NativeDnsSettingsManagerDelegate {
     func dnsManagerStatusChanged() {
         if resources.dnsImplementation == .native {
-            let managerIsEnabled = nativeProvidersService.managerIsEnabled
+            let managerIsEnabled = nativeDnsSettingsManager.dnsConfigIsEnabled
             let _ = updateSystemProtectionResources(toEnabledState: managerIsEnabled)
             NotificationCenter.default.post(name: ComplexProtectionService.systemProtectionChangeNotification, object: self)
         }

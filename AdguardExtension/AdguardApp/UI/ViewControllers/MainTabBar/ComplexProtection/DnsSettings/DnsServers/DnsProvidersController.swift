@@ -33,7 +33,7 @@ final class DnsProvidersController: UITableViewController {
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private let dnsProvidersManager: DnsProvidersManagerProtocol
+    private let dnsProvidersManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!
     
     // View model
     private let model: DnsProvidersModel
@@ -48,12 +48,6 @@ final class DnsProvidersController: UITableViewController {
     //MARK: - Init
     
     required init?(coder: NSCoder) {
-        // TODO: - try! is bad;
-        let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
-        let dnsProtectionConfiguration = DnsConfiguration(resources: resources,
-                                                          isProPurchased: purchaseService.isProPurchased)
-        dnsProvidersManager = try! DnsProvidersManager(configuration: dnsProtectionConfiguration, userDefaults: UserDefaultsStorage(storage: resources.sharedDefaults()))
-        
         model = DnsProvidersModel(dnsProvidersManager: dnsProvidersManager, vpnManager: vpnManager, resources: resources)
         super.init(coder: coder)
     }

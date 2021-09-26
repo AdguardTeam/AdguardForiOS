@@ -107,7 +107,7 @@ final class ComplexProtectionController: UITableViewController {
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
-    private let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
+    private let nativeDnsManager: NativeDnsSettingsManagerProtocol = ServiceLocator.shared.getService()!
     private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     
     // Observers
@@ -180,7 +180,7 @@ final class ComplexProtectionController: UITableViewController {
     @IBAction func systemProtectionChanged(_ sender: UISwitch) {
         if resources.dnsImplementation == .native {
             if #available(iOS 14.0, *), complexProtection.systemProtectionEnabled {
-                nativeProviders.removeDnsManager { error in
+                nativeDnsManager.removeDnsConfig { error in
                     DDLogError("Error removing dns manager: \(error.debugDescription)")
                     DispatchQueue.main.async { [weak self] in
                         sender.isOn = self?.complexProtection.systemProtectionEnabled ?? false
@@ -188,7 +188,7 @@ final class ComplexProtectionController: UITableViewController {
                 }
             } else if #available(iOS 14.0, *) {
                 sender.isOn = complexProtection.systemProtectionEnabled
-                nativeProviders.saveDnsManager { error in
+                nativeDnsManager.saveDnsConfig { error in
                     if let error = error {
                         DDLogError("Received error when turning system protection on; Error: \(error.localizedDescription)")
                     }
@@ -360,9 +360,11 @@ final class ComplexProtectionController: UITableViewController {
     }
     
     private func updateSafariProtectionInfo(){
-        let protectionEnabled = complexProtection.safariProtectionEnabled
-        safariProtectionSwitch.isOn = protectionEnabled
-        safariIcon.tintColor = protectionEnabled ? enabledColor : disabledColor
+        DispatchQueue.asyncSafeMain { [weak self] in
+            let protectionEnabled = self?.complexProtection.safariProtectionEnabled ?? false
+            self?.safariProtectionSwitch.isOn = protectionEnabled
+            self?.safariIcon.tintColor = protectionEnabled ? self?.enabledColor : self?.disabledColor
+        }
     }
     
     private func updateAdvancedProtectionInfo() {

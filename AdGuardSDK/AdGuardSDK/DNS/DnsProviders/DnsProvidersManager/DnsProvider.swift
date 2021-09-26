@@ -33,6 +33,14 @@ public extension DnsProviderMetaProtocol {
     var predefined: DnsProviderProtocol { self as! DnsProviderProtocol }
     var dnsServers: [DnsServerMetaProtocol] { isCustom ? [custom.server] : predefined.servers }
     var isDefault: Bool { self.providerId == PredefinedDnsProvider.systemDefaultProviderId }
+    
+    var activeServerName: String {
+        if isCustom {
+            return name
+        } else {
+            return predefined.servers.first { $0.isEnabled }?.name ?? ""
+        }
+    }
 }
 
 // MARK: - DnsServerMetaProtocol
