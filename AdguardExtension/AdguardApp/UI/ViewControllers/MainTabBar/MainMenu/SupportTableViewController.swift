@@ -130,7 +130,14 @@ class SupportTableViewController: UITableViewController {
             return
         }
         
-        guard let zipLog = support.exportLogs() else {
+        var zipLog: URL?
+        do {
+            zipLog = try support.exportLogs()
+        } catch {
+            DDLogError("(SupportTableViewController) - exportLogsTapped; On export zip file error occurred: \(error)")
+            showUnknownErrorAlert()
+        }
+        guard let zipLog = zipLog else {
             support.deleteLogsFiles()
             return
         }

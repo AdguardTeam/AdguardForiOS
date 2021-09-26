@@ -22,7 +22,7 @@ import DnsAdGuardSDK
 
 protocol SupportServiceProtocol {
     /// Preparing logs archive to sharing. Return archive file URL in temporary directory
-    func exportLogs() -> URL?
+    func exportLogs() throws -> URL?
     /// Delete log archive and other log files from temporary directory. Call it after sharing archive of logs
     func deleteLogsFiles()
     /// Sending feedback data to our backend
@@ -71,7 +71,7 @@ final class SupportService: SupportServiceProtocol {
         self.dnsProtection = dnsProtection
     }
     
-    func exportLogs() -> URL? {
+    func exportLogs() throws -> URL? {
         let archiveName = "AdGuard_logs.zip"
         
         let tmp = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
@@ -81,27 +81,27 @@ final class SupportService: SupportServiceProtocol {
         let fileManager = FileManager.default
         
         /// Create directories in base directory
-        try? fileManager.createDirectory(at: baseUrl, withIntermediateDirectories: true, attributes: nil)
-        try? fileManager.createDirectory(at: cbUrl, withIntermediateDirectories: true, attributes: nil)
-        try? fileManager.createDirectory(at: targetsUrl, withIntermediateDirectories: true, attributes: nil)
+        try fileManager.createDirectory(at: baseUrl, withIntermediateDirectories: true, attributes: nil)
+        try fileManager.createDirectory(at: cbUrl, withIntermediateDirectories: true, attributes: nil)
+        try fileManager.createDirectory(at: targetsUrl, withIntermediateDirectories: true, attributes: nil)
         
         /// Get jsons for content blockers and append them to base directory
-        appendCBJsonsIntoTemporaryDirectory(cbUrl: cbUrl)
+        try appendCBJsonsIntoTemporaryDirectory(cbUrl: cbUrl)
         
         /// Get application state info and save it as state.txt to base directory
         let appStateData = createApplicationStateInfo().data(using: .utf8)
         let appStateUrl = baseUrl.appendingPathComponent("state.txt")
-        try? appStateData?.write(to: appStateUrl)
+        try appStateData?.write(to: appStateUrl)
         
         /// Flush Logs before appending them
         ACLLogger.singleton()?.flush()
         
         /// Append log file for each process to base directory
-        appLogsUrls.forEach { appLogUrl in
+        try appLogsUrls.forEach { appLogUrl in
             let logFileData = applicationLogData(fromUrl: appLogUrl)
             let fileName = appLogUrl.lastPathComponent
             let fileUrl = targetsUrl.appendingPathComponent(fileName)
-            try? logFileData.write(to: fileUrl)
+            try logFileData.write(to: fileUrl)
         }
         
         let logsZipUrl = tmp.appendingPathComponent(archiveName)
@@ -282,10 +282,10 @@ final class SupportService: SupportServiceProtocol {
         return delimeter
     }
     
-    private func appendCBJsonsIntoTemporaryDirectory(cbUrl: URL) {
-        safariProtection.allConverterResults.forEach { converterResult in
+    private func appendCBJsonsIntoTemporaryDirectory(cbUrl: URL) throws {
+        try safariProtection.allConverterResults.forEach { converterResult in
             let fileUrl = converterResult.jsonUrl
-            try? FileManager.default.copyItem(at: fileUrl, to: cbUrl.appendingPathComponent( fileUrl.lastPathComponent))
+            try FileManager.default.copyItem(at: fileUrl, to: cbUrl.appendingPathComponent( fileUrl.lastPathComponent))
         }
     }
     

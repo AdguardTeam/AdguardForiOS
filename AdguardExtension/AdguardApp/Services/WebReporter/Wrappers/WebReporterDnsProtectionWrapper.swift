@@ -35,8 +35,11 @@ struct WebReporterDnsProtectionWrapper: WebReporterWrapperProtocol {
         
         guard dnsIsEnabled else { return params }
         let server = dnsProvidersManager.activeDnsServer
-        params["dns.servers"] = collectPreparedDnsServers(server: server)
-        params["dns.filters"] = collectPreparedDnsFilters()
+        let dnsFilters = collectPreparedDnsFilters()
+        let dnsServers = collectPreparedDnsServers(server: server)
+        params["dns.filters_enabled"] = dnsFilters.isEmpty ? "false" : "true"
+        if !dnsFilters.isEmpty { params["dns.filters"] = dnsFilters }
+        if !dnsServers.isEmpty { params["dns.servers"] = dnsServers }
         
         return params
     }
