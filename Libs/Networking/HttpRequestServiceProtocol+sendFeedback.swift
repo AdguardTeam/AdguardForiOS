@@ -21,11 +21,11 @@ import Foundation
 extension HttpRequestServiceProtocol {
     func sendFeedback(_ feedback: FeedBackProtocol, completion: @escaping (_ success: Bool)->()) {
         let config = RequestFactory.sendFeedbackConfig(feedback)
-        requestSender.send(requestConfig: config) { (result: RequestResult<Bool>) in
+        requestSender.send(requestConfig: config) { (result: Result<Bool, Error>) in
             switch result{
             case .success(let isSuccess):
                 completion(isSuccess)
-            case .error:
+            case .failure(_):
                 completion(false)
             }
         }

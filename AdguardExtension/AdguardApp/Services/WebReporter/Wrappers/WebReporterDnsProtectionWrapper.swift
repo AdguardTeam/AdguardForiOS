@@ -25,7 +25,6 @@ struct WebReporterDnsProtectionWrapper: WebReporterWrapperProtocol {
     //MARK: - Private properties
     private let dnsProtection: DnsProtectionProtocol = ServiceLocator.shared.getService()!
     private let dnsProvidersManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!
-    private let configurationService: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     
     //MARK: - Public methods
     func collectParams() -> [String : String] {
@@ -35,12 +34,8 @@ struct WebReporterDnsProtectionWrapper: WebReporterWrapperProtocol {
         params["dns.enabled"] = dnsIsEnabled ? "true" : "false"
         
         guard dnsIsEnabled else { return params }
-        let dnsFiltersIsEnabled = configurationService.advancedMode
         let server = dnsProvidersManager.activeDnsServer
         params["dns.servers"] = collectPreparedDnsServers(server: server)
-        params["dns.filters_enabled"] = dnsFiltersIsEnabled ? "true" : "false"
-        
-        guard dnsFiltersIsEnabled else { return params }
         params["dns.filters"] = collectPreparedDnsFilters()
         
         return params

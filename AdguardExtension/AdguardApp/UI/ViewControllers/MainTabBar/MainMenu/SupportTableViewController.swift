@@ -24,10 +24,8 @@ class SupportTableViewController: UITableViewController {
     
     // MARK: - Services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    
     private let support: SupportServiceProtocol = ServiceLocator.shared.getService()!
     private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
-    private var webReporter: WebReporterProtocol = ApplicationWebReporter()
     
     // MARK: - Sections and Rows
     
@@ -119,7 +117,7 @@ class SupportTableViewController: UITableViewController {
     }
     
     private func reportIncorrectBlockingRowTapped() {
-        let reportUrl = webReporter.createUrl()
+        let reportUrl = ApplicationWebReporter().createUrl()
         UIApplication.shared.open(reportUrl, options: [:], completionHandler: nil)
     }
     

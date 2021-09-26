@@ -31,12 +31,8 @@ protocol SupportServiceProtocol {
 
 /// Support service assemble app state info
 final class SupportService: SupportServiceProtocol {
-    
-    fileprivate struct DnsServerInfo {
-        let serverName: String
-        let serverId: Int
-        let upstreams: String
-    }
+    fileprivate typealias DnsServerInfo = (serverName: String, serverId: Int, upstreams: String)
+
     
     // Services
     private let resources: AESharedResourcesProtocol
@@ -78,23 +74,23 @@ final class SupportService: SupportServiceProtocol {
     func exportLogs() -> URL? {
         let archiveName = "AdGuard_logs.zip"
         
-        let tmp = NSTemporaryDirectory()
-        let baseUrlString = tmp + "logs/"
-        let cbUrlString = baseUrlString + "CB jsons/"
-        let targetsUrlString = baseUrlString + "Targets/"
+        let tmp = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+        let baseUrl = tmp.appendingPathComponent("logs", isDirectory: true)
+        let cbUrl = baseUrl.appendingPathComponent("CB jsons", isDirectory: true)
+        let targetsUrl = baseUrl.appendingPathComponent("Targets", isDirectory: true)
         let fileManager = FileManager.default
         
         /// Create directories in base directory
-        try? fileManager.createDirectory(atPath: baseUrlString, withIntermediateDirectories: true, attributes: nil)
-        try? fileManager.createDirectory(atPath: cbUrlString, withIntermediateDirectories: true, attributes: nil)
-        try? fileManager.createDirectory(atPath: targetsUrlString, withIntermediateDirectories: true, attributes: nil)
+        try? fileManager.createDirectory(at: baseUrl, withIntermediateDirectories: true, attributes: nil)
+        try? fileManager.createDirectory(at: cbUrl, withIntermediateDirectories: true, attributes: nil)
+        try? fileManager.createDirectory(at: targetsUrl, withIntermediateDirectories: true, attributes: nil)
         
         /// Get jsons for content blockers and append them to base directory
-        appendCBJsonsIntoTemporaryDirectory(cbUrlString: cbUrlString)
+        appendCBJsonsIntoTemporaryDirectory(cbUrl: cbUrl)
         
         /// Get application state info and save it as state.txt to base directory
         let appStateData = createApplicationStateInfo().data(using: .utf8)
-        let appStateUrl = URL(fileURLWithPath: baseUrlString + "state.txt")
+        let appStateUrl = baseUrl.appendingPathComponent("state.txt")
         try? appStateData?.write(to: appStateUrl)
         
         /// Flush Logs before appending them
@@ -104,12 +100,11 @@ final class SupportService: SupportServiceProtocol {
         appLogsUrls.forEach { appLogUrl in
             let logFileData = applicationLogData(fromUrl: appLogUrl)
             let fileName = appLogUrl.lastPathComponent
-            let fileUrl = URL(fileURLWithPath: targetsUrlString + fileName)
+            let fileUrl = targetsUrl.appendingPathComponent(fileName)
             try? logFileData.write(to: fileUrl)
         }
         
-        let baseUrl = URL(fileURLWithPath: baseUrlString, isDirectory: true)
-        let logsZipUrl = URL(fileURLWithPath: tmp + archiveName)
+        let logsZipUrl = tmp.appendingPathComponent(archiveName)
         
         self.logsDirectory = baseUrl
         self.logsZipDirectory = logsZipUrl
@@ -287,11 +282,10 @@ final class SupportService: SupportServiceProtocol {
         return delimeter
     }
     
-    private func appendCBJsonsIntoTemporaryDirectory(cbUrlString: String) {
+    private func appendCBJsonsIntoTemporaryDirectory(cbUrl: URL) {
         safariProtection.allConverterResults.forEach { converterResult in
             let fileUrl = converterResult.jsonUrl
-            let fileManager = FileManager.default
-            try? fileManager.copyItem(atPath: fileUrl.path, toPath: cbUrlString + fileUrl.lastPathComponent)
+            try? FileManager.default.copyItem(at: fileUrl, to: cbUrl.appendingPathComponent( fileUrl.lastPathComponent))
         }
     }
     
@@ -303,9 +297,7 @@ final class SupportService: SupportServiceProtocol {
         let upstreams = server.upstreams.reduce("") { partialResult, upstream in
             partialResult + "\(upstream.upstream)\n"
         }
-        return DnsServerInfo(serverName: serverName,
-                             serverId: serverId,
-                             upstreams: upstreams)
+        return (serverName, serverId, upstreams)
     }
     
     private func collectDnsFilters() -> String {
