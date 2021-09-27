@@ -71,13 +71,13 @@
 "common_action_yes" = "Yes";
 
 /* (MainController) login status caption on main screen */
-"protection_enabled_caption" = "Protection is enabled";
+"protection_enabled_caption" = "Protection is On";
 
 /* (MainController) login status caption on main screen */
 "protection_partly_enabled_caption" = "Some content blockers are disabled";
 
 /* (MainController) login status caption on main screen */
-"protection_disabled_caption" = "Protection is disabled";
+"protection_disabled_caption" = "Protection is Off";
 
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Subscribe";
@@ -563,13 +563,13 @@
 "protection_enabled" = "Protection is On";
 
 /*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Safari and DNS protection";
+"complex_enabled" = "Safari and DNS protection is On";
 
 /*(TodayViewController) Safari protection is enabled text  */
-"safari_enabled" = "Safari content blocking";
+"safari_enabled" = "Safari Protection is On";
 
 /*(TodayViewController) All protection is disabled text  */
-"complex_disabled" = "All protection modules are disabled";
+"complex_disabled" = "Safari and DNS protection is Off";
 
 /*(TodayViewController) DNS protection is enabled text  */
 "system_enabled" = "DNS protection";
@@ -642,9 +642,6 @@
 
 /* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
 "onboarding_fours_step_text" = "For <b>Advanced</b> protection, open the Safari app, tap the <b>aA</b> icon on the left side of the URL field,<br><br> %@ <br><br>then tap <b>AdGuard</b> and confirm all permissions.";
-
-/* (DnsProvidersController) default systen dns server name */
-"default_dns_server_name" = "System DNS";
 
 /* (DnsProvidersController) default systen dns server description */
 "default_dns_server_description" = "Use system default DNS servers provided by your Internet service provider";
@@ -1006,10 +1003,10 @@
 "block_youtube_ads_instructions" = "Did you know that YouTube has changed its algorithms to show you more ads?<br><br>Now, to block them you need to:<br><br>1. Open <a href=\"%@\">youtube.com</a> in Safari.<br><br>2. Tap %@ Share.<br><br>3. Tap \"Block YouTube Ads (by AdGuard)\".";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
-"block_youtube_ads_instructions_done_text_safari" = "Done! Now you can watch YouTube without ads.\n\nWhen the extension is enabled, the caption “with AdGuard” is displayed next to the YouTube logo.<br><br><b>If you reload the page, you’ll need to perform steps 3 and 4 again.</b>";
+"block_youtube_ads_instructions_done_text_safari" = "Done! Now you can watch YouTube without ads.\n\nWhen the extension is enabled, a caption “with AdGuard” is displayed next to the YouTube logo.<br><br><b>If you reload the page, you’ll have to redo steps 3 and 4.</b>";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
-"block_youtube_ads_instructions_done_text" = "Done! Now you can watch YouTube without ads.\n\nWhen the extension is enabled, the caption “with AdGuard” is displayed next to the YouTube logo.<br><br><b>If you reload the page, you’ll need to perform steps 2 and 3 again.</b>";
+"block_youtube_ads_instructions_done_text" = "Done! Now you can watch YouTube without ads.\n\nWhen the extension is enabled, a caption “with AdGuard” is displayed next to the YouTube logo.<br><br><b>If you reload the page, you’ll have to redo steps 2 and 3.</b>";
 
 // MARK: - YouTubeAdsRequestHandler
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
