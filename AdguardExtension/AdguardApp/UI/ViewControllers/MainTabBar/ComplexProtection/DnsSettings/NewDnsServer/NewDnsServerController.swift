@@ -38,7 +38,8 @@ final class NewDnsServerController: BottomAlertController {
         let provider: CustomDnsProviderProtocol?
     }
     
-    //MARK: - Properties
+    // MARK: - Public properties
+    
     var controllerType: DnsServerControllerType = .add
     var dnsProviderManager: DnsProvidersManagerProtocol!
     var customDnsProvider: CustomDnsProviderProtocol?
@@ -47,6 +48,7 @@ final class NewDnsServerController: BottomAlertController {
     weak var delegate: NewDnsServerControllerDelegate?
     
     // MARK: - IB Outlets
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
@@ -62,11 +64,13 @@ final class NewDnsServerController: BottomAlertController {
     @IBOutlet weak var scrollContentView: UIView!
     
     // MARK: - Services
+    
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     
-    //MARK: - Private properties
+    // MARK: - Private properties
+    
     private let textFieldCharectersLimit = 50
     private lazy var model: NewDnsServerModel = {
         return NewDnsServerModel(dnsProvidersManager: dnsProviderManager, vpnManager: vpnManager, provider: customDnsProvider)
@@ -198,7 +202,7 @@ final class NewDnsServerController: BottomAlertController {
 
     }
     
-    //MARK: - Button actions
+    // MARK: - Button actions
     
     private func saveAction() {
         saveOrAddButton.isEnabled = false
@@ -283,7 +287,8 @@ final class NewDnsServerController: BottomAlertController {
     }
 }
 
-//MARK: - NewDnsServerController + ThemableProtocol
+// MARK: - NewDnsServerController + ThemableProtocol
+
 extension NewDnsServerController: ThemableProtocol {
     func updateTheme() {
         contentView.backgroundColor = theme.popupBackgroundColor

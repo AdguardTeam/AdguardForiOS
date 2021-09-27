@@ -52,7 +52,13 @@ protocol ContentBlockerConverterProtocol {
 final class ContentBlockerConverterWrapper: ContentBlockerConverterProtocol {
     func convertArray(rules: [String], safariVersion: SafariVersion, optimize: Bool, advancedBlocking: Bool) -> ConversionResult {
         let converter = ContentBlockerConverter()
-        let result = converter.convertArray(rules: rules, safariVersion: safariVersion, optimize: optimize, advancedBlocking: advancedBlocking)
+        let result = converter.convertArray(
+            rules: rules,
+            safariVersion: safariVersion,
+            optimize: optimize,
+            advancedBlocking: advancedBlocking,
+            advancedBlockingFormat: .txt
+        )
         return result
     }
 }
@@ -69,7 +75,7 @@ protocol FiltersConverterProtocol {
      Note that one of **allowlistRules** and **invertedAllowlistRulesString** should be nil
      - Returns: ContentBlockerConverter result for each content blocker
      */
-    func convert(filters: [FilterFileContent], blocklistRules: [String]?, allowlistRules: [String]?, invertedAllowlistRulesString: String?) -> [FiltersConverterResult]
+    func convert(filters: [FilterFileContent], blocklistRules: [String]?, allowlistRules: [String]?, invertedAllowlistRules: [String]?) -> [FiltersConverterResult]
 }
 
 final class FiltersConverter: FiltersConverterProtocol {
@@ -93,8 +99,8 @@ final class FiltersConverter: FiltersConverterProtocol {
     
     // MARK: - Internal method
     
-    func convert(filters: [FilterFileContent], blocklistRules: [String]?, allowlistRules: [String]?, invertedAllowlistRulesString: String?) -> [FiltersConverterResult] {
-        let sortedRules = sortRulesByContentBlockers(filters, blocklistRules, allowlistRules, invertedAllowlistRulesString)
+    func convert(filters: [FilterFileContent], blocklistRules: [String]?, allowlistRules: [String]?, invertedAllowlistRules: [String]?) -> [FiltersConverterResult] {
+        let sortedRules = sortRulesByContentBlockers(filters, blocklistRules, allowlistRules, invertedAllowlistRules)
         let safariFilters = convert(filters: sortedRules)
         return safariFilters
     }
@@ -105,12 +111,12 @@ final class FiltersConverter: FiltersConverterProtocol {
     private func sortRulesByContentBlockers(_ filters: [FilterFileContent],
                                     _ blocklistRules: [String]?,
                                     _ allowlistRules: [String]?,
-                                    _ invertedAllowlistRulesString: String?) -> [ContentBlockerType: [String]]
+                                    _ invertedAllowlistRules: [String]?) -> [ContentBlockerType: [String]]
     {
         var filterRules = parse(filters: filters)
         addUserRules(blocklistRules: blocklistRules,
                      allowlistRules: allowlistRules,
-                     invertedAllowlistRulesString: invertedAllowlistRulesString,
+                     invertedAllowlistRules: invertedAllowlistRules,
                      filters: &filterRules)
         return filterRules
     }
@@ -147,7 +153,7 @@ final class FiltersConverter: FiltersConverterProtocol {
     }
     
     // Adds all types of user rules to all content blockers
-    private func addUserRules(blocklistRules: [String]?, allowlistRules: [String]?, invertedAllowlistRulesString: String?, filters: inout [ContentBlockerType: [String]]) {
+    private func addUserRules(blocklistRules: [String]?, allowlistRules: [String]?, invertedAllowlistRules: [String]?, filters: inout [ContentBlockerType: [String]]) {
         // add blacklist rules
         if let blocklistRules = blocklistRules {
             filters.keys.forEach { filters[$0]?.append(contentsOf: blocklistRules) }
@@ -160,14 +166,19 @@ final class FiltersConverter: FiltersConverterProtocol {
             filters.keys.forEach { filters[$0]?.append(contentsOf: properAllowlistRules) }
         }
         
-        // add inverted allowlist rules string
-        if let invertedAllowlistRulesString = invertedAllowlistRulesString {
-            filters.keys.forEach { filters[$0]?.append(invertedAllowlistRulesString) }
+        // add inverted allowlist rules
+        if let invertedAllowlistRules = invertedAllowlistRules {
+            let converter = InvertedAllowlistRuleConverter()
+            let properInvertedallowlistRules = invertedAllowlistRules.map { converter.convertDomainToRule($0) }
+            filters.keys.forEach { filters[$0]?.append(contentsOf: properInvertedallowlistRules) }
         }
     }
     
     // Converts all rules to jsons
     private func convert(filters: [ContentBlockerType: [String]]) -> [FiltersConverterResult] {
+        // TODO: - converter.convertArray is very long operation and we need to call it 6 times in a row
+        // Would be great to do it in different threads; Needs to be discussed!
+        
         var conversionResult: [FiltersConverterResult] = []
         let safariVersion = SafariVersion(rawValue: configuration.iosVersion) ?? .safari15
         for (cbType, rules) in filters {
@@ -175,7 +186,7 @@ final class FiltersConverter: FiltersConverterProtocol {
                 rules: rules,
                 safariVersion: safariVersion,
                 optimize: false,
-                advancedBlocking: configuration.advancedBlockingIsEnabled
+                advancedBlocking: configuration.advancedBlockingIsEnabled && configuration.proStatus
             )
             Logger.logInfo("FiltersCoverter result: \(result.message)")
             

@@ -1,20 +1,89 @@
 {
-    "popup_action_safari_protection_title": {
-        "message": "Ochrana Safari"
-    },
-    "popup_action_current_site_status_desc_enabled": {
-        "message": "ochrana zapnuta"
-    },
-    "popup_action_block_element": {
-        "message": "Zablokovat prvek na stránce"
-    },
-    "popup_action_delete_user_rules": {
-        "message": "Vymazat všechna uživatelská pravidla pro tuto stránku"
-    },
     "extension_name": {
         "message": "AdGuard"
     },
     "extension_description": {
-        "message": "AdGuard Safari Web Extension"
+        "message": "Webové rozšíření AdGuard pro Safari"
+    },
+    "popup_action_safari_protection_title": {
+        "message": "Ochrana Safari"
+    },
+    "popup_action_safari_protection_description": {
+        "message": "pro tento web"
+    },
+    "popup_action_safari_protection_description_disabled": {
+        "message": "vypnutá"
+    },
+    "popup_action_current_site_status_desc_enabled": {
+        "message": "ochrana zapnuta"
+    },
+    "popup_action_current_site_status_desc_disabled": {
+        "message": "ochrana je vypnutá"
+    },
+    "popup_action_block_element": {
+        "message": "Zablokovat prvky na této stránce"
+    },
+    "popup_action_delete_user_rules": {
+        "message": "Vymazat všechna uživatelská pravidla pro tento web"
+    },
+    "popup_action_current_site_desc_starting": {
+        "message": "spouštění ochrany"
+    },
+    "popup_action_current_site_desc_allowlisted": {
+        "message": "přidáno do seznamu povolených"
+    },
+    "popup_action_current_site_desc_basic_only": {
+        "message": "pouze základní ochrana"
+    },
+    "popup_modal_all_sites_allowed_title": {
+        "message": "Maximální ochrana"
+    },
+    "popup_modal_all_sites_allowed_desc": {
+        "message": "Dobrá práce! AdGuard dokáže zablokovat téměř jakoukoli reklamu a čelit těm nejobtížnějším výzvám."
+    },
+    "popup_modal_all_sites_allowed_button": {
+        "message": "Začínáme"
+    },
+    "popup_modal_not_all_sites_allowed_title": {
+        "message": "Selektivní ochrana"
+    },
+    "popup_modal_not_all_sites_allowed_desc": {
+        "message": "Povolili jste, aby AdGuard fungoval pouze na tomto webu. Pokud nedáte AdGuardu další oprávnění, reklamy se vám budou zobrazovat i na jiných webových stránkách."
+    },
+    "popup_modal_not_all_sites_allowed_button": {
+        "message": "Pokračovat"
+    },
+    "popup_modal_title_free": {
+        "message": "Buďte tím, čím můžete být"
+    },
+    "popup_modal_desc_free": {
+        "message": "Stále Vám chybí pokročilá ochrana, která je k dispozici v AdGuard Premium. Chcete blokovat v Safari ještě více reklam, například reklamy na YouTube?"
+    },
+    "popup_modal_btn_free": {
+        "message": "Upgradovat"
+    },
+    "popup_fullscreen_support_title": {
+        "message": "Chcete začít znovu od začátku?"
+    },
+    "popup_fullscreen_support_desc": {
+        "message": "Je něco špatně? Můžeme to opravit."
+    },
+    "popup_protection_disabled_support_desc": {
+        "message": "Ochrana pro tento web je VYPNUTÁ. Je něco špatně? Můžeme to opravit."
+    },
+    "popup_support_button_text": {
+        "message": "Nahlásit problém"
+    },
+    "modal_protection_off_title": {
+        "message": "Zapnout ochranu"
+    },
+    "modal_protection_off_settings": {
+        "message": "Otevřete <b>Nastavení<\/b>"
+    },
+    "modal_protection_off_extensions": {
+        "message": "Klepněte na <b>Safari<\/b>, přejeďte dolů a klepněte na <b>Blokátory obsahu<\/b>"
+    },
+    "modal_protection_off_switch": {
+        "message": "<b>Zapnout<\/b> všechna rozšíření AdGuardu."
     }
 }

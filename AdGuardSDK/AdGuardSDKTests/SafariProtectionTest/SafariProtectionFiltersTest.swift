@@ -31,6 +31,13 @@ class SafariProtectionFiltersTest: XCTestCase {
                                             safariManagers: safariManagers)
     }
     
+    func testFiltersAreConverting() {
+        converter.filtersAreConverting = false
+        XCTAssertFalse(converter.filtersAreConverting)
+        
+        converter.filtersAreConverting = true
+        XCTAssert(converter.filtersAreConverting)
+    }
     
     func testGroupsVariable() {
         filters.groups = [

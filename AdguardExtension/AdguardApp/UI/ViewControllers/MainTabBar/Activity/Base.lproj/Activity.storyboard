@@ -77,7 +77,7 @@
         <!--Activity Native Dns Controller-->
         <scene sceneID="d4s-1Y-wFq">
             <objects>
-                <viewController id="lqj-5C-0UP" customClass="ActivityNativeDnsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="lqj-5C-0UP" customClass="ActivityNativeDnsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qmf-x3-6AS">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -251,6 +251,7 @@
                             <constraint firstItem="ceh-zv-HH4" firstAttribute="top" secondItem="eye-K9-gbK" secondAttribute="top" id="z2t-de-Eh5"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <connections>
                         <outlet property="dnsNameLabel" destination="Iwn-G2-Shg" id="Gev-ex-5V9"/>
                         <outlet property="dnsProtocolLabel" destination="ceh-zv-HH4" id="JhU-F8-pDh"/>

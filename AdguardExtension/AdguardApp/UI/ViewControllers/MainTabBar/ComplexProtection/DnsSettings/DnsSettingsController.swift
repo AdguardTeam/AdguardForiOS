@@ -16,11 +16,12 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
+import UIKit
+import DnsAdGuardSDK
 
-class DnsSettingsController : UITableViewController {
+final class DnsSettingsController : UITableViewController {
     
-    //MARK: - IB Outlets
+    // MARK: - IB Outlets
     
     @IBOutlet weak var tryButton: UIButton!
     @IBOutlet weak var systemIcon: UIImageView!
@@ -40,19 +41,20 @@ class DnsSettingsController : UITableViewController {
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
     
-    // MARK: - services
+    // MARK: - Services
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private var dnsProviders: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
+    private var dnsProvidersManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
     private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
-    private let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
+    private let nativeDnsManager: NativeDnsSettingsManagerProtocol = ServiceLocator.shared.getService()!
     
     private var vpnChangeObservation: NotificationToken?
     private var didBecomeActiveNotification: NotificationToken?
     private var proStatusObservation: NotificationToken?
+    private var currentDnsServerObserver: NotificationToken?
     
     private var proStatus: Bool {
         return configuration.proStatus
@@ -97,6 +99,10 @@ class DnsSettingsController : UITableViewController {
         didBecomeActiveNotification = NotificationCenter.default.observe(name: UIApplication.didBecomeActiveNotification, object: nil, queue: .main, using: { [weak self] _ in
             self?.updateVpnInfo()
         })
+        
+        currentDnsServerObserver = NotificationCenter.default.observe(name: .currentDnsServerChanged, object: nil, queue: .main) { [weak self] _ in
+            self?.updateServerName()
+        }
         
         let product = purchaseService.standardProduct
         getPtoTitleLabel.text = getTitleString(product: product).uppercased()
@@ -225,7 +231,7 @@ class DnsSettingsController : UITableViewController {
     @IBAction func toggleEnableSwitch(_ sender: UISwitch) {
         if resources.dnsImplementation == .native {
             if #available(iOS 14.0, *), complexProtection.systemProtectionEnabled {
-                nativeProviders.removeDnsManager { error in
+                nativeDnsManager.removeDnsConfig { error in
                     DDLogError("Error removing dns manager: \(error.debugDescription)")
                     DispatchQueue.main.async { [weak self] in
                         sender.isOn = self?.complexProtection.systemProtectionEnabled ?? false
@@ -233,7 +239,7 @@ class DnsSettingsController : UITableViewController {
                 }
             } else if #available(iOS 14.0, *) {
                 sender.isOn = complexProtection.systemProtectionEnabled
-                nativeProviders.saveDnsManager { error in
+                nativeDnsManager.saveDnsConfig { error in
                     if let error = error {
                         DDLogError("Received error when turning system protection on; Error: \(error.localizedDescription)")
                     }
@@ -268,11 +274,7 @@ class DnsSettingsController : UITableViewController {
     }
     
     private func updateServerName() {
-        if resources.dnsImplementation == .adGuard {
-            serverName.text = dnsProviders.currentServerName
-        } else {
-            serverName.text = nativeProviders.serverName
-        }
+        serverName.text = dnsProvidersManager.activeDnsProvider.activeServerName
     }
     
     private func observeProStatus(){
@@ -319,10 +321,8 @@ class DnsSettingsController : UITableViewController {
 
 extension DnsSettingsController: ChooseDnsImplementationControllerDelegate {
     func currentImplementationChanged() {
-        DispatchQueue.main.async { [weak self] in
-            self?.processCurrentImplementation()
-            self?.tableView.reloadData()
-        }
+        processCurrentImplementation()
+        tableView.reloadData()
     }
     
     private func processCurrentImplementation() {

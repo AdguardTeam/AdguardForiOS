@@ -28,6 +28,7 @@ class ContentBlockersInfoStorageTest: XCTestCase {
         let rulesString = try! String(contentsOf: infoStorage.advancedRulesFileUrl)
         let rules = rulesString.split(separator: "\n")
         XCTAssertEqual(rules.count, 7)
+        XCTAssertEqual(infoStorage.advancedRulesCount, 7)
         
         let rulesSet = Set(advancedRules.reduce("", { $0 + "\n" + $1 }).split(separator: "\n"))
         XCTAssertEqual(rulesSet.count, 7)

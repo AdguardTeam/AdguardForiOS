@@ -17,8 +17,9 @@
 */
 
 import UIKit
+import DnsAdGuardSDK
 
-class ActivityNativeDnsController: UIViewController {
+final class ActivityNativeDnsController: UIViewController {
 
     @IBOutlet weak var dnsStatusLabel: ThemableLabel!
     @IBOutlet weak var dnsNameLabel: ThemableLabel!
@@ -30,7 +31,8 @@ class ActivityNativeDnsController: UIViewController {
     
     // MARK: - services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
+    private let nativeDnsManager: NativeDnsSettingsManagerProtocol = ServiceLocator.shared.getService()!
+    private let dnsProvidersManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - observers
     private var currentDnsServerObserver: NotificationToken?
@@ -50,13 +52,9 @@ class ActivityNativeDnsController: UIViewController {
     }
     
     private func setupLabels() {
-        dnsStatusLabel.text = nativeProviders.managerIsEnabled ? String.localizedString("on_state") : String.localizedString("off_state")
-        dnsNameLabel.text = nativeProviders.currentProvider?.name
-        
-        if let dnsProtocol = nativeProviders.currentServer?.dnsProtocol {
-            let stringId = DnsProtocol.stringIdByProtocol[dnsProtocol] ?? ""
-            dnsProtocolLabel.text = String.localizedString(stringId)
-        }
+        dnsStatusLabel.text = nativeDnsManager.dnsConfigIsEnabled ? String.localizedString("on_state") : String.localizedString("off_state")
+        dnsNameLabel.text = dnsProvidersManager.activeDnsProvider.activeServerName
+        dnsProtocolLabel.text = dnsProvidersManager.activeDnsServer.type.localizedName
     }
     
     private func addObservers() {

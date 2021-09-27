@@ -40,8 +40,10 @@ final class DnsProtectionServiceStorage: DnsProtectionServiceStorageProtocol {
             let userDefaults = UserDefaultsStorage(storage: userDefaults)
             self.filterFilesStorage = try FilterFilesStorage(filterFilesDirectoryUrl: filterFilesDirectoryUrl)
             
-            self.dnsProvidersManager = try DnsProvidersManager(configuration: configuration,
-                                                           userDefaults: userDefaults)
+            self.dnsProvidersManager = try DnsProvidersManager(
+                configuration: configuration,
+                userDefaults: userDefaults
+            )
             
             self.dnsUserRulesManager = DnsUserRulesManagersProvider(fileStorage: filterFilesStorage)
             self.dnsFiltersManager = DnsFiltersManager(userDefaults: userDefaults,

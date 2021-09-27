@@ -116,13 +116,13 @@ final class DnsProvidersVendor: DnsProvidersVendorProtocol {
             }
         }
         
-        // Iterate over custom providers searhing for active provider and server
+        // Iterate over custom providers searching for active provider and server
         for cst in customProvidersStorage.providers {
             let isEnabled = cst.providerId == activeDns.providerId
             if isEnabled {
                 enabledProvider = cst
                 let serverIsEnabled = cst.server.id == activeDns.serverId
-                // Check if enabled server is suppported by implementation
+                // Check if enabled server is supported by implementation
                 if serverIsEnabled && implementation.supportedProtocols.contains(cst.server.type) {
                     enabledServer = cst.server
                     break

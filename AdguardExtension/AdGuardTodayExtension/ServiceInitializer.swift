@@ -26,7 +26,7 @@ protocol ServiceInitializerProtocol  {
     var purchaseService: PurchaseServiceProtocol { get }
     var safariProtection: SafariProtectionProtocol { get }
     var complexProtection: ComplexProtectionServiceProtocol { get }
-    var dnsProvidersService: DnsProvidersServiceProtocol { get }
+    var dnsProvidersManager: DnsProvidersManagerProtocol { get }
     var activityStatistics: ActivityStatisticsProtocol { get }
 }
 
@@ -37,43 +37,47 @@ final class ServiceInitializer: ServiceInitializerProtocol {
     let purchaseService: PurchaseServiceProtocol
     let safariProtection: SafariProtectionProtocol
     let complexProtection: ComplexProtectionServiceProtocol
-    let dnsProvidersService: DnsProvidersServiceProtocol
+    let dnsProvidersManager: DnsProvidersManagerProtocol
     let activityStatistics: ActivityStatisticsProtocol
     
     init(resources: AESharedResourcesProtocol) throws {
-        //MARK: - PurchaseService
         self.purchaseService = PurchaseService(network: networkService,
                                                resources: resources,
                                                productInfo: productInfo)
-        //MARK: - DnsProvidersService
-        self.dnsProvidersService = DnsProvidersService(resources: resources)
         
-        //MARK: - SafariProtection
         let sharedStorageUrls = SharedStorageUrls()
         
         let safariConfiguration = SafariConfiguration(resources: resources, isProPurchased: purchaseService.isProPurchased)
+        
         self.safariProtection = try SafariProtection(configuration: safariConfiguration,
                                                       defaultConfiguration: safariConfiguration,
                                                       filterFilesDirectoryUrl: sharedStorageUrls.filtersFolderUrl,
                                                       dbContainerUrl: sharedStorageUrls.dbFolderUrl,
                                                       jsonStorageUrl: sharedStorageUrls.cbJsonsFolderUrl,
                                                       userDefaults: resources.sharedDefaults())
-        //MARK: - ComplexProtection
-        let oldConfiguration = ConfigurationService(purchaseService: purchaseService, resources: resources, safariProtection: safariProtection)
-        let networkSettings = NetworkSettingsService(resources: resources)
-        let nativeProviders = NativeProvidersService(dnsProvidersService: dnsProvidersService, networkSettingsService: networkSettings, resources: resources, configuration: oldConfiguration)
         
-
-        let vpnManager = VpnManager(resources: resources, configuration: oldConfiguration, networkSettings: NetworkSettingsService(resources: resources), dnsProviders: dnsProvidersService as! DnsProvidersService)
+        let oldConfiguration = ConfigurationService(purchaseService: purchaseService, resources: resources, safariProtection: safariProtection)
+        
+        let networkSettings = NetworkSettingsService(resources: resources)
+        
+        let configuration = ConfigurationService(purchaseService: purchaseService, resources: resources, safariProtection: safariProtection)
+        
+        let dnsConfiguration = DnsConfiguration(resources: resources, isProPurchased: purchaseService.isProPurchased)
+        self.dnsProvidersManager = try DnsProvidersManager(configuration: dnsConfiguration, userDefaults: resources.sharedDefaults())
+        
+        let nativeDnsSettingsManager = NativeDnsSettingsManager(networkSettingsService: networkSettings, dnsProvidersManager: dnsProvidersManager, configuration: configuration, resources: resources)
+        
+        let vpnManager = VpnManager(resources: resources, configuration: oldConfiguration, networkSettings: NetworkSettingsService(resources: resources))
         
         self.complexProtection = ComplexProtectionService(resources: resources,
                                  configuration: oldConfiguration,
                                  vpnManager: vpnManager,
                                  productInfo: productInfo,
-                                 nativeProvidersService: nativeProviders,
+                                 nativeDnsSettingsManager: nativeDnsSettingsManager,
                                  safariProtection: safariProtection)
         
-        //MARK: - ActivityStatistics
+        // MARK: - ActivityStatistics
+        
         self.activityStatistics = try ActivityStatistics(statisticsDbContainerUrl: sharedStorageUrls.statisticsFolderUrl)
     }
 }

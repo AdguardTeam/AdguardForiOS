@@ -68,7 +68,8 @@ final class DnsProviderDetailsController : UITableViewController {
         setupBackButton()
     }
     
-    //MARK: - UITableViewDataSource
+    // MARK: - UITableViewDataSource
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return providerDetailSections.count
     }
@@ -105,7 +106,8 @@ final class DnsProviderDetailsController : UITableViewController {
         return cell
     }
     
-    //MARK: - UITableViewDelegate
+    // MARK: - UITableViewDelegate
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard providerDetailSections[indexPath.section] == .actionSection else {
             return super.tableView(tableView, heightForRowAt: indexPath)
@@ -146,11 +148,11 @@ final class DnsProviderDetailsController : UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return providerDetailSections[section] == .headerSection ? 0.0 : 0.01
+        return 0.01
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return providerDetailSections[section] == .headerSection ? 0.0 : 0.01
+        return 0.01
     }
     
     // MARK: - Actions
@@ -171,7 +173,8 @@ final class DnsProviderDetailsController : UITableViewController {
     
     // MARK: - private methods
     
-    //MARK: - Cell getters
+    // MARK: - Cell getters
+    
     private func getHeaderCell(tableView: UITableView, model: DnsProviderDetailsModel) -> UITableViewCell {
         let cell = DnsProviderHeaderCell.getCell(forTableView: tableView)
         cell.logoImage = model.providerLogo
@@ -217,7 +220,8 @@ extension DnsProviderDetailsController: ThemableProtocol {
     }
 }
 
-//MARK: - DnsProviderDetailsController + SelectDnsProtocolControllerDelegate
+// MARK: - DnsProviderDetailsController + SelectDnsProtocolControllerDelegate
+
 extension DnsProviderDetailsController: SelectDnsProtocolControllerDelegate {
     func protocolSelected(dnsProtocol: DnsAdGuardSDK.DnsProtocol) {
         model.activeDnsProtocol = dnsProtocol

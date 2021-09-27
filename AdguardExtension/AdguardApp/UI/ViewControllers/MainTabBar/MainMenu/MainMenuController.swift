@@ -16,20 +16,20 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
+import UIKit
 import SafariAdGuardSDK
+import DnsAdGuardSDK
 
-class MainMenuController: UITableViewController {
+final class MainMenuController: UITableViewController {
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
 
     private let support: SupportServiceProtocol = ServiceLocator.shared.getService()!
-    private var dnsProviders: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
-
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
+    private let nativeDnsManager: NativeDnsSettingsManagerProtocol = ServiceLocator.shared.getService()!
+    private let dnsProvidersManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!
     
     @IBOutlet weak var settingsImageView: UIImageView!
     @IBOutlet weak var safariProtectionLabel: ThemableLabel!
@@ -37,9 +37,6 @@ class MainMenuController: UITableViewController {
     @IBOutlet weak var supportCell: UITableViewCell!
     @IBOutlet weak var LicenseCell: UITableViewCell!
     @IBOutlet var themableLabels: [ThemableLabel]!
-    
-    private var filtersCountObservation: Any?
-    private var activeFiltersCountObservation: Any?
     
     private var proStatus: Bool {
         return configuration.proStatus
@@ -49,38 +46,15 @@ class MainMenuController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateTheme()
-        updateServerName()
+        updateFilters()
+        systemProtectionLabel.text = dnsProvidersManager.activeDnsProvider.activeServerName
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        updateTheme()
         settingsImageView.image = UIImage(named: "advanced-settings-icon")
-        
-        let updateFilters: ()->() = { [weak self] in
-            guard let self = self else { return }
-            let safariFiltersTextFormat = String.localizedString("safari_filters_format")
-            // todo: move it to SDK
-            var filtersCount = 0
-            for group in self.safariProtection.groups {
-                if !group.isEnabled { continue }
-                for filter in group.filters {
-                    if !filter.isEnabled { continue }
-                    filtersCount += 1
-                }
-            }
-            
-            self.safariProtectionLabel.text = String.localizedStringWithFormat(safariFiltersTextFormat, filtersCount)
-        }
-
-        // todo: add update notification
-//        activeFiltersCountObservation = (filtersService as! FiltersService).observe(\.activeFiltersCount) { (_, _) in
-//            updateFilters()
-//        }
-        
-        updateFilters()
-        
+                
         if Bundle.main.isPro {
             LicenseCell.isHidden = true
         }
@@ -113,16 +87,11 @@ class MainMenuController: UITableViewController {
     
     // MARK: - private methods
     
-    private func updateServerName() {
-        if proStatus {
-            if resources.dnsImplementation == .adGuard {
-                systemProtectionLabel.text = dnsProviders.currentServerName
-            } else {
-                systemProtectionLabel.text = nativeProviders.serverName
-            }
-        } else {
-            systemProtectionLabel.text = String.localizedString("system_dns_server")
-        }
+    private func updateFilters() {
+        let safariFiltersTextFormat = String.localizedString("safari_filters_format")
+        let enabledGroups = safariProtection.groups.filter { $0.isEnabled }
+        let enabledFilters = enabledGroups.flatMap { $0.filters }.filter { $0.isEnabled }
+        safariProtectionLabel.text = String.localizedStringWithFormat(safariFiltersTextFormat, enabledFilters.count)
     }
 }
 
@@ -132,9 +101,6 @@ extension MainMenuController: ThemableProtocol {
         theme.setupLabels(themableLabels)
         theme.setupNavigationBar(navigationController?.navigationBar)
         theme.setupTable(tableView)
-        DispatchQueue.main.async { [weak self] in
-            guard let sSelf = self else { return }
-            sSelf.tableView.reloadData()
-        }
+        tableView.reloadData()
     }
 }

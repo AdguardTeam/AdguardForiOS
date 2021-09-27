@@ -56,8 +56,10 @@ class UserRulesManagerMock: UserRulesManagerProtocol {
     
     var removeRuleCalledCount = 0
     var removeRuleError: Error?
+    var invokedRemoveRuleParameters: [String] = []
     func removeRule(withText ruleText: String) throws {
         removeRuleCalledCount += 1
+        invokedRemoveRuleParameters.append(ruleText)
         if let error = removeRuleError {
             throw error
         }

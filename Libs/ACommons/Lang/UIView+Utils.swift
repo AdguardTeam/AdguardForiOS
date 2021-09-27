@@ -36,4 +36,34 @@ extension UIView {
             layer.removeAnimation(forKey: "rotationAnimation")
         }
     }
+    
+    /// Animates view transition to visible state
+    func fadeIn(_ duration: TimeInterval = 0.3, _ delay: TimeInterval = 0.0, onCompletion: ((_ success: Bool) -> Void)? = nil) {
+        DispatchQueue.asyncSafeMain {
+            self.isHidden = false
+            UIView.animate(
+                withDuration: duration,
+                delay: delay,
+                options: [],
+                animations: { self.alpha = 1 },
+                completion: { success in onCompletion?(success) }
+            )
+        }
+    }
+
+    /// Animates view transition to invisible state
+    func fadeOut(_ duration: TimeInterval = 0.3,_ delay: TimeInterval = 0.0, onCompletion: ((_ success: Bool) -> Void)? = nil) {
+        DispatchQueue.asyncSafeMain {
+            UIView.animate(
+                withDuration: duration,
+                delay: delay,
+                options: [],
+                animations: { self.alpha = 0 },
+                completion: { success in
+                    self.isHidden = true
+                    onCompletion?(success)
+                }
+            )
+        }
+    }
 }

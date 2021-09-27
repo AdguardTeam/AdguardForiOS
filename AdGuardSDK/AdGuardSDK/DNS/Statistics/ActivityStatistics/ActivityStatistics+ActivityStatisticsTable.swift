@@ -146,6 +146,10 @@ public struct CountersStatisticsRecord: Equatable {
         }
     }
     
+    public static func emptyRecord()->CountersStatisticsRecord {
+        return CountersStatisticsRecord(requests: 0, encrypted: 0, blocked: 0, elapsedSumm: 0)
+    }
+    
     static func +(left: CountersStatisticsRecord, right: CountersStatisticsRecord) -> CountersStatisticsRecord {
         return CountersStatisticsRecord(
             requests: left.requests + right.requests,

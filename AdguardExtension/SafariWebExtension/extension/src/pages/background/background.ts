@@ -1,19 +1,19 @@
 /* eslint-disable consistent-return */
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
+import * as TSUrlFilter from '@adguard/tsurlfilter';
 
 import {
     MessagesToBackgroundPage,
     MessagesToContentScript,
-    MessagesToNativeApp,
 } from '../common/constants';
 import { permissions } from './permissions';
 import { log } from '../common/log';
 import { app } from './app';
-import { nativeHost } from './native-host';
 import { Engine } from './engine';
 import { getDomain } from '../common/utils/url';
 import { buildStyleSheet } from './css-service';
 import { SelectorsAndScripts } from '../common/interfaces';
+import { adguard } from './adguard';
 
 interface Message {
     type: string,
@@ -25,8 +25,11 @@ const getEngine = (() => {
     let startPromise: Promise<Engine>;
 
     const start = async () => {
-        const rulesText = await nativeHost.getAdvancedRulesText();
-        await engine.start(rulesText);
+        const rulesText = await adguard.nativeHost.getAdvancedRulesText();
+
+        const convertedRulesText = TSUrlFilter.RuleConverter.convertRules(rulesText);
+        await engine.start(convertedRulesText);
+
         return engine;
     };
 
@@ -42,7 +45,9 @@ const getScriptsAndSelectors = async (url: string): Promise<SelectorsAndScripts>
     const engine = await getEngine();
 
     const hostname = getDomain(url);
-    const cosmeticResult = engine.getCosmeticResult(hostname);
+
+    const cosmeticOption = engine.getCosmeticOption(url);
+    const cosmeticResult = engine.getCosmeticResult(hostname, cosmeticOption);
 
     const injectCssRules = [
         ...cosmeticResult.CSS.generic,
@@ -85,7 +90,6 @@ const getScriptsAndSelectors = async (url: string): Promise<SelectorsAndScripts>
 
 const handleMessages = () => {
     browser.runtime.onMessage.addListener(async (message: Message) => {
-        // @ts-ignore
         const { type, data } = message;
 
         switch (type) {
@@ -95,7 +99,7 @@ const handleMessages = () => {
                 return scriptsAndSelectors as SelectorsAndScripts;
             }
             case MessagesToBackgroundPage.AddRule: {
-                await nativeHost.addToUserRules(data.ruleText);
+                await adguard.nativeHost.addToUserRules(data.ruleText);
                 break;
             }
             case MessagesToBackgroundPage.OpenAssistant: {
@@ -127,12 +131,15 @@ const handleMessages = () => {
 
                 const allSitesAllowed = await permissions.areAllSitesAllowed();
                 const permissionsModalViewed = await app.isPermissionsModalViewed();
-                // TODO consider possibility to join native host calls
-                const protectionEnabled = await nativeHost.isProtectionEnabled(url);
-                const hasUserRules = await nativeHost.hasUserRulesBySite(url);
-                const premiumApp = await nativeHost.isPremiumApp();
-                const appearanceTheme = await nativeHost.getAppearanceTheme();
-                const contentBlockersEnabled = await nativeHost.areContentBlockersEnabled();
+
+                const {
+                    protectionEnabled,
+                    hasUserRules,
+                    premiumApp,
+                    appearanceTheme,
+                    contentBlockersEnabled,
+                    advancedBlockingEnabled,
+                } = await adguard.nativeHost.getInitData(url);
 
                 return {
                     allSitesAllowed,
@@ -142,21 +149,31 @@ const handleMessages = () => {
                     premiumApp,
                     appearanceTheme,
                     contentBlockersEnabled,
+                    advancedBlockingEnabled,
                 };
             }
             case MessagesToBackgroundPage.SetProtectionStatus: {
-                const { enabled } = data;
+                const { enabled, url } = data;
                 if (enabled) {
-                    return nativeHost.enableProtection();
+                    return adguard.nativeHost.enableProtection(url);
                 }
-                return nativeHost.disableProtection();
+                return adguard.nativeHost.disableProtection(url);
             }
             case MessagesToBackgroundPage.ReportProblem: {
                 const { url } = data;
-                return nativeHost.reportProblem(url);
+                return adguard.nativeHost.reportProblem(url);
             }
             case MessagesToBackgroundPage.UpgradeClicked: {
-                await nativeHost.upgradeMe();
+                await adguard.nativeHost.upgradeMe();
+                break;
+            }
+            case MessagesToBackgroundPage.EnableAdvancedBlocking: {
+                await adguard.nativeHost.enableAdvancedBlocking();
+                break;
+            }
+            case MessagesToBackgroundPage.DeleteUserRulesByUrl: {
+                const { url } = data;
+                await adguard.nativeHost.removeUserRulesBySite(url);
                 break;
             }
             default:

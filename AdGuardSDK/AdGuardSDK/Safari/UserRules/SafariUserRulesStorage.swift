@@ -18,9 +18,9 @@
 
 import OrderedCollections
 
-final class SafariUserRulesStorage: UserRulesStorageProtocol {
+final public class SafariUserRulesStorage: UserRulesStorageProtocol {
     
-    var rules: OrderedSet<UserRule> {
+    public var rules: OrderedSet<UserRule> {
         get {
             if let savedRulesData = userDefaults.storage.data(forKey: type.key) {
                 let decoder = JSONDecoder()
@@ -42,8 +42,13 @@ final class SafariUserRulesStorage: UserRulesStorageProtocol {
     private let userDefaults: UserDefaultsStorageProtocol
     private let type: UserRuleType
     
-    init(userDefaults: UserDefaultsStorageProtocol, rulesType: UserRuleType) {
+    public init(userDefaults: UserDefaultsStorageProtocol, rulesType: UserRuleType) {
         self.userDefaults = userDefaults
+        self.type = rulesType
+    }
+    
+    public init(userDefaults: UserDefaults, rulesType: UserRuleType) {
+        self.userDefaults = UserDefaultsStorage(storage: userDefaults)
         self.type = rulesType
     }
 }

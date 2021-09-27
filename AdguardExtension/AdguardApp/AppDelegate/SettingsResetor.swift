@@ -17,6 +17,7 @@
  */
 
 import SafariAdGuardSDK
+import DnsAdGuardSDK
 
 protocol ISettingsResetor {
     func resetAllSettings()
@@ -26,7 +27,7 @@ protocol ISettingsResetor {
 // Reset statistics and settings
 struct SettingsResetor: ISettingsResetor {
     
-    //MARK: - Properties
+    // MARK: - Private properties
     
     private weak var appDelegate: AppDelegate?
     private let vpnManager: VpnManagerProtocol
@@ -34,7 +35,7 @@ struct SettingsResetor: ISettingsResetor {
     private let purchaseService: PurchaseServiceProtocol
     private let safariProtection: SafariProtectionProtocol
     
-    //MARK: - Init
+    // MARK: - Init
     
     init(appDelegate: AppDelegate,
          vpnManager: VpnManagerProtocol,
@@ -49,7 +50,7 @@ struct SettingsResetor: ISettingsResetor {
         self.safariProtection = safariProtection
     }
     
-    //MARK: - IResetSettings methods
+    // MARK: - IResetSettings methods
     
     func resetAllSettings() {
         presentAlert()
@@ -74,12 +75,12 @@ struct SettingsResetor: ISettingsResetor {
  
             appDelegate?.setAppInterfaceStyle()
             
-            let providersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
-            providersService.reset()
+            let dnsProvidersManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!
+            try? dnsProvidersManager.reset()
             
             if #available(iOS 14.0, *) {
-                let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
-                nativeProviders.reset()
+                let nativeDnsManager: NativeDnsSettingsManagerProtocol = ServiceLocator.shared.getService()!
+                nativeDnsManager.reset()
             }
             
             // Notify that settings were reset
@@ -92,7 +93,7 @@ struct SettingsResetor: ISettingsResetor {
         }
     }
     
-    //MARK: - Private methods
+    // MARK: - Private methods
     
     private func resetStatistics(){
         /* Reseting statistics Start*/

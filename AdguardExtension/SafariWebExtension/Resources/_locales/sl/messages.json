@@ -1,83 +1,89 @@
 {
+    "extension_name": {
+        "message": "AdGuard"
+    },
+    "extension_description": {
+        "message": "Spletna razširitev AdGuard Safari"
+    },
     "popup_action_safari_protection_title": {
         "message": "Zaščita Safarija"
     },
     "popup_action_safari_protection_description": {
         "message": "za to spletno stran"
     },
+    "popup_action_safari_protection_description_disabled": {
+        "message": "onemogočena"
+    },
     "popup_action_current_site_status_desc_enabled": {
-        "message": "zaščita je omogočena"
+        "message": "zaščita je VKLOPLJENA"
+    },
+    "popup_action_current_site_status_desc_disabled": {
+        "message": "zaščita je onemogočena"
     },
     "popup_action_block_element": {
-        "message": "Onemogoči element na strani"
+        "message": "Onemogoči element na tej strani"
     },
     "popup_action_delete_user_rules": {
-        "message": "Izbriši vsa uporabniška pravila za to stran"
+        "message": "Izbriši vsa uporabniška pravila za to spletno stran"
     },
     "popup_action_current_site_desc_starting": {
-        "message": "prosimo, počakajte, začenja se zaščita..."
+        "message": "omogočanje zaščite"
     },
     "popup_action_current_site_desc_allowlisted": {
-        "message": "spletna stran je na seznamu dovoljenih"
+        "message": "dodana na seznam dovoljenih"
     },
     "popup_action_current_site_desc_basic_only": {
         "message": "le osnovna zaščita"
     },
     "popup_modal_all_sites_allowed_title": {
-        "message": "Izboljšana izvedba"
+        "message": "Vrhunska zaščita"
     },
     "popup_modal_all_sites_allowed_desc": {
-        "message": "Dobro opravljeno! Zdaj bo AdGuard onemogočil še več oglasov in se spopadel z najtežjimi izzivi!"
+        "message": "Dobro opravljeno! AdGuard bo onemogočil skoraj vsak oglas in se soočil z najtežjimi izzivi."
     },
     "popup_modal_all_sites_allowed_button": {
-        "message": "Naj se magija začne"
+        "message": "Naj se čarovnija začne"
     },
     "popup_modal_not_all_sites_allowed_title": {
-        "message": "Skoraj tam"
+        "message": "Izbirna zaščita"
     },
     "popup_modal_not_all_sites_allowed_desc": {
-        "message": "AdGuardu ste dovolili, da deluje samo na tej spletni strani, kar pomeni, da ne bo zaviral oglasov na drugih spletnih straneh razen, če mu to naslednjič odobrite."
+        "message": "AdGuard ste omogočili samo za to spletno stran. Oglase boste še naprej videli na drugih spletnih straneh razen, če AdGuardu date več dovoljenj."
     },
     "popup_modal_not_all_sites_allowed_button": {
-        "message": "Vredu"
+        "message": "Nadaljuj"
     },
     "popup_modal_title_free": {
-        "message": "Zelo dobro, ampak..."
+        "message": "Bodi vse, kar lahko"
     },
     "popup_modal_desc_free": {
-        "message": "Ne pozabite, da ste zamudili napredno zaščito, ki v brezplačni različici ni na voljo. Pomagal bo pri obravnavi več oglasov, vključno z oglasi na YouTube v Safariju."
+        "message": "Napredne zaščite, ki je na voljo v AdGuard Premium, še vedno nimate. Onemogočimo še več oglasov, kot so oglasi v YouTubu v Safariju?"
     },
     "popup_modal_btn_free": {
         "message": "Nadgradi"
     },
     "popup_fullscreen_support_title": {
-        "message": "Ali je bil to poteg navzgor?"
+        "message": "Uh, oh, ali želite znova zagnati od začetka?"
     },
     "popup_fullscreen_support_desc": {
-        "message": "Če je kaj narobe, nam to sporočite in to bomo popravili."
+        "message": "Je kaj narobe? Morda imamo popravek."
     },
     "popup_protection_disabled_support_desc": {
-        "message": "Videti je, da ste onemogočili zaščito... Je kaj narobe? Lahko to popravimo!"
+        "message": "Uh, oh, zaščita za to spletno stran je IZKLOPLJENA. Je kaj narobe? Morda imamo popravek."
     },
     "popup_support_button_text": {
-        "message": "Poročaj o težavi"
+        "message": "Prijavi težavo"
     },
     "modal_protection_off_title": {
-        "message": "Za uporabo zaščite:"
+        "message": "Omogoči zaščito"
     },
     "modal_protection_off_settings": {
         "message": "Odpri <b>Nastavitve<\/b>"
     },
     "modal_protection_off_extensions": {
-        "message": "Tapnite na <b>Safari<\/b> in izberite menijski vnos <b>\"Razširitve\"<\/b>"
+        "message": "Tapnite <b>Safari<\/b>, povlecite navzdol in tapnite <b>\"Zaviralci vsebine\"<\/b>"
     },
     "modal_protection_off_switch": {
-        "message": "<b>Preklopi<\/b> vse na AdGuard"
-    },
-    "extension_name": {
-        "message": "AdGuard"
-    },
-    "extension_description": {
-        "message": "AdGuard Safari Web Extension"
+        "message": "<b>Omogoči<\/b> vse AdGuard razširitve."
     }
 }

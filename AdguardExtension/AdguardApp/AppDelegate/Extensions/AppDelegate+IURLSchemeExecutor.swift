@@ -39,12 +39,8 @@ extension AppDelegate: IURLSchemeExecutor {
     }
     
     func openDnsProvidersController(showLaunchScreen: Bool, urlAbsoluteString: String) -> Bool {
-        let dnsInfo = DnsResolver.resolve(upstream: urlAbsoluteString)
-        guard let dnsServer = dnsInfo.dnsServer else {
-            return false
-        }
-        return self.presentDnsProvidersController(showLaunchScreen: showLaunchScreen, url: dnsServer)
-        
+        // TODO: - Should process app scheme links for adding custom DNS servers from our web site
+        return self.presentDnsProvidersController(showLaunchScreen: showLaunchScreen, url: nil)
     }
     
     func openImportSettingsController(showLaunchScreen: Bool, settings: Settings?) -> Bool {
@@ -65,5 +61,20 @@ extension AppDelegate: IURLSchemeExecutor {
         let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
         purchaseService.login(withAccessToken: withAccessToken, state: state)
         return true
+    }
+    
+    func openUserRulesRedirectController(for action: UserRulesRedirectAction) -> Bool {
+        DDLogInfo("(AppDelegate) - open UserRulesRedirectController with action = \(action)")
+        return self.presentUserRulesRedirectController(for: action)
+    }
+    
+    func openPurchaseLicenseController() -> Bool {
+        DDLogInfo("(AppDelegate) - open PurchaseLicenseController")
+        return self.presentPurchaseLicenseController()
+    }
+    
+    func openAdvancedProtectionController() -> Bool {
+        DDLogInfo("(AppDelegate) - open openAdvancedProtectionController")
+        return self.presentAdvancedProtectionController()
     }
 }

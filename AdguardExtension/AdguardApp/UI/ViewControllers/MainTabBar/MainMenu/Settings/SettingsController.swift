@@ -259,7 +259,7 @@ class SettingsController: UITableViewController {
     private func calculateHeaderHeight(section: Int) -> CGFloat{
         switch section {
         case titleSection:
-            return 0.0
+            return 0.01
         case themeSection:
             return 48.0
         case otherSection:

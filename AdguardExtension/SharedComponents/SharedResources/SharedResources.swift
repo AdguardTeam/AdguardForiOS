@@ -16,7 +16,7 @@
    along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import DnsAdGuardSDK
+import Foundation
 
 extension AESharedResourcesProtocol {
     
@@ -62,26 +62,6 @@ extension AESharedResourcesProtocol {
         }
         set {
             sharedDefaults().set(newValue, forKey: AEDefaultsRateAppShown)
-        }
-    }
-    
-    /// Map that store info about active protocol for specified provider. 
-    /// Map key: - Int value represent provider Id
-    /// Map value: - Selected DNS protocol for specified provider
-    dynamic var dnsActiveProtocols: [Int: DnsAdGuardSDK.DnsProtocol] {
-        get {
-            if let data = sharedDefaults().object(forKey: DnsActiveProtocols) as? Data {
-                let decoder = JSONDecoder()
-                let protocols = try? decoder.decode([Int: DnsAdGuardSDK.DnsProtocol].self, from: data)
-                return protocols ?? [:]
-            }
-            return [:]
-        }
-        set {
-            let encoder = JSONEncoder()
-            if let data = try? encoder.encode(newValue) {
-                sharedDefaults().set(data, forKey: DnsActiveProtocols)
-            }
         }
     }
     
@@ -139,19 +119,6 @@ extension AESharedResourcesProtocol {
         }
         set {
             sharedDefaults().set(newValue, forKey: AEDefaultsDnsWhitelistEnabled)
-        }
-    }
-    
-    dynamic var tunnelMode: TunnelMode {
-        get {
-            guard let value = sharedDefaults().object(forKey: AEDefaultsVPNTunnelMode) as? Int else {
-                return .split
-            }
-            
-            return TunnelMode(rawValue:  value) ?? .split
-        }
-        set {
-            sharedDefaults().set(newValue.rawValue, forKey: AEDefaultsVPNTunnelMode)
         }
     }
     
@@ -378,8 +345,58 @@ extension AESharedResourcesProtocol {
             sharedDefaults().set(newValue, forKey: setAppUsedKey)
         }
     }
+    
+    // TODO: - This shit is awful, but there is no time now to rewrite it
+    // MARK: - Pro status variables
+    
+    /* PurchaseService variables */
+    
+    var isProPurchased: Bool {
+        purchasedThroughInApp || purchasedThroughSetapp || hasActiveLicense
+    }
+    
+    /* LoginService variables */
+    
+    var hasActiveLicense: Bool {
+        loggedIn && userHasPremiumLicense && licenseIsActive
+    }
+    
+    var licenseExpirationDate: Date? {
+        get {
+            return sharedDefaults().object(forKey: AEDefaultsPremiumExpirationDate) as? Date
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsPremiumExpirationDate)
+        }
+    }
+    
+    var userHasPremiumLicense: Bool {
+        get {
+            return sharedDefaults().bool(forKey: AEDefaultsHasPremiumLicense)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsHasPremiumLicense)
+        }
+    }
+    
+    var loggedIn: Bool {
+        get {
+            return sharedDefaults().bool(forKey: AEDefaultsIsProPurchasedThroughLogin)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: AEDefaultsIsProPurchasedThroughLogin)
+        }
+    }
+    
+    var licenseIsActive: Bool {
+        if let licenseExpirationDate = licenseExpirationDate {
+            return licenseExpirationDate > Date()
+        }
+        return false
+    }
+    
     /* Advanced protection state */
-    dynamic var advancedProtection: Bool {
+    var advancedProtection: Bool {
         get {
             sharedDefaults().bool(forKey: advancedProtectionKey)
         }
@@ -388,7 +405,7 @@ extension AESharedResourcesProtocol {
         }
     }
     /* Advanced protection permission granted for Safari Web Extension */
-    dynamic var advancedProtectionPermissionsGranted: Bool {
+    var advancedProtectionPermissionsGranted: Bool {
         get {
             sharedDefaults().bool(forKey: advancedProtectionPermissionsGrantedKey)
         }
@@ -397,7 +414,7 @@ extension AESharedResourcesProtocol {
         }
     }
     /* Safari Web Extension in enabled */
-    dynamic var safariWebExtensionIsOn: Bool {
+    var safariWebExtensionIsOn: Bool {
         get {
             sharedDefaults().bool(forKey: safariWebExtensionIsOnKey)
         }
@@ -406,7 +423,7 @@ extension AESharedResourcesProtocol {
         }
     }
     
-    dynamic var advancedProtectionWhatsNewScreenShown: Bool {
+    var advancedProtectionWhatsNewScreenShown: Bool {
         get {
             sharedDefaults().bool(forKey: advancedProtectionWhatsNewScreenShownKey)
         }

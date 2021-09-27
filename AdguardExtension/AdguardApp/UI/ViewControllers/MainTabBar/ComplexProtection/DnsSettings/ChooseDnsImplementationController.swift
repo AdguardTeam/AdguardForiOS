@@ -17,6 +17,7 @@
 */
 
 import UIKit
+import DnsAdGuardSDK
 
 protocol ChooseDnsImplementationControllerDelegate: AnyObject {
     func currentImplementationChanged()
@@ -37,11 +38,11 @@ class ChooseDnsImplementationController: BottomAlertController {
     // MARK: - services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private let nativeProviders: NativeProvidersServiceProtocol = ServiceLocator.shared.getService()!
+    private let nativeDnsManager: NativeDnsSettingsManagerProtocol = ServiceLocator.shared.getService()!
+    private let dnsProtection: DnsProtectionProtocol = ServiceLocator.shared.getService()!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         processCurrentImplementation()
         updateTheme()
     }
@@ -53,8 +54,9 @@ class ChooseDnsImplementationController: BottomAlertController {
         delegate?.currentImplementationChanged()
         processCurrentImplementation()
         if #available(iOS 14.0, *) {
-            nativeProviders.removeDnsManager { _ in }
+            nativeDnsManager.removeDnsConfig { _ in }
         }
+        dnsProtection.update(dnsImplementation: .adGuard)
         dismiss(animated: true)
     }
     
@@ -62,6 +64,7 @@ class ChooseDnsImplementationController: BottomAlertController {
         resources.dnsImplementation = .native
         delegate?.currentImplementationChanged()
         processCurrentImplementation()
+        dnsProtection.update(dnsImplementation: .native)
         dismiss(animated: true)
     }
     

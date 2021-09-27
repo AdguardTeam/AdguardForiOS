@@ -52,8 +52,10 @@ class IntroductionOnboardingController: UIViewController {
         return theme.statusbarStyle()
     }
     
-    //MARK: - Actions
-    //MARK: - Private mathods
+    // MARK: - Actions
+    
+    // MARK: - Private methods
+    
     private func setupLicenseTextView() {
         let format = String.localizedString("introduction_license_agreement")
         let privacy = UIApplication.shared.adguardUrl(action: "privacy", from: "license", buildVersion: productInfo.buildVersion())

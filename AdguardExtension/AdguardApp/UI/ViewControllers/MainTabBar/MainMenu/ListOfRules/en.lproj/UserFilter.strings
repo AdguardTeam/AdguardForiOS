@@ -1,9 +1,6 @@
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "5eU-q4-Xed"; Note = "(AddRuleController) cancel button"; */
 "5eU-q4-Xed.normalTitle" = "Cancel";
 
-/* Class = "UILabel"; text = "The rule was added to User rules"; ObjectID = "BfI-YN-iXe"; */
-"BfI-YN-iXe.text" = "The rule was added to User rules";
-
 /* Class = "UIButton"; normalTitle = "Save"; ObjectID = "Bvs-mI-vEr"; */
 "Bvs-mI-vEr.normalTitle" = "Save";
 
@@ -30,6 +27,3 @@
 
 /* Class = "UILabel"; text = "Domain:"; ObjectID = "x7r-Ln-XiZ"; */
 "x7r-Ln-XiZ.text" = "Domain:";
-
-/* Class = "UIButton"; normalTitle = "Ok"; ObjectID = "zRm-I7-37E"; */
-"zRm-I7-37E.normalTitle" = "Ok";

@@ -19,5 +19,7 @@
 import Foundation
 
 public struct RequestFactory {
-    
+    static func sendFeedbackConfig(_ feedback: FeedBackProtocol) -> RequestConfig<SuccessFailureParser> {
+        return RequestConfig<SuccessFailureParser>(request: SendFeedbackRequest(feedback), parser: SuccessFailureParser())
+    }
 }

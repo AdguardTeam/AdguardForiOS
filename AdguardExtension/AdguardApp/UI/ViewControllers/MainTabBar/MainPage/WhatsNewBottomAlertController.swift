@@ -29,17 +29,21 @@ protocol WhatsNewBottomAlertControllerDelegate: AnyObject {
 /// WhatsNewBottomAlertController - Responsible for representation new features available in new version of app
 final class WhatsNewBottomAlertController: BottomAlertController {
     
-    //MARK: - Outlets
+    // MARK: - Outlets
+    
     @IBOutlet weak var enableButton: UIButton!
     @IBOutlet var themableLabels: [ThemableLabel]!
     
-    //MARK: - Properties
+    // MARK: - Properties
     weak var delegate: WhatsNewBottomAlertControllerDelegate?
-    //MARK: - Services
+    
+    // MARK: - Services
+    
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resoruces: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
-    //MARK: - ViewController lifecycle
+    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
+    
+    // MARK: - ViewController lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +51,7 @@ final class WhatsNewBottomAlertController: BottomAlertController {
         updateTheme()
     }
     
-    //MARK: - Actions
+    // MARK: - Actions
     
     @IBAction func enableButtonTapped(_ sender: UIButton) {
         if !configuration.proStatus {

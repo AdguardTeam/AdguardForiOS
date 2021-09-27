@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { browser } from 'webextension-polyfill-ts';
+import browser from 'webextension-polyfill';
 import {
     action,
     computed,
@@ -10,11 +10,10 @@ import {
 } from 'mobx';
 
 import { getDomain } from '../../common/utils/url';
-import { translator } from '../../common/translators/translator';
 import { messenger } from '../../common/messenger';
-import { toDataUrl } from '../image-utils';
-import { log } from '../../common/log';
+import { getFaviconDataUrl } from '../image-utils';
 import { AppearanceTheme } from '../../common/constants';
+import { SiteStatus } from '../constants';
 
 // Do not allow property change outside of store actions
 configure({ enforceActions: 'observed' });
@@ -25,21 +24,7 @@ export enum PopupDataLoadingState {
     Done = 'Done',
 }
 
-enum SiteStatus {
-    ProtectionStarting = 'ProtectionStarting',
-    ProtectionEnabled = 'ProtectionEnabled',
-    Allowlisted = 'Allowlisted',
-    BasicOnly = 'BasicOnly',
-}
-
-const SiteStatusesMessages = {
-    [SiteStatus.ProtectionStarting]: translator.getMessage('popup_action_current_site_desc_starting'),
-    [SiteStatus.ProtectionEnabled]: translator.getMessage('popup_action_current_site_status_desc_enabled'),
-    [SiteStatus.Allowlisted]: translator.getMessage('popup_action_current_site_desc_allowlisted'),
-    [SiteStatus.BasicOnly]: translator.getMessage('popup_action_current_site_desc_basic_only'),
-};
-
-class PopupStore {
+export class PopupStore {
     @observable popupDataLoadingState = PopupDataLoadingState.Idle;
 
     @observable currentSiteStatus = SiteStatus.ProtectionEnabled;
@@ -60,9 +45,15 @@ class PopupStore {
 
     @observable isFullscreen: boolean = false;
 
-    @observable showProtectionDisabledModal: boolean = false;
+    @observable protectionModalVisible: boolean = false;
+
+    @observable contentBlockersEnabled: boolean = false;
 
     @observable appearanceTheme?: AppearanceTheme;
+
+    @observable advancedBlockingEnabled: boolean = false;
+
+    @observable advancedBlockingModalVisible: boolean = false;
 
     /**
      * Flag variable
@@ -84,9 +75,10 @@ class PopupStore {
             currentWindow: true,
         });
 
-        const popupData = await messenger.getPopupData(currentTab.url);
-
-        const currentSiteFaviconDataUrl = await this.getFaviconDataUrl(currentTab.favIconUrl);
+        const [popupData, currentSiteFaviconDataUrl] = await Promise.all([
+            messenger.getPopupData(currentTab.url),
+            getFaviconDataUrl(currentTab.url),
+        ]);
 
         runInAction(() => {
             this.popupDataLoadingState = PopupDataLoadingState.Done;
@@ -99,35 +91,11 @@ class PopupStore {
             this.protectionEnabled = popupData.protectionEnabled;
             this.hasUserRules = popupData.hasUserRules;
             this.premiumApp = popupData.premiumApp;
-            this.showProtectionDisabledModal = !popupData.contentBlockersEnabled;
+            this.contentBlockersEnabled = popupData.contentBlockersEnabled;
+            this.protectionModalVisible = !popupData.contentBlockersEnabled;
             this.appearanceTheme = popupData.appearanceTheme;
+            this.advancedBlockingEnabled = popupData.advancedBlockingEnabled;
         });
-    };
-
-    getFaviconDataUrl = async (url?: string): Promise<string | null> => {
-        if (!url) {
-            return null;
-        }
-
-        const TIMEOUT_MS = 500;
-        const timeoutPromise = new Promise((resolve) => {
-            setTimeout(() => { resolve(null); }, TIMEOUT_MS);
-        });
-
-        // eslint-disable-next-line @typescript-eslint/no-shadow
-        const toDataUrlPromise = async (url: string): Promise<string | null> => {
-            try {
-                return await toDataUrl(url);
-            } catch (e) {
-                log.error('Unable to get favicon data url', e);
-                return null;
-            }
-        };
-
-        return (await Promise.race([
-            timeoutPromise,
-            toDataUrlPromise(url),
-        ])) as Promise<string | null>;
     };
 
     @action
@@ -147,17 +115,16 @@ class PopupStore {
         return getDomain(this.currentSiteUrl);
     }
 
-    @computed
-    get currentSiteStatusMessage(): string {
-        return SiteStatusesMessages[this.currentSiteStatus];
-    }
-
     @action
     async toggleProtection() {
+        if (!this.currentSiteUrl) {
+            return;
+        }
+
         const prevState = this.protectionEnabled;
         this.protectionEnabled = !this.protectionEnabled;
         try {
-            await messenger.setProtectionStatus(this.protectionEnabled);
+            await messenger.setProtectionStatus(this.protectionEnabled, this.currentSiteUrl);
         } catch (e) {
             runInAction(() => {
                 this.protectionEnabled = prevState;
@@ -178,8 +145,18 @@ class PopupStore {
     }
 
     @action
-    closeUpgradeModal() {
+    hideUpgradeModal() {
         this.upgradeModalVisible = false;
+    }
+
+    @action
+    showAdvancedBlockingDisabledModal() {
+        this.advancedBlockingModalVisible = true;
+    }
+
+    @action
+    hideAdvancedBlockingModal() {
+        this.advancedBlockingModalVisible = false;
     }
 
     @action
@@ -188,9 +165,11 @@ class PopupStore {
     }
 
     @action
-    setShowContentBlockersEnabledModal(state: boolean) {
-        this.showProtectionDisabledModal = state;
+    setProtectionModalVisibleState(state: boolean) {
+        this.protectionModalVisible = state;
     }
 }
 
-export const popupStore = createContext(new PopupStore());
+export const popupStoreValue = new PopupStore();
+export const PopupStoreContext = createContext(popupStoreValue);
+export const popupStore = PopupStoreContext;

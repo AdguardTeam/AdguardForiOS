@@ -30,4 +30,13 @@ extension URL {
             return host
         }
     }
+    
+    var domain: String? {
+        guard var host = host else { return nil }
+        
+        if host.starts(with: "www.") {
+            host.removeFirst(4)
+        }
+        return host
+    }
 }

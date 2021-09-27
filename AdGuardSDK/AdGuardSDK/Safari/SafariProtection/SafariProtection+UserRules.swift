@@ -17,6 +17,7 @@
  */
 
 import Foundation
+@_implementationOnly import class ContentBlockerConverter.WebExtensionHelpers
 
 public protocol SafariProtectionUserRulesProtocol {
     /**
@@ -90,7 +91,6 @@ public protocol SafariProtectionUserRulesProtocol {
      - Parameter type: User rule type (blocklist / allowlist / inverted allowlist) to modify rule for
      - Parameter onCbReloaded: Closure to handle errors when reloading Content Blockers
      */
-    // TODO: - Tests missing
     func removeRules(_ rules: [String], for type: SafariUserRuleType, onCbReloaded: ((Error?) -> Void)?)
     
     /**
@@ -99,6 +99,15 @@ public protocol SafariProtectionUserRulesProtocol {
      - Parameter onCbReloaded: Closure to handle errors when reloading Content Blockers
      */
     func removeAllRules(for type: SafariUserRuleType, onCbReloaded: ((Error?) -> Void)?)
+    
+    /**
+     Removes all safari blocklist rules associated with provided `domain`
+     Logic with checking user rule associativity is in `ContentBlockerConverter`
+     - Parameter domain: Domain to check blocklist rules association with
+     - Parameter onCbReloaded: Closure to handle errors when reloading Content Blockers
+     - Seealso [ContentBlockerConverter](https://github.com/AdguardTeam/SafariConverterLib)
+     */
+    func removeAllUserRulesAssociatedWith(domain: String, onCbReloaded: ((Error?) -> Void)?)
 }
 
 /* Extension is used to interact with all available user rules lists and properly process operations with them */
@@ -288,6 +297,34 @@ extension SafariProtection {
                     Logger.logError("(SafariProtection+UserRules) - removeAllRules; Error reloading CBs when removing all rules for type=\(type); Error: \(error)")
                 } else {
                     Logger.logInfo("(SafariProtection+UserRules) - removeAllRules; Successfully reloaded CBs after removing all rules for type=\(type)")
+                }
+                self.completionQueue.async { onCbReloaded?(error) }
+            }
+        }
+    }
+    
+    public func removeAllUserRulesAssociatedWith(domain: String, onCbReloaded: ((Error?) -> Void)?) {
+        workingQueue.sync {
+            Logger.logInfo("(SafariProtection+UserRules) - removeAllUserRulesAssociatedWithDomain; Removing all rules for type=\(domain)")
+            
+            let provider = getProvider(for: .blocklist)
+            executeBlockAndReloadCbs {
+                for rule in provider.allRules {
+                    if converterHelper.userRuleIsAssociated(with: domain, rule.ruleText) {
+                        try? provider.removeRule(withText: rule.ruleText)
+                    }
+                }
+            } onCbReloaded: { [weak self] error in
+                guard let self = self else {
+                    Logger.logError("(SafariProtection+UserRules) - removeAllUserRulesAssociatedWithDomain.onCbReloaded; self is missing!")
+                    DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
+                    return
+                }
+                
+                if let error = error {
+                    Logger.logError("(SafariProtection+UserRules) - removeAllUserRulesAssociatedWithDomain; Error reloading CBs when removing all rules for domain=\(domain); Error: \(error)")
+                } else {
+                    Logger.logInfo("(SafariProtection+UserRules) - removeAllUserRulesAssociatedWithDomain; Successfully reloaded CBs after removing all rules for type=\(domain)")
                 }
                 self.completionQueue.async { onCbReloaded?(error) }
             }

@@ -214,9 +214,6 @@
 /* (DnsSettingController) Native DNS implementation title */
 "native_dns_implementation_title" = "Native";
 
-/* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
-"system_dns_server" = "No encryption (System DNS)";
-
 /* MainMenuController - filters menu description */
 "filters_description_format" = "Enabled %1$d out of %2$d";
 
@@ -274,6 +271,12 @@
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Filters:";
 
+/* (ContentBlockersTableController) - Advanced protection title */
+"cb_screen_advanced_protection_title" = "Advanced protection";
+
+/* (ContentBlockersTableController) - Content Blockers title */
+"cb_screen_content_blockers_title" = "Content Blockers";
+
 /* (AdvancedSettingsController) Restart when network changes error */
 "general_settings_restart_tunnel_error" = "You need to enable VPN first";
 
@@ -306,6 +309,9 @@
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "Disabled in Safari settings";
+
+/* (ContentBlockerStateCell) Description for advanced protection disabled state */
+"disabled_current_state_advanced_protection" = "Disabled in Protection settings";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
 "update_current_state_label" = "Loading into Safari...";
@@ -859,6 +865,26 @@
 /* (AddRuleController) Error description when adding rule that already exists */
 "user_rule_exists_error" = "You're trying to add the rule, which is already in the list";
 
+// MARK: - Strings for UserRulesRedirectController
+
+/* (UserRulesRedirectController) - Processing state title */
+"user_rules_processing_title" = "Processing...";
+
+/* (UserRulesRedirectController) - Processing state description */
+"user_rules_processing_descr" = "Please, wait a second...";
+
+/* (UserRulesRedirectController) - Description when allowlist rule is removed; %@ stands for 'allowlist' word hex color */
+"user_rules_allowlist_rule_removed" = "was removed from <u style=color:%@>allowlist</u>";
+
+/* (UserRulesRedirectController) - Description when new allowlist rule is added; %@ stands for 'allowlist' word hex color */
+"user_rules_allowlist_rule_added" = "was added to <u style=color:%@>allowlist</u>";
+
+/* (UserRulesRedirectController) - Description when blocklist rule is added; %@ stands for 'user rules' words hex color */
+"user_rules_blocklist_rule_added" = "has a new blocking rule in <u style=color:%@>user rules</u>";
+
+/* (UserRulesRedirectController) - Description when blocklist rules are removed */
+"user_rules_blocklist_rules_removed" = "has no more user rules";
+
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
 /* (MainTabBarController) Main page tab for VoiceOver*/
@@ -1022,7 +1048,8 @@
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
 "youtube_script_error_title" = "An unknown error occurred while removing YouTube ads";
 
-//MARK: - ActionExtensionMainController
+// MARK: - ActionExtensionMainController
+
 /* (ActionExtensionMainController) - ActionExtension info for iOS 15>= */
 "action_extension_obsolete_info" = "This AdGuard extension is out of date. Check the Extensions tab of the menu for an updated free AdGuard extension with improved UI and ad-blocking tools.";
 

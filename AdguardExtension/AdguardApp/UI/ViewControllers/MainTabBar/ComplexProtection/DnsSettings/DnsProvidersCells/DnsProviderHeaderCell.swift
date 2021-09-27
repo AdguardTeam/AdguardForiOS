@@ -20,7 +20,7 @@ import UIKit
 
 /// Header cell
 final class DnsProviderHeaderCell : UITableViewCell, Reusable {
-    //MARK: - Properties
+    // MARK: - Properties
     
     /// Logo image
     var logoImage: UIImage? {
@@ -60,7 +60,7 @@ final class DnsProviderHeaderCell : UITableViewCell, Reusable {
         return label
     }()
     
-    //MARK: - Init
+    // MARK: - Init
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -74,14 +74,16 @@ final class DnsProviderHeaderCell : UITableViewCell, Reusable {
         self.selectionStyle = .none
     }
     
-    //MARK: - Public methods
+    // MARK: - Public methods
+    
     func updateTheme(themeService: ThemeServiceProtocol) {
         themeService.setupLabels([descriptionLabel])
         themeService.setupImage(logoImageView)
         themeService.setupTableCell(self)
     }
     
-    //MARK: - Private methods
+    // MARK: - Private methods
+    
     private func setupConstraint() {
         self.contentView.addSubview(logoImageView)
         self.contentView.addSubview(descriptionLabel)

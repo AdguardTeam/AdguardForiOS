@@ -48,7 +48,9 @@ final class SafariProtectionController: UITableViewController {
     private let disabledColor = UIColor.AdGuardColor.lightGray3
    
     private var activeFiltersCount: Int {
-        return safariProtection.groups.flatMap { $0.filters }.filter { $0.isEnabled }.count
+        let enabledGroups = safariProtection.groups.filter { $0.isEnabled }
+        let enabledFilters = enabledGroups.flatMap { $0.filters }.filter { $0.isEnabled }
+        return enabledFilters.count
     }
     
     // MARK: - view controler life cycle

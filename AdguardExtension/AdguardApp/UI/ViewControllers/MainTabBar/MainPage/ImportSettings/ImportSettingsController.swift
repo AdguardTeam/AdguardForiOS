@@ -16,7 +16,7 @@
       along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
+import DnsAdGuardSDK
 import SafariAdGuardSDK
 
 class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITableViewDataSource, ImportSettingsCellDelegate {
@@ -31,7 +31,7 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let importService: ImportSettingsServiceProtocol = ServiceLocator.shared.getService()!
-    private let dnsProvidersService: DnsProvidersServiceProtocol = ServiceLocator.shared.getService()!
+    private let dnsProvidersManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!
     private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     
     private var model: ImportSettingsViewModelProtocol?
@@ -40,7 +40,7 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
         super.viewDidLoad()
         
         if settings != nil {
-            model = ImportSettingsViewModel(settings: settings!, importSettingsService: importService, dnsProvidersService: dnsProvidersService, safariProtection: safariProtection)
+            model = ImportSettingsViewModel(settings: settings!, importSettingsService: importService, dnsProvidersManager: dnsProvidersManager, safariProtection: safariProtection)
         }
         
         updateTheme()

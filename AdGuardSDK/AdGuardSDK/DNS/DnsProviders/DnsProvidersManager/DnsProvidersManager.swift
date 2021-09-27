@@ -97,22 +97,20 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
     
     // MARK: - Initialization
     
-    public init(
-        configuration: DnsConfigurationProtocol,
-        userDefaults: UserDefaultsStorageProtocol
-    ) throws {
-        self.configuration = configuration
-        self.userDefaults = userDefaults
-        self.customProvidersStorage = CustomDnsProvidersStorage(userDefaults: self.userDefaults, configuration: configuration)
-        let predefinedDnsProviders = try PredefinedDnsProvidersDecoder(currentLanguage: configuration.currentLanguage)
-        self.providersVendor = DnsProvidersVendor(predefinedProviders: predefinedDnsProviders, customProvidersStorage: self.customProvidersStorage)
-        
-        let providersWithState = providersVendor.getProvidersWithState(for: configuration.dnsImplementation, activeDns: self.userDefaults.activeDnsInfo)
+    public convenience init(configuration: DnsConfigurationProtocol, userDefaults: UserDefaults) throws {
+        let userDefaultsStorage = UserDefaultsStorage(storage: userDefaults)
+        try self.init(configuration: configuration, userDefaults: userDefaultsStorage)
+    }
     
-        self.predefinedProviders = providersWithState.predefined
-        self.customProviders = providersWithState.custom
-        self.activeDnsProvider = providersWithState.activeDnsProvider
-        self.activeDnsServer = providersWithState.activeDnsServer
+    convenience init(configuration: DnsConfigurationProtocol, userDefaults: UserDefaultsStorageProtocol) throws {
+        let customProvidersStorage = CustomDnsProvidersStorage(userDefaults: userDefaults, configuration: configuration)
+        let predefinedDnsProviders = try PredefinedDnsProvidersDecoder(currentLanguage: configuration.currentLanguage)
+        self.init(
+            configuration: configuration,
+            userDefaults: userDefaults,
+            customProvidersStorage: customProvidersStorage,
+            predefinedProviders: predefinedDnsProviders
+        )
     }
      
     // Init for tests

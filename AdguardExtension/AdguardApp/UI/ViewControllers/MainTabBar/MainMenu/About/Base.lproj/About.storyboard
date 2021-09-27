@@ -11,7 +11,7 @@
         <!--About View Controller-->
         <scene sceneID="R6E-rp-j5m">
             <objects>
-                <viewController id="Cgm-Dr-44X" customClass="AboutViewController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" id="Cgm-Dr-44X" customClass="AboutViewController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="517-dV-Anx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -160,6 +160,7 @@
                             <constraint firstItem="htU-yE-FEi" firstAttribute="centerX" secondItem="c73-ge-xtS" secondAttribute="centerX" id="xqY-Fn-vzi"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
