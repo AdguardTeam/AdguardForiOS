@@ -21,12 +21,18 @@ import SafariAdGuardSDK
 import DnsAdGuardSDK
 
 protocol SupportServiceProtocol {
-    func exportLogs() -> URL?
+    /// Preparing logs archive to sharing. Return archive file URL in temporary directory
+    func exportLogs() throws -> URL?
+    /// Delete log archive and other log files from temporary directory. Call it after sharing archive of logs
     func deleteLogsFiles()
+    /// Sending feedback data to our backend
     func sendFeedback(_ email: String, description: String, reportType: ReportType, sendLogs: Bool, _ completion: @escaping (_ logsSentSuccessfully: Bool) -> Void)
 }
 
-class SupportService: SupportServiceProtocol {
+/// Support service assemble app state info
+final class SupportService: SupportServiceProtocol {
+    fileprivate typealias DnsServerInfo = (serverName: String, serverId: Int, upstreams: String)
+
     
     // Services
     private let resources: AESharedResourcesProtocol
@@ -36,6 +42,8 @@ class SupportService: SupportServiceProtocol {
     private let productInfo: ADProductInfoProtocol
     private let keyChainService: KeychainServiceProtocol
     private let safariProtection: SafariProtectionProtocol
+    private let dnsProvidersManager: DnsProvidersManagerProtocol
+    private let dnsProtection: DnsProtectionProtocol
 
     // Helper variable
     private let reportUrl = "https://reports.adguard.com/new_issue.html"
@@ -51,7 +59,7 @@ class SupportService: SupportServiceProtocol {
     private var logsDirectory: URL?
     private var logsZipDirectory: URL?
     
-    init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol, complexProtection: ComplexProtectionServiceProtocol, productInfo: ADProductInfoProtocol, keyChainService: KeychainServiceProtocol, safariProtection: SafariProtectionProtocol, networkSettings: NetworkSettingsServiceProtocol) {
+    init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol, complexProtection: ComplexProtectionServiceProtocol, productInfo: ADProductInfoProtocol, keyChainService: KeychainServiceProtocol, safariProtection: SafariProtectionProtocol, networkSettings: NetworkSettingsServiceProtocol, dnsProvidersManager: DnsProvidersManagerProtocol, dnsProtection: DnsProtectionProtocol) {
         self.resources = resources
         self.configuration = configuration
         self.complexProtection = complexProtection
@@ -59,51 +67,48 @@ class SupportService: SupportServiceProtocol {
         self.keyChainService = keyChainService
         self.safariProtection = safariProtection
         self.networkSettings = networkSettings
+        self.dnsProvidersManager = dnsProvidersManager
+        self.dnsProtection = dnsProtection
     }
     
-    func exportLogs() -> URL? {
+    func exportLogs() throws -> URL? {
         let archiveName = "AdGuard_logs.zip"
         
-        let tmp = NSTemporaryDirectory()
-        let baseUrlString = tmp + "logs/"
-        let cbUrlString = baseUrlString + "CB jsons/"
-        let targetsUrlString = baseUrlString + "Targets/"
+        let tmp = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+        let baseUrl = tmp.appendingPathComponent("logs", isDirectory: true)
+        let cbUrl = baseUrl.appendingPathComponent("CB jsons", isDirectory: true)
+        let targetsUrl = baseUrl.appendingPathComponent("Targets", isDirectory: true)
+        let logsZipUrl = tmp.appendingPathComponent(archiveName)
+        self.logsDirectory = baseUrl
+        self.logsZipDirectory = logsZipUrl
         let fileManager = FileManager.default
         
+        ///Remove old logs if it exists
+        deleteLogsFiles()
+        
         /// Create directories in base directory
-        try? fileManager.createDirectory(atPath: baseUrlString, withIntermediateDirectories: true, attributes: nil)
-        try? fileManager.createDirectory(atPath: cbUrlString, withIntermediateDirectories: true, attributes: nil)
-        try? fileManager.createDirectory(atPath: targetsUrlString, withIntermediateDirectories: true, attributes: nil)
+        try fileManager.createDirectory(at: baseUrl, withIntermediateDirectories: true, attributes: nil)
+        try fileManager.createDirectory(at: cbUrl, withIntermediateDirectories: true, attributes: nil)
+        try fileManager.createDirectory(at: targetsUrl, withIntermediateDirectories: true, attributes: nil)
         
         /// Get jsons for content blockers and append them to base directory
-//        let contentBlockingInfo = safariProtection.allContentBlockersInfo
-//        contentBlockingInfo.forEach { (_, cbInfo) in
-//            // todo: copy file
-//            let fileUrl = URL(fileURLWithPath: cbUrlString + fileName)
-//            try? jsonData.write(to: fileUrl)
-//        }
+        try appendCBJsonsIntoTemporaryDirectory(cbUrl: cbUrl)
         
         /// Get application state info and save it as state.txt to base directory
         let appStateData = createApplicationStateInfo().data(using: .utf8)
-        let appStateUrl = URL(fileURLWithPath: baseUrlString + "state.txt")
-        try? appStateData?.write(to: appStateUrl)
+        let appStateUrl = baseUrl.appendingPathComponent("state.txt")
+        try appStateData?.write(to: appStateUrl)
         
         /// Flush Logs before appending them
         ACLLogger.singleton()?.flush()
         
         /// Append log file for each process to base directory
-        appLogsUrls.forEach { appLogUrl in
+        try appLogsUrls.forEach { appLogUrl in
             let logFileData = applicationLogData(fromUrl: appLogUrl)
             let fileName = appLogUrl.lastPathComponent
-            let fileUrl = URL(fileURLWithPath: targetsUrlString + fileName)
-            try? logFileData.write(to: fileUrl)
+            let fileUrl = targetsUrl.appendingPathComponent(fileName)
+            try logFileData.write(to: fileUrl)
         }
-        
-        let baseUrl = URL(fileURLWithPath: baseUrlString, isDirectory: true)
-        let logsZipUrl = URL(fileURLWithPath: tmp + archiveName)
-        
-        self.logsDirectory = baseUrl
-        self.logsZipDirectory = logsZipUrl
         
         do {
             try Zip.zipFiles(paths: [baseUrl], zipFilePath: logsZipUrl, password: nil, compression: .BestSpeed, progress: nil)
@@ -145,22 +150,25 @@ class SupportService: SupportServiceProtocol {
         let applicationState = createApplicationStateInfo()
         let debugInfo = sendLogs ? createDebugInfo() : ""
         let feedback: FeedBackProtocol = FeedBack(applicationId: appId, version: version, email: email, language: language, subject: subject, description: description, applicationState: applicationState, debugInfo: debugInfo)
-        // todo: do something with reqest service
-//        requestsService.sendFeedback(feedback) { logsSentSuccessfully in
-//            completion(logsSentSuccessfully)
-//        }
+        
+        let httpRequestService = HttpRequestService()
+        httpRequestService.sendFeedback(feedback) { success in
+            completion(success)
+        }
     }
     
     private func createApplicationStateInfo() -> String {
-        let server = ""
+        let serverInfo = collectDnsServerInfo()
+        
         let device = UIDevice.current
         
-        // todo:
-        let filters = [String]()
-//        let filters = antibanner.activeFilters().reduce("") { filtersString, meta -> String in
-//            let metaString = "ID=\(meta.filterId) Name=\"\(meta.name)\" Version=\(meta.version ?? "-") Enabled=\(meta.enabled)"
-//            return filtersString + metaString + "\n"
-//        }
+        let filters = safariProtection.groups
+            .filter { $0.isEnabled }
+            .flatMap { $0.filters }
+            .reduce("") { filtersString, filter in
+                let metaString = "ID=\(filter.filterId) Name=\"\(filter.name ?? "-")\" Version=\(filter.version ?? "-") Enabled=\(filter.isEnabled)\n"
+                return filtersString + metaString
+            }
         
         let tunnelMode = resources.tunnelMode.debugDescription
         
@@ -195,12 +203,12 @@ class SupportService: SupportServiceProtocol {
         Safari protection enabled: \(complexProtection.safariProtectionEnabled)
         System protection enabled: \(complexProtection.systemProtectionEnabled)
         Tunnel mode \(tunnelMode)
-        DNS server: \(server)
+        DNS server: \(serverInfo.serverName)
         Restart when network changes: \(resources.restartByReachability)
         Filter mobile data: \(networkSettings.filterMobileDataEnabled)
         Filter wi-fi data: \(networkSettings.filterWifiDataEnabled)
 
-        Dns server id: \(-1)
+        Dns server id: \(serverInfo.serverId)
         Dns custom bootstrap servers: \(customBootstraps)"
         Dns custom fallback servers: \(customFallbacks)"
 
@@ -210,9 +218,7 @@ class SupportService: SupportServiceProtocol {
         AdGuard VPN tunnel is running: \(UIApplication.adGuardVpnIsActive)
         """
         
-        for upstream in [String]() {
-            resultString.append("\r\nDns upstream: \(upstream)")
-        }
+        resultString.append("\r\nDns upstream: \(serverInfo.upstreams)")
         
         if networkSettings.exceptions.count > 0 {
             resultString.append("\r\n\r\nWi-Fi exceptions:")
@@ -221,13 +227,10 @@ class SupportService: SupportServiceProtocol {
             }
         }
         
-        if 1 > 0 { // dnsFilters.filters.count
-            resultString.append("\r\nDns filters: \r\n");
-            
-//            for filter in dnsFilters.filters {
-//                resultString.append("name: \(filter.name ?? "UNDEFINED") id: \(filter.id) url: \(filter.subscriptionUrl ?? "UNDEFINED") enabled: \(filter.enabled)\r\n")
-//            }
-        }
+        let filtersString = collectDnsFilters()
+        guard !filtersString.isEmpty else { return resultString }
+        resultString.append("\r\nDns filters: \r\n");
+        resultString.append(filtersString)
         
         return resultString
     }
@@ -278,5 +281,31 @@ class SupportService: SupportServiceProtocol {
         delimeter += "LOG FILE: \(fileName)"
         delimeter += "\r\n-------------------------------------------------------------\r\n"
         return delimeter
+    }
+    
+    private func appendCBJsonsIntoTemporaryDirectory(cbUrl: URL) throws {
+        try safariProtection.allConverterResults.forEach { converterResult in
+            let fileUrl = converterResult.jsonUrl
+            try FileManager.default.copyItem(at: fileUrl, to: cbUrl.appendingPathComponent( fileUrl.lastPathComponent))
+        }
+    }
+    
+    private func collectDnsServerInfo() -> DnsServerInfo {
+        let provider = dnsProvidersManager.activeDnsProvider
+        let server = dnsProvidersManager.activeDnsServer
+        let serverName = server.isPredefined ? server.predefined.name : provider.name
+        let serverId = server.id
+        let upstreams = server.upstreams.reduce("") { partialResult, upstream in
+            partialResult + "\(upstream.upstream)\n"
+        }
+        return (serverName, serverId, upstreams)
+    }
+    
+    private func collectDnsFilters() -> String {
+        return dnsProtection.filters.reduce("") { partialResult, filter in
+            guard filter.isEnabled else { return partialResult }
+            let filterString = "ID=\(filter.filterId) Name=\"\(filter.name ?? "UNDEFINED")\" Url=\(filter.filterDownloadPage ?? "UNDEFINED") Enabled=\(filter.isEnabled)\r\n"
+            return partialResult + filterString
+        }
     }
 }

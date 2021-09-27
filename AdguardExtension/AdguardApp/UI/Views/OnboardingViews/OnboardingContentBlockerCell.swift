@@ -20,7 +20,9 @@ import UIKit
 
 /// OnboardingContentBlockerCell - Custom onboarding table view cell
 final class OnboardingContentBlockerCell: UITableViewCell {
-    //MARK: - Properties
+    
+    // MARK: - Properties
+    
     private let uiSwitch: UISwitch = {
        let view = UISwitch()
         view.isOn = true
@@ -64,7 +66,8 @@ final class OnboardingContentBlockerCell: UITableViewCell {
         }
     }
     
-    //MARK: - Init
+    // MARK: - Init
+    
     override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupConstraints()
@@ -75,7 +78,8 @@ final class OnboardingContentBlockerCell: UITableViewCell {
         self.setupConstraints()
     }
 
-    //MARK: - Private methods
+    // MARK: - Private methods
+    
     private func setupConstraints() {
         self.contentView.addSubview(adguardIcon)
         self.contentView.addSubview(uiSwitch)

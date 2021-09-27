@@ -18,8 +18,16 @@
 
 import Foundation
 
-extension RequestFactory {
-    static func sendFeedbackConfig(_ feedback: FeedBackProtocol) -> RequestConfig<SuccessFailureParser> {
-        return RequestConfig<SuccessFailureParser>(request: SendFeedbackRequest(feedback), parser: SuccessFailureParser())
+extension HttpRequestServiceProtocol {
+    func sendFeedback(_ feedback: FeedBackProtocol, completion: @escaping (_ success: Bool)->()) {
+        let config = RequestFactory.sendFeedbackConfig(feedback)
+        requestSender.send(requestConfig: config) { (result: Result<Bool, Error>) in
+            switch result{
+            case .success(let isSuccess):
+                completion(isSuccess)
+            case .failure(_):
+                completion(false)
+            }
+        }
     }
 }

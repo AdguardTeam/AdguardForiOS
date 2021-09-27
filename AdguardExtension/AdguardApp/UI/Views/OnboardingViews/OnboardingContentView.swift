@@ -31,11 +31,13 @@ final class OnboardingContentView: UIView {
         }
     }
     
-    //MARK: - Services
+    // MARK: - Services
+    
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
-    //MARK: - Properties
+    // MARK: - Properties
+    
     //TODO: Make dynamic content blockers name and icon
     private let contentBlockers = ["AdGuard — Custom", "AdGuard — General", "AdGuard — Other"]
     private let cellsAlpha = [1.0, 0.6, 0.2]
@@ -54,7 +56,8 @@ final class OnboardingContentView: UIView {
         return view
     }()
     
-    //MARK: - Init
+    // MARK: - Init
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setup(with: onboardingType)

@@ -44,7 +44,7 @@ final class AGTextField: UITextField {
         }
     }
 
-    //MARK: - Properties
+    // MARK: - Properties
     
     var leftTextAreaOffset: CGFloat = 0 {
         didSet {
@@ -82,7 +82,7 @@ final class AGTextField: UITextField {
         setupTextFieldRighViewImages()
     }
     
-    //MARK: - Overrided UITextField methods
+    // MARK: - Overrided UITextField methods
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {
         let superBounds = super.textRect(forBounds: bounds)
@@ -100,13 +100,13 @@ final class AGTextField: UITextField {
         return rect
     }
     
-    //MARK: - Public methods
+    // MARK: - Public methods
     
     func themeChanged() {
         setupBorderStyle(state: borderState)
     }
     
-    //MARK: - Private methods
+    // MARK: - Private methods
     
     private func setupTextFieldRighViewImages(images: [UIControl.State.RawValue: UIImage] = [:]) {
         let images = images.isEmpty ? textFieldType.defaultImages : images

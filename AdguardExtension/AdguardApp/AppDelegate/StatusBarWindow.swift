@@ -26,7 +26,8 @@ protocol IStatusBarWindow: AnyObject {
 }
 
 final class StatusBarWindow: IStatusBarWindow {
-    //MARK: - Properties
+    
+    // MARK: - Public properties
     
     var statusBarWindowIsHidden: Bool {
         get {
@@ -49,7 +50,7 @@ final class StatusBarWindow: IStatusBarWindow {
         self.configuration = configuration
     }
     
-    //MARK: - IStatusBarWindow methods
+    // MARK: - IStatusBarWindow methods
     
     func createStatusBarWindow() {
         guard let keyWindow = UIApplication.shared.keyWindow else { return }
@@ -127,7 +128,8 @@ final class StatusBarWindow: IStatusBarWindow {
             self?.statusView.text = text
         }
     }
-    //MARK: - Private methods
+    
+    // MARK: - Private methods
     
     private func showStatusView(with text: String?) {
         statusBarWindow?.isHidden = false

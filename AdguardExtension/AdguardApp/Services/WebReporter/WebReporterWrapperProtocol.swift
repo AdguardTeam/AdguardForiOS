@@ -16,18 +16,8 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
-
-extension HttpRequestServiceProtocol {
-    func sendFeedback(_ feedback: FeedBackProtocol, completion: @escaping (_ success: Bool)->()) {
-        let config = RequestFactory.sendFeedbackConfig(feedback)
-        requestSender.send(requestConfig: config) { (result: Result<Bool>) in
-            switch result{
-            case .success(let isSuccess):
-                completion(isSuccess)
-            case .error:
-                completion(false)
-            }
-        }
-    }
+/// Descendant of this protocol  return prepared reporting parameters
+protocol WebReporterWrapperProtocol {
+    /// Return dictionary with reporting parameters
+   func collectParams() -> [String: String]
 }

@@ -84,8 +84,11 @@ final class StartupService : NSObject{
             userDefaults: sharedResources.sharedDefaults(),
             dnsBackgroundFetchUpdater: dnsProtection)
         
+        let dnsProvidersManager: DnsProvidersManagerProtocol = try! DnsProvidersManager(configuration: dnsProtectionConfiguration, userDefaults: sharedResources.sharedDefaults())
+        
         locator.addService(service: safariProtection)
         locator.addService(service: dnsProtection)
+        locator.addService(service: dnsProvidersManager)
         
         /* End of initializing SDK */
         
@@ -94,9 +97,6 @@ final class StartupService : NSObject{
                 
         let networkSettingsService: NetworkSettingsServiceProtocol = NetworkSettingsService(resources: sharedResources)
         locator.addService(service: networkSettingsService)
-
-        let dnsProvidersManager: DnsProvidersManagerProtocol = try! DnsProvidersManager(configuration: dnsProtectionConfiguration, userDefaults: sharedResources.sharedDefaults())
-        locator.addService(service: dnsProvidersManager)
         
         let nativeDnsManager: NativeDnsSettingsManagerProtocol = NativeDnsSettingsManager(networkSettingsService: networkSettingsService, dnsProvidersManager: dnsProvidersManager, configuration: configuration, resources: sharedResources)
         locator.addService(service: nativeDnsManager)
@@ -116,7 +116,7 @@ final class StartupService : NSObject{
         let keyChainService: KeychainServiceProtocol = KeychainService(resources: sharedResources)
         locator.addService(service: keyChainService)
         
-        let supportService: SupportServiceProtocol = SupportService(resources: sharedResources, configuration: configuration, complexProtection: complexProtection, productInfo: productInfo, keyChainService: keyChainService, safariProtection: safariProtection, networkSettings: networkSettingsService)
+        let supportService: SupportServiceProtocol = SupportService(resources: sharedResources, configuration: configuration, complexProtection: complexProtection, productInfo: productInfo, keyChainService: keyChainService, safariProtection: safariProtection, networkSettings: networkSettingsService, dnsProvidersManager: dnsProvidersManager, dnsProtection: dnsProtection)
         locator.addService(service: supportService)
 
         let userNotificationService: UserNotificationServiceProtocol = UserNotificationService()

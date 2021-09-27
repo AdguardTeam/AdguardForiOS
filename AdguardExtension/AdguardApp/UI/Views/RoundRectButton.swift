@@ -89,7 +89,7 @@ class RoundRectButton: UIButton {
         }
     }
     
-    //MARK: - Initialization
+    // MARK: - Initialization
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -108,7 +108,7 @@ class RoundRectButton: UIButton {
         return newArea.contains(point)
     }
     
-    //MARK: - Load indicator property
+    // MARK: - Load indicator property
     
     private let activityIndicator = UIActivityIndicatorView()
     
@@ -139,7 +139,7 @@ class RoundRectButton: UIButton {
         }
     }
     
-    //MARK: - Public methods
+    // MARK: - Public methods
     
     func startIndicator(){
         setupIndicator()
@@ -151,7 +151,7 @@ class RoundRectButton: UIButton {
         activityIndicator.removeFromSuperview()
     }
     
-    //MARK: - Private methods
+    // MARK: - Private methods
 
     private func updateBackground() {
         if !isEnabled,

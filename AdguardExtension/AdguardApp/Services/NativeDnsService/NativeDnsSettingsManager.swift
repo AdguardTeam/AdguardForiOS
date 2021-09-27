@@ -71,7 +71,7 @@ final class NativeDnsSettingsManager: NativeDnsSettingsManagerProtocol {
         }
     }
     
-    //MARK: - Internal properties
+    // MARK: - Internal properties
     
     // TODO: - Remove later
     weak var delegate: NativeDnsSettingsManagerDelegate?
@@ -96,7 +96,8 @@ final class NativeDnsSettingsManager: NativeDnsSettingsManagerProtocol {
     private let configuration: ConfigurationServiceProtocol
     private let resources: AESharedResourcesProtocol
     
-    //MARK: - Init
+    // MARK: - Init
+    
     init(networkSettingsService: NetworkSettingsServiceProtocol,
          dnsProvidersManager: DnsProvidersManagerProtocol,
          configuration: ConfigurationServiceProtocol,
@@ -115,7 +116,7 @@ final class NativeDnsSettingsManager: NativeDnsSettingsManagerProtocol {
         }
     }
     
-    //MARK: - Internal methods
+    // MARK: - Internal methods
     
     @available(iOS 14.0, *)
     func saveDnsConfig(_ onErrorReceived: @escaping (_ error: Error?) -> Void) {
@@ -159,7 +160,7 @@ final class NativeDnsSettingsManager: NativeDnsSettingsManagerProtocol {
         }
     }
     
-    //MARK: - Private methods
+    // MARK: - Private methods
     
     @available(iOS 14.0, *)
     private func loadDnsManager(_ onManagerLoaded: @escaping (_ dnsManager: NEDNSSettingsManager?) -> Void) {
@@ -237,7 +238,7 @@ final class NativeDnsSettingsManager: NativeDnsSettingsManagerProtocol {
         return dotSettings
     }
     
-    //MARK: - Observers
+    // MARK: - Observers
     
     @available(iOS 14.0, *)
     private func addObservers() {

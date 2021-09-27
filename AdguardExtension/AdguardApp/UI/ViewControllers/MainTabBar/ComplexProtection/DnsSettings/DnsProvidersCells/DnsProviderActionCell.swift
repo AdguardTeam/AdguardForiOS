@@ -19,7 +19,8 @@
 import Foundation
 
 final class DnsProviderActionCell: UITableViewCell, Reusable {
-    //MARK: - Properties
+    // MARK: - Properties
+    
     var actionNameTitle: String = "" {
         didSet {
             actionNameLabel.text = actionNameTitle
@@ -59,7 +60,8 @@ final class DnsProviderActionCell: UITableViewCell, Reusable {
         return imageView
     }()
     
-    //MARK: - Init
+    // MARK: - Init
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupConstraints()
@@ -72,14 +74,15 @@ final class DnsProviderActionCell: UITableViewCell, Reusable {
         self.selectionStyle = .none
     }
     
-    //MARK: - Public methods
+    // MARK: - Public methods
     
     func updateTheme(themeService: ThemeServiceProtocol) {
         themeService.setupLabels([actionNameLabel, selectedOptionLabel])
         themeService.setupTableCell(self)
     }
     
-    //MARK: - Private methods
+    // MARK: - Private methods
+    
     private func setupConstraints() {
         self.contentView.addSubview(actionNameLabel)
         self.contentView.addSubview(selectedOptionLabel)

@@ -23,7 +23,8 @@ import Sentry
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    //MARK: - Properties
+    // MARK: - Public properties
+    
     let statusBarWindow: IStatusBarWindow
     var window: UIWindow?
     
@@ -48,7 +49,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     private var activateWithOpenUrl: Bool = false
 
-    //MARK: - Services
+    // MARK: - Services
+    
     private var resources: AESharedResourcesProtocol
     private var safariProtection: SafariProtectionProtocol
     private var dnsProtection: DnsProtectionProtocol
@@ -63,7 +65,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var complexProtection: ComplexProtectionServiceProtocol
     private var themeService: ThemeServiceProtocol
     
-    //MARK: - Application init
+    // MARK: - Application init
+    
     override init() {
         StartupService.start()
         self.resources = ServiceLocator.shared.getService()!
@@ -137,7 +140,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-    //MARK: - Application Delegate Methods
+    // MARK: - Application Delegate Methods
     
     func applicationWillResignActive(_ application: UIApplication) {
         DDLogInfo("(AppDelegate) applicationWillResignActive.")
@@ -204,7 +207,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return urlParser.parse(url: url)
     }
     
-    //MARK: - Public methods
+    // MARK: - Public methods
     
     func resetAllSettings() {
         let resetProcessor = SettingsResetor(appDelegate: self,
@@ -241,7 +244,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    //MARK: - Private methods
+    // MARK: - Private methods
     
     private func prepareControllers() {
         setappService.start()
@@ -332,7 +335,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    //MARK: - Init logger
+    // MARK: - Init logger
     
     private func initLogger() {
         let isDebugLogs = resources.sharedDefaults().bool(forKey: AEDefaultsDebugLogs)

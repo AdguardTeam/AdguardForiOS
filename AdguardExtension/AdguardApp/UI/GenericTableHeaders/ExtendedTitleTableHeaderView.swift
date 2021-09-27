@@ -20,7 +20,7 @@ import UIKit
 
 final class ExtendedTitleTableHeaderView: UIView {
     
-    //MARK: - UI Elements
+    // MARK: - UI Elements
     
     private lazy var titleLabel: ThemableLabel = {
         let label = ThemableLabel()
@@ -44,11 +44,11 @@ final class ExtendedTitleTableHeaderView: UIView {
         return textView
     }()
     
-    //MARK: - Services
+    // MARK: - Services
     
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
-    //MARK: - Properties
+    // MARK: - Properties
     
     private var themeObserver: NotificationToken?
     

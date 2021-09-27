@@ -50,7 +50,7 @@ struct ExtendedRadioButtonCellModel {
 /// Generic cell with title and description labels and radio button that shows selected state
 final class ExtendedRadioButtonCell: UITableViewCell, Reusable {
     
-    //MARK: - Properties
+    // MARK: - Public properties
     
     var cellTag: Int?
     
@@ -126,7 +126,7 @@ final class ExtendedRadioButtonCell: UITableViewCell, Reusable {
         return imageView
     }()
     
-    //MARK: - Init
+    // MARK: - Init
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -138,13 +138,14 @@ final class ExtendedRadioButtonCell: UITableViewCell, Reusable {
         addConstraints()
     }
     
-    //MARK: - Public methods
+    // MARK: - Public methods
+    
     func updateTheme(themeService: ThemeServiceProtocol) {
         themeService.setupTableCell(self)
         themeService.setupLabels([titleLabel, descriptionLabel])
     }
     
-    //MARK: - Private methods
+    // MARK: - Private methods
     
     private func addConstraints() {
         self.contentView.addSubview(titleLabel)

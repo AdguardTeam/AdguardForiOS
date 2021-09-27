@@ -21,7 +21,7 @@ import DnsAdGuardSDK
 
 final class DnsSettingsController : UITableViewController {
     
-    //MARK: - IB Outlets
+    // MARK: - IB Outlets
     
     @IBOutlet weak var tryButton: UIButton!
     @IBOutlet weak var systemIcon: UIImageView!
@@ -41,7 +41,7 @@ final class DnsSettingsController : UITableViewController {
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
     
-    // MARK: - services
+    // MARK: - Services
     
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!

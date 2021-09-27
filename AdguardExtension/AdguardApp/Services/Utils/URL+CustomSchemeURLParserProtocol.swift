@@ -53,7 +53,8 @@ extension URL: CustomSchemeURLParserProtocol {
         return prepareParams(components: components)
     }
     
-    //MARK: - Private methods
+    // MARK: - Private methods
+    
     private func splitURLByChar(separator: Character) -> [String]? {
         let components = self.absoluteString.split(separator: separator, maxSplits: 1)
         if components.count != 2 {

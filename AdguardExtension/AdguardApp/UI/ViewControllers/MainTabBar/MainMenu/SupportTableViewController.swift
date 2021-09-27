@@ -24,9 +24,6 @@ class SupportTableViewController: UITableViewController {
     
     // MARK: - Services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    
-    // TODO: - It will crash, but this object shouldn't be here; FIX IT
-    private let webReporter: ActionExtensionWebReporterProtocol = ServiceLocator.shared.getService()!
     private let support: SupportServiceProtocol = ServiceLocator.shared.getService()!
     private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
     
@@ -62,14 +59,22 @@ class SupportTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
     }
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
-    
+        
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         theme.setupTableCell(cell)
@@ -112,8 +117,8 @@ class SupportTableViewController: UITableViewController {
     }
     
     private func reportIncorrectBlockingRowTapped() {
-//        let reportUrl = webReporter.composeWebReportUrl(nil)
-//        UIApplication.shared.open(reportUrl, options: [:], completionHandler: nil)
+        let reportUrl = ApplicationWebReporter().createUrl()
+        UIApplication.shared.open(reportUrl, options: [:], completionHandler: nil)
     }
     
     private func rateAppRowTapped() {
@@ -125,7 +130,14 @@ class SupportTableViewController: UITableViewController {
             return
         }
         
-        guard let zipLog = support.exportLogs() else {
+        var zipLog: URL?
+        do {
+            zipLog = try support.exportLogs()
+        } catch {
+            DDLogError("(SupportTableViewController) - exportLogsTapped; On export zip file error occurred: \(error)")
+            showUnknownErrorAlert()
+        }
+        guard let zipLog = zipLog else {
             support.deleteLogsFiles()
             return
         }

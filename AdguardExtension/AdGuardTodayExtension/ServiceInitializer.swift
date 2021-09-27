@@ -76,7 +76,8 @@ final class ServiceInitializer: ServiceInitializerProtocol {
                                  nativeDnsSettingsManager: nativeDnsSettingsManager,
                                  safariProtection: safariProtection)
         
-        //MARK: - ActivityStatistics
+        // MARK: - ActivityStatistics
+        
         self.activityStatistics = try ActivityStatistics(statisticsDbContainerUrl: sharedStorageUrls.statisticsFolderUrl)
     }
 }

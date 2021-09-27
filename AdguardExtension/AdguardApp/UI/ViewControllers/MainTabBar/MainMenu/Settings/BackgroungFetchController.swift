@@ -25,20 +25,25 @@ protocol BackgroundFetchControllerDelegate: AnyObject {
 
 /// View controller for choosing background fetch interval
 final class BackgroundFetchController: BottomAlertController {
-    //MARK: - Outlets
+    
+    // MARK: - Outlets
+    
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var tableView: UITableView!
 
-    //MARK: - Properties
+    // MARK: - Properties
+    
     weak var delegate: BackgroundFetchControllerDelegate?
     private var selectedCell: BackgroundFetchUpdateInterval?
     
     
-    //MARK: - Services
+    // MARK: - Services
+    
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
 
-    //MARK: - ViewController lifecycle
+    // MARK: - ViewController lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateTheme()
@@ -52,7 +57,7 @@ final class BackgroundFetchController: BottomAlertController {
         tableView.separatorStyle = .none
     }
     
-    //MARK: - Private methods
+    // MARK: - Private methods
     
     private func applySelectedOption(row: BackgroundFetchUpdateInterval) {
         AppDelegate.setBackgroundFetchInterval(row.interval)
@@ -62,7 +67,8 @@ final class BackgroundFetchController: BottomAlertController {
     }
 }
 
-//MARK: - BackgroundFetchController + UITableViewDataSource
+// MARK: - BackgroundFetchController + UITableViewDataSource
+
 extension BackgroundFetchController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -82,7 +88,8 @@ extension BackgroundFetchController: UITableViewDataSource {
     }
 }
 
-//MARK: - BackgroundFetchController + UITableViewDelegate
+// MARK: - BackgroundFetchController + UITableViewDelegate
+
 extension BackgroundFetchController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()

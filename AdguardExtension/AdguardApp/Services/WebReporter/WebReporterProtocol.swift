@@ -16,24 +16,8 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
-
-public struct RequestConfig<Parser> where Parser: ParserProtocol {
-    public let request: RequestProtocol
-    public let parser: Parser
-    
-    public init(request: RequestProtocol, parser: Parser) {
-        self.request = request
-        self.parser = parser
-    }
-}
-
-public enum RequestSenderErrors: Error {
-    case stringToUrlError
-    case receivedDataParsingError
-}
-
-public protocol RequestSenderProtocol {
-    func send<Parser>(requestConfig: RequestConfig<Parser>,
-                      completionHandler: @escaping(Result<Parser.Model, Error>) -> Void)
+/// Descendant of this protocol create URL for sending reports
+protocol WebReporterProtocol {
+    /// Return URL with reporting parameters
+    func createUrl() -> URL
 }
