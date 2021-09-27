@@ -7,20 +7,14 @@
 /* Class = "UILabel"; text = "Block Trackers"; ObjectID = "FDG-As-HDY"; */
 "FDG-As-HDY.text" = "Block Trackers";
 
-/* Class = "UIButton"; normalTitle = "WATCH MANUAL"; ObjectID = "GOu-4j-RcN"; */
-"GOu-4j-RcN.normalTitle" = "WATCH MANUAL";
+/* Class = "UIButton"; normalTitle = "Video guide"; ObjectID = "GOu-4j-RcN"; */
+"GOu-4j-RcN.normalTitle" = "Video guide";
 
 /* Class = "UILabel"; text = "Stop thousands of corporations from tracking your every move. Regain control of your online privacy."; ObjectID = "Mzf-WJ-CpC"; Note = "String must be less or equal 4 lines"; */
 "Mzf-WJ-CpC.text" = "Stop thousands of corporations from tracking your every move. Regain control of your online privacy.";
 
-/* Class = "UILabel"; text = "Tap on Safari and choose the \"Content blockers\" menu item"; ObjectID = "QL3-U7-vA8"; */
-"QL3-U7-vA8.text" = "Tap on Safari and choose the \"Content blockers\" menu item";
-
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "cMV-qC-ZdE"; */
 "cMV-qC-ZdE.normalTitle" = "Continue";
-
-/* Class = "UILabel"; text = "Switch on all content blockers and return to the app!"; ObjectID = "eyJ-Xh-OdS"; */
-"eyJ-Xh-OdS.text" = "Switch on all content blockers and return to the app!";
 
 /* Class = "UILabel"; text = "Block Ads"; ObjectID = "hXU-wD-fbI"; */
 "hXU-wD-fbI.text" = "Block Ads";
@@ -39,6 +33,3 @@
 
 /* Class = "UILabel"; text = "Use our collection of flexible filters to remove any type of content. Tune the filtering to your liking and surf the web your way. "; ObjectID = "thP-lV-BhN"; Note = "String must be less or equal 4 lines"; */
 "thP-lV-BhN.text" = "Use our collection of flexible filters to remove any type of content. Tune the filtering to your liking and surf the web your way. ";
-
-/* Class = "UILabel"; text = "Open the settings"; ObjectID = "tsx-Ce-cc8"; */
-"tsx-Ce-cc8.text" = "Open the settings";

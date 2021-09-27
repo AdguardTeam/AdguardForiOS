@@ -37,9 +37,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NlM-RH-NgY" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="24" y="0.0" width="552" height="29"/>
-                                                    <string key="text">BLOCK MORE
-ADS &amp; TRACKERS</string>
+                                                    <rect key="frame" x="24" y="0.0" width="552" height="57.5"/>
+                                                    <string key="text">Block more
+ads &amp; trackers</string>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -733,7 +733,7 @@ ADS &amp; TRACKERS</string>
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                         <inset key="contentEdgeInsets" minX="32" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="GO TO MY ACCOUNT">
+                                        <state key="normal" title="Go to my account">
                                             <color key="titleColor" red="0.40392156862745099" green="0.69803921568627447" blue="0.47450980392156861" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
                                         </state>
                                         <variation key="heightClass=regular-widthClass=regular">
@@ -927,7 +927,7 @@ ADS &amp; TRACKERS</string>
                                                     </constraint>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                                <state key="normal" title="LOGIN">
+                                                <state key="normal" title="Login">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
@@ -1112,7 +1112,7 @@ ADS &amp; TRACKERS</string>
                                     </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
-                                <state key="normal" title="CONFIRM">
+                                <state key="normal" title="Confirm">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>

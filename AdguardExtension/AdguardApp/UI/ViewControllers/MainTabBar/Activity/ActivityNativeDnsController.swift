@@ -40,7 +40,7 @@ final class ActivityNativeDnsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        implementationButton.makeTitleTextUppercased()
+        implementationButton.makeTitleTextCapitalized()
         implementationButton.applyStandardGreenStyle()
         updateTheme()
         setupLabels()

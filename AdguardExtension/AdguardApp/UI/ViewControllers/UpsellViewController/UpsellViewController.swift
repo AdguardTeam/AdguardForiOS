@@ -10,7 +10,7 @@ class UpsellViewController: UIViewController {
         super.viewDidLoad()
         applyGradient()
         
-        installButton.makeTitleTextUppercased()
+        installButton.makeTitleTextCapitalized()
         installButton.applyStandardAdGuardVPNGreenStyle()
     }
     

@@ -77,7 +77,7 @@ class GetProController: UIViewController {
         updateViews()
         updateTheme()
         
-        myAccountButton.makeTitleTextUppercased()
+        myAccountButton.makeTitleTextCapitalized()
         
         if needsShowingExitButton {
             navigationItem.leftBarButtonItems = [exitButton]
@@ -111,12 +111,12 @@ class GetProController: UIViewController {
     
     @IBAction func logoutAction(_ sender: UIBarButtonItem) {
         
-        let alert = UIAlertController(title: nil, message: ACLocalizedString("confirm_logout_text", nil), preferredStyle: .deviceAlertStyle)
+        let alert = UIAlertController(title: nil, message: String.localizedString("confirm_logout_text"), preferredStyle: .deviceAlertStyle)
         
-        let cancelAction = UIAlertAction(title: ACLocalizedString("common_action_cancel", nil), style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel, handler: nil)
         alert.addAction(cancelAction)
         
-        let okAction = UIAlertAction(title: ACLocalizedString("common_action_yes", nil), style: .destructive) {
+        let okAction = UIAlertAction(title: String.localizedString("common_action_yes"), style: .destructive) {
             [weak self] (action) in
             if self?.purchaseService.logout() ?? false {
                 DispatchQueue.main.async {
@@ -176,27 +176,27 @@ class GetProController: UIViewController {
     }
     
     private func purchaseSuccess(){
-        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("purchase_success_message", nil)) {
+        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: String.localizedString("purchase_success_message")) {
             self.navigationController?.popViewController(animated: true)
         }
     }
     
     private func purchaseFailure(error: Error?) {
-        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("purchase_failure_message", nil))
+        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: String.localizedString("purchase_failure_message"))
     }
     
     private func restoreSuccess(){
-        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("restore_success_message", nil)) {
+        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: String.localizedString("restore_success_message")) {
             self.navigationController?.popViewController(animated: true)
         }
     }
     
     private func nothingToRestore() {
-        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("nothing_to_restore_message", nil))
+        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: String.localizedString("nothing_to_restore_message"))
     }
     
     private func restoreFailed(error: NSError?) {
-        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: ACLocalizedString("restore_purchases_failure_message", nil))
+        ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: String.localizedString("restore_purchases_failure_message"))
         getProTableController?.enablePurchaseButtons(true)
     }
     

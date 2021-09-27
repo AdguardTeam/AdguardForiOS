@@ -105,8 +105,8 @@ class BlockRequestController: BottomAlertController {
         tableViewHeight.constant = rowHeight * CGFloat(subDomains.count)
         tableView.layoutIfNeeded()
         
-        addButton.makeTitleTextUppercased()
-        editButton.makeTitleTextUppercased()
+        addButton.makeTitleTextCapitalized()
+        editButton.makeTitleTextCapitalized()
         addButton.applyStandardGreenStyle()
         editButton.applyStandardGreenStyle()
     }

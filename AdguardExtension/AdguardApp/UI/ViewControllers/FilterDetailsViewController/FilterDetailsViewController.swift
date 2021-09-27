@@ -82,7 +82,7 @@ final class FilterDetailsViewController: UIViewController {
     
     private func processBottomButtons() {
         if filterMeta.editable {
-            let title = String.localizedString("common_edit").uppercased()
+            let title = String.localizedString("common_edit").capitalized
             let button = button(withTitle: title)
             button.applyStandardOpaqueStyle()
             button.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
@@ -93,7 +93,7 @@ final class FilterDetailsViewController: UIViewController {
         }
         
         if filterMeta.removable {
-            let title = String.localizedString("common_delete").uppercased()
+            let title = String.localizedString("common_delete").capitalized
             let button = button(withTitle: title)
             button.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.red)
             button.heightAnchor.constraint(equalToConstant: 40.0).isActive = true

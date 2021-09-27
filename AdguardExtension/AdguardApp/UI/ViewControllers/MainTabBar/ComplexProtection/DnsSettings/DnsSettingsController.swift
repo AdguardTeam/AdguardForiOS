@@ -266,7 +266,7 @@ final class DnsSettingsController : UITableViewController {
     private func updateVpnInfo() {
         let enabled = complexProtection.systemProtectionEnabled
         enabledSwitch.isOn = enabled
-        systemProtectionStateLabel.text = enabled ? ACLocalizedString("on_state", nil) : ACLocalizedString("off_state", nil)
+        systemProtectionStateLabel.text = enabled ? String.localizedString("on_state") : String.localizedString("off_state")
         systemIcon.tintColor = enabled ? enabledColor : disabledColor
     
         updateServerName()
@@ -293,17 +293,17 @@ final class DnsSettingsController : UITableViewController {
         
         switch period {
         case .day:
-            formatString = ACLocalizedString("getPro_full_access_days", nil)
+            formatString = String.localizedString("getPro_full_access_days")
         case .week:
             if numberOfUnits == 1 {
-                formatString = ACLocalizedString("getPro_full_access_days", nil)
+                formatString = String.localizedString("getPro_full_access_days")
                 return String.localizedStringWithFormat(formatString, 7)
             }
-            formatString = ACLocalizedString("getPro_full_access_weeks", nil)
+            formatString = String.localizedString("getPro_full_access_weeks")
         case .month:
-            formatString = ACLocalizedString("getPro_full_access_months", nil)
+            formatString = String.localizedString("getPro_full_access_months")
         case .year:
-            formatString = ACLocalizedString("getPro_full_access_years", nil)
+            formatString = String.localizedString("getPro_full_access_years")
         }
         
         let resultString : String = String.localizedStringWithFormat(formatString, numberOfUnits)

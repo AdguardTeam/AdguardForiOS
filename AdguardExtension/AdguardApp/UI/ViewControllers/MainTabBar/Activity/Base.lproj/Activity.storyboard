@@ -1011,7 +1011,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <inset key="titleEdgeInsets" minX="24" minY="0.0" maxX="24" maxY="0.0"/>
-                                <state key="normal" title="TRY FOR FREE">
+                                <state key="normal" title="Try for free">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <variation key="heightClass=regular-widthClass=regular">
@@ -1117,7 +1117,7 @@
                                                             </constraint>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                                        <state key="normal" title="ADD">
+                                                        <state key="normal" title="Add">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <state key="disabled">
@@ -1138,7 +1138,7 @@
                                                             </constraint>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                                        <state key="normal" title="EDIT">
+                                                        <state key="normal" title="Edit">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <attributedString key="userComments">
@@ -1380,7 +1380,7 @@
                                             <constraint firstAttribute="height" constant="40" id="aZB-vk-So3"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                        <state key="normal" title="ADD">
+                                        <state key="normal" title="Add">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <state key="disabled">
@@ -1399,7 +1399,7 @@
                                             <constraint firstAttribute="height" constant="40" id="Wcs-hL-Guu"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                        <state key="normal" title="BACK"/>
+                                        <state key="normal" title="Back"/>
                                         <attributedString key="userComments">
                                             <fragment content="(AddCustomFilterController) cancel button"/>
                                         </attributedString>
@@ -2004,7 +2004,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <inset key="titleEdgeInsets" minX="24" minY="0.0" maxX="24" maxY="0.0"/>
-                                <state key="normal" title="ENABLE">
+                                <state key="normal" title="Enable">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <variation key="heightClass=regular-widthClass=regular">

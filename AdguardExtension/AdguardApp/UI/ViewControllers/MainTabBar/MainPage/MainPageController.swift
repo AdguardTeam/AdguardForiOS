@@ -627,7 +627,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
      Starts indicating that changes are applied
      */
     private func applyingChangesStarted(){
-        protectionStatusLabel.text = ACLocalizedString("applying_changes", nil)
+        protectionStatusLabel.text = String.localizedString("applying_changes")
     }
     
     /**
@@ -685,13 +685,13 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         
         switch (complexProtection.safariProtectionEnabled, complexProtection.systemProtectionEnabled, complexProtection.complexProtectionEnabled) {
         case (true, true, true):
-            complexText = ACLocalizedString("complex_enabled", nil)
+            complexText = String.localizedString("complex_enabled")
         case (_, _, false):
-            complexText = ACLocalizedString("complex_disabled", nil)
+            complexText = String.localizedString("complex_disabled")
         case (true, _, _):
-            complexText = ACLocalizedString("safari_enabled", nil)
+            complexText = String.localizedString("safari_enabled")
         case (_, true, _):
-            complexText = ACLocalizedString("system_enabled", nil)
+            complexText = String.localizedString("system_enabled")
         case (false, false, true):
             // incorrect state
             complexText = ""
@@ -704,7 +704,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     }
     
     private func updateProtectionStates() {
-        let enabledText = complexProtection.complexProtectionEnabled ? ACLocalizedString("protection_enabled", nil) : ACLocalizedString("protection_disabled", nil)
+        let enabledText = complexProtection.complexProtectionEnabled ? String.localizedString("protection_enabled") : String.localizedString("protection_disabled")
         protectionStateLabel.text = enabledText
         
         self.safariProtectionButton.buttonIsOn = complexProtection.safariProtectionEnabled

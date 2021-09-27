@@ -2846,7 +2846,7 @@
                                                             </constraint>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <state key="normal" title="SAVE"/>
+                                                        <state key="normal" title="Save"/>
                                                         <state key="disabled">
                                                             <color key="titleColor" white="0.80338324650000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
@@ -2865,7 +2865,7 @@
                                                             </constraint>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <state key="normal" title="CANCEL"/>
+                                                        <state key="normal" title="Cancel"/>
                                                         <attributedString key="userComments">
                                                             <fragment content="(AddCustomFilterController) cancel button"/>
                                                         </attributedString>
@@ -3045,7 +3045,7 @@
                                                             </constraint>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <state key="normal" title="SAVE"/>
+                                                        <state key="normal" title="Save"/>
                                                         <state key="disabled">
                                                             <color key="titleColor" white="0.80338324650000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
@@ -3064,7 +3064,7 @@
                                                             </constraint>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <state key="normal" title="CANCEL"/>
+                                                        <state key="normal" title="Cancel"/>
                                                         <attributedString key="userComments">
                                                             <fragment content="(AddCustomFilterController) cancel button"/>
                                                         </attributedString>

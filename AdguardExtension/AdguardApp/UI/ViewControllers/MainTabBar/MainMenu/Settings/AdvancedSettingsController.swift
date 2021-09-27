@@ -145,7 +145,7 @@ final class AdvancedSettingsController: UITableViewController {
     private func showRemoveVpnAlert(_ indexPath: IndexPath) {
         let alert = UIAlertController(title: nil, message: String.localizedString("delete_vpn_profile_message"), preferredStyle: .deviceAlertStyle)
         
-        let removeAction = UIAlertAction(title: String.localizedString("delete_title").uppercased(), style: .destructive) {[weak self] _ in
+        let removeAction = UIAlertAction(title: String.localizedString("delete_title").capitalized, style: .destructive) {[weak self] _ in
             guard let self = self else { return }
             self.vpnManager.removeVpnConfiguration {(error) in
                 DispatchQueue.main.async {

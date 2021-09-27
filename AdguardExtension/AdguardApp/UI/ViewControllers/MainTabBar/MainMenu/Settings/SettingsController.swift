@@ -152,7 +152,7 @@ class SettingsController: UITableViewController {
     private func resetStatistics(_ indexPath: IndexPath){
         let alert = UIAlertController(title: String.localizedString("reset_stat_title"), message: String.localizedString("reset_stat_descr"), preferredStyle: .deviceAlertStyle)
         
-        let yesAction = UIAlertAction(title: String.localizedString("reset_title").uppercased(), style: .destructive) { [weak self] _ in
+        let yesAction = UIAlertAction(title: String.localizedString("reset_title").capitalized, style: .destructive) { [weak self] _ in
             alert.dismiss(animated: true, completion: nil)
             NotificationCenter.default.post(name: NSNotification.resetStatistics, object: self)
         }
@@ -252,8 +252,8 @@ class SettingsController: UITableViewController {
     
     private func fillHeaderTitles(){
         headersTitles.append("")
-        headersTitles.append(ACLocalizedString("theme_header_title", nil))
-        headersTitles.append(ACLocalizedString("other_header_title", nil))
+        headersTitles.append(String.localizedString("theme_header_title"))
+        headersTitles.append(String.localizedString("other_header_title"))
     }
     
     private func calculateHeaderHeight(section: Int) -> CGFloat{

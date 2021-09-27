@@ -29,7 +29,7 @@ final class AdvancedYouTubeBlockingController: UIViewController {
     
     //MARK: - Properties
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     
 
     //MARK: - ViewController lifeycle

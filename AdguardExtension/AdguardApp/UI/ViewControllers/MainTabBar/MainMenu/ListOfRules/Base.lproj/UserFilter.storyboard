@@ -90,7 +90,7 @@
                                                             </constraint>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <state key="normal" title="SAVE">
+                                                        <state key="normal" title="Save">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <variation key="heightClass=regular-widthClass=regular">
@@ -108,7 +108,7 @@
                                                             </constraint>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <state key="normal" title="DELETE">
+                                                        <state key="normal" title="Delete">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <variation key="heightClass=regular-widthClass=regular">
@@ -279,7 +279,7 @@
                                                             </constraint>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <state key="normal" title="ADD">
+                                                        <state key="normal" title="Add">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <variation key="heightClass=regular-widthClass=regular">
@@ -297,7 +297,7 @@
                                                             </constraint>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                        <state key="normal" title="CANCEL">
+                                                        <state key="normal" title="Cancel">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                                                         </state>
@@ -422,16 +422,14 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="6QW-Bp-KEN"/>
                                         </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain"/>
+                                        <state key="normal" title=""/>
                                         <connections>
                                             <action selector="okButtonTapped:" destination="7DJ-Q3-45Z" eventType="touchUpInside" id="u5F-Sv-krN"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcz-w0-z5w">
                                         <rect key="frame" x="16" y="80" width="382" height="14"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title=""/>
+                                        <state key="normal" title=""/>
                                         <connections>
                                             <action selector="labelTapped:" destination="7DJ-Q3-45Z" eventType="touchUpInside" id="Iya-ck-RK1"/>
                                         </connections>

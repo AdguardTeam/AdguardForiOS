@@ -81,4 +81,35 @@ class UIButtonUtilsTest: XCTestCase {
         let titleToCheck = button.title(for: .disabled)
         XCTAssertEqual(uppercasedTitle, titleToCheck)
     }
+    
+    // MARK: - makeTitleTextCapitalized function test
+
+    func testCapitalized() {
+        processTestCapitalized(buttonTitle: "title", capitalizedTitle: "Title")
+        processTestCapitalized(buttonTitle: "", capitalizedTitle: "")
+        processTestCapitalized(buttonTitle: nil, capitalizedTitle: nil)
+        processTestCapitalized(buttonTitle: "title", capitalizedTitle: "Title", state: .disabled)
+    }
+    
+    func testMakeTitleTextCapitalizedWithRightState() {
+        let button = UIButton()
+        let buttonTitle: String? = "title"
+        let capitalizedTitle: String? = "Title"
+        
+        button.setTitle(buttonTitle, for: .disabled)
+        button.makeTitleTextUppercased()
+        
+        let titleToCheck = button.title(for: .disabled)
+        XCTAssertEqual(capitalizedTitle, titleToCheck)
+    }
+    
+    private func processTestCapitalized(buttonTitle: String?, capitalizedTitle: String?, state: UIControl.State = .normal) {
+        let button = UIButton()
+        
+        button.setTitle(buttonTitle, for: state)
+        button.makeTitleTextCapitalized(for: state)
+        
+        let titleToCheck = button.title(for: state)
+        XCTAssertEqual(capitalizedTitle, titleToCheck)
+    }
 }

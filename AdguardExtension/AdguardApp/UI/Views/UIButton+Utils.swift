@@ -28,6 +28,11 @@ extension UIButton {
         setTitle(buttonTitle?.uppercased(), for: state)
     }
     
+    func makeTitleTextCapitalized(for state: UIControl.State = .normal) {
+        let buttonTitle = title(for: state)
+        setTitle(buttonTitle?.capitalized, for: state)
+    }
+    
     /*
      Makes button look like standard AdGuard green button
      with green background, no border and white text

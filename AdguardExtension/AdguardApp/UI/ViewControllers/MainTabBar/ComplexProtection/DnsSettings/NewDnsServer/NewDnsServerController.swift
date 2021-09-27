@@ -193,8 +193,9 @@ final class NewDnsServerController: BottomAlertController {
         titleLabel.text = alertTitle
         saveOrAddButton.setTitle(saveOrAddButtonTitle, for: .normal)
         cancelOrDeleteButton.setTitle(cancelOrDeleteButtonTitle, for: .normal)
-        saveOrAddButton.makeTitleTextUppercased()
-        cancelOrDeleteButton.makeTitleTextUppercased()
+        
+        saveOrAddButton.makeTitleTextCapitalized()
+        cancelOrDeleteButton.makeTitleTextCapitalized()
         
         saveOrAddButton.applyStandardGreenStyle()
         cancelOrDeleteButton.applyStandardOpaqueStyle(color: cancelOrDeleteButtonColor)

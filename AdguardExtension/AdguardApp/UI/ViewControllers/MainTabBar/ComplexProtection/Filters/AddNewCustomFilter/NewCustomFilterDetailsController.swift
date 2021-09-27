@@ -80,10 +80,10 @@ final class NewCustomFilterDetailsController: BottomAlertController {
         }
         
         updateTheme()
-        addButton.makeTitleTextUppercased()
+        addButton.makeTitleTextCapitalized()
         addButton.applyStandardGreenStyle()
+        cancelButton.makeTitleTextCapitalized()
         cancelButton.applyStandardOpaqueStyle()
-        cancelButton.makeTitleTextUppercased()
     }
     
     // MARK: - Actions
@@ -193,7 +193,7 @@ final class NewCustomFilterDetailsController: BottomAlertController {
             homepageTopConstraint.constant = 23.0
         }
         
-        addButton.setTitle(String.localizedString("common_add").uppercased(), for: .normal)
+        addButton.setTitle(String.localizedString("common_add").capitalized, for: .normal)
     }
     
     private func setupEditingFilter(_ model: EditCustomFilterModel) {
@@ -211,7 +211,7 @@ final class NewCustomFilterDetailsController: BottomAlertController {
             homepageTopConstraint.constant = 23.0
         }
 
-        addButton.setTitle(String.localizedString("common_save").uppercased(), for: .normal)
+        addButton.setTitle(String.localizedString("common_save").capitalized, for: .normal)
     }
     
     private func makeAttributedLink(with url: String) -> NSAttributedString {

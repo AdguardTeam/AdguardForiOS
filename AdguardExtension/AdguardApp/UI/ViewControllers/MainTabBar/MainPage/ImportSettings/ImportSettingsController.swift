@@ -45,9 +45,9 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
         
         updateTheme()
         okButton.isHidden = true
-        okButton.makeTitleTextUppercased()
+        okButton.makeTitleTextCapitalized()
         okButton.applyStandardGreenStyle()
-        importButton.makeTitleTextUppercased()
+        importButton.makeTitleTextCapitalized()
         importButton.applyStandardGreenStyle()
         tableView.reloadData()
     }
