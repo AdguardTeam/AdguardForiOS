@@ -21,7 +21,7 @@ import UIKit
 
 /// Feature cel
 final class DnsProviderFeatureCell: UITableViewCell, Reusable {
-    //MARK: - Properties
+    // MARK: - Properties
 
     var logoImage: UIImage? {
         didSet {
@@ -74,7 +74,7 @@ final class DnsProviderFeatureCell: UITableViewCell, Reusable {
         return imageView
     }()
     
-    //MARK: - Init
+    // MARK: - Init
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -88,14 +88,14 @@ final class DnsProviderFeatureCell: UITableViewCell, Reusable {
         self.selectionStyle = .none
     }
     
-    //MARK: - Public methods
+    // MARK: - Public methods
     
     func updateTheme(themeService: ThemeServiceProtocol) {
         themeService.setupLabels([nameLabel, descriptionLabel])
         themeService.setupTableCell(self)
     }
     
-    //MARK: - Private methods
+    // MARK: - Private methods
     
     private func setupConstraint() {
         self.contentView.addSubview(logoImageView)

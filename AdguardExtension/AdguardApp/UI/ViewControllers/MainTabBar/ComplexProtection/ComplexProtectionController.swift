@@ -64,7 +64,8 @@ final class ComplexProtectionController: UITableViewController {
     @IBOutlet weak var premiumLabelSpacing: NSLayoutConstraint!
     
     
-    //MARK: - Advanced protection outlets
+    // MARK: - Advanced protection outlets
+    
     @IBOutlet weak var advancedProtectionIcon: UIImageView!
     @IBOutlet weak var advancedProtectionLabel: EdgeInsetLabel! {
         didSet {

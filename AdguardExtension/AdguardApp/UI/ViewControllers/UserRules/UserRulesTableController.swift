@@ -38,7 +38,7 @@ final class UserRulesTableController: UIViewController {
     
     var rulesType: UserRuleType = .blocklist
     
-    //MARK: - Private properties
+    // MARK: - Private properties
     
     private var editButton: UIBarButtonItem {
         return generateBarButtonItem()

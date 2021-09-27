@@ -22,7 +22,7 @@ import SafariAdGuardSDK
 /// AdvancedProtectionController - Responsible for representation advanced settings for Safari Web Extension
 final class AdvancedProtectionController: UIViewController {
     
-    //MARK: - Outlets
+    // MARK: - Outlets
     
     @IBOutlet weak var onOffLabel: UILabel!
     @IBOutlet weak var uiSwitch: UISwitch!
@@ -37,7 +37,7 @@ final class AdvancedProtectionController: UIViewController {
     
     @IBOutlet var themableLabels: [ThemableLabel]!
     
-    //MARK: - Private properties
+    // MARK: - Private properties
     
     private let showLicenseSegue = "ShowLicenseSegueId"
     private var advancedProtectionViewHeightConstraintConst = 0.0
@@ -53,14 +53,14 @@ final class AdvancedProtectionController: UIViewController {
     
     private var proStatusObserver: NotificationToken?
     
-    //MARK: - Services
+    // MARK: - Services
     
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configurationService: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     
-    //MARK: - ViewController lifecycle
+    // MARK: - ViewController lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,7 +80,7 @@ final class AdvancedProtectionController: UIViewController {
         }
     }
     
-    //MARK: - Actions
+    // MARK: - Actions
     
     @IBAction func switchValueChanged(_ sender: UISwitch) {
         if sender.isOn && !configurationService.proStatus {
@@ -95,7 +95,7 @@ final class AdvancedProtectionController: UIViewController {
         safariProtection.update(advancedProtectionEnabled: newAdvancedProtection, onCbReloaded: nil)
     }
     
-    //MARK: - Private methods
+    // MARK: - Private methods
     
     private func hideAdvancedProtectionView() {
         advancedProtectionView.isHidden = true

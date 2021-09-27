@@ -21,18 +21,21 @@ import SafariAdGuardSDK
 /// Application web reporter
 final class ApplicationWebReporter: WebReporterProtocol {
     
-    //MARK: - Private properties
+    // MARK: - Private properties
+    
     private let safariFiltersWrapper: WebReporterWrapperProtocol
     private let dnsProtectionWrapper = WebReporterDnsProtectionWrapper()
-    private let reportUrl = "https://reports.adguard.com/new_issue.html"
+    private let reportUrl = "https://reports.adguard.com/new_issue.html" // TODO: - It should be TDS link
     
-    //MARK: - Init
+    // MARK: - Init
+    
     init() {
         let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
         self.safariFiltersWrapper = WebReporterSafariFiltersWrapper(safariProtection: safariProtection)
     }
     
-    //MARK: - Public methods
+    // MARK: - Public methods
+    
     func createUrl() -> URL {
         var params: [String: String] = [
             "product_type": "iOS",
@@ -52,7 +55,8 @@ final class ApplicationWebReporter: WebReporterProtocol {
         return URL(string: url)!
     }
     
-    //MARK: - Private methods
+    // MARK: - Private methods
+    
     private func assembleParams(result: inout [String: String], params: [String: String]) {
         for key in params.keys {
             if let param = params[key] {

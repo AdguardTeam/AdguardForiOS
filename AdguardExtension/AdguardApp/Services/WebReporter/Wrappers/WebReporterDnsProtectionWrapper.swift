@@ -22,11 +22,13 @@ import DnsAdGuardSDK
 /// Dns protection web reporter wrapper aggregate info about dns protection, dns servers and dns filters
 struct WebReporterDnsProtectionWrapper: WebReporterWrapperProtocol {
     
-    //MARK: - Private properties
+    // MARK: - Private properties
+    
     private let dnsProtection: DnsProtectionProtocol = ServiceLocator.shared.getService()!
     private let dnsProvidersManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!
     
-    //MARK: - Public methods
+    // MARK: - Public methods
+    
     func collectParams() -> [String : String] {
         var params: [String: String] = [:]
         
@@ -44,7 +46,8 @@ struct WebReporterDnsProtectionWrapper: WebReporterWrapperProtocol {
         return params
     }
     
-    //MARK: - Private methods
+    // MARK: - Private methods
+    
     private func collectPreparedDnsFilters() -> String {
         return dnsProtection.filters.reduce("") { partialResult, filter in
             if filter.isEnabled {

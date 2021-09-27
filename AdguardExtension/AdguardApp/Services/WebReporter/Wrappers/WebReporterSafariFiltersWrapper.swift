@@ -21,15 +21,18 @@ import SafariAdGuardSDK
 //TODO: Need write tests
 /// Safari filters web reporter wrapper
 struct WebReporterSafariFiltersWrapper: WebReporterWrapperProtocol {
-    //MARK: - Private properties
+    // MARK: - Private properties
+    
     private let safariProtection: SafariProtectionProtocol
     
-    //MARK: - Init
+    // MARK: - Init
+    
     init(safariProtection: SafariProtectionProtocol) {
         self.safariProtection = safariProtection
     }
     
-    //MARK: - Public methods
+    // MARK: - Public methods
+    
     func collectParams() -> [String : String] {
         var params: [String: String] = [:]
         let filterIds = collectPreparedFiltersIds()
@@ -37,7 +40,8 @@ struct WebReporterSafariFiltersWrapper: WebReporterWrapperProtocol {
         return params
     }
     
-    //MARK: - Private methods
+    // MARK: - Private methods
+    
     private func collectPreparedFiltersIds() -> String {
         return safariProtection.groups
             .filter { $0.isEnabled }

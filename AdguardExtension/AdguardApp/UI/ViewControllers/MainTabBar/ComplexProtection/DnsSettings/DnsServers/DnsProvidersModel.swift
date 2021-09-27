@@ -21,7 +21,8 @@ import DnsAdGuardSDK
 /// Dns providers view model
 final class DnsProvidersModel {
     
-    //MARK: - Public properties
+    // MARK: - Public properties
+    
     let headerTitle: String = String.localizedString("dns_provider_controller_title")
     
     let headerDescription: String = String.localizedString("dns_provider_controller_description")
@@ -31,19 +32,22 @@ final class DnsProvidersModel {
         return allProviders.map { DnsProvidersTableModel(provider: $0) }
     }
     
-    //MARK: - Private properties
+    // MARK: - Private properties
+    
     private let dnsProvidersManager: DnsProvidersManagerProtocol
     private let vpnManager: VpnManagerProtocol
     private let resources: AESharedResourcesProtocol
     
-    //MARK: - Init
+    // MARK: - Init
+    
     init(dnsProvidersManager: DnsProvidersManagerProtocol, vpnManager: VpnManagerProtocol, resources: AESharedResourcesProtocol) {
         self.dnsProvidersManager = dnsProvidersManager
         self.vpnManager = vpnManager
         self.resources = resources
     }
     
-    //MARK: - Public methods
+    // MARK: - Public methods
+    
     func setProviderActive(provider: DnsProviderMetaProtocol) throws {
         let serverId = getActiveServerId(provider: provider)
         try dnsProvidersManager.selectProvider(withId: provider.providerId, serverId: serverId)
@@ -51,7 +55,7 @@ final class DnsProvidersModel {
         NotificationCenter.default.post(name: .currentDnsServerChanged, object: nil)
     }
     
-    //MARK: - Private methods
+    // MARK: - Private methods
     
     /// Return enabled server id. If enabled server doesn't exists then return id of first server from `dnsServers` array.
     /// `dnsServers` - is array of provider DNS servers and it is not empty for all  providers

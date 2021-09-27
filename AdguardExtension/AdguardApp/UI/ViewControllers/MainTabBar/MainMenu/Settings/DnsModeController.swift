@@ -20,10 +20,9 @@ import DnsAdGuardSDK
 
 class DnsModeController: UITableViewController {
     
-    //MARK: - IB Outlets
+    // MARK: - IB Outlets
     
     @IBOutlet var themableLabels: [ThemableLabel]!
-    
     
     @IBOutlet weak var fullButton: UIButton!
     @IBOutlet weak var fullWithoutIconButton: UIButton!
@@ -32,17 +31,17 @@ class DnsModeController: UITableViewController {
     @IBOutlet weak var separator1: UIView!
     @IBOutlet weak var separator2: UIView!
     
-    // MARK: - services
+    // MARK: - Services
     
     let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     
-    // MARK: - private fields
+    // MARK: - Public properties
     
     var selectedCell = 0
     
-    // MARK: - view controller life cycle
+    // MARK: - ViewController lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()

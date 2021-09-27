@@ -22,7 +22,7 @@ import UIKit
 /// ViewModel
 final class DnsProviderDetailsModel {
     
-    //MARK: - Public properties
+    // MARK: - Public properties
     
     /// Provider logo for light color theme
     var providerLogo: UIImage? {
@@ -76,7 +76,8 @@ final class DnsProviderDetailsModel {
     private let resources: AESharedResourcesProtocol
     
     
-    //MARK: - Init
+    // MARK: - Init
+    
     init(provider: DnsProviderProtocol, resources: AESharedResourcesProtocol) {
         self.provider = provider
         self.resources = resources

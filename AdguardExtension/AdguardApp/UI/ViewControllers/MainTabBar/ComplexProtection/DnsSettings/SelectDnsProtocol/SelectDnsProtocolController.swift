@@ -26,16 +26,19 @@ protocol SelectDnsProtocolControllerDelegate: AnyObject {
 /// Controller that represent dns protocol picker
 final class SelectDnsProtocolController: BottomAlertController {
     
-    //MARK: - IBOutlet
+    // MARK: - IBOutlet
+    
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var tableView: UITableView!
     
-    //MARK: - Properties
+    // MARK: - Public properties
+    
     weak var delegate: SelectDnsProtocolControllerDelegate?
     var availableProtocols: [DnsAdGuardSDK.DnsProtocol] = []
     var selectedProtocol: DnsAdGuardSDK.DnsProtocol = .dns
     
-    //MARK: - Private properties
+    // MARK: - Private properties
+    
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
     override func viewDidLoad() {
@@ -47,7 +50,8 @@ final class SelectDnsProtocolController: BottomAlertController {
     }
 }
 
-//MARK: - SelectDnsProtocolController + UITableViewDataSource
+// MARK: - SelectDnsProtocolController + UITableViewDataSource
+
 extension SelectDnsProtocolController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return availableProtocols.count
@@ -64,7 +68,8 @@ extension SelectDnsProtocolController: UITableViewDataSource {
     }
 }
 
-//MARK: - SelectDnsProtocolController + UITableViewDelegate
+// MARK: - SelectDnsProtocolController + UITableViewDelegate
+
 extension SelectDnsProtocolController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedProtocol = availableProtocols[indexPath.row]

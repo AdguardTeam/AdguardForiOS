@@ -21,7 +21,7 @@ import DnsAdGuardSDK
 /// Manage custom dns provider
 final class NewDnsServerModel {
     
-    //MARK: - Properties
+    // MARK: - Properties
     
     /// Provider name
     var providerName: String {
@@ -41,7 +41,8 @@ final class NewDnsServerModel {
     private let dnsProvidersManager: DnsProvidersManagerProtocol
     private let vpnManager: VpnManagerProtocol
 
-    //MARK: - Init
+    // MARK: - Init
+    
     init(dnsProvidersManager: DnsProvidersManagerProtocol,
          vpnManager: VpnManagerProtocol,
          provider: CustomDnsProviderProtocol? = nil) {

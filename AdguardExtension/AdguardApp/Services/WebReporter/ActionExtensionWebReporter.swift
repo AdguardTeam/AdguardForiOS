@@ -4,18 +4,21 @@ import SafariAdGuardSDK
 /// Action extension web reporter 
 final class ActionExtensionWebReporter: WebReporterProtocol {
     
-    //MARK: - Private properties
+    // MARK: - Private properties
+    
     private let url: URL
     private let webReporterSafariFiltersWrapper: WebReporterWrapperProtocol
-    private let reportUrl = "https://reports.adguard.com/new_issue.html"
+    private let reportUrl = "https://reports.adguard.com/new_issue.html" // TODO: - It should be TDS link
     
-    //MARK: - Init
+    // MARK: - Init
+    
     init(url: URL, safariProtection: SafariProtectionProtocol) {
         self.url = url
         self.webReporterSafariFiltersWrapper = WebReporterSafariFiltersWrapper(safariProtection: safariProtection)
     }
     
-    //MARK: - Public methods
+    // MARK: - Public methods
+    
     func createUrl() -> URL {
         var params: [String: String] = [
             "url": url.absoluteString,
@@ -33,7 +36,8 @@ final class ActionExtensionWebReporter: WebReporterProtocol {
         return URL(string: url)!
     }
     
-    //MARK: - Private methods
+    // MARK: - Private methods
+    
     private func assembleParams(result: inout [String: String], params: [String: String]) {
         for key in params.keys {
             if let param = params[key] {

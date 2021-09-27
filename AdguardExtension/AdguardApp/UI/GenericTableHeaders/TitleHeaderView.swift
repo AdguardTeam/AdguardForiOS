@@ -20,7 +20,7 @@ import UIKit
 
 final class TitleTableHeaderView: UIView {
     
-    //MARK: - UI Elements
+    // MARK: - UI Elements
     
     private lazy var titleLabel: ThemableLabel = {
         let label = ThemableLabel()
@@ -32,7 +32,7 @@ final class TitleTableHeaderView: UIView {
         return label
     }()
     
-    //MARK: - Properties
+    // MARK: - Properties
     
     var title: String {
         didSet {

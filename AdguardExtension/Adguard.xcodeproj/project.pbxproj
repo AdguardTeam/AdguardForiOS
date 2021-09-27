@@ -19,6 +19,10 @@
 		2414089B26C4226000741F32 /* OnboardingContentBlockerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2414089A26C4226000741F32 /* OnboardingContentBlockerCell.swift */; };
 		2414089D26C42E6700741F32 /* OnboardingAdvancedProtectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2414089C26C42E6700741F32 /* OnboardingAdvancedProtectionView.swift */; };
 		241819FD2594D76900380A8A /* QueryParametersFromURLStringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241819FC2594D76900380A8A /* QueryParametersFromURLStringTest.swift */; };
+		241FEB0C2701C84F00C1C487 /* WebReporterWrapperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241FEB0B2701C84F00C1C487 /* WebReporterWrapperProtocol.swift */; };
+		241FEB0D2701C84F00C1C487 /* WebReporterWrapperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241FEB0B2701C84F00C1C487 /* WebReporterWrapperProtocol.swift */; };
+		241FEB0E2701C84F00C1C487 /* WebReporterWrapperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241FEB0B2701C84F00C1C487 /* WebReporterWrapperProtocol.swift */; };
+		241FEB0F2701C84F00C1C487 /* WebReporterWrapperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241FEB0B2701C84F00C1C487 /* WebReporterWrapperProtocol.swift */; };
 		2422253F26ECB50B00EC74AE /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2422253E26ECB50B00EC74AE /* ChartViewModel.swift */; };
 		2422254026ECC97700EC74AE /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2422253E26ECB50B00EC74AE /* ChartViewModel.swift */; };
 		2425D6A8258F8C430037AEBE /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */; };
@@ -2688,6 +2692,7 @@
 		2414089A26C4226000741F32 /* OnboardingContentBlockerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContentBlockerCell.swift; sourceTree = "<group>"; };
 		2414089C26C42E6700741F32 /* OnboardingAdvancedProtectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAdvancedProtectionView.swift; sourceTree = "<group>"; };
 		241819FC2594D76900380A8A /* QueryParametersFromURLStringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParametersFromURLStringTest.swift; sourceTree = "<group>"; };
+		241FEB0B2701C84F00C1C487 /* WebReporterWrapperProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebReporterWrapperProtocol.swift; sourceTree = "<group>"; };
 		2422253E26ECB50B00EC74AE /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
 		2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Utils.swift"; sourceTree = "<group>"; };
 		242A07B026C677D900181D35 /* AdvancedProtectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedProtectionController.swift; sourceTree = "<group>"; };
@@ -4454,6 +4459,7 @@
 			isa = PBXGroup;
 			children = (
 				2490F64927006CF300B1514D /* WebReporterProtocol.swift */,
+				241FEB0B2701C84F00C1C487 /* WebReporterWrapperProtocol.swift */,
 				24C31EC126FF703800673309 /* ApplicationWebReporter.swift */,
 				2490F6442700685D00B1514D /* ActionExtensionWebReporter.swift */,
 				24C31EC826FF72BC00673309 /* Wrappers */,
@@ -8548,6 +8554,7 @@
 				7E92754026C67ABA007B2C80 /* Reusable.swift in Sources */,
 				7EF5C51E26C261CC001851D6 /* SharedResources+DebugLogs.swift in Sources */,
 				D0D7E615244455CA001801A5 /* ThemableButton.swift in Sources */,
+				241FEB0E2701C84F00C1C487 /* WebReporterWrapperProtocol.swift in Sources */,
 				242C7FF126E6536B00A01B10 /* DnsUserRulesTableModel.swift in Sources */,
 				7E3FEFAF26CD33F80080EC03 /* AGTextField.swift in Sources */,
 				D0B545BE2435D65C002F0AEC /* MainNavigationController.swift in Sources */,
@@ -8728,6 +8735,7 @@
 				D03E532F21B6A47E00C62152 /* ThemableImageView.swift in Sources */,
 				655A02331C6B7686000F00D7 /* ACLFileLocker.m in Sources */,
 				65EC9CAF1BB9824C00F53F3B /* FMStatementQuotedRecogniser.m in Sources */,
+				241FEB0D2701C84F00C1C487 /* WebReporterWrapperProtocol.swift in Sources */,
 				7E9C0C36256292E200F1999D /* UIColor+Utils.swift in Sources */,
 				D08CE429240D389800A70089 /* KeychainService.swift in Sources */,
 				7E6EFA4526F89D1C002EED38 /* FavIconService.swift in Sources */,
@@ -8980,6 +8988,7 @@
 				7E3FEFBA26CE9E2F0080EC03 /* FilterDetailsViewController.swift in Sources */,
 				241346CC26131CA300CF8601 /* AppDelegate+Themable.swift in Sources */,
 				7E3FEFB426CD3AB60080EC03 /* UITableView+Utils.swift in Sources */,
+				241FEB0C2701C84F00C1C487 /* WebReporterWrapperProtocol.swift in Sources */,
 				7E9082082549D5430048C4B0 /* HowToSetupController.swift in Sources */,
 				2414089B26C4226000741F32 /* OnboardingContentBlockerCell.swift in Sources */,
 				65AD3BBB1B7CB15400004A02 /* AESharedResources.m in Sources */,
@@ -10334,6 +10343,7 @@
 				D0B5444C2435C6BC002F0AEC /* ACLWildcard.m in Sources */,
 				D0B5444D2435C6BC002F0AEC /* NSStringPunycodeAdditions.m in Sources */,
 				D0B5444E2435C6BC002F0AEC /* DDAbstractDatabaseLogger.m in Sources */,
+				241FEB0F2701C84F00C1C487 /* WebReporterWrapperProtocol.swift in Sources */,
 				2490F64D27006CF300B1514D /* WebReporterProtocol.swift in Sources */,
 				D0B544512435C6BC002F0AEC /* ThemableImageView.swift in Sources */,
 				D0B544522435C6BC002F0AEC /* ACLFileLocker.m in Sources */,

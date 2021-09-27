@@ -20,7 +20,9 @@ import UIKit
 
 /// OnboardingAdvancedProtectionView - Custom view for onboarding screen
 final class OnboardingAdvancedProtectionView: UIView {
-    //MARK: - Properties
+    
+    // MARK: - Properties
+    
     private let safariIcon: UIImageView = {
         let view = UIImageView()
         view.image = UIImage(named: "safari_onboarding")
@@ -40,10 +42,12 @@ final class OnboardingAdvancedProtectionView: UIView {
         }
     }
     
-    //MARK: - Services
+    // MARK: - Services
+    
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
-    //MARK: - Init
+    // MARK: - Init
+    
     init() {
         super.init(frame: .zero)
         setupConstraints()
@@ -54,7 +58,8 @@ final class OnboardingAdvancedProtectionView: UIView {
         setupConstraints()
     }
     
-    //MARK: - Private methods
+    // MARK: - Private methods
+    
     private func setupConstraints() {
         safariIcon.translatesAutoresizingMaskIntoConstraints = false
         attributedLabel.translatesAutoresizingMaskIntoConstraints = false

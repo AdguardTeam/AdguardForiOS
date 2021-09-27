@@ -27,7 +27,7 @@ protocol ISettingsResetor {
 // Reset statistics and settings
 struct SettingsResetor: ISettingsResetor {
     
-    //MARK: - Properties
+    // MARK: - Private properties
     
     private weak var appDelegate: AppDelegate?
     private let vpnManager: VpnManagerProtocol
@@ -35,7 +35,7 @@ struct SettingsResetor: ISettingsResetor {
     private let purchaseService: PurchaseServiceProtocol
     private let safariProtection: SafariProtectionProtocol
     
-    //MARK: - Init
+    // MARK: - Init
     
     init(appDelegate: AppDelegate,
          vpnManager: VpnManagerProtocol,
@@ -50,7 +50,7 @@ struct SettingsResetor: ISettingsResetor {
         self.safariProtection = safariProtection
     }
     
-    //MARK: - IResetSettings methods
+    // MARK: - IResetSettings methods
     
     func resetAllSettings() {
         presentAlert()
@@ -93,7 +93,7 @@ struct SettingsResetor: ISettingsResetor {
         }
     }
     
-    //MARK: - Private methods
+    // MARK: - Private methods
     
     private func resetStatistics(){
         /* Reseting statistics Start*/

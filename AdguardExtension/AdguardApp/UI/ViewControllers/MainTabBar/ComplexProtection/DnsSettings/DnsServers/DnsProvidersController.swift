@@ -45,7 +45,7 @@ final class DnsProvidersController: UITableViewController {
     private let dnsDetailsSegueConst = "dnsDetailsSegue"
     private let NewDnsServerControllerIdentifier = "NewDnsServerController"
     
-    //MARK: - Init
+    // MARK: - Init
     
     required init?(coder: NSCoder) {
         model = DnsProvidersModel(dnsProvidersManager: dnsProvidersManager, vpnManager: vpnManager, resources: resources)
@@ -188,14 +188,16 @@ final class DnsProvidersController: UITableViewController {
     }
 }
 
-//MARK: - DnsProvidersController + NewDnsServerControllerDelegate
+// MARK: - DnsProvidersController + NewDnsServerControllerDelegate
+
 extension DnsProvidersController: NewDnsServerControllerDelegate {
     func customProviderUpdated() {
         tableView.reloadData()
     }
 }
 
-//MARK: - DnsProvidersController + DnsProviderDetailsControllerDelegate
+// MARK: - DnsProvidersController + DnsProviderDetailsControllerDelegate
+
 extension DnsProvidersController: DnsProviderDetailsControllerDelegate {
     /// Select active provider from details  controller
     func providerSelected(provider: DnsProviderProtocol) {
@@ -203,7 +205,8 @@ extension DnsProvidersController: DnsProviderDetailsControllerDelegate {
     }
 }
 
-//MARK: - DnsProvidersController + ExtendedRadioButtonCellDelegate
+// MARK: - DnsProvidersController + ExtendedRadioButtonCellDelegate
+
 extension DnsProvidersController: ExtendedRadioButtonCellDelegate {
     /// Select active provider from selected cell
     func radioButtonTapped(with tag: Int) {
@@ -212,7 +215,8 @@ extension DnsProvidersController: ExtendedRadioButtonCellDelegate {
     }
 }
 
-//MARK: - DnsProvidersController + ThemableProtocol
+// MARK: - DnsProvidersController + ThemableProtocol
+
 extension DnsProvidersController: ThemableProtocol {
     func updateTheme() {
         view.backgroundColor = themeService.backgroundColor

@@ -16,8 +16,8 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/// Descendant of this protocol create URL for sending reports
-protocol WebReporterProtocol {
-    /// Return URL with reporting parameters
-    func createUrl() -> URL
+/// Descendant of this protocol  return prepared reporting parameters
+protocol WebReporterWrapperProtocol {
+    /// Return dictionary with reporting parameters
+   func collectParams() -> [String: String]
 }

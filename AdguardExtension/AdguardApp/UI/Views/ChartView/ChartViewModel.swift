@@ -44,7 +44,8 @@ final class ChartViewModel: ChartViewModelProtocol {
         let maxYelement: CGFloat
     }
     
-    //MARK: - Properties
+    // MARK: - Properties
+    
     weak var delegate: ChartViewModelDelegate?
     
     var statisticsInfo: CountersStatisticsRecord {
@@ -71,7 +72,8 @@ final class ChartViewModel: ChartViewModelProtocol {
         }
     }
     
-    //MARK: - Private properties
+    // MARK: - Private properties
+    
     private let chartStatistics: ChartStatisticsProtocol
     private let activityStatistics: ActivityStatisticsProtocol
     private var isStarted: Bool = false
@@ -82,7 +84,8 @@ final class ChartViewModel: ChartViewModelProtocol {
     private var lastFormattedDate: String = ""
     private var frame: CGRect = .zero
     
-    //MARK: - Init
+    // MARK: - Init
+    
     init(statisticsPeriod: StatisticsPeriod, activityStatistics: ActivityStatisticsProtocol, chartStatistics: ChartStatisticsProtocol) {
         self.statisticsPeriod = statisticsPeriod
         self.chartStatistics = chartStatistics
@@ -105,7 +108,8 @@ final class ChartViewModel: ChartViewModelProtocol {
         startChartStatisticsAutoUpdate(seconds: repeatTime)
     }
     
-    //MARK: - Private methods
+    // MARK: - Private methods
+    
     // Update chart points
     private func chartStatisticUpdate() {
         let info = self.statisticsInfo
