@@ -16,7 +16,7 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
+import DnsAdGuardSDK
 import SafariAdGuardSDK
 
 /** this class is responsible for applying the imported settings */
@@ -33,14 +33,14 @@ protocol ImportSettingsServiceDelegate {
 class ImportSettingsService: ImportSettingsServiceProtocol {
     
     private let networking: ACNNetworkingProtocol
-    private let dnsProvidersService: DnsProvidersServiceProtocol
+    private let dnsProvidersManager: DnsProvidersManagerProtocol
     private let purchaseService: PurchaseServiceProtocol
     private let resources: AESharedResourcesProtocol
     private let safariProtection: SafariProtectionProtocol
     
-    init(networking: ACNNetworkingProtocol, dnsProvidersService: DnsProvidersServiceProtocol, purchaseService: PurchaseServiceProtocol, resources: AESharedResourcesProtocol, safariProtection: SafariProtectionProtocol) {
+    init(networking: ACNNetworkingProtocol, dnsProvidersManager: DnsProvidersManagerProtocol, purchaseService: PurchaseServiceProtocol, resources: AESharedResourcesProtocol, safariProtection: SafariProtectionProtocol) {
         self.networking = networking
-        self.dnsProvidersService = dnsProvidersService
+        self.dnsProvidersManager = dnsProvidersManager
         self.purchaseService = purchaseService
         self.resources = resources
         self.safariProtection = safariProtection
@@ -250,8 +250,9 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
     
     private func setDnsServer(serverId: Int) {
         
-        let server = dnsProvidersService.getServer(serverId: serverId)
-        dnsProvidersService.activeDnsServer = server
+        if let provider = dnsProvidersManager.allProviders.first { $0.dnsServers.contains(where: { $0.id == serverId }) } {
+            try? dnsProvidersManager.selectProvider(withId: provider.providerId, serverId: serverId)
+        }
     }
     
     func applyDnsRules(_ rules: [String]?, override: Bool) {

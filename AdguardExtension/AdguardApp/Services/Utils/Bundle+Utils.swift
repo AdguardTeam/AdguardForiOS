@@ -38,7 +38,7 @@ extension Bundle {
     }
     
     var applicationName: String {
-        return Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "AdGuard"
+        return infoDictionary?["CFBundleName"] as? String ?? "AdGuard"
     }
     
     var hostAppBundleId: String {

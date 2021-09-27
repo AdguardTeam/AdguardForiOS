@@ -402,8 +402,6 @@
 		7EE740E126F33FCA0033B673 /* AllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E810826C2A05200925F96 /* AllowlistRuleConverter.swift */; };
 		7EE740E226F33FCA0033B673 /* AllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E810826C2A05200925F96 /* AllowlistRuleConverter.swift */; };
 		7EE740E426F352210033B673 /* WebExtensionHelpersMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE740E326F352210033B673 /* WebExtensionHelpersMock.swift */; };
-		7ED68E3E26EABBFA00929E57 /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC8A37F26E7697C005244CF /* SharedAdGuardSDK.framework */; };
-		7ED68E3F26EABBFA00929E57 /* SharedAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC8A37F26E7697C005244CF /* SharedAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7EE9F63226D8E1DB00646D62 /* FilterFilesStorageProtocol+PredefinedFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE9F63126D8E1DB00646D62 /* FilterFilesStorageProtocol+PredefinedFilters.swift */; };
 		7EE9F63426D8E1DB00646D62 /* FilterFilesStorageProtocol+PredefinedFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE9F63126D8E1DB00646D62 /* FilterFilesStorageProtocol+PredefinedFilters.swift */; };
 		7EE9F63B26D9198B00646D62 /* FiltersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E80F526C2A05200925F96 /* FiltersService.swift */; };
@@ -455,7 +453,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				494E0BD126E8CF68005C21C4 /* SharedAdGuardSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -737,7 +734,6 @@
 				7E966B9326C27F0D006B57BD /* Zip in Frameworks */,
 				7E966B8F26C27F06006B57BD /* SQLite in Frameworks */,
 				7E667A6626E26B890013B1D5 /* ContentBlockerConverter in Frameworks */,
-				494E0BD026E8CF68005C21C4 /* SharedAdGuardSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

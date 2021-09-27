@@ -66,7 +66,7 @@ final class AdvancedProtectionController: UIViewController {
         super.viewDidLoad()
         advancedProtectionView.labelString = String.localizedString("onboarding_fours_step_text")
         
-        uiSwitch.isOn = resources.advancedProtection
+        uiSwitch.isOn = configurationService.isAdvancedProtectionEnabled
         onOffLabel.text = uiSwitch.isOn ? String.localizedString("on_state") : String.localizedString("off_state")
         
         purchaseButton.applyStandardGreenStyle()
@@ -90,7 +90,7 @@ final class AdvancedProtectionController: UIViewController {
         }
         
         let newAdvancedProtection = sender.isOn
-        resources.advancedProtection = newAdvancedProtection
+        configurationService.isAdvancedProtectionEnabled = newAdvancedProtection
         onOffLabel.text = sender.isOn ? String.localizedString("on_state") : String.localizedString("off_state")
         safariProtection.update(advancedProtectionEnabled: newAdvancedProtection, onCbReloaded: nil)
     }

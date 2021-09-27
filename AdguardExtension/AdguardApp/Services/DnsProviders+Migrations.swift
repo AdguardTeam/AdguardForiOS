@@ -18,6 +18,8 @@
 
 import Foundation
 
+// TODO: - Maybe we should leave this migration
+
 protocol DnsProvidersServiceMigratable {
     func migrateActiveServerIfNeeded()
     func reinitializeDnsProvidersObjectsAndSetIdsAndFlags(resources: AESharedResourcesProtocol)

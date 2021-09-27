@@ -17,7 +17,6 @@
 */
 
 import SafariAdGuardSDK
-import DnsAdGuardSDK
 
 extension SafariConfiguration {
     convenience init(bundle: Bundle = .main, resources: AESharedResourcesProtocol, isProPurchased: Bool) {
@@ -49,35 +48,6 @@ extension SafariConfiguration {
             appProductVersion: ADProductInfo().version() ?? "",
             appId: bundle.isPro ? "ios_pro" : "ios",
             cid: UIDevice.current.identifierForVendor?.uuidString ?? ""
-        )
-    }
-}
-
-
-extension DnsConfiguration {
-    
-    convenience init(bundle: Bundle = .main, resources: AESharedResourcesProtocol, isProPurchased: Bool) {
-        let sdkDnsImplementation: DnsAdGuardSDK.DnsImplementation = resources.dnsImplementation == .adGuard ? .adGuard : .native
-        self.init(
-            currentLanguage: "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")",
-            proStatus: bundle.isPro ? true : isProPurchased,
-            dnsFilteringIsEnabled: resources.systemProtectionEnabled,
-            dnsImplementation: sdkDnsImplementation,
-            blocklistIsEnabled: resources.systemUserFilterEnabled,
-            allowlistIsEnabled: resources.systemWhitelistEnabled,
-            lowLevelConfiguration: LowLevelDnsConfiguration.fromResources(resources)
-        )
-    }
-    
-    static func defaultConfiguration(from resources: AESharedResourcesProtocol) -> DnsConfiguration {
-        return DnsConfiguration(
-            currentLanguage: "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")",
-            proStatus: false,
-            dnsFilteringIsEnabled: false,
-            dnsImplementation: .adGuard,
-            blocklistIsEnabled: false,
-            allowlistIsEnabled: false,
-            lowLevelConfiguration: LowLevelDnsConfiguration.fromResources(resources)
         )
     }
 }

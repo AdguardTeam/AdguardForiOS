@@ -48,6 +48,7 @@ final class DnsProvidersModel {
         let serverId = getActiveServerId(provider: provider)
         try dnsProvidersManager.selectProvider(withId: provider.providerId, serverId: serverId)
         vpnManager.updateSettings(completion: nil)
+        NotificationCenter.default.post(name: .currentDnsServerChanged, object: nil)
     }
     
     //MARK: - Private methods
@@ -64,4 +65,8 @@ final class DnsProvidersModel {
         
         return provider.dnsServers.first!.id
     }
+}
+
+extension Notification.Name {
+    static var currentDnsServerChanged: Notification.Name { return .init(rawValue: "currentDnsServerChanged") }
 }

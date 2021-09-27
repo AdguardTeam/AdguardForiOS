@@ -22,6 +22,9 @@ public protocol SafariProtectionContentBlockersProtocol {
     /* Number of advanced rules that will be passed to Safari Web Extension */
     var advancedRulesCount: Int { get }
     
+    /* Returns every content blocker reloading state */
+    var reloadingContentBlockers: [ContentBlockerType: Bool] { get }
+    
     /* Returns every content blocker state */
     var allContentBlockersStates: [ContentBlockerType: Bool] { get }
     
@@ -36,6 +39,10 @@ public protocol SafariProtectionContentBlockersProtocol {
 extension SafariProtection {
     public var advancedRulesCount: Int {
         return workingQueue.sync { return cbStorage.advancedRulesCount }
+    }
+    
+    public var reloadingContentBlockers: [ContentBlockerType : Bool] {
+        return workingQueue.sync { return cbService.reloadingContentBlockers }
     }
     
     public var allContentBlockersStates: [ContentBlockerType : Bool] {
