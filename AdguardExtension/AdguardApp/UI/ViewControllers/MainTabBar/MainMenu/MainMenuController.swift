@@ -47,7 +47,7 @@ final class MainMenuController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateFilters()
-        updateServerName()
+        systemProtectionLabel.text = dnsProvidersManager.activeDnsProvider.activeServerName
     }
     
     override func viewDidLoad() {
@@ -86,14 +86,6 @@ final class MainMenuController: UITableViewController {
     }
     
     // MARK: - private methods
-    
-    private func updateServerName() {
-        if proStatus {
-            systemProtectionLabel.text = dnsProvidersManager.activeDnsProvider.activeServerName
-        } else {
-            systemProtectionLabel.text = String.localizedString("system_dns_server")
-        }
-    }
     
     private func updateFilters() {
         let safariFiltersTextFormat = String.localizedString("safari_filters_format")
