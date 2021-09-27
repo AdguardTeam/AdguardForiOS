@@ -78,7 +78,13 @@ final class SupportService: SupportServiceProtocol {
         let baseUrl = tmp.appendingPathComponent("logs", isDirectory: true)
         let cbUrl = baseUrl.appendingPathComponent("CB jsons", isDirectory: true)
         let targetsUrl = baseUrl.appendingPathComponent("Targets", isDirectory: true)
+        let logsZipUrl = tmp.appendingPathComponent(archiveName)
+        self.logsDirectory = baseUrl
+        self.logsZipDirectory = logsZipUrl
         let fileManager = FileManager.default
+        
+        ///Remove old logs if it exists
+        deleteLogsFiles()
         
         /// Create directories in base directory
         try fileManager.createDirectory(at: baseUrl, withIntermediateDirectories: true, attributes: nil)
@@ -103,11 +109,6 @@ final class SupportService: SupportServiceProtocol {
             let fileUrl = targetsUrl.appendingPathComponent(fileName)
             try logFileData.write(to: fileUrl)
         }
-        
-        let logsZipUrl = tmp.appendingPathComponent(archiveName)
-        
-        self.logsDirectory = baseUrl
-        self.logsZipDirectory = logsZipUrl
         
         do {
             try Zip.zipFiles(paths: [baseUrl], zipFilePath: logsZipUrl, password: nil, compression: .BestSpeed, progress: nil)
