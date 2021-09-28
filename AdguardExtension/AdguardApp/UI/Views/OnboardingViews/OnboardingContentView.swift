@@ -30,8 +30,7 @@ final class OnboardingContentView: UIView {
             setup(with: onboardingType)
         }
     }
-    
-    private var cellHeights: [IndexPath: CGFloat] = [:]
+
     
     //MARK: - Services
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
@@ -133,14 +132,6 @@ extension OnboardingContentView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
-    
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        cellHeights[indexPath] = cell.frame.size.height
-//    }
-//
-//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return cellHeights[indexPath] ?? UITableView.automaticDimension
-//    }
 }
 
 extension OnboardingContentView: ThemableProtocol {
