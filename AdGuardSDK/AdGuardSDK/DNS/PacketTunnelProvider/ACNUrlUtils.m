@@ -1,17 +1,17 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
     Copyright © Adguard Software Limited. All rights reserved.
- 
+
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
- 
+
     Adguard for iOS is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
- 
+
     You should have received a copy of the GNU General Public License
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -45,9 +45,9 @@
      fe80:0000:0000:0000:0204:61ff:254.157.241.86   // IPv4 dotted quad at the end
      fe80:0:0:0:0204:61ff:254.157.241.86            // drop leading zeroes, IPv4 dotted quad at the end
      fe80::204:61ff:254.157.241.86                  // dotted quad at the end, multiple zeroes collapsed
- 
+
      In addition, the regular expression matches these IPv6 forms:
- 
+
      ::1        // localhost
      fe80::     // link-local prefix
      2001::     // global unicast prefix

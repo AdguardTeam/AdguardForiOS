@@ -1214,7 +1214,7 @@ NSString * __nullable DDExtractFileNameWithoutExtension(const char *filePath, BO
                 }
 
                 self->_logFormatter = logFormatter;
- 
+
                 if ([self->_logFormatter respondsToSelector:@selector(didAddToLogger:inQueue:)]) {
                     [self->_logFormatter didAddToLogger:self inQueue:self->_loggerQueue];
                 } else if ([self->_logFormatter respondsToSelector:@selector(didAddToLogger:)]) {

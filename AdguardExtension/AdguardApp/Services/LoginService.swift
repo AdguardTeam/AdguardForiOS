@@ -1,17 +1,17 @@
 /**
        This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
        Copyright © Adguard Software Limited. All rights reserved.
- 
+
        Adguard for iOS is free software: you can redistribute it and/or modify
        it under the terms of the GNU General Public License as published by
        the Free Software Foundation, either version 3 of the License, or
        (at your option) any later version.
- 
+
        Adguard for iOS is distributed in the hope that it will be useful,
        but WITHOUT ANY WARRANTY; without even the implied warranty of
        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
        GNU General Public License for more details.
- 
+
        You should have received a copy of the GNU General Public License
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -36,7 +36,7 @@ protocol LoginServiceProtocol {
     /**
      login on backend server and check license information
      the results will be posted through notification center
- 
+
      we can use adguard license in two ways
      1) login through oauth in safari and get access_token. Then we make auth_token request and get license key. Then bind this key to user device id(app_id) through status request with license key in params
      2) login directly with license key. In this case we immediately send status request with this license key

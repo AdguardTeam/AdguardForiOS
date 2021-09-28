@@ -10,11 +10,11 @@
 #import "FMDatabase.h"
 
 /*
- 
- Note: we call [self retain]; before using dispatch_sync, just incase 
+
+ Note: we call [self retain]; before using dispatch_sync, just incase
  FMDatabaseQueue is released on another thread and we're in the middle of doing
  something in dispatch_sync
- 
+
  */
 
 /**
@@ -23,7 +23,7 @@
  * the queue's dispatch queue, which should not happen and causes a deadlock.
  */
 static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey;
- 
+
 @implementation FMDatabaseQueue
 
 @synthesize path = _path;
@@ -168,7 +168,7 @@ static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey
 
 - (void)beginTransaction:(BOOL)useDeferred withBlock:(void (^)(FMDatabase *db, BOOL *rollback))block {
     FMDBRetain(self);
-    dispatch_sync(_queue, ^() { 
+    dispatch_sync(_queue, ^() {
 
         BOOL shouldRollback = NO;
 
@@ -206,7 +206,7 @@ static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey
     static unsigned long savePointIdx = 0;
     __block NSError *err = 0x00;
     FMDBRetain(self);
-    dispatch_sync(_queue, ^() { 
+    dispatch_sync(_queue, ^() {
 
         NSString *name = [NSString stringWithFormat:@"savePoint%ld", savePointIdx++];
 

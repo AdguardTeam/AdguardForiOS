@@ -12,7 +12,7 @@
 
 /**
  * The FMStatementQuotedRecogniser class is used to recognise quoted literals in the input string.  This can be used for quoted strings, characters, comments and many other things.
- * 
+ *
  * Quoted tokens are recognised via a start string and end string.  You may optionally add an escape sequence string that stops the end quote being recognised at that point in the input.
  * You may optionally provide a block used to replace escape sequences with their actual meaning.  If you don't provide an escape replcement block it is assumed that the character
  * following the escape sequence replaces the whole sequence.

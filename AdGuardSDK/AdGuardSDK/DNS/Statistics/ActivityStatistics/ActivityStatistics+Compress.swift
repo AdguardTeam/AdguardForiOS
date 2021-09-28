@@ -71,7 +71,7 @@ extension StatisticsPeriod {
                month                 week    day   today
      |------|------------------------------|------------|------|----------|---->
                                         NOW
- 
+
      Every segment will be compressed sepately
      So every next segment records will include previous segments
      */

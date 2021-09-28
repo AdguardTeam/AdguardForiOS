@@ -47,7 +47,7 @@ final class SupportService: SupportServiceProtocol {
 
     // Helper variable
     private let reportUrl = "https://reports.adguard.com/new_issue.html"
- 
+
     private var appLogsUrls: [URL] {
         let logsUrl = resources.sharedLogsURL()
         let fm = FileManager.default

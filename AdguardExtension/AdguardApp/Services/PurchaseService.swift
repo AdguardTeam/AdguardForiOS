@@ -1,17 +1,17 @@
 /**
        This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
        Copyright © Adguard Software Limited. All rights reserved.
- 
+
        Adguard for iOS is free software: you can redistribute it and/or modify
        it under the terms of the GNU General Public License as published by
        the Free Software Foundation, either version 3 of the License, or
        (at your option) any later version.
- 
+
        Adguard for iOS is distributed in the hope that it will be useful,
        but WITHOUT ANY WARRANTY; without even the implied warranty of
        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
        GNU General Public License for more details.
- 
+
        You should have received a copy of the GNU General Public License
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -55,7 +55,7 @@ protocol PurchaseServiceProtocol {
 
     /* request SKProducts. If SKProducts failed on start we must repeat this request  */
     func startProductRequest()
- 
+
     /**
      returns true if user has valid renewable subscription or valid adguard license
      */
@@ -88,7 +88,7 @@ protocol PurchaseServiceProtocol {
 
     /*  login on backend server and check license information
         the results will be posted through notification center
- 
+
         we can use adguard license in two ways
         1) login through oauth in safari and get access_token. Then we make auth_token request and get license key. Then bind this key to user device id(app_id) through status request with license key in params
         2) login directly with license key. In this case we immediately send status request with this license key
@@ -355,7 +355,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         loginService.checkStatus { [weak self] (error) in
             _ = self?.processLoginResult(error)
         }
-    } 
+    }
 
     func login(withLicenseKey key: String, completion: @escaping (Bool)->Void) {
         loginService.login(licenseKey: key){ [weak self] (error) in
@@ -680,7 +680,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
     func paymentQueue(_ queue: SKPaymentQueue, shouldAddStorePayment payment: SKPayment, for product: SKProduct) -> Bool {
         return true
     }
- 
+
     // MARK: helper methods
 
     @discardableResult private func processLoginResult(_ error: Error?)->Bool {

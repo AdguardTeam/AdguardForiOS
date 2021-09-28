@@ -20,7 +20,7 @@
 
 /* URL's that might be processed
  <adguardScheme> = adguard or adguard-pro
- 
+
  1. <adguardScheme>:license=<LICENSE>                               <--- Activate license by URL
  2. <adguardScheme>://add/<RULE>                                    <--- Adding new user rule from safari
  3. <adguardScheme>://systemProtection/<VALUE ("on" or "off")>      <--- Turning on/off DNS protection from widget

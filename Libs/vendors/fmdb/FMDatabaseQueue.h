@@ -56,7 +56,7 @@
  - `<FMDatabase>`
 
  @warning Do not instantiate a single `<FMDatabase>` object and use it across multiple threads. Use `FMDatabaseQueue` instead.
- 
+
  @warning The calls to `FMDatabaseQueue`'s methods are blocking.  So even though you are passing along blocks, they will **not** be run on another thread.
 
  */
@@ -76,19 +76,19 @@
 ///----------------------------------------------------
 
 /** Create queue using path.
- 
+
  @param aPath The file path of the database.
- 
+
  @return The `FMDatabaseQueue` object. `nil` on error.
  */
 
 + (instancetype)databaseQueueWithPath:(NSString*)aPath;
 
 /** Create queue using path and specified flags.
- 
+
  @param aPath The file path of the database.
  @param openFlags Flags passed to the openWithFlags method of the database
- 
+
  @return The `FMDatabaseQueue` object. `nil` on error.
  */
 + (instancetype)databaseQueueWithPath:(NSString*)aPath flags:(int)openFlags;
@@ -103,19 +103,19 @@
 - (instancetype)initWithPath:(NSString*)aPath;
 
 /** Create queue using path and specified flags.
- 
+
  @param aPath The file path of the database.
  @param openFlags Flags passed to the openWithFlags method of the database
- 
+
  @return The `FMDatabaseQueue` object. `nil` on error.
  */
 
 - (instancetype)initWithPath:(NSString*)aPath flags:(int)openFlags;
 
 /** Returns the Class of 'FMDatabase' subclass, that will be used to instantiate database object.
- 
+
  Subclasses can override this method to return specified Class of 'FMDatabase' subclass.
- 
+
  @return The Class of 'FMDatabase' subclass, that will be used to instantiate database object.
  */
 
@@ -130,7 +130,7 @@
 ///-----------------------------------------------
 
 /** Synchronously perform database operations on queue.
- 
+
  @param block The code to be run on the queue of `FMDatabaseQueue`
  */
 

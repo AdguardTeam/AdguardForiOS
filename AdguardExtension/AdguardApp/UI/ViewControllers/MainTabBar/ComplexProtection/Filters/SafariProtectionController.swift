@@ -46,7 +46,7 @@ final class SafariProtectionController: UITableViewController {
 
     private let enabledColor = UIColor.AdGuardColor.lightGreen1
     private let disabledColor = UIColor.AdGuardColor.lightGray3
- 
+
     private var activeFiltersCount: Int {
         let enabledGroups = safariProtection.groups.filter { $0.isEnabled }
         let enabledFilters = enabledGroups.flatMap { $0.filters }.filter { $0.isEnabled }

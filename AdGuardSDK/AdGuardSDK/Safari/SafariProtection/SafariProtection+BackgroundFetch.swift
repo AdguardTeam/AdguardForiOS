@@ -1,17 +1,17 @@
 /**
        This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
        Copyright © Adguard Software Limited. All rights reserved.
- 
+
        Adguard for iOS is free software: you can redistribute it and/or modify
        it under the terms of the GNU General Public License as published by
        the Free Software Foundation, either version 3 of the License, or
        (at your option) any later version.
- 
+
        Adguard for iOS is distributed in the hope that it will be useful,
        but WITHOUT ANY WARRANTY; without even the implied warranty of
        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
        GNU General Public License for more details.
- 
+
        You should have received a copy of the GNU General Public License
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -66,13 +66,13 @@ public protocol SafariProtectionBackgroundFetchProtocol {
 
     /**
      This method is neede to finish the update process that did start in the background
- 
+
      For example:
         The background update did complete 2 out of 3 steps.
         To provide user with the latest data we should finish the update and complete the 3rd step
      Note:
         If background update did already finished successfully this method will do nothing
- 
+
      The method should be called on the app start in **didFinishLaunchingWithOptions**
      */
     func finishBackgroundUpdate(_ onUpdateFinished: @escaping (_ error: Error?) -> Void)

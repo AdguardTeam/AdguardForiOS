@@ -792,7 +792,7 @@ static int FMDatabaseBusyHandler(void *f, int count) {
 
     [statement setUseCount:[statement useCount] + 1];
 
-    FMDBRelease(statement); 
+    FMDBRelease(statement);
 
     _isExecutingStatement = NO;
 

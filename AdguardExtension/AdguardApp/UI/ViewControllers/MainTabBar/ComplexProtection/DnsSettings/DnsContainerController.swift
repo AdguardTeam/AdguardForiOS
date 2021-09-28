@@ -21,7 +21,7 @@ import UIKit
 protocol AddDomainToListDelegate {
     /**
      Adds domain or a rule to blacklist / whitelist
- 
+
      - Parameters:
         - domain: the domain to add to list.
         - needsCorrecting: flag indicating the need to make a rule from domain.
@@ -137,7 +137,7 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
                 button.action = {
                     if let record = self.logRecord?.logRecord {
                         let isOriginalRecord = record.userStatus == .none || record.userStatus == .modified
-                        let rules = isOriginalRecord ? record.blockRules : [record.userRule ?? ""] 
+                        let rules = isOriginalRecord ? record.blockRules : [record.userRule ?? ""]
 
                         //self.dnsFiltersService.removeUserRules(rules ?? [])
                         self.set(self.logRecord!.logRecord.userStatus == .movedToBlacklist ? .modified : .removedFromBlacklist)

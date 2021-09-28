@@ -94,7 +94,7 @@ class KeychainServiceTest: XCTestCase {
         let keychain = KeychainService(resources: SharedResourcesMock())
 
         XCTAssert(keychain.saveLicenseKey(server: "test.server", key: "test key"))
- 
+
         let key = keychain.loadLicenseKey(server: "test.server")
 
         XCTAssertNotNil(key)

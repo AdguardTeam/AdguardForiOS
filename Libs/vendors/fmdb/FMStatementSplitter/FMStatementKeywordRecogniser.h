@@ -12,7 +12,7 @@
 
 /**
  * The FMStatementKeywordRecogniser class attempts to recognise a specific keyword in a token stream.
- * 
+ *
  * A keyword recogniser attempts to recognise a specific word or set of symbols.
  * Keyword recognisers can also check that the keyword is not followed by specific characters in order to stop it recognising the beginnings of words.
  */
@@ -24,7 +24,7 @@
 
 /**
  * Creates a Keyword Recogniser for a specific keyword.
- * 
+ *
  * @param keyword The keyword to recognise.
  *
  * @return Returns a keyword recogniser for the passed keyword.
@@ -38,7 +38,7 @@
 
 /**
  * Creates a Keyword Recogniser for a specific keyword.
- * 
+ *
  * @param keyword The keyword to recognise.
  * @param invalidFollowingCharacters A set of characters that may not follow the keyword in the string being tokenised.
  *
@@ -53,7 +53,7 @@
 
 /**
  * Initialises a Keyword Recogniser to recognise a specific keyword.
- * 
+ *
  * @param keyword The keyword to recognise.
  *
  * @return Returns the keyword recogniser initialised to recognise the passed keyword.
@@ -67,7 +67,7 @@
 
 /**
  * Initialises a Keyword Recogniser to recognise a specific keyword.
- * 
+ *
  * @param keyword The keyword to recognise.
  * @param invalidFollowingCharacters A set of characters that may not follow the keyword in the string being tokenised.
  *

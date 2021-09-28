@@ -39,7 +39,7 @@ public protocol CustomFilterMetaParserProtocol {
      ```
      Filter example: https://easylist.to/easylist/easylist.txt
      ```
- 
+
      - Parameter filterFileContentString: File content as string
      - Parameter parserType: Parsing can differ for **system** and **safary** filters
      - Throws: Throws an error if parsing fails
@@ -222,7 +222,7 @@ public extension CustomFilterMetaParserProtocol {
 
         return nil
     }
- 
+
     /**
      Checks if file's content is valid
      Returns true if first 256 chars of content are empty or contain some HTML's tags
@@ -248,7 +248,7 @@ public extension CustomFilterMetaParserProtocol {
      ~~~
      Filter example: https://easylist.to/easylist/easylist.txt
      ~~~
- 
+
      - Parameter url: File's location url
      - Parameter parserType: Parsing can differ for **system** and **safary** filters
      - Throws: Throws an error if parsing or reading file fails

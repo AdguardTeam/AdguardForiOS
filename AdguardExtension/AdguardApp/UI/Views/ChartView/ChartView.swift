@@ -53,7 +53,7 @@ final class ChartView: UIView {
         }
     }
 
-    // Number of maximum requests for specified period 
+    // Number of maximum requests for specified period
     var maxRequests: Int = 0 {
         didSet {
             self.topBorderLabel.text = "\(maxRequests)"

@@ -50,7 +50,7 @@ protocol AffinityRulesParserProtocol {
      - Parameter rule: String represantation of rule
      - Parameter affinity: Affinity mask to apply for rule
      - Returns: String represantation of rule with affinity
- 
+
      For example:
      If we pass **@@||imasdk.googleapis.com** and affinity **general** and **privacy**
      The function will return:
@@ -75,7 +75,7 @@ protocol AffinityRulesParserProtocol {
  @@||google-analytics.com/collect|$domain=ondemandkorea.com
  !#safari_cb_affinity
  ~~~
- 
+
  That means that this 2 rules should be added to **general** and **privacy** content blockers,
  although all other rules from filter example will be added to **ads** CB.
  */

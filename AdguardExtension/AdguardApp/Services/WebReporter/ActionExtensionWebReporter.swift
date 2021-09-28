@@ -1,7 +1,7 @@
 
 import SafariAdGuardSDK
 
-/// Action extension web reporter 
+/// Action extension web reporter
 final class ActionExtensionWebReporter: WebReporterProtocol {
 
     // MARK: - Private properties

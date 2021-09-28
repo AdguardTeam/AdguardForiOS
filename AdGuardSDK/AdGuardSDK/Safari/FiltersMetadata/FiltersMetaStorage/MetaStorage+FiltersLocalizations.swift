@@ -52,7 +52,7 @@ protocol FiltersLocalizationsMetaStorageProtocol {
     func deleteAllLocalizationForFilters(withIds ids: [Int]) throws
     func deleteAllLocalizationForFilter(withId id: Int) throws
 }
- 
+
 extension MetaStorage: FiltersLocalizationsMetaStorageProtocol {
 
     // Returns localized strings for specified filter and language

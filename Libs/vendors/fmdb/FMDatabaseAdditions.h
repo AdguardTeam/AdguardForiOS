@@ -11,7 +11,7 @@
 
 
 /** Category of additions for `<FMDatabase>` class.
- 
+
  ### See also
 
  - `<FMDatabase>`
@@ -24,8 +24,8 @@
 ///----------------------------------------
 
 /** Return `int` value for query
- 
- @param query The SQL query to be performed. 
+
+ @param query The SQL query to be performed.
  @param ... A list of parameters that will be bound to the `?` placeholders in the SQL query.
 
  @return `int` value.
@@ -113,9 +113,9 @@
 - (BOOL)tableExists:(NSString*)tableName;
 
 /** The schema of the database.
- 
+
  This will be the schema for the entire database. For each entity, each row of the result set will include the following fields:
- 
+
  - `type` - The type of entity (e.g. table, index, view, or trigger)
  - `name` - The name of the object
  - `tbl_name` - The name of the table to which the object references
@@ -123,7 +123,7 @@
  - `sql` - The SQL that created the entity
 
  @return `FMResultSet` of schema; `nil` on error.
- 
+
  @see [SQLite File Format](http://www.sqlite.org/fileformat.html)
  */
 
@@ -132,11 +132,11 @@
 /** The schema of the database.
 
  This will be the schema for a particular table as report by SQLite `PRAGMA`, for example:
- 
+
     PRAGMA table_info('employees')
- 
+
  This will report:
- 
+
  - `cid` - The column ID number
  - `name` - The name of the column
  - `type` - The data type specified for the column
@@ -145,20 +145,20 @@
  - `pk` - Whether the field is part of the primary key of the table
 
  @param tableName The name of the table for whom the schema will be returned.
- 
+
  @return `FMResultSet` of schema; `nil` on error.
- 
+
  @see [table_info](http://www.sqlite.org/pragma.html#pragma_table_info)
  */
 
 - (FMResultSet*)getTableSchema:(NSString*)tableName;
 
 /** Test to see if particular column exists for particular table in database
- 
+
  @param columnName The name of the column.
- 
+
  @param tableName The name of the table.
- 
+
  @return `YES` if column exists in table in question; `NO` otherwise.
  */
 
@@ -171,9 +171,9 @@
  @param tableName The name of the table.
 
  @return `YES` if column exists in table in question; `NO` otherwise.
- 
+
  @see columnExists:inTableWithName:
- 
+
  @warning Deprecated - use `<columnExists:inTableWithName:>` instead.
  */
 
@@ -181,15 +181,15 @@
 
 
 /** Validate SQL statement
- 
+
  This validates SQL statement by performing `sqlite3_prepare_v2`, but not returning the results, but instead immediately calling `sqlite3_finalize`.
- 
+
  @param sql The SQL statement being validated.
- 
+
  @param error This is a pointer to a `NSError` object that will receive the autoreleased `NSError` object if there was any error. If this is `nil`, no `NSError` result will be returned.
- 
+
  @return `YES` if validation succeeded without incident; `NO` otherwise.
- 
+
  */
 
 - (BOOL)validateSQL:(NSString*)sql error:(NSError**)error;
@@ -202,9 +202,9 @@
 ///-----------------------------------
 
 /** Retrieve application ID
- 
+
  @return The `uint32_t` numeric value of the application ID.
- 
+
  @see setApplicationID:
  */
 
@@ -213,7 +213,7 @@
 /** Set the application ID
 
  @param appID The `uint32_t` numeric value of the application ID.
- 
+
  @see applicationID
  */
 
@@ -247,18 +247,18 @@
 ///-----------------------------------
 
 /** Retrieve user version
- 
+
  @return The `uint32_t` numeric value of the user version.
- 
+
  @see setUserVersion:
  */
 
 - (uint32_t)userVersion;
 
 /** Set the user-version
- 
+
  @param version The `uint32_t` numeric value of the user version.
- 
+
  @see userVersion
  */
 

@@ -37,7 +37,7 @@ class Dns64Utils: NSObject {
       -First 12 bytes are DNS64 prefix
       -Last 4 bytes are required Ipv4: WELL_KNOWN_IPV4_FIRST or WELL_KNOWN_IPV4_SECOND
       We use simplified algorithm and consider the first matched prefix to be valid
- 
+
       @param ipv6AddressData DNS response
       @return ipv6 prefix if current network is DNS64 enabled
      */

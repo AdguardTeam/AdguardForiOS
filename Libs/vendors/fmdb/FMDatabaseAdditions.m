@@ -84,7 +84,7 @@ return ret;
     return rs;
 }
 
-/* 
+/*
  get table schema: result colums: cid[INTEGER], name,type [STRING], notnull[INTEGER], dflt_value[],pk[INTEGER]
 */
 - (FMResultSet*)getTableSchema:(NSString*)tableName {

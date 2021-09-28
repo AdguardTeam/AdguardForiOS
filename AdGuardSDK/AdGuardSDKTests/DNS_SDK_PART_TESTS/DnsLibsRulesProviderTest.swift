@@ -1,7 +1,7 @@
 import XCTest
 
 class DnsLibsRulesProviderTest: XCTestCase {
- 
+
     var filesStorage: FilterFilesStorageMock!
     var dnsFiltersManager: DnsFiltersManagerMock!
     var dnsLibsRulesProvider: DnsLibsRulesProviderProtocol!

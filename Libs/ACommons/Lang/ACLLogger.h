@@ -83,7 +83,7 @@ extern int ddLogLevel;
 /**
  Initializing of logger.
  This method must be called before writing to log file.
- 
+
  @param appName Directory name where logger will be write logs.
  If nil then will be used default value, that is name of process.
  */

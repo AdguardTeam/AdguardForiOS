@@ -50,7 +50,7 @@ class BottomAlertPresentingTransition: NSObject, UIViewControllerAnimatedTransit
         bottomConstraint.constant = -toView.frame.height
         toView.layoutIfNeeded()
         bottomConstraint.constant = 0.0
- 
+
         transitionContext.containerView.addSubview(toView)
         let duration = transitionDuration(using: transitionContext)
 

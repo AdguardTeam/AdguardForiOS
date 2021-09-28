@@ -52,7 +52,7 @@ class SafariServiceTest: XCTestCase {
     }
 
     func testInvalidateAllSuccess() {
-        testInvalidateAll(errors: [Bool](), expectError: false) 
+        testInvalidateAll(errors: [Bool](), expectError: false)
     }
 
     func testInvalidateAllFailure() {

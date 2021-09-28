@@ -176,7 +176,7 @@
 
             self.sections[i] = originalSection;
         }
- 
+
         self.insertIndexPaths = [[NSMutableArray alloc] initWithCapacity:totalNumberOfRows];
         self.deleteIndexPaths = [[NSMutableArray alloc] initWithCapacity:totalNumberOfRows];
         self.updateIndexPaths = [[NSMutableArray alloc] initWithCapacity:totalNumberOfRows];

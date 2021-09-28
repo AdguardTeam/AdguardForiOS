@@ -29,7 +29,7 @@ public protocol ChartStatisticsProtocol: ResetableSyncProtocol {
 
     /**
      Returns 100 points for building a chart
- 
+
      - Parameters:
        - chartType: Variable that should be used as `y`
        - period: Desired period for points
@@ -90,7 +90,7 @@ final public class ChartStatistics: ChartStatisticsProtocol {
 
     /**
      Returns list of all records stored in DB for the specified `period`
- 
+
      This method will return records sorted by `timeStamp` in ascending order
      */
     func getRecords(for period: StatisticsPeriod) throws -> [ChartStatisticsRecord] {

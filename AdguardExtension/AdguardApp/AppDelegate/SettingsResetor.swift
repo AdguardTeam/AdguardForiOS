@@ -72,7 +72,7 @@ struct SettingsResetor: ISettingsResetor {
                 group.leave()
             }
             group.wait()
- 
+
             appDelegate?.setAppInterfaceStyle()
 
             let dnsProvidersManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!

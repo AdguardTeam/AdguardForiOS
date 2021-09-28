@@ -36,7 +36,7 @@ public protocol DnsProvidersManagerProtocol: ResetableSyncProtocol {
 
     /**
      Makes provider with **id** active
- 
+
      All predefined providers can have multiple DNS servers so to reveal the server to make active
      we need **provider id** to find a provider and **server id** to find a server
      - Parameter id: Unique provider identifier
@@ -66,10 +66,10 @@ public protocol DnsProvidersManagerProtocol: ResetableSyncProtocol {
 
     /**
      Removes custom provider by its **id** from storage
- 
+
      If current provider is removed than the default one or AdGuard DoH will be set depending on the
      current DNS implementation
- 
+
      - Parameter id: Unique identifier of custom DNS provider that should be removed from the storage
      - Throws: Throws an error if custom provider with passed **id** is not in the storage
      */
@@ -112,7 +112,7 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
             predefinedProviders: predefinedDnsProviders
         )
     }
- 
+
     // Init for tests
     init(configuration: DnsConfigurationProtocol,
          userDefaults: UserDefaultsStorageProtocol,

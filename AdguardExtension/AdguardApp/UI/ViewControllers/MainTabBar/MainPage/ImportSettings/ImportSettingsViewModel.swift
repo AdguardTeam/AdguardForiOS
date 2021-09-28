@@ -262,7 +262,7 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
             }
 
             if let filterMeta = filters.first(where: { $0.filterId == filter.id })  {
-                let name = filterMeta.name ?? "" 
+                let name = filterMeta.name ?? ""
                 row.title = String(format: format, name)
             }
             else {

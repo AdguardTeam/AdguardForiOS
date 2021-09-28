@@ -210,14 +210,14 @@ static void isolateQueueReleaseFunc(void *dQueue){
                             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
                                [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
- 
+
                                    *rollback = NO;
                                    if ([self updateDB:db fromVersion:dbVersion toVersion:defaultDBVersion])
                                        dispatch_async(dispatch_get_main_queue(), ^{
 
                                            self.ready = YES;
                                        });
- 
+
                                    else
                                        *rollback = YES;
                                }];
@@ -244,7 +244,7 @@ static void isolateQueueReleaseFunc(void *dQueue){
             //open production DB
             queue = [FMDatabaseQueue databaseQueueWithPath:[productionDBUrl path] flags:(SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_SHAREDCACHE)];
             if (queue){
- 
+
                 [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
 
                     *rollback = NO;
@@ -424,7 +424,7 @@ static void isolateQueueReleaseFunc(void *dQueue){
 /////////////////////////////////////////////////////////////////////
 
 - (BOOL)createDefaultDB:(FMDatabase *)db version:(NSString *)version{
- 
+
     @autoreleasepool {
 
         if (!version)

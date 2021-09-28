@@ -14,7 +14,7 @@
 /** Pool of `<FMDatabase>` objects.
 
  ### See also
- 
+
  - `<FMDatabaseQueue>`
  - `<FMDatabase>`
 
@@ -95,7 +95,7 @@
 ///------------------------------------------------
 
 /** Number of checked-in databases in pool
- 
+
  @returns Number of databases
  */
 

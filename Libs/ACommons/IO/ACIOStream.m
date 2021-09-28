@@ -90,7 +90,7 @@
     NSInteger result = 0;
 
     if (_delegate && [_delegate respondsToSelector:@selector(write:maxLength:stream:)]){
- 
+
             result = [_delegate write:buffer maxLength:len stream:self];
 
         if (result > ACIO_EOF){

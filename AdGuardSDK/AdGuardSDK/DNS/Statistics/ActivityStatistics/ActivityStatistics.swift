@@ -25,7 +25,7 @@ public protocol ActivityStatisticsProtocol: ResetableSyncProtocol {
     /**
      Returns list of `DomainsStatisticsRecord` objects for the specified `period`
      `DomainsStatisticsRecord` represents counters statistics for certain domain
- 
+
      This method will return records sorted by `requests` in descending order
      In case `requests` are equal will sort by `domain`
      */
@@ -68,7 +68,7 @@ final public class ActivityStatistics: ActivityStatisticsProtocol {
 
     /**
      Returns list of all records stored in DB for the specified `period`
- 
+
      This method will return records sorted by `timeStamp` in descending order
      In case `timeStamp`s are equal will sort by `domain`
      */

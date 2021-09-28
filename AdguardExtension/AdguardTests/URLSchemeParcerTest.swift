@@ -71,7 +71,7 @@ class URLSchemeParcerTest: XCTestCase {
         let complexProtectionUrlOff = URL(string: "adguard://complexProtection/off")!
         let complexProtectionUrlEmpty = URL(string: "adguard://complexProtection/")!
         let incorrectComplexProtectionUrl = URL(string: "adguard://complexProtection/Foo")!
- 
+
         let complexProtectionUrlOnResult = urlParcer.parse(url: complexProtectionUrlOn)
         let complexProtectionUrlOffResult = urlParcer.parse(url: complexProtectionUrlOff)
         let complexProtectionUrlEmptyResult = urlParcer.parse(url: complexProtectionUrlEmpty)

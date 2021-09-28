@@ -1,17 +1,17 @@
 /**
        This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
        Copyright © Adguard Software Limited. All rights reserved.
- 
+
        Adguard for iOS is free software: you can redistribute it and/or modify
        it under the terms of the GNU General Public License as published by
        the Free Software Foundation, either version 3 of the License, or
        (at your option) any later version.
- 
+
        Adguard for iOS is distributed in the hope that it will be useful,
        but WITHOUT ANY WARRANTY; without even the implied warranty of
        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
        GNU General Public License for more details.
- 
+
        You should have received a copy of the GNU General Public License
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -26,7 +26,7 @@ public protocol SafariProtectionUserRulesProtocol {
      - Returns: String representation of all enabled rules
      */
     func rulesString(for type: SafariUserRuleType) -> String
- 
+
     /**
      Returns all User rules objects for specified rules type
      - Parameter type: User rule type (blocklist / allowlist / inverted allowlist)
@@ -36,9 +36,9 @@ public protocol SafariProtectionUserRulesProtocol {
 
     /**
      Adds new rule to the specified user rule's list  and reloads CBs than
- 
+
      If **override** is false and **allRules** already contains **rule** it will return **UserRulesStorageError.ruleAlreadyExists**
- 
+
      - Parameter rule: Rule object to add to storage
      - Parameter type: User rule type (blocklist / allowlist / inverted allowlist) to add a rule for
      - Parameter override: If **true** and **rule** is already in the user rule's list than it will be overriden with new one
@@ -48,9 +48,9 @@ public protocol SafariProtectionUserRulesProtocol {
 
     /**
      Adds new rules to the specified user rule's list and reloads CBs than
- 
+
      If **override** is false and **allRules** already contains some rules from **rules** it will return **UserRulesStorageError.rulesAlreadyExist**
- 
+
      - Parameter rules: Rules object to add to storage
      - Parameter type: User rules type (blocklist / allowlist / inverted allowlist) to add rules for
      - Parameter override: If **true**, duplicated rules will be overriden with new ones

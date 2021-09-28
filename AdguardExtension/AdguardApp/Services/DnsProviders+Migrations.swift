@@ -1,17 +1,17 @@
 /**
        This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
        Copyright © Adguard Software Limited. All rights reserved.
- 
+
        Adguard for iOS is free software: you can redistribute it and/or modify
        it under the terms of the GNU General Public License as published by
        the Free Software Foundation, either version 3 of the License, or
        (at your option) any later version.
- 
+
        Adguard for iOS is distributed in the hope that it will be useful,
        but WITHOUT ANY WARRANTY; without even the implied warranty of
        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
        GNU General Public License for more details.
- 
+
        You should have received a copy of the GNU General Public License
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -93,7 +93,7 @@ extension DnsProvidersService: DnsProvidersServiceMigratable {
      Change a port for custom servers with the 'quic' schema to 784
      New port is 8853. Now an address like quic://dns.adguard.com is transformed into quic://dns.adguard.com:8853.
      So to force the use of the old port 784 specify it strictly - quic://dns.adguard.com:784.
- 
+
      That means that if you have custom quic:// URLs and DoQ sdns:// stamps in your server list,
      they (excluding AdGuard's) should be changed from `quic://example.org` to `quic://example.org:784`.
      DoQ sdns:// stamps should also be patched to include port, if they are in list

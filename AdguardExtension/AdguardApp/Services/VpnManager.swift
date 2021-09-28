@@ -53,7 +53,7 @@ class VpnManager: VpnManagerProtocol {
     static let stateChangedNotification = NSNotification.Name("stateChangedNotification")
 
     // MARK: - private properties
- 
+
     private let resources: AESharedResourcesProtocol
     private let appConfiguration: ConfigurationServiceProtocol
     private let networkSettings: NetworkSettingsServiceProtocol

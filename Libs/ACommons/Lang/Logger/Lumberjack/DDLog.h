@@ -561,7 +561,7 @@ FOUNDATION_EXTERN NSString * __nullable DDExtractFileNameWithoutExtension(const 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
- *  This protocol describes a basic logger behavior. 
+ *  This protocol describes a basic logger behavior.
  *  Basically, it can log messages, store a logFormatter plus a bunch of optional behaviors.
  *  (i.e. flush, get its loggerQueue, get its name, ...
  */
