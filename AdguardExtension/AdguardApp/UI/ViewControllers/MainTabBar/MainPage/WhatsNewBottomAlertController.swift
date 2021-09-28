@@ -26,37 +26,38 @@ protocol WhatsNewBottomAlertControllerDelegate: AnyObject {
 
 /// WhatsNewBottomAlertController - Responsible for representation new features available in new version of app
 final class WhatsNewBottomAlertController: BottomAlertController {
-    
+
     // MARK: - Outlets
-    
+
     @IBOutlet weak var enableButton: UIButton!
     @IBOutlet var themableLabels: [ThemableLabel]!
-    
+
     // MARK: - Properties
+
     weak var delegate: WhatsNewBottomAlertControllerDelegate?
-    
+
     // MARK: - Services
-    
+
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
-    
+
     // MARK: - ViewController lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         enableButton.applyStandardGreenStyle()
         updateTheme()
     }
-    
+
     // MARK: - Actions
-    
+
     @IBAction func enableButtonTapped(_ sender: UIButton) {
         if !configuration.proStatus {
             delegate?.enableButtonForNonProTapped()
             return
         }
-        
+
         configuration.isAdvancedProtectionEnabled = true
         safariProtection.update(advancedProtectionEnabled: true, onCbReloaded: nil)
         dismiss(animated: true, completion: onDismissCompletion)
