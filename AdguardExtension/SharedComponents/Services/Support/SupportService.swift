@@ -131,7 +131,7 @@ final class SupportService: SupportServiceProtocol {
         do {
             try fm.removeItem(at: logsDirectory)
             try fm.removeItem(at: logsZipDirectory)
-    
+
             self.logsDirectory = nil
             self.logsZipDirectory = nil
         }
@@ -266,7 +266,7 @@ final class SupportService: SupportServiceProtocol {
             if let delimeterData = delimeter.data(using: .utf8) {
                 logData.append(delimeterData)
             }
-    
+
             let fileUrl = URL(fileURLWithPath: info.filePath)
             if let fileData = try? Data(contentsOf: fileUrl) {
                 logData.append(fileData)

@@ -200,30 +200,30 @@ extension DnsLogRecord {
         if advancedMode {
             var newDomain = domain.hasSuffix(".") ? String(domain.dropLast()) : domain
             newDomain = " " + newDomain
-    
+
             let typeAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .semibold) ]
             let domainAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .regular) ]
-    
+
             let typeAttrString = NSAttributedString(string: recordType, attributes: typeAttr)
             let domainAttrString = NSAttributedString(string: newDomain, attributes: domainAttr)
-    
+
             let combination = NSMutableAttributedString()
             combination.append(typeAttrString)
             combination.append(domainAttrString)
-    
+
             return combination
         } else {
             let typeAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .semibold) ]
             let statusAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .regular),
                                NSAttributedString.Key.foregroundColor: status.textColor]
-    
+
             let typeAttrString = NSAttributedString(string: " (" + recordType + ")", attributes: typeAttr)
             let statusAttrString = NSAttributedString(string: status.title(), attributes: statusAttr)
-    
+
             let combination = NSMutableAttributedString()
             combination.append(statusAttrString)
             combination.append(typeAttrString)
-    
+
             return combination
         }
     }

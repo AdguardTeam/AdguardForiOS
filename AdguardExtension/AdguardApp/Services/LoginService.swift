@@ -230,17 +230,17 @@ final class LoginService: LoginServiceProtocol {
                 callback(nil, error as NSError?)
                 return
             }
-    
+
             guard let data = dataOrNil else {
                 DDLogError("(LoginService) getOauthToken - response data is nil")
                 callback(nil, NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
                 return
             }
-    
+
             DDLogInfo("(LoginService) getOauthToken get response")
-    
+
             let result = sSelf.loginResponseParser.processOauthTokenResponse(data: data)
-    
+
             callback(result.accessToken, result.error)
         }
     }
@@ -248,7 +248,7 @@ final class LoginService: LoginServiceProtocol {
     func login(name: String, password: String, code2fa: String?, callback: @escaping (NSError?) -> Void) {
 
         self.getOauthToken(username: name, password: password, twoFactorToken: code2fa) { [weak self] (token, error) in
-    
+
             if error == nil && token != nil {
                 self?.login(accessToken: token!) { (error) in
                     if error == nil {
@@ -273,7 +273,7 @@ final class LoginService: LoginServiceProtocol {
             if let callback = self?.activeChanged {
                 callback()
             }
-    
+
             completion()
         }
     }
@@ -318,29 +318,29 @@ final class LoginService: LoginServiceProtocol {
 
         network.data(with: request) { [weak self] (dataOrNil, response, error) in
             guard let sSelf = self else { return }
-    
+
             guard error == nil else {
                 DDLogError("(LoginService) loginInternal - got error \(error!.localizedDescription)")
                 callback(error! as NSError)
                 return
             }
-    
+
             guard let data = dataOrNil  else{
                 DDLogError("(LoginService) loginInternal - got empty response")
                 callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
                 return
             }
-    
+
             let (loggedIn, premium, expirationDate, licenseKey, error) = sSelf.loginResponseParser.processLoginResponse(data: data)
-    
+
             DDLogInfo("(LoginService) loginInternal - processLoginResponse: loggedIn - \(loggedIn ? "true" : "false") premium = \(premium) expirationDate = " + (expirationDate == nil ? "nil" : expirationDate!.description))
-    
+
             if error != nil {
                 DDLogError("(LoginService) loginInternal - processLoginResponse error: \(error!.localizedDescription)")
                 callback(error!)
                 return
             }
-    
+
             sSelf.requestStatus(licenseKey: licenseKey, callback: callback)
         }
     }
@@ -375,34 +375,34 @@ final class LoginService: LoginServiceProtocol {
 
         network.data(with: request) { [weak self] (dataOrNil, response, error) in
             guard let sSelf = self else { return }
-    
+
             guard error == nil else {
                 DDLogError("(LoginService) checkStatus - got error \(error!.localizedDescription)")
                 callback(error! as NSError)
                 return
             }
-    
+
             guard let data = dataOrNil  else {
                 DDLogError("(LoginService) checkStatus - got empty response")
                 callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
                 return
             }
-    
+
             let (premium, expirationDate, error) = sSelf.loginResponseParser.processStatusResponse(data: data)
-    
+
             DDLogInfo("(LoginService) checkStatus - processStatusResponse: premium = \(premium) " + (expirationDate == nil ? "" : "expirationDate = \(expirationDate!)"))
-    
-    
+
+
             if error != nil {
                 DDLogError("(LoginService) checkStatus - processStatusResponse error: \(error!.localizedDescription)")
                 callback(error!)
                 return
             }
-    
+
             sSelf.expirationDate = expirationDate
             sSelf.hasPremiumLicense = premium
             sSelf.loggedIn = premium && sSelf.active
-    
+
             callback(nil)
         }
     }
@@ -433,15 +433,15 @@ final class LoginService: LoginServiceProtocol {
         request.timeoutInterval = 10.0
 
         network.data(with: request) { (dataOrNil, response, error) in
-    
+
             guard error == nil else {
                 DDLogError("(LoginService) resetLicense - got error \(error!.localizedDescription)")
                 callback(error! as NSError)
                 return
             }
-    
+
             DDLogInfo("(LoginService) resetLicense succeeded")
-    
+
             callback(nil)
         }
     }
@@ -457,9 +457,9 @@ final class LoginService: LoginServiceProtocol {
 
         timer = Timer(fire: time, interval: 0, repeats: false) { [weak self] (timer) in
             guard let sSelf = self else { return }
-    
+
             DDLogInfo("(LoginService) expiration timer fired")
-        
+
             if let callback = sSelf.activeChanged {
                 callback()
             }

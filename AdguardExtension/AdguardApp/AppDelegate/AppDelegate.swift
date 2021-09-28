@@ -257,7 +257,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         mainPageController.onReady = { [weak self] in
             // request permission for user notifications posting
             self?.userNotificationService.requestPermissions()
-    
+
             // Show rate app dialog when main page is initialized
             self?.showRateAppDialogIfNedeed()
         }
@@ -295,9 +295,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          if purchaseObservation == nil {
              purchaseObservation = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: nil, queue: nil) { (notification) in
                  guard let type =  notification.userInfo?[PurchaseService.kPSNotificationTypeKey] as? String else { return }
-         
+ 
                  DDLogInfo("(AppDelegate) - Received notification type = \(type)")
-         
+ 
                  if type == PurchaseService.kPSNotificationPremiumExpired {
                      self.userNotificationService.postNotification(title: String.localizedString("premium_expired_title"), body: String.localizedString("premium_expired_message"), userInfo: nil)
                  }
@@ -307,7 +307,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          if proStatusObservation == nil {
              proStatusObservation = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
                  guard let self = self else { return }
-         
+ 
                  if !self.configuration.proStatus && self.vpnManager.vpnInstalled {
                      DDLogInfo("(AppDelegate) Remove vpn configuration")
                      self.vpnManager.removeVpnConfiguration { (error) in
@@ -330,7 +330,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setappObservation = NotificationCenter.default.observe(name: .setappDeviceLimitReched, object: nil, queue: OperationQueue.main) { _ in
             if let vc = Self.topViewController() {
                     ACSSystemUtils.showSimpleAlert(for: vc, withTitle: String.localizedString("common_error_title"), message: String.localizedString("setapp_device_limit_reached"))
-            
+
             }
         }
     }

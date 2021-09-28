@@ -86,7 +86,7 @@ class MainNavigationController: UINavigationController {
         if gestureRecognizer.state == .ended {
             cancelTransition(gestureRecognizer: gestureRecognizer, percent: percent)
         }
-        
+
         switch gestureRecognizer.state {
         case .possible:
             forceTransitionCancel()

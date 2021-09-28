@@ -86,7 +86,7 @@ public final class RequestSender: RequestSenderProtocol{
         // Process HTTP requests in background
         ProcessInfo().performExpiringActivity(withReason: "Sending HTTP request") { [weak self, group] expired in
             Logger.logDebug("Sending request with URL = \(requestConfig.request.urlRequest?.url?.absoluteString ?? "nil"); expired = \(expired)")
-    
+
             group.enter()
             self?.requestQueue.async {
                 if expired {
@@ -126,7 +126,7 @@ public final class RequestSender: RequestSenderProtocol{
                     completion(.error(error))
                     return
             }
-    
+
             completion(.success(parsedModel))
         }
 

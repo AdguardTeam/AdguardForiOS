@@ -152,24 +152,24 @@ final class ExtendedRadioButtonCell: UITableViewCell, Reusable {
         self.contentView.addSubview(descriptionLabel)
         self.contentView.addSubview(radioButton)
         self.contentView.addSubview(arrowRight)
-    
+
         let widthHeightConst: CGFloat = isIpadTrait ? 32.0 : 24.0
 
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16.0),
             titleLabel.trailingAnchor.constraint(equalTo: descriptionLabel.trailingAnchor),
-    
+
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 3.0),
             descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             descriptionLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -16.0),
-    
+
             radioButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
             radioButton.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 24.0),
             radioButton.trailingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: -20.0),
-    
+
             radioButton.widthAnchor.constraint(equalToConstant: widthHeightConst),
             radioButton.heightAnchor.constraint(equalToConstant: widthHeightConst),
-    
+
             arrowRight.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
             arrowRight.widthAnchor.constraint(equalToConstant: widthHeightConst),
             arrowRight.heightAnchor.constraint(equalToConstant: widthHeightConst),

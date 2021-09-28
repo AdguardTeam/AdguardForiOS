@@ -64,11 +64,11 @@ class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUser
         let center = UNUserNotificationCenter.current()
 
         center.getNotificationSettings { [weak self] (settings) in
-    
+
             if settings.authorizationStatus != .authorized {
                 return
             }
-    
+
             if settings.alertSetting == .enabled {
                 self?.alertNotification(title: title, body: body, userInfo: userInfo)
             }
@@ -86,7 +86,7 @@ class UserNotificationService: NSObject, UserNotificationServiceProtocol, UNUser
                 onNotificationSent()
                 return
             }
-    
+
             if settings.alertSetting == .enabled {
                 self?.alertNotification(title: title, body: body, badge: nil, userInfo: nil)
             }

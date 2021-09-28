@@ -99,17 +99,17 @@ static NSDictionary *stringUIResources;
         NSDictionary *resourceDict;
         NSArray *filtersDescription;
         for (NSString *locale in [bundle localizations]) {
-    
+
             resourceUrl = [bundle URLForResource:RESOURCE_FILE_NAME withExtension:@"plist" subdirectory:nil localization:locale];
             if (resourceUrl)
                 resourceDict = [NSDictionary dictionaryWithContentsOfURL:resourceUrl];
             else
                 [[NSException appResourceUnavailableException:[RESOURCE_FILE_NAME stringByAppendingFormat:@".plist for locale: %@", locale]] raise];
-    
+
             filtersDescription = resourceDict[RESOURCE_FILTERS_DESCRIPTION];
             if (!filtersDescription)
                 [[NSException appResourceUnavailableException:[NSString stringWithFormat:@"Resource key %@ in file %@.plist for locale: %@", RESOURCE_FILTERS_DESCRIPTION, RESOURCE_FILE_NAME, locale]] raise];
-    
+
             if (filtersDescription.count > filterId)
                 localizations[locale] = filtersDescription[filterId];
         }

@@ -78,7 +78,7 @@ class LoginResponseParser: LoginResponseParserProtocol {
 
         do {
             let jsonResponse = try JSONSerialization.jsonObject(with: data) as! [String: Any]
-    
+
             return processLoginResponseJson(json: jsonResponse)
         }
         catch {
@@ -93,7 +93,7 @@ class LoginResponseParser: LoginResponseParserProtocol {
 
         do {
             let jsonResponse = try JSONSerialization.jsonObject(with: data) as! [String: Any]
-    
+
             return processStatusResponseJson(json: jsonResponse)
         }
         catch {
@@ -107,7 +107,7 @@ class LoginResponseParser: LoginResponseParserProtocol {
     func processOauthTokenResponse(data: Data) -> (accessToken: String?, expirationDate: Date?, error: NSError?) {
         do {
             let jsonResponse = try JSONSerialization.jsonObject(with: data) as! [String: Any]
-    
+
             return processOauthResponseJson(jsonResponse)
         }
         catch {
@@ -149,7 +149,7 @@ class LoginResponseParser: LoginResponseParserProtocol {
         }
 
         if status == AUTH_BAD_CREDINTIALS {
-    
+
             DDLogInfo("(LoginService) login error - bad credintials" )
             let error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginBadCredentials, userInfo: nil)
             return (false, false, nil, nil, error)
@@ -178,13 +178,13 @@ class LoginResponseParser: LoginResponseParserProtocol {
         if status == STATUS_RESPONSE_STATUS_ERROR {
             let licenseKeyStatus = (json["licenseKeyStatus"] as? String) ?? ""
             DDLogInfo("(LoginService) processStatusResponseJson error - status = ERROR licenseKeyStatus: \(licenseKeyStatus)")
-    
+
             var error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil)
-    
+
             if licenseKeyStatus == AUTH_BAD_CREDINTIALS {
                 error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginBadCredentials, userInfo: nil)
             }
-    
+
             if licenseKeyStatus == AUTH_MAX_COMPUTERS_EXCEEDED {
                 error = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginMaxComputersExceeded, userInfo: nil)
             }
@@ -226,19 +226,19 @@ class LoginResponseParser: LoginResponseParserProtocol {
 
         var resultError: NSError?
         switch (error, errorCode) {
-    
+
         case (.some("unauthorized"), .some("2fa_required")):
             resultError = NSError(domain: LoginService.loginErrorDomain, code: LoginService.auth2FaRequired, userInfo: nil)
-    
+
         case (.some("unauthorized"), .some("bad_credentials")):
             resultError = NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginBadCredentials, userInfo: nil)
-    
+
         case (.some("unauthorized"), .some("account_disabled")):
             resultError = NSError(domain: LoginService.loginErrorDomain, code: LoginService.accountIsDisabled, userInfo: nil)
-    
+
         case (.some("unauthorized"), .some("account_locked")):
             resultError = NSError(domain: LoginService.loginErrorDomain, code: LoginService.accountIsLocked, userInfo: nil)
-    
+
         case (.some("unauthorized"), .some("2fa_invalid")):
             resultError = NSError(domain: LoginService.loginErrorDomain, code: LoginService.outh2FAInvalid, userInfo: nil)
         default:

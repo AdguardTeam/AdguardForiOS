@@ -33,7 +33,7 @@ extension FiltersService: FiltersServiceForBuilderProtocol {
                                        id: configuration.appId,
                                        cid: configuration.cid,
                                        lang: configuration.currentLanguage) { [unowned self] filtersMeta in
-    
+
             if let meta = filtersMeta {
                 do {
                     try saveFiltersMetaToDB(meta)

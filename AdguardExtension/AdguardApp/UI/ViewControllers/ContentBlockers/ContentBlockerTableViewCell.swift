@@ -107,11 +107,11 @@ final class ContentBlockerTableViewCell: UITableViewCell, Reusable {
             stateImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: isIpadTrait ? 20.0 : 16.0),
             stateImageView.widthAnchor.constraint(equalToConstant: isIpadTrait ? 32.0 : 24.0),
             stateImageView.heightAnchor.constraint(equalToConstant: isIpadTrait ? 32.0 : 24.0),
-    
+
             cbNameLabel.leadingAnchor.constraint(equalTo: stateImageView.trailingAnchor, constant: isIpadTrait ? 24.0 : 16.0),
             cbNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: isIpadTrait ? -24.0 : -16.0),
             cbNameLabel.topAnchor.constraint(equalTo: stateImageView.topAnchor),
-    
+
             cbDescriptionLabel.leadingAnchor.constraint(equalTo: cbNameLabel.leadingAnchor),
             cbDescriptionLabel.trailingAnchor.constraint(equalTo: cbNameLabel.trailingAnchor),
             cbDescriptionLabel.topAnchor.constraint(equalTo: cbNameLabel.bottomAnchor, constant: -2.0)

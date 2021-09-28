@@ -39,7 +39,7 @@ class DnsStatisticsRecord: CustomDebugStringConvertible {
             let requests = resultSet["requests"] as? Int,
             let encrypted = resultSet["encrypted"] as? Int,
             let elapsedSumm = resultSet["elapsedSumm"] as? Int {
-    
+
             self.date = date
             self.requests = requests
             self.encrypted = encrypted

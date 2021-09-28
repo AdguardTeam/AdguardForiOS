@@ -78,7 +78,7 @@
         // check for a null row
         if (c) {
             NSString *s = [NSString stringWithUTF8String:c];
-    
+
             [object setValue:s forKey:[NSString stringWithUTF8String:sqlite3_column_name([_statement statement], columnIdx)]];
         }
     }
@@ -123,7 +123,7 @@
 
         int columnIdx = 0;
         for (columnIdx = 0; columnIdx < columnCount; columnIdx++) {
-    
+
             NSString *columnName = [NSString stringWithUTF8String:sqlite3_column_name([_statement statement], columnIdx)];
             id objectValue = [self objectForColumnIndex:columnIdx];
             [dict setObject:objectValue forKey:columnName];

@@ -64,7 +64,7 @@ final class DnsProviderDetailsModel {
                 let defaultDnsProtocol = provider.dnsServers.first!.type
                 return dnsProtocols.contains(activeProtocol) ? activeProtocol : defaultDnsProtocol
             }
-    
+
             return provider.dnsServers.first!.type
         }
         set {

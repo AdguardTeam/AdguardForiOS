@@ -65,11 +65,11 @@
 
         if (_locked)
             return YES;
-    
+
         if ([self open]) {
 
             if (flock(_fileDescriptor, LOCK_EX | LOCK_NB) == 0){
-        
+
                 _locked = YES;
                 return YES;
             }
@@ -87,9 +87,9 @@
             return YES;
 
         if ([self open]) {
-    
+
             if (flock(_fileDescriptor, LOCK_EX ) == 0){
-        
+
                 _locked = YES;
                 return YES;
             }
@@ -107,7 +107,7 @@
             return YES;
 
         if (_fileDescriptor >= 0 && flock(_fileDescriptor, LOCK_UN ) == 0){
-    
+
             _locked = NO;
             return YES;
         }

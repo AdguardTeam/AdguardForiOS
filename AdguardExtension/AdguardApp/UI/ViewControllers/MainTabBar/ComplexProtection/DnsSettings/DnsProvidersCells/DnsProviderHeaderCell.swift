@@ -98,7 +98,7 @@ final class DnsProviderHeaderCell : UITableViewCell, Reusable {
             logoImageView.heightAnchor.constraint(equalToConstant: logoImageViewHeightConst),
             logoImageView.widthAnchor.constraint(equalToConstant: logoImageViewWidthConst),
             logoImageView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
-    
+
             descriptionLabel.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: topConst),
             descriptionLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 24.0),
             descriptionLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -24.0),

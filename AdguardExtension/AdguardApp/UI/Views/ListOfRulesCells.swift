@@ -36,7 +36,7 @@ class EnableListOfRulesCell: UITableViewCell {
     var type: RulesType? {
         didSet{
             var image = UIImage()
-    
+
             switch type {
             case .safariUserfilter:
                 image = UIImage(named: "custom") ?? UIImage()
@@ -53,7 +53,7 @@ class EnableListOfRulesCell: UITableViewCell {
             case .none:
                 image = UIImage()
             }
-    
+
             iconImageView.image = image
         }
     }
@@ -97,7 +97,7 @@ class DesciptionCell: UITableViewCell {
             descriptionTextView.text = ""
             let style = NSMutableParagraphStyle()
             style.alignment = .center
-    
+
             headerText.addAttribute(.foregroundColor, value: theme?.lightGrayTextColor ?? .black, range: NSRange(location: 0, length: headerText.length))
             headerText.addAttribute(.font, value: font, range: NSRange(location: 0, length: headerText.length))
             headerText.addAttributes([.paragraphStyle : style], range: NSRange(location: 0, length: headerText.length))
@@ -173,15 +173,15 @@ class NormalRuleCell: UITableViewCell {
 
     var type: RulesType? {
         didSet{
-    
+
             if type == .safariUserfilter || type == .systemBlacklist {
                 ruleNameLabel.textColor = rule?.textColor
             }
 
             ruleStateImageView.isHidden = type == .systemWhitelist || type == .systemBlacklist
-    
+
             let fontSize: CGFloat = (isBigScreen ?? false) ? 20.0 : 16.0
-    
+
             if type == .safariUserfilter {
                 ruleNameLabel.font = UIFont(name: "PTMono-Regular", size: fontSize)
                 topConstraint.constant = 6.0
@@ -241,7 +241,7 @@ class SelectRuleCell: UITableViewCell {
             let selected = ruleIsSelected ?? false
             let selectedImage = UIImage(named: "check") ?? UIImage()
             let unselectedImage = UIImage(named: "check-off") ?? UIImage()
-    
+
             selectRuleImageView.image = selected ? selectedImage : unselectedImage
         }
     }

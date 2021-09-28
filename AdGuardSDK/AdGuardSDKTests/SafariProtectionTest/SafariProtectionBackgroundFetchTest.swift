@@ -53,7 +53,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
         XCTAssertEqual(cbStorage.invokedSaveCount, 0)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
         XCTAssertEqual(dnsBackgroundFetchUpdater.updateFiltersInBackgroundCalledCount, 1)
-    
+
 
         let expectedResult2 = BackgroundFetchUpdateResult(
             backgroundFetchResult: .newData,
@@ -73,7 +73,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
         XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
         XCTAssertEqual(dnsBackgroundFetchUpdater.updateFiltersInBackgroundCalledCount, 1)
-    
+
 
         let expectedResult3 = BackgroundFetchUpdateResult(
             backgroundFetchResult: .newData,
@@ -93,7 +93,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
         XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
         XCTAssertEqual(dnsBackgroundFetchUpdater.updateFiltersInBackgroundCalledCount, 1)
-    
+
 
         let expectedResult4 = BackgroundFetchUpdateResult(
             backgroundFetchResult: .newData,
@@ -135,7 +135,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
         XCTAssertEqual(cbStorage.invokedSaveCount, 0)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
         XCTAssertEqual(dnsBackgroundFetchUpdater.updateFiltersInBackgroundCalledCount, 1)
-    
+
 
         let expectedResult2 = BackgroundFetchUpdateResult(
             backgroundFetchResult: .newData,
@@ -156,7 +156,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
         XCTAssertEqual(cbStorage.invokedSaveCount, 0)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
         XCTAssertEqual(dnsBackgroundFetchUpdater.updateFiltersInBackgroundCalledCount, 2)
-    
+
 
         let expectedResult3 = BackgroundFetchUpdateResult(
             backgroundFetchResult: .noData,
@@ -177,7 +177,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
         XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
         XCTAssertEqual(dnsBackgroundFetchUpdater.updateFiltersInBackgroundCalledCount, 2)
-    
+
 
         let expectedResult4 = BackgroundFetchUpdateResult(
             backgroundFetchResult: .newData,
@@ -198,7 +198,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
         XCTAssertEqual(cbStorage.invokedSaveCount, 2)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
         XCTAssertEqual(dnsBackgroundFetchUpdater.updateFiltersInBackgroundCalledCount, 2)
-    
+
 
         let expectedResult5 = BackgroundFetchUpdateResult(
             backgroundFetchResult: .noData,
@@ -219,7 +219,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
         XCTAssertEqual(cbStorage.invokedSaveCount, 2)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
         XCTAssertEqual(dnsBackgroundFetchUpdater.updateFiltersInBackgroundCalledCount, 2)
-    
+
 
         let expectedResult6 = BackgroundFetchUpdateResult(
             backgroundFetchResult: .newData,
@@ -240,7 +240,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
         XCTAssertEqual(cbStorage.invokedSaveCount, 2)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 2)
         XCTAssertEqual(dnsBackgroundFetchUpdater.updateFiltersInBackgroundCalledCount, 2)
-    
+
 
         let expectedResult7 = BackgroundFetchUpdateResult(
             backgroundFetchResult: .newData,
@@ -279,7 +279,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
         wait(for: [expectation], timeout: 0.5)
         XCTAssertEqual(filters.updateAllMetaCalledCount, 1)
         filters.updateAllMetaCalledCount = 0
-    
+
 
         let expectation2 = XCTestExpectation()
         safariProtection.finishBackgroundUpdate { error in
@@ -309,7 +309,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.5)
-    
+
 
         let expectedResult2 = BackgroundFetchUpdateResult(
             backgroundFetchResult: .newData,
@@ -331,7 +331,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
         filters.updateAllMetaCalledCount = 0
         converter.convertFiltersCalledCount = 0
         cbStorage.invokedSaveCount = 0
-    
+
 
         let expectation3 = XCTestExpectation()
         safariProtection.finishBackgroundUpdate { error in
@@ -361,7 +361,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.5)
-    
+
 
         let expectedResult2 = BackgroundFetchUpdateResult(
             backgroundFetchResult: .newData,
@@ -383,7 +383,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
         filters.updateAllMetaCalledCount = 0
         converter.convertFiltersCalledCount = 0
         cbStorage.invokedSaveCount = 0
-    
+
 
         cbService.updateContentBlockersError = MetaStorageMockError.error
         let expectation3 = XCTestExpectation()
@@ -414,7 +414,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.5)
-    
+
 
         let expectedResult2 = BackgroundFetchUpdateResult(
             backgroundFetchResult: .newData,
@@ -429,7 +429,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
             expectation2.fulfill()
         }
         wait(for: [expectation2], timeout: 0.5)
-    
+
 
         let expectedResult3 = BackgroundFetchUpdateResult(
             backgroundFetchResult: .newData,
@@ -453,7 +453,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
         converter.convertFiltersCalledCount = 0
         cbStorage.invokedSaveCount = 0
         cbService.updateContentBlockersCalledCount = 0
-    
+
 
         let expectation4 = XCTestExpectation()
         safariProtection.finishBackgroundUpdate { error in
@@ -485,7 +485,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
         wait(for: [expectation], timeout: 0.5)
         XCTAssertEqual(filters.updateAllMetaCalledCount, 1)
         filters.updateAllMetaCalledCount = 0
-    
+
 
         let expectation2 = XCTestExpectation()
         safariProtection.finishBackgroundUpdate { error in

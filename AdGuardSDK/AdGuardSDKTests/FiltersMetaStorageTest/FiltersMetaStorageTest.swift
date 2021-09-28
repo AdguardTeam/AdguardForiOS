@@ -152,7 +152,7 @@ class FiltersMetaStorageTest: XCTestCase {
             let adsGroupId = SafariGroup.GroupType.ads.id
             var filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forLanguage: "en")
             XCTAssertEqual(filters.count, 4)
-    
+
             let filterToModify = filters.first!
             let modifiedFilter = ExtendedFiltersMeta.Meta(filterId: filterToModify.filterId,
                                                           name: "newName",
@@ -169,13 +169,13 @@ class FiltersMetaStorageTest: XCTestCase {
                                                           languages: [],
                                                           tags: [],
                                                           rulesCount: 0)
-    
+
             let isUpdated = try! metaStorage.update(filter: modifiedFilter)
             XCTAssertFalse(isUpdated)
-    
+
             filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forLanguage: "en")
             XCTAssertEqual(filters.count, 4)
-    
+
             let modifiedFilterAfterUpdate = filters.first(where: { filterToModify.filterId == $0.filterId })!
             XCTAssertEqual(modifiedFilterAfterUpdate.displayNumber, filterToModify.displayNumber)
             XCTAssertEqual(modifiedFilterAfterUpdate.version, filterToModify.version)

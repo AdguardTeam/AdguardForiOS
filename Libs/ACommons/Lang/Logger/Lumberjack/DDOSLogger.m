@@ -56,7 +56,7 @@ static DDOSLogger *sharedInstance;
         NSString * message = _logFormatter ? [_logFormatter formatLogMessage:logMessage] : logMessage->_message;
         if (message) {
             const char *msg = [message UTF8String];
-    
+
             switch (logMessage->_flag) {
                 case DDLogFlagError     :
                     os_log_error(OS_LOG_DEFAULT, "%{public}s", msg);

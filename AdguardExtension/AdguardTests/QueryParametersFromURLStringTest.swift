@@ -31,7 +31,7 @@ class QueryParametersFromURLStringTest: XCTestCase {
         let stringTwo = "some_token=123&foo=321&bar=qwerty"
         let stringThree = "foo="
         let stringFour = "="
-    
+
 
         let valOne = stringOne.getQueryParametersFromQueryString()
         let valTwo = stringTwo.getQueryParametersFromQueryString()

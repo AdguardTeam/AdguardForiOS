@@ -122,12 +122,12 @@
                     break;
                 }
             }
-    
+
             if (!recognised)
             {
                 currentTokenOffset ++;
             }
-    
+
             if (currentTokenOffset == inputLength && lastSplitterLocation != inputLength)
                 //input comes to end, put all string remaining to the last statement
             {

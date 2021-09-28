@@ -58,7 +58,7 @@ class ImportSettingsTest: XCTestCase {
 
         for group  in filtersService.groups {
             for filter in group.filters {
-        
+
                 if filter.filterId == 2 {
                     XCTAssertTrue(filter.enabled)
                     return
@@ -92,7 +92,7 @@ class ImportSettingsTest: XCTestCase {
         // check result
         for group  in filtersService.groups {
             for filter in group.filters {
-        
+
                 if filter.filterId == 2 {
                     XCTAssertFalse(filter.enabled)
                     return
@@ -114,7 +114,7 @@ class ImportSettingsTest: XCTestCase {
 
         let expectation = XCTestExpectation()
         importService.applySettings(settings) { (settings) in
-    
+
             let filter = customGroup.filters.first
             XCTAssertNotNil(filter)
             XCTAssertEqual(filter?.enabled, true)
@@ -134,7 +134,7 @@ class ImportSettingsTest: XCTestCase {
         let expectation = XCTestExpectation()
 
         importService.applySettings(settings) { [unowned self] (settings) in
-    
+
             let newFilter = self.dnsFiltersService.filters.first
             XCTAssertNotNil(newFilter)
             XCTAssertEqual(newFilter?.name, "custom_dns")
@@ -156,7 +156,7 @@ class ImportSettingsTest: XCTestCase {
         let expectation = XCTestExpectation()
 
         importService.applySettings(settings) { [unowned self] (settings) in
-    
+
             let activeServer = dnsProviders.activeDnsServer
             XCTAssertNotNil(activeServer)
             XCTAssertEqual(activeServer?.serverId, "123")
@@ -174,9 +174,9 @@ class ImportSettingsTest: XCTestCase {
         let expectation = XCTestExpectation()
 
         importService.applySettings(settings) { [unowned self] (settings) in
-    
+
             XCTAssertTrue(purchaseService.activateLicesnseCalled)
-    
+
             expectation.fulfill()
         }
 
@@ -190,7 +190,7 @@ class ImportSettingsTest: XCTestCase {
         let expectation = XCTestExpectation()
 
         importService.applySettings(settings) { [unowned self] (settings) in
-    
+
             let userRules = antibanner.rules[ASDF_USER_FILTER_ID as! NSNumber]
             XCTAssertEqual(userRules!.first!.ruleText, "rule")
             expectation.fulfill()
@@ -206,7 +206,7 @@ class ImportSettingsTest: XCTestCase {
         let expectation = XCTestExpectation()
 
         importService.applySettings(settings) { [unowned self] (settings) in
-    
+
             XCTAssertEqual(dnsFiltersService.userRules.first, "rule")
             expectation.fulfill()
         }
@@ -243,7 +243,7 @@ class ImportSettingsTest: XCTestCase {
         let expectation = XCTestExpectation()
 
         importService.applySettings(settings) { [unowned self] (settings) in
-    
+
             let userRules = antibanner.rules[ASDF_USER_FILTER_ID as NSNumber]
             XCTAssertEqual(userRules?.count, 2)
             XCTAssertEqual(userRules![0].ruleText, "old_rule")
@@ -266,14 +266,14 @@ class ImportSettingsTest: XCTestCase {
         let expectation = XCTestExpectation()
 
         importService.applySettings(settings) { [unowned self] (settings) in
-    
+
             let filters = self.dnsFiltersService.filters
             XCTAssertEqual(filters.count, 2)
             XCTAssertEqual(filters[1].name, "new_dns_filter_name")
             XCTAssertEqual(filters[1].subscriptionUrl, "new_dns_filter_url")
-    
+
             XCTAssertFalse(filters[0].enabled)
-    
+
             expectation.fulfill()
         }
 
@@ -301,12 +301,12 @@ class ImportSettingsTest: XCTestCase {
         let expectation = XCTestExpectation()
 
         importService.applySettings(settings) { [unowned self] (settings) in
-    
+
             let groups = self.filtersService.groups
-    
+
             XCTAssertEqual(groups[0].filters[0].enabled, false) // override works
             XCTAssertEqual(groups[0].filters[1].enabled, true) // apply filter settings works
-    
+
             expectation.fulfill()
         }
 

@@ -124,9 +124,9 @@ public final class SafariProtection: SafariProtectionProtocol {
                 DispatchQueue.main.async { onResetFinished(CommonError.missingSelf) }
                 return
             }
-    
+
             Logger.logInfo("(SafariProtection) - reset start")
-    
+
             //Update config with default configuration
             self.configuration.updateConfig(with: self.defaultConfiguration)
 
@@ -139,19 +139,19 @@ public final class SafariProtection: SafariProtectionProtocol {
                 group.leave()
             }
             group.wait()
-    
+
             guard filtersError == nil else {
                 Logger.logError("(SafariProtection) - reset; Error reseting filters service; Error: \(filtersError!)")
                 self.completionQueue.async { onResetFinished(filtersError) }
                 return
             }
-    
+
             do {
                 Logger.logInfo("(SafariProtection) - reset; filters service was reset")
-        
+
                 try self.safariManagers.reset()
                 Logger.logInfo("(SafariProtection) - reset; user rules managers were reset")
-        
+
                 try self.cbStorage.reset()
                 Logger.logInfo("(SafariProtection) - reset; CB storage was reset")
             } catch {
@@ -159,7 +159,7 @@ public final class SafariProtection: SafariProtectionProtocol {
                 self.completionQueue.async { onResetFinished(error) }
                 return
             }
-                
+
             self.reloadContentBlockers { error in
                 if let error = error {
                     Logger.logError("(SafariProtection) - reset; Error reloading CBs after reset; Error: \(error)")
@@ -195,7 +195,7 @@ public final class SafariProtection: SafariProtectionProtocol {
                 onCbReloaded(CommonError.missingSelf)
                 return
             }
-    
+
             do {
                 let convertedfilters = self.converter.convertFiltersAndUserRulesToJsons()
                 try self.cbStorage.save(converterResults: convertedfilters)
@@ -205,14 +205,14 @@ public final class SafariProtection: SafariProtectionProtocol {
                 self.workingQueue.sync { onCbReloaded(error) }
                 return
             }
-    
+
             self.cbService.updateContentBlockers { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection) - reloadContentBlockers; self is missing!")
                     self?.workingQueue.sync { onCbReloaded(CommonError.missingSelf) }
                     return
                 }
-        
+
                 self.workingQueue.sync { onCbReloaded(error) }
             }
         }

@@ -389,7 +389,7 @@ static int FMDatabaseBusyHandler(void *f, int count) {
 - (BOOL)databaseExists {
 
     if (!_db) {
-    
+
         NSLog(@"The FMDatabase %@ is not open.", self);
 
     #ifndef NS_BLOCK_ASSERTIONS
@@ -695,12 +695,12 @@ static int FMDatabaseBusyHandler(void *f, int count) {
                 NSLog(@"DB Query: %@", sql);
                 NSLog(@"DB Path: %@", _databasePath);
             }
-    
+
             if (_crashOnErrors) {
                 NSAssert(false, @"DB Error: %d \"%@\"", [self lastErrorCode], [self lastErrorMessage]);
                 abort();
             }
-    
+
             sqlite3_finalize(pStmt);
             _isExecutingStatement = NO;
             return nil;
@@ -715,15 +715,15 @@ static int FMDatabaseBusyHandler(void *f, int count) {
     if (dictionaryArgs) {
 
         for (NSString *dictionaryKey in [dictionaryArgs allKeys]) {
-    
+
             // Prefix the key with a colon.
             NSString *parameterName = [[NSString alloc] initWithFormat:@":%@", dictionaryKey];
-    
+
             // Get the index for the parameter name.
             int namedIdx = sqlite3_bind_parameter_index(pStmt, [parameterName UTF8String]);
-    
+
             FMDBRelease(parameterName);
-    
+
             if (namedIdx > 0) {
                 // Standard binding from here.
                 [self bindObject:[dictionaryArgs objectForKey:dictionaryKey] toColumn:namedIdx inStatement:pStmt];
@@ -736,9 +736,9 @@ static int FMDatabaseBusyHandler(void *f, int count) {
         }
     }
     else {
-    
+
         while (idx < queryCount) {
-    
+
             if (arrayArgs && idx < (int)[arrayArgs count]) {
                 obj = [arrayArgs objectAtIndex:(NSUInteger)idx];
             }
@@ -749,7 +749,7 @@ static int FMDatabaseBusyHandler(void *f, int count) {
                 //We ran out of arguments
                 break;
             }
-    
+
             if (_traceExecution) {
                 if ([obj isKindOfClass:[NSData class]]) {
                     NSLog(@"data: %ld bytes", (unsigned long)[(NSData*)obj length]);
@@ -758,9 +758,9 @@ static int FMDatabaseBusyHandler(void *f, int count) {
                     NSLog(@"obj: %@", obj);
                 }
             }
-    
+
             idx++;
-    
+
             [self bindObject:obj toColumn:idx inStatement:pStmt];
         }
     }
@@ -866,18 +866,18 @@ static int FMDatabaseBusyHandler(void *f, int count) {
                 NSLog(@"DB Query: %@", sql);
                 NSLog(@"DB Path: %@", _databasePath);
             }
-    
+
             if (_crashOnErrors) {
                 NSAssert(false, @"DB Error: %d \"%@\"", [self lastErrorCode], [self lastErrorMessage]);
                 abort();
             }
-    
+
             sqlite3_finalize(pStmt);
-    
+
             if (outErr) {
                 *outErr = [self errorWithMessage:[NSString stringWithUTF8String:sqlite3_errmsg(_db)]];
             }
-    
+
             _isExecutingStatement = NO;
             return NO;
         }
@@ -891,19 +891,19 @@ static int FMDatabaseBusyHandler(void *f, int count) {
     if (dictionaryArgs) {
 
         for (NSString *dictionaryKey in [dictionaryArgs allKeys]) {
-    
+
             // Prefix the key with a colon.
             NSString *parameterName = [[NSString alloc] initWithFormat:@":%@", dictionaryKey];
-    
+
             // Get the index for the parameter name.
             int namedIdx = sqlite3_bind_parameter_index(pStmt, [parameterName UTF8String]);
-    
+
             FMDBRelease(parameterName);
-    
+
             if (namedIdx > 0) {
                 // Standard binding from here.
                 [self bindObject:[dictionaryArgs objectForKey:dictionaryKey] toColumn:namedIdx inStatement:pStmt];
-        
+
                 // increment the binding count, so our check below works out
                 idx++;
             }
@@ -915,7 +915,7 @@ static int FMDatabaseBusyHandler(void *f, int count) {
     else {
 
         while (idx < queryCount) {
-    
+
             if (arrayArgs && idx < (int)[arrayArgs count]) {
                 obj = [arrayArgs objectAtIndex:(NSUInteger)idx];
             }
@@ -926,7 +926,7 @@ static int FMDatabaseBusyHandler(void *f, int count) {
                 //We ran out of arguments
                 break;
             }
-    
+
             if (_traceExecution) {
                 if ([obj isKindOfClass:[NSData class]]) {
                     NSLog(@"data: %ld bytes", (unsigned long)[(NSData*)obj length]);
@@ -935,9 +935,9 @@ static int FMDatabaseBusyHandler(void *f, int count) {
                     NSLog(@"obj: %@", obj);
                 }
             }
-    
+
             idx++;
-    
+
             [self bindObject:obj toColumn:idx inStatement:pStmt];
         }
     }

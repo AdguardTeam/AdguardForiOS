@@ -113,15 +113,15 @@ final class DnsProviderFeatureCell: UITableViewCell, Reusable {
             logoImageView.trailingAnchor.constraint(equalTo: self.nameLabel.leadingAnchor, constant: -leadingTrailingConst),
             logoImageView.heightAnchor.constraint(equalToConstant: heightWidthConst),
             logoImageView.widthAnchor.constraint(equalToConstant: heightWidthConst),
-    
+
             nameLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: topBottomConst),
             nameLabel.trailingAnchor.constraint(equalTo: self.logoCheckImageView.leadingAnchor, constant: -30),
-    
+
             descriptionLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 2.0),
             descriptionLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
             descriptionLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
             descriptionLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -topBottomConst),
-    
+
             logoCheckImageView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
             logoCheckImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -leadingTrailingConst),
             logoCheckImageView.heightAnchor.constraint(equalToConstant: heightWidthConst),

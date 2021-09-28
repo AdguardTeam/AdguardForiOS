@@ -53,11 +53,11 @@
         ABECRequest *request = [[ABECRequest alloc] initWithURL:theURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval: 30];
 
         if (request) {
-    
+
             [request setHTTPMethod:@"POST"];
-    
+
             if (parameters.count){
-        
+
                 [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
                 [request setHTTPBody:[[ABECRequest createStringFromParameters:parameters] dataUsingEncoding:NSUTF8StringEncoding]];
                 for(NSString* key in headers.allKeys) {
@@ -76,7 +76,7 @@
         ABECRequest *request = [[ABECRequest alloc] initWithURL:theURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval: 30];
 
         if (request) {
-    
+
             [request setHTTPMethod:@"POST"];
             [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
    
@@ -92,17 +92,17 @@
     @autoreleasepool {
 
         if (parameters.count){
-    
+
             NSString *paramString = [NSString isNullOrEmpty:[theURL query]] ? @"?" : @"&";
             paramString = [paramString stringByAppendingString:[ABECRequest createStringFromParameters:parameters]];
-    
+
             theURL = [NSURL URLWithString:[[theURL absoluteString] stringByAppendingString:paramString]];
         }
 
         ABECRequest *request = [[ABECRequest alloc] initWithURL:theURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval: 30];
 
         if (request) {
-    
+
             [request setHTTPMethod:@"GET"];
         }
 

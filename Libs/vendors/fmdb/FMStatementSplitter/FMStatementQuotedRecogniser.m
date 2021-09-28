@@ -160,7 +160,7 @@
                 }
                 searchRange.length   = searchRange.location + searchRange.length - quotedPosition;
                 searchRange.location = quotedPosition;
-        
+
                 if (endRange.location < searchRange.location)
                 {
                     matchedEndSequence = CFStringFindWithOptions((CFStringRef)tokenString, (CFStringRef)self.endQuote, searchRange, 0L, &endRange);

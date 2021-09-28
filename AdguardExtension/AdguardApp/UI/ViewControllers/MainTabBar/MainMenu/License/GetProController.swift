@@ -64,7 +64,7 @@ class GetProController: UIViewController {
         purchaseObserver = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification),
                                                object: nil, queue: nil)
         { [weak self](notification) in
-    
+
             DispatchQueue.main.async {
                 if let info = notification.userInfo {
                     self?.processNotification(info: info)
@@ -148,7 +148,7 @@ class GetProController: UIViewController {
         DispatchQueue.main.async { [weak self] in
             let type = info[PurchaseService.kPSNotificationTypeKey] as? String
             let error = info[PurchaseService.kPSNotificationErrorKey] as? NSError
-    
+
             switch type {
             case PurchaseService.kPSNotificationPurchaseSuccess:
                 self?.purchaseSuccess()

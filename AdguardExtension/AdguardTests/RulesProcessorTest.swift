@@ -460,7 +460,7 @@ class RulesProcessorTest: XCTestCase {
 
         let data = try? NotEcapingJsonSerialization.data(withJSONObject: obj!, options: [])
         let expectedData = try? NotEcapingJsonSerialization.data(withJSONObject: expectedObj!, options: [])
-    
+
 
         XCTAssertEqual(data, expectedData)
     }
@@ -478,7 +478,7 @@ class RulesProcessorTest: XCTestCase {
 
         let data = try? NotEcapingJsonSerialization.data(withJSONObject: obj!, options: [])
         let expectedData = try? NotEcapingJsonSerialization.data(withJSONObject: expectedObj!, options: [])
-    
+
 
         XCTAssertEqual(data, expectedData)
     }
@@ -513,7 +513,7 @@ class RulesProcessorTest: XCTestCase {
 
         let data = try? NotEcapingJsonSerialization.data(withJSONObject: obj!, options: [])
         let expectedData = try? NotEcapingJsonSerialization.data(withJSONObject: expectedObj!, options: [])
-    
+
 
         XCTAssertEqual(data, expectedData)
     }

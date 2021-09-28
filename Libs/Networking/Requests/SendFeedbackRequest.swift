@@ -36,7 +36,7 @@ final class SendFeedbackRequest: RequestProtocol {
             var request = URLRequest(url: url)
             request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
             request.httpMethod = "POST"
-    
+
             let parameters: [String: Any] = [
                 "applicationId" : feedBack.applicationId ?? "",
                 "version" : feedBack.version ?? "",

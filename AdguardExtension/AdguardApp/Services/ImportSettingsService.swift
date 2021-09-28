@@ -106,7 +106,7 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
 //            guard let uniqueFilters = uniqueCustomFilterSettings(filters: customDnsFilters, filterSettings: dnsFilters) as? [DnsFilterSettings] else { return }
 //            uniqueCustomDnsFilterSettings = uniqueFilters
         }
-    
+
 
         let resultDnsFilters = applyDnsFilters(uniqueCustomDnsFilterSettings, override: settings.overrideDnsFilters ?? false)
         resultSettings.dnsFilters = resultDnsFilters
@@ -161,7 +161,7 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
             if filter.status == .enabled {
 
                 let cbFilter = allFilters.first { $0.filterId == filter.id }
-        
+
                 if cbFilter != nil {
 //                    safariProtection.setFilter(withId: cbFilter!.filterId, cbFilter!.group.groupId, enabled: filter.enable) { error in
 //                        //todo:
@@ -172,7 +172,7 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
                     filter.status = .unsuccessful
                 }
             }
-    
+
             resultFilters.append(filter)
         }
 
@@ -213,17 +213,17 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
     private func applyDnsFilters(_ filters: [DnsFilterSettings], override: Bool)->[DnsFilterSettings] {
 
         if override {
-    
+
         }
 
         var resultDnsFilters: [DnsFilterSettings] = []
 
         let group = DispatchGroup()
         for var filter in filters {
-    
+
             if filter.status == .enabled {
                 group.enter()
-        
+
                 subscribeDnsFilter(filter) { (success) in
                     filter.status = success ? .successful : .unsuccessful
                     resultDnsFilters.append(filter)
@@ -258,12 +258,12 @@ class ImportSettingsService: ImportSettingsServiceProtocol {
     func applyDnsRules(_ rules: [String]?, override: Bool) {
 
         if override {
-    
+
         }
 
         if let dnsRules = rules {
             for rule in dnsRules {
-        
+
             }
         }
     }

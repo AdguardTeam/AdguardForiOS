@@ -40,7 +40,7 @@ class PacketTunnelProviderProxyTest: XCTestCase {
 
         let expectation = XCTestExpectation()
         packetTunnelProviderProxy.startTunnel(options: nil) { error in
-    
+
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1.5)

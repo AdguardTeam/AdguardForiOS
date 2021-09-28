@@ -47,7 +47,7 @@ enum ChartDateType: Int, CaseIterable {
             let hours = Double(calendar.component(.hour, from: now))
             let minutes = Double(calendar.component(.minute, from: now))
             let interval = hours * hour + minutes * 60.0
-    
+
             return (now, now - interval)
         }
     }

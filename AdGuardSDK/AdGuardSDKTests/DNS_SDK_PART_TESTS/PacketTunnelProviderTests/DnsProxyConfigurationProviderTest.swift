@@ -48,7 +48,7 @@ class DnsProxyConfigurationProviderTest: XCTestCase {
             DnsProxyFilter(filterId: 1, filterPath: "path2")
         ]
         dnsLibsRulesProvider.stubbedEnabledCustomDnsFilters = expectedFilters
-        
+
         let expectedBlocklistFilter = DnsProxyFilter(filterId: DnsUserRuleType.blocklist.enabledRulesFilterId, filterPath: "path4")
         dnsLibsRulesProvider.stubbedBlocklistFilter = expectedBlocklistFilter
         expectedFilters.append(expectedBlocklistFilter)

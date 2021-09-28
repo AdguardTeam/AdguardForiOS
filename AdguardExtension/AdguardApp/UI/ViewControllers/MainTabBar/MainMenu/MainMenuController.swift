@@ -54,7 +54,7 @@ final class MainMenuController: UITableViewController {
         super.viewDidLoad()
         updateTheme()
         settingsImageView.image = UIImage(named: "advanced-settings-icon")
-        
+
         if Bundle.main.isPro {
             LicenseCell.isHidden = true
         }

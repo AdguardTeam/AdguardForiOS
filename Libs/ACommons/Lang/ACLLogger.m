@@ -126,11 +126,11 @@ static ACLLogger *singletonLogger;
         case ACLLDefaultLevel:
             return ACLLDefaultLevel;
             break;
-    
+
         case ACLLDebugLevel:
             return ACLLDebugLevel;
             break;
-    
+
         default:
             return ACLLDefaultLevel;
             break;

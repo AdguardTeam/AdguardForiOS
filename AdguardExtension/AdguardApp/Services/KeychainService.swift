@@ -47,29 +47,29 @@ class KeychainService : KeychainServiceProtocol {
     var appId: String? {
         get {
             let (storedId, notFound) = getStoredAppId()
-    
+
             DDLogInfo("(KeychainService) get appId. strored: \(storedId ?? "nil")")
-    
+
             migrate3_0_0appIdIfNeeded(storedId)
-    
+
             if storedId != nil {
                 return storedId
             }
-    
+
             // storedId == nil
-    
+
             // other errors
             if !notFound {
                 _ = deleteAppId()
             }
-    
+
             let newAppId = generateAppId()
-    
+
             DDLogInfo("(KeychainService) generate new app id: \(newAppId)")
             if !save(appId: newAppId) {
                 return nil
             }
-    
+
             return newAppId
         }
     }
@@ -147,11 +147,11 @@ class KeychainService : KeychainServiceProtocol {
 
         for login in logins {
             let email = login[kSecAttrAccount as String]
-    
+
             let deleteQuery = [kSecClass as String:             kSecClassInternetPassword,
                                kSecAttrServer as String:        server as Any,
                                kSecAttrAccount as String:       email as! String]
-    
+
             let status = SecItemDelete(deleteQuery as CFDictionary)
             if status != errSecSuccess {return false}
         }
@@ -257,23 +257,23 @@ class KeychainService : KeychainServiceProtocol {
         }
 
         for resultDict in resultArr {
-    
+
             guard   let key = resultDict[kSecAttrAccount as String] as? String,
                     let value = resultDict[kSecValueData as String] else {
                     DDLogError("(KeychainService) getStoredAppId error. Unknown result format 2")
                     continue
             }
-    
+
             guard let valueString = String(data: value as! Data, encoding: .utf8) else {
                 DDLogError("(KeychainService) getStoredAppId error. Unknown result format 3")
                 continue
             }
-    
+
             if key != appIdKey {
                 DDLogError("(KeychainService) getStoredAppId error. appIdKey does not match")
                 continue
             }
-    
+
             DDLogInfo("(KeychainService) getStoredAppId - success")
             return (valueString, false)
         }
@@ -338,21 +338,21 @@ class KeychainService : KeychainServiceProtocol {
         }
 
         for record in records {
-    
+
             guard let account = record[kSecAttrAccount as String] else {
                 continue
             }
-    
+
             let deleteQuery = [kSecClass as String:             kSecClassGenericPassword,
                                kSecAttrService as String:        appIdService as Any,
                                kSecAttrAccount as String:       account]
-    
+
             let deleteStatus = SecItemDelete(deleteQuery as CFDictionary)
             if deleteStatus != errSecSuccess {
                 DDLogError("(KeychainService) deleteAppId delete error. Status: \(deleteStatus) ")
                 return false
             }
-    
+
             DDLogInfo("(KeychainService) deleteAppId - success")
         }
 

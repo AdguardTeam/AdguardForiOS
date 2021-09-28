@@ -23,10 +23,10 @@ function Assistant(){
     /*LOAD_LIBRARY_HERE*/
 
    adguardAssistant().start(null, function(ruleText){
-                  
+  
                           settings = window.AdguardAssistant_settings;
                           acceptUrlScheme = (typeof settings !== 'undefined' && typeof settings.urlScheme !== 'undefined') ? settings.urlScheme : "adguard";
-                  
+  
                            var item = acceptUrlScheme + '://add/' + encodeURIComponent(ruleText);
                            document.location = item;
                           });

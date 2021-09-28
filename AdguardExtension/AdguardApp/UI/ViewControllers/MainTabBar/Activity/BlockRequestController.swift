@@ -45,7 +45,7 @@ class BlockRequestCell: UITableViewCell {
         didSet {
             checkBox.isSelected = model?.isSelected ?? false
             domainLabel.text = "..." + (model?.domain ?? "")
-    
+
             model?.theme.setupLabel(domainLabel)
         }
     }

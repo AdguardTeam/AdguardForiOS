@@ -74,7 +74,7 @@ extension URL: CustomSchemeURLParserProtocol {
             let command = String((questionComponents?.first)!)
             let queryString = String((questionComponents?.last)!)
             let params = queryString.getQueryParametersFromQueryString()
-    
+
             return URLParserResult(command: command, params: params)
         }
         else if questionComponents?.count == 1 {

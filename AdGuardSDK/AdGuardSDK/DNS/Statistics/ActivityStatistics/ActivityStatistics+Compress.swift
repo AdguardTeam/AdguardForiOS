@@ -40,7 +40,7 @@ extension ActivityStatistics {
             /// if you are confused `end >= start`
             let start = interval.start
             let end = interval.end
-    
+
             let query = ActivityStatisticsTable.table
                 .select([ActivityStatisticsTable.timeStamp.avgDate,
                          ActivityStatisticsTable.domain,
@@ -51,7 +51,7 @@ extension ActivityStatistics {
                 .where(start...end ~= ActivityStatisticsTable.timeStamp)
                 .group(ActivityStatisticsTable.domain)
                 .order(ActivityStatisticsTable.timeStamp.desc, ActivityStatisticsTable.domain)
-    
+
             let result = try statisticsDb.prepare(query.asSQL()).compactMap { ActivityStatisticsRecord(dbRecord: $0) }
             return result
         }

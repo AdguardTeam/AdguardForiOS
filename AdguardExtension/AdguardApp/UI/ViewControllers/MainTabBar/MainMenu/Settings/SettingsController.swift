@@ -289,7 +289,7 @@ class SettingsController: UITableViewController {
 
         if oldValue != newValue {
             resources.sharedDefaults().set(newValue, forKey: AEDefaultsInvertedWhitelist)
-    
+
             safariProtection.update(allowlistIsInverted: newValue) { [weak self] error in
                 if error != nil {
                     self?.resources.sharedDefaults().set(oldValue, forKey: AEDefaultsInvertedWhitelist)

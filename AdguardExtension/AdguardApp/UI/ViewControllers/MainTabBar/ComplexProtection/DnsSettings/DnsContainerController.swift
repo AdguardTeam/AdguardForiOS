@@ -108,7 +108,7 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
             let button = BottomShadowButton()
             let title = type.buttonTitle.uppercased()
             var color: UIColor!
-    
+
             switch (type) {
             case .addRuleToUserFlter:
                 color = UIColor(hexString: "#DF3812")
@@ -117,13 +117,13 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
                         self.presentBlockRequestController(with: rule, type: type, delegate: self)
                     }
                 }
-        
+
             case .removeDomainFromWhitelist:
                 color = UIColor(hexString: "#DF3812")
                 button.action = {
                     if let record = self.logRecord?.logRecord {
                         let userDomain = self.domainsConverter.whitelistRuleFromDomain(record.userRule ?? "")
-                
+
                         let isOriginalRecord = record.userStatus == .none || record.userStatus == .modified
                         let rules = isOriginalRecord ? record.blockRules : [userDomain]
 
@@ -131,7 +131,7 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
                         self.set(record.userStatus == .movedToWhitelist ? .modified : .removedFromWhitelist)
                     }
                 }
-        
+
             case .removeRuleFromUserFilter:
                 color = UIColor.AdGuardColor.lightGreen1
                 button.action = {
@@ -143,7 +143,7 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
                         self.set(self.logRecord!.logRecord.userStatus == .movedToBlacklist ? .modified : .removedFromBlacklist)
                     }
                 }
-        
+
             case .addDomainToWhitelist:
                 color = UIColor.AdGuardColor.lightGreen1
                 button.action = {
@@ -152,10 +152,10 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
                     }
                 }
             }
-    
+
             button.title = title
             button.titleColor = color
-    
+
             return button
         }
 

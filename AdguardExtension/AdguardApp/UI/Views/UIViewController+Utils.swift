@@ -32,11 +32,11 @@ extension UIViewController {
         DispatchQueue.main.async { [weak self] in
             let activityStoryBoard = UIStoryboard(name: "Activity", bundle: nil)
             guard let controller = activityStoryBoard.instantiateViewController(withIdentifier: "BlockRequestControllerId") as? BlockRequestController else { return }
-    
+
             controller.fullDomain = domain
             controller.type = type
             controller.delegate = delegate
-    
+
             self?.present(controller, animated: true, completion: nil)
         }
     }
@@ -45,7 +45,7 @@ extension UIViewController {
         DispatchQueue.main.async { [weak self] in
             let activityStoryBoard = UIStoryboard(name: "Activity", bundle: nil)
             guard let controller = activityStoryBoard.instantiateViewController(withIdentifier: "EditBlockRequestController") as? EditBlockRequestController else { return }
-    
+
             controller.type = type
             controller.domain = domain
             controller.originalDomain = originalDomain
@@ -64,7 +64,7 @@ extension UIViewController {
         } else {
             selector = action
         }
-        
+
         let barButtonItem = UIBarButtonItem(title: "     ", style: .plain, target: self, action: selector)
         barButtonItem.image = imgBackArrow
 

@@ -143,7 +143,7 @@ class VpnManagerTest: XCTestCase {
         }
 
         group.wait()
-        
+
         XCTAssertTrue(vpnManager.vpnInstalled)
     }
 
@@ -185,7 +185,7 @@ class VpnManagerTest: XCTestCase {
         vpnManager.migrateOldVpnSettings { _ in
             group.leave()
         }
-    
+
         group.wait()
 
         // check migration succeded

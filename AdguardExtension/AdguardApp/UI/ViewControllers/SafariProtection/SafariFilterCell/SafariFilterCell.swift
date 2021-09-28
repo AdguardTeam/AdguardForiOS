@@ -155,11 +155,11 @@ final class SafariFilterCell: UITableViewCell, Reusable {
             stateSwitch.topAnchor.constraint(equalTo: contentView.topAnchor, constant: topBottomInset),
             stateSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -sideInset),
             stateSwitch.widthAnchor.constraint(equalToConstant: switchWidth),
-    
+
             stackView.topAnchor.constraint(equalTo: stateSwitch.topAnchor),
             stackView.trailingAnchor.constraint(equalTo: stateSwitch.leadingAnchor, constant: -sideInset),
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: sideInset),
-    
+
             tagsStackView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
             tagsStackView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             tagsStackView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 8.0),
@@ -176,7 +176,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
             stateSwitch.topAnchor.constraint(equalTo: contentView.topAnchor, constant: topBottomInset),
             stateSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -sideInset),
             stateSwitch.widthAnchor.constraint(equalToConstant: switchWidth),
-    
+
             stackView.topAnchor.constraint(equalTo: stateSwitch.topAnchor),
             stackView.trailingAnchor.constraint(equalTo: stateSwitch.leadingAnchor, constant: -sideInset),
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: sideInset),
@@ -232,14 +232,14 @@ final class SafariFilterCell: UITableViewCell, Reusable {
             button.translatesAutoresizingMaskIntoConstraints = false
             button.widthAnchor.constraint(equalToConstant: width).isActive = true
             button.heightAnchor.constraint(equalToConstant: tagHeight).isActive = true
-    
+
             if currentStackWidth + width > tagsStackViewWidth {
                 addEmptyView(to: horStack, currentStackWidth: currentStackWidth)
                 tagsStackView.addArrangedSubview(horStack)
                 horStack = getHorizontalTagStackView()
                 currentStackWidth = 0.0
             }
-    
+
             horStack.addArrangedSubview(button)
             currentStackWidth += width
             currentStackWidth += tagsInset

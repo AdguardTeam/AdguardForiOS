@@ -45,7 +45,7 @@ struct SocialNetworkAuthParametersParser: IURLSchemeParametersParser {
         case socialErrorUserNotFound:
             userInfo[PurchaseService.kPSNotificationTypeKey] = PurchaseService.kPSNotificationLoginUserNotFound
             userInfo[PurchaseService.kPSNotificationErrorKey] = NSError(domain: LoginService.loginErrorDomain, code: LoginService.socialUserNotFound, userInfo: nil)
-    
+
         default:
             break
         }

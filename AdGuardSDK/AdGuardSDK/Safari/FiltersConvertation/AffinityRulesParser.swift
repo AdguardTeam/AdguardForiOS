@@ -103,19 +103,19 @@ struct AffinityRulesParser: AffinityRulesParserProtocol {
 
         // Iterating over file's content line by line
         for (lineIndex, line) in strings.enumerated() {
-    
+
             // If first line contains Adblock Plus than it's not a rule or affinity
             if lineIndex == 0, line.lowercased().contains(adblockFirstLine.lowercased()) {
                 continue
             }
-    
+
             let trimmedLine = line.trimmingCharacters(in: .whitespaces)
-    
+
             // If line is empty just go on
             if trimmedLine.count == 0 {
                 continue
             }
-    
+
             // Affinity mask found
             if trimmedLine.hasPrefix(affinityPrefix) {
                 affinityMask = parseContentBlockerTypes(from: line)
@@ -130,7 +130,7 @@ struct AffinityRulesParser: AffinityRulesParserProtocol {
             else if trimmedLine.first == "!"{
                 continue
             }
-    
+
             let rule = FilterRule(rule: trimmedLine, affinity: affinityMask)
             rules.append(rule)
         }

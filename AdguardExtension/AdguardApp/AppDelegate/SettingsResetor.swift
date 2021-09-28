@@ -64,28 +64,28 @@ struct SettingsResetor: ISettingsResetor {
             self.vpnManager.removeVpnConfiguration { _ in }
             self.resources.reset()
             resetStatistics()
-    
+
             let group = DispatchGroup()
             group.enter()
-    
+
             self.purchaseService.reset {
                 group.leave()
             }
             group.wait()
  
             appDelegate?.setAppInterfaceStyle()
-    
+
             let dnsProvidersManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!
             try? dnsProvidersManager.reset()
-    
+
             if #available(iOS 14.0, *) {
                 let nativeDnsManager: NativeDnsSettingsManagerProtocol = ServiceLocator.shared.getService()!
                 nativeDnsManager.reset()
             }
-    
+
             // Notify that settings were reset
             NotificationCenter.default.post(name: .resetSettings, object: self)
-    
+
             DispatchQueue.main.async {
                 appDelegate?.setMainPageAsCurrentAndPopToRootControllersEverywhere()
                 DDLogInfo("(ResetSettings) Reseting is over")

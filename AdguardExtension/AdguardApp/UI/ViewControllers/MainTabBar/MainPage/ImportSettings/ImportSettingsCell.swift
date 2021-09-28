@@ -53,7 +53,7 @@ class ImportSettingsCell: UITableViewCell {
             case (.notImported):
                 image = UIImage(named: "cross")
             }
-    
+
             check.image = image
         } else {
             check.isHighlighted = model.enabled

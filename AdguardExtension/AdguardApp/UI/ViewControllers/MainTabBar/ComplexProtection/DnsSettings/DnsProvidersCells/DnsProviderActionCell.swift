@@ -97,10 +97,10 @@ final class DnsProviderActionCell: UITableViewCell, Reusable {
             actionNameLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: leadingTrailingConst),
             actionNameLabel.trailingAnchor.constraint(lessThanOrEqualTo: self.selectedOptionLabel.leadingAnchor, constant: -20.0),
             actionNameLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -topBottomConst),
-    
+
             selectedOptionLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
             selectedOptionLabel.trailingAnchor.constraint(equalTo: rightArrowImageView.leadingAnchor, constant: -leadingTrailingConst),
-    
+
             rightArrowImageView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
             rightArrowImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -leadingTrailingConst),
             rightArrowImageView.heightAnchor.constraint(equalToConstant: heightWidthConst),

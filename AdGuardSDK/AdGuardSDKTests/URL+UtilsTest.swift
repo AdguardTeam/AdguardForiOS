@@ -23,7 +23,7 @@ class URL_UtilsTest: XCTestCase {
             XCTAssertTrue(TestsFileManager.rootDirectory.isDirectory)
             XCTAssertFalse(TestsFileManager.workingUrl.isDirectory)
             try FileManager.default.createDirectory(at: TestsFileManager.workingUrl, withIntermediateDirectories: false, attributes: nil)
-    
+
             XCTAssertTrue(TestsFileManager.workingUrl.isDirectory)
         } catch {
             XCTFail("\(error)")
@@ -35,9 +35,9 @@ class URL_UtilsTest: XCTestCase {
             XCTAssertTrue(TestsFileManager.rootDirectory.isDirectory)
             XCTAssertFalse(TestsFileManager.workingUrl.isDirectory)
             let testFileUrl = TestsFileManager.workingUrl.appendingPathComponent("testFile")
-    
+
             try FileManager.default.createDirectory(at: TestsFileManager.workingUrl, withIntermediateDirectories: false, attributes: nil)
-    
+
             XCTAssertFalse(testFileUrl.isDirectory)
             _ = FileManager.default.createFile(atPath: testFileUrl.path, contents: nil, attributes: nil)
             XCTAssertFalse(testFileUrl.isDirectory)

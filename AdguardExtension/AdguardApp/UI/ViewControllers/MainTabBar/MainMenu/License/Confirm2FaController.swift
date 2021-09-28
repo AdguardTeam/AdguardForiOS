@@ -102,18 +102,18 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
     }
 
     private func processNotification(info: [AnyHashable: Any]) {
-        
+
         DispatchQueue.main.async { [weak self] in
-    
+
             self?.confirmButton.isEnabled = true
             self?.confirmButton.stopIndicator()
 
-    
+
             let type = info[PurchaseService.kPSNotificationTypeKey] as? String
             let error = info[PurchaseService.kPSNotificationErrorKey] as? NSError
-    
+
             switch type {
-        
+
             case PurchaseService.kPSNotificationLoginSuccess:
                 self?.loginSuccess()
             case PurchaseService.kPSNotificationLoginFailure:
@@ -122,7 +122,7 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
                 self?.premiumExpired()
             case PurchaseService.kPSNotificationLoginNotPremiumAccount:
                 self?.notPremium()
-        
+
             default:
                 break
             }

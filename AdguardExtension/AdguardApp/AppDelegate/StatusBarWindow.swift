@@ -77,15 +77,15 @@ final class StatusBarWindow: IStatusBarWindow {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.statusViewCounter += 1
-    
+
             if !self.configuration.showStatusBar {
                 return
             }
-    
+
             if !self.statusBarIsShown {
                 self.statusBarIsShown = true
                 self.showStatusView(with: text)
-        
+
             } else {
                 self.changeTextForStatusView(text: text)
             }
@@ -98,7 +98,7 @@ final class StatusBarWindow: IStatusBarWindow {
             if self.statusViewCounter > 0{
                 self.statusViewCounter -= 1
             }
-    
+
             if self.statusViewCounter == 0 {
                 self.hideStatusView()
             }
@@ -111,7 +111,7 @@ final class StatusBarWindow: IStatusBarWindow {
                 guard let self = self else { return }
                 guard let keyWindow = UIApplication.shared.keyWindow else { return }
                 let height = self.statusBarWindow?.frame.height ?? 0.0
-        
+
                 if self.statusBarIsShown {
                     let frame = CGRect(x: 0.0, y: keyWindow.frame.maxY - height, width: keyWindow.frame.width, height: height)
                     self.statusBarWindow?.frame = frame
@@ -137,7 +137,7 @@ final class StatusBarWindow: IStatusBarWindow {
         UIView.animate(withDuration: 0.5) { [weak self] in
             guard let self = self else { return }
             guard let keyWindow = UIApplication.shared.keyWindow else { return }
-    
+
             self.statusView.text = text
             let height = self.statusBarWindow?.frame.height ?? 0.0
             self.statusBarWindow?.frame.origin.y = keyWindow.frame.maxY - height
@@ -148,7 +148,7 @@ final class StatusBarWindow: IStatusBarWindow {
         UIView.animate(withDuration: 0.5, animations: { [weak self] in
             guard let self = self else { return }
             guard let keyWindow = UIApplication.shared.keyWindow else { return }
-    
+
             self.statusBarWindow?.frame.origin.y = keyWindow.frame.maxY
         }) { [weak self] (success) in
             guard let self = self else { return }

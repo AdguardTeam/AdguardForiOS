@@ -154,10 +154,10 @@ class DnsProvidersServiceTest: XCTestCase {
             if contains {
                 XCTFail("\(provider.name) \(String(describing: provider.summary)) contains 'malware'")
             }
-    
+
             for feature in provider.features ?? [] {
                 let contains = feature.title.lowercased().contains("malware") || feature.summary.lowercased().contains("malware")
-        
+
                 if contains {
                     XCTFail("\(feature.title) \(feature.summary) contains 'malware'")
                 }
@@ -171,7 +171,7 @@ class DnsProvidersServiceTest: XCTestCase {
         for provider in providrsService.predefinedProviders {
             XCTAssertFalse(provider.name.isEmpty)
             XCTAssertFalse(provider.summary?.isEmpty ?? true)
-    
+
             for feature in provider.features ?? [] {
                 XCTAssertFalse(feature.title.isEmpty)
                 XCTAssertFalse(feature.summary.isEmpty)

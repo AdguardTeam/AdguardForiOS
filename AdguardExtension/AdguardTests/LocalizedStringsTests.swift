@@ -180,13 +180,13 @@ class LocalizedStringsTests: XCTestCase {
         for key in dictionary.keys {
             var stringDict = dictionary[key] as! [String: Any]
             stringDict.removeValue(forKey: "NSStringLocalizedFormatKey")
-    
+
             var formats: FormatSpecifiersByKey = [:]
             for (stringsKey, stringsDict) in stringDict {
                 var strings = stringsDict as! [String: String]
                 strings.removeValue(forKey: "NSStringFormatSpecTypeKey")
                 strings.removeValue(forKey: "NSStringFormatValueTypeKey")
-        
+
                 for (stringKey, stringValue) in strings {
                     let forms = process(string: stringValue)
                     formats[key + "_" + stringsKey + "_" + stringKey] = forms
@@ -252,7 +252,7 @@ class LocalizedStringsTests: XCTestCase {
             for i in 0..<specifiersNumber {
                 let enSpecifier = enFormatSpecifiers[i]
                 let localizedSpecifier = formatSpecifiers[i]
-        
+
                 XCTAssertNil(enSpecifier.position, "Different specifiers order for locale = \(locale), string key = \(key)")
                 XCTAssertEqual(enSpecifier, localizedSpecifier, "Posotion is not nil for locale = \(locale), string key = \(key)")
             }
@@ -261,7 +261,7 @@ class LocalizedStringsTests: XCTestCase {
         if allPositional {
             let enSortedSpecifiers = enFormatSpecifiers.sorted(by: { $0.position! < $1.position! })
             let localizedSortedSpecifier = formatSpecifiers.sorted(by: { $0.position! < $1.position! })
-    
+
             XCTAssertEqual(enSortedSpecifiers, localizedSortedSpecifier, "Wrong specifiers position for locale = \(locale), string key = \(key)")
         }
     }

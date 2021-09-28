@@ -48,12 +48,12 @@ class GroupLocalizationsMetaStorageTest: XCTestCase {
             XCTAssertFalse(localization!.name!.isEmpty)
 
             try metaStorage.updateLocalizationForGroup(withId: 1, forLanguage: "en", localization: .init(name: "foo"))
-    
+
             localization = metaStorage.getLocalizationForGroup(withId: 1, forLanguage: "en")
             XCTAssertNotNil(localization)
             XCTAssertNotNil(localization?.name)
             XCTAssertEqual(localization!.name!, "foo")
-    
+
         } catch {
             XCTFail("\(error)")
         }

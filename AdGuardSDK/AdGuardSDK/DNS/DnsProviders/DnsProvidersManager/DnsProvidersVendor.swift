@@ -71,7 +71,7 @@ final class DnsProvidersVendor: DnsProvidersVendorProtocol {
         // 2nd step
         let predefined = makePredefinedProviders(for: implementation, with: revealedActiveDns)
         let custom = makeCustomProviders(for: implementation, with: revealedActiveDns)
-    
+
         let enabledProvider: DnsProviderMetaProtocol
         let enabledServer: DnsServerMetaProtocol
 
@@ -100,7 +100,7 @@ final class DnsProvidersVendor: DnsProvidersVendorProtocol {
             if implementation == .native && pr.providerId == PredefinedDnsProvider.systemDefaultProviderId {
                 continue
             }
-    
+
             let isEnabled = pr.providerId == activeDns.providerId
             if isEnabled {
                 let servers = pr.servers.map { DnsServer(server: $0, isEnabled: false) }
@@ -151,7 +151,7 @@ final class DnsProvidersVendor: DnsProvidersVendorProtocol {
             if implementation == .native && provider.providerId == PredefinedDnsProvider.systemDefaultProviderId {
                 return nil
             }
-    
+
             let servers = provider.servers.compactMap { predefinedServer -> DnsServer? in
                 let serverIsEnabled = predefinedServer.id == activeDns.serverId
                 if implementation.supportedProtocols.contains(predefinedServer.type) {
@@ -164,7 +164,7 @@ final class DnsProvidersVendor: DnsProvidersVendorProtocol {
                     return nil
                 }
             }
-    
+
             if servers.isEmpty {
                 return nil
             } else {
@@ -195,11 +195,11 @@ final class DnsProvidersVendor: DnsProvidersVendorProtocol {
                                              type: provider.server.type,
                                              id: provider.server.id,
                                              isEnabled: serverIsEnabled)
-        
+
                 if serverIsEnabled {
                     enabledServer = server
                 }
-        
+
                 let providerIsEnabled = provider.providerId == activeDns.providerId
                 let provider = CustomDnsProvider(name: provider.name,
                                                  server: server,

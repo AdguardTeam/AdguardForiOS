@@ -75,7 +75,7 @@ final class SwitchTableViewCell: UITableViewCell, Reusable {
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
             titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16.0),
             titleLabel.trailingAnchor.constraint(equalTo: stateSwitch.leadingAnchor, constant: -16.0),
-    
+
             stateSwitch.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
             stateSwitch.widthAnchor.constraint(equalToConstant: 50.0),
             stateSwitch.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor)

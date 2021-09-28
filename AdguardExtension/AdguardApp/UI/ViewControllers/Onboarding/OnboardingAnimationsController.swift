@@ -112,7 +112,7 @@ class OnboardingAnimationsController: UIViewController {
         } else {
             // We mustn't show License screen for japannese in onboarding
             let isJapanesse = Locale.current.languageCode == "ja"
-    
+
             if !configuration.proStatus && !isJapanesse{
                 performSegue(withIdentifier: self.showLicenseScreenSegue, sender: self)
             } else {

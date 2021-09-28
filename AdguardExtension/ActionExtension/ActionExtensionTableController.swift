@@ -146,13 +146,13 @@ final class ActionExtensionTableController: UITableViewController {
             // This closure will continue executing for 30 seconds even if user closes the extension
             ProcessInfo().performExpiringActivity(withReason: "Loading JSONs to CB") { [weak self] expired in
                 guard let self = self, !expired, enabled != self.newProtectionState else { return }
-        
+
                 let helper = ActionExtensionUserRulesHelper(domain: self.model.domain, safariProtection: self.safariProtection)
                 let allowlistIsInverted = self.resources.invertedWhitelist
-        
+
                 // When rule is in allowlist it means that protection won't be applied to current domain
                 // If rule is in inverted allowlist that means that all other domains are in the allowlist
-        
+
                 let successfullyChangedState: Bool
                 if allowlistIsInverted {
                     if enabled {

@@ -426,7 +426,7 @@ extension UserRulesTableController: UITableViewDelegate {
         let deleteAction = UIContextualAction(style: .destructive, title: title) { [weak self] (_, _, success: (Bool) -> Void) in
             guard let self = self else { success(false); return }
             let selectedRule = self.model(for: indexPath.row).rule
-    
+
             self.model.remove(rules: [selectedRule], for: [indexPath])
             success(true)
         }

@@ -87,7 +87,7 @@ final class FilterDetailsViewController: UIViewController {
             button.applyStandardOpaqueStyle()
             button.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
             button.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
-    
+
             buttonsStackView.addArrangedSubview(button)
             stackViewHeightConstraint.constant = 40.0
         }
@@ -98,7 +98,7 @@ final class FilterDetailsViewController: UIViewController {
             button.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.red)
             button.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
             button.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
-    
+
             buttonsStackView.addArrangedSubview(button)
             if buttonsStackView.arrangedSubviews.isEmpty {
                 stackViewHeightConstraint.constant = 40.0

@@ -106,7 +106,7 @@ extension SafariProtection {
                     DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
                     return
                 }
-        
+
                 if let error = error {
                     Logger.logError("(SafariProtection+Filters) - setGroup; Error reloading CBs when setting group with id=\(groupType.id) to enabled=\(enabled): \(error)")
                 } else {
@@ -128,7 +128,7 @@ extension SafariProtection {
                     DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
                     return
                 }
-        
+
                 if let error = error {
                     Logger.logError("(SafariProtection+Filters) - setFilter; Error reloading CBs when setting filter with id=\(id), group id=\(groupId) to enabled=\(enabled): \(error)")
                 } else {
@@ -151,7 +151,7 @@ extension SafariProtection {
                 DispatchQueue.main.async { onFilterAddedToDb(CommonError.missingSelf); onCbReloaded(CommonError.missingSelf) }
                 return
             }
-    
+
             Logger.logInfo("(SafariProtection+Filters) - addCustomFilter; Add custom filter: \(customFilter)")
             var addError: Error?
             let group = DispatchGroup()
@@ -161,21 +161,21 @@ extension SafariProtection {
                 group.leave()
             }
             group.wait()
-    
+
             if let addError = addError {
                 Logger.logError("(SafariProtection+Filters) - addCustomFilter; Error adding custom filter: \(customFilter) to storage, error: \(addError)")
                 self.completionQueue.async { onFilterAddedToDb(addError); onCbReloaded(addError) }
                 return
             }
             self.completionQueue.async { onFilterAddedToDb(nil) }
-    
+
             self.reloadContentBlockers { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Filters) - addCustomFilter.reloadContentBlockers; self is missing!")
                     DispatchQueue.main.async { onCbReloaded(CommonError.missingSelf) }
                     return
                 }
-        
+
                 if let error = error {
                     Logger.logError("(SafariProtection+Filters) - addCustomFilter; Error reloading CBs when adding custom filter: \(customFilter); Error: \(error)")
                 } else {
@@ -197,7 +197,7 @@ extension SafariProtection {
                     DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
                     return
                 }
-        
+
                 if let error = error {
                     Logger.logError("(SafariProtection+Filters) - deleteCustomFilter; Error reloading CBs when deleting custom filter with id=\(id): \(error)")
                 } else {
@@ -226,9 +226,9 @@ extension SafariProtection {
                 DispatchQueue.main.async { onFiltersUpdated(.error(CommonError.missingSelf)); onCbReloaded(CommonError.missingSelf) }
                 return
             }
-    
+
             Logger.logInfo("(SafariProtection+Filters) - updateFiltersMetaAndLocalizations; Updating filters meta forcibly=\(forcibly)")
-    
+
             self.filters.updateAllMeta(forcibly: forcibly) { [weak self] result in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Filters) - updateFiltersMetaAndLocalizations.updateAllMeta; self is missing!")
@@ -236,9 +236,9 @@ extension SafariProtection {
                     return
                 }
                 self.completionQueue.async { onFiltersUpdated(result) }
-        
+
                 self.workingQueue.sync {
-            
+
                     self.reloadContentBlockers { [weak self] error in
                         guard let self = self else {
                             Logger.logError("(SafariProtection+Filters) - updateFiltersMetaAndLocalizations.reloadContentBlockers; self is missing!")

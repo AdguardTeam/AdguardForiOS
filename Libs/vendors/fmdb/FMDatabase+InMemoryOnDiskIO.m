@@ -9,12 +9,12 @@ int loadOrSaveDb(sqlite3 *pInMemory, const char *zFilename, int isSave)
     sqlite3_backup *pBackup;  /* Backup object used to copy data */
     sqlite3 *pTo;             /* Database to copy to (pFile or pInMemory) */
     sqlite3 *pFrom;           /* Database to copy from (pFile or pInMemory) */
-    
+
     /* Open the database file identified by zFilename. Exit early if this fails
      ** for any reason. */
     rc = sqlite3_open(zFilename, &pFile);
     if( rc==SQLITE_OK ){
-        
+
         /* If this is a 'load' operation (isSave==0), then data is copied
          ** from the database file just opened to database pInMemory. 
          ** Otherwise, if this is a 'save' operation (isSave==1), then data
@@ -22,7 +22,7 @@ int loadOrSaveDb(sqlite3 *pInMemory, const char *zFilename, int isSave)
          ** pTo accordingly. */
         pFrom = (isSave ? pInMemory : pFile);
         pTo   = (isSave ? pFile     : pInMemory);
-        
+
         /* Set up the backup procedure to copy from the "main" database of 
          ** connection pFile to the main database of connection pInMemory.
          ** If something goes wrong, pBackup will be set to NULL and an error

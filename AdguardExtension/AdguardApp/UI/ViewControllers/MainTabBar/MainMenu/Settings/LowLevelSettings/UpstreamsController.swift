@@ -109,11 +109,11 @@ class UpstreamsController: BottomAlertController {
         case .bootstrap:
             let bootstrapString = resources.customBootstrapServers?.joined(separator: ", ")
             upstreamsTextField.text = bootstrapString
-    
+
         case .fallback:
             let fallbackString = resources.customFallbackServers?.joined(separator: ", ")
             upstreamsTextField.text = fallbackString
-    
+
         case .customAddress:
             let ipAddress = resources.customBlockingIp?.joined(separator: ", ")
             upstreamsTextField.text = ipAddress
@@ -183,16 +183,16 @@ class UpstreamsController: BottomAlertController {
 
         DispatchQueue(label: "save dns upstreams queue").async { [weak self] in
             guard let self = self else { return }
-    
+
             let errors = upstreams.compactMap {
                 AGDnsUtils.test($0, ipv6Available: networkUtils.isIpv6Available)
             }
-    
+
             DispatchQueue.main.async {
-        
+
                 self.saveButton?.isEnabled = true
                 self.saveButton?.stopIndicator()
-        
+
                 if errors.isEmpty {
                     success()
                 }

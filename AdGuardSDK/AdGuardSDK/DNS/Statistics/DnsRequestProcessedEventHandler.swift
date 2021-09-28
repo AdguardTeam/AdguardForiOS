@@ -59,12 +59,12 @@ final class DnsRequestProcessedEventHandler: DnsRequestProcessedEventHandlerProt
                 Logger.logError("(DnsRequestProcessedEventHandler) - handleEvent; Error: \(event.error ?? "Missing self")")
                 return
             }
-    
+
             guard let upstreamId = event.upstreamId, let activeDnsUpstream = self.proxyConfigurationProvider.dnsUpstreamById[upstreamId] else {
                 Logger.logError("(DnsRequestProcessedEventHandler) - handleEvent; event.upstreamId is nil")
                 return
             }
-    
+
             let processedEvent = DnsRequestProcessedEvent(
                 event: event,
                 upstream: activeDnsUpstream.dnsUpstreamInfo,
@@ -72,7 +72,7 @@ final class DnsRequestProcessedEventHandler: DnsRequestProcessedEventHandlerProt
                 dnsBlocklistFilterId: self.proxyConfigurationProvider.dnsBlocklistFilterId,
                 dnsAllowlistFilterId: self.proxyConfigurationProvider.dnsAllowlistFilterId
             )
-    
+
             // Add to statistics
             self.activityStatistics.process(record: processedEvent.activityRecord)
             self.chartStatistics.process(record: processedEvent.chartStatisticsRecord)

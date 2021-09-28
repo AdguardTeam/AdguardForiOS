@@ -123,7 +123,7 @@ extension ExtendedFiltersMeta {
 
         init(from decoder: Decoder, tags: [Tag], groups: [GroupMetaProtocol]) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
-    
+
             self.filterId = try container.decode(Int.self, forKey: .filterId)
             self.name = try container.decode(String.self, forKey: .name)
             self.description = try container.decode(String.self, forKey: .description)
@@ -134,18 +134,18 @@ extension ExtendedFiltersMeta {
             self.trustLevel = try container.decode(TrustLevel.self, forKey: .trustLevel)
             self.version = try container.decode(String.self, forKey: .version)
             self.languages = try container.decode([String].self, forKey: .languages)
-    
+
             let groupId = try container.decode(Int.self, forKey: .group)
             self.group = groups.first(where: { $0.groupId == groupId })!
-    
+
             let intTags = try container.decode([Int].self, forKey: .tags)
             self.tags = intTags.compactMap({ intTag in
                 return tags.first(where: { $0.tagId == intTag })
             })
-    
+
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-    
+
             let timeAddedString = try container.decode(String.self, forKey: .timeAdded)
             let lastUpdateDateString = try container.decode(String.self, forKey: .lastUpdateDate)
 
@@ -224,7 +224,7 @@ public extension ExtendedFiltersMeta {
             case platform
             case problematic
             case obsolete
-    
+
             var id: Int {
                 switch self {
                 case .purpose: return 0
@@ -235,7 +235,7 @@ public extension ExtendedFiltersMeta {
                 case .obsolete: return 6
                 }
             }
-    
+
             init?(tagTypeId: Int) {
                 switch tagTypeId {
                 case 0: self = .purpose
@@ -260,9 +260,9 @@ public extension ExtendedFiltersMeta {
 
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
-    
+
             self.tagId = try container.decode(Int.self, forKey: .tagId)
-    
+
             /*
              Tags can be complex and contain extra info using :
              For example:

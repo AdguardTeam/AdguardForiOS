@@ -176,7 +176,7 @@ static DDLogLevel _captureLevel = DDLogLevelVerbose;
                 // Iterate over new messages.
                 aslmsg msg;
                 aslresponse response = asl_search(NULL, query);
-        
+
                 while ((msg = asl_next(response)))
                 {
                     [self aslMessageReceived:msg];

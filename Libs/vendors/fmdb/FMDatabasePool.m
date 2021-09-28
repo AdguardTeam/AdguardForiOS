@@ -115,16 +115,16 @@
             [_databaseInPool removeLastObject];
         }
         else {
-    
+
             if (_maximumNumberOfDatabasesToCreate) {
                 NSUInteger currentCount = [_databaseOutPool count] + [_databaseInPool count];
-        
+
                 if (currentCount >= _maximumNumberOfDatabasesToCreate) {
                     NSLog(@"Maximum number of databases (%ld) has already been reached!", (long)currentCount);
                     return;
                 }
             }
-    
+
             db = [FMDatabase databaseWithPath:_path];
             shouldNotifyDelegate = YES;
         }
@@ -144,7 +144,7 @@
                 //It should not get added in the pool twice if lastObject was found
                 if (![_databaseOutPool containsObject:db]) {
                     [_databaseOutPool addObject:db];
-            
+
                     if (shouldNotifyDelegate && [_delegate respondsToSelector:@selector(databasePool:didAddDatabase:)]) {
                         [_delegate databasePool:self didAddDatabase:db];
                     }

@@ -79,13 +79,13 @@ extension MetaStorage: GroupsMetaStorageProtocol {
 
         let result: [FilterGroupsTable] = try filtersDb.prepare(query).compactMap { group in
             let dbGroup = FilterGroupsTable(dbGroup: group)
-    
+
             /* If there is no localized group name we trying to get default english localization and if it is steel nil set default localized name from filter_group row */
             var localizedName = getLocalizationForGroup(withId: dbGroup.groupId, forLanguage: lang)?.name
             if localizedName == nil && lang != MetaStorage.defaultDbLanguage  {
                 localizedName = getLocalizationForGroup(withId: dbGroup.groupId, forLanguage: lang)?.name
             }
-    
+
             return FilterGroupsTable(dbGroup: group, localizedName: localizedName ?? dbGroup.name)
         }
         Logger.logDebug("(FiltersMetaStorage) - getAllLocalizedGroups returning \(result.count) groups objects for lang=\(lang)")

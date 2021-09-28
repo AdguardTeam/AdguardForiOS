@@ -201,7 +201,7 @@ final class LowLevelSettingsController: UITableViewController {
             betaChannelTextView.text = ""
             let style = NSMutableParagraphStyle()
             style.alignment = .center
-    
+
             headerText.addAttribute(.foregroundColor, value: theme.lightGrayTextColor , range: NSRange(location: 0, length: headerText.length))
             headerText.addAttribute(.font, value: font, range: NSRange(location: 0, length: headerText.length))
             headerText.addAttributes([.paragraphStyle : style], range: NSRange(location: 0, length: headerText.length))
@@ -231,10 +231,10 @@ extension LowLevelSettingsController: UpstreamsControllerDelegate {
         switch type {
         case .bootstrap:
             bootstrapsDescription.text = isEmptyText ? String.localizedString("low_level_bootstraps_placeholder") : text
-    
+
         case .customAddress:
             return
-    
+
         case .fallback:
             fallbacksDescription.text = isEmptyText ? String.localizedString("low_level_fallbacks_placeholder"): text
         }

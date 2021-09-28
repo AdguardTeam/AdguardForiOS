@@ -968,13 +968,13 @@ unsigned long long const kDDDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 20
     dispatch_sync(self.currentLogFileHandleQueue, ^{
         if (self->_currentLogFileHandle == nil) {
             NSString *logFilePath = [[self currentLogFileInfo] filePath];
-    
+
             self->_currentLogFileHandle = [NSFileHandle fileHandleForWritingAtPath:logFilePath];
             [self->_currentLogFileHandle seekToEndOfFile];
-    
+
             if (self->_currentLogFileHandle) {
                 [self scheduleTimerToRollLogFileDueToAge];
-        
+
                 // Here we are monitoring the log file. In case if it would be deleted ormoved
                 // somewhere we want to roll it and use a new one.
                 self->_currentLogFileVnode = dispatch_source_create(
@@ -983,19 +983,19 @@ unsigned long long const kDDDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 20
                                                               DISPATCH_VNODE_DELETE | DISPATCH_VNODE_RENAME,
                                                               self.loggerQueue
                                                               );
-        
+
                 dispatch_source_set_event_handler(self->_currentLogFileVnode, ^{ @autoreleasepool {
                     NSLogInfo(@"DDFileLogger: Current logfile was moved. Rolling it and creating a new one");
                     [self rollLogFileNow];
                 } });
-        
+
 #if !OS_OBJECT_USE_OBJC
                 dispatch_source_t vnode = self->_currentLogFileVnode;
                 dispatch_source_set_cancel_handler(self->_currentLogFileVnode, ^{
                     dispatch_release(vnode);
                 });
 #endif
-        
+
                 dispatch_resume(self->_currentLogFileVnode);
             }
         }

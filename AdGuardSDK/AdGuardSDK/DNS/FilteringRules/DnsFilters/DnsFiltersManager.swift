@@ -153,20 +153,20 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
                 onFilterAdded(CommonError.missingSelf)
                 return
             }
-    
+
             if let error = error {
                 Logger.logError("(DnsFiltersService) - addFilter; Error adding custom filter to storage; Error: \(error)")
                 onFilterAdded(error)
                 return
             }
-    
+
             var filterMeta: ExtendedCustomFilterMetaProtocol?
             if let filterContent = self.filterFilesStorage.getFilterContentForFilter(withId: filterId) {
                 filterMeta = try? self.metaParser.parse(filterContent, for: .system, filterDownloadPage: url.absoluteString)
             }
             let filter = DnsFilter(meta: filterMeta, name: name, filterId: filterId, subscriptionUrl: url, isEnabled: isEnabled)
             self.filters.append(filter)
-    
+
             Logger.logInfo("(DnsFiltersService) - addFilter; Added DNS filter with name=\(name) url=\(url)")
             onFilterAdded(nil)
         }
@@ -191,21 +191,21 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
                 onFilterUpdated(CommonError.missingSelf)
                 return
             }
-    
+
             if let error = error {
                 Logger.logError("(DnsFiltersService) - updateFilter; Error updating custom DNS filter; Error: \(error)")
                 onFilterUpdated(error)
                 return
             }
-    
+
             var filterMeta: ExtendedCustomFilterMetaProtocol?
             if let filterContent = self.filterFilesStorage.getFilterContentForFilter(withId: dnsFilter.filterId) {
                 filterMeta = try? self.metaParser.parse(filterContent, for: .system, filterDownloadPage: dnsFilter.subscriptionUrl.absoluteString)
             }
-    
+
             let newFilter = DnsFilter(meta: filterMeta, name: dnsFilter.name ?? "", filterId: dnsFilter.filterId, subscriptionUrl: dnsFilter.subscriptionUrl, isEnabled: dnsFilter.isEnabled)
             self.filters[dnsFilterIndex] = newFilter
-    
+
             Logger.logInfo("(DnsFiltersService) - updateFilter; Updated DNS filter with id=\(id)")
             onFilterUpdated(nil)
         }

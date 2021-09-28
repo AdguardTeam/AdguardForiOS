@@ -16,7 +16,7 @@ extension UIApplication {
         for adgInterface in AdGuardVpnOperatingMode.allAvailableInterfaces {
             for interface in activeNetworkInterfaces {
                 guard let cidrRange = ACNCidrRange(cidrString: interface) else { continue }
-        
+
                 if adgInterface.contains(cidrRange) {
                     return true
                 }

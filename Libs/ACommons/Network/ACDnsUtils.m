@@ -52,17 +52,17 @@
                     s6 = (struct sockaddr_in6 *)res->ai_addr;
                     [result addObject:[NSData dataWithBytes:(void *)&(s6->sin6_addr) length:16]];
                     break;
-            
+
                 case AF_INET:
                     s4 = (struct sockaddr_in *)res->ai_addr;
-            
+
                     [result addObject:[NSData dataWithBytes:(void *)&(s4->sin_addr) length:4]];
                     break;
                 default:
                     NSLog(@"Neither IPv4 nor IPv6!");
-            
+
             }
-    
+
             res = res->ai_next;
         }
     }else{

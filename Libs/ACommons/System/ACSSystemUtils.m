@@ -48,7 +48,6 @@
 
     UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:ACLocalizedString(@"common_action_ok", nil) style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction * action) {
-                                                      
                                                               if(completion)
                                                                   completion();
                                                           }];
@@ -86,7 +85,7 @@
 
         task.launchPath = utilPath;
         task.arguments = arguments;
-    
+
 
         NSPipe *pipe;
 

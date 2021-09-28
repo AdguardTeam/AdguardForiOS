@@ -72,7 +72,7 @@ final class RuleDetailsController: BottomAlertController, UITextViewDelegate {
         if context.ruleType == .safariUserfilter {
             ruleTextView.font = UIFont(name: "PTMono-Regular", size: 14.0)
         }
-        
+
         updateTheme()
 
         changeKeyboardReturnKeyTypeIfNeeded()

@@ -155,7 +155,7 @@ final public class ContentBlockerService: ContentBlockerServiceProtocol {
                 NotificationCenter.default.standaloneContentBlockerUpdateFinished(cbType)
                 return
             }
-    
+
             if let userInfo = (error as NSError?)?.userInfo {
                 Logger.logError("(ContentBlockerService) - reloadContentBlocker; Error reloadind content blocker; Error: \(userInfo)")
                 // Sometimes Safari fails to register a content blocker because of inner race conditions, so we try to reload it second time

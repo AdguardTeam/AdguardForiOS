@@ -108,7 +108,7 @@ class BugReportController: UIViewController {
             DispatchQueue.main.async { [weak self] in
                 self?.sendButton.stopIndicator()
                 self?.sendButton.isEnabled = true
-        
+
                 if logsSentSuccessfully {
                     self?.showBugReportSuccessAlert()
                 } else {

@@ -79,7 +79,7 @@ class VpnManager: VpnManagerProtocol {
      When Tunnel is in process of restarting this variable contains function to start tunnel
      */
     private var startTunnel: (() -> Void)?
-    
+
     // MARK: - initialize
 
     init(resources: AESharedResourcesProtocol ,configuration: ConfigurationServiceProtocol, networkSettings: NetworkSettingsServiceProtocol) {
@@ -89,23 +89,23 @@ class VpnManager: VpnManagerProtocol {
 
         configurationObserver = NotificationCenter.default.observe(name: NSNotification.Name.NEVPNStatusDidChange, object: nil, queue: nil) { [weak self] note in
             guard let self = self else { return }
-    
+
             guard let session = note.object as? NETunnelProviderSession else {
                 DDLogError("Invalid note when vpn status received")
                 return
             }
             let vpnStatus = session.status
-    
+
             // When Tunnel is stopped we should start it
             if vpnStatus == .disconnected, self.startTunnel != nil {
                 self.startTunnel?()
                 self.startTunnel = nil // Set to nil when restart is finished
             }
-    
+
             if vpnStatus == .invalid {
                 self.workingQueue.async { [weak self] in
                     guard let self = self else { return }
-            
+
                     // check configuration still installed
                     _ = self.loadManager()
                     if !self.vpnInstalled {
@@ -117,7 +117,7 @@ class VpnManager: VpnManagerProtocol {
 
         configurationObserver2 = NotificationCenter.default.observe(name: NSNotification.Name.NEVPNConfigurationChange, object: nil, queue: nil) { [weak self] (note) in
             guard let self = self else { return }
-    
+
             self.workingQueue.async { [weak self] in
                 guard let self = self else { return }
                 let (manager, _) = self.loadManager()
@@ -135,14 +135,14 @@ class VpnManager: VpnManagerProtocol {
 
         workingQueue.async { [weak self] in
             guard let self = self else { return }
-    
+
             // get manager from system preferences
             let (manager, error) = self.loadManager()
-    
+
             if let manager = manager {
                 self.checkState(manager)
             }
-    
+
             completion(error)
         }
     }
@@ -167,7 +167,7 @@ class VpnManager: VpnManagerProtocol {
             // Call and save completion to prevent memory leaks in queue that waiting this completion
             self?.updateSettingsCallback?(nil)
             self?.updateSettingsCallback = completion
-    
+
             self?.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
                 DDLogInfo("(VpnManager) 1 second passed calling updateSettings now")
                 self?.updateSettingsInternal { error in
@@ -175,7 +175,7 @@ class VpnManager: VpnManagerProtocol {
                         self?.timer?.invalidate()
                         self?.timer = nil
                         self?.updateSettingsCallback?(error)
-                        self?.updateSettingsCallback = nil                
+                        self?.updateSettingsCallback = nil
                     }
                 }
             })
@@ -187,19 +187,19 @@ class VpnManager: VpnManagerProtocol {
 
         workingQueue.async { [weak self] in
             guard let self = self else { return }
-    
+
             let (manager, error) = self.loadManager()
-    
+
             if error != nil {
                 completion(error!)
                 return
             }
-    
+
             if manager == nil {
                 completion(nil)
                 return
             }
-    
+
             completion(self.removeManager(manager!))
         }
     }
@@ -210,19 +210,19 @@ class VpnManager: VpnManagerProtocol {
 
         workingQueue.async { [weak self] in
             guard let self = self else { return }
-    
+
             // remove previous configuration if needed
             let (oldManager, _) = self.loadManager()
             if oldManager != nil {
                 _ = self.removeManager(oldManager!)
             }
-    
+
             let newManager = self.createManager()
-    
+
             self.setupConfiguration(newManager)
-    
+
             let error = self.saveManager(newManager)
-    
+
             self.vpnInstalledValue = error == nil
             completion(error)
         }
@@ -249,29 +249,29 @@ class VpnManager: VpnManagerProtocol {
 
         workingQueue.async { [weak self] in
             guard let self = self else { return }
-    
+
             DDLogInfo("(VpnManager) updateSettings")
-    
+
             let (manager, error) = self.loadManager()
-    
+
             if error != nil {
                 completion?(error!)
                 return
             }
-    
+
             if manager == nil {
                 DDLogError("(VpnManager) updateSettings error - there is no installed vpn configurations to update")
                 let error = VpnManagerError.managerNotInstalled
                 completion?(error)
-        
+
                 return
             }
-    
+
             self.setupConfiguration(manager!)
-    
+
             let saveError = self.saveManager(manager!)
             completion?(saveError)
-    
+
             self.restartTunnel(manager!)
         }
     }
@@ -285,33 +285,33 @@ class VpnManager: VpnManagerProtocol {
         group.enter()
 
         providerManagerType.self.loadAllFromPreferences { [weak self] (managers, error) in
-    
+
             defer { group.leave() }
-    
+
             guard let self = self else { return }
             if error != nil {
                 resultError = error
                 DDLogError("(VpnManager) loadManager error: \(error!)")
                 return
             }
-    
+
             if managers?.count ?? 0 == 0 {
                 DDLogInfo("(VpnManager) loadManager - manager not installed")
                 return
             }
-    
+
             if managers!.count > 1 {
                 DDLogError("(VpnManager) loadManager error - there are \(managers!.count) managers installed. Delete all managers")
-        
+
                 for manager in managers! {
                     _ = self.removeManager(manager)
                 }
-        
+
                 manager = self.createManager()
-        
+
                 return
             }
-    
+
             DDLogInfo("(VpnManager) loadManager success)")
             manager = managers?.first
         }
@@ -384,7 +384,7 @@ class VpnManager: VpnManagerProtocol {
             else {
                 DDLogInfo("(VpnManager) saveManager success")
             }
-    
+
             group.leave()
         }
 

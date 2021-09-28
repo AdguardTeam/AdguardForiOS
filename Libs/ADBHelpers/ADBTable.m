@@ -35,7 +35,7 @@
         if (!db) {
             return  nil;
         }
-    
+
 
         _db = db;
         _tableName = [theClass tableName];
@@ -67,24 +67,24 @@
             if (!row) {
                 row = [_objectClass new];
             }
-    
+
             NSMutableArray *rows = [NSMutableArray array];
-    
+
             NSString *queryString = [NSString stringWithFormat:@"select *, rowid from %@", _tableName];
             NSString *whereString = nil;
-    
+
             NSArray *keys = [self validKeysFromKeyFields:keyFields andWhereString:&whereString];
             if (!keys)
                 return nil;
-    
+
             FMResultSet *result = [db executeQuery:[queryString stringByAppendingString:whereString] withParameterDictionary:[row dictionaryWithValuesForKeys:keys]];
-    
+
             while ([result next]) {
-        
+
                 [rows addObject:[[_objectClass alloc] initWithDbResult:result]];
             }
             [result close];
-    
+
             return rows;
         }
         @catch (NSException *exception) {
@@ -104,12 +104,12 @@
     @autoreleasepool {
 
         if (!row) {
-    
+
             row = [_objectClass new];
         }
 
         if (![row isKindOfClass:_objectClass]) {
-    
+
             return NO;
         }
 
@@ -134,7 +134,7 @@
     @autoreleasepool {
 
         if (![row isKindOfClass:_objectClass]) {
-    
+
             return NO;
         }
 
@@ -148,24 +148,24 @@
         id obj;
         for (NSString *key in _insertQueryKeys) {
             obj = objects[key];
-    
+
             //-------- Convert objects if need it ---------------
-    
+
             if ([_nsdatePropertyNames containsObject:key] && [obj isKindOfClass:[NSDate class]]) {
                 // mapping from NSDate
-        
+
                 valueObjects[key] = [obj iso8601String];
             }
             else if ([_plistPropertyNames containsObject:key] ){
                 // mapping from complex object
-        
+
                 NSData *serializedData;
                 if ([_columnTypes[key] isEqualToString:@"BLOB"]) {
-            
+
                     serializedData = [NSKeyedArchiver archivedDataWithRootObject:obj];
-            
+
                     if (serializedData) {
-                
+
                         valueObjects[key] = serializedData;
                     }
                 }
@@ -173,29 +173,29 @@
                     NSMutableData *mutableData = [NSMutableData data];
                     NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:mutableData];
                     archiver.outputFormat = NSPropertyListXMLFormat_v1_0;
-            
+
                     [archiver encodeObject:obj forKey:NSKeyedArchiveRootObjectKey];
                     [archiver finishEncoding];
-            
+
                     if (mutableData.length) {
-                
+
                         NSString *value = [[NSString alloc] initWithData:mutableData encoding:NSUTF8StringEncoding];
                         if (value) {
-                    
+
                             valueObjects[key] = value;
                         }
-                
+
                     }
-                }                        
+                }
             }
             else{
-        
+
                 //standard mapping
                 valueObjects[key] = obj;
             }
-    
+
             //---------------------------------------------------
-    
+
         };
 
         return [db executeUpdate:queryString withParameterDictionary:valueObjects];
@@ -212,55 +212,55 @@
     @autoreleasepool {
 
         if (!keyRow) {
-    
+
             keyRow = [_objectClass new];
         }
 
         if (!([keyRow isKindOfClass:_objectClass] && [valueRow isKindOfClass:_objectClass])) {
-    
+
             return NO;
         }
 
         // caching method arguments
         if (!(_updateQueryString && keyFields == _updateKeyFields && updateFields == _updateFields)) {
-    
+
             _updateKeyFields = keyFields;
             _updateFields = updateFields;
-    
+
             NSMutableSet *theSet = [NSMutableSet setWithArray:_insertQueryKeys]; // hint _insertQueryKeys
             if ([_updateFields count]) {
-        
+
                 [theSet intersectSet:[NSSet setWithArray:_updateFields]];
             }
             _updateValidFields = [theSet allObjects];
-    
+
             // Get value params for query string
             NSMutableArray *valueParams = [NSMutableArray array];
             for (NSString *key in _updateValidFields) {
 
                 if ([_nsdatePropertyNames containsObject:key]) {
                     // mapping to NSDate
-            
+
                     [valueParams addObject:[NSString stringWithFormat:@"%@ = datetime(:u_%@)", key, key]];
                 }
                 else{
-            
+
                     //standant mapping
                     [valueParams addObject:[NSString stringWithFormat:@"%@ = :u_%@", key, key]];
                 }
             }
-    
+
             NSString *whereString;
             _updateWhereKeys = [self validKeysFromKeyFields:_updateKeyFields andWhereString:&whereString];
             if (!_updateWhereKeys) {
-        
+
                 //error processing
                 _updateQueryString = nil;
                 return NO;
             }
-    
+
             _updateQueryString = [NSString stringWithFormat:@"update %@ set %@%@", _tableName, [valueParams componentsJoinedByString:@", "], whereString];
-    
+
         }
 
         NSDictionary *objects = [valueRow dictionaryWithValuesForKeys:_updateValidFields];
@@ -271,60 +271,60 @@
 
             obj = objects[key];
             //-------- Convert objects if need it ---------------
-    
+
             NSString *specialUpdateKey = [@"u_" stringByAppendingString:key];
-    
+
             if ([_nsdatePropertyNames containsObject:key] && [obj isKindOfClass:[NSDate class]]) {
                 // mapping from NSDate
-        
+
                 valueObjects[specialUpdateKey] = [obj iso8601String];
             }
             else if ([_plistPropertyNames containsObject:key] ){
                 // mapping from Property List
-        
+
                 NSError *err = nil;
                 NSData *serializedData;
                 if ([_columnTypes[key] isEqualToString:@"BLOB"]) {
-            
+
                     serializedData = [NSKeyedArchiver archivedDataWithRootObject:obj];
                     if (serializedData) {
-                
+
                         valueObjects[specialUpdateKey] = serializedData;
                     }
                 }
                 else {
-            
+
                     NSMutableData *mutableData = [NSMutableData data];
                     NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:mutableData];
                     archiver.outputFormat = NSPropertyListXMLFormat_v1_0;
-            
+
                     [archiver encodeRootObject:obj];
                     [archiver finishEncoding];
-            
+
                     if (mutableData.length) {
-              
+  
                         NSString *value = [[NSString alloc] initWithData:mutableData encoding:NSUTF8StringEncoding];
                         if (value) {
-                    
+
                             valueObjects[specialUpdateKey] = value;
                         }
 
                     }
                 }
-        
+
                 if (err)
                     [NSException raise:NSGenericException format:@"Error converting key \"%@\" to property list: %@", key, [err localizedDescription]];
-        
+
             }
             else{
-        
+
                 //standant mapping
                 valueObjects[specialUpdateKey] = obj;
             }
-    
+
             //---------------------------------------------------
         }
-    
+
 
         // get where fields and append to valueObjects
         [valueObjects addEntriesFromDictionary:[keyRow dictionaryWithValuesForKeys:_updateWhereKeys]];
@@ -345,7 +345,7 @@
         NSMutableDictionary *types = [NSMutableDictionary dictionary];
         FMResultSet *result = [_db executeQuery:[NSString stringWithFormat:@"PRAGMA table_info('%@')", _tableName]];
         while ([result next]) {
-    
+
             NSString *name = [result stringForColumnIndex:1];
             [names addObject:name];
             types[name] = [result stringForColumnIndex:2];
@@ -357,7 +357,7 @@
         [result close];
 
         if ([names count]) {
-    
+
             _columnNames = [NSSet setWithArray:names];
             _columnTypes = [types copy];
         }
@@ -369,18 +369,18 @@
 
         NSMutableArray *valueParams = [NSMutableArray array];
         for (NSString *key in _insertQueryKeys) {
-    
+
             if ([_nsdatePropertyNames containsObject:key]) {
                 // mapping to NSDate
-        
+
                 [valueParams addObject:[NSString stringWithFormat:@"datetime(:%@)", key]];
             }
             else{
-        
+
                 //standant mapping
                 [valueParams addObject:[NSString stringWithFormat:@":%@", key]];
             }
-    
+
         }
 
         _insertQueryString = [NSString stringWithFormat:@"insert%%@ into %@ (%@) values (%@)", _tableName, [_insertQueryKeys componentsJoinedByString:@", "], [valueParams componentsJoinedByString:@", "]];
@@ -397,9 +397,9 @@
 
         NSMutableArray *keyStrings = [NSMutableArray array];
         for (NSString *field in keyFields) {
-    
+
             if ([_columnNames containsObject:field]) {
-        
+
                 [keys addObject:field];
                 [keyStrings addObject:[NSString stringWithFormat:@"%@ = :%@", field, field]];
             }
@@ -409,7 +409,7 @@
             *whereString = [NSString stringWithFormat:@" where %@",[keyStrings componentsJoinedByString:@" AND "]];
 
         else{
-    
+
             *whereString = @"";
             // returns error
             return nil;

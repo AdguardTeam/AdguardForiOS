@@ -46,7 +46,7 @@ extension ChartStatistics {
         /// `.all` period is not defined strictly because we don't know how long is it `all` so we've made a workaround
         if period == .all {
             let monthInterval = StatisticsPeriod.month.interval
-    
+
             /// We're trying to get oldest record date from db
             if let oldestDate = oldestRecordDate {
                 /// If oldestDate is older than month interval start than we should set interval as month interval
@@ -113,7 +113,7 @@ extension ChartStatistics {
   
             // Getting compressed record for the interval
             let result = try statisticsDb.prepare(query.asSQL()).compactMap { ChartStatisticsRecord(dbRecord: $0) }
-    
+
             // The result always should be unique
             if result.count != 1 {
                 // If there are multiple results or result is missing we return zero record with date in the middle of the interval

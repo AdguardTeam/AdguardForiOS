@@ -130,7 +130,7 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
                 onTunnelStarted(error)
                 return
             }
-    
+
             switch result {
             case .success(let systemDnsAddresses):
                 let error = self.startDnsProxy(with: systemDnsAddresses)
@@ -153,7 +153,7 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
            lowLevelConfig.bootstrapServers?.count ?? 0 > 0,
            providersManager.activeDnsServer.upstreams.count > 0 {
             Logger.logInfo("(PacketTunnelProviderProxy) - updateTunnelSettings; All settings we need are set by the user, starting tunnel now")
-    
+
             // Setting tunnel settings
             setTunnelSettings { error in
                 if let error = error {
@@ -184,10 +184,10 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
             // Here we add a pause after setting the empty settings.
             // Perhaps this will eliminate the situation with an empty dns list
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-        
+
                 // Reading system DNS servers with empty tunnel settings
                 let systemIps = self?.networkUtils.systemDnsServers ?? []
-        
+
                 // Setting tunnel settings when system DNS servers obtained
                 self?.setTunnelSettings { error in
                     if let error = error {

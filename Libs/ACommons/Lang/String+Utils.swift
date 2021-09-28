@@ -57,13 +57,13 @@ extension NSMutableAttributedString {
                 documentAttributes: nil) else { return nil }
 
         if let settings = attachmentSettings {
-    
+
             let imageRange = resultText.mutableString.range(of: "%@")
             resultText.replaceCharacters(in: imageRange, with: "")
-    
+
             let attachment = NSTextAttachment()
             attachment.image = settings.image
-    
+
             let x = settings.leftEdge
             let y = -settings.topEdge
             let width: CGFloat
@@ -76,16 +76,16 @@ extension NSMutableAttributedString {
                 width = w
                 height = h
             }
-    
-    
+
+
             attachment.bounds = CGRect(x: x, y: y, width: width, height: height)
-    
+
             let attachmentString = NSAttributedString(attachment: attachment)
             resultText.insert(attachmentString, at: imageRange.location)
         }
 
         resultText.addAttributes([NSAttributedString.Key.paragraphStyle : style], range: NSRange(location: 0, length: resultText.length))
-        
+
         return resultText
     }
 }
@@ -182,10 +182,10 @@ extension String {
         if self.contains("[") && self.contains("]") {
             let leftQuotePosition = self.firstIndex(of: "[")!
             let rightQuotePosition = self.firstIndex(of: "]")!
-    
+
             let leftQuoteIndex = self.index(leftQuotePosition, offsetBy: 1)
             let rightQuoteIndex = self.index(rightQuotePosition, offsetBy: -1)
-    
+
             guard leftQuoteIndex < rightQuoteIndex else {
                 return self
             }
@@ -260,19 +260,19 @@ extension String {
         let currentLocaleLanguageCode = Locale.current.languageCode ?? ""
 
         if specialAsianCountriesCodes.contains(currentLocaleLanguageCode) {
-    
+
             let hundredMillions = decimalNumber / 100000000
             if hundredMillions > 1 {
                 let hundredMillionsString = formatter.string(from: NSNumber(floatLiteral: hundredMillions)) ?? "0"
                 return String(format: String.localizedString("hundred_millions_unit"), hundredMillionsString)
             }
-    
+
             let tenThousands = decimalNumber / 10000
             if tenThousands > 100 {
                 let tenThousandsString = formatter.string(from: NSNumber(floatLiteral: tenThousands)) ?? "0"
                 return String(format: String.localizedString("ten_thousands_unit"), tenThousandsString)
             }
-    
+
             return formatter.string(from: number) ?? "0"
         }
 
@@ -338,7 +338,7 @@ extension String {
             if values.count == 2 {
                 params[values[0]] = values[1]
             }
-    
+
             if values.count == 1 {
                 continue
             }

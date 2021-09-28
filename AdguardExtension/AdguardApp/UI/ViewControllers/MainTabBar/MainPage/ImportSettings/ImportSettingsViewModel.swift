@@ -161,7 +161,7 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
             row.imported = imported
             row.enabled = settings.dnsRulesStatus == .enabled
             row.setImportStatus(imported: imported, status: settings.dnsRulesStatus)
-    
+
             rows.append(row)
         }
     }
@@ -175,7 +175,7 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
             row.imported = imported
             row.enabled = settings.userRulesStatus == .enabled
             row.setImportStatus(imported: imported, status: settings.userRulesStatus)
-    
+
             rows.append(row)
         }
     }
@@ -189,7 +189,7 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
             row.imported = imported
             row.enabled = settings.licenseStatus == .enabled
             row.setImportStatus(imported: imported, status: settings.licenseStatus)
-    
+
             rows.append(row)
         }
     }
@@ -198,15 +198,15 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
 
         if let serverId = settings.dnsServerId {
             var row = SettingRow(type: .dnsSettings, index: 0)
-    
+
             let format = String.localizedString("import_dns_settings_format")
             let provider = dnsProvidersManager.allProviders.first { $0.dnsServers.contains(where: { $0.id == serverId }) }
-    
+
             row.title = String(format:format, provider?.activeServerName ?? "")
             row.imported = imported
             row.enabled = settings.dnsStatus == .enabled
             row.setImportStatus(imported: imported, status: settings.dnsStatus)
-    
+
             rows.append(row)
         }
     }
@@ -215,16 +215,16 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
 
         var index = 0
         for filter in settings.dnsFilters ?? [] {
-    
+
             let titleFormat = String.localizedString("import_dns_filter_format")
             let title = String(format: titleFormat, filter.name)
             var row = SettingRow(type: .dnsFilter, index: index)
-    
+
             row.title = title
             row.imported = imported
             row.enabled = filter.status == .enabled
             row.setImportStatus(imported: imported, status: filter.status)
-    
+
             rows.append(row)
             index += 1
         }
@@ -236,14 +236,14 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
         for filter in settings.customCbFilters ?? [] {
             let titleFormat = String.localizedString("import_custom_cb_filter_format")
             let title = String(format: titleFormat, filter.name)
-    
+
             var row = SettingRow(type: .customCbFilter, index: index)
-    
+
             row.title = title
             row.imported = imported
             row.enabled = filter.status == .enabled
             row.setImportStatus(imported: imported, status: filter.status)
-    
+
             rows.append(row)
             index += 1
         }
@@ -256,11 +256,11 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
         for filter in settings.defaultCbFilters ?? [] {
             var row = SettingRow(type: .cbFilter, index: index)
             let format = String.localizedString(filter.enable ? "enable_cb_filter_format" : "disable_cb_filter_format")
-    
+
             let filters:[SafariFilterProtocol] = safariProtection.groups.flatMap { group in
                 return group.filters
             }
-    
+
             if let filterMeta = filters.first(where: { $0.filterId == filter.id })  {
                 let name = filterMeta.name ?? "" 
                 row.title = String(format: format, name)
@@ -268,11 +268,11 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
             else {
                 DDLogError("unknown filter")
             }
-    
+
             row.imported = imported
             row.enabled = filter.status == .enabled
             row.setImportStatus(imported: imported, status: filter.status)
-    
+
             rows.append(row)
             index += 1
         }

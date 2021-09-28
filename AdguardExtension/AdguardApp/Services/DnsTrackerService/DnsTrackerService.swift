@@ -86,10 +86,10 @@ struct Tracker: Codable {
         while cuttedDomain.count > 0 {
             domainKey = trackerDomains[cuttedDomain]
             if domainKey != nil { break }
-    
+
             let splitted = cuttedDomain.split(separator: ".", maxSplits: 1)
             if splitted.count != 2 { break }
-    
+
             cuttedDomain = String(splitted.last!)
         }
 
@@ -116,7 +116,7 @@ struct Tracker: Codable {
         do {
             let whotracksmeData = try Data(contentsOf: URL(fileURLWithPath: whotracksmePath), options: .mappedIfSafe)
             try decodeWhotraksmeTrackers(data: whotracksmeData)
-    
+
             let adguardData = try Data(contentsOf: URL(fileURLWithPath: adguardPath), options: .mappedIfSafe)
             try decodeAdguardTrackers(data: adguardData)
         } catch {

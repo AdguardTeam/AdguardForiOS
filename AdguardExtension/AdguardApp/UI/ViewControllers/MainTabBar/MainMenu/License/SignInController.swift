@@ -106,7 +106,7 @@ class SignInController: UIViewController {
         case PurchaseService.kPSNotificationLoginUserNotFound:
             self.userNotFound()
 
-    
+
         default:
             break
         }

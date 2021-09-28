@@ -359,7 +359,7 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
 
         if (!CFStringGetCString((__bridge CFStringRef)self, selfChars,
                                 (selfLength + 1), kCFStringEncodingASCII)) {
-    
+
             free(selfChars);
             return nil;
         }
@@ -374,7 +374,7 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
     for (int i = 0; i < selfLength; i++) {
 
         if (selfChars[i] == delimiter){
-    
+
             if (i == 0){
                 // Ignore
             }
@@ -383,7 +383,7 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
             }
             else{
                 if (j > 0){
-            
+
                     out = [[NSString alloc] initWithBytes:buffer length:j encoding:NSASCIIStringEncoding];
                     [list addObject:out];
                     j = 0;
@@ -812,7 +812,7 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
                 break;
             }
         } else{
-    
+
             indexA -= indexB;
             // reset B counter
             indexB = 0;
@@ -853,7 +853,7 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
 
         if (!CFStringGetCString((__bridge CFStringRef)self, selfChars,
                                 (selfLength + 1), kCFStringEncodingASCII)) {
-    
+
             free(selfChars);
             return NO;
         }
@@ -875,7 +875,7 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
             _char += 0x20;
 
         if (_selfChar == _char) {
-    
+
             // increment B counter
             if (++indexB == length) {
                 // found
@@ -883,7 +883,7 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
                 break;
             }
         } else{
-    
+
             indexA -= indexB;
             // reset B counter
             indexB = 0;

@@ -904,7 +904,7 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
         for (int i = 0; i< 2; ++i) {
             UIView * target = targets[i];
             if (!target) continue;
-    
+
             CGPoint p = [self convertPoint:point toView:target];
             if (CGRectContainsPoint(target.bounds, p)) {
                 return [target hitTest:p withEvent:event];
@@ -1283,7 +1283,7 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
         else {
             CGFloat velocity = [_panRecognizer velocityInView:self].x;
             CGFloat inertiaThreshold = 100.0; //points per second
-    
+
             if (velocity > inertiaThreshold) {
                 _targetOffset = _swipeOffset < 0 ? 0 : (_leftView  && _leftSwipeSettings.keepButtonsSwiped ? _leftView.bounds.size.width : _targetOffset);
             }

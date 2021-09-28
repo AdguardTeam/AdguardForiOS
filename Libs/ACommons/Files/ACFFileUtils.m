@@ -274,7 +274,7 @@
             [dirEnumerator skipDescendants];
 
         else{
-    
+
             // Add full path for non directories
             if (![isDirectory boolValue] && ([name isEqualToString:fileName] || [pattern matchWildcard:name]))
                 [theArray addObject:theURL];

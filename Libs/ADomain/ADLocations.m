@@ -75,20 +75,20 @@ static NSURL *_sharedProgramDataDirectory;
         NSURL *url = [fm URLForDirectory:NSApplicationSupportDirectory inDomain:domain appropriateForURL:nil create:YES error:&err];
 
         if (err) {
-    
+
             DDLogError(@"Cannot create application data directory: %@", [err localizedDescription]);
             [[NSException exceptionWithName:NSGenericException reason:@"Cannot create application data directory" userInfo:nil] raise];
         }
         NSString *ident = [[NSBundle bundleForClass:[self class]] objectForInfoDictionaryKey:@"CFBundleIdentifier"];
 
         if (!ident) {
-    
+
             ident = ADLDefaultApplicationBundleIdentifier;
         }
 
         url = [url URLByAppendingPathComponent:ident isDirectory:YES];
         if (![fm createDirectoryAtURL:url withIntermediateDirectories:YES attributes:nil error:&err]){
-    
+
             url = nil;
             DDLogError(@"Cannot create application data directory: %@", [err localizedDescription]);
         }

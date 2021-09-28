@@ -31,10 +31,10 @@ final class ComplexProtectionController: UITableViewController {
     @IBOutlet weak var freeLabel: EdgeInsetLabel! {
         didSet{
             freeLabel.text = freeLabel.text?.uppercased()
-    
+
             freeLabel.layer.borderColor = UIColor(hexString: "#5a9c69").cgColor
             freeLabel.layer.borderWidth = 1.0
-    
+
             freeLabel.clipsToBounds = true
             freeLabel.layer.cornerRadius = 4.0
         }
@@ -86,10 +86,10 @@ final class ComplexProtectionController: UITableViewController {
     @IBOutlet weak var notInstalledLabel: EdgeInsetLabel! {
         didSet{
             notInstalledLabel.text = notInstalledLabel.text?.uppercased()
-    
+
             notInstalledLabel.layer.borderColor = UIColor.AdGuardColor.lightGray4.cgColor
             notInstalledLabel.layer.borderWidth = 1.0
-    
+
             notInstalledLabel.clipsToBounds = true
             notInstalledLabel.layer.cornerRadius = 4.0
         }
@@ -212,7 +212,7 @@ final class ComplexProtectionController: UITableViewController {
                 guard let self = self else { return }
                 self.systemProtectionSwitch.isOn = self.complexProtection.systemProtectionEnabled
                 self.systemIcon.tintColor = self.complexProtection.systemProtectionEnabled ? self.enabledColor : self.disabledColor
-        
+
                 if error != nil {
                     self.performSegue(withIdentifier: self.showTrackingProtectionSegue, sender: self)
                 }
@@ -334,18 +334,18 @@ final class ComplexProtectionController: UITableViewController {
     private func observeProStatus(){
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
-    
+
             let isBigScreen = self.traitCollection.verticalSizeClass == .regular && self.traitCollection.horizontalSizeClass == .regular
             let height: CGFloat = isBigScreen ? 26.0 : 18.0
-    
+
             self.freeLabelHeight.constant = self.proStatus ? 0.0 : height
             self.premiumLabelHeight.constant = self.proStatus ? 0.0 : height
             self.premiumAdvancedProtectionLabelHeight.constant = self.proStatus ? 0.0 : height
-    
+
             self.freeLabelSpacing.constant = self.proStatus ? 0.0 : 12.0
             self.premiumLabelSpacing.constant = self.proStatus ? 0.0 : 12.0
             self.premiumAdvancedProtectionLabelSpacing.constant = self.proStatus ? 0.0 : 12.0
-    
+
             self.tableView.reloadData()
         }
     }

@@ -134,7 +134,7 @@ final class ChartView: UIView {
             let x = startX + (gridLineWidth + sectorWidth) * CGFloat(integerLiteral: i)
             let startPoint = CGPoint(x: x, y: 0.0)
             let endPoint = CGPoint(x: x, y: frame.height)
-    
+
             drawLine(from: startPoint, to: endPoint)
         }
     }
@@ -148,7 +148,7 @@ final class ChartView: UIView {
             let y = startY + (gridLineWidth + sectorHeight) * CGFloat(integerLiteral: i)
             let startPoint = CGPoint(x: 0.0, y: y)
             let endPoint = CGPoint(x: frame.width, y: y)
-    
+
             drawLine(from: startPoint, to: endPoint)
         }
     }
@@ -229,12 +229,12 @@ final class ChartView: UIView {
 
         let requestsAlpha: CGFloat = activeChart == .requests ? 1.0 : 0.3
         let encryptedAlpha: CGFloat = activeChart == .encrypted ? 1.0 : 0.3
-            
+
         requestLineLayer.path = requestsPath.cgPath
         requestLineLayer.fillColor = UIColor.clear.cgColor
         requestLineLayer.strokeColor = requestsLineColor.withAlphaComponent(requestsAlpha).cgColor
         requestLineLayer.lineWidth = 3.0
-    
+
         requestLineLayer.shadowColor = requestsShadowColor.withAlphaComponent(requestsAlpha).cgColor
         requestLineLayer.shadowOffset = CGSize(width: 3.0, height: 4.0)
         requestLineLayer.shadowOpacity = 0.5
@@ -244,7 +244,7 @@ final class ChartView: UIView {
         encryptedLineLayer.fillColor = UIColor.clear.cgColor
         encryptedLineLayer.strokeColor = encryptedLineColor.withAlphaComponent(encryptedAlpha).cgColor
         encryptedLineLayer.lineWidth = 3.0
-    
+
         encryptedLineLayer.shadowColor = encryptedShadowColor.withAlphaComponent(encryptedAlpha).cgColor
         encryptedLineLayer.shadowOffset = CGSize(width: 3.0, height: 4.0)
         encryptedLineLayer.shadowOpacity = 0.5

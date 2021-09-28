@@ -40,7 +40,7 @@ public final class RequestSender: RequestSenderProtocol{
                     completionHandler(Result.failure(RequestSenderErrors.receivedDataParsingError))
                     return
             }
-    
+
             completionHandler(Result.success(parsedModel))
         }
 

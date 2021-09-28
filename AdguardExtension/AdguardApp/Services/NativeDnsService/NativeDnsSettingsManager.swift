@@ -109,7 +109,7 @@ final class NativeDnsSettingsManager: NativeDnsSettingsManagerProtocol {
         self.resources = resources
         if #available(iOS 14.0, *) {
             addObservers()
-    
+
             getDnsManagerStatus { [weak self] status in
                 self?.dnsConfigIsEnabled = status.isInstalled && status.isEnabled
             }
@@ -129,7 +129,7 @@ final class NativeDnsSettingsManager: NativeDnsSettingsManagerProtocol {
                 onErrorReceived(NativeDnsSettingsManagerError.failedToLoadManager)
                 return
             }
-    
+
             self?.saveDnsConfigInternal(dnsManager: manager, server: server, onErrorReceived)
         }
     }
@@ -142,7 +142,7 @@ final class NativeDnsSettingsManager: NativeDnsSettingsManagerProtocol {
                 onErrorReceived(NativeDnsSettingsManagerError.failedToLoadManager)
                 return
             }
-    
+
             dnsManager.removeFromPreferences(completionHandler: onErrorReceived)
             // Check manager status after delete
             self?.getDnsManagerStatus { [weak self] status in

@@ -47,22 +47,22 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         for (index, item) in tabBar.items!.enumerated() {
             item.title = nil
             item.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
-    
+
             if index == TabBarTabs.mainTab.rawValue {
                 item.accessibilityLabel = String.localizedString("main_page_tab")
                 continue
             }
-    
+
             if index == TabBarTabs.protectionTab.rawValue {
                 item.accessibilityLabel = String.localizedString("protection_page_tab")
                 continue
             }
-    
+
             if index == TabBarTabs.activityTab.rawValue {
                 item.accessibilityLabel = String.localizedString("activity_page_tab")
                 continue
             }
-    
+
             if index == TabBarTabs.settingTab.rawValue {
                 item.accessibilityLabel = String.localizedString("settings_page_tab")
                 continue

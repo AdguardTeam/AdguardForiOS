@@ -35,20 +35,20 @@ class SafariManagerMock: SFContentBlockerManagerProtocol {
             self.maximumCount = max(self.maximumCount, self.currentCount)
             DispatchQueue(label: "completion").asyncAfter(deadline: .now() + self.sleepTime) {
                 self.currentCount = self.currentCount - 1
-        
+
                 var error: Error?
-        
+
                 self.errorsQueue.sync {
                     if var errorsByIdentifier = self.errors[identifier] {
                         if errorsByIdentifier.count > 0 {
-                    
+
                             error = errorsByIdentifier.first! ? NSError(domain: "", code: 0, userInfo: nil) : nil
                             errorsByIdentifier.remove(at: 0)
                             self.errors[identifier] = errorsByIdentifier
                         }
                     }
                 }
-        
+
                 completionHandler?(error)
             }
         }

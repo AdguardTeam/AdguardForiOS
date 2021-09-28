@@ -116,7 +116,7 @@ final class DnsFilterCell: UITableViewCell, Reusable {
             stateSwitch.topAnchor.constraint(equalTo: contentView.topAnchor, constant: topBottomInset),
             stateSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -sideInset),
             stateSwitch.widthAnchor.constraint(equalToConstant: switchWidth),
-    
+
             stackView.topAnchor.constraint(equalTo: stateSwitch.topAnchor),
             stackView.trailingAnchor.constraint(equalTo: stateSwitch.leadingAnchor, constant: -sideInset),
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: sideInset),

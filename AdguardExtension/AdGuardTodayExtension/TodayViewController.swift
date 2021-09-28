@@ -130,7 +130,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
         else {
             showForExpandedMode()
-    
+
             let height:CGFloat = 225.0
             preferredContentSize = CGSize(width: maxSize.width, height: height)
         }
@@ -204,12 +204,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 self?.timer = nil
                 return
             }
-    
+
             self.changeTextForButton()
 
             guard self.prevRequestNumber < self.requestNumber else { return }
             var timeInterval: TimeInterval = 0.0
-    
+
             if self.requestNumber >= 10000 {
                 timeInterval = 60.0
             } else if self.requestNumber >= 100 {
@@ -217,7 +217,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             } else {
                 timeInterval = 1.0
             }
-    
+
             self.timer?.invalidate()
             self.timer = nil
             self.initTimer(timeInterval: timeInterval)
@@ -247,7 +247,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
      Updates DNS protection view
      */
     private func updateWidgetSystem(){
-    
+
         let vpnEnabled = serviceInitializer.complexProtection.systemProtectionEnabled
 
         let alpha: CGFloat = vpnEnabled ? 1.0 : 0.5
@@ -267,7 +267,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         let safariEnabled = complexProtection.safariProtectionEnabled
         let systemEnabled = complexProtection.systemProtectionEnabled
         let complexEnabled = complexProtection.complexProtectionEnabled
-        
+
         let enabledText = complexEnabled ? String.localizedString("protection_enabled") : String.localizedString("protection_disabled")
 
         self.complexSwitchOutlet.isOn = complexEnabled
@@ -372,20 +372,20 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         DispatchQueue.asyncSafeMain { [weak self] in
             guard let self = self else { return }
             let statisticRecord = try? self.serviceInitializer.activityStatistics.getCounters(for: .all)
-    
+
             let requests = statisticRecord?.requests ?? 0
             let encrypted = statisticRecord?.encrypted ?? 0
             let elapsedSumm = statisticRecord?.elapsedSumm ?? 0
-    
+
             let requestsNumber = self.resources.tempRequestsCount + requests
             self.requestsLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsNumber))
             self.prevRequestNumber = self.requestNumber
             self.requestNumber = requestsNumber
-    
+
             let encryptedNumber = self.resources.tempEncryptedRequestsCount + encrypted
             self.encryptedLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedNumber))
             self.encryptedNumber = encryptedNumber
-    
+
             let averageElapsed = requests == 0 ? 0 : Double(elapsedSumm) / Double(requests)
             self.elapsedLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: averageElapsed))
         }

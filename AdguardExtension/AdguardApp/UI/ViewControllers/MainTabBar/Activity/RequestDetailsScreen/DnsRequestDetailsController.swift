@@ -259,12 +259,12 @@ class DnsRequestDetailsController: UITableViewController {
             imageView.tintColor = UIColor(hexString: "#888888")
             let imageViewFrame = CGRect(x: tableWidth - 48.0, y: label.frame.midY - 12.0, width: 24.0, height: 24.0)
             imageView.frame = imageViewFrame
-    
+
             let buttonFrame = CGRect(x: imageViewFrame.midX - 24.0, y: imageViewFrame.midY - 24.0, width: 48.0, height: 48.0)
             let button = UIButton(frame: buttonFrame)
             button.backgroundColor = .clear
             button.addTarget(self, action: #selector(whoTracksMeInfo(_:)), for: .touchUpInside)
-    
+
             view.addSubview(imageView)
             view.addSubview(button)
         }
@@ -282,7 +282,7 @@ class DnsRequestDetailsController: UITableViewController {
         alert.addAction(UIAlertAction(title: String.localizedString("common_action_more"), style: .default, handler: {[weak self] (action) in
             guard let self = self else { return }
             guard let url = URL(string: self.webPage) else { return }
-    
+
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }))
 
@@ -400,7 +400,7 @@ class DnsRequestDetailsController: UITableViewController {
             generalRows += 1
             generalSectionModel[sizeCell!.row] = sizeModel
         }
-    
+
 
         // Matched filters model
         let matchedFilters = record.matchedFilters ?? ""

@@ -64,12 +64,12 @@ class SetappService: SetappServiceProtocol, SetappManagerDelegate {
      */
     func openUrl(_ url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
         if url.scheme == Bundle.main.bundleIdentifier {
-    
+
             startManager()
-    
+
             if SetappManager.shared.canOpen(url: url) {
                 DDLogInfo("(SetappService) - Setapp can openUrl; url: \(url)")
-        
+
                 return SetappManager.shared.open(url: url, options: options) { [weak self] result in
                     switch result {
                     case .success(let subscription):

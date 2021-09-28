@@ -13,7 +13,7 @@ class UserRulesManagerTest: XCTestCase {
 
     override func setUp() {
         let safariManagersProvider = SafariUserRulesManagersProvider(userDefaultsStorage: storage)
-    
+
         allowlistRulesManager = safariManagersProvider.allowlistRulesManager
         allowlistRulesManager?.removeAllRules()
 
@@ -194,7 +194,7 @@ class UserRulesManagerTest: XCTestCase {
                 try userRuleManager.add(rule: UserRule(ruleText: "1", isEnabled: true), override: true)
                 try userRuleManager.add(rule: UserRule(ruleText: "2", isEnabled: true), override: true)
                 try userRuleManager.add(rule: UserRule(ruleText: "3", isEnabled: true), override: true)
-        
+
                 try userRuleManager.removeRule(withText: "2")
                 try userRuleManager.add(rule: UserRule(ruleText: "2", isEnabled: true), override: true)
             } catch {}

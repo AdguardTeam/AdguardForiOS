@@ -77,7 +77,7 @@ final class FilterDetailsCell: UITableViewCell, Reusable {
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16.0),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
-    
+
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2.0),
             descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
             descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),

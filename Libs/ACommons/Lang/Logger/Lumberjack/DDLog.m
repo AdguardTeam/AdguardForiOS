@@ -833,7 +833,7 @@ static NSUInteger _numProcessors;
             if (!(logMessage->_flag & loggerNode->_level)) {
                 continue;
             }
-    
+
             dispatch_group_async(_loggingGroup, loggerNode->_loggerQueue, ^{ @autoreleasepool {
                 [loggerNode->_logger logMessage:logMessage];
             } });
@@ -849,7 +849,7 @@ static NSUInteger _numProcessors;
             if (!(logMessage->_flag & loggerNode->_level)) {
                 continue;
             }
-    
+
             dispatch_sync(loggerNode->_loggerQueue, ^{ @autoreleasepool {
                 [loggerNode->_logger logMessage:logMessage];
             } });

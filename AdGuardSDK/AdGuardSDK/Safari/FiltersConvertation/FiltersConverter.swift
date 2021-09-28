@@ -142,7 +142,7 @@ final class FiltersConverter: FiltersConverterProtocol {
                 rulesByAffinityBlocks[defaultCBType]?.append(rule.rule)
                 continue
             }
-    
+
             for type in ContentBlockerType.allCases {
                 let affinity = type.affinity
                 if ruleAffinity == .all || ruleAffinity.contains(affinity) {
@@ -189,7 +189,7 @@ final class FiltersConverter: FiltersConverterProtocol {
                 advancedBlocking: configuration.advancedBlockingIsEnabled && configuration.proStatus
             )
             Logger.logInfo("FiltersCoverter result: \(result.message)")
-    
+
             // Just take the info we need
             let converterResult = FiltersConverterResult(type: cbType, conversionResult: result)
             conversionResult.append(converterResult)

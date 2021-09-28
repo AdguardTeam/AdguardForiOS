@@ -204,27 +204,27 @@ static NSInteger _lineBufferSize = ACIOUtilsDefaultLineBufferSize;
         NSUInteger bytesRead = 0;
         NSInteger read = 0;
         @try {
-    
+
             while (1)
             {
                 read = [input read:buffer maxLength:bufferSize];
                 if (read <= ACIO_EOF)
                     break;
-        
+
                 [outputData appendBytes:buffer length:read];
                 if (contentLength != -1){
-            
+
                     bytesRead += read;
                     if (bytesRead == contentLength)
                         break;
-            
+
                     if (contentLength - bytesRead < bufferSize)
                         bufferSize = contentLength - bytesRead;
                 }
             }
         }
         @finally {
-    
+
             free(buffer);
         }
 
@@ -260,27 +260,27 @@ static NSInteger _lineBufferSize = ACIOUtilsDefaultLineBufferSize;
         NSUInteger bytesRead = 0;
         NSInteger read = 0;
         @try {
-    
+
             while (1)
             {
                 read = [input read:buffer maxLength:bufferSize];
                 if (read <= ACIO_EOF)
                     break;
-        
+
                 [output write:buffer maxLength:read];
                 if (contentLength != -1){
-            
+
                     bytesRead += read;
                     if (bytesRead == contentLength)
                         break;
-            
+
                     if (contentLength - bytesRead < bufferSize)
                         bufferSize = contentLength - bytesRead;
                 }
             }
         }
         @finally {
-    
+
             free(buffer);
         }
 

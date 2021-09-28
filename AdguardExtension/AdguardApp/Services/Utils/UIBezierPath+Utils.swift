@@ -34,10 +34,10 @@ extension UIBezierPath {
 
         for i in 0..<points.count {
             let mid = midPoint(p1: p1, p2: points[i])
-    
+
             addQuadCurve(to: mid, controlPoint: controlPoint(p1: mid, p2: p1))
             addQuadCurve(to: points[i], controlPoint: controlPoint(p1: mid, p2: points[i]))
-    
+
             p1 = points[i]
         }
     }

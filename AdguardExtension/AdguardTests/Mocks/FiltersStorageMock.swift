@@ -23,7 +23,7 @@ class FiltersStorageMock: FiltersStorageProtocol {
     var filters: [Int: String]?
 
     func updateFilter(identifier: Int, completion: @escaping (Error?) -> Void) {
-    
+
     }
 
     func updateCustomFilter(identifier: Int, subscriptionUrl: URL, completion: @escaping (Error?) -> Void) {

@@ -42,7 +42,7 @@ class DefaultDatabaseManagerTest: XCTestCase {
             XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
             XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbArchiveRootUrl.path))
             XCTAssert(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileWorkingUrl.path))
-    
+
             try manager.updateDefaultDb()
             XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
             XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbArchiveRootUrl.path))
@@ -63,7 +63,7 @@ class DefaultDatabaseManagerTest: XCTestCase {
             XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
             XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbArchiveRootUrl.path))
             XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileWorkingUrl.path))
-    
+
             try manager.removeDefaultDb()
             XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
             XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbArchiveRootUrl.path))
@@ -83,12 +83,12 @@ class DefaultDatabaseManagerTest: XCTestCase {
             XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
             XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbArchiveRootUrl.path))
             XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileWorkingUrl.path))
-    
+
             TestsFileManager.deleteTestFolder()
             XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
             XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbArchiveRootUrl.path))
             XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileWorkingUrl.path))
-    
+
             try manager.removeDefaultDb()
             XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
             XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbArchiveRootUrl.path))
@@ -106,7 +106,7 @@ class DefaultDatabaseManagerTest: XCTestCase {
             try manager.updateDefaultDb()
             XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
             XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbArchiveRootUrl.path))
-    
+
             try manager.removeDefaultDb()
             XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
             XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbArchiveRootUrl.path))
@@ -148,7 +148,7 @@ class DefaultDatabaseManagerTest: XCTestCase {
             XCTAssertNil(manager.defaultDbSchemaVersion)
             try manager.updateDefaultDb()
             XCTAssertNotNil(manager.defaultDbSchemaVersion)
-    
+
         } catch {
             XCTFail("\(error)")
         }

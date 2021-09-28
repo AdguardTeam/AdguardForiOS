@@ -96,19 +96,19 @@ struct URLSchemeParser: IURLSchemeParser {
             DDLogInfo("(URLSchemeParser) openurl - adding new user rule from safari")
             let processor = OpenUserFilterControllerParser(executor: executor)
             return processor.parse(url)
-    
+
         // Turning on/off DNS protection from widget
         case (.urlScheme, .openSystemProtection):
             DDLogInfo("(URLSchemeParser) openurl - turning on/off DNS protection from widget")
             let processor = OpenDnsSettingsControllerWithLaunchScreenParser(executor: executor)
             return processor.parse(url)
-    
+
         // Turning on/off complex protection from widget
         case (.urlScheme, .openComplexProtection):
             DDLogInfo("(URLSchemeParser) openurl - turning on/off complex protection from widget")
             let processor = OpenMainPageControllerControllerWithLaunchScreenParser(executor: executor)
             return processor.parse(url)
-    
+
         // Activate license by URL
         case (.urlScheme, .activateLicense):
             DDLogInfo("(URLSchemeParser) - activate license key from openUrl")
@@ -118,11 +118,11 @@ struct URLSchemeParser: IURLSchemeParser {
                     return true
                 }
             }
-    
+
             DDLogInfo("(URLSchemeParser) - update license from openUrl")
             let mainPageParser = OpenMainPageControllerParser(executor: executor)
             return mainPageParser.parse(url)
-    
+
         // Adding custom DNS server
         case (.sdnsScheme, _):
             DDLogInfo("(URLSchemeParser) openurl sdns: \(url.absoluteString)")
@@ -139,7 +139,7 @@ struct URLSchemeParser: IURLSchemeParser {
             DDLogInfo("(URLSchemeParser) openurl - apply settings")
             let processor = OpenImportSettingsControllerParser(executor: executor)
             return processor.parse(url)
-    
+
         // Subscribe to custom safari filter
         case (_, .subscribe):
             DDLogInfo("(URLSchemeParser) openurl - subscribe filter")
@@ -157,27 +157,27 @@ struct URLSchemeParser: IURLSchemeParser {
             DDLogInfo("(URLSchemeParser) openurl - Log in by social networks")
             let processor = SocialNetworkAuthParametersParser(executor: executor)
             return processor.parse(url)
-    
+
         // Open with safari web extension action
         case (.urlScheme, .urlSchemeSafariWebExtension):
             DDLogInfo("(URLSchemeParser) openurl - open with safari web extension action")
             let processor = SafariWebExtensionParametersParser(executor: executor)
             return processor.parse(url)
-    
+
         // Open license controller
         case (.urlScheme, .upgradeApp):
             DDLogInfo("(URLSchemeParser) openurl - open license screen; proStatus=\(configurationService.proStatus)")
             guard !configurationService.proStatus else { return false }
-            
+
             let processor = OpenLicenseControllerParser(executor: executor)
             return processor.parse(url)
-    
+
             // Open license controller
         case (.urlScheme, .enableAdvancedProtection):
             DDLogInfo("(URLSchemeParser) openurl - open advanced protection screen; proStatus=\(configurationService.proStatus)")
             let processor = OpenAdvancedProtectionParser(executor: executor)
             return processor.parse(url)
-    
+
         default: return false
         }
     }

@@ -151,7 +151,7 @@ static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey
 
         if ([db hasOpenResultSets]) {
             NSLog(@"Warning: there is at least one open result set around after performing [FMDatabaseQueue inDatabase:]");
-    
+
 #ifdef DEBUG
             NSSet *openSetCopy = FMDBReturnAutoreleased([[db valueForKey:@"_openResultSets"] copy]);
             for (NSValue *rsInWrappedInATastyValueMeal in openSetCopy) {
@@ -213,15 +213,15 @@ static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey
         BOOL shouldRollback = NO;
 
         if ([[self database] startSavePointWithName:name error:&err]) {
-    
+
             block([self database], &shouldRollback);
-    
+
             if (shouldRollback) {
                 // We need to rollback and release this savepoint to remove it
                 [[self database] rollbackToSavePointWithName:name error:&err];
             }
             [[self database] releaseSavePointWithName:name error:&err];
-    
+
         }
     });
     FMDBRelease(self);

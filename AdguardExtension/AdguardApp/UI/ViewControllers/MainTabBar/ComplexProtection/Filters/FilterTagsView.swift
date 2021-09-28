@@ -161,7 +161,7 @@ final class FilterTagsView: UIView, FilterTagsViewModel {
         }
 
         sender.frame.origin = CGPoint(x: leftInset, y: currentYposition)
-        
+
         leftInset += sender.frame.size.width + inset
     }
 }

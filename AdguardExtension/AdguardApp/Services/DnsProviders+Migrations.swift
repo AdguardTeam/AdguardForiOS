@@ -30,7 +30,7 @@ extension DnsProvidersService: DnsProvidersServiceMigratable {
 
     func migrateActiveServerIfNeeded() {
         guard let activeServer = self.activeDnsServer else {
-    
+
             DDLogInfo("(DnsProvidersMigration) - migrateActiveServerIfNeeded. Nothing to migrate")
             return
         }
@@ -65,17 +65,17 @@ extension DnsProvidersService: DnsProvidersServiceMigratable {
 
         if let mappedId = serversMapping[activeServer.serverId] {
             DDLogInfo("(DnsProvidersService)-  start active dns server migration")
-    
+
             let mappedIdString = String(mappedId)
-    
+
             // search server with mappedId in prdefined servers
             for provider in self.predefinedProviders {
                 for server in provider.servers ?? [] {
                     if server.serverId == mappedIdString {
                         DDLogInfo("(DnsProvidersService) migration.  found new dns server with id = \(mappedId)")
-                
+
                         self.activeDnsServer = server
-                
+
                         return
                     }
                 }
@@ -108,11 +108,11 @@ extension DnsProvidersService: DnsProvidersServiceMigratable {
             guard provider.servers?.count == 1,
                   let serverToMigrate = provider.servers?.first
             else { continue }
-    
+
             // Add port to DoQ server if needed
             if serverToMigrate.dnsProtocol == .doq,
                let upstream = serverToMigrate.upstreams.first {
-        
+
                 let newUpstream = addPortToUpstreamIfNeeded(upstream)
                 if newUpstream != upstream {
                     serverToMigrate.upstreams = [newUpstream]
@@ -126,11 +126,11 @@ extension DnsProvidersService: DnsProvidersServiceMigratable {
             else if serverToMigrate.dnsProtocol == .dnsCrypt,
                     let sdnsUpstream = serverToMigrate.upstreams.first,
                     let stamp = AGDnsStamp(string: sdnsUpstream, error: nil) {
-        
+
                 if stamp.proto == .AGSPT_DOQ && !stamp.providerName.contains(":") {
                     let newUpstream = stamp.providerName + ":784"
                     if newUpstream != stamp.providerName {
-                
+
                         stamp.providerName = newUpstream
                         serverToMigrate.upstreams = [stamp.stringValue]
                         if serverToMigrate.serverId == activeDnsServer?.serverId {

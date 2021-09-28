@@ -61,7 +61,7 @@ enum ContentBlockerCellState {
         switch self {
         case .enabled(rulesCount: _, filterNames: let filterNames):
             if filterNames.isEmpty { return nil }
-    
+
             let filtersString = String.localizedString("content_blocker_filters")
             return filtersString + "\n" + filterNames.joined(separator: "\n")
         default:

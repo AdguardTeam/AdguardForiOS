@@ -88,14 +88,14 @@ class SafariProtectionUserRulesTest: XCTestCase {
                     completion(error)
                 }
             }
-    
+
             mock.addRuleCalledCount = 0
             testMethodWithSuccess() { completion in
                 try method(completion)
             }
             XCTAssertEqual(mock.addRuleCalledCount, 1)
-    
-    
+
+
             mock.addRuleCalledCount = 0
             mock.addRuleError = MetaStorageMockError.error
             testMethodWithError() { completion in
@@ -103,8 +103,8 @@ class SafariProtectionUserRulesTest: XCTestCase {
             }
             XCTAssertEqual(mock.addRuleCalledCount, 1)
             mock.addRuleError = nil
-    
-    
+
+
             mock.addRuleCalledCount = 0
             testMethodWithCbReloadError() { completion in
                 try method(completion)
@@ -123,14 +123,14 @@ class SafariProtectionUserRulesTest: XCTestCase {
                     completion(error)
                 }
             }
-    
+
             mock.addRulesCalledCount = 0
             testMethodWithSuccess() { completion in
                 try method(completion)
             }
             XCTAssertEqual(mock.addRulesCalledCount, 1)
-    
-    
+
+
             mock.addRulesCalledCount = 0
             mock.addRulesError = MetaStorageMockError.error
             testMethodWithError() { completion in
@@ -138,8 +138,8 @@ class SafariProtectionUserRulesTest: XCTestCase {
             }
             XCTAssertEqual(mock.addRulesCalledCount, 1)
             mock.addRulesError = nil
-    
-    
+
+
             mock.addRulesCalledCount = 0
             testMethodWithCbReloadError() { completion in
                 try method(completion)
@@ -157,14 +157,14 @@ class SafariProtectionUserRulesTest: XCTestCase {
                     completion(error)
                 }
             }
-    
+
             mock.modifyRuleCalledCount = 0
             testMethodWithSuccess() { completion in
                 try method(completion)
             }
             XCTAssertEqual(mock.modifyRuleCalledCount, 1)
-    
-    
+
+
             mock.modifyRuleCalledCount = 0
             mock.modifyRuleError = MetaStorageMockError.error
             testMethodWithError() { completion in
@@ -172,8 +172,8 @@ class SafariProtectionUserRulesTest: XCTestCase {
             }
             XCTAssertEqual(mock.modifyRuleCalledCount, 1)
             mock.modifyRuleError = nil
-    
-    
+
+
             mock.modifyRuleCalledCount = 0
             testMethodWithCbReloadError() { completion in
                 try method(completion)
@@ -191,14 +191,14 @@ class SafariProtectionUserRulesTest: XCTestCase {
                     completion(error)
                 }
             }
-    
+
             mock.modifyRuleCalledCount = 0
             testMethodWithSuccess() { completion in
                 try method(completion)
             }
             XCTAssertEqual(mock.modifyRuleCalledCount, 2)
-    
-    
+
+
             mock.modifyRuleCalledCount = 0
             testMethodWithCbReloadError() { completion in
                 try method(completion)
@@ -216,14 +216,14 @@ class SafariProtectionUserRulesTest: XCTestCase {
                     completion(error)
                 }
             }
-    
+
             mock.removeRuleCalledCount = 0
             testMethodWithSuccess() { completion in
                 try method(completion)
             }
             XCTAssertEqual(mock.removeRuleCalledCount, 1)
-    
-    
+
+
             mock.removeRuleCalledCount = 0
             mock.removeRuleError = MetaStorageMockError.error
             testMethodWithError() { completion in
@@ -231,8 +231,8 @@ class SafariProtectionUserRulesTest: XCTestCase {
             }
             XCTAssertEqual(mock.removeRuleCalledCount, 1)
             mock.removeRuleError = nil
-    
-    
+
+
             mock.removeRuleCalledCount = 0
             testMethodWithCbReloadError() { completion in
                 try method(completion)
@@ -250,14 +250,14 @@ class SafariProtectionUserRulesTest: XCTestCase {
                     completion(error)
                 }
             }
-    
+
             mock.removeRuleCalledCount = 0
             testMethodWithSuccess() { completion in
                 try method(completion)
             }
             XCTAssertEqual(mock.removeRuleCalledCount, 2)
-                
-    
+
+
             mock.removeRuleCalledCount = 0
             testMethodWithCbReloadError() { completion in
                 try method(completion)
@@ -275,14 +275,14 @@ class SafariProtectionUserRulesTest: XCTestCase {
                     completion(error)
                 }
             }
-    
+
             mock.removeAllRulesCalledCount = 0
             testMethodWithSuccess() { completion in
                 try! method(completion)
             }
             XCTAssertEqual(mock.removeAllRulesCalledCount, 1)
-    
-    
+
+
             mock.removeAllRulesCalledCount = 0
             testMethodWithCbReloadError() { completion in
                 try! method(completion)

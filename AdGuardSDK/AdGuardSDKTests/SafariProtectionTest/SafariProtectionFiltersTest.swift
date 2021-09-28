@@ -182,7 +182,7 @@ class SafariProtectionFiltersTest: XCTestCase {
             XCTAssertEqual(error as! MetaStorageMockError, .error)
             expectation.fulfill()
         } onCbReloaded: { error in
-    
+
         }
         wait(for: [expectation], timeout: 0.5)
 

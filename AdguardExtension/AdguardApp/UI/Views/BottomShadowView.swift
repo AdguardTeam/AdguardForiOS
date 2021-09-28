@@ -142,14 +142,14 @@ class BottomShadowView: UIView {
 
     private func resizeView(){
         buttonsViewHeight.constant = 0.0
-        
+
         var previousElement: UIView = self
         for (index, button) in buttons.enumerated() {
             positionButton(button: button, previousElement: previousElement, index: index)
-    
+
             buttonsViewHeight.constant += buttonsHeight
             previousElement = button
-    
+
             if index != buttons.endIndex - 1 {
                 previousElement = createSeparator(previousElement: previousElement)
                 buttonsViewHeight.constant += separatorHeight

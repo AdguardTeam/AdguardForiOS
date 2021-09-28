@@ -77,7 +77,7 @@ class RoundRectButton: UIButton {
     var buttonIsOn: Bool = true {
         didSet{
             updateTints()
-    
+
             if onAccessibilityTitle == nil || offAccessibilityTitle == nil { return }
             accessibilityLabel = buttonIsOn ? onAccessibilityTitle : offAccessibilityTitle
         }

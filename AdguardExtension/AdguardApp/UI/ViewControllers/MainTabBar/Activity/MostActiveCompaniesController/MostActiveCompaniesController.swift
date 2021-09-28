@@ -69,12 +69,12 @@ extension MostActiveCompaniesController: UITableViewDataSource, UITableViewDeleg
             cell.theme = theme
             cell.companyLabel.text = record.key
             cell.requestsNumberLabel.text = String(format: String.localizedString("requests_number"), record.requests)
-    
+
             if indexPath.row == 0 {
                 let fontSize = cell.companyLabel.font.pointSize
                 cell.companyLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
             }
-    
+
             return cell
         }
         return UITableViewCell()

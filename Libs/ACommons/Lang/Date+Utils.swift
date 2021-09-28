@@ -38,7 +38,7 @@ extension Date {
         let id = Locale.current.identifier
         dateFormatter.locale = Locale(identifier: id)
         let dateString = dateFormatter.string(from: self)
-    
+
         return dateString
     }
 

@@ -114,7 +114,7 @@ extension SafariProtection {
                 return
             }
             Logger.logInfo("(SafariProtection+BackgroundFetch) - finishBackgroundUpdate start; Current state = \(self.currentBackgroundFetchState)")
-    
+
             switch self.currentBackgroundFetchState {
             case .loadAndSaveFilters:
                 let group = DispatchGroup()
@@ -149,11 +149,11 @@ extension SafariProtection {
 
         workingQueue.async { [weak self] in
             guard let self = self else { return }
-    
+
             var safariFiltersUpdateError: Error?
             var dnsFiltersUpdateError: Error?
             let group = DispatchGroup()
-    
+
             // Update Safari filters
             group.enter()
             self.filters.updateAllMeta(forcibly: true) { result in
@@ -163,7 +163,7 @@ extension SafariProtection {
                 }
                 group.leave()
             }
-    
+
             // Update DNS filters
             if let dnsUpdater = self.dnsBackgroundFetchUpdater {
                 group.enter()
@@ -172,13 +172,13 @@ extension SafariProtection {
                     group.leave()
                 }
             }
-    
+
             // On Safari and DNS filters updated
             group.notify(queue: self.completionQueue) { [weak self] in
                 guard let self = self else { return }
-        
+
                 let oldState = self.currentBackgroundFetchState
-        
+
                 // Successfully updated
                 if safariFiltersUpdateError == nil && dnsFiltersUpdateError == nil {
                     self.currentBackgroundFetchState = .convertFilters
@@ -192,11 +192,11 @@ extension SafariProtection {
                     onFiltersUpdated(result)
                     return
                 }
-        
+
                 // Failed to update
                 if let error = safariFiltersUpdateError {
                     Logger.logError("(SafariProtection+BackgroundFetch) - updateFilters; Safari update error: \(error)")
-            
+
                 }
                 if let error = dnsFiltersUpdateError {
                     Logger.logError("(SafariProtection+BackgroundFetch) - updateFilters; DNS update error: \(error)")
@@ -251,9 +251,9 @@ extension SafariProtection {
         workingQueue.async { [weak self] in
             self?.cbService.updateContentBlockers { [weak self] error in
                 guard let self = self else { return }
-        
+
                 let oldState = self.currentBackgroundFetchState
-        
+
                 if let error = error {
                     Logger.logError("(SafariProtection+BackgroundFetch) - reloadContentBlockers; Error reloading CBs: \(error)")
                     let result = BackgroundFetchUpdateResult(

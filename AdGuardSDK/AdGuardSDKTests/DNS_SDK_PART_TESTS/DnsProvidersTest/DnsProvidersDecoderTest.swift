@@ -37,20 +37,20 @@ class DnsProvidersDecoderTest: XCTestCase {
             let enProvider = enProviders[i]
             let deProvider = deProviders[i]
             let zhProvider = zhProviders[i]
-    
+
             XCTAssertNotEqual(enProvider.providerDescription, deProvider.providerDescription)
             XCTAssertNotEqual(enProvider.providerDescription, zhProvider.providerDescription)
             XCTAssertNotEqual(deProvider.providerDescription, zhProvider.providerDescription)
-    
+
             let allEnFeatures = enProvider.servers.flatMap { $0.features }
             let allDeFeatures = deProvider.servers.flatMap { $0.features }
             let allZhFeatures = zhProvider.servers.flatMap { $0.features }
-    
+
             for j in 0..<allEnFeatures.count {
                 let enFeature = allEnFeatures[j]
                 let deFeature = allDeFeatures[j]
                 let zhFeature = allZhFeatures[j]
-        
+
                 XCTAssertNotEqual(enFeature.name, deFeature.name)
                 XCTAssertNotEqual(enFeature.name, zhFeature.name)
                 XCTAssertNotEqual(deFeature.name, zhFeature.name)

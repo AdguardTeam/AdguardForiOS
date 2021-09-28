@@ -129,15 +129,15 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
 
         updateProtections(safari: true, system: shouldUpdateSystemProtection, vc: VC) { [weak self] (safariError, systemError) in
             guard let self = self else { return }
-    
+
             if safariError != nil {
                 self.resources.safariProtectionEnabled = safariEnabled
             }
-    
+
             if systemError != nil {
                 self.resources.systemProtectionEnabled = systemEnabled
             }
-    
+
             completion(safariError, systemError)
         }
     }
@@ -156,7 +156,7 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
 
         if enabled && !resources.complexProtectionEnabled {
             resources.complexProtectionEnabled = true
-    
+
             if resources.systemProtectionEnabled {
                 resources.systemProtectionEnabled = false
             }
@@ -170,15 +170,15 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
 
         updateProtections(safari: needsUpdateSafari, system: needsUpdateSystemProtection, vc: VC) { [weak self] (safariError, systemError) in
             guard let self = self else { return }
-    
+
             if safariError != nil {
                 self.resources.safariProtectionEnabled = safariOld
             }
-    
+
             if systemError != nil {
                 self.resources.systemProtectionEnabled = systemOld
             }
-    
+
             completion(safariError)
         }
     }
@@ -197,15 +197,15 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
 
         updateProtections(safari: needsUpdate.needsUpdateSafari, system: needsUpdate.needsUpdateSystem, vc: VC) { [weak self] (safariError, systemError) in
             guard let self = self else { return }
-    
+
             if safariError != nil {
                 self.resources.safariProtectionEnabled = safariOld
             }
-    
+
             if systemError != nil {
                 self.resources.systemProtectionEnabled = systemOld
             }
-    
+
             completion(systemError)
         }
     }
@@ -214,12 +214,12 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
 
         DispatchQueue(label: "complex protection queue").async { [weak self] in
             guard let self = self else { return }
-    
+
             var safariError: Error?
             var systemError: Error?
-    
+
             let group = DispatchGroup()
-    
+
             if safari {
                 group.enter()
                 self.safariProtection.update(safariProtectionEnabled: self.safariProtectionEnabled ) { error in
@@ -228,7 +228,7 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
                     group.leave()
                 }
             }
-    
+
             if system {
                 DDLogInfo("(ComplexProtectionService) - Begining updating dns protection")
                 group.enter()
@@ -238,9 +238,9 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
                     group.leave()
                 }
             }
-    
+
             group.wait()
-    
+
             completion(safariError, systemError)
         }
     }
@@ -278,17 +278,17 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
         }
 
         if !vpnManager.vpnInstalled && resources.systemProtectionEnabled && vc != nil {
-    
+
             #if !APP_EXTENSION
             self.showConfirmVpnAlert(for: vc!) { [weak self] (confirmed) in
                 guard let self = self else { return }
-        
+
                 if !confirmed {
                     self.resources.systemProtectionEnabled = false
                     completion(ComplexProtectionError.cancelledAddingVpnConfiguration)
                     return
                 }
-        
+
                 self.vpnManager.installVpnConfiguration(completion: completion)
             }
             #endif
@@ -323,7 +323,7 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
                     self.resources.complexProtectionEnabled = enabled
                 }
             }
-    
+
             NotificationCenter.default.post(name: ComplexProtectionService.systemProtectionChangeNotification, object: self)
         }
 
@@ -336,11 +336,11 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
             } else {
                 self.switchSystemProtectionInternal(state: false, for: nil) { [weak self] error in
                     guard let self = self else { return }
-        
+
                     if let error = error {
                         DDLogError("Failed to turn off system protection, error: \(error.localizedDescription)")
                     }
-        
+
                     let managerIsEnabled = self.nativeDnsSettingsManager.dnsConfigIsEnabled
                     let _ = self.updateSystemProtectionResources(toEnabledState: managerIsEnabled)
                     NotificationCenter.default.post(name: ComplexProtectionService.systemProtectionChangeNotification, object: self)
@@ -373,13 +373,13 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
             let okTitle: String = String.localizedString("common_action_ok")
             let cancelTitle: String = String.localizedString("common_action_cancel")
             let privacyTitle: String = String.localizedString("privacy_policy_action")
-    
+
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-    
+
             let okAction = UIAlertAction(title: okTitle, style: .default) {(alert) in
                 confirmed(true)
             }
-    
+
             let privacyAction = UIAlertAction(title: privacyTitle, style: .default) { (alert) in
                 UIApplication.shared.openAdguardUrl(action: "privacy", from: "DnsSettingsController", buildVersion: self.productInfo.buildVersion())
                 confirmed(false)
@@ -387,13 +387,13 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
             let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel) { (alert) in
                 confirmed(false)
             }
-    
+
             alert.addAction(okAction)
             alert.addAction(privacyAction)
             alert.addAction(cancelAction)
-    
+
             alert.preferredAction = okAction
-    
+
             vc.present(alert, animated: true, completion: nil)
         }
     }

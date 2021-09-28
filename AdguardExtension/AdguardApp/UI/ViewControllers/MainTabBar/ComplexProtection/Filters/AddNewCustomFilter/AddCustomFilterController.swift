@@ -120,7 +120,7 @@ final class AddCustomFilterController: BottomAlertController {
             guard let self = self,
                   let controller = self.storyboard?.instantiateViewController(withIdentifier: "NewCustomFilterDetailsController") as? NewCustomFilterDetailsController
             else { return }
-    
+
             controller.delegate = self.delegate
             let model = NewCustomFilterModel(
                 filterName: meta.name ?? "",

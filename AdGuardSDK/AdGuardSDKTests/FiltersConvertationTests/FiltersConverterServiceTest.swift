@@ -91,7 +91,7 @@ class FiltersConverterServiceTest: XCTestCase {
         let adsFilter1 = SafariGroup.Filter(name: "adsFilter1", description: nil, isEnabled: true, filterId: 1, version: nil, lastUpdateDate: nil, updateFrequency: nil, group: adsGroup, displayNumber: 1, languages: [], tags: [], homePage: nil, filterDownloadPage: nil, rulesCount: 10)
         let adsFilter2 = SafariGroup.Filter(name: "adsFilter2", description: nil, isEnabled: false, filterId: 2, version: nil, lastUpdateDate: nil, updateFrequency: nil, group: adsGroup, displayNumber: 2, languages: [], tags: [], homePage: nil, filterDownloadPage: nil, rulesCount: 20)
         adsGroup.filters = [adsFilter1, adsFilter2]
-    
+
 
         var socialGroup = SafariGroup(filters: [], isEnabled: true, groupType: .socialWidgets, groupName: "social", displayNumber: 2)
         let socialFilter1 = SafariGroup.Filter(name: "socialFilter1", description: nil, isEnabled: true, filterId: 3, version: nil, lastUpdateDate: nil, updateFrequency: nil, group: socialGroup, displayNumber: 1, languages: [], tags: [], homePage: nil, filterDownloadPage: nil, rulesCount: 10)

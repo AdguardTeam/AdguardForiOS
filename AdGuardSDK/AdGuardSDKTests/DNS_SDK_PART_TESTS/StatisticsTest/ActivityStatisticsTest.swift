@@ -390,7 +390,7 @@ class ActivityStatisticsTest: XCTestCase {
         for i in 0..<expected.count {
             let exp = expected[i]
             let rl = real[i]
-    
+
             XCTAssertEqual(exp, rl, "Elements differ at index=\(i)")
         }
     }

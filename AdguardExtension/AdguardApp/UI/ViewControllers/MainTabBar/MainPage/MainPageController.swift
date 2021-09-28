@@ -202,7 +202,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
         complexProtectionSwitch.delegate = self
         mainPageModel.delegate = self
-    
+
 
         contentBlockersGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleContentBlockersView(_:)))
         if let recognizer = contentBlockersGestureRecognizer {
@@ -296,7 +296,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 self.applyingChangesEnded()
-        
+
                 if error != nil {
                     ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: error?.localizedDescription)
                 }
@@ -335,7 +335,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             complexProtection.switchSystemProtection(state: systemProtectionButton.buttonIsOn, for: self) { [weak self] error in
                 DispatchQueue.main.async {
                     guard let self = self else { return }
-            
+
                     self.applyingChangesEnded()
                     if error != nil {
                         ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: error?.localizedDescription)
@@ -366,11 +366,11 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             DispatchQueue.asyncSafeMain { [weak self] in
                 guard let self = self else { return }
                 self.applyingChangesEnded()
-        
+
                 if safariError != nil {
                     ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: safariError?.localizedDescription)
                 }
-        
+
                 if systemError != nil {
                     ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: systemError?.localizedDescription)
                 }
@@ -479,20 +479,20 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
         present(controller, animated: true, completion: nil)
     }
-    
+
     /**
     Changes number of requests for all buttons
     */
     private func updateTextForButtons(requestsCount: Int, encryptedCount: Int, averageElapsed: Double){
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
-    
+
             let requestsNumberDefaults = self.resources.tempRequestsCount
             let requestsNumber = requestsCount + requestsNumberDefaults
-    
+
             let encryptedNumberDefaults = self.resources.tempEncryptedRequestsCount
             let encryptedNumber = encryptedCount + encryptedNumberDefaults
-    
+
             self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsNumber))
             self.encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedNumber))
             self.elapsedNumberLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: averageElapsed))
@@ -540,10 +540,10 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         } else {
             chartView.activeChart = .encrypted
             chartModel.chartType = .encrypted
-    
+
             requestsNumberLabel.alpha = 0.5
             encryptedNumberLabel.alpha = 1.0
-    
+
             requestsTextLabel.alpha = 0.5
             encryptedTextLabel.alpha = 1.0
         }
@@ -615,7 +615,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             self?.iconButton?.isUserInteractionEnabled = true
             self?.updateButton.customView?.rotateImage(isNedeed: false)
             self?.updateProtectionStates()
-    
+
             // return status title few seconds later
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
                 self?.updateProtectionStatusText()

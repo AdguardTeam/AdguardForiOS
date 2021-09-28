@@ -94,9 +94,9 @@
             result = [_delegate write:buffer maxLength:len stream:self];
 
         if (result > ACIO_EOF){
-    
+
             _bytesWritten += result;
-    
+
             [_counterWrittenBytesLocker lock];
             _counterWrittenBytes += result;
             [_counterWrittenBytesLocker unlock];

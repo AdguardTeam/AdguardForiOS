@@ -162,13 +162,13 @@ final class NetworkSettingsTableController: UITableViewController, AddRuleContro
             cell.theme = theme
             cell.filterDataTag = row
             cell.filterDataSwitch.tag = row
-    
+
             cell.filterDataSwitch.addTarget(self, action: #selector(filterDataStateAction(_:)), for: .valueChanged)
-    
+
             let filteringMobileDataEnabled: Bool = model?.filterMobileDataEnabled ?? false
             let filteringWifiDataEnabled: Bool = model?.filterWifiDataEnabled ?? false
             cell.enabled = (row == mobileDataRow) ? filteringMobileDataEnabled : filteringWifiDataEnabled
-    
+
             return cell
         }
         return UITableViewCell()
@@ -193,7 +193,7 @@ final class NetworkSettingsTableController: UITableViewController, AddRuleContro
 
     private func setupWifiExceptionsCell(row: Int) -> UITableViewCell {
         let cell = UserRuleTableViewCell.getCell(forTableView: self.tableView)
-    
+
         let exception = model.exceptions[row]
         cell.model = UserRuleCellModel(rule: exception.rule, isEnabled: exception.enabled, isSelected: false, isEditing: false)
 
@@ -218,7 +218,7 @@ final class NetworkSettingsTableController: UITableViewController, AddRuleContro
         guard let controller = storyboard.instantiateViewController(withIdentifier: "AddRuleController") as? AddRuleController else { return }
         controller.delegate = self
         controller.type = .wifiExceptions
-    
+
         present(controller, animated: true, completion: nil)
     }
 
@@ -230,7 +230,7 @@ final class NetworkSettingsTableController: UITableViewController, AddRuleContro
         let rule = UserRule(ruleText: exception.rule, isEnabled: exception.enabled)
 
         controller.context = RuleDetailsController.Context(rule: rule, ruleIndexPath: IndexPath(row: row, section: 0), delegate: model, ruleType: .wifiExceptions)
-    
+
         present(controller, animated: true, completion: nil)
     }
 

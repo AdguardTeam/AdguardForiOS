@@ -79,12 +79,12 @@ final class ProductionDatabaseManager: ProductionDatabaseManagerProtocol {
         let productionDbExists = fileManager.fileExists(atPath: productionDbFileUrl.path)
 
         if !productionDbExists {
-    
+
             // Check if default.db exists and create it otherwise
             if !defaultDatabaseManager.defaultDbFileExists {
                 try defaultDatabaseManager.updateDefaultDb()
             }
-    
+
             // When adguard.db is missing we rename default.db -> adguard.db
             let _ = try fileManager.replaceItemAt(productionDbFileUrl, withItemAt: defaultDatabaseManager.defaultDbFileUrl)
         }

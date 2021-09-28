@@ -37,7 +37,7 @@ struct SignInFailureHandler: SignInFailureHandlerProtocol {
             let errorDescription = error?.localizedDescription ?? "nil"
             DDLogError("(LoginController) processLoginResponse - unknown error: \(errorDescription)")
             let message = String.localizedString("login_error_message")
-    
+
             notificationService.postNotificationInForeground(body: message, title: "")
             return nil
         }
@@ -55,7 +55,7 @@ struct SignInFailureHandler: SignInFailureHandlerProtocol {
             errorMessage = String.localizedString("account_is_disabled_error")
         case LoginService.accountIsLocked:
             errorMessage = String.localizedString("account_is_locked_error")
-    
+
         // errors to be show as alert
         case LoginService.loginMaxComputersExceeded:
             alertMessage = String.localizedString("login_max_computers_exceeded")
@@ -64,7 +64,7 @@ struct SignInFailureHandler: SignInFailureHandlerProtocol {
         // 2fa required
         case LoginService.auth2FaRequired:
             auth2Fa?()
-    
+
         default:
             alertMessage = String.localizedString("login_error_message")
         }

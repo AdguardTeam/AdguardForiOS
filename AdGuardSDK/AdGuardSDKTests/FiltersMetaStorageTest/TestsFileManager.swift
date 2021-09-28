@@ -27,7 +27,7 @@ final class TestsFileManager {
             if fileManager.fileExists(atPath: rootDirectory.appendingPathComponent(defaultDbFileName).path) {
                 try fileManager.removeItem(at: rootDirectory.appendingPathComponent(defaultDbFileName))
             }
-    
+
             if fileManager.fileExists(atPath: rootDirectory.appendingPathComponent(adguardDbFileName).path) {
                 try fileManager.removeItem(at: rootDirectory.appendingPathComponent(adguardDbFileName))
             }

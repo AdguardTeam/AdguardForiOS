@@ -212,7 +212,7 @@ extension MetaStorage: FiltersMetaStorageProtocol {
         let query = FiltersTable.table
                                 .where(FiltersTable.filterId == filter.filterId)
                                 .update(filter.updateSetters)
-    
+
         try filtersDb.run(query)
         Logger.logInfo("(FiltersMetaStorage) - Filter was updated with id \(filter.filterId)")
         return true

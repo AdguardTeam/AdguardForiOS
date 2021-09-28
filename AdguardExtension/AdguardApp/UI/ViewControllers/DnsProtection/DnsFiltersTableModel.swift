@@ -82,12 +82,12 @@ extension DnsFiltersTableModel: NewCustomFilterDetailsControllerDelegate {
                 self?.updateModels()
                 self?.delegate?.filterAdded()
             }
-    
+
             // Restart tunnel to apply new filter
             if error == nil {
                 self?.vpnManager.updateSettings(completion: nil)
             }
-    
+
             onFilterAdded(error)
         })
     }

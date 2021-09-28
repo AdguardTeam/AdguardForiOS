@@ -99,7 +99,7 @@ final class DnsProvidersController: UITableViewController {
             cell.model = cellModel
             cell.updateTheme(themeService: themeService)
             return cell
-    
+
         case .addProviderSection :
             let cell = AddTableViewCell.getCell(forTableView: tableView)
             cell.addTitle = String.localizedString("add_custom_dns_server_title")
@@ -127,7 +127,7 @@ final class DnsProvidersController: UITableViewController {
         switch section {
         case .providerSection:
             let tableModel = model.tableModels[indexPath.row]
-    
+
             if tableModel.provider.isDefault {
                 do {
                     try model.setProviderActive(provider: tableModel.provider)
@@ -137,14 +137,14 @@ final class DnsProvidersController: UITableViewController {
                 }
                 return
             }
-    
+
             if tableModel.provider.isCustom {
                 presentNewDnsServerController(controllerType: .edit, tableModel)
             } else {
                 providerToShow = tableModel.provider.predefined
                 self.performSegue(withIdentifier: dnsDetailsSegueConst, sender: self)
             }
-    
+
         case .addProviderSection: presentNewDnsServerController(controllerType: .add, nil)
         }
 

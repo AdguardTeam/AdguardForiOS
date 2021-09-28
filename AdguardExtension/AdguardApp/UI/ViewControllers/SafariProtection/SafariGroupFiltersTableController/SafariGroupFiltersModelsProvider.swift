@@ -57,10 +57,10 @@ final class SafariGroupFiltersModelsProvider {
             if group.groupType.proOnly && !proStatus {
                 return
             }
-    
+
             let groupModel = StateHeaderViewModel(iconImage: group.groupType.iconImage, title: group.groupName, isEnabled: group.isEnabled, id: group.groupType)
             self.initialGroupModels.append(groupModel)
-    
+
             let filtersModels = group.filters.map { filter -> SafariFilterCellModel in
                 let tagsModels = filter.tags.map { SafariTagButtonModel(tag: $0, isSelected: true) }
                 return SafariFilterCellModel(
@@ -92,7 +92,7 @@ final class SafariGroupFiltersModelsProvider {
             let filteredModels = filterModels.compactMap { filter -> SafariFilterCellModel? in
                 return check(filter, matches: tags, or: words)
             }
-    
+
             if !filteredModels.isEmpty {
                 let groupModel = initialGroupModels[i]
                 searchGroupModels.append(groupModel)

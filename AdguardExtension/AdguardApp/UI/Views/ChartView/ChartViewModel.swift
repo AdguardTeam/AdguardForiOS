@@ -172,20 +172,20 @@ final class ChartViewModel: ChartViewModelProtocol {
 
             var requestsPointX = requestsPoints[i].x
             let requestsPointY = requestsPoints[i].y
-    
+
             var encryptedPointX = encryptedPoints[i].x
             let encryptedPointY = encryptedPoints[i].y
-    
+
             //Correcting x coordinates of all points to find chart start position
             requestsPointX -= requestsPoints[0].x
             encryptedPointX -= encryptedPoints[0].x
-    
+
             let requestsPoint = CGPoint(x: requestsPointX, y: requestsPointY)
             let encryptedPoint = CGPoint(x: encryptedPointX, y: encryptedPointY)
-    
+
             requestsResult.append(requestsPoint)
             encryptedResult.append(encryptedPoint)
-    
+
             //Find max x element for requests
             if requestsResult[i].x > maxXRequestsElement {
                 maxXRequestsElement = CGFloat(requestsPointX)
@@ -194,18 +194,18 @@ final class ChartViewModel: ChartViewModelProtocol {
             if requestsResult[i].y > maxYRequestsElement {
                 maxYRequestsElement = CGFloat(requestsPointY)
             }
-    
+
             //Find max x element for encrypted requests
             if encryptedResult[i].x > maxXEncryptedElement {
                 maxXEncryptedElement = CGFloat(encryptedPointX)
             }
-    
+
             //Find max y element for encrypted requests
             if encryptedResult[i].y > maxYEncryptedElement {
                 maxYEncryptedElement = CGFloat(encryptedPointY)
             }
         }
-    
+
         let maxXelement = max(maxXRequestsElement, maxXEncryptedElement)
         let maxYelement = max(maxYRequestsElement, maxYEncryptedElement)
         let chartPoints = ChartPoints(requestsPoints: requestsResult, encryptedPoints: encryptedResult, maxXelement: maxXelement, maxYelement: maxYelement)
@@ -226,10 +226,10 @@ final class ChartViewModel: ChartViewModelProtocol {
         encryptedResult.reserveCapacity(points.encryptedPoints.count)
 
         for i in 0..<points.requestsPoints.count {
-    
+
             let requestsPoint = points.requestsPoints[i]
             let encryptedPoint = points.encryptedPoints[i]
-    
+
             requestsResult.append(getModifiedPoint(point: requestsPoint, maxXelement: points.maxXelement, maxYelement: points.maxYelement))
             encryptedResult.append(getModifiedPoint(point: encryptedPoint, maxXelement: points.maxXelement, maxYelement: points.maxYelement))
         }

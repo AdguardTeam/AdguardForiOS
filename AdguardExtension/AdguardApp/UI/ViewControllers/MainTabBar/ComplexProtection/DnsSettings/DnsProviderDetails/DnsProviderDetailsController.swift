@@ -133,7 +133,7 @@ final class DnsProviderDetailsController : UITableViewController {
             showSelectServerAlert()
         case .websiteRow:
             guard let url = URL(string: model.providerHomepage) else { return }
-    
+
             let safariController = SFSafariViewController(url: url)
             present(safariController, animated: true, completion: nil)
         }

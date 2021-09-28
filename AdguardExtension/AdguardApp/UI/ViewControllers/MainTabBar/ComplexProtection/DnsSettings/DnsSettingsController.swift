@@ -154,17 +154,17 @@ final class DnsSettingsController : UITableViewController {
 
         if indexPath.section == menuSection {
             cell.isHidden = !proStatus
-    
+
             if indexPath.row == dnsFilteringRow && proStatus {
                 cell.isHidden = !configuration.advancedMode || resources.dnsImplementation == .native
                 networkSettingsSeparator.isHidden = (!configuration.advancedMode || resources.dnsImplementation == .native) && resources.dnsImplementation == .adGuard
             }
-    
+
             if indexPath.row == howToSetupRow && (resources.dnsImplementation != .native || !ios14available) {
                 cell.isHidden = true
                 dnsFilteringSeparator.isHidden = resources.dnsImplementation != .native
             }
-    
+
             if !ios14available && indexPath.row == implementationRow {
                 cell.isHidden = true
             }
@@ -182,19 +182,19 @@ final class DnsSettingsController : UITableViewController {
         }
 
         if indexPath.section == menuSection {
-    
+
             if indexPath.row == dnsFilteringRow && (!configuration.advancedMode || resources.dnsImplementation == .native) {
                 return 0.0
             }
-    
+
             if indexPath.row == howToSetupRow && (resources.dnsImplementation != .native || !ios14available) {
                 return 0.0
             }
-    
+
             if !ios14available && indexPath.row == implementationRow {
                 return 0.0
             }
-    
+
             return proStatus ? normalHeight : 0.0
         }
 

@@ -71,7 +71,7 @@ final class MetaStorage: MetaStorageProtocol {
                 .scalar(FilterGroupsTable.table.select(FilterGroupsTable.groupId.count)
                             .where(FilterGroupsTable.groupId == SafariGroup.GroupType.custom.rawValue))
             if count > 0 { return }
-    
+
             //Query: INSERT INTO filter_groups (\"group_id\", \"name\") VALUES (SafariGroup.GroupType.custom, \'Custom\')"
             let insertionQuery = FilterGroupsTable
                 .table.insert(FilterGroupsTable.groupId <- SafariGroup.GroupType.custom.rawValue,

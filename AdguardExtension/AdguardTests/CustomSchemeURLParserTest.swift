@@ -29,7 +29,7 @@ class CustomSchemeURLParserTest: XCTestCase {
     func testParseURL() {
         let url = URL(string: "adguard:subscribe?location=https://easylist.to/easylist/easylist.txt&title=EasyList")!
         let result = url.parseUrl()
-    
+
 
         let locationValue = result.params?["location"]
         let titleValue = result.params?["title"]

@@ -60,7 +60,7 @@ final class SafariGroupFiltersTableController: UITableViewController {
         case .one(let groupType):
             model = OneSafariGroupFiltersModel(groupType: groupType, safariProtection: safariProtection, configuration: configuration, themeService: themeService)
             navigationItem.rightBarButtonItems = [searchButton]
-    
+
             proStatusObserver = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
                 if self?.configuration.proStatus == false && groupType.proOnly {
                     self?.navigationController?.popViewController(animated: true)

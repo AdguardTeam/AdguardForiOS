@@ -77,7 +77,7 @@ class SafariServiceTest: XCTestCase {
         safariManager.errors = [bundleId!: errors]
 
         safariService.invalidateBlockingJson(type: .general) { (error) in
-    
+
             expectError ? XCTAssertNotNil(error) : XCTAssertNil(error)
             expectation.fulfill()
         }
@@ -95,7 +95,7 @@ class SafariServiceTest: XCTestCase {
 
         for _ in 0..<10 {
             safariService.invalidateBlockingJson(type: .general) { (error) in
-        
+
                 expectError ? XCTAssertNotNil(error) : XCTAssertNil(error)
                 expectation.fulfill()
             }
@@ -114,7 +114,7 @@ class SafariServiceTest: XCTestCase {
         safariManager.errors = [bundleId!: errors]
 
         safariService.invalidateBlockingJsons { (error) in
-    
+
             expectError ? XCTAssertNotNil(error) : XCTAssertNil(error)
             expectation.fulfill()
         }
@@ -133,7 +133,7 @@ class SafariServiceTest: XCTestCase {
 
         for _ in 0..<10 {
             safariService.invalidateBlockingJsons { (error) in
-        
+
                 expectError ? XCTAssertNotNil(error) : XCTAssertNil(error)
                 expectation.fulfill()
             }

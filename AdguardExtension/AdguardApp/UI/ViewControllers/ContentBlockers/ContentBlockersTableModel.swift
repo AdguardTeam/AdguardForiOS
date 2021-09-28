@@ -70,11 +70,11 @@ final class ContentBlockersTableModel {
 
         var cbModels: [ContentBlockerTableViewCellModel] = converterResults.map { converterResult in
             let cbType = converterResult.result.type
-    
+
             // Reveal number of rules that are not in CB
             var overLimitCount = converterResult.result.totalRules - converterResult.result.totalConverted
             if overLimitCount < 0 { overLimitCount = 0 }
-    
+
             // Reveal CB state
             let state: ContentBlockerCellState
             if filtersAreConverting {
@@ -93,7 +93,7 @@ final class ContentBlockersTableModel {
             } else {
                 state = .disabled(isAdvancedProtection: false)
             }
-    
+
             return ContentBlockerTableViewCellModel(state: state, cbType: cbType)
         }
 
@@ -125,10 +125,10 @@ final class ContentBlockersTableModel {
         // Add enabled rules to corresponding CB
         for group in safariProtection.groups {
             if !group.isEnabled { continue }
-    
+
             let enabledFilters = group.filters.filter { $0.isEnabled }
             if enabledFilters.isEmpty { continue }
-    
+
             let cbType = group.groupType.contentBlockerType
             let enabledFiltersNames = enabledFilters.map { $0.filterName }
             enabledFiltersByCB[cbType]?.append(contentsOf: enabledFiltersNames)

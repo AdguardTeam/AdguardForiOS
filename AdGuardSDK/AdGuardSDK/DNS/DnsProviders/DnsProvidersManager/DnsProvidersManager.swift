@@ -165,7 +165,7 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
             userDefaults.activeDnsInfo = DnsProvidersManager.ActiveDnsInfo(providerId: ids.providerId, serverId: ids.serverId)
         }
         reinitializeProviders()
-    
+
 
         Logger.logInfo("(DnsProvidersManager) - addCustomProvider; Added custom provider with name=\(name), upstreams=\(upstreams.joined(separator: "; ")) selectAsCurrent=\(selectAsCurrent)")
     }

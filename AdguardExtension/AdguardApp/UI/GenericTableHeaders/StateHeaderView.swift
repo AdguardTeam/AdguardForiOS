@@ -101,10 +101,10 @@ final class StateHeaderView<ModelIdType: Equatable>: UIView, IdentifiableObjectP
             iconImageView.topAnchor.constraint(equalTo: topAnchor, constant: 30.0),
             iconImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
             iconImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30.0),
-    
+
             titleLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 16.0),
             titleLabel.centerYAnchor.constraint(equalTo: iconImageView.centerYAnchor),
-    
+
             stateSwitch.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 16.0),
             stateSwitch.widthAnchor.constraint(equalToConstant: 50.0),
             stateSwitch.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),

@@ -139,7 +139,7 @@ extension AESharedResourcesProtocol {
             guard let value = sharedDefaults().object(forKey: AEComplexProtectionEnabled) as? Bool else {
                 return true
             }
-    
+
             return value
         }
         set {
@@ -182,7 +182,7 @@ extension AESharedResourcesProtocol {
             sharedDefaults().set(newValue, forKey: AEDefaultsIsProPurchasedThroughSetapp)
         }
     }
-    
+
     dynamic var customFallbackServers: [String]? {
            get {
                return sharedDefaults().array(forKey: CustomFallbackServers) as? [String]

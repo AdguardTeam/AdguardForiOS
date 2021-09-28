@@ -162,7 +162,7 @@ class RequestDetailsCell: UITableViewCell, CopiableCellInfo {
 
     private func updateModel(_ model: LogCellModelProtocol?) {
         guard let model = model else { return }
-        
+
         updateTheme(model.theme)
         titleLabel.text = model.title
         stringToCopy = model.copiedString

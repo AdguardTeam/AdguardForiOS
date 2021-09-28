@@ -123,12 +123,12 @@ class ActivityStatisticsServiceTest: XCTestCase {
 
         let jointGoogleRecord = ActivityStatisticsRecord(domain: "google.com", requests: googleRecord1.requests + googleRecord2.requests + googleRecord3.requests, encrypted: googleRecord1.encrypted + googleRecord2.encrypted + googleRecord3.encrypted)
 
-    
+
 
         let checkRecords = [checkAmazonRecord, jointFacebookRecord, jointGoogleRecord]
 
         activityStatisticsService.writeRecords(records)
-    
+
 
         let recordsToCheck = activityStatisticsService.getRecords(by: .alltime)
         XCTAssertEqual(recordsToCheck, checkRecords)

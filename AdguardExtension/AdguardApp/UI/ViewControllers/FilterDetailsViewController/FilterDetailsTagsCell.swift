@@ -111,14 +111,14 @@ final class FilterDetailsTagsCell: UITableViewCell, Reusable {
             button.translatesAutoresizingMaskIntoConstraints = false
             button.widthAnchor.constraint(equalToConstant: width).isActive = true
             button.heightAnchor.constraint(equalToConstant: tagHeight).isActive = true
-    
+
             if currentStackWidth + width > tagsStackViewWidth {
                 addEmptyView(to: horStack, currentStackWidth: currentStackWidth)
                 tagsStackView.addArrangedSubview(horStack)
                 horStack = getHorizontalTagStackView()
                 currentStackWidth = 0.0
             }
-    
+
             horStack.addArrangedSubview(button)
             currentStackWidth += width
             currentStackWidth += tagsInset

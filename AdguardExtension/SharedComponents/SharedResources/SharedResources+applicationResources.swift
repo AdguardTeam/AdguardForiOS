@@ -50,7 +50,7 @@ extension AESharedResourcesProtocol {
             guard let value = sharedDefaults().object(forKey: BlockingMode) as? Int else {
                 return .defaultMode
             }
-    
+
             return DnsProxyBlockingMode(rawValue: value) ?? .defaultMode
         }
         set {
@@ -83,7 +83,7 @@ extension AESharedResourcesProtocol {
             guard let value = sharedDefaults().object(forKey: AEDefaultsVPNTunnelMode) as? Int else {
                 return .split
             }
-    
+
             return TunnelMode(rawValue:  value) ?? .split
         }
         set {

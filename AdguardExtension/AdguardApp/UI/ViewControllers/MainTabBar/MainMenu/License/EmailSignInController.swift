@@ -191,21 +191,21 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
 
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-    
+
             // skip notification if this controler is not placed on top of navigation stack
             if self.navigationController?.viewControllers.last != self {
                 return
             }
-    
+
             self.loginButton.stopIndicator()
             self.loginButton.isEnabled = true
             self.isKeyboardNextButtonEnabled = true
-    
+
             let type = info[PurchaseService.kPSNotificationTypeKey] as? String
             let error = info[PurchaseService.kPSNotificationErrorKey] as? NSError
-    
+
             switch type {
-        
+
             case PurchaseService.kPSNotificationLoginSuccess:
                 self.loginSuccess()
             case PurchaseService.kPSNotificationLoginFailure:
@@ -214,7 +214,7 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
                 self.premiumExpired()
             case PurchaseService.kPSNotificationLoginNotPremiumAccount:
                 self.notPremium()
-        
+
             default:
                 break
             }

@@ -548,9 +548,9 @@ extension ActivityViewController: DateTypeChangedProtocol {
                 self?.mostActiveButton.isEnabled = false
                 self?.mostActiveCompany.text = String.localizedString("none_message")
             }
-    
+
             self?.companiesNumberLabel.text = "\(companiesInfo.companiesNumber)"
-    
+
             self?.mostRequestedCompanies = companiesInfo.mostRequested
             self?.companiesNumber = companiesInfo.companiesNumber
         }
@@ -567,9 +567,9 @@ extension ActivityViewController {
     private func updateTextForButtons(){
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
-    
+
             let counters = self.activityModel.counters
-    
+
             self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(value: counters.requests))
             self.encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(value: counters.encrypted))
             self.dataSavedLabel.text = String.simpleSecondsFormatter(NSNumber(value: counters.averageElapsed))

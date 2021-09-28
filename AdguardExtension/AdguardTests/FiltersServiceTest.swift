@@ -42,7 +42,7 @@ class FiltersServiceTest: XCTestCase {
             let group = ASDFilterGroup()
             group.groupId = groupParams.groupId as NSNumber
             group.enabled = groupParams.enabled as NSNumber
-    
+
             groupMetas.append(group)
         }
 
@@ -54,7 +54,7 @@ class FiltersServiceTest: XCTestCase {
             filter.filterId = filterParams.filterId as NSNumber
             filter.groupId = filterParams.groupId as NSNumber
             filter.enabled = filterParams.enabled as NSNumber
-    
+
             filterMetas.append(filter)
         }
 
@@ -208,19 +208,19 @@ class FiltersServiceTest: XCTestCase {
         filter.filterId = 2
         metadata.filters = [filter]
         requestSender.result = metadata
-      
+  
         let fitlersService = FiltersService(antibannerController: antibannerController, configuration: configuration, contentBlocker: contentBlocker, resources: SharedResourcesMock(), httpRequestService: httpRequestService, filtersStorage: FiltersStorageMock())
 
         let expectation = XCTestExpectation()
 
         fitlersService.load(refresh: true) {
-    
+
             XCTAssertTrue(requestSender.sendCalled)
-    
+
             let filters = antibanner.filters()
             XCTAssert(filters.count > 0)
             XCTAssert(filters.first?.filterId == 2)
-    
+
             expectation.fulfill()
         }
 

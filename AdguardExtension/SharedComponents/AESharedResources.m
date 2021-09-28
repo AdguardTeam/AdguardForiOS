@@ -240,16 +240,16 @@ NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
 
     @autoreleasepool {
         if (_containerFolderUrl) {
-    
+
             NSURL *dataUrl = [_containerFolderUrl URLByAppendingPathComponent:relativePath];
             if (dataUrl) {
                 ACLFileLocker *locker = [[ACLFileLocker alloc] initWithPath:[dataUrl path]];
                 if ([locker waitLock]) {
-            
+
                     NSData *data = [NSData dataWithContentsOfURL:dataUrl];
-            
+
                     [locker unlock];
-            
+
                     return data;
                 }
             }
@@ -267,16 +267,16 @@ NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
 
     @autoreleasepool {
         if (_containerFolderUrl) {
-    
+
             NSURL *dataUrl = [_containerFolderUrl URLByAppendingPathComponent:relativePath];
             if (dataUrl) {
                 ACLFileLocker *locker = [[ACLFileLocker alloc] initWithPath:[dataUrl path]];
                 if ([locker lock]) {
-            
+
                     BOOL result = [data writeToURL:dataUrl atomically:YES];
-            
+
                     [locker unlock];
-            
+
                     return result;
                 }
             }

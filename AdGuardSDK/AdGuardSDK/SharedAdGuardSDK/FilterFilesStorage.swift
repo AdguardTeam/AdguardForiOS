@@ -117,7 +117,7 @@ public final class FilterFilesStorage: FilterFilesStorageProtocol {
 
         guard let content = try? String.init(contentsOf: fileUrl, encoding: .utf8) else {
             Logger.logError("FiltersStorage getFilterContentForFilter error. Can not read filter with url: \(fileUrl)")
-    
+
             // try to get presaved filter file
             if  let presavedFilterFileUrl = defaultFilteUrlForFilter(withId: id),
                 let content = try? String.init(contentsOf: presavedFilterFileUrl, encoding: .utf8) {

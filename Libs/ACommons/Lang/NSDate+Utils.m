@@ -102,10 +102,10 @@ static NSDateFormatter *sqliteDateFormater;
     @synchronized(httpFormatters){
 
         for (NSDateFormatter *formater in httpFormatters) {
-    
+
             result = [formater dateFromString:dateValue];
             if (result) {
-        
+
                 break;
             }
         }

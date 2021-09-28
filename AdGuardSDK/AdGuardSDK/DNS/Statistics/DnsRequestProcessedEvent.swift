@@ -73,7 +73,7 @@ extension DnsRequestProcessedEvent {
         guard splitedAnswers.count == 1 else { return false }
 
         let dnsAnswer = splitedAnswers[0]
-        
+
         guard let range = dnsAnswer.range(of: ", ") else { return false }
         let ip = dnsAnswer[range.upperBound...]
 

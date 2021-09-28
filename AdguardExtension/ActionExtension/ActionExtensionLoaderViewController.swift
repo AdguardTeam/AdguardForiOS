@@ -49,7 +49,7 @@ final class ActionExtensionLoaderViewController: UIViewController {
         let contextProvider = ContextProvider()
         contextProvider.process(context: extensionContext) { [weak self] result in
             guard let self = self else { return }
-    
+
             switch result {
             case .success(let context):
                 let isSafariProtectionEnabled = self.isSafariProtectionEnabled(for: context.domain)

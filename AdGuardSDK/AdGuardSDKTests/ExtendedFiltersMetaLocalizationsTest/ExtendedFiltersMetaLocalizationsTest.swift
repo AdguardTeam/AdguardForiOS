@@ -8,7 +8,7 @@ class ExtendedFiltersMetaLocalizationsTest: XCTestCase {
         do {
             let decoder = JSONDecoder()
             let extendedFiltersMetaLocalizations = try decoder.decode(ExtendedFiltersMetaLocalizations.self, from: jsonData)
-    
+
             // Tags number differs from filters_test.json because localizations for some tags are missing
             XCTAssertEqual(extendedFiltersMetaLocalizations.tags.count, 60)
             XCTAssertEqual(extendedFiltersMetaLocalizations.groups.count, 7)

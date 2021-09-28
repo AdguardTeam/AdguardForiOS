@@ -46,7 +46,7 @@ final class UserRuleTableViewCell: UITableViewCell, Reusable {
         didSet {
             stateButton.isSelected = model.isEditing ? model.isSelected : model.isEnabled
             ruleLabel.attributedText = model.ruleAttrString
-    
+
             stateButton.setImage(UIImage(named: model.isEditing ? "box_normal" : "check-off"), for: .normal)
             stateButton.setImage(UIImage(named: model.isEditing ? "box_selected" : "check-on"), for: .selected)
             stateButton.isUserInteractionEnabled = !model.isEditing
@@ -94,7 +94,7 @@ final class UserRuleTableViewCell: UITableViewCell, Reusable {
             stateButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             stateButton.widthAnchor.constraint(equalToConstant: 24.0),
             stateButton.heightAnchor.constraint(equalToConstant: 24.0),
-    
+
             ruleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 14.0),
             ruleLabel.leadingAnchor.constraint(equalTo: stateButton.trailingAnchor, constant: 16.0),
             ruleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16.0),

@@ -54,7 +54,7 @@ final public class CompaniesStatistics: CompaniesStatisticsProtocol {
                 counters: domainRecord.counters,
                 domains: Set([domainRecord.domain])
             )
-    
+
             if let existingCompanyStatisticsRecord = countersByCompany[company] {
                 countersByCompany[company] = existingCompanyStatisticsRecord + companyStatisticsRecord
             } else {

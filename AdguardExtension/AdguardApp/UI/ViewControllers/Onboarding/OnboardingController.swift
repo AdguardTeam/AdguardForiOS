@@ -106,7 +106,7 @@ final class OnboardingController: UIViewController {
     private func setupLabels() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-    
+
             let settingsLabelText: String
             let safariLabelText: String
             switch self.onboardingContentView.onboardingType {
@@ -117,11 +117,11 @@ final class OnboardingController: UIViewController {
                 settingsLabelText = String.localizedString("onboarding_first_step_text")
                 safariLabelText = String.localizedString("onboarding_second_step_text")
             }
-    
+
             self.settingsLabel.attributedText = NSMutableAttributedString.fromHtml(settingsLabelText, fontSize: self.settingsLabel.font!.pointSize, color: self.theme.grayTextColor)
-    
+
             self.safariLabel.attributedText = NSMutableAttributedString.fromHtml(safariLabelText, fontSize: self.safariLabel.font!.pointSize, color: self.theme.grayTextColor)
-    
+
             self.switchLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_third_step_text"), fontSize: self.switchLabel.font!.pointSize, color: self.theme.grayTextColor)
         }
     }

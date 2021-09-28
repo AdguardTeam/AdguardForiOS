@@ -127,11 +127,11 @@ class NetworkSettingsServiceTest: XCTestCase, NetworkSettingsChangedDelegate {
         let wifiName = "Network name"
         let enabled = false
         let exeption = WifiException(rule: wifiName, enabled: enabled)
-    
+
         networkSettingsService.add(exception: exeption)
 
         XCTAssert(settingsChangedCalledCount == 1)
-    
+
         XCTAssertEqual([exeption], networkSettingsService.exceptions)
     }
 

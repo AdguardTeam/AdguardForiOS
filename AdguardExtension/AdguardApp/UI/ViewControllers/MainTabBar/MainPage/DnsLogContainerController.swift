@@ -72,23 +72,23 @@ class DnsLogContainerController: UIViewController {
             guard let self = self else { return }
             let proStatus = self.configuration.proStatus
             let nativeDnsImplementation = self.resources.dnsImplementation == .native
-    
+
             self.getProContainerView.isHidden = true
             self.systemProtectionEnablerContainerView.isHidden = true
             self.dnsLogContainerView.isHidden = true
             self.nativeDnsContainerView.isHidden = true
             self.hideTitle()
-    
+
             if proStatus {
-        
+
                 if nativeDnsImplementation {
                     self.nativeDnsContainerView.isHidden = false
                     return
                 }
-        
+
                 let systemProtectionEnabled = self.complexProtection.systemProtectionEnabled
                 let recordsAreEmpty = self.model.records.isEmpty
-        
+
                 if recordsAreEmpty && !systemProtectionEnabled {
                     self.systemProtectionEnablerContainerView.isHidden = false
                 } else {

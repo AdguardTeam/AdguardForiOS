@@ -69,7 +69,7 @@ class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
 
     func getCompanies(for type: ChartDateType, _ completion: @escaping (_ info: CompaniesInfo)->()) {
         workingQueue.async {[weak self] in
-    
+
             guard let self = self else { return }
             var recordsByCompanies: [String : CompanyRequestsRecord] = [:]
             var companiesNumber = 0

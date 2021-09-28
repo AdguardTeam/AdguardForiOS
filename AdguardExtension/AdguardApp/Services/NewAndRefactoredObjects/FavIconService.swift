@@ -49,7 +49,7 @@ struct FavIconService: FavIconServiceProtocol {
                 completionQueue.async { onImageObtained(nil) }
                 return
             }
-    
+
             completionQueue.async { onImageObtained(image) }
         }
         dataTask.resume()

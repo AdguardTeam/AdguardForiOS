@@ -78,12 +78,12 @@ public extension CustomFilterMetaParserProtocol {
 
         // Iterating over file's content line by line
         filterFileContentString.enumerateLines { line, _ in
-    
+
             // Filter's header can begin with it's name in brackets, for example: [Adblock Plus 2.0]
             if line.first == "[" && line.last == "]" && !headerWasParsed {
                 return
             }
-    
+
             // Process line as header if it starts with '!' and header wasn't parsed yet
             if line.first == "!" && !headerWasParsed {
                 processHeader(line: line,
@@ -99,25 +99,25 @@ public extension CustomFilterMetaParserProtocol {
                               &filterDownloadPageInternal)
                 return
             }
-    
+
             // When line doesn't start with '!' we suppose that header was parsed
             headerWasParsed = true
-    
+
             // Ignore blank lines
             if line.isEmpty {
                 return
             }
-    
+
             // Ignore comments when counting rules
             if line.first == "!" {
                 return
             }
-    
+
             // '#' can also be a comment but only for DNS filters
             if line.first == "#" && parserType == .system {
                 return
             }
-    
+
             // If line is not a comment increment rules number
             rulesCount += 1
         }

@@ -429,7 +429,7 @@ extension AppDelegate {
         mainMenuController.loadViewIfNeeded()
         settingsController.loadViewIfNeeded()
         advancedSettingsController.loadViewIfNeeded()
-            
+
         navController.viewControllers = [mainMenuController, settingsController, advancedSettingsController, dnsModeController]
         tabBar.selectedViewController = navController
         window?.rootViewController = tabBar
@@ -459,7 +459,7 @@ extension AppDelegate {
             DDLogError("Navigation controller is nil")
             return
         }
-            
+
         if let tabs = tabBar.viewControllers {
             for viewController in tabs {
                 if let navController = viewController as? UINavigationController {

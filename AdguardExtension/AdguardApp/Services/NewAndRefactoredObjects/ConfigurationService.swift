@@ -47,7 +47,7 @@ final class ConfigurationService: ConfigurationServiceProtocol {
             queue: nil)
         { [weak self] note in
             guard let self = self else { return }
-    
+
             let command = note.userInfo?[PurchaseService.kPSNotificationTypeKey] as! String
             if  command == PurchaseService.kPSNotificationPremiumStatusChanged {
                 self.safariProtection.update(proStatus: self.proStatus, onCbReloaded: nil)

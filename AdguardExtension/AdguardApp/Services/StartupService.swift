@@ -94,7 +94,7 @@ final class StartupService : NSObject{
 
         let configuration: ConfigurationServiceProtocol = ConfigurationService(purchaseService: purchaseService, resources: sharedResources, safariProtection: safariProtection)
         locator.addService(service: configuration)
-        
+
         let networkSettingsService: NetworkSettingsServiceProtocol = NetworkSettingsService(resources: sharedResources)
         locator.addService(service: networkSettingsService)
 

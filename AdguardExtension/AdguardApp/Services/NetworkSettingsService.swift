@@ -105,16 +105,16 @@ final class NetworkSettingsService: NetworkSettingsServiceProtocol {
     var onDemandRules: [NEOnDemandRule] {
         get {
             var onDemandRules = [NEOnDemandRule]()
-    
+
             let SSIDs = enabledExceptions.map{ $0.rule }
             if SSIDs.count > 0 {
                 let disconnectRule = NEOnDemandRuleDisconnect()
                 disconnectRule.ssidMatch = SSIDs
                 onDemandRules.append(disconnectRule)
             }
-    
+
             let disconnectRule = NEOnDemandRuleDisconnect()
-    
+
             switch (filterWifiDataEnabled, filterMobileDataEnabled) {
             case (false, false):
                 disconnectRule.interfaceTypeMatch = .any
@@ -128,10 +128,10 @@ final class NetworkSettingsService: NetworkSettingsServiceProtocol {
             default:
                 break
             }
-    
+
             let connectRule = NEOnDemandRuleConnect()
             connectRule.interfaceTypeMatch = .any
-    
+
             onDemandRules.append(connectRule)
             return onDemandRules
         }
@@ -253,7 +253,7 @@ fileprivate extension AESharedResourcesProtocol {
             guard let decoded = sharedDefaults().object(forKey: wifiExceptionsKey) as? Data else {
                 return []
             }
-    
+
             let exceptions = try? JSONDecoder().decode([WifiException].self, from: decoded)
             return exceptions ?? []
         }

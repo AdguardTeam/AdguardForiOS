@@ -108,7 +108,7 @@
         Boolean split = NO;
         Boolean skip = NO;
         for (ACNCidrRange *excludedRange in excludedRanges) {
-    
+
             if ([excludedRange contains:range]) {
                 skip = YES;
                 break;
@@ -159,7 +159,7 @@
 
         if (i == prefixLenSignificantByte) {
             int shift = 8 - (newPrefixLen - prefixLenSignificantByte * 8);
-    
+
             addrRight[i] = [NSNumber numberWithInt: ([addrRight[i] intValue] | (0x1 << shift))];
         }
     }
@@ -234,7 +234,7 @@
             NSString *ipv6AddressString = [addressStringPartBeforeIPv4 stringByAppendingString:[NSString stringWithFormat:@"%x:%x",
                                         (([address[0] intValue] & 0xff) << 8) + ([address[1] intValue] & 0xff),
                                         (([address[2] intValue] & 0xff) << 8) + ([address[3] intValue] & 0xff)]];
-    
+
             return [self getIpv6AddressFromString: ipv6AddressString];
         }
     } else {
@@ -306,7 +306,7 @@
             NSString * zeros = [NSString repeat:@"0" separator:@":" repeat: 8 - count];
             NSString* left = [addressString substringToIndex: fourDotsRange.location + 1];
             NSString* right = [addressString substringFromIndex:fourDotsRange.location + 1];
-    
+
             addressString = [NSString stringWithFormat:@"%@%@%@", left, zeros, right];
         }
     }

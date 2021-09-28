@@ -156,24 +156,24 @@
         NSInteger totalNumberOfRows = 0;
         for (NSInteger i = 0; i < numberOfSections; ++i) {
             OriginalSection * originalSection = [OriginalSection new];
-    
+
             NSInteger numberOfRows = [tableView numberOfRowsInSection:i];
             totalNumberOfRows += numberOfRows;
             originalSection.rows = [[NSMutableArray alloc] initWithCapacity:numberOfRows];
             for (NSInteger ii = 0; ii < numberOfRows; ++ii) {
                 OriginalRow * tableViewRow = [OriginalRow new];
-        
+
                 NSIndexPath * ip = [NSIndexPath indexPathForRow:ii inSection:i];
                 tableViewRow.cell = [tableView.dataSource tableView:tableView cellForRowAtIndexPath:ip];
                 tableViewRow.height = [tableView.delegate tableView:tableView heightForRowAtIndexPath:ip];
-        
+
                 NSAssert(tableViewRow.cell != nil, @"cannot be nil");
-        
+
                 tableViewRow.originalIndexPath = [NSIndexPath indexPathForRow:ii inSection:i];
-        
+
                 originalSection.rows[ii] = tableViewRow;
             }
-    
+
             self.sections[i] = originalSection;
         }
  
@@ -265,11 +265,11 @@
         OriginalSection * os = self.sections[i];
 
         for (NSInteger ii = 0; ii < [os.rows count]; ++ii) {
-    
+
             if ([os.rows[ii] cell] == cell) {
                 return os.rows[ii];
             }
-    
+
         }
 
     }
@@ -324,27 +324,27 @@
         for (OriginalRow * or in [os.rows copy]) {
 
             if (or.batchOperation == kBatchOperationDelete) {
-        
+
                 NSIndexPath * ip = [self indexPathForDeletingOriginalRow:or];
                 [self.deleteIndexPaths addObject:ip];
-        
+
                 if (or.cell == nil) {
                     //real delete
                     [self removeCellAtIndedexPath:ip];
                 }
-        
+
             } else if (or.batchOperation == kBatchOperationInsert) {
-    
+
                 NSIndexPath * ip = [self indexPathForInsertingOriginalRow:or];
                 [self.insertIndexPaths addObject:ip];
-        
+
             } else if (or.batchOperation == kBatchOperationUpdate) {
-        
+
                 NSIndexPath * ip = [self indexPathForInsertingOriginalRow:or];
                 [self.updateIndexPaths addObject:ip];
-        
+
             }
-    
+
         }
 
     }
@@ -352,10 +352,10 @@
     for (OriginalSection * os in self.sections) {
 
         for (OriginalRow * or in os.rows) {
-    
+
             or.hiddenReal = or.hiddenPlanned;
             or.batchOperation = kBatchOperationNone;
-    
+
         }
 
     }
@@ -477,7 +477,7 @@
             for (NSIndexPath *indexPath in self.originalTable.deleteIndexPaths) {
                 UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
                 cell.layer.zPosition = -2;
-        
+
                 [self.tableView headerViewForSection:indexPath.section].layer.zPosition = -1;
             }
         }

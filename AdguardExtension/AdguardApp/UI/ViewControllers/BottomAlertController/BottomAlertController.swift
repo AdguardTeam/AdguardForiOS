@@ -35,7 +35,7 @@ class KeyboardMover {
                                                selector: #selector(keyboardNotification(notification:)),
                                                name: UIResponder.keyboardWillChangeFrameNotification,
                                                object: nil)
-        
+
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillHide(notification:)),
                                                name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -46,7 +46,7 @@ class KeyboardMover {
         guard let userInfo = notification.userInfo else { return }
         guard let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
         guard let belongsToApp = userInfo[UIResponder.keyboardIsLocalUserInfoKey] as? Bool else { return }
-    
+
         let keyboardHeight = keyboardFrame.height
         let stateIsActive = UIApplication.shared.applicationState == .active
         let tabBarHeight = tabBar?.frame.height ?? 0.0
@@ -54,7 +54,7 @@ class KeyboardMover {
         if belongsToApp && stateIsActive {
             constraint.constant = keyboardHeight - tabBarHeight + initialValue
         }
-    
+
         UIView.animate(withDuration: 0.5,
                         animations: { self.view.layoutIfNeeded() },
                         completion: nil)

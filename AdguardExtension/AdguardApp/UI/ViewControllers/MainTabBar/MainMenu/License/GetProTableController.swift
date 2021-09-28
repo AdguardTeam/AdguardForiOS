@@ -76,7 +76,7 @@ class GetProTableController: UITableViewController {
         updateTheme()
 
         selectedProduct = purchaseService.standardProduct
-      
+  
         setPrice()
 
         proStatusObserver = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in

@@ -97,7 +97,7 @@ class ComplexProtectionSwitch: UIControl {
     func setOn(on: Bool){
         isOn = on
         animate(on: on) {[weak self] in
-    
+
         }
     }
 
@@ -187,7 +187,7 @@ class ComplexProtectionSwitch: UIControl {
 
         innerShadowView.frame = bounds
         innerShadowView.layer.cornerRadius = height / 2
-                
+
         thumbView.frame.size = CGSize(width: thumbSide, height: thumbSide)
         thumbView.center = CGPoint(x: bounds.minX + thumbSide / 2, y: bounds.midY)
         thumbView.layer.cornerRadius = thumbSide / 2
@@ -215,7 +215,7 @@ class ComplexProtectionSwitch: UIControl {
         setNeutralShadows()
         thumbView.layer.shadowOffset = .zero
         thumbView.isUserInteractionEnabled = false
-        
+
         thumbImageView.image = offImage
 
         thumbView.addSubview(thumbImageView)

@@ -178,7 +178,7 @@ class LoginServiceTest: XCTestCase {
             XCTAssert(self.loginService.active)
             XCTAssertNil(self.keychain.auth)
             XCTAssertNotNil(self.keychain.licenseKey)
-    
+
             expectation.fulfill()
         }
 
@@ -202,7 +202,7 @@ class LoginServiceTest: XCTestCase {
             XCTAssertFalse(self.loginService.loggedIn)
             XCTAssertFalse(self.loginService.hasPremiumLicense)
             XCTAssertFalse(self.loginService.active)
-    
+
             expectation.fulfill()
         }
 

@@ -98,19 +98,19 @@ fileprivate extension NSExtensionContext {
         }
 
         itemProvider.loadItem(forTypeIdentifier: String(kUTTypePropertyList), options: nil) { results, error in
-    
+
             if let error = error {
                 DDLogError("(YouTubeAdsRequestHandler) Error: \(error)")
                 onJsExecuted(nil)
                 return
             }
-    
+
             guard let jsResultDict = results as? [String: Any] else {
                 DDLogError("(YouTubeAdsRequestHandler) Error - result dict incorrect. Results: \(results.debugDescription )")
                 onJsExecuted(nil)
                 return
             }
-    
+
             guard let youTubeAdsJsResultDict = jsResultDict[NSExtensionJavaScriptPreprocessingResultsKey] as? [String: Any] else {
                 DDLogError("(YouTubeAdsRequestHandler) Error - can not get NSExtensionJavaScriptPreprocessingResultsKey. Results: \(results.debugDescription )")
                 onJsExecuted(nil)
