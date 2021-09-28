@@ -30,7 +30,6 @@ final class BackgroundFetchController: BottomAlertController {
     
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var tableView: ContentSizedTableView!
-    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
 
     // MARK: - Properties
     
@@ -62,10 +61,9 @@ final class BackgroundFetchController: BottomAlertController {
     }
 
     private func setupTableView() {
-        tableView.register(ExtendedRadioButtonCell.self, forCellReuseIdentifier: ExtendedRadioButtonCell.reuseIdentifier)
+        ExtendedRadioButtonCell.registerCell(forTableView: tableView)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.contentSizeDelegate = self
         tableView.isScrollEnabled = false
         tableView.separatorStyle = .none
         titleLabel.text = String.localizedString("background_app_refresh_time_title")
@@ -130,12 +128,6 @@ extension BackgroundFetchController: ThemableProtocol {
         tableView.backgroundColor = themeService.popupBackgroundColor
         themeService.setupLabel(titleLabel)
         tableView.reloadData()
-    }
-}
-
-extension BackgroundFetchController: ContentSizedTableViewDelegate {
-    func contentSizeDidSet(contentSize: CGSize) {
-        tableViewHeightConstraint.constant = contentSize.height
     }
 }
 

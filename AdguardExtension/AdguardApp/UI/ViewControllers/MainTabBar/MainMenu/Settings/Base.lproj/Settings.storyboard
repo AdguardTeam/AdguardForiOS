@@ -3198,6 +3198,9 @@
                                             <constraint firstAttribute="height" constant="108" id="ZpV-sL-8ky"/>
                                         </constraints>
                                         <sections/>
+                                        <connections>
+                                            <outlet property="heightConstraint" destination="ZpV-sL-8ky" id="LHP-br-cRe"/>
+                                        </connections>
                                     </tableView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -3230,7 +3233,6 @@
                         <outlet property="contentView" destination="bnL-IC-jxK" id="UeH-hk-Jis"/>
                         <outlet property="keyboardHeightLayoutConstraint" destination="msA-bs-i5H" id="msA-lh-RKr"/>
                         <outlet property="tableView" destination="Snq-9B-j9S" id="Ynm-iL-r50"/>
-                        <outlet property="tableViewHeightConstraint" destination="ZpV-sL-8ky" id="UxP-5t-vGy"/>
                         <outlet property="titleLabel" destination="Yue-5n-Amd" id="iys-0S-oTK"/>
                     </connections>
                 </viewController>

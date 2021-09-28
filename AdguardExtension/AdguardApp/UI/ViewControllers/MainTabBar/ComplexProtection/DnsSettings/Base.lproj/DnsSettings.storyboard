@@ -2035,6 +2035,9 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="200" id="ucW-sQ-ugQ"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="heightConstraint" destination="ucW-sQ-ugQ" id="8oY-K9-DRT"/>
+                                        </connections>
                                     </tableView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -2066,7 +2069,6 @@
                         <outlet property="contentView" destination="Eo5-vz-faM" id="j4y-4T-OSe"/>
                         <outlet property="keyboardHeightLayoutConstraint" destination="e2b-IM-wuA" id="LZc-W2-Y43"/>
                         <outlet property="tableView" destination="Npf-Dz-czn" id="tJv-KG-pgw"/>
-                        <outlet property="tableViewHeightConstraint" destination="ucW-sQ-ugQ" id="4XU-uH-0f0"/>
                         <outlet property="titleLabel" destination="vJt-Jd-BI2" id="fdx-sO-Leb"/>
                     </connections>
                 </viewController>

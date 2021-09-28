@@ -18,18 +18,16 @@
 
 import UIKit
 
-/// Delegate protocol for custom table view
-protocol ContentSizedTableViewDelegate: AnyObject {
-    func contentSizeDidSet(contentSize: CGSize)
-}
 /// Custom table view class that return content size on did set
 class ContentSizedTableView: UITableView {
 
-    weak var contentSizeDelegate: ContentSizedTableViewDelegate?
+    // MARK: - Outlets
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
 
-    override var contentSize:CGSize {
+    // MARK: - Private properties
+    override var contentSize: CGSize {
         didSet {
-            contentSizeDelegate?.contentSizeDidSet(contentSize: contentSize)
+            heightConstraint.constant = contentSize.height
         }
     }
 }
