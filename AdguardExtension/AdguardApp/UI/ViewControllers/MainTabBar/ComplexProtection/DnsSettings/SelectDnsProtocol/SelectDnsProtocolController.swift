@@ -45,9 +45,16 @@ final class SelectDnsProtocolController: BottomAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateTheme()
+        setupTableView()
+    }
+
+    // MARK: - Private methods
+
+    private func setupTableView() {
         tableView.contentSizeDelegate = self
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.isScrollEnabled = false
         ExtendedRadioButtonCell.registerCell(forTableView: tableView)
     }
 }
