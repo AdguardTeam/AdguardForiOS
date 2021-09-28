@@ -41,7 +41,7 @@
 - (id)initWithStartQuote:(NSString *)initStartQuote endQuote:(NSString *)initEndQuote escapeSequence:(NSString *)initEscapeSequence maximumLength:(NSUInteger)initMaximumLength name:(NSString *)initName
 {
     self = [super init];
-    
+
     if (nil != self)
     {
         [self setStartQuote:initStartQuote];
@@ -50,7 +50,7 @@
         [self setMaximumLength:initMaximumLength];
         [self setName:initName];
     }
-    
+
     return self;
 }
 
@@ -63,7 +63,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super init];
-    
+
     if (nil != self)
     {
         [self setStartQuote:[aDecoder decodeObjectForKey:CPQuotedRecogniserStartQuoteKey]];
@@ -80,7 +80,7 @@
         }
         [self setName:[aDecoder decodeObjectForKey:CPQuotedRecogniserNameKey]];
     }
-    
+
     return self;
 }
 
@@ -110,19 +110,19 @@
     CFRange searchRange = CFRangeMake(*tokenPosition, rangeLength);
     CFRange range;
     BOOL matched = CFStringFindWithOptions((CFStringRef)tokenString, (CFStringRef)self.startQuote, searchRange, kCFCompareAnchored, &range);
-    
+
     CFMutableStringRef outputString = CFStringCreateMutable(kCFAllocatorDefault, 0);
-    
+
     if (matched)
     {
         searchRange.location = searchRange.location + range.length;
         searchRange.length   = searchRange.length   - range.length;
-        
+
         CFRange endRange;
         CFRange escapeRange;
         BOOL matchedEndSequence = CFStringFindWithOptions((CFStringRef)tokenString, (CFStringRef)self.endQuote, searchRange, 0L, &endRange);
         BOOL matchedEscapeSequence = nil == self.escapeSequence ? NO : CFStringFindWithOptions((CFStringRef)tokenString, (CFStringRef)self.escapeSequence, searchRange, 0L, &escapeRange);
-        
+
         while (matchedEndSequence && searchRange.location < inputLength)
         {
             if (!matchedEscapeSequence || endRange.location < escapeRange.location)//End quote is not escaped by escape sequence.
@@ -160,7 +160,7 @@
                 }
                 searchRange.length   = searchRange.location + searchRange.length - quotedPosition;
                 searchRange.location = quotedPosition;
-                
+
                 if (endRange.location < searchRange.location)
                 {
                     matchedEndSequence = CFStringFindWithOptions((CFStringRef)tokenString, (CFStringRef)self.endQuote, searchRange, 0L, &endRange);
@@ -172,7 +172,7 @@
             }
         }
     }
-    
+
     CFRelease(outputString);
     return NSMakeRange(NSNotFound, 0);
 }

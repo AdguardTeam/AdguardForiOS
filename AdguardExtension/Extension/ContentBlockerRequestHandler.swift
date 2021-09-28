@@ -21,23 +21,23 @@ import SafariAdGuardSDK
 
 class ContentBlockerRequestHandler: NSObject, NSExtensionRequestHandling {
     func beginRequest(with context: NSExtensionContext) {
-        
+
         let resources = AESharedResources()
-        
+
         // Init Logger
         ACLLogger.singleton().initLogger(resources.sharedAppLogsURL())
         ACLLogger.singleton().logLevel = resources.isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
-        
+
         DDLogInfo("ActionRequestHandler start request")
-        
+
         guard let cbBundleId = Bundle.main.bundleIdentifier else {
             DDLogError("ActionRequestHandler received nil bundle id")
             context.completeRequest(returningItems: nil, completionHandler: nil)
             return
         }
-        
+
         let url: URL?
-        
+
         do {
             let jsonProvider = try ContentBlockerJsonProvider(
                 cbBundleId: cbBundleId,
@@ -51,16 +51,16 @@ class ContentBlockerRequestHandler: NSObject, NSExtensionRequestHandling {
             context.completeRequest(returningItems: nil, completionHandler: nil)
             return
         }
-        
+
         guard let url = url, let attachment = NSItemProvider(contentsOf: url) else {
             DDLogError("ActionRequestHandler Can't init attachment")
             context.completeRequest(returningItems: nil, completionHandler: nil)
             return
         }
-        
+
         let item = NSExtensionItem()
         item.attachments = [attachment]
-        
+
         DDLogInfo("ActionRequestHandler complete request")
         context.completeRequest(returningItems: [item], completionHandler: nil)
     }

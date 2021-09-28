@@ -26,35 +26,35 @@ protocol ISettingsResetor {
 // TODO: - New SDK supports settings reset, this object needs changes
 // Reset statistics and settings
 struct SettingsResetor: ISettingsResetor {
-    
+
     // MARK: - Private properties
-    
+
     private weak var appDelegate: AppDelegate?
     private let vpnManager: VpnManagerProtocol
     private let resources: AESharedResourcesProtocol
     private let purchaseService: PurchaseServiceProtocol
     private let safariProtection: SafariProtectionProtocol
-    
+
     // MARK: - Init
-    
+
     init(appDelegate: AppDelegate,
          vpnManager: VpnManagerProtocol,
          resources: AESharedResourcesProtocol,
          purchaseService: PurchaseServiceProtocol,
          safariProtection: SafariProtectionProtocol) {
-        
+
         self.appDelegate = appDelegate
         self.vpnManager = vpnManager
         self.resources = resources
         self.purchaseService = purchaseService
         self.safariProtection = safariProtection
     }
-    
+
     // MARK: - IResetSettings methods
-    
+
     func resetAllSettings() {
         presentAlert()
-        
+
         DispatchQueue(label: "reset_queue").async {
             DDLogInfo("(ResetSettings) resetAllSettings")
 
@@ -64,40 +64,40 @@ struct SettingsResetor: ISettingsResetor {
             self.vpnManager.removeVpnConfiguration { _ in }
             self.resources.reset()
             resetStatistics()
-            
+
             let group = DispatchGroup()
             group.enter()
-            
+
             self.purchaseService.reset {
                 group.leave()
             }
             group.wait()
- 
+
             appDelegate?.setAppInterfaceStyle()
-            
+
             let dnsProvidersManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!
             try? dnsProvidersManager.reset()
-            
+
             if #available(iOS 14.0, *) {
                 let nativeDnsManager: NativeDnsSettingsManagerProtocol = ServiceLocator.shared.getService()!
                 nativeDnsManager.reset()
             }
-            
+
             // Notify that settings were reset
             NotificationCenter.default.post(name: .resetSettings, object: self)
-            
+
             DispatchQueue.main.async {
                 appDelegate?.setMainPageAsCurrentAndPopToRootControllersEverywhere()
                 DDLogInfo("(ResetSettings) Reseting is over")
             }
         }
     }
-    
+
     // MARK: - Private methods
-    
+
     private func resetStatistics(){
         /* Reseting statistics Start*/
-        
+
         // delete database file
         let url = self.resources.sharedResuorcesURL().appendingPathComponent("dns-statistics.db")
         do {
@@ -107,7 +107,7 @@ struct SettingsResetor: ISettingsResetor {
             DDLogInfo("(ResetSettings) Statistics removing error: \(error.localizedDescription)")
         }
     }
-    
+
     private func presentAlert() {
         let alert = UIAlertController(title: nil, message: String.localizedString("loading_message"), preferredStyle: .alert)
 

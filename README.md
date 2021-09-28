@@ -6,7 +6,7 @@
 <p align="center">
   Top-notch ad blocking in Safari, anti-tracking protection and DNS privacy.
 </p>
-  
+
   <p align="center">
     <a href="https://adguard.com/">Website</a> |
     <a href="https://reddit.com/r/Adguard">Reddit</a> |

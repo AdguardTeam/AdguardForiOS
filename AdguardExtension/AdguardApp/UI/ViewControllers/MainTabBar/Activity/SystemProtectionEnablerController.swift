@@ -22,12 +22,12 @@ class SystemProtectionEnablerController: UIViewController {
 
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var enableButton: UIButton!
-    
+
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         enableButton.accessibilityLabel = String.localizedString("enable_system_protection_voiceover")
         enableButton.applyStandardGreenStyle()
         updateTheme()

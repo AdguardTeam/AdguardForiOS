@@ -23,7 +23,7 @@
 #define ACIOStreamErrorException            @"ACIOStreamErrorException"
 
 enum{
-    
+
     ACIO_ERROR =  -1,
     ACIO_EOF
 };
@@ -44,7 +44,7 @@ enum{
 - (NSInteger)read:(uint8_t *)buffer maxLength:(NSUInteger)len stream:(ACIOStream *)stream;
 /**
     Writes the contents of a provided data buffer to the receiver.
- 
+
     @return Method must return the number of bytes actually written, or ACIO_ERROR constant if an error occurs. If the receiver is a fixed-length and has reached its capacity, method must return ACIO_EOF constant.
  */
 - (NSInteger)write:(const uint8_t *)buffer maxLength:(NSUInteger)len stream:(ACIOStream *)stream;
@@ -58,7 +58,7 @@ enum{
  *  All work is performed through delegate, which conform ACIOStreamDelegate protocol
  */
 @interface ACIOStream : NSObject <ACIOUtilReadProtocol, ACIOUtilWriteProtocol>{
-    
+
     NSLock *_counterWrittenBytesLocker;
 }
 
@@ -89,9 +89,9 @@ enum{
 
 /**
     Writes the bytes from the specified buffer to the stream up to len bytes.
-    Returns the number of bytes actually written, 
-    or ACIO_ERROR constant if an error occurs. 
-    If the receiver is a fixed-length and has reached its capacity, 
+    Returns the number of bytes actually written,
+    or ACIO_ERROR constant if an error occurs.
+    If the receiver is a fixed-length and has reached its capacity,
     ACIO_EOF constant is returned.
  */
 - (NSInteger)write:(const uint8_t *)buffer maxLength:(NSUInteger)len;

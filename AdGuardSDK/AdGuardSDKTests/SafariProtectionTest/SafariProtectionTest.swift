@@ -9,9 +9,9 @@ class SafariProtectionTest: XCTestCase {
     var cbStorage: ContentBlockersInfoStorageMock!
     var cbService: ContentBlockerServiceMock!
     var safariManagers: SafariUserRulesManagersProviderMock!
-    
+
     var safariProtection: SafariProtectionProtocol!
-    
+
     override func setUp() {
         configuration = SafariConfigurationMock()
         defaultConfiguration = SafariConfigurationMock()
@@ -30,92 +30,92 @@ class SafariProtectionTest: XCTestCase {
                                             cbService: cbService,
                                             safariManagers: safariManagers)
     }
-    
+
     func testResetWithFiltersServiceError() {
         filters.resetError = MetaStorageMockError.resetError
         let expectation = XCTestExpectation()
-        
+
         safariProtection.reset { error in
             XCTAssertEqual(error as! MetaStorageMockError, .resetError)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.5)
-        
+
         XCTAssertEqual(safariManagers.resetCalledCount, 0)
         XCTAssertEqual(cbStorage.invokedResetCount, 0)
         XCTAssertEqual(converter.convertFiltersCalledCount, 0)
         XCTAssertEqual(cbStorage.invokedSaveCount, 0)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
     }
-    
+
     func testResetWithUserRulesError() {
         safariManagers.resetError = MetaStorageMockError.resetError
         let expectation = XCTestExpectation()
-        
+
         safariProtection.reset { error in
             XCTAssertEqual(error as! MetaStorageMockError, .resetError)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.5)
-        
+
         XCTAssertEqual(safariManagers.resetCalledCount, 1)
         XCTAssertEqual(cbStorage.invokedResetCount, 0)
         XCTAssertEqual(converter.convertFiltersCalledCount, 0)
         XCTAssertEqual(cbStorage.invokedSaveCount, 0)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
     }
-    
+
     func testResetWithCbStorageError() {
         cbStorage.stubbedResetError = MetaStorageMockError.resetError
         let expectation = XCTestExpectation()
-        
+
         safariProtection.reset { error in
             XCTAssertEqual(error as! MetaStorageMockError, .resetError)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.5)
-        
+
         XCTAssertEqual(safariManagers.resetCalledCount, 1)
         XCTAssertEqual(cbStorage.invokedResetCount, 1)
         XCTAssertEqual(converter.convertFiltersCalledCount, 0)
         XCTAssertEqual(cbStorage.invokedSaveCount, 0)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
     }
-    
+
     func testResetWithSaveCbsError() {
         cbStorage.stubbedSaveError = MetaStorageMockError.resetError
         let expectation = XCTestExpectation()
-        
+
         safariProtection.reset { error in
             XCTAssertEqual(error as! MetaStorageMockError, .resetError)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.5)
-        
+
         XCTAssertEqual(safariManagers.resetCalledCount, 1)
         XCTAssertEqual(cbStorage.invokedResetCount, 1)
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
         XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
     }
-    
+
     func testResetWithReloadCbError() {
         cbService.updateContentBlockersError = MetaStorageMockError.resetError
         let expectation = XCTestExpectation()
-        
+
         safariProtection.reset { error in
             XCTAssertEqual(error as! MetaStorageMockError, .resetError)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.5)
-        
+
         XCTAssertEqual(safariManagers.resetCalledCount, 1)
         XCTAssertEqual(cbStorage.invokedResetCount, 1)
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
         XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
     }
-    
+
     func testResetWithSuccess() {
         let expectation = XCTestExpectation()
         safariProtection.reset { error in
@@ -123,18 +123,18 @@ class SafariProtectionTest: XCTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.5)
-        
+
         XCTAssertEqual(safariManagers.resetCalledCount, 1)
         XCTAssertEqual(cbStorage.invokedResetCount, 1)
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
         XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
     }
-    
+
     func testExecuteBlockAndReloadCbsWithThrowingBlock() {
         let expectation = XCTestExpectation()
         let sp = safariProtection as! SafariProtection
-        
+
         do {
             try sp.executeBlockAndReloadCbs {
                 throw MetaStorageMockError.error
@@ -146,14 +146,14 @@ class SafariProtectionTest: XCTestCase {
         catch {
             XCTAssertEqual(error as! MetaStorageMockError, .error)
         }
-        
+
         wait(for: [expectation], timeout: 0.5)
-        
+
         XCTAssertEqual(converter.convertFiltersCalledCount, 0)
         XCTAssertEqual(cbStorage.invokedSaveCount, 0)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
     }
-    
+
     func testExecuteBlockAndReloadCbsWithNotThrowingBlock() {
         let expectation = XCTestExpectation()
         let sp = safariProtection as! SafariProtection
@@ -162,7 +162,7 @@ class SafariProtectionTest: XCTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.5)
-        
+
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
         XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)

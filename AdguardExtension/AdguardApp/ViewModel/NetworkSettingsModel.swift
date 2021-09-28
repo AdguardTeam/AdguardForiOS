@@ -19,7 +19,7 @@
 import SharedAdGuardSDK
 
 final class NetworkSettingsModel: RuleDetailsControllerDelegate {
-    
+
     var filterWifiDataEnabled: Bool {
         get {
             return networkSettingsService.filterWifiDataEnabled
@@ -35,7 +35,7 @@ final class NetworkSettingsModel: RuleDetailsControllerDelegate {
             }
         }
     }
-    
+
     var filterMobileDataEnabled: Bool {
         get {
             return networkSettingsService.filterMobileDataEnabled
@@ -51,54 +51,54 @@ final class NetworkSettingsModel: RuleDetailsControllerDelegate {
             }
         }
     }
-    
+
     var delegate: NetworkSettingsChangedDelegate? {
         didSet{
             networkSettingsService.delegate = delegate
         }
     }
-    
+
     var exceptions: [WifiException] {
         get {
             networkSettingsService.exceptions
         }
     }
-    
+
     // MARK: - Private variables
-    
+
     private let networkSettingsService: NetworkSettingsServiceProtocol
     private let vpnManager: VpnManagerProtocol
     private let resources: AESharedResourcesProtocol
     private let nativeDnsManager: NativeDnsSettingsManagerProtocol
-    
+
     init(networkSettingsService: NetworkSettingsServiceProtocol, vpnManager: VpnManagerProtocol, resources: AESharedResourcesProtocol, nativeDnsManager: NativeDnsSettingsManagerProtocol) {
         self.networkSettingsService = networkSettingsService
         self.vpnManager = vpnManager
         self.resources = resources
         self.nativeDnsManager = nativeDnsManager
     }
-    
+
     // MARK: - Global methods
-    
+
     func addException(rule: String) throws {
         let exception = WifiException(rule: rule, enabled: true)
         try networkSettingsService.add(exception: exception)
         vpnManager.updateSettings(completion: nil)
     }
-    
+
     func changeState(rule: String, enabled: Bool) {
         networkSettingsService.changeState(name: rule, enabled: enabled)
         vpnManager.updateSettings(completion: nil)
     }
-    
+
     // MARK: - RuleDetailsControllerDelegate methods
-    
+
     func removeRule(_ ruleText: String, at indexPath: IndexPath) throws {
         let exception = exceptions[indexPath.row]
         networkSettingsService.delete(exception: exception)
         vpnManager.updateSettings(completion: nil)
     }
-    
+
     func modifyRule(_ oldRuleText: String, newRule: UserRule, at indexPath: IndexPath) throws {
         try networkSettingsService.rename(oldName: oldRuleText, newName: newRule.ruleText)
         vpnManager.updateSettings(completion: nil)

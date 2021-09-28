@@ -41,7 +41,7 @@
     NSDate *result;
     NSError *err;
     NSDictionary *attrs;
-    
+
     if ([pathUrl isFileURL]){
         attrs = [[NSFileManager defaultManager] attributesOfItemAtPath:[pathUrl path] error:&err];
         if (err)
@@ -49,7 +49,7 @@
         else
             result = [attrs fileModificationDate];
     }
-    
+
     return result ? result : [NSDate distantFuture];
 }
 
@@ -59,7 +59,7 @@
     NSDate *result;
     NSError *err;
     NSDictionary *attrs;
-    
+
     if ([pathUrl isFileURL]){
         attrs = [[NSFileManager defaultManager] attributesOfItemAtPath:[pathUrl path] error:&err];
         if (err)
@@ -67,7 +67,7 @@
         else
             result = [attrs fileCreationDate];
     }
-    
+
     return result ? result : [NSDate distantFuture];
 }
 
@@ -78,21 +78,21 @@
 // Old name - ReadQuetly
 + (NSData *)readQuetlyForUrl:(NSURL *)pathUrl
 {
-    
+
     if (![pathUrl isFileURL])
         return  nil;
-    
+
     NSError *err;
     NSData *result = [NSData dataWithContentsOfURL:pathUrl options:NSDataReadingUncached error:&err];
-    
+
     if (err) {
-        
+
         DDLogWarn(@"Error reading file %@: %@", pathUrl, [err localizedDescription]);
         return nil;
     }
-    
+
     return result;
-    
+
 }
 
 /// Writes quetly text to the specified file
@@ -101,9 +101,9 @@
 {
     if (!text) return;
     if (![pathUrl isFileURL]) return;
-    
+
     NSError *err;
-    
+
     if (![text writeToURL:pathUrl atomically:YES encoding:[ACFFileUtils defaultFileEncoding] error:&err])
         DDLogWarn(@"Error writing to file %@: %@", pathUrl, [err localizedDescription]);
 }
@@ -112,21 +112,21 @@
 // Old name - Touch
 + (void)touchForUrl:(NSURL *)pathUrl
 {
-    
+
     NSFileManager *manager = [NSFileManager defaultManager];
-    
+
     if ([pathUrl isFileURL] && [pathUrl checkResourceIsReachableAndReturnError:nil]) {
-        
+
         NSError *err;
         if (![manager setAttributes:@{NSFileModificationDate: [NSDate date]} ofItemAtPath:pathUrl.path error:&err])
             DDLogWarn(@"Error touching file %@: %@", pathUrl, [err localizedDescription]);
     }
     else{
-        
+
         if (![manager createFileAtPath:pathUrl.path contents:[NSData data] attributes:nil])
             DDLogWarn(@"Error touching file %@: Can't create empty file.", pathUrl);
     }
-    
+
 }
 
 /// Deletes file or directory on the path.
@@ -134,12 +134,12 @@
 + (BOOL)deleteQuetlyForUrl:(NSURL *)pathUrl
 {
     if (![pathUrl isFileURL]) return NO;
-    
+
     NSError *err;
     BOOL result = [[NSFileManager defaultManager] removeItemAtURL:pathUrl error:&err];
     if (!result)
         DDLogWarn(@"Error deleting %@: %@", pathUrl, [err localizedDescription]);
-    
+
     return result;
 }
 
@@ -151,23 +151,23 @@
     // Declare needed variables
     CFStringRef result = NULL;
     CFReadStreamRef readStream = NULL;
-    
+
     if (![fileUrl isFileURL])
         [[NSException argumentException:@"fileUrl"] raise];
-    
+
     @try {
-        
+
     // Create and open the read stream
     readStream = CFReadStreamCreateWithFile(kCFAllocatorDefault,
                                             (__bridge CFURLRef)fileUrl);
     if (!readStream) return nil;
     bool didSucceed = (bool)CFReadStreamOpen(readStream);
     if (!didSucceed) return nil;
-    
+
     // Initialize the hash object
     CC_MD5_CTX hashObject;
     CC_MD5_Init(&hashObject);
-    
+
     // Feed the data to the hash object
     bool hasMoreData = true;
     while (hasMoreData) {
@@ -184,17 +184,17 @@
                       (const void *)buffer,
                       (CC_LONG)readBytesCount);
     }
-    
+
     // Check if the read operation succeeded
     didSucceed = !hasMoreData;
-    
+
     // Compute the hash digest
     unsigned char digest[CC_MD5_DIGEST_LENGTH];
     CC_MD5_Final(digest, &hashObject);
-    
+
     // Abort if the read operation failed
     if (!didSucceed) return nil;
-    
+
     // Compute the string result
     char hash[2 * sizeof(digest) + 1];
     for (size_t i = 0; i < sizeof(digest); ++i) {
@@ -203,7 +203,7 @@
     result = CFStringCreateWithCString(kCFAllocatorDefault,
                                        (const char *)hash,
                                        kCFStringEncodingUTF8);
-    
+
     }
     @finally {
 
@@ -212,37 +212,37 @@
             CFRelease(readStream);
         }
     }
-    
+
     return (__bridge_transfer NSString *)result;
 }
 
 + (BOOL)isFile:(NSURL *)pathUrl olderThan:(NSDate *)dateTime
 {
     if (!dateTime) return NO;
-        
+
     return [[ACFFileUtils fileLastWriteTimeForUrl:pathUrl] compare:dateTime] != NSOrderedDescending;
 }
 
 + (NSArray *)findFileByName:(NSString *)fileName inDirectory:(NSURL *)directoryToScan level:(NSUInteger)level{
-    
+
     return [ACFFileUtils findUrlByName:fileName inDirectory:directoryToScan level:level ignoreDirectory:YES];
 }
 
 
 + (NSArray *)findUrlByName:(NSString *)fileName inDirectory:(NSURL *)directoryToScan level:(NSUInteger)level ignoreDirectory:(BOOL)ignoreDirectory{
-    
+
     if (!fileName)
         [[NSException argumentException:@"fileName"] raise];
-    
+
     if (!directoryToScan)
         [[NSException argumentException:@"directoryToScan"] raise];
-    
+
     //Create wildcard
     ACLWildcard *pattern = [ACLWildcard wildcard:fileName];
-    
+
     // Create a local file manager instance
     NSFileManager *localFileManager=[[NSFileManager alloc] init];
-    
+
     // Enumerate the directory (specified elsewhere in your code)
     // Request the two properties the method uses, name and isDirectory
     // Ignore hidden files
@@ -251,17 +251,17 @@
                                                   includingPropertiesForKeys:@[NSURLNameKey, NSURLIsDirectoryKey]
                                                                      options:NSDirectoryEnumerationSkipsHiddenFiles
                                                                 errorHandler:nil];
-    
+
     // An array to store the all the enumerated file names in
     NSMutableArray *theArray=[NSMutableArray array];
-    
+
     // Enumerate the dirEnumerator results, each value is stored in allURLs
     for (NSURL *theURL in dirEnumerator) {
-        
+
         // Retrieve the file name. From NSURLNameKey, cached during the enumeration.
         NSString *name;
         [theURL getResourceValue:&name forKey:NSURLNameKey error:NULL];
-        
+
         // Retrieve whether a directory. From NSURLIsDirectoryKey, also
         // cached during the enumeration.
         NSNumber *isDirectory = @(0);
@@ -272,9 +272,9 @@
         // Ignore sublevels
         if ( level && level <= [dirEnumerator level] && [isDirectory boolValue])
             [dirEnumerator skipDescendants];
-        
+
         else{
-            
+
             // Add full path for non directories
             if (![isDirectory boolValue] && ([name isEqualToString:fileName] || [pattern matchWildcard:name]))
                 [theArray addObject:theURL];

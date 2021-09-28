@@ -17,18 +17,18 @@
  */
 
 struct OpenUserFilterControllerParser: IURLSchemeParametersParser {
-    
+
     private let executor: IURLSchemeExecutor
-    
+
     init(executor: IURLSchemeExecutor) {
         self.executor = executor
     }
-    
+
     func parse(_ url: URL) -> Bool {
         let rule = String(url.path.suffix(url.path.count - 1))
         if rule.isEmpty { return false }
         return executor.openUserFilterController(rule: rule)
     }
 
-    
+
 }

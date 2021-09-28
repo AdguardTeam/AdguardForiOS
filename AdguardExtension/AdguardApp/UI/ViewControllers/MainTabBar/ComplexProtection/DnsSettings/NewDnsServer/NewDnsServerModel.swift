@@ -20,51 +20,51 @@ import DnsAdGuardSDK
 
 /// Manage custom dns provider
 final class NewDnsServerModel {
-    
+
     // MARK: - Properties
-    
+
     /// Provider name
     var providerName: String {
         return provider?.name ?? ""
     }
-    
+
     /// Provider upstream
     var providerUpstream: String {
         guard let server = provider?.server,
               let upstream = server.upstreams.first?.upstream else { return "" }
-        
+
         return upstream
     }
-    
-    
+
+
     let provider: CustomDnsProviderProtocol?
     private let dnsProvidersManager: DnsProvidersManagerProtocol
     private let vpnManager: VpnManagerProtocol
 
     // MARK: - Init
-    
+
     init(dnsProvidersManager: DnsProvidersManagerProtocol,
          vpnManager: VpnManagerProtocol,
          provider: CustomDnsProviderProtocol? = nil) {
-        
+
         self.dnsProvidersManager = dnsProvidersManager
         self.vpnManager = vpnManager
         self.provider = provider
     }
-    
+
     /// Function to add custom provider
     func addCustomProvider(name: String, upstream: String) throws {
         try dnsProvidersManager.addCustomProvider(name: name, upstreams: [upstream], selectAsCurrent: true)
         vpnManager.updateSettings(completion: nil)
     }
-    
+
     /// Function to update custom provider
     func updateCustomProvider(newName: String, newUpstream: String, provider: DnsProviderMetaProtocol) throws {
         let providerId = provider.providerId
         try dnsProvidersManager.updateCustomProvider(withId: providerId, newName: newName, newUpstreams: [newUpstream], selectAsCurrent: false)
         vpnManager.updateSettings(completion: nil)
     }
-    
+
     /// Function to remove custom provider
     func removeCustomProvider(provider: DnsProviderMetaProtocol) throws {
         let providerId = provider.providerId

@@ -38,10 +38,10 @@ struct FiltersTable: Equatable {
     let removable: Bool
     let expires: Int? // TODO: - Looks like this property is useless
     let subscriptionUrl: String?
-    
+
     // Table name
     static let table = Table("filters")
-    
+
     // Columns names
     static let filterId = Expression<Int>("filter_id")
     static let groupId = Expression<Int>("group_id")
@@ -57,7 +57,7 @@ struct FiltersTable: Equatable {
     static let removable = Expression<Bool>("removable")
     static let expires = Expression<Int?>("expires")
     static let subscriptionUrl = Expression<String?>("subscriptionUrl")
-    
+
     // Localized initializer
     init(dbFilter: Row, localizedName: String, localizedDescription: String) {
         self.filterId = dbFilter[FiltersTable.filterId]
@@ -75,7 +75,7 @@ struct FiltersTable: Equatable {
         self.expires = dbFilter[FiltersTable.expires]
         self.subscriptionUrl = dbFilter[FiltersTable.subscriptionUrl]
     }
-    
+
     // Initializer from DB result
     init(dbFilter: Row) {
         self.filterId = dbFilter[FiltersTable.filterId]
@@ -93,7 +93,7 @@ struct FiltersTable: Equatable {
         self.expires = dbFilter[FiltersTable.expires]
         self.subscriptionUrl = dbFilter[FiltersTable.subscriptionUrl]
     }
-    
+
     // Default initializer
     init(filterId: Int, groupId: Int, isEnabled: Bool, version: String?, lastUpdateTime: Date?, lastCheckTime: Date?, editable: Bool, displayNumber: Int, name: String, description: String, homePage: String?, removable: Bool, expires: Int?, subscriptionUrl: String?) {
         self.filterId = filterId
@@ -129,12 +129,12 @@ fileprivate extension ExtendedFilterMetaProtocol {
         ]
         return sttrs
     }
-    
+
     func getDbAddSetters(isEnabled: Bool) -> [Setter] {
         var sttrs: [Setter] = updateSetters
         sttrs.append(FiltersTable.filterId <- self.filterId)
         sttrs.append(FiltersTable.isEnabled <- isEnabled)
-        
+
         return sttrs
     }
 }
@@ -142,7 +142,7 @@ fileprivate extension ExtendedFilterMetaProtocol {
 // MARK: - MetaStorage + Filters
 protocol FiltersMetaStorageProtocol {
     var nextCustomFilterId: Int { get }
-    
+
     func getLocalizedFiltersForGroup(withId id: Int, forLanguage lang: String) throws -> [FiltersTable]
     func setFilter(withId id: Int, enabled: Bool) throws
     func update(filter: ExtendedFilterMetaProtocol) throws -> Bool
@@ -154,7 +154,7 @@ protocol FiltersMetaStorageProtocol {
 }
 
 extension MetaStorage: FiltersMetaStorageProtocol {
-    
+
     // Checks existing filter id and returns new unique id for custom filter
     var nextCustomFilterId: Int {
         // Query: SELECT max(filter_id) FROM filters
@@ -164,7 +164,7 @@ extension MetaStorage: FiltersMetaStorageProtocol {
             return CustomFilterMeta.baseCustomFilterId
         }
     }
-    
+
     // Returns all filters from database with localizations for specified group and language
     func getLocalizedFiltersForGroup(withId id: Int, forLanguage lang: String) throws -> [FiltersTable] {
         // Query: select * from filters where group_id = id order by display_number, filter_id
@@ -179,7 +179,7 @@ extension MetaStorage: FiltersMetaStorageProtocol {
         Logger.logDebug("(FiltersMetaStorage) - getLocalizedFiltersForGroup with id=\(id); lang=\(lang); return \(dbFilters.count) objects")
         return dbFilters
     }
-    
+
     // Enables or disables a filter with specified id
     func setFilter(withId id: Int, enabled: Bool) throws {
         //Query: UPDATE "filters" SET "is_enabled" = enabled WHERE ("filter_id" = filterId)
@@ -187,7 +187,7 @@ extension MetaStorage: FiltersMetaStorageProtocol {
         let rowId = try filtersDb.run(query)
         Logger.logInfo("(FiltersMetaStorage) - Filter enabled state with filter Id \(rowId) was updated to state \(enabled)")
     }
-    
+
     /**
      Updates filter with passed meta
      Compares passed filter version and filter version in DB
@@ -197,27 +197,27 @@ extension MetaStorage: FiltersMetaStorageProtocol {
      */
     func update(filter: ExtendedFilterMetaProtocol) throws -> Bool {
         Logger.logDebug("(FiltersMetaStorage) - updateFilter start; Filter id=\(filter.filterId)")
-        
+
         // Query: SELECT version FROM filters WHERE filter_id = filter.filterId
         let versionQuery = FiltersTable.table.select(FiltersTable.version).where(FiltersTable.filterId == filter.filterId)
         guard let currentFilterVersion = try filtersDb.pluck(versionQuery)?.get(FiltersTable.version) else {
             Logger.logDebug("(FiltersMetaStorage) - updateFilter; Failed to get current filter version; Filter id=\(filter.filterId)")
             return false
         }
-        
+
         Logger.logDebug("(FiltersMetaStorage) - updateFilter; Filter id=\(filter.filterId); Update \(currentFilterVersion) -> \(filter.version ?? "nil")")
         guard currentFilterVersion != filter.version else { return false }
-        
+
         // Query: UPDATE filters SET (group_id, version, last_update_time, editable, display_number, name, description, homepage, removable, expires, subscriptionUrl) WHERE filter_id = filter.filterId
         let query = FiltersTable.table
                                 .where(FiltersTable.filterId == filter.filterId)
                                 .update(filter.updateSetters)
-            
+
         try filtersDb.run(query)
         Logger.logInfo("(FiltersMetaStorage) - Filter was updated with id \(filter.filterId)")
         return true
     }
-    
+
     /**
      Updates meta for passed filters if needed
      Checks filter version for every filter and decides whether to update filter or not
@@ -230,7 +230,7 @@ extension MetaStorage: FiltersMetaStorageProtocol {
             return wasUpdated ? $0.filterId : nil
         }
     }
-    
+
     // Creates filter with passed meta
     func add(filter: ExtendedFilterMetaProtocol, enabled: Bool) throws {
         // Query: INSERT OR REPLACE INTO "filters" (filter_id, group_id, is_enabled, version, last_update_time, editable, display_number, name, description, homepage, removable, expires, subscriptionUrl)
@@ -238,23 +238,23 @@ extension MetaStorage: FiltersMetaStorageProtocol {
         try filtersDb.run(query)
         Logger.logInfo("(FiltersMetaStorage) - Filter was added with id \(filter.filterId)")
     }
-    
+
     // Deletes filter and all data associated with it
     func deleteFilter(withId id: Int) throws {
         try deleteFilters(withIds: [id])
     }
-    
+
     // Deletes filters and all data associated with them
     func deleteFilters(withIds ids: [Int]) throws {
         let filtersToDelete = FiltersTable.table.filter(ids.contains(FiltersTable.filterId))
         let deletedRows = try filtersDb.run(filtersToDelete.delete())
         Logger.logDebug("(FiltersMetaStorage) - deleteFilters; deleted \(deletedRows) filters")
-        
+
         try deleteLangsForFilters(withIds: ids)
         try deleteTagsForFilters(withIds: ids)
         try deleteAllLocalizationForFilters(withIds: ids)
     }
-    
+
     func renameFilter(withId id: Int, name: String) throws {
         // Query: UPDATE filters SET (name) WHERE filter_id = id
         let query = FiltersTable.table.where(FiltersTable.filterId == id).update(FiltersTable.name <- name)

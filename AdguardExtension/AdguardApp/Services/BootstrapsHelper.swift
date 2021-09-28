@@ -25,19 +25,19 @@ import DnsAdGuardSDK
 struct BootstrapsHelper {
     static var bootstraps: [String] {
         var bootstraps = NetworkUtils().systemDnsServers
-        
+
         // If our Tunnel appears in system DNS servers we should remove it
         // Because the tunnel is unable to resolve DNS servers
         let tunnelIpV4 = Constants.LocalDnsAddresses.ipv4
         let tunnelIpV6 = Constants.LocalDnsAddresses.ipv6
         bootstraps.removeAll(where: { $0 == tunnelIpV4 || $0 == tunnelIpV6 })
-        
+
         // If bootstraps are empty after removing our tunnel
         // Than we add AdGuard Non-filtering DNS
         if bootstraps.isEmpty {
             bootstraps = Constants.LocalDnsAddresses.defaultSystemDnsServers
         }
-        
+
         return bootstraps
     }
 }

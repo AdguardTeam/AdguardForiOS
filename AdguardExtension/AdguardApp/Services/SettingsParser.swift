@@ -1,17 +1,17 @@
 /**
        This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
        Copyright © Adguard Software Limited. All rights reserved.
- 
+
        Adguard for iOS is free software: you can redistribute it and/or modify
        it under the terms of the GNU General Public License as published by
        the Free Software Foundation, either version 3 of the License, or
        (at your option) any later version.
- 
+
        Adguard for iOS is distributed in the hope that it will be useful,
        but WITHOUT ANY WARRANTY; without even the implied warranty of
        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
        GNU General Public License for more details.
- 
+
        You should have received a copy of the GNU General Public License
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -24,16 +24,16 @@ protocol CustomFilterSettingsProtocol {
 
 enum ImportSettingStatus: Int, Codable {
     typealias RawValue = Int
-    
+
     case enabled, disabled, successful, unsuccessful
 }
 
 struct DefaultCBFilterSettings: Codable {
     var id: Int
     var enable: Bool
-    
+
     var status: ImportSettingStatus = .enabled
-    
+
     enum CodingKeys:String, CodingKey  {
         case id, enable
     }
@@ -42,9 +42,9 @@ struct DefaultCBFilterSettings: Codable {
 struct CustomCBFilterSettings: Codable, CustomFilterSettingsProtocol {
     var name: String
     var url: String
-    
+
     var status: ImportSettingStatus = .enabled
-    
+
     enum CodingKeys:String, CodingKey  {
         case name
         case url
@@ -54,9 +54,9 @@ struct CustomCBFilterSettings: Codable, CustomFilterSettingsProtocol {
 struct DnsFilterSettings: Codable, CustomFilterSettingsProtocol {
     var name: String
     var url: String
-    
+
     var status: ImportSettingStatus = .enabled
-    
+
     enum CodingKeys:String, CodingKey  {
         case name
         case url
@@ -65,7 +65,7 @@ struct DnsFilterSettings: Codable, CustomFilterSettingsProtocol {
 
 enum DnsNameSetting: String, Codable {
     typealias RawValue = String
-    
+
     case adguardDefault = "default"
     case adguardFamily = "adguard-dns-family"
     case adguardNonFiltering = "adguard-dns-non-filtering"
@@ -73,7 +73,7 @@ enum DnsNameSetting: String, Codable {
 
 enum DnsProtocolSetting: String, Codable {
     typealias RawValue = String
-    
+
     case dns = "DNS"
     case dnsCrypt = "DNSCRYPT"
     case doh = "DOH"
@@ -82,14 +82,14 @@ enum DnsProtocolSetting: String, Codable {
 }
 
 struct Settings: Codable {
-    
+
     // override flags
     var overrideCbFilters:Bool?
     var overrideCustomFilters:Bool?
     var overrideUserRules:Bool?
     var overrideDnsUserRules:Bool?
     var overrideDnsFilters:Bool?
-    
+
     // settings
     var defaultCbFilters:[DefaultCBFilterSettings]?
     var customCbFilters:[CustomCBFilterSettings]?
@@ -98,7 +98,7 @@ struct Settings: Codable {
     var license: String?
     var userRules: [String]?
     var dnsUserRules: [String]?
-    
+
     // import statuses
     var dnsStatus: ImportSettingStatus = .enabled
     var licenseStatus: ImportSettingStatus = .enabled
@@ -124,17 +124,17 @@ struct Settings: Codable {
 
 /** this class is responsible for parsing app settings which recieved via custom url scheme */
 protocol SettingsParserProtocol {
-    
+
     func parse(querry: String)->Settings?
 }
 
 class SettingsParser: SettingsParserProtocol {
-    
+
     func parse(querry: String) -> Settings? {
-        
+
         let json = querry.removingPercentEncoding
         let settings = try? JSONDecoder().decode(Settings.self, from: json?.data(using: .utf8) ?? Data())
-        
+
         return settings;
     }
 }

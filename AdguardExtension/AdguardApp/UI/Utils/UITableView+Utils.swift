@@ -21,11 +21,11 @@ import Foundation
 extension UITableView {
     func layoutTableHeaderView() {
         guard let headerView = self.tableHeaderView else { return }
-        
+
         let sizeToFit = CGSize(width: self.frame.width, height: UIView.layoutFittingCompressedSize.height)
         let height = headerView.systemLayoutSizeFitting(sizeToFit).height
         var headerFrame = headerView.frame
-        
+
         if height != headerFrame.size.height {
             headerFrame.size.height = height
             headerView.frame = headerFrame

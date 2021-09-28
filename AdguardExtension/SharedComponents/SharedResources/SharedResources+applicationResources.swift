@@ -19,7 +19,7 @@
 import Foundation
 import DnsAdGuardSDK
 
-extension AESharedResourcesProtocol {    
+extension AESharedResourcesProtocol {
     /// Advanced mode state
     var advancedMode: Bool {
         get {
@@ -50,14 +50,14 @@ extension AESharedResourcesProtocol {
             guard let value = sharedDefaults().object(forKey: BlockingMode) as? Int else {
                 return .defaultMode
             }
-            
+
             return DnsProxyBlockingMode(rawValue: value) ?? .defaultMode
         }
         set {
             sharedDefaults().setValue(newValue.rawValue, forKey: BlockingMode)
         }
     }
-    
+
     /// Map that store info about active protocol for specified provider.
     /// Map key: - Int value represent provider Id
     /// Map value: - Selected DNS protocol for specified provider
@@ -77,13 +77,13 @@ extension AESharedResourcesProtocol {
             }
         }
     }
-    
+
     dynamic var tunnelMode: TunnelMode {
         get {
             guard let value = sharedDefaults().object(forKey: AEDefaultsVPNTunnelMode) as? Int else {
                 return .split
             }
-            
+
             return TunnelMode(rawValue:  value) ?? .split
         }
         set {

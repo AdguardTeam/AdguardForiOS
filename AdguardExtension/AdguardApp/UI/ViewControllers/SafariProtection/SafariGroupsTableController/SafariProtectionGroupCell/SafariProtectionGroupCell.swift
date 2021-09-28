@@ -1,17 +1,17 @@
 /**
        This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
        Copyright © Adguard Software Limited. All rights reserved.
- 
+
        Adguard for iOS is free software: you can redistribute it and/or modify
        it under the terms of the GNU General Public License as published by
        the Free Software Foundation, either version 3 of the License, or
        (at your option) any later version.
- 
+
        Adguard for iOS is distributed in the hope that it will be useful,
        but WITHOUT ANY WARRANTY; without even the implied warranty of
        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
        GNU General Public License for more details.
- 
+
        You should have received a copy of the GNU General Public License
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -37,7 +37,7 @@ extension SafariProtectionGroupCellModel {
         self.isAccessible = false
         self.groupType = .ads
     }
-        
+
     init(group: SafariGroup, proStatus: Bool) {
         self.iconImage = group.groupType.iconImage
         self.title = group.groupName
@@ -46,7 +46,7 @@ extension SafariProtectionGroupCellModel {
         self.isAccessible = group.groupType.proOnly ? proStatus : true
         self.groupType = group.groupType
     }
-    
+
     private static func getDescription(for group: SafariGroup, proStatus: Bool) -> String {
         if group.groupType.proOnly && !proStatus {
             if group.groupType == .security {
@@ -76,40 +76,40 @@ protocol SafariProtectionGroupCellDelegate: AnyObject {
 }
 
 final class SafariProtectionGroupCell: UITableViewCell, Reusable {
-    
+
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var descriptionLabel: ThemableLabel!
     @IBOutlet weak var stateSwitch: UISwitch!
-    
+
     // MARK: - Services
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
 
     // MARK: - Properties
     private var themeObserver: NotificationToken?
-    
+
     weak var delegate: SafariProtectionGroupCellDelegate?
-    
+
     var model: SafariProtectionGroupCellModel = SafariProtectionGroupCellModel() {
         didSet {
             process(model: model)
         }
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         updateTheme()
         iconImageView.tintColor = UIColor.AdGuardColor.green
-        
+
         themeObserver = NotificationCenter.default.observe(name: .themeChanged, object: nil, queue: .main) { [weak self] _ in
             self?.updateTheme()
         }
     }
-    
+
     @IBAction func switchTapped(_ sender: UISwitch) {
         delegate?.stateChanged(for: model.groupType, newState: !model.isEnabled)
     }
-    
+
     private func process(model: SafariProtectionGroupCellModel) {
         iconImageView.image = model.iconImage
         titleLabel.text = model.title

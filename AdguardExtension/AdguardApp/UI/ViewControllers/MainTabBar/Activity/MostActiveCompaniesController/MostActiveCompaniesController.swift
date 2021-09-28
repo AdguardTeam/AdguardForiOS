@@ -22,32 +22,32 @@ class MostActiveCompaniesController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var controllerTitle: ThemableLabel!
     @IBOutlet weak var tableView: UITableView!
-    
+
     @IBOutlet var themableLabels: [ThemableLabel]!
-    
+
     // MARK: - Services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    
+
     // MARK: - Public variables
 
     var chartDateType: ChartDateType?
     var mostRequestedCompanies: [CompanyRequestsRecord] = []
-    
+
     // MARK: - Private variables
-    
+
     private var choosenRecord: CompanyRequestsRecord?
-    
+
     private let mostActiveCompaniesCellReuseId = "MostActiveCompaniesCellId"
     private let showCompanyDetailsSegueId = "showCompanyDetails"
-    
+
     // MARK: - ViewController life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         updateTheme()
         setupBackButton()
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showCompanyDetailsSegueId {
             if let controller = segue.destination as? CompanyDetailedController {
@@ -62,34 +62,34 @@ extension MostActiveCompaniesController: UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return mostRequestedCompanies.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: mostActiveCompaniesCellReuseId) as? MostActiveCompaniesCell {
             let record = mostRequestedCompanies[indexPath.row]
             cell.theme = theme
             cell.companyLabel.text = record.key
             cell.requestsNumberLabel.text = String(format: String.localizedString("requests_number"), record.requests)
-            
+
             if indexPath.row == 0 {
                 let fontSize = cell.companyLabel.font.pointSize
                 cell.companyLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
             }
-            
+
             return cell
         }
         return UITableViewCell()
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         choosenRecord = mostRequestedCompanies[indexPath.row]
         performSegue(withIdentifier: showCompanyDetailsSegueId, sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
+
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
     }
-    
+
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }

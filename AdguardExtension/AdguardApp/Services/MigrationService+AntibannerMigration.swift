@@ -20,7 +20,7 @@ import Foundation
 
 
 extension MigrationService {
-    
+
     // todo: move it to sdk?
 //    func migrateFilterRulesIfNeeded(antibanner: AESAntibannerProtocol, storage: FiltersStorageProtocol) {
 //

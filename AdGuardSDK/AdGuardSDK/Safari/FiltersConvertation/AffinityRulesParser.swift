@@ -22,7 +22,7 @@ import Foundation
 
 struct Affinity: OptionSet {
     let rawValue: UInt8
-    
+
     static let general = Affinity(rawValue: 1 << 0)
     static let privacy = Affinity(rawValue: 1 << 1)
     static let socialWidgetsAndAnnoyances = Affinity(rawValue: 1 << 2)
@@ -44,13 +44,13 @@ struct FilterRule {
 protocol AffinityRulesParserProtocol {
     /* Converts array of rules strings to array of FilterRule-s with affinities */
     static func parse(strings: [String]) -> [FilterRule]
-    
+
     /**
      Converts rules string without affinity to the string with specified affinity
      - Parameter rule: String represantation of rule
      - Parameter affinity: Affinity mask to apply for rule
      - Returns: String represantation of rule with affinity
-     
+
      For example:
      If we pass **@@||imasdk.googleapis.com** and affinity **general** and **privacy**
      The function will return:
@@ -75,18 +75,18 @@ protocol AffinityRulesParserProtocol {
  @@||google-analytics.com/collect|$domain=ondemandkorea.com
  !#safari_cb_affinity
  ~~~
- 
+
  That means that this 2 rules should be added to **general** and **privacy** content blockers,
  although all other rules from filter example will be added to **ads** CB.
  */
 struct AffinityRulesParser: AffinityRulesParserProtocol {
-    
+
     // MARK: - Private properties
-    
+
     private static let adblockFirstLine = "Adblock Plus"
     private static let affinityPrefix = "!#safari_cb_affinity("
     private static let affinitySuffix = "!#safari_cb_affinity"
-    
+
     private static let stringToAffinity:[String: Affinity] = ["general" : .general,
                                                               "privacy" : .privacy,
                                                               "social"  : .socialWidgetsAndAnnoyances,
@@ -94,28 +94,28 @@ struct AffinityRulesParser: AffinityRulesParserProtocol {
                                                               "custom" : .custom,
                                                               "security" : .security,
                                                               "all" : Affinity(rawValue: 0)]
-    
+
     // MARK: - Public methods
-    
+
     static func parse(strings: [String]) -> [FilterRule] {
         var rules: [FilterRule] = []
         var affinityMask: Affinity?
-        
+
         // Iterating over file's content line by line
         for (lineIndex, line) in strings.enumerated() {
-            
+
             // If first line contains Adblock Plus than it's not a rule or affinity
             if lineIndex == 0, line.lowercased().contains(adblockFirstLine.lowercased()) {
                 continue
             }
-            
+
             let trimmedLine = line.trimmingCharacters(in: .whitespaces)
-            
+
             // If line is empty just go on
             if trimmedLine.count == 0 {
                 continue
             }
-            
+
             // Affinity mask found
             if trimmedLine.hasPrefix(affinityPrefix) {
                 affinityMask = parseContentBlockerTypes(from: line)
@@ -130,14 +130,14 @@ struct AffinityRulesParser: AffinityRulesParserProtocol {
             else if trimmedLine.first == "!"{
                 continue
             }
-            
+
             let rule = FilterRule(rule: trimmedLine, affinity: affinityMask)
             rules.append(rule)
         }
-        
+
         return rules
     }
-    
+
     static func rule(_ rule: String, withAffinity affinity: Affinity?) -> String {
         guard let affinity = affinity, !rule.trimmingCharacters(in: .whitespaces).isEmpty else {
             return rule
@@ -152,26 +152,26 @@ struct AffinityRulesParser: AffinityRulesParserProtocol {
         if affinity.contains(.security) { affinityValues.append("security") }
         if affinity.contains(.socialWidgetsAndAnnoyances) { affinityValues.append("social") }
         if affinity.rawValue == 0 { affinityValues.append("all") }
-        
+
         return "!#safari_cb_affinity(\(affinityValues.joined(separator: ",")))\n\(rule)\n!#safari_cb_affinity"
     }
-    
+
     // MARK: - private methods
-    
+
     // Gets all affinity masks from rule
     private static func parseContentBlockerTypes(from ruleText: String) -> Affinity? {
         var result: Affinity?
-        
+
         let startIndex = ruleText.index(ruleText.startIndex, offsetBy: affinityPrefix.count)
         let endIndex = ruleText.index(ruleText.startIndex, offsetBy: ruleText.count - 1)
         guard startIndex < endIndex else {
             return nil
         }
-        
+
         let range = startIndex..<endIndex
         let stripped = ruleText[range]
         let list = stripped.components(separatedBy: ",")
-        
+
         for item in list {
             let trimmed = item.trimmingCharacters(in: .whitespacesAndNewlines)
             let affinity = AffinityRulesParser.stringToAffinity[trimmed]

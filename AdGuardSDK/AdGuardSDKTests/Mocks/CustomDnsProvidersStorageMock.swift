@@ -1,9 +1,9 @@
 import Foundation
 
 final class CustomDnsProvidersStorageMock: CustomDnsProvidersStorageProtocol {
-    
+
     var providers: [CustomDnsProviderProtocol] = []
-    
+
     var addCustomProviderCalledCount = 0
     var addCustomProviderResult: Result<(Int, Int)> = .error(CommonError.missingData)
     func addCustomProvider(name: String, upstreams: [String]) throws -> (providerId: Int, serverId: Int) {
@@ -13,7 +13,7 @@ final class CustomDnsProvidersStorageMock: CustomDnsProvidersStorageProtocol {
         case .error(let error): throw error
         }
     }
-    
+
     var updateCustomProviderCalledCount = 0
     var updateCustomProviderError: Error?
     func updateCustomProvider(withId id: Int, newName: String, newUpstreams: [String]) throws {
@@ -22,7 +22,7 @@ final class CustomDnsProvidersStorageMock: CustomDnsProvidersStorageProtocol {
             throw error
         }
     }
-    
+
     var removeCustomProviderCalledCount = 0
     var removeCustomProviderError: Error?
     func removeCustomProvider(withId id: Int) throws {
@@ -31,7 +31,7 @@ final class CustomDnsProvidersStorageMock: CustomDnsProvidersStorageProtocol {
             throw error
         }
     }
-    
+
     var resetCalledCount = 0
     var resetError: Error?
     func reset() throws {

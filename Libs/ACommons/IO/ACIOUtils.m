@@ -94,7 +94,7 @@ static NSInteger _lineBufferSize = ACIOUtilsDefaultLineBufferSize;
     if (data == nil || data.length == 0) return YES;
 
     const Byte *bytes = [data bytes];
-    
+
     for (int i = 0; i < data.length; i++)
     {
         if (![ACIOUtils isEmptyOrWhitespaceByte:bytes[i]])
@@ -102,7 +102,7 @@ static NSInteger _lineBufferSize = ACIOUtilsDefaultLineBufferSize;
             return NO;
         }
     }
-    
+
     return YES;
 }
 
@@ -149,7 +149,7 @@ static NSInteger _lineBufferSize = ACIOUtilsDefaultLineBufferSize;
 
 + (NSString *)readLine:(id<ACIOUtilReadProtocol>)stream encoding:(NSStringEncoding)encoding{
     @autoreleasepool {
-        
+
         NSData *lineBytes = [self readLineBytes:stream];
         if (lineBytes.length == 0) {
             return nil;
@@ -184,50 +184,50 @@ static NSInteger _lineBufferSize = ACIOUtilsDefaultLineBufferSize;
 
         // doing nothing for content-length == 0
         if (contentLength == 0) return nil;
-        
+
         NSUInteger bufferSize;
         if (contentLength == -1)
             bufferSize = _bufferSize;
-        
+
         else if (_bufferSize > contentLength)
             bufferSize = contentLength;
-        
+
         else
             bufferSize = _bufferSize;
-        
+
         NSMutableData *outputData = [NSMutableData dataWithCapacity:bufferSize];
-        
+
         Byte *buffer = malloc(bufferSize * sizeof(Byte));
         if (buffer == nil)
             @throw [NSException mallocException:@"buffer"];
-        
+
         NSUInteger bytesRead = 0;
         NSInteger read = 0;
         @try {
-            
+
             while (1)
             {
                 read = [input read:buffer maxLength:bufferSize];
                 if (read <= ACIO_EOF)
                     break;
-                
+
                 [outputData appendBytes:buffer length:read];
                 if (contentLength != -1){
-                    
+
                     bytesRead += read;
                     if (bytesRead == contentLength)
                         break;
-                    
+
                     if (contentLength - bytesRead < bufferSize)
                         bufferSize = contentLength - bytesRead;
                 }
             }
         }
         @finally {
-            
+
             free(buffer);
         }
-        
+
         return outputData;
     }
 }
@@ -239,51 +239,51 @@ static NSInteger _lineBufferSize = ACIOUtilsDefaultLineBufferSize;
 + (NSInteger)copyFrom:(id<ACIOUtilReadProtocol>)input to:(id<ACIOUtilWriteProtocol>)output length:(NSInteger)contentLength
 {
     @autoreleasepool {
-    
+
         // doing nothing for content-length == 0
         if (contentLength == 0) return 0;
-        
+
         NSUInteger bufferSize;
         if (contentLength == -1)
             bufferSize = _bufferSize;
-        
+
         else if (_bufferSize > contentLength)
             bufferSize = contentLength;
-        
+
         else
             bufferSize = _bufferSize;
-        
+
         Byte *buffer = malloc(bufferSize * sizeof(Byte));
         if (buffer == nil)
             @throw [NSException mallocException:@"buffer"];
-        
+
         NSUInteger bytesRead = 0;
         NSInteger read = 0;
         @try {
-            
+
             while (1)
             {
                 read = [input read:buffer maxLength:bufferSize];
                 if (read <= ACIO_EOF)
                     break;
-                
+
                 [output write:buffer maxLength:read];
                 if (contentLength != -1){
-                    
+
                     bytesRead += read;
                     if (bytesRead == contentLength)
                         break;
-                    
+
                     if (contentLength - bytesRead < bufferSize)
                         bufferSize = contentLength - bytesRead;
                 }
             }
         }
         @finally {
-            
+
             free(buffer);
         }
-        
+
         return bytesRead;
     }
 }

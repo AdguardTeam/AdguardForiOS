@@ -23,23 +23,23 @@ class DnsStatisticsRecord: CustomDebugStringConvertible {
     var requests: Int
     var encrypted: Int
     var elapsedSumm: Int
-    
+
     var debugDescription: String { "date: \(date); requests = \(requests); encrypted = \(encrypted); elapsedSumm = \(elapsedSumm)" }
-    
+
     init(date: Date = Date(), requests: Int = 0, encrypted: Int = 0, elapsedSumm: Int = 0) {
         self.date = date
         self.requests = requests
         self.encrypted = encrypted
         self.elapsedSumm = elapsedSumm
     }
-    
+
     init?(_ resultSet: FMResultSet) {
         if let iso8601DateString = resultSet["timeStamp"] as? String,
             let date = ISO8601DateFormatter().date(from: iso8601DateString),
             let requests = resultSet["requests"] as? Int,
             let encrypted = resultSet["encrypted"] as? Int,
             let elapsedSumm = resultSet["elapsedSumm"] as? Int {
-            
+
             self.date = date
             self.requests = requests
             self.encrypted = encrypted

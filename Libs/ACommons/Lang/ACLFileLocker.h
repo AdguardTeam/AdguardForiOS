@@ -22,11 +22,11 @@
 /////////////////////////////////////////////////////////////////////
 
 /**
-    Implements locking of a file, which used as a primitive 
-    locking mechanism in interprocess communications. 
+    Implements locking of a file, which used as a primitive
+    locking mechanism in interprocess communications.
  */
 @interface ACLFileLocker  : NSObject{
-    
+
     int _fileDescriptor;
     BOOL _locked;
 }

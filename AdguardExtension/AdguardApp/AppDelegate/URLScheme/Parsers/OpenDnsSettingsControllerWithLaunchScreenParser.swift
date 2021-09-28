@@ -19,11 +19,11 @@
 struct OpenDnsSettingsControllerWithLaunchScreenParser: IURLSchemeParametersParser {
 
     private let executor: IURLSchemeExecutor
-    
+
     init(executor: IURLSchemeExecutor) {
         self.executor = executor
     }
-    
+
     func parse(_ url: URL) -> Bool {
         let dnsProtectionIsEnabled = url.protectionStateIsEnabled()
         return executor.openDnsSettingsController(showLaunchScreen: true, dnsProtectionIsEnabled: dnsProtectionIsEnabled)

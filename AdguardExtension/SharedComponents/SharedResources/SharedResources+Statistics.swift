@@ -19,7 +19,7 @@
 import enum DnsAdGuardSDK.StatisticsPeriod
 
 extension AESharedResourcesProtocol {
-    
+
     dynamic var activityStatisticsType: StatisticsPeriod {
         get {
             let periodType = sharedDefaults().object(forKey: ActivityStatisticsPeriodType) as? Int
@@ -31,7 +31,7 @@ extension AESharedResourcesProtocol {
             sharedDefaults().set(rawValue, forKey: ActivityStatisticsPeriodType)
         }
     }
-    
+
     dynamic var chartDateType: StatisticsPeriod {
         get {
             let periodType = sharedDefaults().object(forKey: StatisticsPeriodType) as? Int

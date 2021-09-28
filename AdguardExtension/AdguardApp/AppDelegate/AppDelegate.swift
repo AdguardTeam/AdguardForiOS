@@ -22,12 +22,12 @@ import Sentry
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
+
     // MARK: - Public properties
-    
+
     let statusBarWindow: IStatusBarWindow
     var window: UIWindow?
-    
+
     // AppDelegate+StatusBarWindow notifications
     var filtersUpdateStarted: SafariAdGuardSDK.NotificationToken?
     var filtersUpdateFinished: SafariAdGuardSDK.NotificationToken?
@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var purchaseObservation: NotificationToken?
     private var proStatusObservation: NotificationToken?
     private var setappObservation: NotificationToken?
-    
+
     private var firstRun: Bool {
         get {
             resources.firstRun
@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var activateWithOpenUrl: Bool = false
 
     // MARK: - Services
-    
+
     private var resources: AESharedResourcesProtocol
     private var safariProtection: SafariProtectionProtocol
     private var dnsProtection: DnsProtectionProtocol
@@ -64,9 +64,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var rateService: RateAppServiceProtocol
     private var complexProtection: ComplexProtectionServiceProtocol
     private var themeService: ThemeServiceProtocol
-    
+
     // MARK: - Application init
-    
+
     override init() {
         StartupService.start()
         self.resources = ServiceLocator.shared.getService()!
@@ -83,50 +83,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.themeService = ServiceLocator.shared.getService()!
         self.safariProtection = ServiceLocator.shared.getService()!
         self.dnsProtection = ServiceLocator.shared.getService()!
-        
+
         self.statusBarWindow = StatusBarWindow(configuration: configuration)
         super.init()
     }
-    
+
     deinit {
         resources.sharedDefaults().removeObserver(self, forKeyPath: TunnelErrorCode)
     }
-    
+
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        
+
         //------------- Preparing for start application. Stage 1. -----------------
-        
+
         activateWithOpenUrl = false
-        
+
         initLogger()
         DDLogInfo("(AppDelegate) Preparing for start application. Stage 1.")
-        
+
         //------------ Interface Tuning -----------------------------------
         self.window?.backgroundColor = UIColor.clear
-        
+
         if (application.applicationState != .background) {
             purchaseService.checkPremiumStatusChanged()
         }
-        
+
         return true
     }
-    
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        
+
         SentrySDK.start { options in
             options.dsn = Constants.Sentry.dsnUrl
             options.enableAutoSessionTracking = false
         }
-        
+
         prepareControllers()
-        
+
         //------------- Preparing for start application. Stage 2. -----------------
         DDLogInfo("(AppDelegate) Preparing for start application. Stage 2.")
-        
+
         let interval = resources.backgroundFetchUpdatePeriod.interval
         AppDelegate.setBackgroundFetchInterval(interval)
         subscribeToNotifications()
-        
+
         // Background fetch consists of 3 steps, so if the update process didn't fully finish in the background than we should continue it here
         safariProtection.finishBackgroundUpdate { error in
             if let error = error {
@@ -135,22 +135,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             DDLogInfo("(AppDelegate) - didFinishLaunchingWithOptions; Finish background update successfully")
         }
-        
+
         return true
     }
-    
-    
+
+
     // MARK: - Application Delegate Methods
-    
+
     func applicationWillResignActive(_ application: UIApplication) {
         DDLogInfo("(AppDelegate) applicationWillResignActive.")
     }
-    
+
     func applicationDidEnterBackground(_ application: UIApplication) {
         DDLogInfo("(AppDelegate) applicationDidEnterBackground.")
         resources.synchronizeSharedDefaults()
     }
-    
+
     func applicationWillEnterForeground(_ application: UIApplication) {
         DDLogInfo("(AppDelegate) applicationWillEnterForeground.")
         configuration.checkContentBlockerEnabled()
@@ -159,24 +159,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         safariProtection.updateConfig(with: safariConfig)
         dnsProtection.updateConfig(with: dnsConfig)
     }
-    
+
     func applicationDidBecomeActive(_ application: UIApplication) {
         DDLogInfo("(AppDelegate) applicationDidBecomeActive.")
         initStatusBarNotifications(application)
-        
+
         // If theme mode is System Default gets current style
         setAppInterfaceStyle()
     }
-    
+
     func applicationWillTerminate(_ application: UIApplication) {
         DDLogInfo("(AppDelegate) applicationWillTerminate.")
         resources.synchronizeSharedDefaults()
     }
-    
+
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         addPurchaseStatusObserver()
         purchaseService.checkLicenseStatus()
-        
+
         // Update filters in background
         safariProtection.updateSafariProtectionInBackground { [weak self] result in
             if let error = result.error {
@@ -191,24 +191,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    
+
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         DDLogError("(AppDelegate) application Open URL.")
         activateWithOpenUrl = true
-        
+
         if setappService.openUrl(url, options: options) {
             return true
         }
-        
+
         let urlParser: IURLSchemeParser = URLSchemeParser(executor: self,
                                                           configurationService: configuration,
                                                           purchaseService: purchaseService)
-        
+
         return urlParser.parse(url: url)
     }
-    
+
     // MARK: - Public methods
-    
+
     func resetAllSettings() {
         let resetProcessor = SettingsResetor(appDelegate: self,
                                              vpnManager: vpnManager,
@@ -217,7 +217,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                              safariProtection: safariProtection)
         resetProcessor.resetAllSettings()
     }
-    
+
     func setAppInterfaceStyle() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -234,34 +234,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    
+
     // MARK: - Observing Values from User Defaults
-    
+
     // TODO: - Change the way we show overlimit error for DNS filters
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == TunnelErrorCode, resources.tunnelErrorCode == 3 {
             postDnsFiltersOverlimitNotificationIfNedeed()
         }
     }
-    
+
     // MARK: - Private methods
-    
+
     private func prepareControllers() {
         setappService.start()
-        
+
         guard let mainPageController = getMainPageController() else {
             DDLogError("mainPageController is nil")
             return
         }
-        
+
         mainPageController.onReady = { [weak self] in
             // request permission for user notifications posting
             self?.userNotificationService.requestPermissions()
-            
+
             // Show rate app dialog when main page is initialized
             self?.showRateAppDialogIfNedeed()
         }
-        
+
         guard let dnsLogContainerVC = getDnsLogContainerController() else {
             DDLogError("dnsLogContainerVC is nil")
             return
@@ -271,7 +271,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          */
         dnsLogContainerVC.loadViewIfNeeded()
     }
-    
+
     // TODO: - Change the way we show overlimit error for DNS filters and handle the error
     private func postDnsFiltersOverlimitNotificationIfNedeed(){
         let rulesNumberString = String.simpleThousandsFormatting(NSNumber(integerLiteral: 1)) // dnsFiltersService.enabledRulesCount
@@ -280,7 +280,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let userInfo: [String : Int] = [PushNotificationCommands.command : PushNotificationCommands.openDnsFiltersController.rawValue]
         userNotificationService.postNotification(title: title, body: body, userInfo: userInfo)
     }
-    
+
     private func showRateAppDialogIfNedeed() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { [weak self] in
             guard let self = self else { return }
@@ -290,24 +290,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    
+
     private func addPurchaseStatusObserver() {
          if purchaseObservation == nil {
              purchaseObservation = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: nil, queue: nil) { (notification) in
                  guard let type =  notification.userInfo?[PurchaseService.kPSNotificationTypeKey] as? String else { return }
-                 
+
                  DDLogInfo("(AppDelegate) - Received notification type = \(type)")
-                 
+
                  if type == PurchaseService.kPSNotificationPremiumExpired {
                      self.userNotificationService.postNotification(title: String.localizedString("premium_expired_title"), body: String.localizedString("premium_expired_message"), userInfo: nil)
                  }
              }
          }
-         
+
          if proStatusObservation == nil {
              proStatusObservation = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
                  guard let self = self else { return }
-                 
+
                  if !self.configuration.proStatus && self.vpnManager.vpnInstalled {
                      DDLogInfo("(AppDelegate) Remove vpn configuration")
                      self.vpnManager.removeVpnConfiguration { (error) in
@@ -319,34 +319,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
              }
          }
      }
-    
+
     private func subscribeToNotifications() {
         subscribeToUserNotificationServiceNotifications()
-        
+
         resources.sharedDefaults().addObserver(self, forKeyPath: TunnelErrorCode, options: .new, context: nil)
-        
+
         subscribeToThemeChangeNotification()
-        
+
         setappObservation = NotificationCenter.default.observe(name: .setappDeviceLimitReched, object: nil, queue: OperationQueue.main) { _ in
             if let vc = Self.topViewController() {
                     ACSSystemUtils.showSimpleAlert(for: vc, withTitle: String.localizedString("common_error_title"), message: String.localizedString("setapp_device_limit_reached"))
-                    
+
             }
         }
     }
-    
+
     // MARK: - Init logger
-    
+
     private func initLogger() {
         let isDebugLogs = resources.sharedDefaults().bool(forKey: AEDefaultsDebugLogs)
         DDLogInfo("(AppDelegate) Init app with loglevel %s", level: isDebugLogs ? .debug : .all)
         ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
         ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
-        
+
         #if DEBUG
         ACLLogger.singleton()?.logLevel = ACLLDebugLevel
         #endif
-        
+
         AGLogger.setLevel(isDebugLogs ? .AGLL_TRACE : .AGLL_INFO)
         AGLogger.setCallback { msg, length in
             guard let msg = msg else { return }
@@ -355,18 +355,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 DDLogInfo("(DnsLibs) \(str)")
             }
         }
-    
+
         DDLogInfo("Application started. Version: \(productInfo.buildVersion() ?? "nil")")
-        
+
         // TODO: - Add this to all extensions that use AdGuarSDK
         Logger.logDebug = { msg in
             DDLogDebug(msg)
         }
-        
+
         Logger.logInfo = { msg in
             DDLogInfo(msg)
         }
-        
+
         Logger.logError = { msg in
             DDLogError(msg)
         }

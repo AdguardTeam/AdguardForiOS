@@ -1,17 +1,17 @@
 /**
        This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
        Copyright © Adguard Software Limited. All rights reserved.
- 
+
        Adguard for iOS is free software: you can redistribute it and/or modify
        it under the terms of the GNU General Public License as published by
        the Free Software Foundation, either version 3 of the License, or
        (at your option) any later version.
- 
+
        Adguard for iOS is distributed in the hope that it will be useful,
        but WITHOUT ANY WARRANTY; without even the implied warranty of
        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
        GNU General Public License for more details.
- 
+
        You should have received a copy of the GNU General Public License
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -59,9 +59,9 @@ public extension SafariGroup {
         public let homePage: String?
         public let filterDownloadPage: String?
         public let rulesCount: Int
-        
+
         // MARK: - Initialization
-        
+
         init(name: String?, description: String?, isEnabled: Bool, filterId: Int, version: String?, lastUpdateDate: Date?, updateFrequency: Int?, group: GroupMetaProtocol, displayNumber: Int, languages: [String], tags: [ExtendedFiltersMeta.Tag], homePage: String?, filterDownloadPage: String?, rulesCount: Int) {
             self.name = name
             self.description = description
@@ -78,7 +78,7 @@ public extension SafariGroup {
             self.filterDownloadPage = filterDownloadPage
             self.rulesCount = rulesCount
         }
-        
+
         init(dbFilter: FiltersTable, group: GroupMetaProtocol, rulesCount: Int, languages: [String], tags: [FilterTagsTable], filterDownloadPage: String?) {
             self.name = dbFilter.name
             self.description = dbFilter.description
@@ -95,7 +95,7 @@ public extension SafariGroup {
             self.filterDownloadPage = filterDownloadPage
             self.rulesCount = rulesCount
         }
-        
+
         init(customFilter: ExtendedCustomFilterMetaProtocol, filterId: Int, isEnabled: Bool, group: GroupMetaProtocol, displayNumber: Int) {
             self.name = customFilter.name
             self.description = customFilter.description

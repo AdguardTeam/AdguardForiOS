@@ -22,13 +22,13 @@ import Foundation
 /// Parser to parse data from `FiltersMetadataRequest` and returns `ExtendedFiltersMeta`
 struct FiltersMetadataParser: ParserProtocol {
     typealias Model = ExtendedFiltersMeta
-    
+
     func parse(data: Data, response: URLResponse?) -> Model? {
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
             Logger.logError("(FiltersMetadataParser) bad response")
             return nil
         }
-        
+
         let decoder = JSONDecoder()
         return try? decoder.decode(ExtendedFiltersMeta.self, from: data)
     }

@@ -23,17 +23,17 @@ import struct SharedAdGuardSDK.Constants
 struct PredefinedDnsProviders: Decodable, Equatable {
     let features: [DnsFeature]
     let providers: [PredefinedDnsProvider]
-    
+
     enum CodingKeys: String, CodingKey {
         case features
         case providers
     }
-    
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        
+
         self.features = try container.decode([DnsFeature].self, forKey: .features)
-        
+
         var decodedProviders: [PredefinedDnsProvider] = []
         let providersDecoder = try container.superDecoder(forKey: .providers)
         var providersContainer = try providersDecoder.unkeyedContainer()
@@ -50,7 +50,7 @@ struct PredefinedDnsProviders: Decodable, Equatable {
 struct PredefinedDnsProvider: Decodable, Equatable {
     static let systemDefaultProviderId = 10000
     static let adguardDnsProviderId = 10001
-    
+
     let name: String
     let providerDescription: String
     let servers: [PredefinedDnsServer]
@@ -67,7 +67,7 @@ struct PredefinedDnsProvider: Decodable, Equatable {
         case homepage
         case providerDescription = "description"
     }
-    
+
     init(name: String, providerDescription: String, servers: [PredefinedDnsServer], providerId: Int, logo: UIImage?, logoDark: UIImage?, homepage: String) {
         self.name = name
         self.providerDescription = providerDescription
@@ -77,10 +77,10 @@ struct PredefinedDnsProvider: Decodable, Equatable {
         self.logoDark = logoDark
         self.homepage = homepage
     }
-    
+
     init(from decoder: Decoder, allDnsFeatures: [DnsFeature]) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        
+
         var decodedServers: [PredefinedDnsServer] = []
         let serversDecoder = try container.superDecoder(forKey: .servers)
         var serversContainer = try serversDecoder.unkeyedContainer()
@@ -90,7 +90,7 @@ struct PredefinedDnsProvider: Decodable, Equatable {
             decodedServers.append(server)
         }
         self.servers = decodedServers
-        
+
         self.name = try container.decode(String.self, forKey: .name)
         self.providerId = try container.decode(Int.self, forKey: .providerId)
         let logoImageName = try container.decode(String.self, forKey: .logo)
@@ -99,7 +99,7 @@ struct PredefinedDnsProvider: Decodable, Equatable {
         self.homepage = try container.decode(String.self, forKey: .homepage)
         self.providerDescription = try container.decode(String.self, forKey: .providerDescription)
     }
-    
+
     init(from decoder: Decoder) throws {
         try self.init(from: decoder, allDnsFeatures: [])
     }
@@ -111,24 +111,24 @@ public struct DnsFeature: Decodable, Equatable {
     public let type: DnsFeatureType
     public let name: String
     public let featureDescription: String
-    
+
     enum CodingKeys: String, CodingKey {
         case logo
         case type
         case name
         case featureDescription = "description"
     }
-    
+
     public init(logo: UIImage, type: DnsFeatureType, name: String, featureDescription: String) {
         self.logo = logo
         self.type = type
         self.name = name
         self.featureDescription = featureDescription
     }
-    
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        
+
         let logoImageName = try container.decode(String.self, forKey: .logo)
         self.logo = UIImage(named: logoImageName, in: Bundle.current, compatibleWith: nil)!
         self.type = try container.decode(DnsFeatureType.self, forKey: .type)
@@ -151,14 +151,14 @@ public enum DnsFeatureType: String, Codable, Equatable {
 struct PredefinedDnsServer: Decodable, Equatable {
     static let systemDefaultServerId = 0
     static let adguardDohServerId = 3
-    
+
     public let features: [DnsFeature]
     public let upstreams: [DnsUpstream]
     public let providerId: Int
     public let id: Int
     public let name: String
     public let type: DnsProtocol
-    
+
     init(features: [DnsFeature], upstreams: [DnsUpstream], providerId: Int, type: DnsProtocol, id: Int, name: String) {
         self.features = features
         self.upstreams = upstreams
@@ -167,16 +167,16 @@ struct PredefinedDnsServer: Decodable, Equatable {
         self.name = name
         self.type = upstreams.first?.`protocol` ?? .dns
     }
-    
+
     init(from decoder: Decoder, allDnsFeatures: [DnsFeature]) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        
+
         let dnsFeaturesTypes = try container.decode([DnsFeatureType].self, forKey: .features)
         self.features = allDnsFeatures.filter { dnsFeaturesTypes.contains($0.type) }
         self.providerId = try container.decode(Int.self, forKey: .providerId)
         self.id = try container.decode(Int.self, forKey: .id)
         self.name = try container.decode(String.self, forKey: .name)
-        
+
         let upstrs = try container.decode([String].self, forKey: .upstreams)
         let type = try container.decode(DnsProtocol.self, forKey: .type)
         self.type = type
@@ -193,7 +193,7 @@ public enum DnsProtocol: String, Codable, CaseIterable, Equatable {
     case doh = "doh"
     case dot = "dot"
     case doq = "doq"
-    
+
     var isCrypto: Bool {
         switch self {
         case .dns: return false
@@ -207,7 +207,7 @@ public enum DnsProtocol: String, Codable, CaseIterable, Equatable {
 public struct DnsUpstream: Equatable, Codable {
     public let upstream: String // DNS upstream
     public let `protocol`: DnsProtocol // DNS upstream protocol e.g. DoH, DoT, QUIC
-    
+
     public init(upstream: String, protocol: DnsProtocol) {
         self.upstream = upstream
         self.protocol = `protocol`

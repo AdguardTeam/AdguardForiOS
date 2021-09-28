@@ -41,7 +41,7 @@ static NSDictionary *stringUIResources;
 /////////////////////////////////////////////////////////////////////
 
 + (NSString *)lang{
-    
+
     NSString *lang = [NSLocale.currentLocale objectForKey:NSLocaleLanguageCode];
     if (! lang) {
         lang = ADL_DEFAULT_LANG;
@@ -50,17 +50,17 @@ static NSDictionary *stringUIResources;
 }
 
 + (NSString *)region{
-    
+
     NSString *region = [[NSLocale.currentLocale objectForKey:NSLocaleCountryCode] lowercaseString];
     if (! region) {
         region = ADL_DEFAULT_REGION;
     }
-    
+
     return region;
 }
 
 + (NSString *)canonicalLanguageIdentifier {
-    
+
     NSString *localeIdentifier = NSLocale.currentLocale.localeIdentifier;
     return [NSLocale canonicalLanguageIdentifierFromString:localeIdentifier];
 }
@@ -68,24 +68,24 @@ static NSDictionary *stringUIResources;
 + (NSArray *)filtersDescription{
 
     [self loadStringUIResources];
-    
+
     NSArray *filtersDescription = stringUIResources[RESOURCE_FILTERS_DESCRIPTION];
     if (!filtersDescription)
         [[NSException appResourceUnavailableException:[NSString stringWithFormat:@"Resource key %@ in file %@.plist", RESOURCE_FILTERS_DESCRIPTION, RESOURCE_FILE_NAME]] raise];
-    
+
     return filtersDescription;
 }
 
 + (NSDictionary *)defaultProcessesDescription{
-    
+
     [self loadStringUIResources];
-    
+
     NSDictionary *processesDescription = stringUIResources[RESOURCE_DEFAULT_PROCESS_FOR_FILTERING_DESCRIPTION];
     if (!processesDescription)
         [[NSException appResourceUnavailableException:[NSString stringWithFormat:@"Resource key %@ in file %@.plist", RESOURCE_DEFAULT_PROCESS_FOR_FILTERING_DESCRIPTION, RESOURCE_FILE_NAME]] raise];
-    
+
     return processesDescription;
-    
+
 }
 
 + (NSDictionary *)localizationsOfFilter:(NSUInteger)filterId{
@@ -93,50 +93,50 @@ static NSDictionary *stringUIResources;
     NSMutableDictionary *localizations = [NSMutableDictionary dictionary];
 
     @autoreleasepool {
-        
+
         NSBundle *bundle = [NSBundle bundleForClass:[ADLocales class]];
         NSURL *resourceUrl;
         NSDictionary *resourceDict;
         NSArray *filtersDescription;
         for (NSString *locale in [bundle localizations]) {
-            
+
             resourceUrl = [bundle URLForResource:RESOURCE_FILE_NAME withExtension:@"plist" subdirectory:nil localization:locale];
             if (resourceUrl)
                 resourceDict = [NSDictionary dictionaryWithContentsOfURL:resourceUrl];
             else
                 [[NSException appResourceUnavailableException:[RESOURCE_FILE_NAME stringByAppendingFormat:@".plist for locale: %@", locale]] raise];
-            
+
             filtersDescription = resourceDict[RESOURCE_FILTERS_DESCRIPTION];
             if (!filtersDescription)
                 [[NSException appResourceUnavailableException:[NSString stringWithFormat:@"Resource key %@ in file %@.plist for locale: %@", RESOURCE_FILTERS_DESCRIPTION, RESOURCE_FILE_NAME, locale]] raise];
-            
+
             if (filtersDescription.count > filterId)
                 localizations[locale] = filtersDescription[filterId];
         }
-        
+
     }
-    
-    
+
+
     return localizations;
 }
 
 + (NSArray *)localizedFeedbackSubjects{
-    
+
     [self loadStringUIResources];
-    
+
     NSArray *subjects = stringUIResources[RESOURCE_FEEDBACK_SUBJECTS];
     if (!subjects)
         [[NSException appResourceUnavailableException:[NSString stringWithFormat:@"Resource key %@ in file %@.plist", RESOURCE_FEEDBACK_SUBJECTS, RESOURCE_FILE_NAME]] raise];
-    
+
     return subjects;
-    
+
 }
 
 + (void) loadStringUIResources {
-    
+
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        
+
         NSURL *resUrl = [[NSBundle bundleForClass:[ADLocales class]] URLForResource:RESOURCE_FILE_NAME withExtension:@"plist"];
         if (resUrl)
             stringUIResources = [NSDictionary dictionaryWithContentsOfURL:resUrl];

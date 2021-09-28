@@ -20,50 +20,50 @@ import UIKit
 
 class AboutViewController: UIViewController {
     @IBOutlet var loginButton: UIBarButtonItem!
-    
+
     @IBOutlet weak var logoImageView: ThemableImageView!
     @IBOutlet weak var versionLabel: ThemableLabel!
     @IBOutlet weak var copyrightLabel: ThemableLabel!
     @IBOutlet var themableLabels: [ThemableLabel]!
-    
-    
+
+
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
-    
-    
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupLabels()
         updateTheme()
         setupBackButton()
     }
 
     // MARK: - Actions
-    
+
     @IBAction func moreInfoTapped(_ sender: UIButton) {
         UIApplication.shared.openAdguardUrl(action: "more_info", from: "about", buildVersion: productInfo.buildVersion())
     }
-    
+
     @IBAction func readMoreTapped(_ sender: UIButton) {
         UIApplication.shared.openAdguardUrl(action: "acknowledgments", from: "about", buildVersion: productInfo.buildVersion())
     }
-    
+
     @IBAction func eulaTapped(_ sender: UIButton) {
         UIApplication.shared.openAdguardUrl(action: "eula", from: "about", buildVersion: productInfo.buildVersion())
     }
-    
+
     @IBAction func privacyPolicyTapped(_ sender: UIButton) {
         UIApplication.shared.openAdguardUrl(action: "privacy", from: "about", buildVersion: productInfo.buildVersion())
     }
-    
+
     // MARK: - private methods
     private func setupLabels() {
         let version = productInfo.versionWithBuildNumber() ?? ""
         let versionFormat = String.localizedString("about_version_format")
         versionLabel.text = String(format: versionFormat, version)
-        
+
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy"
         let currentYearString = dateFormatter.string(from: Date())

@@ -1,15 +1,15 @@
 import XCTest
 
 class CustomFilterMetaParserTest: XCTestCase {
-    
+
     let parser: CustomFilterMetaParserProtocol = CustomFilterMetaParser()
-    
+
     // MARK: - Safari filters test
-    
+
     func testEasyListFilter() {
         let fileContent = getStringFromFile("EasyListTest")
         let result = try! parser.parse(fileContent, for: .safari, filterDownloadPage: nil)
-        
+
         XCTAssertEqual(result.name, "EasyList")
         XCTAssertNil(result.description)
         XCTAssertEqual(result.version, "202105121116")
@@ -22,12 +22,12 @@ class CustomFilterMetaParserTest: XCTestCase {
         XCTAssertNil(result.filterDownloadPage)
         XCTAssertEqual(result.rulesCount, 48)
     }
-    
+
     func testEasyListFilterWithPassedUrl() {
         let url = "https://domain.com"
         let fileContent = getStringFromFile("EasyListTest")
         let result = try! parser.parse(fileContent, for: .safari, filterDownloadPage: url)
-        
+
         XCTAssertEqual(result.name, "EasyList")
         XCTAssertNil(result.description)
         XCTAssertEqual(result.version, "202105121116")
@@ -40,11 +40,11 @@ class CustomFilterMetaParserTest: XCTestCase {
         XCTAssertEqual(result.filterDownloadPage, url)
         XCTAssertEqual(result.rulesCount, 48)
     }
-    
+
     func testAdblockIcelandicFilter() {
         let fileContent = getStringFromFile("AdblockIcelandicFilterTest")
         let result = try! parser.parse(fileContent, for: .safari, filterDownloadPage: nil)
-        
+
         XCTAssertNil(result.name)
         XCTAssertNil(result.description)
         XCTAssertNil(result.version)
@@ -57,11 +57,11 @@ class CustomFilterMetaParserTest: XCTestCase {
         XCTAssertNil(result.filterDownloadPage)
         XCTAssertEqual(result.rulesCount, 188)
     }
-    
+
     func testAdGuardBaseFilter() {
         let fileContent = getStringFromFile("AdGuardBaseFilterTest")
         let result = try! parser.parse(fileContent, for: .safari, filterDownloadPage: nil)
-        
+
         XCTAssertEqual(result.name, "AdGuard Base filter")
         XCTAssertEqual(result.description, "EasyList + AdGuard English filter. This filter is necessary for quality ad blocking.")
         XCTAssertEqual(result.version, "2.1.75.96")
@@ -74,13 +74,13 @@ class CustomFilterMetaParserTest: XCTestCase {
         XCTAssertNil(result.filterDownloadPage)
         XCTAssertEqual(result.rulesCount, 38)
     }
-    
+
     func testEmptyFileContent() {
         XCTAssertThrowsError(try parser.parse("", for: .safari, filterDownloadPage: nil)) { error in
             XCTAssertEqual(error as! CustomFilterMetaParserError, CustomFilterMetaParserError.invalidFileContent)
         }
     }
-    
+
     func testInvalidFileContent() {
         let htmlContent = """
                         <!DOCTYPE html>
@@ -94,13 +94,13 @@ class CustomFilterMetaParserTest: XCTestCase {
             XCTAssertEqual(error as! CustomFilterMetaParserError, CustomFilterMetaParserError.invalidFileContent)
         }
     }
-    
+
     // MARK: - DNS filters test
-    
+
     func testAdGuardSDNSFilter() {
         let fileContent = getStringFromFile("AdGuardSDNSFilterTest")
         let result = try! parser.parse(fileContent, for: .system, filterDownloadPage: nil)
-        
+
         XCTAssertEqual(result.name, "AdGuard DNS filter")
         XCTAssertEqual(result.description, "Filter composed of several other filters (AdGuard Base filter, Social media filter, Tracking Protection filter, Mobile ads filter, EasyList, EasyPrivacy, etc) and simplified specifically to be better compatible with DNS-level ad blocking.")
         XCTAssertNil(result.version)
@@ -113,9 +113,9 @@ class CustomFilterMetaParserTest: XCTestCase {
         XCTAssertNil(result.filterDownloadPage)
         XCTAssertEqual(result.rulesCount, 7)
     }
-    
+
     // MARK: - Helper methods
-    
+
     private func getStringFromFile(_ fileName: String) -> String {
         let path = Bundle(for: type(of: self)).url(forResource: fileName, withExtension: "txt")!
         let content = try! String(contentsOf: path)

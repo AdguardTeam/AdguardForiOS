@@ -1,17 +1,17 @@
 /**
        This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
        Copyright © Adguard Software Limited. All rights reserved.
- 
+
        Adguard for iOS is free software: you can redistribute it and/or modify
        it under the terms of the GNU General Public License as published by
        the Free Software Foundation, either version 3 of the License, or
        (at your option) any later version.
- 
+
        Adguard for iOS is distributed in the hope that it will be useful,
        but WITHOUT ANY WARRANTY; without even the implied warranty of
        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
        GNU General Public License for more details.
- 
+
        You should have received a copy of the GNU General Public License
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -23,13 +23,13 @@ protocol ImportRulesControllerDelegate {
 }
 
 class ImportRulesController : UIViewController {
-    
+
     var delegate : ImportRulesControllerDelegate?
     @IBOutlet weak var urlField: UITextField!
     @IBOutlet weak var contentView: RoundrectView!
-    
+
     @IBOutlet weak var keyboardHeightLayoutConstraint: NSLayoutConstraint!
-    
+
     // MARK: - View Controller life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,11 +39,11 @@ class ImportRulesController : UIViewController {
             UIResponder.keyboardWillChangeFrameNotification,
                                                object: nil)
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     @objc func keyboardNotification(notification: NSNotification) {
         if let userInfo = notification.userInfo {
             let endFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
@@ -64,9 +64,9 @@ class ImportRulesController : UIViewController {
                            completion: nil)
         }
     }
-    
+
     @IBAction func checkAction(_ sender: Any) {
-        
+
         delegate?.loadRules(url: urlField.text!, completion: { [weak self](success) in
             if success {
                 self?.dismiss(animated: true, completion: nil)

@@ -19,36 +19,36 @@
 import Foundation
 
 class ProductInfoMock: ADProductInfoProtocol {
-    
+
     var buildNumberInternal = "0"
-    
+
     func version() -> String! {
         return "1.0.0"
     }
-    
+
     func versionWithBuildNumber() -> String! {
         return "1.0.0(20)"
     }
-    
+
     func buildVersion() -> String! {
         return "20"
     }
-    
+
     func buildNumber() -> String! {
         return buildNumberInternal
     }
-    
+
     func name() -> String! {
         return ""
     }
-    
+
     func userAgentString() -> String! {
         return ""
     }
-    
+
     func applicationID() -> String! {
         return ""
     }
-    
-    
+
+
 }

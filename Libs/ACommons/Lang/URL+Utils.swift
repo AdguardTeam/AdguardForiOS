@@ -23,17 +23,17 @@ extension URL {
         guard let host = host else {
             return ""
         }
-        
+
         if let port = port {
             return String(format: "%@:%@", host, port)
         } else {
             return host
         }
     }
-    
+
     var domain: String? {
         guard var host = host else { return nil }
-        
+
         if host.starts(with: "www.") {
             host.removeFirst(4)
         }

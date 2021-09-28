@@ -22,7 +22,7 @@ import SQLite
 struct ChartStatisticsTable: Equatable {
     // Table name
     static let table = Table(Constants.Statistics.StatisticsType.chart.tableName)
-    
+
     // Columns names
     static let timeStamp = Expression<Date>("timeStamp")
     static let requests = Expression<Int>("requests")
@@ -40,21 +40,21 @@ public struct ChartStatisticsRecord: Equatable {
     public let blocked: Int
     public let elapsedSumm: Int
     public let averageElapsed: Int
-    
+
     public init(timeStamp: Date, requests: Int, encrypted: Int, blocked: Int, elapsedSumm: Int) {
         self.timeStamp = timeStamp
         self.requests = requests
         self.encrypted = encrypted
         self.blocked = blocked
         self.elapsedSumm = elapsedSumm
-        
+
         if self.requests > 0 {
             averageElapsed = elapsedSumm / requests
         } else {
             averageElapsed = 0
         }
     }
-    
+
     init(dbRecord: Row) {
         let timeStamp = dbRecord[ChartStatisticsTable.timeStamp]
         let requests = dbRecord[ChartStatisticsTable.requests]
@@ -63,7 +63,7 @@ public struct ChartStatisticsRecord: Equatable {
         let elapsedSumm = dbRecord[ChartStatisticsTable.elapsedSumm]
         self.init(timeStamp: timeStamp, requests: requests, encrypted: encrypted, blocked: blocked, elapsedSumm: elapsedSumm)
     }
-    
+
     /// Failable initializer for compressing records
     init?(dbRecord: SQLite.Statement.Element) {
         guard let timeStampString = dbRecord[0] as? String,
@@ -77,7 +77,7 @@ public struct ChartStatisticsRecord: Equatable {
         }
         self.init(timeStamp: timeStamp, requests: Int(requests), encrypted: Int(encrypted), blocked: Int(blocked), elapsedSumm: Int(elapsedSumm))
     }
-    
+
     public static func == (lhs: Self, rhs: Self) -> Bool {
         // Dates created from DB object can differ a little bit, so we add 1 second for an error rate
         let dateDiff = lhs.timeStamp.timeIntervalSince1970 - rhs.timeStamp.timeIntervalSince1970
@@ -109,7 +109,7 @@ extension DnsRequestProcessedEvent {
 public struct Point: Equatable {
     public let x: Int
     public let y: Int
-    
+
     public init(x: Int, y: Int) {
         self.x = x
         self.y = y
@@ -119,7 +119,7 @@ public struct Point: Equatable {
 public struct ChartRecords {
     public let chartType: ChartType
     public let points: [Point]
-    
+
     public init(chartType: ChartType, points: [Point]) {
         self.chartType = chartType
         self.points = points

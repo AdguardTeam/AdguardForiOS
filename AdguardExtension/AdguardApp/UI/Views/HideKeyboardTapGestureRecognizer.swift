@@ -23,12 +23,12 @@ import UIKit
  */
 class HideKeyboardTapGestureRecognizer: UITapGestureRecognizer, UIGestureRecognizerDelegate {
     var viewsToIgnore: [UIView] = []
-    
+
     override init(target: Any?, action: Selector?) {
         super.init(target: target, action: action)
         delegate = self
     }
-    
+
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if let touchedView = touch.view {
             return !viewsToIgnore.contains(touchedView)

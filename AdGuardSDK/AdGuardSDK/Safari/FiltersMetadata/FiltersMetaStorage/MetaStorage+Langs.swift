@@ -24,14 +24,14 @@ fileprivate struct FilterLangsTable {
     // Properties from table
     let filterId: Int
     let lang: String
-    
+
     // Table name
     static let table = Table("filter_langs")
-    
+
     // Columns names
     static let filterId = Expression<Int>("filter_id")
     static let lang = Expression<String>("lang")
-    
+
     // Initializer from DB result
     init(dbLang: Row) {
         self.filterId = dbLang[Self.filterId]
@@ -52,7 +52,7 @@ extension MetaStorage: LangsMetaStorageProtocol {
     func getLangsForFilter(withId id: Int) throws -> [String] {
         // Query: SELECT * FROM filter_langs WHERE filter_id = id
         let query = FilterLangsTable.table.filter(id == FilterLangsTable.filterId)
-        
+
         let result: [String] = try filtersDb.prepare(query).compactMap { lang in
             let dbLang = FilterLangsTable(dbLang: lang)
             return dbLang.lang
@@ -60,7 +60,7 @@ extension MetaStorage: LangsMetaStorageProtocol {
         Logger.logDebug("(FiltersMetaStorage) - getLangsForFilter returning \(result.count) langs objects for filter with id=\(id)")
         return result
     }
-    
+
     /*
      Updates all passed languages for filter.
      Adds new languages if some are missing.
@@ -74,7 +74,7 @@ extension MetaStorage: LangsMetaStorageProtocol {
         let deletedRows = try filtersDb.run(langsToDelete.delete())
         Logger.logDebug("(FiltersMetaStorage) - updateAll langs; deleted \(deletedRows) rows")
     }
-    
+
     // Updates passed language for filter. If language is missing adds it
     func update(lang: String, forFilterWithId id: Int) throws {
         let query = FilterLangsTable.table.insert(or: .replace ,FilterLangsTable.filterId <- id, FilterLangsTable.lang <- lang)
@@ -82,7 +82,7 @@ extension MetaStorage: LangsMetaStorageProtocol {
         try filtersDb.run(query)
         Logger.logDebug("(FiltersMetaStorage) -  Insert row with filterID \(id) and lang \(lang)")
     }
-    
+
     // Deletes langs for filters with passed ids
     func deleteLangsForFilters(withIds ids: [Int]) throws {
         let langsToDelete = FilterLangsTable.table.filter(ids.contains(FilterLangsTable.filterId))

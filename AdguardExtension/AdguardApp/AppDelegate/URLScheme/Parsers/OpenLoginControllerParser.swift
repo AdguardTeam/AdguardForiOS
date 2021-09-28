@@ -18,11 +18,11 @@
 
 struct OpenLoginControllerParser: IURLSchemeParametersParser {
     private let executor: IURLSchemeExecutor
-    
+
     init(executor: IURLSchemeExecutor) {
         self.executor = executor
     }
-    
+
     func parse(_ url: URL) -> Bool {
         guard let license = url.parseUrl().params?["license"], !license.isEmpty else { return false }
         return executor.openLoginController(license: license)

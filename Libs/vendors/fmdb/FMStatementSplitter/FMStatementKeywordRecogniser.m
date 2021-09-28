@@ -53,13 +53,13 @@
 - (id)initWithKeywords:(NSArray *)keywords invalidFollowingCharacters:(NSCharacterSet *)invalidFollowingCharacters
 {
     self = [super init];
-    
+
     if (nil != self)
     {
         self.keywords = keywords;
         [self setInvalidFollowingCharacters:invalidFollowingCharacters];
     }
-    
+
     return self;
 }
 
@@ -74,13 +74,13 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super init];
-    
+
     if (nil != self)
     {
         [self setKeywords:[aDecoder decodeObjectForKey:CPKeywordRecogniserKeywordKey]];
         [self setInvalidFollowingCharacters:[aDecoder decodeObjectForKey:CPKeywordRecogniserInvalidFollowingCharactersKey]];
     }
-    
+
     return self;
 }
 
@@ -111,7 +111,7 @@
             }
         }
     }
-    
+
     return NSMakeRange(NSNotFound, 0);
 }
 

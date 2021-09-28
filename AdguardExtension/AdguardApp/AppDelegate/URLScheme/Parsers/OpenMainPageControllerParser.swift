@@ -18,11 +18,11 @@
 
 struct OpenMainPageControllerParser: IURLSchemeParametersParser {
     private let executor: IURLSchemeExecutor
-    
+
     init(executor: IURLSchemeExecutor) {
         self.executor = executor
     }
-    
+
     func parse(_ url: URL) -> Bool {
         let complexProtectionIsEnabled = url.protectionStateIsEnabled()
         return executor.openMainPageController(showLaunchScreen: false, complexProtectionIsEnabled: complexProtectionIsEnabled)

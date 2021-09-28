@@ -25,88 +25,88 @@ protocol ActivityViewControllerDelegate: AnyObject {
 }
 
 class ActivityViewController: UITableViewController {
-    
+
     // MARK: - Outlets
-    
+
     @IBOutlet weak var activityTitle: ThemableLabel!
     @IBOutlet weak var activityImage: UIImageView!
-    
+
     @IBOutlet weak var changePeriodTypeButton: UIButton!
-    
+
     @IBOutlet weak var requestsNumberLabel: ThemableLabel!
     @IBOutlet weak var encryptedNumberLabel: UILabel!
     @IBOutlet weak var dataSavedLabel: UILabel!
     @IBOutlet weak var companiesNumberLabel: ThemableLabel!
-    
+
     @IBOutlet weak var mostActiveButton: RoundRectButton!
     @IBOutlet weak var mostActiveLabel: ThemableLabel!
     @IBOutlet weak var mostActiveCompany: ThemableLabel!
     @IBOutlet weak var rightArrowImageView: UIImageView!
-    
+
     @IBOutlet weak var recentActivityLabel: ThemableLabel!
     @IBOutlet weak var searchBar: UISearchBar!
-    
+
     @IBOutlet weak var placeHolderLabel: ThemableLabel!
-    
+
     @IBOutlet var themableButtons: [ThemableButton]!
     @IBOutlet var themableLabels: [ThemableLabel]!
-    
+
     // MARK: - Outlet views for tableview
     @IBOutlet weak var filterButton: UIButton!
     @IBOutlet var sectionHeaderView: UIView!
     @IBOutlet var tableHeaderView: UIView!
     @IBOutlet weak var tableFooterView: UIView!
-    
-    
+
+
     // MARK: - Services
-    
+
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let dnsTrackersService: DnsTrackerServiceProtocol = ServiceLocator.shared.getService()!
     private let domainsParserService: DomainsParserServiceProtocol = ServiceLocator.shared.getService()!
     private let domainsConverter: DomainsConverterProtocol = DomainsConverter()
-    
+
     // MARK: - Notifications
     private var keyboardShowToken: NotificationToken?
     private var resetStatisticsToken: NotificationToken?
     private var advancedModeObserver: NotificationToken?
     private var resetSettingsToken: NotificationToken?
-    
+
     // MARK: - Public variables
-    
+
     var requestsModel: DnsRequestLogViewModel?
     weak var delegate: ActivityViewControllerDelegate?
-    
+
     // MARK: - Private variables
-    
+
     private var titleInNavBarIsShown = false
-    
+
     private let activityModel: ActivityStatisticsModelProtocol
 //    private var statisticsModel: ChartViewModelProtocol = ServiceLocator.shared.getService()! TODO: Change it to ActivityStatisticsViewModel
-    
+
     private let activityTableViewCellReuseId = "ActivityTableViewCellId"
     private let showDnsContainerSegueId = "showDnsContainer"
     private let showMostActiveCompaniesSegueId = "showMostActiveCompaniesId"
-    
+
     private var selectedRecord: DnsLogRecordExtended?
     private var mostRequestedCompanies: [CompanyRequestsRecord] = []
     private var companiesNumber = 0
-    
+
     private var swipedRecord: DnsLogRecordExtended?
     private var swipedIndexPath: IndexPath?
-    
+
     // MARK: - ViewController life cycle
-    
+
     required init?(coder: NSCoder) {
         let activityStatistics: ActivityStatisticsProtocol = ServiceLocator.shared.getService()!
         activityModel = ActivityStatisticsModel(dnsTrackersService: dnsTrackersService, domainsParserService: domainsParserService, activityStatistics: activityStatistics)
         super.init(coder: coder)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         requestsModel?.delegate = self
 
         activityImage.tintColor = UIColor.AdGuardColor.lightGreen1
@@ -116,29 +116,29 @@ class ActivityViewController: UITableViewController {
         addObservers()
         filterButton.isHidden = !configuration.advancedMode
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         if let nav = navigationController as? MainNavigationController {
             nav.currentSwipeRecognizer?.delegate = self
         }
-        
+
         updateTextForButtons()
         tableView.reloadData()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+
         if let nav = navigationController as? MainNavigationController {
             nav.currentSwipeRecognizer?.delegate = nil
         }
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+
         let height = tableHeaderView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
         var headerFrame = tableHeaderView.frame
 
@@ -148,7 +148,7 @@ class ActivityViewController: UITableViewController {
             tableView.tableHeaderView = tableHeaderView
         }
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showDnsContainerSegueId, let controller = segue.destination as? DnsContainerController {
             controller.logRecord = selectedRecord
@@ -157,13 +157,13 @@ class ActivityViewController: UITableViewController {
 //            controller.chartDateType = resources.activityStatisticsType TODO: Fix it
         }
     }
-    
+
     // MARK: - Actions
-    
+
     @IBAction func changePeriodTypeAction(_ sender: UIButton) {
         showChartDateTypeController()
     }
-    
+
     @IBAction func infoAction(_ sender: UIButton) {
         switch sender.tag {
         case 0:
@@ -186,21 +186,21 @@ class ActivityViewController: UITableViewController {
             return
         }
     }
-    
+
     @IBAction func mostActiveTapped(_ sender: UIButton) {
         performSegue(withIdentifier: showMostActiveCompaniesSegueId, sender: self)
     }
-    
+
     @IBAction func clearActivityLogAction(_ sender: UIButton) {
         showResetAlert(sender)
     }
-    
+
     @IBAction func changeRequestsTypeAction(_ sender: UIButton) {
         showGroupsAlert(sender)
     }
-    
+
     // MARK: - Tableview Datasource and Delegate
-    
+
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return sectionHeaderView
     }
@@ -209,7 +209,7 @@ class ActivityViewController: UITableViewController {
         theme.setupLabel(placeHolderLabel)
         return requestsModel?.records.count == 0 ? tableFooterView : UIView()
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if requestsModel?.records.count == 0 {
             let isBigScreen = traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular
@@ -217,15 +217,15 @@ class ActivityViewController: UITableViewController {
         }
         return 0.01
     }
-    
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return requestsModel?.records.count ?? 0
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: activityTableViewCellReuseId) as? ActivityTableViewCell {
             guard let record = requestsModel?.records[indexPath.row] else { return UITableViewCell() }
@@ -237,7 +237,7 @@ class ActivityViewController: UITableViewController {
         }
         return UITableViewCell()
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let record = requestsModel?.records[indexPath.row] {
             selectedRecord = record
@@ -245,7 +245,7 @@ class ActivityViewController: UITableViewController {
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
+
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard configuration.advancedMode, let record = requestsModel?.records[indexPath.row] else {
             return UISwipeActionsConfiguration(actions: [])
@@ -263,7 +263,7 @@ class ActivityViewController: UITableViewController {
         }
         return UISwipeActionsConfiguration(actions: [])
     }
-    
+
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard configuration.advancedMode, let record = requestsModel?.records[indexPath.row] else {
             return UISwipeActionsConfiguration(actions: [])
@@ -281,24 +281,24 @@ class ActivityViewController: UITableViewController {
         }
         return UISwipeActionsConfiguration(actions: [])
     }
-    
+
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y
-        
+
         if offset > activityTitle.frame.maxY && !titleInNavBarIsShown {
             delegate?.showTitle()
             titleInNavBarIsShown = true
             return
         }
-        
+
         if offset < activityTitle.frame.maxY && titleInNavBarIsShown {
             delegate?.hideTitle()
             titleInNavBarIsShown = false
         }
     }
-    
+
     // MARK: - Private methods
-    
+
     private func observeAdvancedMode(){
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
@@ -306,62 +306,62 @@ class ActivityViewController: UITableViewController {
             self.tableView.reloadData()
         }
     }
-    
+
     private func showResetAlert(_ sender: UIButton){
         let alert = UIAlertController(title: String.localizedString("reset_activity_title"), message: String.localizedString("reset_activity_message"), preferredStyle: .deviceAlertStyle)
-        
+
         let yesAction = UIAlertAction(title: String.localizedString("common_action_yes"), style: .destructive) {[weak self] _ in
             alert.dismiss(animated: true, completion: nil)
             self?.requestsModel?.clearRecords()
         }
-        
+
         alert.addAction(yesAction)
-        
+
         let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel) { _ in
             alert.dismiss(animated: true, completion: nil)
         }
-        
+
         alert.addAction(cancelAction)
-        
+
         present(alert, animated: true)
     }
-    
+
     private func showGroupsAlert(_ sender: UIButton) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .deviceAlertStyle)
-        
+
         let allRequestsAction = UIAlertAction(title: String.localizedString("all_requests_alert_action"), style: .default) {[weak self] _ in
             guard let self = self else { return }
             self.requestsModel?.displayedStatisticsType = .allRequests
 //            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType) TODO: Fix it
             alert.dismiss(animated: true, completion: nil)
         }
-        
+
         let blockedOnlyAction = UIAlertAction(title: String.localizedString("blocked_only_alert_action"), style: .default) {[weak self] _ in
             guard let self = self else { return }
             self.requestsModel?.displayedStatisticsType = .blockedRequests
 //            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType) TODO: Fix it
             alert.dismiss(animated: true, completion: nil)
         }
-        
+
         let allowedOnlyAction = UIAlertAction(title: String.localizedString("allowed_only_alert_action"), style: .default) {[weak self] _ in
             guard let self = self else { return }
             self.requestsModel?.displayedStatisticsType = .allowedRequests
 //            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType) TODO: Fix it
             alert.dismiss(animated: true, completion: nil)
         }
-        
+
         let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel) { _ in
             alert.dismiss(animated: true, completion: nil)
         }
-        
+
         alert.addAction(allRequestsAction)
         alert.addAction(blockedOnlyAction)
         alert.addAction(allowedOnlyAction)
         alert.addAction(cancelAction)
-        
+
         present(alert, animated: true)
     }
-    
+
     /**
      Presents ChartDateTypeController
      */
@@ -371,13 +371,13 @@ class ActivityViewController: UITableViewController {
         controller.delegate = self
         present(controller, animated: true, completion: nil)
     }
-    
+
     private func setupTableView(){
         let nib = UINib.init(nibName: "ActivityTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: activityTableViewCellReuseId)
         refreshControl?.addTarget(self, action: #selector(updateTableView(sender:)), for: .valueChanged)
     }
-    
+
     private func keyboardWillShow() {
         DispatchQueue.main.async {[weak self] in
             let isEmpty = self?.tableView.numberOfRows(inSection: 0) == 0
@@ -386,28 +386,28 @@ class ActivityViewController: UITableViewController {
             }
         }
     }
-    
+
     /**
      Adds observers to controller
      */
     private func addObservers(){
-        
+
         keyboardShowToken = NotificationCenter.default.observe(name: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] (notification) in
             self?.keyboardWillShow()
         }
-        
+
         advancedModeObserver = NotificationCenter.default.observe(name: .advancedModeChanged, object: nil, queue: .main, using: { [weak self] _ in
             self?.observeAdvancedMode()
         })
-        
+
         resetStatisticsToken = NotificationCenter.default.observe(name: NSNotification.resetStatistics, object: nil, queue: .main) { [weak self] (notification) in
 //            self?.dateTypeChanged(dateType: self?.resources.activityStatisticsType ?? .day)
         }
-        
+
         resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] (notification) in
 //            self?.dateTypeChanged(dateType: self?.resources.activityStatisticsType ?? .day)
         }
-        
+
         requestsModel?.recordsObserver = { [weak self] (records) in
             DispatchQueue.main.async {[weak self] in
                 guard let self = self else { return }
@@ -418,7 +418,7 @@ class ActivityViewController: UITableViewController {
             }
         }
     }
-    
+
     private func createSwipeAction(forButtonType buttonType: DnsLogButtonType, record: DnsLogRecordExtended) -> UISwipeActionsConfiguration {
         var buttonColor: UIColor
         switch buttonType {
@@ -444,15 +444,15 @@ class ActivityViewController: UITableViewController {
         buttonAction.backgroundColor = buttonColor
         return UISwipeActionsConfiguration(actions: [buttonAction])
     }
-    
+
     private func removeRuleFromUserFilter(record: DnsLogRecord) {
         let isOriginalRecord = record.userStatus == .none || record.userStatus == .modified
         let rules = isOriginalRecord ? record.blockRules : [record.userRule ?? ""]
-        
+
         //dnsFiltersService.removeUserRules(rules ?? [])
         set(record.userStatus == .movedToBlacklist ? .modified : .removedFromBlacklist)
     }
-    
+
     private func removeDomainFromWhitelist(record: DnsLogRecord) {
         let userDomain = domainsConverter.whitelistRuleFromDomain(record.userRule ?? "")
         let isOriginalRecord = record.userStatus == .none || record.userStatus == .modified
@@ -461,7 +461,7 @@ class ActivityViewController: UITableViewController {
         //dnsFiltersService.removeWhitelistRules(rules ?? [])
         set(record.userStatus == .movedToWhitelist ? .modified : .removedFromWhitelist)
     }
-    
+
     @objc func updateTableView(sender: UIRefreshControl) {
         statisticsPeriodChanged(statisticsPeriod: resources.activityStatisticsType)
         //TODO: Fix it
@@ -479,27 +479,27 @@ extension ActivityViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
     }
-    
+
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         UIView.animate(withDuration: 0.5) {
             searchBar.showsCancelButton = true
         }
         return true
     }
-    
+
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         UIView.animate(withDuration: 0.5) {
             searchBar.showsCancelButton = false
         }
         return true
     }
-    
+
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         UIView.animate(withDuration: 0.5) {
             searchBar.resignFirstResponder()
         }
     }
-    
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         requestsModel?.searchString = searchText
     }
@@ -526,10 +526,10 @@ extension ActivityViewController: DateTypeChangedProtocol {
 //        activityModel.getCompanies(for: dateType) {[weak self] (info) in
 //            self?.processCompaniesInfo(info)
 //        }
-        
+
         updateTextForButtons()
     }
-    
+
     private func processCompaniesInfo(_ companiesInfo: CompaniesInfo) {
         DispatchQueue.main.async {[weak self] in
             if !companiesInfo.mostRequested.isEmpty {
@@ -548,9 +548,9 @@ extension ActivityViewController: DateTypeChangedProtocol {
                 self?.mostActiveButton.isEnabled = false
                 self?.mostActiveCompany.text = String.localizedString("none_message")
             }
-            
+
             self?.companiesNumberLabel.text = "\(companiesInfo.companiesNumber)"
-            
+
             self?.mostRequestedCompanies = companiesInfo.mostRequested
             self?.companiesNumber = companiesInfo.companiesNumber
         }
@@ -560,16 +560,16 @@ extension ActivityViewController: DateTypeChangedProtocol {
 // MARK: - NumberOfRequestsChangedDelegate
 
 extension ActivityViewController {
-    
+
     /**
     Changes number of requests for all buttons
     */
     private func updateTextForButtons(){
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
-            
+
             let counters = self.activityModel.counters
-            
+
             self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(value: counters.requests))
             self.encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(value: counters.encrypted))
             self.dataSavedLabel.text = String.simpleSecondsFormatter(NSNumber(value: counters.averageElapsed))
@@ -599,7 +599,7 @@ extension ActivityViewController: AddDomainToListDelegate {
             set(swipedRecord.logRecord.userStatus == .removedFromBlacklist ? .modified : .movedToBlacklist, rule)
         }
     }
-    
+
     private func set(_ status: DnsLogRecordUserStatus, _ rule: String? = nil) {
         guard let swipedRecord = swipedRecord, let swipedIndexPath = swipedIndexPath else { return }
         swipedRecord.logRecord.userStatus = status

@@ -26,7 +26,7 @@ protocol MigrationServiceProtocol {
 
 // todo: write new migration service
 class MigrationService: MigrationServiceProtocol {
-    
+
 //    private let currentSchemaVersion = 5
 //
 //    private let vpnManager: VpnManagerProtocol

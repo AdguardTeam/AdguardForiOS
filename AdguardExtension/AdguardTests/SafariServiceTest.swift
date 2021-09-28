@@ -19,7 +19,7 @@
 import XCTest
 
 class SafariServiceTest: XCTestCase {
-    
+
     var safariService: SafariService!
     var safariManager: SafariManagerMock!
 
@@ -31,116 +31,116 @@ class SafariServiceTest: XCTestCase {
     }
 
     override func tearDown() {
-        
+
     }
-    
-    
+
+
     func testInvalidateOneCB() {
         testInvalidateOne(errors: [false], expectError: false)
     }
-    
+
     func testInvalidateOneCBWithError() {
         testInvalidateOne(errors: [true, true/*for second try*/], expectError: true)
     }
-    
+
     func testInvalidateOneCBWithErrorOnFirstTry() {
         testInvalidateOne(errors: [true, false/*for second try*/], expectError: false)
     }
-    
+
     func testInvalidateOneCBWithErrorOnFirstTryManytimes() {
         testInvalidateManyTimes(errors: [true, false/*for second try*/], expectError: false)
     }
-    
+
     func testInvalidateAllSuccess() {
-        testInvalidateAll(errors: [Bool](), expectError: false) 
+        testInvalidateAll(errors: [Bool](), expectError: false)
     }
-    
+
     func testInvalidateAllFailure() {
         testInvalidateAll(errors: [true, true], expectError: true)
     }
-    
+
     func testInvalidateAllManyTimesSuccess() {
         testInvalidateAllManyTimes(errors: [true, false], expectError: false)
     }
-    
+
     func testInvalidateAllManyTimesFailure() {
         testInvalidateAllManyTimes(errors: [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true], expectError: true)
     }
-    
+
     // MARK: - private methods
-    
+
     func testInvalidateOne(errors:[Bool], expectError: Bool) {
-        
+
         let expectation = XCTestExpectation()
-        
+
         let bundleId = SafariService.contenBlockerBundleIdByType[.general]
         safariManager.errors = [bundleId!: errors]
-        
+
         safariService.invalidateBlockingJson(type: .general) { (error) in
-            
+
             expectError ? XCTAssertNotNil(error) : XCTAssertNil(error)
             expectation.fulfill()
         }
-        
+
         wait(for: [expectation], timeout: 10.0)
     }
-    
+
     func testInvalidateManyTimes(errors:[Bool], expectError: Bool) {
-        
+
         let expectation = XCTestExpectation()
         expectation.expectedFulfillmentCount = 10
-        
+
         let bundleId = SafariService.contenBlockerBundleIdByType[.general]
         safariManager.errors = [bundleId!: errors]
-        
+
         for _ in 0..<10 {
             safariService.invalidateBlockingJson(type: .general) { (error) in
-                
+
                 expectError ? XCTAssertNotNil(error) : XCTAssertNil(error)
                 expectation.fulfill()
             }
         }
-        
+
         wait(for: [expectation], timeout: 10.0)
-        
+
         XCTAssertTrue(safariManager.maximumCount == 1)
     }
-    
+
     func testInvalidateAll(errors:[Bool], expectError: Bool) {
-        
+
         let expectation = XCTestExpectation()
-        
+
         let bundleId = SafariService.contenBlockerBundleIdByType[.general]
         safariManager.errors = [bundleId!: errors]
-        
+
         safariService.invalidateBlockingJsons { (error) in
-            
+
             expectError ? XCTAssertNotNil(error) : XCTAssertNil(error)
             expectation.fulfill()
         }
-        
+
         wait(for: [expectation], timeout: 10.0)
     }
-    
+
     func testInvalidateAllManyTimes(errors:[Bool], expectError: Bool) {
-        
+
         let expectation = XCTestExpectation()
         expectation.expectedFulfillmentCount = 10
-        
+
         let bundleId = SafariService.contenBlockerBundleIdByType[.general]
         safariManager.errors = [bundleId!: errors]
         safariManager.sleepTime = 0.1
-        
+
         for _ in 0..<10 {
             safariService.invalidateBlockingJsons { (error) in
-                
+
                 expectError ? XCTAssertNotNil(error) : XCTAssertNil(error)
                 expectation.fulfill()
             }
         }
-        
+
         wait(for: [expectation], timeout: 15.0)
-        
+
         XCTAssertTrue(safariManager.maximumCount == 1)
     }
 }

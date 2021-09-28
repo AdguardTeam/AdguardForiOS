@@ -24,7 +24,7 @@
 #pragma mark - Utilities
 //////////////////////////////////////////////////////////////
 
-/** 
+/**
  Gets encoding from the encoding name. If not found - returns default
 */
 + (NSStringEncoding)encodingFromString:(nonnull NSString *)encodingName default:(NSStringEncoding)defaultEncoding;
@@ -42,7 +42,7 @@
 
 - (nonnull NSString *)replace:(nonnull NSString *)from to:(nonnull NSString *)to;
 
-/** 
+/**
  @return index of string into receiver, or -1 if not found
 */
 - (NSInteger)indexOf:(nonnull NSString *)string fromIndex:(NSUInteger)index;
@@ -58,7 +58,7 @@
  @param count The maximum number of substrings to return.
 
  @param omitEmpty Set YES to omit empty array elements from the array returned.
- 
+
  */
 - (nonnull NSArray *)splitByArray:(nonnull NSArray *)strings count:(NSUInteger)count omitEmpty:(BOOL)omitEmpty;
 
@@ -71,11 +71,11 @@
 
 /**
  Splits string in ascii mode by the delimiter, ignoring escaped delimiters (and empty parts).
- 
+
  @return List with string parts, where escaped characters became unescaped.
- 
+
  Exemples:
- 
+
  NSArray *test = @[];
  XCTAssert([[@"    " asciiSplitByDelimiter:' ' escapeCharacter:'\\'] isEqual:@[]]);
  test = @[@" "];
@@ -88,7 +88,7 @@
  XCTAssert([test isEqualToArray:[@"str\\ str" asciiSplitByDelimiter:' ' escapeCharacter:'\\']]);
  test = @[@"str,", @" ", @"\\st,r"];
  XCTAssert([test isEqualToArray:[@"str\\,, ,\\st\\,r" asciiSplitByDelimiter:',' escapeCharacter:'\\']]);
- 
+
  */
 - (nullable NSArray *)asciiSplitByDelimiter:(char)delimiter escapeCharacter:(char)escapeCharacter;
 
@@ -112,10 +112,10 @@
 
 /**
     Find any string from string array as substring in receiver.
- 
+
     @param strings An array of strings that finding in this string, an empty array that contains no strings, or nil.
     @param startIndex Index, from it will be performed search.
- 
+
     @return Range of first occurence of any string from string array, otherwise range where range.location equals NSNotFound.
  */
 - (NSRange)rangeOfAny:(nonnull NSArray *)strings from:(NSUInteger)startIndex;

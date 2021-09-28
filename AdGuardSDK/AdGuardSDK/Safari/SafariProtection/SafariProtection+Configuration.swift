@@ -1,17 +1,17 @@
 /**
        This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
        Copyright © Adguard Software Limited. All rights reserved.
- 
+
        Adguard for iOS is free software: you can redistribute it and/or modify
        it under the terms of the GNU General Public License as published by
        the Free Software Foundation, either version 3 of the License, or
        (at your option) any later version.
- 
+
        Adguard for iOS is distributed in the hope that it will be useful,
        but WITHOUT ANY WARRANTY; without even the implied warranty of
        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
        GNU General Public License for more details.
- 
+
        You should have received a copy of the GNU General Public License
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -20,43 +20,43 @@ import Foundation
 
 /*  Application user configuration */
 public protocol SafariProtectionConfigurationProtocol {
-        
+
     /* Shows if user has Premium app version */
     var proStatus: Bool { get }
-    
+
     /* State of the whole Safari protection. If it is false nothing will be filtered */
     var safariProtectionEnabled: Bool { get }
-    
+
     /* State of advanced protection. If it is true than there will be added extra rules for more precise safari blocking */
     var advancedProtectionIsEnabled: Bool { get }
-    
+
     /* State of the list that is responsible for blocking rules. In UI it is called User rules */
     var blocklistIsEnabled: Bool { get }
-    
+
     /* State of the list that is responsible for the rules that cancel blocklist rules actions */
     var allowlistIsEnabled: Bool { get }
-    
+
     /* Allowlist rules can be inverted. That means that blocklist rules will work on all sites except the sites from the inverted allowlist  */
     var allowlistIsInverted: Bool { get }
-    
+
     /* Updates pro status in configuration and reloads content blockers */
     func update(proStatus: Bool, onCbReloaded: ((_ error: Error?) -> Void)?)
-    
+
     /* Updates Safari protection state and reloads content blockers */
     func update(safariProtectionEnabled: Bool, onCbReloaded: ((_ error: Error?) -> Void)?)
-    
+
     /* Updates Advanced protection state and reloads content blockers */
     func update(advancedProtectionEnabled: Bool, onCbReloaded: ((_ error: Error?) -> Void)?)
-    
+
     /* Updates block list state and reloads content blockers */
     func update(blocklistIsEnabled: Bool, onCbReloaded: ((_ error: Error?) -> Void)?)
-    
+
     /* Updates allow list state and reloads content blockers */
     func update(allowlistIsEnabled: Bool, onCbReloaded: ((_ error: Error?) -> Void)?)
-    
+
     /* Updates state of allowlist invertion and reloads content blockers */
     func update(allowlistIsInverted: Bool, onCbReloaded: ((_ error: Error?) -> Void)?)
-    
+
     /* Update configuration with new one */
     func updateConfig(with newConfig: SafariConfigurationProtocol)
 }
@@ -66,31 +66,31 @@ extension SafariProtection {
     public var proStatus: Bool {
         return workingQueue.sync { return configuration.proStatus }
     }
-    
+
     public var safariProtectionEnabled: Bool {
         return workingQueue.sync { return configuration.safariProtectionEnabled }
     }
-    
+
     public var advancedProtectionIsEnabled: Bool {
         return workingQueue.sync { return configuration.advancedBlockingIsEnabled }
     }
-    
+
     public var blocklistIsEnabled: Bool {
         return workingQueue.sync { return configuration.blocklistIsEnabled }
     }
-    
+
     public var allowlistIsEnabled: Bool {
         return workingQueue.sync { return configuration.allowlistIsEnabled }
     }
-    
+
     public var allowlistIsInverted: Bool {
         return workingQueue.sync { return configuration.allowlistIsInverted }
     }
-    
+
     public func update(proStatus: Bool, onCbReloaded: ((_ error: Error?) -> Void)?) {
         workingQueue.sync {
             Logger.logInfo("(SafariProtection+Configuration) - updateProStatus; Updating proStatus from=\(self.configuration.proStatus) to=\(proStatus)")
-            
+
             try? executeBlockAndReloadCbs {
                 if configuration.proStatus != proStatus {
                     configuration.proStatus = proStatus
@@ -104,7 +104,7 @@ extension SafariProtection {
                     DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
                     return
                 }
-                
+
                 if let error = error {
                     Logger.logError("(SafariProtection+Configuration) - updateProStatus; Error reloading CBs when updating proStatus; Error: \(error)")
                 } else {
@@ -114,11 +114,11 @@ extension SafariProtection {
             }
         }
     }
-    
+
     public func update(safariProtectionEnabled: Bool, onCbReloaded: ((_ error: Error?) -> Void)?) {
         workingQueue.sync {
             Logger.logInfo("(SafariProtection+Configuration) - updateSafariProtection; Updating safariProtection from=\(self.configuration.safariProtectionEnabled) to=\(safariProtectionEnabled)")
-            
+
             try? executeBlockAndReloadCbs {
                 if configuration.safariProtectionEnabled != safariProtectionEnabled {
                     configuration.safariProtectionEnabled = safariProtectionEnabled
@@ -131,7 +131,7 @@ extension SafariProtection {
                     DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
                     return
                 }
-                
+
                 if let error = error {
                     Logger.logError("(SafariProtection+Configuration) - updateSafariProtection; Error reloading CBs when updating safariProtection; Error: \(error)")
                 } else {
@@ -141,11 +141,11 @@ extension SafariProtection {
             }
         }
     }
-    
+
     public func update(advancedProtectionEnabled: Bool, onCbReloaded: ((Error?) -> Void)?) {
         workingQueue.sync {
             Logger.logInfo("(SafariProtection+Configuration) - updateAdvancedProtection; Updating updateAdvancedProtection from=\(self.configuration.advancedBlockingIsEnabled) to=\(advancedProtectionEnabled)")
-            
+
             try? executeBlockAndReloadCbs {
                 if configuration.advancedBlockingIsEnabled != advancedProtectionEnabled {
                     configuration.advancedBlockingIsEnabled = advancedProtectionEnabled
@@ -158,7 +158,7 @@ extension SafariProtection {
                     DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
                     return
                 }
-                
+
                 if let error = error {
                     Logger.logError("(SafariProtection+Configuration) - updateAdvancedProtection; Error reloading CBs when updating advancedProtection; Error: \(error)")
                 } else {
@@ -168,7 +168,7 @@ extension SafariProtection {
             }
         }
     }
-    
+
     public func update(blocklistIsEnabled: Bool, onCbReloaded: ((_ error: Error?) -> Void)?) {
         workingQueue.sync {
             Logger.logInfo("(SafariProtection+Configuration) - updateBlocklistIsEnabled; Updating blocklist state from=\(self.configuration.blocklistIsEnabled) to=\(blocklistIsEnabled)")
@@ -185,7 +185,7 @@ extension SafariProtection {
                     DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
                     return
                 }
-                
+
                 if let error = error {
                     Logger.logError("(SafariProtection+Configuration) - updateBlocklistIsEnabled; Error reloading CBs when updating blocklist state; Error: \(error)")
                 } else {
@@ -195,7 +195,7 @@ extension SafariProtection {
             }
         }
     }
-    
+
     public func update(allowlistIsEnabled: Bool, onCbReloaded: ((_ error: Error?) -> Void)?) {
         workingQueue.sync {
             Logger.logInfo("(SafariProtection+Configuration) - updateAllowlistIsEnabled; Updating allowlist state from=\(self.configuration.allowlistIsEnabled) to=\(allowlistIsEnabled)")
@@ -212,7 +212,7 @@ extension SafariProtection {
                     DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
                     return
                 }
-                
+
                 if let error = error {
                     Logger.logError("(SafariProtection+Configuration) - updateAllowlistIsEnabled; Error reloading CBs when updating allowlist state; Error: \(error)")
                 } else {
@@ -222,11 +222,11 @@ extension SafariProtection {
             }
         }
     }
-    
+
     public func update(allowlistIsInverted: Bool, onCbReloaded: ((_ error: Error?) -> Void)?) {
         workingQueue.sync {
             Logger.logInfo("(SafariProtection+Configuration) - updateAllowlistIsInverted; Updating allowlist invertion state from=\(self.configuration.allowlistIsInverted) to=\(allowlistIsInverted)")
-            
+
             try? executeBlockAndReloadCbs {
                 if configuration.allowlistIsInverted != allowlistIsInverted {
                     configuration.allowlistIsInverted = allowlistIsInverted
@@ -239,7 +239,7 @@ extension SafariProtection {
                     DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
                     return
                 }
-                
+
                 if let error = error {
                     Logger.logError("(SafariProtection+Configuration) - updateAllowlistIsEnabled; Error reloading CBs when updating allowlist invertion; Error: \(error)")
                 } else {
@@ -249,7 +249,7 @@ extension SafariProtection {
             }
         }
     }
-    
+
     public func updateConfig(with newConfig: SafariConfigurationProtocol) {
         workingQueue.sync {
             Logger.logInfo("(SafariProtection+Configuration) - updateConfig;")

@@ -52,25 +52,25 @@
 
 /**
     Finds file by name in specified directory including subdirectories.
- 
+
     @param fileName         Filename for search. May be wildcard pattern.
     @param directoryToScan  The location of the directory that defines start point of search.
     @param level            Level of nesting. Set to 0 for infinity.
- 
-    @return                 Array of NSURL objects that point to files. 
+
+    @return                 Array of NSURL objects that point to files.
                             If files not found returns empty array.
  */
 + (NSArray *)findFileByName:(NSString *)fileName inDirectory:(NSURL *)directoryToScan level:(NSUInteger)level;
 
 /**
     Finds file Url by name in specified directory including subdirectories.
- 
+
     @param fileName         Filename or folder for search. May be wildcard pattern.
     @param directoryToScan  The location of the directory that defines start point of search.
     @param level            Level of nesting. Set to 0 for infinity.
     @param ignoreDirectory  Not include in returned array Url for directory.
 
-    @return                 Array of NSURL objects that point to files. 
+    @return                 Array of NSURL objects that point to files.
                             If files not found returns empty array.
  */
 + (NSArray *)findUrlByName:(NSString *)fileName inDirectory:(NSURL *)directoryToScan level:(NSUInteger)level ignoreDirectory:(BOOL)ignoreDirectory;

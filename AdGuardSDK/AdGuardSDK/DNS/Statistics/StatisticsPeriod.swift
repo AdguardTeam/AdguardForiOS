@@ -24,7 +24,7 @@ public enum StatisticsPeriod: Int,  CaseIterable, CustomDebugStringConvertible {
     case week
     case month
     case all
-    
+
     public var debugDescription: String {
         switch self {
         case .today: return "TODAY"
@@ -34,14 +34,14 @@ public enum StatisticsPeriod: Int,  CaseIterable, CustomDebugStringConvertible {
         case .all: return "ALL"
         }
     }
-    
+
     public static var allCases = [Self.today, .day, .week,.month, .all]
-    
+
     /// Date interval for a certain `Period`
     public var interval: DateInterval {
         let now = Date()
         let hour = 3600.0 // 1 hour in seconds
-        
+
         switch self {
         case .today:
             let calendar = Calendar.current

@@ -21,11 +21,11 @@ import XCTest
 class DnsTrackerServiceTest: XCTestCase {
 
     var trackersService: DnsTrackerService!
-    
+
     override func setUp() {
         trackersService = DnsTrackerService()
     }
-    
+
     let simpleJson = """
                     {
                         "timeUpdated": "2019-11-11T16:19:45.362Z",
@@ -64,40 +64,40 @@ class DnsTrackerServiceTest: XCTestCase {
                         }
                     }
                 """
-    
+
     func testSimpleTracker() {
         setupTrackersJson(json: simpleJson)
         let info = trackersService.getTrackerInfo(by: "google.com")
         XCTAssertNotNil(info)
         XCTAssertEqual(info?.categoryKey, "advertising")
     }
-    
+
     func testSubdomain() {
         setupTrackersJson(json: simpleJson)
         let info = trackersService.getTrackerInfo(by: "www.google.com")
         XCTAssertNotNil(info)
     }
-    
+
     func testNotFound() {
         setupTrackersJson(json: simpleJson)
         let info = trackersService.getTrackerInfo(by: "apple.com")
         XCTAssertNil(info)
     }
-    
+
     func testSubdomainCategory() {
         setupTrackersJson(json: simpleJson)
         let info = trackersService.getTrackerInfo(by: "translate.google.com")
         XCTAssertNotNil(info)
         XCTAssertEqual(info?.categoryKey, "customer_interaction")
     }
-    
+
     func testSubdomainCategory2() {
         setupTrackersJson(json: simpleJson)
         let info = trackersService.getTrackerInfo(by: "subdomain.translate.google.com")
         XCTAssertNotNil(info)
         XCTAssertEqual(info?.categoryKey, "customer_interaction")
     }
-    
+
     func testAdguardJson() {
         setupTrackersJson(json: simpleJson)
         setupAdguardJson(   """
@@ -117,16 +117,16 @@ class DnsTrackerServiceTest: XCTestCase {
                                 }
                             }
                             """)
-        
+
         let adguardInfo = trackersService.getTrackerInfo(by: "example.org")
         XCTAssertNotNil(adguardInfo)
         XCTAssertEqual(adguardInfo?.categoryKey, "comments")
-        
+
         let whotracksmeInfo = trackersService.getTrackerInfo(by: "google.com")
         XCTAssertNotNil(whotracksmeInfo)
         XCTAssertEqual(whotracksmeInfo?.categoryKey, "advertising")
     }
-    
+
     func testAdguardJsonOverride() {
         setupTrackersJson(json: simpleJson)
         setupAdguardJson(   """
@@ -146,12 +146,12 @@ class DnsTrackerServiceTest: XCTestCase {
                                 }
                             }
                             """)
-        
+
         let whotracksmeInfo = trackersService.getTrackerInfo(by: "google.com")
         XCTAssertNotNil(whotracksmeInfo)
         XCTAssertEqual(whotracksmeInfo?.categoryKey, "comments")
     }
-    
+
     func setupTrackersJson(json: String) {
         guard let data = json.data(using: .utf8) else {
             XCTFail()
@@ -164,7 +164,7 @@ class DnsTrackerServiceTest: XCTestCase {
             XCTFail()
         }
     }
-    
+
     func setupAdguardJson(_ json: String) {
         let data = json.data(using: .utf8)
         try? trackersService.decodeAdguardTrackers(data: data!)

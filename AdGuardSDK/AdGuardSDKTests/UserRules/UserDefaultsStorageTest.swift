@@ -4,23 +4,23 @@ import OrderedCollections
 class UserDefaultsStorageTest: XCTestCase {
 
     var userDefaults: UserDefaultsStorageProtocol!
-    
+
     lazy var allowlistRuleStorage: UserRulesStorageProtocol = {
         SafariUserRulesStorage(userDefaults: userDefaults, rulesType: .allowlist)
     }()
-        
+
     lazy var invertedAllowlistRulesStorage: UserRulesStorageProtocol = {
         SafariUserRulesStorage(userDefaults: userDefaults, rulesType: .invertedAllowlist)
     }()
-    
+
     lazy var blocklistRulesStorage: UserRulesStorageProtocol  = {
         SafariUserRulesStorage(userDefaults: userDefaults, rulesType: .blocklist)
     }()
-    
+
     let userRules = [UserRule(ruleText: "1", isEnabled: false),
                      UserRule(ruleText: "2", isEnabled: true),
                      UserRule(ruleText: "3", isEnabled: false)]
-    
+
     override func setUpWithError() throws {
         userDefaults = UserDefaultsStorage(storage: UserDefaults(suiteName: "UserRulesStorage")!)
         allowlistRuleStorage.rules = []
@@ -37,7 +37,7 @@ class UserDefaultsStorageTest: XCTestCase {
             XCTAssert(rule.isEnabled == userRules[index].isEnabled)
         }
     }
-    
+
     func testResetAllowlistRuleStorage() {
         XCTAssert(allowlistRuleStorage.rules.isEmpty)
         allowlistRuleStorage.rules = OrderedSet(userRules)
@@ -45,7 +45,7 @@ class UserDefaultsStorageTest: XCTestCase {
         allowlistRuleStorage.rules = []
         XCTAssert(allowlistRuleStorage.rules.isEmpty)
     }
-    
+
     func testInvertedAllowlistRulesStorageWithSuccess() {
         XCTAssert(invertedAllowlistRulesStorage.rules.isEmpty)
         invertedAllowlistRulesStorage.rules = OrderedSet(userRules)
@@ -55,7 +55,7 @@ class UserDefaultsStorageTest: XCTestCase {
             XCTAssert(rule.isEnabled == userRules[index].isEnabled)
         }
     }
-    
+
     func testResetInvertedAllowlistRulesStorage() {
         XCTAssert(invertedAllowlistRulesStorage.rules.isEmpty)
         invertedAllowlistRulesStorage.rules = OrderedSet(userRules)
@@ -63,7 +63,7 @@ class UserDefaultsStorageTest: XCTestCase {
         invertedAllowlistRulesStorage.rules = []
         XCTAssert(invertedAllowlistRulesStorage.rules.isEmpty)
     }
-    
+
     func testBlocklistRulesStorageWithSuccess() {
         XCTAssert(blocklistRulesStorage.rules.isEmpty)
         blocklistRulesStorage.rules = OrderedSet(userRules)
@@ -73,7 +73,7 @@ class UserDefaultsStorageTest: XCTestCase {
             XCTAssert(rule.isEnabled == userRules[index].isEnabled)
         }
     }
-    
+
     func testResetBlocklistRulesStorage() {
         XCTAssert(blocklistRulesStorage.rules.isEmpty)
         blocklistRulesStorage.rules = OrderedSet(userRules)

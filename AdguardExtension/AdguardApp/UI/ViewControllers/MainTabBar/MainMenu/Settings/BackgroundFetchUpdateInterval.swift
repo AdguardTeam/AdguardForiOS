@@ -29,10 +29,10 @@ enum BackgroundFetchUpdateInterval: Int, CaseIterable {
     case every3Hour
     case every12Hours
     case every24Hours
-    
+
     var interval: TimeInterval {
         let hour: TimeInterval = 3600.0
-        
+
         switch self {
         case .defaultPeriod: return 6 * hour
         case .everyHour: return hour

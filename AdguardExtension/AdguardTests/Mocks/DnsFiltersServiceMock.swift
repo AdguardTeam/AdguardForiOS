@@ -19,73 +19,73 @@
 import Foundation
 
 class DnsFiltersServiceMock: DnsFiltersServiceProtocol {
-    
+
     func addFilter(name: String, url: URL, networking: ACNNetworkingProtocol, callback: ((Bool) -> Void)?) {
         let filter = DnsFilter(subscriptionUrl: url.absoluteString, name: name, date: Date(), enabled: true, desc: nil, importantDesc: nil, version: nil, rulesCount: nil, homepage: nil)
         filters.append(filter)
-        
+
         callback?(true)
     }
-    
+
     var filters: [DnsFilter] = []
-    
+
     var enabledFiltersCount: Int = 0
-    
+
     var enabledRulesCount: Int = 0
-    
+
     var filtersJson: String = ""
-    
+
     var whitelistRules: [String] = []
-    
+
     var userRules: [String] = []
-    
+
     var filtersAreUpdating: Bool = false
-    
+
     func setFilter(filterId: Int, enabled: Bool) {
-        
+
     }
-    
+
     func addFilter(_ filter: DnsFilter, data: Data?) {
-        
+
     }
-    
+
     func deleteFilter(_ filter: DnsFilter, completionHandler: (() -> Void)?) {
-        
+
     }
-    
+
     func disableAllFilters() {
         for filter in filters {
             filter.enabled = false
         }
     }
-    
+
     func updateFilters(networking: ACNNetworkingProtocol, callback: (() -> Void)?) {
-        
+
     }
-    
+
     func reset() {
-        
+
     }
-    
+
     func addWhitelistRule(_ rule: String) {
-        
+
     }
-    
+
     func addBlacklistRule(_ rule: String) {
         userRules.append(rule)
     }
-    
+
     func removeWhitelistRules(_ rules: [String]) {
-        
+
     }
-    
+
     func removeUserRules(_ rules: [String]) {
-        
+
     }
-    
+
     func readFiltersMeta() {
-        
+
     }
-    
-    
+
+
 }

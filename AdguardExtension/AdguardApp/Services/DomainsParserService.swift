@@ -26,7 +26,7 @@ class DomainsParserService: DomainsParserServiceProtocol {
     /* It must be initialized and stored during app life
      because it initializes a big list inside */
     var domainsParser: DomainParser?
-    
+
     init() {
         self.domainsParser = try? DomainParser(quickParsing: true)
     }

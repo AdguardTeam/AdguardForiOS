@@ -21,24 +21,24 @@ import SafariAdGuardSDK
 
 /// AdvancedProtectionController - Responsible for representation advanced settings for Safari Web Extension
 final class AdvancedProtectionController: UIViewController {
-    
+
     // MARK: - Outlets
-    
+
     @IBOutlet weak var onOffLabel: UILabel!
     @IBOutlet weak var uiSwitch: UISwitch!
     @IBOutlet weak var advancedProtectionView: OnboardingAdvancedProtectionView!
-    
+
     @IBOutlet weak var purchaseButton: RoundRectButton!
     @IBOutlet weak var firstDescriptionLabel: UIView!
     @IBOutlet weak var contentView: UIView!
-    
+
     @IBOutlet weak var firstDescriptionLabelTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var advancedProtectionViewTopConstraint: NSLayoutConstraint!
-    
+
     @IBOutlet var themableLabels: [ThemableLabel]!
-    
+
     // MARK: - Private properties
-    
+
     private let showLicenseSegue = "ShowLicenseSegueId"
     private var advancedProtectionViewHeightConstraintConst = 0.0
     private var advancedProtectionIsHidden: Bool = false {
@@ -50,63 +50,63 @@ final class AdvancedProtectionController: UIViewController {
             }
         }
     }
-    
+
     private var proStatusObserver: NotificationToken?
-    
+
     // MARK: - Services
-    
+
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configurationService: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
-    
+
     // MARK: - ViewController lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         advancedProtectionView.labelString = String.localizedString("onboarding_fours_step_text")
-        
+
         uiSwitch.isOn = configurationService.isAdvancedProtectionEnabled
         onOffLabel.text = uiSwitch.isOn ? String.localizedString("on_state") : String.localizedString("off_state")
-        
+
         purchaseButton.applyStandardGreenStyle()
         setupBackButton()
         updateTheme()
-        
+
         configureScreenContent()
-        
+
         proStatusObserver = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
             self?.configureScreenContent()
         }
     }
-    
+
     // MARK: - Actions
-    
+
     @IBAction func switchValueChanged(_ sender: UISwitch) {
         if sender.isOn && !configurationService.proStatus {
             performSegue(withIdentifier: self.showLicenseSegue, sender: self)
             sender.setOn(false, animated: false)
             return
         }
-        
+
         let newAdvancedProtection = sender.isOn
         configurationService.isAdvancedProtectionEnabled = newAdvancedProtection
         onOffLabel.text = sender.isOn ? String.localizedString("on_state") : String.localizedString("off_state")
         safariProtection.update(advancedProtectionEnabled: newAdvancedProtection, onCbReloaded: nil)
     }
-    
+
     // MARK: - Private methods
-    
+
     private func hideAdvancedProtectionView() {
         advancedProtectionView.isHidden = true
-        
+
         firstDescriptionLabelTopConstraint.isActive = false
         firstDescriptionLabelTopConstraint = firstDescriptionLabel.topAnchor.constraint(equalTo: uiSwitch.bottomAnchor, constant: 24.0)
         firstDescriptionLabelTopConstraint.isActive = true
-        
+
         advancedProtectionViewTopConstraint.constant = 0
     }
-    
+
     private func showAdvancedProtectionView() {
         advancedProtectionView.isHidden = false
         firstDescriptionLabelTopConstraint.isActive = false
@@ -114,7 +114,7 @@ final class AdvancedProtectionController: UIViewController {
         firstDescriptionLabelTopConstraint.isActive = true
         advancedProtectionViewTopConstraint.constant = isIpadTrait ? 32.0 : 16.0
     }
-    
+
     private func configureScreenContent() {
         purchaseButton.isHidden = configurationService.proStatus
         let hideView = resources.safariWebExtensionIsOn && resources.advancedProtectionPermissionsGranted

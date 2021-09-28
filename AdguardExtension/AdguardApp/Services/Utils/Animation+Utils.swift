@@ -20,7 +20,7 @@ import Foundation
 import Lottie
 
 extension Animation {
-    
+
     static var onboardingFirstStep: Animation? {
         get {
             guard let path = Bundle.main.path(forResource: "safari_protection_step1", ofType: "json") else { return nil }
@@ -28,7 +28,7 @@ extension Animation {
             return animation
         }
     }
-    
+
     static var onboardingSecondStep: Animation? {
         get {
             guard let path = Bundle.main.path(forResource: "safari_protection_step2", ofType: "json") else { return nil }
@@ -36,7 +36,7 @@ extension Animation {
             return animation
         }
     }
-    
+
     static var onboardingThirdStep: Animation? {
         get {
             guard let path = Bundle.main.path(forResource: "safari_tracking_protection_step3", ofType: "json") else { return nil }
@@ -44,5 +44,5 @@ extension Animation {
             return animation
         }
     }
-    
+
 }

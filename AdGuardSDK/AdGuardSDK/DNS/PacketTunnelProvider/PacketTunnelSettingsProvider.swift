@@ -1,17 +1,17 @@
 /**
     This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
     Copyright © Adguard Software Limited. All rights reserved.
- 
+
     Adguard for iOS is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
- 
+
     Adguard for iOS is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
- 
+
     You should have received a copy of the GNU General Public License
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -25,15 +25,15 @@ protocol PacketTunnelSettingsProviderProtocol {
 /// This object creates `NEPacketTunnelNetworkSettings` for `PacketTunnelProvider`
 /// Used to incapsulate settings creation logic
 final class PacketTunnelSettingsProvider: PacketTunnelSettingsProviderProtocol {
-    
+
     private let addresses: PacketTunnelProvider.Addresses
     private let networkUtils: NetworkUtilsProtocol
-    
+
     init(addresses: PacketTunnelProvider.Addresses, networkUtils: NetworkUtilsProtocol = NetworkUtils()) {
         self.addresses = addresses
         self.networkUtils = networkUtils
     }
-    
+
     func createSettings(full: Bool, withoutVpnIcon: Bool) -> NEPacketTunnelNetworkSettings {
         let settings = NEPacketTunnelNetworkSettings(tunnelRemoteAddress: addresses.tunnelRemoteAddress)
 
@@ -84,7 +84,7 @@ final class PacketTunnelSettingsProvider: PacketTunnelSettingsProviderProtocol {
 
         return settings
     }
-    
+
     /**
      returns array of ipv4 exclude ranges for full tunnel modes
 

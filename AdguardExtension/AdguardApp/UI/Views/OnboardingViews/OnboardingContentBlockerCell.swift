@@ -20,9 +20,9 @@ import UIKit
 
 /// OnboardingContentBlockerCell - Custom onboarding table view cell
 final class OnboardingContentBlockerCell: UITableViewCell {
-    
+
     // MARK: - Properties
-    
+
     private let uiSwitch: UISwitch = {
        let view = UISwitch()
         view.isOn = true
@@ -31,14 +31,14 @@ final class OnboardingContentBlockerCell: UITableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
+
     private let adguardIcon: UIImageView = {
        let view = UIImageView()
         view.image = UIImage(named: "LoadScreen")
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
+
     private let titleLabel: UILabel = {
        let view = UILabel()
         view.numberOfLines = 1
@@ -46,61 +46,61 @@ final class OnboardingContentBlockerCell: UITableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
+
     let separator: UIView = {
         let view = UIView()
         view.backgroundColor = .red
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
+
     var titleString: String? {
         didSet {
             titleLabel.text = titleString
         }
     }
-    
+
     var titleLabelTextColor: UIColor? {
         didSet {
             titleLabel.textColor = titleLabelTextColor
         }
     }
-    
+
     // MARK: - Init
-    
+
     override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupConstraints()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.setupConstraints()
     }
 
     // MARK: - Private methods
-    
+
     private func setupConstraints() {
         self.contentView.addSubview(adguardIcon)
         self.contentView.addSubview(uiSwitch)
         self.contentView.addSubview(titleLabel)
         self.contentView.addSubview(separator)
-        
+
         adguardIcon.heightAnchor.constraint(equalToConstant: 24).isActive = true
         adguardIcon.widthAnchor.constraint(equalToConstant: 24).isActive = true
         adguardIcon.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
         adguardIcon.trailingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: -16.0).isActive = true
         adguardIcon.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
-        
+
         titleLabel.trailingAnchor.constraint(equalTo: uiSwitch.leadingAnchor, constant: -16.0).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
-        
+
         uiSwitch.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -2.0).isActive = true
         uiSwitch.widthAnchor.constraint(equalToConstant: 49.0).isActive = true
         uiSwitch.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 6.0).isActive = true
         uiSwitch.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -6.0).isActive = true
         uiSwitch.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        
+
         separator.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         separator.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
         separator.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true

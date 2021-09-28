@@ -12,24 +12,24 @@ public protocol ContentBlockerJsonProviderProtocol {
 
 /// This class should be used in Content Blocker's extensions to get appropriate JSON
 public final class ContentBlockerJsonProvider: ContentBlockerJsonProviderProtocol {
-    
+
     public var jsonUrl: URL? { jsonStorage.getConverterResult(for: type)?.jsonUrl }
-    
+
     private let jsonStorage: ContentBlockersInfoStorageProtocol
     private let type: ContentBlockerType
-    
+
     public init(cbBundleId: String, mainAppBundleId: String, jsonStorageUrl: URL, userDefaults: UserDefaults) throws {
         let userDefaultsStorage = UserDefaultsStorage(storage: userDefaults)
         self.jsonStorage = try ContentBlockersInfoStorage(jsonStorageUrl: jsonStorageUrl, userDefaultsStorage: userDefaultsStorage)
         self.type = Self.typeForBundleId(cbBundleId, mainAppBundleId: mainAppBundleId)
     }
-    
+
     /// Initializer for tests
     init(jsonStorage: ContentBlockersInfoStorageProtocol, type: ContentBlockerType) {
         self.jsonStorage = jsonStorage
         self.type = type
     }
-    
+
     private static func typeForBundleId(_ cbBundleId: String, mainAppBundleId: String)->ContentBlockerType {
         for type in ContentBlockerType.allCases {
             if type.contentBlockerBundleId(mainAppBundleId) == cbBundleId {

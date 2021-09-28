@@ -21,7 +21,7 @@ import Foundation
 public struct RequestConfig<Parser> where Parser: ParserProtocol {
     public let request: RequestProtocol
     public let parser: Parser
-    
+
     public init(request: RequestProtocol, parser: Parser) {
         self.request = request
         self.parser = parser

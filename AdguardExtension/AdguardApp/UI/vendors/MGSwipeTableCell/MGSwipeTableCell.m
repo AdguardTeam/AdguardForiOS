@@ -85,7 +85,7 @@
     if (!differentWidth) {
         containerWidth = maxSize.width * buttonsArray.count + buttonsDistance * (buttonsArray.count - 1);
     }
-    
+
     if (self = [super initWithFrame:CGRectMake(0, 0, containerWidth, maxSize.height)]) {
         _fromLeft = direction == MGSwipeDirectionLeftToRight;
         _buttonsDistance = buttonsDistance;
@@ -162,7 +162,7 @@
                    _container.bounds.size.width - (button.frame.origin.x + button.bounds.size.width ) + extra
                           ,_container.bounds.size.height);
     }
-    
+
 }
 
 -(void) expandToOffset:(CGFloat) offset settings:(MGSwipeExpansionSettings*) settings
@@ -195,7 +195,7 @@
         }
         [_container addSubview:_expansionBackground];
         _expansionLayout = settings.expansionLayout;
-        
+
         CGFloat duration = _fromLeft ? _cell.leftExpansion.animationDuration : _cell.rightExpansion.animationDuration;
         [UIView animateWithDuration: duration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
             _expandedButton.hidden = NO;
@@ -281,7 +281,7 @@
         autoHide = [sender performSelector:@selector(callMGSwipeConvenienceCallback:) withObject:_cell];
     }
 #pragma clang diagnostic pop
-    
+
     if (_cell.delegate && [_cell.delegate respondsToSelector:@selector(swipeTableCell:tappedButtonAtIndex:direction:fromExpansion:)]) {
         NSInteger index = [_buttons indexOfObject:sender];
         if (!_fromLeft) {
@@ -289,7 +289,7 @@
         }
         autoHide|= [_cell.delegate swipeTableCell:_cell tappedButtonAtIndex:index direction:_fromLeft ? MGSwipeDirectionLeftToRight : MGSwipeDirectionRightToLeft fromExpansion:fromExpansion];
     }
-    
+
     if (fromExpansion && autoHide) {
         _expandedButton = nil;
         _cell.swipeOffset = 0;
@@ -297,7 +297,7 @@
     else if (autoHide) {
         [_cell hideSwipeAnimated:YES];
     }
-    
+
     return autoHide;
 
 }
@@ -314,7 +314,7 @@
 {
     const CGFloat dx = self.bounds.size.width * (1.0 - t);
     CGFloat offsetX = 0;
-    
+
     UIView* lastButton = [_buttons lastObject];
     for (UIView *button in _buttons) {
         CGRect frame = button.frame;
@@ -333,7 +333,7 @@
 {
     CGFloat selfWidth = self.bounds.size.width;
     CGFloat offsetX = 0;
-    
+
     UIView* lastButton = [_buttons lastObject];
     for (UIView *button in _buttons) {
         CGRect frame = button.frame;
@@ -358,7 +358,7 @@
 {
     CGFloat selfWidth = self.bounds.size.width;
     CGFloat offsetX = 0;
-    
+
     UIView* lastButton = [_buttons lastObject];
     for (UIView *button in _buttons) {
         CGRect frame = button.frame;
@@ -552,7 +552,7 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
     CGPoint _panStartPoint;
     CGFloat _panStartOffset;
     CGFloat _targetOffset;
-    
+
     UIView * _swipeOverlay;
     UIImageView * _swipeView;
     UIView * _swipeContentView;
@@ -567,7 +567,7 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
     UITableViewCellSelectionStyle _previusSelectionStyle;
     NSMutableSet * _previusHiddenViews;
     BOOL _triggerStateChanges;
-    
+
     MGSwipeAnimationData * _animationData;
     void (^_animationCompletion)(BOOL finished);
     CADisplayLink * _displayLink;
@@ -628,7 +628,7 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
     _preservesSelectionStatus = NO;
     _allowsOppositeSwipe = YES;
     _firstSwipeState = MGSwipeStateNone;
-    
+
 }
 
 -(void) cleanViews
@@ -732,7 +732,7 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
         [_swipeOverlay addSubview:_swipeView];
         [self.contentView addSubview:_swipeOverlay];
     }
-    
+
     [self fetchButtonsIfNeeded];
     if (!_leftView && _leftButtons.count > 0) {
         _leftView = [[MGSwipeButtonsView alloc] initWithButtons:_leftButtons direction:MGSwipeDirectionLeftToRight differentWidth:_allowsButtonsWithDifferentWidth buttonsDistance:_leftSwipeSettings.buttonsDistance];
@@ -757,7 +757,7 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
         return;
     }
     _overlayEnabled = YES;
-    
+
     if (!_preservesSelectionStatus)
         self.selected = NO;
     if (_swipeContentView)
@@ -765,15 +765,15 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
     if (_delegate && [_delegate respondsToSelector:@selector(swipeTableCellWillBeginSwiping:)]) {
         [_delegate swipeTableCellWillBeginSwiping:self];
     }
-    
+
     // snapshot cell without separator
     CGSize  cropSize        = CGSizeMake(self.bounds.size.width, self.contentView.bounds.size.height);
     _swipeView.image = [self imageFromView:self cropSize:cropSize];
-    
+
     _swipeOverlay.hidden = NO;
     if (_swipeContentView)
         [_swipeView addSubview:_swipeContentView];
-    
+
     if (!_allowsMultipleSwipe) {
         //input overlay on the whole table
         UITableView * table = [self parentTable];
@@ -788,7 +788,7 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
     _previusSelectionStyle = self.selectionStyle;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     [self setAccesoryViewsHidden:YES];
-    
+
     _tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHandler:)];
     _tapRecognizer.cancelsTouchesInView = YES;
     _tapRecognizer.delegate = self;
@@ -807,12 +807,12 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
         [_swipeContentView removeFromSuperview];
         [self.contentView addSubview:_swipeContentView];
     }
-    
+
     if (_tableInputOverlay) {
         [_tableInputOverlay removeFromSuperview];
         _tableInputOverlay = nil;
     }
-    
+
     self.selectionStyle = _previusSelectionStyle;
     NSArray * selectedRows = self.parentTable.indexPathsForSelectedRows;
     if ([selectedRows containsObject:[self.parentTable indexPathForCell:self]]) {
@@ -820,11 +820,11 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
         self.selected = YES;
     }
     [self setAccesoryViewsHidden:NO];
-    
+
     if (_delegate && [_delegate respondsToSelector:@selector(swipeTableCellWillEndSwiping:)]) {
         [_delegate swipeTableCellWillEndSwiping:self];
     }
-    
+
     if (_tapRecognizer) {
         [self removeGestureRecognizer:_tapRecognizer];
         _tapRecognizer = nil;
@@ -904,7 +904,7 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
         for (int i = 0; i< 2; ++i) {
             UIView * target = targets[i];
             if (!target) continue;
-            
+
             CGPoint p = [self convertPoint:point toView:target];
             if (CGRectContainsPoint(target.bounds, p)) {
                 return [target hitTest:p withEvent:event];
@@ -934,7 +934,7 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
             view.hidden = hidden;
         }
     }
-    
+
     for (UIView * view in self.contentView.subviews) {
         if (view == _swipeOverlay || view == _swipeContentView) continue;
         if (hidden && !view.hidden) {
@@ -945,7 +945,7 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
             view.hidden = NO;
         }
     }
-    
+
     if (!hidden) {
         [_previusHiddenViews removeAllObjects];
     }
@@ -995,12 +995,12 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
     CGFloat sign = newOffset > 0 ? 1.0 : -1.0;
     MGSwipeButtonsView * activeButtons = sign < 0 ? _rightView : _leftView;
     MGSwipeSettings * activeSettings = sign < 0 ? _rightSwipeSettings : _leftSwipeSettings;
-  
+
     if(activeSettings.enableSwipeBounces) {
         _swipeOffset = newOffset;
 
         CGFloat maxUnbouncedOffset = sign * activeButtons.bounds.size.width;
-        
+
         if ((sign > 0 && newOffset > maxUnbouncedOffset) || (sign < 0 && newOffset < maxUnbouncedOffset)) {
             _swipeOffset = maxUnbouncedOffset + (newOffset - maxUnbouncedOffset) * activeSettings.swipeBounceRate;
         }
@@ -1010,8 +1010,8 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
         _swipeOffset = sign > 0 ? MIN(newOffset, maxOffset) : MAX(newOffset, maxOffset);
     }
     CGFloat offset = fabs(_swipeOffset);
-  
-  
+
+
     if (!activeButtons || offset == 0) {
         if (_leftView)
             [_leftView endExpansionAnimated:NO];
@@ -1028,15 +1028,15 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
         BOOL keepButtons = activeSettings.keepButtonsSwiped;
         _targetOffset = keepButtons && offset > activeButtons.bounds.size.width * swipeThreshold ? activeButtons.bounds.size.width * sign : 0;
     }
-    
+
     BOOL onlyButtons = activeSettings.onlySwipeButtons;
     _swipeView.transform = CGAffineTransformMakeTranslation(onlyButtons ? 0 : _swipeOffset, 0);
-    
+
     //animate existing buttons
     MGSwipeButtonsView* but[2] = {_leftView, _rightView};
     MGSwipeSettings* settings[2] = {_leftSwipeSettings, _rightSwipeSettings};
     MGSwipeExpansionSettings * expansions[2] = {_leftExpansion, _rightExpansion};
-    
+
     for (int i = 0; i< 2; ++i) {
         MGSwipeButtonsView * view = but[i];
         if (!view) continue;
@@ -1085,7 +1085,7 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
     _allowSwipeLeftToRight = _leftButtons.count > 0;
     _allowSwipeRightToLeft = _rightButtons.count > 0;
     UIView * buttonsView = direction == MGSwipeDirectionLeftToRight ? _leftView : _rightView;
-    
+
     if (buttonsView) {
         CGFloat s = direction == MGSwipeDirectionLeftToRight ? 1.0 : -1.0;
         MGSwipeAnimation * animation = animated ? (direction == MGSwipeDirectionLeftToRight ? _leftSwipeSettings.showAnimation : _rightSwipeSettings.showAnimation) : nil;
@@ -1097,14 +1097,14 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
 {
     CGFloat s = direction == MGSwipeDirectionLeftToRight ? 1.0 : -1.0;
     MGSwipeExpansionSettings* expSetting = direction == MGSwipeDirectionLeftToRight ? _leftExpansion : _rightExpansion;
-    
+
     // only perform animation if there's no pending expansion animation and requested direction has fillOnTrigger enabled
     if(!_activeExpansion && expSetting.fillOnTrigger) {
         [self createSwipeViewIfNeeded];
         _allowSwipeLeftToRight = _leftButtons.count > 0;
         _allowSwipeRightToLeft = _rightButtons.count > 0;
         UIView * buttonsView = direction == MGSwipeDirectionLeftToRight ? _leftView : _rightView;
-        
+
         if (buttonsView) {
             __weak MGSwipeButtonsView * expansionView = direction == MGSwipeDirectionLeftToRight ? _leftView : _rightView;
             __weak MGSwipeTableCell * weakself = self;
@@ -1127,7 +1127,7 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
         _triggerStateChanges = YES;
     }
     self.swipeOffset = [_animationData.animation value:elapsed duration:_animationData.duration from:_animationData.from to:_animationData.to];
-    
+
     //call animation completion and invalidate timer
     if (completed){
         [timer invalidate];
@@ -1165,7 +1165,7 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
     if (offset !=0) {
         [self createSwipeViewIfNeeded];
     }
-    
+
     if (!animation) {
         self.swipeOffset = offset;
         if (completion) {
@@ -1173,7 +1173,7 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
         }
         return;
     }
-    
+
     _animationCompletion = completion;
     _triggerStateChanges = NO;
     _animationData.from = _swipeOffset;
@@ -1228,7 +1228,7 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
 -(void) panHandler: (UIPanGestureRecognizer *)gesture
 {
     CGPoint current = [gesture translationInView:self];
-    
+
     if (gesture.state == UIGestureRecognizerStateBegan) {
         [self invalidateDisplayLink];
 
@@ -1240,7 +1240,7 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
         if (_swipeOffset != 0) {
             _firstSwipeState = _swipeOffset > 0 ? MGSwipeStateSwipingLeftToRight : MGSwipeStateSwipingRightToLeft;
         }
-        
+
         if (!_allowsMultipleSwipe) {
             NSArray * cells = [self parentTable].visibleCells;
             for (MGSwipeTableCell * cell in cells) {
@@ -1283,7 +1283,7 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
         else {
             CGFloat velocity = [_panRecognizer velocityInView:self].x;
             CGFloat inertiaThreshold = 100.0; //points per second
-            
+
             if (velocity > inertiaThreshold) {
                 _targetOffset = _swipeOffset < 0 ? 0 : (_leftView  && _leftSwipeSettings.keepButtonsSwiped ? _leftView.bounds.size.width : _targetOffset);
             }
@@ -1304,19 +1304,19 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
             }
             [self setSwipeOffset:_targetOffset animation:animation completion:nil];
         }
-        
+
         _firstSwipeState = MGSwipeStateNone;
     }
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
-    
+
     if (gestureRecognizer == _panRecognizer) {
-        
+
         if (self.isEditing) {
             return NO; //do not swipe while editing table
         }
-        
+
         CGPoint translation = [_panRecognizer translationInView:self];
         if (fabs(translation.y) > fabs(translation.x)) {
             return NO; // user is scrolling vertically
@@ -1327,11 +1327,11 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
                 return _allowsSwipeWhenTappingButtons; //user clicked outside the cell or in the buttons area
             }
         }
-        
+
         if (_swipeOffset != 0.0) {
             return YES; //already swiped, don't need to check buttons or canSwipe delegate
         }
-        
+
         //make a decision according to existing buttons or using the optional delegate
         if (_delegate && [_delegate respondsToSelector:@selector(swipeTableCell:canSwipe:fromPoint:)]) {
             CGPoint point = [_panRecognizer locationInView:self];
@@ -1350,7 +1350,7 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
             _allowSwipeLeftToRight = _leftButtons.count > 0;
             _allowSwipeRightToLeft = _rightButtons.count > 0;
         }
-        
+
         return (_allowSwipeLeftToRight && translation.x > 0) || (_allowSwipeRightToLeft && translation.x < 0);
     }
     else if (gestureRecognizer == _tapRecognizer) {

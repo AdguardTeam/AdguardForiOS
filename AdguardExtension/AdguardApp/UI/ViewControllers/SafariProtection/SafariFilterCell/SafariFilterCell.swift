@@ -1,17 +1,17 @@
 /**
        This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
        Copyright © Adguard Software Limited. All rights reserved.
- 
+
        Adguard for iOS is free software: you can redistribute it and/or modify
        it under the terms of the GNU General Public License as published by
        the Free Software Foundation, either version 3 of the License, or
        (at your option) any later version.
- 
+
        Adguard for iOS is distributed in the hope that it will be useful,
        but WITHOUT ANY WARRANTY; without even the implied warranty of
        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
        GNU General Public License for more details.
- 
+
        You should have received a copy of the GNU General Public License
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -51,17 +51,17 @@ protocol SafariFilterCellDelegate: AnyObject {
 // MARK: - SafariFilterCell
 
 final class SafariFilterCell: UITableViewCell, Reusable {
-    
+
     // MARK: - Public properties
-    
+
     var model = SafariFilterCellModel() {
         didSet { processModel() }
     }
-    
+
     weak var delegate: SafariFilterCellDelegate?
-    
+
     // MARK: - UI
-    
+
     private lazy var titleLabel: ThemableLabel = {
         let label = ThemableLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -72,7 +72,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         label.attributedText = model.filterNameAttrString
         return label
     }()
-    
+
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -81,7 +81,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         stackView.spacing = 2.0
         return stackView
     }()
-    
+
     private lazy var tagsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -90,7 +90,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         stackView.spacing = 4.0
         return stackView
     }()
-    
+
     private lazy var stateSwitch: UISwitch = {
         let stateSwitch = UISwitch()
         stateSwitch.translatesAutoresizingMaskIntoConstraints = false
@@ -98,9 +98,9 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         stateSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
         return stateSwitch
     }()
-    
+
     // MARK: - Private properties
-    
+
     // UI elements constraints
     private var sideInset: CGFloat { isIpadTrait ? 24.0 : 16.0 }
     private var topBottomInset: CGFloat { isIpadTrait ? 16.0 : 12.0 }
@@ -108,27 +108,27 @@ final class SafariFilterCell: UITableViewCell, Reusable {
     private var tagsInset: CGFloat { isIpadTrait ? 16.0 : 8.0 }
     private var tagHeight: CGFloat { isIpadTrait ? 32.0 : 22.0 }
     private var tagsStackViewWidth: CGFloat { lastFrame.width - (sideInset * 3) - switchWidth }
-    
+
     // We use it to avoid changing constraints when frame didn't change
     private var lastFrame: CGRect = .zero
-    
+
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private var themeObserver: NotificationToken?
-        
+
     // MARK: - Initialization
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.lastFrame = frame
         setupUiWithTags()
     }
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.lastFrame = frame
         setupUiWithTags()
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         if frame != lastFrame {
@@ -136,13 +136,13 @@ final class SafariFilterCell: UITableViewCell, Reusable {
             processModel()
         }
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
         titleLabel.text = nil
         titleLabel.attributedText = nil
     }
-    
+
     // MARK: - Private methods
 
     private func setupUiWithTags() {
@@ -150,80 +150,80 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         contentView.addSubview(stateSwitch)
         contentView.addSubview(stackView)
         contentView.addSubview(tagsStackView)
-        
+
         NSLayoutConstraint.activate([
             stateSwitch.topAnchor.constraint(equalTo: contentView.topAnchor, constant: topBottomInset),
             stateSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -sideInset),
             stateSwitch.widthAnchor.constraint(equalToConstant: switchWidth),
-            
+
             stackView.topAnchor.constraint(equalTo: stateSwitch.topAnchor),
             stackView.trailingAnchor.constraint(equalTo: stateSwitch.leadingAnchor, constant: -sideInset),
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: sideInset),
-            
+
             tagsStackView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
             tagsStackView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             tagsStackView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 8.0),
             tagsStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -topBottomInset)
         ])
     }
-    
+
     private func setupUiWithoutTags() {
         contentView.subviews.forEach { $0.removeFromSuperview() }
         contentView.addSubview(stateSwitch)
         contentView.addSubview(stackView)
-        
+
         NSLayoutConstraint.activate([
             stateSwitch.topAnchor.constraint(equalTo: contentView.topAnchor, constant: topBottomInset),
             stateSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -sideInset),
             stateSwitch.widthAnchor.constraint(equalToConstant: switchWidth),
-            
+
             stackView.topAnchor.constraint(equalTo: stateSwitch.topAnchor),
             stackView.trailingAnchor.constraint(equalTo: stateSwitch.leadingAnchor, constant: -sideInset),
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: sideInset),
             stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -topBottomInset)
         ])
     }
-    
+
     private func processModel() {
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         tagsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        
+
         stateSwitch.isOn = model.isEnabled
-        
+
         titleLabel.attributedText = model.filterNameAttrString
         stackView.addArrangedSubview(titleLabel)
-        
+
         if let version = model.version {
             let format = String.localizedString("filter_version_format")
             let versionString = String(format: format, version)
             let label = getDescriptionLabel(versionString)
             stackView.addArrangedSubview(label)
         }
-        
+
         if let updateDate = model.lastUpdateDate, let dateString = updateDate.formatedStringWithHoursAndMinutes() {
             let format = String.localizedString("filter_date_format")
             let updateDateString = String(format: format, dateString)
             let label = getDescriptionLabel(updateDateString)
             stackView.addArrangedSubview(label)
         }
-        
+
         if !model.tags.isEmpty {
             setupUiWithTags()
             processTags()
         } else {
             setupUiWithoutTags()
         }
-        
+
         contentView.alpha = model.groupIsEnabled ? 1.0 : 0.5
         contentView.isUserInteractionEnabled = model.groupIsEnabled
-        
+
         layoutIfNeeded()
     }
-    
+
     private func processTags() {
         var horStack = getHorizontalTagStackView()
         var currentStackWidth: CGFloat = 0.0
-        
+
         for tag in model.tags {
             let button = SafariTagButton(model: tag)
             button.addTarget(self, action: #selector(tagButtonTapped(_:)), for: .touchUpInside)
@@ -232,23 +232,23 @@ final class SafariFilterCell: UITableViewCell, Reusable {
             button.translatesAutoresizingMaskIntoConstraints = false
             button.widthAnchor.constraint(equalToConstant: width).isActive = true
             button.heightAnchor.constraint(equalToConstant: tagHeight).isActive = true
-            
+
             if currentStackWidth + width > tagsStackViewWidth {
                 addEmptyView(to: horStack, currentStackWidth: currentStackWidth)
                 tagsStackView.addArrangedSubview(horStack)
                 horStack = getHorizontalTagStackView()
                 currentStackWidth = 0.0
             }
-            
+
             horStack.addArrangedSubview(button)
             currentStackWidth += width
             currentStackWidth += tagsInset
         }
-        
+
         addEmptyView(to: horStack, currentStackWidth: currentStackWidth)
         tagsStackView.addArrangedSubview(horStack)
     }
-    
+
     private func getDescriptionLabel(_ text: String) -> ThemableLabel {
         let label = ThemableLabel()
         label.lightGreyText = true
@@ -260,7 +260,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         themeService.setupLabel(label)
         return label
     }
-    
+
     private func getHorizontalTagStackView() -> UIStackView {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -271,7 +271,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         stackView.heightAnchor.constraint(equalToConstant: tagHeight).isActive = true
         return stackView
     }
-    
+
     private func addEmptyView(to stack: UIStackView, currentStackWidth: CGFloat) {
         let spaceLeft = tagsStackViewWidth - currentStackWidth
         let emptyView = UIView()
@@ -281,12 +281,12 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         emptyView.heightAnchor.constraint(equalToConstant: tagHeight).isActive = true
         stack.addArrangedSubview(emptyView)
     }
-    
+
     /// Switch action handler
     @objc private final func switchValueChanged() {
         delegate?.safariFilterStateChanged(model.filterId, model.groupType, !model.isEnabled)
     }
-    
+
     @objc private final func tagButtonTapped(_ sender: SafariTagButton) {
         delegate?.tagTapped(sender.model.tagName)
     }

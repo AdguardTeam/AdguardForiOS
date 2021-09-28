@@ -25,14 +25,14 @@ import SharedAdGuardSDK
 struct WifiException: Equatable, Codable {
     // rule - ssid the wi-fi network in which the dns filtering should not work
     let rule: String
-    
+
     // state of rule
     let enabled: Bool
 }
 
 /** delegate protocol is used for notification about chnges in view model */
 protocol NetworkSettingsChangedDelegate {
-    
+
     // called on any change of model
     func settingsChanged()
 }
@@ -43,78 +43,78 @@ protocol NetworkSettingsChangedDelegate {
 protocol NetworkSettingsServiceProtocol: AnyObject {
     // wi-fi exception rules
     var exceptions: [WifiException] { get }
-    
+
     // array of active wi-fi exceptions
     var enabledExceptions: [WifiException] { get }
-    
+
     // DNS filtering is enabled when connected to Wi-Fi
     var filterWifiDataEnabled: Bool { get set }
-    
+
     // DNS filtering is enabled when connected to mobile network
     var filterMobileDataEnabled: Bool { get set }
-    
+
     // delegate for change notifications
     var delegate: NetworkSettingsChangedDelegate? { get set }
-    
+
     // ondemand rules based on network settings and used by the vpn manager
     var onDemandRules: [NEOnDemandRule] { get }
-    
+
     // adds an exception. Throws error if such ssid already exists in the exclusion list
     func add(exception: WifiException) throws
-    
+
     // deletes an exception
     func delete(exception: WifiException)
-    
+
     // changes name of exception. Throws error if error if newName already exists in the exclusion list
     func rename(oldName: String, newName: String) throws
-    
+
     // changes enabled state of exception with name
     func changeState(name: String, enabled: Bool)
-    
+
     // fetches current wi-fi name. Wi-fi name returns in completionHandler asyncronously in main thread
     // it returns nil on ios 15 due to ios bug https://developer.apple.com/forums/thread/670970
     func fetchCurrentWiFiName(_ completionHandler: @escaping (String?)->Void)
 }
 
 final class NetworkSettingsService: NetworkSettingsServiceProtocol {
-    
+
     var filterWifiDataEnabled: Bool {
         get { return resources.filterWifiDataEnabled }
         set { resources.filterWifiDataEnabled = newValue }
     }
-    
+
     var filterMobileDataEnabled: Bool {
         get { return resources.filterMobileDataEnabled }
         set { resources.filterMobileDataEnabled = newValue }
     }
-    
+
     var delegate: NetworkSettingsChangedDelegate?
-    
+
     var exceptions: [WifiException] = [] {
         didSet {
             saveExceptions()
         }
     }
-    
+
     var enabledExceptions: [WifiException] {
         get {
             return exceptions.filter { $0.enabled }
         }
     }
-    
+
     var onDemandRules: [NEOnDemandRule] {
         get {
             var onDemandRules = [NEOnDemandRule]()
-            
+
             let SSIDs = enabledExceptions.map{ $0.rule }
             if SSIDs.count > 0 {
                 let disconnectRule = NEOnDemandRuleDisconnect()
                 disconnectRule.ssidMatch = SSIDs
                 onDemandRules.append(disconnectRule)
             }
-            
+
             let disconnectRule = NEOnDemandRuleDisconnect()
-            
+
             switch (filterWifiDataEnabled, filterMobileDataEnabled) {
             case (false, false):
                 disconnectRule.interfaceTypeMatch = .any
@@ -128,28 +128,28 @@ final class NetworkSettingsService: NetworkSettingsServiceProtocol {
             default:
                 break
             }
-            
+
             let connectRule = NEOnDemandRuleConnect()
             connectRule.interfaceTypeMatch = .any
-            
+
             onDemandRules.append(connectRule)
             return onDemandRules
         }
     }
-    
+
     /* Variables */
-    
+
     private let filePath = "NetworkSettings"
-    
+
     /* Services */
     private let resources: AESharedResourcesProtocol
-    
+
     init(resources: AESharedResourcesProtocol) {
         self.resources = resources
-        
+
         exceptions = resources.wifiExceptions
     }
-    
+
     func add(exception: WifiException) throws {
         if !exceptions.contains(where: { $0.rule == exception.rule }){
             exceptions.append(exception)
@@ -158,31 +158,31 @@ final class NetworkSettingsService: NetworkSettingsServiceProtocol {
             throw UserRulesStorageError.ruleAlreadyExists(ruleString: exception.rule)
         }
     }
-    
+
     func delete(exception: WifiException) {
         if let index = exceptions.firstIndex(of: exception){
             exceptions.remove(at: index)
         }
     }
-    
+
     func rename(oldName: String, newName: String) throws {
         if exceptions.contains(where: { $0.rule == newName }) {
             throw UserRulesStorageError.ruleAlreadyExists(ruleString: newName)
         }
-        
+
         if let index = exceptions.firstIndex(where: { $0.rule == oldName }){
             let newException = WifiException(rule: newName, enabled: exceptions[index].enabled)
             exceptions[index] = newException
         }
     }
-    
+
     func changeState(name: String, enabled: Bool) {
         if let index = exceptions.firstIndex(where: { $0.rule == name }){
             let newException = WifiException(rule: name, enabled: enabled)
             exceptions[index] = newException
         }
     }
-    
+
     func fetchCurrentWiFiName(_ completionHandler: @escaping (String?) -> Void) {
         if #available(iOS 14.0, *) {
             NEHotspotNetwork.fetchCurrent { network in
@@ -206,12 +206,12 @@ final class NetworkSettingsService: NetworkSettingsServiceProtocol {
                 }
             }
         }
-        
+
         completionHandler(nil)
     }
-    
+
     // MARK: - Private methods
-    
+
     private func saveExceptions(){
         resources.wifiExceptions = exceptions
         delegate?.settingsChanged()
@@ -219,7 +219,7 @@ final class NetworkSettingsService: NetworkSettingsServiceProtocol {
 }
 
 fileprivate extension AESharedResourcesProtocol {
-    
+
     var wifiExceptionsEnabledKey: String { "AEDefaultsWifiExceptionsEnabled" }
     var filterMobileEnabledKey: String { "AEDefaultsFilterMobileEnabled" }
     var wifiExceptionsKey: String { "wifiExceptionsKey" }
@@ -234,7 +234,7 @@ fileprivate extension AESharedResourcesProtocol {
             }
         }
     }
-    
+
     var filterMobileDataEnabled: Bool {
         get {
             return sharedDefaults().object(forKey: filterMobileEnabledKey) as? Bool ?? true
@@ -245,7 +245,7 @@ fileprivate extension AESharedResourcesProtocol {
             }
         }
     }
-    
+
     // TODO: write migration
     // in v4.2 Wi-Fi exceptions were saved in the json file. We now store them in user defaults.
     var wifiExceptions: [WifiException] {
@@ -253,7 +253,7 @@ fileprivate extension AESharedResourcesProtocol {
             guard let decoded = sharedDefaults().object(forKey: wifiExceptionsKey) as? Data else {
                 return []
             }
-            
+
             let exceptions = try? JSONDecoder().decode([WifiException].self, from: decoded)
             return exceptions ?? []
         }

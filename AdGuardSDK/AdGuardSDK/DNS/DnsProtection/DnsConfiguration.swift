@@ -41,16 +41,16 @@ public enum TunnelMode: Int, CustomDebugStringConvertible {
 public enum DnsProxyBlockingMode: Int {
     /// Default blocking mode can be every mode bellow, it is specified in `AGDnsProxy.h`
     case defaultMode = 0
-    
+
     /// Respond with REFUSED response code
     case refused
-    
+
     /// Respond with NXDOMAIN response code
     case nxdomain
-    
+
     /// Respond with an address that is all-zeroes
     case unspecifiedAddress
-    
+
     /**
      Respond with an address that is all-zeroes, or
      a custom blocking address, if it is specified, or
@@ -58,13 +58,13 @@ public enum DnsProxyBlockingMode: Int {
      */
     case customAddress
 }
-    
+
 public protocol DnsConfigurationProtocol: ConfigurationProtocol {
     var blocklistIsEnabled: Bool { get set }
     var allowlistIsEnabled: Bool { get set }
     var dnsFilteringIsEnabled: Bool { get set }
     var dnsImplementation: DnsImplementation { get set }
-    
+
     // low level settings
     var lowLevelConfiguration: LowLevelDnsConfiguration { get set }
 }
@@ -78,7 +78,7 @@ public final class DnsConfiguration: DnsConfigurationProtocol {
     public var blocklistIsEnabled: Bool
     public var allowlistIsEnabled: Bool
     public var lowLevelConfiguration: LowLevelDnsConfiguration
-    
+
     public init(currentLanguage: String, proStatus: Bool, dnsFilteringIsEnabled: Bool, dnsImplementation: DnsImplementation, blocklistIsEnabled: Bool, allowlistIsEnabled: Bool, lowLevelConfiguration: LowLevelDnsConfiguration) {
         self.currentLanguage = currentLanguage
         self.proStatus = proStatus
@@ -104,7 +104,7 @@ public struct LowLevelDnsConfiguration {
     public var blockedTtl: Int // TTL of the record for the blocked domains (in seconds)
     public var blockIpv6: Bool // Block AAAA requests
     public var restartByReachability: Bool // Reinitialize PacketTunnelProvider when network changes
-    
+
     public init(tunnelMode: TunnelMode, fallbackServers: [String]? = nil, bootstrapServers: [String]? = nil, blockingMode: DnsProxyBlockingMode, blockingIp: String? = nil, blockedTtl: Int, blockIpv6: Bool, restartByReachability: Bool) {
         self.tunnelMode = tunnelMode
         self.fallbackServers = fallbackServers
@@ -118,7 +118,7 @@ public struct LowLevelDnsConfiguration {
 }
 
 extension DnsConfigurationProtocol {
-    
+
     //TODO: Need tests
     func updateConfig(with newConfig: DnsConfigurationProtocol) {
         self.currentLanguage = newConfig.currentLanguage

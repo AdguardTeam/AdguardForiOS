@@ -30,14 +30,14 @@ struct ExtendedRadioButtonCellModel {
     let radioButtonSelected: Bool
     let isArrowRightHidden: Bool
     let delegate: ExtendedRadioButtonCellDelegate?
-    
+
     init(cellTag: Int = 0,
          titleString: String = "",
          descriptionString: String = "",
          radioButtonSelected: Bool = false,
          isArrowRightHidden: Bool = false,
          delegate: ExtendedRadioButtonCellDelegate? = nil) {
-        
+
         self.cellTag = cellTag
         self.titleString = titleString
         self.descriptionString = descriptionString
@@ -49,35 +49,35 @@ struct ExtendedRadioButtonCellModel {
 
 /// Generic cell with title and description labels and radio button that shows selected state
 final class ExtendedRadioButtonCell: UITableViewCell, Reusable {
-    
+
     // MARK: - Public properties
-    
+
     var cellTag: Int?
-    
+
     var titleString: String = "" {
         didSet {
             titleLabel.text = titleString
         }
     }
-    
+
     var descriptionString: String = "" {
         didSet {
             descriptionLabel.text = descriptionString
         }
     }
-    
+
     var radioButtonSelected: Bool = false {
         didSet {
             radioButton.isSelected = radioButtonSelected
         }
     }
-    
+
     var isArrowRightHidden: Bool = false {
         didSet {
             arrowRight.isHidden = isArrowRightHidden
         }
     }
-    
+
     var model: ExtendedRadioButtonCellModel? {
         didSet {
             guard let model = model else { return }
@@ -89,9 +89,9 @@ final class ExtendedRadioButtonCell: UITableViewCell, Reusable {
             delegate = model.delegate
         }
     }
-    
+
     weak var delegate: ExtendedRadioButtonCellDelegate?
-    
+
     private lazy var titleLabel: ThemableLabel = {
         let label = ThemableLabel()
         label.greyText = true
@@ -101,7 +101,7 @@ final class ExtendedRadioButtonCell: UITableViewCell, Reusable {
         label.numberOfLines = 0
         return label
     }()
-    
+
     private lazy var descriptionLabel: ThemableLabel = {
         let label = ThemableLabel()
         label.greyText = false
@@ -111,13 +111,13 @@ final class ExtendedRadioButtonCell: UITableViewCell, Reusable {
         label.numberOfLines = 0
         return label
     }()
-    
+
     private var radioButton: RadioButton = {
         let button = RadioButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
+
     private var arrowRight: UIImageView = {
         let imageView = UIImageView()
         let image = UIImage(named: "arrow_right")
@@ -125,61 +125,61 @@ final class ExtendedRadioButtonCell: UITableViewCell, Reusable {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
+
     // MARK: - Init
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addConstraints()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         addConstraints()
     }
-    
+
     // MARK: - Public methods
-    
+
     func updateTheme(themeService: ThemeServiceProtocol) {
         themeService.setupTableCell(self)
         themeService.setupLabels([titleLabel, descriptionLabel])
     }
-    
+
     // MARK: - Private methods
-    
+
     private func addConstraints() {
         self.contentView.addSubview(titleLabel)
         self.contentView.addSubview(descriptionLabel)
         self.contentView.addSubview(radioButton)
         self.contentView.addSubview(arrowRight)
-            
+
         let widthHeightConst: CGFloat = isIpadTrait ? 32.0 : 24.0
-        
+
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16.0),
             titleLabel.trailingAnchor.constraint(equalTo: descriptionLabel.trailingAnchor),
-            
+
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 3.0),
             descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             descriptionLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -16.0),
-            
+
             radioButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
             radioButton.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 24.0),
             radioButton.trailingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: -20.0),
-            
+
             radioButton.widthAnchor.constraint(equalToConstant: widthHeightConst),
             radioButton.heightAnchor.constraint(equalToConstant: widthHeightConst),
-            
+
             arrowRight.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
             arrowRight.widthAnchor.constraint(equalToConstant: widthHeightConst),
             arrowRight.heightAnchor.constraint(equalToConstant: widthHeightConst),
             arrowRight.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -24.0),
             arrowRight.leadingAnchor.constraint(equalTo: self.descriptionLabel.trailingAnchor, constant: 24.0)
         ])
-        
+
         radioButton.addTarget(self, action: #selector(radioButtonTapped(_:)), for: .touchUpInside)
     }
-    
+
     @objc
     private final func radioButtonTapped(_ sender: RadioButton) {
         guard let tag = cellTag else { return }

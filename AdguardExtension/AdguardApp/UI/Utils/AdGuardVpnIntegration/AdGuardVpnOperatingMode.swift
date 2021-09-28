@@ -3,7 +3,7 @@ import Foundation
 enum AdGuardVpnOperatingMode: CaseIterable {
     case general
     case ipSec
-    
+
     /* ACNCidrRange objects represent IP address range with network mask  */
     var networkInterfaces: [ACNCidrRange] {
         switch self {
@@ -11,7 +11,7 @@ enum AdGuardVpnOperatingMode: CaseIterable {
         case .ipSec: return [ACNCidrRange(cidrString: "10.40.32.0/19")]
         }
     }
-    
+
     /* All available AdGuard VPN network interfaces */
     static var allAvailableInterfaces: [ACNCidrRange] { AdGuardVpnOperatingMode.allCases.flatMap { $0.networkInterfaces } }
 }
