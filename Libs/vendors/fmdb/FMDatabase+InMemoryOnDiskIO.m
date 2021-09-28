@@ -42,7 +42,7 @@ int loadOrSaveDb(sqlite3 *pInMemory, const char *zFilename, int isSave)
         }
         rc = sqlite3_errcode(pTo);
     }
-    
+
     /* Close the database connection opened on database file zFilename
      ** and return the result of this function. */
     (void)sqlite3_close(pFile);
@@ -61,14 +61,14 @@ int loadOrSaveDb(sqlite3 *pInMemory, const char *zFilename, int isSave)
         NSLog(@"Database is not an in-memory representation." );
         return NO;
     }
-    
+
     // and only if the database is open
     if ( self->_db == nil ) 
     {
         NSLog(@"Invalid database connection." );
         return NO;
     }
-    
+
     return ( SQLITE_OK == loadOrSaveDb( self->_db, [filePath fileSystemRepresentation], false ) );
 
 }
@@ -81,15 +81,15 @@ int loadOrSaveDb(sqlite3 *pInMemory, const char *zFilename, int isSave)
         NSLog(@"Database is not an in-memory representation." );
         return NO;
     }
-    
+
     // and only if the database is open
     if ( self->_db == nil ) 
     {
         NSLog(@"Invalid database connection." );
         return NO;
     }
-    
-    // save the in-memory representation    
+
+    // save the in-memory representation
     return ( SQLITE_OK == loadOrSaveDb( self->_db, [filePath fileSystemRepresentation], true ) );
 }
 
