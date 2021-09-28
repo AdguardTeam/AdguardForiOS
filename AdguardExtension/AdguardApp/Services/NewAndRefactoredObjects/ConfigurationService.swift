@@ -162,11 +162,10 @@ final class ConfigurationService: ConfigurationServiceProtocol {
     /// Checks Safari Content blockers state (enabled/disabled)
     func checkContentBlockerEnabled() {
         let allCB = safariProtection.allContentBlockersStates
-        let cbChanges = allCB != contentBlockerPreviousState
+        let cbChanges = allCB != contentBlockerEnabled
         let enabledCBCount = allCB.filter { $0.value }.count
         
         if enabledCBCount != allCB.count || cbChanges {
-            contentBlockerPreviousState = allCB
             contentBlockerEnabled = allCB
             Self.contentBlockersStateChanged()
         }

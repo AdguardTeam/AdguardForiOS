@@ -97,13 +97,12 @@ final class OnboardingContentView: UIView {
     
     private func applyConstraints(to view: UIView) {
         let constraint: NSLayoutConstraint
-        constraint = view is UITableView ? view.bottomAnchor.constraint(equalTo: self.bottomAnchor) : view.bottomAnchor.constraint(equalTo: self.bottomAnchor)
 
         NSLayoutConstraint.activate([
             view.topAnchor.constraint(equalTo: self.topAnchor),
             view.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             view.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            constraint
+            view.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
 }

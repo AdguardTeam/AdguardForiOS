@@ -48,8 +48,8 @@
 		2430CE1526F34D78005A05DA /* BackgroungFetchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2430CE1326F34D77005A05DA /* BackgroungFetchController.swift */; };
 		2430CE1726F360F6005A05DA /* ExtendedRadioButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2430CE1626F360F6005A05DA /* ExtendedRadioButtonCell.swift */; };
 		2430CE1826F360F6005A05DA /* ExtendedRadioButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2430CE1626F360F6005A05DA /* ExtendedRadioButtonCell.swift */; };
-		24356134270349D000182588 /* ContentSizingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356133270349D000182588 /* ContentSizingTableView.swift */; };
-		24356135270349D000182588 /* ContentSizingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356133270349D000182588 /* ContentSizingTableView.swift */; };
+		24356134270349D000182588 /* ContentSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356133270349D000182588 /* ContentSizedTableView.swift */; };
+		24356135270349D000182588 /* ContentSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24356133270349D000182588 /* ContentSizedTableView.swift */; };
 		2443394C2580C13600AB4F26 /* LowLevelSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */; };
 		2443394D2580C13600AB4F26 /* LowLevelSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */; };
 		244339712580D8AB00AB4F26 /* BlockingModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244339702580D8AB00AB4F26 /* BlockingModeController.swift */; };
@@ -2704,7 +2704,7 @@
 		242C7FEF26E6536B00A01B10 /* DnsUserRulesTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsUserRulesTableModel.swift; sourceTree = "<group>"; };
 		2430CE1326F34D77005A05DA /* BackgroungFetchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroungFetchController.swift; sourceTree = "<group>"; };
 		2430CE1626F360F6005A05DA /* ExtendedRadioButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedRadioButtonCell.swift; sourceTree = "<group>"; };
-		24356133270349D000182588 /* ContentSizingTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizingTableView.swift; sourceTree = "<group>"; };
+		24356133270349D000182588 /* ContentSizedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizedTableView.swift; sourceTree = "<group>"; };
 		2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowLevelSettingsController.swift; sourceTree = "<group>"; };
 		244339702580D8AB00AB4F26 /* BlockingModeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockingModeController.swift; sourceTree = "<group>"; };
 		244339A62580EA2600AB4F26 /* BlockedResponseTtlController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedResponseTtlController.swift; sourceTree = "<group>"; };
@@ -6754,7 +6754,7 @@
 			isa = PBXGroup;
 			children = (
 				7EF5C57126C26E18001851D6 /* EdgeInsetLabel.swift */,
-				24356133270349D000182588 /* ContentSizingTableView.swift */,
+				24356133270349D000182588 /* ContentSizedTableView.swift */,
 				24AD872C260A247B0034D402 /* RadioButton.swift */,
 				7E5FC200234F71F0008E383D /* ListOfRulesCells.swift */,
 				D0F9115B212DDCD3006DF0D3 /* StackElementView.swift */,
@@ -8451,7 +8451,7 @@
 				24D922922604B428002F368B /* AppDelegate+CheckPeriod.swift in Sources */,
 				D0B545C92435D669002F0AEC /* GetProController.swift in Sources */,
 				659886611CF74DE9003ECD1C /* FMStatementKeywordRecogniser.m in Sources */,
-				24356135270349D000182588 /* ContentSizingTableView.swift in Sources */,
+				24356135270349D000182588 /* ContentSizedTableView.swift in Sources */,
 				7E3556D725DBEB7500CB2A8D /* UIViewController+Present.swift in Sources */,
 				D0B545E82435D6A4002F0AEC /* ChartView.swift in Sources */,
 				D0A614EE26EBA18B00793922 /* BootstrapsHelper.swift in Sources */,
@@ -8887,7 +8887,7 @@
 				65EC9C901BB9824C00F53F3B /* FMDatabase.m in Sources */,
 				24F67F5826E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift in Sources */,
 				7E2D93FC26F4891D00534DC5 /* Constants+Sentry.swift in Sources */,
-				24356134270349D000182588 /* ContentSizingTableView.swift in Sources */,
+				24356134270349D000182588 /* ContentSizedTableView.swift in Sources */,
 				655A02251C6B7686000F00D7 /* ACIOStream.m in Sources */,
 				249606E2258B832100C747BA /* SocialSignInButton.swift in Sources */,
 				7EAA0D7A26CA8785007208E5 /* SafariFilterCell.swift in Sources */,

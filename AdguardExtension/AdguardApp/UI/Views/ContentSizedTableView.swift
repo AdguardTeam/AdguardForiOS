@@ -18,10 +18,11 @@
 
 import UIKit
 
+/// Delegate protocol for custom table view
 protocol ContentSizedTableViewDelegate: AnyObject {
     func contentSizeDidSet(contentSize: CGSize)
 }
-
+/// Custom table view class that return content size on did set
 class ContentSizedTableView: UITableView {
 
     weak var contentSizeDelegate: ContentSizedTableViewDelegate?
