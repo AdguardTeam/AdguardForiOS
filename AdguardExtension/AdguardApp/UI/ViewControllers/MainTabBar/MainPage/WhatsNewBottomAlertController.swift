@@ -41,7 +41,7 @@ final class WhatsNewBottomAlertController: BottomAlertController {
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     
-    //MARK: - ViewController lifecycle
+    // MARK: - ViewController lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()

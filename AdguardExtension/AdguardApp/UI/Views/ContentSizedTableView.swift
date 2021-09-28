@@ -22,9 +22,11 @@ import UIKit
 class ContentSizedTableView: UITableView {
 
     // MARK: - Outlets
+
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
 
     // MARK: - Private properties
+
     override var contentSize: CGSize {
         didSet {
             heightConstraint.constant = contentSize.height
