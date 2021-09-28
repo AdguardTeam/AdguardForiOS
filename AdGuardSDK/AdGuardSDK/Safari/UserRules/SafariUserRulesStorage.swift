@@ -19,7 +19,7 @@
 import OrderedCollections
 
 final public class SafariUserRulesStorage: UserRulesStorageProtocol {
-    
+
     public var rules: OrderedSet<UserRule> {
         get {
             if let savedRulesData = userDefaults.storage.data(forKey: type.key) {
@@ -38,15 +38,15 @@ final public class SafariUserRulesStorage: UserRulesStorageProtocol {
             }
         }
     }
-    
+
     private let userDefaults: UserDefaultsStorageProtocol
     private let type: UserRuleType
-    
+
     public init(userDefaults: UserDefaultsStorageProtocol, rulesType: UserRuleType) {
         self.userDefaults = userDefaults
         self.type = rulesType
     }
-    
+
     public init(userDefaults: UserDefaults, rulesType: UserRuleType) {
         self.userDefaults = UserDefaultsStorage(storage: userDefaults)
         self.type = rulesType

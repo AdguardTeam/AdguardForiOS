@@ -25,22 +25,22 @@ protocol SelectDnsProtocolControllerDelegate: AnyObject {
 
 /// Controller that represent dns protocol picker
 final class SelectDnsProtocolController: BottomAlertController {
-    
+
     // MARK: - IBOutlet
-    
+
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var tableView: UITableView!
-    
+
     // MARK: - Public properties
-    
+
     weak var delegate: SelectDnsProtocolControllerDelegate?
     var availableProtocols: [DnsAdGuardSDK.DnsProtocol] = []
     var selectedProtocol: DnsAdGuardSDK.DnsProtocol = .dns
-    
+
     // MARK: - Private properties
-    
+
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         updateTheme()
@@ -56,7 +56,7 @@ extension SelectDnsProtocolController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return availableProtocols.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ExtendedRadioButtonCell.getCell(forTableView: tableView)
         let prot = availableProtocols[indexPath.row]
@@ -77,11 +77,11 @@ extension SelectDnsProtocolController: UITableViewDelegate {
         delegate?.protocolSelected(dnsProtocol: selectedProtocol)
         dismiss(animated: true)
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
+
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }

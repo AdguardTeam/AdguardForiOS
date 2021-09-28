@@ -25,14 +25,14 @@ struct FilterDetailsCellModel {
 }
 
 final class FilterDetailsCell: UITableViewCell, Reusable {
-    
+
     var model: FilterDetailsCellModel! {
         didSet {
             titleLabel.text = model.title
             descriptionLabel.text = model.description
         }
     }
-    
+
     private lazy var titleLabel: ThemableLabel = {
         let label = ThemableLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -42,7 +42,7 @@ final class FilterDetailsCell: UITableViewCell, Reusable {
         label.textAlignment = .left
         return label
     }()
-    
+
     private lazy var descriptionLabel: ThemableLabel = {
         let label = ThemableLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -52,12 +52,12 @@ final class FilterDetailsCell: UITableViewCell, Reusable {
         label.textAlignment = .left
         return label
     }()
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupUI()
     }
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
@@ -68,16 +68,16 @@ final class FilterDetailsCell: UITableViewCell, Reusable {
         themeService.setupLabel(descriptionLabel)
         themeService.setupTableCell(self)
     }
-    
+
     private func setupUI() {
         addSubview(titleLabel)
         addSubview(descriptionLabel)
-        
+
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16.0),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
-            
+    
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2.0),
             descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
             descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),

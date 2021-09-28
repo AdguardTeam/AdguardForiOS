@@ -21,33 +21,33 @@ import UIKit
 
 protocol UserRulesRedirectControllerModelProtocol: AnyObject {
     var state: UserRulesRedirectController.State { get set }
-    
+
     var title: String { get }
     var description: String { get }
     var icon: UIImage? { get }
-    
+
     func processAction(_ onCbReloaded: @escaping (Error?) -> Void)
 }
 
 final class UserRulesRedirectControllerModel: UserRulesRedirectControllerModelProtocol {
-    
+
     var state: UserRulesRedirectController.State = .processing
-    
+
     var title: String { state.title }
     var description: String { state.getDescription(resources.invertedWhitelist) }
     var icon: UIImage? { action.getIcon(resources.invertedWhitelist) }
-    
+
     private let action: UserRulesRedirectAction
-    
+
     private let safariProtection: SafariProtectionProtocol
     private let resources: AESharedResourcesProtocol
-    
+
     init(action: UserRulesRedirectAction, safariProtection: SafariProtectionProtocol, resources: AESharedResourcesProtocol) {
         self.action = action
         self.safariProtection = safariProtection
         self.resources = resources
     }
-    
+
     func processAction(_ onCbReloaded: @escaping (Error?) -> Void) {
         switch action {
         case .disableSiteProtection(let domain):
@@ -82,7 +82,7 @@ fileprivate extension UserRulesRedirectController.State {
         case .done(let action): return action.title
         }
     }
-    
+
     func getDescription(_ allowlistIsInverted: Bool) -> String {
         switch self {
         case .processing: return String.localizedString("user_rules_processing_descr")
@@ -102,7 +102,7 @@ fileprivate extension UserRulesRedirectAction {
         case .removeAllBlocklistRules(let domain): return domain
         }
     }
-    
+
     func getIcon(_ allowlistIsInverted: Bool) -> UIImage? {
         switch self {
         case .disableSiteProtection(_):
@@ -121,7 +121,7 @@ fileprivate extension UserRulesRedirectAction {
         case .removeAllBlocklistRules(_): return UIImage(named: "kill_switch")
         }
     }
-    
+
     func getDescription(_ allowlistIsInverted: Bool) -> String {
         let color = UIColor.AdGuardColor.lightGreen1
         let format: String

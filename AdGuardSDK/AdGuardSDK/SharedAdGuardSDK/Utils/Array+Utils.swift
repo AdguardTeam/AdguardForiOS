@@ -30,7 +30,7 @@ public extension Array where Element: Equatable {
         }
         return true
     }
-    
+
     /// Returns true if `isOrderedBefore` returns true for all element pairs
     func isSorted(isOrderedBefore: (Element, Element) -> Bool) -> Bool {
         for i in 1..<self.count {

@@ -35,7 +35,7 @@
 }
 
 - (void) testUtilMethod {
-    
+
     /* Shortened at end */
     NSString *expanded1 = [ACNCidrRange expandIPv6String:@"2000::"];
     XCTAssertEqualObjects(@"2000:0:0:0:0:0:0:0", expanded1);
@@ -45,18 +45,18 @@
     /* Shortened in the middle */
     NSString *expanded3 = [ACNCidrRange expandIPv6String:@"2001:db8:a::1"];
     XCTAssertEqualObjects(@"2001:db8:a:0:0:0:0:1", expanded3);
-    
+
     /* Error! */
     NSString *expanded4 = nil;
     @try {
         expanded4 = [ACNCidrRange expandIPv6String: @"2001:db8::a::1"];
     } @catch (NSException *exception) {
-        
+
     } @finally {
-        
+
     }
     XCTAssertNil(expanded4);
-    
+
     /* Zero replaced by "::", has 8 ":"s but still valid */
     NSString *expanded5 = [ACNCidrRange expandIPv6String: @"1:2:3:4:5:6:7::"];
     XCTAssertEqualObjects(@"1:2:3:4:5:6:7:0", expanded5);
@@ -136,22 +136,22 @@
     ACNCidrRange *range = [[ACNCidrRange alloc] initWithCidrString:@"2000::/3"];
     NSMutableArray<ACNCidrRange*> *originalRanges = [NSMutableArray new];
     [originalRanges addObject: range];
-    
+
     ACNCidrRange *excludedRange1 = [[ACNCidrRange alloc] initWithCidrString:@"2600:1000::/28"];
     ACNCidrRange *excludedRange2 = [[ACNCidrRange alloc] initWithCidrString:@"2600:1010::/29"];
     NSArray<ACNCidrRange*> *excludedRanges = @[excludedRange1, excludedRange2];
-    
+
     [self testExcludingRangesOriginalRanges: originalRanges excludedRanges: excludedRanges];
 }
 
 - (void) testExcludingRangesOriginalRanges: (NSArray*)originalRanges excludedRanges: (NSArray*) excludedRanges {
     NSArray* resultingRanges = [ACNCidrRange excludeFrom:originalRanges excludedRanges:excludedRanges];
-    
+
     // Check that list is sorted
     NSArray *resultingRangesSorted = [resultingRanges sortedArrayUsingSelector:@selector(compare:)];
-    
+
     XCTAssertEqualObjects(resultingRanges, resultingRangesSorted);
-    
+
     // Check that list doesn't contain all excluded routes
     for (ACNCidrRange *resultingRange in resultingRanges) {
         for (ACNCidrRange *excludedRange in excludedRanges) {
@@ -163,13 +163,13 @@
 - (void) testExcludeIpv4 {
     ACNCidrRange *range = [[ACNCidrRange alloc] initWithCidrString:@"0.0.0.0/0"];
     NSArray *originalRanges = @[range];
-    
+
     // Always exclude multicast
     ACNCidrRange *excludedRange1 = [[ACNCidrRange alloc] initWithCidrString:@"224.0.0.0/3"];
     // Exclude test IP
     ACNCidrRange *excludedRange2 = [[ACNCidrRange alloc] initWithCidrString:@"1.2.3.4"];
     NSArray *excludedRanges = @[excludedRange1, excludedRange2];
-    
+
     [self testExcludingRangesOriginalRanges:originalRanges excludedRanges:excludedRanges];
 }
 
@@ -179,15 +179,15 @@
  * @return List of excluded subnets
  */
 - (NSArray<ACNCidrRange*> *) readExclusions:(NSString*) exclusions {
-    
+
     NSArray<NSString*> *lines = [exclusions componentsSeparatedByString:@"\n"];
-    
+
     // First calculating excluded subnets
     NSMutableArray<ACNCidrRange*> *excludedSubNets = [NSMutableArray new];
     for (NSString *line in lines) {
-        
+
         NSString *cidr = [NSString stringByTrim:line];
-        
+
         if (cidr.length && ![cidr hasPrefix:@"//"]) {
             @try {
                 ACNCidrRange *range = [[ACNCidrRange alloc] initWithCidrString: cidr];
@@ -218,21 +218,21 @@
     @"\n"
     @"// UK EE wi-fi calling (#582)\n"
     @"109.249.0.0/16";
-    
+
     NSArray *excludedSubNets = [self readExclusions:exclusions];
-    
+
     XCTAssertEqual(11, excludedSubNets.count);
-    
+
     NSArray *originalRanges = [ACNCidrRange excludeFrom:[[ACNCidrRange alloc] initWithCidrString:@"0.0.0.0/0"] excludedRange:[[ACNCidrRange alloc] initWithCidrString:@"224.0.0.0/3"]];
-    
+
     NSArray *includedSubNets = [ACNCidrRange excludeFrom:originalRanges excludedRanges:excludedSubNets];
-    
+
     // Same count as in old IpAddressUtils after converting ranges to cidr lists
     XCTAssertEqual(74, includedSubNets.count);
 }
 
 - (void) testExclusion {
-    
+
     NSArray *excludeIpv6cidrs = @[
                                   @"2001:ad00:ad00::/113",
                                   @"2001:ad00:ad00::8000/115",
@@ -362,37 +362,37 @@
                                   @"4000::/2",
                                   @"8000::/1",
                                   ];
-    
+
     ACNCidrRange *defaultRoute = [[ACNCidrRange alloc]initWithCidrString:@"::/0"];
     NSArray<ACNCidrRange*> * dnsRanges = @[
                                            [[ACNCidrRange alloc]initWithCidrString:@"2001:ad00:ad00::ad00"],
                                            [[ACNCidrRange alloc]initWithCidrString:@"2001:ad00:ad00::ad01"]
                                            ];
     NSArray<ACNCidrRange*> *excludedRanges = [ACNCidrRange excludeFrom:@[defaultRoute] excludedRanges:dnsRanges];
-    
+
     XCTAssertEqual(excludedRanges.count, excludeIpv6cidrs.count);
-    
+
     NSArray *resultArray = [excludeIpv6cidrs sortedArrayUsingSelector:@selector(compare:)];
-    
+
     NSMutableArray<NSString*> *excludedArray = [NSMutableArray new];
     for (ACNCidrRange* range in excludedRanges) {
         [excludedArray addObject:[range toString]];
     }
     [excludedArray sortUsingSelector:@selector(compare:)];
-    
+
     for (ACNCidrRange* range in excludedRanges) {
-        
+
         XCTAssertFalse([range contains:dnsRanges[0]]);
         XCTAssertFalse([range contains:dnsRanges[1]]);
     }
-    
+
     XCTAssertEqualObjects(resultArray, excludedArray);
 }
 
 - (void) testExclusion2 {
-    
+
     NSArray* excludeIpv4Cidrs = @[
-                                  
+                          
                                   @"0.0.0.1/32",
                                   @"0.0.0.2/31",
                                   @"0.0.0.4/30",
@@ -423,7 +423,7 @@
                                   @"8.0.0.0/5",
                                   @"16.0.0.0/4",
                                   @"32.0.0.0/3",
-                                  
+                          
                                   @"64.0.0.0/3",
                                   @"96.0.0.0/4",
                                   @"112.0.0.0/5",
@@ -456,7 +456,7 @@
                                   @"124.0.0.0/6",
                                   @"128.0.0.0/1",
                                   ];
-    
+
     ACNCidrRange *defaultRoute = [[ACNCidrRange alloc]initWithCidrString:@"0.0.0.0/0"];
     NSArray<ACNCidrRange*> * dnsRanges = @[
                                            [[ACNCidrRange alloc]initWithCidrString:@"121.121.121.121"],
@@ -466,25 +466,25 @@
                                            [[ACNCidrRange alloc]initWithCidrString:@"0.0.0.0/32"]
                                            ];
     NSArray<ACNCidrRange*> *excludedRanges = [ACNCidrRange excludeFrom:@[defaultRoute] excludedRanges:dnsRanges];
-    
+
     XCTAssertEqual(excludedRanges.count, excludeIpv4Cidrs.count);
-    
+
     NSArray *resultArray = [excludeIpv4Cidrs sortedArrayUsingSelector:@selector(compare:)];
-    
+
     NSMutableArray<NSString*> *excludedArray = [NSMutableArray new];
     for (ACNCidrRange* range in excludedRanges) {
         [excludedArray addObject:[range toString]];
     }
     [excludedArray sortUsingSelector:@selector(compare:)];
-    
+
     for (ACNCidrRange* range in excludedRanges) {
-        
+
         XCTAssertFalse([range contains:dnsRanges[0]]);
         XCTAssertFalse([range contains:dnsRanges[1]]);
         XCTAssertFalse([range contains:dnsRanges[2]]);
         XCTAssertFalse([range contains:dnsRanges[3]]);
     }
-    
+
     XCTAssertEqualObjects(resultArray, excludedArray);
 }
 

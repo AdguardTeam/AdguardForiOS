@@ -26,7 +26,7 @@ enum ContentBlockerCellState {
     case convertingFilters
     case updatingContentBlockers
     case overlimited(overlimitRulesCount: Int)
-    
+
     fileprivate var image: UIImage? {
         switch self {
         case .enabled: return UIImage(named: "logocheck")
@@ -35,7 +35,7 @@ enum ContentBlockerCellState {
         case .overlimited: return UIImage(named: "errorAttention")
         }
     }
-    
+
     fileprivate var description: String {
         switch self {
         case .enabled(let rulesCount, filterNames: _):
@@ -56,19 +56,19 @@ enum ContentBlockerCellState {
             return String(format: format, overLimitRulesCount)
         }
     }
-    
+
     fileprivate var filtersDescription: String? {
         switch self {
         case .enabled(rulesCount: _, filterNames: let filterNames):
             if filterNames.isEmpty { return nil }
-            
+    
             let filtersString = String.localizedString("content_blocker_filters")
             return filtersString + "\n" + filterNames.joined(separator: "\n")
         default:
             return nil
         }
     }
-    
+
     fileprivate var shouldRotateImage: Bool {
         switch self {
         case .updatingContentBlockers, .convertingFilters: return true
@@ -86,7 +86,7 @@ struct ContentBlockerTableViewCellModel {
     let name: String
     let description: String
     let filtersString: String?
-    
+
     /// Intializer for Content Blocker
     init(state: ContentBlockerCellState, cbType: ContentBlockerType) {
         self.image = state.image
@@ -95,7 +95,7 @@ struct ContentBlockerTableViewCellModel {
         self.description = state.description
         self.filtersString = state.filtersDescription
     }
-    
+
     /// Initializer for Advanced Protection
     init(state: ContentBlockerCellState, name: String) {
         self.image = state.image
@@ -104,7 +104,7 @@ struct ContentBlockerTableViewCellModel {
         self.description = state.description
         self.filtersString = nil
     }
-    
+
     init() {
         self.image = nil
         self.shouldRotateImage = false

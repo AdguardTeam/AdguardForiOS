@@ -21,11 +21,11 @@
 public protocol ActivityStatisticsProtocol: ResetableSyncProtocol {
     /// Adds the `record` obtained from DNS-libs in the Tunnel to the DB
     func process(record: ActivityStatisticsRecord)
-      
+  
     /**
      Returns list of `DomainsStatisticsRecord` objects for the specified `period`
      `DomainsStatisticsRecord` represents counters statistics for certain domain
-     
+ 
      This method will return records sorted by `requests` in descending order
      In case `requests` are equal will sort by `domain`
      */
@@ -44,11 +44,11 @@ public protocol ActivityStatisticsProtocol: ResetableSyncProtocol {
 final public class ActivityStatistics: ActivityStatisticsProtocol {
 
     let statisticsDb: Connection
-    
+
     public init(statisticsDbContainerUrl: URL) throws {
         // Create directory if doesn't exist
         try FileManager.default.createDirectory(at: statisticsDbContainerUrl, withIntermediateDirectories: true, attributes: [:])
-        
+
         let dbName = Constants.Statistics.StatisticsType.activity.dbFileName
         self.statisticsDb = try Connection(statisticsDbContainerUrl.appendingPathComponent(dbName).path)
         dateFormatter.dateFormat = Constants.Statistics.dbDateFormat
@@ -65,16 +65,16 @@ final public class ActivityStatistics: ActivityStatisticsProtocol {
             Logger.logError("(ActivityStatistics) - processRecord; Error adding record to DB; Error: \(error)")
         }
     }
-    
+
     /**
      Returns list of all records stored in DB for the specified `period`
-     
+ 
      This method will return records sorted by `timeStamp` in descending order
      In case `timeStamp`s are equal will sort by `domain`
      */
     func getRecords(for period: StatisticsPeriod) throws -> [ActivityStatisticsRecord] {
         Logger.logDebug("(ActivityStatistics) - getRecords for period=\(period.debugDescription)")
-        
+
         let interval = period.interval
         let query = ActivityStatisticsTable.table
             .where(interval.start...interval.end ~= ActivityStatisticsTable.timeStamp)
@@ -82,15 +82,15 @@ final public class ActivityStatistics: ActivityStatisticsProtocol {
         let records: [ActivityStatisticsRecord] = try statisticsDb.prepare(query).map {
             return ActivityStatisticsRecord(dbRecord: $0)
         }
-        
+
         Logger.logDebug("(ActivityStatistics) - getRecords; Return \(records.count) records for period=\(period.debugDescription)")
-        
+
         return records
     }
-    
+
     public func getDomains(for period: StatisticsPeriod) throws -> [DomainsStatisticsRecord] {
         Logger.logDebug("(ActivityStatistics) - getDomains for period=\(period.debugDescription)")
-        
+
         let interval = period.interval
         let query = ActivityStatisticsTable.table
             .select([ActivityStatisticsTable.domain,
@@ -101,16 +101,16 @@ final public class ActivityStatistics: ActivityStatisticsProtocol {
             .where(interval.start...interval.end ~= ActivityStatisticsTable.timeStamp)
             .group(ActivityStatisticsTable.domain)
             .order(ActivityStatisticsTable.requests.desc, ActivityStatisticsTable.domain)
-        
+
         let result = try statisticsDb.prepare(query.asSQL()).map { DomainsStatisticsRecord(dbRecord: $0) }
-        
+
         Logger.logDebug("(ActivityStatistics) - getDomains; Return \(result.count) domains for period=\(period.debugDescription)")
         return result
     }
-    
+
     public func getCounters(for period: StatisticsPeriod) throws -> CountersStatisticsRecord {
         Logger.logDebug("(ActivityStatistics) - getCounters for period=\(period.debugDescription)")
-        
+
         let interval = period.interval
         let query = ActivityStatisticsTable.table
             .select([ActivityStatisticsTable.requests.varSum,
@@ -119,9 +119,9 @@ final public class ActivityStatistics: ActivityStatisticsProtocol {
                      ActivityStatisticsTable.elapsedSumm.varSum])
             .where(interval.start...interval.end ~= ActivityStatisticsTable.timeStamp)
             .limit(1)
-        
+
         let records = try statisticsDb.prepare(query.asSQL()).map { CountersStatisticsRecord(dbRecord: $0) }
-        
+
         if records.count == 1 {
             Logger.logDebug("(ActivityStatistics) - getCounters; Return \(records.first!) for period=\(period.debugDescription)")
             return records.first!
@@ -130,16 +130,16 @@ final public class ActivityStatistics: ActivityStatisticsProtocol {
             return CountersStatisticsRecord.emptyRecord()
         }
     }
-    
+
     public func reset() throws {
         Logger.logInfo("(ActivityStatistics) - reset called")
-        
+
         let resetQuery = ActivityStatisticsTable.table.delete()
         try statisticsDb.run(resetQuery)
-        
+
         Logger.logInfo("(ActivityStatistics) - reset successfully finished")
     }
-    
+
     func add(record: ActivityStatisticsRecord) throws {
         let setters: [Setter] = [ActivityStatisticsTable.timeStamp <- record.timeStamp,
                                  ActivityStatisticsTable.domain <- record.domain,

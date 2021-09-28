@@ -19,43 +19,43 @@
 import UIKit
 
 class RateAppProblemController: BottomAlertController {
-    
+
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var problemIsDoneButton: UIButton!
     @IBOutlet weak var problemRemainsButton: UIButton!
-    
+
     // Services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupDescriptionTextView()
-        
+
         problemIsDoneButton.makeTitleTextCapitalized()
         problemIsDoneButton.applyStandardGreenStyle()
-        
+
         problemRemainsButton.makeTitleTextCapitalized()
         problemRemainsButton.applyStandardOpaqueStyle()
-        
+
         updateTheme()
     }
-    
+
     // MARK: - Actions
-    
+
     @IBAction func problemIsDoneTapped(_ sender: UIButton) {
         dismiss(animated: true)
     }
-    
+
     @IBAction func problemRemains(_ sender: UIButton) {
         dismiss(animated: true) {
             AppDelegate.shared.presentBugReportController(withType: .bugReport)
         }
     }
-    
+
     // MARK: - Private methods
-    
+
     private func setupDescriptionTextView() {
         let problemDescription = String.localizedString("rate_app_problem_description")
         descriptionTextView.attributedText = NSMutableAttributedString.fromHtml(problemDescription, fontSize: descriptionTextView.font!.pointSize, color: theme.blackTextColor, textAlignment: .center)

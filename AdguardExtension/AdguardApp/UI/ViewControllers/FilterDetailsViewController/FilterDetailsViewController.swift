@@ -25,48 +25,48 @@ protocol FilterDetailsViewControllerDelegate: NewCustomFilterDetailsControllerDe
 }
 
 final class FilterDetailsViewController: UIViewController {
-    
+
     // MARK: - UI Elements
-    
+
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var buttonsStackView: UIStackView!
     @IBOutlet weak var stackViewHeightConstraint: NSLayoutConstraint!
-    
+
     // MARK: - Public properties
-    
+
     weak var delegate: FilterDetailsViewControllerDelegate!
     var filterMeta: FilterDetailsProtocol!
-    
+
     // MARK: - Private properties
-    
+
     private var model: FilterDetailsViewModel!
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private var themeObserver: NotificationToken?
-    
+
     // MARK: - UIViewController lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         processBottomButtons()
         setupBackButton()
-        
+
         updateTheme()
         setupTableView()
         tableView.tableHeaderView = ExtendedTitleTableHeaderView(title: filterMeta.filterName, normalDescription: filterMeta.description ?? "")
-        
+
         themeObserver = NotificationCenter.default.observe(name: .themeChanged, object: nil, queue: .main) { [weak self] _ in
             self?.updateTheme()
         }
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.layoutTableHeaderView()
     }
-    
+
     // MARK: - Private methods
-    
+
     private func setupTableView() {
         model = FilterDetailsViewModel(filterMeta: filterMeta, themeService: themeService)
         model.delegate = self
@@ -74,12 +74,12 @@ final class FilterDetailsViewController: UIViewController {
         tableView.delegate = model
         tableView.dataSource = model
         tableView.separatorStyle = .none
-        
+
         SwitchTableViewCell.registerCell(forTableView: tableView)
         FilterDetailsCell.registerCell(forTableView: tableView)
         FilterDetailsTagsCell.registerCell(forTableView: tableView)
     }
-    
+
     private func processBottomButtons() {
         if filterMeta.editable {
             let title = String.localizedString("common_edit").capitalized
@@ -87,18 +87,18 @@ final class FilterDetailsViewController: UIViewController {
             button.applyStandardOpaqueStyle()
             button.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
             button.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
-            
+    
             buttonsStackView.addArrangedSubview(button)
             stackViewHeightConstraint.constant = 40.0
         }
-        
+
         if filterMeta.removable {
             let title = String.localizedString("common_delete").capitalized
             let button = button(withTitle: title)
             button.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.red)
             button.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
             button.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
-            
+    
             buttonsStackView.addArrangedSubview(button)
             if buttonsStackView.arrangedSubviews.isEmpty {
                 stackViewHeightConstraint.constant = 40.0
@@ -107,14 +107,14 @@ final class FilterDetailsViewController: UIViewController {
             }
         }
     }
-    
+
     private func button(withTitle title: String) -> UIButton {
         let button = UIButton()
         button.setTitle(title, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16.0, weight: .regular)
         return button
     }
-    
+
     @objc private final func editButtonTapped() {
         let storyboard = UIStoryboard(name: "Filters", bundle: nil)
         guard let controller = storyboard.instantiateViewController(withIdentifier: "NewCustomFilterDetailsController") as? NewCustomFilterDetailsController else {
@@ -130,7 +130,7 @@ final class FilterDetailsViewController: UIViewController {
         controller.delegate = self
         present(controller, animated: true, completion: nil)
     }
-    
+
     @objc private final func deleteButtonTapped() {
         do {
             try delegate.deleteFilter(filterId: filterMeta.filterId)
@@ -143,7 +143,7 @@ final class FilterDetailsViewController: UIViewController {
             showUnknownErrorAlert()
         }
     }
-    
+
     private func apply(newFilterMeta: FilterDetailsProtocol) {
         DispatchQueue.asyncSafeMain { [weak self] in
             self?.filterMeta = newFilterMeta
@@ -177,11 +177,11 @@ extension FilterDetailsViewController: SwitchTableViewCellDelegate {
 // MARK: - FilterDetailsViewController + NewCustomFilterDetailsControllerDelegate
 
 extension FilterDetailsViewController: NewCustomFilterDetailsControllerDelegate {
-    
+
     func addCustomFilter(_ meta: ExtendedCustomFilterMetaProtocol, _ onFilterAdded: @escaping (Error?) -> Void) {
         delegate.addCustomFilter(meta, onFilterAdded)
     }
-    
+
     func renameFilter(withId filterId: Int, to newName: String) throws -> FilterDetailsProtocol {
         let newFilterMeta = try delegate.renameFilter(withId: filterId, to: newName)
         apply(newFilterMeta: newFilterMeta)

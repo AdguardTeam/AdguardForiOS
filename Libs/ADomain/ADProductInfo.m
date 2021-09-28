@@ -44,23 +44,23 @@ static NSDictionary *persistentProductInfo;
 
 /// Returns Product Version
 - (NSString *)version{
-    
+
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        
+
         NSString *version = [[NSBundle bundleForClass:[ADProductInfo class]] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
         if (!version)
             version = [self buildNumber];
-        
+
         mVersion = version ? version : DEFAULT_PRODUCT_VERSION;
     });
-    
+
     return mVersion;
 }
 
 - (NSString *)versionWithBuildNumber {
     NSString *build = [self buildNumber];
-    
+
     if(build)
         return [NSString stringWithFormat:@"%@(%@)", [self version], build];
     else
@@ -69,10 +69,10 @@ static NSDictionary *persistentProductInfo;
 
 /// Returns Product Version With Build Number
 - (NSString *)buildVersion{
-    
+
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        
+
         NSString *version = [[NSBundle bundleForClass:[ADProductInfo class]] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
         NSString *build = [self buildNumber];
 #ifdef DEBUG
@@ -80,13 +80,13 @@ static NSDictionary *persistentProductInfo;
 #endif
         if (version && build)
             version = [NSString stringWithFormat:@"%@.%@", version, build];
-        
+
         else if (build)
             version = build;
-        
+
         _buildVersion = version ? version : DEFAULT_PRODUCT_VERSION;
     });
-    
+
     return _buildVersion;
 }
 
@@ -96,15 +96,15 @@ static NSDictionary *persistentProductInfo;
 
 /// Returns Localized Product Name
 - (NSString *)name{
-    
+
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        
+
         NSString *name = [[NSBundle bundleForClass:[ADProductInfo class]] objectForInfoDictionaryKey:@"CFBundleName"];
-        
+
         mName = name ? name : DEFAULT_PRODUCT_NAME;
     });
-    
+
     return mName;
 }
 
@@ -112,24 +112,24 @@ static NSDictionary *persistentProductInfo;
 - (NSString *)applicationID{
 
     [self prepareProductInfo];
-    
+
     return persistentProductInfo[INFO_KEY_APPID];
 }
 
 - (NSString *)userAgentString{
-    
+
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        
+
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || TARGET_OS_IOS
-        
+
         NSOperatingSystemVersion version = [[NSProcessInfo processInfo] operatingSystemVersion];
-        
+
         userAgentString = [NSString stringWithFormat:@"%@/%ld (%@; %@ %ld_%ld_%ld)",
                            DEFAULT_PRODUCT_NAME, (long)[ADProductInfo version], [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemName], (long)version.majorVersion, (long)version.minorVersion, (long)version.patchVersion];
-        
+
 #elif TARGET_OS_MAC
-        
+
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated"
         SInt32 major, minor, bugfix;
@@ -137,16 +137,16 @@ static NSDictionary *persistentProductInfo;
         Gestalt(gestaltSystemVersionMinor, &minor);
         Gestalt(gestaltSystemVersionBugFix, &bugfix);
 #pragma clang diagnostic pop
-        
+
         userAgentString = [NSString stringWithFormat:@"%@/%@ (Macintosh; Intel Mac OS X %d_%d_%d)",
                            DEFAULT_PRODUCT_NAME, [ADProductInfo version], major, minor, bugfix];
-        
+
 #endif
 
     });
-    
+
     return userAgentString;
-    
+
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -161,18 +161,18 @@ static NSDictionary *persistentProductInfo;
       @autoreleasepool {
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || TARGET_OS_IOS
-          
+  
           // Creating product info
           NSUUID *uuid = [[UIDevice currentDevice] identifierForVendor];
           persistentProductInfo =
           @{INFO_KEY_APPID : [uuid UUIDString]};
-          
+  
 #elif TARGET_OS_MAC
-          
+  
           // Creating product info
           persistentProductInfo =
           @{INFO_KEY_APPID : DEFAULT_PRODUCT_NAME};
-          
+  
 #endif
       }
     });

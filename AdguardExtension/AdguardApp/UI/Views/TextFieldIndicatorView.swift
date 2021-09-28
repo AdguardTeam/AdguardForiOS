@@ -19,19 +19,19 @@
 import UIKit
 
 class TextFieldIndicatorView: UIView {
-    
+
     enum TextFieldIndicatorViewState {
         case error, enabled, disabled
     }
-    
+
     private lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
-    
+
     var state: TextFieldIndicatorViewState = .disabled {
         didSet {
             backgroundColor = stateColor
         }
     }
-    
+
     private var stateColor: UIColor {
         switch state {
         case .error: return UIColor.AdGuardColor.red
@@ -39,7 +39,7 @@ class TextFieldIndicatorView: UIView {
         case .disabled: return theme.editLineColor
         }
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         backgroundColor = stateColor

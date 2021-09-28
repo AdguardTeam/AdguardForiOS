@@ -58,7 +58,7 @@ extension Rule {
         let matchingClosure:(RuleLabel, String) -> Bool = {ruleComponent, hostComponent in
             return ruleComponent.isMatching(label: hostComponent)
         }
-        
+
         #if swift(>=4.2)
         return zipped.allSatisfy(matchingClosure)
         #else
@@ -67,10 +67,10 @@ extension Rule {
         }
         return !zipped.contains(where: notMatchingClosure)
         #endif
-        
+
        // return matching
     }
-        
+
 
     /// ⚠️ Should be called only for host matching the rule
     func parse(hostLabels: [String]) -> ParsedHost {

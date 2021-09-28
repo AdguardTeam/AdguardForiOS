@@ -22,7 +22,7 @@
 @class ADBTableRow;
 
 @interface ADBTable : NSObject{
-    
+
     Class _objectClass;
     NSSet *_propertyNames;
     NSSet *_nsdatePropertyNames;
@@ -32,7 +32,7 @@
     NSString *_tableName;
     NSSet *_columnNames;
     NSDictionary *_columnTypes;
-    
+
     // Cached values for insert request
     NSString *_insertQueryString;
     NSArray *_insertQueryKeys;
@@ -42,7 +42,7 @@
     NSString *_updateQueryString;
     NSArray *_updateWhereKeys;
     NSArray *_updateValidFields;
-    
+
 }
 
 - (id)initWithRowClass:(Class)theClass db:(FMDatabase *)db;

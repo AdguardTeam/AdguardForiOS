@@ -25,7 +25,7 @@ struct DnsFilterCellModel {
     let isEnabled: Bool // Filter state
     let version: String? // Filter version. Filter content always changes by it's authors, so we store the version of filter to identify it
     let lastUpdateDate: Date? // The last time the filter was updated
-    
+
     init(filterId: Int, filterNameAttrString: NSAttributedString, isEnabled: Bool, version: String?, lastUpdateDate: Date?) {
         self.filterId = filterId
         self.filterNameAttrString = filterNameAttrString
@@ -33,7 +33,7 @@ struct DnsFilterCellModel {
         self.version = version
         self.lastUpdateDate = lastUpdateDate
     }
-    
+
     init() {
         self.filterId = 0
         self.filterNameAttrString = NSAttributedString(string: "")
@@ -49,17 +49,17 @@ protocol DnsFilterCellDelegate: AnyObject {
 
 /// Cell for displaying DnsFilter info
 final class DnsFilterCell: UITableViewCell, Reusable {
-    
+
     // MARK: - Public variables
-    
+
     var model = DnsFilterCellModel() {
         didSet { processModel() }
     }
-    
+
     weak var delegate: DnsFilterCellDelegate?
-    
+
     // MARK: - UI elements
-    
+
     private lazy var titleLabel: ThemableLabel = {
         let label = ThemableLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -70,9 +70,9 @@ final class DnsFilterCell: UITableViewCell, Reusable {
         label.attributedText = model.filterNameAttrString
         return label
     }()
-    
+
     private var descriptionLabels: [ThemableLabel] = []
-    
+
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -81,7 +81,7 @@ final class DnsFilterCell: UITableViewCell, Reusable {
         stackView.spacing = 2.0
         return stackView
     }()
-    
+
     private lazy var stateSwitch: UISwitch = {
         let stateSwitch = UISwitch()
         stateSwitch.translatesAutoresizingMaskIntoConstraints = false
@@ -89,50 +89,50 @@ final class DnsFilterCell: UITableViewCell, Reusable {
         stateSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
         return stateSwitch
     }()
-    
+
     /* UI elements constants */
     private var sideInset: CGFloat { isIpadTrait ? 24.0 : 16.0 }
     private var topBottomInset: CGFloat { isIpadTrait ? 16.0 : 12.0 }
     private let switchWidth: CGFloat = 50.0
-    
+
     // MARK: - Initialization
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         initialize()
     }
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initialize()
     }
-    
+
     private func initialize() {
         contentView.subviews.forEach { $0.removeFromSuperview() }
         contentView.addSubview(stateSwitch)
         contentView.addSubview(stackView)
-        
+
         NSLayoutConstraint.activate([
             stateSwitch.topAnchor.constraint(equalTo: contentView.topAnchor, constant: topBottomInset),
             stateSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -sideInset),
             stateSwitch.widthAnchor.constraint(equalToConstant: switchWidth),
-            
+    
             stackView.topAnchor.constraint(equalTo: stateSwitch.topAnchor),
             stackView.trailingAnchor.constraint(equalTo: stateSwitch.leadingAnchor, constant: -sideInset),
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: sideInset),
             stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -topBottomInset)
         ])
     }
-    
+
     private func processModel() {
         descriptionLabels = []
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        
+
         stateSwitch.isOn = model.isEnabled
-        
+
         titleLabel.attributedText = model.filterNameAttrString
         stackView.addArrangedSubview(titleLabel)
-        
+
         if let version = model.version {
             let format = String.localizedString("filter_version_format")
             let versionString = String(format: format, version)
@@ -140,7 +140,7 @@ final class DnsFilterCell: UITableViewCell, Reusable {
             stackView.addArrangedSubview(label)
             descriptionLabels.append(label)
         }
-        
+
         if let updateDate = model.lastUpdateDate, let dateString = updateDate.formatedStringWithHoursAndMinutes() {
             let format = String.localizedString("filter_date_format")
             let updateDateString = String(format: format, dateString)
@@ -149,7 +149,7 @@ final class DnsFilterCell: UITableViewCell, Reusable {
             descriptionLabels.append(label)
         }
     }
-    
+
     private func getDescriptionLabel(_ text: String) -> ThemableLabel {
         let label = ThemableLabel()
         label.lightGreyText = true
@@ -160,17 +160,17 @@ final class DnsFilterCell: UITableViewCell, Reusable {
         label.text = text
         return label
     }
-    
+
     // MARK: - Public methods
-    
+
     func updateTheme(_ themeService: ThemeServiceProtocol) {
         themeService.setupTableCell(self)
         themeService.setupLabel(titleLabel)
         themeService.setupLabels(descriptionLabels)
     }
-    
+
     // MARK: - Private methods
-    
+
     /// Switch action handler
     @objc private final func switchValueChanged() {
         delegate?.dnsFilterStateChanged(model.filterId, newState: !model.isEnabled)

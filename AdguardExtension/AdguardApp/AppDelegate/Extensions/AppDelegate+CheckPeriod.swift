@@ -24,7 +24,7 @@ extension AppDelegate {
             DDLogError("(AppDelegate) - setBackgroundFetchInterval; Background fetch period=\(interval) is to low")
             return
         }
-        
+
         UIApplication.shared.setMinimumBackgroundFetchInterval(interval)
         DDLogInfo("(AppDelegate) Set background fetch interval=\(interval)")
     }

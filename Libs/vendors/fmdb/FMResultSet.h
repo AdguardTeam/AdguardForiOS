@@ -26,7 +26,7 @@
 @interface FMResultSet : NSObject {
     FMDatabase          *_parentDB;
     FMStatement         *_statement;
-    
+
     NSString            *_query;
     NSMutableDictionary *_columnNameToIndexMap;
 }

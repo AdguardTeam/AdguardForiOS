@@ -19,7 +19,7 @@
 import XCTest
 
 class AASFilterSubscriptionParserTest: XCTestCase {
-    
+
     var networking: NetworkMock!
     var parser: AASFilterSubscriptionParser!
 
@@ -60,7 +60,7 @@ class AASFilterSubscriptionParserTest: XCTestCase {
                                     !#safari_cb_affinity(social)
                                     ||social.com^
                                     !#safari_cb_affinity
-                                    
+                            
                                     !#safari_cb_affinity(all)
                                     ||all.com^
                                     !#safari_cb_affinity
@@ -68,19 +68,19 @@ class AASFilterSubscriptionParserTest: XCTestCase {
                                     !#safari_cb_affinity(general, other)
                                     ||general_and_other.com^
                                     !#safari_cb_affinity
-                                    
+                            
                                     ||noaffinity2.com^
 
                                     """
-        
+
         do {
             let result = try parser.parse(from: URL(string: "test.com")!, networking: networking)
             XCTAssertNotNil(result)
-            
+    
             var allUsed = Affinity()
-            
+    
             for rule in (result.rules as! [FilterRule])  {
-                
+        
                 let affinity = rule.affinity
                 switch rule.text {
                 case "||general.com^":
@@ -101,19 +101,19 @@ class AASFilterSubscriptionParserTest: XCTestCase {
                 case "||social.com^":
                     XCTAssertTrue(affinity == .socialWidgetsAndAnnoyances)
                     allUsed.insert(.socialWidgetsAndAnnoyances)
-                    
+            
                 case "||all.com^":
                     XCTAssertTrue(affinity!.rawValue == 0)
-                    
+            
                 case "||general_and_other.com^":
                     XCTAssertTrue(affinity!.contains(.general))
                     XCTAssertTrue(affinity!.contains(.other))
-                    
+            
                 default:
                     XCTAssertNil(rule.affinity)
                 }
             }
-            
+    
             XCTAssertTrue(allUsed.contains(.general))
             XCTAssertTrue(allUsed.contains(.other))
             XCTAssertTrue(allUsed.contains(.security))

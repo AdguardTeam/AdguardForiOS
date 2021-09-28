@@ -42,30 +42,30 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
             return [Message.messageTypeKey: MessageType.error.rawValue]
         }
     }
-    
+
     // MARK: - Private methods
-    
+
     private func getInitData(_ url: String?) -> [String: Any] {
         let resources = AESharedResources()
         // We set it to be sure the user opened Extension
         resources.safariWebExtensionIsOn = true
-        
+
         let cbService = ContentBlockerService(appBundleId: Bundle.main.hostAppBundleId)
         let domain = URL(string: url ?? "")?.domain
-        
+
         // Selected theme
         let themeName = resources.themeMode.messageName
-        
+
         // Safari Content Blockers states
         let someContentBlockersEnabled = cbService.allContentBlockersStates.values.reduce(false, { $0 || $1 })
-        
+
         // User Pro status
         let isPro = Bundle.main.isPro ? true : resources.isProPurchased
-        
+
         // Check if there are blocklist rules associated with passed domain
         let blocklistManager = SafariUserRulesManagersProvider(userDefaults: resources.sharedDefaults()).blocklistRulesManager
         let hasUserRules = domain == nil ? false : blocklistManager.hasUserRules(for: domain!)
-        
+
         return [
             Message.appearanceTheme: themeName,
             Message.contentBlockersEnabled: someContentBlockersEnabled,
@@ -89,7 +89,7 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
     /// - Parameter fromBeginning: If true the file will be read from the beginning
     private func getAdvancedRules(_ fromBeginning: Bool) -> [String: Any?] {
         let advancedRulesFileUrl = SharedStorageUrls().advancedRulesFileUrl
-        
+
         // Create file reader object if doesn't exist
         if fileReader == nil {
             fileReader = ChunkFileReader(fileUrl: advancedRulesFileUrl, chunkSize: 2048)
@@ -101,7 +101,7 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
                 return [Message.advancedRulesKey: nil]
             }
         }
-        
+
         if let chunk = fileReader?.nextChunk() {
             return [Message.advancedRulesKey: chunk]
         } else {
@@ -110,10 +110,10 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
             return [Message.advancedRulesKey: nil]
         }
     }
-    
+
     private func isSafariProtectionEnabled(for domain: String?, resources: AESharedResources) -> Bool {
         guard let domain = domain else { return false }
-    
+
         let isAllowlistInverted = resources.invertedWhitelist
         let safariUserRulesStorage = SafariUserRulesStorage(
             userDefaults: resources.sharedDefaults(),
@@ -123,7 +123,7 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
         let isDomainInRules = enabledRules.contains(domain)
         return isAllowlistInverted ? isDomainInRules : !isDomainInRules
     }
-    
+
     private func constructReportLink(_ url: String) -> String {
         let url = "https://reports.adguard.com/new_issue.html"
         let params: [String: String] = [

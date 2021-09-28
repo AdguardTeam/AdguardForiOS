@@ -23,7 +23,7 @@
 #define ACIOStreamErrorException            @"ACIOStreamErrorException"
 
 enum{
-    
+
     ACIO_ERROR =  -1,
     ACIO_EOF
 };
@@ -58,7 +58,7 @@ enum{
  *  All work is performed through delegate, which conform ACIOStreamDelegate protocol
  */
 @interface ACIOStream : NSObject <ACIOUtilReadProtocol, ACIOUtilWriteProtocol>{
-    
+
     NSLock *_counterWrittenBytesLocker;
 }
 

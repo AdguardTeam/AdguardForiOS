@@ -20,75 +20,75 @@ import DnsAdGuardSDK
 
 /// Controller that represent all predefined and custom providers
 final class DnsProvidersController: UITableViewController {
-    
+
     fileprivate enum DnsProvidersSection: Int, CaseIterable {
         case providerSection = 0
         case addProviderSection
     }
-    
+
     // MARK: - public fields
     var openUrl: String?
-    
+
     // MARK: - services
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let dnsProvidersManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!
-    
+
     // View model
     private let model: DnsProvidersModel
-    
+
     // MARK: Private properties
     private var providerToShow: DnsProviderProtocol?
     private let sections: [DnsProvidersSection] = DnsProvidersSection.allCases
-    
+
     private let dnsDetailsSegueConst = "dnsDetailsSegue"
     private let NewDnsServerControllerIdentifier = "NewDnsServerController"
-    
+
     // MARK: - Init
-    
+
     required init?(coder: NSCoder) {
         model = DnsProvidersModel(dnsProvidersManager: dnsProvidersManager, vpnManager: vpnManager, resources: resources)
         super.init(coder: coder)
     }
-    
+
     // MARK: - ViewController life cycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         setupBackButton()
         updateTheme()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         guard let _ = openUrl else { return }
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
             self?.presentNewDnsServerController(controllerType: .add, nil)
             self?.openUrl = nil
         }
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.layoutTableHeaderView()
     }
-    
-    
+
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == dnsDetailsSegueConst,
               let controller = segue.destination as? DnsProviderDetailsController,
               let provider = providerToShow
         else { return }
-        
+
         controller.provider = provider
         controller.delegate = self
     }
-    
+
     // MARK: - table view methods
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section = sections[indexPath.section]
         switch section {
@@ -99,7 +99,7 @@ final class DnsProvidersController: UITableViewController {
             cell.model = cellModel
             cell.updateTheme(themeService: themeService)
             return cell
-            
+    
         case .addProviderSection :
             let cell = AddTableViewCell.getCell(forTableView: tableView)
             cell.addTitle = String.localizedString("add_custom_dns_server_title")
@@ -107,7 +107,7 @@ final class DnsProvidersController: UITableViewController {
             return cell
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let section = sections[section]
         switch section {
@@ -115,19 +115,19 @@ final class DnsProvidersController: UITableViewController {
         case .providerSection: return model.tableModels.count
         }
     }
-    
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         defer { tableView.deselectRow(at: indexPath, animated: true) }
         let section = sections[indexPath.section]
-        
+
         switch section {
         case .providerSection:
             let tableModel = model.tableModels[indexPath.row]
-            
+    
             if tableModel.provider.isDefault {
                 do {
                     try model.setProviderActive(provider: tableModel.provider)
@@ -137,23 +137,23 @@ final class DnsProvidersController: UITableViewController {
                 }
                 return
             }
-            
+    
             if tableModel.provider.isCustom {
                 presentNewDnsServerController(controllerType: .edit, tableModel)
             } else {
                 providerToShow = tableModel.provider.predefined
                 self.performSegue(withIdentifier: dnsDetailsSegueConst, sender: self)
             }
-            
+    
         case .addProviderSection: presentNewDnsServerController(controllerType: .add, nil)
         }
-        
+
     }
-        
+
     // MARK: - Private methods
     private func presentNewDnsServerController(controllerType: DnsServerControllerType, _ tableModel: DnsProvidersTableModel?) {
         guard let controller = storyboard?.instantiateViewController(withIdentifier: NewDnsServerControllerIdentifier) as? NewDnsServerController else { return }
-        
+
         switch controllerType {
         case .add:
             controller.dnsProviderManager = dnsProvidersManager
@@ -162,13 +162,13 @@ final class DnsProvidersController: UITableViewController {
             guard let provider = tableModel?.provider.custom else { return }
             controller.customDnsProvider = provider
         }
-        
+
         controller.dnsProviderManager = dnsProvidersManager
         controller.controllerType = controllerType
         controller.delegate = self
         present(controller, animated: true, completion: nil)
     }
-    
+
     private func setProviderAndReloadTable(provider: DnsProviderMetaProtocol) {
         do {
             try model.setProviderActive(provider: provider)
@@ -177,11 +177,11 @@ final class DnsProvidersController: UITableViewController {
             showUnknownErrorAlert() //TODO: Process DnsProvidersManager errors
         }
     }
-    
+
     private func setupTableView() {
         AddTableViewCell.registerCell(forTableView: tableView)
         ExtendedRadioButtonCell.registerCell(forTableView: tableView)
-        
+
         let titleHeader = ExtendedTitleTableHeaderView(title: model.headerTitle, normalDescription: model.headerDescription)
         tableView.tableHeaderView = titleHeader
         tableView.rowHeight = UITableView.automaticDimension

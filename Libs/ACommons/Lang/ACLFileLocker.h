@@ -26,7 +26,7 @@
     locking mechanism in interprocess communications. 
  */
 @interface ACLFileLocker  : NSObject{
-    
+
     int _fileDescriptor;
     BOOL _locked;
 }

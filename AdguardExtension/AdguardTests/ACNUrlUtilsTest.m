@@ -36,42 +36,42 @@
 }
 
 - (void) testHostsLine {
-    
+
     NSString* ip;
     NSString* domain;
-    
+
     BOOL result = [ACNUrlUtils checkHostsLine:@"127.0.0.1 example.com" ip:&ip domain:&domain];
-    
+
     XCTAssertEqualObjects(@"example.com", domain);
     XCTAssertEqualObjects(@"127.0.0.1", ip);
-    
+
     result = [ACNUrlUtils checkHostsLine:@"127.0.0.2      example1.com" ip:&ip domain:&domain];
-    
+
     XCTAssertEqualObjects(@"example1.com", domain);
     XCTAssertEqualObjects(@"127.0.0.2", ip);
-    
+
     result = [ACNUrlUtils checkHostsLine:@"     127.0.0.3   \t\t\t   example3.com\t\t\t" ip:&ip domain:&domain];
-    
+
     XCTAssertEqualObjects(@"example3.com", domain);
     XCTAssertEqualObjects(@"127.0.0.3", ip);
-    
+
     result = [ACNUrlUtils checkHostsLine:@"example3.com" ip:&ip domain:&domain];
     XCTAssertFalse(result);
-    
+
     result = [ACNUrlUtils checkHostsLine:@"   example3.com   " ip:&ip domain:&domain];
     XCTAssertFalse(result);
-    
+
     // valid ipv6 address and domain
-    
+
     result = [ACNUrlUtils checkHostsLine:@"::1 example4.com" ip:&ip domain:&domain];
     XCTAssertTrue(result);
     XCTAssertEqualObjects(@"example4.com", domain);
     XCTAssertEqualObjects(@"::1", ip);
-    
+
     // invalid ip
     result = [ACNUrlUtils checkHostsLine:@"127.0.0 example5.com" ip:&ip domain:&domain];
     XCTAssertFalse(result);
-    
+
     // invalid domain
     result = [ACNUrlUtils checkHostsLine:@"127.0.0.1 exam^ple.com" ip:&ip domain:&domain];
     XCTAssertFalse(result);

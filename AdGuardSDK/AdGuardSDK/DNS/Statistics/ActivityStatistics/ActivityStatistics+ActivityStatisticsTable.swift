@@ -23,7 +23,7 @@
 struct ActivityStatisticsTable {
     // Table name
     static let table = Table(Constants.Statistics.StatisticsType.activity.tableName)
-    
+
     // Columns names
     static let timeStamp = Expression<Date>("timeStamp")
     static let domain = Expression<String>("domain")
@@ -42,7 +42,7 @@ public struct ActivityStatisticsRecord: Equatable {
     let encrypted: Int
     let blocked: Int
     let elapsedSumm: Int
-    
+
     public static func == (lhs: Self, rhs: Self) -> Bool {
         // Dates created from DB object can differ a little bit, so we add 1 second for an error rate
         let dateDiff = lhs.timeStamp.timeIntervalSince1970 - rhs.timeStamp.timeIntervalSince1970
@@ -65,7 +65,7 @@ extension ActivityStatisticsRecord {
         self.blocked = dbRecord[ActivityStatisticsTable.blocked]
         self.elapsedSumm = dbRecord[ActivityStatisticsTable.elapsedSumm]
     }
-    
+
     init?(dbRecord: SQLite.Statement.Element) {
         guard let timeStampString = dbRecord[0] as? String,
               let timeStamp = dateFormatter.date(from: timeStampString),
@@ -77,7 +77,7 @@ extension ActivityStatisticsRecord {
         else {
             return nil
         }
-        
+
         self.timeStamp = timeStamp
         self.domain = domain
         self.requests = Int(requests)
@@ -124,7 +124,7 @@ public struct CountersStatisticsRecord: Equatable {
     public let blocked: Int
     public let averageElapsed: Int
     public let elapsedSumm: Int
-    
+
     init(dbRecord: SQLite.Statement.Element) {
         let requests = dbRecord[0] as? Int64 ?? 0
         let encrypted = dbRecord[1] as? Int64 ?? 0
@@ -132,24 +132,24 @@ public struct CountersStatisticsRecord: Equatable {
         let elapsedSumm = dbRecord[3] as? Int64 ?? 0
         self.init(requests: Int(requests), encrypted: Int(encrypted), blocked: Int(blocked), elapsedSumm: Int(elapsedSumm))
     }
-    
+
     public init(requests: Int, encrypted: Int, blocked: Int, elapsedSumm: Int) {
         self.requests = requests
         self.encrypted = encrypted
         self.blocked = blocked
         self.elapsedSumm = elapsedSumm
-        
+
         if requests == 0 {
             self.averageElapsed = 0
         } else {
             self.averageElapsed = Int(elapsedSumm / requests)
         }
     }
-    
+
     public static func emptyRecord()->CountersStatisticsRecord {
         return CountersStatisticsRecord(requests: 0, encrypted: 0, blocked: 0, elapsedSumm: 0)
     }
-    
+
     static func +(left: CountersStatisticsRecord, right: CountersStatisticsRecord) -> CountersStatisticsRecord {
         return CountersStatisticsRecord(
             requests: left.requests + right.requests,

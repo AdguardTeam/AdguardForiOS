@@ -19,9 +19,9 @@
 import Foundation
 
 class RoundrectView: UIView {
-    
+
     override func layoutSubviews() {
-        
+
         let corners: CACornerMask = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         layer.cornerRadius = 10.0
         layer.maskedCorners = corners
@@ -30,5 +30,5 @@ class RoundrectView: UIView {
         layer.shadowRadius = 3
         layer.shadowOpacity = 1
     }
-    
+
 }

@@ -19,7 +19,7 @@
 import Foundation
 
 class ACLLogFileManagerDefault: DDLogFileManagerDefault {
-    
+
     /**
      We must override isLogFile to use logs from extensions in main appplication
      */

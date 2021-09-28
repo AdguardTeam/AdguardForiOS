@@ -21,9 +21,9 @@ import SafariAdGuardSDK
 import DnsAdGuardSDK
 
 final class UserRulesTableController: UIViewController {
-    
+
     // MARK: - UI Elements
-    
+
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var buttonsStackView: UIStackView!
     @IBOutlet weak var deleteButton: UIButton!
@@ -33,25 +33,25 @@ final class UserRulesTableController: UIViewController {
     @IBOutlet weak var stackViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet var searchButton: UIBarButtonItem!
     @IBOutlet var cancelFromSearchButton: UIBarButtonItem!
-    
+
     // MARK: - Internal properties
-    
+
     var rulesType: UserRuleType = .blocklist
-    
+
     // MARK: - Private properties
-    
+
     private var editButton: UIBarButtonItem {
         return generateBarButtonItem()
     }
-    
+
     // MARK: - Private properties
-    
+
     /* Headers */
     private lazy var titleHeader: ExtendedTitleTableHeaderView = {
         ExtendedTitleTableHeaderView(title: model.title, htmlDescription: model.description)
     }()
     private let searchHeader = AGSearchView()
-    
+
     /* Services */
     private var themeObserver: NotificationToken?
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -60,9 +60,9 @@ final class UserRulesTableController: UIViewController {
     private let sharedResources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let fileShareHelper = FileShareHelper()
     private var model: UserRulesTableModelProtocol!
-    
+
     // MARK: - ViewController lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
@@ -73,33 +73,33 @@ final class UserRulesTableController: UIViewController {
         themeObserver = NotificationCenter.default.observe(name: .themeChanged, object: nil, queue: .main) { [weak self] _ in
             self?.updateTheme()
         }
-        
+
         setupToHideKeyboardOnTapOnView(ignoringViews: [])
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.layoutTableHeaderView()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         if let nav = navigationController as? MainNavigationController {
             nav.currentSwipeRecognizer?.delegate = self
         }
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+
         if let nav = navigationController as? MainNavigationController {
             nav.currentSwipeRecognizer?.delegate = nil
         }
     }
-    
+
     // MARK: - Actions
-    
+
     @IBAction func deleteButtonTapped(_ sender: UIButton) {
         guard let paths = tableView.indexPathsForSelectedRows, !paths.isEmpty else {
             return
@@ -108,7 +108,7 @@ final class UserRulesTableController: UIViewController {
         model.remove(rules: selectedRules, for: paths)
         goToNormalMode()
     }
-    
+
     @IBAction func enableButtonTapped(_ sender: UIButton) {
         guard let paths = tableView.indexPathsForSelectedRows, !paths.isEmpty else {
             return
@@ -117,7 +117,7 @@ final class UserRulesTableController: UIViewController {
         model.turn(rules: selectedRules, for: paths, on: true)
         goToNormalMode()
     }
-    
+
     @IBAction func disableButtonTapped(_ sender: UIButton) {
         guard let paths = tableView.indexPathsForSelectedRows, !paths.isEmpty else {
             return
@@ -126,21 +126,21 @@ final class UserRulesTableController: UIViewController {
         model.turn(rules: selectedRules, for: paths, on: false)
         goToNormalMode()
     }
-    
+
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
         goToNormalMode()
     }
-    
+
     @IBAction func searchButtonTapped(_ sender: UIBarButtonItem) {
         goToSearchMode()
     }
-    
+
     @IBAction func cancelFromSearchTapped(_ sender: UIBarButtonItem) {
         goToNormalMode()
     }
-    
+
     // MARK: - Private methods
-    
+
     private func setupTableView() {
         switch rulesType {
         case .blocklist:
@@ -155,7 +155,7 @@ final class UserRulesTableController: UIViewController {
             model = DnsUserRulesTableModel(type: .allowlist, dnsProtection: dnsProtection, resources: sharedResources, fileShareHelper: fileShareHelper)
         }
         model.delegate = self
-        
+
         tableView.backgroundColor = .clear
         tableView.allowsSelection = true
         tableView.allowsMultipleSelection = true
@@ -167,37 +167,37 @@ final class UserRulesTableController: UIViewController {
         tableView.sectionFooterHeight = 0.01
         tableView.estimatedRowHeight = 48.0
         tableView.rowHeight = UITableView.automaticDimension
-        
+
         AddTableViewCell.registerCell(forTableView: tableView)
         UserRuleTableViewCell.registerCell(forTableView: tableView)
     }
-    
+
     private final func presentAlert() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .deviceAlertStyle)
-        
+
         let selectAction = UIAlertAction(title: String.localizedString("common_select"), style: .default) { [weak self] _ in
             self?.select()
         }
         alert.addAction(selectAction)
-        
+
         let importAction = UIAlertAction(title: String.localizedString("import"), style: .default) { [weak self] _ in
             self?.importRules()
         }
         alert.addAction(importAction)
-        
+
         let exportAction = UIAlertAction(title: String.localizedString("export"), style: .default) { [weak self] _ in
             self?.exportRules()
         }
         alert.addAction(exportAction)
-        
+
         let cancelAction = UIAlertAction(title: String.localizedString("cancel_button_title"), style: .cancel) { _ in
             alert.dismiss(animated: true, completion: nil)
         }
         alert.addAction(cancelAction)
-        
+
         present(alert, animated: true, completion: nil)
     }
-    
+
     @available(iOS 14.0, *)
     private func createMenu() -> UIMenu {
         let selectAction = UIAction(title: String.localizedString("common_select"), image: UIImage(systemName: "checkmark.circle")) { [weak self] a in
@@ -210,15 +210,15 @@ final class UserRulesTableController: UIViewController {
         let exportAction = UIAction(title: String.localizedString("export"), image: UIImage(systemName: "square.and.arrow.up")) { [weak self] _ in
             self?.exportRules()
         }
-        
+
         let menu = UIMenu(children: [selectAction, importAction, exportAction])
         return menu
     }
-    
+
     private func select() {
         goToEditingMode()
     }
-    
+
     private func importRules() {
         model.importFile(for: self) { [weak self] error in
             if error != nil {
@@ -226,11 +226,11 @@ final class UserRulesTableController: UIViewController {
             }
         }
     }
-    
+
     private func exportRules() {
         model.exportFile(for: self)
     }
-    
+
     private func presentAddRuleController() {
         let storyboard = UIStoryboard(name: "UserFilter", bundle: nil)
         guard let controller = storyboard.instantiateViewController(withIdentifier: "AddRuleController") as? AddRuleController else { return }
@@ -244,11 +244,11 @@ final class UserRulesTableController: UIViewController {
         }
         present(controller, animated: true)
     }
-    
+
     private func presentDetailsController(rule: UserRule, indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "UserFilter", bundle: nil)
         guard let controller = storyboard.instantiateViewController(withIdentifier: "RuleDetailsController") as? RuleDetailsController else { return }
-        
+
         let type: RulesType
         switch rulesType {
         case .blocklist: type = .safariUserfilter
@@ -257,7 +257,7 @@ final class UserRulesTableController: UIViewController {
         case .dnsBlocklist: type = .systemBlacklist
         case .dnsAllowlist: type = .systemWhitelist
         }
-        
+
         let context = RuleDetailsController.Context(
             rule: rule,
             ruleIndexPath: indexPath,
@@ -267,7 +267,7 @@ final class UserRulesTableController: UIViewController {
         controller.context = context
         present(controller, animated: true)
     }
-    
+
     private func goToSearchMode() {
         model.isSearching = true
         navigationItem.rightBarButtonItems = model.isEditing ? [cancelFromSearchButton] : [editButton, cancelFromSearchButton]
@@ -276,7 +276,7 @@ final class UserRulesTableController: UIViewController {
         searchHeader.textField.borderState = .enabled
         tableView.reloadWithSelectedRows()
     }
-    
+
     private func goToEditingMode() {
         model.isEditing = true
         buttonsStackView.isHidden = false
@@ -288,14 +288,14 @@ final class UserRulesTableController: UIViewController {
         navigationItem.rightBarButtonItems = model.isSearching ? [cancelFromSearchButton] : [cancelFromSearchButton, searchButton]
         tableView.reloadWithSelectedRows()
     }
-    
+
     private func goToNormalMode() {
         model.isEditing = false
         model.isSearching = false
         searchHeader.textField.text = nil
         model.searchString = nil
         model.deselectAll()
-        
+
         UIView.animate(withDuration: 0.2) { [unowned self] in
             buttonsStackView.alpha = 0.0
             stackViewHeightConstraint.constant = 0.0
@@ -308,7 +308,7 @@ final class UserRulesTableController: UIViewController {
         tableView.tableHeaderView = titleHeader
         view.endEditing(true)
     }
-    
+
     private func model(for row: Int) -> UserRuleCellModel {
         if model.isEditing || model.isSearching {
             return model.rulesModels[row]
@@ -316,7 +316,7 @@ final class UserRulesTableController: UIViewController {
             return model.rulesModels[row - 1]
         }
     }
-    
+
     @objc
     private final func editButtonTapped(_ sender: UIBarButtonItem) {
         presentAlert()
@@ -326,10 +326,10 @@ final class UserRulesTableController: UIViewController {
     private final func editButtonTappedForSelection(_ sender: UIBarButtonItem) {
         select()
     }
-    
+
     private func generateBarButtonItem() -> UIBarButtonItem {
         let image = UIImage(named: "edit")
-        
+
         if model.isSearching {
             return UIBarButtonItem(image: image, style: .done, target: self, action: #selector(editButtonTappedForSelection(_:)))
         } else if #available(iOS 14.0, *) {
@@ -351,19 +351,19 @@ extension UserRulesTableController: UITableViewDataSource {
         view.config = IdentifiableViewConfig(model: model, delegate: self)
         return view
     }
-    
+
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return model.isEditing || model.isSearching ? model.rulesModels.count : model.rulesModels.count + 1
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 && !model.isEditing && !model.isSearching {
             let cell = AddTableViewCell.getCell(forTableView: tableView)
@@ -378,7 +378,7 @@ extension UserRulesTableController: UITableViewDataSource {
             return cell
         }
     }
-    
+
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         //indexPath.row == 0 - it is "Add new rule cell"
         return (model.isEditing || model.isSearching) ? true : indexPath.row > 0
@@ -396,7 +396,7 @@ extension UserRulesTableController: UITableViewDelegate {
         }
         return indexPath
     }
-    
+
     func tableView(_ tableView: UITableView, willDeselectRowAt indexPath: IndexPath) -> IndexPath? {
         if model.isEditing, let cell = tableView.cellForRow(at: indexPath) as? UserRuleTableViewCell {
             model.setRule(cell.model.rule, selected: false)
@@ -412,7 +412,7 @@ extension UserRulesTableController: UITableViewDelegate {
             tableView.deselectRow(at: indexPath, animated: true)
             return
         }
-        
+
         if !model.isEditing {
             let ruleModel = model(for: indexPath.row)
             let userRule = UserRule(ruleText: ruleModel.rule, isEnabled: ruleModel.isEnabled)
@@ -420,13 +420,13 @@ extension UserRulesTableController: UITableViewDelegate {
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }
-    
+
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let title = String.localizedString("delete_title").capitalized
         let deleteAction = UIContextualAction(style: .destructive, title: title) { [weak self] (_, _, success: (Bool) -> Void) in
             guard let self = self else { success(false); return }
             let selectedRule = self.model(for: indexPath.row).rule
-            
+    
             self.model.remove(rules: [selectedRule], for: [indexPath])
             success(true)
         }
@@ -442,15 +442,15 @@ extension UserRulesTableController: UserRulesTableModelDelegate {
     func rulesChanged() {
         tableView.reloadWithSelectedRows()
     }
-    
+
     func rulesChanged(at indexPaths: [IndexPath]) {
         tableView.reloadRows(at: indexPaths, with: .automatic)
     }
-    
+
     func rulesRemoved(at indexPaths: [IndexPath]) {
         tableView.deleteRows(at: indexPaths, with: .left)
     }
-    
+
     func ruleSuccessfullyAdded() {
         tableView.insertRows(at: [IndexPath(row: model.rulesModels.count, section: 0)], with: .automatic)
     }
@@ -502,7 +502,7 @@ fileprivate extension UITableView {
             reloadData()
             return
         }
-        
+
         reloadData()
         paths.forEach { selectRow(at: $0, animated: false, scrollPosition: .none) }
     }
@@ -511,7 +511,7 @@ fileprivate extension UITableView {
 // MARK: - UserRulesTableController + UIGestureRecognizerDelegate
 
 extension UserRulesTableController: UIGestureRecognizerDelegate {
-    
+
     /**
      This method is needed to avoid collisions between table view swipe gesture and navigation controller swipes
      */

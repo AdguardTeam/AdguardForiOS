@@ -19,10 +19,10 @@
 import Foundation
 
 extension Bundle {
-    
+
     /// do not foget to add "ProApplication" key to target info.plist file
     var isPro: Bool { infoDictionary?["ProApplication"] as? Bool ?? false }
-    
+
     /**
      Returns locale code with script code
      Example:
@@ -36,15 +36,15 @@ extension Bundle {
         }
         return Locale.current.languageCode ?? Locale.current.identifier
     }
-    
+
     var applicationName: String {
         return infoDictionary?["CFBundleName"] as? String ?? "AdGuard"
     }
-    
+
     var hostAppBundleId: String {
         Bundle.main.isPro ? "com.adguard.AdguardPro" : "com.adguard.AdguardExtension"
     }
-    
+
     /// We use different app schemes for pro and normal adguard
     /// This variable  is used to get an app scheme without filling plist files
     var appScheme: String { isPro ? "adguard-pro" : "adguard" }

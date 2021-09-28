@@ -22,15 +22,15 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
 
     private let resources = Services.shared.resources
     private let processor = Services.shared.processor
-    
+
     override init() {
         super.init()
         setupLogger()
     }
-    
+
     func beginRequest(with context: NSExtensionContext) {
         let item = context.inputItems[0] as! NSExtensionItem
-        
+
         let messageDict = item.userInfo?[SFExtensionMessageKey] as! [String: Any]
 
         guard let message = Message(message: messageDict) else {
@@ -38,14 +38,14 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
             context.completeRequest(returningItems: nil, completionHandler: nil)
             return
         }
-        
+
         DDLogInfo("Received message from JS: \(messageDict)")
         let result = processor.process(message: message)
         let response = NSExtensionItem()
         response.userInfo = [SFExtensionMessageKey: result]
         context.completeRequest(returningItems: [response], completionHandler: nil)
     }
-    
+
     // MARK: - Private methods
 
     /// Initializes `ACLLogger`

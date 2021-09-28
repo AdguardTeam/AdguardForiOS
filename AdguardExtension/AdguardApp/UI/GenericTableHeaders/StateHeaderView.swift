@@ -27,7 +27,7 @@ struct StateHeaderViewModel<ObjectIdType: Equatable>: IdentifiableObject {
 }
 
 final class StateHeaderView<ModelIdType: Equatable>: UIView, IdentifiableObjectProtocol {
-    
+
     var config: IdentifiableViewConfig<StateHeaderViewModel<ModelIdType>>! {
         didSet {
             iconImageView.image = config.model.iconImage
@@ -35,16 +35,16 @@ final class StateHeaderView<ModelIdType: Equatable>: UIView, IdentifiableObjectP
             stateSwitch.isOn = config.model.isEnabled
         }
     }
-    
+
     // MARK: - UI Elements
-    
+
     private lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-    
+
     private lazy var titleLabel: ThemableLabel = {
         let label = ThemableLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -54,7 +54,7 @@ final class StateHeaderView<ModelIdType: Equatable>: UIView, IdentifiableObjectP
         label.textAlignment = .left
         return label
     }()
-    
+
     private lazy var stateSwitch: UISwitch = {
         let stateSwitch = UISwitch()
         stateSwitch.translatesAutoresizingMaskIntoConstraints = false
@@ -62,49 +62,49 @@ final class StateHeaderView<ModelIdType: Equatable>: UIView, IdentifiableObjectP
         stateSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
         return stateSwitch
     }()
-    
+
     // MARK: - Services
-    
+
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
 
     // MARK: - Properties
     private var themeObserver: NotificationToken?
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupUI()
         setupTheme()
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
         setupTheme()
     }
-    
+
     /// Switch action handler
     @objc private final func switchValueChanged() {
         config.model.isEnabled = !config.model.isEnabled
         config.delegate?.modelChanged(config.model)
     }
-    
+
     // MARK: - Private methods
-    
+
     private func setupUI() {
         addSubview(iconImageView)
         addSubview(titleLabel)
         addSubview(stateSwitch)
-        
+
         NSLayoutConstraint.activate([
             iconImageView.widthAnchor.constraint(equalToConstant: 24.0),
             iconImageView.heightAnchor.constraint(equalToConstant: 24.0),
             iconImageView.topAnchor.constraint(equalTo: topAnchor, constant: 30.0),
             iconImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
             iconImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30.0),
-            
+    
             titleLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 16.0),
             titleLabel.centerYAnchor.constraint(equalTo: iconImageView.centerYAnchor),
-            
+    
             stateSwitch.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 16.0),
             stateSwitch.widthAnchor.constraint(equalToConstant: 50.0),
             stateSwitch.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
@@ -115,7 +115,7 @@ final class StateHeaderView<ModelIdType: Equatable>: UIView, IdentifiableObjectP
     private func setupTheme() {
         iconImageView.tintColor = UIColor.AdGuardColor.green
         updateTheme()
-        
+
         themeObserver = NotificationCenter.default.observe(name: .themeChanged, object: nil, queue: .main) { [weak self] _ in
             self?.updateTheme()
         }

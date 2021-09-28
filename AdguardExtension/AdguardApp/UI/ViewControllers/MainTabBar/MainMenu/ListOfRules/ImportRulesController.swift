@@ -23,13 +23,13 @@ protocol ImportRulesControllerDelegate {
 }
 
 class ImportRulesController : UIViewController {
-    
+
     var delegate : ImportRulesControllerDelegate?
     @IBOutlet weak var urlField: UITextField!
     @IBOutlet weak var contentView: RoundrectView!
-    
+
     @IBOutlet weak var keyboardHeightLayoutConstraint: NSLayoutConstraint!
-    
+
     // MARK: - View Controller life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,11 +39,11 @@ class ImportRulesController : UIViewController {
             UIResponder.keyboardWillChangeFrameNotification,
                                                object: nil)
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     @objc func keyboardNotification(notification: NSNotification) {
         if let userInfo = notification.userInfo {
             let endFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
@@ -64,9 +64,9 @@ class ImportRulesController : UIViewController {
                            completion: nil)
         }
     }
-    
+
     @IBAction func checkAction(_ sender: Any) {
-        
+
         delegate?.loadRules(url: urlField.text!, completion: { [weak self](success) in
             if success {
                 self?.dismiss(animated: true, completion: nil)

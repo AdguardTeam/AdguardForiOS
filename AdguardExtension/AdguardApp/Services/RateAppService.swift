@@ -24,17 +24,17 @@ import StoreKit
 }
 
 class RateAppService: RateAppServiceProtocol {
-    
+
     private let resources: AESharedResourcesProtocol
     private let configuration: ConfigurationServiceProtocol
-    
+
     init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol) {
         self.resources = resources
         self.configuration = configuration
-        
+
         resources.appEntryCount += 1
     }
-    
+
     var shouldShowRateAppDialog: Bool {
         resources.appEntryCount >= 3 && !resources.rateAppShown && configuration.allContentBlockersEnabled
     }

@@ -22,18 +22,18 @@ import DnsAdGuardSDK
 
 /// Singleton to quikcly get different services objects and remove initialization logic from view controllers
 final class ServicesInitializer {
-    
+
     static let shared = try! ServicesInitializer()
-    
+
     let safariProtection: SafariProtectionProtocol
     let resources: AESharedResourcesProtocol
     let themeService: ThemeServiceProtocol
     let configuration: ConfigurationServiceProtocol
-    
+
     init() throws {
         self.resources = AESharedResources()
         Self.setupLogger(resources)
-        
+
         // Registering standart Defaults
         let appPath = Bundle.main.bundlePath as NSString
         let fullPath = appPath.appendingPathComponent("../../") as String
@@ -48,14 +48,14 @@ final class ServicesInitializer {
             DDLogError("(ServicesInitializer) - default.plist was not loaded.")
             throw CommonError.missingFile(filename: "default.plist")
         }
-    
+
         let networkService = ACNNetworking()
         let productInfo = ADProductInfo()
         let purchaseService = PurchaseService(network: networkService, resources: resources, productInfo: productInfo)
         let sharedUrls = SharedStorageUrls()
         let preloadedFilesManager = PreloadedFilesManager(sharedStorageUrls: sharedUrls, bundle: bundle)
         try preloadedFilesManager.processPreloadedFiles()
-        
+
         /* Initializing SDK */
         let safariProtectionConfiguration = SafariConfiguration(
             bundle: bundle,
@@ -63,7 +63,7 @@ final class ServicesInitializer {
             isProPurchased: purchaseService.isProPurchased
         )
         let defaultConfiguration = SafariConfiguration.defaultConfiguration()
-        
+
         self.safariProtection = try SafariProtection(
             configuration: safariProtectionConfiguration,
             defaultConfiguration: defaultConfiguration,
@@ -73,16 +73,16 @@ final class ServicesInitializer {
             userDefaults: resources.sharedDefaults()
         )
         /* End of initializing SDK */
-        
+
         self.configuration = ConfigurationService(
             purchaseService: purchaseService,
             resources: resources,
             safariProtection: safariProtection
         )
-        
+
         self.themeService = ThemeService(configuration)
     }
-    
+
     private static func setupLogger(_ resources: AESharedResourcesProtocol) {
         // Init Logger
         ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())

@@ -19,24 +19,24 @@
 import Foundation
 
 final class SendFeedbackRequest: RequestProtocol {
-    
+
     private let feedBack: FeedBackProtocol
-    
+
     init(_ feedBack: FeedBackProtocol) {
         self.feedBack = feedBack
     }
-    
+
     var urlRequest: URLRequest? {
         let domain = "https://mobile.adtidy.org/"
         let command = "api/1.0/feedback.html"
         let key = "key=4DDBE80A3DA94D819A00523252FB6380"
         let request = domain + command + "?" + key
-        
+
         if let url = URL(string: request) {
             var request = URLRequest(url: url)
             request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
             request.httpMethod = "POST"
-            
+    
             let parameters: [String: Any] = [
                 "applicationId" : feedBack.applicationId ?? "",
                 "version" : feedBack.version ?? "",
@@ -53,5 +53,5 @@ final class SendFeedbackRequest: RequestProtocol {
         }
         return nil
     }
-    
+
 }

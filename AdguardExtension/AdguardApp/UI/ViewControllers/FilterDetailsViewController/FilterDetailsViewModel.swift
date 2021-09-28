@@ -19,31 +19,31 @@
 import SafariAdGuardSDK
 
 final class FilterDetailsViewModel: NSObject {
-    
+
     weak var delegate: SwitchTableViewCellDelegate?
-    
+
     fileprivate enum Section {
         case state
         case meta
         case tags
     }
-    
+
     private let sections: [Section]
     private let metaRows: [FilterDetailsCellModel]
     private let tagModels: [SafariTagButtonModel]
-    
+
     private let filterMeta: FilterDetailsProtocol
     private let themeService: ThemeServiceProtocol
-    
+
     init(filterMeta: FilterDetailsProtocol, themeService: ThemeServiceProtocol) {
         self.filterMeta = filterMeta
         self.themeService = themeService
-        
+
         var sections: [Section] = []
         var metaRows: [FilterDetailsCellModel] = []
         self.tagModels = filterMeta.tags.map { SafariTagButtonModel(tag: $0, isSelected: true) }
         sections.append(.state)
-        
+
         if let version = filterMeta.version {
             let model = FilterDetailsCellModel(
                 title: String.localizedString("detailed_filter_info_version_subtitle"),
@@ -52,7 +52,7 @@ final class FilterDetailsViewModel: NSObject {
             )
             metaRows.append(model)
         }
-        
+
         if let updated = filterMeta.lastUpdateDate?.formatedString() {
             let model = FilterDetailsCellModel(
                 title: String.localizedString("detailed_filter_info_updated_subtitle"),
@@ -61,14 +61,14 @@ final class FilterDetailsViewModel: NSObject {
             )
             metaRows.append(model)
         }
-        
+
         let model = FilterDetailsCellModel(
             title: String.localizedString("detailed_filter_info_rules_count_subtitle"),
             description: String(filterMeta.rulesCount),
             isLink: false
         )
         metaRows.append(model)
-        
+
         if let website = filterMeta.homepage {
             let model = FilterDetailsCellModel(
                 title: String.localizedString("detailed_filter_info_website_subtitle"),
@@ -77,7 +77,7 @@ final class FilterDetailsViewModel: NSObject {
             )
             metaRows.append(model)
         }
-        
+
         if let subscriptionUrl = filterMeta.filterDownloadPage {
             let model = FilterDetailsCellModel(
                 title: String.localizedString("detailed_filter_info_subscription_subtitle"),
@@ -86,15 +86,15 @@ final class FilterDetailsViewModel: NSObject {
             )
             metaRows.append(model)
         }
-        
+
         if !metaRows.isEmpty {
             sections.append(.meta)
         }
-        
+
         if !tagModels.isEmpty {
             sections.append(.tags)
         }
-        
+
         self.sections = sections
         self.metaRows = metaRows
     }
@@ -126,7 +126,7 @@ extension FilterDetailsViewModel: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let sct = sections[section]
         switch sct {
@@ -135,7 +135,7 @@ extension FilterDetailsViewModel: UITableViewDataSource {
         case .tags: return 1
         }
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let sct = sections[indexPath.section]
         switch sct {
@@ -160,19 +160,19 @@ extension FilterDetailsViewModel: UITableViewDataSource {
             return cell
         }
     }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.01
     }
-    
+
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
     }
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return UIView()
     }
-    
+
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }

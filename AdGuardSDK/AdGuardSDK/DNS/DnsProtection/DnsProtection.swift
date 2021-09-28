@@ -25,12 +25,12 @@ public typealias DnsProtectionProtocol = DnsProtectionConfigurationProtocol
                                 & ResetableSyncProtocol
 
 public final class DnsProtection: DnsProtectionProtocol {
-    
+
     // Serial queue to avoid races in services
     let workingQueue = DispatchQueue(label: "AdGuardSDK.DnsProtection.workingQueue")
     // Queue to call completion handlers
     let completionQueue = DispatchQueue.main
-    
+
     /* Services */
     var configuration: DnsConfigurationProtocol
     let defaultConfiguration: DnsConfigurationProtocol
@@ -38,7 +38,7 @@ public final class DnsProtection: DnsProtectionProtocol {
     let dnsUserRulesManagerProvider: DnsUserRulesManagersProviderProtocol
     let dnsFiltersManager: DnsFiltersManagerProtocol
     let filterFilesStorage: FilterFilesStorageProtocol
-    
+
     public init(
         configuration: DnsConfigurationProtocol,
         defaultConfiguration: DnsConfigurationProtocol,
@@ -47,13 +47,13 @@ public final class DnsProtection: DnsProtectionProtocol {
         let services = try DnsProtectionServiceStorage(configuration: configuration, userDefaults: userDefaults, filterFilesDirectoryUrl: filterFilesDirectoryUrl)
         self.configuration = configuration
         self.defaultConfiguration = defaultConfiguration
-        
+
         self.dnsProvidersManager = services.dnsProvidersManager
         self.dnsUserRulesManagerProvider = services.dnsUserRulesManager
         self.dnsFiltersManager = services.dnsFiltersManager
         self.filterFilesStorage = services.filterFilesStorage
     }
-    
+
     // Initializer for tests
     init(configuration: DnsConfigurationProtocol,
          defaultConfiguration: DnsConfigurationProtocol,
@@ -61,7 +61,7 @@ public final class DnsProtection: DnsProtectionProtocol {
          dnsUserRulesManagerProvider: DnsUserRulesManagersProviderProtocol,
          dnsFiltersManager: DnsFiltersManagerProtocol,
          filterFilesStorage: FilterFilesStorageProtocol) {
-        
+
         self.configuration = configuration
         self.defaultConfiguration = defaultConfiguration
         self.dnsProvidersManager = dnsProvidersManager
@@ -69,7 +69,7 @@ public final class DnsProtection: DnsProtectionProtocol {
         self.dnsFiltersManager = dnsFiltersManager
         self.filterFilesStorage = filterFilesStorage
     }
-    
+
     public func reset() throws {
         try workingQueue.sync {
             configuration.updateConfig(with: defaultConfiguration)

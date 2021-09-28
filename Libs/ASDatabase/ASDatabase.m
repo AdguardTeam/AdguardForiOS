@@ -40,7 +40,7 @@
 static const void * const kDatabaseQueueSpecificKey = &kDatabaseQueueSpecificKey;
 
 static void isolateQueueReleaseFunc(void *dQueue){
-    
+
     if (dQueue) {
         CFRelease(dQueue);
     }
@@ -61,7 +61,7 @@ static void isolateQueueReleaseFunc(void *dQueue){
 /////////////////////////////////////////////////////////////////////
 
 - (void)dealloc{
-    
+
     [queue close];
 }
 
@@ -74,66 +74,66 @@ static void isolateQueueReleaseFunc(void *dQueue){
     if (!dbURL) {
         return;
     }
-    
+
     @synchronized (self) {
-        
+
         if (self.dbURL) {
             return;
         }
-        
+
         _dbURL = dbURL;
-        
+
         self.error = nil;
-        
+
         __block NSString *defaultDBVersion;
 
         // Open default DB
-        
+
         NSString *defaultDbPath = [[[dbURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:ASD_DEFAULT_DB_NAME] path];
-        
-        
+    
+
         NSURL *defaultDBMarkerFile = [[dbURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:DB_DEFAULTDB_MARKER_FILE];
-        
+
         NSString *marker = [NSString stringWithContentsOfURL:defaultDBMarkerFile encoding:NSUTF8StringEncoding error:nil];
-        
+
         if (! [marker isEqualToString: buildVersion]) {
 
             BOOL result = NO;
-            
+    
             if (upgradeDefaultDb) {
-                
+        
                 // in this case we must update default DB to actual version
-                
+        
                 // unzip default DB into working folder
                 @autoreleasepool {
-                    
+            
                     NSString *zippedDefaultDbPath = [[[NSBundle bundleForClass:[self class]] resourcePath]
                                                      stringByAppendingPathComponent:ASD_DEFAULT_DB_NAME @".gz"];
-                    
+            
                     NSData *dbData;
                     @autoreleasepool {
                         NSData *zippedDbData = [NSData dataWithContentsOfFile:zippedDefaultDbPath];
                         if (zippedDbData.length) {
-                            
+                    
                             dbData = [zippedDbData gunzippedData];
                         }
                     }
                     if (dbData.length) {
-                        
+                
                         result = [dbData writeToFile:defaultDbPath atomically:YES];
                     }
-                    
-                    
+            
+            
                     if (result) {
                         // save marker as current version+build
                         NSURL *defaultDBMarkerFile = [[dbURL URLByDeletingLastPathComponent] URLByAppendingPathComponent:DB_DEFAULTDB_MARKER_FILE];
                         result = [buildVersion writeToURL:defaultDBMarkerFile atomically:YES encoding:NSUTF8StringEncoding error:nil];
                     }
-                    
+            
                 }
             }
             else {
-                
+        
                 if (marker) {
                     // we found any marker, it means that default DB exists in shared folder
                     result = YES;
@@ -144,30 +144,30 @@ static void isolateQueueReleaseFunc(void *dQueue){
                                              userInfo:@{NSLocalizedDescriptionKey : @"Error init default DB."}];
                 // todo:
 //                DDLogErrsor(@"Error init default DB.");
-                
+        
                 return;
             }
-            
+    
         }
-        
+
         defaultDbQueue = [FMDatabaseQueue databaseQueueWithPath:defaultDbPath flags:(SQLITE_OPEN_READONLY | SQLITE_OPEN_SHAREDCACHE)];
         if (defaultDbQueue){
-            
+    
             __typeof__(self) __weak  wSelf = self;
-            
+    
             [defaultDbQueue inDatabase:^(FMDatabase *db) {
-                
+        
                 __typeof__(self) sSelf = wSelf;
-                
+        
                 // check current version of production DB
                 FMResultSet *result = [db executeQuery:@"select schema_version from version;"];
                 if ([result next]){
-                    
+            
                     defaultDBVersion = [result stringForColumnIndex:0];
                     [result close];
                 }
                 else{
-                    
+            
                     sSelf.error = [db lastError];
                     //todo:
 //                    DDLogError(@"Error selecting scheme_version from default DB: %@", [[db lastError] localizedDescription]);
@@ -175,62 +175,62 @@ static void isolateQueueReleaseFunc(void *dQueue){
             }];
         }
         else{
-            
+    
             // Clinical case.
             [NSException raise:NSInternalInconsistencyException format:@"Can't open default DB."];
         }
-        
+
         if (self.error) {
-            
+    
             [defaultDbQueue close];
             return;
         }
-        
+
         // check production DB
         NSURL *productionDBUrl = _dbURL;
 
         if ([productionDBUrl checkResourceIsReachableAndReturnError:nil]) {
-            
+    
             // check current version of production DB
 
             // open production DB
             queue = [FMDatabaseQueue databaseQueueWithPath:[productionDBUrl path] flags:(SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_SHAREDCACHE)];
             if (queue){
-                
+        
                 [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
 
                     FMResultSet *result = [db executeQuery:@"select schema_version from version;"];
                     if ([result next]){
-                        
+                
                         dbVersion = [result stringForColumnIndex:0];
                         if ([dbVersion compare:defaultDBVersion options:NSNumericSearch] == NSOrderedAscending) {
 
                             // STARTING OF UPDATE DATABASE STRUCTURE
-                            
+                    
                             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                                
+                        
                                [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
-                                   
+                           
                                    *rollback = NO;
                                    if ([self updateDB:db fromVersion:dbVersion toVersion:defaultDBVersion])
                                        dispatch_async(dispatch_get_main_queue(), ^{
 
                                            self.ready = YES;
                                        });
-                                   
+                           
                                    else
                                        *rollback = YES;
                                }];
-                                
+                        
                             });
-                            
+                    
                             //
                         }
                         else
                             self.ready = YES;
                     }
                     else{
-                        
+                
                         self.error = [db lastError];
 //                    todo:
 //                        DDLogError(@"Error selecting scheme_version from production DB: %@", [[db lastError] localizedDescription]);
@@ -240,16 +240,16 @@ static void isolateQueueReleaseFunc(void *dQueue){
             }
         }
         else{
-            
+    
             //open production DB
             queue = [FMDatabaseQueue databaseQueueWithPath:[productionDBUrl path] flags:(SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_SHAREDCACHE)];
             if (queue){
-             
+     
                 [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
-                    
+            
                     *rollback = NO;
                     if ([db goodConnection]){
-                        
+                
                         //create production DB from default creation script
                         if ([self createDefaultDB:db version:@""])
                              self.ready = YES;
@@ -257,7 +257,7 @@ static void isolateQueueReleaseFunc(void *dQueue){
                             *rollback = YES;
                     }
                     else{
-                        
+                
                         self.error = [NSError errorWithDomain:ASDatabaseErrorDomain code:ASDatabaseOpenErrorCode
                                                          userInfo:@{NSLocalizedDescriptionKey : @"Error testing connection to production DB."}];
 //                    todo:
@@ -266,37 +266,37 @@ static void isolateQueueReleaseFunc(void *dQueue){
                 }];
             }
             else{
-                
+        
                 self.error = [NSError errorWithDomain:ASDatabaseErrorDomain code:ASDatabaseOpenErrorCode
                                                  userInfo:@{NSLocalizedDescriptionKey : @"Error opening production DB."}];
                 //todo:
 //                DDLogError(@"Error opening production DB.");
             }
         }
-        
+
         if (self.error){
-            
+    
             [queue close];
             [defaultDbQueue close];
-        }        
+        }
     }
 }
 
 - (void)readUncommited:(BOOL)enabled{
-    
+
     if (self.ready){
-        
+
         FMDatabaseQueue *execQueue;
         @synchronized(self) {
             execQueue = (__bridge FMDatabaseQueue *)dispatch_get_specific(kDatabaseQueueSpecificKey);
         }
-        
+
         if (!execQueue) {
             execQueue = queue;
         }
-        
+
         [execQueue inDatabase:^(FMDatabase *db) {
-            
+    
             if (enabled) {
                 [db executeUpdate:@"PRAGMA read_uncommitted = True"];
             }
@@ -312,16 +312,16 @@ static void isolateQueueReleaseFunc(void *dQueue){
 }
 
 - (void)exec:(void (^)(FMDatabase *db, BOOL *rollback))block{
-    
+
     NSUInteger identifier = [self beginBackgroundTask];
-    
+
     if (self.ready){
-        
+
         FMDatabaseQueue *execQueue;
         @synchronized(self) {
             execQueue = (__bridge FMDatabaseQueue *)dispatch_get_specific(kDatabaseQueueSpecificKey);
         }
-        
+
         if (!execQueue) {
             execQueue = queue;
         }
@@ -332,54 +332,54 @@ static void isolateQueueReleaseFunc(void *dQueue){
         // todo:
 //        DDLogWarn(@"Database service not ready. Not possible execute query in production DB.");
     }
-    
+
     [self endBackgroubdTaskWithId:identifier];
 }
 
 - (void)rawExec:(void (^)(FMDatabase *db))block{
-    
+
     NSUInteger identifier = [self beginBackgroundTask];
     if (self.ready){
-        
+
         FMDatabaseQueue *execQueue;
         @synchronized(self) {
            execQueue = (__bridge FMDatabaseQueue *)dispatch_get_specific(kDatabaseQueueSpecificKey);
         }
-        
+
         if (!execQueue) {
             execQueue = queue;
         }
-        
+
         [execQueue inDatabase:block];
     }
     else {
         //todo:
 //        DDLogWarn(@"Database service not ready. Not possible execute query in production DB.");
     }
-    
+
     [self endBackgroubdTaskWithId:identifier];
 }
 
 - (void)queryDefaultDB:(void (^)(FMDatabase *db))block{
-    
+
     NSUInteger identifier = [self beginBackgroundTask];
-    
+
     if (self.ready)
         [defaultDbQueue inDatabase:block];
     else {
         // todo:
 //        DDLogWarn(@"Database service not ready. Not possible execute query in default DB.");
     }
-    
+
     [self endBackgroubdTaskWithId:identifier];
 }
 
 - (BOOL)isolateQueue:(dispatch_queue_t)theQueue{
-    
+
     if (theQueue == nil) {
         return NO;
     }
-    
+
     if (self.ready){
 
         @synchronized(self) {
@@ -388,10 +388,10 @@ static void isolateQueueReleaseFunc(void *dQueue){
             if (dQueue) {
                 return YES;
             }
-            
+    
             dQueue = [FMDatabaseQueue databaseQueueWithPath:[_dbURL path] flags:(SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_SHAREDCACHE)];
             if (dQueue){
-                
+        
                 dispatch_queue_set_specific(theQueue, kDatabaseQueueSpecificKey, (void *)CFBridgingRetain(dQueue), &isolateQueueReleaseFunc);
                 return YES;
             }
@@ -402,16 +402,16 @@ static void isolateQueueReleaseFunc(void *dQueue){
 }
 
 - (void)resetIsolationQueue:(dispatch_queue_t)theQueue{
-    
+
     if (theQueue == nil) {
         return;
     }
-    
+
     @synchronized(self) {
-        
+
         dispatch_queue_set_specific(theQueue, kDatabaseQueueSpecificKey, NULL, NULL);
     }
-    
+
     return;
 }
 
@@ -429,9 +429,9 @@ static void isolateQueueReleaseFunc(void *dQueue){
 
         if (!version)
             version = @"";
-            
+    
         NSString *scriptPath = [NSString stringWithFormat:DB_SCHEME_FILE_FORMAT,  [[NSBundle bundleForClass:[self class]] resourcePath], version];
-        
+
         return [self createDefaultDB:db scriptPath:scriptPath];
     }
 }
@@ -439,29 +439,29 @@ static void isolateQueueReleaseFunc(void *dQueue){
 - (BOOL)createDefaultDB:(FMDatabase *)db scriptPath:(NSString *)scriptPath{
 
     @autoreleasepool {
-        
+
         NSError *err;
-        
+
         NSString *dbCreateScript = [NSString stringWithContentsOfFile:scriptPath encoding:NSUTF8StringEncoding error:&err];
-        
+
         if (err) {
 //        todo:
 //            DDLogError(@"Error reading file with db creation script: %@", [err localizedDescription]);
             self.error = err;
             return NO;
         }
-        
+
         NSArray *queries = [[FMSQLStatementSplitter sharedInstance] statementsFromBatchSqlStatement:dbCreateScript];
-        
+
         BOOL result = YES;
-        
+
         for (FMSplittedStatement *statement in queries) {
-            
+    
             NSString *query = [statement.statementString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             if (![NSString isNullOrEmpty:query])
                 result &= [db executeUpdate:query];
         }
-        
+
         return result;
     }
 }
@@ -474,29 +474,29 @@ static void isolateQueueReleaseFunc(void *dQueue){
 }
 
 - (BOOL)updateDB:(FMDatabase *)db fromVersion:(NSString *)version toVersion:(NSString *)toVersion resourcePath:(NSString *)resourcePath{
-    
+
     while (![version isEqualToString:toVersion]){
         @autoreleasepool {
-            
+    
             NSError *err;
             NSString *updateScriptPath = [NSString stringWithFormat:DB_SCHEME_UPDATE_FORMAT,  resourcePath, version];
             NSString *dbUpdateScript = [NSString stringWithContentsOfFile:updateScriptPath encoding:NSUTF8StringEncoding error:&err];
-            
+    
             if (err) {
 //            todo:
 //                DDLogError(@"Error reading file with db update script: %@", [err localizedDescription]);
                 self.error = err;
                 return NO;
             }
-            
+    
             NSArray *queries = [[FMSQLStatementSplitter sharedInstance] statementsFromBatchSqlStatement:dbUpdateScript];
-            
+    
             for (FMSplittedStatement *statement in queries) {
-                
+        
                 NSString *query = [statement.statementString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
                 if (![NSString isNullOrEmpty:query]){
                     if (![db executeUpdate:query]){
-                        
+                
                         // todo:
 //                        DDLogError(@"Error in update script: %@", updateScriptPath);
                         return NO;
@@ -516,7 +516,7 @@ static void isolateQueueReleaseFunc(void *dQueue){
                 return NO;
         }
     }
-    
+
     return YES;
 }
 

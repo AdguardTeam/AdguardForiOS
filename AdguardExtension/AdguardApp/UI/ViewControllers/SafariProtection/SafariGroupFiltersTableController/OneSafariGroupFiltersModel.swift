@@ -33,37 +33,37 @@ protocol SafariGroupFiltersModelProtocol: UITableViewDelegate, UITableViewDataSo
 }
 
 final class OneSafariGroupFiltersModel: NSObject, SafariGroupFiltersModelProtocol {
-    
+
     // MARK: - Public properties
-    
+
     var searchString: String? {
         didSet {
             processSearchString()
         }
     }
-    
+
     weak var tableView: UITableView?
     weak var delegate: SafariGroupFiltersModelDelegate?
-    
+
     // MARK: - Private properties
-    
+
     private var group: SafariGroup
     private lazy var isCustom: Bool = { group.groupType == .custom }()
     private var isSearching: Bool { modelsProvider.isSearching }
     private var addButtonIsDisplayed: Bool { isCustom && !isSearching }
     private var groupModel: StateHeaderViewModel<SafariGroup.GroupType>
     private var filtersModels: [SafariFilterCellModel] { modelsProvider.filtersModels.first ?? [] }
-    
+
     /* Services */
     private let safariProtection: SafariProtectionProtocol
     private let configuration: ConfigurationServiceProtocol
     private let themeService: ThemeServiceProtocol
     private var modelsProvider: SafariGroupFiltersModelsProvider
-    
+
     private var proStatusObserver: NotificationToken?
-    
+
     // MARK: - Initialization
-    
+
     init(groupType: SafariGroup.GroupType, safariProtection: SafariProtectionProtocol, configuration: ConfigurationServiceProtocol, themeService: ThemeServiceProtocol) {
         self.safariProtection = safariProtection
         self.configuration = configuration
@@ -72,7 +72,7 @@ final class OneSafariGroupFiltersModel: NSObject, SafariGroupFiltersModelProtoco
         self.modelsProvider = SafariGroupFiltersModelsProvider(sdkModels: [group], proStatus: configuration.proStatus)
         self.groupModel = modelsProvider.groupModels.first!
         super.init()
-        
+
         self.proStatusObserver = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
             guard let self = self else { return }
             self.modelsProvider = SafariGroupFiltersModelsProvider(sdkModels: [self.group], proStatus: self.configuration.proStatus)
@@ -84,7 +84,7 @@ final class OneSafariGroupFiltersModel: NSObject, SafariGroupFiltersModelProtoco
             self.tableView?.reloadData()
         }
     }
-    
+
     // MARK: - Public methods
 
     func setup(tableView: UITableView) {
@@ -96,14 +96,14 @@ final class OneSafariGroupFiltersModel: NSObject, SafariGroupFiltersModelProtoco
         tableView.sectionFooterHeight = 0.01
         tableView.rowHeight = UITableView.automaticDimension
     }
-    
+
     // MARK: - Private methods
-    
+
     private func processSearchString() {
         modelsProvider.searchString = searchString
         tableView?.reloadData()
     }
-    
+
     private func reinit() {
         guard let newGroup = safariProtection.groups.first(where: { $0.groupType == group.groupType }) else {
             assertionFailure("safariProtection should contain group with type=\(group.groupType)")
@@ -123,7 +123,7 @@ extension OneSafariGroupFiltersModel {
         try safariProtection.deleteCustomFilter(withId: filterId, onCbReloaded: nil)
         reinit()
     }
-    
+
     func setFilter(with groupId: Int?, filterId: Int, enabled: Bool) throws -> FilterDetailsProtocol {
         guard let groupId = groupId else {
             assertionFailure("Group id is nil")
@@ -132,14 +132,14 @@ extension OneSafariGroupFiltersModel {
 
         try safariProtection.setFilter(withId: filterId, groupId, enabled: enabled, onCbReloaded: nil)
         reinit()
-        
+
         guard let newFilterMeta = group.filters.first(where: { $0.filterId == filterId }) else {
             assertionFailure("group should contain filter with filterId=\(filterId)")
             throw CommonError.missingData
         }
         return newFilterMeta
     }
-    
+
     func addCustomFilter(_ meta: ExtendedCustomFilterMetaProtocol, _ onFilterAdded: @escaping (Error?) -> Void) {
         safariProtection.add(customFilter: meta, enabled: true) { error in
             DispatchQueue.asyncSafeMain { [weak self] in
@@ -152,7 +152,7 @@ extension OneSafariGroupFiltersModel {
             }
         }
     }
-    
+
     func renameFilter(withId filterId: Int, to newName: String) throws -> FilterDetailsProtocol {
         try safariProtection.renameCustomFilter(withId: filterId, to: newName)
         reinit()
@@ -174,7 +174,7 @@ extension OneSafariGroupFiltersModel {
             DDLogError("(OneSafariGroupFiltersModel) - safariFilterStateChanged; Error changing safari filter state; Error: \(error)")
         }
     }
-    
+
     func tagTapped(_ tagName: String) {
         delegate?.tagTapped(tagName)
     }
@@ -185,16 +185,16 @@ extension OneSafariGroupFiltersModel {
 extension OneSafariGroupFiltersModel {
     func modelChanged<Model: IdentifiableObject>(_ newModel: Model) {
         guard let newModel = newModel as? StateHeaderViewModel<SafariGroup.GroupType> else { return }
-        
+
         let groupType = newModel.id
         DDLogInfo("(OneSafariGroupFiltersModel) - setGroup; Trying to change group=\(groupType) to state=\(newModel.isEnabled)")
-        
+
         do {
             try safariProtection.setGroup(groupType, enabled: newModel.isEnabled, onCbReloaded: nil)
         } catch {
             DDLogError("(OneSafariGroupFiltersModel) - setGroup; DB error when changing group=\(groupType) to state=\(newModel.isEnabled); Error: \(error)")
         }
-        
+
         groupModel = StateHeaderViewModel(
             iconImage: groupModel.iconImage,
             title: groupModel.title,
@@ -212,7 +212,7 @@ extension OneSafariGroupFiltersModel {
         if indexPath.section == Section.title.rawValue {
             return
         }
-        
+
         if addButtonIsDisplayed && indexPath.row == 0 {
             delegate?.addNewFilterTapped()
         } else {
@@ -224,7 +224,7 @@ extension OneSafariGroupFiltersModel {
             }
             delegate?.filterTapped(filter)
         }
-        
+
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
@@ -232,11 +232,11 @@ extension OneSafariGroupFiltersModel {
 // MARK: - OneSafariGroupFiltersModel + UITableViewDataSource
 
 extension OneSafariGroupFiltersModel {
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return Section.allCases.count
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let sct = Section(rawValue: section) else {
             assertionFailure("Section received invalid rawValuew=\(section)")
@@ -247,7 +247,7 @@ extension OneSafariGroupFiltersModel {
         case .filters: return isCustom && !isSearching ? filtersModels.count + 1 : filtersModels.count
         }
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let sct = Section(rawValue: indexPath.section) else {
             assertionFailure("Section received invalid rawValuew=\(indexPath.section)")
@@ -274,7 +274,7 @@ extension OneSafariGroupFiltersModel {
             return cell
         }
     }
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let sct = Section(rawValue: section) else {
             assertionFailure("Section received invalid rawValuew=\(section)")
@@ -289,7 +289,7 @@ extension OneSafariGroupFiltersModel {
             return headerView
         }
     }
-    
+
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }

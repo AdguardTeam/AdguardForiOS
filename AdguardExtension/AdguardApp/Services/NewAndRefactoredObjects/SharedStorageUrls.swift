@@ -28,7 +28,7 @@ protocol SharedStorageUrlsProtocol {
 
 /// This object contains all shared folders URLs
 struct SharedStorageUrls: SharedStorageUrlsProtocol {
-    
+
     let sharedContainerUrl: URL
     let dbFolderUrl: URL
     let filtersFolderUrl: URL
@@ -36,7 +36,7 @@ struct SharedStorageUrls: SharedStorageUrlsProtocol {
     let cbJsonsFolderUrl: URL
     let advancedRulesFileUrl: URL
     let statisticsFolderUrl: URL
-    
+
     private static let sharedResourcesGroup = Bundle.main.infoDictionary!["SharedResourcesGroup"] as! String
 }
 

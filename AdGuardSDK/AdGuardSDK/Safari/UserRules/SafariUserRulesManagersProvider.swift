@@ -29,34 +29,34 @@ final public class SafariUserRulesManagersProvider: SafariUserRulesManagersProvi
         let storage = SafariUserRulesStorage(userDefaults: userDefaultsStorage, rulesType: .blocklist)
         return UserRulesManager(type: .blocklist, storage: storage, converter: OpaqueRuleConverter())
     }()
-    
+
     private(set) lazy public var allowlistRulesManager: UserRulesManagerProtocol = {
         let storage = SafariUserRulesStorage(userDefaults: userDefaultsStorage, rulesType: .allowlist)
         return UserRulesManager(type: .allowlist, storage: storage, converter: AllowlistRuleConverter())
     }()
-    
+
     private(set) lazy public var invertedAllowlistRulesManager: UserRulesManagerProtocol = {
         let storage = SafariUserRulesStorage(userDefaults: userDefaultsStorage, rulesType: .invertedAllowlist)
         return UserRulesManager(type: .invertedAllowlist, storage: storage, converter: InvertedAllowlistRuleConverter())
     }()
-    
+
     private let userDefaultsStorage: UserDefaultsStorageProtocol
-    
+
     init(userDefaultsStorage: UserDefaultsStorageProtocol) {
         self.userDefaultsStorage = userDefaultsStorage
     }
-    
+
     public init(userDefaults: UserDefaults) {
         self.userDefaultsStorage = UserDefaultsStorage(storage: userDefaults)
     }
-    
+
     public func reset() throws {
         Logger.logInfo("(UserRulesManagersProvider) - reset start")
-        
+
         try blocklistRulesManager.reset()
         try allowlistRulesManager.reset()
         try invertedAllowlistRulesManager.reset()
-        
+
         Logger.logInfo("(UserRulesManagersProvider) - reset; Successfully reset all user rules managers")
     }
 }

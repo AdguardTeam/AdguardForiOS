@@ -29,20 +29,20 @@ class ImportSettingsCell: UITableViewCell {
     @IBOutlet weak var checkButton: UIButton!
     @IBOutlet weak var separator: UIView!
     @IBOutlet weak var subtitleTopConstraint: NSLayoutConstraint!
-    
+
     weak var delegate: ImportSettingsCellDelegate?
-    
+
     @IBAction func checkAction(_ sender: Any) {
         let newState = !check.isHighlighted
         check.isHighlighted = newState
         delegate?.stateChanged(tag: self.tag, state: newState)
     }
-    
-    
+
+
     func setup(model: SettingRow, lastRow: Bool,theme: ThemeServiceProtocol) {
-        
+
         title.text = model.title
-        
+
         if model.imported {
             let image: UIImage?
             switch (model.importStatus) {
@@ -53,20 +53,20 @@ class ImportSettingsCell: UITableViewCell {
             case (.notImported):
                 image = UIImage(named: "cross")
             }
-            
+    
             check.image = image
         } else {
             check.isHighlighted = model.enabled
         }
-        
+
         subtitle.text = model.subtitle
-        
+
         subtitleTopConstraint.constant = model.subtitle.count > 0 ? 7 : 0
-        
+
         checkButton.isEnabled = !model.imported
-        
+
         separator.isHidden = lastRow
-        
+
         self.backgroundColor = theme.popupBackgroundColor
         theme.setupLabel(title)
         theme.setupSeparator(separator)

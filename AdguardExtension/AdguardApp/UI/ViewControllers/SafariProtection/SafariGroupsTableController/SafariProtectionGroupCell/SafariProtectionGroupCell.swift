@@ -37,7 +37,7 @@ extension SafariProtectionGroupCellModel {
         self.isAccessible = false
         self.groupType = .ads
     }
-        
+
     init(group: SafariGroup, proStatus: Bool) {
         self.iconImage = group.groupType.iconImage
         self.title = group.groupName
@@ -46,7 +46,7 @@ extension SafariProtectionGroupCellModel {
         self.isAccessible = group.groupType.proOnly ? proStatus : true
         self.groupType = group.groupType
     }
-    
+
     private static func getDescription(for group: SafariGroup, proStatus: Bool) -> String {
         if group.groupType.proOnly && !proStatus {
             if group.groupType == .security {
@@ -76,40 +76,40 @@ protocol SafariProtectionGroupCellDelegate: AnyObject {
 }
 
 final class SafariProtectionGroupCell: UITableViewCell, Reusable {
-    
+
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var descriptionLabel: ThemableLabel!
     @IBOutlet weak var stateSwitch: UISwitch!
-    
+
     // MARK: - Services
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
 
     // MARK: - Properties
     private var themeObserver: NotificationToken?
-    
+
     weak var delegate: SafariProtectionGroupCellDelegate?
-    
+
     var model: SafariProtectionGroupCellModel = SafariProtectionGroupCellModel() {
         didSet {
             process(model: model)
         }
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         updateTheme()
         iconImageView.tintColor = UIColor.AdGuardColor.green
-        
+
         themeObserver = NotificationCenter.default.observe(name: .themeChanged, object: nil, queue: .main) { [weak self] _ in
             self?.updateTheme()
         }
     }
-    
+
     @IBAction func switchTapped(_ sender: UISwitch) {
         delegate?.stateChanged(for: model.groupType, newState: !model.isEnabled)
     }
-    
+
     private func process(model: SafariProtectionGroupCellModel) {
         iconImageView.image = model.iconImage
         titleLabel.text = model.title

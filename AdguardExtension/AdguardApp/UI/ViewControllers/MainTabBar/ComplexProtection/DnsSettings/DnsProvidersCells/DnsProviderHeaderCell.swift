@@ -21,34 +21,34 @@ import UIKit
 /// Header cell
 final class DnsProviderHeaderCell : UITableViewCell, Reusable {
     // MARK: - Properties
-    
+
     /// Logo image
     var logoImage: UIImage? {
         didSet {
             logoImageView.lightThemeImage = logoImage
         }
     }
-    
+
     /// Logo image for dark theme
     var darkLogoImage: UIImage? {
         didSet {
             logoImageView.darkThemeImage = darkLogoImage
         }
     }
-    
+
     /// Description string
     var descriptionString: String = "" {
         didSet {
             descriptionLabel.text = descriptionString
         }
     }
-    
+
     private var logoImageView: ThemableImageView = {
         let imageView = ThemableImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
+
     private lazy var descriptionLabel: ThemableLabel = {
         let label = ThemableLabel()
         label.greyText = true
@@ -59,7 +59,7 @@ final class DnsProviderHeaderCell : UITableViewCell, Reusable {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     // MARK: - Init
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -67,38 +67,38 @@ final class DnsProviderHeaderCell : UITableViewCell, Reusable {
         setupConstraint()
         self.selectionStyle = .none
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupConstraint()
         self.selectionStyle = .none
     }
-    
+
     // MARK: - Public methods
-    
+
     func updateTheme(themeService: ThemeServiceProtocol) {
         themeService.setupLabels([descriptionLabel])
         themeService.setupImage(logoImageView)
         themeService.setupTableCell(self)
     }
-    
+
     // MARK: - Private methods
-    
+
     private func setupConstraint() {
         self.contentView.addSubview(logoImageView)
         self.contentView.addSubview(descriptionLabel)
-        
+
         let logoImageViewHeightConst = isIpadTrait ? 168.0 : 56.0
         let logoImageViewWidthConst = isIpadTrait ? 936.0 : 312.0
         let topConst = isIpadTrait ? 40.0 : 16.0
         let bottomConst = isIpadTrait ? 96.0 : 32.0
-        
+
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16.0),
             logoImageView.heightAnchor.constraint(equalToConstant: logoImageViewHeightConst),
             logoImageView.widthAnchor.constraint(equalToConstant: logoImageViewWidthConst),
             logoImageView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
-            
+    
             descriptionLabel.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: topConst),
             descriptionLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 24.0),
             descriptionLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -24.0),

@@ -19,12 +19,12 @@
 import Foundation
 
 struct OpenLicenseControllerParser: IURLSchemeParametersParser {
-    
+
     private let executor: IURLSchemeExecutor
-    
+
     init(executor: IURLSchemeExecutor) {
         self.executor = executor
     }
-    
+
     func parse(_ url: URL) -> Bool { executor.openPurchaseLicenseController() }
 }

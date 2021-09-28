@@ -20,9 +20,9 @@ import Foundation
 
 public class SuccessFailureParser: ParserProtocol {
     public typealias Model = Bool
-    
+
     public init () {}
-    
+
     public func parse(data: Data, response: URLResponse?) -> SuccessFailureParser.Model? {
         if let response = response as? HTTPURLResponse {
             if response.statusCode == 200 {

@@ -21,17 +21,17 @@ import Foundation
 class DnsLogRecordsServiceMock: DnsLogRecordsServiceProtocol {
     func writeRecords(_ records: [DnsLogRecord]) {
     }
-    
+
     func readRecords() -> [DnsLogRecord] {
         return []
     }
-    
+
     func set(rowId: NSNumber, status: DnsLogRecordUserStatus, userRule: String?) {
     }
-    
+
     func clearLog() {
     }
-    
+
     func reset() {
     }
 }

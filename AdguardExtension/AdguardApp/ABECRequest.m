@@ -35,29 +35,29 @@
 /////////////////////////////////////////////////////////////////////
 
 - (id)initWithURL:(NSURL *)URL cachePolicy:(NSURLRequestCachePolicy)cachePolicy timeoutInterval:(NSTimeInterval)timeoutInterval{
-    
+
     self = [super initWithURL:URL cachePolicy:cachePolicy timeoutInterval:timeoutInterval]; // [super _init_];
     if (self)
     {
         // Marking of request, that request is from Adguard.
         [self setValue:[[ADProductInfo new] userAgentString] forHTTPHeaderField:@"User-Agent"];
     }
-    
+
     return self;
 }
 
 + (NSURLRequest*)postRequestForURL:(NSURL *)theURL parameters:(NSDictionary *)parameters headers:(nullable NSDictionary<NSString *,NSString *> *)headers{
-    
+
     @autoreleasepool {
-        
+
         ABECRequest *request = [[ABECRequest alloc] initWithURL:theURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval: 30];
-        
+
         if (request) {
-            
+    
             [request setHTTPMethod:@"POST"];
-            
+    
             if (parameters.count){
-                
+        
                 [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
                 [request setHTTPBody:[[ABECRequest createStringFromParameters:parameters] dataUsingEncoding:NSUTF8StringEncoding]];
                 for(NSString* key in headers.allKeys) {
@@ -65,73 +65,73 @@
                 }
             }
         }
-        
+
         return request;
     }
 }
 
 + (NSURLRequest *)postRequestForURL:(NSURL *)theURL json:(NSString *)jsonString {
     @autoreleasepool {
-        
+
         ABECRequest *request = [[ABECRequest alloc] initWithURL:theURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval: 30];
-        
+
         if (request) {
-            
+    
             [request setHTTPMethod:@"POST"];
             [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-           
+   
             [request setHTTPBody: [jsonString dataUsingEncoding:NSUTF8StringEncoding]];
         }
-        
+
         return request;
     }
 }
 
 + (id)getRequestForURL:(NSURL *)theURL parameters:(NSDictionary *)parameters{
-    
+
     @autoreleasepool {
-        
+
         if (parameters.count){
-            
+    
             NSString *paramString = [NSString isNullOrEmpty:[theURL query]] ? @"?" : @"&";
             paramString = [paramString stringByAppendingString:[ABECRequest createStringFromParameters:parameters]];
-            
+    
             theURL = [NSURL URLWithString:[[theURL absoluteString] stringByAppendingString:paramString]];
         }
-        
+
         ABECRequest *request = [[ABECRequest alloc] initWithURL:theURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval: 30];
-        
+
         if (request) {
-            
+    
             [request setHTTPMethod:@"GET"];
         }
-        
+
         return request;
     }
 }
 
 + (NSString *)createStringFromParameters:(NSDictionary *)parameters{
-    
+
     static NSCharacterSet *queryCharset;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-       
+   
         NSMutableCharacterSet *newSet = [NSMutableCharacterSet characterSetWithRange:NSMakeRange(0, 32)];
         [newSet addCharactersInRange:NSMakeRange(127, 1)];
         [newSet addCharactersInString:@" \"#%<>[\\]^`{|}/+=&"];
         queryCharset = [[newSet copy] invertedSet];
     });
-    
+
     NSMutableArray *parametersArray = [NSMutableArray arrayWithCapacity:parameters.count];
     [parameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        
-        NSString *value = [[obj description] stringByAddingPercentEncodingWithAllowedCharacters:queryCharset];      
+
+        NSString *value = [[obj description] stringByAddingPercentEncodingWithAllowedCharacters:queryCharset];  
         [parametersArray addObject:[NSString stringWithFormat:@"%@=%@", [key description], value]];
     }];
-    
-    
+
+
     return [parametersArray componentsJoinedByString:@"&"];
-    
+
 }
 
 @end

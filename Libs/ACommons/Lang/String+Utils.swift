@@ -31,39 +31,39 @@ extension NSMutableAttributedString {
         let leftEdge: CGFloat
         let size: AttachmentSize
     }
-    
+
     func alignCenter(){
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = .center
-        
+
         let attributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.paragraphStyle: paragraph]
         self.addAttributes(attributes, range: NSRange(location: 0, length: length))
     }
-    
+
     static func fromHtml(_ html: String, fontSize: CGFloat, color: UIColor, attachmentSettings: AttachmentSettings? = nil, textAlignment: NSTextAlignment = .left, lineBreakMode: NSLineBreakMode = .byWordWrapping) -> NSMutableAttributedString? {
-        
+
         let style = NSMutableParagraphStyle()
         style.alignment = textAlignment
         style.lineBreakMode = lineBreakMode
-        
+
         let format = NSMutableString(string: html)
         let wrapped = "<span style=\"font-family: -apple-system; font-size: \(fontSize); color: \(color.hex())\">\(format)</span>"
         guard let htmlData = wrapped.data(using: .utf8) else { return nil}
-        
+
         guard let resultText = try? NSMutableAttributedString(
                 data: htmlData,
                 options: [.documentType: NSAttributedString.DocumentType.html,
                           .characterEncoding:NSNumber(value:String.Encoding.utf8.rawValue)],
                 documentAttributes: nil) else { return nil }
-        
+
         if let settings = attachmentSettings {
-            
+    
             let imageRange = resultText.mutableString.range(of: "%@")
             resultText.replaceCharacters(in: imageRange, with: "")
-            
+    
             let attachment = NSTextAttachment()
             attachment.image = settings.image
-            
+    
             let x = settings.leftEdge
             let y = -settings.topEdge
             let width: CGFloat
@@ -76,22 +76,22 @@ extension NSMutableAttributedString {
                 width = w
                 height = h
             }
-            
-            
+    
+    
             attachment.bounds = CGRect(x: x, y: y, width: width, height: height)
-            
+    
             let attachmentString = NSAttributedString(attachment: attachment)
             resultText.insert(attachmentString, at: imageRange.location)
         }
-        
+
         resultText.addAttributes([NSAttributedString.Key.paragraphStyle : style], range: NSRange(location: 0, length: resultText.length))
-                
+        
         return resultText
     }
 }
 
 extension String {
-    
+
     func dataFromHex()-> Data {
         var hex = self
         var data = Data()
@@ -106,19 +106,19 @@ extension String {
         }
         return data
     }
-    
+
     static func randomString(length: Int) -> String {
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         return String((0..<length).map{ _ in letters.randomElement()! })
     }
-    
+
     /// Returns tuple with attributed string that highlight passed occurancies and `found` flag
     /// It is true if any occurancies were found
     func highlight(occuranciesOf strings: Set<String>) -> (attrString: NSAttributedString, matchesFound: Bool) {
         let attributedString = NSMutableAttributedString(string: self)
         attributedString.addAttribute(NSAttributedString.Key.backgroundColor, value: UIColor.clear, range: NSRange(location: 0, length: self.count))
         guard !strings.isEmpty else { return (attributedString, false) }
-        
+
         let highlightColor = UIColor.AdGuardColor.lightGreen1
         var foundCount = 0
         for string in strings {
@@ -130,7 +130,7 @@ extension String {
         }
         return (attributedString, foundCount != 0)
     }
-    
+
     /// Returns NSRanges of all occurancies of substring in string
     func ranges(of substring: String, options: CompareOptions = [], locale: Locale? = nil) -> [NSRange] {
         var searchRange: Range<Index>?
@@ -141,13 +141,13 @@ extension String {
         }
         return result
     }
-    
+
     var clearAttrString: NSAttributedString {
         let attributedString = NSMutableAttributedString(string: self)
         attributedString.addAttribute(NSAttributedString.Key.backgroundColor, value: UIColor.clear, range: NSRange(location: 0, length: self.count))
         return attributedString
     }
-    
+
     // Adds space every 3 symbols
     // Use for formatting numbers
     static func formatSringNumber(number: Int) -> String{
@@ -157,7 +157,7 @@ extension String {
         str = String(str.reversed())
         return str
     }
-    
+
     func isValidUpstream() -> Bool {
         let charSet = CharacterSet(charactersIn: self)
         var validCharsSet = CharacterSet.urlPathAllowed
@@ -166,7 +166,7 @@ extension String {
         validCharsSet.insert("]")
         return charSet.isSubset(of: validCharsSet) && self.count > 0
     }
-    
+
     /*
      Discards port from IP address
      94.140.14.15:52 -> 94.140.14.15
@@ -178,14 +178,14 @@ extension String {
         guard let firstChar = self.first, firstChar == "[" || firstChar.isNumber else {
             return self
         }
-        
+
         if self.contains("[") && self.contains("]") {
             let leftQuotePosition = self.firstIndex(of: "[")!
             let rightQuotePosition = self.firstIndex(of: "]")!
-            
+    
             let leftQuoteIndex = self.index(leftQuotePosition, offsetBy: 1)
             let rightQuoteIndex = self.index(rightQuotePosition, offsetBy: -1)
-            
+    
             guard leftQuoteIndex < rightQuoteIndex else {
                 return self
             }
@@ -199,37 +199,37 @@ extension String {
             return String(parts[0])
         }
     }
-    
+
     static func localizedString(_ key: String)->String {
         return ACLocalizedString(key, nil)
     }
-    
-    
+
+
     static func simpleSecondsFormatter(_ number: NSNumber) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.locale = .current
         formatter.minimumFractionDigits = 0
-        
+
         let seconds = number.doubleValue / 1000000
         if seconds >= 1 {
             formatter.maximumFractionDigits = 0
             let formatterString = formatter.string(from: NSNumber(floatLiteral: seconds)) ?? "\(number.intValue)"
             return String(format: String.localizedString("s_unit"), formatterString)
         }
-        
+
         let miliseconds = number.doubleValue / 1000
         if miliseconds >= 1 {
             formatter.maximumFractionDigits = 1
             let formatterString = formatter.string(from: NSNumber(floatLiteral: miliseconds)) ?? "\(number.intValue)"
             return String(format: String.localizedString("ms_unit"), formatterString)
         }
-        
+
         formatter.maximumFractionDigits = 0
         let formatterString = formatter.string(from: number) ?? "\(number.intValue)"
         return String(format: String.localizedString("ms_unit"), formatterString)
     }
-    
+
     /*
      Formats a number, devides thousands with separator, depending on current locale
      */
@@ -241,7 +241,7 @@ extension String {
         formatter.maximumFractionDigits = 0
         return formatter.string(from: number) ?? "\(number.intValue)"
     }
-    
+
     /**
     Converts number to string, ignores decimal part
     Formatted by locale
@@ -252,69 +252,69 @@ extension String {
         formatter.locale = .current
         formatter.minimumFractionDigits = 0
         formatter.maximumFractionDigits = 0
-        
+
         let decimalNumber: Double = number.doubleValue
-        
+
         /* Asian countries from this array have a different way of formatting numbers */
         let specialAsianCountriesCodes = ["zh", "ko", "ja"]
         let currentLocaleLanguageCode = Locale.current.languageCode ?? ""
-        
+
         if specialAsianCountriesCodes.contains(currentLocaleLanguageCode) {
-            
+    
             let hundredMillions = decimalNumber / 100000000
             if hundredMillions > 1 {
                 let hundredMillionsString = formatter.string(from: NSNumber(floatLiteral: hundredMillions)) ?? "0"
                 return String(format: String.localizedString("hundred_millions_unit"), hundredMillionsString)
             }
-            
+    
             let tenThousands = decimalNumber / 10000
             if tenThousands > 100 {
                 let tenThousandsString = formatter.string(from: NSNumber(floatLiteral: tenThousands)) ?? "0"
                 return String(format: String.localizedString("ten_thousands_unit"), tenThousandsString)
             }
-            
+    
             return formatter.string(from: number) ?? "0"
         }
-        
+
         /* This is normal formatting */
         let millions = decimalNumber / 1000000
         if millions > 1 {
             let millionsString = formatter.string(from: NSNumber(floatLiteral: millions)) ?? "0"
             return String(format: String.localizedString("millions_unit"), millionsString)
         }
-        
+
         let thousands = decimalNumber / 1000
-        
+
         if thousands > 100 {
             formatter.maximumFractionDigits = 0
             let thousandsString = formatter.string(from: NSNumber(floatLiteral: thousands)) ?? "0"
             return String(format: String.localizedString("thousands_unit"), thousandsString)
         }
-        
+
         if thousands > 10 {
             formatter.maximumFractionDigits = 1
             let thousandsString = formatter.string(from: NSNumber(floatLiteral: thousands)) ?? "0"
             return String(format: String.localizedString("thousands_unit"), thousandsString)
         }
-        
+
         if thousands > 1 {
             formatter.maximumFractionDigits = 2
             let thousandsString = formatter.string(from: NSNumber(floatLiteral: thousands)) ?? "0"
             return String(format: String.localizedString("thousands_unit"), thousandsString)
         }
-        
+
         return formatter.string(from: number) ?? "0"
     }
-    
+
     /**
     Generates subdomains from top level domain
     */
     static func generateSubDomains(from domain: String) -> [String] {
         let newDomain = domain.hasSuffix(".") ? String(domain.dropLast()) : domain
-        
+
         var subdomains = newDomain.split(separator: ".")
         var domainsToReturn: [String] = []
-        
+
         while subdomains.count >= 2{
             let newSubDomain = subdomains.joined(separator: ".")
             domainsToReturn.append(newSubDomain)
@@ -322,14 +322,14 @@ extension String {
         }
         return domainsToReturn
     }
-    
+
     /* Checks if the string is valid email */
     func isValidEmail() -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: self)
     }
-    
+
     func getQueryParametersFromQueryString() -> [String: String]? {
         var params: [String: String] = [:]
         let pairs = self.components(separatedBy: "&")
@@ -338,12 +338,12 @@ extension String {
             if values.count == 2 {
                 params[values[0]] = values[1]
             }
-            
+    
             if values.count == 1 {
                 continue
             }
         }
-        
+
         return params.count > 0 ? params : nil
     }
 }

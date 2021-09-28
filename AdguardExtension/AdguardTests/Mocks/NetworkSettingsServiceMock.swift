@@ -21,30 +21,30 @@ import NetworkExtension
 
 class NetworkSettingsServiceMock: NetworkSettingsServiceProtocol {
     var exceptions: [WifiException] = []
-    
+
     var enabledExceptions: [WifiException] = []
-    
+
     var filterWifiDataEnabled: Bool = true
-    
+
     var filterMobileDataEnabled: Bool = true
-    
+
     var delegate: NetworkSettingsChangedDelegate?
-    
+
     func add(exception: WifiException) {
-        
+
     }
-    
+
     func delete(exception: WifiException) {
-        
+
     }
-    
+
     func change(oldException: WifiException, newException: WifiException) {
-        
+
     }
-    
+
     func getCurrentWiFiName() -> String? {
         return nil
     }
-    
+
     var onDemandRules: [NEOnDemandRule] = []
 }

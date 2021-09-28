@@ -19,10 +19,10 @@
 import Foundation
 
 protocol SafariProtectionApiMethodsProtocol {
-    
+
     /// Loads filters meta data with API call to our server and returns it in completion if request succeedes
     func loadFiltersMetadata(version: String, id: String, cid: String, lang: String, _ completion: @escaping (_ filterMeta: ExtendedFiltersMeta?) -> Void)
-    
+
     /// Loads filters localizations with API call to our server and returns them in completion if request succeedes
     func loadFiltersLocalizations(_ completion: @escaping (_ filterMetaLocalization: ExtendedFiltersMetaLocalizations?) -> Void)
 }
@@ -32,19 +32,19 @@ protocol SafariProtectionApiMethodsProtocol {
  It's methods send requests and return objects of different types
  */
 final class SafariProtectionApiMethods: SafariProtectionApiMethodsProtocol {
-    
+
     private let requestSender: RequestSenderProtocol
-    
+
     init(requestSender: RequestSenderProtocol = RequestSender()) {
         self.requestSender = requestSender
     }
-    
+
     func loadFiltersMetadata(version: String,
                              id: String,
                              cid: String,
                              lang: String,
                              _ completion: @escaping (_ filterMeta: ExtendedFiltersMeta?) -> Void) {
-        
+
         let config = RequestsFactory.loadFiltersMetadataConfig(version: version, id: id, cid: cid, lang: lang)
         requestSender.send(requestConfig: config) { result in
             switch result {
@@ -55,7 +55,7 @@ final class SafariProtectionApiMethods: SafariProtectionApiMethodsProtocol {
             }
         }
     }
-    
+
     func loadFiltersLocalizations(_ completion: @escaping (_ filterMetaLocalization: ExtendedFiltersMetaLocalizations?) -> Void) {
         let config = RequestsFactory.loadFiltersLocalizationsConfig()
         requestSender.send(requestConfig: config) { result in

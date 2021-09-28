@@ -59,9 +59,9 @@ public extension SafariGroup {
         public let homePage: String?
         public let filterDownloadPage: String?
         public let rulesCount: Int
-        
+
         // MARK: - Initialization
-        
+
         init(name: String?, description: String?, isEnabled: Bool, filterId: Int, version: String?, lastUpdateDate: Date?, updateFrequency: Int?, group: GroupMetaProtocol, displayNumber: Int, languages: [String], tags: [ExtendedFiltersMeta.Tag], homePage: String?, filterDownloadPage: String?, rulesCount: Int) {
             self.name = name
             self.description = description
@@ -78,7 +78,7 @@ public extension SafariGroup {
             self.filterDownloadPage = filterDownloadPage
             self.rulesCount = rulesCount
         }
-        
+
         init(dbFilter: FiltersTable, group: GroupMetaProtocol, rulesCount: Int, languages: [String], tags: [FilterTagsTable], filterDownloadPage: String?) {
             self.name = dbFilter.name
             self.description = dbFilter.description
@@ -95,7 +95,7 @@ public extension SafariGroup {
             self.filterDownloadPage = filterDownloadPage
             self.rulesCount = rulesCount
         }
-        
+
         init(customFilter: ExtendedCustomFilterMetaProtocol, filterId: Int, isEnabled: Bool, group: GroupMetaProtocol, displayNumber: Int) {
             self.name = customFilter.name
             self.description = customFilter.description

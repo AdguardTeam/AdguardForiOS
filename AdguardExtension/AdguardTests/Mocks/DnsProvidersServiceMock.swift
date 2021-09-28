@@ -20,31 +20,31 @@ import Foundation
 
 class DnsProvidersServiceMock:DnsProvidersServiceProtocol {
     var delegate: DnsProvidersServiceDelegate?
-    
+
     var vpnManager: VpnManagerProtocol?
-    
+
     var adguardDohServer: DnsServerInfo? { return nil }
-    
+
     var adguardFamilyDohServer: DnsServerInfo? { return nil }
-    
+
     func reset() { }
-    
+
     var allProviders: [DnsProviderInfo] = []
-    
+
     var predefinedProviders: [DnsProviderInfo] = []
-    
+
     var customProviders: [DnsProviderInfo] = []
-    
+
     var activeDnsServer: DnsServerInfo?
-    
+
     var activeDnsProvider: DnsProviderInfo?
-    
+
     var currentServerName: String = ""
-    
+
     init(allProviders: [DnsProviderInfo] = []) {
         self.allProviders = allProviders
     }
-    
+
     func isCustomServer(_ server: DnsServerInfo) -> Bool {
         return true
     }
@@ -52,19 +52,19 @@ class DnsProvidersServiceMock:DnsProvidersServiceProtocol {
     func addCustomProvider(name: String, upstream: String, _ onProviderAdded: @escaping () -> Void) {
         onProviderAdded()
     }
-    
+
     func deleteProvider(_ provider: DnsProviderInfo, _ onProviderDeleted: @escaping () -> Void) {
         onProviderDeleted()
     }
-    
+
     func updateProvider(_ provider: DnsProviderInfo, _ onProviderUpdated: @escaping () -> Void) {
         onProviderUpdated()
     }
-    
+
     func isActiveProvider(_ provider: DnsProviderInfo) -> Bool {
         return true
     }
-    
+
     func getServer(serverId: Int) -> DnsServerInfo? {
         for provider in allProviders {
             for server in provider.servers ?? [] {
@@ -73,10 +73,10 @@ class DnsProvidersServiceMock:DnsProvidersServiceProtocol {
                 }
             }
         }
-        
+
         return nil
     }
-    
+
     func getServerName(serverId: Int) -> String? {
         return ""
     }

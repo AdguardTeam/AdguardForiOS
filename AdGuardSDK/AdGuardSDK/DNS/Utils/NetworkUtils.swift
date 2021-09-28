@@ -21,39 +21,39 @@ import Foundation
 protocol NetworkUtilsProtocol {
     /* Returns list of ip addresses of system DNS servers */
     var systemDnsServers: [String] { get }
-    
+
     /* Returns true if ipv4 is available */
     var isIpv4Available: Bool { get }
-    
+
     /* Returns true if ipv6 is available */
     var isIpv6Available: Bool { get }
-    
+
     /* Returns DNS protocol of passed upstream */
     func getProtocol(from upstream: String) throws -> DnsProtocol
-    
+
     /* Checks if upstream is valid */
     func upstreamIsValid(_ upstream: String) -> Bool
 }
 
 public struct NetworkUtils: NetworkUtilsProtocol {
-    
+
     public var systemDnsServers: [String] {
         var state = __res_9_state()
         res_9_ninit(&state)
-        
+
         defer {
             res_9_ndestroy(&state)
         }
-        
+
         let maxServers = 10
         var servers = [res_9_sockaddr_union](repeating: res_9_sockaddr_union(), count: maxServers)
         let found = Int(res_9_getservers(&state, &servers, Int32(maxServers)))
 
         let addrs = Array(servers[0 ..< found]).filter() { $0.sin.sin_len > 0 }
-        
+
         return addrs.map { convertAddrToString($0) }
     }
-    
+
     public var isIpv4Available: Bool {
         var result = false
         enumerateNetworkInterfaces { (cursor) -> Bool in
@@ -65,7 +65,7 @@ public struct NetworkUtils: NetworkUtilsProtocol {
         }
         return result
     }
-    
+
     public var isIpv6Available: Bool {
         var result = false
         enumerateNetworkInterfaces { (cursor) -> Bool in
@@ -77,14 +77,14 @@ public struct NetworkUtils: NetworkUtilsProtocol {
         }
         return result
     }
-    
+
     public init() {}
-    
+
     func getProtocol(from upstream: String) throws -> DnsProtocol {
         if upstream.hasPrefix("sdns://") {
             return try getDnsProtocol(from: upstream)
         }
-        
+
         if upstream.hasPrefix("https://") {
             return .doh
         } else if upstream.hasPrefix("tls://") {
@@ -98,12 +98,12 @@ public struct NetworkUtils: NetworkUtilsProtocol {
             throw CustomDnsProvidersStorageError.invalidUpstream(upstream: upstream)
         }
     }
-    
+
     func upstreamIsValid(_ upstream: String) -> Bool {
         let bootstraps = systemDnsServers
-        
+
         let dnsUpstream = AGDnsUpstream(address: upstream, bootstrap: bootstraps, timeoutMs: AGDnsUpstream.defaultTimeoutMs, serverIp: Data(), id: 0, outboundInterfaceName: nil)
-        
+
         if let error = AGDnsUtils.test(dnsUpstream, ipv6Available: isIpv6Available) {
             Logger.logError("(NetworkUtils) - upstreamIsValid; Error: \(error)")
             return false
@@ -111,12 +111,12 @@ public struct NetworkUtils: NetworkUtilsProtocol {
             return true
         }
     }
-    
+
     private func enumerateNetworkInterfaces(process: (UnsafeMutablePointer<ifaddrs>) -> Bool) {
         var addrList : UnsafeMutablePointer<ifaddrs>?
         guard getifaddrs(&addrList) == 0, let firstAddr = addrList else { return }
         defer { freeifaddrs(addrList) }
-        
+
         for cursor in sequence(first: firstAddr, next: { $0.pointee.ifa_next }) {
             let flags = cursor.pointee.ifa_flags
             if ((Int32(flags) & (IFF_UP|IFF_RUNNING|IFF_LOOPBACK)) == (IFF_UP|IFF_RUNNING)) {
@@ -126,7 +126,7 @@ public struct NetworkUtils: NetworkUtilsProtocol {
             }
         }
     }
-    
+
     private func convertAddrToString(_ s: res_9_sockaddr_union) -> String {
         var s = s
         var hostBuffer = [CChar](repeating: 0, count: Int(NI_MAXHOST))
@@ -140,7 +140,7 @@ public struct NetworkUtils: NetworkUtilsProtocol {
 
         return String(cString: hostBuffer)
     }
-    
+
     private func getDnsProtocol(from sdnsUpstream: String) throws -> DnsProtocol {
         var error: NSError?
         if let stamp = AGDnsStamp(string: sdnsUpstream, error: &error) {

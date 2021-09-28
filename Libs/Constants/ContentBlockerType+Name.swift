@@ -19,10 +19,10 @@
 import enum SafariAdGuardSDK.ContentBlockerType
 
 extension ContentBlockerType {
-    
+
     // TODO: - It is not localized yet, but we are able to do it
     // It's called so, not to change code that uses this variable after it't beeing localized
-    
+
     var localizedName: String {
         let appName = Bundle.main.applicationName
         let cbName: String
@@ -34,7 +34,7 @@ extension ContentBlockerType {
         case .custom: cbName = "Custom"
         case .security: cbName = "Security"
         }
-        
+
         return appName + " - " + cbName
     }
 }

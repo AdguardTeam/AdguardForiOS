@@ -27,7 +27,7 @@ import Setapp
 protocol SetappServiceProtocol {
     /* starts setapp workflow if setapp license was activated */
     func start()
-    
+
     /* open url if needed
         returns true if request is managed by setapp
      */
@@ -35,41 +35,41 @@ protocol SetappServiceProtocol {
 }
 
 class SetappService: SetappServiceProtocol, SetappManagerDelegate {
-    
+
     private let purchaseService: PurchaseServiceProtocol
     private let resources: AESharedResourcesProtocol
-    
+
     private let deviceLimitErrorCode = 1703
     private var started = false
-    
+
     init(purchaseService: PurchaseServiceProtocol, resources: AESharedResourcesProtocol) {
         self.purchaseService = purchaseService
         self.resources = resources
-        
+
         DDLogInfo("(SetappService) - init; setappUsed  = \(resources.setappUsed )")
         if resources.setappUsed {
             purchaseService.updateSetappState(subscription: SetappManager.shared.subscription)
         }
     }
-    
+
     func start() {
         DDLogInfo("(SetappService) - starting Setapp; Current status = \(SetappManager.shared.subscription.description); setappUsed = \(resources.setappUsed)")
         if resources.setappUsed {
             startManager()
         }
     }
-    
+
     /**
      checks if the url belongs to the setapp and processes it through the setup api
      */
     func openUrl(_ url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
         if url.scheme == Bundle.main.bundleIdentifier {
-            
+    
             startManager()
-            
+    
             if SetappManager.shared.canOpen(url: url) {
                 DDLogInfo("(SetappService) - Setapp can openUrl; url: \(url)")
-                
+        
                 return SetappManager.shared.open(url: url, options: options) { [weak self] result in
                     switch result {
                     case .success(let subscription):
@@ -84,37 +84,37 @@ class SetappService: SetappServiceProtocol, SetappManagerDelegate {
                 }
             }
         }
-        
+
         return false
     }
-    
+
     // MARK: -- SetAppManagerDelegate
-    
+
     func setappManager(_ manager: SetappManager, didUpdateSubscriptionTo newSetappSubscription: SetappSubscription) {
         DDLogInfo("(SetappService) setapp subscription changed")
         DDLogInfo("(SetappService) setapp new subscription is active: \(manager.subscription.isActive)")
-        
+
         purchaseService.updateSetappState(subscription: manager.subscription)
         resources.setappUsed = true
     }
-    
+
     // MARK: -- private methods
-    
+
     private func startManager() {
         DDLogInfo("(SetappService) - startManager; start = \(started)")
-        
+
         if started {
             return
         }
-        
+
         SetappManager.shared.start(with: .default)
         SetappManager.logLevel = .debug
         SetappManager.shared.delegate = self
-        
+
         SetappManager.setLogHandle { (message: String, logLevel: SetappLogLevel) in
             DDLogInfo("(Setapp) [\(logLevel)], \(message)")
         }
-        
+
         started = true
     }
 }

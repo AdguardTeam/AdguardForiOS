@@ -22,15 +22,15 @@ protocol Reusable: AnyObject {
 
 extension Reusable {
     static var reuseIdentifier: String { return "\(self)" }
-    
+
     static func registerNibCell(forTableView tableView: UITableView) {
         tableView.register(UINib(nibName: reuseIdentifier, bundle: nil), forCellReuseIdentifier: reuseIdentifier)
     }
-    
+
     static func registerCell(forTableView tableView: UITableView) {
         tableView.register(self, forCellReuseIdentifier: reuseIdentifier)
     }
-    
+
     static func getCell(forTableView tableView: UITableView) -> Self {
         tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as! Self
     }

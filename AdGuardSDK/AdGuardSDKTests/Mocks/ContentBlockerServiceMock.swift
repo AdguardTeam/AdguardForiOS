@@ -1,11 +1,11 @@
 import Foundation
 
 final class ContentBlockerServiceMock: ContentBlockerServiceProtocol {
-    
+
     var reloadingContentBlockers: [ContentBlockerType: Bool] = [:]
-    
+
     var allContentBlockersStates: [ContentBlockerType: Bool] = [:]
-    
+
     var updateContentBlockersCalledCount = 0
     var updateContentBlockersError: Error?
     func updateContentBlockers(onContentBlockersUpdated: @escaping (Error?) -> Void) {
@@ -14,7 +14,7 @@ final class ContentBlockerServiceMock: ContentBlockerServiceProtocol {
             onContentBlockersUpdated(self.updateContentBlockersError)
         }
     }
-    
+
     var getStateCalledCount = 0
     var getStateResult = false
     func getState(for cbType: ContentBlockerType) -> Bool {

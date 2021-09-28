@@ -28,7 +28,7 @@ class SettingsParserTest: XCTestCase {
 
     func testAllSettings() {
         let parser = SettingsParser()
-        
+
         let json = """
                     {
                       "version": 1,
@@ -72,9 +72,9 @@ class SettingsParserTest: XCTestCase {
                     }
         """
         let settings = parser.parse(querry: json)
-        
+
         XCTAssertNotNil(settings)
-        
+
         XCTAssertEqual(settings?.defaultCbFilters?[0].id, 1)
         XCTAssertEqual(settings?.defaultCbFilters?[0].enable, true)
         XCTAssertEqual(settings?.defaultCbFilters?[1].id, 2)

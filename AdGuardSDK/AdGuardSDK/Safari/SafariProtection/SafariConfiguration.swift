@@ -27,7 +27,7 @@ public protocol SafariConfigurationProtocol: ConfigurationProtocol {
     var blocklistIsEnabled: Bool { get set }
     var allowlistIsEnabled: Bool { get set }
     var allowlistIsInverted: Bool { get set }
-    
+
     // Application information
     var appBundleId: String { get set } // Application bundle identifier
     var appProductVersion: String { get set } // Application product version for example 4.1.1 for AdGuard
@@ -46,12 +46,12 @@ public final class SafariConfiguration: SafariConfigurationProtocol {
     public var blocklistIsEnabled: Bool
     public var allowlistIsEnabled: Bool
     public var allowlistIsInverted: Bool
-    
+
     public var appBundleId: String
     public var appProductVersion: String
     public var appId: String
     public var cid: String
-    
+
     public init(
         iosVersion: Int,
         currentLanguage: String,

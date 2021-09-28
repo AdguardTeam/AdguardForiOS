@@ -20,11 +20,11 @@ import Foundation
 @_implementationOnly import class ContentBlockerConverter.WebExtensionHelpers
 
 public struct InvertedAllowlistRuleConverter: UserRuleConverterProtocol {
-    
+
     private static let invertedAllowlistPrefix = "~"
-    
+
     public init() {}
-    
+
     /*
      This function converts domain to inverted allowlist rule ~domain
      If passed domain already contains '~' it won't be repeated
@@ -33,7 +33,7 @@ public struct InvertedAllowlistRuleConverter: UserRuleConverterProtocol {
         let helper = WebExtensionHelpers()
         return helper.convertDomainToInvertedAllowlistRule(domain)
     }
-    
+
     /*
      This function converts rule with ~domain format to domain
      If passed rule doesn't contain '~' prefix the function will return rule without modifying it
@@ -42,7 +42,7 @@ public struct InvertedAllowlistRuleConverter: UserRuleConverterProtocol {
         let helper = WebExtensionHelpers()
         return helper.convertInvertedAllowlistRuleToDomain(rule)
     }
-    
+
     /*
      This function returns all converted rules separated by '|'
      The result rule must start with '@@||*$document,domain='

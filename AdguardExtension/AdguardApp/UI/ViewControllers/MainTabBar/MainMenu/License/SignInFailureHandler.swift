@@ -25,29 +25,29 @@ protocol SignInFailureHandlerProtocol {
 
 struct SignInFailureHandler: SignInFailureHandlerProtocol {
     private let notificationService: UserNotificationServiceProtocol
-    
+
     init(notificationService: UserNotificationServiceProtocol) {
         self.notificationService = notificationService
     }
-    
+
     func loginFailure(_ error: NSError?, auth2Fa: (() -> ())? = nil ) -> SignInMessages {
-        
+
         if error == nil || error?.domain != LoginService.loginErrorDomain {
             // unknown error
             let errorDescription = error?.localizedDescription ?? "nil"
             DDLogError("(LoginController) processLoginResponse - unknown error: \(errorDescription)")
             let message = String.localizedString("login_error_message")
-            
+    
             notificationService.postNotificationInForeground(body: message, title: "")
             return nil
         }
-        
+
         // some errors we show as red text below password text field, some in alert dialog
         var errorMessage: String?
         var alertMessage: String?
-        
+
         switch error!.code {
-        
+
         // errors to be shown in red label
         case LoginService.loginBadCredentials:
             errorMessage = String.localizedString("bad_credentials_error")
@@ -55,7 +55,7 @@ struct SignInFailureHandler: SignInFailureHandlerProtocol {
             errorMessage = String.localizedString("account_is_disabled_error")
         case LoginService.accountIsLocked:
             errorMessage = String.localizedString("account_is_locked_error")
-            
+    
         // errors to be show as alert
         case LoginService.loginMaxComputersExceeded:
             alertMessage = String.localizedString("login_max_computers_exceeded")
@@ -64,11 +64,11 @@ struct SignInFailureHandler: SignInFailureHandlerProtocol {
         // 2fa required
         case LoginService.auth2FaRequired:
             auth2Fa?()
-            
+    
         default:
             alertMessage = String.localizedString("login_error_message")
         }
-        
+
         return (errorMessage: errorMessage, alertMessage: alertMessage)
     }
 }

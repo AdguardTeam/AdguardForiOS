@@ -58,7 +58,7 @@ extension DnsProxyBlockingMode {
         case .customAddress: return .AGBM_ADDRESS
         }
     }
-    
+
     var agHostsRulesBlockingMode: AGBlockingMode {
         switch self {
         case .defaultMode: return AGDnsProxyConfig.getDefault().hostsRulesBlockingMode

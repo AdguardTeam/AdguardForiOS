@@ -20,9 +20,9 @@ import Foundation
 @_implementationOnly import class ContentBlockerConverter.WebExtensionHelpers
 
 public struct AllowlistRuleConverter: UserRuleConverterProtocol {
-    
+
     public init() {}
-    
+
     /*
      This function converts domain to allowlist rule @@||domain^$document
      If passed domain already contains '@@||' or '^$document' they won't be repeated
@@ -31,7 +31,7 @@ public struct AllowlistRuleConverter: UserRuleConverterProtocol {
         let helper = WebExtensionHelpers()
         return helper.convertDomainToAllowlistRule(domain)
     }
-    
+
     /*
      This function converts rule with @@||domain^$document format to domain
      If passed rule doesn't contain '@@||' or '^$document'
@@ -41,11 +41,11 @@ public struct AllowlistRuleConverter: UserRuleConverterProtocol {
         let helper = WebExtensionHelpers()
         return helper.convertAllowlistRuleToDomain(ruleText)
     }
-    
+
     /*
      Returns all converted rules joined by new line
      The result string looks like:
-     
+ 
      @@||domain1^$document
      @@||domain2^$document
      @@||domain3^$document

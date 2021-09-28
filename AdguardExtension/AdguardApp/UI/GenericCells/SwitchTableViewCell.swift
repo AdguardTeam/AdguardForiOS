@@ -23,16 +23,16 @@ protocol SwitchTableViewCellDelegate: AnyObject {
 }
 
 final class SwitchTableViewCell: UITableViewCell, Reusable {
-    
+
     weak var delegate: SwitchTableViewCellDelegate?
-    
+
     var switchIsOn = false {
         didSet {
             titleLabel.text = switchIsOn.localizedStateDescription
             stateSwitch.setOn(switchIsOn, animated: true)
         }
     }
-    
+
     private lazy var stateSwitch: UISwitch = {
         let stateSwitch = UISwitch()
         stateSwitch.translatesAutoresizingMaskIntoConstraints = false
@@ -40,7 +40,7 @@ final class SwitchTableViewCell: UITableViewCell, Reusable {
         stateSwitch.addTarget(self, action: #selector(switchValueChanged(_:)), for: .valueChanged)
         return stateSwitch
     }()
-    
+
     private lazy var titleLabel: ThemableLabel = {
         let label = ThemableLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -50,12 +50,12 @@ final class SwitchTableViewCell: UITableViewCell, Reusable {
         label.textAlignment = .left
         return label
     }()
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupUI()
     }
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
@@ -65,23 +65,23 @@ final class SwitchTableViewCell: UITableViewCell, Reusable {
         themeService.setupLabel(titleLabel)
         themeService.setupTableCell(self)
     }
-    
+
     private func setupUI() {
         contentView.addSubview(titleLabel)
         contentView.addSubview(stateSwitch)
-        
+
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16.0),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
             titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16.0),
             titleLabel.trailingAnchor.constraint(equalTo: stateSwitch.leadingAnchor, constant: -16.0),
-            
+    
             stateSwitch.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
             stateSwitch.widthAnchor.constraint(equalToConstant: 50.0),
             stateSwitch.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor)
         ])
     }
-    
+
     /// Switch action handler
     @objc private final func switchValueChanged(_ sender: UISwitch) {
         delegate?.switchStateChanged(to: sender.isOn)

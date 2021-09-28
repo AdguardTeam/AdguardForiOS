@@ -20,27 +20,27 @@ import UIKit
 import SafariAdGuardSDK
 
 final class FilterDetailsTagsCell: UITableViewCell, Reusable {
-    
+
     var tagModels: [SafariTagButtonModel] = [] {
         didSet {
             processModels()
         }
     }
-    
+
     // MARK: - Private properties
-    
+
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    
+
     // UI elements constraints
     private var sideInset: CGFloat { isIpadTrait ? 24.0 : 16.0 }
     private var topBottomInset: CGFloat { isIpadTrait ? 16.0 : 12.0 }
     private var tagsInset: CGFloat { isIpadTrait ? 16.0 : 8.0 }
     private var tagHeight: CGFloat { isIpadTrait ? 32.0 : 22.0 }
     private var tagsStackViewWidth: CGFloat { lastFrame.width - (sideInset * 2) }
-    
+
     // We use it to avoid changing constraints when frame didn't change
     private var lastFrame: CGRect = .zero
-    
+
     private lazy var tagsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +49,7 @@ final class FilterDetailsTagsCell: UITableViewCell, Reusable {
         stackView.spacing = 4.0
         return stackView
     }()
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         if frame != lastFrame {
@@ -57,17 +57,17 @@ final class FilterDetailsTagsCell: UITableViewCell, Reusable {
             processModels()
         }
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupUI()
     }
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
     }
-    
+
     func updateTheme() {
         tagsStackView.subviews.forEach { stackView in
             if let stackView = stackView as? UIStackView {
@@ -80,12 +80,12 @@ final class FilterDetailsTagsCell: UITableViewCell, Reusable {
         }
         themeService.setupTableCell(self)
     }
-    
+
     private func setupUI() {
         selectionStyle = .none
         tagsStackView.isUserInteractionEnabled = false
         contentView.addSubview(tagsStackView)
-        
+
         NSLayoutConstraint.activate([
             tagsStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: sideInset),
             tagsStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -sideInset),
@@ -93,17 +93,17 @@ final class FilterDetailsTagsCell: UITableViewCell, Reusable {
             tagsStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -topBottomInset)
         ])
     }
-    
+
     private func processModels() {
         tagsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         processTags()
         layoutIfNeeded()
     }
-    
+
     private func processTags() {
         var horStack = getHorizontalTagStackView()
         var currentStackWidth: CGFloat = 0.0
-        
+
         for tag in tagModels {
             let button = SafariTagButton(model: tag)
             button.updateTheme(themeService)
@@ -111,23 +111,23 @@ final class FilterDetailsTagsCell: UITableViewCell, Reusable {
             button.translatesAutoresizingMaskIntoConstraints = false
             button.widthAnchor.constraint(equalToConstant: width).isActive = true
             button.heightAnchor.constraint(equalToConstant: tagHeight).isActive = true
-            
+    
             if currentStackWidth + width > tagsStackViewWidth {
                 addEmptyView(to: horStack, currentStackWidth: currentStackWidth)
                 tagsStackView.addArrangedSubview(horStack)
                 horStack = getHorizontalTagStackView()
                 currentStackWidth = 0.0
             }
-            
+    
             horStack.addArrangedSubview(button)
             currentStackWidth += width
             currentStackWidth += tagsInset
         }
-        
+
         addEmptyView(to: horStack, currentStackWidth: currentStackWidth)
         tagsStackView.addArrangedSubview(horStack)
     }
-    
+
     private func getHorizontalTagStackView() -> UIStackView {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -138,7 +138,7 @@ final class FilterDetailsTagsCell: UITableViewCell, Reusable {
         stackView.heightAnchor.constraint(equalToConstant: tagHeight).isActive = true
         return stackView
     }
-    
+
     private func addEmptyView(to stack: UIStackView, currentStackWidth: CGFloat) {
         let spaceLeft = tagsStackViewWidth - currentStackWidth
         let emptyView = UIView()

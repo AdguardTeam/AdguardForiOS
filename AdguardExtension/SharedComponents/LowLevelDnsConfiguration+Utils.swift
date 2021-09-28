@@ -31,7 +31,7 @@ extension LowLevelDnsConfiguration {
             restartByReachability: true
         )
     }
-    
+
     static func fromResources(_ resources: AESharedResourcesProtocol)->LowLevelDnsConfiguration {
         return LowLevelDnsConfiguration(
             tunnelMode: resources.tunnelMode,

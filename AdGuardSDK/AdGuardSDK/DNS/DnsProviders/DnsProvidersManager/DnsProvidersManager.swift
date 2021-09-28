@@ -23,11 +23,11 @@ public protocol DnsProvidersManagerProtocol: ResetableSyncProtocol {
     var allProviders: [DnsProviderMetaProtocol] { get }
     var predefinedProviders: [DnsProviderProtocol] { get }
     var customProviders: [CustomDnsProviderProtocol] { get }
-    
+
     /* Active */
     var activeDnsProvider: DnsProviderMetaProtocol { get }
     var activeDnsServer: DnsServerMetaProtocol { get }
-    
+
     /**
      This method should be called when implementation changes
      All inner objects will be reconstructed according to implementation
@@ -36,7 +36,7 @@ public protocol DnsProvidersManagerProtocol: ResetableSyncProtocol {
 
     /**
      Makes provider with **id** active
-     
+ 
      All predefined providers can have multiple DNS servers so to reveal the server to make active
      we need **provider id** to find a provider and **server id** to find a server
      - Parameter id: Unique provider identifier
@@ -53,7 +53,7 @@ public protocol DnsProvidersManagerProtocol: ResetableSyncProtocol {
      - Throws: Throws an error if upstreams are invalid or have different protocols
      */
     func addCustomProvider(name: String, upstreams: [String], selectAsCurrent: Bool) throws
-    
+
     /**
      Updates custom provider in the storage
      - Parameter id: Unique identifier of custom DNS provider that should be updated
@@ -63,13 +63,13 @@ public protocol DnsProvidersManagerProtocol: ResetableSyncProtocol {
      - Throws: Throws an error if custom provider with the specified **id** is not in the storage
      */
     func updateCustomProvider(withId id: Int, newName: String, newUpstreams: [String], selectAsCurrent: Bool) throws
-    
+
     /**
      Removes custom provider by its **id** from storage
-     
+ 
      If current provider is removed than the default one or AdGuard DoH will be set depending on the
      current DNS implementation
-     
+ 
      - Parameter id: Unique identifier of custom DNS provider that should be removed from the storage
      - Throws: Throws an error if custom provider with passed **id** is not in the storage
      */
@@ -77,31 +77,31 @@ public protocol DnsProvidersManagerProtocol: ResetableSyncProtocol {
 }
 
 final public class DnsProvidersManager: DnsProvidersManagerProtocol {
-    
+
     // MARK: - Internal variables
-    
+
     public var allProviders: [DnsProviderMetaProtocol] { predefinedProviders + customProviders }
     public var predefinedProviders: [DnsProviderProtocol]
     public var customProviders: [CustomDnsProviderProtocol]
-    
+
     public var activeDnsProvider: DnsProviderMetaProtocol
     public var activeDnsServer: DnsServerMetaProtocol
-    
+
     // MARK: - Private variables
-    
+
     /* Services */
     private let configuration: DnsConfigurationProtocol
     private let userDefaults: UserDefaultsStorageProtocol
     private let customProvidersStorage: CustomDnsProvidersStorageProtocol
     private let providersVendor: DnsProvidersVendorProtocol
-    
+
     // MARK: - Initialization
-    
+
     public convenience init(configuration: DnsConfigurationProtocol, userDefaults: UserDefaults) throws {
         let userDefaultsStorage = UserDefaultsStorage(storage: userDefaults)
         try self.init(configuration: configuration, userDefaults: userDefaultsStorage)
     }
-    
+
     convenience init(configuration: DnsConfigurationProtocol, userDefaults: UserDefaultsStorageProtocol) throws {
         let customProvidersStorage = CustomDnsProvidersStorage(userDefaults: userDefaults, configuration: configuration)
         let predefinedDnsProviders = try PredefinedDnsProvidersDecoder(currentLanguage: configuration.currentLanguage)
@@ -112,81 +112,81 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
             predefinedProviders: predefinedDnsProviders
         )
     }
-     
+ 
     // Init for tests
     init(configuration: DnsConfigurationProtocol,
          userDefaults: UserDefaultsStorageProtocol,
          customProvidersStorage: CustomDnsProvidersStorageProtocol,
          predefinedProviders: PredefinedDnsProvidersDecoderProtocol) {
-        
+
         self.configuration = configuration
         self.userDefaults = userDefaults
         self.customProvidersStorage = customProvidersStorage
         self.providersVendor = DnsProvidersVendor(predefinedProviders: predefinedProviders, customProvidersStorage: self.customProvidersStorage)
-        
+
         let providersWithState = providersVendor.getProvidersWithState(for: configuration.dnsImplementation, activeDns: userDefaults.activeDnsInfo)
-        
+
         self.predefinedProviders = providersWithState.predefined
         self.customProviders = providersWithState.custom
         self.activeDnsProvider = providersWithState.activeDnsProvider
         self.activeDnsServer = providersWithState.activeDnsServer
     }
-    
+
     // MARK: - Public methods
-    
+
     public func dnsImplementationChanged() {
         Logger.logInfo("(DnsProvidersManager) - dnsImplementationChanged; Changed to \(configuration.dnsImplementation)")
         reinitializeProviders()
     }
-    
+
     public func selectProvider(withId id: Int, serverId: Int) throws {
         Logger.logInfo("(DnsProvidersManager) - selectProvider; Selecting provider with id=\(id) serverId=\(serverId)")
-        
+
         guard let provider = allProviders.first(where: { $0.providerId == id }) else {
             throw DnsProviderError.invalidProvider(providerId: id)
         }
-    
+
         guard provider.dnsServers.contains(where: { $0.id == serverId }) else {
             throw DnsProviderError.invalidCombination(providerId: id, serverId: serverId)
         }
-        
+
         let newActiveDnsInfo = DnsProvidersManager.ActiveDnsInfo(providerId: id, serverId: serverId)
         userDefaults.activeDnsInfo = newActiveDnsInfo
         reinitializeProviders()
-        
+
         Logger.logInfo("(DnsProvidersManager) - selectProvider; Selected provider with id=\(id) serverId=\(serverId)")
     }
-    
+
     public func addCustomProvider(name: String, upstreams: [String], selectAsCurrent: Bool) throws {
         Logger.logInfo("(DnsProvidersManager) - addCustomProvider; Trying to add custom provider with name=\(name), upstreams=\(upstreams.joined(separator: "; ")) selectAsCurrent=\(selectAsCurrent)")
-        
+
         let ids = try customProvidersStorage.addCustomProvider(name: name, upstreams: upstreams)
         if selectAsCurrent {
             userDefaults.activeDnsInfo = DnsProvidersManager.ActiveDnsInfo(providerId: ids.providerId, serverId: ids.serverId)
         }
         reinitializeProviders()
-        
-        
+    
+
         Logger.logInfo("(DnsProvidersManager) - addCustomProvider; Added custom provider with name=\(name), upstreams=\(upstreams.joined(separator: "; ")) selectAsCurrent=\(selectAsCurrent)")
     }
-    
+
     public func updateCustomProvider(withId id: Int, newName: String, newUpstreams: [String], selectAsCurrent: Bool) throws {
         Logger.logInfo("(DnsProvidersManager) - updateCustomProvider; Trying to update custom provider with id=\(id) name=\(newName), upstreams=\(newUpstreams.joined(separator: "; ")) selectAsCurrent=\(selectAsCurrent)")
-        
+
         try customProvidersStorage.updateCustomProvider(withId: id, newName: newName, newUpstreams: newUpstreams)
         if selectAsCurrent, let provider = customProviders.first(where: { $0.providerId == id }) {
             userDefaults.activeDnsInfo = DnsProvidersManager.ActiveDnsInfo(providerId: provider.providerId, serverId: provider.server.id)
         }
         reinitializeProviders()
-        
+
         Logger.logInfo("(DnsProvidersManager) - updateCustomProvider; Updated custom provider with id=\(id) name=\(newName), upstreams=\(newUpstreams.joined(separator: "; ")) selectAsCurrent=\(selectAsCurrent)")
     }
-    
+
     public func removeCustomProvider(withId id: Int) throws {
         Logger.logInfo("(DnsProvidersManager) - removeCustomProvider; Trying to remove provider with id=\(id)")
-        
+
         try customProvidersStorage.removeCustomProvider(withId: id)
-        
+
         let activeProviderId = userDefaults.activeDnsInfo.providerId
         if id == activeProviderId {
             let defaultProviderId = PredefinedDnsProvider.systemDefaultProviderId
@@ -194,29 +194,29 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
             userDefaults.activeDnsInfo = DnsProvidersManager.ActiveDnsInfo(providerId: defaultProviderId, serverId: defaultServerId)
         }
         reinitializeProviders()
-        
+
         Logger.logInfo("(DnsProvidersManager) - removeCustomProvider; Removed provider with id=\(id)")
     }
-    
+
     public func reset() throws {
         Logger.logInfo("(DnsProvidersManager) - reset; Start")
-        
+
         let defaultProviderId = PredefinedDnsProvider.systemDefaultProviderId
         let defaultServerId = PredefinedDnsServer.systemDefaultServerId
         userDefaults.activeDnsInfo = DnsProvidersManager.ActiveDnsInfo(providerId: defaultProviderId, serverId: defaultServerId)
-        
+
         try! customProvidersStorage.reset()
         reinitializeProviders()
-        
+
         Logger.logInfo("(DnsProvidersManager) - reset; Finish")
     }
-    
+
     // MARK: - Private methods
-    
+
     private func reinitializeProviders() {
         let providersWithState = providersVendor.getProvidersWithState(for: configuration.dnsImplementation,
                                                                        activeDns: userDefaults.activeDnsInfo)
-        
+
         self.predefinedProviders = providersWithState.predefined
         self.customProviders = providersWithState.custom
         self.activeDnsProvider = providersWithState.activeDnsProvider
@@ -227,17 +227,17 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
 // MARK: - DnsProvidersManager + Helper objects
 
 extension DnsProvidersManager {
-    
+
     struct ActiveDnsInfo: Codable {
         let providerId: Int
         let serverId: Int
     }
-    
+
     enum DnsProviderError: Error, CustomDebugStringConvertible {
         case invalidProvider(providerId: Int)
         case invalidCombination(providerId: Int, serverId: Int)
         case unsupportedProtocol(prot: DnsProtocol)
-        
+
         var debugDescription: String {
             switch self {
             case .invalidProvider(let providerId): return "DNS provider with id=\(providerId) doesn't exist"
@@ -252,7 +252,7 @@ extension DnsProvidersManager {
 
 fileprivate extension UserDefaultsStorageProtocol {
     private var activeDnsInfoKey: String { "DnsAdGuardSDK.activeDnsInfoKey" }
-    
+
     var activeDnsInfo: DnsProvidersManager.ActiveDnsInfo {
         get {
             if let infoData = storage.value(forKey: activeDnsInfoKey) as? Data {

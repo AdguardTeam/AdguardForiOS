@@ -26,16 +26,16 @@ struct FilterGroupsTable: Equatable {
     let name: String
     let displayNumber: Int
     let isEnabled: Bool
-    
+
     // Table name
     static let table = Table("filter_groups")
-    
+
     // Columns names
     static let groupId = Expression<Int>("group_id")
     static let name = Expression<String>("name")
     static let displayNumber = Expression<Int>("display_number")
     static let isEnabled = Expression<Bool>("is_enabled")
-    
+
     // Localized initializer
     init(dbGroup: Row, localizedName: String) {
         self.groupId = dbGroup[FilterGroupsTable.groupId]
@@ -43,7 +43,7 @@ struct FilterGroupsTable: Equatable {
         self.displayNumber = dbGroup[FilterGroupsTable.displayNumber]
         self.isEnabled = dbGroup[FilterGroupsTable.isEnabled]
     }
-    
+
     // Initializer from DB result
     init(dbGroup: Row) {
         self.groupId = dbGroup[FilterGroupsTable.groupId]
@@ -51,7 +51,7 @@ struct FilterGroupsTable: Equatable {
         self.displayNumber = dbGroup[FilterGroupsTable.displayNumber]
         self.isEnabled = dbGroup[FilterGroupsTable.isEnabled]
     }
-    
+
     // Default initializer
     init(groupId: Int, name: String, displayNumber: Int, isEnabled: Bool) {
         self.groupId = groupId
@@ -71,27 +71,27 @@ protocol GroupsMetaStorageProtocol {
 }
 
 extension MetaStorage: GroupsMetaStorageProtocol {
-    
+
     // Returns all groups with localization for specified language from database
     func getAllLocalizedGroups(forLanguage lang: String) throws -> [FilterGroupsTable] {
         // Query: SELECT * FROM filter_groups ORDER BY display_number, group_id
         let query = FilterGroupsTable.table.order(FilterGroupsTable.displayNumber, FilterGroupsTable.groupId)
-        
+
         let result: [FilterGroupsTable] = try filtersDb.prepare(query).compactMap { group in
             let dbGroup = FilterGroupsTable(dbGroup: group)
-            
+    
             /* If there is no localized group name we trying to get default english localization and if it is steel nil set default localized name from filter_group row */
             var localizedName = getLocalizationForGroup(withId: dbGroup.groupId, forLanguage: lang)?.name
             if localizedName == nil && lang != MetaStorage.defaultDbLanguage  {
                 localizedName = getLocalizationForGroup(withId: dbGroup.groupId, forLanguage: lang)?.name
             }
-            
+    
             return FilterGroupsTable(dbGroup: group, localizedName: localizedName ?? dbGroup.name)
         }
         Logger.logDebug("(FiltersMetaStorage) - getAllLocalizedGroups returning \(result.count) groups objects for lang=\(lang)")
         return result
     }
-    
+
     // Enables or disables a group with specified id
     func setGroup(withId id: Int, enabled: Bool) throws {
         // Query: UPDATE filter_groups SET is_enabled = enabled WHERE group_id = id
@@ -99,7 +99,7 @@ extension MetaStorage: GroupsMetaStorageProtocol {
         try filtersDb.run(query.update(FilterGroupsTable.isEnabled <- enabled))
         Logger.logDebug("(FiltersMetaStorage) - setGroup group with id=\(id) was set to enabled=\(enabled)")
     }
-    
+
     // Updates group metadata with passed one
     func update(group: GroupMetaProtocol) throws {
         // Query: UPDATE filter_groups SET name = group.groupName, display_number = group.displayNumber) WHERE group_id = group.groupId
@@ -109,12 +109,12 @@ extension MetaStorage: GroupsMetaStorageProtocol {
         try filtersDb.run(query)
         Logger.logDebug("(FiltersMetaStorage) - Update group with id=\(group.groupId)")
     }
-    
+
     // Updates passed groups meta
     func update(groups: [GroupMetaProtocol]) throws {
         try groups.forEach { try update(group: $0) }
     }
-    
+
     // TODO: - Needs tests
     /// Adds group to DB
     /// This methods should be used only in `Builder`

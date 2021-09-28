@@ -24,30 +24,30 @@ import SafariAdGuardSDK
 final class ActionExtensionTableController: UITableViewController {
 
     // MARK: - UI Elements
-    
+
     @IBOutlet weak var faviconImageView: UIImageView!
     @IBOutlet weak var domainLabel: ThemableLabel!
     @IBOutlet weak var protectionSwitch: UISwitch!
     @IBOutlet var themableLabels: [ThemableLabel]!
-    
+
     var model: Model!
-    
+
     // MARK: - Private variables
-    
+
     private var newProtectionState: Bool = false
     private let toggleProtectionQueue = DispatchQueue(label: "ActionExtensionTableController.toggleProtectionQueue", qos: .utility)
-    
+
     private let themeService = ServicesInitializer.shared.themeService
     private let configuration = ServicesInitializer.shared.configuration
     private let resources = ServicesInitializer.shared.resources
     private let safariProtection = ServicesInitializer.shared.safariProtection
-    
+
     private let protectionStateRow = 0
     private let blockElementRow = 1
     private let reportProblemRow = 2
-    
+
     // MARK: - UIViewController lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -59,7 +59,7 @@ final class ActionExtensionTableController: UITableViewController {
         updateTheme()
         checkContentBlockersState()
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         faviconImageView.layer.cornerRadius = faviconImageView.frame.height / 2
@@ -75,14 +75,14 @@ final class ActionExtensionTableController: UITableViewController {
             updateTheme()
         }
     }
-    
+
     // MARK: - Actions
-    
+
     @IBAction func protectionStateChanged(_ sender: UISwitch) {
         let newEnabled = sender.isOn
         changeProtectionState(to: newEnabled)
     }
-    
+
     @IBAction func doneButtonTapped(_ sender: UIBarButtonItem) {
         let extensionItem = NSExtensionItem()
         let reload = newProtectionState != model.isSafariProtectionEnabled
@@ -90,24 +90,24 @@ final class ActionExtensionTableController: UITableViewController {
             item: [NSExtensionJavaScriptFinalizeArgumentKey: ["needReload": "\(reload)"]] as NSSecureCoding,
             typeIdentifier: String(kUTTypePropertyList)
         )
-        
+
         extensionItem.attachments?.append(itemProvider)
         extensionContext?.completeRequest(returningItems: [extensionItem], completionHandler: nil)
     }
-    
+
     // MARK: - Tableview delegates
-        
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         themeService.setupTableCell(cell)
         return cell
     }
-    
+
     // MARK: - Table view delegate
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         defer { tableView.deselectRow(at: indexPath, animated: true) }
-        
+
         switch indexPath.row {
         case protectionStateRow:
             let newEnabled = !protectionSwitch.isOn
@@ -118,41 +118,41 @@ final class ActionExtensionTableController: UITableViewController {
         default: return
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
+
     override func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
         return 50.0
     }
-    
+
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return createInfoView()
     }
-    
+
     // MARK: - Private methods
-    
+
     private func updateTheme() {
         view.backgroundColor = themeService.backgroundColor
         themeService.setupLabels(themableLabels)
         themeService.setupTable(tableView)
         tableView.reloadData()
     }
-    
+
     /// Changes current page protection state
     private func changeProtectionState(to enabled: Bool) {
         toggleProtectionQueue.async {
             // This closure will continue executing for 30 seconds even if user closes the extension
             ProcessInfo().performExpiringActivity(withReason: "Loading JSONs to CB") { [weak self] expired in
                 guard let self = self, !expired, enabled != self.newProtectionState else { return }
-                
+        
                 let helper = ActionExtensionUserRulesHelper(domain: self.model.domain, safariProtection: self.safariProtection)
                 let allowlistIsInverted = self.resources.invertedWhitelist
-                
+        
                 // When rule is in allowlist it means that protection won't be applied to current domain
                 // If rule is in inverted allowlist that means that all other domains are in the allowlist
-                
+        
                 let successfullyChangedState: Bool
                 if allowlistIsInverted {
                     if enabled {
@@ -178,7 +178,7 @@ final class ActionExtensionTableController: UITableViewController {
             }
         }
     }
-        
+
     /// Presents alert to notify user about overlimit
     private func showOverLimitAlert() {
         DispatchQueue.main.async { [weak self] in
@@ -187,7 +187,7 @@ final class ActionExtensionTableController: UITableViewController {
             self?.presentSimpleAlert(title: title, message: message, onOkButtonTapped: nil)
         }
     }
-    
+
     /// Calls JS script for precise element blocking on the current WEB page
     private func blockElement() {
         guard model.isJsInjectSupported else {
@@ -196,18 +196,18 @@ final class ActionExtensionTableController: UITableViewController {
             presentSimpleAlert(title: title, message: message, onOkButtonTapped: nil)
             return
         }
-        
+
         let extensionItem = NSExtensionItem()
         let settings = ["urlScheme": Bundle.main.appScheme]
         let itemProvider: NSItemProvider = NSItemProvider(
             item: [NSExtensionJavaScriptFinalizeArgumentKey: ["blockElement": NSNumber(value: 1), "settings": settings]] as NSSecureCoding,
             typeIdentifier: String(kUTTypePropertyList)
         )
-        
+
         extensionItem.attachments = [itemProvider]
         extensionContext?.completeRequest(returningItems: [extensionItem], completionHandler: nil)
     }
-    
+
     /// Constructs report URL and opens our special WEB page for reporting
     private func reportProblem() {
         let safariProtection = ServicesInitializer.shared.safariProtection
@@ -216,7 +216,7 @@ final class ActionExtensionTableController: UITableViewController {
         openWithUrl(url)
         extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
     }
-    
+
     /// Notify user if not all content blockers are enabled
     private func checkContentBlockersState() {
         if !configuration.allContentBlockersEnabled {
@@ -225,7 +225,7 @@ final class ActionExtensionTableController: UITableViewController {
             presentSimpleAlert(title: title, message: message, onOkButtonTapped: nil)
         }
     }
-    
+
     /// This method is a hack for opening URL from extension
     private func openWithUrl(_ url: URL) {
         var responder: UIResponder? = self
@@ -237,19 +237,19 @@ final class ActionExtensionTableController: UITableViewController {
             responder = responder?.next
         }
     }
-    
+
     /// Info view with message that action extension is old feature
     private func createInfoView() -> UIView {
         let view = UIView()
         let containerView = UIView()
         let label = ThemableLabel()
-        
+
         containerView.translatesAutoresizingMaskIntoConstraints = false
         label.translatesAutoresizingMaskIntoConstraints = false
-        
+
         view.addSubview(containerView)
         containerView.addSubview(label)
-        
+
         containerView.backgroundColor = themeService.selectedCellColor
         containerView.layer.cornerRadius = 4
         label.greyText = true
@@ -257,23 +257,23 @@ final class ActionExtensionTableController: UITableViewController {
         label.font = .systemFont(ofSize: isIpadTrait ? 24.0 : 16.0)
         themeService.setupLabel(label)
         label.numberOfLines = 0
-        
+
         if #available(iOS 15, *) {
             label.text = String.localizedString("action_extension_obsolete_info")
         } else {
             label.text = String.localizedString("action_extension_new_version_info")
         }
-    
+
         label.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 12.0).isActive = true
         label.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 12.0).isActive = true
         label.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -12.0).isActive = true
         label.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -12.0).isActive = true
-        
+
         containerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8.0).isActive = true
         containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8.0).isActive = true
         containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8.0).isActive = true
-        
+
         return view
     }
 }
@@ -287,7 +287,7 @@ extension ActionExtensionTableController {
         let domain: String
         let isJsInjectSupported: Bool
         let isSafariProtectionEnabled: Bool
-        
+
         init(context: Context, isSafariProtectionEnabled: Bool) {
             self.icon = context.icon
             self.url = context.url

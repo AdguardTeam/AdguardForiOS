@@ -29,11 +29,11 @@ public final class Atomic<Value> {
  
     private let queue = DispatchQueue(label: "AdGuardSDK.atomic")
     private var value: Value
-    
+
     public init(wrappedValue: Value) {
         self.value = wrappedValue
     }
-    
+
     public func mutate(_ mutation: (inout Value) throws -> Void) rethrows {
         return try queue.sync { try mutation(&value) }
     }

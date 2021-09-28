@@ -23,39 +23,39 @@ protocol OnboardingControllerDelegate {
 }
 
 final class OnboardingController: UIViewController {
-    
+
     var delegate: OnboardingControllerDelegate?
     var needsShowingPremium: Bool?
-    
+
     // MARK: - services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
-    
+
     private var contenBlockerObserver: NotificationToken?
-    
+
     private let showLicenseSegue = "ShowLicenseSegue"
-    
+
     // MARK: - outlets
     @IBOutlet weak var settingsLabel: ThemableLabel!
     @IBOutlet weak var safariLabel: ThemableLabel!
     @IBOutlet weak var switchLabel: ThemableLabel!
     @IBOutlet weak var onboardingContentView: OnboardingContentView!
     @IBOutlet weak var onboardingContentViewTopConstraint: NSLayoutConstraint!
-    
+
     @IBOutlet weak var watchManualButtonIpad: UIButton!
     @IBOutlet var themableLabels: [ThemableLabel]!
-    
+
     // MARK: - view controller live cycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         contenBlockerObserver = NotificationCenter.default.observe(name: .contentBlockersStateChanged, object: nil, queue: .main, using: { [weak self] _ in
             self?.observeContentBlockersState()
         })
-        
+
         watchManualButtonIpad.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.lightGreen1)
-        
+
         if #available(iOS 15.0, *) {
             onboardingContentViewTopConstraint.constant = 48.0
             onboardingContentView.onboardingType = .withAdvancedProtection
@@ -63,10 +63,10 @@ final class OnboardingController: UIViewController {
             onboardingContentViewTopConstraint.constant = 30.0
             onboardingContentView.onboardingType = .withoutAdvancedProtection
         }
-        
+
         self.updateTheme()
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let getProController = segue.destination as? GetProController {
             navigationController?.setNavigationBarHidden(false, animated: true)
@@ -76,17 +76,17 @@ final class OnboardingController: UIViewController {
             }
         }
     }
-    
+
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return theme.statusbarStyle()
     }
-    
+
     // MARK: - Actions
-    
+
     @IBAction func closeAction(_ sender: Any) {
         // We mustn't show License screen for japannese in onboarding
         let isJapanesse = Locale.current.languageCode == "ja"
-        
+
         if needsShowingPremium == true && !configuration.proStatus && !isJapanesse{
             performSegue(withIdentifier: self.showLicenseSegue, sender: self)
         } else {
@@ -95,18 +95,18 @@ final class OnboardingController: UIViewController {
             }
         }
     }
-    
+
     @IBAction func videoAction(_ sender: UIButton) {
         showVideoTutorial()
     }
-    
-    
+
+
     // MARK: - Private methods
-    
+
     private func setupLabels() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            
+    
             let settingsLabelText: String
             let safariLabelText: String
             switch self.onboardingContentView.onboardingType {
@@ -117,19 +117,19 @@ final class OnboardingController: UIViewController {
                 settingsLabelText = String.localizedString("onboarding_first_step_text")
                 safariLabelText = String.localizedString("onboarding_second_step_text")
             }
-            
+    
             self.settingsLabel.attributedText = NSMutableAttributedString.fromHtml(settingsLabelText, fontSize: self.settingsLabel.font!.pointSize, color: self.theme.grayTextColor)
-            
+    
             self.safariLabel.attributedText = NSMutableAttributedString.fromHtml(safariLabelText, fontSize: self.safariLabel.font!.pointSize, color: self.theme.grayTextColor)
-            
+    
             self.switchLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_third_step_text"), fontSize: self.switchLabel.font!.pointSize, color: self.theme.grayTextColor)
         }
     }
-    
+
     private func observeContentBlockersState(){
         // We mustn't show License screen for japannese in onboarding
         let isJapanesse = Locale.current.languageCode == "ja"
-        
+
         if needsShowingPremium == true && configuration.someContentBlockersEnabled && !configuration.proStatus {
             DispatchQueue.main.async {[weak self] in
                 guard let self = self else { return }

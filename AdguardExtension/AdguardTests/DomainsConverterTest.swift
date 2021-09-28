@@ -20,72 +20,72 @@ import XCTest
 
 class DomainsConverterTest: XCTestCase {
     let converter: DomainsConverterProtocol = DomainsConverter()
-    
+
     // MARK: - Test whitelistDomainFromRule function
-    
+
     func testWhitelistDomainFromRuleWithRule(){
         let domain = "www.google.com"
         let whitelistRule = "@@||www.google.com^|$important"
         let domainToCheck = converter.whitelistDomainFromRule(whitelistRule)
-        
+
         XCTAssertEqual(domain, domainToCheck)
     }
-    
+
     func testEmptyWhitelistRule() {
         let domain = ""
         let whitelistRule = "@@||"
-        
+
         let domainToCheck = converter.whitelistDomainFromRule(whitelistRule)
-        
+
         XCTAssertEqual(domain, domainToCheck)
     }
-    
+
     func testWhitelistDomainFromRuleWithDomain(){
         let domain = "www.google.com"
         let domainToCheck = converter.whitelistDomainFromRule(domain)
-        
+
         XCTAssertEqual(domain, domainToCheck)
     }
-    
+
     // MARK: - Test blacklistRuleFromDomain function
-    
+
     func testBlacklistRuleFromDomainWithRule(){
         let domain = "www.google.com"
         let blacklistRule = "||www.google.com^$important"
         let ruleToCheck = converter.blacklistRuleFromDomain(domain)
-        
+
         XCTAssertEqual(blacklistRule, ruleToCheck)
     }
-    
+
     func testBlacklistRuleFromDomainWithDomain(){
         let blacklistRule = "||www.google.com^$important"
         let ruleToCheck = converter.blacklistRuleFromDomain(blacklistRule)
-        
+
         XCTAssertEqual(blacklistRule, ruleToCheck)
     }
-    
+
     func testBlacklistRuleFromDomainWithRuleWithDotInTheEnd(){
         let domain = "www.google.com."
         let blacklistRule = "||www.google.com^$important"
         let ruleToCheck = converter.blacklistRuleFromDomain(domain)
-        
+
         XCTAssertEqual(blacklistRule, ruleToCheck)
     }
-    
+
     // MARK: - Test whitelistRuleFromDomain function
-    
+
     func testWhitelistRuleFromDomainWithRule(){
         let domain = "www.google.com"
         let whitelistRule = "@@||www.google.com^|$important"
         let ruleToCheck = converter.whitelistRuleFromDomain(domain)
-        
+
         XCTAssertEqual(whitelistRule, ruleToCheck)
     }
-    
+
     func testWhitelistRuleFromDomainWithDomain(){
         let whitelistRule = "@@||www.google.com^|$important"
         let ruleToCheck = converter.whitelistRuleFromDomain(whitelistRule)
-        
+
         XCTAssertEqual(whitelistRule, ruleToCheck)
     }
 }

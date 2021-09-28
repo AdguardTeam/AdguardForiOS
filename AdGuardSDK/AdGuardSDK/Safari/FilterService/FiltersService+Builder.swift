@@ -23,7 +23,7 @@ protocol FiltersServiceForBuilderProtocol {
 }
 
 extension FiltersService: FiltersServiceForBuilderProtocol {
-    
+
     /// This function should be used only in builder
     func downloadAndSaveFiltersMeta() throws {
         var resultError: Error?
@@ -33,7 +33,7 @@ extension FiltersService: FiltersServiceForBuilderProtocol {
                                        id: configuration.appId,
                                        cid: configuration.cid,
                                        lang: configuration.currentLanguage) { [unowned self] filtersMeta in
-            
+    
             if let meta = filtersMeta {
                 do {
                     try saveFiltersMetaToDB(meta)
@@ -46,11 +46,11 @@ extension FiltersService: FiltersServiceForBuilderProtocol {
             group.leave()
         }
         group.wait()
-        
+
         if let resultError = resultError {
             throw resultError
         }
-        
+
         group.enter()
         apiMethods.loadFiltersLocalizations { [unowned self] filtersMetaLocalizations in
             if let localizations = filtersMetaLocalizations {
@@ -63,29 +63,29 @@ extension FiltersService: FiltersServiceForBuilderProtocol {
             group.leave()
         }
         group.wait()
-        
+
         if let resultError = resultError {
             throw resultError
         }
     }
-    
+
     private func saveFiltersMetaToDB(_ meta: ExtendedFiltersMeta) throws {
         // Meta received from the server
         let allGroupsMeta = meta.groups
         let allFiltersMeta = meta.filters
-        
+
         // Update Groups meta
         try metaStorage.add(groups: allGroupsMeta)
         let addedIds = add(filters: allFiltersMeta)
         assert(addedIds.count == allFiltersMeta.count, "Feels like some filters failed to load")
     }
-    
+
     /* Updates filters and groups localizations in database that were downloaded */
     private func save(localizations: ExtendedFiltersMetaLocalizations) throws {
         // Groups localizations received from the server
         let allGroupsLocalizations = localizations.groups
         let allGroupIdsReceived = allGroupsLocalizations.keys
-        
+
         // Updating groups localizations in database
         for groupId in allGroupIdsReceived {
             let localizationsByLangs = allGroupsLocalizations[groupId] ?? [:]
@@ -95,11 +95,11 @@ extension FiltersService: FiltersServiceForBuilderProtocol {
                 try metaStorage.updateLocalizationForGroup(withId: groupId, forLanguage: lang, localization: localization)
             }
         }
-        
+
         // Filters localizations received from the server
         let allFilterLocalizations = localizations.filters
         let allFilterIdsReceived = allFilterLocalizations.keys
-        
+
         // Updating filters localizations in database
         for filterId in allFilterIdsReceived {
             let localizationsByLangs = allFilterLocalizations[filterId] ?? [:]

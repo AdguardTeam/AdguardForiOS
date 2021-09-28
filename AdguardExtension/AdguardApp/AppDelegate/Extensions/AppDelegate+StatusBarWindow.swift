@@ -22,23 +22,23 @@ extension AppDelegate {
         application.applicationIconBadgeNumber = 0
         statusBarWindow.createStatusBarWindow()
         statusBarWindow.statusBarWindowIsHidden = true
-        
+
         filtersUpdateStarted = NotificationCenter.default.filtersUpdateStart { [weak self] in
             self?.statusBarWindow.showStatusViewIfNeeded(text: String.localizedString("loading_filters"))
         }
-        
+
         filtersUpdateFinished = NotificationCenter.default.filtersUpdateFinished { [weak self] in
             self?.statusBarWindow.hideStatusViewIfNeeded()
         }
-        
+
         contentBlockersUpdateStarted = NotificationCenter.default.contentBlockersUpdateStart { [weak self] in
             self?.statusBarWindow.showStatusViewIfNeeded(text: String.localizedString("loading_content_blockers"))
         }
-        
+
         contentBlockersUpdateFinished = NotificationCenter.default.contentBlockersUpdateFinished { [weak self] in
             self?.statusBarWindow.hideStatusViewIfNeeded()
         }
-        
+
         orientationChangeNotification = NotificationCenter.default.observe(name: UIDevice.orientationDidChangeNotification, object: nil, queue: nil, using: { [weak self] (notification) in
             self?.statusBarWindow.changeOrientation()
         })

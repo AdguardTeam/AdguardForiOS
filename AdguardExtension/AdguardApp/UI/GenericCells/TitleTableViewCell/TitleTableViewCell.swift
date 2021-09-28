@@ -21,18 +21,18 @@ import UIKit
 final class TitleTableViewCell: UITableViewCell, Reusable {
     // MARK: - Outlets
     @IBOutlet weak var titleLabel: ThemableLabel!
-    
+
     var title: String? {
         didSet {
             titleLabel.text = title
         }
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
     }
-    
+
     func updateTheme(_ themeService: ThemeServiceProtocol) {
         themeService.setupTableCell(self)
         themeService.setupLabel(titleLabel)

@@ -19,11 +19,11 @@
 import XCTest
 
 class NativeProvidersServiceTest: XCTestCase {
-    
+
     func testInitialization() {
         let dnsProviders = DnsProvidersServiceMock(allProviders: generateProviders())
         let nativeProviders = NativeProvidersService(dnsProvidersService: dnsProviders, networkSettingsService: NetworkSettingsServiceMock(), resources: SharedResourcesMock(), configuration: ConfigurationServiceMock())
-        
+
         let providersToCheck = nativeProviders.providers
         let supportedProtocols = NativeProvidersService.supportedProtocols
         providersToCheck.forEach { provider in
@@ -32,9 +32,9 @@ class NativeProvidersServiceTest: XCTestCase {
             XCTAssertFalse(servers.isEmpty)
         }
     }
-    
+
     // MARK: - Private methods
-    
+
     private func generateProviders() -> [DnsProviderInfo] {
         var adguardProviders: [DnsProviderInfo] = []
         for i in 0..<10 {
@@ -46,11 +46,11 @@ class NativeProvidersServiceTest: XCTestCase {
         }
         return adguardProviders
     }
-    
+
     private func generateServers(providerId: Int) -> [DnsServerInfo] {
         let dnsProtocols = DnsProtocol.allCases.shuffled()
         let serverProtocolsNumber = Int.random(in: 0..<dnsProtocols.count)
-        
+
         var servers: [DnsServerInfo] = []
         for i in 0..<serverProtocolsNumber {
             let dnsProtocol = dnsProtocols[i]
@@ -60,12 +60,12 @@ class NativeProvidersServiceTest: XCTestCase {
         }
         return servers
     }
-    
+
     private func generateUpstream(forProtocol dnsProtocol: DnsProtocol) -> String {
         if let prefix = DnsProtocol.prefixByProtocol[dnsProtocol] {
             return prefix + String.randomString(length: 10)
         }
-        
+
         // Regular type
         let number = Int.random(in: 1...9)
         return "\(number).\(number).\(number).\(number)"

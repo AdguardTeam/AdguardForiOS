@@ -27,7 +27,7 @@ import Reachability
  - Seealso https://developer.apple.com/documentation/networkextension/nepackettunnelprovider
  */
 open class PacketTunnelProvider: NEPacketTunnelProvider {
-    
+
     public struct Addresses {
         let tunnelRemoteAddress: String
         let interfaceIpv4: String
@@ -35,7 +35,7 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
         let localDnsIpv4: String
         let localDnsIpv6: String
         let defaultSystemDnsServers: [String]
-        
+
         public init(
             tunnelRemoteAddress: String,
             interfaceIpv4: String,
@@ -55,13 +55,13 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
 
     private var tunnelProxy: PacketTunnelProviderProxyProtocol!
     private let reachabilityHandler: Reachability
-    
+
     override public init() {
         assertionFailure("This initializer shouldn't be called")
         self.reachabilityHandler = try! Reachability()
         super.init()
     }
-    
+
     public init(
         userDefaults: UserDefaults,
         debugLoggs: Bool,
@@ -72,26 +72,26 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
     ) throws {
         let userDefaultsStorage = UserDefaultsStorage(storage: userDefaults)
         let dnsProvidersManager = try DnsProvidersManager(configuration: dnsConfiguration, userDefaults: userDefaultsStorage)
-        
+
         let filtersFileStorage = try FilterFilesStorage(filterFilesDirectoryUrl: filterStorageUrl)
-        
+
         let filtersManager = DnsFiltersManager(
             userDefaults: userDefaultsStorage,
             filterFilesStorage: filtersFileStorage,
             configuration: dnsConfiguration
         )
-        
+
         let dnsLibsRulesProvider = DnsLibsRulesProvider(
             dnsFiltersManager: filtersManager,
             filterFilesStorage: filtersFileStorage
         )
-        
+
         let proxySettingsProvider = DnsProxyConfigurationProvider(
             dnsProvidersManager: dnsProvidersManager,
             dnsLibsRulesProvider: dnsLibsRulesProvider,
             dnsConfiguration: dnsConfiguration
         )
-        
+
         let dnsProxy = DnsProxy(
             proxySettingsProvider: proxySettingsProvider,
             dnsLibsRulesProvider: dnsLibsRulesProvider,
@@ -99,7 +99,7 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
         )
 
         let tunnelSettingsProvider = PacketTunnelSettingsProvider(addresses: addresses)
-        
+
         self.tunnelProxy = PacketTunnelProviderProxy(
             isDebugLogs: debugLoggs,
             tunnelAddresses: addresses,
@@ -108,13 +108,13 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
             tunnelSettings: tunnelSettingsProvider,
             providersManager: dnsProvidersManager
         )
-        
+
         self.reachabilityHandler = try Reachability()
-        
+
         super.init()
-        
+
         tunnelProxy.delegate = self
-        
+
         NotificationCenter.default.addObserver(forName: .reachabilityChanged, object: nil, queue: nil) { [weak self] _ in
             self?.tunnelProxy.networkChanged()
         }
@@ -135,7 +135,7 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
             completionHandler(error)
             return
         }
-        
+
         tunnelProxy.startTunnel(options: options, completionHandler: completionHandler)
     }
 
@@ -162,15 +162,15 @@ extension PacketTunnelProvider: PacketTunnelProviderProxyDelegate {
     func setTunnelSettings(_ settings: NETunnelNetworkSettings?, _ completionHandler: ((Error?) -> Void)?) {
         setTunnelNetworkSettings(settings, completionHandler: completionHandler)
     }
-    
+
     func readPackets(completionHandler: @escaping ([Data], [NSNumber]) -> Void) {
         packetFlow.readPackets(completionHandler: completionHandler)
     }
-    
+
     func writePackets(_ packets: [Data], _ protocols: [NSNumber]) {
         packetFlow.writePackets(packets, withProtocols: protocols)
     }
-    
+
     func cancelTunnel(with error: Error?) {
         cancelTunnelWithError(error)
     }

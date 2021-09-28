@@ -25,15 +25,15 @@ protocol DnsRequestProcessedEventHandlerProtocol: AnyObject {
 
 /// This object is used in Tunnel to save statistics data obtained from DNS-libs
 final class DnsRequestProcessedEventHandler: DnsRequestProcessedEventHandlerProtocol {
-    
+
     private let eventQueue = DispatchQueue(label: "DnsAdGuardSDK.DnsRequestProcessedEventHandler.eventQueue", qos: .background)
-    
+
     /* Services */
     private let proxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
     private let activityStatistics: ActivityStatisticsProtocol
     private let chartStatistics: ChartStatisticsProtocol
     private let dnsLogStatistics: DnsLogStatisticsProtocol
-    
+
     init(
         proxyConfigurationProvider: DnsProxyConfigurationProviderProtocol,
         activityStatistics: ActivityStatisticsProtocol,
@@ -45,13 +45,13 @@ final class DnsRequestProcessedEventHandler: DnsRequestProcessedEventHandlerProt
         self.chartStatistics = chartStatistics
         self.dnsLogStatistics = dnsLogStatistics
     }
-    
+
     deinit {
         eventQueue.sync {
             Logger.logInfo("(DnsRequestProcessedEventHandler) - deinit; Flush to db")
         }
     }
-    
+
     // TODO: - Add some tests
     func handle(event: AGDnsRequestProcessedEventWrapper) {
         eventQueue.async { [weak self] in
@@ -59,12 +59,12 @@ final class DnsRequestProcessedEventHandler: DnsRequestProcessedEventHandlerProt
                 Logger.logError("(DnsRequestProcessedEventHandler) - handleEvent; Error: \(event.error ?? "Missing self")")
                 return
             }
-            
+    
             guard let upstreamId = event.upstreamId, let activeDnsUpstream = self.proxyConfigurationProvider.dnsUpstreamById[upstreamId] else {
                 Logger.logError("(DnsRequestProcessedEventHandler) - handleEvent; event.upstreamId is nil")
                 return
             }
-            
+    
             let processedEvent = DnsRequestProcessedEvent(
                 event: event,
                 upstream: activeDnsUpstream.dnsUpstreamInfo,
@@ -72,7 +72,7 @@ final class DnsRequestProcessedEventHandler: DnsRequestProcessedEventHandlerProt
                 dnsBlocklistFilterId: self.proxyConfigurationProvider.dnsBlocklistFilterId,
                 dnsAllowlistFilterId: self.proxyConfigurationProvider.dnsAllowlistFilterId
             )
-            
+    
             // Add to statistics
             self.activityStatistics.process(record: processedEvent.activityRecord)
             self.chartStatistics.process(record: processedEvent.chartStatisticsRecord)

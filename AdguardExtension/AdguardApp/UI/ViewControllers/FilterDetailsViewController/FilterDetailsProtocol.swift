@@ -45,7 +45,7 @@ extension SafariGroup.Filter: FilterDetailsProtocol {
 
 // MARK: - DnsFilter + FilterDetailsProtocol
 
-extension DnsAdGuardSDK.DnsFilter: FilterDetailsProtocol {    
+extension DnsAdGuardSDK.DnsFilter: FilterDetailsProtocol {
     var filterName: String { self.name ?? "" }
     var groupId: Int? { nil }
     var homepage: String? { self.homePage }

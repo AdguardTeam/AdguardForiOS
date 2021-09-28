@@ -4,11 +4,11 @@ final class SafariUserRulesManagersProviderMock: SafariUserRulesManagersProvider
     lazy var blocklistRulesManager: UserRulesManagerProtocol = { blocklistRulesManagerMock }()
     lazy var allowlistRulesManager: UserRulesManagerProtocol = { allowlistRulesManagerMock }()
     lazy var invertedAllowlistRulesManager: UserRulesManagerProtocol = { invertedAllowlistRulesManagerMock }()
-    
+
     let blocklistRulesManagerMock = BlocklistRulesManagerMock()
     let allowlistRulesManagerMock = AllowlistRulesManagerMock()
     let invertedAllowlistRulesManagerMock = InvertedAllowlistRulesManagerMock()
-    
+
     var resetCalledCount = 0
     var resetError: Error?
     func reset() throws {
@@ -22,11 +22,11 @@ final class SafariUserRulesManagersProviderMock: SafariUserRulesManagersProvider
 class UserRulesManagerMock: UserRulesManagerProtocol {
 
     var type: SafariUserRuleType { .blocklist }
-    
+
     var rulesString: String = ""
-    
+
     var allRules: [UserRule] = []
-    
+
     var addRuleCalledCount = 0
     var addRuleError: Error?
     func add(rule: UserRule, override: Bool) throws {
@@ -35,7 +35,7 @@ class UserRulesManagerMock: UserRulesManagerProtocol {
             throw error
         }
     }
-    
+
     var addRulesCalledCount = 0
     var addRulesError: Error?
     func add(rules: [UserRule], override: Bool) throws {
@@ -44,7 +44,7 @@ class UserRulesManagerMock: UserRulesManagerProtocol {
             throw error
         }
     }
-    
+
     var modifyRuleCalledCount = 0
     var modifyRuleError: Error?
     func modifyRule(_ oldRuleText: String, _ newRule: UserRule) throws {
@@ -53,7 +53,7 @@ class UserRulesManagerMock: UserRulesManagerProtocol {
             throw error
         }
     }
-    
+
     var removeRuleCalledCount = 0
     var removeRuleError: Error?
     var invokedRemoveRuleParameters: [String] = []
@@ -64,14 +64,14 @@ class UserRulesManagerMock: UserRulesManagerProtocol {
             throw error
         }
     }
-    
+
     var removeAllRulesCalledCount = 0
     func removeAllRules() {
         removeAllRulesCalledCount += 1
     }
-    
+
     func reset() throws {
-        
+
     }
 }
 

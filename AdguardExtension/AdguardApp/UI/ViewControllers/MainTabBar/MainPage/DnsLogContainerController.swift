@@ -25,36 +25,36 @@ class DnsLogContainerController: UIViewController {
     @IBOutlet weak var getProContainerView: UIView!
     @IBOutlet weak var dnsLogContainerView: UIView!
     @IBOutlet weak var nativeDnsContainerView: UIView!
-    
+
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    
+
     private let model = DnsRequestLogViewModel(dnsTrackerService: ServiceLocator.shared.getService()!)
-    
+
     private var resetSettingsToken: NotificationToken?
     private var proObservation: NSKeyValueObservation?
-    
+
     private let showDnsLogSegueId = "showDnsLogSegue"
-    
+
     // MARK: - View Controller life cycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         updateTheme()
-        
+
         resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] (notification) in
             self?.setCurrentContainerView()
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setCurrentContainerView()
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showDnsLogSegueId {
             if let vc = segue.destination as? ActivityViewController {
@@ -63,32 +63,32 @@ class DnsLogContainerController: UIViewController {
             }
         }
     }
-    
-    
+
+
     // MARK: - Private methods
-    
+
     private func setCurrentContainerView() {
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
             let proStatus = self.configuration.proStatus
             let nativeDnsImplementation = self.resources.dnsImplementation == .native
-            
+    
             self.getProContainerView.isHidden = true
             self.systemProtectionEnablerContainerView.isHidden = true
             self.dnsLogContainerView.isHidden = true
             self.nativeDnsContainerView.isHidden = true
             self.hideTitle()
-            
+    
             if proStatus {
-                
+        
                 if nativeDnsImplementation {
                     self.nativeDnsContainerView.isHidden = false
                     return
                 }
-                
+        
                 let systemProtectionEnabled = self.complexProtection.systemProtectionEnabled
                 let recordsAreEmpty = self.model.records.isEmpty
-                
+        
                 if recordsAreEmpty && !systemProtectionEnabled {
                     self.systemProtectionEnablerContainerView.isHidden = false
                 } else {
@@ -105,7 +105,7 @@ extension DnsLogContainerController: ActivityViewControllerDelegate {
     func hideTitle() {
         animateHidingTitleInNavBar()
     }
-    
+
     func showTitle() {
         animateShowingTitleInNavBar(String.localizedString("activity_title"))
     }

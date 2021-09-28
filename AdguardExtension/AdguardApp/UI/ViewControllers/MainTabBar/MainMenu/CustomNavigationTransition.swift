@@ -19,13 +19,13 @@
 import Foundation
 
 class CustomNavigationTransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
-    
+
     let presenting: Bool
 
     init(presenting: Bool) {
         self.presenting = presenting
     }
-    
+
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return TimeInterval(floatLiteral: 0.3)
     }
@@ -36,7 +36,7 @@ class CustomNavigationTransitionAnimator: NSObject, UIViewControllerAnimatedTran
 
         let duration = transitionDuration(using: transitionContext)
         let container = transitionContext.containerView
-        
+
         if presenting {
             container.addSubview(toView)
         } else {
@@ -65,14 +65,14 @@ class CustomNavigationTransitionAnimator: NSObject, UIViewControllerAnimatedTran
 }
 
 class CustomNavigationTransitionCoordinator: NSObject, UINavigationControllerDelegate {
-    
+
     var interactionController: UIPercentDrivenInteractiveTransition?
 
     private var lastFromVc: UIViewController?
     private var lastToVc: UIViewController?
-    
+
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
+
         switch operation {
         case .push:
             return CustomNavigationTransitionAnimator(presenting: true)
@@ -82,7 +82,7 @@ class CustomNavigationTransitionCoordinator: NSObject, UINavigationControllerDel
             return nil
         }
     }
-    
+
     func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         return interactionController
     }

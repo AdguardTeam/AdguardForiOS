@@ -21,9 +21,9 @@ import UIKit
 
 @IBDesignable
 class StackElementView: UIView {
-    
+
     @IBInspectable var intrinsicHeight: CGFloat = 0
-    
+
     override open var intrinsicContentSize: CGSize {
         return CGSize(width: self.frame.width, height: self.intrinsicHeight)
     }

@@ -58,17 +58,17 @@ return ret;
 
 
 - (BOOL)tableExists:(NSString*)tableName {
-    
+
     tableName = [tableName lowercaseString];
-    
+
     FMResultSet *rs = [self executeQuery:@"select [sql] from sqlite_master where [type] = 'table' and lower(name) = ?", tableName];
-    
+
     //if at least one next exists, table exists
     BOOL returnBool = [rs next];
-    
+
     //close and free object
     [rs close];
-    
+
     return returnBool;
 }
 
@@ -77,10 +77,10 @@ return ret;
  check if table exist in database  (patch from OZLB)
 */
 - (FMResultSet*)getSchema {
-    
+
     //result colums: type[STRING], name[STRING],tbl_name[STRING],rootpage[INTEGER],sql[STRING]
     FMResultSet *rs = [self executeQuery:@"SELECT type, name, tbl_name, rootpage, sql FROM (SELECT * FROM sqlite_master UNION ALL SELECT * FROM sqlite_temp_master) WHERE type != 'meta' AND name NOT LIKE 'sqlite_%' ORDER BY tbl_name, type DESC, name"];
-    
+
     return rs;
 }
 
@@ -88,22 +88,22 @@ return ret;
  get table schema: result colums: cid[INTEGER], name,type [STRING], notnull[INTEGER], dflt_value[],pk[INTEGER]
 */
 - (FMResultSet*)getTableSchema:(NSString*)tableName {
-    
+
     //result colums: cid[INTEGER], name,type [STRING], notnull[INTEGER], dflt_value[],pk[INTEGER]
     FMResultSet *rs = [self executeQuery:[NSString stringWithFormat: @"pragma table_info('%@')", tableName]];
-    
+
     return rs;
 }
 
 - (BOOL)columnExists:(NSString*)columnName inTableWithName:(NSString*)tableName {
-    
+
     BOOL returnBool = NO;
-    
+
     tableName  = [tableName lowercaseString];
     columnName = [columnName lowercaseString];
-    
+
     FMResultSet *rs = [self getTableSchema:tableName];
-    
+
     //check if column is present in table schema
     while ([rs next]) {
         if ([[[rs stringForColumn:@"name"] lowercaseString] isEqualToString:columnName]) {
@@ -111,10 +111,10 @@ return ret;
             break;
         }
     }
-    
+
     //If this is not done FMDatabase instance stays out of pool
     [rs close];
-    
+
     return returnBool;
 }
 
@@ -122,17 +122,17 @@ return ret;
 #if SQLITE_VERSION_NUMBER >= 3007017
 
 - (uint32_t)applicationID {
-    
+
     uint32_t r = 0;
-    
+
     FMResultSet *rs = [self executeQuery:@"pragma application_id"];
-    
+
     if ([rs next]) {
         r = (uint32_t)[rs longLongIntForColumnIndex:0];
     }
-    
+
     [rs close];
-    
+
     return r;
 }
 
@@ -147,22 +147,22 @@ return ret;
 #if TARGET_OS_MAC && !TARGET_OS_IPHONE
 - (NSString*)applicationIDString {
     NSString *s = NSFileTypeForHFSTypeCode([self applicationID]);
-    
+
     assert([s length] == 6);
-    
+
     s = [s substringWithRange:NSMakeRange(1, 4)];
-    
-    
+
+
     return s;
-    
+
 }
 
 - (void)setApplicationIDString:(NSString*)s {
-    
+
     if ([s length] != 4) {
         NSLog(@"setApplicationIDString: string passed is not exactly 4 chars long. (was %ld)", [s length]);
     }
-    
+
     [self setApplicationID:NSHFSTypeCodeFromFileType([NSString stringWithFormat:@"'%@'", s])];
 }
 
@@ -173,13 +173,13 @@ return ret;
 
 - (uint32_t)userVersion {
     uint32_t r = 0;
-    
+
     FMResultSet *rs = [self executeQuery:@"pragma user_version"];
-    
+
     if ([rs next]) {
         r = (uint32_t)[rs longLongIntForColumnIndex:0];
     }
-    
+
     [rs close];
     return r;
 }
@@ -204,7 +204,7 @@ return ret;
 - (BOOL)validateSQL:(NSString*)sql error:(NSError**)error {
     sqlite3_stmt *pStmt = NULL;
     BOOL validationSucceeded = YES;
-    
+
     int rc = sqlite3_prepare_v2(_db, [sql UTF8String], -1, &pStmt, 0);
     if (rc != SQLITE_OK) {
         validationSucceeded = NO;
@@ -215,9 +215,9 @@ return ret;
                                                                           forKey:NSLocalizedDescriptionKey]];
         }
     }
-    
+
     sqlite3_finalize(pStmt);
-    
+
     return validationSucceeded;
 }
 

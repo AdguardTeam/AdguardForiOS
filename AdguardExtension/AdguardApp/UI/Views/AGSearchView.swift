@@ -25,7 +25,7 @@ protocol AGSearchViewDelegate: AnyObject {
 final class AGSearchView: UIView {
 
     weak var delegate: AGSearchViewDelegate?
-    
+
     let textField: AGTextField = {
         let textField = AGTextField()
         textField.leftTextAreaOffset = 16.0
@@ -34,35 +34,35 @@ final class AGSearchView: UIView {
         textField.placeholder = String.localizedString("search_view_placeholder")
         return textField
     }()
-    
+
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private var themeObserver: NotificationToken?
-    
+
     // MARK: - Initialization
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         customInit()
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         customInit()
     }
-    
+
     init() {
         super.init(frame: .zero)
         customInit()
     }
-    
+
     // MARK: - Private methods
-    
+
     private func customInit() {
         textField.delegate = self
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.rightView?.isHidden = true
         addSubview(textField)
-        
+
         NSLayoutConstraint.activate([
             textField.heightAnchor.constraint(equalToConstant: 48.0),
             textField.topAnchor.constraint(equalTo: topAnchor, constant: 2.0),
@@ -70,7 +70,7 @@ final class AGSearchView: UIView {
             textField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
             textField.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16.0)
         ])
-        
+
         updateTheme()
         themeObserver = NotificationCenter.default.observe(name: .themeChanged, object: nil, queue: .main) { [weak self] _ in
             self?.updateTheme()
@@ -79,27 +79,27 @@ final class AGSearchView: UIView {
 }
 
 extension AGSearchView: UITextFieldDelegate {
-    
+
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = textField.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-        
+
         delegate?.textChanged(to: updatedText)
-        
+
         self.textField.borderState = .enabled
         self.textField.rightView?.isHidden = updatedText.isEmpty
         return true
     }
-    
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.textField.borderState = .enabled
     }
-    
+
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.textField.borderState = .disabled
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.textField.resignFirstResponder()
         self.textField.borderState = .disabled

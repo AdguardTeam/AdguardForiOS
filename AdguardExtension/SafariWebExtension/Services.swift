@@ -20,7 +20,7 @@ import Foundation
 
 final class Services {
     static let shared = Services()
-    
+
     let resources: AESharedResourcesProtocol
     let urlsStorage: SharedStorageUrlsProtocol
     let processor: SafariWebExtensionMessageProcessorProtocol

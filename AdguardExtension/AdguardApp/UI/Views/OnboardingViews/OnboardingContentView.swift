@@ -24,20 +24,20 @@ final class OnboardingContentView: UIView {
         case withAdvancedProtection
         case withoutAdvancedProtection
     }
-    
+
     var onboardingType: OnboardingType = .withoutAdvancedProtection {
         didSet {
             setup(with: onboardingType)
         }
     }
-    
+
     // MARK: - Services
-    
+
     private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    
+
     // MARK: - Properties
-    
+
     //TODO: Make dynamic content blockers name and icon
     private let contentBlockers = ["AdGuard — Custom", "AdGuard — General", "AdGuard — Other"]
     private let cellsAlpha = [1.0, 0.6, 0.2]
@@ -49,25 +49,25 @@ final class OnboardingContentView: UIView {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
-    
+
     private let advancedProtectionView: OnboardingAdvancedProtectionView = {
        let view = OnboardingAdvancedProtectionView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
+
     // MARK: - Init
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setup(with: onboardingType)
     }
-    
+
     init(onboardingType: OnboardingType) {
         super.init(frame: .zero)
         setup(with: onboardingType)
     }
-    
+
     private func setup(with type: OnboardingType) {
         switch type {
         case .withAdvancedProtection:
@@ -78,13 +78,13 @@ final class OnboardingContentView: UIView {
             setupWithoutAdvancedProtection()
         }
     }
-    
+
     private func setupWithAdvancedProtection() {
         self.addSubview(advancedProtectionView)
         applyConstraints(to: advancedProtectionView)
         advancedProtectionView.labelString = String.localizedString("onboarding_fours_step_text")
     }
-    
+
     private func setupWithoutAdvancedProtection() {
         tableView.register(OnboardingContentBlockerCell.self, forCellReuseIdentifier: cellReuseId)
         tableView.dataSource = self
@@ -93,7 +93,7 @@ final class OnboardingContentView: UIView {
         self.addSubview(tableView)
         applyConstraints(to: tableView)
     }
-    
+
     private func applyConstraints(to view: UIView) {
         view.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         view.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
@@ -106,7 +106,7 @@ extension OnboardingContentView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return contentBlockers.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseId) as? OnboardingContentBlockerCell {
             let isLastCell = indexPath.row == contentBlockers.count - 1
@@ -131,7 +131,7 @@ extension OnboardingContentView: UITableViewDelegate {
 extension OnboardingContentView: ThemableProtocol {
     func updateTheme() {
         self.backgroundColor = themeService.backgroundColor
-        
+
 
         switch onboardingType {
         case .withAdvancedProtection:

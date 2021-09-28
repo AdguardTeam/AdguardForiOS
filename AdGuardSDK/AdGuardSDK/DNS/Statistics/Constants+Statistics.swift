@@ -24,7 +24,7 @@ extension Constants {
             case dnsLog
             case activity
             case chart
-            
+    
             var tableName: String {
                 switch self {
                 case .dnsLog: return "DNS_log_table"
@@ -32,7 +32,7 @@ extension Constants {
                 case .chart: return "chart_statistics_table"
                 }
             }
-            
+    
             var dbFileName: String {
                 switch self {
                 case .dnsLog: return "DNS_log_statistics.db"
@@ -41,7 +41,7 @@ extension Constants {
                 }
             }
         }
-        
+
         // Date format for DB
         static let dbDateFormat = "yyyy-MM-dd HH:mm:ss"
     }

@@ -30,26 +30,26 @@ protocol DnsLibsRulesProviderProtocol {
 }
 
 final class DnsLibsRulesProvider: DnsLibsRulesProviderProtocol {
-    
+
     var enabledCustomDnsFilters: [DnsProxyFilter] {
         dnsFiltersManager.getDnsLibsFilters().map { DnsProxyFilter(filterId: $0.key, filterPath: $0.value) }
     }
-    
+
     var blocklistFilter: DnsProxyFilter {
         let filterId = DnsUserRuleType.blocklist.enabledRulesFilterId
         let path = filterFilesStorage.getUrlForFilter(withId: filterId).path
         return DnsProxyFilter(filterId: filterId, filterPath: path)
     }
-    
+
     var allowlistFilter: DnsProxyFilter {
         let filterId = DnsUserRuleType.allowlist.enabledRulesFilterId
         let path = filterFilesStorage.getUrlForFilter(withId: filterId).path
         return DnsProxyFilter(filterId: filterId, filterPath: path)
     }
-    
+
     private let dnsFiltersManager: DnsFiltersManagerProtocol
     private let filterFilesStorage: CustomFilterFilesStorageProtocol
-    
+
     init(dnsFiltersManager: DnsFiltersManagerProtocol, filterFilesStorage: CustomFilterFilesStorageProtocol) {
         self.dnsFiltersManager = dnsFiltersManager
         self.filterFilesStorage = filterFilesStorage

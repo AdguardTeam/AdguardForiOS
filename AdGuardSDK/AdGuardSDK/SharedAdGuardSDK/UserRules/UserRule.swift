@@ -43,24 +43,24 @@ public enum DnsUserRuleType {
 public struct UserRule: Codable, Hashable {
     public var ruleText: String
     public var isEnabled: Bool
-    
+
     public init(ruleText: String, isEnabled: Bool = true) {
         self.ruleText = ruleText
         self.isEnabled = isEnabled
     }
-    
+
     public static func isValid(rule: String) -> Bool {
         let trimmedRule = rule.trimmingCharacters(in: .whitespacesAndNewlines)
         if trimmedRule.count == 0 {
             return false
         }
-        
+
         let oldInjectRules = "adg_start_style_inject"
         let maskContentRule = "$$"
         let maskContentExceptionRule = "$@$"
         let maskJsRule = "%%"
         let maskFilterUnsupportedRule = "##^"
-        
+
         return !(trimmedRule.contains(oldInjectRules)
                 || trimmedRule.contains(maskContentRule)
                 || trimmedRule.contains(maskContentExceptionRule)

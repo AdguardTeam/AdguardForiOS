@@ -26,26 +26,26 @@ protocol DnsUserRulesManagersProviderProtocol: ResetableSyncProtocol {
 final class DnsUserRulesManagersProvider: DnsUserRulesManagersProviderProtocol {
     let blocklistRulesManager: UserRulesManagerProtocol
     let allowlistRulesManager: UserRulesManagerProtocol
-    
+
     private let fileStorage: FilterFilesStorageProtocol
-    
+
     // fileStorage should be passed as new object with unique folder to avoid filters ids collisions
     init(fileStorage: FilterFilesStorageProtocol) {
         self.fileStorage = fileStorage
-        
+
         let blocklistStorage = DnsUserRulesStorage(type: .blocklist, fileStorage: fileStorage)
         self.blocklistRulesManager = UserRulesManager(type: .dnsBlocklist, storage: blocklistStorage, converter: OpaqueRuleConverter())
-        
+
         let allowlistStorage = DnsUserRulesStorage(type: .allowlist, fileStorage: fileStorage)
         self.allowlistRulesManager = UserRulesManager(type: .dnsAllowlist, storage: allowlistStorage, converter: OpaqueRuleConverter())
     }
-    
+
     func reset() throws {
         Logger.logInfo("(UserRulesManagersProvider) - reset start")
-        
+
         try blocklistRulesManager.reset()
         try allowlistRulesManager.reset()
-        
+
         Logger.logInfo("(UserRulesManagersProvider) - reset; Successfully reset all user rules managers")
     }
 }

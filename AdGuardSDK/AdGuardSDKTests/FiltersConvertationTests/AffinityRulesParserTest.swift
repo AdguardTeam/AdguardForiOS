@@ -1,9 +1,9 @@
 import XCTest
 
 class AffinityRulesParserTest: XCTestCase {
-    
+
     // MARK: - test parse strings
-    
+
     func testParseStringsWithoutAffinity() {
         // 6 comments 4 rules
         let filterText = """
@@ -19,10 +19,10 @@ class AffinityRulesParserTest: XCTestCase {
                         ||main-ti-hub.com^
                         """
         let strings = filterText.components(separatedBy: .newlines)
-        
+
         let rules = AffinityRulesParser.parse(strings: strings)
         XCTAssertEqual(rules.count, 4)
-        
+
         for (index, rule) in rules.enumerated() {
             XCTAssertNil(rule.affinity)
             switch index {
@@ -34,7 +34,7 @@ class AffinityRulesParserTest: XCTestCase {
             }
         }
     }
-    
+
     func testParseStringsWithAffinity() {
         // 1 comment; 2 rules; 3 rules with affinity
         let filterText = """
@@ -48,10 +48,10 @@ class AffinityRulesParserTest: XCTestCase {
                         !#safari_cb_affinity
                         """
         let strings = filterText.components(separatedBy: .newlines)
-        
+
         let rules = AffinityRulesParser.parse(strings: strings)
         XCTAssertEqual(rules.count, 5)
-        
+
         for (index, rule) in rules.enumerated() {
             switch index {
             case 0:
@@ -74,9 +74,9 @@ class AffinityRulesParserTest: XCTestCase {
             }
         }
     }
-    
+
     // MARK: - test rule withAffinity
-    
+
     func testRuleWithAffinity() {
         let rule = "@@||imasdk.googleapis.com"
         let ruleWithAffinity = AffinityRulesParser.rule(rule, withAffinity: [.security, .general, .custom])
@@ -87,7 +87,7 @@ class AffinityRulesParserTest: XCTestCase {
                             """
         XCTAssertEqual(ruleWithAffinity, expectedRule)
     }
-    
+
     func testRuleWithEmptyAffinity() {
         let rule = "@@||imasdk.googleapis.com"
         let ruleWithAffinity = AffinityRulesParser.rule(rule, withAffinity: [])
@@ -98,14 +98,14 @@ class AffinityRulesParserTest: XCTestCase {
                             """
         XCTAssertEqual(ruleWithAffinity, expectedRule)
     }
-    
+
     func testRuleWithNilAffinity() {
         let rule = "@@||imasdk.googleapis.com"
         let ruleWithAffinity = AffinityRulesParser.rule(rule, withAffinity: nil)
         let expectedRule = "@@||imasdk.googleapis.com"
         XCTAssertEqual(ruleWithAffinity, expectedRule)
     }
-    
+
     func testEmptyRuleWithAffinity() {
         let rule = "  "
         let ruleWithAffinity = AffinityRulesParser.rule(rule, withAffinity: [.general])

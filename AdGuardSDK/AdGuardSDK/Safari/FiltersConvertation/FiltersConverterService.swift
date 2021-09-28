@@ -22,7 +22,7 @@ import Foundation
 protocol FiltersConverterServiceProtocol {
     /* Returns true if filters are converting now */
     var filtersAreConverting: Bool { get }
-    
+
     /* Converts enabled filters and user rules to jsons objects for every content blocker */
     func convertFiltersAndUserRulesToJsons() -> [FiltersConverterResult]
 }
@@ -41,17 +41,17 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
             }
         }
     }
-    
+
     // MARK: - Services
-    
+
     private let configuration: SafariConfigurationProtocol
     private let filtersService: FiltersServiceProtocol
     private let filterFilesStorage: FilterFilesStorageProtocol
     private let safariManagers: SafariUserRulesManagersProviderProtocol
     private let filtersConverter: FiltersConverterProtocol
-    
+
     // MARK: - Initialization
-    
+
     init(configuration: SafariConfigurationProtocol,
          filtersService: FiltersServiceProtocol,
          filterFilesStorage: FilterFilesStorageProtocol,
@@ -64,18 +64,18 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
         self.safariManagers = safariManagers
         self.filtersConverter = filtersConverter
     }
-    
+
     // MARK: - Internal methods
-    
+
     func convertFiltersAndUserRulesToJsons() -> [FiltersConverterResult] {
         filtersAreConverting = true
         defer { filtersAreConverting = false }
-        
+
         // Run converter with empty data if Safari protection is disabled
         guard configuration.safariProtectionEnabled else {
             return filtersConverter.convert(filters: [], blocklistRules: nil, allowlistRules: nil, invertedAllowlistRules: nil)
         }
-        
+
         // Get active filters info. It is an array of tuples [(filter id, group type)]
         let activeFiltersInfo = filtersService.groups.filter {
             if configuration.proStatus {
@@ -87,7 +87,7 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
         .flatMap { $0.filters }
         .filter { $0.isEnabled }
         .map { ($0.filterId, SafariGroup.GroupType(rawValue: $0.group.groupId)!) }
-        
+
         // Get active filters file's text
         let filesContent: [FilterFileContent] = activeFiltersInfo.compactMap {
             if let filterFileString = filterFilesStorage.getFilterContentForFilter(withId: $0.0) {
@@ -97,12 +97,12 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
                 return nil
             }
         }
-        
+
         // Get enabled blocklist rules
         let blocklistRulesManager = safariManagers.blocklistRulesManager
         let enabledBlockListRules = blocklistRulesManager.allRules.filter { $0.isEnabled }
                                                                   .map { $0.ruleText }
-        
+
         // Get either allowlist rules or inverted allowlist rules (they aren't working at the same time)
         var enabledAllowlistRules: [String]?
         var enabledInvertedAllowlistRules: [String]?
@@ -115,7 +115,7 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
             enabledAllowlistRules = allowlistRulesManager.allRules.filter { $0.isEnabled }
                                                                   .map { $0.ruleText }
         }
-        
+
         // Run converter with all enabled rules
         let safariFilters = filtersConverter.convert(
             filters: filesContent,
@@ -155,7 +155,7 @@ fileprivate extension NotificationCenter {
     func filtersConvertionStarted() {
         self.post(name: .filtersConvertionStarted, object: self, userInfo: nil)
     }
-    
+
     func filtersConvertionFinished() {
         self.post(name: .filtersConvertionFinished, object: self, userInfo: nil)
     }
@@ -167,7 +167,7 @@ public extension NotificationCenter {
             handler()
         }
     }
-    
+
     func filtersConvertionFinished(queue: OperationQueue? = .main, handler: @escaping () -> Void) -> NotificationToken {
         return self.observe(name: .filtersConvertionFinished, object: nil, queue: queue) { _ in
             handler()

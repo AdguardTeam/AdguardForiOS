@@ -43,11 +43,11 @@
 
 - (id)init {
     self = [super init];
-    
+
     if (self) {
         self.height = CGFLOAT_MAX;
     }
-    
+
     return self;
 }
 
@@ -56,18 +56,18 @@
 }
 
 - (void)setHidden:(BOOL)hidden {
-    
+
     if ((!self.hiddenReal) && (hidden)) {
         self.batchOperation = kBatchOperationDelete;
     } else if ((self.hiddenReal) && (!hidden)) {
         self.batchOperation = kBatchOperationInsert;
     }
-    
+
     self.hiddenPlanned = hidden;
 }
 
 - (void)update {
-    
+
     if (!self.hidden) {
         if (self.batchOperation == kBatchOperationNone) {
             self.batchOperation = kBatchOperationUpdate;
@@ -100,24 +100,24 @@
             ++count;
         }
     }
-    
+
     return count;
 }
 
 - (NSInteger)vissibleRowIndexWithTableViewCell:(UITableViewCell *)cell {
-    
+
     NSInteger i = 0;
     for (OriginalRow * or in self.rows) {
-        
+
         if (or.cell == cell) {
             return i;
         }
-        
+
         if (!or.hidden) {
             ++i;
         }
     }
-    
+
     return -1;
 }
 
@@ -146,220 +146,220 @@
 @implementation OriginalTable
 
 - (id)initWithTableView:(UITableView *)tableView {
-    
+
     self = [super init];
     if (self) {
-        
+
         NSInteger numberOfSections = [tableView numberOfSections];
         self.sections = [[NSMutableArray alloc] initWithCapacity:numberOfSections];
-        
+
         NSInteger totalNumberOfRows = 0;
         for (NSInteger i = 0; i < numberOfSections; ++i) {
             OriginalSection * originalSection = [OriginalSection new];
-            
+    
             NSInteger numberOfRows = [tableView numberOfRowsInSection:i];
             totalNumberOfRows += numberOfRows;
             originalSection.rows = [[NSMutableArray alloc] initWithCapacity:numberOfRows];
             for (NSInteger ii = 0; ii < numberOfRows; ++ii) {
                 OriginalRow * tableViewRow = [OriginalRow new];
-                
+        
                 NSIndexPath * ip = [NSIndexPath indexPathForRow:ii inSection:i];
                 tableViewRow.cell = [tableView.dataSource tableView:tableView cellForRowAtIndexPath:ip];
                 tableViewRow.height = [tableView.delegate tableView:tableView heightForRowAtIndexPath:ip];
-                
+        
                 NSAssert(tableViewRow.cell != nil, @"cannot be nil");
-                
+        
                 tableViewRow.originalIndexPath = [NSIndexPath indexPathForRow:ii inSection:i];
-                
+        
                 originalSection.rows[ii] = tableViewRow;
             }
-            
+    
             self.sections[i] = originalSection;
         }
-     
+ 
         self.insertIndexPaths = [[NSMutableArray alloc] initWithCapacity:totalNumberOfRows];
         self.deleteIndexPaths = [[NSMutableArray alloc] initWithCapacity:totalNumberOfRows];
         self.updateIndexPaths = [[NSMutableArray alloc] initWithCapacity:totalNumberOfRows];
-        
+
         self.tableView = tableView;
-        
+
     }
-    
+
     return self;
 }
 
 - (void)insertCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    
+
     OriginalSection *originalSection = self.sections[indexPath.section];
-    
+
     OriginalRow * tableViewRow = [OriginalRow new];
-    
+
     tableViewRow.cell = cell;
     NSAssert(tableViewRow.cell != nil, @"cannot be nil");
-    
+
     tableViewRow.height = UITableViewAutomaticDimension;
     tableViewRow.hiddenReal = YES;
     tableViewRow.hiddenPlanned = NO;
     tableViewRow.batchOperation = kBatchOperationInsert;;
 
-    
+
     tableViewRow.originalIndexPath = indexPath;
-    
+
     NSMutableArray *rows = originalSection.rows;
-    
+
     [rows insertObject:tableViewRow atIndex:indexPath.row];
-    
+
     for (NSUInteger i = (indexPath.row + 1); i < rows.count; i++) {
-        
+
         tableViewRow = rows[i];
         tableViewRow.originalIndexPath = [NSIndexPath indexPathForRow:i inSection:indexPath.section];
     }
 }
 
 - (void)removeCellAtIndedexPath:(NSIndexPath *)indexPath {
-    
+
     OriginalSection *originalSection = self.sections[indexPath.section];
     NSMutableArray *rows = originalSection.rows;
-    
+
     [rows removeObjectAtIndex:indexPath.row];
-    
+
     for (NSUInteger i = indexPath.row; i < rows.count; i++) {
-        
+
         ((OriginalRow *)rows[i]).originalIndexPath = [NSIndexPath indexPathForRow:i inSection:indexPath.section];
     }
 }
 
 - (OriginalRow *)originalRowWithIndexPath:(NSIndexPath *)indexPath {
-    
+
     OriginalSection * oSection = self.sections[indexPath.section];
     OriginalRow * oRow = oSection.rows[indexPath.row];
-    
+
     return oRow;
 }
 
 - (OriginalRow *)vissibleOriginalRowWithIndexPath:(NSIndexPath *)indexPath {
-    
+
     OriginalSection * oSection = self.sections[indexPath.section];
     NSInteger vissibleIndex = -1;
     for (int i = 0; i < [oSection.rows count]; ++i) {
-        
+
         OriginalRow * oRow = [oSection.rows objectAtIndex:i];
-        
+
         if (!oRow.hidden) {
             ++vissibleIndex;
         }
-        
+
         if (indexPath.row == vissibleIndex) {
             return oRow;
         }
-        
+
     }
-    
+
     return nil;
 }
 
 - (OriginalRow *)originalRowWithTableViewCell:(UITableViewCell *)cell {
-    
+
     for (NSInteger i = 0; i < [self.sections count]; ++i) {
-    
+
         OriginalSection * os = self.sections[i];
-    
+
         for (NSInteger ii = 0; ii < [os.rows count]; ++ii) {
-            
+    
             if ([os.rows[ii] cell] == cell) {
                 return os.rows[ii];
             }
-            
-        }
-        
-    }
     
+        }
+
+    }
+
     return nil;
 }
 
 - (NSIndexPath *)indexPathForInsertingOriginalRow:(OriginalRow *)originalRow {
-    
+
     OriginalSection * oSection = self.sections[originalRow.originalIndexPath.section];
     NSInteger vissibleIndex = -1;
     for (NSInteger i = 0; i < originalRow.originalIndexPath.row; ++i) {
-        
+
         OriginalRow * oRow = [oSection.rows objectAtIndex:i];
-        
+
         if (!oRow.hidden) {
             ++vissibleIndex;
         }
-        
+
     }
-    
+
     return [NSIndexPath indexPathForRow:vissibleIndex + 1 inSection:originalRow.originalIndexPath.section];
-    
+
 }
 
 - (NSIndexPath *)indexPathForDeletingOriginalRow:(OriginalRow *)originalRow {
-    
+
     OriginalSection * oSection = self.sections[originalRow.originalIndexPath.section];
     NSInteger vissibleIndex = -1;
     for (NSInteger i = 0; i < originalRow.originalIndexPath.row; ++i) {
-        
+
         OriginalRow * oRow = [oSection.rows objectAtIndex:i];
-        
+
         if (!oRow.hiddenReal) {
             ++vissibleIndex;
         }
-        
+
     }
-    
+
     return [NSIndexPath indexPathForRow:vissibleIndex + 1 inSection:originalRow.originalIndexPath.section];
-    
+
 }
 
 - (void)prepareUpdates {
-    
+
     [self.insertIndexPaths removeAllObjects];
     [self.deleteIndexPaths removeAllObjects];
     [self.updateIndexPaths removeAllObjects];
-    
+
     for (OriginalSection * os in self.sections) {
-        
+
         for (OriginalRow * or in [os.rows copy]) {
-        
+
             if (or.batchOperation == kBatchOperationDelete) {
-                
+        
                 NSIndexPath * ip = [self indexPathForDeletingOriginalRow:or];
                 [self.deleteIndexPaths addObject:ip];
-                
+        
                 if (or.cell == nil) {
                     //real delete
                     [self removeCellAtIndedexPath:ip];
                 }
-                
+        
             } else if (or.batchOperation == kBatchOperationInsert) {
-            
+    
                 NSIndexPath * ip = [self indexPathForInsertingOriginalRow:or];
                 [self.insertIndexPaths addObject:ip];
-                
+        
             } else if (or.batchOperation == kBatchOperationUpdate) {
-                
+        
                 NSIndexPath * ip = [self indexPathForInsertingOriginalRow:or];
                 [self.updateIndexPaths addObject:ip];
-                
+        
             }
-            
-        }
-        
-    }
     
+        }
+
+    }
+
     for (OriginalSection * os in self.sections) {
-        
+
         for (OriginalRow * or in os.rows) {
-            
+    
             or.hiddenReal = or.hiddenPlanned;
             or.batchOperation = kBatchOperationNone;
-            
-        }
-        
-    }
     
+        }
+
+    }
+
 }
 
 @end
@@ -382,9 +382,9 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        
+
         // Custom initialization
-        
+
     }
     return self;
 }
@@ -398,33 +398,33 @@
     self.insertTableViewRowAnimation = UITableViewRowAnimationRight;
     self.deleteTableViewRowAnimation = UITableViewRowAnimationLeft;
     self.reloadTableViewRowAnimation = UITableViewRowAnimationMiddle;
-    
+
     self.originalTable = [[OriginalTable alloc] initWithTableView:self.tableView];
-    
+
 }
 
 #pragma mark - Public
 
 - (void)insertCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    
+
    [self.originalTable insertCell:cell atIndexPath:indexPath];
 }
 
 - (void)removeCellAtIndexPath:(NSIndexPath *)indexPath {
-    
+
     OriginalRow *row = [self.originalTable originalRowWithIndexPath:indexPath];
     if (row) {
-        
+
         [row setHidden:YES];
         row.cell = nil;
     }
 }
 
 - (void)updateCell:(UITableViewCell *)cell {
-    
+
     OriginalRow * row = [self.originalTable originalRowWithTableViewCell:cell];
     [row update];
-    
+
 }
 
 - (void)updateCells:(NSArray *)cells {
@@ -434,10 +434,10 @@
 }
 
 - (void)cell:(UITableViewCell *)cell setHidden:(BOOL)hidden {
-    
+
     OriginalRow * row = [self.originalTable originalRowWithTableViewCell:cell];
     [row setHidden:hidden];
-    
+
 }
 
 - (void)cells:(NSArray *)cells setHidden:(BOOL)hidden {
@@ -447,10 +447,10 @@
 }
 
 - (void)cell:(UITableViewCell *)cell setHeight:(CGFloat)height {
-    
+
     OriginalRow * row = [self.originalTable originalRowWithTableViewCell:cell];
     [row setHeight:height];
-    
+
 }
 
 - (void)cells:(NSArray *)cells setHeight:(CGFloat)height {
@@ -466,37 +466,37 @@
 - (void)reloadDataAnimated:(BOOL)animated {
 
     [self.originalTable prepareUpdates];
-    
+
     if (!animated) {
-    
+
         [self.tableView reloadData];
-        
+
     } else {
-        
+
         if (self.animateSectionHeaders) {
             for (NSIndexPath *indexPath in self.originalTable.deleteIndexPaths) {
                 UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
                 cell.layer.zPosition = -2;
-                
+        
                 [self.tableView headerViewForSection:indexPath.section].layer.zPosition = -1;
             }
         }
-        
+
         [self.tableView beginUpdates];
-        
+
         [self.tableView reloadRowsAtIndexPaths:self.originalTable.updateIndexPaths withRowAnimation:self.reloadTableViewRowAnimation];
-        
+
         [self.tableView insertRowsAtIndexPaths:self.originalTable.insertIndexPaths withRowAnimation:self.insertTableViewRowAnimation];
-        
+
         [self.tableView deleteRowsAtIndexPaths:self.originalTable.deleteIndexPaths withRowAnimation:self.deleteTableViewRowAnimation];
-        
+
         [self.tableView endUpdates];
-        
+
         if (!self.animateSectionHeaders) {
             [self.tableView reloadData];
         }
     }
-    
+
 }
 
 #pragma mark - TableView Data Source
@@ -506,7 +506,7 @@
     if (self.originalTable == nil) {
         return [super tableView:tableView numberOfRowsInSection:section];
     }
-    
+
     return [self.originalTable.sections[section] numberOfVissibleRows];
 }
 
@@ -515,11 +515,11 @@
     if (self.originalTable == nil) {
         return [super tableView:tableView cellForRowAtIndexPath:indexPath];
     }
-    
+
     OriginalRow * or = [self.originalTable vissibleOriginalRowWithIndexPath:indexPath];
-    
+
     NSAssert(or.cell != nil, @"CANNOT BE NULL");
-    
+
     return or.cell;
 }
 
@@ -533,18 +533,18 @@
         }
     }
     return [super tableView:tableView indentationLevelForRowAtIndexPath:indexPath];
-    
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.originalTable != nil) {
         OriginalRow * or = [self.originalTable vissibleOriginalRowWithIndexPath:indexPath];
-        
+
         if (or.height != CGFLOAT_MAX) {
             return or.height;
         }
-        
+
         indexPath = or.originalIndexPath;
     }
     return [super tableView:tableView heightForRowAtIndexPath:indexPath];

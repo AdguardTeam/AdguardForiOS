@@ -19,7 +19,7 @@
 import OrderedCollections
 
 final class DnsUserRulesStorage: UserRulesStorageProtocol {
-    
+
     var rules: OrderedSet<UserRule> {
         get {
             let allRules = getAllRules()
@@ -43,17 +43,17 @@ final class DnsUserRulesStorage: UserRulesStorageProtocol {
             saveEnabledRules(enabledRules)
         }
     }
-    
+
     // MARK: - Private properties
-        
+
     private let type: DnsUserRuleType
     private let fileStorage: FilterFilesStorageProtocol
-    
+
     // fileStorage should be passed as new object with unique folder to avoid filters ids collisions
     init(type: DnsUserRuleType, fileStorage: FilterFilesStorageProtocol) {
         self.type = type
         self.fileStorage = fileStorage
-        
+
         // Create empty file if doesn't exist for all rules
         if fileStorage.getFilterContentForFilter(withId: type.allRulesFilterId) == nil {
             do {
@@ -62,7 +62,7 @@ final class DnsUserRulesStorage: UserRulesStorageProtocol {
                 Logger.logError("(DnsUserRulesStorage) - init; Failed to create empty file with id=\(type.allRulesFilterId). It can lead to various errors")
             }
         }
-        
+
         // Create empty file if doesn't exist for enabled rules
         if fileStorage.getFilterContentForFilter(withId: type.enabledRulesFilterId) == nil {
             do {
@@ -72,16 +72,16 @@ final class DnsUserRulesStorage: UserRulesStorageProtocol {
             }
         }
     }
-    
+
     // MARK: - Private methods
-    
+
     private func getAllRules() -> [String] {
         guard let rules = fileStorage.getFilterContentForFilter(withId: type.allRulesFilterId) else {
             return []
         }
         return rules.isEmpty ? [] : rules.components(separatedBy: .newlines)
     }
-    
+
     private func saveAllRules(_ rules: [String]) {
         let rulesString = rules.joined(separator: "\n")
         do {
@@ -90,14 +90,14 @@ final class DnsUserRulesStorage: UserRulesStorageProtocol {
             Logger.logError("(DnsUserRulesStorage) - saveAllRules; Error saving all rules; Error: \(error)")
         }
     }
-    
+
     private func getEnabledRules() -> [String] {
         guard let rules = fileStorage.getFilterContentForFilter(withId: type.enabledRulesFilterId) else {
             return []
         }
         return rules.components(separatedBy: .newlines)
     }
-    
+
     private func saveEnabledRules(_ rules: [String]) {
         let rulesString = rules.joined(separator: "\n")
         do {
@@ -111,14 +111,14 @@ final class DnsUserRulesStorage: UserRulesStorageProtocol {
 // MARK: - DnsUserRuleType + Filter ids
 
 extension DnsUserRuleType {
-    
+
     var enabledRulesFilterId: Int {
         switch self {
         case .allowlist: return 10001
         case .blocklist: return 10002
         }
     }
-    
+
     fileprivate var allRulesFilterId: Int {
         switch self {
         case .allowlist: return 10003

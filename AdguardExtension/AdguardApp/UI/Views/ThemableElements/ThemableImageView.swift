@@ -19,7 +19,7 @@
 import Foundation
 
 class ThemableImageView: UIImageView {
-    
+
     @IBInspectable var lightThemeImage: UIImage?
     @IBInspectable var darkThemeImage: UIImage?
 }

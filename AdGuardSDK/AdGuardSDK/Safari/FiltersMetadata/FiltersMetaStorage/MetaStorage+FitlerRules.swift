@@ -27,17 +27,17 @@ private struct FilterRulesTable {
     let ruleText: String
     let isEnabled: Bool
     let affinity: Int?
-    
+
     // Table name
     static let table = Table("filter_rules")
-    
+
     // Columns names
     static let filterId = Expression<Int>("filter_id")
     static let ruleId = Expression<Int>("rule_id")
     static let ruleText = Expression<String>("rule_text")
     static let isEnabled = Expression<Bool>("is_enabled")
     static let affinity = Expression<Int>("affinity")
-    
+
     // Initializer from DB result
     init(dbFilterRule: Row) {
         self.filterId = dbFilterRule[Self.filterId]

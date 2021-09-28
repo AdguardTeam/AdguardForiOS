@@ -25,7 +25,7 @@ public enum CommonError: Error, CustomDebugStringConvertible {
     case missingFile(filename: String)
     case dataDidNotChange
     case error(message: String)
-    
+
     public var debugDescription: String {
         switch self {
         case .missingSelf: return "self object is nil"

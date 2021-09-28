@@ -26,10 +26,10 @@ extension Date {
         dateFormatter.timeStyle = .none
         dateFormatter.locale = Locale.current
         let dateString = dateFormatter.string(from: self)
-        
+
         return dateString
     }
-    
+
     // return formated and localized string from date
     public func formatedStringWithHoursAndMinutes() -> String?{
         let dateFormatter = DateFormatter()
@@ -38,10 +38,10 @@ extension Date {
         let id = Locale.current.identifier
         dateFormatter.locale = Locale(identifier: id)
         let dateString = dateFormatter.string(from: self)
-            
+    
         return dateString
     }
-    
+
     static func dateFromIso8601(_ from: String) -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"

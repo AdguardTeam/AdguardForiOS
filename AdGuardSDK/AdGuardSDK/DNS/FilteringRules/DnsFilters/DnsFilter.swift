@@ -33,7 +33,7 @@ public struct DnsFilter: ExtendedCustomFilterMetaProtocol, Codable, Equatable {
     public let communityPage: String?
     public let filterDownloadPage: String?
     public let rulesCount: Int
-    
+
     init(filterId: Int, subscriptionUrl: URL, isEnabled: Bool, name: String?, description: String?, version: String?, lastUpdateDate: Date?, updateFrequency: Int?, homePage: String?, licensePage: String?, issuesReportPage: String?, communityPage: String?, filterDownloadPage: String?, rulesCount: Int) {
         self.filterId = filterId
         self.subscriptionUrl = subscriptionUrl
@@ -50,7 +50,7 @@ public struct DnsFilter: ExtendedCustomFilterMetaProtocol, Codable, Equatable {
         self.filterDownloadPage = filterDownloadPage
         self.rulesCount = rulesCount
     }
-    
+
     init(meta: ExtendedCustomFilterMetaProtocol?, name: String, filterId: Int, subscriptionUrl: URL, isEnabled: Bool) {
         self.filterId = filterId
         self.subscriptionUrl = subscriptionUrl

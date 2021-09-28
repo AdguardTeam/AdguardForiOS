@@ -22,7 +22,7 @@ public enum UserRulesStorageError: Error, CustomDebugStringConvertible {
     case ruleAlreadyExists(ruleString: String)
     case rulesAlreadyExist(rulesStrings: [String])
     case ruleDoesNotExist(ruleString: String)
-    
+
     public var debugDescription: String {
         switch self {
         case .ruleAlreadyExists(let rule): return "Rule '\(rule)' already exists in rules list"
@@ -33,39 +33,39 @@ public enum UserRulesStorageError: Error, CustomDebugStringConvertible {
 }
 
 public protocol UserRulesManagerProtocol: ResetableSyncProtocol, AnyObject {
-    
+
     /* String representation of all enabled rules */
     var rulesString: String { get }
-    
+
     /* All UserRule objects  */
     var allRules: [UserRule] { get }
-    
+
     /**
      Adds new rule to the user rule's list
      - Parameter rule: Rule object to add to storage
      - Parameter override: If **true** and **rule** is already in the user rule's list than it will be overriden with new one
-     
+ 
      - Throws: **UserRulesStorageError.ruleAlreadyExists**
                 if **override** is false and **allRules** already contains **rule**
      */
     func add(rule: UserRule, override: Bool) throws
-    
+
     /**
      Adds new rules to the user rule's list
      - Parameter rules: Rules object to add to storage
      - Parameter override: If **true**, duplicated rules will be overriden with new ones
-     
+ 
      - Throws: **UserRulesStorageError.rulesAlreadyExist**
                 if **override** is false and **allRules** already contains some rules from **rules**
      */
     func add(rules: [UserRule], override: Bool) throws
-    
+
     /* Modifies rule in the user rule's list */
     func modifyRule(_ oldRuleText: String, _ newRule: UserRule) throws
-    
+
     /* Removes rule from the user rule's list */
     func removeRule(withText ruleText: String) throws
-    
+
     /* Remove all rules from storage */
     func removeAllRules()
 }

@@ -21,16 +21,16 @@ import Foundation
 public protocol SafariProtectionContentBlockersProtocol {
     /* Number of advanced rules that will be passed to Safari Web Extension */
     var advancedRulesCount: Int { get }
-    
+
     /* Returns every content blocker reloading state */
     var reloadingContentBlockers: [ContentBlockerType: Bool] { get }
-    
+
     /* Returns every content blocker state */
     var allContentBlockersStates: [ContentBlockerType: Bool] { get }
-    
+
     /* Returns all content blocker conversion results and JSONs urls */
     var allConverterResults: [ConverterResult] { get }
-    
+
     /* Returns state of the specified content blocker */
     func getState(for cbType: ContentBlockerType) -> Bool
 }
@@ -40,19 +40,19 @@ extension SafariProtection {
     public var advancedRulesCount: Int {
         return workingQueue.sync { return cbStorage.advancedRulesCount }
     }
-    
+
     public var reloadingContentBlockers: [ContentBlockerType : Bool] {
         return workingQueue.sync { return cbService.reloadingContentBlockers }
     }
-    
+
     public var allContentBlockersStates: [ContentBlockerType : Bool] {
         return workingQueue.sync { return cbService.allContentBlockersStates }
     }
-    
+
     public var allConverterResults: [ConverterResult] {
         return workingQueue.sync { return cbStorage.allConverterResults }
     }
-    
+
     public func getState(for cbType: ContentBlockerType) -> Bool {
         return workingQueue.sync {
             return cbService.getState(for: cbType)

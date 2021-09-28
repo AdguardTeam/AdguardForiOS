@@ -20,7 +20,7 @@ import Foundation
 
 enum TabBarTabs: Int {
     typealias RawValue = Int
-    
+
     case mainTab = 0
     case protectionTab = 1
     case activityTab = 2
@@ -28,47 +28,47 @@ enum TabBarTabs: Int {
 }
 
 class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
-    
+
     private var bottomView: UIView?
     private let bottomLineHeight: CGFloat = 4.0
 
     private var bottomViewLeftAnchor: NSLayoutConstraint?
-    
+
     private lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
-        
+
         if tabBar.items == nil {
             return
         }
-        
+
         for (index, item) in tabBar.items!.enumerated() {
             item.title = nil
             item.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
-            
+    
             if index == TabBarTabs.mainTab.rawValue {
                 item.accessibilityLabel = String.localizedString("main_page_tab")
                 continue
             }
-            
+    
             if index == TabBarTabs.protectionTab.rawValue {
                 item.accessibilityLabel = String.localizedString("protection_page_tab")
                 continue
             }
-            
+    
             if index == TabBarTabs.activityTab.rawValue {
                 item.accessibilityLabel = String.localizedString("activity_page_tab")
                 continue
             }
-            
+    
             if index == TabBarTabs.settingTab.rawValue {
                 item.accessibilityLabel = String.localizedString("settings_page_tab")
                 continue
             }
         }
-        
+
         updateTheme()
         createSelectionIndicator()
         addTabBarShadow()
@@ -81,72 +81,72 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
             }
         }
     }
-    
+
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         changeLeftAnchor(for: item)
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         guard let item = tabBar.selectedItem else { return }
         resizeIndicator()
         changeLeftAnchor(for: item)
     }
-    
+
     private func changeLeftAnchor(for item: UITabBarItem){
         let numberOfItems = CGFloat(tabBar.items!.count)
         let width: CGFloat = tabBar.frame.width / numberOfItems
-        
+
         let selectedItem = tabBar.items?.firstIndex(of: item) ?? 0
-        
+
         bottomViewLeftAnchor?.constant = width / 4 + CGFloat(selectedItem) * width
-        
+
         UIView.animate(withDuration: 0.3) {[weak self] in
             self?.tabBar.layoutIfNeeded()
         }
     }
-    
+
     private func addTabBarShadow(){
         tabBar.shadowImage = UIImage()
         tabBar.backgroundImage = UIImage()
-        
+
         tabBar.layer.shadowColor = UIColor.black.cgColor
         tabBar.layer.shadowOpacity = 0.1
         tabBar.layer.shadowRadius = 2.0
     }
-    
+
     private func createSelectionIndicator() {
         if bottomView != nil {
             return
         }
-        
+
         bottomView = UIView()
         bottomView?.isUserInteractionEnabled = false
         bottomView?.translatesAutoresizingMaskIntoConstraints = false
         bottomView?.backgroundColor = UIColor.AdGuardColor.lightGreen1
         tabBar.addSubview(bottomView ?? UIView())
-        
+
         let numberOfItems = CGFloat(tabBar.items!.count)
-        
+
         let width: CGFloat = tabBar.frame.width / numberOfItems
-        
+
         let mult = 1 / (numberOfItems * 2)
-        
+
         bottomView?.heightAnchor.constraint(equalToConstant: bottomLineHeight).isActive = true
         bottomView?.widthAnchor.constraint(equalTo: tabBar.widthAnchor, multiplier: mult).isActive = true
         bottomViewLeftAnchor = bottomView?.leftAnchor.constraint(equalTo: tabBar.leftAnchor, constant: width / 4)
         bottomViewLeftAnchor?.isActive = true
         bottomView?.bottomAnchor.constraint(equalTo: tabBar.bottomAnchor).isActive = true
     }
-    
+
     private func resizeIndicator(){
         let bottomInset = tabBar.safeAreaInsets.bottom
-        
+
         if bottomInset != 0.0 {
             bottomView?.isHidden = true
             return
         }
-        
+
         let numberOfItems = CGFloat(tabBar.items!.count)
         let width: CGFloat = tabBar.frame.width / numberOfItems
         let bounds = CGRect(x: 0.0, y: 0.0, width: width / 2, height: bottomLineHeight)
@@ -165,10 +165,10 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
                 return nil
         }
         let edge: UIRectEdge = fromVCIndex > toVCIndex ? .right : .left
-        
+
         return CustomNavigationTransitionAnimator(presenting: edge == .left)
     }
-    
+
     // Set transitionCoordinator to nil to prevent controllers disappearing
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         return transitionCoordinator == nil

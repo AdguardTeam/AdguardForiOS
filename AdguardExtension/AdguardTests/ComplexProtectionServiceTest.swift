@@ -21,12 +21,12 @@ import XCTest
 class ComplexProtectionServiceTest: XCTestCase {
 
     var complexProtection: ComplexProtectionService!
-    
+
     var resources: SharedResourcesMock!
     var safari: SafariServiceMock!
     var configuration: ConfigurationServiceMock!
     var vpnManager: VpnManagerMock!
-    
+
     override func setUp() {
         resources = SharedResourcesMock()
         safari = SafariServiceMock()
@@ -38,7 +38,7 @@ class ComplexProtectionServiceTest: XCTestCase {
 
     override func tearDown() {
     }
-    
+
     let safariEnableCases = [
                               ((false, false, false), (true, false, true)),
                               ((false, false, true), (true, false, true)),
@@ -46,7 +46,7 @@ class ComplexProtectionServiceTest: XCTestCase {
                               ((false, true, true), (true, true, true)),
                               ((true, false, false), (true, false, true)),
     ]
-    
+
     let safariDisableCases = [
                               ((true, false, false), (false, false, false)),
                               ((true, false, true), (false, false, false)),
@@ -55,7 +55,7 @@ class ComplexProtectionServiceTest: XCTestCase {
                               ((false, true, true), (false, true, true)),
                               ((false, true, false), (false, true, false)),
     ]
-    
+
     let systemEnableCases = [
                               ((false, false, false), (false, true, true)),
                               ((false, false, true), (false, true, true)),
@@ -63,13 +63,13 @@ class ComplexProtectionServiceTest: XCTestCase {
                               ((false, true, true), (false, true, true)),
                               ((true, false, false), (false, true, true)),
     ]
-    
+
     let systemDisableCases = [ ((false, true, false), (false, false, false)),
                               ((false, true, true), (false, false, false)),
                               ((false, false, false), (false, false, false)),
                               ((true, true, true), (true, false, true)),
     ]
-    
+
     let complexEnableCases = [
                               ((false, false, false), (true, true, true)),
                               ((false, true, false), (false, true, true)),
@@ -77,7 +77,7 @@ class ComplexProtectionServiceTest: XCTestCase {
                               ((true, true, false), (true, true, true)),
                               ((true, true, true), (true, true, true)),
     ]
-    
+
     let complexDisableCases = [
                               ((false, false, true), (false, false, false)),
                               ((false, true, true), (false, true, false)),
@@ -85,46 +85,46 @@ class ComplexProtectionServiceTest: XCTestCase {
                               ((true, true, true), (true, true, false)),
                               ((true, true, false), (true, true, false)),
     ]
-    
-    
+
+
     func testEnableSafari() {
         for (old, new) in safariEnableCases {
             testEnable(.safari, state: true, oldStates: old, expectedStates: new)
         }
     }
-    
+
     func testDisableSafari() {
         for (old, new) in safariDisableCases {
             testEnable(.safari, state: false, oldStates: old, expectedStates: new)
         }
     }
-    
+
     func testEnableSystem() {
         for (old, new) in systemEnableCases {
             testEnable(.system, state: true, oldStates: old, expectedStates: new)
         }
     }
-    
+
     func testDisableSystem() {
         for (old, new) in systemDisableCases {
             testEnable(.system, state: false, oldStates: old, expectedStates: new)
         }
     }
-    
+
     func testEnableComplex() {
         for (old, new) in complexEnableCases {
             testEnable(.complex, state: true, oldStates: old, expectedStates: new)
         }
     }
-    
+
     func testDisableComplex() {
         for (old, new) in complexDisableCases {
             testEnable(.complex, state: false, oldStates: old, expectedStates: new)
         }
     }
-    
-    
-    
+
+
+
     enum Enable {
         case safari, system, complex
     }
@@ -133,12 +133,12 @@ class ComplexProtectionServiceTest: XCTestCase {
         resources.safariProtectionEnabled = oldStates.safari
         resources.systemProtectionEnabled = oldStates.system
         resources.complexProtectionEnabled = oldStates.complex
-        
+
         safari.invalidateCalled = false
         vpnManager.updateCalled = false
-    
+
         let expectation = XCTestExpectation()
-        
+
         switch what {
         case .safari:
             complexProtection.switchSafariProtection(state: state, for: nil) { (error) in
@@ -157,9 +157,9 @@ class ComplexProtectionServiceTest: XCTestCase {
                 expectation.fulfill()
             }
         }
-        
+
         wait(for: [expectation], timeout: 5)
-        
+
         XCTAssert(resources.safariProtectionEnabled == expectedStates.safari)
         XCTAssert(resources.systemProtectionEnabled == expectedStates.system)
         XCTAssert(resources.complexProtectionEnabled == expectedStates.complex)

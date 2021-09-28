@@ -28,9 +28,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     NSURL *videoURL = [NSURL URLWithString:[NSString stringWithFormat:URL_TEMPLATE, [ADLocales lang], DEFAULT_TUTORIAL_VIDEO]];
-    
+
     if (videoURL) {
         [self createPlayerForUrl:videoURL];
     }
@@ -56,19 +56,19 @@
 }
 
 - (void)createPlayerForUrl:(NSURL *)videoURL {
-    
+
     AVPlayer *player  = [AVPlayer playerWithURL:videoURL];
-    
+
     [player.currentItem addObserver:self forKeyPath:@"status" options:(NSKeyValueObservingOptionNew) context:nil];
-    
+
     [[NSNotificationCenter defaultCenter]
      addObserver:self
      selector:@selector(playerEnd:)
      name:AVPlayerItemDidPlayToEndTimeNotification
      object:player.currentItem];
-    
+
     self.player = player;
-    
+
     if (player.currentItem.status == AVPlayerItemStatusReadyToPlay) {
         [self.player play];
     }
@@ -80,7 +80,7 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
-    
+
     if ([object isEqual:self.player.currentItem] && [keyPath isEqualToString:@"status"]) {
 
         AVPlayerStatus status = [change[NSKeyValueChangeNewKey] intValue];

@@ -64,7 +64,7 @@
  */
 
 @interface FMDatabase : NSObject  {
-    
+
     sqlite3*            _db;
     NSString*           _databasePath;
     BOOL                _logsErrors;
@@ -76,7 +76,7 @@
     BOOL                _inTransaction;
     NSTimeInterval      _maxBusyRetryTimeInterval;
     NSTimeInterval      _startBusyRetryTime;
-    
+
     NSMutableDictionary *_cachedStatements;
     NSMutableSet        *_openResultSets;
     NSMutableSet        *_openFunctions;

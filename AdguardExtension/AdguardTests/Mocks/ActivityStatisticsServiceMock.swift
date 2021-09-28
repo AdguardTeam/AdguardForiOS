@@ -20,25 +20,25 @@ import Foundation
 
 class ActivityStatisticsServiceMock: ActivityStatisticsServiceProtocol {
     func writeRecords(_ records: [ActivityStatisticsRecord]) {
-        
+
     }
-    
+
     func deleteAllRecords() {
-        
+
     }
-    
+
     func stopDb() {
-        
+
     }
-    
+
     func startDb() {
-        
+
     }
-    
+
     func getAllRecords() -> [ActivityStatisticsRecord] {
         return []
     }
-    
+
     func getRecords(by type: ChartDateType) -> [ActivityStatisticsRecord] {
         return []
     }

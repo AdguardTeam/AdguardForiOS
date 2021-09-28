@@ -19,7 +19,7 @@
 import Foundation
 
 extension AESharedResourcesProtocol {
-    
+
     /// User theme mode of app UI
     dynamic var themeMode: ThemeMode {
         get {
@@ -36,7 +36,7 @@ extension AESharedResourcesProtocol {
             sharedDefaults().set(newValue.rawValue, forKey: AEDefaultsDarkTheme)
         }
     }
-    
+
     /// System appearence style
     dynamic var systemAppearenceIsDark: Bool {
         get {

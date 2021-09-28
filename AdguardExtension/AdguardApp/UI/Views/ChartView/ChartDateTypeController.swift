@@ -24,31 +24,31 @@ protocol DateTypeChangedProtocol: AnyObject {
 }
 
 final class ChartDateTypeController: BottomAlertController {
-    
+
     @IBOutlet weak var periodLabel: ThemableLabel!
     @IBOutlet weak var content: UIView!
-    
+
     @IBOutlet var buttons: [RoundRectButton]!
     @IBOutlet var separators: [UIView]!
-    
+
     weak var delegate: DateTypeChangedProtocol?
-    
+
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    
+
     private let todayTag = 0
     private let oneDayTag = 1
     private let weekTag = 2
     private let monthTag = 3
     private let allTimeTag = 4
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         updateTheme()
     }
-    
+
     @IBAction func charDataTypeAction(_ sender: UIButton) {
-        
+
         switch sender.tag {
         case todayTag:
             delegate?.statisticsPeriodChanged(statisticsPeriod: .today)
@@ -63,7 +63,7 @@ final class ChartDateTypeController: BottomAlertController {
         default:
             break
         }
-        
+
         dismiss(animated: true, completion: nil)
     }
 }

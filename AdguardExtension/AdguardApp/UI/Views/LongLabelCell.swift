@@ -20,7 +20,7 @@ import Foundation
 
 @IBDesignable
 class LongLabelCell : UITableViewCell {
-    
+
     var contentSubview : UIView?
     @IBInspectable var nibName: String?
 
@@ -28,7 +28,7 @@ class LongLabelCell : UITableViewCell {
         super.awakeFromNib()
         xibSetup()
     }
-    
+
     func xibSetup() {
         guard let view = loadViewFromNib() else { return }
         view.frame = bounds
@@ -46,7 +46,7 @@ class LongLabelCell : UITableViewCell {
             withOwner: self,
             options: nil).first as? UIView
     }
-    
+
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         xibSetup()

@@ -20,9 +20,9 @@ import Foundation
 
 enum ChartDateType: Int, CaseIterable {
     typealias RawValue = Int
-    
+
     case alltime = 0, month, week, day, today
-    
+
     /**
      Returns current bounds for the  given type
      */
@@ -32,7 +32,7 @@ enum ChartDateType: Int, CaseIterable {
         let week = 7.0 * day
         let month = 30.0 * day
         let now = Date()
-        
+
         switch self {
         case .alltime:
             return (now, Date(timeIntervalSinceReferenceDate: 0))
@@ -47,15 +47,15 @@ enum ChartDateType: Int, CaseIterable {
             let hours = Double(calendar.component(.hour, from: now))
             let minutes = Double(calendar.component(.minute, from: now))
             let interval = hours * hour + minutes * 60.0
-            
+    
             return (now, now - interval)
         }
     }
-    
+
     func getFormatterString(from date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale.current
-        
+
         switch self {
         case .today:
             dateFormatter.dateFormat = "HH:mm"
@@ -70,7 +70,7 @@ enum ChartDateType: Int, CaseIterable {
         }
         return dateFormatter.string(from: date)
     }
-    
+
     /**
      Get title for changeStatisticsDatesButton when it is changed
      */
@@ -88,7 +88,7 @@ enum ChartDateType: Int, CaseIterable {
             return String.localizedString("chart_alltime")
         }
     }
-    
+
     private func now() -> Date {
         return Date()
     }

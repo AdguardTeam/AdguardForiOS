@@ -20,27 +20,27 @@ import Foundation
 
 /// Request to obtain filters meta data
 struct FiltersMetadataRequest: RequestProtocol {
-    
+
     let version: String
     let id: String
     let cid: String
     let lang: String
-    
+
     init(version: String, id: String, cid: String, lang: String) {
         self.version = version
         self.id = id
         self.cid = cid
         self.lang = lang
     }
-    
+
     var urlRequest: URLRequest? {
         let path = "\(urlBase)filters.js"
-        
+
         var params: [String: Any] = [
             "v": version,
             "lang": lang
         ]
-        
+
 #if os(iOS)
         params["id"] = id
         params["cid"] = cid
@@ -51,10 +51,10 @@ struct FiltersMetadataRequest: RequestProtocol {
             Logger.logError("FiltersMetadataRequest errror - can not construct url" )
             return nil
         }
-        
+
         var request = URLRequest(url: resultUrl)
         request.httpMethod = "GET"
-        
+
         return request
     }
 }

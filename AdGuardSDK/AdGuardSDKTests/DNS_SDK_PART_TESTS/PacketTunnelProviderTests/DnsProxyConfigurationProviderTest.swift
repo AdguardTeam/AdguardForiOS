@@ -1,13 +1,13 @@
 import XCTest
 
 class DnsProxyConfigurationProviderTest: XCTestCase {
-    
+
     var dnsProvidersManager: DnsProvidersManagerMock!
     var dnsLibsRulesProvider: DnsLibsRulesProviderMock!
     var dnsConfiguration: DnsConfigurationMock!
     var networkUtils: NetworkUtilsMock!
     var dnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol!
-    
+
     override func setUp() {
         dnsProvidersManager = DnsProvidersManagerMock()
         dnsLibsRulesProvider = DnsLibsRulesProviderMock()
@@ -20,7 +20,7 @@ class DnsProxyConfigurationProviderTest: XCTestCase {
             networkUtils: networkUtils
         )
     }
-    
+
     func test() {
         dnsProvidersManager.stubbedActiveDnsServer = DnsServer(
             features: [],
@@ -31,7 +31,7 @@ class DnsProxyConfigurationProviderTest: XCTestCase {
             name: "custom",
             isEnabled: true
         )
-        
+
         dnsConfiguration.lowLevelConfiguration = LowLevelDnsConfiguration(
             tunnelMode: .split,
             fallbackServers: ["9.9.9.9"],
@@ -42,33 +42,33 @@ class DnsProxyConfigurationProviderTest: XCTestCase {
             blockIpv6: false,
             restartByReachability: true
         )
-        
+
         var expectedFilters = [
             DnsProxyFilter(filterId: 0, filterPath: "path1"),
             DnsProxyFilter(filterId: 1, filterPath: "path2")
         ]
         dnsLibsRulesProvider.stubbedEnabledCustomDnsFilters = expectedFilters
-                
+        
         let expectedBlocklistFilter = DnsProxyFilter(filterId: DnsUserRuleType.blocklist.enabledRulesFilterId, filterPath: "path4")
         dnsLibsRulesProvider.stubbedBlocklistFilter = expectedBlocklistFilter
         expectedFilters.append(expectedBlocklistFilter)
-        
+
         let expectedAllowlistFilter = DnsProxyFilter(filterId: DnsUserRuleType.allowlist.enabledRulesFilterId, filterPath: "path3")
         dnsLibsRulesProvider.stubbedAllowlistFilter = expectedAllowlistFilter
         expectedFilters.append(expectedAllowlistFilter)
-        
+
         networkUtils.getProtocolResult = .success(.dns)
         networkUtils.isIpv4Available = true
         networkUtils.isIpv6Available = false
-        
+
         let systemDnsUpstream = DnsUpstream(upstream: "8.8.8.8", protocol: .dns)
         let actualConfig = dnsProxyConfigurationProvider.getProxyConfig([systemDnsUpstream])
-        
+
         let bootstrap = DnsUpstream(upstream: "1.1.1.1", protocol: .dns)
         let expectedUpstreams = [DnsProxyUpstream(dnsUpstreamInfo: systemDnsUpstream, dnsBootstraps: [bootstrap], id: 0)]
         let fallback = DnsUpstream(upstream: "9.9.9.9", protocol: .dns)
         let expectedFallbacks = [DnsProxyUpstream(dnsUpstreamInfo: fallback, dnsBootstraps: [bootstrap], id: 1)]
-        
+
         let expectedConfig = DnsProxyConfiguration(
             upstreams: expectedUpstreams,
             fallbacks: expectedFallbacks,
@@ -83,7 +83,7 @@ class DnsProxyConfigurationProviderTest: XCTestCase {
             blockIpv6: false
         )
         XCTAssertEqual(actualConfig, expectedConfig)
-        
+
         let expectedDnsUpstreamById = [
             0: expectedUpstreams[0],
             1: expectedFallbacks[0]
@@ -91,11 +91,11 @@ class DnsProxyConfigurationProviderTest: XCTestCase {
         XCTAssertEqual(dnsProxyConfigurationProvider.dnsUpstreamById, expectedDnsUpstreamById)
         XCTAssertEqual(dnsProxyConfigurationProvider.dnsAllowlistFilterId,  DnsUserRuleType.allowlist.enabledRulesFilterId)
         XCTAssertEqual(dnsProxyConfigurationProvider.dnsBlocklistFilterId,  DnsUserRuleType.blocklist.enabledRulesFilterId)
-        
+
         XCTAssertEqual(dnsLibsRulesProvider.invokedEnabledCustomDnsFiltersGetterCount, 1)
         XCTAssertEqual(dnsLibsRulesProvider.invokedAllowlistFilterGetterCount, 1)
         XCTAssertEqual(dnsLibsRulesProvider.invokedBlocklistFilterGetterCount, 1)
     }
-    
+
     // TODO: - Need more tests
 }

@@ -27,21 +27,21 @@ public protocol CustomFilterFilesStorageProtocol: ResetableSyncProtocol {
      - Parameter onFilterUpdated: Error handling closure
      */
     func updateCustomFilter(withId id: Int, subscriptionUrl: URL, onFilterUpdated: @escaping (Error?) -> Void)
-    
+
     /**
      Delete  filter file with specified **id**
      - Parameter id: Filter unique id where
      - Throws: Some Foundation methods can throw while removing file
      */
     func deleteFilter(withId id: Int) throws
-    
+
     /**
      Returns filter file content by **filter id**
      - Parameter id: Filter unique id
      - Returns: Filter file content if filter file exists, nil otherwise
      */
     func getFilterContentForFilter(withId id: Int) -> String?
-    
+
     /**
      Returns filter file URL by **filter id**
      - Parameter id: Filter unique id
@@ -51,24 +51,24 @@ public protocol CustomFilterFilesStorageProtocol: ResetableSyncProtocol {
 }
 
 public protocol FilterFilesStorageProtocol: CustomFilterFilesStorageProtocol {
-    
+
     /// URL of directory where all filters are stored
     var filterFilesDirectoryUrl: URL { get }
-    
+
     /**
      Updates filter file with specified **id**
      - Parameter id: Filter unique id
      - Parameter onFilterUpdated: Error handling closure
      */
     func updateFilter(withId id: Int, onFilterUpdated: @escaping (Error?) -> Void)
-    
+
     /**
      Returns filter files content by filters id-s
      - Parameter identifiers: Array of filter id-s whose content should be returned
      - Returns: A dictionary of existing filters files content by filter id-s
      */
     func getFiltersContentForFilters(withIds identifiers: [Int]) -> [Int: String]
-    
+
     /**
      Saves **content** of filter to the file of filter with specified **id**
      - Parameter id: Filter unique id where **filterContent** should be saved
@@ -80,19 +80,19 @@ public protocol FilterFilesStorageProtocol: CustomFilterFilesStorageProtocol {
 
 /* This class manages filters text files */
 public final class FilterFilesStorage: FilterFilesStorageProtocol {
-    
+
     // URL of directory where all filters are stored
     public let filterFilesDirectoryUrl: URL
-    
+
     // MARK: - Private properties
-    
+
     private let fileManager = FileManager.default
-    
+
     // Concurrent queue for downloading filter files
     private let filtersDownloadQueue = DispatchQueue(label: "AdguardSDK.FilterFilesStorage.filtersDownloadQueue", qos: .background, attributes: .concurrent)
-    
+
     // MARK: - Initialization
-    
+
     public init(filterFilesDirectoryUrl: URL) throws {
         // We are trying to create directory if passed URL is not a valid directory
         if !filterFilesDirectoryUrl.isDirectory {
@@ -100,24 +100,24 @@ public final class FilterFilesStorage: FilterFilesStorageProtocol {
         }
         self.filterFilesDirectoryUrl = filterFilesDirectoryUrl
     }
-    
+
     // MARK: - Public methods
-    
+
     public func updateFilter(withId id: Int, onFilterUpdated: @escaping (Error?) -> Void) {
         let filterFileUrl = urlForFilter(withId: id)
         downloadFilter(withUrl: filterFileUrl, filterId: id, onFilterDownloaded: onFilterUpdated)
     }
-    
+
     public func updateCustomFilter(withId id: Int, subscriptionUrl: URL, onFilterUpdated: @escaping (Error?) -> Void) {
         downloadFilter(withUrl: subscriptionUrl, filterId: id, onFilterDownloaded: onFilterUpdated)
     }
-    
+
     public func getFilterContentForFilter(withId id: Int) -> String? {
         let fileUrl = fileUrlForFilter(withId: id)
-        
+
         guard let content = try? String.init(contentsOf: fileUrl, encoding: .utf8) else {
             Logger.logError("FiltersStorage getFilterContentForFilter error. Can not read filter with url: \(fileUrl)")
-            
+    
             // try to get presaved filter file
             if  let presavedFilterFileUrl = defaultFilteUrlForFilter(withId: id),
                 let content = try? String.init(contentsOf: presavedFilterFileUrl, encoding: .utf8) {
@@ -128,10 +128,10 @@ public final class FilterFilesStorage: FilterFilesStorageProtocol {
         }
         return content
     }
-    
+
     public func getFiltersContentForFilters(withIds identifiers: [Int]) -> [Int : String] {
         var result: [Int: String] = [:]
-        
+
         for id in identifiers {
             if let content = getFilterContentForFilter(withId: id) {
                 result[id] = content
@@ -139,24 +139,24 @@ public final class FilterFilesStorage: FilterFilesStorageProtocol {
         }
         return result
     }
-    
+
     public func saveFilter(withId id: Int, filterContent: String) throws {
         let filterFileUrl = fileUrlForFilter(withId: id)
         try filterContent.write(to: filterFileUrl, atomically: true, encoding: .utf8)
     }
-    
+
     public func deleteFilter(withId id: Int) throws {
         let filterFileUrl = fileUrlForFilter(withId: id)
         try fileManager.removeItem(at: filterFileUrl)
     }
-    
+
     public func getUrlForFilter(withId id: Int) -> URL {
         return fileUrlForFilter(withId: id)
     }
-    
+
     public func reset() throws {
         Logger.logInfo("(FilterFilesStorage) - reset start")
-        
+
         // Delete all custom filters files
         let filtersUrls = try fileManager.contentsOfDirectory(at: filterFilesDirectoryUrl, includingPropertiesForKeys: nil, options: [])
         try filtersUrls.forEach { filterUrl in
@@ -169,12 +169,12 @@ public final class FilterFilesStorage: FilterFilesStorageProtocol {
         }
         Logger.logInfo("(FilterFilesStorage) - reset; Successfully deleted directory with filters")
     }
-    
+
     // MARK: - Private methods
-    
+
     private func downloadFilter(withUrl url: URL, filterId: Int, onFilterDownloaded: @escaping (Error?) -> Void) {
         let filterFileUrl = fileUrlForFilter(withId: filterId)
-        
+
         filtersDownloadQueue.async {
             do {
                 let content = try String(contentsOf: url)
@@ -187,16 +187,16 @@ public final class FilterFilesStorage: FilterFilesStorageProtocol {
             }
         }
     }
-    
+
     private func urlForFilter(withId id: Int) -> URL {
         let url = "https://filters.adtidy.org/ios/filters/\(id)_optimized.txt"
         return URL(string: url)!
     }
-    
+
     private func fileUrlForFilter(withId id: Int) -> URL {
         return filterFilesDirectoryUrl.appendingPathComponent("\(id).txt")
     }
-    
+
     private func defaultFilteUrlForFilter(withId id: Int) -> URL? {
         return Bundle.main.url(forResource: "\(id)", withExtension: "txt")
     }

@@ -34,7 +34,7 @@
     {
         _tokenRecognisers = [NSMutableArray array];
         FMDBRetain(_tokenRecognisers);
-        
+
         //' quote
         FMStatementQuotedRecogniser *singleQuoteRecogniser = nil;
         singleQuoteRecogniser = [FMStatementQuotedRecogniser quotedRecogniserWithStartQuote:@"'"
@@ -43,17 +43,17 @@
                                                                              name:@"SingleQuote"];
         singleQuoteRecogniser.shouldQuoteEscapeSequence = YES;
         [_tokenRecognisers addObject:singleQuoteRecogniser];
-        
+
         //" quote
         FMStatementQuotedRecogniser *doubleQuoteRecogniser = nil;
         doubleQuoteRecogniser = [FMStatementQuotedRecogniser quotedRecogniserWithStartQuote:@"\""
                                                                      endQuote:@"\""
                                                                escapeSequence:@"\\"
                                                                          name:@"DoubleQuote"];
-        
+
         doubleQuoteRecogniser.shouldQuoteEscapeSequence = NO;
         [_tokenRecognisers addObject:doubleQuoteRecogniser];
-        
+
         //` quote
         FMStatementQuotedRecogniser *sqlashQuoteRecogniser = nil;
         sqlashQuoteRecogniser = [FMStatementQuotedRecogniser quotedRecogniserWithStartQuote:@"`"
@@ -62,7 +62,7 @@
                                                                               name:@"SqlashQuote"];
         sqlashQuoteRecogniser.shouldQuoteEscapeSequence = NO;
         [_tokenRecognisers addObject:sqlashQuoteRecogniser];
-        
+
         //; recognizer
         NSArray *operatorKeywords = @[@";"];
         [_tokenRecognisers addObject:[FMStatementKeywordRecogniser recogniserForKeywords:operatorKeywords]];
@@ -122,12 +122,12 @@
                     break;
                 }
             }
-            
+    
             if (!recognised)
             {
                 currentTokenOffset ++;
             }
-            
+    
             if (currentTokenOffset == inputLength && lastSplitterLocation != inputLength)
                 //input comes to end, put all string remaining to the last statement
             {
@@ -139,7 +139,7 @@
             }
         }
     }
-    
+
     return [NSArray arrayWithArray:resultArray];
 }
 
@@ -152,22 +152,22 @@
     @"select TABLE IF NOT EXISTS `web_playlist_order` (`playlist_id` BIGINT NOT NULL, `field` VARCHAR(40) NULL, `order` VARCHAR(40) NULL, PRIMARY KEY select (`playlist_SELECTid`));",
     @"'\\\\';",
     @"'blah blah"];
-    
+
     NSMutableString *batchStatement = [NSMutableString string];
     for (NSString *str in statementStringArray)
     {
         [batchStatement appendString:str];
     }
-    
+
     //Result
     NSArray *statements = [[FMSQLStatementSplitter sharedInstance] statementsFromBatchSqlStatement:batchStatement];
     NSLog(@"%@ test with parsed result: %@",[super description], statements);
-    
+
     //counts
     NSLog(@"statement count :%lu expected %lu.",
           (unsigned long)statements.count,
           (unsigned long)statementStringArray.count);
-    
+
     //single statement
     for (NSUInteger i = 0; i<statementStringArray.count && i<statements.count; i++)
     {

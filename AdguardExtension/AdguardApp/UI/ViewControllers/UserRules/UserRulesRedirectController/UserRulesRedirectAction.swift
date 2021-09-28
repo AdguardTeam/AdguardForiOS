@@ -23,7 +23,7 @@ enum UserRulesRedirectAction {
     case disableSiteProtection(domain: String)
     case addToBlocklist(domain: String)
     case removeAllBlocklistRules(domain: String)
-    
+
     var scheme: String {
         switch self {
         case .enableSiteProtection(_): return "\(Bundle.main.appScheme)://safariWebExtension?action=enableSiteProtection&domain="
@@ -32,7 +32,7 @@ enum UserRulesRedirectAction {
         case .removeAllBlocklistRules(_): return "\(Bundle.main.appScheme)://safariWebExtension?action=removeAllBlocklistRules&domain="
         }
     }
-    
+
     static func action(from actionString: String, domain: String) -> Self {
         switch actionString {
         case "enableSiteProtection": return .enableSiteProtection(domain: domain)

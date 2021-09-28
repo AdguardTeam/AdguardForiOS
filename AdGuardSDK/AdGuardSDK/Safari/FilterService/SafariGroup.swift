@@ -36,9 +36,9 @@ public struct SafariGroup: SafariGroupProtocol {
     public let groupType: SafariGroup.GroupType
     public let groupName: String
     public let displayNumber: Int
-    
+
     // MARK: Initialization
-    
+
     init(filters: [SafariGroup.Filter], isEnabled: Bool, groupId: Int, groupName: String, displayNumber: Int) {
         self.groupId = groupId
         self.filters = filters
@@ -47,7 +47,7 @@ public struct SafariGroup: SafariGroupProtocol {
         self.groupName = groupName
         self.displayNumber = displayNumber
     }
-    
+
     init(filters: [SafariGroup.Filter], isEnabled: Bool, groupType: SafariGroup.GroupType, groupName: String, displayNumber: Int) {
         self.groupId = groupType.id
         self.filters = filters
@@ -56,7 +56,7 @@ public struct SafariGroup: SafariGroupProtocol {
         self.groupName = groupName
         self.displayNumber = displayNumber
     }
-    
+
     init(dbGroup: FilterGroupsTable, filters: [SafariGroup.Filter]) {
         self.groupId = dbGroup.groupId
         self.filters = filters

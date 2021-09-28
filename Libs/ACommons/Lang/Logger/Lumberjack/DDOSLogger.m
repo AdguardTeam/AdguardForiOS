@@ -50,13 +50,13 @@ static DDOSLogger *sharedInstance;
     if ([logMessage->_fileName isEqualToString:@"DDASLLogCapture"]) {
         return;
     }
-    
+
     if(@available(iOS 10.0, macOS 10.12, tvOS 10.0, watchOS 3.0, *)) {
-        
+
         NSString * message = _logFormatter ? [_logFormatter formatLogMessage:logMessage] : logMessage->_message;
         if (message) {
             const char *msg = [message UTF8String];
-            
+    
             switch (logMessage->_flag) {
                 case DDLogFlagError     :
                     os_log_error(OS_LOG_DEFAULT, "%{public}s", msg);
@@ -72,7 +72,7 @@ static DDOSLogger *sharedInstance;
                     break;
             }
         }
-        
+
     }
 
 }

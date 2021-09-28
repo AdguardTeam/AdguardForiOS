@@ -26,52 +26,52 @@ final class AdvancedSettingsController: UITableViewController {
     @IBOutlet weak var restartProtectionSwitch: UISwitch!
     @IBOutlet weak var debugLogsSwitch: UISwitch!
     @IBOutlet weak var lastSeparator: UIView!
-    
+
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
-    
+
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
-        
+
     private let showStatusbarRow = 0
     private let restartProtectionRow = 1
     private let debugLogsRow = 2
     private let removeVpnProfile = 5
-    
+
     private var vpnConfigurationObserver: NotificationToken?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         updateTheme()
         setupBackButton()
 
         restartProtectionSwitch.isOn = resources.restartByReachability
         debugLogsSwitch.isOn = resources.isDebugLogs
         showStatusbarSwitch.isOn = configuration.showStatusBar
-        
+
         vpnConfigurationObserver = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: .main) { [weak self] (note) in
             self?.lastSeparator.isHidden = false
             self?.tableView.reloadData()
         }
     }
-    
+
     // MARK: - actions
-    
+
     @IBAction func showProgressbarAction(_ sender: UISwitch) {
         if !sender.isOn {
            NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
         }
         configuration.showStatusBar = sender.isOn
     }
-    
+
     @IBAction func restartProtectionAction(_ sender: UISwitch) {
         resources.restartByReachability = sender.isOn
         vpnManager.updateSettings(completion: nil)
     }
-    
+
     @IBAction func debugLogsAction(_ sender: UISwitch) {
         let isDebugLogs = sender.isOn
         resources.isDebugLogs = isDebugLogs
@@ -80,33 +80,33 @@ final class AdvancedSettingsController: UITableViewController {
         AGLogger.setLevel(isDebugLogs ? .AGLL_TRACE : .AGLL_INFO)
         vpnManager.updateSettings(completion: nil) // restart tunnel to apply new log level
     }
-    
+
     // MARK: - Table view data source
-    
+
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         cell.isHidden = false
-        
+
         if indexPath.row == restartProtectionRow && !configuration.proStatus{
             cell.isHidden = true
         }
-        
+
         if indexPath.row == removeVpnProfile && (!vpnManager.vpnInstalled || resources.dnsImplementation == .native) {
             cell.isHidden = true
         }
-        
+
         theme.setupTableCell(cell)
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case showStatusbarRow:
@@ -125,26 +125,26 @@ final class AdvancedSettingsController: UITableViewController {
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
+
         if indexPath.row == restartProtectionRow && !configuration.proStatus{
             return 0.0
         }
-        
+
         if indexPath.row == removeVpnProfile && (!vpnManager.vpnInstalled || resources.dnsImplementation == .native) {
             lastSeparator.isHidden = true
             return 0.0
         }
-        
+
         return super.tableView(tableView, heightForRowAt: indexPath)
     }
-    
+
     // MARK: - Private methods
-    
+
     private func showRemoveVpnAlert(_ indexPath: IndexPath) {
         let alert = UIAlertController(title: nil, message: String.localizedString("delete_vpn_profile_message"), preferredStyle: .deviceAlertStyle)
-        
+
         let removeAction = UIAlertAction(title: String.localizedString("delete_title").capitalized, style: .destructive) {[weak self] _ in
             guard let self = self else { return }
             self.vpnManager.removeVpnConfiguration {(error) in
@@ -157,12 +157,12 @@ final class AdvancedSettingsController: UITableViewController {
                 }
             }
         }
-        
+
         alert.addAction(removeAction)
-        
+
         let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel) { _ in
         }
-        
+
         alert.addAction(cancelAction)
 
         self.present(alert, animated: true)

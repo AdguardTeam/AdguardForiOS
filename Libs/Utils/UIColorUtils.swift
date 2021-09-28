@@ -36,16 +36,16 @@ extension UIColor {
         }
         self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
     }
-    
+
     func hex()->String {
-        
+
         var red: CGFloat = 0
         var green: CGFloat = 0
         var blue: CGFloat = 0
         var alpha: CGFloat = 0
 
         getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-        
+
         let redInt = Int(red * 255)
         let greenInt = Int(green * 255)
         let blueInt = Int(blue * 255)

@@ -25,60 +25,60 @@ class CustomSchemeURLParserTest: XCTestCase {
 
     override func tearDownWithError() throws {
     }
-    
+
     func testParseURL() {
         let url = URL(string: "adguard:subscribe?location=https://easylist.to/easylist/easylist.txt&title=EasyList")!
         let result = url.parseUrl()
-        
-        
+    
+
         let locationValue = result.params?["location"]
         let titleValue = result.params?["title"]
-        
+
         XCTAssertNotNil(locationValue)
         XCTAssertNotNil(titleValue)
-        
+
         XCTAssertEqual(locationValue, "https://easylist.to/easylist/easylist.txt")
         XCTAssertEqual(titleValue, "EasyList")
     }
-    
+
     func testParseAuthURL() {
         let url = URL(string: "adguard://auth#some_token=123&foo=321&bar=qwerty")!
         let result = url.parseAuthUrl()
-        
+
         let tokenValue = result.params?["some_token"]
         let fooValue = result.params?["foo"]
         let barValue = result.params?["bar"]
-        
+
         XCTAssertNotNil(tokenValue)
         XCTAssertNotNil(fooValue)
         XCTAssertNotNil(barValue)
-        
+
         XCTAssertEqual(tokenValue, "123")
         XCTAssertEqual(fooValue, "321")
         XCTAssertEqual(barValue, "qwerty")
     }
-    
+
     func testParseIncorectParamsOfURL() {
         let url = URL(string: "adguard:subscribe?&location=&&&=&")!
         let result = url.parseUrl()
-        
+
         let locationValue = result.params?["location"]
         let emptyValue = result.params?[""]
-        
+
         XCTAssertNotNil(locationValue)
         XCTAssertNotNil(emptyValue)
-        
+
         XCTAssertEqual(locationValue, "")
         XCTAssertEqual(emptyValue, "")
     }
-    
+
     func testParseIncorectParamsOfAuthURL() {
         let url = URL(string: "adguard:subscribe#location=&&&=&")!
         let result = url.parseAuthUrl()
-        
+
         let locationValue = result.params?["location"]
         let emptyValue = result.params?[""]
-        
+
         XCTAssertNil(locationValue)
         XCTAssertNil(emptyValue)
     }

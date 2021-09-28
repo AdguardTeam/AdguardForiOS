@@ -4,18 +4,18 @@ class DefaultDatabaseManagerTest: XCTestCase {
     let rootDirectory = TestsFileManager.rootDirectory
     let workingUrl = TestsFileManager.workingUrl
     let fileManager = FileManager.default
-    
+
     override func setUp() {
         TestsFileManager.deleteTestFolder()
         TestsFileManager.clearRootDirectory()
         TestsFileManager.putDbFileToDirectory(Bundle(for: type(of: self)))
     }
-    
+
     override func tearDown() {
         TestsFileManager.deleteTestFolder()
         TestsFileManager.clearRootDirectory()
     }
-    
+
     func testUpdateDefaultDbWithSuccess() {
         let manager = try! DefaultDatabaseManager(dbContainerUrl: workingUrl)
         XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
@@ -31,7 +31,7 @@ class DefaultDatabaseManagerTest: XCTestCase {
             XCTFail("\(error)")
         }
     }
-    
+
     func testUpdateDefaultDbWithMultipleUpdates() {
         let manager = try! DefaultDatabaseManager(dbContainerUrl: workingUrl)
         XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
@@ -42,7 +42,7 @@ class DefaultDatabaseManagerTest: XCTestCase {
             XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
             XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbArchiveRootUrl.path))
             XCTAssert(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileWorkingUrl.path))
-            
+    
             try manager.updateDefaultDb()
             XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
             XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbArchiveRootUrl.path))
@@ -52,7 +52,7 @@ class DefaultDatabaseManagerTest: XCTestCase {
             XCTFail()
         }
     }
-    
+
     func testRemoveDefaultDbWithSuccess() {
         let manager = try! DefaultDatabaseManager(dbContainerUrl: workingUrl)
         XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
@@ -63,7 +63,7 @@ class DefaultDatabaseManagerTest: XCTestCase {
             XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
             XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbArchiveRootUrl.path))
             XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileWorkingUrl.path))
-            
+    
             try manager.removeDefaultDb()
             XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
             XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbArchiveRootUrl.path))
@@ -72,7 +72,7 @@ class DefaultDatabaseManagerTest: XCTestCase {
             XCTFail()
         }
     }
-    
+
     func testRemoveDefaultDbFailure() {
         let manager = try! DefaultDatabaseManager(dbContainerUrl: workingUrl)
         XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
@@ -83,12 +83,12 @@ class DefaultDatabaseManagerTest: XCTestCase {
             XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
             XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbArchiveRootUrl.path))
             XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileWorkingUrl.path))
-            
+    
             TestsFileManager.deleteTestFolder()
             XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
             XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbArchiveRootUrl.path))
             XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileWorkingUrl.path))
-            
+    
             try manager.removeDefaultDb()
             XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
             XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbArchiveRootUrl.path))
@@ -97,7 +97,7 @@ class DefaultDatabaseManagerTest: XCTestCase {
             XCTFail()
         }
     }
-    
+
     func testRemoveDefaultDbWithFailureInRootFolder() {
         let manager = try! DefaultDatabaseManager(dbContainerUrl: rootDirectory)
         XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
@@ -106,7 +106,7 @@ class DefaultDatabaseManagerTest: XCTestCase {
             try manager.updateDefaultDb()
             XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
             XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbArchiveRootUrl.path))
-            
+    
             try manager.removeDefaultDb()
             XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
             XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbArchiveRootUrl.path))
@@ -115,7 +115,7 @@ class DefaultDatabaseManagerTest: XCTestCase {
             XCTFail()
         }
     }
-    
+
     func testRemoveDefaultDbIfNotExistsFailure() {
         let manager = try! DefaultDatabaseManager(dbContainerUrl: workingUrl)
         XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
@@ -130,7 +130,7 @@ class DefaultDatabaseManagerTest: XCTestCase {
             XCTFail()
         }
     }
-    
+
     func testDefaultDbFileExistsWithSuccess() {
         do {
             let manager = try! DefaultDatabaseManager(dbContainerUrl: workingUrl)
@@ -141,14 +141,14 @@ class DefaultDatabaseManagerTest: XCTestCase {
             XCTFail("\(error)")
         }
     }
-    
+
     func testDefaultDbSchemaVersionWithSuccess() {
         do {
             let manager = try! DefaultDatabaseManager(dbContainerUrl: workingUrl)
             XCTAssertNil(manager.defaultDbSchemaVersion)
             try manager.updateDefaultDb()
             XCTAssertNotNil(manager.defaultDbSchemaVersion)
-            
+    
         } catch {
             XCTFail("\(error)")
         }

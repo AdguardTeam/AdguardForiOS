@@ -35,12 +35,12 @@ protocol UserRulesTableModelProtocol: UserRuleTableViewCellDelegate, AddRuleCont
     var rulesModels: [UserRuleCellModel] { get }
     var icon: UIImage? { get }
     var searchString: String? { get set }
-    
+
     func remove(rules: [String], for indexPaths: [IndexPath])
     func turn(rules: [String], for indexPaths: [IndexPath], on: Bool)
     func setRule(_ rule: String, selected: Bool)
     func deselectAll()
-    
+
     func exportFile(for vc: UIViewController)
     func importFile(for vc: UIViewController, _ completion: @escaping (Error?) -> Void)
 }

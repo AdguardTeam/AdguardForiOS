@@ -20,20 +20,20 @@ import Foundation
 import UIKit
 
 class BottomAlertPresentingTransition: NSObject, UIViewControllerAnimatedTransitioning {
-    
+
     private let duration: TimeInterval
-    
+
     init(duration: TimeInterval = 0.5) {
         self.duration = duration
         super.init()
     }
-    
+
     private let targetColor = UIColor.AdGuardColor.darkBackground.withAlphaComponent(0.5)
-    
+
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return duration
     }
-    
+
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard let toVc = transitionContext.viewController(forKey: .to) as? BottomAlertController,
             let bottomConstraint = toVc.keyboardHeightLayoutConstraint,
@@ -42,7 +42,7 @@ class BottomAlertPresentingTransition: NSObject, UIViewControllerAnimatedTransit
             DDLogError("Animation without Content view")
             return
         }
-    
+
         /*
          We need to hide view and layout it
          Otherwise it will layout it while appearing
@@ -50,10 +50,10 @@ class BottomAlertPresentingTransition: NSObject, UIViewControllerAnimatedTransit
         bottomConstraint.constant = -toView.frame.height
         toView.layoutIfNeeded()
         bottomConstraint.constant = 0.0
-               
+       
         transitionContext.containerView.addSubview(toView)
         let duration = transitionDuration(using: transitionContext)
-        
+
         UIView.animate(withDuration: duration, animations: { [weak self] in
             guard let self = self else { return }
             toView.backgroundColor = self.targetColor
@@ -65,31 +65,31 @@ class BottomAlertPresentingTransition: NSObject, UIViewControllerAnimatedTransit
 }
 
 class BottomAlertDismissingTransition: NSObject, UIViewControllerAnimatedTransitioning {
-    
+
     private let duration: TimeInterval
     private let bottomConstraint: NSLayoutConstraint!
-    
+
     init(duration: TimeInterval = 0.5, bottomConstraint: NSLayoutConstraint!) {
         self.duration = duration
         self.bottomConstraint = bottomConstraint
         super.init()
     }
-    
+
     private let targetColor = UIColor.clear
-    
+
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return duration
     }
-    
+
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         let fromView = transitionContext.view(forKey: .from)
 
         guard let contentView = fromView?.subviews.first else {
             return
         }
-        
+
         let duration = transitionDuration(using: transitionContext)
-        
+
         UIView.animate(withDuration: duration, animations: { [weak self] in
             fromView?.backgroundColor = self?.targetColor
             self?.bottomConstraint.constant = -contentView.frame.height

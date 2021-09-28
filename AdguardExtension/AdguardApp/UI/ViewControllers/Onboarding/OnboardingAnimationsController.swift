@@ -23,48 +23,48 @@ class OnboardingAnimationsController: UIViewController {
 
     @IBOutlet weak var animationsScrollView: UIScrollView!
     @IBOutlet weak var textsScrollView: UIScrollView!
-    
+
     @IBOutlet weak var firstAnimationView: AnimationView!
     @IBOutlet weak var secondAnimationView: AnimationView!
     @IBOutlet weak var thirdAnimationView: AnimationView!
     @IBOutlet weak var pageContol: UIPageControl!
-    
+
     @IBOutlet weak var nextButton: UIButton!
-    
+
     @IBOutlet var themableLabels: [ThemableLabel]!
-    
+
     var delegate: OnboardingControllerDelegate?
-    
+
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private var orientationChangeNotification: NotificationToken?
-    
+
     private var currentStep = 1
-    
+
     private let showLicenseScreenSegue = "showLicenseScreenSegue"
     private let showOnboardingControllerSegue = "ShowOnboardingController"
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         nextButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.lightGreen1)
         updateTheme()
         setupAnimationViews()
         addGestureRecognizers()
         firstAnimationView.play()
-        
+
         orientationChangeNotification = NotificationCenter.default.observe(name: UIDevice.orientationDidChangeNotification, object: nil, queue: nil, using: {[weak self] (notification) in
             DispatchQueue.main.async {
                 self?.setupScrollViews()
             }
         })
     }
-    
+
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return theme.statusbarStyle()
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? OnboardingController {
             controller.delegate = delegate
@@ -77,42 +77,42 @@ class OnboardingAnimationsController: UIViewController {
             }
         }
     }
-    
+
     @IBAction func nextButtonTapped(_ sender: UIButton) {
         if currentStep == 3 {
             makeRedirect()
             return
         }
-        
+
         pageContol.currentPage += 1
         currentStep += 1
-        
+
         setupScrollViews()
-        
+
         if currentStep == 2 {
             firstAnimationView.stop()
             secondAnimationView.play()
             return
         }
-        
+
         if currentStep == 3 {
             secondAnimationView.stop()
             thirdAnimationView.play()
             return
         }
     }
-    
+
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
         makeRedirect()
     }
-    
+
     private func makeRedirect() {
         if !configuration.someContentBlockersEnabled {
             performSegue(withIdentifier: showOnboardingControllerSegue, sender: self)
         } else {
             // We mustn't show License screen for japannese in onboarding
             let isJapanesse = Locale.current.languageCode == "ja"
-            
+    
             if !configuration.proStatus && !isJapanesse{
                 performSegue(withIdentifier: self.showLicenseScreenSegue, sender: self)
             } else {
@@ -139,10 +139,10 @@ class OnboardingAnimationsController: UIViewController {
             thirdAnimationView.backgroundBehavior = .pauseAndRestore
         }
     }
-    
+
     private func setupScrollViews() {
         var offset: CGFloat = 0.0
-        
+
         if currentStep == 1 {
             offset = 0.0
         }
@@ -152,61 +152,61 @@ class OnboardingAnimationsController: UIViewController {
         else if currentStep == 3 {
             offset = thirdAnimationView.frame.minX
         }
-        
+
         animationsScrollView.setContentOffset(CGPoint(x: offset, y: 0.0), animated: true)
         textsScrollView.setContentOffset(CGPoint(x: offset, y: 0.0), animated: true)
     }
-    
+
     private func addGestureRecognizers() {
         let rightSwipeRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(onRightSwipe(_:)))
         let leftSwipeRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(onLeftSwipe(_:)))
-        
+
         rightSwipeRecognizer.direction = .right
         leftSwipeRecognizer.direction = .left
-        
+
         view.addGestureRecognizer(rightSwipeRecognizer)
         view.addGestureRecognizer(leftSwipeRecognizer)
     }
-    
+
     @objc private func onRightSwipe(_ sender: UISwipeGestureRecognizer) {
         if currentStep == 1 {
             return
         }
-        
+
         pageContol.currentPage -= 1
         currentStep -= 1
-        
+
         setupScrollViews()
-        
+
         if currentStep == 2 {
             thirdAnimationView.stop()
             secondAnimationView.play()
             return
         }
-        
+
         if currentStep == 1 {
             secondAnimationView.stop()
             firstAnimationView.play()
             return
         }
     }
-    
+
     @objc private func onLeftSwipe(_ sender: UISwipeGestureRecognizer) {
         if currentStep == 3 {
             return
         }
-        
+
         pageContol.currentPage += 1
         currentStep += 1
-        
+
         setupScrollViews()
-        
+
         if currentStep == 2 {
             firstAnimationView.stop()
             secondAnimationView.play()
             return
         }
-        
+
         if currentStep == 3 {
             secondAnimationView.stop()
             thirdAnimationView.play()

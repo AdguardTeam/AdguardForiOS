@@ -24,13 +24,13 @@ public protocol UserRuleConverterProtocol {
      If passed domain is already a rule that returns itself
      */
     func convertDomainToRule(_ domain: String) -> String
-    
+
     /*
      Converts rule to domain
      If passed rule is already a domain that returns itself
      */
     func convertRuleToDomain(_ rule: String) -> String
-    
+
     /* Returns string representation of rules */
     func convertRulesToString(_ rules: [UserRule]) -> String
 }

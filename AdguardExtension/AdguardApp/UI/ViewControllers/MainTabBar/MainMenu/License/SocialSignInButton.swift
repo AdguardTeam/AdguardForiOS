@@ -18,7 +18,7 @@
 
 class SocialSignInButton: ThemableButton {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         self.titleLabel?.textAlignment = .center
@@ -26,19 +26,19 @@ class SocialSignInButton: ThemableButton {
         self.titleLabel?.lineBreakMode = .byWordWrapping
         setConstraints(imageViewOffset: 20)
     }
-    
+
     override var isHighlighted: Bool {
         didSet {
             self.backgroundColor = isHighlighted ? theme.lightGrayTextColor : .clear
         }
     }
-    
+
     private func  setConstraints(imageViewOffset: CGFloat) {
         self.imageView?.translatesAutoresizingMaskIntoConstraints = false
         self.imageView?.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0.0).isActive = true
         self.imageView?.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: imageViewOffset).isActive = true
         self.imageView?.widthAnchor.constraint(equalToConstant: self.imageView?.frame.width ?? 0.0).isActive = true
-        
+
         self.titleLabel?.translatesAutoresizingMaskIntoConstraints = false
         self.titleLabel?.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0.0).isActive = true
         self.titleLabel?.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0.0).isActive = true

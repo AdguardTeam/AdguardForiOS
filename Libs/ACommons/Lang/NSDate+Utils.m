@@ -43,18 +43,18 @@ static NSDateFormatter *baseHttpFormatter;
 static NSDateFormatter *sqliteDateFormater;
 
 + (NSDate *)dateWithISO8601String:(NSString *)description{
-    
+
     [NSDate initISO8601Formater];
     if (!description)
         return [NSDate distantPast];
-    
+
     NSUInteger index = description.length;
     if (index < 3)
         return [NSDate distantPast];
-    
+
     index -= 3;
     NSString *string = [[description substringToIndex:index] stringByAppendingString:[description substringFromIndex:(index + 1)]];
-    
+
     @synchronized(ISO8601DateFormater){
 
         return [ISO8601DateFormater dateFromString:string];
@@ -62,10 +62,10 @@ static NSDateFormatter *sqliteDateFormater;
 }
 
 + (NSDate *)dateWithSQliteString:(NSString *)sqliteTimeStamp{
-    
+
     if (!(sqliteTimeStamp && [sqliteTimeStamp isKindOfClass:[NSString class]]))
         return [NSDate distantPast];
-    
+
     [NSDate initSqliteFormater];
     @synchronized(sqliteDateFormater){
         return [sqliteDateFormater dateFromString:[sqliteTimeStamp stringByAppendingString:@" +0000"]];
@@ -74,7 +74,7 @@ static NSDateFormatter *sqliteDateFormater;
 
 
 - (NSString *)iso8601String{
-    
+
     [NSDate initISO8601Formater];
     @synchronized(ISO8601DateFormater){
 
@@ -85,46 +85,46 @@ static NSDateFormatter *sqliteDateFormater;
 }
 
 + (NSDate *)parseHttpDateFromString:(NSString *)dateValue{
-    
+
     // trim single quotes around date if present
     // see issue #5279
     if (dateValue.length > 1
         && [dateValue hasPrefix:@"'"]
         && [dateValue hasSuffix:@"'"]
         ) {
-        
+
         dateValue = [dateValue substringWithRange:NSMakeRange(1, dateValue.length - 2)];
     }
-    
+
     [NSDate initHttpFormatters];
-    
+
     NSDate *result;
     @synchronized(httpFormatters){
-        
+
         for (NSDateFormatter *formater in httpFormatters) {
-            
+    
             result = [formater dateFromString:dateValue];
             if (result) {
-                
+        
                 break;
             }
         }
     }
-    
+
     return result;
 }
 
 + (NSString *)formatHttpDate:(NSDate *)date{
-    
+
     if (!date) {
-        
+
         return nil;
     }
-    
+
     [NSDate initHttpFormatters];
 
     @synchronized(baseHttpFormatter){
-        
+
         return [baseHttpFormatter stringFromDate:date];
     }
 }
@@ -134,13 +134,13 @@ static NSDateFormatter *sqliteDateFormater;
 ////////////////////////////////////////////////////////////////////////////
 
 + (void)initISO8601Formater{
-    
+
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        
+
         ISO8601DateFormater = [[NSDateFormatter alloc] init];
         NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
-        
+
         [ISO8601DateFormater setLocale:enUSPOSIXLocale];
         [ISO8601DateFormater setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSSZZZ"];
         [ISO8601DateFormater setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
@@ -148,13 +148,13 @@ static NSDateFormatter *sqliteDateFormater;
 }
 
 + (void)initSqliteFormater{
-    
+
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        
+
         sqliteDateFormater = [[NSDateFormatter alloc] init];
         NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
-        
+
         [sqliteDateFormater setLocale:enUSPOSIXLocale];
         [sqliteDateFormater setDateFormat:SQLITE_DATE_PATTERN];
         [sqliteDateFormater setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
@@ -162,33 +162,33 @@ static NSDateFormatter *sqliteDateFormater;
 }
 
 + (void)initHttpFormatters{
-    
+
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        
+
         NSMutableArray *formaterArray = [NSMutableArray arrayWithCapacity:3];
         NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
-        
+
         NSDateFormatter *formater =[[NSDateFormatter alloc] init];
         [formater setLocale:enUSPOSIXLocale];
         [formater setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
         [formater setDateFormat:HTTP_DATE_PATTERN_RFC1123];
         [formaterArray addObject:formater];
-        
+
         formater =[[NSDateFormatter alloc] init];
         [formater setLocale:enUSPOSIXLocale];
         [formater setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
         [formater setDateFormat:HTTP_DATE_PATTERN_RFC1036];
         [formaterArray addObject:formater];
-        
+
         formater =[[NSDateFormatter alloc] init];
         [formater setLocale:enUSPOSIXLocale];
         [formater setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
         [formater setDateFormat:HTTP_DATE_PATTERN_ASCTIME];
         [formaterArray addObject:formater];
-        
+
         httpFormatters = [formaterArray copy];
-        
+
         baseHttpFormatter = [[NSDateFormatter alloc] init];
         [baseHttpFormatter setLocale:enUSPOSIXLocale];
         [baseHttpFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];

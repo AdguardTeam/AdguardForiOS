@@ -21,10 +21,10 @@ import struct DnsAdGuardSDK.DnsFilter
 protocol DnsFiltersModelsProviderProtocol: AnyObject {
     /// Returns DNS filters models depending on `searchString`
     var filtersModels: [DnsFilterCellModel] { get }
-    
+
     /// String the user entered while searching for DNS filters
     var searchString: String? { get set }
-    
+
     /// True if searching, false otherwise
     var isSearching: Bool { get }
 }
@@ -32,11 +32,11 @@ protocol DnsFiltersModelsProviderProtocol: AnyObject {
 /// This object is a helper for `DnsFiltetsModel`
 /// It is responsible for providing UITableViewCell models, all logic of searching is encapsulated here
 final class DnsFiltersModelsProvider: DnsFiltersModelsProviderProtocol {
-    
+
     // MARK: - Public variables
-    
+
     var filtersModels: [DnsFilterCellModel] { isSearching ? searchModels : initialModels }
-    
+
     var searchString: String? {
         didSet {
             if isSearching {
@@ -46,16 +46,16 @@ final class DnsFiltersModelsProvider: DnsFiltersModelsProviderProtocol {
             }
         }
     }
-    
+
     var isSearching: Bool { searchString != nil && !searchString!.isEmpty }
-    
+
     // MARK: - Private variables
-    
+
     private let initialModels: [DnsFilterCellModel]
     private var searchModels: [DnsFilterCellModel] = []
-    
+
     // MARK: - Initializer
-    
+
     init(sdkModels: [DnsFilter]) {
         self.initialModels = sdkModels.map { sdkModel -> DnsFilterCellModel in
             DnsFilterCellModel(
@@ -67,13 +67,13 @@ final class DnsFiltersModelsProvider: DnsFiltersModelsProviderProtocol {
             )
         }
     }
-    
+
     // MARK: - Private methods
-    
+
     private func search() {
         guard let searchString = searchString else { return }
         let searchWords = searchString.split(separator: " ").map { String($0) }
-        
+
         searchModels = initialModels.compactMap { initialModel -> DnsFilterCellModel? in
             let occuranceInfo = initialModel.filterNameAttrString.string.highlight(occuranciesOf: Set(searchWords))
             if occuranceInfo.matchesFound {

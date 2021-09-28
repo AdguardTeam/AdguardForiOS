@@ -22,7 +22,7 @@ import Foundation
 protocol FileShareHelperProtocol {
     /// exports @text to Files App with @filename
     func exportFile(for vc: UIViewController, filename: String, text: String)
-    
+
     /// imports text from Files App. Returns @text of imported file as a string in callback
     func importFile(for vc: UIViewController, _ completion: @escaping (Result<String, Error>) -> Void)
 }
@@ -30,10 +30,10 @@ protocol FileShareHelperProtocol {
 final class FileShareHelper: NSObject, UIDocumentPickerDelegate, FileShareHelperProtocol {
 
     private var importCompletion: ((Result<String, Error>) -> Void)?
-    
+
     func exportFile(for vc: UIViewController, filename: String, text: String) {
         let tmp = FileManager.default.temporaryDirectory.appendingPathComponent(filename)
-        
+
         do {
             try text.write(to: tmp, atomically: true, encoding: .utf8)
             let activityItem = tmp
@@ -47,18 +47,18 @@ final class FileShareHelper: NSObject, UIDocumentPickerDelegate, FileShareHelper
             DDLogError("(FileShareHelper) - exportFile; Error: \(error)")
         }
     }
-    
+
     func importFile(for vc: UIViewController, _ completion: @escaping (Result<String, Error>) -> Void) {
         let controller = UIDocumentPickerViewController(documentTypes: ["public.text"], in: .open)
         controller.popoverPresentationController?.sourceView = vc.view
         controller.popoverPresentationController?.sourceRect = vc.view.frame
         controller.delegate = self
         controller.allowsMultipleSelection = false
-        
+
         importCompletion = completion
         vc.present(controller, animated: true, completion: nil)
     }
-    
+
     /// Delegate method. It is called from `importFile`
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         guard let url = urls.first, url.startAccessingSecurityScopedResource() else {

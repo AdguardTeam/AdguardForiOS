@@ -20,35 +20,35 @@ import UIKit
 import SafariAdGuardSDK
 
 final class AddCustomFilterController: BottomAlertController {
-    
+
     var type: NewFilterType = .safariCustom
     var openUrl: String?
     var openTitle: String?
     weak var delegate: NewCustomFilterDetailsControllerDelegate?
-    
+
     private let detailsSegueId = "showFilterDetailsSegue"
-    
+
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var nextButton: RoundRectButton!
     @IBOutlet weak var cancelButton: RoundRectButton!
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
-    
+
     @IBOutlet var themableLabels: [ThemableLabel]!
-    
+
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private var themeObserver: NotificationToken?
     private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
-    
+
     // MARK: - View Controller life cycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         nextButton.isEnabled = false
         nextButton.makeTitleTextCapitalized()
         cancelButton.makeTitleTextCapitalized()
-        
+
         nextButton.applyStandardGreenStyle()
         cancelButton.applyStandardOpaqueStyle()
 
@@ -59,33 +59,33 @@ final class AddCustomFilterController: BottomAlertController {
         else {
             urlTextField.becomeFirstResponder()
         }
-        
+
         ruleTextChanged(urlTextField)
         updateTheme()
         themeObserver = NotificationCenter.default.observe(name: .themeChanged, object: nil, queue: .main) { [weak self] _ in
             self?.updateTheme()
         }
     }
-    
+
     @IBAction func ruleTextChanged(_ sender: UITextField) {
         let enabled = sender.text != "" && sender.text != nil
         nextButton.isEnabled = enabled
     }
-    
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textViewUnderline.state = .enabled
     }
-    
+
     func textFieldDidEndEditing(_ textField: UITextField) {
         textViewUnderline.state = .disabled
     }
-    
+
     // MARK: - Actions
-    
+
     @IBAction func continueAction(_ sender: Any) {
         nextButton.startIndicator()
         nextButton.isEnabled = false
-        
+
         guard let urlString = urlTextField?.text else {
             nextButton.isEnabled = true
             nextButton.stopIndicator()
@@ -96,7 +96,7 @@ final class AddCustomFilterController: BottomAlertController {
             nextButton.stopIndicator()
             return
         }
-        
+
         let parser = CustomFilterMetaParser()
         do {
             let meta = try parser.getMetaFrom(url: url, for: .safari)
@@ -107,20 +107,20 @@ final class AddCustomFilterController: BottomAlertController {
         nextButton.isEnabled = true
         nextButton.stopIndicator()
     }
-    
+
     @IBAction func cancelAction(_ sender: Any) {
         dismiss(animated: true)
     }
-    
+
     // MARK: - private method
-    
+
     private func presentNewCustomFilterDetailsController(_ meta: ExtendedCustomFilterMetaProtocol) {
         let presenter = presentingViewController
         dismiss(animated: true) { [weak self] in
             guard let self = self,
                   let controller = self.storyboard?.instantiateViewController(withIdentifier: "NewCustomFilterDetailsController") as? NewCustomFilterDetailsController
             else { return }
-            
+    
             controller.delegate = self.delegate
             let model = NewCustomFilterModel(
                 filterName: meta.name ?? "",

@@ -30,33 +30,33 @@ struct Context {
 /// This object is responsible for providing extension context
 /// It transforms `NSExtensionContext` into normal readable object `Context`
 struct ContextProvider {
-    
+
     enum ContextError: Error, CustomDebugStringConvertible {
         case typeInconformance
         case errorLoadingItem
         case obtainDomain
-        
+
         var debugDescription: String {
             return ""
         }
     }
-    
+
     private let favIconService: FavIconServiceProtocol
-    
+
     init(favIconService: FavIconServiceProtocol = FavIconService()) {
         self.favIconService = favIconService
     }
-    
+
     func process(context: NSExtensionContext?, onContextObtained: @escaping (Result<Context, ContextError>) -> Void) {
         let completionQueue = DispatchQueue.main
-        
+
         guard let item = context?.inputItems.first as? NSExtensionItem,
               let itemProvider = item.attachments?.first
         else {
             completionQueue.async { onContextObtained(.failure(ContextError.errorLoadingItem)) }
             return
         }
-        
+
         let type = String(kUTTypePropertyList)
         guard itemProvider.hasItemConformingToTypeIdentifier(type) else {
             DDLogError("(ContextProvider) - process; Error: itemProvider doesn't conform to type \(type))")
@@ -73,22 +73,22 @@ struct ContextProvider {
             processDictionary(result, onContextObtained)
         }
     }
-    
+
     private func processDictionary(_ dict: NSSecureCoding?, _ onContextObtained: @escaping (Result<Context, ContextError>) -> Void) {
         let completionQueue = DispatchQueue.main
-        
+
         guard let dictResult = dict as? [String: Any] else {
             DDLogError("(ContextProvider) - process; Error result is not a valid dict. Results: \(String(describing: dict))")
             completionQueue.async { onContextObtained(.failure(ContextError.typeInconformance)) }
             return
         }
-        
+
         guard let infoDict = dictResult[NSExtensionJavaScriptPreprocessingResultsKey] as? [String: Any] else {
             DDLogError("(ContextProvider) - process; Can't get NSExtensionJavaScriptPreprocessingResultsKey. Results: \(dictResult)")
             completionQueue.async { onContextObtained(.failure(ContextError.typeInconformance)) }
             return
         }
-        
+
         // Obtaining url and domain of the current page
         guard let urlString = infoDict["urlString"] as? String,
               let url = URL(string: urlString),
@@ -98,11 +98,11 @@ struct ContextProvider {
             completionQueue.async { onContextObtained(.failure(ContextError.obtainDomain)) }
             return
         }
-        
+
         // True if page supports JS injections
         let jsInjectSupportedKey = infoDict["injectScriptSupported"] as? Int
         let isJsInjectSupported = jsInjectSupportedKey == 1 ? true : false
-        
+
         // WebSite favicon url
         favIconService.provideImage(for: domain) { image in
             let context = Context(

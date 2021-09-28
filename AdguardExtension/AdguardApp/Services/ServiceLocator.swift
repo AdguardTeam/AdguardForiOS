@@ -27,26 +27,26 @@ protocol ServiceLocating {
  ServiceLocator this service locates all shared services
  */
 final class ServiceLocator: NSObject, ServiceLocating {
-    
+
     private lazy var services: Dictionary<String, Any> = [:]
     private func typeName(some: Any) -> String {
         return "\(some)"
     }
-    
+
     func addService<T>(service: T) {
         let key = typeName(some: T.self)
         services[key] = service
     }
-    
+
     func getService<T>() -> T? {
         let key = typeName(some: T.self)
         return services[key] as? T
     }
-    
+
     /// for using in obj c code
     @objc func getSetvice(typeName: String) -> Any? {
         return services[typeName]
     }
-    
+
     @objc public static let shared = ServiceLocator()
 }

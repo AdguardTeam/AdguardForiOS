@@ -21,17 +21,17 @@ import UIKit
 class SupportTableViewController: UITableViewController {
 
     @IBOutlet var themableLabels: [ThemableLabel]!
-    
+
     // MARK: - Services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let support: SupportServiceProtocol = ServiceLocator.shared.getService()!
     private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
-    
+
     // MARK: - Sections and Rows
-    
+
     private let titleSection = 0
     private let optionsSection = 1
-    
+
     private let videoTutorialRow = 0
     private let faqRow = 1
     private let reportIncorrectBlockingRow = 2
@@ -40,49 +40,49 @@ class SupportTableViewController: UITableViewController {
     private let discussRow = 5
     private let rateAppRow = 6
     private let exportLogsRow = 7
-    
+
     private let bugReportSegueId = "BugReportSegueId"
     private var reportType: ReportType = .bugReport
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         updateTheme()
         setupBackButton()
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == bugReportSegueId, let bugReportVC = segue.destination as? BugReportController {
             bugReportVC.reportType = reportType
         }
     }
-    
+
     // MARK: - Table view data source
-    
+
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.01
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
     }
-    
+
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return UIView()
     }
-    
+
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
-        
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         theme.setupTableCell(cell)
         return cell
     }
-    
+
     // MARK: - Table view delegate
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch (indexPath.section, indexPath.row) {
         case (titleSection, _):
@@ -108,28 +108,28 @@ class SupportTableViewController: UITableViewController {
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
+
     // MARK: - private methods
-    
+
     private func showBugReportController(_ type: ReportType) {
         reportType = type
         performSegue(withIdentifier: bugReportSegueId, sender: self)
     }
-    
+
     private func reportIncorrectBlockingRowTapped() {
         let reportUrl = ApplicationWebReporter().createUrl()
         UIApplication.shared.open(reportUrl, options: [:], completionHandler: nil)
     }
-    
+
     private func rateAppRowTapped() {
         AppDelegate.shared.presentRateAppController()
     }
-    
+
     private func exportLogsTapped() {
         guard let exportLogsCell = tableView.cellForRow(at: IndexPath(row: exportLogsRow, section: optionsSection)) else {
             return
         }
-        
+
         var zipLog: URL?
         do {
             zipLog = try support.exportLogs()
@@ -141,7 +141,7 @@ class SupportTableViewController: UITableViewController {
             support.deleteLogsFiles()
             return
         }
-        
+
         let activityVC = UIActivityViewController(activityItems: [zipLog] as [Any], applicationActivities: nil)
         activityVC.completionWithItemsHandler = {[weak self] _, _, _, error in
             if let error = error {
@@ -149,12 +149,12 @@ class SupportTableViewController: UITableViewController {
             }
             self?.support.deleteLogsFiles()
         }
-        
+
         if let presenter = activityVC.popoverPresentationController {
             presenter.sourceView = exportLogsCell
             presenter.sourceRect = exportLogsCell.bounds
         }
-        
+
         present(activityVC, animated: true)
     }
 }

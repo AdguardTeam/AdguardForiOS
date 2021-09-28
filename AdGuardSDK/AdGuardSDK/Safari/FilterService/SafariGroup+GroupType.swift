@@ -28,9 +28,9 @@ public extension SafariGroup {
         case other = 6
         case languageSpecific = 7
         case custom = 101
-        
+
         public var id: Int { self.rawValue }
-        
+
         public var proOnly: Bool {
             switch self {
             case .security, .custom: return true

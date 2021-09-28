@@ -19,7 +19,7 @@
 import XCTest
 
 class DnsFiltersServiceTest: XCTestCase {
-    
+
     var filtersService: DnsFiltersService!
     var resources = SharedResourcesMock()
     var vpn = VpnManagerMock()
@@ -30,17 +30,17 @@ class DnsFiltersServiceTest: XCTestCase {
 
     override func tearDown() {
     }
-    
+
     func testAddWhitelistRule() {
-        
+
         filtersService.addWhitelistRule("@@||google.com^")
         filtersService.addWhitelistRule("@@||apple.com^")
-        
+
         XCTAssertEqual(filtersService.whitelistRules, ["@@||google.com^", "@@||apple.com^"])
     }
-    
+
     func testRemoveWhitelistRule2() {
-        
+
         filtersService.whitelistRules = ["@@||google.com^", "@@||apple.com^", "@@||example.org^"]
         filtersService.removeWhitelistRules(["@@||apple.com^"])
         XCTAssertEqual(filtersService.whitelistRules, ["@@||google.com^", "@@||example.org^"])

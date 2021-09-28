@@ -21,7 +21,7 @@ import struct SharedAdGuardSDK.UserRule
 protocol UserRulesModelsProviderProtocol {
     var searchString: String? { get set }
     var rules: [UserRuleCellModel] { get }
-    
+
     func addRuleModel(_ ruleModel: UserRuleCellModel)
     func setEditing(_ editing: Bool)
     func modifyRule(_ oldRuleText: String, newRule: UserRule)
@@ -31,42 +31,42 @@ protocol UserRulesModelsProviderProtocol {
 }
 
 final class UserRulesModelsProvider: UserRulesModelsProviderProtocol {
-    
+
     // MARK: - Internal properties
-    
+
     var searchString: String? {
         didSet {
             processSearchString()
         }
     }
-    
+
     var rules: [UserRuleCellModel] { isSearching ? searchModels : initialModels }
-    
+
     // MARK: - Private properties
-    
+
     private var isSearching: Bool { searchString != nil && !searchString!.isEmpty }
-    
+
     private var initialModels: [UserRuleCellModel]
     private var searchModels: [UserRuleCellModel] = []
-    
+
     init(initialModels: [UserRuleCellModel]) {
         self.initialModels = initialModels
     }
-    
+
     // MARK: - Internal methods
-    
+
     func addRuleModel(_ ruleModel: UserRuleCellModel) {
         initialModels.append(ruleModel)
         processSearchString()
     }
-    
+
     func setEditing(_ editing: Bool) {
         for i in 0..<initialModels.count {
             initialModels[i].isEditing = editing
         }
         processSearchString()
     }
-    
+
     func modifyRule(_ oldRuleText: String, newRule: UserRule) {
         if let modifiedRuleIndex = initialModels.firstIndex(where: { $0.rule == oldRuleText }) {
             initialModels[modifiedRuleIndex].isEnabled = newRule.isEnabled
@@ -74,14 +74,14 @@ final class UserRulesModelsProvider: UserRulesModelsProviderProtocol {
         }
         processSearchString()
     }
-    
+
     func removeRule(_ rule: String) {
         if let removedRuleIndex = initialModels.firstIndex(where: { $0.rule == rule }) {
             initialModels.remove(at: removedRuleIndex)
         }
         processSearchString()
     }
-    
+
     func setRule(_ rule: String, selected: Bool) {
         if let ruleIndex = initialModels.firstIndex(where: { $0.rule == rule }) {
             initialModels[ruleIndex].isSelected = selected
@@ -90,7 +90,7 @@ final class UserRulesModelsProvider: UserRulesModelsProviderProtocol {
             searchModels[ruleIndex].isSelected = selected
         }
     }
-    
+
     func deselectAll() {
         for i in 0..<initialModels.count {
             initialModels[i].isSelected = false
@@ -99,14 +99,14 @@ final class UserRulesModelsProvider: UserRulesModelsProviderProtocol {
             searchModels[i].isSelected = false
         }
     }
-    
+
     // MARK: - Private methods
-    
+
     private func processSearchString() {
         guard isSearching, let searchString = searchString else { return }
-        
+
         let words = searchString.split(separator: " ").map { String($0) }
-        
+
         searchModels = initialModels.compactMap { initialModel -> UserRuleCellModel? in
             let highlightedOccurancies = initialModel.rule.highlight(occuranciesOf: Set(words))
             if highlightedOccurancies.matchesFound {

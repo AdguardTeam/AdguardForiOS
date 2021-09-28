@@ -21,20 +21,20 @@ import DnsAdGuardSDK
 //TODO: Need write tests
 /// Dns protection web reporter wrapper aggregate info about dns protection, dns servers and dns filters
 struct WebReporterDnsProtectionWrapper: WebReporterWrapperProtocol {
-    
+
     // MARK: - Private properties
-    
+
     private let dnsProtection: DnsProtectionProtocol = ServiceLocator.shared.getService()!
     private let dnsProvidersManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!
-    
+
     // MARK: - Public methods
-    
+
     func collectParams() -> [String : String] {
         var params: [String: String] = [:]
-        
+
         let dnsIsEnabled = dnsProtection.dnsProtectionEnabled
         params["dns.enabled"] = dnsIsEnabled ? "true" : "false"
-        
+
         guard dnsIsEnabled else { return params }
         let server = dnsProvidersManager.activeDnsServer
         let dnsFilters = collectPreparedDnsFilters()
@@ -42,12 +42,12 @@ struct WebReporterDnsProtectionWrapper: WebReporterWrapperProtocol {
         params["dns.filters_enabled"] = dnsFilters.isEmpty ? "false" : "true"
         if !dnsFilters.isEmpty { params["dns.filters"] = dnsFilters }
         if !dnsServers.isEmpty { params["dns.servers"] = dnsServers }
-        
+
         return params
     }
-    
+
     // MARK: - Private methods
-    
+
     private func collectPreparedDnsFilters() -> String {
         return dnsProtection.filters.reduce("") { partialResult, filter in
             if filter.isEnabled {
@@ -57,7 +57,7 @@ struct WebReporterDnsProtectionWrapper: WebReporterWrapperProtocol {
             return partialResult
         }
     }
-    
+
     private func collectPreparedDnsServers(server: DnsServerMetaProtocol) -> String {
         return server.upstreams.reduce("") { partialResult, server in
             let separator = partialResult.isEmpty ? "" : ","

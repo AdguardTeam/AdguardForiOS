@@ -31,35 +31,35 @@ protocol MetaStorageProtocol: MetaStorageTypeAlias, ResetableSyncProtocol, AnyOb
 }
 
 final class MetaStorage: MetaStorageProtocol {
-    
+
     // MARK: - Public properties
-    
+
     static var defaultDbLanguage: String = "en"
-    
+
     var filtersDb: Connection
-    
+
     // MARK: - Production DB manager
-    
+
     private let productionDbManager: ProductionDatabaseManagerProtocol
-    
+
     // MARK: - Initialization
-    
+
     init(productionDbManager: ProductionDatabaseManagerProtocol) {
         self.productionDbManager = productionDbManager
         self.filtersDb = productionDbManager.filtersDb
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         insertCustomGroupIfNeeded()
     }
-    
+
     func reset() throws {
         Logger.logInfo("(MetaStorage) - reset start")
-        
+
         try productionDbManager.reset()
         filtersDb = productionDbManager.filtersDb
-        
+
         Logger.logInfo("(MetaStorage) - reset; Successfully reset adguard.db reinitialize Connection object now")
     }
-    
+
     /*
      We don't store custom group and localization in default DB.
      If custom group not exists in production DB we should insert custom group with default localization
@@ -71,7 +71,7 @@ final class MetaStorage: MetaStorageProtocol {
                 .scalar(FilterGroupsTable.table.select(FilterGroupsTable.groupId.count)
                             .where(FilterGroupsTable.groupId == SafariGroup.GroupType.custom.rawValue))
             if count > 0 { return }
-            
+    
             //Query: INSERT INTO filter_groups (\"group_id\", \"name\") VALUES (SafariGroup.GroupType.custom, \'Custom\')"
             let insertionQuery = FilterGroupsTable
                 .table.insert(FilterGroupsTable.groupId <- SafariGroup.GroupType.custom.rawValue,

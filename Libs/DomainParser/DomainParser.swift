@@ -14,13 +14,13 @@ enum DomainParserError: Error {
 
 /// Uses the public suffix list
 public struct DomainParser {
-    
+
     let parsedRules: ParsedRules
-    
+
     let onlyBasicRules: Bool
-    
+
     let basicRulesParser: BasicRulesParser
-    
+
     /// Parse the `public_suffix_list` file and build the set of Rules
     /// Parameters:
     ///   - QuickParsing: IF true, the `exception` and `wildcard` rules will be ignored
@@ -39,7 +39,7 @@ public struct DomainParser {
             return parseExceptionsAndWildCardRules(host: host) ??  basicRulesParser.parse(host: host)
         }
      }
-    
+
     func parseExceptionsAndWildCardRules(host: String) -> ParsedHost? {
         let hostComponents = host.components(separatedBy: ".")
         let isMatching: (Rule) -> Bool =  { $0.isMatching(hostLabels: hostComponents) }

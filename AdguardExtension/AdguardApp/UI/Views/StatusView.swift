@@ -19,45 +19,45 @@
 import UIKit
 
 class StatusView: UIView {
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
         setupLabel()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupView()
         setupLabel()
     }
-    
+
     var text: String? {
         didSet {
             textLabel.text = text
         }
     }
-    
+
     private let textLabel: UILabel = UILabel()
-    
+
     private func setupView(){
         frame.size.height = 16.0
         backgroundColor = UIColor(hexString: "#d8d8d8")
     }
-    
+
     private func setupLabel(){
         textLabel.font = UIFont.systemFont(ofSize: 10.0, weight: .regular)
         textLabel.textColor = UIColor(hexString: "#4d4d4d")
         textLabel.textAlignment = .center
         textLabel.numberOfLines = 1
-    
+
         addSubview(textLabel)
-        
+
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         textLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         textLabel.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         textLabel.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         textLabel.heightAnchor.constraint(equalToConstant: 16.0).isActive = true
-        
+
     }
 }

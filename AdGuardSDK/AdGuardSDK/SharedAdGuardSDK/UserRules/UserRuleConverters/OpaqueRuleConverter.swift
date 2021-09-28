@@ -19,24 +19,24 @@
 import Foundation
 
 public struct OpaqueRuleConverter: UserRuleConverterProtocol {
-    
+
     public init() {}
-    
+
     /*
      This functions do nothing.
      Blocklist, DNS blocklist and allowlist rules are not modified by ourselves
      Blocklist syntax can be rather complicated and
      we suppose that user provided the correct rule
      */
-    
+
     public func convertDomainToRule(_ domain: String) -> String {
         return domain
     }
-    
+
     public func convertRuleToDomain(_ rule: String) -> String {
         return rule
     }
-    
+
     /* Returns all converted rules joined by new line */
     public func convertRulesToString(_ rules: [UserRule]) -> String {
         return rules.map { $0.ruleText }

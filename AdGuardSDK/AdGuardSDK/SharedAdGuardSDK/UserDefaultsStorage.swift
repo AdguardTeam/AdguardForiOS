@@ -23,9 +23,9 @@ public protocol UserDefaultsStorageProtocol: AnyObject {
 }
 
 public final class UserDefaultsStorage: UserDefaultsStorageProtocol {
-    
+
     public let storage: UserDefaults
-    
+
     public init(storage: UserDefaults) {
         self.storage = storage
     }

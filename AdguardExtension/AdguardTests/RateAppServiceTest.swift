@@ -23,36 +23,36 @@ class RateAppServiceTest: XCTestCase {
     private var resources: AESharedResourcesProtocol!
     private var rateAppService: RateAppServiceProtocol!
     private var configuration: ConfigurationServiceMock!
-    
+
     override func setUp() {
         resources = SharedResourcesMock()
         configuration = ConfigurationServiceMock()
         rateAppService = RateAppService(resources: resources, configuration: configuration)
     }
-    
+
     // MARK: - showRateAppAlertIfNeeded test
-    
+
     func testAppEntryCountWillIncrement() {
         // It must be 1 after initialization
         XCTAssert(resources.appEntryCount == 1)
     }
-    
+
     func testShouldShowRateAppDialog() {
         resources.appEntryCount = 2
         resources.rateAppShown = false
         configuration.allContentBlockersEnabled = true
         XCTAssertFalse(rateAppService.shouldShowRateAppDialog)
-        
+
         resources.appEntryCount = 4
         resources.rateAppShown = false
         configuration.allContentBlockersEnabled = true
         XCTAssert(rateAppService.shouldShowRateAppDialog)
-        
+
         resources.appEntryCount = 4
         resources.rateAppShown = true
         configuration.allContentBlockersEnabled = true
         XCTAssertFalse(rateAppService.shouldShowRateAppDialog)
-        
+
         resources.appEntryCount = 4
         resources.rateAppShown = false
         configuration.allContentBlockersEnabled = false

@@ -18,11 +18,11 @@
 
 struct OpenDnsProvidersControllerParser: IURLSchemeParametersParser {
     private let executor: IURLSchemeExecutor
-    
+
     init(executor: IURLSchemeExecutor) {
         self.executor = executor
     }
-    
+
     func parse(_ url: URL) -> Bool {
         // If host is nil than there is no data in URL (sdns://<DATA>)
         guard let _ = url.host else { return false }

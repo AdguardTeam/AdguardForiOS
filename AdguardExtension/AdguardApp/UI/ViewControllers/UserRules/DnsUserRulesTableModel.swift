@@ -20,13 +20,13 @@ import DnsAdGuardSDK
 
 final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
     // MARK: - Internal properties
-    
+
     weak var delegate: UserRulesTableModelDelegate?
-    
+
     var title: String { type.title }
-    
+
     var description: String { type.description }
-    
+
     var isEnabled: Bool {
         get {
             switch type {
@@ -45,37 +45,37 @@ final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
             }
         }
     }
-    
+
     var isEditing: Bool = false {
         didSet {
             guard isEditing != oldValue else { return }
             modelProvider.setEditing(isEditing)
         }
     }
-    
+
     var isSearching: Bool = false
-    
+
     var icon: UIImage? { type.icon }
-    
+
     var searchString: String? {
         didSet {
             modelProvider.searchString = searchString
             delegate?.rulesChanged()
         }
     }
-    
+
     var rulesModels: [UserRuleCellModel] { modelProvider.rules }
-    
+
     // MARK: - Private properties
-    
+
     private let type: DnsUserRuleType
     private let dnsProtection: DnsProtectionProtocol
     private let resources: AESharedResourcesProtocol
     private let fileShareHelper: FileShareHelperProtocol
     private var modelProvider: UserRulesModelsProviderProtocol
-    
+
     // MARK: - Initialization
-    
+
     init(type: DnsUserRuleType, dnsProtection: DnsProtectionProtocol, resources: AESharedResourcesProtocol, fileShareHelper: FileShareHelperProtocol) {
         self.type = type
         self.dnsProtection = dnsProtection
@@ -83,9 +83,9 @@ final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
         self.fileShareHelper = fileShareHelper
         self.modelProvider = UserRulesModelsProvider(initialModels: Self.models(dnsProtection, type))
     }
-    
+
     // MARK: - Internal methods
-    
+
     func addRule(_ ruleText: String) throws {
         let rule = UserRule(ruleText: ruleText, isEnabled: true)
         try dnsProtection.add(rule: rule, override: false, for: type)
@@ -93,7 +93,7 @@ final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
         modelProvider.addRuleModel(model)
         delegate?.ruleSuccessfullyAdded()
     }
-    
+
     func ruleStateChanged(_ rule: String, newState: Bool) {
         do {
             let newRule = UserRule(ruleText: rule, isEnabled: newState)
@@ -104,46 +104,46 @@ final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
             DDLogError("(DnsUserRulesTableModel) - ruleStateChanged; Error: \(error)")
         }
     }
-    
+
     func removeRule(_ ruleText: String, at indexPath: IndexPath) throws {
         try dnsProtection.removeRule(withText: ruleText, for: type)
         modelProvider.removeRule(ruleText)
         delegate?.rulesRemoved(at: [indexPath])
     }
-    
+
     func modifyRule(_ oldRuleText: String, newRule: UserRule, at indexPath: IndexPath) throws {
         try dnsProtection.modifyRule(oldRuleText, newRule, for: type)
         modelProvider.modifyRule(oldRuleText, newRule: newRule)
         delegate?.rulesChanged(at: [indexPath])
     }
-    
+
     func turn(rules: [String], for indexPaths: [IndexPath], on: Bool) {
         dnsProtection.turnRules(rules, on: on, for: type)
         modelProvider = UserRulesModelsProvider(initialModels: Self.models(dnsProtection, type))
         modelProvider.searchString = searchString
         delegate?.rulesChanged(at: indexPaths)
     }
-    
+
     func remove(rules: [String], for indexPaths: [IndexPath]) {
         dnsProtection.removeRules(rules, for: type)
         modelProvider = UserRulesModelsProvider(initialModels: Self.models(dnsProtection, type))
         modelProvider.searchString = searchString
         delegate?.rulesRemoved(at: indexPaths)
     }
-    
+
     func setRule(_ rule: String, selected: Bool) {
         modelProvider.setRule(rule, selected: selected)
     }
-    
+
     func deselectAll() {
         modelProvider.deselectAll()
     }
-    
+
     func exportFile(for vc: UIViewController) {
         let rulesText = dnsProtection.rulesString(for: type)
         fileShareHelper.exportFile(for: vc, filename: type.filename, text: rulesText)
     }
-    
+
     func importFile(for vc: UIViewController, _ completion: @escaping (Error?) -> Void) {
         fileShareHelper.importFile(for: vc) { result in
             DispatchQueue.asyncSafeMain { [weak self] in
@@ -156,9 +156,9 @@ final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
             }
         }
     }
-    
+
     // MARK: - Private methods
-    
+
     private func addNewRulesAfterImport(_ rulesText: String, _ completion: @escaping (Error?) -> Void) {
         let rules = rulesText.split(separator: "\n").map { UserRule(ruleText: String($0), isEnabled: true) }
         do {
@@ -171,14 +171,14 @@ final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
         }
         delegate?.rulesChanged()
     }
-    
+
     private static func models(_ dnsProtection: DnsProtectionProtocol, _ type: DnsUserRuleType) -> [UserRuleCellModel] {
         let rules = dnsProtection.allRules(for: type)
         return rules.map {
             UserRuleCellModel(rule: $0.ruleText, isEnabled: $0.isEnabled, isSelected: false, isEditing: false)
         }
     }
-    
+
 }
 
 // MARK: - DnsUserRuleType + helper variables
@@ -190,7 +190,7 @@ fileprivate extension DnsUserRuleType {
         case .allowlist: return String.localizedString("whitelist_title")
         }
     }
-    
+
     var description: String {
         let url = UIApplication.shared.adguardUrl(action: "dns_filter_rules", from: "user_filter", buildVersion: ADProductInfo().buildVersion())
         switch self {
@@ -202,14 +202,14 @@ fileprivate extension DnsUserRuleType {
             return String(format: format, url)
         }
     }
-    
+
     var icon: UIImage? {
         switch self {
         case .blocklist: return UIImage(named: "blacklist-icon")
         case .allowlist: return UIImage(named: "thumbsup")
         }
     }
-    
+
     var filename: String {
         switch self {
         case .blocklist: return "dns_blocklist.txt"

@@ -23,33 +23,33 @@ import UIKit
 final class ActionExtensionLoaderViewController: UIViewController {
 
     // MARK: - UI Elements
-    
+
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
+
     // MARK: - Private variables
-    
+
     private var modelToPass: ActionExtensionTableController.Model?
     private let segueId = "showActionExtensionSegueId"
-    
+
     private let themeService = ServicesInitializer.shared.themeService
     private let configuration = ServicesInitializer.shared.configuration
-    
+
     // MARK: - UIViewController lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.startAnimating()
         configuration.systemAppearenceIsDark = systemStyleIsDark
         updateTheme()
-        
+
         navigationController?.navigationBar.shadowImage = UIImage()
         title = Bundle.main.applicationName
-        
+
         let contextProvider = ContextProvider()
         contextProvider.process(context: extensionContext) { [weak self] result in
             guard let self = self else { return }
-            
+    
             switch result {
             case .success(let context):
                 let isSafariProtectionEnabled = self.isSafariProtectionEnabled(for: context.domain)
@@ -60,14 +60,14 @@ final class ActionExtensionLoaderViewController: UIViewController {
             }
         }
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let destinationVC = segue.destination as? ActionExtensionTableController, let model = modelToPass else {
             return
         }
         destinationVC.model = model
     }
-    
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         if #available(iOSApplicationExtension 13.0, *) {
             guard previousTraitCollection?.userInterfaceStyle != traitCollection.userInterfaceStyle else {
@@ -77,26 +77,26 @@ final class ActionExtensionLoaderViewController: UIViewController {
             updateTheme()
         }
     }
-    
+
     // MARK: - Close action
-    
+
     @IBAction func closeAction(_ sender: UIButton) {
         extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
     }
-    
+
     // MARK: - Private methods
-    
+
     private func isSafariProtectionEnabled(for domain: String) -> Bool {
         let resources = ServicesInitializer.shared.resources
         let safariProtection = ServicesInitializer.shared.safariProtection
-        
+
         let isAllowlistInverted = resources.invertedWhitelist
         let rules = safariProtection.allRules(for: isAllowlistInverted ? .invertedAllowlist : .allowlist)
         let enabledRules = rules.compactMap { $0.isEnabled ? $0.ruleText : nil }
         let isDomainInRules = enabledRules.contains(domain)
         return isAllowlistInverted ? isDomainInRules : !isDomainInRules
     }
-    
+
     private func receivedError(error: ContextProvider.ContextError) {
         activityIndicator.stopAnimating()
         activityIndicator.isHidden = true

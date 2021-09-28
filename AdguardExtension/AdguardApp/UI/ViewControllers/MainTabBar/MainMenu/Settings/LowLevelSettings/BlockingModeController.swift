@@ -20,7 +20,7 @@ import UIKit
 import DnsAdGuardSDK
 
 class BlockingModeController: UITableViewController {
-    
+
     @IBOutlet var buttons: [UIButton]!
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
@@ -30,15 +30,15 @@ class BlockingModeController: UITableViewController {
     @IBOutlet weak var nxDomainHeaderLabel: ThemableLabel!
     @IBOutlet weak var nullIPHeaderLabel: ThemableLabel!
     @IBOutlet weak var customIPHeaderLabel: ThemableLabel!
-    
+
     private var selectedCell = 0
-    
+
     private let defaultMode = 0
     private let refusedMode = 1
     private let nxDomainMode = 2
     private let unspecifiedAddressMode = 3
     private let customAddressMode = 4
-    
+
     // MARK: - services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
@@ -46,11 +46,11 @@ class BlockingModeController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         tableView.rowHeight = UITableView.automaticDimension
-        
+
         let mode = resources.blockingMode
-        
+
         switch mode {
         case .defaultMode:
             selectedCell = defaultMode
@@ -63,51 +63,51 @@ class BlockingModeController: UITableViewController {
         case .customAddress:
             selectedCell = customAddressMode
         }
-        
+
         updateButtons(by: selectedCell)
         setupBackButton()
-        
+
         updateTheme()
-        
+
         var text = ""
         if let customBlockingIp = resources.customBlockingIp?.joined(separator: ", ") {
             text = customBlockingIp
         }
         updateDescriptionLabel(type: .customAddress, text: text)
-        
+
         defaultHeaderLabel.text = DnsProxyBlockingMode.defaultMode.name
         refusedHeaderLabel.text = DnsProxyBlockingMode.refused.name
         nxDomainHeaderLabel.text = DnsProxyBlockingMode.nxdomain.name
         nullIPHeaderLabel.text = DnsProxyBlockingMode.unspecifiedAddress.name
         customIPHeaderLabel.text = DnsProxyBlockingMode.customAddress.name
     }
-    
+
     // MARK: - Actions
-    
+
     @IBAction func buttonTapped(_ sender: UIButton) {
         updateBlockingMode(index: sender.tag)
     }
-    
+
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         theme.setupTableCell(cell)
-        
+
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         updateBlockingMode(index: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
+
     // MARK: - Private methods
-    
+
     private func updateButtons(by index: Int) {
         buttons.forEach { $0.isSelected = $0.tag == index }
     }
-    
+
     private func updateBlockingMode(index: Int) {
         let mode: DnsProxyBlockingMode
         switch index {
@@ -125,21 +125,21 @@ class BlockingModeController: UITableViewController {
         default:
             mode = .defaultMode
         }
-        
+
         selectedCell = index
-        
+
         if mode != .customAddress {
             setupMode(mode: mode)
         }
     }
-    
+
     private func showCustomIPAlert() {
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "UpstreamsController") as? UpstreamsController else { return }
         controller.upstreamType = .customAddress
         controller.delegate = self
         present(controller, animated: true, completion: nil)
     }
-    
+
     private func setupMode(mode: DnsProxyBlockingMode) {
         resources.blockingMode = mode
         vpnManager.updateSettings(completion: nil)

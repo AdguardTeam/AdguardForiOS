@@ -29,12 +29,12 @@ struct URLParserResult {
 }
 
 extension URL: CustomSchemeURLParserProtocol {
-    
+
     func protectionStateIsEnabled() -> Bool? {
         if self.path.isEmpty { return nil }
         let suffix = String(self.path.suffix(self.path.count - 1))
         let parameters = suffix.split(separator: "/")
-        
+
         let enabledString = String(parameters.first ?? "")
         let isSufixValid = enabledString == "on" || enabledString == "off"
         if isSufixValid {
@@ -42,19 +42,19 @@ extension URL: CustomSchemeURLParserProtocol {
         }
         return nil
     }
-    
+
     func parseAuthUrl() -> URLParserResult {
         guard let components = splitURLByChar(separator: "#") else { return URLParserResult() }
         return prepareParams(components: components)
     }
-    
+
     func parseUrl() -> URLParserResult {
         guard let components = splitURLByChar(separator: ":") else { return URLParserResult() }
         return prepareParams(components: components)
     }
-    
+
     // MARK: - Private methods
-    
+
     private func splitURLByChar(separator: Character) -> [String]? {
         let components = self.absoluteString.split(separator: separator, maxSplits: 1)
         if components.count != 2 {
@@ -63,18 +63,18 @@ extension URL: CustomSchemeURLParserProtocol {
         }
         return components.compactMap { String($0) }
     }
-    
+
     private func prepareParams(components: [String]) -> URLParserResult {
         let querry = components.last
-        
+
         // try to parse url with question (adguard:subscribe?location=https://easylist.to/easylist/easylist.txt&title=EasyList)
         let questionComponents = querry?.split(separator: "?", maxSplits: 1)
-        
+
         if questionComponents?.count == 2 {
             let command = String((questionComponents?.first)!)
             let queryString = String((questionComponents?.last)!)
             let params = queryString.getQueryParametersFromQueryString()
-            
+    
             return URLParserResult(command: command, params: params)
         }
         else if questionComponents?.count == 1 {
@@ -84,7 +84,7 @@ extension URL: CustomSchemeURLParserProtocol {
             let command = params?.first?.key != nil ? params?.first!.key : nil
             return URLParserResult(command: command, params: params)
         }
-        
+
         DDLogError("(CustomSchemeURLPareser) parseCustomUrlScheme error - unsupported url format")
         return URLParserResult()
     }

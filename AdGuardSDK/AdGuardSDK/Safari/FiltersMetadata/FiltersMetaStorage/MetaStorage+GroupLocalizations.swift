@@ -25,15 +25,15 @@ struct FilterGroupLocalizationsTable {
     let groupId: Int
     let lang: String
     let name: String?
-    
+
     // Table name
     static let table = Table("filter_group_localizations")
-    
+
     // Columns names
     static let groupId = Expression<Int>("group_id")
     static let lang = Expression<String>("lang")
     static let name = Expression<String>("name")
-    
+
     // Initializer from DB result
     init(dbGroupLocalization: Row?) {
         self.groupId = dbGroupLocalization?[Self.groupId] ?? -1
@@ -49,12 +49,12 @@ protocol GroupLocalizationsMetaStorageProtocol {
 }
 
 extension MetaStorage: GroupLocalizationsMetaStorageProtocol {
-    
+
     // Returns localized strings for specified group and language
     func getLocalizationForGroup(withId id: Int, forLanguage lang: String) -> FilterGroupLocalizationsTable? {
         // Query: select * from filter_group_localization where group_id = id and lang = lang
         let query = FilterGroupLocalizationsTable.table.filter(FilterGroupLocalizationsTable.groupId == id && FilterGroupLocalizationsTable.lang == lang)
-        
+
         guard let dbGroulLocalization = try? filtersDb.pluck(query) else {
             Logger.logDebug("(FiltersMetaStorage) - query result is nil for filter with id=\(id) for lang=\(lang)")
             return nil
@@ -63,7 +63,7 @@ extension MetaStorage: GroupLocalizationsMetaStorageProtocol {
         Logger.logDebug("(FiltersMetaStorage) - getLocalizationForGroup returning \(groupLocalization) for filter with id=\(id) for lang=\(lang)")
         return groupLocalization
     }
-    
+
     // Updates localization for group. Adds new localization if missing.
     func updateLocalizationForGroup(withId id: Int, forLanguage lang: String, localization: ExtendedFiltersMetaLocalizations.GroupLocalization) throws {
         // Query: INSERT OR REPLACE INTO filter_group_localization (group_id, lang, name)

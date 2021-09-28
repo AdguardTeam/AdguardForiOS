@@ -41,12 +41,12 @@ struct SettingRow {
     var importStatus: ImportStatus = .notImported
     var title: String = ""
     var subtitle: String = ""
-    
+
     var type: ImportRowType
     var index: Int
-    
+
     mutating func setImportStatus(imported: Bool, status: ImportSettingStatus) {
-        
+
         var result: ImportStatus = .notImported
         if imported {
             switch status {
@@ -63,9 +63,9 @@ struct SettingRow {
         else {
             result = .notImported
         }
-        
+
         self.importStatus = result
-        
+
         if result == .unsucessfull {
             self.subtitle = String.localizedString("import_unseccuessful")
         }
@@ -74,35 +74,35 @@ struct SettingRow {
 
 protocol ImportSettingsViewModelProtocol {
     var rows: [SettingRow] { get }
-    
+
     func setState(_ state: Bool, forRow: Int)
     func applySettings(callback: @escaping ()->Void)
 }
 
 class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
-    
+
     var rows: [SettingRow]
-    
+
     private var settings: Settings
     private let importService: ImportSettingsServiceProtocol
     private let dnsProvidersManager: DnsProvidersManagerProtocol
     private let safariProtection: SafariProtectionProtocol
-    
+
     init(settings: Settings, importSettingsService: ImportSettingsServiceProtocol, dnsProvidersManager: DnsProvidersManagerProtocol, safariProtection: SafariProtectionProtocol) {
         self.settings = settings
         self.importService = importSettingsService
         self.safariProtection = safariProtection
         self.dnsProvidersManager = dnsProvidersManager
-        
+
         rows = []
         fillRows(imported: false)
     }
-    
+
     func setState(_ state: Bool, forRow index: Int) {
         var row = rows[index]
-        
+
         let status: ImportSettingStatus = state ? .enabled : .disabled
-        
+
         switch(row.type) {
         case .cbFilter:
             settings.defaultCbFilters?[row.index].status = status
@@ -119,13 +119,13 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
         case .userRules:
             settings.userRulesStatus = status
         }
-        
+
         row.enabled = state
         rows[index] = row
     }
-    
+
     func applySettings(callback: @escaping ()->Void) {
-        
+
         importService.applySettings(settings) { [weak self] (result) in
             guard let self = self else { return }
             self.settings = result
@@ -133,41 +133,41 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
             callback()
         }
     }
-    
+
     private func fillRows(imported: Bool) {
-        
+
         rows = []
-        
+
         fillCBFilters(imported)
-        
+
         fillCustomCBFilters(imported)
-        
+
         fillDnsFilters(imported)
-        
+
         fillDns(imported)
-        
+
         fillLicense(imported)
-        
+
         fillUserRules(imported)
-        
+
         fillDnsRules(imported)
     }
-    
+
     fileprivate func fillDnsRules(_ imported: Bool) {
-        
+
         if settings.dnsUserRules?.count ?? 0 > 0 {
             var row = SettingRow(type: .dnsRules, index: 0)
             row.title = String.localizedString("import_dns_user_rules")
             row.imported = imported
             row.enabled = settings.dnsRulesStatus == .enabled
             row.setImportStatus(imported: imported, status: settings.dnsRulesStatus)
-            
+    
             rows.append(row)
         }
     }
-    
+
     private func fillUserRules(_ imported: Bool) {
-        
+
         let userRulesCount = settings.userRules?.count ?? 0
         if userRulesCount > 0 {
             var row = SettingRow(type: .userRules, index: 0)
@@ -175,13 +175,13 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
             row.imported = imported
             row.enabled = settings.userRulesStatus == .enabled
             row.setImportStatus(imported: imported, status: settings.userRulesStatus)
-            
+    
             rows.append(row)
         }
     }
-    
+
     private func fillLicense(_ imported: Bool) {
-        
+
         if !Bundle.main.isPro && settings.license?.count ?? 0 > 0 {
             var row = SettingRow(type: .license, index: 0)
             let format = String.localizedString("import_license_format")
@@ -189,78 +189,78 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
             row.imported = imported
             row.enabled = settings.licenseStatus == .enabled
             row.setImportStatus(imported: imported, status: settings.licenseStatus)
-            
+    
             rows.append(row)
         }
     }
-    
+
     private func fillDns(_ imported: Bool) {
-        
+
         if let serverId = settings.dnsServerId {
             var row = SettingRow(type: .dnsSettings, index: 0)
-            
+    
             let format = String.localizedString("import_dns_settings_format")
             let provider = dnsProvidersManager.allProviders.first { $0.dnsServers.contains(where: { $0.id == serverId }) }
-            
+    
             row.title = String(format:format, provider?.activeServerName ?? "")
             row.imported = imported
             row.enabled = settings.dnsStatus == .enabled
             row.setImportStatus(imported: imported, status: settings.dnsStatus)
-            
+    
             rows.append(row)
         }
     }
-    
+
     private func fillDnsFilters(_ imported: Bool) {
-        
+
         var index = 0
         for filter in settings.dnsFilters ?? [] {
-            
+    
             let titleFormat = String.localizedString("import_dns_filter_format")
             let title = String(format: titleFormat, filter.name)
             var row = SettingRow(type: .dnsFilter, index: index)
-            
+    
             row.title = title
             row.imported = imported
             row.enabled = filter.status == .enabled
             row.setImportStatus(imported: imported, status: filter.status)
-            
+    
             rows.append(row)
             index += 1
         }
     }
-    
+
     private func fillCustomCBFilters(_ imported: Bool) {
-        
+
         var index = 0
         for filter in settings.customCbFilters ?? [] {
             let titleFormat = String.localizedString("import_custom_cb_filter_format")
             let title = String(format: titleFormat, filter.name)
-            
+    
             var row = SettingRow(type: .customCbFilter, index: index)
-            
+    
             row.title = title
             row.imported = imported
             row.enabled = filter.status == .enabled
             row.setImportStatus(imported: imported, status: filter.status)
-            
+    
             rows.append(row)
             index += 1
         }
     }
-    
+
     fileprivate func fillCBFilters(_ imported: Bool) {
-        
+
         var index = 0
-        
+
         for filter in settings.defaultCbFilters ?? [] {
             var row = SettingRow(type: .cbFilter, index: index)
             let format = String.localizedString(filter.enable ? "enable_cb_filter_format" : "disable_cb_filter_format")
-            
+    
             let filters:[SafariFilterProtocol] = safariProtection.groups.flatMap { group in
                 return group.filters
             }
-            
+    
             if let filterMeta = filters.first(where: { $0.filterId == filter.id })  {
                 let name = filterMeta.name ?? "" 
                 row.title = String(format: format, name)
@@ -268,11 +268,11 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
             else {
                 DDLogError("unknown filter")
             }
-            
+    
             row.imported = imported
             row.enabled = filter.status == .enabled
             row.setImportStatus(imported: imported, status: filter.status)
-            
+    
             rows.append(row)
             index += 1
         }

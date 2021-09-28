@@ -31,57 +31,57 @@ class UpstreamsController: BottomAlertController {
     @IBOutlet weak var upstreamsTextField: UITextField!
     @IBOutlet weak var scrollContentView: UIView!
     @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
-    
+
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
-    
+
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
-    
+
     var upstreamType: UpstreamType!
     weak var delegate: UpstreamsControllerDelegate?
-    
-    
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         prepareUpstreamTextField()
         prepareTextFieldDescription()
-        
+
         upstreamsTextField.becomeFirstResponder()
-        
+
         updateTheme()
         cancelButton.makeTitleTextCapitalized()
         cancelButton.applyStandardOpaqueStyle()
         saveButton.makeTitleTextCapitalized()
         saveButton.applyStandardGreenStyle()
     }
-    
+
     // MARK: - Actions
     @IBAction func cancelAction(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
-    
+
     @IBAction func saveAction(_ sender: UIButton) {
         guard let text = upstreamsTextField.text?.trimmingCharacters(in: .whitespaces) else { return }
         guard let type = upstreamType else { return }
-        
+
         if type == .fallback, text == "none" {
             applyChanges(addresses: [text])
             return
         }
-        
+
         let addresses = transformToArray(address: text)
         let validAddresses = addresses.filter { ACNUrlUtils.isIPv4($0) || ACNUrlUtils.isIPv6($0) }
-        
+
         if validAddresses.count != addresses.count && !text.isEmpty {
             DDLogError("(UppstreamsController) saveAction error - invalid addresses)")
             let messsage = type == .customAddress ? String.localizedString("invalid_ip_message") : String.localizedString("invalid_upstream_message")
             ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("common_error_title"), message: messsage)
             return
         }
-        
+
         switch type {
         case .customAddress:
             applyChanges(addresses: validAddresses)
@@ -93,27 +93,27 @@ class UpstreamsController: BottomAlertController {
             }
         }
     }
-    
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textViewUnderline.state = .enabled
     }
-    
+
     func textFieldDidEndEditing(_ textField: UITextField) {
         textViewUnderline.state = .disabled
     }
-    
+
     // MARK: - Private methods
-    
+
     private func prepareUpstreamTextField() {
         switch upstreamType {
         case .bootstrap:
             let bootstrapString = resources.customBootstrapServers?.joined(separator: ", ")
             upstreamsTextField.text = bootstrapString
-            
+    
         case .fallback:
             let fallbackString = resources.customFallbackServers?.joined(separator: ", ")
             upstreamsTextField.text = fallbackString
-            
+    
         case .customAddress:
             let ipAddress = resources.customBlockingIp?.joined(separator: ", ")
             upstreamsTextField.text = ipAddress
@@ -122,7 +122,7 @@ class UpstreamsController: BottomAlertController {
         }
         upstreamsTextField.placeholder = String.localizedString("upstreams_custom_address_description")
     }
-    
+
     private func prepareTextFieldDescription() {
         switch upstreamType {
         case .bootstrap:
@@ -138,23 +138,23 @@ class UpstreamsController: BottomAlertController {
             break
         }
     }
-    
+
     private func transformToArray(address: String) -> [String] {
         let trimmedAddresses = address.trimmingCharacters(in: .whitespaces)
         let ipAddresses = trimmedAddresses.split(separator: ",").map { String($0).trimmingCharacters(in: .whitespaces) }
         return ipAddresses
     }
-    
+
     private func applyChanges(addresses: [String]) {
         saveUpstreams(upstreams: addresses)
         vpnManager.updateSettings(completion: nil)
         dismiss(animated: true)
     }
-    
+
     private func saveUpstreams(upstreams: [String]) {
         let address: [String]? = upstreams.isEmpty ? nil : upstreams
         let text = upstreams.joined(separator: ", ")
-        
+
         switch upstreamType {
         case .bootstrap:
             resources.customBootstrapServers = address
@@ -169,30 +169,30 @@ class UpstreamsController: BottomAlertController {
             break
         }
     }
-    
+
     private func checkUpstream(upstreams: [String] ,success:@escaping ()->Void) {
         saveButton?.isEnabled = false
         saveButton?.startIndicator()
-        
+
         let networkUtils = NetworkUtils()
         let bootstraps = BootstrapsHelper.bootstraps
-        
+
         let upstreams = upstreams.map {
             AGDnsUpstream(address: $0, bootstrap: bootstraps, timeoutMs: AGDnsUpstream.defaultTimeoutMs, serverIp: Data(), id: 0, outboundInterfaceName: nil)
         }
-        
+
         DispatchQueue(label: "save dns upstreams queue").async { [weak self] in
             guard let self = self else { return }
-            
+    
             let errors = upstreams.compactMap {
                 AGDnsUtils.test($0, ipv6Available: networkUtils.isIpv6Available)
             }
-            
+    
             DispatchQueue.main.async {
-                
+        
                 self.saveButton?.isEnabled = true
                 self.saveButton?.stopIndicator()
-                
+        
                 if errors.isEmpty {
                     success()
                 }

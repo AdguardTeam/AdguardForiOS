@@ -26,20 +26,20 @@ public typealias SafariProtectionProtocol = SafariProtectionFiltersProtocol
                                             & SafariProtectionContentBlockersProtocol
                                             & SafariProtectionBackgroundFetchProtocol
                                             & ResetableAsyncProtocol
-    
+
 public final class SafariProtection: SafariProtectionProtocol {
-    
+
     // MARK: - Internal variables
-    
+
     // Serial queue to avoid races in services
     let workingQueue = DispatchQueue(label: "SafariAdGuardSDK.SafariProtection.workingQueue")
-    
+
     // Serial queue for converting Content Blockers to avoid working queue load
     let cbQueue = DispatchQueue(label: "SafariAdGuardSDK.SafariProtection.cbQueue", qos: .background)
-    
+
     // Queue to call completion handlers
     let completionQueue = DispatchQueue.main
-    
+
     /* Services */
     var configuration: SafariConfigurationProtocol
     let userDefaults: UserDefaultsStorageProtocol
@@ -51,9 +51,9 @@ public final class SafariProtection: SafariProtectionProtocol {
     let converterHelper: WebExtensionHelpersProtocol
     let dnsBackgroundFetchUpdater: DnsBackgroundFetchUpdateProtocol?
     private let defaultConfiguration: SafariConfigurationProtocol
-    
+
     // MARK: - Initialization
-    
+
     /**
      Mediator object that controls all SDK. Every call to SDK must go through this object
      - Parameter configuration: Current application configuration
@@ -77,7 +77,7 @@ public final class SafariProtection: SafariProtectionProtocol {
                                           dbContainerUrl: dbContainerUrl,
                                           userDefaults: userDefaults,
                                           jsonStorageUrl: jsonStorageUrl)
-        
+
         self.configuration = configuration
         self.defaultConfiguration = defaultConfiguration
         self.userDefaults = services.userDefaults
@@ -89,7 +89,7 @@ public final class SafariProtection: SafariProtectionProtocol {
         self.converterHelper = WebExtensionHelpers()
         self.dnsBackgroundFetchUpdater = dnsBackgroundFetchUpdater
     }
-    
+
     // Initializer for tests
     init(configuration: SafariConfigurationProtocol,
          defaultConfiguration: SafariConfigurationProtocol,
@@ -113,9 +113,9 @@ public final class SafariProtection: SafariProtectionProtocol {
         self.converterHelper = converterHelper
         self.dnsBackgroundFetchUpdater = dnsBackgroundFetchUpdater
     }
-    
+
     // MARK: - Public method
-    
+
     /* Resets all sdk to default configuration. Deletes all stored filters, filters meta and user rules */
     public func reset(_ onResetFinished: @escaping (Error?) -> Void) {
         workingQueue.async { [weak self] in
@@ -124,9 +124,9 @@ public final class SafariProtection: SafariProtectionProtocol {
                 DispatchQueue.main.async { onResetFinished(CommonError.missingSelf) }
                 return
             }
-            
+    
             Logger.logInfo("(SafariProtection) - reset start")
-            
+    
             //Update config with default configuration
             self.configuration.updateConfig(with: self.defaultConfiguration)
 
@@ -139,19 +139,19 @@ public final class SafariProtection: SafariProtectionProtocol {
                 group.leave()
             }
             group.wait()
-            
+    
             guard filtersError == nil else {
                 Logger.logError("(SafariProtection) - reset; Error reseting filters service; Error: \(filtersError!)")
                 self.completionQueue.async { onResetFinished(filtersError) }
                 return
             }
-            
+    
             do {
                 Logger.logInfo("(SafariProtection) - reset; filters service was reset")
-                
+        
                 try self.safariManagers.reset()
                 Logger.logInfo("(SafariProtection) - reset; user rules managers were reset")
-                
+        
                 try self.cbStorage.reset()
                 Logger.logInfo("(SafariProtection) - reset; CB storage was reset")
             } catch {
@@ -159,7 +159,7 @@ public final class SafariProtection: SafariProtectionProtocol {
                 self.completionQueue.async { onResetFinished(error) }
                 return
             }
-                        
+                
             self.reloadContentBlockers { error in
                 if let error = error {
                     Logger.logError("(SafariProtection) - reset; Error reloading CBs after reset; Error: \(error)")
@@ -170,9 +170,9 @@ public final class SafariProtection: SafariProtectionProtocol {
             }
         }
     }
-    
+
     // MARK: - Internal methods
-    
+
     /* Executes block that leads to CB JSON files changes, after that reloads CBs */
     func executeBlockAndReloadCbs(block: () throws -> Void, onCbReloaded: @escaping (_ error: Error?) -> Void) rethrows {
         do {
@@ -183,10 +183,10 @@ public final class SafariProtection: SafariProtectionProtocol {
             onCbReloaded(error)
             throw error
         }
-        
+
         reloadContentBlockers(onCbReloaded: onCbReloaded)
     }
-    
+
     /* Creates JSON files for Content blockers and reloads CBs to apply new JSONs */
     func reloadContentBlockers(onCbReloaded: @escaping (_ error: Error?) -> Void) {
         cbQueue.async { [weak self] in
@@ -195,7 +195,7 @@ public final class SafariProtection: SafariProtectionProtocol {
                 onCbReloaded(CommonError.missingSelf)
                 return
             }
-            
+    
             do {
                 let convertedfilters = self.converter.convertFiltersAndUserRulesToJsons()
                 try self.cbStorage.save(converterResults: convertedfilters)
@@ -205,14 +205,14 @@ public final class SafariProtection: SafariProtectionProtocol {
                 self.workingQueue.sync { onCbReloaded(error) }
                 return
             }
-            
+    
             self.cbService.updateContentBlockers { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection) - reloadContentBlockers; self is missing!")
                     self?.workingQueue.sync { onCbReloaded(CommonError.missingSelf) }
                     return
                 }
-                
+        
                 self.workingQueue.sync { onCbReloaded(error) }
             }
         }

@@ -29,23 +29,23 @@ class AEInvertedWhitelistDomainsObjectTest: XCTestCase {
     }
 
     func testMigration4_0() {
-        
+
         let encoder = NSKeyedArchiver()
-        
+
         // encode old format
         let domains = ["google.com", "example.com"]
         encoder.encode(domains, forKey: "domains")
-        
+
         let data = encoder.encodedData
         let decoder = NSKeyedUnarchiver(forReadingWith: data)
 
         let invertedWLObject = AEInvertedWhitelistDomainsObject(coder: decoder)
-        
+
         // create object in new format
-        
+
         let rules = domains.map { ASDFilterRule(text: $0, enabled: true) }
         let newInvertedWLObject = AEInvertedWhitelistDomainsObject(rules: rules)
-        
+
         XCTAssertEqual(invertedWLObject?.rule, newInvertedWLObject.rule)
         XCTAssertEqual(invertedWLObject?.rules, newInvertedWLObject.rules)
     }

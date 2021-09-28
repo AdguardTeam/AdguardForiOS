@@ -24,7 +24,7 @@ import Foundation
     var requests: Int
     var encrypted: Int
     var elapsedSumm: Int?
-    
+
     init(date: Date? = nil, domain: String, requests: Int = 0, encrypted: Int = 0, elapsedSumm: Int? = nil) {
         self.date = date
         self.domain = domain
@@ -38,9 +38,9 @@ import Foundation
             return "domain = \(self.domain); requests = \(self.requests); encrypted = \(self.encrypted)"
         }
     }
-    
+
     // MARK: - Equatable protocol
-    
+
     override func isEqual(_ object: Any?) -> Bool {
         if let object = object as? ActivityStatisticsRecord {
             return object.date == self.date &&

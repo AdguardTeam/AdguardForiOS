@@ -27,36 +27,36 @@ protocol SafariGroupsModelDelegate: AnyObject {
 }
 
 final class SafariGroupsModel {
-    
+
     private(set) var groups: [SafariProtectionGroupCellModel] = []
     weak var delegate: SafariGroupsModelDelegate?
-    
+
     // MARK: - Private properties
-    
+
     private var proStatusObserver: NotificationToken?
-    
+
     /* Services */
     private let safariProtection: SafariProtectionProtocol
     private let configuration: ConfigurationServiceProtocol
-    
+
     // MARK: - Initialization
-    
+
     init(safariProtection: SafariProtectionProtocol, configuration: ConfigurationServiceProtocol) {
         self.safariProtection = safariProtection
         self.configuration = configuration
-        
+
         self.proStatusObserver = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
             self?.createModels()
             self?.delegate?.modelsChanged()
         }
         createModels()
     }
-    
+
     // MARK: - Public methods
-    
+
     func setGroup(_ groupType: SafariGroup.GroupType, enabled: Bool) {
         DDLogInfo("(SafariGroupsModel) - setGroup; Trying to change group=\(groupType) to state=\(enabled)")
-        
+
         do {
             try safariProtection.setGroup(groupType, enabled: enabled, onCbReloaded: nil)
             let row = groups.firstIndex(where: { $0.groupType == groupType }) ?? 0
@@ -67,14 +67,14 @@ final class SafariGroupsModel {
             DDLogError("(SafariGroupsModel) - setGroup; DB error when changing group=\(groupType) to state=\(enabled); Error: \(error)")
         }
     }
-    
+
     func updateModels() {
         createModels()
         delegate?.modelsChanged()
     }
-    
+
     // MARK: - Private methods
-    
+
     private func createModels() {
         let groupsFromSDK = safariProtection.groups
         self.groups = groupsFromSDK.map {

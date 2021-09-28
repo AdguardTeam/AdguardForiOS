@@ -27,26 +27,26 @@
 /////////////////////////////////////////////////////////////////////
 
 - (id)init{
-    
+
     self = [super init];
     if (self) {
-        
+
         _bytesRead = _bytesWritten = 0;
         _counterWrittenBytes = 0;
         _counterWrittenBytesLocker = [NSLock new];
     }
-    
+
     return self;
 }
 
 - (id)initWithDelegate:(id<ACIOStreamDelegate>)delegate{
-    
+
     self = [self init];
     if (self) {
-        
+
         _delegate = delegate;
     }
-    
+
     return self;
 }
 
@@ -62,18 +62,18 @@
 
     if (len == 0)
         return 0;
-    
+
     if (buffer == NULL)
         return ACIO_ERROR;
-    
+
     NSInteger result = ACIO_EOF;
     if (_delegate && [_delegate respondsToSelector:@selector(read:maxLength:stream:)]){
-        
+
         result = [_delegate read:buffer maxLength:len stream:self];
 
         if (result > 0)
             _bytesRead += result;
-        
+
     }
     else result = ACIO_ERROR;
 
@@ -86,17 +86,17 @@
         return 0;
     if (buffer == NULL)
         return ACIO_ERROR;
-    
+
     NSInteger result = 0;
 
     if (_delegate && [_delegate respondsToSelector:@selector(write:maxLength:stream:)]){
  
             result = [_delegate write:buffer maxLength:len stream:self];
-        
+
         if (result > ACIO_EOF){
-            
+    
             _bytesWritten += result;
-            
+    
             [_counterWrittenBytesLocker lock];
             _counterWrittenBytes += result;
             [_counterWrittenBytesLocker unlock];
@@ -104,12 +104,12 @@
     }
     else
         return ACIO_ERROR;
-    
+
     return result;
 }
 
 - (void)clearCounterWrittenBytes{
-    
+
     [_counterWrittenBytesLocker lock];
     _counterWrittenBytes = 0;
     [_counterWrittenBytesLocker unlock];

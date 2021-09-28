@@ -38,11 +38,11 @@ static NSMutableDictionary *_plistPropertyNamesForClasses;
  
     [super initialize];
     @autoreleasepool {
-        
+
         // obtainning typies of object properties
         unsigned int count = 0;
         objc_property_t *properties = class_copyPropertyList( self, &count );
-        
+
         NSMutableArray *dateNames = [NSMutableArray array];
         NSMutableArray *plistNames = [NSMutableArray array];
         NSMutableArray *pNames = [NSMutableArray array];
@@ -50,7 +50,7 @@ static NSMutableDictionary *_plistPropertyNamesForClasses;
         char *propertyType;
         NSString *pType;
         for (NSUInteger i = 0; i <count; i++) {
-            
+    
             propertyType = property_copyAttributeValue(properties[i], "T");
             propertyName = [NSString stringWithCString:property_getName(properties[i]) encoding:NSUTF8StringEncoding];
             pType = [NSString stringWithUTF8String:propertyType];
@@ -59,70 +59,70 @@ static NSMutableDictionary *_plistPropertyNamesForClasses;
 
             [pNames addObject:propertyName];
             if ([pType isEqualToString:@"NSDate"]) {
-                
+        
                 [dateNames addObject:propertyName];
             }
             else if (
                      [pType containsAny:@[@"NSDictionary",@"NSMutableDictionary",@"NSArray",@"NSMutableArray"]]
                      || (! [pType hasPrefix:@"NS"] && [NSClassFromString(pType) conformsToProtocol:@protocol(NSCoding)])
                      ){
-                
+        
                 [plistNames addObject:propertyName];
             }
-            
+    
             free(propertyType);
-            
+    
         }
-        
+
         if (pNames.count) {
-            
+    
             if (!_propertyNamesForClasses)
                 _propertyNamesForClasses = [NSMutableDictionary dictionary];
 
             [self setPropertiesCacheDictionary:_propertyNamesForClasses withArray:pNames];
         }
         if (dateNames.count) {
-            
+    
             if (!_nsdatePropertyNamesForClasses)
                 _nsdatePropertyNamesForClasses = [NSMutableDictionary dictionary];
-            
+    
             [self setPropertiesCacheDictionary:_nsdatePropertyNamesForClasses withArray:dateNames];
         }
         if (plistNames.count) {
-            
+    
             if (!_plistPropertyNamesForClasses)
                 _plistPropertyNamesForClasses = [NSMutableDictionary dictionary];
-            
+    
             [self setPropertiesCacheDictionary:_plistPropertyNamesForClasses withArray:plistNames];
         }
 
         if ( properties != NULL )
             free( properties );
     }
-    
+
 }
 
 + (NSString *)tableName{
-    
+
     if ([self class] == [ADBTableRow class]) {
         return nil;
     }
-    
+
     return NSStringFromClass([self class]);
 }
 
 + (NSSet *)propertyNames{
-    
+
     return _propertyNamesForClasses[NSStringFromClass([self class])];
 }
 
 + (NSSet *)nsdatePropertyNames{
-    
+
     return _nsdatePropertyNamesForClasses[NSStringFromClass([self class])];
 }
 
 + (NSSet *)plistPropertyNames{
-    
+
     return _plistPropertyNamesForClasses[NSStringFromClass([self class])];
 }
 
@@ -133,29 +133,29 @@ static NSMutableDictionary *_plistPropertyNamesForClasses;
     if (self) {
         @try {
         if (dbResult) {
-            
+    
             NSDictionary *result = [dbResult resultDictionary];
             NSSet *nsdateP = [[self class] nsdatePropertyNames];
             NSSet *plistP = [[self class] plistPropertyNames];
             [result enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-                
+        
                 // sets nil value
                 if (!obj || obj == [NSNull null]) {
-                    
+            
                     if([self respondsToSelector:NSSelectorFromString(key)]) {
                         [self setValue:nil forKey:key];
                     }
                     return;
                 }
-                
+        
                 if ([nsdateP containsObject:key]) {
                     // mapping to NSDate
-                    
+            
                     [self setValue:[NSDate dateWithSQliteString:obj] forKey:key];
                 }
                 else if ([plistP containsObject:key]){
                     // mapping to complex object
-                    
+            
                     id plist;
                     if ([obj isKindOfClass:[NSData class]]) {
                         @try {
@@ -167,14 +167,14 @@ static NSMutableDictionary *_plistPropertyNamesForClasses;
                         }
                     }
                     else if ([obj isKindOfClass:[NSString class]]){
-                        
+                
                         plist = [NSKeyedUnarchiver unarchiveObjectWithData:[obj dataUsingEncoding:NSUTF8StringEncoding]];
                     }
-                    
+            
                     [self setValue:plist forKey:key];
                 }
                 else{
-                    
+            
                     //standant mapping
                     if([self respondsToSelector:NSSelectorFromString(key)]) {
                         @try {
@@ -187,7 +187,7 @@ static NSMutableDictionary *_plistPropertyNamesForClasses;
                     }
                 }
             }];
-            
+    
         }
         }
         @catch (NSException *exception) {
@@ -195,7 +195,7 @@ static NSMutableDictionary *_plistPropertyNamesForClasses;
             [ACLLogger.singleton flush];
         }
     }
-    
+
     return self;
 }
 
@@ -208,19 +208,19 @@ static NSMutableDictionary *_plistPropertyNamesForClasses;
 
         NSString *className = NSStringFromClass(self);
         NSMutableSet *propertyNames = dict[className];
-        
+
         if (!propertyNames) {
             propertyNames = [NSMutableSet set];
             dict[className] = propertyNames;
         }
-        
+
         [propertyNames addObjectsFromArray:pNames];
-        
+
         // add properties from super classes
         Class superClass = self;
         NSSet *pSet;
         while ([(superClass = [superClass superclass]) isSubclassOfClass:[ACObject class]]) {
-            
+    
             className = NSStringFromClass(superClass);
             pSet = dict[className];
             if (pSet)

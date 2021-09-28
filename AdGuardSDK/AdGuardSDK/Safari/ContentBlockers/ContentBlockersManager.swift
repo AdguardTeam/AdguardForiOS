@@ -29,11 +29,11 @@ protocol ContentBlockersManagerProtocol {
 }
 
 struct ContentBlockersManager: ContentBlockersManagerProtocol {
-        
+
     func reloadContentBlocker(withId id: String, _ onContentBlockerReloaded: @escaping (_ error: Error?) -> Void) {
         SFContentBlockerManager.reloadContentBlocker(withIdentifier: id, completionHandler: onContentBlockerReloaded)
     }
-    
+
     func getStateOfContentBlocker(withId id: String, _ onContentBlockerStateRevealed: @escaping (Result<Bool>) -> Void) {
         SFContentBlockerManager.getStateOfContentBlocker(withIdentifier: id) { state, error in
             if let error = error {

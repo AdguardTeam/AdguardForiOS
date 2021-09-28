@@ -16,7 +16,7 @@ class PacketTunnelProviderProxyTest: XCTestCase {
     var providersManager: DnsProvidersManagerMock!
     var delegateMock: PacketTunnelProviderProxyDelegateMock!
     var packetTunnelProviderProxy: PacketTunnelProviderProxyProtocol!
-    
+
     override func setUp() {
         dnsProxy = DnsProxyMock()
         dnsConfiguration = DnsConfigurationMock()
@@ -33,19 +33,19 @@ class PacketTunnelProviderProxyTest: XCTestCase {
         )
         packetTunnelProviderProxy.delegate = delegateMock
     }
-    
+
     func test() {
         packetTunnelSetting.stubbedCreateSettingsResult = NEPacketTunnelNetworkSettings()
         delegateMock.stubbedReadPacketsCompletionHandlerResult = ([], [])
-        
+
         let expectation = XCTestExpectation()
         packetTunnelProviderProxy.startTunnel(options: nil) { error in
-            
+    
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1.5)
     }
-    
+
     // TODO: - Need more tests
 }
 

@@ -24,7 +24,7 @@ public protocol HttpRequestServiceProtocol {
 
 public class HttpRequestService: NSObject, HttpRequestServiceProtocol {
     public var requestSender: RequestSenderProtocol
-    
+
     init(requestSender: RequestSenderProtocol = RequestSender()) {
         self.requestSender = requestSender
     }

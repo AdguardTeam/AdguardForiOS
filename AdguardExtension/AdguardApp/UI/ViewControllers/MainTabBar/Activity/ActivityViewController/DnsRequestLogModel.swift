@@ -31,12 +31,12 @@ struct DnsLogRecordCategory{
 class DnsLogRecordExtended {
     let logRecord: DnsLogRecord
     let category: DnsLogRecordCategory
-    
+
     init(record: DnsLogRecord, category: DnsLogRecordCategory) {
         self.logRecord = record
         self.category = category
     }
-    
+
     lazy var matchedFilters: String? = {
 //        let allFilters = dnsFiltersService.filters
 //        let filterNames = logRecord.matchedFilterIds?.map {(filterId) -> String in
@@ -73,10 +73,10 @@ extension DnsLogRecordUserStatus {
         }
     }
 }
-    
+
 enum DnsLogButtonType {
     case removeDomainFromWhitelist, removeRuleFromUserFilter, addDomainToWhitelist, addRuleToUserFlter
-    
+
     var buttonTitle: String {
         switch self {
         case .removeDomainFromWhitelist:
@@ -117,7 +117,7 @@ extension DnsLogRecord
             return [.addDomainToWhitelist, .addRuleToUserFlter]
         }
     }
-    
+
     func time () -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm:ss"
@@ -138,7 +138,7 @@ enum DnsStatisticsDisplayedRequestsType {
  view model for ActivityViewController
  */
 class DnsRequestLogViewModel {
-    
+
     // MARK: - pubic fields
     /**
      array of log records. If search is active it returns filtered array
@@ -150,17 +150,17 @@ class DnsRequestLogViewModel {
             }
         }
     }
-    
+
     /**
      Type of the displayed statistics
     */
     var displayedStatisticsType: DnsStatisticsDisplayedRequestsType = .allRequests
-    
+
     /**
      records changes observer. It calls when records array changes
      */
     var recordsObserver: (([DnsLogRecordExtended])->Void)?
-    
+
     /**
      search query string
      */
@@ -174,24 +174,24 @@ class DnsRequestLogViewModel {
             recordsObserver?(records)
         }
     }
-    
+
     var delegate: DnsRequestsDelegateProtocol? = nil
-    
+
     // MARK: - private fields
-    
+
     private let dnsTrackerService: DnsTrackerServiceProtocol
-    
+
     private var allRecords = [DnsLogRecordExtended]()
     private var searchRecords = [DnsLogRecordExtended]()
-    
+
     private let workingQueue = DispatchQueue(label: "DnsRequestLogViewModel queue")
-    
+
     // MARK: - init
     init(dnsTrackerService: DnsTrackerServiceProtocol) {
         self.dnsTrackerService = dnsTrackerService
         self.searchString = ""
     }
-    
+
     // MARK: - public methods
     /**
      obtains records array from vpnManager
@@ -201,7 +201,7 @@ class DnsRequestLogViewModel {
             self?.obtainRecordsInternal(for: type, domains: domains)
         }
     }
-    
+
     func clearRecords(){
         workingQueue.sync { [weak self] in
             self?.allRecords = []
@@ -209,14 +209,14 @@ class DnsRequestLogViewModel {
         }
         delegate?.requestsCleared()
     }
-    
+
     private func obtainRecordsInternal(for type: ChartDateType, domains: Set<String>? = nil) {
         let intervalTime = type.getTimeInterval()
         let firstDate = intervalTime.begin
         let lastDate = intervalTime.end
-        
+
         allRecords = [DnsLogRecordExtended]()
-        
+
 //        for logRecord in [DnsLogRecordExtended]() {
 //            if let domains = domains, !domains.contains(logRecord.domain) {
 //                continue
@@ -251,7 +251,7 @@ class DnsRequestLogViewModel {
 //            let record = DnsLogRecordExtended(record: logRecord, category: category, dnsFiltersService: dnsFiltersService)
 //            allRecords.append(record)
 //        }
-        
+
         recordsObserver?(allRecords)
     }
 }

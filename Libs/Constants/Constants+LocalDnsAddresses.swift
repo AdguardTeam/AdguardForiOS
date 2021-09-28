@@ -22,7 +22,7 @@ extension Constants {
     struct LocalDnsAddresses {
         static let ipv4 = "198.18.0.1"
         static let ipv6 = "2001:ad00:ad00::ad00"
-        
+
         // AdGuard DNS Non-filtering
         static let defaultSystemDnsServers = ["94.140.14.140", "94.140.14.141", "2a10:50c0::1:ff", "2a10:50c0::2:ff"]
     }

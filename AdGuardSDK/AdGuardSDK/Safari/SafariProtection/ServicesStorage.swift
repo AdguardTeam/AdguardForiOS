@@ -29,7 +29,7 @@ protocol ServicesStorageProtocol {
 }
 
 final class ServicesStorage: ServicesStorageProtocol {
-    
+
     let configuration: SafariConfigurationProtocol
     let userDefaults: UserDefaultsStorageProtocol
     let safariManagers: SafariUserRulesManagersProviderProtocol
@@ -46,24 +46,24 @@ final class ServicesStorage: ServicesStorageProtocol {
     {
         let filterFilesStorage = try FilterFilesStorage(filterFilesDirectoryUrl: filterFilesDirectoryUrl)
         try filterFilesStorage.unzipPredefinedFiltersIfNeeded()
-        
+
         let productionDbManager = try ProductionDatabaseManager(dbContainerUrl: dbContainerUrl)
         let metaStorage = MetaStorage(productionDbManager: productionDbManager)
         let apiMethods = SafariProtectionApiMethods()
-        
+
         self.userDefaults = UserDefaultsStorage(storage: userDefaults)
-        
+
         self.configuration = configuration
-        
+
         self.safariManagers = SafariUserRulesManagersProvider(userDefaultsStorage: self.userDefaults)
-        
+
         self.cbStorage = try ContentBlockersInfoStorage(
             jsonStorageUrl: jsonStorageUrl,
             userDefaultsStorage: self.userDefaults
         )
-        
+
         self.cbService = ContentBlockerService(appBundleId: configuration.appBundleId)
-        
+
         self.filters = try FiltersService(
             configuration: self.configuration,
             filterFilesStorage: filterFilesStorage,
@@ -71,7 +71,7 @@ final class ServicesStorage: ServicesStorageProtocol {
             userDefaultsStorage: self.userDefaults,
             apiMethods: apiMethods
         )
-        
+
         let filtersConverter = FiltersConverter(configuration: configuration)
         self.converter = FiltersConverterService(
             configuration: configuration,

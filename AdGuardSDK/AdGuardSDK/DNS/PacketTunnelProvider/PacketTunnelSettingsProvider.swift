@@ -25,15 +25,15 @@ protocol PacketTunnelSettingsProviderProtocol {
 /// This object creates `NEPacketTunnelNetworkSettings` for `PacketTunnelProvider`
 /// Used to incapsulate settings creation logic
 final class PacketTunnelSettingsProvider: PacketTunnelSettingsProviderProtocol {
-    
+
     private let addresses: PacketTunnelProvider.Addresses
     private let networkUtils: NetworkUtilsProtocol
-    
+
     init(addresses: PacketTunnelProvider.Addresses, networkUtils: NetworkUtilsProtocol = NetworkUtils()) {
         self.addresses = addresses
         self.networkUtils = networkUtils
     }
-    
+
     func createSettings(full: Bool, withoutVpnIcon: Bool) -> NEPacketTunnelNetworkSettings {
         let settings = NEPacketTunnelNetworkSettings(tunnelRemoteAddress: addresses.tunnelRemoteAddress)
 
@@ -84,7 +84,7 @@ final class PacketTunnelSettingsProvider: PacketTunnelSettingsProviderProtocol {
 
         return settings
     }
-    
+
     /**
      returns array of ipv4 exclude ranges for full tunnel modes
 

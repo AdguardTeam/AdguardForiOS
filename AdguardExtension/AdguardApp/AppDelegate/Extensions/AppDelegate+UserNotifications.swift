@@ -23,18 +23,18 @@ extension AppDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(showAlertNotification(notification:)), name: .showCommonAlert, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(openDnsFiltersController(notification:)), name: .showDnsFiltersController, object: nil)
     }
-    
+
     @objc private func showAlertNotification(notification: Notification) {
         let body = notification.userInfo?[UserNotificationService.notificationBody] as? String
         let title = notification.userInfo?[UserNotificationService.notificationTitle] as? String
         showCommonAlertForTopVc(body, title)
     }
-    
+
     @objc private func openDnsFiltersController(notification: Notification) {
         let success = presentDnsFiltersController()
         DDLogInfo("Presented DnsFiltersController successfully = \(success ? "Yes" : "No")")
     }
-    
+
     private func showCommonAlertForTopVc(_ body: String?, _ title: String?) {
         DispatchQueue.main.async {
             if let topVC = AppDelegate.topViewController() {

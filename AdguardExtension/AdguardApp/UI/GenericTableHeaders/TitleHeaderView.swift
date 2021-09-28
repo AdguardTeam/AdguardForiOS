@@ -19,9 +19,9 @@
 import UIKit
 
 final class TitleTableHeaderView: UIView {
-    
+
     // MARK: - UI Elements
-    
+
     private lazy var titleLabel: ThemableLabel = {
         let label = ThemableLabel()
         label.greyText = true
@@ -31,44 +31,44 @@ final class TitleTableHeaderView: UIView {
         label.font = UIFont.systemFont(ofSize: isIpadTrait ? 40.0 : 24.0, weight: .bold)
         return label
     }()
-    
+
     // MARK: - Properties
-    
+
     var title: String {
         didSet {
             titleLabel.text = title
         }
     }
-    
+
     required init?(coder: NSCoder) {
         self.title = ""
         super.init(coder: coder)
     }
-    
+
     override init(frame: CGRect) {
         self.title = ""
         super.init(frame: frame)
     }
-    
+
     init(title: String) {
         self.title = title
         super.init(frame: .zero)
         setupUI()
     }
-    
+
     // MARK: - Internal methods
-    
+
     func updateTheme(_ themeService: ThemeServiceProtocol) {
         backgroundColor = themeService.backgroundColor
         themeService.setupLabel(titleLabel)
     }
-    
+
     // MARK: - Private methods
-    
+
     private func setupUI() {
         titleLabel.text = title
         addSubview(titleLabel)
-        
+
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: isIpadTrait ? 24.0 : 16.0),

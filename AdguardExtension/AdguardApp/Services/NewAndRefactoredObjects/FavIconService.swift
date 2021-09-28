@@ -22,7 +22,7 @@ import UIKit
 protocol FavIconServiceProtocol {
     /// Returns URL of the icon for the specified `domain`
     func getIconUrl(for domain: String) -> URL?
-    
+
     /// Provides UIImage of the icon for the specified `domain` in `onImageObtained` closure
     func provideImage(for domain: String, _ onImageObtained: @escaping (_ image: UIImage?) -> Void)
 }
@@ -30,14 +30,14 @@ protocol FavIconServiceProtocol {
 /// Implementation of `FavIconServiceProtocol`
 /// It uses our internal service for obtaining icons
 struct FavIconService: FavIconServiceProtocol {
-    
+
     private let urlBase = "https://icons.adguard.org/icon?domain="
-    
+
     func getIconUrl(for domain: String) -> URL? {
         let url = urlBase + domain
         return URL(string: url)
     }
-    
+
     func provideImage(for domain: String, _ onImageObtained: @escaping (_ image: UIImage?) -> Void) {
         let completionQueue = DispatchQueue.main
         guard let url = getIconUrl(for: domain) else {
@@ -49,7 +49,7 @@ struct FavIconService: FavIconServiceProtocol {
                 completionQueue.async { onImageObtained(nil) }
                 return
             }
-            
+    
             completionQueue.async { onImageObtained(image) }
         }
         dataTask.resume()

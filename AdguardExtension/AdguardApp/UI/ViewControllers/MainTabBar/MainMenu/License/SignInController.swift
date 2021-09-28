@@ -20,25 +20,25 @@ import UIKit
 import SafariServices
 
 class SignInController: UIViewController {
-    
+
     @IBOutlet var buttons: [SocialSignInButton]!
     @IBOutlet var themableLabels: [ThemableLabel]!
-    
+
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let notificationService: UserNotificationServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
-    
+
     private var notificationSignInObserver: NotificationToken?
-    
+
     private var sfSafariViewController: SFSafariViewController?
-    
+
     private var signInFailureHandler: SignInFailureHandler!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         signInFailureHandler = SignInFailureHandler(notificationService: notificationService)
 
         notificationSignInObserver = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: nil, queue: .main) { [weak self] notification in
@@ -46,35 +46,35 @@ class SignInController: UIViewController {
                 self?.processNotification(info: info)
             }
         }
-        
+
         setupBackButton()
         updateTheme()
         setupButtonTitles()
     }
-    
-    
+
+
     // MARK: - Actions
-    
+
     @IBAction func appleLoginButtonTapped(_ sender: UIButton) {
         makeLogin(with: .apple)
-        
+
     }
-    
+
     @IBAction func googleLoginButtonTapped(_ sender: UIButton) {
         makeLogin(with: .google)
-        
+
     }
-    
+
     @IBAction func facebookLoginButtonTapped(_ sender: UIButton) {
         makeLogin(with: .facebook)
     }
-    
+
     // MARK: - Private methods
-    
+
     private func prepareButtons() {
         buttons.forEach { $0.applyRoundRectStyle(color: theme.lightGrayTextColor.cgColor ) }
     }
-    
+
     private func makeLogin(with socialProvider: SocialProvider) {
         let state = UUID().uuidString
         resources.sharedDefaults().setValue(state, forKey: AEDefaultsAuthStateString)
@@ -82,19 +82,19 @@ class SignInController: UIViewController {
         sfSafariViewController = SFSafariViewController(url: url)
         present(sfSafariViewController!, animated: true, completion: nil)
     }
-    
+
     private func processNotification(info: [AnyHashable: Any]) {
-        
+
         // skip notification if this controler is not placed on top of navigation stack
         if self.navigationController?.viewControllers.last != self {
             return
         }
-        
+
         let type = info[PurchaseService.kPSNotificationTypeKey] as? String
         let error = info[PurchaseService.kPSNotificationErrorKey] as? NSError
-        
+
         switch type {
-        
+
         case PurchaseService.kPSNotificationLoginSuccess:
             self.loginSuccess()
         case PurchaseService.kPSNotificationLoginFailure:
@@ -106,46 +106,46 @@ class SignInController: UIViewController {
         case PurchaseService.kPSNotificationLoginUserNotFound:
             self.userNotFound()
 
-            
+    
         default:
             break
         }
     }
-    
+
     private func loginSuccess() {
         let message = String.localizedString("login_success_message")
         dismiss(toMainPage: true, message: message)
     }
-    
+
     private func loginFailure(_ error: NSError?) {
         if let alertMessage = signInFailureHandler.loginFailure(error)?.alertMessage {
             dismiss(toMainPage: false, message: alertMessage)
         }
     }
-    
+
     private func premiumExpired() {
         let body = String.localizedString("login_premium_expired_message")
         dismiss(toMainPage: false, message: body)
     }
-    
+
     private func notPremium() {
         let body = String.localizedString("not_premium_message")
         dismiss(toMainPage: false, message: body)
     }
-    
+
     private func userNotFound() {
         let message = String(format: String.localizedString("user_not_found_message"), UIApplication.adguardSigninURL)
         dismiss(animated: true) { [weak self] in
             self?.notificationService.postNotificationInForeground(body: message, title: "")
         }
     }
-    
+
     private func dismiss(toMainPage: Bool, message: String) {
         guard self.presentedViewController == self.sfSafariViewController else { return }
         sfSafariViewController?.dismiss(animated: true, completion: { [notificationService] in
             notificationService.postNotificationInForeground(body: message, title: "")
         })
-        
+
         if toMainPage {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.dismissToMainPage()
@@ -153,7 +153,7 @@ class SignInController: UIViewController {
             self.navigationController?.popViewController(animated: false)
         }
     }
-    
+
     private func setupButtonTitles() {
         buttons.forEach {
             let text: String

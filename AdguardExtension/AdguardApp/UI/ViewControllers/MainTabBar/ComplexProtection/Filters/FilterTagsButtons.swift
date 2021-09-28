@@ -32,20 +32,20 @@ protocol SendTagNameButtonProtocol: FilterTagsViewModel {
 }
 
 class TagButton: RoundRectButton, SendTagNameButtonProtocol{
-    
+
     init() {
         super.init(frame: .zero)
         addTarget(self, action: #selector(self.sendName(_:)), for: .touchUpInside)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     weak var delegate: TagButtonTappedDelegate?
-    
+
     var name: String?
-    
+
     @objc func sendName(_ sender: TagButton) {
         delegate?.tagButtonTapped(sender)
     }

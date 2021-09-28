@@ -52,14 +52,14 @@
 {
     NSError *err;
     ACLWildcard *wildcard = [[ACLWildcard alloc] initWithWildcard:pattern options:options error:&err];
-    
+
     if  (err){
-        
+
         DDLogWarn(@"Can't create regex for: %@", pattern);
         DDLogWarn(@"Regex creation error: %@", [err localizedDescription]);
         return nil;
     }
-    
+
     return wildcard;
 }
 
@@ -89,11 +89,11 @@
 
     if (![NSString isNullOrEmpty:_shortcut] && ![input contains:_shortcut])
         return NO;
-    
-    
+
+
     NSRange result = [self rangeOfFirstMatchInString:input options:0 range:NSMakeRange(0, input.length)];
     return result.location != NSNotFound;
-    
+
 }
 
 
@@ -112,13 +112,13 @@
     NSString *longest = @"";
     NSCharacterSet *cSet = [NSCharacterSet characterSetWithCharactersInString:[NSString stringWithFormat:@"%@%@", MASK_ANY_SYMBOLS, MASK_ANY_SYMBOL]];
     NSArray *parts = [fromPattern componentsSeparatedByCharactersInSet:cSet];
-    
+
     for (NSString *part in parts)
         if (part.length > longest.length)
         {
             longest = part;
         }
-    
+
     return longest;
 }
 

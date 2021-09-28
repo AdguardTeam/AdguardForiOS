@@ -19,20 +19,20 @@
 import UIKit
 
 final class AddTableViewCell: UITableViewCell, Reusable {
-    
+
     var addTitle: String = "" {
         didSet {
             descriptionLabel.text = addTitle
         }
     }
-    
+
     private lazy var iconImageView: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.image = UIImage(named: "plus")
         return view
     }()
-    
+
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -45,33 +45,33 @@ final class AddTableViewCell: UITableViewCell, Reusable {
         super.awakeFromNib()
         setupConstraints()
     }
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupConstraints()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupConstraints()
     }
-    
+
     func updateTheme(_ themeService: ThemeServiceProtocol) {
         themeService.setupTableCell(self)
     }
-    
+
     private func setupConstraints() {
         self.contentView.addSubview(iconImageView)
         self.contentView.addSubview(descriptionLabel)
-        
+
         let widthHeightConst: CGFloat = isIpadTrait ? 32.0 : 24.0
-        
+
         iconImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         iconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16.0).isActive = true
         iconImageView.trailingAnchor.constraint(equalTo: descriptionLabel.leadingAnchor, constant: -16.0).isActive = true
         iconImageView.widthAnchor.constraint(equalToConstant: widthHeightConst).isActive = true
         iconImageView.heightAnchor.constraint(equalToConstant: widthHeightConst).isActive = true
-        
+
         descriptionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 14.0).isActive = true
         descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16.0).isActive = true
         descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -14.0).isActive = true

@@ -25,48 +25,48 @@ class QueryParametersFromURLStringTest: XCTestCase {
 
     override func tearDownWithError() throws {
     }
-    
+
     func testValidQueryExtension() {
         let stringOne = "location=https://easylist.to/easylist/easylist.txt&title=EasyList"
         let stringTwo = "some_token=123&foo=321&bar=qwerty"
         let stringThree = "foo="
         let stringFour = "="
-        
-        
+    
+
         let valOne = stringOne.getQueryParametersFromQueryString()
         let valTwo = stringTwo.getQueryParametersFromQueryString()
         let valThree = stringThree.getQueryParametersFromQueryString()
         let valFour = stringFour.getQueryParametersFromQueryString()
-        
+
         XCTAssertNotNil(valOne)
         XCTAssertNotNil(valTwo)
         XCTAssertNotNil(valThree)
         XCTAssertNotNil(valFour)
-        
+
         XCTAssertEqual(valOne!["location"], "https://easylist.to/easylist/easylist.txt")
         XCTAssertEqual(valOne!["title"], "EasyList")
-        
+
         XCTAssertEqual(valTwo!["some_token"], "123")
         XCTAssertEqual(valTwo!["foo"], "321")
         XCTAssertEqual(valTwo!["bar"], "qwerty")
-        
+
         XCTAssertEqual(valThree!["foo"], "")
         XCTAssertEqual(valFour![""], "")
 
     }
-    
+
     func testNotValidQueryExtension() {
         let invalidStringOne = "SomeFooBar"
         let invalidStringTwo = "&"
         let emptyInvalidString = ""
-        
+
         let valOne = invalidStringOne.getQueryParametersFromQueryString()
         let valTwo = invalidStringTwo.getQueryParametersFromQueryString()
         let valThree = emptyInvalidString.getQueryParametersFromQueryString()
         XCTAssertNil(valOne)
         XCTAssertNil(valTwo)
         XCTAssertNil(valThree)
-        
+
     }
 
 }

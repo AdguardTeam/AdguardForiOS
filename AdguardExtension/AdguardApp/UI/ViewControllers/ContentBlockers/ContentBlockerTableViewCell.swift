@@ -22,22 +22,22 @@ import UIKit
 final class ContentBlockerTableViewCell: UITableViewCell, Reusable {
 
     // MARK: - Public properties
-    
+
     var model = ContentBlockerTableViewCellModel() {
         didSet {
             processModel()
         }
     }
-    
+
     // MARK: - UI elements
-    
+
     private lazy var stateImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-    
+
     private lazy var cbNameLabel: ThemableLabel = {
         let label = ThemableLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -47,7 +47,7 @@ final class ContentBlockerTableViewCell: UITableViewCell, Reusable {
         label.textAlignment = .left
         return label
     }()
-    
+
     private lazy var cbDescriptionLabel: ThemableLabel = {
         let label = ThemableLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -57,7 +57,7 @@ final class ContentBlockerTableViewCell: UITableViewCell, Reusable {
         label.textAlignment = .left
         return label
     }()
-    
+
     private lazy var cbFiltersLabel: ThemableLabel = {
         let label = ThemableLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -67,15 +67,15 @@ final class ContentBlockerTableViewCell: UITableViewCell, Reusable {
         label.textAlignment = .left
         return label
     }()
-    
+
     // MARK: - Private properties
-    
+
     // We use this constraint to reduce cell size when filters are empty
     private var cbFiltersLabelBottomConstraint: NSLayoutConstraint!
     private var cbDescriptionLabelBottomConstraint: NSLayoutConstraint!
-    
+
     // MARK: - Initialization
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         initialize()
@@ -85,14 +85,14 @@ final class ContentBlockerTableViewCell: UITableViewCell, Reusable {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initialize()
     }
-    
+
     private func initialize() {
         self.selectionStyle = .none
-        
+
         contentView.addSubview(stateImageView)
         contentView.addSubview(cbNameLabel)
         contentView.addSubview(cbDescriptionLabel)
-        
+
         cbDescriptionLabelBottomConstraint = cbDescriptionLabel.bottomAnchor.constraint(
             equalTo: contentView.bottomAnchor,
             constant: isIpadTrait ? -24.0 : -16.0
@@ -101,30 +101,30 @@ final class ContentBlockerTableViewCell: UITableViewCell, Reusable {
             equalTo: contentView.bottomAnchor,
             constant: isIpadTrait ? -24.0 : -16.0
         )
-        
+
         NSLayoutConstraint.activate([
             stateImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: isIpadTrait ? 24.0 : 16.0),
             stateImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: isIpadTrait ? 20.0 : 16.0),
             stateImageView.widthAnchor.constraint(equalToConstant: isIpadTrait ? 32.0 : 24.0),
             stateImageView.heightAnchor.constraint(equalToConstant: isIpadTrait ? 32.0 : 24.0),
-            
+    
             cbNameLabel.leadingAnchor.constraint(equalTo: stateImageView.trailingAnchor, constant: isIpadTrait ? 24.0 : 16.0),
             cbNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: isIpadTrait ? -24.0 : -16.0),
             cbNameLabel.topAnchor.constraint(equalTo: stateImageView.topAnchor),
-            
+    
             cbDescriptionLabel.leadingAnchor.constraint(equalTo: cbNameLabel.leadingAnchor),
             cbDescriptionLabel.trailingAnchor.constraint(equalTo: cbNameLabel.trailingAnchor),
             cbDescriptionLabel.topAnchor.constraint(equalTo: cbNameLabel.bottomAnchor, constant: -2.0)
         ])
-        
+
         layoutFiltersLabel()
     }
-    
+
     private func layoutFiltersLabel() {
         cbDescriptionLabelBottomConstraint.isActive = false
         cbFiltersLabel.removeFromSuperview()
         contentView.addSubview(cbFiltersLabel)
-        
+
         NSLayoutConstraint.activate([
             cbFiltersLabel.leadingAnchor.constraint(equalTo: cbDescriptionLabel.leadingAnchor),
             cbFiltersLabel.trailingAnchor.constraint(equalTo: cbDescriptionLabel.trailingAnchor),
@@ -132,22 +132,22 @@ final class ContentBlockerTableViewCell: UITableViewCell, Reusable {
             cbFiltersLabelBottomConstraint
         ])
     }
-    
+
     // MARK: - Public methods
-    
+
     func updateTheme(_ themeService: ThemeServiceProtocol) {
         themeService.setupTableCell(self)
         themeService.setupLabels([cbNameLabel, cbDescriptionLabel, cbFiltersLabel])
     }
-    
+
     // MARK: - Private methods
-    
+
     private func processModel() {
         stateImageView.image = model.image
         cbNameLabel.text = model.name
         cbDescriptionLabel.text = model.description
         cbFiltersLabel.text = model.filtersString
-        
+
         if model.filtersString == nil {
             cbFiltersLabelBottomConstraint.isActive = false
             cbFiltersLabel.removeFromSuperview()
@@ -155,7 +155,7 @@ final class ContentBlockerTableViewCell: UITableViewCell, Reusable {
         } else {
             layoutFiltersLabel()
         }
-        
+
         stateImageView.rotateImage(isNedeed: model.shouldRotateImage)
     }
 }

@@ -31,14 +31,14 @@
 
 @interface FMDatabasePool : NSObject {
     NSString            *_path;
-    
+
     dispatch_queue_t    _lockQueue;
-    
+
     NSMutableArray      *_databaseInPool;
     NSMutableArray      *_databaseOutPool;
-    
+
     __unsafe_unretained id _delegate;
-    
+
     NSUInteger          _maximumNumberOfDatabasesToCreate;
     int                 _openFlags;
 }

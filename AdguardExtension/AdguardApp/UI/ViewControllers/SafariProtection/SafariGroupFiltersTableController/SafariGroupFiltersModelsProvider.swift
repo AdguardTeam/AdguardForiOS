@@ -20,10 +20,10 @@ import SafariAdGuardSDK
 
 typealias SafariGroupFiltersModel = (groupModel: StateHeaderViewModel<SafariGroup.GroupType>, filtersModel: [SafariFilterCellModel])
 final class SafariGroupFiltersModelsProvider {
-    
+
     var groupModels: [StateHeaderViewModel<SafariGroup.GroupType>] { isSearching ? searchGroupModels : initialGroupModels }
     var filtersModels: [[SafariFilterCellModel]] { isSearching ? searchFiltersModels : initialFiltersModels }
-    
+
     var searchString: String? {
         didSet {
             if isSearching {
@@ -34,33 +34,33 @@ final class SafariGroupFiltersModelsProvider {
             }
         }
     }
-    
+
     var isSearching: Bool { searchString != nil && !searchString!.isEmpty }
-    
+
     // MARK: - Private properties
-    
+
     private let proStatus: Bool
-    
+
     // MARK: - Models
-    
+
     private var searchGroupModels: [StateHeaderViewModel<SafariGroup.GroupType>] = []
     private var searchFiltersModels: [[SafariFilterCellModel]] = []
-    
+
     private var initialGroupModels: [StateHeaderViewModel<SafariGroup.GroupType>] = []
     private var initialFiltersModels: [[SafariFilterCellModel]] = []
-    
+
     // MARK: - Initialization
-    
+
     init(sdkModels: [SafariGroup], proStatus: Bool) {
         self.proStatus = proStatus
         sdkModels.forEach { group in
             if group.groupType.proOnly && !proStatus {
                 return
             }
-            
+    
             let groupModel = StateHeaderViewModel(iconImage: group.groupType.iconImage, title: group.groupName, isEnabled: group.isEnabled, id: group.groupType)
             self.initialGroupModels.append(groupModel)
-            
+    
             let filtersModels = group.filters.map { filter -> SafariFilterCellModel in
                 let tagsModels = filter.tags.map { SafariTagButtonModel(tag: $0, isSelected: true) }
                 return SafariFilterCellModel(
@@ -77,22 +77,22 @@ final class SafariGroupFiltersModelsProvider {
             self.initialFiltersModels.append(filtersModels)
         }
     }
-    
+
     // MARK: - Private methods
-    
+
     private func search() {
         searchGroupModels = []
         searchFiltersModels = []
         guard let searchString = searchString else { return }
-        
+
         let (tags, words) = getTagsAndWordsFrom(searchString)
-        
+
         for i in 0..<initialGroupModels.count {
             let filterModels = initialFiltersModels[i]
             let filteredModels = filterModels.compactMap { filter -> SafariFilterCellModel? in
                 return check(filter, matches: tags, or: words)
             }
-            
+    
             if !filteredModels.isEmpty {
                 let groupModel = initialGroupModels[i]
                 searchGroupModels.append(groupModel)
@@ -100,7 +100,7 @@ final class SafariGroupFiltersModelsProvider {
             }
         }
     }
-    
+
     /// Gets tags and separate words from search string
     private func getTagsAndWordsFrom(_ string: String) -> (tags: Set<String>, words: Set<String>) {
         var tags: Set<String> = []
@@ -115,14 +115,14 @@ final class SafariGroupFiltersModelsProvider {
         }
         return (tags, words)
     }
-    
+
     private func check(_ filter: SafariFilterCellModel, matches tags: Set<String>, or words: Set<String>) -> SafariFilterCellModel? {
         let filterTags = Set(filter.tags.map { $0.tagName })
         let matchedTags = filterTags.intersection(tags)
         let tagModels = filter.tags.map {
             SafariTagButtonModel(tagName: $0.tagName, isLang: $0.isLang, isSelected: matchedTags.contains($0.tagName))
         }
-        
+
         let highlightedOccurancies = filter.filterNameAttrString.string.highlight(occuranciesOf: words)
         if highlightedOccurancies.matchesFound || !matchedTags.isEmpty {
             return SafariFilterCellModel(

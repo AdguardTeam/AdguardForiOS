@@ -21,40 +21,40 @@ import UIKit
 
 /// ViewModel
 final class DnsProviderDetailsModel {
-    
+
     // MARK: - Public properties
-    
+
     /// Provider logo for light color theme
     var providerLogo: UIImage? {
         return provider.logo
     }
-    
+
     /// Provider logo for dark color theme
     var providerDarkLogo: UIImage? {
         //Not all providers have dark logo
         return provider.logoDark ?? providerLogo
     }
-    
+
     /// Provider url
     var providerHomepage: String {
         return provider.homepage
     }
-    
+
     /// List of provider features
     var features: [DnsAdGuardSDK.DnsFeature] {
         return provider.servers.first { $0.type == activeDnsProtocol }?.features ?? []
     }
-    
+
     /// Provider description
     var providerDescription: String {
         return provider.providerDescription
     }
-    
+
     /// List of supported  protocols by this provider
     var dnsProtocols: [DnsAdGuardSDK.DnsProtocol] {
         return provider.dnsServers.map { $0.type }
     }
-    
+
     /// active dns protocol
     var activeDnsProtocol: DnsAdGuardSDK.DnsProtocol {
         get {
@@ -64,7 +64,7 @@ final class DnsProviderDetailsModel {
                 let defaultDnsProtocol = provider.dnsServers.first!.type
                 return dnsProtocols.contains(activeProtocol) ? activeProtocol : defaultDnsProtocol
             }
-            
+    
             return provider.dnsServers.first!.type
         }
         set {
@@ -74,10 +74,10 @@ final class DnsProviderDetailsModel {
 
     private let provider: DnsProviderProtocol
     private let resources: AESharedResourcesProtocol
-    
-    
+
+
     // MARK: - Init
-    
+
     init(provider: DnsProviderProtocol, resources: AESharedResourcesProtocol) {
         self.provider = provider
         self.resources = resources
