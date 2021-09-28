@@ -203,7 +203,7 @@ static NSMutableDictionary *_plistPropertyNamesForClasses;
 #pragma mark Private Methods
 /////////////////////////////////////////////////////////////////////
 + (void)setPropertiesCacheDictionary:(NSMutableDictionary *)dict withArray:(NSArray *)pNames{
-  
+
     @autoreleasepool {
 
         NSString *className = NSStringFromClass(self);

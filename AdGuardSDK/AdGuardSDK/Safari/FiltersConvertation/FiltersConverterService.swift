@@ -31,7 +31,7 @@ protocol FiltersConverterServiceProtocol {
  This class is responsible for converting all enabled filters and user rules (blocklist / allowlist / inverted allowlist) to jsons objects
  */
 final class FiltersConverterService: FiltersConverterServiceProtocol {
-  
+
     private(set) var filtersAreConverting: Bool = false {
         didSet {
             if filtersAreConverting {

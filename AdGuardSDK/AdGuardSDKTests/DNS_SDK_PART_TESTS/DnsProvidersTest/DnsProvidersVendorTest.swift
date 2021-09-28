@@ -31,7 +31,7 @@ class DnsProvidersVendorTest: XCTestCase {
         XCTAssertEqual(adguardProviders.custom.count, 2)
         XCTAssertEqual(adguardProviders.predefined.count, 11)
         XCTAssertEqual(adguardProviders.activeDnsProvider.name, "Quad9")
-   
+ 
         checkStates(adgProviders, providerId: providerId, serverId: serverId, implementation: .adGuard)
         checkDefaultServer(adgProviders, matching: 1)
 

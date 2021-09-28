@@ -187,17 +187,17 @@ extension AESharedResourcesProtocol {
            get {
                return sharedDefaults().array(forKey: CustomFallbackServers) as? [String]
            }
-   
+ 
            set {
                sharedDefaults().setValue(newValue, forKey: CustomFallbackServers)
            }
        }
-   
+ 
        dynamic var customBootstrapServers: [String]? {
            get {
                return sharedDefaults().array(forKey: CustomBootstrapServers) as? [String]
            }
-   
+ 
            set {
                sharedDefaults().setValue(newValue, forKey: CustomBootstrapServers)
            }

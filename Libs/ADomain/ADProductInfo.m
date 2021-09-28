@@ -161,18 +161,18 @@ static NSDictionary *persistentProductInfo;
       @autoreleasepool {
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || TARGET_OS_IOS
-  
+
           // Creating product info
           NSUUID *uuid = [[UIDevice currentDevice] identifierForVendor];
           persistentProductInfo =
           @{INFO_KEY_APPID : [uuid UUIDString]};
-  
+
 #elif TARGET_OS_MAC
-  
+
           // Creating product info
           persistentProductInfo =
           @{INFO_KEY_APPID : DEFAULT_PRODUCT_NAME};
-  
+
 #endif
       }
     });

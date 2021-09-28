@@ -995,7 +995,7 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
     CGFloat sign = newOffset > 0 ? 1.0 : -1.0;
     MGSwipeButtonsView * activeButtons = sign < 0 ? _rightView : _leftView;
     MGSwipeSettings * activeSettings = sign < 0 ? _rightSwipeSettings : _leftSwipeSettings;
-  
+
     if(activeSettings.enableSwipeBounces) {
         _swipeOffset = newOffset;
 
@@ -1010,8 +1010,8 @@ static inline CGFloat mgEaseInOutBounce(CGFloat t, CGFloat b, CGFloat c) {
         _swipeOffset = sign > 0 ? MIN(newOffset, maxOffset) : MAX(newOffset, maxOffset);
     }
     CGFloat offset = fabs(_swipeOffset);
-  
-  
+
+
     if (!activeButtons || offset == 0) {
         if (_leftView)
             [_leftView endExpansionAnimated:NO];

@@ -50,7 +50,7 @@ protocol DnsProxyConfigurationProviderProtocol {
      - Returns configuration that will be passed to DNS-lib
      */
     func getProxyConfig(_ systemDnsUpstreams: [DnsUpstream]) -> DnsProxyConfiguration
-  
+
     /// Just clears `upstreamById`
     func reset()
 }

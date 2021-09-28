@@ -53,7 +53,7 @@ protocol FiltersServiceProtocol: ResetableAsyncProtocol {
      - Parameter enabled: new group state
      */
     func setGroup(withId id: Int, enabled: Bool) throws
-  
+
     /**
      Enables or disables filter by **filter id** and **group id**
      - Parameter id: id of the filter that should be enabled/disabled

@@ -16,14 +16,14 @@ int loadOrSaveDb(sqlite3 *pInMemory, const char *zFilename, int isSave)
     if( rc==SQLITE_OK ){
 
         /* If this is a 'load' operation (isSave==0), then data is copied
-         ** from the database file just opened to database pInMemory. 
+         ** from the database file just opened to database pInMemory.
          ** Otherwise, if this is a 'save' operation (isSave==1), then data
          ** is copied from pInMemory to pFile.  Set the variables pFrom and
          ** pTo accordingly. */
         pFrom = (isSave ? pInMemory : pFile);
         pTo   = (isSave ? pFile     : pInMemory);
 
-        /* Set up the backup procedure to copy from the "main" database of 
+        /* Set up the backup procedure to copy from the "main" database of
          ** connection pFile to the main database of connection pInMemory.
          ** If something goes wrong, pBackup will be set to NULL and an error
          ** code and  message left in connection pTo.
@@ -56,14 +56,14 @@ int loadOrSaveDb(sqlite3 *pInMemory, const char *zFilename, int isSave)
 - (BOOL)readFromFile:(NSString*)filePath
 {
     // only attempt to load an on-disk representation for an in-memory database
-    if ( self->_databasePath != nil ) 
+    if ( self->_databasePath != nil )
     {
         NSLog(@"Database is not an in-memory representation." );
         return NO;
     }
 
     // and only if the database is open
-    if ( self->_db == nil ) 
+    if ( self->_db == nil )
     {
         NSLog(@"Invalid database connection." );
         return NO;
@@ -83,7 +83,7 @@ int loadOrSaveDb(sqlite3 *pInMemory, const char *zFilename, int isSave)
     }
 
     // and only if the database is open
-    if ( self->_db == nil ) 
+    if ( self->_db == nil )
     {
         NSLog(@"Invalid database connection." );
         return NO;

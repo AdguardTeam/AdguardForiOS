@@ -66,7 +66,7 @@ class DnsProvidersServiceTest: XCTestCase {
             expectation.fulfill()
         })
         wait(for: [expectation], timeout: 1.0)
-  
+
         let server = dnsProviders.customProviders[0].servers?.first
         XCTAssertEqual(server?.dnsProtocol, .dot)
     }

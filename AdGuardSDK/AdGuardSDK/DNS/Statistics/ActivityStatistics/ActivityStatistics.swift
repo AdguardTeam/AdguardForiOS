@@ -21,7 +21,7 @@
 public protocol ActivityStatisticsProtocol: ResetableSyncProtocol {
     /// Adds the `record` obtained from DNS-libs in the Tunnel to the DB
     func process(record: ActivityStatisticsRecord)
-  
+
     /**
      Returns list of `DomainsStatisticsRecord` objects for the specified `period`
      `DomainsStatisticsRecord` represents counters statistics for certain domain
@@ -30,7 +30,7 @@ public protocol ActivityStatisticsProtocol: ResetableSyncProtocol {
      In case `requests` are equal will sort by `domain`
      */
     func getDomains(for period: StatisticsPeriod) throws -> [DomainsStatisticsRecord]
-  
+
     /**
      Returns `CountersStatisticsRecord` object for the specified `period`
      `CountersStatisticsRecord` represents counters statistics

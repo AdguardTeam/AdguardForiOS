@@ -210,14 +210,14 @@ static void isolateQueueReleaseFunc(void *dQueue){
                             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
                                [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
-   
+ 
                                    *rollback = NO;
                                    if ([self updateDB:db fromVersion:dbVersion toVersion:defaultDBVersion])
                                        dispatch_async(dispatch_get_main_queue(), ^{
 
                                            self.ready = YES;
                                        });
-   
+ 
                                    else
                                        *rollback = YES;
                                }];

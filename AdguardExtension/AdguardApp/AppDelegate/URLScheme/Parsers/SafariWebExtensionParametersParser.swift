@@ -35,7 +35,7 @@ struct SafariWebExtensionParametersParser: IURLSchemeParametersParser {
             DDLogError("Failed to extract info from url=\(url.absoluteString)")
             return false
         }
-   
+ 
         let action = UserRulesRedirectAction.action(from: actionStr, domain: decodedDomain)
         return executor.openUserRulesRedirectController(for: action)
     }

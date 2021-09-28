@@ -120,7 +120,7 @@ final class NativeDnsSettingsManager: NativeDnsSettingsManagerProtocol {
 
     @available(iOS 14.0, *)
     func saveDnsConfig(_ onErrorReceived: @escaping (_ error: Error?) -> Void) {
-   
+ 
         let server = dnsProvidersManager.activeDnsServer
 
         loadDnsManager { [weak self] dnsManager in

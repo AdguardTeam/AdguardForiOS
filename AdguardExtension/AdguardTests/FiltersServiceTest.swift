@@ -108,7 +108,7 @@ class FiltersServiceTest: XCTestCase {
     }
 
     func testDisableFilter(){
-   
+ 
         let service = initService(groups: [(123, true)], filters: [("filter name 1", 321, 123, false), ("filter name 2", 456, 123, true)])
 
         XCTAssertTrue(service.groups[0].enabled)
@@ -208,7 +208,7 @@ class FiltersServiceTest: XCTestCase {
         filter.filterId = 2
         metadata.filters = [filter]
         requestSender.result = metadata
-  
+
         let fitlersService = FiltersService(antibannerController: antibannerController, configuration: configuration, contentBlocker: contentBlocker, resources: SharedResourcesMock(), httpRequestService: httpRequestService, filtersStorage: FiltersStorageMock())
 
         let expectation = XCTestExpectation()

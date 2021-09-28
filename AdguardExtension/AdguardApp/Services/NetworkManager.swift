@@ -25,7 +25,7 @@ extension INetworkManager {
                     let interfaceName = interface.ifa_name,
                     let interfaceNameFormatted = String(cString: interfaceName, encoding: .utf8)
                     else { continue }
-   
+ 
                 var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
                 getnameinfo(interface.ifa_addr, socklen_t(interface.ifa_addr.pointee.sa_len), &hostname, socklen_t(hostname.count), nil, socklen_t(0), NI_NUMERICHOST)
 

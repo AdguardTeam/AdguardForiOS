@@ -23,7 +23,7 @@ class MainNavigationController: UINavigationController {
     var currentSwipeRecognizer: UIPanGestureRecognizer?
 
     private lazy var theme: ThemeServiceProtocol =  { ServiceLocator.shared.getService()! }()
-   
+ 
     private let edgeSwipeGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
 
     override func viewDidLoad() {

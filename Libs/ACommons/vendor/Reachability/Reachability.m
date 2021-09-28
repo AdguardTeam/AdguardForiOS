@@ -141,7 +141,7 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 }
 
 +(Reachability *)reachabilityForInternetConnection 
-{   
+{ 
     struct sockaddr_in zeroAddress;
     bzero(&zeroAddress, sizeof(zeroAddress));
     zeroAddress.sin_len = sizeof(zeroAddress);
@@ -335,7 +335,7 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 
 -(BOOL)isReachable
 {
-    SCNetworkReachabilityFlags flags;  
+    SCNetworkReachabilityFlags flags;
 
     if(!SCNetworkReachabilityGetFlags(self.reachabilityRef, &flags))
         return NO;

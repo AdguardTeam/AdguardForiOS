@@ -79,7 +79,7 @@
 
             [request setHTTPMethod:@"POST"];
             [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-   
+ 
             [request setHTTPBody: [jsonString dataUsingEncoding:NSUTF8StringEncoding]];
         }
 
@@ -115,7 +115,7 @@
     static NSCharacterSet *queryCharset;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-   
+ 
         NSMutableCharacterSet *newSet = [NSMutableCharacterSet characterSetWithRange:NSMakeRange(0, 32)];
         [newSet addCharactersInRange:NSMakeRange(127, 1)];
         [newSet addCharactersInString:@" \"#%<>[\\]^`{|}/+=&"];
@@ -125,7 +125,7 @@
     NSMutableArray *parametersArray = [NSMutableArray arrayWithCapacity:parameters.count];
     [parameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
 
-        NSString *value = [[obj description] stringByAddingPercentEncodingWithAllowedCharacters:queryCharset];  
+        NSString *value = [[obj description] stringByAddingPercentEncodingWithAllowedCharacters:queryCharset];
         [parametersArray addObject:[NSString stringWithFormat:@"%@=%@", [key description], value]];
     }];
 

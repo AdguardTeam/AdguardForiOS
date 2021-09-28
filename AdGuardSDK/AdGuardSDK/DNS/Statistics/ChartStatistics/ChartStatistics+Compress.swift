@@ -110,7 +110,7 @@ extension ChartStatistics {
                          ChartStatisticsTable.elapsedSumm.sum])
                 .where(start...end ~= ChartStatisticsTable.timeStamp)
                 .order(ChartStatisticsTable.timeStamp)
-  
+
             // Getting compressed record for the interval
             let result = try statisticsDb.prepare(query.asSQL()).compactMap { ChartStatisticsRecord(dbRecord: $0) }
 

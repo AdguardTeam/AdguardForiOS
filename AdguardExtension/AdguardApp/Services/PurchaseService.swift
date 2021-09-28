@@ -55,7 +55,7 @@ protocol PurchaseServiceProtocol {
 
     /* request SKProducts. If SKProducts failed on start we must repeat this request  */
     func startProductRequest()
-   
+ 
     /**
      returns true if user has valid renewable subscription or valid adguard license
      */
@@ -355,7 +355,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         loginService.checkStatus { [weak self] (error) in
             _ = self?.processLoginResult(error)
         }
-    }   
+    } 
 
     func login(withLicenseKey key: String, completion: @escaping (Bool)->Void) {
         loginService.login(licenseKey: key){ [weak self] (error) in
