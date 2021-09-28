@@ -39,9 +39,9 @@ static DDLogLevel _captureLevel = DDLogLevelVerbose;
     if (!_cancel) {
         return;
     }
-    
+
     _cancel = NO;
-    
+
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
         [self captureAslLogs];
     });
@@ -63,12 +63,12 @@ static DDLogLevel _captureLevel = DDLogLevelVerbose;
 
 + (void)configureAslQuery:(aslmsg)query {
     const char param[] = "7";  // ASL_LEVEL_DEBUG, which is everything. We'll rely on regular DDlog log level to filter
-    
+
     asl_set_query(query, ASL_KEY_LEVEL, param, ASL_QUERY_OP_LESS_EQUAL | ASL_QUERY_OP_NUMERIC);
 
     // Don't retrieve logs from our own DDASLLogger
     asl_set_query(query, kDDASLKeyDDLog, kDDASLDDLogValue, ASL_QUERY_OP_NOT_EQUAL);
-    
+
 #if !TARGET_OS_IPHONE || (defined(TARGET_SIMULATOR) && TARGET_SIMULATOR)
     int processId = [[NSProcessInfo processInfo] processIdentifier];
     char pid[16];
@@ -124,7 +124,7 @@ static DDLogLevel _captureLevel = DDLogLevelVerbose;
                                                                 tag:nil
                                                             options:0
                                                           timestamp:timeStamp];
-    
+
     [DDLog log:async message:logMessage];
 }
 
@@ -176,7 +176,7 @@ static DDLogLevel _captureLevel = DDLogLevelVerbose;
                 // Iterate over new messages.
                 aslmsg msg;
                 aslresponse response = asl_search(NULL, query);
-                
+
                 while ((msg = asl_next(response)))
                 {
                     [self aslMessageReceived:msg];

@@ -22,7 +22,7 @@ extension RequestsFactory {
     static func loadFiltersMetadataConfig(version: String, id: String, cid: String, lang: String) -> RequestConfig<FiltersMetadataParser> {
         return RequestConfig<FiltersMetadataParser>(request: FiltersMetadataRequest(version: version, id: id, cid: cid, lang: lang), parser: FiltersMetadataParser())
     }
-    
+
     static func loadFiltersLocalizationsConfig() -> RequestConfig<FiltersLocalizationsParser> {
         return RequestConfig<FiltersLocalizationsParser>(request: FiltersLocalizationsRequest(), parser: FiltersLocalizationsParser())
     }

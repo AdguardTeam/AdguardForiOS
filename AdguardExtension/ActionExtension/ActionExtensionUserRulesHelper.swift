@@ -23,23 +23,23 @@ import SafariAdGuardSDK
 /// This object is a helper for `ActionExtensionTableController` to interact with user rules objects
 /// It is the key logic of the extension and it can be tested
 struct ActionExtensionUserRulesHelper {
-    
+
     private let domain: String
     private let safariProtection: SafariProtectionUserRulesProtocol & SafariProtectionContentBlockersProtocol
-    
+
     init(domain: String, safariProtection: SafariProtectionUserRulesProtocol & SafariProtectionContentBlockersProtocol) {
         self.domain = domain
         self.safariProtection = safariProtection
     }
-    
+
     func addDomainToAllowlist() -> (success: Bool, overlimit: Bool) {
         let isOverlimit = self.isOverlimit()
         if isOverlimit {
             return (false, isOverlimit)
         }
-        
+
         let rule = UserRule(ruleText: domain, isEnabled: true)
-        
+
         do {
             let group = DispatchGroup()
             group.enter()
@@ -53,7 +53,7 @@ struct ActionExtensionUserRulesHelper {
             return (false, isOverlimit)
         }
     }
-    
+
     func removeDomainFromAllowlist() -> Bool {
         do {
             let group = DispatchGroup()
@@ -68,15 +68,15 @@ struct ActionExtensionUserRulesHelper {
             return false
         }
     }
-    
+
     func addDomainToInvertedAllowlist() -> (success: Bool, overlimit: Bool) {
         let isOverlimit = self.isOverlimit()
         if isOverlimit {
             return (false, isOverlimit)
         }
-        
+
         let rule = UserRule(ruleText: domain, isEnabled: true)
-        
+
         do {
             let group = DispatchGroup()
             group.enter()
@@ -90,7 +90,7 @@ struct ActionExtensionUserRulesHelper {
             return (false, isOverlimit)
         }
     }
-    
+
     func removeDomainFromInvertedAllowlist() -> Bool {
         do {
             let group = DispatchGroup()
@@ -105,7 +105,7 @@ struct ActionExtensionUserRulesHelper {
             return false
         }
     }
-    
+
     /// There is a limit of available CB rules, for iOS 15 and later it is 150K and 50k for older ones
     /// User rules are placed in every CB, so if one CB is overlimited than we suppose that it is overlimited in general
     private func isOverlimit() -> Bool {

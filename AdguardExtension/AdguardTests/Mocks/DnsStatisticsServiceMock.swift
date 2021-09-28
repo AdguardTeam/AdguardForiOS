@@ -22,34 +22,34 @@ class DnsStatisticsServiceMock: DnsStatisticsServiceProtocol {
     func getAllCounters() -> DnsCounters? {
         return nil
     }
-    
+
     var minimumStatisticSaveTime: Double = 0.0
-    
+
     func writeRecord(_ record: DnsStatisticsRecord) {
-        
+
     }
-    
+
     func getAllRecords() -> [DnsStatisticsRecord] {
         return []
     }
-    
+
     func getRecords(by type: ChartDateType) -> [DnsStatisticsRecord] {
         return []
     }
-    
+
     func getRecordsCount() -> Int {
         return 0
     }
-    
+
     func deleteAllRecords() {
-        
+
     }
-    
+
     func stopDb() {
-        
+
     }
-    
+
     func startDb() {
-        
+
     }
 }

@@ -22,26 +22,26 @@ import SafariAdGuardSDK
 /// Safari filters web reporter wrapper
 struct WebReporterSafariFiltersWrapper: WebReporterWrapperProtocol {
     // MARK: - Private properties
-    
+
     private let safariProtection: SafariProtectionProtocol
-    
+
     // MARK: - Init
-    
+
     init(safariProtection: SafariProtectionProtocol) {
         self.safariProtection = safariProtection
     }
-    
+
     // MARK: - Public methods
-    
+
     func collectParams() -> [String : String] {
         var params: [String: String] = [:]
         let filterIds = collectPreparedFiltersIds()
         params["filters"] = filterIds
         return params
     }
-    
+
     // MARK: - Private methods
-    
+
     private func collectPreparedFiltersIds() -> String {
         return safariProtection.groups
             .filter { $0.isEnabled }

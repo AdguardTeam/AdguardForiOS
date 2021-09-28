@@ -33,29 +33,29 @@ protocol MainPageModelProtocol: AnyObject {
 /// Super old model, it should be removed
 /// Actually it was rewritten in Stories PR
 final class MainPageModel: MainPageModelProtocol {
-    
+
     weak var delegate: MainPageModelDelegate?
-    
+
     // MARK: - private members
-    
+
     private let safariProtection: SafariProtectionProtocol
     private let resources: AESharedResourcesProtocol
-    
+
     // MARK: - init
-    
+
     init(resource: AESharedResourcesProtocol, safariProtection: SafariProtectionProtocol) {
         self.resources = resource
         self.safariProtection = safariProtection
     }
-    
+
     // MARK: - public methods
-    
+
     /**
      updates filters. calls callback during updating process
      */
     func updateFilters() {
         delegate?.updateStarted()
-        
+
         var message: String?
         safariProtection.updateFiltersMetaAndLocalizations(true) { [weak delegate] result in
             switch result {

@@ -14,7 +14,7 @@
 /** Pool of `<FMDatabase>` objects.
 
  ### See also
- 
+
  - `<FMDatabaseQueue>`
  - `<FMDatabase>`
 
@@ -31,14 +31,14 @@
 
 @interface FMDatabasePool : NSObject {
     NSString            *_path;
-    
+
     dispatch_queue_t    _lockQueue;
-    
+
     NSMutableArray      *_databaseInPool;
     NSMutableArray      *_databaseOutPool;
-    
+
     __unsafe_unretained id _delegate;
-    
+
     NSUInteger          _maximumNumberOfDatabasesToCreate;
     int                 _openFlags;
 }
@@ -95,7 +95,7 @@
 ///------------------------------------------------
 
 /** Number of checked-in databases in pool
- 
+
  @returns Number of databases
  */
 

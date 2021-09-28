@@ -137,7 +137,7 @@ NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
 /////////////////////////////////////////////////////////////////////
 
 + (void)initialize{
-    
+
     if (self == [AESharedResources class]) {
     }
 }
@@ -158,41 +158,41 @@ NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
 
 
 - (NSURL *)sharedResuorcesURL{
-    
+
     return _containerFolderUrl;
 }
 
 - (NSURL *)sharedAppLogsURL{
-    
+
     NSString *ident = [[NSBundle bundleForClass:[self class]] bundleIdentifier];
-    
+
     NSURL *logsUrl = [self sharedLogsURL];
     if (ident) {
         logsUrl = [logsUrl URLByAppendingPathComponent:ident];
     }
-    
+
     return logsUrl;
 }
 
 - (NSURL *)sharedLogsURL{
-    
+
     return [_containerFolderUrl URLByAppendingPathComponent:@"Logs"];
 }
 
 - (void)reset {
-    
+
     for (NSString* key in _sharedUserDefaults.dictionaryRepresentation.allKeys) {
         [_sharedUserDefaults removeObjectForKey:key];
     }
     [_sharedUserDefaults synchronize];
-    
+
     // remove all files in shared directory
-    
+
     NSFileManager *fm = [NSFileManager defaultManager];
-    
+
     NSError *error = nil;
     for (NSString *file in [fm contentsOfDirectoryAtPath:_containerFolderUrl.path error:&error]) {
-        
+
         if ([file contains:@".db"]) continue;
         BOOL success = [fm removeItemAtPath:[NSString stringWithFormat:@"%@/%@", _containerFolderUrl.path, file] error:&error];
         if (!success || error) {
@@ -201,12 +201,12 @@ NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
 }
 
 - (NSUserDefaults *)sharedDefaults{
-    
+
     return _sharedUserDefaults;
 }
 
 - (void)synchronizeSharedDefaults{
-    
+
     [_sharedUserDefaults synchronize];
 }
 
@@ -233,28 +233,28 @@ NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
 
 
 - (NSData *)loadDataFromFileRelativePath:(NSString *)relativePath{
-    
+
     if (!relativePath) {
          [[NSException argumentException:@"relativePath"] raise];
     }
-    
+
     @autoreleasepool {
         if (_containerFolderUrl) {
-            
+
             NSURL *dataUrl = [_containerFolderUrl URLByAppendingPathComponent:relativePath];
             if (dataUrl) {
                 ACLFileLocker *locker = [[ACLFileLocker alloc] initWithPath:[dataUrl path]];
                 if ([locker waitLock]) {
-                    
+
                     NSData *data = [NSData dataWithContentsOfURL:dataUrl];
-                    
+
                     [locker unlock];
-                    
+
                     return data;
                 }
             }
         }
-        
+
         return nil;
     }
 }
@@ -264,32 +264,32 @@ NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
     if (!(data && relativePath)) {
         [[NSException argumentException:@"data/relativePath"] raise];
     }
-    
+
     @autoreleasepool {
         if (_containerFolderUrl) {
-            
+
             NSURL *dataUrl = [_containerFolderUrl URLByAppendingPathComponent:relativePath];
             if (dataUrl) {
                 ACLFileLocker *locker = [[ACLFileLocker alloc] initWithPath:[dataUrl path]];
                 if ([locker lock]) {
-                    
+
                     BOOL result = [data writeToURL:dataUrl atomically:YES];
-                    
+
                     [locker unlock];
-                    
+
                     return result;
                 }
             }
         }
-        
+
         return NO;;
     }
 }
 
 - (NSString*) pathForRelativePath:(NSString*) relativePath {
-    
+
     NSURL *dataUrl = [_containerFolderUrl URLByAppendingPathComponent:relativePath];
-    
+
     return dataUrl.path;
 }
 

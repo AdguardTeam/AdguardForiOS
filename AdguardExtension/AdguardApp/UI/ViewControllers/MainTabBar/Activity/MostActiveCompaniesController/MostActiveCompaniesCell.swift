@@ -21,19 +21,19 @@ import UIKit
 class MostActiveCompaniesCell: UITableViewCell {
     @IBOutlet weak var companyLabel: ThemableLabel!
     @IBOutlet weak var requestsNumberLabel: ThemableLabel!
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
         let fontSize = companyLabel.font.pointSize
         companyLabel.font = UIFont.systemFont(ofSize: fontSize, weight: .medium)
     }
-    
+
     var theme: ThemeServiceProtocol? {
         didSet{
             updateTheme()
         }
     }
-    
+
     private func updateTheme(){
         theme?.setupTableCell(self)
         theme?.setupLabel(companyLabel)

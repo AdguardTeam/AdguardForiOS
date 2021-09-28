@@ -20,30 +20,30 @@ import Foundation
 
 class NativeProvidersServiceMock: NativeProvidersServiceProtocol {
     var delegate: NativeProvidersServiceDelegate?
-    
+
     var managerIsEnabled: Bool = false
-    
+
     var currentServer: DnsServerInfo?
-    
+
     var serverName: String = ""
-    
+
     var currentProvider: DnsProviderInfo?
-    
+
     var providers: [DnsProviderInfo] = []
-    
+
     func saveDnsManager(_ onErrorReceived: @escaping (Error?) -> ()) {
         onErrorReceived(nil)
     }
-    
+
     func removeDnsManager(_ onErrorReceived: @escaping (Error?) -> ()) {
         onErrorReceived(nil)
     }
-    
+
     func reinitializeProviders() {
-        
+
     }
-    
+
     func reset() {
-        
+
     }
 }

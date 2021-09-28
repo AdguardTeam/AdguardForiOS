@@ -21,22 +21,22 @@ import Foundation
 class FiltersServiceMock: FiltersServiceProtocol {
     var updateNotification: Notification.Name = Notification.Name("updateNotification")
     var updateStarted = false
-    
+
     var groups: [Group] = []
-    
+
     var activeFiltersCount: Int {
         return 0
     }
-    
+
     func setGroup(_ groupId: Int, enabled: Bool) {
     }
-    
+
     func setFilter(_ filter: Filter, enabled: Bool) {
         let filter = groups.flatMap { $0.filters }
             .first { $0.filterId == filter.filterId }
         filter?.enabled = enabled
     }
-    
+
     func disableAllFilters() {
         for group in groups {
             for filter in group.filters {
@@ -44,38 +44,38 @@ class FiltersServiceMock: FiltersServiceProtocol {
             }
         }
     }
-    
+
     func addCustomFilter(_ filter: AASCustomFilterParserResult) {
         var group = groups.first { $0.groupId == AdGuardFilterGroup.custom.rawValue }
         if group == nil {
             group = Group(AdGuardFilterGroup.custom.rawValue)
             groups.append(group!)
         }
-        
+
         let filterObj = Filter(filterId: 0, groupId: AdGuardFilterGroup.custom.rawValue)
         filterObj.name = filter.meta.name
         filterObj.enabled = true
         group!.filters.append(filterObj)
     }
-    
+
     func deleteCustomFilter(_ filter: Filter) {
     }
-    
+
     func load(refresh: Bool, _ completion: @escaping () -> Void) {
         updateStarted = true
     }
-    
+
     func reset() {
     }
-    
+
     func updateGroups() {
     }
-    
+
     func getGroup(_ groupId: Int) -> Group? {
         return nil
     }
-    
+
     func renameCustomFilter(_ filterId: Int, _ newName: String) {
     }
-    
+
 }

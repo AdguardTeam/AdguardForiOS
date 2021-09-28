@@ -20,58 +20,58 @@ import Foundation
 import Setapp
 
 class PurchaseServiceMock: PurchaseServiceProtocol {
-    
+
     var purchasedThroughSetapp: Bool = false
-    
+
     func updateSetappState(subscription: SetappSubscription) {
     }
-    
+
     var activateLicesnseCalled = false
-    
+
     func start() {
     }
-    
+
     func startProductRequest() {
     }
-    
+
     var isProPurchased: Bool = false
-    
+
     var purchasedThroughLogin: Bool = false
-    
+
     func checkPremiumStatusChanged() {
     }
-    
+
     var standardProduct: Product?
-    
+
     var products: [Product] = []
-    
+
     func login(withAccessToken token: String?, state: String?) {
     }
-    
+
     func login(withLicenseKey key: String, completion: @escaping (Bool) -> Void) {
         activateLicesnseCalled = true
         completion(true)
     }
-    
+
     func login(name: String, password: String, code2fa: String?) {
     }
-    
+
     func checkLicenseStatus() {
     }
-    
+
     func logout() -> Bool {
         return true
     }
-    
+
     func requestPurchase(productId: String) {
     }
-    
+
     func requestRestore() {
     }
-    
+
     func reset(completion: @escaping () -> Void) {
     }
-    
+
     func generateAuthURL(state: String, socialProvider: SocialProvider) -> URL? {
         return nil
     }

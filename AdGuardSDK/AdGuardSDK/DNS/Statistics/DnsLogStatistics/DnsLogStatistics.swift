@@ -22,7 +22,7 @@
 public protocol DnsLogStatisticsProtocol: ResetableSyncProtocol {
     /// Saves passed `event` to DB
     func process(event: DnsRequestProcessedEvent)
-    
+
     /// Returns all log records saved in DB
     func getDnsLogRecords() throws -> [DnsRequestProcessedEvent]
 }
@@ -30,23 +30,23 @@ public protocol DnsLogStatisticsProtocol: ResetableSyncProtocol {
 /// This object is responsible for saving and getting statistics about DNS requests and responses
 /// It stores the last 1500 objects of log, if it is overflowed that it will purge the oldest 500 records
 final public class DnsLogStatistics: DnsLogStatisticsProtocol {
-    
+
     // MARK: - Private properties
-    
+
     private let statisticsDb: Connection
-        
+
     public init(statisticsDbContainerUrl: URL) throws {
         // Create directory if doesn't exist
         try FileManager.default.createDirectory(at: statisticsDbContainerUrl, withIntermediateDirectories: true, attributes: [:])
-        
+
         let dbName = Constants.Statistics.StatisticsType.dnsLog.dbFileName
         statisticsDb = try Connection(statisticsDbContainerUrl.appendingPathComponent(dbName).path)
         dateFormatter.dateFormat = Constants.Statistics.dbDateFormat
         try createTableIfNotExists()
     }
-    
+
     // MARK: - Public methods
-    
+
     /// Tries to save `event` to `DNS_log_statistics.db`
     public func process(event: DnsRequestProcessedEvent) {
         do {
@@ -56,7 +56,7 @@ final public class DnsLogStatistics: DnsLogStatisticsProtocol {
             Logger.logError("(DnsLogStatistics) - processEvent; Error adding event to DB; Error: \(error)")
         }
     }
-    
+
     /// Returns all available records from `DNS_log_statistics.db`
     public func getDnsLogRecords() throws -> [DnsRequestProcessedEvent] {
         Logger.logInfo("(DnsLogStatistics) - getDnsLogRecords called")
@@ -71,15 +71,15 @@ final public class DnsLogStatistics: DnsLogStatisticsProtocol {
     /// Removes all records from `DNS_log_statistics.db`
     public func reset() throws {
         Logger.logInfo("(DnsLogStatistics) - reset called")
-        
+
         let resetQuery = DnsLogTable.table.delete()
         try statisticsDb.run(resetQuery)
-        
+
         Logger.logInfo("(DnsLogStatistics) - reset successfully finished")
     }
-    
+
     // MARK: - Private methods
-    
+
     /// Creates `DNS_log_table` in statistics DB if it doesn't exist
     private func createTableIfNotExists() throws {
         let query = DnsLogTable.table.create(temporary: false, ifNotExists: true) { builder in
@@ -98,7 +98,7 @@ final public class DnsLogStatistics: DnsLogStatisticsProtocol {
         }
         try statisticsDb.run(query)
     }
-    
+
     /// Removes last 500 records if records number exceeds 1500 records
     private func purgeDnsLogIfNeeded() throws {
         let maxRecordsCount = 1500
@@ -106,19 +106,19 @@ final public class DnsLogStatistics: DnsLogStatisticsProtocol {
         guard recordsCount >= maxRecordsCount else {
             return
         }
-        
+
         let recordsToRemoveCount = 500
         try removeLast(recordsToRemoveCount)
-        
+
         Logger.logInfo("(DnsLogStatistics) - purgeDnsLogIfNeeded; Last \(recordsToRemoveCount) records were purged")
     }
-    
+
     /// Removes `n` last rows from the table
     private func removeLast(_ n: Int) throws {
         let removeQuery = DnsLogTable.table.order(DnsLogTable.startDate).limit(n)
         try statisticsDb.run(removeQuery.delete())
     }
-    
+
     /// Adds `record` to `DNS_log_table`
     private func add(record: DnsRequestProcessedEvent) throws {
         let setters: [Setter] = [DnsLogTable.domain <- record.domain,

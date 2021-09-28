@@ -1,17 +1,17 @@
 /**
        This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
        Copyright © Adguard Software Limited. All rights reserved.
- 
+
        Adguard for iOS is free software: you can redistribute it and/or modify
        it under the terms of the GNU General Public License as published by
        the Free Software Foundation, either version 3 of the License, or
        (at your option) any later version.
- 
+
        Adguard for iOS is distributed in the hope that it will be useful,
        but WITHOUT ANY WARRANTY; without even the implied warranty of
        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
        GNU General Public License for more details.
- 
+
        You should have received a copy of the GNU General Public License
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -22,69 +22,69 @@ import SafariAdGuardSDK
 final class SafariGroupTableController: UITableViewController {
 
     // MARK: - UI Elements
-    
+
     @IBOutlet var searchButton: UIBarButtonItem!
-    
+
     // MARK: - Private properties
-    
+
     private let licenseSegueId = "licenseSegueId"
     private let groupSegueId = "groupSegueId"
-    
+
     private var selectedDisplayType = SafariGroupFiltersTableController.DisplayType.one(groupType: .ads)
-    
+
     private let titleSection = 0
     private let groupsSection = 1
-    
+
     /* Services */
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let model: SafariGroupsModel
-    
+
     // MARK: - Initializer
-    
+
     required init?(coder: NSCoder) {
         self.model = SafariGroupsModel(safariProtection: safariProtection, configuration: configuration)
         super.init(coder: coder)
     }
-    
+
     // MARK: - Actions
-    
+
     @IBAction func searchButtonTapped(_ sender: Any) {
         selectedDisplayType = .all
         performSegue(withIdentifier: groupSegueId, sender: self)
     }
-    
+
     // MARK: - UITableViewController lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.rightBarButtonItems = [searchButton]
         model.delegate = self
-        
+
         setupTableView()
         updateTheme()
         setupBackButton()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         model.updateModels()
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let destinationVC = segue.destination as? SafariGroupFiltersTableController, segue.identifier == groupSegueId else {
             return
         }
         destinationVC.displayType = selectedDisplayType
     }
-    
+
     // MARK: - Private methods
-    
+
     private func setupTableView() {
         TitleTableViewCell.registerNibCell(forTableView: tableView)
         SafariProtectionGroupCell.registerNibCell(forTableView: tableView)
-        
+
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -111,23 +111,23 @@ extension SafariGroupTableController {
 // MARK: - Table view data source
 
 extension SafariGroupTableController {
-    
+
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return UIView()
     }
-    
+
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.01
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
     }
-    
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -139,7 +139,7 @@ extension SafariGroupTableController {
             return model.groups.count
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == titleSection {
             let cell = TitleTableViewCell.getCell(forTableView: tableView)
@@ -159,11 +159,11 @@ extension SafariGroupTableController {
 // MARK: - SafariGroupTableController + SafariGroupsModelDelegate
 
 extension SafariGroupTableController: SafariGroupsModelDelegate {
-    
+
     func modelChanged(_ rowToChange: Int) {
         tableView.reloadRows(at: [IndexPath(row: rowToChange, section: groupsSection)], with: .automatic)
     }
-    
+
     func modelsChanged() {
         tableView.reloadData()
     }

@@ -24,34 +24,34 @@ class RateAppController: BottomAlertController {
     @IBOutlet weak var descriptionLabel: ThemableLabel!
     @IBOutlet weak var rateAppButton: UIButton!
     @IBOutlet weak var haveAProblemButton: UIButton!
-    
+
     @IBOutlet var themableLabels: [ThemableLabel]!
-    
+
     // Services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         descriptionLabel.text = String.localizedString("rate_app_description")
-        
+
         rateAppButton.makeTitleTextCapitalized()
         rateAppButton.applyStandardGreenStyle()
-        
+
         haveAProblemButton.makeTitleTextCapitalized()
         haveAProblemButton.applyStandardOpaqueStyle()
-        
+
         updateTheme()
     }
-    
+
     // MARK: - Actions
-    
+
     @IBAction func rateAppTapped(_ sender: UIButton) {
         dismiss(animated: true) {
             UIApplication.shared.openAppStoreToRateApp()
         }
     }
-    
+
     @IBAction func haveAProblemTapped(_ sender: UIButton) {
         dismiss(animated: true) {
             AppDelegate.shared.presentRateAppProblemController()

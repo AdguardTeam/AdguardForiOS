@@ -22,7 +22,7 @@ class DnsLogRecordsServiceTest: XCTestCase {
 
     var service: DnsLogRecordsService!
     var resources = SharedResourcesMock()
-    
+
     override func setUp() {
         resources.reset()
         service = DnsLogRecordsService(resources: resources)
@@ -30,19 +30,19 @@ class DnsLogRecordsServiceTest: XCTestCase {
 
     override func tearDown() {
     }
-    
+
     func testAddRecord() {
         let recordToSave = DnsLogRecord(domain: "domain", date: Date(), elapsed: 100, type: "type", answer: "answer", server: "server", upstreamAddr: "upstream", bytesSent: 100, bytesReceived: 100, status: .processed, userStatus: .none, blockRules: nil, matchedFilterIds: nil, originalAnswer: "", answerStatus: "NOERROR")
         service.writeRecords([recordToSave])
-        
+
         let records = service.readRecords()
         XCTAssertEqual(records.count, 1)
-        
+
         guard let record = records.first else {
             XCTFail()
             return
         }
-        
+
         XCTAssertEqual(record.domain, recordToSave.domain)
         XCTAssertEqual(record.date, recordToSave.date)
         XCTAssertEqual(record.elapsed, recordToSave.elapsed)
@@ -56,12 +56,12 @@ class DnsLogRecordsServiceTest: XCTestCase {
         XCTAssertEqual(record.userStatus, recordToSave.userStatus)
         XCTAssertEqual(record.blockRules, recordToSave.blockRules)
     }
-    
+
     func testClearLog() {
-        
+
         testAddRecord()
         service.clearLog()
-        
+
         let records = service.readRecords()
         XCTAssertEqual(records.count, 0)
     }

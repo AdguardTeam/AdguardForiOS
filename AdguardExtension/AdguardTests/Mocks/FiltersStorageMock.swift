@@ -19,24 +19,24 @@
 import Foundation
 
 class FiltersStorageMock: FiltersStorageProtocol {
-    
+
     var filters: [Int: String]?
-    
+
     func updateFilter(identifier: Int, completion: @escaping (Error?) -> Void) {
-            
+
     }
-    
+
     func updateCustomFilter(identifier: Int, subscriptionUrl: URL, completion: @escaping (Error?) -> Void) {
-        
+
     }
-    
+
     func getFilters(identifiers: [Int]) -> [Int : String] {
         return filters ?? [:]
     }
-    
+
     func saveFilter(identifier: Int, content: String) -> Error? {
         return nil
     }
-    
-    
+
+
 }

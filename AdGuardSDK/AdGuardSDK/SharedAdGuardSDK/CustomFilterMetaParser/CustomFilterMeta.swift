@@ -40,7 +40,7 @@ public struct CustomFilterMeta: ExtendedCustomFilterMetaProtocol {
     public let communityPage: String? // key: 'Community'
     public let filterDownloadPage: String? // key: 'Download'
     public let rulesCount: Int
-    
+
     public init(name: String?, description: String?, version: String?, lastUpdateDate: Date?, updateFrequency: Int?, homePage: String?, licensePage: String?, issuesReportPage: String?, communityPage: String?, filterDownloadPage: String?, rulesCount: Int) {
         self.name = name
         self.description = description

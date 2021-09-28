@@ -27,28 +27,28 @@ class ChooseDnsImplementationController: BottomAlertController {
 
     @IBOutlet weak var adGuardButton: UIButton!
     @IBOutlet weak var nativeButton: UIButton!
-    
+
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var separator: UIView!
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var popupButtons: [RoundRectButton]!
-    
+
     weak var delegate: ChooseDnsImplementationControllerDelegate?
-    
+
     // MARK: - services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let nativeDnsManager: NativeDnsSettingsManagerProtocol = ServiceLocator.shared.getService()!
     private let dnsProtection: DnsProtectionProtocol = ServiceLocator.shared.getService()!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         processCurrentImplementation()
         updateTheme()
     }
-    
+
     // MARK: - Private methods
-    
+
     @IBAction func adGuardSelected(_ sender: UIButton) {
         resources.dnsImplementation = .adGuard
         delegate?.currentImplementationChanged()
@@ -59,7 +59,7 @@ class ChooseDnsImplementationController: BottomAlertController {
         dnsProtection.update(dnsImplementation: .adGuard)
         dismiss(animated: true)
     }
-    
+
     @IBAction func nativeSelected(_ sender: UIButton) {
         resources.dnsImplementation = .native
         delegate?.currentImplementationChanged()
@@ -67,12 +67,12 @@ class ChooseDnsImplementationController: BottomAlertController {
         dnsProtection.update(dnsImplementation: .native)
         dismiss(animated: true)
     }
-    
+
     // MARK: - Private methods
-    
+
     private func processCurrentImplementation() {
         let implementation = resources.dnsImplementation
-        
+
         adGuardButton.isSelected = implementation == .adGuard
         nativeButton.isSelected = implementation == .native
     }

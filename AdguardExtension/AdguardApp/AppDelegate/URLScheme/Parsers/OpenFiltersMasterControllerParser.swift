@@ -18,13 +18,13 @@
  */
 
 struct OpenFiltersMasterControllerParser: IURLSchemeParametersParser {
-    
+
     private let executor: IURLSchemeExecutor
-    
+
     init(executor: IURLSchemeExecutor) {
         self.executor = executor
     }
-    
+
     func parse(_ url: URL) -> Bool {
         guard let params = url.parseUrl().params else { return false }
         guard let locationUrl = params["location"]?.removingPercentEncoding, !locationUrl.isEmpty else { return false }

@@ -20,7 +20,7 @@ struct FeedBack: FeedBackProtocol {
     let applicationState: String?
     let appName: String = "adguard_ios"
     let debugInfo: String?
-    
+
     init(applicationId: String?, version: String?, email: String?, language: String?, subject: String?, description: String?, applicationState: String?, debugInfo: String) {
         self.applicationId = applicationId
         self.version = version
@@ -36,7 +36,7 @@ struct FeedBack: FeedBackProtocol {
 enum ReportType {
     case bugReport
     case feedback
-    
+
     // email subject
     var subject: String {
         let appName = Bundle.main.applicationName

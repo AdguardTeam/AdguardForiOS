@@ -22,7 +22,7 @@
 struct DnsLogTable: Equatable {
     // Table name
     static let table = Table(Constants.Statistics.StatisticsType.dnsLog.tableName)
-    
+
     // Columns names
     static let domain = Expression<String>("domain")
     static let startDate = Expression<Date>("start_date")

@@ -22,7 +22,7 @@ final class DnsProvidersManagerMock: DnsProvidersManagerProtocol {
         invokedCustomProvidersGetterCount += 1
         return stubbedCustomProviders
     }
-    
+
     var invokedActiveDnsProviderGetterCount = 0
     var stubbedActiveDnsProvider: DnsProviderMetaProtocol!
     var activeDnsProvider: DnsProviderMetaProtocol {

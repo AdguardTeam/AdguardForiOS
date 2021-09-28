@@ -17,16 +17,16 @@
 @class FMStatement;
 
 /** Represents the results of executing a query on an `<FMDatabase>`.
- 
+
  ### See also
- 
+
  - `<FMDatabase>`
  */
 
 @interface FMResultSet : NSObject {
     FMDatabase          *_parentDB;
     FMStatement         *_statement;
-    
+
     NSString            *_query;
     NSMutableDictionary *_columnNameToIndexMap;
 }
@@ -52,11 +52,11 @@
 ///------------------------------------
 
 /** Create result set from `<FMStatement>`
- 
+
  @param statement A `<FMStatement>` to be performed
- 
+
  @param aDB A `<FMDatabase>` to be used
- 
+
  @return A `FMResultSet` on success; `nil` on failure
  */
 
@@ -73,11 +73,11 @@
 ///---------------------------------------
 
 /** Retrieve next row for result set.
- 
+
  You must always invoke `next` before attempting to access the values returned in a query, even if you're only expecting one.
 
  @return `YES` if row successfully retrieved; `NO` if end of result set reached
- 
+
  @see hasAnotherRow
  */
 
@@ -86,9 +86,9 @@
 /** Did the last call to `<next>` succeed in retrieving another row?
 
  @return `YES` if the last call to `<next>` succeeded in retrieving another record; `NO` if not.
- 
+
  @see next
- 
+
  @warning The `hasAnotherRow` method must follow a call to `<next>`. If the previous database interaction was something other than a call to `next`, then this method may return `NO`, whether there is another row of data or not.
  */
 
@@ -99,7 +99,7 @@
 ///---------------------------------------------
 
 /** How many columns in result set
- 
+
  @return Integer value of the number of columns.
  */
 
@@ -218,7 +218,7 @@
  @param columnName `NSString` value of the name of the column.
 
  @return `double` value of the result set's column.
- 
+
  */
 
 - (double)doubleForColumn:(NSString*)columnName;
@@ -228,7 +228,7 @@
  @param columnIdx Zero-based index for column.
 
  @return `double` value of the result set's column.
- 
+
  */
 
 - (double)doubleForColumnIndex:(int)columnIdx;
@@ -238,7 +238,7 @@
  @param columnName `NSString` value of the name of the column.
 
  @return `NSString` value of the result set's column.
- 
+
  */
 
 - (NSString*)stringForColumn:(NSString*)columnName;
@@ -266,19 +266,19 @@
  @param columnIdx Zero-based index for column.
 
  @return `NSDate` value of the result set's column.
- 
+
  */
 
 - (NSDate*)dateForColumnIndex:(int)columnIdx;
 
 /** Result set `NSData` value for column.
- 
+
  This is useful when storing binary data in table (such as image or the like).
 
  @param columnName `NSString` value of the name of the column.
 
  @return `NSData` value of the result set's column.
- 
+
  */
 
 - (NSData*)dataForColumn:(NSString*)columnName;
@@ -333,17 +333,17 @@
 - (id)objectForColumnIndex:(int)columnIdx;
 
 /** Result set object for column.
- 
+
  This method allows the use of the "boxed" syntax supported in Modern Objective-C. For example, by defining this method, the following syntax is now supported:
- 
+
     id result = rs[@"employee_name"];
- 
+
  This simplified syntax is equivalent to calling:
- 
+
     id result = [rs objectForKeyedSubscript:@"employee_name"];
- 
+
  which is, it turns out, equivalent to calling:
- 
+
     id result = [rs objectForColumnName:@"employee_name"];
 
  @param columnName `NSString` value of the name of the column.
@@ -383,7 +383,7 @@
  @warning If you are going to use this data after you iterate over the next row, or after you close the
 result set, make sure to make a copy of the data first (or just use `<dataForColumn:>`/`<dataForColumnIndex:>`)
 If you don't, you're going to be in a world of hurt when you try and use the data.
- 
+
  */
 
 - (NSData*)dataNoCopyForColumn:(NSString*)columnName NS_RETURNS_NOT_RETAINED;
@@ -403,7 +403,7 @@ If you don't, you're going to be in a world of hurt when you try and use the dat
 - (NSData*)dataNoCopyForColumnIndex:(int)columnIdx NS_RETURNS_NOT_RETAINED;
 
 /** Is the column `NULL`?
- 
+
  @param columnIdx Zero-based index for column.
 
  @return `YES` if column is `NULL`; `NO` if not `NULL`.
@@ -421,20 +421,20 @@ If you don't, you're going to be in a world of hurt when you try and use the dat
 - (BOOL)columnIsNull:(NSString*)columnName;
 
 
-/** Returns a dictionary of the row results mapped to case sensitive keys of the column names. 
- 
+/** Returns a dictionary of the row results mapped to case sensitive keys of the column names.
+
  @returns `NSDictionary` of the row results.
- 
+
  @warning The keys to the dictionary are case sensitive of the column names.
  */
 
 - (NSDictionary*)resultDictionary;
- 
+
 /** Returns a dictionary of the row results
- 
+
  @see resultDictionary
- 
- @warning **Deprecated**: Please use `<resultDictionary>` instead.  Also, beware that `<resultDictionary>` is case sensitive! 
+
+ @warning **Deprecated**: Please use `<resultDictionary>` instead.  Also, beware that `<resultDictionary>` is case sensitive!
  */
 
 - (NSDictionary*)resultDict  __attribute__ ((deprecated));
@@ -444,13 +444,13 @@ If you don't, you're going to be in a world of hurt when you try and use the dat
 ///-----------------------------
 
 /** Performs `setValue` to yield support for key value observing.
- 
+
  @param object The object for which the values will be set. This is the key-value-coding compliant object that you might, for example, observe.
 
  */
 
 - (void)kvcMagic:(id)object;
 
- 
+
 @end
 

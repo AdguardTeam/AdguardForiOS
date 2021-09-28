@@ -78,7 +78,7 @@ typedef NS_ENUM(NSInteger, MGSwipeEasingFunction) {
 @property (nonatomic, assign) MGSwipeTransition transition;
 /** Size proportional threshold to hide/keep the buttons when the user ends swiping. Default value 0.5 */
 @property (nonatomic, assign) CGFloat threshold;
-/** Optional offset to change the swipe buttons position. Relative to the cell border position. Default value: 0 
+/** Optional offset to change the swipe buttons position. Relative to the cell border position. Default value: 0
  ** For example it can be used to avoid cropped buttons when sectionIndexTitlesForTableView is used in the UITableView
  **/
 @property (nonatomic, assign) CGFloat offset;
@@ -135,7 +135,7 @@ typedef NS_ENUM(NSInteger, MGSwipeEasingFunction) {
 /** Animation settings when the expansion is triggered **/
 @property (nonatomic, strong, nonnull) MGSwipeAnimation * triggerAnimation;
 
-/** Property to read or change expansion animation durations. Default value 0.2 
+/** Property to read or change expansion animation durations. Default value 0.2
  * The target animation is the change of a button from normal state to expanded state
  */
 @property (nonatomic, assign) CGFloat animationDuration;
@@ -145,7 +145,7 @@ typedef NS_ENUM(NSInteger, MGSwipeEasingFunction) {
 /** helper forward declaration */
 @class MGSwipeTableCell;
 
-/** 
+/**
  * Optional delegate to configure swipe buttons or to receive triggered actions.
  * Buttons can be configured inline when the cell is created instead of using this delegate,
  * but using the delegate improves memory usage because buttons are only created in demand
@@ -218,7 +218,7 @@ typedef NS_ENUM(NSInteger, MGSwipeEasingFunction) {
 /** optional to use contentView alternative. Use this property instead of contentView to support animated views while swiping */
 @property (nonatomic, strong, readonly, nonnull) UIView * swipeContentView;
 
-/** 
+/**
  * Left and right swipe buttons and its settings.
  * Buttons can be any kind of UIView but it's recommended to use the convenience MGSwipeButton class
  */

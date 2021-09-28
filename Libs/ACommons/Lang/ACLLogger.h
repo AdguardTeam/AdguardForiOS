@@ -27,11 +27,11 @@
 
 // Set this log level for application.
 typedef enum{
-    
+
     ACLLDefaultLevel = DDLogLevelInfo,
     ACLLDebugLevel = DDLogLevelDebug,
     ACLLVerboseLevel = DDLogLevelVerbose
-    
+
 } ACLLogLevelType;
 
 //---------------------------------------------------
@@ -55,7 +55,7 @@ extern int ddLogLevel;
     Global logger class, which have one singleton object.
  */
 @interface ACLLogger : NSObject{
-    
+
     BOOL _initialized;
 }
 
@@ -83,7 +83,7 @@ extern int ddLogLevel;
 /**
  Initializing of logger.
  This method must be called before writing to log file.
- 
+
  @param appName Directory name where logger will be write logs.
  If nil then will be used default value, that is name of process.
  */

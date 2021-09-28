@@ -23,10 +23,10 @@ class HttpRequestServiceMock: HttpRequestServiceProtocol {
 }
 
 class RequestSenderMock: RequestSenderProtocol {
-    
+
     var result: Any?
     var sendCalled = false
-    
+
     func send<Parser>(requestConfig: RequestConfig<Parser>, completionHandler: @escaping (Result<Parser.Model>) -> Void) where Parser : ParserProtocol {
         DispatchQueue(label: "").async { [unowned self] in
             self.sendCalled = true

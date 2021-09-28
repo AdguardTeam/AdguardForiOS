@@ -47,7 +47,7 @@ final class OnboardingController: UIViewController {
     @IBOutlet weak var watchManualButtonIpad: UIButton!
     @IBOutlet var themableLabels: [ThemableLabel]!
 
-    // MARK: - ViewController livecycle
+    // MARK: - ViewController lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,7 +86,7 @@ final class OnboardingController: UIViewController {
     @IBAction func closeAction(_ sender: Any) {
         // We mustn't show License screen for japannese in onboarding
         let isJapanesse = Locale.current.languageCode == "ja"
-        
+
         if needsShowingPremium == true && !configuration.proStatus && !isJapanesse{
             performSegue(withIdentifier: self.showLicenseSegue, sender: self)
         } else {
@@ -105,7 +105,7 @@ final class OnboardingController: UIViewController {
     private func setupLabels() {
         DispatchQueue.asyncSafeMain { [weak self] in
             guard let self = self else { return }
-            
+
             let settingsLabelText: String
             let safariLabelText: String
             switch self.onboardingContentView.onboardingType {
@@ -130,7 +130,7 @@ final class OnboardingController: UIViewController {
     private func observeContentBlockersState(){
         // We mustn't show License screen for japannese in onboarding
         let isJapanesse = Locale.current.languageCode == "ja"
-        
+
         if needsShowingPremium == true && configuration.someContentBlockersEnabled && !configuration.proStatus {
             DispatchQueue.main.async {[weak self] in
                 guard let self = self else { return }

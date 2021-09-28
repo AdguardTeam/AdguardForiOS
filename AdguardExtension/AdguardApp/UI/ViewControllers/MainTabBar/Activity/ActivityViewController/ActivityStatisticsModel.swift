@@ -25,7 +25,7 @@ class CompanyRequestsRecord {
     let key: String
     var requests: Int
     var encrypted: Int
-    
+
     init(company: String?, key: String, requests: Int, encrypted: Int) {
         self.company = company
         self.key = key
@@ -40,36 +40,36 @@ struct CompaniesInfo {
 }
 
 protocol ActivityStatisticsModelProtocol: AnyObject {
-    
+
     var period: StatisticsPeriod { get set }
     var counters: CountersStatisticsRecord { get }
-    
+
     func getCompanies(for type: ChartDateType, _ completion: @escaping (_ info: CompaniesInfo)->())
 }
 
 class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
-    
+
     private let dnsTrackersService: DnsTrackerServiceProtocol
     private let domainsParserService: DomainsParserServiceProtocol
     private let activityStatistics: ActivityStatisticsProtocol
-    
+
     private let workingQueue = DispatchQueue(label: "ActivityStatisticsModel queue", qos: .userInitiated)
-    
+
     var period: StatisticsPeriod = .all
-    
+
     var counters: CountersStatisticsRecord {
         return (try? activityStatistics.getCounters(for: period)) ?? CountersStatisticsRecord.emptyRecord()
     }
-    
+
     init(dnsTrackersService: DnsTrackerServiceProtocol, domainsParserService: DomainsParserServiceProtocol, activityStatistics: ActivityStatisticsProtocol) {
         self.dnsTrackersService = dnsTrackersService
         self.domainsParserService = domainsParserService
         self.activityStatistics = activityStatistics
     }
-    
+
     func getCompanies(for type: ChartDateType, _ completion: @escaping (_ info: CompaniesInfo)->()) {
         workingQueue.async {[weak self] in
-            
+
             guard let self = self else { return }
             var recordsByCompanies: [String : CompanyRequestsRecord] = [:]
             var companiesNumber = 0

@@ -26,16 +26,16 @@ struct FilterTagsTable {
     let tagId: Int
     let type: Int
     let name: String
-    
+
     // Table name
     static let table = Table("filter_tags")
-    
+
     // Columns names
     static let filterId = Expression<Int>("filter_id")
     static let tagId = Expression<Int>("tag_id")
     static let type = Expression<Int>("type")
     static let name = Expression<String>("name")
-    
+
     // Initializer from DB result
     init(dbTag: Row) {
         self.filterId = dbTag[Self.filterId]
@@ -56,29 +56,29 @@ protocol TagsMetaStorageProtocol {
 }
 
 extension MetaStorage: TagsMetaStorageProtocol {
-    
+
     // Returns all tags from database
     func getAllTags() throws -> [FilterTagsTable] {
         // Query: SELECT * FROM filter_tags OREDER BY filter_id
         let query = FilterTagsTable.table.order(FilterTagsTable.filterId)
-        
+
         let result: [FilterTagsTable] = try filtersDb.prepare(query).map { FilterTagsTable(dbTag: $0) }
         Logger.logDebug("(FiltersMetaStorage) - allTags returning \(result.count) tags objects")
         return result
     }
-    
+
     // Returns array of tags for filter with specified id
     func getTagsForFilter(withId id: Int) throws -> [FilterTagsTable] {
         // Query: SELECT * FROM filter_tags WHERE filter_id = id ORDER BY tag_id
         let query = FilterTagsTable.table
                                    .filter(id == FilterTagsTable.filterId)
                                    .order(FilterTagsTable.tagId)
-        
+
         let result: [FilterTagsTable] = try filtersDb.prepare(query).map { FilterTagsTable(dbTag: $0) }
         Logger.logDebug("(FiltersMetaStorage) - getTagsForFilter returning \(result.count) tags objects for filter with id=\(id)")
         return result
     }
-    
+
     /*
      Updates all passed tags for filter.
      Adds new tags if some are missing.
@@ -88,14 +88,14 @@ extension MetaStorage: TagsMetaStorageProtocol {
         for tag in tags {
             try update(tag: tag, forFilterWithId: id)
         }
-        
+
         // Remove tags
         let tagsIds = tags.map { $0.tagId }
         let tagsToDelete = FilterTagsTable.table.filter(FilterTagsTable.filterId == id && !tagsIds.contains(FilterTagsTable.tagId))
         let deletedRows = try filtersDb.run(tagsToDelete.delete())
         Logger.logDebug("(FiltersMetaStorage) - updateAll tags; deleted \(deletedRows) rows")
     }
-    
+
     // Updates passed tag for filter. If tag is missing adds it
     func update(tag: ExtendedFiltersMeta.Tag, forFilterWithId id: Int) throws {
         // Query: INSERT OR REPLACE INTO filter_tags (filter_id, tag_id, type, name)
@@ -107,7 +107,7 @@ extension MetaStorage: TagsMetaStorageProtocol {
         try filtersDb.run(query)
         Logger.logDebug("(FiltersMetaStorage) - Insert tag with tagId = \(tag.tagId) and name \(tag.tagName)")
     }
-    
+
     // Deletes tags for filters with passed ids
     func deleteTagsForFilters(withIds ids: [Int]) throws {
         let tagsToDelete = FilterTagsTable.table.filter(ids.contains(FilterTagsTable.filterId))

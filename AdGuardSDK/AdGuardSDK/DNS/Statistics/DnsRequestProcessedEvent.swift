@@ -33,7 +33,7 @@ public struct DnsRequestProcessedEvent {
     public let bytesReceived: Int // Number of bytes received from a server
     public let blockRules: [String] // Filtering rules texts
     public let cacheHit: Bool // True if this response was served from the cache
-    
+
     public var isBlocked: Bool {
         switch processedStatus {
         case .blocklistedByDnsFilter, .blocklistedByUserFilter: return true
@@ -65,23 +65,23 @@ extension DnsRequestProcessedEvent {
         self.blockRules = event.rules
         self.cacheHit = event.cacheHit
     }
-    
+
     private static func isLocalHost(dnsAnswer: String, type: String) -> Bool {
         guard type == "A" || type == "AAAA" else { return false }
-        
+
         let splitedAnswers = dnsAnswer.split(separator: "\n").map({ String($0) })
         guard splitedAnswers.count == 1 else { return false }
-        
+
         let dnsAnswer = splitedAnswers[0]
-                
+
         guard let range = dnsAnswer.range(of: ", ") else { return false }
         let ip = dnsAnswer[range.upperBound...]
-        
+
         let isIpv4Localhost = type == "A" && (ip == "0.0.0.0" || ip == "127.0.0.1")
         let isIpv6Localhost = type == "AAAA" && (ip == "::" || ip == "::1")
         return isIpv4Localhost || isIpv6Localhost
     }
-    
+
     private static func getEventStatus(
         _ event: AGDnsRequestProcessedEventWrapper,
         isEncrypted: Bool,
@@ -89,7 +89,7 @@ extension DnsRequestProcessedEvent {
         dnsBlocklistFilterId: Int,
         dnsAllowlistFilterId: Int
     ) -> ProcessedStatus {
-        
+
         if event.whitelist {
             return event.filterListIds.contains(dnsAllowlistFilterId) ? .allowlistedByUserFilter : .allowlistedByDnsFilter
         }

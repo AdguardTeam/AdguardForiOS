@@ -18,11 +18,11 @@
 
 struct OpenTunnelModeControllerParser: IURLSchemeParametersParser {
     private let executor: IURLSchemeExecutor
-    
+
     init(executor: IURLSchemeExecutor) {
         self.executor = executor
     }
-    
+
     func parse(_ url: URL) -> Bool {
         return executor.openTunnelModeController(showLaunchScreen: false)
     }

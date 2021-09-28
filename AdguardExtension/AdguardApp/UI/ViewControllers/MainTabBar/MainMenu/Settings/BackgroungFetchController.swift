@@ -25,34 +25,34 @@ protocol BackgroundFetchControllerDelegate: AnyObject {
 
 /// View controller for choosing background fetch interval
 final class BackgroundFetchController: BottomAlertController {
-    
+
     // MARK: - Outlets
-    
+
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var tableView: ContentSizedTableView!
 
     // MARK: - Properties
-    
+
     weak var delegate: BackgroundFetchControllerDelegate?
     private var selectedCell: BackgroundFetchUpdateInterval?
-    
-    
+
+
     // MARK: - Services
-    
+
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
 
     // MARK: - ViewController lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         updateTheme()
         selectedCell = resources.backgroundFetchUpdatePeriod
         setupTableView()
     }
-    
+
     // MARK: - Private methods
-    
+
     private func applySelectedOption(row: BackgroundFetchUpdateInterval) {
         AppDelegate.setBackgroundFetchInterval(row.interval)
         selectedCell = row

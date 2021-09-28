@@ -19,15 +19,15 @@
 struct SocialNetworkAuthParametersParser: IURLSchemeParametersParser {
     private let executor: IURLSchemeExecutor
     private let socialErrorUserNotFound = "user_not_found"
-    
+
     init(executor: IURLSchemeExecutor) {
         self.executor = executor
     }
-    
-    
+
+
     func parse(_ url: URL) -> Bool {
         guard let params = url.parseAuthUrl().params else { return false }
-        
+
         if let error = params["error"] {
             socialLoginErrorProcessor(error: error)
             return false
@@ -37,7 +37,7 @@ struct SocialNetworkAuthParametersParser: IURLSchemeParametersParser {
             return executor.login(withAccessToken: token, state: state)
         }
     }
-    
+
     private func socialLoginErrorProcessor(error: String) {
         var userInfo = [AnyHashable: Any]()
         DDLogInfo("(URLSchemeProcessor) Social login error: \(error)")
@@ -45,7 +45,7 @@ struct SocialNetworkAuthParametersParser: IURLSchemeParametersParser {
         case socialErrorUserNotFound:
             userInfo[PurchaseService.kPSNotificationTypeKey] = PurchaseService.kPSNotificationLoginUserNotFound
             userInfo[PurchaseService.kPSNotificationErrorKey] = NSError(domain: LoginService.loginErrorDomain, code: LoginService.socialUserNotFound, userInfo: nil)
-            
+
         default:
             break
         }

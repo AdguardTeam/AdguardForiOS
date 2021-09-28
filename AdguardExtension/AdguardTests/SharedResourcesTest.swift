@@ -20,7 +20,7 @@ import XCTest
 
 // in this test we test SharedResources protocol extension
 class SharedResourcesTest: XCTestCase {
-    
+
     var resources: AESharedResourcesProtocol!
 
     override func setUp() {
@@ -32,25 +32,25 @@ class SharedResourcesTest: XCTestCase {
     }
 
     func testFilterEnabled() {
-        
+
         // advanced mode and all keys are undefined
         // all filters must be enabled
         XCTAssertTrue(resources.safariWhitelistEnabled)
         XCTAssertTrue(resources.safariUserFilterEnabled)
         XCTAssertTrue(resources.systemWhitelistEnabled)
         XCTAssertTrue(resources.systemUserFilterEnabled)
-        
+
         // define advanced mode as false
         resources.sharedDefaults().set(false, forKey: AEDefaultsDeveloperMode)
-        
+
         // all filters must be enabled
         XCTAssertTrue(resources.safariWhitelistEnabled)
         XCTAssertTrue(resources.safariUserFilterEnabled)
         XCTAssertTrue(resources.systemWhitelistEnabled)
         XCTAssertTrue(resources.systemUserFilterEnabled)
-        
+
         // set advanced mode to true
-        
+
         resources.sharedDefaults().set(true, forKey: AEDefaultsDeveloperMode)
 
         // all filters must be enabled
@@ -58,43 +58,43 @@ class SharedResourcesTest: XCTestCase {
         XCTAssertTrue(resources.safariUserFilterEnabled)
         XCTAssertTrue(resources.systemWhitelistEnabled)
         XCTAssertTrue(resources.systemUserFilterEnabled)
-        
+
         // define all filters as enabled
         resources.safariWhitelistEnabled = true
         resources.safariUserFilterEnabled = true
         resources.systemWhitelistEnabled = true
         resources.systemUserFilterEnabled = true
-        
+
         // all filters must be enabled
         XCTAssertTrue(resources.safariWhitelistEnabled)
         XCTAssertTrue(resources.safariUserFilterEnabled)
         XCTAssertTrue(resources.systemWhitelistEnabled)
         XCTAssertTrue(resources.systemUserFilterEnabled)
-        
+
         // set all filters as disabled
         resources.safariWhitelistEnabled = false
         resources.safariUserFilterEnabled = false
         resources.systemWhitelistEnabled = false
         resources.systemUserFilterEnabled = false
-        
+
         // all filters must be disabled
         XCTAssertFalse(resources.safariWhitelistEnabled)
         XCTAssertFalse(resources.safariUserFilterEnabled)
         XCTAssertFalse(resources.systemWhitelistEnabled)
         XCTAssertFalse(resources.systemUserFilterEnabled)
-        
+
         // set advanced mode true
         resources.sharedDefaults().set(false, forKey: AEDefaultsDeveloperMode)
-        
+
         // all filters must be enabled, because advanced mode is false
         XCTAssertTrue(resources.safariWhitelistEnabled)
         XCTAssertTrue(resources.safariUserFilterEnabled)
         XCTAssertTrue(resources.systemWhitelistEnabled)
         XCTAssertTrue(resources.systemUserFilterEnabled)
-        
+
         // undefine advanced mode
         resources.sharedDefaults().removeObject(forKey: AEDefaultsDeveloperMode)
-        
+
         // all filters must be enabled
         XCTAssertTrue(resources.safariWhitelistEnabled)
         XCTAssertTrue(resources.safariUserFilterEnabled)

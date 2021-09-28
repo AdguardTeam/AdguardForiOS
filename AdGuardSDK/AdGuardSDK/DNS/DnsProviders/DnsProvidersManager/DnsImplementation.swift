@@ -28,7 +28,7 @@ import Foundation
 public enum DnsImplementation: Int {
     case adGuard
     case native
-    
+
     public init?(rawValue: Int) {
         switch rawValue {
         case DnsImplementation.adGuard.rawValue:
@@ -40,7 +40,7 @@ public enum DnsImplementation: Int {
             return nil
         }
     }
-    
+
     var supportedProtocols: [DnsProtocol] {
         switch self {
         case .adGuard: return DnsProtocol.allCases

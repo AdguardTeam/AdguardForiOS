@@ -2,7 +2,7 @@ import XCTest
 @_implementationOnly import ContentBlockerConverter
 
 final class ContentBlockerConverterMock: ContentBlockerConverterProtocol {
-    
+
     var convertArrayCalledCount = 0
     var passedRules: [[String]] = []
     var convertArrayResult: ConversionResult!
@@ -23,15 +23,15 @@ class FiltersConverterTest: XCTestCase {
     var converterMock: ContentBlockerConverterMock!
     var configuaration: SafariConfigurationMock!
     var converter: FiltersConverterProtocol!
-    
+
     override func setUp() {
         converterMock = ContentBlockerConverterMock()
         configuaration = SafariConfigurationMock()
         converter = FiltersConverter(configuration: configuaration, converter: converterMock)
     }
-    
+
     // MARK: - Parts of different filters to test
-    
+
     let adGuardBaseFilter = FilterFileContent(text: """
                                                     ! Checksum: ZfQYKYYCHnYvVSRxWh6gNw
                                                     ally.sh#@#.adsBox
@@ -43,7 +43,7 @@ class FiltersConverterTest: XCTestCase {
                                                     !#safari_cb_affinity
                                                     """,
                                               group: .ads)
-    
+
     let adGuardExperimentalFilter = FilterFileContent(text: """
                                                             ! Checksum: yzpecJf8/nqMe6xzg+biBA
                                                             ! Title: AdGuard Experimental filter (Optimized)
@@ -52,32 +52,32 @@ class FiltersConverterTest: XCTestCase {
                                                             reddit.com##.
                                                             """,
                                                             group: .other)
-    
+
     let adGuardDutchFilter = FilterFileContent(text: """
                                                     ! Expires: 4 days (update frequency)
                                                     -reclameplaatjes/
                                                     /adbron.
                                                     """,
                                                group: .languageSpecific)
-    
+
     let webAnnoyancesUltralist = FilterFileContent(text: """
                                                         ! Start Web Annoyances Ultralist - Main Filters
                                                         10best.com##.homepage-top-story-callout.columns.large-12
                                                         1688.com###j-identity
                                                         """,
                                                    group: .annoyances)
-    
+
     // MARK: - Tests
     // Just test different filters and rules variations
-    
+
     func testWithAllowlistRules() {
         let filters = [adGuardBaseFilter, adGuardExperimentalFilter]
         let blocklistRules = ["/adtwee/*", "ya.ru", "google.com"]
         let allowlistRules = ["mail.com"]
-        
+
         converterMock.convertArrayResult = ConversionResult(totalConvertedCount: 0, convertedCount: 0, errorsCount: 0, overLimit: true, converted: "", message: "")
         let results = converter.convert(filters: filters, blocklistRules: blocklistRules, allowlistRules: allowlistRules, invertedAllowlistRules: nil)
-        
+
         XCTAssertEqual(converterMock.passedRules.count, ContentBlockerType.allCases.count)
         var i = 0
         for res in results {
@@ -135,14 +135,14 @@ class FiltersConverterTest: XCTestCase {
             }
         }
     }
-    
+
     func testWithInvertedAllowlistRules() {
         let filters = [adGuardDutchFilter, webAnnoyancesUltralist]
         let invertedAllowlistRules = ["@@||*$document,domain=~ya.ru", "@@||*$document,domain=~vk.com", "@@||*$document,domain=~mail.ru"]
-        
+
         converterMock.convertArrayResult = ConversionResult(totalConvertedCount: 0, convertedCount: 0, errorsCount: 0, overLimit: true, converted: "", message: "")
         let results = converter.convert(filters: filters, blocklistRules: nil, allowlistRules: nil, invertedAllowlistRules: invertedAllowlistRules)
-        
+
         XCTAssertEqual(converterMock.passedRules.count, ContentBlockerType.allCases.count)
         var i = 0
         for res in results {

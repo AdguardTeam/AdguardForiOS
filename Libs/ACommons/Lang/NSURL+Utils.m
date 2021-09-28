@@ -25,7 +25,7 @@
 //////////////////////////////////////////////////////////////
 
 - (NSString *)hostWithPort{
-    
+
     if ([self port])
         return [NSString stringWithFormat:@"%@:%@",[self host], [self port]];
     else
@@ -33,19 +33,19 @@
 }
 
 - (NSString *)relativeUrlString{
-    
+
     NSString *result = [self absoluteString];
-    
+
     NSInteger index = [result indexOf:@"://"];
 
     if (index < 0)
         return result;
     else{
-        
+
         index = [result indexOf:@"/" fromIndex:(index + 3)];
         if (index < 0)
             return result;
-        
+
         return [result substringFromIndex:index];
     }
 }

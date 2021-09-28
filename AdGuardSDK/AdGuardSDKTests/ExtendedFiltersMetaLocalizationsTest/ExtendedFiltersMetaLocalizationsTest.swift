@@ -4,11 +4,11 @@ class ExtendedFiltersMetaLocalizationsTest: XCTestCase {
     func testExtendedFiltersMetaIsDecodedProperly() {
         let jsonUrl = Bundle(for: type(of: self)).url(forResource: "filters_i18n_test", withExtension: "json")!
         let jsonData = try! Data(contentsOf: jsonUrl)
-        
+
         do {
             let decoder = JSONDecoder()
             let extendedFiltersMetaLocalizations = try decoder.decode(ExtendedFiltersMetaLocalizations.self, from: jsonData)
-            
+
             // Tags number differs from filters_test.json because localizations for some tags are missing
             XCTAssertEqual(extendedFiltersMetaLocalizations.tags.count, 60)
             XCTAssertEqual(extendedFiltersMetaLocalizations.groups.count, 7)

@@ -1,17 +1,17 @@
 /**
        This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
        Copyright © Adguard Software Limited. All rights reserved.
- 
+
        Adguard for iOS is free software: you can redistribute it and/or modify
        it under the terms of the GNU General Public License as published by
        the Free Software Foundation, either version 3 of the License, or
        (at your option) any later version.
- 
+
        Adguard for iOS is distributed in the hope that it will be useful,
        but WITHOUT ANY WARRANTY; without even the implied warranty of
        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
        GNU General Public License for more details.
- 
+
        You should have received a copy of the GNU General Public License
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -27,7 +27,7 @@ public protocol SafariConfigurationProtocol: ConfigurationProtocol {
     var blocklistIsEnabled: Bool { get set }
     var allowlistIsEnabled: Bool { get set }
     var allowlistIsInverted: Bool { get set }
-    
+
     // Application information
     var appBundleId: String { get set } // Application bundle identifier
     var appProductVersion: String { get set } // Application product version for example 4.1.1 for AdGuard
@@ -46,12 +46,12 @@ public final class SafariConfiguration: SafariConfigurationProtocol {
     public var blocklistIsEnabled: Bool
     public var allowlistIsEnabled: Bool
     public var allowlistIsInverted: Bool
-    
+
     public var appBundleId: String
     public var appProductVersion: String
     public var appId: String
     public var cid: String
-    
+
     public init(
         iosVersion: Int,
         currentLanguage: String,

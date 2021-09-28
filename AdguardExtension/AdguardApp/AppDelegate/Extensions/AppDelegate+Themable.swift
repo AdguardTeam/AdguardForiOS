@@ -21,7 +21,7 @@ protocol ThemableProtocol {
 }
 
 extension AppDelegate {
-    
+
     func subscribeToThemeChangeNotification() {
         NotificationCenter.default.addObserver(forName: .themeChanged, object: nil, queue: .main) { [weak self] _ in
             let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -29,19 +29,19 @@ extension AppDelegate {
             self?.themeChange()
         }
     }
-    
+
     private func themeChange() {
         guard let root =  window?.rootViewController else { return }
         recursiveThemeUpdate(vc: root)
     }
-    
+
     private func recursiveThemeUpdate(vc: UIViewController?) {
         if vc == nil { return }
         recursiveThemeUpdate(vc: vc?.presentedViewController)
         recursiveChildrenThemeUpdate(children: vc?.children)
         (vc as? ThemableProtocol)?.updateTheme()
     }
-    
+
     private func recursiveChildrenThemeUpdate(children: [UIViewController]?) {
         guard let children = children, !children.isEmpty else { return }
         children.forEach {

@@ -21,7 +21,7 @@ import SafariAdGuardSDK
 import DnsAdGuardSDK
 
 final class MainPageController: UIViewController, DateTypeChangedProtocol, ComplexSwitchDelegate, OnboardingControllerDelegate, GetProControllerDelegate, MainPageModelDelegate {
-    
+
     var ready = false
     var onReady: (()->Void)? {
         didSet {
@@ -30,9 +30,9 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             }
         }
     }
-    
+
     // MARK: - Nav bar elements
-    
+
     @IBOutlet weak var updateButton: UIBarButtonItem! {
         didSet{
             updateButton.accessibilityLabel = String.localizedString("update_filters_voiceover")
@@ -48,120 +48,120 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     }
 
     // MARK: - Protection status elements
-    
+
     @IBOutlet weak var safariProtectionButton: RoundRectButton!
     @IBOutlet weak var systemProtectionButton: RoundRectButton!
     @IBOutlet weak var vpnUpsellButton: RoundRectButton!
-    
+
     @IBOutlet weak var protectionStateLabel: ThemableLabel!
     @IBOutlet weak var protectionStatusLabel: ThemableLabel!
-    
-    
+
+
     // MARK: - Complex protection switch
-    
+
     @IBOutlet weak var complexProtectionView: UIView!
     @IBOutlet weak var complexProtectionSwitch: ComplexProtectionSwitch!
-    
-    
+
+
     // MARK: - Statistics elements
-    
+
     @IBOutlet weak var changeStatisticsDatesButton: UIButton!
     @IBOutlet weak var chartView: ChartView!
-    
+
     @IBOutlet weak var statisticsStackView: UIStackView!
-    
+
     @IBOutlet weak var requestsButton: UIButton!
     @IBOutlet weak var encryptedButton: UIButton!
     @IBOutlet weak var elapsedButton: UIButton!
-    
+
     @IBOutlet weak var requestsNumberLabel: ThemableLabel!
     @IBOutlet weak var encryptedNumberLabel: ThemableLabel!
     @IBOutlet weak var elapsedNumberLabel: ThemableLabel!
-    
+
     @IBOutlet weak var requestsTextLabel: ThemableLabel!
     @IBOutlet weak var encryptedTextLabel: ThemableLabel!
     @IBOutlet weak var elapsedTextLabel: ThemableLabel!
-    
-    
+
+
     // MARK: Get Pro elements
-    
+
     @IBOutlet weak var getProView: UIView!
     @IBOutlet weak var adguardManImageView: UIImageView!
     @IBOutlet weak var manDialogView: UIView!
     @IBOutlet weak var manDialogText: ThemableLabel!
     @IBOutlet weak var getProButton: UIButton!
-    
+
     // MARK: - Native DNS view
-    
+
     @IBOutlet weak var nativeDnsTitleLabel: ThemableLabel!
     @IBOutlet weak var nativeDnsView: UIView!
     @IBOutlet weak var dnsProviderNameLabel: ThemableLabel!
     @IBOutlet weak var dnsProtocolNameLabel: ThemableLabel!
-    
+
     // MARK: - Content blockers view
-    
+
     @IBOutlet weak var contentBlockerViewIphone: UIView!
     @IBOutlet weak var contentBlockerViewIpad: UIView!
 
-    
+
     // MARK: - Themable labels
-    
+
     @IBOutlet var themableLabels: [ThemableLabel]!
-    
-    
+
+
     // MARK: - Constraints
     @IBOutlet weak var contentBlockerViewConstraint: NSLayoutConstraint!
-    
+
     // MARK: - Constraints to change for iphone SE - like devices
-    
+
     @IBOutlet weak var safariIconHeight: NSLayoutConstraint!
     @IBOutlet weak var safariIconWidth: NSLayoutConstraint!
-    
+
     @IBOutlet weak var systemIconWidth: NSLayoutConstraint!
     @IBOutlet weak var systemIconHeight: NSLayoutConstraint!
-    
+
     @IBOutlet weak var vpnPromoIconWidth: NSLayoutConstraint!
     @IBOutlet weak var vpnPromoIconHeight: NSLayoutConstraint!
-    
+
     @IBOutlet weak var safariIconCenterSpace: NSLayoutConstraint!
     @IBOutlet weak var systemIconCenterSpace: NSLayoutConstraint!
-    
+
     @IBOutlet weak var complexSwitchWidth: NSLayoutConstraint!
     @IBOutlet weak var complexSwitchHeight: NSLayoutConstraint!
     @IBOutlet weak var fromButtonsToTopHeight: NSLayoutConstraint!
     @IBOutlet weak var fixItIphoneButton: UIButton!
     @IBOutlet weak var fixItiPadButton: UIButton!
-    
+
     var stateFromWidget: Bool?
-    
+
     var importSettings: Settings?
-    
+
     // MARK: - Variables
-    
+
     private var iconButton: UIButton? = nil
     private let getProSegueId = "getProSegue"
-    
+
     private var proStatus: Bool { configuration.proStatus }
     private var contentBlockersGestureRecognizer: UIPanGestureRecognizer? = nil
-    
+
     // We change constraints only for iphone SE - like devices
     private let isIphoneSeLike = UIScreen.main.bounds.width == 320.0
     private let screenIsLessThanIphone6 = UIScreen.main.bounds.width <= 414.0
-    
+
     // Indicates whether filters are updating
     private var updateInProcess = false
-    
+
     // Show helper only once during app lifecycle
     private var contentBlockerHelperWasShown = false
-    
+
     private var onBoardingIsInProcess = false
-    
+
     private var safariUpdateEnded = true
     private var dnsUpdateEnded = true
-    
-    
+
+
     // MARK: - Services
-    
+
     private lazy var configuration: ConfigurationServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var theme: ThemeServiceProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var resources: AESharedResourcesProtocol = { ServiceLocator.shared.getService()! }()
@@ -171,11 +171,11 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     private lazy var safariProtection: SafariProtectionProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var dnsProtection: DnsProtectionProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var dnsProvidersManager: DnsProvidersManagerProtocol = { ServiceLocator.shared.getService()! }()
-    
+
     // MARK: - View models
     private lazy var mainPageModel: MainPageModelProtocol = { MainPageModel(resource: resources, safariProtection: safariProtection) }()
     private var chartModel: ChartViewModelProtocol!
-    
+
     // MARK: - Observers
     private var appWillEnterForeground: NotificationToken?
     private var vpnConfigurationObserver: NotificationToken!
@@ -183,83 +183,83 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     private var dnsImplementationObserver: NotificationToken?
     private var currentDnsServerObserver: NotificationToken?
     private var proStatusObserver: NotificationToken?
-    
+
     // MARK: - View Controller life cycle
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         updateTheme()
         initChartViewModel()
         statisticsPeriodChanged(statisticsPeriod: resources.chartDateType)
         addObservers()
         setUIForRequestType(true)
         setupVoiceOverLabels()
-    
+
         complexProtectionSwitch.delegate = self
         mainPageModel.delegate = self
-        
-        
+
+
         contentBlockersGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleContentBlockersView(_:)))
         if let recognizer = contentBlockersGestureRecognizer {
             contentBlockerViewIpad.addGestureRecognizer(recognizer)
         }
-        
+
         configuration.checkContentBlockerEnabled()
-        
+
         if let stateFromWidget = self.stateFromWidget {
             complexProtection.switchComplexProtection(state: stateFromWidget, for: self) { (_, _) in
             }
         }
-        
+
         if importSettings != nil {
             showImportSettings()
         }
-        
+
         processDnsServerChange()
         checkAdGuardVpnIsInstalled()
     }
-        
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         processState()
         updateProtectionStates()
         updateProtectionStatusText()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+
         if let nav = navigationController as? MainNavigationController {
             nav.addGestureRecognizer()
         }
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+
         chartModel.chartViewSizeChanged(frame: chartView.frame)
-        
+
         if isIphoneSeLike {
             setupConstraintsForIphoneSe()
         }
         if screenIsLessThanIphone6 {
             setupFontsForSmallScreen()
         }
-        
+
         getProButton.layer.cornerRadius = getProButton.frame.height / 2
         fixItIphoneButton.layer.cornerRadius = fixItIphoneButton.frame.height / 2
         fixItiPadButton.layer.cornerRadius = fixItiPadButton.frame.height / 2
     }
-        
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return theme.statusbarStyle()
     }
-    
+
     private func processContentBlockersHelper() {
         if #available(iOS 15.0, *), !resources.whatsNewScreenShown {
             showWhatsNewWithAdvancedProtectionInfo { [weak self] in
@@ -273,30 +273,30 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
     // MARK: - Actions
 
-    
+
     // MARK: - Nav Bar Actions
-    
+
     @objc private func updateFilters(_ sender: Any) {
         self.dnsUpdateEnded = false
-    
+
         dnsProtection.updateAllFilters { [weak self] _ in
             self?.dnsUpdateEnded = true
             self?.safariUpdateEnded = false
             self?.mainPageModel.updateFilters()
         }
     }
-    
+
     // MARK: - Protection Status Actions
-    
+
     @IBAction func changeSafariProtectionState(_ sender: RoundRectButton) {
         safariProtectionButton.buttonIsOn = !safariProtectionButton.buttonIsOn
-    
+
         applyingChangesStarted()
         complexProtection.switchSafariProtection(state: safariProtectionButton.buttonIsOn, for: self) { [weak self] error in
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 self.applyingChangesEnded()
-                
+
                 if error != nil {
                     ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: error?.localizedDescription)
                 }
@@ -304,7 +304,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         }
         updateProtectionStates()
     }
-    
+
     @IBAction func changeSystemProtectionState(_ sender: RoundRectButton) {
         if resources.dnsImplementation == .native {
             if systemProtectionButton.buttonIsOn {
@@ -328,14 +328,14 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             }
             return
         }
-        
+
         systemProtectionButton.buttonIsOn = !systemProtectionButton.buttonIsOn
         if configuration.proStatus {
             applyingChangesStarted()
             complexProtection.switchSystemProtection(state: systemProtectionButton.buttonIsOn, for: self) { [weak self] error in
                 DispatchQueue.main.async {
                     guard let self = self else { return }
-                    
+
                     self.applyingChangesEnded()
                     if error != nil {
                         ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: error?.localizedDescription)
@@ -348,7 +348,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         }
         updateProtectionStates()
     }
-    
+
     @IBAction func vpnUpsellTapped(_ sender: RoundRectButton) {
         if UIApplication.adGuardVpnIsInstalled {
             UIApplication.openAdGuardVpnAppIfInstalled()
@@ -356,9 +356,9 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             presentUpsellScreen()
         }
     }
-    
+
     // MARK: - Complex protection switch action
-    
+
     @IBAction func complexProtectionState(_ sender: ComplexProtectionSwitch) {
         let enabled = sender.isOn
         applyingChangesStarted()
@@ -366,11 +366,11 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             DispatchQueue.asyncSafeMain { [weak self] in
                 guard let self = self else { return }
                 self.applyingChangesEnded()
-                
+
                 if safariError != nil {
                     ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: safariError?.localizedDescription)
                 }
-                
+
                 if systemError != nil {
                     ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: systemError?.localizedDescription)
                 }
@@ -378,82 +378,82 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         }
         updateProtectionStates()
     }
-    
-    
+
+
     // MARK: - Statistics Actions
-    
+
     @IBAction func changeStatisticDates(_ sender: UIButton) {
         showChartDateTypeController()
     }
-    
+
     @IBAction func requestsTapped(_ sender: UIButton) {
         chooseRequest()
     }
-    
+
     @IBAction func encryptedTapped(_ sender: UIButton) {
         chooseEncrypted()
     }
-    
+
     @IBAction func averageTimeTapped(_ sender: UIButton) {
         chooseElapsedTime()
     }
-    
+
     // MARK: - Content blockers view actions
-    
+
     @IBAction func crossTapped(_ sender: UIButton) {
         hideContentBlockersInfo()
     }
-    
+
     @IBAction func fixItTapped(_ sender: UIButton) {
         showContentBlockersHelper()
     }
-    
+
     // MARK: - ChartPointsChangedDelegate method
-    
+
     func numberOfRequestsChanged(requestsCount: Int, encryptedCount: Int, averageElapsed: Double) {
         updateTextForButtons(requestsCount: requestsCount, encryptedCount: encryptedCount, averageElapsed: averageElapsed)
     }
-    
+
     // MARK: - DateTypeChangedProtocol method
-    
+
     func statisticsPeriodChanged(statisticsPeriod: StatisticsPeriod) {
         resources.chartDateType = statisticsPeriod
         changeStatisticsDatesButton.setTitle(statisticsPeriod.dateTypeString, for: .normal)
         chartModel.statisticsPeriod = statisticsPeriod
     }
-    
-    
+
+
     // MARK: - Complex switch delegate
-    
+
     func beginTracking() {
         if let nav = navigationController as? MainNavigationController {
             nav.removeGestureRecognizer()
         }
     }
-    
+
     // MARK: - OnboardingViewController delegate
-    
+
     func onboardingDidFinish() {
         resources.sharedDefaults().set(true, forKey: OnboardingWasShown)
         onBoardingIsInProcess = false
         ready = true
         callOnready()
     }
-    
+
     // MARK: - GetProControllerDelegate delegate
-    
+
     func getProControllerClosed() {
         onboardingDidFinish()
     }
-    
+
     // MARK: - view model delegate methods
-    
+
     func updateStarted() {
         protectionStatusLabel.text = String.localizedString("update_filter_start_message")
         safariUpdateEnded = false
         updateStartedInternal()
     }
-    
+
     func updateFinished(message: String?) {
         if message != nil {
             protectionStatusLabel.text = message
@@ -461,44 +461,44 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         safariUpdateEnded = true
         endUpdate()
     }
-    
+
     func updateFailed(error: String) {
         protectionStatusLabel.text = error
         safariUpdateEnded = true
         endUpdate()
     }
-    
+
     // MARK: - Private methods
-    
+
     /**
      Presents ChartDateTypeController
      */
     private func showChartDateTypeController(){
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "ChartDateTypeController") as? ChartDateTypeController else { return }
         controller.delegate = self
-        
+
         present(controller, animated: true, completion: nil)
     }
-            
+
     /**
     Changes number of requests for all buttons
     */
     private func updateTextForButtons(requestsCount: Int, encryptedCount: Int, averageElapsed: Double){
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
-            
+
             let requestsNumberDefaults = self.resources.tempRequestsCount
             let requestsNumber = requestsCount + requestsNumberDefaults
-            
+
             let encryptedNumberDefaults = self.resources.tempEncryptedRequestsCount
             let encryptedNumber = encryptedCount + encryptedNumberDefaults
-            
+
             self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsNumber))
             self.encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedNumber))
             self.elapsedNumberLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: averageElapsed))
         }
     }
-    
+
     /**
      Called when "requests" button tapped
      */
@@ -511,7 +511,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             setUIForRequestType()
         }
     }
-    
+
     private func setUIForRequestType(_ initial: Bool = false) {
         /*
          When we call this method in viewDidLoad we don't need set chartView.activeChart,
@@ -521,14 +521,14 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             chartView.activeChart = .requests
         }
         chartModel.chartType = .requests
-        
+
         requestsNumberLabel.alpha = 1.0
         encryptedNumberLabel.alpha = 0.5
-        
+
         requestsTextLabel.alpha = 1.0
         encryptedTextLabel.alpha = 0.5
     }
-    
+
     /**
     Called when "blocked" button tapped
     */
@@ -540,63 +540,63 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         } else {
             chartView.activeChart = .encrypted
             chartModel.chartType = .encrypted
-            
+
             requestsNumberLabel.alpha = 0.5
             encryptedNumberLabel.alpha = 1.0
-            
+
             requestsTextLabel.alpha = 0.5
             encryptedTextLabel.alpha = 1.0
         }
     }
-    
+
     /**
     Called when "data daved" button tapped
     */
     private func chooseElapsedTime(){
         ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("average_info_alert_title"), message: String.localizedString("average_info_alert_message"))
     }
-    
+
     /**
     Checks if AdGuard VPN is installed and changes VPN upsell button color
     */
     private func checkAdGuardVpnIsInstalled() {
         vpnUpsellButton.buttonIsOn = UIApplication.adGuardVpnIsActive
     }
-    
+
     /**
      Adds observers to controller
      */
     private func addObservers(){
-        
+
         appWillEnterForeground = NotificationCenter.default.observe(name: UIApplication.willEnterForegroundNotification, object: nil, queue: .main, using: {[weak self] (notification) in
             self?.updateProtectionStates()
             self?.updateProtectionStatusText()
             self?.checkAdGuardVpnIsInstalled()
         })
-        
+
         proStatusObserver = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
             self?.processState()
         }
-        
+
         contentBlockerObserver = NotificationCenter.default.observe(name: .contentBlockersStateChanged, object: nil, queue: .main) { [weak self] _ in
             self?.observeContentBlockersState()
         }
-        
+
         vpnConfigurationObserver = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: .main) { [weak self] _ in
             self?.updateProtectionStates()
             self?.updateProtectionStatusText()
         }
-        
+
         dnsImplementationObserver = NotificationCenter.default.observe(name: .dnsImplementationChanged, object: nil, queue: .main) { [weak self] _ in
             self?.processState()
             self?.processDnsServerChange()
         }
-        
+
         currentDnsServerObserver = NotificationCenter.default.observe(name: .currentDnsServerChanged, object: nil, queue: .main) { [weak self] _ in
             self?.processDnsServerChange()
         }
     }
-    
+
     /**
      Starts to rotate refresh button
      */
@@ -605,7 +605,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         iconButton?.isUserInteractionEnabled = false
         updateButton.customView?.rotateImage(isNedeed: true)
     }
-    
+
     /**
      Stops to rotate refresh button
      */
@@ -615,21 +615,21 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             self?.iconButton?.isUserInteractionEnabled = true
             self?.updateButton.customView?.rotateImage(isNedeed: false)
             self?.updateProtectionStates()
-            
+
             // return status title few seconds later
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
                 self?.updateProtectionStatusText()
             }
         }
     }
-    
+
     /**
      Starts indicating that changes are applied
      */
     private func applyingChangesStarted(){
         protectionStatusLabel.text = String.localizedString("applying_changes")
     }
-    
+
     /**
     Stops indicating that changes are applied
     */
@@ -637,16 +637,16 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         updateProtectionStatusText()
         updateProtectionStates()
     }
-    
+
     /* States views by pro status and dns implementation */
     private func processState() {
         let isNativeImplementation = resources.dnsImplementation == .native
-        
+
         getProView.isHidden = true
         statisticsStackView.isHidden = true
         nativeDnsView.isHidden = true
         changeStatisticsDatesButton.isHidden = true
-        
+
         if proStatus {
             if isNativeImplementation {
                 nativeDnsView.isHidden = false
@@ -659,12 +659,12 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         }
         systemProtectionButton.buttonIsOn = complexProtection.systemProtectionEnabled
     }
-    
+
     private func processDnsServerChange() {
         guard resources.dnsImplementation == .native else {
             return
         }
-        
+
         if resources.dnsImplementation == .native {
             dnsProviderNameLabel.text = dnsProvidersManager.activeDnsProvider.activeServerName
             dnsProtocolNameLabel.text = dnsProvidersManager.activeDnsServer.type.localizedName
@@ -673,16 +673,16 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             dnsProtocolNameLabel.text = nil
         }
     }
-    
+
     /**
     Update state of safari, system and complex protection
      and updates UI
     */
-    
+
     private func updateProtectionStatusText() {
-        
+
         let complexText: String
-        
+
         switch (complexProtection.safariProtectionEnabled, complexProtection.systemProtectionEnabled, complexProtection.complexProtectionEnabled) {
         case (true, true, true):
             complexText = String.localizedString("complex_enabled")
@@ -696,23 +696,23 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             // incorrect state
             complexText = ""
         }
-        
+
         protectionStatusLabel.text = safariUpdateEnded && dnsUpdateEnded ? complexText : String.localizedString("update_filter_start_message")
         complexProtectionSwitch.accessibilityLabel = safariUpdateEnded && dnsUpdateEnded ? complexText : String.localizedString("update_filter_start_message")
-        
+
         nativeDnsTitleLabel.text = complexProtection.systemProtectionEnabled ? String.localizedString("native_dns_working") : String.localizedString("native_dns_not_working")
     }
-    
+
     private func updateProtectionStates() {
         let enabledText = complexProtection.complexProtectionEnabled ? String.localizedString("protection_enabled") : String.localizedString("protection_disabled")
         protectionStateLabel.text = enabledText
-        
+
         self.safariProtectionButton.buttonIsOn = complexProtection.safariProtectionEnabled
         self.systemProtectionButton.buttonIsOn = complexProtection.systemProtectionEnabled
         self.chartView.isEnabled = complexProtection.systemProtectionEnabled
         self.complexProtectionSwitch.setOn(on: complexProtection.complexProtectionEnabled)
     }
-    
+
     /**
     Checks state of content blockers
      and updates UI
@@ -724,9 +724,9 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         } else {
             showContentBlockersInfo()
         }
-        
+
         let onboardingShown = resources.sharedDefaults().bool(forKey: OnboardingWasShown)
-        
+
         DDLogInfo("Content blockers states changed; onboardingShown = \(onboardingShown); onBoardingIsInProcess = \(onBoardingIsInProcess)")
         if !onBoardingIsInProcess {
             if !onboardingShown {
@@ -747,7 +747,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             self?.contentBlockerViewIpad.alpha = 1.0
         }
     }
-    
+
     /**
      Hides iPad content blockers info
      */
@@ -758,7 +758,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             self?.contentBlockerViewIpad.isHidden = true
         }
     }
-    
+
     /**
      Shows iPhone content blockers info
     */
@@ -768,7 +768,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             self?.contentBlockerViewConstraint.constant = 64.0
         }
     }
-    
+
     /**
      Hides iPhone content blockers info
     */
@@ -779,7 +779,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             self?.contentBlockerViewIphone.isHidden = true
         }
     }
-    
+
     /**
      Shows content blockers info
      */
@@ -789,7 +789,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             self?.showIpadContentBlockersInfo()
         }
     }
-    
+
     /**
      Hides content blockers info
      */
@@ -799,20 +799,20 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             self?.hideIphoneContentBlockersInfo()
         }
     }
-    
+
     @objc private func handleContentBlockersView(_ gestureRecognizer: UIPanGestureRecognizer) {
         let translation = gestureRecognizer.translation(in: self.view)
         let x = translation.x
         let y = translation.y
         let gestureViewX = gestureRecognizer.view?.center.x ?? 0.0
         let gestureViewY = gestureRecognizer.view?.center.y ?? 0.0
-        
+
         if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
             contentBlockerViewIpad.center = CGPoint(x: gestureViewX + x, y: gestureViewY + y)
             gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
         }
     }
-    
+
     private func showOnboarding() {
         DispatchQueue.main.async { [weak self] in
             let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
@@ -825,7 +825,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             }
         }
     }
-    
+
     private func showContentBlockersHelper() {
         DispatchQueue.main.async { [weak self] in
             let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
@@ -837,7 +837,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             }
         }
     }
-    
+
     private func showWhatsNewWithAdvancedProtectionInfo(_ completion: (() -> Void)?) {
         let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
         if let controller = storyboard.instantiateViewController(withIdentifier: "WhatsNewBottomAlertController") as? WhatsNewBottomAlertController {
@@ -846,7 +846,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             present(controller, animated: true)
         }
     }
-    
+
     private func callOnready() {
         onReady?()
         onReady = nil
@@ -857,52 +857,52 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
      */
     private func setupConstraintsForIphoneSe(){
         fromButtonsToTopHeight.constant = 10.0
-        
+
         fixItIphoneButton.titleLabel?.font = UIFont.systemFont(ofSize: 11.0, weight: .bold)
         manDialogText.font = UIFont.systemFont(ofSize: 19.0, weight: .regular)
-        
+
         safariIconHeight.constant = 24.0
         safariIconWidth.constant = 24.0
-        
+
         systemIconWidth.constant = 24.0
         systemIconHeight.constant = 24.0
-        
+
         vpnPromoIconWidth.constant = 24.0
         vpnPromoIconHeight.constant = 24.0
-        
+
         safariIconCenterSpace.constant = 20.0
         systemIconCenterSpace.constant = 20.0
-        
+
         protectionStateLabel.font = protectionStateLabel.font.withSize(20.0)
         protectionStatusLabel.font = protectionStatusLabel.font.withSize(14.0)
-        
+
         complexSwitchWidth.constant = 80.0
         complexSwitchHeight.constant = 30.0
-        
+
         view.layoutIfNeeded()
     }
-    
+
     private func setupFontsForSmallScreen(){
         requestsTextLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
         encryptedTextLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
         elapsedTextLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
     }
-    
+
     private func setupVoiceOverLabels(){
         safariProtectionButton.accessibilityLabel = String.localizedString("safari_enabled")
         systemProtectionButton.accessibilityLabel = String.localizedString("system_enabled")
-        
+
         requestsButton.accessibilityLabel = String.localizedString("requests_number_voiceover")
         encryptedButton.accessibilityLabel = String.localizedString("encrypted_number_voiceover")
         elapsedButton.accessibilityLabel = String.localizedString("elapsed_time_voiceover")
-        
+
         safariProtectionButton.onAccessibilityTitle = String.localizedString("safari_protection_enabled_voiceover")
         safariProtectionButton.offAccessibilityTitle = String.localizedString("safari_protection_disabled_voiceover")
-        
+
         systemProtectionButton.onAccessibilityTitle = String.localizedString("tracking_protection_enabled_voiceover")
         systemProtectionButton.offAccessibilityTitle = String.localizedString("tracking_protection_disabled_voiceover")
     }
-    
+
     private func endUpdate()
     {
         switch(safariUpdateEnded, dnsUpdateEnded){
@@ -912,21 +912,21 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             break
         }
     }
-    
+
     private func showImportSettings() {
         let storyboard = UIStoryboard(name: "ImportSettings", bundle: nil)
-        
+
         guard let importController = storyboard.instantiateViewController(withIdentifier: "ImportSettingsController") as? ImportSettingsController else {
             DDLogError("can not instantiate ImportSettingsController")
             return
         }
-        
+
         guard let settings = importSettings else { return }
-        
+
         importController.settings = settings
         present(importController, animated: true, completion: nil)
     }
-    
+
     private func showContentBlockersHelperIfNeeded() {
         if !configuration.allContentBlockersEnabled && !contentBlockerHelperWasShown {
             showContentBlockersHelper()
@@ -936,12 +936,12 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             callOnready()
         }
     }
-    
+
     private func initChartViewModel() {
         let chartStatistics: ChartStatisticsProtocol = ServiceLocator.shared.getService()!
         let activityStatistics: ActivityStatisticsProtocol = ServiceLocator.shared.getService()!
         chartModel = ChartViewModel(statisticsPeriod: resources.chartDateType, activityStatistics: activityStatistics, chartStatistics: chartStatistics)
-        
+
         chartModel.delegate = self
         chartModel.startChartStatisticsAutoUpdate(seconds: 5.0)
     }
@@ -951,12 +951,12 @@ extension MainPageController: ThemableProtocol {
     func updateTheme(){
         navigationController?.view.backgroundColor = theme.backgroundColor
         theme.setupNavigationBar(navigationController?.navigationBar)
-        
+
         chartView.updateTheme()
         view.backgroundColor = theme.backgroundColor
         theme.setupLabels(themableLabels)
         getProView.backgroundColor = theme.backgroundColor
-        
+
         contentBlockerViewIphone.backgroundColor = theme.notificationWindowColor
         nativeDnsView.backgroundColor = theme.backgroundColor
     }
@@ -979,10 +979,10 @@ extension MainPageController: ChartViewModelDelegate {
                                  firstFormattedDate: String,
                                  lastFormattedDate: String,
                                  maxRequests: Int) {
-        
+
         chartView.chartPoints = points
         updateTextForButtons(requestsCount: countersStatisticsRecord?.requests ?? 0, encryptedCount: countersStatisticsRecord?.encrypted ?? 0, averageElapsed: Double(countersStatisticsRecord?.averageElapsed ?? 0))
-        
+
         chartView.leftDateLabelText = firstFormattedDate
         chartView.rightDateLabelText = lastFormattedDate
         chartView.maxRequests = maxRequests

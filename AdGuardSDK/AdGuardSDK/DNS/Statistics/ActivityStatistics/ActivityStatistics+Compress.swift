@@ -21,26 +21,26 @@
 /// Extension with table compression methods
 /// These methods are not part of Interface, do not use them directly
 extension ActivityStatistics {
-    
+
     /// Compresses the table
     func compressTable() throws {
         Logger.logInfo("(ActivityStatistics) - compressTable; Trying to compress the table")
-        
+
         let recordsCountBeforeCompression = try statisticsDb.scalar(ActivityStatisticsTable.table.count)
         let compressedRecords = try getCompressedRecords()
         try reset()
         try compressedRecords.forEach { try add(record: $0) }
-        
+
         Logger.logInfo("(ActivityStatistics) - compressTable; Successfully compressed the table; from \(recordsCountBeforeCompression) to \(compressedRecords.count)")
     }
-    
+
     private func getCompressedRecords() throws -> [ActivityStatisticsRecord] {
         let intervals = StatisticsPeriod.activityCompressionIntervals
         let compressedRecords: [ActivityStatisticsRecord] = try intervals.flatMap { interval -> [ActivityStatisticsRecord] in
             /// if you are confused `end >= start`
             let start = interval.start
             let end = interval.end
-            
+
             let query = ActivityStatisticsTable.table
                 .select([ActivityStatisticsTable.timeStamp.avgDate,
                          ActivityStatisticsTable.domain,
@@ -51,7 +51,7 @@ extension ActivityStatistics {
                 .where(start...end ~= ActivityStatisticsTable.timeStamp)
                 .group(ActivityStatisticsTable.domain)
                 .order(ActivityStatisticsTable.timeStamp.desc, ActivityStatisticsTable.domain)
-            
+
             let result = try statisticsDb.prepare(query.asSQL()).compactMap { ActivityStatisticsRecord(dbRecord: $0) }
             return result
         }
@@ -66,36 +66,36 @@ extension StatisticsPeriod {
      Intervals where statistics data will be compressed to one record by domains
      So if there were `n` different domains in the interval they will be compressed to
      `n` unique records, all counters will be summed
-        
+
      Statistics timeline:
                month                 week    day   today
      |------|------------------------------|------------|------|----------|---->
                                         NOW
-     
+
      Every segment will be compressed sepately
      So every next segment records will include previous segments
      */
     static var activityCompressionIntervals: [DateInterval] {
         let todayInterval = Self.today.interval
-        
+
         var duration: TimeInterval = 0.0
-        
+
         var dayInterval = Self.day.interval
         duration = todayInterval.duration
         dayInterval = DateInterval(start: dayInterval.start, end: dayInterval.end - duration)
-        
+
         var weekInterval = Self.week.interval
         duration += dayInterval.duration
         weekInterval = DateInterval(start: weekInterval.start, end: weekInterval.end - duration)
-        
+
         var monthInterval = Self.month.interval
         duration += weekInterval.duration
         monthInterval = DateInterval(start: monthInterval.start, end: monthInterval.end - duration)
-        
+
         var allInterval = Self.all.interval
         duration += monthInterval.duration
         allInterval = DateInterval(start: allInterval.start, end: allInterval.end - duration)
-        
+
         return [todayInterval, dayInterval, weekInterval, monthInterval, allInterval]
     }
 }

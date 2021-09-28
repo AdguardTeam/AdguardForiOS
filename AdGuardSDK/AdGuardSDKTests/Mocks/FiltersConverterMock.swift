@@ -1,7 +1,7 @@
 import Foundation
 
 final class FiltersConverterMock: FiltersConverterProtocol {
-    
+
     var resultFilters: [FiltersConverterResult] = []
     var convertCalledCount = 0
     var passedFilters: [FilterFileContent]?

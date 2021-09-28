@@ -31,7 +31,7 @@ extension DnsConfiguration {
             lowLevelConfiguration: LowLevelDnsConfiguration.fromResources(resources)
         )
     }
-    
+
     static func defaultConfiguration(from resources: AESharedResourcesProtocol) -> DnsConfiguration {
         return DnsConfiguration(
             currentLanguage: "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")",

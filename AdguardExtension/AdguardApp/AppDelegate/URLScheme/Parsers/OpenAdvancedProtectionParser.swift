@@ -20,11 +20,11 @@ import Foundation
 
 struct OpenAdvancedProtectionParser: IURLSchemeParametersParser {
     private let executor: IURLSchemeExecutor
-    
+
     init(executor: IURLSchemeExecutor) {
         self.executor = executor
     }
-    
+
     func parse(_ url: URL) -> Bool {
         return executor.openAdvancedProtectionController()
     }

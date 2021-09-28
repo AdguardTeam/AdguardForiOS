@@ -33,40 +33,40 @@ class RuleInfo: NSObject {
     var textColor: UIColor!
     var font: UIFont!
     var enabled: Bool
-    
+
     // we define the type of rule by special makers that we look for in the text of rule
     // https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters#basic-rules-syntax
     private let whitelistPrefix = "@@"
-    
+
     // https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters#comments
     private let commentPrefix = "!"
-    
+
     // https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters#cosmetic-elemhide-rules
     private let elemhideMarkers = ["##", "#@#", "#?#", "#@?#"]
-    
+
     // https://kb.adguard.com/en/general/how-to-create-your-own-ad-filters#cosmetic-css-rules
     private let cssMarkers = ["#$#", "#@$#", "#$?#", "#@$?#"]
-    
+
     private let whitelistColor = UIColor(hexString: "35605F")
     private let elemhodeColor = UIColor(hexString: "5586C0")
     private let cssColor = UIColor(hexString: "3A669C")
     private let commentColor = UIColor(hexString: "6D6D6D")
-    
+
     override var debugDescription: String {
         return "ruleText: \(rule) \nselected: \(selected) \nenabled: \(enabled)"
     }
-    
+
     init(_ rule: String, _ selected: Bool, _ enabled: Bool, _ themeService: ThemeServiceProtocol) {
         self.rule = rule
         self.selected = selected
         self.enabled = enabled
-        
+
         super.init()
-        
+
         let ruleType = self.type(rule)
-        
+
         let font = ruleType == .comment ? UIFont.italicSystemFont(ofSize: 15.0) : (UIFont(name: "PT Mono", size: 15.0) ?? UIFont.systemFont(ofSize: 15.0))
-        
+
         var color: UIColor?
         switch ruleType {
         case .whitelist:
@@ -83,24 +83,24 @@ class RuleInfo: NSObject {
         self.textColor = color!
         self.font = font
     }
-    
+
     private func type(_ rule: String) -> RuleType {
-        
+
         if rule.starts(with: commentPrefix) {
             return .comment
         }
-        
+
         if rule.starts(with: whitelistPrefix) {
             return .whitelist
         }
         if elemhideMarkers.contains(where: { (marker) in return rule.contains(marker) }) {
             return .css
         }
-        
+
         if cssMarkers.contains(where: { (marker) in return rule.contains(marker) }) {
             return .cssException
         }
-        
+
         return .blacklist
     }
 }

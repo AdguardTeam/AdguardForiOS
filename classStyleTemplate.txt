@@ -70,14 +70,14 @@
 #pragma mark Init and Class methods
 
 - (id)init{
-    
+
     self = [super init]; // [super _init_];
     if (self)
     {
-        
-        
+
+
     }
-    
+
     return self;
 }
 
@@ -95,12 +95,12 @@
 //}
 
 //- (BOOL)isEqual:(id)object{
-//    
+//
 //    if (object == self)
 //        return YES;
 //    if ([object isKindOfClass:[self class]])
 //        return YES;
-//    
+//
 //    else
 //        return NO;
 //}

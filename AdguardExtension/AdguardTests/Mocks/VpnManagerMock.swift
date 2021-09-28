@@ -19,33 +19,33 @@
 import Foundation
 
 class VpnManagerMock: NSObject, VpnManagerProtocol {
-    
+
     var updateCalled = false
-    
+
     func updateSettings(completion: ((Error?) -> Void)?) {
         updateCalled = true
         completion?(nil)
     }
-    
+
     func removeVpnConfiguration(completion: @escaping (Error?) -> Void) {
         completion(nil)
     }
-    
+
     func installVpnConfiguration(completion: @escaping (Error?) -> Void) {
         completion(nil)
     }
-    
+
     func checkVpnInstalled(completion: @escaping (Error?) -> Void) {
         completion(nil)
     }
-    
+
     func migrateOldVpnSettings(completion: @escaping (Error?) -> Void) {
         completion(nil)
     }
-    
+
     func getConfigurationStatus(callback: @escaping (VpnConfigurationStatus)->Void) {
         callback(VpnConfigurationStatus(isInstalled: true, isSelected: true, onDemandEnabled: true, connectionStatus: .enabled))
     }
-    
+
     var vpnInstalled: Bool = true
 }

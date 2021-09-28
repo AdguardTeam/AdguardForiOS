@@ -23,10 +23,10 @@ public protocol CompaniesStatisticsProtocol: AnyObject {
 }
 
 final public class CompaniesStatistics: CompaniesStatisticsProtocol {
-    
+
     private let activityStatistics: ActivityStatisticsProtocol
     private let dnsTrackersProvider: DnsTrackersProviderProtocol
-    
+
     init(activityStatistics: ActivityStatisticsProtocol, dnsTrackersProvider: DnsTrackersProviderProtocol) {
         self.activityStatistics = activityStatistics
         self.dnsTrackersProvider = dnsTrackersProvider
@@ -37,7 +37,7 @@ final public class CompaniesStatistics: CompaniesStatisticsProtocol {
     public func getCompaniesStatistics(for period: StatisticsPeriod) throws -> [CompaniesStatisticsRecord] {
         let domainsRecords = try activityStatistics.getDomains(for: period)
         var countersByCompany: [String: CompaniesStatisticsRecord] = [:]
-        
+
         domainsRecords.forEach { domainRecord in
             let company: String
             let tracker: DnsTracker?
@@ -54,7 +54,7 @@ final public class CompaniesStatistics: CompaniesStatisticsProtocol {
                 counters: domainRecord.counters,
                 domains: Set([domainRecord.domain])
             )
-            
+
             if let existingCompanyStatisticsRecord = countersByCompany[company] {
                 countersByCompany[company] = existingCompanyStatisticsRecord + companyStatisticsRecord
             } else {

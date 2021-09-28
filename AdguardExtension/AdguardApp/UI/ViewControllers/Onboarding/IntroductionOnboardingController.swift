@@ -19,52 +19,52 @@
 import UIKit
 
 class IntroductionOnboardingController: UIViewController {
-    
+
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var licenseTextView: UITextView!
     @IBOutlet weak var nextButton: RoundRectButton!
-    
+
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    
+
     var delegate: OnboardingControllerDelegate?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         nextButton.applyStandardGreenStyle()
         updateTheme()
         setupBackButton()
-        
+
         if let navController = navigationController as? MainNavigationController {
             navController.removeGestureRecognizer()
         }
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? OnboardingAnimationsController {
             controller.delegate = delegate
         }
     }
-    
+
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return theme.statusbarStyle()
     }
-    
+
     // MARK: - Actions
-    
+
     // MARK: - Private methods
-    
+
     private func setupLicenseTextView() {
         let format = String.localizedString("introduction_license_agreement")
         let privacy = UIApplication.shared.adguardUrl(action: "privacy", from: "license", buildVersion: productInfo.buildVersion())
         let eula = UIApplication.shared.adguardUrl(action: "eula", from: "license", buildVersion: productInfo.buildVersion())
         let htmlString = String(format: format, privacy, eula)
-        
+
         let font = licenseTextView.font ?? UIFont.systemFont(ofSize: 16.0)
         let attributeString = NSMutableAttributedString.fromHtml(htmlString, fontSize: font.pointSize, color: theme.blackTextColor, textAlignment: .center)
-        
+
         licenseTextView.attributedText = attributeString
     }
 }

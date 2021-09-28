@@ -1,35 +1,35 @@
 import UIKit
 
 class UpsellViewController: UIViewController {
-    
+
     @IBOutlet weak var installButton: UIButton!
-    
+
     private var gradient: CAGradientLayer?
-        
+
     override func viewDidLoad() {
         super.viewDidLoad()
         applyGradient()
-        
+
         installButton.makeTitleTextCapitalized()
         installButton.applyStandardAdGuardVPNGreenStyle()
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         gradient?.frame = view.bounds
     }
-    
+
     @IBAction func crossTapped(_ sender: UIButton) {
         dismiss(animated: true)
     }
-    
+
     @IBAction func installButtonTapped(_ sender: UIButton) {
         UIApplication.openAdGuardVpnAppStorePage()
         dismiss(animated: true)
     }
-    
+
     // MARK: - Private methods
-    
+
     private func applyGradient() {
         let gradientLayer = CAGradientLayer()
         let color1 = UIColor(hexString: "#464558").cgColor

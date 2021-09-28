@@ -44,7 +44,7 @@
  Managing database and queue for DB operations
  */
 @interface ASDatabase : NSObject{
- 
+
     FMDatabaseQueue *defaultDbQueue; // queue for default DB
     FMDatabaseQueue *queue; // queue for production DB
     NSString *dbVersion;
@@ -61,9 +61,9 @@
 /**
     Init database, copying default.db to production if need it, checking scheme version.
     If error occurs, then `ready` property stays NO and `error` property has last error object.
- 
+
     @param dbURL                    Url of the production DB.
-    @param upgradeDefaultDb         Set to YES this parameter, 
+    @param upgradeDefaultDb         Set to YES this parameter,
                                     if you need fresh version of the default DB in shared folder.
  */
 - (void)initDbWithURL:(NSURL *)dbURL upgradeDefaultDb:(BOOL)upgradeDefaultDb buildVersion: (NSString*) buildVersion;
@@ -72,7 +72,7 @@
  Executes queries in "transaction" (in fact in save point,
  so if no open transaction at the moment, then code will be performed
  as single transaction).
- 
+
  @param block Block of a code, which will be performed in single transaction.
  */
 - (void)exec:(void (^)(FMDatabase *db, BOOL *rollback))block;
@@ -94,12 +94,12 @@
 - (void)readUncommited:(BOOL)enabled;
 
 /**
- Turns on mode for GCD queue, when job in DB, in this queue, 
+ Turns on mode for GCD queue, when job in DB, in this queue,
  is performed on separated DB connection.
  */
 - (BOOL)isolateQueue:(dispatch_queue_t)theQueue;
 /**
- Turns off isolated mode for GCD queue. 
+ Turns off isolated mode for GCD queue.
  See description of method: - (BOOL)isolateQueue:(dispatch_queue_t)theQueue;
  */
 - (void)resetIsolationQueue:(dispatch_queue_t)theQueue;
@@ -110,7 +110,7 @@
 
 /**
     Create tables in DB using creation script.
-    @param version May be empty string. 
+    @param version May be empty string.
     In this case is used default creation script.
  */
 - (BOOL)createDefaultDB:(FMDatabase *)db version:(NSString *)version;
@@ -129,7 +129,7 @@
 /**
  Update tables in DB using update scripts up to version,
  that defined by toVersion parameter.
- 
+
  @param resourcePath Path where is update scripts.
  */
 - (BOOL)updateDB:(FMDatabase *)db fromVersion:(NSString *)version toVersion:(NSString *)toVersion resourcePath:(NSString *)resourcePath;

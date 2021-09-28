@@ -23,7 +23,7 @@ public struct CompaniesStatisticsRecord: Equatable {
     let tracker: DnsTracker? // DNS tracker information, associated with this company
     let counters: CountersStatisticsRecord // Different counters for company
     let domains: Set<String> // Set of domains related with company
-    
+
     static func +(left: CompaniesStatisticsRecord, right: CompaniesStatisticsRecord) -> CompaniesStatisticsRecord {
         return CompaniesStatisticsRecord(
             company: left.company,

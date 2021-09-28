@@ -33,7 +33,7 @@ public extension DnsProviderMetaProtocol {
     var predefined: DnsProviderProtocol { self as! DnsProviderProtocol }
     var dnsServers: [DnsServerMetaProtocol] { isCustom ? [custom.server] : predefined.servers }
     var isDefault: Bool { self.providerId == PredefinedDnsProvider.systemDefaultProviderId }
-    
+
     var activeServerName: String {
         if isCustom {
             return name
@@ -80,7 +80,7 @@ public struct DnsProvider: DnsProviderProtocol {
     public let logoDark: UIImage?
     public let homepage: String
     public var isEnabled: Bool
-    
+
     init(name: String, providerDescription: String, servers: [DnsServer], providerId: Int, logo: UIImage?, logoDark: UIImage?, homepage: String, isEnabled: Bool) {
         self.name = name
         self.providerDescription = providerDescription
@@ -91,7 +91,7 @@ public struct DnsProvider: DnsProviderProtocol {
         self.homepage = homepage
         self.isEnabled = isEnabled
     }
-    
+
     init(provider: PredefinedDnsProvider, servers: [DnsServer], isEnabled: Bool) {
         self.name = provider.name
         self.providerDescription = provider.providerDescription
@@ -118,7 +118,7 @@ public struct DnsServer: DnsServerProtocol {
     public let id: Int
     public let name: String
     public var isEnabled: Bool
-    
+
     init(features: [DnsFeature], upstreams: [DnsUpstream], providerId: Int, type: DnsProtocol, id: Int, name: String, isEnabled: Bool) {
         self.features = features
         self.upstreams = upstreams
@@ -127,7 +127,7 @@ public struct DnsServer: DnsServerProtocol {
         self.name = name
         self.isEnabled = isEnabled
     }
-    
+
     init(server: PredefinedDnsServer, isEnabled: Bool) {
         self.features = server.features
         self.upstreams = server.upstreams
@@ -151,7 +151,7 @@ public struct CustomDnsProvider: CustomDnsProviderProtocol, Codable, Equatable {
     public var server: CustomDnsServer
     public let providerId: Int
     public var isEnabled: Bool
-    
+
     init(name: String, server: CustomDnsServer, providerId: Int, isEnabled: Bool) {
         self.name = name
         self.server = server
@@ -168,7 +168,7 @@ public struct CustomDnsServer: DnsServerMetaProtocol, Codable, Equatable {
     public let type: DnsProtocol
     public let id: Int
     public var isEnabled: Bool
-    
+
     init(upstreams: [DnsUpstream], providerId: Int, type: DnsProtocol, id: Int, isEnabled: Bool) {
         self.upstreams = upstreams
         self.providerId = providerId

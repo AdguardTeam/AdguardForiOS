@@ -19,86 +19,86 @@
 import UIKit
 
 class CompanyDetailedController: UITableViewController {
-    
+
     // MARK: - Outlets
     @IBOutlet weak var titleLabel: ThemableLabel!
-    
+
     @IBOutlet weak var requestsNumberLabel: ThemableLabel!
     @IBOutlet weak var encryptedNumberLabel: UILabel!
-    
+
     @IBOutlet weak var searchBar: UISearchBar!
-    
+
     @IBOutlet weak var placeHolderLabel: ThemableLabel!
-    
+
     @IBOutlet weak var tableHeaderView: UIView!
     @IBOutlet var tableFooterView: UIView!
     @IBOutlet var sectionHeaderView: UIView!
-    
+
     @IBOutlet weak var recentActivityLabel: ThemableLabel!
-    
+
     @IBOutlet var themableButtons: [ThemableButton]!
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var filterButton: UIButton!
-    
+
     // MARK: - Services
-    
+
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsTrackersService: DnsTrackerServiceProtocol = ServiceLocator.shared.getService()!
     private let domainsParserService: DomainsParserServiceProtocol = ServiceLocator.shared.getService()!
-    
+
     // MARK: - Notifications
-    
+
     private var advancedModeObserver: NotificationToken?
     private var keyboardShowToken: NotificationToken?
-    
+
     // MARK: - Public variables
     var chartDateType: ChartDateType?
-    
+
     var record: CompanyRequestsRecord?
     let requestsModel: DnsRequestLogViewModel
-    
+
     // MARK: - Private variables
     private var selectedRecord: DnsLogRecordExtended?
-    
+
     private let activityTableViewCellReuseId = "ActivityTableViewCellId"
     private let showDnsContainerSegueId = "showDnsContainer"
-    
+
     private var titleInNavBarIsShown = false
-    
+
     //var model:
-    
+
     required init?(coder: NSCoder) {
         requestsModel = DnsRequestLogViewModel(dnsTrackerService: dnsTrackersService)
         super.init(coder: coder)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         updateTheme()
         setupTableView()
         addObservers()
         setupBackButton()
         titleLabel.text = record?.key
-        
+
         requestsModel.delegate = self
         if let type = chartDateType, let domains = record?.domains {
             requestsModel.obtainRecords(for: type, domains: domains)
         }
-        
+
         let requestsCount = record?.requests ?? 0
         let encryptedCount = record?.encrypted ?? 0
-        
+
         filterButton.isHidden = !configuration.advancedMode
-        
+
         requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
         encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedCount))
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+
         let height = tableHeaderView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
         var headerFrame = tableHeaderView.frame
 
@@ -108,7 +108,7 @@ class CompanyDetailedController: UITableViewController {
             tableView.tableHeaderView = tableHeaderView
         }
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showDnsContainerSegueId {
             if let controller = segue.destination as? DnsContainerController {
@@ -116,9 +116,9 @@ class CompanyDetailedController: UITableViewController {
             }
         }
     }
-    
+
     // MARK: - Actions
-    
+
     @IBAction func infoAction(_ sender: UIButton) {
         switch sender.tag {
         case 0:
@@ -133,12 +133,12 @@ class CompanyDetailedController: UITableViewController {
             return
         }
     }
-    
+
     @IBAction func changeRequestsTypeAction(_ sender: UIButton) {
         showGroupsAlert(sender)
     }
-    
-    
+
+
     // MARK: - UITableViewDataSource, UITableViewDelegate
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -149,7 +149,7 @@ class CompanyDetailedController: UITableViewController {
         theme.setupLabel(placeHolderLabel)
         return requestsModel.records.count == 0 ? tableFooterView : UIView()
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if requestsModel.records.count == 0 {
             let isBigScreen = traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular
@@ -157,15 +157,15 @@ class CompanyDetailedController: UITableViewController {
         }
         return 0.01
     }
-    
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return requestsModel.records.count
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: activityTableViewCellReuseId) as? ActivityTableViewCell {
             let record = requestsModel.records[indexPath.row]
@@ -177,40 +177,40 @@ class CompanyDetailedController: UITableViewController {
         }
         return UITableViewCell()
     }
-    
+
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y
-        
+
         if offset > titleLabel.frame.maxY && !titleInNavBarIsShown {
             animateShowingTitleInNavBar(record?.key)
             titleInNavBarIsShown = true
             return
         }
-        
+
         if offset < titleLabel.frame.maxY && titleInNavBarIsShown {
             animateHidingTitleInNavBar()
             titleInNavBarIsShown = false
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let record = requestsModel.records[indexPath.row]
         selectedRecord = record
         performSegue(withIdentifier: showDnsContainerSegueId, sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
+
     // MARK: - Private methods
-    
+
     private func addObservers(){
         keyboardShowToken = NotificationCenter.default.observe(name: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] (notification) in
             self?.keyboardWillShow()
         }
-        
+
         advancedModeObserver = NotificationCenter.default.observe(name: .advancedModeChanged, object: nil, queue: .main, using: { [weak self] _ in
             self?.observeAdvancedMode()
         })
-        
+
         requestsModel.recordsObserver = { [weak self] (records) in
             DispatchQueue.main.async {[weak self] in
                 guard let self = self else { return }
@@ -221,7 +221,7 @@ class CompanyDetailedController: UITableViewController {
             }
         }
     }
-    
+
     private func keyboardWillShow() {
         DispatchQueue.main.async {[weak self] in
             let isEmpty = self?.tableView.numberOfRows(inSection: 0) == 0
@@ -230,7 +230,7 @@ class CompanyDetailedController: UITableViewController {
             }
         }
     }
-    
+
     private func observeAdvancedMode(){
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
@@ -238,16 +238,16 @@ class CompanyDetailedController: UITableViewController {
             self.filterButton.isHidden = !self.configuration.advancedMode
         }
     }
-    
+
     private func setupTableView(){
         let nib = UINib.init(nibName: "ActivityTableViewCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: activityTableViewCellReuseId)
         refreshControl?.addTarget(self, action: #selector(updateTableView(sender:)), for: .valueChanged)
     }
-    
+
     private func showGroupsAlert(_ sender: UIButton) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .deviceAlertStyle)
-        
+
         let allRequestsAction = UIAlertAction(title: String.localizedString("all_requests_alert_action"), style: .default) {[weak self] _ in
             guard let self = self else { return }
             self.requestsModel.displayedStatisticsType = .allRequests
@@ -256,7 +256,7 @@ class CompanyDetailedController: UITableViewController {
             }
             alert.dismiss(animated: true, completion: nil)
         }
-        
+
         let blockedOnlyAction = UIAlertAction(title: String.localizedString("blocked_only_alert_action"), style: .default) {[weak self] _ in
             guard let self = self else { return }
             self.requestsModel.displayedStatisticsType = .blockedRequests
@@ -265,7 +265,7 @@ class CompanyDetailedController: UITableViewController {
             }
             alert.dismiss(animated: true, completion: nil)
         }
-        
+
         let allowedOnlyAction = UIAlertAction(title: String.localizedString("allowed_only_alert_action"), style: .default) {[weak self] _ in
             guard let self = self else { return }
             self.requestsModel.displayedStatisticsType = .allowedRequests
@@ -274,19 +274,19 @@ class CompanyDetailedController: UITableViewController {
             }
             alert.dismiss(animated: true, completion: nil)
         }
-        
+
         let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel) { _ in
             alert.dismiss(animated: true, completion: nil)
         }
-        
+
         alert.addAction(allRequestsAction)
         alert.addAction(blockedOnlyAction)
         alert.addAction(allowedOnlyAction)
         alert.addAction(cancelAction)
-        
+
         present(alert, animated: true)
     }
-    
+
     @objc func updateTableView(sender: UIRefreshControl) {
         if let type = chartDateType, let domains = record?.domains {
             requestsModel.obtainRecords(for: type, domains: domains)
@@ -301,27 +301,27 @@ extension CompanyDetailedController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         view.endEditing(true)
     }
-    
+
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         UIView.animate(withDuration: 0.5) {
             searchBar.showsCancelButton = true
         }
         return true
     }
-    
+
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         UIView.animate(withDuration: 0.5) {
             searchBar.showsCancelButton = false
         }
         return true
     }
-    
+
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         UIView.animate(withDuration: 0.5) {
             searchBar.resignFirstResponder()
         }
     }
-    
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         requestsModel.searchString = searchText
     }

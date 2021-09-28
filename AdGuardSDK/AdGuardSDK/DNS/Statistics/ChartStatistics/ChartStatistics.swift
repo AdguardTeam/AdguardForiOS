@@ -23,13 +23,13 @@ public protocol ChartStatisticsProtocol: ResetableSyncProtocol {
      Returns oldest record timeStamp or nil if DB is empty
      */
     var oldestRecordDate: Date? { get }
-    
+
     /// Adds the `record` obtained from DNS-libs in the Tunnel to the DB
     func process(record: ChartStatisticsRecord)
-    
+
     /**
      Returns 100 points for building a chart
-     
+
      - Parameters:
        - chartType: Variable that should be used as `y`
        - period: Desired period for points
@@ -41,9 +41,9 @@ public protocol ChartStatisticsProtocol: ResetableSyncProtocol {
 
 /// This object is responsible for managing statistics that is used to build charts
 final public class ChartStatistics: ChartStatisticsProtocol {
-    
+
     let statisticsDb: Connection
-    
+
     /// Returns oldest record timeStamp or nil if DB is empty
     public var oldestRecordDate: Date? {
         let query = ChartStatisticsTable.table
@@ -54,19 +54,19 @@ final public class ChartStatistics: ChartStatisticsProtocol {
         let date = dbDate?[ChartStatisticsTable.timeStamp]
         return date
     }
-    
+
     public init(statisticsDbContainerUrl: URL) throws {
         // Create directory if doesn't exist
         try FileManager.default.createDirectory(at: statisticsDbContainerUrl, withIntermediateDirectories: true, attributes: [:])
-        
+
         let dbName = Constants.Statistics.StatisticsType.chart.dbFileName
         statisticsDb = try Connection(statisticsDbContainerUrl.appendingPathComponent(dbName).path)
         dateFormatter.dateFormat = Constants.Statistics.dbDateFormat
         try createTableIfNotExists()
     }
-    
+
     // MARK: - Public methods
-    
+
     /// Just adds `record` to the table
     func add(record: ChartStatisticsRecord) throws {
         let setters: [Setter] = [ChartStatisticsTable.timeStamp <- record.timeStamp,
@@ -78,7 +78,7 @@ final public class ChartStatistics: ChartStatisticsProtocol {
         let addQuery = ChartStatisticsTable.table.insert(setters)
         try statisticsDb.run(addQuery)
     }
-    
+
     public func process(record: ChartStatisticsRecord) {
         do {
             try add(record: record)
@@ -87,15 +87,15 @@ final public class ChartStatistics: ChartStatisticsProtocol {
             Logger.logError("(ChartStatistics) - processRecord; Error adding record to DB; Error: \(error)")
         }
     }
-    
+
     /**
      Returns list of all records stored in DB for the specified `period`
-     
+
      This method will return records sorted by `timeStamp` in ascending order
      */
     func getRecords(for period: StatisticsPeriod) throws -> [ChartStatisticsRecord] {
         Logger.logDebug("(ChartStatistics) - getRecords for period=\(period.debugDescription)")
-        
+
         let interval = period.interval
         let query = ChartStatisticsTable.table
             .where(interval.start...interval.end ~= ChartStatisticsTable.timeStamp)
@@ -103,25 +103,25 @@ final public class ChartStatistics: ChartStatisticsProtocol {
         let records: [ChartStatisticsRecord] = try statisticsDb.prepare(query).map {
             ChartStatisticsRecord(dbRecord: $0)
         }
-        
+
         Logger.logDebug("(ChartStatistics) - getRecords; Return \(records.count) records for period=\(period.debugDescription)")
-        
+
         return records
     }
 
     public func getPoints(for chartType: ChartType, for period: StatisticsPeriod) throws -> ChartRecords {
         Logger.logDebug("(ChartStatistics) - getPoints for chartType=\(chartType) for period=\(period.debugDescription)")
-        
+
         /// Intervals for points. Each interval will contain 1 aggregated point
         let intervals = chartIntervals(for: period)
-        
+
         let points = try intervals.compactMap { interval -> Point? in
             let query = ChartStatisticsTable.table
                 .select([chartType.expression.varSum,
                          dateInSeconds(ChartStatisticsTable.timeStamp)])
                 .where(interval.start...interval.end ~= ChartStatisticsTable.timeStamp)
                 .order(ChartStatisticsTable.timeStamp)
-            
+
             /// Here must be only 1 point, we'll check it later
             let points: [Point] = try statisticsDb.prepare(query.asSQL()).map {
                 guard let x = $0[1] as? Int64, let y = $0[0] as? Int64 else {
@@ -131,7 +131,7 @@ final public class ChartStatistics: ChartStatisticsProtocol {
                 }
                 return Point(x: Int(x), y: Int(y))
             }
-            
+
             /// Check if point is the only one
             if points.count != 1 {
                 return Point(x: Int(interval.middle.timeIntervalSince1970), y: 0)
@@ -139,7 +139,7 @@ final public class ChartStatistics: ChartStatisticsProtocol {
                 return points.first!
             }
         }
-        
+
         Logger.logDebug("(ChartStatistics) - getPoints for chartType=\(chartType) for period=\(period.debugDescription) returning \(points.count) points")
         return ChartRecords(chartType: chartType, points: points)
     }
@@ -147,13 +147,13 @@ final public class ChartStatistics: ChartStatisticsProtocol {
     /// Removes all records from the table
     public func reset() throws {
         Logger.logInfo("(ChartStatistics) - reset called")
-        
+
         let resetQuery = ChartStatisticsTable.table.delete()
         try statisticsDb.run(resetQuery)
-        
+
         Logger.logInfo("(ChartStatistics) - reset successfully finished")
     }
-    
+
     // MARK: - Private methods
 
     /// Creates `chart_statistics_table` in statistics DB if it doesn't exist
@@ -167,7 +167,7 @@ final public class ChartStatistics: ChartStatisticsProtocol {
         }
         try statisticsDb.run(query)
     }
-    
+
     /// Converts timeStamp to number of seconds since 1970
     private func dateInSeconds(_ expr: Expression<Date>) -> Expression<Int> {
         Expression(literal: "cast(avg(strftime('%s', \(expr.asSQL()))) as int) as \(expr.template)")

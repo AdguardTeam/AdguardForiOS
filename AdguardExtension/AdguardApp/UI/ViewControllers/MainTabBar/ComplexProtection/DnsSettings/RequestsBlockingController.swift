@@ -23,37 +23,37 @@ final class RequestsBlockingController: UITableViewController {
 
     @IBOutlet weak var filtersLabel: ThemableLabel!
     @IBOutlet var themableLabels: [ThemableLabel]!
-    
+
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsProtection: DnsProtectionProtocol = ServiceLocator.shared.getService()!
-    
+
     private let dnsBlacklistSegue = "dnsBlacklistSegue"
     private let dnsWhitelistSegue = "dnsWhitelistSegue"
-    
+
     private var advancedModeObserver: NotificationToken?
     private var themeObserver: NotificationToken?
-    
+
     private let headerSection = 0
-    
+
     // MARK: - View controller life cycle
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let destinationVC = segue.destination as? UserRulesTableController else {
             return
         }
-        
+
         if segue.identifier == dnsBlacklistSegue {
             destinationVC.rulesType = .dnsBlocklist
         } else if segue.identifier == dnsWhitelistSegue {
             destinationVC.rulesType = .dnsAllowlist
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         updateTheme()
         setupBackButton()
-        
+
         advancedModeObserver = NotificationCenter.default.observe(name: .advancedModeChanged, object: nil, queue: .main, using: { [weak self] _ in
             self?.tableView.reloadData()
         })
@@ -61,7 +61,7 @@ final class RequestsBlockingController: UITableViewController {
             self?.updateTheme()
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let enabledFiltersCount = dnsProtection.filters.filter { $0.isEnabled }.count
@@ -69,28 +69,28 @@ final class RequestsBlockingController: UITableViewController {
         let filtersDescriptionText = String.localizedStringWithFormat(filtersDescriptionFormat, enabledFiltersCount)
         filtersLabel.text = filtersDescriptionText
     }
-    
+
     // MARK: - Table view delegate methods
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
-        
+
         theme.setupTableCell(cell)
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.01
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
     }
-    
+
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return UIView()
     }
-    
+
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }

@@ -1,17 +1,17 @@
 import XCTest
 
 class ContentBlockersInfoStorageTest: XCTestCase {
-    
+
     let allCbInfoKey = "AdGuardSDK.allCbInfoKey"
-    
+
     var userDefaultsStorage: UserDefaultsStorageMock!
     var infoStorage: ContentBlockersInfoStorageProtocol!
-    
+
     override func setUpWithError() throws {
         userDefaultsStorage = UserDefaultsStorageMock()
         infoStorage = try ContentBlockersInfoStorage(jsonStorageUrl: TestsFileManager.workingUrl, userDefaultsStorage: userDefaultsStorage)
     }
-    
+
     func testAdvancedRulesFileUrl() {
         TestsFileManager.clearRootDirectory()
         let advancedRules = [
@@ -24,23 +24,23 @@ class ContentBlockersInfoStorageTest: XCTestCase {
         ]
         let results = getFilterConvertionResultsForAdvancedRules(advancedRules)
         try! infoStorage.save(converterResults: results)
-        
+
         let rulesString = try! String(contentsOf: infoStorage.advancedRulesFileUrl)
         let rules = rulesString.split(separator: "\n")
         XCTAssertEqual(rules.count, 7)
         XCTAssertEqual(infoStorage.advancedRulesCount, 7)
-        
+
         let rulesSet = Set(advancedRules.reduce("", { $0 + "\n" + $1 }).split(separator: "\n"))
         XCTAssertEqual(rulesSet.count, 7)
         rules.forEach {
             XCTAssert(rulesSet.contains($0))
         }
     }
-    
+
     func testAllConverterResults() {
         fillStorage()
     }
-    
+
     func testSaveCbJsonsWithError() {
         let filters = [
             FiltersConverterResult(type: .general, jsonString: "some_string", totalRules: 100, totalConverted: 20, overlimit: true, errorsCount: 1, advancedBlockingConvertedCount: 1, advancedBlockingJson: "some_json", advancedBlockingText: "some_text", message: "message"),
@@ -52,40 +52,40 @@ class ContentBlockersInfoStorageTest: XCTestCase {
                 XCTFail()
             }
         }
-        
+
         XCTAssert(infoStorage.allConverterResults.isEmpty)
     }
-    
+
     func testSaveCbJsonsWithSuccess() {
         let results = getFilterConvertionResults()
         try! infoStorage.save(converterResults: results)
         XCTAssertEqual(infoStorage.allConverterResults.count, 6)
     }
-    
+
     func testGetInfo() {
         fillStorage()
         let info = infoStorage.getConverterResult(for: .socialWidgetsAndAnnoyances)!
         let result = getFilterConvertionResults().first(where: { $0.type == .socialWidgetsAndAnnoyances })!
         XCTAssertEqual(result, info.result)
     }
-    
+
     func testGetInfoWithNilResult() {
         let info = infoStorage.getConverterResult(for: .general)
         XCTAssertNil(info)
     }
-    
+
     func testReset() {
         fillStorage()
         try! infoStorage.reset()
         XCTAssert(infoStorage.allConverterResults.isEmpty)
-        
+
         let items = try! FileManager.default.contentsOfDirectory(at: TestsFileManager.workingUrl, includingPropertiesForKeys: nil, options: [])
         XCTAssert(items.isEmpty)
-        
+
         // Test that service continues operating as usual
         testSaveCbJsonsWithSuccess()
     }
-    
+
     private func fillStorage() {
         XCTAssert(infoStorage.allConverterResults.isEmpty)
         let someUrl = TestsFileManager.workingUrl
@@ -94,10 +94,10 @@ class ContentBlockersInfoStorageTest: XCTestCase {
         let encoder = JSONEncoder()
         let cbInfoData = try! encoder.encode(someInfo)
         userDefaultsStorage.storage.setValue(cbInfoData, forKey: allCbInfoKey)
-        
+
         XCTAssertEqual(infoStorage.allConverterResults, someInfo)
     }
-    
+
     private func getFilterConvertionResults() -> [FiltersConverterResult] {
         let results = [
             FiltersConverterResult(type: .general, jsonString: "some_string", totalRules: 100, totalConverted: 20, overlimit: true, errorsCount: 1, advancedBlockingConvertedCount: 1, advancedBlockingJson: "some_json", advancedBlockingText: "some_text", message: "message"),
@@ -109,7 +109,7 @@ class ContentBlockersInfoStorageTest: XCTestCase {
         ]
         return results
     }
-    
+
     private func getFilterConvertionResultsForAdvancedRules(_ advancedRules: [String]) -> [FiltersConverterResult] {
         let results = [
             FiltersConverterResult(type: .general, jsonString: "", totalRules: 0, totalConverted: 0, overlimit: false, errorsCount: 0, advancedBlockingConvertedCount: 0, advancedBlockingJson: "", advancedBlockingText: advancedRules[0], message: ""),

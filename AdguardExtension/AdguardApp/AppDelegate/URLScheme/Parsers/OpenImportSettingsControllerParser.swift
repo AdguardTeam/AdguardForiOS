@@ -19,11 +19,11 @@
 
 struct OpenImportSettingsControllerParser: IURLSchemeParametersParser {
     private let executor: IURLSchemeExecutor
-    
+
     init(executor: IURLSchemeExecutor) {
         self.executor = executor
     }
-    
+
     func parse(_ url: URL) -> Bool {
         guard let json = url.parseUrl().params?["json"], !json.isEmpty else { return false }
         let parser = SettingsParser()

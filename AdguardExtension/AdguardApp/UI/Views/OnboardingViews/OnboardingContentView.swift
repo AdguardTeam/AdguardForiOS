@@ -31,7 +31,7 @@ final class OnboardingContentView: UIView {
         }
     }
 
-    //MARK: - Services
+    // MARK: - Services
 
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!

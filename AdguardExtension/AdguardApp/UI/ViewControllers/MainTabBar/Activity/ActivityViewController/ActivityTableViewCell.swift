@@ -28,26 +28,26 @@ class ActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var blockStateView: UIView!
     @IBOutlet weak var categoryImageView: UIImageView!
     @IBOutlet weak var timeLabel: ThemableLabel!
-    
+
     var advancedMode: Bool = true
-    
+
     var domainsParser: DomainParser?
-    
+
     var theme: ThemeServiceProtocol? {
         didSet {
             updateTheme()
         }
     }
-    
+
     var record: DnsLogRecordExtended? {
         didSet {
             processRecord()
         }
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
-        
+
         backgroundColor = nil
         blockStateView.backgroundColor = .clear
         infoLabel.attributedText = nil
@@ -55,30 +55,30 @@ class ActivityTableViewCell: UITableViewCell {
         timeLabel.text = nil
         categoryImageView.isHidden = false
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         blockStateView.layer.cornerRadius = blockStateView.frame.height / 2.0
     }
-    
+
     // MARK: - Private variables
-    
+
     private let redDotColor = UIColor.AdGuardColor.red
     private let greenDotColor = UIColor.AdGuardColor.lightGreen1
     private let greyDotColor = UIColor(hexString: "#888888")
-    
+
     // MARK: - Private methods
-    
+
     private func processRecord(){
         guard let record = record else { return }
         let timeString = record.logRecord.time()
         let name = record.category.name
         let domain = record.logRecord.getDetailsString(infoLabel.font.pointSize, advancedMode)
-        
+
         companyLabel.text = (name == nil || advancedMode) ? record.logRecord.firstLevelDomain(parser: domainsParser) : name
         infoLabel.attributedText = domain
         timeLabel.text = timeString
-        
+
         // Setup cell background color
         let type: BlockedRecordType
         switch record.logRecord.status {
@@ -92,7 +92,7 @@ class ActivityTableViewCell: UITableViewCell {
             type = .blocked
         }
         setupRecordCell(type: type, dnsStatus: record.logRecord.answerStatus ?? "")
-        
+
         // Setup blockStateView color
         switch record.logRecord.userStatus {
         case .removedFromWhitelist:
@@ -108,24 +108,24 @@ class ActivityTableViewCell: UITableViewCell {
         default:
             blockStateView.backgroundColor = .clear
         }
-        
+
         let categoryImage = UIImage.getCategoryImage(withId: record.category.categoryId)
         categoryImageView.isHidden = categoryImage == nil
         categoryImageView.image = categoryImage
     }
-    
+
     private func updateTheme(){
         theme?.setupTableCell(self)
         theme?.setupLabel(companyLabel)
         theme?.setupLabel(infoLabel)
         theme?.setupLabel(timeLabel)
     }
-    
+
     private func setupRecordCell(type: BlockedRecordType, dnsStatus: String){
-        
+
         var logSelectedCellColor: UIColor = .clear
         var logBlockedCellColor: UIColor = .clear
-        
+
         switch type {
         case .blocked:
             logSelectedCellColor = UIColor(hexString: "#4DDF3812")
@@ -136,7 +136,7 @@ class ActivityTableViewCell: UITableViewCell {
         default:
             return
         }
-        
+
         let bgColorView = UIView()
         bgColorView.backgroundColor = logSelectedCellColor
         selectedBackgroundView = bgColorView

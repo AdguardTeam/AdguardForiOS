@@ -25,19 +25,19 @@ final class ActivityNativeDnsController: UIViewController {
     @IBOutlet weak var dnsNameLabel: ThemableLabel!
     @IBOutlet weak var dnsProtocolLabel: ThemableLabel!
     @IBOutlet weak var implementationButton: UIButton!
-    
+
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
-    
+
     // MARK: - services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let nativeDnsManager: NativeDnsSettingsManagerProtocol = ServiceLocator.shared.getService()!
     private let dnsProvidersManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!
-    
+
     // MARK: - observers
     private var currentDnsServerObserver: NotificationToken?
     private var systemProtectionChangeObserver: NotificationToken?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         implementationButton.makeTitleTextCapitalized()
@@ -46,23 +46,23 @@ final class ActivityNativeDnsController: UIViewController {
         setupLabels()
         addObservers()
     }
-    
+
     @IBAction func implementationButtonTapped(_ sender: UIButton) {
         AppDelegate.shared.presentDnsSettingsController()
     }
-    
+
     private func setupLabels() {
         dnsStatusLabel.text = nativeDnsManager.dnsConfigIsEnabled ? String.localizedString("on_state") : String.localizedString("off_state")
         dnsNameLabel.text = dnsProvidersManager.activeDnsProvider.activeServerName
         dnsProtocolLabel.text = dnsProvidersManager.activeDnsServer.type.localizedName
     }
-    
+
     private func addObservers() {
-        
+
         currentDnsServerObserver = NotificationCenter.default.observe(name: .currentDnsServerChanged, object: nil, queue: .main) { [weak self] _ in
             self?.setupLabels()
         }
-        
+
         systemProtectionChangeObserver = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: .main) { [weak self] _ in
             self?.setupLabels()
         }

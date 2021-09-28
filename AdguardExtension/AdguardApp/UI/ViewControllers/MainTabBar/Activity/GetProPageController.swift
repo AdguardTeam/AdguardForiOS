@@ -19,39 +19,39 @@
 import UIKit
 
 class GetProPageController: UIViewController {
-    
+
     @IBOutlet weak var activityImage: UIImageView!
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var tryButton: UIButton!
     @IBOutlet var themableLabels: [ThemableLabel]!
-    
+
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         activityImage.image = UIImage(named: "activity")
-        
+
         let product = purchaseService.standardProduct
-    
+
         titleLabel.text = getTitleString(product: product).uppercased()
-    
+
         updateTheme()
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tryButton.layer.cornerRadius = tryButton.frame.height / 2
     }
-    
+
     private func getTitleString(product: Product?) -> String {
-        
+
         let period = product?.trialPeriod?.unit ?? .week
         let numberOfUnits = product?.trialPeriod?.numberOfUnits ?? 1
-        
+
         var formatString : String = ""
-        
+
         switch period {
         case .day:
             formatString = String.localizedString("getPro_full_access_days")
@@ -66,9 +66,9 @@ class GetProPageController: UIViewController {
         case .year:
             formatString = String.localizedString("getPro_full_access_years")
         }
-        
+
         let resultString : String = String.localizedStringWithFormat(formatString, numberOfUnits)
-        
+
         return resultString
     }
 }

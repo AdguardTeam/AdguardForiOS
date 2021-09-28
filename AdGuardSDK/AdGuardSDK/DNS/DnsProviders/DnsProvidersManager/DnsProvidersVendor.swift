@@ -32,30 +32,30 @@ protocol DnsProvidersVendorProtocol {
  This object is responsible for vendoring DNS providers objects with actual states
  */
 final class DnsProvidersVendor: DnsProvidersVendorProtocol {
-    
+
     // MARK: - Providers
-    
+
     struct Providers {
         let predefined: [DnsProviderProtocol]
         let custom: [CustomDnsProviderProtocol]
         let activeDnsProvider: DnsProviderMetaProtocol
         let activeDnsServer: DnsServerMetaProtocol
     }
-    
+
     // MARK: - Private variables
-    
+
     private let predefinedProviders: [PredefinedDnsProvider]
     private let customProvidersStorage: CustomDnsProvidersStorageProtocol
-    
+
     // MARK: - Initialization
-    
+
     init(predefinedProviders: PredefinedDnsProvidersDecoderProtocol, customProvidersStorage: CustomDnsProvidersStorageProtocol) {
         self.predefinedProviders = predefinedProviders.providers
         self.customProvidersStorage = customProvidersStorage
     }
-    
+
     // MARK: - Public methods
-    
+
     /**
      The main difficulty of setting DNS providers and servers states is the fact that not all DNS protocols are supported in Native Implementation.
      The goal of this function is to return only supported servers and providers and to set **isEnabled** states.
@@ -67,11 +67,11 @@ final class DnsProvidersVendor: DnsProvidersVendorProtocol {
     func getProvidersWithState(for implementation: DnsImplementation, activeDns: DnsProvidersManager.ActiveDnsInfo) -> Providers {
         // 1st step
         let revealedActiveDns = revealActiveDns(for: implementation, activeDns: activeDns)
-        
+
         // 2nd step
         let predefined = makePredefinedProviders(for: implementation, with: revealedActiveDns)
         let custom = makeCustomProviders(for: implementation, with: revealedActiveDns)
-            
+
         let enabledProvider: DnsProviderMetaProtocol
         let enabledServer: DnsServerMetaProtocol
 
@@ -82,25 +82,25 @@ final class DnsProvidersVendor: DnsProvidersVendorProtocol {
             enabledProvider = custom.1!
             enabledServer = custom.2!
         }
-        
+
         // 3rd step
         return Providers(predefined: predefined.0, custom: custom.0, activeDnsProvider: enabledProvider, activeDnsServer: enabledServer)
     }
-    
+
     // MARK: - Private methods
-    
+
     private func revealActiveDns(for implementation: DnsImplementation, activeDns: DnsProvidersManager.ActiveDnsInfo) -> DnsProvidersManager.ActiveDnsInfo {
         // Need to check if current DNS could be suppoted by implementation
         var enabledProvider: DnsProviderMetaProtocol?
         var enabledServer: DnsServerMetaProtocol?
-        
+
         // Iterate over predefined providers searching for active provider and server
         providersLoop: for pr in predefinedProviders {
             // Need to remove system default server in native implementation
             if implementation == .native && pr.providerId == PredefinedDnsProvider.systemDefaultProviderId {
                 continue
             }
-            
+
             let isEnabled = pr.providerId == activeDns.providerId
             if isEnabled {
                 let servers = pr.servers.map { DnsServer(server: $0, isEnabled: false) }
@@ -115,7 +115,7 @@ final class DnsProvidersVendor: DnsProvidersVendorProtocol {
                 }
             }
         }
-        
+
         // Iterate over custom providers searching for active provider and server
         for cst in customProvidersStorage.providers {
             let isEnabled = cst.providerId == activeDns.providerId
@@ -129,29 +129,29 @@ final class DnsProvidersVendor: DnsProvidersVendorProtocol {
                 }
             }
         }
-        
+
         // If one of these variables is nil than it means that either server or provider is not supported
         // In that case we set AdGuard DoH server as default
         let shouldSetAdguardProvider = enabledProvider == nil || enabledServer == nil
         let adguardDnsInfo = DnsProvidersManager.ActiveDnsInfo(providerId: PredefinedDnsProvider.adguardDnsProviderId,
                                                                serverId: PredefinedDnsServer.adguardDohServerId)
         let revealedActiveDns = shouldSetAdguardProvider ? adguardDnsInfo : activeDns
-        
+
         return revealedActiveDns
     }
-    
+
     private func makePredefinedProviders(for implementation: DnsImplementation,
                                          with activeDns: DnsProvidersManager.ActiveDnsInfo) -> ([DnsProvider], DnsProviderMetaProtocol?, DnsServerMetaProtocol?) {
-        
+
         var enabledProvider: DnsProviderMetaProtocol?
         var enabledServer: DnsServerMetaProtocol?
-        
+
         let predefined: [DnsProvider] = predefinedProviders.compactMap { provider in
             // Need to remove system default server in native implementation
             if implementation == .native && provider.providerId == PredefinedDnsProvider.systemDefaultProviderId {
                 return nil
             }
-            
+
             let servers = provider.servers.compactMap { predefinedServer -> DnsServer? in
                 let serverIsEnabled = predefinedServer.id == activeDns.serverId
                 if implementation.supportedProtocols.contains(predefinedServer.type) {
@@ -164,7 +164,7 @@ final class DnsProvidersVendor: DnsProvidersVendorProtocol {
                     return nil
                 }
             }
-            
+
             if servers.isEmpty {
                 return nil
             } else {
@@ -178,15 +178,15 @@ final class DnsProvidersVendor: DnsProvidersVendorProtocol {
         }
         return (predefined, enabledProvider, enabledServer)
     }
-    
+
     private func makeCustomProviders(
         for implementation: DnsImplementation,
         with activeDns: DnsProvidersManager.ActiveDnsInfo
     ) -> ([CustomDnsProvider], DnsProviderMetaProtocol?, DnsServerMetaProtocol?) {
-        
+
         var enabledProvider: DnsProviderMetaProtocol?
         var enabledServer: DnsServerMetaProtocol?
-        
+
         let customProviders: [CustomDnsProvider] = customProvidersStorage.providers.compactMap { provider in
             if implementation.supportedProtocols.contains(provider.server.type) {
                 let serverIsEnabled = provider.server.id == activeDns.serverId
@@ -195,11 +195,11 @@ final class DnsProvidersVendor: DnsProvidersVendorProtocol {
                                              type: provider.server.type,
                                              id: provider.server.id,
                                              isEnabled: serverIsEnabled)
-                
+
                 if serverIsEnabled {
                     enabledServer = server
                 }
-                
+
                 let providerIsEnabled = provider.providerId == activeDns.providerId
                 let provider = CustomDnsProvider(name: provider.name,
                                                  server: server,

@@ -60,7 +60,7 @@
 
 /**
  Obtain localized description of processes for filtering.
- 
+
  @return    Returns dictionary, where key is bundle id of the application,
             and value contains description of process.
  */

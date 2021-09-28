@@ -28,9 +28,9 @@
     NSString *_dateFormatterKey;
     DDAtomicCounter *_atomicLoggerCounter;
     NSDateFormatter *_threadUnsafeDateFormatter; // Use [self stringFromDate]
-    
+
     pthread_mutex_t _mutex;
-    
+
     NSUInteger _minQueueLength;           // _prefix == Only access via atomic property
     NSUInteger _maxQueueLength;           // _prefix == Only access via atomic property
     NSMutableDictionary *_replacements;   // _prefix == Only access from within spinlock

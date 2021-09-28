@@ -1,17 +1,17 @@
 /**
        This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
        Copyright © Adguard Software Limited. All rights reserved.
- 
+
        Adguard for iOS is free software: you can redistribute it and/or modify
        it under the terms of the GNU General Public License as published by
        the Free Software Foundation, either version 3 of the License, or
        (at your option) any later version.
- 
+
        Adguard for iOS is distributed in the hope that it will be useful,
        but WITHOUT ANY WARRANTY; without even the implied warranty of
        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
        GNU General Public License for more details.
- 
+
        You should have received a copy of the GNU General Public License
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -25,7 +25,7 @@ public struct BackgroundFetchUpdateResult: Equatable {
     public let newBackgroundFetchState: BackgroundFetchState
     public let oldBackgroundFetchState: BackgroundFetchState
     public let error: Error?
-    
+
     public static func == (lhs: BackgroundFetchUpdateResult, rhs: BackgroundFetchUpdateResult) -> Bool {
         return lhs.backgroundFetchResult.rawValue == rhs.backgroundFetchResult.rawValue
         && lhs.newBackgroundFetchState == rhs.newBackgroundFetchState
@@ -49,7 +49,7 @@ public enum BackgroundFetchState: Int, CustomDebugStringConvertible {
     case convertFilters
     case reloadContentBlockers
     case updateFinished
-    
+
     public var debugDescription: String {
         switch self {
         case .loadAndSaveFilters: return "loadAndSaveFilters"
@@ -63,16 +63,16 @@ public enum BackgroundFetchState: Int, CustomDebugStringConvertible {
 public protocol SafariProtectionBackgroundFetchProtocol {
     /// Updates filters while background fetch is active
     func updateSafariProtectionInBackground(_ onStateExecutionFinished: @escaping (_ result: BackgroundFetchUpdateResult) -> Void)
-    
+
     /**
      This method is neede to finish the update process that did start in the background
-     
+
      For example:
         The background update did complete 2 out of 3 steps.
         To provide user with the latest data we should finish the update and complete the 3rd step
      Note:
         If background update did already finished successfully this method will do nothing
-     
+
      The method should be called on the app start in **didFinishLaunchingWithOptions**
      */
     func finishBackgroundUpdate(_ onUpdateFinished: @escaping (_ error: Error?) -> Void)
@@ -89,12 +89,12 @@ extension SafariProtection {
             userDefaults.currentBackgroundFetchState = newValue
         }
     }
-    
+
     // MARK: - Public methods
-    
+
     public func updateSafariProtectionInBackground(_ onStateExecutionFinished: @escaping (_ result: BackgroundFetchUpdateResult) -> Void) {
         Logger.logInfo("(SafariProtection+BackgroundFetch) - updateSafariProtectionInBackground; Start background fetch, current state = \(currentBackgroundFetchState)")
-        
+
         switch currentBackgroundFetchState {
         case .loadAndSaveFilters, .updateFinished:
             updateFilters(onStateExecutionFinished)
@@ -105,7 +105,7 @@ extension SafariProtection {
             reloadContentBlockers(onStateExecutionFinished)
         }
     }
-    
+
     public func finishBackgroundUpdate(_ onUpdateFinished: @escaping (_ error: Error?) -> Void) {
         DispatchQueue(label: "SafariAdGuardSDK.SafariProtection.finishBackgroundUpdate").async { [weak self] in
             guard let self = self else {
@@ -114,7 +114,7 @@ extension SafariProtection {
                 return
             }
             Logger.logInfo("(SafariProtection+BackgroundFetch) - finishBackgroundUpdate start; Current state = \(self.currentBackgroundFetchState)")
-            
+
             switch self.currentBackgroundFetchState {
             case .loadAndSaveFilters:
                 let group = DispatchGroup()
@@ -140,20 +140,20 @@ extension SafariProtection {
             }
         }
     }
-    
+
     // MARK: - Private methods
-    
+
     // 1st step of background update
     private func updateFilters(_ onFiltersUpdated: @escaping (_ result: BackgroundFetchUpdateResult) -> Void) {
         Logger.logInfo("(SafariProtection+BackgroundFetch) - updateFilters start")
-        
+
         workingQueue.async { [weak self] in
             guard let self = self else { return }
-            
+
             var safariFiltersUpdateError: Error?
             var dnsFiltersUpdateError: Error?
             let group = DispatchGroup()
-            
+
             // Update Safari filters
             group.enter()
             self.filters.updateAllMeta(forcibly: true) { result in
@@ -163,7 +163,7 @@ extension SafariProtection {
                 }
                 group.leave()
             }
-            
+
             // Update DNS filters
             if let dnsUpdater = self.dnsBackgroundFetchUpdater {
                 group.enter()
@@ -172,13 +172,13 @@ extension SafariProtection {
                     group.leave()
                 }
             }
-            
+
             // On Safari and DNS filters updated
             group.notify(queue: self.completionQueue) { [weak self] in
                 guard let self = self else { return }
-                
+
                 let oldState = self.currentBackgroundFetchState
-                
+
                 // Successfully updated
                 if safariFiltersUpdateError == nil && dnsFiltersUpdateError == nil {
                     self.currentBackgroundFetchState = .convertFilters
@@ -192,11 +192,11 @@ extension SafariProtection {
                     onFiltersUpdated(result)
                     return
                 }
-                
+
                 // Failed to update
                 if let error = safariFiltersUpdateError {
                     Logger.logError("(SafariProtection+BackgroundFetch) - updateFilters; Safari update error: \(error)")
-                    
+
                 }
                 if let error = dnsFiltersUpdateError {
                     Logger.logError("(SafariProtection+BackgroundFetch) - updateFilters; DNS update error: \(error)")
@@ -211,11 +211,11 @@ extension SafariProtection {
             }
         }
     }
-    
+
     // 2nd step of background update
     private func convertFilters() -> BackgroundFetchUpdateResult {
         Logger.logInfo("(SafariProtection+BackgroundFetch) - convertFiltersInBackground start")
-        
+
         return workingQueue.sync {
             let oldState = currentBackgroundFetchState
             do {
@@ -243,17 +243,17 @@ extension SafariProtection {
             }
         }
     }
-    
+
     // 3rd step of background update
     private func reloadContentBlockers(_ onCbReloaded: @escaping (_ result: BackgroundFetchUpdateResult) -> Void) {
         Logger.logInfo("(SafariProtection+BackgroundFetch) - reloadContentBlockers start")
-        
+
         workingQueue.async { [weak self] in
             self?.cbService.updateContentBlockers { [weak self] error in
                 guard let self = self else { return }
-                
+
                 let oldState = self.currentBackgroundFetchState
-                
+
                 if let error = error {
                     Logger.logError("(SafariProtection+BackgroundFetch) - reloadContentBlockers; Error reloading CBs: \(error)")
                     let result = BackgroundFetchUpdateResult(
@@ -282,9 +282,9 @@ extension SafariProtection {
 // MARK: - UserDefaultsStorageProtocol + currentBackgroundFetchState
 
 fileprivate extension UserDefaultsStorageProtocol {
-    
+
     private var currentBackgroundFetchStateKey: String { "AdGuardSDK.currentBackgroundFetchStateKey" }
-    
+
     var currentBackgroundFetchState: BackgroundFetchState {
         get {
             if let intObject = storage.value(forKey: currentBackgroundFetchStateKey) as? Int {

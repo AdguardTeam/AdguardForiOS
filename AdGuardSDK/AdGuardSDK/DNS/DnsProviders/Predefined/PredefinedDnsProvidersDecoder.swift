@@ -29,13 +29,13 @@ protocol PredefinedDnsProvidersDecoderProtocol {
 */
 struct PredefinedDnsProvidersDecoder: PredefinedDnsProvidersDecoderProtocol {
     var providers: [PredefinedDnsProvider] = []
-    
+
     // Language for providers localizations
     private let currentLanguage: String
-    
+
     // Bundle variable for tests
     private let bundle: Bundle
-    
+
     /*
      Language map for providers_i18n.json
      Some languages codes from json differ from apple ones
@@ -43,16 +43,16 @@ struct PredefinedDnsProvidersDecoder: PredefinedDnsProvidersDecoderProtocol {
     private let languageMap = ["es": "es-ES",
                                "zh-Hans": "zh-CN",
                                "zh-Hant": "zh-TW"]
-    
+
     //Init bundle with DnsProtection class type as default value
     init(currentLanguage: String, bundle: Bundle = .init(for: DnsProtection.self) ) throws {
         self.currentLanguage = currentLanguage
         self.bundle = bundle
         try initializeDnsProviders()
     }
-    
+
     // MARK: - Private methods
-    
+
     /* Initializes providers from providers.json */
     private mutating func initializeDnsProviders() throws {
         let jsonData = try getData(forFileName: "providers")
@@ -60,14 +60,14 @@ struct PredefinedDnsProvidersDecoder: PredefinedDnsProvidersDecoderProtocol {
         let dnsProviders = try decoder.decode(PredefinedDnsProviders.self, from: jsonData)
         self.providers = try localizeDnsProviders(dnsProviders.providers)
     }
-    
+
     /* Gets localizations for providers obtained from providers.json */
     private func localizeDnsProviders(_ providers: [PredefinedDnsProvider]) throws -> [PredefinedDnsProvider] {
         let jsonData = try getData(forFileName: "providers_i18n")
         let json = try JSONSerialization.jsonObject(with: jsonData) as! [String: Any]
         let providersJson = json["providers"] as! [String: Any]
         let featuresJson = json["features"] as! [String: Any]
-        
+
         return providers.map { provider in
             let localized = localizationsForProvider(provider, providersJson)
             let servers = localizationsForFeatures(provider, featuresJson)
@@ -80,7 +80,7 @@ struct PredefinedDnsProvidersDecoder: PredefinedDnsProvidersDecoderProtocol {
                                          homepage: provider.homepage)
         }
     }
-    
+
     /* Helper methods to obtain localized name and desc for provider from providers_i18n.json */
     private func localizationsForProvider(_ provider: PredefinedDnsProvider, _ providersJson: [String: Any]) -> (name: String, desc: String) {
         let lang = languageMap[currentLanguage] ?? currentLanguage
@@ -94,11 +94,11 @@ struct PredefinedDnsProvidersDecoder: PredefinedDnsProvidersDecoderProtocol {
             return (provider.name, provider.providerDescription)
         }
     }
-    
+
     /* Helper methods to obtain localized name and desc for features of servers from providers_i18n.json */
     private func localizationsForFeatures(_ provider: PredefinedDnsProvider, _ featuresJson: [String: Any]) -> [PredefinedDnsServer] {
         let lang = languageMap[currentLanguage] ?? currentLanguage
-        
+
         return provider.servers.map { server in
             let newFeatures = server.features.map { feature -> DnsFeature in
                 let allLocalizations = featuresJson[feature.type.rawValue] as! [String: Any]
@@ -121,7 +121,7 @@ struct PredefinedDnsProvidersDecoder: PredefinedDnsProvidersDecoderProtocol {
                              name: server.name)
         }
     }
-    
+
     /* Returns json Data from file name */
     private func getData(forFileName fileName: String) throws -> Data {
         guard let pathString = bundle.path(forResource: fileName, ofType: "json") else {

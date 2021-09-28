@@ -2,7 +2,7 @@ import UIKit
 
 @IBDesignable
 class EdgeInsetLabel: ThemableLabel {
-    
+
     @IBInspectable
     var leftTextInset: CGFloat {
         set { textInsets.left = newValue }
@@ -26,7 +26,7 @@ class EdgeInsetLabel: ThemableLabel {
         set { textInsets.bottom = newValue }
         get { return textInsets.bottom }
     }
-    
+
     var textInsets = UIEdgeInsets.zero {
         didSet { invalidateIntrinsicContentSize() }
     }

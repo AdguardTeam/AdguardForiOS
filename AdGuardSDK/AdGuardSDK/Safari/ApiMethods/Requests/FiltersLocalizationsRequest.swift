@@ -20,14 +20,14 @@ import Foundation
 
 /// Request to obtain filters localizations
 struct FiltersLocalizationsRequest: RequestProtocol {
-    
+
     var urlRequest: URLRequest? {
         let path = "\(urlBase)filters_i18n.js"
         guard let url = URL(string: path) else { return nil }
-        
+
         var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: TimeInterval(30))
         request.httpMethod = "GET"
-        
+
         return request
     }
 }

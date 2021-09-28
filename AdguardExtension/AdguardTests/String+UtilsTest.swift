@@ -19,25 +19,25 @@
 import XCTest
 
 class StringUtilsTest: XCTestCase {
-    
+
     let correctDnsServers: [String] = ["8.8.8.8", "https://dns.google/dns-query", "tls://dns.google", "https://www.cloudflare.com/dns/", "https://dns.cloudflare.com/dns-query", "tls://1.1.1.1", "208.67.222.222", "sdns://AQAAAAAAAAAADjIwOC42Ny4yMjAuMjIwILc1EUAgbyJdPivYItf9aR6hwzzI1maNDL4Ev6vKQ_t5GzIuZG5zY3J5cHQtY2VydC5vcGVuZG5zLmNvbQ", "sdns://AQAAAAAAAAAADjIwOC42Ny4yMjAuMTIzILc1EUAgbyJdPivYItf9aR6hwzzI1maNDL4Ev6vKQ_t5GzIuZG5zY3J5cHQtY2VydC5vcGVuZG5zLmNvbQ", "149.112.112.112", "sdns://AQMAAAAAAAAADDkuOS45Ljk6ODQ0MyBnyEe4yHWM0SAkVUO-dWdG3zTfHYTAC4xHA2jfgh2GPhkyLmRuc2NyeXB0LWNlcnQucXVhZDkubmV0"]
-    
+
     let incorrectDnsServers: [String] = ["уоатылрволаы", "tls://аолаоав.fje", "fыдджg", "sdns://AQAAAAAAAAAADjIwOC42Ny4yMjAuMjIwILc1EUAgbyJdPivYItf9aR6hwzzI1maNDL4Ev6vKQ_t5GzIuZG5zY3J5cHQtY2VydC5vcGVuZG5zLmNvаораоровооароровоаf", ""]
-    
+
     func testCheckIfValidDnsServerForCorrectExamples() {
         for server in correctDnsServers {
             XCTAssertTrue(server.isValidUpstream())
         }
     }
-    
+
     func testCheckIfValidDnsServerForIncorrectExamples() {
         for server in incorrectDnsServers {
             XCTAssertFalse(server.isValidUpstream())
         }
     }
-    
+
     // MARK: - generateSubDomains tests
-    
+
     func testGenerateSubDomainsWithNormalDomain(){
         let domain = "e6858.dscce9.akamaiedge.net"
         let subdomains = ["e6858.dscce9.akamaiedge.net",
@@ -46,7 +46,7 @@ class StringUtilsTest: XCTestCase {
         let subDomainsToCheck = String.generateSubDomains(from: domain)
         XCTAssertEqual(subdomains, subDomainsToCheck)
     }
-    
+
     func testGenerateSubDomainsWithDotInTheEnd(){
         let domain = "e6858.dscce9.akamaiedge.net."
         let subdomains = ["e6858.dscce9.akamaiedge.net",
@@ -55,14 +55,14 @@ class StringUtilsTest: XCTestCase {
         let subDomainsToCheck = String.generateSubDomains(from: domain)
         XCTAssertEqual(subdomains, subDomainsToCheck)
     }
-    
+
     func testGenerateSubDomainsWithEmptyDomain(){
         let domain = ""
         let subdomains: [String] = []
         let subDomainsToCheck = String.generateSubDomains(from: domain)
         XCTAssertEqual(subdomains, subDomainsToCheck)
     }
-    
+
     func testDiscardPortFromIpAddress() {
         let testCases = ["2a10:50c0::bad1:ff:53": "2a10:50c0::bad1:ff:53",
                          "94.140.14.15:543": "94.140.14.15",
@@ -72,7 +72,7 @@ class StringUtilsTest: XCTestCase {
                          "tls://dns-unfiltered.adguard.com": "tls://dns-unfiltered.adguard.com",
                          "https://dns.adguard.com/dns-query": "https://dns.adguard.com/dns-query",
                          "sdns://AAAAAAAAAAAACTc3Ljg4LjguOA": "sdns://AAAAAAAAAAAACTc3Ljg4LjguOA"]
-        
+
         for (testCase, result) in testCases {
             XCTAssertEqual(testCase.discardPortFromIpAddress(), result)
         }

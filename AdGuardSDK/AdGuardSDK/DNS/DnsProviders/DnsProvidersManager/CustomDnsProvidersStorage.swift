@@ -21,7 +21,7 @@ import Foundation
 protocol CustomDnsProvidersStorageProtocol: ResetableSyncProtocol {
     /* Returns saved custom DNS providers objects */
     var providers: [CustomDnsProviderProtocol] { get }
-    
+
     /**
      Adds new custom provider to storage
      - Parameter name: Name of provider to add
@@ -30,7 +30,7 @@ protocol CustomDnsProvidersStorageProtocol: ResetableSyncProtocol {
      - Returns: Provider and server id of newly created object
      */
     func addCustomProvider(name: String, upstreams: [String]) throws -> (providerId: Int, serverId: Int)
-    
+
     /**
      Updates custom provider in the storage
      - Parameter id: Unique identifier of custom DNS provider that should be updated
@@ -39,7 +39,7 @@ protocol CustomDnsProvidersStorageProtocol: ResetableSyncProtocol {
      - Throws: Throws an error if custom provider with the specified **id** is not in the storage
      */
     func updateCustomProvider(withId id: Int, newName: String, newUpstreams: [String]) throws
-    
+
     /**
      Removes custom provider by its **id** from storage
      - Parameter id: Unique identifier of custom DNS provider that should be removed from the storage
@@ -54,7 +54,7 @@ public enum CustomDnsProvidersStorageError: Error, CustomDebugStringConvertible 
     case differentDnsProtocols(upstreams: [String])
     case emptyUpstreams
     case notSupportedProtocol(dnsProtocol: DnsProtocol, implementation: DnsImplementation)
-    
+
     public var debugDescription: String {
         switch self {
         case .providerAbsent(let providerId): return "Custom provider with id=\(providerId) is absent"
@@ -71,20 +71,20 @@ public enum CustomDnsProvidersStorageError: Error, CustomDebugStringConvertible 
  Also it is responsible for adding new providers and removing existing ones
  */
 final class CustomDnsProvidersStorage: CustomDnsProvidersStorageProtocol {
-    
-    // MARK: - CustomDnsProvidersStorageError
-    
 
-    
+    // MARK: - CustomDnsProvidersStorageError
+
+
+
     // MARK: - Internal variables
-    
+
     var providers: [CustomDnsProviderProtocol] { userDefaults.customProviders }
-    
+
     // MARK: - Private variables
-    
+
     private let customProviderBaseId = 0
     private let customServerBaseId = 100000
-    
+
     private var nextCustomIds: (providerId: Int, serverId: Int) {
         let providers = userDefaults.customProviders
         var maxProviderId = customProviderBaseId
@@ -99,45 +99,45 @@ final class CustomDnsProvidersStorage: CustomDnsProvidersStorageProtocol {
         }
         return (maxProviderId + 1, maxServerId + 1)
     }
-    
+
     /* Services */
     private let userDefaults: UserDefaultsStorageProtocol
     private let networkUtils: NetworkUtilsProtocol
     private let configuration: DnsConfigurationProtocol
-    
+
     // MARK: - Initialization
-    
+
     init(userDefaults: UserDefaultsStorageProtocol, networkUtils: NetworkUtilsProtocol = NetworkUtils(), configuration: DnsConfigurationProtocol) {
         self.userDefaults = userDefaults
         self.networkUtils = networkUtils
         self.configuration = configuration
     }
-    
+
     // MARK: - Internal methods
 
     func addCustomProvider(name: String, upstreams: [String]) throws -> (providerId: Int, serverId: Int) {
         let dnsProtocol = try checkProviderInfo(name: name, upstreams: upstreams)
         try checkDnsImplementation(dnsProtocol: dnsProtocol)
         let dnsUpstreams = upstreams.map { DnsUpstream(upstream: $0, protocol: dnsProtocol) }
-        
+
         let ids = nextCustomIds
         let customServer = CustomDnsServer(upstreams: dnsUpstreams, providerId: ids.providerId, type: dnsProtocol, id: ids.serverId, isEnabled: false)
         let customProvider = CustomDnsProvider(name: name, server: customServer, providerId: ids.providerId, isEnabled: false)
         userDefaults.customProviders.append(customProvider)
         return (ids.providerId, ids.serverId)
     }
-    
+
     func updateCustomProvider(withId id: Int, newName: String, newUpstreams: [String]) throws {
         // Make sure that provider exists
         guard let providerIndex = userDefaults.customProviders.firstIndex(where: { $0.providerId == id }) else {
             throw CustomDnsProvidersStorageError.providerAbsent(providerId: id)
         }
-        
+
         let oldProvider = userDefaults.customProviders[providerIndex]
         let newDnsProtocol = try checkProviderInfo(name: newName, upstreams: newUpstreams)
         try checkDnsImplementation(dnsProtocol: newDnsProtocol)
         let newDnsUpstreams = newUpstreams.map { DnsUpstream(upstream: $0, protocol: newDnsProtocol) }
-        
+
         let customServer = CustomDnsServer(upstreams: newDnsUpstreams,
                                            providerId: oldProvider.providerId,
                                            type: newDnsProtocol,
@@ -146,33 +146,33 @@ final class CustomDnsProvidersStorage: CustomDnsProvidersStorageProtocol {
         let customProvider = CustomDnsProvider(name: newName, server: customServer, providerId: oldProvider.providerId, isEnabled: false)
         userDefaults.customProviders[providerIndex] = customProvider
     }
-    
+
     func removeCustomProvider(withId id: Int) throws {
         // Make sure that provider exists
         guard let providerIndex = userDefaults.customProviders.firstIndex(where: { $0.providerId == id }) else {
             throw CustomDnsProvidersStorageError.providerAbsent(providerId: id)
         }
-        
+
         // Remove provider if exists
         userDefaults.customProviders.remove(at: providerIndex)
     }
-    
+
     func reset() throws {
         userDefaults.customProviders = []
     }
-    
+
     // MARK: - Private methods
-    
+
     private func checkProviderInfo(name: String, upstreams: [String]) throws -> DnsProtocol {
         guard !upstreams.isEmpty else {
             throw CustomDnsProvidersStorageError.emptyUpstreams
         }
-        
+
         let protocols = try upstreams.map { try networkUtils.getProtocol(from: $0) }
         guard protocols.allElementsAreEqual else {
             throw CustomDnsProvidersStorageError.differentDnsProtocols(upstreams: upstreams)
         }
-        
+
         try upstreams.forEach {
             let isValid = networkUtils.upstreamIsValid($0)
             if !isValid {
@@ -181,21 +181,21 @@ final class CustomDnsProvidersStorage: CustomDnsProvidersStorageProtocol {
         }
         return protocols.first!
     }
-    
+
     private func checkDnsImplementation(dnsProtocol: DnsProtocol) throws {
         if !configuration.dnsImplementation.supportedProtocols.contains(dnsProtocol) {
             throw CustomDnsProvidersStorageError.notSupportedProtocol(dnsProtocol: dnsProtocol,
                                                                       implementation: configuration.dnsImplementation)
         }
     }
-    
+
 }
 
 // MARK: - UserDefaultsStorageProtocol + customProviders
 
 fileprivate extension UserDefaultsStorageProtocol {
     private var customProvidersKey: String { "DnsAdGuardSDK.customProvidersKey" }
-    
+
     var customProviders: [CustomDnsProvider] {
         get {
             if let providersData = storage.data(forKey: customProvidersKey) {

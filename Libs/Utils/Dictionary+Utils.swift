@@ -28,7 +28,7 @@ public extension Dictionary {
         .joined(separator: "&")
         .data(using: .utf8)
     }
-    
+
     /*
      Concatenates url string and params string with "?" symbol
      */

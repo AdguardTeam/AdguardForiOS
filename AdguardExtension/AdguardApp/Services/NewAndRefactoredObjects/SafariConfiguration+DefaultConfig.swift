@@ -33,7 +33,7 @@ extension SafariConfiguration {
                   appId: bundle.isPro ? "ios_pro" : "ios",
                   cid: UIDevice.current.identifierForVendor?.uuidString ?? "")
     }
-    
+
     static func defaultConfiguration(bundle: Bundle = .main) -> SafariConfiguration {
         return SafariConfiguration(
             iosVersion: UIDevice.current.iosVersion,

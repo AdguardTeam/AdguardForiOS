@@ -1,17 +1,17 @@
 /**
        This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
        Copyright © Adguard Software Limited. All rights reserved.
- 
+
        Adguard for iOS is free software: you can redistribute it and/or modify
        it under the terms of the GNU General Public License as published by
        the Free Software Foundation, either version 3 of the License, or
        (at your option) any later version.
- 
+
        Adguard for iOS is distributed in the hope that it will be useful,
        but WITHOUT ANY WARRANTY; without even the implied warranty of
        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
        GNU General Public License for more details.
- 
+
        You should have received a copy of the GNU General Public License
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -31,7 +31,7 @@ public struct FiltersConverterResult: Codable, Equatable {
     public let advancedBlockingJson: String? // Json string of advanced content blocker rules
     public let advancedBlockingText: String? // Text of advanced content blocker rules
     public let message: String // Result message
-    
+
     init(type: ContentBlockerType, jsonString: String, totalRules: Int, totalConverted: Int, overlimit: Bool, errorsCount: Int, advancedBlockingConvertedCount: Int, advancedBlockingJson: String?, advancedBlockingText: String?, message: String) {
         self.type = type
         self.jsonString = jsonString
@@ -44,7 +44,7 @@ public struct FiltersConverterResult: Codable, Equatable {
         self.advancedBlockingText = advancedBlockingText
         self.message = message
     }
-    
+
     init(type: ContentBlockerType, conversionResult: ConversionResult) {
         self.type = type
         self.jsonString = conversionResult.converted

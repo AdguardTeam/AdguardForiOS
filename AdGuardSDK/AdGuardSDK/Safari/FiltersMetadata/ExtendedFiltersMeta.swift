@@ -1,17 +1,17 @@
 /**
        This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
        Copyright © Adguard Software Limited. All rights reserved.
- 
+
        Adguard for iOS is free software: you can redistribute it and/or modify
        it under the terms of the GNU General Public License as published by
        the Free Software Foundation, either version 3 of the License, or
        (at your option) any later version.
- 
+
        Adguard for iOS is distributed in the hope that it will be useful,
        but WITHOUT ANY WARRANTY; without even the implied warranty of
        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
        GNU General Public License for more details.
- 
+
        You should have received a copy of the GNU General Public License
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -37,18 +37,18 @@ public struct ExtendedFiltersMeta: Decodable {
     public let groups: [GroupMetaProtocol]
     public let tags: [Tag]
     public let filters: [ExtendedFilterMetaProtocol]
-    
+
     enum CodingKeys: String, CodingKey {
         case groups
         case tags
         case filters
     }
-    
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        
+
         self.groups = try container.decode([Group].self, forKey: .groups)
-        
+
         // Decoding tags
         var decodedTags: [Tag] = []
         let tagsDecoder = try container.superDecoder(forKey: .tags)
@@ -60,7 +60,7 @@ public struct ExtendedFiltersMeta: Decodable {
             }
         }
         self.tags = decodedTags
-        
+
         // Decoding filters
         var decodedFilters: [Meta] = []
         let filtersDecoder = try container.superDecoder(forKey: .filters)
@@ -72,7 +72,7 @@ public struct ExtendedFiltersMeta: Decodable {
         }
         self.filters = decodedFilters
     }
-    
+
     init(groups: [GroupMetaProtocol], tags: [Tag], filters: [ExtendedFilterMetaProtocol]) {
         self.groups = groups
         self.tags = tags
@@ -99,7 +99,7 @@ extension ExtendedFiltersMeta {
         let languages: [String]
         let tags: [Tag]
         let rulesCount: Int
-        
+
         enum CodingKeys: String, CodingKey {
             case filterId
             case name
@@ -116,14 +116,14 @@ extension ExtendedFiltersMeta {
             case languages
             case tags
         }
-        
+
         init(from decoder: Decoder) throws {
             try self.init(from: decoder, tags: [], groups: [])
         }
-        
+
         init(from decoder: Decoder, tags: [Tag], groups: [GroupMetaProtocol]) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
-            
+
             self.filterId = try container.decode(Int.self, forKey: .filterId)
             self.name = try container.decode(String.self, forKey: .name)
             self.description = try container.decode(String.self, forKey: .description)
@@ -134,26 +134,26 @@ extension ExtendedFiltersMeta {
             self.trustLevel = try container.decode(TrustLevel.self, forKey: .trustLevel)
             self.version = try container.decode(String.self, forKey: .version)
             self.languages = try container.decode([String].self, forKey: .languages)
-            
+
             let groupId = try container.decode(Int.self, forKey: .group)
             self.group = groups.first(where: { $0.groupId == groupId })!
-            
+
             let intTags = try container.decode([Int].self, forKey: .tags)
             self.tags = intTags.compactMap({ intTag in
                 return tags.first(where: { $0.tagId == intTag })
             })
-            
+
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-            
+
             let timeAddedString = try container.decode(String.self, forKey: .timeAdded)
             let lastUpdateDateString = try container.decode(String.self, forKey: .lastUpdateDate)
-        
+
             self.timeAdded = dateFormatter.date(from: timeAddedString)
             self.lastUpdateDate = dateFormatter.date(from: lastUpdateDateString)
             self.rulesCount = 0
         }
-        
+
         init(filterId: Int, name: String?, description: String?, timeAdded: Date?, homePage: String?, updateFrequency: Int?, displayNumber: Int, group: GroupMetaProtocol, filterDownloadPage: String?, trustLevel: ExtendedFiltersMeta.TrustLevel, version: String?, lastUpdateDate: Date?, languages: [String], tags: [ExtendedFiltersMeta.Tag], rulesCount: Int) {
             self.filterId = filterId
             self.name = name
@@ -171,7 +171,7 @@ extension ExtendedFiltersMeta {
             self.tags = tags
             self.rulesCount = rulesCount
         }
-        
+
         // Initializer for custom filter
         init(customFilterMeta: ExtendedCustomFilterMetaProtocol, filterId: Int, timeAdded: Date? = Date(), displayNumber: Int, group: GroupMetaProtocol) {
             self.filterId = filterId
@@ -224,7 +224,7 @@ public extension ExtendedFiltersMeta {
             case platform
             case problematic
             case obsolete
-            
+
             var id: Int {
                 switch self {
                 case .purpose: return 0
@@ -235,7 +235,7 @@ public extension ExtendedFiltersMeta {
                 case .obsolete: return 6
                 }
             }
-            
+
             init?(tagTypeId: Int) {
                 switch tagTypeId {
                 case 0: self = .purpose
@@ -248,21 +248,21 @@ public extension ExtendedFiltersMeta {
                 }
             }
         }
-        
+
         public let tagId: Int
         public let tagType: TagType
         public let tagName: String
-        
+
         enum CodingKeys: String, CodingKey {
             case tagId
             case keyword
         }
-        
+
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
-            
+
             self.tagId = try container.decode(Int.self, forKey: .tagId)
-            
+
             /*
              Tags can be complex and contain extra info using :
              For example:
@@ -278,13 +278,13 @@ public extension ExtendedFiltersMeta {
                 throw NSError(domain: "unknown.tag.type", code: 1, userInfo: nil)
             }
         }
-        
+
         init(tagId: Int, tagType: ExtendedFiltersMeta.Tag.TagType, tagName: String) {
             self.tagId = tagId
             self.tagType = tagType
             self.tagName = tagName
         }
-        
+
         init?(tagId: Int, tagTypeId: Int, tagName: String) {
             if let tagType = ExtendedFiltersMeta.Tag.TagType(tagTypeId: tagTypeId) {
                 self.tagType = tagType
