@@ -49,7 +49,6 @@ final class OnboardingController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         contenBlockerObserver = NotificationCenter.default.observe(name: .contentBlockersStateChanged, object: nil, queue: .main, using: { [weak self] _ in
             self?.observeContentBlockersState()
         })
@@ -63,7 +62,6 @@ final class OnboardingController: UIViewController {
             onboardingContentViewTopConstraint.constant = 30.0
             onboardingContentView.onboardingType = .withoutAdvancedProtection
         }
-        
         self.updateTheme()
     }
     
@@ -104,7 +102,7 @@ final class OnboardingController: UIViewController {
     // MARK: - Private methods
     
     private func setupLabels() {
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.asyncSafeMain { [weak self] in
             guard let self = self else { return }
             
             let settingsLabelText: String
@@ -117,12 +115,14 @@ final class OnboardingController: UIViewController {
                 settingsLabelText = String.localizedString("onboarding_first_step_text")
                 safariLabelText = String.localizedString("onboarding_second_step_text")
             }
+        
+            let fontSize: CGFloat = self.isIpadTrait ? 24.0 : 16.0
             
-            self.settingsLabel.attributedText = NSMutableAttributedString.fromHtml(settingsLabelText, fontSize: self.settingsLabel.font!.pointSize, color: self.theme.grayTextColor)
+            self.settingsLabel.attributedText = NSMutableAttributedString.fromHtml(settingsLabelText, fontSize: fontSize, color: self.theme.grayTextColor)
             
-            self.safariLabel.attributedText = NSMutableAttributedString.fromHtml(safariLabelText, fontSize: self.safariLabel.font!.pointSize, color: self.theme.grayTextColor)
+            self.safariLabel.attributedText = NSMutableAttributedString.fromHtml(safariLabelText, fontSize: fontSize, color: self.theme.grayTextColor)
             
-            self.switchLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_third_step_text"), fontSize: self.switchLabel.font!.pointSize, color: self.theme.grayTextColor)
+            self.switchLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_third_step_text"), fontSize: fontSize, color: self.theme.grayTextColor)
         }
     }
     

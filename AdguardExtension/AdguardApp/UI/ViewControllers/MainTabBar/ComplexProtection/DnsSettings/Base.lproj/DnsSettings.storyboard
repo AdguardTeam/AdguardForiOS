@@ -2029,9 +2029,12 @@
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                         </variation>
                                     </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Npf-Dz-czn">
-                                        <rect key="frame" x="0.0" y="64" width="414" height="187.5"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Npf-Dz-czn" customClass="ContentSizedTableView" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="64" width="414" height="200"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="ucW-sQ-ugQ"/>
+                                        </constraints>
                                     </tableView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -2046,8 +2049,7 @@
                                         <variation key="heightClass=regular-widthClass=regular" constant="48"/>
                                     </constraint>
                                     <constraint firstItem="Npf-Dz-czn" firstAttribute="leading" secondItem="Eo5-vz-faM" secondAttribute="leading" id="r3q-l4-7ai"/>
-                                    <constraint firstItem="Npf-Dz-czn" firstAttribute="height" secondItem="Eo5-vz-faM" secondAttribute="height" multiplier="0.745704" id="rVc-gF-mPe"/>
-                                    <constraint firstAttribute="bottom" secondItem="Npf-Dz-czn" secondAttribute="bottom" id="zuz-Kk-UjW"/>
+                                    <constraint firstAttribute="bottom" secondItem="Npf-Dz-czn" secondAttribute="bottom" constant="10" id="zuz-Kk-UjW"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -2064,6 +2066,7 @@
                         <outlet property="contentView" destination="Eo5-vz-faM" id="j4y-4T-OSe"/>
                         <outlet property="keyboardHeightLayoutConstraint" destination="e2b-IM-wuA" id="LZc-W2-Y43"/>
                         <outlet property="tableView" destination="Npf-Dz-czn" id="tJv-KG-pgw"/>
+                        <outlet property="tableViewHeightConstraint" destination="ucW-sQ-ugQ" id="4XU-uH-0f0"/>
                         <outlet property="titleLabel" destination="vJt-Jd-BI2" id="fdx-sO-Leb"/>
                     </connections>
                 </viewController>
@@ -2095,7 +2098,6 @@
         <image name="dns" width="24" height="24"/>
         <image name="ic_adguard" width="24" height="24"/>
         <image name="language-group-icon" width="24" height="24"/>
-        <image name="plus" width="26" height="26"/>
         <image name="question" width="20" height="20"/>
         <image name="whitelist-icon" width="24" height="24"/>
         <systemColor name="separatorColor">

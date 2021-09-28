@@ -423,12 +423,12 @@ extension AESharedResourcesProtocol {
         }
     }
     
-    var advancedProtectionWhatsNewScreenShown: Bool {
+    var whatsNewScreenShown: Bool {
         get {
-            sharedDefaults().bool(forKey: advancedProtectionWhatsNewScreenShownKey)
+            sharedDefaults().bool(forKey: whatsNewScreenShownKey)
         }
         set {
-            sharedDefaults().set(newValue, forKey: advancedProtectionWhatsNewScreenShownKey)
+            sharedDefaults().set(newValue, forKey: whatsNewScreenShownKey)
         }
     }
 }
@@ -438,7 +438,7 @@ fileprivate extension AESharedResourcesProtocol {
     var advancedProtectionKey: String  { "advancedProtectionKey" }
     var advancedProtectionPermissionsGrantedKey: String { "advancedProtectionPermissionsGrantedKey" }
     var safariWebExtensionIsOnKey: String { "safariWebExtensionIsOnKey" }
-    var advancedProtectionWhatsNewScreenShownKey: String { "advancedProtectionWhatsNewScreenShownKey" }
+    var whatsNewScreenShownKey: String { "whatsNewScreenShownKey" }
 }
 
 extension Notification.Name {

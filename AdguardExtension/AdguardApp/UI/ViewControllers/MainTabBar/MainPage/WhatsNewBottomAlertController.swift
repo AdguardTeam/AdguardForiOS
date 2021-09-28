@@ -17,14 +17,12 @@
 */
 
 import UIKit
-
+import SafariAdGuardSDK
 
 /// WhatsNewBottomAlertControllerDelegate - Delegate protocol
 protocol WhatsNewBottomAlertControllerDelegate: AnyObject {
     func enableButtonForNonProTapped()
 }
-
-
 
 /// WhatsNewBottomAlertController - Responsible for representation new features available in new version of app
 final class WhatsNewBottomAlertController: BottomAlertController {
@@ -40,10 +38,10 @@ final class WhatsNewBottomAlertController: BottomAlertController {
     // MARK: - Services
     
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let resoruces: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
+    private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     
-    // MARK: - ViewController lifecycle
+    //MARK: - ViewController lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +57,8 @@ final class WhatsNewBottomAlertController: BottomAlertController {
             return
         }
         
-        resoruces.advancedProtection = true
+        configuration.isAdvancedProtectionEnabled = true
+        safariProtection.update(advancedProtectionEnabled: true, onCbReloaded: nil)
         dismiss(animated: true, completion: onDismissCompletion)
     }
 }

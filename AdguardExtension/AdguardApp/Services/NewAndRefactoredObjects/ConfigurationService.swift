@@ -23,6 +23,7 @@ import SafariAdGuardSDK
 final class ConfigurationService: ConfigurationServiceProtocol {
         
     // MARK: - Private properties
+    private var contentBlockerPreviousState: [ContentBlockerType: Bool] = [:]
     
     /* Services */
     private var purchaseService : PurchaseServiceProtocol
@@ -39,6 +40,7 @@ final class ConfigurationService: ConfigurationServiceProtocol {
         self.resources = resources
         self.safariProtection = safariProtection
         self.contentBlockerEnabled = safariProtection.allContentBlockersStates
+        self.contentBlockerPreviousState = safariProtection.allContentBlockersStates
         
         let notificationName = Notification.Name(PurchaseService.kPurchaseServiceNotification)
         self.purchaseServiceObserver = NotificationCenter.default.observe(
@@ -159,9 +161,13 @@ final class ConfigurationService: ConfigurationServiceProtocol {
     
     /// Checks Safari Content blockers state (enabled/disabled)
     func checkContentBlockerEnabled() {
-        let enabled = safariProtection.allContentBlockersStates
-        if enabled != contentBlockerEnabled {
-            contentBlockerEnabled = enabled
+        let allCB = safariProtection.allContentBlockersStates
+        let cbChanges = allCB != contentBlockerPreviousState
+        let enabledCBCount = allCB.filter { $0.value }.count
+        
+        if enabledCBCount != allCB.count || cbChanges {
+            contentBlockerPreviousState = allCB
+            contentBlockerEnabled = allCB
             Self.contentBlockersStateChanged()
         }
     }

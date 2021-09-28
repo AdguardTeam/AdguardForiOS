@@ -29,7 +29,8 @@ final class BackgroundFetchController: BottomAlertController {
     // MARK: - Outlets
     
     @IBOutlet weak var titleLabel: ThemableLabel!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: ContentSizedTableView!
+    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
 
     // MARK: - Properties
     
@@ -54,6 +55,7 @@ final class BackgroundFetchController: BottomAlertController {
         tableView.register(ExtendedRadioButtonCell.self, forCellReuseIdentifier: ExtendedRadioButtonCell.reuseIdentifier)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.contentSizeDelegate = self
         tableView.separatorStyle = .none
     }
     
@@ -125,6 +127,12 @@ extension BackgroundFetchController: ThemableProtocol {
         tableView.backgroundColor = themeService.popupBackgroundColor
         themeService.setupLabel(titleLabel)
         tableView.reloadData()
+    }
+}
+
+extension BackgroundFetchController: ContentSizedTableViewDelegate {
+    func contentSizeDidSet(contentSize: CGSize) {
+        tableViewHeightConstraint.constant = contentSize.height
     }
 }
 

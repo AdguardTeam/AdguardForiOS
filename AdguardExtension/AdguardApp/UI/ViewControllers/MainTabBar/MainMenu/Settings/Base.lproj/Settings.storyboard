@@ -3191,9 +3191,12 @@
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="40"/>
                                         </variation>
                                     </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Snq-9B-j9S">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Snq-9B-j9S" customClass="ContentSizedTableView" customModule="Adguard" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="42" width="414" height="108"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="108" id="ZpV-sL-8ky"/>
+                                        </constraints>
                                         <sections/>
                                     </tableView>
                                 </subviews>
@@ -3205,8 +3208,7 @@
                                     <constraint firstItem="Yue-5n-Amd" firstAttribute="leading" secondItem="bnL-IC-jxK" secondAttribute="leading" constant="24" id="3E5-dH-aF0"/>
                                     <constraint firstItem="tRH-gM-893" firstAttribute="top" secondItem="bnL-IC-jxK" secondAttribute="top" constant="8" id="FiR-8E-Fb4"/>
                                     <constraint firstAttribute="trailing" secondItem="Snq-9B-j9S" secondAttribute="trailing" id="WGn-as-ywe"/>
-                                    <constraint firstAttribute="bottom" secondItem="Snq-9B-j9S" secondAttribute="bottom" id="fSe-qR-XFS"/>
-                                    <constraint firstItem="Snq-9B-j9S" firstAttribute="height" secondItem="bnL-IC-jxK" secondAttribute="height" multiplier="0.719912" id="k1o-zO-e8S"/>
+                                    <constraint firstAttribute="bottom" secondItem="Snq-9B-j9S" secondAttribute="bottom" constant="10" id="fSe-qR-XFS"/>
                                     <constraint firstItem="Snq-9B-j9S" firstAttribute="leading" secondItem="bnL-IC-jxK" secondAttribute="leading" id="rm4-bI-LjE"/>
                                     <constraint firstItem="tRH-gM-893" firstAttribute="centerX" secondItem="bnL-IC-jxK" secondAttribute="centerX" id="wSO-Qf-5jR"/>
                                     <constraint firstItem="Snq-9B-j9S" firstAttribute="top" secondItem="Yue-5n-Amd" secondAttribute="bottom" id="xu9-ut-aS0"/>
@@ -3228,6 +3230,7 @@
                         <outlet property="contentView" destination="bnL-IC-jxK" id="UeH-hk-Jis"/>
                         <outlet property="keyboardHeightLayoutConstraint" destination="msA-bs-i5H" id="msA-lh-RKr"/>
                         <outlet property="tableView" destination="Snq-9B-j9S" id="Ynm-iL-r50"/>
+                        <outlet property="tableViewHeightConstraint" destination="ZpV-sL-8ky" id="UxP-5t-vGy"/>
                         <outlet property="titleLabel" destination="Yue-5n-Amd" id="iys-0S-oTK"/>
                     </connections>
                 </viewController>

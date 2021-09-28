@@ -31,9 +31,10 @@ final class OnboardingContentView: UIView {
         }
     }
     
-    // MARK: - Services
+    private var cellHeights: [IndexPath: CGFloat] = [:]
     
-    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    //MARK: - Services
+    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     
     // MARK: - Properties
@@ -47,6 +48,7 @@ final class OnboardingContentView: UIView {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.isUserInteractionEnabled = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.isScrollEnabled = false
         return tableView
     }()
     
@@ -95,10 +97,15 @@ final class OnboardingContentView: UIView {
     }
     
     private func applyConstraints(to view: UIView) {
-        view.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        view.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        view.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        view.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        let constraint: NSLayoutConstraint
+        constraint = view is UITableView ? view.bottomAnchor.constraint(equalTo: self.bottomAnchor) : view.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+
+        NSLayoutConstraint.activate([
+            view.topAnchor.constraint(equalTo: self.topAnchor),
+            view.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            constraint
+        ])
     }
 }
 
@@ -126,6 +133,14 @@ extension OnboardingContentView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
+    
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        cellHeights[indexPath] = cell.frame.size.height
+//    }
+//
+//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return cellHeights[indexPath] ?? UITableView.automaticDimension
+//    }
 }
 
 extension OnboardingContentView: ThemableProtocol {

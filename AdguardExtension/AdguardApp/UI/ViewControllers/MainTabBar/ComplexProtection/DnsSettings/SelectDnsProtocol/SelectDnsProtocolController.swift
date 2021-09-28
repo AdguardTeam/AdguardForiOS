@@ -28,8 +28,9 @@ final class SelectDnsProtocolController: BottomAlertController {
     
     // MARK: - IBOutlet
     
+    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var titleLabel: ThemableLabel!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: ContentSizedTableView!
     
     // MARK: - Public properties
     
@@ -44,6 +45,7 @@ final class SelectDnsProtocolController: BottomAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateTheme()
+        tableView.contentSizeDelegate = self
         tableView.delegate = self
         tableView.dataSource = self
         ExtendedRadioButtonCell.registerCell(forTableView: tableView)
@@ -97,5 +99,11 @@ extension SelectDnsProtocolController: ThemableProtocol {
         tableView.backgroundColor = themeService.popupBackgroundColor
         themeService.setupLabel(titleLabel)
         tableView.reloadData()
+    }
+}
+
+extension SelectDnsProtocolController: ContentSizedTableViewDelegate {
+    func contentSizeDidSet(contentSize: CGSize) {
+        self.tableViewHeightConstraint.constant = contentSize.height
     }
 }
