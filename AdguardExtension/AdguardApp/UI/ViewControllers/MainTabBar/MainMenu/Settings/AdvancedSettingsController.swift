@@ -26,6 +26,7 @@ final class AdvancedSettingsController: UITableViewController {
     @IBOutlet weak var restartProtectionSwitch: UISwitch!
     @IBOutlet weak var debugLogsSwitch: UISwitch!
     @IBOutlet weak var lastSeparator: UIView!
+    @IBOutlet weak var contentBlockersDescriptionLabel: UILabel!
 
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet var separators: [UIView]!
@@ -51,6 +52,15 @@ final class AdvancedSettingsController: UITableViewController {
         restartProtectionSwitch.isOn = resources.restartByReachability
         debugLogsSwitch.isOn = resources.isDebugLogs
         showStatusbarSwitch.isOn = configuration.showStatusBar
+
+        let descriptionText: String
+        if #available(iOS 15.0, *) {
+            descriptionText = String.localizedString("cb_description_advanced_protection")
+        } else {
+            descriptionText = String.localizedString("cb_description_common")
+        }
+
+        contentBlockersDescriptionLabel.text = descriptionText
 
         vpnConfigurationObserver = NotificationCenter.default.observe(name: ComplexProtectionService.systemProtectionChangeNotification, object: nil, queue: .main) { [weak self] (note) in
             self?.lastSeparator.isHidden = false

@@ -940,8 +940,8 @@
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have 6 content blockers, each of them can contain up to 50,000 rules" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ObO-g4-VHL" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="27.5" width="342" height="0.0"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ObO-g4-VHL" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="37.5" width="342" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1140,6 +1140,7 @@
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <connections>
+                        <outlet property="contentBlockersDescriptionLabel" destination="ObO-g4-VHL" id="20q-hk-Dkd"/>
                         <outlet property="debugLogsSwitch" destination="BZ8-9j-arQ" id="n2t-W8-cfy"/>
                         <outlet property="lastSeparator" destination="8OZ-ef-mbG" id="3pL-P2-ZfY"/>
                         <outlet property="restartProtectionSwitch" destination="Imm-1j-t70" id="7QM-Lx-Do6"/>
