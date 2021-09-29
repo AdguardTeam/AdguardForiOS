@@ -51,6 +51,7 @@ final public class ActivityStatistics: ActivityStatisticsProtocol {
 
         let dbName = Constants.Statistics.StatisticsType.activity.dbFileName
         self.statisticsDb = try Connection(statisticsDbContainerUrl.appendingPathComponent(dbName).path)
+        self.statisticsDb.busyTimeout = 0.5
         dateFormatter.dateFormat = Constants.Statistics.dbDateFormat
         try self.createTableIfNotExists()
         try compressTable()

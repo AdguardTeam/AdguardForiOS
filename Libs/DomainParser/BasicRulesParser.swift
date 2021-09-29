@@ -15,6 +15,8 @@ public struct BasicRulesParser {
         self.suffixes = suffixes
     }
     public func parse(host: String) -> ParsedHost? {
+        // trim last '.' character
+        let host = host.last == "." ? String(host.dropLast()) : host
         let lowercasedHost = host.lowercased()
         let hostComponents = lowercasedHost.components(separatedBy: ".")
         var hostSlices = ArraySlice(hostComponents)
