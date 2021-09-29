@@ -18,7 +18,7 @@
 
 import UIKit
 
-/// Custom table view class that return content size on did set
+/// Custom table view class that resize itself height constraint
 class ContentSizedTableView: UITableView {
 
     // MARK: - Private properties
@@ -27,7 +27,7 @@ class ContentSizedTableView: UITableView {
 
     override var contentSize: CGSize {
         didSet {
-            self.constraints.first!.constant = contentSize.height
+            heightConstraint.constant = contentSize.height
         }
     }
 

@@ -647,7 +647,7 @@
 "advanced_protection_onboarding_third_step_text" = "Set all AdGuard toggles to <b>On.</b> You`re good to go!";
 
 /* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
-"onboarding_fours_step_text" = "For <b>Advanced</b> protection, open the Safari app, tap the <b>aA</b> icon on the left side of the URL field,<br><br> %@ <br><br>then tap <b>AdGuard</b> and confirm all permissions.";
+"onboarding_fours_step_text" = "For <b>Advanced</b> protection, open the Safari app, tap the <b>aA</b> icon on the left side of the URL field,<br><br> %@ <br><br>then tap Manage extensions and enable <b>AdGuard</b> toggle.";
 
 /* (DnsProvidersController) default systen dns server description */
 "default_dns_server_description" = "Use system default DNS servers provided by your Internet service provider";

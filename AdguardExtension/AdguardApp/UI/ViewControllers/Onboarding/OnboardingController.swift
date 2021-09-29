@@ -108,13 +108,16 @@ final class OnboardingController: UIViewController {
 
             let settingsLabelText: String
             let safariLabelText: String
+            let switchLabelText: String
             switch self.onboardingContentView.onboardingType {
             case .withAdvancedProtection:
                 settingsLabelText = String.localizedString("advanced_protection_onboarding_first_step_text")
                 safariLabelText = String.localizedString("advanced_protection_onboarding_second_step_text")
+                switchLabelText = String.localizedString("advanced_protection_onboarding_third_step_text")
             case .withoutAdvancedProtection:
                 settingsLabelText = String.localizedString("onboarding_first_step_text")
                 safariLabelText = String.localizedString("onboarding_second_step_text")
+                switchLabelText = String.localizedString("onboarding_third_step_text")
             }
 
             let fontSize: CGFloat = self.isIpadTrait ? 24.0 : 16.0
@@ -123,7 +126,7 @@ final class OnboardingController: UIViewController {
 
             self.safariLabel.attributedText = NSMutableAttributedString.fromHtml(safariLabelText, fontSize: fontSize, color: self.theme.grayTextColor)
 
-            self.switchLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_third_step_text"), fontSize: fontSize, color: self.theme.grayTextColor)
+            self.switchLabel.attributedText = NSMutableAttributedString.fromHtml(switchLabelText, fontSize: fontSize, color: self.theme.grayTextColor)
         }
     }
 
