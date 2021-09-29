@@ -29,13 +29,13 @@ final class BackgroundFetchController: BottomAlertController {
     // MARK: - Outlets
 
     @IBOutlet weak var titleLabel: ThemableLabel!
-    @IBOutlet weak var tableView: ContentSizedTableView!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
 
     // MARK: - Properties
 
     weak var delegate: BackgroundFetchControllerDelegate?
     private var selectedCell: BackgroundFetchUpdateInterval?
-
 
     // MARK: - Services
 
@@ -43,6 +43,18 @@ final class BackgroundFetchController: BottomAlertController {
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
 
     // MARK: - ViewController lifecycle
+
+    override var preferredContentSize: CGSize {
+        get {
+            tableView.layoutIfNeeded()
+            if let cellHeight = tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.frame.size.height {
+                let numberOfCells = CGFloat(BackgroundFetchUpdateInterval.allCases.count)
+                tableViewHeightConstraint.constant = (cellHeight * numberOfCells) + 10.0
+            }
+            return super.preferredContentSize
+        }
+        set {}
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
