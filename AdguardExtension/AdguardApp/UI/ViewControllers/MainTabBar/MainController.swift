@@ -9,7 +9,6 @@ import UIKit
 import Network
 import NetworkExtension
 import CoreData
-import SafariServices
 import WebKit
 import AudioToolbox
 import UserNotifications
