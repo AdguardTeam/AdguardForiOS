@@ -928,7 +928,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     }
 
     private func showContentBlockersHelperIfNeeded() {
-        if !configuration.allContentBlockersEnabled && !contentBlockerHelperWasShown {
+        if !configuration.someContentBlockersEnabled && !contentBlockerHelperWasShown {
             showContentBlockersHelper()
             contentBlockerHelperWasShown = true
         } else {
