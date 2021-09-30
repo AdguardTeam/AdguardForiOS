@@ -52,7 +52,7 @@ class MostActiveCompaniesController: UIViewController {
         if segue.identifier == showCompanyDetailsSegueId {
             if let controller = segue.destination as? CompanyDetailedController {
                 controller.record = choosenRecord
-                controller.chartDateType = chartDateType
+                controller.recordType = .normal
             }
         }
     }

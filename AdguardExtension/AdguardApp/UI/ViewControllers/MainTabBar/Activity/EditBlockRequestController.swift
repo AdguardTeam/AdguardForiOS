@@ -24,46 +24,46 @@ class EditBlockRequestController: BottomAlertController {
     @IBOutlet weak var descriptionLabel: ThemableLabel!
     @IBOutlet weak var domainNameTextField: UITextField!
     @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
-    
+
     @IBOutlet weak var addButton: RoundRectButton!
     @IBOutlet weak var backButton: RoundRectButton!
-    
+
     @IBOutlet var themableLabels: [ThemableLabel]!
 
     var type: DnsLogButtonType = .addDomainToWhitelist
     var domain: String = ""
     var originalDomain: String = ""
     var delegate: AddDomainToListDelegate?
-    
+
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         titleLabel.text = (type == .addDomainToWhitelist) ? String.localizedString("whitelist_request") : String.localizedString("block_request")
-        
+
         let converter = DomainsConverter()
-        
+
         domainNameTextField.text = (type == .addDomainToWhitelist) ? domain : converter.blacklistRuleFromDomain(domain)
         domainNameTextField.becomeFirstResponder()
-        
+
         updateTheme()
-        
+
         addButton.makeTitleTextCapitalized()
         backButton.makeTitleTextCapitalized()
         addButton.applyStandardGreenStyle()
         backButton.applyStandardOpaqueStyle()
     }
-    
+
     // MARK: - Actions
-    
+
     @IBAction func addTapped(_ sender: UIButton) {
         let domain = domainNameTextField.text ?? ""
         let needsCorrecting = type == .addDomainToWhitelist
         delegate?.add(domain: domain, needsCorrecting: needsCorrecting, by: type)
         dismiss(animated: true)
     }
-    
+
     @IBAction func backTapped(_ sender: UIButton) {
         let presenter = presentingViewController
         dismiss(animated: true) {[weak self] in
@@ -71,11 +71,11 @@ class EditBlockRequestController: BottomAlertController {
             presenter?.presentBlockRequestController(with: self.originalDomain, type: self.type, delegate: self.delegate)
         }
     }
-    
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textViewUnderline.state = .enabled
     }
-    
+
     func textFieldDidEndEditing(_ textField: UITextField) {
         textViewUnderline.state = .disabled
     }

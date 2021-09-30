@@ -33,25 +33,25 @@ class DnsRequestDetailsController: UITableViewController {
     }
     var shadowView: BottomShadowView? = nil
     var containerController: DnsContainerController? = nil
-    
+
     // MARK: - private fields
     private var sectionModels: [Int : [Int : LogCellModelProtocol?]] = [:]
-    
+
     private let webPage = "https://whotracks.me"
-    
+
     private let requestDetailsCellId = "RequestDetailsCellId"
     private let activityTitleCellId = "ActivityTitleCell"
-    
+
     // MARK: - Notifications
     private var advancedModeObserver: NotificationToken?
-    
+
     // MARK: - Services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
-    
+
     // MARK: - Sections & Rows
     private let titleSection = 0
-    
+
     private var generalSection: Int?
     private var domainCell: IndexPath?
     private var statusCell: IndexPath?
@@ -61,32 +61,32 @@ class DnsRequestDetailsController: UITableViewController {
     private var sizeCell: IndexPath?
     private var matchedFiltersCell: IndexPath?
     private var matchedRulesCell: IndexPath?
-    
+
     private var trackerDetailsSection: Int?
     private var categoryCell: IndexPath?
     private var nameCell: IndexPath?
     private var websiteCell: IndexPath?
-    
+
     private var dnsSection: Int?
     private var typeCell: IndexPath?
     private var dnsStatusCell: IndexPath?
     private var dnsUpstreamCell: IndexPath?
     private var dnsAnswerCell: IndexPath?
     private var originalAnswerCell: IndexPath?
-    
+
     // MARK: - ViewController life cycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         advancedModeObserver = NotificationCenter.default.observe(name: .advancedModeChanged, object: nil, queue: .main, using: { [weak self] _ in
             self?.createCellModels()
             self?.tableView.reloadData()
         })
-        
+
         updateTheme()
     }
-    
+
     override func viewDidLayoutSubviews() {
         guard let container = containerController else { return }
         if container.containerView.frame.height <= tableView.contentSize.height {
@@ -106,7 +106,7 @@ class DnsRequestDetailsController: UITableViewController {
         guard let sectionModel = sectionModels[section] else { return 0 }
         return sectionModel.count
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == titleSection {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: activityTitleCellId) as? ActivityTitleCell else {
@@ -116,25 +116,25 @@ class DnsRequestDetailsController: UITableViewController {
             theme.setupLabel(cell.titleLabel)
             return cell
         }
-        
+
         guard let cell = tableView.dequeueReusableCell(withIdentifier: requestDetailsCellId) as? RequestDetailsCell else { return UITableViewCell() }
-        
+
         let model = getModel(for: indexPath)
         cell.model = model
         theme.setupTableCell(cell)
-        
+
         guard let sectionModel = sectionModels[indexPath.section] else {
             cell.hideSeparator()
             return cell
         }
-    
+
         if sectionModel.count == indexPath.row + 1 {
             cell.hideSeparator()
         }
-        
+
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let record = logRecord, section != titleSection else { return UIView() }
         
@@ -151,70 +151,70 @@ class DnsRequestDetailsController: UITableViewController {
         default:
             return nil
         }
-        
+
         let view = createHeaderView(with: text.uppercased(), needsButton: needsButton)
         return view
     }
-    
+
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+
         defer {
             tableView.deselectRow(at: indexPath, animated: true)
         }
-        
+
         if indexPath.section == titleSection { return }
-        
+
         if indexPath == websiteCell {
             guard let cell = tableView.cellForRow(at: indexPath) as? RequestDetailsCell else { return }
             cell.openWebsite()
             return
         }
-        
+
         guard let cell = tableView.cellForRow(at: indexPath) as? CopiableCellInfo else { return }
         cell.showCopyLabel()
         UIPasteboard.general.string = cell.stringToCopy
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return section == titleSection ? 0.01 : 52.0
     }
-    
+
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffset = scrollView.contentOffset.y
         let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height;
-        
+
         if maximumOffset - contentOffset < 5.0 {
             shadowView?.animateHidingOfShadow()
         } else {
             shadowView?.animateAppearingOfShadow()
         }
     }
-    
+
     // MARK: - Actions
-    
+
     @IBAction func whoTracksMeInfo(_ sender: UIButton) {
         showAlert(sender)
     }
-    
+
     // MARK: - Public function
-    
+
     func updateStatusLabel(){
         guard let statusCell = statusCell, let generalSection = generalSection else { return }
         let statusCellModel = getStatusCellModel()
         sectionModels[generalSection]?[statusCell.row] = statusCellModel
         tableView.reloadRows(at: [statusCell], with: .fade)
     }
-    
+
     // MARK: - Private methods
-    
+
     /**
      Returns view model for specific cell
      */
@@ -229,30 +229,30 @@ class DnsRequestDetailsController: UITableViewController {
         }
         return nil
     }
-    
+
     /**
      Creates header view for sections
      */
     private func createHeaderView(with text: String, needsButton: Bool) -> UIView{
         let tableWidth = tableView.frame.width
         let isBigScreen = traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular
-        
+
         let viewFrame = CGRect(x: 0.0, y: 0.0, width: tableWidth, height: 52.0)
         let view = UIView(frame: viewFrame)
         view.backgroundColor = theme.backgroundColor
         view.translatesAutoresizingMaskIntoConstraints = false
-        
+
         let padding: CGFloat = needsButton ? 60.0 : 24.0
         let labelFrame = CGRect(x: 24.0, y: 24.0, width: tableWidth - padding, height: isBigScreen ? 24.0 : 16.0)
         let label = ThemableLabel(frame: labelFrame)
         label.lightGreyText = true
         label.text = text
         label.numberOfLines = 0
-        
+
         label.font = UIFont.systemFont(ofSize: isBigScreen ? 24.0 : 16.0, weight: .regular)
-        
+
         view.addSubview(label)
-        
+
         if needsButton {
             let image = UIImage(named: "question") ?? UIImage()
             let imageView = UIImageView(image: image)
@@ -268,7 +268,7 @@ class DnsRequestDetailsController: UITableViewController {
             view.addSubview(imageView)
             view.addSubview(button)
         }
-        
+
         theme.setupLabel(label)
         return view
     }
@@ -278,19 +278,19 @@ class DnsRequestDetailsController: UITableViewController {
      */
     private func showAlert(_ sender: UIButton) {
         let alert = UIAlertController(title: "", message: String.localizedString("whotrackme_message"), preferredStyle: .deviceAlertStyle)
-        
+
         alert.addAction(UIAlertAction(title: String.localizedString("common_action_more"), style: .default, handler: {[weak self] (action) in
             guard let self = self else { return }
             guard let url = URL(string: self.webPage) else { return }
-            
+
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }))
-        
+
         alert.addAction(UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel, handler: nil))
-        
+
         present(alert, animated: true, completion: nil)
     }
-    
+
     private func getStatusCellModel() -> LogCellModel? {
         guard let record = logRecord else { return nil }
         
@@ -301,10 +301,8 @@ class DnsRequestDetailsController: UITableViewController {
         let statusTitle = String.localizedString("status_title")
         let statusModel = status.isEmpty ? nil : LogCellModel(copiedString: stCopied, title: statusTitle, info: stCopied, infoFontWeight: statusFontWeight, infoColor: color, theme: theme)
         return statusModel
-        
-        return LogCellModel(isDataCell: true, copiedString: "", title: "", info: "", infoFontWeight: nil, infoColor: nil, categoryId: nil, bytesSent: nil, bytesReceived: nil, theme: theme)
     }
-    
+
     /**
      Method to create a model for this VC
      */
@@ -320,14 +318,14 @@ class DnsRequestDetailsController: UITableViewController {
             let lastSection = sectionsArray.last ?? 0
             return sectionsArray.isEmpty ? 1 : (lastSection + 1)
         }
-        
+
         /**
          General Section
          */
         var generalSectionModel: [Int : LogCellModelProtocol?] = [:]
         var generalRows = 0
         let generalSectionToAssign = sectionNumber
-        
+
         // Domain model
         var domain = record.event.domain
         domain = domain.hasSuffix(".") ? String(domain.dropLast()) : domain
@@ -340,7 +338,7 @@ class DnsRequestDetailsController: UITableViewController {
             generalRows += 1
             generalSectionModel[domainCell!.row] = domainModel
         }
-        
+
         // Status model
         let statusModel = getStatusCellModel()
         let statusModelIsNil = statusModel == nil
@@ -350,7 +348,7 @@ class DnsRequestDetailsController: UITableViewController {
             generalRows += 1
             generalSectionModel[statusCell!.row] = statusModel
         }
-        
+
         // Elapsed model
         let elapsed = record.event.elapsed
         let elapsedTitle = String.localizedString("elapsed_title")
@@ -362,7 +360,7 @@ class DnsRequestDetailsController: UITableViewController {
             generalRows += 1
             generalSectionModel[elapsedCell!.row] = elapsedModel
         }
-        
+
         // Time model
         let time = record.time()
         let timeTitle = String.localizedString("time_title")
@@ -374,7 +372,7 @@ class DnsRequestDetailsController: UITableViewController {
             generalRows += 1
             generalSectionModel[timeCell!.row] = timeModel
         }
-        
+
         // Server model
         let server = record.event.upstream.upstream
         let serverTitle = String.localizedString("server_title")
@@ -386,7 +384,7 @@ class DnsRequestDetailsController: UITableViewController {
             generalRows += 1
             generalSectionModel[serverCell!.row] = serverModel
         }
-        
+
         // Size model
         let bytesSent = record.event.bytesSent
         let bytesReceived = record.event.bytesReceived
@@ -401,8 +399,7 @@ class DnsRequestDetailsController: UITableViewController {
             generalRows += 1
             generalSectionModel[sizeCell!.row] = sizeModel
         }
-        
-        
+
         // Matched filters model
         // TODO: store matched filters in SDK
         let matchedFilters = record.event.blockRules.joined(separator: ", ")
@@ -428,19 +425,19 @@ class DnsRequestDetailsController: UITableViewController {
             generalRows += 1
             generalSectionModel[matchedRulesCell!.row] = matchedRulesModel
         }
-        
+
         if let generalSection = generalSection {
             sectionsArray.append(generalSection)
             sectionModels[generalSection] = generalSectionModel
         }
-        
+
         /**
          Tracker Details Section
          */
         var trackerDetailsSectionModel: [Int : LogCellModelProtocol?] = [:]
         var trackerDetailsRows = 0
         let trackerSectionToAssign = sectionNumber
-        
+
         // Category model
         let category = record.tracker?.name ?? ""
         let categoryTitle = String.localizedString("category_title")
@@ -452,7 +449,7 @@ class DnsRequestDetailsController: UITableViewController {
             trackerDetailsRows += 1
             trackerDetailsSectionModel[categoryCell!.row] = categoryModel
         }
-        
+
         // Name model
         let name = record.tracker?.name ?? ""
         let nameTitle = String.localizedString("name_title")
@@ -465,7 +462,7 @@ class DnsRequestDetailsController: UITableViewController {
             trackerDetailsRows += 1
             trackerDetailsSectionModel[nameCell!.row] = nameModel
         }
-        
+
         // Website model
         let website = record.tracker?.url ?? ""
         let websiteTitle = String.localizedString("website_title")
@@ -478,7 +475,7 @@ class DnsRequestDetailsController: UITableViewController {
             trackerDetailsRows += 1
             trackerDetailsSectionModel[websiteCell!.row] = websiteModel
         }
-        
+
         if let trackerDetailsSection = trackerDetailsSection {
             sectionsArray.append(trackerDetailsSection)
             sectionModels[trackerDetailsSection] = trackerDetailsSectionModel
@@ -490,7 +487,7 @@ class DnsRequestDetailsController: UITableViewController {
         var dnsSectionModel: [Int : LogCellModelProtocol?] = [:]
         var dnsRows = 0
         let dnsSectionToAssign = sectionNumber
-        
+
         // Type model
         let type = record.getTypeAndIp()
         let typeTitle = String.localizedString("type_title")
@@ -502,7 +499,7 @@ class DnsRequestDetailsController: UITableViewController {
             dnsRows += 1
             dnsSectionModel[typeCell!.row] = typeModel
         }
-        
+
         // Dns status model
         let dnsStatus = record.event.processedStatus.title
         let dnsStatusTitle = String.localizedString("dns_status_title")
@@ -514,7 +511,7 @@ class DnsRequestDetailsController: UITableViewController {
             dnsRows += 1
             dnsSectionModel[dnsStatusCell!.row] = dnsStatusModel
         }
-        
+
         // Dns upstream model
         let dnsUpstream = record.event.upstream.upstream
         let dnsUpstreamTitle = String.localizedString("dns_upstream_title")
@@ -526,7 +523,7 @@ class DnsRequestDetailsController: UITableViewController {
             dnsRows += 1
             dnsSectionModel[dnsUpstreamCell!.row] = dnsUpstreamModel
         }
-        
+
         // Dns answer model
         let dnsAnswer = record.event.answer
         let emptyAnswer = String.localizedString("empty_dns_answer")
@@ -539,7 +536,7 @@ class DnsRequestDetailsController: UITableViewController {
             dnsRows += 1
             dnsSectionModel[dnsAnswerCell!.row] = dnsAnswerModel
         }
-        
+
         // Original answer model
         let originalAnswer = record.event.originalAnswer
         let originalAnswerTitle = String.localizedString("original_answer_title")

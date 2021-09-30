@@ -24,56 +24,56 @@ import DnsAdGuardSDK
  this service initializes all shared services and put them into ServiceLocator
  */
 final class StartupService : NSObject{
-    
+
     @objc
     static func start() {
-        
+
         let locator = ServiceLocator.shared
-        
+
         // init services
-        
+
         let sharedResources: AESharedResourcesProtocol = AESharedResources()
         locator.addService(service: sharedResources)
-        
+
         // Registering standard Defaults
         if let path = Bundle.main.path(forResource: "defaults", ofType: "plist"),
             let defs = NSDictionary(contentsOfFile: path)  as? [String: Any] {
             sharedResources.sharedDefaults().register(defaults: defs)
         }
-        
+
         let networkService = ACNNetworking()
         locator.addService(service: networkService)
-        
+
         let productInfo: ADProductInfoProtocol = ADProductInfo()
         locator.addService(service: productInfo)
-        
+
         let purchaseService:PurchaseServiceProtocol = PurchaseService(network: networkService, resources: sharedResources, productInfo: productInfo)
         purchaseService.start()
         locator.addService(service: purchaseService)
-    
+
         let sharedUrls = SharedStorageUrls()
         let preloadedFilesManager = PreloadedFilesManager(sharedStorageUrls: sharedUrls)
         try! preloadedFilesManager.processPreloadedFiles()
-        
+
         /* Initializing SDK */
         let safariProtectionConfiguration = SafariConfiguration(
             resources: sharedResources,
             isProPurchased: purchaseService.isProPurchased
         )
         let defaultConfiguration = SafariConfiguration.defaultConfiguration()
-        
+
         let dnsProtectionConfiguration = DnsConfiguration(
             resources: sharedResources,
             isProPurchased: purchaseService.isProPurchased
         )
         let defaultDnsProtectionConfiguration = DnsConfiguration.defaultConfiguration(from: sharedResources)
-        
+
         // TODO: - try! is bad
         let dnsProtection: DnsProtectionProtocol = try! DnsProtection(configuration: dnsProtectionConfiguration,
                                           defaultConfiguration: defaultDnsProtectionConfiguration,
                                           userDefaults: sharedResources.sharedDefaults(),
                                           filterFilesDirectoryUrl: sharedUrls.dnsFiltersFolderUrl)
-        
+
         // TODO: - try! is bad
         let safariProtection: SafariProtectionProtocol = try! SafariProtection(
             configuration: safariProtectionConfiguration,
@@ -83,69 +83,69 @@ final class StartupService : NSObject{
             jsonStorageUrl: sharedUrls.cbJsonsFolderUrl,
             userDefaults: sharedResources.sharedDefaults(),
             dnsBackgroundFetchUpdater: dnsProtection)
-        
+
         let dnsProvidersManager: DnsProvidersManagerProtocol = try! DnsProvidersManager(configuration: dnsProtectionConfiguration, userDefaults: sharedResources.sharedDefaults())
 
         locator.addService(service: safariProtection)
         locator.addService(service: dnsProtection)
         locator.addService(service: dnsProvidersManager)
-        
+
         /* End of initializing SDK */
-        
+
         let configuration: ConfigurationServiceProtocol = ConfigurationService(purchaseService: purchaseService, resources: sharedResources, safariProtection: safariProtection)
         locator.addService(service: configuration)
-                
+
         let networkSettingsService: NetworkSettingsServiceProtocol = NetworkSettingsService(resources: sharedResources)
         locator.addService(service: networkSettingsService)
 
         let nativeDnsManager: NativeDnsSettingsManagerProtocol = NativeDnsSettingsManager(networkSettingsService: networkSettingsService, dnsProvidersManager: dnsProvidersManager, configuration: configuration, resources: sharedResources)
         locator.addService(service: nativeDnsManager)
-        
+
         let vpnManager: VpnManager = VpnManager(resources: sharedResources, configuration: configuration, networkSettings: networkSettingsService)
         locator.addService(service: vpnManager as VpnManagerProtocol)
-        
+
         let complexProtection: ComplexProtectionServiceProtocol = ComplexProtectionService(resources: sharedResources, configuration: configuration, vpnManager: vpnManager, productInfo: productInfo, nativeDnsSettingsManager: nativeDnsManager, safariProtection: safariProtection)
         locator.addService(service: complexProtection)
-        
+
         vpnManager.complexProtection = complexProtection
         vpnManager.checkVpnInstalled { _ in }
-        
+
         let themeService: ThemeServiceProtocol = ThemeService(configuration)
         locator.addService(service: themeService)
-        
+
         let keyChainService: KeychainServiceProtocol = KeychainService(resources: sharedResources)
         locator.addService(service: keyChainService)
-        
+
         let supportService: SupportServiceProtocol = SupportService(resources: sharedResources, configuration: configuration, complexProtection: complexProtection, productInfo: productInfo, keyChainService: keyChainService, safariProtection: safariProtection, networkSettings: networkSettingsService, dnsProvidersManager: dnsProvidersManager, dnsProtection: dnsProtection)
         locator.addService(service: supportService)
 
         let userNotificationService: UserNotificationServiceProtocol = UserNotificationService()
         locator.addService(service: userNotificationService)
-    
+
         let dnsTrackers: DnsTrackersProviderProtocol = try! DnsTrackersProvider()
         locator.addService(service: dnsTrackers)
-        
+
         let rateService: RateAppServiceProtocol = RateAppService(resources: sharedResources, configuration: configuration)
         locator.addService(service: rateService)
-        
+
         let domainsParserService: DomainsParserServiceProtocol = DomainsParserService()
         locator.addService(service: domainsParserService)
-        
+
 //        let migrationService: MigrationServiceProtocol = MigrationService(vpnManager: vpnManager, dnsProvidersService: dnsProviders, resources: sharedResources, antibanner: antibanner, dnsFiltersService: dnsFiltersService, networking: networkService, activityStatisticsService: activityStatisticsService, dnsStatisticsService: dnsStatisticsService, dnsLogService: dnsLogService, configuration: configuration, filtersService: filtersService, productInfo: productInfo, contentBlockerService: contentBlockerService, nativeProviders: nativeProviders, filtersStorage: filtersStorage, safariProtection: safariProtection)
 //        locator.addService(service: migrationService)
-        
+
         let setappService: SetappServiceProtocol = SetappService(purchaseService: purchaseService, resources: sharedResources)
         locator.addService(service: setappService)
-        
+
         let importSettings: ImportSettingsServiceProtocol = ImportSettingsService(networking: networkService, dnsProvidersManager: dnsProvidersManager, purchaseService: purchaseService, resources: sharedResources, safariProtection: safariProtection)
         locator.addService(service: importSettings)
-        
+
         let activityStatistics: ActivityStatisticsProtocol = try! ActivityStatistics(statisticsDbContainerUrl: sharedUrls.statisticsFolderUrl)
         locator.addService(service: activityStatistics)
-        
+
         let chartStatistics: ChartStatisticsProtocol = try! ChartStatistics(statisticsDbContainerUrl: sharedUrls.statisticsFolderUrl)
         locator.addService(service: chartStatistics)
-        
+
         let dnsLogStatistics: DnsLogStatisticsProtocol = try! DnsLogStatistics(statisticsDbContainerUrl: sharedUrls.statisticsFolderUrl)
         locator.addService(service: dnsLogStatistics)
     }

@@ -133,7 +133,6 @@
 		2490F650270097C900B1514D /* HttpRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95923F2C56200F9A544 /* HttpRequestService.swift */; };
 		2490F651270097CA00B1514D /* HttpRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F95923F2C56200F9A544 /* HttpRequestService.swift */; };
 		2490F652270097E500B1514D /* RequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F94523F2B64400F9A544 /* RequestSender.swift */; };
-		2490F653270097E600B1514D /* RequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F94523F2B64400F9A544 /* RequestSender.swift */; };
 		2490F654270097FC00B1514D /* RequestSenderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F94623F2B64400F9A544 /* RequestSenderProtocol.swift */; };
 		2490F655270097FE00B1514D /* RequestSenderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F94623F2B64400F9A544 /* RequestSenderProtocol.swift */; };
 		2490F6562700982800B1514D /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F94223F2B64400F9A544 /* RequestProtocol.swift */; };
@@ -1586,6 +1585,7 @@
 		D08A21A726FC541A00267930 /* DispatchQueue+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E92754A26C6C02F007B2C80 /* DispatchQueue+Utils.swift */; };
 		D08A21AB270493D000267930 /* DnsLogRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08187C12260ABD600E961B5 /* DnsLogRecord.swift */; };
 		D08A21AC270493D200267930 /* DnsLogRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08187C12260ABD600E961B5 /* DnsLogRecord.swift */; };
+		D08A21AD2705A76C00267930 /* RequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB2F94523F2B64400F9A544 /* RequestSender.swift */; };
 		D08CE427240D37D600A70089 /* ConfigurationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CB347A212DD1AB003B650E /* ConfigurationService.swift */; };
 		D08CE428240D37E300A70089 /* PurchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F91179213422E1006DF0D3 /* PurchaseService.swift */; };
 		D08CE429240D389800A70089 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F7F0C72268946700592B1E /* KeychainService.swift */; };
@@ -8410,6 +8410,7 @@
 				D0B545E12435D69B002F0AEC /* ThemableLabel.swift in Sources */,
 				2491F74226F63AF5006CF561 /* DnsProviderDetailsModel.swift in Sources */,
 				D0D7E62224445731001801A5 /* MostActiveCompaniesCell.swift in Sources */,
+				D08A21AD2705A76C00267930 /* RequestSender.swift in Sources */,
 				7EAA0D8826CA8E8C007208E5 /* UITextView+Utils.swift in Sources */,
 				24D922922604B428002F368B /* AppDelegate+CheckPeriod.swift in Sources */,
 				D0B545C92435D669002F0AEC /* GetProController.swift in Sources */,

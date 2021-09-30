@@ -16,7 +16,6 @@
       along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
 import DnsAdGuardSDK
 
 enum BlockedRecordType {
@@ -29,26 +28,26 @@ class ActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var blockStateView: UIView!
     @IBOutlet weak var categoryImageView: UIImageView!
     @IBOutlet weak var timeLabel: ThemableLabel!
-    
+
     var advancedMode: Bool = true
-    
+
     var domainsParser: DomainParser?
-    
+
     var theme: ThemeServiceProtocol? {
         didSet {
             updateTheme()
         }
     }
-    
+
     var record: DnsLogRecord? {
         didSet {
             processRecord()
         }
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
-        
+
         backgroundColor = nil
         blockStateView.backgroundColor = .clear
         infoLabel.attributedText = nil
@@ -56,30 +55,30 @@ class ActivityTableViewCell: UITableViewCell {
         timeLabel.text = nil
         categoryImageView.isHidden = false
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         blockStateView.layer.cornerRadius = blockStateView.frame.height / 2.0
     }
-    
+
     // MARK: - Private variables
-    
+
     private let redDotColor = UIColor.AdGuardColor.red
     private let greenDotColor = UIColor.AdGuardColor.lightGreen1
-    private let greyDotColor = UIColor(hexString: "#888888")
-    
+    private let greyDotColor = UIColor.AdGuardColor.lightGray3
+
     // MARK: - Private methods
-    
+
     private func processRecord(){
         guard let record = record else { return }
         let timeString = record.time()
         let name = record.tracker?.name
         let domain = record.getDetailsString(infoLabel.font.pointSize, advancedMode)
-        
+
         companyLabel.text = (name == nil || advancedMode) ? record.firstLevelDomain(parser: domainsParser) : name
         infoLabel.attributedText = domain
         timeLabel.text = timeString
-        
+
         // Setup cell background color
         let type: BlockedRecordType
         switch record.event.processedStatus {
@@ -98,30 +97,30 @@ class ActivityTableViewCell: UITableViewCell {
         categoryImageView.isHidden = categoryImage == nil
         categoryImageView.image = categoryImage
     }
-    
+
     private func updateTheme(){
         theme?.setupTableCell(self)
         theme?.setupLabel(companyLabel)
         theme?.setupLabel(infoLabel)
         theme?.setupLabel(timeLabel)
     }
-    
+
     private func setupRecordCell(type: BlockedRecordType){
-        
+
         var logSelectedCellColor: UIColor = .clear
         var logBlockedCellColor: UIColor = .clear
-        
+
         switch type {
         case .blocked:
-            logSelectedCellColor = UIColor(hexString: "#4DDF3812")
-            logBlockedCellColor = UIColor(hexString: "#33DF3812")
+            logSelectedCellColor = UIColor.AdGuardColor.logSelectedCellColor
+            logBlockedCellColor = UIColor.AdGuardColor.logBlockedCellColor
         case .whitelisted:
-            logSelectedCellColor = UIColor(hexString: "#4D67b279")
-            logBlockedCellColor = UIColor(hexString: "#3367b279")
+            logSelectedCellColor = UIColor.AdGuardColor.logSelectedAllowlistedCellColor
+            logBlockedCellColor = UIColor.AdGuardColor.logAllowlistedCellColor
         default:
             return
         }
-        
+
         let bgColorView = UIView()
         bgColorView.backgroundColor = logSelectedCellColor
         selectedBackgroundView = bgColorView

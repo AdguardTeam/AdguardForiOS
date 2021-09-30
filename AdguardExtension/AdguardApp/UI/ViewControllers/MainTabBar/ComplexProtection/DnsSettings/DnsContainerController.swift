@@ -22,7 +22,7 @@ import DnsAdGuardSDK
 protocol AddDomainToListDelegate {
     /**
      Adds domain or a rule to blacklist / whitelist
-     
+
      - Parameters:
         - domain: the domain to add to list.
         - needsCorrecting: flag indicating the need to make a rule from domain.
@@ -35,22 +35,22 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
 
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var shadowView: BottomShadowView!
-    
+
     var logRecord: DnsLogRecord!
-    
+
     private var blockRequestControllerId = "BlockRequestControllerId"
-    
+
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let domainsConverter: DomainsConverterProtocol = DomainsConverter()
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsProtection: DnsProtectionProtocol = ServiceLocator.shared.getService()!
-    
+
     private var advancedModeObserver: NotificationToken?
-    
+
     private var detailsController: DnsRequestDetailsController?
-    
+
     // MARK: - view controller life cycle
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationVC = segue.destination as? DnsRequestDetailsController {
             destinationVC.logRecord = logRecord
@@ -59,22 +59,22 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
             detailsController = destinationVC
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         advancedModeObserver = NotificationCenter.default.observe(name: .advancedModeChanged, object: nil, queue: .main, using: { [weak self] _ in
             self?.updateButtons()
         })
-        
+
         updateButtons()
-        
+
         setupBackButton()
         updateTheme()
     }
-    
+
     // MARK: - AddDomainToListDelegate method
-    
+
     func add(domain: String, needsCorrecting: Bool, by type: DnsLogButtonType) {
         if type == .addDomainToWhitelist {
             let rule = needsCorrecting ? domainsConverter.whitelistRuleFromDomain(domain) : domain
@@ -83,17 +83,17 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
             let rule = needsCorrecting ? domainsConverter.blacklistRuleFromDomain(domain) : domain
         }
     }
-    
+
     // MARK: - private methods
 
     private func updateButtons() {
         shadowView.isHidden = !configuration.advancedMode
-        
+
         if !configuration.advancedMode {
             shadowView.buttons = []
             return
         }
-        
+
         let buttons = logRecord!.getButtons().map{ [weak self] (type) -> BottomShadowButton in
             guard let self = self else { return BottomShadowButton() }
             let button = BottomShadowButton()
@@ -113,9 +113,7 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
                 color = UIColor(hexString: "#DF3812")
                 button.action = {
                     if let record = self.logRecord {
-                        // TODO: 
-                        //self.dnsFiltersService.removeWhitelistRules(rules ?? [])
-//                        self.set(record.userStatus == .movedToWhitelist ? .modified : .removedFromWhitelist)
+                        self.dnsProtection.removeRules(record.event.blockRules, for: .allowlist)
                     }
                 }
 
@@ -123,11 +121,7 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
                 color = UIColor.AdGuardColor.lightGreen1
                 button.action = {
                     if let record = self.logRecord {
-//                        let isOriginalRecord = record.userStatus == .none || record.userStatus == .modified
-//                        let rules = isOriginalRecord ? record.blockRules : [record.userRule ?? ""]
-
-                        //self.dnsFiltersService.removeUserRules(rules ?? [])
-//                        self.set(self.logRecord!.logRecord.userStatus == .movedToBlacklist ? .modified : .removedFromBlacklist)
+                        self.dnsProtection.removeRules(record.event.blockRules, for: .blocklist)
                     }
                 }
 
