@@ -17,6 +17,7 @@
 */
 
 import UIKit
+import DnsAdGuardSDK
 
 class CompanyDetailedController: UITableViewController {
 
@@ -44,7 +45,7 @@ class CompanyDetailedController: UITableViewController {
 
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
-    private let dnsTrackersService: DnsTrackerServiceProtocol = ServiceLocator.shared.getService()!
+    private let dnsTrackers: DnsTrackersProviderProtocol = ServiceLocator.shared.getService()!
     private let domainsParserService: DomainsParserServiceProtocol = ServiceLocator.shared.getService()!
 
     // MARK: - Notifications
@@ -53,13 +54,13 @@ class CompanyDetailedController: UITableViewController {
     private var keyboardShowToken: NotificationToken?
 
     // MARK: - Public variables
-    var chartDateType: ChartDateType?
+    var recordType: BlockedRecordType?
 
     var record: CompanyRequestsRecord?
     let requestsModel: DnsRequestLogViewModel
 
     // MARK: - Private variables
-    private var selectedRecord: DnsLogRecordExtended?
+    private var selectedRecord: DnsLogRecord?
 
     private let activityTableViewCellReuseId = "ActivityTableViewCellId"
     private let showDnsContainerSegueId = "showDnsContainer"
@@ -69,7 +70,7 @@ class CompanyDetailedController: UITableViewController {
     //var model:
 
     required init?(coder: NSCoder) {
-        requestsModel = DnsRequestLogViewModel(dnsTrackerService: dnsTrackersService)
+        requestsModel = DnsRequestLogViewModel(dnsTrackers: dnsTrackers, dnsStatistics: ServiceLocator.shared.getService()!)
         super.init(coder: coder)
     }
 
@@ -83,7 +84,7 @@ class CompanyDetailedController: UITableViewController {
         titleLabel.text = record?.key
 
         requestsModel.delegate = self
-        if let type = chartDateType, let domains = record?.domains {
+        if let type = recordType, let domains = record?.domains {
             requestsModel.obtainRecords(for: type, domains: domains)
         }
 
@@ -137,7 +138,6 @@ class CompanyDetailedController: UITableViewController {
     @IBAction func changeRequestsTypeAction(_ sender: UIButton) {
         showGroupsAlert(sender)
     }
-
 
     // MARK: - UITableViewDataSource, UITableViewDelegate
 
@@ -251,7 +251,7 @@ class CompanyDetailedController: UITableViewController {
         let allRequestsAction = UIAlertAction(title: String.localizedString("all_requests_alert_action"), style: .default) {[weak self] _ in
             guard let self = self else { return }
             self.requestsModel.displayedStatisticsType = .allRequests
-            if let type = self.chartDateType, let domains = self.record?.domains {
+            if let type = self.recordType, let domains = self.record?.domains {
                 self.requestsModel.obtainRecords(for: type, domains: domains)
             }
             alert.dismiss(animated: true, completion: nil)
@@ -260,7 +260,7 @@ class CompanyDetailedController: UITableViewController {
         let blockedOnlyAction = UIAlertAction(title: String.localizedString("blocked_only_alert_action"), style: .default) {[weak self] _ in
             guard let self = self else { return }
             self.requestsModel.displayedStatisticsType = .blockedRequests
-            if let type = self.chartDateType, let domains = self.record?.domains {
+            if let type = self.recordType, let domains = self.record?.domains {
                 self.requestsModel.obtainRecords(for: type, domains: domains)
             }
             alert.dismiss(animated: true, completion: nil)
@@ -269,7 +269,7 @@ class CompanyDetailedController: UITableViewController {
         let allowedOnlyAction = UIAlertAction(title: String.localizedString("allowed_only_alert_action"), style: .default) {[weak self] _ in
             guard let self = self else { return }
             self.requestsModel.displayedStatisticsType = .allowedRequests
-            if let type = self.chartDateType, let domains = self.record?.domains {
+            if let type = self.recordType, let domains = self.record?.domains {
                 self.requestsModel.obtainRecords(for: type, domains: domains)
             }
             alert.dismiss(animated: true, completion: nil)
@@ -288,7 +288,7 @@ class CompanyDetailedController: UITableViewController {
     }
 
     @objc func updateTableView(sender: UIRefreshControl) {
-        if let type = chartDateType, let domains = record?.domains {
+        if let type = recordType, let domains = record?.domains {
             requestsModel.obtainRecords(for: type, domains: domains)
         }
         refreshControl?.endRefreshing()

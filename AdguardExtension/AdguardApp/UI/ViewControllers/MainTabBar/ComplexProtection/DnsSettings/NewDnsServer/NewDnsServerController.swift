@@ -165,7 +165,7 @@ final class NewDnsServerController: BottomAlertController {
         let enabled = dnsName.count > 0 && correctDns
 
         if !correctDns && !dnsUrl.isEmpty {
-            dnsSeparator.backgroundColor = UIColor(hexString: "#df3812")
+            dnsSeparator.backgroundColor = UIColor.AdGuardColor.red
         } else {
             dnsSeparator.backgroundColor = UIColor.lightGray
         }

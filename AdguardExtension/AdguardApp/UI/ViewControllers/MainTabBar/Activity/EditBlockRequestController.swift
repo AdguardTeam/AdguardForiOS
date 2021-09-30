@@ -40,11 +40,11 @@ class EditBlockRequestController: BottomAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        titleLabel.text = type == .addDomainToWhitelist ? String.localizedString("whitelist_request") : String.localizedString("block_request")
+        titleLabel.text = (type == .addDomainToWhitelist) ? String.localizedString("whitelist_request") : String.localizedString("block_request")
 
         let converter = DomainsConverter()
 
-        domainNameTextField.text = type == .addDomainToWhitelist ? domain : converter.blacklistRuleFromDomain(domain)
+        domainNameTextField.text = (type == .addDomainToWhitelist) ? domain : converter.blacklistRuleFromDomain(domain)
         domainNameTextField.becomeFirstResponder()
 
         updateTheme()

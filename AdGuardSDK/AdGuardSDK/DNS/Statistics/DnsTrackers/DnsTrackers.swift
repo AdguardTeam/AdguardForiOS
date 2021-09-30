@@ -60,9 +60,9 @@ struct DnsTrackers: Decodable {
 // MARK: - DnsTracker
 public struct DnsTracker: Equatable, Decodable {
     fileprivate(set) var jsonType: JsonType = .adGuard
-    let name: String
-    let category: Category
-    let url: String?
+    public let name: String
+    public let category: Category
+    public let url: String?
 
     enum JsonType: String, Decodable {
         case adGuard = "adguard"
@@ -75,7 +75,7 @@ public struct DnsTracker: Equatable, Decodable {
         case url
     }
 
-    enum Category: Int, Decodable {
+    public enum Category: Int, Decodable {
         case audioVideoPlayer = 0
         case comments = 1
         case customerInteraction = 2

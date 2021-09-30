@@ -61,8 +61,11 @@ extension UIColor {
         static let red: UIColor = #colorLiteral(red: 0.8745098039, green: 0.2196078431, blue: 0.07058823529, alpha: 1)             //hex = #df3812
         static let errorRedColor: UIColor = #colorLiteral(red: 0.7607843137, green: 0.2196078431, blue: 0.07843137255, alpha: 1)   //hex = #c23814
 
-        static let logBlockedCellColor: UIColor = #colorLiteral(red: 0.2, green: 0.8745098039, blue: 0.2196078431, alpha: 0.12) //hex = #33df38 alpha: 12
-        static let logSelectedCellColor: UIColor = #colorLiteral(red: 0.3019607843, green: 0.8745098039, blue: 0.2196078431, alpha: 0.12) //hex = #4ddf38 alpha: 12
+        static let logBlockedCellColor: UIColor = #colorLiteral(red: 0.2, green: 0.8745098039, blue: 0.2196078431, alpha: 0.05) //hex = #33df3812
+        static let logSelectedCellColor: UIColor = #colorLiteral(red: 0.3019607843, green: 0.8745098039, blue: 0.2196078431, alpha: 0.05) //hex = #4ddf3812
+
+        static let logAllowlistedCellColor: UIColor = #colorLiteral(red: 0.2, green: 0.4039215686, blue: 0.6980392157, alpha: 0.3)          //hex = #3367b279
+        static let logSelectedAllowlistedCellColor: UIColor = #colorLiteral(red: 0.3019607843, green: 0.4039215686, blue: 0.6980392157, alpha: 0.3)  //hex = #4D67b279
 
     }
 }

@@ -17,6 +17,7 @@
 */
 
 import UIKit
+import DnsAdGuardSDK
 
 class ActivityTitleCell: UITableViewCell {
     @IBOutlet weak var titleLabel: ThemableLabel!
@@ -25,7 +26,7 @@ class ActivityTitleCell: UITableViewCell {
 class DnsRequestDetailsController: UITableViewController {
 
     // MARK: - public fields
-    var logRecord: DnsLogRecordExtended? {
+    var logRecord: DnsLogRecord? {
         didSet{
             createCellModels()
         }
@@ -138,12 +139,11 @@ class DnsRequestDetailsController: UITableViewController {
         guard let record = logRecord, section != titleSection else { return UIView() }
 
         var text = ""
-        var needsButton = false
+        var needsButton = true
 
         switch section {
         case trackerDetailsSection:
             text = String.localizedString("tracker_details_header")
-            needsButton = !record.category.isAdguardJson
         case generalSection:
             text = String.localizedString("general_header")
         case dnsSection:
@@ -294,10 +294,9 @@ class DnsRequestDetailsController: UITableViewController {
     private func getStatusCellModel() -> LogCellModel? {
         guard let record = logRecord else { return nil }
 
-        let status = record.logRecord.status.title()
-        let userStatus = record.logRecord.userStatus
-        let stCopied = (userStatus == .none || userStatus == .modified) ? status : "\(status) (\(userStatus.title()))"
-        let color = record.logRecord.status.textColor
+        let status = record.event.processedStatus.title
+        let stCopied = status
+        let color = record.event.processedStatus.textColor
         let statusFontWeight = UIFont.Weight.bold
         let statusTitle = String.localizedString("status_title")
         let statusModel = status.isEmpty ? nil : LogCellModel(copiedString: stCopied, title: statusTitle, info: stCopied, infoFontWeight: statusFontWeight, infoColor: color, theme: theme)
@@ -328,7 +327,7 @@ class DnsRequestDetailsController: UITableViewController {
         let generalSectionToAssign = sectionNumber
 
         // Domain model
-        var domain = record.logRecord.domain
+        var domain = record.event.domain
         domain = domain.hasSuffix(".") ? String(domain.dropLast()) : domain
         let domainTitle = String.localizedString("domain_title")
         let domainModelIsNil = domain.isEmpty
@@ -351,7 +350,7 @@ class DnsRequestDetailsController: UITableViewController {
         }
 
         // Elapsed model
-        let elapsed = record.logRecord.elapsed
+        let elapsed = record.event.elapsed
         let elapsedTitle = String.localizedString("elapsed_title")
         let elapsedString = String(format: "%d ms", elapsed)
         let elapsedModel = LogCellModel(copiedString: elapsedString, title: elapsedTitle, info: elapsedString, theme: theme)
@@ -363,7 +362,7 @@ class DnsRequestDetailsController: UITableViewController {
         }
 
         // Time model
-        let time = record.logRecord.time()
+        let time = record.time()
         let timeTitle = String.localizedString("time_title")
         let timeModelIsNil = time.isEmpty
         let timeModel = timeModelIsNil ? nil : LogCellModel(copiedString: time, title:timeTitle, info: time, theme: theme)
@@ -375,7 +374,7 @@ class DnsRequestDetailsController: UITableViewController {
         }
 
         // Server model
-        let server = record.logRecord.server
+        let server = record.event.upstream.upstream
         let serverTitle = String.localizedString("server_title")
         let serverModelIsNil = server.isEmpty
         let serverModel = serverModelIsNil ? nil : LogCellModel(copiedString: server, title: serverTitle, info: server, theme: theme)
@@ -387,8 +386,8 @@ class DnsRequestDetailsController: UITableViewController {
         }
 
         // Size model
-        let bytesSent = record.logRecord.bytesSent
-        let bytesReceived = record.logRecord.bytesReceived
+        let bytesSent = record.event.bytesSent
+        let bytesReceived = record.event.bytesReceived
         let bytesSentText = String(format: "%d B", bytesSent)
         let bytesReceivedText = String(format: "%d B", bytesReceived)
         let sizeTitle = String.localizedString("size_title")
@@ -401,9 +400,9 @@ class DnsRequestDetailsController: UITableViewController {
             generalSectionModel[sizeCell!.row] = sizeModel
         }
 
-
         // Matched filters model
-        let matchedFilters = record.matchedFilters ?? ""
+        // TODO: store matched filters in SDK
+        let matchedFilters = record.event.blockRules.joined(separator: ", ")
         let matchedFiltersTitle = String.localizedString("matched_filter_title")
         let matchedFiltersModelIsNil = matchedFilters.isEmpty
         let matchedFiltersModel = matchedFiltersModelIsNil ? nil : LogCellModel(copiedString: matchedFilters, title: matchedFiltersTitle, info: matchedFilters, theme: theme)
@@ -415,7 +414,7 @@ class DnsRequestDetailsController: UITableViewController {
         }
 
         // Matched rules model
-        let matchedRules = record.logRecord.blockRules?.joined(separator: "\n") ?? ""
+        let matchedRules = record.event.blockRules.joined(separator: "\n")
         let matchedRulesModelIsNil = matchedRules.isEmpty
         let matchedRulesTitle = String.localizedString("matched_rule_title")
         let matchedRulesModel = matchedRulesModelIsNil ? nil : LogCellModel(copiedString: matchedRules, title: matchedRulesTitle, info: matchedRules, theme: theme)
@@ -440,10 +439,10 @@ class DnsRequestDetailsController: UITableViewController {
         let trackerSectionToAssign = sectionNumber
 
         // Category model
-        let category = record.category.category ?? ""
+        let category = record.tracker?.name ?? ""
         let categoryTitle = String.localizedString("category_title")
         let categoryModelIsNil = category.isEmpty
-        let categoryModel = categoryModelIsNil ? nil : LogCellModel(copiedString: category, title: categoryTitle, info: category, categoryId: record.category.categoryId, theme: theme)
+        let categoryModel: LogCellModel? = categoryModelIsNil ? nil : LogCellModel(copiedString: category, title: categoryTitle, info: category, categoryId: record.tracker?.category.rawValue, theme: theme)
         if !categoryModelIsNil {
             trackerDetailsSection = trackerSectionToAssign
             categoryCell = IndexPath(row: trackerDetailsRows, section: trackerDetailsSection!)
@@ -452,7 +451,7 @@ class DnsRequestDetailsController: UITableViewController {
         }
 
         // Name model
-        let name = record.category.name ?? ""
+        let name = record.tracker?.name ?? ""
         let nameTitle = String.localizedString("name_title")
         let nameFontWeight = UIFont.Weight.bold
         let nameModelIsNil = name.isEmpty
@@ -465,7 +464,7 @@ class DnsRequestDetailsController: UITableViewController {
         }
 
         // Website model
-        let website = record.category.url ?? ""
+        let website = record.tracker?.url ?? ""
         let websiteTitle = String.localizedString("website_title")
         let color: UIColor = UIColor.AdGuardColor.lightGreen1
         let websiteModelIsNil = website.isEmpty
@@ -482,7 +481,6 @@ class DnsRequestDetailsController: UITableViewController {
             sectionModels[trackerDetailsSection] = trackerDetailsSectionModel
         }
 
-
         /**
          DNS Section
         */
@@ -491,7 +489,7 @@ class DnsRequestDetailsController: UITableViewController {
         let dnsSectionToAssign = sectionNumber
 
         // Type model
-        let type = record.logRecord.getTypeAndIp()
+        let type = record.getTypeAndIp()
         let typeTitle = String.localizedString("type_title")
         let typeModelIsNil = type.isEmpty
         let typeModel = typeModelIsNil ? nil : LogCellModel(copiedString: type, title: typeTitle, info: type, theme: theme)
@@ -503,7 +501,7 @@ class DnsRequestDetailsController: UITableViewController {
         }
 
         // Dns status model
-        let dnsStatus = record.logRecord.answerStatus ?? ""
+        let dnsStatus = record.event.processedStatus.title
         let dnsStatusTitle = String.localizedString("dns_status_title")
         let dnsStatusModelIsNil = dnsStatus.isEmpty
         let dnsStatusModel = dnsStatusModelIsNil ? nil : LogCellModel(copiedString: dnsStatus, title: dnsStatusTitle, info: dnsStatus, theme: theme)
@@ -515,7 +513,7 @@ class DnsRequestDetailsController: UITableViewController {
         }
 
         // Dns upstream model
-        let dnsUpstream = record.logRecord.upstreamAddr ?? ""
+        let dnsUpstream = record.event.upstream.upstream
         let dnsUpstreamTitle = String.localizedString("dns_upstream_title")
         let dnsUpstreamModelIsNil = dnsUpstream.isEmpty
         let dnsUpstreamModel = dnsUpstreamModelIsNil ? nil : LogCellModel(copiedString: dnsUpstream, title: dnsUpstreamTitle, info: dnsUpstream, theme: theme)
@@ -527,7 +525,7 @@ class DnsRequestDetailsController: UITableViewController {
         }
 
         // Dns answer model
-        let dnsAnswer = record.logRecord.answer
+        let dnsAnswer = record.event.answer
         let emptyAnswer = String.localizedString("empty_dns_answer")
         let answerString = dnsAnswer.isEmpty ? emptyAnswer : dnsAnswer
         let dnsAnserTitle = String.localizedString("dns_answer_title")
@@ -540,7 +538,7 @@ class DnsRequestDetailsController: UITableViewController {
         }
 
         // Original answer model
-        let originalAnswer = record.logRecord.originalAnswer ?? ""
+        let originalAnswer = record.event.originalAnswer
         let originalAnswerTitle = String.localizedString("original_answer_title")
         let originalAnswerModelIsNil = originalAnswer.isEmpty
         let originalAnswerModel = originalAnswerModelIsNil ? nil : LogCellModel(copiedString: originalAnswer, title: originalAnswerTitle, info: originalAnswer, theme: theme)

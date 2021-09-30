@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol DnsTrackersProviderProtocol: AnyObject {
+public protocol DnsTrackersProviderProtocol: AnyObject {
     /// Returns tracker object by domain if found in json or nil otherwise
     func getTracker(by domain: String) -> DnsTracker?
 }
@@ -29,11 +29,11 @@ protocol DnsTrackersProviderProtocol: AnyObject {
  Trackers information from `adguard.json` has a higher priority than from `whotracksme.json`
  If tracker is not found in `adguard.json` we're trying to find it in `whotracksme.json`
  */
-final class DnsTrackersProvider: DnsTrackersProviderProtocol {
+public  final class DnsTrackersProvider: DnsTrackersProviderProtocol {
     private let whoTracksMeTrackers: DnsTrackers
     private let adguardTrackers: DnsTrackers
 
-    init() throws {
+    public init() throws {
         let bundle = Bundle(for: type(of: self))
 
         /// These files can be found here https://github.com/AdguardTeam/AdGuardHome/tree/master/client/src/helpers/trackers
@@ -50,7 +50,7 @@ final class DnsTrackersProvider: DnsTrackersProviderProtocol {
         self.adguardTrackers = try JSONDecoder().decode(DnsTrackers.self, from: adguardData)
     }
 
-    func getTracker(by domain: String) -> DnsTracker? {
+    public func getTracker(by domain: String) -> DnsTracker? {
         guard !domain.isEmpty else {
             return nil
         }

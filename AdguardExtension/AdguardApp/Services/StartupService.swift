@@ -16,7 +16,6 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
 import SafariAdGuardSDK
 import DnsAdGuardSDK
 
@@ -122,8 +121,8 @@ final class StartupService : NSObject{
         let userNotificationService: UserNotificationServiceProtocol = UserNotificationService()
         locator.addService(service: userNotificationService)
 
-        let dnsTrackerService: DnsTrackerServiceProtocol = DnsTrackerService()
-        locator.addService(service: dnsTrackerService)
+        let dnsTrackers: DnsTrackersProviderProtocol = try! DnsTrackersProvider()
+        locator.addService(service: dnsTrackers)
 
         let rateService: RateAppServiceProtocol = RateAppService(resources: sharedResources, configuration: configuration)
         locator.addService(service: rateService)
@@ -145,5 +144,8 @@ final class StartupService : NSObject{
 
         let chartStatistics: ChartStatisticsProtocol = try! ChartStatistics(statisticsDbContainerUrl: sharedUrls.statisticsFolderUrl)
         locator.addService(service: chartStatistics)
+
+        let dnsLogStatistics: DnsLogStatisticsProtocol = try! DnsLogStatistics(statisticsDbContainerUrl: sharedUrls.statisticsFolderUrl)
+        locator.addService(service: dnsLogStatistics)
     }
 }

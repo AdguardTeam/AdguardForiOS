@@ -16,7 +16,6 @@
       along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
 import DnsAdGuardSDK
 
 class CompanyRequestsRecord {
@@ -49,7 +48,7 @@ protocol ActivityStatisticsModelProtocol: AnyObject {
 
 class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
 
-    private let dnsTrackersService: DnsTrackerServiceProtocol
+    private let dnsTrackers: DnsTrackersProviderProtocol
     private let domainsParserService: DomainsParserServiceProtocol
     private let activityStatistics: ActivityStatisticsProtocol
 
@@ -61,8 +60,8 @@ class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
         return (try? activityStatistics.getCounters(for: period)) ?? CountersStatisticsRecord.emptyRecord()
     }
 
-    init(dnsTrackersService: DnsTrackerServiceProtocol, domainsParserService: DomainsParserServiceProtocol, activityStatistics: ActivityStatisticsProtocol) {
-        self.dnsTrackersService = dnsTrackersService
+    init(dnsTrackers: DnsTrackersProviderProtocol, domainsParserService: DomainsParserServiceProtocol, activityStatistics: ActivityStatisticsProtocol) {
+        self.dnsTrackers = dnsTrackers
         self.domainsParserService = domainsParserService
         self.activityStatistics = activityStatistics
     }
