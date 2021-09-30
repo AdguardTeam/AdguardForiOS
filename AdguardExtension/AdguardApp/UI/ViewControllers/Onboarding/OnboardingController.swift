@@ -27,7 +27,8 @@ final class OnboardingController: UIViewController {
     var delegate: OnboardingControllerDelegate?
     var needsShowingPremium: Bool?
 
-    // MARK: - services
+    // MARK: - Services
+
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
 
@@ -35,7 +36,8 @@ final class OnboardingController: UIViewController {
 
     private let showLicenseSegue = "ShowLicenseSegue"
 
-    // MARK: - outlets
+    // MARK: - Outlets
+
     @IBOutlet weak var settingsLabel: ThemableLabel!
     @IBOutlet weak var safariLabel: ThemableLabel!
     @IBOutlet weak var switchLabel: ThemableLabel!
@@ -45,11 +47,10 @@ final class OnboardingController: UIViewController {
     @IBOutlet weak var watchManualButtonIpad: UIButton!
     @IBOutlet var themableLabels: [ThemableLabel]!
 
-    // MARK: - view controller live cycle
+    // MARK: - ViewController lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         contenBlockerObserver = NotificationCenter.default.observe(name: .contentBlockersStateChanged, object: nil, queue: .main, using: { [weak self] _ in
             self?.observeContentBlockersState()
         })
@@ -63,7 +64,6 @@ final class OnboardingController: UIViewController {
             onboardingContentViewTopConstraint.constant = 30.0
             onboardingContentView.onboardingType = .withoutAdvancedProtection
         }
-
         self.updateTheme()
     }
 
@@ -100,29 +100,33 @@ final class OnboardingController: UIViewController {
         showVideoTutorial()
     }
 
-
     // MARK: - Private methods
 
     private func setupLabels() {
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.asyncSafeMain { [weak self] in
             guard let self = self else { return }
 
             let settingsLabelText: String
             let safariLabelText: String
+            let switchLabelText: String
             switch self.onboardingContentView.onboardingType {
             case .withAdvancedProtection:
                 settingsLabelText = String.localizedString("advanced_protection_onboarding_first_step_text")
                 safariLabelText = String.localizedString("advanced_protection_onboarding_second_step_text")
+                switchLabelText = String.localizedString("advanced_protection_onboarding_third_step_text")
             case .withoutAdvancedProtection:
                 settingsLabelText = String.localizedString("onboarding_first_step_text")
                 safariLabelText = String.localizedString("onboarding_second_step_text")
+                switchLabelText = String.localizedString("onboarding_third_step_text")
             }
 
-            self.settingsLabel.attributedText = NSMutableAttributedString.fromHtml(settingsLabelText, fontSize: self.settingsLabel.font!.pointSize, color: self.theme.grayTextColor)
+            let fontSize: CGFloat = self.isIpadTrait ? 24.0 : 16.0
 
-            self.safariLabel.attributedText = NSMutableAttributedString.fromHtml(safariLabelText, fontSize: self.safariLabel.font!.pointSize, color: self.theme.grayTextColor)
+            self.settingsLabel.attributedText = NSMutableAttributedString.fromHtml(settingsLabelText, fontSize: fontSize, color: self.theme.grayTextColor)
 
-            self.switchLabel.attributedText = NSMutableAttributedString.fromHtml(String.localizedString("onboarding_third_step_text"), fontSize: self.switchLabel.font!.pointSize, color: self.theme.grayTextColor)
+            self.safariLabel.attributedText = NSMutableAttributedString.fromHtml(safariLabelText, fontSize: fontSize, color: self.theme.grayTextColor)
+
+            self.switchLabel.attributedText = NSMutableAttributedString.fromHtml(switchLabelText, fontSize: fontSize, color: self.theme.grayTextColor)
         }
     }
 

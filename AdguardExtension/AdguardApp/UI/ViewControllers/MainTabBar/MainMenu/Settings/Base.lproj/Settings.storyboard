@@ -940,8 +940,8 @@
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have 6 content blockers, each of them can contain up to 50,000 rules" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ObO-g4-VHL" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="27.5" width="342" height="0.0"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ObO-g4-VHL" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="37.5" width="342" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1140,6 +1140,7 @@
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <connections>
+                        <outlet property="contentBlockersDescriptionLabel" destination="ObO-g4-VHL" id="20q-hk-Dkd"/>
                         <outlet property="debugLogsSwitch" destination="BZ8-9j-arQ" id="n2t-W8-cfy"/>
                         <outlet property="lastSeparator" destination="8OZ-ef-mbG" id="3pL-P2-ZfY"/>
                         <outlet property="restartProtectionSwitch" destination="Imm-1j-t70" id="7QM-Lx-Do6"/>
@@ -3191,8 +3192,8 @@
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="40"/>
                                         </variation>
                                     </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Snq-9B-j9S">
-                                        <rect key="frame" x="0.0" y="42" width="414" height="108"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Snq-9B-j9S" customClass="ContentSizedTableView" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="42" width="414" height="50"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <sections/>
                                     </tableView>
@@ -3205,11 +3206,12 @@
                                     <constraint firstItem="Yue-5n-Amd" firstAttribute="leading" secondItem="bnL-IC-jxK" secondAttribute="leading" constant="24" id="3E5-dH-aF0"/>
                                     <constraint firstItem="tRH-gM-893" firstAttribute="top" secondItem="bnL-IC-jxK" secondAttribute="top" constant="8" id="FiR-8E-Fb4"/>
                                     <constraint firstAttribute="trailing" secondItem="Snq-9B-j9S" secondAttribute="trailing" id="WGn-as-ywe"/>
-                                    <constraint firstAttribute="bottom" secondItem="Snq-9B-j9S" secondAttribute="bottom" id="fSe-qR-XFS"/>
-                                    <constraint firstItem="Snq-9B-j9S" firstAttribute="height" secondItem="bnL-IC-jxK" secondAttribute="height" multiplier="0.719912" id="k1o-zO-e8S"/>
+                                    <constraint firstAttribute="bottom" secondItem="Snq-9B-j9S" secondAttribute="bottom" constant="10" id="fSe-qR-XFS"/>
                                     <constraint firstItem="Snq-9B-j9S" firstAttribute="leading" secondItem="bnL-IC-jxK" secondAttribute="leading" id="rm4-bI-LjE"/>
                                     <constraint firstItem="tRH-gM-893" firstAttribute="centerX" secondItem="bnL-IC-jxK" secondAttribute="centerX" id="wSO-Qf-5jR"/>
-                                    <constraint firstItem="Snq-9B-j9S" firstAttribute="top" secondItem="Yue-5n-Amd" secondAttribute="bottom" id="xu9-ut-aS0"/>
+                                    <constraint firstItem="Snq-9B-j9S" firstAttribute="top" secondItem="Yue-5n-Amd" secondAttribute="bottom" constant="30" id="xu9-ut-aS0">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="42"/>
+                                    </constraint>
                                     <constraint firstAttribute="trailing" secondItem="Yue-5n-Amd" secondAttribute="trailing" constant="24" id="ywk-Pz-2Ct"/>
                                 </constraints>
                             </view>

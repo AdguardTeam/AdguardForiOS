@@ -29,8 +29,8 @@ final class SelectDnsProtocolController: BottomAlertController {
     // MARK: - IBOutlet
 
     @IBOutlet weak var titleLabel: ThemableLabel!
-    @IBOutlet weak var tableView: UITableView!
-
+    @IBOutlet weak var tableView: ContentSizedTableView!
+    
     // MARK: - Public properties
 
     weak var delegate: SelectDnsProtocolControllerDelegate?
@@ -41,11 +41,20 @@ final class SelectDnsProtocolController: BottomAlertController {
 
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
 
+    // MARK: - ViewController lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         updateTheme()
+        setupTableView()
+    }
+
+    // MARK: - Private methods
+
+    private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.isScrollEnabled = false
         ExtendedRadioButtonCell.registerCell(forTableView: tableView)
     }
 }

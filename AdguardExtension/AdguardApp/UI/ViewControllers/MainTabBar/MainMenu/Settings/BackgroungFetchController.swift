@@ -29,13 +29,12 @@ final class BackgroundFetchController: BottomAlertController {
     // MARK: - Outlets
 
     @IBOutlet weak var titleLabel: ThemableLabel!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: ContentSizedTableView!
 
     // MARK: - Properties
 
     weak var delegate: BackgroundFetchControllerDelegate?
     private var selectedCell: BackgroundFetchUpdateInterval?
-
 
     // MARK: - Services
 
@@ -47,14 +46,8 @@ final class BackgroundFetchController: BottomAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateTheme()
-        titleLabel.text = String.localizedString("background_app_refresh_time_title")
-
         selectedCell = resources.backgroundFetchUpdatePeriod
-
-        tableView.register(ExtendedRadioButtonCell.self, forCellReuseIdentifier: ExtendedRadioButtonCell.reuseIdentifier)
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.separatorStyle = .none
+        setupTableView()
     }
 
     // MARK: - Private methods
@@ -64,6 +57,15 @@ final class BackgroundFetchController: BottomAlertController {
         selectedCell = row
         resources.backgroundFetchUpdatePeriod = row
         delegate?.periodSelected(period: row)
+    }
+
+    private func setupTableView() {
+        ExtendedRadioButtonCell.registerCell(forTableView: tableView)
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.isScrollEnabled = false
+        tableView.separatorStyle = .none
+        titleLabel.text = String.localizedString("background_app_refresh_time_title")
     }
 }
 

@@ -2029,16 +2029,19 @@
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                         </variation>
                                     </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Npf-Dz-czn">
-                                        <rect key="frame" x="0.0" y="64" width="414" height="187.5"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Npf-Dz-czn" customClass="ContentSizedTableView" customModule="Adguard" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="64" width="414" height="200"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <sections/>
                                     </tableView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="J4t-ME-idR" firstAttribute="top" secondItem="Eo5-vz-faM" secondAttribute="top" constant="8" id="14F-JY-oJc"/>
                                     <constraint firstAttribute="trailing" secondItem="Npf-Dz-czn" secondAttribute="trailing" id="16p-Am-ChC"/>
-                                    <constraint firstItem="Npf-Dz-czn" firstAttribute="top" secondItem="vJt-Jd-BI2" secondAttribute="bottom" id="3et-QD-0pp"/>
+                                    <constraint firstItem="Npf-Dz-czn" firstAttribute="top" secondItem="vJt-Jd-BI2" secondAttribute="bottom" constant="30" id="3et-QD-0pp">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="42"/>
+                                    </constraint>
                                     <constraint firstItem="J4t-ME-idR" firstAttribute="centerX" secondItem="Eo5-vz-faM" secondAttribute="centerX" id="FNk-Qa-hgS"/>
                                     <constraint firstItem="vJt-Jd-BI2" firstAttribute="leading" secondItem="Eo5-vz-faM" secondAttribute="leading" constant="24" id="ZFB-uY-Y0u"/>
                                     <constraint firstAttribute="trailing" secondItem="vJt-Jd-BI2" secondAttribute="trailing" constant="24" id="blE-fg-2sE"/>
@@ -2046,8 +2049,7 @@
                                         <variation key="heightClass=regular-widthClass=regular" constant="48"/>
                                     </constraint>
                                     <constraint firstItem="Npf-Dz-czn" firstAttribute="leading" secondItem="Eo5-vz-faM" secondAttribute="leading" id="r3q-l4-7ai"/>
-                                    <constraint firstItem="Npf-Dz-czn" firstAttribute="height" secondItem="Eo5-vz-faM" secondAttribute="height" multiplier="0.745704" id="rVc-gF-mPe"/>
-                                    <constraint firstAttribute="bottom" secondItem="Npf-Dz-czn" secondAttribute="bottom" id="zuz-Kk-UjW"/>
+                                    <constraint firstAttribute="bottom" secondItem="Npf-Dz-czn" secondAttribute="bottom" constant="10" id="zuz-Kk-UjW"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -2095,7 +2097,6 @@
         <image name="dns" width="24" height="24"/>
         <image name="ic_adguard" width="24" height="24"/>
         <image name="language-group-icon" width="24" height="24"/>
-        <image name="plus" width="26" height="26"/>
         <image name="question" width="20" height="20"/>
         <image name="whitelist-icon" width="24" height="24"/>
         <systemColor name="separatorColor">

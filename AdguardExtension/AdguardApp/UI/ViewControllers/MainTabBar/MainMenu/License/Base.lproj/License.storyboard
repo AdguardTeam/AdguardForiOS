@@ -22,18 +22,18 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="Wum-GM-vP3">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="0.0"/>
+                            <rect key="frame" x="0.0" y="799.00000076293941" width="600" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <sections>
                             <tableViewSection id="bgD-9b-vQa">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="LCU-et-mWz">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="125"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="LCU-et-mWz">
+                                        <rect key="frame" x="0.0" y="44.5" width="600" height="73.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LCU-et-mWz" id="MJx-iD-eXa">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LCU-et-mWz" id="MJx-iD-eXa">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="73.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NlM-RH-NgY" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -62,11 +62,11 @@ ads &amp; trackers</string>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Axd-Oi-fOF">
-                                        <rect key="frame" x="0.0" y="153" width="600" height="113"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Axd-Oi-fOF">
+                                        <rect key="frame" x="0.0" y="118" width="600" height="114"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Axd-Oi-fOF" id="Gro-8y-kpd">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Axd-Oi-fOF" id="Gro-8y-kpd">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="114"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Ir-7w-QFx" customClass="ThemableImageView" customModule="Adguard" customModuleProvider="target">
@@ -97,8 +97,8 @@ ads &amp; trackers</string>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="ner-Vt-vZ7">
-                                        <rect key="frame" x="0.0" y="116" width="600" height="300"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="ner-Vt-vZ7">
+                                        <rect key="frame" x="0.0" y="232" width="600" height="282"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ner-Vt-vZ7" id="nX8-ID-3BF">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
@@ -122,8 +122,8 @@ ads &amp; trackers</string>
                                                                         </constraint>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LFY-z4-zg1">
-                                                                    <rect key="frame" x="24" y="17.5" width="494" height="40.5"/>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LFY-z4-zg1">
+                                                                    <rect key="frame" x="16" y="16" width="518" height="38.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value your privacy" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwp-I7-Qtl" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                                             <rect key="frame" x="0.0" y="21.5" width="518" height="17"/>
@@ -198,8 +198,8 @@ ads &amp; trackers</string>
                                                                         </constraint>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4uD-hr-fx8">
-                                                                    <rect key="frame" x="24" y="17.5" width="494" height="40.5"/>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4uD-hr-fx8">
+                                                                    <rect key="frame" x="16" y="16" width="518" height="38.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Block phishing, scam and crypto-jacking" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YIm-R8-cxj" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                                             <rect key="frame" x="0.0" y="23.5" width="494" height="17"/>
@@ -273,8 +273,8 @@ ads &amp; trackers</string>
                                                                         </constraint>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ScX-WH-dTM">
-                                                                    <rect key="frame" x="24" y="17.5" width="494" height="40.5"/>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ScX-WH-dTM">
+                                                                    <rect key="frame" x="16" y="16" width="518" height="38.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Custom filters" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ppx-jv-rek" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                                             <rect key="frame" x="0.0" y="0.0" width="494" height="19.5"/>
@@ -348,8 +348,8 @@ ads &amp; trackers</string>
                                                                         </constraint>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CWH-10-VID">
-                                                                    <rect key="frame" x="24" y="17.5" width="494" height="40.5"/>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CWH-10-VID">
+                                                                    <rect key="frame" x="16" y="16" width="518" height="38.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Premium is activated" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjF-1C-hFa" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                                             <rect key="frame" x="0.0" y="0.0" width="494" height="20"/>
@@ -421,11 +421,11 @@ ads &amp; trackers</string>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="MJQ-Ke-gNh">
-                                        <rect key="frame" x="0.0" y="666" width="600" height="200"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="MJQ-Ke-gNh">
+                                        <rect key="frame" x="0.0" y="514" width="600" height="212"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MJQ-Ke-gNh" id="Fux-84-Tbi">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MJQ-Ke-gNh" id="Fux-84-Tbi">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="212"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grP-hO-r5Q" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -449,7 +449,7 @@ ads &amp; trackers</string>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="85Z-Yj-BfW">
                                                     <rect key="frame" x="24" y="16" width="552" height="40"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MXP-Ep-1bd" userLabel="PeriodButton" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MXP-Ep-1bd" userLabel="PeriodButton" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="568" height="40"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <userDefinedRuntimeAttributes>
@@ -530,8 +530,8 @@ ads &amp; trackers</string>
                                                         <constraint firstItem="Cua-wI-Zkj" firstAttribute="centerY" secondItem="85Z-Yj-BfW" secondAttribute="centerY" id="t88-5L-fDZ"/>
                                                     </constraints>
                                                 </view>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UbO-jW-NNO" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="72" width="568" height="40"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UbO-jW-NNO" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="100" width="568" height="40"/>
                                                     <color key="backgroundColor" red="0.38431372549999998" green="0.69803921570000005" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="zM6-Ew-g7K">
@@ -729,7 +729,7 @@ ads &amp; trackers</string>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YZG-h1-909" userLabel="AccountView">
                                 <rect key="frame" x="0.0" y="540" width="600" height="60"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rxf-sg-Wfk" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rxf-sg-Wfk" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                         <inset key="contentEdgeInsets" minX="32" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -814,7 +814,7 @@ ads &amp; trackers</string>
         <!--Email Sign In Controller-->
         <scene sceneID="Dmi-cL-90j">
             <objects>
-                <viewController storyboardIdentifier="EmailSignInScene" id="YAD-0P-paW" customClass="EmailSignInController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EmailSignInScene" extendedLayoutIncludesOpaqueBars="YES" id="YAD-0P-paW" customClass="EmailSignInController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gvD-Ne-xOz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -873,7 +873,7 @@ ads &amp; trackers</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 </variation>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ltL-YJ-ZeT">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ltL-YJ-ZeT">
                                                 <rect key="frame" x="368" y="154" width="30" height="29"/>
                                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                                 <state key="normal">
@@ -919,7 +919,7 @@ ads &amp; trackers</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 </variation>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bUa-fF-AXO" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bUa-fF-AXO" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="24" y="259" width="366" height="48"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="48" id="199-9p-SYV">
@@ -1018,6 +1018,7 @@ ads &amp; trackers</string>
                                 </constraints>
                             </scrollView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="C1y-me-9tp"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="lWX-pJ-1zR" secondAttribute="bottom" id="Ehl-aQ-a9m"/>
@@ -1025,8 +1026,8 @@ ads &amp; trackers</string>
                             <constraint firstItem="lWX-pJ-1zR" firstAttribute="leading" secondItem="C1y-me-9tp" secondAttribute="leading" id="yXF-XZ-xgs"/>
                             <constraint firstItem="lWX-pJ-1zR" firstAttribute="top" secondItem="C1y-me-9tp" secondAttribute="top" id="zYn-4M-kmM"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="C1y-me-9tp"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <connections>
                         <outlet property="bottomConstraint" destination="Ehl-aQ-a9m" id="Obe-DT-hTZ"/>
                         <outlet property="errorLabel" destination="2g1-8V-xSB" id="74V-h1-lYG"/>
@@ -1052,9 +1053,9 @@ ads &amp; trackers</string>
         <!--Confirm2 Fa Controller-->
         <scene sceneID="rf8-eC-sdY">
             <objects>
-                <viewController id="WvU-yq-t4d" customClass="Confirm2FaController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" id="WvU-yq-t4d" customClass="Confirm2FaController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uhQ-yW-M5R">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Code from the authentication app:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53G-qY-SZ5" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -1104,7 +1105,7 @@ ads &amp; trackers</string>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 </variation>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rrj-Gm-LCJ" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rrj-Gm-LCJ" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                                 <rect key="frame" x="16" y="151" width="382" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="tPl-aP-jJv">
@@ -1138,6 +1139,7 @@ ads &amp; trackers</string>
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="mDa-F1-ucE"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="rrj-Gm-LCJ" firstAttribute="top" secondItem="tpo-aC-0J4" secondAttribute="bottom" constant="40" id="5v7-uN-zFb">
@@ -1171,8 +1173,8 @@ ads &amp; trackers</string>
                             <constraint firstItem="tpo-aC-0J4" firstAttribute="leading" secondItem="opD-uD-yGj" secondAttribute="leading" id="vSg-X2-q9e"/>
                             <constraint firstItem="tpo-aC-0J4" firstAttribute="top" secondItem="opD-uD-yGj" secondAttribute="bottom" constant="4" id="zJY-pP-V3o"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="mDa-F1-ucE"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <connections>
                         <outlet property="codeLine" destination="tpo-aC-0J4" id="123-kM-x15"/>
                         <outlet property="codeTextField" destination="opD-uD-yGj" id="CSh-mm-dfa"/>
@@ -1188,7 +1190,7 @@ ads &amp; trackers</string>
         <!--Sign In Controller-->
         <scene sceneID="eSG-aF-bm5">
             <objects>
-                <viewController storyboardIdentifier="SignInScene" id="feC-dX-1xt" customClass="SignInController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignInScene" extendedLayoutIncludesOpaqueBars="YES" id="feC-dX-1xt" customClass="SignInController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oLe-jr-YMA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1293,6 +1295,7 @@ ads &amp; trackers</string>
                             <constraint firstItem="fxK-6y-LB6" firstAttribute="leading" secondItem="Bvh-PD-3nC" secondAttribute="leading" constant="20" id="vbE-92-8XP"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" id="MLR-gq-0tv"/>
                     <connections>
                         <outletCollection property="buttons" destination="PSE-uk-lAE" collectionClass="NSMutableArray" id="Kfk-PH-E2H"/>

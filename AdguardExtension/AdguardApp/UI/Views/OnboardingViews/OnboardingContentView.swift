@@ -33,7 +33,7 @@ final class OnboardingContentView: UIView {
 
     // MARK: - Services
 
-    private let configuration: ConfigurationService = ServiceLocator.shared.getService()!
+    private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
 
     // MARK: - Properties
@@ -47,6 +47,7 @@ final class OnboardingContentView: UIView {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.isUserInteractionEnabled = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.isScrollEnabled = false
         return tableView
     }()
 
@@ -95,10 +96,12 @@ final class OnboardingContentView: UIView {
     }
 
     private func applyConstraints(to view: UIView) {
-        view.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        view.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        view.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        view.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            view.topAnchor.constraint(equalTo: self.topAnchor),
+            view.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            view.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+        ])
     }
 }
 
@@ -131,7 +134,6 @@ extension OnboardingContentView: UITableViewDelegate {
 extension OnboardingContentView: ThemableProtocol {
     func updateTheme() {
         self.backgroundColor = themeService.backgroundColor
-
 
         switch onboardingType {
         case .withAdvancedProtection:

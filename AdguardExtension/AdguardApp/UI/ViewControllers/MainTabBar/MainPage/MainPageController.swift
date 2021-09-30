@@ -261,9 +261,9 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     }
 
     private func processContentBlockersHelper() {
-        if #available(iOS 15, *), !resources.advancedProtectionWhatsNewScreenShown {
+        if #available(iOS 15.0, *), !resources.whatsNewScreenShown {
             showWhatsNewWithAdvancedProtectionInfo { [weak self] in
-                self?.resources.advancedProtectionWhatsNewScreenShown = true
+                self?.resources.whatsNewScreenShown = true
                 self?.showContentBlockersHelperIfNeeded()
             }
         } else {
@@ -783,7 +783,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     /**
      Shows content blockers info
      */
-    private func showContentBlockersInfo(){
+    private func showContentBlockersInfo() {
         DispatchQueue.main.async {[weak self] in
             self?.showIphoneContentBlockersInfo()
             self?.showIpadContentBlockersInfo()
@@ -793,7 +793,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     /**
      Hides content blockers info
      */
-    private func hideContentBlockersInfo(){
+    private func hideContentBlockersInfo() {
         DispatchQueue.main.async {[weak self] in
             self?.hideIpadContentBlockersInfo()
             self?.hideIphoneContentBlockersInfo()
@@ -965,6 +965,7 @@ extension MainPageController: ThemableProtocol {
 extension MainPageController: WhatsNewBottomAlertControllerDelegate {
     func enableButtonForNonProTapped() {
         if configuration.proStatus { return }
+        resources.whatsNewScreenShown = true
         self.dismiss(animated: true) { [weak self] in
             guard let self = self else { return }
             self.performSegue(withIdentifier: self.getProSegueId, sender: nil)
