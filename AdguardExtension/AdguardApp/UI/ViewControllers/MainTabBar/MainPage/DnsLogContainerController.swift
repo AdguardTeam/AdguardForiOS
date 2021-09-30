@@ -87,7 +87,7 @@ class DnsLogContainerController: UIViewController {
 
                 let systemProtectionEnabled = self.complexProtection.systemProtectionEnabled
                 let recordsAreEmpty = self.model.records.isEmpty
-                
+
                 if recordsAreEmpty && !systemProtectionEnabled {
                     self.systemProtectionEnablerContainerView.isHidden = false
                 } else {

@@ -32,29 +32,29 @@ public protocol DnsTrackersProviderProtocol: AnyObject {
 public  final class DnsTrackersProvider: DnsTrackersProviderProtocol {
     private let whoTracksMeTrackers: DnsTrackers
     private let adguardTrackers: DnsTrackers
-    
+
     public init() throws {
         let bundle = Bundle(for: type(of: self))
-        
+
         /// These files can be found here https://github.com/AdguardTeam/AdGuardHome/tree/master/client/src/helpers/trackers
         guard let whotracksmeUrl = bundle.url(forResource: DnsTracker.JsonType.whoTracksMe.rawValue, withExtension: "json"),
               let adguardUrl = bundle.url(forResource: DnsTracker.JsonType.adGuard.rawValue, withExtension: "json")
         else {
             throw CommonError.missingFile(filename: "whotracksme.json||adguard.json")
         }
-        
+
         let whotracksmeData = try Data(contentsOf: whotracksmeUrl)
         let adguardData = try Data(contentsOf: adguardUrl)
-        
+
         self.whoTracksMeTrackers = try JSONDecoder().decode(DnsTrackers.self, from: whotracksmeData)
         self.adguardTrackers = try JSONDecoder().decode(DnsTrackers.self, from: adguardData)
     }
-    
+
     public func getTracker(by domain: String) -> DnsTracker? {
         guard !domain.isEmpty else {
             return nil
         }
-        
+
         if let adguardTracker = adguardTrackers.getTracker(by: domain) {
             return adguardTracker
         }

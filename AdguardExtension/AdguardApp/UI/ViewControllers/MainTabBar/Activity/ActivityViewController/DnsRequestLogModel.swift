@@ -1,17 +1,17 @@
 /**
        This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
        Copyright © Adguard Software Limited. All rights reserved.
- 
+
        Adguard for iOS is free software: you can redistribute it and/or modify
        it under the terms of the GNU General Public License as published by
        the Free Software Foundation, either version 3 of the License, or
        (at your option) any later version.
- 
+
        Adguard for iOS is distributed in the hope that it will be useful,
        but WITHOUT ANY WARRANTY; without even the implied warranty of
        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
        GNU General Public License for more details.
- 
+
        You should have received a copy of the GNU General Public License
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -52,7 +52,7 @@ extension DnsRequestProcessedEvent.ProcessedStatus {
         }
     }
 }
-    
+
 enum DnsLogButtonType {
     case removeDomainFromWhitelist, removeRuleFromUserFilter, addDomainToWhitelist, addRuleToUserFlter
 
@@ -109,7 +109,7 @@ enum DnsStatisticsDisplayedRequestsType {
  view model for ActivityViewController
  */
 class DnsRequestLogViewModel {
-    
+
     // MARK: - pubic fields
     /**
      array of log records. If search is active it returns filtered array
@@ -121,17 +121,17 @@ class DnsRequestLogViewModel {
             }
         }
     }
-    
+
     /**
      Type of the displayed statistics
     */
     var displayedStatisticsType: DnsStatisticsDisplayedRequestsType = .allRequests
-    
+
     /**
      records changes observer. It calls when records array changes
      */
     var recordsObserver: (([DnsLogRecord])->Void)?
-    
+
     /**
      search query string
      */
@@ -145,26 +145,26 @@ class DnsRequestLogViewModel {
             recordsObserver?(records)
         }
     }
-    
+
     var delegate: DnsRequestsDelegateProtocol? = nil
-    
+
     // MARK: - private fields
-    
+
     private let dnsTrackers: DnsTrackersProviderProtocol
     private let dnsStatistics: DnsLogStatisticsProtocol
-    
+
     private var allRecords: [DnsLogRecord] = []
     private var searchRecords: [DnsLogRecord] = []
-    
+
     private let workingQueue = DispatchQueue(label: "DnsRequestLogViewModel queue")
-    
+
     // MARK: - init
     init(dnsTrackers: DnsTrackersProviderProtocol, dnsStatistics: DnsLogStatisticsProtocol) {
         self.dnsTrackers = dnsTrackers
         self.dnsStatistics = dnsStatistics
         self.searchString = ""
     }
-    
+
     // MARK: - public methods
     /**
      obtains records array from vpnManager
@@ -174,7 +174,7 @@ class DnsRequestLogViewModel {
             self?.obtainRecordsInternal(for: type, domains: domains)
         }
     }
-    
+
     func clearRecords(){
         workingQueue.sync { [weak self] in
             self?.allRecords = []
@@ -182,7 +182,7 @@ class DnsRequestLogViewModel {
         }
         delegate?.requestsCleared()
     }
-    
+
     private func obtainRecordsInternal(for type: BlockedRecordType, domains: Set<String>? = nil) {
 
         let events = (try? dnsStatistics.getDnsLogRecords()) ?? []

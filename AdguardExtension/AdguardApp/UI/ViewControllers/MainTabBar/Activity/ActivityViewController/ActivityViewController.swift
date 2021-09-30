@@ -25,7 +25,7 @@ protocol ActivityViewControllerDelegate: AnyObject {
 }
 
 class ActivityViewController: UITableViewController {
-    
+
     // MARK: - Outlets
 
     @IBOutlet weak var activityTitle: ThemableLabel!
@@ -285,13 +285,13 @@ class ActivityViewController: UITableViewController {
 
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y
-        
+
         if offset > activityTitle.frame.maxY && !titleInNavBarIsShown {
             delegate?.showTitle()
             titleInNavBarIsShown = true
             return
         }
-        
+
         if offset < activityTitle.frame.maxY && titleInNavBarIsShown {
             delegate?.hideTitle()
             titleInNavBarIsShown = false
@@ -315,7 +315,7 @@ class ActivityViewController: UITableViewController {
             alert.dismiss(animated: true, completion: nil)
             self?.requestsModel?.clearRecords()
         }
-        
+
         alert.addAction(yesAction)
 
         let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel) { _ in
@@ -326,7 +326,7 @@ class ActivityViewController: UITableViewController {
 
         present(alert, animated: true)
     }
-    
+
 //    private func showGroupsAlert(_ sender: UIButton) {
 //        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .deviceAlertStyle)
 //
@@ -392,7 +392,7 @@ class ActivityViewController: UITableViewController {
      Adds observers to controller
      */
     private func addObservers(){
-        
+
         keyboardShowToken = NotificationCenter.default.observe(name: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] (notification) in
             self?.keyboardWillShow()
         }
@@ -488,7 +488,7 @@ extension ActivityViewController: UISearchBarDelegate {
             searchBar.resignFirstResponder()
         }
     }
-    
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         requestsModel?.searchString = searchText
     }
@@ -515,7 +515,7 @@ extension ActivityViewController: DateTypeChangedProtocol {
 //        activityModel.getCompanies(for: dateType) {[weak self] (info) in
 //            self?.processCompaniesInfo(info)
 //        }
-        
+
         updateTextForButtons()
     }
 
@@ -556,9 +556,9 @@ extension ActivityViewController {
     private func updateTextForButtons(){
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
-            
+
             let counters = self.activityModel.counters
-            
+
             self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(value: counters.requests))
             self.encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(value: counters.encrypted))
             self.dataSavedLabel.text = String.simpleSecondsFormatter(NSNumber(value: counters.averageElapsed))

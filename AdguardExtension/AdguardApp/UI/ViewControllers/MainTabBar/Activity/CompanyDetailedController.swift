@@ -119,7 +119,7 @@ class CompanyDetailedController: UITableViewController {
     }
 
     // MARK: - Actions
-    
+
     @IBAction func infoAction(_ sender: UIButton) {
         switch sender.tag {
         case 0:
@@ -180,7 +180,7 @@ class CompanyDetailedController: UITableViewController {
 
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y
-        
+
         if offset > titleLabel.frame.maxY && !titleInNavBarIsShown {
             animateShowingTitleInNavBar(record?.key)
             titleInNavBarIsShown = true

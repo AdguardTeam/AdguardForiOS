@@ -137,10 +137,10 @@ class DnsRequestDetailsController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let record = logRecord, section != titleSection else { return UIView() }
-        
+
         var text = ""
         var needsButton = true
-        
+
         switch section {
         case trackerDetailsSection:
             text = String.localizedString("tracker_details_header")
@@ -221,7 +221,7 @@ class DnsRequestDetailsController: UITableViewController {
     private func getModel(for indexPath: IndexPath) -> LogCellModelProtocol? {
         let section = indexPath.section
         let row = indexPath.row
-        
+
         if let sectionModel = sectionModels[section] {
             if let cellModel = sectionModel[row] {
                 return cellModel
@@ -259,12 +259,12 @@ class DnsRequestDetailsController: UITableViewController {
             imageView.tintColor = UIColor(hexString: "#888888")
             let imageViewFrame = CGRect(x: tableWidth - 48.0, y: label.frame.midY - 12.0, width: 24.0, height: 24.0)
             imageView.frame = imageViewFrame
-            
+
             let buttonFrame = CGRect(x: imageViewFrame.midX - 24.0, y: imageViewFrame.midY - 24.0, width: 48.0, height: 48.0)
             let button = UIButton(frame: buttonFrame)
             button.backgroundColor = .clear
             button.addTarget(self, action: #selector(whoTracksMeInfo(_:)), for: .touchUpInside)
-            
+
             view.addSubview(imageView)
             view.addSubview(button)
         }
@@ -293,7 +293,7 @@ class DnsRequestDetailsController: UITableViewController {
 
     private func getStatusCellModel() -> LogCellModel? {
         guard let record = logRecord else { return nil }
-        
+
         let status = record.event.processedStatus.title
         let stCopied = status
         let color = record.event.processedStatus.textColor
@@ -311,7 +311,7 @@ class DnsRequestDetailsController: UITableViewController {
         generalSection = nil
         dnsSection = nil
         sectionModels.removeAll()
-        
+
         guard let record = logRecord else { return }
         var sectionsArray: [Int] = []
         var sectionNumber: Int {
@@ -412,7 +412,7 @@ class DnsRequestDetailsController: UITableViewController {
             generalRows += 1
             generalSectionModel[matchedFiltersCell!.row] = matchedFiltersModel
         }
-        
+
         // Matched rules model
         let matchedRules = record.event.blockRules.joined(separator: "\n")
         let matchedRulesModelIsNil = matchedRules.isEmpty
@@ -548,7 +548,7 @@ class DnsRequestDetailsController: UITableViewController {
             dnsRows += 1
             dnsSectionModel[originalAnswerCell!.row] = originalAnswerModel
         }
-        
+
         if let dnsSection = dnsSection {
             sectionModels[dnsSection] = dnsSectionModel
         }
