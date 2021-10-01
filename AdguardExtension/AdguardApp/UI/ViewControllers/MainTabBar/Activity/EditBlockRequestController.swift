@@ -30,7 +30,7 @@ class EditBlockRequestController: BottomAlertController {
 
     @IBOutlet var themableLabels: [ThemableLabel]!
 
-    var type: DnsLogButtonType = .addDomainToWhitelist
+    var type: DnsLogButtonType = .addDomainToAllowList
     var domain: String = ""
     var originalDomain: String = ""
     var delegate: AddDomainToListDelegate?
@@ -40,11 +40,11 @@ class EditBlockRequestController: BottomAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        titleLabel.text = (type == .addDomainToWhitelist) ? String.localizedString("whitelist_request") : String.localizedString("block_request")
+        titleLabel.text = (type == .addDomainToAllowList) ? String.localizedString("whitelist_request") : String.localizedString("block_request")
 
         let converter = DomainsConverter()
 
-        domainNameTextField.text = (type == .addDomainToWhitelist) ? domain : converter.blacklistRuleFromDomain(domain)
+        domainNameTextField.text = (type == .addDomainToAllowList) ? domain : converter.userFilterBlockRuleFromDomain(domain)
         domainNameTextField.becomeFirstResponder()
 
         updateTheme()
@@ -59,7 +59,7 @@ class EditBlockRequestController: BottomAlertController {
 
     @IBAction func addTapped(_ sender: UIButton) {
         let domain = domainNameTextField.text ?? ""
-        let needsCorrecting = type == .addDomainToWhitelist
+        let needsCorrecting = type == .addDomainToAllowList
         delegate?.add(domain: domain, needsCorrecting: needsCorrecting, by: type)
         dismiss(animated: true)
     }

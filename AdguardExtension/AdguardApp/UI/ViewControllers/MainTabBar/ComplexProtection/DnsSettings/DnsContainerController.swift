@@ -76,11 +76,11 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
     // MARK: - AddDomainToListDelegate method
 
     func add(domain: String, needsCorrecting: Bool, by type: DnsLogButtonType) {
-        if type == .addDomainToWhitelist {
-            let rule = needsCorrecting ? domainsConverter.whitelistRuleFromDomain(domain) : domain
-            //dnsFiltersService.addWhitelistRule(rule)
+        if type == .addDomainToAllowList {
+            try? dnsProtection.add(rule: UserRule(ruleText: domain), override: true, for: .allowlist)
         } else if type == .addRuleToUserFlter {
-            let rule = needsCorrecting ? domainsConverter.blacklistRuleFromDomain(domain) : domain
+            let rule = needsCorrecting ? domainsConverter.userFilterBlockRuleFromDomain(domain) : domain
+            try? dnsProtection.add(rule: UserRule(ruleText: rule), override: true, for: .blocklist)
         }
     }
 
@@ -125,7 +125,7 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
                     }
                 }
 
-            case .addDomainToWhitelist:
+            case .addDomainToAllowList:
                 color = UIColor.AdGuardColor.lightGreen1
                 button.action = {
                     if let domain = self.logRecord?.event.domain {

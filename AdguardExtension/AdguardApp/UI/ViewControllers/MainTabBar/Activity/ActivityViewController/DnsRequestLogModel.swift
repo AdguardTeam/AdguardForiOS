@@ -54,7 +54,7 @@ extension DnsRequestProcessedEvent.ProcessedStatus {
 }
 
 enum DnsLogButtonType {
-    case removeDomainFromWhitelist, removeRuleFromUserFilter, addDomainToWhitelist, addRuleToUserFlter
+    case removeDomainFromWhitelist, removeRuleFromUserFilter, addDomainToAllowList, addRuleToUserFlter
 
     var buttonTitle: String {
         switch self {
@@ -62,7 +62,7 @@ enum DnsLogButtonType {
             return String.localizedString("remove_from_whitelist")
         case .removeRuleFromUserFilter:
             return String.localizedString("remove_from_blacklist")
-        case .addDomainToWhitelist:
+        case .addDomainToAllowList:
             return String.localizedString("add_to_whitelist")
         case .addRuleToUserFlter:
             return String.localizedString("add_to_blacklist")
@@ -73,19 +73,17 @@ enum DnsLogButtonType {
 extension DnsLogRecord
 {
     func getButtons() -> [DnsLogButtonType] {
-        switch (event.processedStatus) {
-        case .blocklistedByUserFilter:
+        switch (event.processedStatus, userFilterStatus) {
+        case (.blocklistedByUserFilter, _), (_, .blocklisted):
             return [.removeRuleFromUserFilter]
-        case .blocklistedByDnsFilter:
-            return [.addDomainToWhitelist]
-        case .allowlistedByUserFilter:
+        case (.allowlistedByUserFilter, _), (_, .allowlisted):
             return [.removeDomainFromWhitelist]
-        case .allowlistedByDnsFilter:
+        case (.blocklistedByDnsFilter, _):
+            return [.addDomainToAllowList]
+        case (.allowlistedByDnsFilter, _):
             return [.addRuleToUserFlter]
-        case .processed:
-            return [.addDomainToWhitelist, .addRuleToUserFlter]
-        case .encrypted:
-            return [.addDomainToWhitelist, .addRuleToUserFlter]
+        default:
+            return [.addDomainToAllowList, .addRuleToUserFlter]
         }
     }
 
@@ -152,6 +150,8 @@ class DnsRequestLogViewModel {
 
     private let dnsTrackers: DnsTrackersProviderProtocol
     private let dnsStatistics: DnsLogStatisticsProtocol
+    private let dnsProtection: DnsProtectionProtocol
+    private let domainsConverter: DomainsConverterProtocol
 
     private var allRecords: [DnsLogRecord] = []
     private var searchRecords: [DnsLogRecord] = []
@@ -159,9 +159,11 @@ class DnsRequestLogViewModel {
     private let workingQueue = DispatchQueue(label: "DnsRequestLogViewModel queue")
 
     // MARK: - init
-    init(dnsTrackers: DnsTrackersProviderProtocol, dnsStatistics: DnsLogStatisticsProtocol) {
+    init(dnsTrackers: DnsTrackersProviderProtocol, dnsStatistics: DnsLogStatisticsProtocol, dnsProtection: DnsProtectionProtocol, domainsConverter: DomainsConverterProtocol) {
         self.dnsTrackers = dnsTrackers
         self.dnsStatistics = dnsStatistics
+        self.dnsProtection = dnsProtection
+        self.domainsConverter = domainsConverter
         self.searchString = ""
     }
 
@@ -190,9 +192,33 @@ class DnsRequestLogViewModel {
         allRecords = events.map {
             let firstLevelDomain = domainParser?.parse(host: $0.domain)?.domain
             let tracker = firstLevelDomain == nil ? nil : dnsTrackers.getTracker(by: firstLevelDomain!)
-            return DnsLogRecord(event: $0, tracker: tracker)
+            let userStatus = userFilterStatusForDomain($0.domain)
+            return DnsLogRecord(event: $0, tracker: tracker, userFilterStatus: userStatus)
         }
 
         recordsObserver?(allRecords)
+    }
+
+    private func userFilterStatusForDomain(_ domain: String)->UserFilterStatus {
+
+        // we should check user rules for all domains
+        let subdomains: [String] = String.generateSubDomains(from: domain)
+
+        // check allowlist
+        for subdomain in subdomains {
+            if dnsProtection.checkRuleExists(domain, for: .allowlist) {
+                return .allowlisted
+            }
+        }
+
+        // check blocklist
+        for subdomain in subdomains {
+            let rule = domainsConverter.userFilterBlockRuleFromDomain(subdomain)
+            if dnsProtection.checkRuleExists(rule, for: .blocklist) {
+                return .blocklisted
+            }
+        }
+
+        return .none
     }
 }

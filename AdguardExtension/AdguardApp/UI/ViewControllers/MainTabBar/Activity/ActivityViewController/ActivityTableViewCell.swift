@@ -96,6 +96,19 @@ class ActivityTableViewCell: UITableViewCell {
         let categoryImage = UIImage.getCategoryImage(withId: record.tracker?.category.rawValue)
         categoryImageView.isHidden = categoryImage == nil
         categoryImageView.image = categoryImage
+
+        // Setup blockStateView color
+        let color: UIColor
+        switch (record.event.processedStatus, record.userFilterStatus) {
+        case (_, .allowlisted), (.allowlistedByUserFilter, _), (.allowlistedByDnsFilter, _):
+            color = greenDotColor
+        case (_, .blocklisted), (.blocklistedByUserFilter, _), (.blocklistedByDnsFilter, _):
+            color = redDotColor
+        default:
+            color = .clear
+        }
+
+        blockStateView.backgroundColor = color
     }
 
     private func updateTheme(){

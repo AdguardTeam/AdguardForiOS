@@ -255,7 +255,7 @@ class ActivityViewController: UITableViewController {
         swipedRecord = record
         let availableTypes = record.getButtons()
         for buttonType in availableTypes {
-            if buttonType == .addDomainToWhitelist {
+            if buttonType == .addDomainToAllowList {
                 return createSwipeAction(forButtonType: buttonType, record: record)
             }
             if buttonType == .removeDomainFromWhitelist {
@@ -423,7 +423,7 @@ class ActivityViewController: UITableViewController {
     private func createSwipeAction(forButtonType buttonType: DnsLogButtonType, record: DnsLogRecord) -> UISwipeActionsConfiguration {
         var buttonColor: UIColor
         switch buttonType {
-        case .addDomainToWhitelist:
+        case .addDomainToAllowList:
             buttonColor = UIColor.AdGuardColor.lightGreen1
         case .addRuleToUserFlter:
             buttonColor = UIColor(hexString: "#c23814")
@@ -433,7 +433,7 @@ class ActivityViewController: UITableViewController {
         let buttonAction = UIContextualAction(style: .normal, title: buttonType.buttonTitle) { [weak self] (action, view, success:(Bool) -> Void) in
             guard let self = self else { return }
             switch buttonType {
-            case .addDomainToWhitelist, .addRuleToUserFlter:
+            case .addDomainToAllowList, .addRuleToUserFlter:
                 self.presentBlockRequestController(with: record.event.domain, type: buttonType, delegate: self)
             case .removeRuleFromUserFilter:
                 self.removeRuleFromUserFilter(record: record)
@@ -455,10 +455,11 @@ class ActivityViewController: UITableViewController {
     }
 
     @objc func updateTableView(sender: UIRefreshControl) {
+        requestsModel?.obtainRecords(for: .normal, domains: nil)
         statisticsPeriodChanged(statisticsPeriod: resources.activityStatisticsType)
-
         activityModel.period = resources.activityStatisticsType
-        updateTextForButtons()
+
+        refreshControl?.endRefreshing()
     }
 }
 
@@ -576,16 +577,16 @@ extension ActivityViewController: UIGestureRecognizerDelegate {
 extension ActivityViewController: AddDomainToListDelegate {
 
     func add(domain: String, needsCorrecting: Bool, by type: DnsLogButtonType) {
-        let rule = UserRule(ruleText: domain, isEnabled: true)
         switch type {
         case .removeDomainFromWhitelist:
             break
         case .removeRuleFromUserFilter:
             break
-        case .addDomainToWhitelist:
-            try? dnsProtection.add(rule: rule, override: true, for: .allowlist)
+        case .addDomainToAllowList:
+            try? dnsProtection.add(rule: UserRule(ruleText: domain), override: true, for: .allowlist)
         case .addRuleToUserFlter:
-            try? dnsProtection.add(rule: rule, override: true, for: .blocklist)
+            let rule = needsCorrecting ? domainsConverter.userFilterBlockRuleFromDomain(domain) : domain
+            try? dnsProtection.add(rule: UserRule(ruleText: rule), override: true, for: .blocklist)
         }
     }
 }

@@ -83,7 +83,7 @@ class BlockRequestController: BottomAlertController {
         }
     }
 
-    var type: DnsLogButtonType = .addDomainToWhitelist
+    var type: DnsLogButtonType = .addDomainToAllowList
     var delegate: AddDomainToListDelegate?
 
     private var subDomains: [BlockRequestCellModel] = []
@@ -98,7 +98,7 @@ class BlockRequestController: BottomAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        titleLabel.text = type == .addDomainToWhitelist ? String.localizedString("whitelist_request") : String.localizedString("block_request")
+        titleLabel.text = type == .addDomainToAllowList ? String.localizedString("whitelist_request") : String.localizedString("block_request")
 
         updateTheme()
 

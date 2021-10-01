@@ -102,6 +102,13 @@ public protocol DnsProtectionUserRulesManagerProtocol {
      - Parameter type: User rule type (blocklist / allowlist)
      */
     func removeAllRules(for type: DnsUserRuleType)
+
+    /** check that user filter contains the rule
+     - Parameter rule: user rule to check
+     - Parameter type: User rule type (blocklist / allowlist)
+     - Returns: check result
+     */
+    func checkRuleExists(_ rule: String, for type: DnsUserRuleType)->Bool
 }
 
 extension DnsProtection {
@@ -173,12 +180,18 @@ extension DnsProtection {
         }
     }
 
-
     public func removeAllRules(for type: DnsUserRuleType) {
         workingQueue.sync {
             Logger.logInfo("(DnsProtection+UserRules) - removeAllRules; Removing all rules for type=\(type)")
             let manager = getManager(for: type)
             manager.removeAllRules()
+        }
+    }
+
+    public func checkRuleExists(_ rule: String, for type: DnsUserRuleType)->Bool {
+        workingQueue.sync {
+            let manager = getManager(for: type)
+            return manager.checkRuleExists(rule)
         }
     }
 

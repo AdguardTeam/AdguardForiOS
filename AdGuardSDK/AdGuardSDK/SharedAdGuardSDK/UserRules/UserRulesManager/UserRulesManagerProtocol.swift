@@ -68,4 +68,10 @@ public protocol UserRulesManagerProtocol: ResetableSyncProtocol, AnyObject {
 
     /* Remove all rules from storage */
     func removeAllRules()
+
+    /** check that user filter contains the rule
+     - Parameter ruleText: text of user rule to check
+     - Returns: check result
+     */
+    func checkRuleExists(_ ruleText: String)->Bool
 }

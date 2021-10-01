@@ -24,7 +24,7 @@ import Foundation
  To make it work you just need to pass appropriate storage and rules converter types
  */
 public final class UserRulesManager: UserRulesManagerProtocol {
-
+   
     // MARK: - Public properties
 
     public var rulesString: String {
@@ -94,6 +94,11 @@ public final class UserRulesManager: UserRulesManagerProtocol {
 
     public func removeAllRules() {
         storage.rules.removeAll()
+    }
+
+    public func checkRuleExists(_ ruleText: String) -> Bool {
+        let rule = UserRule(ruleText: ruleText)
+        return storage.rules.contains(rule)
     }
 
     public func reset() throws {

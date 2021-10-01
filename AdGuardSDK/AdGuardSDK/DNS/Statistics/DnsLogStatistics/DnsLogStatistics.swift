@@ -41,6 +41,7 @@ final public class DnsLogStatistics: DnsLogStatisticsProtocol {
 
         let dbName = Constants.Statistics.StatisticsType.dnsLog.dbFileName
         statisticsDb = try Connection(statisticsDbContainerUrl.appendingPathComponent(dbName).path)
+        statisticsDb.busyTimeout = 0.5
         dateFormatter.dateFormat = Constants.Statistics.dbDateFormat
         try createTableIfNotExists()
     }

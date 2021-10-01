@@ -19,6 +19,10 @@
 import Foundation
 import DnsAdGuardSDK
 
+enum UserFilterStatus {
+    case allowlisted, blocklisted, none
+}
+
 /**
  view model for dns request log table cell
  */
@@ -27,6 +31,8 @@ struct DnsLogRecord {
     let event: DnsRequestProcessedEvent
     // dns tracker info for event.domain
     let tracker: DnsTracker?
+    // status determines whether the matched rules are contained in custom filters
+    let userFilterStatus: UserFilterStatus
 
     // returns subtitle text for table view cell
     func getDetailsString(_ fontSize: CGFloat, _ advancedMode: Bool) -> NSMutableAttributedString {
