@@ -55,6 +55,7 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
 
     private var tunnelProxy: PacketTunnelProviderProxyProtocol!
     private let reachabilityHandler: Reachability
+    private var reachabilityObserver: NotificationToken?
 
     override public init() {
         assertionFailure("This initializer shouldn't be called")
@@ -115,8 +116,11 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
 
         tunnelProxy.delegate = self
 
-        NotificationCenter.default.addObserver(forName: .reachabilityChanged, object: nil, queue: nil) { [weak self] _ in
-            self?.tunnelProxy.networkChanged()
+        reachabilityObserver = NotificationCenter.default.observe(name: .reachabilityChanged, object: nil, queue: nil) { [weak self] _ in
+            // We don't need to restart tunnel when there is no connection
+            if let reachability = self?.reachabilityHandler, reachability.connection != .unavailable {
+                self?.tunnelProxy.networkChanged()
+            }
         }
 
         Logger.logInfo("(PacketTunnelProvider) init finished")
