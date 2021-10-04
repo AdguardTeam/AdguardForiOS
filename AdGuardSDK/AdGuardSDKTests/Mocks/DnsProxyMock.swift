@@ -14,9 +14,8 @@ final class DnsProxyMock: DnsProxyProtocol {
     }
 
     var invokedStopCount = 0
-    func stop(_ onProxyStopped: @escaping () -> Void) {
+    func stop() {
         invokedStopCount += 1
-        onProxyStopped()
     }
 
     var invokedResolveCount = 0

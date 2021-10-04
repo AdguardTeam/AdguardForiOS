@@ -20,7 +20,7 @@ import Foundation
 
 protocol DnsProxyProtocol: AnyObject {
     func start(_ systemDnsUpstreams: [DnsUpstream]) -> Error?
-    func stop(_ onProxyStopped: @escaping () -> Void)
+    func stop()
     func resolve(dnsRequest: Data, onRequestResolved: @escaping (Data?) -> Void)
 }
 
@@ -58,13 +58,12 @@ final class DnsProxy: DnsProxyProtocol {
         }
     }
 
-    func stop(_ onProxyStopped: @escaping () -> Void) {
+    func stop() {
         resolveQueue.sync(flags: .barrier) { [weak self] in
             Logger.logInfo("(DnsProxy) - stop")
             self?.proxy = nil
             self?.proxySettingsProvider.reset()
             Logger.logInfo("(DnsProxy) - stopped")
-            onProxyStopped()
         }
     }
 
