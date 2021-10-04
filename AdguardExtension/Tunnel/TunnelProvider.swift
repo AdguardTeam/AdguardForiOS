@@ -106,7 +106,7 @@ class TunnelProvider: PacketTunnelProvider {
 
     private static func setupLogger(_ resources: AESharedResourcesProtocol) {
         let debugLoggs = resources.isDebugLogs
-        ACLLogger.singleton().initLogger(resources.sharedLogsURL())
+        ACLLogger.singleton().initLogger(resources.sharedAppLogsURL())
         ACLLogger.singleton().logLevel = debugLoggs ? ACLLDebugLevel : ACLLDefaultLevel
         DDLogInfo("Init tunnel with loglevel: \(debugLoggs ? "DEBUG" : "NORMAL")")
 
@@ -115,11 +115,11 @@ class TunnelProvider: PacketTunnelProvider {
         }
 
         Logger.logDebug = { msg in
-            DDLogInfo(msg)
+            DDLogDebug(msg)
         }
 
         Logger.logError = { msg in
-            DDLogInfo(msg)
+            DDLogError(msg)
         }
     }
 }
