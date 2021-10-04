@@ -46,12 +46,6 @@ final class DnsRequestProcessedEventHandler: DnsRequestProcessedEventHandlerProt
         self.dnsLogStatistics = dnsLogStatistics
     }
 
-    deinit {
-        eventQueue.sync {
-            Logger.logInfo("(DnsRequestProcessedEventHandler) - deinit; Flush to db")
-        }
-    }
-
     // TODO: - Add some tests
     func handle(event: AGDnsRequestProcessedEventWrapper) {
         eventQueue.async { [weak self] in
