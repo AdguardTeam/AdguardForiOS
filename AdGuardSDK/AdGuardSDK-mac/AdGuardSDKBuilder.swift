@@ -21,9 +21,7 @@ public class AdGuardSDKBuilder: AdGuardSDKBuilderProtocol {
 
         let api = SafariProtectionApiMethods()
 
-        let predefinedService = PredefinedSafariMetaService(safariConfiguration: configuration, metaStorage: metaStorage)
-
-        filtersService = try! FiltersService(configuration: configuration, filterFilesStorage: filtersStorage, metaStorage: metaStorage, userDefaultsStorage: defaults, apiMethods: api, predefinedSafariService: predefinedService)
+        filtersService = try! FiltersService(configuration: configuration, filterFilesStorage: filtersStorage, metaStorage: metaStorage, userDefaultsStorage: defaults, apiMethods: api)
     }
 
     public func loadAll() throws {
