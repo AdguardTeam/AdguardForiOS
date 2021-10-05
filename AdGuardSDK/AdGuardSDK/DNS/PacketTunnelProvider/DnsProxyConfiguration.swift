@@ -29,8 +29,6 @@ struct DnsProxyConfiguration: Equatable {
     let fallbacks: [DnsProxyUpstream] // DNS fallbacks
     let dns64Upstreams: [DnsProxyUpstream] // Upstreams to use for discovery of DNS64 prefixes
     let filters: [DnsProxyFilter] // Filters to pass into proxy
-    let allowlist: String // Allow list as a string
-    let allowlistId: Int // filter id for allowlist
     let ipv6Available: Bool // True if IPv6 is available
     let rulesBlockingMode: DnsProxyBlockingMode // How to respond to requests blocked by AdBlock-style rules
     let hostsBlockingMode: DnsProxyBlockingMode // How to respond to requests blocked by hosts-style rules

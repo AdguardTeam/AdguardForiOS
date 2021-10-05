@@ -60,10 +60,24 @@ extension AGDnsUpstream {
 
 extension AGDnsFilterParams {
     convenience init(from filter: DnsProxyFilter) {
+
+        let filterId = filter.filterId
+        let filterData: String
+        let inMemory: Bool
+
+        switch filter.filterData {
+        case .file(let path):
+            filterData = path
+            inMemory = false
+        case .text(let text):
+            filterData = text
+            inMemory = true
+        }
+
         self.init(
-            id: filter.filterId,
-            data: filter.filterPath,
-            inMemory: false
+            id: filterId,
+            data: filterData,
+            inMemory: inMemory
         )
     }
 }
@@ -94,20 +108,13 @@ extension AGDnsProxyConfig {
     /// We use `DnsProxyConfiguration` to be able to test how we configure `AGDnsProxyConfig`
     convenience init(from configuration: DnsProxyConfiguration) {
         let defaultConfig = AGDnsProxyConfig.getDefault()!
-        var filters = configuration.filters.map { AGDnsFilterParams(from: $0) }
-        if let allowlist = AGDnsFilterParams(id: configuration.allowlistId, data: configuration.allowlist, inMemory: true) {
-            filters.append(allowlist)
-        }
-        else {
-            Logger.logError("can not instantiate dns allowlist")
-        }
-
+        
         self.init(
             upstreams: configuration.upstreams.map { AGDnsUpstream(from: $0) },
             fallbacks: configuration.fallbacks.map { AGDnsUpstream(from: $0) },
             fallbackDomains: defaultConfig.fallbackDomains,
             detectSearchDomains: defaultConfig.detectSearchDomains,
-            filters: filters,
+            filters: configuration.filters.map { AGDnsFilterParams(from: $0)},
             blockedResponseTtlSecs: configuration.blockedResponseTtlSecs,
             dns64Settings: AGDns64Settings(from: configuration.dns64Upstreams),
             listeners: nil,

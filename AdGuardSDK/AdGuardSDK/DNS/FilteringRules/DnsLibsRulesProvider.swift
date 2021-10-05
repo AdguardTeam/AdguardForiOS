@@ -18,38 +18,43 @@
 
 import Foundation
 
-struct DnsProxyFilter: Equatable {
-    let filterId: Int
-    let filterPath: String
+enum DnsProxyFilterData {
+    case file(String)
+    case text(String)
 }
 
-struct DnsProxyAllowlistFilter {
+struct DnsProxyFilter: Equatable {
+
     let filterId: Int
-    let filterText: String
+    let filterData: DnsProxyFilterData
+
+    static func == (lhs: DnsProxyFilter, rhs: DnsProxyFilter) -> Bool {
+        return lhs.filterId == rhs.filterId
+    }
 }
 
 protocol DnsLibsRulesProviderProtocol {
     var enabledCustomDnsFilters: [DnsProxyFilter] { get }
     var blocklistFilter: DnsProxyFilter { get }
-    var allowlistFilter: DnsProxyAllowlistFilter { get }
+    var allowlistFilter: DnsProxyFilter { get }
 }
 
 final class DnsLibsRulesProvider: DnsLibsRulesProviderProtocol {
 
     var enabledCustomDnsFilters: [DnsProxyFilter] {
-        dnsFiltersManager.getDnsLibsFilters().map { DnsProxyFilter(filterId: $0.key, filterPath: $0.value) }
+        dnsFiltersManager.getDnsLibsFilters().map { DnsProxyFilter(filterId: $0.key, filterData: .file($0.value)) }
     }
 
     var blocklistFilter: DnsProxyFilter {
         let filterId = DnsUserRuleType.blocklist.enabledRulesFilterId
         let path = filterFilesStorage.getUrlForFilter(withId: filterId).path
-        return DnsProxyFilter(filterId: filterId, filterPath: path)
+        return DnsProxyFilter(filterId: filterId, filterData: .file(path))
     }
 
-    var allowlistFilter: DnsProxyAllowlistFilter {
+    var allowlistFilter: DnsProxyFilter {
         let filterId = DnsUserRuleType.allowlist.enabledRulesFilterId
-        let text = allowlistRulesString()
-        return DnsProxyAllowlistFilter(filterId: filterId, filterText: text)
+        let text = userRulesProvider.allowlistRulesManager.allowlistRulesString()
+        return DnsProxyFilter(filterId: filterId, filterData: .text(text))
     }
 
     private let dnsFiltersManager: DnsFiltersManagerProtocol
@@ -62,17 +67,26 @@ final class DnsLibsRulesProvider: DnsLibsRulesProviderProtocol {
         self.userRulesProvider = userRulesProvider
     }
 
-    // MARK: - private methods
+}
 
-    private func allowlistRulesString()->String {
-        let rules = userRulesProvider.allowlistRulesManager.allRules
+fileprivate extension UserRulesManagerProtocol {
+    func allowlistRulesString()->String {
+
+        let converter = DnsAllowlistRulesConverter()
+        let rules = self.allRules
 
         let text: String = rules.reduce("") { partialResult, rule in
             if rule.isEnabled {
-                return partialResult + "@@||\(rule.ruleText)^|\n"
+                return partialResult + converter.convertDomainToRule(rule.ruleText) + "\n"
             }
             return partialResult
         }
         return text
+    }
+}
+
+fileprivate class DnsAllowlistRulesConverter {
+    func convertDomainToRule(_ domain: String)->String {
+        return "@@||\(domain)^|"
     }
 }
