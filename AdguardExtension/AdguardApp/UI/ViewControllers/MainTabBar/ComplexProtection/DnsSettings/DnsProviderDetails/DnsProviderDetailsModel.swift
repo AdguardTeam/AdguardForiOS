@@ -57,17 +57,31 @@ final class DnsProviderDetailsModel {
         return provider.dnsServers.map { $0.type }
     }
 
-    /// active dns protocol
+    /// Active DNS protocol
     var activeDnsProtocol: DnsAdGuardSDK.DnsProtocol {
         get {
-            ///Providers alway have server.
-            ///If we didn't find active server from User Defaults than we should take first protocol from provider dns servers
-            if let activeProtocol = resources.dnsActiveProtocols[provider.providerId] {
-                let defaultDnsProtocol = provider.dnsServers.first!.type
-                return dnsProtocols.contains(activeProtocol) ? activeProtocol : defaultDnsProtocol
+            let defaultDnsProtocol: DnsProtocol
+
+            if provider.dnsServers.contains(where: { $0.type == .doh }) {
+                defaultDnsProtocol = .doh
+            }
+            else if provider.dnsServers.contains(where: { $0.type == .dot }) {
+                defaultDnsProtocol = .dot
+            }
+            else if provider.dnsServers.contains(where: { $0.type == .dns }) {
+                defaultDnsProtocol = .dns
+            }
+            else {
+                defaultDnsProtocol = provider.dnsServers.first!.type
             }
 
-            return provider.dnsServers.first!.type
+            /// Providers always have server.
+            /// If we didn't find active server from User Defaults than we should take DoH protocol from provider DNS servers
+            if let selectedProtocol = resources.dnsActiveProtocols[provider.providerId] {
+                return dnsProtocols.contains(selectedProtocol) ? selectedProtocol : defaultDnsProtocol
+            } else {
+                return defaultDnsProtocol
+            }
         }
         set {
             resources.dnsActiveProtocols[provider.providerId] = newValue
