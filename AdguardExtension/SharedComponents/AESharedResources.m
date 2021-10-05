@@ -185,20 +185,6 @@ NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
         [_sharedUserDefaults removeObjectForKey:key];
     }
     [_sharedUserDefaults synchronize];
-
-    // remove all files in shared directory
-
-    NSFileManager *fm = [NSFileManager defaultManager];
-
-    NSError *error = nil;
-    for (NSString *file in [fm contentsOfDirectoryAtPath:_containerFolderUrl.path error:&error]) {
-
-        // FIXME: Maybe we should get this strings from some constants
-        if (([file isEqual: @"db_files"]) || ([file isEqual: @"filters"]) || ([file isEqual: @"cb_jsons" ])) { continue; }
-        BOOL success = [fm removeItemAtPath:[NSString stringWithFormat:@"%@/%@", _containerFolderUrl.path, file] error:&error];
-        if (!success || error) {
-        }
-    }
 }
 
 - (NSUserDefaults *)sharedDefaults{

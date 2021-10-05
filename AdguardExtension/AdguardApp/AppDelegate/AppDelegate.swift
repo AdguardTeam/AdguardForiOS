@@ -381,14 +381,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setupOnFirstAppRun() {
         guard firstRun else { return }
         firstRun = false
-
-        /// Reset safari protection to default
-        safariProtection.reset { error in
-            if let error = error {
-                DDLogError("(AppDelegate) - setupOnFirstAppRun; First run reset error: \(error)")
-                return
-            }
-            DDLogInfo("(AppDelegate) - setupOnFirstAppRun; First run reset successfully ended")
-        }
+        safariProtection.setupPredefinedGroupsAndFilters()
     }
 }

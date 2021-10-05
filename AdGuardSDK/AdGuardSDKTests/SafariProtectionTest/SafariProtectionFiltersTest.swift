@@ -347,4 +347,21 @@ class SafariProtectionFiltersTest: XCTestCase {
         XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
     }
+
+    func testSetupPredefinedWithSuccess() {
+        XCTAssertEqual(filters.setupPredefinedGroupsAndFiltersCount, 0)
+        safariProtection.setupPredefinedGroupsAndFilters()
+        XCTAssertEqual(filters.setupPredefinedGroupsAndFiltersCount, 1)
+    }
+
+    func testSetupPredefinedWithError() {
+        XCTAssertEqual(filters.setupPredefinedGroupsAndFiltersCount, 0)
+        filters.setupPredefinedGroupsAndFiltersError = MetaStorageMockError.error
+        safariProtection.setupPredefinedGroupsAndFilters()
+        XCTAssertEqual(filters.setupPredefinedGroupsAndFiltersCount, 1)
+
+        filters.updateAllMetaResult = .error(MetaStorageMockError.error)
+        safariProtection.setupPredefinedGroupsAndFilters()
+        XCTAssertEqual(filters.setupPredefinedGroupsAndFiltersCount, 2)
+    }
 }

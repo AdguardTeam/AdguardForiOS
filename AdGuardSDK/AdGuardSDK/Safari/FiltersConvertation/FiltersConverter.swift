@@ -181,7 +181,6 @@ final class FiltersConverter: FiltersConverterProtocol {
 
         var conversionResult: [FiltersConverterResult] = []
 
-        // FIXME: Safari not support resource-type: "iFrame-document". Converter with parameter .safari15 return it and we catch CB reloading error
         let safariVersion = SafariVersion(rawValue: configuration.iosVersion) ?? .safari15
         for (cbType, rules) in filters {
             let result = converter.convertArray(

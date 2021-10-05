@@ -61,4 +61,13 @@ final class FiltersServiceMock: FiltersServiceProtocol {
         resetCalledCount += 1
         onResetFinished(resetError)
     }
+
+    var setupPredefinedGroupsAndFiltersCount = 0
+    var setupPredefinedGroupsAndFiltersError: Error?
+    func setupPredefinedGroupsAndFilters() throws {
+        setupPredefinedGroupsAndFiltersCount += 1
+        if let error = setupPredefinedGroupsAndFiltersError {
+            throw error
+        }
+    }
 }

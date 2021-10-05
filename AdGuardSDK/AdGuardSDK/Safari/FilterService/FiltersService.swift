@@ -87,6 +87,12 @@ protocol FiltersServiceProtocol: ResetableAsyncProtocol {
      - throws: Can throw error if error occured while renaming filter
      */
     func renameCustomFilter(withId id: Int, to name: String) throws
+
+    /**
+     Setup predefined groups and filters
+     - throws: Can throw error if error occured while setuping
+     */
+    func setupPredefinedGroupsAndFilters() throws
 }
 
 /*
@@ -142,7 +148,6 @@ final class FiltersService: FiltersServiceProtocol {
     let userDefaultsStorage: UserDefaultsStorageProtocol
     let metaParser: CustomFilterMetaParserProtocol
     let apiMethods: SafariProtectionApiMethodsProtocol
-    private let predefinedSafariService: PredefinedSafariMetaServiceProtocol
 
     // MARK: - Initialization
 
@@ -152,16 +157,14 @@ final class FiltersService: FiltersServiceProtocol {
         metaStorage: MetaStorageProtocol,
         userDefaultsStorage: UserDefaultsStorageProtocol,
         metaParser: CustomFilterMetaParserProtocol = CustomFilterMetaParser(),
-        apiMethods: SafariProtectionApiMethodsProtocol,
-        predefinedSafariService: PredefinedSafariMetaService
-    ) throws {
+        apiMethods: SafariProtectionApiMethodsProtocol) throws {
+
         self.configuration = configuration
         self.filterFilesStorage = filterFilesStorage
         self.metaStorage = metaStorage
         self.userDefaultsStorage = userDefaultsStorage
         self.metaParser = metaParser
         self.apiMethods = apiMethods
-        self.predefinedSafariService = predefinedSafariService
 
         try self._groupsAtomic.mutate { $0.append(contentsOf: try getAllLocalizedGroups()) }
     }
@@ -241,7 +244,7 @@ final class FiltersService: FiltersServiceProtocol {
         if preconditionError == nil, updateMetadataError == nil, groupsUpdateError == nil {
             userDefaultsStorage.lastFiltersUpdateCheckDate = Date()
         }
-        comletionGroup.notify(queue: .global(qos: .utility)) {
+        comletionGroup.notify(queue: .main) {
             if let preconditionError = preconditionError {
                 onFiltersUpdated(.error(preconditionError))
             }
@@ -397,9 +400,6 @@ final class FiltersService: FiltersServiceProtocol {
                 try self.metaStorage.reset()
                 try self.filterFilesStorage.reset()
                 try self.filterFilesStorage.unzipPredefinedFiltersIfNeeded()
-
-                /// Set predefined groups and filters
-                try self.predefinedSafariService.predefine(with: self.groups)
             }
             catch {
                 Logger.logInfo("(FiltersService) - reset; Error: \(error)")
@@ -431,6 +431,12 @@ final class FiltersService: FiltersServiceProtocol {
                 case .error(let error): onResetFinished(error)
                 }
             }
+        }
+    }
+
+    func setupPredefinedGroupsAndFilters() throws {
+        try workingQueue.sync {
+            try metaStorage.setupPredefinedMeta(with: groups, currentLanguage: configuration.currentLanguage)
         }
     }
 
@@ -602,7 +608,7 @@ final class FiltersService: FiltersServiceProtocol {
             }
         }
         let result = (_successfullyLoadedFilterIds.wrappedValue, _failedFilterIds.wrappedValue)
-        group.notify(queue: .global(qos: .utility)) { onFilesUpdated(result) }
+        group.notify(queue: .main) { onFilesUpdated(result) }
     }
 
     /**
@@ -645,7 +651,7 @@ final class FiltersService: FiltersServiceProtocol {
             group.leave()
         }
 
-        group.notify(queue: .global(qos: .utility)) {
+        group.notify(queue: .main) {
             if let error = resultError {
                 onFiltersMetaUpdated(.error(error))
             } else if let metaUpdateResult = metaUpdateResult {

@@ -95,15 +95,13 @@ class FitlerServiceTest: XCTestCase {
         userDefaultsStorage = UserDefaultsStorageMock()
         apiMethods = SafariProtectionApiMethodsMock()
         metaParser = MetaParserMock()
-        let pref = PredefinedSafariMetaService(safariConfiguration: configuration, metaStorage: metaStorage)
 
         filterService = try FiltersService(configuration: configuration,
                                            filterFilesStorage: filterFileStorage,
                                            metaStorage: metaStorage,
                                            userDefaultsStorage: userDefaultsStorage,
                                            metaParser: metaParser,
-                                           apiMethods: apiMethods,
-                                           predefinedSafariService: pref)
+                                           apiMethods: apiMethods)
     }
 
 
@@ -897,5 +895,21 @@ class FitlerServiceTest: XCTestCase {
 
         XCTAssertEqual(metaStorage.resetCalledCount, 1)
         XCTAssertEqual(filterFileStorage.resetCalledCount, 1)
+    }
+
+    func testSetupPredefinedGroupsAndFiltersWithSuccess() {
+        XCTAssertEqual(metaStorage.setupPredefinedMetaCalledCount, 0)
+        try! filterService.setupPredefinedGroupsAndFilters()
+        XCTAssertEqual(metaStorage.setupPredefinedMetaCalledCount, 1)
+    }
+
+    func testSetupPredefinedGroupsAndFiltersWithError() {
+        XCTAssertEqual(metaStorage.setupPredefinedMetaCalledCount, 0)
+        metaStorage.setupPredefinedMetaError =  FilterFilesStorageMockError.error
+        XCTAssertThrowsError(try filterService.setupPredefinedGroupsAndFilters()) {
+            if case FilterFilesStorageMockError.error = $0 {}
+            else { XCTFail()}
+        }
+        XCTAssertEqual(metaStorage.setupPredefinedMetaCalledCount, 1)
     }
 }

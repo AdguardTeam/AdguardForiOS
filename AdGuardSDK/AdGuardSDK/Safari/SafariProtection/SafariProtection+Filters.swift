@@ -82,6 +82,11 @@ public protocol SafariProtectionFiltersProtocol {
         onFiltersUpdated: @escaping (_ error: Result<FiltersUpdateResult>) -> Void,
         onCbReloaded: @escaping (_ error: Error?) -> Void
     )
+
+    /**
+     Setup predefined groups and filters
+     */
+    func setupPredefinedGroupsAndFilters()
 }
 
 /* Extension is used to interact with filters and groups object and properly process operations with them */
@@ -246,6 +251,39 @@ extension SafariProtection {
                             return
                         }
                         self.completionQueue.async { onCbReloaded(error) }
+                    }
+                }
+            }
+        }
+    }
+
+    public func setupPredefinedGroupsAndFilters() {
+        workingQueue.sync { [weak self] in
+            guard let self = self else {
+                Logger.logError("(SafariProtection+Filters) - setupPredefinedGroupsAndFilters; self is missing!")
+                return
+            }
+
+            do {
+                try self.filters.setupPredefinedGroupsAndFilters()
+                Logger.logInfo("(SafariProtection+Filters) - setupPredefinedGroupsAndFilters; Successfully setup predefined groups and filters")
+            } catch {
+                Logger.logInfo("(SafariProtection+Filters) - setupPredefinedGroupsAndFilters; Error occurred while setup predefined groups and filters ")
+                return
+            }
+
+            self.filters.updateAllMeta(forcibly: true) { result in
+                switch result {
+                case .error(let error):
+                    Logger.logError("(SafariProtection+Filters) - setupPredefinedGroupsAndFilters; Update all meta after setup predefined groups and filters error: \(error)")
+                case .success(_):
+                    Logger.logInfo("(SafariProtection+Filters) - setupPredefinedGroupsAndFilters; Successfully update all meta after setup predefined groups and filters")
+                    self.reloadContentBlockers { error in
+                        if let error = error {
+                            Logger.logError("(SafariProtection+Filters) - setupPredefinedGroupsAndFilters; CB reload error: \(error)")
+                            return
+                        }
+                        Logger.logInfo("(SafariProtection+Filters) - setupPredefinedGroupsAndFilters; Successfully reload CB")
                     }
                 }
             }

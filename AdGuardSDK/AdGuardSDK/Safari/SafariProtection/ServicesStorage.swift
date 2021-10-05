@@ -64,16 +64,12 @@ final class ServicesStorage: ServicesStorageProtocol {
 
         self.cbService = ContentBlockerService(appBundleId: configuration.appBundleId)
 
-        let predefinedSafariService = PredefinedSafariMetaService(safariConfiguration: self.configuration, metaStorage: metaStorage)
-
         self.filters = try FiltersService(
             configuration: self.configuration,
             filterFilesStorage: filterFilesStorage,
             metaStorage: metaStorage,
             userDefaultsStorage: self.userDefaults,
-            apiMethods: apiMethods,
-            predefinedSafariService: predefinedSafariService
-        )
+            apiMethods: apiMethods)
 
         let filtersConverter = FiltersConverter(configuration: configuration)
         self.converter = FiltersConverterService(

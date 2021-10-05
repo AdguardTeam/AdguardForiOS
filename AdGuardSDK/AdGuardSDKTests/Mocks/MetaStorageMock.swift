@@ -335,4 +335,13 @@ class MetaStorageMock: MetaStorageProtocol {
             throw error
         }
     }
+
+    var setupPredefinedMetaCalledCount = 0
+    var setupPredefinedMetaError: Error?
+    func setupPredefinedMeta(with groups: [SafariGroup], currentLanguage: String) throws {
+        setupPredefinedMetaCalledCount += 1
+        if let error = setupPredefinedMetaError {
+            throw error
+        }
+    }
 }
