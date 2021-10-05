@@ -201,7 +201,7 @@ public final class SafariProtection: SafariProtectionProtocol {
                 try self.cbStorage.save(converterResults: convertedfilters)
             }
             catch {
-                Logger.logError("(SafariProtection) - createNewCbJsonsAndReloadCbs; Error conveerting filters: \(error)")
+                Logger.logError("(SafariProtection) - createNewCbJsonsAndReloadCbs; Error converting filters: \(error)")
                 self.workingQueue.sync { onCbReloaded(error) }
                 return
             }

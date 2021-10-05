@@ -127,7 +127,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppDelegate.setBackgroundFetchInterval(interval)
         subscribeToNotifications()
 
+        if firstRun {
+            setupOnFirstAppRun()
+            return true
+        }
+
         // Background fetch consists of 3 steps, so if the update process didn't fully finish in the background than we should continue it here
+
         safariProtection.finishBackgroundUpdate { error in
             if let error = error {
                 DDLogError("(AppDelegate) - didFinishLaunchingWithOptions; Finished background update with error: \(error)")
@@ -369,6 +375,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         Logger.logError = { msg in
             DDLogError(msg)
+        }
+    }
+
+    private func setupOnFirstAppRun() {
+        guard firstRun else { return }
+        firstRun = false
+
+        /// Reset safari protection to default
+        safariProtection.reset { error in
+            if let error = error {
+                DDLogError("(AppDelegate) - setupOnFirstAppRun; First run reset error: \(error)")
+                return
+            }
+            DDLogInfo("(AppDelegate) - setupOnFirstAppRun; First run reset successfully ended")
         }
     }
 }

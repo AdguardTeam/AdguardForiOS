@@ -95,13 +95,15 @@ class FitlerServiceTest: XCTestCase {
         userDefaultsStorage = UserDefaultsStorageMock()
         apiMethods = SafariProtectionApiMethodsMock()
         metaParser = MetaParserMock()
+        let pref = PredefinedSafariMetaService(safariConfiguration: configuration, metaStorage: metaStorage)
 
         filterService = try FiltersService(configuration: configuration,
                                            filterFilesStorage: filterFileStorage,
                                            metaStorage: metaStorage,
                                            userDefaultsStorage: userDefaultsStorage,
                                            metaParser: metaParser,
-                                           apiMethods: apiMethods)
+                                           apiMethods: apiMethods,
+                                           predefinedSafariService: pref)
     }
 
 

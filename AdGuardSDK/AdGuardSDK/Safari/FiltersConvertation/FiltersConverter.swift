@@ -180,6 +180,8 @@ final class FiltersConverter: FiltersConverterProtocol {
         // Would be great to do it in different threads; Needs to be discussed!
 
         var conversionResult: [FiltersConverterResult] = []
+
+        // FIXME: Safari not support resource-type: "iFrame-document". Converter with parameter .safari15 return it and we catch CB reloading error
         let safariVersion = SafariVersion(rawValue: configuration.iosVersion) ?? .safari15
         for (cbType, rules) in filters {
             let result = converter.convertArray(
@@ -188,7 +190,7 @@ final class FiltersConverter: FiltersConverterProtocol {
                 optimize: false,
                 advancedBlocking: configuration.advancedBlockingIsEnabled && configuration.proStatus
             )
-            Logger.logInfo("FiltersCoverter result: \(result.message)")
+            Logger.logInfo("FiltersConverter result: \(result.message)")
 
             // Just take the info we need
             let converterResult = FiltersConverterResult(type: cbType, conversionResult: result)
