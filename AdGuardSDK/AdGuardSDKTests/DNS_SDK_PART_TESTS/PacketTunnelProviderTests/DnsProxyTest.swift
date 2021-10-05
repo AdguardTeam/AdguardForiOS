@@ -22,6 +22,8 @@ class DnsProxyTest: XCTestCase {
             fallbacks: [],
             dns64Upstreams: [],
             filters: [],
+            allowlist: "",
+            allowlistId: 999,
             ipv6Available: true,
             rulesBlockingMode: .customAddress,
             hostsBlockingMode: .customAddress,

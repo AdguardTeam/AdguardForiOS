@@ -23,10 +23,15 @@ struct DnsProxyFilter: Equatable {
     let filterPath: String
 }
 
+struct DnsProxyAllowlistFilter {
+    let filterId: Int
+    let filterText: String
+}
+
 protocol DnsLibsRulesProviderProtocol {
     var enabledCustomDnsFilters: [DnsProxyFilter] { get }
     var blocklistFilter: DnsProxyFilter { get }
-    var allowlistFilter: DnsProxyFilter { get }
+    var allowlistFilter: DnsProxyAllowlistFilter { get }
 }
 
 final class DnsLibsRulesProvider: DnsLibsRulesProviderProtocol {
@@ -41,17 +46,33 @@ final class DnsLibsRulesProvider: DnsLibsRulesProviderProtocol {
         return DnsProxyFilter(filterId: filterId, filterPath: path)
     }
 
-    var allowlistFilter: DnsProxyFilter {
+    var allowlistFilter: DnsProxyAllowlistFilter {
         let filterId = DnsUserRuleType.allowlist.enabledRulesFilterId
-        let path = filterFilesStorage.getUrlForFilter(withId: filterId).path
-        return DnsProxyFilter(filterId: filterId, filterPath: path)
+        let text = allowlistRulesString()
+        return DnsProxyAllowlistFilter(filterId: filterId, filterText: text)
     }
 
     private let dnsFiltersManager: DnsFiltersManagerProtocol
     private let filterFilesStorage: CustomFilterFilesStorageProtocol
+    private let userRulesProvider: DnsUserRulesManagersProviderProtocol
 
-    init(dnsFiltersManager: DnsFiltersManagerProtocol, filterFilesStorage: CustomFilterFilesStorageProtocol) {
+    init(dnsFiltersManager: DnsFiltersManagerProtocol, filterFilesStorage: CustomFilterFilesStorageProtocol, userRulesProvider: DnsUserRulesManagersProviderProtocol) {
         self.dnsFiltersManager = dnsFiltersManager
         self.filterFilesStorage = filterFilesStorage
+        self.userRulesProvider = userRulesProvider
+    }
+
+    // MARK: - private methods
+
+    private func allowlistRulesString()->String {
+        let rules = userRulesProvider.allowlistRulesManager.allRules
+
+        let text: String = rules.reduce("") { partialResult, rule in
+            if rule.isEnabled {
+                return partialResult + "@@||\(rule.ruleText)^|\n"
+            }
+            return partialResult
+        }
+        return text
     }
 }

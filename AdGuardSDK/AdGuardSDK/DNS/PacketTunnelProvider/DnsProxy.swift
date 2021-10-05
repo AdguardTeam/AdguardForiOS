@@ -39,14 +39,12 @@ final class DnsProxy: DnsProxyProtocol {
 
     /* Services */
     private let proxySettingsProvider: DnsProxyConfigurationProviderProtocol
-    private let dnsLibsRulesProvider: DnsLibsRulesProviderProtocol
     private let statisticsDbContainerUrl: URL
 
     // MARK: - Initialization
 
     init(proxySettingsProvider: DnsProxyConfigurationProviderProtocol, dnsLibsRulesProvider: DnsLibsRulesProviderProtocol, statisticsDbContainerUrl: URL) {
         self.proxySettingsProvider = proxySettingsProvider
-        self.dnsLibsRulesProvider = dnsLibsRulesProvider
         self.statisticsDbContainerUrl = statisticsDbContainerUrl
     }
 

@@ -53,10 +53,9 @@ class DnsProxyConfigurationProviderTest: XCTestCase {
         dnsLibsRulesProvider.stubbedBlocklistFilter = expectedBlocklistFilter
         expectedFilters.append(expectedBlocklistFilter)
 
-        let expectedAllowlistFilter = DnsProxyFilter(filterId: DnsUserRuleType.allowlist.enabledRulesFilterId, filterPath: "path3")
+        let expectedAllowlistFilter = DnsProxyAllowlistFilter(filterId: DnsUserRuleType.allowlist.enabledRulesFilterId, filterText: "allowlist text")
         dnsLibsRulesProvider.stubbedAllowlistFilter = expectedAllowlistFilter
-        expectedFilters.append(expectedAllowlistFilter)
-
+        
         networkUtils.getProtocolResult = .success(.dns)
         networkUtils.isIpv4Available = true
         networkUtils.isIpv6Available = false
@@ -74,6 +73,8 @@ class DnsProxyConfigurationProviderTest: XCTestCase {
             fallbacks: expectedFallbacks,
             dns64Upstreams: [],
             filters: expectedFilters,
+            allowlist: expectedAllowlistFilter.filterText,
+            allowlistId: expectedAllowlistFilter.filterId,
             ipv6Available: false,
             rulesBlockingMode: .customAddress,
             hostsBlockingMode: .customAddress,

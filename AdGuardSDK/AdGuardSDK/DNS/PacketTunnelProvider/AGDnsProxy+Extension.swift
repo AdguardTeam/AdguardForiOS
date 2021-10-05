@@ -94,12 +94,20 @@ extension AGDnsProxyConfig {
     /// We use `DnsProxyConfiguration` to be able to test how we configure `AGDnsProxyConfig`
     convenience init(from configuration: DnsProxyConfiguration) {
         let defaultConfig = AGDnsProxyConfig.getDefault()!
+        var filters = configuration.filters.map { AGDnsFilterParams(from: $0) }
+        if let allowlist = AGDnsFilterParams(id: configuration.allowlistId, data: configuration.allowlist, inMemory: true) {
+            filters.append(allowlist)
+        }
+        else {
+            Logger.logError("can not instantiate dns allowlist")
+        }
+
         self.init(
             upstreams: configuration.upstreams.map { AGDnsUpstream(from: $0) },
             fallbacks: configuration.fallbacks.map { AGDnsUpstream(from: $0) },
             fallbackDomains: defaultConfig.fallbackDomains,
             detectSearchDomains: defaultConfig.detectSearchDomains,
-            filters: configuration.filters.map { AGDnsFilterParams(from: $0) },
+            filters: filters,
             blockedResponseTtlSecs: configuration.blockedResponseTtlSecs,
             dns64Settings: AGDns64Settings(from: configuration.dns64Upstreams),
             listeners: nil,

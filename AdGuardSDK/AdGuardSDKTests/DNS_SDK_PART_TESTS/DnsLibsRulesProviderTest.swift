@@ -5,13 +5,16 @@ class DnsLibsRulesProviderTest: XCTestCase {
     var filesStorage: FilterFilesStorageMock!
     var dnsFiltersManager: DnsFiltersManagerMock!
     var dnsLibsRulesProvider: DnsLibsRulesProviderProtocol!
+    var userRulesProvider: DnsUserRulesManagersProviderMock!
 
     override func setUp() {
         filesStorage = FilterFilesStorageMock()
         dnsFiltersManager = DnsFiltersManagerMock()
+        userRulesProvider = DnsUserRulesManagersProviderMock()
         dnsLibsRulesProvider = DnsLibsRulesProvider(
             dnsFiltersManager: dnsFiltersManager,
-            filterFilesStorage: filesStorage
+            filterFilesStorage: filesStorage,
+            userRulesProvider: userRulesProvider
         )
     }
 
@@ -44,13 +47,13 @@ class DnsLibsRulesProviderTest: XCTestCase {
     }
 
     func testAllowlistFilter() {
-        let url = URL(string: "https://filters.com")!
-        filesStorage.stubbedGetUrlForFilterResult = url
+        let rulesManager = UserRulesManagerMock()
+        rulesManager.allRules = [UserRule(ruleText: "allowRule")]
+        userRulesProvider.stubbedAllowlistRulesManager = rulesManager
 
         let allowlistFilter = dnsLibsRulesProvider.allowlistFilter
+
         XCTAssertEqual(allowlistFilter.filterId, DnsUserRuleType.allowlist.enabledRulesFilterId)
-        XCTAssertEqual(allowlistFilter.filterPath, url.path)
-        XCTAssertEqual(filesStorage.invokedGetUrlForFilterCount, 1)
-        XCTAssertEqual(filesStorage.invokedGetUrlForFilterParameter, DnsUserRuleType.allowlist.enabledRulesFilterId)
+        XCTAssertEqual(allowlistFilter.filterText, "@@||allowRule^|\n")
     }
 }

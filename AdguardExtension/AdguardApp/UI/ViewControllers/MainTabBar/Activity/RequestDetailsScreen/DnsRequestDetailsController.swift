@@ -374,9 +374,9 @@ class DnsRequestDetailsController: UITableViewController {
         }
 
         // Server model
-        let server = record.event.upstream.upstream
+        let server = record.event.upstream?.upstream
         let serverTitle = String.localizedString("server_title")
-        let serverModelIsNil = server.isEmpty
+        let serverModelIsNil = server?.isEmpty ?? true
         let serverModel = serverModelIsNil ? nil : LogCellModel(copiedString: server, title: serverTitle, info: server, theme: theme)
         if !serverModelIsNil {
             generalSection = generalSectionToAssign
@@ -513,9 +513,9 @@ class DnsRequestDetailsController: UITableViewController {
         }
 
         // Dns upstream model
-        let dnsUpstream = record.event.upstream.upstream
+        let dnsUpstream = record.event.upstream?.upstream
         let dnsUpstreamTitle = String.localizedString("dns_upstream_title")
-        let dnsUpstreamModelIsNil = dnsUpstream.isEmpty
+        let dnsUpstreamModelIsNil = dnsUpstream?.isEmpty ?? true
         let dnsUpstreamModel = dnsUpstreamModelIsNil ? nil : LogCellModel(copiedString: dnsUpstream, title: dnsUpstreamTitle, info: dnsUpstream, theme: theme)
         if !dnsUpstreamModelIsNil && configuration.advancedMode {
             dnsSection = dnsSectionToAssign
