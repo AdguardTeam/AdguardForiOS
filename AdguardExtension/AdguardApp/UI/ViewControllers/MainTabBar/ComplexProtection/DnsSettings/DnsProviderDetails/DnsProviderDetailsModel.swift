@@ -22,7 +22,9 @@ import UIKit
 /// ViewModel
 final class DnsProviderDetailsModel {
 
-    // MARK: - Public properties
+    // MARK: - Internal properties
+
+    var provider: DnsProviderProtocol
 
     /// Provider logo for light color theme
     var providerLogo: UIImage? {
@@ -72,14 +74,20 @@ final class DnsProviderDetailsModel {
         }
     }
 
-    private let provider: DnsProviderProtocol
+    private let providerId: Int
     private let resources: AESharedResourcesProtocol
-
+    private let dnsProvidersManager: DnsProvidersManagerProtocol
 
     // MARK: - Init
 
-    init(provider: DnsProviderProtocol, resources: AESharedResourcesProtocol) {
-        self.provider = provider
+    init(providerId: Int, resources: AESharedResourcesProtocol, dnsProvidersManager: DnsProvidersManagerProtocol) {
+        self.providerId = providerId
+        self.dnsProvidersManager = dnsProvidersManager
         self.resources = resources
+        self.provider = dnsProvidersManager.allProviders.first(where: { $0.providerId == providerId })!.predefined
+    }
+
+    func dnsImplementationChanged() {
+        provider = dnsProvidersManager.allProviders.first(where: { $0.providerId == providerId })!.predefined
     }
 }

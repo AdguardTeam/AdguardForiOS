@@ -32,7 +32,7 @@ public protocol DnsProvidersManagerProtocol: ResetableSyncProtocol {
      This method should be called when implementation changes
      All inner objects will be reconstructed according to implementation
      */
-    func dnsImplementationChanged()
+    func update(dnsImplementation: DnsImplementation)
 
     /**
      Makes provider with **id** active
@@ -134,8 +134,9 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
 
     // MARK: - Public methods
 
-    public func dnsImplementationChanged() {
-        Logger.logInfo("(DnsProvidersManager) - dnsImplementationChanged; Changed to \(configuration.dnsImplementation)")
+    public func update(dnsImplementation: DnsImplementation) {
+        Logger.logInfo("(DnsProvidersManager) - updateDnsImplementation; Changed to \(dnsImplementation)")
+        configuration.dnsImplementation = dnsImplementation
         reinitializeProviders()
     }
 

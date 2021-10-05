@@ -37,9 +37,9 @@ final class DnsProvidersManagerMock: DnsProvidersManagerProtocol {
         return stubbedActiveDnsServer
     }
 
-    var invokedDnsImplementationChangedCount = 0
-    func dnsImplementationChanged() {
-        invokedDnsImplementationChangedCount += 1
+    var updateDnsImplementationChangedCount = 0
+    func update(dnsImplementation: DnsImplementation) {
+        updateDnsImplementationChangedCount += 1
     }
 
     var invokedSelectProviderCount = 0
