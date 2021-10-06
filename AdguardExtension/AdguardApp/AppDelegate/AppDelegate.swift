@@ -382,6 +382,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setupOnFirstAppRun() {
         guard firstRun else { return }
         firstRun = false
-        safariProtection.enablePredefinedGroupsAndFilters()
+
+        do {
+            try safariProtection.enablePredefinedGroupsAndFilters()
+            DDLogInfo("(AppDelegate) - setupOnFirstAppRun; Successfully setup predefined groups and filters")
+        } catch {
+            DDLogError("(AppDelegate) - setupOnFirstAppRun; Error occurred while setup predefined groups and filters")
+        }
+
+        updateSafariProtectionMeta()
+    }
+
+    private func updateSafariProtectionMeta() {
+        safariProtection.updateFiltersMetaAndLocalizations(true) { result in
+            switch result {
+            case .success(_):
+                DDLogInfo("(AppDelegate) - updateSafariProtectionMeta; Safari protection meta successfully updated")
+
+            case .error(let error):
+                DDLogError("(AppDelegate) - updateSafariProtectionMeta; On update safari protection meta error occurred: \(error)")
+            }
+
+        } onCbReloaded: { error in
+            if let error = error {
+                DDLogError("(AppDelegate) - updateSafariProtectionMeta; On reload CB error occurred: \(error)")
+                return
+            }
+
+            DDLogInfo("(AppDelegate) - updateSafariProtectionMeta; Successfully reload CB")
+        }
     }
 }

@@ -44,7 +44,6 @@ struct FilterTagsTable {
         self.name = dbTag[Self.name]
     }
 
-    // Init for tests only
     init(filterId: Int, tagId: Int, type: Int, name: String) {
         self.filterId = filterId
         self.tagId = tagId

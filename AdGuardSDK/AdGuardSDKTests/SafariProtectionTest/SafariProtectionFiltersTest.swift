@@ -350,21 +350,14 @@ class SafariProtectionFiltersTest: XCTestCase {
 
     func testEnablePredefinedGroupsAndFiltersWithSuccess() {
         XCTAssertEqual(filters.enablePredefinedGroupsAndFiltersCount, 0)
-        safariProtection.enablePredefinedGroupsAndFilters()
-        wait(for: [], timeout: 0.5)
+        try! safariProtection.enablePredefinedGroupsAndFilters()
         XCTAssertEqual(filters.enablePredefinedGroupsAndFiltersCount, 1)
     }
 
     func testEnablePredefinedGroupsAndFiltersWithServiceErrors() {
         XCTAssertEqual(filters.enablePredefinedGroupsAndFiltersCount, 0)
         filters.enablePredefinedGroupsAndFiltersError = MetaStorageMockError.error
-        safariProtection.enablePredefinedGroupsAndFilters()
-        wait(for: [], timeout: 0.5)
+        XCTAssertThrowsError(try safariProtection.enablePredefinedGroupsAndFilters())
         XCTAssertEqual(filters.enablePredefinedGroupsAndFiltersCount, 1)
-
-        filters.updateAllMetaResult = .error(MetaStorageMockError.error)
-        safariProtection.enablePredefinedGroupsAndFilters()
-        wait(for: [], timeout: 0.5)
-        XCTAssertEqual(filters.enablePredefinedGroupsAndFiltersCount, 2)
     }
 }

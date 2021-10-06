@@ -437,6 +437,7 @@ final class FiltersService: FiltersServiceProtocol {
     func enablePredefinedGroupsAndFilters() throws {
         try workingQueue.sync {
             try enablePredefinedGroupsAndFiltersInternal(with: groups, currentLanguage: configuration.currentLanguage)
+            try self._groupsAtomic.mutate { $0 = try getAllLocalizedGroups() }
         }
     }
 
