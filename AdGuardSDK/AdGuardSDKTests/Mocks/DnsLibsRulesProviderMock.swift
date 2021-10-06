@@ -17,8 +17,8 @@ final class DnsLibsRulesProviderMock: DnsLibsRulesProviderProtocol {
     }
 
     var invokedAllowlistFilterGetterCount = 0
-    var stubbedAllowlistFilter: DnsProxyAllowlistFilter!
-    var allowlistFilter: DnsProxyAllowlistFilter {
+    var stubbedAllowlistFilter: DnsProxyFilter!
+    var allowlistFilter: DnsProxyFilter {
         invokedAllowlistFilterGetterCount += 1
         return stubbedAllowlistFilter
     }

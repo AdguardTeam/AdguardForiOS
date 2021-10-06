@@ -44,17 +44,18 @@ class DnsProxyConfigurationProviderTest: XCTestCase {
         )
 
         var expectedFilters = [
-            DnsProxyFilter(filterId: 0, filterPath: "path1"),
-            DnsProxyFilter(filterId: 1, filterPath: "path2")
+            DnsProxyFilter(filterId: 0, filterData: .file("path1")),
+            DnsProxyFilter(filterId: 1, filterData: .file("path2"))
         ]
         dnsLibsRulesProvider.stubbedEnabledCustomDnsFilters = expectedFilters
 
-        let expectedBlocklistFilter = DnsProxyFilter(filterId: DnsUserRuleType.blocklist.enabledRulesFilterId, filterPath: "path4")
+        let expectedBlocklistFilter = DnsProxyFilter(filterId: DnsUserRuleType.blocklist.enabledRulesFilterId, filterData: .file("path4"))
         dnsLibsRulesProvider.stubbedBlocklistFilter = expectedBlocklistFilter
         expectedFilters.append(expectedBlocklistFilter)
 
-        let expectedAllowlistFilter = DnsProxyAllowlistFilter(filterId: DnsUserRuleType.allowlist.enabledRulesFilterId, filterText: "allowlist text")
+        let expectedAllowlistFilter = DnsProxyFilter(filterId: DnsUserRuleType.allowlist.enabledRulesFilterId, filterData: .text("allowlist text"))
         dnsLibsRulesProvider.stubbedAllowlistFilter = expectedAllowlistFilter
+        expectedFilters.append(expectedAllowlistFilter)
         
         networkUtils.getProtocolResult = .success(.dns)
         networkUtils.isIpv4Available = true
@@ -73,8 +74,6 @@ class DnsProxyConfigurationProviderTest: XCTestCase {
             fallbacks: expectedFallbacks,
             dns64Upstreams: [],
             filters: expectedFilters,
-            allowlist: expectedAllowlistFilter.filterText,
-            allowlistId: expectedAllowlistFilter.filterId,
             ipv6Available: false,
             rulesBlockingMode: .customAddress,
             hostsBlockingMode: .customAddress,

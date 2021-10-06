@@ -18,7 +18,7 @@
 
 import Foundation
 
-enum DnsProxyFilterData {
+enum DnsProxyFilterData: Equatable {
     case file(String)
     case text(String)
 }

@@ -25,8 +25,8 @@ class DnsLibsRulesProviderTest: XCTestCase {
         var filters = dnsLibsRulesProvider.enabledCustomDnsFilters
         filters.sort(by: { $0.filterId < $1.filterId })
         XCTAssertEqual(filters.count, 2)
-        XCTAssertEqual(filters[0], DnsProxyFilter(filterId: 1, filterPath: "path1"))
-        XCTAssertEqual(filters[1], DnsProxyFilter(filterId: 2, filterPath: "path2"))
+        XCTAssertEqual(filters[0], DnsProxyFilter(filterId: 1, filterData: .file("path1")))
+        XCTAssertEqual(filters[1], DnsProxyFilter(filterId: 2, filterData: .file("path2")))
         XCTAssertEqual(dnsFiltersManager.invokedGetDnsLibsFiltersCount, 1)
 
         dnsFiltersManager.stubbedGetDnsLibsFiltersResult = [:]
@@ -41,7 +41,7 @@ class DnsLibsRulesProviderTest: XCTestCase {
 
         let blocklistFilter = dnsLibsRulesProvider.blocklistFilter
         XCTAssertEqual(blocklistFilter.filterId, DnsUserRuleType.blocklist.enabledRulesFilterId)
-        XCTAssertEqual(blocklistFilter.filterPath, url.path)
+        XCTAssertEqual(blocklistFilter.filterData, .file(url.path))
         XCTAssertEqual(filesStorage.invokedGetUrlForFilterCount, 1)
         XCTAssertEqual(filesStorage.invokedGetUrlForFilterParameter, DnsUserRuleType.blocklist.enabledRulesFilterId)
     }
@@ -54,6 +54,6 @@ class DnsLibsRulesProviderTest: XCTestCase {
         let allowlistFilter = dnsLibsRulesProvider.allowlistFilter
 
         XCTAssertEqual(allowlistFilter.filterId, DnsUserRuleType.allowlist.enabledRulesFilterId)
-        XCTAssertEqual(allowlistFilter.filterText, "@@||allowRule^|\n")
+        XCTAssertEqual(allowlistFilter.filterData, .text("@@||allowRule^|\n"))
     }
 }
