@@ -32,7 +32,6 @@ protocol ChartViewModelProtocol {
     var statisticsPeriod: StatisticsPeriod { get set }
     var chartType: ChartType { get set }
     var delegate: ChartViewModelDelegate? { get set }
-    func startChartStatisticsAutoUpdate(seconds: TimeInterval)
     func chartViewSizeChanged(frame: CGRect)
 }
 
@@ -61,14 +60,14 @@ final class ChartViewModel: ChartViewModelProtocol {
     var statisticsPeriod: StatisticsPeriod {
         didSet {
             guard isStarted else { return }
-            startChartStatisticsAutoUpdate(seconds: repeatTime)
+            startChartStatisticsAutoUpdate()
         }
     }
 
     var chartType: ChartType = .requests {
         didSet {
             guard isStarted else { return }
-            startChartStatisticsAutoUpdate(seconds: repeatTime)
+            startChartStatisticsAutoUpdate()
         }
     }
 
@@ -78,7 +77,6 @@ final class ChartViewModel: ChartViewModelProtocol {
     private let activityStatistics: ActivityStatisticsProtocol
     private var isStarted: Bool = false
     private var timer: Timer?
-    private var repeatTime: TimeInterval = 5.0
 
     private var firstFormattedDate: String = ""
     private var lastFormattedDate: String = ""
@@ -92,11 +90,11 @@ final class ChartViewModel: ChartViewModelProtocol {
         self.activityStatistics = activityStatistics
     }
 
-    func startChartStatisticsAutoUpdate(seconds: TimeInterval) {
+    func startChartStatisticsAutoUpdate() {
         isStarted = true
         timer?.invalidate()
         timer = nil
-        repeatTime = seconds
+        let repeatTime = statisticsPeriod.getChartViewUpdateInterval(statisticsInfo.requests)
         chartStatisticUpdate()
         timer = Timer.scheduledTimer(withTimeInterval: repeatTime, repeats: true, block: { [weak self] _ in
             self?.chartStatisticUpdate()
@@ -105,7 +103,7 @@ final class ChartViewModel: ChartViewModelProtocol {
 
     func chartViewSizeChanged(frame: CGRect) {
         self.frame = frame
-        startChartStatisticsAutoUpdate(seconds: repeatTime)
+        startChartStatisticsAutoUpdate()
     }
 
     // MARK: - Private methods
@@ -253,6 +251,17 @@ final class ChartViewModel: ChartViewModelProtocol {
 }
 
 fileprivate extension StatisticsPeriod {
+
+    /// Returns counters update interval depending on requests number
+    /// The less requests number the less significant changes are
+    func getChartViewUpdateInterval(_ requestsCount: Int) -> TimeInterval {
+        switch requestsCount {
+        case 0..<1000: return 10.0
+        case 1000..<10000: return 30.0
+        default: return 60.0
+        }
+    }
+
     func getInterval(_ oldestRecordDate: Date?) -> DateInterval {
         switch self {
         case .today, .day, .week, .month:
