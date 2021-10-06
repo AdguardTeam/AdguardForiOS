@@ -847,6 +847,9 @@
 /* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
 "native_dns_setup_description" = "To enable native DNS, you need to open <b>System settings</b>, go to <b>General > VPN & Network > DNS</b> and select <b>%@</b> there.";
 
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name; String for iOS 15 and newer */
+"native_dns_setup_description_ios15" = "To enable native DNS, you need to open <b>System settings</b>, go to <b>General > VPN & Device Management > DNS</b> and select <b>%@</b> there.";
+
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Tell us whether you are satisfied with ad blocking experience so far";
 
