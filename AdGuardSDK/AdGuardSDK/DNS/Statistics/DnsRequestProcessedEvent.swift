@@ -28,7 +28,7 @@ public struct DnsRequestProcessedEvent {
     public let answer: String // DNS Answers string representation
     public let processedStatus: ProcessedStatus // DNS answer's status
     public let originalAnswer: String // If blocked by CNAME, here will be DNS original answer's string representation
-    public let upstream: DnsUpstream // The upstream that provided the answer
+    public let upstream: DnsUpstream? // The upstream that provided the answer. It can be nil if the request was blocked localy by dns filter
     public let bytesSent: Int // Number of bytes sent to a server
     public let bytesReceived: Int // Number of bytes received from a server
     public let blockRules: [String] // Filtering rules texts
@@ -40,12 +40,12 @@ public struct DnsRequestProcessedEvent {
         default: return false
         }
     }
-    public var isEncrypted: Bool { upstream.`protocol`.isCrypto }
+    public var isEncrypted: Bool { upstream?.`protocol`.isCrypto ?? false }
 }
 
 /// Initializer from wrapper for DNS-libs object
 extension DnsRequestProcessedEvent {
-    init(event: AGDnsRequestProcessedEventWrapper, upstream: DnsUpstream, customDnsFilterIds: [Int], dnsBlocklistFilterId: Int, dnsAllowlistFilterId: Int) {
+    init(event: AGDnsRequestProcessedEventWrapper, upstream: DnsUpstream?, customDnsFilterIds: [Int], dnsBlocklistFilterId: Int, dnsAllowlistFilterId: Int) {
         self.domain = event.domain
         self.startDate = Date(timeIntervalSince1970: TimeInterval(event.startTime / 1000))
         self.elapsed = event.elapsed
@@ -53,7 +53,7 @@ extension DnsRequestProcessedEvent {
         self.answer = event.answer
         self.processedStatus = Self.getEventStatus(
             event,
-            isEncrypted: upstream.`protocol`.isCrypto,
+            isEncrypted: upstream?.`protocol`.isCrypto ?? false,
             customDnsFilterIds: customDnsFilterIds,
             dnsBlocklistFilterId: dnsBlocklistFilterId,
             dnsAllowlistFilterId: dnsAllowlistFilterId

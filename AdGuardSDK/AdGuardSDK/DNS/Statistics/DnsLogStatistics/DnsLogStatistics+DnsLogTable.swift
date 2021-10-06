@@ -31,7 +31,7 @@ struct DnsLogTable: Equatable {
     static let answer = Expression<String>("answer")
     static let processedStatus = Expression<Int>("processed_status")
     static let originalAnswer = Expression<String>("original_answer")
-    static let upstream = Expression<DnsUpstream>("upstream")
+    static let upstream = Expression<DnsUpstream?>("upstream")
     static let bytesSent = Expression<Int>("bytes_sent")
     static let bytesReceived = Expression<Int>("bytes_received")
     static let blockRules = Expression<[String]>("block_rules")

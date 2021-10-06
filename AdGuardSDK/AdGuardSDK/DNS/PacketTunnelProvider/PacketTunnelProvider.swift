@@ -82,9 +82,12 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
             configuration: dnsConfiguration
         )
 
+        let userRulesProvider = DnsUserRulesManagersProvider(fileStorage: filtersFileStorage)
+
         let dnsLibsRulesProvider = DnsLibsRulesProvider(
             dnsFiltersManager: filtersManager,
-            filterFilesStorage: filtersFileStorage
+            filterFilesStorage: filtersFileStorage,
+            userRulesProvider: userRulesProvider
         )
 
         let proxySettingsProvider = DnsProxyConfigurationProvider(
@@ -95,7 +98,6 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
 
         let dnsProxy = DnsProxy(
             proxySettingsProvider: proxySettingsProvider,
-            dnsLibsRulesProvider: dnsLibsRulesProvider,
             statisticsDbContainerUrl: statisticsDbContainerUrl
         )
 
