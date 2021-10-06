@@ -129,6 +129,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if firstRun {
             setupOnFirstAppRun()
+            // After first app run we don't need to call finishBackgroundUpdate
             return true
         }
 

@@ -348,20 +348,23 @@ class SafariProtectionFiltersTest: XCTestCase {
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
     }
 
-    func testSetupPredefinedWithSuccess() {
-        XCTAssertEqual(filters.setupPredefinedGroupsAndFiltersCount, 0)
-        safariProtection.setupPredefinedGroupsAndFilters()
-        XCTAssertEqual(filters.setupPredefinedGroupsAndFiltersCount, 1)
+    func testEnablePredefinedGroupsAndFiltersWithSuccess() {
+        XCTAssertEqual(filters.enablePredefinedGroupsAndFiltersCount, 0)
+        safariProtection.enablePredefinedGroupsAndFilters()
+        wait(for: [], timeout: 0.5)
+        XCTAssertEqual(filters.enablePredefinedGroupsAndFiltersCount, 1)
     }
 
-    func testSetupPredefinedWithError() {
-        XCTAssertEqual(filters.setupPredefinedGroupsAndFiltersCount, 0)
-        filters.setupPredefinedGroupsAndFiltersError = MetaStorageMockError.error
-        safariProtection.setupPredefinedGroupsAndFilters()
-        XCTAssertEqual(filters.setupPredefinedGroupsAndFiltersCount, 1)
+    func testEnablePredefinedGroupsAndFiltersWithServiceErrors() {
+        XCTAssertEqual(filters.enablePredefinedGroupsAndFiltersCount, 0)
+        filters.enablePredefinedGroupsAndFiltersError = MetaStorageMockError.error
+        safariProtection.enablePredefinedGroupsAndFilters()
+        wait(for: [], timeout: 0.5)
+        XCTAssertEqual(filters.enablePredefinedGroupsAndFiltersCount, 1)
 
         filters.updateAllMetaResult = .error(MetaStorageMockError.error)
-        safariProtection.setupPredefinedGroupsAndFilters()
-        XCTAssertEqual(filters.setupPredefinedGroupsAndFiltersCount, 2)
+        safariProtection.enablePredefinedGroupsAndFilters()
+        wait(for: [], timeout: 0.5)
+        XCTAssertEqual(filters.enablePredefinedGroupsAndFiltersCount, 2)
     }
 }

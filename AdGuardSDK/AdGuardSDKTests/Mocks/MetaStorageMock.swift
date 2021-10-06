@@ -223,9 +223,13 @@ class MetaStorageMock: MetaStorageProtocol {
     }
 
     var getTagsForFilterCalledCount = 0
+    var getTagsForFilterResult:SharedAdGuardSDK.Result<[FilterTagsTable]> = .success([])
     func getTagsForFilter(withId id: Int) throws -> [FilterTagsTable] {
         getTagsForFilterCalledCount += 1
-        return []
+        switch getTagsForFilterResult {
+        case .success(let result): return result.filter { $0.filterId == id }
+        case .error(let error): throw error
+        }
     }
 
     var updateAllTagsCalledCount = 0

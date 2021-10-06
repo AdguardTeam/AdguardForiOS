@@ -897,19 +897,101 @@ class FitlerServiceTest: XCTestCase {
         XCTAssertEqual(filterFileStorage.resetCalledCount, 1)
     }
 
-    func testSetupPredefinedGroupsAndFiltersWithSuccess() {
-        XCTAssertEqual(metaStorage.setupPredefinedMetaCalledCount, 0)
-        try! filterService.setupPredefinedGroupsAndFilters()
-        XCTAssertEqual(metaStorage.setupPredefinedMetaCalledCount, 1)
+    func testEnabledPredefinedGroupsAndFiltersWithSuccess() {
+        prepareFilterServiceWithPredefined()
+        configuration.currentLanguage = "en-US"
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 0)
+        XCTAssertEqual(metaStorage.setFilterCalledCount, 0)
+        try! filterService.enablePredefinedGroupsAndFilters()
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 4)
+        XCTAssertEqual(metaStorage.setFilterCalledCount, 3)
     }
 
-    func testSetupPredefinedGroupsAndFiltersWithError() {
-        XCTAssertEqual(metaStorage.setupPredefinedMetaCalledCount, 0)
-        metaStorage.setupPredefinedMetaError =  FilterFilesStorageMockError.error
-        XCTAssertThrowsError(try filterService.setupPredefinedGroupsAndFilters()) {
-            if case FilterFilesStorageMockError.error = $0 {}
-            else { XCTFail()}
+    func testEnabledPredefinedGroupsAndFiltersWithBadLanguage() {
+        prepareFilterServiceWithPredefined()
+        configuration.currentLanguage = "foo"
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 0)
+        XCTAssertEqual(metaStorage.setFilterCalledCount, 0)
+        try! filterService.enablePredefinedGroupsAndFilters()
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 4)
+        XCTAssertEqual(metaStorage.setFilterCalledCount, 0)
+    }
+
+    func testEnabledPredefinedGroupsAndFiltersWithSetFilterError() {
+        prepareFilterServiceWithPredefined()
+        configuration.currentLanguage = "en-US"
+        metaStorage.setFilterResultError = FilterFilesStorageMockError.error
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 0)
+        XCTAssertEqual(metaStorage.setFilterCalledCount, 0)
+        XCTAssertThrowsError(try filterService.enablePredefinedGroupsAndFilters())
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 0)
+        XCTAssertEqual(metaStorage.setFilterCalledCount, 1)
+    }
+
+    func testEnabledPredefinedGroupsAndFiltersWithSetGroupError() {
+        prepareFilterServiceWithPredefined()
+        configuration.currentLanguage = "en-US"
+        metaStorage.setGroupResultError = FilterFilesStorageMockError.error
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 0)
+        XCTAssertEqual(metaStorage.setFilterCalledCount, 0)
+        XCTAssertThrowsError(try filterService.enablePredefinedGroupsAndFilters())
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 1)
+        XCTAssertEqual(metaStorage.setFilterCalledCount, 1)
+    }
+
+    private func prepareFilterServiceWithPredefined() {
+        let predefinedGroups: [SafariGroup.GroupType] = [.ads, .languageSpecific, .custom, .privacy]
+        var exclusion: [SafariGroup.GroupType] = []
+        var arrayOfTags: [FilterTagsTable] = []
+        for mock in metaStorage.filtersTableMock {
+            let groupType = SafariGroup.GroupType(rawValue: mock.groupId)!
+            let tags: [FilterTagsTable]
+
+            if predefinedGroups.contains(groupType) && !exclusion.contains(groupType) {
+                tags = generate(groupType: groupType, filterId: mock.filterId)
+                exclusion.append(groupType)
+
+            } else if predefinedGroups.contains(groupType) && exclusion.contains(groupType) {
+                tags = generate(groupType: groupType, filterId: mock.filterId, forcePredefined: true)
+
+            } else {
+                tags = []
+            }
+
+            arrayOfTags.append(contentsOf: tags)
         }
-        XCTAssertEqual(metaStorage.setupPredefinedMetaCalledCount, 1)
+
+        metaStorage.getTagsForFilterResult = .success(arrayOfTags.compactMap { $0 })
+
+        filterService = try! FiltersService(configuration: configuration,
+                                           filterFilesStorage: filterFileStorage,
+                                           metaStorage: metaStorage,
+                                           userDefaultsStorage: userDefaultsStorage,
+                                           metaParser: metaParser,
+                                           apiMethods: apiMethods)
+    }
+
+    private func generate(groupType: SafariGroup.GroupType, filterId: Int, forcePredefined: Bool = false) -> [FilterTagsTable] {
+        if forcePredefined {
+            let purpose = ExtendedFiltersMeta.Tag.TagType.purpose.id
+            return [FilterTagsTable(filterId: filterId, tagId: filterId, type: purpose, name: "tag_name_\(filterId)")]
+        }
+
+        let tags: [FilterTagsTable]
+        switch groupType {
+        case .ads:
+            let recommended = ExtendedFiltersMeta.Tag.TagType.recommended.id
+            tags = [FilterTagsTable(filterId: filterId, tagId: filterId, type: recommended, name: "tag_name_\(filterId)")]
+        case .languageSpecific:
+            let recommended = ExtendedFiltersMeta.Tag.TagType.recommended.id
+            tags = [FilterTagsTable(filterId: filterId, tagId: filterId, type: recommended, name: "tag_name_\(filterId)")]
+        case .privacy:
+            let recommended = ExtendedFiltersMeta.Tag.TagType.recommended.id
+            tags = [FilterTagsTable(filterId: filterId, tagId: filterId, type: recommended, name: "tag_name_\(filterId)")]
+        case .custom, .socialWidgets, .annoyances, .security, .other:
+            tags = []
+        }
+
+        return tags
     }
 }

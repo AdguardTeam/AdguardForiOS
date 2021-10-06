@@ -25,7 +25,6 @@ typealias MetaStorageTypeAlias = FiltersMetaStorageProtocol
                                 & LangsMetaStorageProtocol
                                 & GroupLocalizationsMetaStorageProtocol
                                 & FiltersLocalizationsMetaStorageProtocol
-                                & PredefinedSafariMetaProtocol
 
 protocol MetaStorageProtocol: MetaStorageTypeAlias, ResetableSyncProtocol, AnyObject {
     static var defaultDbLanguage: String { get }

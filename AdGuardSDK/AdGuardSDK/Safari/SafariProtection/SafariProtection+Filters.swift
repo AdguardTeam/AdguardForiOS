@@ -84,9 +84,9 @@ public protocol SafariProtectionFiltersProtocol {
     )
 
     /**
-     Setup predefined groups and filters
+     Enable predefined groups and filters
      */
-    func setupPredefinedGroupsAndFilters()
+    func enablePredefinedGroupsAndFilters()
 }
 
 /* Extension is used to interact with filters and groups object and properly process operations with them */
@@ -257,15 +257,15 @@ extension SafariProtection {
         }
     }
 
-    public func setupPredefinedGroupsAndFilters() {
-        workingQueue.sync { [weak self] in
+    public func enablePredefinedGroupsAndFilters() {
+        workingQueue.async { [weak self] in
             guard let self = self else {
                 Logger.logError("(SafariProtection+Filters) - setupPredefinedGroupsAndFilters; self is missing!")
                 return
             }
 
             do {
-                try self.filters.setupPredefinedGroupsAndFilters()
+                try self.filters.enablePredefinedGroupsAndFilters()
                 Logger.logInfo("(SafariProtection+Filters) - setupPredefinedGroupsAndFilters; Successfully setup predefined groups and filters")
             } catch {
                 Logger.logInfo("(SafariProtection+Filters) - setupPredefinedGroupsAndFilters; Error occurred while setup predefined groups and filters ")

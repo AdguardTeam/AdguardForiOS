@@ -89,10 +89,10 @@ protocol FiltersServiceProtocol: ResetableAsyncProtocol {
     func renameCustomFilter(withId id: Int, to name: String) throws
 
     /**
-     Setup predefined groups and filters
+     Enable predefined groups and filters
      - throws: Can throw error if error occured while setuping
      */
-    func setupPredefinedGroupsAndFilters() throws
+    func enablePredefinedGroupsAndFilters() throws
 }
 
 /*
@@ -434,9 +434,9 @@ final class FiltersService: FiltersServiceProtocol {
         }
     }
 
-    func setupPredefinedGroupsAndFilters() throws {
+    func enablePredefinedGroupsAndFilters() throws {
         try workingQueue.sync {
-            try metaStorage.setupPredefinedMeta(with: groups, currentLanguage: configuration.currentLanguage)
+            try enablePredefinedGroupsAndFiltersInternal(with: groups, currentLanguage: configuration.currentLanguage)
         }
     }
 
@@ -775,6 +775,44 @@ final class FiltersService: FiltersServiceProtocol {
         if let error = resultError {
             throw error
         }
+    }
+
+    //MARK: - Enabling predefined meta methods
+
+    /* Enable predefined groups and filters. Throws error on setting enabled state in storage*/
+    private func enablePredefinedGroupsAndFiltersInternal(with groups: [SafariGroup], currentLanguage: String) throws {
+        let predefinedGroups: [SafariGroup.GroupType] = [.ads, .privacy, .languageSpecific, .custom]
+
+        for group in groups {
+            guard predefinedGroups.contains(group.groupType) else { continue }
+            var recommendedCount = 0
+
+            for filter in group.filters {
+                guard isRecommended(filter: filter, currentLanguage: currentLanguage) else { continue }
+                try metaStorage.setFilter(withId: filter.filterId, enabled: true)
+                Logger.logInfo("(FiltersService) - enablePredefinedMeta; Filter with id=\(filter.filterId) were enabled for groupType=\(group.groupType)")
+                recommendedCount += 1
+            }
+
+            let groupIsEnabled = recommendedCount > 0 || group.groupType == .custom
+            try metaStorage.setGroup(withId: group.groupId, enabled: groupIsEnabled)
+            Logger.logInfo("(FiltersService) - enablePredefinedMeta; Group with groupType=\(group.groupType) were enabled")
+        }
+    }
+
+    /* Return true if filter is recommended as predefined filter */
+    private func isRecommended(filter: SafariGroup.Filter, currentLanguage: String) -> Bool {
+        let isRecommended = filter.tags.contains(where: { $0.tagType == .recommended })
+        let isContainsLanguage = contains(currentLanguage: currentLanguage, inLanguages: filter.languages)
+        return isRecommended && isContainsLanguage
+    }
+
+    /* Return true if current language contains in array of languages or if languages array is empty */
+    private func contains(currentLanguage: String ,inLanguages languages: [String]) -> Bool {
+        let splited = currentLanguage.split(separator: "-")
+        guard splited.count == 2 else { return false }
+        let contains = languages.contains(String(splited[0])) || languages.contains(String(splited[1]))
+        return contains || languages.isEmpty
     }
 }
 

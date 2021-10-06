@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2415D84F270C961A00776A60 /* MetaStorage+PredefinedMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2415D84E270C961A00776A60 /* MetaStorage+PredefinedMeta.swift */; };
-		2415D850270C961A00776A60 /* MetaStorage+PredefinedMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2415D84E270C961A00776A60 /* MetaStorage+PredefinedMeta.swift */; };
-		2415D851270C961A00776A60 /* MetaStorage+PredefinedMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2415D84E270C961A00776A60 /* MetaStorage+PredefinedMeta.swift */; };
 		241D084026F1F5620008FD17 /* DnsProtection+BackgroundFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241D083F26F1F5620008FD17 /* DnsProtection+BackgroundFetch.swift */; };
 		241D084126F1F5620008FD17 /* DnsProtection+BackgroundFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241D083F26F1F5620008FD17 /* DnsProtection+BackgroundFetch.swift */; };
 		241D084326F21B4A0008FD17 /* DnsProtection+Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241D084226F21B4A0008FD17 /* DnsProtection+Filters.swift */; };
@@ -475,7 +472,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2415D84E270C961A00776A60 /* MetaStorage+PredefinedMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MetaStorage+PredefinedMeta.swift"; sourceTree = "<group>"; };
 		241D083F26F1F5620008FD17 /* DnsProtection+BackgroundFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DnsProtection+BackgroundFetch.swift"; sourceTree = "<group>"; };
 		241D084226F21B4A0008FD17 /* DnsProtection+Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DnsProtection+Filters.swift"; sourceTree = "<group>"; };
 		241D084526F22DE40008FD17 /* DnsFIltersUpdateResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsFIltersUpdateResult.swift; sourceTree = "<group>"; };
@@ -868,7 +864,6 @@
 				7E6E7FE126C299DB00925F96 /* TestsFileManager.swift */,
 				7E6E7FE226C299DB00925F96 /* FiltersMetaStorageTest.swift */,
 				7E6E7FE426C299DB00925F96 /* TagsMetaStorageTest.swift */,
-				24C2CC04270C41650082A051 /* PredefinedSafariMetaStorageTest.swift */,
 			);
 			path = FiltersMetaStorageTest;
 			sourceTree = "<group>";
@@ -928,6 +923,7 @@
 			isa = PBXGroup;
 			children = (
 				7E6E7FFD26C299DC00925F96 /* FiltersServiceTest.swift */,
+				24C2CC04270C41650082A051 /* PredefinedSafariMetaStorageTest.swift */,
 			);
 			path = FilterServiceTest;
 			sourceTree = "<group>";
@@ -1185,7 +1181,6 @@
 				7E6E80EB26C2A05200925F96 /* MetaStorage+Filters.swift */,
 				7E6E80EC26C2A05200925F96 /* MetaStorage+Langs.swift */,
 				7E6E80ED26C2A05200925F96 /* MetaStorage+Groups.swift */,
-				2415D84E270C961A00776A60 /* MetaStorage+PredefinedMeta.swift */,
 			);
 			path = FiltersMetaStorage;
 			sourceTree = "<group>";
@@ -1924,7 +1919,6 @@
 				7E6E81AF26C2A05B00925F96 /* DnsRequestProcessedEventHandler.swift in Sources */,
 				7E6E804526C299DE00925F96 /* FilterFilesStorageTest.swift in Sources */,
 				7E6E814B26C2A05300925F96 /* SafariGroup.swift in Sources */,
-				2415D851270C961A00776A60 /* MetaStorage+PredefinedMeta.swift in Sources */,
 				7E6E805526C299DF00925F96 /* SafariProtectionBackgroundFetchTest.swift in Sources */,
 				7E6E81D826C2A05B00925F96 /* PredefinedDnsProvider.swift in Sources */,
 				7E9B1DEE26F229450003EB0E /* DnsProxyConfiguration.swift in Sources */,
@@ -1973,7 +1967,6 @@
 				7E6E81F126C2A45200925F96 /* Dictionary+Utils.swift in Sources */,
 				7E6E811C26C2A05300925F96 /* RequestsFactory+Safari.swift in Sources */,
 				7EE9F63226D8E1DB00646D62 /* FilterFilesStorageProtocol+PredefinedFilters.swift in Sources */,
-				2415D84F270C961A00776A60 /* MetaStorage+PredefinedMeta.swift in Sources */,
 				7E6E814A26C2A05300925F96 /* SafariGroup.swift in Sources */,
 				7E6E816426C2A05300925F96 /* ServicesStorage.swift in Sources */,
 				7E6E816626C2A05300925F96 /* SafariConfiguration.swift in Sources */,
@@ -2176,7 +2169,6 @@
 				7EC8A3F626E77DE3005244CF /* FilterMetaProtocol.swift in Sources */,
 				7EC8A3F926E77DE6005244CF /* CommonError.swift in Sources */,
 				7EAD350826C2B7D4001AFB3A /* ExtendedFiltersMeta.swift in Sources */,
-				2415D850270C961A00776A60 /* MetaStorage+PredefinedMeta.swift in Sources */,
 				7EC8A3E926E77DD6005244CF /* URL+Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
