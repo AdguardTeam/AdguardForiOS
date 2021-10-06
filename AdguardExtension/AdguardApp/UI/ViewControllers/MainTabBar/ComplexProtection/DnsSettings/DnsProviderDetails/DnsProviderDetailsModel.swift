@@ -75,8 +75,8 @@ final class DnsProviderDetailsModel {
                 defaultDnsProtocol = provider.dnsServers.first!.type
             }
 
-            /// Providers always have server.
-            /// If we didn't find active server from User Defaults than we should take DoH protocol from provider DNS servers
+            /// Providers must always have at least one server
+            /// If we were unable to find the server user did select than we'll take the default one
             if let selectedProtocol = resources.dnsActiveProtocols[provider.providerId] {
                 return dnsProtocols.contains(selectedProtocol) ? selectedProtocol : defaultDnsProtocol
             } else {
