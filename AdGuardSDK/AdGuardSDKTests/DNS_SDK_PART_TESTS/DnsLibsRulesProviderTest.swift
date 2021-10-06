@@ -54,6 +54,6 @@ class DnsLibsRulesProviderTest: XCTestCase {
         let allowlistFilter = dnsLibsRulesProvider.allowlistFilter
 
         XCTAssertEqual(allowlistFilter.filterId, DnsUserRuleType.allowlist.enabledRulesFilterId)
-        XCTAssertEqual(allowlistFilter.filterData, .text("@@||allowRule^|\n"))
+        XCTAssertEqual(allowlistFilter.filterData, .text("@@||allowRule^|$important\n"))
     }
 }

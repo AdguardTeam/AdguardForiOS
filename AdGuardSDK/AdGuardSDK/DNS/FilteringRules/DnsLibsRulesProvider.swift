@@ -87,6 +87,6 @@ fileprivate extension UserRulesManagerProtocol {
 
 fileprivate class DnsAllowlistRulesConverter {
     func convertDomainToRule(_ domain: String)->String {
-        return "@@||\(domain)^|"
+        return "@@||\(domain)^|$important"
     }
 }
