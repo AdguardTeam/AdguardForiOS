@@ -91,6 +91,12 @@ fileprivate extension UserRulesManagerProtocol {
 /// DnsAllowlistRulesConverter is responsible for converting domain name to allowlist rule
 fileprivate class DnsAllowlistRulesConverter {
     func convertDomainToRule(_ domain: String)->String {
-        return "@@||\(domain)^|$important"
+        // check that we have domain name without allowlist rule prefix
+        if domain.hasPrefix("@@") {
+            return domain
+        }
+        else {
+            return "@@||\(domain)^|$important"
+        }
     }
 }
