@@ -382,6 +382,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setupOnFirstAppRun() {
         guard firstRun else { return }
         firstRun = false
-        safariProtection.setupPredefinedGroupsAndFilters()
+        safariProtection.enablePredefinedGroupsAndFilters()
     }
 }
