@@ -205,28 +205,27 @@ extension String {
     }
 
 
-    static func simpleSecondsFormatter(_ number: NSNumber) -> String {
+    static func simpleSecondsFormatter(_ ms: NSNumber) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.locale = .current
         formatter.minimumFractionDigits = 0
 
-        let seconds = number.doubleValue / 1000000
+        let seconds = ms.doubleValue / 1000
         if seconds >= 1 {
-            formatter.maximumFractionDigits = 0
-            let formatterString = formatter.string(from: NSNumber(floatLiteral: seconds)) ?? "\(number.intValue)"
+            formatter.maximumFractionDigits = 1
+            let formatterString = formatter.string(from: NSNumber(floatLiteral: seconds)) ?? "\(ms.intValue)"
             return String(format: String.localizedString("s_unit"), formatterString)
         }
 
-        let miliseconds = number.doubleValue / 1000
-        if miliseconds >= 1 {
-            formatter.maximumFractionDigits = 1
-            let formatterString = formatter.string(from: NSNumber(floatLiteral: miliseconds)) ?? "\(number.intValue)"
+        if ms.intValue >= 1 {
+            formatter.maximumFractionDigits = 0
+            let formatterString = formatter.string(from: NSNumber(floatLiteral: ms.doubleValue)) ?? "\(ms.intValue)"
             return String(format: String.localizedString("ms_unit"), formatterString)
         }
 
         formatter.maximumFractionDigits = 0
-        let formatterString = formatter.string(from: number) ?? "\(number.intValue)"
+        let formatterString = formatter.string(from: ms) ?? "\(ms.intValue)"
         return String(format: String.localizedString("ms_unit"), formatterString)
     }
 

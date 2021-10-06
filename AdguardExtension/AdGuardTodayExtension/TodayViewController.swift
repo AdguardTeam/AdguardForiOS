@@ -373,20 +373,18 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             guard let self = self else { return }
             let statisticRecord = try? self.serviceInitializer.activityStatistics.getCounters(for: .all)
 
-            let requests = statisticRecord?.requests ?? 0
-            let encrypted = statisticRecord?.encrypted ?? 0
+            let requestsNumber = statisticRecord?.requests ?? 0
+            let encryptedNumber = statisticRecord?.encrypted ?? 0
             let elapsedSumm = statisticRecord?.elapsedSumm ?? 0
 
-            let requestsNumber = self.resources.tempRequestsCount + requests
             self.requestsLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsNumber))
             self.prevRequestNumber = self.requestNumber
             self.requestNumber = requestsNumber
 
-            let encryptedNumber = self.resources.tempEncryptedRequestsCount + encrypted
             self.encryptedLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedNumber))
             self.encryptedNumber = encryptedNumber
 
-            let averageElapsed = requests == 0 ? 0 : Double(elapsedSumm) / Double(requests)
+            let averageElapsed = requestsNumber == 0 ? 0 : Double(elapsedSumm) / Double(requestsNumber)
             self.elapsedLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: averageElapsed))
         }
     }
