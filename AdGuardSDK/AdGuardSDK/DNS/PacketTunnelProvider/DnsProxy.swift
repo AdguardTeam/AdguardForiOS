@@ -43,7 +43,7 @@ final class DnsProxy: DnsProxyProtocol {
 
     // MARK: - Initialization
 
-    init(proxySettingsProvider: DnsProxyConfigurationProviderProtocol, dnsLibsRulesProvider: DnsLibsRulesProviderProtocol, statisticsDbContainerUrl: URL) {
+    init(proxySettingsProvider: DnsProxyConfigurationProviderProtocol, statisticsDbContainerUrl: URL) {
         self.proxySettingsProvider = proxySettingsProvider
         self.statisticsDbContainerUrl = statisticsDbContainerUrl
     }

@@ -18,21 +18,19 @@
 
 import Foundation
 
+/// DNS filter content. It can be .file with a path to file or .text with filter content as a String
 enum DnsProxyFilterData: Equatable {
-    case file(String)
-    case text(String)
+    case file(_ path: String)
+    case text(_ text: String)
 }
 
+/// Information about DNS filter.
 struct DnsProxyFilter: Equatable {
-
     let filterId: Int
     let filterData: DnsProxyFilterData
-
-    static func == (lhs: DnsProxyFilter, rhs: DnsProxyFilter) -> Bool {
-        return lhs.filterId == rhs.filterId
-    }
 }
 
+/// This class is responsible for providing DNS filters to the DNS proxy.
 protocol DnsLibsRulesProviderProtocol {
     var enabledCustomDnsFilters: [DnsProxyFilter] { get }
     var blocklistFilter: DnsProxyFilter { get }
@@ -69,7 +67,12 @@ final class DnsLibsRulesProvider: DnsLibsRulesProviderProtocol {
 
 }
 
+/// This extension is responsible for generating an allowlist.
+/// UserRulesManager stores DNS allowlist as a list of **domain names**.
+/// DnsProxy expects a list of allowlist **rules**.
+/// This extension converts the list of domains to the list of rules.
 fileprivate extension UserRulesManagerProtocol {
+    /// returns all enabled allowlist rules as a String
     func allowlistRulesString()->String {
 
         let converter = DnsAllowlistRulesConverter()
@@ -85,6 +88,7 @@ fileprivate extension UserRulesManagerProtocol {
     }
 }
 
+/// DnsAllowlistRulesConverter is responsible for converting domain name to allowlist rule
 fileprivate class DnsAllowlistRulesConverter {
     func convertDomainToRule(_ domain: String)->String {
         return "@@||\(domain)^|$important"
