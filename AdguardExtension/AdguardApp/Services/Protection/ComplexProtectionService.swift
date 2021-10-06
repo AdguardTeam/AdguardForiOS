@@ -206,7 +206,12 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
                 self.resources.systemProtectionEnabled = systemOld
             }
 
-            completion(systemError)
+            // FIXME: Current logic is rather odd and should be changed later
+            if let complexProtectionError = systemError as? ComplexProtectionError, complexProtectionError == .cancelledAddingVpnConfiguration {
+                completion(nil)
+            } else {
+                completion(systemError)
+            }
         }
     }
 
@@ -280,7 +285,7 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
         if !vpnManager.vpnInstalled && resources.systemProtectionEnabled && vc != nil {
 
             #if !APP_EXTENSION
-            self.showConfirmVpnAlert(for: vc!) { [weak self] (confirmed) in
+            self.showConfirmVpnAlert(for: vc!) { [weak self] confirmed in
                 guard let self = self else { return }
 
                 if !confirmed {
