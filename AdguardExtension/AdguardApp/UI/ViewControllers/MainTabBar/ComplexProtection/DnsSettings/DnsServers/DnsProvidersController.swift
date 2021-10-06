@@ -45,6 +45,8 @@ final class DnsProvidersController: UITableViewController {
     private let dnsDetailsSegueConst = "dnsDetailsSegue"
     private let NewDnsServerControllerIdentifier = "NewDnsServerController"
 
+    private var dnsImplementationObserver: NotificationToken?
+
     // MARK: - Init
 
     required init?(coder: NSCoder) {
@@ -59,6 +61,10 @@ final class DnsProvidersController: UITableViewController {
         setupTableView()
         setupBackButton()
         updateTheme()
+
+        dnsImplementationObserver = NotificationCenter.default.observe(name: .dnsImplementationChanged, object: nil, queue: .main) { [weak self] _ in
+            self?.tableView.reloadData()
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -76,14 +82,13 @@ final class DnsProvidersController: UITableViewController {
         tableView.layoutTableHeaderView()
     }
 
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == dnsDetailsSegueConst,
               let controller = segue.destination as? DnsProviderDetailsController,
-              let provider = providerToShow
+              let providerId = providerToShow?.providerId
         else { return }
 
-        controller.provider = provider
+        controller.providerId = providerId
         controller.delegate = self
     }
 
