@@ -100,10 +100,10 @@ extension DnsRequestProcessedEvent {
             return .blocklistedByDnsFilter
         }
         else if event.status == "REFUSED" {
-            return .blocklistedByDnsFilter
+            return .blocklistedByDnsServer
         }
         else if isLocalHost(dnsAnswer: event.answer, type: event.type) {
-            return .blocklistedByDnsFilter
+            return .blocklistedByDnsServer
         }
         else if isEncrypted {
             return .encrypted
@@ -124,6 +124,7 @@ extension DnsRequestProcessedEvent {
         case blocklistedByDnsFilter = 3
         case allowlistedByUserFilter = 4
         case allowlistedByDnsFilter = 5
+        case blocklistedByDnsServer = 6
     }
 }
 

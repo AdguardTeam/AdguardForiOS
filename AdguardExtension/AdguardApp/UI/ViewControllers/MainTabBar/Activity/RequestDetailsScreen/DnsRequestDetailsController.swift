@@ -294,7 +294,7 @@ class DnsRequestDetailsController: UITableViewController {
     private func getStatusCellModel() -> LogCellModel? {
         guard let record = logRecord else { return nil }
 
-        let status = record.event.processedStatus.title
+        let status = record.getStatusTitle()
         let stCopied = status
         let color = record.event.processedStatus.textColor
         let statusFontWeight = UIFont.Weight.bold

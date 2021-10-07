@@ -88,7 +88,7 @@ class ActivityTableViewCell: UITableViewCell {
             type = .normal
         case .allowlistedByDnsFilter, .allowlistedByUserFilter:
             type = .whitelisted
-        case .blocklistedByDnsFilter, .blocklistedByUserFilter:
+        case .blocklistedByDnsFilter, .blocklistedByUserFilter, .blocklistedByDnsServer:
             type = .blocked
         }
         setupRecordCell(type: type)

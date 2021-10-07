@@ -109,6 +109,12 @@ public protocol DnsProtectionUserRulesManagerProtocol {
      - Returns: check result
      */
     func checkRuleExists(_ rule: String, for type: DnsUserRuleType)->Bool
+
+    /** removes all rules that matches given domain
+     - Parameter domain: domain
+     - Parameter type: User rule type (blocklist / allowlist)
+     */
+    func removeAllRulesMatchesDomain(_ domain: String, type: DnsUserRuleType)
 }
 
 extension DnsProtection {
@@ -195,10 +201,42 @@ extension DnsProtection {
         }
     }
 
+    public func removeAllRulesMatchesDomain(_ domain: String, type: DnsUserRuleType) {
+        workingQueue.sync {
+            let manager = getManager(for: type)
+            let rules = rulesForDomain(domain, type: type)
+            rules.forEach {
+                try? manager.removeRule(withText: $0)
+            }
+        }
+    }
+
     private func getManager(for type: DnsUserRuleType) -> UserRulesManagerProtocol {
         switch type {
         case .blocklist: return dnsUserRulesManagerProvider.blocklistRulesManager
         case .allowlist: return dnsUserRulesManagerProvider.allowlistRulesManager
         }
+    }
+
+    private func rulesForDomain(_ domain: String, type: DnsUserRuleType)->[String] {
+        let domains = allDomainsFromDomain(domain)
+        switch type {
+        case .blocklist:
+            return blockRulesForDomains(domains)
+        case .allowlist:
+            return allowRulesForDomains(domains)
+        }
+    }
+
+    private func allDomainsFromDomain(_ domain: String)->[String] {
+        return []
+    }
+
+    private func blockRulesForDomains(_ domains: [String])->[String]{
+        return []
+    }
+
+    private func allowRulesForDomains(_ domains: [String])->[String] {
+        return []
     }
 }

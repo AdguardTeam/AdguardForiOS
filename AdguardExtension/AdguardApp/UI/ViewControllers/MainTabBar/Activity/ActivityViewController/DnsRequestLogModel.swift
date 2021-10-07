@@ -30,7 +30,7 @@ extension DnsRequestProcessedEvent.ProcessedStatus {
             return String.localizedString("dns_request_status_encrypted")
         case .allowlistedByUserFilter, .allowlistedByDnsFilter:
             return String.localizedString("dns_request_status_allowlisted")
-        case .blocklistedByUserFilter, .blocklistedByDnsFilter:
+        case .blocklistedByUserFilter, .blocklistedByDnsFilter, .blocklistedByDnsServer:
             return String.localizedString("dns_request_status_blocked")
         }
     }
@@ -47,7 +47,7 @@ extension DnsRequestProcessedEvent.ProcessedStatus {
             return allowedColor
         case .allowlistedByUserFilter, .allowlistedByDnsFilter:
             return allowedColor
-        case .blocklistedByUserFilter, .blocklistedByDnsFilter:
+        case .blocklistedByUserFilter, .blocklistedByDnsFilter, .blocklistedByDnsServer:
             return blockedColor
         }
     }
@@ -74,16 +74,71 @@ extension DnsLogRecord
 {
     func getButtons() -> [DnsLogButtonType] {
         switch (event.processedStatus, userFilterStatus) {
-        case (.blocklistedByUserFilter, _), (_, .blocklisted):
-            return [.removeRuleFromUserFilter]
-        case (.allowlistedByUserFilter, _), (_, .allowlisted):
-            return [.removeDomainFromWhitelist]
-        case (.blocklistedByDnsFilter, _):
-            return [.addDomainToAllowList]
-        case (.allowlistedByDnsFilter, _):
+        case (.processed, .none), (.encrypted, .none):
             return [.addRuleToUserFlter]
+        case (.processed, .allowlisted), (.encrypted, .allowlisted):
+            return [.removeDomainFromWhitelist]
+        case (.processed, .blocklisted), (.encrypted, .blocklisted):
+            return [.removeRuleFromUserFilter]
+        case (.blocklistedByDnsFilter, .none), (.blocklistedByDnsFilter, .blocklisted):
+            return [.addDomainToAllowList]
+        case (.blocklistedByDnsFilter, .allowlisted):
+            return [.removeDomainFromWhitelist]
+        case (.blocklistedByDnsServer, _):
+            return []
+        case (.allowlistedByUserFilter, .none):
+            return [.addRuleToUserFlter, .addDomainToAllowList]
+        case (.allowlistedByUserFilter, .allowlisted):
+            return [.removeDomainFromWhitelist]
+        case (.allowlistedByUserFilter, .blocklisted):
+            return [.removeRuleFromUserFilter]
+        case (.allowlistedByDnsFilter, .none):
+            return [.addRuleToUserFlter]
+        case (.allowlistedByDnsFilter, .allowlisted):
+            return [.removeDomainFromWhitelist]
+        case (.allowlistedByDnsFilter, .blocklisted):
+            return [.removeRuleFromUserFilter]
+        case (.blocklistedByUserFilter, .none):
+            return [.addRuleToUserFlter, .addDomainToAllowList]
+        case (.blocklistedByUserFilter, .allowlisted):
+            return [.removeDomainFromWhitelist]
+        case (.blocklistedByUserFilter, .blocklisted):
+            return [.removeRuleFromUserFilter]
+        }
+    }
+
+    /// returnes status title. For example - "Processed(Added to allowlist)"
+    func getStatusTitle()->String {
+        let eventStatusTitle = event.processedStatus.title
+
+        var additionalTitleKey: String? = nil
+        switch (event.processedStatus, userFilterStatus) {
+        case (.processed, .allowlisted), (.encrypted, .allowlisted):
+            additionalTitleKey = "dns_request_user_status_added_to_whitelist"
+        case (.processed, .blocklisted), (.encrypted, .blocklisted):
+            additionalTitleKey = "dns_request_user_status_added_to_blacklist"
+        case (.blocklistedByDnsFilter, .allowlisted):
+            additionalTitleKey = "dns_request_user_status_added_to_whitelist"
+        case (.allowlistedByUserFilter, .none):
+            additionalTitleKey = "dns_request_user_status_removed_from_whitelist"
+        case (.allowlistedByUserFilter, .blocklisted):
+            additionalTitleKey = "dns_request_user_status_added_to_blacklist"
+        case (.allowlistedByDnsFilter, .blocklisted):
+            additionalTitleKey = "dns_request_user_status_added_to_blacklist"
+        case (.blocklistedByUserFilter, .none):
+            additionalTitleKey = "dns_request_user_status_removed_from_blacklist"
+        case (.blocklistedByUserFilter, .allowlisted):
+            additionalTitleKey = "dns_request_user_status_added_to_whitelist"
         default:
-            return [.addDomainToAllowList, .addRuleToUserFlter]
+            break
+        }
+
+        if  let key = additionalTitleKey {
+            let additionalTitle = String.localizedString(key)
+            return "\(eventStatusTitle) (\(additionalTitle))"
+        }
+        else {
+            return eventStatusTitle
         }
     }
 
