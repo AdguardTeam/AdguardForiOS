@@ -810,11 +810,10 @@ final class FiltersService: FiltersServiceProtocol {
 
     /* Return true if current language contains in array of languages */
     private func containsLanguage(currentLanguage: String, inLanguages languages: [String]) -> Bool {
-        return languages.reduce(false) { partialResult, language in
+        return languages.contains {
             let lowercasedCurrentLanguage = currentLanguage.lowercased()
-            let language = language.lowercased()
-            let isContains = lowercasedCurrentLanguage.contains(language)
-            return partialResult || isContains
+            let language = $0.lowercased()
+            return lowercasedCurrentLanguage.contains(language)
         }
     }
 }
