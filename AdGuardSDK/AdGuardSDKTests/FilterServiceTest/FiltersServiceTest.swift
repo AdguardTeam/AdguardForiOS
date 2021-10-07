@@ -1,6 +1,14 @@
 import XCTest
 
-class FitlerServiceTest: XCTestCase {
+class FiltersServiceTest: XCTestCase {
+
+    let recommendedId = ExtendedFiltersMeta.Tag.TagType.recommended.id
+    let platformId = ExtendedFiltersMeta.Tag.TagType.platform.id
+    let adsGroupId = SafariGroup.GroupType.ads.id
+    let languageSpecificGroupId = SafariGroup.GroupType.languageSpecific.id
+    let customGroupId = SafariGroup.GroupType.custom.id
+    let privacyGroupId = SafariGroup.GroupType.privacy.id
+    let securityGroupId = SafariGroup.GroupType.security.id
 
     lazy var mockFiltersMeta: ExtendedFiltersMeta = {
         let groups = metaStorage.groupsTableMock.map { group in
@@ -895,5 +903,378 @@ class FitlerServiceTest: XCTestCase {
 
         XCTAssertEqual(metaStorage.resetCalledCount, 1)
         XCTAssertEqual(filterFileStorage.resetCalledCount, 1)
+    }
+
+    //MARK: - Testing enabledPredefinedGroupsAndFilters() method
+
+    func testEnabledPredefinedGroupsAndFiltersWithSuccess() {
+        let privacyFilters = metaStorage.filtersTableMock.filter { $0.groupId == privacyGroupId }
+        let tags: [FilterTagsTable] = privacyFilters.enumerated().map { filter in
+            let type = filter.offset == privacyFilters.count - 1 ? recommendedId : platformId
+            return FilterTagsTable(filterId: filter.element.filterId, tagId: 1, type: type, name: "tag_name")
+        }
+
+        try! initPredefined(currentLanguage: "en", langsForFilter: [], tags: tags)
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 4)
+        XCTAssertEqual(metaStorage.setFilterCalledCount, 1)
+        XCTAssertEqual(metaStorage.setGroupResult.count, 4)
+
+        filterService.groups.forEach {
+            if $0.groupType == .custom || $0.groupType == .privacy {
+                XCTAssert($0.isEnabled)
+            } else {
+                XCTAssertFalse($0.isEnabled)
+            }
+        }
+
+        XCTAssertEqual(metaStorage.setFilterResult.count, 1)
+        let filter = filterService.groups.flatMap { group in
+            return group.filters
+        }.filter { $0.tags.contains(where: { $0.tagType == .recommended} )}
+
+        XCTAssertEqual(filter.count, 1)
+        XCTAssertEqual(filter.first!.isEnabled, true)
+    }
+
+    func testEnabledPredefinedGroupsAndFiltersWitAllPredefinedFilters() {
+        let predefinedGroups: [SafariGroup.GroupType] = [.ads, .privacy, .custom, .languageSpecific]
+
+        let privacyFilters = metaStorage.filtersTableMock.filter { $0.groupId == privacyGroupId }
+        let adsFilters = metaStorage.filtersTableMock.filter { $0.groupId == adsGroupId}
+        let languageSpecificFilters = metaStorage.filtersTableMock.filter { $0.groupId == languageSpecificGroupId }
+
+        let privacyTags: [FilterTagsTable] = privacyFilters.enumerated().map { filter in
+            let type = filter.offset == privacyFilters.count - 1 ? recommendedId : platformId
+            return FilterTagsTable(filterId: filter.element.filterId, tagId: 1, type: type, name: "tag_name")
+        }
+
+        let adsTags: [FilterTagsTable] = adsFilters.enumerated().map { filter in
+            let type: Int
+            if filter.offset == adsFilters.count - 1 || filter.offset == adsFilters.count - 2 {
+                type = recommendedId
+            } else {
+                type = platformId
+            }
+            return FilterTagsTable(filterId: filter.element.filterId, tagId: 1, type: type, name: "tag_name")
+        }
+
+        let languageSpecificTags: [FilterTagsTable] = languageSpecificFilters.enumerated().map { filter in
+            let type = filter.offset == languageSpecificFilters.count - 1 ? recommendedId : platformId
+            return FilterTagsTable(filterId: filter.element.filterId, tagId: 1, type: type, name: "tag_name")
+        }
+
+        let tags = privacyTags + adsTags + languageSpecificTags
+
+        try! initPredefined(currentLanguage: "en", langsForFilter: [], tags: tags)
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 4)
+        XCTAssertEqual(metaStorage.setFilterCalledCount, 4)
+        XCTAssertEqual(metaStorage.setGroupResult.count, 4)
+
+        filterService.groups.forEach {
+            if predefinedGroups.contains($0.groupType) {
+                XCTAssert($0.isEnabled)
+            } else {
+                XCTAssertFalse($0.isEnabled)
+            }
+        }
+
+        XCTAssertEqual(metaStorage.setFilterResult.count, 4)
+        let filters = filterService.groups.flatMap { group in
+            return group.filters
+        }.filter { $0.tags.contains(where: { $0.tagType == .recommended}) }
+
+        XCTAssertEqual(filters.count, 4)
+        filters.forEach {
+            XCTAssert($0.isEnabled)
+        }
+
+    }
+
+    func testEnabledPredefinedGroupsAndFiltersWithEmptyTagsForPredefinedFilters() {
+
+        let securityFilters = metaStorage.filtersTableMock.filter { $0.groupId == securityGroupId }
+        let tags: [FilterTagsTable] = securityFilters.enumerated().map { filter in
+            return FilterTagsTable(filterId: filter.element.filterId, tagId: 1, type: recommendedId, name: "tag_name")
+        }
+
+        try! initPredefined(currentLanguage: "en", langsForFilter: [], tags: tags)
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 4)
+        XCTAssertEqual(metaStorage.setFilterCalledCount, 0)
+        XCTAssertEqual(metaStorage.setGroupResult.count, 4)
+
+        filterService.groups.forEach {
+            if $0.groupType == .custom {
+                XCTAssert($0.isEnabled)
+            } else {
+                XCTAssertFalse($0.isEnabled)
+            }
+        }
+
+        XCTAssertEqual(metaStorage.setFilterResult.count, 0)
+        let filters = filterService.groups.flatMap { group in
+            return group.filters
+        }.filter { $0.tags.contains(where: { $0.tagType == .recommended}) }
+
+        XCTAssertEqual(filters.count, 3)
+        filters.forEach {
+            XCTAssertFalse($0.isEnabled)
+        }
+    }
+
+    func testEnabledPredefinedGroupsAndFiltersWithEmptyTags() {
+
+        try! initPredefined(currentLanguage: "en", langsForFilter: [], tags: [])
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 4)
+        XCTAssertEqual(metaStorage.setFilterCalledCount, 0)
+        XCTAssertEqual(metaStorage.setGroupResult.count, 4)
+
+        filterService.groups.forEach {
+            if $0.groupType == .custom {
+                XCTAssert($0.isEnabled)
+            } else {
+                XCTAssertFalse($0.isEnabled)
+            }
+        }
+
+        XCTAssertEqual(metaStorage.setFilterResult.count, 0)
+        let filters = filterService.groups.flatMap { group in
+            return group.filters
+        }.filter { $0.tags.contains(where: { $0.tagType == .recommended}) }
+
+        XCTAssertEqual(filters.count, 0)
+    }
+
+    func testEnabledPredefinedGroupsAndFiltersWithBadCurrentLanguage() {
+
+        let privacyFilters = metaStorage.filtersTableMock.filter { $0.groupId == privacyGroupId }
+        let tags: [FilterTagsTable] = privacyFilters.enumerated().map { filter in
+            let type = filter.offset == privacyFilters.count - 1 ? recommendedId : platformId
+            return FilterTagsTable(filterId: filter.element.filterId, tagId: 1, type: type, name: "tag_name")
+        }
+
+        try! initPredefined(currentLanguage: "foo", langsForFilter: [], tags: tags)
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 4)
+        XCTAssertEqual(metaStorage.setFilterCalledCount, 1)
+        XCTAssertEqual(metaStorage.setGroupResult.count, 4)
+
+        filterService.groups.forEach {
+            if $0.groupType == .custom || $0.groupType == .privacy {
+                XCTAssert($0.isEnabled)
+            } else {
+                XCTAssertFalse($0.isEnabled)
+            }
+        }
+
+        XCTAssertEqual(metaStorage.setFilterResult.count, 1)
+        let filters = filterService.groups.flatMap { group in
+            return group.filters
+        }.filter { $0.tags.contains(where: { $0.tagType == .recommended}) }
+
+        XCTAssertEqual(filters.count, 1)
+        XCTAssert(filters.first!.isEnabled)
+    }
+
+    func testEnabledPredefinedGroupsAndFiltersWithBadCurrentLanguageAndNotEmptyFilterLanguages() {
+
+        let privacyFilters = metaStorage.filtersTableMock.filter { $0.groupId == privacyGroupId }
+        let tags: [FilterTagsTable] = privacyFilters.enumerated().map { filter in
+            let type = filter.offset == privacyFilters.count - 1 ? recommendedId : platformId
+            return FilterTagsTable(filterId: filter.element.filterId, tagId: 1, type: type, name: "tag_name")
+        }
+
+        try! initPredefined(currentLanguage: "foo", langsForFilter: ["en", "fr"], tags: tags)
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 4)
+        XCTAssertEqual(metaStorage.setFilterCalledCount, 0)
+        XCTAssertEqual(metaStorage.setGroupResult.count, 4)
+
+        filterService.groups.forEach {
+            if $0.groupType == .custom {
+                XCTAssert($0.isEnabled)
+            } else {
+                XCTAssertFalse($0.isEnabled)
+            }
+        }
+
+        XCTAssertEqual(metaStorage.setFilterResult.count, 0)
+        let filters = filterService.groups.flatMap { group in
+            return group.filters
+        }.filter { $0.tags.contains(where: { $0.tagType == .recommended}) }
+
+        XCTAssertEqual(filters.count, 1)
+        XCTAssertFalse(filters.first!.isEnabled)
+    }
+
+    func testEnabledPredefinedGroupsAndFiltersWithCapitalizedLanguages() {
+
+        let privacyFilters = metaStorage.filtersTableMock.filter { $0.groupId == privacyGroupId }
+        let tags: [FilterTagsTable] = privacyFilters.enumerated().map { filter in
+            let type = filter.offset == privacyFilters.count - 1 ? recommendedId : platformId
+            return FilterTagsTable(filterId: filter.element.filterId, tagId: 1, type: type, name: "tag_name")
+        }
+
+        try! initPredefined(currentLanguage: "en-US", langsForFilter: ["EN", "FR"], tags: tags)
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 4)
+        XCTAssertEqual(metaStorage.setFilterCalledCount, 1)
+        XCTAssertEqual(metaStorage.setGroupResult.count, 4)
+
+        filterService.groups.forEach {
+            if $0.groupType == .custom || $0.groupType == .privacy {
+                XCTAssert($0.isEnabled)
+            } else {
+                XCTAssertFalse($0.isEnabled)
+            }
+        }
+
+        XCTAssertEqual(metaStorage.setFilterResult.count, 1)
+        let filters = filterService.groups.flatMap { group in
+            return group.filters
+        }.filter { $0.tags.contains(where: { $0.tagType == .recommended}) }
+
+        XCTAssertEqual(filters.count, 1)
+        XCTAssert(filters.first!.isEnabled)
+    }
+
+    func testEnabledPredefinedGroupsAndFiltersWithEmptyGroups() {
+
+        let privacyFilters = metaStorage.filtersTableMock.filter { $0.groupId == privacyGroupId }
+        let tags: [FilterTagsTable] = privacyFilters.enumerated().map { filter in
+            let type = filter.offset == privacyFilters.count - 1 ? recommendedId : platformId
+            return FilterTagsTable(filterId: filter.element.filterId, tagId: 1, type: type, name: "tag_name")
+        }
+
+        metaStorage.getAllLocalizedGroupsResult = .success([])
+        try! initPredefined(currentLanguage: "en", langsForFilter: [], tags: tags)
+
+        XCTAssertEqual(metaStorage.setGroupResult.count, 0)
+        XCTAssertEqual(metaStorage.setFilterResult.count, 0)
+        XCTAssertEqual(filterService.groups.count, 0)
+    }
+
+    func testEnabledPredefinedGroupsAndFiltersWithEmptyFilters() {
+        let privacyFilters = metaStorage.filtersTableMock.filter { $0.groupId == privacyGroupId }
+        let tags: [FilterTagsTable] = privacyFilters.enumerated().map { filter in
+            let type = filter.offset == privacyFilters.count - 1 ? recommendedId : platformId
+            return FilterTagsTable(filterId: filter.element.filterId, tagId: 1, type: type, name: "tag_name")
+        }
+
+        metaStorage.getAllLocalizaedFiltersResult = .success([])
+        try! initPredefined(currentLanguage: "en", langsForFilter: [], tags: tags)
+
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 4)
+        XCTAssertEqual(metaStorage.setFilterCalledCount, 0)
+
+        XCTAssertEqual(metaStorage.setGroupResult.count, 4)
+        filterService.groups.forEach {
+            if $0.groupType == .custom {
+                XCTAssert($0.isEnabled)
+            } else {
+                XCTAssertFalse($0.isEnabled)
+            }
+        }
+
+        XCTAssertEqual(metaStorage.setFilterResult.count, 0)
+        let filters = filterService.groups.flatMap { group in
+            return group.filters
+        }.filter { $0.tags.contains(where: { $0.tagType == .recommended}) }
+
+        XCTAssertEqual(filters.count, 0)
+    }
+
+    func testEnabledPredefinedGroupsAndFiltersWithSetGroupsError() {
+        let privacyFilters = metaStorage.filtersTableMock.filter { $0.groupId == privacyGroupId }
+        let tags: [FilterTagsTable] = privacyFilters.enumerated().map { filter in
+            let type = filter.offset == privacyFilters.count - 1 ? recommendedId : platformId
+            return FilterTagsTable(filterId: filter.element.filterId, tagId: 1, type: type, name: "tag_name")
+        }
+
+        metaStorage.setGroupResultError = MetaStorageMockError.error
+        XCTAssertThrowsError(try initPredefined(currentLanguage: "en", langsForFilter: [], tags: tags))
+
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 1)
+        XCTAssertEqual(metaStorage.setFilterCalledCount, 0)
+
+        XCTAssertEqual(metaStorage.setGroupResult.count, 0)
+        XCTAssertEqual(metaStorage.setFilterResult.count, 0)
+
+        filterService.groups.forEach {
+            XCTAssertFalse($0.isEnabled)
+            $0.filters.forEach { filter in XCTAssertFalse(filter.isEnabled)}
+        }
+    }
+
+    func testEnabledPredefinedGroupsAndFiltersWithSetFilterError() {
+        let privacyFilters = metaStorage.filtersTableMock.filter { $0.groupId == privacyGroupId }
+        let tags: [FilterTagsTable] = privacyFilters.enumerated().map { filter in
+            let type = filter.offset == privacyFilters.count - 1 ? recommendedId : platformId
+            return FilterTagsTable(filterId: filter.element.filterId, tagId: 1, type: type, name: "tag_name")
+        }
+
+        metaStorage.setFilterResultError = MetaStorageMockError.error
+        XCTAssertThrowsError(try initPredefined(currentLanguage: "en", langsForFilter: [], tags: tags))
+
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 1)
+        XCTAssertEqual(metaStorage.setFilterCalledCount, 1)
+
+        XCTAssertEqual(metaStorage.setGroupResult.count, 1)
+        XCTAssertEqual(metaStorage.setFilterResult.count, 0)
+
+        filterService.groups.forEach {
+            XCTAssertFalse($0.isEnabled)
+            $0.filters.forEach { filter in XCTAssertFalse(filter.isEnabled)}
+        }
+    }
+
+    func testEnabledPredefinedGroupsAndFiltersWithMetaStorageTagsError() {
+        metaStorage.getTagsForFilterResult = .error(MetaStorageMockError.error)
+        checkWithError()
+    }
+
+    func testEnabledPredefinedGroupsAndFiltersWithMetaStorageLangsFilterError() {
+        metaStorage.getLangsForFilterResult = .error(MetaStorageMockError.error)
+        checkWithError()
+    }
+
+    func testEnabledPredefinedGroupsAndFiltersWithMetaStorageLocalizedFiltersError() {
+        metaStorage.getAllLocalizaedFiltersResult = .error(MetaStorageMockError.error)
+        checkWithError()
+    }
+
+    func testEnabledPredefinedGroupsAndFiltersWithMetaStorageLocalizedGroupsError() {
+        metaStorage.getAllLocalizedGroupsResult = .error(MetaStorageMockError.error)
+        checkWithError()
+    }
+
+    private func checkWithError() {
+        XCTAssertThrowsError( try filterService.enablePredefinedGroupsAndFilters())
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 4)
+        XCTAssertEqual(metaStorage.setFilterCalledCount, 0)
+        XCTAssertEqual(metaStorage.setGroupResult.count, 4)
+
+        filterService.groups.forEach {
+            XCTAssertFalse($0.isEnabled)
+            $0.filters.forEach { filter in XCTAssertFalse(filter.isEnabled)}
+        }
+
+        XCTAssertEqual(metaStorage.setFilterResult.count, 0)
+    }
+
+
+    private func initPredefined(currentLanguage: String, langsForFilter: [String], tags: [FilterTagsTable]) throws {
+        configuration.currentLanguage = currentLanguage
+        metaStorage.getLangsForFilterResult = .success(langsForFilter)
+        metaStorage.getTagsForFilterResult = .success(tags)
+        reinitFilterService()
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 0)
+        XCTAssertEqual(metaStorage.setFilterCalledCount, 0)
+        try filterService.enablePredefinedGroupsAndFilters()
+    }
+
+    private func reinitFilterService() {
+        filterService = try! FiltersService(configuration: configuration,
+                                           filterFilesStorage: filterFileStorage,
+                                           metaStorage: metaStorage,
+                                           userDefaultsStorage: userDefaultsStorage,
+                                           metaParser: metaParser,
+                                           apiMethods: apiMethods)
     }
 }

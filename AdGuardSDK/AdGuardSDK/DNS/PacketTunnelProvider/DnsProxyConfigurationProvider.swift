@@ -126,8 +126,8 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
         dnsBlocklistFilterId = blocklistFilter.filterId
 
         let allowlistFilter = dnsLibsRulesProvider.allowlistFilter
-        proxyFilters.append(allowlistFilter)
         dnsAllowlistFilterId = allowlistFilter.filterId
+        proxyFilters.append(allowlistFilter)
 
         let customBlockingIps = getCustomBlockingIps()
         return DnsProxyConfiguration(

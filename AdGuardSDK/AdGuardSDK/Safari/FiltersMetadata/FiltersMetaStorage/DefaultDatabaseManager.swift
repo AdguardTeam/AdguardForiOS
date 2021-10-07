@@ -92,7 +92,7 @@ final class DefaultDatabaseManager: DefaultDatabaseManagerProtocol {
 
     // MARK: - Public methods
 
-    // Unarchives default database file and returns an URL of default.db file
+    // Unarchives default database file
     func updateDefaultDb() throws {
         Logger.logInfo("(DefaultDatabaseManager) - updateDefaultDb; Unarchiving default.db")
         let defaultDbArchiveUrl = dbContainerUrl.appendingPathComponent(defaultDbArchiveFile)

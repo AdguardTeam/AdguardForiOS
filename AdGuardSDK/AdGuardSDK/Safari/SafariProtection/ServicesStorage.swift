@@ -69,8 +69,7 @@ final class ServicesStorage: ServicesStorageProtocol {
             filterFilesStorage: filterFilesStorage,
             metaStorage: metaStorage,
             userDefaultsStorage: self.userDefaults,
-            apiMethods: apiMethods
-        )
+            apiMethods: apiMethods)
 
         let filtersConverter = FiltersConverter(configuration: configuration)
         self.converter = FiltersConverterService(
