@@ -804,8 +804,8 @@ final class FiltersService: FiltersServiceProtocol {
     /* Return true if filter is recommended as predefined filter */
     private func isRecommended(filter: SafariGroup.Filter, currentLanguage: String) -> Bool {
         let isRecommended = filter.tags.contains(where: { $0.tagType == .recommended })
-        let isContainsLanguage = containsLanguage(currentLanguage: currentLanguage, inLanguages: filter.languages)
-        return isRecommended && (filter.languages.isEmpty || isContainsLanguage)
+        let containsLanguage = containsLanguage(currentLanguage: currentLanguage, inLanguages: filter.languages)
+        return isRecommended && (filter.languages.isEmpty || containsLanguage)
     }
 
     /* Return true if current language contains in array of languages */

@@ -4,6 +4,8 @@ class FiltersServiceTest: XCTestCase {
 
     let recommendedId = ExtendedFiltersMeta.Tag.TagType.recommended.id
     let platformId = ExtendedFiltersMeta.Tag.TagType.platform.id
+    let adsGroupId = SafariGroup.GroupType.ads.id
+    let languageSpecificGroupId = SafariGroup.GroupType.languageSpecific.id
     let customGroupId = SafariGroup.GroupType.custom.id
     let privacyGroupId = SafariGroup.GroupType.privacy.id
     let securityGroupId = SafariGroup.GroupType.security.id
@@ -932,6 +934,60 @@ class FiltersServiceTest: XCTestCase {
 
         XCTAssertEqual(filter.count, 1)
         XCTAssertEqual(filter.first!.isEnabled, true)
+    }
+
+    func testEnabledPredefinedGroupsAndFiltersWitAllPredefinedFilters() {
+        let predefinedGroups: [SafariGroup.GroupType] = [.ads, .privacy, .custom, .languageSpecific]
+
+        let privacyFilters = metaStorage.filtersTableMock.filter { $0.groupId == privacyGroupId }
+        let adsFilters = metaStorage.filtersTableMock.filter { $0.groupId == adsGroupId}
+        let languageSpecificFilters = metaStorage.filtersTableMock.filter { $0.groupId == languageSpecificGroupId }
+
+        let privacyTags: [FilterTagsTable] = privacyFilters.enumerated().map { filter in
+            let type = filter.offset == privacyFilters.count - 1 ? recommendedId : platformId
+            return FilterTagsTable(filterId: filter.element.filterId, tagId: 1, type: type, name: "tag_name")
+        }
+
+        let adsTags: [FilterTagsTable] = adsFilters.enumerated().map { filter in
+            let type: Int
+            if filter.offset == adsFilters.count - 1 || filter.offset == adsFilters.count - 2 {
+                type = recommendedId
+            } else {
+                type = platformId
+            }
+            return FilterTagsTable(filterId: filter.element.filterId, tagId: 1, type: type, name: "tag_name")
+        }
+
+        let languageSpecificTags: [FilterTagsTable] = languageSpecificFilters.enumerated().map { filter in
+            let type = filter.offset == languageSpecificFilters.count - 1 ? recommendedId : platformId
+            return FilterTagsTable(filterId: filter.element.filterId, tagId: 1, type: type, name: "tag_name")
+        }
+
+        let tags = privacyTags + adsTags + languageSpecificTags
+
+        try! initPredefined(currentLanguage: "en", langsForFilter: [], tags: tags)
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 4)
+        XCTAssertEqual(metaStorage.setFilterCalledCount, 4)
+        XCTAssertEqual(metaStorage.setGroupResult.count, 4)
+
+        filterService.groups.forEach {
+            if predefinedGroups.contains($0.groupType) {
+                XCTAssert($0.isEnabled)
+            } else {
+                XCTAssertFalse($0.isEnabled)
+            }
+        }
+
+        XCTAssertEqual(metaStorage.setFilterResult.count, 4)
+        let filters = filterService.groups.flatMap { group in
+            return group.filters
+        }.filter { $0.tags.contains(where: { $0.tagType == .recommended}) }
+
+        XCTAssertEqual(filters.count, 4)
+        filters.forEach {
+            XCTAssert($0.isEnabled)
+        }
+
     }
 
     func testEnabledPredefinedGroupsAndFiltersWithEmptyTagsForPredefinedFilters() {
