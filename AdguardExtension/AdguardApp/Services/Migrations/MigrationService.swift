@@ -32,6 +32,7 @@ final class MigrationService: MigrationServiceProtocol {
     private let networking: ACNNetworkingProtocol
     private let configurationService: ConfigurationServiceProtocol
     private let productInfo: ADProductInfoProtocol
+    private let safariProtection: SafariProtectionProtocol
     
     private let migrationQueue = DispatchQueue(label: "MigrationService queue", qos: .userInitiated)
 
@@ -40,13 +41,15 @@ final class MigrationService: MigrationServiceProtocol {
         resources: AESharedResourcesProtocol,
         networking: ACNNetworkingProtocol,
         configurationService: ConfigurationServiceProtocol,
-        productInfo: ADProductInfoProtocol
+        productInfo: ADProductInfoProtocol,
+        safariProtection: SafariProtectionProtocol
     ) {
         self.vpnManager = vpnManager
         self.resources = resources
         self.networking = networking
         self.configurationService = configurationService
         self.productInfo = productInfo
+        self.safariProtection = safariProtection
 
         resources.sharedDefaults().set(self.currentSchemaVersion, forKey: AEDefaultsProductSchemaVersion)
     }
@@ -208,6 +211,36 @@ final class MigrationService: MigrationServiceProtocol {
 //            dnsProvidersMigratable.reinitializeDnsProvidersObjectsAndSetIdsAndFlags(resources: resources)
 //            nativeProviders.reinitializeProviders()
 //        }
+
+        /**
+         Migration:
+            In app version 4.3 (800+) we've moved all Safari and DNS protection logic to our own SDK to make this logic reusable in other products
+            All data from User rules, allowlist rules, inverted allowlist rules, DNS blocklist, DNS allowlist, filters(safari/dns) data was replaced in different storages
+            So we need to migrate this data respectively
+         */
+        if lastBuildVersion < 800 {
+            do {
+                let filtersDbMigration = try SafariProtectionFiltersDatabaseMigrationHelper(
+                    oldAdguardDBFilePath: resources.sharedResuorcesURL().appendingPathComponent("adguard.db").path,
+                    oldDefaultDBFilePath: resources.sharedResuorcesURL().appendingPathComponent("default.db").path
+                )
+                let allowlistRulesMigration = SafariProtectionAllowlistRulesMigrationHelper(rulesContainerDirectoryPath: resources.sharedResuorcesURL().path)
+                let customFiltersMigration = try SafariProtectionCustomFiltersMigrationHelper(
+                    newDBFilePath: SharedStorageUrls().dbFolderUrl.appendingPathComponent("adguard.db").path,
+                    filtersDirectoryUrl: SharedStorageUrls().filtersFolderUrl
+                )
+                let sdkMigrationHelper = SDKMigrationServiceHelper(
+                    safariProtection: safariProtection as! SafariProtectionMigrationsProtocol,
+                    filtersDbMigration: filtersDbMigration,
+                    allowlistRulesMigration: allowlistRulesMigration,
+                    customFiltersMigration: customFiltersMigration
+                )
+                try sdkMigrationHelper.migrate()
+                DDLogInfo("(MigrationService) - Successfully migrated old data to SDK")
+            } catch {
+                DDLogError("(MigrationService) - Failed to migrate old data to SDK; Error: \(error)")
+            }
+        }
     }
 
     // MARK: - Methods for migrations

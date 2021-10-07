@@ -402,6 +402,8 @@
 		7EE740E126F33FCA0033B673 /* AllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E810826C2A05200925F96 /* AllowlistRuleConverter.swift */; };
 		7EE740E226F33FCA0033B673 /* AllowlistRuleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E810826C2A05200925F96 /* AllowlistRuleConverter.swift */; };
 		7EE740E426F352210033B673 /* WebExtensionHelpersMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE740E326F352210033B673 /* WebExtensionHelpersMock.swift */; };
+		7EE981DD270F214400AB1EA1 /* SafariProtection+Migrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE981DC270F214400AB1EA1 /* SafariProtection+Migrations.swift */; };
+		7EE981DE270F214400AB1EA1 /* SafariProtection+Migrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE981DC270F214400AB1EA1 /* SafariProtection+Migrations.swift */; };
 		7EE9F63226D8E1DB00646D62 /* FilterFilesStorageProtocol+PredefinedFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE9F63126D8E1DB00646D62 /* FilterFilesStorageProtocol+PredefinedFilters.swift */; };
 		7EE9F63426D8E1DB00646D62 /* FilterFilesStorageProtocol+PredefinedFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE9F63126D8E1DB00646D62 /* FilterFilesStorageProtocol+PredefinedFilters.swift */; };
 		7EE9F63B26D9198B00646D62 /* FiltersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E80F526C2A05200925F96 /* FiltersService.swift */; };
@@ -697,6 +699,7 @@
 		7ED2009326EE67D6001E8422 /* DnsProxyConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProxyConfiguration.swift; sourceTree = "<group>"; };
 		7ED2009626EE808D001E8422 /* DnsProxyConfigurationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProxyConfigurationProvider.swift; sourceTree = "<group>"; };
 		7EE740E326F352210033B673 /* WebExtensionHelpersMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebExtensionHelpersMock.swift; sourceTree = "<group>"; };
+		7EE981DC270F214400AB1EA1 /* SafariProtection+Migrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SafariProtection+Migrations.swift"; sourceTree = "<group>"; };
 		7EE9F63126D8E1DB00646D62 /* FilterFilesStorageProtocol+PredefinedFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilterFilesStorageProtocol+PredefinedFilters.swift"; sourceTree = "<group>"; };
 		7EFA0F6326F2201600EBCD99 /* PacketTunnelProviderProxyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProviderProxyTest.swift; sourceTree = "<group>"; };
 		7EFA0F6626F2205500EBCD99 /* DnsProxyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProxyTest.swift; sourceTree = "<group>"; };
@@ -1215,6 +1218,7 @@
 				7E6E80FE26C2A05200925F96 /* SafariProtection+Configuration.swift */,
 				7E6E80FF26C2A05200925F96 /* SafariProtection+BackgroundFetch.swift */,
 				7E6E810126C2A05200925F96 /* SafariProtection+Filters.swift */,
+				7EE981DC270F214400AB1EA1 /* SafariProtection+Migrations.swift */,
 				7E6E810226C2A05200925F96 /* ServicesStorage.swift */,
 				24D0AF3026F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift */,
 				7E6E810326C2A05200925F96 /* SafariConfiguration.swift */,
@@ -1897,6 +1901,7 @@
 				7E6E81E026C2A05B00925F96 /* PredefinedDnsProvidersDecoder.swift in Sources */,
 				7E6E81C126C2A05B00925F96 /* DnsLibsRulesProvider.swift in Sources */,
 				7E6E801E26C299DE00925F96 /* CustomDnsProvidersStorageTest.swift in Sources */,
+				7EE981DE270F214400AB1EA1 /* SafariProtection+Migrations.swift in Sources */,
 				7E6E802326C299DE00925F96 /* ActivityStatisticsTest.swift in Sources */,
 				7E9B1DF426F229450003EB0E /* PacketTunnelProviderProxy.swift in Sources */,
 				7E6E803926C299DE00925F96 /* DnsFiltersManagerMock.swift in Sources */,
@@ -1985,6 +1990,7 @@
 				7E5A6ED926E8B6CC00B7EF6A /* FiltersConverterResult.swift in Sources */,
 				7E6E813226C2A05300925F96 /* MetaStorage+GroupLocalizations.swift in Sources */,
 				7E6E816226C2A05300925F96 /* SafariProtection+Filters.swift in Sources */,
+				7EE981DD270F214400AB1EA1 /* SafariProtection+Migrations.swift in Sources */,
 				7E6E815A26C2A05300925F96 /* SafariProtection+UserRules.swift in Sources */,
 				7E6E815826C2A05300925F96 /* SafariProtection+ContentBlockers.swift in Sources */,
 				7E6E813826C2A05300925F96 /* ProductionDatabaseManager.swift in Sources */,
