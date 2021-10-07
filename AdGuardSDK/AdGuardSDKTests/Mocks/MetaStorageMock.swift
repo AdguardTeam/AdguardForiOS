@@ -38,38 +38,7 @@ class MetaStorageMock: MetaStorageProtocol {
         }
     }
 
-    var filtersTableMock: [FiltersTable] {
-        let filtersIdsByGroup = [
-            SafariGroup.GroupType.ads.id: [1, 2, 3, 4, 5, 6],
-            SafariGroup.GroupType.privacy.id: [7, 8, 9, 10],
-            SafariGroup.GroupType.socialWidgets.id: [11, 12, 13],
-            SafariGroup.GroupType.annoyances.id: [14, 15, 16, 17],
-            SafariGroup.GroupType.security.id: [18, 19, 20],
-            SafariGroup.GroupType.other.id: [21, 22, 23, 24, 25],
-            SafariGroup.GroupType.languageSpecific.id: [26, 27, 28],
-            SafariGroup.GroupType.custom.id: [29, 30]
-        ]
-
-        return filtersIdsByGroup.flatMap { groupId, filtersIds in
-            return filtersIds.map {
-                let filterId = groupId == SafariGroup.GroupType.custom.id ? CustomFilterMeta.baseCustomFilterId + $0 : $0
-                return FiltersTable(filterId: filterId,
-                                    groupId: groupId,
-                                    isEnabled: false,
-                                    version: "1.1.1",
-                                    lastUpdateTime: Date(),
-                                    lastCheckTime: Date(),
-                                    editable: false,
-                                    displayNumber: filterId,
-                                    name: "filter_\(filterId)",
-                                    description: "description_\(filterId)",
-                                    homePage: "some.home.page_\(filterId)",
-                                    removable: false,
-                                    expires: 100,
-                                    subscriptionUrl: "some.download.page_\(filterId)")
-            }
-        }
-    }
+    var filtersTableMock: [FiltersTable] = []
 
     var nextCustomFilterId: Int {
         filtersTableMock.reduce(0) { result, filter in
@@ -83,6 +52,7 @@ class MetaStorageMock: MetaStorageProtocol {
 
     init() {
         getAllLocalizedGroupsResult = .success(groupsTableMock)
+        filtersTableMock = initFilters()
     }
 
     // MARK: - FiltersMetaStorageProtocol + Filters methods
@@ -104,11 +74,17 @@ class MetaStorageMock: MetaStorageProtocol {
 
     var setFilterCalledCount = 0
     var setFilterResultError: Error?
+    var setFilterResult: [FiltersTable] = []
     func setFilter(withId id: Int, enabled: Bool) throws {
         setFilterCalledCount += 1
         if let error = setFilterResultError {
             throw error
         }
+
+        guard let item = filtersTableMock.enumerated().first(where: { $0.element.filterId == id }) else { return }
+        let updatedFilter = getFilterTable(for: item.element, isEnabled: enabled)
+        setFilterResult.append(updatedFilter)
+        filtersTableMock[item.offset] = updatedFilter
     }
 
     var updateFilterCalledCount = 0
@@ -180,11 +156,23 @@ class MetaStorageMock: MetaStorageProtocol {
 
     var setGroupCalledCount = 0
     var setGroupResultError: Error?
+    var setGroupResult: [FilterGroupsTable] = []
     func setGroup(withId id: Int, enabled: Bool) throws {
         setGroupCalledCount += 1
         if let error = setGroupResultError {
             throw error
         }
+
+        guard let item = groupsTableMock.enumerated().first(where: { $0.element.groupId == id }) else { return }
+        let updatedGroup = FilterGroupsTable(groupId: item.element.groupId, name: item.element.name, displayNumber: item.element.displayNumber, isEnabled: enabled)
+        setGroupResult.append(updatedGroup)
+        groupsTableMock[item.offset] = updatedGroup
+
+        switch getAllLocalizedGroupsResult {
+        case .success(_): getAllLocalizedGroupsResult = .success(groupsTableMock)
+        case .error(_): break
+        }
+
     }
 
     var updateGroupCalledCount = 0
@@ -223,9 +211,13 @@ class MetaStorageMock: MetaStorageProtocol {
     }
 
     var getTagsForFilterCalledCount = 0
+    var getTagsForFilterResult:SharedAdGuardSDK.Result<[FilterTagsTable]> = .success([])
     func getTagsForFilter(withId id: Int) throws -> [FilterTagsTable] {
         getTagsForFilterCalledCount += 1
-        return []
+        switch getTagsForFilterResult {
+        case .success(let result): return result.filter { $0.filterId == id }
+        case .error(let error): throw error
+        }
     }
 
     var updateAllTagsCalledCount = 0
@@ -255,9 +247,13 @@ class MetaStorageMock: MetaStorageProtocol {
     // MARK: - FiltersMetaStorageProtocol + Langs methods
 
     var getLangsForFilterCalledCount = 0
+    var getLangsForFilterResult: SharedAdGuardSDK.Result<[String]> = .success([])
     func getLangsForFilter(withId id: Int) throws -> [String] {
         getLangsForFilterCalledCount += 1
-        return []
+        switch getLangsForFilterResult {
+        case .success(let result): return result
+        case .error(let error): throw error
+        }
     }
 
     var updateAllLangsCalledCount = 0
@@ -333,6 +329,65 @@ class MetaStorageMock: MetaStorageProtocol {
         resetCalledCount += 1
         if let error = resetError {
             throw error
+        }
+    }
+
+    var setupPredefinedMetaCalledCount = 0
+    var setupPredefinedMetaError: Error?
+    func setupPredefinedMeta(with groups: [SafariGroup], currentLanguage: String) throws {
+        setupPredefinedMetaCalledCount += 1
+        if let error = setupPredefinedMetaError {
+            throw error
+        }
+    }
+
+    private func getFilterTable(for filter: FiltersTable, isEnabled: Bool) -> FiltersTable {
+        return FiltersTable(filterId: filter.filterId,
+                            groupId: filter.groupId,
+                            isEnabled: isEnabled,
+                            version: filter.version,
+                            lastUpdateTime: filter.lastUpdateTime,
+                            lastCheckTime: filter.lastCheckTime,
+                            editable: filter.editable,
+                            displayNumber: filter.displayNumber,
+                            name: filter.name,
+                            description: filter.description,
+                            homePage: filter.homePage,
+                            removable: filter.removable,
+                            expires: filter.expires,
+                            subscriptionUrl: filter.subscriptionUrl)
+    }
+
+    private func initFilters() -> [FiltersTable] {
+        let filtersIdsByGroup = [
+            SafariGroup.GroupType.ads.id: [1, 2, 3, 4, 5, 6],
+            SafariGroup.GroupType.privacy.id: [7, 8, 9, 10],
+            SafariGroup.GroupType.socialWidgets.id: [11, 12, 13],
+            SafariGroup.GroupType.annoyances.id: [14, 15, 16, 17],
+            SafariGroup.GroupType.security.id: [18, 19, 20],
+            SafariGroup.GroupType.other.id: [21, 22, 23, 24, 25],
+            SafariGroup.GroupType.languageSpecific.id: [26, 27, 28],
+            SafariGroup.GroupType.custom.id: [29, 30]
+        ]
+
+        return filtersIdsByGroup.flatMap { groupId, filtersIds in
+            return filtersIds.map {
+                let filterId = groupId == SafariGroup.GroupType.custom.id ? CustomFilterMeta.baseCustomFilterId + $0 : $0
+                return FiltersTable(filterId: filterId,
+                                    groupId: groupId,
+                                    isEnabled: false,
+                                    version: "1.1.1",
+                                    lastUpdateTime: Date(),
+                                    lastCheckTime: Date(),
+                                    editable: false,
+                                    displayNumber: filterId,
+                                    name: "filter_\(filterId)",
+                                    description: "description_\(filterId)",
+                                    homePage: "some.home.page_\(filterId)",
+                                    removable: false,
+                                    expires: 100,
+                                    subscriptionUrl: "some.download.page_\(filterId)")
+            }
         }
     }
 }

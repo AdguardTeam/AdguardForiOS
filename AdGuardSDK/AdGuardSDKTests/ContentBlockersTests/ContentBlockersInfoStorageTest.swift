@@ -66,7 +66,14 @@ class ContentBlockersInfoStorageTest: XCTestCase {
         fillStorage()
         let info = infoStorage.getConverterResult(for: .socialWidgetsAndAnnoyances)!
         let result = getFilterConvertionResults().first(where: { $0.type == .socialWidgetsAndAnnoyances })!
-        XCTAssertEqual(result, info.result)
+        XCTAssertEqual(result.type, info.type)
+        XCTAssertEqual(result.overlimit, info.overlimit)
+        XCTAssertEqual(result.totalRules, info.totalRules)
+        XCTAssertEqual(result.totalConverted, info.totalConverted)
+        XCTAssertEqual(result.overlimit, info.overlimit)
+        XCTAssertEqual(result.errorsCount, info.errorsCount)
+        XCTAssertEqual(result.advancedBlockingConvertedCount, info.advancedBlockingConvertedCount)
+        XCTAssertEqual(result.message, info.message)
     }
 
     func testGetInfoWithNilResult() {
