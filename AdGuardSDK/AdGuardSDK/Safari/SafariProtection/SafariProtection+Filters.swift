@@ -259,6 +259,10 @@ extension SafariProtection {
     }
 
     public func enablePredefinedGroupsAndFilters() throws {
-        try workingQueue.sync { try self.filters.enablePredefinedGroupsAndFilters() }
+        try workingQueue.sync {
+            Logger.logInfo("(SafariProtection+Filters) - enablePredefinedGroupsAndFilters; Start enabling predefined groups and filters")
+            try self.filters.enablePredefinedGroupsAndFilters()
+            Logger.logInfo("(SafariProtection+Filters) - enablePredefinedGroupsAndFilters; Enabling predefined groups and filters successfully ended")
+        }
     }
 }

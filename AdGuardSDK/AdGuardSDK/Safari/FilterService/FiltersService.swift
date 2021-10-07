@@ -543,7 +543,7 @@ final class FiltersService: FiltersServiceProtocol {
         }
     }
 
-    /* Returns filters meta for sprecified group */
+    /* Returns filters meta for specified group */
     private func getFilters(forGroup group: SafariGroupProtocol) throws -> [SafariGroup.Filter] {
         let localizedFiltersMeta = try metaStorage.getLocalizedFiltersForGroup(withId: group.groupId, forLanguage: configuration.currentLanguage)
         return try localizedFiltersMeta.map { dbFilter in
@@ -805,15 +805,17 @@ final class FiltersService: FiltersServiceProtocol {
     private func isRecommended(filter: SafariGroup.Filter, currentLanguage: String) -> Bool {
         let isRecommended = filter.tags.contains(where: { $0.tagType == .recommended })
         let isContainsLanguage = contains(currentLanguage: currentLanguage, inLanguages: filter.languages)
-        return isRecommended && isContainsLanguage
+        return isRecommended && (filter.languages.isEmpty ||  isContainsLanguage)
     }
 
-    /* Return true if current language contains in array of languages or if languages array is empty */
-    private func contains(currentLanguage: String ,inLanguages languages: [String]) -> Bool {
-        let splited = currentLanguage.split(separator: "-")
-        guard splited.count == 2 else { return false }
-        let contains = languages.contains(String(splited[0])) || languages.contains(String(splited[1]))
-        return contains || languages.isEmpty
+    /* Return true if current language contains in array of languages */
+    private func contains(currentLanguage: String, inLanguages languages: [String]) -> Bool {
+        return languages.reduce(false) { partialResult, language in
+            let lowercasedCurrentLanguage = currentLanguage.lowercased()
+            let language = language.lowercased()
+            let isContains = lowercasedCurrentLanguage.contains(language)
+            return partialResult || isContains
+        }
     }
 }
 
