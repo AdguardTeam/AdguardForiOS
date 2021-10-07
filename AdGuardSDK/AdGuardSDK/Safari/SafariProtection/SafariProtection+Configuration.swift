@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import SharedAdGuardSDK
 
 /*  Application user configuration */
 public protocol SafariProtectionConfigurationProtocol {

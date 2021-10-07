@@ -17,7 +17,7 @@
 
  */
 
-@_implementationOnly import SQLite
+import SQLite
 
 public protocol DnsLogStatisticsProtocol: ResetableSyncProtocol {
     /// Saves passed `event` to DB

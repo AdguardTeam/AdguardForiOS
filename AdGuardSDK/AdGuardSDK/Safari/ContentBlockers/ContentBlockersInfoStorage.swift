@@ -17,7 +17,8 @@
  */
 
 import Foundation
-@_implementationOnly import ContentBlockerConverter
+import SharedAdGuardSDK
+import ContentBlockerConverter
 
 // MARK: - ContentBlockerType
 

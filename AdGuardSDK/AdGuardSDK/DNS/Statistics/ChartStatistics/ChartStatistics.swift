@@ -16,7 +16,7 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-@_implementationOnly import SQLite
+import SQLite
 
 public protocol ChartStatisticsProtocol: ResetableSyncProtocol {
     /**

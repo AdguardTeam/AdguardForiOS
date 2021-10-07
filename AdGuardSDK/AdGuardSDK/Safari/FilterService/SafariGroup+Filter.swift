@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import SharedAdGuardSDK
 
 /**
  All filters that we store have their own meta and rules

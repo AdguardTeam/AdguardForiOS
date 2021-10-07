@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import SharedAdGuardSDK
 import UIKit.UIBackgroundConfiguration
 
 /// This object contains all information about background fetch update result

@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import SharedAdGuardSDK
 
 public protocol ContentBlockerServiceProtocol {
     /* Returns every content blocker reloading state */

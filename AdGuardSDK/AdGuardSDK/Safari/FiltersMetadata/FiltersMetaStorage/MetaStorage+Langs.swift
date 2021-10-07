@@ -17,7 +17,8 @@
 */
 
 import Foundation
-@_implementationOnly import SQLite
+import SharedAdGuardSDK
+import SQLite
 
 /* FilterLangsTablel; filter_langs table */
 fileprivate struct FilterLangsTable {

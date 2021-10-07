@@ -20,6 +20,7 @@ import NetworkExtension
 import DnsAdGuardSDK
 import SafariAdGuardSDK
 import Sentry
+import AGDnsProxy
 
 /**
  This object gives access to a virtual network interface

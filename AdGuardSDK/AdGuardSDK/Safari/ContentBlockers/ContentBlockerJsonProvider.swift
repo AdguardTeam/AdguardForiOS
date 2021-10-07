@@ -1,4 +1,5 @@
 import Foundation
+import SharedAdGuardSDK
 
 public protocol ContentBlockerJsonProviderProtocol {
     /**

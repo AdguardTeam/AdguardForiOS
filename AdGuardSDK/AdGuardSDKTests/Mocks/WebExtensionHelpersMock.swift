@@ -1,5 +1,5 @@
 import Foundation
-@_implementationOnly import protocol ContentBlockerConverter.WebExtensionHelpersProtocol
+import protocol ContentBlockerConverter.WebExtensionHelpersProtocol
 
 final class WebExtensionHelpersMock: WebExtensionHelpersProtocol {
 

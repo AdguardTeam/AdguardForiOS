@@ -18,4 +18,5 @@
 
 /// This import is used to import Shared to the entire target
 /// More info can be found here https://forums.swift.org/t/what-does-exported-import-do/35869/2
+/// FIXME what to do with this file?
 @_exported import SharedAdGuardSDK

@@ -16,6 +16,8 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import Foundation
+import SharedAdGuardSDK
 import OrderedCollections
 
 final public class SafariUserRulesStorage: UserRulesStorageProtocol {

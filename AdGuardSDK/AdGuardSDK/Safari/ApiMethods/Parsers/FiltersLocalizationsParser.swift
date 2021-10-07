@@ -17,6 +17,7 @@
 */
 
 import Foundation
+import SharedAdGuardSDK
 
 /// Parser to parse data from `FiltersLocalizationsRequest` and returns `ExtendedFiltersMetaLocalizations`
 struct FiltersLocalizationsParser: ParserProtocol {

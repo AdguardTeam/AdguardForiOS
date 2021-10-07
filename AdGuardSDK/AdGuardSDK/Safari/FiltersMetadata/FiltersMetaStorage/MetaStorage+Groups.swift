@@ -17,7 +17,8 @@
 */
 
 import Foundation
-@_implementationOnly import SQLite
+import SQLite
+import SharedAdGuardSDK
 
 /* FilterGroupsTable; filter_groups table */
 struct FilterGroupsTable: Equatable {

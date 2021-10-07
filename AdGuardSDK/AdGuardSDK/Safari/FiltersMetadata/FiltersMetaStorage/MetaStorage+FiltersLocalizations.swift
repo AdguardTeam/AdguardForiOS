@@ -16,8 +16,8 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
-@_implementationOnly import SQLite
+import SharedAdGuardSDK
+import SQLite
 
 /* FilterLocalizationsTable; filter_localizations table */
 struct FilterLocalizationsTable {

@@ -17,6 +17,7 @@
  */
 
 import NetworkExtension
+import AGDnsProxy
 
 protocol PacketTunnelProviderProxyDelegate: AnyObject {
     func setTunnelSettings(_ settings: NETunnelNetworkSettings?, _ completionHandler: ((Error?) -> Void)?)
@@ -232,11 +233,12 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
     /// Initializes DNS-lib logger
     private func setupLogger(isDebugLogs: Bool) {
         AGLogger.setLevel(isDebugLogs ? .AGLL_DEBUG : .AGLL_WARN )
-        AGLogger.setCallback { msg, size in
-            if let msg = msg {
-                Logger.logInfo("(DnsLibs) -> \(String(cString: msg))")
-            }
-        }
+        // FIXME repair?
+//        AGLogger.setCallback { msg, size in
+//            if let msg = msg {
+//                Logger.logInfo("(DnsLibs) -> \(String(cString: msg))")
+//            }
+//        }
     }
 
     /// Returns `DnsUpstream` objects from system DNS servers

@@ -17,7 +17,8 @@
 */
 
 import Foundation
-@_implementationOnly import SQLite
+import SharedAdGuardSDK
+import SQLite
 
 /* FilterGroupLocalizationsTable; filter_group_localization table */
 struct FilterGroupLocalizationsTable {

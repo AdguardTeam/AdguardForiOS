@@ -6,7 +6,7 @@
 #import "DDLogMacros.h"
 #import "ADProductInfo.h"
 #import "Reachability.h"
-#import <AGDnsProxy/AGDnsProxy.h>
+//#import <AGDnsProxy/AGDnsProxy.h> FIXME remove?
 #import "ADBTableRow.h"
 #import "ADBTable.h"
 #import "ABECRequest.h"

@@ -18,6 +18,7 @@
 
 import Foundation
 import SafariAdGuardSDK
+import SharedAdGuardSDK
 
 // TODO: - Write tests
 

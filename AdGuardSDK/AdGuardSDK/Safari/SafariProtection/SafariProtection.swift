@@ -17,8 +17,9 @@
  */
 
 import Foundation
-@_implementationOnly import class ContentBlockerConverter.WebExtensionHelpers
-@_implementationOnly import protocol ContentBlockerConverter.WebExtensionHelpersProtocol
+import SharedAdGuardSDK
+import class ContentBlockerConverter.WebExtensionHelpers
+import protocol ContentBlockerConverter.WebExtensionHelpersProtocol
 
 public typealias SafariProtectionProtocol = SafariProtectionFiltersProtocol
                                             & SafariProtectionUserRulesProtocol

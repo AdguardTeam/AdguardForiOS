@@ -17,6 +17,7 @@
 */
 
 import Foundation
+import SharedAdGuardSDK
 
 /// Request to obtain filters meta data
 struct FiltersMetadataRequest: RequestProtocol {

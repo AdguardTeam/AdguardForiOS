@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import SharedAdGuardSDK
 
 protocol ServicesStorageProtocol {
     var configuration: SafariConfigurationProtocol { get }

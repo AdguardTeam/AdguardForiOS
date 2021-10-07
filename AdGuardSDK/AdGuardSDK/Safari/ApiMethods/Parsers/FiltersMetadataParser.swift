@@ -18,6 +18,7 @@
 
 
 import Foundation
+import SharedAdGuardSDK
 
 /// Parser to parse data from `FiltersMetadataRequest` and returns `ExtendedFiltersMeta`
 struct FiltersMetadataParser: ParserProtocol {

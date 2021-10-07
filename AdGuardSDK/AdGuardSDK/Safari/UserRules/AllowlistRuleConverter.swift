@@ -17,7 +17,8 @@
  */
 
 import Foundation
-@_implementationOnly import class ContentBlockerConverter.WebExtensionHelpers
+import SharedAdGuardSDK
+import class ContentBlockerConverter.WebExtensionHelpers
 
 public struct AllowlistRuleConverter: UserRuleConverterProtocol {
 

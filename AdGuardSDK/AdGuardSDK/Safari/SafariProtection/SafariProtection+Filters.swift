@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import SharedAdGuardSDK
 
 public protocol SafariProtectionFiltersProtocol {
     /// Returns true if filters are converting now

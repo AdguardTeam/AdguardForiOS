@@ -17,7 +17,8 @@
 */
 
 import Foundation
-@_implementationOnly import SQLite
+import SharedAdGuardSDK
+import SQLite
 
 protocol ProductionDatabaseManagerProtocol: ResetableSyncProtocol {
     /*

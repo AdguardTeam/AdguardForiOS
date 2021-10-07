@@ -17,8 +17,9 @@
 */
 
 import Foundation
+import SharedAdGuardSDK
 import Zip
-@_implementationOnly import SQLite
+import SQLite
 
 protocol DefaultDatabaseManagerProtocol {
     // default.db file URL

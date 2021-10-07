@@ -2,8 +2,8 @@
 //  AdGuardSDK.h
 //  AdGuardSDK
 //
-//  Created by Ivan Ilin on 28.07.2021.
-//
+
+// FIXME remove this file?
 
 #import <Foundation/Foundation.h>
 
@@ -14,5 +14,3 @@ FOUNDATION_EXPORT double AdGuardSDKVersionNumber;
 FOUNDATION_EXPORT const unsigned char AdGuardSDKVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <AdGuardSDK/PublicHeader.h>
-
-
