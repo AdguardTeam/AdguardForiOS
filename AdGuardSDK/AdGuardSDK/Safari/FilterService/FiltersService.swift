@@ -804,12 +804,12 @@ final class FiltersService: FiltersServiceProtocol {
     /* Return true if filter is recommended as predefined filter */
     private func isRecommended(filter: SafariGroup.Filter, currentLanguage: String) -> Bool {
         let isRecommended = filter.tags.contains(where: { $0.tagType == .recommended })
-        let isContainsLanguage = contains(currentLanguage: currentLanguage, inLanguages: filter.languages)
-        return isRecommended && (filter.languages.isEmpty ||  isContainsLanguage)
+        let isContainsLanguage = containsLanguage(currentLanguage: currentLanguage, inLanguages: filter.languages)
+        return isRecommended && (filter.languages.isEmpty || isContainsLanguage)
     }
 
     /* Return true if current language contains in array of languages */
-    private func contains(currentLanguage: String, inLanguages languages: [String]) -> Bool {
+    private func containsLanguage(currentLanguage: String, inLanguages languages: [String]) -> Bool {
         return languages.reduce(false) { partialResult, language in
             let lowercasedCurrentLanguage = currentLanguage.lowercased()
             let language = language.lowercased()
