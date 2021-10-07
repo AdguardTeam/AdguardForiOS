@@ -20,122 +20,95 @@ import Foundation
 import SafariAdGuardSDK
 
 protocol MigrationServiceProtocol {
-    func install()
-    func migrateIfNeeded(inBackground: Bool)
+    func migrateIfNeeded()
 }
 
-// todo: write new migration service
-class MigrationService: MigrationServiceProtocol {
+final class MigrationService: MigrationServiceProtocol {
 
-//    private let currentSchemaVersion = 5
-//
-//    private let vpnManager: VpnManagerProtocol
-//    private let dnsProvidersService: DnsProvidersServiceProtocol
-//    private let resources: AESharedResourcesProtocol
-//    private let dnsFiltersService: DnsFiltersServiceProtocol
-//    private let networking: ACNNetworkingProtocol
-//    private let activityStatisticsService: ActivityStatisticsServiceProtocol
-//    private let dnsStatisticsService: DnsStatisticsServiceProtocol
-//    private let dnsLogRecordsService: DnsLogRecordsServiceProtocol
-//    private let configurationService: ConfigurationServiceProtocol
-//    private let productInfo: ADProductInfoProtocol
-//    private let nativeProviders: NativeProvidersServiceProtocol
-//    private let safariProtection: SafariProtectionProtocol
-//
+    private let currentSchemaVersion = 5
+
+    private let vpnManager: VpnManagerProtocol
+    private let resources: AESharedResourcesProtocol
+    private let networking: ACNNetworkingProtocol
+    private let configurationService: ConfigurationServiceProtocol
+    private let productInfo: ADProductInfoProtocol
+    
     private let migrationQueue = DispatchQueue(label: "MigrationService queue", qos: .userInitiated)
-//
-//    init(vpnManager: VpnManagerProtocol,
-//         dnsProvidersService: DnsProvidersServiceProtocol,
-//         resources: AESharedResourcesProtocol,
-//         dnsFiltersService: DnsFiltersServiceProtocol,
-//         networking: ACNNetworkingProtocol,
-//         activityStatisticsService: ActivityStatisticsServiceProtocol,
-//         dnsStatisticsService: DnsStatisticsServiceProtocol,
-//         dnsLogService: DnsLogRecordsServiceProtocol,
-//         configuration: ConfigurationServiceProtocol,
-//         productInfo: ADProductInfoProtocol,
-//         nativeProviders: NativeProvidersServiceProtocol,
-//         safariProtection: SafariProtectionProtocol) {
-//        self.vpnManager = vpnManager
-//        self.dnsProvidersService = dnsProvidersService
-//        self.resources = resources
-//        self.dnsFiltersService = dnsFiltersService
-//        self.networking = networking
-//        self.activityStatisticsService = activityStatisticsService
-//        self.dnsStatisticsService = dnsStatisticsService
-//        self.dnsLogRecordsService = dnsLogService
-//        self.configurationService = configuration
-//        self.productInfo = productInfo
-//        self.nativeProviders = nativeProviders
-//        self.safariProtection = safariProtection
-//    }
-//
-    func install() {
+
+    init(
+        vpnManager: VpnManagerProtocol,
+        resources: AESharedResourcesProtocol,
+        networking: ACNNetworkingProtocol,
+        configurationService: ConfigurationServiceProtocol,
+        productInfo: ADProductInfoProtocol
+    ) {
+        self.vpnManager = vpnManager
+        self.resources = resources
+        self.networking = networking
+        self.configurationService = configurationService
+        self.productInfo = productInfo
+
+        resources.sharedDefaults().set(self.currentSchemaVersion, forKey: AEDefaultsProductSchemaVersion)
+    }
+
+    func migrateIfNeeded(){
         migrationQueue.async {[weak self] in
             guard let self = self else { return }
-//            self.resources.sharedDefaults().set(self.currentSchemaVersion, forKey: AEDefaultsProductSchemaVersion)
+                self.migrateIfNeededPrivate()
         }
     }
 
-    func migrateIfNeeded(inBackground: Bool){
-        migrationQueue.async {[weak self] in
-            guard let self = self else { return }
-//            self.migrateIfNeededPrivate(inBackground: inBackground)
+    private func migrateIfNeededPrivate() {
+        majorMigration()
+        minorAndPatchMigration()
+    }
+
+    private func majorMigration() {
+        let savedSchemaVersion = resources.sharedDefaults().integer(forKey: AEDefaultsProductSchemaVersion)
+
+        /* For major migration */
+        if savedSchemaVersion != currentSchemaVersion {
+            DDLogInfo("(MigrationService) - Migration will be started. Current schema version: \(savedSchemaVersion), update to: \(currentSchemaVersion).")
+
+            var result = true
+
+            if savedSchemaVersion < 3 {
+
+                if Bundle.main.isPro {
+                    result = result && proFrom2To4Update()
+                }
+                else {
+                    // TODO: - There is no antibanner anymore; enableGroupsWithEnabledFilters uses AntiBanner
+                    result = result && enableGroupsWithEnabledFilters()
+                    result = result && migrateVpnSettingsFromTunnelconfiguration()
+                }
+            }
+
+            if savedSchemaVersion < 5 {
+                // TODO: - There is no antibanner anymore
+                //self.migrateFilterRulesIfNeeded(antibanner: antibanner, storage: filtersStorage)
+            }
+
+            /* If all migrations are successfull, than save current schema version */
+            if result {
+                resources.sharedDefaults().set(currentSchemaVersion, forKey: AEDefaultsProductSchemaVersion)
+            }
         }
     }
-//
-//    private func migrateIfNeededPrivate(inBackground: Bool) {
-//        majorMigration()
-//        minorAndPatchMigration(inBackground: inBackground)
-//    }
-//
-//    private func majorMigration() {
-//        let savedSchemaVersion = resources.sharedDefaults().integer(forKey: AEDefaultsProductSchemaVersion)
-//
-//        /* For major migration */
-//        if savedSchemaVersion != currentSchemaVersion {
-//            DDLogInfo("(MigrationService) - Migration will be started. Current schema version: \(savedSchemaVersion), update to: \(currentSchemaVersion).")
-//
-//            var result = true
-//
-//            if savedSchemaVersion < 3 {
-//
-//                if Bundle.main.isPro {
-//                    result = result && proFrom2To4Update()
-//                }
-//                else {
-//                    result = result && enableGroupsWithEnabledFilters()
-//                    result = result && migrateVpnSettingsFromTunnelconfiguration()
-//                }
-//            }
-//
-//            if savedSchemaVersion < 5 {
-//                // todo:
-////                self.migrateFilterRulesIfNeeded(antibanner: antibanner, storage: filtersStorage)
-//            }
-//
-//            /* If all migrations are successfull, than save current schema version */
-//            if result {
-//                resources.sharedDefaults().set(currentSchemaVersion, forKey: AEDefaultsProductSchemaVersion)
-//            }
-//        }
-//    }
-//
-//    private func minorAndPatchMigration(inBackground: Bool) {
-//        let lastBuildVersion = resources.buildVersion
-//        let currentBuildVersion = Int(productInfo.buildNumber())
-//
-//        DDLogInfo("(MigrationService) - minorAndPatchMigration in Background: \(inBackground)")
-//
-//        /**
-//        Migration:
-//         Update Antibanner and DnsFilters on every migration
-//        */
-//        if lastBuildVersion != currentBuildVersion {
-//            DDLogInfo("(MigrationService) Patch migration from \(lastBuildVersion) to \(String(describing: currentBuildVersion))")
-//
-//            resources.buildVersion = currentBuildVersion ?? 0
-//
+
+    private func minorAndPatchMigration() {
+        let lastBuildVersion = resources.buildVersion
+        let currentBuildVersion = Int(productInfo.buildNumber())
+
+        DDLogInfo("(MigrationService) - minorAndPatchMigration")
+
+        // TODO: - This migration was using AntiBanner
+        /// Migration: Update Antibanner and DnsFilters on every migration
+        if lastBuildVersion != currentBuildVersion {
+            DDLogInfo("(MigrationService) Patch migration from \(lastBuildVersion) to \(String(describing: currentBuildVersion))")
+
+            resources.buildVersion = currentBuildVersion ?? 0
+
 //            if inBackground {
 //                resources.needUpdateFilters = true
 //                resources.sharedDefaults().set(true, forKey: NeedToUpdateFiltersKey)
@@ -144,81 +117,83 @@ class MigrationService: MigrationServiceProtocol {
 //                updateAntibanner()
 //                updateDnsFilters()
 //            }
-//        }
-//        else if resources.needUpdateFilters {
-//            DDLogInfo("(MigrationService) finish migration started in background ")
-//
+        }
+        else if resources.needUpdateFilters {
+            DDLogInfo("(MigrationService) finish migration started in background ")
+
 //            updateAntibanner()
 //            updateDnsFilters()
 //
 //            resources.needUpdateFilters = false
-//        }
-//
-//        /* If lastBuildVersion is 0, it means that it is new install and migration is not needed */
-//        if lastBuildVersion == 0 {
-//            return
-//        }
-//
-//        if Bundle.main.isPro {
-//
-//        }
-//        else {
-//            /**
-//            Migration:
-//             In app version 4.0 (448) we've begun reseting all statistics while resetting the settings;
-//             In early versions of 4.0 we were detecting blocked requests instead of encrypted;
-//             Early app version hasn't reached app store, so we just reset old statistics and db files.
-//            */
-//            if lastBuildVersion < 448 {
-//                DDLogInfo("(MigrationService) - resetStatistics migration started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
-//                resetStatistics()
-//            }
-//        }
-//
+        }
+
+        /// If lastBuildVersion is 0, it means that it is new install and migration is not needed
+        if lastBuildVersion == 0 {
+            return
+        }
+
+        if Bundle.main.isPro {
+
+        }
+        else {
+            // TODO: - This migration was used for Alpha and Beta testers; Is there any reason for supporting it?
+            /**
+            Migration:
+             In app version 4.0 (448) we've begun reseting all statistics while resetting the settings;
+             In early versions of 4.0 we were detecting blocked requests instead of encrypted;
+             Early app version hasn't reached app store, so we just reset old statistics and db files.
+            */
+            if lastBuildVersion < 448 {
+                DDLogInfo("(MigrationService) - resetStatistics migration started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
+                resetStatistics()
+            }
+        }
+
+        /**
+        Migration:
+         In app version 4.1 (561) we've removed 'optimize' feature for filters, because it was confusing;
+         Now this feature is set to false by default and we need to reload JSON for content blockers.
+         Migration for AdGuard and AdGuard Pro
+        */
+        if lastBuildVersion < 561 {
+            DDLogInfo("(MigrationService) -  removeOptimizeFeature started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
+            removeOptimizeFeature()
+        }
+
+
+        // TODO: - setProtocolForCustomProviders uses DnsProvidersService that doesn't exist anymore
+        /**
+        Migration:
+         In app version 4.0.4 (563) we began to inititalize custom dns servers with dns protocol
+         for previously added custom servers we set protocol here
+        */
+        if lastBuildVersion < 563 {
+            DDLogInfo("(MigrationService) - setProtocolForCustomProviders migration started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
+            setProtocolForCustomProviders()
+        }
+
+        /**
+        Migration:
+         In app version 4.0.4 (585) we've changed PacketTunnelProvider ip adresses for identifying tunnel mode in AdGuard VPN
+         Restart tunnel to update ip addresses
+        */
+        if lastBuildVersion < 585 {
+            DDLogInfo("(MigrationService) - restart tunnel to change tunnel ip address. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
+            vpnManager.updateSettings(completion: nil)
+        }
+
+        /*
+         In app version 4.1 (590) we've changed logic of showing rate app dialog
+         this flag is useless now
+        */
+        if lastBuildVersion < 590 {
+            resources.sharedDefaults().removeObject(forKey: "AEDefaultsLastBuildRateAppRequested")
+        }
+
+        // TODO: - This migration uses DnsProvidersService and NativeProvidersService that don't exist anymore
 //        /**
 //        Migration:
-//         In app version 4.1 (561) we've removed 'optimize' feature for filters, because it was confusing;
-//         Now this feature is set to false by default and we need to reload JSON for content blockers.
-//         Migration for AdGuard and AdGuard Pro
-//        */
-//        if lastBuildVersion < 561 {
-//            DDLogInfo("(MigrationService) -  removeOptimizeFeature started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
-//            removeOptimizeFeature()
-//        }
-//
-//
-//        /**
-//        Migration:
-//         In app version 4.0.4 (563) we began to inititalize custom dns servers with dns protocol
-//         for previously added custom servers we set protocol here
-//        */
-//        if lastBuildVersion < 563 {
-//            DDLogInfo("(MigrationService) - setProtocolForCustomProviders migration started. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
-//            setProtocolForCustomProviders()
-//        }
-//
-//        /**
-//        Migration:
-//         In app version 4.0.4 (585) we changed PacketTunnelProvider ip adresses for identifying tunnel mode in AdGuard VPN
-//         Restart tunnel to update ip addresses
-//        */
-//        if lastBuildVersion < 585 {
-//            DDLogInfo("(MigrationService) - restart tunnel to change tunnel ip address. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
-//            vpnManager.updateSettings(completion: nil)
-//        }
-//
-//        /*
-//         In app version 4.1 (590) we've changed logic of showing rate app dialog
-//         this flag is useless now
-//        */
-//        if lastBuildVersion < 590 {
-//            resources.sharedDefaults().removeObject(forKey: "AEDefaultsLastBuildRateAppRequested")
-//        }
-//
-//
-//        /**
-//        Migration:
-//         In app version 4.1 (593) we've added AdGuard Dns repository support and begun to use
+//         In app version 4.1 (593) we've added AdGuard DNS repository support and begun to use
 //         all information from providers.json
 //         Server id and provider id were added and now we need to set them for current DNS server otherwise it will be nil
 //         isCustomProvider  property was added
@@ -233,11 +208,12 @@ class MigrationService: MigrationServiceProtocol {
 //            dnsProvidersMigratable.reinitializeDnsProvidersObjectsAndSetIdsAndFlags(resources: resources)
 //            nativeProviders.reinitializeProviders()
 //        }
-//    }
-//
-//    // MARK: - Methods for migrations
-//
-//    private func setProtocolForCustomProviders(){
+    }
+
+    // MARK: - Methods for migrations
+
+    // TODO: - This method uses DnsProvidersService that doesn't exist anymore
+    private func setProtocolForCustomProviders(){
 //        let customProviders = dnsProvidersService.customProviders
 //        var changesCount = 0
 //
@@ -266,9 +242,10 @@ class MigrationService: MigrationServiceProtocol {
 //                }
 //            }
 //        }
-//    }
-//
-//    private func resetStatistics(){
+    }
+
+    // TODO: - This reset was used for Alpha and Beta testers; Is there any reason for supporting it?
+    private func resetStatistics(){
 //        /* Reseting statistics Start*/
 //        self.activityStatisticsService.stopDb()
 //        self.dnsStatisticsService.stopDb()
@@ -280,75 +257,83 @@ class MigrationService: MigrationServiceProtocol {
 //        /* Reseting statistics end */
 //        self.activityStatisticsService.startDb()
 //        self.dnsStatisticsService.startDb()
-//    }
-//
-//    private func enableGroupsWithEnabledFilters() -> Bool {
+    }
+
+    // TODO: - This method uses obsolete AntiBanner class
+    private func enableGroupsWithEnabledFilters() -> Bool {
 //        let result = antibanner.enableGroupsWithEnabledFilters()
 //
 //        filtersService.updateGroups()
 //
-//        return result
-//    }
-//
-//    private func updateAntibanner() {
+        return true
+    }
+
+    // TODO: - This method uses obsolete AntiBanner class
+    private func updateAntibanner() {
 //        // removing malware filter with antibanner
 //        if self.antibanner.filters().contains(where: { $0.filterId == 208 }) {
 //            self.antibanner.unsubscribeFilter(NSNumber(integerLiteral: 208))
 //        }
 //
 //        filtersService.load(refresh: true, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.safariUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertedWhitelist: resources.invertedWhitelist) {_,_ in }
-//    }
-//
-//    private func updateDnsFilters() {
-//        dnsFiltersService.updateFilters(networking: networking, callback: nil)
-//    }
-//
-//    private func migrateProDnsUserFilters()->Bool {
-//
-//        var result = false
-//        let domainsConverter: DomainsConverterProtocol = DomainsConverter()
-//        let fm = FileManager()
-//
-//        if let whitelistData = resources.loadData(fromFileRelativePath: "pro-whitelist-doamins.data"),
-//                whitelistData.count > 0 {
-//            if let domains = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(whitelistData) as? [String]{
-//                for domain in domains {
-//                    result = true
-//                    dnsFiltersService.addWhitelistRule(domainsConverter.whitelistRuleFromDomain(domain))
-//                }
-//            }
-//            else {
-//                DDLogError("(MigrationService) migrateProDnsUserFilters - can not parse whitelist")
-//            }
-//
-//            try? fm.removeItem(atPath: resources.path(forRelativePath: "pro-whitelist-doamins.data"))
-//        }
-//
-//
-//        if let blacklistData = resources.loadData(fromFileRelativePath: "pro-blacklist-doamins.data"),
-//                blacklistData.count  > 0 {
-//            if let domains = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(blacklistData) as? [String]{
-//                for domain in domains {
-//                    result = true
-//                    dnsFiltersService.addBlacklistRule(domainsConverter.blacklistRuleFromDomain(domain))
-//                }
-//            }
-//            else {
-//                DDLogError("(MigrationService) migrateProDnsUserFilters - can not parse blacklist")
-//            }
-//
-//            try? fm.removeItem(atPath: resources.path(forRelativePath: "pro-blacklist-doamins.data"))
-//        }
-//
-//        return result
-//    }
-//
-//    // migrate vpn settings (dns server, tunnel mode, restart by reachability)
-//    private func migrateVpnSettingsFromTunnelconfiguration() ->Bool {
-//
-//        DDLogInfo("(MigrationService) migrateVpnSettingsFromTunnelconfiguration")
-//        var result = true
-//
+    }
+
+    // TODO: - This method uses DnsFiltersService that doesn't exist anymore
+    private func updateDnsFilters() {
+        //dnsFiltersService.updateFilters(networking: networking, callback: nil)
+    }
+
+    // TODO: - This method did migration for PRO version from v2->v4
+    // It uses obsolete DnsFiltersService, but we can use SDK API and put old rules with it
+    // Looks very old, do we need to support it?
+    private func migrateProDnsUserFilters() -> Bool {
+        var result = false
+        let domainsConverter: DomainsConverterProtocol = DomainsConverter()
+        let fm = FileManager()
+
+        if let whitelistData = resources.loadData(fromFileRelativePath: "pro-whitelist-doamins.data"),
+                whitelistData.count > 0 {
+            if let domains = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(whitelistData) as? [String]{
+                for domain in domains {
+                    result = true
+                    //dnsFiltersService.addWhitelistRule(domainsConverter.whitelistRuleFromDomain(domain))
+                }
+            }
+            else {
+                DDLogError("(MigrationService) migrateProDnsUserFilters - can not parse whitelist")
+            }
+
+            try? fm.removeItem(atPath: resources.path(forRelativePath: "pro-whitelist-doamins.data"))
+        }
+
+
+        if let blacklistData = resources.loadData(fromFileRelativePath: "pro-blacklist-doamins.data"),
+                blacklistData.count  > 0 {
+            if let domains = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(blacklistData) as? [String]{
+                for domain in domains {
+                    result = true
+                    //dnsFiltersService.addBlacklistRule(domainsConverter.blacklistRuleFromDomain(domain))
+                }
+            }
+            else {
+                DDLogError("(MigrationService) migrateProDnsUserFilters - can not parse blacklist")
+            }
+
+            try? fm.removeItem(atPath: resources.path(forRelativePath: "pro-blacklist-doamins.data"))
+        }
+
+        return result
+    }
+
+    // TODO: - This method did migration for PRO version from v2->v4
+    // There is no migrateOldVpnSettings method in VpnManager anymore
+    // Looks very old, do we need to support it?
+
+    // migrate vpn settings (dns server, tunnel mode, restart by reachability)
+    private func migrateVpnSettingsFromTunnelconfiguration() -> Bool {
+        DDLogInfo("(MigrationService) migrateVpnSettingsFromTunnelconfiguration")
+        var result = true
+
 //        let group = DispatchGroup()
 //        group.enter()
 //        vpnManager.migrateOldVpnSettings { (error) in
@@ -361,29 +346,30 @@ class MigrationService: MigrationServiceProtocol {
 //        }
 //
 //        group.wait()
+
+        return result
+    }
+
+    private func proFrom2To4Update() -> Bool {
+        var result = true
+
+        DDLogInfo("(MigrationService) migrate pro v2->v4")
+
+        result = result && migrateVpnSettingsFromTunnelconfiguration()
+
+        // TODO: - Obsolete service
+        // The format for storing log entries has changed. Clear log.
+//       dnsLogRecordsService.clearLog()
 //
-//        return result
-//    }
-//
-//    private func proFrom2To4Update()->Bool {
-//
-//        var result = true
-//
-//        DDLogInfo("(MigrationService) migrate pro v2->v4")
-//
-//        result = result && migrateVpnSettingsFromTunnelconfiguration()
-//
-//        // The format for storing log entries has changed. Clear log.
-//        dnsLogRecordsService.clearLog()
-//
-//        // migrate old dns user filters(whitelist/blacklist)
-//        if migrateProDnsUserFilters() {
-//
-//            // if the user had dns filters we enable advanced mode
-//            configurationService.advancedMode = true
-//        }
-//
-//        // migrate old dns filter subscriptions to new dns filters
+        // migrate old dns user filters(whitelist/blacklist)
+        if migrateProDnsUserFilters() {
+
+            // if the user had dns filters we enable advanced mode
+            configurationService.advancedMode = true
+        }
+
+        // TODO: - Obsolete service
+        // migrate old dns filter subscriptions to new dns filters
 //        let manager = ProSubscriptionsMigrationService(resources: resources, dnsFiltersService: dnsFiltersService)
 //        if manager.migrateIfNeeeded() {
 //            DDLogInfo("(MigrationService) pro subscriptions have been successfully migrated.")
@@ -399,11 +385,12 @@ class MigrationService: MigrationServiceProtocol {
 //
 //        // turn on groups
 //        result = result && enableGroupsWithEnabledFilters()
-//
-//        return result
-//    }
-//
-//    private func removeOptimizeFeature() {
+        
+        return result
+    }
+
+    // TODO: - This method is full of old objects
+    private func removeOptimizeFeature() {
 //        let backgroundTaskId = UIApplication.shared.beginBackgroundTask { }
 //        contentBlockerService.reloadJsons(backgroundUpdate: false, protectionEnabled: safariProtection.safariProtectionEnabled, userFilterEnabled: resources.safariUserFilterEnabled, whitelistEnabled: resources.safariWhitelistEnabled, invertWhitelist: resources.invertedWhitelist) { error in
 //            if let error = error {
@@ -411,6 +398,6 @@ class MigrationService: MigrationServiceProtocol {
 //            }
 //            UIApplication.shared.endBackgroundTask(backgroundTaskId)
 //        }
-//    }
+    }
 }
 
