@@ -43,6 +43,13 @@ struct FilterTagsTable {
         self.type = dbTag[Self.type]
         self.name = dbTag[Self.name]
     }
+
+    init(filterId: Int, tagId: Int, type: Int, name: String) {
+        self.filterId = filterId
+        self.tagId = tagId
+        self.type = type
+        self.name = name
+    }
 }
 
 // MARK: - MetaStorage + Tags

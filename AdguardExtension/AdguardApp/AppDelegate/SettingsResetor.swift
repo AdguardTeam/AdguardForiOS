@@ -62,6 +62,8 @@ struct SettingsResetor: ISettingsResetor {
                 // todo: process error
             }
             self.vpnManager.removeVpnConfiguration { _ in }
+
+            // FIXME: Fix async reset with reseting safari protection
             self.resources.reset()
             resetStatistics()
 
