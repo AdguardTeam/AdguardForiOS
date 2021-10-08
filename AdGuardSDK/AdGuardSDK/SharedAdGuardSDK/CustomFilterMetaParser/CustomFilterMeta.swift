@@ -25,7 +25,7 @@ public protocol ExtendedCustomFilterMetaProtocol: FilterMetaProtocol {
 }
 
 public extension ExtendedCustomFilterMetaProtocol {
-    static var baseCustomFilterId: Int { 100_000 }
+    static var baseCustomFilterId: Int { 10_000 }
 }
 
 public struct CustomFilterMeta: ExtendedCustomFilterMetaProtocol {

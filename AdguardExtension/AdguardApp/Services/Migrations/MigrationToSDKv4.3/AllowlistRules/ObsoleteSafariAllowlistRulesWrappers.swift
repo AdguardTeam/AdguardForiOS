@@ -74,9 +74,21 @@ final class SDKSafariMigrationAllowlistRule: NSObject, NSCoding, SDKSafariMigrat
         else { return nil }
         let unarchivedAffinity = coder.decodeObject(forKey: "affinity") as? Int
 
+        // In version before 4.2 allowlist domains were saved as rules
+        // If we don't remove old suffix and prefix the user will see rules in his list
+        // Besides there will be a problem while converting rules
+        // So this obsolete prefix and suffix must be removed
+        var ruleText = unarchivedRuleText
+        let obsoleteAllowlistPrefix = "@@||"
+        let obsoleteAllowlistSuffix = "$document"
+        if ruleText.hasPrefix(obsoleteAllowlistPrefix) && ruleText.hasSuffix(obsoleteAllowlistSuffix) {
+            ruleText.removeFirst(obsoleteAllowlistPrefix.count)
+            ruleText.removeLast(obsoleteAllowlistSuffix.count)
+        }
+
         self.init(filterId: unarchivedFilterId,
                   ruleId: unarchivedRuleId,
-                  ruleText: unarchivedRuleText,
+                  ruleText: ruleText,
                   isEnabled: unarchivedIsEnabled,
                   affinity: unarchivedAffinity)
     }

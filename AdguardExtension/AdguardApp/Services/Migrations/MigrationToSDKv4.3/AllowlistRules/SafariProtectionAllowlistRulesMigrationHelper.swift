@@ -20,22 +20,13 @@ import Foundation
 import enum SafariAdGuardSDK.CommonError
 
 protocol SafariProtectionAllowlistRulesMigrationHelperProtocol: AnyObject {
-    /**
-     Returns swift allowlist rules objects from obsolete rules objects
-     - Throws error if there is no file with rules in provided directory or rules unarchive failed
-     */
+    /// Returns swift allowlist rules objects from obsolete rules objects
     func getAllowlistRules() throws -> [SDKSafariMigrationRule]
 
-    /**
-     Returns swift inverted allowlist rules objects from obsolete rules objects
-     - Throws error if there is no file with rules in provided directory or rules unarchive failed
-     */
+    /// Returns swift inverted allowlist rules objects from obsolete rules objects
     func getInvertedAllowlistRules() throws -> [SDKSafariMigrationRule]
 
-    /**
-     Removes old files where allowlist rules used to store
-     - Throws error if there is no file with rules in provided directory
-     */
+    /// Removes old files where allowlist rules used to store
     func removeOldRuleFiles() throws
 }
 
@@ -63,7 +54,7 @@ final class SafariProtectionAllowlistRulesMigrationHelper: SafariProtectionAllow
         let url = URL(fileURLWithPath: rulesContainerDirectoryPath).appendingPathComponent(oldSafariAllowListRulesFileName)
         guard fileManager.fileExists(atPath: url.path) else {
             DDLogWarn("(SafariProtectionAllowlistRulesMigrationHelper) -  allowlist rules file doesn't exist")
-            throw CommonError.missingFile(filename: url.path)
+            return []
         }
 
         let data = try Data(contentsOf: url)
@@ -81,7 +72,7 @@ final class SafariProtectionAllowlistRulesMigrationHelper: SafariProtectionAllow
         let url = URL(fileURLWithPath: rulesContainerDirectoryPath).appendingPathComponent(oldSafariInvertedAllowListRulesFileName)
         guard fileManager.fileExists(atPath: url.path) else {
             DDLogWarn("(SafariProtectionAllowlistRulesMigrationHelper) -  inverted allowlist rules file doesn't exist")
-            throw CommonError.missingFile(filename: url.path)
+            return []
         }
 
         let data = try Data(contentsOf: url)
@@ -102,14 +93,10 @@ final class SafariProtectionAllowlistRulesMigrationHelper: SafariProtectionAllow
 
         if fileManager.fileExists(atPath: invertedAllowlistRulesFileUrl.path) {
             try fileManager.removeItem(atPath: invertedAllowlistRulesFileUrl.path)
-        } else {
-            throw CommonError.missingFile(filename: invertedAllowlistRulesFileUrl.path)
         }
 
         if fileManager.fileExists(atPath: allowlistRulesFileUrl.path) {
             try fileManager.removeItem(atPath: allowlistRulesFileUrl.path)
-        } else {
-            throw CommonError.missingFile(filename: allowlistRulesFileUrl.path)
         }
     }
 }

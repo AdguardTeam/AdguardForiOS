@@ -55,6 +55,9 @@ final class SDKMigrationServiceHelper: SDKMigrationServiceHelperProtocol {
         try migrate(userRules: invertedAllowlistRules, for: .invertedAllowlist)
 
         /* DB migration */
+        let customFilters = try filtersDbMigration.getCustomFilters()
+        try customFiltersMigration.migrateCustomFilters(customFilters)
+
         let groupStates = try filtersDbMigration.getGroupsStates()
         try groupStates.forEach {
             if let groupType = SafariGroup.GroupType(rawValue: $0.groupId) {
@@ -65,10 +68,9 @@ final class SDKMigrationServiceHelper: SDKMigrationServiceHelperProtocol {
         let filtersStates = try filtersDbMigration.getFiltersStates()
         try filtersStates.forEach { try safariProtection.setFilter(withId: $0.filterId, $0.groupId, enabled: $0.isEnabled) }
 
-        let customFilters = try filtersDbMigration.getCustomFilters()
-        try customFiltersMigration.migrateCustomFilters(customFilters)
         try safariProtection.reinitializeGroupsAndFilters()
 
+        /* Remove old files */
         try allowlistRulesMigration.removeOldRuleFiles()
         try filtersDbMigration.removeOldDBFiles()
 

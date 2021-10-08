@@ -49,7 +49,8 @@ final class SafariProtectionFiltersDatabaseMigrationHelper: SafariProtectionFilt
     private let oldAdguardDBFilePath: String
     private let oldDefaultDBFilePath: String
 
-    private let baseCustomFilterId = 100_000
+    private let baseCustomFilterId = 10_000
+    private let baseUserRulesGroupId = 0
     private let baseUserRulesFilterId = 0
 
     private let fileManager = FileManager.default
@@ -75,8 +76,10 @@ final class SafariProtectionFiltersDatabaseMigrationHelper: SafariProtectionFilt
 
         // Query: SELECT group_id, is_enabled FROM filter_groups
         let query = FilterGroupsTable.table.select(FilterGroupsTable.groupId, FilterGroupsTable.isEnabled)
-        let groupIds: [(groupId: Int, isEnabled: Bool)] = try oldAdguardDB.prepare(query).map { dbGroup in
+        let groupIds: [(groupId: Int, isEnabled: Bool)] = try oldAdguardDB.prepare(query).compactMap { dbGroup in
             let table = FilterGroupsTable(dbGroup: dbGroup)
+            if table.groupId == baseUserRulesGroupId { return nil }
+
             return (groupId: table.groupId, isEnabled: table.isEnabled )
         }
 
@@ -89,8 +92,10 @@ final class SafariProtectionFiltersDatabaseMigrationHelper: SafariProtectionFilt
 
         // Query: SELECT * FROM filters
         let query = FiltersTable.table
-        let filterIds: [(filterId: Int, groupId: Int, isEnabled: Bool)] = try oldAdguardDB.prepare(query).map { dbFilter in
+        let filterIds: [(filterId: Int, groupId: Int, isEnabled: Bool)] = try oldAdguardDB.prepare(query).compactMap { dbFilter in
             let table = FiltersTable(dbFilter: dbFilter)
+            if table.filterId == baseUserRulesFilterId || table.groupId == baseUserRulesGroupId { return nil }
+
             return (filterId: table.filterId, groupId: table.groupId, isEnabled: table.isEnabled)
         }
 
