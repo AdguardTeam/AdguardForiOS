@@ -33,7 +33,6 @@ protocol SDKSafariMigrationRule {
     var affinity: Int? { get }
 }
 
-@objc(SDKSafariMigrationAllowlistRule)
 final class SDKSafariMigrationAllowlistRule: NSObject, NSCoding, SDKSafariMigrationRule {
 
     let filterId: Int
@@ -94,7 +93,6 @@ final class SDKSafariMigrationAllowlistRule: NSObject, NSCoding, SDKSafariMigrat
     }
 }
 
-@objc(SDKSafariMigrationInvertedAllowlistDomainObject)
 final class SDKSafariMigrationInvertedAllowlistDomainObject: NSObject, NSCoding {
 
     let rules: [SDKSafariMigrationAllowlistRule]
