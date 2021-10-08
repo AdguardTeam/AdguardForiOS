@@ -53,8 +53,6 @@ final class SettingsResetService: SettingsResetServiceProtocol {
     private let activityStatistics: ActivityStatisticsProtocol
     private let dnsLogStatistics: DnsLogStatisticsProtocol
 
-    private var isPro: Bool { return Bundle.main.isPro ? true : purchaseService.isProPurchased }
-
     // MARK: - Init
 
     init(vpnManager: VpnManagerProtocol,

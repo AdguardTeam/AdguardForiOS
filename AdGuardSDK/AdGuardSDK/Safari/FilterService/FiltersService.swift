@@ -436,7 +436,7 @@ final class FiltersService: FiltersServiceProtocol {
 
     func enablePredefinedGroupsAndFilters() throws {
         try workingQueue.sync {
-            try enablePredefinedGroupsAndFiltersInternal(with: groups, configuration: configuration)
+            try enablePredefinedGroupsAndFiltersInternal(with: groups, currentLanguage: configuration.currentLanguage)
             try self._groupsAtomic.mutate { $0 = try getAllLocalizedGroups() }
         }
     }
@@ -781,22 +781,21 @@ final class FiltersService: FiltersServiceProtocol {
     //MARK: - Enabling predefined meta methods
 
     /* Enable predefined groups and filters. Throws error on setting enabled state in storage*/
-    private func enablePredefinedGroupsAndFiltersInternal(with groups: [SafariGroup], configuration: SafariConfigurationProtocol) throws {
-        let predefinedGroups: [SafariGroup.GroupType] = [.ads, .privacy, .languageSpecific, .custom]
+    private func enablePredefinedGroupsAndFiltersInternal(with groups: [SafariGroup], currentLanguage: String) throws {
+        let predefinedGroups: [SafariGroup.GroupType] = [.ads, .privacy, .languageSpecific]
 
         for group in groups {
             guard predefinedGroups.contains(group.groupType) else { continue }
             var recommendedCount = 0
 
             for filter in group.filters {
-                guard isRecommended(filter: filter, currentLanguage: configuration.currentLanguage) else { continue }
+                guard isRecommended(filter: filter, currentLanguage: currentLanguage) else { continue }
                 try metaStorage.setFilter(withId: filter.filterId, enabled: true)
                 Logger.logInfo("(FiltersService) - enablePredefinedMeta; Filter with id=\(filter.filterId) were enabled for groupType=\(group.groupType)")
                 recommendedCount += 1
             }
 
-            let isCustomGroup = group.groupType == .custom && configuration.proStatus
-            let groupIsEnabled = recommendedCount > 0 || isCustomGroup
+            let groupIsEnabled = recommendedCount > 0
             try metaStorage.setGroup(withId: group.groupId, enabled: groupIsEnabled)
             Logger.logInfo("(FiltersService) - enablePredefinedMeta; Group with groupType=\(group.groupType) were enabled")
         }

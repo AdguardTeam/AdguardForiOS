@@ -915,12 +915,12 @@ class FiltersServiceTest: XCTestCase {
         }
 
         try! initPredefined(currentLanguage: "en", langsForFilter: [], tags: tags)
-        XCTAssertEqual(metaStorage.setGroupCalledCount, 4)
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 3)
         XCTAssertEqual(metaStorage.setFilterCalledCount, 1)
-        XCTAssertEqual(metaStorage.setGroupResult.count, 4)
+        XCTAssertEqual(metaStorage.setGroupResult.count, 3)
 
         filterService.groups.forEach {
-            if $0.groupType == .custom || $0.groupType == .privacy {
+            if $0.groupType == .privacy {
                 XCTAssert($0.isEnabled)
             } else {
                 XCTAssertFalse($0.isEnabled)
@@ -943,9 +943,9 @@ class FiltersServiceTest: XCTestCase {
             return FilterTagsTable(filterId: filter.element.filterId, tagId: 1, type: type, name: "tag_name")
         }
         try! initPredefined(currentLanguage: "en", langsForFilter: [], tags: tags, proStatus: false)
-        XCTAssertEqual(metaStorage.setGroupCalledCount, 4)
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 3)
         XCTAssertEqual(metaStorage.setFilterCalledCount, 1)
-        XCTAssertEqual(metaStorage.setGroupResult.count, 4)
+        XCTAssertEqual(metaStorage.setGroupResult.count, 3)
 
         filterService.groups.forEach {
             if $0.groupType == .privacy {
@@ -965,7 +965,7 @@ class FiltersServiceTest: XCTestCase {
     }
 
     func testEnabledPredefinedGroupsAndFiltersWitAllPredefinedFilters() {
-        let predefinedGroups: [SafariGroup.GroupType] = [.ads, .privacy, .custom, .languageSpecific]
+        let predefinedGroups: [SafariGroup.GroupType] = [.ads, .privacy, .languageSpecific]
 
         let privacyFilters = metaStorage.filtersTableMock.filter { $0.groupId == privacyGroupId }
         let adsFilters = metaStorage.filtersTableMock.filter { $0.groupId == adsGroupId}
@@ -994,9 +994,9 @@ class FiltersServiceTest: XCTestCase {
         let tags = privacyTags + adsTags + languageSpecificTags
 
         try! initPredefined(currentLanguage: "en", langsForFilter: [], tags: tags)
-        XCTAssertEqual(metaStorage.setGroupCalledCount, 4)
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 3)
         XCTAssertEqual(metaStorage.setFilterCalledCount, 4)
-        XCTAssertEqual(metaStorage.setGroupResult.count, 4)
+        XCTAssertEqual(metaStorage.setGroupResult.count, 3)
 
         filterService.groups.forEach {
             if predefinedGroups.contains($0.groupType) {
@@ -1026,16 +1026,12 @@ class FiltersServiceTest: XCTestCase {
         }
 
         try! initPredefined(currentLanguage: "en", langsForFilter: [], tags: tags)
-        XCTAssertEqual(metaStorage.setGroupCalledCount, 4)
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 3)
         XCTAssertEqual(metaStorage.setFilterCalledCount, 0)
-        XCTAssertEqual(metaStorage.setGroupResult.count, 4)
+        XCTAssertEqual(metaStorage.setGroupResult.count, 3)
 
         filterService.groups.forEach {
-            if $0.groupType == .custom {
-                XCTAssert($0.isEnabled)
-            } else {
-                XCTAssertFalse($0.isEnabled)
-            }
+            XCTAssertFalse($0.isEnabled)
         }
 
         XCTAssertEqual(metaStorage.setFilterResult.count, 0)
@@ -1052,16 +1048,12 @@ class FiltersServiceTest: XCTestCase {
     func testEnabledPredefinedGroupsAndFiltersWithEmptyTags() {
 
         try! initPredefined(currentLanguage: "en", langsForFilter: [], tags: [])
-        XCTAssertEqual(metaStorage.setGroupCalledCount, 4)
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 3)
         XCTAssertEqual(metaStorage.setFilterCalledCount, 0)
-        XCTAssertEqual(metaStorage.setGroupResult.count, 4)
+        XCTAssertEqual(metaStorage.setGroupResult.count, 3)
 
         filterService.groups.forEach {
-            if $0.groupType == .custom {
-                XCTAssert($0.isEnabled)
-            } else {
-                XCTAssertFalse($0.isEnabled)
-            }
+            XCTAssertFalse($0.isEnabled)
         }
 
         XCTAssertEqual(metaStorage.setFilterResult.count, 0)
@@ -1081,12 +1073,12 @@ class FiltersServiceTest: XCTestCase {
         }
 
         try! initPredefined(currentLanguage: "foo", langsForFilter: [], tags: tags)
-        XCTAssertEqual(metaStorage.setGroupCalledCount, 4)
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 3)
         XCTAssertEqual(metaStorage.setFilterCalledCount, 1)
-        XCTAssertEqual(metaStorage.setGroupResult.count, 4)
+        XCTAssertEqual(metaStorage.setGroupResult.count, 3)
 
         filterService.groups.forEach {
-            if $0.groupType == .custom || $0.groupType == .privacy {
+            if $0.groupType == .privacy {
                 XCTAssert($0.isEnabled)
             } else {
                 XCTAssertFalse($0.isEnabled)
@@ -1111,16 +1103,12 @@ class FiltersServiceTest: XCTestCase {
         }
 
         try! initPredefined(currentLanguage: "foo", langsForFilter: ["en", "fr"], tags: tags)
-        XCTAssertEqual(metaStorage.setGroupCalledCount, 4)
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 3)
         XCTAssertEqual(metaStorage.setFilterCalledCount, 0)
-        XCTAssertEqual(metaStorage.setGroupResult.count, 4)
+        XCTAssertEqual(metaStorage.setGroupResult.count, 3)
 
         filterService.groups.forEach {
-            if $0.groupType == .custom {
-                XCTAssert($0.isEnabled)
-            } else {
-                XCTAssertFalse($0.isEnabled)
-            }
+            XCTAssertFalse($0.isEnabled)
         }
 
         XCTAssertEqual(metaStorage.setFilterResult.count, 0)
@@ -1141,12 +1129,12 @@ class FiltersServiceTest: XCTestCase {
         }
 
         try! initPredefined(currentLanguage: "en-US", langsForFilter: ["EN", "FR"], tags: tags)
-        XCTAssertEqual(metaStorage.setGroupCalledCount, 4)
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 3)
         XCTAssertEqual(metaStorage.setFilterCalledCount, 1)
-        XCTAssertEqual(metaStorage.setGroupResult.count, 4)
+        XCTAssertEqual(metaStorage.setGroupResult.count, 3)
 
         filterService.groups.forEach {
-            if $0.groupType == .custom || $0.groupType == .privacy {
+            if $0.groupType == .privacy {
                 XCTAssert($0.isEnabled)
             } else {
                 XCTAssertFalse($0.isEnabled)
@@ -1188,16 +1176,12 @@ class FiltersServiceTest: XCTestCase {
         metaStorage.getAllLocalizaedFiltersResult = .success([])
         try! initPredefined(currentLanguage: "en", langsForFilter: [], tags: tags)
 
-        XCTAssertEqual(metaStorage.setGroupCalledCount, 4)
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 3)
         XCTAssertEqual(metaStorage.setFilterCalledCount, 0)
 
-        XCTAssertEqual(metaStorage.setGroupResult.count, 4)
+        XCTAssertEqual(metaStorage.setGroupResult.count, 3)
         filterService.groups.forEach {
-            if $0.groupType == .custom {
-                XCTAssert($0.isEnabled)
-            } else {
-                XCTAssertFalse($0.isEnabled)
-            }
+            XCTAssertFalse($0.isEnabled)
         }
 
         XCTAssertEqual(metaStorage.setFilterResult.count, 0)
@@ -1274,9 +1258,9 @@ class FiltersServiceTest: XCTestCase {
 
     private func checkWithError() {
         XCTAssertThrowsError( try filterService.enablePredefinedGroupsAndFilters())
-        XCTAssertEqual(metaStorage.setGroupCalledCount, 4)
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 3)
         XCTAssertEqual(metaStorage.setFilterCalledCount, 0)
-        XCTAssertEqual(metaStorage.setGroupResult.count, 4)
+        XCTAssertEqual(metaStorage.setGroupResult.count, 3)
 
         filterService.groups.forEach {
             XCTAssertFalse($0.isEnabled)
