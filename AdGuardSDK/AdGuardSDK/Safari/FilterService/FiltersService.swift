@@ -93,6 +93,12 @@ protocol FiltersServiceProtocol: ResetableAsyncProtocol {
      - throws: Can throw error if error occured while setuping
      */
     func enablePredefinedGroupsAndFilters() throws
+    // TODO: - Refactor it later
+    // It is a crutch because we add some data to DB while migrating custom filters
+    // If we don't reinitialize groups after migration we'll get inconsistency of states
+
+    /// Reinitializes groups with filters with actual info from database
+    func reinitializeGroups() throws
 }
 
 /*
@@ -383,6 +389,12 @@ final class FiltersService: FiltersServiceProtocol {
 
             _groupsAtomic.mutate { $0[customGroupIndex].filters[filterIndex] = newFilter }
             Logger.logDebug("(FiltersService) - renameCustomFilter; Custom filter with id = \(id) was successfully renamed")
+        }
+    }
+
+    func reinitializeGroups() throws {
+        try workingQueue.sync {
+            try self._groupsAtomic.mutate { $0 = try self.getAllLocalizedGroups() }
         }
     }
 
