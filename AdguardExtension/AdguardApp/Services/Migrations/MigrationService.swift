@@ -23,6 +23,9 @@ protocol MigrationServiceProtocol {
     func migrateIfNeeded()
 }
 
+/// This object is responsible for running migration code
+/// It has a knowledge of previous and current product versions
+/// And runs migrations according to these versions
 final class MigrationService: MigrationServiceProtocol {
 
     private let currentSchemaVersion = 5
@@ -218,6 +221,7 @@ final class MigrationService: MigrationServiceProtocol {
             All data from User rules, allowlist rules, inverted allowlist rules, DNS blocklist, DNS allowlist, filters(safari/dns) data was replaced in different storages
             So we need to migrate this data respectively
          */
+        // TODO: - Change migration version before release
         if lastBuildVersion < 800 {
             do {
                 let filtersDbMigration = try SafariProtectionFiltersDatabaseMigrationHelper(

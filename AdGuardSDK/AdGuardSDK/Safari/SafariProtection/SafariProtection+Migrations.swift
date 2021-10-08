@@ -18,6 +18,7 @@
 
 import Foundation
 
+/// This protocol helps main app to perform migration from v4.2 to v4.3
 public protocol SafariProtectionMigrationsProtocol: AnyObject {
     func add(rules: [UserRule], for type: SafariUserRuleType, override: Bool) throws
     func setGroup(_ groupType: SafariGroup.GroupType, enabled: Bool) throws
