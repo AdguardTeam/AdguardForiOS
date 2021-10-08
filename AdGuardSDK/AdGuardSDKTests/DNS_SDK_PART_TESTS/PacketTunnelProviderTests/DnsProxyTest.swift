@@ -11,7 +11,6 @@ class DnsProxyTest: XCTestCase {
         dnsLibsRulesProvider = DnsLibsRulesProviderMock()
         dnsProxy = DnsProxy(
             proxySettingsProvider: proxySettingsProvider,
-            dnsLibsRulesProvider: dnsLibsRulesProvider,
             statisticsDbContainerUrl: TestsFileManager.workingUrl
         )
     }
