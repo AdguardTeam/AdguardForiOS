@@ -20,8 +20,8 @@ import Foundation
 
 // MARK: - Affinity
 
-struct Affinity: OptionSet {
-    let rawValue: UInt8
+public struct Affinity: OptionSet {
+    public let rawValue: UInt8
 
     static let general = Affinity(rawValue: 1 << 0)
     static let privacy = Affinity(rawValue: 1 << 1)
@@ -30,18 +30,22 @@ struct Affinity: OptionSet {
     static let custom = Affinity(rawValue: 1 << 4)
     static let security = Affinity(rawValue: 1 << 5)
     static let all = Affinity([])
+
+    public init(rawValue: UInt8) {
+        self.rawValue = rawValue
+    }
 }
 
 // MARK: - FilterRule
 
-struct FilterRule {
+public struct FilterRule {
     let rule: String
     let affinity: Affinity?
 }
 
 // MARK: - AffinityRulesParserProtocol
 
-protocol AffinityRulesParserProtocol {
+public protocol AffinityRulesParserProtocol {
     /* Converts array of rules strings to array of FilterRule-s with affinities */
     static func parse(strings: [String]) -> [FilterRule]
 
@@ -69,17 +73,16 @@ protocol AffinityRulesParserProtocol {
  Such rules have **Affinity**.
  If rules are bordered with **affinityPrefix** and **affinitySuffix** than they should be added to the specified CB.
  Rules with affinity look like this:
- ~~~
+ ```
  !#safari_cb_affinity(general,privacy)
  @@||imasdk.googleapis.com/js/sdkloader/ima3.js$domain=ondemandkorea.com
  @@||google-analytics.com/collect|$domain=ondemandkorea.com
  !#safari_cb_affinity
- ~~~
-
+ ```
  That means that this 2 rules should be added to **general** and **privacy** content blockers,
  although all other rules from filter example will be added to **ads** CB.
  */
-struct AffinityRulesParser: AffinityRulesParserProtocol {
+public struct AffinityRulesParser: AffinityRulesParserProtocol {
 
     // MARK: - Private properties
 
@@ -97,7 +100,7 @@ struct AffinityRulesParser: AffinityRulesParserProtocol {
 
     // MARK: - Public methods
 
-    static func parse(strings: [String]) -> [FilterRule] {
+    public static func parse(strings: [String]) -> [FilterRule] {
         var rules: [FilterRule] = []
         var affinityMask: Affinity?
 
@@ -138,7 +141,7 @@ struct AffinityRulesParser: AffinityRulesParserProtocol {
         return rules
     }
 
-    static func rule(_ rule: String, withAffinity affinity: Affinity?) -> String {
+    public static func rule(_ rule: String, withAffinity affinity: Affinity?) -> String {
         guard let affinity = affinity, !rule.trimmingCharacters(in: .whitespaces).isEmpty else {
             return rule
         }
