@@ -20,7 +20,7 @@ import SafariAdGuardSDK
 import DnsAdGuardSDK
 
 /// Protocol for reseting service
-protocol SettingsReseterServiceProtocol: AnyObject {
+protocol SettingsResetServiceProtocol: AnyObject {
     /// Reset safari protection, DNS protection, all in app statistics, providers, purchase info, resources, vpn manager. Post notification that settings were reseted
     func resetAllSettings()
     /// Reset all statistics info like chart statistics, activity statistics and DNS log statistics. Post notification that statistics were reseted
@@ -33,8 +33,10 @@ protocol SettingsReseterServiceProtocol: AnyObject {
     func resetDnsLogStatistics() -> Bool
 }
 
+// TODO: Need tests for this service
+
 /// Service reset safari protection, DNS protection, all in app statistics, providers, purchase info, resources, vpn manager
-final class SettingsReseterService: SettingsReseterServiceProtocol {
+final class SettingsResetService: SettingsResetServiceProtocol {
 
     // MARK: - Private properties
 
@@ -81,28 +83,21 @@ final class SettingsReseterService: SettingsReseterServiceProtocol {
     // MARK: - Public methods
 
     func resetAllSettings() {
-        presentAlert()
+        DispatchQueue.asyncSafeMain {
+            AppDelegate.shared.presentLoadingAlert()
+        }
+
         workingQueue.async { [weak self] in
             guard let self = self else { return }
             DDLogInfo("(SettingsReseterService) - resetAllSettings; Start reset")
 
-            // MARK: - Reset Shared Defaults
+            // Reset Shared Defaults
 
             self.resources.reset()
             self.resources.firstRun = false
 
-            // MARK: - Reset purchase service
-
+            // Reset safari protection
             let group = DispatchGroup()
-            group.enter()
-            self.purchaseService.reset {
-                group.leave()
-            }
-
-            group.wait()
-
-            // MARK: - Reset safari protection
-
             group.enter()
             self.safariProtection.reset(withReloadCB: false) { error in
                 if let error = error  {
@@ -110,28 +105,37 @@ final class SettingsReseterService: SettingsReseterServiceProtocol {
                     group.leave()
                     return
                 }
-                self.updateSafariProtectionConfig()
                 self.enablePredefinedFiltersAndGroups()
                 self.updateSafariProtectionMeta()
                 group.leave()
             }
             group.wait()
 
-            // MARK: - Reset VpnManager
+            // Reset VpnManager
 
             self.vpnManager.removeVpnConfiguration { _ in }
 
-            // MARK: - Reset Statistics
+            // Reset Statistics
+
             self.resetAllStatistics()
 
-            // MARK: - Reset DNS protection
+            // Reset DNS protection
 
             self.resetDnsProtection()
 
-            // MARK: - Reset DNS providers
+            // Reset DNS providers
 
             self.resetDnsProviderManager()
             if #available(iOS 14.0, *) { self.nativeDnsManager.reset() }
+
+            // Reset purchase service
+
+            group.enter()
+            self.purchaseService.reset {
+                group.leave()
+            }
+
+            group.wait()
 
             AppDelegate.shared.setAppInterfaceStyle()
             // Notify that settings were reset
@@ -155,10 +159,7 @@ final class SettingsReseterService: SettingsReseterServiceProtocol {
             let chartReseted = self.resetChartStatistics()
             let dnsLogReseted = self.resetDnsLogStatistics()
 
-            guard activityReseted && chartReseted && dnsLogReseted else {
-                DDLogWarn("(SettingsReseterService) - resetStatistics; Not all statistics were reseted. Activity is reseted = \(activityReseted); Chart reseted = \(chartReseted); DNS log reseted = \(dnsLogReseted)")
-                return
-            }
+            DDLogInfo("(SettingsReseterService) - resetStatistics; Activity is reseted = \(activityReseted); Chart reseted = \(chartReseted); DNS log reseted = \(dnsLogReseted)")
             // Notify that settings were reset
             NotificationCenter.default.post(name: .resetStatistics, object: self)
             DDLogInfo("(SettingsReseterService) - resetStatistics; Reset statistics is over")
@@ -204,7 +205,6 @@ final class SettingsReseterService: SettingsReseterServiceProtocol {
     private func resetDnsProtection() {
         do {
             try dnsProtection.reset()
-            updateDnsProtectionConfig()
             DDLogInfo("(SettingsReseterService) - resetDnsProtection; Dns Protection reseted successfully")
         } catch {
             DDLogError("(SettingsReseterService) - resetDnsProtection; Error occurred while reseting dns protection: \(error)")
@@ -231,18 +231,6 @@ final class SettingsReseterService: SettingsReseterServiceProtocol {
         }
     }
 
-    private func updateSafariProtectionConfig() {
-        let defaultConfig = SafariConfiguration.defaultConfiguration()
-        defaultConfig.proStatus = isPro
-        safariProtection.updateConfig(with: defaultConfig)
-    }
-
-    private func updateDnsProtectionConfig() {
-        let defaultConfig = DnsConfiguration.defaultConfiguration(from: resources)
-        defaultConfig.proStatus = isPro
-        dnsProtection.updateConfig(with: defaultConfig)
-    }
-
     private func updateSafariProtectionMeta() {
         safariProtection.updateFiltersMetaAndLocalizations(true) { result in
             switch result {
@@ -261,16 +249,5 @@ final class SettingsReseterService: SettingsReseterServiceProtocol {
 
             DDLogInfo("(SettingsReseterService) - updateSafariProtectionMeta; Successfully reload CB")
         }
-    }
-
-    private func presentAlert() {
-        let alert = UIAlertController(title: nil, message: String.localizedString("loading_message"), preferredStyle: .alert)
-
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.startAnimating();
-
-        alert.view.addSubview(loadingIndicator)
-        AppDelegate.shared.window?.rootViewController?.present(alert, animated: true, completion: nil)
     }
 }

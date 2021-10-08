@@ -20,6 +20,16 @@ import Foundation
 @_implementationOnly import class ContentBlockerConverter.WebExtensionHelpers
 @_implementationOnly import protocol ContentBlockerConverter.WebExtensionHelpersProtocol
 
+/// Reset protocol for safari protection
+public protocol ResetableSafariProtectionAsyncProtocol: ResetableProtocol {
+    /**
+     Reset safari protection
+     - Parameter withReloadCB: if true reload CB
+     - Parameter onResetFinished: Closure return error if it occurred while reseting safari protection
+     */
+    func reset(withReloadCB: Bool, _ onResetFinished: @escaping (_ error: Error?) -> Void)
+}
+
 public typealias SafariProtectionProtocol = SafariProtectionFiltersProtocol
                                             & SafariProtectionUserRulesProtocol
                                             & SafariProtectionConfigurationProtocol

@@ -27,7 +27,3 @@ public protocol ResetableSyncProtocol: ResetableProtocol {
 public protocol ResetableAsyncProtocol: ResetableProtocol {
     func reset(_ onResetFinished: @escaping (_ error: Error?) -> Void)
 }
-
-public protocol ResetableSafariProtectionAsyncProtocol: ResetableProtocol {
-    func reset(withReloadCB: Bool, _ onResetFinished: @escaping (_ error: Error?) -> Void)
-}

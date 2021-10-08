@@ -66,7 +66,7 @@ class ActivityViewController: UITableViewController {
     private let domainsParserService: DomainsParserServiceProtocol = ServiceLocator.shared.getService()!
     private let domainsConverter: DomainsConverterProtocol = DomainsConverter()
     private let dnsProtection: DnsProtectionProtocol = ServiceLocator.shared.getService()!
-    private let settingsReseter: SettingsReseterServiceProtocol = ServiceLocator.shared.getService()!
+    private let settingsReset: SettingsResetServiceProtocol = ServiceLocator.shared.getService()!
 
     // MARK: - Notifications
     private var keyboardShowToken: NotificationToken?
@@ -315,7 +315,8 @@ class ActivityViewController: UITableViewController {
         let yesAction = UIAlertAction(title: String.localizedString("common_action_yes"), style: .destructive) {[weak self] _ in
             alert.dismiss(animated: true, completion: nil)
             self?.requestsModel?.clearRecords()
-            _ = self?.settingsReseter.resetDnsLogStatistics()
+            let resetResult = self?.settingsReset.resetDnsLogStatistics()
+            DDLogInfo("(ActivityViewController) - showResetAlert; DNS log statistics reseted successfully = \(resetResult ?? false)")
         }
 
         alert.addAction(yesAction)

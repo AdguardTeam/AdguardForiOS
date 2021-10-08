@@ -936,6 +936,34 @@ class FiltersServiceTest: XCTestCase {
         XCTAssertEqual(filter.first!.isEnabled, true)
     }
 
+    func testEnabledPredefinedGroupsAndFiltersWithNonProStatus() {
+        let privacyFilters = metaStorage.filtersTableMock.filter { $0.groupId == privacyGroupId }
+        let tags: [FilterTagsTable] = privacyFilters.enumerated().map { filter in
+            let type = filter.offset == privacyFilters.count - 1 ? recommendedId : platformId
+            return FilterTagsTable(filterId: filter.element.filterId, tagId: 1, type: type, name: "tag_name")
+        }
+        try! initPredefined(currentLanguage: "en", langsForFilter: [], tags: tags, proStatus: false)
+        XCTAssertEqual(metaStorage.setGroupCalledCount, 4)
+        XCTAssertEqual(metaStorage.setFilterCalledCount, 1)
+        XCTAssertEqual(metaStorage.setGroupResult.count, 4)
+
+        filterService.groups.forEach {
+            if $0.groupType == .privacy {
+                XCTAssert($0.isEnabled)
+            } else {
+                XCTAssertFalse($0.isEnabled)
+            }
+        }
+
+        XCTAssertEqual(metaStorage.setFilterResult.count, 1)
+        let filter = filterService.groups.flatMap { group in
+            return group.filters
+        }.filter { $0.tags.contains(where: { $0.tagType == .recommended} )}
+
+        XCTAssertEqual(filter.count, 1)
+        XCTAssertEqual(filter.first!.isEnabled, true)
+    }
+
     func testEnabledPredefinedGroupsAndFiltersWitAllPredefinedFilters() {
         let predefinedGroups: [SafariGroup.GroupType] = [.ads, .privacy, .custom, .languageSpecific]
 
@@ -1259,7 +1287,8 @@ class FiltersServiceTest: XCTestCase {
     }
 
 
-    private func initPredefined(currentLanguage: String, langsForFilter: [String], tags: [FilterTagsTable]) throws {
+    private func initPredefined(currentLanguage: String, langsForFilter: [String], tags: [FilterTagsTable], proStatus: Bool = true) throws {
+        configuration.proStatus = proStatus
         configuration.currentLanguage = currentLanguage
         metaStorage.getLangsForFilterResult = .success(langsForFilter)
         metaStorage.getTagsForFilterResult = .success(tags)

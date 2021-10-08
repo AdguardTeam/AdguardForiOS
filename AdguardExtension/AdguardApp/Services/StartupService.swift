@@ -148,7 +148,7 @@ final class StartupService : NSObject{
         let dnsLogStatistics: DnsLogStatisticsProtocol = try! DnsLogStatistics(statisticsDbContainerUrl: sharedUrls.statisticsFolderUrl)
         locator.addService(service: dnsLogStatistics)
 
-        let settingsReseter: SettingsReseterServiceProtocol = SettingsReseterService(vpnManager: vpnManager,
+        let settingsReset: SettingsResetServiceProtocol = SettingsResetService(vpnManager: vpnManager,
                                                                                      resources: sharedResources,
                                                                                      purchaseService: purchaseService,
                                                                                      safariProtection: safariProtection,
@@ -158,6 +158,6 @@ final class StartupService : NSObject{
                                                                                      chartStatistics: chartStatistics,
                                                                                      activityStatistics: activityStatistics,
                                                                                      dnsLogStatistics: dnsLogStatistics)
-        locator.addService(service: settingsReseter)
+        locator.addService(service: settingsReset)
     }
 }

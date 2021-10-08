@@ -205,8 +205,8 @@
 		24D11F2E26F5CCA600EC269F /* DnsProvidersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D11F2C26F5CCA500EC269F /* DnsProvidersModel.swift */; };
 		24D6A9E125FB698A00674D11 /* StatusBarWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6A9E025FB698A00674D11 /* StatusBarWindow.swift */; };
 		24D6A9E225FB698A00674D11 /* StatusBarWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6A9E025FB698A00674D11 /* StatusBarWindow.swift */; };
-		24D6A9F525FB7A6300674D11 /* SettingsReseterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6A9F425FB7A6300674D11 /* SettingsReseterService.swift */; };
-		24D6A9F625FB7A6300674D11 /* SettingsReseterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6A9F425FB7A6300674D11 /* SettingsReseterService.swift */; };
+		24D6A9F525FB7A6300674D11 /* SettingsResetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6A9F425FB7A6300674D11 /* SettingsResetService.swift */; };
+		24D6A9F625FB7A6300674D11 /* SettingsResetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6A9F425FB7A6300674D11 /* SettingsResetService.swift */; };
 		24D7367926EA1895003EE3EC /* ServiceInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D7367826EA1895003EE3EC /* ServiceInitializer.swift */; };
 		24D9225B2604B28B002F368B /* AppDelegate+UserNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D9225A2604B28B002F368B /* AppDelegate+UserNotifications.swift */; };
 		24D9226D2604B3DD002F368B /* AppDelegate+UserNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D9225A2604B28B002F368B /* AppDelegate+UserNotifications.swift */; };
@@ -2738,7 +2738,7 @@
 		24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSchemeURLParserTest.swift; sourceTree = "<group>"; };
 		24D11F2C26F5CCA500EC269F /* DnsProvidersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersModel.swift; sourceTree = "<group>"; };
 		24D6A9E025FB698A00674D11 /* StatusBarWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarWindow.swift; sourceTree = "<group>"; };
-		24D6A9F425FB7A6300674D11 /* SettingsReseterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsReseterService.swift; sourceTree = "<group>"; };
+		24D6A9F425FB7A6300674D11 /* SettingsResetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsResetService.swift; sourceTree = "<group>"; };
 		24D7367826EA1895003EE3EC /* ServiceInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceInitializer.swift; sourceTree = "<group>"; };
 		24D9225A2604B28B002F368B /* AppDelegate+UserNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+UserNotifications.swift"; sourceTree = "<group>"; };
 		24D9227F2604B41C002F368B /* AppDelegate+CheckPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+CheckPeriod.swift"; sourceTree = "<group>"; };
@@ -6810,7 +6810,7 @@
 				7EA216392444847700393949 /* MigrationService.swift */,
 				D0984F992608866900703DB2 /* MigrationService+AntibannerMigration.swift */,
 				D0A614EC26EBA18B00793922 /* BootstrapsHelper.swift */,
-				24D6A9F425FB7A6300674D11 /* SettingsReseterService.swift */,
+				24D6A9F425FB7A6300674D11 /* SettingsResetService.swift */,
 				24C31EC026FF702500673309 /* WebReporter */,
 				7ED0B1A526C4335700B0CE7B /* NewAndRefactoredObjects */,
 				7EC67FB5254843B300FEEEE2 /* NativeDnsService */,
@@ -8513,7 +8513,7 @@
 				7EC67F6D2548301000FEEEE2 /* ChooseDnsImplementationController.swift in Sources */,
 				D0984F9B2608866900703DB2 /* MigrationService+AntibannerMigration.swift in Sources */,
 				D06E6BD525E8F6000069013C /* VpnConfigurationStatus.swift in Sources */,
-				24D6A9F625FB7A6300674D11 /* SettingsReseterService.swift in Sources */,
+				24D6A9F625FB7A6300674D11 /* SettingsResetService.swift in Sources */,
 				7EBDFE9226CFAE2B00CCE8CC /* FilterDetailsCell.swift in Sources */,
 				7EB89CB126C50C5F00E7C8A1 /* FileManager+Utils.swift in Sources */,
 				D0D7E53324371A63001801A5 /* ACDnsUtils.m in Sources */,
@@ -9115,7 +9115,7 @@
 				7E3556D625DBEB7500CB2A8D /* UIViewController+Present.swift in Sources */,
 				7E9C0BCD25627E8D00F1999D /* UIColor+Utils.swift in Sources */,
 				7E86A9BA26CBB84E000B395F /* SafariTagButton.swift in Sources */,
-				24D6A9F525FB7A6300674D11 /* SettingsReseterService.swift in Sources */,
+				24D6A9F525FB7A6300674D11 /* SettingsResetService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

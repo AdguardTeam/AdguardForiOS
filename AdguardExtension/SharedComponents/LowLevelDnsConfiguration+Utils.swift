@@ -27,8 +27,8 @@ extension LowLevelDnsConfiguration {
             blockingMode: .defaultMode,
             blockingIp: nil,
             blockedTtl: 2, // 2 seconds is more than enough to process packet record
-            blockIpv6: true,
-            restartByReachability: true
+            blockIpv6: false,
+            restartByReachability: false
         )
     }
 

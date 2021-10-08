@@ -25,7 +25,7 @@ class SettingsController: UITableViewController {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
-    private let settingsReseter: SettingsReseterServiceProtocol = ServiceLocator.shared.getService()!
+    private let settingsReset: SettingsResetServiceProtocol = ServiceLocator.shared.getService()!
 
     @IBOutlet weak var wifiUpdateSwitch: UISwitch!
     @IBOutlet weak var invertedSwitch: UISwitch!
@@ -155,7 +155,7 @@ class SettingsController: UITableViewController {
 
         let yesAction = UIAlertAction(title: String.localizedString("reset_title").capitalized, style: .destructive) { [weak self] _ in
             alert.dismiss(animated: true, completion: nil)
-            self?.settingsReseter.resetAllStatistics()
+            self?.settingsReset.resetAllStatistics()
         }
 
         alert.addAction(yesAction)
@@ -174,7 +174,7 @@ class SettingsController: UITableViewController {
 
         let yesAction = UIAlertAction(title: String.localizedString("common_action_yes"), style: .destructive) { [weak self] _ in
             alert.dismiss(animated: true, completion: nil)
-            self?.settingsReseter.resetAllSettings()
+            self?.settingsReset.resetAllSettings()
         }
 
         alert.addAction(yesAction)
