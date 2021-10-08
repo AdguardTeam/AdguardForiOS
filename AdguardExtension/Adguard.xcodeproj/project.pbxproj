@@ -826,7 +826,6 @@
 		7E9F3E1023CE08E300A7BDA2 /* DomainsConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9F3E0F23CE08E300A7BDA2 /* DomainsConverter.swift */; };
 		7E9F3E1123CE0FA700A7BDA2 /* DomainsConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9F3E0F23CE08E300A7BDA2 /* DomainsConverter.swift */; };
 		7EA2163A2444847700393949 /* MigrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA216392444847700393949 /* MigrationService.swift */; };
-		7EA2163D24449EEC00393949 /* MigrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA216392444847700393949 /* MigrationService.swift */; };
 		7EA2B3252424FE8F00FD3304 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA2B3232424FE8F00FD3304 /* ActivityTableViewCell.swift */; };
 		7EA2B3262424FE8F00FD3304 /* ActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EA2B3242424FE8F00FD3304 /* ActivityTableViewCell.xib */; };
 		7EA3DBC524090D7B000D8D42 /* Animation+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA3DBC424090D7B000D8D42 /* Animation+Utils.swift */; };
@@ -1571,7 +1570,6 @@
 		D0977A6D221D8C9700E10AC8 /* ACLLogFileManagerDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0977A6B221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift */; };
 		D0984F9A2608866900703DB2 /* MigrationService+AntibannerMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0984F992608866900703DB2 /* MigrationService+AntibannerMigration.swift */; };
 		D0984F9B2608866900703DB2 /* MigrationService+AntibannerMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0984F992608866900703DB2 /* MigrationService+AntibannerMigration.swift */; };
-		D0984F9C2608866900703DB2 /* MigrationService+AntibannerMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0984F992608866900703DB2 /* MigrationService+AntibannerMigration.swift */; };
 		D098B44924497764003BA4DA /* ActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EA2B3242424FE8F00FD3304 /* ActivityTableViewCell.xib */; };
 		D09CB60523ABBA7D008C9FF7 /* OnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09CB60423ABBA7D008C9FF7 /* OnboardingController.swift */; };
 		D09E271B2541D00B002D6BC0 /* Setapp in Frameworks */ = {isa = PBXBuildFile; productRef = D09E271A2541D00B002D6BC0 /* Setapp */; };
@@ -9007,7 +9005,6 @@
 				D0C940E623EAE3E4008B85EC /* NetworkSettingsService.swift in Sources */,
 				7ED558AE27106CF1001D4D79 /* UserRulesRedirectAction.swift in Sources */,
 				7EE8AC1826C595350070D477 /* ThemeMode.swift in Sources */,
-				D0984F9C2608866900703DB2 /* MigrationService+AntibannerMigration.swift in Sources */,
 				D0288F4423069ACB00A4EBEF /* NSDate+Utils.m in Sources */,
 				7ED558AF27106D45001D4D79 /* OpenLicenseControllerParser.swift in Sources */,
 				7E7702AC27008A1D004A8616 /* NativeDnsSettingsManager.swift in Sources */,
