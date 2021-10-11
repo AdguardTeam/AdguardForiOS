@@ -1639,7 +1639,6 @@
 		D0977A6D221D8C9700E10AC8 /* ACLLogFileManagerDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0977A6B221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift */; };
 		D0984F9A2608866900703DB2 /* MigrationService+AntibannerMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0984F992608866900703DB2 /* MigrationService+AntibannerMigration.swift */; };
 		D0984F9B2608866900703DB2 /* MigrationService+AntibannerMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0984F992608866900703DB2 /* MigrationService+AntibannerMigration.swift */; };
-		D0984F9C2608866900703DB2 /* MigrationService+AntibannerMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0984F992608866900703DB2 /* MigrationService+AntibannerMigration.swift */; };
 		D098B44924497764003BA4DA /* ActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EA2B3242424FE8F00FD3304 /* ActivityTableViewCell.xib */; };
 		D09B64782624AFED00F60AF7 /* FiltersStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64772624AFED00F60AF7 /* FiltersStorageMock.swift */; };
 		D09B64AE2624B14200F60AF7 /* HttpRequestServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09B64AD2624B14200F60AF7 /* HttpRequestServiceMock.swift */; };
@@ -6465,6 +6464,7 @@
 		7EE981C6270EFC7500AB1EA1 /* Migrations */ = {
 			isa = PBXGroup;
 			children = (
+				D0984F992608866900703DB2 /* MigrationService+AntibannerMigration.swift */,
 				7EA216392444847700393949 /* MigrationService.swift */,
 				7EE981CB270EFDB100AB1EA1 /* MigrationToSDKv4.3 */,
 			);
@@ -6880,7 +6880,6 @@
 				7E21CBA725F918FA00A5A735 /* NetworkManager.swift */,
 				7E8576752435F57F0055F63D /* DomainsParserService.swift */,
 				7EE981C6270EFC7500AB1EA1 /* Migrations */,
-				D0984F992608866900703DB2 /* MigrationService+AntibannerMigration.swift */,
 				D0A614EC26EBA18B00793922 /* BootstrapsHelper.swift */,
 				24C31EC026FF702500673309 /* WebReporter */,
 				7ED0B1A526C4335700B0CE7B /* NewAndRefactoredObjects */,
@@ -9352,7 +9351,6 @@
 				D0C940E623EAE3E4008B85EC /* NetworkSettingsService.swift in Sources */,
 				7EE8AC1826C595350070D477 /* ThemeMode.swift in Sources */,
 				D02C080221BEAA2100796714 /* FiltersServiceTest.swift in Sources */,
-				D0984F9C2608866900703DB2 /* MigrationService+AntibannerMigration.swift in Sources */,
 				7EA2163C24449EA700393949 /* MigrationServiceTest.swift in Sources */,
 				D0288F4423069ACB00A4EBEF /* NSDate+Utils.m in Sources */,
 				7E7702AC27008A1D004A8616 /* NativeDnsSettingsManager.swift in Sources */,

@@ -20,6 +20,9 @@ import Foundation
 import enum DnsAdGuardSDK.CommonError
 import struct DnsAdGuardSDK.DnsFilter
 
+/// This object is a helper for `SDKMigrationServiceHelper`
+/// It is responsible for providing DNS filters content and meta from previous storage and saving it in new storage
+/// And removing obsolete data
 protocol DnsProtectionFiltersMigrationHelperProtocol: AnyObject {
     /// Returns DNS filters meta from old storage
     func getDnsFiltersMeta() -> [SDKDnsMigrationObsoleteDnsFilter]
@@ -34,9 +37,7 @@ protocol DnsProtectionFiltersMigrationHelperProtocol: AnyObject {
     func removeDnsFiltersDataFromOldStorage()
 }
 
-/// This object is a helper for `SDKMigrationServiceHelper`
-/// It is responsible for providing DNS filters content and meta from previous storage and saving it in new storage
-/// And removing obsolete data
+/// Implementation of `DnsProtectionFiltersMigrationHelperProtocol`
 final class DnsProtectionFiltersMigrationHelper: DnsProtectionFiltersMigrationHelperProtocol {
 
     private let oldDnsFiltersContainerFolderUrl: URL
