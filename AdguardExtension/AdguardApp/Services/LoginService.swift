@@ -270,9 +270,6 @@ final class LoginService: LoginServiceProtocol {
     func reset(completion:@escaping ()->Void ) {
         resetLicense { [weak self] (_) in
             self?.keychain.reset()
-            if let callback = self?.activeChanged {
-                callback()
-            }
 
             completion()
         }

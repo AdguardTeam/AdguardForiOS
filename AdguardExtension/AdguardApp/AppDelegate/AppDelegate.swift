@@ -217,15 +217,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Public methods
 
-    func resetAllSettings() {
-        let resetProcessor = SettingsResetor(appDelegate: self,
-                                             vpnManager: vpnManager,
-                                             resources: resources,
-                                             purchaseService: purchaseService,
-                                             safariProtection: safariProtection)
-        resetProcessor.resetAllSettings()
-    }
-
     func setAppInterfaceStyle() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
