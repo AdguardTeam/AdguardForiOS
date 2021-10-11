@@ -63,6 +63,7 @@
                             <constraint firstItem="F7h-od-er8" firstAttribute="top" secondItem="QM8-d3-eSj" secondAttribute="top" id="ydu-Lx-Ceb"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <connections>
                         <outlet property="dnsLogContainerView" destination="F7h-od-er8" id="1Cf-Hw-8vL"/>
                         <outlet property="getProContainerView" destination="I8C-5V-XdX" id="mJK-Ev-w5w"/>
@@ -202,7 +203,7 @@
                         <viewLayoutGuide key="safeArea" id="iGK-5u-0DL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="iGK-5u-0DL" firstAttribute="bottom" secondItem="1A6-DD-78f" secondAttribute="bottom" priority="250" constant="42" id="0sz-qG-9as"/>
+                            <constraint firstItem="iGK-5u-0DL" firstAttribute="bottom" secondItem="1A6-DD-78f" secondAttribute="bottom" constant="42" id="0sz-qG-9as"/>
                             <constraint firstItem="iGK-5u-0DL" firstAttribute="trailing" secondItem="a0E-KM-oA3" secondAttribute="trailing" constant="24" id="4Cd-nM-xPR"/>
                             <constraint firstItem="iGK-5u-0DL" firstAttribute="trailing" secondItem="Iwn-G2-Shg" secondAttribute="trailing" constant="16" id="5GC-DH-h3X"/>
                             <constraint firstItem="iGK-5u-0DL" firstAttribute="trailing" secondItem="ceh-zv-HH4" secondAttribute="trailing" constant="16" id="8wV-qV-4GG"/>
@@ -271,18 +272,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BFk-Ks-ezq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2084.8000000000002" y="654.67980295566508"/>
+            <point key="canvasLocation" x="2087" y="916"/>
         </scene>
         <!--Dns Container Controller-->
         <scene sceneID="9eU-yK-W4S">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="xvL-9q-qox" customClass="DnsContainerController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="xvL-9q-qox" customClass="DnsContainerController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MQz-Un-cMd">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="798"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n1j-Q6-vGE">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="738"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="808"/>
                                 <connections>
                                     <segue destination="7eB-aD-VKK" kind="embed" id="qCe-mL-boE"/>
                                 </connections>
@@ -310,6 +311,7 @@
                             <constraint firstItem="nrU-sC-Yky" firstAttribute="trailing" secondItem="1Pb-x4-4OY" secondAttribute="trailing" id="eFd-uq-gqu"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <connections>
                         <outlet property="containerView" destination="n1j-Q6-vGE" id="R7O-78-2bk"/>
                         <outlet property="shadowView" destination="1Pb-x4-4OY" id="Ybv-Yx-fHm"/>
@@ -322,9 +324,9 @@
         <!--Most Active Companies Controller-->
         <scene sceneID="xZZ-iE-vuG">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="d7M-Oi-Bgo" customClass="MostActiveCompaniesController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="d7M-Oi-Bgo" customClass="MostActiveCompaniesController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zvo-vj-Fmf">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="798"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Most active companies" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Asq-k8-hi1" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -436,6 +438,7 @@
                             <constraint firstItem="Asq-k8-hi1" firstAttribute="leading" secondItem="qB9-PF-jLI" secondAttribute="leading" constant="24" id="qvO-IG-jEZ"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" id="isp-9c-Wuw"/>
                     <connections>
                         <outlet property="controllerTitle" destination="Asq-k8-hi1" id="ioW-4y-Ey5"/>
@@ -706,21 +709,21 @@
         <!--Dns Request Details Controller-->
         <scene sceneID="8CM-yW-ZJC">
             <objects>
-                <tableViewController id="7eB-aD-VKK" customClass="DnsRequestDetailsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="7eB-aD-VKK" customClass="DnsRequestDetailsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="1" id="gSW-Cf-kx2">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="738"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ActivityTitleCell" id="cft-t8-7Ym" customClass="ActivityTitleCell" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="64"/>
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="53"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cft-t8-7Ym" id="mmk-iv-asa">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="53"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Request details" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uni-H6-XNc" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                            <rect key="frame" x="24" y="11" width="366" height="29"/>
+                                            <rect key="frame" x="24" y="0.0" width="366" height="29"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -926,6 +929,7 @@
                             <outlet property="delegate" destination="7eB-aD-VKK" id="OPT-jm-iho"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yRY-D2-KzC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1066,7 +1070,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NDu-Yu-Ww9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2088.4057971014495" y="492.85714285714283"/>
+            <point key="canvasLocation" x="2087" y="265"/>
         </scene>
         <!--Block Request Controller-->
         <scene sceneID="JXZ-K9-IfZ">
@@ -1479,7 +1483,7 @@
         <!--Activity View Controller-->
         <scene sceneID="MKS-mT-4Xy">
             <objects>
-                <tableViewController id="lL1-Yv-4AH" customClass="ActivityViewController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="lL1-Yv-4AH" customClass="ActivityViewController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="44" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="104" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="0ce-n6-kCx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1814,6 +1818,7 @@
                             <outlet property="delegate" destination="lL1-Yv-4AH" id="Aly-pF-p86"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="U9t-xM-Gcq">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2034,7 +2039,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aRG-Fb-OKh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2089.8550724637685" y="-170.08928571428569"/>
+            <point key="canvasLocation" x="2087" y="-376"/>
         </scene>
         <!--DnsSettings-->
         <scene sceneID="Muf-LS-F1j">

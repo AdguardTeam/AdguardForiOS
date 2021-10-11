@@ -85,6 +85,9 @@
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "Purchase";
 
+/* (GetProTableController) missing purchase alert message */
+"upgrade_missing_purchase_message" = "The list of subscriptions is not available. Please check your Internet connection and try again.";
+
 /* (LoginController) lost password button title */
 "lost_password" = "Lost password?";
 

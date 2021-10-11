@@ -180,6 +180,11 @@ class GetProTableController: UITableViewController {
     }
 
     @IBAction func choosePeriodAction(_ sender: Any) {
+        if purchaseService.products.isEmpty {
+            presentSimpleAlert(title: nil, message: String.localizedString("upgrade_missing_purchase_message"))
+            return
+        }
+
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .deviceAlertStyle)
 
         for product in purchaseService.products {
