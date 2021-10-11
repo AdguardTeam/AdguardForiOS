@@ -69,16 +69,6 @@ class SharedResourcesMock: NSObject, AESharedResourcesProtocol {
 
     var whitelistContentBlockingRules: NSMutableArray?
 
-    var invertedWhitelistContentBlockingObject: AEInvertedWhitelistDomainsObject?
-
-    var lastUpdateFilterMetadata: ABECFilterClientMetadata?
-
-    var filtersMetadataCache: ABECFilterClientMetadata?
-
-    var i18nCacheForFilterSubscription: ABECFilterClientLocalization?
-
-    var activeDnsServer: DnsServerInfo? = nil
-
     func path(forRelativePath relativePath: String) -> String {
         return "test_domain\(relativePath)"
     }

@@ -204,7 +204,6 @@ extension String {
         return ACLocalizedString(key, nil)
     }
 
-
     static func simpleSecondsFormatter(_ ms: NSNumber) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal

@@ -24,13 +24,15 @@ class NetworkSettingsServiceMock: NetworkSettingsServiceProtocol {
 
     var enabledExceptions: [WifiException] = []
 
-    var filterWifiDataEnabled: Bool = true
+    var filterWifiDataEnabled: Bool = false
 
-    var filterMobileDataEnabled: Bool = true
+    var filterMobileDataEnabled: Bool = false
 
     var delegate: NetworkSettingsChangedDelegate?
 
-    func add(exception: WifiException) {
+    var onDemandRules: [NEOnDemandRule] = []
+
+    func add(exception: WifiException) throws {
 
     }
 
@@ -38,13 +40,15 @@ class NetworkSettingsServiceMock: NetworkSettingsServiceProtocol {
 
     }
 
-    func change(oldException: WifiException, newException: WifiException) {
+    func rename(oldName: String, newName: String) throws {
 
     }
 
-    func getCurrentWiFiName() -> String? {
-        return nil
+    func changeState(name: String, enabled: Bool) {
+
     }
 
-    var onDemandRules: [NEOnDemandRule] = []
+    func fetchCurrentWiFiName(_ completionHandler: @escaping (String?) -> Void) {
+        completionHandler(nil)
+    }
 }
