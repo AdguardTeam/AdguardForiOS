@@ -31,20 +31,28 @@ final class SDKMigrationServiceHelper: SDKMigrationServiceHelperProtocol {
     private let filtersDbMigration: SafariProtectionFiltersDatabaseMigrationHelperProtocol
     private let allowlistRulesMigration: SafariProtectionAllowlistRulesMigrationHelperProtocol
     private let customFiltersMigration: SafariProtectionCustomFiltersMigrationHelperProtocol
+    private let dnsFiltersMigration: DnsProtectionFiltersMigrationHelperProtocol
 
     init(
         safariProtection: SafariProtectionMigrationsProtocol,
         filtersDbMigration: SafariProtectionFiltersDatabaseMigrationHelperProtocol,
         allowlistRulesMigration: SafariProtectionAllowlistRulesMigrationHelperProtocol,
-        customFiltersMigration: SafariProtectionCustomFiltersMigrationHelperProtocol
+        customFiltersMigration: SafariProtectionCustomFiltersMigrationHelperProtocol,
+        dnsFiltersMigration: DnsProtectionFiltersMigrationHelperProtocol
     ) {
         self.safariProtection = safariProtection
         self.filtersDbMigration = filtersDbMigration
         self.allowlistRulesMigration = allowlistRulesMigration
         self.customFiltersMigration = customFiltersMigration
+        self.dnsFiltersMigration = dnsFiltersMigration
     }
 
     func migrate() throws {
+        try migrateSafariProtection()
+        try migrateDnsProtection()
+    }
+
+    private func migrateSafariProtection() throws {
         /* Rules migration */
         let userRules = try filtersDbMigration.getUserRules()
         let allowlistRules = try allowlistRulesMigration.getAllowlistRules()
@@ -75,6 +83,14 @@ final class SDKMigrationServiceHelper: SDKMigrationServiceHelperProtocol {
         try filtersDbMigration.removeOldDBFiles()
 
         safariProtection.convertFiltersAndReloadCbs(onCbReloaded: nil)
+    }
+
+    private func migrateDnsProtection() throws {
+        /* DNS filters migration */
+        let oldDnsFilters = dnsFiltersMigration.getDnsFiltersMeta()
+        try dnsFiltersMigration.saveDnsFiltersToSDK(oldDnsFilters)
+        try dnsFiltersMigration.replaceFilesForDnsFilters(with: oldDnsFilters.map { $0.id })
+        dnsFiltersMigration.removeDnsFiltersDataFromOldStorage()
     }
 
     private func migrate(userRules: [SDKSafariMigrationRule], for type: SafariUserRuleType) throws {

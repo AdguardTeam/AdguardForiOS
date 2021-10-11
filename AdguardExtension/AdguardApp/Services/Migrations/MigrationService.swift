@@ -36,7 +36,7 @@ final class MigrationService: MigrationServiceProtocol {
     private let configurationService: ConfigurationServiceProtocol
     private let productInfo: ADProductInfoProtocol
     private let safariProtection: SafariProtectionProtocol
-    
+
     private let migrationQueue = DispatchQueue(label: "MigrationService queue", qos: .userInitiated)
 
     init(
@@ -233,11 +233,17 @@ final class MigrationService: MigrationServiceProtocol {
                     newDBFilePath: SharedStorageUrls().dbFolderUrl.appendingPathComponent("adguard.db").path,
                     filtersDirectoryUrl: SharedStorageUrls().filtersFolderUrl
                 )
+                let dnsFiltersMigration = DnsProtectionFiltersMigrationHelper(
+                    oldDnsFiltersContainerFolderUrl: resources.sharedResuorcesURL(),
+                    newDnsFiltersContainerFolderUrl: SharedStorageUrls().dnsFiltersFolderUrl,
+                    resources: resources
+                )
                 let sdkMigrationHelper = SDKMigrationServiceHelper(
                     safariProtection: safariProtection as! SafariProtectionMigrationsProtocol,
                     filtersDbMigration: filtersDbMigration,
                     allowlistRulesMigration: allowlistRulesMigration,
-                    customFiltersMigration: customFiltersMigration
+                    customFiltersMigration: customFiltersMigration,
+                    dnsFiltersMigration: dnsFiltersMigration
                 )
                 try sdkMigrationHelper.migrate()
                 DDLogInfo("(MigrationService) - Successfully migrated old data to SDK")
