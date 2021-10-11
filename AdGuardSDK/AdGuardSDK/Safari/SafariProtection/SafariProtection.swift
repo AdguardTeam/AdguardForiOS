@@ -20,12 +20,22 @@ import Foundation
 @_implementationOnly import class ContentBlockerConverter.WebExtensionHelpers
 @_implementationOnly import protocol ContentBlockerConverter.WebExtensionHelpersProtocol
 
+/// Reset protocol for safari protection
+public protocol ResetableSafariProtectionAsyncProtocol: ResetableProtocol {
+    /**
+     Reset safari protection
+     - Parameter withReloadCB: if true reload CB
+     - Parameter onResetFinished: Closure return error if it occurred while reseting safari protection
+     */
+    func reset(withReloadCB: Bool, _ onResetFinished: @escaping (_ error: Error?) -> Void)
+}
+
 public typealias SafariProtectionProtocol = SafariProtectionFiltersProtocol
                                             & SafariProtectionUserRulesProtocol
                                             & SafariProtectionConfigurationProtocol
                                             & SafariProtectionContentBlockersProtocol
                                             & SafariProtectionBackgroundFetchProtocol
-                                            & ResetableAsyncProtocol
+                                            & ResetableSafariProtectionAsyncProtocol
 
 public final class SafariProtection: SafariProtectionProtocol {
 
@@ -117,7 +127,7 @@ public final class SafariProtection: SafariProtectionProtocol {
     // MARK: - Public method
 
     /* Resets all sdk to default configuration. Deletes all stored filters, filters meta and user rules */
-    public func reset(_ onResetFinished: @escaping (Error?) -> Void) {
+    public func reset(withReloadCB: Bool, _ onResetFinished: @escaping (Error?) -> Void) {
         workingQueue.async { [weak self] in
             guard let self = self else {
                 Logger.logError("(SafariProtection) - reset; self is missing!")
@@ -158,6 +168,10 @@ public final class SafariProtection: SafariProtectionProtocol {
                 Logger.logError("(SafariProtection) - reset; Error reseting one of the service; Error: \(error)")
                 self.completionQueue.async { onResetFinished(error) }
                 return
+            }
+
+            guard withReloadCB else {
+                return self.completionQueue.async { onResetFinished(nil) }
             }
 
             self.reloadContentBlockers { error in

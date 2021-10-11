@@ -51,19 +51,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Services
 
-    private var resources: AESharedResourcesProtocol
-    private var safariProtection: SafariProtectionProtocol
-    private var dnsProtection: DnsProtectionProtocol
-    private var purchaseService: PurchaseServiceProtocol
-    private var networking: ACNNetworking
-    private var configuration: ConfigurationServiceProtocol
-    private var productInfo: ADProductInfoProtocol
-    private var userNotificationService: UserNotificationServiceProtocol
-    private var vpnManager: VpnManagerProtocol
-    private var setappService: SetappServiceProtocol
-    private var rateService: RateAppServiceProtocol
-    private var complexProtection: ComplexProtectionServiceProtocol
-    private var themeService: ThemeServiceProtocol
+    private let resources: AESharedResourcesProtocol
+    private let safariProtection: SafariProtectionProtocol
+    private let dnsProtection: DnsProtectionProtocol
+    private let purchaseService: PurchaseServiceProtocol
+    private let networking: ACNNetworking
+    private let configuration: ConfigurationServiceProtocol
+    private let productInfo: ADProductInfoProtocol
+    private let migrationService: MigrationServiceProtocol
+    private let userNotificationService: UserNotificationServiceProtocol
+    private let vpnManager: VpnManagerProtocol
+    private let setappService: SetappServiceProtocol
+    private let rateService: RateAppServiceProtocol
+    private let complexProtection: ComplexProtectionServiceProtocol
+    private let themeService: ThemeServiceProtocol
 
     // MARK: - Application init
 
@@ -75,13 +76,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.networking = ServiceLocator.shared.getService()!
         self.configuration = ServiceLocator.shared.getService()!
         self.productInfo = ServiceLocator.shared.getService()!
+        self.migrationService = ServiceLocator.shared.getService()!
         self.userNotificationService = ServiceLocator.shared.getService()!
         self.vpnManager = ServiceLocator.shared.getService()!
         self.setappService = ServiceLocator.shared.getService()!
         self.rateService = ServiceLocator.shared.getService()!
         self.complexProtection = ServiceLocator.shared.getService()!
         self.themeService = ServiceLocator.shared.getService()!
-        self.safariProtection = ServiceLocator.shared.getService()!
         self.dnsProtection = ServiceLocator.shared.getService()!
 
         self.statusBarWindow = StatusBarWindow(configuration: configuration)
@@ -95,7 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
 
         //------------- Preparing for start application. Stage 1. -----------------
-
+        migrationService.migrateIfNeeded()
         activateWithOpenUrl = false
 
         initLogger()
@@ -215,15 +216,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     // MARK: - Public methods
-
-    func resetAllSettings() {
-        let resetProcessor = SettingsResetor(appDelegate: self,
-                                             vpnManager: vpnManager,
-                                             resources: resources,
-                                             purchaseService: purchaseService,
-                                             safariProtection: safariProtection)
-        resetProcessor.resetAllSettings()
-    }
 
     func setAppInterfaceStyle() {
         DispatchQueue.main.async { [weak self] in

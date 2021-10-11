@@ -34,7 +34,6 @@ public final class DnsProtection: DnsProtectionProtocol {
     /* Services */
     var configuration: DnsConfigurationProtocol
     let defaultConfiguration: DnsConfigurationProtocol
-    let dnsProvidersManager: DnsProvidersManagerProtocol
     let dnsUserRulesManagerProvider: DnsUserRulesManagersProviderProtocol
     let dnsFiltersManager: DnsFiltersManagerProtocol
     let filterFilesStorage: FilterFilesStorageProtocol
@@ -48,7 +47,6 @@ public final class DnsProtection: DnsProtectionProtocol {
         self.configuration = configuration
         self.defaultConfiguration = defaultConfiguration
 
-        self.dnsProvidersManager = services.dnsProvidersManager
         self.dnsUserRulesManagerProvider = services.dnsUserRulesManager
         self.dnsFiltersManager = services.dnsFiltersManager
         self.filterFilesStorage = services.filterFilesStorage
@@ -57,14 +55,12 @@ public final class DnsProtection: DnsProtectionProtocol {
     // Initializer for tests
     init(configuration: DnsConfigurationProtocol,
          defaultConfiguration: DnsConfigurationProtocol,
-         dnsProvidersManager: DnsProvidersManagerProtocol,
          dnsUserRulesManagerProvider: DnsUserRulesManagersProviderProtocol,
          dnsFiltersManager: DnsFiltersManagerProtocol,
          filterFilesStorage: FilterFilesStorageProtocol) {
 
         self.configuration = configuration
         self.defaultConfiguration = defaultConfiguration
-        self.dnsProvidersManager = dnsProvidersManager
         self.dnsUserRulesManagerProvider = dnsUserRulesManagerProvider
         self.dnsFiltersManager = dnsFiltersManager
         self.filterFilesStorage = filterFilesStorage
@@ -73,7 +69,6 @@ public final class DnsProtection: DnsProtectionProtocol {
     public func reset() throws {
         try workingQueue.sync {
             configuration.updateConfig(with: defaultConfiguration)
-            try dnsProvidersManager.reset()
             try dnsUserRulesManagerProvider.reset()
             try dnsFiltersManager.reset()
             try filterFilesStorage.reset()

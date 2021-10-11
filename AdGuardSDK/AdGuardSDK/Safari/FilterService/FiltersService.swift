@@ -93,6 +93,12 @@ protocol FiltersServiceProtocol: ResetableAsyncProtocol {
      - throws: Can throw error if error occured while setuping
      */
     func enablePredefinedGroupsAndFilters() throws
+    // TODO: - Refactor it later
+    // It is a crutch because we add some data to DB while migrating custom filters
+    // If we don't reinitialize groups after migration we'll get inconsistency of states
+
+    /// Reinitializes groups with filters with actual info from database
+    func reinitializeGroups() throws
 }
 
 /*
@@ -383,6 +389,12 @@ final class FiltersService: FiltersServiceProtocol {
 
             _groupsAtomic.mutate { $0[customGroupIndex].filters[filterIndex] = newFilter }
             Logger.logDebug("(FiltersService) - renameCustomFilter; Custom filter with id = \(id) was successfully renamed")
+        }
+    }
+
+    func reinitializeGroups() throws {
+        try workingQueue.sync {
+            try self._groupsAtomic.mutate { $0 = try self.getAllLocalizedGroups() }
         }
     }
 
@@ -782,7 +794,7 @@ final class FiltersService: FiltersServiceProtocol {
 
     /* Enable predefined groups and filters. Throws error on setting enabled state in storage*/
     private func enablePredefinedGroupsAndFiltersInternal(with groups: [SafariGroup], currentLanguage: String) throws {
-        let predefinedGroups: [SafariGroup.GroupType] = [.ads, .privacy, .languageSpecific, .custom]
+        let predefinedGroups: [SafariGroup.GroupType] = [.ads, .privacy, .languageSpecific]
 
         for group in groups {
             guard predefinedGroups.contains(group.groupType) else { continue }
@@ -795,7 +807,7 @@ final class FiltersService: FiltersServiceProtocol {
                 recommendedCount += 1
             }
 
-            let groupIsEnabled = recommendedCount > 0 || group.groupType == .custom
+            let groupIsEnabled = recommendedCount > 0
             try metaStorage.setGroup(withId: group.groupId, enabled: groupIsEnabled)
             Logger.logInfo("(FiltersService) - enablePredefinedMeta; Group with groupType=\(group.groupType) were enabled")
         }

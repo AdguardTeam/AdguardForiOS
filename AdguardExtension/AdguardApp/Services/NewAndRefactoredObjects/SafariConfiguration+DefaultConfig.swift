@@ -16,6 +16,7 @@
       along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import UIKit.UIDevice
 import SafariAdGuardSDK
 
 extension SafariConfiguration {
@@ -38,7 +39,7 @@ extension SafariConfiguration {
         return SafariConfiguration(
             iosVersion: UIDevice.current.iosVersion,
             currentLanguage: "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")",
-            proStatus: false,
+            proStatus: bundle.isPro ? true : false,
             safariProtectionEnabled: true,
             advancedBlockingIsEnabled: true, // TODO: - Don't forget to change
             blocklistIsEnabled: false,

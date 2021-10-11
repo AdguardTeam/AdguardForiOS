@@ -19,7 +19,6 @@
 import UIKit
 import NotificationCenter
 import SafariAdGuardSDK
-import DnsAdGuardSDK
 
 class TodayViewController: UIViewController, NCWidgetProviding {
 

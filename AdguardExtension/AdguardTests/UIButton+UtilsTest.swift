@@ -97,7 +97,7 @@ class UIButtonUtilsTest: XCTestCase {
         let capitalizedTitle: String? = "Title"
 
         button.setTitle(buttonTitle, for: .disabled)
-        button.makeTitleTextUppercased()
+        button.makeTitleTextCapitalized(for: .disabled)
 
         let titleToCheck = button.title(for: .disabled)
         XCTAssertEqual(capitalizedTitle, titleToCheck)

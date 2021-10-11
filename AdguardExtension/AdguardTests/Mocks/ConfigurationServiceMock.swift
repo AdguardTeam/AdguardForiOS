@@ -18,10 +18,11 @@
 
 import Foundation
 
-class ConfigurationServiceMock: NSObject, ConfigurationServiceProtocol{
+class ConfigurationServiceMock: NSObject, ConfigurationServiceProtocol {
+    var isAdvancedProtectionEnabled: Bool = false
     var appRated: Bool = false
     var advancedMode: Bool = true
-    var userThemeMode: ThemeMode = AELightThemeMode
+    var userThemeMode: ThemeMode = .light
     var showStatusBar: Bool = true
     var systemAppearenceIsDark = true
     var purchasedThroughLogin = true
@@ -29,4 +30,8 @@ class ConfigurationServiceMock: NSObject, ConfigurationServiceProtocol{
     var proStatus = true
     var allContentBlockersEnabled: Bool = true
     var someContentBlockersEnabled: Bool = true
+
+    func checkContentBlockerEnabled() {
+
+    }
 }

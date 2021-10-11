@@ -3,15 +3,12 @@ import XCTest
 class DnsProxyTest: XCTestCase {
 
     var proxySettingsProvider: DnsProxyConfigurationProviderMock!
-    var dnsLibsRulesProvider: DnsLibsRulesProviderMock!
     var dnsProxy: DnsProxyProtocol!
 
     override func setUp() {
         proxySettingsProvider = DnsProxyConfigurationProviderMock()
-        dnsLibsRulesProvider = DnsLibsRulesProviderMock()
         dnsProxy = DnsProxy(
             proxySettingsProvider: proxySettingsProvider,
-            dnsLibsRulesProvider: dnsLibsRulesProvider,
             statisticsDbContainerUrl: TestsFileManager.workingUrl
         )
     }

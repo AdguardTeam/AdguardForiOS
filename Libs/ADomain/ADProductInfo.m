@@ -18,7 +18,6 @@
 #import "ADProductInfo.h"
 #import "ACommons/ACLang.h"
 #import "ADLocations.h"
-#import "vendors/fmdb/FMDatabase.h"
 
 #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR || TARGET_OS_IOS
 
