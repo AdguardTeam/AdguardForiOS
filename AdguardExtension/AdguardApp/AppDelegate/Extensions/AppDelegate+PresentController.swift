@@ -652,6 +652,18 @@ extension AppDelegate {
         return controller
     }
 
+    /* Presenting loading alert */
+    func presentLoadingAlert() {
+        let alert = UIAlertController(title: nil, message: String.localizedString("loading_message"), preferredStyle: .alert)
+
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.startAnimating();
+
+        alert.view.addSubview(loadingIndicator)
+        window?.rootViewController?.present(alert, animated: true, completion: nil)
+    }
+
     /* Returns navigation controller for certain tab */
     private func getNavigationController(for tab: TabBarTabs) -> MainNavigationController? {
         let tabBar = getMainTabController()

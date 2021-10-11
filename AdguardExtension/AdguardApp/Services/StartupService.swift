@@ -145,5 +145,17 @@ final class StartupService : NSObject{
 
         let migrationService: MigrationServiceProtocol = MigrationService(vpnManager: vpnManager, resources: sharedResources, networking: networkService, configurationService: configuration, productInfo: productInfo, safariProtection: safariProtection)
         locator.addService(service: migrationService)
+
+        let settingsReset: SettingsResetServiceProtocol = SettingsResetService(vpnManager: vpnManager,
+                                                                                     resources: sharedResources,
+                                                                                     purchaseService: purchaseService,
+                                                                                     safariProtection: safariProtection,
+                                                                                     dnsProtection: dnsProtection,
+                                                                                     dnsProvidersManager: dnsProvidersManager,
+                                                                                     nativeDnsManager: nativeDnsManager,
+                                                                                     chartStatistics: chartStatistics,
+                                                                                     activityStatistics: activityStatistics,
+                                                                                     dnsLogStatistics: dnsLogStatistics)
+        locator.addService(service: settingsReset)
     }
 }

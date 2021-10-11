@@ -794,7 +794,7 @@ final class FiltersService: FiltersServiceProtocol {
 
     /* Enable predefined groups and filters. Throws error on setting enabled state in storage*/
     private func enablePredefinedGroupsAndFiltersInternal(with groups: [SafariGroup], currentLanguage: String) throws {
-        let predefinedGroups: [SafariGroup.GroupType] = [.ads, .privacy, .languageSpecific, .custom]
+        let predefinedGroups: [SafariGroup.GroupType] = [.ads, .privacy, .languageSpecific]
 
         for group in groups {
             guard predefinedGroups.contains(group.groupType) else { continue }
@@ -807,7 +807,7 @@ final class FiltersService: FiltersServiceProtocol {
                 recommendedCount += 1
             }
 
-            let groupIsEnabled = recommendedCount > 0 || group.groupType == .custom
+            let groupIsEnabled = recommendedCount > 0
             try metaStorage.setGroup(withId: group.groupId, enabled: groupIsEnabled)
             Logger.logInfo("(FiltersService) - enablePredefinedMeta; Group with groupType=\(group.groupType) were enabled")
         }

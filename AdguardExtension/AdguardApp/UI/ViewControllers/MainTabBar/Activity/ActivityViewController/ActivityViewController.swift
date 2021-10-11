@@ -66,6 +66,7 @@ class ActivityViewController: UITableViewController {
     private let domainsParserService: DomainsParserServiceProtocol = ServiceLocator.shared.getService()!
     private let domainsConverter: DomainsConverterProtocol = DomainsConverter()
     private let dnsProtection: DnsProtectionProtocol = ServiceLocator.shared.getService()!
+    private let settingsReset: SettingsResetServiceProtocol = ServiceLocator.shared.getService()!
 
     // MARK: - Notifications
     private var keyboardShowToken: NotificationToken?
@@ -314,6 +315,8 @@ class ActivityViewController: UITableViewController {
         let yesAction = UIAlertAction(title: String.localizedString("common_action_yes"), style: .destructive) {[weak self] _ in
             alert.dismiss(animated: true, completion: nil)
             self?.requestsModel?.clearRecords()
+            let resetResult = self?.settingsReset.resetDnsLogStatistics()
+            DDLogInfo("(ActivityViewController) - showResetAlert; DNS log statistics reseted successfully = \(resetResult ?? false)")
         }
 
         alert.addAction(yesAction)
@@ -402,11 +405,11 @@ class ActivityViewController: UITableViewController {
         })
 
         resetStatisticsToken = NotificationCenter.default.observe(name: NSNotification.resetStatistics, object: nil, queue: .main) { [weak self] (notification) in
-//            self?.dateTypeChanged(dateType: self?.resources.activityStatisticsType ?? .day)
+            self?.requestsModel?.obtainRecords(for: .normal)
         }
 
         resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] (notification) in
-//            self?.dateTypeChanged(dateType: self?.resources.activityStatisticsType ?? .day)
+            self?.requestsModel?.obtainRecords(for: .normal)
         }
 
         requestsModel?.recordsObserver = { [weak self] (records) in

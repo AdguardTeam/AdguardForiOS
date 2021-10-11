@@ -39,7 +39,7 @@ extension SafariConfiguration {
         return SafariConfiguration(
             iosVersion: UIDevice.current.iosVersion,
             currentLanguage: "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")",
-            proStatus: false,
+            proStatus: bundle.isPro ? true : false,
             safariProtectionEnabled: true,
             advancedBlockingIsEnabled: true, // TODO: - Don't forget to change
             blocklistIsEnabled: false,

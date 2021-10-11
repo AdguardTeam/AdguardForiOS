@@ -32,15 +32,15 @@ extension DnsConfiguration {
         )
     }
 
-    static func defaultConfiguration(from resources: AESharedResourcesProtocol) -> DnsConfiguration {
+    static func defaultConfiguration(from resources: AESharedResourcesProtocol, bundle: Bundle = .main) -> DnsConfiguration {
         return DnsConfiguration(
             currentLanguage: "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")",
-            proStatus: false,
+            proStatus: bundle.isPro ? true : false,
             dnsFilteringIsEnabled: false,
             dnsImplementation: .adGuard,
             blocklistIsEnabled: false,
             allowlistIsEnabled: false,
-            lowLevelConfiguration: LowLevelDnsConfiguration.fromResources(resources)
+            lowLevelConfiguration: LowLevelDnsConfiguration.defaultConfiguration
         )
     }
 }
