@@ -705,6 +705,8 @@
 		7E70266A26DE462D00F8FC25 /* UserRuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70266826DE462D00F8FC25 /* UserRuleTableViewCell.swift */; };
 		7E707F8C26F0EBE100882005 /* LowLevelDnsConfiguration+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07373A126EB5F0A007366F8 /* LowLevelDnsConfiguration+Utils.swift */; };
 		7E707F8D26F0EBE300882005 /* LowLevelDnsConfiguration+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07373A126EB5F0A007366F8 /* LowLevelDnsConfiguration+Utils.swift */; };
+		7E70C3A7271425690031C3F4 /* DnsProtectionUserRulesMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70C3A6271425690031C3F4 /* DnsProtectionUserRulesMigrationHelper.swift */; };
+		7E70C3A8271425690031C3F4 /* DnsProtectionUserRulesMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70C3A6271425690031C3F4 /* DnsProtectionUserRulesMigrationHelper.swift */; };
 		7E74FCAC239F9BF7006C0990 /* MainPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74FCAB239F9BF7006C0990 /* MainPageController.swift */; };
 		7E74FCB0239F9C96006C0990 /* MainPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74FCAF239F9C96006C0990 /* MainPageModel.swift */; };
 		7E7702A226FF5113004A8616 /* TitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7702A126FF5113004A8616 /* TitleHeaderView.swift */; };
@@ -3185,6 +3187,7 @@
 		7E70266226DD29A500F8FC25 /* UserRulesTableModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRulesTableModelProtocol.swift; sourceTree = "<group>"; };
 		7E70266526DD412600F8FC25 /* IdentifiableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableObject.swift; sourceTree = "<group>"; };
 		7E70266826DE462D00F8FC25 /* UserRuleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRuleTableViewCell.swift; sourceTree = "<group>"; };
+		7E70C3A6271425690031C3F4 /* DnsProtectionUserRulesMigrationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProtectionUserRulesMigrationHelper.swift; sourceTree = "<group>"; };
 		7E74789426EC9EA8008DC25C /* Extension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Extension-Bridging-Header.h"; sourceTree = "<group>"; };
 		7E74789526ECA06C008DC25C /* AdGuardTodayExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AdGuardTodayExtension-Bridging-Header.h"; sourceTree = "<group>"; };
 		7E74789626ECA455008DC25C /* SafariWebExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SafariWebExtension-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -6207,6 +6210,7 @@
 			isa = PBXGroup;
 			children = (
 				7EE34B1D2712E04700950F52 /* DnsProtectionFiltersMigrationHelper.swift */,
+				7E70C3A6271425690031C3F4 /* DnsProtectionUserRulesMigrationHelper.swift */,
 			);
 			path = DNS;
 			sourceTree = "<group>";
@@ -8385,6 +8389,7 @@
 				7EF5C57326C26E18001851D6 /* EdgeInsetLabel.swift in Sources */,
 				7E9C0BCE25627E8D00F1999D /* UIColor+Utils.swift in Sources */,
 				7E15DFDB26E63AE50020247E /* UIDevice+Utils.swift in Sources */,
+				7E70C3A8271425690031C3F4 /* DnsProtectionUserRulesMigrationHelper.swift in Sources */,
 				D0B545DB2435D69B002F0AEC /* RoundRectButton.swift in Sources */,
 				244339722580D8AB00AB4F26 /* BlockingModeController.swift in Sources */,
 				7E70266126DD28C600F8FC25 /* SafariUserRulesTableModel.swift in Sources */,
@@ -8812,6 +8817,7 @@
 				D031A139219EFC99002C17D9 /* DDMultiFormatter.m in Sources */,
 				7E15DFD726E63A460020247E /* UIDevice+Utils.swift in Sources */,
 				7E822C0E2435EDD30015B4D0 /* RulesParser.swift in Sources */,
+				7E70C3A7271425690031C3F4 /* DnsProtectionUserRulesMigrationHelper.swift in Sources */,
 				247432DE261731C00025C7B8 /* UIAlerController+Style.swift in Sources */,
 				D005096D2202F5EB006BC10C /* DnsProviderDetailsController.swift in Sources */,
 				7E70265C26DD23D700F8FC25 /* UserRulesTableController.swift in Sources */,
