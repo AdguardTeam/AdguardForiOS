@@ -114,7 +114,7 @@ final class SafariTagButton: UIButton {
 
         var desiredFrame = sizeThatFits(CGSize(width: .greatestFiniteMagnitude, height: buttonHeight))
         titleEdgeInsets = UIEdgeInsets(top: 2.0, left: buttonTextInset, bottom: 2.0, right: buttonTextInset)
-        desiredFrame.width += 2 * buttonTextInset
+        desiredFrame.width += 2.5 * buttonTextInset
 
         frame.size = desiredFrame
     }
