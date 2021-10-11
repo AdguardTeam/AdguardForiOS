@@ -22,7 +22,7 @@ import SafariAdGuardSDK
 extension SafariConfiguration {
     convenience init(bundle: Bundle = .main, resources: AESharedResourcesProtocol, isProPurchased: Bool) {
         self.init(iosVersion: UIDevice.current.iosVersion,
-                  currentLanguage: "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")",
+                  currentLanguage: SafariConfiguration.getLanguage(),
                   proStatus: bundle.isPro ? true : isProPurchased,
                   safariProtectionEnabled: resources.safariProtectionEnabled,
                   advancedBlockingIsEnabled: true,
@@ -38,7 +38,7 @@ extension SafariConfiguration {
     static func defaultConfiguration(bundle: Bundle = .main) -> SafariConfiguration {
         return SafariConfiguration(
             iosVersion: UIDevice.current.iosVersion,
-            currentLanguage: "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")",
+            currentLanguage: getLanguage(),
             proStatus: bundle.isPro ? true : false,
             safariProtectionEnabled: true,
             advancedBlockingIsEnabled: true, // TODO: - Don't forget to change
@@ -50,5 +50,21 @@ extension SafariConfiguration {
             appId: bundle.isPro ? "ios_pro" : "ios",
             cid: UIDevice.current.identifierForVendor?.uuidString ?? ""
         )
+    }
+
+    private static func getLanguage() -> String {
+        let exclusionLanguageMap = ["es" : ["ES"],
+                                    "pt" : ["BR", "PT"],
+                                    "zh" : ["TW"]]
+
+        let languageString = ADLocales.lang() ?? "en"
+        var regionString = ADLocales.region() ?? "US"
+        regionString = regionString.uppercased()
+
+        guard let languageArray = exclusionLanguageMap[languageString],
+              languageArray.contains(regionString)
+        else { return languageString }
+
+        return "\(languageString)_\(regionString)"
     }
 }
