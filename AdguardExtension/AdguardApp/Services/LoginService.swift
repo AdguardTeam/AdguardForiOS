@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import UIKit.UIDevice
 
 /**
  LoginService - this service is responsible for working with adguard logins and licenses

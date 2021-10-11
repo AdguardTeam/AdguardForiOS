@@ -16,6 +16,7 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import UIKit.UIApplication
 import NetworkExtension
 import DnsAdGuardSDK
 

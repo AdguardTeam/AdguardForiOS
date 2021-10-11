@@ -1,4 +1,5 @@
 class URLSchemeExecutorMock: IURLSchemeExecutor {
+
     func openUserFilterController(rule: String) -> Bool {
         true
     }
@@ -35,5 +36,15 @@ class URLSchemeExecutorMock: IURLSchemeExecutor {
         true
     }
 
+    func openUserRulesRedirectController(for action: UserRulesRedirectAction) -> Bool {
+        true
+    }
 
+    func openPurchaseLicenseController() -> Bool {
+        true
+    }
+
+    func openAdvancedProtectionController() -> Bool {
+        true
+    }
 }
