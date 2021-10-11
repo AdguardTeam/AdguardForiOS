@@ -113,8 +113,8 @@ final class SafariTagButton: UIButton {
         alpha = model.isSelected ? 1.0 : 0.3
 
         var desiredFrame = sizeThatFits(CGSize(width: .greatestFiniteMagnitude, height: buttonHeight))
-        titleEdgeInsets = UIEdgeInsets(top: 2.0, left: buttonTextInset, bottom: 2.0, right: buttonTextInset)
-        desiredFrame.width += 2.5 * buttonTextInset
+        /// sizeThatFits return not correct size for small size screens and we must add  `+ 1.0` for correcting width
+        desiredFrame.width += 2 * buttonTextInset + 1.0
 
         frame.size = desiredFrame
     }

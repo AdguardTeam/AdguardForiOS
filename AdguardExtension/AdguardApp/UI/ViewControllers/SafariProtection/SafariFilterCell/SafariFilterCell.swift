@@ -266,7 +266,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         stackView.axis = .horizontal
         stackView.distribution = .fillProportionally
         stackView.spacing = tagsInset
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.alignment = .leading
         stackView.heightAnchor.constraint(equalToConstant: tagHeight).isActive = true
         return stackView
     }
