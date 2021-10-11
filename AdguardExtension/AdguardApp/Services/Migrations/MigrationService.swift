@@ -238,12 +238,17 @@ final class MigrationService: MigrationServiceProtocol {
                     newDnsFiltersContainerFolderUrl: SharedStorageUrls().dnsFiltersFolderUrl,
                     resources: resources
                 )
+                let dnsRulesMigration = DnsProtectionUserRulesMigrationHelper(
+                    oldDnsUserRulesContainerFolderUrl: resources.sharedResuorcesURL(),
+                    newDnsUserRulesContainerFolderUrl: SharedStorageUrls().dnsFiltersFolderUrl
+                )
                 let sdkMigrationHelper = SDKMigrationServiceHelper(
                     safariProtection: safariProtection as! SafariProtectionMigrationsProtocol,
                     filtersDbMigration: filtersDbMigration,
                     allowlistRulesMigration: allowlistRulesMigration,
                     customFiltersMigration: customFiltersMigration,
-                    dnsFiltersMigration: dnsFiltersMigration
+                    dnsFiltersMigration: dnsFiltersMigration,
+                    dnsRulesMigration: dnsRulesMigration
                 )
                 try sdkMigrationHelper.migrate()
                 DDLogInfo("(MigrationService) - Successfully migrated old data to SDK")
