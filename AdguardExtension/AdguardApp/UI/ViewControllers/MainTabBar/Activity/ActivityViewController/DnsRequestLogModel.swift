@@ -149,6 +149,26 @@ extension DnsLogRecord
     }
 }
 
+extension DnsProtectionUserRulesManagerProtocol {
+    func removeDomainFromUserFilter(_ domain: String){
+        let subdomains: [String] = String.generateSubDomains(from: domain)
+        let domainsConverter = DomainsConverter()
+
+        for subdomain in subdomains {
+            let rule = domainsConverter.userFilterBlockRuleFromDomain(subdomain)
+            try? self.removeRule(withText: rule, for: .blocklist)
+        }
+    }
+
+    func removeDomainFromAllowlist(_ domain: String) {
+        let subdomains: [String] = String.generateSubDomains(from: domain)
+
+        for subdomain in subdomains {
+            try? self.removeRule(withText: subdomain, for: .allowlist)
+        }
+    }
+}
+
 protocol DnsRequestsDelegateProtocol {
     func requestsCleared()
 }
@@ -207,6 +227,7 @@ class DnsRequestLogViewModel {
     private let dnsStatistics: DnsLogStatisticsProtocol
     private let dnsProtection: DnsProtectionProtocol
     private let domainsConverter: DomainsConverterProtocol
+    private let domainsParser: DomainsParserServiceProtocol
 
     private var allRecords: [DnsLogRecord] = []
     private var searchRecords: [DnsLogRecord] = []
@@ -214,11 +235,12 @@ class DnsRequestLogViewModel {
     private let workingQueue = DispatchQueue(label: "DnsRequestLogViewModel queue")
 
     // MARK: - init
-    init(dnsTrackers: DnsTrackersProviderProtocol, dnsStatistics: DnsLogStatisticsProtocol, dnsProtection: DnsProtectionProtocol, domainsConverter: DomainsConverterProtocol) {
+    init(dnsTrackers: DnsTrackersProviderProtocol, dnsStatistics: DnsLogStatisticsProtocol, dnsProtection: DnsProtectionProtocol, domainsConverter: DomainsConverterProtocol, domainsParser: DomainsParserServiceProtocol) {
         self.dnsTrackers = dnsTrackers
         self.dnsStatistics = dnsStatistics
         self.dnsProtection = dnsProtection
         self.domainsConverter = domainsConverter
+        self.domainsParser = domainsParser
         self.searchString = ""
     }
 
@@ -240,40 +262,30 @@ class DnsRequestLogViewModel {
         delegate?.requestsCleared()
     }
 
+    func removeDomainFromUserFilter(_ domain: String){
+        dnsProtection.removeDomainFromUserFilter(domain)
+    }
+
+    func removeDomainFromAllowlist(_ domain: String) {
+        dnsProtection.removeDomainFromAllowlist(domain)
+    }
+
+    func updateUserStatuses() {
+        for record in allRecords {
+            record.updateUserStatus()
+        }
+    }
+
+    // MARK: - private methods
+
     private func obtainRecordsInternal(for type: BlockedRecordType, domains: Set<String>? = nil) {
 
         let events = (try? dnsStatistics.getDnsLogRecords()) ?? []
-        let domainParser = try? DomainParser()
         allRecords = events.map {
-            let firstLevelDomain = domainParser?.parse(host: $0.domain)?.domain
-            let tracker = firstLevelDomain == nil ? nil : dnsTrackers.getTracker(by: firstLevelDomain!)
-            let userStatus = userFilterStatusForDomain($0.domain)
-            return DnsLogRecord(event: $0, tracker: tracker, userFilterStatus: userStatus)
+            return DnsLogRecord(event: $0, dnsProtection: dnsProtection, dnsTrackers: dnsTrackers, domainsConverter: domainsConverter, domainParser: domainsParser.domainsParser)
         }
 
         recordsObserver?(allRecords)
     }
 
-    private func userFilterStatusForDomain(_ domain: String)->UserFilterStatus {
-
-        // we should check user rules for all domains
-        let subdomains: [String] = String.generateSubDomains(from: domain)
-
-        // check allowlist
-        for subdomain in subdomains {
-            if dnsProtection.checkRuleExists(domain, for: .allowlist) {
-                return .allowlisted
-            }
-        }
-
-        // check blocklist
-        for subdomain in subdomains {
-            let rule = domainsConverter.userFilterBlockRuleFromDomain(subdomain)
-            if dnsProtection.checkRuleExists(rule, for: .blocklist) {
-                return .blocklisted
-            }
-        }
-
-        return .none
-    }
 }

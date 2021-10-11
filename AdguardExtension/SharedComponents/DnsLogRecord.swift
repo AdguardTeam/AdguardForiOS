@@ -24,15 +24,28 @@ enum UserFilterStatus {
 }
 
 /**
- view model for dns request log table cell
+ view model for dns request log
  */
-struct DnsLogRecord {
+class DnsLogRecord {
     // processed dns requestinfo
     let event: DnsRequestProcessedEvent
     // dns tracker info for event.domain
     let tracker: DnsTracker?
     // status determines whether the matched rules are contained in custom filters
-    let userFilterStatus: UserFilterStatus
+    var userFilterStatus: UserFilterStatus
+
+    private let dnsProtection: DnsProtectionProtocol
+    private let domainsConverter: DomainsConverterProtocol
+
+    init(event: DnsRequestProcessedEvent, dnsProtection: DnsProtectionProtocol, dnsTrackers: DnsTrackersProviderProtocol, domainsConverter: DomainsConverterProtocol, domainParser: DomainParser?) {
+        self.event = event
+        self.dnsProtection = dnsProtection
+        self.domainsConverter = domainsConverter
+
+        let firstLevelDomain = domainParser?.parse(host: event.domain)?.domain
+        tracker = firstLevelDomain == nil ? nil : dnsTrackers.getTracker(by: firstLevelDomain!)
+        userFilterStatus = DnsLogRecord.userFilterStatusForDomain(event.domain, dnsProtection: dnsProtection, domainsConverter: domainsConverter)
+    }
 
     // returns subtitle text for table view cell
     func getDetailsString(_ fontSize: CGFloat, _ advancedMode: Bool) -> NSMutableAttributedString {
@@ -74,6 +87,33 @@ struct DnsLogRecord {
     func firstLevelDomain(parser: DomainParser?) -> String {
         let firstLevelDomain = parser?.parse(host: event.domain)?.domain
         return firstLevelDomain ?? event.domain
+    }
+
+    func updateUserStatus() {
+        userFilterStatus = DnsLogRecord.userFilterStatusForDomain(event.domain, dnsProtection: dnsProtection, domainsConverter: domainsConverter)
+    }
+
+    private static func userFilterStatusForDomain(_ domain: String, dnsProtection: DnsProtectionProtocol, domainsConverter: DomainsConverterProtocol)->UserFilterStatus {
+
+        // we should check user rules for all domains
+        let subdomains: [String] = String.generateSubDomains(from: domain)
+
+        // check allowlist
+        for subdomain in subdomains {
+            if dnsProtection.checkRuleExists(subdomain, for: .allowlist) {
+                return .allowlisted
+            }
+        }
+
+        // check blocklist
+        for subdomain in subdomains {
+            let rule = domainsConverter.userFilterBlockRuleFromDomain(subdomain)
+            if dnsProtection.checkRuleExists(rule, for: .blocklist) {
+                return .blocklisted
+            }
+        }
+
+        return .none
     }
 }
 

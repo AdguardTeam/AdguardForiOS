@@ -70,7 +70,7 @@ class CompanyDetailedController: UITableViewController {
     //var model:
 
     required init?(coder: NSCoder) {
-        requestsModel = DnsRequestLogViewModel(dnsTrackers: dnsTrackers, dnsStatistics: ServiceLocator.shared.getService()!, dnsProtection: ServiceLocator.shared.getService()!, domainsConverter: DomainsConverter())
+        requestsModel = DnsRequestLogViewModel(dnsTrackers: dnsTrackers, dnsStatistics: ServiceLocator.shared.getService()!, dnsProtection: ServiceLocator.shared.getService()!, domainsConverter: DomainsConverter(), domainsParser: domainsParserService)
         super.init(coder: coder)
     }
 

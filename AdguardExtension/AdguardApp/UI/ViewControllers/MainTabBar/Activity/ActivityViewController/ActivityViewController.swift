@@ -152,6 +152,7 @@ class ActivityViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showDnsContainerSegueId, let controller = segue.destination as? DnsContainerController {
             controller.logRecord = selectedRecord
+            controller.delegate = self
         } else if segue.identifier == showMostActiveCompaniesSegueId, let controller = segue.destination as? MostActiveCompaniesController {
             controller.mostRequestedCompanies = mostRequestedCompanies
             // TODO: Set correct time period ror this controller
@@ -447,11 +448,11 @@ class ActivityViewController: UITableViewController {
     }
 
     private func removeRuleFromUserFilter(record: DnsLogRecord) {
-        dnsProtection.removeRules(record.event.blockRules, for: .blocklist)
+        requestsModel?.removeDomainFromUserFilter(record.event.domain)
     }
 
     private func removeDomainFromWhitelist(record: DnsLogRecord) {
-        dnsProtection.removeRules(record.event.blockRules, for: .allowlist)
+        requestsModel?.removeDomainFromAllowlist(record.event.domain)
     }
 
     @objc func updateTableView(sender: UIRefreshControl) {
@@ -605,5 +606,11 @@ extension ActivityViewController: ThemableProtocol {
         theme.setupButtons(themableButtons)
         mostActiveButton.customHighlightedBackgroundColor = theme.selectedCellColor
         mostActiveButton.customBackgroundColor = theme.backgroundColor
+    }
+}
+
+extension ActivityViewController: DnsContainerControllerDelegate {
+    func userStatusChanged() {
+        requestsModel?.updateUserStatuses()
     }
 }

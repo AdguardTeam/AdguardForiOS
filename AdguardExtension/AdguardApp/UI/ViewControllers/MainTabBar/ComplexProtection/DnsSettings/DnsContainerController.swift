@@ -19,7 +19,7 @@
 import UIKit
 import DnsAdGuardSDK
 
-protocol AddDomainToListDelegate {
+protocol AddDomainToListDelegate: AnyObject {
     /**
      Adds domain or a rule to blacklist / whitelist
 
@@ -31,12 +31,17 @@ protocol AddDomainToListDelegate {
     func add(domain: String, needsCorrecting: Bool, by type: DnsLogButtonType)
 }
 
+protocol DnsContainerControllerDelegate: AnyObject {
+    func userStatusChanged()
+}
+
 class DnsContainerController: UIViewController, AddDomainToListDelegate {
 
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var shadowView: BottomShadowView!
 
     var logRecord: DnsLogRecord!
+    weak var delegate: DnsContainerControllerDelegate?
 
     private var blockRequestControllerId = "BlockRequestControllerId"
 
@@ -82,6 +87,8 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
             let rule = needsCorrecting ? domainsConverter.userFilterBlockRuleFromDomain(domain) : domain
             try? dnsProtection.add(rule: UserRule(ruleText: rule), override: true, for: .blocklist)
         }
+
+        updateUserStatus()
     }
 
     // MARK: - private methods
@@ -113,7 +120,8 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
                 color = UIColor.AdGuardColor.red
                 button.action = {
                     if let record = self.logRecord {
-                        self.dnsProtection.removeRules(record.event.blockRules, for: .allowlist)
+                        self.dnsProtection.removeDomainFromAllowlist(record.event.domain)
+                        self.updateUserStatus()
                     }
                 }
 
@@ -121,7 +129,8 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
                 color = UIColor.AdGuardColor.lightGreen1
                 button.action = {
                     if let record = self.logRecord {
-                        self.dnsProtection.removeRules(record.event.blockRules, for: .blocklist)
+                        self.dnsProtection.removeDomainFromUserFilter(record.event.domain)
+                        self.updateUserStatus()
                     }
                 }
 
@@ -141,6 +150,13 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
         }
 
         shadowView.buttons = buttons
+    }
+
+    private func updateUserStatus() {
+        self.logRecord.updateUserStatus()
+        self.updateButtons()
+        detailsController?.tableView.reloadData()
+        delegate?.userStatusChanged()
     }
 }
 

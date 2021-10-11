@@ -84,7 +84,7 @@ class BlockRequestController: BottomAlertController {
     }
 
     var type: DnsLogButtonType = .addDomainToAllowList
-    var delegate: AddDomainToListDelegate?
+    weak var delegate: AddDomainToListDelegate?
 
     private var subDomains: [BlockRequestCellModel] = []
 
