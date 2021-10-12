@@ -110,9 +110,7 @@ final class SDKMigrationServiceHelper: SDKMigrationServiceHelperProtocol {
         let customDnsProviders = dnsProvidersMigration.getCustomDnsProviders()
         try dnsProvidersMigration.saveCustomDnsProviders(customDnsProviders)
 
-        let activeDnsServerInfo = dnsProvidersMigration.getActiveDnsServerInfo()
-        try dnsProvidersMigration.selectActiveDnsServer(activeDnsServerInfo)
-
+        dnsProvidersMigration.selectActiveDnsServer()
         dnsProvidersMigration.removeOldCustomDnsProvidersData()
     }
 

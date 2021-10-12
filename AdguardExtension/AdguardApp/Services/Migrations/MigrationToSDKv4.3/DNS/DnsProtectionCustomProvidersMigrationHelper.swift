@@ -21,9 +21,6 @@ import DnsAdGuardSDK
 /// This object is a helper for `SDKMigrationServiceHelper`
 /// It is responsible for providing old DNS custom providers objects, saving them to SDK storage, selecting and removing old data
 protocol DnsProtectionCustomProvidersMigrationHelperProtocol: AnyObject {
-    /// Returns active DNS provider id and server id. If nothing was selected return nil
-    func getActiveDnsServerInfo() -> (providerId: Int, serverId: Int)?
-
     /// Returns old objects of DNS custom providers
     func getCustomDnsProviders() -> [SDKDnsMigrationObsoleteCustomDnsProvider]
 
@@ -31,7 +28,7 @@ protocol DnsProtectionCustomProvidersMigrationHelperProtocol: AnyObject {
     func saveCustomDnsProviders(_ providers: [SDKDnsMigrationObsoleteCustomDnsProvider]) throws
 
     /// Selects active DNS server and provider if was selected
-    func selectActiveDnsServer(_ activeServerInfo: (providerId: Int, serverId: Int)?) throws
+    func selectActiveDnsServer()
 
     /// Removes old objects from storage
     func removeOldCustomDnsProvidersData()
@@ -51,22 +48,6 @@ final class DnsProtectionCustomProvidersMigrationHelper: DnsProtectionCustomProv
         NSKeyedUnarchiver.setClass(SDKDnsMigrationObsoleteCustomDnsServer.self, forClassName: "DnsServerInfo")
     }
 
-    func getActiveDnsServerInfo() -> (providerId: Int, serverId: Int)? {
-        guard
-            let activeDnsServerData = resources.sharedDefaults().data(forKey: "ActiveDnsServer"),
-            let activeDnsServerParamsDict = try? JSONSerialization.jsonObject(with: activeDnsServerData, options: []) as? [String: Any],
-            let providerId = activeDnsServerParamsDict["providerId"] as? Int,
-            let serverIdString = activeDnsServerParamsDict["serverId"] as? String,
-            let serverId = Int(serverIdString)
-        else {
-            DDLogInfo("(DnsProtectionCustomProvidersMigrationHelper) - getActiveDnsServerInfo; Active DNS server wasn't saved")
-            return nil
-        }
-
-        DDLogInfo("(DnsProtectionCustomProvidersMigrationHelper) - getActiveDnsServerInfo; Active DNS server provider id=\(providerId); server id=\(serverId)")
-        return (providerId, serverId)
-    }
-
     func getCustomDnsProviders() -> [SDKDnsMigrationObsoleteCustomDnsProvider] {
         guard
             let data = resources.sharedDefaults().object(forKey: "APDefaultsCustomDnsProviders") as? Data,
@@ -82,24 +63,23 @@ final class DnsProtectionCustomProvidersMigrationHelper: DnsProtectionCustomProv
 
     func saveCustomDnsProviders(_ providers: [SDKDnsMigrationObsoleteCustomDnsProvider]) throws {
         DDLogInfo("(DnsProtectionCustomProvidersMigrationHelper) - saveCustomDnsProviders; Saving \(providers.count) providers to SDK")
+
+        let activeServerInfo = getActiveDnsServerInfo()
+
         try providers.forEach {
-            try dnsProvidersManager.addCustomProvider(name: $0.name, upstreams: [$0.server.upstream], selectAsCurrent: false)
+            let selectAsCurrent = activeServerInfo != nil && $0.providerId == activeServerInfo?.providerId && $0.server.serverId == activeServerInfo?.serverId
+            try dnsProvidersManager.addCustomProvider(name: $0.name, upstreams: [$0.server.upstream], selectAsCurrent: selectAsCurrent)
         }
         DDLogInfo("(DnsProtectionCustomProvidersMigrationHelper) - saveCustomDnsProviders; Saved \(providers.count) providers to SDK")
     }
 
-    func selectActiveDnsServer(_ activeServerInfo: (providerId: Int, serverId: Int)?) throws {
+    func selectActiveDnsServer() {
         DDLogInfo("(DnsProtectionCustomProvidersMigrationHelper) - selectActiveDnsServer; Selecting active server")
 
-        guard let activeServerInfo = activeServerInfo else {
+        guard let activeServerInfo = getActiveDnsServerInfo() else {
             DDLogInfo("(DnsProtectionCustomProvidersMigrationHelper) - selectActiveDnsServer; Server wasn't selected")
             return
         }
-
-        DDLogInfo("(DnsProtectionCustomProvidersMigrationHelper) - selectActiveDnsServer; Selecting active server with provider id=\(activeServerInfo.providerId); server id=\(activeServerInfo.serverId)")
-        try dnsProvidersManager.selectProvider(withId: activeServerInfo.providerId, serverId: activeServerInfo.serverId)
-
-        DDLogInfo("(DnsProtectionCustomProvidersMigrationHelper) - selectActiveDnsServer; Seleced active server")
 
         // We need to save selected custom DNS provider, otherwise user'll see wrong info in UI
         guard
@@ -115,6 +95,23 @@ final class DnsProtectionCustomProvidersMigrationHelper: DnsProtectionCustomProv
     func removeOldCustomDnsProvidersData() {
         resources.sharedDefaults().removeObject(forKey: "APDefaultsCustomDnsProviders")
         resources.sharedDefaults().removeObject(forKey: "ActiveDnsServer")
+    }
+
+    /// Returns active DNS provider id and server id. If nothing was selected return nil
+    private func getActiveDnsServerInfo() -> (providerId: Int, serverId: Int)? {
+        guard
+            let activeDnsServerData = resources.sharedDefaults().data(forKey: "ActiveDnsServer"),
+            let activeDnsServerParamsDict = try? JSONSerialization.jsonObject(with: activeDnsServerData, options: []) as? [String: Any],
+            let providerId = activeDnsServerParamsDict["providerId"] as? Int,
+            let serverIdString = activeDnsServerParamsDict["serverId"] as? String,
+            let serverId = Int(serverIdString)
+        else {
+            DDLogInfo("(DnsProtectionCustomProvidersMigrationHelper) - getActiveDnsServerInfo; Active DNS server wasn't saved")
+            return nil
+        }
+
+        DDLogInfo("(DnsProtectionCustomProvidersMigrationHelper) - getActiveDnsServerInfo; Active DNS server provider id=\(providerId); server id=\(serverId)")
+        return (providerId, serverId)
     }
 }
 
