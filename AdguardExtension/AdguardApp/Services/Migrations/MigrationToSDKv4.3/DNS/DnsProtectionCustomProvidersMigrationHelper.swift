@@ -28,7 +28,7 @@ protocol DnsProtectionCustomProvidersMigrationHelperProtocol: AnyObject {
     func saveCustomDnsProviders(_ providers: [SDKDnsMigrationObsoleteCustomDnsProvider]) throws
 
     /// Selects active DNS server and provider if was selected
-    func selectActiveDnsServer()
+    func selectActiveDnsServer() throws
 
     /// Removes old objects from storage
     func removeOldCustomDnsProvidersData()
@@ -73,12 +73,24 @@ final class DnsProtectionCustomProvidersMigrationHelper: DnsProtectionCustomProv
         DDLogInfo("(DnsProtectionCustomProvidersMigrationHelper) - saveCustomDnsProviders; Saved \(providers.count) providers to SDK")
     }
 
-    func selectActiveDnsServer() {
+    func selectActiveDnsServer() throws {
         DDLogInfo("(DnsProtectionCustomProvidersMigrationHelper) - selectActiveDnsServer; Selecting active server")
+
 
         guard let activeServerInfo = getActiveDnsServerInfo() else {
             DDLogInfo("(DnsProtectionCustomProvidersMigrationHelper) - selectActiveDnsServer; Server wasn't selected")
             return
+        }
+
+        let isCustomServer = activeServerInfo.serverId >= 100000 && activeServerInfo.providerId < 10000
+
+        // Check if active server is not custom. Custom servers do not support protocol selection
+        if isCustomServer {
+            return
+        }
+        // If server is not custom we need to set predefined DNS server as active
+        else {
+            try dnsProvidersManager.selectProvider(withId: activeServerInfo.providerId, serverId: activeServerInfo.serverId)
         }
 
         // We need to save selected custom DNS provider, otherwise user'll see wrong info in UI
