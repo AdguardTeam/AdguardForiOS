@@ -588,15 +588,20 @@ extension ActivityViewController: UIGestureRecognizerDelegate {
 extension ActivityViewController: AddDomainToListDelegate {
 
     func add(domain: String, by type: DnsLogButtonType) {
-        switch type {
-        case .removeDomainFromWhitelist:
-            break
-        case .removeRuleFromUserFilter:
-            break
-        case .addDomainToAllowList:
-            requestsModel?.addDomainToAllowlist(domain)
-        case .addRuleToUserFlter:
-            requestsModel?.addDomainToUserRules(domain)
+        do {
+            switch type {
+            case .removeDomainFromWhitelist:
+                break
+            case .removeRuleFromUserFilter:
+                break
+            case .addDomainToAllowList:
+                try requestsModel?.addDomainToAllowlist(domain)
+            case .addRuleToUserFlter:
+                try requestsModel?.addDomainToUserRules(domain)
+            }
+        }
+        catch {
+            showUnknownErrorAlert()
         }
     }
 }

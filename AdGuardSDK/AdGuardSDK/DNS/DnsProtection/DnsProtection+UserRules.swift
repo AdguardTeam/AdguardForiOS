@@ -108,7 +108,7 @@ public protocol DnsProtectionUserRulesManagerProtocol {
      - Parameter type: User rule type (blocklist / allowlist)
      - Returns: true, if rule exists and enabled
      */
-    func checkRuleExists(_ rule: String, for type: DnsUserRuleType)->Bool
+    func checkEnabledRuleExists(_ rule: String, for type: DnsUserRuleType)->Bool
 }
 
 extension DnsProtection {
@@ -188,10 +188,10 @@ extension DnsProtection {
         }
     }
 
-    public func checkRuleExists(_ rule: String, for type: DnsUserRuleType)->Bool {
+    public func checkEnabledRuleExists(_ rule: String, for type: DnsUserRuleType)->Bool {
         workingQueue.sync {
             let manager = getManager(for: type)
-            return manager.checkRuleExists(rule)
+            return manager.checkEnabledRuleExists(rule)
         }
     }
 

@@ -23,6 +23,7 @@ protocol DomainConverterProtocol {
     func userFilterBlockRuleFromDomain(_ domain: String) -> String
 }
 
+///  this class is responsible for converting domain names to dns user rules
 final class DomainConverter: DomainConverterProtocol {
 
     private let blacklistPrefix = "||"

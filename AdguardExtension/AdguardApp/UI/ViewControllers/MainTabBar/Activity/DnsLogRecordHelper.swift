@@ -54,7 +54,7 @@ final class DnsLogRecordHelper {
 
         // check allowlist
         for subdomain in subdomains {
-            if dnsProtection.checkRuleExists(subdomain, for: .allowlist) {
+            if dnsProtection.checkEnabledRuleExists(subdomain, for: .allowlist) {
                 return .allowlisted
             }
         }
@@ -62,7 +62,7 @@ final class DnsLogRecordHelper {
         // check blocklist
         for subdomain in subdomains {
             let rule = domainConverter.userFilterBlockRuleFromDomain(subdomain)
-            if dnsProtection.checkRuleExists(rule, for: .blocklist) {
+            if dnsProtection.checkEnabledRuleExists(rule, for: .blocklist) {
                 return .blocklisted
             }
         }

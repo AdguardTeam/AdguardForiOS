@@ -73,5 +73,5 @@ public protocol UserRulesManagerProtocol: ResetableSyncProtocol, AnyObject {
      - Parameter ruleText: text of user rule to check
      - Returns: check result
      */
-    func checkRuleExists(_ ruleText: String)->Bool
+    func checkEnabledRuleExists(_ ruleText: String)->Bool
 }

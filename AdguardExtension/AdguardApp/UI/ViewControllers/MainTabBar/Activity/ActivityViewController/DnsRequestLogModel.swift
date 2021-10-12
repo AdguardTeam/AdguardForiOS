@@ -264,13 +264,13 @@ class DnsRequestLogViewModel {
         delegate?.requestsCleared()
     }
 
-    func addDomainToAllowlist(_ domain: String) {
-        try? dnsProtection.add(rule: UserRule(ruleText: domain), override: true, for: .allowlist)
+    func addDomainToAllowlist(_ domain: String) throws {
+        try dnsProtection.add(rule: UserRule(ruleText: domain), override: true, for: .allowlist)
     }
 
-    func addDomainToUserRules(_ domain: String) {
+    func addDomainToUserRules(_ domain: String) throws {
         let rule = domainConverter.userFilterBlockRuleFromDomain(domain)
-        try? dnsProtection.add(rule: UserRule(ruleText: rule), override: true, for: .blocklist)
+        try dnsProtection.add(rule: UserRule(ruleText: rule), override: true, for: .blocklist)
     }
 
     func removeDomainFromUserFilter(_ domain: String) throws {
