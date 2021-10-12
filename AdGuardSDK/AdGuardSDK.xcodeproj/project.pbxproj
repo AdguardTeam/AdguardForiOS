@@ -2710,7 +2710,7 @@
 			repositoryURL = "https://github.com/AdguardTeam/SafariConverterLib";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.13;
+				minimumVersion = 2.0.15;
 			};
 		};
 		7E966B8926C27E68006B57BD /* XCRemoteSwiftPackageReference "DnsLibs" */ = {
