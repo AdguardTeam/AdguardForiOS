@@ -167,10 +167,11 @@ final class FiltersConverter: FiltersConverterProtocol {
         }
 
         // add inverted allowlist rules
-        if let invertedAllowlistRules = invertedAllowlistRules {
-            let converter = InvertedAllowlistRuleConverter()
-            let properInvertedallowlistRules = invertedAllowlistRules.map { converter.convertDomainToRule($0) }
-            filters.keys.forEach { filters[$0]?.append(contentsOf: properInvertedallowlistRules) }
+        if
+            let invertedAllowlistRules = invertedAllowlistRules,
+            let properInvertedAllowlistRule = ContentBlockerConverter.createInvertedAllowlistRule(by: invertedAllowlistRules)
+        {
+            filters.keys.forEach { filters[$0]?.append(properInvertedAllowlistRule) }
         }
     }
 
