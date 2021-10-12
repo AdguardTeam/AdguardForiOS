@@ -108,6 +108,7 @@ public protocol DnsProtectionUserRulesManagerProtocol {
      - Parameter type: User rule type (blocklist / allowlist)
      - Returns: true, if rule exists and enabled
      */
+    // TODO: write tests
     func checkEnabledRuleExists(_ rule: String, for type: DnsUserRuleType)->Bool
 }
 
