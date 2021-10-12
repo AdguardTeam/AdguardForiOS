@@ -19,11 +19,11 @@
 import UIKit
 import DnsAdGuardSDK
 
-class ActivityTitleCell: UITableViewCell {
+final class ActivityTitleCell: UITableViewCell {
     @IBOutlet weak var titleLabel: ThemableLabel!
 }
 
-class DnsRequestDetailsController: UITableViewController {
+final class DnsRequestDetailsController: UITableViewController {
 
     // MARK: - public fields
     var model: DnsRequestDetailsViewModel! {

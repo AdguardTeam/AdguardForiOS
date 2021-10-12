@@ -34,7 +34,7 @@ protocol DnsRequestDetailsContainerControllerDelegate: AnyObject {
     func userStatusChanged()
 }
 
-class DnsRequestDetailsContainerController: UIViewController, AddDomainToListDelegate {
+final class DnsRequestDetailsContainerController: UIViewController, AddDomainToListDelegate {
 
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var shadowView: BottomShadowView!
@@ -80,10 +80,15 @@ class DnsRequestDetailsContainerController: UIViewController, AddDomainToListDel
     // MARK: - AddDomainToListDelegate method
 
     func add(domain: String, by type: DnsLogButtonType) {
-        if type == .addDomainToAllowList {
-            model.addDomainToAllowlist(domain)
-        } else if type == .addRuleToUserFlter {
-            model.addDomainToUserRules(domain)
+        do {
+            if type == .addDomainToAllowList {
+                try model.addDomainToAllowlist(domain)
+            } else if type == .addRuleToUserFlter {
+                try model.addDomainToUserRules(domain)
+            }
+        }
+        catch {
+            self.showUnknownErrorAlert()
         }
         updateUserStatus()
     }
@@ -114,14 +119,24 @@ class DnsRequestDetailsContainerController: UIViewController, AddDomainToListDel
             case .removeDomainFromWhitelist:
                 color = UIColor.AdGuardColor.red
                 button.action = {
-                    self.model.removeFromAllowlist()
+                    do {
+                        try self.model.removeFromAllowlist()
+                    }
+                    catch {
+                        self.showUnknownErrorAlert()
+                    }
                     self.updateUserStatus()
                 }
 
             case .removeRuleFromUserFilter:
                 color = UIColor.AdGuardColor.lightGreen1
                 button.action = {
-                    self.model.removeFromUserRules()
+                    do {
+                        try self.model.removeFromUserRules()
+                    }
+                    catch {
+                        self.showUnknownErrorAlert()
+                    }
                     self.updateUserStatus()
                 }
 

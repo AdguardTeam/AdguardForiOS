@@ -16,13 +16,11 @@
       along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import DnsAdGuardSDK
-
 enum BlockedRecordType {
     case normal, whitelisted, blocked
 }
 
-class ActivityTableViewCell: UITableViewCell {
+final class ActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var companyLabel: ThemableLabel!
     @IBOutlet weak var infoLabel: ThemableLabel!
     @IBOutlet weak var blockStateView: UIView!
@@ -30,8 +28,6 @@ class ActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var timeLabel: ThemableLabel!
 
     var advancedMode: Bool = true
-
-    var domainParser: DomainParser?
 
     var theme: ThemeServiceProtocol? {
         didSet {

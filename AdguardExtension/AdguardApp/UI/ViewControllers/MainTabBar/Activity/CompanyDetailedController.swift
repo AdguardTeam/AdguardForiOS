@@ -171,7 +171,6 @@ class CompanyDetailedController: UITableViewController {
         if let cell = tableView.dequeueReusableCell(withIdentifier: activityTableViewCellReuseId) as? ActivityTableViewCell {
             let record = requestsModel.records[indexPath.row]
             cell.advancedMode = configuration.advancedMode
-            cell.domainParser = domainParserService.domainParser
             cell.theme = theme
             cell.record = record
             return cell

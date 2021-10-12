@@ -24,9 +24,9 @@ enum UserFilterStatus {
 }
 
 /**
- view model for dns request log
+ model for dns request log record
  */
-class DnsLogRecord {
+final class DnsLogRecord {
     // processed dns requestinfo
     let event: DnsRequestProcessedEvent
     // dns tracker info for event.domain
@@ -41,8 +41,6 @@ class DnsLogRecord {
         self.firstLevelDomain = firstLevelDomain
         self.tracker = tracker
         self.userFilterStatus = userFilterStatus
-//        firstLevelDomain = domainParser?.parse(host: event.domain)?.domain ?? event.domain
-//        tracker = firstLevelDomain == nil ? nil : dnsTrackers.getTracker(by: firstLevelDomain!)
     }
 
     // returns subtitle text for table view cell

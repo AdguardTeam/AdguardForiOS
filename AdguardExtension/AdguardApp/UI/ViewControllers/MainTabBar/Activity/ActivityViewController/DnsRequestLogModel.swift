@@ -150,21 +150,21 @@ extension DnsLogRecord
 }
 
 extension DnsProtectionUserRulesManagerProtocol {
-    func removeDomainFromUserFilter(_ domain: String){
+    func removeDomainFromUserFilter(_ domain: String) throws {
         let subdomains: [String] = String.generateSubDomains(from: domain)
         let domainConverter = DomainConverter()
 
         for subdomain in subdomains {
             let rule = domainConverter.userFilterBlockRuleFromDomain(subdomain)
-            try? self.removeRule(withText: rule, for: .blocklist)
+            try self.removeRule(withText: rule, for: .blocklist)
         }
     }
 
-    func removeDomainFromAllowlist(_ domain: String) {
+    func removeDomainFromAllowlist(_ domain: String) throws {
         let subdomains: [String] = String.generateSubDomains(from: domain)
 
         for subdomain in subdomains {
-            try? self.removeRule(withText: subdomain, for: .allowlist)
+            try self.removeRule(withText: subdomain, for: .allowlist)
         }
     }
 }
@@ -227,7 +227,7 @@ class DnsRequestLogViewModel {
     private let dnsStatistics: DnsLogStatisticsProtocol
     private let dnsProtection: DnsProtectionProtocol
     private let domainConverter: DomainConverterProtocol
-    private let domainParser: DomainParser
+    private let domainParser: DomainParser?
     private let logRecordHelper: DnsLogRecordHelper
 
     private var allRecords: [DnsLogRecord] = []
@@ -241,9 +241,9 @@ class DnsRequestLogViewModel {
         self.dnsStatistics = dnsStatistics
         self.dnsProtection = dnsProtection
         self.domainConverter = domainConverter
-        self.domainParser = domainParser.domainParser!
+        self.domainParser = domainParser.domainParser
         self.searchString = ""
-        self.logRecordHelper = DnsLogRecordHelper(dnsProtection: dnsProtection, dnsTrackers: dnsTrackers, domainConverter: domainConverter, domainParser: domainParser.domainParser!)
+        self.logRecordHelper = DnsLogRecordHelper(dnsProtection: dnsProtection, dnsTrackers: dnsTrackers, domainConverter: domainConverter)
     }
 
     // MARK: - public methods
@@ -273,12 +273,12 @@ class DnsRequestLogViewModel {
         try? dnsProtection.add(rule: UserRule(ruleText: rule), override: true, for: .blocklist)
     }
 
-    func removeDomainFromUserFilter(_ domain: String){
-        dnsProtection.removeDomainFromUserFilter(domain)
+    func removeDomainFromUserFilter(_ domain: String) throws {
+        try dnsProtection.removeDomainFromUserFilter(domain)
     }
 
-    func removeDomainFromAllowlist(_ domain: String) {
-        dnsProtection.removeDomainFromAllowlist(domain)
+    func removeDomainFromAllowlist(_ domain: String) throws {
+        try dnsProtection.removeDomainFromAllowlist(domain)
     }
 
     func updateUserStatuses() {
@@ -297,7 +297,7 @@ class DnsRequestLogViewModel {
 
         let events = (try? dnsStatistics.getDnsLogRecords()) ?? []
         allRecords = events.map {
-            let firstLevelDomain = domainParser.parse(host: $0.domain)?.domain ?? $0.domain
+            let firstLevelDomain = domainParser?.parse(host: $0.domain)?.domain ?? $0.domain
             let tracker = dnsTrackers.getTracker(by: firstLevelDomain)
             let userFilterStatus = logRecordHelper.getUserFilterStatusForDomain($0.domain)
 

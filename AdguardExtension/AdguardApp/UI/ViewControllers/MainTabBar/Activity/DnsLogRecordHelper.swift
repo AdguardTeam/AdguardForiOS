@@ -16,39 +16,36 @@
       along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
 import DnsAdGuardSDK
 
-/** this class is responsible for */
-class DnsLogRecordHelper {
+/** this class is helper for DnsLogRecord  */
+final class DnsLogRecordHelper {
 
     private let dnsProtection: DnsProtectionProtocol
     private let dnsTrackers: DnsTrackersProviderProtocol
     private let domainConverter: DomainConverterProtocol
-    private let domainParser: DomainParser
 
-    init(dnsProtection: DnsProtectionProtocol, dnsTrackers: DnsTrackersProviderProtocol, domainConverter: DomainConverterProtocol, domainParser: DomainParser) {
+    init(dnsProtection: DnsProtectionProtocol, dnsTrackers: DnsTrackersProviderProtocol, domainConverter: DomainConverterProtocol) {
         self.dnsProtection = dnsProtection
         self.dnsTrackers = dnsTrackers
         self.domainConverter = domainConverter
-        self.domainParser = domainParser
     }
 
-    func addDomainToAllowlist(_ domain: String) {
-        try? dnsProtection.add(rule: UserRule(ruleText: domain), override: true, for: .allowlist)
+    func addDomainToAllowlist(_ domain: String) throws {
+        try dnsProtection.add(rule: UserRule(ruleText: domain), override: true, for: .allowlist)
     }
 
-    func addDomainToUserRules(_ domain: String) {
+    func addDomainToUserRules(_ domain: String) throws {
         let rule = domainConverter.userFilterBlockRuleFromDomain(domain)
-        try? dnsProtection.add(rule: UserRule(ruleText: rule), override: true, for: .blocklist)
+        try dnsProtection.add(rule: UserRule(ruleText: rule), override: true, for: .blocklist)
     }
 
-    func removeDomainFromAllowlist(_ domain: String) {
-        dnsProtection.removeDomainFromAllowlist(domain)
+    func removeDomainFromAllowlist(_ domain: String) throws {
+        try dnsProtection.removeDomainFromAllowlist(domain)
     }
 
-    func removeDomainFromUserRules(_ domain: String) {
-        dnsProtection.removeDomainFromUserFilter(domain)
+    func removeDomainFromUserRules(_ domain: String) throws {
+        try dnsProtection.removeDomainFromUserFilter(domain)
     }
 
     func getUserFilterStatusForDomain(_ domain: String)->UserFilterStatus {

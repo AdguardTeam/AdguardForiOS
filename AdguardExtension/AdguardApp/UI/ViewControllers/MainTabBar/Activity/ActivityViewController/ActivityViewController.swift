@@ -231,7 +231,6 @@ class ActivityViewController: UITableViewController {
         if let cell = tableView.dequeueReusableCell(withIdentifier: activityTableViewCellReuseId) as? ActivityTableViewCell {
             guard let record = requestsModel?.records[indexPath.row] else { return UITableViewCell() }
             cell.advancedMode = configuration.advancedMode
-            cell.domainParser = domainParserService.domainParser
             cell.theme = theme
             cell.record = record
             return cell
@@ -449,11 +448,21 @@ class ActivityViewController: UITableViewController {
     }
 
     private func removeRuleFromUserFilter(record: DnsLogRecord) {
-        requestsModel?.removeDomainFromUserFilter(record.event.domain)
+        do {
+            try requestsModel?.removeDomainFromUserFilter(record.event.domain)
+        }
+        catch {
+            self.showUnknownErrorAlert()
+        }
     }
 
     private func removeDomainFromWhitelist(record: DnsLogRecord) {
-        requestsModel?.removeDomainFromAllowlist(record.event.domain)
+        do {
+            try requestsModel?.removeDomainFromAllowlist(record.event.domain)
+        }
+        catch {
+            self.showUnknownErrorAlert()
+        }
     }
 
     @objc func updateTableView(sender: UIRefreshControl) {

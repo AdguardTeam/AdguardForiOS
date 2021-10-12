@@ -23,7 +23,7 @@ protocol DomainConverterProtocol {
     func userFilterBlockRuleFromDomain(_ domain: String) -> String
 }
 
-class DomainConverter: DomainConverterProtocol {
+final class DomainConverter: DomainConverterProtocol {
 
     private let blacklistPrefix = "||"
     private let blacklistSuffix = "^$important"

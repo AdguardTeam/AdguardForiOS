@@ -46,7 +46,7 @@ protocol ActivityStatisticsModelProtocol: AnyObject {
     func getCompanies(for type: ChartDateType, _ completion: @escaping (_ info: CompaniesInfo)->())
 }
 
-class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
+final class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
 
     private let dnsTrackers: DnsTrackersProviderProtocol
     private let domainParserService: DomainParserServiceProtocol

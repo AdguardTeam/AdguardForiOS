@@ -19,9 +19,9 @@
 import Foundation
 
 /** View model for DnsRequestDetailsContainerController */
-class DnsRequestDetailsViewModel {
+final class DnsRequestDetailsViewModel {
 
-    var logRecord: DnsLogRecord
+    let logRecord: DnsLogRecord
 
     private let helper: DnsLogRecordHelper
 
@@ -30,23 +30,23 @@ class DnsRequestDetailsViewModel {
         self.helper = helper
     }
 
-    func addDomainToAllowlist(_ domain: String) {
-        helper.addDomainToAllowlist(domain)
+    func addDomainToAllowlist(_ domain: String) throws {
+        try helper.addDomainToAllowlist(domain)
         logRecord.userFilterStatus = helper.getUserFilterStatusForDomain(logRecord.event.domain)
     }
 
-    func addDomainToUserRules(_ domain: String) {
-        helper.addDomainToUserRules(domain)
+    func addDomainToUserRules(_ domain: String) throws {
+        try helper.addDomainToUserRules(domain)
         logRecord.userFilterStatus = helper.getUserFilterStatusForDomain(logRecord.event.domain)
     }
 
-    func removeFromAllowlist() {
-        helper.removeDomainFromAllowlist(logRecord.event.domain)
+    func removeFromAllowlist() throws {
+        try helper.removeDomainFromAllowlist(logRecord.event.domain)
         logRecord.userFilterStatus = helper.getUserFilterStatusForDomain(logRecord.event.domain)
     }
 
-    func removeFromUserRules() {
-        helper.removeDomainFromUserRules(logRecord.event.domain)
+    func removeFromUserRules() throws {
+        try helper.removeDomainFromUserRules(logRecord.event.domain)
         logRecord.userFilterStatus = helper.getUserFilterStatusForDomain(logRecord.event.domain)
     }
 }
