@@ -17,6 +17,7 @@
 */
 
 import SafariAdGuardSDK
+import DnsAdGuardSDK
 
 protocol SDKMigrationServiceHelperProtocol: AnyObject {
     func migrate() throws
@@ -34,6 +35,7 @@ final class SDKMigrationServiceHelper: SDKMigrationServiceHelperProtocol {
     private let dnsFiltersMigration: DnsProtectionFiltersMigrationHelperProtocol
     private let dnsRulesMigration: DnsProtectionUserRulesMigrationHelperProtocol
     private let dnsProvidersMigration: DnsProtectionCustomProvidersMigrationHelperProtocol
+    private let dnsProvidersManager: DnsProvidersManagerProtocol
 
     init(
         safariProtection: SafariProtectionMigrationsProtocol,
@@ -42,7 +44,8 @@ final class SDKMigrationServiceHelper: SDKMigrationServiceHelperProtocol {
         customFiltersMigration: SafariProtectionCustomFiltersMigrationHelperProtocol,
         dnsFiltersMigration: DnsProtectionFiltersMigrationHelperProtocol,
         dnsRulesMigration: DnsProtectionUserRulesMigrationHelperProtocol,
-        dnsProvidersMigration: DnsProtectionCustomProvidersMigrationHelperProtocol
+        dnsProvidersMigration: DnsProtectionCustomProvidersMigrationHelperProtocol,
+        dnsProvidersManager: DnsProvidersManagerProtocol
     ) {
         self.safariProtection = safariProtection
         self.filtersDbMigration = filtersDbMigration
@@ -51,6 +54,7 @@ final class SDKMigrationServiceHelper: SDKMigrationServiceHelperProtocol {
         self.dnsFiltersMigration = dnsFiltersMigration
         self.dnsRulesMigration = dnsRulesMigration
         self.dnsProvidersMigration = dnsProvidersMigration
+        self.dnsProvidersManager = dnsProvidersManager
     }
 
     func migrate() throws {
@@ -104,7 +108,12 @@ final class SDKMigrationServiceHelper: SDKMigrationServiceHelperProtocol {
 
         /* Custom DNS providers migration */
         let customDnsProviders = dnsProvidersMigration.getCustomDnsProviders()
+        try dnsProvidersMigration.saveCustomDnsProviders(customDnsProviders)
+
         let activeDnsServerInfo = dnsProvidersMigration.getActiveDnsServerInfo()
+        try dnsProvidersMigration.selectActiveDnsServer(activeDnsServerInfo)
+
+        dnsProvidersMigration.removeOldCustomDnsProvidersData()
     }
 
     private func migrate(userRules: [SDKSafariMigrationRule], for type: SafariUserRuleType) throws {

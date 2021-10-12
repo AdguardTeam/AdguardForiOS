@@ -39,6 +39,7 @@ final class SafariProtectionCustomFiltersMigrationHelper: SafariProtectionCustom
     }
 
     func migrateCustomFilters(_ filters: [SafariProtectionFiltersDatabaseMigrationHelper.ObsoleteCustomFilter]) throws {
+        DDLogInfo("(SafariProtectionCustomFiltersMigrationHelper) - migrateCustomFilters; Saving \(filters.count) custom filters to new DB")
         try filters.forEach { try addCustomFilterToDb($0) }
 
         for filter in filters {

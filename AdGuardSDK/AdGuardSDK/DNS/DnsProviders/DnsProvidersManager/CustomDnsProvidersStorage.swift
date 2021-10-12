@@ -72,23 +72,24 @@ public enum CustomDnsProvidersStorageError: Error, CustomDebugStringConvertible 
  */
 final class CustomDnsProvidersStorage: CustomDnsProvidersStorageProtocol {
 
-    // MARK: - CustomDnsProvidersStorageError
-
-
-
     // MARK: - Internal variables
 
     var providers: [CustomDnsProviderProtocol] { userDefaults.customProviders }
 
     // MARK: - Private variables
 
-    private let customProviderBaseId = 0
+    private let customProviderBaseId = 1
     private let customServerBaseId = 100000
 
     private var nextCustomIds: (providerId: Int, serverId: Int) {
         let providers = userDefaults.customProviders
         var maxProviderId = customProviderBaseId
         var maxServerId = customServerBaseId
+
+        if providers.isEmpty {
+            return (maxProviderId, maxServerId)
+        }
+
         providers.forEach {
             if $0.providerId > maxProviderId {
                 maxProviderId = $0.providerId
