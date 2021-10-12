@@ -49,7 +49,7 @@ protocol ActivityStatisticsModelProtocol: AnyObject {
 class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
 
     private let dnsTrackers: DnsTrackersProviderProtocol
-    private let domainsParserService: DomainsParserServiceProtocol
+    private let domainParserService: DomainParserServiceProtocol
     private let activityStatistics: ActivityStatisticsProtocol
 
     private let workingQueue = DispatchQueue(label: "ActivityStatisticsModel queue", qos: .userInitiated)
@@ -60,9 +60,9 @@ class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
         return (try? activityStatistics.getCounters(for: period)) ?? CountersStatisticsRecord.emptyRecord()
     }
 
-    init(dnsTrackers: DnsTrackersProviderProtocol, domainsParserService: DomainsParserServiceProtocol, activityStatistics: ActivityStatisticsProtocol) {
+    init(dnsTrackers: DnsTrackersProviderProtocol, domainParserService: DomainParserServiceProtocol, activityStatistics: ActivityStatisticsProtocol) {
         self.dnsTrackers = dnsTrackers
-        self.domainsParserService = domainsParserService
+        self.domainParserService = domainParserService
         self.activityStatistics = activityStatistics
     }
 
@@ -72,7 +72,7 @@ class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
             guard let self = self else { return }
             var recordsByCompanies: [String : CompanyRequestsRecord] = [:]
             var companiesNumber = 0
-            let parser = self.domainsParserService.domainsParser
+            let parser = self.domainParserService.domainParser
 //
 //            for record in records {
 //                let company = self.dnsTrackersService.getTrackerInfo(by: record.domain)?.name

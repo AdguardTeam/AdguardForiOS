@@ -33,18 +33,16 @@ class DnsLogRecord {
     let tracker: DnsTracker?
     // status determines whether the matched rules are contained in custom filters
     var userFilterStatus: UserFilterStatus
+    // first level domain
+    let firstLevelDomain: String
 
-    private let dnsProtection: DnsProtectionProtocol
-    private let domainsConverter: DomainsConverterProtocol
-
-    init(event: DnsRequestProcessedEvent, dnsProtection: DnsProtectionProtocol, dnsTrackers: DnsTrackersProviderProtocol, domainsConverter: DomainsConverterProtocol, domainParser: DomainParser?) {
+    init(event: DnsRequestProcessedEvent, tracker: DnsTracker?, firstLevelDomain: String, userFilterStatus: UserFilterStatus) {
         self.event = event
-        self.dnsProtection = dnsProtection
-        self.domainsConverter = domainsConverter
-
-        let firstLevelDomain = domainParser?.parse(host: event.domain)?.domain
-        tracker = firstLevelDomain == nil ? nil : dnsTrackers.getTracker(by: firstLevelDomain!)
-        userFilterStatus = DnsLogRecord.userFilterStatusForDomain(event.domain, dnsProtection: dnsProtection, domainsConverter: domainsConverter)
+        self.firstLevelDomain = firstLevelDomain
+        self.tracker = tracker
+        self.userFilterStatus = userFilterStatus
+//        firstLevelDomain = domainParser?.parse(host: event.domain)?.domain ?? event.domain
+//        tracker = firstLevelDomain == nil ? nil : dnsTrackers.getTracker(by: firstLevelDomain!)
     }
 
     // returns subtitle text for table view cell
@@ -81,39 +79,6 @@ class DnsLogRecord {
 
             return combination
         }
-    }
-
-    // returns first level domain for this request
-    func firstLevelDomain(parser: DomainParser?) -> String {
-        let firstLevelDomain = parser?.parse(host: event.domain)?.domain
-        return firstLevelDomain ?? event.domain
-    }
-
-    func updateUserStatus() {
-        userFilterStatus = DnsLogRecord.userFilterStatusForDomain(event.domain, dnsProtection: dnsProtection, domainsConverter: domainsConverter)
-    }
-
-    private static func userFilterStatusForDomain(_ domain: String, dnsProtection: DnsProtectionProtocol, domainsConverter: DomainsConverterProtocol)->UserFilterStatus {
-
-        // we should check user rules for all domains
-        let subdomains: [String] = String.generateSubDomains(from: domain)
-
-        // check allowlist
-        for subdomain in subdomains {
-            if dnsProtection.checkRuleExists(subdomain, for: .allowlist) {
-                return .allowlisted
-            }
-        }
-
-        // check blocklist
-        for subdomain in subdomains {
-            let rule = domainsConverter.userFilterBlockRuleFromDomain(subdomain)
-            if dnsProtection.checkRuleExists(rule, for: .blocklist) {
-                return .blocklisted
-            }
-        }
-
-        return .none
     }
 }
 

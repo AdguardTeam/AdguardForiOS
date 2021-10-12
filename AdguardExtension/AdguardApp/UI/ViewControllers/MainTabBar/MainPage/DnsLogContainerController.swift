@@ -34,8 +34,8 @@ class DnsLogContainerController: UIViewController {
     private let model = DnsRequestLogViewModel(dnsTrackers: ServiceLocator.shared.getService()!,
                                                dnsStatistics: ServiceLocator.shared.getService()!,
                                                dnsProtection: ServiceLocator.shared.getService()!,
-                                               domainsConverter: DomainsConverter(),
-                                               domainsParser: ServiceLocator.shared.getService()!
+                                               domainConverter: DomainConverter(),
+                                               domainParser: ServiceLocator.shared.getService()!
     )
 
     private var resetSettingsToken: NotificationToken?

@@ -115,7 +115,7 @@ class BlockRequestController: BottomAlertController {
 
     @IBAction func addTapped(_ sender: UIButton) {
         let domain = subDomains.first(where: { $0.isSelected })?.domain ?? ""
-        delegate?.add(domain: domain, needsCorrecting: true, by: type)
+        delegate?.add(domain: domain, by: type)
         dismiss(animated: true, completion: nil)
     }
 

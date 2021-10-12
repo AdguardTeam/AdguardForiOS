@@ -31,7 +31,7 @@ class ActivityTableViewCell: UITableViewCell {
 
     var advancedMode: Bool = true
 
-    var domainsParser: DomainParser?
+    var domainParser: DomainParser?
 
     var theme: ThemeServiceProtocol? {
         didSet {
@@ -75,7 +75,7 @@ class ActivityTableViewCell: UITableViewCell {
         let name = record.tracker?.name
         let domain = record.getDetailsString(infoLabel.font.pointSize, advancedMode)
 
-        companyLabel.text = (name == nil || advancedMode) ? record.firstLevelDomain(parser: domainsParser) : name
+        companyLabel.text = (name == nil || advancedMode) ? record.firstLevelDomain : name
         infoLabel.attributedText = domain
         timeLabel.text = timeString
 

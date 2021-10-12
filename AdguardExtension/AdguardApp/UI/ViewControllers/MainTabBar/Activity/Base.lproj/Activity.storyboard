@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WCl-qt-0xD">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WCl-qt-0xD">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,29 +12,29 @@
             <objects>
                 <viewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="WCl-qt-0xD" customClass="DnsLogContainerController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YrG-aq-Ie8">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I8C-5V-XdX">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <connections>
                                     <segue destination="8db-fG-wCj" kind="embed" identifier="getProSegue" id="k4D-Nb-GOz"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F7h-od-er8">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <connections>
                                     <segue destination="lL1-Yv-4AH" kind="embed" identifier="showDnsLogSegue" id="28v-nK-Eae"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J8h-GA-5Bk">
-                                <rect key="frame" x="0.0" y="44" width="375" height="768"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <connections>
                                     <segue destination="lqj-5C-0UP" kind="embed" id="T49-fw-zKB"/>
                                 </connections>
                             </containerView>
                             <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PaQ-5i-arg">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <connections>
                                     <segue destination="ax5-Qu-4Mn" kind="embed" id="jlm-U1-tGC"/>
                                 </connections>
@@ -80,11 +78,11 @@
             <objects>
                 <viewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="lqj-5C-0UP" customClass="ActivityNativeDnsController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qmf-x3-6AS">
-                        <rect key="frame" x="0.0" y="0.0" width="430" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AdGuard can’t see DNS queries in this mode. If you want to see DNS activity of your device, use AdGuard implementation." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a0E-KM-oA3" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="24" y="147" width="552" height="39"/>
+                                <rect key="frame" x="24" y="147" width="327" height="57.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -96,7 +94,7 @@
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1A6-DD-78f">
-                                <rect key="frame" x="32" y="652" width="366" height="40"/>
+                                <rect key="frame" x="32" y="686" width="311" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="jYk-Ce-xLJ"/>
                                 </constraints>
@@ -107,7 +105,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Native DNS" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mSj-Zz-Gm9" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="24" y="150" width="366" height="29"/>
+                                <rect key="frame" x="24" y="106" width="327" height="29"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -119,7 +117,7 @@
                                 </variation>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="native" translatesAutoresizingMaskIntoConstraints="NO" id="oyW-3W-rWj">
-                                <rect key="frame" x="191" y="86" width="48" height="48"/>
+                                <rect key="frame" x="163.5" y="42" width="48" height="48"/>
                                 <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="ec8-un-kLf">
@@ -129,7 +127,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ckn-Oh-2aa" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="16" y="290" width="49" height="20.333333333333314"/>
+                                <rect key="frame" x="16" y="246.5" width="49" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -138,7 +136,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fRq-kZ-Xd7" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="398" y="290.5" width="0.0" height="0.0"/>
+                                <rect key="frame" x="359" y="246.5" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -148,14 +146,14 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HVu-ia-y4c">
-                                <rect key="frame" x="0.0" y="324.33333333333331" width="430" height="0.66666666666668561"/>
+                                <rect key="frame" x="0.0" y="260.5" width="375" height="0.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="u3J-oo-2il"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Server" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="baH-YE-AMw" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="15.999999999999996" y="339" width="49.666666666666657" height="20.333333333333314"/>
+                                <rect key="frame" x="16" y="275" width="49.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -164,7 +162,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iwn-G2-Shg" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="398" y="319" width="0.0" height="0.0"/>
+                                <rect key="frame" x="359" y="275" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -174,14 +172,14 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dwb-66-4CU">
-                                <rect key="frame" x="0.0" y="373.33333333333331" width="430" height="0.33333333333331439"/>
+                                <rect key="frame" x="0.0" y="289" width="375" height="0.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="bfM-B0-dQM"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protocol" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eye-K9-gbK" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="15.999999999999996" y="387.66666666666669" width="63.666666666666657" height="20.333333333333314"/>
+                                <rect key="frame" x="16" y="303.5" width="64" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -190,7 +188,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ceh-zv-HH4" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="398" y="347.5" width="0.0" height="0.0"/>
+                                <rect key="frame" x="359" y="303.5" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -274,16 +272,16 @@
             </objects>
             <point key="canvasLocation" x="2087" y="916"/>
         </scene>
-        <!--Dns Container Controller-->
+        <!--Dns Request Details Container Controller-->
         <scene sceneID="9eU-yK-W4S">
             <objects>
-                <viewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="xvL-9q-qox" customClass="DnsContainerController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="xvL-9q-qox" customClass="DnsRequestDetailsContainerController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MQz-Un-cMd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n1j-Q6-vGE">
-                                <rect key="frame" x="0.0" y="44" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="852"/>
                                 <connections>
                                     <segue destination="7eB-aD-VKK" kind="embed" id="qCe-mL-boE"/>
                                 </connections>
@@ -330,7 +328,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Most active companies" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Asq-k8-hi1" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="24" y="44" width="366" height="29"/>
+                                <rect key="frame" x="24" y="0.0" width="366" height="29"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -342,15 +340,15 @@
                                 </variation>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="l1U-rp-2rZ">
-                                <rect key="frame" x="0.0" y="87" width="414" height="711"/>
+                                <rect key="frame" x="0.0" y="53" width="414" height="799"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MostActiveCompaniesCellId" id="fjb-Ci-Jvi" customClass="MostActiveCompaniesCell" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="52"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="32.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fjb-Ci-Jvi" id="BaZ-mD-rnb">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="52"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="32.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBn-TP-JBq" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -366,7 +364,7 @@
                                                     </variation>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="Wbq-rq-H5F">
-                                                    <rect key="frame" x="374" y="14" width="24" height="24"/>
+                                                    <rect key="frame" x="374" y="4.5" width="24" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="24" id="2hu-O2-eFU">
                                                             <variation key="heightClass=regular-widthClass=regular" constant="32"/>
@@ -521,7 +519,7 @@
                                     </variation>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qPQ-vV-fXm" customClass="ThemableButton" customModule="Adguard" customModuleProvider="target">
-                                    <rect key="frame" x="20" y="91" width="166.5" height="18"/>
+                                    <rect key="frame" x="8" y="97" width="190.5" height="22"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="22" id="P4s-7x-cyq"/>
                                     </constraints>
@@ -566,7 +564,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="2JR-M5-ccZ">
-                                <rect key="frame" x="0.0" y="179" width="414" height="43.5"/>
+                                <rect key="frame" x="0.0" y="195.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2JR-M5-ccZ" id="CTw-Od-gZ9">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -581,6 +579,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="oYh-5h-4md"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="TaN-AU-2fX">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
@@ -633,7 +632,7 @@
                         <constraint firstItem="DCy-so-G1C" firstAttribute="centerY" secondItem="K6G-aX-FSJ" secondAttribute="centerY" id="vsc-jV-WFH"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleAspectFit" ambiguous="YES" id="P5d-Vd-a5i">
+                <view contentMode="scaleAspectFit" id="P5d-Vd-a5i">
                     <rect key="frame" x="0.0" y="0.0" width="416" height="120"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
@@ -749,7 +748,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RequestDetailsCellId" id="b2U-hv-Pem" customClass="RequestDetailsCell" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="414" height="32.5"/>
+                                <rect key="frame" x="0.0" y="97.5" width="414" height="32.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="b2U-hv-Pem" id="84V-IP-ITQ">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="32.5"/>
@@ -852,7 +851,7 @@
                                             </constraints>
                                         </view>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hv7-jl-iD5">
-                                            <rect key="frame" x="347" y="18" width="16" height="16"/>
+                                            <rect key="frame" x="374" y="8.5" width="16" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="16" id="4L5-71-qIM">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="20"/>
@@ -954,7 +953,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" minimumFontSize="24" translatesAutoresizingMaskIntoConstraints="NO" id="ApV-fQ-kgK" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="24" y="448" width="366" height="0.0"/>
+                                <rect key="frame" x="24" y="426" width="366" height="0.0"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -966,7 +965,7 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Security filters, DNS privacy, custom filters, etc." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="ae4-WL-0pQ" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="24" y="464" width="366" height="19.333333333333314"/>
+                                <rect key="frame" x="24" y="442" width="366" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -990,7 +989,7 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can see who tries to track you, view stats and the log of DNS requests blocking" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T0y-mr-Zwa" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="24" y="144" width="366" height="38.333333333333343"/>
+                                <rect key="frame" x="24" y="147" width="366" height="38.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1003,7 +1002,7 @@
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6xN-ij-jJj">
-                                <rect key="frame" x="107" y="515.5" width="200" height="40"/>
+                                <rect key="frame" x="107" y="493.5" width="200" height="40"/>
                                 <color key="backgroundColor" red="0.40392156862745099" green="0.69803921568627447" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="1Kx-Sg-Q7z">
@@ -1077,14 +1076,14 @@
             <objects>
                 <viewController storyboardIdentifier="BlockRequestControllerId" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" modalPresentationStyle="overFullScreen" id="SQZ-I4-mzW" customClass="BlockRequestController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Png-mP-61h">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sdh-OW-4Mg" userLabel="Content View">
-                                <rect key="frame" x="0.0" y="460" width="414" height="436"/>
+                                <rect key="frame" x="0.0" y="195.5" width="600" height="404.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="prq-RX-otW">
-                                        <rect key="frame" x="195" y="8" width="24" height="2"/>
+                                        <rect key="frame" x="288" y="8" width="24" height="2"/>
                                         <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="24" id="fjT-80-Ha8">
@@ -1096,7 +1095,7 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Block request" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kwZ-Kw-f1R" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="25" y="42" width="364" height="29"/>
+                                        <rect key="frame" x="25" y="42" width="550" height="29"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <color key="textColor" red="0.28627450980000002" green="0.28627450980000002" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1108,13 +1107,13 @@
                                         </variation>
                                     </label>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bQe-el-p3y">
-                                        <rect key="frame" x="0.0" y="103" width="414" height="301.5"/>
+                                        <rect key="frame" x="0.0" y="103" width="600" height="301.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mvW-eZ-55E">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="301.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="301.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l5B-oj-DnW" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="16" y="175.5" width="382" height="40"/>
+                                                        <rect key="frame" x="16" y="175.5" width="568" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="GQZ-wl-j9w">
                                                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
@@ -1135,7 +1134,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7mk-7J-iLD" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="16" y="231.5" width="382" height="40"/>
+                                                        <rect key="frame" x="16" y="231.5" width="568" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="g6x-wM-tEx">
                                                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
@@ -1156,17 +1155,17 @@
                                                         </connections>
                                                     </button>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Tb1-ZT-707">
-                                                        <rect key="frame" x="0.0" y="51.5" width="414" height="100"/>
+                                                        <rect key="frame" x="0.0" y="51.5" width="600" height="100"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="100" id="4XK-CU-bLS"/>
                                                         </constraints>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BlockRequestCellId" id="tdG-3H-7GJ" customClass="BlockRequestCell" customModule="Adguard" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="28" width="414" height="50"/>
+                                                                <rect key="frame" x="0.0" y="44.5" width="600" height="50"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tdG-3H-7GJ" id="95h-eG-6CN">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m4E-bk-KEh">
@@ -1183,7 +1182,7 @@
                                                                             </connections>
                                                                         </button>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SHQ-02-VU8" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                                            <rect key="frame" x="64" y="16" width="334" height="18"/>
+                                                                            <rect key="frame" x="64" y="16" width="520" height="18"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="18" id="aUL-mh-Tdg"/>
                                                                             </constraints>
@@ -1216,7 +1215,7 @@
                                                         </connections>
                                                     </tableView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose the domain level:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uj0-U3-Qfx" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="24" y="0.0" width="366" height="19.5"/>
+                                                        <rect key="frame" x="24" y="0.0" width="552" height="19.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -1310,14 +1309,14 @@
             <objects>
                 <viewController storyboardIdentifier="EditBlockRequestController" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" modalPresentationStyle="overFullScreen" id="QSc-py-R8e" customClass="EditBlockRequestController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="noU-WV-2Uo">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dgc-l5-iRo">
-                                <rect key="frame" x="0.0" y="595.5" width="414" height="300.5"/>
+                                <rect key="frame" x="0.0" y="283" width="600" height="317"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GoR-QU-5cA">
-                                        <rect key="frame" x="195" y="8" width="24" height="2"/>
+                                        <rect key="frame" x="288" y="8" width="24" height="2"/>
                                         <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="IUJ-Cv-bKN">
@@ -1329,7 +1328,7 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Block request" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y8j-ib-ZgR" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="25" y="42" width="364" height="29"/>
+                                        <rect key="frame" x="32" y="42" width="536" height="29"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <color key="textColor" red="0.28627450980000002" green="0.28627450980000002" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1341,7 +1340,7 @@
                                         </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Domain name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M4r-q5-RXv" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="25" y="103" width="364" height="17"/>
+                                        <rect key="frame" x="32" y="103" width="536" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1354,7 +1353,7 @@
                                         </variation>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ShZ-0e-9AG">
-                                        <rect key="frame" x="25" y="135" width="364" height="30"/>
+                                        <rect key="frame" x="32" y="136" width="536" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="n6z-jg-wrj"/>
                                         </constraints>
@@ -1372,14 +1371,14 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lAJ-10-TeO" customClass="TextFieldIndicatorView" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="24" y="161" width="366" height="1"/>
+                                        <rect key="frame" x="24" y="170" width="552" height="1"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="8LF-mv-Ljr"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1rj-wD-aeH" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="182" width="382" height="40"/>
+                                        <rect key="frame" x="16" y="191" width="568" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="aZB-vk-So3"/>
                                         </constraints>
@@ -1398,7 +1397,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hoI-YR-JcD" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="237.5" width="382" height="40"/>
+                                        <rect key="frame" x="16" y="247" width="568" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Wcs-hL-Guu"/>
                                         </constraints>
@@ -1521,7 +1520,7 @@
                                     </variation>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNX-Qd-Hmo">
-                                    <rect key="frame" x="215.5" y="82" width="190.5" height="61.5"/>
+                                    <rect key="frame" x="215.5" y="125" width="190.5" height="40"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                     <color key="textColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -1530,14 +1529,14 @@
                                     </variation>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UiV-od-dv4">
-                                    <rect key="frame" x="206.5" y="84" width="1" height="58"/>
+                                    <rect key="frame" x="206.5" y="125" width="1" height="62"/>
                                     <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="1" id="wRd-m3-clv"/>
                                     </constraints>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lKJ-8V-GJi" customClass="ThemableButton" customModule="Adguard" customModuleProvider="target">
-                                    <rect key="frame" x="20" y="124" width="166.5" height="18"/>
+                                    <rect key="frame" x="8" y="165" width="190.5" height="22"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="22" id="obI-Vj-BCL"/>
                                     </constraints>
@@ -1554,7 +1553,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="1" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4IJ-xy-hky" customClass="ThemableButton" customModule="Adguard" customModuleProvider="target">
-                                    <rect key="frame" x="227.5" y="124" width="166.5" height="18"/>
+                                    <rect key="frame" x="215.5" y="165" width="190.5" height="22"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="22" id="id6-lo-huE"/>
                                     </constraints>
@@ -1571,7 +1570,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w9H-e5-jiH" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                    <rect key="frame" x="8" y="189.5" width="190.5" height="61.5"/>
+                                    <rect key="frame" x="8" y="211" width="190.5" height="40"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -1583,7 +1582,7 @@
                                     </variation>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jgb-st-fnO" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                    <rect key="frame" x="215.5" y="189.5" width="190.5" height="61.5"/>
+                                    <rect key="frame" x="215.5" y="211" width="190.5" height="40"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -1595,14 +1594,14 @@
                                     </variation>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gOe-MU-6Bz">
-                                    <rect key="frame" x="206.5" y="166" width="1" height="58"/>
+                                    <rect key="frame" x="206.5" y="211" width="1" height="62"/>
                                     <color key="backgroundColor" red="0.84705882349999995" green="0.84705882349999995" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="1" id="7MK-mO-1Kr"/>
                                     </constraints>
                                 </view>
                                 <button opaque="NO" tag="2" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yio-E8-cQV" customClass="ThemableButton" customModule="Adguard" customModuleProvider="target">
-                                    <rect key="frame" x="20" y="206" width="166.5" height="18"/>
+                                    <rect key="frame" x="8" y="251" width="190.5" height="22"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="22" id="zB7-Rs-CAx"/>
                                     </constraints>
@@ -1619,7 +1618,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="3" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xj3-X8-fnq" customClass="ThemableButton" customModule="Adguard" customModuleProvider="target">
-                                    <rect key="frame" x="227.5" y="206" width="166.5" height="18"/>
+                                    <rect key="frame" x="215.5" y="251" width="190.5" height="22"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="22" id="mao-24-uqs"/>
                                     </constraints>
@@ -1645,7 +1644,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Most active" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yWy-kc-8Zg" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                    <rect key="frame" x="24" y="270" width="84" height="20"/>
+                                    <rect key="frame" x="24" y="321" width="84" height="20"/>
                                     <accessibility key="accessibilityConfiguration">
                                         <bool key="isElement" value="NO"/>
                                     </accessibility>
@@ -1665,7 +1664,7 @@
                                     </variation>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gK7-Kw-vh5" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                    <rect key="frame" x="350" y="280" width="0.0" height="0.0"/>
+                                    <rect key="frame" x="350" y="331" width="0.0" height="0.0"/>
                                     <accessibility key="accessibilityConfiguration">
                                         <bool key="isElement" value="NO"/>
                                     </accessibility>
@@ -1680,7 +1679,7 @@
                                     </variation>
                                 </label>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="9cb-6s-8gL">
-                                    <rect key="frame" x="366" y="268" width="24" height="24"/>
+                                    <rect key="frame" x="366" y="319" width="24" height="24"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="24" id="Vpg-Ov-ttR">
                                             <variation key="heightClass=regular-widthClass=regular" constant="32"/>
@@ -1804,7 +1803,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="qNf-hp-8Rh">
-                                <rect key="frame" x="0.0" y="427" width="414" height="43.5"/>
+                                <rect key="frame" x="0.0" y="443.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qNf-hp-8Rh" id="YA0-k5-11Y">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -1938,7 +1937,7 @@
                             </connections>
                         </button>
                         <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="dEb-Gf-ItY">
-                            <rect key="frame" x="8" y="40" width="400" height="56"/>
+                            <rect key="frame" x="8" y="40" width="400" height="72"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
                                 <outlet property="delegate" destination="lL1-Yv-4AH" id="4DN-5A-kGL"/>
@@ -1984,7 +1983,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DNS protection is disabled" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="X1F-2p-Xpe" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="32" y="324" width="350" height="72"/>
+                                <rect key="frame" x="32" y="302" width="350" height="72"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1997,7 +1996,7 @@
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XYE-JT-WSH">
-                                <rect key="frame" x="107" y="428" width="200" height="40"/>
+                                <rect key="frame" x="107" y="406" width="200" height="40"/>
                                 <color key="backgroundColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="9YM-Id-ofF">

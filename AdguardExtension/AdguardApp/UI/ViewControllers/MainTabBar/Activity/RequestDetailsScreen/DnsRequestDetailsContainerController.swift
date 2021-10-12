@@ -25,28 +25,27 @@ protocol AddDomainToListDelegate: AnyObject {
 
      - Parameters:
         - domain: the domain to add to list.
-        - needsCorrecting: flag indicating the need to make a rule from domain.
         - type: type of domain blacklist / whitelist.
      */
-    func add(domain: String, needsCorrecting: Bool, by type: DnsLogButtonType)
+    func add(domain: String, by type: DnsLogButtonType)
 }
 
-protocol DnsContainerControllerDelegate: AnyObject {
+protocol DnsRequestDetailsContainerControllerDelegate: AnyObject {
     func userStatusChanged()
 }
 
-class DnsContainerController: UIViewController, AddDomainToListDelegate {
+class DnsRequestDetailsContainerController: UIViewController, AddDomainToListDelegate {
 
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var shadowView: BottomShadowView!
 
-    var logRecord: DnsLogRecord!
-    weak var delegate: DnsContainerControllerDelegate?
+    var model: DnsRequestDetailsViewModel!
+    weak var delegate: DnsRequestDetailsContainerControllerDelegate?
 
     private var blockRequestControllerId = "BlockRequestControllerId"
 
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let domainsConverter: DomainsConverterProtocol = DomainsConverter()
+    private let domainConverter: DomainConverterProtocol = DomainConverter()
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsProtection: DnsProtectionProtocol = ServiceLocator.shared.getService()!
 
@@ -58,7 +57,7 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationVC = segue.destination as? DnsRequestDetailsController {
-            destinationVC.logRecord = logRecord
+            destinationVC.model = model
             destinationVC.shadowView = shadowView
             destinationVC.containerController = self
             detailsController = destinationVC
@@ -80,14 +79,12 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
 
     // MARK: - AddDomainToListDelegate method
 
-    func add(domain: String, needsCorrecting: Bool, by type: DnsLogButtonType) {
+    func add(domain: String, by type: DnsLogButtonType) {
         if type == .addDomainToAllowList {
-            try? dnsProtection.add(rule: UserRule(ruleText: domain), override: true, for: .allowlist)
+            model.addDomainToAllowlist(domain)
         } else if type == .addRuleToUserFlter {
-            let rule = needsCorrecting ? domainsConverter.userFilterBlockRuleFromDomain(domain) : domain
-            try? dnsProtection.add(rule: UserRule(ruleText: rule), override: true, for: .blocklist)
+            model.addDomainToUserRules(domain)
         }
-
         updateUserStatus()
     }
 
@@ -101,7 +98,7 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
             return
         }
 
-        let buttons = logRecord!.getButtons().map{ [weak self] (type) -> BottomShadowButton in
+        let buttons = model.logRecord.getButtons().map{ [weak self] (type) -> BottomShadowButton in
             guard let self = self else { return BottomShadowButton() }
             let button = BottomShadowButton()
             let title = type.buttonTitle.uppercased()
@@ -111,35 +108,27 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
             case .addRuleToUserFlter:
                 color = UIColor.AdGuardColor.red
                 button.action = {
-                    if let rule = self.logRecord?.event.domain {
-                        self.presentBlockRequestController(with: rule, type: type, delegate: self)
-                    }
+                    self.presentBlockRequestController(with: self.model.logRecord.event.domain, type: type, delegate: self)
                 }
 
             case .removeDomainFromWhitelist:
                 color = UIColor.AdGuardColor.red
                 button.action = {
-                    if let record = self.logRecord {
-                        self.dnsProtection.removeDomainFromAllowlist(record.event.domain)
-                        self.updateUserStatus()
-                    }
+                    self.model.removeFromAllowlist()
+                    self.updateUserStatus()
                 }
 
             case .removeRuleFromUserFilter:
                 color = UIColor.AdGuardColor.lightGreen1
                 button.action = {
-                    if let record = self.logRecord {
-                        self.dnsProtection.removeDomainFromUserFilter(record.event.domain)
-                        self.updateUserStatus()
-                    }
+                    self.model.removeFromUserRules()
+                    self.updateUserStatus()
                 }
 
             case .addDomainToAllowList:
                 color = UIColor.AdGuardColor.lightGreen1
                 button.action = {
-                    if let domain = self.logRecord?.event.domain {
-                        self.presentBlockRequestController(with: domain, type: type, delegate: self)
-                    }
+                    self.presentBlockRequestController(with: self.model.logRecord.event.domain, type: type, delegate: self)
                 }
             }
 
@@ -153,14 +142,13 @@ class DnsContainerController: UIViewController, AddDomainToListDelegate {
     }
 
     private func updateUserStatus() {
-        self.logRecord.updateUserStatus()
         self.updateButtons()
-        detailsController?.tableView.reloadData()
+        detailsController?.updateStatusLabel()
         delegate?.userStatusChanged()
     }
 }
 
-extension DnsContainerController: ThemableProtocol {
+extension DnsRequestDetailsContainerController: ThemableProtocol {
     func updateTheme() {
         theme.setupNavigationBar(navigationController?.navigationBar)
         view.backgroundColor = theme.backgroundColor

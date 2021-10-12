@@ -42,7 +42,7 @@ class EditBlockRequestController: BottomAlertController {
 
         titleLabel.text = (type == .addDomainToAllowList) ? String.localizedString("whitelist_request") : String.localizedString("block_request")
 
-        let converter = DomainsConverter()
+        let converter = DomainConverter()
 
         domainNameTextField.text = (type == .addDomainToAllowList) ? domain : converter.userFilterBlockRuleFromDomain(domain)
         domainNameTextField.becomeFirstResponder()
@@ -59,8 +59,7 @@ class EditBlockRequestController: BottomAlertController {
 
     @IBAction func addTapped(_ sender: UIButton) {
         let domain = domainNameTextField.text ?? ""
-        let needsCorrecting = type == .addDomainToAllowList
-        delegate?.add(domain: domain, needsCorrecting: needsCorrecting, by: type)
+        delegate?.add(domain: domain, by: type)
         dismiss(animated: true)
     }
 

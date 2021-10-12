@@ -74,7 +74,7 @@ final class ChartView: UIView {
 
     private var gridColor = UIColor(displayP3Red: 0.53, green: 0.53, blue: 0.53, alpha: 0.3)
 
-    private let offColor = UIColor(hexString: "#888888")
+    private let offColor = UIColor.AdGuardColor.lightGray3
 
     private var numberOfVerticalSectors = 7
     private var numberOfHorizontalSectors = 2

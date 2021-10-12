@@ -63,9 +63,7 @@ class ActivityViewController: UITableViewController {
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let dnsTrackers: DnsTrackersProviderProtocol = ServiceLocator.shared.getService()!
-    private let domainsParserService: DomainsParserServiceProtocol = ServiceLocator.shared.getService()!
-    private let domainsConverter: DomainsConverterProtocol = DomainsConverter()
-    private let dnsProtection: DnsProtectionProtocol = ServiceLocator.shared.getService()!
+    private let domainParserService: DomainParserServiceProtocol = ServiceLocator.shared.getService()!
     private let settingsReset: SettingsResetServiceProtocol = ServiceLocator.shared.getService()!
 
     // MARK: - Notifications
@@ -100,7 +98,7 @@ class ActivityViewController: UITableViewController {
 
     required init?(coder: NSCoder) {
         let activityStatistics: ActivityStatisticsProtocol = ServiceLocator.shared.getService()!
-        activityModel = ActivityStatisticsModel(dnsTrackers: dnsTrackers, domainsParserService: domainsParserService, activityStatistics: activityStatistics)
+        activityModel = ActivityStatisticsModel(dnsTrackers: dnsTrackers, domainParserService: domainParserService, activityStatistics: activityStatistics)
         super.init(coder: coder)
     }
 
@@ -151,8 +149,8 @@ class ActivityViewController: UITableViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == showDnsContainerSegueId, let controller = segue.destination as? DnsContainerController {
-            controller.logRecord = selectedRecord
+        if segue.identifier == showDnsContainerSegueId, let controller = segue.destination as? DnsRequestDetailsContainerController {
+            controller.model = requestsModel?.logRecordViewModelFor(record: selectedRecord!)
             controller.delegate = self
         } else if segue.identifier == showMostActiveCompaniesSegueId, let controller = segue.destination as? MostActiveCompaniesController {
             controller.mostRequestedCompanies = mostRequestedCompanies
@@ -233,7 +231,7 @@ class ActivityViewController: UITableViewController {
         if let cell = tableView.dequeueReusableCell(withIdentifier: activityTableViewCellReuseId) as? ActivityTableViewCell {
             guard let record = requestsModel?.records[indexPath.row] else { return UITableViewCell() }
             cell.advancedMode = configuration.advancedMode
-            cell.domainsParser = domainsParserService.domainsParser
+            cell.domainParser = domainParserService.domainParser
             cell.theme = theme
             cell.record = record
             return cell
@@ -430,9 +428,9 @@ class ActivityViewController: UITableViewController {
         case .addDomainToAllowList:
             buttonColor = UIColor.AdGuardColor.lightGreen1
         case .addRuleToUserFlter:
-            buttonColor = UIColor(hexString: "#c23814")
+            buttonColor = UIColor.AdGuardColor.errorRedColor
         default:
-            buttonColor = UIColor(hexString: "#888888")
+            buttonColor = UIColor.AdGuardColor.lightGray3
         }
         let buttonAction = UIContextualAction(style: .normal, title: buttonType.buttonTitle) { [weak self] (action, view, success:(Bool) -> Void) in
             guard let self = self else { return }
@@ -580,17 +578,16 @@ extension ActivityViewController: UIGestureRecognizerDelegate {
 
 extension ActivityViewController: AddDomainToListDelegate {
 
-    func add(domain: String, needsCorrecting: Bool, by type: DnsLogButtonType) {
+    func add(domain: String, by type: DnsLogButtonType) {
         switch type {
         case .removeDomainFromWhitelist:
             break
         case .removeRuleFromUserFilter:
             break
         case .addDomainToAllowList:
-            try? dnsProtection.add(rule: UserRule(ruleText: domain), override: true, for: .allowlist)
+            requestsModel?.addDomainToAllowlist(domain)
         case .addRuleToUserFlter:
-            let rule = needsCorrecting ? domainsConverter.userFilterBlockRuleFromDomain(domain) : domain
-            try? dnsProtection.add(rule: UserRule(ruleText: rule), override: true, for: .blocklist)
+            requestsModel?.addDomainToUserRules(domain)
         }
     }
 }
@@ -612,7 +609,7 @@ extension ActivityViewController: ThemableProtocol {
     }
 }
 
-extension ActivityViewController: DnsContainerControllerDelegate {
+extension ActivityViewController: DnsRequestDetailsContainerControllerDelegate {
     func userStatusChanged() {
         requestsModel?.updateUserStatuses()
     }

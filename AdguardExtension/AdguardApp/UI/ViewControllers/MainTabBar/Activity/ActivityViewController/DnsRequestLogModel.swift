@@ -152,10 +152,10 @@ extension DnsLogRecord
 extension DnsProtectionUserRulesManagerProtocol {
     func removeDomainFromUserFilter(_ domain: String){
         let subdomains: [String] = String.generateSubDomains(from: domain)
-        let domainsConverter = DomainsConverter()
+        let domainConverter = DomainConverter()
 
         for subdomain in subdomains {
-            let rule = domainsConverter.userFilterBlockRuleFromDomain(subdomain)
+            let rule = domainConverter.userFilterBlockRuleFromDomain(subdomain)
             try? self.removeRule(withText: rule, for: .blocklist)
         }
     }
@@ -226,8 +226,9 @@ class DnsRequestLogViewModel {
     private let dnsTrackers: DnsTrackersProviderProtocol
     private let dnsStatistics: DnsLogStatisticsProtocol
     private let dnsProtection: DnsProtectionProtocol
-    private let domainsConverter: DomainsConverterProtocol
-    private let domainsParser: DomainsParserServiceProtocol
+    private let domainConverter: DomainConverterProtocol
+    private let domainParser: DomainParser
+    private let logRecordHelper: DnsLogRecordHelper
 
     private var allRecords: [DnsLogRecord] = []
     private var searchRecords: [DnsLogRecord] = []
@@ -235,13 +236,14 @@ class DnsRequestLogViewModel {
     private let workingQueue = DispatchQueue(label: "DnsRequestLogViewModel queue")
 
     // MARK: - init
-    init(dnsTrackers: DnsTrackersProviderProtocol, dnsStatistics: DnsLogStatisticsProtocol, dnsProtection: DnsProtectionProtocol, domainsConverter: DomainsConverterProtocol, domainsParser: DomainsParserServiceProtocol) {
+    init(dnsTrackers: DnsTrackersProviderProtocol, dnsStatistics: DnsLogStatisticsProtocol, dnsProtection: DnsProtectionProtocol, domainConverter: DomainConverterProtocol, domainParser: DomainParserServiceProtocol) {
         self.dnsTrackers = dnsTrackers
         self.dnsStatistics = dnsStatistics
         self.dnsProtection = dnsProtection
-        self.domainsConverter = domainsConverter
-        self.domainsParser = domainsParser
+        self.domainConverter = domainConverter
+        self.domainParser = domainParser.domainParser!
         self.searchString = ""
+        self.logRecordHelper = DnsLogRecordHelper(dnsProtection: dnsProtection, dnsTrackers: dnsTrackers, domainConverter: domainConverter, domainParser: domainParser.domainParser!)
     }
 
     // MARK: - public methods
@@ -262,6 +264,15 @@ class DnsRequestLogViewModel {
         delegate?.requestsCleared()
     }
 
+    func addDomainToAllowlist(_ domain: String) {
+        try? dnsProtection.add(rule: UserRule(ruleText: domain), override: true, for: .allowlist)
+    }
+
+    func addDomainToUserRules(_ domain: String) {
+        let rule = domainConverter.userFilterBlockRuleFromDomain(domain)
+        try? dnsProtection.add(rule: UserRule(ruleText: rule), override: true, for: .blocklist)
+    }
+
     func removeDomainFromUserFilter(_ domain: String){
         dnsProtection.removeDomainFromUserFilter(domain)
     }
@@ -272,8 +283,12 @@ class DnsRequestLogViewModel {
 
     func updateUserStatuses() {
         for record in allRecords {
-            record.updateUserStatus()
+            record.userFilterStatus =  logRecordHelper.getUserFilterStatusForDomain(record.event.domain)
         }
+    }
+
+    func logRecordViewModelFor(record: DnsLogRecord)->DnsRequestDetailsViewModel {
+        return DnsRequestDetailsViewModel(logRecord: record, helper: logRecordHelper)
     }
 
     // MARK: - private methods
@@ -282,7 +297,11 @@ class DnsRequestLogViewModel {
 
         let events = (try? dnsStatistics.getDnsLogRecords()) ?? []
         allRecords = events.map {
-            return DnsLogRecord(event: $0, dnsProtection: dnsProtection, dnsTrackers: dnsTrackers, domainsConverter: domainsConverter, domainParser: domainsParser.domainsParser)
+            let firstLevelDomain = domainParser.parse(host: $0.domain)?.domain ?? $0.domain
+            let tracker = dnsTrackers.getTracker(by: firstLevelDomain)
+            let userFilterStatus = logRecordHelper.getUserFilterStatusForDomain($0.domain)
+
+            return DnsLogRecord(event: $0, tracker: tracker, firstLevelDomain: firstLevelDomain, userFilterStatus: userFilterStatus)
         }
 
         recordsObserver?(allRecords)

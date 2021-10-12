@@ -18,12 +18,12 @@
 
 import Foundation
 
-protocol DomainsConverterProtocol {
+protocol DomainConverterProtocol {
     // converts blacklist domain to rule
     func userFilterBlockRuleFromDomain(_ domain: String) -> String
 }
 
-class DomainsConverter: DomainsConverterProtocol {
+class DomainConverter: DomainConverterProtocol {
 
     private let blacklistPrefix = "||"
     private let blacklistSuffix = "^$important"
