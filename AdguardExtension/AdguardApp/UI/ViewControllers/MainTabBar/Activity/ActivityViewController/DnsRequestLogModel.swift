@@ -153,18 +153,34 @@ extension DnsProtectionUserRulesManagerProtocol {
     func removeDomainFromUserFilter(_ domain: String) throws {
         let subdomains: [String] = String.generateSubDomains(from: domain)
         let domainConverter = DomainConverter()
+        var atLeastOneSuccess = false
 
         for subdomain in subdomains {
-            let rule = domainConverter.userFilterBlockRuleFromDomain(subdomain)
-            try self.removeRule(withText: rule, for: .blocklist)
+            do {
+                let rule = domainConverter.userFilterBlockRuleFromDomain(subdomain)
+                try self.removeRule(withText: rule, for: .blocklist)
+                atLeastOneSuccess = true
+            }
+            catch {}
+        }
+        if !atLeastOneSuccess {
+            throw UserRulesStorageError.ruleDoesNotExist(ruleString: domainConverter.userFilterBlockRuleFromDomain(domain))
         }
     }
 
     func removeDomainFromAllowlist(_ domain: String) throws {
         let subdomains: [String] = String.generateSubDomains(from: domain)
+        var atLeastOneSuccess = false
 
         for subdomain in subdomains {
-            try self.removeRule(withText: subdomain, for: .allowlist)
+            do {
+                try self.removeRule(withText: subdomain, for: .allowlist)
+                atLeastOneSuccess = true
+            }
+            catch {}
+        }
+        if !atLeastOneSuccess {
+            throw UserRulesStorageError.ruleDoesNotExist(ruleString: domain)
         }
     }
 }

@@ -139,11 +139,12 @@ final class DnsRequestDetailsController: UITableViewController {
         guard section != titleSection else { return UIView() }
 
         var text = ""
-        var needsButton = true
+        var needsButton = false
 
         switch section {
         case trackerDetailsSection:
             text = String.localizedString("tracker_details_header")
+            needsButton = model.logRecord.tracker?.jsonType != .adGuard
         case generalSection:
             text = String.localizedString("general_header")
         case dnsSection:
