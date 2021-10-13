@@ -18,14 +18,14 @@
 
 import DnsAdGuardSDK
 
-class CompanyRequestsRecord {
+final class CompanyRequestsRecord {
     var domains = Set<String>()
-    let company: String?
+    let company: String
     let key: String
     var requests: Int
     var encrypted: Int
 
-    init(company: String?, key: String, requests: Int, encrypted: Int) {
+    init(company: String, key: String, requests: Int, encrypted: Int) {
         self.company = company
         self.key = key
         self.requests = requests
@@ -39,11 +39,10 @@ struct CompaniesInfo {
 }
 
 protocol ActivityStatisticsModelProtocol: AnyObject {
-
     var period: StatisticsPeriod { get set }
     var counters: CountersStatisticsRecord { get }
 
-    func getCompanies(for type: ChartDateType, _ completion: @escaping (_ info: CompaniesInfo)->())
+    func getCompanies(for type: StatisticsPeriod, _ completion: @escaping (_ info: CompaniesInfo) -> Void)
 }
 
 final class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
@@ -51,6 +50,7 @@ final class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
     private let dnsTrackers: DnsTrackersProviderProtocol
     private let domainParserService: DomainParserServiceProtocol
     private let activityStatistics: ActivityStatisticsProtocol
+    private let companiesStatistics: CompaniesStatistics
 
     private let workingQueue = DispatchQueue(label: "ActivityStatisticsModel queue", qos: .userInitiated)
 
@@ -60,49 +60,36 @@ final class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
         return (try? activityStatistics.getCounters(for: period)) ?? CountersStatisticsRecord.emptyRecord()
     }
 
-    init(dnsTrackers: DnsTrackersProviderProtocol, domainParserService: DomainParserServiceProtocol, activityStatistics: ActivityStatisticsProtocol) {
+    init(
+        dnsTrackers: DnsTrackersProviderProtocol,
+        domainParserService: DomainParserServiceProtocol,
+        activityStatistics: ActivityStatisticsProtocol,
+        companiesStatistics: CompaniesStatistics
+    ) {
         self.dnsTrackers = dnsTrackers
         self.domainParserService = domainParserService
         self.activityStatistics = activityStatistics
+        self.companiesStatistics = companiesStatistics
     }
 
-    func getCompanies(for type: ChartDateType, _ completion: @escaping (_ info: CompaniesInfo)->()) {
-        workingQueue.async {[weak self] in
-
+    func getCompanies(for type: StatisticsPeriod, _ completion: @escaping (_ info: CompaniesInfo) -> Void) {
+        workingQueue.async { [weak self] in
             guard let self = self else { return }
-            var recordsByCompanies: [String : CompanyRequestsRecord] = [:]
-            var companiesNumber = 0
-            let parser = self.domainParserService.domainParser
-//
-//            for record in records {
-//                let company = self.dnsTrackersService.getTrackerInfo(by: record.domain)?.name
-//                let domain = parser?.parse(host: record.domain)?.domain ?? record.domain
-//                let key = company ?? domain
-//
-//                if let existingRecord = recordsByCompanies[key] {
-//                    existingRecord.requests += record.requests
-//                    existingRecord.encrypted += record.encrypted
-//                    existingRecord.domains.insert(record.domain)
-//                } else {
-//                    let requestRecord = CompanyRequestsRecord(company: company, key: key, requests: record.requests, encrypted: record.encrypted)
-//                    requestRecord.domains.insert(record.domain)
-//                    recordsByCompanies[key] = requestRecord
-//
-//                    /* We count unique domains as companies if a company wasn't found by domain */
-//                    companiesNumber += 1
-//                }
-//            }
-//
-//            let recordsArray = Array(recordsByCompanies.values)
-//            let mostRequested = recordsArray.sorted(by: {
-//                if $0.requests != $1.requests {
-//                    return $0.requests > $1.requests
-//                } else {
-//                    return $0.key < $1.key
-//                }
-//            })
-//
-            let info = CompaniesInfo(mostRequested: [], companiesNumber: 0)
+
+            guard let statistics = try? self.companiesStatistics.getCompaniesStatistics(for: type) else {
+                let info = CompaniesInfo(mostRequested: [], companiesNumber: 0)
+                completion(info)
+                return
+            }
+            let records: [CompanyRequestsRecord] = statistics.map {
+                return CompanyRequestsRecord(
+                    company: $0.company,
+                    key: $0.company,
+                    requests: $0.counters.requests,
+                    encrypted: $0.counters.encrypted
+                )
+            }
+            let info = CompaniesInfo(mostRequested: records, companiesNumber: records.count)
             completion(info)
         }
     }

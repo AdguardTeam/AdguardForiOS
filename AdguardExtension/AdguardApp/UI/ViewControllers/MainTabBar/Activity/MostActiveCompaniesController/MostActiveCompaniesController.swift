@@ -17,8 +17,9 @@
 */
 
 import UIKit
+import enum DnsAdGuardSDK.StatisticsPeriod
 
-class MostActiveCompaniesController: UIViewController {
+final class MostActiveCompaniesController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var controllerTitle: ThemableLabel!
     @IBOutlet weak var tableView: UITableView!
@@ -30,7 +31,7 @@ class MostActiveCompaniesController: UIViewController {
 
     // MARK: - Public variables
 
-    var chartDateType: ChartDateType?
+    var chartDateType: StatisticsPeriod?
     var mostRequestedCompanies: [CompanyRequestsRecord] = []
 
     // MARK: - Private variables
