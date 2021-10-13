@@ -46,6 +46,7 @@ struct FilterGroupLocalizationsTable {
 protocol GroupLocalizationsMetaStorageProtocol {
     func getLocalizationForGroup(withId id: Int, forLanguage lang: String) -> FilterGroupLocalizationsTable?
     func updateLocalizationForGroup(withId id: Int, forLanguage lang: String, localization: ExtendedFiltersMetaLocalizations.GroupLocalization) throws
+    func collectGroupsMetaLocalizationLanguage(from suitableLanguages: [String]) throws -> String
 }
 
 extension MetaStorage: GroupLocalizationsMetaStorageProtocol {
@@ -73,5 +74,18 @@ extension MetaStorage: GroupLocalizationsMetaStorageProtocol {
                                                                FilterGroupLocalizationsTable.name <- localization.name)
         try filtersDb.run(query)
         Logger.logDebug("(FiltersMetaStorage) - Insert localization for group with id=\(id) lang=\(lang) and name=\(localization.name)")
+    }
+
+    func collectGroupsMetaLocalizationLanguage(from suitableLanguages: [String]) throws -> String {
+        var foundedLocale = MetaStorage.defaultDbLanguage
+        for lang in suitableLanguages{
+            // Query: SELECT count(filter_id) FROM filter_group_localization WHERE lang == lang
+            let query: ScalarQuery = FilterGroupLocalizationsTable.table.select(FilterLocalizationsTable.filterId.count).where(FilterLocalizationsTable.lang == lang)
+            let count = try filtersDb.scalar(query)
+            guard count > 0 else { continue }
+            foundedLocale = lang
+            break
+        }
+        return foundedLocale
     }
 }

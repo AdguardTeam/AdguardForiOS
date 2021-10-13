@@ -19,9 +19,11 @@
 		241D085026F247F10008FD17 /* DnsProvidersManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241D084F26F247F10008FD17 /* DnsProvidersManagerMock.swift */; };
 		241D085126F247F10008FD17 /* DnsProvidersManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241D084F26F247F10008FD17 /* DnsProvidersManagerMock.swift */; };
 		2456E6F726F24A2A001B1760 /* DnsUserRulesManagersProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2456E6F626F24A2A001B1760 /* DnsUserRulesManagersProviderMock.swift */; };
-		245E792F270CB65800A34B7F /* default.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = 245E792E270CB65800A34B7F /* default.db.zip */; };
 		2465359726E74B7200234EA5 /* DnsProtection+UserRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2465359626E74B7200234EA5 /* DnsProtection+UserRules.swift */; };
 		2465359826E74B7200234EA5 /* DnsProtection+UserRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2465359626E74B7200234EA5 /* DnsProtection+UserRules.swift */; };
+		24BBF6CD2714941F00F08E50 /* Locale+Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BBF6C82714914900F08E50 /* Locale+Language.swift */; };
+		24C9E55A271495CA00905245 /* Locale+Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BBF6C82714914900F08E50 /* Locale+Language.swift */; };
+		24C9E55C2714A1BA00905245 /* default.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = 24C9E55B2714A1BA00905245 /* default.db.zip */; };
 		24D0AF3126F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D0AF3026F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift */; };
 		24D0AF3226F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D0AF3026F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift */; };
 		7E15DFD126E603040020247E /* CompaniesStatisticsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E15DFD026E603040020247E /* CompaniesStatisticsTest.swift */; };
@@ -480,8 +482,9 @@
 		241D084B26F23ED00008FD17 /* DnsBackgroundFetchUpdaterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsBackgroundFetchUpdaterMock.swift; sourceTree = "<group>"; };
 		241D084F26F247F10008FD17 /* DnsProvidersManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersManagerMock.swift; sourceTree = "<group>"; };
 		2456E6F626F24A2A001B1760 /* DnsUserRulesManagersProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsUserRulesManagersProviderMock.swift; sourceTree = "<group>"; };
-		245E792E270CB65800A34B7F /* default.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = default.db.zip; sourceTree = "<group>"; };
 		2465359626E74B7200234EA5 /* DnsProtection+UserRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DnsProtection+UserRules.swift"; sourceTree = "<group>"; };
+		24BBF6C82714914900F08E50 /* Locale+Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Locale+Language.swift"; sourceTree = "<group>"; };
+		24C9E55B2714A1BA00905245 /* default.db.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = default.db.zip; sourceTree = "<group>"; };
 		24D0AF3026F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsBackgroundFetchUpdateProtocol.swift; sourceTree = "<group>"; };
 		7E15DFD026E603040020247E /* CompaniesStatisticsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesStatisticsTest.swift; sourceTree = "<group>"; };
 		7E15DFD226E604920020247E /* ActivityStatisticsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStatisticsMock.swift; sourceTree = "<group>"; };
@@ -858,10 +861,10 @@
 				7E6E7FDA26C299DB00925F96 /* ProductionDatabaseManagerTest.swift */,
 				7E6E7FDB26C299DB00925F96 /* GroupLocalizationsMetaStorageTest.swift */,
 				7E6E7FDC26C299DB00925F96 /* GroupsMetaStorageTest.swift */,
+				24C9E55B2714A1BA00905245 /* default.db.zip */,
 				7E6E7FDD26C299DB00925F96 /* LangsMetaStorageTest.swift */,
 				7E6E7FDE26C299DB00925F96 /* FiltersLocalizationsMetaStorageTest.swift */,
 				7E6E7FDF26C299DB00925F96 /* DefaultDatabaseManagerTest.swift */,
-				245E792E270CB65800A34B7F /* default.db.zip */,
 				7E6E7FE126C299DB00925F96 /* TestsFileManager.swift */,
 				7E6E7FE226C299DB00925F96 /* FiltersMetaStorageTest.swift */,
 				7E6E7FE426C299DB00925F96 /* TagsMetaStorageTest.swift */,
@@ -1423,6 +1426,7 @@
 			isa = PBXGroup;
 			children = (
 				7EC8A3DF26E77D5E005244CF /* DateInterval+Utils.swift */,
+				24BBF6C82714914900F08E50 /* Locale+Language.swift */,
 				7EC8A3E026E77D5E005244CF /* URL+Utils.swift */,
 				7EC8A3E126E77D5E005244CF /* Array+Utils.swift */,
 				7EC8A3E226E77D5E005244CF /* NotificationCenter+Utils.swift */,
@@ -1727,7 +1731,7 @@
 				7E667A7026E3896D0013B1D5 /* adguard.json in Resources */,
 				7EA5109526C2B2CB00207781 /* schema0.101.sql in Resources */,
 				7E6E805A26C299DF00925F96 /* AdblockIcelandicFilterTest.txt in Resources */,
-				245E792F270CB65800A34B7F /* default.db.zip in Resources */,
+				24C9E55C2714A1BA00905245 /* default.db.zip in Resources */,
 				7EA5109726C2B2CB00207781 /* schema0.100.sql in Resources */,
 				7E667A7226E3896D0013B1D5 /* whotracksme.json in Resources */,
 				7E6E804326C299DE00925F96 /* filters_i18n_test.json in Resources */,
@@ -2097,6 +2101,7 @@
 				7EC8A39526E769CA005244CF /* Result.swift in Sources */,
 				7EC8A3E826E77D5E005244CF /* Atomic.swift in Sources */,
 				7EC8A3A126E769DB005244CF /* UserRulesStorageProtocol.swift in Sources */,
+				24C9E55A271495CA00905245 /* Locale+Language.swift in Sources */,
 				7EC8A38B26E769B4005244CF /* RequestProtocol.swift in Sources */,
 				7EC8A39726E769D3005244CF /* UserRuleConverter.swift in Sources */,
 				7EC8A3A026E769DB005244CF /* UserRulesManager.swift in Sources */,
@@ -2132,6 +2137,7 @@
 				7EC8A3ED26E77DD6005244CF /* Array+Utils.swift in Sources */,
 				7ED0B19E26C4269600B0CE7B /* Constants+Files.swift in Sources */,
 				7EC8A3FE26E77DE9005244CF /* OpaqueRuleConverter.swift in Sources */,
+				24BBF6CD2714941F00F08E50 /* Locale+Language.swift in Sources */,
 				7EAD355026C2E293001AFB3A /* FiltersService+Builder.swift in Sources */,
 				7EAD350626C2B7C2001AFB3A /* SafariGroup+GroupType.swift in Sources */,
 				7EC8A3F226E77DDE005244CF /* RequestsFactory.swift in Sources */,

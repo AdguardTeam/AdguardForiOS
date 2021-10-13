@@ -104,7 +104,7 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
 
     convenience init(configuration: DnsConfigurationProtocol, userDefaults: UserDefaultsStorageProtocol) throws {
         let customProvidersStorage = CustomDnsProvidersStorage(userDefaults: userDefaults, configuration: configuration)
-        let predefinedDnsProviders = try PredefinedDnsProvidersDecoder(currentLanguage: configuration.currentLanguage)
+        let predefinedDnsProviders = try PredefinedDnsProvidersDecoder(currentLocale: configuration.currentLocale)
         self.init(
             configuration: configuration,
             userDefaults: userDefaults,

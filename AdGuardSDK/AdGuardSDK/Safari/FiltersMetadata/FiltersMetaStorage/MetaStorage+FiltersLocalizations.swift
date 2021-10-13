@@ -51,6 +51,7 @@ protocol FiltersLocalizationsMetaStorageProtocol {
     func updateLocalizationForFilter(withId id: Int, forLanguage lang: String, localization: ExtendedFiltersMetaLocalizations.FilterLocalization) throws
     func deleteAllLocalizationForFilters(withIds ids: [Int]) throws
     func deleteAllLocalizationForFilter(withId id: Int) throws
+    func collectFiltersMetaLocalizationLanguage(from suitableLanguages: [String]) throws -> String
 }
 
 extension MetaStorage: FiltersLocalizationsMetaStorageProtocol {
@@ -92,5 +93,18 @@ extension MetaStorage: FiltersLocalizationsMetaStorageProtocol {
         let query = FilterLocalizationsTable.table.where(FilterLocalizationsTable.filterId == id).delete()
         try filtersDb.run(query)
         Logger.logDebug("(FiltersMetaStorage) - Delete all localization for filter with id=\(id)")
+    }
+
+    func collectFiltersMetaLocalizationLanguage(from suitableLanguages: [String]) throws -> String {
+        var foundedLocale = MetaStorage.defaultDbLanguage
+        for lang in suitableLanguages{
+            // Query: SELECT count(filter_id) FROM filter_localization WHERE lang == lang
+            let query: ScalarQuery = FilterLocalizationsTable.table.select(FilterLocalizationsTable.filterId.count).where(FilterLocalizationsTable.lang == lang)
+            let count = try filtersDb.scalar(query)
+            guard count > 0 else { continue }
+            foundedLocale = lang
+            break
+        }
+        return foundedLocale
     }
 }

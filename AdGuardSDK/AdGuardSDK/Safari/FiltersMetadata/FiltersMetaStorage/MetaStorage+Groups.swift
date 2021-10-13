@@ -63,7 +63,7 @@ struct FilterGroupsTable: Equatable {
 
 // MARK: - MetaStorage + Groups
 protocol GroupsMetaStorageProtocol {
-    func getAllLocalizedGroups(forLanguage lang: String) throws -> [FilterGroupsTable]
+    func getAllLocalizedGroups(forSuitableLanguages suitableLanguages: [String]) throws -> [FilterGroupsTable]
     func setGroup(withId id: Int, enabled: Bool) throws
     func update(group: GroupMetaProtocol) throws
     func update(groups: [GroupMetaProtocol]) throws
@@ -73,7 +73,8 @@ protocol GroupsMetaStorageProtocol {
 extension MetaStorage: GroupsMetaStorageProtocol {
 
     // Returns all groups with localization for specified language from database
-    func getAllLocalizedGroups(forLanguage lang: String) throws -> [FilterGroupsTable] {
+    func getAllLocalizedGroups(forSuitableLanguages suitableLanguages: [String]) throws -> [FilterGroupsTable] {
+        let lang = try collectGroupsMetaLocalizationLanguage(from: suitableLanguages)
         // Query: SELECT * FROM filter_groups ORDER BY display_number, group_id
         let query = FilterGroupsTable.table.order(FilterGroupsTable.displayNumber, FilterGroupsTable.groupId)
 

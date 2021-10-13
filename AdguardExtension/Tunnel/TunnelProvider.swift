@@ -60,9 +60,9 @@ class TunnelProvider: PacketTunnelProvider {
         let statisticsUrl = urlStorage.statisticsFolderUrl
 
         // todo: use shared Configuretion extension to instantiate this
-        let currentLanguage = "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")"
+        let currentLocale = Locale.current
 
-        let configuration = DnsConfiguration(currentLanguage: currentLanguage,
+        let configuration = DnsConfiguration(currentLocale: currentLocale,
                                              proStatus: true,
                                              dnsFilteringIsEnabled: resources.systemProtectionEnabled,
                                              dnsImplementation: resources.dnsImplementation,
