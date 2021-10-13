@@ -7,7 +7,6 @@
 #import "ADProductInfo.h"
 #import "DDLogMacros.h"
 #import "Reachability.h"
-#import <AGDnsProxy/AGDnsProxy.h>
 #import "ADBTableRow.h"
 #import "ADBTable.h"
 #import "APCommonSharedResources.h"

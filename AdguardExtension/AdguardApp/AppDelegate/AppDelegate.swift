@@ -294,12 +294,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func addPurchaseStatusObserver() {
          if purchaseObservation == nil {
-             purchaseObservation = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: nil, queue: nil) { (notification) in
-                 guard let type =  notification.userInfo?[PurchaseService.kPSNotificationTypeKey] as? String else { return }
+             purchaseObservation = NotificationCenter.default.observe(name: Notification.Name(PurchaseAssistant.kPurchaseServiceNotification), object: nil, queue: nil) { (notification) in
+                 guard let type =  notification.userInfo?[PurchaseAssistant.kPSNotificationTypeKey] as? String else { return }
 
                  DDLogInfo("(AppDelegate) - Received notification type = \(type)")
 
-                 if type == PurchaseService.kPSNotificationPremiumExpired {
+                 if type == PurchaseAssistant.kPSNotificationPremiumExpired {
                      self.userNotificationService.postNotification(title: String.localizedString("premium_expired_title"), body: String.localizedString("premium_expired_message"), userInfo: nil)
                  }
              }

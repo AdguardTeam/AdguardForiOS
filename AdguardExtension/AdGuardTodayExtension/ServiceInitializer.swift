@@ -23,7 +23,6 @@ protocol ServiceInitializerProtocol  {
     var networkService: ACNNetworkingProtocol { get }
     var productInfo: ADProductInfoProtocol { get }
 
-    var purchaseService: PurchaseServiceProtocol { get }
     var safariProtection: SafariProtectionProtocol { get }
     var complexProtection: ComplexProtectionServiceProtocol { get }
     var dnsProvidersManager: DnsProvidersManagerProtocol { get }
@@ -34,47 +33,60 @@ final class ServiceInitializer: ServiceInitializerProtocol {
     let networkService: ACNNetworkingProtocol = ACNNetworking()
     let productInfo: ADProductInfoProtocol = ADProductInfo()
 
-    let purchaseService: PurchaseServiceProtocol
     let safariProtection: SafariProtectionProtocol
     let complexProtection: ComplexProtectionServiceProtocol
     let dnsProvidersManager: DnsProvidersManagerProtocol
     let activityStatistics: ActivityStatisticsProtocol
 
     init(resources: AESharedResourcesProtocol) throws {
-        self.purchaseService = PurchaseService(network: networkService,
-                                               resources: resources,
-                                               productInfo: productInfo)
+
+        let purchaseStatusService = EmptyPurchaseStatusService()
 
         let sharedStorageUrls = SharedStorageUrls()
 
-        let safariConfiguration = SafariConfiguration(resources: resources, isProPurchased: purchaseService.isProPurchased)
+        let isProPurchased = false // We don't care about account state in this extension
+        let safariConfiguration = SafariConfiguration(resources: resources, isProPurchased: isProPurchased)
 
-        self.safariProtection = try SafariProtection(configuration: safariConfiguration,
-                                                      defaultConfiguration: safariConfiguration,
-                                                      filterFilesDirectoryUrl: sharedStorageUrls.filtersFolderUrl,
-                                                      dbContainerUrl: sharedStorageUrls.dbFolderUrl,
-                                                      jsonStorageUrl: sharedStorageUrls.cbJsonsFolderUrl,
-                                                      userDefaults: resources.sharedDefaults())
-
-        let oldConfiguration = ConfigurationService(purchaseService: purchaseService, resources: resources, safariProtection: safariProtection)
+        self.safariProtection = try SafariProtection(
+            configuration: safariConfiguration,
+            defaultConfiguration: safariConfiguration,
+            filterFilesDirectoryUrl: sharedStorageUrls.filtersFolderUrl,
+            dbContainerUrl: sharedStorageUrls.dbFolderUrl,
+            jsonStorageUrl: sharedStorageUrls.cbJsonsFolderUrl,
+            userDefaults: resources.sharedDefaults()
+        )
 
         let networkSettings = NetworkSettingsService(resources: resources)
 
-        let configuration = ConfigurationService(purchaseService: purchaseService, resources: resources, safariProtection: safariProtection)
+        let configuration = ConfigurationService(
+            purchaseService: purchaseStatusService,
+            resources: resources,
+            safariProtection: safariProtection
+        )
 
-        let dnsConfiguration = DnsConfiguration(resources: resources, isProPurchased: purchaseService.isProPurchased)
+        let dnsConfiguration = DnsConfiguration(
+            resources: resources,
+            isProPurchased: purchaseStatusService.isProPurchased
+        )
+
         self.dnsProvidersManager = try DnsProvidersManager(configuration: dnsConfiguration, userDefaults: resources.sharedDefaults())
 
         let nativeDnsSettingsManager = NativeDnsSettingsManager(networkSettingsService: networkSettings, dnsProvidersManager: dnsProvidersManager, configuration: configuration, resources: resources)
 
-        let vpnManager = VpnManager(resources: resources, configuration: oldConfiguration, networkSettings: NetworkSettingsService(resources: resources))
+        let vpnManager = VpnManager(
+            resources: resources,
+            configuration: configuration,
+            networkSettings: NetworkSettingsService(resources: resources)
+        )
 
-        self.complexProtection = ComplexProtectionService(resources: resources,
-                                 configuration: oldConfiguration,
-                                 vpnManager: vpnManager,
-                                 productInfo: productInfo,
-                                 nativeDnsSettingsManager: nativeDnsSettingsManager,
-                                 safariProtection: safariProtection)
+        self.complexProtection = ComplexProtectionService(
+            resources: resources,
+            configuration: configuration,
+            vpnManager: vpnManager,
+            productInfo: productInfo,
+            nativeDnsSettingsManager: nativeDnsSettingsManager,
+            safariProtection: safariProtection
+        )
 
         // MARK: - ActivityStatistics
 
