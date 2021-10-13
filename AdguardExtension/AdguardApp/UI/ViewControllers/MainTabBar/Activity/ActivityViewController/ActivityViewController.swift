@@ -550,7 +550,7 @@ extension ActivityViewController: DateTypeChangedProtocol {
                 self?.rightArrowImageView.alpha = 1.0
                 self?.mostActiveButton.isEnabled = true
                 let record = companiesInfo.mostRequested[0]
-                self?.mostActiveCompany.text = record.key
+                self?.mostActiveCompany.text = record.company
             } else {
                 self?.mostActiveButton.alpha = 0.5
                 self?.mostActiveLabel.alpha = 0.5

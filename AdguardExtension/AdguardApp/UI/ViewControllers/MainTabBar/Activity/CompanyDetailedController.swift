@@ -81,7 +81,7 @@ class CompanyDetailedController: UITableViewController {
         setupTableView()
         addObservers()
         setupBackButton()
-        titleLabel.text = record?.key
+        titleLabel.text = record?.company
 
         requestsModel.delegate = self
         if let type = recordType, let domains = record?.domains {
@@ -182,7 +182,7 @@ class CompanyDetailedController: UITableViewController {
         let offset = scrollView.contentOffset.y
 
         if offset > titleLabel.frame.maxY && !titleInNavBarIsShown {
-            animateShowingTitleInNavBar(record?.key)
+            animateShowingTitleInNavBar(record?.company)
             titleInNavBarIsShown = true
             return
         }

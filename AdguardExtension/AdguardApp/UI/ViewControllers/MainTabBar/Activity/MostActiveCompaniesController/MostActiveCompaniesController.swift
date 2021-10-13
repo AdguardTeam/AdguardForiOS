@@ -68,7 +68,7 @@ extension MostActiveCompaniesController: UITableViewDataSource, UITableViewDeleg
         if let cell = tableView.dequeueReusableCell(withIdentifier: mostActiveCompaniesCellReuseId) as? MostActiveCompaniesCell {
             let record = mostRequestedCompanies[indexPath.row]
             cell.theme = theme
-            cell.companyLabel.text = record.key
+            cell.companyLabel.text = record.company
             cell.requestsNumberLabel.text = String(format: String.localizedString("requests_number"), record.requests)
 
             if indexPath.row == 0 {

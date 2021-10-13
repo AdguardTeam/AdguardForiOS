@@ -21,13 +21,11 @@ import DnsAdGuardSDK
 final class CompanyRequestsRecord {
     var domains = Set<String>()
     let company: String
-    let key: String
     var requests: Int
     var encrypted: Int
 
-    init(company: String, key: String, requests: Int, encrypted: Int) {
+    init(company: String, requests: Int, encrypted: Int) {
         self.company = company
-        self.key = key
         self.requests = requests
         self.encrypted = encrypted
     }
@@ -84,7 +82,6 @@ final class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
             let records: [CompanyRequestsRecord] = statistics.map {
                 return CompanyRequestsRecord(
                     company: $0.company,
-                    key: $0.company,
                     requests: $0.counters.requests,
                     encrypted: $0.counters.encrypted
                 )
