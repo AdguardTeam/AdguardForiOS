@@ -26,31 +26,33 @@ public extension Locale {
     }
 
     /// Return list of suitable languages ordered by priority
-    func provideSuitableLanguages(delimiter: Delimiter) -> [String] {
+    func getSuitableLanguages(delimiter: Delimiter) -> [String] {
         var result: [String] = []
 
-        let chinesMap = ["Hans" : "CN",
-                         "Hant" : "TW"]
+        let chineseMap = ["Hans" : "CN",
+                          "Hant" : "TW"]
 
         let defaultLanguageCode = "en"
         let defaultRegionCode = "US"
+        let exclusionSpanishLanguage = "es"
 
         let languageCode = languageCode ?? defaultLanguageCode
         let scriptCode = scriptCode
         let variantCode = variantCode
         let regionCode = regionCode ?? defaultRegionCode
 
+        let isSpanish = languageCode == exclusionSpanishLanguage
         result.append(languageCode)
 
-        if let _ = variantCode, let script = scriptCode {
+        if variantCode != nil, let script = scriptCode {
             result.append(languageCode + delimiter.rawValue + regionCode)
-            if let mapValue = chinesMap[script] {
+            if let mapValue = chineseMap[script] {
                 result.append(languageCode + delimiter.rawValue + mapValue)
             }
-        } else if let _ = variantCode, scriptCode == nil {
+        } else if variantCode != nil, scriptCode == nil {
             result.append(languageCode + delimiter.rawValue + regionCode)
         } else if let scrip = scriptCode, variantCode == nil {
-            if let mapValue = chinesMap[scrip] {
+            if let mapValue = chineseMap[scrip] {
                 result.append(languageCode + delimiter.rawValue + mapValue)
             }
         } else {
@@ -58,6 +60,12 @@ public extension Locale {
                 result.append(languageCode + delimiter.rawValue + regionCode)
             }
         }
+
+        // if language is Spanish than create language like es_ES or es-ES
+        if isSpanish {
+            result.append(exclusionSpanishLanguage + delimiter.rawValue + exclusionSpanishLanguage.uppercased())
+        }
+
         return result.reversed()
     }
 }

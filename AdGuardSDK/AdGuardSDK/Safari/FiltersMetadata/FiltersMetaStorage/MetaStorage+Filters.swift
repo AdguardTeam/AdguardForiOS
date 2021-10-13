@@ -167,7 +167,6 @@ extension MetaStorage: FiltersMetaStorageProtocol {
 
     // Returns all filters from database with localizations for specified group and language
     func getLocalizedFiltersForGroup(withId id: Int, forSuitableLanguages suitableLanguages: [String]) throws -> [FiltersTable] {
-        //TODO: Insert here
         let lang = try collectFiltersMetaLocalizationLanguage(from: suitableLanguages)
         // Query: select * from filters where group_id = id order by display_number, filter_id
         let query = FiltersTable.table.filter(FiltersTable.groupId == id).order(FiltersTable.displayNumber, FiltersTable.filterId)

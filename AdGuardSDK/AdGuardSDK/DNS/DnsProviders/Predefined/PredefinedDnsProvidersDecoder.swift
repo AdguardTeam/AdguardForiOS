@@ -76,10 +76,10 @@ struct PredefinedDnsProvidersDecoder: PredefinedDnsProvidersDecoderProtocol {
 
     /* Helper methods to obtain localized name and desc for provider from providers_i18n.json */
     private func localizationsForProvider(_ provider: PredefinedDnsProvider, _ providersJson: [String: Any]) -> (name: String, desc: String) {
-        let suitableLanguages = currentLocale.provideSuitableLanguages(delimiter: .dash)
+        let suitableLanguages = currentLocale.getSuitableLanguages(delimiter: .dash)
         let id = String(provider.providerId)
         let allLocalizations = providersJson[id] as! [String: Any]
-        let lang = collectLocalizationLanguage(suitableLanguages: suitableLanguages, json: allLocalizations)
+        let lang = collectLocalizationLanguage(suitableLanguages: suitableLanguages, availableLanguages: allLocalizations)
         if let currentLocalization = allLocalizations[lang] as? [String: Any] {
             let name = currentLocalization["name"] as! String
             let desc = currentLocalization["description"] as! String
@@ -91,14 +91,14 @@ struct PredefinedDnsProvidersDecoder: PredefinedDnsProvidersDecoderProtocol {
 
     /* Helper methods to obtain localized name and desc for features of servers from providers_i18n.json */
     private func localizationsForFeatures(_ provider: PredefinedDnsProvider, _ featuresJson: [String: Any]) -> [PredefinedDnsServer] {
-        let suitableLanguages = currentLocale.provideSuitableLanguages(delimiter: .dash)
+        let suitableLanguages = currentLocale.getSuitableLanguages(delimiter: .dash)
 
         return provider.servers.map { server in
             let newFeatures = server.features.map { feature -> DnsFeature in
                 let allLocalizations = featuresJson[feature.type.rawValue] as! [String: Any]
                 var name = feature.name
                 var desc = feature.featureDescription
-                let lang = collectLocalizationLanguage(suitableLanguages: suitableLanguages, json: allLocalizations)
+                let lang = collectLocalizationLanguage(suitableLanguages: suitableLanguages, availableLanguages: allLocalizations)
                 if let currentLocalization = allLocalizations[lang] as? [String: Any] {
                     name = currentLocalization["name"] as! String
                     desc = currentLocalization["description"] as! String
@@ -127,10 +127,10 @@ struct PredefinedDnsProvidersDecoder: PredefinedDnsProvidersDecoderProtocol {
         return try Data(contentsOf: pathUrl)
     }
 
-    private func collectLocalizationLanguage(suitableLanguages: [String], json: [String: Any]) -> String {
+    private func collectLocalizationLanguage(suitableLanguages: [String], availableLanguages: [String: Any]) -> String {
         var result = "en"
         for language in suitableLanguages {
-            if let _ = json[language] {
+            if availableLanguages[language] != nil {
                 result = language
                 break
             }

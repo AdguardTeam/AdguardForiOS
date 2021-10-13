@@ -157,7 +157,7 @@ final class FiltersService: FiltersServiceProtocol {
     let apiMethods: SafariProtectionApiMethodsProtocol
 
     private var suitableLanguages: [String] {
-        return configuration.currentLocale.provideSuitableLanguages(delimiter: .underScore)
+        return configuration.currentLocale.getSuitableLanguages(delimiter: .underScore)
     }
 
     // MARK: - Initialization

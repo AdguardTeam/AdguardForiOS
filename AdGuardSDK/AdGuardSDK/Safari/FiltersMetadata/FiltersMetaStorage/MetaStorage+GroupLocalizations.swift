@@ -76,16 +76,18 @@ extension MetaStorage: GroupLocalizationsMetaStorageProtocol {
         Logger.logDebug("(FiltersMetaStorage) - Insert localization for group with id=\(id) lang=\(lang) and name=\(localization.name)")
     }
 
+    // Iterate over `filter_group_localization` table and return language for records that satisfy condition for first meted element of suitable language list
+    // If there is no records that satisfy condition return default `en` language
     func collectGroupsMetaLocalizationLanguage(from suitableLanguages: [String]) throws -> String {
-        var foundedLocale = MetaStorage.defaultDbLanguage
+        var foundLocale = MetaStorage.defaultDbLanguage
         for lang in suitableLanguages{
             // Query: SELECT count(filter_id) FROM filter_group_localization WHERE lang == lang
             let query: ScalarQuery = FilterGroupLocalizationsTable.table.select(FilterLocalizationsTable.filterId.count).where(FilterLocalizationsTable.lang == lang)
             let count = try filtersDb.scalar(query)
             guard count > 0 else { continue }
-            foundedLocale = lang
+            foundLocale = lang
             break
         }
-        return foundedLocale
+        return foundLocale
     }
 }

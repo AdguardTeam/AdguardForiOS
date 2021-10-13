@@ -95,16 +95,18 @@ extension MetaStorage: FiltersLocalizationsMetaStorageProtocol {
         Logger.logDebug("(FiltersMetaStorage) - Delete all localization for filter with id=\(id)")
     }
 
+    // Iterate over `filter_localization` table and return language for records that satisfy condition for first meted element of suitable language list
+    // If there is no records that satisfy condition return default `en` language
     func collectFiltersMetaLocalizationLanguage(from suitableLanguages: [String]) throws -> String {
-        var foundedLocale = MetaStorage.defaultDbLanguage
+        var foundLocale = MetaStorage.defaultDbLanguage
         for lang in suitableLanguages{
             // Query: SELECT count(filter_id) FROM filter_localization WHERE lang == lang
             let query: ScalarQuery = FilterLocalizationsTable.table.select(FilterLocalizationsTable.filterId.count).where(FilterLocalizationsTable.lang == lang)
             let count = try filtersDb.scalar(query)
             guard count > 0 else { continue }
-            foundedLocale = lang
+            foundLocale = lang
             break
         }
-        return foundedLocale
+        return foundLocale
     }
 }

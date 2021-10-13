@@ -79,7 +79,7 @@ public final class DnsConfiguration: DnsConfigurationProtocol {
     public var allowlistIsEnabled: Bool
     public var lowLevelConfiguration: LowLevelDnsConfiguration
 
-    public init(currentLocale: Locale, proStatus: Bool, dnsFilteringIsEnabled: Bool, dnsImplementation: DnsImplementation, blocklistIsEnabled: Bool, allowlistIsEnabled: Bool, lowLevelConfiguration: LowLevelDnsConfiguration) {
+    public init(currentLocale: Locale = .current, proStatus: Bool, dnsFilteringIsEnabled: Bool, dnsImplementation: DnsImplementation, blocklistIsEnabled: Bool, allowlistIsEnabled: Bool, lowLevelConfiguration: LowLevelDnsConfiguration) {
         self.currentLocale = currentLocale
         self.proStatus = proStatus
         self.dnsFilteringIsEnabled = dnsFilteringIsEnabled
