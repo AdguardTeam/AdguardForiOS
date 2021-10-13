@@ -45,7 +45,7 @@ final public class CompaniesStatistics: CompaniesStatisticsProtocol {
             let tracker: DnsTracker?
 
             var resolvedDomain = domainRecord.domain
-            if domainRecord.domain.hasSuffix(".") {
+            if resolvedDomain.hasSuffix(".") {
                 resolvedDomain.removeLast(1)
             }
 
@@ -61,7 +61,7 @@ final public class CompaniesStatistics: CompaniesStatisticsProtocol {
                 company: company,
                 tracker: tracker,
                 counters: domainRecord.counters,
-                domains: Set([domainRecord.domain])
+                domains: Set([domain])
             )
 
             if let existingCompanyStatisticsRecord = countersByCompany[company] {

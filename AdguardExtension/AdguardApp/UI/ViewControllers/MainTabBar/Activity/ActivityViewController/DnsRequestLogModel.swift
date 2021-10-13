@@ -196,7 +196,7 @@ enum DnsStatisticsDisplayedRequestsType {
 /**
  view model for ActivityViewController
  */
-class DnsRequestLogViewModel {
+final class DnsRequestLogViewModel {
 
     // MARK: - pubic fields
     /**
@@ -218,7 +218,7 @@ class DnsRequestLogViewModel {
     /**
      records changes observer. It calls when records array changes
      */
-    var recordsObserver: (([DnsLogRecord])->Void)?
+    var recordsObserver: (([DnsLogRecord]) -> Void)?
 
     /**
      search query string
@@ -234,7 +234,7 @@ class DnsRequestLogViewModel {
         }
     }
 
-    var delegate: DnsRequestsDelegateProtocol? = nil
+    var delegate: DnsRequestsDelegateProtocol?
 
     // MARK: - private fields
 
@@ -251,23 +251,28 @@ class DnsRequestLogViewModel {
     private let workingQueue = DispatchQueue(label: "DnsRequestLogViewModel queue")
 
     // MARK: - init
-    init(dnsTrackers: DnsTrackersProviderProtocol, dnsStatistics: DnsLogStatisticsProtocol, dnsProtection: DnsProtectionProtocol, domainConverter: DomainConverterProtocol, domainParser: DomainParserServiceProtocol) {
+    init(
+        dnsTrackers: DnsTrackersProviderProtocol,
+        dnsStatistics: DnsLogStatisticsProtocol,
+        dnsProtection: DnsProtectionProtocol,
+        domainConverter: DomainConverterProtocol,
+        domainParser: DomainParserServiceProtocol,
+        logRecordHelper: DnsLogRecordHelper
+    ) {
         self.dnsTrackers = dnsTrackers
         self.dnsStatistics = dnsStatistics
         self.dnsProtection = dnsProtection
         self.domainConverter = domainConverter
         self.domainParser = domainParser.domainParser
         self.searchString = ""
-        self.logRecordHelper = DnsLogRecordHelper(dnsProtection: dnsProtection, dnsTrackers: dnsTrackers, domainConverter: domainConverter)
+        self.logRecordHelper = logRecordHelper
     }
 
     // MARK: - public methods
-    /**
-     obtains records array from vpnManager
-    */
-    func obtainRecords(for type: BlockedRecordType, domains: Set<String>? = nil) {
-        workingQueue.async {[weak self] in
-            self?.obtainRecordsInternal(for: type, domains: domains)
+
+    func obtainRecords(for period: StatisticsPeriod, domains: Set<String>? = nil) {
+        workingQueue.async { [weak self] in
+            self?.obtainRecordsInternal(for: period, domains: domains)
         }
     }
 
@@ -298,7 +303,7 @@ class DnsRequestLogViewModel {
 
     func updateUserStatuses() {
         for record in allRecords {
-            record.userFilterStatus =  logRecordHelper.getUserFilterStatusForDomain(record.event.domain)
+            record.userFilterStatus = logRecordHelper.getUserFilterStatusForDomain(record.event.domain)
         }
     }
 
@@ -308,18 +313,27 @@ class DnsRequestLogViewModel {
 
     // MARK: - private methods
 
-    private func obtainRecordsInternal(for type: BlockedRecordType, domains: Set<String>? = nil) {
-
-        let events = (try? dnsStatistics.getDnsLogRecords()) ?? []
-        allRecords = events.map {
+    private func obtainRecordsInternal(for period: StatisticsPeriod, domains: Set<String>? = nil) {
+        let events = (try? dnsStatistics.getDnsLogRecords(for: period)) ?? []
+        allRecords = events.compactMap {
             let firstLevelDomain = domainParser?.parse(host: $0.domain)?.domain ?? $0.domain
             let tracker = dnsTrackers.getTracker(by: firstLevelDomain)
             let userFilterStatus = logRecordHelper.getUserFilterStatusForDomain($0.domain)
 
-            return DnsLogRecord(event: $0, tracker: tracker, firstLevelDomain: firstLevelDomain, userFilterStatus: userFilterStatus)
+            // If domains are not nil than we should check if record's domain is in domains
+            if let domains = domains {
+                if domains.contains(firstLevelDomain) {
+                    return DnsLogRecord(event: $0, tracker: tracker, firstLevelDomain: firstLevelDomain, userFilterStatus: userFilterStatus)
+                } else {
+                    return nil
+                }
+            }
+            // If domains are nil than we shouldn't filter records
+            else {
+                return DnsLogRecord(event: $0, tracker: tracker, firstLevelDomain: firstLevelDomain, userFilterStatus: userFilterStatus)
+            }
         }
 
         recordsObserver?(allRecords)
     }
-
 }

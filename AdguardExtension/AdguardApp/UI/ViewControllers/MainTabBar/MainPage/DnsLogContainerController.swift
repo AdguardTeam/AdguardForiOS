@@ -18,7 +18,7 @@
 
 import UIKit
 
-class DnsLogContainerController: UIViewController {
+final class DnsLogContainerController: UIViewController {
 
     // MARK: - Variables
     @IBOutlet weak var systemProtectionEnablerContainerView: UIView!
@@ -31,11 +31,13 @@ class DnsLogContainerController: UIViewController {
     private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
 
-    private let model = DnsRequestLogViewModel(dnsTrackers: ServiceLocator.shared.getService()!,
-                                               dnsStatistics: ServiceLocator.shared.getService()!,
-                                               dnsProtection: ServiceLocator.shared.getService()!,
-                                               domainConverter: DomainConverter(),
-                                               domainParser: ServiceLocator.shared.getService()!
+    private let model = DnsRequestLogViewModel(
+        dnsTrackers: ServiceLocator.shared.getService()!,
+        dnsStatistics: ServiceLocator.shared.getService()!,
+        dnsProtection: ServiceLocator.shared.getService()!,
+        domainConverter: DomainConverter(),
+        domainParser: ServiceLocator.shared.getService()!,
+        logRecordHelper: ServiceLocator.shared.getService()!
     )
 
     private var resetSettingsToken: NotificationToken?
