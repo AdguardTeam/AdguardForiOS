@@ -405,6 +405,8 @@
 		B22FCDC2270BD56B00B1C935 /* DnsAdGuardSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = B22FCDBA270BBC4F00B1C935 /* DnsAdGuardSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B22FCDE4270C7F5300B1C935 /* SystemLibs.h in Sources */ = {isa = PBXBuildFile; fileRef = B22FCDDE270C639600B1C935 /* SystemLibs.h */; };
 		B22FCDE5270C8C4E00B1C935 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6E81EF26C2A3E300925F96 /* libresolv.tbd */; };
+		B2673DD827173F0700E04747 /* SafariProtection+Migrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2673DD727173F0700E04747 /* SafariProtection+Migrations.swift */; };
+		B2673DDA27173F0700E04747 /* SafariProtection+Migrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2673DD727173F0700E04747 /* SafariProtection+Migrations.swift */; };
 		B29D5367270CE2CB0045CB16 /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC8A37F26E7697C005244CF /* SharedAdGuardSDK.framework */; };
 		B29D53A0270D24FF0045CB16 /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC8A37F26E7697C005244CF /* SharedAdGuardSDK.framework */; };
 		B29D53A8270D27960045CB16 /* SharedAdGuardSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = B29D53A7270D27270045CB16 /* SharedAdGuardSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -425,44 +427,6 @@
 		D0A3CF9926E7AF32006E90AD /* ACNCidrRange.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A3CF9826E7AF31006E90AD /* ACNCidrRange.m */; };
 		D0A3CFA126E90F12006E90AD /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A3CF9F26E90F10006E90AD /* ACNUrlUtils.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		B29D5365270CE2850045CB16 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0A0E38C26B16B03005344D2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7EC8A37E26E7697C005244CF;
-			remoteInfo = SharedAdGuardSDK;
-		};
-		B29D5369270CE2CC0045CB16 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0A0E38C26B16B03005344D2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7EC8A37E26E7697C005244CF;
-			remoteInfo = SharedAdGuardSDK;
-		};
-		B2C8E9C2271700F800ACDED8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0A0E38C26B16B03005344D2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B2C8E9AE2717008C00ACDED8;
-			remoteInfo = AdGuardSdkDependencies;
-		};
-		B2C8E9CB27170EB400ACDED8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0A0E38C26B16B03005344D2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B2C8E9AE2717008C00ACDED8;
-			remoteInfo = AdGuardSdkDependencies;
-		};
-		B2C8E9D027170ED500ACDED8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D0A0E38C26B16B03005344D2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B2C8E9AE2717008C00ACDED8;
-			remoteInfo = AdGuardSdkDependencies;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		241D083F26F1F5620008FD17 /* DnsProtection+BackgroundFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DnsProtection+BackgroundFetch.swift"; sourceTree = "<group>"; };
@@ -695,6 +659,7 @@
 		B22FCDBA270BBC4F00B1C935 /* DnsAdGuardSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DnsAdGuardSDK.h; sourceTree = "<group>"; };
 		B22FCDC1270BD3D400B1C935 /* DnsAdGuardSDK.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = DnsAdGuardSDK.modulemap; sourceTree = "<group>"; };
 		B22FCDDE270C639600B1C935 /* SystemLibs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemLibs.h; sourceTree = "<group>"; };
+		B2673DD727173F0700E04747 /* SafariProtection+Migrations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SafariProtection+Migrations.swift"; sourceTree = "<group>"; };
 		B29D53A6270D267C0045CB16 /* SharedAdGuardSDK.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = SharedAdGuardSDK.modulemap; sourceTree = "<group>"; };
 		B29D53A7270D27270045CB16 /* SharedAdGuardSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedAdGuardSDK.h; sourceTree = "<group>"; };
 		B2C8E9AF2717008C00ACDED8 /* AdGuardSdkDependencies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AdGuardSdkDependencies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1214,6 +1179,7 @@
 		7E6E80FB26C2A05200925F96 /* SafariProtection */ = {
 			isa = PBXGroup;
 			children = (
+				B2673DD727173F0700E04747 /* SafariProtection+Migrations.swift */,
 				7E6E810026C2A05200925F96 /* SafariProtection.swift */,
 				7E6E80FC26C2A05200925F96 /* SafariProtection+ContentBlockers.swift */,
 				7E6E80FD26C2A05200925F96 /* SafariProtection+UserRules.swift */,
@@ -1579,7 +1545,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				B2C8E9C3271700F800ACDED8 /* PBXTargetDependency */,
 			);
 			name = SafariAdGuardSDK;
 			packageProductDependencies = (
@@ -1600,7 +1565,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				B2C8E9CC27170EB400ACDED8 /* PBXTargetDependency */,
 			);
 			name = DnsAdGuardSDK;
 			packageProductDependencies = (
@@ -1667,9 +1631,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				B29D5366270CE2850045CB16 /* PBXTargetDependency */,
-				B29D536A270CE2CC0045CB16 /* PBXTargetDependency */,
-				B2C8E9D127170ED500ACDED8 /* PBXTargetDependency */,
 			);
 			name = "AdGuardSDK-mac";
 			packageProductDependencies = (
@@ -1941,6 +1902,7 @@
 				7E6E81E026C2A05B00925F96 /* PredefinedDnsProvidersDecoder.swift in Sources */,
 				7E6E81C126C2A05B00925F96 /* DnsLibsRulesProvider.swift in Sources */,
 				7E6E801E26C299DE00925F96 /* CustomDnsProvidersStorageTest.swift in Sources */,
+				B2673DDA27173F0700E04747 /* SafariProtection+Migrations.swift in Sources */,
 				7E6E802326C299DE00925F96 /* ActivityStatisticsTest.swift in Sources */,
 				7E9B1DF426F229450003EB0E /* PacketTunnelProviderProxy.swift in Sources */,
 				7E6E803926C299DE00925F96 /* DnsFiltersManagerMock.swift in Sources */,
@@ -2029,6 +1991,7 @@
 				7E5A6ED926E8B6CC00B7EF6A /* FiltersConverterResult.swift in Sources */,
 				7E6E813226C2A05300925F96 /* MetaStorage+GroupLocalizations.swift in Sources */,
 				7E6E816226C2A05300925F96 /* SafariProtection+Filters.swift in Sources */,
+				B2673DD827173F0700E04747 /* SafariProtection+Migrations.swift in Sources */,
 				7E6E815A26C2A05300925F96 /* SafariProtection+UserRules.swift in Sources */,
 				7E6E815826C2A05300925F96 /* SafariProtection+ContentBlockers.swift in Sources */,
 				7E6E813826C2A05300925F96 /* ProductionDatabaseManager.swift in Sources */,
@@ -2222,34 +2185,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		B29D5366270CE2850045CB16 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7EC8A37E26E7697C005244CF /* SharedAdGuardSDK */;
-			targetProxy = B29D5365270CE2850045CB16 /* PBXContainerItemProxy */;
-		};
-		B29D536A270CE2CC0045CB16 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7EC8A37E26E7697C005244CF /* SharedAdGuardSDK */;
-			targetProxy = B29D5369270CE2CC0045CB16 /* PBXContainerItemProxy */;
-		};
-		B2C8E9C3271700F800ACDED8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B2C8E9AE2717008C00ACDED8 /* AdGuardSdkDependencies */;
-			targetProxy = B2C8E9C2271700F800ACDED8 /* PBXContainerItemProxy */;
-		};
-		B2C8E9CC27170EB400ACDED8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B2C8E9AE2717008C00ACDED8 /* AdGuardSdkDependencies */;
-			targetProxy = B2C8E9CB27170EB400ACDED8 /* PBXContainerItemProxy */;
-		};
-		B2C8E9D127170ED500ACDED8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B2C8E9AE2717008C00ACDED8 /* AdGuardSdkDependencies */;
-			targetProxy = B2C8E9D027170ED500ACDED8 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		7E6E7FC926C299AB00925F96 /* Debug */ = {
