@@ -1,11 +1,3 @@
-//
-//  PurchaseAssistant.swift
-//  Adguard
-//
-//  Created by Artem Ivanov on 13.10.2021.
-//  Copyright © 2021 Performiks. All rights reserved.
-//
-
 import Foundation
 
 class PurchaseAssistant {
