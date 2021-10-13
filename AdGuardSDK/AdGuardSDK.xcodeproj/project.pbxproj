@@ -21,8 +21,9 @@
 		2456E6F726F24A2A001B1760 /* DnsUserRulesManagersProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2456E6F626F24A2A001B1760 /* DnsUserRulesManagersProviderMock.swift */; };
 		2465359726E74B7200234EA5 /* DnsProtection+UserRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2465359626E74B7200234EA5 /* DnsProtection+UserRules.swift */; };
 		2465359826E74B7200234EA5 /* DnsProtection+UserRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2465359626E74B7200234EA5 /* DnsProtection+UserRules.swift */; };
-		24BBF6CD2714941F00F08E50 /* Locale+Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BBF6C82714914900F08E50 /* Locale+Language.swift */; };
-		24C9E55A271495CA00905245 /* Locale+Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BBF6C82714914900F08E50 /* Locale+Language.swift */; };
+		24C60B5427173E000097F5C3 /* Locale+Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BBF6C82714914900F08E50 /* Locale+Language.swift */; };
+		24C60B5527173E010097F5C3 /* Locale+Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BBF6C82714914900F08E50 /* Locale+Language.swift */; };
+		24C60B5627173E020097F5C3 /* Locale+Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BBF6C82714914900F08E50 /* Locale+Language.swift */; };
 		24C9E55C2714A1BA00905245 /* default.db.zip in Resources */ = {isa = PBXBuildFile; fileRef = 24C9E55B2714A1BA00905245 /* default.db.zip */; };
 		24D0AF3126F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D0AF3026F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift */; };
 		24D0AF3226F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D0AF3026F0FD7A00187810 /* DnsBackgroundFetchUpdateProtocol.swift */; };
@@ -1862,6 +1863,7 @@
 				7E6E81FC26C2ABFA00925F96 /* NetworkUtils.swift in Sources */,
 				7E6E804926C299DE00925F96 /* UserDefaultsStorageTest.swift in Sources */,
 				7E6E805226C299DE00925F96 /* SafariProtectionUserRulesTest.swift in Sources */,
+				24C60B5527173E010097F5C3 /* Locale+Language.swift in Sources */,
 				7E6E804B26C299DE00925F96 /* ContentBlockerServiceTest.swift in Sources */,
 				7E6E812526C2A05300925F96 /* AffinityRulesParser.swift in Sources */,
 				7E6E811926C2A05300925F96 /* FiltersMetadataParser.swift in Sources */,
@@ -2101,7 +2103,6 @@
 				7EC8A39526E769CA005244CF /* Result.swift in Sources */,
 				7EC8A3E826E77D5E005244CF /* Atomic.swift in Sources */,
 				7EC8A3A126E769DB005244CF /* UserRulesStorageProtocol.swift in Sources */,
-				24C9E55A271495CA00905245 /* Locale+Language.swift in Sources */,
 				7EC8A38B26E769B4005244CF /* RequestProtocol.swift in Sources */,
 				7EC8A39726E769D3005244CF /* UserRuleConverter.swift in Sources */,
 				7EC8A3A026E769DB005244CF /* UserRulesManager.swift in Sources */,
@@ -2114,6 +2115,7 @@
 				7EC8A3E726E77D5E005244CF /* NotificationCenter+Utils.swift in Sources */,
 				7EC8A38826E769B4005244CF /* RequestsFactory.swift in Sources */,
 				7EC8A3E526E77D5E005244CF /* URL+Utils.swift in Sources */,
+				24C60B5627173E020097F5C3 /* Locale+Language.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2137,7 +2139,6 @@
 				7EC8A3ED26E77DD6005244CF /* Array+Utils.swift in Sources */,
 				7ED0B19E26C4269600B0CE7B /* Constants+Files.swift in Sources */,
 				7EC8A3FE26E77DE9005244CF /* OpaqueRuleConverter.swift in Sources */,
-				24BBF6CD2714941F00F08E50 /* Locale+Language.swift in Sources */,
 				7EAD355026C2E293001AFB3A /* FiltersService+Builder.swift in Sources */,
 				7EAD350626C2B7C2001AFB3A /* SafariGroup+GroupType.swift in Sources */,
 				7EC8A3F226E77DDE005244CF /* RequestsFactory.swift in Sources */,
@@ -2176,6 +2177,7 @@
 				7EAD34FE26C2B50B001AFB3A /* SafariGroup.swift in Sources */,
 				7EC8A3F626E77DE3005244CF /* FilterMetaProtocol.swift in Sources */,
 				7EC8A3F926E77DE6005244CF /* CommonError.swift in Sources */,
+				24C60B5427173E000097F5C3 /* Locale+Language.swift in Sources */,
 				7EAD350826C2B7D4001AFB3A /* ExtendedFiltersMeta.swift in Sources */,
 				7EC8A3E926E77DD6005244CF /* URL+Utils.swift in Sources */,
 			);

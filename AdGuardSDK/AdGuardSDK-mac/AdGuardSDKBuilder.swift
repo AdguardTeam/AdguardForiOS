@@ -10,7 +10,7 @@ public class AdGuardSDKBuilder: AdGuardSDKBuilderProtocol {
 
     let filtersService: FiltersServiceForBuilderProtocol
     public init (filtersStorageUrl: URL, dbUrl: URL) {
-        let configuration = SafariConfiguration(iosVersion: 13, currentLanguage: "en", proStatus: false, safariProtectionEnabled: true, advancedBlockingIsEnabled: true, blocklistIsEnabled: true, allowlistIsEnabled: true, allowlistIsInverted: false, appBundleId: Bundle.main.bundleIdentifier ?? "", appProductVersion: "", appId: "builder", cid: "")
+        let configuration = SafariConfiguration(iosVersion: 13, currentLocale: Locale.current, proStatus: false, safariProtectionEnabled: true, advancedBlockingIsEnabled: true, blocklistIsEnabled: true, allowlistIsEnabled: true, allowlistIsInverted: false, appBundleId: Bundle.main.bundleIdentifier ?? "", appProductVersion: "", appId: "builder", cid: "")
 
         let filtersStorage = try! FilterFilesStorage(filterFilesDirectoryUrl: filtersStorageUrl)
 

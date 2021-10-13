@@ -37,8 +37,6 @@ public extension Locale {
         let exclusionSpanishLanguage = "es"
 
         let languageCode = languageCode ?? defaultLanguageCode
-        let scriptCode = scriptCode
-        let variantCode = variantCode
         let regionCode = regionCode ?? defaultRegionCode
 
         let isSpanish = languageCode == exclusionSpanishLanguage

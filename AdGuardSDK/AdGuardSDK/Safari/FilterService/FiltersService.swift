@@ -17,7 +17,6 @@
  */
 
 import Foundation
-import SharedAdGuardSDK
 
 // MARK: - FiltersUpdateResult
 
