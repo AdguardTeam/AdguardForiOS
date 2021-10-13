@@ -18,46 +18,21 @@
 
 import Foundation
 
-protocol DomainsConverterProtocol {
-    // converts whitelist rule to domain
-    func whitelistDomainFromRule(_ rule: String) -> String
-
-    // converts whitelist domain to rule
-    func whitelistRuleFromDomain(_ domain:String) -> String
-
+protocol DomainConverterProtocol {
     // converts blacklist domain to rule
-    func blacklistRuleFromDomain(_ domain: String) -> String
+    func userFilterBlockRuleFromDomain(_ domain: String) -> String
 }
 
-class DomainsConverter: DomainsConverterProtocol {
-
-    private let whitelistPrefix = "@@||"
-    private let whitelistSuffix = "^|$important"
+///  this class is responsible for converting domain names to dns user rules
+final class DomainConverter: DomainConverterProtocol {
 
     private let blacklistPrefix = "||"
     private let blacklistSuffix = "^$important"
 
-    func whitelistDomainFromRule(_ rule: String)->String {
-        let start = rule.hasPrefix(whitelistPrefix) ? whitelistPrefix.count : 0
-        let end = rule.hasSuffix(whitelistSuffix) ? -whitelistSuffix.count : 0
-
-        let startIndex = rule.index(rule.startIndex, offsetBy: start)
-        let endIndex = end != 0 ? rule.index(rule.endIndex, offsetBy: end) : rule.endIndex
-
-        let domain = rule[startIndex..<endIndex]
-        return String(domain)
-    }
-
-    func blacklistRuleFromDomain(_ domain: String)->String {
+    func userFilterBlockRuleFromDomain(_ domain: String)->String {
         let trimmed = domain.hasSuffix(".") ? String(domain.dropLast()) : domain
         var rule = trimmed.hasPrefix(blacklistPrefix) ? trimmed : (blacklistPrefix + trimmed)
         rule = trimmed.hasSuffix(blacklistSuffix) ? rule : (rule + blacklistSuffix)
-        return rule
-    }
-
-    func whitelistRuleFromDomain(_ domain:String)->String {
-        var rule = domain.hasPrefix(whitelistPrefix) ? domain : (whitelistPrefix + domain)
-        rule = domain.hasSuffix(whitelistSuffix) ? rule : (rule + whitelistSuffix)
         return rule
     }
 }

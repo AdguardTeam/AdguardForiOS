@@ -46,7 +46,7 @@ class CompanyDetailedController: UITableViewController {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsTrackers: DnsTrackersProviderProtocol = ServiceLocator.shared.getService()!
-    private let domainsParserService: DomainsParserServiceProtocol = ServiceLocator.shared.getService()!
+    private let domainParserService: DomainParserServiceProtocol = ServiceLocator.shared.getService()!
 
     // MARK: - Notifications
 
@@ -70,7 +70,7 @@ class CompanyDetailedController: UITableViewController {
     //var model:
 
     required init?(coder: NSCoder) {
-        requestsModel = DnsRequestLogViewModel(dnsTrackers: dnsTrackers, dnsStatistics: ServiceLocator.shared.getService()!)
+        requestsModel = DnsRequestLogViewModel(dnsTrackers: dnsTrackers, dnsStatistics: ServiceLocator.shared.getService()!, dnsProtection: ServiceLocator.shared.getService()!, domainConverter: DomainConverter(), domainParser: domainParserService)
         super.init(coder: coder)
     }
 
@@ -112,8 +112,9 @@ class CompanyDetailedController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showDnsContainerSegueId {
-            if let controller = segue.destination as? DnsContainerController {
-                controller.logRecord = selectedRecord
+            if let controller = segue.destination as? DnsRequestDetailsContainerController {
+                // TODO: get LogRecordVeiwModel somewhere
+//                controller.model = selectedRecord
             }
         }
     }
@@ -170,7 +171,6 @@ class CompanyDetailedController: UITableViewController {
         if let cell = tableView.dequeueReusableCell(withIdentifier: activityTableViewCellReuseId) as? ActivityTableViewCell {
             let record = requestsModel.records[indexPath.row]
             cell.advancedMode = configuration.advancedMode
-            cell.domainsParser = domainsParserService.domainsParser
             cell.theme = theme
             cell.record = record
             return cell

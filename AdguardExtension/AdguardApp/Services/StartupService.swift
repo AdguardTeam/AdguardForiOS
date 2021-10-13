@@ -125,7 +125,7 @@ final class StartupService : NSObject{
         let rateService: RateAppServiceProtocol = RateAppService(resources: sharedResources, configuration: configuration)
         locator.addService(service: rateService)
 
-        let domainsParserService: DomainsParserServiceProtocol = DomainsParserService()
+        let domainsParserService: DomainParserServiceProtocol = DomainParserService()
         locator.addService(service: domainsParserService)
 
         let setappService: SetappServiceProtocol = SetappService(purchaseService: purchaseService, resources: sharedResources)

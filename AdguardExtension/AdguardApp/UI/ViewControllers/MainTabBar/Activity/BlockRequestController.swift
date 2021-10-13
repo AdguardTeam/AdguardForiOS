@@ -83,8 +83,8 @@ class BlockRequestController: BottomAlertController {
         }
     }
 
-    var type: DnsLogButtonType = .addDomainToWhitelist
-    var delegate: AddDomainToListDelegate?
+    var type: DnsLogButtonType = .addDomainToAllowList
+    weak var delegate: AddDomainToListDelegate?
 
     private var subDomains: [BlockRequestCellModel] = []
 
@@ -98,7 +98,7 @@ class BlockRequestController: BottomAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        titleLabel.text = type == .addDomainToWhitelist ? String.localizedString("whitelist_request") : String.localizedString("block_request")
+        titleLabel.text = type == .addDomainToAllowList ? String.localizedString("whitelist_request") : String.localizedString("block_request")
 
         updateTheme()
 
@@ -115,7 +115,7 @@ class BlockRequestController: BottomAlertController {
 
     @IBAction func addTapped(_ sender: UIButton) {
         let domain = subDomains.first(where: { $0.isSelected })?.domain ?? ""
-        delegate?.add(domain: domain, needsCorrecting: true, by: type)
+        delegate?.add(domain: domain, by: type)
         dismiss(animated: true, completion: nil)
     }
 

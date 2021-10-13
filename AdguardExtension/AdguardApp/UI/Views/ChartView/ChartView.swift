@@ -66,15 +66,15 @@ final class ChartView: UIView {
     private var bottomBorderLabel = UILabel()
     private var topBorderLabel = UILabel()
 
-    private var requestsLineColor = UIColor(hexString: "67b279")
-    private var requestsShadowColor = UIColor(hexString: "67b279")
+    private var requestsLineColor = UIColor.AdGuardColor.lightGreen1
+    private var requestsShadowColor = UIColor.AdGuardColor.lightGreen1
 
-    private var encryptedLineColor = UIColor(hexString: "#677bb2")
-    private var encryptedShadowColor = UIColor(hexString: "677bb2")
+    private var encryptedLineColor = UIColor.AdGuardColor.lightBlue
+    private var encryptedShadowColor = UIColor.AdGuardColor.lightBlue
 
-    private var gridColor = UIColor(displayP3Red: 0.53, green: 0.53, blue: 0.53, alpha: 0.3)
+    private var gridColor = UIColor.AdGuardColor.chartGridColor
 
-    private let offColor = UIColor(hexString: "#888888")
+    private let offColor = UIColor.AdGuardColor.lightGray3
 
     private var numberOfVerticalSectors = 7
     private var numberOfHorizontalSectors = 2
@@ -116,7 +116,7 @@ final class ChartView: UIView {
 
     private func enabledStateChanged() {
         let requestsColor = theme.grayTextColor
-        let encryptedColor = UIColor(hexString: "67b279")
+        let encryptedColor = UIColor.AdGuardColor.lightGreen1
 
         requestsLineColor = isEnabled ? requestsColor : offColor
         requestsShadowColor = isEnabled ? requestsColor : offColor
