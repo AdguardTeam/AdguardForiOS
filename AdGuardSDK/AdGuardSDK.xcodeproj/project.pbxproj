@@ -345,7 +345,6 @@
 		7EC8A3A126E769DB005244CF /* UserRulesStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E807526C2A04100925F96 /* UserRulesStorageProtocol.swift */; };
 		7EC8A3A226E769DB005244CF /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E807826C2A04100925F96 /* Configuration.swift */; };
 		7EC8A3BB26E76B4E005244CF /* FilterMetaProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E80EE26C2A05200925F96 /* FilterMetaProtocol.swift */; };
-		7EC8A3C726E771D4005244CF /* Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8A3C626E771D4005244CF /* Import.swift */; };
 		7EC8A3C926E772A9005244CF /* Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8A3C826E772A9005244CF /* Import.swift */; };
 		7EC8A3CF26E773C6005244CF /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E966AF526C27B93006B57BD /* SafariAdGuardSDK.framework */; };
 		7EC8A3D126E77413005244CF /* Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8A3D026E77413005244CF /* Import.swift */; };
@@ -407,6 +406,7 @@
 		B22FCDE5270C8C4E00B1C935 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6E81EF26C2A3E300925F96 /* libresolv.tbd */; };
 		B2673DD827173F0700E04747 /* SafariProtection+Migrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2673DD727173F0700E04747 /* SafariProtection+Migrations.swift */; };
 		B2673DDA27173F0700E04747 /* SafariProtection+Migrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2673DD727173F0700E04747 /* SafariProtection+Migrations.swift */; };
+		B2673E8627179C8F00E04747 /* SafariAdGuardSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = B2673E8527179C8F00E04747 /* SafariAdGuardSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B29D5367270CE2CB0045CB16 /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC8A37F26E7697C005244CF /* SharedAdGuardSDK.framework */; };
 		B29D53A0270D24FF0045CB16 /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC8A37F26E7697C005244CF /* SharedAdGuardSDK.framework */; };
 		B29D53A8270D27960045CB16 /* SharedAdGuardSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = B29D53A7270D27270045CB16 /* SharedAdGuardSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -520,7 +520,6 @@
 		7E6E801B26C299DE00925F96 /* EasyListTest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = EasyListTest.txt; sourceTree = "<group>"; };
 		7E6E801C26C299DE00925F96 /* CustomFilterMetaParserTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFilterMetaParserTest.swift; sourceTree = "<group>"; };
 		7E6E805D26C2A03600925F96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = AdGuardSDK/Info.plist; sourceTree = SOURCE_ROOT; };
-		7E6E805E26C2A03600925F96 /* AdGuardSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AdGuardSDK.h; path = AdGuardSDK/AdGuardSDK.h; sourceTree = SOURCE_ROOT; };
 		7E6E806026C2A04100925F96 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7E6E806126C2A04100925F96 /* FilterFilesStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterFilesStorage.swift; sourceTree = "<group>"; };
 		7E6E806326C2A04100925F96 /* ParserProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserProtocol.swift; sourceTree = "<group>"; };
@@ -637,7 +636,6 @@
 		7EAD352226C2C1C0001AFB3A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7EAD354F26C2E293001AFB3A /* FiltersService+Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FiltersService+Builder.swift"; sourceTree = "<group>"; };
 		7EC8A37F26E7697C005244CF /* SharedAdGuardSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SharedAdGuardSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7EC8A3C626E771D4005244CF /* Import.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Import.swift; sourceTree = "<group>"; };
 		7EC8A3C826E772A9005244CF /* Import.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Import.swift; sourceTree = "<group>"; };
 		7EC8A3D026E77413005244CF /* Import.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Import.swift; sourceTree = "<group>"; };
 		7EC8A3DF26E77D5E005244CF /* DateInterval+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateInterval+Utils.swift"; sourceTree = "<group>"; };
@@ -660,6 +658,8 @@
 		B22FCDC1270BD3D400B1C935 /* DnsAdGuardSDK.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = DnsAdGuardSDK.modulemap; sourceTree = "<group>"; };
 		B22FCDDE270C639600B1C935 /* SystemLibs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemLibs.h; sourceTree = "<group>"; };
 		B2673DD727173F0700E04747 /* SafariProtection+Migrations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SafariProtection+Migrations.swift"; sourceTree = "<group>"; };
+		B2673E8427179C5D00E04747 /* SafariAdguardSDK.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = SafariAdguardSDK.modulemap; sourceTree = "<group>"; };
+		B2673E8527179C8F00E04747 /* SafariAdGuardSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SafariAdGuardSDK.h; sourceTree = "<group>"; };
 		B29D53A6270D267C0045CB16 /* SharedAdGuardSDK.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = SharedAdGuardSDK.modulemap; sourceTree = "<group>"; };
 		B29D53A7270D27270045CB16 /* SharedAdGuardSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedAdGuardSDK.h; sourceTree = "<group>"; };
 		B2C8E9AF2717008C00ACDED8 /* AdGuardSdkDependencies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AdGuardSdkDependencies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1056,7 +1056,6 @@
 		7E6E80CA26C2A05200925F96 /* Safari */ = {
 			isa = PBXGroup;
 			children = (
-				7EC8A3C626E771D4005244CF /* Import.swift */,
 				7E6E80FB26C2A05200925F96 /* SafariProtection */,
 				7E6E80CB26C2A05200925F96 /* SQLScripts */,
 				7E6E80D326C2A05200925F96 /* ApiMethods */,
@@ -1065,6 +1064,8 @@
 				7E6E80F126C2A05200925F96 /* FilterService */,
 				7E6E80F626C2A05200925F96 /* ContentBlockers */,
 				7E6E810426C2A05200925F96 /* UserRules */,
+				B2673E8427179C5D00E04747 /* SafariAdguardSDK.modulemap */,
+				B2673E8527179C8F00E04747 /* SafariAdGuardSDK.h */,
 			);
 			name = Safari;
 			path = AdGuardSDK/Safari;
@@ -1372,7 +1373,6 @@
 				7E6E805F26C2A04100925F96 /* SharedAdGuardSDK */,
 				7E6E80CA26C2A05200925F96 /* Safari */,
 				7E6E817026C2A05A00925F96 /* DNS */,
-				7E6E805E26C2A03600925F96 /* AdGuardSDK.h */,
 				7E6E805D26C2A03600925F96 /* Info.plist */,
 			);
 			path = AdGuardSDK;
@@ -1470,6 +1470,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2673E8627179C8F00E04747 /* SafariAdGuardSDK.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2009,7 +2010,6 @@
 				7E6E814826C2A05300925F96 /* SafariGroup+GroupType.swift in Sources */,
 				7E4F0BA226F3619E00EB5B23 /* UserRulesManagerProtocol+Utils.swift in Sources */,
 				7E6E815026C2A05300925F96 /* ContentBlockersInfoStorage.swift in Sources */,
-				7EC8A3C726E771D4005244CF /* Import.swift in Sources */,
 				7E6E811826C2A05300925F96 /* FiltersMetadataParser.swift in Sources */,
 				7E6E813426C2A05300925F96 /* MetaStorage+FiltersLocalizations.swift in Sources */,
 				7EE740E026F33FCA0033B673 /* InvertedAllowlistRuleConverter.swift in Sources */,
@@ -2262,6 +2262,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				MODULEMAP_FILE = AdGuardSDK/Safari/SafariAdGuardSDK.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.SafariAdGuardSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -2295,6 +2296,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				MODULEMAP_FILE = AdGuardSDK/Safari/SafariAdGuardSDK.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.SafariAdGuardSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

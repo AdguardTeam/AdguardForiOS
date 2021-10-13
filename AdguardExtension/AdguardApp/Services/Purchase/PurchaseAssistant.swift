@@ -35,6 +35,5 @@ class PurchaseAssistant {
     /// errors
     static let AEPurchaseErrorDomain = "AEPurchaseErrorDomain"
 
-//    static let AEPurchaseErrorAuthFailed = -1 FIXME is that should be removed?
     static let AEConfirmReceiptError = -2
 }

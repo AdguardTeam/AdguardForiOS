@@ -15,4 +15,3 @@ FOUNDATION_EXPORT const unsigned char DnsAdGuardSDKVersionString[];
 
 #import <DnsAdGuardSDK/ACNCidrRange.h>
 #import <DnsAdGuardSDK/ACNUrlUtils.h>
-

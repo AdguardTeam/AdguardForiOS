@@ -17,8 +17,8 @@
  */
 
 import Foundation
-import SafariAdGuardSDK
 import SharedAdGuardSDK
+import SafariAdGuardSDK
 
 // TODO: - Write tests
 
@@ -49,10 +49,10 @@ struct PreloadedFilesManager: PreloadedFilesManagerProtocol {
     }
 
     func processPreloadedFiles() throws {
-        guard let dbZipUrlInBundle = bundle.url(forResource: SafariAdGuardSDK.Constants.Files.defaultDbFileName, withExtension: "zip"),
+        guard let dbZipUrlInBundle = bundle.url(forResource: SharedAdGuardSDK.Constants.Files.defaultDbFileName, withExtension: "zip"),
               let filtersZipUrlInBundle = bundle.url(forResource: "filters", withExtension: "zip")
         else {
-            throw CommonError.missingFile(filename: SafariAdGuardSDK.Constants.Files.defaultDbZipFileName)
+            throw CommonError.missingFile(filename: SharedAdGuardSDK.Constants.Files.defaultDbZipFileName)
         }
 
         let dbFolderUrl = sharedStorageUrls.dbFolderUrl
@@ -65,8 +65,8 @@ struct PreloadedFilesManager: PreloadedFilesManagerProtocol {
         try fm.createDirectory(at: filtersFolderUrl, withIntermediateDirectories: true, attributes: [:])
 
         // Copy Zip files from Bundle to shared URL
-        let dbZipUrl = dbFolderUrl.appendingPathComponent(SafariAdGuardSDK.Constants.Files.defaultDbZipFileName)
-        let filtersZipUrl = filtersFolderUrl.appendingPathComponent(SafariAdGuardSDK.Constants.Files.filtersZipFileName)
+        let dbZipUrl = dbFolderUrl.appendingPathComponent(SharedAdGuardSDK.Constants.Files.defaultDbZipFileName)
+        let filtersZipUrl = filtersFolderUrl.appendingPathComponent(SharedAdGuardSDK.Constants.Files.filtersZipFileName)
         try fm.copyOrReplace(at: dbZipUrlInBundle, to: dbZipUrl)
         try fm.copyOrReplace(at: filtersZipUrlInBundle, to: filtersZipUrl)
     }

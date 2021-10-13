@@ -16,6 +16,7 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import SharedAdGuardSDK
 import SafariAdGuardSDK
 import DnsAdGuardSDK
 import AGDnsProxy
@@ -30,11 +31,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     // AppDelegate+StatusBarWindow notifications
-    var filtersUpdateStarted: SafariAdGuardSDK.NotificationToken?
-    var filtersUpdateFinished: SafariAdGuardSDK.NotificationToken?
-    var contentBlockersUpdateStarted: SafariAdGuardSDK.NotificationToken?
-    var contentBlockersUpdateFinished: SafariAdGuardSDK.NotificationToken?
-    var orientationChangeNotification: NotificationToken?
+    var filtersUpdateStarted: SharedAdGuardSDK.NotificationToken?
+    var filtersUpdateFinished: SharedAdGuardSDK.NotificationToken?
+    var contentBlockersUpdateStarted: SharedAdGuardSDK.NotificationToken?
+    var contentBlockersUpdateFinished: SharedAdGuardSDK.NotificationToken?
+    var orientationChangeNotification: SharedAdGuardSDK.NotificationToken?
     // AppDelegate addPurchaseStatusObserver notifications
     private var purchaseObservation: NotificationToken?
     private var proStatusObservation: NotificationToken?
@@ -348,14 +349,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
 
         AGLogger.setLevel(isDebugLogs ? .AGLL_TRACE : .AGLL_INFO)
-        // FIXME investigate this case
-//        AGLogger.setCallback { msg, length in
-//            guard let msg = msg else { return }
-//            let data = Data(bytes: msg, count: Int(length))
-//            if let str = String(data: data, encoding: .utf8) {
-//                DDLogInfo("(DnsLibs) \(str)")
-//            }
-//        }
+        AGLogger.setCallback { _, msg, length in
+            guard let msg = msg else { return }
+            let data = Data(bytes: msg, count: Int(length))
+            if let str = String(data: data, encoding: .utf8) {
+                DDLogInfo("(DnsLibs) \(str)")
+            }
+        }
 
         DDLogInfo("Application started. Version: \(productInfo.buildVersion() ?? "nil")")
 

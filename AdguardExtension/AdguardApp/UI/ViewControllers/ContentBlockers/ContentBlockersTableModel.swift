@@ -16,6 +16,7 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import SharedAdGuardSDK
 import SafariAdGuardSDK
 
 protocol ContentBlockersTableModelDelegate: AnyObject {
@@ -38,12 +39,12 @@ final class ContentBlockersTableModel {
     private let configuration: ConfigurationServiceProtocol
 
     /* Observers */
-    private var filtersConvertionStartObserver: SafariAdGuardSDK.NotificationToken?
-    private var filtersConvertionEndObserver: SafariAdGuardSDK.NotificationToken?
-    private var standaloneContentBlockerReloadStartObserver: SafariAdGuardSDK.NotificationToken?
-    private var standaloneContentBlockerReloadEndObserver: SafariAdGuardSDK.NotificationToken?
-    private var contentBlockersStateChangedObserver: NotificationToken?
-    private var advancedProtectionStateObserver: NotificationToken?
+    private var filtersConvertionStartObserver: SharedAdGuardSDK.NotificationToken?
+    private var filtersConvertionEndObserver: SharedAdGuardSDK.NotificationToken?
+    private var standaloneContentBlockerReloadStartObserver: SharedAdGuardSDK.NotificationToken?
+    private var standaloneContentBlockerReloadEndObserver: SharedAdGuardSDK.NotificationToken?
+    private var contentBlockersStateChangedObserver: SharedAdGuardSDK.NotificationToken?
+    private var advancedProtectionStateObserver: SharedAdGuardSDK.NotificationToken?
 
     init(safariProtection: SafariProtectionProtocol, configuration: ConfigurationServiceProtocol) {
         self.safariProtection = safariProtection

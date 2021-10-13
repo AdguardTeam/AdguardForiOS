@@ -242,12 +242,11 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
     /// Initializes DNS-lib logger
     private func setupLogger(isDebugLogs: Bool) {
         AGLogger.setLevel(isDebugLogs ? .AGLL_DEBUG : .AGLL_WARN )
-        // FIXME repair?
-//        AGLogger.setCallback { msg, size in
-//            if let msg = msg {
-//                Logger.logInfo("(DnsLibs) -> \(String(cString: msg))")
-//            }
-//        }
+        AGLogger.setCallback { _, msg, size in
+            if let msg = msg {
+                Logger.logInfo("(DnsLibs) -> \(String(cString: msg))")
+            }
+        }
     }
 
     /// Returns `DnsUpstream` objects from system DNS servers

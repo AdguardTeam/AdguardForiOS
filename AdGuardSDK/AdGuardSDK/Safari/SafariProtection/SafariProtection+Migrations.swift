@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import SharedAdGuardSDK
 
 /// This protocol helps main app to perform migration from v4.2 to v4.3
 public protocol SafariProtectionMigrationsProtocol: AnyObject {
