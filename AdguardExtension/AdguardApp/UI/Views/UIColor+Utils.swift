@@ -16,7 +16,7 @@
    along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
+import UIKit
 
 extension UIColor {
     struct AdGuardColor {
@@ -67,5 +67,6 @@ extension UIColor {
         static let logAllowlistedCellColor: UIColor = #colorLiteral(red: 0.2, green: 0.4039215686, blue: 0.6980392157, alpha: 0.3)          //hex = #3367b279
         static let logSelectedAllowlistedCellColor: UIColor = #colorLiteral(red: 0.3019607843, green: 0.4039215686, blue: 0.6980392157, alpha: 0.3)  //hex = #4D67b279
 
+        static let chartGridColor = #colorLiteral(red: 0.5294117647, green: 0.5294117647, blue: 0.5294117647, alpha: 0.3)            // hex = #8787874c
     }
 }

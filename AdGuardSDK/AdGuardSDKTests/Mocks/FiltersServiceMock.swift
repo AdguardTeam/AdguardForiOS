@@ -55,10 +55,24 @@ final class FiltersServiceMock: FiltersServiceProtocol {
         }
     }
 
+    var reinitializeGroupsCalledCount = 0
+    func reinitializeGroups() throws {
+        reinitializeGroupsCalledCount += 1
+    }
+
     var resetCalledCount = 0
     var resetError: Error?
     func reset(_ onResetFinished: @escaping (Error?) -> Void) {
         resetCalledCount += 1
         onResetFinished(resetError)
+    }
+
+    var enablePredefinedGroupsAndFiltersCount = 0
+    var enablePredefinedGroupsAndFiltersError: Error?
+    func enablePredefinedGroupsAndFilters() throws {
+        enablePredefinedGroupsAndFiltersCount += 1
+        if let error = enablePredefinedGroupsAndFiltersError {
+            throw error
+        }
     }
 }

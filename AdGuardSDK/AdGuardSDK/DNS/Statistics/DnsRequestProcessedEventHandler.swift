@@ -46,12 +46,6 @@ final class DnsRequestProcessedEventHandler: DnsRequestProcessedEventHandlerProt
         self.dnsLogStatistics = dnsLogStatistics
     }
 
-    deinit {
-        eventQueue.sync {
-            Logger.logInfo("(DnsRequestProcessedEventHandler) - deinit; Flush to db")
-        }
-    }
-
     // TODO: - Add some tests
     func handle(event: AGDnsRequestProcessedEventWrapper) {
         eventQueue.async { [weak self] in
@@ -60,14 +54,20 @@ final class DnsRequestProcessedEventHandler: DnsRequestProcessedEventHandlerProt
                 return
             }
 
-            guard let upstreamId = event.upstreamId, let activeDnsUpstream = self.proxyConfigurationProvider.dnsUpstreamById[upstreamId] else {
-                Logger.logError("(DnsRequestProcessedEventHandler) - handleEvent; event.upstreamId is nil")
-                return
+            Logger.logInfo("handleEvent domain: \(event.domain) answer: \(event.answer) status: \(event.status) rules: \(event.rules) type: \(event.type) whitelst: \(event.whitelist) upstreamId: \(event.upstreamId ?? 0)")
+
+            let activeDnsUpstream: DnsProxyUpstream?
+
+            if let upstreamId = event.upstreamId {
+                activeDnsUpstream = self.proxyConfigurationProvider.dnsUpstreamById[upstreamId]
+            }
+            else {
+                activeDnsUpstream = nil
             }
 
             let processedEvent = DnsRequestProcessedEvent(
                 event: event,
-                upstream: activeDnsUpstream.dnsUpstreamInfo,
+                upstream: activeDnsUpstream?.dnsUpstreamInfo,
                 customDnsFilterIds: self.proxyConfigurationProvider.customDnsFilterIds,
                 dnsBlocklistFilterId: self.proxyConfigurationProvider.dnsBlocklistFilterId,
                 dnsAllowlistFilterId: self.proxyConfigurationProvider.dnsAllowlistFilterId

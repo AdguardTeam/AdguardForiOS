@@ -23,7 +23,7 @@ protocol ChooseDnsImplementationControllerDelegate: AnyObject {
     func currentImplementationChanged()
 }
 
-class ChooseDnsImplementationController: BottomAlertController {
+final class ChooseDnsImplementationController: BottomAlertController {
 
     @IBOutlet weak var adGuardButton: UIButton!
     @IBOutlet weak var nativeButton: UIButton!
@@ -39,7 +39,7 @@ class ChooseDnsImplementationController: BottomAlertController {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let nativeDnsManager: NativeDnsSettingsManagerProtocol = ServiceLocator.shared.getService()!
-    private let dnsProtection: DnsProtectionProtocol = ServiceLocator.shared.getService()!
+    private let dnsProvidersManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,21 +50,21 @@ class ChooseDnsImplementationController: BottomAlertController {
     // MARK: - Private methods
 
     @IBAction func adGuardSelected(_ sender: UIButton) {
+        dnsProvidersManager.update(dnsImplementation: .adGuard)
         resources.dnsImplementation = .adGuard
         delegate?.currentImplementationChanged()
         processCurrentImplementation()
         if #available(iOS 14.0, *) {
             nativeDnsManager.removeDnsConfig { _ in }
         }
-        dnsProtection.update(dnsImplementation: .adGuard)
         dismiss(animated: true)
     }
 
     @IBAction func nativeSelected(_ sender: UIButton) {
+        dnsProvidersManager.update(dnsImplementation: .native)
         resources.dnsImplementation = .native
         delegate?.currentImplementationChanged()
         processCurrentImplementation()
-        dnsProtection.update(dnsImplementation: .native)
         dismiss(animated: true)
     }
 

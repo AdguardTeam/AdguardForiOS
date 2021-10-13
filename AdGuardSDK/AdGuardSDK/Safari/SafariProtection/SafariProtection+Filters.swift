@@ -83,6 +83,12 @@ public protocol SafariProtectionFiltersProtocol {
         onFiltersUpdated: @escaping (_ error: Result<FiltersUpdateResult>) -> Void,
         onCbReloaded: @escaping (_ error: Error?) -> Void
     )
+
+    /**
+     Enable predefined groups and filters
+     - Throws: Can throw error if error occured while enabling filter or groups
+     */
+    func enablePredefinedGroupsAndFilters() throws
 }
 
 /* Extension is used to interact with filters and groups object and properly process operations with them */
@@ -250,6 +256,14 @@ extension SafariProtection {
                     }
                 }
             }
+        }
+    }
+
+    public func enablePredefinedGroupsAndFilters() throws {
+        try workingQueue.sync {
+            Logger.logInfo("(SafariProtection+Filters) - enablePredefinedGroupsAndFilters; Start enabling predefined groups and filters")
+            try self.filters.enablePredefinedGroupsAndFilters()
+            Logger.logInfo("(SafariProtection+Filters) - enablePredefinedGroupsAndFilters; Enabling predefined groups and filters successfully ended")
         }
     }
 }

@@ -22,7 +22,9 @@ import UIKit
 /// ViewModel
 final class DnsProviderDetailsModel {
 
-    // MARK: - Public properties
+    // MARK: - Internal properties
+
+    var provider: DnsProviderProtocol
 
     /// Provider logo for light color theme
     var providerLogo: UIImage? {
@@ -55,31 +57,51 @@ final class DnsProviderDetailsModel {
         return provider.dnsServers.map { $0.type }
     }
 
-    /// active dns protocol
+    /// Active DNS protocol
     var activeDnsProtocol: DnsAdGuardSDK.DnsProtocol {
         get {
-            ///Providers alway have server.
-            ///If we didn't find active server from User Defaults than we should take first protocol from provider dns servers
-            if let activeProtocol = resources.dnsActiveProtocols[provider.providerId] {
-                let defaultDnsProtocol = provider.dnsServers.first!.type
-                return dnsProtocols.contains(activeProtocol) ? activeProtocol : defaultDnsProtocol
+            let defaultDnsProtocol: DnsProtocol
+
+            if provider.dnsServers.contains(where: { $0.type == .doh }) {
+                defaultDnsProtocol = .doh
+            }
+            else if provider.dnsServers.contains(where: { $0.type == .dot }) {
+                defaultDnsProtocol = .dot
+            }
+            else if provider.dnsServers.contains(where: { $0.type == .dns }) {
+                defaultDnsProtocol = .dns
+            }
+            else {
+                defaultDnsProtocol = provider.dnsServers.first!.type
             }
 
-            return provider.dnsServers.first!.type
+            /// Providers must always have at least one server
+            /// If we were unable to find the server user did select than we'll take the default one
+            if let selectedProtocol = resources.dnsActiveProtocols[provider.providerId] {
+                return dnsProtocols.contains(selectedProtocol) ? selectedProtocol : defaultDnsProtocol
+            } else {
+                return defaultDnsProtocol
+            }
         }
         set {
             resources.dnsActiveProtocols[provider.providerId] = newValue
         }
     }
 
-    private let provider: DnsProviderProtocol
+    private let providerId: Int
     private let resources: AESharedResourcesProtocol
-
+    private let dnsProvidersManager: DnsProvidersManagerProtocol
 
     // MARK: - Init
 
-    init(provider: DnsProviderProtocol, resources: AESharedResourcesProtocol) {
-        self.provider = provider
+    init(providerId: Int, resources: AESharedResourcesProtocol, dnsProvidersManager: DnsProvidersManagerProtocol) {
+        self.providerId = providerId
+        self.dnsProvidersManager = dnsProvidersManager
         self.resources = resources
+        self.provider = dnsProvidersManager.allProviders.first(where: { $0.providerId == providerId })!.predefined
+    }
+
+    func dnsImplementationChanged() {
+        provider = dnsProvidersManager.allProviders.first(where: { $0.providerId == providerId })!.predefined
     }
 }

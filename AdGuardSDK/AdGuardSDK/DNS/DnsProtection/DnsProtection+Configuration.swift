@@ -43,9 +43,6 @@ public protocol DnsProtectionConfigurationProtocol {
     /* Updates allow list state */
     func update(allowlistIsEnabled: Bool)
 
-    /* Updates dns implementation state*/
-    func update(dnsImplementation: DnsImplementation)
-
     //TODO: Need tests
     /* Updated dns configuration with new one */
     func updateConfig(with newConfig: DnsConfigurationProtocol)
@@ -89,13 +86,6 @@ extension DnsProtection {
     public func update(allowlistIsEnabled: Bool) {
         workingQueue.sync {
             self.configuration.allowlistIsEnabled = allowlistIsEnabled
-        }
-    }
-
-    public func update(dnsImplementation: DnsImplementation) {
-        workingQueue.sync {
-            self.configuration.dnsImplementation = dnsImplementation
-            self.dnsProvidersManager.dnsImplementationChanged()
         }
     }
 

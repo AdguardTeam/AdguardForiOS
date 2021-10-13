@@ -63,8 +63,9 @@ class DnsProvidersManagerTest: XCTestCase {
         checkVariables(custom: 0, predefined: 10, servers: 26, providerId: PredefinedDnsProvider.adguardDnsProviderId, serverId: PredefinedDnsServer.adguardDohServerId, dnsImp: .native)
         checkEnabledProvider(providerId: PredefinedDnsProvider.adguardDnsProviderId, serverId: PredefinedDnsServer.adguardDohServerId)
 
-        configuration.dnsImplementation = .adGuard
-        providersManager.dnsImplementationChanged()
+        XCTAssertEqual(configuration.dnsImplementation, .native)
+        providersManager.update(dnsImplementation: .adGuard)
+        XCTAssertEqual(configuration.dnsImplementation, .adGuard)
 
         checkVariables(custom: 0, predefined: 11, servers: 36, providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId, dnsImp: .adGuard)
         checkEnabledProvider(providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId)
@@ -79,8 +80,9 @@ class DnsProvidersManagerTest: XCTestCase {
         checkVariables(custom: 0, predefined: 11, servers: 36, providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId, dnsImp: .adGuard)
         checkEnabledProvider(providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId)
 
-        configuration.dnsImplementation = .native
-        providersManager.dnsImplementationChanged()
+        XCTAssertEqual(configuration.dnsImplementation, .adGuard)
+        providersManager.update(dnsImplementation: .native)
+        XCTAssertEqual(configuration.dnsImplementation, .native)
 
         checkVariables(custom: 0, predefined: 10, servers: 26, providerId: PredefinedDnsProvider.adguardDnsProviderId, serverId: PredefinedDnsServer.adguardDohServerId, dnsImp: .adGuard)
         checkEnabledProvider(providerId: PredefinedDnsProvider.adguardDnsProviderId, serverId: PredefinedDnsServer.adguardDohServerId)
@@ -95,8 +97,9 @@ class DnsProvidersManagerTest: XCTestCase {
         checkVariables(custom: 0, predefined: 10, servers: 26, providerId: PredefinedDnsProvider.adguardDnsProviderId, serverId: PredefinedDnsServer.adguardDohServerId, dnsImp: .native)
         checkEnabledProvider(providerId: PredefinedDnsProvider.adguardDnsProviderId, serverId: PredefinedDnsServer.adguardDohServerId)
 
-        configuration.dnsImplementation = .adGuard
-        providersManager.dnsImplementationChanged()
+        XCTAssertEqual(configuration.dnsImplementation, .native)
+        providersManager.update(dnsImplementation: .adGuard)
+        XCTAssertEqual(configuration.dnsImplementation, .adGuard)
 
         checkVariables(custom: 0, predefined: 11, servers: 36, providerId: PredefinedDnsProvider.adguardDnsProviderId, serverId: PredefinedDnsServer.adguardDohServerId, dnsImp: .adGuard)
         checkEnabledProvider(providerId: PredefinedDnsProvider.adguardDnsProviderId, serverId: PredefinedDnsServer.adguardDohServerId)
@@ -118,8 +121,9 @@ class DnsProvidersManagerTest: XCTestCase {
         checkVariables(custom: 1, predefined: 11, servers: 37, providerId: providerId, serverId: serverId, dnsImp: .adGuard)
         checkEnabledProvider(providerId: providerId, serverId: serverId)
 
-        configuration.dnsImplementation = .native
-        providersManager.dnsImplementationChanged()
+        XCTAssertEqual(configuration.dnsImplementation, .adGuard)
+        providersManager.update(dnsImplementation: .native)
+        XCTAssertEqual(configuration.dnsImplementation, .native)
 
         checkVariables(custom: 0, predefined: 10, servers: 26, providerId: PredefinedDnsProvider.adguardDnsProviderId, serverId: PredefinedDnsServer.adguardDohServerId, dnsImp: .native)
         checkEnabledProvider(providerId: PredefinedDnsProvider.adguardDnsProviderId, serverId: PredefinedDnsServer.adguardDohServerId)

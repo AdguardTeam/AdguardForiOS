@@ -88,6 +88,18 @@ protocol FiltersServiceProtocol: ResetableAsyncProtocol {
      - throws: Can throw error if error occured while renaming filter
      */
     func renameCustomFilter(withId id: Int, to name: String) throws
+
+    /**
+     Enable predefined groups and filters
+     - throws: Can throw error if error occured while setuping
+     */
+    func enablePredefinedGroupsAndFilters() throws
+    // TODO: - Refactor it later
+    // It is a crutch because we add some data to DB while migrating custom filters
+    // If we don't reinitialize groups after migration we'll get inconsistency of states
+
+    /// Reinitializes groups with filters with actual info from database
+    func reinitializeGroups() throws
 }
 
 /*
@@ -152,14 +164,15 @@ final class FiltersService: FiltersServiceProtocol {
         metaStorage: MetaStorageProtocol,
         userDefaultsStorage: UserDefaultsStorageProtocol,
         metaParser: CustomFilterMetaParserProtocol = CustomFilterMetaParser(),
-        apiMethods: SafariProtectionApiMethodsProtocol
-    ) throws {
+        apiMethods: SafariProtectionApiMethodsProtocol) throws {
+
         self.configuration = configuration
         self.filterFilesStorage = filterFilesStorage
         self.metaStorage = metaStorage
         self.userDefaultsStorage = userDefaultsStorage
         self.metaParser = metaParser
         self.apiMethods = apiMethods
+
         try self._groupsAtomic.mutate { $0.append(contentsOf: try getAllLocalizedGroups()) }
     }
 
@@ -380,6 +393,12 @@ final class FiltersService: FiltersServiceProtocol {
         }
     }
 
+    func reinitializeGroups() throws {
+        try workingQueue.sync {
+            try self._groupsAtomic.mutate { $0 = try self.getAllLocalizedGroups() }
+        }
+    }
+
     /* Resets all data stored to default */
     func reset(_ onResetFinished: @escaping (Error?) -> Void) {
         workingQueue.async { [weak self] in
@@ -425,6 +444,13 @@ final class FiltersService: FiltersServiceProtocol {
                 case .error(let error): onResetFinished(error)
                 }
             }
+        }
+    }
+
+    func enablePredefinedGroupsAndFilters() throws {
+        try workingQueue.sync {
+            try enablePredefinedGroupsAndFiltersInternal(with: groups, currentLanguage: configuration.currentLanguage)
+            try self._groupsAtomic.mutate { $0 = try getAllLocalizedGroups() }
         }
     }
 
@@ -530,7 +556,7 @@ final class FiltersService: FiltersServiceProtocol {
         }
     }
 
-    /* Returns filters meta for sprecified group */
+    /* Returns filters meta for specified group */
     private func getFilters(forGroup group: SafariGroupProtocol) throws -> [SafariGroup.Filter] {
         let localizedFiltersMeta = try metaStorage.getLocalizedFiltersForGroup(withId: group.groupId, forLanguage: configuration.currentLanguage)
         return try localizedFiltersMeta.map { dbFilter in
@@ -762,6 +788,45 @@ final class FiltersService: FiltersServiceProtocol {
 
         if let error = resultError {
             throw error
+        }
+    }
+
+    //MARK: - Enabling predefined meta methods
+
+    /* Enable predefined groups and filters. Throws error on setting enabled state in storage*/
+    private func enablePredefinedGroupsAndFiltersInternal(with groups: [SafariGroup], currentLanguage: String) throws {
+        let predefinedGroups: [SafariGroup.GroupType] = [.ads, .privacy, .languageSpecific]
+
+        for group in groups {
+            guard predefinedGroups.contains(group.groupType) else { continue }
+            var recommendedCount = 0
+
+            for filter in group.filters {
+                guard isRecommended(filter: filter, currentLanguage: currentLanguage) else { continue }
+                try metaStorage.setFilter(withId: filter.filterId, enabled: true)
+                Logger.logInfo("(FiltersService) - enablePredefinedMeta; Filter with id=\(filter.filterId) were enabled for groupType=\(group.groupType)")
+                recommendedCount += 1
+            }
+
+            let groupIsEnabled = recommendedCount > 0
+            try metaStorage.setGroup(withId: group.groupId, enabled: groupIsEnabled)
+            Logger.logInfo("(FiltersService) - enablePredefinedMeta; Group with groupType=\(group.groupType) were enabled")
+        }
+    }
+
+    /* Return true if filter is recommended as predefined filter */
+    private func isRecommended(filter: SafariGroup.Filter, currentLanguage: String) -> Bool {
+        let isRecommended = filter.tags.contains(where: { $0.tagType == .recommended })
+        let containsLanguage = containsLanguage(currentLanguage: currentLanguage, inLanguages: filter.languages)
+        return isRecommended && (filter.languages.isEmpty || containsLanguage)
+    }
+
+    /* Return true if current language contains in array of languages */
+    private func containsLanguage(currentLanguage: String, inLanguages languages: [String]) -> Bool {
+        return languages.contains {
+            let lowercasedCurrentLanguage = currentLanguage.lowercased()
+            let language = $0.lowercased()
+            return lowercasedCurrentLanguage.contains(language)
         }
     }
 }

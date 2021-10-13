@@ -67,7 +67,7 @@ class FilterFilesStorageMock: FilterFilesStorageProtocol {
     var invokedGetUrlForFilterParameter: Int!
     var invokedGetUrlForFilterParametersList = [Int]()
     var stubbedGetUrlForFilterResult: URL!
-
+    
     func getUrlForFilter(withId id: Int) -> URL {
         invokedGetUrlForFilter = true
         invokedGetUrlForFilterCount += 1

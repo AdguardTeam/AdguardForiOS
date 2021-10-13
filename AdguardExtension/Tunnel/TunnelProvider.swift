@@ -41,11 +41,10 @@ class TunnelProvider: PacketTunnelProvider {
     public override init() {
         // init logger
         let resources = AESharedResources()
-        let debugLoggs = resources.isDebugLogs
-        ACLLogger.singleton().initLogger(resources.sharedLogsURL())
-        ACLLogger.singleton().logLevel = debugLoggs ? ACLLDebugLevel : ACLLDefaultLevel
-        DDLogInfo("Init tunnel with loglevel: \(debugLoggs ? "DEBUG" : "NORMAL")")
+        Self.setupLogger(resources)
 
+        let debugLoggs = resources.isDebugLogs
+        
         // start and configure Sentry
         SentrySDK.start { options in
             options.dsn = Constants.Sentry.dsnUrl
@@ -104,5 +103,24 @@ class TunnelProvider: PacketTunnelProvider {
             localDnsIpv6: Constants.LocalDnsAddresses.ipv6,
             defaultSystemDnsServers: Constants.LocalDnsAddresses.defaultSystemDnsServers
         )
+    }
+
+    private static func setupLogger(_ resources: AESharedResourcesProtocol) {
+        let debugLoggs = resources.isDebugLogs
+        ACLLogger.singleton().initLogger(resources.sharedAppLogsURL())
+        ACLLogger.singleton().logLevel = debugLoggs ? ACLLDebugLevel : ACLLDefaultLevel
+        DDLogInfo("Init tunnel with loglevel: \(debugLoggs ? "DEBUG" : "NORMAL")")
+
+        Logger.logInfo = { msg in
+            DDLogInfo(msg)
+        }
+
+        Logger.logDebug = { msg in
+            DDLogDebug(msg)
+        }
+
+        Logger.logError = { msg in
+            DDLogError(msg)
+        }
     }
 }

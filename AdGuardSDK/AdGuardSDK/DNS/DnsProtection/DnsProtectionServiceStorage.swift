@@ -19,7 +19,6 @@
 import Foundation
 
 protocol DnsProtectionServiceStorageProtocol {
-    var dnsProvidersManager: DnsProvidersManagerProtocol { get }
     var dnsUserRulesManager: DnsUserRulesManagersProviderProtocol { get }
     var dnsFiltersManager: DnsFiltersManagerProtocol { get }
     var filterFilesStorage: FilterFilesStorageProtocol { get }
@@ -27,7 +26,6 @@ protocol DnsProtectionServiceStorageProtocol {
 
 final class DnsProtectionServiceStorage: DnsProtectionServiceStorageProtocol {
 
-    let dnsProvidersManager: DnsProvidersManagerProtocol
     let dnsUserRulesManager: DnsUserRulesManagersProviderProtocol
     let dnsFiltersManager: DnsFiltersManagerProtocol
     let filterFilesStorage: FilterFilesStorageProtocol
@@ -39,11 +37,6 @@ final class DnsProtectionServiceStorage: DnsProtectionServiceStorageProtocol {
             let configuration = configuration
             let userDefaults = UserDefaultsStorage(storage: userDefaults)
             self.filterFilesStorage = try FilterFilesStorage(filterFilesDirectoryUrl: filterFilesDirectoryUrl)
-
-            self.dnsProvidersManager = try DnsProvidersManager(
-                configuration: configuration,
-                userDefaults: userDefaults
-            )
 
             self.dnsUserRulesManager = DnsUserRulesManagersProvider(fileStorage: filterFilesStorage)
             self.dnsFiltersManager = DnsFiltersManager(userDefaults: userDefaults,

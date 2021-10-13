@@ -138,7 +138,7 @@ class FiltersConverterTest: XCTestCase {
 
     func testWithInvertedAllowlistRules() {
         let filters = [adGuardDutchFilter, webAnnoyancesUltralist]
-        let invertedAllowlistRules = ["@@||*$document,domain=~ya.ru", "@@||*$document,domain=~vk.com", "@@||*$document,domain=~mail.ru"]
+        let invertedAllowlistRules = ["ya.ru", "vk.com", "mail.ru"]
 
         converterMock.convertArrayResult = ConversionResult(totalConvertedCount: 0, convertedCount: 0, errorsCount: 0, overLimit: true, converted: "", message: "")
         let results = converter.convert(filters: filters, blocklistRules: nil, allowlistRules: nil, invertedAllowlistRules: invertedAllowlistRules)
@@ -151,39 +151,27 @@ class FiltersConverterTest: XCTestCase {
             i += 1
             switch cbType {
             case .general:
-                XCTAssertEqual(rules.count, 5)
+                XCTAssertEqual(rules.count, 3)
                 XCTAssertEqual(rules[0], "-reclameplaatjes/")
                 XCTAssertEqual(rules[1], "/adbron.")
-                XCTAssertEqual(rules[2], "@@||*$document,domain=~ya.ru")
-                XCTAssertEqual(rules[3], "@@||*$document,domain=~vk.com")
-                XCTAssertEqual(rules[4], "@@||*$document,domain=~mail.ru")
+                XCTAssertEqual(rules[2], "@@||*$document,domain=~ya.ru|~vk.com|~mail.ru")
             case .other:
-                XCTAssertEqual(rules.count, 3)
-                XCTAssertEqual(rules[0], "@@||*$document,domain=~ya.ru")
-                XCTAssertEqual(rules[1], "@@||*$document,domain=~vk.com")
-                XCTAssertEqual(rules[2], "@@||*$document,domain=~mail.ru")
+                XCTAssertEqual(rules.count, 1)
+                XCTAssertEqual(rules[0], "@@||*$document,domain=~ya.ru|~vk.com|~mail.ru")
             case .privacy:
-                XCTAssertEqual(rules.count, 3)
-                XCTAssertEqual(rules[0], "@@||*$document,domain=~ya.ru")
-                XCTAssertEqual(rules[1], "@@||*$document,domain=~vk.com")
-                XCTAssertEqual(rules[2], "@@||*$document,domain=~mail.ru")
+                XCTAssertEqual(rules.count, 1)
+                XCTAssertEqual(rules[0], "@@||*$document,domain=~ya.ru|~vk.com|~mail.ru")
             case .security:
-                XCTAssertEqual(rules.count, 3)
-                XCTAssertEqual(rules[0], "@@||*$document,domain=~ya.ru")
-                XCTAssertEqual(rules[1], "@@||*$document,domain=~vk.com")
-                XCTAssertEqual(rules[2], "@@||*$document,domain=~mail.ru")
+                XCTAssertEqual(rules.count, 1)
+                XCTAssertEqual(rules[0], "@@||*$document,domain=~ya.ru|~vk.com|~mail.ru")
             case .socialWidgetsAndAnnoyances:
-                XCTAssertEqual(rules.count, 5)
+                XCTAssertEqual(rules.count, 3)
                 XCTAssertEqual(rules[0], "10best.com##.homepage-top-story-callout.columns.large-12")
                 XCTAssertEqual(rules[1], "1688.com###j-identity")
-                XCTAssertEqual(rules[2], "@@||*$document,domain=~ya.ru")
-                XCTAssertEqual(rules[3], "@@||*$document,domain=~vk.com")
-                XCTAssertEqual(rules[4], "@@||*$document,domain=~mail.ru")
+                XCTAssertEqual(rules[2], "@@||*$document,domain=~ya.ru|~vk.com|~mail.ru")
             case .custom:
-                XCTAssertEqual(rules.count, 3)
-                XCTAssertEqual(rules[0], "@@||*$document,domain=~ya.ru")
-                XCTAssertEqual(rules[1], "@@||*$document,domain=~vk.com")
-                XCTAssertEqual(rules[2], "@@||*$document,domain=~mail.ru")
+                XCTAssertEqual(rules.count, 1)
+                XCTAssertEqual(rules[0], "@@||*$document,domain=~ya.ru|~vk.com|~mail.ru")
             }
         }
     }

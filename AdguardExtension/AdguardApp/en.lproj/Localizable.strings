@@ -85,6 +85,9 @@
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "Purchase";
 
+/* (GetProTableController) missing purchase alert message */
+"upgrade_missing_purchase_message" = "The list of subscriptions is not available. Please check your Internet connection and try again.";
+
 /* (LoginController) lost password button title */
 "lost_password" = "Lost password?";
 
@@ -842,10 +845,13 @@
 "requests_number" = "%d requests";
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
-"native_dns_setup_title" = "Please enable %@ in the system DNS settings";
+"native_dns_setup_title" = "Enable %@ in your DNS settings";
 
 /* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
-"native_dns_setup_description" = "To enable native DNS, you need to open <b>System settings</b>, go to <b>General > VPN & Network > DNS</b> and select <b>%@</b> there.";
+"native_dns_setup_description" = "To use native DNS, select <b>%@</b> in <b>System settings > General > VPN & Network > DNS</b>.";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name; String for iOS 15 and newer */
+"native_dns_setup_description_ios15" = "To use native DNS, select <b>%@</b> in <b>System settings > General > VPN & Device Management > DNS</b>.";
 
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Tell us whether you are satisfied with ad blocking experience so far";

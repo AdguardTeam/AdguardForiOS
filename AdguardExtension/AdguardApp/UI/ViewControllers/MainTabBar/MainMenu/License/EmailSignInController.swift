@@ -282,7 +282,7 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
 
     private func setupLostPasswordButton(){
         let title = String.localizedString("lost_password")
-        let color = UIColor(hexString: "#888888")
+        let color = UIColor.AdGuardColor.lightGray3
         let nsRange = NSRange(location: 0, length: title.count)
         let font = lostPasswordButton.titleLabel?.font
 

@@ -39,21 +39,23 @@ final class DnsProviderDetailsController : UITableViewController {
     }
 
     // MARK: - public fields
-    var provider: DnsProviderProtocol!
+    var providerId: Int!
     weak var delegate: DnsProviderDetailsControllerDelegate?
 
     // MARK: - Services
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private let domainsParserService: DomainsParserServiceProtocol = ServiceLocator.shared.getService()!
+    private let dnsProvidersManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!
+    private let domainParserService: DomainParserServiceProtocol = ServiceLocator.shared.getService()!
 
     // MARK: - private properties
     private lazy var model: DnsProviderDetailsModel = {
-        return DnsProviderDetailsModel(provider: provider, resources: resources)
+        return DnsProviderDetailsModel(providerId: providerId, resources: resources, dnsProvidersManager: dnsProvidersManager)
     }()
     private let providerDetailSections: [ProviderSection] = ProviderSection.allCases
     private let providerDetailRows: [ProviderRow]  = ProviderRow.allCases
     private let selectDnsProtocolControllerIdentifier = "SelectDnsProtocolController"
+    private var dnsImplementationObserver: NotificationToken?
 
     // MARK: - view controller life cycle
 
@@ -66,6 +68,11 @@ final class DnsProviderDetailsController : UITableViewController {
 
         updateTheme()
         setupBackButton()
+
+        dnsImplementationObserver = NotificationCenter.default.observe(name: .dnsImplementationChanged, object: nil, queue: .main) { [weak self] _ in
+            self?.model.dnsImplementationChanged()
+            self?.tableView.reloadData()
+        }
     }
 
     // MARK: - UITableViewDataSource
@@ -158,7 +165,7 @@ final class DnsProviderDetailsController : UITableViewController {
     // MARK: - Actions
 
     @IBAction func selectTapped(_ sender: Any) {
-        delegate?.providerSelected(provider: provider)
+        delegate?.providerSelected(provider: model.provider)
         navigationController?.popViewController(animated: true)
     }
 
@@ -196,7 +203,7 @@ final class DnsProviderDetailsController : UITableViewController {
         let cell = DnsProviderActionCell.getCell(forTableView: tableView)
         cell.actionNameTitle = String.localizedString("website_title")
         let host = URL(string: model.providerHomepage)?.host ?? ""
-        let option = domainsParserService.domainsParser?.parse(host: host)?.domain ?? model.providerHomepage
+        let option = domainParserService.domainParser?.parse(host: host)?.domain ?? model.providerHomepage
         cell.selectedOptionTitle = option
         cell.updateTheme(themeService: themeService)
         return cell

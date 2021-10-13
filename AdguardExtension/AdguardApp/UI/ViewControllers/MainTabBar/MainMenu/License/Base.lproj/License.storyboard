@@ -581,6 +581,9 @@ ads &amp; trackers</string>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="customHighlightedBackgroundColor">
                                                             <color key="value" white="0.5" alpha="0.20424871580000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="customBackgroundColor">
+                                                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <variation key="heightClass=regular-widthClass=regular">
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>

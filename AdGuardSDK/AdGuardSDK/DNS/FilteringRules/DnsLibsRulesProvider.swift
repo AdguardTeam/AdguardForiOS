@@ -18,11 +18,19 @@
 
 import Foundation
 
-struct DnsProxyFilter: Equatable {
-    let filterId: Int
-    let filterPath: String
+/// DNS filter content. It can be .file with a path to file or .text with filter content as a String
+enum DnsProxyFilterData: Equatable {
+    case file(_ path: String)
+    case text(_ text: String)
 }
 
+/// Information about DNS filter.
+struct DnsProxyFilter: Equatable {
+    let filterId: Int
+    let filterData: DnsProxyFilterData
+}
+
+/// This class is responsible for providing DNS filters to the DNS proxy.
 protocol DnsLibsRulesProviderProtocol {
     var enabledCustomDnsFilters: [DnsProxyFilter] { get }
     var blocklistFilter: DnsProxyFilter { get }
@@ -32,26 +40,63 @@ protocol DnsLibsRulesProviderProtocol {
 final class DnsLibsRulesProvider: DnsLibsRulesProviderProtocol {
 
     var enabledCustomDnsFilters: [DnsProxyFilter] {
-        dnsFiltersManager.getDnsLibsFilters().map { DnsProxyFilter(filterId: $0.key, filterPath: $0.value) }
+        dnsFiltersManager.getDnsLibsFilters().map { DnsProxyFilter(filterId: $0.key, filterData: .file($0.value)) }
     }
 
     var blocklistFilter: DnsProxyFilter {
         let filterId = DnsUserRuleType.blocklist.enabledRulesFilterId
         let path = filterFilesStorage.getUrlForFilter(withId: filterId).path
-        return DnsProxyFilter(filterId: filterId, filterPath: path)
+        return DnsProxyFilter(filterId: filterId, filterData: .file(path))
     }
 
     var allowlistFilter: DnsProxyFilter {
         let filterId = DnsUserRuleType.allowlist.enabledRulesFilterId
-        let path = filterFilesStorage.getUrlForFilter(withId: filterId).path
-        return DnsProxyFilter(filterId: filterId, filterPath: path)
+        let text = userRulesProvider.allowlistRulesManager.allowlistRulesString()
+        return DnsProxyFilter(filterId: filterId, filterData: .text(text))
     }
 
     private let dnsFiltersManager: DnsFiltersManagerProtocol
     private let filterFilesStorage: CustomFilterFilesStorageProtocol
+    private let userRulesProvider: DnsUserRulesManagersProviderProtocol
 
-    init(dnsFiltersManager: DnsFiltersManagerProtocol, filterFilesStorage: CustomFilterFilesStorageProtocol) {
+    init(dnsFiltersManager: DnsFiltersManagerProtocol, filterFilesStorage: CustomFilterFilesStorageProtocol, userRulesProvider: DnsUserRulesManagersProviderProtocol) {
         self.dnsFiltersManager = dnsFiltersManager
         self.filterFilesStorage = filterFilesStorage
+        self.userRulesProvider = userRulesProvider
+    }
+
+}
+
+/// This extension is responsible for generating an allowlist.
+/// UserRulesManager stores DNS allowlist as a list of **domain names**.
+/// DnsProxy expects a list of allowlist **rules**.
+/// This extension converts the list of domains to the list of rules.
+fileprivate extension UserRulesManagerProtocol {
+    /// returns all enabled allowlist rules as a String
+    func allowlistRulesString()->String {
+
+        let converter = DnsAllowlistRulesConverter()
+        let rules = self.allRules
+
+        let text: String = rules.reduce("") { partialResult, rule in
+            if rule.isEnabled {
+                return partialResult + converter.convertDomainToRule(rule.ruleText) + "\n"
+            }
+            return partialResult
+        }
+        return text
+    }
+}
+
+/// DnsAllowlistRulesConverter is responsible for converting domain name to allowlist rule
+fileprivate class DnsAllowlistRulesConverter {
+    func convertDomainToRule(_ domain: String)->String {
+        // check that we have domain name without allowlist rule prefix
+        if domain.hasPrefix("@@") {
+            return domain
+        }
+        else {
+            return "@@||\(domain)^|$important"
+        }
     }
 }

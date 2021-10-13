@@ -96,6 +96,12 @@ public final class UserRulesManager: UserRulesManagerProtocol {
         storage.rules.removeAll()
     }
 
+    public func checkEnabledRuleExists(_ ruleText: String) -> Bool {
+        return storage.rules.contains { rule in
+            rule.ruleText == ruleText && rule.isEnabled
+        }
+    }
+
     public func reset() throws {
         removeAllRules()
     }

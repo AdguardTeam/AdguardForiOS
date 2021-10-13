@@ -50,12 +50,24 @@ public enum ContentBlockerType: Int, CaseIterable, Codable {
  It is more convenient to use URLs because Content Blockers are waiting JSON URL with converted rules.
  */
 public struct ConverterResult: Codable, Equatable {
-    public let result: FiltersConverterResult // Converter result obtained from ConverterLib
     public let jsonUrl: URL // URL where JSON with converted rules is stored
+    public let type: ContentBlockerType // Content blocker type the result is related with
+    public let totalRules: Int // Total valis rules number, because some rules that we pass can be invalid
+    public let totalConverted: Int // The result number of rules with Content blockers limit of 'contentBlockerRulesLimit' rules
+    public let overlimit: Bool // Is true if totalRules is greater than 'contentBlockerRulesLimit' rules
+    public let errorsCount: Int // Number of errors handled
+    public let advancedBlockingConvertedCount: Int // Number of entries in advanced blocking part
+    public let message: String // Result message
 
     init(result: FiltersConverterResult, jsonUrl: URL) {
-        self.result = result
         self.jsonUrl = jsonUrl
+        self.type = result.type
+        self.totalRules = result.totalRules
+        self.totalConverted = result.totalConverted
+        self.overlimit = result.overlimit
+        self.errorsCount = result.errorsCount
+        self.advancedBlockingConvertedCount = result.advancedBlockingConvertedCount
+        self.message = result.message
     }
 }
 
@@ -129,7 +141,7 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
     func getConverterResult(for cbType: ContentBlockerType) -> ConverterResult? {
         Logger.logInfo("(ContentBlockersJSONStorage) - getConverterResult; Result request for \(cbType)")
         let allResults = userDefaultsStorage.allCbInfo
-        return allResults.first(where: { $0.result.type == cbType })
+        return allResults.first(where: { $0.type == cbType })
     }
 
     func reset() throws {
@@ -204,7 +216,7 @@ fileprivate extension UserDefaultsStorageProtocol {
             if let cbInfoData = try? encoder.encode(newValue) {
                 storage.set(cbInfoData, forKey: allCbInfoKey)
             } else {
-                storage.set(Date(), forKey: allCbInfoKey)
+                storage.set(Data(), forKey: allCbInfoKey)
             }
         }
     }

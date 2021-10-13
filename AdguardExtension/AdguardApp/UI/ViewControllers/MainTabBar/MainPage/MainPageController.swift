@@ -408,12 +408,6 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         showContentBlockersHelper()
     }
 
-    // MARK: - ChartPointsChangedDelegate method
-
-    func numberOfRequestsChanged(requestsCount: Int, encryptedCount: Int, averageElapsed: Double) {
-        updateTextForButtons(requestsCount: requestsCount, encryptedCount: encryptedCount, averageElapsed: averageElapsed)
-    }
-
     // MARK: - DateTypeChangedProtocol method
 
     func statisticsPeriodChanged(statisticsPeriod: StatisticsPeriod) {
@@ -487,14 +481,8 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         DispatchQueue.main.async {[weak self] in
             guard let self = self else { return }
 
-            let requestsNumberDefaults = self.resources.tempRequestsCount
-            let requestsNumber = requestsCount + requestsNumberDefaults
-
-            let encryptedNumberDefaults = self.resources.tempEncryptedRequestsCount
-            let encryptedNumber = encryptedCount + encryptedNumberDefaults
-
-            self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsNumber))
-            self.encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedNumber))
+            self.requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
+            self.encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedCount))
             self.elapsedNumberLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: averageElapsed))
         }
     }
@@ -943,7 +931,6 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         chartModel = ChartViewModel(statisticsPeriod: resources.chartDateType, activityStatistics: activityStatistics, chartStatistics: chartStatistics)
 
         chartModel.delegate = self
-        chartModel.startChartStatisticsAutoUpdate(seconds: 5.0)
     }
 }
 

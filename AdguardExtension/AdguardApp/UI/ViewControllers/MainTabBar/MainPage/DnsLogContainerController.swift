@@ -31,7 +31,12 @@ class DnsLogContainerController: UIViewController {
     private let complexProtection: ComplexProtectionServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
 
-    private let model = DnsRequestLogViewModel(dnsTrackers: ServiceLocator.shared.getService()!, dnsStatistics: ServiceLocator.shared.getService()!)
+    private let model = DnsRequestLogViewModel(dnsTrackers: ServiceLocator.shared.getService()!,
+                                               dnsStatistics: ServiceLocator.shared.getService()!,
+                                               dnsProtection: ServiceLocator.shared.getService()!,
+                                               domainConverter: DomainConverter(),
+                                               domainParser: ServiceLocator.shared.getService()!
+    )
 
     private var resetSettingsToken: NotificationToken?
     private var proObservation: NSKeyValueObservation?

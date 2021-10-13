@@ -18,7 +18,7 @@
 
 import UIKit
 
-class HowToSetupController: BottomAlertController {
+final class HowToSetupController: BottomAlertController {
 
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var descriptionLabel: ThemableLabel!
@@ -50,7 +50,13 @@ class HowToSetupController: BottomAlertController {
         let title = String(format: titleFormat, Bundle.main.applicationName)
         titleLabel.text = title
 
-        let descriptionFormat = String.localizedString("native_dns_setup_description")
+        let descriptionFormat: String
+
+        if #available(iOS 15.0, *) {
+            descriptionFormat = String.localizedString("native_dns_setup_description_ios15")
+        } else {
+            descriptionFormat = String.localizedString("native_dns_setup_description")
+        }
         let description = String(format: descriptionFormat, Bundle.main.applicationName)
         descriptionLabel.attributedText = NSMutableAttributedString.fromHtml(description, fontSize: descriptionLabel.font!.pointSize, color: theme.grayTextColor, textAlignment: .center)
     }

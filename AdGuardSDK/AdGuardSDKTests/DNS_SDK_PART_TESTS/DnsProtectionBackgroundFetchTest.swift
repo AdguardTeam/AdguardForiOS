@@ -5,7 +5,6 @@ class DnsProtectionBackgroundFetchTest: XCTestCase {
     var dnsProtection: DnsProtectionProtocol!
     var dnsConfiguration: DnsConfigurationMock!
     var dnsDefaultConfiguration: DnsConfigurationMock!
-    var dnsProvidersManager: DnsProvidersManagerMock!
     var dnsUserRulesManagersProvider: DnsUserRulesManagersProviderMock!
     var dnsFiltersManager: DnsFiltersManagerMock!
     var filterFilesStorage: FilterFilesStorageMock!
@@ -13,14 +12,12 @@ class DnsProtectionBackgroundFetchTest: XCTestCase {
     override func setUp() {
         self.dnsConfiguration = DnsConfigurationMock()
         self.dnsDefaultConfiguration = DnsConfigurationMock()
-        self.dnsProvidersManager = DnsProvidersManagerMock()
         self.dnsUserRulesManagersProvider = DnsUserRulesManagersProviderMock()
         self.dnsFiltersManager = DnsFiltersManagerMock()
         self.filterFilesStorage = FilterFilesStorageMock()
 
         dnsProtection =  DnsProtection(configuration: dnsConfiguration,
                                        defaultConfiguration: dnsDefaultConfiguration,
-                                       dnsProvidersManager: dnsProvidersManager,
                                        dnsUserRulesManagerProvider: dnsUserRulesManagersProvider,
                                        dnsFiltersManager: dnsFiltersManager,
                                        filterFilesStorage: filterFilesStorage)

@@ -111,7 +111,7 @@ struct ActionExtensionUserRulesHelper {
     /// User rules are placed in every CB, so if one CB is overlimited than we suppose that it is overlimited in general
     private func isOverlimit() -> Bool {
         let converterResults = safariProtection.allConverterResults
-        let isOverLimit = converterResults.reduce(false, { $0 || $1.result.overlimit })
+        let isOverLimit = converterResults.reduce(false, { $0 || $1.overlimit })
         return isOverLimit
     }
 }

@@ -20,23 +20,7 @@ import Foundation
 
 extension AESharedResourcesProtocol {
 
-    dynamic var tempRequestsCount: Int {
-        get {
-            return sharedDefaults().integer(forKey: AEDefaultsRequests)
-        }
-        set {
-            sharedDefaults().set(newValue, forKey: AEDefaultsRequests)
-        }
-    }
-
-    dynamic var tempEncryptedRequestsCount: Int {
-        get {
-            return sharedDefaults().integer(forKey: AEDefaultsEncryptedRequests)
-        }
-        set {
-            sharedDefaults().set(newValue, forKey: AEDefaultsEncryptedRequests)
-        }
-    }
+    // TODO: - Remove obsolete data from defaults when migrating; Keys to delete: AEDefaultsRequests, AEDefaultsEncryptedRequests
 
     dynamic var tunnelErrorCode: Int? {
         get {
