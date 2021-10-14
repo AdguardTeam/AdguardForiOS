@@ -20,30 +20,12 @@
         }
       },
       {
-        "package": "Punycode",
-        "repositoryURL": "https://github.com/gumob/PunycodeSwift.git",
-        "state": {
-          "branch": null,
-          "revision": "4356ec54e073741449640d3d50a1fd24fd1e1b8b",
-          "version": "2.1.0"
-        }
-      },
-      {
         "package": "Reachability",
         "repositoryURL": "https://github.com/ashleymills/Reachability.swift",
         "state": {
           "branch": null,
           "revision": "c01bbdf2d633cf049ae1ed1a68a2020a8bda32e2",
           "version": "5.1.0"
-        }
-      },
-      {
-        "package": "ContentBlockerConverter",
-        "repositoryURL": "https://github.com/AdguardTeam/SafariConverterLib",
-        "state": {
-          "branch": null,
-          "revision": "04395845bc9d4d95772952e495223fc566a06008",
-          "version": "2.0.15"
         }
       },
       {
@@ -69,17 +51,8 @@
         "repositoryURL": "https://github.com/stephencelis/SQLite.swift.git",
         "state": {
           "branch": null,
-          "revision": "9af51e2edf491c0ea632e369a6566e09b65aa333",
-          "version": "0.13.0"
-        }
-      },
-      {
-        "package": "swift-argument-parser",
-        "repositoryURL": "https://github.com/apple/swift-argument-parser",
-        "state": {
-          "branch": null,
-          "revision": "6b2aa2748a7881eebb9f84fb10c01293e15b52ca",
-          "version": "0.5.0"
+          "revision": "0a9893ec030501a3956bee572d6b4fdd3ae158a1",
+          "version": "0.12.2"
         }
       },
       {

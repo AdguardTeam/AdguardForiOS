@@ -59,6 +59,7 @@ final class DnsProxy: DnsProxyProtocol {
     func stop() {
         resolveQueue.sync(flags: .barrier) { [weak self] in
             Logger.logInfo("(DnsProxy) - stop")
+            self?.stop()
             self?.proxy = nil
             self?.proxySettingsProvider.reset()
             Logger.logInfo("(DnsProxy) - stopped")

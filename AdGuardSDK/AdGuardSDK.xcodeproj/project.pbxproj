@@ -407,18 +407,17 @@
 		B2673DD827173F0700E04747 /* SafariProtection+Migrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2673DD727173F0700E04747 /* SafariProtection+Migrations.swift */; };
 		B2673DDA27173F0700E04747 /* SafariProtection+Migrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2673DD727173F0700E04747 /* SafariProtection+Migrations.swift */; };
 		B2673E8627179C8F00E04747 /* SafariAdGuardSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = B2673E8527179C8F00E04747 /* SafariAdGuardSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B26B92222718273000F1D482 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = B26B92212718273000F1D482 /* Reachability */; };
 		B29D5367270CE2CB0045CB16 /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC8A37F26E7697C005244CF /* SharedAdGuardSDK.framework */; };
 		B29D53A0270D24FF0045CB16 /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC8A37F26E7697C005244CF /* SharedAdGuardSDK.framework */; };
 		B29D53A8270D27960045CB16 /* SharedAdGuardSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = B29D53A7270D27270045CB16 /* SharedAdGuardSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B29D53B6270D4A860045CB16 /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC8A37F26E7697C005244CF /* SharedAdGuardSDK.framework */; };
 		B2AECEB4270C913E00C6976B /* SystemLibs.h in Headers */ = {isa = PBXBuildFile; fileRef = B22FCDDE270C639600B1C935 /* SystemLibs.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2C8E9B92717009800ACDED8 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = B2C8E9B82717009800ACDED8 /* Zip */; };
-		B2C8E9BD2717009F00ACDED8 /* ContentBlockerConverter in Frameworks */ = {isa = PBXBuildFile; productRef = B2C8E9BC2717009F00ACDED8 /* ContentBlockerConverter */; };
-		B2C8E9BF271700A500ACDED8 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = B2C8E9BE271700A500ACDED8 /* Reachability */; };
-		B2C8E9C0271700F800ACDED8 /* AdGuardSdkDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C8E9AF2717008C00ACDED8 /* AdGuardSdkDependencies.framework */; };
+		B2C8E9C0271700F800ACDED8 /* AdGuardSdkDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C8E9AF2717008C00ACDED8 /* AdGuardSdkDependencies.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		B2C8E9C627170DC600ACDED8 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = B2C8E9C527170DC600ACDED8 /* SQLite */; };
 		B2C8E9C827170E9900ACDED8 /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = B2C8E9C727170E9900ACDED8 /* AGDnsProxy */; };
-		B2C8E9C927170EB400ACDED8 /* AdGuardSdkDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C8E9AF2717008C00ACDED8 /* AdGuardSdkDependencies.framework */; };
+		B2C8E9C927170EB400ACDED8 /* AdGuardSdkDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C8E9AF2717008C00ACDED8 /* AdGuardSdkDependencies.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		B2C8E9CE27170ED500ACDED8 /* AdGuardSdkDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C8E9AF2717008C00ACDED8 /* AdGuardSdkDependencies.framework */; };
 		D049EE9B26B2F31A00B8088B /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049EB9426B17C0A00B8088B /* Dictionary+Utils.swift */; };
 		D049EE9E26B2F33200B8088B /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049EB9326B17C0A00B8088B /* CharacterSet+Utils.swift */; };
@@ -719,9 +718,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2C8E9C627170DC600ACDED8 /* SQLite in Frameworks */,
+				B26B92222718273000F1D482 /* Reachability in Frameworks */,
 				B2C8E9C827170E9900ACDED8 /* AGDnsProxy in Frameworks */,
-				B2C8E9BD2717009F00ACDED8 /* ContentBlockerConverter in Frameworks */,
-				B2C8E9BF271700A500ACDED8 /* Reachability in Frameworks */,
 				B2C8E9B92717009800ACDED8 /* Zip in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1493,7 +1491,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B2C8E9AA2717008C00ACDED8 /* Headers */ = {
+		B2673E892717AB1D00E04747 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1599,10 +1597,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B2C8E9B52717008C00ACDED8 /* Build configuration list for PBXNativeTarget "AdGuardSdkDependencies" */;
 			buildPhases = (
-				B2C8E9AA2717008C00ACDED8 /* Headers */,
-				B2C8E9AB2717008C00ACDED8 /* Sources */,
+				B2673E892717AB1D00E04747 /* Headers */,
+				B2673E8A2717AB2200E04747 /* Sources */,
 				B2C8E9AC2717008C00ACDED8 /* Frameworks */,
-				B2C8E9AD2717008C00ACDED8 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -1611,10 +1608,9 @@
 			name = AdGuardSdkDependencies;
 			packageProductDependencies = (
 				B2C8E9B82717009800ACDED8 /* Zip */,
-				B2C8E9BC2717009F00ACDED8 /* ContentBlockerConverter */,
-				B2C8E9BE271700A500ACDED8 /* Reachability */,
 				B2C8E9C527170DC600ACDED8 /* SQLite */,
 				B2C8E9C727170E9900ACDED8 /* AGDnsProxy */,
+				B26B92212718273000F1D482 /* Reachability */,
 			);
 			productName = AdGuardSdkDependencies;
 			productReference = B2C8E9AF2717008C00ACDED8 /* AdGuardSdkDependencies.framework */;
@@ -1685,7 +1681,6 @@
 				D0B01EF226B1753A00F67AD2 /* XCRemoteSwiftPackageReference "SQLite.swift" */,
 				D049E9CE26B17B2100B8088B /* XCRemoteSwiftPackageReference "Zip" */,
 				7E966B8926C27E68006B57BD /* XCRemoteSwiftPackageReference "DnsLibs" */,
-				7E667A6426E26B890013B1D5 /* XCRemoteSwiftPackageReference "SafariConverterLib" */,
 				D0A3CF9026E7AADE006E90AD /* XCRemoteSwiftPackageReference "Reachability" */,
 				7E16F29626FA0E5E00383410 /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
@@ -1757,13 +1752,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		7EC8A37D26E7697C005244CF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B2C8E9AD2717008C00ACDED8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2114,7 +2102,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B2C8E9AB2717008C00ACDED8 /* Sources */ = {
+		B2673E8A2717AB2200E04747 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2777,14 +2765,6 @@
 				minimumVersion = 1.0.1;
 			};
 		};
-		7E667A6426E26B890013B1D5 /* XCRemoteSwiftPackageReference "SafariConverterLib" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AdguardTeam/SafariConverterLib";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.12;
-			};
-		};
 		7E966B8926C27E68006B57BD /* XCRemoteSwiftPackageReference "DnsLibs" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AdguardTeam/DnsLibs";
@@ -2813,8 +2793,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.12.2;
+				kind = exactVersion;
+				version = 0.12.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -2850,20 +2830,15 @@
 			package = D0A3CF9026E7AADE006E90AD /* XCRemoteSwiftPackageReference "Reachability" */;
 			productName = Reachability;
 		};
+		B26B92212718273000F1D482 /* Reachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0A3CF9026E7AADE006E90AD /* XCRemoteSwiftPackageReference "Reachability" */;
+			productName = Reachability;
+		};
 		B2C8E9B82717009800ACDED8 /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D049E9CE26B17B2100B8088B /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
-		};
-		B2C8E9BC2717009F00ACDED8 /* ContentBlockerConverter */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7E667A6426E26B890013B1D5 /* XCRemoteSwiftPackageReference "SafariConverterLib" */;
-			productName = ContentBlockerConverter;
-		};
-		B2C8E9BE271700A500ACDED8 /* Reachability */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D0A3CF9026E7AADE006E90AD /* XCRemoteSwiftPackageReference "Reachability" */;
-			productName = Reachability;
 		};
 		B2C8E9C527170DC600ACDED8 /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;

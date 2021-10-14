@@ -1077,6 +1077,8 @@
 		B2673E8127176D8A00E04747 /* PurchaseServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C19E7B2716DE5800331109 /* PurchaseServiceProtocol.swift */; };
 		B2673E8227176D9100E04747 /* PurchaseAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C8E9772716E4AD00ACDED8 /* PurchaseAssistant.swift */; };
 		B2673E8327176DD700E04747 /* PurchaseStatusProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C19E7E2716DFDE00331109 /* PurchaseStatusProtocol.swift */; };
+		B26B923027182EEC00F1D482 /* AdGuardSdkDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B26B921E2718266200F1D482 /* AdGuardSdkDependencies.framework */; };
+		B26B923127182EEC00F1D482 /* AdGuardSdkDependencies.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B26B921E2718266200F1D482 /* AdGuardSdkDependencies.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B29D5358270CD9DC0045CB16 /* DnsAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29DD474270CB04B0072B42F /* DnsAdGuardSDK.framework */; };
 		B29D536F270CE4CF0045CB16 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0971B8632DD00319AA3 /* libsqlite3.tbd */; };
 		B29D5370270CE6020045CB16 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0991B8632F600319AA3 /* libz.tbd */; };
@@ -2281,6 +2283,7 @@
 			files = (
 				B29D538F270D1B6E0045CB16 /* SafariAdGuardSDK.framework in Embed Frameworks */,
 				B29D538D270D1B240045CB16 /* DnsAdGuardSDK.framework in Embed Frameworks */,
+				B26B923127182EEC00F1D482 /* AdGuardSdkDependencies.framework in Embed Frameworks */,
 				B29D53AB270D40EB0045CB16 /* SharedAdGuardSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -3250,6 +3253,7 @@
 		B2673DE1271740C600E04747 /* SettingsResetService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsResetService.swift; sourceTree = "<group>"; };
 		B2673DE42717413100E04747 /* DomainConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomainConverter.swift; sourceTree = "<group>"; };
 		B2673DE72717418600E04747 /* DnsLogRecordHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DnsLogRecordHelper.swift; sourceTree = "<group>"; };
+		B26B921E2718266200F1D482 /* AdGuardSdkDependencies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AdGuardSdkDependencies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B29D53A9270D40EA0045CB16 /* SharedAdGuardSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SharedAdGuardSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B29DD474270CB04B0072B42F /* DnsAdGuardSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DnsAdGuardSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2C19E7B2716DE5800331109 /* PurchaseServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseServiceProtocol.swift; sourceTree = "<group>"; };
@@ -3700,6 +3704,7 @@
 				B29D5394270D1D9E0045CB16 /* AGDnsProxy in Frameworks */,
 				B2C19E5A2716B25D00331109 /* NetworkExtension.framework in Frameworks */,
 				7E4D205E22D71B3E003B0E75 /* libiconv.tbd in Frameworks */,
+				B26B923027182EEC00F1D482 /* AdGuardSdkDependencies.framework in Frameworks */,
 				D09E271B2541D00B002D6BC0 /* Setapp in Frameworks */,
 				65F3986E1B7C894000ABCD39 /* SafariServices.framework in Frameworks */,
 				B29D53AA270D40EB0045CB16 /* SharedAdGuardSDK.framework in Frameworks */,
@@ -5178,6 +5183,7 @@
 		65D8294D1EDDA905008F7F30 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B26B921E2718266200F1D482 /* AdGuardSdkDependencies.framework */,
 				B29D53A9270D40EA0045CB16 /* SharedAdGuardSDK.framework */,
 				B29DD474270CB04B0072B42F /* DnsAdGuardSDK.framework */,
 				7E6454E526EBD58700B1E66C /* SafariAdGuardSDK.framework */,
@@ -12911,8 +12917,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.12.2;
+				kind = exactVersion;
+				version = 0.12.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
