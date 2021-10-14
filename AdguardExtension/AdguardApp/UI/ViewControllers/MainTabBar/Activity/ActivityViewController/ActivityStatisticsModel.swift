@@ -21,15 +21,8 @@ import DnsAdGuardSDK
 struct CompanyRequestsRecord {
     let domains: Set<String>
     let company: String
-    var requests: Int
-    var encrypted: Int
-
-    init(domains: Set<String>, company: String, requests: Int, encrypted: Int) {
-        self.domains = domains
-        self.company = company
-        self.requests = requests
-        self.encrypted = encrypted
-    }
+    let requests: Int
+    let encrypted: Int
 }
 
 struct CompaniesInfo {

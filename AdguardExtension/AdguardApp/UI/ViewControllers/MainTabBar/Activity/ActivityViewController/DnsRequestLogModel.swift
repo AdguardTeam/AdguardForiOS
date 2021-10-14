@@ -223,7 +223,7 @@ final class DnsRequestLogViewModel {
     /**
      search query string
      */
-    var searchString: String {
+    var searchString: String = "" {
         didSet {
             workingQueue.sync { [weak self] in
                 guard let searchLowercased = self?.searchString.lowercased() else { return }
@@ -241,7 +241,6 @@ final class DnsRequestLogViewModel {
     private let dnsTrackers: DnsTrackersProviderProtocol
     private let dnsStatistics: DnsLogStatisticsProtocol
     private let dnsProtection: DnsProtectionProtocol
-    private let domainConverter: DomainConverterProtocol
     private let domainParser: DomainParser?
     private let logRecordHelper: DnsLogRecordHelper
 
@@ -255,16 +254,13 @@ final class DnsRequestLogViewModel {
         dnsTrackers: DnsTrackersProviderProtocol,
         dnsStatistics: DnsLogStatisticsProtocol,
         dnsProtection: DnsProtectionProtocol,
-        domainConverter: DomainConverterProtocol,
         domainParser: DomainParserServiceProtocol,
         logRecordHelper: DnsLogRecordHelper
     ) {
         self.dnsTrackers = dnsTrackers
         self.dnsStatistics = dnsStatistics
         self.dnsProtection = dnsProtection
-        self.domainConverter = domainConverter
         self.domainParser = domainParser.domainParser
-        self.searchString = ""
         self.logRecordHelper = logRecordHelper
     }
 
@@ -289,8 +285,7 @@ final class DnsRequestLogViewModel {
     }
 
     func addDomainToUserRules(_ domain: String) throws {
-        let rule = domainConverter.userFilterBlockRuleFromDomain(domain)
-        try dnsProtection.add(rule: UserRule(ruleText: rule), override: true, for: .blocklist)
+        try logRecordHelper.addDomainToUserRules(domain)
     }
 
     func removeDomainFromUserFilter(_ domain: String) throws {

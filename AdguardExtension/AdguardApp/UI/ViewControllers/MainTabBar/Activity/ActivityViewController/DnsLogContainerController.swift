@@ -35,7 +35,6 @@ final class DnsLogContainerController: UIViewController {
         dnsTrackers: ServiceLocator.shared.getService()!,
         dnsStatistics: ServiceLocator.shared.getService()!,
         dnsProtection: ServiceLocator.shared.getService()!,
-        domainConverter: DomainConverter(),
         domainParser: ServiceLocator.shared.getService()!,
         logRecordHelper: ServiceLocator.shared.getService()!
     )
