@@ -5,7 +5,7 @@ final class SafariConfigurationMock: SafariConfigurationProtocol {
 
     var advancedBlockingIsEnabled: Bool = false
 
-    var currentLanguage: String = "en"
+    var currentLocale: Locale = .current
 
     var proStatus: Bool = false
 

@@ -10,7 +10,7 @@ final class DnsConfigurationMock: DnsConfigurationProtocol {
 
     var dnsImplementation: DnsImplementation = .adGuard
 
-    var currentLanguage: String = ""
+    var currentLocale: Locale = .current
 
     var proStatus: Bool = false
 

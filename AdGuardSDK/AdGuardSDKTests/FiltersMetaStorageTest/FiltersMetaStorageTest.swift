@@ -1,4 +1,5 @@
 import XCTest
+import SQLite
 
 class FiltersMetaStorageTest: XCTestCase {
 
@@ -32,7 +33,7 @@ class FiltersMetaStorageTest: XCTestCase {
     func testGetAllFiltersWithSuccess() {
         // Test with en language
         let adsGroupId = SafariGroup.GroupType.ads.id
-        var filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forLanguage: "en")
+        var filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["en"])
         XCTAssertEqual(filters.count, 4)
         filters.forEach {
             XCTAssertNotNil($0.filterId)
@@ -56,7 +57,7 @@ class FiltersMetaStorageTest: XCTestCase {
 
         // Test with fr language
         let privacyGroupId = SafariGroup.GroupType.privacy.id
-        filters = try! metaStorage.getLocalizedFiltersForGroup(withId: privacyGroupId, forLanguage: "fr")
+        filters = try! metaStorage.getLocalizedFiltersForGroup(withId: privacyGroupId, forSuitableLanguages: ["fr"])
         XCTAssertEqual(filters.count, 5)
         filters.forEach {
             XCTAssertNotNil($0.filterId)
@@ -81,7 +82,7 @@ class FiltersMetaStorageTest: XCTestCase {
 
     func testGetAllFiltersWithNonExistingLang() {
         let adsGroupId = SafariGroup.GroupType.ads.id
-        let filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forLanguage: "123")
+        let filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["123"])
         XCTAssertEqual(filters.count, 4)
         filters.forEach {
             XCTAssertNotNil($0.filterId)
@@ -106,17 +107,17 @@ class FiltersMetaStorageTest: XCTestCase {
 
     func testSetGroup() {
         let adsGroupId = SafariGroup.GroupType.ads.id
-        let filter = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forLanguage: "en").first!
+        let filter = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["en"]).first!
 
         try! metaStorage.setFilter(withId: filter.filterId, enabled: !filter.isEnabled)
 
-        let updatedFilter = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forLanguage: "en").first(where: { $0.filterId == filter.filterId})!
+        let updatedFilter = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["en"]).first(where: { $0.filterId == filter.filterId})!
         XCTAssertNotEqual(filter.isEnabled, updatedFilter.isEnabled)
     }
 
     func testUpdateFilterWithNewVersion() {
         let adsGroupId = SafariGroup.GroupType.ads.id
-        var filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forLanguage: "en")
+        var filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["en"])
         XCTAssertEqual(filters.count, 4)
 
         let filterToModify = filters.first!
@@ -139,7 +140,7 @@ class FiltersMetaStorageTest: XCTestCase {
         let isUpdated = try! metaStorage.update(filter: modifiedFilter)
         XCTAssert(isUpdated)
 
-        filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forLanguage: "en")
+        filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["en"])
         XCTAssertEqual(filters.count, 4)
 
         let modifiedFilterAfterUpdate = filters.first(where: { filterToModify.filterId == $0.filterId })!
@@ -150,7 +151,7 @@ class FiltersMetaStorageTest: XCTestCase {
     func testUpdateFilterWithOldVersion() {
         func testUpdateFilterWithNewVersion() {
             let adsGroupId = SafariGroup.GroupType.ads.id
-            var filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forLanguage: "en")
+            var filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["en"])
             XCTAssertEqual(filters.count, 4)
 
             let filterToModify = filters.first!
@@ -173,7 +174,7 @@ class FiltersMetaStorageTest: XCTestCase {
             let isUpdated = try! metaStorage.update(filter: modifiedFilter)
             XCTAssertFalse(isUpdated)
 
-            filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forLanguage: "en")
+            filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["en"])
             XCTAssertEqual(filters.count, 4)
 
             let modifiedFilterAfterUpdate = filters.first(where: { filterToModify.filterId == $0.filterId })!
@@ -184,7 +185,7 @@ class FiltersMetaStorageTest: XCTestCase {
 
     func testUpdateFilters() {
         let adsGroupId = SafariGroup.GroupType.ads.id
-        var filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forLanguage: "en")
+        var filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["en"])
         XCTAssertEqual(filters.count, 4)
 
         let filterToModify = filters[1]
@@ -227,7 +228,7 @@ class FiltersMetaStorageTest: XCTestCase {
         let updatedFilterIds = try! metaStorage.update(filters: [modifiedFilter, filterThatShouldNotChange])
         XCTAssertEqual(updatedFilterIds, [filterToModify.filterId])
 
-        filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forLanguage: "en")
+        filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["en"])
         XCTAssertEqual(filters.count, 4)
 
         let changedFilter = filters.first(where: { $0.filterId == filterToModify.filterId })!
@@ -245,19 +246,19 @@ class FiltersMetaStorageTest: XCTestCase {
 
     func testUpdateFiltersWithEmptyList() {
         let adsGroupId = SafariGroup.GroupType.ads.id
-        var filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forLanguage: "en")
+        var filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["en"])
         XCTAssertEqual(filters.count, 4)
 
         let updateFilterIds = try! metaStorage.update(filters: [])
         XCTAssert(updateFilterIds.isEmpty)
 
-        filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forLanguage: "en")
+        filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["en"])
         XCTAssertEqual(filters.count, 4)
     }
 
     func testDeleteFilters() {
         let groupId = SafariGroup.GroupType.languageSpecific.id
-        var filters = try! metaStorage.getLocalizedFiltersForGroup(withId: groupId, forLanguage: "en").filter { $0.filterId == 1 || $0.filterId == 6 || $0.filterId == 7}
+        var filters = try! metaStorage.getLocalizedFiltersForGroup(withId: groupId, forSuitableLanguages: ["en"]).filter { $0.filterId == 1 || $0.filterId == 6 || $0.filterId == 7}
         XCTAssertEqual(filters.count, 3)
 
         filters.forEach {
@@ -269,7 +270,7 @@ class FiltersMetaStorageTest: XCTestCase {
         let filterIds = filters.map { $0.filterId }
         try! metaStorage.deleteFilters(withIds: filterIds)
 
-        filters = try! metaStorage.getLocalizedFiltersForGroup(withId: groupId, forLanguage: "en").filter { $0.filterId == 1 || $0.filterId == 6 || $0.filterId == 7}
+        filters = try! metaStorage.getLocalizedFiltersForGroup(withId: groupId, forSuitableLanguages: ["en"]).filter { $0.filterId == 1 || $0.filterId == 6 || $0.filterId == 7}
         XCTAssertEqual(filters.count, 0)
 
         filterIds.forEach {
@@ -281,7 +282,7 @@ class FiltersMetaStorageTest: XCTestCase {
 
     func testRenameFilter() {
         let groupId = SafariGroup.GroupType.custom.id
-        var filters = try! metaStorage.getLocalizedFiltersForGroup(withId: groupId, forLanguage: "en")
+        var filters = try! metaStorage.getLocalizedFiltersForGroup(withId: groupId, forSuitableLanguages: ["en"])
         XCTAssert(filters.isEmpty)
 
         let customFilterId = metaStorage.nextCustomFilterId
@@ -303,14 +304,14 @@ class FiltersMetaStorageTest: XCTestCase {
 
         try! metaStorage.add(filter: customFilter, enabled: true)
 
-        filters = try! metaStorage.getLocalizedFiltersForGroup(withId: groupId, forLanguage: "en")
+        filters = try! metaStorage.getLocalizedFiltersForGroup(withId: groupId, forSuitableLanguages: ["en"])
         XCTAssertEqual(filters.count, 1)
         XCTAssertEqual(filters[0].name, "Custom filter")
         XCTAssertEqual(filters[0].description, "Custom filter description")
 
         try! metaStorage.renameFilter(withId: customFilterId, name: "New name")
 
-        filters = try! metaStorage.getLocalizedFiltersForGroup(withId: groupId, forLanguage: "en")
+        filters = try! metaStorage.getLocalizedFiltersForGroup(withId: groupId, forSuitableLanguages: ["en"])
         XCTAssertEqual(filters.count, 1)
         XCTAssertEqual(filters[0].name, "New name")
         XCTAssertEqual(filters[0].description, "Custom filter description")
@@ -318,7 +319,7 @@ class FiltersMetaStorageTest: XCTestCase {
 
     func testReset() {
         let customGroupId = SafariGroup.GroupType.custom.id
-        var filters = try! metaStorage.getLocalizedFiltersForGroup(withId: customGroupId, forLanguage: "en")
+        var filters = try! metaStorage.getLocalizedFiltersForGroup(withId: customGroupId, forSuitableLanguages: ["en"])
         XCTAssertEqual(filters.count, 0)
 
         let customFilterId = metaStorage.nextCustomFilterId
@@ -338,12 +339,80 @@ class FiltersMetaStorageTest: XCTestCase {
                                                     tags: [],
                                                     rulesCount: 0)
         try! metaStorage.add(filter: customFilter, enabled: true)
-        filters = try! metaStorage.getLocalizedFiltersForGroup(withId: customGroupId, forLanguage: "en")
+        filters = try! metaStorage.getLocalizedFiltersForGroup(withId: customGroupId, forSuitableLanguages: ["en"])
         XCTAssertEqual(filters.count, 1)
 
         try! metaStorage.reset()
 
-        filters = try! metaStorage.getLocalizedFiltersForGroup(withId: customGroupId, forLanguage: "en")
+        filters = try! metaStorage.getLocalizedFiltersForGroup(withId: customGroupId, forSuitableLanguages: ["en"])
         XCTAssertEqual(filters.count, 0)
+    }
+
+    func testDefaultLocalization() {
+        let adsGroupId = SafariGroup.GroupType.ads.id
+        let fooFilters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["foo"])
+        let enFilters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["en"])
+
+        XCTAssertEqual(fooFilters.count, 4)
+        XCTAssertEqual(enFilters.count, 4)
+
+        for i in 0..<fooFilters.count {
+            XCTAssertEqual(fooFilters[i].name, enFilters[i].name)
+            XCTAssertEqual(fooFilters[i].description, enFilters[i].description)
+        }
+    }
+
+    func testDifferentLanguages() {
+        let adsGroupId = SafariGroup.GroupType.ads.id
+        let ptFilters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["pt_BR"])
+        let enFilters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["en"])
+
+        XCTAssertEqual(ptFilters.count, 4)
+        XCTAssertEqual(enFilters.count, 4)
+
+        for i in 0..<ptFilters.count {
+            XCTAssertNotEqual(ptFilters[i].description, enFilters[i].description)
+        }
+    }
+
+    func testCollectFiltersMetaLocalizationLanguageWithSuccess() {
+        let enLanguage = try! metaStorage.collectFiltersMetaLocalizationLanguage(from: ["en"])
+        let fooLanguage = try! metaStorage.collectFiltersMetaLocalizationLanguage(from: ["foo"])
+        XCTAssertEqual(enLanguage, fooLanguage)
+    }
+
+    func testCollectFiltersMetaLocalizationLanguageWithSuitableList() {
+        let enLanguage = try! metaStorage.collectFiltersMetaLocalizationLanguage(from: ["en"])
+        let frLanguage = try! metaStorage.collectFiltersMetaLocalizationLanguage(from: ["Foo", "Bar", "fr"])
+        XCTAssertNotEqual(enLanguage, frLanguage)
+        XCTAssertEqual(frLanguage, "fr")
+    }
+
+    func testCollectFiltersMetaLocalizationLanguageWithEmptySuitableLanguageList() {
+        let enLanguage = try! metaStorage.collectFiltersMetaLocalizationLanguage(from: ["en"])
+        let emptyLanguage = try! metaStorage.collectFiltersMetaLocalizationLanguage(from: [])
+        XCTAssertEqual(enLanguage, emptyLanguage)
+    }
+
+    func testCollectFiltersMetaLocalizationLanguageWithSpecialRegionLanguage() {
+        insertIntoDBLocalizationForSpecialRegion(languageName: "aa_BB")
+        let aaLanguage = try! metaStorage.collectFiltersMetaLocalizationLanguage(from: ["foo", "bar", "aa"])
+        XCTAssertEqual(aaLanguage, "aa_BB")
+    }
+
+    func testCollectFiltersMetaLocalizationLanguageWithWrongSpecialRegionLanguage() {
+        insertIntoDBLocalizationForSpecialRegion(languageName: "aa_BB")
+        let aaLanguage = try! metaStorage.collectFiltersMetaLocalizationLanguage(from: ["foo", "bar", "bb"])
+        XCTAssertEqual(aaLanguage, "en")
+    }
+
+    private func insertIntoDBLocalizationForSpecialRegion(languageName: String) {
+        let setters = [FilterLocalizationsTable.filterId <- 123456,
+                       FilterLocalizationsTable.lang <- languageName,
+                       FilterLocalizationsTable.name <- "\(languageName) name",
+                       FilterLocalizationsTable.description <- "\(languageName) description"]
+
+        let query = FilterLocalizationsTable.table.insert(setters)
+        try! metaStorage.filtersDb.run(query)
     }
  }

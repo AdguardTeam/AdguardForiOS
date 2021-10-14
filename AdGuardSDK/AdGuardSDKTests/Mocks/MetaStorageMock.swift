@@ -59,7 +59,7 @@ class MetaStorageMock: MetaStorageProtocol {
 
     var getLocalizedFiltersForGroupCalledCount = 0
     var getAllLocalizaedFiltersResult: SharedAdGuardSDK.Result<[FiltersTable]>?
-    func getLocalizedFiltersForGroup(withId id: Int, forLanguage lang: String) throws -> [FiltersTable] {
+    func getLocalizedFiltersForGroup(withId id: Int, forSuitableLanguages suitableLanguages: [String]) throws -> [FiltersTable] {
         getLocalizedFiltersForGroupCalledCount += 1
 
         guard let result = getAllLocalizaedFiltersResult else {
@@ -146,7 +146,7 @@ class MetaStorageMock: MetaStorageProtocol {
     // MARK: - FiltersMetaStorageProtocol + Groups methods
     var getAllLocalizedGroupsCalledCount = 0
     var getAllLocalizedGroupsResult: SharedAdGuardSDK.Result<[FilterGroupsTable]> = .success([])
-    func getAllLocalizedGroups(forLanguage lang: String) throws -> [FilterGroupsTable] {
+    func getAllLocalizedGroups(forSuitableLanguages suitableLanguages: [String]) throws -> [FilterGroupsTable] {
         getAllLocalizedGroupsCalledCount += 1
         switch getAllLocalizedGroupsResult {
         case .success(let groups): return groups
@@ -339,6 +339,28 @@ class MetaStorageMock: MetaStorageProtocol {
         if let error = setupPredefinedMetaError {
             throw error
         }
+    }
+
+    var collectGroupsMetaLocalizationLanguageCalledCount = 0
+    var collectGroupsMetaLocalizationLanguageError: Error?
+    var collectGroupsMetaLocalizationLanguageResult = ""
+    func collectGroupsMetaLocalizationLanguage(from suitableLanguages: [String]) throws -> String {
+        collectGroupsMetaLocalizationLanguageCalledCount += 1
+        if let error = collectGroupsMetaLocalizationLanguageError {
+            throw error
+        }
+        return collectGroupsMetaLocalizationLanguageResult
+    }
+
+    var collectFiltersMetaLocalizationLanguageCalledCount = 0
+    var collectFiltersMetaLocalizationLanguageError: Error?
+    var collectFiltersMetaLocalizationLanguageResult = ""
+    func collectFiltersMetaLocalizationLanguage(from suitableLanguages: [String]) throws -> String {
+        collectFiltersMetaLocalizationLanguageCalledCount += 1
+        if let error = collectFiltersMetaLocalizationLanguageError {
+            throw error
+        }
+        return collectFiltersMetaLocalizationLanguageResult
     }
 
     private func getFilterTable(for filter: FiltersTable, isEnabled: Bool) -> FiltersTable {
