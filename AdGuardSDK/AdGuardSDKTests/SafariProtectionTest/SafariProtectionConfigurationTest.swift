@@ -399,7 +399,7 @@ class SafariProtectionConfigurationTest: XCTestCase {
     func testUpdateConfig() {
         let protection = safariProtection as! SafariProtection
         let newConfig = SafariConfiguration(iosVersion: 1,
-                            currentLocale: Locale.current,
+                            currentLocale: Locale(identifier: "en"),
                             proStatus: false,
                             safariProtectionEnabled: true,
                             advancedBlockingIsEnabled: false,

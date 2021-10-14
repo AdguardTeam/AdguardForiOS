@@ -5,7 +5,7 @@ class DnsProvidersVendorTest: XCTestCase {
     var vendor: DnsProvidersVendorProtocol!
 
     override func setUp() {
-        let decoder = try! PredefinedDnsProvidersDecoder(currentLocale: Locale.current, bundle: Bundle(for: type(of: self)))
+        let decoder = try! PredefinedDnsProvidersDecoder(currentLocale: Locale(identifier: "en"), bundle: Bundle(for: type(of: self)))
         customStorage = CustomDnsProvidersStorageMock()
         vendor = DnsProvidersVendor(predefinedProviders: decoder, customProvidersStorage: customStorage)
     }

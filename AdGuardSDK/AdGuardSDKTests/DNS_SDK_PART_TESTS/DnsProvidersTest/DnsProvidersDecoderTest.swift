@@ -3,7 +3,7 @@ import XCTest
 class DnsProvidersDecoderTest: XCTestCase {
 
     func testProvidersDecodedProperly() {
-        let decoder = try! PredefinedDnsProvidersDecoder(currentLocale: Locale.current, bundle: Bundle(for: type(of: self)))
+        let decoder = try! PredefinedDnsProvidersDecoder(currentLocale: Locale(identifier: "en"), bundle: Bundle(for: type(of: self)))
         let providers = decoder.providers
 
         XCTAssertEqual(providers.count, 11)
