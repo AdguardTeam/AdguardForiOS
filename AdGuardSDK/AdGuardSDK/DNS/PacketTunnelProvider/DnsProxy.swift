@@ -59,7 +59,7 @@ final class DnsProxy: DnsProxyProtocol {
     func stop() {
         resolveQueue.sync(flags: .barrier) { [weak self] in
             Logger.logInfo("(DnsProxy) - stop")
-            self?.stop()
+            self?.proxy?.stop()
             self?.proxy = nil
             self?.proxySettingsProvider.reset()
             Logger.logInfo("(DnsProxy) - stopped")
@@ -79,6 +79,10 @@ final class DnsProxy: DnsProxyProtocol {
         Logger.logInfo("(DnsProxy) - start")
 
         // Configuration
+        if (proxy != nil) {
+            proxy?.stop()
+            proxy = nil
+        }
         proxySettingsProvider.reset()
         let configurtion = proxySettingsProvider.getProxyConfig(systemDnsUpstreams)
         let agConfig = AGDnsProxyConfig(from: configurtion)
