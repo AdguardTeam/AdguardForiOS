@@ -45,7 +45,7 @@ class TunnelProvider: PacketTunnelProvider {
         Self.setupLogger(resources)
 
         let debugLoggs = resources.isDebugLogs
-        
+
         // start and configure Sentry
         SentrySDK.start { options in
             options.dsn = Constants.Sentry.dsnUrl

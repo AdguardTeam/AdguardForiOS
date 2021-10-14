@@ -44,8 +44,10 @@ final class ServiceInitializer: ServiceInitializerProtocol {
 
         let sharedStorageUrls = SharedStorageUrls()
 
-        let isProPurchased = false // We don't care about account state in this extension
-        let safariConfiguration = SafariConfiguration(resources: resources, isProPurchased: isProPurchased)
+        let safariConfiguration = SafariConfiguration(
+            resources: resources,
+            isProPurchased: purchaseStatusService.isProPurchased
+        )
 
         self.safariProtection = try SafariProtection(
             configuration: safariConfiguration,
