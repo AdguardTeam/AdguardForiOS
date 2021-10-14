@@ -17,6 +17,7 @@
 */
 
 import Foundation
+import SharedAdGuardSDK
 
 public protocol DnsProtectionConfigurationProtocol {
     /* Shows if user has Premium app version */

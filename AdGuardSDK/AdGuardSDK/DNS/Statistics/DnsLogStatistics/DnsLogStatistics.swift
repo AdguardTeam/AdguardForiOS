@@ -18,6 +18,7 @@
  */
 
 import SQLite
+import SharedAdGuardSDK
 
 public protocol DnsLogStatisticsProtocol: ResetableSyncProtocol {
     /// Saves passed `event` to DB

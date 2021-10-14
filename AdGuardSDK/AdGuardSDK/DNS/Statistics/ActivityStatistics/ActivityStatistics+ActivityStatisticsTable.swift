@@ -17,6 +17,7 @@
 */
 
 import SQLite
+import SharedAdGuardSDK
 
 // MARK: - ActivityStatisticsTable
 

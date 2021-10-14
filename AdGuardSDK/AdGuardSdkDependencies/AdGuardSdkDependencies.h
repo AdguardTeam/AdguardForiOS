@@ -1,10 +1,3 @@
-//
-//  AdGuardSdkDependencies.h
-//  AdGuardSdkDependencies
-//
-//  Created by Artem Ivanov on 13.10.2021.
-//
-
 #import <Foundation/Foundation.h>
 
 //! Project version number for AdGuardSdkDependencies.

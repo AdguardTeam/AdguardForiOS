@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import SharedAdGuardSDK
 
 /// DNS filter content. It can be .file with a path to file or .text with filter content as a String
 enum DnsProxyFilterData: Equatable {

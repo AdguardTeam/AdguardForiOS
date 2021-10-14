@@ -17,6 +17,7 @@
  */
 
 import NetworkExtension
+import SharedAdGuardSDK
 import DnsAdGuardSDK
 import SafariAdGuardSDK
 import Sentry

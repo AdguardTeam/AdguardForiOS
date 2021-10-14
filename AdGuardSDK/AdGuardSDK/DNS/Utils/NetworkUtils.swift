@@ -18,6 +18,7 @@
 
 import AGDnsProxy
 import SystemLibs
+import SharedAdGuardSDK
 
 protocol NetworkUtilsProtocol {
     /* Returns list of ip addresses of system DNS servers */

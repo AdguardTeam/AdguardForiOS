@@ -17,6 +17,7 @@
 */
 
 import Foundation
+import SharedAdGuardSDK
 
 /// `PacketTunnelProvider` operating modes
 public enum TunnelMode: Int, CustomDebugStringConvertible {

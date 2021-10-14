@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import SharedAdGuardSDK
 
 // TODO: Need tests
 public protocol DnsProtectionFiltersProtocol {

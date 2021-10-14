@@ -19,6 +19,7 @@
 import Foundation
 import NetworkExtension
 import Reachability
+import SharedAdGuardSDK
 
 /**
  This object gives access to a virtual network interface

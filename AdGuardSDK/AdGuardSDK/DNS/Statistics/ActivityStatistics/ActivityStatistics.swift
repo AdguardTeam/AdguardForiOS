@@ -17,6 +17,7 @@
  */
 
 import SQLite
+import SharedAdGuardSDK
 
 public protocol ActivityStatisticsProtocol: ResetableSyncProtocol {
     /// Adds the `record` obtained from DNS-libs in the Tunnel to the DB

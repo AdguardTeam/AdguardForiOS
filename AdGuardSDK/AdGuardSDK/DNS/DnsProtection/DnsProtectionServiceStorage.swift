@@ -17,6 +17,7 @@
 */
 
 import Foundation
+import SharedAdGuardSDK
 
 protocol DnsProtectionServiceStorageProtocol {
     var dnsUserRulesManager: DnsUserRulesManagersProviderProtocol { get }

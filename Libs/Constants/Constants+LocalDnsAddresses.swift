@@ -16,7 +16,7 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import DnsAdGuardSDK
+import SharedAdGuardSDK
 
 extension Constants {
     struct LocalDnsAddresses {

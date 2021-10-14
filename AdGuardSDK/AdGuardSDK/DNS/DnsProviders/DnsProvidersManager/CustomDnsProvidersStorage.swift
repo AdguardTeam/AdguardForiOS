@@ -17,6 +17,7 @@
 */
 
 import Foundation
+import SharedAdGuardSDK
 
 protocol CustomDnsProvidersStorageProtocol: ResetableSyncProtocol {
     /* Returns saved custom DNS providers objects */

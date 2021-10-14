@@ -17,6 +17,7 @@
 */
 
 import SQLite
+import SharedAdGuardSDK
 
 /// Extension with table compression methods
 /// These methods are not part of Interface, do not use them directly

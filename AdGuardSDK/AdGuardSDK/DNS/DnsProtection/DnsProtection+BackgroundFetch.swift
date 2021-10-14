@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import SharedAdGuardSDK
 
 extension DnsProtection {
     public func updateFiltersInBackground(onFiltersUpdate: @escaping ((_ error: Error?) -> Void)) {

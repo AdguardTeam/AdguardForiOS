@@ -17,6 +17,7 @@
 */
 
 import Foundation
+import SharedAdGuardSDK
 
 public protocol DnsProvidersManagerProtocol: ResetableSyncProtocol {
     /* Providers */

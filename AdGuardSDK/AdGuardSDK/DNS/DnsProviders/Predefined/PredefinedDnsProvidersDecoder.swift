@@ -17,6 +17,7 @@
 */
 
 import Foundation
+import SharedAdGuardSDK
 
 protocol PredefinedDnsProvidersDecoderProtocol {
     var providers: [PredefinedDnsProvider] { get }

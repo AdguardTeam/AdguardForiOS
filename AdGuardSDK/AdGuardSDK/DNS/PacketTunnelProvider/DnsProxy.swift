@@ -17,6 +17,7 @@
  */
 
 import AGDnsProxy
+import SharedAdGuardSDK
 
 protocol DnsProxyProtocol: AnyObject {
     func start(_ systemDnsUpstreams: [DnsUpstream]) -> Error?
@@ -79,7 +80,7 @@ final class DnsProxy: DnsProxyProtocol {
         Logger.logInfo("(DnsProxy) - start")
 
         // Configuration
-        if (proxy != nil) {
+        if proxy != nil {
             proxy?.stop()
             proxy = nil
         }

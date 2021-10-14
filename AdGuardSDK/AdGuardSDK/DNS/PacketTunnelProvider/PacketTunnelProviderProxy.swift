@@ -18,6 +18,7 @@
 
 import NetworkExtension
 import AGDnsProxy
+import SharedAdGuardSDK
 
 protocol PacketTunnelProviderProxyDelegate: AnyObject {
     func setTunnelSettings(_ settings: NETunnelNetworkSettings?, _ completionHandler: ((Error?) -> Void)?)

@@ -18,7 +18,7 @@
 
 import Foundation
 import SafariAdGuardSDK
-import DnsAdGuardSDK
+import SharedAdGuardSDK
 
 /// Singleton to quikcly get different services objects and remove initialization logic from view controllers
 final class ServicesInitializer {

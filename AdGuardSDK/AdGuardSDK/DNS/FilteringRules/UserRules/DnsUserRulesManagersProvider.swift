@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import SharedAdGuardSDK
 
 protocol DnsUserRulesManagersProviderProtocol: ResetableSyncProtocol {
     var blocklistRulesManager: UserRulesManagerProtocol { get }

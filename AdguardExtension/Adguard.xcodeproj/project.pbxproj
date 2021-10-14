@@ -12912,7 +12912,7 @@
 			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
 			requirement = {
 				kind = exactVersion;
-				version = 0.12.2;
+				version = 0.13.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

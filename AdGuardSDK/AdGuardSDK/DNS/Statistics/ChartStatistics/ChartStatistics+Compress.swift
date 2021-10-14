@@ -17,6 +17,7 @@
  */
 
 import SQLite
+import SharedAdGuardSDK
 
 extension ChartStatistics {
     /// Compresses table if there are more than 1000 records

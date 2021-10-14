@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import SharedAdGuardSDK
 
 public struct DnsFilter: ExtendedCustomFilterMetaProtocol, Codable, Equatable {
     public let filterId: Int

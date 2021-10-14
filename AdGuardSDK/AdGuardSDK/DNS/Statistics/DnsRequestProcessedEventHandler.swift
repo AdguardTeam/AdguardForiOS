@@ -17,6 +17,7 @@
 */
 
 import Foundation
+import SharedAdGuardSDK
 
 protocol DnsRequestProcessedEventHandlerProtocol: AnyObject {
     /// Accepts event object from DNS-libs and adds it to different statistics

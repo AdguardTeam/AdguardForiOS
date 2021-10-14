@@ -344,7 +344,6 @@
 		7EC8A3A126E769DB005244CF /* UserRulesStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E807526C2A04100925F96 /* UserRulesStorageProtocol.swift */; };
 		7EC8A3A226E769DB005244CF /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E807826C2A04100925F96 /* Configuration.swift */; };
 		7EC8A3BB26E76B4E005244CF /* FilterMetaProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E80EE26C2A05200925F96 /* FilterMetaProtocol.swift */; };
-		7EC8A3C926E772A9005244CF /* Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8A3C826E772A9005244CF /* Import.swift */; };
 		7EC8A3CF26E773C6005244CF /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E966AF526C27B93006B57BD /* SafariAdGuardSDK.framework */; };
 		7EC8A3D126E77413005244CF /* Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8A3D026E77413005244CF /* Import.swift */; };
 		7EC8A3E426E77D5E005244CF /* DateInterval+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8A3DF26E77D5E005244CF /* DateInterval+Utils.swift */; };
@@ -418,14 +417,12 @@
 		D049EE9B26B2F31A00B8088B /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049EB9426B17C0A00B8088B /* Dictionary+Utils.swift */; };
 		D049EE9E26B2F33200B8088B /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049EB9326B17C0A00B8088B /* CharacterSet+Utils.swift */; };
 		D04F6A952718307700224DEF /* ContentBlockerConverter in Frameworks */ = {isa = PBXBuildFile; productRef = D04F6A942718307700224DEF /* ContentBlockerConverter */; };
-		D04F6A9C271836D100224DEF /* AdGuardSdkDependencies.h in Headers */ = {isa = PBXBuildFile; fileRef = D04F6A9B271836D100224DEF /* AdGuardSdkDependencies.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D04F6AAF27183D3100224DEF /* AdGuardSdkDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C8E9AF2717008C00ACDED8 /* AdGuardSdkDependencies.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D09E32C026EB85FA00B5417A /* PacketTunnelSettingsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E32BF26EB85FA00B5417A /* PacketTunnelSettingsProvider.swift */; };
 		D0A3CF9426E7AC95006E90AD /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A3CF9326E7AC95006E90AD /* PacketTunnelProvider.swift */; };
 		D0A3CF9926E7AF32006E90AD /* ACNCidrRange.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A3CF9826E7AF31006E90AD /* ACNCidrRange.m */; };
 		D0A3CFA126E90F12006E90AD /* ACNUrlUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A3CF9F26E90F10006E90AD /* ACNUrlUtils.m */; };
 		D0DA0A1B27184EBA007681B2 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = D0DA0A1A27184EBA007681B2 /* SQLite */; };
-		D0DA0A2427185672007681B2 /* AdGuardAGDnsProxyDependencies.h in Headers */ = {isa = PBXBuildFile; fileRef = D0DA0A2327185672007681B2 /* AdGuardAGDnsProxyDependencies.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0DA0A292718567F007681B2 /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = D0DA0A282718567F007681B2 /* AGDnsProxy */; };
 		D0DA0A2A2718586D007681B2 /* AdGuardAGDnsProxyDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DA0A2127185672007681B2 /* AdGuardAGDnsProxyDependencies.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -662,7 +659,6 @@
 		7EAD352226C2C1C0001AFB3A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7EAD354F26C2E293001AFB3A /* FiltersService+Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FiltersService+Builder.swift"; sourceTree = "<group>"; };
 		7EC8A37F26E7697C005244CF /* SharedAdGuardSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SharedAdGuardSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7EC8A3C826E772A9005244CF /* Import.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Import.swift; sourceTree = "<group>"; };
 		7EC8A3D026E77413005244CF /* Import.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Import.swift; sourceTree = "<group>"; };
 		7EC8A3DF26E77D5E005244CF /* DateInterval+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateInterval+Utils.swift"; sourceTree = "<group>"; };
 		7EC8A3E026E77D5E005244CF /* URL+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Utils.swift"; sourceTree = "<group>"; };
@@ -692,17 +688,13 @@
 		D049EB9326B17C0A00B8088B /* CharacterSet+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CharacterSet+Utils.swift"; path = "../Libs/Utils/CharacterSet+Utils.swift"; sourceTree = "<group>"; };
 		D049EB9426B17C0A00B8088B /* Dictionary+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Dictionary+Utils.swift"; path = "../Libs/Utils/Dictionary+Utils.swift"; sourceTree = "<group>"; };
 		D049EBA026B1868200B8088B /* AdGuardSDK_mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AdGuardSDK_mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D04F6A9A271836A900224DEF /* AdguardSdkDependencies.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = AdguardSdkDependencies.modulemap; sourceTree = "<group>"; };
-		D04F6A9B271836D100224DEF /* AdGuardSdkDependencies.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdGuardSdkDependencies.h; sourceTree = "<group>"; };
 		D09E32BF26EB85FA00B5417A /* PacketTunnelSettingsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelSettingsProvider.swift; sourceTree = "<group>"; };
 		D0A3CF9326E7AC95006E90AD /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
 		D0A3CF9726E7AF30006E90AD /* ACNCidrRange.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNCidrRange.h; sourceTree = "<group>"; };
 		D0A3CF9826E7AF31006E90AD /* ACNCidrRange.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNCidrRange.m; sourceTree = "<group>"; };
 		D0A3CF9F26E90F10006E90AD /* ACNUrlUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACNUrlUtils.m; sourceTree = "<group>"; };
 		D0A3CFA026E90F11006E90AD /* ACNUrlUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACNUrlUtils.h; sourceTree = "<group>"; };
-		D0DA0A12271848CD007681B2 /* SystemLibs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemLibs.h; sourceTree = "<group>"; };
 		D0DA0A2127185672007681B2 /* AdGuardAGDnsProxyDependencies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AdGuardAGDnsProxyDependencies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0DA0A2327185672007681B2 /* AdGuardAGDnsProxyDependencies.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdGuardAGDnsProxyDependencies.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1257,7 +1249,6 @@
 		7E6E817026C2A05A00925F96 /* DNS */ = {
 			isa = PBXGroup;
 			children = (
-				7EC8A3C826E772A9005244CF /* Import.swift */,
 				D0A3CF8D26E7A87D006E90AD /* PacketTunnelProvider */,
 				7E6E818C26C2A05A00925F96 /* DnsProtection */,
 				7E6E817126C2A05A00925F96 /* Statistics */,
@@ -1408,7 +1399,6 @@
 		7EAD351E26C2BD46001AFB3A /* AdGuardSDK */ = {
 			isa = PBXGroup;
 			children = (
-				D04F6A992718367500224DEF /* SdkDependencies */,
 				7E6E805F26C2A04100925F96 /* SharedAdGuardSDK */,
 				7E6E80CA26C2A05200925F96 /* Safari */,
 				7E6E817026C2A05A00925F96 /* DNS */,
@@ -1458,16 +1448,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D04F6A992718367500224DEF /* SdkDependencies */ = {
-			isa = PBXGroup;
-			children = (
-				D04F6A9A271836A900224DEF /* AdguardSdkDependencies.modulemap */,
-				D04F6A9B271836D100224DEF /* AdGuardSdkDependencies.h */,
-				D0DA0A12271848CD007681B2 /* SystemLibs.h */,
-			);
-			path = SdkDependencies;
-			sourceTree = "<group>";
-		};
 		D0A0E38B26B16B03005344D2 = {
 			isa = PBXGroup;
 			children = (
@@ -1476,7 +1456,6 @@
 				7EAD351F26C2C1C0001AFB3A /* AdGuardSDK-mac */,
 				7EAD351E26C2BD46001AFB3A /* AdGuardSDK */,
 				7E6E7FC226C299AB00925F96 /* AdGuardSDKTests */,
-				D0DA0A2227185672007681B2 /* AdGuardAGDnsProxyDependencies */,
 				D0A0E39626B16B03005344D2 /* Products */,
 				D049EE8526B2F23B00B8088B /* Frameworks */,
 			);
@@ -1514,14 +1493,6 @@
 			path = PacketTunnelProvider;
 			sourceTree = "<group>";
 		};
-		D0DA0A2227185672007681B2 /* AdGuardAGDnsProxyDependencies */ = {
-			isa = PBXGroup;
-			children = (
-				D0DA0A2327185672007681B2 /* AdGuardAGDnsProxyDependencies.h */,
-			);
-			path = AdGuardAGDnsProxyDependencies;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1556,7 +1527,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D04F6A9C271836D100224DEF /* AdGuardSdkDependencies.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1572,7 +1542,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0DA0A2427185672007681B2 /* AdGuardAGDnsProxyDependencies.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2131,7 +2100,6 @@
 				7E6E81C626C2A05B00925F96 /* DnsUserRulesManagersProvider.swift in Sources */,
 				7E4A132326E4F40D00728BDE /* CompaniesStatistics.swift in Sources */,
 				241D084626F22DE40008FD17 /* DnsFIltersUpdateResult.swift in Sources */,
-				7EC8A3C926E772A9005244CF /* Import.swift in Sources */,
 				7EAD34F226C2B397001AFB3A /* CharacterSet+Utils.swift in Sources */,
 				241D085026F247F10008FD17 /* DnsProvidersManagerMock.swift in Sources */,
 				7E6E81C026C2A05B00925F96 /* DnsLibsRulesProvider.swift in Sources */,
@@ -2596,7 +2564,6 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				MODULEMAP_FILE = AdGuardSDK/SdkDependencies/AdguardSdkDependencies.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdGuardSdkDependencies;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -2628,7 +2595,6 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				MODULEMAP_FILE = AdGuardSDK/SdkDependencies/AdguardSdkDependencies.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdGuardSdkDependencies;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -3015,7 +2981,7 @@
 			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
 			requirement = {
 				kind = exactVersion;
-				version = 0.12.2;
+				version = 0.13.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
