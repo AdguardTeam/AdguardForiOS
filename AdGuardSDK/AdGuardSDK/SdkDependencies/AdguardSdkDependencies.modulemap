@@ -1,0 +1,11 @@
+framework module AdGuardSdkDependencies {
+    umbrella header "AdGuardSdkDependencies.h"
+
+    export *
+    module * { export * }
+}
+
+//framework module SdkDepSystemLibs [system] {
+//    header "SystemLibs.h"
+//    export *
+//}
