@@ -127,12 +127,18 @@ struct PredefinedDnsProvidersDecoder: PredefinedDnsProvidersDecoderProtocol {
     }
 
     private func collectLocalizationLanguage(suitableLanguages: [String], availableLanguages: [String: Any]) -> String {
-        var result = "en"
+        // Trying to find available language
         for language in suitableLanguages {
             if availableLanguages[language] != nil {
-                result = language
-                break
+                return language
             }
+        }
+
+        var result = "en"
+        // If language still missed lets try to find similar languages
+        let keys = availableLanguages.keys.filter { $0.contains(suitableLanguages.last ?? result) }.sorted()
+        if let lang = keys.first {
+            result = lang
         }
         return result
     }

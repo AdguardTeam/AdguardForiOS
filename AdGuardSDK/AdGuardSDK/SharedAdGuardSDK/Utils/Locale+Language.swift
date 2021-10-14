@@ -18,6 +18,20 @@
 
 import Foundation
 
+/*
+    Transform given language codes into suitable for our provider and filter json localization files
+    Function `getSuitableLanguages` return list of sorted by priority suitable languages
+
+     For example:
+     Input language identifier     Result
+     1. pt                      -> [pt]
+     2. pt_RU                   -> [pt_RU, pt]
+     3. pt-BR_RU                -> [pt_BR, pt]
+     4. pt-Hans_RU              -> [pt_CN, pt]
+     5. pt-Hans-HK_RU           -> [pt_CN, pt_HK, pt]
+     7. pt-Hans                 -> [pt_CN, pt]
+ */
+
 public extension Locale {
 
     enum Delimiter: String {
@@ -34,12 +48,10 @@ public extension Locale {
 
         let defaultLanguageCode = "en"
         let defaultRegionCode = "US"
-        let exclusionSpanishLanguage = "es"
 
         let languageCode = languageCode ?? defaultLanguageCode
         let regionCode = regionCode ?? defaultRegionCode
 
-        let isSpanish = languageCode == exclusionSpanishLanguage
         result.append(languageCode)
 
         if variantCode != nil, let script = scriptCode {
@@ -58,12 +70,7 @@ public extension Locale {
                 result.append(languageCode + delimiter.rawValue + regionCode)
             }
         }
-
-        // if language is Spanish than create language like es_ES or es-ES
-        if isSpanish {
-            result.append(exclusionSpanishLanguage + delimiter.rawValue + exclusionSpanishLanguage.uppercased())
-        }
-
+        
         return result.reversed()
     }
 }

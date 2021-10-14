@@ -155,9 +155,9 @@ final class FiltersService: FiltersServiceProtocol {
     let metaParser: CustomFilterMetaParserProtocol
     let apiMethods: SafariProtectionApiMethodsProtocol
 
-    private var suitableLanguages: [String] {
+    private lazy var suitableLanguages: [String] = {
         return configuration.currentLocale.getSuitableLanguages(delimiter: .underScore)
-    }
+    }()
 
     // MARK: - Initialization
 

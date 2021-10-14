@@ -76,18 +76,44 @@ extension MetaStorage: GroupLocalizationsMetaStorageProtocol {
         Logger.logDebug("(FiltersMetaStorage) - Insert localization for group with id=\(id) lang=\(lang) and name=\(localization.name)")
     }
 
-    // Iterate over `filter_group_localization` table and return language for records that satisfy condition for first meted element of suitable language list
-    // If there is no records that satisfy condition return default `en` language
+
+    // MARK: - MetaStorage groups meta localization
+
+    // This function iterate over `filter_group_localization` table and return language if DB contains records with first matched language from `suitableLanguages` list
+    // If they're no matching languages, then we are looking for similar languages.
+    // End if there is no similar languages return default `en` language
+    
     func collectGroupsMetaLocalizationLanguage(from suitableLanguages: [String]) throws -> String {
-        var foundLocale = MetaStorage.defaultDbLanguage
+        // Trying to find full match language
         for lang in suitableLanguages{
             // Query: SELECT count(filter_id) FROM filter_group_localization WHERE lang == lang
             let query: ScalarQuery = FilterGroupLocalizationsTable.table.select(FilterLocalizationsTable.filterId.count).where(FilterLocalizationsTable.lang == lang)
             let count = try filtersDb.scalar(query)
             guard count > 0 else { continue }
-            foundLocale = lang
-            break
+            return lang
         }
-        return foundLocale
+
+        var foundLanguage = MetaStorage.defaultDbLanguage
+        // If language still missed lets try to find similar languages
+        let similarLanguages = try collectSimilarGroupsMetaLanguages(for: suitableLanguages.last ?? foundLanguage)
+        if let similarLanguage = similarLanguages.first {
+            foundLanguage = similarLanguage
+        }
+
+        return foundLanguage
+    }
+
+    // Return list of similar languages
+    // example: if input language `pt` than return [pt-BR, pt-PT]
+    private func collectSimilarGroupsMetaLanguages(for language: String) throws -> [String] {
+        // Query: SELECT DISTINCT lang FROM filter_group_localizations WHERE (lang LIKE 'language%') AND (lang != 'language') ORDER by lang
+        let query = FilterGroupLocalizationsTable
+            .table
+            .select(distinct: [FilterGroupLocalizationsTable.lang])
+            .where(FilterGroupLocalizationsTable.lang.like("\(language)%") && FilterGroupLocalizationsTable.lang != language).order(FilterGroupLocalizationsTable.lang)
+
+        return try filtersDb.prepare(query).compactMap { row in
+            return row[FilterGroupLocalizationsTable.lang]
+        }
     }
 }
