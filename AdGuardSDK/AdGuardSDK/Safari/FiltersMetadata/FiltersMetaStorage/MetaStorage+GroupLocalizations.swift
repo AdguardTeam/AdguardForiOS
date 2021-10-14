@@ -79,10 +79,11 @@ extension MetaStorage: GroupLocalizationsMetaStorageProtocol {
 
     // MARK: - MetaStorage groups meta localization
 
-    // This function iterate over `filter_group_localization` table and return language if DB contains records with first matched language from `suitableLanguages` list
-    // If they're no matching languages, then we are looking for similar languages.
-    // End if there is no similar languages return default `en` language
-    
+    /**
+     This function iterates over `filter_group_localization` table and returns language if DB contains records with first matched language from `suitableLanguages` list.
+     If there are no matching languages, then we are looking for similar languages.
+     End if there is no similar languages return default `en` language.
+    */
     func collectGroupsMetaLocalizationLanguage(from suitableLanguages: [String]) throws -> String {
         // Trying to find full match language
         for lang in suitableLanguages{
@@ -94,7 +95,7 @@ extension MetaStorage: GroupLocalizationsMetaStorageProtocol {
         }
 
         var foundLanguage = MetaStorage.defaultDbLanguage
-        // If language still missed lets try to find similar languages
+        // Trying to find similar languages if language is still missed
         let similarLanguages = try collectSimilarGroupsMetaLanguages(for: suitableLanguages.last ?? foundLanguage)
         if let similarLanguage = similarLanguages.first {
             foundLanguage = similarLanguage
@@ -103,8 +104,10 @@ extension MetaStorage: GroupLocalizationsMetaStorageProtocol {
         return foundLanguage
     }
 
-    // Return list of similar languages
-    // example: if input language `pt` than return [pt-BR, pt-PT]
+    /**
+     Returns list of similar languages.
+     Example: if input language `pt` then returns [pt-BR, pt-PT].
+     */
     private func collectSimilarGroupsMetaLanguages(for language: String) throws -> [String] {
         // Query: SELECT DISTINCT lang FROM filter_group_localizations WHERE (lang LIKE 'language%') AND (lang != 'language') ORDER by lang
         let query = FilterGroupLocalizationsTable

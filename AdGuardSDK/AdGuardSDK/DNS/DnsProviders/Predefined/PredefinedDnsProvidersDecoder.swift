@@ -135,7 +135,7 @@ struct PredefinedDnsProvidersDecoder: PredefinedDnsProvidersDecoderProtocol {
         }
 
         var result = "en"
-        // If language still missed lets try to find similar languages
+        // Trying to find similar languages if language is still missed
         let keys = availableLanguages.keys.filter { $0.contains(suitableLanguages.last ?? result) }.sorted()
         if let lang = keys.first {
             result = lang

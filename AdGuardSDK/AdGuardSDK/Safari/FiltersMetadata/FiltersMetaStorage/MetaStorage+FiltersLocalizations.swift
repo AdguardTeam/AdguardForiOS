@@ -98,9 +98,11 @@ extension MetaStorage: FiltersLocalizationsMetaStorageProtocol {
 
     // MARK: - MetaStorage filters meta localization
 
-    // This function iterate over `filter_localization` table and return language if DB contains records with first matched language from `suitableLanguages` list
-    // If they're no matching languages, then we are looking for similar languages.
-    // End if there is no similar languages return default `en` language
+    /**
+     This function iterates over `filter_localization` table and returns language if DB contains records with first matched language from `suitableLanguages` list.
+     If there are no matching languages, then we are looking for similar languages.
+     End if there is no similar languages return default `en` language.
+     */
     func collectFiltersMetaLocalizationLanguage(from suitableLanguages: [String]) throws -> String {
 
         // Trying to find full match language
@@ -113,7 +115,7 @@ extension MetaStorage: FiltersLocalizationsMetaStorageProtocol {
         }
 
         var foundLanguage = MetaStorage.defaultDbLanguage
-        // If language still missed lets try to find similar languages
+        // Trying to find similar languages if language is still missed
         let similarLanguages = try collectSimilarFiltersMetaLanguages(for: suitableLanguages.last ?? foundLanguage)
         if let similarLanguage = similarLanguages.first {
             foundLanguage = similarLanguage
@@ -122,8 +124,10 @@ extension MetaStorage: FiltersLocalizationsMetaStorageProtocol {
         return foundLanguage
     }
 
-    // Return list of similar languages
-    // example: if input language `pt` than return [pt_BR, pt_PT]
+    /**
+     Returns list of similar languages.
+     Example: if input language `pt` then returns [pt_BR, pt_PT].
+     */
     private func collectSimilarFiltersMetaLanguages(for language: String) throws -> [String] {
         // Query: SELECT DISTINCT lang FROM filter_localizations WHERE (lang LIKE 'language%') AND (lang != 'language') ORDER by lang
         let query = FilterLocalizationsTable

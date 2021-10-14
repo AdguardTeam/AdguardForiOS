@@ -18,20 +18,7 @@
 
 import Foundation
 
-/*
-    Transform given language codes into suitable for our provider and filter json localization files
-    Function `getSuitableLanguages` return list of sorted by priority suitable languages
-
-     For example:
-     Input language identifier     Result
-     1. pt                      -> [pt]
-     2. pt_RU                   -> [pt_RU, pt]
-     3. pt-BR_RU                -> [pt_BR, pt]
-     4. pt-Hans_RU              -> [pt_CN, pt]
-     5. pt-Hans-HK_RU           -> [pt_CN, pt_HK, pt]
-     7. pt-Hans                 -> [pt_CN, pt]
- */
-
+/// Transform given language codes into suitable for our provider and filter json localization files
 public extension Locale {
 
     enum Delimiter: String {
@@ -39,7 +26,18 @@ public extension Locale {
         case dash = "-"
     }
 
-    /// Return list of suitable languages ordered by priority
+    /**
+     Function  returns list of sorted by priority suitable languages
+
+     For example:
+     Input language identifier     Result
+     1. pt                                    -> [pt]
+     2. pt_RU                            -> [pt_RU, pt]
+     3. pt-BR_RU                      -> [pt_BR, pt]
+     4. pt-Hans_RU                   -> [pt_CN, pt]
+     5. pt-Hans-HK_RU             -> [pt_CN, pt_HK, pt]
+     7. pt-Hans                          -> [pt_CN, pt]
+     */
     func getSuitableLanguages(delimiter: Delimiter) -> [String] {
         var result: [String] = []
 
