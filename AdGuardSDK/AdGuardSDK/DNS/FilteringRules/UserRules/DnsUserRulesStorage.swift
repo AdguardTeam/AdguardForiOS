@@ -17,6 +17,7 @@
  */
 
 import OrderedCollections
+import SharedAdGuardSDK
 
 final class DnsUserRulesStorage: UserRulesStorageProtocol {
 

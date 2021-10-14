@@ -18,7 +18,6 @@
 
 import Foundation
 
-
 class Confirm2FaController : UIViewController, UITextFieldDelegate {
 
     // MARK: - public properties
@@ -50,7 +49,7 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
 
         fromOnboarding = self.tabBarController == nil
 
-        purchaseObserver = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification),
+        purchaseObserver = NotificationCenter.default.observe(name: Notification.Name(PurchaseAssistant.kPurchaseServiceNotification),
                                                                       object: nil, queue: OperationQueue.main)
         { [weak self](notification) in
             if let info = notification.userInfo {
@@ -109,18 +108,18 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
             self?.confirmButton.stopIndicator()
 
 
-            let type = info[PurchaseService.kPSNotificationTypeKey] as? String
-            let error = info[PurchaseService.kPSNotificationErrorKey] as? NSError
+            let type = info[PurchaseAssistant.kPSNotificationTypeKey] as? String
+            let error = info[PurchaseAssistant.kPSNotificationErrorKey] as? NSError
 
             switch type {
 
-            case PurchaseService.kPSNotificationLoginSuccess:
+            case PurchaseAssistant.kPSNotificationLoginSuccess:
                 self?.loginSuccess()
-            case PurchaseService.kPSNotificationLoginFailure:
+            case PurchaseAssistant.kPSNotificationLoginFailure:
                 self?.loginFailure(error)
-            case PurchaseService.kPSNotificationLoginPremiumExpired:
+            case PurchaseAssistant.kPSNotificationLoginPremiumExpired:
                 self?.premiumExpired()
-            case PurchaseService.kPSNotificationLoginNotPremiumAccount:
+            case PurchaseAssistant.kPSNotificationLoginNotPremiumAccount:
                 self?.notPremium()
 
             default:

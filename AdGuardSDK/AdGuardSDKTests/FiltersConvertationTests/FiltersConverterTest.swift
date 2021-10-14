@@ -1,5 +1,5 @@
 import XCTest
-@_implementationOnly import ContentBlockerConverter
+import ContentBlockerConverter
 
 final class ContentBlockerConverterMock: ContentBlockerConverterProtocol {
 

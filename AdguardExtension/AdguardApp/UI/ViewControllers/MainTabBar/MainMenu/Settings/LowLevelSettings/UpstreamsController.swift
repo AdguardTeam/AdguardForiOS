@@ -18,6 +18,7 @@
 
 import UIKit
 import DnsAdGuardSDK
+import AGDnsProxy
 
 protocol UpstreamsControllerDelegate: AnyObject {
     func updateDescriptionLabel(type: UpstreamType, text: String)

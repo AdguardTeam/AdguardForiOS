@@ -1,3 +1,5 @@
+import SharedAdGuardSDK
+
 final class DnsBackgroundFetchUpdaterMock: DnsBackgroundFetchUpdateProtocol {
 
     var updateFiltersInBackgroundCalledCount = 0

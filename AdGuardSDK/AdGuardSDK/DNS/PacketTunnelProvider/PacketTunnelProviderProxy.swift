@@ -17,6 +17,8 @@
  */
 
 import NetworkExtension
+import AGDnsProxy
+import SharedAdGuardSDK
 
 protocol PacketTunnelProviderProxyDelegate: AnyObject {
     func setTunnelSettings(_ settings: NETunnelNetworkSettings?, _ completionHandler: ((Error?) -> Void)?)
@@ -241,7 +243,7 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
     /// Initializes DNS-lib logger
     private func setupLogger(isDebugLogs: Bool) {
         AGLogger.setLevel(isDebugLogs ? .AGLL_DEBUG : .AGLL_WARN )
-        AGLogger.setCallback { msg, size in
+        AGLogger.setCallback { _, msg, size in
             if let msg = msg {
                 Logger.logInfo("(DnsLibs) -> \(String(cString: msg))")
             }
