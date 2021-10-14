@@ -278,7 +278,7 @@ extension SafariProtectionFiltersDatabaseMigrationHelper {
         let subscriptionUrl: String?
         let rules: [ObsoleteFilterRules]
 
-        init(filterId: Int, groupId: Int, isEnabled: Bool, version: String?, lastUpdateTime: Date?, displayNumber: Int, name: String, description: String, homePage: String?, subscriptionUrl: String?, rules: [ObsoleteFilterRules]) {
+        init(filterId: Int, groupId: Int, isEnabled: Bool, version: String?, lastUpdateTime: Date?, displayNumber: Int, name: String?, description: String?, homePage: String?, subscriptionUrl: String?, rules: [ObsoleteFilterRules]) {
             self.filterId = filterId
             self.groupId = groupId
             self.isEnabled = isEnabled
