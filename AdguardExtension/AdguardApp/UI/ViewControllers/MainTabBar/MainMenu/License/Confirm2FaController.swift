@@ -18,7 +18,6 @@
 
 import Foundation
 
-
 class Confirm2FaController : UIViewController, UITextFieldDelegate {
 
     // MARK: - public properties

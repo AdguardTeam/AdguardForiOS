@@ -16,8 +16,6 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
-import Foundation
 import SharedAdGuardSDK
 
 /// Parser to parse data from `FiltersMetadataRequest` and returns `ExtendedFiltersMeta`

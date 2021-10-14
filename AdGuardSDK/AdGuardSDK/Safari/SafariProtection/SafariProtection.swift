@@ -16,7 +16,6 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
 import SharedAdGuardSDK
 import class ContentBlockerConverter.WebExtensionHelpers
 import protocol ContentBlockerConverter.WebExtensionHelpersProtocol

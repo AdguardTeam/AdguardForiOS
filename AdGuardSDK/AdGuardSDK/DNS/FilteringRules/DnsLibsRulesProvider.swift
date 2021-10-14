@@ -16,7 +16,6 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
 import SharedAdGuardSDK
 
 /// DNS filter content. It can be .file with a path to file or .text with filter content as a String
