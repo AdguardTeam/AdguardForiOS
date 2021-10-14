@@ -427,7 +427,7 @@
 		D0DA0A1B27184EBA007681B2 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = D0DA0A1A27184EBA007681B2 /* SQLite */; };
 		D0DA0A2427185672007681B2 /* AdGuardAGDnsProxyDependencies.h in Headers */ = {isa = PBXBuildFile; fileRef = D0DA0A2327185672007681B2 /* AdGuardAGDnsProxyDependencies.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0DA0A292718567F007681B2 /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = D0DA0A282718567F007681B2 /* AGDnsProxy */; };
-		D0DA0A2A2718586D007681B2 /* AdGuardAGDnsProxyDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DA0A2127185672007681B2 /* AdGuardAGDnsProxyDependencies.framework */; };
+		D0DA0A2A2718586D007681B2 /* AdGuardAGDnsProxyDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0DA0A2127185672007681B2 /* AdGuardAGDnsProxyDependencies.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2701,7 +2701,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -2771,7 +2770,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -2836,6 +2834,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2866,6 +2865,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

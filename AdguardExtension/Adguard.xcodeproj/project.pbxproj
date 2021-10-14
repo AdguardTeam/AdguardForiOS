@@ -1076,6 +1076,8 @@
 		B2673E8127176D8A00E04747 /* PurchaseServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C19E7B2716DE5800331109 /* PurchaseServiceProtocol.swift */; };
 		B2673E8227176D9100E04747 /* PurchaseAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C8E9772716E4AD00ACDED8 /* PurchaseAssistant.swift */; };
 		B2673E8327176DD700E04747 /* PurchaseStatusProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C19E7E2716DFDE00331109 /* PurchaseStatusProtocol.swift */; };
+		B26B923527185AB400F1D482 /* AdGuardSdkDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B26B921E2718266200F1D482 /* AdGuardSdkDependencies.framework */; };
+		B26B923627185AB400F1D482 /* AdGuardSdkDependencies.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B26B921E2718266200F1D482 /* AdGuardSdkDependencies.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B29D5358270CD9DC0045CB16 /* DnsAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29DD474270CB04B0072B42F /* DnsAdGuardSDK.framework */; };
 		B29D536F270CE4CF0045CB16 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0971B8632DD00319AA3 /* libsqlite3.tbd */; };
 		B29D5370270CE6020045CB16 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0991B8632F600319AA3 /* libz.tbd */; };
@@ -1092,7 +1094,7 @@
 		B29D537E270CE9470045CB16 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6454E526EBD58700B1E66C /* SafariAdGuardSDK.framework */; };
 		B29D537F270CE9470045CB16 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6454E526EBD58700B1E66C /* SafariAdGuardSDK.framework */; };
 		B29D5380270CE9480045CB16 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6454E526EBD58700B1E66C /* SafariAdGuardSDK.framework */; };
-		B29D5381270CE9520045CB16 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6454E526EBD58700B1E66C /* SafariAdGuardSDK.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		B29D5381270CE9520045CB16 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6454E526EBD58700B1E66C /* SafariAdGuardSDK.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		B29D5382270CE95D0045CB16 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6454E526EBD58700B1E66C /* SafariAdGuardSDK.framework */; };
 		B29D5383270CE95E0045CB16 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6454E526EBD58700B1E66C /* SafariAdGuardSDK.framework */; };
 		B29D5384270CE9690045CB16 /* DnsAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29DD474270CB04B0072B42F /* DnsAdGuardSDK.framework */; };
@@ -1144,8 +1146,8 @@
 		B2C19E7C2716DE5800331109 /* PurchaseServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C19E7B2716DE5800331109 /* PurchaseServiceProtocol.swift */; };
 		B2C19E7F2716DFDE00331109 /* PurchaseStatusProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C19E7E2716DFDE00331109 /* PurchaseStatusProtocol.swift */; };
 		B2C19E802716DFDE00331109 /* PurchaseStatusProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C19E7E2716DFDE00331109 /* PurchaseStatusProtocol.swift */; };
-		B2C7275D2716A55900A37BA3 /* DnsAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29DD474270CB04B0072B42F /* DnsAdGuardSDK.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		B2C727622716AFA300A37BA3 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = B2C727612716AFA300A37BA3 /* Sentry */; settings = {ATTRIBUTES = (Weak, ); }; };
+		B2C7275D2716A55900A37BA3 /* DnsAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29DD474270CB04B0072B42F /* DnsAdGuardSDK.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		B2C727622716AFA300A37BA3 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = B2C727612716AFA300A37BA3 /* Sentry */; settings = {ATTRIBUTES = (Required, ); }; };
 		B2C8E9782716E4AD00ACDED8 /* PurchaseAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C8E9772716E4AD00ACDED8 /* PurchaseAssistant.swift */; };
 		B2C8E9792716E4AD00ACDED8 /* PurchaseAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C8E9772716E4AD00ACDED8 /* PurchaseAssistant.swift */; };
 		B2C8E97A2716E62100ACDED8 /* SafariConfiguration+DefaultConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE461C626FE568D00DFBF2A /* SafariConfiguration+DefaultConfig.swift */; };
@@ -1339,7 +1341,6 @@
 		D04C2B77240FA18E009330A8 /* ComplexProtectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF005E2239929FC00047073 /* ComplexProtectionService.swift */; };
 		D04C2B78240FA462009330A8 /* UIApplication+OpenAdguardUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D016FBB8224CF46B00CF3B29 /* UIApplication+OpenAdguardUrl.swift */; };
 		D04CDE84250679BF00A6D2CC /* ProductInfoMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04CDE83250679BF00A6D2CC /* ProductInfoMock.swift */; };
-		D04F6AB62718449200224DEF /* AdGuardSdkDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B26B921E2718266200F1D482 /* AdGuardSdkDependencies.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D051B05C233101C6008A9A0F /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; };
 		D0569E4421F1EBF200985DA9 /* DnsSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0569E4221F1EBEB00985DA9 /* DnsSettingsController.swift */; };
 		D0569E4F21F1F76E00985DA9 /* DnsProvidersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0569E4E21F1F76E00985DA9 /* DnsProvidersController.swift */; };
@@ -1803,7 +1804,6 @@
 		D0B544B72435C6BC002F0AEC /* ActionExtension.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0B8EB902248E5770066C5AC /* ActionExtension.xcassets */; };
 		D0B5451B2435C6BF002F0AEC /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0991B8632F600319AA3 /* libz.tbd */; };
 		D0B5451D2435C6BF002F0AEC /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D8294E1EDDA905008F7F30 /* NetworkExtension.framework */; };
-		D0B5451F2435C6BF002F0AEC /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65C98AA21D3661B500E4B57D /* libresolv.tbd */; };
 		D0B5453A2435C7B9002F0AEC /* AdguardProBlockingExtensionGeneral.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D0B542CA2435C6A3002F0AEC /* AdguardProBlockingExtensionGeneral.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D0B5453B2435C7B9002F0AEC /* AdguardProBlockingExtensionPrivacy.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D0B543032435C6A7002F0AEC /* AdguardProBlockingExtensionPrivacy.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D0B5453C2435C7B9002F0AEC /* AdguardProBlockingExtensionAnnoyances.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D0B5433C2435C6AA002F0AEC /* AdguardProBlockingExtensionAnnoyances.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -2279,6 +2279,7 @@
 			files = (
 				B29D538F270D1B6E0045CB16 /* SafariAdGuardSDK.framework in Embed Frameworks */,
 				B29D538D270D1B240045CB16 /* DnsAdGuardSDK.framework in Embed Frameworks */,
+				B26B923627185AB400F1D482 /* AdGuardSdkDependencies.framework in Embed Frameworks */,
 				B29D53AB270D40EB0045CB16 /* SharedAdGuardSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -3693,11 +3694,11 @@
 				656D7D041B8FA7E500CC8A19 /* JavaScriptCore.framework in Frameworks */,
 				B29D538E270D1B6E0045CB16 /* SafariAdGuardSDK.framework in Frameworks */,
 				7EF5C56026C269D6001851D6 /* Sentry in Frameworks */,
+				B26B923527185AB400F1D482 /* AdGuardSdkDependencies.framework in Frameworks */,
 				B29D5394270D1D9E0045CB16 /* AGDnsProxy in Frameworks */,
 				B2C19E5A2716B25D00331109 /* NetworkExtension.framework in Frameworks */,
 				7E4D205E22D71B3E003B0E75 /* libiconv.tbd in Frameworks */,
 				D09E271B2541D00B002D6BC0 /* Setapp in Frameworks */,
-				D04F6AB62718449200224DEF /* AdGuardSdkDependencies.framework in Frameworks */,
 				65F3986E1B7C894000ABCD39 /* SafariServices.framework in Frameworks */,
 				B29D53AA270D40EB0045CB16 /* SharedAdGuardSDK.framework in Frameworks */,
 			);
@@ -3929,7 +3930,6 @@
 				B29D5389270CE9810045CB16 /* SafariAdGuardSDK.framework in Frameworks */,
 				D0B5451B2435C6BF002F0AEC /* libz.tbd in Frameworks */,
 				D0B5451D2435C6BF002F0AEC /* NetworkExtension.framework in Frameworks */,
-				D0B5451F2435C6BF002F0AEC /* libresolv.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
