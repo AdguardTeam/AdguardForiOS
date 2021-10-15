@@ -423,6 +423,8 @@
 		B26B926327198FC800F1D482 /* BasicRulesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26B925327198FC800F1D482 /* BasicRulesParser.swift */; };
 		B26B926427198FC800F1D482 /* ParsedHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26B925427198FC800F1D482 /* ParsedHost.swift */; };
 		B26B926527198FC800F1D482 /* ParsedHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26B925427198FC800F1D482 /* ParsedHost.swift */; };
+		B26B92672719AA0600F1D482 /* Locale+Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26B92662719AA0600F1D482 /* Locale+Language.swift */; };
+		B26B926A2719AA2800F1D482 /* Locale+LanguageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26B92692719AA2800F1D482 /* Locale+LanguageTest.swift */; };
 		B29D5367270CE2CB0045CB16 /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC8A37F26E7697C005244CF /* SharedAdGuardSDK.framework */; };
 		B29D53A0270D24FF0045CB16 /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC8A37F26E7697C005244CF /* SharedAdGuardSDK.framework */; };
 		B29D53A8270D27960045CB16 /* SharedAdGuardSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = B29D53A7270D27270045CB16 /* SharedAdGuardSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -708,6 +710,8 @@
 		B26B925227198FC800F1D482 /* RulesParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesParser.swift; sourceTree = "<group>"; };
 		B26B925327198FC800F1D482 /* BasicRulesParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicRulesParser.swift; sourceTree = "<group>"; };
 		B26B925427198FC800F1D482 /* ParsedHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsedHost.swift; sourceTree = "<group>"; };
+		B26B92662719AA0600F1D482 /* Locale+Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Locale+Language.swift"; sourceTree = "<group>"; };
+		B26B92692719AA2800F1D482 /* Locale+LanguageTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Locale+LanguageTest.swift"; sourceTree = "<group>"; };
 		B29D53A6270D267C0045CB16 /* SharedAdGuardSDK.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = SharedAdGuardSDK.modulemap; sourceTree = "<group>"; };
 		B29D53A7270D27270045CB16 /* SharedAdGuardSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedAdGuardSDK.h; sourceTree = "<group>"; };
 		B2C8E9AF2717008C00ACDED8 /* AdGuardSdkDependencies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AdGuardSdkDependencies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -819,6 +823,7 @@
 		7E6E7FC226C299AB00925F96 /* AdGuardSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				B26B92692719AA2800F1D482 /* Locale+LanguageTest.swift */,
 				7E6E7FCB26C299DA00925F96 /* DNS_SDK_PART_TESTS */,
 				7E6E7FD726C299DA00925F96 /* Info.plist */,
 				7E6E7FFB26C299DC00925F96 /* AdGuardSDKTests-Bridging-Header.h */,
@@ -1447,6 +1452,7 @@
 		7EC8A3DE26E77D5E005244CF /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B26B92662719AA0600F1D482 /* Locale+Language.swift */,
 				7EC8A3DF26E77D5E005244CF /* DateInterval+Utils.swift */,
 				7EC8A3E026E77D5E005244CF /* URL+Utils.swift */,
 				7EC8A3E126E77D5E005244CF /* Array+Utils.swift */,
@@ -2091,6 +2097,7 @@
 				7E6E812726C2A05300925F96 /* FiltersConverterService.swift in Sources */,
 				B26B926527198FC800F1D482 /* ParsedHost.swift in Sources */,
 				7E6E81C326C2A05B00925F96 /* DnsFiltersManager.swift in Sources */,
+				B26B926A2719AA2800F1D482 /* Locale+LanguageTest.swift in Sources */,
 				7E6E812B26C2A05300925F96 /* FiltersConverter.swift in Sources */,
 				7E6E81E626C2A05B00925F96 /* DnsProvidersVendor.swift in Sources */,
 				7E6E813526C2A05300925F96 /* MetaStorage+FiltersLocalizations.swift in Sources */,
@@ -2256,6 +2263,7 @@
 				7EC8A3E726E77D5E005244CF /* NotificationCenter+Utils.swift in Sources */,
 				7EC8A38826E769B4005244CF /* RequestsFactory.swift in Sources */,
 				7EC8A3E526E77D5E005244CF /* URL+Utils.swift in Sources */,
+				B26B92672719AA0600F1D482 /* Locale+Language.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
