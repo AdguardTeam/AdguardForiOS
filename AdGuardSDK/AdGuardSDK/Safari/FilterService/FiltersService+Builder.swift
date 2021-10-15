@@ -27,11 +27,13 @@ extension FiltersService: FiltersServiceForBuilderProtocol {
         var resultError: Error?
         let group = DispatchGroup()
         group.enter()
-        let lang = configuration.currentLocale.getSuitableLanguages(delimiter: .underScore).first ?? "en"
-        apiMethods.loadFiltersMetadata(version: configuration.appProductVersion,
-                                       id: configuration.appId,
-                                       cid: configuration.cid,
-                                       lang: lang) { [unowned self] filtersMeta in
+        let lang = configuration.currentLocale.getSuitableLanguages(delimiter: .underScore).first ?? Locale.defaultLanguageCode
+        apiMethods.loadFiltersMetadata(
+            version: configuration.appProductVersion,
+            id: configuration.appId,
+            cid: configuration.cid,
+            lang: lang
+        ) { [unowned self] filtersMeta in
 
             if let meta = filtersMeta {
                 do {

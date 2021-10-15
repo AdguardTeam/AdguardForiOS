@@ -34,12 +34,14 @@ public extension Locale {
 
      For example:
      Input language identifier     Result
-     1. pt                                    -> [pt]
-     2. pt_RU                            -> [pt_RU, pt]
-     3. pt-BR_RU                      -> [pt_BR, pt]
-     4. pt-Hans_RU                   -> [pt_CN, pt]
-     5. pt-Hans-HK_RU             -> [pt_CN, pt_HK, pt]
-     7. pt-Hans                          -> [pt_CN, pt]
+     ```
+     1. pt              -> [pt]
+     2. pt_RU           -> [pt_RU, pt]
+     3. pt-BR_RU        -> [pt_BR, pt]
+     4. pt-Hans_RU      -> [pt_CN, pt]
+     5. pt-Hans-HK_RU   -> [pt_CN, pt_HK, pt]
+     7. pt-Hans         -> [pt_CN, pt]
+     ```
      */
     func getSuitableLanguages(delimiter: Delimiter) -> [String] {
         var result: [String] = []
