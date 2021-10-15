@@ -17,7 +17,7 @@
 */
 
 import AGDnsProxy
-import SystemLibs
+import SystemLibsResolv
 import SharedAdGuardSDK
 
 protocol NetworkUtilsProtocol {

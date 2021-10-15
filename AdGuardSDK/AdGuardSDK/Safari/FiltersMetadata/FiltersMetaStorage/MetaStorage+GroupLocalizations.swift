@@ -46,6 +46,7 @@ struct FilterGroupLocalizationsTable {
 protocol GroupLocalizationsMetaStorageProtocol {
     func getLocalizationForGroup(withId id: Int, forLanguage lang: String) -> FilterGroupLocalizationsTable?
     func updateLocalizationForGroup(withId id: Int, forLanguage lang: String, localization: ExtendedFiltersMetaLocalizations.GroupLocalization) throws
+    func collectGroupsMetaLocalizationLanguage(from suitableLanguages: [String]) throws -> String
 }
 
 extension MetaStorage: GroupLocalizationsMetaStorageProtocol {
@@ -73,5 +74,56 @@ extension MetaStorage: GroupLocalizationsMetaStorageProtocol {
                                                                FilterGroupLocalizationsTable.name <- localization.name)
         try filtersDb.run(query)
         Logger.logDebug("(FiltersMetaStorage) - Insert localization for group with id=\(id) lang=\(lang) and name=\(localization.name)")
+    }
+
+
+    // MARK: - MetaStorage groups meta localization
+
+    /**
+     This function iterates over `filter_group_localization` table and returns language if DB contains records with first matched language from `suitableLanguages` list.
+     If there are no matching languages, then we are looking for similar languages.
+     End if there is no similar languages return default `en` language.
+    */
+    func collectGroupsMetaLocalizationLanguage(from suitableLanguages: [String]) throws -> String {
+        // Trying to find full match language
+        for lang in suitableLanguages{
+            // Query: SELECT count(group_id) FROM filter_group_localization WHERE lang == lang
+            let query: ScalarQuery = FilterGroupLocalizationsTable
+                .table
+                .select(FilterGroupLocalizationsTable.groupId.count)
+                .where(FilterGroupLocalizationsTable.lang == lang)
+            let count = try filtersDb.scalar(query)
+            guard count > 0 else { continue }
+            return lang
+        }
+
+        var foundLanguage = MetaStorage.defaultDbLanguage
+        /*
+         Trying to find similar languages if language is still missed
+         The last element of the `suitableLanguages` list is a simple language code such as `se` or `en`.
+         */
+        let similarLanguages = try collectSimilarGroupsMetaLanguages(for: suitableLanguages.last ?? foundLanguage)
+        if let similarLanguage = similarLanguages.first {
+            foundLanguage = similarLanguage
+        }
+
+        return foundLanguage
+    }
+
+    /**
+     Returns list of similar languages.
+     Example: if input language `pt` then returns [pt-BR, pt-PT].
+     */
+    private func collectSimilarGroupsMetaLanguages(for language: String) throws -> [String] {
+        // Query: SELECT DISTINCT lang FROM filter_group_localizations WHERE (lang LIKE 'language%') AND (lang != 'language') ORDER by lang
+        let query = FilterGroupLocalizationsTable
+            .table
+            .select(distinct: [FilterGroupLocalizationsTable.lang])
+            .where(FilterGroupLocalizationsTable.lang.like("\(language)%") && FilterGroupLocalizationsTable.lang != language)
+            .order(FilterGroupLocalizationsTable.lang)
+
+        return try filtersDb.prepare(query).compactMap { row in
+            return row[FilterGroupLocalizationsTable.lang]
+        }
     }
 }

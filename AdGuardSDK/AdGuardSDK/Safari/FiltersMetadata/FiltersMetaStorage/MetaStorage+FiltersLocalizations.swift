@@ -46,11 +46,13 @@ struct FilterLocalizationsTable {
 }
 
 // MARK: - MetaStorage + FiltersLocalizations methods
+
 protocol FiltersLocalizationsMetaStorageProtocol {
     func getLocalizationForFilter(withId id: Int, forLanguage lang: String) throws -> FilterLocalizationsTable?
     func updateLocalizationForFilter(withId id: Int, forLanguage lang: String, localization: ExtendedFiltersMetaLocalizations.FilterLocalization) throws
     func deleteAllLocalizationForFilters(withIds ids: [Int]) throws
     func deleteAllLocalizationForFilter(withId id: Int) throws
+    func collectFiltersMetaLocalizationLanguage(from suitableLanguages: [String]) throws -> String
 }
 
 extension MetaStorage: FiltersLocalizationsMetaStorageProtocol {
@@ -92,5 +94,56 @@ extension MetaStorage: FiltersLocalizationsMetaStorageProtocol {
         let query = FilterLocalizationsTable.table.where(FilterLocalizationsTable.filterId == id).delete()
         try filtersDb.run(query)
         Logger.logDebug("(FiltersMetaStorage) - Delete all localization for filter with id=\(id)")
+    }
+
+    // MARK: - MetaStorage filters meta localization
+
+    /**
+     This function iterates over `filter_localization` table and returns language if DB contains records with first matched language from `suitableLanguages` list.
+     If there are no matching languages, then we are looking for similar languages.
+     End if there is no similar languages return default `en` language.
+     */
+    func collectFiltersMetaLocalizationLanguage(from suitableLanguages: [String]) throws -> String {
+
+        // Trying to find full match language
+        for lang in suitableLanguages {
+            // Query: SELECT count(filter_id) FROM filter_localization WHERE lang == lang
+            let query: ScalarQuery = FilterLocalizationsTable
+                .table
+                .select(FilterLocalizationsTable.filterId.count)
+                .where(FilterLocalizationsTable.lang == lang)
+            let count = try filtersDb.scalar(query)
+            guard count > 0 else { continue }
+            return lang
+        }
+
+        var foundLanguage = MetaStorage.defaultDbLanguage
+        /*
+         Trying to find similar languages if language is still missed
+         The last element of the `suitableLanguages` list is a simple language code such as `se` or `en`.
+         */
+        let similarLanguages = try collectSimilarFiltersMetaLanguages(for: suitableLanguages.last ?? foundLanguage)
+        if let similarLanguage = similarLanguages.first {
+            foundLanguage = similarLanguage
+        }
+
+        return foundLanguage
+    }
+
+    /**
+     Returns list of similar languages.
+     Example: if input language `pt` then returns [pt_BR, pt_PT].
+     */
+    private func collectSimilarFiltersMetaLanguages(for language: String) throws -> [String] {
+        // Query: SELECT DISTINCT lang FROM filter_localizations WHERE (lang LIKE 'language%') AND (lang != 'language') ORDER by lang
+        let query = FilterLocalizationsTable
+            .table
+            .select(distinct: [FilterLocalizationsTable.lang])
+            .where(FilterLocalizationsTable.lang.like("\(language)%") && FilterLocalizationsTable.lang != language)
+            .order(FilterLocalizationsTable.lang)
+
+        return try filtersDb.prepare(query).compactMap { row in
+            return row[FilterLocalizationsTable.lang]
+        }
     }
 }

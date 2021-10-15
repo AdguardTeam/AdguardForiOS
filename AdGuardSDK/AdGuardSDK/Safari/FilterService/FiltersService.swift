@@ -155,6 +155,10 @@ final class FiltersService: FiltersServiceProtocol {
     let metaParser: CustomFilterMetaParserProtocol
     let apiMethods: SafariProtectionApiMethodsProtocol
 
+    private lazy var suitableLanguages: [String] = {
+        return configuration.currentLocale.getSuitableLanguages(delimiter: .underScore)
+    }()
+
     // MARK: - Initialization
 
     init(
@@ -448,7 +452,9 @@ final class FiltersService: FiltersServiceProtocol {
 
     func enablePredefinedGroupsAndFilters() throws {
         try workingQueue.sync {
-            try enablePredefinedGroupsAndFiltersInternal(with: groups, currentLanguage: configuration.currentLanguage)
+            // The first element of the `suitableLanguages` list is the language code with the highest priority.
+            let lang = suitableLanguages.first ?? Locale.defaultLanguageCode
+            try enablePredefinedGroupsAndFiltersInternal(with: groups, currentLanguage: lang)
             try self._groupsAtomic.mutate { $0 = try getAllLocalizedGroups() }
         }
     }
@@ -542,7 +548,7 @@ final class FiltersService: FiltersServiceProtocol {
 
     /* Returns all groups from database with filters and localizations */
     private func getAllLocalizedGroups() throws -> [SafariGroup] {
-        let localizedGroupsMeta = try metaStorage.getAllLocalizedGroups(forLanguage: configuration.currentLanguage)
+        let localizedGroupsMeta = try metaStorage.getAllLocalizedGroups(forSuitableLanguages: suitableLanguages)
         return try localizedGroupsMeta.map { groupMeta in
             let group = SafariGroup(dbGroup: groupMeta, filters: [])
             let groupFilters = try getFilters(forGroup: group)
@@ -557,7 +563,7 @@ final class FiltersService: FiltersServiceProtocol {
 
     /* Returns filters meta for specified group */
     private func getFilters(forGroup group: SafariGroupProtocol) throws -> [SafariGroup.Filter] {
-        let localizedFiltersMeta = try metaStorage.getLocalizedFiltersForGroup(withId: group.groupId, forLanguage: configuration.currentLanguage)
+        let localizedFiltersMeta = try metaStorage.getLocalizedFiltersForGroup(withId: group.groupId, forSuitableLanguages: suitableLanguages)
         return try localizedFiltersMeta.map { dbFilter in
             // TODO: - Maybe we should store rulesCount in database
             let meta = getMetaForFilter(withId: dbFilter.filterId, filterDownloadPage: dbFilter.subscriptionUrl)
@@ -636,10 +642,12 @@ final class FiltersService: FiltersServiceProtocol {
         let group = DispatchGroup()
 
         group.enter()
+        // The first element of the `suitableLanguages` list is the language code with the highest priority.
+        let lang = suitableLanguages.first ?? Locale.defaultLanguageCode
         apiMethods.loadFiltersMetadata(version: configuration.appProductVersion,
                                                id: configuration.appId,
                                                cid: configuration.cid,
-                                               lang: configuration.currentLanguage) { [weak self] filtersMeta in
+                                               lang: lang) { [weak self] filtersMeta in
             if let meta = filtersMeta {
                 do {
                     metaUpdateResult = try self?.save(filtersMeta: meta, filtersIdsToUpdate: ids)

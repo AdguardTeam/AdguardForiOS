@@ -914,7 +914,7 @@ class FiltersServiceTest: XCTestCase {
             return FilterTagsTable(filterId: filter.element.filterId, tagId: 1, type: type, name: "tag_name")
         }
 
-        try! initPredefined(currentLanguage: "en", langsForFilter: [], tags: tags)
+        try! initPredefined(currentLocale: Locale(identifier: "en"), langsForFilter: [], tags: tags)
         XCTAssertEqual(metaStorage.setGroupCalledCount, 3)
         XCTAssertEqual(metaStorage.setFilterCalledCount, 1)
         XCTAssertEqual(metaStorage.setGroupResult.count, 3)
@@ -942,7 +942,7 @@ class FiltersServiceTest: XCTestCase {
             let type = filter.offset == privacyFilters.count - 1 ? recommendedId : platformId
             return FilterTagsTable(filterId: filter.element.filterId, tagId: 1, type: type, name: "tag_name")
         }
-        try! initPredefined(currentLanguage: "en", langsForFilter: [], tags: tags, proStatus: false)
+        try! initPredefined(currentLocale: Locale(identifier: "en"), langsForFilter: [], tags: tags, proStatus: false)
         XCTAssertEqual(metaStorage.setGroupCalledCount, 3)
         XCTAssertEqual(metaStorage.setFilterCalledCount, 1)
         XCTAssertEqual(metaStorage.setGroupResult.count, 3)
@@ -993,7 +993,7 @@ class FiltersServiceTest: XCTestCase {
 
         let tags = privacyTags + adsTags + languageSpecificTags
 
-        try! initPredefined(currentLanguage: "en", langsForFilter: [], tags: tags)
+        try! initPredefined(currentLocale: Locale(identifier: "en"), langsForFilter: [], tags: tags)
         XCTAssertEqual(metaStorage.setGroupCalledCount, 3)
         XCTAssertEqual(metaStorage.setFilterCalledCount, 4)
         XCTAssertEqual(metaStorage.setGroupResult.count, 3)
@@ -1025,7 +1025,7 @@ class FiltersServiceTest: XCTestCase {
             return FilterTagsTable(filterId: filter.element.filterId, tagId: 1, type: recommendedId, name: "tag_name")
         }
 
-        try! initPredefined(currentLanguage: "en", langsForFilter: [], tags: tags)
+        try! initPredefined(currentLocale: Locale(identifier: "en"), langsForFilter: [], tags: tags)
         XCTAssertEqual(metaStorage.setGroupCalledCount, 3)
         XCTAssertEqual(metaStorage.setFilterCalledCount, 0)
         XCTAssertEqual(metaStorage.setGroupResult.count, 3)
@@ -1047,7 +1047,7 @@ class FiltersServiceTest: XCTestCase {
 
     func testEnabledPredefinedGroupsAndFiltersWithEmptyTags() {
 
-        try! initPredefined(currentLanguage: "en", langsForFilter: [], tags: [])
+        try! initPredefined(currentLocale: Locale(identifier: "en"), langsForFilter: [], tags: [])
         XCTAssertEqual(metaStorage.setGroupCalledCount, 3)
         XCTAssertEqual(metaStorage.setFilterCalledCount, 0)
         XCTAssertEqual(metaStorage.setGroupResult.count, 3)
@@ -1072,7 +1072,7 @@ class FiltersServiceTest: XCTestCase {
             return FilterTagsTable(filterId: filter.element.filterId, tagId: 1, type: type, name: "tag_name")
         }
 
-        try! initPredefined(currentLanguage: "foo", langsForFilter: [], tags: tags)
+        try! initPredefined(currentLocale: Locale(identifier: "foo"), langsForFilter: [], tags: tags)
         XCTAssertEqual(metaStorage.setGroupCalledCount, 3)
         XCTAssertEqual(metaStorage.setFilterCalledCount, 1)
         XCTAssertEqual(metaStorage.setGroupResult.count, 3)
@@ -1102,7 +1102,7 @@ class FiltersServiceTest: XCTestCase {
             return FilterTagsTable(filterId: filter.element.filterId, tagId: 1, type: type, name: "tag_name")
         }
 
-        try! initPredefined(currentLanguage: "foo", langsForFilter: ["en", "fr"], tags: tags)
+        try! initPredefined(currentLocale: Locale(identifier: "foo"), langsForFilter: ["en", "fr"], tags: tags)
         XCTAssertEqual(metaStorage.setGroupCalledCount, 3)
         XCTAssertEqual(metaStorage.setFilterCalledCount, 0)
         XCTAssertEqual(metaStorage.setGroupResult.count, 3)
@@ -1128,7 +1128,7 @@ class FiltersServiceTest: XCTestCase {
             return FilterTagsTable(filterId: filter.element.filterId, tagId: 1, type: type, name: "tag_name")
         }
 
-        try! initPredefined(currentLanguage: "en-US", langsForFilter: ["EN", "FR"], tags: tags)
+        try! initPredefined(currentLocale: Locale(identifier: "en-US"), langsForFilter: ["EN", "FR"], tags: tags)
         XCTAssertEqual(metaStorage.setGroupCalledCount, 3)
         XCTAssertEqual(metaStorage.setFilterCalledCount, 1)
         XCTAssertEqual(metaStorage.setGroupResult.count, 3)
@@ -1159,7 +1159,7 @@ class FiltersServiceTest: XCTestCase {
         }
 
         metaStorage.getAllLocalizedGroupsResult = .success([])
-        try! initPredefined(currentLanguage: "en", langsForFilter: [], tags: tags)
+        try! initPredefined(currentLocale: Locale(identifier: "en"), langsForFilter: [], tags: tags)
 
         XCTAssertEqual(metaStorage.setGroupResult.count, 0)
         XCTAssertEqual(metaStorage.setFilterResult.count, 0)
@@ -1174,7 +1174,7 @@ class FiltersServiceTest: XCTestCase {
         }
 
         metaStorage.getAllLocalizaedFiltersResult = .success([])
-        try! initPredefined(currentLanguage: "en", langsForFilter: [], tags: tags)
+        try! initPredefined(currentLocale: Locale(identifier: "en"), langsForFilter: [], tags: tags)
 
         XCTAssertEqual(metaStorage.setGroupCalledCount, 3)
         XCTAssertEqual(metaStorage.setFilterCalledCount, 0)
@@ -1200,7 +1200,7 @@ class FiltersServiceTest: XCTestCase {
         }
 
         metaStorage.setGroupResultError = MetaStorageMockError.error
-        XCTAssertThrowsError(try initPredefined(currentLanguage: "en", langsForFilter: [], tags: tags))
+        XCTAssertThrowsError(try initPredefined(currentLocale: Locale(identifier: "en"), langsForFilter: [], tags: tags))
 
         XCTAssertEqual(metaStorage.setGroupCalledCount, 1)
         XCTAssertEqual(metaStorage.setFilterCalledCount, 0)
@@ -1222,7 +1222,7 @@ class FiltersServiceTest: XCTestCase {
         }
 
         metaStorage.setFilterResultError = MetaStorageMockError.error
-        XCTAssertThrowsError(try initPredefined(currentLanguage: "en", langsForFilter: [], tags: tags))
+        XCTAssertThrowsError(try initPredefined(currentLocale: Locale(identifier: "en"), langsForFilter: [], tags: tags))
 
         XCTAssertEqual(metaStorage.setGroupCalledCount, 1)
         XCTAssertEqual(metaStorage.setFilterCalledCount, 1)
@@ -1271,9 +1271,9 @@ class FiltersServiceTest: XCTestCase {
     }
 
 
-    private func initPredefined(currentLanguage: String, langsForFilter: [String], tags: [FilterTagsTable], proStatus: Bool = true) throws {
+    private func initPredefined(currentLocale: Locale, langsForFilter: [String], tags: [FilterTagsTable], proStatus: Bool = true) throws {
         configuration.proStatus = proStatus
-        configuration.currentLanguage = currentLanguage
+        configuration.currentLocale = currentLocale
         metaStorage.getLangsForFilterResult = .success(langsForFilter)
         metaStorage.getTagsForFilterResult = .success(tags)
         reinitFilterService()

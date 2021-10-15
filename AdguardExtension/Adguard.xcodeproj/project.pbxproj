@@ -17,6 +17,8 @@
 		2414089B26C4226000741F32 /* OnboardingContentBlockerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2414089A26C4226000741F32 /* OnboardingContentBlockerCell.swift */; };
 		2414089D26C42E6700741F32 /* OnboardingAdvancedProtectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2414089C26C42E6700741F32 /* OnboardingAdvancedProtectionView.swift */; };
 		241819FD2594D76900380A8A /* QueryParametersFromURLStringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241819FC2594D76900380A8A /* QueryParametersFromURLStringTest.swift */; };
+		24195D432719FA2300F31547 /* SystemLibsResolv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24195D422719FA2300F31547 /* SystemLibsResolv.framework */; };
+		24195D442719FA2300F31547 /* SystemLibsResolv.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24195D422719FA2300F31547 /* SystemLibsResolv.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		241FEB0C2701C84F00C1C487 /* WebReporterWrapperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241FEB0B2701C84F00C1C487 /* WebReporterWrapperProtocol.swift */; };
 		241FEB0D2701C84F00C1C487 /* WebReporterWrapperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241FEB0B2701C84F00C1C487 /* WebReporterWrapperProtocol.swift */; };
 		241FEB0E2701C84F00C1C487 /* WebReporterWrapperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241FEB0B2701C84F00C1C487 /* WebReporterWrapperProtocol.swift */; };
@@ -1080,6 +1082,7 @@
 		B26B9245271872B500F1D482 /* SharedAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B29D53A9270D40EA0045CB16 /* SharedAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B26B924727197D2400F1D482 /* DnsProtectionCustomProvidersMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26B924627197D2400F1D482 /* DnsProtectionCustomProvidersMigrationHelper.swift */; };
 		B26B924827197D2400F1D482 /* DnsProtectionCustomProvidersMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26B924627197D2400F1D482 /* DnsProtectionCustomProvidersMigrationHelper.swift */; };
+		B26B92A02719FE4200F1D482 /* SystemLibsResolv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24195D422719FA2300F31547 /* SystemLibsResolv.framework */; };
 		B29D5358270CD9DC0045CB16 /* DnsAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29DD474270CB04B0072B42F /* DnsAdGuardSDK.framework */; };
 		B29D536F270CE4CF0045CB16 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0971B8632DD00319AA3 /* libsqlite3.tbd */; };
 		B29D5370270CE6020045CB16 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0991B8632F600319AA3 /* libz.tbd */; };
@@ -2271,6 +2274,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				24195D442719FA2300F31547 /* SystemLibsResolv.framework in Embed Frameworks */,
 				B29D538F270D1B6E0045CB16 /* SafariAdGuardSDK.framework in Embed Frameworks */,
 				B29D538D270D1B240045CB16 /* DnsAdGuardSDK.framework in Embed Frameworks */,
 				B26B923627185AB400F1D482 /* AdGuardSdkDependencies.framework in Embed Frameworks */,
@@ -2306,6 +2310,7 @@
 		2414089A26C4226000741F32 /* OnboardingContentBlockerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContentBlockerCell.swift; sourceTree = "<group>"; };
 		2414089C26C42E6700741F32 /* OnboardingAdvancedProtectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAdvancedProtectionView.swift; sourceTree = "<group>"; };
 		241819FC2594D76900380A8A /* QueryParametersFromURLStringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParametersFromURLStringTest.swift; sourceTree = "<group>"; };
+		24195D422719FA2300F31547 /* SystemLibsResolv.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SystemLibsResolv.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		241FEB0B2701C84F00C1C487 /* WebReporterWrapperProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebReporterWrapperProtocol.swift; sourceTree = "<group>"; };
 		2422253E26ECB50B00EC74AE /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
 		2425D6A7258F8C430037AEBE /* Dictionary+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Utils.swift"; sourceTree = "<group>"; };
@@ -3652,6 +3657,7 @@
 				659886A01CF74DE9003ECD1C /* JavaScriptCore.framework in Frameworks */,
 				B26B9244271872B500F1D482 /* SharedAdGuardSDK.framework in Frameworks */,
 				659886A11CF74DE9003ECD1C /* libz.tbd in Frameworks */,
+				B26B92A02719FE4200F1D482 /* SystemLibsResolv.framework in Frameworks */,
 				7EF5C56426C26AC0001851D6 /* Sentry in Frameworks */,
 				B26B923E2718716B00F1D482 /* AdGuardSdkDependencies.framework in Frameworks */,
 				659886A31CF74DE9003ECD1C /* SafariServices.framework in Frameworks */,
@@ -3679,6 +3685,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24195D432719FA2300F31547 /* SystemLibsResolv.framework in Frameworks */,
 				7E2522142408201700743648 /* Lottie in Frameworks */,
 				655E94931BBEADD500286FBE /* AVKit.framework in Frameworks */,
 				B29D538C270D1B240045CB16 /* DnsAdGuardSDK.framework in Frameworks */,
@@ -5168,6 +5175,7 @@
 		65D8294D1EDDA905008F7F30 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				24195D422719FA2300F31547 /* SystemLibsResolv.framework */,
 				B26B921E2718266200F1D482 /* AdGuardSdkDependencies.framework */,
 				B29D53A9270D40EA0045CB16 /* SharedAdGuardSDK.framework */,
 				B29DD474270CB04B0072B42F /* DnsAdGuardSDK.framework */,

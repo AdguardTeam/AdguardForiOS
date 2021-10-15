@@ -39,7 +39,7 @@ public protocol SafariConfigurationProtocol: ConfigurationProtocol {
 
 public final class SafariConfiguration: SafariConfigurationProtocol {
     public var iosVersion: Int
-    public var currentLanguage: String
+    public var currentLocale: Locale
     public var proStatus: Bool
     public var safariProtectionEnabled: Bool
     public var advancedBlockingIsEnabled: Bool
@@ -54,7 +54,7 @@ public final class SafariConfiguration: SafariConfigurationProtocol {
 
     public init(
         iosVersion: Int,
-        currentLanguage: String,
+        currentLocale: Locale,
         proStatus: Bool,
         safariProtectionEnabled: Bool,
         advancedBlockingIsEnabled: Bool,
@@ -67,7 +67,7 @@ public final class SafariConfiguration: SafariConfigurationProtocol {
         cid: String
     ) {
         self.iosVersion = iosVersion
-        self.currentLanguage = currentLanguage
+        self.currentLocale = currentLocale
         self.proStatus = proStatus
         self.safariProtectionEnabled = safariProtectionEnabled
         self.advancedBlockingIsEnabled = advancedBlockingIsEnabled
@@ -83,7 +83,7 @@ public final class SafariConfiguration: SafariConfigurationProtocol {
 
 extension SafariConfigurationProtocol {
     func updateConfig(with newConfig: SafariConfigurationProtocol) {
-        self.currentLanguage = newConfig.currentLanguage
+        self.currentLocale = newConfig.currentLocale
         self.proStatus = newConfig.proStatus
         self.iosVersion = newConfig.iosVersion
         self.safariProtectionEnabled = newConfig.safariProtectionEnabled

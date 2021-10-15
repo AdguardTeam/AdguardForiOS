@@ -16,8 +16,6 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
-
 protocol FiltersServiceForBuilderProtocol {
     func downloadAndSaveFiltersMeta() throws
 }
@@ -29,10 +27,13 @@ extension FiltersService: FiltersServiceForBuilderProtocol {
         var resultError: Error?
         let group = DispatchGroup()
         group.enter()
-        apiMethods.loadFiltersMetadata(version: configuration.appProductVersion,
-                                       id: configuration.appId,
-                                       cid: configuration.cid,
-                                       lang: configuration.currentLanguage) { [unowned self] filtersMeta in
+        let lang = configuration.currentLocale.getSuitableLanguages(delimiter: .underScore).first ?? Locale.defaultLanguageCode
+        apiMethods.loadFiltersMetadata(
+            version: configuration.appProductVersion,
+            id: configuration.appId,
+            cid: configuration.cid,
+            lang: lang
+        ) { [unowned self] filtersMeta in
 
             if let meta = filtersMeta {
                 do {

@@ -19,10 +19,10 @@
 import DnsAdGuardSDK
 
 extension DnsConfiguration {
-    convenience init(bundle: Bundle = .main, resources: AESharedResourcesProtocol, isProPurchased: Bool) {
+    convenience init(bundle: Bundle = .main, currentLocale: Locale = .current, resources: AESharedResourcesProtocol, isProPurchased: Bool) {
         let sdkDnsImplementation: DnsAdGuardSDK.DnsImplementation = resources.dnsImplementation == .adGuard ? .adGuard : .native
         self.init(
-            currentLanguage: "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")",
+            currentLocale: currentLocale,
             proStatus: bundle.isPro ? true : isProPurchased,
             dnsFilteringIsEnabled: resources.systemProtectionEnabled,
             dnsImplementation: sdkDnsImplementation,
@@ -32,9 +32,9 @@ extension DnsConfiguration {
         )
     }
 
-    static func defaultConfiguration(from resources: AESharedResourcesProtocol, bundle: Bundle = .main) -> DnsConfiguration {
+    static func defaultConfiguration(from resources: AESharedResourcesProtocol, bundle: Bundle = .main, currentLocale: Locale = .current) -> DnsConfiguration {
         return DnsConfiguration(
-            currentLanguage: "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")",
+            currentLocale: currentLocale,
             proStatus: bundle.isPro ? true : false,
             dnsFilteringIsEnabled: false,
             dnsImplementation: .adGuard,
