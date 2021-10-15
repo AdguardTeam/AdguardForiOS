@@ -16,7 +16,8 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-@_implementationOnly import SQLite
+import SQLite
+import SharedAdGuardSDK
 
 public protocol ActivityStatisticsProtocol: ResetableSyncProtocol {
     /// Adds the `record` obtained from DNS-libs in the Tunnel to the DB

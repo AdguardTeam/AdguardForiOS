@@ -17,6 +17,7 @@
  */
 
 import NetworkExtension
+import SharedAdGuardSDK
 
 protocol PacketTunnelSettingsProviderProtocol {
     func createSettings(full: Bool, withoutVpnIcon: Bool) -> NEPacketTunnelNetworkSettings

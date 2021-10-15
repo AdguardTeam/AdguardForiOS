@@ -17,6 +17,7 @@
  */
 
 import SafariAdGuardSDK
+import SharedAdGuardSDK
 import UIKit
 
 protocol RuleDetailsControllerDelegate {

@@ -17,7 +17,7 @@
 */
 
 import Foundation
-import enum SafariAdGuardSDK.CommonError
+import enum SharedAdGuardSDK.CommonError
 
 protocol SafariProtectionAllowlistRulesMigrationHelperProtocol: AnyObject {
     /// Returns swift allowlist rules objects from obsolete rules objects

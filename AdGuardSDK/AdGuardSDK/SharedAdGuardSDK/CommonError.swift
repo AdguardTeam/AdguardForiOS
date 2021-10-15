@@ -18,7 +18,6 @@
 
 import Foundation
 
-
 public enum CommonError: Error, CustomDebugStringConvertible {
     case missingSelf
     case missingData

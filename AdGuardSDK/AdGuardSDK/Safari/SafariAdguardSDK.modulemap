@@ -1,0 +1,6 @@
+framework module SafariAdGuardSDK {
+    umbrella header "SafariAdGuardSDK.h"
+
+    export *
+    module * { export * }
+}

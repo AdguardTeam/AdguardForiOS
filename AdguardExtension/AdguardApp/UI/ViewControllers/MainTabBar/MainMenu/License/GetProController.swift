@@ -61,7 +61,7 @@ class GetProController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        purchaseObserver = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification),
+        purchaseObserver = NotificationCenter.default.observe(name: Notification.Name(PurchaseAssistant.kPurchaseServiceNotification),
                                                object: nil, queue: nil)
         { [weak self](notification) in
 
@@ -146,28 +146,28 @@ class GetProController: UIViewController {
     private func processNotification(info: [AnyHashable: Any]) {
 
         DispatchQueue.main.async { [weak self] in
-            let type = info[PurchaseService.kPSNotificationTypeKey] as? String
-            let error = info[PurchaseService.kPSNotificationErrorKey] as? NSError
+            let type = info[PurchaseAssistant.kPSNotificationTypeKey] as? String
+            let error = info[PurchaseAssistant.kPSNotificationErrorKey] as? NSError
 
             switch type {
-            case PurchaseService.kPSNotificationPurchaseSuccess:
+            case PurchaseAssistant.kPSNotificationPurchaseSuccess:
                 self?.purchaseSuccess()
-            case PurchaseService.kPSNotificationPurchaseFailure:
+            case PurchaseAssistant.kPSNotificationPurchaseFailure:
                 self?.getProTableController?.enablePurchaseButtons(true)
                 self?.purchaseFailure(error: error)
-            case PurchaseService.kPSNotificationRestorePurchaseSuccess:
+            case PurchaseAssistant.kPSNotificationRestorePurchaseSuccess:
                 self?.restoreSuccess()
-            case PurchaseService.kPSNotificationRestorePurchaseNothingToRestore:
+            case PurchaseAssistant.kPSNotificationRestorePurchaseNothingToRestore:
                 self?.getProTableController?.enablePurchaseButtons(true)
                 self?.nothingToRestore()
-            case PurchaseService.kPSNotificationRestorePurchaseFailure:
+            case PurchaseAssistant.kPSNotificationRestorePurchaseFailure:
                 self?.getProTableController?.enablePurchaseButtons(true)
                 self?.restoreFailed(error: error)
-            case PurchaseService.kPSNotificationReadyToPurchase:
+            case PurchaseAssistant.kPSNotificationReadyToPurchase:
                 self?.getProTableController?.selectedProduct = self?.purchaseService.standardProduct
                 self?.getProTableController?.enablePurchaseButtons(true)
                 self?.getProTableController?.setPrice()
-            case PurchaseService.kPSNotificationCanceled:
+            case PurchaseAssistant.kPSNotificationCanceled:
                 self?.getProTableController?.enablePurchaseButtons(true)
             default:
                 break
@@ -202,7 +202,7 @@ class GetProController: UIViewController {
 
     private func updateViews() {
 
-        switch (configurationService.proStatus, configurationService.purchasedThroughLogin) {
+        switch (configurationService.proStatus, purchaseService.purchasedThroughLogin) {
         case (false, _):
             goToMyAccountHeight.constant = 0
             navigationItem.rightBarButtonItems = [loginBarButton]

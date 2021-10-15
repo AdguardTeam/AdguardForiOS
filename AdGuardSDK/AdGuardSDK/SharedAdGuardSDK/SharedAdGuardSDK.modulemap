@@ -1,0 +1,6 @@
+framework module SharedAdGuardSDK {
+    umbrella header "SharedAdGuardSDK.h"
+
+    export *
+    module * { export * }
+}

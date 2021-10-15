@@ -16,9 +16,9 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
+import SharedAdGuardSDK
 import Zip
-@_implementationOnly import SQLite
+import SQLite
 
 protocol DefaultDatabaseManagerProtocol {
     // default.db file URL

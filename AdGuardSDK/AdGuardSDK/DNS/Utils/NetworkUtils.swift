@@ -16,7 +16,9 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
+import AGDnsProxy
+import SystemLibs
+import SharedAdGuardSDK
 
 protocol NetworkUtilsProtocol {
     /* Returns list of ip addresses of system DNS servers */
@@ -80,7 +82,7 @@ public struct NetworkUtils: NetworkUtilsProtocol {
 
     public init() {}
 
-    func getProtocol(from upstream: String) throws -> DnsProtocol {
+    public func getProtocol(from upstream: String) throws -> DnsProtocol {
         if upstream.hasPrefix("sdns://") {
             return try getDnsProtocol(from: upstream)
         }

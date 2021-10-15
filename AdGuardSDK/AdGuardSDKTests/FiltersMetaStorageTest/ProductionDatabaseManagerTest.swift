@@ -1,5 +1,5 @@
 import XCTest
-@_implementationOnly import SQLite
+import SQLite
 
 class ProductionDatabaseManagerTest: XCTestCase {
 

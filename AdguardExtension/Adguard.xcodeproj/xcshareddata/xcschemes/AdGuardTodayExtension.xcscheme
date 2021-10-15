@@ -21,20 +21,6 @@
                ReferencedContainer = "container:Adguard.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "65F398101B7B684700ABCD39"
-               BuildableName = "Adguard.app"
-               BlueprintName = "Adguard"
-               ReferencedContainer = "container:Adguard.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -57,16 +43,6 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "2">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "65F398101B7B684700ABCD39"
-            BuildableName = "Adguard.app"
-            BlueprintName = "Adguard"
-            ReferencedContainer = "container:Adguard.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -75,16 +51,15 @@
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES"
       launchAutomaticallySubstyle = "2">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "65F398101B7B684700ABCD39"
-            BuildableName = "Adguard.app"
-            BlueprintName = "Adguard"
+            BlueprintIdentifier = "7E536C65238D2AC400A83A79"
+            BuildableName = "AdGuardTodayExtension.appex"
+            BlueprintName = "AdGuardTodayExtension"
             ReferencedContainer = "container:Adguard.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

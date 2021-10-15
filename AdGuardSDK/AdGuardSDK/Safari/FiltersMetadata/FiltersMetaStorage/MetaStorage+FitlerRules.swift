@@ -17,7 +17,7 @@
 */
 
 import Foundation
-@_implementationOnly import SQLite
+import SQLite
 
 /* FilterRulesTable; filter_rules table */
 private struct FilterRulesTable {

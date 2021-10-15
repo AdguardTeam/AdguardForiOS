@@ -16,7 +16,7 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
+import SharedAdGuardSDK
 
 extension RequestsFactory {
     static func loadFiltersMetadataConfig(version: String, id: String, cid: String, lang: String) -> RequestConfig<FiltersMetadataParser> {

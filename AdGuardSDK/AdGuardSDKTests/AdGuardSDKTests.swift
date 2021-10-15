@@ -1,10 +1,3 @@
-//
-//  AdGuardSDKTests.swift
-//  AdGuardSDKTests
-//
-//  Created by Илья Ковальчук on 10.08.2021.
-//
-
 import XCTest
 
 class AdGuardSDKTests: XCTestCase {

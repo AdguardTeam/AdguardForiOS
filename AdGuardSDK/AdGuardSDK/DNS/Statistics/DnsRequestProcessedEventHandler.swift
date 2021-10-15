@@ -16,7 +16,7 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
+import SharedAdGuardSDK
 
 protocol DnsRequestProcessedEventHandlerProtocol: AnyObject {
     /// Accepts event object from DNS-libs and adds it to different statistics
