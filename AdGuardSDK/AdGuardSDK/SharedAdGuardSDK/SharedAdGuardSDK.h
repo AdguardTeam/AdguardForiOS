@@ -2,8 +2,6 @@
 //  SharedAdGuardSDK.h
 //  SharedAdGuardSDK
 //
-//  Created by Илья Ковальчук on 07.09.2021.
-//
 
 #import <Foundation/Foundation.h>
 
@@ -14,5 +12,3 @@ FOUNDATION_EXPORT double SharedAdGuardSDKVersionNumber;
 FOUNDATION_EXPORT const unsigned char SharedAdGuardSDKVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <SharedAdGuardSDK/PublicHeader.h>
-
-

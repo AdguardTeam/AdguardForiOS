@@ -16,7 +16,6 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
 import SafariAdGuardSDK
 
 /// This service is responsible for current application configuration
@@ -25,7 +24,7 @@ final class ConfigurationService: ConfigurationServiceProtocol {
     // MARK: - Private properties
 
     /* Services */
-    private var purchaseService : PurchaseServiceProtocol
+    private var purchaseService : PurchaseStatusProtocol
     private var resources: AESharedResourcesProtocol
     private var safariProtection: SafariProtectionProtocol
 
@@ -34,13 +33,13 @@ final class ConfigurationService: ConfigurationServiceProtocol {
 
     // MARK: - Initialization
 
-    init(purchaseService : PurchaseServiceProtocol, resources: AESharedResourcesProtocol, safariProtection: SafariProtectionProtocol) {
+    init(purchaseService : PurchaseStatusProtocol, resources: AESharedResourcesProtocol, safariProtection: SafariProtectionProtocol) {
         self.purchaseService = purchaseService
         self.resources = resources
         self.safariProtection = safariProtection
         self.contentBlockerEnabled = safariProtection.allContentBlockersStates
 
-        let notificationName = Notification.Name(PurchaseService.kPurchaseServiceNotification)
+        let notificationName = Notification.Name(PurchaseAssistant.kPurchaseServiceNotification)
         self.purchaseServiceObserver = NotificationCenter.default.observe(
             name: notificationName,
             object: nil,
@@ -48,8 +47,8 @@ final class ConfigurationService: ConfigurationServiceProtocol {
         { [weak self] note in
             guard let self = self else { return }
 
-            let command = note.userInfo?[PurchaseService.kPSNotificationTypeKey] as! String
-            if  command == PurchaseService.kPSNotificationPremiumStatusChanged {
+            let command = note.userInfo?[PurchaseAssistant.kPSNotificationTypeKey] as! String
+            if  command == PurchaseAssistant.kPSNotificationPremiumStatusChanged {
                 self.safariProtection.update(proStatus: self.proStatus, onCbReloaded: nil)
                 self.resources.advancedProtection = false
                 self.proStatusChanged()
@@ -61,9 +60,6 @@ final class ConfigurationService: ConfigurationServiceProtocol {
 
     /// This flag indicates that pro fetures are purchased
     var proStatus: Bool { Bundle.main.isPro ? true : purchaseService.isProPurchased }
-
-    /// This flag indicates that pro status was purchased on our site
-    var purchasedThroughLogin: Bool { purchaseService.purchasedThroughLogin }
 
     /// This flag indicated whether advanced protection is enabled. Note that this feature is pro only
     var isAdvancedProtectionEnabled: Bool {
@@ -199,4 +195,3 @@ extension Notification.Name {
     static var contentBlockersStateChanged: Notification.Name { return .init(rawValue: "contentBlockersStateChanged") }
     static var advancedProtectionStateChanged: Notification.Name { return .init(rawValue: "advancedProtectionStateChanged") }
 }
-

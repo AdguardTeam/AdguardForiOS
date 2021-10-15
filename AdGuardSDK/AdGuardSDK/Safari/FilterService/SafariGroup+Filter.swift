@@ -16,7 +16,7 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
+import SharedAdGuardSDK
 
 /**
  All filters that we store have their own meta and rules

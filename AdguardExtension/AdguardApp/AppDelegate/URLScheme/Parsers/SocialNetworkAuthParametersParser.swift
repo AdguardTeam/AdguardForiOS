@@ -43,12 +43,12 @@ struct SocialNetworkAuthParametersParser: IURLSchemeParametersParser {
         DDLogInfo("(URLSchemeProcessor) Social login error: \(error)")
         switch error {
         case socialErrorUserNotFound:
-            userInfo[PurchaseService.kPSNotificationTypeKey] = PurchaseService.kPSNotificationLoginUserNotFound
-            userInfo[PurchaseService.kPSNotificationErrorKey] = NSError(domain: LoginService.loginErrorDomain, code: LoginService.socialUserNotFound, userInfo: nil)
+            userInfo[PurchaseAssistant.kPSNotificationTypeKey] = PurchaseAssistant.kPSNotificationLoginUserNotFound
+            userInfo[PurchaseAssistant.kPSNotificationErrorKey] = NSError(domain: LoginService.loginErrorDomain, code: LoginService.socialUserNotFound, userInfo: nil)
 
         default:
             break
         }
-        NotificationCenter.default.post(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: self, userInfo: userInfo)
+        NotificationCenter.default.post(name: Notification.Name(PurchaseAssistant.kPurchaseServiceNotification), object: self, userInfo: userInfo)
     }
 }

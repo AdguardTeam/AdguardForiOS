@@ -1,6 +1,5 @@
-//
-//  Use this file to import your target's public headers that you would like to expose to Swift.
-//
+#ifndef AdGuard_Bridging_Header_h
+#define AdGuard_Bridging_Header_h
 
 #import "AEUIPlayerViewController.h"
 #import "AESharedResources.h"
@@ -17,3 +16,5 @@
 #import "ACNCidrRange.h"
 #import "ABECRequest.h"
 #import "ACLLogger.h"
+
+#endif /* AdGuard_Bridging_Header_h */

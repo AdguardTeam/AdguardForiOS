@@ -48,130 +48,6 @@ typealias Product = (type: ProductType, price: String, period: Period?, trialPer
  Work with Adguard Licenses is delegated to EmailSignInController
  */
 
-protocol PurchaseServiceProtocol {
-
-    /* star service. It request SKProducts  */
-    func start()
-
-    /* request SKProducts. If SKProducts failed on start we must repeat this request  */
-    func startProductRequest()
-
-    /**
-     returns true if user has valid renewable subscription or valid adguard license
-     */
-    var isProPurchased: Bool {get}
-
-    /**
-     returns true if user has been logged in through login
-     */
-    var purchasedThroughLogin: Bool {get}
-
-    /**
-     returns true if user has been logged in through Setapp
-     */
-    var purchasedThroughSetapp: Bool {get}
-
-    /**
-     returns true if premium expired. It works both for in-app purchases and for adguard licenses
-     */
-    func checkPremiumStatusChanged()
-
-    /**
-     returns standart product (currently it is Year subscribtion )
-     */
-    var standardProduct: Product? { get }
-
-    /**
-     return array of products
-     */
-    var products: [Product] { get }
-
-    /*  login on backend server and check license information
-        the results will be posted through notification center
-
-        we can use adguard license in two ways
-        1) login through oauth in safari and get access_token. Then we make auth_token request and get license key. Then bind this key to user device id(app_id) through status request with license key in params
-        2) login directly with license key. In this case we immediately send status request with this license key
-     */
-    func login(withAccessToken token: String?, state: String?)
-    func login(withLicenseKey key: String, completion: @escaping (Bool)->Void)
-
-    /**
-     Log with name and password
-     */
-    func login(name: String, password: String, code2fa: String?)
-
-    /**
-     checks the status of adguard license
-     */
-    func checkLicenseStatus()
-
-    /**
-     deletes all login information
-     */
-    func logout()->Bool
-
-    /**
-     requests an renewable or non-consumable subscription purchase
-     */
-    func requestPurchase(productId: String)
-
-    /**
-     requests restore in-app purchases
-     */
-    func requestRestore()
-
-    /** resets all login data */
-    func reset(completion: @escaping ()->Void )
-
-    /** handle setapp subscription changes */
-    func updateSetappState(subscription: SetappSubscription)
-
-    /** generate URL for OAUTH */
-    func generateAuthURL(state: String, socialProvider: SocialProvider) -> URL?
-
-}
-
-// MARK: - public constants -
-extension PurchaseService {
-
-    /// NSNotificationCenter notification name
-    static let kPurchaseServiceNotification = "kPurchaseServiceNotification"
-
-    /// notification user data keys
-    static let kPSNotificationTypeKey = "kPSNotificationTypeKey"
-    static let kPSNotificationErrorKey = "kPSNotificationErrorKey"
-    static let kPSNotificationPremiumExpiredKey = "kPSNotificationPremiumExpiredKey"
-
-    /// notification types
-    static let kPSNotificationPurchaseSuccess = "kPSNotificationPurchaseSuccess"
-    static let kPSNotificationPurchaseFailure = "kPSNotificationPurchaseFailure"
-    static let kPSNotificationRestorePurchaseSuccess = "kPSNotificationRestorePurchaseSuccess"
-    static let kPSNotificationRestorePurchaseFailure = "kPSNotificationRestorePurchaseFailure"
-    static let kPSNotificationSilentRestoreSuccess = "kPSNotificationSilentRestoreSuccess"
-    static let kPSNotificationRestorePurchaseNothingToRestore = "kPSNotificationRestorePurchaseNothingToRestore"
-    static let kPSNotificationLoginSuccess = "kPSNotificationLoginSuccess"
-    static let kPSNotificationLoginFailure = "kPSNotificationLoginFailure"
-    static let kPSNotificationLoginPremiumExpired = "kPSNotificationLoginPremiumExpired"
-    static let kPSNotificationLoginNotPremiumAccount = "kPSNotificationLoginNotPremiumAccount"
-    static let kPSNotificationLoginUserNotFound = "kPSNotificationLoginUserNotFound"
-    static let kPSNotificationReadyToPurchase = "kPSNotificationReadyToPurchase"
-    static let kPSNotificationPremiumExpired = "kPSNotificationPremiumExpired"
-
-    /// Cancel button tapped notification
-    static let kPSNotificationCanceled = "kPSNotificationCanceled"
-
-    static let kPSNotificationPremiumStatusChanged = "kPSNotificationPremiumStatusChanged"
-
-    static let kPSNotificationOauthSucceeded = "kPSNotificationOauthSucceeded"
-
-    /// errors
-    static let AEPurchaseErrorDomain = "AEPurchaseErrorDomain"
-
-    static let AEPurchaseErrorAuthFailed = -1
-    static let AEConfirmReceiptError = -2
-}
-
 // MARK: - service implementation -
 final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransactionObserver, SKProductsRequestDelegate {
 
@@ -341,7 +217,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         start()
 
         loginService.activeChanged = { [weak self] in
-            self?.postNotification(PurchaseService.kPSNotificationPremiumStatusChanged)
+            self?.postNotification(PurchaseAssistant.kPSNotificationPremiumStatusChanged)
         }
     }
 
@@ -380,11 +256,11 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
 
         if token == nil || state == nil || expectedState == nil || state! != expectedState! {
             DDLogError("(PurchaseService) login with access token failed " + (token == nil ? "token == nil" : "") + (state == nil ? "state == nil" : "") + (expectedState == nil ? "expectedState == nil" : "") + (state != expectedState ? "state != expectedState" : ""))
-            postNotification(PurchaseService.kPSNotificationLoginFailure, nil)
+            postNotification(PurchaseAssistant.kPSNotificationLoginFailure, nil)
             return
         }
 
-        postNotification(PurchaseService.kPSNotificationOauthSucceeded, nil)
+        postNotification(PurchaseAssistant.kPSNotificationOauthSucceeded, nil)
 
         loginService.login(accessToken: token!) { [weak self]  (error) in
             guard let sSelf = self else { return }
@@ -405,7 +281,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         guard let receiptUrlStr = Bundle.main.appStoreReceiptURL else { return }
         if !FileManager.default.fileExists(atPath: receiptUrlStr.path) { return }
         guard let data = try? Data(contentsOf: receiptUrlStr) else {
-            complete(NSError(domain: PurchaseService.AEPurchaseErrorDomain, code: PurchaseService.AEConfirmReceiptError, userInfo: nil))
+            complete(NSError(domain: PurchaseAssistant.AEPurchaseErrorDomain, code: PurchaseAssistant.AEConfirmReceiptError, userInfo: nil))
             return
         }
 
@@ -415,7 +291,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
 
         guard let appId = keychain.appId else {
             DDLogError("(LoginService) loginInternal error - can not obtain appId)")
-            complete(NSError(domain: PurchaseService.AEPurchaseErrorDomain, code: PurchaseService.AEConfirmReceiptError, userInfo: [:]))
+            complete(NSError(domain: PurchaseAssistant.AEPurchaseErrorDomain, code: PurchaseAssistant.AEConfirmReceiptError, userInfo: [:]))
             return
         }
 
@@ -447,7 +323,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
             }
 
             guard let data = dataOrNil  else{
-                complete(NSError(domain: PurchaseService.AEPurchaseErrorDomain, code: PurchaseService.AEConfirmReceiptError, userInfo: nil))
+                complete(NSError(domain: PurchaseAssistant.AEPurchaseErrorDomain, code: PurchaseAssistant.AEConfirmReceiptError, userInfo: nil))
                 return
             }
 
@@ -457,17 +333,17 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
                 let validateSuccess = strongSelf.processValidateResponse(json: jsonResponse)
 
                 if !validateSuccess {
-                    complete(NSError(domain: PurchaseService.AEPurchaseErrorDomain, code: PurchaseService.AEConfirmReceiptError, userInfo: nil))
+                    complete(NSError(domain: PurchaseAssistant.AEPurchaseErrorDomain, code: PurchaseAssistant.AEConfirmReceiptError, userInfo: nil))
                     return
                 }
 
                 strongSelf.purchasedThroughInApp = strongSelf.isInAppPurchaseActive()
 
-                strongSelf.postNotification(PurchaseService.kPSNotificationPremiumStatusChanged)
+                strongSelf.postNotification(PurchaseAssistant.kPSNotificationPremiumStatusChanged)
                 complete(nil)
             }
             catch {
-                complete(NSError(domain: PurchaseService.AEPurchaseErrorDomain, code: PurchaseService.AEConfirmReceiptError, userInfo: nil))
+                complete(NSError(domain: PurchaseAssistant.AEPurchaseErrorDomain, code: PurchaseAssistant.AEConfirmReceiptError, userInfo: nil))
             }
         }
     }
@@ -491,10 +367,10 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         validateReceipt { [weak self] (error) in
             guard let sSelf = self else { return }
             if wasActive && !sSelf.isInAppPurchaseActive() {
-                sSelf.postNotification(PurchaseService.kPSNotificationPremiumExpired)
+                sSelf.postNotification(PurchaseAssistant.kPSNotificationPremiumExpired)
             }
             else if !wasActive && sSelf.isInAppPurchaseActive() {
-                sSelf.postNotification(PurchaseService.kPSNotificationSilentRestoreSuccess)
+                sSelf.postNotification(PurchaseAssistant.kPSNotificationSilentRestoreSuccess)
             }
         }
 
@@ -504,7 +380,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
             loginService.checkStatus { [weak self] (error) in
                 if error != nil || !(self?.loginService.active ?? false) {
                     if !(self?.loginService.hasPremiumLicense ?? true) {
-                        self?.postNotification(PurchaseService.kPSNotificationPremiumExpired)
+                        self?.postNotification(PurchaseAssistant.kPSNotificationPremiumExpired)
                     }
                 }
             }
@@ -580,10 +456,10 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
                 DDLogInfo("(PurchaseService) Transaction failed for product: \(transaction.payment.productIdentifier)")
                 SKPaymentQueue.default().finishTransaction(transaction)
                 if error?.code == SKError.paymentCancelled.rawValue {
-                    postNotification(PurchaseService.kPSNotificationCanceled, nil)
+                    postNotification(PurchaseAssistant.kPSNotificationCanceled, nil)
                     break
                 }
-                postNotification(PurchaseService.kPSNotificationPurchaseFailure, transaction.error)
+                postNotification(PurchaseAssistant.kPSNotificationPurchaseFailure, transaction.error)
 
             case .purchased:
                 DDLogInfo("(PurchaseService) Transaction purchased for product: \(transaction.payment.productIdentifier)")
@@ -605,13 +481,13 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
                 guard let sSelf = self else { return }
 
                 if error == nil && sSelf.purchasedThroughInApp {
-                    let result = purchased ? PurchaseService.kPSNotificationPurchaseSuccess : PurchaseService.kPSNotificationRestorePurchaseSuccess
+                    let result = purchased ? PurchaseAssistant.kPSNotificationPurchaseSuccess : PurchaseAssistant.kPSNotificationRestorePurchaseSuccess
 
                     sSelf.postNotification(result)
                 }
 
                 if error == nil && !sSelf.purchasedThroughInApp {
-                    sSelf.postNotification(PurchaseService.kPSNotificationRestorePurchaseNothingToRestore)
+                    sSelf.postNotification(PurchaseAssistant.kPSNotificationRestorePurchaseNothingToRestore)
                 }
             }
         }
@@ -643,7 +519,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         }
 
         if productsToPurchase.count > 0 {
-            postNotification(PurchaseService.kPSNotificationReadyToPurchase)
+            postNotification(PurchaseAssistant.kPSNotificationReadyToPurchase)
             productRequest = nil
         }
     }
@@ -663,7 +539,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         }
 
         // nothing to restore
-        postNotification(PurchaseService.kPSNotificationRestorePurchaseNothingToRestore)
+        postNotification(PurchaseAssistant.kPSNotificationRestorePurchaseNothingToRestore)
     }
 
     func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
@@ -671,10 +547,10 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         DDLogError("(PurchaseServie) restore failed with error: \(error.localizedDescription)")
         let nsError = error as NSError
         if nsError.code == SKError.paymentCancelled.rawValue {
-            postNotification(PurchaseService.kPSNotificationCanceled, nil)
+            postNotification(PurchaseAssistant.kPSNotificationCanceled, nil)
             return
         }
-        postNotification(PurchaseService.kPSNotificationRestorePurchaseFailure, error)
+        postNotification(PurchaseAssistant.kPSNotificationRestorePurchaseFailure, error)
     }
 
     func paymentQueue(_ queue: SKPaymentQueue, shouldAddStorePayment payment: SKPayment, for product: SKProduct) -> Bool {
@@ -689,20 +565,20 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         if error != nil {
 
             DDLogError("(PurchaseService) processLoginResult error \(error!.localizedDescription)")
-            postNotification(PurchaseService.kPSNotificationLoginFailure, error)
+            postNotification(PurchaseAssistant.kPSNotificationLoginFailure, error)
             return false
         }
 
         // check state
         if !loginService.hasPremiumLicense {
-            postNotification(PurchaseService.kPSNotificationLoginNotPremiumAccount)
+            postNotification(PurchaseAssistant.kPSNotificationLoginNotPremiumAccount)
             return false
         }
 
-        let userInfo = [PurchaseService.kPSNotificationTypeKey: PurchaseService.kPSNotificationLoginSuccess,
-                        PurchaseService.kPSNotificationLoginPremiumExpired: !loginService.active] as [String : Any]
+        let userInfo = [PurchaseAssistant.kPSNotificationTypeKey: PurchaseAssistant.kPSNotificationLoginSuccess,
+                        PurchaseAssistant.kPSNotificationLoginPremiumExpired: !loginService.active] as [String : Any]
 
-        NotificationCenter.default.post(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: self, userInfo: userInfo)
+        NotificationCenter.default.post(name: Notification.Name(PurchaseAssistant.kPurchaseServiceNotification), object: self, userInfo: userInfo)
         return true
     }
 
@@ -768,12 +644,12 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
     }
 
     private func postNotification(_ type: String,_ error: Any? = nil) {
-        var userInfo = [PurchaseService.kPSNotificationTypeKey: type] as [String: Any]
+        var userInfo = [PurchaseAssistant.kPSNotificationTypeKey: type] as [String: Any]
         if(error != nil) {
-            userInfo[PurchaseService.kPSNotificationErrorKey] = error!
+            userInfo[PurchaseAssistant.kPSNotificationErrorKey] = error!
         }
 
-        NotificationCenter.default.post(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: self, userInfo: userInfo)
+        NotificationCenter.default.post(name: Notification.Name(PurchaseAssistant.kPurchaseServiceNotification), object: self, userInfo: userInfo)
     }
 
     private func priceOfProduct(_ product: SKProduct)->String {
@@ -818,7 +694,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
 
     private func requestPurchase(product: SKProduct?) {
         if product == nil {
-            postNotification(PurchaseService.kPSNotificationPurchaseFailure)
+            postNotification(PurchaseAssistant.kPSNotificationPurchaseFailure)
         }
         else  {
             let payment = SKMutablePayment(product: product!)
@@ -837,7 +713,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         if (subscription.isActive && !resources.purchasedThroughSetapp) ||
             !subscription.isActive && resources.purchasedThroughSetapp {
             resources.purchasedThroughSetapp = subscription.isActive
-            postNotification(PurchaseService.kPSNotificationPremiumStatusChanged)
+            postNotification(PurchaseAssistant.kPSNotificationPremiumStatusChanged)
         }
     }
 }

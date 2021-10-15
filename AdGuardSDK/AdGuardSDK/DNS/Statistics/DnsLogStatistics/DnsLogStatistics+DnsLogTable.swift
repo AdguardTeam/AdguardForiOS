@@ -16,7 +16,8 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-@_implementationOnly import SQLite
+import SQLite
+import SharedAdGuardSDK
 
 /// Object representation of DB table `DNS_log_statistics.db`
 struct DnsLogTable: Equatable {

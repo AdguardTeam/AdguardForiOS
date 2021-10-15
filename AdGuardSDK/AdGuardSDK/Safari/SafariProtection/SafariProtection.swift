@@ -16,9 +16,9 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
-@_implementationOnly import class ContentBlockerConverter.WebExtensionHelpers
-@_implementationOnly import protocol ContentBlockerConverter.WebExtensionHelpersProtocol
+import SharedAdGuardSDK
+import class ContentBlockerConverter.WebExtensionHelpers
+import protocol ContentBlockerConverter.WebExtensionHelpersProtocol
 
 /// Reset protocol for safari protection
 public protocol ResetableSafariProtectionAsyncProtocol: ResetableProtocol {
