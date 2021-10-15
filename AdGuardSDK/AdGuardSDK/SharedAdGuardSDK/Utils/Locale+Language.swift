@@ -26,6 +26,9 @@ public extension Locale {
         case dash = "-"
     }
 
+    static let defaultLanguageCode = "en"
+    static let defaultRegionCode = "US"
+
     /**
      Function  returns list of sorted by priority suitable languages
 
@@ -41,14 +44,17 @@ public extension Locale {
     func getSuitableLanguages(delimiter: Delimiter) -> [String] {
         var result: [String] = []
 
+        /*
+         Chinese languages codes from json different from apple ones
+         Hans - Chinese in the simplified script
+         Hant - Chinese in the traditional script
+        */
         let chineseMap = ["Hans" : "CN",
                           "Hant" : "TW"]
 
-        let defaultLanguageCode = "en"
-        let defaultRegionCode = "US"
 
-        let languageCode = languageCode ?? defaultLanguageCode
-        let regionCode = regionCode ?? defaultRegionCode
+        let languageCode = languageCode ?? Locale.defaultLanguageCode
+        let regionCode = regionCode ?? Locale.defaultRegionCode
 
         result.append(languageCode)
 
@@ -64,7 +70,7 @@ public extension Locale {
                 result.append(languageCode + delimiter.rawValue + mapValue)
             }
         } else {
-            if regionCode != defaultRegionCode {
+            if regionCode != Locale.defaultRegionCode {
                 result.append(languageCode + delimiter.rawValue + regionCode)
             }
         }

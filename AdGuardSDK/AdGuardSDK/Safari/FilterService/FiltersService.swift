@@ -452,7 +452,8 @@ final class FiltersService: FiltersServiceProtocol {
 
     func enablePredefinedGroupsAndFilters() throws {
         try workingQueue.sync {
-            let lang = suitableLanguages.first ?? "en"
+            // The first element of the `suitableLanguages` list is the language code with the highest priority.
+            let lang = suitableLanguages.first ?? Locale.defaultLanguageCode
             try enablePredefinedGroupsAndFiltersInternal(with: groups, currentLanguage: lang)
             try self._groupsAtomic.mutate { $0 = try getAllLocalizedGroups() }
         }
@@ -641,7 +642,8 @@ final class FiltersService: FiltersServiceProtocol {
         let group = DispatchGroup()
 
         group.enter()
-        let lang = suitableLanguages.first ?? "en"
+        // The first element of the `suitableLanguages` list is the language code with the highest priority.
+        let lang = suitableLanguages.first ?? Locale.defaultLanguageCode
         apiMethods.loadFiltersMetadata(version: configuration.appProductVersion,
                                                id: configuration.appId,
                                                cid: configuration.cid,

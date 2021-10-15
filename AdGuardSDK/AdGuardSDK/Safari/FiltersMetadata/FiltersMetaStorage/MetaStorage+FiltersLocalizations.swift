@@ -108,14 +108,20 @@ extension MetaStorage: FiltersLocalizationsMetaStorageProtocol {
         // Trying to find full match language
         for lang in suitableLanguages {
             // Query: SELECT count(filter_id) FROM filter_localization WHERE lang == lang
-            let query: ScalarQuery = FilterLocalizationsTable.table.select(FilterLocalizationsTable.filterId.count).where(FilterLocalizationsTable.lang == lang)
+            let query: ScalarQuery = FilterLocalizationsTable
+                .table
+                .select(FilterLocalizationsTable.filterId.count)
+                .where(FilterLocalizationsTable.lang == lang)
             let count = try filtersDb.scalar(query)
             guard count > 0 else { continue }
             return lang
         }
 
         var foundLanguage = MetaStorage.defaultDbLanguage
-        // Trying to find similar languages if language is still missed
+        /*
+         Trying to find similar languages if language is still missed
+         The last element of the `suitableLanguages` list is a simple language code such as `se` or `en`.
+         */
         let similarLanguages = try collectSimilarFiltersMetaLanguages(for: suitableLanguages.last ?? foundLanguage)
         if let similarLanguage = similarLanguages.first {
             foundLanguage = similarLanguage
@@ -133,7 +139,8 @@ extension MetaStorage: FiltersLocalizationsMetaStorageProtocol {
         let query = FilterLocalizationsTable
             .table
             .select(distinct: [FilterLocalizationsTable.lang])
-            .where(FilterLocalizationsTable.lang.like("\(language)%") && FilterLocalizationsTable.lang != language).order(FilterLocalizationsTable.lang)
+            .where(FilterLocalizationsTable.lang.like("\(language)%") && FilterLocalizationsTable.lang != language)
+            .order(FilterLocalizationsTable.lang)
 
         return try filtersDb.prepare(query).compactMap { row in
             return row[FilterLocalizationsTable.lang]

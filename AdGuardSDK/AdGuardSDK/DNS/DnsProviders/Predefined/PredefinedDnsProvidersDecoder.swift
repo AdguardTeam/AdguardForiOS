@@ -134,12 +134,17 @@ struct PredefinedDnsProvidersDecoder: PredefinedDnsProvidersDecoderProtocol {
             }
         }
 
-        var result = "en"
-        // Trying to find similar languages if language is still missed
-        let keys = availableLanguages.keys.filter { $0.contains(suitableLanguages.last ?? result) }.sorted()
+        var foundLanguage = Locale.defaultLanguageCode
+
+        /*
+         Trying to find similar languages if language is still missed.
+         The last element of the `suitableLanguages` list is a simple language code such as `se` or `en`.
+         We're sorting because some keys from provider_i18n.json, like Portugals, have multiple language code options (pt_PT and pt_BR)
+         */
+        let keys = availableLanguages.keys.filter { $0.contains(suitableLanguages.last ?? foundLanguage) }.sorted()
         if let lang = keys.first {
-            result = lang
+            foundLanguage = lang
         }
-        return result
+        return foundLanguage
     }
 }

@@ -87,15 +87,21 @@ extension MetaStorage: GroupLocalizationsMetaStorageProtocol {
     func collectGroupsMetaLocalizationLanguage(from suitableLanguages: [String]) throws -> String {
         // Trying to find full match language
         for lang in suitableLanguages{
-            // Query: SELECT count(filter_id) FROM filter_group_localization WHERE lang == lang
-            let query: ScalarQuery = FilterGroupLocalizationsTable.table.select(FilterLocalizationsTable.filterId.count).where(FilterLocalizationsTable.lang == lang)
+            // Query: SELECT count(group_id) FROM filter_group_localization WHERE lang == lang
+            let query: ScalarQuery = FilterGroupLocalizationsTable
+                .table
+                .select(FilterGroupLocalizationsTable.groupId.count)
+                .where(FilterGroupLocalizationsTable.lang == lang)
             let count = try filtersDb.scalar(query)
             guard count > 0 else { continue }
             return lang
         }
 
         var foundLanguage = MetaStorage.defaultDbLanguage
-        // Trying to find similar languages if language is still missed
+        /*
+         Trying to find similar languages if language is still missed
+         The last element of the `suitableLanguages` list is a simple language code such as `se` or `en`.
+         */
         let similarLanguages = try collectSimilarGroupsMetaLanguages(for: suitableLanguages.last ?? foundLanguage)
         if let similarLanguage = similarLanguages.first {
             foundLanguage = similarLanguage
@@ -113,7 +119,8 @@ extension MetaStorage: GroupLocalizationsMetaStorageProtocol {
         let query = FilterGroupLocalizationsTable
             .table
             .select(distinct: [FilterGroupLocalizationsTable.lang])
-            .where(FilterGroupLocalizationsTable.lang.like("\(language)%") && FilterGroupLocalizationsTable.lang != language).order(FilterGroupLocalizationsTable.lang)
+            .where(FilterGroupLocalizationsTable.lang.like("\(language)%") && FilterGroupLocalizationsTable.lang != language)
+            .order(FilterGroupLocalizationsTable.lang)
 
         return try filtersDb.prepare(query).compactMap { row in
             return row[FilterGroupLocalizationsTable.lang]

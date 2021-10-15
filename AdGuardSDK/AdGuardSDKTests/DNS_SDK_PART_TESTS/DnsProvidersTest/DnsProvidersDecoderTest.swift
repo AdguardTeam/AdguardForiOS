@@ -31,29 +31,38 @@ class DnsProvidersDecoderTest: XCTestCase {
         let bundle = Bundle(for: type(of: self))
         let enProviders = (try! PredefinedDnsProvidersDecoder(currentLocale: Locale(identifier: "en"), bundle: bundle)).providers
         let deProviders = (try! PredefinedDnsProvidersDecoder(currentLocale: Locale(identifier: "de"), bundle: bundle)).providers
-        let zhProviders = (try! PredefinedDnsProvidersDecoder(currentLocale: Locale(identifier: "zh-Hant_TW"), bundle: bundle)).providers
+        let zhHansProviders = (try! PredefinedDnsProvidersDecoder(currentLocale: Locale(identifier: "zh-Hans"), bundle: bundle)).providers
+        let zhHantProviders = (try! PredefinedDnsProvidersDecoder(currentLocale: Locale(identifier: "zh-Hant_TW"), bundle: bundle)).providers
 
         for i in 0..<enProviders.count {
             let enProvider = enProviders[i]
             let deProvider = deProviders[i]
-            let zhProvider = zhProviders[i]
+            let zhHansProvider = zhHansProviders[i]
+            let zhHantProvider = zhHantProviders[i]
 
             XCTAssertNotEqual(enProvider.providerDescription, deProvider.providerDescription)
-            XCTAssertNotEqual(enProvider.providerDescription, zhProvider.providerDescription)
-            XCTAssertNotEqual(deProvider.providerDescription, zhProvider.providerDescription)
+            XCTAssertNotEqual(enProvider.providerDescription, zhHansProvider.providerDescription)
+            XCTAssertNotEqual(enProvider.providerDescription, zhHantProvider.providerDescription)
+            XCTAssertNotEqual(deProvider.providerDescription, zhHansProvider.providerDescription)
+            XCTAssertNotEqual(deProvider.providerDescription, zhHantProvider.providerDescription)
+            XCTAssertNotEqual(zhHansProvider.providerDescription, zhHantProvider.providerDescription)
 
             let allEnFeatures = enProvider.servers.flatMap { $0.features }
             let allDeFeatures = deProvider.servers.flatMap { $0.features }
-            let allZhFeatures = zhProvider.servers.flatMap { $0.features }
+            let allZhHansFeatures = zhHansProvider.servers.flatMap { $0.features }
+            let allZhHantFeatures = zhHantProvider.servers.flatMap { $0.features }
 
             for j in 0..<allEnFeatures.count {
                 let enFeature = allEnFeatures[j]
                 let deFeature = allDeFeatures[j]
-                let zhFeature = allZhFeatures[j]
+                let zhHansFeature = allZhHansFeatures[j]
+                let zhHantFeature = allZhHantFeatures[j]
 
                 XCTAssertNotEqual(enFeature.name, deFeature.name)
-                XCTAssertNotEqual(enFeature.name, zhFeature.name)
-                XCTAssertNotEqual(deFeature.name, zhFeature.name)
+                XCTAssertNotEqual(enFeature.name, zhHansFeature.name)
+                XCTAssertNotEqual(enFeature.name, zhHantFeature.name)
+                XCTAssertNotEqual(deFeature.name, zhHansFeature.name)
+                XCTAssertNotEqual(deFeature.name, zhHantFeature.name)
             }
         }
     }
