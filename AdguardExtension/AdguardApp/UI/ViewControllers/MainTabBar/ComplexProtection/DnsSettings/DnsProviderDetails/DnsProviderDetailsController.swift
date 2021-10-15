@@ -46,7 +46,7 @@ final class DnsProviderDetailsController : UITableViewController {
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let dnsProvidersManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!
-    private let domainsParserService: DomainsParserServiceProtocol = ServiceLocator.shared.getService()!
+    private let domainParserService: DomainParserServiceProtocol = ServiceLocator.shared.getService()!
 
     // MARK: - private properties
     private lazy var model: DnsProviderDetailsModel = {
@@ -203,7 +203,7 @@ final class DnsProviderDetailsController : UITableViewController {
         let cell = DnsProviderActionCell.getCell(forTableView: tableView)
         cell.actionNameTitle = String.localizedString("website_title")
         let host = URL(string: model.providerHomepage)?.host ?? ""
-        let option = domainsParserService.domainsParser?.parse(host: host)?.domain ?? model.providerHomepage
+        let option = domainParserService.domainParser?.parse(host: host)?.domain ?? model.providerHomepage
         cell.selectedOptionTitle = option
         cell.updateTheme(themeService: themeService)
         return cell

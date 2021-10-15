@@ -16,9 +16,9 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
 import NetworkExtension
 import Reachability
+import SharedAdGuardSDK
 
 /**
  This object gives access to a virtual network interface

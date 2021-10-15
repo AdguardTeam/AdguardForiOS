@@ -29,7 +29,7 @@ extension AESharedResourcesProtocol {
         }
     }
 
-    dynamic var dnsImplementation: DnsImplementation {
+    var dnsImplementation: DnsImplementation {
         get {
             if let savedImplementation = sharedDefaults().object(forKey: DnsImplementationKey) as? Int {
                 return DnsImplementation(rawValue: savedImplementation) ?? .adGuard
@@ -44,7 +44,7 @@ extension AESharedResourcesProtocol {
         }
     }
 
-    dynamic var blockingMode: DnsProxyBlockingMode  {
+    var blockingMode: DnsProxyBlockingMode  {
         get {
             guard let value = sharedDefaults().object(forKey: BlockingMode) as? Int else {
                 return .defaultMode
@@ -60,7 +60,7 @@ extension AESharedResourcesProtocol {
     /// Map that store info about active protocol for specified provider.
     /// Map key: - Int value represent provider Id
     /// Map value: - Selected DNS protocol for specified provider
-    dynamic var dnsActiveProtocols: [Int: DnsAdGuardSDK.DnsProtocol] {
+    var dnsActiveProtocols: [Int: DnsAdGuardSDK.DnsProtocol] {
         get {
             if let data = sharedDefaults().object(forKey: DnsActiveProtocols) as? Data {
                 let decoder = JSONDecoder()
@@ -77,7 +77,7 @@ extension AESharedResourcesProtocol {
         }
     }
 
-    dynamic var tunnelMode: TunnelMode {
+    var tunnelMode: TunnelMode {
         get {
             guard let value = sharedDefaults().object(forKey: AEDefaultsVPNTunnelMode) as? Int else {
                 return .split

@@ -16,17 +16,31 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
 import DnsAdGuardSDK
 
+enum UserFilterStatus {
+    case allowlisted, blocklisted, none
+}
+
 /**
- view model for dns request log table cell
+ model for dns request log record
  */
-struct DnsLogRecord {
+final class DnsLogRecord {
     // processed dns requestinfo
     let event: DnsRequestProcessedEvent
     // dns tracker info for event.domain
     let tracker: DnsTracker?
+    // status determines whether the matched rules are contained in custom filters
+    var userFilterStatus: UserFilterStatus
+    // first level domain
+    let firstLevelDomain: String
+
+    init(event: DnsRequestProcessedEvent, tracker: DnsTracker?, firstLevelDomain: String, userFilterStatus: UserFilterStatus) {
+        self.event = event
+        self.firstLevelDomain = firstLevelDomain
+        self.tracker = tracker
+        self.userFilterStatus = userFilterStatus
+    }
 
     // returns subtitle text for table view cell
     func getDetailsString(_ fontSize: CGFloat, _ advancedMode: Bool) -> NSMutableAttributedString {
@@ -62,12 +76,6 @@ struct DnsLogRecord {
 
             return combination
         }
-    }
-
-    // returns first level domain for this request
-    func firstLevelDomain(parser: DomainParser?) -> String {
-        let firstLevelDomain = parser?.parse(host: event.domain)?.domain
-        return firstLevelDomain ?? event.domain
     }
 }
 

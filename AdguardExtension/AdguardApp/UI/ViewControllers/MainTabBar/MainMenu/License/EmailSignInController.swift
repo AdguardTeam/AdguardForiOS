@@ -78,7 +78,7 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
         nameEdit.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
         updateLoginButton()
 
-        notificationObserver = NotificationCenter.default.addObserver(forName: Notification.Name(PurchaseService.kPurchaseServiceNotification),
+        notificationObserver = NotificationCenter.default.addObserver(forName: Notification.Name(PurchaseAssistant.kPurchaseServiceNotification),
                                                                       object: nil, queue: nil)
         { [weak self](notification) in
             if let info = notification.userInfo {
@@ -201,18 +201,18 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
             self.loginButton.isEnabled = true
             self.isKeyboardNextButtonEnabled = true
 
-            let type = info[PurchaseService.kPSNotificationTypeKey] as? String
-            let error = info[PurchaseService.kPSNotificationErrorKey] as? NSError
+            let type = info[PurchaseAssistant.kPSNotificationTypeKey] as? String
+            let error = info[PurchaseAssistant.kPSNotificationErrorKey] as? NSError
 
             switch type {
 
-            case PurchaseService.kPSNotificationLoginSuccess:
+            case PurchaseAssistant.kPSNotificationLoginSuccess:
                 self.loginSuccess()
-            case PurchaseService.kPSNotificationLoginFailure:
+            case PurchaseAssistant.kPSNotificationLoginFailure:
                 self.loginFailure(error)
-            case PurchaseService.kPSNotificationLoginPremiumExpired:
+            case PurchaseAssistant.kPSNotificationLoginPremiumExpired:
                 self.premiumExpired()
-            case PurchaseService.kPSNotificationLoginNotPremiumAccount:
+            case PurchaseAssistant.kPSNotificationLoginNotPremiumAccount:
                 self.notPremium()
 
             default:
@@ -282,7 +282,7 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
 
     private func setupLostPasswordButton(){
         let title = String.localizedString("lost_password")
-        let color = UIColor(hexString: "#888888")
+        let color = UIColor.AdGuardColor.lightGray3
         let nsRange = NSRange(location: 0, length: title.count)
         let font = lostPasswordButton.titleLabel?.font
 

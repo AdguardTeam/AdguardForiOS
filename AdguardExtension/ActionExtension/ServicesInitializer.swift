@@ -16,9 +16,8 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
 import SafariAdGuardSDK
-import DnsAdGuardSDK
+import SharedAdGuardSDK
 
 /// Singleton to quikcly get different services objects and remove initialization logic from view controllers
 final class ServicesInitializer {

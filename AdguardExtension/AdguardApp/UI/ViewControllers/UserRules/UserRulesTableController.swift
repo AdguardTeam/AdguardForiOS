@@ -17,6 +17,7 @@
  */
 
 import UIKit
+import SharedAdGuardSDK
 import SafariAdGuardSDK
 import DnsAdGuardSDK
 

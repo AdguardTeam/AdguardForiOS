@@ -16,8 +16,8 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
-@_implementationOnly import ContentBlockerConverter
+import SharedAdGuardSDK
+import ContentBlockerConverter
 
 protocol FiltersConverterServiceProtocol {
     /* Returns true if filters are converting now */

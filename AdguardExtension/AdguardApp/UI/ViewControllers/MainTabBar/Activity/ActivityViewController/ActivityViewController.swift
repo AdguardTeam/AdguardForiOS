@@ -24,7 +24,7 @@ protocol ActivityViewControllerDelegate: AnyObject {
     func showTitle()
 }
 
-class ActivityViewController: UITableViewController {
+final class ActivityViewController: UITableViewController {
 
     // MARK: - Outlets
 
@@ -63,9 +63,7 @@ class ActivityViewController: UITableViewController {
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let dnsTrackers: DnsTrackersProviderProtocol = ServiceLocator.shared.getService()!
-    private let domainsParserService: DomainsParserServiceProtocol = ServiceLocator.shared.getService()!
-    private let domainsConverter: DomainsConverterProtocol = DomainsConverter()
-    private let dnsProtection: DnsProtectionProtocol = ServiceLocator.shared.getService()!
+    private let domainParserService: DomainParserServiceProtocol = ServiceLocator.shared.getService()!
     private let settingsReset: SettingsResetServiceProtocol = ServiceLocator.shared.getService()!
 
     // MARK: - Notifications
@@ -100,7 +98,17 @@ class ActivityViewController: UITableViewController {
 
     required init?(coder: NSCoder) {
         let activityStatistics: ActivityStatisticsProtocol = ServiceLocator.shared.getService()!
-        activityModel = ActivityStatisticsModel(dnsTrackers: dnsTrackers, domainsParserService: domainsParserService, activityStatistics: activityStatistics)
+        let dnsTrackers: DnsTrackersProviderProtocol = ServiceLocator.shared.getService()!
+        guard let companyStatistics = try? CompaniesStatistics(activityStatistics: activityStatistics, dnsTrackersProvider: dnsTrackers) else {
+            return nil
+        }
+
+        activityModel = ActivityStatisticsModel(
+            dnsTrackers: dnsTrackers,
+            domainParserService: domainParserService,
+            activityStatistics: activityStatistics,
+            companiesStatistics: companyStatistics
+        )
         super.init(coder: coder)
     }
 
@@ -115,7 +123,7 @@ class ActivityViewController: UITableViewController {
         statisticsPeriodChanged(statisticsPeriod: resources.activityStatisticsType)
         addObservers()
         filterButton.isHidden = !configuration.advancedMode
-        requestsModel?.obtainRecords(for: .normal, domains: nil)
+        requestsModel?.obtainRecords(for: resources.activityStatisticsType, domains: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -151,12 +159,13 @@ class ActivityViewController: UITableViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == showDnsContainerSegueId, let controller = segue.destination as? DnsContainerController {
-            controller.logRecord = selectedRecord
+        if segue.identifier == showDnsContainerSegueId, let controller = segue.destination as? DnsRequestDetailsContainerController {
+            controller.model = requestsModel?.logRecordViewModelFor(record: selectedRecord!)
+            controller.delegate = self
         } else if segue.identifier == showMostActiveCompaniesSegueId, let controller = segue.destination as? MostActiveCompaniesController {
             controller.mostRequestedCompanies = mostRequestedCompanies
-            // TODO: Set correct time period ror this controller
-//            controller.chartDateType = resources.activityStatisticsType
+            controller.chartDateType = resources.activityStatisticsType
+            controller.requestsModel = requestsModel
         }
     }
 
@@ -232,7 +241,6 @@ class ActivityViewController: UITableViewController {
         if let cell = tableView.dequeueReusableCell(withIdentifier: activityTableViewCellReuseId) as? ActivityTableViewCell {
             guard let record = requestsModel?.records[indexPath.row] else { return UITableViewCell() }
             cell.advancedMode = configuration.advancedMode
-            cell.domainsParser = domainsParserService.domainsParser
             cell.theme = theme
             cell.record = record
             return cell
@@ -256,7 +264,7 @@ class ActivityViewController: UITableViewController {
         swipedRecord = record
         let availableTypes = record.getButtons()
         for buttonType in availableTypes {
-            if buttonType == .addDomainToWhitelist {
+            if buttonType == .addDomainToAllowList {
                 return createSwipeAction(forButtonType: buttonType, record: record)
             }
             if buttonType == .removeDomainFromWhitelist {
@@ -396,7 +404,7 @@ class ActivityViewController: UITableViewController {
      */
     private func addObservers(){
 
-        keyboardShowToken = NotificationCenter.default.observe(name: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] (notification) in
+        keyboardShowToken = NotificationCenter.default.observe(name: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] _ in
             self?.keyboardWillShow()
         }
 
@@ -404,16 +412,18 @@ class ActivityViewController: UITableViewController {
             self?.observeAdvancedMode()
         })
 
-        resetStatisticsToken = NotificationCenter.default.observe(name: NSNotification.resetStatistics, object: nil, queue: .main) { [weak self] (notification) in
-            self?.requestsModel?.obtainRecords(for: .normal)
+        resetStatisticsToken = NotificationCenter.default.observe(name: NSNotification.resetStatistics, object: nil, queue: .main) { [weak self] _ in
+            guard let self = self else { return }
+            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
         }
 
-        resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] (notification) in
-            self?.requestsModel?.obtainRecords(for: .normal)
+        resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] _ in
+            guard let self = self else { return }
+            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
         }
 
         requestsModel?.recordsObserver = { [weak self] (records) in
-            DispatchQueue.main.async {[weak self] in
+            DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.tableView.reloadData()
                 if self.requestsModel?.records.isEmpty == true {
@@ -426,17 +436,17 @@ class ActivityViewController: UITableViewController {
     private func createSwipeAction(forButtonType buttonType: DnsLogButtonType, record: DnsLogRecord) -> UISwipeActionsConfiguration {
         var buttonColor: UIColor
         switch buttonType {
-        case .addDomainToWhitelist:
+        case .addDomainToAllowList:
             buttonColor = UIColor.AdGuardColor.lightGreen1
         case .addRuleToUserFlter:
-            buttonColor = UIColor(hexString: "#c23814")
+            buttonColor = UIColor.AdGuardColor.errorRedColor
         default:
-            buttonColor = UIColor(hexString: "#888888")
+            buttonColor = UIColor.AdGuardColor.lightGray3
         }
         let buttonAction = UIContextualAction(style: .normal, title: buttonType.buttonTitle) { [weak self] (action, view, success:(Bool) -> Void) in
             guard let self = self else { return }
             switch buttonType {
-            case .addDomainToWhitelist, .addRuleToUserFlter:
+            case .addDomainToAllowList, .addRuleToUserFlter:
                 self.presentBlockRequestController(with: record.event.domain, type: buttonType, delegate: self)
             case .removeRuleFromUserFilter:
                 self.removeRuleFromUserFilter(record: record)
@@ -450,18 +460,29 @@ class ActivityViewController: UITableViewController {
     }
 
     private func removeRuleFromUserFilter(record: DnsLogRecord) {
-        dnsProtection.removeRules(record.event.blockRules, for: .blocklist)
+        do {
+            try requestsModel?.removeDomainFromUserFilter(record.event.domain)
+        }
+        catch {
+            self.showUnknownErrorAlert()
+        }
     }
 
     private func removeDomainFromWhitelist(record: DnsLogRecord) {
-        dnsProtection.removeRules(record.event.blockRules, for: .allowlist)
+        do {
+            try requestsModel?.removeDomainFromAllowlist(record.event.domain)
+        }
+        catch {
+            self.showUnknownErrorAlert()
+        }
     }
 
     @objc func updateTableView(sender: UIRefreshControl) {
+        requestsModel?.obtainRecords(for: resources.activityStatisticsType, domains: nil)
         statisticsPeriodChanged(statisticsPeriod: resources.activityStatisticsType)
-
         activityModel.period = resources.activityStatisticsType
-        updateTextForButtons()
+
+        refreshControl?.endRefreshing()
     }
 }
 
@@ -514,16 +535,15 @@ extension ActivityViewController: DateTypeChangedProtocol {
         activityModel.period = statisticsPeriod
         changePeriodTypeButton.setTitle(statisticsPeriod.dateTypeString, for: .normal)
 
-        // TODO: update companies counter
-//        activityModel.getCompanies(for: dateType) {[weak self] (info) in
-//            self?.processCompaniesInfo(info)
-//        }
+        activityModel.getCompanies(for: statisticsPeriod) {[weak self] (info) in
+            self?.processCompaniesInfo(info)
+        }
 
         updateTextForButtons()
     }
 
     private func processCompaniesInfo(_ companiesInfo: CompaniesInfo) {
-        DispatchQueue.main.async {[weak self] in
+        DispatchQueue.asyncSafeMain { [weak self] in
             if !companiesInfo.mostRequested.isEmpty {
                 self?.mostActiveButton.alpha = 1.0
                 self?.mostActiveLabel.alpha = 1.0
@@ -531,7 +551,7 @@ extension ActivityViewController: DateTypeChangedProtocol {
                 self?.rightArrowImageView.alpha = 1.0
                 self?.mostActiveButton.isEnabled = true
                 let record = companiesInfo.mostRequested[0]
-                self?.mostActiveCompany.text = record.key
+                self?.mostActiveCompany.text = record.company
             } else {
                 self?.mostActiveButton.alpha = 0.5
                 self?.mostActiveLabel.alpha = 0.5
@@ -578,17 +598,21 @@ extension ActivityViewController: UIGestureRecognizerDelegate {
 
 extension ActivityViewController: AddDomainToListDelegate {
 
-    func add(domain: String, needsCorrecting: Bool, by type: DnsLogButtonType) {
-        let rule = UserRule(ruleText: domain, isEnabled: true)
-        switch type {
-        case .removeDomainFromWhitelist:
-            break
-        case .removeRuleFromUserFilter:
-            break
-        case .addDomainToWhitelist:
-            try? dnsProtection.add(rule: rule, override: true, for: .allowlist)
-        case .addRuleToUserFlter:
-            try? dnsProtection.add(rule: rule, override: true, for: .blocklist)
+    func add(domain: String, by type: DnsLogButtonType) {
+        do {
+            switch type {
+            case .removeDomainFromWhitelist:
+                break
+            case .removeRuleFromUserFilter:
+                break
+            case .addDomainToAllowList:
+                try requestsModel?.addDomainToAllowlist(domain)
+            case .addRuleToUserFlter:
+                try requestsModel?.addDomainToUserRules(domain)
+            }
+        }
+        catch {
+            showUnknownErrorAlert()
         }
     }
 }
@@ -607,5 +631,11 @@ extension ActivityViewController: ThemableProtocol {
         theme.setupButtons(themableButtons)
         mostActiveButton.customHighlightedBackgroundColor = theme.selectedCellColor
         mostActiveButton.customBackgroundColor = theme.backgroundColor
+    }
+}
+
+extension ActivityViewController: DnsRequestDetailsContainerControllerDelegate {
+    func userStatusChanged() {
+        requestsModel?.updateUserStatuses()
     }
 }

@@ -17,6 +17,7 @@
 */
 
 import SafariAdGuardSDK
+import SharedAdGuardSDK
 
 // TODO: - We should write tests for it
 

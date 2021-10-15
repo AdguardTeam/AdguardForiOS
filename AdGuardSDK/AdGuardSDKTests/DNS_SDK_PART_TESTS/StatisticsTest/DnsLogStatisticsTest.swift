@@ -47,7 +47,7 @@ class DnsLogStatisticsTest: XCTestCase {
         statistics.process(event: mockEvent1)
         statistics.process(event: mockEvent2)
 
-        let records = try! statistics.getDnsLogRecords()
+        let records = try! statistics.getDnsLogRecords(for: .all)
         XCTAssertEqual(records, [mockEvent1, mockEvent2])
     }
 
@@ -55,7 +55,7 @@ class DnsLogStatisticsTest: XCTestCase {
         let records = generateRecords(1000)
         records.forEach { statistics.process(event: $0) }
 
-        let recordsFromDb = try! statistics.getDnsLogRecords()
+        let recordsFromDb = try! statistics.getDnsLogRecords(for: .all)
         let dates = recordsFromDb.map { $0.startDate }
         XCTAssert(dates.isSorted(isOrderedBefore: >=))
     }
@@ -63,7 +63,7 @@ class DnsLogStatisticsTest: XCTestCase {
     func testPurge() {
         let records = generateRecords(1499)
         records.forEach { statistics.process(event: $0) }
-        var recordsFromDb = try! statistics.getDnsLogRecords()
+        var recordsFromDb = try! statistics.getDnsLogRecords(for: .all)
         XCTAssertEqual(recordsFromDb.count, records.count)
 
         // This records should be removed
@@ -71,7 +71,7 @@ class DnsLogStatisticsTest: XCTestCase {
 
         // Check log is purged
         statistics.process(event: mockEvent1)
-        recordsFromDb = try! statistics.getDnsLogRecords()
+        recordsFromDb = try! statistics.getDnsLogRecords(for: .all)
         XCTAssertEqual(recordsFromDb.count, 1000)
 
         // Check proper records removed
@@ -79,7 +79,7 @@ class DnsLogStatisticsTest: XCTestCase {
 
         //  Check new record is added
         statistics.process(event: mockEvent2)
-        recordsFromDb = try! statistics.getDnsLogRecords()
+        recordsFromDb = try! statistics.getDnsLogRecords(for: .all)
         XCTAssertEqual(recordsFromDb.count, 1001)
 
         // Check records order
@@ -91,11 +91,11 @@ class DnsLogStatisticsTest: XCTestCase {
         let records = generateRecords(1000)
         records.forEach { statistics.process(event: $0) }
 
-        var recordsFromDb = try! statistics.getDnsLogRecords()
+        var recordsFromDb = try! statistics.getDnsLogRecords(for: .all)
         XCTAssertEqual(recordsFromDb.count, records.count)
 
         try! statistics.reset()
-        recordsFromDb = try! statistics.getDnsLogRecords()
+        recordsFromDb = try! statistics.getDnsLogRecords(for: .all)
         XCTAssert(recordsFromDb.isEmpty)
     }
 

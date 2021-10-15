@@ -16,13 +16,11 @@
       along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import DnsAdGuardSDK
-
 enum BlockedRecordType {
     case normal, whitelisted, blocked
 }
 
-class ActivityTableViewCell: UITableViewCell {
+final class ActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var companyLabel: ThemableLabel!
     @IBOutlet weak var infoLabel: ThemableLabel!
     @IBOutlet weak var blockStateView: UIView!
@@ -30,8 +28,6 @@ class ActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var timeLabel: ThemableLabel!
 
     var advancedMode: Bool = true
-
-    var domainsParser: DomainParser?
 
     var theme: ThemeServiceProtocol? {
         didSet {
@@ -75,7 +71,7 @@ class ActivityTableViewCell: UITableViewCell {
         let name = record.tracker?.name
         let domain = record.getDetailsString(infoLabel.font.pointSize, advancedMode)
 
-        companyLabel.text = (name == nil || advancedMode) ? record.firstLevelDomain(parser: domainsParser) : name
+        companyLabel.text = (name == nil || advancedMode) ? record.firstLevelDomain : name
         infoLabel.attributedText = domain
         timeLabel.text = timeString
 
@@ -88,7 +84,7 @@ class ActivityTableViewCell: UITableViewCell {
             type = .normal
         case .allowlistedByDnsFilter, .allowlistedByUserFilter:
             type = .whitelisted
-        case .blocklistedByDnsFilter, .blocklistedByUserFilter:
+        case .blocklistedByDnsFilter, .blocklistedByUserFilter, .blocklistedByDnsServer:
             type = .blocked
         }
         setupRecordCell(type: type)
@@ -96,6 +92,19 @@ class ActivityTableViewCell: UITableViewCell {
         let categoryImage = UIImage.getCategoryImage(withId: record.tracker?.category.rawValue)
         categoryImageView.isHidden = categoryImage == nil
         categoryImageView.image = categoryImage
+
+        // Setup blockStateView color
+        let color: UIColor
+        switch (record.event.processedStatus, record.userFilterStatus) {
+        case (_, .allowlisted), (.allowlistedByUserFilter, _), (.allowlistedByDnsFilter, _):
+            color = greenDotColor
+        case (_, .blocklisted), (.blocklistedByUserFilter, _), (.blocklistedByDnsFilter, _):
+            color = redDotColor
+        default:
+            color = .clear
+        }
+
+        blockStateView.backgroundColor = color
     }
 
     private func updateTheme(){

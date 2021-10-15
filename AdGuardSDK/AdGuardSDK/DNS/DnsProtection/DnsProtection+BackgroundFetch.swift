@@ -16,7 +16,7 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
+import SharedAdGuardSDK
 
 extension DnsProtection {
     public func updateFiltersInBackground(onFiltersUpdate: @escaping ((_ error: Error?) -> Void)) {

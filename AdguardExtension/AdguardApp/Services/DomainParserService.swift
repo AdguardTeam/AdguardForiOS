@@ -18,16 +18,16 @@
 
 import Foundation
 
-protocol DomainsParserServiceProtocol {
-    var domainsParser: DomainParser? { get }
+protocol DomainParserServiceProtocol {
+    var domainParser: DomainParser? { get }
 }
 
-class DomainsParserService: DomainsParserServiceProtocol {
+final class DomainParserService: DomainParserServiceProtocol {
     /* It must be initialized and stored during app life
      because it initializes a big list inside */
-    var domainsParser: DomainParser?
+    var domainParser: DomainParser?
 
     init() {
-        self.domainsParser = try? DomainParser(quickParsing: true)
+        self.domainParser = try? DomainParser(quickParsing: true)
     }
 }

@@ -73,6 +73,10 @@ class UserRulesManagerMock: UserRulesManagerProtocol {
     func reset() throws {
 
     }
+
+    func checkEnabledRuleExists(_ ruleText: String) -> Bool {
+        return false
+    }
 }
 
 final class BlocklistRulesManagerMock: UserRulesManagerMock {

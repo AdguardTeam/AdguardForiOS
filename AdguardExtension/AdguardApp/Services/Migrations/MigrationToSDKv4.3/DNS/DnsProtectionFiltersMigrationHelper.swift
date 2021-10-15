@@ -17,7 +17,7 @@
 */
 
 import Foundation
-import enum DnsAdGuardSDK.CommonError
+import enum SharedAdGuardSDK.CommonError
 import struct DnsAdGuardSDK.DnsFilter
 
 /// This object is a helper for `SDKMigrationServiceHelper`
@@ -61,10 +61,14 @@ final class DnsProtectionFiltersMigrationHelper: DnsProtectionFiltersMigrationHe
             let obj = NSKeyedUnarchiver.unarchiveObject(with: $0)
             return obj as? SDKDnsMigrationObsoleteDnsFilter
         }
+
+        DDLogInfo("(DnsProtectionFiltersMigrationHelper) - getDnsFiltersMeta; Got \(dnsFilters.count) DNS filters meta")
         return dnsFilters
     }
 
     func saveDnsFiltersToSDK(_ filters: [SDKDnsMigrationObsoleteDnsFilter]) throws {
+        DDLogInfo("(DnsProtectionFiltersMigrationHelper) - saveDnsFiltersToSDK; Saving \(filters.count) DNS filters meta to new storage")
+
         let newDnsFilters = filters.map {
             return DnsFilter(
                 filterId: $0.id,
@@ -87,6 +91,8 @@ final class DnsProtectionFiltersMigrationHelper: DnsProtectionFiltersMigrationHe
         let encoder = JSONEncoder()
         let filtersData = try encoder.encode(newDnsFilters)
         resources.sharedDefaults().setValue(filtersData, forKey: "DnsAdGuardSDK.dnsFiltersKey")
+
+        DDLogInfo("(DnsProtectionFiltersMigrationHelper) - saveDnsFiltersToSDK; Saved \(filters.count) DNS filters meta to new storage")
     }
 
     func removeDnsFiltersDataFromOldStorage() {
@@ -110,6 +116,8 @@ final class DnsProtectionFiltersMigrationHelper: DnsProtectionFiltersMigrationHe
      As custom DNS filters have stayed in same range, we won't change their identifiers
      */
     func replaceFilesForDnsFilters(with ids: [Int]) throws {
+        DDLogInfo("(DnsProtectionFiltersMigrationHelper) - replaceFilesForDnsFilters; Replacing \(ids.count) DNS filters files to new folder")
+
         for id in ids {
             let oldFileName = "dns_filter_\(id).txt"
             let newFileName = "\(id).txt"
@@ -124,6 +132,8 @@ final class DnsProtectionFiltersMigrationHelper: DnsProtectionFiltersMigrationHe
             try FileManager.default.copyOrReplace(at: oldFileUrl, to: newFileUrl)
             try FileManager.default.removeItem(at: oldFileUrl)
         }
+
+        DDLogInfo("(DnsProtectionFiltersMigrationHelper) - replaceFilesForDnsFilters; Replaced \(ids.count) DNS filters files to new folder")
     }
 }
 
