@@ -98,7 +98,19 @@ class ActivityViewController: UITableViewController {
 
     required init?(coder: NSCoder) {
         let activityStatistics: ActivityStatisticsProtocol = ServiceLocator.shared.getService()!
-        activityModel = ActivityStatisticsModel(dnsTrackers: dnsTrackers, domainParserService: domainParserService, activityStatistics: activityStatistics)
+        guard
+            let trackersProvider = try? DnsTrackersProvider(),
+            let companyStatistics = try? CompaniesStatistics(activityStatistics: activityStatistics, dnsTrackersProvider: trackersProvider)
+        else {
+            return nil
+        }
+
+        activityModel = ActivityStatisticsModel(
+            dnsTrackers: dnsTrackers,
+            domainParserService: domainParserService,
+            activityStatistics: activityStatistics,
+            companiesStatistics: companyStatistics
+        )
         super.init(coder: coder)
     }
 
@@ -154,8 +166,7 @@ class ActivityViewController: UITableViewController {
             controller.delegate = self
         } else if segue.identifier == showMostActiveCompaniesSegueId, let controller = segue.destination as? MostActiveCompaniesController {
             controller.mostRequestedCompanies = mostRequestedCompanies
-            // TODO: Set correct time period ror this controller
-//            controller.chartDateType = resources.activityStatisticsType
+            controller.chartDateType = resources.activityStatisticsType
         }
     }
 
@@ -523,16 +534,15 @@ extension ActivityViewController: DateTypeChangedProtocol {
         activityModel.period = statisticsPeriod
         changePeriodTypeButton.setTitle(statisticsPeriod.dateTypeString, for: .normal)
 
-        // TODO: update companies counter
-//        activityModel.getCompanies(for: dateType) {[weak self] (info) in
-//            self?.processCompaniesInfo(info)
-//        }
+        activityModel.getCompanies(for: statisticsPeriod) {[weak self] (info) in
+            self?.processCompaniesInfo(info)
+        }
 
         updateTextForButtons()
     }
 
     private func processCompaniesInfo(_ companiesInfo: CompaniesInfo) {
-        DispatchQueue.main.async {[weak self] in
+        DispatchQueue.asyncSafeMain { [weak self] in
             if !companiesInfo.mostRequested.isEmpty {
                 self?.mostActiveButton.alpha = 1.0
                 self?.mostActiveLabel.alpha = 1.0
@@ -540,7 +550,7 @@ extension ActivityViewController: DateTypeChangedProtocol {
                 self?.rightArrowImageView.alpha = 1.0
                 self?.mostActiveButton.isEnabled = true
                 let record = companiesInfo.mostRequested[0]
-                self?.mostActiveCompany.text = record.key
+                self?.mostActiveCompany.text = record.company
             } else {
                 self?.mostActiveButton.alpha = 0.5
                 self?.mostActiveLabel.alpha = 0.5

@@ -71,8 +71,7 @@ enum DnsLogButtonType {
     }
 }
 
-extension DnsLogRecord
-{
+extension DnsLogRecord {
     func getButtons() -> [DnsLogButtonType] {
         switch (event.processedStatus, userFilterStatus) {
         case (.processed, .none), (.encrypted, .none):
@@ -143,7 +142,7 @@ extension DnsLogRecord
         }
     }
 
-    func time () -> String {
+    func time() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm:ss"
         return dateFormatter.string(from: event.startDate)

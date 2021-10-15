@@ -17,8 +17,9 @@
 */
 
 import UIKit
+import enum DnsAdGuardSDK.StatisticsPeriod
 
-class MostActiveCompaniesController: UIViewController {
+final class MostActiveCompaniesController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var controllerTitle: ThemableLabel!
     @IBOutlet weak var tableView: UITableView!
@@ -30,7 +31,7 @@ class MostActiveCompaniesController: UIViewController {
 
     // MARK: - Public variables
 
-    var chartDateType: ChartDateType?
+    var chartDateType: StatisticsPeriod?
     var mostRequestedCompanies: [CompanyRequestsRecord] = []
 
     // MARK: - Private variables
@@ -67,7 +68,7 @@ extension MostActiveCompaniesController: UITableViewDataSource, UITableViewDeleg
         if let cell = tableView.dequeueReusableCell(withIdentifier: mostActiveCompaniesCellReuseId) as? MostActiveCompaniesCell {
             let record = mostRequestedCompanies[indexPath.row]
             cell.theme = theme
-            cell.companyLabel.text = record.key
+            cell.companyLabel.text = record.company
             cell.requestsNumberLabel.text = String(format: String.localizedString("requests_number"), record.requests)
 
             if indexPath.row == 0 {

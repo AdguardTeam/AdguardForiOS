@@ -19,12 +19,12 @@
 import Foundation
 
 public struct CompaniesStatisticsRecord: Equatable {
-    let company: String // Company name that domain is attached to. If company was not found than it is domain
-    let tracker: DnsTracker? // DNS tracker information, associated with this company
-    let counters: CountersStatisticsRecord // Different counters for company
-    let domains: Set<String> // Set of domains related with company
+    public let company: String // Company name that domain is attached to. If company was not found than it is domain
+    public let tracker: DnsTracker? // DNS tracker information, associated with this company
+    public let counters: CountersStatisticsRecord // Different counters for company
+    public let domains: Set<String> // Set of domains related with company
 
-    static func +(left: CompaniesStatisticsRecord, right: CompaniesStatisticsRecord) -> CompaniesStatisticsRecord {
+    public static func +(left: CompaniesStatisticsRecord, right: CompaniesStatisticsRecord) -> CompaniesStatisticsRecord {
         return CompaniesStatisticsRecord(
             company: left.company,
             tracker: left.tracker,
