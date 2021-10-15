@@ -16,7 +16,7 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
+import SharedAdGuardSDK
 
 //TODO: Need tests
 public protocol DnsProtectionUserRulesManagerProtocol {
@@ -102,6 +102,14 @@ public protocol DnsProtectionUserRulesManagerProtocol {
      - Parameter type: User rule type (blocklist / allowlist)
      */
     func removeAllRules(for type: DnsUserRuleType)
+
+    /** check that user filter contains the rule
+     - Parameter rule: user rule to check
+     - Parameter type: User rule type (blocklist / allowlist)
+     - Returns: true, if rule exists and enabled
+     */
+    // TODO: write tests
+    func checkEnabledRuleExists(_ rule: String, for type: DnsUserRuleType)->Bool
 }
 
 extension DnsProtection {
@@ -173,12 +181,18 @@ extension DnsProtection {
         }
     }
 
-
     public func removeAllRules(for type: DnsUserRuleType) {
         workingQueue.sync {
             Logger.logInfo("(DnsProtection+UserRules) - removeAllRules; Removing all rules for type=\(type)")
             let manager = getManager(for: type)
             manager.removeAllRules()
+        }
+    }
+
+    public func checkEnabledRuleExists(_ rule: String, for type: DnsUserRuleType)->Bool {
+        workingQueue.sync {
+            let manager = getManager(for: type)
+            return manager.checkEnabledRuleExists(rule)
         }
     }
 

@@ -19,6 +19,7 @@
 
 import UIKit
 import SafariAdGuardSDK
+import AGDnsProxy
 
 final class AdvancedSettingsController: UITableViewController {
 

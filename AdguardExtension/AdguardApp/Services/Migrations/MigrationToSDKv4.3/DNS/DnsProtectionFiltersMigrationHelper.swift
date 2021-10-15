@@ -17,7 +17,7 @@
 */
 
 import Foundation
-import enum DnsAdGuardSDK.CommonError
+import enum SharedAdGuardSDK.CommonError
 import struct DnsAdGuardSDK.DnsFilter
 
 /// This object is a helper for `SDKMigrationServiceHelper`

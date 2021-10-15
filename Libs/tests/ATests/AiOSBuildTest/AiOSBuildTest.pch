@@ -1,11 +1,3 @@
-//
-//  AiOSBuildTest.pch
-//  ATests
-//
-//  Created by Roman Sokolov on 19.08.15.
-//
-//
-
 #ifndef ATests_AiOSBuildTest_pch
 #define ATests_AiOSBuildTest_pch
 

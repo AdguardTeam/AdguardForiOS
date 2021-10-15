@@ -17,7 +17,8 @@
 
  */
 
-@_implementationOnly import SQLite
+import SQLite
+import SharedAdGuardSDK
 
 public protocol DnsLogStatisticsProtocol: ResetableSyncProtocol {
     /// Saves passed `event` to DB
@@ -41,6 +42,11 @@ final public class DnsLogStatistics: DnsLogStatisticsProtocol {
 
         let dbName = Constants.Statistics.StatisticsType.dnsLog.dbFileName
         statisticsDb = try Connection(statisticsDbContainerUrl.appendingPathComponent(dbName).path)
+        
+        // This database is used by several processes at the same time.
+        // It is possible that a database file is temporarily locked in one process and is being accessed from another process.
+        // Here we set a timeout to resolve this issue.
+        statisticsDb.busyTimeout = 0.5
         dateFormatter.dateFormat = Constants.Statistics.dbDateFormat
         try createTableIfNotExists()
     }

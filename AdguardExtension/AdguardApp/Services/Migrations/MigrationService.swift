@@ -344,7 +344,7 @@ final class MigrationService: MigrationServiceProtocol {
     // Looks very old, do we need to support it?
     private func migrateProDnsUserFilters() -> Bool {
         var result = false
-        let domainsConverter: DomainsConverterProtocol = DomainsConverter()
+        let domainConverter: DomainConverterProtocol = DomainConverter()
         let fm = FileManager()
 
         if let whitelistData = resources.loadData(fromFileRelativePath: "pro-whitelist-doamins.data"),

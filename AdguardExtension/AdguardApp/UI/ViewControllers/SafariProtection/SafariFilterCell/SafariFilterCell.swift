@@ -67,7 +67,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.greyText = true
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 16.0, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: isIpadTrait ? 24.0 : 16.0, weight: .regular)
         label.textAlignment = .left
         label.attributedText = model.filterNameAttrString
         return label
@@ -253,8 +253,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         let label = ThemableLabel()
         label.lightGreyText = true
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
-        label.heightAnchor.constraint(equalToConstant: 16.0).isActive = true
+        label.font = UIFont.systemFont(ofSize: isIpadTrait ? 24.0 : 16.0, weight: .regular)
         label.textAlignment = .left
         label.text = text
         themeService.setupLabel(label)
@@ -267,7 +266,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         stackView.axis = .horizontal
         stackView.distribution = .fillProportionally
         stackView.spacing = tagsInset
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.alignment = .leading
         stackView.heightAnchor.constraint(equalToConstant: tagHeight).isActive = true
         return stackView
     }

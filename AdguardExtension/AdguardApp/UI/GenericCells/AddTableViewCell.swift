@@ -37,7 +37,7 @@ final class AddTableViewCell: UITableViewCell, Reusable {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.AdGuardColor.lightGreen1
-        label.font = .systemFont(ofSize: isIpadTrait ? 20.0 : 16.0)
+        label.font = .systemFont(ofSize: isIpadTrait ? 24.0 : 16.0)
         return label
     }()
 

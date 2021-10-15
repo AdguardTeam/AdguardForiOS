@@ -1,0 +1,11 @@
+framework module DnsAdGuardSDK {
+    umbrella header "DnsAdGuardSDK.h"
+
+    export *
+    module * { export * }
+}
+
+framework module SystemLibs [system] {
+    header "SystemLibs.h"
+    export *
+}

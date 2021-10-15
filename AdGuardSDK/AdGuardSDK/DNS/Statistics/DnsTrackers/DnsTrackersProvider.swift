@@ -16,7 +16,7 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
+import SharedAdGuardSDK
 
 public protocol DnsTrackersProviderProtocol: AnyObject {
     /// Returns tracker object by domain if found in json or nil otherwise

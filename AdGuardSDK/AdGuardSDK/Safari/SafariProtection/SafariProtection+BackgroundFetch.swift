@@ -16,7 +16,7 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
+import SharedAdGuardSDK
 import UIKit.UIBackgroundConfiguration
 
 /// This object contains all information about background fetch update result

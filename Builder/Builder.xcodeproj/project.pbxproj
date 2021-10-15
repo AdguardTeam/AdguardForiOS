@@ -7,12 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B29D53B1270D46BD0045CB16 /* AdGuardSDK_mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D049EBA826B1869C00B8088B /* AdGuardSDK_mac.framework */; };
+		B29D53B2270D46BD0045CB16 /* AdGuardSDK_mac.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D049EBA826B1869C00B8088B /* AdGuardSDK_mac.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B2C8E9D42717115400ACDED8 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = B2C8E9D32717115400ACDED8 /* Zip */; };
 		D049EBB826B18BEA00B8088B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049EBB726B18BEA00B8088B /* main.swift */; };
-		D049EE7426B2A12900B8088B /* AdGuardSDK_mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D049EBA826B1869C00B8088B /* AdGuardSDK_mac.framework */; };
 		D09B6EE426B9E0A200AC3BE7 /* schema.sql in CopyFiles */ = {isa = PBXBuildFile; fileRef = 659C60D31B8B50200081EBE3 /* schema.sql */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		B29D53B3270D46BD0045CB16 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B29D53B2270D46BD0045CB16 /* AdGuardSDK_mac.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D049EBAE26B18B7B00B8088B /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -49,7 +62,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D049EE7426B2A12900B8088B /* AdGuardSDK_mac.framework in Frameworks */,
+				B2C8E9D42717115400ACDED8 /* Zip in Frameworks */,
+				B29D53B1270D46BD0045CB16 /* AdGuardSDK_mac.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,12 +151,16 @@
 				D049EBAC26B18B7B00B8088B /* Sources */,
 				D049EBAD26B18B7B00B8088B /* Frameworks */,
 				D049EBAE26B18B7B00B8088B /* CopyFiles */,
+				B29D53B3270D46BD0045CB16 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Builder;
+			packageProductDependencies = (
+				B2C8E9D32717115400ACDED8 /* Zip */,
+			);
 			productName = Builder;
 			productReference = D049EBB026B18B7B00B8088B /* Builder */;
 			productType = "com.apple.product-type.tool";
@@ -176,8 +194,6 @@
 			);
 			mainGroup = 659C5FBF1B8B4DC90081EBE3;
 			packageReferences = (
-				D0F284C22608795C002AAC7B /* XCRemoteSwiftPackageReference "SafariConverterLib" */,
-				D060751C26A9726A00C9CC3E /* XCRemoteSwiftPackageReference "SQLite.swift" */,
 				D060751F26A9740900C9CC3E /* XCRemoteSwiftPackageReference "Zip" */,
 			);
 			productRefGroup = 659C5FC91B8B4DC90081EBE3 /* Products */;
@@ -422,14 +438,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D060751C26A9726A00C9CC3E /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.12.2;
-			};
-		};
 		D060751F26A9740900C9CC3E /* XCRemoteSwiftPackageReference "Zip" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/marmelroy/Zip.git";
@@ -438,15 +446,15 @@
 				revision = 059e7346082d02de16220cd79df7db18ddeba8c3;
 			};
 		};
-		D0F284C22608795C002AAC7B /* XCRemoteSwiftPackageReference "SafariConverterLib" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AdguardTeam/SafariConverterLib";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.13;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B2C8E9D32717115400ACDED8 /* Zip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D060751F26A9740900C9CC3E /* XCRemoteSwiftPackageReference "Zip" */;
+			productName = Zip;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 659C5FC01B8B4DC90081EBE3 /* Project object */;
 }

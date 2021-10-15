@@ -20,7 +20,7 @@ import SafariAdGuardSDK
 import DnsAdGuardSDK
 
 /// This service initializes all shared services and puts them into ServiceLocator
-final class StartupService : NSObject{
+final class StartupService : NSObject {
 
     @objc
     static func start() {
@@ -125,7 +125,7 @@ final class StartupService : NSObject{
         let rateService: RateAppServiceProtocol = RateAppService(resources: sharedResources, configuration: configuration)
         locator.addService(service: rateService)
 
-        let domainsParserService: DomainsParserServiceProtocol = DomainsParserService()
+        let domainsParserService: DomainParserServiceProtocol = DomainParserService()
         locator.addService(service: domainsParserService)
 
         let setappService: SetappServiceProtocol = SetappService(purchaseService: purchaseService, resources: sharedResources)
