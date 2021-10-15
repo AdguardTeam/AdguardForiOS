@@ -1,6 +1,6 @@
 import XCTest
 import struct DnsAdGuardSDK.DnsFilter
-import enum DnsAdGuardSDK.CommonError
+import enum SharedAdGuardSDK.CommonError
 
 /// Tests for `DnsProtectionFiltersMigrationHelper`
 class DnsProtectionFiltersMigrationHelperTests: XCTestCase {

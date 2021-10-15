@@ -18,8 +18,9 @@
 
 import XCTest
 
+// FIXME reinvestigate whether this file can be helpful or not
 class DomainsConverterTest: XCTestCase {
-    let converter: DomainsConverterProtocol = DomainsConverter()
+    let converter: DomainConverterProtocol = DomainConverter()
 
     // MARK: - Test whitelistDomainFromRule function
 
