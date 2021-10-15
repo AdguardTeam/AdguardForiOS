@@ -24,8 +24,11 @@ public protocol DnsLogStatisticsProtocol: ResetableSyncProtocol {
     /// Saves passed `event` to DB
     func process(event: DnsRequestProcessedEvent)
 
-    /// Returns all log records saved in DB
-    func getDnsLogRecords() throws -> [DnsRequestProcessedEvent]
+    /**
+     Returns list of `DnsRequestProcessedEvent` objects for the specified `period`
+     This method will return records sorted by `startDate` in descending order
+     */
+    func getDnsLogRecords(for period: StatisticsPeriod) throws -> [DnsRequestProcessedEvent]
 }
 
 /// This object is responsible for saving and getting statistics about DNS requests and responses
@@ -63,10 +66,13 @@ final public class DnsLogStatistics: DnsLogStatisticsProtocol {
         }
     }
 
-    /// Returns all available records from `DNS_log_statistics.db`
-    public func getDnsLogRecords() throws -> [DnsRequestProcessedEvent] {
+    // TODO: - Needs new tests
+    /// Returns all available records from `DNS_log_statistics.db` for the specified `period`
+    public func getDnsLogRecords(for period: StatisticsPeriod) throws -> [DnsRequestProcessedEvent] {
         Logger.logInfo("(DnsLogStatistics) - getDnsLogRecords called")
-        let query = DnsLogTable.table.order(DnsLogTable.startDate.desc)
+        let query = DnsLogTable.table
+            .where(period.interval.start...period.interval.end ~= DnsLogTable.startDate)
+            .order(DnsLogTable.startDate.desc)
         let all: [DnsRequestProcessedEvent] = try statisticsDb.prepare(query).map {
             DnsRequestProcessedEvent(dbLogRecord: $0)
         }

@@ -24,7 +24,7 @@ protocol ActivityViewControllerDelegate: AnyObject {
     func showTitle()
 }
 
-class ActivityViewController: UITableViewController {
+final class ActivityViewController: UITableViewController {
 
     // MARK: - Outlets
 
@@ -98,10 +98,8 @@ class ActivityViewController: UITableViewController {
 
     required init?(coder: NSCoder) {
         let activityStatistics: ActivityStatisticsProtocol = ServiceLocator.shared.getService()!
-        guard
-            let trackersProvider = try? DnsTrackersProvider(),
-            let companyStatistics = try? CompaniesStatistics(activityStatistics: activityStatistics, dnsTrackersProvider: trackersProvider)
-        else {
+        let dnsTrackers: DnsTrackersProviderProtocol = ServiceLocator.shared.getService()!
+        guard let companyStatistics = try? CompaniesStatistics(activityStatistics: activityStatistics, dnsTrackersProvider: dnsTrackers) else {
             return nil
         }
 
@@ -125,7 +123,7 @@ class ActivityViewController: UITableViewController {
         statisticsPeriodChanged(statisticsPeriod: resources.activityStatisticsType)
         addObservers()
         filterButton.isHidden = !configuration.advancedMode
-        requestsModel?.obtainRecords(for: .normal, domains: nil)
+        requestsModel?.obtainRecords(for: resources.activityStatisticsType, domains: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -167,6 +165,7 @@ class ActivityViewController: UITableViewController {
         } else if segue.identifier == showMostActiveCompaniesSegueId, let controller = segue.destination as? MostActiveCompaniesController {
             controller.mostRequestedCompanies = mostRequestedCompanies
             controller.chartDateType = resources.activityStatisticsType
+            controller.requestsModel = requestsModel
         }
     }
 
@@ -405,7 +404,7 @@ class ActivityViewController: UITableViewController {
      */
     private func addObservers(){
 
-        keyboardShowToken = NotificationCenter.default.observe(name: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] (notification) in
+        keyboardShowToken = NotificationCenter.default.observe(name: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { [weak self] _ in
             self?.keyboardWillShow()
         }
 
@@ -413,16 +412,18 @@ class ActivityViewController: UITableViewController {
             self?.observeAdvancedMode()
         })
 
-        resetStatisticsToken = NotificationCenter.default.observe(name: NSNotification.resetStatistics, object: nil, queue: .main) { [weak self] (notification) in
-            self?.requestsModel?.obtainRecords(for: .normal)
+        resetStatisticsToken = NotificationCenter.default.observe(name: NSNotification.resetStatistics, object: nil, queue: .main) { [weak self] _ in
+            guard let self = self else { return }
+            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
         }
 
-        resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] (notification) in
-            self?.requestsModel?.obtainRecords(for: .normal)
+        resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] _ in
+            guard let self = self else { return }
+            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
         }
 
         requestsModel?.recordsObserver = { [weak self] (records) in
-            DispatchQueue.main.async {[weak self] in
+            DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.tableView.reloadData()
                 if self.requestsModel?.records.isEmpty == true {
@@ -477,7 +478,7 @@ class ActivityViewController: UITableViewController {
     }
 
     @objc func updateTableView(sender: UIRefreshControl) {
-        requestsModel?.obtainRecords(for: .normal, domains: nil)
+        requestsModel?.obtainRecords(for: resources.activityStatisticsType, domains: nil)
         statisticsPeriodChanged(statisticsPeriod: resources.activityStatisticsType)
         activityModel.period = resources.activityStatisticsType
 

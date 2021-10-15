@@ -5640,7 +5640,6 @@
 				7E952E9223D5FF8500D89AE0 /* MainPage.storyboard */,
 				7E9D31C123A11BB60040AE4B /* ComplexProtectionSwitch.swift */,
 				7E3BDEDF23A15709009492CE /* GetProDialogView.swift */,
-				7ECF38BA23AA43A300A39094 /* DnsLogContainerController.swift */,
 				24C49DBC26C40AC900790CB3 /* WhatsNewBottomAlertController.swift */,
 				2444013826EE2F9500FB7CE5 /* ChartType+Utils.swift */,
 			);
@@ -5850,6 +5849,7 @@
 		7EB5526E242247C3000498CC /* ActivityViewController */ = {
 			isa = PBXGroup;
 			children = (
+				7ECF38BA23AA43A300A39094 /* DnsLogContainerController.swift */,
 				D020B27A21F894F90075BB8D /* DnsRequestLogModel.swift */,
 				7EB5526C24224755000498CC /* ActivityViewController.swift */,
 				7EB5526F242247E2000498CC /* ActivityStatisticsModel.swift */,

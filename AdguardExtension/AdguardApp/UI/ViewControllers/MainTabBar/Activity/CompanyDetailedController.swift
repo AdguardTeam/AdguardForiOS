@@ -19,7 +19,7 @@
 import UIKit
 import DnsAdGuardSDK
 
-class CompanyDetailedController: UITableViewController {
+final class CompanyDetailedController: UITableViewController {
 
     // MARK: - Outlets
     @IBOutlet weak var titleLabel: ThemableLabel!
@@ -54,25 +54,18 @@ class CompanyDetailedController: UITableViewController {
     private var keyboardShowToken: NotificationToken?
 
     // MARK: - Public variables
-    var recordType: BlockedRecordType?
-
+    var statisticsPeriod: StatisticsPeriod?
+    var requestsModel: DnsRequestLogViewModel!
     var record: CompanyRequestsRecord?
-    let requestsModel: DnsRequestLogViewModel
 
     // MARK: - Private variables
+
     private var selectedRecord: DnsLogRecord?
 
     private let activityTableViewCellReuseId = "ActivityTableViewCellId"
     private let showDnsContainerSegueId = "showDnsContainer"
 
     private var titleInNavBarIsShown = false
-
-    //var model:
-
-    required init?(coder: NSCoder) {
-        requestsModel = DnsRequestLogViewModel(dnsTrackers: dnsTrackers, dnsStatistics: ServiceLocator.shared.getService()!, dnsProtection: ServiceLocator.shared.getService()!, domainConverter: DomainConverter(), domainParser: domainParserService)
-        super.init(coder: coder)
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,8 +77,8 @@ class CompanyDetailedController: UITableViewController {
         titleLabel.text = record?.company
 
         requestsModel.delegate = self
-        if let type = recordType, let domains = record?.domains {
-            requestsModel.obtainRecords(for: type, domains: domains)
+        if let period = statisticsPeriod, let domains = record?.domains {
+            requestsModel.obtainRecords(for: period, domains: domains)
         }
 
         let requestsCount = record?.requests ?? 0
@@ -95,6 +88,11 @@ class CompanyDetailedController: UITableViewController {
 
         requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
         encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedCount))
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
 
     override func viewDidLayoutSubviews() {
@@ -112,9 +110,11 @@ class CompanyDetailedController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showDnsContainerSegueId {
-            if let controller = segue.destination as? DnsRequestDetailsContainerController {
-                // TODO: get LogRecordVeiwModel somewhere
-//                controller.model = selectedRecord
+            if let controller = segue.destination as? DnsRequestDetailsContainerController, let record = selectedRecord {
+                let helper: DnsLogRecordHelper = ServiceLocator.shared.getService()!
+                let model = DnsRequestDetailsViewModel(logRecord: record, helper: helper)
+                controller.model = model
+                controller.delegate = self
             }
         }
     }
@@ -211,8 +211,8 @@ class CompanyDetailedController: UITableViewController {
             self?.observeAdvancedMode()
         })
 
-        requestsModel.recordsObserver = { [weak self] (records) in
-            DispatchQueue.main.async {[weak self] in
+        requestsModel.recordsObserver = { [weak self] records in
+            DispatchQueue.asyncSafeMain { [weak self] in
                 guard let self = self else { return }
                 self.tableView.reloadData()
                 if self.requestsModel.records.isEmpty {
@@ -251,8 +251,8 @@ class CompanyDetailedController: UITableViewController {
         let allRequestsAction = UIAlertAction(title: String.localizedString("all_requests_alert_action"), style: .default) {[weak self] _ in
             guard let self = self else { return }
             self.requestsModel.displayedStatisticsType = .allRequests
-            if let type = self.recordType, let domains = self.record?.domains {
-                self.requestsModel.obtainRecords(for: type, domains: domains)
+            if let period = self.statisticsPeriod, let domains = self.record?.domains {
+                self.requestsModel.obtainRecords(for: period, domains: domains)
             }
             alert.dismiss(animated: true, completion: nil)
         }
@@ -260,8 +260,8 @@ class CompanyDetailedController: UITableViewController {
         let blockedOnlyAction = UIAlertAction(title: String.localizedString("blocked_only_alert_action"), style: .default) {[weak self] _ in
             guard let self = self else { return }
             self.requestsModel.displayedStatisticsType = .blockedRequests
-            if let type = self.recordType, let domains = self.record?.domains {
-                self.requestsModel.obtainRecords(for: type, domains: domains)
+            if let period = self.statisticsPeriod, let domains = self.record?.domains {
+                self.requestsModel.obtainRecords(for: period, domains: domains)
             }
             alert.dismiss(animated: true, completion: nil)
         }
@@ -269,8 +269,8 @@ class CompanyDetailedController: UITableViewController {
         let allowedOnlyAction = UIAlertAction(title: String.localizedString("allowed_only_alert_action"), style: .default) {[weak self] _ in
             guard let self = self else { return }
             self.requestsModel.displayedStatisticsType = .allowedRequests
-            if let type = self.recordType, let domains = self.record?.domains {
-                self.requestsModel.obtainRecords(for: type, domains: domains)
+            if let period = self.statisticsPeriod, let domains = self.record?.domains {
+                self.requestsModel.obtainRecords(for: period, domains: domains)
             }
             alert.dismiss(animated: true, completion: nil)
         }
@@ -288,8 +288,8 @@ class CompanyDetailedController: UITableViewController {
     }
 
     @objc func updateTableView(sender: UIRefreshControl) {
-        if let type = recordType, let domains = record?.domains {
-            requestsModel.obtainRecords(for: type, domains: domains)
+        if let period = statisticsPeriod, let domains = record?.domains {
+            requestsModel.obtainRecords(for: period, domains: domains)
         }
         refreshControl?.endRefreshing()
     }
@@ -331,9 +331,17 @@ extension CompanyDetailedController: UISearchBarDelegate {
 
 extension CompanyDetailedController: DnsRequestsDelegateProtocol {
     func requestsCleared() {
-        DispatchQueue.main.async {[weak self] in
+        DispatchQueue.asyncSafeMain { [weak self] in
             self?.tableView.reloadData()
         }
+    }
+}
+
+// MARK: - DnsRequestDetailsContainerControllerDelegate
+
+extension CompanyDetailedController: DnsRequestDetailsContainerControllerDelegate {
+    func userStatusChanged() {
+        requestsModel.updateUserStatuses()
     }
 }
 

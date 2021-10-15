@@ -143,6 +143,9 @@ final class StartupService : NSObject {
         let dnsLogStatistics: DnsLogStatisticsProtocol = try! DnsLogStatistics(statisticsDbContainerUrl: sharedUrls.statisticsFolderUrl)
         locator.addService(service: dnsLogStatistics)
 
+        let dnsLogRecordsHelper = DnsLogRecordHelper(dnsProtection: dnsProtection, dnsTrackers: dnsTrackers, domainConverter: DomainConverter())
+        locator.addService(service: dnsLogRecordsHelper)
+
         let migrationService: MigrationServiceProtocol = MigrationService(
             vpnManager: vpnManager,
             resources: sharedResources,
@@ -154,16 +157,18 @@ final class StartupService : NSObject {
         )
         locator.addService(service: migrationService)
 
-        let settingsReset: SettingsResetServiceProtocol = SettingsResetService(vpnManager: vpnManager,
-                                                                                     resources: sharedResources,
-                                                                                     purchaseService: purchaseService,
-                                                                                     safariProtection: safariProtection,
-                                                                                     dnsProtection: dnsProtection,
-                                                                                     dnsProvidersManager: dnsProvidersManager,
-                                                                                     nativeDnsManager: nativeDnsManager,
-                                                                                     chartStatistics: chartStatistics,
-                                                                                     activityStatistics: activityStatistics,
-                                                                                     dnsLogStatistics: dnsLogStatistics)
+        let settingsReset: SettingsResetServiceProtocol = SettingsResetService(
+            vpnManager: vpnManager,
+            resources: sharedResources,
+            purchaseService: purchaseService,
+            safariProtection: safariProtection,
+            dnsProtection: dnsProtection,
+            dnsProvidersManager: dnsProvidersManager,
+            nativeDnsManager: nativeDnsManager,
+            chartStatistics: chartStatistics,
+            activityStatistics: activityStatistics,
+            dnsLogStatistics: dnsLogStatistics
+        )
         locator.addService(service: settingsReset)
     }
 }
