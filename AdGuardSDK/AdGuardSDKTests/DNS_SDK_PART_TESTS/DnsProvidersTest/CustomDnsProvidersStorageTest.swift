@@ -101,16 +101,16 @@ class CustomDnsProvidersStorageTest: XCTestCase {
         XCTAssertEqual(ids1.providerId, 1)
         XCTAssertEqual(ids2.providerId, 2)
 
-        XCTAssertEqual(ids1.serverId, 100001)
-        XCTAssertEqual(ids2.serverId, 100002)
+        XCTAssertEqual(ids1.serverId, 100000)
+        XCTAssertEqual(ids2.serverId, 100001)
 
         XCTAssertEqual(storage.providers.count, 2)
 
         XCTAssertEqual(storage.providers[0].providerId, 1)
         XCTAssertEqual(storage.providers[1].providerId, 2)
 
-        XCTAssertEqual(storage.providers[0].server.id, 100001)
-        XCTAssertEqual(storage.providers[1].server.id, 100002)
+        XCTAssertEqual(storage.providers[0].server.id, 100000)
+        XCTAssertEqual(storage.providers[1].server.id, 100001)
     }
 
     func testAddCustomProviderWithSuccess() {

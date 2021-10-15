@@ -1052,7 +1052,7 @@
 		B2673E692717543F00E04747 /* ACLLogFileManagerDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0977A6B221D8B3E00E10AC8 /* ACLLogFileManagerDefault.swift */; };
 		B2673E6A2717544100E04747 /* NotificationCenter+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAD352626C2C657001AFB3A /* NotificationCenter+Utils.swift */; };
 		B2673E6B2717544400E04747 /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0B2219EFC99002C17D9 /* CLIColor.m */; };
-		B2673E6C2717545B00E04747 /* AdGuardDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C8E9982716FDB300ACDED8 /* AdGuardDependencies.framework */; };
+		B2673E6C2717545B00E04747 /* AdGuardDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C8E9982716FDB300ACDED8 /* AdGuardDependencies.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B2673E6D2717547D00E04747 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0BE219EFC99002C17D9 /* DDLog.m */; };
 		B2673E6E2717548100E04747 /* TunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08D44D226E1F6730023FC20 /* TunnelProvider.swift */; };
 		B2673E6F2717548400E04747 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0C6219EFC99002C17D9 /* DDFileLogger.m */; };
@@ -1086,6 +1086,8 @@
 		B26B9243271872B200F1D482 /* SafariAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6454E526EBD58700B1E66C /* SafariAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B26B9244271872B500F1D482 /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29D53A9270D40EA0045CB16 /* SharedAdGuardSDK.framework */; };
 		B26B9245271872B500F1D482 /* SharedAdGuardSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B29D53A9270D40EA0045CB16 /* SharedAdGuardSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B26B924727197D2400F1D482 /* DnsProtectionCustomProvidersMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26B924627197D2400F1D482 /* DnsProtectionCustomProvidersMigrationHelper.swift */; };
+		B26B924827197D2400F1D482 /* DnsProtectionCustomProvidersMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26B924627197D2400F1D482 /* DnsProtectionCustomProvidersMigrationHelper.swift */; };
 		B29D5358270CD9DC0045CB16 /* DnsAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29DD474270CB04B0072B42F /* DnsAdGuardSDK.framework */; };
 		B29D536F270CE4CF0045CB16 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0971B8632DD00319AA3 /* libsqlite3.tbd */; };
 		B29D5370270CE6020045CB16 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0991B8632F600319AA3 /* libz.tbd */; };
@@ -3257,6 +3259,7 @@
 		B2673DE42717413100E04747 /* DomainConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomainConverter.swift; sourceTree = "<group>"; };
 		B2673DE72717418600E04747 /* DnsLogRecordHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DnsLogRecordHelper.swift; sourceTree = "<group>"; };
 		B26B921E2718266200F1D482 /* AdGuardSdkDependencies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AdGuardSdkDependencies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B26B924627197D2400F1D482 /* DnsProtectionCustomProvidersMigrationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DnsProtectionCustomProvidersMigrationHelper.swift; path = DNS/DnsProtectionCustomProvidersMigrationHelper.swift; sourceTree = "<group>"; };
 		B29D53A9270D40EA0045CB16 /* SharedAdGuardSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SharedAdGuardSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B29DD474270CB04B0072B42F /* DnsAdGuardSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DnsAdGuardSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2C19E7B2716DE5800331109 /* PurchaseServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseServiceProtocol.swift; sourceTree = "<group>"; };
@@ -5997,6 +6000,7 @@
 		B2673DB427173DFD00E04747 /* MigrationToSDKv4.3 */ = {
 			isa = PBXGroup;
 			children = (
+				B26B924627197D2400F1D482 /* DnsProtectionCustomProvidersMigrationHelper.swift */,
 				B2673DB527173DFD00E04747 /* SDKMigrationServiceHelper.swift */,
 				B2673DB627173DFD00E04747 /* Safari */,
 				B2673DBD27173DFD00E04747 /* DNS */,
@@ -8033,6 +8037,7 @@
 				7EF5C53C26C2621D001851D6 /* SharedResources+Statistics.swift in Sources */,
 				D0B545A72435D640002F0AEC /* DnsProvidersController.swift in Sources */,
 				B2673DC727173DFD00E04747 /* SafariProtectionCustomFiltersMigrationHelper.swift in Sources */,
+				B26B924827197D2400F1D482 /* DnsProtectionCustomProvidersMigrationHelper.swift in Sources */,
 				D0B545DD2435D69B002F0AEC /* LongLabelCell.swift in Sources */,
 				D0B545BA2435D655002F0AEC /* DnsRequestDetailsController.swift in Sources */,
 				7EA7834D2578E54500CA8889 /* SupportService+Feedback.swift in Sources */,
@@ -8470,6 +8475,7 @@
 				D02B550122EED4AF0039BC48 /* Date+Utils.swift in Sources */,
 				7E50493322F07FFA0095181C /* FilterTagsButtons.swift in Sources */,
 				7EBDFE9126CFAE2B00CCE8CC /* FilterDetailsCell.swift in Sources */,
+				B26B924727197D2400F1D482 /* DnsProtectionCustomProvidersMigrationHelper.swift in Sources */,
 				D0F9117A213422E1006DF0D3 /* PurchaseService.swift in Sources */,
 				7E2522162408207A00743648 /* OnboardingAnimationsController.swift in Sources */,
 				7E86A9B726CBB591000B395F /* UITraitEnvironment+Utils.swift in Sources */,

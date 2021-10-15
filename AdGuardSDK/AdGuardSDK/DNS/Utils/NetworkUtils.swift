@@ -82,7 +82,7 @@ public struct NetworkUtils: NetworkUtilsProtocol {
 
     public init() {}
 
-    func getProtocol(from upstream: String) throws -> DnsProtocol {
+    public func getProtocol(from upstream: String) throws -> DnsProtocol {
         if upstream.hasPrefix("sdns://") {
             return try getDnsProtocol(from: upstream)
         }
