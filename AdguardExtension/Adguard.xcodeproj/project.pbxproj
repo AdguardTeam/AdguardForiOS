@@ -846,6 +846,8 @@
 		7EA887E9237D290E00E1043D /* CustomNavigationTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA887E8237D290E00E1043D /* CustomNavigationTransition.swift */; };
 		7EA94CB727197CB0000EB08D /* DnsProtectionFiltersMigrationHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA94CB627197CB0000EB08D /* DnsProtectionFiltersMigrationHelperTests.swift */; };
 		7EA94CB827197CFB000EB08D /* DnsProtectionFiltersMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE34B1D2712E04700950F52 /* DnsProtectionFiltersMigrationHelper.swift */; };
+		7EA94CBB27199991000EB08D /* DnsProtectionUserRulesMigrationHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA94CBA27199991000EB08D /* DnsProtectionUserRulesMigrationHelperTests.swift */; };
+		7EA94CBC271999BD000EB08D /* DnsProtectionUserRulesMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70C3A6271425690031C3F4 /* DnsProtectionUserRulesMigrationHelper.swift */; };
 		7EAA0D7A26CA8785007208E5 /* SafariFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA0D7826CA8785007208E5 /* SafariFilterCell.swift */; };
 		7EAA0D7B26CA8785007208E5 /* SafariFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA0D7826CA8785007208E5 /* SafariFilterCell.swift */; };
 		7EAA0D8726CA8E8C007208E5 /* UITextView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA0D8626CA8E8C007208E5 /* UITextView+Utils.swift */; };
@@ -3400,6 +3402,7 @@
 		7EA7DCBD26C674FE0032AD5C /* SafariProtectionGroupCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SafariProtectionGroupCell.xib; sourceTree = "<group>"; };
 		7EA887E8237D290E00E1043D /* CustomNavigationTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationTransition.swift; sourceTree = "<group>"; };
 		7EA94CB627197CB0000EB08D /* DnsProtectionFiltersMigrationHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProtectionFiltersMigrationHelperTests.swift; sourceTree = "<group>"; };
+		7EA94CBA27199991000EB08D /* DnsProtectionUserRulesMigrationHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProtectionUserRulesMigrationHelperTests.swift; sourceTree = "<group>"; };
 		7EAA0D7826CA8785007208E5 /* SafariFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariFilterCell.swift; sourceTree = "<group>"; };
 		7EAA0D8626CA8E8C007208E5 /* UITextView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Utils.swift"; sourceTree = "<group>"; };
 		7EAA0D8926CA9B35007208E5 /* SafariGroupFiltersModelsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariGroupFiltersModelsProvider.swift; sourceTree = "<group>"; };
@@ -6066,6 +6069,7 @@
 			isa = PBXGroup;
 			children = (
 				7EA94CB627197CB0000EB08D /* DnsProtectionFiltersMigrationHelperTests.swift */,
+				7EA94CBA27199991000EB08D /* DnsProtectionUserRulesMigrationHelperTests.swift */,
 			);
 			path = DnsProtectionMigration;
 			sourceTree = "<group>";
@@ -8976,9 +8980,11 @@
 				249E11462600D389003A5FBD /* OpenDnsProvidersControllerParser.swift in Sources */,
 				7EF099F5271837C2009A1A32 /* SafariProtectionCustomFiltersMigrationHelperTests.swift in Sources */,
 				7ED558B427106F71001D4D79 /* DispatchQueue+Utils.swift in Sources */,
+				7EA94CBC271999BD000EB08D /* DnsProtectionUserRulesMigrationHelper.swift in Sources */,
 				7ED558B527106FCC001D4D79 /* UserNotificationService.swift in Sources */,
 				D0288F41230699A900A4EBEF /* ACLFileLogger.m in Sources */,
 				7E8576642435F1F70055F63D /* Rule.swift in Sources */,
+				7EA94CBB27199991000EB08D /* DnsProtectionUserRulesMigrationHelperTests.swift in Sources */,
 				D0F7F0D022689CEC00592B1E /* LoginServiceTest.swift in Sources */,
 				7E1AB68E25824ABD00519B2B /* CharacterSet+Utils.swift in Sources */,
 				247521FA2594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */,

@@ -2,6 +2,7 @@ import XCTest
 import struct DnsAdGuardSDK.DnsFilter
 import enum DnsAdGuardSDK.CommonError
 
+/// Tests for `DnsProtectionFiltersMigrationHelper`
 class DnsProtectionFiltersMigrationHelperTests: XCTestCase {
 
     var resources: SharedResourcesMock!

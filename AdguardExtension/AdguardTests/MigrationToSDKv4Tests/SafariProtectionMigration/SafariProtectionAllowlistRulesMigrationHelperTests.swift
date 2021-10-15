@@ -1,6 +1,6 @@
 import XCTest
 
-/// Tests for `SafariProtectionAllowlistRulesMigrationHelperTests`
+/// Tests for `SafariProtectionAllowlistRulesMigrationHelper`
 class SafariProtectionAllowlistRulesMigrationHelperTests: XCTestCase {
 
     var allowlistMigration: SafariProtectionAllowlistRulesMigrationHelperProtocol!
