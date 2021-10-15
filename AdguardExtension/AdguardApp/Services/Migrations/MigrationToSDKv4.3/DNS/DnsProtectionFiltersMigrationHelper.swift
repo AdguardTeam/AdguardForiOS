@@ -140,9 +140,21 @@ class SDKDnsMigrationObsoleteDnsFilter: NSObject, NSCoding {
     let rulesCount: Int
     let homepage: String?
 
+    init(id: Int, subscriptionUrl: URL, name: String?, updateDate: Date?, enabled: Bool, desc: String?, version: String?, rulesCount: Int, homepage: String?) {
+        self.id = id
+        self.subscriptionUrl = subscriptionUrl
+        self.name = name
+        self.updateDate = updateDate
+        self.enabled = enabled
+        self.desc = desc
+        self.version = version
+        self.rulesCount = rulesCount
+        self.homepage = homepage
+    }
+
     func encode(with coder: NSCoder) {
         coder.encode(id, forKey: "id")
-        coder.encode(subscriptionUrl, forKey: "subscriptionUrl")
+        coder.encode(subscriptionUrl.absoluteString, forKey: "subscriptionUrl")
         coder.encode(name, forKey: "name")
         coder.encode(updateDate, forKey: "updateDate")
         coder.encode(enabled, forKey: "enabled")
@@ -167,7 +179,7 @@ class SDKDnsMigrationObsoleteDnsFilter: NSObject, NSCoding {
         self.enabled = coder.decodeBool(forKey: "enabled")
         self.desc = coder.decodeObject(forKey: "desc") as? String
         self.version = coder.decodeObject(forKey: "version") as? String
-        self.rulesCount = coder.decodeObject(forKey: "rulesCount") as? Int ?? 0
+        self.rulesCount = coder.decodeInteger(forKey: "rulesCount")
         self.homepage = coder.decodeObject(forKey: "homepage") as? String
     }
 }

@@ -844,6 +844,8 @@
 		7EA7DCC026C674FE0032AD5C /* SafariProtectionGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EA7DCBD26C674FE0032AD5C /* SafariProtectionGroupCell.xib */; };
 		7EA7DCC126C674FE0032AD5C /* SafariProtectionGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EA7DCBD26C674FE0032AD5C /* SafariProtectionGroupCell.xib */; };
 		7EA887E9237D290E00E1043D /* CustomNavigationTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA887E8237D290E00E1043D /* CustomNavigationTransition.swift */; };
+		7EA94CB727197CB0000EB08D /* DnsProtectionFiltersMigrationHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA94CB627197CB0000EB08D /* DnsProtectionFiltersMigrationHelperTests.swift */; };
+		7EA94CB827197CFB000EB08D /* DnsProtectionFiltersMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE34B1D2712E04700950F52 /* DnsProtectionFiltersMigrationHelper.swift */; };
 		7EAA0D7A26CA8785007208E5 /* SafariFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA0D7826CA8785007208E5 /* SafariFilterCell.swift */; };
 		7EAA0D7B26CA8785007208E5 /* SafariFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA0D7826CA8785007208E5 /* SafariFilterCell.swift */; };
 		7EAA0D8726CA8E8C007208E5 /* UITextView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAA0D8626CA8E8C007208E5 /* UITextView+Utils.swift */; };
@@ -3397,6 +3399,7 @@
 		7EA7DCBC26C674FE0032AD5C /* SafariProtectionGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariProtectionGroupCell.swift; sourceTree = "<group>"; };
 		7EA7DCBD26C674FE0032AD5C /* SafariProtectionGroupCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SafariProtectionGroupCell.xib; sourceTree = "<group>"; };
 		7EA887E8237D290E00E1043D /* CustomNavigationTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationTransition.swift; sourceTree = "<group>"; };
+		7EA94CB627197CB0000EB08D /* DnsProtectionFiltersMigrationHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProtectionFiltersMigrationHelperTests.swift; sourceTree = "<group>"; };
 		7EAA0D7826CA8785007208E5 /* SafariFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariFilterCell.swift; sourceTree = "<group>"; };
 		7EAA0D8626CA8E8C007208E5 /* UITextView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Utils.swift"; sourceTree = "<group>"; };
 		7EAA0D8926CA9B35007208E5 /* SafariGroupFiltersModelsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariGroupFiltersModelsProvider.swift; sourceTree = "<group>"; };
@@ -6047,6 +6050,26 @@
 			path = SafariProtection;
 			sourceTree = "<group>";
 		};
+		7EA94CB527197C91000EB08D /* SafariProtectionMigration */ = {
+			isa = PBXGroup;
+			children = (
+				7E579B6A2716C5E50029EBCF /* SDKMigrationOldDbWrapper.swift */,
+				7ECCD28D2715DD1000D8B053 /* SafariProtectionFiltersDatabaseMigrationHelperTests.swift */,
+				7EF099F727183A34009A1A32 /* SDKMigrationNewDbWrapper.swift */,
+				7EF099F4271837C2009A1A32 /* SafariProtectionCustomFiltersMigrationHelperTests.swift */,
+				7EE4B340271878380041FDE9 /* SafariProtectionAllowlistRulesMigrationHelperTests.swift */,
+			);
+			path = SafariProtectionMigration;
+			sourceTree = "<group>";
+		};
+		7EA94CB927197D2E000EB08D /* DnsProtectionMigration */ = {
+			isa = PBXGroup;
+			children = (
+				7EA94CB627197CB0000EB08D /* DnsProtectionFiltersMigrationHelperTests.swift */,
+			);
+			path = DnsProtectionMigration;
+			sourceTree = "<group>";
+		};
 		7EAA0D7E26CA8789007208E5 /* SafariFilterCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -6183,11 +6206,8 @@
 			isa = PBXGroup;
 			children = (
 				7ECCD2922715DEA100D8B053 /* SDKMigrationsDirectoriesManager.swift */,
-				7E579B6A2716C5E50029EBCF /* SDKMigrationOldDbWrapper.swift */,
-				7ECCD28D2715DD1000D8B053 /* SafariProtectionFiltersDatabaseMigrationHelperTests.swift */,
-				7EF099F727183A34009A1A32 /* SDKMigrationNewDbWrapper.swift */,
-				7EF099F4271837C2009A1A32 /* SafariProtectionCustomFiltersMigrationHelperTests.swift */,
-				7EE4B340271878380041FDE9 /* SafariProtectionAllowlistRulesMigrationHelperTests.swift */,
+				7EA94CB527197C91000EB08D /* SafariProtectionMigration */,
+				7EA94CB927197D2E000EB08D /* DnsProtectionMigration */,
 			);
 			path = MigrationToSDKv4Tests;
 			sourceTree = "<group>";
@@ -9025,6 +9045,7 @@
 				D03E532A21B41FF000C62152 /* CocoaLumberjack.swift in Sources */,
 				D09E2D56255D7633002D6BC0 /* SettingsParserTest.swift in Sources */,
 				7EF14476242A287D0034A727 /* ActivityStatisticsRecord.swift in Sources */,
+				7EA94CB827197CFB000EB08D /* DnsProtectionFiltersMigrationHelper.swift in Sources */,
 				7E5844DB23FD88E700BAD052 /* UserNotificationServiceMock.swift in Sources */,
 				24F5528D258753F400AF1D3B /* DNSSettings.swift in Sources */,
 				24ED98CE259B78DF00A73B17 /* Array+Utils.swift in Sources */,
@@ -9036,6 +9057,7 @@
 				7EE567B823D0A28B00CC10DB /* DomainsConverterTest.swift in Sources */,
 				7E8576662435F1F70055F63D /* BasicRulesParser.swift in Sources */,
 				D09E2D32255D6AFF002D6BC0 /* SettingsParser.swift in Sources */,
+				7EA94CB727197CB0000EB08D /* DnsProtectionFiltersMigrationHelperTests.swift in Sources */,
 				D04C2B78240FA462009330A8 /* UIApplication+OpenAdguardUrl.swift in Sources */,
 				249E118E2600D393003A5FBD /* SocialNetworkAuthParametersParser.swift in Sources */,
 				249E117C2600D390003A5FBD /* OpenTunnelModeControllerParser.swift in Sources */,
