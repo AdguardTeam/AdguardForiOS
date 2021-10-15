@@ -18,7 +18,7 @@
 
 import Foundation
 
-/// Transform given language codes into suitable for our provider and filter json localization files
+/// Transforms given language codes into suitable for our provider and filter json localization files
 public extension Locale {
 
     enum Delimiter: String {
@@ -45,7 +45,7 @@ public extension Locale {
         var result: [String] = []
 
         /*
-         Chinese languages codes from json different from apple ones
+         Chinese languages codes from json are different from apple ones
          Hans - Chinese in the simplified script
          Hant - Chinese in the traditional script
         */
