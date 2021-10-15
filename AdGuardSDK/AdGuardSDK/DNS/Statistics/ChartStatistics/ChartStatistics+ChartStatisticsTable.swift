@@ -17,6 +17,7 @@
  */
 
 import SQLite
+import SharedAdGuardSDK
 
 /// Object representation of `chart_statistics_table`
 struct ChartStatisticsTable: Equatable {

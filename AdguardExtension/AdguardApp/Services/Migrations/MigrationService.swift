@@ -16,8 +16,8 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
 import SafariAdGuardSDK
+import DnsAdGuardSDK
 
 protocol MigrationServiceProtocol {
     func migrateIfNeeded()
@@ -36,6 +36,7 @@ final class MigrationService: MigrationServiceProtocol {
     private let configurationService: ConfigurationServiceProtocol
     private let productInfo: ADProductInfoProtocol
     private let safariProtection: SafariProtectionProtocol
+    private let dnsProvidersManager: DnsProvidersManagerProtocol
 
     private let migrationQueue = DispatchQueue(label: "MigrationService queue", qos: .userInitiated)
 
@@ -45,7 +46,8 @@ final class MigrationService: MigrationServiceProtocol {
         networking: ACNNetworkingProtocol,
         configurationService: ConfigurationServiceProtocol,
         productInfo: ADProductInfoProtocol,
-        safariProtection: SafariProtectionProtocol
+        safariProtection: SafariProtectionProtocol,
+        dnsProvidersManager: DnsProvidersManagerProtocol
     ) {
         self.vpnManager = vpnManager
         self.resources = resources
@@ -53,6 +55,7 @@ final class MigrationService: MigrationServiceProtocol {
         self.configurationService = configurationService
         self.productInfo = productInfo
         self.safariProtection = safariProtection
+        self.dnsProvidersManager = dnsProvidersManager
 
         resources.sharedDefaults().set(self.currentSchemaVersion, forKey: AEDefaultsProductSchemaVersion)
     }
@@ -242,15 +245,20 @@ final class MigrationService: MigrationServiceProtocol {
                     oldDnsUserRulesContainerFolderUrl: resources.sharedResuorcesURL(),
                     newDnsUserRulesContainerFolderUrl: SharedStorageUrls().dnsFiltersFolderUrl
                 )
+                let dnsProvidersMigration = DnsProtectionCustomProvidersMigrationHelper(resources: resources, dnsProvidersManager: dnsProvidersManager)
                 let sdkMigrationHelper = SDKMigrationServiceHelper(
                     safariProtection: safariProtection as! SafariProtectionMigrationsProtocol,
                     filtersDbMigration: filtersDbMigration,
                     allowlistRulesMigration: allowlistRulesMigration,
                     customFiltersMigration: customFiltersMigration,
                     dnsFiltersMigration: dnsFiltersMigration,
-                    dnsRulesMigration: dnsRulesMigration
+                    dnsRulesMigration: dnsRulesMigration,
+                    dnsProvidersMigration: dnsProvidersMigration,
+                    dnsProvidersManager: dnsProvidersManager
                 )
                 try sdkMigrationHelper.migrate()
+                // Reloads Tunnel if it active to apply migrated DNS settings
+                vpnManager.updateSettings(completion: nil)
                 DDLogInfo("(MigrationService) - Successfully migrated old data to SDK")
             } catch {
                 DDLogError("(MigrationService) - Failed to migrate old data to SDK; Error: \(error)")
@@ -336,7 +344,7 @@ final class MigrationService: MigrationServiceProtocol {
     // Looks very old, do we need to support it?
     private func migrateProDnsUserFilters() -> Bool {
         var result = false
-        let domainsConverter: DomainsConverterProtocol = DomainsConverter()
+        let domainConverter: DomainConverterProtocol = DomainConverter()
         let fm = FileManager()
 
         if let whitelistData = resources.loadData(fromFileRelativePath: "pro-whitelist-doamins.data"),

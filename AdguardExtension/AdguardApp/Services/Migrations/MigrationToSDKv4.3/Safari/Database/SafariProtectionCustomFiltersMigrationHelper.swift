@@ -16,7 +16,6 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
 import SQLite
 import SafariAdGuardSDK
 
@@ -39,6 +38,7 @@ final class SafariProtectionCustomFiltersMigrationHelper: SafariProtectionCustom
     }
 
     func migrateCustomFilters(_ filters: [SafariProtectionFiltersDatabaseMigrationHelper.ObsoleteCustomFilter]) throws {
+        DDLogInfo("(SafariProtectionCustomFiltersMigrationHelper) - migrateCustomFilters; Saving \(filters.count) custom filters to new DB")
         try filters.forEach { try addCustomFilterToDb($0) }
 
         for filter in filters {

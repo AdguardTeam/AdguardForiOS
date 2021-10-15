@@ -18,7 +18,6 @@
 
 import Foundation
 
-
 extension Array {
     func uniqueElements<T:Hashable>(map: (Element) -> T)  -> [Element] {
         var set = Set<T>()

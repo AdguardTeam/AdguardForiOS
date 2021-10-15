@@ -18,4 +18,4 @@
 
 import Foundation
 
-public struct Constants {}
+public struct Constants { }

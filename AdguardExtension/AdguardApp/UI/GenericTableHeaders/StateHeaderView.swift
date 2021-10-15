@@ -50,7 +50,7 @@ final class StateHeaderView<ModelIdType: Equatable>: UIView, IdentifiableObjectP
         label.translatesAutoresizingMaskIntoConstraints = false
         label.greyText = true
         label.numberOfLines = 1
-        label.font = UIFont.systemFont(ofSize: 16.0, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: isIpadTrait ? 24.0 : 16.0, weight: .regular)
         label.textAlignment = .left
         return label
     }()

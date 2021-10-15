@@ -9,7 +9,7 @@ class CompaniesStatisticsTest: XCTestCase {
     override func setUp() {
         activityStatistics = ActivityStatisticsMock()
         dnsTrackersProvider = DnsTrackersProviderMock()
-        companiesStatistics = CompaniesStatistics(activityStatistics: activityStatistics, dnsTrackersProvider: dnsTrackersProvider)
+        companiesStatistics = try! CompaniesStatistics(activityStatistics: activityStatistics, dnsTrackersProvider: dnsTrackersProvider)
     }
 
     func testTrackerWasNotFoundInJson() {

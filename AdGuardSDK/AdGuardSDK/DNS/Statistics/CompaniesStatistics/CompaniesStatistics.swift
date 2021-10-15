@@ -26,10 +26,12 @@ final public class CompaniesStatistics: CompaniesStatisticsProtocol {
 
     private let activityStatistics: ActivityStatisticsProtocol
     private let dnsTrackersProvider: DnsTrackersProviderProtocol
+    private let domainParser: DomainParser
 
-    init(activityStatistics: ActivityStatisticsProtocol, dnsTrackersProvider: DnsTrackersProviderProtocol) {
+    public init(activityStatistics: ActivityStatisticsProtocol, dnsTrackersProvider: DnsTrackersProviderProtocol) throws {
         self.activityStatistics = activityStatistics
         self.dnsTrackersProvider = dnsTrackersProvider
+        self.domainParser = try DomainParser(quickParsing: true)
     }
 
     /// Returns companies records sorted by requests number
@@ -41,18 +43,25 @@ final public class CompaniesStatistics: CompaniesStatisticsProtocol {
         domainsRecords.forEach { domainRecord in
             let company: String
             let tracker: DnsTracker?
-            if let foundTracker = dnsTrackersProvider.getTracker(by: domainRecord.domain) {
+
+            var resolvedDomain = domainRecord.domain
+            if resolvedDomain.hasSuffix(".") {
+                resolvedDomain.removeLast(1)
+            }
+
+            let domain = domainParser.parse(host: resolvedDomain)?.domain ?? resolvedDomain
+            if let foundTracker = dnsTrackersProvider.getTracker(by: domain) {
                 company = foundTracker.name
                 tracker = foundTracker
             } else {
-                company = domainRecord.domain
+                company = domain
                 tracker = nil
             }
             let companyStatisticsRecord = CompaniesStatisticsRecord(
                 company: company,
                 tracker: tracker,
                 counters: domainRecord.counters,
-                domains: Set([domainRecord.domain])
+                domains: Set([domain])
             )
 
             if let existingCompanyStatisticsRecord = countersByCompany[company] {

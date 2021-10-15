@@ -16,7 +16,7 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
+import AGDnsProxy
 
 /// Wrapper for `AGDnsRequestProcessedEvent`
 /// It is needed to be able to write tests for other objects

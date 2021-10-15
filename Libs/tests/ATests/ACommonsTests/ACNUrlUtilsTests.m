@@ -1,11 +1,3 @@
-//
-//  ACNUrlUtilsTests.m
-//  ATests
-//
-//  Created by Roman Sokolov on 11.01.17.
-//
-//
-
 #import "ACNetwork.h"
 #import <XCTest/XCTest.h>
 

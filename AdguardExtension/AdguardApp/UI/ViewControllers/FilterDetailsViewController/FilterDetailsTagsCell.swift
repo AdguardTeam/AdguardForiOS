@@ -87,10 +87,10 @@ final class FilterDetailsTagsCell: UITableViewCell, Reusable {
         contentView.addSubview(tagsStackView)
 
         NSLayoutConstraint.activate([
-            tagsStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: sideInset),
-            tagsStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -sideInset),
-            tagsStackView.topAnchor.constraint(equalTo: topAnchor, constant: topBottomInset),
-            tagsStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -topBottomInset)
+            tagsStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: sideInset),
+            tagsStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -sideInset),
+            tagsStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: topBottomInset),
+            tagsStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -topBottomInset)
         ])
     }
 
@@ -134,7 +134,7 @@ final class FilterDetailsTagsCell: UITableViewCell, Reusable {
         stackView.axis = .horizontal
         stackView.distribution = .fillProportionally
         stackView.spacing = tagsInset
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.alignment = .leading
         stackView.heightAnchor.constraint(equalToConstant: tagHeight).isActive = true
         return stackView
     }

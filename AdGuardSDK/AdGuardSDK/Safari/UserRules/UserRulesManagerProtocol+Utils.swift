@@ -16,7 +16,8 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-@_implementationOnly import class ContentBlockerConverter.WebExtensionHelpers
+import class ContentBlockerConverter.WebExtensionHelpers
+import SharedAdGuardSDK
 
 public extension UserRulesManagerProtocol {
     /// Returns true if there are some enabled rules in `allRules` blocklist that are associated with passed `domain`

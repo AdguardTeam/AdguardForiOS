@@ -41,7 +41,7 @@ class SignInController: UIViewController {
 
         signInFailureHandler = SignInFailureHandler(notificationService: notificationService)
 
-        notificationSignInObserver = NotificationCenter.default.observe(name: Notification.Name(PurchaseService.kPurchaseServiceNotification), object: nil, queue: .main) { [weak self] notification in
+        notificationSignInObserver = NotificationCenter.default.observe(name: Notification.Name(PurchaseAssistant.kPurchaseServiceNotification), object: nil, queue: .main) { [weak self] notification in
             if let info = notification.userInfo {
                 self?.processNotification(info: info)
             }
@@ -90,20 +90,20 @@ class SignInController: UIViewController {
             return
         }
 
-        let type = info[PurchaseService.kPSNotificationTypeKey] as? String
-        let error = info[PurchaseService.kPSNotificationErrorKey] as? NSError
+        let type = info[PurchaseAssistant.kPSNotificationTypeKey] as? String
+        let error = info[PurchaseAssistant.kPSNotificationErrorKey] as? NSError
 
         switch type {
 
-        case PurchaseService.kPSNotificationLoginSuccess:
+        case PurchaseAssistant.kPSNotificationLoginSuccess:
             self.loginSuccess()
-        case PurchaseService.kPSNotificationLoginFailure:
+        case PurchaseAssistant.kPSNotificationLoginFailure:
             self.loginFailure(error)
-        case PurchaseService.kPSNotificationLoginPremiumExpired:
+        case PurchaseAssistant.kPSNotificationLoginPremiumExpired:
             self.premiumExpired()
-        case PurchaseService.kPSNotificationLoginNotPremiumAccount:
+        case PurchaseAssistant.kPSNotificationLoginNotPremiumAccount:
             self.notPremium()
-        case PurchaseService.kPSNotificationLoginUserNotFound:
+        case PurchaseAssistant.kPSNotificationLoginUserNotFound:
             self.userNotFound()
 
 

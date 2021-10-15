@@ -16,7 +16,7 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import Foundation
+import SharedAdGuardSDK
 
 /// `PacketTunnelProvider` operating modes
 public enum TunnelMode: Int, CustomDebugStringConvertible {

@@ -17,9 +17,11 @@
  */
 
 import NetworkExtension
+import SharedAdGuardSDK
 import DnsAdGuardSDK
 import SafariAdGuardSDK
 import Sentry
+import AGDnsProxy
 
 /**
  This object gives access to a virtual network interface
@@ -43,7 +45,7 @@ class TunnelProvider: PacketTunnelProvider {
         Self.setupLogger(resources)
 
         let debugLoggs = resources.isDebugLogs
-        
+
         // start and configure Sentry
         SentrySDK.start { options in
             options.dsn = Constants.Sentry.dsnUrl

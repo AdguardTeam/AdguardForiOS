@@ -1,5 +1,5 @@
 import Foundation
-@_implementationOnly import SQLite
+import SQLite
 
 public protocol AdGuardSDKBuilderProtocol {
     /// loads metadata and all filters synchronously and store them in urls sent to constructor
