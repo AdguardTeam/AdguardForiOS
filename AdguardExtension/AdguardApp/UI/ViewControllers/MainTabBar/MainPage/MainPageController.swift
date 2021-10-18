@@ -171,9 +171,10 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     private lazy var safariProtection: SafariProtectionProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var dnsProtection: DnsProtectionProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var dnsProvidersManager: DnsProvidersManagerProtocol = { ServiceLocator.shared.getService()! }()
+    private lazy var vpnManager: VpnManagerProtocol = { ServiceLocator.shared.getService()! }()
 
     // MARK: - View models
-    private lazy var mainPageModel: MainPageModelProtocol = { MainPageModel(resource: resources, safariProtection: safariProtection) }()
+    private lazy var mainPageModel: MainPageModelProtocol = { MainPageModel(resource: resources, safariProtection: safariProtection, dnsProtection: dnsProtection, vpnManager: vpnManager) }()
     private var chartModel: ChartViewModelProtocol!
 
     // MARK: - Observers
