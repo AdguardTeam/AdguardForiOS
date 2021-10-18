@@ -156,6 +156,7 @@ final class DnsProvidersController: UITableViewController {
     }
 
     // MARK: - Private methods
+
     private func presentNewDnsServerController(controllerType: DnsServerControllerType, _ tableModel: DnsProvidersTableModel?) {
         guard let controller = storyboard?.instantiateViewController(withIdentifier: NewDnsServerControllerIdentifier) as? NewDnsServerController else { return }
 
