@@ -20,9 +20,9 @@ import UIKit.UIDevice
 import SafariAdGuardSDK
 
 extension SafariConfiguration {
-    convenience init(bundle: Bundle = .main, resources: AESharedResourcesProtocol, isProPurchased: Bool) {
+    convenience init(bundle: Bundle = .main, currentLocale: Locale = .current, resources: AESharedResourcesProtocol, isProPurchased: Bool) {
         self.init(iosVersion: UIDevice.current.iosVersion,
-                  currentLanguage: "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")",
+                  currentLocale: currentLocale,
                   proStatus: bundle.isPro ? true : isProPurchased,
                   safariProtectionEnabled: resources.safariProtectionEnabled,
                   advancedBlockingIsEnabled: true,
@@ -35,10 +35,10 @@ extension SafariConfiguration {
                   cid: UIDevice.current.identifierForVendor?.uuidString ?? "")
     }
 
-    static func defaultConfiguration(bundle: Bundle = .main) -> SafariConfiguration {
+    static func defaultConfiguration(bundle: Bundle = .main, currentLocale: Locale = Locale.current) -> SafariConfiguration {
         return SafariConfiguration(
             iosVersion: UIDevice.current.iosVersion,
-            currentLanguage: "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")",
+            currentLocale: currentLocale,
             proStatus: bundle.isPro ? true : false,
             safariProtectionEnabled: true,
             advancedBlockingIsEnabled: true, // TODO: - Don't forget to change

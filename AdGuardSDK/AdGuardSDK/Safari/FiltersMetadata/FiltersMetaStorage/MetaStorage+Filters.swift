@@ -143,7 +143,7 @@ fileprivate extension ExtendedFilterMetaProtocol {
 protocol FiltersMetaStorageProtocol {
     var nextCustomFilterId: Int { get }
 
-    func getLocalizedFiltersForGroup(withId id: Int, forLanguage lang: String) throws -> [FiltersTable]
+    func getLocalizedFiltersForGroup(withId id: Int, forSuitableLanguages suitableLanguages: [String]) throws -> [FiltersTable]
     func setFilter(withId id: Int, enabled: Bool) throws
     func update(filter: ExtendedFilterMetaProtocol) throws -> Bool
     func update(filters: [ExtendedFilterMetaProtocol]) throws -> [Int]
@@ -166,7 +166,8 @@ extension MetaStorage: FiltersMetaStorageProtocol {
     }
 
     // Returns all filters from database with localizations for specified group and language
-    func getLocalizedFiltersForGroup(withId id: Int, forLanguage lang: String) throws -> [FiltersTable] {
+    func getLocalizedFiltersForGroup(withId id: Int, forSuitableLanguages suitableLanguages: [String]) throws -> [FiltersTable] {
+        let lang = try collectFiltersMetaLocalizationLanguage(from: suitableLanguages)
         // Query: select * from filters where group_id = id order by display_number, filter_id
         let query = FiltersTable.table.filter(FiltersTable.groupId == id).order(FiltersTable.displayNumber, FiltersTable.filterId)
         let dbFilters: [FiltersTable] = try filtersDb.prepare(query).map { dbFilter in

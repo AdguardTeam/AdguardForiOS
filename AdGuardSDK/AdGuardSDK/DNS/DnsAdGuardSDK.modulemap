@@ -4,8 +4,3 @@ framework module DnsAdGuardSDK {
     export *
     module * { export * }
 }
-
-framework module SystemLibs [system] {
-    header "SystemLibs.h"
-    export *
-}

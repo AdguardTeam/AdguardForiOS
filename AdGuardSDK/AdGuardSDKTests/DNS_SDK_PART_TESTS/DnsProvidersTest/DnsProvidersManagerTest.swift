@@ -410,7 +410,7 @@ class DnsProvidersManagerTest: XCTestCase {
     // MARK: - Private methods
 
     private func initialize() {
-        let providers = try! PredefinedDnsProvidersDecoder(currentLanguage: "en", bundle: Bundle(for: type(of: self)))
+        let providers = try! PredefinedDnsProvidersDecoder(currentLocale: Locale(identifier: "en"), bundle: Bundle(for: type(of: self)))
         providersManager = DnsProvidersManager(configuration: configuration,
                                                userDefaults: userDefaults,
                                                customProvidersStorage: customProviders,

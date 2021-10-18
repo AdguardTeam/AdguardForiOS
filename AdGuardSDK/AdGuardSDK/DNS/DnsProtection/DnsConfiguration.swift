@@ -71,7 +71,7 @@ public protocol DnsConfigurationProtocol: ConfigurationProtocol {
 
 /// All DNS protection settings
 public final class DnsConfiguration: DnsConfigurationProtocol {
-    public var currentLanguage: String
+    public var currentLocale: Locale
     public var proStatus: Bool
     public var dnsFilteringIsEnabled: Bool
     public var dnsImplementation: DnsImplementation
@@ -79,8 +79,8 @@ public final class DnsConfiguration: DnsConfigurationProtocol {
     public var allowlistIsEnabled: Bool
     public var lowLevelConfiguration: LowLevelDnsConfiguration
 
-    public init(currentLanguage: String, proStatus: Bool, dnsFilteringIsEnabled: Bool, dnsImplementation: DnsImplementation, blocklistIsEnabled: Bool, allowlistIsEnabled: Bool, lowLevelConfiguration: LowLevelDnsConfiguration) {
-        self.currentLanguage = currentLanguage
+    public init(currentLocale: Locale = .current, proStatus: Bool, dnsFilteringIsEnabled: Bool, dnsImplementation: DnsImplementation, blocklistIsEnabled: Bool, allowlistIsEnabled: Bool, lowLevelConfiguration: LowLevelDnsConfiguration) {
+        self.currentLocale = currentLocale
         self.proStatus = proStatus
         self.dnsFilteringIsEnabled = dnsFilteringIsEnabled
         self.dnsImplementation = dnsImplementation
@@ -121,7 +121,7 @@ extension DnsConfigurationProtocol {
 
     //TODO: Need tests
     func updateConfig(with newConfig: DnsConfigurationProtocol) {
-        self.currentLanguage = newConfig.currentLanguage
+        self.currentLocale = newConfig.currentLocale
         self.proStatus = newConfig.proStatus
         self.dnsFilteringIsEnabled = newConfig.dnsFilteringIsEnabled
         self.dnsImplementation = newConfig.dnsImplementation

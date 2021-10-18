@@ -399,7 +399,7 @@ class SafariProtectionConfigurationTest: XCTestCase {
     func testUpdateConfig() {
         let protection = safariProtection as! SafariProtection
         let newConfig = SafariConfiguration(iosVersion: 1,
-                            currentLanguage: "currentLanguage",
+                            currentLocale: Locale(identifier: "en"),
                             proStatus: false,
                             safariProtectionEnabled: true,
                             advancedBlockingIsEnabled: false,
@@ -413,7 +413,7 @@ class SafariProtectionConfigurationTest: XCTestCase {
         protection.updateConfig(with: newConfig)
 
         XCTAssertEqual(protection.configuration.iosVersion, newConfig.iosVersion)
-        XCTAssertEqual(protection.configuration.currentLanguage, newConfig.currentLanguage)
+        XCTAssertEqual(protection.configuration.currentLocale.identifier, newConfig.currentLocale.identifier)
         XCTAssertEqual(protection.configuration.proStatus, newConfig.proStatus)
         XCTAssertEqual(protection.configuration.safariProtectionEnabled, newConfig.safariProtectionEnabled)
         XCTAssertEqual(protection.configuration.advancedBlockingIsEnabled, newConfig.advancedBlockingIsEnabled)

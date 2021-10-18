@@ -61,11 +61,7 @@ class TunnelProvider: PacketTunnelProvider {
         let filterStorageUrl = urlStorage.dnsFiltersFolderUrl
         let statisticsUrl = urlStorage.statisticsFolderUrl
 
-        // todo: use shared Configuretion extension to instantiate this
-        let currentLanguage = "\(ADLocales.lang() ?? "en")-\(ADLocales.region() ?? "US")"
-
-        let configuration = DnsConfiguration(currentLanguage: currentLanguage,
-                                             proStatus: true,
+        let configuration = DnsConfiguration(proStatus: true,
                                              dnsFilteringIsEnabled: resources.systemProtectionEnabled,
                                              dnsImplementation: resources.dnsImplementation,
                                              blocklistIsEnabled: true,
