@@ -16,7 +16,6 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses>.
 */
 
-import Foundation
 import SQLite
 import DnsAdGuardSDK
 
@@ -38,10 +37,9 @@ protocol DnsStatisticsMigrationHelperProtocol {
     func removeOldDb() throws
 }
 
-class DnsStatisticsMigrationHelper: DnsStatisticsMigrationHelperProtocol {
+final class DnsStatisticsMigrationHelper: DnsStatisticsMigrationHelperProtocol {
 
     private let oldRequestLogUrl: URL
-
     private let oldStatisticsDbUrl: URL
     private let newStatisticsDbUrl: URL
 
@@ -61,7 +59,7 @@ class DnsStatisticsMigrationHelper: DnsStatisticsMigrationHelperProtocol {
         let oldDb = try Connection(oldStatisticsDbUrl.path, readonly: false)
         let newDb = try Connection(newStatisticsDbUrl.path, readonly: false)
 
-        try? alterOldTable(db: oldDb, table: DnsStatisticsTable.table)
+        try alterOldTable(db: oldDb, table: DnsStatisticsTable.table)
         try createNewTable(db: newDb, table: DnsStatisticsTable.newTable)
 
         let records = try readStatistics(db: oldDb)
@@ -72,7 +70,7 @@ class DnsStatisticsMigrationHelper: DnsStatisticsMigrationHelperProtocol {
         let oldDb = try Connection(oldStatisticsDbUrl.path, readonly: false)
         let newDb = try Connection(newStatisticsDbUrl.path, readonly: false)
 
-        try? alterOldTable(db: oldDb, table: DnsActivityTable.table)
+        try alterOldTable(db: oldDb, table: DnsActivityTable.table)
         try createNewTable(db: newDb, table: DnsActivityTable.newTable)
 
         let records = try readActivity(db: oldDb)
@@ -80,7 +78,7 @@ class DnsStatisticsMigrationHelper: DnsStatisticsMigrationHelperProtocol {
     }
 
     func removeOldDb() throws {
-//        try FileManager.default.removeItem(atPath: oldStatisticsDbUrl.path)
+        try FileManager.default.removeItem(atPath: oldStatisticsDbUrl.path)
     }
 
     // MARK: private methods
