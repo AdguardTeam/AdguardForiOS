@@ -71,6 +71,17 @@ platform :ios do
     )
   end
 
+  desc "Runs unit SDK tests"
+  lane :tests_sdk do
+    run_tests(
+      scheme: "AdGuardSDKTests",
+      output_types: "junit",
+      clean: true,
+      code_coverage: true,
+      prelaunch_simulator: true,
+    )
+  end
+
   desc "Builds app for appstore"
   lane :build do
     clean()
