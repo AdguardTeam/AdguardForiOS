@@ -37,6 +37,7 @@ final class SDKMigrationServiceHelper: SDKMigrationServiceHelperProtocol {
     private let dnsRulesMigration: DnsProtectionUserRulesMigrationHelperProtocol
     private let dnsProvidersMigration: DnsProtectionCustomProvidersMigrationHelperProtocol
     private let dnsProvidersManager: DnsProvidersManagerProtocol
+    private let dnsStatisticsMigration: DnsStatisticsMigrationHelperProtocol
 
     init(
         safariProtection: SafariProtectionMigrationsProtocol,
@@ -46,7 +47,8 @@ final class SDKMigrationServiceHelper: SDKMigrationServiceHelperProtocol {
         dnsFiltersMigration: DnsProtectionFiltersMigrationHelperProtocol,
         dnsRulesMigration: DnsProtectionUserRulesMigrationHelperProtocol,
         dnsProvidersMigration: DnsProtectionCustomProvidersMigrationHelperProtocol,
-        dnsProvidersManager: DnsProvidersManagerProtocol
+        dnsProvidersManager: DnsProvidersManagerProtocol,
+        dnsStatisticsMigration: DnsStatisticsMigrationHelperProtocol
     ) {
         self.safariProtection = safariProtection
         self.filtersDbMigration = filtersDbMigration
@@ -56,11 +58,13 @@ final class SDKMigrationServiceHelper: SDKMigrationServiceHelperProtocol {
         self.dnsRulesMigration = dnsRulesMigration
         self.dnsProvidersMigration = dnsProvidersMigration
         self.dnsProvidersManager = dnsProvidersManager
+        self.dnsStatisticsMigration = dnsStatisticsMigration
     }
 
     func migrate() throws {
         try migrateSafariProtection()
         try migrateDnsProtection()
+        try migrateDnsStatistics()
     }
 
     private func migrateSafariProtection() throws {
@@ -118,5 +122,12 @@ final class SDKMigrationServiceHelper: SDKMigrationServiceHelperProtocol {
     private func migrate(userRules: [SDKSafariMigrationRule], for type: SafariUserRuleType) throws {
         let rules = userRules.map { UserRule(ruleText: $0.ruleText, isEnabled: $0.isEnabled) }
         try safariProtection.add(rules: rules, for: type, override: true)
+    }
+
+    private func migrateDnsStatistics() throws {
+        try dnsStatisticsMigration.removeOldRequestLogTable()
+        try dnsStatisticsMigration.migrateStatistics()
+        try dnsStatisticsMigration.migrateActivity()
+        try dnsStatisticsMigration.removeOldDb()
     }
 }

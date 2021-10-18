@@ -246,6 +246,8 @@ final class MigrationService: MigrationServiceProtocol {
                     newDnsUserRulesContainerFolderUrl: SharedStorageUrls().dnsFiltersFolderUrl
                 )
                 let dnsProvidersMigration = DnsProtectionCustomProvidersMigrationHelper(resources: resources, dnsProvidersManager: dnsProvidersManager)
+
+                let dnsStatisticsMigration = DnsStatisticsMigrationHelper(oldContainerFolderUrl: resources.sharedResuorcesURL(), newContainerDbUrl: SharedStorageUrls().statisticsFolderUrl)
                 let sdkMigrationHelper = SDKMigrationServiceHelper(
                     safariProtection: safariProtection as! SafariProtectionMigrationsProtocol,
                     filtersDbMigration: filtersDbMigration,
@@ -254,7 +256,8 @@ final class MigrationService: MigrationServiceProtocol {
                     dnsFiltersMigration: dnsFiltersMigration,
                     dnsRulesMigration: dnsRulesMigration,
                     dnsProvidersMigration: dnsProvidersMigration,
-                    dnsProvidersManager: dnsProvidersManager
+                    dnsProvidersManager: dnsProvidersManager,
+                    dnsStatisticsMigration: dnsStatisticsMigration
                 )
                 try sdkMigrationHelper.migrate()
                 // Reloads Tunnel if it active to apply migrated DNS settings

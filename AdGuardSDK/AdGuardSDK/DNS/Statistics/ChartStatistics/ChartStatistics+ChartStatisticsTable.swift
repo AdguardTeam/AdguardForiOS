@@ -56,7 +56,7 @@ public struct ChartStatisticsRecord: Equatable {
         }
     }
 
-    init(dbRecord: Row) {
+    public init(dbRecord: Row) {
         let timeStamp = dbRecord[ChartStatisticsTable.timeStamp]
         let requests = dbRecord[ChartStatisticsTable.requests]
         let encrypted = dbRecord[ChartStatisticsTable.encrypted]
