@@ -69,7 +69,7 @@ extension SelectDnsProtocolController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ExtendedRadioButtonCell.getCell(forTableView: tableView)
         let prot = availableProtocols[indexPath.row]
-        cell.titleString = prot.localizedString
+        cell.titleString = prot.localizedName
         cell.radioButtonSelected = prot == selectedProtocol
         cell.isArrowRightHidden = true
         cell.updateTheme(themeService: themeService)

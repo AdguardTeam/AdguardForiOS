@@ -153,7 +153,7 @@ final class NewDnsServerController: BottomAlertController {
     private func showWrongProtocolAlert(dnsProtocol: DnsAdGuardSDK.DnsProtocol) {
         let title = String.localizedString("invalid_dns_protocol_title")
         let messageFormat = String.localizedString("invalid_dns_protocol_message")
-        let dnsProtocolString = dnsProtocol.localizedString
+        let dnsProtocolString = dnsProtocol.localizedName
         let message = String(format: messageFormat, dnsProtocolString)
         presentSimpleAlert(title: title, message: message)
     }

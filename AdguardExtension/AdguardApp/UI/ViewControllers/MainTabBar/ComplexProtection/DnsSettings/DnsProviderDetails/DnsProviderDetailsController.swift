@@ -194,7 +194,7 @@ final class DnsProviderDetailsController : UITableViewController {
     private func getServerCell(tableView: UITableView) -> UITableViewCell {
         let cell = DnsProviderActionCell.getCell(forTableView: tableView)
         cell.actionNameTitle =  String.localizedString("server_title")
-        cell.selectedOptionTitle = model.activeDnsProtocol.localizedString
+        cell.selectedOptionTitle = model.activeDnsProtocol.localizedName
         cell.updateTheme(themeService: themeService)
         return cell
     }
@@ -234,17 +234,5 @@ extension DnsProviderDetailsController: SelectDnsProtocolControllerDelegate {
         model.activeDnsProtocol = dnsProtocol
         delegate?.providerSelected(provider: model.provider)
         tableView.reloadData()
-    }
-}
-
-extension DnsAdGuardSDK.DnsProtocol {
-    var localizedString: String {
-        switch self {
-        case .dns: return String.localizedString("regular_dns_protocol")
-        case .dnscrypt: return String.localizedString("dns_crypt_protocol")
-        case .doh: return String.localizedString("doh_protocol")
-        case .dot: return String.localizedString("dot_protocol")
-        case .doq: return String.localizedString("doq_protocol")
-        }
     }
 }
