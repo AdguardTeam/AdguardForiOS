@@ -22,20 +22,9 @@ import SafariAdGuardSDK
 final class UserRulesRedirectController: BottomAlertController {
 
     var action: UserRulesRedirectAction!
-    var state: State = .processing {
-        didSet {
-            model.state = state
-        }
-    }
-
-    enum State {
-        case processing
-        case done(action: UserRulesRedirectAction)
-    }
 
     // MARK: - UI Elements
 
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var descriptionLabel: ThemableLabel!
@@ -52,19 +41,10 @@ final class UserRulesRedirectController: BottomAlertController {
         labelButton.isEnabled = false
         model = UserRulesRedirectControllerModel(action: action, safariProtection: safariProtection, resources: resources)
 
-        imageView.isHidden = true
         imageView.image = model.icon
-        activityIndicator.isHidden = false
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.startAnimating()
         setupOkButton()
         updateTheme()
-
-        model.processAction { error in
-            DispatchQueue.asyncSafeMain { [weak self] in
-                self?.setNormal()
-            }
-        }
+        model.processAction()
     }
 
     @IBAction func okButtonTapped(_ sender: UIButton) {
@@ -92,20 +72,6 @@ final class UserRulesRedirectController: BottomAlertController {
         okButton.applyStandardGreenStyle()
     }
 
-    private func setNormal() {
-        state = .done(action: action)
-        imageView.isHidden = false
-        UIView.animate(withDuration: 0.3) {
-            self.activityIndicator.alpha = 0.0
-            self.imageView.alpha = 1.0
-            self.setTexts()
-        } completion: { _ in
-            self.activityIndicator.stopAnimating()
-            self.activityIndicator.isHidden = true
-            self.labelButton.isEnabled = true
-        }
-    }
-
     private func setTexts() {
         titleLabel.text = model.title
         descriptionLabel.attributedText = NSMutableAttributedString.fromHtml(
@@ -126,7 +92,6 @@ extension UserRulesRedirectController: ThemableProtocol {
         contentView.backgroundColor = themeService.popupBackgroundColor
         themeService.setupLabel(titleLabel)
         themeService.setupLabel(descriptionLabel)
-        activityIndicator.style = themeService.indicatorStyle
         setTexts()
     }
 }

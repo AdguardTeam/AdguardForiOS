@@ -223,6 +223,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
         processDnsServerChange()
         checkAdGuardVpnIsInstalled()
+        observeContentBlockersState()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -655,7 +656,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         }
 
         if resources.dnsImplementation == .native {
-            dnsProviderNameLabel.text = dnsProvidersManager.activeDnsProvider.activeServerName
+            dnsProviderNameLabel.text = dnsProvidersManager.activeDnsProvider.name
             dnsProtocolNameLabel.text = dnsProvidersManager.activeDnsServer.type.localizedName
         } else {
             dnsProviderNameLabel.text = nil
@@ -974,17 +975,5 @@ extension MainPageController: ChartViewModelDelegate {
         chartView.leftDateLabelText = firstFormattedDate
         chartView.rightDateLabelText = lastFormattedDate
         chartView.maxRequests = maxRequests
-    }
-}
-
-extension DnsProtocol {
-    var localizedName: String {
-        switch self {
-        case .dns: return String.localizedString("regular_dns_protocol")
-        case .dnscrypt: return String.localizedString("dns_crypt_protocol")
-        case .doh: return String.localizedString("doh_protocol")
-        case .dot: return String.localizedString("dot_protocol")
-        case .doq: return String.localizedString("doq_protocol")
-        }
     }
 }

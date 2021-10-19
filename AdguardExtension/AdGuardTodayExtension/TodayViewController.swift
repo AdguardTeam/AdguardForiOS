@@ -56,7 +56,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var complexStatusLabel: UILabel!
     @IBOutlet weak var complexStatisticsLabel: UILabel!
 
-
     private let resources: AESharedResourcesProtocol = AESharedResources()
     private let serviceInitializer: ServiceInitializerProtocol
 
@@ -69,16 +68,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     // MARK: View Controller lifecycle
 
     required init?(coder: NSCoder) {
-
-        // Init Logger
-        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
-
-        let isDebugLogs = resources.isDebugLogs
-        DDLogInfo("Start today extension with log level: \(isDebugLogs ? "DEBUG" : "Normal")")
-        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
-
-        DDLogInfo("(TodayViewController) - init start")
-        ACLLogger.singleton()?.flush()
+        Self.initLogger(with: resources)
 
         // Services initialising
         do {
@@ -91,14 +81,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         super.init(coder: coder)
 
         DDLogInfo("(TodayViewController) - init end")
-        ACLLogger.singleton()?.flush()
-        ACLLogger.singleton()?.flush()
     }
 
     override func viewDidLoad() {
-        DDLogInfo("(TodayViewController) - viewDidLoad")
-        ACLLogger.singleton()?.flush()
         super.viewDidLoad()
+        DDLogInfo("(TodayViewController) - viewDidLoad")
 
         height.constant = extensionContext?.widgetMaximumSize(for: .compact).height ?? 110.0
 
@@ -118,18 +105,15 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
 
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
-
         updateWidgetComplex()
         updateWidgetSystem()
         updateWidgetSafari()
 
-        if (activeDisplayMode == .compact) {
+        if activeDisplayMode == .compact {
             showForCompactMode()
             preferredContentSize = maxSize
-        }
-        else {
+        } else {
             showForExpandedMode()
-
             let height:CGFloat = 225.0
             preferredContentSize = CGSize(width: maxSize.width, height: height)
         }
@@ -223,9 +207,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
     }
 
-    /**
-     Updates safari protection view
-     */
+    /// Updates safari protection view
     private func updateWidgetSafari(){
         let safariEnabled = serviceInitializer.complexProtection.safariProtectionEnabled
 
@@ -242,11 +224,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
     }
 
-    /**
-     Updates DNS protection view
-     */
+    /// Updates DNS protection view
     private func updateWidgetSystem(){
-
         let vpnEnabled = serviceInitializer.complexProtection.systemProtectionEnabled
 
         let alpha: CGFloat = vpnEnabled ? 1.0 : 0.5
@@ -258,9 +237,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         self.systemTextLabel.text = self.getServerName()
     }
 
-    /**
-     Updates complex protection view
-     */
+    /// Updates complex protection view
     private func updateWidgetComplex() {
         let complexProtection = serviceInitializer.complexProtection
         let safariEnabled = complexProtection.safariProtectionEnabled
@@ -315,9 +292,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         complexSwitchOutlet.layer.cornerRadius = complexSwitchOutlet.frame.height / 2
     }
 
-    /**
-     Animates an appearing of compact mode
-     */
+    /// Animates an appearing of compact mode
     private func showForCompactMode(){
         compactView.isHidden = false
 
@@ -333,9 +308,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
     }
 
-    /**
-     Animates an appearing of expanded mode
-     */
+    /// Animates an appearing of expanded mode
     private func showForExpandedMode(){
         expandedStackView.isHidden = false
 
@@ -351,22 +324,18 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
     }
 
-    /**
-     Gets current server name from vpnManager
-     */
+    /// Gets current server name from vpnManager
     private func getServerName() -> String {
 
         if resources.dnsImplementation == .native {
             return serviceInitializer.complexProtection.systemProtectionEnabled ? String.localizedString("native_dns_working") : String.localizedString("native_dns_not_working")
         }
 
-        let serverName = serviceInitializer.dnsProvidersManager.activeDnsProvider.activeServerName
+        let serverName = serviceInitializer.dnsProvidersManager.activeServerName
         return serverName
     }
 
-    /**
-     Changes number of requests for specific button
-     */
+    /// Changes number of requests for specific button
     private func changeTextForButton(){
         DispatchQueue.asyncSafeMain { [weak self] in
             guard let self = self else { return }
@@ -387,12 +356,19 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             self.elapsedLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: averageElapsed))
         }
     }
+
+    /// Initializes logger
+    private static func initLogger(with resources: AESharedResourcesProtocol) {
+        // Init Logger
+        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
+
+        let isDebugLogs = resources.isDebugLogs
+        DDLogInfo("Start today extension with log level: \(isDebugLogs ? "DEBUG" : "Normal")")
+        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
+    }
 }
 
-/**
- Themable colors for today extension
- */
-
+/// Themable colors for today extension
 fileprivate extension TodayViewController {
     var widgetTextColor: UIColor {
         return UIColor(named: "widgetTextColor")!
