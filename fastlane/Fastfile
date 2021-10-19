@@ -87,7 +87,9 @@ platform :ios do
     clean()
     prepare_key()
 
-    match(type: "appstore")
+    if !options[:ignore_match]
+      match(type: "appstore")
+    end
     build_app(
       scheme: ENV['BUILD_SCHEME'],
       output_directory: ENV['OUTPUT_DIRECTORY'],
