@@ -69,7 +69,11 @@ class SharedResourcesMock: NSObject, AESharedResourcesProtocol {
 
     var whitelistContentBlockingRules: NSMutableArray?
 
+    var pathString: String?
     func path(forRelativePath relativePath: String) -> String {
+        if let path = pathString {
+            return path + "/" + relativePath
+        }
         return "test_domain\(relativePath)"
     }
 
