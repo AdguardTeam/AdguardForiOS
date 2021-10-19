@@ -28,14 +28,14 @@ extension DnsProvidersManagerProtocol {
             name = provider.name
         }
         else {
-            name = "\(provider.name) (\(self.activeDnsServer.type.name))"
+            name = "\(provider.name) (\(self.activeDnsServer.type.localizedName))"
         }
         return name
     }
 }
 
 extension DnsProtocol {
-    var name: String {
+    var localizedName: String {
         let key: String
         switch self {
         case .dns:

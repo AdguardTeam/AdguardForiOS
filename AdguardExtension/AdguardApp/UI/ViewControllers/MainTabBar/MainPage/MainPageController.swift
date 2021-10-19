@@ -975,15 +975,3 @@ extension MainPageController: ChartViewModelDelegate {
         chartView.maxRequests = maxRequests
     }
 }
-
-extension DnsProtocol {
-    var localizedName: String {
-        switch self {
-        case .dns: return String.localizedString("regular_dns_protocol")
-        case .dnscrypt: return String.localizedString("dns_crypt_protocol")
-        case .doh: return String.localizedString("doh_protocol")
-        case .dot: return String.localizedString("dot_protocol")
-        case .doq: return String.localizedString("doq_protocol")
-        }
-    }
-}
