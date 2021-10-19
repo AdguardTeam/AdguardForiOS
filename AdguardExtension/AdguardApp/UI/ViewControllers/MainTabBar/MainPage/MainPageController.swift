@@ -222,6 +222,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
         processDnsServerChange()
         checkAdGuardVpnIsInstalled()
+        observeContentBlockersState()
     }
 
     override func viewWillAppear(_ animated: Bool) {
