@@ -79,7 +79,9 @@ final class MainPageModel: MainPageModelProtocol {
                 _filtersCount.mutate { $0 += updateResult.updatedFilterIds.count }
             }
         } onCbReloaded: { error in
-            _updateError.mutate { $0 = error }
+            if let error = error {
+                _updateError.mutate { $0 = error }
+            }
             group.leave()
         }
 
