@@ -7,7 +7,7 @@ class NetworkSettingsMigrationTest: XCTestCase {
                                WifiException(rule: "rule#2", enabled: false),
                                WifiException(rule: "rule#3", enabled: true)]
 
-    private lazy var filePath = SDKMigrationsDirectoriesManager.rootUrl.appendingPathComponent("NetworkSettings").path
+    private var filePath = SDKMigrationsDirectoriesManager.rootUrl.appendingPathComponent("NetworkSettings").path
 
     private let fileManager = FileManager.default
     private var resource: SharedResourcesMock!
