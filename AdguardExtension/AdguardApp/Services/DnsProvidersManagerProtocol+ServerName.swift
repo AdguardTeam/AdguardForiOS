@@ -25,10 +25,10 @@ extension DnsProvidersManagerProtocol {
         let name: String
         let provider = self.activeDnsProvider
         if provider.isCustom {
-            name = provider.activeServerName
+            name = provider.name
         }
         else {
-            name = "\(provider.activeServerName) (\(self.activeDnsServer.type.name))"
+            name = "\(provider.name) (\(self.activeDnsServer.type.name))"
         }
         return name
     }

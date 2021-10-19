@@ -1567,6 +1567,8 @@
 		D09E9648216CE5E400313AB1 /* ThemableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E9647216CE5E400313AB1 /* ThemableLabel.swift */; };
 		D0A23545271ED12A00CE1730 /* DnsProvidersManagerProtocol+ServerName.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A23544271ED12A00CE1730 /* DnsProvidersManagerProtocol+ServerName.swift */; };
 		D0A23546271ED12A00CE1730 /* DnsProvidersManagerProtocol+ServerName.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A23544271ED12A00CE1730 /* DnsProvidersManagerProtocol+ServerName.swift */; };
+		D0A23547271ED4AE00CE1730 /* DnsProvidersManagerProtocol+ServerName.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A23544271ED12A00CE1730 /* DnsProvidersManagerProtocol+ServerName.swift */; };
+		D0A23548271ED4B100CE1730 /* DnsProvidersManagerProtocol+ServerName.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A23544271ED12A00CE1730 /* DnsProvidersManagerProtocol+ServerName.swift */; };
 		D0A29F8923E0334000D974CF /* RateAppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A29F8823E0334000D974CF /* RateAppService.swift */; };
 		D0A614ED26EBA18B00793922 /* BootstrapsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A614EC26EBA18B00793922 /* BootstrapsHelper.swift */; };
 		D0A614EE26EBA18B00793922 /* BootstrapsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A614EC26EBA18B00793922 /* BootstrapsHelper.swift */; };
@@ -8894,6 +8896,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0A23547271ED4AE00CE1730 /* DnsProvidersManagerProtocol+ServerName.swift in Sources */,
 				B2C19E5E2716BA2B00331109 /* TodayViewController.swift in Sources */,
 				B2C8E9852716E97F00ACDED8 /* DDTTYLogger.m in Sources */,
 				B2C8E98D2716EA4D00ACDED8 /* EmptyPurchaseStatusService.swift in Sources */,
@@ -9546,6 +9549,7 @@
 				B2673E0C2717512E00E04747 /* ACLFileLogger.m in Sources */,
 				B2673E0D2717514500E04747 /* String+Utils.swift in Sources */,
 				B2673DFD271750E100E04747 /* DDOSLogger.m in Sources */,
+				D0A23548271ED4B100CE1730 /* DnsProvidersManagerProtocol+ServerName.swift in Sources */,
 				B2673E072717510700E04747 /* DispatchQueue+Utils.swift in Sources */,
 				B2673DF8271750C700E04747 /* DDFileLogger.m in Sources */,
 				B2673E8027176D1300E04747 /* VpnConfigurationStatus.swift in Sources */,

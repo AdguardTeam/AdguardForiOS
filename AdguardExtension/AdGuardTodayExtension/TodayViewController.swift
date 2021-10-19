@@ -360,7 +360,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             return serviceInitializer.complexProtection.systemProtectionEnabled ? String.localizedString("native_dns_working") : String.localizedString("native_dns_not_working")
         }
 
-        let serverName = serviceInitializer.dnsProvidersManager.activeDnsProvider.activeServerName
+        let serverName = serviceInitializer.dnsProvidersManager.activeServerName
         return serverName
     }
 

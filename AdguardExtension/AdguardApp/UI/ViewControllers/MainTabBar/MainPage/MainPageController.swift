@@ -654,7 +654,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         }
 
         if resources.dnsImplementation == .native {
-            dnsProviderNameLabel.text = dnsProvidersManager.activeDnsProvider.activeServerName
+            dnsProviderNameLabel.text = dnsProvidersManager.activeDnsProvider.name
             dnsProtocolNameLabel.text = dnsProvidersManager.activeDnsServer.type.localizedName
         } else {
             dnsProviderNameLabel.text = nil
