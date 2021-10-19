@@ -76,15 +76,15 @@ final class NetworkSettingsMigrations: NetworkSettingsMigrationProtocol {
     }
 
     private func removeOldExceptionsFile() {
-        let fileManage = FileManager.default
+        let fileManager = FileManager.default
         do {
             let path = resources.path(forRelativePath: jsonNetworkSettingsFileName)
-            guard fileManage.fileExists(atPath: path) else {
+            guard fileManager.fileExists(atPath: path) else {
                 DDLogWarn("(NetworkSettingsMigration) - removeOldExceptionsFile; File doesn't exists")
                 return
             }
 
-            try FileManager.default.removeItem(atPath: path)
+            try fileManager.removeItem(atPath: path)
             DDLogInfo("(NetworkSettingsMigration) - removeOldExceptionsFile; Exception file successfully removed")
         } catch {
             DDLogError("(NetworkSettingsMigration) - removeOldExceptionsFile; Error occurred while removing exception file: \(error)")

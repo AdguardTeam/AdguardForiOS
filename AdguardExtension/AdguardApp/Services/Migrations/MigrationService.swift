@@ -229,6 +229,9 @@ final class MigrationService: MigrationServiceProtocol {
          */
         // TODO: - Change migration version before release
         if lastBuildVersion < 800 {
+            let networkSettingsMigration = NetworkSettingsMigrations(networkSettingsService: networkSettings, resources: resources)
+            networkSettingsMigration.startMigration()
+
             do {
                 let filtersDbMigration = try SafariProtectionFiltersDatabaseMigrationHelper(
                     oldAdguardDBFilePath: resources.sharedResuorcesURL().appendingPathComponent("adguard.db").path,
@@ -260,10 +263,7 @@ final class MigrationService: MigrationServiceProtocol {
                     dnsProvidersManager: dnsProvidersManager
                 )
 
-                let networkSettingsMigration = NetworkSettingsMigrations(networkSettingsService: networkSettings, resources: resources)
-
                 try sdkMigrationHelper.migrate()
-                networkSettingsMigration.startMigration()
                 // Reloads Tunnel if it active to apply migrated DNS settings
                 vpnManager.updateSettings(completion: nil)
                 DDLogInfo("(MigrationService) - Successfully migrated old data to SDK")

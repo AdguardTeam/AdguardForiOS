@@ -82,7 +82,7 @@ class NetworkSettingsMigrationTest: XCTestCase {
     private func createTestFile(exceptions: [WifiException]) {
         let data = try! JSONEncoder().encode(exceptions)
         resource.files = ["NetworkSettings": data]
-        resource.pathString = SDKMigrationsDirectoriesManager.rootUrl.path
+        resource.pathResult = filePath
         fileManager.createFile(atPath: filePath, contents: data)
     }
 }
