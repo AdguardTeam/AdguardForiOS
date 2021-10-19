@@ -125,9 +125,9 @@ final class SDKMigrationServiceHelper: SDKMigrationServiceHelperProtocol {
     }
 
     private func migrateDnsStatistics() throws {
-        try dnsStatisticsMigration.removeOldRequestLogTable()
+        try dnsStatisticsMigration.removeOldRequestLogDatabase()
         try dnsStatisticsMigration.migrateStatistics()
         try dnsStatisticsMigration.migrateActivity()
-        try dnsStatisticsMigration.removeOldDb()
+        try dnsStatisticsMigration.removeOldStatisticsDatabase()
     }
 }

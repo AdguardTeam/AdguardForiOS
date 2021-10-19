@@ -24,8 +24,8 @@ import DnsAdGuardSDK
 /// And removing obsolete files
 protocol DnsStatisticsMigrationHelperProtocol {
 
-    // removes old requst log table. This table only contains the last 1500 requests and we don't need to migrate them.
-    func removeOldRequestLogTable() throws
+    // removes old requst log database. This table only contains the last 1500 requests and we don't need to migrate them.
+    func removeOldRequestLogDatabase() throws
 
     // migrates requests statistics to new database. Adds 'blocked' columm
     func migrateStatistics() throws
@@ -33,8 +33,8 @@ protocol DnsStatisticsMigrationHelperProtocol {
     // migrates activity(company) statistics to new database. Adds 'blocked' columm
     func migrateActivity() throws
 
-    // remove old .db file
-    func removeOldDb() throws
+    // remove old statistics database file.
+    func removeOldStatisticsDatabase() throws
 }
 
 final class DnsStatisticsMigrationHelper: DnsStatisticsMigrationHelperProtocol {
@@ -49,13 +49,16 @@ final class DnsStatisticsMigrationHelper: DnsStatisticsMigrationHelperProtocol {
         self.newStatisticsDbUrl = newContainerDbUrl.appendingPathComponent("activity_statistics.db")
     }
 
-    func removeOldRequestLogTable() throws {
+    func removeOldRequestLogDatabase() throws {
         if FileManager.default.fileExists(atPath: oldRequestLogUrl.path) {
             try FileManager.default.removeItem(at: oldRequestLogUrl)
         }
     }
 
     func migrateStatistics() throws {
+
+        guard FileManager.default.fileExists(atPath: oldStatisticsDbUrl.path) else { return }
+
         let oldDb = try Connection(oldStatisticsDbUrl.path, readonly: false)
         let newDb = try Connection(newStatisticsDbUrl.path, readonly: false)
 
@@ -67,6 +70,9 @@ final class DnsStatisticsMigrationHelper: DnsStatisticsMigrationHelperProtocol {
     }
 
     func migrateActivity() throws {
+
+        guard FileManager.default.fileExists(atPath: oldStatisticsDbUrl.path) else { return }
+        
         let oldDb = try Connection(oldStatisticsDbUrl.path, readonly: false)
         let newDb = try Connection(newStatisticsDbUrl.path, readonly: false)
 
@@ -77,7 +83,7 @@ final class DnsStatisticsMigrationHelper: DnsStatisticsMigrationHelperProtocol {
         try writeActivity(records, db: newDb)
     }
 
-    func removeOldDb() throws {
+    func removeOldStatisticsDatabase() throws {
         try FileManager.default.removeItem(atPath: oldStatisticsDbUrl.path)
     }
 
