@@ -23,6 +23,7 @@ import Foundation
 enum MessageType: String {
     case getInitData = "get_init_data"
     case getAdvancedRules = "get_advanced_rules_text"
+    case shouldUpdateAdvancedRules = "should_update_advanced_rules"
 
     // Response cases
     case success = "success"
@@ -42,6 +43,7 @@ struct Message {
     static let appearanceTheme = "appearance_theme"
     static let contentBlockersEnabled = "content_blockers_enabled"
     static let advancedBlockingEnabled = "advanced_blocking_enabled"
+    static let shouldUpdateAdvancedRules = "should_update_advanced_rules"
 
     // Links
     static let enableSiteProtectionLink = "enable_site_protection_link"

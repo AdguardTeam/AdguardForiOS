@@ -24,7 +24,23 @@ protocol SafariWebExtensionMessageProcessorProtocol {
 
 final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcessorProtocol {
 
+    // TODO: - This is a temporary workaround; Should be fixed later
+    private var shouldUpdateAdvancedRules: Bool {
+        get {
+            resources.sharedDefaults().bool(forKey: "SafariAdGuardSDK.shouldUpdateAdvancedRulesKey")
+        }
+        set {
+            resources.sharedDefaults().set(newValue, forKey: "SafariAdGuardSDK.shouldUpdateAdvancedRulesKey")
+        }
+    }
+
     private var fileReader: ChunkFileReader?
+
+    private let resources: AESharedResourcesProtocol
+
+    init(resources: AESharedResourcesProtocol) {
+        self.resources = resources
+    }
 
     func process(message: Message) -> [String: Any?]  {
         switch message.type {
@@ -36,6 +52,11 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
             // True if rules file should be read from the beginning
             let fromBeginning = message.data as? Bool
             return getAdvancedRules(fromBeginning ?? false)
+        case .shouldUpdateAdvancedRules:
+            let shouldUpdate = shouldUpdateAdvancedRules
+            // TODO: - Maybe we should set it to false later?
+            shouldUpdateAdvancedRules = false
+            return [Message.shouldUpdateAdvancedRules: shouldUpdate]
         default:
             DDLogError("Received bad case")
             return [Message.messageTypeKey: MessageType.error.rawValue]
