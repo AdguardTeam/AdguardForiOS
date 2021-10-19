@@ -71,12 +71,23 @@ platform :ios do
     )
   end
 
+  desc "Runs unit SDK tests"
+  lane :tests_sdk do
+    run_tests(
+      scheme: "AdGuardSDKTests",
+      output_types: "junit",
+      clean: true,
+      code_coverage: true,
+      prelaunch_simulator: true,
+    )
+  end
+
   desc "Builds app for appstore"
-  lane :build do
+  lane :build do |options|
     clean()
     prepare_key()
 
-    match(type: "appstore", readonly: true)
+    match(type: "appstore")
     build_app(
       scheme: ENV['BUILD_SCHEME'],
       output_directory: ENV['OUTPUT_DIRECTORY'],
@@ -91,15 +102,19 @@ platform :ios do
     )
     zip_archive()
 
-    upload_dsym()
+    if options[:upload_dsym]
+      upload_dsym()
+    end
   end
 
   desc "Builds adhoc build for inner testing"
-  lane :adhoc do
+  lane :adhoc do |options|
     clean()
     prepare_key()
 
-    match(type: "adhoc", force_for_new_devices: true)
+    if !options[:ignore_match]
+      match(type: "adhoc", force_for_new_devices: true)
+    end
     build_app(
       scheme: ENV['BUILD_SCHEME'],
       output_directory: ENV['OUTPUT_DIRECTORY'],

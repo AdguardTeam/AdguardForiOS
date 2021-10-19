@@ -230,8 +230,8 @@ extension SafariProtectionFiltersDatabaseMigrationHelper {
         let version: String?
         let lastUpdateTime: Date?
         let displayNumber: Int
-        let name: String
-        let description: String
+        let name: String?
+        let description: String?
         let homePage: String?
         let subscriptionUrl: String?
 
@@ -242,13 +242,13 @@ extension SafariProtectionFiltersDatabaseMigrationHelper {
         static let filterId = Expression<Int>("filter_id")
         static let groupId = Expression<Int>("group_id")
         static let isEnabled = Expression<Bool>("is_enabled")
-        static let version = Expression<String>("version")
-        static let lastUpdateTime = Expression<Date>("last_update_time")
+        static let version = Expression<String?>("version")
+        static let lastUpdateTime = Expression<Date?>("last_update_time")
         static let displayNumber = Expression<Int>("display_number")
-        static let name = Expression<String>("name")
-        static let description = Expression<String>("description")
-        static let homePage = Expression<String>("homepage")
-        static let subscriptionUrl = Expression<String>("subscriptionUrl")
+        static let name = Expression<String?>("name")
+        static let description = Expression<String?>("description")
+        static let homePage = Expression<String?>("homepage")
+        static let subscriptionUrl = Expression<String?>("subscriptionUrl")
 
         // Initializer from DB result
         init(dbFilter: Row) {
@@ -272,13 +272,13 @@ extension SafariProtectionFiltersDatabaseMigrationHelper {
         let version: String?
         let lastUpdateTime: Date?
         let displayNumber: Int
-        let name: String
-        let description: String
+        let name: String?
+        let description: String?
         let homePage: String?
         let subscriptionUrl: String?
         let rules: [ObsoleteFilterRules]
 
-        init(filterId: Int, groupId: Int, isEnabled: Bool, version: String?, lastUpdateTime: Date?, displayNumber: Int, name: String, description: String, homePage: String?, subscriptionUrl: String?, rules: [ObsoleteFilterRules]) {
+        init(filterId: Int, groupId: Int, isEnabled: Bool, version: String?, lastUpdateTime: Date?, displayNumber: Int, name: String?, description: String?, homePage: String?, subscriptionUrl: String?, rules: [ObsoleteFilterRules]) {
             self.filterId = filterId
             self.groupId = groupId
             self.isEnabled = isEnabled

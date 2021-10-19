@@ -33,6 +33,7 @@ final class SafariProtectionCustomFiltersMigrationHelper: SafariProtectionCustom
     private let filtersDirectoryUrl: URL
 
     init(newDBFilePath: String, filtersDirectoryUrl: URL) throws {
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         self.newAdguardDB = try Connection(newDBFilePath, readonly: false)
         self.filtersDirectoryUrl = filtersDirectoryUrl
     }
@@ -116,8 +117,8 @@ fileprivate extension SafariProtectionCustomFiltersMigrationHelper {
         static let groupId = Expression<Int>("group_id")
         static let isEnabled = Expression<Bool>("is_enabled")
         static let version = Expression<String?>("version")
-        static let lastUpdateTime = Expression<Date>("last_update_time")
-        static let lastCheckTime = Expression<Date>("last_check_time")
+        static let lastUpdateTime = Expression<Date?>("last_update_time")
+        static let lastCheckTime = Expression<Date?>("last_check_time")
         static let editable = Expression<Bool>("editable")
         static let displayNumber = Expression<Int>("display_number")
         static let name = Expression<String?>("name")
