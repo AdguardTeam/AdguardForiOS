@@ -205,9 +205,9 @@ extension DnsProvidersController: NewDnsServerControllerDelegate {
 // MARK: - DnsProvidersController + DnsProviderDetailsControllerDelegate
 
 extension DnsProvidersController: DnsProviderDetailsControllerDelegate {
-    /// Select active provider from details  controller
-    func providerSelected(provider: DnsProviderProtocol) {
-       setProviderAndReloadTable(provider: provider)
+    /// Updates UI
+    func providerSelected() {
+        tableView.reloadData()
     }
 }
 

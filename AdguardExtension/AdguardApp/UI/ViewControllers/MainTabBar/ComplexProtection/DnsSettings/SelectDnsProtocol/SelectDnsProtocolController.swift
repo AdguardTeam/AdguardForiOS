@@ -20,7 +20,7 @@ import DnsAdGuardSDK
 
 /// Delegate protocol for DnsProviderDetailsController
 protocol SelectDnsProtocolControllerDelegate: AnyObject {
-    func protocolSelected(dnsProtocol: DnsAdGuardSDK.DnsProtocol)
+    func protocolSelected(dnsProtocol: DnsProtocol)
 }
 
 /// Controller that represent dns protocol picker
@@ -34,8 +34,8 @@ final class SelectDnsProtocolController: BottomAlertController {
     // MARK: - Public properties
 
     weak var delegate: SelectDnsProtocolControllerDelegate?
-    var availableProtocols: [DnsAdGuardSDK.DnsProtocol] = []
-    var selectedProtocol: DnsAdGuardSDK.DnsProtocol = .dns
+    var availableProtocols: [DnsProtocol] = []
+    var selectedProtocol: DnsProtocol = .dns
 
     // MARK: - Private properties
 

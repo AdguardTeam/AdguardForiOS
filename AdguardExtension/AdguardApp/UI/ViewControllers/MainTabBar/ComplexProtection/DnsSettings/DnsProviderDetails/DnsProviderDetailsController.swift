@@ -21,7 +21,8 @@ import DnsAdGuardSDK
 
 /// Delegate for DnsProvidersController
 protocol DnsProviderDetailsControllerDelegate: AnyObject {
-    func providerSelected(provider: DnsProviderProtocol)
+    /// Notify the delegate that provider have been selected
+    func providerSelected()
 }
 
 /// Details controller that represent info about provider
@@ -47,10 +48,11 @@ final class DnsProviderDetailsController : UITableViewController {
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let dnsProvidersManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!
     private let domainParserService: DomainParserServiceProtocol = ServiceLocator.shared.getService()!
+    private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
 
     // MARK: - private properties
     private lazy var model: DnsProviderDetailsModel = {
-        return DnsProviderDetailsModel(providerId: providerId, resources: resources, dnsProvidersManager: dnsProvidersManager)
+        return DnsProviderDetailsModel(providerId: providerId, resources: resources, dnsProvidersManager: dnsProvidersManager, vpnManager: vpnManager)
     }()
     private let providerDetailSections: [ProviderSection] = ProviderSection.allCases
     private let providerDetailRows: [ProviderRow]  = ProviderRow.allCases
@@ -165,8 +167,15 @@ final class DnsProviderDetailsController : UITableViewController {
     // MARK: - Actions
 
     @IBAction func selectTapped(_ sender: Any) {
-        delegate?.providerSelected(provider: model.provider)
-        navigationController?.popViewController(animated: true)
+        do {
+            try model.selectProviderWithActiveDnsProtocol()
+            delegate?.providerSelected()
+            navigationController?.popViewController(animated: true)
+        } catch {
+            DDLogError("(DnsProviderDetailsController) - selectTapped; While selecting provider error occurred: \(error)")
+            // TODO: Localize user error
+            presentSimpleAlert(title: nil, message: "Error occurred while selecting provider: \(model.provider.name)")
+        }
     }
 
     private func showSelectServerAlert(){
@@ -230,9 +239,14 @@ extension DnsProviderDetailsController: ThemableProtocol {
 // MARK: - DnsProviderDetailsController + SelectDnsProtocolControllerDelegate
 
 extension DnsProviderDetailsController: SelectDnsProtocolControllerDelegate {
-    func protocolSelected(dnsProtocol: DnsAdGuardSDK.DnsProtocol) {
-        model.activeDnsProtocol = dnsProtocol
-        delegate?.providerSelected(provider: model.provider)
-        tableView.reloadData()
+    func protocolSelected(dnsProtocol: DnsProtocol) {
+        do {
+            try model.selectProviderWith(dnsProtocol: dnsProtocol)
+            tableView.reloadData()
+        } catch {
+            DDLogError("(DnsProviderDetailsController) - protocolSelected; While selecting protocol error occurred: \(error)")
+            // TODO: Localize user error
+            presentSimpleAlert(title: nil, message: "Error occurred while selecting dns server")
+        }
     }
 }
