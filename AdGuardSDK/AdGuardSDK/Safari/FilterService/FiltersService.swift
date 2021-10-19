@@ -209,10 +209,10 @@ final class FiltersService: FiltersServiceProtocol {
 
             var updatedFilterFilesIds: Set<Int> = []
 
-            // Update filters file content
+            // Update predefined filters file content
             let group = DispatchGroup()
             group.enter()
-            self.updateFiltersFileContent { result in
+            self.updatePredefinedFiltersFileContent { result in
                 updatedFilterFilesIds = result.0
                 updateResult.failedFilterIds = result.1.sorted()
 
@@ -221,9 +221,9 @@ final class FiltersService: FiltersServiceProtocol {
             // Wait when files finish updating
             group.wait()
 
-            // Update filters metadata
+            // Update predefined filters metadata
             group.enter()
-            self.updateMetadataForFilters(withIds: updatedFilterFilesIds) { result in
+            self.updateMetadataForPredefinedFilters(withIds: updatedFilterFilesIds) { result in
                 switch result {
                 case .success(let metaResult):
                     updateResult.addedFilterIds = metaResult.0
@@ -234,7 +234,16 @@ final class FiltersService: FiltersServiceProtocol {
                 }
                 group.leave()
             }
-            // Wait when meta finishes updating
+            // Wait when predefined meta finishes updating
+            group.wait()
+
+            // Update custom filters files and meta
+            group.enter()
+            self.updateCustomFilters { result in
+                updateResult.updatedFilterIds += result.updatedFilterIds
+                updateResult.failedFilterIds += result.failedFilterIds
+                group.leave()
+            }
             group.wait()
 
             // Fill groups with actual objects
@@ -594,24 +603,111 @@ final class FiltersService: FiltersServiceProtocol {
     }
 
     /**
-     Updates filters file content
-     - Returns ids of groups which filters were updated; ids of filters that were updated; ids of filters that failed to update
+     Updates custom filters files and metadata
+     - Provides ids of groups which filters were updated; ids of filters that were updated; ids of filters that failed to update
+     */
+    private func updateCustomFilters(onCustomFiltersUpdated: @escaping (FiltersFileUpdateResult) -> Void) {
+        // Get custom group
+        guard
+            let customGroup = groupsAtomic.first(where: { $0.groupType == .custom }),
+            customGroup.isEnabled
+        else {
+            Logger.logInfo("(FiltersService) - updateCustomFilters; custom group is missing or disabled")
+            onCustomFiltersUpdated(([], []))
+            return
+        }
+
+        // Get enabled custom filters
+        let enabledCustomFilters = customGroup.filters.filter { $0.isEnabled }
+        if enabledCustomFilters.isEmpty {
+            Logger.logInfo("(FiltersService) - updateCustomFilters; There are 0 custom filters enabled")
+            onCustomFiltersUpdated(([], []))
+            return
+        }
+
+        // Update result
+        @Atomic var updatedFilterIds: Set<Int> = []
+        @Atomic var failedFilterIds: Set<Int> = []
+
+        // Start updating custom filters concurrently
+        let op = BlockOperation()
+        enabledCustomFilters.forEach { customFilter in
+            op.addExecutionBlock { [weak self] in
+                guard let self = self else { return }
+                let filterIsUpdated = self.updateCustomFilterSync(customFilter, customGroup)
+                if filterIsUpdated {
+                    _updatedFilterIds.mutate { $0.insert(customFilter.filterId) }
+                } else {
+                    _failedFilterIds.mutate { $0.insert(customFilter.filterId) }
+                }
+            }
+        }
+        // Handle custom filters update finish
+        op.completionBlock = {
+            let result = (_updatedFilterIds.wrappedValue, _failedFilterIds.wrappedValue)
+            onCustomFiltersUpdated(result)
+        }
+        op.start()
+    }
+
+    /// Helper method for `updateCustomFilters`
+    /// Updates custom filter meta and content
+    /// - Returns true if filter was updated
+    private func updateCustomFilterSync(_ customFilter: SafariGroup.Filter, _ customGroup: SafariGroup) -> Bool {
+        guard
+            let filterUrlString = customFilter.filterDownloadPage,
+            let filterUrl = URL(string: filterUrlString),
+            let filterContent = try? String(contentsOf: filterUrl)
+        else {
+            return false
+        }
+
+        do {
+            // Get custom filter meta from filter content; If meta is invalid parsing'll fail and filter won't be updated
+            let filterMeta = try metaParser.parse(filterContent, for: .safari, filterDownloadPage: filterUrlString)
+
+            // Save new custom filter content
+            try filterFilesStorage.saveFilter(withId: customFilter.filterId, filterContent: filterContent)
+
+            // Creating custom filter object
+            let filter = ExtendedFiltersMeta.Meta(
+                customFilterMeta: filterMeta,
+                filterId: customFilter.filterId,
+                displayNumber: customFilter.displayNumber,
+                group: customGroup
+            )
+
+            // Update custom filter meta
+            let isUpdated = try metaStorage.update(filter: filter)
+            Logger.logInfo("(FiltersService) - updateCustomFilter; Custom filter with id=\(customFilter.filterId) was updated successfully=\(isUpdated)")
+            return isUpdated
+        } catch {
+            Logger.logError("(FiltersService) - updateCustomFilter; Error parsing new meta for custom filter with id=\(customFilter.filterId); Error: \(error)")
+            return false
+        }
+    }
+
+    /**
+     Updates predefined filters files content
+     - Returns ids of filters which files were updated; ids of filters which files failed to update
      */
     private typealias FiltersFileUpdateResult = (updatedFilterIds: Set<Int>, failedFilterIds: Set<Int>)
-    private func updateFiltersFileContent(onFilesUpdated: @escaping (FiltersFileUpdateResult) -> Void) {
+    private func updatePredefinedFiltersFileContent(onFilesUpdated: @escaping (FiltersFileUpdateResult) -> Void) {
         @Atomic var successfullyLoadedFilterIds: Set<Int> = []
         @Atomic var failedFilterIds: Set<Int> = []
 
+        // Update only enabled filters in enabled groups ignoring custom filters
         let group = DispatchGroup()
-        let allFilters = groupsAtomic.flatMap { $0.filters }
+        let enabledGroups = groupsAtomic.filter { $0.isEnabled }
+        let enabledFilters = enabledGroups.flatMap { $0.filters }.filter { $0.isEnabled && !$0.isCustom }
 
         // TODO: - Write tests for it
-        guard allFilters.count > 0 else {
+        guard enabledFilters.count > 0 else {
             onFilesUpdated(([], []))
             return
         }
 
-        allFilters.forEach { filter in
+        enabledFilters.forEach { filter in
             group.enter()
 
             // Update filter file
@@ -626,17 +722,19 @@ final class FiltersService: FiltersServiceProtocol {
                 group.leave()
             }
         }
-        let result = (_successfullyLoadedFilterIds.wrappedValue, _failedFilterIds.wrappedValue)
-        group.notify(queue: .main) { onFilesUpdated(result) }
+        group.notify(queue: .main) {
+            let result = (_successfullyLoadedFilterIds.wrappedValue, _failedFilterIds.wrappedValue)
+            onFilesUpdated(result)
+        }
     }
 
     /**
-     Downloads filter metadata and metadata localizations and saves it to database
+     Downloads predefined filters metadata and metadata localizations and saves it to database
      While updating meta we can obtain some new filters or find out that some filters no longer exist
      If update was successfull we return update result with new filter ids and removed filter ids in completion
      If update fails we provide an error in completion
      */
-    private func updateMetadataForFilters(withIds ids: Set<Int>, onFiltersMetaUpdated: @escaping (_ result: Result<FiltersMetaUpdateResult>) -> Void) {
+    private func updateMetadataForPredefinedFilters(withIds ids: Set<Int>, onFiltersMetaUpdated: @escaping (_ result: Result<FiltersMetaUpdateResult>) -> Void) {
         var resultError: Error?
         var metaUpdateResult: FiltersMetaUpdateResult?
         let group = DispatchGroup()
@@ -644,13 +742,15 @@ final class FiltersService: FiltersServiceProtocol {
         group.enter()
         // The first element of the `suitableLanguages` list is the language code with the highest priority.
         let lang = suitableLanguages.first ?? Locale.defaultLanguageCode
-        apiMethods.loadFiltersMetadata(version: configuration.appProductVersion,
-                                               id: configuration.appId,
-                                               cid: configuration.cid,
-                                               lang: lang) { [weak self] filtersMeta in
+        apiMethods.loadFiltersMetadata(
+            version: configuration.appProductVersion,
+            id: configuration.appId,
+            cid: configuration.cid,
+            lang: lang
+        ) { [weak self] filtersMeta in
             if let meta = filtersMeta {
                 do {
-                    metaUpdateResult = try self?.save(filtersMeta: meta, filtersIdsToUpdate: ids)
+                    metaUpdateResult = try self?.save(predefinedFiltersMeta: meta, filtersIdsToUpdate: ids)
                 } catch {
                     resultError = error
                     Logger.logError("(FiltersService) - Saving filters metadata error: \(error)")
@@ -686,16 +786,16 @@ final class FiltersService: FiltersServiceProtocol {
     /**
      Updates filters and groups meta in database that were downloaded
      Also checks if new filters were received and existing became obsolete
-     - Parameter filtersMeta: Meta that was loaded from the server
+     - Parameter predefinedFiltersMeta: Meta for all predefined filters that was loaded from the server
      - Parameter filtersIdsToUpdate: Ids of filters that were successfully downloaded from the server
      - Parameter groupIds: Ids of groups which filters were successfully downloaded from the server
      - Returns ids of filters that were successfully added; ids of filters that were successfully removed
      */
     private typealias FiltersMetaUpdateResult = (addedFilterIds: [Int], removedFiltersIds: [Int], updatedFiltersIds: [Int])
-    private func save(filtersMeta: ExtendedFiltersMeta, filtersIdsToUpdate: Set<Int>) throws -> FiltersMetaUpdateResult {
+    private func save(predefinedFiltersMeta: ExtendedFiltersMeta, filtersIdsToUpdate: Set<Int>) throws -> FiltersMetaUpdateResult {
         // Meta received from the server
-        let allGroupsMeta = filtersMeta.groups
-        let allFiltersMeta = filtersMeta.filters
+        let allGroupsMeta = predefinedFiltersMeta.groups
+        let allFiltersMeta = predefinedFiltersMeta.filters
 
         // Meta we should try to update in database
         let filtersToUpdate = allFiltersMeta.filter { filtersIdsToUpdate.contains($0.filterId) }
@@ -718,7 +818,8 @@ final class FiltersService: FiltersServiceProtocol {
             try metaStorage.updateAll(langs: $0.languages, forFilterWithId: $0.filterId)
         }
 
-        let existingFilterIds = groupsAtomic.flatMap { $0.filters }.map { $0.filterId }
+        // Don't include custom filters in existing, they have their own update flow
+        let existingFilterIds = groupsAtomic.flatMap { $0.filters }.compactMap { $0.isCustom ? nil : $0.filterId }
         let receivedMetaFilterIds = allFiltersMeta.map { $0.filterId }
 
         // Add new filters if appeared

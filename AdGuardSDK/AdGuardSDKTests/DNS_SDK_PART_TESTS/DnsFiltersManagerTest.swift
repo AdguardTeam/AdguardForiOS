@@ -257,7 +257,7 @@ class DnsFiltersManagerTest: XCTestCase {
 
         let exp = XCTestExpectation()
         manager.updateAllFilters { result in
-            XCTAssertEqual(result.updatedFiltersIds, [1, 2])
+            XCTAssertEqual(result.updatedFiltersIds, [1])
             XCTAssertEqual(result.unupdatedFiltersIds, [])
             exp.fulfill()
         }
@@ -273,7 +273,20 @@ class DnsFiltersManagerTest: XCTestCase {
         let exp = XCTestExpectation()
         manager.updateAllFilters { result in
             XCTAssertEqual(result.updatedFiltersIds, [])
-            XCTAssertEqual(result.unupdatedFiltersIds, [1, 2])
+            XCTAssertEqual(result.unupdatedFiltersIds, [1])
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 0.5)
+    }
+
+    func testUpdateAllFiltersWithZeroFilters() {
+        set([])
+        XCTAssert(manager.filters.isEmpty)
+
+        let exp = XCTestExpectation()
+        manager.updateAllFilters { result in
+            XCTAssert(result.updatedFiltersIds.isEmpty)
+            XCTAssert(result.unupdatedFiltersIds.isEmpty)
             exp.fulfill()
         }
         wait(for: [exp], timeout: 0.5)

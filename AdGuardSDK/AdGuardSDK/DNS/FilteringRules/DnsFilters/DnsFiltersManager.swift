@@ -198,6 +198,7 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
                 return
             }
 
+            // TODO: - DNS filter version is not checked now. This code can be improved by adding filter version check
             var filterMeta: ExtendedCustomFilterMetaProtocol?
             if let filterContent = self.filterFilesStorage.getFilterContentForFilter(withId: dnsFilter.filterId) {
                 filterMeta = try? self.metaParser.parse(filterContent, for: .system, filterDownloadPage: dnsFilter.subscriptionUrl.absoluteString)
@@ -218,7 +219,8 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
 
         var updatedIds: [Int] = []
         var unupdatedIds: [Int] = []
-        for filter in filters {
+        let enabledFilters = filters.filter { $0.isEnabled }
+        for filter in enabledFilters {
             group.enter()
             updateFilter(withId: filter.filterId) { error in
                 if error == nil {
