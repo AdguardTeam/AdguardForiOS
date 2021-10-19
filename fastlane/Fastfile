@@ -106,11 +106,13 @@ platform :ios do
   end
 
   desc "Builds adhoc build for inner testing"
-  lane :adhoc do
+  lane :adhoc do |options|
     clean()
     prepare_key()
 
-    match(type: "adhoc", force_for_new_devices: true)
+    if !options[:ignore_match]
+      match(type: "adhoc", force_for_new_devices: true)
+    end
     build_app(
       scheme: ENV['BUILD_SCHEME'],
       output_directory: ENV['OUTPUT_DIRECTORY'],
