@@ -21,21 +21,16 @@ import SafariAdGuardSDK
 import UIKit
 
 protocol UserRulesRedirectControllerModelProtocol: AnyObject {
-    var state: UserRulesRedirectController.State { get set }
-
     var title: String { get }
     var description: String { get }
     var icon: UIImage? { get }
-
-    func processAction(_ onCbReloaded: @escaping (Error?) -> Void)
+    func processAction()
 }
 
 final class UserRulesRedirectControllerModel: UserRulesRedirectControllerModelProtocol {
 
-    var state: UserRulesRedirectController.State = .processing
-
-    var title: String { state.title }
-    var description: String { state.getDescription(resources.invertedWhitelist) }
+    var title: String { action.title }
+    var description: String { action.getDescription(resources.invertedWhitelist) }
     var icon: UIImage? { action.getIcon(resources.invertedWhitelist) }
 
     private let action: UserRulesRedirectAction
@@ -49,45 +44,27 @@ final class UserRulesRedirectControllerModel: UserRulesRedirectControllerModelPr
         self.resources = resources
     }
 
-    func processAction(_ onCbReloaded: @escaping (Error?) -> Void) {
+    func processAction() {
         switch action {
         case .disableSiteProtection(let domain):
             if resources.invertedWhitelist {
-                try? safariProtection.removeRule(withText: domain, for: .invertedAllowlist, onCbReloaded: onCbReloaded)
+                try? safariProtection.removeRule(withText: domain, for: .invertedAllowlist, onCbReloaded: nil)
             } else {
                 let rule = UserRule(ruleText: domain, isEnabled: true)
-                try? safariProtection.add(rule: rule, for: .allowlist, override: true, onCbReloaded: onCbReloaded)
+                try? safariProtection.add(rule: rule, for: .allowlist, override: true, onCbReloaded: nil)
             }
         case .enableSiteProtection(let domain):
             if resources.invertedWhitelist {
                 let rule = UserRule(ruleText: domain, isEnabled: true)
-                try? safariProtection.add(rule: rule, for: .invertedAllowlist, override: true, onCbReloaded: onCbReloaded)
+                try? safariProtection.add(rule: rule, for: .invertedAllowlist, override: true, onCbReloaded: nil)
             } else {
-                try? safariProtection.removeRule(withText: domain, for: .allowlist, onCbReloaded: onCbReloaded)
+                try? safariProtection.removeRule(withText: domain, for: .allowlist, onCbReloaded: nil)
             }
         case .addToBlocklist(let domain):
             let rule = UserRule(ruleText: domain, isEnabled: true)
-            try? safariProtection.add(rule: rule, for: .blocklist, override: true, onCbReloaded: onCbReloaded)
+            try? safariProtection.add(rule: rule, for: .blocklist, override: true, onCbReloaded: nil)
         case .removeAllBlocklistRules(let domain):
-            safariProtection.removeAllUserRulesAssociatedWith(domain: domain, onCbReloaded: onCbReloaded)
-        }
-    }
-}
-
-// MARK: - UserRulesRedirectController.State + Helper variables
-
-fileprivate extension UserRulesRedirectController.State {
-    var title: String {
-        switch self {
-        case .processing: return String.localizedString("user_rules_processing_title")
-        case .done(let action): return action.title
-        }
-    }
-
-    func getDescription(_ allowlistIsInverted: Bool) -> String {
-        switch self {
-        case .processing: return String.localizedString("user_rules_processing_descr")
-        case .done(let action): return action.getDescription(allowlistIsInverted)
+            safariProtection.removeAllUserRulesAssociatedWith(domain: domain, onCbReloaded: nil)
         }
     }
 }

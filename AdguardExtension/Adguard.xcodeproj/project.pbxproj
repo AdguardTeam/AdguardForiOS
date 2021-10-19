@@ -11102,6 +11102,7 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariWebExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "AdGuard Safari Web Extension";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -11125,7 +11126,6 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "SafariWebExtension/SafariWebExtension-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -11150,6 +11150,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariWebExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "AdGuard Safari Web Extension";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -11171,7 +11172,6 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "SafariWebExtension/SafariWebExtension-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -11200,7 +11200,7 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariWebExtension/ProSafariWebExtensionInfo.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "AdGuard Safari Web Extension";
+				INFOPLIST_KEY_CFBundleDisplayName = "AdGuard Pro Safari Web Extension";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -11224,7 +11224,6 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "SafariWebExtension/SafariWebExtension-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -11249,7 +11248,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SafariWebExtension/ProSafariWebExtensionInfo.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "AdGuard Safari Web Extension";
+				INFOPLIST_KEY_CFBundleDisplayName = "AdGuard Pro Safari Web Extension";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -11271,7 +11270,6 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "SafariWebExtension/SafariWebExtension-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -11313,7 +11311,6 @@
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -11349,7 +11346,6 @@
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -11381,7 +11377,6 @@
 				INFOPLIST_FILE = YouTubeAdsActionExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = YouTubeAdsActionExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -11399,7 +11394,6 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "YouTubeAdsActionExtension/YouTubeAdsActionExtension-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -11427,7 +11421,6 @@
 				INFOPLIST_FILE = YouTubeAdsActionExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = YouTubeAdsActionExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -11443,7 +11436,6 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "YouTubeAdsActionExtension/YouTubeAdsActionExtension-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -11478,7 +11470,6 @@
 				INFOPLIST_KEY_CFBundleDisplayName = YouTube;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -11496,7 +11487,6 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "YouTubeAdsActionExtension/YouTubeAdsActionExtension-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -11526,7 +11516,6 @@
 				INFOPLIST_KEY_CFBundleDisplayName = YouTube;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -11542,7 +11531,6 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "YouTubeAdsActionExtension/YouTubeAdsActionExtension-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -11637,7 +11625,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -11654,7 +11641,6 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -11686,7 +11672,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -11702,7 +11687,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -11741,7 +11725,6 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -11772,7 +11755,6 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Adguard-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -12314,7 +12296,6 @@
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -12350,7 +12331,6 @@
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "Adguard-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
