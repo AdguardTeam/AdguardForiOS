@@ -111,18 +111,26 @@ final class DnsProviderDetailsModel {
         provider = dnsProvidersManager.allProviders.first(where: { $0.providerId == providerId })!.predefined
     }
 
-    /// Selects active dns protocol and selects if needed provider with `dnsProtocol` after that restarts vpn manager
+    /**
+     Selects provider with `dnsProtocol` and restarts vpn.
+     Selecting and restarting vpn only happen if active dns provider equal to selected dns provider and active dns server not equal to selected dns server.
+     */
     func selectProviderWith(dnsProtocol: DnsProtocol) throws {
         activeDnsProtocol = dnsProtocol
+        // Making this guard to prevent unnecessary updating
         guard dnsProvidersManager.activeDnsProvider.providerId == providerId,
               dnsProvidersManager.activeDnsServer.type != dnsProtocol
         else { return }
         try selectProvider(dnsProtocol: dnsProtocol)
     }
 
-    /// Selects if needed provider with currently active dns protocol and restarts vpn manager
+    /**
+     Selects provider with currently active dns protocol and restarts vpn.
+     Selecting and restarting vpn only happen if active dns provider NOT equal to selected dns provider.
+     */
     func selectProviderWithActiveDnsProtocol() throws {
-        guard dnsProvidersManager.activeDnsServer.type != activeDnsProtocol else { return }
+        // Making this guard to prevent unnecessary updating. Updates only if provider not active
+        guard dnsProvidersManager.activeDnsProvider.providerId != providerId else { return }
         try selectProvider(dnsProtocol: activeDnsProtocol)
     }
 

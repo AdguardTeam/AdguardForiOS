@@ -173,8 +173,7 @@ final class DnsProviderDetailsController : UITableViewController {
             navigationController?.popViewController(animated: true)
         } catch {
             DDLogError("(DnsProviderDetailsController) - selectTapped; While selecting provider error occurred: \(error)")
-            // TODO: Localize user error
-            presentSimpleAlert(title: nil, message: "Error occurred while selecting provider: \(model.provider.name)")
+            showUnknownErrorAlert()
         }
     }
 
@@ -245,8 +244,7 @@ extension DnsProviderDetailsController: SelectDnsProtocolControllerDelegate {
             tableView.reloadData()
         } catch {
             DDLogError("(DnsProviderDetailsController) - protocolSelected; While selecting protocol error occurred: \(error)")
-            // TODO: Localize user error
-            presentSimpleAlert(title: nil, message: "Error occurred while selecting dns server")
+            showUnknownErrorAlert()
         }
     }
 }
