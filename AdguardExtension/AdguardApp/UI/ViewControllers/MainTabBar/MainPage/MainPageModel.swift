@@ -79,6 +79,7 @@ final class MainPageModel: MainPageModelProtocol {
                 _filtersCount.mutate { $0 += updateResult.updatedFilterIds.count }
             }
         } onCbReloaded: { error in
+            _updateError.mutate { $0 = error }
             group.leave()
         }
 
@@ -93,13 +94,13 @@ final class MainPageModel: MainPageModelProtocol {
 
         group.notify(queue: .main) { [weak delegate] in
             let message: String
-            if filtersCount > 0 {
-                let format = String.localizedString("filters_updated_format")
-                message = String(format: format, filtersCount)
-            }
-            else if let error = updateError {
+            if let error = updateError {
                 DDLogError("(MainPageModel) - updateFilters; Error: \(error)")
                 message = String.localizedString("filter_updates_error")
+            }
+            else if filtersCount > 0 {
+                let format = String.localizedString("filters_updated_format")
+                message = String(format: format, filtersCount)
             }
             else {
                 message = String.localizedString("filters_noUpdates")

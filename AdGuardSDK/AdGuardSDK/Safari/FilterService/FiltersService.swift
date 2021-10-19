@@ -619,7 +619,7 @@ final class FiltersService: FiltersServiceProtocol {
 
         // Get enabled custom filters
         let enabledCustomFilters = customGroup.filters.filter { $0.isEnabled }
-        if enabledCustomFilters.count == 0 {
+        if enabledCustomFilters.isEmpty {
             Logger.logInfo("(FiltersService) - updateCustomFilters; There are 0 custom filters enabled")
             onCustomFiltersUpdated(([], []))
             return
