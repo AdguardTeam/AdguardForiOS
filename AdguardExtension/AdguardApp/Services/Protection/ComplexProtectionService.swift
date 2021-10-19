@@ -216,7 +216,7 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
         }
     }
 
-    private func updateProtections(safari:Bool, system: Bool, vc: UIViewController?, completion: @escaping (_ safariError: Error?, _ systemError: Error?)->Void) {
+    private func updateProtections(safari: Bool, system: Bool, vc: UIViewController?, completion: @escaping (_ safariError: Error?, _ systemError: Error?)->Void) {
 
         DispatchQueue(label: "complex protection queue").async { [weak self] in
             guard let self = self else { return }

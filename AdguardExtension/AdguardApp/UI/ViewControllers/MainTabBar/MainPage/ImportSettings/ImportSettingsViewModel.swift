@@ -202,7 +202,7 @@ class ImportSettingsViewModel: ImportSettingsViewModelProtocol {
             let format = String.localizedString("import_dns_settings_format")
             let provider = dnsProvidersManager.allProviders.first { $0.dnsServers.contains(where: { $0.id == serverId }) }
 
-            row.title = String(format:format, provider?.activeServerName ?? "")
+            row.title = String(format:format, provider?.name ?? "")
             row.imported = imported
             row.enabled = settings.dnsStatus == .enabled
             row.setImportStatus(imported: imported, status: settings.dnsStatus)

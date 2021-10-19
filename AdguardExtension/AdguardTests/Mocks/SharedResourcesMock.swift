@@ -69,8 +69,9 @@ class SharedResourcesMock: NSObject, AESharedResourcesProtocol {
 
     var whitelistContentBlockingRules: NSMutableArray?
 
+    var pathResult: String = ""
     func path(forRelativePath relativePath: String) -> String {
-        return "test_domain\(relativePath)"
+        return pathResult
     }
 
     override init() {

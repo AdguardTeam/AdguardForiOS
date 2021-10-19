@@ -171,9 +171,10 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     private lazy var safariProtection: SafariProtectionProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var dnsProtection: DnsProtectionProtocol = { ServiceLocator.shared.getService()! }()
     private lazy var dnsProvidersManager: DnsProvidersManagerProtocol = { ServiceLocator.shared.getService()! }()
+    private lazy var vpnManager: VpnManagerProtocol = { ServiceLocator.shared.getService()! }()
 
     // MARK: - View models
-    private lazy var mainPageModel: MainPageModelProtocol = { MainPageModel(resource: resources, safariProtection: safariProtection) }()
+    private lazy var mainPageModel: MainPageModelProtocol = { MainPageModel(resource: resources, safariProtection: safariProtection, dnsProtection: dnsProtection, vpnManager: vpnManager) }()
     private var chartModel: ChartViewModelProtocol!
 
     // MARK: - Observers
@@ -222,6 +223,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
         processDnsServerChange()
         checkAdGuardVpnIsInstalled()
+        observeContentBlockersState()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -654,7 +656,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         }
 
         if resources.dnsImplementation == .native {
-            dnsProviderNameLabel.text = dnsProvidersManager.activeDnsProvider.activeServerName
+            dnsProviderNameLabel.text = dnsProvidersManager.activeDnsProvider.name
             dnsProtocolNameLabel.text = dnsProvidersManager.activeDnsServer.type.localizedName
         } else {
             dnsProviderNameLabel.text = nil
@@ -973,17 +975,5 @@ extension MainPageController: ChartViewModelDelegate {
         chartView.leftDateLabelText = firstFormattedDate
         chartView.rightDateLabelText = lastFormattedDate
         chartView.maxRequests = maxRequests
-    }
-}
-
-extension DnsProtocol {
-    var localizedName: String {
-        switch self {
-        case .dns: return String.localizedString("regular_dns_protocol")
-        case .dnscrypt: return String.localizedString("dns_crypt_protocol")
-        case .doh: return String.localizedString("doh_protocol")
-        case .dot: return String.localizedString("dot_protocol")
-        case .doq: return String.localizedString("doq_protocol")
-        }
     }
 }
