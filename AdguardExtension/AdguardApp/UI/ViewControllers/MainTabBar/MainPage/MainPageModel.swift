@@ -22,8 +22,7 @@ import DnsAdGuardSDK
 
 protocol MainPageModelDelegate: AnyObject {
     func updateStarted()
-    func updateFinished(message: String?)
-    func updateFailed(error: String)
+    func updateFinished(message: String)
 }
 
 protocol MainPageModelProtocol: AnyObject {
@@ -38,7 +37,7 @@ final class MainPageModel: MainPageModelProtocol {
     weak var delegate: MainPageModelDelegate?
 
     // MARK: - private members
-
+    private let workingQueue = DispatchQueue(label: "AdGuardApp.MainPageModelQueue")
     private let safariProtection: SafariProtectionProtocol
     private let dnsProtection: DnsProtectionProtocol
     private let resources: AESharedResourcesProtocol
@@ -60,41 +59,48 @@ final class MainPageModel: MainPageModelProtocol {
 
     // MARK: - public methods
 
-    /**
-     updates filters. calls callback during updating process
-     */
+    /// Updates safari and dns filters. 
     func updateFilters() {
-        delegate?.updateStarted()
-
-        @Atomic var filtersCount = 0
-        @Atomic var updateError: Error?
-        let group = DispatchGroup()
-
-        group.enter()
-        safariProtection.updateFiltersMetaAndLocalizations(true) { result in
-            switch result {
-            case .error(let error):
-                _updateError.mutate { $0 = error }
-            case .success(let updateResult):
-                _filtersCount.mutate { $0 += updateResult.updatedFilterIds.count }
-            }
-        } onCbReloaded: { error in
-            if let error = error {
-                _updateError.mutate { $0 = error }
-            }
-            group.leave()
+        DispatchQueue.asyncSafeMain { [weak self] in
+            self?.delegate?.updateStarted()
         }
 
-        group.enter()
-        dnsProtection.updateAllFilters { [weak vpnManager] result in
-            _filtersCount.mutate { $0 += result.updatedFiltersIds.count }
-            if result.updatedFiltersIds.count > 0 {
-                vpnManager?.updateSettings(completion: nil)
-            }
-            group.leave()
-        }
+        workingQueue.async { [weak self] in
+            guard let self = self else { return }
+            @Atomic var filtersCount = 0
+            @Atomic var needRestartVpn = false
+            @Atomic var updateError: Error?
+            let group = DispatchGroup()
 
-        group.notify(queue: .main) { [weak delegate] in
+            group.enter()
+            self.safariProtection.updateFiltersMetaAndLocalizations(true) { result in
+                switch result {
+                case .error(let error):
+                    _updateError.mutate { $0 = error }
+                case .success(let updateResult):
+                    _filtersCount.mutate { $0 += updateResult.updatedFilterIds.count }
+                    // Reloads vpn if dns filters have been updated
+                    if needRestartVpn {
+                        self.vpnManager.updateSettings(completion: nil)
+                        _needRestartVpn.mutate { $0 = false }
+                    }
+                }
+            } onCbReloaded: { error in
+                if let error = error {
+                    _updateError.mutate { $0 = error }
+                }
+                group.leave()
+            }
+
+            group.enter()
+            self.dnsProtection.updateAllFilters { result in
+                _filtersCount.mutate { $0 += result.updatedFiltersIds.count }
+                _needRestartVpn.mutate { $0 = !result.updatedFiltersIds.isEmpty }
+                group.leave()
+            }
+
+            group.wait()
+
             let message: String
             if let error = updateError {
                 DDLogError("(MainPageModel) - updateFilters; Error: \(error)")
@@ -103,11 +109,15 @@ final class MainPageModel: MainPageModelProtocol {
             else if filtersCount > 0 {
                 let format = String.localizedString("filters_updated_format")
                 message = String(format: format, filtersCount)
+                if needRestartVpn { self.vpnManager.updateSettings(completion: nil) }
             }
             else {
                 message = String.localizedString("filters_noUpdates")
             }
-            delegate?.updateFinished(message: message)
+
+            DispatchQueue.main.async {
+                self.delegate?.updateFinished(message: message)
+            }
         }
     }
 }
