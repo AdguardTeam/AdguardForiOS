@@ -229,6 +229,13 @@ final class MigrationService: MigrationServiceProtocol {
          */
         // TODO: - Change migration version before release
         if lastBuildVersion < 800 {
+            let oldFilesMigration = SDKMigrationOldFilesHelper(
+                oldFilesContainerUrl: resources.sharedResuorcesURL(),
+                cbJsonFolderUrl: SharedStorageUrls().cbJsonsFolderUrl
+            )
+            oldFilesMigration.removeOldUnusedFiles()
+            oldFilesMigration.replaceCbJsonFiles()
+
             let networkSettingsMigration = NetworkSettingsMigrations(networkSettingsService: networkSettings, resources: resources)
             networkSettingsMigration.startMigration()
 

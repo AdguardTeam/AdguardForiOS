@@ -802,6 +802,8 @@
 		7ED3D37023CCD55C0014734A /* EditBlockRequestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED3D36F23CCD55C0014734A /* EditBlockRequestController.swift */; };
 		7ED85C2A255D5ABD0085DDFD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659E59751BC6D82700FA2384 /* Localizable.strings */; };
 		7ED85C3C255D5AFF0085DDFD /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7EC35AAF230D8EC100D9B959 /* Localizable.stringsdict */; };
+		7EDA07C02720490100D2AF86 /* SDKMigrationOldFilesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDA07BF2720490100D2AF86 /* SDKMigrationOldFilesHelper.swift */; };
+		7EDA07C12720490100D2AF86 /* SDKMigrationOldFilesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDA07BF2720490100D2AF86 /* SDKMigrationOldFilesHelper.swift */; };
 		7EDACF8026ED105900C7EE63 /* UserRulesRedirectControllerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDACF7F26ED105900C7EE63 /* UserRulesRedirectControllerModel.swift */; };
 		7EDACF8126ED105900C7EE63 /* UserRulesRedirectControllerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDACF7F26ED105900C7EE63 /* UserRulesRedirectControllerModel.swift */; };
 		7EDACF8E26ED2B4A00C7EE63 /* SharedResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF5C51026C261AF001851D6 /* SharedResources.swift */; };
@@ -3151,6 +3153,7 @@
 		7ED3D36D23CCD5480014734A /* BlockRequestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockRequestController.swift; sourceTree = "<group>"; };
 		7ED3D36F23CCD55C0014734A /* EditBlockRequestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBlockRequestController.swift; sourceTree = "<group>"; };
 		7ED68E4426EB98E200929E57 /* YouTubeAdsActionExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YouTubeAdsActionExtension-Bridging-Header.h"; sourceTree = "<group>"; };
+		7EDA07BF2720490100D2AF86 /* SDKMigrationOldFilesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDKMigrationOldFilesHelper.swift; sourceTree = "<group>"; };
 		7EDAC08122F1DF5200F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/About.strings; sourceTree = "<group>"; };
 		7EDAC08222F1DF5200F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/DnsSettings.strings; sourceTree = "<group>"; };
 		7EDAC08322F1DF5200F3924D /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Filters.strings; sourceTree = "<group>"; };
@@ -5896,6 +5899,7 @@
 			children = (
 				B26B924627197D2400F1D482 /* DnsProtectionCustomProvidersMigrationHelper.swift */,
 				B2673DB527173DFD00E04747 /* SDKMigrationServiceHelper.swift */,
+				7EDA07BF2720490100D2AF86 /* SDKMigrationOldFilesHelper.swift */,
 				B2673DB627173DFD00E04747 /* Safari */,
 				B2673DBD27173DFD00E04747 /* DNS */,
 			);
@@ -8109,6 +8113,7 @@
 				D0D7E5E224444D81001801A5 /* BasicRulesParser.swift in Sources */,
 				7E4CC0532577E8C1005ADBCA /* HideKeyboardTapGestureRecognizer.swift in Sources */,
 				D0B545852435D62A002F0AEC /* ComplexProtectionService.swift in Sources */,
+				7EDA07C12720490100D2AF86 /* SDKMigrationOldFilesHelper.swift in Sources */,
 				247CB6132600C8870047974C /* OpenImportSettingsControllerParser.swift in Sources */,
 				D031A0DE219EFC99002C17D9 /* DDOSLogger.m in Sources */,
 				D0B545C12435D660002F0AEC /* SettingsController.swift in Sources */,
@@ -8548,6 +8553,7 @@
 				D07373A226EB5F0A007366F8 /* LowLevelDnsConfiguration+Utils.swift in Sources */,
 				7EA887E9237D290E00E1043D /* CustomNavigationTransition.swift in Sources */,
 				7E5101932355B53700935FE9 /* NetworkSettingsModel.swift in Sources */,
+				7EDA07C02720490100D2AF86 /* SDKMigrationOldFilesHelper.swift in Sources */,
 				242C7FF026E6536B00A01B10 /* DnsUserRulesTableModel.swift in Sources */,
 				7E49EB5C2442435D00911AB1 /* UIBezierPath+Utils.swift in Sources */,
 				247CB5EA2600C1B10047974C /* OpenLoginControllerParser.swift in Sources */,
