@@ -41,17 +41,25 @@ final class DnsStatisticsMigrationHelper: DnsStatisticsMigrationHelperProtocol {
 
     private let oldRequestLogUrl: URL
     private let oldStatisticsDbUrl: URL
+    private let oldRequestDbJournalUrl: URL
+    private let oldStatististicsDbJournalUrl: URL
     private let newStatisticsDbUrl: URL
 
     init(oldContainerFolderUrl: URL, newContainerDbUrl: URL) {
         self.oldRequestLogUrl = oldContainerFolderUrl.appendingPathComponent("dns-log-records.db")
         self.oldStatisticsDbUrl = oldContainerFolderUrl.appendingPathComponent("dns-statistics.db")
+        self.oldRequestDbJournalUrl = oldContainerFolderUrl.appendingPathComponent("dns-log-records.db-journal")
+        self.oldStatististicsDbJournalUrl = oldContainerFolderUrl.appendingPathComponent("dns-log-records.db-journal")
+
         self.newStatisticsDbUrl = newContainerDbUrl.appendingPathComponent("activity_statistics.db")
     }
 
     func removeOldRequestLogDatabase() throws {
         if FileManager.default.fileExists(atPath: oldRequestLogUrl.path) {
             try FileManager.default.removeItem(at: oldRequestLogUrl)
+        }
+        if FileManager.default.fileExists(atPath: oldRequestDbJournalUrl.path) {
+            try FileManager.default.removeItem(atPath: oldRequestDbJournalUrl.path)
         }
     }
 
@@ -84,7 +92,12 @@ final class DnsStatisticsMigrationHelper: DnsStatisticsMigrationHelperProtocol {
     }
 
     func removeOldStatisticsDatabase() throws {
-        try FileManager.default.removeItem(atPath: oldStatisticsDbUrl.path)
+        if FileManager.default.fileExists(atPath: oldStatisticsDbUrl.path) {
+            try FileManager.default.removeItem(atPath: oldStatisticsDbUrl.path)
+        }
+        if FileManager.default.fileExists(atPath: oldStatististicsDbJournalUrl.path) {
+            try FileManager.default.removeItem(atPath: oldStatististicsDbJournalUrl.path)
+        }
     }
 
     // MARK: private methods
