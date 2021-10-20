@@ -59,11 +59,9 @@ final class MainPageModel: MainPageModelProtocol {
 
     // MARK: - public methods
 
-    /// Updates safari and dns filters. 
+    /// Updates safari and dns filters.
     func updateFilters() {
-        DispatchQueue.asyncSafeMain { [weak self] in
-            self?.delegate?.updateStarted()
-        }
+        delegate?.updateStarted()
 
         workingQueue.async { [weak self] in
             guard let self = self else { return }
