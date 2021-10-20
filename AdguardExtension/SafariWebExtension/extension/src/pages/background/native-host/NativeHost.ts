@@ -269,10 +269,14 @@ export class NativeHost implements NativeHostInterface {
             MessagesToNativeApp.ShouldUpdateAdvancedRules,
         );
 
-        if (!response || !Object.prototype.hasOwnProperty.call(response, 'shouldUpdateAdvancedRules')) {
+        if (!response
+            || !Object.prototype.hasOwnProperty.call(
+                response,
+                MessagesToNativeApp.ShouldUpdateAdvancedRules
+            )) {
             return false;
         }
 
-        return !!response.shouldUpdateAdvancedRules;
+        return !!response[MessagesToNativeApp.ShouldUpdateAdvancedRules];
     }
 }
