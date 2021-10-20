@@ -189,7 +189,7 @@ class SDKDnsMigrationObsoleteDnsFilter: NSObject, NSCoding {
         self.enabled = coder.decodeBool(forKey: "enabled")
         self.desc = coder.decodeObject(forKey: "desc") as? String
         self.version = coder.decodeObject(forKey: "version") as? String
-        self.rulesCount = coder.decodeInteger(forKey: "rulesCount")
+        self.rulesCount = coder.decodeObject(forKey: "rulesCount") as? Int ?? 0
         self.homepage = coder.decodeObject(forKey: "homepage") as? String
     }
 }
