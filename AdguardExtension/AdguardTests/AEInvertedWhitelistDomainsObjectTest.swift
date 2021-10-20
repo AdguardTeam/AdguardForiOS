@@ -18,6 +18,7 @@
 
 import XCTest
 
+// FIXME reinvestigate whether this file can be helpful or not
 class AEInvertedWhitelistDomainsObjectTest: XCTestCase {
 
     override func setUp() {

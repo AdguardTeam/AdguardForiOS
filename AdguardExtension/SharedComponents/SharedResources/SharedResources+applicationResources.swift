@@ -60,11 +60,11 @@ extension AESharedResourcesProtocol {
     /// Map that store info about active protocol for specified provider.
     /// Map key: - Int value represent provider Id
     /// Map value: - Selected DNS protocol for specified provider
-    var dnsActiveProtocols: [Int: DnsAdGuardSDK.DnsProtocol] {
+    var dnsActiveProtocols: [Int: DnsProtocol] {
         get {
             if let data = sharedDefaults().object(forKey: DnsActiveProtocols) as? Data {
                 let decoder = JSONDecoder()
-                let protocols = try? decoder.decode([Int: DnsAdGuardSDK.DnsProtocol].self, from: data)
+                let protocols = try? decoder.decode([Int: DnsProtocol].self, from: data)
                 return protocols ?? [:]
             }
             return [:]

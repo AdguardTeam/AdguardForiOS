@@ -47,7 +47,7 @@ final class MainMenuController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateFilters()
-        systemProtectionLabel.text = dnsProvidersManager.activeDnsProvider.activeServerName
+        systemProtectionLabel.text = dnsProvidersManager.activeServerName
     }
 
     override func viewDidLoad() {

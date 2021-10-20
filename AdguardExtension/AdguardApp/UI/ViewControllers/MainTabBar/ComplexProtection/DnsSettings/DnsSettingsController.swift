@@ -274,7 +274,7 @@ final class DnsSettingsController : UITableViewController {
     }
 
     private func updateServerName() {
-        serverName.text = dnsProvidersManager.activeDnsProvider.activeServerName
+        serverName.text = dnsProvidersManager.activeServerName
     }
 
     private func observeProStatus(){

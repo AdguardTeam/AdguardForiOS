@@ -1,7 +1,7 @@
 import Foundation
 import Setapp
 
-protocol PurchaseServiceProtocol : PurchaseStatusProtocol {
+protocol PurchaseServiceProtocol: PurchaseStatusProtocol {
 
     /* star service. It request SKProducts  */
     func start()
