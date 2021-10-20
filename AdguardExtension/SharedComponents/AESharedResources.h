@@ -306,11 +306,6 @@ extern NSString* _Nonnull BlockedResponseTtlSecs;
 /**
  User defaults key for custom blocking Ipv4.
  */
-extern NSString* _Nonnull CustomBlockingIp;
-
-/**
- User defaults key for custom blocking Ipv4.
- */
 extern NSString* _Nonnull CustomBlockingIpv4;
 
 /**

@@ -25,7 +25,8 @@ extension LowLevelDnsConfiguration {
             fallbackServers: nil,
             bootstrapServers: nil,
             blockingMode: .defaultMode,
-            blockingIp: nil,
+            blockingIpv4:  nil,
+            blockingIpv6: nil,
             blockedTtl: 2, // 2 seconds is more than enough to process packet record
             blockIpv6: false,
             restartByReachability: false
@@ -35,7 +36,11 @@ extension LowLevelDnsConfiguration {
     static func fromResources(_ resources: AESharedResourcesProtocol)->LowLevelDnsConfiguration {
         return LowLevelDnsConfiguration(
             tunnelMode: resources.tunnelMode,
+            fallbackServers: resources.customFallbackServers,
+            bootstrapServers: resources.customBootstrapServers,
             blockingMode: resources.blockingMode,
+            blockingIpv4: resources.customBlockingIpv4,
+            blockingIpv6: resources.customBlockingIpv6,
             blockedTtl: resources.blockedResponseTtlSecs,
             blockIpv6: resources.blockIpv6,
             restartByReachability: resources.restartByReachability

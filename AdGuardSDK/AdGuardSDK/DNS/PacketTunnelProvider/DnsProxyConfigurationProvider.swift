@@ -129,7 +129,6 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
         dnsAllowlistFilterId = allowlistFilter.filterId
         proxyFilters.append(allowlistFilter)
 
-        let customBlockingIps = getCustomBlockingIps()
         return DnsProxyConfiguration(
             upstreams: proxyUpstreams,
             fallbacks: proxyFallbacks,
@@ -139,8 +138,8 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
             rulesBlockingMode: lowLevelConfiguration.blockingMode,
             hostsBlockingMode: lowLevelConfiguration.blockingMode,
             blockedResponseTtlSecs: lowLevelConfiguration.blockedTtl,
-            customBlockingIpv4: customBlockingIps.ipv4,
-            customBlockingIpv6: customBlockingIps.ipv6,
+            customBlockingIpv4: lowLevelConfiguration.blockingIpv4 ?? "0.0.0.0",
+            customBlockingIpv6: lowLevelConfiguration.blockingIpv6 ?? "::",
             blockIpv6: lowLevelConfiguration.blockIpv6
         )
     }
@@ -169,25 +168,6 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
         return upstreams.map {
             let prot = try? networkUtils.getProtocol(from: $0)
             return DnsUpstream(upstream: $0, protocol: prot ?? .dns)
-        }
-    }
-
-    /// Processes the case when DNS requests are blocked with custom ip address
-    /// If `blockingIp` and `blockingMode` is not  `customAddress`
-    /// We respond with an address that is all-zeroes
-    private func getCustomBlockingIps() -> (ipv4: String?, ipv6: String?) {
-        let lowLevelConfiguration = dnsConfiguration.lowLevelConfiguration
-
-        if let blockingIp = lowLevelConfiguration.blockingIp, lowLevelConfiguration.blockingMode == .customAddress {
-            if ACNUrlUtils.isIPv4(blockingIp) {
-                return (blockingIp, nil)
-            } else if ACNUrlUtils.isIPv6(blockingIp) {
-                return (nil, blockingIp)
-            } else {
-                return ("0.0.0.0", "::")
-            }
-        } else {
-            return ("0.0.0.0", "::")
         }
     }
 }

@@ -54,6 +54,16 @@ extension AGDnsUpstream {
             outboundInterfaceName: nil
         )
     }
+
+    dynamic open override var description: String {
+        return  """
+                address: \(address ?? "nil")
+                bootstrap: \(bootstrap ?? [])
+                timeoutMs: \(timeoutMs)
+                id: \(id)
+                outboundInterfaceName: \(outboundInterfaceName ?? "nil")
+                """
+    }
 }
 
 // MARK: - AGDnsFilterParams + DnsProxyFilter init
@@ -91,6 +101,14 @@ extension AGDns64Settings {
             maxTries: 2,
             waitTimeMs: AGDnsUpstream.defaultTimeoutMs
         )
+    }
+
+    dynamic open override var description: String {
+        return  """
+                upstreams: \(upstreams ?? [])
+                maxTries: \(maxTries)
+                waitTimeMs: \(waitTimeMs)
+                """
     }
 }
 
@@ -131,5 +149,28 @@ extension AGDnsProxyConfig {
             enableRetransmissionHandling: true,
             helperPath: nil
         )
+    }
+
+    dynamic open override var description: String {
+        return """
+               upsteams: \(upstreams ?? [])
+               fallbacks: \(fallbacks ?? [])
+               fallbackDomains: \(fallbackDomains ?? [])
+               detectSearchDomains: \(detectSearchDomains)
+               filters: \(filters ?? [])
+               blockedResponseTtlSecs: \(blockedResponseTtlSecs)
+               dns64Settings: \(dns64Settings.description() ?? "nil")
+               ipv6Available: \(ipv6Available)
+               blockIpv6: \(blockIpv6)
+               adblockRulesBlockingMode: \(adblockRulesBlockingMode)
+               hostsRulesBlockingMode: \(hostsRulesBlockingMode)
+               customBlockingIpv4: \(customBlockingIpv4 ?? "nil")
+               customBlockingIpv6: \(customBlockingIpv6 ?? "nil")
+               dnsCacheSize: \(dnsCacheSize)
+               optimisticCache: \(optimisticCache)
+               enableDNSSECOK: \(enableDNSSECOK)
+               enableRetransmissionHandling: \(enableRetransmissionHandling)
+               helperPath: \(helperPath ?? "nil")
+               """
     }
 }

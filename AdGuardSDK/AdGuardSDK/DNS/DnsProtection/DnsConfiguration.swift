@@ -90,33 +90,6 @@ public final class DnsConfiguration: DnsConfigurationProtocol {
     }
 }
 
-/**
- Low level settings user provided for configuring `AGDnsProxy`
- They are configured in `LowLevelSettingsController`
- - Seealso `LowLevelSettingsController.swift`, `AGDnsProxy.h`
- */
-public struct LowLevelDnsConfiguration {
-    public var tunnelMode: TunnelMode // PacketTunnelProvider operating mode
-    public var fallbackServers: [String]? // Fallback upstreams settings
-    public var bootstrapServers: [String]? // Bootstrap upstreams settings
-    public var blockingMode: DnsProxyBlockingMode // How to respond to requests blocked
-    public var blockingIp: String? // Custom address to return for filtered requests
-    public var blockedTtl: Int // TTL of the record for the blocked domains (in seconds)
-    public var blockIpv6: Bool // Block AAAA requests
-    public var restartByReachability: Bool // Reinitialize PacketTunnelProvider when network changes
-
-    public init(tunnelMode: TunnelMode, fallbackServers: [String]? = nil, bootstrapServers: [String]? = nil, blockingMode: DnsProxyBlockingMode, blockingIp: String? = nil, blockedTtl: Int, blockIpv6: Bool, restartByReachability: Bool) {
-        self.tunnelMode = tunnelMode
-        self.fallbackServers = fallbackServers
-        self.bootstrapServers = bootstrapServers
-        self.blockingMode = blockingMode
-        self.blockingIp = blockingIp
-        self.blockedTtl = blockedTtl
-        self.blockIpv6 = blockIpv6
-        self.restartByReachability = restartByReachability
-    }
-}
-
 extension DnsConfigurationProtocol {
 
     //TODO: Need tests
@@ -127,5 +100,35 @@ extension DnsConfigurationProtocol {
         self.dnsImplementation = newConfig.dnsImplementation
         self.blocklistIsEnabled = newConfig.blocklistIsEnabled
         self.allowlistIsEnabled = newConfig.allowlistIsEnabled
+        self.lowLevelConfiguration = newConfig.lowLevelConfiguration
+    }
+}
+
+/**
+ Low level settings user provided for configuring `AGDnsProxy`
+ They are configured in `LowLevelSettingsController`
+ - Seealso `LowLevelSettingsController.swift`, `AGDnsProxy.h`
+ */
+public struct LowLevelDnsConfiguration {
+    public var tunnelMode: TunnelMode // PacketTunnelProvider operating mode
+    public var fallbackServers: [String]? // Fallback upstreams settings
+    public var bootstrapServers: [String]? // Bootstrap upstreams settings
+    public var blockingMode: DnsProxyBlockingMode // How to respond to requests blocked
+    public var blockingIpv4: String? // Custom address to return for filtered requests
+    public var blockingIpv6: String? // Custom address to return for filtered requests
+    public var blockedTtl: Int // TTL of the record for the blocked domains (in seconds)
+    public var blockIpv6: Bool // Block AAAA requests
+    public var restartByReachability: Bool // Reinitialize PacketTunnelProvider when network changes
+
+    public init(tunnelMode: TunnelMode, fallbackServers: [String]?, bootstrapServers: [String]?, blockingMode: DnsProxyBlockingMode, blockingIpv4: String?, blockingIpv6: String?, blockedTtl: Int, blockIpv6: Bool, restartByReachability: Bool) {
+        self.tunnelMode = tunnelMode
+        self.fallbackServers = fallbackServers
+        self.bootstrapServers = bootstrapServers
+        self.blockingMode = blockingMode
+        self.blockingIpv4 = blockingIpv4
+        self.blockingIpv6 = blockingIpv6
+        self.blockedTtl = blockedTtl
+        self.blockIpv6 = blockIpv6
+        self.restartByReachability = restartByReachability
     }
 }

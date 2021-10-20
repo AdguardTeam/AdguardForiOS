@@ -111,8 +111,6 @@ NSString *BlockingMode = @"BlockingMode";
 
 NSString *BlockedResponseTtlSecs = @"BlockedResponseTtlSecs";
 
-NSString *CustomBlockingIp = @"CustomBlockingIp";
-
 NSString *CustomBlockingIpv4 = @"CustomBlockingIpv4";
 
 NSString *CustomBlockingIpv6 = @"CustomBlockingIpv6";

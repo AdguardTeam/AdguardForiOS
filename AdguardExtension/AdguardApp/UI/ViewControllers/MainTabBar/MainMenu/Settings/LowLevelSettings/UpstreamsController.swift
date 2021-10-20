@@ -116,7 +116,7 @@ class UpstreamsController: BottomAlertController {
             upstreamsTextField.text = fallbackString
 
         case .customAddress:
-            let ipAddress = resources.customBlockingIp?.joined(separator: ", ")
+            let ipAddress = resources.customBlockingIps
             upstreamsTextField.text = ipAddress
         default:
             break
@@ -164,7 +164,7 @@ class UpstreamsController: BottomAlertController {
             resources.customFallbackServers = address
             delegate?.updateDescriptionLabel(type: .fallback, text: text)
         case .customAddress:
-            resources.customBlockingIp = address
+            saveCustomBlockingIps(upstreams)
             delegate?.updateDescriptionLabel(type: .customAddress, text: text)
         default:
             break
@@ -204,6 +204,13 @@ class UpstreamsController: BottomAlertController {
                 }
             }
         }
+    }
+
+    private func saveCustomBlockingIps(_ ips: [String]) {
+        let ipv4 = ips.first { ACNUrlUtils.isIPv4($0) }
+        let ipv6 = ips.first { ACNUrlUtils.isIPv6($0) }
+        resources.customBlockingIpv4 = ipv4
+        resources.customBlockingIpv6 = ipv6
     }
 }
 

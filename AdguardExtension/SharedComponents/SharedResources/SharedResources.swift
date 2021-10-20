@@ -199,15 +199,6 @@ extension AESharedResourcesProtocol {
         }
     }
 
-    dynamic var customBlockingIp: [String]? {
-        get {
-            return sharedDefaults().array(forKey: CustomBlockingIp) as? [String]
-        }
-        set {
-            sharedDefaults().setValue(newValue, forKey: CustomBlockingIp)
-        }
-    }
-
     dynamic var customBlockingIpv4: String? {
         get {
             return sharedDefaults().string(forKey: CustomBlockingIpv4)
