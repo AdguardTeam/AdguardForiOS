@@ -705,7 +705,7 @@
 		B22FCDC1270BD3D400B1C935 /* DnsAdGuardSDK.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = DnsAdGuardSDK.modulemap; sourceTree = "<group>"; };
 		B22FCDDE270C639600B1C935 /* SystemLibs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemLibs.h; sourceTree = "<group>"; };
 		B2673DD727173F0700E04747 /* SafariProtection+Migrations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SafariProtection+Migrations.swift"; sourceTree = "<group>"; };
-		B2673E8427179C5D00E04747 /* SafariAdguardSDK.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = SafariAdguardSDK.modulemap; sourceTree = "<group>"; };
+		B2673E8427179C5D00E04747 /* SafariAdGuardSDK.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = SafariAdGuardSDK.modulemap; sourceTree = "<group>"; };
 		B2673E8527179C8F00E04747 /* SafariAdGuardSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SafariAdGuardSDK.h; sourceTree = "<group>"; };
 		B26B924A27198FC800F1D482 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		B26B924B27198FC800F1D482 /* DomainParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomainParser.swift; sourceTree = "<group>"; };
@@ -1151,7 +1151,7 @@
 				7E6E80F126C2A05200925F96 /* FilterService */,
 				7E6E80F626C2A05200925F96 /* ContentBlockers */,
 				7E6E810426C2A05200925F96 /* UserRules */,
-				B2673E8427179C5D00E04747 /* SafariAdguardSDK.modulemap */,
+				B2673E8427179C5D00E04747 /* SafariAdGuardSDK.modulemap */,
 				B2673E8527179C8F00E04747 /* SafariAdGuardSDK.h */,
 			);
 			name = Safari;
