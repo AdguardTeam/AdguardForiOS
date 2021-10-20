@@ -76,7 +76,6 @@ final class DnsProtectionCustomProvidersMigrationHelper: DnsProtectionCustomProv
     func selectActiveDnsServer() throws {
         DDLogInfo("(DnsProtectionCustomProvidersMigrationHelper) - selectActiveDnsServer; Selecting active server")
 
-
         guard let activeServerInfo = getActiveDnsServerInfo() else {
             DDLogInfo("(DnsProtectionCustomProvidersMigrationHelper) - selectActiveDnsServer; Server wasn't selected")
             return
@@ -132,6 +131,7 @@ class SDKDnsMigrationObsoleteCustomDnsProvider: NSObject, NSCoding {
     let providerId: Int
     let server: SDKDnsMigrationObsoleteCustomDnsServer
 
+    // Encoder used only for tests
     func encode(with coder: NSCoder) {
         coder.encode(name, forKey: "name")
         coder.encode(providerId, forKey: "providerId")
@@ -149,6 +149,13 @@ class SDKDnsMigrationObsoleteCustomDnsProvider: NSObject, NSCoding {
         self.providerId = coder.decodeInteger(forKey: "providerId")
         self.server = server
     }
+
+    // Init for tests
+    init(name: String, providerId: Int, server: SDKDnsMigrationObsoleteCustomDnsServer) {
+        self.name = name
+        self.providerId = providerId
+        self.server = server
+    }
 }
 
 class SDKDnsMigrationObsoleteCustomDnsServer: NSObject, NSCoding {
@@ -157,17 +164,17 @@ class SDKDnsMigrationObsoleteCustomDnsServer: NSObject, NSCoding {
     let name: String
     let upstream: String
 
+    // Encoder used only for tests
     func encode(with coder: NSCoder) {
-        coder.encode(serverId, forKey: "server_id")
-        coder.encode(providerId, forKey: "providerId")
-        coder.encode(name, forKey: "name")
-        coder.encode([upstream], forKey: "upstreams")
+        coder.encode(serverId as Any?, forKey: "server_id")
+        coder.encode(providerId as Any?, forKey: "providerId")
+        coder.encode(name as Any?, forKey: "name")
+        coder.encode([upstream] as Any?, forKey: "upstreams")
     }
 
     required init?(coder: NSCoder) {
         guard
-            let serverIdString = coder.decodeObject(forKey: "server_id") as? String,
-            let serverId = Int(serverIdString),
+            let serverId = coder.decodeObject(forKey: "server_id") as? Int,
             let providerId = coder.decodeObject(forKey: "providerId") as? Int,
             let name = coder.decodeObject(forKey: "name") as? String,
             let upstream = (coder.decodeObject(forKey: "upstreams") as? [String])?.first
@@ -175,6 +182,14 @@ class SDKDnsMigrationObsoleteCustomDnsServer: NSObject, NSCoding {
             return nil
         }
 
+        self.serverId = serverId
+        self.providerId = providerId
+        self.name = name
+        self.upstream = upstream
+    }
+
+    // Init for tests
+    init(serverId: Int, providerId: Int, name: String, upstream: String) {
         self.serverId = serverId
         self.providerId = providerId
         self.name = name
