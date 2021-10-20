@@ -20,7 +20,7 @@ import DnsAdGuardSDK
 
 /// Delegate protocol for DnsProviderDetailsController
 protocol SelectDnsProtocolControllerDelegate: AnyObject {
-    func protocolSelected(dnsProtocol: DnsAdGuardSDK.DnsProtocol)
+    func protocolSelected(dnsProtocol: DnsProtocol)
 }
 
 /// Controller that represent dns protocol picker
@@ -34,8 +34,8 @@ final class SelectDnsProtocolController: BottomAlertController {
     // MARK: - Public properties
 
     weak var delegate: SelectDnsProtocolControllerDelegate?
-    var availableProtocols: [DnsAdGuardSDK.DnsProtocol] = []
-    var selectedProtocol: DnsAdGuardSDK.DnsProtocol = .dns
+    var availableProtocols: [DnsProtocol] = []
+    var selectedProtocol: DnsProtocol = .dns
 
     // MARK: - Private properties
 
@@ -69,7 +69,7 @@ extension SelectDnsProtocolController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ExtendedRadioButtonCell.getCell(forTableView: tableView)
         let prot = availableProtocols[indexPath.row]
-        cell.titleString = prot.localizedString
+        cell.titleString = prot.localizedName
         cell.radioButtonSelected = prot == selectedProtocol
         cell.isArrowRightHidden = true
         cell.updateTheme(themeService: themeService)

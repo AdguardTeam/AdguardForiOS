@@ -16,7 +16,9 @@
       along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+import SharedAdGuardSDK
 import SafariAdGuardSDK
+import DnsAdGuardSDK
 
 protocol MainPageModelDelegate: AnyObject {
     func updateStarted()
@@ -38,13 +40,22 @@ final class MainPageModel: MainPageModelProtocol {
     // MARK: - private members
 
     private let safariProtection: SafariProtectionProtocol
+    private let dnsProtection: DnsProtectionProtocol
     private let resources: AESharedResourcesProtocol
+    private let vpnManager: VpnManagerProtocol
 
     // MARK: - init
 
-    init(resource: AESharedResourcesProtocol, safariProtection: SafariProtectionProtocol) {
+    init(
+        resource: AESharedResourcesProtocol,
+        safariProtection: SafariProtectionProtocol,
+        dnsProtection: DnsProtectionProtocol,
+        vpnManager: VpnManagerProtocol
+    ) {
         self.resources = resource
         self.safariProtection = safariProtection
+        self.dnsProtection = dnsProtection
+        self.vpnManager = vpnManager
     }
 
     // MARK: - public methods
@@ -55,22 +66,47 @@ final class MainPageModel: MainPageModelProtocol {
     func updateFilters() {
         delegate?.updateStarted()
 
-        var message: String?
-        safariProtection.updateFiltersMetaAndLocalizations(true) { [weak delegate] result in
+        @Atomic var filtersCount = 0
+        @Atomic var updateError: Error?
+        let group = DispatchGroup()
+
+        group.enter()
+        safariProtection.updateFiltersMetaAndLocalizations(true) { result in
             switch result {
-            case .error(_):
-                delegate?.updateFailed(error: String.localizedString("filter_updates_error"))
-                return
+            case .error(let error):
+                _updateError.mutate { $0 = error }
             case .success(let updateResult):
-                let filtersCount = updateResult.updatedFilterIds.count
-                if filtersCount > 0 {
-                    let format = String.localizedString("filters_updated_format")
-                    message = String(format: format, filtersCount)
-                } else {
-                    message = String.localizedString("filters_noUpdates")
-                }
+                _filtersCount.mutate { $0 += updateResult.updatedFilterIds.count }
             }
-        } onCbReloaded: { [weak delegate] _ in
+        } onCbReloaded: { error in
+            if let error = error {
+                _updateError.mutate { $0 = error }
+            }
+            group.leave()
+        }
+
+        group.enter()
+        dnsProtection.updateAllFilters { [weak vpnManager] result in
+            _filtersCount.mutate { $0 += result.updatedFiltersIds.count }
+            if result.updatedFiltersIds.count > 0 {
+                vpnManager?.updateSettings(completion: nil)
+            }
+            group.leave()
+        }
+
+        group.notify(queue: .main) { [weak delegate] in
+            let message: String
+            if let error = updateError {
+                DDLogError("(MainPageModel) - updateFilters; Error: \(error)")
+                message = String.localizedString("filter_updates_error")
+            }
+            else if filtersCount > 0 {
+                let format = String.localizedString("filters_updated_format")
+                message = String(format: format, filtersCount)
+            }
+            else {
+                message = String.localizedString("filters_noUpdates")
+            }
             delegate?.updateFinished(message: message)
         }
     }

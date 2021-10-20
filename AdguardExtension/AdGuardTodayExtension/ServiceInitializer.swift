@@ -39,14 +39,15 @@ final class ServiceInitializer: ServiceInitializerProtocol {
     let activityStatistics: ActivityStatisticsProtocol
 
     init(resources: AESharedResourcesProtocol) throws {
-
-        let purchaseStatusService = EmptyPurchaseStatusService()
+        let networkService = ACNNetworking()
+        let productInfo = ADProductInfo()
+        let purchaseService = PurchaseService(network: networkService, resources: resources, productInfo: productInfo)
 
         let sharedStorageUrls = SharedStorageUrls()
 
         let safariConfiguration = SafariConfiguration(
-            resources: resources,
-            isProPurchased: purchaseStatusService.isProPurchased
+            resources: resources, 
+            isProPurchased: purchaseService.isProPurchased
         )
 
         self.safariProtection = try SafariProtection(
@@ -61,14 +62,14 @@ final class ServiceInitializer: ServiceInitializerProtocol {
         let networkSettings = NetworkSettingsService(resources: resources)
 
         let configuration = ConfigurationService(
-            purchaseService: purchaseStatusService,
+            purchaseService: purchaseService,
             resources: resources,
             safariProtection: safariProtection
         )
 
         let dnsConfiguration = DnsConfiguration(
             resources: resources,
-            isProPurchased: purchaseStatusService.isProPurchased
+            isProPurchased: purchaseService.isProPurchased
         )
 
         self.dnsProvidersManager = try DnsProvidersManager(configuration: dnsConfiguration, userDefaults: resources.sharedDefaults())
