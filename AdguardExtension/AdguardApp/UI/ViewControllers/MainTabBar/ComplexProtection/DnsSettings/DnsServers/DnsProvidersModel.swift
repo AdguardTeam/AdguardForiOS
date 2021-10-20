@@ -57,17 +57,20 @@ final class DnsProvidersModel {
 
     // MARK: - Private methods
 
-    /// Return enabled server id. If enabled server doesn't exists then return id of first server from `dnsServers` array.
+    /// Returns enabled server id. If enabled server doesn't exists then returns id of DoH server. And If DoH server doesn't  exist too than returns first server id from `dnsServers` array
     /// `dnsServers` - is array of provider DNS servers and it is not empty for all  providers
     private func getActiveServerId(provider: DnsProviderMetaProtocol) -> Int {
         if provider.isCustom { return provider.custom.server.id }
 
+        let dohServerId = provider.dnsServers.first { $0.type == .doh }?.id ??
+        provider.dnsServers.first!.id
+
         if let activeDnsProtocol = resources.dnsActiveProtocols[provider.providerId] {
             let serverId = provider.dnsServers.first { $0.type == activeDnsProtocol }?.id
-            return serverId ?? provider.dnsServers.first!.id
+            return serverId ?? dohServerId
         }
 
-        return provider.dnsServers.first!.id
+        return dohServerId
     }
 }
 

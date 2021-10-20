@@ -59,6 +59,7 @@ public extension SafariGroup {
         public let homePage: String?
         public let filterDownloadPage: String?
         public let rulesCount: Int
+        public var isCustom: Bool { filterId >= CustomFilterMeta.baseCustomFilterId }
 
         // MARK: - Initialization
 

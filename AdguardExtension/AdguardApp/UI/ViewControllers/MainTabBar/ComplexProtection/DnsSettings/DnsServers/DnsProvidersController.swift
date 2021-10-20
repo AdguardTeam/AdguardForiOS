@@ -156,6 +156,7 @@ final class DnsProvidersController: UITableViewController {
     }
 
     // MARK: - Private methods
+
     private func presentNewDnsServerController(controllerType: DnsServerControllerType, _ tableModel: DnsProvidersTableModel?) {
         guard let controller = storyboard?.instantiateViewController(withIdentifier: NewDnsServerControllerIdentifier) as? NewDnsServerController else { return }
 
@@ -204,9 +205,9 @@ extension DnsProvidersController: NewDnsServerControllerDelegate {
 // MARK: - DnsProvidersController + DnsProviderDetailsControllerDelegate
 
 extension DnsProvidersController: DnsProviderDetailsControllerDelegate {
-    /// Select active provider from details  controller
-    func providerSelected(provider: DnsProviderProtocol) {
-       setProviderAndReloadTable(provider: provider)
+    /// Updates UI
+    func providerSelected() {
+        tableView.reloadData()
     }
 }
 
