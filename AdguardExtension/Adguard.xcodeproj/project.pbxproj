@@ -39,6 +39,8 @@
 		2430CE1526F34D78005A05DA /* BackgroungFetchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2430CE1326F34D77005A05DA /* BackgroungFetchController.swift */; };
 		2430CE1726F360F6005A05DA /* ExtendedRadioButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2430CE1626F360F6005A05DA /* ExtendedRadioButtonCell.swift */; };
 		2430CE1826F360F6005A05DA /* ExtendedRadioButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2430CE1626F360F6005A05DA /* ExtendedRadioButtonCell.swift */; };
+		2438CA18271F109000173E23 /* DnsProtectionCustomProvidersMigrationHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2438CA17271F109000173E23 /* DnsProtectionCustomProvidersMigrationHelperTest.swift */; };
+		2438CA1A271F112500173E23 /* InAppDnsProvidersManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2438CA19271F112500173E23 /* InAppDnsProvidersManagerMock.swift */; };
 		2443394C2580C13600AB4F26 /* LowLevelSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */; };
 		2443394D2580C13600AB4F26 /* LowLevelSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */; };
 		244339712580D8AB00AB4F26 /* BlockingModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244339702580D8AB00AB4F26 /* BlockingModeController.swift */; };
@@ -2326,6 +2328,8 @@
 		242C7FEF26E6536B00A01B10 /* DnsUserRulesTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsUserRulesTableModel.swift; sourceTree = "<group>"; };
 		2430CE1326F34D77005A05DA /* BackgroungFetchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroungFetchController.swift; sourceTree = "<group>"; };
 		2430CE1626F360F6005A05DA /* ExtendedRadioButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedRadioButtonCell.swift; sourceTree = "<group>"; };
+		2438CA17271F109000173E23 /* DnsProtectionCustomProvidersMigrationHelperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProtectionCustomProvidersMigrationHelperTest.swift; sourceTree = "<group>"; };
+		2438CA19271F112500173E23 /* InAppDnsProvidersManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppDnsProvidersManagerMock.swift; sourceTree = "<group>"; };
 		2443394B2580C13600AB4F26 /* LowLevelSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowLevelSettingsController.swift; sourceTree = "<group>"; };
 		244339702580D8AB00AB4F26 /* BlockingModeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockingModeController.swift; sourceTree = "<group>"; };
 		244339A62580EA2600AB4F26 /* BlockedResponseTtlController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedResponseTtlController.swift; sourceTree = "<group>"; };
@@ -5976,6 +5980,7 @@
 			children = (
 				B26B92742719B46F00F1D482 /* DnsProtectionFiltersMigrationHelperTests.swift */,
 				B26B92752719B46F00F1D482 /* DnsProtectionUserRulesMigrationHelperTests.swift */,
+				2438CA17271F109000173E23 /* DnsProtectionCustomProvidersMigrationHelperTest.swift */,
 				7E774CB52720633100A970C1 /* DnsStatisticsMigrationHelperTests.swift */,
 				7E774CB7272074BF00A970C1 /* DnsStatisticsOldWrapper.swift */,
 			);
@@ -6245,6 +6250,7 @@
 				D0EC86B423A7738E00EDF107 /* VpnManagerMock.swift */,
 				7E3244D4255AD4F20058BCDF /* NetworkSettingsServiceMock.swift */,
 				24C03C4525FF73790062DEED /* URLSchemeExecutorMock.swift */,
+				2438CA19271F112500173E23 /* InAppDnsProvidersManagerMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -8706,6 +8712,7 @@
 				7E8576662435F1F70055F63D /* BasicRulesParser.swift in Sources */,
 				D09E2D32255D6AFF002D6BC0 /* SettingsParser.swift in Sources */,
 				D04C2B78240FA462009330A8 /* UIApplication+OpenAdguardUrl.swift in Sources */,
+				2438CA18271F109000173E23 /* DnsProtectionCustomProvidersMigrationHelperTest.swift in Sources */,
 				249E118E2600D393003A5FBD /* SocialNetworkAuthParametersParser.swift in Sources */,
 				249E117C2600D390003A5FBD /* OpenTunnelModeControllerParser.swift in Sources */,
 				D02C080E21BEAD0F00796714 /* ConfigurationServiceMock.swift in Sources */,
@@ -8727,6 +8734,7 @@
 				D0288F372306984A00A4EBEF /* ACLExecuteBlockDelayed.m in Sources */,
 				7EE715CB2316765800C03DE9 /* String+UtilsTest.swift in Sources */,
 				24F8A94D271DB62600ADA050 /* NetworkSettingsMigration.swift in Sources */,
+				2438CA1A271F112500173E23 /* InAppDnsProvidersManagerMock.swift in Sources */,
 				249E11222600D384003A5FBD /* OpenMainPageControllerParser.swift in Sources */,
 				B26B928F2719BA4100F1D482 /* OpenAdvancedProtectionParser.swift in Sources */,
 				D0288F2D2305AEF900A4EBEF /* UIColorUtils.swift in Sources */,
