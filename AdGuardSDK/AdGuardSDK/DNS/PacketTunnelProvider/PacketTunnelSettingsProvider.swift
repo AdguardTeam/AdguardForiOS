@@ -142,11 +142,19 @@ extension NEIPv4Route {
         guard components.count == 2 else { return nil }
 
         let dest = components[0]
-        let maskLength = Int(components[1])
-        var maskLong: in_addr_t = 0xffffffff >> (32 - maskLength!)
-        maskLong = maskLong << (32 - maskLength!)
+
+        guard ACNUrlUtils.isIPv4(dest) else { return nil }
+
+        guard let maskLength = Int(components[1]),
+               (0...32).contains(maskLength) else {
+                   return nil
+               }
+        var maskLong: in_addr_t = 0xffffffff >> (32 - maskLength)
+        maskLong = maskLong << (32 - maskLength)
         maskLong = maskLong.byteSwapped
-        let buf = addr2ascii(AF_INET, &maskLong, Int32(MemoryLayout.size(ofValue: maskLong)), nil)!
+        guard let buf = addr2ascii(AF_INET, &maskLong, Int32(MemoryLayout.size(ofValue: maskLong)), nil) else {
+            return nil
+        }
         let maskStr = String(cString: buf)
         return NEIPv4Route(destinationAddress: dest, subnetMask: maskStr)
     }
@@ -158,9 +166,15 @@ extension NEIPv6Route {
         guard components.count == 2 else { return nil }
 
         let dest = components[0]
+
+        guard ACNUrlUtils.isIPv6(dest) else { return nil }
+
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
-        let mask = formatter.number(from: components[1])!
+        guard let mask = formatter.number(from: components[1]),
+              (0...128).contains(mask.intValue) else {
+                  return nil
+              }
         return NEIPv6Route(destinationAddress: dest, networkPrefixLength: mask)
     }
 }
