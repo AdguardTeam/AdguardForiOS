@@ -37,12 +37,12 @@ struct ActivityStatisticsTable {
 // MARK: - ActivityStatistics + ActivityStatisticsRecord
 
 public struct ActivityStatisticsRecord: Equatable {
-    let timeStamp: Date
-    let domain: String
-    let requests: Int
-    let encrypted: Int
-    let blocked: Int
-    let elapsedSumm: Int
+    public let timeStamp: Date
+    public let domain: String
+    public let requests: Int
+    public let encrypted: Int
+    public let blocked: Int
+    public let elapsedSumm: Int
 
     public static func == (lhs: Self, rhs: Self) -> Bool {
         // Dates created from DB object can differ a little bit, so we add 1 second for an error rate
@@ -57,7 +57,7 @@ public struct ActivityStatisticsRecord: Equatable {
     }
 }
 
-extension ActivityStatisticsRecord {
+public extension ActivityStatisticsRecord {
     init(dbRecord: Row) {
         self.timeStamp = dbRecord[ActivityStatisticsTable.timeStamp]
         self.domain = dbRecord[ActivityStatisticsTable.domain]
