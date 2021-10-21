@@ -29,9 +29,6 @@ protocol SDKMigrationOldFilesHelperProtocol {
     func replaceCbJsonFiles()
 }
 
-// TODO: - This migration object is small, and can be accessed from any target
-// Disscuss it!
-
 /// Implementation of `SDKMigrationOldFilesHelperProtocol`
 final class SDKMigrationOldFilesHelper: SDKMigrationOldFilesHelperProtocol {
 
@@ -77,8 +74,7 @@ final class SDKMigrationOldFilesHelper: SDKMigrationOldFilesHelperProtocol {
             }
 
             if !FileManager.default.fileExists(atPath: newCbJsonFileUrl.path) {
-                try? FileManager.default.copyItem(at: oldCbJsonFileUrl, to: newCbJsonFileUrl)
-                try? FileManager.default.removeItem(at: oldCbJsonFileUrl)
+                try? FileManager.default.moveItem(at: oldCbJsonFileUrl, to: newCbJsonFileUrl)
             }
         }
     }
