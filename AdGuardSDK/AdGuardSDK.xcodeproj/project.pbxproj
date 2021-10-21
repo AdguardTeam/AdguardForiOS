@@ -439,6 +439,7 @@
 		D049EE9E26B2F33200B8088B /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049EB9326B17C0A00B8088B /* CharacterSet+Utils.swift */; };
 		D04F6A952718307700224DEF /* ContentBlockerConverter in Frameworks */ = {isa = PBXBuildFile; productRef = D04F6A942718307700224DEF /* ContentBlockerConverter */; };
 		D04F6AAF27183D3100224DEF /* AdGuardSdkDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C8E9AF2717008C00ACDED8 /* AdGuardSdkDependencies.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D080EED82721C74B00146FB2 /* NESettingsExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D080EED72721C74B00146FB2 /* NESettingsExtensionTests.swift */; };
 		D09E32C026EB85FA00B5417A /* PacketTunnelSettingsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E32BF26EB85FA00B5417A /* PacketTunnelSettingsProvider.swift */; };
 		D0A3CF9426E7AC95006E90AD /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A3CF9326E7AC95006E90AD /* PacketTunnelProvider.swift */; };
 		D0A3CF9926E7AF32006E90AD /* ACNCidrRange.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A3CF9826E7AF31006E90AD /* ACNCidrRange.m */; };
@@ -724,6 +725,7 @@
 		D049EB9326B17C0A00B8088B /* CharacterSet+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CharacterSet+Utils.swift"; path = "../Libs/Utils/CharacterSet+Utils.swift"; sourceTree = "<group>"; };
 		D049EB9426B17C0A00B8088B /* Dictionary+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Dictionary+Utils.swift"; path = "../Libs/Utils/Dictionary+Utils.swift"; sourceTree = "<group>"; };
 		D049EBA026B1868200B8088B /* AdGuardSDK_mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AdGuardSDK_mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D080EED72721C74B00146FB2 /* NESettingsExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NESettingsExtensionTests.swift; sourceTree = "<group>"; };
 		D09E32BF26EB85FA00B5417A /* PacketTunnelSettingsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelSettingsProvider.swift; sourceTree = "<group>"; };
 		D0A3CF9326E7AC95006E90AD /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
 		D0A3CF9726E7AF30006E90AD /* ACNCidrRange.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNCidrRange.h; sourceTree = "<group>"; };
@@ -1493,6 +1495,7 @@
 				7EFA0F6626F2205500EBCD99 /* DnsProxyTest.swift */,
 				7EFA0F6826F2206E00EBCD99 /* DnsProxyConfigurationProviderTest.swift */,
 				7EFA0F6A26F2208400EBCD99 /* PacketTunnelSettingsProviderTest.swift */,
+				D080EED72721C74B00146FB2 /* NESettingsExtensionTests.swift */,
 			);
 			path = PacketTunnelProviderTests;
 			sourceTree = "<group>";
@@ -2015,6 +2018,7 @@
 				7E6E81CB26C2A05B00925F96 /* DnsProtection.swift in Sources */,
 				7EE740E426F352210033B673 /* WebExtensionHelpersMock.swift in Sources */,
 				7E6E802B26C299DE00925F96 /* LangsMetaStorageTest.swift in Sources */,
+				D080EED82721C74B00146FB2 /* NESettingsExtensionTests.swift in Sources */,
 				7E6E805C26C299DF00925F96 /* CustomFilterMetaParserTest.swift in Sources */,
 				7E9B1DF326F229450003EB0E /* PacketTunnelSettingsProvider.swift in Sources */,
 				7E6E81E826C2A05B00925F96 /* DnsProvider.swift in Sources */,
