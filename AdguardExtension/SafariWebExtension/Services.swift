@@ -28,6 +28,6 @@ final class Services {
     init() {
         self.resources = AESharedResources()
         self.urlsStorage = SharedStorageUrls()
-        self.processor = SafariWebExtensionMessageProcessor()
+        self.processor = SafariWebExtensionMessageProcessor(resources: resources)
     }
 }

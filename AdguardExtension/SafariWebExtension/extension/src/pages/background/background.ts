@@ -33,8 +33,8 @@ const getEngine = (() => {
         return engine;
     };
 
-    return () => {
-        if (!startPromise) {
+    return (shouldUpdateAdvancedRules: boolean) => {
+        if (!startPromise || shouldUpdateAdvancedRules) {
             startPromise = start();
         }
         return startPromise;
@@ -42,7 +42,9 @@ const getEngine = (() => {
 })();
 
 const getScriptsAndSelectors = async (url: string): Promise<SelectorsAndScripts> => {
-    const engine = await getEngine();
+    const shouldUpdateAdvancedRules = await adguard.nativeHost.shouldUpdateAdvancedRules();
+
+    const engine = await getEngine(shouldUpdateAdvancedRules);
 
     const hostname = getDomain(url);
 

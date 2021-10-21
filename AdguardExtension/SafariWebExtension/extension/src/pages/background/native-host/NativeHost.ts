@@ -41,6 +41,7 @@ export interface NativeHostInterface {
     upgradeMe(): Promise<void>
     getAdvancedRulesText(): Promise<string | void>
     enableAdvancedBlocking(): Promise<void>
+    shouldUpdateAdvancedRules(): Promise<boolean>
 }
 
 export class NativeHost implements NativeHostInterface {
@@ -258,5 +259,24 @@ export class NativeHost implements NativeHostInterface {
             protectionEnabled,
             advancedBlockingEnabled,
         };
+    }
+
+    /**
+     * Checks if native app has updated rules
+     */
+    async shouldUpdateAdvancedRules(): Promise<boolean> {
+        const response = await this.sendNativeMessage(
+            MessagesToNativeApp.ShouldUpdateAdvancedRules,
+        );
+
+        if (!response
+            || !Object.prototype.hasOwnProperty.call(
+                response,
+                MessagesToNativeApp.ShouldUpdateAdvancedRules
+            )) {
+            return false;
+        }
+
+        return !!response[MessagesToNativeApp.ShouldUpdateAdvancedRules];
     }
 }

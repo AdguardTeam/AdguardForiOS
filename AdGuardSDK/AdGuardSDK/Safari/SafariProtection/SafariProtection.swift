@@ -220,6 +220,11 @@ public final class SafariProtection: SafariProtectionProtocol {
                 return
             }
 
+            // TODO: - Can be improved
+            // This flag is set when advanced rules are converted and saved to file
+            // Now it is done for messaging in Safari Web extension as we haven't found another solution yet
+            self.userDefaults.shouldUpdateAdvancedRules = true
+
             self.cbService.updateContentBlockers { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection) - reloadContentBlockers; self is missing!")
@@ -229,6 +234,23 @@ public final class SafariProtection: SafariProtectionProtocol {
 
                 self.workingQueue.sync { onCbReloaded(error) }
             }
+        }
+    }
+}
+
+// MARK: - UserDefaultsStorageProtocol + shouldUpdateAdvancedRulesKey
+
+fileprivate extension UserDefaultsStorageProtocol {
+
+    private var shouldUpdateAdvancedRulesKey: String { "SafariAdGuardSDK.shouldUpdateAdvancedRulesKey" }
+
+    /// Returns true if advanced protection rules should be updated
+    var shouldUpdateAdvancedRules: Bool {
+        get {
+            storage.bool(forKey: shouldUpdateAdvancedRulesKey)
+        }
+        set {
+            storage.set(newValue, forKey: shouldUpdateAdvancedRulesKey)
         }
     }
 }

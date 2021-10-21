@@ -186,6 +186,9 @@ testcases.adguard.com,surge.sh#?##case28 > :is(.case28, #main, footer, span):con
     enableAdvancedBlocking(): Promise<void> {
         throw new Error('Method not implemented.');
     }
+    shouldUpdateAdvancedRules(): Promise<boolean> {
+        throw new Error('Method not implemented.');
+    }
 }
 
 export const nativeHostMock = new NativeHostMock();

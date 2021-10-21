@@ -2,6 +2,7 @@ export enum MessagesToNativeApp {
     WriteInNativeLog = 'writeInNativeLog',
     GetAdvancedRulesText = 'get_advanced_rules_text',
     GetInitData = 'get_init_data',
+    ShouldUpdateAdvancedRules = 'should_update_advanced_rules',
 }
 
 export enum MessagesToBackgroundPage {
