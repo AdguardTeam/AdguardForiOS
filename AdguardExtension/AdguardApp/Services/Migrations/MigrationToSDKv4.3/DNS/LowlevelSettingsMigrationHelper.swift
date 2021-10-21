@@ -20,16 +20,16 @@
 
 import Foundation
 
-/** this class is responsible for low level settings migration */
+/** this essence is responsible for low level settings migration */
 protocol LowlevelSettingsMigrationHelperProtocol {
     /// in v4.2 we stored an array of custom blocking IPs
     /// in 4.3 we store separate IPv4 and IPv6 custom blocking IPs
     func migrateCustomBlockingIps()
 }
 
-class LowlevelSettingsMigrationHelper: LowlevelSettingsMigrationHelperProtocol {
+final class LowlevelSettingsMigrationHelper: LowlevelSettingsMigrationHelperProtocol {
 
-    let resources: AESharedResourcesProtocol
+    private let resources: AESharedResourcesProtocol
 
     init(resources: AESharedResourcesProtocol) {
         self.resources = resources
