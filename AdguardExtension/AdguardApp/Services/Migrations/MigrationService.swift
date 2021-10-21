@@ -264,7 +264,7 @@ final class MigrationService: MigrationServiceProtocol {
                     dnsRulesMigration: dnsRulesMigration,
                     dnsProvidersMigration: dnsProvidersMigration,
                     dnsProvidersManager: dnsProvidersManager,
-                    lowLevelSettingsMigration: lowLevelSettingsMigration
+                    lowLevelSettingsMigration: lowLevelSettingsMigration,
                     dnsStatisticsMigration: dnsStatisticsMigration
                 )
 

@@ -49,7 +49,7 @@ final class SDKMigrationServiceHelper: SDKMigrationServiceHelperProtocol {
         dnsRulesMigration: DnsProtectionUserRulesMigrationHelperProtocol,
         dnsProvidersMigration: DnsProtectionCustomProvidersMigrationHelperProtocol,
         dnsProvidersManager: DnsProvidersManagerProtocol,
-        lowLevelSettingsMigration: LowlevelSettingsMigrationHelperProtocol
+        lowLevelSettingsMigration: LowlevelSettingsMigrationHelperProtocol,
         dnsStatisticsMigration: DnsStatisticsMigrationHelperProtocol
     ) {
         self.safariProtection = safariProtection
