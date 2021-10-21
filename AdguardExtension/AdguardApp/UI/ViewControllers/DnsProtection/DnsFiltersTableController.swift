@@ -173,6 +173,13 @@ final class DnsFiltersTableController: UITableViewController {
         let descr = String(format: format, "\(model.enabledRulesCount)")
         tableView.tableHeaderView = ExtendedTitleTableHeaderView(title: title, normalDescription: descr)
     }
+
+    private func updateTitleHeaderView() {
+        let format = String.localizedString("dns_filters_number_title")
+        let descr = String(format: format, "\(model.enabledRulesCount)")
+        guard let header = tableView.tableHeaderView as? ExtendedTitleTableHeaderView else { return }
+        header.setNormalTitle(descr)
+    }
 }
 
 // MARK: - DnsFiltersTableController + DnsFiltersTableModelDelegate
@@ -180,13 +187,13 @@ final class DnsFiltersTableController: UITableViewController {
 extension DnsFiltersTableController: DnsFiltersTableModelDelegate {
     func modelsChanged() {
         tableView.reloadData()
-        setTitleHeaderView()
+        updateTitleHeaderView()
     }
 
     func filterAdded() {
         let indexPath = IndexPath(row: model.cellModels.count, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
-        setTitleHeaderView()
+        updateTitleHeaderView()
     }
 }
 
