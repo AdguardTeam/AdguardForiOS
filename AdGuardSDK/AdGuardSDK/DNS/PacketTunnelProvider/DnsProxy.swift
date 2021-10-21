@@ -113,7 +113,7 @@ final class DnsProxy: DnsProxyProtocol {
         // Error reference
         var error: NSError?
 
-        Logger.logInfo("(DnsProxy) start with config: \n\(agConfig)")
+        Logger.logInfo("(DnsProxy) start with config: \n\(agConfig.extendedDescription)")
 
         // Proxy init
         proxy = AGDnsProxy(config: agConfig, handler: agEvents, error: &error)

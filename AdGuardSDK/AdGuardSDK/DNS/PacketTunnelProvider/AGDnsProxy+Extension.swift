@@ -55,7 +55,7 @@ extension AGDnsUpstream {
         )
     }
 
-    dynamic open override var description: String {
+    var extendedDescription: String {
         return  """
                 address: \(address ?? "nil")
                 bootstrap: \(bootstrap ?? [])
@@ -103,7 +103,7 @@ extension AGDns64Settings {
         )
     }
 
-    dynamic open override var description: String {
+    var extendedDescription: String {
         return  """
                 upstreams: \(upstreams ?? [])
                 maxTries: \(maxTries)
@@ -151,15 +151,15 @@ extension AGDnsProxyConfig {
         )
     }
 
-    dynamic open override var description: String {
+    var extendedDescription: String {
         return """
-               upsteams: \(upstreams ?? [])
-               fallbacks: \(fallbacks ?? [])
+               upsteams:\((upstreams ?? []).map { $0.extendedDescription })
+               fallbacks: \((fallbacks ?? []).map { $0.extendedDescription })
                fallbackDomains: \(fallbackDomains ?? [])
                detectSearchDomains: \(detectSearchDomains)
                filters: \(filters ?? [])
                blockedResponseTtlSecs: \(blockedResponseTtlSecs)
-               dns64Settings: \(dns64Settings.description() ?? "nil")
+               dns64Settings: \(dns64Settings.extendedDescription)
                ipv6Available: \(ipv6Available)
                blockIpv6: \(blockIpv6)
                adblockRulesBlockingMode: \(adblockRulesBlockingMode)
