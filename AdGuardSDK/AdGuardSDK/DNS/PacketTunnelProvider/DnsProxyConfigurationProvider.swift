@@ -138,8 +138,8 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
             rulesBlockingMode: lowLevelConfiguration.blockingMode,
             hostsBlockingMode: lowLevelConfiguration.blockingMode,
             blockedResponseTtlSecs: lowLevelConfiguration.blockedTtl,
-            customBlockingIpv4: lowLevelConfiguration.blockingIpv4 ?? "0.0.0.0",
-            customBlockingIpv6: lowLevelConfiguration.blockingIpv6 ?? "::",
+            customBlockingIpv4: lowLevelConfiguration.blockingIpv4,
+            customBlockingIpv6: lowLevelConfiguration.blockingIpv6,
             blockIpv6: lowLevelConfiguration.blockIpv6
         )
     }

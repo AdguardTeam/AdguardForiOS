@@ -126,7 +126,7 @@ extension AGDnsProxyConfig {
     /// We use `DnsProxyConfiguration` to be able to test how we configure `AGDnsProxyConfig`
     convenience init(from configuration: DnsProxyConfiguration) {
         let defaultConfig = AGDnsProxyConfig.getDefault()!
-        
+
         self.init(
             upstreams: configuration.upstreams.map { AGDnsUpstream(from: $0) },
             fallbacks: configuration.fallbacks.map { AGDnsUpstream(from: $0) },
@@ -135,19 +135,19 @@ extension AGDnsProxyConfig {
             filters: configuration.filters.map { AGDnsFilterParams(from: $0)},
             blockedResponseTtlSecs: configuration.blockedResponseTtlSecs,
             dns64Settings: AGDns64Settings(from: configuration.dns64Upstreams),
-            listeners: nil,
+            listeners: defaultConfig.listeners,
             outboundProxy: defaultConfig.outboundProxy,
             ipv6Available: configuration.ipv6Available,
             blockIpv6: configuration.blockIpv6,
             adblockRulesBlockingMode: configuration.rulesBlockingMode.agRulesBlockingMode,
             hostsRulesBlockingMode: configuration.hostsBlockingMode.agHostsRulesBlockingMode,
-            customBlockingIpv4: configuration.customBlockingIpv4,
-            customBlockingIpv6: configuration.customBlockingIpv6,
-            dnsCacheSize: 128,
-            optimisticCache: false,
-            enableDNSSECOK: false,
-            enableRetransmissionHandling: true,
-            helperPath: nil
+            customBlockingIpv4: configuration.customBlockingIpv4 ?? defaultConfig.customBlockingIpv4,
+            customBlockingIpv6: configuration.customBlockingIpv6 ?? defaultConfig.customBlockingIpv6,
+            dnsCacheSize: defaultConfig.dnsCacheSize,
+            optimisticCache: defaultConfig.optimisticCache,
+            enableDNSSECOK: defaultConfig.enableDNSSECOK,
+            enableRetransmissionHandling: defaultConfig.enableRetransmissionHandling,
+            helperPath: defaultConfig.helperPath
         )
     }
 
