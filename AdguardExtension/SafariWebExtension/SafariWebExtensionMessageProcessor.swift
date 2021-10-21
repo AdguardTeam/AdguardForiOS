@@ -112,7 +112,7 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
 
         // Create file reader object if doesn't exist
         if fileReader == nil {
-            fileReader = ChunkFileReader(fileUrl: advancedRulesFileUrl, chunkSize: 2048)
+            fileReader = ChunkFileReader(fileUrl: advancedRulesFileUrl, chunkSize: 65536)
         }
         // Rewind file reader if fromBeginning is true
         else if fromBeginning {
