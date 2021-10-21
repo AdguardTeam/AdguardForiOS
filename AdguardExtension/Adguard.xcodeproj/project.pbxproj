@@ -622,6 +622,14 @@
 		7E7702A226FF5113004A8616 /* TitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7702A126FF5113004A8616 /* TitleHeaderView.swift */; };
 		7E7702A326FF5113004A8616 /* TitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7702A126FF5113004A8616 /* TitleHeaderView.swift */; };
 		7E7702AC27008A1D004A8616 /* NativeDnsSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24929E3126FDEDC100A32702 /* NativeDnsSettingsManager.swift */; };
+		7E774CB62720633100A970C1 /* DnsStatisticsMigrationHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E774CB52720633100A970C1 /* DnsStatisticsMigrationHelperTests.swift */; };
+		7E774CB8272074BF00A970C1 /* DnsStatisticsOldWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E774CB7272074BF00A970C1 /* DnsStatisticsOldWrapper.swift */; };
+		7E786B9527217D7E00B46D90 /* AdGuardSdkDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B26B921E2718266200F1D482 /* AdGuardSdkDependencies.framework */; };
+		7E786B9627217E2500B46D90 /* AdGuardAGDnsProxyDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E174BF8271F146B006B7271 /* AdGuardAGDnsProxyDependencies.framework */; };
+		7E786B9727217E2900B46D90 /* SystemLibsResolv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24195D422719FA2300F31547 /* SystemLibsResolv.framework */; };
+		7E786B9827217E3100B46D90 /* SharedAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29D53A9270D40EA0045CB16 /* SharedAdGuardSDK.framework */; };
+		7E786B9927217E3500B46D90 /* DnsAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B29DD474270CB04B0072B42F /* DnsAdGuardSDK.framework */; };
+		7E786B9A27217E3900B46D90 /* SafariAdGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6454E526EBD58700B1E66C /* SafariAdGuardSDK.framework */; };
 		7E7F9908241A98E400FC89DC /* RateApp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E7F990A241A98E400FC89DC /* RateApp.storyboard */; };
 		7E7F9943241B7AA400FC89DC /* ComplexProtectionServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7F9942241B7AA300FC89DC /* ComplexProtectionServiceMock.swift */; };
 		7E822C0A2435EDD30015B4D0 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E822C002435EDD30015B4D0 /* Constant.swift */; };
@@ -862,7 +870,6 @@
 		7EF5C57326C26E18001851D6 /* EdgeInsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF5C57126C26E18001851D6 /* EdgeInsetLabel.swift */; };
 		7EF6AF87233D11B000D29B36 /* RequestsBlockingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF6AF86233D11B000D29B36 /* RequestsBlockingController.swift */; };
 		7EF9189222F05F8A00427A61 /* FilterTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF9189122F05F8A00427A61 /* FilterTagsView.swift */; };
-		A5E02635261E334700198396 /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = A5E02634261E334700198396 /* AGDnsProxy */; };
 		A5E02637261E336100198396 /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = A5E02636261E336100198396 /* AGDnsProxy */; };
 		B22FCD93270B7DBF00B1C935 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E5A0991B8632F600319AA3 /* libz.tbd */; };
 		B22FCD9E270B7DFA00B1C935 /* TunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08D44D226E1F6730023FC20 /* TunnelProvider.swift */; };
@@ -1084,8 +1091,6 @@
 		B26B92782719B46F00F1D482 /* SDKMigrationNewDbWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26B926F2719B46F00F1D482 /* SDKMigrationNewDbWrapper.swift */; };
 		B26B927A2719B46F00F1D482 /* SafariProtectionAllowlistRulesMigrationHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26B92712719B46F00F1D482 /* SafariProtectionAllowlistRulesMigrationHelperTests.swift */; };
 		B26B927B2719B46F00F1D482 /* SDKMigrationsDirectoriesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26B92722719B46F00F1D482 /* SDKMigrationsDirectoriesManager.swift */; };
-		B26B927F2719B6A600F1D482 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = B26B927E2719B6A600F1D482 /* SQLite */; };
-		B26B92812719B6DC00F1D482 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = B26B92802719B6DC00F1D482 /* Zip */; };
 		B26B92832719B72700F1D482 /* PurchaseServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C19E7B2716DE5800331109 /* PurchaseServiceProtocol.swift */; };
 		B26B92842719B72E00F1D482 /* OpenLicenseControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E85A82226F37FBD0059BB33 /* OpenLicenseControllerParser.swift */; };
 		B26B92852719B73600F1D482 /* PurchaseStatusProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C19E7E2716DFDE00331109 /* PurchaseStatusProtocol.swift */; };
@@ -2911,6 +2916,8 @@
 		7E74FCAB239F9BF7006C0990 /* MainPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageController.swift; sourceTree = "<group>"; };
 		7E74FCAF239F9C96006C0990 /* MainPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageModel.swift; sourceTree = "<group>"; };
 		7E7702A126FF5113004A8616 /* TitleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleHeaderView.swift; sourceTree = "<group>"; };
+		7E774CB52720633100A970C1 /* DnsStatisticsMigrationHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsStatisticsMigrationHelperTests.swift; sourceTree = "<group>"; };
+		7E774CB7272074BF00A970C1 /* DnsStatisticsOldWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsStatisticsOldWrapper.swift; sourceTree = "<group>"; };
 		7E7D636626D6A91A0002EE6A /* popup.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = popup.js; sourceTree = "<group>"; };
 		7E7F990B241A98EF00FC89DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/RateApp.storyboard; sourceTree = "<group>"; };
 		7E7F9911241A990500FC89DC /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/RateApp.strings"; sourceTree = "<group>"; };
@@ -3668,11 +3675,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B26B927F2719B6A600F1D482 /* SQLite in Frameworks */,
-				A5E02635261E334700198396 /* AGDnsProxy in Frameworks */,
+				7E786B9727217E2900B46D90 /* SystemLibsResolv.framework in Frameworks */,
+				7E786B9927217E3500B46D90 /* DnsAdGuardSDK.framework in Frameworks */,
+				7E786B9627217E2500B46D90 /* AdGuardAGDnsProxyDependencies.framework in Frameworks */,
+				7E786B9A27217E3900B46D90 /* SafariAdGuardSDK.framework in Frameworks */,
 				65C54D8B1B94A89700CABF0F /* libsqlite3.tbd in Frameworks */,
 				65C54D8A1B94A89000CABF0F /* libz.tbd in Frameworks */,
-				B26B92812719B6DC00F1D482 /* Zip in Frameworks */,
+				7E786B9527217D7E00B46D90 /* AdGuardSdkDependencies.framework in Frameworks */,
+				7E786B9827217E3100B46D90 /* SharedAdGuardSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5966,6 +5976,8 @@
 			children = (
 				B26B92742719B46F00F1D482 /* DnsProtectionFiltersMigrationHelperTests.swift */,
 				B26B92752719B46F00F1D482 /* DnsProtectionUserRulesMigrationHelperTests.swift */,
+				7E774CB52720633100A970C1 /* DnsStatisticsMigrationHelperTests.swift */,
+				7E774CB7272074BF00A970C1 /* DnsStatisticsOldWrapper.swift */,
 			);
 			path = DnsProtectionMigration;
 			sourceTree = "<group>";
@@ -6495,9 +6507,6 @@
 			);
 			name = AdguardTests;
 			packageProductDependencies = (
-				A5E02634261E334700198396 /* AGDnsProxy */,
-				B26B927E2719B6A600F1D482 /* SQLite */,
-				B26B92802719B6DC00F1D482 /* Zip */,
 			);
 			productName = AdguardExtensionTests;
 			productReference = 65F3982A1B7B684700ABCD39 /* AdguardTests.xctest */;
@@ -8700,6 +8709,7 @@
 				249E118E2600D393003A5FBD /* SocialNetworkAuthParametersParser.swift in Sources */,
 				249E117C2600D390003A5FBD /* OpenTunnelModeControllerParser.swift in Sources */,
 				D02C080E21BEAD0F00796714 /* ConfigurationServiceMock.swift in Sources */,
+				7E774CB62720633100A970C1 /* DnsStatisticsMigrationHelperTests.swift in Sources */,
 				D0AEC26B24093364003E8FCC /* APCommonSharedResources.m in Sources */,
 				B26B92832719B72700F1D482 /* PurchaseServiceProtocol.swift in Sources */,
 				D0288F3E2306996E00A4EBEF /* DDOSLogger.m in Sources */,
@@ -8723,6 +8733,7 @@
 				7E3244D5255AD4F20058BCDF /* NetworkSettingsServiceMock.swift in Sources */,
 				D00E44542563F2AD002DDE98 /* ImportSettingsViewModel.swift in Sources */,
 				B26B92902719BA6100F1D482 /* SharedResources+applicationResources.swift in Sources */,
+				7E774CB8272074BF00A970C1 /* DnsStatisticsOldWrapper.swift in Sources */,
 				B26B92782719B46F00F1D482 /* SDKMigrationNewDbWrapper.swift in Sources */,
 				B26B92892719B78600F1D482 /* PurchaseAssistant.swift in Sources */,
 				65EC9BCD1BB9824C00F53F3B /* ADLocations.m in Sources */,
@@ -12834,25 +12845,10 @@
 			package = A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */;
 			productName = AGDnsProxy;
 		};
-		A5E02634261E334700198396 /* AGDnsProxy */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */;
-			productName = AGDnsProxy;
-		};
 		A5E02636261E336100198396 /* AGDnsProxy */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */;
 			productName = AGDnsProxy;
-		};
-		B26B927E2719B6A600F1D482 /* SQLite */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */;
-			productName = SQLite;
-		};
-		B26B92802719B6DC00F1D482 /* Zip */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */;
-			productName = Zip;
 		};
 		B29D5393270D1D9E0045CB16 /* AGDnsProxy */ = {
 			isa = XCSwiftPackageProductDependency;

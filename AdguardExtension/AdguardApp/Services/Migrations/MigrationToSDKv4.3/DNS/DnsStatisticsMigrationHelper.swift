@@ -71,7 +71,7 @@ final class DnsStatisticsMigrationHelper: DnsStatisticsMigrationHelperProtocol {
         let newDb = try Connection(newStatisticsDbUrl.path, readonly: false)
 
         try alterOldTable(db: oldDb, table: DnsStatisticsTable.table)
-        try createNewTable(db: newDb, table: DnsStatisticsTable.newTable)
+        try createNewChartTable(db: newDb, table: DnsStatisticsTable.newTable)
 
         let records = try readStatistics(db: oldDb)
         try writeStatistics(records, db: newDb)
@@ -85,7 +85,7 @@ final class DnsStatisticsMigrationHelper: DnsStatisticsMigrationHelperProtocol {
         let newDb = try Connection(newStatisticsDbUrl.path, readonly: false)
 
         try alterOldTable(db: oldDb, table: DnsActivityTable.table)
-        try createNewTable(db: newDb, table: DnsActivityTable.newTable)
+        try createNewActivityTable(db: newDb, table: DnsActivityTable.newTable)
 
         let records = try readActivity(db: oldDb)
         try writeActivity(records, db: newDb)
@@ -106,7 +106,7 @@ final class DnsStatisticsMigrationHelper: DnsStatisticsMigrationHelperProtocol {
         try db.run(table.addColumn(Expression<Int>("blocked"), check: nil, defaultValue: 0))
     }
 
-    private func createNewTable(db: Connection, table:Table) throws {
+    private func createNewChartTable(db: Connection, table: Table) throws {
         let query = table.create(temporary: false, ifNotExists: true) { builder in
             builder.column(DnsStatisticsTable.timeStamp)
             builder.column(DnsStatisticsTable.requests)
@@ -117,10 +117,20 @@ final class DnsStatisticsMigrationHelper: DnsStatisticsMigrationHelperProtocol {
         try db.run(query)
     }
 
+    private func createNewActivityTable(db: Connection, table: Table) throws {
+        let query = table.create(temporary: false, ifNotExists: true) { builder in
+            builder.column(DnsActivityTable.timeStamp)
+            builder.column(DnsActivityTable.domain)
+            builder.column(DnsActivityTable.requests)
+            builder.column(DnsActivityTable.encrypted)
+            builder.column(DnsActivityTable.blocked)
+            builder.column(DnsActivityTable.elapsedSumm)
+        }
+        try db.run(query)
+    }
+
     private func readStatistics(db: Connection) throws -> [ChartStatisticsRecord] {
-
         let oldDateFormatter = dateFormatter
-
         dateFormatter = iso8601Formatter()
 
         let query = DnsStatisticsTable.table
@@ -175,7 +185,7 @@ final class DnsStatisticsMigrationHelper: DnsStatisticsMigrationHelperProtocol {
         try db.run(addQuery)
     }
 
-    private func iso8601Formatter()->DateFormatter {
+    private func iso8601Formatter() -> DateFormatter {
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .iso8601)
         formatter.locale = Locale(identifier: "en_US_POSIX")
