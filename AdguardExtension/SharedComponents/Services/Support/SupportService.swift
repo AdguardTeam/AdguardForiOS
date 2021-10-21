@@ -23,8 +23,10 @@ import DnsAdGuardSDK
 protocol SupportServiceProtocol {
     /// Preparing logs archive to sharing. Return archive file URL in temporary directory
     func exportLogs() throws -> URL?
+
     /// Delete log archive and other log files from temporary directory. Call it after sharing archive of logs
     func deleteLogsFiles()
+
     /// Sending feedback data to our backend
     func sendFeedback(_ email: String, description: String, reportType: ReportType, sendLogs: Bool, _ completion: @escaping (_ logsSentSuccessfully: Bool) -> Void)
 }
@@ -33,8 +35,8 @@ protocol SupportServiceProtocol {
 final class SupportService: SupportServiceProtocol {
     fileprivate typealias DnsServerInfo = (serverName: String, serverId: Int, upstreams: String)
 
+    // MARK: - Services
 
-    // Services
     private let resources: AESharedResourcesProtocol
     private let configuration: ConfigurationServiceProtocol
     private let complexProtection: ComplexProtectionServiceProtocol
@@ -45,7 +47,8 @@ final class SupportService: SupportServiceProtocol {
     private let dnsProvidersManager: DnsProvidersManagerProtocol
     private let dnsProtection: DnsProtectionProtocol
 
-    // Helper variable
+    // MARK: - Helper variable
+
     private let reportUrl = "https://reports.adguard.com/new_issue.html"
 
     private var appLogsUrls: [URL] {
@@ -59,6 +62,8 @@ final class SupportService: SupportServiceProtocol {
     private var logsDirectory: URL?
     private var logsZipDirectory: URL?
 
+    //MARK: - Init
+
     init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol, complexProtection: ComplexProtectionServiceProtocol, productInfo: ADProductInfoProtocol, keyChainService: KeychainServiceProtocol, safariProtection: SafariProtectionProtocol, networkSettings: NetworkSettingsServiceProtocol, dnsProvidersManager: DnsProvidersManagerProtocol, dnsProtection: DnsProtectionProtocol) {
         self.resources = resources
         self.configuration = configuration
@@ -71,17 +76,19 @@ final class SupportService: SupportServiceProtocol {
         self.dnsProtection = dnsProtection
     }
 
+    // MARK: - Public methods
+
     func exportLogs() throws -> URL? {
         let archiveName = "AdGuard_logs.zip"
+        let fileManager = FileManager.default
 
         let tmp = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
         let baseUrl = tmp.appendingPathComponent("logs", isDirectory: true)
         let cbUrl = baseUrl.appendingPathComponent("CB jsons", isDirectory: true)
         let targetsUrl = baseUrl.appendingPathComponent("Targets", isDirectory: true)
         let logsZipUrl = tmp.appendingPathComponent(archiveName)
-        self.logsDirectory = baseUrl
-        self.logsZipDirectory = logsZipUrl
-        let fileManager = FileManager.default
+        self.logsDirectory = fileManager.fileExists(atPath: baseUrl.path) ? baseUrl : nil
+        self.logsZipDirectory = fileManager.fileExists(atPath: logsZipUrl.path) ? logsZipUrl : nil
 
         ///Remove old logs if it exists
         deleteLogsFiles()
@@ -115,7 +122,7 @@ final class SupportService: SupportServiceProtocol {
             return logsZipUrl
         }
         catch {
-            DDLogError("Failed to export logs: \(error)")
+            DDLogError("(SupportService) - exportLogs; Failed to export logs: \(error)")
         }
         return nil
     }
@@ -124,7 +131,7 @@ final class SupportService: SupportServiceProtocol {
         let fm = FileManager.default
 
         guard let logsDirectory = self.logsDirectory, let logsZipDirectory = self.logsZipDirectory else {
-            DDLogError("File is missing")
+            DDLogWarn("(SupportService) - deleteLogsFiles; File is missing")
             return
         }
 
@@ -136,7 +143,7 @@ final class SupportService: SupportServiceProtocol {
             self.logsZipDirectory = nil
         }
         catch {
-            DDLogError("Error removing logs files: \(error)")
+            DDLogError("(SupportService) - deleteLogsFiles; Error removing logs files: \(error)")
         }
     }
 
