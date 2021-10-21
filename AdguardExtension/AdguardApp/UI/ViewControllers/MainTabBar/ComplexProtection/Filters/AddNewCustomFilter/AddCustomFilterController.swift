@@ -98,15 +98,10 @@ final class AddCustomFilterController: BottomAlertController {
             return
         }
 
-        let parser = CustomFilterMetaParser()
-        do {
-            let meta = try parser.getMetaFrom(url: url, for: .safari)
-            presentNewCustomFilterDetailsController(meta)
-        } catch {
-            presentSimpleAlert(title: nil, message: error.localizedDescription, onOkButtonTapped: nil)
+        parse(url: url) { [weak self] in
+            self?.nextButton.isEnabled = true
+            self?.nextButton.stopIndicator()
         }
-        nextButton.isEnabled = true
-        nextButton.stopIndicator()
     }
 
     @IBAction func cancelAction(_ sender: Any) {
@@ -130,6 +125,26 @@ final class AddCustomFilterController: BottomAlertController {
             )
             controller.newFilterModel = model
             presenter?.present(controller, animated: true, completion: nil)
+        }
+    }
+
+    private func parse(url: URL, completion: @escaping () -> Void) {
+        DispatchQueue(label: "AdGuardApp.AddNewCustomFilterQueue").async { [weak self] in
+            let parser = CustomFilterMetaParser()
+            do {
+                let meta = try parser.getMetaFrom(url: url, for: .safari)
+                DDLogInfo("(AddCustomFilterController) - parse URL; Successfully get meta from url: \(url)")
+                DispatchQueue.main.async {
+                    completion()
+                    self?.presentNewCustomFilterDetailsController(meta)
+                }
+            } catch {
+                DDLogError("(AddCustomFilterController) - parse URL; Failed to get meta from url: \(url) ,\nError: \(error)")
+                DispatchQueue.main.async {
+                    completion()
+                    self?.presentSimpleAlert(title: nil, message: error.localizedDescription, onOkButtonTapped: nil)
+                }
+            }
         }
     }
 }
