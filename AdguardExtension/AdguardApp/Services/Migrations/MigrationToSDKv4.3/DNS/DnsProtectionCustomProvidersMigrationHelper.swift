@@ -76,7 +76,6 @@ final class DnsProtectionCustomProvidersMigrationHelper: DnsProtectionCustomProv
     func selectActiveDnsServer() throws {
         DDLogInfo("(DnsProtectionCustomProvidersMigrationHelper) - selectActiveDnsServer; Selecting active server")
 
-
         guard let activeServerInfo = getActiveDnsServerInfo() else {
             DDLogInfo("(DnsProtectionCustomProvidersMigrationHelper) - selectActiveDnsServer; Server wasn't selected")
             return
@@ -132,6 +131,7 @@ class SDKDnsMigrationObsoleteCustomDnsProvider: NSObject, NSCoding {
     let providerId: Int
     let server: SDKDnsMigrationObsoleteCustomDnsServer
 
+    // Encoder used only for tests
     func encode(with coder: NSCoder) {
         coder.encode(name, forKey: "name")
         coder.encode(providerId, forKey: "providerId")
@@ -149,6 +149,13 @@ class SDKDnsMigrationObsoleteCustomDnsProvider: NSObject, NSCoding {
         self.providerId = coder.decodeInteger(forKey: "providerId")
         self.server = server
     }
+
+    // Init for tests
+    init(name: String, providerId: Int, server: SDKDnsMigrationObsoleteCustomDnsServer) {
+        self.name = name
+        self.providerId = providerId
+        self.server = server
+    }
 }
 
 class SDKDnsMigrationObsoleteCustomDnsServer: NSObject, NSCoding {
@@ -157,9 +164,12 @@ class SDKDnsMigrationObsoleteCustomDnsServer: NSObject, NSCoding {
     let name: String
     let upstream: String
 
+    // Encoder used only for tests
     func encode(with coder: NSCoder) {
-        coder.encode(serverId, forKey: "server_id")
-        coder.encode(providerId, forKey: "providerId")
+        let stringServerId = String(serverId)
+        let number = NSNumber(value: providerId)
+        coder.encode(stringServerId, forKey: "server_id")
+        coder.encode(number, forKey: "providerId")
         coder.encode(name, forKey: "name")
         coder.encode([upstream], forKey: "upstreams")
     }
@@ -175,6 +185,14 @@ class SDKDnsMigrationObsoleteCustomDnsServer: NSObject, NSCoding {
             return nil
         }
 
+        self.serverId = serverId
+        self.providerId = providerId
+        self.name = name
+        self.upstream = upstream
+    }
+
+    // Init for tests
+    init(serverId: Int, providerId: Int, name: String, upstream: String) {
         self.serverId = serverId
         self.providerId = providerId
         self.name = name

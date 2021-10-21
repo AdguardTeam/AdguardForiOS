@@ -73,7 +73,7 @@ public struct DnsProvider: DnsProviderProtocol {
     public let homepage: String
     public var isEnabled: Bool
 
-    init(name: String, providerDescription: String, servers: [DnsServer], providerId: Int, logo: UIImage?, logoDark: UIImage?, homepage: String, isEnabled: Bool) {
+   public init(name: String, providerDescription: String, servers: [DnsServer], providerId: Int, logo: UIImage?, logoDark: UIImage?, homepage: String, isEnabled: Bool) {
         self.name = name
         self.providerDescription = providerDescription
         self.servers = servers
@@ -111,7 +111,7 @@ public struct DnsServer: DnsServerProtocol {
     public let name: String
     public var isEnabled: Bool
 
-    init(features: [DnsFeature], upstreams: [DnsUpstream], providerId: Int, type: DnsProtocol, id: Int, name: String, isEnabled: Bool) {
+    public init(features: [DnsFeature], upstreams: [DnsUpstream], providerId: Int, type: DnsProtocol, id: Int, name: String, isEnabled: Bool) {
         self.features = features
         self.upstreams = upstreams
         self.providerId = providerId
