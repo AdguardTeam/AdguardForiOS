@@ -279,13 +279,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     // MARK: - Nav Bar Actions
 
     @objc private func updateFilters(_ sender: Any) {
-        self.dnsUpdateEnded = false
-
-        dnsProtection.updateAllFilters { [weak self] _ in
-            self?.dnsUpdateEnded = true
-            self?.safariUpdateEnded = false
-            self?.mainPageModel.updateFilters()
-        }
+        mainPageModel.updateFilters()
     }
 
     // MARK: - Protection Status Actions
@@ -447,20 +441,14 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     func updateStarted() {
         protectionStatusLabel.text = String.localizedString("update_filter_start_message")
         safariUpdateEnded = false
+        dnsUpdateEnded = false
         updateStartedInternal()
     }
 
-    func updateFinished(message: String?) {
-        if message != nil {
-            protectionStatusLabel.text = message
-        }
+    func updateFinished(message: String) {
+        protectionStatusLabel.text = message
         safariUpdateEnded = true
-        endUpdate()
-    }
-
-    func updateFailed(error: String) {
-        protectionStatusLabel.text = error
-        safariUpdateEnded = true
+        dnsUpdateEnded = true
         endUpdate()
     }
 

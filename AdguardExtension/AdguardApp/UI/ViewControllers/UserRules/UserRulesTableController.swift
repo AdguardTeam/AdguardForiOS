@@ -59,6 +59,7 @@ final class UserRulesTableController: UIViewController {
     private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     private let dnsProtection: DnsProtectionProtocol = ServiceLocator.shared.getService()!
     private let sharedResources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
+    private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     private let fileShareHelper = FileShareHelper()
     private var model: UserRulesTableModelProtocol!
 
@@ -151,9 +152,9 @@ final class UserRulesTableController: UIViewController {
         case .invertedAllowlist:
             model = SafariUserRulesTableModel(type: .invertedAllowlist, safariProtection: safariProtection, resources: sharedResources, fileShareHelper: fileShareHelper)
         case .dnsBlocklist:
-            model = DnsUserRulesTableModel(type: .blocklist, dnsProtection: dnsProtection, resources: sharedResources, fileShareHelper: fileShareHelper)
+            model = DnsUserRulesTableModel(type: .blocklist, dnsProtection: dnsProtection, resources: sharedResources, fileShareHelper: fileShareHelper, vpnManager: vpnManager)
         case .dnsAllowlist:
-            model = DnsUserRulesTableModel(type: .allowlist, dnsProtection: dnsProtection, resources: sharedResources, fileShareHelper: fileShareHelper)
+            model = DnsUserRulesTableModel(type: .allowlist, dnsProtection: dnsProtection, resources: sharedResources, fileShareHelper: fileShareHelper, vpnManager: vpnManager)
         }
         model.delegate = self
 
