@@ -117,6 +117,7 @@ extension DnsFiltersTableModel: FilterDetailsViewControllerDelegate {
     func setFilter(with groupId: Int?, filterId: Int, enabled: Bool) throws -> FilterDetailsProtocol {
         try dnsProtection.setFilter(withId: filterId, to: enabled)
         updateModels()
+        delegate?.modelsChanged()
         vpnManager.updateSettings(completion: nil)
 
         if let filter = dnsProtection.filters.first(where: { $0.filterId == filterId }) {

@@ -180,11 +180,13 @@ final class DnsFiltersTableController: UITableViewController {
 extension DnsFiltersTableController: DnsFiltersTableModelDelegate {
     func modelsChanged() {
         tableView.reloadData()
+        setTitleHeaderView()
     }
 
     func filterAdded() {
         let indexPath = IndexPath(row: model.cellModels.count, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
+        setTitleHeaderView()
     }
 }
 
