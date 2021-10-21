@@ -120,13 +120,15 @@ final class DnsFiltersTableController: UITableViewController {
         filterTapped()
     }
 
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+
     // MARK: - Private methods
 
     private func setupTableView() {
         AddTableViewCell.registerCell(forTableView: tableView)
         DnsFilterCell.registerCell(forTableView: tableView)
-        tableView.sectionHeaderHeight = 0.01
-        tableView.sectionFooterHeight = 0.01
         tableView.estimatedRowHeight = 80.0
         tableView.rowHeight = UITableView.automaticDimension
         setTitleHeaderView()

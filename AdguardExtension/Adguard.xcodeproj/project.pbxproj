@@ -2369,7 +2369,6 @@
 		24CE2B83271DA4E700E169E7 /* NetworkSettingsMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsMigration.swift; sourceTree = "<group>"; };
 		24D11F2C26F5CCA500EC269F /* DnsProvidersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersModel.swift; sourceTree = "<group>"; };
 		24D6A9E025FB698A00674D11 /* StatusBarWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarWindow.swift; sourceTree = "<group>"; };
-		24D6A9F425FB7A6300674D11 /* SettingsResetor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsResetor.swift; sourceTree = "<group>"; };
 		24D7367826EA1895003EE3EC /* ServiceInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceInitializer.swift; sourceTree = "<group>"; };
 		24D9225A2604B28B002F368B /* AppDelegate+UserNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+UserNotifications.swift"; sourceTree = "<group>"; };
 		24D9227F2604B41C002F368B /* AppDelegate+CheckPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+CheckPeriod.swift"; sourceTree = "<group>"; };
@@ -5837,7 +5836,6 @@
 			children = (
 				24557DF625EFD4AE00BC5B26 /* AppDelegate.swift */,
 				24D6A9E025FB698A00674D11 /* StatusBarWindow.swift */,
-				24D6A9F425FB7A6300674D11 /* SettingsResetor.swift */,
 				24D923212604C6D6002F368B /* Extensions */,
 				24D6A9CB25FB60A200674D11 /* URLScheme */,
 			);

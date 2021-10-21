@@ -77,7 +77,7 @@ final class DnsFilterCell: UITableViewCell, Reusable {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fill
         stackView.spacing = 2.0
         return stackView
     }()
@@ -116,6 +116,7 @@ final class DnsFilterCell: UITableViewCell, Reusable {
             stateSwitch.topAnchor.constraint(equalTo: contentView.topAnchor, constant: topBottomInset),
             stateSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -sideInset),
             stateSwitch.widthAnchor.constraint(equalToConstant: switchWidth),
+            stateSwitch.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -topBottomInset),
 
             stackView.topAnchor.constraint(equalTo: stateSwitch.topAnchor),
             stackView.trailingAnchor.constraint(equalTo: stateSwitch.leadingAnchor, constant: -sideInset),
@@ -155,7 +156,6 @@ final class DnsFilterCell: UITableViewCell, Reusable {
         label.lightGreyText = true
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
-        label.heightAnchor.constraint(equalToConstant: 16.0).isActive = true
         label.textAlignment = .left
         label.text = text
         return label
