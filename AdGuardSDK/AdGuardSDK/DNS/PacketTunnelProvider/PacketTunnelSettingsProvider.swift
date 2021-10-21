@@ -146,7 +146,7 @@ extension NEIPv4Route {
         var maskLong: in_addr_t = 0xffffffff >> (32 - maskLength!)
         maskLong = maskLong << (32 - maskLength!)
         maskLong = maskLong.byteSwapped
-        let buf = addr2ascii(AF_INET, &maskLong, 32, nil)!
+        let buf = addr2ascii(AF_INET, &maskLong, Int32(MemoryLayout.size(ofValue: maskLong)), nil)!
         let maskStr = String(cString: buf)
         return NEIPv4Route(destinationAddress: dest, subnetMask: maskStr)
     }
