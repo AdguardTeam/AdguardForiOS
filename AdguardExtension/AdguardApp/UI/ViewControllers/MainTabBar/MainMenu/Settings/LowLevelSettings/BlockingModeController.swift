@@ -69,11 +69,7 @@ class BlockingModeController: UITableViewController {
 
         updateTheme()
 
-        var text = ""
-        if let customBlockingIp = resources.customBlockingIp?.joined(separator: ", ") {
-            text = customBlockingIp
-        }
-        updateDescriptionLabel(type: .customAddress, text: text)
+        updateDescriptionLabel(type: .customAddress, text: resources.customBlockingIps)
 
         defaultHeaderLabel.text = DnsProxyBlockingMode.defaultMode.name
         refusedHeaderLabel.text = DnsProxyBlockingMode.refused.name
@@ -156,7 +152,7 @@ extension BlockingModeController: UpstreamsControllerDelegate {
             if selectedCell == customAddressMode {
                 updateBlockingMode(index: defaultMode)
             }
-        } else if !text.isEmpty && selectedCell == customAddressMode && resources.blockingMode != .customAddress {
+        } else if selectedCell == customAddressMode && resources.blockingMode != .customAddress {
             setupMode(mode: .customAddress)
         }
         customIPDescriptionLabel.text = string

@@ -37,6 +37,7 @@ final class SDKMigrationServiceHelper: SDKMigrationServiceHelperProtocol {
     private let dnsRulesMigration: DnsProtectionUserRulesMigrationHelperProtocol
     private let dnsProvidersMigration: DnsProtectionCustomProvidersMigrationHelperProtocol
     private let dnsProvidersManager: DnsProvidersManagerProtocol
+    private let lowLevelSettingsMigration: LowlevelSettingsMigrationHelperProtocol
     private let dnsStatisticsMigration: DnsStatisticsMigrationHelperProtocol
 
     init(
@@ -48,6 +49,7 @@ final class SDKMigrationServiceHelper: SDKMigrationServiceHelperProtocol {
         dnsRulesMigration: DnsProtectionUserRulesMigrationHelperProtocol,
         dnsProvidersMigration: DnsProtectionCustomProvidersMigrationHelperProtocol,
         dnsProvidersManager: DnsProvidersManagerProtocol,
+        lowLevelSettingsMigration: LowlevelSettingsMigrationHelperProtocol,
         dnsStatisticsMigration: DnsStatisticsMigrationHelperProtocol
     ) {
         self.safariProtection = safariProtection
@@ -58,6 +60,7 @@ final class SDKMigrationServiceHelper: SDKMigrationServiceHelperProtocol {
         self.dnsRulesMigration = dnsRulesMigration
         self.dnsProvidersMigration = dnsProvidersMigration
         self.dnsProvidersManager = dnsProvidersManager
+        self.lowLevelSettingsMigration = lowLevelSettingsMigration
         self.dnsStatisticsMigration = dnsStatisticsMigration
     }
 
@@ -117,6 +120,8 @@ final class SDKMigrationServiceHelper: SDKMigrationServiceHelperProtocol {
 
         try dnsProvidersMigration.selectActiveDnsServer()
         dnsProvidersMigration.removeOldCustomDnsProvidersData()
+
+        lowLevelSettingsMigration.migrateCustomBlockingIps()
     }
 
     private func migrate(userRules: [SDKSafariMigrationRule], for type: SafariUserRuleType) throws {

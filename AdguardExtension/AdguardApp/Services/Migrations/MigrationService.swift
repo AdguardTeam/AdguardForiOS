@@ -253,6 +253,7 @@ final class MigrationService: MigrationServiceProtocol {
                 )
                 let dnsProvidersMigration = DnsProtectionCustomProvidersMigrationHelper(resources: resources, dnsProvidersManager: dnsProvidersManager)
 
+                let lowLevelSettingsMigration: LowlevelSettingsMigrationHelperProtocol = LowlevelSettingsMigrationHelper(resources: resources)
                 let dnsStatisticsMigration = DnsStatisticsMigrationHelper(oldContainerFolderUrl: resources.sharedResuorcesURL(), newContainerDbUrl: SharedStorageUrls().statisticsFolderUrl)
                 let sdkMigrationHelper = SDKMigrationServiceHelper(
                     safariProtection: safariProtection as! SafariProtectionMigrationsProtocol,
@@ -263,6 +264,7 @@ final class MigrationService: MigrationServiceProtocol {
                     dnsRulesMigration: dnsRulesMigration,
                     dnsProvidersMigration: dnsProvidersMigration,
                     dnsProvidersManager: dnsProvidersManager,
+                    lowLevelSettingsMigration: lowLevelSettingsMigration,
                     dnsStatisticsMigration: dnsStatisticsMigration
                 )
 

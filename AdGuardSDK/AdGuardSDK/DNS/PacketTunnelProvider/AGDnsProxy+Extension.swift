@@ -54,6 +54,16 @@ extension AGDnsUpstream {
             outboundInterfaceName: nil
         )
     }
+
+    var extendedDescription: String {
+        return  """
+                address: \(address ?? "nil")
+                bootstrap: \(bootstrap ?? [])
+                timeoutMs: \(timeoutMs)
+                id: \(id)
+                outboundInterfaceName: \(outboundInterfaceName ?? "nil")
+                """
+    }
 }
 
 // MARK: - AGDnsFilterParams + DnsProxyFilter init
@@ -92,6 +102,14 @@ extension AGDns64Settings {
             waitTimeMs: AGDnsUpstream.defaultTimeoutMs
         )
     }
+
+    var extendedDescription: String {
+        return  """
+                upstreams: \(upstreams ?? [])
+                maxTries: \(maxTries)
+                waitTimeMs: \(waitTimeMs)
+                """
+    }
 }
 
 // MARK: - AGDnsUpstream + defaultTimeoutMs
@@ -108,7 +126,7 @@ extension AGDnsProxyConfig {
     /// We use `DnsProxyConfiguration` to be able to test how we configure `AGDnsProxyConfig`
     convenience init(from configuration: DnsProxyConfiguration) {
         let defaultConfig = AGDnsProxyConfig.getDefault()!
-        
+
         self.init(
             upstreams: configuration.upstreams.map { AGDnsUpstream(from: $0) },
             fallbacks: configuration.fallbacks.map { AGDnsUpstream(from: $0) },
@@ -117,19 +135,42 @@ extension AGDnsProxyConfig {
             filters: configuration.filters.map { AGDnsFilterParams(from: $0)},
             blockedResponseTtlSecs: configuration.blockedResponseTtlSecs,
             dns64Settings: AGDns64Settings(from: configuration.dns64Upstreams),
-            listeners: nil,
+            listeners: defaultConfig.listeners,
             outboundProxy: defaultConfig.outboundProxy,
             ipv6Available: configuration.ipv6Available,
             blockIpv6: configuration.blockIpv6,
             adblockRulesBlockingMode: configuration.rulesBlockingMode.agRulesBlockingMode,
             hostsRulesBlockingMode: configuration.hostsBlockingMode.agHostsRulesBlockingMode,
-            customBlockingIpv4: configuration.customBlockingIpv4,
-            customBlockingIpv6: configuration.customBlockingIpv6,
-            dnsCacheSize: 128,
-            optimisticCache: false,
-            enableDNSSECOK: false,
-            enableRetransmissionHandling: true,
-            helperPath: nil
+            customBlockingIpv4: configuration.customBlockingIpv4 ?? defaultConfig.customBlockingIpv4,
+            customBlockingIpv6: configuration.customBlockingIpv6 ?? defaultConfig.customBlockingIpv6,
+            dnsCacheSize: defaultConfig.dnsCacheSize,
+            optimisticCache: defaultConfig.optimisticCache,
+            enableDNSSECOK: defaultConfig.enableDNSSECOK,
+            enableRetransmissionHandling: defaultConfig.enableRetransmissionHandling,
+            helperPath: defaultConfig.helperPath
         )
+    }
+
+    var extendedDescription: String {
+        return """
+               upsteams:\((upstreams ?? []).map { $0.extendedDescription })
+               fallbacks: \((fallbacks ?? []).map { $0.extendedDescription })
+               fallbackDomains: \(fallbackDomains ?? [])
+               detectSearchDomains: \(detectSearchDomains)
+               filters: \(filters ?? [])
+               blockedResponseTtlSecs: \(blockedResponseTtlSecs)
+               dns64Settings: \(dns64Settings.extendedDescription)
+               ipv6Available: \(ipv6Available)
+               blockIpv6: \(blockIpv6)
+               adblockRulesBlockingMode: \(adblockRulesBlockingMode)
+               hostsRulesBlockingMode: \(hostsRulesBlockingMode)
+               customBlockingIpv4: \(customBlockingIpv4 ?? "nil")
+               customBlockingIpv6: \(customBlockingIpv6 ?? "nil")
+               dnsCacheSize: \(dnsCacheSize)
+               optimisticCache: \(optimisticCache)
+               enableDNSSECOK: \(enableDNSSECOK)
+               enableRetransmissionHandling: \(enableRetransmissionHandling)
+               helperPath: \(helperPath ?? "nil")
+               """
     }
 }
