@@ -286,7 +286,13 @@ extension OneSafariGroupFiltersModel {
             return UIView()
         case .filters:
             let headerView = StateHeaderView<SafariGroup.GroupType>(frame: .zero)
-            headerView.config = IdentifiableViewConfig(model: groupModel, delegate: self)
+            let model = StateHeaderViewModel(
+                iconImage: groupModel.iconImage,
+                title: groupModel.isEnabled.localizedStateDescription,
+                isEnabled: groupModel.isEnabled,
+                id: group.groupType
+            )
+            headerView.config = IdentifiableViewConfig(model: model, delegate: self)
             return headerView
         }
     }
