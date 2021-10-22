@@ -37,6 +37,10 @@ final class OneSafariGroupFiltersModel: NSObject, SafariGroupFiltersModelProtoco
 
     // MARK: - Public properties
 
+    var title: String { groupModel.title }
+
+    var summary: String { "Here will be a group description when content team provides us with it" }
+
     var searchString: String? {
         didSet {
             processSearchString()
@@ -89,7 +93,6 @@ final class OneSafariGroupFiltersModel: NSObject, SafariGroupFiltersModelProtoco
     // MARK: - Public methods
 
     func setup(tableView: UITableView) {
-        TitleTableViewCell.registerNibCell(forTableView: tableView)
         AddTableViewCell.registerCell(forTableView: tableView)
         SafariFilterCell.registerCell(forTableView: tableView)
         tableView.sectionHeaderHeight = UITableView.automaticDimension
@@ -210,10 +213,6 @@ extension OneSafariGroupFiltersModel {
 
 extension OneSafariGroupFiltersModel {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == Section.title.rawValue {
-            return
-        }
-
         if addButtonIsDisplayed && indexPath.row == 0 {
             delegate?.addNewFilterTapped()
         } else {
@@ -235,72 +234,41 @@ extension OneSafariGroupFiltersModel {
 extension OneSafariGroupFiltersModel {
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return Section.allCases.count
+        return 1
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let sct = Section(rawValue: section) else {
-            assertionFailure("Section received invalid rawValuew=\(section)")
-            return 0
-        }
-        switch sct {
-        case .title: return 1
-        case .filters: return isCustom && !isSearching ? filtersModels.count + 1 : filtersModels.count
-        }
+        return isCustom && !isSearching ? filtersModels.count + 1 : filtersModels.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let sct = Section(rawValue: indexPath.section) else {
-            assertionFailure("Section received invalid rawValuew=\(indexPath.section)")
-            return UITableViewCell()
-        }
-        switch sct {
-        case .title:
-            let cell = TitleTableViewCell.getCell(forTableView: tableView)
-            cell.title = groupModel.title
+        if isCustom && indexPath.row == 0 && !isSearching {
+            let cell = AddTableViewCell.getCell(forTableView: tableView)
+            cell.addTitle = String.localizedString("add_new_filter")
             cell.updateTheme(themeService)
             return cell
-        case .filters:
-            if isCustom && indexPath.row == 0 && !isSearching {
-                let cell = AddTableViewCell.getCell(forTableView: tableView)
-                cell.addTitle = String.localizedString("add_new_filter")
-                cell.updateTheme(themeService)
-                return cell
-            }
-            let index = addButtonIsDisplayed ? indexPath.row - 1 : indexPath.row
-            let cell = SafariFilterCell.getCell(forTableView: tableView)
-            cell.model = filtersModels[index]
-            cell.updateTheme()
-            cell.delegate = self
-            return cell
         }
+        let index = addButtonIsDisplayed ? indexPath.row - 1 : indexPath.row
+        let cell = SafariFilterCell.getCell(forTableView: tableView)
+        cell.model = filtersModels[index]
+        cell.updateTheme()
+        cell.delegate = self
+        return cell
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let sct = Section(rawValue: section) else {
-            assertionFailure("Section received invalid rawValuew=\(section)")
-            return nil
-        }
-        switch sct {
-        case .title:
-            return UIView()
-        case .filters:
-            let headerView = StateHeaderView<SafariGroup.GroupType>(frame: .zero)
-            headerView.config = IdentifiableViewConfig(model: groupModel, delegate: self)
-            return headerView
-        }
+        let headerView = StateHeaderView<SafariGroup.GroupType>(frame: .zero)
+        let model = StateHeaderViewModel(
+            iconImage: groupModel.iconImage,
+            title: groupModel.isEnabled.localizedStateDescription,
+            isEnabled: groupModel.isEnabled,
+            id: group.groupType
+        )
+        headerView.config = IdentifiableViewConfig(model: model, delegate: self)
+        return headerView
     }
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
-    }
-}
-
-// MARK: - OneSafariGroupFiltersModel + Section
-
-fileprivate extension OneSafariGroupFiltersModel {
-    enum Section: Int, CaseIterable {
-        case title = 0
-        case filters
     }
 }

@@ -39,7 +39,8 @@ final class SafariGroupFiltersTableController: UITableViewController {
 
     private let filterDetailsSegueId = "FilterDetailsSegueId"
     private var selectedFilter: SafariGroup.Filter!
-    private var headerView: AGSearchView?
+    private var headerSearchView: AGSearchView?
+    private var headerTitleView: ExtendedTitleTableHeaderView?
 
     /* Services */
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -60,6 +61,7 @@ final class SafariGroupFiltersTableController: UITableViewController {
         case .one(let groupType):
             model = OneSafariGroupFiltersModel(groupType: groupType, safariProtection: safariProtection, configuration: configuration, themeService: themeService)
             navigationItem.rightBarButtonItems = [searchButton]
+            addHeaderTitleView()
 
             proStatusObserver = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
                 if self?.configuration.proStatus == false && groupType.proOnly {
@@ -70,8 +72,8 @@ final class SafariGroupFiltersTableController: UITableViewController {
             model = AllSafariGroupsFiltersModel(safariProtection: safariProtection, configuration: configuration)
             title = String.localizedString("navigation_item_filters_title")
             navigationItem.rightBarButtonItems = [cancelButton]
-            addTableHeaderView()
-            headerView?.textField.becomeFirstResponder()
+            addHeaderSearchView()
+            headerSearchView?.textField.becomeFirstResponder()
         case .none:
             break
         }
@@ -104,27 +106,40 @@ final class SafariGroupFiltersTableController: UITableViewController {
 
     @IBAction func searchButtonTapped(_ sender: UIBarButtonItem) {
         navigationItem.rightBarButtonItems = [cancelButton]
-        addTableHeaderView()
-        headerView?.textField.becomeFirstResponder()
+        addHeaderSearchView()
+        headerSearchView?.textField.becomeFirstResponder()
     }
 
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
         navigationItem.rightBarButtonItems = [searchButton]
-        removeTableHeaderView()
+        switch displayType {
+        case .one(_): addHeaderTitleView()
+        case .all: removeTableHeaderView()
+        case .none: break
+        }
         model.searchString = nil
     }
 
     // MARK: - Private methods
 
-    private func addTableHeaderView() {
-        headerView = AGSearchView()
-        headerView?.delegate = self
-        tableView.tableHeaderView = headerView
+    private func addHeaderSearchView() {
+        headerTitleView = nil
+        headerSearchView = AGSearchView()
+        headerSearchView?.delegate = self
+        tableView.tableHeaderView = headerSearchView
+    }
 
+    private func addHeaderTitleView() {
+        guard let oneGroupModel = model as? OneSafariGroupFiltersModel else {
+            return
+        }
+        headerSearchView = nil
+        headerTitleView = ExtendedTitleTableHeaderView(title: oneGroupModel.title, normalDescription: oneGroupModel.summary)
+        tableView.tableHeaderView = headerTitleView
     }
 
     private func removeTableHeaderView() {
-        headerView = nil
+        headerSearchView = nil
         tableView.tableHeaderView = nil
     }
 }
@@ -139,21 +154,20 @@ extension SafariGroupFiltersTableController: SafariGroupFiltersModelDelegate {
     }
 
     func tagTapped(_ tagName: String) {
-        if headerView == nil {
-            addTableHeaderView()
+        if headerSearchView == nil {
+            addHeaderSearchView()
         }
 
-        let searchText = headerView?.textField.text ?? ""
+        let searchText = headerSearchView?.textField.text ?? ""
 
         if !searchText.isEmpty {
-            headerView?.textField.text = searchText + " " + tagName
+            headerSearchView?.textField.text = searchText + " " + tagName
         } else {
-            headerView?.textField.text = tagName
+            headerSearchView?.textField.text = tagName
         }
-        model.searchString = headerView?.textField.text
+        model.searchString = headerSearchView?.textField.text
 
-        headerView?.textField.rightView?.isHidden = false
-        headerView?.textField.becomeFirstResponder()
+        headerSearchView?.textField.rightView?.isHidden = false
         navigationItem.rightBarButtonItems = [cancelButton]
     }
 
