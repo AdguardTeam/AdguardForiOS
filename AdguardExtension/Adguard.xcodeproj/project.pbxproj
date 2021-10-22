@@ -712,6 +712,8 @@
 		7EA2B3262424FE8F00FD3304 /* ActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EA2B3242424FE8F00FD3304 /* ActivityTableViewCell.xib */; };
 		7EA3DBC524090D7B000D8D42 /* Animation+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA3DBC424090D7B000D8D42 /* Animation+Utils.swift */; };
 		7EA3DBC72409367B000D8D42 /* IntroductionOnboardingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA3DBC62409367B000D8D42 /* IntroductionOnboardingController.swift */; };
+		7EA40F8A2722C81A00FAEE0B /* ChineseUserExposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA40F892722C81A00FAEE0B /* ChineseUserExposer.swift */; };
+		7EA40F8B2722C81A00FAEE0B /* ChineseUserExposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA40F892722C81A00FAEE0B /* ChineseUserExposer.swift */; };
 		7EA45505254AB249002B69C6 /* ActivityNativeDnsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA45504254AB249002B69C6 /* ActivityNativeDnsController.swift */; };
 		7EA45506254AB249002B69C6 /* ActivityNativeDnsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA45504254AB249002B69C6 /* ActivityNativeDnsController.swift */; };
 		7EA45519254ABEDE002B69C6 /* AppDelegate+PresentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA45518254ABEDE002B69C6 /* AppDelegate+PresentController.swift */; };
@@ -1595,13 +1597,13 @@
 		D0A23546271ED12A00CE1730 /* DnsProvidersManagerProtocol+ServerName.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A23544271ED12A00CE1730 /* DnsProvidersManagerProtocol+ServerName.swift */; };
 		D0A23547271ED4AE00CE1730 /* DnsProvidersManagerProtocol+ServerName.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A23544271ED12A00CE1730 /* DnsProvidersManagerProtocol+ServerName.swift */; };
 		D0A23548271ED4B100CE1730 /* DnsProvidersManagerProtocol+ServerName.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A23544271ED12A00CE1730 /* DnsProvidersManagerProtocol+ServerName.swift */; };
+		D0A2354C27201D0D00CE1730 /* DnsStatisticsMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2354B27201D0D00CE1730 /* DnsStatisticsMigrationHelper.swift */; };
+		D0A2354D27201D0D00CE1730 /* DnsStatisticsMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2354B27201D0D00CE1730 /* DnsStatisticsMigrationHelper.swift */; };
+		D0A2354E27201D0D00CE1730 /* DnsStatisticsMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2354B27201D0D00CE1730 /* DnsStatisticsMigrationHelper.swift */; };
 		D0A235502720569400CE1730 /* SharedResources+customBlockingIps.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2354F2720569400CE1730 /* SharedResources+customBlockingIps.swift */; };
 		D0A235512720569400CE1730 /* SharedResources+customBlockingIps.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2354F2720569400CE1730 /* SharedResources+customBlockingIps.swift */; };
 		D0A235532720651000CE1730 /* LowlevelSettingsMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A235522720651000CE1730 /* LowlevelSettingsMigrationHelper.swift */; };
 		D0A235542720651000CE1730 /* LowlevelSettingsMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A235522720651000CE1730 /* LowlevelSettingsMigrationHelper.swift */; };
-		D0A2354C27201D0D00CE1730 /* DnsStatisticsMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2354B27201D0D00CE1730 /* DnsStatisticsMigrationHelper.swift */; };
-		D0A2354D27201D0D00CE1730 /* DnsStatisticsMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2354B27201D0D00CE1730 /* DnsStatisticsMigrationHelper.swift */; };
-		D0A2354E27201D0D00CE1730 /* DnsStatisticsMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A2354B27201D0D00CE1730 /* DnsStatisticsMigrationHelper.swift */; };
 		D0A29F8923E0334000D974CF /* RateAppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A29F8823E0334000D974CF /* RateAppService.swift */; };
 		D0A614ED26EBA18B00793922 /* BootstrapsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A614EC26EBA18B00793922 /* BootstrapsHelper.swift */; };
 		D0A614EE26EBA18B00793922 /* BootstrapsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A614EC26EBA18B00793922 /* BootstrapsHelper.swift */; };
@@ -3108,6 +3110,7 @@
 		7EA2B3242424FE8F00FD3304 /* ActivityTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityTableViewCell.xib; sourceTree = "<group>"; };
 		7EA3DBC424090D7B000D8D42 /* Animation+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Animation+Utils.swift"; sourceTree = "<group>"; };
 		7EA3DBC62409367B000D8D42 /* IntroductionOnboardingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionOnboardingController.swift; sourceTree = "<group>"; };
+		7EA40F892722C81A00FAEE0B /* ChineseUserExposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChineseUserExposer.swift; sourceTree = "<group>"; };
 		7EA45504254AB249002B69C6 /* ActivityNativeDnsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityNativeDnsController.swift; sourceTree = "<group>"; };
 		7EA45518254ABEDE002B69C6 /* AppDelegate+PresentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+PresentController.swift"; sourceTree = "<group>"; };
 		7EA7834A2578E54500CA8889 /* SupportService+Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SupportService+Feedback.swift"; sourceTree = "<group>"; };
@@ -3441,9 +3444,9 @@
 		D09E9645216CE10F00313AB1 /* ThemableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemableImageView.swift; sourceTree = "<group>"; };
 		D09E9647216CE5E400313AB1 /* ThemableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemableLabel.swift; sourceTree = "<group>"; };
 		D0A23544271ED12A00CE1730 /* DnsProvidersManagerProtocol+ServerName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DnsProvidersManagerProtocol+ServerName.swift"; sourceTree = "<group>"; };
+		D0A2354B27201D0D00CE1730 /* DnsStatisticsMigrationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DnsStatisticsMigrationHelper.swift; sourceTree = "<group>"; };
 		D0A2354F2720569400CE1730 /* SharedResources+customBlockingIps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharedResources+customBlockingIps.swift"; sourceTree = "<group>"; };
 		D0A235522720651000CE1730 /* LowlevelSettingsMigrationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowlevelSettingsMigrationHelper.swift; sourceTree = "<group>"; };
-		D0A2354B27201D0D00CE1730 /* DnsStatisticsMigrationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DnsStatisticsMigrationHelper.swift; sourceTree = "<group>"; };
 		D0A29F8823E0334000D974CF /* RateAppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateAppService.swift; sourceTree = "<group>"; };
 		D0A614EC26EBA18B00793922 /* BootstrapsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootstrapsHelper.swift; sourceTree = "<group>"; };
 		D0AEC268240930C0003E8FCC /* VpnManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VpnManagerTest.swift; sourceTree = "<group>"; };
@@ -6355,6 +6358,7 @@
 				7ED0B1A526C4335700B0CE7B /* NewAndRefactoredObjects */,
 				7EC67FB5254843B300FEEEE2 /* NativeDnsService */,
 				D0A23544271ED12A00CE1730 /* DnsProvidersManagerProtocol+ServerName.swift */,
+				7EA40F892722C81A00FAEE0B /* ChineseUserExposer.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -8115,6 +8119,7 @@
 				7E92753926C67A1D007B2C80 /* TitleTableViewCell.swift in Sources */,
 				D0B545E22435D69B002F0AEC /* UIViewController+Utils.swift in Sources */,
 				2422254026ECC97700EC74AE /* ChartViewModel.swift in Sources */,
+				7EA40F8B2722C81A00FAEE0B /* ChineseUserExposer.swift in Sources */,
 				24C31EC326FF711000673309 /* ApplicationWebReporter.swift in Sources */,
 				D0B545A12435D63D002F0AEC /* GetProPageController.swift in Sources */,
 				D0B545822435D62A002F0AEC /* Animation+Utils.swift in Sources */,
@@ -8557,6 +8562,7 @@
 				7E4E411D24D80D5200250D15 /* SupportTableViewController.swift in Sources */,
 				7E2BA2E426F9D3D600B44D4A /* UIViewController+Alert.swift in Sources */,
 				D0116CEE20627E58009598B1 /* ACNCidrRange.m in Sources */,
+				7EA40F8A2722C81A00FAEE0B /* ChineseUserExposer.swift in Sources */,
 				24B3DAEF26F8B4D000A66C0F /* DnsProviderActionCell.swift in Sources */,
 				7E303C2126F6463400EBACD1 /* DnsFiltersModelsProvider.swift in Sources */,
 				D018672C203C86050003110A /* MGSwipeTableCell.m in Sources */,
