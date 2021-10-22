@@ -281,6 +281,10 @@ final class ComplexProtectionController: UITableViewController {
                 cell.isHidden = true
             }
         }
+
+        if indexPath.row == adguardVpnCell {
+            cell.isHidden = ChineseUserExposer.isUserFromChina
+        }
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -296,6 +300,10 @@ final class ComplexProtectionController: UITableViewController {
             if indexPath.row == advancedProtectionCell {
                 return 0
             }
+        }
+
+        if indexPath.row == adguardVpnCell && ChineseUserExposer.isUserFromChina {
+            return 0
         }
 
         return super.tableView(tableView, heightForRowAt: indexPath)

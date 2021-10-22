@@ -51,7 +51,12 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
     private lazy var safariProtectionButton = { getButton(for: .safari) }()
     private lazy var systemProtectionButton = { getButton(for: .system) }()
-    private lazy var vpnUpsellButton = { false ? getButton(for: .vpn) : nil }()
+    private lazy var vpnUpsellButton: RoundRectButton? = {
+        if !ChineseUserExposer.isUserFromChina {
+            return getButton(for: .vpn)
+        }
+        return nil
+    }()
 
     @IBOutlet weak var protectionButtonsStackView: UIStackView!
 
