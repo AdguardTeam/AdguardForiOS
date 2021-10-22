@@ -56,7 +56,7 @@ class DnsProtectionFiltersMigrationHelperTests: XCTestCase {
             enabled: false,
             desc: nil,
             version: nil,
-            rulesCount: 30,
+            rulesCount: nil,
             homepage: nil
         )
 

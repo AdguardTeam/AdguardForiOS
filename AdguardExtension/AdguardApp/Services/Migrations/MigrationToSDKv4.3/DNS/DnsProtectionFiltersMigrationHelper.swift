@@ -84,7 +84,7 @@ final class DnsProtectionFiltersMigrationHelper: DnsProtectionFiltersMigrationHe
                 issuesReportPage: nil,
                 communityPage: nil,
                 filterDownloadPage: $0.subscriptionUrl.path,
-                rulesCount: $0.rulesCount
+                rulesCount: $0.rulesCount ?? 0
             )
         }
 
@@ -147,10 +147,10 @@ class SDKDnsMigrationObsoleteDnsFilter: NSObject, NSCoding {
     let enabled: Bool
     let desc: String?
     let version: String?
-    let rulesCount: Int
+    let rulesCount: Int?
     let homepage: String?
 
-    init(id: Int, subscriptionUrl: URL, name: String?, updateDate: Date?, enabled: Bool, desc: String?, version: String?, rulesCount: Int, homepage: String?) {
+    init(id: Int, subscriptionUrl: URL, name: String?, updateDate: Date?, enabled: Bool, desc: String?, version: String?, rulesCount: Int?, homepage: String?) {
         self.id = id
         self.subscriptionUrl = subscriptionUrl
         self.name = name
@@ -189,7 +189,7 @@ class SDKDnsMigrationObsoleteDnsFilter: NSObject, NSCoding {
         self.enabled = coder.decodeBool(forKey: "enabled")
         self.desc = coder.decodeObject(forKey: "desc") as? String
         self.version = coder.decodeObject(forKey: "version") as? String
-        self.rulesCount = coder.decodeObject(forKey: "rulesCount") as? Int ?? 0
+        self.rulesCount = coder.decodeObject(forKey: "rulesCount") as? Int
         self.homepage = coder.decodeObject(forKey: "homepage") as? String
     }
 }
