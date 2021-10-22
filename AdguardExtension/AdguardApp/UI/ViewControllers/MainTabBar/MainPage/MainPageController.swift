@@ -49,9 +49,16 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
     // MARK: - Protection status elements
 
-    @IBOutlet weak var safariProtectionButton: RoundRectButton!
-    @IBOutlet weak var systemProtectionButton: RoundRectButton!
-    @IBOutlet weak var vpnUpsellButton: RoundRectButton!
+    private lazy var safariProtectionButton = { getButton(for: .safari) }()
+    private lazy var systemProtectionButton = { getButton(for: .system) }()
+    private lazy var vpnUpsellButton: RoundRectButton? = {
+        if !ChineseUserExposer.isUserFromChina {
+            return getButton(for: .vpn)
+        }
+        return nil
+    }()
+
+    @IBOutlet weak var protectionButtonsStackView: UIStackView!
 
     @IBOutlet weak var protectionStateLabel: ThemableLabel!
     @IBOutlet weak var protectionStatusLabel: ThemableLabel!
@@ -113,18 +120,6 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     @IBOutlet weak var contentBlockerViewConstraint: NSLayoutConstraint!
 
     // MARK: - Constraints to change for iphone SE - like devices
-
-    @IBOutlet weak var safariIconHeight: NSLayoutConstraint!
-    @IBOutlet weak var safariIconWidth: NSLayoutConstraint!
-
-    @IBOutlet weak var systemIconWidth: NSLayoutConstraint!
-    @IBOutlet weak var systemIconHeight: NSLayoutConstraint!
-
-    @IBOutlet weak var vpnPromoIconWidth: NSLayoutConstraint!
-    @IBOutlet weak var vpnPromoIconHeight: NSLayoutConstraint!
-
-    @IBOutlet weak var safariIconCenterSpace: NSLayoutConstraint!
-    @IBOutlet weak var systemIconCenterSpace: NSLayoutConstraint!
 
     @IBOutlet weak var complexSwitchWidth: NSLayoutConstraint!
     @IBOutlet weak var complexSwitchHeight: NSLayoutConstraint!
@@ -194,6 +189,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupProtectionButtonsStackView()
         updateTheme()
         initChartViewModel()
         statisticsPeriodChanged(statisticsPeriod: resources.chartDateType)
@@ -284,7 +280,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
     // MARK: - Protection Status Actions
 
-    @IBAction func changeSafariProtectionState(_ sender: RoundRectButton) {
+    @objc private final func changeSafariProtectionState(_ sender: RoundRectButton) {
         safariProtectionButton.buttonIsOn = !safariProtectionButton.buttonIsOn
 
         applyingChangesStarted()
@@ -301,7 +297,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         updateProtectionStates()
     }
 
-    @IBAction func changeSystemProtectionState(_ sender: RoundRectButton) {
+    @objc private final func changeSystemProtectionState(_ sender: RoundRectButton) {
         if resources.dnsImplementation == .native {
             if systemProtectionButton.buttonIsOn {
                 if #available(iOS 14.0, *) {
@@ -345,7 +341,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         updateProtectionStates()
     }
 
-    @IBAction func vpnUpsellTapped(_ sender: RoundRectButton) {
+    @objc private final func vpnUpsellTapped(_ sender: RoundRectButton) {
         if UIApplication.adGuardVpnIsInstalled {
             UIApplication.openAdGuardVpnAppIfInstalled()
         } else {
@@ -538,7 +534,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     Checks if AdGuard VPN is installed and changes VPN upsell button color
     */
     private func checkAdGuardVpnIsInstalled() {
-        vpnUpsellButton.buttonIsOn = UIApplication.adGuardVpnIsActive
+        vpnUpsellButton?.buttonIsOn = UIApplication.adGuardVpnIsActive
     }
 
     /**
@@ -839,18 +835,6 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         fixItIphoneButton.titleLabel?.font = UIFont.systemFont(ofSize: 11.0, weight: .bold)
         manDialogText.font = UIFont.systemFont(ofSize: 19.0, weight: .regular)
 
-        safariIconHeight.constant = 24.0
-        safariIconWidth.constant = 24.0
-
-        systemIconWidth.constant = 24.0
-        systemIconHeight.constant = 24.0
-
-        vpnPromoIconWidth.constant = 24.0
-        vpnPromoIconHeight.constant = 24.0
-
-        safariIconCenterSpace.constant = 20.0
-        systemIconCenterSpace.constant = 20.0
-
         protectionStateLabel.font = protectionStateLabel.font.withSize(20.0)
         protectionStatusLabel.font = protectionStatusLabel.font.withSize(14.0)
 
@@ -963,5 +947,63 @@ extension MainPageController: ChartViewModelDelegate {
         chartView.leftDateLabelText = firstFormattedDate
         chartView.rightDateLabelText = lastFormattedDate
         chartView.maxRequests = maxRequests
+    }
+}
+
+// MARK: - MainPageController + Protection buttons stack view setup
+
+fileprivate extension MainPageController {
+
+    enum ProtectionType: CaseIterable {
+        case safari
+        case system
+        case vpn
+
+        var image: UIImage? {
+            switch self {
+            case .safari: return UIImage(named: "safari")
+            case .system: return UIImage(named: "ic_adguard")
+            case .vpn: return UIImage(named: "vpn_logo")
+            }
+        }
+
+        var selector: Selector {
+            switch self {
+            case .safari: return #selector(changeSafariProtectionState(_:))
+            case .system: return #selector(changeSystemProtectionState(_:))
+            case .vpn: return #selector(vpnUpsellTapped(_:))
+            }
+        }
+    }
+
+    func setupProtectionButtonsStackView() {
+        protectionButtonsStackView.alignment = .center
+        protectionButtonsStackView.axis = .horizontal
+        protectionButtonsStackView.distribution = .fillEqually
+        protectionButtonsStackView.spacing = isIphoneSeLike ? 20.0 : 28.0
+
+        protectionButtonsStackView.addArrangedSubview(safariProtectionButton)
+        protectionButtonsStackView.addArrangedSubview(systemProtectionButton)
+        if let vpnButton = vpnUpsellButton {
+            protectionButtonsStackView.addArrangedSubview(vpnButton)
+        }
+    }
+
+    func getButton(for type: ProtectionType) -> RoundRectButton {
+        let button = RoundRectButton()
+        button.onTintColor = UIColor.AdGuardColor.lightGreen1
+        button.offTintColor = UIColor.AdGuardColor.lightGray3
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        button.setImage(type.image, for: .normal)
+        button.addTarget(self, action: type.selector, for: .touchUpInside)
+
+        button.translatesAutoresizingMaskIntoConstraints = false
+        let side: CGFloat = isIphoneSeLike ? 24.0 : (isIpadTrait ? 42.0 : 32.0)
+        NSLayoutConstraint.activate([
+            button.widthAnchor.constraint(equalToConstant: side),
+            button.heightAnchor.constraint(equalToConstant: side)
+        ])
+        return button
     }
 }
