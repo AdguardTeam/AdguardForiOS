@@ -48,6 +48,17 @@ final class MetaStorage: MetaStorageProtocol {
         self.productionDbManager = productionDbManager
         self.filtersDb = productionDbManager.filtersDb
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+
+        // TODO: - It's a crutch; Refactor it later
+        // This database is used by several threads at the same time.
+        // It is possible that a database file is temporarily locked in one thread and is being accessed from another.
+        // Here we set a timeout and `busyHadler` to resolve this issue
+        // `busyHandler` is needed to handle error when db is locked and try once more
+        self.filtersDb.busyTimeout = 0.5
+        self.filtersDb.busyHandler { _ in
+            Logger.logError("(MetaStorage) - init; Safari filters db is locked")
+            return true
+        }
         insertCustomGroupIfNeeded()
     }
 
