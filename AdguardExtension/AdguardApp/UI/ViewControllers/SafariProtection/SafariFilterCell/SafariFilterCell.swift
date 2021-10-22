@@ -176,6 +176,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
             stateSwitch.topAnchor.constraint(equalTo: contentView.topAnchor, constant: topBottomInset),
             stateSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -sideInset),
             stateSwitch.widthAnchor.constraint(equalToConstant: switchWidth),
+            stateSwitch.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -topBottomInset),
 
             stackView.topAnchor.constraint(equalTo: stateSwitch.topAnchor),
             stackView.trailingAnchor.constraint(equalTo: stateSwitch.leadingAnchor, constant: -sideInset),
