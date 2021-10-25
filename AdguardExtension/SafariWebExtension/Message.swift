@@ -44,6 +44,7 @@ struct Message {
     static let contentBlockersEnabled = "content_blockers_enabled"
     static let advancedBlockingEnabled = "advanced_blocking_enabled"
     static let shouldUpdateAdvancedRules = "should_update_advanced_rules"
+    static let allowlistIsInverted = "allowlist_inverted"
 
     // Links
     static let enableSiteProtectionLink = "enable_site_protection_link"

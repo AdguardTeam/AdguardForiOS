@@ -32,6 +32,9 @@
     "popup_action_current_site_desc_allowlisted": {
         "message": "added to allowlist"
     },
+    "popup_action_current_site_desc_allowlisted_inverted": {
+        "message": "added to allowlist (inverted)"
+    },
     "popup_action_current_site_desc_basic_only": {
         "message": "basic protection only"
     },

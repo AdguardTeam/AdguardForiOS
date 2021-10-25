@@ -53,6 +53,8 @@ export class PopupStore {
 
     @observable advancedBlockingEnabled: boolean = false;
 
+    @observable allowlistInverted: boolean = false;
+
     @observable advancedBlockingModalVisible: boolean = false;
 
     /**
@@ -95,6 +97,7 @@ export class PopupStore {
             this.protectionModalVisible = !popupData.contentBlockersEnabled;
             this.appearanceTheme = popupData.appearanceTheme;
             this.advancedBlockingEnabled = popupData.advancedBlockingEnabled;
+            this.allowlistInverted = popupData.allowlistInverted;
         });
     };
 

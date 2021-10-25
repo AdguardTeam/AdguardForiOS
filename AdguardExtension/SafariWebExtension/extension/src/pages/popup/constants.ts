@@ -3,5 +3,6 @@ export enum SiteStatus {
     ProtectionEnabled = 'ProtectionEnabled',
     ProtectionDisabled = 'ProtectionDisabled',
     Allowlisted = 'Allowlisted',
+    AllowlistedInverted = 'AllowlistedInverted',
     BasicOnly = 'BasicOnly',
 }
