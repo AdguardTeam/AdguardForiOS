@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import SharedAdGuardSDK
 
 protocol DnsProxyConfigurationProviderProtocol {
     /**
@@ -115,7 +116,7 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
          Detect ipv6 addresses,
          We need to use system DNS in dns64Settings variable, that's why we iterate through fallbacks variable
          */
-        let ipv6Fallbacks = proxyFallbacks.filter { ACNUrlUtils.isIPv6($0.dnsUpstreamInfo.upstream) }
+        let ipv6Fallbacks = proxyFallbacks.filter { UrlUtils.isIpv6($0.dnsUpstreamInfo.upstream) }
 
         // Filters for DNS-lib
         var proxyFilters = dnsLibsRulesProvider.enabledCustomDnsFilters

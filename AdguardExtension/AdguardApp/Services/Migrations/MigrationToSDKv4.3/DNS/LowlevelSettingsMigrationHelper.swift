@@ -19,6 +19,7 @@
   
 
 import Foundation
+import SharedAdGuardSDK
 
 /** this essence is responsible for low level settings migration */
 protocol LowlevelSettingsMigrationHelperProtocol {
@@ -40,8 +41,8 @@ final class LowlevelSettingsMigrationHelper: LowlevelSettingsMigrationHelperProt
             return
         }
 
-        let ipv4 = customBlockingIps.first { ACNUrlUtils.isIPv4($0) }
-        let ipv6 = customBlockingIps.first { ACNUrlUtils.isIPv6($0) }
+        let ipv4 = customBlockingIps.first { UrlUtils.isIpv4($0) }
+        let ipv6 = customBlockingIps.first { UrlUtils.isIpv6($0) }
 
         resources.customBlockingIpv4 = ipv4
         resources.customBlockingIpv6 = ipv6

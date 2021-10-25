@@ -19,7 +19,8 @@ final class DnsConfigurationMock: DnsConfigurationProtocol {
         fallbackServers: nil,
         bootstrapServers: nil,
         blockingMode: .defaultMode,
-        blockingIp: nil,
+        blockingIpv4: nil,
+        blockingIpv6: nil,
         blockedTtl: 2,
         blockIpv6: false,
         restartByReachability: true

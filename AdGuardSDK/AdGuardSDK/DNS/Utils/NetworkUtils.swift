@@ -94,7 +94,7 @@ public struct NetworkUtils: NetworkUtilsProtocol {
         } else if upstream.hasPrefix("quic://") {
             return .doq
         } else {
-            if ACNUrlUtils.isIPv4(upstream) || ACNUrlUtils.isIPv6(upstream) {
+            if UrlUtils.isIpv4(upstream) || UrlUtils.isIpv6(upstream) {
                 return .dns
             }
             throw CustomDnsProvidersStorageError.invalidUpstream(upstream: upstream)

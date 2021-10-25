@@ -143,7 +143,7 @@ extension NEIPv4Route {
 
         let dest = components[0]
 
-        guard ACNUrlUtils.isIPv4(dest) else { return nil }
+        guard UrlUtils.isIpv4(dest) else { return nil }
 
         guard let maskLength = Int(components[1]),
                (0...32).contains(maskLength) else {
@@ -167,7 +167,7 @@ extension NEIPv6Route {
 
         let dest = components[0]
 
-        guard ACNUrlUtils.isIPv6(dest) else { return nil }
+        guard UrlUtils.isIpv6(dest) else { return nil }
 
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
