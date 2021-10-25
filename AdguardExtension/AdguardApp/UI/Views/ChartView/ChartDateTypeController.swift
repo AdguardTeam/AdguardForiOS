@@ -34,12 +34,6 @@ final class ChartDateTypeController: BottomAlertController {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
 
-    private let todayTag = 0
-    private let oneDayTag = 1
-    private let weekTag = 2
-    private let monthTag = 3
-    private let allTimeTag = 4
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
