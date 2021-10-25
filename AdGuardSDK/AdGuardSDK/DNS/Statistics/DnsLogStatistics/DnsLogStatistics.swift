@@ -29,6 +29,18 @@ public protocol DnsLogStatisticsProtocol: ResetableSyncProtocol {
      This method will return records sorted by `startDate` in descending order
      */
     func getDnsLogRecords(for period: StatisticsPeriod) throws -> [DnsRequestProcessedEvent]
+
+    /**
+     Returns list of blocked `DnsRequestProcessedEvent` objects for the specified `period`
+     This method will return blocked records sorted by `startDate` in descending order
+     */
+    func getBlockedDnsLogRecords(for period: StatisticsPeriod) throws -> [DnsRequestProcessedEvent]
+
+    /**
+     Returns list of allowlisted `DnsRequestProcessedEvent` objects for the specified `period`
+     This method will return allowlisted records sorted by `startDate` in descending order
+     */
+    func getAllowlistedDnsLogRecords(for period: StatisticsPeriod) throws -> [DnsRequestProcessedEvent]
 }
 
 /// This object is responsible for saving and getting statistics about DNS requests and responses
@@ -85,6 +97,45 @@ final public class DnsLogStatistics: DnsLogStatisticsProtocol {
         }
         Logger.logInfo("(DnsLogStatistics) - getDnsLogRecords fetched \(all.count) log records")
         return all
+    }
+
+    // TODO: - Needs new tests
+    /// Returns all available blocked records from `DNS_log_statistics.db` for the specified `period`
+    public func getBlockedDnsLogRecords(for period: StatisticsPeriod) throws -> [DnsRequestProcessedEvent] {
+        Logger.logInfo("(DnsLogStatistics) - getBlockedDnsLogRecords called")
+        let query = DnsLogTable.table
+            .where(
+                period.interval.start...period.interval.end ~= DnsLogTable.startDate && (
+                    DnsLogTable.processedStatus == DnsRequestProcessedEvent.ProcessedStatus.blocklistedByDnsFilter.rawValue ||
+                    DnsLogTable.processedStatus == DnsRequestProcessedEvent.ProcessedStatus.blocklistedByDnsServer.rawValue ||
+                    DnsLogTable.processedStatus == DnsRequestProcessedEvent.ProcessedStatus.blocklistedByUserFilter.rawValue
+                )
+            )
+            .order(DnsLogTable.startDate.desc)
+        let blocked: [DnsRequestProcessedEvent] = try statisticsDb.prepare(query).map {
+            DnsRequestProcessedEvent(dbLogRecord: $0)
+        }
+        Logger.logInfo("(DnsLogStatistics) - getBlockedDnsLogRecords fetched \(blocked.count) log records")
+        return blocked
+    }
+
+    // TODO: - Needs new tests
+    /// Returns all available allowlisted records from `DNS_log_statistics.db` for the specified `period`
+    public func getAllowlistedDnsLogRecords(for period: StatisticsPeriod) throws -> [DnsRequestProcessedEvent] {
+        Logger.logInfo("(DnsLogStatistics) - getAllowlistedDnsLogRecords called")
+        let query = DnsLogTable.table
+            .where(
+                period.interval.start...period.interval.end ~= DnsLogTable.startDate && (
+                    DnsLogTable.processedStatus == DnsRequestProcessedEvent.ProcessedStatus.allowlistedByDnsFilter.rawValue ||
+                    DnsLogTable.processedStatus == DnsRequestProcessedEvent.ProcessedStatus.allowlistedByUserFilter.rawValue
+                )
+            )
+            .order(DnsLogTable.startDate.desc)
+        let allowlisted: [DnsRequestProcessedEvent] = try statisticsDb.prepare(query).map {
+            DnsRequestProcessedEvent(dbLogRecord: $0)
+        }
+        Logger.logInfo("(DnsLogStatistics) - getAllowlistedDnsLogRecords fetched \(allowlisted.count) log records")
+        return allowlisted
     }
 
     /// Removes all records from `DNS_log_statistics.db`

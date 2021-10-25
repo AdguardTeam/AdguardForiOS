@@ -108,7 +108,7 @@ extension DnsLogRecord {
     }
 
     /// returnes status title. For example - "Processed(Added to allowlist)"
-    func getStatusTitle()->String {
+    func getStatusTitle() -> String {
         let eventStatusTitle = event.processedStatus.title
 
         var additionalTitleKey: String? = nil
@@ -310,7 +310,12 @@ final class DnsRequestLogViewModel {
     // MARK: - private methods
 
     private func obtainRecordsInternal(for period: StatisticsPeriod, domains: Set<String>? = nil) {
-        let events = (try? dnsStatistics.getDnsLogRecords(for: period)) ?? []
+        let events: [DnsRequestProcessedEvent]
+        switch displayedStatisticsType {
+        case .allRequests: events = (try? dnsStatistics.getDnsLogRecords(for: period)) ?? []
+        case .blockedRequests: events = (try? dnsStatistics.getBlockedDnsLogRecords(for: period)) ?? []
+        case .allowedRequests: events = (try? dnsStatistics.getAllowlistedDnsLogRecords(for: period)) ?? []
+        }
         allRecords = events.compactMap {
             let firstLevelDomain = domainParser?.parse(host: $0.domain)?.domain ?? $0.domain
             let tracker = dnsTrackers.getTracker(by: firstLevelDomain)

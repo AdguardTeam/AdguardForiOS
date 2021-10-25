@@ -61,12 +61,12 @@ extension UIColor {
         static let red: UIColor = #colorLiteral(red: 0.8745098039, green: 0.2196078431, blue: 0.07058823529, alpha: 1)             //hex = #df3812
         static let errorRedColor: UIColor = #colorLiteral(red: 0.7607843137, green: 0.2196078431, blue: 0.07843137255, alpha: 1)   //hex = #c23814
 
-        static let logBlockedCellColor: UIColor = #colorLiteral(red: 0.2, green: 0.8745098039, blue: 0.2196078431, alpha: 0.05) //hex = #33df3812
-        static let logSelectedCellColor: UIColor = #colorLiteral(red: 0.3019607843, green: 0.8745098039, blue: 0.2196078431, alpha: 0.05) //hex = #4ddf3812
+        static let logBlockedCellColor: UIColor = #colorLiteral(red: 0.8745098039, green: 0.2196078431, blue: 0.07058823529, alpha: 0.2) //hex = #DF3812 alpha: 20
+        static let logSelectedCellColor: UIColor = #colorLiteral(red: 0.8745098039, green: 0.2196078431, blue: 0.07058823529, alpha: 0.3) //hex = #DF3812 alpha: 30
 
-        static let logAllowlistedCellColor: UIColor = #colorLiteral(red: 0.2, green: 0.4039215686, blue: 0.6980392157, alpha: 0.3)          //hex = #3367b279
-        static let logSelectedAllowlistedCellColor: UIColor = #colorLiteral(red: 0.3019607843, green: 0.4039215686, blue: 0.6980392157, alpha: 0.3)  //hex = #4D67b279
+        static let logAllowlistedCellColor: UIColor = #colorLiteral(red: 0.4039215686, green: 0.6980392157, blue: 0.4745098039, alpha: 0.2)     //hex = #67B279 alpha: 20
+        static let logSelectedAllowlistedCellColor: UIColor = #colorLiteral(red: 0.4039215686, green: 0.6980392157, blue: 0.4745098039, alpha: 0.3) //hex = #67B279 alpha: 30
 
-        static let chartGridColor = #colorLiteral(red: 0.5294117647, green: 0.5294117647, blue: 0.5294117647, alpha: 0.3)            // hex = #8787874c
+        static let chartGridColor = #colorLiteral(red: 0.5294117647, green: 0.5294117647, blue: 0.5294117647, alpha: 0.3)      // hex = #878787 alpha: 30
     }
 }

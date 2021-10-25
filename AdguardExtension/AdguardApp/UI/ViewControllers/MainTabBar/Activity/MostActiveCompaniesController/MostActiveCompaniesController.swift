@@ -33,7 +33,7 @@ final class MostActiveCompaniesController: UIViewController {
 
     var chartDateType: StatisticsPeriod?
     var mostRequestedCompanies: [CompanyRequestsRecord] = []
-    var requestsModel: DnsRequestLogViewModel?
+    weak var activityVC: DnsRequestDetailsContainerControllerDelegate?
 
     // MARK: - Private variables
 
@@ -55,7 +55,7 @@ final class MostActiveCompaniesController: UIViewController {
             if let controller = segue.destination as? CompanyDetailedController {
                 controller.record = choosenRecord
                 controller.statisticsPeriod = chartDateType
-                controller.requestsModel = requestsModel
+                controller.activityVC = activityVC
             }
         }
     }

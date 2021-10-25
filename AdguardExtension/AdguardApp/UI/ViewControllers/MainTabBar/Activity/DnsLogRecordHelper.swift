@@ -49,7 +49,7 @@ final class DnsLogRecordHelper {
         try dnsProtection.removeDomainFromUserFilter(domain)
     }
 
-    func getUserFilterStatusForDomain(_ domain: String)->UserFilterStatus {
+    func getUserFilterStatusForDomain(_ domain: String) -> UserFilterStatus {
         // we should check user rules for all domains
         let subdomains: [String] = String.generateSubDomains(from: domain)
 
