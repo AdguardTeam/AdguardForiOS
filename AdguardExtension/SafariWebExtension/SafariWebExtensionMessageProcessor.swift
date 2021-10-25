@@ -93,6 +93,7 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
             Message.premiumApp: isPro,
             Message.protectionEnabled: isSafariProtectionEnabled(for: domain, resources: resources),
             Message.advancedBlockingEnabled: resources.advancedProtection,
+            Message.allowlistIsInverted: resources.invertedWhitelist,
 
             Message.enableSiteProtectionLink: UserRulesRedirectAction.enableSiteProtection(domain: "").scheme,
             Message.disableSiteProtectionLink: UserRulesRedirectAction.disableSiteProtection(domain: "").scheme,
