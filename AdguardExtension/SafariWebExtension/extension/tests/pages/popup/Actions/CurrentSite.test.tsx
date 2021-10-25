@@ -119,4 +119,44 @@ describe('current site action', () => {
             expect(advancedBlockingModalTitle).toBeInTheDocument();
         });
     });
+
+    describe('renders inverted allowlist', () => {
+        it('renders allowlist description', async () => {
+            jest.spyOn(messenger, 'getPopupData').mockResolvedValue({
+                allSitesAllowed: true,
+                permissionsModalViewed: true,
+                protectionEnabled: false,
+                hasUserRules: true,
+                premiumApp: true,
+                appearanceTheme: true,
+                contentBlockersEnabled: true,
+                advancedBlockingEnabled: false,
+                allowlistInverted: false,
+            });
+
+            render(<Popup />);
+
+            const basicProtectionDesc = await screen.findByText('popup_action_current_site_desc_allowlisted');
+            expect(basicProtectionDesc).toBeInTheDocument();
+        });
+
+        it('renders inverted allowlist description', async () => {
+            jest.spyOn(messenger, 'getPopupData').mockResolvedValue({
+                allSitesAllowed: true,
+                permissionsModalViewed: true,
+                protectionEnabled: false,
+                hasUserRules: true,
+                premiumApp: true,
+                appearanceTheme: true,
+                contentBlockersEnabled: true,
+                advancedBlockingEnabled: false,
+                allowlistInverted: true,
+            });
+
+            render(<Popup />);
+
+            const basicProtectionDesc = await screen.findByText('popup_action_current_site_desc_allowlisted_inverted');
+            expect(basicProtectionDesc).toBeInTheDocument();
+        });
+    });
 });

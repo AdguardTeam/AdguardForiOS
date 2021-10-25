@@ -12,6 +12,7 @@ const SiteStatusesMessages = {
     [SiteStatus.ProtectionEnabled]: translator.getMessage('popup_action_current_site_status_desc_enabled'),
     [SiteStatus.ProtectionDisabled]: translator.getMessage('popup_action_current_site_status_desc_disabled'),
     [SiteStatus.Allowlisted]: translator.getMessage('popup_action_current_site_desc_allowlisted'),
+    [SiteStatus.AllowlistedInverted]: translator.getMessage('popup_action_current_site_desc_allowlisted_inverted'),
     [SiteStatus.BasicOnly]: translator.getMessage('popup_action_current_site_desc_basic_only'),
 };
 
@@ -26,7 +27,11 @@ export const CurrentSite = observer(() => {
     }
 
     if (!store.protectionEnabled) {
-        description = SiteStatusesMessages[SiteStatus.Allowlisted];
+        if (store.allowlistInverted) {
+            description = SiteStatusesMessages[SiteStatus.AllowlistedInverted];
+        } else {
+            description = SiteStatusesMessages[SiteStatus.Allowlisted];
+        }
     }
 
     if (!store.contentBlockersEnabled) {

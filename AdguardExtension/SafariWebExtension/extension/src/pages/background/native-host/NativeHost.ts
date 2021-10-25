@@ -28,6 +28,7 @@ interface NativeHostInitData {
     premiumApp: boolean,
     protectionEnabled: boolean,
     advancedBlockingEnabled: boolean,
+    allowlistInverted: boolean,
 }
 
 export interface NativeHostInterface {
@@ -223,6 +224,7 @@ export class NativeHost implements NativeHostInterface {
             appearance_theme: appearanceTheme,
             content_blockers_enabled: contentBlockersEnabled,
             advanced_blocking_enabled: advancedBlockingEnabled,
+            allowlist_inverted: allowlistInverted,
 
             // links
             // e.g. "adguard://safariWebExtension?action=removeFromAllowlist&domain="
@@ -258,6 +260,7 @@ export class NativeHost implements NativeHostInterface {
             premiumApp,
             protectionEnabled,
             advancedBlockingEnabled,
+            allowlistInverted,
         };
     }
 
