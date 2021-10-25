@@ -72,7 +72,7 @@ final class OnboardingAdvancedProtectionView: UIView {
         safariIcon.heightAnchor.constraint(equalToConstant: heightWidthConst).isActive = true
         safariIcon.widthAnchor.constraint(equalToConstant: heightWidthConst).isActive = true
         safariIcon.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        safariIcon.trailingAnchor.constraint(equalTo: attributedLabel.leadingAnchor, constant: -7.0).isActive = true
+        safariIcon.trailingAnchor.constraint(equalTo: attributedLabel.leadingAnchor, constant: -8.0).isActive = true
         safariIcon.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
 
         attributedLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
