@@ -37,17 +37,17 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <variation key="heightClass=regular-widthClass=regular">
-                                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     </variation>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="safari" translatesAutoresizingMaskIntoConstraints="NO" id="rFj-gs-pCq">
                                                     <rect key="frame" x="183" y="8" width="48" height="48"/>
                                                     <color key="tintColor" red="0.35294117650000001" green="0.61176470589999998" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="48" id="bNp-Kn-77j">
+                                                        <constraint firstAttribute="height" constant="56" id="bNp-Kn-77j">
                                                             <variation key="heightClass=regular-widthClass=regular" constant="64"/>
                                                         </constraint>
-                                                        <constraint firstAttribute="width" constant="48" id="f8g-2b-5Po">
+                                                        <constraint firstAttribute="width" constant="56" id="f8g-2b-5Po">
                                                             <variation key="heightClass=regular-widthClass=regular" constant="64"/>
                                                         </constraint>
                                                     </constraints>
@@ -68,16 +68,16 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="6WB-a0-8YE" secondAttribute="trailing" constant="24" id="407-Vf-7Uw"/>
                                                 <constraint firstItem="6WB-a0-8YE" firstAttribute="leading" secondItem="1gT-I7-liG" secondAttribute="leading" constant="24" id="85d-6R-udz"/>
-                                                <constraint firstItem="QHZ-sJ-wTL" firstAttribute="top" secondItem="6WB-a0-8YE" secondAttribute="bottom" constant="12" id="EXC-7v-CiL">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                                                <constraint firstItem="QHZ-sJ-wTL" firstAttribute="top" secondItem="6WB-a0-8YE" secondAttribute="bottom" constant="8" id="EXC-7v-CiL">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
                                                 <constraint firstAttribute="trailing" secondItem="QHZ-sJ-wTL" secondAttribute="trailing" constant="24" id="Kcg-ug-359"/>
                                                 <constraint firstItem="QHZ-sJ-wTL" firstAttribute="leading" secondItem="1gT-I7-liG" secondAttribute="leading" constant="24" id="Oty-hk-WlG"/>
-                                                <constraint firstItem="6WB-a0-8YE" firstAttribute="top" secondItem="rFj-gs-pCq" secondAttribute="bottom" constant="16" id="TID-qP-dkn">
+                                                <constraint firstItem="6WB-a0-8YE" firstAttribute="top" secondItem="rFj-gs-pCq" secondAttribute="bottom" constant="12" id="TID-qP-dkn">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="40"/>
                                                 </constraint>
                                                 <constraint firstItem="rFj-gs-pCq" firstAttribute="centerX" secondItem="1gT-I7-liG" secondAttribute="centerX" id="Z3I-Tv-cO5"/>
-                                                <constraint firstAttribute="bottom" secondItem="QHZ-sJ-wTL" secondAttribute="bottom" constant="16" id="ghi-gC-FJb">
+                                                <constraint firstAttribute="bottom" secondItem="QHZ-sJ-wTL" secondAttribute="bottom" constant="24" id="ghi-gC-FJb">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="96"/>
                                                 </constraint>
                                                 <constraint firstItem="rFj-gs-pCq" firstAttribute="top" secondItem="1gT-I7-liG" secondAttribute="top" constant="8" id="ysr-fo-Rh9">

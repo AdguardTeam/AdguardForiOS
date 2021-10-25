@@ -17,23 +17,13 @@
  */
 
 import UIKit
-import SafariAdGuardSDK
-import DnsAdGuardSDK
 
 final class MainMenuController: UITableViewController {
 
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-
-    private let support: SupportServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
-    private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
-    private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private let nativeDnsManager: NativeDnsSettingsManagerProtocol = ServiceLocator.shared.getService()!
-    private let dnsProvidersManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!
 
     @IBOutlet weak var settingsImageView: UIImageView!
-    @IBOutlet weak var safariProtectionLabel: ThemableLabel!
-    @IBOutlet weak var systemProtectionLabel: ThemableLabel!
     @IBOutlet weak var supportCell: UITableViewCell!
     @IBOutlet weak var LicenseCell: UITableViewCell!
     @IBOutlet var themableLabels: [ThemableLabel]!
@@ -43,12 +33,6 @@ final class MainMenuController: UITableViewController {
     }
 
     // MARK: - view controler life cycle
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        updateFilters()
-        systemProtectionLabel.text = dnsProvidersManager.activeServerName
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,15 +67,6 @@ final class MainMenuController: UITableViewController {
         }
 
         return super.tableView(tableView, heightForRowAt: indexPath)
-    }
-
-    // MARK: - private methods
-
-    private func updateFilters() {
-        let safariFiltersTextFormat = String.localizedString("safari_filters_format")
-        let enabledGroups = safariProtection.groups.filter { $0.isEnabled }
-        let enabledFilters = enabledGroups.flatMap { $0.filters }.filter { $0.isEnabled }
-        safariProtectionLabel.text = String.localizedStringWithFormat(safariFiltersTextFormat, enabledFilters.count)
     }
 }
 

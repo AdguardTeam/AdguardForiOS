@@ -73,6 +73,8 @@ extension SelectDnsProtocolController: UITableViewDataSource {
         cell.radioButtonSelected = prot == selectedProtocol
         cell.isArrowRightHidden = true
         cell.updateTheme(themeService: themeService)
+        cell.cellTag = indexPath.row
+        cell.delegate = self
         return cell
     }
 }
@@ -97,6 +99,16 @@ extension SelectDnsProtocolController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
+    }
+}
+
+// MARK: - ChartDateTypeController + ExtendedRadioButtonCellDelegate
+
+extension SelectDnsProtocolController: ExtendedRadioButtonCellDelegate {
+    func radioButtonTapped(with tag: Int) {
+        let indexPath = IndexPath(row: tag, section: 0)
+        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+        tableView(tableView, didSelectRowAt: indexPath)
     }
 }
 

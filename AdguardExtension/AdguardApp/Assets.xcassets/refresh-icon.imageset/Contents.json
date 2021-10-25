@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "idiom" : "universal",
-      "filename" : "refresh-icon.pdf"
+      "filename" : "refresh-icon.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   },
   "properties" : {
-    "template-rendering-intent" : "template",
-    "preserves-vector-representation" : true,
-    "auto-scaling" : "auto"
+    "preserves-vector-representation" : true
   }
 }

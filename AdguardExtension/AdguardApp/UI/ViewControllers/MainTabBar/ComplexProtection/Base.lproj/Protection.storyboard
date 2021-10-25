@@ -39,9 +39,7 @@
                                                     <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="ygl-Nz-r9R" secondAttribute="height" id="E2v-gt-eK4"/>
-                                                        <constraint firstAttribute="width" constant="48" id="xW4-3G-Udj">
-                                                            <variation key="heightClass=regular-widthClass=regular" constant="64"/>
-                                                        </constraint>
+                                                        <constraint firstAttribute="width" constant="56" id="xW4-3G-Udj"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wyK-CX-EwT" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -59,16 +57,10 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="ygl-Nz-r9R" firstAttribute="centerX" secondItem="dsQ-eP-qBd" secondAttribute="centerX" id="4j5-dm-7ob"/>
-                                                <constraint firstAttribute="bottom" secondItem="wyK-CX-EwT" secondAttribute="bottom" constant="16" id="F9g-fD-8Y8">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="96"/>
-                                                </constraint>
-                                                <constraint firstItem="wyK-CX-EwT" firstAttribute="top" secondItem="ygl-Nz-r9R" secondAttribute="bottom" constant="16" id="J6N-Hx-VAJ">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="32"/>
-                                                </constraint>
+                                                <constraint firstAttribute="bottom" secondItem="wyK-CX-EwT" secondAttribute="bottom" constant="24" id="F9g-fD-8Y8"/>
+                                                <constraint firstItem="wyK-CX-EwT" firstAttribute="top" secondItem="ygl-Nz-r9R" secondAttribute="bottom" constant="12" id="J6N-Hx-VAJ"/>
                                                 <constraint firstAttribute="trailing" secondItem="wyK-CX-EwT" secondAttribute="trailing" constant="24" id="eVo-y5-iOw"/>
-                                                <constraint firstItem="ygl-Nz-r9R" firstAttribute="top" secondItem="dsQ-eP-qBd" secondAttribute="top" constant="8" id="nxz-6A-LFk">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="96"/>
-                                                </constraint>
+                                                <constraint firstItem="ygl-Nz-r9R" firstAttribute="top" secondItem="dsQ-eP-qBd" secondAttribute="top" id="nxz-6A-LFk"/>
                                                 <constraint firstItem="wyK-CX-EwT" firstAttribute="leading" secondItem="dsQ-eP-qBd" secondAttribute="leading" constant="24" id="tcM-Os-03D"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -795,7 +787,7 @@
                                                         <variation key="heightClass=regular-widthClass=regular" constant="32"/>
                                                     </constraint>
                                                 </constraints>
-                                                <imageReference key="image" image="logocheck"/>
+                                                <imageReference key="image" image="about-icon"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j5C-JI-DlO">
                                                 <rect key="frame" x="17" y="360.5" width="24" height="24"/>
@@ -812,12 +804,12 @@
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gpV-f6-CX5">
                                                 <rect key="frame" x="187" y="0.0" width="40" height="40"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="igh-Vb-1xg"/>
-                                                    <constraint firstAttribute="width" constant="40" id="kWe-Fx-vUD"/>
+                                                    <constraint firstAttribute="height" constant="56" id="igh-Vb-1xg"/>
+                                                    <constraint firstAttribute="width" constant="56" id="kWe-Fx-vUD"/>
                                                 </constraints>
                                                 <imageReference key="image" image="subscribed-icon"/>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blocks stubborn ads, including YouTube ads in Safari" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZgQ-6Q-ytX" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Blocks stubborn ads, including YouTube ads in Safari" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZgQ-6Q-ytX" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="54" y="360.5" width="344" height="38.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <nil key="textColor"/>
@@ -881,7 +873,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Requires additional access permissions and uses them strictly to block ads" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i0Z-fi-Rc0" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Requires additional access permissions and uses them strictly to block ads" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i0Z-fi-Rc0" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="54" y="485.5" width="344" height="38.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <nil key="textColor"/>
@@ -924,19 +916,21 @@
                                             <constraint firstItem="OxY-0X-J4W" firstAttribute="top" secondItem="gpV-f6-CX5" secondAttribute="bottom" constant="12" id="4NS-8e-Ado"/>
                                             <constraint firstItem="gpV-f6-CX5" firstAttribute="centerX" secondItem="cIW-ej-Mu3" secondAttribute="centerX" id="537-fO-hY8"/>
                                             <constraint firstAttribute="bottom" secondItem="pv0-hE-9gb" secondAttribute="bottom" constant="24" id="5bP-JB-KUd"/>
-                                            <constraint firstItem="kfG-2o-Ru6" firstAttribute="leading" secondItem="9wg-p1-Dh8" secondAttribute="leading" id="6gx-MU-cet"/>
+                                            <constraint firstItem="kfG-2o-Ru6" firstAttribute="leading" secondItem="cIW-ej-Mu3" secondAttribute="leading" constant="16" id="5l9-lc-Eff"/>
                                             <constraint firstItem="9wg-p1-Dh8" firstAttribute="width" secondItem="cIW-ej-Mu3" secondAttribute="width" multiplier="0.606534" id="7Gn-B1-mzj"/>
                                             <constraint firstItem="ZgQ-6Q-ytX" firstAttribute="trailing" secondItem="WNs-Mf-o2E" secondAttribute="trailing" id="7Qv-2Q-16l"/>
                                             <constraint firstItem="pv0-hE-9gb" firstAttribute="top" secondItem="i0Z-fi-Rc0" secondAttribute="bottom" constant="40" id="9Tl-6z-0oD"/>
                                             <constraint firstItem="9wg-p1-Dh8" firstAttribute="trailing" secondItem="OxY-0X-J4W" secondAttribute="trailing" id="DZM-s1-6SI"/>
                                             <constraint firstItem="9wg-p1-Dh8" firstAttribute="leading" secondItem="OxY-0X-J4W" secondAttribute="leading" id="H3u-Fg-pSw"/>
-                                            <constraint firstAttribute="trailing" secondItem="I6b-LU-Dw9" secondAttribute="trailing" constant="12" id="HkF-Im-HwA"/>
+                                            <constraint firstAttribute="trailing" secondItem="I6b-LU-Dw9" secondAttribute="trailing" constant="16" id="HkF-Im-HwA"/>
                                             <constraint firstItem="i0Z-fi-Rc0" firstAttribute="leading" secondItem="qpz-cD-SkB" secondAttribute="trailing" constant="13" id="IDr-yn-TDc"/>
                                             <constraint firstAttribute="trailing" secondItem="OxY-0X-J4W" secondAttribute="trailing" constant="24" id="Kxf-Pd-SuX"/>
                                             <constraint firstAttribute="trailing" secondItem="ZgQ-6Q-ytX" secondAttribute="trailing" constant="16" id="Nib-M0-NAf"/>
-                                            <constraint firstItem="9wg-p1-Dh8" firstAttribute="top" secondItem="OxY-0X-J4W" secondAttribute="bottom" constant="8" id="Pee-mG-AEh"/>
+                                            <constraint firstItem="9wg-p1-Dh8" firstAttribute="top" secondItem="OxY-0X-J4W" secondAttribute="bottom" constant="8" id="Pee-mG-AEh">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                            </constraint>
                                             <constraint firstItem="WNs-Mf-o2E" firstAttribute="trailing" secondItem="9wg-p1-Dh8" secondAttribute="trailing" id="Qyz-BM-h94"/>
-                                            <constraint firstItem="I6b-LU-Dw9" firstAttribute="top" secondItem="9wg-p1-Dh8" secondAttribute="bottom" constant="29" id="SDX-FD-eoK"/>
+                                            <constraint firstItem="I6b-LU-Dw9" firstAttribute="top" secondItem="9wg-p1-Dh8" secondAttribute="bottom" constant="34" id="SDX-FD-eoK"/>
                                             <constraint firstItem="j5C-JI-DlO" firstAttribute="top" secondItem="ZgQ-6Q-ytX" secondAttribute="top" id="SOP-OE-aUn"/>
                                             <constraint firstItem="ZgQ-6Q-ytX" firstAttribute="leading" secondItem="j5C-JI-DlO" secondAttribute="trailing" constant="13" id="Sby-QY-IeT"/>
                                             <constraint firstItem="pv0-hE-9gb" firstAttribute="top" relation="greaterThanOrEqual" secondItem="i0Z-fi-Rc0" secondAttribute="bottom" constant="30" id="TBG-iP-tUa"/>
@@ -951,7 +945,7 @@
                                             <constraint firstItem="OxY-0X-J4W" firstAttribute="leading" secondItem="cIW-ej-Mu3" secondAttribute="leading" constant="24" id="eEj-oe-50b"/>
                                             <constraint firstItem="ZgQ-6Q-ytX" firstAttribute="top" secondItem="WNs-Mf-o2E" secondAttribute="bottom" constant="24" id="eZ4-z4-y8Y"/>
                                             <constraint firstItem="j5C-JI-DlO" firstAttribute="leading" secondItem="WNs-Mf-o2E" secondAttribute="leading" id="ev2-2N-siI"/>
-                                            <constraint firstItem="WNs-Mf-o2E" firstAttribute="leading" secondItem="cIW-ej-Mu3" secondAttribute="leading" constant="17" id="ewe-XX-er8"/>
+                                            <constraint firstItem="WNs-Mf-o2E" firstAttribute="leading" secondItem="cIW-ej-Mu3" secondAttribute="leading" constant="16" id="ewe-XX-er8"/>
                                             <constraint firstItem="i0Z-fi-Rc0" firstAttribute="trailing" secondItem="rm0-Ip-riS" secondAttribute="trailing" id="fiM-io-LRa"/>
                                             <constraint firstItem="kfG-2o-Ru6" firstAttribute="leading" secondItem="cIW-ej-Mu3" secondAttribute="leading" constant="16" id="hnv-cM-d5r"/>
                                             <constraint firstItem="i0Z-fi-Rc0" firstAttribute="top" secondItem="rm0-Ip-riS" secondAttribute="bottom" constant="24" id="l9y-0T-s99"/>
@@ -959,7 +953,7 @@
                                             <constraint firstAttribute="trailing" secondItem="pv0-hE-9gb" secondAttribute="trailing" constant="16" id="n0r-8g-stu"/>
                                             <constraint firstItem="rm0-Ip-riS" firstAttribute="leading" secondItem="XH8-Ky-Bjc" secondAttribute="trailing" constant="13" id="oGU-Xo-Vwu"/>
                                             <constraint firstItem="pv0-hE-9gb" firstAttribute="width" secondItem="cIW-ej-Mu3" secondAttribute="width" multiplier="0.34375" id="snb-ie-gmM"/>
-                                            <constraint firstItem="I6b-LU-Dw9" firstAttribute="leading" secondItem="kfG-2o-Ru6" secondAttribute="trailing" constant="25" id="sqM-hy-ZLs"/>
+                                            <constraint firstItem="I6b-LU-Dw9" firstAttribute="leading" secondItem="kfG-2o-Ru6" secondAttribute="trailing" constant="16" id="sqM-hy-ZLs"/>
                                             <constraint firstItem="WNs-Mf-o2E" firstAttribute="leading" secondItem="9wg-p1-Dh8" secondAttribute="leading" id="utY-VK-HTH"/>
                                             <constraint firstItem="rm0-Ip-riS" firstAttribute="top" secondItem="ZgQ-6Q-ytX" secondAttribute="bottom" constant="24" id="uwy-Y5-jOd"/>
                                             <constraint firstItem="I6b-LU-Dw9" firstAttribute="trailing" secondItem="9wg-p1-Dh8" secondAttribute="trailing" id="ykk-4J-07E"/>
@@ -995,7 +989,6 @@
                                                 <exclude reference="HkF-Im-HwA"/>
                                                 <include reference="ykk-4J-07E"/>
                                                 <include reference="9Tl-6z-0oD"/>
-                                                <exclude reference="TBG-iP-tUa"/>
                                                 <exclude reference="VbD-Wb-FTZ"/>
                                                 <include reference="dWO-go-xzf"/>
                                                 <exclude reference="n0r-8g-stu"/>
@@ -1071,16 +1064,16 @@
     </scenes>
     <designables>
         <designable name="7ma-TB-Yab">
-            <size key="intrinsicContentSize" width="51" height="14.5"/>
+            <size key="intrinsicContentSize" width="63" height="18.5"/>
         </designable>
         <designable name="P9C-72-GAw">
-            <size key="intrinsicContentSize" width="51" height="14.5"/>
+            <size key="intrinsicContentSize" width="63" height="18.5"/>
         </designable>
         <designable name="l1g-hs-4EK">
-            <size key="intrinsicContentSize" width="23.5" height="14.5"/>
+            <size key="intrinsicContentSize" width="35.5" height="18.5"/>
         </designable>
         <designable name="vNo-hV-l4c">
-            <size key="intrinsicContentSize" width="73.5" height="14.5"/>
+            <size key="intrinsicContentSize" width="85.5" height="18.5"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
@@ -1089,6 +1082,7 @@
     <resources>
         <image name="Group-1" width="717" height="512"/>
         <image name="Play" width="24" height="24"/>
+        <image name="about-icon" width="24" height="24"/>
         <image name="advanced_protection_icon" width="24" height="24"/>
         <image name="arrow_right" width="24" height="24"/>
         <image name="ic_adguard" width="24" height="24"/>

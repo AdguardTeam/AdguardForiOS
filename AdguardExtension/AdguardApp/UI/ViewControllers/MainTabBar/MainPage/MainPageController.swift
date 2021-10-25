@@ -42,6 +42,8 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
             iconButton = UIButton(frame: iconSize)
             iconButton?.setBackgroundImage(icon, for: .normal)
             iconButton?.tintColor = tintColor
+            iconButton?.contentVerticalAlignment = .fill
+            iconButton?.contentHorizontalAlignment = .fill
             updateButton.customView = iconButton
             iconButton?.addTarget(self, action: #selector(updateFilters(_:)), for: .touchUpInside)
         }

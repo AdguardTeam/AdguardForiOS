@@ -27,54 +27,85 @@ final class ChartDateTypeController: BottomAlertController {
 
     @IBOutlet weak var periodLabel: ThemableLabel!
     @IBOutlet weak var content: UIView!
-
-    @IBOutlet var buttons: [RoundRectButton]!
-    @IBOutlet var separators: [UIView]!
+    @IBOutlet weak var tableView: UITableView!
 
     weak var delegate: DateTypeChangedProtocol?
 
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-
-    private let todayTag = 0
-    private let oneDayTag = 1
-    private let weekTag = 2
-    private let monthTag = 3
-    private let allTimeTag = 4
+    private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupTableView()
         updateTheme()
     }
 
-    @IBAction func charDataTypeAction(_ sender: UIButton) {
-
-        switch sender.tag {
-        case todayTag:
-            delegate?.statisticsPeriodChanged(statisticsPeriod: .today)
-        case oneDayTag:
-            delegate?.statisticsPeriodChanged(statisticsPeriod: .day)
-        case weekTag:
-            delegate?.statisticsPeriodChanged(statisticsPeriod: .week)
-        case monthTag:
-            delegate?.statisticsPeriodChanged(statisticsPeriod: .month)
-        case allTimeTag:
-            delegate?.statisticsPeriodChanged(statisticsPeriod: .all)
-        default:
-            break
-        }
-
-        dismiss(animated: true, completion: nil)
+    private func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.isScrollEnabled = false
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 52.0
+        ExtendedRadioButtonCell.registerCell(forTableView: tableView)
     }
 }
+
+// MARK: - ChartDateTypeController + UITableViewDelegate
+
+extension ChartDateTypeController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let period = StatisticsPeriod.allCases[indexPath.row]
+        delegate?.statisticsPeriodChanged(statisticsPeriod: period)
+        tableView.deselectRow(at: indexPath, animated: true)
+        dismiss(animated: true)
+    }
+}
+
+// MARK: - ChartDateTypeController + UITableViewDataSource
+
+extension ChartDateTypeController: UITableViewDataSource {
+
+    func numberOfSections(in tableView: UITableView) -> Int { 1 }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { StatisticsPeriod.allCases.count }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = ExtendedRadioButtonCell.getCell(forTableView: tableView)
+        let period = StatisticsPeriod.allCases[indexPath.row]
+        cell.titleString = period.dateTypeString
+        cell.radioButtonSelected = resources.chartDateType == period
+        cell.isArrowRightHidden = true
+        cell.updateTheme(themeService: theme)
+        cell.cellTag = indexPath.row
+        cell.delegate = self
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+}
+
+// MARK: - ChartDateTypeController + ExtendedRadioButtonCellDelegate
+
+extension ChartDateTypeController: ExtendedRadioButtonCellDelegate {
+    func radioButtonTapped(with tag: Int) {
+        let indexPath = IndexPath(row: tag, section: 0)
+        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+        tableView(tableView, didSelectRowAt: indexPath)
+    }
+}
+
+// MARK: - ChartDateTypeController + ThemableProtocol
 
 extension ChartDateTypeController: ThemableProtocol {
     func updateTheme() {
         contentView.backgroundColor = theme.popupBackgroundColor
         periodLabel.textColor = theme.popupTitleTextColor
-        theme.setupSeparators(separators)
-        for button in buttons {
-            button.setTitleColor(theme.grayTextColor, for: .normal)
-        }
+        tableView.reloadData()
     }
 }
