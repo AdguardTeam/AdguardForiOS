@@ -31,7 +31,7 @@ struct ExtendedRadioButtonCellModel {
     let isArrowRightHidden: Bool
     let delegate: ExtendedRadioButtonCellDelegate?
 
-    init(cellTag: Int = 0,
+    init(cellTag: Int,
          titleString: String = "",
          descriptionString: String = "",
          radioButtonSelected: Bool = false,
