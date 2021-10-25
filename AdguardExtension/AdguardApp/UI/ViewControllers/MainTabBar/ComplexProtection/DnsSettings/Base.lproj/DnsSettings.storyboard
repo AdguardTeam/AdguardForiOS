@@ -38,12 +38,8 @@
                                                     <rect key="frame" x="183" y="8" width="48" height="48"/>
                                                     <color key="tintColor" red="0.35294117650000001" green="0.61176470589999998" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="48" id="Avv-yV-0H1">
-                                                            <variation key="heightClass=regular-widthClass=regular" constant="64"/>
-                                                        </constraint>
-                                                        <constraint firstAttribute="height" constant="48" id="P4B-b6-O9Q">
-                                                            <variation key="heightClass=regular-widthClass=regular" constant="64"/>
-                                                        </constraint>
+                                                        <constraint firstAttribute="width" constant="56" id="Avv-yV-0H1"/>
+                                                        <constraint firstAttribute="height" constant="56" id="P4B-b6-O9Q"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DNS protection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYv-iX-uIo" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -71,27 +67,21 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="NO"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <variation key="heightClass=regular-widthClass=regular">
-                                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     </variation>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="PFY-Cq-NFN" firstAttribute="leading" secondItem="JLd-ev-GWd" secondAttribute="leading" constant="24" id="0yp-b5-zVD"/>
-                                                <constraint firstItem="HzY-lY-IfE" firstAttribute="top" secondItem="JLd-ev-GWd" secondAttribute="top" constant="8" id="16G-tp-A5a">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="96"/>
-                                                </constraint>
-                                                <constraint firstItem="QYv-iX-uIo" firstAttribute="top" secondItem="HzY-lY-IfE" secondAttribute="bottom" constant="16" id="PWO-Cs-lYu">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="40"/>
-                                                </constraint>
+                                                <constraint firstItem="HzY-lY-IfE" firstAttribute="top" secondItem="JLd-ev-GWd" secondAttribute="top" id="16G-tp-A5a"/>
+                                                <constraint firstItem="QYv-iX-uIo" firstAttribute="top" secondItem="HzY-lY-IfE" secondAttribute="bottom" constant="12" id="PWO-Cs-lYu"/>
                                                 <constraint firstItem="QYv-iX-uIo" firstAttribute="leading" secondItem="JLd-ev-GWd" secondAttribute="leading" constant="24" id="QAr-47-v4h"/>
                                                 <constraint firstAttribute="trailing" secondItem="PFY-Cq-NFN" secondAttribute="trailing" constant="24" id="bEH-gt-n75"/>
-                                                <constraint firstItem="PFY-Cq-NFN" firstAttribute="top" secondItem="QYv-iX-uIo" secondAttribute="bottom" constant="12" id="hLW-RF-58W">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                                                <constraint firstItem="PFY-Cq-NFN" firstAttribute="top" secondItem="QYv-iX-uIo" secondAttribute="bottom" constant="8" id="hLW-RF-58W">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
-                                                <constraint firstAttribute="bottom" secondItem="PFY-Cq-NFN" secondAttribute="bottom" constant="16" id="hnl-c1-MDo">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="96"/>
-                                                </constraint>
+                                                <constraint firstAttribute="bottom" secondItem="PFY-Cq-NFN" secondAttribute="bottom" constant="24" id="hnl-c1-MDo"/>
                                                 <constraint firstItem="QYv-iX-uIo" firstAttribute="centerX" secondItem="JLd-ev-GWd" secondAttribute="centerX" id="rip-VW-Xfw"/>
                                                 <constraint firstAttribute="trailing" secondItem="QYv-iX-uIo" secondAttribute="trailing" constant="24" id="wDu-4z-2ga"/>
                                                 <constraint firstItem="HzY-lY-IfE" firstAttribute="centerX" secondItem="JLd-ev-GWd" secondAttribute="centerX" id="wcz-2M-gH6"/>
@@ -1997,7 +1987,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eo5-vz-faM">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eo5-vz-faM">
                                 <rect key="frame" x="0.0" y="534" width="414" height="362"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J4t-ME-idR">

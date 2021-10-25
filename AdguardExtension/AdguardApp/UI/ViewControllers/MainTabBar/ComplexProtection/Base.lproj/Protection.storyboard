@@ -39,9 +39,7 @@
                                                     <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="ygl-Nz-r9R" secondAttribute="height" id="E2v-gt-eK4"/>
-                                                        <constraint firstAttribute="width" constant="48" id="xW4-3G-Udj">
-                                                            <variation key="heightClass=regular-widthClass=regular" constant="64"/>
-                                                        </constraint>
+                                                        <constraint firstAttribute="width" constant="56" id="xW4-3G-Udj"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Protection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wyK-CX-EwT" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -59,16 +57,10 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="ygl-Nz-r9R" firstAttribute="centerX" secondItem="dsQ-eP-qBd" secondAttribute="centerX" id="4j5-dm-7ob"/>
-                                                <constraint firstAttribute="bottom" secondItem="wyK-CX-EwT" secondAttribute="bottom" constant="16" id="F9g-fD-8Y8">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="96"/>
-                                                </constraint>
-                                                <constraint firstItem="wyK-CX-EwT" firstAttribute="top" secondItem="ygl-Nz-r9R" secondAttribute="bottom" constant="16" id="J6N-Hx-VAJ">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="32"/>
-                                                </constraint>
+                                                <constraint firstAttribute="bottom" secondItem="wyK-CX-EwT" secondAttribute="bottom" constant="24" id="F9g-fD-8Y8"/>
+                                                <constraint firstItem="wyK-CX-EwT" firstAttribute="top" secondItem="ygl-Nz-r9R" secondAttribute="bottom" constant="12" id="J6N-Hx-VAJ"/>
                                                 <constraint firstAttribute="trailing" secondItem="wyK-CX-EwT" secondAttribute="trailing" constant="24" id="eVo-y5-iOw"/>
-                                                <constraint firstItem="ygl-Nz-r9R" firstAttribute="top" secondItem="dsQ-eP-qBd" secondAttribute="top" constant="8" id="nxz-6A-LFk">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="96"/>
-                                                </constraint>
+                                                <constraint firstItem="ygl-Nz-r9R" firstAttribute="top" secondItem="dsQ-eP-qBd" secondAttribute="top" id="nxz-6A-LFk"/>
                                                 <constraint firstItem="wyK-CX-EwT" firstAttribute="leading" secondItem="dsQ-eP-qBd" secondAttribute="leading" constant="24" id="tcM-Os-03D"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -934,7 +926,9 @@
                                             <constraint firstItem="i0Z-fi-Rc0" firstAttribute="leading" secondItem="qpz-cD-SkB" secondAttribute="trailing" constant="13" id="IDr-yn-TDc"/>
                                             <constraint firstAttribute="trailing" secondItem="OxY-0X-J4W" secondAttribute="trailing" constant="24" id="Kxf-Pd-SuX"/>
                                             <constraint firstAttribute="trailing" secondItem="ZgQ-6Q-ytX" secondAttribute="trailing" constant="16" id="Nib-M0-NAf"/>
-                                            <constraint firstItem="9wg-p1-Dh8" firstAttribute="top" secondItem="OxY-0X-J4W" secondAttribute="bottom" constant="8" id="Pee-mG-AEh"/>
+                                            <constraint firstItem="9wg-p1-Dh8" firstAttribute="top" secondItem="OxY-0X-J4W" secondAttribute="bottom" constant="8" id="Pee-mG-AEh">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                            </constraint>
                                             <constraint firstItem="WNs-Mf-o2E" firstAttribute="trailing" secondItem="9wg-p1-Dh8" secondAttribute="trailing" id="Qyz-BM-h94"/>
                                             <constraint firstItem="I6b-LU-Dw9" firstAttribute="top" secondItem="9wg-p1-Dh8" secondAttribute="bottom" constant="34" id="SDX-FD-eoK"/>
                                             <constraint firstItem="j5C-JI-DlO" firstAttribute="top" secondItem="ZgQ-6Q-ytX" secondAttribute="top" id="SOP-OE-aUn"/>
@@ -1083,7 +1077,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="tqk-Tx-Td7"/>
+        <segue reference="WYM-YR-INH"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Group-1" width="717" height="512"/>

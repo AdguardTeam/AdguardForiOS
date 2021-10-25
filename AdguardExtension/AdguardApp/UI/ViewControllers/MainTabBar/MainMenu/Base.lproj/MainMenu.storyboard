@@ -41,12 +41,8 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vpr-hb-t1u">
                                                     <rect key="frame" x="476" y="8" width="72" height="72"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="48" id="Fx6-c5-0Bc">
-                                                            <variation key="heightClass=regular-widthClass=regular" constant="64"/>
-                                                        </constraint>
-                                                        <constraint firstAttribute="width" constant="48" id="VSx-kx-rgh">
-                                                            <variation key="heightClass=regular-widthClass=regular" constant="64"/>
-                                                        </constraint>
+                                                        <constraint firstAttribute="height" constant="56" id="Fx6-c5-0Bc"/>
+                                                        <constraint firstAttribute="width" constant="56" id="VSx-kx-rgh"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UJb-NW-d5B" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -64,17 +60,11 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Vpr-hb-t1u" firstAttribute="centerX" secondItem="5eg-sd-icu" secondAttribute="centerX" id="17v-PB-19z"/>
-                                                <constraint firstItem="Vpr-hb-t1u" firstAttribute="top" secondItem="5eg-sd-icu" secondAttribute="top" constant="8" id="1oD-RJ-EKJ">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="96"/>
-                                                </constraint>
+                                                <constraint firstItem="Vpr-hb-t1u" firstAttribute="top" secondItem="5eg-sd-icu" secondAttribute="top" id="1oD-RJ-EKJ"/>
                                                 <constraint firstAttribute="trailing" secondItem="UJb-NW-d5B" secondAttribute="trailing" constant="24" id="Hkh-Bc-gbZ"/>
-                                                <constraint firstItem="UJb-NW-d5B" firstAttribute="top" secondItem="Vpr-hb-t1u" secondAttribute="bottom" constant="16" id="LaG-nL-ZWT">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="32"/>
-                                                </constraint>
+                                                <constraint firstItem="UJb-NW-d5B" firstAttribute="top" secondItem="Vpr-hb-t1u" secondAttribute="bottom" constant="12" id="LaG-nL-ZWT"/>
                                                 <constraint firstItem="UJb-NW-d5B" firstAttribute="leading" secondItem="5eg-sd-icu" secondAttribute="leading" constant="24" id="c2e-58-e24"/>
-                                                <constraint firstAttribute="bottom" secondItem="UJb-NW-d5B" secondAttribute="bottom" constant="16" id="lTf-kh-Cpp">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="96"/>
-                                                </constraint>
+                                                <constraint firstAttribute="bottom" secondItem="UJb-NW-d5B" secondAttribute="bottom" constant="24" id="lTf-kh-Cpp"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
