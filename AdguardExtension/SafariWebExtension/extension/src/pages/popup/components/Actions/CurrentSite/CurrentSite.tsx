@@ -27,10 +27,17 @@ export const CurrentSite = observer(() => {
     }
 
     if (!store.protectionEnabled) {
-        if (store.allowlistInverted) {
+        description = SiteStatusesMessages[SiteStatus.Allowlisted];
+        descriptionColor = 'green';
+    }
+
+    if (store.allowlistInverted) {
+        if (store.protectionEnabled) {
             description = SiteStatusesMessages[SiteStatus.AllowlistedInverted];
+            descriptionColor = 'green';
         } else {
-            description = SiteStatusesMessages[SiteStatus.Allowlisted];
+            description = SiteStatusesMessages[SiteStatus.ProtectionDisabled];
+            descriptionColor = 'gray';
         }
     }
 
