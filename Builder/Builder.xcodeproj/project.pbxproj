@@ -11,6 +11,8 @@
 		B29D53B2270D46BD0045CB16 /* AdGuardSDK_mac.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D049EBA826B1869C00B8088B /* AdGuardSDK_mac.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B2C8E9D42717115400ACDED8 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = B2C8E9D32717115400ACDED8 /* Zip */; };
 		D049EBB826B18BEA00B8088B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049EBB726B18BEA00B8088B /* main.swift */; };
+		D080EF012726FB0300146FB2 /* SystemLibsResolv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D080EF002726FB0300146FB2 /* SystemLibsResolv.framework */; };
+		D080EF022726FB0300146FB2 /* SystemLibsResolv.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D080EF002726FB0300146FB2 /* SystemLibsResolv.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D09B6EE426B9E0A200AC3BE7 /* schema.sql in CopyFiles */ = {isa = PBXBuildFile; fileRef = 659C60D31B8B50200081EBE3 /* schema.sql */; };
 /* End PBXBuildFile section */
 
@@ -21,6 +23,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				D080EF022726FB0300146FB2 /* SystemLibsResolv.framework in Embed Frameworks */,
 				B29D53B2270D46BD0045CB16 /* AdGuardSDK_mac.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -53,6 +56,7 @@
 		D067D8CE213EC8A900ECDE6D /* update0.101.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = update0.101.sql; sourceTree = "<group>"; };
 		D070CAAC22F489910061D9FC /* schema0.102.sql */ = {isa = PBXFileReference; lastKnownFileType = text; path = schema0.102.sql; sourceTree = "<group>"; };
 		D070CAAD22F489910061D9FC /* update0.102.sql */ = {isa = PBXFileReference; lastKnownFileType = text; path = update0.102.sql; sourceTree = "<group>"; };
+		D080EF002726FB0300146FB2 /* SystemLibsResolv.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SystemLibsResolv.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0D561782191F6EB00A35DEC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D0D5617A2191F6F700A35DEC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -64,6 +68,7 @@
 			files = (
 				B2C8E9D42717115400ACDED8 /* Zip in Frameworks */,
 				B29D53B1270D46BD0045CB16 /* AdGuardSDK_mac.framework in Frameworks */,
+				D080EF012726FB0300146FB2 /* SystemLibsResolv.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +122,7 @@
 		D0D561772191F6EB00A35DEC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D080EF002726FB0300146FB2 /* SystemLibsResolv.framework */,
 				D049EBA826B1869C00B8088B /* AdGuardSDK_mac.framework */,
 				D0D5617A2191F6F700A35DEC /* Cocoa.framework */,
 				D0D561782191F6EB00A35DEC /* AVFoundation.framework */,

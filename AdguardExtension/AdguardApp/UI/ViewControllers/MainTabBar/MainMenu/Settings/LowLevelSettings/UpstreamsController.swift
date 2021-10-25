@@ -18,6 +18,7 @@
 
 import UIKit
 import DnsAdGuardSDK
+import SharedAdGuardSDK
 import AGDnsProxy
 
 protocol UpstreamsControllerDelegate: AnyObject {
@@ -74,7 +75,7 @@ class UpstreamsController: BottomAlertController {
         }
 
         let addresses = transformToArray(address: text)
-        let validAddresses = addresses.filter { ACNUrlUtils.isIPv4($0) || ACNUrlUtils.isIPv6($0) }
+        let validAddresses = addresses.filter { UrlUtils.isIpv4($0) || UrlUtils.isIpv6($0) }
 
         if validAddresses.count != addresses.count && !text.isEmpty {
             DDLogError("(UppstreamsController) saveAction error - invalid addresses)")
@@ -207,8 +208,8 @@ class UpstreamsController: BottomAlertController {
     }
 
     private func saveCustomBlockingIps(_ ips: [String]) {
-        let ipv4 = ips.first { ACNUrlUtils.isIPv4($0) }
-        let ipv6 = ips.first { ACNUrlUtils.isIPv6($0) }
+        let ipv4 = ips.first { UrlUtils.isIpv4($0) }
+        let ipv6 = ips.first { UrlUtils.isIpv6($0) }
         resources.customBlockingIpv4 = ipv4
         resources.customBlockingIpv6 = ipv6
     }

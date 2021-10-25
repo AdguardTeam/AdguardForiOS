@@ -37,7 +37,8 @@ class DnsProxyConfigurationProviderTest: XCTestCase {
             fallbackServers: ["9.9.9.9"],
             bootstrapServers: ["1.1.1.1"],
             blockingMode: .customAddress,
-            blockingIp: "2.2.2.2",
+            blockingIpv4: "2.2.2.2",
+            blockingIpv6: "::",
             blockedTtl: 200,
             blockIpv6: false,
             restartByReachability: true
@@ -79,7 +80,7 @@ class DnsProxyConfigurationProviderTest: XCTestCase {
             hostsBlockingMode: .customAddress,
             blockedResponseTtlSecs: 200,
             customBlockingIpv4: "2.2.2.2",
-            customBlockingIpv6: nil,
+            customBlockingIpv6: "::",
             blockIpv6: false
         )
         XCTAssertEqual(actualConfig, expectedConfig)
