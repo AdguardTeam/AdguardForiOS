@@ -3,6 +3,8 @@ import Foundation
 final class FiltersServiceMock: FiltersServiceProtocol {
     var groups: [SafariGroup] = []
 
+    var lastFiltersUpdateCheckDate: Date = Date()
+
     var updateAllMetaCalledCount = 0
     var updateAllMetaResult: Result<FiltersUpdateResult> = .success(FiltersUpdateResult())
     func updateAllMeta(forcibly: Bool, onFiltersUpdated: @escaping (Result<FiltersUpdateResult>) -> Void) {

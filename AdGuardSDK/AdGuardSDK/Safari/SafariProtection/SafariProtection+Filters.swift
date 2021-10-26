@@ -25,6 +25,9 @@ public protocol SafariProtectionFiltersProtocol {
     /// Returns all Safari Groups objects
     var groups: [SafariGroup] { get }
 
+    /// Returns last date of safari filters update. If date were never been seated returns nil
+    var lastFiltersUpdateCheckDate: Date? { get }
+
     /**
      Enables or disables group by **group type** and reloads CBs than
      - Parameter groupType: type of the group that should be enabled/disabled
@@ -98,6 +101,15 @@ extension SafariProtection {
     public var filtersAreConverting: Bool { workingQueue.sync { converter.filtersAreConverting } }
 
     public var groups: [SafariGroup] { workingQueue.sync { filters.groups } }
+
+    public var lastFiltersUpdateCheckDate: Date? {
+        workingQueue.sync {
+            if filters.lastFiltersUpdateCheckDate == Date(timeIntervalSince1970: 0.0) {
+                return nil
+            }
+            return filters.lastFiltersUpdateCheckDate
+        }
+    }
 
     // MARK: - Public methods
 

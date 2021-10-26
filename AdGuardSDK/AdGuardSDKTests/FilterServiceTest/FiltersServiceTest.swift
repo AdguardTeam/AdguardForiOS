@@ -120,7 +120,8 @@ class FiltersServiceTest: XCTestCase {
         filtersUpdateStartedExpectation.isInverted = true
         filtersUpdateFinishedExpectation.isInverted = true
 
-        userDefaultsStorage.storage.setValue(Date(), forKey: lastFiltersUpdateCheckDateKey)
+        let updateDate = Date()
+        userDefaultsStorage.storage.setValue(updateDate, forKey: lastFiltersUpdateCheckDateKey)
 
         filterService.updateAllMeta(forcibly: false, onFiltersUpdated: { result in
             switch result {
@@ -134,7 +135,7 @@ class FiltersServiceTest: XCTestCase {
             expectation.fulfill()
         })
         wait(for: [expectation, filtersUpdateFinishedExpectation, filtersUpdateStartedExpectation], timeout: 1.0)
-
+        XCTAssertEqual(filterService.lastFiltersUpdateCheckDate, updateDate)
         XCTAssertEqual(filterFileStorage.updateCustomFilterCalledCount, 0)
         XCTAssertEqual(filterFileStorage.updateFilterCalledCount, 0)
         XCTAssertEqual(metaStorage.updateFiltersCalledCount, 0)
@@ -172,7 +173,7 @@ class FiltersServiceTest: XCTestCase {
         })
 
         wait(for: [expectation, filtersUpdateFinishedExpectation, filtersUpdateStartedExpectation], timeout: 1.0)
-        let afterUpdateDate = userDefaultsStorage.storage.value(forKey: lastFiltersUpdateCheckDateKey) as! Date
+        let afterUpdateDate = filterService.lastFiltersUpdateCheckDate
         XCTAssert(afterUpdateDate > beforeUpdateDate)
 
         XCTAssertEqual(filterFileStorage.updateCustomFilterCalledCount, metaStorage.filtersTableMock.filter{ $0.groupId == SafariGroup.GroupType.custom.id }.count)
@@ -200,6 +201,8 @@ class FiltersServiceTest: XCTestCase {
         apiMethods.loadFiltersLocalizationsResult = mockFiltersLocalizations
         filterFileStorage.updateFilterResultError = FilterFilesStorageMockError.updateFilterError
 
+        let beforeUpdateDate = Date()
+
         filterService.updateAllMeta(forcibly: true, onFiltersUpdated: { result in
             switch result {
             case .success(let updateResult):
@@ -214,6 +217,8 @@ class FiltersServiceTest: XCTestCase {
             expectation.fulfill()
         })
         wait(for: [expectation, filtersUpdateFinishedExpectation, filtersUpdateStartedExpectation], timeout: 1.0)
+        let afterUpdateDate = filterService.lastFiltersUpdateCheckDate
+        XCTAssert(afterUpdateDate > beforeUpdateDate)
 
         XCTAssertEqual(filterFileStorage.updateCustomFilterCalledCount, 2)
         XCTAssertEqual(filterFileStorage.updateFilterCalledCount, 28)
