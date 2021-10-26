@@ -165,7 +165,6 @@ final class UserRulesTableController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.sectionHeaderHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 84.0
         tableView.sectionFooterHeight = 0.01
         tableView.estimatedRowHeight = 48.0
         tableView.rowHeight = UITableView.automaticDimension
@@ -347,6 +346,9 @@ final class UserRulesTableController: UIViewController {
 
 extension UserRulesTableController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if model.isEditing || model.isSearching {
+            return nil
+        }
         let isEnabled = model.isEnabled
         let model = StateHeaderViewModel(iconImage: model.icon, title: isEnabled.localizedStateDescription, isEnabled: isEnabled, id: isEnabled)
         let view =  StateHeaderView<Bool>(frame: .zero)
