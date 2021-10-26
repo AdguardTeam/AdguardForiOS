@@ -462,7 +462,7 @@ final class FiltersService: FiltersServiceProtocol {
     func enablePredefinedGroupsAndFilters() throws {
         try workingQueue.sync {
             /* The first element of the `suitableLanguages` list is the language code with the lowest priority. Last element of `suitableLanguages` is code language like `fr`, `de` or 'ru'.
-            filters.json contains languages for filters only in code language formate
+            filters.json contains languages for filters only in code language format
              */
             let lang = suitableLanguages.last ?? Locale.defaultLanguageCode
             try enablePredefinedGroupsAndFiltersInternal(with: groups, currentLanguage: lang)
