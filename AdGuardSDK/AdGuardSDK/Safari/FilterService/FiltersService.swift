@@ -41,6 +41,11 @@ protocol FiltersServiceProtocol: ResetableAsyncProtocol {
     var groups: [SafariGroup] { get }
 
     /**
+     Returns last safari filters update date
+     */
+    var lastFiltersUpdateCheckDate: Date { get }
+
+    /**
      Checks update conditions for meta and updates them if needed
      - Parameter forcibly: ignores update conditions and immediately updates filters
      - Parameter onFiltersUpdated: closure to handle update **result**
@@ -132,6 +137,10 @@ final class FiltersService: FiltersServiceProtocol {
     // MARK: - Public properties
 
     var groups: [SafariGroup] { _groupsAtomic.wrappedValue }
+
+    var lastFiltersUpdateCheckDate: Date {
+        workingQueue.sync { userDefaultsStorage.lastFiltersUpdateCheckDate }
+    }
 
     // MARK: - Private properties
 
@@ -257,11 +266,11 @@ final class FiltersService: FiltersServiceProtocol {
 
             // Notify that filters finished updating
             NotificationCenter.default.filtersUpdateFinished()
-        }
 
-        // Save filters update time if filters were successfully updated
-        if preconditionError == nil, updateMetadataError == nil, groupsUpdateError == nil {
-            userDefaultsStorage.lastFiltersUpdateCheckDate = Date()
+            // Save filters update time if filters were successfully updated
+            if preconditionError == nil, updateMetadataError == nil, groupsUpdateError == nil {
+                self.userDefaultsStorage.lastFiltersUpdateCheckDate = Date()
+            }
         }
         comletionGroup.notify(queue: .main) {
             if let preconditionError = preconditionError {

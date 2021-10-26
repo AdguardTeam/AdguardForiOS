@@ -360,4 +360,12 @@ class SafariProtectionFiltersTest: XCTestCase {
         XCTAssertThrowsError(try safariProtection.enablePredefinedGroupsAndFilters())
         XCTAssertEqual(filters.enablePredefinedGroupsAndFiltersCount, 1)
     }
+
+    func testLastFiltersUpdateCheckDate() {
+        let filtersDate = Date()
+        filters.lastFiltersUpdateCheckDate = filtersDate
+        XCTAssertEqual(safariProtection.lastFiltersUpdateCheckDate, filtersDate)
+        filters.lastFiltersUpdateCheckDate = Date(timeIntervalSince1970: 0.0)
+        XCTAssertNil(safariProtection.lastFiltersUpdateCheckDate)
+    }
 }

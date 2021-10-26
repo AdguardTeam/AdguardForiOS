@@ -208,7 +208,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
 
     /// Updates safari protection view
-    private func updateWidgetSafari(){
+    private func updateWidgetSafari() {
         let safariEnabled = serviceInitializer.complexProtection.safariProtectionEnabled
 
         let alpha: CGFloat = safariEnabled ? 1.0 : 0.5
@@ -217,15 +217,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         safariTitleLabel.alpha = alpha
         safariSwitchOutlet.isOn = safariEnabled
 
-        if let lastUpdateDate = resources.sharedDefaults().object(forKey: AEDefaultsCheckFiltersLastDate) as? Date {
-
+        if let lastUpdateDate = serviceInitializer.safariProtection.lastFiltersUpdateCheckDate {
             let dateString = lastUpdateDate.formatedString() ?? ""
             safariTextLabel.text = String(format: String.localizedString("filter_date_format"), dateString)
         }
     }
 
     /// Updates DNS protection view
-    private func updateWidgetSystem(){
+    private func updateWidgetSystem() {
         let vpnEnabled = serviceInitializer.complexProtection.systemProtectionEnabled
 
         let alpha: CGFloat = vpnEnabled ? 1.0 : 0.5
@@ -269,7 +268,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
      Set text colors and switches backgrounds
      Must be called from NCWidgetProviding method in ios 13
      */
-    private func setColorsToLabels(){
+    private func setColorsToLabels() {
         safariTitleLabel.textColor = widgetTitleColor
         safariTextLabel.textColor = widgetTextColor
 
@@ -293,7 +292,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
 
     /// Animates an appearing of compact mode
-    private func showForCompactMode(){
+    private func showForCompactMode() {
         compactView.isHidden = false
 
         UIView.animate(withDuration: 0.5, animations: {[weak self] in
@@ -309,7 +308,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
 
     /// Animates an appearing of expanded mode
-    private func showForExpandedMode(){
+    private func showForExpandedMode() {
         expandedStackView.isHidden = false
 
         UIView.animate(withDuration: 0.5, animations: {[weak self] in
@@ -336,7 +335,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
 
     /// Changes number of requests for specific button
-    private func changeTextForButton(){
+    private func changeTextForButton() {
         DispatchQueue.asyncSafeMain { [weak self] in
             guard let self = self else { return }
             let statisticRecord = try? self.serviceInitializer.activityStatistics.getCounters(for: .all)
