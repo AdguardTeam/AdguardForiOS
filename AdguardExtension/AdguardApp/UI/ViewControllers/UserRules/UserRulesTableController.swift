@@ -273,8 +273,9 @@ final class UserRulesTableController: UIViewController {
         model.isSearching = true
         navigationItem.rightBarButtonItems = model.isEditing ? [cancelFromSearchButton] : [editButton, cancelFromSearchButton]
         tableView.tableHeaderView = searchHeader
-        searchHeader.textField.becomeFirstResponder()
+        searchHeader.textField.returnKeyType = .search
         searchHeader.textField.borderState = .enabled
+        searchHeader.textField.becomeFirstResponder()
         tableView.reloadWithSelectedRows()
     }
 

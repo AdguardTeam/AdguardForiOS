@@ -163,8 +163,8 @@ final class DnsFiltersTableController: UITableViewController {
     private func setSearchHeaderView() {
         headerView = AGSearchView()
         headerView?.delegate = self
+        headerView?.textField.returnKeyType = .search
         tableView.tableHeaderView = headerView
-
     }
 
     private func setTitleHeaderView() {

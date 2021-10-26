@@ -126,6 +126,7 @@ final class SafariGroupFiltersTableController: UITableViewController {
         headerTitleView = nil
         headerSearchView = AGSearchView()
         headerSearchView?.delegate = self
+        headerSearchView?.textField.returnKeyType = .search
         tableView.tableHeaderView = headerSearchView
     }
 
