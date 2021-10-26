@@ -165,7 +165,6 @@ final class UserRulesTableController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.sectionHeaderHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 84.0
         tableView.sectionFooterHeight = 0.01
         tableView.estimatedRowHeight = 48.0
         tableView.rowHeight = UITableView.automaticDimension
@@ -273,9 +272,12 @@ final class UserRulesTableController: UIViewController {
     private func goToSearchMode() {
         model.isSearching = true
         navigationItem.rightBarButtonItems = model.isEditing ? [cancelFromSearchButton] : [editButton, cancelFromSearchButton]
+        navigationItem.leftBarButtonItem = nil
+        navigationItem.setHidesBackButton(true, animated: true)
         tableView.tableHeaderView = searchHeader
-        searchHeader.textField.becomeFirstResponder()
+        searchHeader.textField.returnKeyType = .search
         searchHeader.textField.borderState = .enabled
+        searchHeader.textField.becomeFirstResponder()
         tableView.reloadWithSelectedRows()
     }
 
@@ -306,6 +308,8 @@ final class UserRulesTableController: UIViewController {
             buttonsStackView.isHidden = true
         }
         navigationItem.rightBarButtonItems = [editButton, searchButton]
+        navigationItem.setHidesBackButton(false, animated: true)
+        setupBackButton()
         tableView.reloadData()
         tableView.tableHeaderView = titleHeader
         view.endEditing(true)
@@ -347,6 +351,9 @@ final class UserRulesTableController: UIViewController {
 
 extension UserRulesTableController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if model.isEditing || model.isSearching {
+            return nil
+        }
         let isEnabled = model.isEnabled
         let model = StateHeaderViewModel(iconImage: model.icon, title: isEnabled.localizedStateDescription, isEnabled: isEnabled, id: isEnabled)
         let view =  StateHeaderView<Bool>(frame: .zero)
