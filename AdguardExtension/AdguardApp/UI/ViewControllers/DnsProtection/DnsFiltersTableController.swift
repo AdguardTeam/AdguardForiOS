@@ -70,11 +70,15 @@ final class DnsFiltersTableController: UITableViewController {
 
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
         navigationItem.rightBarButtonItems = [searchButton]
+        navigationItem.setHidesBackButton(false, animated: true)
+        setupBackButton()
         setTitleHeaderView()
     }
 
     @IBAction func searchButtonTapped(_ sender: UIBarButtonItem) {
         navigationItem.rightBarButtonItems = [cancelButton]
+        navigationItem.leftBarButtonItem = nil
+        navigationItem.setHidesBackButton(true, animated: true)
         setSearchHeaderView()
         headerView?.textField.becomeFirstResponder()
     }

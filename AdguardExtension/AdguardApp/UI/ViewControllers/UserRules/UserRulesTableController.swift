@@ -272,6 +272,8 @@ final class UserRulesTableController: UIViewController {
     private func goToSearchMode() {
         model.isSearching = true
         navigationItem.rightBarButtonItems = model.isEditing ? [cancelFromSearchButton] : [editButton, cancelFromSearchButton]
+        navigationItem.leftBarButtonItem = nil
+        navigationItem.setHidesBackButton(true, animated: true)
         tableView.tableHeaderView = searchHeader
         searchHeader.textField.returnKeyType = .search
         searchHeader.textField.borderState = .enabled
@@ -306,6 +308,8 @@ final class UserRulesTableController: UIViewController {
             buttonsStackView.isHidden = true
         }
         navigationItem.rightBarButtonItems = [editButton, searchButton]
+        navigationItem.setHidesBackButton(false, animated: true)
+        setupBackButton()
         tableView.reloadData()
         tableView.tableHeaderView = titleHeader
         view.endEditing(true)

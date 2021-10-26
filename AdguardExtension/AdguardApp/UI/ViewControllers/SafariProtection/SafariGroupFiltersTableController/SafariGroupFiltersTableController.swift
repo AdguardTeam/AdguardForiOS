@@ -55,6 +55,7 @@ final class SafariGroupFiltersTableController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupBackButton()
 
         // Setup view model
         switch displayType {
@@ -84,7 +85,6 @@ final class SafariGroupFiltersTableController: UITableViewController {
         model.delegate = self
 
         updateTheme()
-        setupBackButton()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -111,6 +111,8 @@ final class SafariGroupFiltersTableController: UITableViewController {
     }
 
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
+        setupBackButton()
+        navigationItem.setHidesBackButton(false, animated: true)
         navigationItem.rightBarButtonItems = [searchButton]
         switch displayType {
         case .one(_): addHeaderTitleView()
@@ -123,6 +125,8 @@ final class SafariGroupFiltersTableController: UITableViewController {
     // MARK: - Private methods
 
     private func addHeaderSearchView() {
+        navigationItem.leftBarButtonItem = nil
+        navigationItem.setHidesBackButton(true, animated: true)
         headerTitleView = nil
         headerSearchView = AGSearchView()
         headerSearchView?.delegate = self
