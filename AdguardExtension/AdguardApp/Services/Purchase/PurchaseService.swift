@@ -276,11 +276,12 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
     }
 
     func validateReceipt(onComplete complete:@escaping ((Error?)->Void)){
-
         // get receipt
-        guard let receiptUrlStr = Bundle.main.appStoreReceiptURL else { return }
-        if !FileManager.default.fileExists(atPath: receiptUrlStr.path) { return }
-        guard let data = try? Data(contentsOf: receiptUrlStr) else {
+        guard
+            let receiptUrlStr = Bundle.main.appStoreReceiptURL,
+            FileManager.default.fileExists(atPath: receiptUrlStr.path),
+            let data = try? Data(contentsOf: receiptUrlStr)
+        else {
             complete(NSError(domain: PurchaseAssistant.AEPurchaseErrorDomain, code: PurchaseAssistant.AEConfirmReceiptError, userInfo: nil))
             return
         }
@@ -364,18 +365,18 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         // but also for restoring purchases after reinstalling the application
         DDLogInfo("(PurchaseService) checkPremiumExpired - validateReceipt")
         let wasActive = self.isInAppPurchaseActive()
-        validateReceipt { [weak self] (error) in
-            guard let sSelf = self else { return }
-            if wasActive && !sSelf.isInAppPurchaseActive() {
-                sSelf.postNotification(PurchaseAssistant.kPSNotificationPremiumExpired)
+        validateReceipt { [weak self] _ in
+            guard let self = self else { return }
+
+            if wasActive && !self.isInAppPurchaseActive() {
+                self.postNotification(PurchaseAssistant.kPSNotificationPremiumExpired)
             }
-            else if !wasActive && sSelf.isInAppPurchaseActive() {
-                sSelf.postNotification(PurchaseAssistant.kPSNotificationSilentRestoreSuccess)
+            else if !wasActive && self.isInAppPurchaseActive() {
+                self.postNotification(PurchaseAssistant.kPSNotificationSilentRestoreSuccess)
             }
         }
 
-        if(loginService.loggedIn && loginService.hasPremiumLicense) {
-
+        if loginService.loggedIn && loginService.hasPremiumLicense {
             DDLogInfo("(PurchaseService) checkPremiumExpired - сheck adguard license status")
             loginService.checkStatus { [weak self] (error) in
                 if error != nil || !(self?.loginService.active ?? false) {

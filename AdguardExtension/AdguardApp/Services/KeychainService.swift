@@ -21,9 +21,9 @@ import Foundation
 protocol KeychainServiceProtocol {
 
     var appId: String? { get }
-    func loadAuth(server: String)->(login: String, password: String)?
+    func loadAuth(server: String) -> (login: String, password: String)?
     func saveAuth(server: String, login: String, password: String) -> Bool
-    func deleteAuth(server: String) ->Bool
+    func deleteAuth(server: String) -> Bool
     func saveLicenseKey(server: String, key: String) -> Bool
     func loadLicenseKey(server: String) -> String?
     func deleteLicenseKey(server: String) -> Bool
