@@ -36,7 +36,7 @@ public struct DnsRequestProcessedEvent {
 
     public var isBlocked: Bool {
         switch processedStatus {
-        case .blocklistedByDnsFilter, .blocklistedByUserFilter: return true
+        case .blocklistedByDnsFilter, .blocklistedByUserFilter, .blocklistedByDnsServer: return true
         default: return false
         }
     }

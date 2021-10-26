@@ -54,18 +54,31 @@ final class CompanyDetailedController: UITableViewController {
     private var keyboardShowToken: NotificationToken?
 
     // MARK: - Public variables
+
+    // TODO: - It's a crutch to get link of `ActivityViewController`
+    weak var activityVC: DnsRequestDetailsContainerControllerDelegate?
     var statisticsPeriod: StatisticsPeriod?
-    var requestsModel: DnsRequestLogViewModel!
     var record: CompanyRequestsRecord?
 
     // MARK: - Private variables
-
+    private let requestsModel: DnsRequestLogViewModel
     private var selectedRecord: DnsLogRecord?
 
     private let activityTableViewCellReuseId = "ActivityTableViewCellId"
     private let showDnsContainerSegueId = "showDnsContainer"
 
     private var titleInNavBarIsShown = false
+
+    required init?(coder: NSCoder) {
+        self.requestsModel = DnsRequestLogViewModel(
+            dnsTrackers: ServiceLocator.shared.getService()!,
+            dnsStatistics: ServiceLocator.shared.getService()!,
+            dnsProtection: ServiceLocator.shared.getService()!,
+            domainParser: ServiceLocator.shared.getService()!,
+            logRecordHelper: ServiceLocator.shared.getService()!
+        )
+        super.init(coder: coder)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,11 +101,6 @@ final class CompanyDetailedController: UITableViewController {
 
         requestsNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsCount))
         encryptedNumberLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedCount))
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tableView.reloadData()
     }
 
     override func viewDidLayoutSubviews() {
@@ -214,6 +222,9 @@ final class CompanyDetailedController: UITableViewController {
         requestsModel.recordsObserver = { [weak self] records in
             DispatchQueue.asyncSafeMain { [weak self] in
                 guard let self = self else { return }
+
+                self.refreshControl?.endRefreshing()
+
                 self.tableView.reloadData()
                 if self.requestsModel.records.isEmpty {
                     self.tableView.scrollRectToVisible(self.tableFooterView.frame, animated: true)
@@ -287,11 +298,10 @@ final class CompanyDetailedController: UITableViewController {
         present(alert, animated: true)
     }
 
-    @objc func updateTableView(sender: UIRefreshControl) {
+    @objc private final func updateTableView(sender: UIRefreshControl) {
         if let period = statisticsPeriod, let domains = record?.domains {
             requestsModel.obtainRecords(for: period, domains: domains)
         }
-        refreshControl?.endRefreshing()
     }
 }
 
@@ -342,6 +352,10 @@ extension CompanyDetailedController: DnsRequestsDelegateProtocol {
 extension CompanyDetailedController: DnsRequestDetailsContainerControllerDelegate {
     func userStatusChanged() {
         requestsModel.updateUserStatuses()
+        activityVC?.userStatusChanged()
+        DispatchQueue.asyncSafeMain { [weak self] in
+            self?.tableView.reloadData()
+        }
     }
 }
 

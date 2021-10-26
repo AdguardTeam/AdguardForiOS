@@ -134,7 +134,6 @@ final class ActivityViewController: UITableViewController {
         }
 
         updateTextForButtons()
-        tableView.reloadData()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -165,7 +164,7 @@ final class ActivityViewController: UITableViewController {
         } else if segue.identifier == showMostActiveCompaniesSegueId, let controller = segue.destination as? MostActiveCompaniesController {
             controller.mostRequestedCompanies = mostRequestedCompanies
             controller.chartDateType = resources.activityStatisticsType
-            controller.requestsModel = requestsModel
+            controller.activityVC = self
         }
     }
 
@@ -207,7 +206,7 @@ final class ActivityViewController: UITableViewController {
     }
 
     @IBAction func changeRequestsTypeAction(_ sender: UIButton) {
-//        showGroupsAlert(sender)
+        showGroupsAlert(sender)
     }
 
     // MARK: - Tableview Datasource and Delegate
@@ -338,41 +337,41 @@ final class ActivityViewController: UITableViewController {
         present(alert, animated: true)
     }
 
-//    private func showGroupsAlert(_ sender: UIButton) {
-//        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .deviceAlertStyle)
-//
-//        let allRequestsAction = UIAlertAction(title: String.localizedString("all_requests_alert_action"), style: .default) {[weak self] _ in
-//            guard let self = self else { return }
-//            self.requestsModel?.displayedStatisticsType = .allRequests
-//            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
-//            alert.dismiss(animated: true, completion: nil)
-//        }
-//
-//        let blockedOnlyAction = UIAlertAction(title: String.localizedString("blocked_only_alert_action"), style: .default) {[weak self] _ in
-//            guard let self = self else { return }
-//            self.requestsModel?.displayedStatisticsType = .blockedRequests
-//            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
-//            alert.dismiss(animated: true, completion: nil)
-//        }
-//
-//        let allowedOnlyAction = UIAlertAction(title: String.localizedString("allowed_only_alert_action"), style: .default) {[weak self] _ in
-//            guard let self = self else { return }
-//            self.requestsModel?.displayedStatisticsType = .allowedRequests
-//            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
-//            alert.dismiss(animated: true, completion: nil)
-//        }
-//
-//        let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel) { _ in
-//            alert.dismiss(animated: true, completion: nil)
-//        }
-//
-//        alert.addAction(allRequestsAction)
-//        alert.addAction(blockedOnlyAction)
-//        alert.addAction(allowedOnlyAction)
-//        alert.addAction(cancelAction)
-//
-//        present(alert, animated: true)
-//    }
+    private func showGroupsAlert(_ sender: UIButton) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .deviceAlertStyle)
+
+        let allRequestsAction = UIAlertAction(title: String.localizedString("all_requests_alert_action"), style: .default) {[weak self] _ in
+            guard let self = self else { return }
+            self.requestsModel?.displayedStatisticsType = .allRequests
+            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
+            alert.dismiss(animated: true, completion: nil)
+        }
+
+        let blockedOnlyAction = UIAlertAction(title: String.localizedString("blocked_only_alert_action"), style: .default) {[weak self] _ in
+            guard let self = self else { return }
+            self.requestsModel?.displayedStatisticsType = .blockedRequests
+            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
+            alert.dismiss(animated: true, completion: nil)
+        }
+
+        let allowedOnlyAction = UIAlertAction(title: String.localizedString("allowed_only_alert_action"), style: .default) {[weak self] _ in
+            guard let self = self else { return }
+            self.requestsModel?.displayedStatisticsType = .allowedRequests
+            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
+            alert.dismiss(animated: true, completion: nil)
+        }
+
+        let cancelAction = UIAlertAction(title: String.localizedString("common_action_cancel"), style: .cancel) { _ in
+            alert.dismiss(animated: true, completion: nil)
+        }
+
+        alert.addAction(allRequestsAction)
+        alert.addAction(blockedOnlyAction)
+        alert.addAction(allowedOnlyAction)
+        alert.addAction(cancelAction)
+
+        present(alert, animated: true)
+    }
 
     /**
      Presents ChartDateTypeController
@@ -423,8 +422,11 @@ final class ActivityViewController: UITableViewController {
         }
 
         requestsModel?.recordsObserver = { [weak self] (records) in
-            DispatchQueue.main.async { [weak self] in
+            DispatchQueue.asyncSafeMain { [weak self] in
                 guard let self = self else { return }
+
+                self.refreshControl?.endRefreshing()
+
                 self.tableView.reloadData()
                 if self.requestsModel?.records.isEmpty == true {
                     self.tableView.scrollRectToVisible(self.tableFooterView.frame, animated: true)
@@ -477,12 +479,10 @@ final class ActivityViewController: UITableViewController {
         }
     }
 
-    @objc func updateTableView(sender: UIRefreshControl) {
+    @objc private final func updateTableView(sender: UIRefreshControl) {
         requestsModel?.obtainRecords(for: resources.activityStatisticsType, domains: nil)
         statisticsPeriodChanged(statisticsPeriod: resources.activityStatisticsType)
         activityModel.period = resources.activityStatisticsType
-
-        refreshControl?.endRefreshing()
     }
 }
 
@@ -522,7 +522,7 @@ extension ActivityViewController: UISearchBarDelegate {
 
 extension ActivityViewController: DnsRequestsDelegateProtocol {
     func requestsCleared() {
-        DispatchQueue.main.async {[weak self] in
+        DispatchQueue.asyncSafeMain { [weak self] in
             self?.tableView.reloadData()
         }
     }
@@ -637,5 +637,8 @@ extension ActivityViewController: ThemableProtocol {
 extension ActivityViewController: DnsRequestDetailsContainerControllerDelegate {
     func userStatusChanged() {
         requestsModel?.updateUserStatuses()
+        DispatchQueue.asyncSafeMain { [weak self] in
+            self?.tableView.reloadData()
+        }
     }
 }
