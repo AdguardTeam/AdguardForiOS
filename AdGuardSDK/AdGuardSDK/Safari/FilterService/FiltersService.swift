@@ -461,10 +461,8 @@ final class FiltersService: FiltersServiceProtocol {
 
     func enablePredefinedGroupsAndFilters() throws {
         try workingQueue.sync {
-            /* The first element of the `suitableLanguages` list is the language code with the lowest priority. Last element of `suitableLanguages` is code language like `fr`, `de` or 'ru'.
-            filters.json contains languages for filters only in code language format
-             */
-            let lang = suitableLanguages.last ?? Locale.defaultLanguageCode
+            // The first element of the `suitableLanguages` list is the language code with the highest priority.
+            let lang = suitableLanguages.first ?? Locale.defaultLanguageCode
             try enablePredefinedGroupsAndFiltersInternal(with: groups, currentLanguage: lang)
             try self._groupsAtomic.mutate { $0 = try getAllLocalizedGroups() }
         }
@@ -905,7 +903,7 @@ final class FiltersService: FiltersServiceProtocol {
 
     /* Enable predefined groups and filters. Throws error on setting enabled state in storage*/
     private func enablePredefinedGroupsAndFiltersInternal(with groups: [SafariGroup], currentLanguage: String) throws {
-        let predefinedGroups: [SafariGroup.GroupType] = [.ads, .privacy, .languageSpecific]
+        let groupsToEnable: [SafariGroup.GroupType] = [.ads, .privacy, .languageSpecific]
         for group in groups {
             var recommendedCount = 0
 
@@ -916,9 +914,12 @@ final class FiltersService: FiltersServiceProtocol {
                 recommendedCount += 1
             }
 
-            let groupIsEnabled = recommendedCount > 0 && predefinedGroups.contains(group.groupType)
+            /*
+             Some groups has enabled filters but groups it self not enabled. That because not all groups must be enabled, only `ads`, `privacy` and `language specific` groups
+             */
+            let groupIsEnabled = recommendedCount > 0 && groupsToEnable.contains(group.groupType)
             try metaStorage.setGroup(withId: group.groupId, enabled: groupIsEnabled)
-            Logger.logInfo("(FiltersService) - enablePredefinedMeta; Group with groupType=\(group.groupType) were enabled")
+            Logger.logInfo("(FiltersService) - enablePredefinedMeta; Group with groupType=\(group.groupType) were enabled = \(groupIsEnabled)")
         }
     }
 
