@@ -915,7 +915,7 @@ final class FiltersService: FiltersServiceProtocol {
             }
 
             /*
-             Some groups has enabled filters but groups it self not enabled. That because not all groups must be enabled, only `ads`, `privacy` and `language specific` groups
+             Some disabled groups have enabled filters. Only these groups should be enabled by default: ads, privacy and language specific
              */
             let groupIsEnabled = recommendedCount > 0 && groupsToEnable.contains(group.groupType)
             try metaStorage.setGroup(withId: group.groupId, enabled: groupIsEnabled)
