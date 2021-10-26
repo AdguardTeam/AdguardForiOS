@@ -192,6 +192,7 @@ final class SupportService: SupportServiceProtocol {
         Platform: \(device.systemName)
         OS: \(device.systemVersion)
         ID: \(device.identifierForVendor?.uuidString ?? "Unknown")
+        APP ID: \(keyChainService.appId ?? "nil")
 
         Locale: \(ADLocales.lang() ?? "Unknown")
         Region: \(ADLocales.region() ?? "Unknown")
