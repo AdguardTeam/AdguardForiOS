@@ -44,7 +44,7 @@
 
         _provider = provider;
         _dnsProxy = dnsProxy;
-        _readQueue = dispatch_queue_create("com.adguard.AdguardPro.tunnel.read", DISPATCH_QUEUE_SERIAL);
+        _readQueue = dispatch_queue_create("com.adguard.VisafePro.tunnel.read", DISPATCH_QUEUE_SERIAL);
     }
     return self;
 }

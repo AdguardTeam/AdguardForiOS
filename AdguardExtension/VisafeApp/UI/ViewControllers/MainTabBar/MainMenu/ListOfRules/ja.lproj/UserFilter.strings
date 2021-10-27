@@ -1,0 +1,26 @@
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "5eU-q4-Xed"; Note = "(AddRuleController) cancel button"; */
+"5eU-q4-Xed.normalTitle" = "キャンセル";
+
+/* Class = "UILabel"; text = "The rule has been added to the User rules"; ObjectID = "BfI-YN-iXe"; */
+"BfI-YN-iXe.text" = "ユーザールールにルール追加完了。";
+
+/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "Bvs-mI-vEr"; */
+"Bvs-mI-vEr.normalTitle" = "保存";
+
+/* Class = "UILabel"; text = "Edit"; ObjectID = "EH6-Zr-YRP"; */
+"EH6-Zr-YRP.text" = "編集";
+
+/* Class = "UIButton"; normalTitle = "Select"; ObjectID = "HFf-Yp-hjB"; */
+"HFf-Yp-hjB.normalTitle" = "選択する";
+
+/* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "Tei-uI-6Gr"; */
+"Tei-uI-6Gr.normalTitle" = "削除";
+
+/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "fCd-gA-rXS"; */
+"fCd-gA-rXS.normalTitle" = "追加";
+
+/* Class = "UILabel"; text = "Domain:"; ObjectID = "x7r-Ln-XiZ"; */
+"x7r-Ln-XiZ.text" = "ドメイン：";
+
+/* Class = "UIButton"; normalTitle = "OK"; ObjectID = "zRm-I7-37E"; */
+"zRm-I7-37E.normalTitle" = "OK";

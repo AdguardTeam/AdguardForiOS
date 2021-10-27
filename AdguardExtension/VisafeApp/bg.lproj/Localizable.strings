@@ -1,0 +1,41 @@
+/* (AEService) The default message for an unknown error. */
+"support_unexpected_error" = "Възникна неочаквана грешка. Моля, свържете се с екипа за поддръжка.";
+
+/* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
+"support_rule_converting_error" = "Не може да конвертираме правилата. Възникна неочаквана грешка. Моля, свържете се с екипа за поддръжка.";
+
+/* (AEService) Service errors descriptions */
+"json_converting_error" = "Не мога да инициализирам конвертора за JSON формата";
+
+/* (Action Extension - Adguard Assistant) Assistant UI. Title for 'close icon' button */
+"common_action_cancel" = "Откажи";
+
+/* (AEService) Service errors descriptions */
+"rule_converting_error" = "не може да се преобразува правилото за филтриране. Текстът на правилото е невалиден.";
+
+/* Alert title. On error. */
+"common_error_title" = "Грешка";
+
+/* (AEService) Service errors descriptions */
+"safari_filters_loading_error" = "Филтрите не могат да бъдат заредени в Сафари. Поради това новите промени не са приложени.";
+
+/* (LoginController) lost password button title */
+"lost_password" = "Забравили сте си паролата?";
+
+/* (AESupport) Alert message if user have no e-mail account on device */
+"bug_report_sending_error" = "Не може да изпратим доклад за грешка, защото нямате създаден и-мейл на вашето устройство.";
+
+/* (MainController) Error on check filter uspdates */
+"filter_updates_error" = "Грешка при актуализация на филтрите";
+
+/* (MainController) Message on main screen during update */
+"filters_noUpdates" = "Не са намерени актиализации";
+
+/* Adguard DNS server description */
+"adguard_dns_description" = "блокира реклами, тракери и фишинг уебсайтове";
+
+/* Adguard Family DNS server description */
+"adguard_family_dns_description" = "блокира всичко по-горе и уеб сайтове за възрастни";
+
+/* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
+"support_vpn_configuration_problem" = "Имаше проблем с конфигурацията на ВЧМ, моля свържете се с нашия екип за поддръжка.";

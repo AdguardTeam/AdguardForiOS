@@ -150,20 +150,7 @@ extension AESharedResourcesProtocol {
             sharedDefaults().set(newValue, forKey: AEComplexProtectionEnabled)
         }
     }
-    
-    dynamic var backgroundFetchState: BackgroundFetchState {
-        get {
-            guard let value = sharedDefaults().object(forKey: BackgroundFetchStateKey) as? Int else {
-                return .notStarted
-            }
-            return BackgroundFetchState(rawValue: value)!
-        }
-        set {
-            DDLogInfo("(SharedResources) set background fetch state: \(newValue.rawValue)")
-            sharedDefaults().set(newValue.rawValue, forKey: BackgroundFetchStateKey)
-        }
-    }
-    
+        
     dynamic var needUpdateFilters: Bool {
         get {
             return sharedDefaults().bool(forKey: NeedToUpdateFiltersKey)

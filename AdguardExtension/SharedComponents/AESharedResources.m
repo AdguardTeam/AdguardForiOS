@@ -27,7 +27,7 @@ NSString *AEDefaultsFirstRunKey = @"AEDefaultsFirstRunKey";
 NSString *AEDefaultsProductSchemaVersion = @"AEDefaultsProductSchemaVersion";
 NSString *AEDefaultsProductBuildVersion = @"AEDefaultsProductBuildVersion";
 NSString *AEDefaultsCheckFiltersLastDate = @"AEDefaultsCheckFiltersLastDate";
-NSString *AEDefaultsJSONMaximumConvertedRules = @"AEDefaultsJSONMaximumConvertedRules";
+//NSString *AEDefaultsJSONMaximumConvertedRules = @"AEDefaultsJSONMaximumConvertedRules";
 NSString *AEDefaultsJSONConvertedRules = @"AEDefaultsJSONConvertedRules";
 NSString *AEDefaultsJSONRulesForConvertion = @"AEDefaultsJSONRulesForConvertion";
 NSString *AEDefaultsJSONRulesOverlimitReached = @"AEDefaultsJSONRulesOverlimitReached";
@@ -86,7 +86,7 @@ NSString* AEDefaultsShowStatusViewInfo = @"AEDefaultsShowStatusViewInfo";
 NSString *ShowStatusViewNotification = @"ShowStatusViewNotification";
 NSString *HideStatusViewNotification = @"HideStatusViewNotification";
 
-NSString* SafariProtectionState = @"SafariProtectionState";
+//NSString* SafariProtectionState = @"SafariProtectionState";
 
 NSString* DnsFilterUniqueId = @"DnsFilterUniqueId";
 
@@ -408,14 +408,14 @@ NSString* LastDnsFiltersUpdateTime = @"LastDnsFiltersUpdateTime";
     [_sharedUserDefaults synchronize];
 }
 
-- (BOOL)safariProtectionEnabled{
-    NSNumber *safariEnabled = [self.sharedDefaults objectForKey:SafariProtectionState];
-    return safariEnabled == nil ? YES : safariEnabled.boolValue;
-}
+//- (BOOL)safariProtectionEnabled{
+//    NSNumber *safariEnabled = [self.sharedDefaults objectForKey:SafariProtectionState];
+//    return safariEnabled == nil ? YES : safariEnabled.boolValue;
+//}
 
-- (void)setSafariProtectionEnabled:(BOOL)safariProtectionEnabled{
-    [self.sharedDefaults setBool:safariProtectionEnabled forKey:SafariProtectionState];
-}
+//- (void)setSafariProtectionEnabled:(BOOL)safariProtectionEnabled{
+//    [self.sharedDefaults setBool:safariProtectionEnabled forKey:SafariProtectionState];
+//}
 
 - (BOOL)systemProtectionEnabled {
     return [self.sharedDefaults boolForKey:AESystemProtectionEnabled]; // default false

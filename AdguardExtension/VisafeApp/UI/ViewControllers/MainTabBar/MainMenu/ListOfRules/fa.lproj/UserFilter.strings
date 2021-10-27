@@ -1,0 +1,17 @@
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "5eU-q4-Xed"; Note = "(AddRuleController) cancel button"; */
+"5eU-q4-Xed.normalTitle" = "لغو";
+
+/* Class = "UILabel"; text = "The rule has been added to the User rules"; ObjectID = "BfI-YN-iXe"; */
+"BfI-YN-iXe.text" = "قاعده به پالونه کاربری افزوده شده است.";
+
+/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "Bvs-mI-vEr"; */
+"Bvs-mI-vEr.normalTitle" = "ذخیره";
+
+/* Class = "UILabel"; text = "Edit"; ObjectID = "EH6-Zr-YRP"; */
+"EH6-Zr-YRP.text" = "ويرايش";
+
+/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "fCd-gA-rXS"; */
+"fCd-gA-rXS.normalTitle" = "افزودن";
+
+/* Class = "UILabel"; text = "Domain:"; ObjectID = "x7r-Ln-XiZ"; */
+"x7r-Ln-XiZ.text" = "دامنه:";

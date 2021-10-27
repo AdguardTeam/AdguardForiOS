@@ -65,7 +65,7 @@ extern NSString * _Nonnull AEDefaultsCheckFiltersLastDate;
  User Defaults key that define maximum of the rules count,
  which may be converted to content blocking JSON.
  */
-extern NSString * _Nonnull AEDefaultsJSONMaximumConvertedRules;
+//extern NSString * _Nonnull AEDefaultsJSONMaximumConvertedRules;
 
 /**
  User Defaults key that define current count of the rules, which put into converter.
@@ -472,7 +472,7 @@ extern NSString* _Nonnull LastDnsFiltersUpdateTime;
 
 - (nonnull NSString*) pathForRelativePath:(nonnull NSString*) relativePath;
 
-@property BOOL safariProtectionEnabled;
+//@property BOOL safariProtectionEnabled;
 
 @property BOOL systemProtectionEnabled;
 

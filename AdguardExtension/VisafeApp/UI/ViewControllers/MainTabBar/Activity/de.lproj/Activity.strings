@@ -1,0 +1,104 @@
+/* Class = "UIButton"; normalTitle = "Switch mode"; ObjectID = "1A6-DD-78f"; */
+"1A6-DD-78f.normalTitle" = "Wechseln";
+
+/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "1rj-wD-aeH"; */
+"1rj-wD-aeH.normalTitle" = "Hinzufügen";
+
+/* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "4IJ-xy-hky"; */
+"4IJ-xy-hky.normalTitle" = "verschlüsselt";
+
+/* Class = "UILabel"; text = "Activity"; ObjectID = "5bV-zZ-4dr"; */
+"5bV-zZ-4dr.text" = "Aktivität";
+
+/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "6xN-ij-jJj"; */
+"6xN-ij-jJj.normalTitle" = "AUSPROBIEREN";
+
+/* Class = "UIButton"; normalTitle = "EDIT"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
+"7mk-7J-iLD.normalTitle" = "Bearbeiten";
+
+/* Class = "UILabel"; text = "Most active companies"; ObjectID = "Asq-k8-hi1"; */
+"Asq-k8-hi1.text" = "Die aktivsten Unternehmen";
+
+/* Class = "UILabel"; text = "No recent activity tracked (we store only the last 1500 requests)"; ObjectID = "DCy-so-G1C"; */
+"DCy-so-G1C.text" = "Keine kürzlichen Aktivitäten aufgezeichnet (es werden nur die letzten 1.500 Anfragen gespeichert)";
+
+/* Class = "UILabel"; text = "No recent activity tracked (we store only the last 1500 requests)"; ObjectID = "Epn-q1-BdL"; */
+"Epn-q1-BdL.text" = "Keine kürzlichen Aktivitäten aufgezeichnet (es werden nur die letzten 1.500 Anfragen gespeichert)";
+
+/* Class = "UILabel"; text = "Activity"; ObjectID = "Hbu-Bm-HWZ"; */
+"Hbu-Bm-HWZ.text" = "Aktivität";
+
+/* Class = "UILabel"; text = "Domain name:"; ObjectID = "M4r-q5-RXv"; */
+"M4r-q5-RXv.text" = "Domainname:";
+
+/* Class = "UILabel"; text = "You can see who tries to track you, view stats and the log of DNS requests blocking"; ObjectID = "T0y-mr-Zwa"; */
+"T0y-mr-Zwa.text" = "Sie können sich anzeigen lassen, wer versucht, Sie zu verfolgen und Statistiken und das Protokoll der Sperrungen von DNS-Anfragen einsehen";
+
+/* Class = "UILabel"; text = "DNS protection is disabled"; ObjectID = "X1F-2p-Xpe"; */
+"X1F-2p-Xpe.text" = "DNS-Schutz ist deaktiviert";
+
+/* Class = "UIButton"; normalTitle = "ENABLE"; ObjectID = "XYE-JT-WSH"; */
+"XYE-JT-WSH.normalTitle" = "AKTIVIEREN";
+
+/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "Xgg-jX-hwe"; */
+"Xgg-jX-hwe.normalTitle" = "Kopiert";
+
+/* Class = "UIButton"; normalTitle = "companies"; ObjectID = "Xj3-X8-fnq"; */
+"Xj3-X8-fnq.normalTitle" = "Unternehmen";
+
+/* Class = "UILabel"; text = "AdGuard can’t see DNS queries in this mode. If you want to see DNS activity of your device, use AdGuard implementation."; ObjectID = "a0E-KM-oA3"; */
+"a0E-KM-oA3.text" = "AdGuard kann in diesem Modus keine DNS-Anfragen erkennen. Wenn Sie die DNS-Aktivität Ihres Geräts angezeigt bekommen möchten, verwenden Sie die AdGuard-Implementierung.";
+
+/* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
+"ae4-WL-0pQ.text" = "Sicherheitsfilter, DNS-Datenschutz, benutzerdefinierte Filter usw.";
+
+/* Class = "UILabel"; text = "Server"; ObjectID = "baH-YE-AMw"; */
+"baH-YE-AMw.text" = "Server";
+
+/* Class = "UILabel"; text = "Status"; ObjectID = "ckn-Oh-2aa"; */
+"ckn-Oh-2aa.text" = "Status";
+
+/* Class = "UILabel"; text = "Protocol"; ObjectID = "eye-K9-gbK"; */
+"eye-K9-gbK.text" = "Protokoll";
+
+/* Class = "UILabel"; text = "Recent activity"; ObjectID = "hR9-Pm-Gq0"; */
+"hR9-Pm-Gq0.text" = "Letzte Aktivität";
+
+/* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
+"hoI-YR-JcD.normalTitle" = "Zurück";
+
+/* Class = "UILabel"; text = "Recent activity"; ObjectID = "kX9-ZX-NOu"; */
+"kX9-ZX-NOu.text" = "Letzte Aktivität";
+
+/* Class = "UILabel"; text = "Block request"; ObjectID = "kwZ-Kw-f1R"; */
+"kwZ-Kw-f1R.text" = "Anfrage sperren";
+
+/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "l5B-oj-DnW"; */
+"l5B-oj-DnW.normalTitle" = "Hinzufügen";
+
+/* Class = "UIButton"; normalTitle = "requests"; ObjectID = "lKJ-8V-GJi"; */
+"lKJ-8V-GJi.normalTitle" = "Anfragen";
+
+/* Class = "UILabel"; text = "Native DNS"; ObjectID = "mSj-Zz-Gm9"; */
+"mSj-Zz-Gm9.text" = "Nativer DNS ist aktiviert";
+
+/* Class = "UIButton"; normalTitle = "requests"; ObjectID = "qPQ-vV-fXm"; */
+"qPQ-vV-fXm.normalTitle" = "Anfragen";
+
+/* Class = "UILabel"; text = "Choose the domain level:"; ObjectID = "uj0-U3-Qfx"; */
+"uj0-U3-Qfx.text" = "Domain-Level auswählen";
+
+/* Class = "UILabel"; text = "Request details"; ObjectID = "uni-H6-XNc"; */
+"uni-H6-XNc.text" = "Einzelheiten der Anfrage";
+
+/* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "wt5-4Q-CTq"; */
+"wt5-4Q-CTq.normalTitle" = "verschlüsselt";
+
+/* Class = "UILabel"; text = "Block request"; ObjectID = "y8j-ib-ZgR"; */
+"y8j-ib-ZgR.text" = "Anfrage sperren";
+
+/* Class = "UILabel"; text = "Most active"; ObjectID = "yWy-kc-8Zg"; */
+"yWy-kc-8Zg.text" = "Aktivste";
+
+/* Class = "UIButton"; normalTitle = "avg. time"; ObjectID = "yio-E8-cQV"; */
+"yio-E8-cQV.normalTitle" = "∅ Zeit";

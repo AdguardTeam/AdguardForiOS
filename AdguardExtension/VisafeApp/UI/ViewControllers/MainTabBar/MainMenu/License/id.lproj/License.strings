@@ -1,0 +1,56 @@
+/* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
+"53G-qY-SZ5.text" = "Kode dari aplikasi autentikasi:";
+
+/* Class = "UILabel"; text = "Security filters"; ObjectID = "6P7-a5-VLL"; */
+"6P7-a5-VLL.text" = "Filter keamanan";
+
+/* Class = "UIBarButtonItem"; title = "Logout"; ObjectID = "70b-CS-wqh"; */
+"70b-CS-wqh.title" = "Keluar";
+
+/* Class = "UILabel"; text = "All Premium features are available"; ObjectID = "FLH-Qd-Atk"; */
+"FLH-Qd-Atk.text" = "Semua fitur Premium tersedia";
+
+/* Class = "UILabel"; text = "Login"; ObjectID = "J8s-sG-FKu"; */
+"J8s-sG-FKu.text" = "Masuk";
+
+/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "KOP-vw-FG7"; */
+"KOP-vw-FG7.text" = "Buat aturan anda sendiri";
+
+/* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
+"LJj-cc-Ko5.text" = "Email:";
+
+/* Class = "UILabel"; text = "BLOCK MORE\nADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
+"NlM-RH-NgY.text" = "BLOKIR LEBIH\\\nIKLAN & PELACAK";
+
+/* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
+"P6N-OK-fHG.text" = "Kata sandi:";
+
+/* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
+"Rxf-sg-Wfk.normalTitle" = "PERGI KE AKUN SAYA";
+
+/* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "UaA-JQ-kV4"; */
+"UaA-JQ-kV4.title" = "Masuk";
+
+/* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
+"YIm-R8-cxj.text" = "Blokir phishing, scam, dan crypto-jacking";
+
+/* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "bUa-fF-AXO"; */
+"bUa-fF-AXO.normalTitle" = "MASUK";
+
+/* Class = "UILabel"; text = "Value your privacy"; ObjectID = "fwp-I7-Qtl"; */
+"fwp-I7-Qtl.text" = "Hargai privasi Anda";
+
+/* Class = "UILabel"; text = "DNS protection"; ObjectID = "gLL-6o-GGa"; */
+"gLL-6o-GGa.text" = "Proteksi DNS";
+
+/* Class = "UILabel"; text = "Premium is activated"; ObjectID = "hjF-1C-hFa"; */
+"hjF-1C-hFa.text" = "Premium diaktifkan";
+
+/* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
+"mR4-EU-MFx.normalTitle" = "Pulihkan pembelian";
+
+/* Class = "UILabel"; text = "Custom filters"; ObjectID = "ppx-jv-rek"; */
+"ppx-jv-rek.text" = "Penyaring buatan";
+
+/* Class = "UIButton"; normalTitle = "CONFIRM"; ObjectID = "rrj-Gm-LCJ"; */
+"rrj-Gm-LCJ.normalTitle" = "KONFIRMASI";

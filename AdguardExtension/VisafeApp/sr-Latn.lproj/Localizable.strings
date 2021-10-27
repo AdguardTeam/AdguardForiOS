@@ -1,0 +1,777 @@
+/* (AEService) The default message for an unknown error. */
+"support_unexpected_error" = "Dogodila se neočekivana greška. Molimo vas da kontaktirate tim podrške.";
+
+/* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
+"support_rule_converting_error" = "Ne mogu da pretvorim filtere. Dogodila se neočekivana greška. Molimo vas da kontaktirate tim podrške.";
+
+/* (AEService) Service errors descriptions */
+"json_converting_error" = "Ne mogu da pokrenem u konvertor JSON format.";
+
+/* (Action Extension - Adguard Assistant) Assistant UI. Title for 'close icon' button */
+"common_action_cancel" = "Otkaži";
+
+/* (AEService) Service errors descriptions */
+"rule_converting_error" = "Ne mogu da pretvorim pravilo filtera. Tekst pravila je nevažeći.";
+
+/* (AEUIUtils) User filter convertering error description. */
+"filter_rules_converting_error" = "Ne mogu da dodam ova korisnička pravila za Safari";
+
+/* Alert title. On error. */
+"common_error_title" = "Greška";
+
+/* NO Button caption in alert */
+"common_action_no" = "Ne";
+
+/* Main Controller. Inverted whitelist cell caption */
+"inverted_whitelist_title" = "Bela lista je okrenuta";
+
+/* (MainPageController) Text to indicate changes processing */
+"applying_changes" = "Primenjivanje promena...";
+
+/* (MainPageController) Text for seconds units (ms) milliseconds */
+"ms_unit" = "%@ ms";
+
+/* (MainPageController) Text for seconds units (s) seconds */
+"s_unit" = "%@ s";
+
+/* (MainPageController) Text for data units (M) Millions */
+"millions_unit" = "%@M";
+
+/* (MainPageController) Text for data units (K) Kilo, Thousands */
+"thousands_unit" = "%@K";
+
+/* (MainPageController) Text for data units 100000000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"hundred_millions_unit" = "%@100M";
+
+/* (MainPageController) Text for data units 10000 for China, Korea and Japan, it shouldn't be translated in other languages */
+"ten_thousands_unit" = "%@10K";
+
+/* (User Filter Screen) Title */
+"user_filter_title" = "Korisnička pravila";
+
+/* (User Filter Screen) User Filter input helper */
+"user_filter_helper" = "Ovde unesite vaša pravila, odvojena novim redovima";
+
+/* YES Button caption in alert */
+"common_action_yes" = "Da";
+
+/* (MainController) login status caption on main screen */
+"protection_enabled_caption" = "Zaštita je uključena";
+
+/* (MainController) login status caption on main screen */
+"protection_partly_enabled_caption" = "Neki blokatori sadržaja su isključeni";
+
+/* (MainController) login status caption on main screen */
+"protection_disabled_caption" = "Zaštita je isključena";
+
+/* (GetProTableController) upgrade button title */
+"upgrade_button_title" = "Pretplati se";
+
+/* (GetProTableController) upgrade button title for lifetime license */
+"upgrade_lifetime_button_title" = "Kupi";
+
+/* (LoginController) lost password button title */
+"lost_password" = "Izgubili ste lozinku?";
+
+/* (AEUIGetProViewController) message that appears if the account has expired */
+"premium_expired_message" = "Vaš premium nalog je istekao";
+
+/* (AEUIGetProViewController) title of the message that appears if the account has expired */
+"premium_expired_title" = "Pažnja";
+
+/* (AEUIGetProViewController) message that appears if the account is not premium */
+"not_premium_message" = "Uspešno ste se prijavili na svoj AdGuard nalog, ali u njemu nema licenci koje vam dozvoljavaju da aktivirate premium verziju.";
+
+/* (AEUIGetProViewController) message that appears when the user successfully logs in */
+"login_success_message" = "Uspešno ste se prijavili u vaš AdGuard nalog! Vaša premium licenca je uspešno aktivirana.";
+
+/* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
+"login_premium_expired_message" = "Uspešno ste se prijavili u svoj AdGuard nalog, ali licenčni ključevi za aktivaciju premium naloga su istekli.";
+
+/* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
+"restore_purchases_failure_message" = "Dogodila se greška prilikom pokušaja oporavka kupovine.";
+
+/* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
+"nothing_to_restore_message" = "Nema kupovina koje se mogu oporaviti";
+
+/* (AEUIGetProViewController) message that appears when an error occurred during purchase */
+"purchase_failure_message" = "Dogodila se greška prilikom obrade vaše kupovine.";
+
+/* (GroupsController) Custom filter group name */
+"custom_group_name" = "Prilagođeno";
+
+/* (GroupsController) Filter group filter count format */
+"filter_group_filters_count_format" = "Uključeni filteri: %d/%d";
+
+/* (GroupsController) Filters update time format */
+"filter_date_format" = "Ažurirano filtera: %@";
+
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "Ovde možete dodati vaša pravila<br>Pročitajte ovu <a href=\"%@\">napomenu o sintaksi pravila</a>.";
+
+/* (UserFilterController) inverted whitelist description */
+"inverted_whitelist_text" = "Ovde unesite domen. AdGuard će uključiti filtriranje u Safariju samo za te sajtove.";
+
+/* (UserFilterController) dns whitelist description */
+"dns_whitelist_text" = "Ovde unesite domene. AdGuard neće blokirati te domene";
+
+/* (UserFilterController) dns blocklist description */
+"dns_blacklist_text_format" = "Ovde unesite domene. AdGuard će sprečiti sve aplikacije i preglednike da učitaju te domene. Ova crna lista podržava <a href=\"%@\">AdGuard's DNS sintaksu</a>";
+
+/* (MainController) message that appers when filters updating */
+"update_filter_start_message" = "Ažuriram...";
+
+/* (UserFilterController) add blacklist rule placeholder */
+"add_blacklist_rule_placeholder" = "||example.org^";
+
+/* (UserFilterController) add whitelist domain placeholder */
+"add_whitelist_domain_placeholder" = "example.org";
+
+/* (UserFilterController) add wifi name placeholder */
+"add_wifi_name_placeholder" = "Vaše Wi-Fi ime";
+
+/* (UserFilterController) add blacklist rule caption */
+"add_blacklist_rule_caption" = "Pravilo:";
+
+/* (UserFilterController) add whitelist domain caption */
+"add_whitelist_domain_caption" = "Domen:";
+
+/* (UserFilterController) add wifi name caption */
+"add_wifi_name_caption" = "Vaše Wi-Fi ime:";
+
+/* (AESupport) Alert message if user have no e-mail account on device */
+"bug_report_sending_error" = "Ne mogu da pošaljem izveštaj o grešci jer nemate podešen nijedan email nalog.";
+
+/* (MainController) Error on check filter uspdates */
+"filter_updates_error" = "Greška prilikom ažuriranja filtera";
+
+/* (MainController) Message on main screen during update */
+"filters_noUpdates" = "Ažuriranja nisu pronađena.";
+
+/* (MainController) Message on main screen during update - count of updated filters */
+"filters_updated_format" = "Filteri su ažurirani: %lu ";
+
+/* (FiltersController) Filter Version format */
+"filter_version_format" = "verzija %@";
+
+/* (DnsSettingController) split tunel mode description */
+"tunnel_mode_split_description" = "Split-Tunnel, kompatibilan sa “ličnim VPN” aplikacijama";
+
+/* (DnsSettingController) Full tunel mode description */
+"tunnel_mode_full_description" = "Full-Tunnel, nekompatibilan sa drugim VPN aplikacijama";
+
+/* (DnsSettingController) Full (without VPN icon) mode description */
+"tunnel_mode_full_without_icon_description" = "Full-Tunnel (bez VPN ikonice), nekompatibilan sa drugim VPN aplikacijama, manje stabilno";
+
+/* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
+"system_dns_server" = "Sistemski Dns";
+
+/* MainMenuController - filters menu description */
+"filters_description_format" = "Uključeno %1$d od %2$d";
+
+/* DnsProviderDetailsController - regular dns protocol */
+"regular_dns_protocol" = "Uobičajeno";
+
+/* DnsProviderDetailsController - dns crypt protocol */
+"dns_crypt_protocol" = "DNSCrypt";
+
+/* DnsProviderDetailsController - dns over https protocol */
+"doh_protocol" = "DNS-over-HTTPS";
+
+/* DnsProviderDetailsController - dns over https rotocol */
+"dot_protocol" = "DNS-over-TLS";
+
+/* DnsProviderDetailsController - dns over quic rotocol */
+"doq_protocol" = "DNS-over-QUIC (experimentalno)";
+
+/* GetProController - confirm logout text */
+"confirm_logout_text" = "Jeste li sigurni da želite da se odjavite?";
+
+/* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
+"support_vpn_configuration_problem" = "Došlo je do problema sa VPN konfiguracijom. Kontaktirajte naš tim podrške.";
+
+/* login error message */
+"login_error_message" = "Došlo je do greške prilikom prijavljivanja";
+
+/* purchase secription format */
+"purchase_description_format" = "O AdGuard pretplati:<br><br>• Naplata će biti izvršena preko vašeg iTunes naloga nnakon potvrde kupovine.<br>• Pretplata će se automatski obnavljati, ali ukoliko je automatska obnova isključena najmanje 24 časa pre isteka trenutnog perioda onda se neće obnoviti.<br>• Obnova pretplate će biti izvršena 24-časa pre isteka trenutnog perioda. Vašom pretplatom kao i automatskom obnovom možete upravljati na vašem iTunes nalogu nakon kupovine pretplate.<br><br><a href=%1$@>Politika privatnosti</a> <br><br><a href=%2$@>Uslovi korišćenja</a>";
+
+/* lifetime purchase secription format */
+"lifetime_purchase_description_format" = "<a href=%1$@>Politika privatnosti</a> <br><br><a href=%2$@>Uslovi korišćenja</a>";
+
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"common_action_ok" = "U redu";
+
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"privacy_policy_action" = "Politika privatnosti";
+
+/* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
+"vpn_confirm_title" = "VPN će biti napravljen";
+
+/* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
+"vpn_confirm_message" = "VPN je obavezan kako biste podesili prilagođeni DNS. Napravljeni VPN je lokalni, što znači da vaš saobraćaj neće biti preusmeren kroz druge servere.\nMi ne prikupljamo nikakve podatke kada koristite ovaj VPN profil.";
+
+/* this message is shown during the login on the license screen */
+"loading_message" = "Molim sačekajte...";
+
+/* (AdvancedSettingsController) "Theme" header view title*/
+"theme_header_title" = "Tema";
+
+/* (AdvancedSettingsController) "Other" header view title*/
+"other_header_title" = "Ostalo";
+
+/* (ContentBlockerStateController) Enabled filters */
+"content_blocker_filters" = "Filter:";
+
+/* (AdvancedSettingsController) Restart when network changes error */
+"general_settings_restart_tunnel_error" = "Potrebno je da najpre omogućite VPN";
+
+/* (AdvancedSettingsController) Reset statistics title */
+"reset_stat_title" = "Resetuj statistiku";
+
+/* (AdvancedSettingsController) Reset statistics description */
+"reset_stat_descr" = "Sva statistika će biti obrisana!";
+
+/* (AdvancedSettingsController) Reset button title */
+"reset_title" = "Resetuj";
+
+/* (AdvancedSettingsController) Remove Vpn profile title */
+"remove_vpn_profile_title" = "Ukloni VPn profil";
+
+/* (AdvancedSettingsController) Remove Vpn profile error title */
+"remove_vpn_profile_error_title" = "Došlo je do greške";
+
+/* (AdvancedSettingsController) Remove Vpn profile error message */
+"remove_vpn_profile_error_message" = "Nešto je pošlo naopako dok smo brisali vaš VPN profil";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
+"enabled_current_content_blocker_state_label" = "%@ pravila se koristi";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
+"disabled_current_state_label" = "Isključi u postavkama Safarija";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
+"update_current_state_label" = "Učitavam u Safari...";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
+"over_limit_current_state_label" = "Ograničenje od %1$@ pravila je dosegnuto. Aplikacija možda neće ispravno raditi. Molimo vas da isključite dodatna pravila. Trenutno %2$@ od %3$@ pravila se koristi; %4$@ pravila je isključeno.";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
+"failed_updating_current_state_label" = "Filteri nisu ažurirani";
+
+/* (GetProController) login error message text */
+"login_max_computers_exceeded" = "Ova licenca je aktivirana na maksimalnom broju uređaja";
+
+/* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
+"action_extension_no_configuration_message_format" = "Pre nego što budete mogli da koristite ovu radnju proširenja, %1$@ treba da izvrši početno postavljanje. Pokrenite glavnu %2$@ aplikaciju i dopustite joj da uradi to.";
+
+/* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
+"content_blocker_disabled_format" = "Imajte na umu da je blokator sadržaja isključen. To znači da reklame neće biti filtrirane bez obzira na AdGuard postavke. Molimo vas da uključite AdGuard blokator sadržaja u postavkama Safarija kako bi filtriranje započelo.";
+
+/* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
+"hostname_obtaining_error" = "Ime hosta nije dobijeno. Verovatno stranica još uvek nije učitana.";
+
+/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
+"assistant_launching_unable" = "Bezbednosna politika ovog sajta ne dozvoljava pokretanje AdGuard pomoćnika.";
+
+/* (Action Extension - ActionViewController) Some errors when starting. */
+"support_error_safari_extension" = "Dogodila se neočekivana greška prilikom pokretanja proširenja za Safari.. Molimo vas da kontaktirate AdGuard podršku ako se ovo ponovi.";
+
+/* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
+"common_warning_title" = "Upozorenje";
+
+/* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
+"filter_rules_maximum" = "Dostigli ste najveći broj dozvoljenih pravila.";
+
+/* (GetProController) title for permanent subscription */
+"permanent_subscription_title" = "Doživotno";
+
+/* (FiltersController) ON state in groups section */
+"on_state" = "Uključeno";
+
+/* (FiltersController) OFF state in groups section */
+"off_state" = "Isključeno";
+
+/* (NewCustomFilterDetailedController) homepage string */
+"homepage_title" = "Početna stranica:";
+
+/* (FilterDetailsController) delete filter title */
+"delete_filter_title" = "Izbriši filter";
+
+/* (FilterDetailsController) delete filter message */
+"delete_filter_message" = "Jeste li sigurni da želite da izbrišete ovaj filter?";
+
+/* (AboutViewController) current app version format */
+"about_version_format" = "Verzija %@";
+
+/* (AboutViewController) AdGuard copyright string */
+"copyright_format" = "© 2009–%@. Adguard Software Ltd.\nSva prava zadržana";
+
+/* (AboutViewController) Logout title */
+"common_logout" = "Odjavi se";
+
+/* (AboutViewController) Login title */
+"common_license" = "Licenca";
+
+/* (LoginController) incorrect email/passsword mesage */
+"bad_credentials_error" = "Netačna adresa elektronske pošte ili lozinka";
+
+/* (LoginController) disabled account mesage */
+"account_is_disabled_error" = "Nalog je blokiran";
+
+/* (LoginController) locked account mesage */
+"account_is_locked_error" = "Nalog je privremeno zaključan";
+
+/* (Confirm2faController) Invalid 2fa token on login */
+"invalid_2fa_code_error" = "Netačan 2FA token";
+
+/* (NetworkSettingsController) title for wifi exceptions */
+"wifi_exceptions_title" = "Wi-Fi izuzeci";
+
+/* (NetworkSettingsController) description for wifi exceptions */
+"wifi_exceptions_description" = "Zaštita sistema neće raditi na Wi-Fi mrežama koje su izlistane ispod";
+
+/* (NetworkSettingsController) button title for "Add an exception" */
+"add_exception_title" = "Dodaj izuzetak";
+
+/* (NetworkSettingsController) title for "Filter mobile data" */
+"filter_mobile_title" = "Filtriraj mobilne podatke";
+
+/* (NetworkSettingsController) title for "Filter wi-fi data" */
+"filter_wifi_title" = "Filtriraj Wi-Fi";
+
+/* (NetworkSettingsController) description for mobile data */
+"mobile_data_description" = "Zaštita sistema na mobilnim podacima";
+
+/* (NetworkSettingsController) description for wi-fi data */
+"wifi_data_description" = "Sistemska zaštita na Wi-Fi";
+
+/* (ListOfRulesModel) title for dns allowlist */
+"allowlist_title" = "Lista dozvoljenih";
+
+/* (ListOfRulesModel) title safari Allowlist */
+"whitelist_title" = "Bela lista";
+
+/* (ListOfRulesModel) title for dns block list */
+"dns_blacklist_title" = "Crna lista";
+
+/* (ListOfRulesModel) title for safari user filter */
+"safari_userfilter_title" = "Safari korisnička pravila";
+
+/* (ListOfRulesModel) title for export */
+"export" = "Izvezi";
+
+/* (ListOfRulesModel) title for Clear button*/
+"common_clear" = "Očisti";
+
+/* (ListOfRulesModel) title for Save button */
+"common_save" = "Sačuvaj";
+
+/* (ListOfRulesModel) title for import */
+"import" = "Uvezi";
+
+/* "Disabled" title */
+"disabled" = "Isključeno";
+
+/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
+"remove_from_whitelist" = "Ukloni sa bele liste";
+
+/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
+"remove_from_blacklist" = "Ukloni sa crne liste";
+
+/*(LogRecord) "ADD TO ALLOWLIST" button title */
+"add_to_whitelist" = "Dodaj na belu listu";
+
+/*(LogRecord) "ADD TO BLOCKLIST" button title */
+"add_to_blacklist" = "Dodaj na crnu listu";
+
+/*(GroupsController) Security description without premium  */
+"security_description" = "Dozvoli blokiranje fišing sajtova i drugih opasnih domena. Dostupno za Premium korisnike";
+
+/*(GroupsController) Custom filters description without premium  */
+"custom_description" = "Dozvoljava dodavanje filtera trećih strana. Dostupno za premium korisnike";
+
+/*(LogCategory) audio video player category*/
+"audio_video_player" = "Audio i video plejeri";
+
+/*(LogCategory) comments category*/
+"comments" = "Komentari";
+
+/*(LogCategory) customer interaction category*/
+"customer_interaction" = "Korisnička interakcija";
+
+/*(LogCategory) pornvertising category*/
+"pornvertising" = "Pornvertising";
+
+/*(LogCategory) advertising category*/
+"advertising" = "Oglašavanje";
+
+/*(LogCategory) essential category*/
+"essential" = "Neophodno";
+
+/*(LogCategory) site_analytics category*/
+"site_analytics" = "Analitika sajta";
+
+/*(LogCategory) social media category*/
+"social_media" = "Društvene mreže";
+
+/*(LogCategory) miscellaneous category*/
+"misc" = "Razno";
+
+/*(LogCategory) DNS category*/
+"cdn" = "CDN";
+
+/*(LogCategory) mobile analytics category*/
+"mobile_analytics" = "Mobilna analitika";
+
+/*(LogCategory) hosting category*/
+"hosting" = "Hosting";
+
+/*(LogCategory) unknown category*/
+"unknown" = "Nepoznato";
+
+/*(LogCategory) extensions category*/
+"extensions" = "Proširenja";
+
+/*(ListOfRules) Select title */
+"common_select" = "Izaberi";
+
+/*(ListOfRules) Edit title */
+"common_edit" = "Izmeni";
+
+/*(ListOfRules) Delete title */
+"common_delete" = "Izbriši";
+
+/*(ListOfRules) Select all title */
+"common_select_all" = "Izaberi sve";
+
+/*(ListOfRules) Add domain title */
+"add_domain" = "Dodaj domen";
+
+/*(ListOfRules) Add new rule title */
+"add_new_rule" = "Dodaj novo pravilo";
+
+/* confirm reset lert text */
+"confirm_reset_text" = "Sve postavke, uključujući korisnička pravila, sistemsku zaštitu, okruženje i postavke autorizacije, biće vraćene na podrazumevane vrednosti. Ova radnja se ne može opozvati. Želite li da nastavite?";
+
+/* (DnsLogContainerController) reset activity log title */
+"reset_activity_title" = "Resetuj dnevnik aktivnosti";
+
+/* (DnsLogContainerController) reset activity log message */
+"reset_activity_message" = "Svi zapisi sa aktivnostima će biti izbrisani!";
+
+/*(MainScreen) "24 hours" chart date type */
+"chart_24hours" = "24 časa";
+
+/*(MainScreen) "today" chart date type */
+"chart_date_today" = "Danas";
+
+/*(MainScreen) "7 days" chart date type */
+"chart_7days" = "7 dana";
+
+/*(MainScreen) "30 days" chart date type */
+"chart_30days" = "30 dana";
+
+/*(MainScreen) "all time" chart date type */
+"chart_alltime" = "Sve vreme";
+
+/*(NewCustomFilterDetailsController) title for new custom filter */
+"new_filter_title" = "Novi korisnički filter";
+
+/*(NewCustomFilterDetailsController) title for new dns filter */
+"new_dns_filter_title" = "Novi DNS filter";
+
+/*(NewCustomFilterDetailsController) title for editing custom filter */
+"edit_custom_filter_title" = "Izmeni prilagođeni filter";
+
+/*(NewCustomFilterDetailsController) add button title */
+"common_add" = "Dodaj";
+
+/*(TodayViewController) Protection is disabled title  */
+"protection_disabled" = "Zaštita je isključena";
+
+/*(TodayViewController) Protection is enabled title  */
+"protection_enabled" = "Zaštita je uključena";
+
+/*(TodayViewController) Complex protection is enabled text  */
+"complex_enabled" = "Safari i sistemska zaštita";
+
+/*(TodayViewController) Safari protection is enabled text  */
+"safari_enabled" = "Safari blokiranje sadržaja";
+
+/*(TodayViewController) All protection is disabled text  */
+"complex_disabled" = "Svi podprogrami zaštite su isključeni";
+
+/*(TodayViewController) DNS protection is enabled text  */
+"system_enabled" = "Sistemska zaštita";
+
+/*(TodayViewController) Statistics format text  */
+"widget_statistics" = "%1$d zahteva, %2$d blokirano";
+
+/*(DnsRequestDetailsController) message for info alert  */
+"whotrackme_message" = "Ove informacije su učitane sa usluge WhoTrackMe.com";
+
+/*(DnsRequestDetailsController) action title for info alert  */
+"common_action_more" = "Više";
+
+/*(DnsFiltersController) action title adding existing filter  */
+"filter_exists" = "Pokušali ste da dodate postojeći filter. Ovaj filter je već na listi.";
+
+/*(DnsFiltersController) DNS filters number title */
+"dns_filters_number_title" = "%@ pravila su uključena";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_overlimit_title" = "Previše pravila je uključeno: %@. Neka od njih će biti isključena";
+
+/*(DnsFiltersController) DNS filters overlimit title */
+"dns_filters_notification_title" = "Isključite neke filtere za ispravan rad";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_blocked" = "Blokirano";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_processed" = "Obrađeno";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_encrypted" = "Šifrovano";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_allowlisted" = "Dozvoljeno";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_whitelist" = "dodato na belu listu";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_blacklist" = "dodato na crnu listu";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_whitelist" = "uklonjeno sa bele liste";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_blacklist" = "uklonjeno sa crne liste";
+
+/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
+"onboarding_first_step_text" = "Otvorite <b>postavke</b>";
+
+/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
+"onboarding_second_step_text" = "Dodirnite <b>Safari</b> i izaberite <b>\"blokatori sadržaja\"</b>";
+
+/* (DnsProvidersController) default systen dns server name */
+"default_dns_server_name" = "Sistemski DNS";
+
+/* (DnsProvidersController) default systen dns server description */
+"default_dns_server_description" = "Koristite podrazumevane DNS servere sistema koje vam daje vaš dobavljač internet usluga";
+
+/* (BlockRequestController) Block request title */
+"block_request" = "Blokiraj zahtev";
+
+/* (BlockRequestController) Allowlist request title */
+"whitelist_request" = "Stavi zahtev na belu listu";
+
+/* (AEUIPlayerViewController) Video Tutorial title */
+"video_tutorial_title" = "Video uputstvo";
+
+/* (NewDnsServerController) error message text */
+"invalid_upstream_message" = "Uneli ste nevažeći upstream";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_blacklist" = "Crna lista sistema";
+
+/* (DnsRequestDetailsController) - matched filter name for user filter */
+"system_whitelist" = "Bela lista sistema";
+
+/* (DnsRequestDetailsController) "Details" title for section header */
+"tracker_details_header" = "Detalji praćenja";
+
+/* (DnsRequestDetailsController) "General" title for section header */
+"general_header" = "Opšte";
+
+/* (DnsRequestDetailsController) "Filtering" title for section header */
+"filtering_header" = "Filtriranje";
+
+/* (DnsRequestDetailsController) "DNS" title for section header */
+"dns_header" = "DNS";
+
+/* (DnsRequestDetailsController) "Category" title for cell */
+"category_title" = "Kategorija";
+
+/* (DnsRequestDetailsController) "Name" title for cell */
+"name_title" = "Ime";
+
+/* (DnsRequestDetailsController) "Website" title for cell */
+"website_title" = "Sajt";
+
+/* (DnsRequestDetailsController) "Domain" title for cell */
+"domain_title" = "Domen";
+
+/* (DnsRequestDetailsController) "Server" title for cell */
+"server_title" = "Server";
+
+/* (DnsRequestDetailsController) "Status" title for cell */
+"status_title" = "Status";
+
+/* (DnsRequestDetailsController) "Time" title for cell */
+"time_title" = "Vreme";
+
+/* (DnsRequestDetailsController) "Size" title for cell */
+"size_title" = "Veličina";
+
+/* (DnsRequestDetailsController) "Elapsed" title for cell */
+"elapsed_title" = "Proteklo";
+
+/* (DnsRequestDetailsController) "Type" title for cell */
+"type_title" = "Vrsta";
+
+/* (DnsRequestDetailsController) "DNS status" title for cell */
+"dns_status_title" = "DNS status";
+
+/* (DnsRequestDetailsController) "DNS upstream" title for cell */
+"dns_upstream_title" = "DNS upstream";
+
+/* (DnsRequestDetailsController) "DNS answer" title for cell */
+"dns_answer_title" = "DNS odgovor";
+
+/* (DnsRequestDetailsController) "Matched filter" title for cell */
+"matched_filter_title" = "Filter poklapanja";
+
+/* (DnsRequestDetailsController) "Matched rules" title for cell */
+"matched_rule_title" = "Pravilo poklapanja";
+
+/* (DnsRequestDetailsController) "Original answer" title for cell */
+"original_answer_title" = "Izvorni odgovor";
+
+/* (DnsRequestDetailsController) - empty dns answer title */
+"empty_dns_answer" = "Prazno";
+
+/* (ActivityViewController) - Requests alert title */
+"requests_info_alert_title" = "Zahtevi";
+
+/* (ActivityViewController) - Requests alert message */
+"requests_info_alert_message" = "Svaki put kada posetite sajt, zahtev je poslat. Sajtovi mogu slati skrivene zahteve kroz koje mogu da procure lični podaci. Korisno je znati ukupan broj zahteva kako bi se shvatila širina ovog problema.";
+
+/* (ActivityViewController) - encrypted alert title */
+"encrypted_info_alert_title" = "Šifrovani zahtevi";
+
+/* (ActivityViewController) - encrypted alert message */
+"encrypted_info_alert_message" = "Broj šifrovanih DNS zahteva. Potrebno je da koristite šifrovani DNS server kako bi vaš DNS saobraćaj bio šifrovan.";
+
+/* (ActivityViewController) - Average time title */
+"average_info_alert_title" = "Prosečno vreme";
+
+/* (ActivityViewController) - Average time message */
+"average_info_alert_message" = "Prosečno vreme koje je potrebno za obradu DNS zahteva. Što brži DNS server koristite, ono će biti manje.";
+
+/* (ActivityViewController) - Companies alert title */
+"companies_info_alert_title" = "Broj kompanija";
+
+/* (ActivityViewController) - Companies alert message */
+"companies_info_alert_message" = "Ovo je broj kompanija na koje su zahtevi prosleđeni.";
+
+/* (ActivityViewController) - All requests alert action */
+"all_requests_alert_action" = "Svi zahtevi";
+
+/* (ActivityViewController) - Blocked only alert action */
+"blocked_only_alert_action" = "Samo blokirano";
+
+/* (ActivityViewController) - Allowed only alert action */
+"allowed_only_alert_action" = "Samo dozvoljeno";
+
+/* (ActivityViewController) - None message when there is no statistics */
+"none_message" = "Ništa";
+
+/* (DnsLogContainerController) - Activity title */
+"activity_title" = "Aktivnost";
+
+/* (MostActiveCompaniesController) - Requests number label */
+"requests_number" = "%d zahteva";
+
+// MARK: - Strings for VoiceOver -
+// MARK: - MainTabBarController
+/* (MainTabBarController) Main page tab for VoiceOver*/
+
+
+"main_page_tab" = "Glavni ekran";
+
+/* (MainTabBarController) Protection page tab for VoiceOver*/
+"protection_page_tab" = "Ekran zaštite";
+
+/* (MainTabBarController) Activity page tab for VoiceOver*/
+"activity_page_tab" = "Ekran aktivnosti";
+
+/* (MainTabBarController) Settings page tab for VoiceOver*/
+"settings_page_tab" = "Ekran postavki";
+
+
+// MARK: - MainPageController
+/* (MainPageController) safari content blocking enabled title for VoiceOver*/
+
+"safari_protection_enabled_voiceover" = "Zaštita za Safari je uključena";
+
+/* (MainPageController) safari content blocking disabled title for VoiceOver*/
+"safari_protection_disabled_voiceover" = "Zaštita za Safari je isključena";
+
+/* (MainPageController) DNS protection enabled title for VoiceOver*/
+"tracking_protection_enabled_voiceover" = "DNS zaštita je uključena";
+
+/* (MainPageController) DNS protection disabled title for VoiceOver*/
+"tracking_protection_disabled_voiceover" = "DNS zaštita je isključena";
+
+/* (MainPageController) update filters title for VoiceOver*/
+"update_filters_voiceover" = "Ažuriraj filtere";
+
+/* (MainPageController) requests number title for VoiceOver*/
+"requests_number_voiceover" = "Broj zahteva";
+
+/* (MainPageController) blocked requests number title for VoiceOver*/
+"encrypted_number_voiceover" = "Broj šifrovanih DNS zahteva";
+
+/* (MainPageController) saved data size for VoiceOver*/
+"elapsed_time_voiceover" = "Prosečno vreme za obradu DNS zahteva";
+
+
+// MARK: - SystemProtectionEnablerController
+/* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
+
+"enable_system_protection_voiceover" = "Uključi DNS zaštitu";
+
+
+// MARK: - GetProTableController
+/* (GetProTableController) Choose your subscription type for VoiceOver*/
+
+"choose_sub_voiceover" = "Izaberite vrstu pretplate";
+
+// MARK: - LoginController
+/* (LoginController) Enter your email here title for VoiceOver*/
+
+"enter_email_voiceover" = "Ovde unesite adresu vaše elektronske pošte";
+
+/* (LoginController) Enter your password here title for VoiceOver*/
+"enter_password_voiceover" = "Ovde unesite vašu lozinku";
+
+// MARK: = ImportSettingsController
+/* (ImportSettingsController) add custom content blocker filter format */
+"import_custom_cb_filter_format" = "Dodaj korisnički filter blokiranja: %@";
+
+/* (ImportSettingsController) add custom dns filter format */
+"import_dns_filter_format" = "Dodaj prilagođeni DNS filter: %@";
+
+/* (ImportSettingsController) enable content blocker filter format */
+"enable_cb_filter_format" = "Omogući filter: %@";
+
+/* (ImportSettingsController) disable content blocker filter format */
+"disable_cb_filter_format" = "Onemogući filter: %@";
+
+/* (ImportSettingsController) Unsuccessful */
+"import_unseccuessful" = "Neuspelo";
+
+/* (ImportSettingsController) select dns title */
+"import_dns_settings_format" = "Izaberi DNS server: %@";
+
+/* (ImportSettingsController) activate license format */
+"import_license_format" = "Aktivirajte premium mogućnosti sa %@ licenčnim ključem";
+
+/* (ImportSettingsController) add user rules title */
+"import_user_rules" = "Dodaj korisnička pravila";
+
+/* (ImportSettingsController) add dns rules title */
+"import_dns_user_rules" = "Dodaj DNS korisnička pravila";

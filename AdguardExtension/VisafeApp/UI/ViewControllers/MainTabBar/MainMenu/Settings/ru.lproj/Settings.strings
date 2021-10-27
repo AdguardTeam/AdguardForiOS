@@ -1,0 +1,182 @@
+/* Class = "UILabel"; text = "Reset settings"; ObjectID = "0RM-mR-ikS"; */
+"0RM-mR-ikS.text" = "Сбросить настройки";
+
+/* Class = "UILabel"; text = "Time in seconds"; ObjectID = "2A9-hH-oY3"; */
+"2A9-hH-oY3.text" = "Время в секундах";
+
+/* Class = "UILabel"; text = "Debug logs"; ObjectID = "3zG-B5-jE5"; */
+"3zG-B5-jE5.text" = "Отладочные логи";
+
+/* Class = "UILabel"; text = "Blocked response TTL"; ObjectID = "7nl-3p-BP2"; */
+"7nl-3p-BP2.text" = "Заблокированный ответ TTL";
+
+/* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "8ad-4w-rbs"; */
+"8ad-4w-rbs.text" = "Инвертировать белый список";
+
+/* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
+"8jT-85-XFp.text" = "Не совместим с другими VPN-приложениями, нестабильный";
+
+/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "95J-h1-QgG"; */
+"95J-h1-QgG.normalTitle" = "СОХРАНИТЬ";
+
+/* Class = "UILabel"; text = "Delete VPN profile"; ObjectID = "9hH-ca-VHY"; */
+"9hH-ca-VHY.text" = "Удалить VPN-профиль";
+
+/* Class = "UILabel"; text = "Bootstrap IP address"; ObjectID = "A89-2M-jqd"; */
+"A89-2M-jqd.text" = "Bootstrap IP-адрес";
+
+/* Class = "UILabel"; text = "Respond with REFUSED code"; ObjectID = "AtW-mH-6ja"; */
+"AtW-mH-6ja.text" = "Отвечает с кодом REFUSED";
+
+/* Class = "UILabel"; text = "Show filter updates progress bar"; ObjectID = "BOT-Ej-15M"; */
+"BOT-Ej-15M.text" = "Показывать индикатор обновлений фильтров";
+
+/* Class = "UILabel"; text = "Content blockers"; ObjectID = "BQY-q7-BQU"; */
+"BQY-q7-BQU.text" = "Блокировщики контента";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "Dfm-If-1AX"; Note = "(AddCustomFilterController) cancel button"; */
+"Dfm-If-1AX.normalTitle" = "ОТМЕНА";
+
+/* Class = "UILabel"; text = "Blocking mode"; ObjectID = "ESe-CM-On1"; */
+"ESe-CM-On1.text" = "Режим блокировки";
+
+/* Class = "UILabel"; text = "Incompatible with other VPN apps"; ObjectID = "EbM-k3-HW8"; */
+"EbM-k3-HW8.text" = "Не совместим с другими VPN-приложениями";
+
+/* Class = "UILabel"; text = "Dark"; ObjectID = "FzS-e3-CK1"; */
+"FzS-e3-CK1.text" = "Темная";
+
+/* Class = "UILabel"; text = "Don't change them unless you know what you're doing"; ObjectID = "GBd-dx-t46"; */
+"GBd-dx-t46.text" = "Изменяйте настройки, только если вы уверены в том, что делаете";
+
+/* Class = "UILabel"; text = "AdGuard will write more details to the logfile. Don't enable unless you need to track down a bug"; ObjectID = "GFO-xu-Bir"; */
+"GFO-xu-Bir.text" = "AdGuard будет записывать более подробную информацию в журнал. Включите эту опцию, только если вам нужно отследить ошибку";
+
+/* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
+"GGp-kp-YJI.text" = "Split-Tunnel";
+
+/* Class = "UILabel"; text = "Enable this option if you experience issues with the Internet connection while AdGuard is running"; ObjectID = "H3Q-H6-YV0"; */
+"H3Q-H6-YV0.text" = "Включите эту опцию, если во время работы AdGuard возникнут проблемы с подключением к интернету";
+
+/* Class = "UILabel"; text = "Low-level settings"; ObjectID = "IvJ-Oi-vGF"; */
+"IvJ-Oi-vGF.text" = "Низкоуровневые настройки";
+
+/* Class = "UILabel"; text = "Bootstrap servers"; ObjectID = "JQH-8J-wY8"; */
+"JQH-8J-wY8.text" = "Bootstrap-серверы";
+
+/* Class = "UILabel"; text = "This will delete your actual VPN profile and disable DNS protection"; ObjectID = "Jnb-4w-9NY"; */
+"Jnb-4w-9NY.text" = "Удаление вашего VPN-профиля отключит DNS-защиту";
+
+/* Class = "UILabel"; text = "Advanced settings"; ObjectID = "Lig-ju-iTI"; */
+"Lig-ju-iTI.text" = "Расширенные настройки";
+
+/* Class = "UILabel"; text = "Block IPv6"; ObjectID = "NC2-8A-E6f"; */
+"NC2-8A-E6f.text" = "Блокировать IPv6";
+
+/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain up to 50,000 rules"; ObjectID = "ObO-g4-VHL"; */
+"ObO-g4-VHL.text" = "Вам доступны 6 блокировщиков контента по 50,000 правил в каждом";
+
+/* Class = "UILabel"; text = "Advanced mode"; ObjectID = "Ory-8I-Ih0"; */
+"Ory-8I-Ih0.text" = "Расширенный режим";
+
+/* Class = "UILabel"; text = "Reset statistics"; ObjectID = "QEc-dY-TtB"; */
+"QEc-dY-TtB.text" = "Сбросить статистику";
+
+/* Class = "UILabel"; text = "Block AAAA requests"; ObjectID = "Rmq-30-7hJ"; */
+"Rmq-30-7hJ.text" = "Блокировать AAAA-запросы";
+
+/* Class = "UILabel"; text = "System default"; ObjectID = "TX9-Md-Qzr"; */
+"TX9-Md-Qzr.text" = "Системные настройки";
+
+/* Class = "UILabel"; text = "This option will reset all your settings"; ObjectID = "Twq-5a-kOB"; */
+"Twq-5a-kOB.text" = "Эта опция меню сбросит все настройки";
+
+/* Class = "UITableViewSection"; headerTitle = "Theme"; ObjectID = "Vtx-vp-WIV"; */
+"Vtx-vp-WIV.headerTitle" = "Тема";
+
+/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "WUY-Cq-SPm"; Note = "(AddCustomFilterController) cancel button"; */
+"WUY-Cq-SPm.normalTitle" = "ОТМЕНА";
+
+/* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
+"X0A-gU-hzf.text" = "Автоматическое обновление только через Wi-Fi";
+
+/* Class = "UILabel"; text = "Full-Tunnel"; ObjectID = "aIJ-gX-03k"; */
+"aIJ-gX-03k.text" = "Full-Tunnel";
+
+/* Class = "UILabel"; text = "DNS Servers"; ObjectID = "bRu-jJ-qsB"; */
+"bRu-jJ-qsB.text" = "DNS-серверы";
+
+/* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "bnd-Eh-hpk"; */
+"bnd-Eh-hpk.text" = "Туннельный режим";
+
+/* Class = "UILabel"; text = "Blocking mode"; ObjectID = "cXx-vF-2MX"; */
+"cXx-vF-2MX.text" = "Режим блокировки";
+
+/* Class = "UILabel"; text = "Tunnel mode"; ObjectID = "cdQ-kW-CG7"; */
+"cdQ-kW-CG7.text" = "Туннельный режим";
+
+/* Class = "UILabel"; text = "Respond with zero IP address (0.0.0.0 for A; :: for AAAA) when blocked by AdBlock-style rule; respond with the IP address specified in the rule when blocked by /etc/hosts-style rule"; ObjectID = "cgV-he-JNk"; */
+"cgV-he-JNk.text" = "Стандартный: Отвечает с нулевым IP-адресом, (0.0.0.0 для A; :: для AAAA) когда заблокировано правилом в стиле Adblock; отвечает с IP-адресом, указанным в правиле, когда заблокировано правилом в стиле /etc/hosts-style";
+
+/* Class = "UILabel"; text = "Restart protection when network changes"; ObjectID = "dLN-5K-c1N"; */
+"dLN-5K-c1N.text" = "Перезапускать защиту при изменении сети";
+
+/* Class = "UILabel"; text = "Respond with NXDOMAIN code"; ObjectID = "dsw-Ub-m4M"; */
+"dsw-Ub-m4M.text" = "Отвечает с кодом NXDOMAIN";
+
+/* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
+"eIa-RB-Phv.text" = "Расширенные настройки";
+
+/* Class = "UILabel"; text = "Full-Tunnel (without VPN icon)"; ObjectID = "eiP-yl-Xb3"; */
+"eiP-yl-Xb3.text" = "Full-Tunnel (без иконки VPN)";
+
+/* Class = "UILabel"; text = "Compatible with “Personal VPN” apps"; ObjectID = "gxl-pG-zh1"; */
+"gxl-pG-zh1.text" = "Совместим с персональными VPN-приложениями";
+
+/* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
+"jmQ-ze-hFG.text" = "В режиме Split-Tunnel AdGuard совместим с так называемыми \"персональными VPN-приложениями\". В качестве компромисса, в этом режиме он может быть обойден системой в случае плохой связи.";
+
+/* Class = "UILabel"; text = "Fallback servers"; ObjectID = "k0U-fn-m9X"; */
+"k0U-fn-m9X.text" = "Fallback-серверы";
+
+/* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
+"nL4-Vl-Gcz.headerTitle" = "Другие";
+
+/* Class = "UILabel"; text = "Content blockers"; ObjectID = "nPj-OI-Pcb"; */
+"nPj-OI-Pcb.text" = "Блокировщики контента";
+
+/* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
+"ocH-QT-NRZ.text" = "Светлая";
+
+/* Class = "UILabel"; text = "Enables additional settings for advanced users"; ObjectID = "qUy-uy-QiF"; */
+"qUy-uy-QiF.text" = "Включает дополнительные настройки для продвинутых пользователей";
+
+/* Class = "UILabel"; text = "Show status bar"; ObjectID = "qxo-YS-JWL"; */
+"qxo-YS-JWL.text" = "Показывать строку текущего состояния";
+
+/* Class = "UILabel"; text = "Respond with zero IP address (0.0.0.0 for A; :: for AAAA)"; ObjectID = "rDk-OP-kAS"; */
+"rDk-OP-kAS.text" = "Отвечает с нулевым IP-адресом (0.0.0.0 для A; :: для AAAA)";
+
+/* Class = "UILabel"; text = "Low-level settings"; ObjectID = "reQ-4X-84i"; */
+"reQ-4X-84i.text" = "Низкоуровневые настройки";
+
+/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "sNF-Hy-NdB"; */
+"sNF-Hy-NdB.normalTitle" = "СОХРАНИТЬ";
+
+/* Class = "UILabel"; text = "Settings"; ObjectID = "sc6-Tw-xnL"; */
+"sc6-Tw-xnL.text" = "Настройки";
+
+/* Class = "UILabel"; text = "If this setting is enabled, AdGuard will use only Wi-Fi for background filter updates"; ObjectID = "tTY-BW-QcN"; */
+"tTY-BW-QcN.text" = "Если эта опция включена, AdGuard будет использовать только Wi-Fi для фонового обновления фильтров";
+
+/* Class = "UILabel"; text = "Blocked Response TTL"; ObjectID = "uRk-qq-TJH"; */
+"uRk-qq-TJH.text" = "Заблокированный ответ TTL";
+
+/* Class = "UILabel"; text = "Are you a developer?"; ObjectID = "wPe-ae-X0G"; */
+"wPe-ae-X0G.text" = "Вы разработчик?";
+
+/* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
+"wYq-g0-5k6.text" = "Эта опция очистит все данные статистики, такие как количество запросов и другие";
+
+/* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
+"yBG-d2-ebt.text" = "Разблокировать рекламу везде, кроме сайтов из этого списка";

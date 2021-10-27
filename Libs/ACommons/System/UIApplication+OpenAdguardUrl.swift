@@ -22,8 +22,8 @@ extension UIApplication {
     
     static let adguardSigninURL = "https://my.adguard.com"
     static let adguardUrl = "https://adguard.com/forward.html"
-    static let rateAdGuardAppUrl = "https://itunes.apple.com/app/id1047223162?action=write-review"
-    static let rateAdGuardProAppUrl = "https://itunes.apple.com/app/id1126386264?action=write-review"
+    static let rateVisafeAppUrl = "https://itunes.apple.com/app/id1047223162?action=write-review"
+    static let rateVisafeProAppUrl = "https://itunes.apple.com/app/id1126386264?action=write-review"
     
     func openAdguardUrl(action: String, from: String, buildVersion: String) {
         
@@ -47,7 +47,7 @@ extension UIApplication {
     }
     
     func openAppStoreToRateApp() {
-        if let writeReviewURL = URL(string: Bundle.main.isPro ? UIApplication.rateAdGuardProAppUrl : UIApplication.rateAdGuardAppUrl) {
+        if let writeReviewURL = URL(string: Bundle.main.isPro ? UIApplication.rateVisafeProAppUrl : UIApplication.rateVisafeAppUrl) {
             UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
         }
     }

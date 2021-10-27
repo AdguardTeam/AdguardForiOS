@@ -1,0 +1,62 @@
+/* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
+"53G-qY-SZ5.text" = "인증 앱의 코드:";
+
+/* Class = "UILabel"; text = "Security filters"; ObjectID = "6P7-a5-VLL"; */
+"6P7-a5-VLL.text" = "보안 필터";
+
+/* Class = "UIBarButtonItem"; title = "Logout"; ObjectID = "70b-CS-wqh"; */
+"70b-CS-wqh.title" = "로그아웃";
+
+/* Class = "UILabel"; text = "All Premium features are available"; ObjectID = "FLH-Qd-Atk"; */
+"FLH-Qd-Atk.text" = "모든 프리미엄 기능을 사용할 수 있습니다";
+
+/* Class = "UILabel"; text = "Login"; ObjectID = "J8s-sG-FKu"; */
+"J8s-sG-FKu.text" = "로그인";
+
+/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "KOP-vw-FG7"; */
+"KOP-vw-FG7.text" = "나만의 규칙을 설정하기";
+
+/* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
+"LJj-cc-Ko5.text" = "이메일:";
+
+/* Class = "UILabel"; text = "BLOCK MORE\nADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
+"NlM-RH-NgY.text" = "트래커 및 광고 \n차단";
+
+/* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
+"P6N-OK-fHG.text" = "비밀번호:";
+
+/* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
+"Rxf-sg-Wfk.normalTitle" = "내 계정으로 이동";
+
+/* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "UaA-JQ-kV4"; */
+"UaA-JQ-kV4.title" = "로그인";
+
+/* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
+"YIm-R8-cxj.text" = "온라인 사기, 피싱 및 크립토재킹을 차단합니다";
+
+/* Class = "UILabel"; text = "Log in with your AdGuard account or with connected social networks"; ObjectID = "ZuM-Nn-uXv"; */
+"ZuM-Nn-uXv.text" = "SNS 또는 AdGuard 계정으로 로그인하십시오";
+
+/* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "bUa-fF-AXO"; */
+"bUa-fF-AXO.normalTitle" = "로그인";
+
+/* Class = "UILabel"; text = "Value your privacy"; ObjectID = "fwp-I7-Qtl"; */
+"fwp-I7-Qtl.text" = "개인정보를 보호하세요";
+
+/* Class = "UILabel"; text = "Sign in"; ObjectID = "fxK-6y-LB6"; */
+"fxK-6y-LB6.text" = "로그인";
+
+/* Class = "UILabel"; text = "DNS protection"; ObjectID = "gLL-6o-GGa"; */
+"gLL-6o-GGa.text" = "DNS 보호";
+
+/* Class = "UILabel"; text = "Premium is activated"; ObjectID = "hjF-1C-hFa"; */
+"hjF-1C-hFa.text" = "프리미엄이 활성화되었습니다";
+
+/* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
+"mR4-EU-MFx.normalTitle" = "구매 내역 복구";
+
+/* Class = "UILabel"; text = "Custom filters"; ObjectID = "ppx-jv-rek"; */
+"ppx-jv-rek.text" = "사용자 정의 필터";
+
+/* Class = "UIButton"; normalTitle = "CONFIRM"; ObjectID = "rrj-Gm-LCJ"; */
+"rrj-Gm-LCJ.normalTitle" = "확인";

@@ -19,7 +19,7 @@
 #import "DDLogMacros.h"
 #import "ACNUrlUtils.h"
 #import "Constants.h"
-#import "AdguardApp/Services/AEThemeModeEnum.h"
+#import "VisafeApp/Services/AEThemeModeEnum.h"
 #import "AERDomainFilterRule.h"
 #import "ASDatabase.h"
 #import "Reachability.h"

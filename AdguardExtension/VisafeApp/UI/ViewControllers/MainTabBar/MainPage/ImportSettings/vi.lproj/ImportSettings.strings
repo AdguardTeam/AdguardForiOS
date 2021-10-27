@@ -1,0 +1,8 @@
+/* Class = "UIButton"; normalTitle = "IMPORT"; ObjectID = "EFE-OP-v8S"; */
+"EFE-OP-v8S.normalTitle" = "NHẬP";
+
+/* Class = "UILabel"; text = "Import settings"; ObjectID = "fry-VW-ub3"; */
+"fry-VW-ub3.text" = "Nhập cài đặt";
+
+/* Class = "UIButton"; normalTitle = "OK"; ObjectID = "ktl-xf-pyK"; */
+"ktl-xf-pyK.normalTitle" = "OK";

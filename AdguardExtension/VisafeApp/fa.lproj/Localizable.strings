@@ -1,0 +1,326 @@
+/* (AEService) The default message for an unknown error. */
+"support_unexpected_error" = "یک خطای غیرمنتظره رخ داده است.لطفا با تیم پشتیبانی تماس بگیرید.";
+
+/* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
+"support_rule_converting_error" = "دستورات را نمیتوان تبدیل کرد.خطای غیر منتظره رخ داد.لطفا با تیم پشتیبانی تماس بگیرید.";
+
+/* (AEService) Service errors descriptions */
+"json_converting_error" = "تبدیلگر به جی فرمت اِس اُ اِن را نمیتوان مقدار دهی اولیه کرد!";
+
+/* (Action Extension - Adguard Assistant) Assistant UI. Title for 'close icon' button */
+"common_action_cancel" = "لغو";
+
+/* (AEService) Service errors descriptions */
+"rule_converting_error" = "دستور فیلتر را نمیتوان تبدیل کرد.دستور متن نامعتبر است.";
+
+/* (AEUIUtils) User filter convertering error description. */
+"filter_rules_converting_error" = "دستورات فیلتر کاربر را نمیتوان فیلتر کرد.یکی از دستورات حاوی خطا است.دستور بعدی در موقعیت فعلی مکان نما را بررسی کنید.";
+
+/* Alert title. On error. */
+"common_error_title" = "خطا";
+
+/* NO Button caption in alert */
+"common_action_no" = "خیر";
+
+/* (User Filter Screen) Title */
+"user_filter_title" = "فیلتر کاربر";
+
+/* (User Filter Screen) User Filter input helper */
+"user_filter_helper" = "دستورات دستی خود را اینجا وارد کنید، با شکستن خط از هم جدا میشوند";
+
+/* YES Button caption in alert */
+"common_action_yes" = "بله";
+
+/* (MainController) login status caption on main screen */
+"protection_enabled_caption" = "حفاظت فعال شده است";
+
+/* (MainController) login status caption on main screen */
+"protection_partly_enabled_caption" = "برخی مسدودسازی های محتوا غیرفعال شده اند";
+
+/* (MainController) login status caption on main screen */
+"protection_disabled_caption" = "حفاظت غيرفعال شده است";
+
+/* (GetProTableController) upgrade button title for lifetime license */
+"upgrade_lifetime_button_title" = "خرید";
+
+/* (LoginController) lost password button title */
+"lost_password" = "رمزعبور را گم کرده اید؟";
+
+/* (AEUIGetProViewController) message that appears if the account has expired */
+"premium_expired_message" = "اکانت پریمیوم شما منقضی شده است";
+
+/* (AEUIGetProViewController) title of the message that appears if the account has expired */
+"premium_expired_title" = "توجه";
+
+/* (AEUIGetProViewController) message that appears if the account is not premium */
+"not_premium_message" = "شما با موفقیت وارد اکانت AdGuard شده اید اما کلید مجوزی که اجازه فعالسازی نسخه پریمیوم را بدهد وجود ندارد";
+
+/* (AEUIGetProViewController) message that appears when the user successfully logs in */
+"login_success_message" = "شما با موفقیت وارد اکانت AdGuard شده اید! نسخه پریمیوم AdGuard for iOS فعال شد.";
+
+/* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
+"login_premium_expired_message" = "شما با موفقیت وارد اکانت AdGuard شده اید اما کلیدهای مجوز نسخه پریمیوم منقضی شده اند.";
+
+/* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
+"restore_purchases_failure_message" = "یک خطا حین بازگرداندن خرید رخ داده است.";
+
+/* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
+"nothing_to_restore_message" = "خریدی برای بازگرداندن وجود ندارد";
+
+/* (AEUIGetProViewController) message that appears when an error occurred during purchase */
+"purchase_failure_message" = "یک خطا حین پردازش خرید شما رخ داد.";
+
+/* (GroupsController) Custom filter group name */
+"custom_group_name" = "دستي";
+
+/* (GroupsController) Filter group filter count format */
+"filter_group_filters_count_format" = "فیلترهای فعال شده: %d/%d";
+
+/* (GroupsController) Filters update time format */
+"filter_date_format" = "فیلتر بروز رسانی شده  : %@";
+
+/* (UserFilterController) blacklist description format */
+"blacklist_text_format" = "دستورات دستی خود را اینجا وارد کنید<br>این نکته <a href=\"%@\">درباره نحو دستور را بخوانید</a>.";
+
+/* (UserFilterController) inverted whitelist description */
+"inverted_whitelist_text" = "نام دامنه را اینجا وارد کنید.AdGuard فیلترینگ را در سافاری فقط برای این وبسایت ها فعال می کند.";
+
+/* (MainController) message that appers when filters updating */
+"update_filter_start_message" = "بروز رسانی...";
+
+/* (UserFilterController) add blacklist rule placeholder */
+"add_blacklist_rule_placeholder" = "||example.org^";
+
+/* (UserFilterController) add whitelist domain placeholder */
+"add_whitelist_domain_placeholder" = "example.org";
+
+/* (UserFilterController) add blacklist rule caption */
+"add_blacklist_rule_caption" = "دستور:";
+
+/* (UserFilterController) add whitelist domain caption */
+"add_whitelist_domain_caption" = "دامنه:";
+
+/* (AESupport) Alert message if user have no e-mail account on device */
+"bug_report_sending_error" = "گزارش مشکل را نمیتوان ارسال کرد چون ایمیل بدرستی در دستگاه شما پیکربندی نشده است.";
+
+/* (MainController) Error on check filter uspdates */
+"filter_updates_error" = "خطای بروز رسانی فیلترها";
+
+/* (MainController) Message on main screen during update */
+"filters_noUpdates" = "بروز رسانی یافت نشد";
+
+/* (MainController) Message on main screen during update - count of updated filters */
+"filters_updated_format" = "%lu فیلتر بروز رسانی شده";
+
+/* (FiltersController) Filter Version format */
+"filter_version_format" = "نسخه %@";
+
+/* (DnsSettingController) split tunel mode description */
+"tunnel_mode_split_description" = "تقسیم تونل،سازگار با برنامه های \"وی پی اِن شخصی\"";
+
+/* (DnsSettingController) Full tunel mode description */
+"tunnel_mode_full_description" = "تونل-کامل،ناسازگار با سایر برنامه های VPN";
+
+/* (DnsSettingController) Full (without VPN icon) mode description */
+"tunnel_mode_full_without_icon_description" = "تونل-کامل(بدون آیکون VPN)،ناسازگار با سایر برنامه های VPN،کمتر پایدار";
+
+/* MainMenuController - filters menu description */
+"filters_description_format" = "فعال شده %1$d از %2$d";
+
+/* DnsProviderDetailsController - regular dns protocol */
+"regular_dns_protocol" = "عادی";
+
+/* DnsProviderDetailsController - dns crypt protocol */
+"dns_crypt_protocol" = "DNSCrypt";
+
+/* DnsProviderDetailsController - dns over https protocol */
+"doh_protocol" = "DNS-over-HTTPS";
+
+/* DnsProviderDetailsController - dns over https rotocol */
+"dot_protocol" = "DNS-over-TLS";
+
+/* GetProController - confirm logout text */
+"confirm_logout_text" = "آیا واقعا میخواهید خارج شوید؟";
+
+/* (APVPNManager)  PRO version. Error, which may occur in DNS Filtering module. When user turns on DNS Filtering functionality. */
+"support_vpn_configuration_problem" = "مشکلی با پیکربندی وی پی اِن وجود دارد.لطفا با تیم پشتیبانی تماس بگیرید.";
+
+/* login error message */
+"login_error_message" = "یک خطا حین ورود رخ داده است";
+
+/* purchase secription format */
+"purchase_description_format" = "AdGuard Premium یک سرویس پولی سالانه با هزینه اشتراک $2.99/سال (قیمت در هر منطقه میتواند متفاوت باشد) هست. هزینه در حساب iTunes در حین تایید خرید کسر میشود. اشتراک خودکار تمدید میشود مگر اینکه تمدید خودکار حداقل 24 ساعت قبل از پایان دوره فعلی خاموش شده باشد. حساب خودکار به مدت 24 ساعت قبل از پایان دوره فعلی کسر می شود. اشتراک های شما میتواند مدیریت شود و تمدید خودکار میتواند با رفتن به تنظیمات iTunes بعد از خرید اشتراک غیرفعال شود.<br><br><a href=%1$@>سیاست حریم خصوصی</a> <br><br><a href=%2$@>شرایط استفاده</a>";
+
+/* lifetime purchase secription format */
+"lifetime_purchase_description_format" = "<a href=%1$@>سیاست حریم خصوصی</a> <br><br><a href=%2$@>شرایط استفاده</a>";
+
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"common_action_ok" = "تأیید";
+
+/* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
+"privacy_policy_action" = "سیاست حریم خصوصی";
+
+/* DnsSettingsController - alert title. This message is shown when the user first starts the VPN. */
+"vpn_confirm_title" = "یک VPN ایجاد خواهد شد";
+
+/* DnsSettingsController - alert message. This message is shown when the user first starts the VPN. */
+"vpn_confirm_message" = "برای راه اندازی تنظیم DNS دستی، VPN نیاز است. VPN ایجاد شده محلی هست،یعنی ترافیک شما توسط هیچ سرور دیگری وقتی از این پروفایل VPN استفاده می کنید تغیییر مسیر داده نمی شود. ما هیچ داده ای جمع آوری نمی کنیم.";
+
+/* this message is shown during the login on the license screen */
+"loading_message" = "منتظر بمانید...";
+
+/* (AdvancedSettingsController) "Theme" header view title*/
+"theme_header_title" = "پوسته";
+
+/* (AdvancedSettingsController) "Other" header view title*/
+"other_header_title" = "ساير";
+
+/* (ContentBlockerStateController) Enabled filters */
+"content_blocker_filters" = "فيلترها:";
+
+/* (AdvancedSettingsController) Restart when network changes error */
+"general_settings_restart_tunnel_error" = "شما ابتدا باید VPN را فعال کنید";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
+"enabled_current_content_blocker_state_label" = "%@ دستور در حال استفاده است";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
+"disabled_current_state_label" = "در تنظیمات سافاری غیرفعال شده است";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
+"update_current_state_label" = "بررسی برای بروز رسانی...";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when over limited  */
+"over_limit_current_state_label" = "محدودیت %1$@ دستور به سر رسید. برنامه امکان دارد درست کار نکند. لطفا دستورات اضافه را غیرفعال کنید. اکنون %2$@ از %3$@ دستور در حال استفاده است; %4$@ دستور غیرفعال است.";
+
+/* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when failed updating */
+"failed_updating_current_state_label" = "فیلترها بروز رسانی نشده است";
+
+/* (GetProController) login error message text */
+"login_max_computers_exceeded" = "این مجوز در حداکثر تعداد دستگاه مجاز فعال شده است. شما میتوانید مجوز را از دستگاه های استفاده نشده در حساب شخصی در وبسایت adguard.com جدا کنید";
+
+/* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
+"action_extension_no_configuration_message_format" = "قبل از استفاده شما از این اقدام افزونه، %1$@ پیکربندی اولیه را اِجرا می کند. برای انجام آن برنامه اصلی %2$@ را اجرا کنید.";
+
+/* (Action Extension - AEAUIMainController) error occurs when content blocker is disabled. */
+"content_blocker_disabled_format" = "توجه کنید که مسدودساز محتوا غیرفعال شده است. این یعنی صرف نظر از تنظیمات AdGuard چیزی فیلتر نخواهد شد. لطفا AdGuard Content blocker را در تنظیمات سافاری برای شروع فیلترینگ فعال کنید.";
+
+/* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
+"hostname_obtaining_error" = "نام میزبان گرفته نشد. شاید صفحه هنوز بارگیری نشده است.";
+
+/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
+"assistant_launching_unable" = "سیاست امنیتی این وبسایت اجازه اِجرای AdGuard Assistant را نمی دهد.";
+
+/* (Action Extension - ActionViewController) Some errors when starting. */
+"support_error_safari_extension" = "خطای غیر منتظره حین مقدار دهی اولیه اقدام افزونه سافاری رخ داد. لطفا اگر دوباره رخ داد با تیم پشتیبانی AdGuard تماس بگیرید.";
+
+/* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
+"common_warning_title" = "هشدار";
+
+/* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
+"filter_rules_maximum" = "شما از حداکثر تعداد دستورات فیلتر تخطی کرده اید.";
+
+/* (GetProController) title for permanent subscription */
+"permanent_subscription_title" = "دائمی";
+
+/* (FiltersController) ON state in groups section */
+"on_state" = "روشن";
+
+/* (FiltersController) OFF state in groups section */
+"off_state" = "خاموش";
+
+/* (NewCustomFilterDetailedController) homepage string */
+"homepage_title" = "صفحه خانگي:";
+
+/* (LoginController) incorrect email/passsword mesage */
+"bad_credentials_error" = "رمزعبور یا ایمیل اشتباه است";
+
+/* (LoginController) disabled account mesage */
+"account_is_disabled_error" = "حساب مسدود شده است";
+
+/* (LoginController) locked account mesage */
+"account_is_locked_error" = "حساب موقتا قفل شده است";
+
+/* (Confirm2faController) Invalid 2fa token on login */
+"invalid_2fa_code_error" = "توکن احراز هویت دو مرحله ای نامعتبر است";
+
+/* (ListOfRulesModel) title for safari user filter */
+"safari_userfilter_title" = "دستورات کاربر سافاری";
+
+/* (ListOfRulesModel) title for export */
+"export" = "خروجيگيري";
+
+/* (ListOfRulesModel) title for Clear button*/
+"common_clear" = "پاکسازی";
+
+/* (ListOfRulesModel) title for Save button */
+"common_save" = "ذخیره";
+
+/* (ListOfRulesModel) title for import */
+"import" = "وارد کردن";
+
+/* "Disabled" title */
+"disabled" = "غير فعال شده";
+
+/*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
+"remove_from_whitelist" = "حذف از لیست سفید";
+
+/*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
+"remove_from_blacklist" = "حذف از لیست سیاه";
+
+/*(LogRecord) "ADD TO ALLOWLIST" button title */
+"add_to_whitelist" = "افزودن به لیست سفید";
+
+/*(LogRecord) "ADD TO BLOCKLIST" button title */
+"add_to_blacklist" = "افزودن به لیست سیاه";
+
+/*(GroupsController) Security description without premium  */
+"security_description" = "اجازه مسدودسازی سایت های فیشینگ و سایر دامنه های خطرناک را میدهد. برای کاربران پریمیوم موجود است";
+
+/*(GroupsController) Custom filters description without premium  */
+"custom_description" = "اجازه افزودن فیلترهای ثالث را میدهد. برای کاربران پریمیوم موجود است";
+
+/*(LogCategory) audio video player category*/
+"audio_video_player" = "پخش کننده صوتی و صدا";
+
+/*(LogCategory) comments category*/
+"comments" = "نظرات";
+
+/*(LogCategory) customer interaction category*/
+"customer_interaction" = "ارتباط با مشتری";
+
+/*(LogCategory) pornvertising category*/
+"pornvertising" = "تبلیغات ضد اخلاقی";
+
+/*(LogCategory) advertising category*/
+"advertising" = "تبلیغات";
+
+/*(LogCategory) essential category*/
+"essential" = "ضروری";
+
+/*(LogCategory) site_analytics category*/
+"site_analytics" = "آنالیزگر سایت";
+
+/*(LogCategory) social media category*/
+"social_media" = "رسانه اجتماعی";
+
+/*(LogCategory) miscellaneous category*/
+"misc" = "متفرقه";
+
+/*(LogCategory) DNS category*/
+"cdn" = "CDN";
+
+/*(LogCategory) mobile analytics category*/
+"mobile_analytics" = "آنالیزگر موبایل";
+
+/*(LogCategory) hosting category*/
+"hosting" = "میزبانی";
+
+/*(LogCategory) unknown category*/
+"unknown" = "ناشناخته";
+
+/*(LogCategory) extensions category*/
+"extensions" = "افزونه ها";
+
+/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
+"onboarding_second_step_text" = "روی آیکون <b>سافاری</b> را ضربه زده و <b>\"مسدودساز محتوا\"</b> را از منو انتخاب کنید";

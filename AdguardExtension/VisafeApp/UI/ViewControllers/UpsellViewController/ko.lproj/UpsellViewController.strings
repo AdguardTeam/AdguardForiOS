@@ -1,0 +1,8 @@
+/* Class = "UILabel"; text = "Boost your privacy"; ObjectID = "F39-yu-JFf"; */
+"F39-yu-JFf.text" = "개인정보 보호 강화";
+
+/* Class = "UIButton"; normalTitle = "Install"; ObjectID = "QUd-Cq-s4r"; */
+"QUd-Cq-s4r.normalTitle" = "설치";
+
+/* Class = "UILabel"; text = "No compromise! With AdGuard VPN, you can stay 100% anonymous and enjoy the benefits of an ad blocker at the same time!"; ObjectID = "mC8-Ix-Hei"; */
+"mC8-Ix-Hei.text" = "타협이란 없습니다! AdGuard VPN을 이용하면 익명성을 완전히 유지하면서 광고 차단기의 효과를 동시에 즐길 수 있습니다!";

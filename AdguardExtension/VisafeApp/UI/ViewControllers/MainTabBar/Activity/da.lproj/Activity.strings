@@ -1,0 +1,104 @@
+/* Class = "UIButton"; normalTitle = "Switch mode"; ObjectID = "1A6-DD-78f"; */
+"1A6-DD-78f.normalTitle" = "Skift tilstand";
+
+/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "1rj-wD-aeH"; */
+"1rj-wD-aeH.normalTitle" = "TILFØJ";
+
+/* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "4IJ-xy-hky"; */
+"4IJ-xy-hky.normalTitle" = "krypteret";
+
+/* Class = "UILabel"; text = "Activity"; ObjectID = "5bV-zZ-4dr"; */
+"5bV-zZ-4dr.text" = "Aktivitet";
+
+/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "6xN-ij-jJj"; */
+"6xN-ij-jJj.normalTitle" = "PRØV GRATIS";
+
+/* Class = "UIButton"; normalTitle = "EDIT"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
+"7mk-7J-iLD.normalTitle" = "REDIGÉR";
+
+/* Class = "UILabel"; text = "Most active companies"; ObjectID = "Asq-k8-hi1"; */
+"Asq-k8-hi1.text" = "Mest aktive virksomheder";
+
+/* Class = "UILabel"; text = "No recent activity tracked (we store only the last 1500 requests)"; ObjectID = "DCy-so-G1C"; */
+"DCy-so-G1C.text" = "Ingen nylige aktiviteter sporet (vi gemmer kun de seneste 1.500 forespørgsler)";
+
+/* Class = "UILabel"; text = "No recent activity tracked (we store only the last 1500 requests)"; ObjectID = "Epn-q1-BdL"; */
+"Epn-q1-BdL.text" = "Ingen nylige aktiviteter sporet (vi gemmer kun de seneste 1.500 forespørgsler)";
+
+/* Class = "UILabel"; text = "Activity"; ObjectID = "Hbu-Bm-HWZ"; */
+"Hbu-Bm-HWZ.text" = "Aktivitet";
+
+/* Class = "UILabel"; text = "Domain name:"; ObjectID = "M4r-q5-RXv"; */
+"M4r-q5-RXv.text" = "Domænenavn:";
+
+/* Class = "UILabel"; text = "You can see who tries to track you, view stats and the log of DNS requests blocking"; ObjectID = "T0y-mr-Zwa"; */
+"T0y-mr-Zwa.text" = "Du kan se, hvem der forsøger at spore dig, statistikker og loggen over DNS-forespørgselsblokering";
+
+/* Class = "UILabel"; text = "DNS protection is disabled"; ObjectID = "X1F-2p-Xpe"; */
+"X1F-2p-Xpe.text" = "DNS-beskyttelse er deaktiveret";
+
+/* Class = "UIButton"; normalTitle = "ENABLE"; ObjectID = "XYE-JT-WSH"; */
+"XYE-JT-WSH.normalTitle" = "AKTIVÉR";
+
+/* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "Xgg-jX-hwe"; */
+"Xgg-jX-hwe.normalTitle" = "Kopieret";
+
+/* Class = "UIButton"; normalTitle = "companies"; ObjectID = "Xj3-X8-fnq"; */
+"Xj3-X8-fnq.normalTitle" = "virksomheder";
+
+/* Class = "UILabel"; text = "AdGuard can’t see DNS queries in this mode. If you want to see DNS activity of your device, use AdGuard implementation."; ObjectID = "a0E-KM-oA3"; */
+"a0E-KM-oA3.text" = "AdGuard kan ikke se DNS-forespørgsler i denne tilstand. Vil du se DNS-aktivitet på din enhed, skal du bruge AdGuard-implementeringen.";
+
+/* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
+"ae4-WL-0pQ.text" = "Sikkerhedsfiltre, DNS-fortrolighed, tilpassede filtre mv.";
+
+/* Class = "UILabel"; text = "Server"; ObjectID = "baH-YE-AMw"; */
+"baH-YE-AMw.text" = "Server";
+
+/* Class = "UILabel"; text = "Status"; ObjectID = "ckn-Oh-2aa"; */
+"ckn-Oh-2aa.text" = "Status";
+
+/* Class = "UILabel"; text = "Protocol"; ObjectID = "eye-K9-gbK"; */
+"eye-K9-gbK.text" = "Protokol";
+
+/* Class = "UILabel"; text = "Recent activity"; ObjectID = "hR9-Pm-Gq0"; */
+"hR9-Pm-Gq0.text" = "Seneste aktivitet";
+
+/* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
+"hoI-YR-JcD.normalTitle" = "TILBAGE";
+
+/* Class = "UILabel"; text = "Recent activity"; ObjectID = "kX9-ZX-NOu"; */
+"kX9-ZX-NOu.text" = "Seneste aktivitet";
+
+/* Class = "UILabel"; text = "Block request"; ObjectID = "kwZ-Kw-f1R"; */
+"kwZ-Kw-f1R.text" = "Blokér forespørgsel";
+
+/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "l5B-oj-DnW"; */
+"l5B-oj-DnW.normalTitle" = "TILFØJ";
+
+/* Class = "UIButton"; normalTitle = "requests"; ObjectID = "lKJ-8V-GJi"; */
+"lKJ-8V-GJi.normalTitle" = "forespørgsler";
+
+/* Class = "UILabel"; text = "Native DNS"; ObjectID = "mSj-Zz-Gm9"; */
+"mSj-Zz-Gm9.text" = "Indbygget DNS";
+
+/* Class = "UIButton"; normalTitle = "requests"; ObjectID = "qPQ-vV-fXm"; */
+"qPQ-vV-fXm.normalTitle" = "forespørgsler";
+
+/* Class = "UILabel"; text = "Choose the domain level:"; ObjectID = "uj0-U3-Qfx"; */
+"uj0-U3-Qfx.text" = "Vælg domæneniveau:";
+
+/* Class = "UILabel"; text = "Request details"; ObjectID = "uni-H6-XNc"; */
+"uni-H6-XNc.text" = "Forespørgselsdetaljer";
+
+/* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "wt5-4Q-CTq"; */
+"wt5-4Q-CTq.normalTitle" = "krypteret";
+
+/* Class = "UILabel"; text = "Block request"; ObjectID = "y8j-ib-ZgR"; */
+"y8j-ib-ZgR.text" = "Blokér forespørgsel";
+
+/* Class = "UILabel"; text = "Most active"; ObjectID = "yWy-kc-8Zg"; */
+"yWy-kc-8Zg.text" = "Mest aktive";
+
+/* Class = "UIButton"; normalTitle = "avg. time"; ObjectID = "yio-E8-cQV"; */
+"yio-E8-cQV.normalTitle" = "gns. tid";

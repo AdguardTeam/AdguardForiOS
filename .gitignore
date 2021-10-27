@@ -23,6 +23,7 @@ Adguard.ipa
 # idea files
 .idea
 
+.github/
 # ------------------ OS X -----------------
 .DS_Store
 

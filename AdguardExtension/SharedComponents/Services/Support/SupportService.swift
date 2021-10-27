@@ -38,7 +38,6 @@ class SupportService: SupportServiceProtocol {
     private let antibanner: AESAntibannerProtocol
     private let requestsService: HttpRequestServiceProtocol
     private let keyChainService: KeychainServiceProtocol
-    private let safariService: SafariServiceProtocol
 
     // Helper variable
     private let reportUrl = "https://reports.adguard.com/new_issue.html"
@@ -54,7 +53,7 @@ class SupportService: SupportServiceProtocol {
     private var logsDirectory: URL?
     private var logsZipDirectory: URL?
     
-    init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol, complexProtection: ComplexProtectionServiceProtocol, dnsProviders: DnsProvidersServiceProtocol, networkSettings: NetworkSettingsServiceProtocol, dnsFilters: DnsFiltersServiceProtocol, productInfo: ADProductInfoProtocol, antibanner: AESAntibannerProtocol, requestsService: HttpRequestServiceProtocol, keyChainService: KeychainServiceProtocol, safariService: SafariServiceProtocol) {
+    init(resources: AESharedResourcesProtocol, configuration: ConfigurationServiceProtocol, complexProtection: ComplexProtectionServiceProtocol, dnsProviders: DnsProvidersServiceProtocol, networkSettings: NetworkSettingsServiceProtocol, dnsFilters: DnsFiltersServiceProtocol, productInfo: ADProductInfoProtocol, antibanner: AESAntibannerProtocol, requestsService: HttpRequestServiceProtocol, keyChainService: KeychainServiceProtocol) {
         self.resources = resources
         self.configuration = configuration
         self.complexProtection = complexProtection
@@ -65,7 +64,6 @@ class SupportService: SupportServiceProtocol {
         self.antibanner = antibanner
         self.requestsService = requestsService
         self.keyChainService = keyChainService
-        self.safariService = safariService
     }
     
     func exportLogs() -> URL? {
@@ -82,13 +80,6 @@ class SupportService: SupportServiceProtocol {
         try? fileManager.createDirectory(atPath: cbUrlString, withIntermediateDirectories: true, attributes: nil)
         try? fileManager.createDirectory(atPath: targetsUrlString, withIntermediateDirectories: true, attributes: nil)
         
-        /// Get jsons for content blockers and append them to base directory
-        let contentBlockingJsonByFilename = safariService.allBlockingContentRules()
-        contentBlockingJsonByFilename.forEach { fileName, jsonData in
-            let fileUrl = URL(fileURLWithPath: cbUrlString + fileName)
-            try? jsonData.write(to: fileUrl)
-        }
-
         /// Get application state info and save it as state.txt to base directory
         let appStateData = createApplicationStateInfo().data(using: .utf8)
         let appStateUrl = URL(fileURLWithPath: baseUrlString + "state.txt")

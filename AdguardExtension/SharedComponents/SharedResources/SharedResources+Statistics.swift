@@ -20,27 +20,4 @@ import Foundation
 
 extension AESharedResourcesProtocol {
     
-    dynamic var activityStatisticsType: ChartDateType {
-        get {
-            let periodType = sharedDefaults().object(forKey: ActivityStatisticsPeriodType) as? Int
-            let rawValue = periodType ?? ChartDateType.day.rawValue
-            return ChartDateType(rawValue: rawValue) ?? .day
-        }
-        set {
-            let rawValue = newValue.rawValue
-            sharedDefaults().set(rawValue, forKey: ActivityStatisticsPeriodType)
-        }
-    }
-    
-    dynamic var chartDateType: ChartDateType {
-        get {
-            let periodType = sharedDefaults().object(forKey: StatisticsPeriodType) as? Int
-            let rawValue = periodType ?? ChartDateType.day.rawValue
-            return ChartDateType(rawValue: rawValue) ?? .day
-        }
-        set {
-            let rawValue = newValue.rawValue
-            sharedDefaults().set(rawValue, forKey: StatisticsPeriodType)
-        }
-    }
 }

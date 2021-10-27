@@ -8,7 +8,6 @@ protocol ConfigurationServiceProtocol : NSObjectProtocol {
     var systemAppearenceIsDark: Bool { get }
     var proStatus : Bool { get }
     var appRated: Bool { get set }
-    var purchasedThroughLogin: Bool { get }
     var advancedMode: Bool { get  set }
     var showStatusBar: Bool { get set }
     var allContentBlockersEnabled: Bool { get }

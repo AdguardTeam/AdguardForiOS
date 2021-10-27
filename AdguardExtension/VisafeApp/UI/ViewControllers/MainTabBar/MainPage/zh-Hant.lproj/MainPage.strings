@@ -1,0 +1,53 @@
+/* Class = "UILabel"; text = "Get stronger with PREMIUM!"; ObjectID = "3qN-uj-pOb"; */
+"3qN-uj-pOb.text" = "因高級版而更加強大！";
+
+/* Class = "UIButton"; normalTitle = "FIX IT"; ObjectID = "46F-Jh-wHm"; */
+"46F-Jh-wHm.normalTitle" = "修復它";
+
+/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "4Ft-5h-4Jd"; */
+"4Ft-5h-4Jd.normalTitle" = "免費地試用";
+
+/* Class = "UILabel"; text = "Period"; ObjectID = "5pX-mg-2fq"; */
+"5pX-mg-2fq.text" = "期間";
+
+/* Class = "UILabel"; text = "Native DNS is working"; ObjectID = "8Z0-0U-Hfk"; */
+"8Z0-0U-Hfk.text" = "原生的 DNS 正在運作";
+
+/* Class = "UILabel"; text = "requests"; ObjectID = "Btd-nN-zLO"; */
+"Btd-nN-zLO.text" = "請求";
+
+/* Class = "UILabel"; text = "avg. time"; ObjectID = "Cfe-vu-29O"; */
+"Cfe-vu-29O.text" = "平均時間";
+
+/* Class = "UILabel"; text = "Some content blockers are disabled"; ObjectID = "FcP-gP-TsG"; */
+"FcP-gP-TsG.text" = "某些內容阻擋器被禁用";
+
+/* Class = "UIButton"; normalTitle = "Today"; ObjectID = "Oez-VU-4fi"; */
+"Oez-VU-4fi.normalTitle" = "今日";
+
+/* Class = "UIButton"; normalTitle = "24 hours"; ObjectID = "Roe-x7-9e8"; */
+"Roe-x7-9e8.normalTitle" = "24 小時";
+
+/* Class = "UIButton"; normalTitle = "7 days"; ObjectID = "VRw-EP-ZlF"; */
+"VRw-EP-ZlF.normalTitle" = "7 日";
+
+/* Class = "UINavigationItem"; title = "AdGuard"; ObjectID = "YaQ-RE-YZT"; Note = "Main Menu header"; */
+"YaQ-RE-YZT.title" = "AdGuard";
+
+/* Class = "UILabel"; text = "encrypted"; ObjectID = "a5U-A8-S8G"; */
+"a5U-A8-S8G.text" = "已加密的";
+
+/* Class = "UILabel"; text = "Some Safari content blockers are disabled"; ObjectID = "cvv-CS-LMQ"; */
+"cvv-CS-LMQ.text" = "某些 Safari 內容阻擋器被禁用";
+
+/* Class = "UIButton"; normalTitle = "All time"; ObjectID = "gDb-ep-jQg"; */
+"gDb-ep-jQg.normalTitle" = "所有的時間";
+
+/* Class = "UIButton"; normalTitle = "30 days"; ObjectID = "gu3-as-BZN"; */
+"gu3-as-BZN.normalTitle" = "30 日";
+
+/* Class = "UIButton"; normalTitle = "All time"; ObjectID = "kfe-5H-fB1"; */
+"kfe-5H-fB1.normalTitle" = "所有的時間";
+
+/* Class = "UIButton"; normalTitle = "FIX IT"; ObjectID = "oe6-9O-dBB"; */
+"oe6-9O-dBB.normalTitle" = "修復它";

@@ -1,0 +1,23 @@
+{
+    "providers": [
+        {
+            "name": "System default",
+            "servers": [
+                {
+                    "features": [],
+                    "upstreams": [],
+                    "providerId": 10000,
+                    "type": "dns",
+                    "id": 0,
+                    "name": "System"
+                }
+            ],
+            "providerId": 10000,
+            "logo": "",
+            "homepage": "",
+            "description": "Use system default DNS servers provided by your ISP (Internet Service Provider)"
+        }
+    ],
+    "features": [
+    ]
+}
