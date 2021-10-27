@@ -176,83 +176,83 @@ class UserRulesManagerTest: XCTestCase {
     private func testSetRules(userRuleManager: UserRulesManagerProtocol) {
         // Test 1
         XCTAssert(userRuleManager.allRules.isEmpty)
-        try! userRuleManager.add(rule: UserRule(ruleText: "kek1", isEnabled: true), override: true)
+        try! userRuleManager.add(rule: UserRule(ruleText: "rule1", isEnabled: true), override: true)
         XCTAssertEqual(userRuleManager.allRules.count, 1)
 
-        userRuleManager.set(rules: ["kek1", "kek2"])
+        userRuleManager.set(rules: ["rule1", "rule2"])
         XCTAssertEqual(userRuleManager.allRules.count, 2)
-        XCTAssertEqual(userRuleManager.allRules[0], UserRule(ruleText: "kek1", isEnabled: true))
-        XCTAssertEqual(userRuleManager.allRules[1], UserRule(ruleText: "kek2", isEnabled: true))
+        XCTAssertEqual(userRuleManager.allRules[0], UserRule(ruleText: "rule1", isEnabled: true))
+        XCTAssertEqual(userRuleManager.allRules[1], UserRule(ruleText: "rule2", isEnabled: true))
         userRuleManager.removeAllRules()
 
         // Test 2
         XCTAssert(userRuleManager.allRules.isEmpty)
-        try! userRuleManager.add(rule: UserRule(ruleText: "kek1", isEnabled: false), override: true)
+        try! userRuleManager.add(rule: UserRule(ruleText: "rule1", isEnabled: false), override: true)
         XCTAssertEqual(userRuleManager.allRules.count, 1)
 
-        userRuleManager.set(rules: ["kek0", "kek1", "kek2"])
+        userRuleManager.set(rules: ["rule0", "rule1", "rule2"])
         XCTAssertEqual(userRuleManager.allRules.count, 3)
-        XCTAssertEqual(userRuleManager.allRules[0], UserRule(ruleText: "kek0", isEnabled: true))
-        XCTAssertEqual(userRuleManager.allRules[1], UserRule(ruleText: "kek1", isEnabled: false))
-        XCTAssertEqual(userRuleManager.allRules[2], UserRule(ruleText: "kek2", isEnabled: true))
+        XCTAssertEqual(userRuleManager.allRules[0], UserRule(ruleText: "rule0", isEnabled: true))
+        XCTAssertEqual(userRuleManager.allRules[1], UserRule(ruleText: "rule1", isEnabled: false))
+        XCTAssertEqual(userRuleManager.allRules[2], UserRule(ruleText: "rule2", isEnabled: true))
         userRuleManager.removeAllRules()
 
         // Test 3
         XCTAssert(userRuleManager.allRules.isEmpty)
         try! userRuleManager.add(
             rules: [
-                UserRule(ruleText: "kek1", isEnabled: true),
-                UserRule(ruleText: "kek2", isEnabled: false),
-                UserRule(ruleText: "kek3", isEnabled: true),
-                UserRule(ruleText: "kek4", isEnabled: true)
+                UserRule(ruleText: "rule1", isEnabled: true),
+                UserRule(ruleText: "rule2", isEnabled: false),
+                UserRule(ruleText: "rule3", isEnabled: true),
+                UserRule(ruleText: "rule4", isEnabled: true)
             ],
             override: true
         )
         XCTAssertEqual(userRuleManager.allRules.count, 4)
 
-        userRuleManager.set(rules: ["kek1", "kek2", "kek4"])
+        userRuleManager.set(rules: ["rule1", "rule2", "rule4"])
         XCTAssertEqual(userRuleManager.allRules.count, 3)
-        XCTAssertEqual(userRuleManager.allRules[0], UserRule(ruleText: "kek1", isEnabled: true))
-        XCTAssertEqual(userRuleManager.allRules[1], UserRule(ruleText: "kek2", isEnabled: false))
-        XCTAssertEqual(userRuleManager.allRules[2], UserRule(ruleText: "kek4", isEnabled: true))
+        XCTAssertEqual(userRuleManager.allRules[0], UserRule(ruleText: "rule1", isEnabled: true))
+        XCTAssertEqual(userRuleManager.allRules[1], UserRule(ruleText: "rule2", isEnabled: false))
+        XCTAssertEqual(userRuleManager.allRules[2], UserRule(ruleText: "rule4", isEnabled: true))
         userRuleManager.removeAllRules()
 
         // Test 4
         XCTAssert(userRuleManager.allRules.isEmpty)
         try! userRuleManager.add(
             rules: [
-                UserRule(ruleText: "kek1", isEnabled: true),
-                UserRule(ruleText: "kek2", isEnabled: false),
-                UserRule(ruleText: "kek3", isEnabled: true)
+                UserRule(ruleText: "rule1", isEnabled: true),
+                UserRule(ruleText: "rule2", isEnabled: false),
+                UserRule(ruleText: "rule3", isEnabled: true)
             ],
             override: true
         )
         XCTAssertEqual(userRuleManager.allRules.count, 3)
 
-        userRuleManager.set(rules: ["kek11", "kek21", "koko"])
+        userRuleManager.set(rules: ["rule11", "rule21", "rulerule"])
         XCTAssertEqual(userRuleManager.allRules.count, 3)
-        XCTAssertEqual(userRuleManager.allRules[0], UserRule(ruleText: "kek11", isEnabled: true))
-        XCTAssertEqual(userRuleManager.allRules[1], UserRule(ruleText: "kek21", isEnabled: true))
-        XCTAssertEqual(userRuleManager.allRules[2], UserRule(ruleText: "koko", isEnabled: true))
+        XCTAssertEqual(userRuleManager.allRules[0], UserRule(ruleText: "rule11", isEnabled: true))
+        XCTAssertEqual(userRuleManager.allRules[1], UserRule(ruleText: "rule21", isEnabled: true))
+        XCTAssertEqual(userRuleManager.allRules[2], UserRule(ruleText: "rulerule", isEnabled: true))
         userRuleManager.removeAllRules()
 
         // Test 5
         XCTAssert(userRuleManager.allRules.isEmpty)
         try! userRuleManager.add(
             rules: [
-                UserRule(ruleText: "kek1", isEnabled: true),
-                UserRule(ruleText: "kek2", isEnabled: false),
-                UserRule(ruleText: "kek3", isEnabled: true)
+                UserRule(ruleText: "rule1", isEnabled: true),
+                UserRule(ruleText: "rule2", isEnabled: false),
+                UserRule(ruleText: "rule3", isEnabled: true)
             ],
             override: true
         )
         XCTAssertEqual(userRuleManager.allRules.count, 3)
 
-        userRuleManager.set(rules: ["kek1", "", "kek2", "     ", "kek3", "  "])
+        userRuleManager.set(rules: ["rule1", "", "rule2", "     ", "rule3", "  "])
         XCTAssertEqual(userRuleManager.allRules.count, 3)
-        XCTAssertEqual(userRuleManager.allRules[0], UserRule(ruleText: "kek1", isEnabled: true))
-        XCTAssertEqual(userRuleManager.allRules[1], UserRule(ruleText: "kek2", isEnabled: false))
-        XCTAssertEqual(userRuleManager.allRules[2], UserRule(ruleText: "kek3", isEnabled: true))
+        XCTAssertEqual(userRuleManager.allRules[0], UserRule(ruleText: "rule1", isEnabled: true))
+        XCTAssertEqual(userRuleManager.allRules[1], UserRule(ruleText: "rule2", isEnabled: false))
+        XCTAssertEqual(userRuleManager.allRules[2], UserRule(ruleText: "rule3", isEnabled: true))
         userRuleManager.removeAllRules()
     }
 
