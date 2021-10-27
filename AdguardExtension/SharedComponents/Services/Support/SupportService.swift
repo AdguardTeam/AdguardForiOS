@@ -19,6 +19,7 @@
 import Zip
 import SafariAdGuardSDK
 import DnsAdGuardSDK
+import AGDnsProxy
 
 protocol SupportServiceProtocol {
     /// Preparing logs archive to sharing. Return archive file URL in temporary directory
@@ -223,6 +224,7 @@ final class SupportService: SupportServiceProtocol {
 
         AdGuard VPN is installed on device: \(UIApplication.adGuardVpnIsInstalled)
         AdGuard VPN tunnel is running: \(UIApplication.adGuardVpnIsActive)
+        AdGuard DNS library version:\(AGDnsProxy.libraryVersion() ?? "Unknown")
         """
 
         resultString.append("\r\nDns upstream: \(serverInfo.upstreams)")
