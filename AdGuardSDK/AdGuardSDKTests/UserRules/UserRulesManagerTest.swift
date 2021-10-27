@@ -235,6 +235,25 @@ class UserRulesManagerTest: XCTestCase {
         XCTAssertEqual(userRuleManager.allRules[1], UserRule(ruleText: "kek21", isEnabled: true))
         XCTAssertEqual(userRuleManager.allRules[2], UserRule(ruleText: "koko", isEnabled: true))
         userRuleManager.removeAllRules()
+
+        // Test 5
+        XCTAssert(userRuleManager.allRules.isEmpty)
+        try! userRuleManager.add(
+            rules: [
+                UserRule(ruleText: "kek1", isEnabled: true),
+                UserRule(ruleText: "kek2", isEnabled: false),
+                UserRule(ruleText: "kek3", isEnabled: true)
+            ],
+            override: true
+        )
+        XCTAssertEqual(userRuleManager.allRules.count, 3)
+
+        userRuleManager.set(rules: ["kek1", "", "kek2", "     ", "kek3", "  "])
+        XCTAssertEqual(userRuleManager.allRules.count, 3)
+        XCTAssertEqual(userRuleManager.allRules[0], UserRule(ruleText: "kek1", isEnabled: true))
+        XCTAssertEqual(userRuleManager.allRules[1], UserRule(ruleText: "kek2", isEnabled: false))
+        XCTAssertEqual(userRuleManager.allRules[2], UserRule(ruleText: "kek3", isEnabled: true))
+        userRuleManager.removeAllRules()
     }
 
     private func testModifyRule(userRuleManager: UserRulesManagerProtocol) throws {

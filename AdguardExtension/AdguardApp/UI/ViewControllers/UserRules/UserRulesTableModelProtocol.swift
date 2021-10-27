@@ -25,7 +25,14 @@ protocol UserRulesTableModelDelegate: AnyObject {
     func rulesRemoved(at indexPaths: [IndexPath])
 }
 
-protocol UserRulesTableModelProtocol: UserRuleTableViewCellDelegate, AddRuleControllerDelegate, RuleDetailsControllerDelegate {
+protocol UserRulesEditorProtocol: AnyObject {
+    var editorTitle: String { get }
+    var editorDescription: String { get }
+    var userRulesString: String { get }
+    func saveUserRules(from text: String)
+}
+
+protocol UserRulesTableModelProtocol: UserRulesEditorProtocol, UserRuleTableViewCellDelegate, AddRuleControllerDelegate, RuleDetailsControllerDelegate {
     var delegate: UserRulesTableModelDelegate? { get set }
     var title: String { get }
     var description: String { get }

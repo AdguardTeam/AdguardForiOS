@@ -80,11 +80,18 @@ public final class UserRulesManager: UserRulesManagerProtocol {
 
     public func set(rules: [String]) {
         let uniqueRules = rules.uniqueElements
-        let newRules: [UserRule] = uniqueRules.map { ruleToAdd in
-            if let existingRule = storage.rules.first(where: { $0.ruleText == ruleToAdd }) {
+        
+        let newRules: [UserRule] = uniqueRules.compactMap { ruleToAdd in
+            let trimmedRule = ruleToAdd.trimmingCharacters(in: .whitespacesAndNewlines)
+
+            if trimmedRule.isEmpty {
+                return nil
+            }
+
+            if let existingRule = storage.rules.first(where: { $0.ruleText == trimmedRule }) {
                 return existingRule
             }
-            return UserRule(ruleText: ruleToAdd, isEnabled: true)
+            return UserRule(ruleText: trimmedRule, isEnabled: true)
         }
         storage.rules = OrderedSet(newRules)
     }

@@ -25,6 +25,12 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
 
     weak var delegate: UserRulesTableModelDelegate?
 
+    var editorTitle: String { title }
+
+    var editorDescription: String { type.editorDescription }
+
+    var userRulesString: String { rulesModels.map { $0.rule }.joined(separator: "\n") }
+
     var title: String { type.title }
 
     var description: String { type.description }
@@ -137,6 +143,13 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
         modelProvider.setRule(rule, selected: selected)
     }
 
+    func saveUserRules(from text: String) {
+        let userRulesString = text.split(separator: "\n").map { String($0).trimmingCharacters(in: .whitespaces) }
+        safariProtection.set(rules: userRulesString, for: type, onCbReloaded: nil)
+        modelProvider = UserRulesModelsProvider(initialModels: Self.models(safariProtection, type))
+        delegate?.rulesChanged()
+    }
+
     func deselectAll() {
         modelProvider.deselectAll()
     }
@@ -205,6 +218,14 @@ fileprivate extension SafariUserRuleType {
         case .invertedAllowlist:
             let format = String.localizedString("inverted_whitelist_text")
             return String(format: format, url)
+        }
+    }
+
+    var editorDescription: String {
+        switch self {
+        case .blocklist: return String.localizedString("editor_safari_user_rules_description")
+        case .allowlist: return String.localizedString("editor_allowlist_rules_description")
+        case .invertedAllowlist: return String.localizedString("editor_inverted_allowlist_rules_description")
         }
     }
 

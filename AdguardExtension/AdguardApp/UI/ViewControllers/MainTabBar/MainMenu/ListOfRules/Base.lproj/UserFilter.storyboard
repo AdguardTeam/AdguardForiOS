@@ -590,6 +590,7 @@
                         <outlet property="searchButton" destination="Bwi-cN-sBK" id="VHB-eb-hxd"/>
                         <outlet property="stackViewHeightConstraint" destination="QT5-ER-eKE" id="cIP-yG-fw1"/>
                         <outlet property="tableView" destination="NNR-u1-gfP" id="Q8a-he-0s6"/>
+                        <segue destination="Xpr-FD-GUv" kind="show" identifier="openEditorSegueId" id="KDa-ij-JwA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ivZ-tf-xj3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -604,10 +605,88 @@
                     </connections>
                 </barButtonItem>
             </objects>
-            <point key="canvasLocation" x="661" y="1"/>
+            <point key="canvasLocation" x="-30" y="1"/>
+        </scene>
+        <!--User Rules Editor Controller-->
+        <scene sceneID="LRt-Xb-xQA">
+            <objects>
+                <viewController extendedLayoutIncludesOpaqueBars="YES" modalPresentationStyle="fullScreen" id="Xpr-FD-GUv" customClass="UserRulesEditorController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ma6-5u-RBP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kR4-xj-toN" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="28" y="44" width="362" height="0.0"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jB9-m0-MDV" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="28" y="52" width="362" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                </variation>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ltx-2B-5sb">
+                                <rect key="frame" x="0.0" y="76" width="414" height="737"/>
+                                <color key="tintColor" red="0.35294117650000001" green="0.61176470589999998" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="D2I-6o-TvZ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="jB9-m0-MDV" firstAttribute="top" secondItem="kR4-xj-toN" secondAttribute="bottom" constant="8" id="6UC-CX-BYp"/>
+                            <constraint firstItem="kR4-xj-toN" firstAttribute="top" secondItem="D2I-6o-TvZ" secondAttribute="top" id="AsH-fK-PMI"/>
+                            <constraint firstItem="D2I-6o-TvZ" firstAttribute="trailing" secondItem="kR4-xj-toN" secondAttribute="trailing" constant="24" id="DYB-Ig-5EB"/>
+                            <constraint firstItem="D2I-6o-TvZ" firstAttribute="trailing" secondItem="ltx-2B-5sb" secondAttribute="trailing" id="Hxp-9h-vDt"/>
+                            <constraint firstItem="kR4-xj-toN" firstAttribute="leading" secondItem="D2I-6o-TvZ" secondAttribute="leading" constant="28" id="SAj-Wq-zUL"/>
+                            <constraint firstItem="ltx-2B-5sb" firstAttribute="leading" secondItem="D2I-6o-TvZ" secondAttribute="leading" id="Zaw-gb-ZbS"/>
+                            <constraint firstItem="ltx-2B-5sb" firstAttribute="top" secondItem="jB9-m0-MDV" secondAttribute="bottom" constant="24" id="dIb-31-zqv"/>
+                            <constraint firstItem="jB9-m0-MDV" firstAttribute="trailing" secondItem="kR4-xj-toN" secondAttribute="trailing" id="irx-ed-gch"/>
+                            <constraint firstItem="D2I-6o-TvZ" firstAttribute="bottom" secondItem="ltx-2B-5sb" secondAttribute="bottom" id="q7E-5V-33K"/>
+                            <constraint firstItem="jB9-m0-MDV" firstAttribute="leading" secondItem="kR4-xj-toN" secondAttribute="leading" id="qFT-xL-pcR"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="US9-bf-KL9"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="jB9-m0-MDV" id="hAo-fP-jq8"/>
+                        <outlet property="rulesTextView" destination="ltx-2B-5sb" id="AE1-kA-uRx"/>
+                        <outlet property="saveButton" destination="hkH-D6-pHp" id="78X-sR-GLY"/>
+                        <outlet property="titleLabel" destination="kR4-xj-toN" id="AR9-wu-kLN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xky-Iz-ixA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <barButtonItem systemItem="save" id="hkH-D6-pHp">
+                    <connections>
+                        <action selector="saveButton:" destination="Xpr-FD-GUv" id="xrW-ZE-r2a"/>
+                    </connections>
+                </barButtonItem>
+            </objects>
+            <point key="canvasLocation" x="929" y="1"/>
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
