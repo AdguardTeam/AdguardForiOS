@@ -41,6 +41,9 @@ final class FileShareHelper: NSObject, UIDocumentPickerDelegate, FileShareHelper
             let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
             activityVC.popoverPresentationController?.sourceView = vc.view
             activityVC.popoverPresentationController?.sourceRect = vc.view.frame
+            // To show popover without an arrow we need to set empty value for permittedArrowDirections
+            activityVC.popoverPresentationController?.permittedArrowDirections = []
+
             vc.present(activityVC, animated: true, completion: nil)
         }
         catch {
