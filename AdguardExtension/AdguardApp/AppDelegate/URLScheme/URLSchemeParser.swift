@@ -127,7 +127,7 @@ struct URLSchemeParser: IURLSchemeParser {
         case (.sdnsScheme, _):
             DDLogInfo("(URLSchemeParser) openurl sdns: \(url.absoluteString)")
             if !configurationService.proStatus {
-                let processor = OpenDnsSettingsControllerParser(executor: executor)
+                let processor = OpenLicenseControllerParser(executor: executor)
                 return processor.parse(url)
             } else {
                 let processor = OpenDnsProvidersControllerParser(executor: executor)
@@ -172,7 +172,7 @@ struct URLSchemeParser: IURLSchemeParser {
             let processor = OpenLicenseControllerParser(executor: executor)
             return processor.parse(url)
 
-            // Open license controller
+        // Open license controller
         case (.urlScheme, .enableAdvancedProtection):
             DDLogInfo("(URLSchemeParser) openurl - open advanced protection screen; proStatus=\(configurationService.proStatus)")
             let processor = OpenAdvancedProtectionParser(executor: executor)

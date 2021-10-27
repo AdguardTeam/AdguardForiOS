@@ -28,6 +28,9 @@ final class SafariGroupFiltersTableController: UITableViewController {
 
     // MARK: - Public properties
 
+    var titleForImport: String?
+    var urlStringForImport: String?
+
     var displayType: DisplayType!
 
     enum DisplayType {
@@ -100,6 +103,16 @@ final class SafariGroupFiltersTableController: UITableViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.layoutTableHeaderView()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if titleForImport != nil, urlStringForImport != nil {
+            addNewFilterTapped()
+
+            titleForImport = nil
+            urlStringForImport = nil
+        }
     }
 
     // MARK: - Actions
@@ -182,6 +195,8 @@ extension SafariGroupFiltersTableController: SafariGroupFiltersModelDelegate {
             return
         }
 
+        controller.openTitle = titleForImport
+        controller.openUrl = urlStringForImport
         controller.type = .safariCustom
         controller.delegate = model
         present(controller, animated: true, completion: nil)
