@@ -25,14 +25,17 @@ extension ActivityStatistics {
 
     /// Compresses the table
     func compressTable() throws {
-        Logger.logInfo("(ActivityStatistics) - compressTable; Trying to compress the table")
+        try statisticsDb.transaction(.immediate) {
 
-        let recordsCountBeforeCompression = try statisticsDb.scalar(ActivityStatisticsTable.table.count)
-        let compressedRecords = try getCompressedRecords()
-        try reset()
-        try compressedRecords.forEach { try add(record: $0) }
+            Logger.logInfo("(ActivityStatistics) - compressTable; Trying to compress the table")
 
-        Logger.logInfo("(ActivityStatistics) - compressTable; Successfully compressed the table; from \(recordsCountBeforeCompression) to \(compressedRecords.count)")
+            let recordsCountBeforeCompression = try statisticsDb.scalar(ActivityStatisticsTable.table.count)
+            let compressedRecords = try getCompressedRecords()
+            try reset()
+            try add(records: compressedRecords)
+
+            Logger.logInfo("(ActivityStatistics) - compressTable; Successfully compressed the table; from \(recordsCountBeforeCompression) to \(compressedRecords.count)")
+        }
     }
 
     private func getCompressedRecords() throws -> [ActivityStatisticsRecord] {

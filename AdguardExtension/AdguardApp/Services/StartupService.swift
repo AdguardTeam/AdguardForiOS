@@ -22,13 +22,11 @@ import DnsAdGuardSDK
 /// This service initializes all shared services and puts them into ServiceLocator
 final class StartupService : NSObject {
 
-    @objc
-    static func start() {
-
+    static func initResources() -> AESharedResourcesProtocol {
         let locator = ServiceLocator.shared
 
         // init services
-
+        
         let sharedResources: AESharedResourcesProtocol = AESharedResources()
         locator.addService(service: sharedResources)
 
@@ -38,6 +36,17 @@ final class StartupService : NSObject {
             sharedResources.sharedDefaults().register(defaults: defs)
         }
 
+        return sharedResources
+    }
+
+    static func start() {
+
+        let locator = ServiceLocator.shared
+
+        // init services
+
+        let sharedResources: AESharedResourcesProtocol = locator.getService()!
+        
         let networkService = ACNNetworking()
         locator.addService(service: networkService)
 

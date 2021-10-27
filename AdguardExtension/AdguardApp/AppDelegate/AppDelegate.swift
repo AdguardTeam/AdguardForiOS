@@ -71,7 +71,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Application init
 
     override init() {
+        let resources = StartupService.initResources()
+
+        AppDelegate.initLogger(resources: resources)
         StartupService.start()
+
         self.resources = ServiceLocator.shared.getService()!
         self.safariProtection = ServiceLocator.shared.getService()!
         self.purchaseService = ServiceLocator.shared.getService()!
@@ -88,7 +92,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.dnsProtection = ServiceLocator.shared.getService()!
 
         self.statusBarWindow = StatusBarWindow(configuration: configuration)
+
         super.init()
+
+        DDLogInfo("Application started. Version: \(productInfo.buildVersion() ?? "nil")")
     }
 
     deinit {
@@ -98,8 +105,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
 
         //------------- Preparing for start application. Stage 1. -----------------
-        initLogger()
         purchaseService.checkLicenseStatus()
+
         migrationService.migrateIfNeeded()
         activateWithOpenUrl = false
 
@@ -339,7 +346,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Init logger
 
-    private func initLogger() {
+    private static func initLogger(resources: AESharedResourcesProtocol) {
         let isDebugLogs = resources.sharedDefaults().bool(forKey: AEDefaultsDebugLogs)
         DDLogInfo("(AppDelegate) Init app with loglevel %s", level: isDebugLogs ? .debug : .all)
         ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
@@ -348,6 +355,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if DEBUG
         ACLLogger.singleton()?.logLevel = ACLLDebugLevel
         #endif
+
+        dynamicLogLevel = .info;
 
         AGLogger.setLevel(isDebugLogs ? .AGLL_TRACE : .AGLL_INFO)
         AGLogger.setCallback { _, msg, length in
@@ -358,9 +367,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
-        DDLogInfo("Application started. Version: \(productInfo.buildVersion() ?? "nil")")
-
-        // TODO: - Add this to all extensions that use AdGuarSDK
         Logger.logDebug = { msg in
             DDLogDebug(msg)
         }

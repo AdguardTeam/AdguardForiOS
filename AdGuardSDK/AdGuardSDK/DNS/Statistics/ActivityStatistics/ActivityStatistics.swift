@@ -56,13 +56,8 @@ final public class ActivityStatistics: ActivityStatisticsProtocol {
         // TODO: - It's a crutch; Refactor it later
         // This database is used by several threads at the same time.
         // It is possible that a database file is temporarily locked in one thread and is being accessed from another.
-        // Here we set a timeout and `busyHadler` to resolve this issue
-        // `busyHandler` is needed to handle error when db is locked and try once more
-        self.statisticsDb.busyTimeout = 0.5
-        self.statisticsDb.busyHandler { _ in
-            Logger.logError("(ActivityStatistics) - init; Activity statistics db is locked")
-            return true
-        }
+        // Here we set a timeout to resolve this issue
+        self.statisticsDb.busyTimeout = 10.0
 
         dateFormatter.dateFormat = Constants.Statistics.dbDateFormat
         try self.createTableIfNotExists()
@@ -162,6 +157,20 @@ final public class ActivityStatistics: ActivityStatisticsProtocol {
                                  ActivityStatisticsTable.elapsedSumm <- record.elapsedSumm]
 
         let addQuery = ActivityStatisticsTable.table.insert(setters)
+        try statisticsDb.run(addQuery)
+    }
+
+    func add(records: [ActivityStatisticsRecord]) throws {
+        let setters: [[Setter]] = records.map { record in
+            [ActivityStatisticsTable.timeStamp <- record.timeStamp,
+             ActivityStatisticsTable.domain <- record.domain,
+             ActivityStatisticsTable.requests <- record.requests,
+             ActivityStatisticsTable.encrypted <- record.encrypted,
+             ActivityStatisticsTable.blocked <- record.blocked,
+             ActivityStatisticsTable.elapsedSumm <- record.elapsedSumm]
+        }
+
+        let addQuery = ActivityStatisticsTable.table.insertMany(setters)
         try statisticsDb.run(addQuery)
     }
 
