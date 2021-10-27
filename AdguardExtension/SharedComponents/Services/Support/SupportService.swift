@@ -170,11 +170,14 @@ final class SupportService: SupportServiceProtocol {
 
         let device = UIDevice.current
 
-        let filters = safariProtection.groups
-            .filter { $0.isEnabled }
+        let enabledGroups = safariProtection.groups.filter { $0.isEnabled }
+        let groupsString = enabledGroups.reduce("", { $0 + "Group id=\($1.groupId) name=\($1.groupName)\n" })
+
+        let filtersString = enabledGroups
             .flatMap { $0.filters }
+            .filter { $0.isEnabled }
             .reduce("") { filtersString, filter in
-                let metaString = "ID=\(filter.filterId) Name=\"\(filter.name ?? "-")\" Version=\(filter.version ?? "-") Enabled=\(filter.isEnabled)\n"
+                let metaString = "ID=\(filter.filterId) GroupId=\(filter.group.groupId) Name=\"\(filter.name ?? "-")\" Version=\(filter.version ?? "-")\n"
                 return filtersString + metaString
             }
 
@@ -190,6 +193,7 @@ final class SupportService: SupportServiceProtocol {
         Platform: \(device.systemName)
         OS: \(device.systemVersion)
         ID: \(device.identifierForVendor?.uuidString ?? "Unknown")
+        APP ID: \(keyChainService.appId ?? "nil")
 
         Locale: \(ADLocales.lang() ?? "Unknown")
         Region: \(ADLocales.region() ?? "Unknown")
@@ -201,8 +205,12 @@ final class SupportService: SupportServiceProtocol {
         CustomContentBlockerRulesCount: \(resources.customContentBlockerRulesCount)
         SecurityContentBlockerRulesCount: \(resources.securityContentBlockerRulesCount)
 
-        Filters subscriptions:
-        \(filters)
+        Safari Filters information:
+        Enabled Groups:
+        \(groupsString)
+
+        Enabled Filters:
+        \(filtersString)
 
         PRO:
         Pro feature \(configuration.proStatus ? "ENABLED" : "DISABLED").
@@ -236,10 +244,10 @@ final class SupportService: SupportServiceProtocol {
             }
         }
 
-        let filtersString = collectDnsFilters()
-        guard !filtersString.isEmpty else { return resultString }
+        let dnsFiltersString = collectDnsFilters()
+        guard !dnsFiltersString.isEmpty else { return resultString }
         resultString.append("\r\nDns filters: \r\n");
-        resultString.append(filtersString)
+        resultString.append(dnsFiltersString)
 
         return resultString
     }
@@ -313,6 +321,7 @@ final class SupportService: SupportServiceProtocol {
     private func collectDnsFilters() -> String {
         return dnsProtection.filters.reduce("") { partialResult, filter in
             guard filter.isEnabled else { return partialResult }
+
             let filterString = "ID=\(filter.filterId) Name=\"\(filter.name ?? "UNDEFINED")\" Url=\(filter.filterDownloadPage ?? "UNDEFINED") Enabled=\(filter.isEnabled)\r\n"
             return partialResult + filterString
         }
