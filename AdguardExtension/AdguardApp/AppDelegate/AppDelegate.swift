@@ -99,6 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //------------- Preparing for start application. Stage 1. -----------------
         initLogger()
+        purchaseService.checkLicenseStatus()
         migrationService.migrateIfNeeded()
         activateWithOpenUrl = false
 
