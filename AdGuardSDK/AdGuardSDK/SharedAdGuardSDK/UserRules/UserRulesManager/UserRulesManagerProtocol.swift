@@ -21,12 +21,14 @@ import Foundation
 public enum UserRulesStorageError: Error, CustomDebugStringConvertible {
     case ruleAlreadyExists(ruleString: String)
     case rulesAlreadyExist(rulesStrings: [String])
+    case attemptingToAddDuplicates(duplicatedRules: [String])
     case ruleDoesNotExist(ruleString: String)
 
     public var debugDescription: String {
         switch self {
         case .ruleAlreadyExists(let rule): return "Rule '\(rule)' already exists in rules list"
         case .rulesAlreadyExist(rulesStrings: let rules): return "Rules '\(rules.joined(separator: ";"))' already exists in rules list"
+        case .attemptingToAddDuplicates(duplicatedRules: let duplicates): return "There are duplicates in rules attempted to be add; Duplicates: \(duplicates.joined(separator: ";"))"
         case .ruleDoesNotExist(let rule): return "Rule '\(rule)' doest not exist in rules list"
         }
     }

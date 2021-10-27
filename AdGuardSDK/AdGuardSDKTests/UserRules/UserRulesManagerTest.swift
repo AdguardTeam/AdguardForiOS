@@ -47,16 +47,18 @@ class UserRulesManagerTest: XCTestCase {
         TestsFileManager.clearRootDirectory()
     }
 
-    let testRules = [UserRule(ruleText: "foo1"),
-                     UserRule(ruleText: "foo2"),
-                     UserRule(ruleText: "foo3"),
-                     UserRule(ruleText: "foo4"),
-                     UserRule(ruleText: "foo5"),
-                     UserRule(ruleText: "foo6"),
-                     UserRule(ruleText: "foo7"),
-                     UserRule(ruleText: "foo8"),
-                     UserRule(ruleText: "foo9"),
-                     UserRule(ruleText: "foo10")]
+    let testRules = [
+        UserRule(ruleText: "foo1", isEnabled: false),
+        UserRule(ruleText: "foo2"),
+        UserRule(ruleText: "foo3"),
+        UserRule(ruleText: "foo4"),
+        UserRule(ruleText: "foo5", isEnabled: false),
+        UserRule(ruleText: "foo6"),
+        UserRule(ruleText: "foo7"),
+        UserRule(ruleText: "foo8"),
+        UserRule(ruleText: "foo9"),
+        UserRule(ruleText: "foo10")
+    ]
 
     func testAllowlistRulesManager() {
         try! testAddRule(userRuleManager: allowlistRulesManager!)
@@ -125,7 +127,6 @@ class UserRulesManagerTest: XCTestCase {
     }
 
     private func testAddRules(userRuleManager: UserRulesManagerProtocol) throws {
-
         XCTAssert(userRuleManager.allRules.isEmpty)
         try userRuleManager.add(rules: testRules, override: false)
         XCTAssertEqual(userRuleManager.allRules.count, testRules.count)
@@ -135,6 +136,34 @@ class UserRulesManagerTest: XCTestCase {
 
         XCTAssertNoThrow(try userRuleManager.add(rules: testRules, override: true))
         XCTAssertFalse(userRuleManager.allRules.isEmpty)
+
+        // Test add rules with duplicates
+        userRuleManager.removeAllRules()
+
+        var rulesWithDuplicates = testRules
+        rulesWithDuplicates.append(testRules[0])
+        XCTAssertThrowsError(try userRuleManager.add(rules: rulesWithDuplicates, override: false))
+        XCTAssert(userRuleManager.allRules.isEmpty)
+
+        // Only unique rules should be added
+        XCTAssertNoThrow(try userRuleManager.add(rules: rulesWithDuplicates, override: true))
+        XCTAssertEqual(userRuleManager.allRules.count, testRules.count)
+
+        // Test duplicates with existing rules
+        XCTAssertNoThrow(try userRuleManager.add(rules: [testRules[0], testRules[1]], override: true))
+        XCTAssertEqual(userRuleManager.allRules.count, testRules.count)
+
+        XCTAssertThrowsError(try userRuleManager.add(rules: [testRules[0], testRules[1]], override: false))
+        XCTAssertEqual(userRuleManager.allRules.count, testRules.count)
+
+        XCTAssertNoThrow(try userRuleManager.add(rules: [testRules[1], testRules[1]], override: true))
+        XCTAssertEqual(userRuleManager.allRules.count, testRules.count)
+
+        XCTAssertThrowsError(try userRuleManager.add(rules: [testRules[0], testRules[0]], override: false))
+        XCTAssertEqual(userRuleManager.allRules.count, testRules.count)
+
+        XCTAssertNoThrow(try userRuleManager.add(rules: [testRules[1], testRules[1], UserRule(ruleText: "duplicate"), UserRule(ruleText: "duplicate")], override: true))
+        XCTAssertEqual(userRuleManager.allRules.count, testRules.count + 1)
 
         userRuleManager.removeAllRules()
     }

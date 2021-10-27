@@ -41,3 +41,19 @@ public extension Array where Element: Equatable {
         return true
     }
 }
+
+public extension Array where Element: Hashable {
+    /// Returns array of duplicate elements
+    /// Returns empty array if there are no duplicates
+    var duplicates: [Element] {
+        var uniqueElements: Set<Element> = []
+        return self.compactMap {
+            if uniqueElements.contains($0) {
+                return $0
+            } else {
+                uniqueElements.insert($0)
+                return nil
+            }
+        }
+    }
+}

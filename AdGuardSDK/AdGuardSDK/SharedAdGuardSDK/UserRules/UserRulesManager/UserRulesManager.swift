@@ -56,6 +56,11 @@ public final class UserRulesManager: UserRulesManagerProtocol {
     }
 
     public func add(rules: [UserRule], override: Bool) throws {
+        let duplicates = rules.map { $0.ruleText }.duplicates
+        if !override, !duplicates.isEmpty {
+            throw UserRulesStorageError.attemptingToAddDuplicates(duplicatedRules: duplicates)
+        }
+
         let rulesTextSet = Set(storage.rules.map { $0.ruleText })
         let existingRules = rulesTextSet.intersection(rules.map { $0.ruleText })
 
@@ -63,7 +68,7 @@ public final class UserRulesManager: UserRulesManagerProtocol {
             throw UserRulesStorageError.rulesAlreadyExist(rulesStrings: Array(existingRules))
         }
 
-        if existingRules.isEmpty {
+        if existingRules.isEmpty && duplicates.isEmpty {
             storage.rules.append(contentsOf: rules)
         } else {
             try rules.forEach {
