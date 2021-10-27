@@ -356,7 +356,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ACLLogger.singleton()?.logLevel = ACLLDebugLevel
         #endif
 
-        dynamicLogLevel = .info;
+        dynamicLogLevel = DDLogLevel(rawValue: UInt(ddLogLevel)) ?? .info
 
         AGLogger.setLevel(isDebugLogs ? .AGLL_TRACE : .AGLL_INFO)
         AGLogger.setCallback { _, msg, length in
