@@ -68,21 +68,15 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="6WB-a0-8YE" secondAttribute="trailing" constant="24" id="407-Vf-7Uw"/>
                                                 <constraint firstItem="6WB-a0-8YE" firstAttribute="leading" secondItem="1gT-I7-liG" secondAttribute="leading" constant="24" id="85d-6R-udz"/>
-                                                <constraint firstItem="QHZ-sJ-wTL" firstAttribute="top" secondItem="6WB-a0-8YE" secondAttribute="bottom" constant="8" id="EXC-7v-CiL">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
-                                                </constraint>
+                                                <constraint firstItem="QHZ-sJ-wTL" firstAttribute="top" secondItem="6WB-a0-8YE" secondAttribute="bottom" constant="8" id="EXC-7v-CiL"/>
                                                 <constraint firstAttribute="trailing" secondItem="QHZ-sJ-wTL" secondAttribute="trailing" constant="24" id="Kcg-ug-359"/>
                                                 <constraint firstItem="QHZ-sJ-wTL" firstAttribute="leading" secondItem="1gT-I7-liG" secondAttribute="leading" constant="24" id="Oty-hk-WlG"/>
-                                                <constraint firstItem="6WB-a0-8YE" firstAttribute="top" secondItem="rFj-gs-pCq" secondAttribute="bottom" constant="12" id="TID-qP-dkn">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="40"/>
-                                                </constraint>
+                                                <constraint firstItem="6WB-a0-8YE" firstAttribute="top" secondItem="rFj-gs-pCq" secondAttribute="bottom" constant="12" id="TID-qP-dkn"/>
                                                 <constraint firstItem="rFj-gs-pCq" firstAttribute="centerX" secondItem="1gT-I7-liG" secondAttribute="centerX" id="Z3I-Tv-cO5"/>
                                                 <constraint firstAttribute="bottom" secondItem="QHZ-sJ-wTL" secondAttribute="bottom" constant="24" id="ghi-gC-FJb">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="96"/>
                                                 </constraint>
-                                                <constraint firstItem="rFj-gs-pCq" firstAttribute="top" secondItem="1gT-I7-liG" secondAttribute="top" constant="8" id="ysr-fo-Rh9">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="96"/>
-                                                </constraint>
+                                                <constraint firstItem="rFj-gs-pCq" firstAttribute="top" secondItem="1gT-I7-liG" secondAttribute="top" id="ysr-fo-Rh9"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
