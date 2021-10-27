@@ -142,7 +142,7 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
     }
 
     func exportFile(for vc: UIViewController) {
-        let rulesText = safariProtection.rulesString(for: type)
+        let rulesText = safariProtection.allRules(for: type).map { $0.ruleText }.joined(separator: "\n")
         fileShareHelper.exportFile(for: vc, filename: type.filename, text: rulesText)
     }
 
