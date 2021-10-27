@@ -45,6 +45,11 @@ class UserRulesManagerMock: UserRulesManagerProtocol {
         }
     }
 
+    var setRulesCalledCount = 0
+    func set(rules: [String]) {
+        setRulesCalledCount += 1
+    }
+
     var modifyRuleCalledCount = 0
     var modifyRuleError: Error?
     func modifyRule(_ oldRuleText: String, _ newRule: UserRule) throws {

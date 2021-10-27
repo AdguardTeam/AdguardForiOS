@@ -63,6 +63,7 @@ class UserRulesManagerTest: XCTestCase {
     func testAllowlistRulesManager() {
         try! testAddRule(userRuleManager: allowlistRulesManager!)
         try! testAddRules(userRuleManager: allowlistRulesManager!)
+        testSetRules(userRuleManager: allowlistRulesManager!)
         try! testModifyRule(userRuleManager: allowlistRulesManager!)
         try! testRemoveRules(userRuleManager: allowlistRulesManager!)
         try! testRemoveAllRules(userRuleManager: allowlistRulesManager!)
@@ -73,6 +74,7 @@ class UserRulesManagerTest: XCTestCase {
     func testInvertedAllowlistRulesManager() {
         try! testAddRule(userRuleManager: invertedAllowlistRulesManager!)
         try! testAddRules(userRuleManager: invertedAllowlistRulesManager!)
+        testSetRules(userRuleManager: invertedAllowlistRulesManager!)
         try! testModifyRule(userRuleManager: invertedAllowlistRulesManager!)
         try! testRemoveRules(userRuleManager: invertedAllowlistRulesManager!)
         try! testRemoveAllRules(userRuleManager: invertedAllowlistRulesManager!)
@@ -83,6 +85,7 @@ class UserRulesManagerTest: XCTestCase {
     func testBlockinglistRulesManager() {
         try! testAddRule(userRuleManager: blocklistRulesManager!)
         try! testAddRules(userRuleManager: blocklistRulesManager!)
+        testSetRules(userRuleManager: blocklistRulesManager!)
         try! testModifyRule(userRuleManager: blocklistRulesManager!)
         try! testRemoveRules(userRuleManager: blocklistRulesManager!)
         try! testRemoveAllRules(userRuleManager: blocklistRulesManager!)
@@ -93,6 +96,7 @@ class UserRulesManagerTest: XCTestCase {
     func testDnsBlockinglistRulesManager() {
         try! testAddRule(userRuleManager: dnsBlocklistRulesManager!)
         try! testAddRules(userRuleManager: dnsBlocklistRulesManager!)
+        testSetRules(userRuleManager: dnsBlocklistRulesManager!)
         try! testModifyRule(userRuleManager: dnsBlocklistRulesManager!)
         try! testRemoveRules(userRuleManager: dnsBlocklistRulesManager!)
         try! testRemoveAllRules(userRuleManager: dnsBlocklistRulesManager!)
@@ -103,6 +107,7 @@ class UserRulesManagerTest: XCTestCase {
     func testDnsAllowlistRulesManager() {
         try! testAddRule(userRuleManager: dnsAllowlistRulesManager!)
         try! testAddRules(userRuleManager: dnsAllowlistRulesManager!)
+        testSetRules(userRuleManager: dnsAllowlistRulesManager!)
         try! testModifyRule(userRuleManager: dnsAllowlistRulesManager!)
         try! testRemoveRules(userRuleManager: dnsAllowlistRulesManager!)
         try! testRemoveAllRules(userRuleManager: dnsAllowlistRulesManager!)
@@ -168,8 +173,71 @@ class UserRulesManagerTest: XCTestCase {
         userRuleManager.removeAllRules()
     }
 
-    private func testModifyRule(userRuleManager: UserRulesManagerProtocol) throws {
+    private func testSetRules(userRuleManager: UserRulesManagerProtocol) {
+        // Test 1
+        XCTAssert(userRuleManager.allRules.isEmpty)
+        try! userRuleManager.add(rule: UserRule(ruleText: "kek1", isEnabled: true), override: true)
+        XCTAssertEqual(userRuleManager.allRules.count, 1)
 
+        userRuleManager.set(rules: ["kek1", "kek2"])
+        XCTAssertEqual(userRuleManager.allRules.count, 2)
+        XCTAssertEqual(userRuleManager.allRules[0], UserRule(ruleText: "kek1", isEnabled: true))
+        XCTAssertEqual(userRuleManager.allRules[1], UserRule(ruleText: "kek2", isEnabled: true))
+        userRuleManager.removeAllRules()
+
+        // Test 2
+        XCTAssert(userRuleManager.allRules.isEmpty)
+        try! userRuleManager.add(rule: UserRule(ruleText: "kek1", isEnabled: false), override: true)
+        XCTAssertEqual(userRuleManager.allRules.count, 1)
+
+        userRuleManager.set(rules: ["kek0", "kek1", "kek2"])
+        XCTAssertEqual(userRuleManager.allRules.count, 3)
+        XCTAssertEqual(userRuleManager.allRules[0], UserRule(ruleText: "kek0", isEnabled: true))
+        XCTAssertEqual(userRuleManager.allRules[1], UserRule(ruleText: "kek1", isEnabled: false))
+        XCTAssertEqual(userRuleManager.allRules[2], UserRule(ruleText: "kek2", isEnabled: true))
+        userRuleManager.removeAllRules()
+
+        // Test 3
+        XCTAssert(userRuleManager.allRules.isEmpty)
+        try! userRuleManager.add(
+            rules: [
+                UserRule(ruleText: "kek1", isEnabled: true),
+                UserRule(ruleText: "kek2", isEnabled: false),
+                UserRule(ruleText: "kek3", isEnabled: true),
+                UserRule(ruleText: "kek4", isEnabled: true)
+            ],
+            override: true
+        )
+        XCTAssertEqual(userRuleManager.allRules.count, 4)
+
+        userRuleManager.set(rules: ["kek1", "kek2", "kek4"])
+        XCTAssertEqual(userRuleManager.allRules.count, 3)
+        XCTAssertEqual(userRuleManager.allRules[0], UserRule(ruleText: "kek1", isEnabled: true))
+        XCTAssertEqual(userRuleManager.allRules[1], UserRule(ruleText: "kek2", isEnabled: false))
+        XCTAssertEqual(userRuleManager.allRules[2], UserRule(ruleText: "kek4", isEnabled: true))
+        userRuleManager.removeAllRules()
+
+        // Test 4
+        XCTAssert(userRuleManager.allRules.isEmpty)
+        try! userRuleManager.add(
+            rules: [
+                UserRule(ruleText: "kek1", isEnabled: true),
+                UserRule(ruleText: "kek2", isEnabled: false),
+                UserRule(ruleText: "kek3", isEnabled: true)
+            ],
+            override: true
+        )
+        XCTAssertEqual(userRuleManager.allRules.count, 3)
+
+        userRuleManager.set(rules: ["kek11", "kek21", "koko"])
+        XCTAssertEqual(userRuleManager.allRules.count, 3)
+        XCTAssertEqual(userRuleManager.allRules[0], UserRule(ruleText: "kek11", isEnabled: true))
+        XCTAssertEqual(userRuleManager.allRules[1], UserRule(ruleText: "kek21", isEnabled: true))
+        XCTAssertEqual(userRuleManager.allRules[2], UserRule(ruleText: "koko", isEnabled: true))
+        userRuleManager.removeAllRules()
+    }
+
+    private func testModifyRule(userRuleManager: UserRulesManagerProtocol) throws {
         XCTAssert(userRuleManager.allRules.isEmpty)
         try userRuleManager.add(rules: testRules, override: false)
         XCTAssertEqual(userRuleManager.allRules.count, testRules.count)

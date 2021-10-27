@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import OrderedCollections
 
 /*
  This class is a generic user rules manager
@@ -75,6 +76,17 @@ public final class UserRulesManager: UserRulesManagerProtocol {
                 try internalAdd(rule: $0, override: override)
             }
         }
+    }
+
+    public func set(rules: [String]) {
+        let uniqueRules = rules.uniqueElements
+        let newRules: [UserRule] = uniqueRules.map { ruleToAdd in
+            if let existingRule = storage.rules.first(where: { $0.ruleText == ruleToAdd }) {
+                return existingRule
+            }
+            return UserRule(ruleText: ruleToAdd, isEnabled: true)
+        }
+        storage.rules = OrderedSet(newRules)
     }
 
     public func modifyRule(_ oldRuleText: String, _ newRule: UserRule) throws {

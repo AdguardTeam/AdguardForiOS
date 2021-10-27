@@ -62,6 +62,14 @@ public protocol UserRulesManagerProtocol: ResetableSyncProtocol, AnyObject {
      */
     func add(rules: [UserRule], override: Bool) throws
 
+    /**
+     Replaces old rules models with provided rules string
+     If one of passed rules did already exist than it's state will be preserved
+
+     - Parameter rules: Rules texts to add to storage
+     */
+    func set(rules: [String])
+
     /* Modifies rule in the user rule's list */
     func modifyRule(_ oldRuleText: String, _ newRule: UserRule) throws
 

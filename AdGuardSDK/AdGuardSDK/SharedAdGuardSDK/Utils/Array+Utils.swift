@@ -56,4 +56,16 @@ public extension Array where Element: Hashable {
             }
         }
     }
+
+    /// Returns array of unique elements preserving elements order
+    var uniqueElements: [Element] {
+        var uniqueElements: Set<Element> = []
+        return self.compactMap {
+            if uniqueElements.contains($0) {
+                return nil
+            }
+            uniqueElements.insert($0)
+            return $0
+        }
+    }
 }
