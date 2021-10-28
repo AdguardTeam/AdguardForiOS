@@ -64,16 +64,10 @@ final public class ChartStatistics: ChartStatisticsProtocol {
         self.statisticsDb = try Connection(statisticsDbContainerUrl.appendingPathComponent(dbName).path)
         dateFormatter.dateFormat = Constants.Statistics.dbDateFormat
 
-        // TODO: - It's a crutch; Refactor it later
         // This database is used by several threads at the same time.
         // It is possible that a database file is temporarily locked in one thread and is being accessed from another.
-        // Here we set a timeout and `busyHadler` to resolve this issue
-        // `busyHandler` is needed to handle error when db is locked and try once more
-        self.statisticsDb.busyTimeout = 0.5
-        self.statisticsDb.busyHandler { _ in
-            Logger.logError("(ChartStatistics) - init; Chart statistics db is locked")
-            return true
-        }
+        // Here we set a timeout to resolve this issue
+        self.statisticsDb.busyTimeout = 10.0
 
         try createTableIfNotExists()
     }
