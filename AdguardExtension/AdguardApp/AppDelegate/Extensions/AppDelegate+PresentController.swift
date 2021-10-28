@@ -136,8 +136,7 @@ extension AppDelegate {
      Returns true on success and false otherwise
      */
     func presentLoginController(showLaunchScreen: Bool = false, withLicenseKey key: String? = nil) -> Bool {
-        let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
-        if purchaseService.isProPurchased {
+        if proStatus {
             return openMainPageController(showLaunchScreen: false, complexProtectionIsEnabled: nil)
         }
 
@@ -186,7 +185,7 @@ extension AppDelegate {
      Returns true on success and false otherwise
      */
     func presentDnsProvidersController(showLaunchScreen: Bool = false, url: String? = nil) -> Bool {
-        guard proStatus else  { return presentPurchaseLicenseController() }
+        if !proStatus { return presentPurchaseLicenseController() }
 
         guard let tabBar = getMainTabController() else {
             DDLogError("Tab bar is nil")
@@ -232,7 +231,7 @@ extension AppDelegate {
      Returns true on success and false otherwise
      */
     func presentFiltersMasterController(showLaunchScreen: Bool = false, url: String? = nil, title: String? = nil) -> Bool {
-        guard proStatus else { return presentPurchaseLicenseController() }
+        if !proStatus { return presentPurchaseLicenseController() }
         
         guard let tabBar = getMainTabController() else {
             DDLogError("Tab bar is nil")
@@ -553,7 +552,7 @@ extension AppDelegate {
     }
 
     func presentPurchaseLicenseController() -> Bool {
-        guard !proStatus else { return false }
+        if proStatus { return false }
 
         guard let tabBar = getMainTabController() else {
             DDLogError("Tab bar is nil")

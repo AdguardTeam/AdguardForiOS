@@ -84,10 +84,6 @@ struct URLSchemeParser: IURLSchemeParser {
             command = StringConstants.getStringConstant(string: url.parseUrl().command)
         }
 
-        if command == .activateLicense && Bundle.main.isPro {
-            return false
-        }
-
         switch (scheme, command) {
         // Adding new user rule from safari
         case (.urlScheme, .urlSchemeCommandAdd):
