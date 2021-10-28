@@ -62,9 +62,7 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        /*
-            If there is no tab bar this mean that we trying to login from onboarding license screen and we must dismiss it after successful login
-        */
+        // If there is no tab bar this mean that we trying to login from onboarding license screen and we must dismiss it after successful login
         fromOnboarding = self.tabBarController == nil
 
         setupBackButton()
