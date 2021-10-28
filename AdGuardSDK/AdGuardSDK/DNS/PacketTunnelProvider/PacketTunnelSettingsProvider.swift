@@ -20,6 +20,7 @@ import NetworkExtension
 import SharedAdGuardSDK
 
 protocol PacketTunnelSettingsProviderProtocol {
+    var addresses: PacketTunnelProvider.Addresses { get }
     func createSettings(full: Bool, withoutVpnIcon: Bool) -> NEPacketTunnelNetworkSettings
 }
 
@@ -27,7 +28,7 @@ protocol PacketTunnelSettingsProviderProtocol {
 /// Used to incapsulate settings creation logic
 final class PacketTunnelSettingsProvider: PacketTunnelSettingsProviderProtocol {
 
-    private let addresses: PacketTunnelProvider.Addresses
+    let addresses: PacketTunnelProvider.Addresses
     private let networkUtils: NetworkUtilsProtocol
 
     init(addresses: PacketTunnelProvider.Addresses, networkUtils: NetworkUtilsProtocol = NetworkUtils()) {

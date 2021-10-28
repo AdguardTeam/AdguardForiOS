@@ -56,10 +56,12 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
     private var tunnelProxy: PacketTunnelProviderProxyProtocol!
     private let reachabilityHandler: Reachability
     private var reachabilityObserver: NotificationToken?
+    private var reachabilityConnection: Reachability.Connection
 
     override public init() {
         assertionFailure("This initializer shouldn't be called")
         self.reachabilityHandler = try! Reachability()
+        self.reachabilityConnection = .unavailable
         super.init()
     }
 
@@ -113,17 +115,11 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
         )
 
         self.reachabilityHandler = try Reachability()
+        self.reachabilityConnection = .unavailable
 
         super.init()
 
         tunnelProxy.delegate = self
-
-        reachabilityObserver = NotificationCenter.default.observe(name: .reachabilityChanged, object: nil, queue: nil) { [weak self] _ in
-            // We don't need to restart tunnel when there is no connection
-            if let reachability = self?.reachabilityHandler, reachability.connection != .unavailable {
-                self?.tunnelProxy.networkChanged()
-            }
-        }
 
         Logger.logInfo("(PacketTunnelProvider) init finished")
     }
@@ -142,7 +138,10 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
             return
         }
 
-        tunnelProxy.startTunnel(options: options, completionHandler: completionHandler)
+        tunnelProxy.startTunnel(options: options) { [weak self] error in
+            self?.startReachcbilityHandling()
+            completionHandler(error)
+        }
     }
 
     public override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
@@ -159,6 +158,20 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
     public override func wake() {
         Logger.logInfo("(PacketTunnelProvider) Wake Event")
         tunnelProxy.wake()
+    }
+
+    private func startReachcbilityHandling() {
+        self.reachabilityConnection = self.reachabilityHandler.connection
+
+        self.reachabilityObserver = NotificationCenter.default.observe(name: .reachabilityChanged, object: nil, queue: nil) { [weak self] note in
+            guard let self = self, let reachability = note.object as? Reachability else { return }
+            // We don't need to restart tunnel when there is no connection
+            Logger.logInfo("Reachability connection changed from \(self.reachabilityConnection) to \(reachability.connection)")
+            if reachability.connection != .unavailable && reachability.connection != self.reachabilityConnection {
+                self.tunnelProxy.networkChanged()
+                self.reachabilityConnection = reachability.connection
+            }
+        }
     }
 }
 
