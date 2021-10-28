@@ -212,9 +212,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         let urlParser: IURLSchemeParser = URLSchemeParser(executor: self,
-                                                          configurationService: configuration,
-                                                          purchaseService: purchaseService)
-
+                                                          configurationService: configuration)
         return urlParser.parse(url: url)
     }
 

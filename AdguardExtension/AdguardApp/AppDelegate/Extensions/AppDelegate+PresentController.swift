@@ -24,6 +24,11 @@ extension AppDelegate {
 
     static let shared = UIApplication.shared.delegate as! AppDelegate
 
+    private var proStatus: Bool {
+        let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
+        return configuration.proStatus
+    }
+
     /* returns launch screen from LaunchScreen.storyboard */
     func getLaunchScreen() -> UIViewController? {
         let launchScreenStoryboard = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main)
@@ -131,6 +136,11 @@ extension AppDelegate {
      Returns true on success and false otherwise
      */
     func presentLoginController(showLaunchScreen: Bool = false, withLicenseKey key: String? = nil) -> Bool {
+        let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
+        if purchaseService.isProPurchased {
+            return openMainPageController(showLaunchScreen: false, complexProtectionIsEnabled: nil)
+        }
+
         guard let tabBar = getMainTabController() else {
             DDLogError("Tab bar is nil")
             return false
@@ -176,6 +186,7 @@ extension AppDelegate {
      Returns true on success and false otherwise
      */
     func presentDnsProvidersController(showLaunchScreen: Bool = false, url: String? = nil) -> Bool {
+        guard proStatus else  { return presentPurchaseLicenseController() }
 
         guard let tabBar = getMainTabController() else {
             DDLogError("Tab bar is nil")
@@ -221,6 +232,8 @@ extension AppDelegate {
      Returns true on success and false otherwise
      */
     func presentFiltersMasterController(showLaunchScreen: Bool = false, url: String? = nil, title: String? = nil) -> Bool {
+        guard proStatus else { return presentPurchaseLicenseController() }
+        
         guard let tabBar = getMainTabController() else {
             DDLogError("Tab bar is nil")
             return false
@@ -540,6 +553,8 @@ extension AppDelegate {
     }
 
     func presentPurchaseLicenseController() -> Bool {
+        guard !proStatus else { return false }
+
         guard let tabBar = getMainTabController() else {
             DDLogError("Tab bar is nil")
             return false

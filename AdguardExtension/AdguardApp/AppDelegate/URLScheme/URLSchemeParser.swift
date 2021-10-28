@@ -71,12 +71,10 @@ struct URLSchemeParser: IURLSchemeParser {
 
     private let executor: IURLSchemeExecutor
     private let configurationService: ConfigurationServiceProtocol
-    private let purchaseService: PurchaseServiceProtocol
 
-    init(executor: IURLSchemeExecutor, configurationService: ConfigurationServiceProtocol, purchaseService: PurchaseServiceProtocol) {
+    init(executor: IURLSchemeExecutor, configurationService: ConfigurationServiceProtocol) {
         self.executor = executor
         self.configurationService = configurationService
-        self.purchaseService = purchaseService
     }
 
     func parse(url: URL) -> Bool {
@@ -112,27 +110,14 @@ struct URLSchemeParser: IURLSchemeParser {
         // Activate license by URL
         case (.urlScheme, .activateLicense):
             DDLogInfo("(URLSchemeParser) - activate license key from openUrl")
-            if !purchaseService.isProPurchased {
-                let loginParser = OpenLoginControllerParser(executor: executor)
-                if loginParser.parse(url) {
-                    return true
-                }
-            }
-
-            DDLogInfo("(URLSchemeParser) - update license from openUrl")
-            let mainPageParser = OpenMainPageControllerParser(executor: executor)
-            return mainPageParser.parse(url)
+            let loginParser = OpenLoginControllerParser(executor: executor)
+            return loginParser.parse(url)
 
         // Adding custom DNS server
         case (.sdnsScheme, _):
             DDLogInfo("(URLSchemeParser) openurl sdns: \(url.absoluteString)")
-            if !configurationService.proStatus {
-                let processor = OpenLicenseControllerParser(executor: executor)
-                return processor.parse(url)
-            } else {
-                let processor = OpenDnsProvidersControllerParser(executor: executor)
-                return processor.parse(url)
-            }
+            let processor = OpenDnsProvidersControllerParser(executor: executor)
+            return processor.parse(url)
 
         // Import settings
         case (.urlScheme, .applySettings):
@@ -143,13 +128,8 @@ struct URLSchemeParser: IURLSchemeParser {
         // Subscribe to custom safari filter
         case (_, .subscribe):
             DDLogInfo("(URLSchemeParser) openurl - subscribe filter")
-            if configurationService.proStatus {
-                let processor = OpenFiltersMasterControllerParser(executor: executor)
-                return processor.parse(url)
-            }
-
-            let mainPageParser = OpenMainPageControllerParser(executor: executor)
-            return mainPageParser.parse(url)
+            let processor = OpenFiltersMasterControllerParser(executor: executor)
+            return processor.parse(url)
 
         // Open Tunnel Mode settings
         case (_, .openTunnelModeSettings):
@@ -172,8 +152,6 @@ struct URLSchemeParser: IURLSchemeParser {
         // Open license controller
         case (.urlScheme, .upgradeApp):
             DDLogInfo("(URLSchemeParser) openurl - open license screen; proStatus=\(configurationService.proStatus)")
-            guard !configurationService.proStatus else { return false }
-
             let processor = OpenLicenseControllerParser(executor: executor)
             return processor.parse(url)
 
