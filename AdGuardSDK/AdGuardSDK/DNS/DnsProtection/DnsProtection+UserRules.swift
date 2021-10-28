@@ -59,6 +59,15 @@ public protocol DnsProtectionUserRulesManagerProtocol {
     func add(rules: [UserRule], override: Bool, for type: DnsUserRuleType) throws
 
     /**
+     Replaces old rules models with provided rules string
+     If one of passed rules did already exist than it's state will be preserved
+
+     - Parameter rules: Rules texts to add to storage
+     - Parameter type: User rules type (blocklist / allowlist) to add rules for
+     */
+    func set(rules: [String], for type: DnsUserRuleType)
+
+    /**
      Modifies rule in the user rule's list
      - Parameter oldRuleText: Old rule text
      - Parameter newRuleText: New rule text
@@ -142,6 +151,14 @@ extension DnsProtection {
             Logger.logInfo("(DnsProtection+UserRules) - addRules; Adding \(rules.count) rules; for type=\(type); override=\(override)")
             let manager = getManager(for: type)
             try manager.add(rules: rules, override: override)
+        }
+    }
+
+    public func set(rules: [String], for type: DnsUserRuleType) {
+        workingQueue.sync {
+            Logger.logInfo("(DnsProtection+UserRules) - setRules; Setting \(rules.count) rules; for type=\(type)")
+            let manager = getManager(for: type)
+            manager.set(rules: rules)
         }
     }
 

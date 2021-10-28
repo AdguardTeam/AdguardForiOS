@@ -20,9 +20,16 @@ import SharedAdGuardSDK
 import DnsAdGuardSDK
 
 final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
+
     // MARK: - Internal properties
 
     weak var delegate: UserRulesTableModelDelegate?
+
+    var editorTitle: String { title }
+
+    var editorDescription: String { type.editorDescription }
+
+    var userRulesString: String { rulesModels.map { $0.rule }.joined(separator: "\n") }
 
     var title: String { type.title }
 
@@ -149,6 +156,14 @@ final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
         modelProvider.setRule(rule, selected: selected)
     }
 
+    func saveUserRules(from text: String) {
+        let userRulesString = text.split(separator: "\n").map { String($0).trimmingCharacters(in: .whitespaces) }
+        dnsProtection.set(rules: userRulesString, for: type)
+        vpnManager.updateSettings(completion: nil)
+        modelProvider = UserRulesModelsProvider(initialModels: Self.models(dnsProtection, type))
+        delegate?.rulesChanged()
+    }
+
     func deselectAll() {
         modelProvider.deselectAll()
     }
@@ -215,6 +230,13 @@ fileprivate extension DnsUserRuleType {
         case .allowlist:
             let format = String.localizedString("whitelist_text")
             return String(format: format, url)
+        }
+    }
+
+    var editorDescription: String {
+        switch self {
+        case .blocklist: return String.localizedString("editor_dns_blocklist_rules_description")
+        case .allowlist: return String.localizedString("editor_dns_allowlist_rules_description")
         }
     }
 

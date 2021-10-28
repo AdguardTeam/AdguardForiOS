@@ -17,6 +17,7 @@
  */
 
 import Foundation
+import OrderedCollections
 
 /*
  This class is a generic user rules manager
@@ -56,6 +57,11 @@ public final class UserRulesManager: UserRulesManagerProtocol {
     }
 
     public func add(rules: [UserRule], override: Bool) throws {
+        let duplicates = rules.map { $0.ruleText }.duplicates
+        if !override, !duplicates.isEmpty {
+            throw UserRulesStorageError.attemptingToAddDuplicates(duplicatedRules: duplicates)
+        }
+
         let rulesTextSet = Set(storage.rules.map { $0.ruleText })
         let existingRules = rulesTextSet.intersection(rules.map { $0.ruleText })
 
@@ -63,13 +69,31 @@ public final class UserRulesManager: UserRulesManagerProtocol {
             throw UserRulesStorageError.rulesAlreadyExist(rulesStrings: Array(existingRules))
         }
 
-        if existingRules.isEmpty {
+        if existingRules.isEmpty && duplicates.isEmpty {
             storage.rules.append(contentsOf: rules)
         } else {
             try rules.forEach {
                 try internalAdd(rule: $0, override: override)
             }
         }
+    }
+
+    public func set(rules: [String]) {
+        let uniqueRules = rules.uniqueElements
+        
+        let newRules: [UserRule] = uniqueRules.compactMap { ruleToAdd in
+            let trimmedRule = ruleToAdd.trimmingCharacters(in: .whitespacesAndNewlines)
+
+            if trimmedRule.isEmpty {
+                return nil
+            }
+
+            if let existingRule = storage.rules.first(where: { $0.ruleText == trimmedRule }) {
+                return existingRule
+            }
+            return UserRule(ruleText: trimmedRule, isEnabled: true)
+        }
+        storage.rules = OrderedSet(newRules)
     }
 
     public func modifyRule(_ oldRuleText: String, _ newRule: UserRule) throws {

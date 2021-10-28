@@ -59,6 +59,16 @@ public protocol SafariProtectionUserRulesProtocol {
     func add(rules: [UserRule], for type: SafariUserRuleType, override: Bool, onCbReloaded: ((Error?) -> Void)?) throws
 
     /**
+     Replaces old rules models with provided rules string and reloads CBs than
+     If one of passed rules did already exist than it's state will be preserved
+
+     - Parameter rules: Rules texts to add to storage
+     - Parameter type: User rules type (blocklist / allowlist / inverted allowlist) to add rules for
+     - Parameter onCbReloaded: Closure to handle errors when reloading Content Blockers
+     */
+    func set(rules: [String], for type: SafariUserRuleType, onCbReloaded: ((Error?) -> Void)?)
+
+    /**
      Modifies rule in the specified user rule's list and reloads CBs than
      - Parameter oldRuleText: Old rule text to find a rule that wil be modified
      - Parameter newRule: New rule to replace old one
@@ -173,6 +183,30 @@ extension SafariProtection {
                     Logger.logError("(SafariProtection+UserRules) - addRules; Error reloading CBs when adding \(rules.count) rules for type=\(type), override=\(override); Error: \(error)")
                 } else {
                     Logger.logInfo("(SafariProtection+UserRules) - addRules; Successfully reloaded CBs after adding \(rules.count) rules for type=\(type), override=\(override)")
+                }
+                self.completionQueue.async { onCbReloaded?(error) }
+            }
+        }
+    }
+
+    public func set(rules: [String], for type: SafariUserRuleType, onCbReloaded: ((Error?) -> Void)?) {
+        workingQueue.sync {
+            Logger.logInfo("(SafariProtection+UserRules) - setRules; Setting \(rules.count) rules; for type=\(type)")
+
+            let provider = self.getProvider(for: type)
+            executeBlockAndReloadCbs {
+                provider.set(rules: rules)
+            } onCbReloaded: { [weak self] error in
+                guard let self = self else {
+                    Logger.logError("(SafariProtection+UserRules) - setRules.onCbReloaded; self is missing!")
+                    DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
+                    return
+                }
+
+                if let error = error {
+                    Logger.logError("(SafariProtection+UserRules) - setRules; Error reloading CBs when setting \(rules.count) rules for type=\(type); Error: \(error)")
+                } else {
+                    Logger.logInfo("(SafariProtection+UserRules) - setRules; Successfully reloaded CBs after setting \(rules.count) rules for type=\(type)")
                 }
                 self.completionQueue.async { onCbReloaded?(error) }
             }

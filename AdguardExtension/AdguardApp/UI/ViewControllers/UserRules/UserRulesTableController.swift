@@ -47,6 +47,8 @@ final class UserRulesTableController: UIViewController {
 
     // MARK: - Private properties
 
+    private let openEditorSegueId = "openEditorSegueId"
+
     /* Headers */
     private lazy var titleHeader: ExtendedTitleTableHeaderView = {
         ExtendedTitleTableHeaderView(title: model.title, htmlDescription: model.description)
@@ -97,6 +99,12 @@ final class UserRulesTableController: UIViewController {
 
         if let nav = navigationController as? MainNavigationController {
             nav.currentSwipeRecognizer?.delegate = nil
+        }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == openEditorSegueId, let userRulesEditorVC = segue.destination as? UserRulesEditorController {
+            userRulesEditorVC.model = model
         }
     }
 
@@ -181,6 +189,11 @@ final class UserRulesTableController: UIViewController {
         }
         alert.addAction(selectAction)
 
+        let openEditorAction = UIAlertAction(title: String.localizedString("open_user_rules_editor"), style: .default) { [weak self] _ in
+            self?.openEditor()
+        }
+        alert.addAction(openEditorAction)
+
         let importAction = UIAlertAction(title: String.localizedString("import"), style: .default) { [weak self] _ in
             self?.importRules()
         }
@@ -201,9 +214,11 @@ final class UserRulesTableController: UIViewController {
 
     @available(iOS 14.0, *)
     private func createMenu() -> UIMenu {
-        let selectAction = UIAction(title: String.localizedString("common_select"), image: UIImage(systemName: "checkmark.circle")) { [weak self] a in
-            print(a)
+        let selectAction = UIAction(title: String.localizedString("common_select"), image: UIImage(systemName: "checkmark.circle")) { [weak self] _ in
             self?.select()
+        }
+        let openEditorAction = UIAction(title: String.localizedString("open_user_rules_editor"), image: UIImage(systemName: "pencil.circle")) { [weak self] _ in
+            self?.openEditor()
         }
         let importAction = UIAction(title: String.localizedString("import"), image: UIImage(systemName: "square.and.arrow.down")) { [weak self] _ in
             self?.importRules()
@@ -212,12 +227,16 @@ final class UserRulesTableController: UIViewController {
             self?.exportRules()
         }
 
-        let menu = UIMenu(children: [selectAction, importAction, exportAction])
+        let menu = UIMenu(children: [selectAction, openEditorAction, importAction, exportAction])
         return menu
     }
 
     private func select() {
         goToEditingMode()
+    }
+
+    private func openEditor() {
+        performSegue(withIdentifier: openEditorSegueId, sender: self)
     }
 
     private func importRules() {

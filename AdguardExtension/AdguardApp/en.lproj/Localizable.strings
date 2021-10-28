@@ -433,6 +433,24 @@
 /* (ListOfRulesModel) title for export */
 "export" = "Export";
 
+/* (UserRulesTableController) - title for editing user rules option  */
+"open_user_rules_editor" = "Open editor";
+
+/* (UserRulesTableController) - description for Safari user rules in editor  */
+"editor_safari_user_rules_description" = "Add custom Safari user rules";
+
+/* (UserRulesTableController) - description for allowlist rules in editor  */
+"editor_allowlist_rules_description" = "Add custom allowlist rules";
+
+/* (UserRulesTableController) - description for inverted allowlist rules in editor  */
+"editor_inverted_allowlist_rules_description" = "Add custom inverted allowlist rules";
+
+/* (UserRulesTableController) - description for DNS allowlist rules in editor  */
+"editor_dns_allowlist_rules_description" = "Add custom DNS allowlist rules";
+
+/* (UserRulesTableController) - description for DNS blocklist rules in editor  */
+"editor_dns_blocklist_rules_description" = "Add custom DNS blocklist rules";
+
 /* (ListOfRulesModel) title for Clear button*/
 "common_clear" = "Clear";
 
