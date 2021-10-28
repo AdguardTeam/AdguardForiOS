@@ -44,12 +44,8 @@
                                                     <rect key="frame" x="183" y="8" width="48" height="48"/>
                                                     <color key="tintColor" red="0.35294117650000001" green="0.61176470589999998" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="56" id="bNp-Kn-77j">
-                                                            <variation key="heightClass=regular-widthClass=regular" constant="64"/>
-                                                        </constraint>
-                                                        <constraint firstAttribute="width" constant="56" id="f8g-2b-5Po">
-                                                            <variation key="heightClass=regular-widthClass=regular" constant="64"/>
-                                                        </constraint>
+                                                        <constraint firstAttribute="height" constant="56" id="bNp-Kn-77j"/>
+                                                        <constraint firstAttribute="width" constant="56" id="f8g-2b-5Po"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Safari protection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6WB-a0-8YE" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -550,7 +546,7 @@
                                                         <rect key="frame" x="16" y="202.5" width="382" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="vxS-Qg-61V">
-                                                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
                                                             </constraint>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -559,7 +555,7 @@
                                                             <fragment content="(NewCustomFilterDetailsController) CANCEL button"/>
                                                         </attributedString>
                                                         <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         </variation>
                                                         <connections>
                                                             <action selector="cancelAction:" destination="iY4-7b-KHH" eventType="touchUpInside" id="kmi-IG-YPa"/>
@@ -618,7 +614,7 @@
                                                         <rect key="frame" x="16" y="146.5" width="382" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="0kI-YO-tAU">
-                                                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
                                                             </constraint>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -626,7 +622,7 @@
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         </variation>
                                                         <connections>
                                                             <action selector="addAction:" destination="iY4-7b-KHH" eventType="touchUpInside" id="Qdi-j7-epy"/>
@@ -805,7 +801,7 @@
                                                         <rect key="frame" x="16" y="76" width="382" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="i3H-wW-sb3">
-                                                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
                                                             </constraint>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -813,7 +809,7 @@
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         </variation>
                                                         <connections>
                                                             <action selector="continueAction:" destination="GjI-Il-1rN" eventType="touchUpInside" id="JdX-HW-GRL"/>
@@ -823,7 +819,7 @@
                                                         <rect key="frame" x="16" y="131.5" width="382" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="vHT-MP-5w7">
-                                                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
                                                             </constraint>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -832,7 +828,7 @@
                                                             <fragment content="(AddCustomFilterController) cancel button"/>
                                                         </attributedString>
                                                         <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         </variation>
                                                         <connections>
                                                             <action selector="cancelAction:" destination="GjI-Il-1rN" eventType="touchUpInside" id="fId-a7-4Gg"/>

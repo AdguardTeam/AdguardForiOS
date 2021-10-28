@@ -101,7 +101,7 @@ final class AdvancedProtectionController: UIViewController {
         advancedProtectionView.isHidden = true
 
         firstDescriptionLabelTopConstraint.isActive = false
-        firstDescriptionLabelTopConstraint = firstDescriptionLabel.topAnchor.constraint(equalTo: uiSwitch.bottomAnchor, constant: 24.0)
+        firstDescriptionLabelTopConstraint = firstDescriptionLabel.topAnchor.constraint(equalTo: uiSwitch.bottomAnchor, constant: isIpadTrait ? 96.0 : 24.0)
         firstDescriptionLabelTopConstraint.isActive = true
 
         advancedProtectionViewTopConstraint.constant = 0
@@ -110,9 +110,9 @@ final class AdvancedProtectionController: UIViewController {
     private func showAdvancedProtectionView() {
         advancedProtectionView.isHidden = false
         firstDescriptionLabelTopConstraint.isActive = false
-        firstDescriptionLabelTopConstraint = firstDescriptionLabel.topAnchor.constraint(equalTo: advancedProtectionView.bottomAnchor, constant: 24.0)
+        firstDescriptionLabelTopConstraint = firstDescriptionLabel.topAnchor.constraint(equalTo: advancedProtectionView.bottomAnchor, constant: isIpadTrait ? 48.0 : 36.0)
         firstDescriptionLabelTopConstraint.isActive = true
-        advancedProtectionViewTopConstraint.constant = isIpadTrait ? 40.0 : 27.0
+        advancedProtectionViewTopConstraint.constant = isIpadTrait ? 96.0 : 24.0
     }
 
     private func configureScreenContent() {

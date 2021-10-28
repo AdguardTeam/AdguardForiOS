@@ -122,9 +122,7 @@
                                 <rect key="frame" x="183" y="86" width="48" height="48"/>
                                 <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="ec8-un-kLf">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="64"/>
-                                    </constraint>
+                                    <constraint firstAttribute="height" constant="56" id="ec8-un-kLf"/>
                                     <constraint firstAttribute="width" secondItem="oyW-3W-rWj" secondAttribute="height" multiplier="1:1" id="xPT-Rh-qOJ"/>
                                 </constraints>
                             </imageView>
@@ -208,8 +206,8 @@
                             <constraint firstItem="iGK-5u-0DL" firstAttribute="trailing" secondItem="Iwn-G2-Shg" secondAttribute="trailing" constant="16" id="5GC-DH-h3X"/>
                             <constraint firstItem="iGK-5u-0DL" firstAttribute="trailing" secondItem="ceh-zv-HH4" secondAttribute="trailing" constant="16" id="8wV-qV-4GG"/>
                             <constraint firstItem="Iwn-G2-Shg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="baH-YE-AMw" secondAttribute="trailing" constant="16" id="EcQ-At-Ze5"/>
-                            <constraint firstItem="ckn-Oh-2aa" firstAttribute="top" secondItem="a0E-KM-oA3" secondAttribute="bottom" constant="42" id="FIO-qi-Co3">
-                                <variation key="heightClass=regular-widthClass=regular" constant="72"/>
+                            <constraint firstItem="ckn-Oh-2aa" firstAttribute="top" secondItem="a0E-KM-oA3" secondAttribute="bottom" constant="24" id="FIO-qi-Co3">
+                                <variation key="heightClass=regular-widthClass=regular" constant="96"/>
                             </constraint>
                             <constraint firstItem="Dwb-66-4CU" firstAttribute="leading" secondItem="iGK-5u-0DL" secondAttribute="leading" id="Hia-8G-C5z"/>
                             <constraint firstItem="baH-YE-AMw" firstAttribute="leading" secondItem="iGK-5u-0DL" secondAttribute="leading" constant="16" id="I7v-M1-dH2"/>
@@ -240,7 +238,7 @@
                             <constraint firstItem="iGK-5u-0DL" firstAttribute="trailing" secondItem="HVu-ia-y4c" secondAttribute="trailing" id="rW7-qq-EOf"/>
                             <constraint firstItem="ckn-Oh-2aa" firstAttribute="leading" secondItem="iGK-5u-0DL" secondAttribute="leading" constant="16" id="s1i-0f-LO8"/>
                             <constraint firstItem="Iwn-G2-Shg" firstAttribute="top" secondItem="baH-YE-AMw" secondAttribute="top" id="sn9-et-4pT"/>
-                            <constraint firstItem="oyW-3W-rWj" firstAttribute="top" secondItem="iGK-5u-0DL" secondAttribute="top" constant="42" id="uDG-Qs-1c0"/>
+                            <constraint firstItem="oyW-3W-rWj" firstAttribute="top" secondItem="iGK-5u-0DL" secondAttribute="top" id="uDG-Qs-1c0"/>
                             <constraint firstItem="eye-K9-gbK" firstAttribute="top" secondItem="Dwb-66-4CU" secondAttribute="bottom" constant="14" id="vpv-oW-z78">
                                 <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                             </constraint>
@@ -946,9 +944,7 @@
                                 <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="s4c-Cn-DYM" secondAttribute="height" id="NUP-n0-bN8"/>
-                                    <constraint firstAttribute="height" constant="56" id="lbN-mF-Sqv">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="64"/>
-                                    </constraint>
+                                    <constraint firstAttribute="height" constant="56" id="lbN-mF-Sqv"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" minimumFontSize="24" translatesAutoresizingMaskIntoConstraints="NO" id="ApV-fQ-kgK" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -1491,12 +1487,8 @@
                                     <rect key="frame" x="183" y="0.0" width="48" height="48"/>
                                     <color key="tintColor" red="0.35294117650000001" green="0.61176470589999998" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="56" id="KPS-15-L5i">
-                                            <variation key="heightClass=regular-widthClass=regular" constant="64"/>
-                                        </constraint>
-                                        <constraint firstAttribute="width" constant="56" id="Qpg-ds-hJU">
-                                            <variation key="heightClass=regular-widthClass=regular" constant="64"/>
-                                        </constraint>
+                                        <constraint firstAttribute="height" constant="56" id="KPS-15-L5i"/>
+                                        <constraint firstAttribute="width" constant="56" id="Qpg-ds-hJU"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F4A-Cw-TxW" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">

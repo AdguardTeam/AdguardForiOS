@@ -78,10 +78,10 @@
                                                 <constraint firstItem="QYv-iX-uIo" firstAttribute="top" secondItem="HzY-lY-IfE" secondAttribute="bottom" constant="12" id="PWO-Cs-lYu"/>
                                                 <constraint firstItem="QYv-iX-uIo" firstAttribute="leading" secondItem="JLd-ev-GWd" secondAttribute="leading" constant="24" id="QAr-47-v4h"/>
                                                 <constraint firstAttribute="trailing" secondItem="PFY-Cq-NFN" secondAttribute="trailing" constant="24" id="bEH-gt-n75"/>
-                                                <constraint firstItem="PFY-Cq-NFN" firstAttribute="top" secondItem="QYv-iX-uIo" secondAttribute="bottom" constant="8" id="hLW-RF-58W">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                <constraint firstItem="PFY-Cq-NFN" firstAttribute="top" secondItem="QYv-iX-uIo" secondAttribute="bottom" constant="8" id="hLW-RF-58W"/>
+                                                <constraint firstAttribute="bottom" secondItem="PFY-Cq-NFN" secondAttribute="bottom" constant="24" id="hnl-c1-MDo">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="96"/>
                                                 </constraint>
-                                                <constraint firstAttribute="bottom" secondItem="PFY-Cq-NFN" secondAttribute="bottom" constant="24" id="hnl-c1-MDo"/>
                                                 <constraint firstItem="QYv-iX-uIo" firstAttribute="centerX" secondItem="JLd-ev-GWd" secondAttribute="centerX" id="rip-VW-Xfw"/>
                                                 <constraint firstAttribute="trailing" secondItem="QYv-iX-uIo" secondAttribute="trailing" constant="24" id="wDu-4z-2ga"/>
                                                 <constraint firstItem="HzY-lY-IfE" firstAttribute="centerX" secondItem="JLd-ev-GWd" secondAttribute="centerX" id="wcz-2M-gH6"/>
@@ -126,7 +126,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="d2y-PM-g5Z" secondAttribute="trailing" constant="16" id="Yms-6l-zqk">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
-                                                <constraint firstItem="d2y-PM-g5Z" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sU7-pP-eTN" secondAttribute="trailing" constant="20" id="rXo-ho-bpj"/>
+                                                <constraint firstItem="d2y-PM-g5Z" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sU7-pP-eTN" secondAttribute="trailing" constant="16" id="rXo-ho-bpj"/>
                                                 <constraint firstItem="d2y-PM-g5Z" firstAttribute="top" secondItem="lCQ-zH-1w3" secondAttribute="top" constant="16" id="ukO-WD-KUW">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                                 </constraint>
@@ -1002,7 +1002,7 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="NO"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <variation key="heightClass=regular-widthClass=regular">
-                                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="DNS filtering" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDF-5j-uJn" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -1019,18 +1019,14 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="qjN-LB-N3T" firstAttribute="top" secondItem="vDF-5j-uJn" secondAttribute="bottom" constant="8" id="0B4-dP-WYs">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="32"/>
-                                                </constraint>
+                                                <constraint firstItem="qjN-LB-N3T" firstAttribute="top" secondItem="vDF-5j-uJn" secondAttribute="bottom" constant="8" id="0B4-dP-WYs"/>
                                                 <constraint firstAttribute="trailing" secondItem="qjN-LB-N3T" secondAttribute="trailing" constant="24" id="5Oa-GQ-wZi"/>
                                                 <constraint firstAttribute="trailing" secondItem="vDF-5j-uJn" secondAttribute="trailing" constant="24" id="6FC-h7-dUm"/>
                                                 <constraint firstAttribute="bottom" secondItem="qjN-LB-N3T" secondAttribute="bottom" constant="24" id="Ogu-mb-eZ8">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="96"/>
                                                 </constraint>
                                                 <constraint firstItem="qjN-LB-N3T" firstAttribute="leading" secondItem="6gQ-9V-p7b" secondAttribute="leading" constant="24" id="WPZ-8R-v1Y"/>
-                                                <constraint firstItem="vDF-5j-uJn" firstAttribute="top" secondItem="6gQ-9V-p7b" secondAttribute="top" id="rrZ-fK-1PS">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="96"/>
-                                                </constraint>
+                                                <constraint firstItem="vDF-5j-uJn" firstAttribute="top" secondItem="6gQ-9V-p7b" secondAttribute="top" id="rrZ-fK-1PS"/>
                                                 <constraint firstItem="vDF-5j-uJn" firstAttribute="leading" secondItem="6gQ-9V-p7b" secondAttribute="leading" constant="24" id="wx2-OW-hWq"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1522,14 +1518,15 @@
                                                         <rect key="frame" x="16" y="180" width="382" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="AzJ-5V-ZFs">
-                                                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
                                                             </constraint>
                                                         </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                         <state key="normal">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         </variation>
                                                         <connections>
                                                             <action selector="saveOrAddAction:" destination="rrq-5g-czh" eventType="touchUpInside" id="aSn-pN-lub"/>
@@ -1539,9 +1536,10 @@
                                                         <rect key="frame" x="16" y="236" width="382" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="pRu-aG-zpL">
-                                                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
                                                             </constraint>
                                                         </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                         <state key="normal">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
@@ -1549,7 +1547,7 @@
                                                             <fragment content="(AddCustomFilterController) cancel button"/>
                                                         </attributedString>
                                                         <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         </variation>
                                                         <connections>
                                                             <action selector="cancelOrDeleteAction:" destination="rrq-5g-czh" eventType="touchUpInside" id="Ntq-by-Sru"/>
@@ -1704,9 +1702,15 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o1z-O6-Bk9">
                                         <rect key="frame" x="16" y="149.5" width="382" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="7XJ-Fl-dB7"/>
+                                            <constraint firstAttribute="height" constant="40" id="7XJ-Fl-dB7">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                            </constraint>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="Ok"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        </variation>
                                         <connections>
                                             <action selector="openSettingsTapped:" destination="3C5-Fs-baK" eventType="touchUpInside" id="sh2-H5-YDQ"/>
                                         </connections>
