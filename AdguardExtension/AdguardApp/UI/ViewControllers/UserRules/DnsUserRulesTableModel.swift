@@ -154,7 +154,7 @@ final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
     }
 
     func exportFile(for vc: UIViewController) {
-        let rulesText = dnsProtection.rulesString(for: type)
+        let rulesText = dnsProtection.allRules(for: type).map { $0.ruleText }.joined(separator: "\n")
         fileShareHelper.exportFile(for: vc, filename: type.filename, text: rulesText)
     }
 
