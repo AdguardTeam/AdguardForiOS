@@ -551,6 +551,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="bKX-2F-Cwa"/>
                                                         </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
@@ -561,10 +562,10 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="24" id="3ND-ub-Om3">
-                                                                <variation key="heightClass=regular-widthClass=regular" constant="36"/>
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="32"/>
                                                             </constraint>
                                                             <constraint firstAttribute="height" constant="24" id="U5r-9T-YyP">
-                                                                <variation key="heightClass=regular-widthClass=regular" constant="36"/>
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="32"/>
                                                             </constraint>
                                                         </constraints>
                                                     </imageView>
@@ -577,7 +578,7 @@
                                                     <constraint firstItem="XU8-ej-FCF" firstAttribute="top" secondItem="EG2-SZ-8xL" secondAttribute="top" id="Qgx-m7-Ssm"/>
                                                     <constraint firstItem="tsx-Ce-cc8" firstAttribute="top" secondItem="EG2-SZ-8xL" secondAttribute="top" id="tDM-Xr-0Ca"/>
                                                     <constraint firstItem="tsx-Ce-cc8" firstAttribute="leading" secondItem="XU8-ej-FCF" secondAttribute="trailing" constant="8" id="w0K-v8-mIH">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="16"/>
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="12"/>
                                                     </constraint>
                                                 </constraints>
                                                 <variation key="heightClass=regular-widthClass=regular">
@@ -593,10 +594,10 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="24" id="LSn-vH-yRq">
-                                                                <variation key="heightClass=regular-widthClass=regular" constant="36"/>
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="32"/>
                                                             </constraint>
                                                             <constraint firstAttribute="height" constant="24" id="xU5-vv-fzE">
-                                                                <variation key="heightClass=regular-widthClass=regular" constant="36"/>
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="32"/>
                                                             </constraint>
                                                         </constraints>
                                                         <imageReference key="image" image="safari_onboarding"/>
@@ -606,6 +607,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="BSj-Mz-wbx"/>
                                                         </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
@@ -616,7 +618,7 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="QL3-U7-vA8" firstAttribute="leading" secondItem="kwR-8g-Weq" secondAttribute="trailing" constant="8" id="3LB-R4-FiJ">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="16"/>
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="12"/>
                                                     </constraint>
                                                     <constraint firstItem="kwR-8g-Weq" firstAttribute="top" secondItem="HDL-Gb-Dgk" secondAttribute="top" id="9kz-OO-cOy"/>
                                                     <constraint firstAttribute="bottom" secondItem="QL3-U7-vA8" secondAttribute="bottom" id="KmE-Gv-2jK"/>
@@ -632,10 +634,10 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="24" id="XMu-Op-fRN">
-                                                                <variation key="heightClass=regular-widthClass=regular" constant="36"/>
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="32"/>
                                                             </constraint>
                                                             <constraint firstAttribute="height" constant="24" id="an2-pg-5Qw">
-                                                                <variation key="heightClass=regular-widthClass=regular" constant="36"/>
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="32"/>
                                                             </constraint>
                                                         </constraints>
                                                     </imageView>
@@ -644,6 +646,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="M8R-ge-1ef"/>
                                                         </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                         <userDefinedRuntimeAttributes>
@@ -657,7 +660,7 @@
                                                     <constraint firstAttribute="bottom" secondItem="eyJ-Xh-OdS" secondAttribute="bottom" id="Ule-A6-39K"/>
                                                     <constraint firstItem="eyJ-Xh-OdS" firstAttribute="top" secondItem="wcN-Rv-mji" secondAttribute="top" id="Uyg-qD-Kow"/>
                                                     <constraint firstItem="eyJ-Xh-OdS" firstAttribute="leading" secondItem="IoS-Qz-Db1" secondAttribute="trailing" constant="8" id="gKb-rh-0Pd">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="16"/>
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="12"/>
                                                     </constraint>
                                                     <constraint firstItem="IoS-Qz-Db1" firstAttribute="top" secondItem="wcN-Rv-mji" secondAttribute="top" id="nZj-sD-xDx"/>
                                                     <constraint firstItem="IoS-Qz-Db1" firstAttribute="leading" secondItem="wcN-Rv-mji" secondAttribute="leading" id="v89-l9-8BN"/>

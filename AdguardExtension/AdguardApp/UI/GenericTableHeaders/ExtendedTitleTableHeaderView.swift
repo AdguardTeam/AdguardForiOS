@@ -118,10 +118,10 @@ final class ExtendedTitleTableHeaderView: UIView {
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: isIpadTrait ? -24.0 : -16.0),
             titleLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: titleLabel.font.pointSize + 2.0),
 
-            descriptionTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: isIpadTrait ? 16.0 : 8.0),
+            descriptionTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8.0),
             descriptionTextView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: isIpadTrait ? 24.0 : 16.0),
             descriptionTextView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: isIpadTrait ? -24.0 : -16.0),
-            descriptionTextView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: isIpadTrait ? -24.0 : -16.0),
+            descriptionTextView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: isIpadTrait ? -96.0 : -24.0),
             descriptionTextView.heightAnchor.constraint(greaterThanOrEqualToConstant: descriptionTextView.font!.pointSize + 2.0),
         ])
     }

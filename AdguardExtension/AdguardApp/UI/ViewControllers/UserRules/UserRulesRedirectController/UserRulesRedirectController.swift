@@ -38,7 +38,6 @@ final class UserRulesRedirectController: BottomAlertController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        labelButton.isEnabled = false
         model = UserRulesRedirectControllerModel(action: action, safariProtection: safariProtection, resources: resources)
 
         imageView.image = model.icon

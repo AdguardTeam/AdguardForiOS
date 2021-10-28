@@ -67,12 +67,12 @@ final class OnboardingAdvancedProtectionView: UIView {
         self.addSubview(safariIcon)
         self.addSubview(attributedLabel)
 
-        let heightWidthConst = isIpadTrait ? 36.0 : 24.0
+        let heightWidthConst = isIpadTrait ? 32.0 : 24.0
 
         safariIcon.heightAnchor.constraint(equalToConstant: heightWidthConst).isActive = true
         safariIcon.widthAnchor.constraint(equalToConstant: heightWidthConst).isActive = true
         safariIcon.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        safariIcon.trailingAnchor.constraint(equalTo: attributedLabel.leadingAnchor, constant: -8.0).isActive = true
+        safariIcon.trailingAnchor.constraint(equalTo: attributedLabel.leadingAnchor, constant: isIpadTrait ? -12.0 : -8.0).isActive = true
         safariIcon.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
 
         attributedLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
@@ -82,10 +82,12 @@ final class OnboardingAdvancedProtectionView: UIView {
 
     private func processAttributes(with string: String) {
         guard let image = UIImage(named: "advancedSafariProtection") else { return }
-        let attachmentSettings = NSMutableAttributedString.AttachmentSettings(image: image,
-                                                                               topEdge: 7.5,
-                                                                               leftEdge: 5,
-                                                                               size: .customSize(width: image.size.width, height: image.size.height))
+        let attachmentSettings = NSMutableAttributedString.AttachmentSettings(
+            image: image,
+            topEdge: 7.5,
+            leftEdge: 5,
+            size: .customSize(width: image.size.width, height: image.size.height)
+        )
 
         let attributedText = NSMutableAttributedString.fromHtml(string, fontSize: isIpadTrait ? 24.0 : 16.0, color: themeService.grayTextColor, attachmentSettings: attachmentSettings, textAlignment: .left)
         attributedLabel.attributedText = attributedText
