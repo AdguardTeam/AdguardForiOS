@@ -88,6 +88,7 @@ final class SafariGroupFiltersTableController: UITableViewController {
         model.delegate = self
 
         updateTheme()
+        presentOnImport()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -103,16 +104,6 @@ final class SafariGroupFiltersTableController: UITableViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.layoutTableHeaderView()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if titleForImport != nil, urlStringForImport != nil {
-            addNewFilterTapped()
-
-            titleForImport = nil
-            urlStringForImport = nil
-        }
     }
 
     // MARK: - Actions
@@ -159,6 +150,13 @@ final class SafariGroupFiltersTableController: UITableViewController {
     private func removeTableHeaderView() {
         headerSearchView = nil
         tableView.tableHeaderView = nil
+    }
+
+    private func presentOnImport() {
+        guard titleForImport != nil, urlStringForImport != nil else { return }
+        addNewFilterTapped()
+        titleForImport = nil
+        urlStringForImport = nil
     }
 }
 

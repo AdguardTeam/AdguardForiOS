@@ -260,11 +260,10 @@ extension AppDelegate {
         safariGroupFiltersTableController.titleForImport = title
         safariGroupFiltersTableController.urlStringForImport = url
         safariGroupFiltersTableController.displayType = .one(groupType: .custom)
-        safariGroupFiltersTableController.loadViewIfNeeded()
 
-        navController.viewControllers = [mainMenuController, safariProtectionController, safariGroupTableController, safariGroupFiltersTableController]
-        tabBar.selectedViewController = navController
         window?.rootViewController = tabBar
+        tabBar.selectedViewController = navController
+        navController.viewControllers = [mainMenuController, safariProtectionController, safariGroupTableController, safariGroupFiltersTableController]
 
         return true
     }
