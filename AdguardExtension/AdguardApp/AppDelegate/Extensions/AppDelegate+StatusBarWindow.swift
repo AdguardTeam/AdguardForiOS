@@ -31,6 +31,14 @@ extension AppDelegate {
             self?.statusBarWindow.hideStatusViewIfNeeded()
         }
 
+        filtersConvertionStarted = NotificationCenter.default.filtersConvertionStarted { [weak self] in
+            self?.statusBarWindow.showStatusViewIfNeeded(text: String.localizedString("converting_rules"))
+        }
+
+        filtersConvertionFinished = NotificationCenter.default.filtersConvertionFinished { [weak self] in
+            self?.statusBarWindow.hideStatusViewIfNeeded()
+        }
+
         contentBlockersUpdateStarted = NotificationCenter.default.contentBlockersUpdateStart { [weak self] in
             self?.statusBarWindow.showStatusViewIfNeeded(text: String.localizedString("loading_content_blockers"))
         }

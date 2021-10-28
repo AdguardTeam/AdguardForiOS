@@ -33,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // AppDelegate+StatusBarWindow notifications
     var filtersUpdateStarted: SharedAdGuardSDK.NotificationToken?
     var filtersUpdateFinished: SharedAdGuardSDK.NotificationToken?
+    var filtersConvertionStarted: SharedAdGuardSDK.NotificationToken?
+    var filtersConvertionFinished: SharedAdGuardSDK.NotificationToken?
     var contentBlockersUpdateStarted: SharedAdGuardSDK.NotificationToken?
     var contentBlockersUpdateFinished: SharedAdGuardSDK.NotificationToken?
     var orientationChangeNotification: SharedAdGuardSDK.NotificationToken?
