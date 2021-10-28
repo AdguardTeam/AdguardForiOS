@@ -143,8 +143,13 @@ struct URLSchemeParser: IURLSchemeParser {
         // Subscribe to custom safari filter
         case (_, .subscribe):
             DDLogInfo("(URLSchemeParser) openurl - subscribe filter")
-            let processor = OpenFiltersMasterControllerParser(executor: executor)
-            return processor.parse(url)
+            if configurationService.proStatus {
+                let processor = OpenFiltersMasterControllerParser(executor: executor)
+                return processor.parse(url)
+            }
+
+            let mainPageParser = OpenMainPageControllerParser(executor: executor)
+            return mainPageParser.parse(url)
 
         // Open Tunnel Mode settings
         case (_, .openTunnelModeSettings):

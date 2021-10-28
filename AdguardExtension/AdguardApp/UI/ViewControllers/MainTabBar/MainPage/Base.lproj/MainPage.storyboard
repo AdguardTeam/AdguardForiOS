@@ -23,7 +23,7 @@
         <!--AdGuard-->
         <scene sceneID="zqJ-IQ-lJU">
             <objects>
-                <viewController storyboardIdentifier="MainPageController" id="T6V-s9-cBk" customClass="MainPageController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainPageController" extendedLayoutIncludesOpaqueBars="YES" id="T6V-s9-cBk" customClass="MainPageController" customModule="Adguard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qnu-x2-MQD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -706,6 +706,7 @@
                             </mask>
                         </variation>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" title="AdGuard" id="YaQ-RE-YZT" userLabel="Activity">
                         <barButtonItem key="rightBarButtonItem" id="mZo-6k-bpe">
                             <color key="tintColor" red="0.35294117650000001" green="0.61176470589999998" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
