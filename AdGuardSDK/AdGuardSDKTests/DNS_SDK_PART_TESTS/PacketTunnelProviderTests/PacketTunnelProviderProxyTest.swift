@@ -22,6 +22,7 @@ class PacketTunnelProviderProxyTest: XCTestCase {
         dnsConfiguration = DnsConfigurationMock()
         packetTunnelSetting = PacketTunnelSettingsProviderMock()
         providersManager = DnsProvidersManagerMock()
+        providersManager.stubbedActiveDnsServer = DnsServer(features: [], upstreams: [], providerId: 0, type: .dns, id: 0, name: "", isEnabled: true)
         delegateMock = PacketTunnelProviderProxyDelegateMock()
         packetTunnelProviderProxy = PacketTunnelProviderProxy(
             isDebugLogs: true,
@@ -29,7 +30,9 @@ class PacketTunnelProviderProxyTest: XCTestCase {
             dnsProxy: dnsProxy,
             dnsConfiguration: dnsConfiguration,
             tunnelSettings: packetTunnelSetting,
-            providersManager: providersManager
+            providersManager: providersManager,
+            networkUtils: NetworkUtilsMock(),
+            addresses: PacketTunnelProvider.Addresses(tunnelRemoteAddress: "", interfaceIpv4: "", interfaceIpv6: "", localDnsIpv4: "", localDnsIpv6: "", defaultSystemDnsServers: [])
         )
         packetTunnelProviderProxy.delegate = delegateMock
     }

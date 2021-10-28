@@ -60,6 +60,7 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
     private let tunnelSettings: PacketTunnelSettingsProviderProtocol
     private let providersManager: DnsProvidersManagerProtocol
     private let networkUtils: NetworkUtilsProtocol
+    private let addresses: PacketTunnelProvider.Addresses
 
     // MARK: - Initialization
 
@@ -70,7 +71,8 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
         dnsConfiguration: DnsConfigurationProtocol,
         tunnelSettings: PacketTunnelSettingsProviderProtocol,
         providersManager: DnsProvidersManagerProtocol,
-        networkUtils: NetworkUtilsProtocol = NetworkUtils()
+        networkUtils: NetworkUtilsProtocol,
+        addresses: PacketTunnelProvider.Addresses
     ) {
         self.tunnelAddresses = tunnelAddresses
         self.dnsProxy = dnsProxy
@@ -78,6 +80,7 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
         self.tunnelSettings = tunnelSettings
         self.providersManager = providersManager
         self.networkUtils = networkUtils
+        self.addresses = addresses
 
         setupLogger(isDebugLogs: isDebugLogs)
     }
@@ -163,14 +166,13 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
 
         Logger.logInfo("updateTunnelSettings with system servers: \(allSystemServers)")
 
-        let systemDnsServers = allSystemServers.filter { $0 != tunnelSettings.addresses.localDnsIpv4 && $0 != tunnelSettings.addresses.localDnsIpv6 }
+        let systemDnsServers = allSystemServers.filter { $0 != addresses.localDnsIpv4 && $0 != addresses.localDnsIpv6 }
 
-        let hasFallbacks = !(lowLevelConfig.fallbackServers?.isEmpty ?? true)
-        let hasBootstraps = !(lowLevelConfig.bootstrapServers?.isEmpty ?? true)
+        let hasFallbacks = lowLevelConfig.fallbackServers?.isEmpty == false
+        let hasBootstraps = lowLevelConfig.bootstrapServers?.isEmpty == false
 
         // Check if user's already provided all needed settings
-        if providersManager.activeDnsServer.upstreams.count > 0 && hasFallbacks && hasBootstraps || !systemDnsServers.isEmpty
-            {
+        if providersManager.activeDnsServer.upstreams.count > 0 && hasFallbacks && hasBootstraps || !systemDnsServers.isEmpty {
             Logger.logInfo("(PacketTunnelProviderProxy) - updateTunnelSettings; All settings we need are set by the user, starting tunnel now")
 
             // Setting tunnel settings
@@ -264,7 +266,7 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
         if systemServers.isEmpty {
             systemServers = tunnelAddresses.defaultSystemDnsServers
         }
-        let networkUtils = NetworkUtils()
+
         return systemServers.map {
             let prot = try? networkUtils.getProtocol(from: $0)
             return DnsUpstream(upstream: $0, protocol: prot ?? .dns)

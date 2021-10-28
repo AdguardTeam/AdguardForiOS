@@ -111,7 +111,9 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
             dnsProxy: dnsProxy,
             dnsConfiguration: dnsConfiguration,
             tunnelSettings: tunnelSettingsProvider,
-            providersManager: dnsProvidersManager
+            providersManager: dnsProvidersManager,
+            networkUtils: NetworkUtils(),
+            addresses: addresses
         )
 
         self.reachabilityHandler = try Reachability()
