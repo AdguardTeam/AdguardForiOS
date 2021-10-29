@@ -28,6 +28,9 @@ final class SafariGroupFiltersTableController: UITableViewController {
 
     // MARK: - Public properties
 
+    var titleForImport: String?
+    var urlStringForImport: String?
+
     var displayType: DisplayType!
 
     enum DisplayType {
@@ -85,6 +88,7 @@ final class SafariGroupFiltersTableController: UITableViewController {
         model.delegate = self
 
         updateTheme()
+        presentOnImport()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -147,6 +151,13 @@ final class SafariGroupFiltersTableController: UITableViewController {
         headerSearchView = nil
         tableView.tableHeaderView = nil
     }
+
+    private func presentOnImport() {
+        guard titleForImport != nil, urlStringForImport != nil else { return }
+        addNewFilterTapped()
+        titleForImport = nil
+        urlStringForImport = nil
+    }
 }
 
 // MARK: - SafariGroupFiltersTableController + SafariGroupFiltersModelDelegate
@@ -182,6 +193,8 @@ extension SafariGroupFiltersTableController: SafariGroupFiltersModelDelegate {
             return
         }
 
+        controller.openTitle = titleForImport
+        controller.openUrl = urlStringForImport
         controller.type = .safariCustom
         controller.delegate = model
         present(controller, animated: true, completion: nil)

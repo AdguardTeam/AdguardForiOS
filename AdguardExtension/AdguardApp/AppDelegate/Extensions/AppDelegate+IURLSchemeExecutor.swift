@@ -22,8 +22,7 @@ extension AppDelegate: IURLSchemeExecutor {
 
 
     func openUserFilterController(rule: String) -> Bool {
-        // TODO: - Implement later
-        return true
+        self.presentUserRulesRedirectController(for: .addToBlocklist(domain: rule))
     }
 
     func openDnsSettingsController(showLaunchScreen: Bool, dnsProtectionIsEnabled: Bool?) -> Bool {
@@ -39,8 +38,7 @@ extension AppDelegate: IURLSchemeExecutor {
     }
 
     func openDnsProvidersController(showLaunchScreen: Bool, urlAbsoluteString: String) -> Bool {
-        // TODO: - Should process app scheme links for adding custom DNS servers from our web site
-        return self.presentDnsProvidersController(showLaunchScreen: showLaunchScreen, url: nil)
+        return self.presentDnsProvidersController(showLaunchScreen: showLaunchScreen, url: urlAbsoluteString)
     }
 
     func openImportSettingsController(showLaunchScreen: Bool, settings: Settings?) -> Bool {

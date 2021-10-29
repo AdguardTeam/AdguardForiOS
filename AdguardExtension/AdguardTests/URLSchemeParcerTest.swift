@@ -7,9 +7,8 @@ class URLSchemeParcerTest: XCTestCase {
     override func setUpWithError() throws {
         let executor = URLSchemeExecutorMock()
         let configuration = ConfigurationServiceMock()
-        let purchaseService = PurchaseServiceMock()
 
-        urlParcer = URLSchemeParser(executor: executor, configurationService: configuration, purchaseService: purchaseService)
+        urlParcer = URLSchemeParser(executor: executor, configurationService: configuration)
 
     }
 
@@ -27,7 +26,7 @@ class URLSchemeParcerTest: XCTestCase {
         let incorrectLicenseUrlResult = urlParcer.parse(url: incorrectLicenseUrl)
         let licenseUrlResult = urlParcer.parse(url: licenseUrl)
 
-        XCTAssertTrue(emptyLicenseUrlResult)
+        XCTAssertFalse(emptyLicenseUrlResult)
         XCTAssertFalse(incorrectLicenseUrlResult)
         XCTAssertTrue(licenseUrlResult)
     }
