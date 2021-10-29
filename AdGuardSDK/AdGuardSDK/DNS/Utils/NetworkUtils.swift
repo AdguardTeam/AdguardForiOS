@@ -60,7 +60,7 @@ public class NetworkUtils: NetworkUtilsProtocol {
             monitor().start(queue: DispatchQueue(label: "NWPathMonitor handler queue"))
 
             // we must wait for fist pathUpdateHandler call to get actual network state
-            group?.wait()
+            _ = group?.wait(timeout: .now() + 0.5)
         }
     }
 
@@ -90,7 +90,10 @@ public class NetworkUtils: NetworkUtilsProtocol {
     public var isIpv4Available: Bool {
 
         if #available(iOS 12.0, *) {
-            return monitor().currentPath.supportsIPv4
+            // availableInterfaces theoretically can be empty if currentPath was not initialised yet
+            if !monitor().currentPath.availableInterfaces.isEmpty {
+                return monitor().currentPath.supportsIPv4
+            }
         }
 
         var result = false
@@ -107,7 +110,10 @@ public class NetworkUtils: NetworkUtilsProtocol {
     public var isIpv6Available: Bool {
 
         if #available(iOS 12.0, *) {
-            return monitor().currentPath.supportsIPv6
+            // availableInterfaces theoretically can be empty if currentPath was not initialised yet
+            if !monitor().currentPath.availableInterfaces.isEmpty {
+                return monitor().currentPath.supportsIPv6
+            }
         }
 
         var result = false
