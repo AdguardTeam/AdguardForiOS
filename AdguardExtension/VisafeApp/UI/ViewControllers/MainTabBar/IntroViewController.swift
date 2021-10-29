@@ -43,27 +43,34 @@ class IntroViewController: UIViewController {
         scrollView.frame = holderView.bounds
         holderView.addSubview(scrollView)
     
-        let titles = ["Chống lừa đảo\nvà mã độc", "Hạn chế quảng cáo\nvà theo dõi", "Kiểm soát chủ động", "Quản trị Dashboard", "Chào mừng"]
-//        let subTitles = ["", "", "", "", ""]
+        let titles = ["Chống lừa đảo, mã độc,\ntấn công mạng", "Hạn chế quảng cáo\nvà theo dõi", "Kiểm soát chủ động", "Quản trị Dashboard", "Chào mừng"]
+        let subTitles = ["Phòng tránh nguy cơ, thiệt hại từ\ncác cuộc tấn công mạng, lừa đảo trực tuyến", "", "", "", ""]
         
-        for x in 0..<5 {
+        for x in 0..<1 {
             let pageView = UIView(frame: CGRect(x: CGFloat(x) * holderView.frame.size.width, y: 0, width: holderView.frame.size.width, height: holderView.frame.size.height))
             scrollView.addSubview(pageView)
             
             // Title, image, button
-            let label1 = UILabel(frame: CGRect(x: 10, y: 10, width: pageView.frame.size.width - 10, height: 140))
+            let label1 = UILabel(frame: CGRect(x: 10, y: pageView.frame.size.height - 280, width: pageView.frame.size.width - 10, height: 140))
+            let label2 = UILabel(frame: CGRect(x: 10, y: pageView.frame.size.height - 220, width: pageView.frame.size.width - 10, height: 140))
+            
+            let imageView = UIImageView(frame: CGRect(x: 50, y: 0+5, width: pageView.frame.size.width - 100, height: pageView.frame.size.height - 60 - 130 - 15))
             
             
-            let imageView = UIImageView(frame: CGRect(x: 20, y: 0+100, width: pageView.frame.size.width - 30, height: pageView.frame.size.height - 60 - 130 - 15))
-            
-            
-            let button = UIButton(frame: CGRect(x: 20, y: pageView.frame.size.height - 150, width: pageView.frame.size.width - 40, height: 00))
+            let button = UIButton(frame: CGRect(x: 40, y: pageView.frame.size.height - 150, width: pageView.frame.size.width - 80, height: 00))
             
             label1.textAlignment = .center
-            label1.font = UIFont(name: "Helvetica-Bold", size: 30)
+            label1.font = UIFont(name: "Helvetica-Bold", size: 24)
             label1.numberOfLines = 2
             pageView.addSubview(label1)
             label1.text = titles[x]
+            
+            label2.textAlignment = .center
+            label2.font = UIFont(name: "Helvetica", size: 15)
+            label2.textColor = UIColor.gray
+            label2.numberOfLines = 2
+            pageView.addSubview(label2)
+            label2.text = subTitles[x]
             
             imageView.contentMode = .scaleAspectFit
             imageView.image = UIImage(named: "intro-\(x+1)")
@@ -71,16 +78,16 @@ class IntroViewController: UIViewController {
             
             button.setTitleColor(.white, for: .normal)
             button.backgroundColor = .systemYellow
-            button.setTitle("Tiếp theo", for: .normal)
+            button.setTitle("Bắt đầu", for: .normal)
             if x == 4 {
-                button.setTitle("Bắt đầu ngay", for: .normal)
+                button.setTitle("Bắt đầu", for: .normal)
             }
             button.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
             button.tag = x + 1
 //            pageView.addSubview(button)
         }
         
-        scrollView.contentSize = CGSize(width: holderView.frame.size.width*5, height: 0)
+        scrollView.contentSize = CGSize(width: holderView.frame.size.width*1, height: 0)
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
