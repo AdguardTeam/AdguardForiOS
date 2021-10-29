@@ -162,8 +162,8 @@ extension AGDnsProxyConfig {
                dns64Settings: \(dns64Settings.extendedDescription)
                ipv6Available: \(ipv6Available)
                blockIpv6: \(blockIpv6)
-               adblockRulesBlockingMode: \(adblockRulesBlockingMode)
-               hostsRulesBlockingMode: \(hostsRulesBlockingMode)
+               adblockRulesBlockingMode: \(adblockRulesBlockingMode.extendedDescription)
+               hostsRulesBlockingMode: \(hostsRulesBlockingMode.extendedDescription)
                customBlockingIpv4: \(customBlockingIpv4 ?? "nil")
                customBlockingIpv6: \(customBlockingIpv6 ?? "nil")
                dnsCacheSize: \(dnsCacheSize)
@@ -172,5 +172,20 @@ extension AGDnsProxyConfig {
                enableRetransmissionHandling: \(enableRetransmissionHandling)
                helperPath: \(helperPath ?? "nil")
                """
+    }
+}
+
+extension AGBlockingMode {
+    var extendedDescription: String {
+        switch self {
+        case .AGBM_REFUSED:
+            return "REFUSED"
+        case .AGBM_NXDOMAIN:
+            return "NXDOMAIN"
+        case .AGBM_ADDRESS:
+            return "CUSTOM_IP"
+        default:
+            return "UNKNOWN"
+        }
     }
 }
