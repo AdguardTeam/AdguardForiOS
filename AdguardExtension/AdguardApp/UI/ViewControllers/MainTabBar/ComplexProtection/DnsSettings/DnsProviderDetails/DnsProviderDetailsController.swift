@@ -201,7 +201,7 @@ final class DnsProviderDetailsController : UITableViewController {
 
     private func getServerCell(tableView: UITableView) -> UITableViewCell {
         let cell = DnsProviderActionCell.getCell(forTableView: tableView)
-        cell.actionNameTitle =  String.localizedString("server_title")
+        cell.actionNameTitle = String.localizedString("server_title")
         cell.selectedOptionTitle = model.activeDnsProtocol.localizedName
         cell.updateTheme(themeService: themeService)
         return cell
