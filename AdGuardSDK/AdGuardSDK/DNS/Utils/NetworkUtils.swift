@@ -38,8 +38,9 @@ public protocol NetworkUtilsProtocol {
     func upstreamIsValid(_ upstream: String) -> Bool
 }
 
-public struct NetworkUtils: NetworkUtilsProtocol {
+public class NetworkUtils: NetworkUtilsProtocol {
 
+    // We cannot use the @available attribute on properties. Therefore, we have to use a function to get it.
     private var _monitor: Any?
     @available(iOS 12.0, *)
     private func monitor() -> NWPathMonitor {
@@ -49,7 +50,23 @@ public struct NetworkUtils: NetworkUtilsProtocol {
     public init() {
         if #available(iOS 12.0, *) {
             _monitor = NWPathMonitor()
-            monitor().start(queue: DispatchQueue.global(qos: .background))
+            var group: DispatchGroup? = DispatchGroup()
+            group?.enter()
+            monitor().pathUpdateHandler = { _ in
+                group?.leave()
+                group = nil
+            }
+            // We must start the monitor to have the actual value of the path at any time
+            monitor().start(queue: DispatchQueue(label: "NWPathMonitor handler queue"))
+
+            // we must wait for fist pathUpdateHandler call to get actual network state
+            group?.wait()
+        }
+    }
+
+    deinit {
+        if #available(iOSApplicationExtension 12.0, *) {
+            monitor().cancel()
         }
     }
 

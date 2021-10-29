@@ -41,6 +41,7 @@ class UpstreamsController: BottomAlertController {
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     private let networkUtils: NetworkUtilsProtocol = ServiceLocator.shared.getService()!
+    private let bootstrapsHelper: BootstrapsHelperProtocol = ServiceLocator.shared.getService()!
 
     var upstreamType: UpstreamType!
     weak var delegate: UpstreamsControllerDelegate?
@@ -177,8 +178,7 @@ class UpstreamsController: BottomAlertController {
         saveButton?.isEnabled = false
         saveButton?.startIndicator()
 
-        let bootstraps = BootstrapsHelper.getBootstraps(networkUtils: networkUtils)
-
+        let bootstraps = bootstrapsHelper.bootstraps
         let upstreams = upstreams.map {
             AGDnsUpstream(address: $0, bootstrap: bootstraps, timeoutMs: AGDnsUpstream.defaultTimeoutMs, serverIp: Data(), id: 0, outboundInterfaceName: nil)
         }

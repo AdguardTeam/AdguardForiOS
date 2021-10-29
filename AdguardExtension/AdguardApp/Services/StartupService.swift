@@ -99,6 +99,9 @@ final class StartupService : NSObject {
         locator.addService(service: dnsProtection)
         locator.addService(service: dnsProvidersManager)
 
+        let bootstrapsHelper: BootstrapsHelperProtocol = BootstrapsHelper(networkUtils: networkUtils)
+        locator.addService(service: bootstrapsHelper)
+
         /* End of initializing SDK */
 
         let configuration: ConfigurationServiceProtocol = ConfigurationService(purchaseService: purchaseService, resources: sharedResources, safariProtection: safariProtection)
