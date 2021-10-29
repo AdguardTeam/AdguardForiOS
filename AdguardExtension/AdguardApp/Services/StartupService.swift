@@ -90,7 +90,10 @@ final class StartupService : NSObject {
             userDefaults: sharedResources.sharedDefaults(),
             dnsBackgroundFetchUpdater: dnsProtection)
 
-        let dnsProvidersManager: DnsProvidersManagerProtocol = try! DnsProvidersManager(configuration: dnsProtectionConfiguration, userDefaults: sharedResources.sharedDefaults())
+        let networkUtils: NetworkUtilsProtocol = NetworkUtils()
+        locator.addService(service: networkUtils)
+
+        let dnsProvidersManager: DnsProvidersManagerProtocol = try! DnsProvidersManager(configuration: dnsProtectionConfiguration, userDefaults: sharedResources.sharedDefaults(), networkUtils: networkUtils)
 
         locator.addService(service: safariProtection)
         locator.addService(service: dnsProtection)

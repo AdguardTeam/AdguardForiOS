@@ -19,8 +19,9 @@
 import AGDnsProxy
 import SystemLibsResolv
 import SharedAdGuardSDK
+import Network
 
-protocol NetworkUtilsProtocol {
+public protocol NetworkUtilsProtocol {
     /* Returns list of ip addresses of system DNS servers */
     var systemDnsServers: [String] { get }
 
@@ -38,6 +39,19 @@ protocol NetworkUtilsProtocol {
 }
 
 public struct NetworkUtils: NetworkUtilsProtocol {
+
+    private var _monitor: Any?
+    @available(iOS 12.0, *)
+    private func monitor() -> NWPathMonitor {
+        return _monitor as! NWPathMonitor
+    }
+
+    public init() {
+        if #available(iOS 12.0, *) {
+            _monitor = NWPathMonitor()
+            monitor().start(queue: DispatchQueue.global(qos: .background))
+        }
+    }
 
     public var systemDnsServers: [String] {
         var state = __res_9_state()
@@ -57,6 +71,11 @@ public struct NetworkUtils: NetworkUtilsProtocol {
     }
 
     public var isIpv4Available: Bool {
+
+        if #available(iOS 12.0, *) {
+            return monitor().currentPath.supportsIPv4
+        }
+
         var result = false
         enumerateNetworkInterfaces { (cursor) -> Bool in
             if cursor.pointee.ifa_addr.pointee.sa_family == AF_INET {
@@ -69,6 +88,11 @@ public struct NetworkUtils: NetworkUtilsProtocol {
     }
 
     public var isIpv6Available: Bool {
+
+        if #available(iOS 12.0, *) {
+            return monitor().currentPath.supportsIPv6
+        }
+
         var result = false
         enumerateNetworkInterfaces { (cursor) -> Bool in
             if cursor.pointee.ifa_addr.pointee.sa_family == AF_INET6 {
@@ -79,8 +103,6 @@ public struct NetworkUtils: NetworkUtilsProtocol {
         }
         return result
     }
-
-    public init() {}
 
     public func getProtocol(from upstream: String) throws -> DnsProtocol {
         if upstream.hasPrefix("sdns://") {
@@ -101,7 +123,7 @@ public struct NetworkUtils: NetworkUtilsProtocol {
         }
     }
 
-    func upstreamIsValid(_ upstream: String) -> Bool {
+    public func upstreamIsValid(_ upstream: String) -> Bool {
         let bootstraps = systemDnsServers
 
         let dnsUpstream = AGDnsUpstream(address: upstream, bootstrap: bootstraps, timeoutMs: AGDnsUpstream.defaultTimeoutMs, serverIp: Data(), id: 0, outboundInterfaceName: nil)

@@ -23,8 +23,8 @@ import DnsAdGuardSDK
  to resolve DNS addresses
  */
 struct BootstrapsHelper {
-    static var bootstraps: [String] {
-        var bootstraps = NetworkUtils().systemDnsServers
+    static func getBootstraps(networkUtils: NetworkUtilsProtocol) -> [String] {
+        var bootstraps = networkUtils.systemDnsServers
 
         // If our Tunnel appears in system DNS servers we should remove it
         // Because the tunnel is unable to resolve DNS servers

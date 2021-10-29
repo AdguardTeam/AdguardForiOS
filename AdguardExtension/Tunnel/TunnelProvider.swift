@@ -69,11 +69,13 @@ class TunnelProvider: PacketTunnelProvider {
                                              lowLevelConfiguration: LowLevelDnsConfiguration.fromResources(resources))
 
         try! super.init(userDefaults: resources.sharedDefaults(),
-                       debugLoggs: debugLoggs,
-                       dnsConfiguration: configuration,
-                       addresses: TunnelProvider.getAddresses(mode: resources.tunnelMode),
-                       filterStorageUrl: filterStorageUrl,
-                       statisticsDbContainerUrl: statisticsUrl)
+                        debugLoggs: debugLoggs,
+                        dnsConfiguration: configuration,
+                        addresses: TunnelProvider.getAddresses(mode: resources.tunnelMode),
+                        filterStorageUrl: filterStorageUrl,
+                        statisticsDbContainerUrl: statisticsUrl,
+                        networkUtils: NetworkUtils()
+        )
     }
 
     static func getAddresses(mode: TunnelMode)-> PacketTunnelProvider.Addresses {
