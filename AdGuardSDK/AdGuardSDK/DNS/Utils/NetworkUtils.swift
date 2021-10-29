@@ -65,7 +65,7 @@ public class NetworkUtils: NetworkUtilsProtocol {
     }
 
     deinit {
-        if #available(iOSApplicationExtension 12.0, *) {
+        if #available(iOS 12.0, *) {
             monitor().cancel()
         }
     }
