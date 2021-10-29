@@ -161,6 +161,9 @@ final public class ActivityStatistics: ActivityStatisticsProtocol {
     }
 
     func add(records: [ActivityStatisticsRecord]) throws {
+        // If numbert of records is zero there will be no setters and addQuery will be incorrect
+        guard records.count > 0 else { return }
+
         let setters: [[Setter]] = records.map { record in
             [ActivityStatisticsTable.timeStamp <- record.timeStamp,
              ActivityStatisticsTable.domain <- record.domain,

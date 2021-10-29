@@ -139,10 +139,11 @@ final class AddCustomFilterController: BottomAlertController {
                     self?.presentNewCustomFilterDetailsController(meta)
                 }
             } catch {
-                DDLogError("(AddCustomFilterController) - parse URL; Failed to get meta from url: \(url) ,\nError: \(error)")
+                DDLogError("(AddCustomFilterController) - parse URL; Failed to get meta from url: \(url); Error: \(error)")
                 DispatchQueue.main.async {
                     completion()
-                    self?.presentSimpleAlert(title: nil, message: error.localizedDescription, onOkButtonTapped: nil)
+                    let errorMessage = String.localizedString("add_custom_filter_error_message")
+                    self?.presentSimpleAlert(title: nil, message: errorMessage, onOkButtonTapped: nil)
                 }
             }
         }
