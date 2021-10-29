@@ -16,9 +16,12 @@
     along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import Foundation
+import Firebase
+import FirebaseMessaging
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
     
     //MARK: - Properties
     let statusBarWindow: IStatusBarWindow
@@ -113,23 +116,144 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //------------ Interface Tuning -----------------------------------
         self.window?.backgroundColor = UIColor.clear
-
-//        GIDSignIn.sharedInstance.clientID = "364533202921-h0510keg49fuo2okdgopo48mato4905d.apps.googleusercontent.com"
-//        GIDSignIn.sharedInstance().delegate = self
-//        // 3
-//        GIDSignIn.sharedInstance()?.restorePreviousSignIn()
         return true
     }
-   
+    static func GetUserID(){
+        let url = URL(string: DOMAIN_TO_GET_USER_ID)
+        guard let requestUrl = url else { fatalError() }
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "GET"
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("Error took place \(error)")
+                return
+            }
+            guard let data = data else {return}
+            do{
+                let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! [String: Any]
+                DispatchQueue.main.async {
+                    if let httpResponse = response as? HTTPURLResponse{
+                        if httpResponse.statusCode == 200{
+                            StoreData.saveMyPlist(key: "userid", value: json["deviceId"] as! String)
+                        }
+                    }
+                }
+            }catch _{
+                
+            }
+        }
+        task.resume()
+    }
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         prepareControllers()
-       
+        if StoreData.getMyPlist(key: "userid") == nil{
+            AppDelegate.GetUserID()
+        }
         //------------- Preparing for start application. Stage 2. -----------------
         DDLogInfo("(AppDelegate) Preparing for start application. Stage 2.")
         
         AppDelegate.setPeriodForCheckingFilters()
+//        subscribeToNotifications()
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, err) in
+                print("granted: \(granted)")
+            }
+        UNUserNotificationCenter.current().delegate = self
+        
+        //register firebase
+        FirebaseApp.configure() // gọi hàm để cấu hình 1 app Firebase mặc định
+        Messaging.messaging().delegate = self //Nhận các message từ FirebaseMessaging
+        configApplePush(application) // đăng ký nhận push.
         return true
     }
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        if StoreData.getMyPlist(key: "userid") == nil{
+            AppDelegate.GetUserID()
+        }
+        if StoreData.getMyPlist(key: "userid") != nil
+        {
+            if StoreData.getMyPlist(key: "status_code_vip") == nil
+            {
+                self.postRequestSendToken(deviceId: StoreData.getMyPlist(key: "userid") as! String, token: fcmToken!)
+            }
+            else{
+                if StoreData.getMyPlist(key: "status_code_vip") as! Int != 1
+                {
+                    self.postRequestSendToken(deviceId: (StoreData.getMyPlist(key: "userid") as! String).lowercased(), token: fcmToken!)
+                }
+            }
+        }
+    }
+    func postRequestSendToken(deviceId:String, token:String){
+        StoreData.saveMyPlist(key: "status_code_token", value: 2)
+        struct RequestData: Codable {
+            var deviceId:String
+            var token:String
+        }
+        let url = URL(string: DOMAIN_SEND_TOKEN)
+        guard let requestUrl = url else { fatalError() }
+        var request = URLRequest(url: requestUrl)
+        request.httpMethod = "POST"
+        // Set HTTP Request Header
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let request_json = RequestData(
+            deviceId: deviceId, token:token )
+        print("tokenfire")
+        print((request_json))
+        let jsonData = try? JSONEncoder().encode(request_json)
+        request.httpBody = jsonData
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            if let error = error {
+                print("Error took place \(error)")
+                return
+            }
+            guard let data = data else {return}
+            do{
+                let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! [String: Any]
+                print(json)
+                DispatchQueue.main.async {
+                    if json["msg"] as! String == ""
+                    {
+                        print("SEND_TOKEN_TRUE")
+                        StoreData.saveMyPlist(key: "status_code_token", value: 1)
+                    }
+                    else
+                    {
+                        print("SEND_TOKEN_FALSE")
+                        StoreData.saveMyPlist(key: "status_code_token",value: 0)
+                    }
+                }
+            }catch let jsonErr{
+                print(jsonErr)
+           }
+        }
+        task.resume()
+    }
+    func configApplePush(_ application: UIApplication) {
+        if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        
+        application.registerForRemoteNotifications()
+        
+        if let token = Messaging.messaging().fcmToken {
+            print("FCM token: \(token)")
+        }
+    }
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
+    }
+    
     //MARK: - Application Delegate Methods
     
     func applicationWillResignActive(_ application: UIApplication) {

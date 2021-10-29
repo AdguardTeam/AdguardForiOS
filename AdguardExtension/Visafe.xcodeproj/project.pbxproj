@@ -125,10 +125,13 @@
 		7ED595DA259B263C00608222 /* DnsResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED595D8259B263C00608222 /* DnsResolver.swift */; };
 		A5E02631261E330900198396 /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = A5E02630261E330900198396 /* AGDnsProxy */; };
 		A5E02633261E331E00198396 /* AGDnsProxy in Frameworks */ = {isa = PBXBuildFile; productRef = A5E02632261E331E00198396 /* AGDnsProxy */; };
-		C0761043270444F200AD4ACA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0761042270444F200AD4ACA /* Main.storyboard */; };
+		C02CD664272BD70A001130F0 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02CD663272BD70A001130F0 /* IntroViewController.swift */; };
+		C02CD667272BDC82001130F0 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = C02CD666272BDC82001130F0 /* FirebaseMessaging */; };
 		C0A8593D26C376020083E103 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A8593526C376010083E103 /* MainController.swift */; };
 		C0DB789A26C4B71C003C7900 /* DomainVisafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DB789926C4B71C003C7900 /* DomainVisafe.swift */; };
 		C0DB78C526C50F2C003C7900 /* GoogleService-Info.plist in Sources */ = {isa = PBXBuildFile; fileRef = C0DB78C426C50D42003C7900 /* GoogleService-Info.plist */; };
+		C0E03048272BC84B00FF66BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0E03047272BC84B00FF66BE /* Main.storyboard */; };
+		C0E0304A272BD32400FF66BE /* StoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E03049272BD32400FF66BE /* StoreData.swift */; };
 		D004F1FA1F16338400F75A4B /* ACNIPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D004F1F91F16338400F75A4B /* ACNIPUtils.m */; };
 		D00E448A25650084002DDE98 /* ImportSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00E448825650084002DDE98 /* ImportSettingsService.swift */; };
 		D0116CEF20627E58009598B1 /* ACNCidrRange.m in Sources */ = {isa = PBXBuildFile; fileRef = D0116CED20627E58009598B1 /* ACNCidrRange.m */; };
@@ -642,11 +645,13 @@
 		7EEC43242428EFB100F39C33 /* ActivityStatisticsRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStatisticsRecord.swift; sourceTree = "<group>"; };
 		7EF005E2239929FC00047073 /* ComplexProtectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexProtectionService.swift; sourceTree = "<group>"; };
 		7EF75A6C234B6010006ED3E5 /* DnsTrackerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsTrackerService.swift; sourceTree = "<group>"; };
-		C0761042270444F200AD4ACA /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		C02CD663272BD70A001130F0 /* IntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		C0A8593526C376010083E103 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		C0DB789926C4B71C003C7900 /* DomainVisafe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomainVisafe.swift; sourceTree = "<group>"; };
 		C0DB78BC26C4D5D6003C7900 /* VisafeDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VisafeDebug.entitlements; sourceTree = "<group>"; };
 		C0DB78C426C50D42003C7900 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C0E03047272BC84B00FF66BE /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		C0E03049272BD32400FF66BE /* StoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreData.swift; sourceTree = "<group>"; };
 		D004F1F81F16338400F75A4B /* ACNIPUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACNIPUtils.h; sourceTree = "<group>"; };
 		D004F1F91F16338400F75A4B /* ACNIPUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACNIPUtils.m; sourceTree = "<group>"; };
 		D00509682201D730006BC10C /* DnsProvidersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersService.swift; sourceTree = "<group>"; };
@@ -774,6 +779,7 @@
 			files = (
 				655AAC9E1D379E9C00E316EA /* libresolv.tbd in Frameworks */,
 				6598869D1CF74DE9003ECD1C /* AVKit.framework in Frameworks */,
+				C02CD667272BDC82001130F0 /* FirebaseMessaging in Frameworks */,
 				A5E02631261E330900198396 /* AGDnsProxy in Frameworks */,
 				D04820B125402270000FA31A /* Setapp in Frameworks */,
 				7EA782ED2578D48800CA8889 /* (null) in Frameworks */,
@@ -1383,7 +1389,9 @@
 		7E8AC81523A7BF2700669C75 /* MainTabBar */ = {
 			isa = PBXGroup;
 			children = (
-				C0761042270444F200AD4ACA /* Main.storyboard */,
+				C02CD663272BD70A001130F0 /* IntroViewController.swift */,
+				C0E03049272BD32400FF66BE /* StoreData.swift */,
+				C0E03047272BC84B00FF66BE /* Main.storyboard */,
 				C0A8593526C376010083E103 /* MainController.swift */,
 				7EF4285823AB766500948B65 /* ComplexProtection */,
 				7E902ADF23CCB4E700215B33 /* Activity */,
@@ -1820,6 +1828,7 @@
 				D06E3082253F2F32008BBD2D /* ContentBlockerConverter */,
 				7ECAA28E257E4ACB004DA0D3 /* Zip */,
 				A5E02630261E330900198396 /* AGDnsProxy */,
+				C02CD666272BDC82001130F0 /* FirebaseMessaging */,
 			);
 			productName = AdguardExtension;
 			productReference = 659886B91CF74DE9003ECD1C /* Visafe Pro.app */;
@@ -1915,6 +1924,7 @@
 				D06E2F89253F0E24008BBD2D /* XCRemoteSwiftPackageReference "SafariConverterLib" */,
 				7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */,
 				A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */,
+				C02CD665272BDC82001130F0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 65F398121B7B684700ABCD39 /* Products */;
 			projectDirPath = "";
@@ -1936,10 +1946,10 @@
 				659886A51CF74DE9003ECD1C /* defaults.plist in Resources */,
 				655AACD61D4233A000E316EA /* ProLaunchScreen.storyboard in Resources */,
 				D06E30B0253F3182008BBD2D /* providers_i18n.json in Resources */,
+				C0E03048272BC84B00FF66BE /* Main.storyboard in Resources */,
 				D0D7E583243B1C14001801A5 /* adguard.json in Resources */,
 				D0D7E584243B1C14001801A5 /* whotracksme.json in Resources */,
 				653153421CF9911800C92A73 /* AdguardPro.entitlements in Resources */,
-				C0761043270444F200AD4ACA /* Main.storyboard in Resources */,
 				D0D7E57F243B1BF5001801A5 /* providers.json in Resources */,
 				D0D7E585243B1C4F001801A5 /* PTMono-Regular.ttf in Resources */,
 				D0D891B8246520E40098487A /* public_suffix_list.dat in Resources */,
@@ -2133,7 +2143,9 @@
 				C0A8593D26C376020083E103 /* MainController.swift in Sources */,
 				D0B545FC2435D6CB002F0AEC /* NotificationService+Utils.swift in Sources */,
 				D0D7E615244455CA001801A5 /* ThemableButton.swift in Sources */,
+				C0E0304A272BD32400FF66BE /* StoreData.swift in Sources */,
 				659886791CF74DE9003ECD1C /* ABECRequest.m in Sources */,
+				C02CD664272BD70A001130F0 /* IntroViewController.swift in Sources */,
 				D0B545A42435D640002F0AEC /* (null) in Sources */,
 				D0B545E02435D69B002F0AEC /* ThemeableImageView.swift in Sources */,
 				C0DB789A26C4B71C003C7900 /* DomainVisafe.swift in Sources */,
@@ -2425,6 +2437,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = PPZ8Y7NW8F;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/VisafeApp/UI/ViewControllers/MainTabBar/visafe_ios/Pods/GoogleSignIn/Frameworks",
+				);
 				HEADER_SEARCH_PATHS = $inherited;
 				INFOPLIST_FILE = VisafePro/VisafePro.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -2459,6 +2475,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = PPZ8Y7NW8F;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/VisafeApp/UI/ViewControllers/MainTabBar/visafe_ios/Pods/GoogleSignIn/Frameworks",
+				);
 				HEADER_SEARCH_PATHS = $inherited;
 				INFOPLIST_FILE = VisafePro/VisafePro.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -2802,6 +2822,14 @@
 				version = 1.5.44;
 			};
 		};
+		C02CD665272BDC82001130F0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.9.0;
+			};
+		};
 		D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MacPaw/Setapp-framework.git";
@@ -2835,6 +2863,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */;
 			productName = AGDnsProxy;
+		};
+		C02CD666272BDC82001130F0 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C02CD665272BDC82001130F0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 		D06E3082253F2F32008BBD2D /* ContentBlockerConverter */ = {
 			isa = XCSwiftPackageProductDependency;
