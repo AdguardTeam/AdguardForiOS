@@ -96,7 +96,7 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
 
     func addRule(_ ruleText: String) throws {
         let rule = UserRule(ruleText: ruleText, isEnabled: true)
-        try safariProtection.add(rule: rule, for: type, override: false, onCbReloaded: nil)
+        try safariProtection.add(rule: rule, for: type, override: false, shouldReloadCB: true, onCbReloaded: nil)
         let model = UserRuleCellModel(rule: ruleText, isEnabled: true, isSelected: false, isEditing: isEditing)
         modelProvider.addRuleModel(model)
         delegate?.ruleSuccessfullyAdded()

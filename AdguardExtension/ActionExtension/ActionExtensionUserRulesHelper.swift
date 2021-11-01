@@ -44,7 +44,7 @@ struct ActionExtensionUserRulesHelper {
         do {
             let group = DispatchGroup()
             group.enter()
-            try safariProtection.add(rule: rule, for: .allowlist, override: true) { _ in
+            try safariProtection.add(rule: rule, for: .allowlist, override: true, shouldReloadCB: true) { _ in
                 group.leave()
             }
             group.wait()
@@ -81,7 +81,7 @@ struct ActionExtensionUserRulesHelper {
         do {
             let group = DispatchGroup()
             group.enter()
-            try safariProtection.add(rule: rule, for: .invertedAllowlist, override: true) { _ in
+            try safariProtection.add(rule: rule, for: .invertedAllowlist, override: true, shouldReloadCB: true) { _ in
                 group.leave()
             }
             group.wait()

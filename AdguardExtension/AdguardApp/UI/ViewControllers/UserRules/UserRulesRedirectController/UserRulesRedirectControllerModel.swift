@@ -51,18 +51,18 @@ final class UserRulesRedirectControllerModel: UserRulesRedirectControllerModelPr
                 try? safariProtection.removeRule(withText: domain, for: .invertedAllowlist, onCbReloaded: nil)
             } else {
                 let rule = UserRule(ruleText: domain, isEnabled: true)
-                try? safariProtection.add(rule: rule, for: .allowlist, override: true, onCbReloaded: nil)
+                try? safariProtection.add(rule: rule, for: .allowlist, override: true, shouldReloadCB: true, onCbReloaded: nil)
             }
         case .enableSiteProtection(let domain):
             if resources.invertedWhitelist {
                 let rule = UserRule(ruleText: domain, isEnabled: true)
-                try? safariProtection.add(rule: rule, for: .invertedAllowlist, override: true, onCbReloaded: nil)
+                try? safariProtection.add(rule: rule, for: .invertedAllowlist, override: true, shouldReloadCB: true, onCbReloaded: nil)
             } else {
                 try? safariProtection.removeRule(withText: domain, for: .allowlist, onCbReloaded: nil)
             }
         case .addToBlocklist(let domain):
             let rule = UserRule(ruleText: domain, isEnabled: true)
-            try? safariProtection.add(rule: rule, for: .blocklist, override: true, onCbReloaded: nil)
+            try? safariProtection.add(rule: rule, for: .blocklist, override: true, shouldReloadCB: true, onCbReloaded: nil)
         case .removeAllBlocklistRules(let domain):
             safariProtection.removeAllUserRulesAssociatedWith(domain: domain, onCbReloaded: nil)
         }

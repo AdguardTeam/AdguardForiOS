@@ -147,16 +147,20 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
     func addFilter(withName name: String, url: URL, isEnabled: Bool, onFilterAdded: @escaping (Error?) -> Void) {
         Logger.logInfo("(DnsFiltersService) - addFilter; Trying to add filter with name=\(name) url=\(url)")
 
+        let group = DispatchGroup()
         let filterId = nextFilterId
+        group.enter()
         filterFilesStorage.updateCustomFilter(withId: filterId, subscriptionUrl: url) { [weak self] error in
             guard let self = self else {
                 onFilterAdded(CommonError.missingSelf)
+                group.leave()
                 return
             }
 
             if let error = error {
                 Logger.logError("(DnsFiltersService) - addFilter; Error adding custom filter to storage; Error: \(error)")
                 onFilterAdded(error)
+                group.leave()
                 return
             }
 
@@ -169,7 +173,9 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
 
             Logger.logInfo("(DnsFiltersService) - addFilter; Added DNS filter with name=\(name) url=\(url)")
             onFilterAdded(nil)
+            group.leave()
         }
+        group.wait()
     }
 
     func removeFilter(withId id: Int) throws {
