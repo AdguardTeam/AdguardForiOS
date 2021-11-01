@@ -14,7 +14,7 @@
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
+#   along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 #
 
 echo "Clean Script Running with ACTION=${ACTION}"
