@@ -24,11 +24,11 @@ final class StatusBarManager: NSObject {
 
     // MARK: - Private properties
 
-    fileprivate let keyWindow: UIWindow
+    private let keyWindow: UIWindow
     private let statusBarWindow: StatusBarWindow
     private let animationDuration: CGFloat = 0.5
 
-    fileprivate var statusBarWindowSize: CGSize {
+    private var statusBarWindowSize: CGSize {
         let bottomSafeAreaInset = keyWindow.safeAreaInsets.bottom / 2.0
         let height = statusBarWindow.isIpadTrait ? 20.0 : 16.0
         return CGSize(
@@ -37,14 +37,14 @@ final class StatusBarManager: NSObject {
         )
     }
 
-    fileprivate var shownOrigin: CGPoint {
+    private var shownOrigin: CGPoint {
         return CGPoint(
             x: 0.0,
             y: keyWindow.frame.maxY - statusBarWindowSize.height
         )
     }
 
-    fileprivate var hiddenOrigin: CGPoint {
+    private var hiddenOrigin: CGPoint {
         return CGPoint(
             x: 0.0,
             y: keyWindow.frame.maxY
@@ -70,7 +70,6 @@ final class StatusBarManager: NSObject {
 
         self.statusBarWindow.frame.size = statusBarWindowSize
         self.statusBarWindow.frame.origin = hiddenOrigin
-        self.statusBarWindow.isHidden = false
         initializeObservers()
     }
 
@@ -101,11 +100,16 @@ final class StatusBarManager: NSObject {
             self?.hideStatusBar()
         }
 
-        orientationChangeNotification = NotificationCenter.default.observe(name: UIDevice.orientationDidChangeNotification, object: nil, queue: .main) { [weak self] _ in
-            self?.rotate()
+        orientationChangeNotification = NotificationCenter.default.observe(name: UIDevice.orientationDidChangeNotification, object: nil, queue: .main) { _ in
+            // This code will be executed after the rotation was completed (in the main queue) and the new sizes are available
+            DispatchQueue.main.async { [weak self] in
+                self?.rotate()
+            }
         }
     }
 
+    /// Shows status bar if is not already shown
+    /// Also handles cases when status bar has 2 animations at a time
     private func showStatusBar(with text: String?) {
         statusBarWindow.text = text
 
@@ -121,6 +125,7 @@ final class StatusBarManager: NSObject {
                 statusBarWindow.frame.origin = shownOrigin
             }
 
+            statusBarWindow.isHidden = false
             showAnimator = animator
             showAnimator?.startAnimation()
             return
@@ -135,10 +140,14 @@ final class StatusBarManager: NSObject {
         let animator = UIViewPropertyAnimator(duration: animationDuration, curve: .easeOut) { [unowned self] in
             statusBarWindow.frame.origin = shownOrigin
         }
+        statusBarWindow.isHidden = false
         showAnimator = animator
         showAnimator?.startAnimation()
+        hideAnimator = nil
     }
 
+    /// Hides status bar if is not already hidden
+    /// Also handles cases when status bar has 2 animations at a time
     private func hideStatusBar() {
         // If animation is showing when we want to hide status bar
         if let showAnimator = showAnimator, showAnimator.isRunning {
@@ -151,7 +160,11 @@ final class StatusBarManager: NSObject {
             let animator = UIViewPropertyAnimator(duration: restAnimationDuration, curve: .easeIn) { [unowned self] in
                 statusBarWindow.frame.origin = hiddenOrigin
             }
-
+            animator.addCompletion { [weak self] position in
+                if position == .end {
+                    self?.statusBarWindow.isHidden = true
+                }
+            }
             hideAnimator = animator
             hideAnimator?.startAnimation()
             return
@@ -163,14 +176,94 @@ final class StatusBarManager: NSObject {
         }
 
         // If status bar is shown
-        let animator = UIViewPropertyAnimator(duration: animationDuration, curve: .easeOut) { [unowned self] in
+        let animator = UIViewPropertyAnimator(duration: animationDuration, curve: .easeIn) { [unowned self] in
             statusBarWindow.frame.origin = hiddenOrigin
+        }
+        animator.addCompletion { [weak self] position in
+            if position == .end {
+                self?.statusBarWindow.isHidden = true
+            }
         }
         hideAnimator = animator
         hideAnimator?.startAnimation()
+        showAnimator = nil
     }
 
+    /// Rotates status bar when device orientation changes
     private func rotate() {
+        // If status bar is showing now
+        if let showAnimator = showAnimator, showAnimator.isRunning {
+            // Stop animation and save percentage of animation completed
+            let percentOfCompletion = showAnimator.fractionComplete
+            let restAnimationDuration = animationDuration * (1.0 - percentOfCompletion)
+            showAnimator.stopAnimation(true)
+            showAnimator.finishAnimation(at: .current)
+            statusBarWindow.isHidden = true
 
+            // Set status bar new position with respect to percentage of animation completed
+            let currentYposition = CGPoint(
+                x: 0.0,
+                y: keyWindow.frame.maxY - (statusBarWindowSize.height * (1.0 - percentOfCompletion))
+            )
+            statusBarWindow.frame.size = statusBarWindowSize
+            statusBarWindow.frame.origin = currentYposition
+
+            // Continue animation with new orientation
+            let animator = UIViewPropertyAnimator(duration: restAnimationDuration, curve: .easeOut) { [unowned self] in
+                statusBarWindow.frame.origin = shownOrigin
+            }
+            statusBarWindow.isHidden = false
+            self.showAnimator = animator
+            self.showAnimator?.startAnimation()
+            hideAnimator = nil
+            return
+        }
+
+        // If status bar is hiding now
+        if let hideAnimator = hideAnimator, hideAnimator.isRunning {
+            // Stop animation and save percentage of animation completed
+            let percentOfCompletion = hideAnimator.fractionComplete
+            let restAnimationDuration = animationDuration * (1.0 - percentOfCompletion)
+            hideAnimator.stopAnimation(true)
+            hideAnimator.finishAnimation(at: .current)
+            statusBarWindow.isHidden = true
+
+            // Set status bar new position with respect to percentage of animation completed
+            let currentYposition = CGPoint(
+                x: 0.0,
+                y: keyWindow.frame.maxY - (statusBarWindowSize.height * percentOfCompletion)
+            )
+            statusBarWindow.frame.size = statusBarWindowSize
+            statusBarWindow.frame.origin = currentYposition
+
+            // Continue animation with new orientation
+            let animator = UIViewPropertyAnimator(duration: restAnimationDuration, curve: .easeIn) { [unowned self] in
+                statusBarWindow.frame.origin = hiddenOrigin
+            }
+            animator.addCompletion { [weak self] position in
+                if position == .end {
+                    self?.statusBarWindow.isHidden = true
+                }
+            }
+            statusBarWindow.isHidden = false
+            self.hideAnimator = animator
+            self.hideAnimator?.startAnimation()
+            showAnimator = nil
+            return
+        }
+
+        // If status bar is shown
+        if let showAnimator = showAnimator, showAnimator.state == .inactive {
+            statusBarWindow.frame.size = statusBarWindowSize
+            statusBarWindow.frame.origin = shownOrigin
+            return
+        }
+
+        // If status bar is hidden
+        if hideAnimator == nil || hideAnimator?.state == .inactive {
+            statusBarWindow.frame.size = statusBarWindowSize
+            statusBarWindow.frame.origin = hiddenOrigin
+            return
+        }
     }
 }
