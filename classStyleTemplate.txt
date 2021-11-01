@@ -56,7 +56,6 @@
 /// along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 ///
 
-
 #import "_newClass_.h"
 
 #define _NEW_DEFINE_
