@@ -190,7 +190,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 keyWindow = UIApplication.shared.keyWindow
             }
             if let keyWindow = keyWindow {
-                statusBarManager = StatusBarManager(keyWindow: keyWindow)
+                statusBarManager = StatusBarManager(configuration: configuration, keyWindow: keyWindow)
             }
         }
     }

@@ -70,10 +70,6 @@ NSString* AEDefaultsRequests = @"AEDefaultsRequests";
 NSString* AEDefaultsEncryptedRequests = @"AEDefaultsEncryptedRequests";
 NSString* LastStatisticsSaveTime = @"LastStatisticsSaveTime";
 
-NSString* AEDefaultsShowStatusViewInfo = @"AEDefaultsShowStatusViewInfo";
-NSString *ShowStatusViewNotification = @"ShowStatusViewNotification";
-NSString *HideStatusViewNotification = @"HideStatusViewNotification";
-
 NSString* SafariProtectionState = @"SafariProtectionState";
 
 NSString* DnsFilterUniqueId = @"DnsFilterUniqueId";

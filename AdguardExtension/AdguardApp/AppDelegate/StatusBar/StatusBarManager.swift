@@ -24,6 +24,7 @@ final class StatusBarManager: NSObject {
 
     // MARK: - Private properties
 
+    private let configuration: ConfigurationServiceProtocol
     private let keyWindow: UIWindow
     private let statusBarWindow: StatusBarWindow
     private let animationDuration: CGFloat = 0.5
@@ -62,8 +63,11 @@ final class StatusBarManager: NSObject {
     private var contentBlockersUpdateStarted: SharedAdGuardSDK.NotificationToken?
     private var contentBlockersUpdateFinished: SharedAdGuardSDK.NotificationToken?
     private var orientationChangeNotification: SharedAdGuardSDK.NotificationToken?
+    private var advancedModeObserver: NotificationToken?
+    private var showStatusBarObserver: NotificationToken?
 
-    init(keyWindow: UIWindow) {
+    init(configuration: ConfigurationServiceProtocol, keyWindow: UIWindow) {
+        self.configuration = configuration
         self.keyWindow = keyWindow
         self.statusBarWindow = StatusBarWindow(frame: .zero)
         super.init()
@@ -77,33 +81,57 @@ final class StatusBarManager: NSObject {
 
     private func initializeObservers() {
         filtersUpdateStarted = NotificationCenter.default.filtersUpdateStart(queue: .main) { [weak self] in
-            self?.showStatusBar(with: String.localizedString("loading_filters"))
+            if self?.configuration.showStatusBar == true {
+                self?.showStatusBar(with: String.localizedString("loading_filters"))
+            }
         }
 
         filtersUpdateFinished = NotificationCenter.default.filtersUpdateFinished(queue: .main) { [weak self] in
-            self?.hideStatusBar()
+            if self?.configuration.showStatusBar == true {
+                self?.hideStatusBar()
+            }
         }
 
         filtersConvertionStarted = NotificationCenter.default.filtersConvertionStarted(queue: .main) { [weak self] in
-            self?.showStatusBar(with: String.localizedString("converting_rules"))
+            if self?.configuration.showStatusBar == true {
+                self?.showStatusBar(with: String.localizedString("converting_rules"))
+            }
         }
 
         filtersConvertionFinished = NotificationCenter.default.filtersConvertionFinished(queue: .main) { [weak self] in
-            self?.hideStatusBar()
+            if self?.configuration.showStatusBar == true {
+                self?.hideStatusBar()
+            }
         }
 
         contentBlockersUpdateStarted = NotificationCenter.default.contentBlockersUpdateStart(queue: .main) { [weak self] in
-            self?.showStatusBar(with: String.localizedString("loading_content_blockers"))
+            if self?.configuration.showStatusBar == true {
+                self?.showStatusBar(with: String.localizedString("loading_content_blockers"))
+            }
         }
 
         contentBlockersUpdateFinished = NotificationCenter.default.contentBlockersUpdateFinished(queue: .main) { [weak self] in
-            self?.hideStatusBar()
+            if self?.configuration.showStatusBar == true {
+                self?.hideStatusBar()
+            }
         }
 
         orientationChangeNotification = NotificationCenter.default.observe(name: UIDevice.orientationDidChangeNotification, object: nil, queue: .main) { _ in
             // This code will be executed after the rotation was completed (in the main queue) and the new sizes are available
             DispatchQueue.main.async { [weak self] in
                 self?.rotate()
+            }
+        }
+
+        advancedModeObserver = NotificationCenter.default.observe(name: .advancedModeChanged, object: nil, queue: .main) { [weak self] _ in
+            if self?.configuration.showStatusBar == false {
+                self?.hideStatusBar()
+            }
+        }
+
+        showStatusBarObserver = NotificationCenter.default.observe(name: .showStatusBarChanged, object: nil, queue: .main) { [weak self] _ in
+            if self?.configuration.showStatusBar == false {
+                self?.hideStatusBar()
             }
         }
     }
