@@ -16,7 +16,6 @@
 /// along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 ///
 
-
 // Handle UserNotificationService notifications
 extension AppDelegate {
     func subscribeToUserNotificationServiceNotifications() {

@@ -1,4 +1,3 @@
-
 ///
 /// This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
 /// Copyright © Adguard Software Limited. All rights reserved.

@@ -16,7 +16,6 @@
 /// along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
 ///
 
-
 class RadioButton: UIButton {
     @IBInspectable var stateOn: UIImage? = UIImage(named: "bullet")
     @IBInspectable var stateOff: UIImage? = UIImage(named: "bulletnone")
