@@ -62,6 +62,7 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // If there is no tab bar this mean that we trying to login from onboarding license screen and we must dismiss it after successful login
         fromOnboarding = self.tabBarController == nil
 
         setupBackButton()
@@ -92,15 +93,16 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
 
         nameEdit.accessibilityLabel = String.localizedString("enter_email_voiceover")
         passwordEdit.accessibilityLabel = String.localizedString("enter_password_voiceover")
-
-        if licenseKey != nil && !licenseKey!.isEmpty {
-            purchaseService.login(withLicenseKey: licenseKey!) {_ in }
-        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        nameEdit.becomeFirstResponder()
+        if let licenseKey = licenseKey, !licenseKey.isEmpty {
+            nameEdit.text = licenseKey
+            login()
+        } else {
+            nameEdit.becomeFirstResponder()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -223,11 +225,10 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
 
     private func loginSuccess() {
         let message = String.localizedString("login_success_message")
-        /*
-            If there is no tab bar this mean that we trying to login from onboarding license screen and we must dismiss it after successful login
-        */
 
-        if !fromOnboarding {
+        let isLoginingWithLicenseURL = !(licenseKey?.isEmpty ?? true)
+
+        if !fromOnboarding || isLoginingWithLicenseURL {
             self.navigationController?.popToRootViewController(animated: false)
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.dismissToMainPage(animated: true)

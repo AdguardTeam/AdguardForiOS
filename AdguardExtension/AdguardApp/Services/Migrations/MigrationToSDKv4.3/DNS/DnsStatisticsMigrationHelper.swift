@@ -143,6 +143,7 @@ final class DnsStatisticsMigrationHelper: DnsStatisticsMigrationHelperProtocol {
     }
 
     private func writeStatistics(_ records: [ChartStatisticsRecord], db: Connection) throws {
+        guard records.count > 0 else { return }
 
         let setters: [[Setter]] = records.map { record in
             [DnsStatisticsTable.timeStamp <- record.timeStamp,
@@ -171,6 +172,7 @@ final class DnsStatisticsMigrationHelper: DnsStatisticsMigrationHelperProtocol {
     }
 
     private func writeActivity(_ records: [ActivityStatisticsRecord], db: Connection) throws {
+        guard records.count > 0 else { return }
 
         let setters: [[Setter]] = records.map { record in
             [DnsActivityTable.timeStamp <- record.timeStamp,

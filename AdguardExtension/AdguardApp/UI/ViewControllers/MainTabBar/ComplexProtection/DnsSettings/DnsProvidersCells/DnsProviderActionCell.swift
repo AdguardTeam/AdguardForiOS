@@ -37,7 +37,9 @@ final class DnsProviderActionCell: UITableViewCell, Reusable {
         let label = ThemableLabel()
         label.greyText = true
         label.lightGreyText = false
-        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.numberOfLines = 1
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
         label.font = .systemFont(ofSize: isIpadTrait ? 24.0 : 16.0, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -47,6 +49,7 @@ final class DnsProviderActionCell: UITableViewCell, Reusable {
         let label = ThemableLabel()
         label.greyText = true
         label.lightGreyText = false
+        label.textAlignment = .right
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: isIpadTrait ? 24.0 : 16.0)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -96,10 +99,10 @@ final class DnsProviderActionCell: UITableViewCell, Reusable {
             actionNameLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: topBottomConst),
             actionNameLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: leadingTrailingConst),
             actionNameLabel.trailingAnchor.constraint(lessThanOrEqualTo: self.selectedOptionLabel.leadingAnchor, constant: -20.0),
-            actionNameLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -topBottomConst),
 
-            selectedOptionLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
+            selectedOptionLabel.topAnchor.constraint(equalTo: actionNameLabel.topAnchor),
             selectedOptionLabel.trailingAnchor.constraint(equalTo: rightArrowImageView.leadingAnchor, constant: -leadingTrailingConst),
+            selectedOptionLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -topBottomConst),
 
             rightArrowImageView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
             rightArrowImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -leadingTrailingConst),

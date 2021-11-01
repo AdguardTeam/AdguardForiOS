@@ -24,6 +24,11 @@ extension AppDelegate {
 
     static let shared = UIApplication.shared.delegate as! AppDelegate
 
+    private var proStatus: Bool {
+        let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
+        return configuration.proStatus
+    }
+
     /* returns launch screen from LaunchScreen.storyboard */
     func getLaunchScreen() -> UIViewController? {
         let launchScreenStoryboard = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main)
@@ -79,7 +84,7 @@ extension AppDelegate {
 
         let dnsSettingsStoryBoard = UIStoryboard(name: "DnsSettings", bundle: Bundle.main)
         guard let dnsSettingsController = dnsSettingsStoryBoard.instantiateViewController(withIdentifier: "DnsSettingsController") as? DnsSettingsController else {
-            DDLogError("DnsSettings.storyboard doesnt't have DnsSettingsController")
+            DDLogError("DnsSettings.storyboard doesn't have DnsSettingsController")
             return false
         }
         dnsSettingsController.stateFromWidget = enabled
@@ -113,7 +118,7 @@ extension AppDelegate {
 
         let mainPageStoryboard = UIStoryboard(name: "MainPage", bundle: Bundle.main)
         guard let mainPageController = mainPageStoryboard.instantiateViewController(withIdentifier: "MainPageController") as? MainPageController else {
-            DDLogError("MainPage.storyboard doesnt't have MainPageController")
+            DDLogError("MainPage.storyboard doesn't have MainPageController")
             return false
         }
         mainPageController.stateFromWidget = enabled
@@ -131,6 +136,10 @@ extension AppDelegate {
      Returns true on success and false otherwise
      */
     func presentLoginController(showLaunchScreen: Bool = false, withLicenseKey key: String? = nil) -> Bool {
+        if proStatus {
+            return openMainPageController(showLaunchScreen: false, complexProtectionIsEnabled: nil)
+        }
+
         guard let tabBar = getMainTabController() else {
             DDLogError("Tab bar is nil")
             return false
@@ -147,18 +156,18 @@ extension AppDelegate {
 
         let mainPageStoryboard = UIStoryboard(name: "MainPage", bundle: Bundle.main)
         guard let mainPageController = mainPageStoryboard.instantiateViewController(withIdentifier: "MainPageController") as? MainPageController else {
-            DDLogError("MainPage.storyboard doesnt't have MainPageController")
+            DDLogError("MainPage.storyboard doesn't have MainPageController")
             return false
         }
 
         let licenseStoryboard = UIStoryboard(name: "License", bundle: Bundle.main)
         guard let getProController = licenseStoryboard.instantiateViewController(withIdentifier: "GetProController") as? GetProController else {
-            DDLogError("License.storyboard doesnt't have GetProController")
+            DDLogError("License.storyboard doesn't have GetProController")
             return false
         }
 
         guard let loginController = licenseStoryboard.instantiateViewController(withIdentifier: "EmailSignInScene") as? EmailSignInController else {
-            DDLogError("License.storyboard doesnt't have EmailSignInController")
+            DDLogError("License.storyboard doesn't have EmailSignInController")
             return false
         }
         loginController.licenseKey = key
@@ -176,6 +185,7 @@ extension AppDelegate {
      Returns true on success and false otherwise
      */
     func presentDnsProvidersController(showLaunchScreen: Bool = false, url: String? = nil) -> Bool {
+        if !proStatus { return presentPurchaseLicenseController() }
 
         guard let tabBar = getMainTabController() else {
             DDLogError("Tab bar is nil")
@@ -198,12 +208,12 @@ extension AppDelegate {
 
         let dnsSettingsStoryBoard = UIStoryboard(name: "DnsSettings", bundle: Bundle.main)
         guard let dnsSettingsController = dnsSettingsStoryBoard.instantiateViewController(withIdentifier: "DnsSettingsController") as? DnsSettingsController else {
-            DDLogError("DnsSettings.storyboard doesnt't have DnsSettingsController")
+            DDLogError("DnsSettings.storyboard doesn't have DnsSettingsController")
             return false
         }
 
         guard let dnsProvidersController = dnsSettingsStoryBoard.instantiateViewController(withIdentifier: "DnsProvidersController") as? DnsProvidersController else {
-            DDLogError("DnsSettings.storyboard doesnt't have DnsProvidersController")
+            DDLogError("DnsSettings.storyboard doesn't have DnsProvidersController")
             return false
         }
         dnsProvidersController.openUrl = url
@@ -221,6 +231,8 @@ extension AppDelegate {
      Returns true on success and false otherwise
      */
     func presentFiltersMasterController(showLaunchScreen: Bool = false, url: String? = nil, title: String? = nil) -> Bool {
+        if !proStatus { return presentPurchaseLicenseController() }
+        
         guard let tabBar = getMainTabController() else {
             DDLogError("Tab bar is nil")
             return false
@@ -242,30 +254,29 @@ extension AppDelegate {
 
         let filtersStoryboard = UIStoryboard(name: "Filters", bundle: Bundle.main)
         guard let safariProtectionController = filtersStoryboard.instantiateViewController(withIdentifier: "SafariProtectionController") as? SafariProtectionController else {
-            DDLogError("Filters.storyboard doesnt't have SafariProtectionController")
+            DDLogError("Filters.storyboard doesn't have SafariProtectionController")
             return false
         }
 
-        // TODO: - Let user subscribe for filter
+        guard let safariGroupTableController = filtersStoryboard.instantiateViewController(withIdentifier: "SafariGroupTableController") as? SafariGroupTableController else {
+            DDLogError("Filters.storyboard doesn't have SafariGroupTableController")
+            return false
+        }
+        safariGroupTableController.loadViewIfNeeded()
 
-//        guard let filtersMasterController = filtersStoryboard.instantiateViewController(withIdentifier: "FiltersMasterController") as? FiltersMasterController else {
-//            DDLogError("Filters.storyboard doesnt't have FiltersMasterController")
-//            return false
-//        }
-//        filtersMasterController.loadViewIfNeeded()
-//
-//        guard let groupsController = filtersMasterController.children.first(where: { $0 is GroupsController }) as? GroupsController else {
-//            DDLogError("FiltersMasterController doesnt't have GroupsController")
-//            return false
-//        }
-//        groupsController.openUrl = url
-//        groupsController.openTitle = title
-//        groupsController.loadViewIfNeeded()
-//
-//        navController.viewControllers = [mainMenuController, safariProtectionController, filtersMasterController]
-//        tabBar.selectedViewController = navController
-//        window?.rootViewController = tabBar
-//
+        guard let safariGroupFiltersTableController = filtersStoryboard.instantiateViewController(withIdentifier: "SafariGroupFiltersTableController") as? SafariGroupFiltersTableController else {
+            DDLogError("Filters.storyboard doesn't have SafariGroupFiltersTableController")
+            return false
+        }
+
+        safariGroupFiltersTableController.titleForImport = title
+        safariGroupFiltersTableController.urlStringForImport = url
+        safariGroupFiltersTableController.displayType = .one(groupType: .custom)
+
+        window?.rootViewController = tabBar
+        tabBar.selectedViewController = navController
+        navController.viewControllers = [mainMenuController, safariProtectionController, safariGroupTableController, safariGroupFiltersTableController]
+
         return true
     }
 
@@ -273,6 +284,8 @@ extension AppDelegate {
      Presents DnsFiltersController
      Returns true on success and false otherwise
      */
+
+    // FIXME: We use this method for presenting dns controller if handle overlimit error from AppDelegate method `postDnsFiltersOverlimitNotificationIfNedeed`
     func presentDnsFiltersController(showLaunchScreen: Bool = false) -> Bool {
 
 //        guard let tabBar = getMainTabController() else {
@@ -539,6 +552,8 @@ extension AppDelegate {
     }
 
     func presentPurchaseLicenseController() -> Bool {
+        if proStatus { return false }
+
         guard let tabBar = getMainTabController() else {
             DDLogError("Tab bar is nil")
             return false
