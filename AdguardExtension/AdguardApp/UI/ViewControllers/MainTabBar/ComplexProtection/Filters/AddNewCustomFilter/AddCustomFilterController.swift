@@ -20,6 +20,10 @@ import UIKit
 import SharedAdGuardSDK
 import SafariAdGuardSDK
 
+enum NewFilterType {
+    case safariCustom, dnsCustom
+}
+
 final class AddCustomFilterController: BottomAlertController {
 
     var type: NewFilterType = .safariCustom
@@ -32,8 +36,7 @@ final class AddCustomFilterController: BottomAlertController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var nextButton: RoundRectButton!
     @IBOutlet weak var cancelButton: RoundRectButton!
-    @IBOutlet weak var urlTextField: UITextField!
-    @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
+    @IBOutlet weak var urlTextField: AGTextField!
 
     @IBOutlet var themableLabels: [ThemableLabel]!
 
@@ -46,7 +49,8 @@ final class AddCustomFilterController: BottomAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        nextButton.isEnabled = false
+        urlTextField.delegate = self
+
         nextButton.makeTitleTextCapitalized()
         cancelButton.makeTitleTextCapitalized()
 
@@ -60,25 +64,30 @@ final class AddCustomFilterController: BottomAlertController {
         else {
             urlTextField.becomeFirstResponder()
         }
-
-        ruleTextChanged(urlTextField)
+        nextButton.isEnabled = !(urlTextField.text ?? "").isEmpty
         updateTheme()
         themeObserver = NotificationCenter.default.observe(name: .themeChanged, object: nil, queue: .main) { [weak self] _ in
             self?.updateTheme()
         }
     }
 
-    @IBAction func ruleTextChanged(_ sender: UITextField) {
-        let enabled = sender.text != "" && sender.text != nil
-        nextButton.isEnabled = enabled
+    // MARK: - UITextFieldDelegate
+
+    override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        urlTextField.borderState = .disabled
+        urlTextField.resignFirstResponder()
+        return true
     }
 
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textViewUnderline.state = .enabled
-    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
 
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        textViewUnderline.state = .disabled
+        urlTextField.borderState = .enabled
+        urlTextField.rightView?.isHidden = updatedText.isEmpty
+        nextButton.isEnabled = !updatedText.isEmpty
+        return true
     }
 
     // MARK: - Actions
@@ -150,9 +159,7 @@ final class AddCustomFilterController: BottomAlertController {
     }
 }
 
-enum NewFilterType {
-    case safariCustom, dnsCustom
-}
+// MARK: - AddCustomFilterController + ThemableProtocol
 
 extension AddCustomFilterController: ThemableProtocol {
     func updateTheme() {
@@ -161,5 +168,6 @@ extension AddCustomFilterController: ThemableProtocol {
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(urlTextField)
         nextButton.indicatorStyle = theme.indicatorStyle
+        urlTextField.updateTheme()
     }
 }

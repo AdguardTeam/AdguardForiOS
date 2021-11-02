@@ -90,7 +90,7 @@ class AGTextField: UITextField {
         didSet {
             attributedPlaceholder = NSAttributedString(
                 string: placeholder ?? "",
-                attributes: [NSAttributedString.Key.foregroundColor: themeService.placeholderColor]
+                attributes: [NSAttributedString.Key.foregroundColor: UIColor.AdGuardColor.lightGray4]
             )
         }
     }
@@ -179,7 +179,7 @@ class AGTextField: UITextField {
         tintColor = themeService.textFieldTintColor
         attributedPlaceholder = NSAttributedString(
             string: placeholder ?? "",
-            attributes: [NSAttributedString.Key.foregroundColor: themeService.placeholderColor]
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.AdGuardColor.lightGray4]
         )
     }
 
@@ -286,7 +286,6 @@ extension AGTextField: UITextFieldDelegate {
 
 fileprivate extension ThemeServiceProtocol {
     var textFieldBackgroundColor: UIColor { themeIsDark ? UIColor.AdGuardColor.lightGray2 : UIColor.AdGuardColor.lightGray6 }
-    var placeholderColor: UIColor { themeIsDark ? UIColor.AdGuardColor.lightGray2 : UIColor.AdGuardColor.lightGray4 }
     var disabledBorderColor: UIColor { themeIsDark ? UIColor.AdGuardColor.lightGray3 : UIColor.AdGuardColor.lightGray5 }
     var enabledBorderColor: UIColor { themeIsDark ? UIColor.AdGuardColor.lightGray5 : UIColor.AdGuardColor.lightGray4 }
     var iconTintColor: UIColor { themeIsDark ? UIColor.AdGuardColor.lightGray5 : UIColor.AdGuardColor.lightGray4 }
