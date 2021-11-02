@@ -1,4 +1,9 @@
-//
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>FILEHEADER</key>
+    <string>
 // This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
 // Copyright © Adguard Software Limited. All rights reserved.
 //
@@ -13,21 +18,7 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
-//
-
-import Foundation
-
-protocol ConfigurationServiceProtocol: AnyObject {
-    var darkTheme: Bool { get }
-    var userThemeMode: ThemeMode { get set }
-    var systemAppearenceIsDark: Bool { get set }
-    var proStatus : Bool { get }
-    var isAdvancedProtectionEnabled: Bool { get set }
-    var advancedMode: Bool { get  set }
-    var showStatusBar: Bool { get set }
-    var allContentBlockersEnabled: Bool { get }
-    var someContentBlockersEnabled: Bool { get }
-
-    func checkContentBlockerEnabled()
-}
+// along with Adguard for iOS. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+//</string>
+</dict>
+</plist>
