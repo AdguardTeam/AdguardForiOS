@@ -16,9 +16,9 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
+import UIKit
 
-class Confirm2FaController : UIViewController, UITextFieldDelegate {
+final class Confirm2FaController : UIViewController, UITextFieldDelegate {
 
     // MARK: - public properties
 
@@ -34,8 +34,7 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
     // MARK: - IB outlets
 
     @IBOutlet var themableLabels: [ThemableLabel]!
-    @IBOutlet weak var codeTextField: UITextField!
-    @IBOutlet weak var codeLine: UIView!
+    @IBOutlet weak var codeTextField: AGTextField!
     @IBOutlet weak var confirmButton: RoundRectButton!
     @IBOutlet weak var errorLabel: UILabel!
 
@@ -46,12 +45,13 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
     // MARK: - VC lifecycle
 
     override func viewDidLoad() {
-
+        super.viewDidLoad()
+        codeTextField.delegate = self
         fromOnboarding = self.tabBarController == nil
 
-        purchaseObserver = NotificationCenter.default.observe(name: Notification.Name(PurchaseAssistant.kPurchaseServiceNotification),
-                                                                      object: nil, queue: OperationQueue.main)
-        { [weak self](notification) in
+        purchaseObserver = NotificationCenter.default.observe(
+            name: Notification.Name(PurchaseAssistant.kPurchaseServiceNotification),
+            object: nil, queue: OperationQueue.main) { [weak self](notification) in
             if let info = notification.userInfo {
                 self?.processNotification(info: info)
             }
@@ -62,30 +62,16 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
         setupBackButton()
         confirmButton.makeTitleTextCapitalized()
         confirmButton.applyStandardGreenStyle()
-
-        super.viewDidLoad()
+        confirmButton.isEnabled = false
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        codeTextField.becomeFirstResponder()
         super.viewDidAppear(animated)
+        codeTextField.becomeFirstResponder()
     }
-
-    // MARK: - textView methods
-    @IBAction func editingChange(_ sender: Any) {
-        updateControls()
-    }
-
-    @IBAction func startEditing(_ sender: Any) {
-        updateControls()
-    }
-
-    @IBAction func endEditing(_ sender: Any) {
-        updateControls()
-    }
-
 
     // MARK: - actions
+
     @IBAction func confirmAction(_ sender: Any) {
         if credentials != nil {
             confirmButton.isEnabled = false
@@ -94,9 +80,24 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
         }
     }
 
+    // MARK: - TextFieldDelegate
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+
+        codeTextField.rightView?.isHidden = updatedText.isEmpty
+        confirmButton.isEnabled = !updatedText.isEmpty
+        codeTextField.borderState = .enabled
+        errorLabel.text = ""
+
+        return true
+    }
+
     // MARK: - private methods
 
-    func updateUI() {
+    private func updateUI() {
         confirmButton.isEnabled = codeTextField.text?.count ?? 0 > 0
     }
 
@@ -173,17 +174,11 @@ class Confirm2FaController : UIViewController, UITextFieldDelegate {
 
         if let message = messages?.errorMessage {
             errorLabel.text = message
-            codeLine.backgroundColor = theme.errorRedColor
+            codeTextField.borderState = .error
         }
         else {
             errorLabel.text = ""
-            codeLine.backgroundColor = theme.editLineColor
         }
-    }
-
-    private func updateControls() {
-        confirmButton.isEnabled = codeTextField.text?.count ?? 0 > 0
-        codeLine.backgroundColor = codeTextField.isEditing ? theme.editLineSelectedColor : theme.editLineColor
     }
 }
 
@@ -191,8 +186,7 @@ extension Confirm2FaController: ThemableProtocol {
     func updateTheme() {
         theme.setupLabels(themableLabels)
         theme.setupTextField(codeTextField)
-        theme.setupSeparator(codeLine)
+        codeTextField.updateTheme()
         view.backgroundColor = theme.backgroundColor
-        updateControls()
     }
 }

@@ -1059,22 +1059,22 @@ ads &amp; trackers</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Code from the authentication app:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53G-qY-SZ5" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                <rect key="frame" x="16" y="52" width="382" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <rect key="frame" x="16" y="52" width="382" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 </variation>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="opD-uD-yGj">
-                                <rect key="frame" x="28" y="84" width="544" height="16"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="opD-uD-yGj" customClass="AGTextField" customModule="Adguard" customModuleProvider="target">
+                                <rect key="frame" x="16" y="79.5" width="382" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="18" id="Hbk-Ja-6xJ">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="26"/>
+                                    <constraint firstAttribute="height" constant="40" id="Hbk-Ja-6xJ">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="60"/>
                                     </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -1083,21 +1083,11 @@ ads &amp; trackers</string>
                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 </variation>
                                 <connections>
-                                    <action selector="editingChange:" destination="WvU-yq-t4d" eventType="editingChanged" id="2sf-Rz-MVM"/>
-                                    <action selector="endEditing:" destination="WvU-yq-t4d" eventType="editingDidEnd" id="Gi8-BP-Iam"/>
-                                    <action selector="startEditing:" destination="WvU-yq-t4d" eventType="editingDidBegin" id="tQA-0w-Ncy"/>
                                     <outlet property="delegate" destination="WvU-yq-t4d" id="36e-sz-Y5A"/>
                                 </connections>
                             </textField>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tpo-aC-0J4">
-                                <rect key="frame" x="21" y="104" width="558" height="2"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="2" id="GTw-Ye-GoH"/>
-                                </constraints>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6qG-Kc-9wb" userLabel="Error Label">
-                                <rect key="frame" x="21" y="110" width="558" height="0.0"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6qG-Kc-9wb" userLabel="Error Label">
+                                <rect key="frame" x="16" y="123.5" width="382" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.87450980389999999" green="0.21960784310000001" blue="0.070588235289999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1108,11 +1098,11 @@ ads &amp; trackers</string>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rrj-Gm-LCJ" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                                 <rect key="frame" x="16" y="151" width="382" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="tPl-aP-jJv">
+                                    <constraint firstAttribute="height" constant="40" id="tPl-aP-jJv">
                                         <variation key="heightClass=regular-widthClass=regular" constant="60"/>
                                     </constraint>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <state key="normal" title="Confirm">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -1131,7 +1121,7 @@ ads &amp; trackers</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                                 </variation>
                                 <connections>
                                     <action selector="confirmAction:" destination="WvU-yq-t4d" eventType="touchUpInside" id="9aX-ec-byy"/>
@@ -1142,41 +1132,38 @@ ads &amp; trackers</string>
                         <viewLayoutGuide key="safeArea" id="mDa-F1-ucE"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="rrj-Gm-LCJ" firstAttribute="top" secondItem="tpo-aC-0J4" secondAttribute="bottom" constant="40" id="5v7-uN-zFb">
-                                <variation key="heightClass=regular-widthClass=regular" constant="64"/>
+                            <constraint firstItem="53G-qY-SZ5" firstAttribute="top" secondItem="mDa-F1-ucE" secondAttribute="top" constant="8" id="BpY-pW-y7b">
+                                <variation key="heightClass=regular-widthClass=regular" constant="14"/>
                             </constraint>
-                            <constraint firstItem="53G-qY-SZ5" firstAttribute="top" secondItem="mDa-F1-ucE" secondAttribute="top" constant="8" id="BpY-pW-y7b"/>
+                            <constraint firstItem="6qG-Kc-9wb" firstAttribute="leading" secondItem="opD-uD-yGj" secondAttribute="leading" id="D08-rB-RZ8"/>
                             <constraint firstItem="opD-uD-yGj" firstAttribute="leading" secondItem="53G-qY-SZ5" secondAttribute="leading" id="Edc-os-jSp"/>
+                            <constraint firstItem="rrj-Gm-LCJ" firstAttribute="top" secondItem="opD-uD-yGj" secondAttribute="bottom" constant="32" id="FC1-1H-Myj">
+                                <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                            </constraint>
                             <constraint firstItem="rrj-Gm-LCJ" firstAttribute="leading" secondItem="mDa-F1-ucE" secondAttribute="leading" constant="16" id="HZB-YS-r0h">
                                 <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                             </constraint>
-                            <constraint firstItem="opD-uD-yGj" firstAttribute="top" secondItem="53G-qY-SZ5" secondAttribute="bottom" constant="18" id="I2u-gi-sk8">
-                                <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                            <constraint firstItem="opD-uD-yGj" firstAttribute="top" secondItem="53G-qY-SZ5" secondAttribute="bottom" constant="8" id="I2u-gi-sk8">
+                                <variation key="heightClass=regular-widthClass=regular" constant="14"/>
                             </constraint>
                             <constraint firstItem="53G-qY-SZ5" firstAttribute="leading" secondItem="mDa-F1-ucE" secondAttribute="leading" constant="16" id="Qk2-FL-JvT">
                                 <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                             </constraint>
-                            <constraint firstItem="6qG-Kc-9wb" firstAttribute="top" secondItem="tpo-aC-0J4" secondAttribute="bottom" constant="4" id="RRJ-DX-1GA">
-                                <variation key="heightClass=regular-widthClass=regular" constant="8"/>
-                            </constraint>
-                            <constraint firstItem="6qG-Kc-9wb" firstAttribute="leading" secondItem="tpo-aC-0J4" secondAttribute="leading" id="aN6-xG-NYE"/>
-                            <constraint firstItem="6qG-Kc-9wb" firstAttribute="trailing" secondItem="tpo-aC-0J4" secondAttribute="trailing" id="b9R-bU-6Yo"/>
                             <constraint firstItem="mDa-F1-ucE" firstAttribute="trailing" secondItem="53G-qY-SZ5" secondAttribute="trailing" constant="16" id="c8K-IN-Gvo">
                                 <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                             </constraint>
-                            <constraint firstItem="tpo-aC-0J4" firstAttribute="top" secondItem="opD-uD-yGj" secondAttribute="bottom" constant="4" id="cjz-Er-fta"/>
-                            <constraint firstItem="mDa-F1-ucE" firstAttribute="trailing" secondItem="opD-uD-yGj" secondAttribute="trailing" constant="28" id="pZD-d7-9ju"/>
-                            <constraint firstItem="tpo-aC-0J4" firstAttribute="trailing" secondItem="opD-uD-yGj" secondAttribute="trailing" id="uKe-dV-vXL"/>
+                            <constraint firstItem="6qG-Kc-9wb" firstAttribute="trailing" secondItem="opD-uD-yGj" secondAttribute="trailing" id="cTF-bv-d0w"/>
+                            <constraint firstItem="6qG-Kc-9wb" firstAttribute="top" secondItem="opD-uD-yGj" secondAttribute="bottom" constant="4" id="tMS-a3-oEz">
+                                <variation key="heightClass=regular-widthClass=regular" constant="6"/>
+                            </constraint>
+                            <constraint firstItem="opD-uD-yGj" firstAttribute="trailing" secondItem="53G-qY-SZ5" secondAttribute="trailing" id="uO1-VC-YqT"/>
                             <constraint firstItem="mDa-F1-ucE" firstAttribute="trailing" secondItem="rrj-Gm-LCJ" secondAttribute="trailing" constant="16" id="v62-9w-qSv">
                                 <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                             </constraint>
-                            <constraint firstItem="tpo-aC-0J4" firstAttribute="leading" secondItem="opD-uD-yGj" secondAttribute="leading" id="vSg-X2-q9e"/>
-                            <constraint firstItem="tpo-aC-0J4" firstAttribute="top" secondItem="opD-uD-yGj" secondAttribute="bottom" constant="4" id="zJY-pP-V3o"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <connections>
-                        <outlet property="codeLine" destination="tpo-aC-0J4" id="123-kM-x15"/>
                         <outlet property="codeTextField" destination="opD-uD-yGj" id="CSh-mm-dfa"/>
                         <outlet property="confirmButton" destination="rrj-Gm-LCJ" id="kCh-Ru-bXR"/>
                         <outlet property="errorLabel" destination="6qG-Kc-9wb" id="ewd-4V-JTa"/>
@@ -1185,7 +1172,7 @@ ads &amp; trackers</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rsu-bP-0RS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3643" y="4706"/>
+            <point key="canvasLocation" x="3642.0289855072465" y="4705.5803571428569"/>
         </scene>
         <!--Sign In Controller-->
         <scene sceneID="eSG-aF-bm5">
