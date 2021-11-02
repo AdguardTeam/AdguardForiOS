@@ -16,10 +16,10 @@
        along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Foundation
+import UIKit
 import SafariServices
 
-class EmailSignInController: UIViewController, UITextFieldDelegate {
+final class EmailSignInController: UIViewController, UITextFieldDelegate {
 
     // MARK: - properties
 
@@ -34,17 +34,14 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
     private var notificationObserver: Any?
 
     // MARK: - IB outlets
-    @IBOutlet weak var nameEdit: UITextField!
+    @IBOutlet weak var nameEdit: AGTextField!
     @IBOutlet weak var loginButton: RoundRectButton!
-    @IBOutlet weak var nameLine: UIView!
-    @IBOutlet weak var passwordEdit: UITextField!
-    @IBOutlet weak var passwordLine: UIView!
+    @IBOutlet weak var passwordEdit: AGTextField!
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
 
     @IBOutlet var themableLabels: [ThemableLabel]!
-    @IBOutlet var separators: [UIView]!
 
     @IBOutlet weak var lostPasswordButton: UIButton!
 
@@ -75,7 +72,7 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
 
         // setup lost password button
         setupLostPasswordButton()
-
+        passwordEdit.textFieldType = .secure
         nameEdit.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
         updateLoginButton()
 
@@ -131,6 +128,7 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
     }
 
     // MARK: - text field delegate methods
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == nameEdit {
             passwordEdit.becomeFirstResponder()
@@ -143,20 +141,7 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
         return true
     }
 
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        updateLines()
-    }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        updateLines()
-    }
-
     // MARK: - private methods
-
-    func updateLines() {
-        nameLine.backgroundColor = nameEdit.isEditing ? theme.editLineSelectedColor : theme.editLineColor
-        passwordLine.backgroundColor = passwordEdit.isEditing ? theme.editLineSelectedColor : theme.editLineColor
-    }
 
     private func updateLoginButton() {
         loginButton.isEnabled = nameEdit.text?.count ?? 0 > 0
@@ -259,7 +244,6 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
     }
 
     private func loginFailure(_ error: NSError?) {
-
         let signInHelper = SignInFailureHandler(notificationService: notificationService)
         let messages = signInHelper.loginFailure(error, auth2Fa: { [unowned self] in
             self.performSegue(withIdentifier: self.confirm2faSegue, sender: self)
@@ -271,13 +255,13 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
 
         if let message = messages?.errorMessage {
             errorLabel.text = message
-            nameLine.backgroundColor = theme.errorRedColor
-            passwordLine.backgroundColor = theme.errorRedColor
+            nameEdit.borderState = .error
+            passwordEdit.borderState = .error
         }
         else {
             errorLabel.text = ""
-            nameLine.backgroundColor = theme.separatorColor
-            passwordLine.backgroundColor = theme.separatorColor
+            nameEdit.borderState = .enabled
+            passwordEdit.borderState = .enabled
         }
     }
 
@@ -300,12 +284,10 @@ class EmailSignInController: UIViewController, UITextFieldDelegate {
 extension EmailSignInController: ThemableProtocol {
     func updateTheme() {
         view.backgroundColor = theme.backgroundColor
-
+        nameEdit.updateTheme()
+        passwordEdit.updateTheme()
         theme.setupTextField(nameEdit)
         theme.setupTextField(passwordEdit)
-
-        separators.forEach { $0.backgroundColor = theme.separatorColor }
         theme.setupLabels(themableLabels)
-        updateLines()
     }
 }

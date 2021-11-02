@@ -98,7 +98,7 @@ extension AGSearchView: UITextFieldDelegate {
 extension AGSearchView: ThemableProtocol {
     func updateTheme() {
         backgroundColor = themeService.backgroundColor
-        textField.themeChanged()
+        textField.updateTheme()
         textField.tintColor = themeService.grayTextColor
         textField.backgroundColor = themeService.selectedCellColor
         textField.textColor = themeService.grayTextColor

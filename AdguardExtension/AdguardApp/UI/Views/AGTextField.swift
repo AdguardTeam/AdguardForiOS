@@ -36,23 +36,24 @@ class AGTextField: UITextField {
     enum IndicatorState {
         case error, enabled, disabled
 
-        func color(_ themeService: ThemeServiceProtocol) -> UIColor {
+        func borderColor(_ themeService: ThemeServiceProtocol) -> UIColor {
             switch self {
             case .error: return UIColor.AdGuardColor.red
-            case .enabled, .disabled: return themeService.textFieldIndicatorBorderColor
+            case .enabled: return themeService.enabledBorderColor
+            case .disabled: return themeService.disabledBorderColor
             }
         }
     }
 
     // MARK: - Properties
 
-    var leftTextAreaOffset: CGFloat = 0 {
+    var leftTextAreaOffset: CGFloat = 16.0 {
         didSet {
             layoutIfNeeded()
         }
     }
 
-    var rightTextAreaOffset: CGFloat = 0 {
+    var rightTextAreaOffset: CGFloat = 16.0 {
         didSet {
             layoutIfNeeded()
         }
@@ -73,8 +74,16 @@ class AGTextField: UITextField {
 
     // MARK: - Overrided properties
 
-    private weak var _delegate: UITextFieldDelegate?
+    override var placeholder: String? {
+        didSet {
+            attributedPlaceholder = NSAttributedString(
+                string: placeholder ?? "",
+                attributes: [NSAttributedString.Key.foregroundColor: themeService.placeholderColor]
+            )
+        }
+    }
 
+    private weak var _delegate: UITextFieldDelegate?
     override var delegate: UITextFieldDelegate? {
         get {
             return self._delegate
@@ -111,6 +120,7 @@ class AGTextField: UITextField {
         setupBorderStyle(state: .disabled)
         textFieldType = self.isSecureTextEntry ? .secure : .normal
         setupTextFieldRighViewImages()
+        rightView?.isHidden = true
     }
 
     // MARK: - Overrided UITextField methods
@@ -149,8 +159,16 @@ class AGTextField: UITextField {
 
     // MARK: - Public methods
 
-    func themeChanged() {
+    func updateTheme() {
+        backgroundColor = themeService.textFieldBackgroundColor
         setupBorderStyle(state: borderState)
+        rightView?.tintColor = themeService.iconTintColor
+        textColor = themeService.textColor
+        tintColor = themeService.textFieldTintColor
+        attributedPlaceholder = NSAttributedString(
+            string: placeholder ?? "",
+            attributes: [NSAttributedString.Key.foregroundColor: themeService.placeholderColor]
+        )
     }
 
     // MARK: - Private methods
@@ -173,6 +191,7 @@ class AGTextField: UITextField {
 
         self.rightView = button
         self.rightViewMode = .always
+        self.rightView?.isHidden = text == nil || text?.isEmpty == true
     }
 
     private func getRect(forBounds bounds: CGRect) -> CGRect {
@@ -182,12 +201,8 @@ class AGTextField: UITextField {
 
     private func setupBorderStyle(state: IndicatorState) {
         self.layer.cornerRadius = 8
-        let width: CGFloat
-        switch state {
-        case .disabled: width = 0.0
-        case .enabled, .error: width = 1.0
-        }
-        animateBorderStyle(with: state.color(themeService), width: width)
+        self.layer.borderWidth = 1.0
+        animateBorderStyle(with: state.borderColor(themeService))
     }
 
     @objc private final func secureTapped(_ sender: UIButton) {
@@ -200,23 +215,14 @@ class AGTextField: UITextField {
         let _ = delegate?.textField?(self, shouldChangeCharactersIn: NSRange(), replacementString: "")
     }
 
-    private func animateBorderStyle(with color: UIColor, width: CGFloat) {
-        let animationGroup = CAAnimationGroup()
-
+    private func animateBorderStyle(with color: UIColor) {
         let borderColorAnimation: CABasicAnimation = CABasicAnimation(keyPath: "borderColor")
         borderColorAnimation.fromValue = layer.borderColor
         borderColorAnimation.toValue = color.cgColor
+        borderColorAnimation.duration = 0.2
 
-        let borderWidthAnimation: CABasicAnimation = CABasicAnimation(keyPath: "borderWidth")
-        borderWidthAnimation.fromValue = layer.borderWidth
-        borderWidthAnimation.toValue = width
-
-        animationGroup.animations = [borderColorAnimation, borderWidthAnimation]
-        animationGroup.duration = 0.2
-
-        layer.add(animationGroup, forKey: "animation group")
+        layer.add(borderColorAnimation, forKey: "animation")
         layer.borderColor = color.cgColor
-        layer.borderWidth = width
     }
 }
 
@@ -262,4 +268,16 @@ extension AGTextField: UITextFieldDelegate {
         self.borderState = .disabled
         return true
     }
+}
+
+// MARK: AGTextField + themable colors
+
+fileprivate extension ThemeServiceProtocol {
+    var textFieldBackgroundColor: UIColor { themeIsDark ? UIColor.AdGuardColor.lightGray2 : UIColor.AdGuardColor.lightGray6 }
+    var placeholderColor: UIColor { themeIsDark ? UIColor.AdGuardColor.lightGray2 : UIColor.AdGuardColor.lightGray4 }
+    var disabledBorderColor: UIColor { themeIsDark ? UIColor.AdGuardColor.lightGray3 : UIColor.AdGuardColor.lightGray5 }
+    var enabledBorderColor: UIColor { themeIsDark ? UIColor.AdGuardColor.lightGray5 : UIColor.AdGuardColor.lightGray4 }
+    var iconTintColor: UIColor { themeIsDark ? UIColor.AdGuardColor.lightGray5 : UIColor.AdGuardColor.lightGray4 }
+    var textFieldTintColor: UIColor { themeIsDark ? UIColor.AdGuardColor.lightGray7 : UIColor.AdGuardColor.lightGray2 }
+    var textColor: UIColor { themeIsDark ? UIColor.AdGuardColor.lightGray7 : UIColor.AdGuardColor.lightGray2 }
 }

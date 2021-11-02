@@ -30,6 +30,7 @@
                             <variation key="heightClass=regular-widthClass=regular" constant="32"/>
                         </constraint>
                     </constraints>
+                    <color key="tintColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" backgroundImage="cross"/>
                     <connections>
                         <action selector="crossTapped:" destination="-1" eventType="touchUpInside" id="Wy6-ks-1WV"/>

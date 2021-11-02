@@ -203,6 +203,7 @@
                                         <variation key="heightClass=regular-widthClass=regular" constant="32"/>
                                     </constraint>
                                 </constraints>
+                                <color key="tintColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="cross"/>
                                 <connections>
                                     <action selector="cancelButtonTapped:" destination="wQn-A0-Ee1" eventType="touchUpInside" id="CTw-Gj-bsT"/>
@@ -526,6 +527,7 @@
                                                         <variation key="heightClass=regular-widthClass=regular" constant="32"/>
                                                     </constraint>
                                                 </constraints>
+                                                <color key="tintColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" image="cross"/>
                                                 <connections>
                                                     <action selector="closeAction:" destination="eQY-Hl-hIc" eventType="touchUpInside" id="wOx-y6-MFr"/>
