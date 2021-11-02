@@ -1,8 +1,4 @@
 #!/bin/bash
-
-#  clean-script.sh
-#  Adguard
-#
 #
 #   This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
 #   Copyright © Adguard Software Limited. All rights reserved.
@@ -14,12 +10,12 @@
 #
 #   Adguard for iOS is distributed in the hope that it will be useful,
 #   but WITHOUT ANY WARRANTY; without even the implied warranty of
-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 #   GNU General Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License
-#   along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
-
+#   along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
+#
 
 echo "Clean Script Running with ACTION=${ACTION}"
 
