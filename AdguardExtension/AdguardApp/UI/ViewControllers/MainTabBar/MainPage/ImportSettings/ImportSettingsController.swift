@@ -21,7 +21,7 @@ import SafariAdGuardSDK
 
 class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITableViewDataSource, ImportSettingsCellDelegate {
 
-    var settings: Settings?
+    var settings: ImportSettings?
 
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var tableView: UITableView!

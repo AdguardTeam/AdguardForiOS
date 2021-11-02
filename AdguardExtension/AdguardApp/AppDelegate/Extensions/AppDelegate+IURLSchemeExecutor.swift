@@ -41,7 +41,7 @@ extension AppDelegate: IURLSchemeExecutor {
         return self.presentDnsProvidersController(showLaunchScreen: showLaunchScreen, url: urlAbsoluteString)
     }
 
-    func openImportSettingsController(showLaunchScreen: Bool, settings: Settings?) -> Bool {
+    func openImportSettingsController(showLaunchScreen: Bool, settings: ImportSettings?) -> Bool {
         return self.presentImportSettingsController(showLaunchScreen: showLaunchScreen, settings: settings)
     }
 

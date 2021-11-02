@@ -502,7 +502,7 @@ extension AppDelegate {
      Presents DnsModeController
      Returns true on success and false otherwise
      */
-    func presentImportSettingsController(showLaunchScreen: Bool = false, settings: Settings?) -> Bool {
+    func presentImportSettingsController(showLaunchScreen: Bool = false, settings: ImportSettings?) -> Bool {
         guard let tabBar = getMainTabController() else {
             DDLogError("Tab bar is nil")
             return false

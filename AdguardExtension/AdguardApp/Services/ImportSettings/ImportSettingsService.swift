@@ -23,7 +23,7 @@ import SafariAdGuardSDK
 /// Descendant of this protocol applies the import settings
 protocol ImportSettingsServiceProtocol {
     /// Applies the import settings. Return settings import result in completion
-    func applySettings(_ settings: Settings, completion: @escaping (Settings) -> Void)
+    func applySettings(_ settings: ImportSettings, completion: @escaping (ImportSettings) -> Void)
 }
 
 protocol ImportSettingsServiceDelegate {
@@ -64,26 +64,32 @@ final class ImportSettingsService: ImportSettingsServiceProtocol {
 
     // MARK: - Internal methods
 
-    func applySettings(_ settings: Settings, completion: @escaping (Settings) -> Void) {
+    func applySettings(_ settings: ImportSettings, completion: @escaping (ImportSettings) -> Void) {
         workingQueue.async { [weak self] in
-            self?.applySettingsInternal(settings, completion: completion)
+            guard let self = self else {
+                completion(settings)
+                return
+            }
+
+            let result = self.applySettingsInternal(settings)
+            completion(result)
         }
     }
 
     // MARK: - Private methods
 
-    private func applySettingsInternal(_ settings: Settings, completion: (Settings) -> Void) {
+    private func applySettingsInternal(_ settings: ImportSettings) -> ImportSettings {
         var resultSettings = settings
 
         // Safari protection imports
 
-        let importSafariFiltersResult = safariImportHelper.importSafariFilters(settings.defaultCbFilters ?? [], override: settings.overrideCbFilters ?? false)
+        let importSafariFiltersResult = safariImportHelper.importSafariFilters(settings.defaultSafariFilters ?? [], override: settings.overrideDefaultSafariFilters ?? false)
         let importSafariCustomFiltersResult = importSafariCustomFilters(settings: settings)
         let importSafariBlocklistResult = importSafariBlocklistRules(settings: settings)
 
-        resultSettings.defaultCbFilters = importSafariFiltersResult
-        resultSettings.customCbFilters = importSafariCustomFiltersResult
-        resultSettings.userRulesStatus = importSafariBlocklistResult
+        resultSettings.defaultSafariFilters = importSafariFiltersResult
+        resultSettings.customSafariFilters = importSafariCustomFiltersResult
+        resultSettings.importSafariBlocklistRulesStatus = importSafariBlocklistResult
 
         if !importSafariFiltersResult.isEmpty ||
             !importSafariCustomFiltersResult.isEmpty ||
@@ -92,12 +98,14 @@ final class ImportSettingsService: ImportSettingsServiceProtocol {
         }
 
         let importLicenseResult = importLicense(settings: settings)
-        resultSettings.licenseStatus = importLicenseResult
+        resultSettings.importLicenseStatus = importLicenseResult
 
-        // Import DNS settings only if app is PRO or if import license settings was successful
-        guard importLicenseResult == .successful || importLicenseResult == .enabled else {
-            completion(settings)
-            return
+
+        // Import DNS settings only if application PRO or successfully logged in with license and login status is not .unsuccessful
+        let availableStatus = importLicenseResult == .notImported || importLicenseResult == .successful
+        let isLicensePurchased = purchaseService.isProPurchased || Bundle.main.isPro
+        guard availableStatus && isLicensePurchased else {
+            return resultSettings
         }
 
         // DNS Imports
@@ -107,8 +115,8 @@ final class ImportSettingsService: ImportSettingsServiceProtocol {
         let importDnsRulesResult = importDnsRules(settings: settings)
 
         resultSettings.dnsFilters = importDnsFiltersResult
-        resultSettings.dnsStatus = importDnsServerResult
-        resultSettings.dnsRulesStatus = importDnsRulesResult
+        resultSettings.importDnsServerStatus = importDnsServerResult
+        resultSettings.importDnsBlocklistRulesStatus = importDnsRulesResult
 
         if !importDnsFiltersResult.isEmpty ||
             importDnsRulesResult == .successful ||
@@ -116,27 +124,28 @@ final class ImportSettingsService: ImportSettingsServiceProtocol {
             vpnManager.updateSettings(completion: nil)
         }
 
-        completion(resultSettings)
+        return resultSettings
     }
 
     // MARK: - Safari protection imports
 
-    private func importSafariBlocklistRules(settings: Settings) -> ImportSettingStatus {
-        if settings.userRulesStatus == .enabled {
-            let result = safariImportHelper.importSafariBlocklistRules(settings.userRules ?? [], override: settings.overrideUserRules ?? false)
+    private func importSafariBlocklistRules(settings: ImportSettings) -> ImportSettings.ImportSettingStatus {
+
+        if settings.isSafariBlocklistRulesImportEnabled {
+            let result = safariImportHelper.importSafariBlocklistRules(settings.safariBlocklistRules ?? [], override: settings.overrideSafariBlocklistRules ?? false)
             return result ? .successful : .unsuccessful
         }
-        return settings.userRulesStatus
+        return settings.importSafariBlocklistRulesStatus
     }
 
-    private func importSafariCustomFilters(settings: Settings) -> [CustomCBFilterSettings] {
-        let uniqueImportCustomSafariFilters = settings.customCbFilters?.uniqueElements { $0.url } ?? []
+    private func importSafariCustomFilters(settings: ImportSettings) -> [ImportSettings.FilterSettings] {
+        let uniqueImportCustomSafariFilters = settings.customSafariFilters?.uniqueElements { $0.url } ?? []
         let customFilters = safariProtection.groups.first { $0.groupType == .custom }?.filters ?? []
-        let overrideCustomFilters = settings.overrideCustomFilters ?? false
+        let overrideCustomFilters = settings.overrideCustomSafariFilters ?? false
 
-        guard let uniqueCustomSafariFiltersSettings = collectUniqueFiltersToImport(filters: customFilters, filtersToImport: uniqueImportCustomSafariFilters, override: overrideCustomFilters) as? [CustomCBFilterSettings] else { return [] }
+        let uniqueCustomSafariFiltersSettings = collectUniqueFiltersToImport(filters: customFilters, filtersToImport: uniqueImportCustomSafariFilters, override: overrideCustomFilters)
 
-        var resultSettings = [CustomCBFilterSettings]()
+        var resultSettings = [ImportSettings.FilterSettings]()
         let group = DispatchGroup()
         group.enter()
         safariImportHelper.importCustomSafariFilters(uniqueCustomSafariFiltersSettings, override: overrideCustomFilters) { result in
@@ -150,14 +159,14 @@ final class ImportSettingsService: ImportSettingsServiceProtocol {
     // MARK: - DNS Imports
 
     // DNS filters
-    private func importDnsFilters(settings: Settings) -> [DnsFilterSettings] {
+    private func importDnsFilters(settings: ImportSettings) -> [ImportSettings.FilterSettings] {
         let uniqueImportDnsFilters = settings.dnsFilters?.uniqueElements { $0.url } ?? []
         let dnsFilters = dnsProtection.filters
         let overrideDnsFilters = settings.overrideDnsFilters ?? false
 
-        guard let uniqueCustomDnsFilterSettings = collectUniqueFiltersToImport(filters: dnsFilters, filtersToImport: uniqueImportDnsFilters, override: overrideDnsFilters) as? [DnsFilterSettings] else { return [] }
+        let uniqueCustomDnsFilterSettings = collectUniqueFiltersToImport(filters: dnsFilters, filtersToImport: uniqueImportDnsFilters, override: overrideDnsFilters)
 
-        var resultSettings = [DnsFilterSettings]()
+        var resultSettings = [ImportSettings.FilterSettings]()
         let group = DispatchGroup()
         group.enter()
         dnsImportHelper.importDnsFilters(uniqueCustomDnsFilterSettings, override: overrideDnsFilters) { result in
@@ -169,30 +178,30 @@ final class ImportSettingsService: ImportSettingsServiceProtocol {
     }
 
     // DNS server
-    private func importDnsServer(settings: Settings) -> ImportSettingStatus {
+    private func importDnsServer(settings: ImportSettings) -> ImportSettings.ImportSettingStatus {
         if let dnsServerId = settings.dnsServerId {
-            if settings.dnsStatus == .enabled {
+            if settings.isDnsServerImportEnabled {
                 let result = dnsImportHelper.importDnsServer(serverId: dnsServerId)
                 return result ? .successful : .unsuccessful
             }
         }
-        return settings.dnsStatus
+        return settings.importDnsServerStatus
     }
 
     // DNS Blocklist rules
-    private func importDnsRules(settings: Settings) -> ImportSettingStatus {
-        guard let dnsUserRules = settings.dnsUserRules else { return settings.dnsRulesStatus }
-        if settings.dnsRulesStatus == .enabled {
-            let overrideDnsUserRules = settings.overrideDnsUserRules ?? false
+    private func importDnsRules(settings: ImportSettings) -> ImportSettings.ImportSettingStatus {
+        guard let dnsUserRules = settings.dnsBlocklistRules else { return settings.importDnsBlocklistRulesStatus }
+        if settings.isDnsBlocklistRulesImportEnabled {
+            let overrideDnsUserRules = settings.overrideDnsBlocklistRules ?? false
             let rulesToImport = dnsUserRules.map { UserRule(ruleText: $0) }
             let result = dnsImportHelper.importDnsBlocklistRules(rulesToImport, override: overrideDnsUserRules)
             return result ? .successful : .unsuccessful
         }
-        return settings.dnsRulesStatus
+        return settings.importDnsBlocklistRulesStatus
     }
 
     // Return unique filters
-    private func collectUniqueFiltersToImport(filters: [FilterMetaProtocol], filtersToImport: [CustomFilterSettingsProtocol], override: Bool) -> [CustomFilterSettingsProtocol] {
+    private func collectUniqueFiltersToImport(filters: [FilterMetaProtocol], filtersToImport: [ImportSettings.FilterSettings], override: Bool) -> [ImportSettings.FilterSettings] {
         return filtersToImport.compactMap { filterToImport in
             if override || !filters.contains(where: { $0.filterDownloadPage == filterToImport.url }) {
                 return filterToImport
@@ -224,14 +233,13 @@ final class ImportSettingsService: ImportSettingsServiceProtocol {
 
     // MARK: - License import
 
-    private func importLicense(settings: Settings) -> ImportSettingStatus {
-        guard !Bundle.main.isPro else { return .enabled }
-        guard settings.licenseStatus == .enabled else { return .disabled }
+    private func importLicense(settings: ImportSettings) -> ImportSettings.ImportSettingStatus {
+        guard settings.isLicenseImportEnabled && !(Bundle.main.isPro || purchaseService.isProPurchased) else { return .notImported }
         guard let license = settings.license else { return .unsuccessful }
 
         let group = DispatchGroup()
 
-        var result: ImportSettingStatus = .enabled
+        var result: ImportSettings.ImportSettingStatus = .unsuccessful
         group.enter()
         purchaseService.login(withLicenseKey: license) { loginResult in
             result = loginResult ? .successful : .unsuccessful

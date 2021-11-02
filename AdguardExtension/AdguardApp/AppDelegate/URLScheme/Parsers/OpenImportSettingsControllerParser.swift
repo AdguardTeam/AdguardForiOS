@@ -27,7 +27,12 @@ struct OpenImportSettingsControllerParser: IURLSchemeParametersParser {
     func parse(_ url: URL) -> Bool {
         guard let json = url.parseUrl().params?["json"], !json.isEmpty else { return false }
         let parser = SettingsParser()
-        let settings = parser.parse(querry: json)
-        return executor.openImportSettingsController(showLaunchScreen: true, settings: settings)
+        do {
+            let settings = try parser.parse(query: json)
+            return executor.openImportSettingsController(showLaunchScreen: true, settings: settings)
+        } catch {
+            DDLogError("(OpenImportSettingsControllerParser) - parse; Error occurred while parsing json = \(json)")
+            return false
+        }
     }
 }

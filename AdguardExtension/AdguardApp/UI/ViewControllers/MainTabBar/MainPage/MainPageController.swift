@@ -131,7 +131,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
     var stateFromWidget: Bool?
 
-    var importSettings: Settings?
+    var importSettings: ImportSettings?
 
     // MARK: - Variables
 

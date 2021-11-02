@@ -75,6 +75,9 @@
 		244AFB792704A4CA00D628E6 /* ContentSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244AFB782704A4CA00D628E6 /* ContentSizedTableView.swift */; };
 		244AFB7A2704A4CA00D628E6 /* ContentSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244AFB782704A4CA00D628E6 /* ContentSizedTableView.swift */; };
 		24557DF725EFD4AE00BC5B26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24557DF625EFD4AE00BC5B26 /* AppDelegate.swift */; };
+		2455B21127317FA9002B86D7 /* ImportSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2455B21027317FA9002B86D7 /* ImportSettings.swift */; };
+		2455B21227317FA9002B86D7 /* ImportSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2455B21027317FA9002B86D7 /* ImportSettings.swift */; };
+		2455B21327317FA9002B86D7 /* ImportSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2455B21027317FA9002B86D7 /* ImportSettings.swift */; };
 		247432DE261731C00025C7B8 /* UIAlerController+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247432DD261731C00025C7B8 /* UIAlerController+Style.swift */; };
 		247432DF261731C00025C7B8 /* UIAlerController+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247432DD261731C00025C7B8 /* UIAlerController+Style.swift */; };
 		247521F22594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */; };
@@ -2339,6 +2342,7 @@
 		244419832614C1BC009555F3 /* String+NSRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+NSRange.swift"; sourceTree = "<group>"; };
 		244AFB782704A4CA00D628E6 /* ContentSizedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizedTableView.swift; sourceTree = "<group>"; };
 		24557DF625EFD4AE00BC5B26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2455B21027317FA9002B86D7 /* ImportSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportSettings.swift; sourceTree = "<group>"; };
 		247432DD261731C00025C7B8 /* UIAlerController+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlerController+Style.swift"; sourceTree = "<group>"; };
 		247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+CustomSchemeURLParserProtocol.swift"; sourceTree = "<group>"; };
 		247CB5042600A3220047974C /* URLSchemeParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSchemeParser.swift; sourceTree = "<group>"; };
@@ -3964,6 +3968,8 @@
 		2487C013272AECB000449BC2 /* ImportSettings */ = {
 			isa = PBXGroup;
 			children = (
+				D09E2D2F255D6AFF002D6BC0 /* SettingsParser.swift */,
+				2455B21027317FA9002B86D7 /* ImportSettings.swift */,
 				D00E448825650084002DDE98 /* ImportSettingsService.swift */,
 				2487C016272AECD900449BC2 /* ImportDNSSettingsHelper.swift */,
 				2487C018272AECE800449BC2 /* ImportSafariProtectionSettingsHelper.swift */,
@@ -6349,7 +6355,6 @@
 				7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */,
 				D0A29F8823E0334000D974CF /* RateAppService.swift */,
 				D0F9117521303E4C006DF0D3 /* ServiceLocator.swift */,
-				D09E2D2F255D6AFF002D6BC0 /* SettingsParser.swift */,
 				D09E2BCE25558075002D6BC0 /* SetappService.swift */,
 				7E1104F822DE27C700720501 /* StartupService.swift */,
 				D09E9643216CB14A00313AB1 /* ThemeService.swift */,
@@ -8190,6 +8195,7 @@
 				249606CF258B831100C747BA /* SocialSignInButton.swift in Sources */,
 				D00E441C2562A4B0002DDE98 /* ImportSettingsCell.swift in Sources */,
 				D0B545A82435D640002F0AEC /* DnsSettingsController.swift in Sources */,
+				2455B21227317FA9002B86D7 /* ImportSettings.swift in Sources */,
 				24B3DAF526F8C51600A66C0F /* DnsProviderActionCell.swift in Sources */,
 				7E9082092549D5430048C4B0 /* HowToSetupController.swift in Sources */,
 				D0D0CAFE268B058700AD427E /* ABECRequest.m in Sources */,
@@ -8635,6 +8641,7 @@
 				24D9225B2604B28B002F368B /* AppDelegate+UserNotifications.swift in Sources */,
 				D09E2A98254AC0D5002D6BC0 /* Bundle+Utils.swift in Sources */,
 				7E70266326DD29A500F8FC25 /* UserRulesTableModelProtocol.swift in Sources */,
+				2455B21127317FA9002B86D7 /* ImportSettings.swift in Sources */,
 				D09E9646216CE10F00313AB1 /* ThemableImageView.swift in Sources */,
 				7E822C0D2435EDD30015B4D0 /* Rule.swift in Sources */,
 				7E51C1EC2729375D006D7411 /* UserRulesEditorController.swift in Sources */,
@@ -8705,6 +8712,7 @@
 				7E18952723FD8E6D006FB241 /* RateAppService.swift in Sources */,
 				249E10FE2600D380003A5FBD /* OpenUserFilterControllerParser.swift in Sources */,
 				D0EFBF5E22BB6BAC00D2D391 /* LoginResponseParser.swift in Sources */,
+				2455B21327317FA9002B86D7 /* ImportSettings.swift in Sources */,
 				7E8576632435F1F70055F63D /* RuleLabel.swift in Sources */,
 				24F67F5A26E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift in Sources */,
 				B26B92872719B74300F1D482 /* SharedResources+Theme.swift in Sources */,

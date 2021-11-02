@@ -37,7 +37,7 @@ final class ImportSafariProtectionSettingsHelper {
     // MARK: Internal methods
 
     /// Imports Safari filters. If **override** is true then all filters and groups will be disabled except new setted filters. If group contain enabled filters it will be enabled too. Return import result
-    func importSafariFilters(_ filtersToImport: [DefaultCBFilterSettings], override: Bool)-> [DefaultCBFilterSettings] {
+    func importSafariFilters(_ filtersToImport: [ImportSettings.DefaultSafariFilterSettings], override: Bool) -> [ImportSettings.DefaultSafariFilterSettings] {
         workingQueue.sync {
             if override { disableAllSafariFiltersAndGroups() }
 
@@ -77,7 +77,7 @@ final class ImportSafariProtectionSettingsHelper {
     }
 
     /// Imports custom Safari filters. If **override** is true then all old filters will be replaced with new ones. Returns import result in completion
-    func importCustomSafariFilters(_ filters: [CustomCBFilterSettings], override: Bool, completion: @escaping ([CustomCBFilterSettings]) -> Void) {
+    func importCustomSafariFilters(_ filters: [ImportSettings.FilterSettings], override: Bool, completion: @escaping ([ImportSettings.FilterSettings]) -> Void) {
         workingQueue.async { [weak self] in
             guard let self = self else {
                 DDLogError("(ImportSafariProtectionSettingsHelper) - importCustomSafariFilters; Missing self")
@@ -88,7 +88,7 @@ final class ImportSafariProtectionSettingsHelper {
             if override { self.removeAllCustomSafariFilters() }
 
             let group = DispatchGroup()
-            var result = [CustomCBFilterSettings]()
+            var result = [ImportSettings.FilterSettings]()
 
             filters.forEach { filter in
                 group.enter()
@@ -112,9 +112,9 @@ final class ImportSafariProtectionSettingsHelper {
 
     // MARK: - Private methods
 
-    private func subscribe(_ filter: CustomCBFilterSettings, completion: @escaping (CustomCBFilterSettings) -> Void) {
+    private func subscribe(_ filter: ImportSettings.FilterSettings, completion: @escaping (ImportSettings.FilterSettings) -> Void) {
         var filter = filter
-        if filter.status == .enabled {
+        if filter.isImportEnabled {
             addCustomFilter(filter) { success in
                 filter.status = success ? .successful : .unsuccessful
                 completion(filter)
@@ -124,7 +124,7 @@ final class ImportSafariProtectionSettingsHelper {
         }
     }
 
-    private func addCustomFilter(_ filter: CustomCBFilterSettings, completion: @escaping (_ success: Bool) -> Void) {
+    private func addCustomFilter(_ filter: ImportSettings.FilterSettings, completion: @escaping (_ success: Bool) -> Void) {
         guard let url = URL(string: filter.url) else {
             DDLogError("(ImportSafariProtectionSettingsHelper) - subscribeSafariCustomFilter; Incorrect URL string = \(filter.url)")
             self.completionQueue.async { completion(false) }
@@ -151,11 +151,14 @@ final class ImportSafariProtectionSettingsHelper {
         }
     }
 
-    private func importSafariFiltersInternal(_ filtersToImport: [DefaultCBFilterSettings], allFilters: [SafariGroup.Filter]) -> [DefaultCBFilterSettings] {
-        var resultFilters: [DefaultCBFilterSettings] = []
+    private func importSafariFiltersInternal(
+        _ filtersToImport: [ImportSettings.DefaultSafariFilterSettings],
+        allFilters: [SafariGroup.Filter]) -> [ImportSettings.DefaultSafariFilterSettings] {
+
+        var resultFilters: [ImportSettings.DefaultSafariFilterSettings] = []
 
         for var filterToImport in filtersToImport {
-            if filterToImport.status == .enabled {
+            if filterToImport.isImportEnabled {
                 if let filter = allFilters.first(where: { $0.filterId == filterToImport.id }) {
                     filterToImport.status = setFilter(filter: filter, enabled: filterToImport.enable)
                 } else {
@@ -168,7 +171,7 @@ final class ImportSafariProtectionSettingsHelper {
         return resultFilters
     }
 
-    private func setFilter(filter: SafariGroup.Filter, enabled: Bool) -> ImportSettingStatus {
+    private func setFilter(filter: SafariGroup.Filter, enabled: Bool) -> ImportSettings.ImportSettingStatus {
         do {
             try safariProtection.setFilter(withId: filter.filterId, groupId: filter.group.groupId, enabled: enabled)
             DDLogInfo("(ImportSafariProtectionSettingsHelper) - setFilter; Successfully set enable to \(enabled) for filter with id = \(filter.filterId) for group id = \(filter.group.groupId)")
@@ -191,7 +194,7 @@ final class ImportSafariProtectionSettingsHelper {
     }
 
     /// Return set of GroupType that must be enabled
-    private func collectGroupsToEnable(_ filtersToImport: [DefaultCBFilterSettings]) -> Set<SafariGroup.GroupType> {
+    private func collectGroupsToEnable(_ filtersToImport: [ImportSettings.DefaultSafariFilterSettings]) -> Set<SafariGroup.GroupType> {
         var setOfGroups = Set<SafariGroup.GroupType>()
         safariProtection.groups.forEach { group in
             filtersToImport.forEach { filter in

@@ -82,7 +82,7 @@ final class ImportDNSSettingsHelper {
 
     /// Imports DNS filters.
     /// If **override** is true then all old filters will be replaced with new ones. Returns import result
-    func importDnsFilters(_ filters: [DnsFilterSettings], override: Bool, completion: @escaping ([DnsFilterSettings]) -> Void) {
+    func importDnsFilters(_ filters: [ImportSettings.FilterSettings], override: Bool, completion: @escaping ([ImportSettings.FilterSettings]) -> Void) {
         workingQueue.async { [weak self] in
             guard let self = self else {
                 DDLogError("(ImportDNSSettingsHelper) - importDnsFilters; Missing self")
@@ -92,7 +92,7 @@ final class ImportDNSSettingsHelper {
 
             if override { self.removeAllDnsFilters() }
 
-            var resultDnsFilters: [DnsFilterSettings] = []
+            var resultDnsFilters: [ImportSettings.FilterSettings] = []
             let group = DispatchGroup()
 
             filters.forEach { filter in
@@ -110,9 +110,9 @@ final class ImportDNSSettingsHelper {
 
     // MARK: - Private methods
 
-    private func subscribe(_ filter: DnsFilterSettings, completion: @escaping (DnsFilterSettings) -> Void) {
+    private func subscribe(_ filter: ImportSettings.FilterSettings, completion: @escaping (ImportSettings.FilterSettings) -> Void) {
         var filter = filter
-        if filter.status == .enabled {
+        if filter.isImportEnabled {
             addDnsFilter(filter) { success in
                 filter.status = success ? .successful : .unsuccessful
                 completion(filter)
@@ -122,7 +122,7 @@ final class ImportDNSSettingsHelper {
         }
     }
 
-    private func addDnsFilter(_ filter: DnsFilterSettings, completion: @escaping (_ success: Bool) -> Void) {
+    private func addDnsFilter(_ filter: ImportSettings.FilterSettings, completion: @escaping (_ success: Bool) -> Void) {
         guard let url = URL(string: filter.url) else {
             DDLogError("(ImportDNSSettingsHelper) - subscribeDnsFilter; Invalid URL string: \(filter.url)")
             self.completionQueue.async { completion(false) }

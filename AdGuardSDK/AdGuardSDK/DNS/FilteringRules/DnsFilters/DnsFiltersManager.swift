@@ -151,12 +151,6 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
         }
     }
 
-//    func addFilter() {
-//        workingQueue.async {
-//            completion(addFIlterSync())
-//        }
-//    }
-
     func addFilter(withName name: String, url: URL, isEnabled: Bool, onFilterAdded: @escaping (Error?) -> Void) {
         workingQueue.async { [weak self] in
             guard let self = self else {
@@ -167,7 +161,6 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
 
             let error = self.addFilterSync(withName: name, url: url, isEnabled: isEnabled)
             self.completionQueue.async { onFilterAdded(error) }
-            return
         }
     }
 
@@ -334,9 +327,9 @@ extension DnsFiltersManager {
         case dnsFilterAbsent(filterId: Int)
 
         var debugDescription: String {
-                switch self {
-                case .dnsFilterAbsent(let filterId): return "DNS filter with id=\(filterId) doesn't exist"
-                }
+            switch self {
+            case .dnsFilterAbsent(let filterId): return "DNS filter with id=\(filterId) doesn't exist"
+            }
         }
     }
 }
