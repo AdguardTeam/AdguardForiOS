@@ -26,10 +26,6 @@ protocol ImportSettingsServiceProtocol {
     func applySettings(_ settings: ImportSettings, completion: @escaping (ImportSettings) -> Void)
 }
 
-protocol ImportSettingsServiceDelegate {
-    func applySettingsFinished()
-}
-
 /// This class is responsible for applying the imported settings
 final class ImportSettingsService: ImportSettingsServiceProtocol {
 
