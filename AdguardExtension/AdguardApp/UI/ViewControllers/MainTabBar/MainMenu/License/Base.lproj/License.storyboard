@@ -871,19 +871,6 @@ ads &amp; trackers</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 </variation>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ltL-YJ-ZeT">
-                                                <rect key="frame" x="368" y="154" width="30" height="29"/>
-                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
-                                                <state key="normal">
-                                                    <color key="titleColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <variation key="heightClass=regular-widthClass=regular">
-                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="20"/>
-                                                </variation>
-                                                <connections>
-                                                    <action selector="recoverAction:" destination="YAD-0P-paW" eventType="touchUpInside" id="Yww-3m-Fhd"/>
-                                                </connections>
-                                            </button>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kyL-RQ-Vt7" userLabel="Password Edit" customClass="AGTextField" customModule="Adguard" customModuleProvider="target">
                                                 <rect key="frame" x="16" y="183" width="382" height="40"/>
                                                 <constraints>
@@ -917,7 +904,7 @@ ads &amp; trackers</string>
                                                         <variation key="heightClass=regular-widthClass=regular" constant="60"/>
                                                     </constraint>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                 <state key="normal" title="Login">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -934,7 +921,7 @@ ads &amp; trackers</string>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="needsToDisplayIndicator" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <variation key="heightClass=regular-widthClass=regular">
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                                                 </variation>
                                                 <connections>
                                                     <action selector="loginAction:" destination="YAD-0P-paW" eventType="touchUpInside" id="iVN-iN-ZPI"/>
@@ -948,7 +935,28 @@ ads &amp; trackers</string>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                                </variation>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ltL-YJ-ZeT">
+                                                <rect key="frame" x="16" y="327" width="382" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="Gbs-5r-i2B">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="28"/>
+                                                    </constraint>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="16"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="24"/>
+                                                </variation>
+                                                <connections>
+                                                    <action selector="recoverAction:" destination="YAD-0P-paW" eventType="touchUpInside" id="Yww-3m-Fhd"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -956,9 +964,8 @@ ads &amp; trackers</string>
                                             <constraint firstItem="J8s-sG-FKu" firstAttribute="top" secondItem="7WT-eT-xqR" secondAttribute="top" id="0oT-pN-IoG"/>
                                             <constraint firstItem="P6N-OK-fHG" firstAttribute="trailing" secondItem="LJj-cc-Ko5" secondAttribute="trailing" id="15m-eE-RIB"/>
                                             <constraint firstItem="kyL-RQ-Vt7" firstAttribute="leading" secondItem="3iu-SA-2Ay" secondAttribute="leading" id="1wJ-Hs-qaG"/>
-                                            <constraint firstItem="ltL-YJ-ZeT" firstAttribute="centerY" secondItem="P6N-OK-fHG" secondAttribute="centerY" id="6Tg-O3-08d"/>
-                                            <constraint firstItem="bUa-fF-AXO" firstAttribute="top" secondItem="kyL-RQ-Vt7" secondAttribute="bottom" constant="40" id="Dgn-ZA-PcE">
-                                                <variation key="heightClass=regular-widthClass=regular" constant="64"/>
+                                            <constraint firstItem="bUa-fF-AXO" firstAttribute="top" secondItem="kyL-RQ-Vt7" secondAttribute="bottom" constant="32" id="Dgn-ZA-PcE">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="48"/>
                                             </constraint>
                                             <constraint firstItem="LJj-cc-Ko5" firstAttribute="leading" secondItem="7WT-eT-xqR" secondAttribute="leading" constant="16" id="EKD-vF-QjY">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="24"/>
@@ -966,10 +973,13 @@ ads &amp; trackers</string>
                                             <constraint firstItem="2g1-8V-xSB" firstAttribute="top" secondItem="kyL-RQ-Vt7" secondAttribute="bottom" constant="4" id="G9a-je-5sa">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="6"/>
                                             </constraint>
-                                            <constraint firstItem="kyL-RQ-Vt7" firstAttribute="top" secondItem="P6N-OK-fHG" secondAttribute="bottom" constant="4" id="GoV-dP-saG">
-                                                <variation key="heightClass=regular-widthClass=regular" constant="6"/>
+                                            <constraint firstItem="kyL-RQ-Vt7" firstAttribute="top" secondItem="P6N-OK-fHG" secondAttribute="bottom" constant="8" id="GoV-dP-saG">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="14"/>
                                             </constraint>
                                             <constraint firstAttribute="trailing" secondItem="bUa-fF-AXO" secondAttribute="trailing" constant="16" id="HFB-UA-Dtd">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                            </constraint>
+                                            <constraint firstAttribute="trailing" secondItem="ltL-YJ-ZeT" secondAttribute="trailing" constant="16" id="ICh-fJ-JDC">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                             </constraint>
                                             <constraint firstAttribute="trailing" secondItem="LJj-cc-Ko5" secondAttribute="trailing" constant="16" id="Lae-yo-lBx">
@@ -980,19 +990,24 @@ ads &amp; trackers</string>
                                             <constraint firstItem="P6N-OK-fHG" firstAttribute="top" secondItem="3iu-SA-2Ay" secondAttribute="bottom" constant="40" id="Uv8-xk-zRq">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="64"/>
                                             </constraint>
-                                            <constraint firstItem="LJj-cc-Ko5" firstAttribute="top" secondItem="J8s-sG-FKu" secondAttribute="bottom" constant="32" id="Y5d-d7-u7P"/>
+                                            <constraint firstAttribute="bottom" secondItem="ltL-YJ-ZeT" secondAttribute="bottom" constant="36" id="XmK-OS-FXf"/>
+                                            <constraint firstItem="LJj-cc-Ko5" firstAttribute="top" secondItem="J8s-sG-FKu" secondAttribute="bottom" constant="24" id="Y5d-d7-u7P">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="96"/>
+                                            </constraint>
                                             <constraint firstItem="3iu-SA-2Ay" firstAttribute="leading" secondItem="LJj-cc-Ko5" secondAttribute="leading" id="bU4-11-Ied"/>
-                                            <constraint firstItem="3iu-SA-2Ay" firstAttribute="top" secondItem="LJj-cc-Ko5" secondAttribute="bottom" constant="4" id="iJ8-4m-B7y">
-                                                <variation key="heightClass=regular-widthClass=regular" constant="6"/>
+                                            <constraint firstItem="ltL-YJ-ZeT" firstAttribute="leading" secondItem="7WT-eT-xqR" secondAttribute="leading" constant="16" id="dCI-hr-e2N">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                            </constraint>
+                                            <constraint firstItem="3iu-SA-2Ay" firstAttribute="top" secondItem="LJj-cc-Ko5" secondAttribute="bottom" constant="8" id="iJ8-4m-B7y">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="14"/>
                                             </constraint>
                                             <constraint firstAttribute="trailing" secondItem="J8s-sG-FKu" secondAttribute="trailing" constant="24" id="iNM-Cy-uvE"/>
                                             <constraint firstItem="P6N-OK-fHG" firstAttribute="leading" secondItem="LJj-cc-Ko5" secondAttribute="leading" id="j3Y-69-bve"/>
                                             <constraint firstItem="bUa-fF-AXO" firstAttribute="leading" secondItem="7WT-eT-xqR" secondAttribute="leading" constant="16" id="kBB-qt-UBT">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                             </constraint>
+                                            <constraint firstItem="ltL-YJ-ZeT" firstAttribute="top" secondItem="bUa-fF-AXO" secondAttribute="bottom" constant="32" id="luL-Hk-6CU"/>
                                             <constraint firstItem="J8s-sG-FKu" firstAttribute="leading" secondItem="7WT-eT-xqR" secondAttribute="leading" constant="24" id="odl-fV-dzD"/>
-                                            <constraint firstAttribute="bottom" secondItem="bUa-fF-AXO" secondAttribute="bottom" constant="36" id="x4e-qU-S0G"/>
-                                            <constraint firstItem="ltL-YJ-ZeT" firstAttribute="trailing" secondItem="LJj-cc-Ko5" secondAttribute="trailing" id="yNy-QQ-2hw"/>
                                             <constraint firstItem="kyL-RQ-Vt7" firstAttribute="trailing" secondItem="3iu-SA-2Ay" secondAttribute="trailing" id="zTf-d0-ZeX"/>
                                         </constraints>
                                     </view>

@@ -59,6 +59,18 @@ class AGTextField: UITextField {
         }
     }
 
+    var bottomTextAreaOffset: CGFloat = 12.0 {
+        didSet {
+            layoutIfNeeded()
+        }
+    }
+
+    var topTextAreaOffset: CGFloat = 12.0 {
+        didSet {
+            layoutIfNeeded()
+        }
+    }
+
     var textFieldType: TextSecurityType = .normal {
         didSet {
             self.isSecureTextEntry = textFieldType == .secure
@@ -195,7 +207,7 @@ class AGTextField: UITextField {
     }
 
     private func getRect(forBounds bounds: CGRect) -> CGRect {
-        let edge = UIEdgeInsets(top: 0, left: leftTextAreaOffset, bottom: 0, right: rightTextAreaOffset)
+        let edge = UIEdgeInsets(top: topTextAreaOffset, left: leftTextAreaOffset, bottom: bottomTextAreaOffset, right: rightTextAreaOffset)
         return bounds.inset(by: edge)
     }
 

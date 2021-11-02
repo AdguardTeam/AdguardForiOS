@@ -141,6 +141,26 @@ final class EmailSignInController: UIViewController, UITextFieldDelegate {
         return true
     }
 
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+
+        if textField == nameEdit {
+            nameEdit.rightView?.isHidden = updatedText.isEmpty
+        }
+        nameEdit.borderState = .enabled
+
+        if textField == passwordEdit {
+            passwordEdit.rightView?.isHidden = updatedText.isEmpty
+        }
+        passwordEdit.borderState = .enabled
+
+        errorLabel.text = ""
+
+        return true
+    }
+
     // MARK: - private methods
 
     private func updateLoginButton() {
@@ -226,7 +246,6 @@ final class EmailSignInController: UIViewController, UITextFieldDelegate {
                 proController?.getProControllerDelegate?.getProControllerClosed()
             }
         }
-
     }
 
     private func premiumExpired() {
