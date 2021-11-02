@@ -20,9 +20,9 @@ import SharedAdGuardSDK
 import DnsAdGuardSDK
 import SafariAdGuardSDK
 
-/// Descendant of this protocol applying import settings
+/// Descendant of this protocol applies the import settings
 protocol ImportSettingsServiceProtocol {
-    /// Applyes import settings. Return settings import result in completion
+    /// Applies the import settings. Return settings import result in completion
     func applySettings(_ settings: Settings, completion: @escaping (Settings) -> Void)
 }
 
@@ -33,16 +33,22 @@ protocol ImportSettingsServiceDelegate {
 /// This class is responsible for applying the imported settings
 final class ImportSettingsService: ImportSettingsServiceProtocol {
 
+    // MARK: - Services
+
     private let dnsProvidersManager: DnsProvidersManagerProtocol
     private let safariProtection: SafariProtectionProtocol
     private let dnsProtection: DnsProtectionProtocol
     private let vpnManager: VpnManagerProtocol
     private let purchaseService: PurchaseServiceProtocol
 
+    //MARK: - Private properties
+
     private let safariImportHelper: ImportSafariProtectionSettingsHelper
     private let dnsImportHelper: ImportDNSSettingsHelper
 
     private let workingQueue = DispatchQueue(label: "AdGuardApp.ImportSettingsQueue")
+
+    // MARK: - Init
 
     init(dnsProvidersManager: DnsProvidersManagerProtocol, safariProtection: SafariProtectionProtocol, dnsProtection: DnsProtectionProtocol, vpnManager: VpnManagerProtocol, purchaseService: PurchaseServiceProtocol
     ) {
@@ -56,13 +62,17 @@ final class ImportSettingsService: ImportSettingsServiceProtocol {
         self.dnsImportHelper = ImportDNSSettingsHelper(dnsProvidersManager: dnsProvidersManager, dnsProtection: dnsProtection)
     }
 
+    // MARK: - Internal methods
+
     func applySettings(_ settings: Settings, completion: @escaping (Settings) -> Void) {
         workingQueue.async { [weak self] in
-            self?.applySettingsSync(settings, completion: completion)
+            self?.applySettingsInternal(settings, completion: completion)
         }
     }
 
-    private func applySettingsSync(_ settings: Settings, completion: (Settings) -> Void) {
+    // MARK: - Private methods
+
+    private func applySettingsInternal(_ settings: Settings, completion: (Settings) -> Void) {
         var resultSettings = settings
 
         // Safari protection imports
@@ -84,7 +94,7 @@ final class ImportSettingsService: ImportSettingsServiceProtocol {
         let importLicenseResult = importLicense(settings: settings)
         resultSettings.licenseStatus = importLicenseResult
 
-        // Import DNS settings only if app is PRO or if import license settings was successfull
+        // Import DNS settings only if app is PRO or if import license settings was successful
         guard importLicenseResult == .successful || importLicenseResult == .enabled else {
             completion(settings)
             return
@@ -126,7 +136,15 @@ final class ImportSettingsService: ImportSettingsServiceProtocol {
 
         guard let uniqueCustomSafariFiltersSettings = collectUniqueFiltersToImport(filters: customFilters, filtersToImport: uniqueImportCustomSafariFilters, override: overrideCustomFilters) as? [CustomCBFilterSettings] else { return [] }
 
-        return safariImportHelper.importCustomSafariFilters(uniqueCustomSafariFiltersSettings, override: overrideCustomFilters)
+        var resultSettings = [CustomCBFilterSettings]()
+        let group = DispatchGroup()
+        group.enter()
+        safariImportHelper.importCustomSafariFilters(uniqueCustomSafariFiltersSettings, override: overrideCustomFilters) { result in
+            resultSettings = result
+            group.leave()
+        }
+        group.wait()
+        return resultSettings
     }
 
     // MARK: - DNS Imports
@@ -139,7 +157,15 @@ final class ImportSettingsService: ImportSettingsServiceProtocol {
 
         guard let uniqueCustomDnsFilterSettings = collectUniqueFiltersToImport(filters: dnsFilters, filtersToImport: uniqueImportDnsFilters, override: overrideDnsFilters) as? [DnsFilterSettings] else { return [] }
 
-        return dnsImportHelper.importDnsFilters(uniqueCustomDnsFilterSettings, override: overrideDnsFilters)
+        var resultSettings = [DnsFilterSettings]()
+        let group = DispatchGroup()
+        group.enter()
+        dnsImportHelper.importDnsFilters(uniqueCustomDnsFilterSettings, override: overrideDnsFilters) { result in
+            resultSettings = result
+            group.leave()
+        }
+        group.wait()
+        return resultSettings
     }
 
     // DNS server

@@ -19,107 +19,135 @@
 import SafariAdGuardSDK
 import SharedAdGuardSDK
 
-/// This struct responsible for imports Safari protection settings
-struct ImportSafariProtectionSettingsHelper {
+/// This object is responsible for importing Safari protection settings
+final class ImportSafariProtectionSettingsHelper {
+    // MARK: - Properties
+
     private let safariProtection: SafariProtectionProtocol
+
+    private let workingQueue = DispatchQueue(label: "AdGuardApp.ImportSafariProtectionSettingsHelperQueue")
+    private let completionQueue = DispatchQueue(label: "AdGuardApp.ImportSafariProtectionSettingsHelperCompletionQueue")
+
+    // MARK: - Init
 
     init(safariProtection: SafariProtectionProtocol) {
         self.safariProtection = safariProtection
     }
 
-    /// Imports Safari filters. If **override** is true then all filters and groups would be disabled except new setted filters. If group contain enabled filters it would be enabled too. Return import result
+    // MARK: Internal methods
+
+    /// Imports Safari filters. If **override** is true then all filters and groups will be disabled except new setted filters. If group contain enabled filters it will be enabled too. Return import result
     func importSafariFilters(_ filtersToImport: [DefaultCBFilterSettings], override: Bool)-> [DefaultCBFilterSettings] {
-        if override { disableAllSafariFiltersAndGroups() }
+        workingQueue.sync {
+            if override { disableAllSafariFiltersAndGroups() }
 
-        let allFilters = safariProtection.groups.flatMap { $0.filters }
-        let result = importSafariFiltersInternal(filtersToImport, allFilters: allFilters)
+            let allFilters = safariProtection.groups.flatMap { $0.filters }
+            let result = importSafariFiltersInternal(filtersToImport, allFilters: allFilters)
 
-        let groupsToEnable = collectGroupsToEnable(filtersToImport)
-        enableGroups(groupsToEnable: groupsToEnable)
+            let groupsToEnable = collectGroupsToEnable(filtersToImport)
+            enableGroups(groupsToEnable: groupsToEnable)
 
-        return result
+            return result
+        }
     }
 
-    /// Imports custom Safari filters. If **override** is true then all old filters would be replaced with new ones. Returns import result
-    func importCustomSafariFilters(_ filters: [CustomCBFilterSettings], override: Bool) -> [CustomCBFilterSettings] {
-        if override { removeAllCustomSafariFilters() }
+    /// Imports Safari blocklist rules. If **override** is true then all old rules will be replaced new ones. Returns true if storage was changed
+    func importSafariBlocklistRules(_ rules: [String]?, override: Bool) -> Bool {
+        workingQueue.sync {
+            var result = false
+            if override {
+                safariProtection.removeAllRules(for: .blocklist)
+                result = true
+            }
 
-        var result = [CustomCBFilterSettings]()
-        let group = DispatchGroup()
+            if let rules = rules {
+                rules.forEach {
+                    do {
+                        let userRule = UserRule(ruleText: $0)
+                        try safariProtection.add(rule: userRule, for: .blocklist, override: override)
+                        DDLogInfo("(ImportSafariProtectionSettingsHelper) - importSafariBlocklistRules; Successfully add rule \($0) to blocklist")
+                        result = true
+                    } catch {
+                        DDLogError("(ImportSafariProtectionSettingsHelper) - importSafariBlocklistRules; Error occurred while adding rule = \($0) for blocklist; Error: \(error)")
+                    }
+                }
+            }
+            return result
+        }
+    }
 
-        for var filter in filters {
+    /// Imports custom Safari filters. If **override** is true then all old filters will be replaced with new ones. Returns import result in completion
+    func importCustomSafariFilters(_ filters: [CustomCBFilterSettings], override: Bool, completion: @escaping ([CustomCBFilterSettings]) -> Void) {
+        workingQueue.async { [weak self] in
+            guard let self = self else {
+                DDLogError("(ImportSafariProtectionSettingsHelper) - importCustomSafariFilters; Missing self")
+                DispatchQueue.main.async { completion([]) }
+                return
+            }
 
-            if filter.status == .enabled {
+            if override { self.removeAllCustomSafariFilters() }
+
+            let group = DispatchGroup()
+            var result = [CustomCBFilterSettings]()
+
+            filters.forEach { filter in
                 group.enter()
-
-                subscribeSafariCustomFilter(filter) { success in
-                    filter.status = success ? .successful : .unsuccessful
-                    result.append(filter)
+                self.subscribe(filter) { settings in
+                    result.append(settings)
                     group.leave()
                 }
-            } else {
-                result.append(filter)
             }
-        }
 
-        group.wait()
+            group.wait()
 
-        if !result.isEmpty,
-            let groupEnabled = safariProtection.groups.first(where: { $0.groupType == .custom })?.isEnabled,
-            !groupEnabled {
-            enableGroups(groupsToEnable: Set<SafariGroup.GroupType>(arrayLiteral: .custom))
+            // Enable custom group if custom filters was added and custom group was not enabled
+            if !result.isEmpty,
+               let groupEnabled = self.safariProtection.groups.first(where: { $0.groupType == .custom })?.isEnabled,
+                !groupEnabled {
+                self.enableGroups(groupsToEnable: Set<SafariGroup.GroupType>(arrayLiteral: .custom))
+            }
+            self.completionQueue.async { completion(result) }
         }
-        return result
     }
 
-    /// Import Safari blocklist rules. If **override** is true then all old rules would be replaced new ones. Returns true if storage have been changed
-    func importSafariBlocklistRules(_ rules: [String]?, override: Bool) -> Bool {
-        var result = false
-        if override {
-            safariProtection.removeAllRules(for: .blocklist, shouldReloadCB: false, onCbReloaded: nil)
-            result = true
-        }
+    // MARK: - Private methods
 
-        if let rules = rules {
-            rules.forEach {
-                do {
-                    let userRule = UserRule(ruleText: $0)
-                    try safariProtection.add(rule: userRule, for: .blocklist, override: override, shouldReloadCB: false, onCbReloaded: nil)
-                    DDLogInfo("(ImportSafariProtectionSettingsHelper) - importSafariBlocklistRules; Successfully add rule \($0) to blocklist")
-                    result = true
-                } catch {
-                    DDLogError("(ImportSafariProtectionSettingsHelper) - importSafariBlocklistRules; Error occurred while adding rule = \($0) for blocklist; Error: \(error)")
-                }
+    private func subscribe(_ filter: CustomCBFilterSettings, completion: @escaping (CustomCBFilterSettings) -> Void) {
+        var filter = filter
+        if filter.status == .enabled {
+            addCustomFilter(filter) { success in
+                filter.status = success ? .successful : .unsuccessful
+                completion(filter)
             }
+        } else {
+            completion(filter)
         }
-
-        return result
     }
 
-    private func subscribeSafariCustomFilter(_ filter: CustomCBFilterSettings, completion: @escaping (Bool) -> Void) {
+    private func addCustomFilter(_ filter: CustomCBFilterSettings, completion: @escaping (_ success: Bool) -> Void) {
         guard let url = URL(string: filter.url) else {
             DDLogError("(ImportSafariProtectionSettingsHelper) - subscribeSafariCustomFilter; Incorrect URL string = \(filter.url)")
-            completion(false)
+            self.completionQueue.async { completion(false) }
             return
         }
         let parser = CustomFilterMetaParser()
 
         do {
             let meta = try parser.getMetaFrom(url: url, for: .safari)
-            safariProtection.add(customFilter: meta, enabled: true, shouldReloadCB: false) { error in
+            safariProtection.add(customFilter: meta, enabled: true) { error in
                 if let error = error {
                     DDLogError("(ImportSafariProtectionSettingsHelper) - subscribeSafariCustomFilter; Error occurred while adding new custom filter with url = \(url); Error: \(error)")
-                    completion(false)
+                    self.completionQueue.async { completion(false) }
                     return
                 }
 
                 DDLogInfo("(ImportSafariProtectionSettingsHelper) - subscribeSafariCustomFilter; Successfully add new custom filter with url = \(url)")
-                completion(true)
-            } onCbReloaded: { _ in }
+                self.completionQueue.async { completion(true) }
+            }
 
         } catch {
             DDLogError("(ImportSafariProtectionSettingsHelper)")
-            completion(false)
+            self.completionQueue.async { completion(false) }
         }
     }
 
@@ -142,7 +170,7 @@ struct ImportSafariProtectionSettingsHelper {
 
     private func setFilter(filter: SafariGroup.Filter, enabled: Bool) -> ImportSettingStatus {
         do {
-            try safariProtection.setFilter(withId: filter.filterId, filter.group.groupId, enabled: enabled, shouldReloadCB: false, onCbReloaded: nil)
+            try safariProtection.setFilter(withId: filter.filterId, groupId: filter.group.groupId, enabled: enabled)
             DDLogInfo("(ImportSafariProtectionSettingsHelper) - setFilter; Successfully set enable to \(enabled) for filter with id = \(filter.filterId) for group id = \(filter.group.groupId)")
             return .successful
         } catch {
@@ -154,7 +182,7 @@ struct ImportSafariProtectionSettingsHelper {
     private func enableGroups(groupsToEnable: Set<SafariGroup.GroupType>) {
         groupsToEnable.forEach {
             do {
-                try safariProtection.setGroup($0, enabled: true, shouldReloadCB: false, onCbReloaded: nil)
+                try safariProtection.setGroup(groupType: $0, enabled: true)
                 DDLogInfo("(ImportSafariProtectionSettingsHelper) - enableGroups; Group \($0) were enabled")
             } catch {
                 DDLogError("(ImportSafariProtectionSettingsHelper) - enableGroups; Error occurred while enabling group \($0); Error: \(error)")
@@ -193,7 +221,7 @@ struct ImportSafariProtectionSettingsHelper {
 
     private func disableGroupAndAllFilters(for group: SafariGroup) {
         do {
-            try safariProtection.setGroup(group.groupType, enabled: false, shouldReloadCB: false, onCbReloaded: nil)
+            try safariProtection.setGroup(groupType: group.groupType, enabled: false)
             DDLogInfo("(ImportSafariProtectionSettingsHelper) - disableGroupAndAllFilters; Group = \(group.groupType) were disabled")
         } catch {
             DDLogError("(ImportSafariProtectionSettingsHelper) - disableGroupAndAllFilters; Error occurred while disabling group = \(group.groupType); Error: \(error)")
@@ -201,7 +229,7 @@ struct ImportSafariProtectionSettingsHelper {
 
         group.filters.forEach { filter in
             do {
-                try safariProtection.setFilter(withId: filter.filterId, filter.group.groupId, enabled: false, shouldReloadCB: false, onCbReloaded: nil)
+                try safariProtection.setFilter(withId: filter.filterId, groupId: filter.group.groupId, enabled: false)
                 DDLogInfo("(ImportSafariProtectionSettingsHelper) - disableGroupAndAllFilters; Filter with id = \(filter.filterId) were disabled")
             } catch {
                 DDLogError("(ImportSafariProtectionSettingsHelper) - disableGroupAndAllFilters; Error occurred while disabling filter with id = \(filter.filterId); Error: \(error)")
@@ -212,7 +240,7 @@ struct ImportSafariProtectionSettingsHelper {
     private func deleteFilters(from group: SafariGroup) {
         group.filters.forEach {
             do {
-                try safariProtection.deleteCustomFilter(withId: $0.filterId, shouldReloadCB: false, onCbReloaded: nil)
+                try safariProtection.deleteCustomFilter(withId: $0.filterId)
                 DDLogInfo("(ImportSafariProtectionSettingsHelper) - deleteFilters; Successfully delete filter with id = \($0.filterId)")
             } catch {
                 DDLogError("(ImportSafariProtectionSettingsHelper) - deleteFilters; Error occurred while deleting filter with id = \($0.filterId); Error: \(error)")

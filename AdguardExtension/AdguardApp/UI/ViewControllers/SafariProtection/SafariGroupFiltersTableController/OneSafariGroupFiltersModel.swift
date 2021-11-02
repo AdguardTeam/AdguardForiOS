@@ -124,7 +124,7 @@ final class OneSafariGroupFiltersModel: NSObject, SafariGroupFiltersModelProtoco
 
 extension OneSafariGroupFiltersModel {
     func deleteFilter(filterId: Int) throws {
-        try safariProtection.deleteCustomFilter(withId: filterId, shouldReloadCB: true, onCbReloaded: nil)
+        try safariProtection.deleteCustomFilter(withId: filterId, onCbReloaded: nil)
         reinit()
     }
 
@@ -134,7 +134,7 @@ extension OneSafariGroupFiltersModel {
             throw CommonError.missingData
         }
 
-        try safariProtection.setFilter(withId: filterId, groupId, enabled: enabled, shouldReloadCB: true, onCbReloaded: nil)
+        try safariProtection.setFilter(withId: filterId, groupId: groupId, enabled: enabled, onCbReloaded: nil)
         reinit()
 
         guard let newFilterMeta = group.filters.first(where: { $0.filterId == filterId }) else {
@@ -145,7 +145,7 @@ extension OneSafariGroupFiltersModel {
     }
 
     func addCustomFilter(_ meta: ExtendedCustomFilterMetaProtocol, _ onFilterAdded: @escaping (Error?) -> Void) {
-        safariProtection.add(customFilter: meta, enabled: true, shouldReloadCB: true) { error in
+        safariProtection.add(customFilter: meta, enabled: true) { error in
             DispatchQueue.asyncSafeMain { [weak self] in
                 self?.reinit()
                 onFilterAdded(error)
@@ -194,7 +194,7 @@ extension OneSafariGroupFiltersModel {
         DDLogInfo("(OneSafariGroupFiltersModel) - setGroup; Trying to change group=\(groupType) to state=\(newModel.isEnabled)")
 
         do {
-            try safariProtection.setGroup(groupType, enabled: newModel.isEnabled, shouldReloadCB: true, onCbReloaded: nil)
+            try safariProtection.setGroup(groupType: groupType, enabled: newModel.isEnabled, onCbReloaded: nil)
         } catch {
             DDLogError("(OneSafariGroupFiltersModel) - setGroup; DB error when changing group=\(groupType) to state=\(newModel.isEnabled); Error: \(error)")
         }

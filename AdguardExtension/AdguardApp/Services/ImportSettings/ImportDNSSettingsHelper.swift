@@ -19,13 +19,16 @@
 import SharedAdGuardSDK
 import DnsAdGuardSDK
 
-/// This struct responsible for imports DNS settings
-struct ImportDNSSettingsHelper {
+/// This object is responsible for importing DNS protection settings
+final class ImportDNSSettingsHelper {
 
     // MARK: - Private properties
 
     private let dnsProvidersManager: DnsProvidersManagerProtocol
     private let dnsProtection: DnsProtectionProtocol
+
+    private let workingQueue = DispatchQueue(label: "AdGuardApp.ImportDNSSettingsHelperQueue")
+    private let completionQueue = DispatchQueue(label: "AdGuardApp.ImportDNSSettingsHelperCompletionQueue")
 
     // MARK: - Init
 
@@ -36,87 +39,104 @@ struct ImportDNSSettingsHelper {
 
     // MARK: - DNS protection imports
 
-    /// Imports DNS filters. If **override** is true then all old filters would be replaced new ones. Returns import result
-    func importDnsFilters(_ filters: [DnsFilterSettings], override: Bool) -> [DnsFilterSettings] {
-        if override { removeAllDnsFilters() }
+    /// Imports DNS blocklist rules. If **override** is true then all old rules will be replaced new ones. Return true if storage was changed
+    func importDnsBlocklistRules(_ rules: [UserRule], override: Bool) -> Bool {
+        workingQueue.sync {
+            var result = false
 
-        var resultDnsFilters: [DnsFilterSettings] = []
+            if override {
+                dnsProtection.removeAllRules(for: .blocklist)
+                result = true
+            }
 
-        let group = DispatchGroup()
-        for var filter in filters {
+            rules.forEach {
+                do {
+                    try dnsProtection.add(rule: $0, override: override, for: .blocklist)
+                    DDLogInfo("(ImportDNSSettingsHelper) - importDnsBlocklistRules; Rule = \($0) were successfully added")
+                    result = true
+                } catch {
+                    DDLogError("(ImportDNSSettingsHelper) - importDnsBlocklistRules; Error occurred while adding rule = \($0); Error: = \(error)")
+                }
+            }
+            return result
+        }
+    }
 
-            if filter.status == .enabled {
+    /// Imports DNS server with **serverId**. Return true if server was setted
+    func importDnsServer(serverId: Int) -> Bool {
+        workingQueue.sync {
+            guard dnsProvidersManager.activeDnsServer.id != serverId else { return false }
+            if let provider = dnsProvidersManager.allProviders.first(where: { $0.dnsServers.contains(where: { $0.id == serverId }) }) {
+                do {
+                    try dnsProvidersManager.selectProvider(withId: provider.providerId, serverId: serverId)
+                    DDLogInfo("(ImportDNSSettingsHelper) - importDnsServer; Server with id = \(serverId) and provider = \(provider.name) were successfully selected")
+                    return true
+                } catch {
+                    DDLogError("(ImportDNSSettingsHelper) - importDnsServer; Error occurred while selecting server with id = \(serverId) and provider = \(provider.name)")
+                    return false
+                }
+            }
+            return false
+        }
+    }
+
+    /// Imports DNS filters.
+    /// If **override** is true then all old filters will be replaced with new ones. Returns import result
+    func importDnsFilters(_ filters: [DnsFilterSettings], override: Bool, completion: @escaping ([DnsFilterSettings]) -> Void) {
+        workingQueue.async { [weak self] in
+            guard let self = self else {
+                DDLogError("(ImportDNSSettingsHelper) - importDnsFilters; Missing self")
+                DispatchQueue.main.async { completion([]) }
+                return
+            }
+
+            if override { self.removeAllDnsFilters() }
+
+            var resultDnsFilters: [DnsFilterSettings] = []
+            let group = DispatchGroup()
+
+            filters.forEach { filter in
                 group.enter()
-
-                subscribeDnsFilter(filter) { success in
-                    filter.status = success ? .successful : .unsuccessful
-                    resultDnsFilters.append(filter)
+                self.subscribe(filter) { settings in
+                    resultDnsFilters.append(settings)
                     group.leave()
                 }
             }
-            else {
-                resultDnsFilters.append(filter)
-            }
+
+            group.wait()
+            self.completionQueue.async { completion(resultDnsFilters) }
         }
-
-        group.wait()
-
-        return resultDnsFilters
     }
 
-    /// Imports DNS server with **serverId**. Return true if server were setted
-    func importDnsServer(serverId: Int) -> Bool {
-        guard dnsProvidersManager.activeDnsServer.id != serverId else { return false }
-        if let provider = dnsProvidersManager.allProviders.first(where: { $0.dnsServers.contains(where: { $0.id == serverId }) }) {
-            do {
-                try dnsProvidersManager.selectProvider(withId: provider.providerId, serverId: serverId)
-                DDLogInfo("(ImportDNSSettingsHelper) - importDnsServer; Server with id = \(serverId) and provider = \(provider.name) were successfully selected")
-                return true
-            } catch {
-                DDLogError("(ImportDNSSettingsHelper) - importDnsServer; Error occurred while selecting server with id = \(serverId) and provider = \(provider.name)")
-                return false
+    // MARK: - Private methods
+
+    private func subscribe(_ filter: DnsFilterSettings, completion: @escaping (DnsFilterSettings) -> Void) {
+        var filter = filter
+        if filter.status == .enabled {
+            addDnsFilter(filter) { success in
+                filter.status = success ? .successful : .unsuccessful
+                completion(filter)
             }
+        } else {
+            completion(filter)
         }
-        return false
     }
 
-    /// Imports DNS blocklist rules. If **override** is true then all old rules would be replaced new ones. Return true if storage were changed
-    func importDnsBlocklistRules(_ rules: [UserRule], override: Bool) -> Bool {
-        var result = false
-
-        if override {
-            dnsProtection.removeAllRules(for: .blocklist)
-            result = true
-        }
-
-        rules.forEach {
-            do {
-                try dnsProtection.add(rule: $0, override: override, for: .blocklist)
-                DDLogInfo("(ImportDNSSettingsHelper) - importDnsBlocklistRules; Rule = \($0) were successfully added")
-                result = true
-            } catch {
-                DDLogError("(ImportDNSSettingsHelper) - importDnsBlocklistRules; Error occurred while adding rule = \($0); Error: = \(error)")
-            }
-        }
-
-        return result
-    }
-
-    private func subscribeDnsFilter(_ filter: DnsFilterSettings, completion: @escaping (Bool) -> Void) {
+    private func addDnsFilter(_ filter: DnsFilterSettings, completion: @escaping (_ success: Bool) -> Void) {
         guard let url = URL(string: filter.url) else {
             DDLogError("(ImportDNSSettingsHelper) - subscribeDnsFilter; Invalid URL string: \(filter.url)")
-            completion(false)
+            self.completionQueue.async { completion(false) }
             return
         }
 
         dnsProtection.addFilter(withName: filter.name, url: url, isEnabled: true) { error in
             if let error = error {
                 DDLogError("(ImportDNSSettingsHelper) - subscribeDnsFilter; Error occurred while trying to add DNS filter with url = \(url); Error: \(error)")
-                completion(false)
+                self.completionQueue.async { completion(false) }
                 return
             }
             DDLogInfo("(ImportDNSSettingsHelper) - subscribeDnsFilter; DNS Filter with url = \(url) successfully added")
-            completion(true)
+            self.completionQueue.async { completion(true) }
         }
     }
 
