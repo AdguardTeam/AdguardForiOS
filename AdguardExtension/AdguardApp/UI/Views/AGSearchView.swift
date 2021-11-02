@@ -78,6 +78,8 @@ final class AGSearchView: UIView {
     }
 }
 
+// MARK: - AGSearchView + UITextFieldDelegate
+
 extension AGSearchView: UITextFieldDelegate {
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -89,20 +91,6 @@ extension AGSearchView: UITextFieldDelegate {
 
         self.textField.borderState = .enabled
         self.textField.rightView?.isHidden = updatedText.isEmpty
-        return true
-    }
-
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        self.textField.borderState = .enabled
-    }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        self.textField.borderState = .disabled
-    }
-
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.textField.resignFirstResponder()
-        self.textField.borderState = .disabled
         return true
     }
 }
