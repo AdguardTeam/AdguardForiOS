@@ -503,8 +503,8 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uWd-ZI-H88">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="265"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rule count:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RJU-32-r8h" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="32" y="88" width="345" height="18"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Rule count:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RJU-32-r8h" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="16" y="89" width="77.5" height="18"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="textColor" red="0.28627450980000002" green="0.28627450980000002" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -518,8 +518,8 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         </variation>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tDs-5f-dGf" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="382" y="90" width="0.0" height="0.0"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tDs-5f-dGf" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="98.5" y="98" width="299.5" height="0.0"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="textColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -561,8 +561,8 @@
                                                             <action selector="cancelAction:" destination="iY4-7b-KHH" eventType="touchUpInside" id="kmi-IG-YPa"/>
                                                         </connections>
                                                     </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cyn-cw-Zrm" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="32" y="0.0" width="350" height="17"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cyn-cw-Zrm" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="16" y="0.0" width="382" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -574,11 +574,11 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         </variation>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name of the filter:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zcB-eh-Ou4">
-                                                        <rect key="frame" x="32" y="33" width="350" height="18"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name of the filter" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zcB-eh-Ou4" customClass="AGTextField" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="16" y="25" width="382" height="40"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="18" id="shn-sj-gIP">
-                                                                <variation key="heightClass=regular-widthClass=regular" constant="28"/>
+                                                            <constraint firstAttribute="height" constant="40" id="shn-sj-gIP">
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
                                                             </constraint>
                                                         </constraints>
                                                         <color key="textColor" red="0.28627450980000002" green="0.28627450980000002" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -590,17 +590,7 @@
                                                         <variation key="heightClass=regular-widthClass=regular">
                                                             <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                         </variation>
-                                                        <connections>
-                                                            <outlet property="delegate" destination="iY4-7b-KHH" id="9pp-9h-ViR"/>
-                                                        </connections>
                                                     </textField>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zco-NT-vBm" customClass="TextFieldIndicatorView" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="24" y="51" width="366" height="1"/>
-                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="1" id="OKf-24-CHb"/>
-                                                        </constraints>
-                                                    </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4aS-KK-N0G">
                                                         <rect key="frame" x="32" y="93" width="350" height="30"/>
                                                         <variation key="heightClass=regular-widthClass=regular">
@@ -634,6 +624,9 @@
                                                 <constraints>
                                                     <constraint firstItem="t8x-PU-hFK" firstAttribute="trailing" secondItem="zcB-eh-Ou4" secondAttribute="trailing" id="3Av-xe-fA4"/>
                                                     <constraint firstAttribute="bottom" secondItem="mEm-ll-QZR" secondAttribute="bottom" constant="24" id="44T-or-81u"/>
+                                                    <constraint firstItem="RJU-32-r8h" firstAttribute="top" secondItem="zcB-eh-Ou4" secondAttribute="bottom" constant="24" id="5b2-mW-2dp">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                                                    </constraint>
                                                     <constraint firstItem="t8x-PU-hFK" firstAttribute="top" secondItem="tDs-5f-dGf" secondAttribute="bottom" id="6vQ-9H-4jB"/>
                                                     <constraint firstItem="zcB-eh-Ou4" firstAttribute="trailing" secondItem="Cyn-cw-Zrm" secondAttribute="trailing" id="7ES-bD-aHs"/>
                                                     <constraint firstItem="mEm-ll-QZR" firstAttribute="leading" secondItem="uWd-ZI-H88" secondAttribute="leading" constant="16" id="8Vp-b4-QrM"/>
@@ -641,30 +634,28 @@
                                                     <constraint firstItem="zcB-eh-Ou4" firstAttribute="leading" secondItem="Cyn-cw-Zrm" secondAttribute="leading" id="DjU-ic-knU"/>
                                                     <constraint firstItem="4aS-KK-N0G" firstAttribute="centerX" secondItem="t8x-PU-hFK" secondAttribute="centerX" id="E2h-Rg-z92"/>
                                                     <constraint firstItem="4aS-KK-N0G" firstAttribute="width" secondItem="t8x-PU-hFK" secondAttribute="width" id="Jda-ZG-Y7q"/>
-                                                    <constraint firstItem="Cyn-cw-Zrm" firstAttribute="leading" secondItem="uWd-ZI-H88" secondAttribute="leading" constant="32" id="Jg2-YE-mm0"/>
+                                                    <constraint firstItem="Cyn-cw-Zrm" firstAttribute="leading" secondItem="uWd-ZI-H88" secondAttribute="leading" constant="16" id="Jg2-YE-mm0">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                    </constraint>
                                                     <constraint firstItem="mEm-ll-QZR" firstAttribute="top" secondItem="kCb-lJ-BLL" secondAttribute="bottom" constant="16" id="LG0-Zl-uZ2"/>
                                                     <constraint firstItem="4aS-KK-N0G" firstAttribute="centerY" secondItem="t8x-PU-hFK" secondAttribute="centerY" id="LGi-9I-tfY"/>
-                                                    <constraint firstItem="tDs-5f-dGf" firstAttribute="trailing" secondItem="zcB-eh-Ou4" secondAttribute="trailing" id="Mbs-d6-LXn"/>
+                                                    <constraint firstItem="tDs-5f-dGf" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zcB-eh-Ou4" secondAttribute="trailing" id="Mbs-d6-LXn"/>
                                                     <constraint firstItem="RJU-32-r8h" firstAttribute="leading" secondItem="zcB-eh-Ou4" secondAttribute="leading" id="PX2-wh-RF8"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Cyn-cw-Zrm" secondAttribute="trailing" constant="32" id="PkY-mZ-DsS"/>
-                                                    <constraint firstItem="tDs-5f-dGf" firstAttribute="leading" secondItem="RJU-32-r8h" secondAttribute="trailing" constant="5" id="YuO-NP-LL8"/>
-                                                    <constraint firstItem="zcB-eh-Ou4" firstAttribute="top" secondItem="Cyn-cw-Zrm" secondAttribute="bottom" constant="16" id="b3E-s0-VPn">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="22"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Cyn-cw-Zrm" secondAttribute="trailing" constant="16" id="PkY-mZ-DsS">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                     </constraint>
-                                                    <constraint firstAttribute="trailing" secondItem="zco-NT-vBm" secondAttribute="trailing" constant="24" id="d21-6u-z5b"/>
+                                                    <constraint firstItem="tDs-5f-dGf" firstAttribute="leading" secondItem="RJU-32-r8h" secondAttribute="trailing" constant="5" id="YuO-NP-LL8"/>
+                                                    <constraint firstItem="zcB-eh-Ou4" firstAttribute="top" secondItem="Cyn-cw-Zrm" secondAttribute="bottom" constant="8" id="b3E-s0-VPn">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="16"/>
+                                                    </constraint>
                                                     <constraint firstItem="t8x-PU-hFK" firstAttribute="leading" secondItem="RJU-32-r8h" secondAttribute="leading" id="dAf-q9-z0U"/>
                                                     <constraint firstItem="kCb-lJ-BLL" firstAttribute="top" secondItem="t8x-PU-hFK" secondAttribute="bottom" constant="24" id="dsH-aw-gew">
                                                         <variation key="heightClass=regular-widthClass=regular" constant="48"/>
                                                     </constraint>
                                                     <constraint firstItem="4aS-KK-N0G" firstAttribute="height" secondItem="t8x-PU-hFK" secondAttribute="height" id="eb8-aK-HbA"/>
-                                                    <constraint firstItem="RJU-32-r8h" firstAttribute="top" secondItem="zco-NT-vBm" secondAttribute="bottom" constant="32" id="jPu-mx-WgR">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="48"/>
-                                                    </constraint>
                                                     <constraint firstItem="kCb-lJ-BLL" firstAttribute="leading" secondItem="uWd-ZI-H88" secondAttribute="leading" constant="16" id="m8G-1h-1n1"/>
-                                                    <constraint firstItem="zco-NT-vBm" firstAttribute="leading" secondItem="uWd-ZI-H88" secondAttribute="leading" constant="24" id="oXv-Bf-gMg"/>
                                                     <constraint firstAttribute="trailing" secondItem="mEm-ll-QZR" secondAttribute="trailing" constant="16" id="omO-od-nuo"/>
                                                     <constraint firstItem="Cyn-cw-Zrm" firstAttribute="top" secondItem="uWd-ZI-H88" secondAttribute="top" id="rXi-RV-lal"/>
-                                                    <constraint firstItem="zco-NT-vBm" firstAttribute="top" secondItem="zcB-eh-Ou4" secondAttribute="bottom" constant="4" id="sSE-rr-iRT"/>
                                                     <constraint firstAttribute="trailing" secondItem="kCb-lJ-BLL" secondAttribute="trailing" constant="16" id="tBd-jS-2kS"/>
                                                 </constraints>
                                             </view>
@@ -718,7 +709,6 @@
                         <outlet property="name" destination="zcB-eh-Ou4" id="jmi-1i-u3J"/>
                         <outlet property="newFilterTitle" destination="NsT-wt-1hd" id="iin-wz-aeA"/>
                         <outlet property="rulesCount" destination="tDs-5f-dGf" id="lCX-Yz-OIf"/>
-                        <outlet property="textViewUnderline" destination="zco-NT-vBm" id="Owy-Ny-vvB"/>
                         <outletCollection property="themableLabels" destination="tDs-5f-dGf" collectionClass="NSMutableArray" id="997-nl-ZtB"/>
                         <outletCollection property="themableLabels" destination="RJU-32-r8h" collectionClass="NSMutableArray" id="bzX-FW-T4D"/>
                     </connections>
@@ -838,18 +828,26 @@
                                                     <constraint firstItem="Z16-OR-tjl" firstAttribute="top" secondItem="oG1-6A-zBh" secondAttribute="top" id="Bxl-et-pzZ"/>
                                                     <constraint firstItem="Fwl-LI-5Fu" firstAttribute="trailing" secondItem="Z16-OR-tjl" secondAttribute="trailing" id="EIP-4M-vkW"/>
                                                     <constraint firstItem="OpB-AR-Og7" firstAttribute="top" secondItem="nch-wu-mKC" secondAttribute="bottom" constant="16" id="FyD-y9-cJT"/>
-                                                    <constraint firstItem="OpB-AR-Og7" firstAttribute="leading" secondItem="oG1-6A-zBh" secondAttribute="leading" constant="16" id="LHB-gv-RTA"/>
+                                                    <constraint firstItem="OpB-AR-Og7" firstAttribute="leading" secondItem="oG1-6A-zBh" secondAttribute="leading" constant="16" id="LHB-gv-RTA">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                    </constraint>
                                                     <constraint firstItem="Fwl-LI-5Fu" firstAttribute="top" secondItem="Z16-OR-tjl" secondAttribute="bottom" constant="8" id="R0f-Uu-rqR">
                                                         <variation key="heightClass=regular-widthClass=regular" constant="16"/>
                                                     </constraint>
                                                     <constraint firstItem="Fwl-LI-5Fu" firstAttribute="leading" secondItem="Z16-OR-tjl" secondAttribute="leading" id="U6f-yQ-8yO"/>
-                                                    <constraint firstAttribute="trailing" secondItem="nch-wu-mKC" secondAttribute="trailing" constant="16" id="WYc-DB-CgL"/>
-                                                    <constraint firstItem="nch-wu-mKC" firstAttribute="leading" secondItem="oG1-6A-zBh" secondAttribute="leading" constant="16" id="dRM-r7-Lrc"/>
+                                                    <constraint firstAttribute="trailing" secondItem="nch-wu-mKC" secondAttribute="trailing" constant="16" id="WYc-DB-CgL">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                    </constraint>
+                                                    <constraint firstItem="nch-wu-mKC" firstAttribute="leading" secondItem="oG1-6A-zBh" secondAttribute="leading" constant="16" id="dRM-r7-Lrc">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                    </constraint>
                                                     <constraint firstItem="Z16-OR-tjl" firstAttribute="leading" secondItem="oG1-6A-zBh" secondAttribute="leading" constant="16" id="j14-jb-Gg5">
                                                         <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                     </constraint>
                                                     <constraint firstAttribute="bottom" secondItem="OpB-AR-Og7" secondAttribute="bottom" constant="24" id="qAD-Yc-Gk3"/>
-                                                    <constraint firstAttribute="trailing" secondItem="OpB-AR-Og7" secondAttribute="trailing" constant="16" id="y9g-te-YAc"/>
+                                                    <constraint firstAttribute="trailing" secondItem="OpB-AR-Og7" secondAttribute="trailing" constant="16" id="y9g-te-YAc">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                    </constraint>
                                                 </constraints>
                                             </view>
                                         </subviews>

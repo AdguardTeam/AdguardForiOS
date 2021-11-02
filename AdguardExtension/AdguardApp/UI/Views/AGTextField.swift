@@ -59,13 +59,13 @@ class AGTextField: UITextField {
         }
     }
 
-    var bottomTextAreaOffset: CGFloat = 12.0 {
+    var bottomTextAreaOffset: CGFloat = 0.0 {
         didSet {
             layoutIfNeeded()
         }
     }
 
-    var topTextAreaOffset: CGFloat = 12.0 {
+    var topTextAreaOffset: CGFloat = 0.0 {
         didSet {
             layoutIfNeeded()
         }
@@ -260,6 +260,7 @@ extension AGTextField: UITextFieldDelegate {
             return outerDelegate.textFieldDidBeginEditing!(textField)
         }
 
+        self.rightView?.isHidden = (textField.text ?? "").isEmpty
         self.borderState = .enabled
     }
 
@@ -268,6 +269,7 @@ extension AGTextField: UITextFieldDelegate {
             return outerDelegate.textFieldDidEndEditing!(textField)
         }
 
+        self.rightView?.isHidden = (textField.text ?? "").isEmpty
         self.borderState = .disabled
     }
 
