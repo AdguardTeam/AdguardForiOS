@@ -27,6 +27,10 @@ class ContentBlockerRequestHandler: NSObject, NSExtensionRequestHandling {
         ACLLogger.singleton().initLogger(resources.sharedAppLogsURL())
         ACLLogger.singleton().logLevel = resources.isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
 
+        // migrate settings if needed
+        let migration = ContentBlockerMigrationService(resources: resources)
+        migration.migrateIfNeeded()
+
         DDLogInfo("ActionRequestHandler start request")
 
         guard let cbBundleId = Bundle.main.bundleIdentifier else {
@@ -41,7 +45,7 @@ class ContentBlockerRequestHandler: NSObject, NSExtensionRequestHandling {
             let jsonProvider = try ContentBlockerJsonProvider(
                 cbBundleId: cbBundleId,
                 mainAppBundleId: Bundle.main.hostAppBundleId,
-                jsonStorageUrl: resources.sharedResuorcesURL(),
+                jsonStorageUrl: SharedStorageUrls().cbJsonsFolderUrl,
                 userDefaults: resources.sharedDefaults()
             )
             url = jsonProvider.jsonUrl

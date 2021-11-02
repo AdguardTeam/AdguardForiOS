@@ -73,8 +73,17 @@ final class SDKMigrationOldFilesHelper: SDKMigrationOldFilesHelperProtocol {
                 return
             }
 
-            if !FileManager.default.fileExists(atPath: newCbJsonFileUrl.path) {
-                try? FileManager.default.moveItem(at: oldCbJsonFileUrl, to: newCbJsonFileUrl)
+            do {
+                if !FileManager.default.fileExists(atPath: cbJsonFolderUrl.path) {
+                    try FileManager.default.createDirectory(at: cbJsonFolderUrl, withIntermediateDirectories: true, attributes: nil)
+                }
+
+                if !FileManager.default.fileExists(atPath: newCbJsonFileUrl.path) {
+                    try FileManager.default.moveItem(at: oldCbJsonFileUrl, to: newCbJsonFileUrl)
+                }
+            }
+            catch {
+                DDLogError("replaceCbJsonFilesSDKMigrationOldFilesHelper) replaceCbJsonFiles - replace error: \(error)")
             }
         }
     }

@@ -301,8 +301,7 @@ final class SupportService: SupportServiceProtocol {
     }
 
     private func appendCBJsonsIntoTemporaryDirectory(cbUrl: URL) throws {
-        try safariProtection.allConverterResults.forEach { converterResult in
-            let fileUrl = converterResult.jsonUrl
+        try safariProtection.allContentBlockerJsonUrls.forEach { fileUrl in
             try FileManager.default.copyItem(at: fileUrl, to: cbUrl.appendingPathComponent( fileUrl.lastPathComponent))
         }
     }

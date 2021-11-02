@@ -13,7 +13,7 @@ public protocol ContentBlockerJsonProviderProtocol {
 /// This class should be used in Content Blocker's extensions to get appropriate JSON
 public final class ContentBlockerJsonProvider: ContentBlockerJsonProviderProtocol {
 
-    public var jsonUrl: URL? { jsonStorage.getConverterResult(for: type)?.jsonUrl }
+    public var jsonUrl: URL? { jsonStorage.urlForJson(withType: type) }
 
     private let jsonStorage: ContentBlockersInfoStorageProtocol
     private let type: ContentBlockerType
