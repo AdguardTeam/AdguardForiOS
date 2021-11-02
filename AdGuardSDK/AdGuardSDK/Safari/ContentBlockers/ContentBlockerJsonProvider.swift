@@ -6,14 +6,14 @@ public protocol ContentBlockerJsonProviderProtocol {
      - Parameter safariProtectionIsEnabled: Current state of Safari protection
      - throws: Can throw an error if error occured while getting JSON file
      */
-    var jsonUrl: URL? { get }
+    var jsonUrl: URL { get }
 }
 
 
 /// This class should be used in Content Blocker's extensions to get appropriate JSON
 public final class ContentBlockerJsonProvider: ContentBlockerJsonProviderProtocol {
 
-    public var jsonUrl: URL? { jsonStorage.urlForJson(withType: type) }
+    public var jsonUrl: URL { jsonStorage.urlForJson(withType: type) }
 
     private let jsonStorage: ContentBlockersInfoStorageProtocol
     private let type: ContentBlockerType

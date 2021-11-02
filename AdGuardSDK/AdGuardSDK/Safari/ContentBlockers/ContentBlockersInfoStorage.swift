@@ -57,7 +57,7 @@ public struct ConverterResult: Codable, Equatable {
     public let advancedBlockingConvertedCount: Int // Number of entries in advanced blocking part
     public let message: String // Result message
 
-    init(result: FiltersConverterResult/*, jsonUrl: URL*/) {
+    init(result: FiltersConverterResult) {
         self.type = result.type
         self.totalRules = result.totalRules
         self.totalConverted = result.totalConverted
@@ -159,7 +159,7 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
         Logger.logInfo("(ContentBlockersJSONStorage) - reset; Successfully deleted directory with CBs JSONs")
     }
 
-    public func urlForJson(withType cbType: ContentBlockerType) -> URL {
+    func urlForJson(withType cbType: ContentBlockerType) -> URL {
         return jsonStorageUrl.appendingPathComponent(cbType.fileName)
     }
 

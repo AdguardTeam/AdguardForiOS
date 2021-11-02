@@ -95,9 +95,8 @@ class ContentBlockersInfoStorageTest: XCTestCase {
 
     private func fillStorage() {
         XCTAssert(infoStorage.allConverterResults.isEmpty)
-        let someUrl = TestsFileManager.workingUrl
         let results = getFilterConvertionResults()
-        let someInfo = results.map { ConverterResult(result: $0, jsonUrl: someUrl) }
+        let someInfo = results.map { ConverterResult(result: $0) }
         let encoder = JSONEncoder()
         let cbInfoData = try! encoder.encode(someInfo)
         userDefaultsStorage.storage.setValue(cbInfoData, forKey: allCbInfoKey)
