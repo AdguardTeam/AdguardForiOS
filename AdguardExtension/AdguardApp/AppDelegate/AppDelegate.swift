@@ -21,6 +21,7 @@ import SafariAdGuardSDK
 import DnsAdGuardSDK
 import AGDnsProxy
 import Sentry
+import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
