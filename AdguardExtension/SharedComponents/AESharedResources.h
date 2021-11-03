@@ -211,21 +211,6 @@ extern NSString* _Nonnull AEDefaultsEncryptedRequests;
 extern NSString*  _Nonnull LastStatisticsSaveTime;
 
 /**
- String to send notifications for StatusView
- */
-extern NSString* _Nonnull AEDefaultsShowStatusViewInfo;
-
-/**
- Notify to show status view
- */
-extern NSString* _Nonnull ShowStatusViewNotification;
-
-/**
- Hide status view
- */
-extern NSString* _Nonnull HideStatusViewNotification;
-
-/**
  Unique id for dns filters
  */
 extern NSString* _Nonnull DnsFilterUniqueId;

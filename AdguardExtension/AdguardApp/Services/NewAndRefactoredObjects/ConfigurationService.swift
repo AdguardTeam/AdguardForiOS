@@ -147,7 +147,10 @@ final class ConfigurationService: ConfigurationServiceProtocol {
             return showStatusBar && advancedMode
         }
         set{
-            resources.sharedDefaults().set(newValue, forKey: AEDefaultsShowStatusBar)
+            if newValue != showStatusBar {
+                resources.sharedDefaults().set(newValue, forKey: AEDefaultsShowStatusBar)
+                Self.showStatusBarChanged()
+            }
         }
     }
 
@@ -186,6 +189,10 @@ final class ConfigurationService: ConfigurationServiceProtocol {
     private static func advancedProtectionStateChanged() {
         NotificationCenter.default.post(name: .advancedProtectionStateChanged, object: self)
     }
+
+    private static func showStatusBarChanged() {
+        NotificationCenter.default.post(name: .showStatusBarChanged, object: self)
+    }
 }
 
 extension Notification.Name {
@@ -194,4 +201,5 @@ extension Notification.Name {
     static var advancedModeChanged: Notification.Name { return .init(rawValue: "advancedModeChanged") }
     static var contentBlockersStateChanged: Notification.Name { return .init(rawValue: "contentBlockersStateChanged") }
     static var advancedProtectionStateChanged: Notification.Name { return .init(rawValue: "advancedProtectionStateChanged") }
+    static var showStatusBarChanged: Notification.Name { return .init(rawValue: "showStatusBarChanged") }
 }

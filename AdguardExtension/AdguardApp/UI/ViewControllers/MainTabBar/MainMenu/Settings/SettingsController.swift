@@ -131,9 +131,6 @@ class SettingsController: UITableViewController {
 
     @IBAction func advancedModeAction(_ sender: UISwitch) {
         configuration.advancedMode = sender.isOn
-        if !sender.isOn {
-           NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
-        }
         tableView.reloadData()
     }
 

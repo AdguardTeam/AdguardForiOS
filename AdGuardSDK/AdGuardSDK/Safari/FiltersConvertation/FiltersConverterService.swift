@@ -34,6 +34,10 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
 
     private(set) var filtersAreConverting: Bool = false {
         didSet {
+            if oldValue == filtersAreConverting {
+                return
+            }
+
             if filtersAreConverting {
                 NotificationCenter.default.filtersConvertionStarted()
             } else {

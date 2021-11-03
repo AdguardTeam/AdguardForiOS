@@ -71,9 +71,6 @@ final class AdvancedSettingsController: UITableViewController {
     // MARK: - actions
 
     @IBAction func showProgressbarAction(_ sender: UISwitch) {
-        if !sender.isOn {
-           NotificationCenter.default.post(name: NSNotification.Name.HideStatusView, object: self)
-        }
         configuration.showStatusBar = sender.isOn
     }
 
