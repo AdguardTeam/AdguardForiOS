@@ -22,7 +22,7 @@ import SafariAdGuardSDK
 
 /// Descendant of this protocol applies the import settings
 protocol ImportSettingsServiceProtocol {
-    /// Applies the import settings. Return settings import result in completion
+    /// Applies the import settings. Returns settings import result in completion
     func applySettings(_ settings: ImportSettings, completion: @escaping (ImportSettings) -> Void)
 }
 
@@ -96,9 +96,8 @@ final class ImportSettingsService: ImportSettingsServiceProtocol {
         let importLicenseResult = importLicense(settings: settings)
         resultSettings.importLicenseStatus = importLicenseResult
 
-
         // Import DNS settings only if application PRO or successfully logged in with license and login status is not .unsuccessful
-        let availableStatus = importLicenseResult == .notImported || importLicenseResult == .successful
+        let availableStatus = importLicenseResult != .unsuccessful
         let isLicensePurchased = purchaseService.isProPurchased || Bundle.main.isPro
         guard availableStatus && isLicensePurchased else {
             return resultSettings

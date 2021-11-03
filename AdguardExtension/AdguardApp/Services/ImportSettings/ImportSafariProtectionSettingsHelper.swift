@@ -36,7 +36,7 @@ final class ImportSafariProtectionSettingsHelper {
 
     // MARK: Internal methods
 
-    /// Imports Safari filters. If **override** is true then all filters and groups will be disabled except new setted filters. If group contain enabled filters it will be enabled too. Return import result
+    /// Imports Safari filters. If **override** is true then all filters and groups will be disabled except new setted filters. If group contains enabled filters it will be enabled too. Returns import result
     func importSafariFilters(_ filtersToImport: [ImportSettings.DefaultSafariFilterSettings], override: Bool) -> [ImportSettings.DefaultSafariFilterSettings] {
         workingQueue.sync {
             if override { disableAllSafariFiltersAndGroups() }
@@ -45,13 +45,13 @@ final class ImportSafariProtectionSettingsHelper {
             let result = importSafariFiltersInternal(filtersToImport, allFilters: allFilters)
 
             let groupsToEnable = collectGroupsToEnable(filtersToImport)
-            enableGroups(groupsToEnable: groupsToEnable)
+            enableGroups(groupsToEnable)
 
             return result
         }
     }
 
-    /// Imports Safari blocklist rules. If **override** is true then all old rules will be replaced new ones. Returns true if storage was changed
+    /// Imports Safari blocklist rules. If **override** is true then all old rules will be replaced with new ones. Returns true if storage was changed
     func importSafariBlocklistRules(_ rules: [String]?, override: Bool) -> Bool {
         workingQueue.sync {
             var result = false
@@ -104,7 +104,7 @@ final class ImportSafariProtectionSettingsHelper {
             if !result.isEmpty,
                let groupEnabled = self.safariProtection.groups.first(where: { $0.groupType == .custom })?.isEnabled,
                 !groupEnabled {
-                self.enableGroups(groupsToEnable: Set<SafariGroup.GroupType>(arrayLiteral: .custom))
+                self.enableGroups(Set<SafariGroup.GroupType>(arrayLiteral: .custom))
             }
             self.completionQueue.async { completion(result) }
         }
@@ -151,16 +151,14 @@ final class ImportSafariProtectionSettingsHelper {
         }
     }
 
-    private func importSafariFiltersInternal(
-        _ filtersToImport: [ImportSettings.DefaultSafariFilterSettings],
-        allFilters: [SafariGroup.Filter]) -> [ImportSettings.DefaultSafariFilterSettings] {
+    private func importSafariFiltersInternal(_ filtersToImport: [ImportSettings.DefaultSafariFilterSettings], allFilters: [SafariGroup.Filter]) -> [ImportSettings.DefaultSafariFilterSettings] {
 
         var resultFilters: [ImportSettings.DefaultSafariFilterSettings] = []
 
         for var filterToImport in filtersToImport {
             if filterToImport.isImportEnabled {
                 if let filter = allFilters.first(where: { $0.filterId == filterToImport.id }) {
-                    filterToImport.status = setFilter(filter: filter, enabled: filterToImport.enable)
+                    filterToImport.status = setFilter(filter, enabled: filterToImport.enable)
                 } else {
                     filterToImport.status = .unsuccessful
                 }
@@ -171,7 +169,7 @@ final class ImportSafariProtectionSettingsHelper {
         return resultFilters
     }
 
-    private func setFilter(filter: SafariGroup.Filter, enabled: Bool) -> ImportSettings.ImportSettingStatus {
+    private func setFilter(_ filter: SafariGroup.Filter, enabled: Bool) -> ImportSettings.ImportSettingStatus {
         do {
             try safariProtection.setFilter(withId: filter.filterId, groupId: filter.group.groupId, enabled: enabled)
             DDLogInfo("(ImportSafariProtectionSettingsHelper) - setFilter; Successfully set enable to \(enabled) for filter with id = \(filter.filterId) for group id = \(filter.group.groupId)")
@@ -182,7 +180,7 @@ final class ImportSafariProtectionSettingsHelper {
         }
     }
 
-    private func enableGroups(groupsToEnable: Set<SafariGroup.GroupType>) {
+    private func enableGroups(_ groupsToEnable: Set<SafariGroup.GroupType>) {
         groupsToEnable.forEach {
             do {
                 try safariProtection.setGroup(groupType: $0, enabled: true)
@@ -193,7 +191,7 @@ final class ImportSafariProtectionSettingsHelper {
         }
     }
 
-    /// Return set of GroupType that must be enabled
+    /// Returns set of GroupType that must be enabled
     private func collectGroupsToEnable(_ filtersToImport: [ImportSettings.DefaultSafariFilterSettings]) -> Set<SafariGroup.GroupType> {
         var setOfGroups = Set<SafariGroup.GroupType>()
         safariProtection.groups.forEach { group in
@@ -206,8 +204,8 @@ final class ImportSafariProtectionSettingsHelper {
         return setOfGroups
     }
 
-    /// Disable all filters excepts filters from custom group.
-    /// Disable all groups excepts custom group.
+    /// Disables all filters excepts filters from custom group.
+    /// Disables all groups excepts custom group.
     private func disableAllSafariFiltersAndGroups() {
         for group in safariProtection.groups {
             if group.groupType == .custom { continue }

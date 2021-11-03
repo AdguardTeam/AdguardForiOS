@@ -239,7 +239,7 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
     // MARK: - Private methods
 
     private func addFilterSync(withName name: String, url: URL, isEnabled: Bool) -> Error? {
-        Logger.logInfo("(DnsFiltersService) - addFilter; Trying to add filter with name=\(name) url=\(url)")
+        Logger.logInfo("(DnsFiltersService) - addFilterSync; Trying to add filter with name=\(name) url=\(url)")
         var resultError: Error?
         let filterId = nextFilterId
         let group = DispatchGroup()
@@ -252,7 +252,7 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
             }
 
             if let error = error {
-                Logger.logError("(DnsFiltersService) - addFilter; Error adding custom filter to storage; Error: \(error)")
+                Logger.logError("(DnsFiltersService) - addFilterSync; Error adding custom filter to storage; Error: \(error)")
                 resultError = error
                 group.leave()
                 return
@@ -265,7 +265,7 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
             let filter = DnsFilter(meta: filterMeta, name: name, filterId: filterId, subscriptionUrl: url, isEnabled: isEnabled)
             self.filters.append(filter)
 
-            Logger.logInfo("(DnsFiltersService) - addFilter; Added DNS filter with name=\(name) url=\(url)")
+            Logger.logInfo("(DnsFiltersService) - addFilterSync; Added DNS filter with name=\(name) url=\(url)")
             group.leave()
         }
 
@@ -277,7 +277,7 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
     }
 
     private func updateFilterSync(withId id: Int) -> Error? {
-        Logger.logInfo("(DnsFiltersService) - updateFilter; Trying to update DNS filter with id=\(id)")
+        Logger.logInfo("(DnsFiltersService) - updateFilterSync; Trying to update DNS filter with id=\(id)")
 
         guard let dnsFilterIndex = filters.firstIndex(where: { $0.filterId == id }) else {
             return DnsFilterError.dnsFilterAbsent(filterId: id)
@@ -295,7 +295,7 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
             }
 
             if let error = error {
-                Logger.logError("(DnsFiltersService) - updateFilter; Error updating custom DNS filter; Error: \(error)")
+                Logger.logError("(DnsFiltersService) - updateFilterSync; Error updating custom DNS filter; Error: \(error)")
                 resultError = error
                 group.leave()
                 return
@@ -310,7 +310,7 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
             let newFilter = DnsFilter(meta: filterMeta, name: dnsFilter.name ?? "", filterId: dnsFilter.filterId, subscriptionUrl: dnsFilter.subscriptionUrl, isEnabled: dnsFilter.isEnabled)
             self.filters[dnsFilterIndex] = newFilter
 
-            Logger.logInfo("(DnsFiltersService) - updateFilter; Updated DNS filter with id=\(id)")
+            Logger.logInfo("(DnsFiltersService) - updateFilterSync; Updated DNS filter with id=\(id)")
             group.leave()
         }
         group.wait()

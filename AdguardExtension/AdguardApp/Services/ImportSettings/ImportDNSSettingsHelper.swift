@@ -39,7 +39,7 @@ final class ImportDNSSettingsHelper {
 
     // MARK: - DNS protection imports
 
-    /// Imports DNS blocklist rules. If **override** is true then all old rules will be replaced new ones. Return true if storage was changed
+    /// Imports DNS blocklist rules. If **override** is true then all old rules will be replaced new ones. Returns true if storage was changed
     func importDnsBlocklistRules(_ rules: [UserRule], override: Bool) -> Bool {
         workingQueue.sync {
             var result = false
@@ -62,7 +62,7 @@ final class ImportDNSSettingsHelper {
         }
     }
 
-    /// Imports DNS server with **serverId**. Return true if server was setted
+    /// Imports DNS server with **serverId**. Returns true if server was setted
     func importDnsServer(serverId: Int) -> Bool {
         workingQueue.sync {
             guard dnsProvidersManager.activeDnsServer.id != serverId else { return false }

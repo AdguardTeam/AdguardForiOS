@@ -146,54 +146,55 @@ extension SafariProtection {
 
     public func setGroup(groupType: SafariGroup.GroupType, enabled: Bool) throws {
         try workingQueue.sync {
-            Logger.logInfo("(SafariProtection+Filters) - setGroup; Setting group with id=\(groupType.id) to enabled=\(enabled)")
-            try filters.setGroup(withId: groupType.id, enabled: enabled)
+            try setGroupInternal(groupType, enabled: enabled)
         }
     }
 
     public func setGroup(groupType: SafariGroup.GroupType, enabled: Bool, onCbReloaded: ((_ error: Error?) -> Void)?) throws {
-        try executeBlockAndReloadCbs {
-            try setGroup(groupType, enabled: enabled)
-        } onCbReloaded: { [weak self] error in
-            guard let self = self else {
-                Logger.logError("(SafariProtection+Filters) - setGroup.onCbReloaded; self is missing!")
-                DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
-                return
-            }
+        try workingQueue.sync {
+            try executeBlockAndReloadCbs {
+                try setGroupInternal(groupType, enabled: enabled)
+            } onCbReloaded: { [weak self] error in
+                guard let self = self else {
+                    Logger.logError("(SafariProtection+Filters) - setGroup.onCbReloaded; self is missing!")
+                    DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
+                    return
+                }
 
-            if let error = error {
-                Logger.logError("(SafariProtection+Filters) - setGroup.onCbReloaded; Error reloading CBs when setting group with id=\(groupType.id) to enabled=\(enabled): \(error)")
-            } else {
-                Logger.logInfo("(SafariProtection+Filters) - setGroup.onCbReloaded; Successfully reloaded CBs after setting group with id=\(groupType.id) to enabled=\(enabled)")
+                if let error = error {
+                    Logger.logError("(SafariProtection+Filters) - setGroup.onCbReloaded; Error reloading CBs when setting group with id=\(groupType.id) to enabled=\(enabled): \(error)")
+                } else {
+                    Logger.logInfo("(SafariProtection+Filters) - setGroup.onCbReloaded; Successfully reloaded CBs after setting group with id=\(groupType.id) to enabled=\(enabled)")
+                }
+                self.completionQueue.async { onCbReloaded?(error) }
             }
-            self.completionQueue.async { onCbReloaded?(error) }
         }
     }
 
-
     public func setFilter(withId id: Int, groupId: Int, enabled: Bool) throws {
         try workingQueue.sync {
-            Logger.logInfo("(SafariProtection+Filters) - setFilter; Setting filter with id=\(id), group id=\(groupId) to enabled=\(enabled)")
-            try self.filters.setFilter(withId: id, groupId, enabled: enabled)
+            try setFilterInternal(withId: id, groupId: groupId, enabled: enabled)
         }
     }
 
     public func setFilter(withId id: Int, groupId: Int, enabled: Bool, onCbReloaded: ((_ error: Error?) -> Void)?) throws {
-        try executeBlockAndReloadCbs {
-            try setFilter(withId: id, groupId: groupId, enabled: enabled)
-        } onCbReloaded: { [weak self] error in
-            guard let self = self else {
-                Logger.logError("(SafariProtection+Filters) - setFilter.onCbReloaded; self is missing!")
-                DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
-                return
-            }
+        try workingQueue.sync {
+            try executeBlockAndReloadCbs {
+                try setFilterInternal(withId: id, groupId: groupId, enabled: enabled)
+            } onCbReloaded: { [weak self] error in
+                guard let self = self else {
+                    Logger.logError("(SafariProtection+Filters) - setFilter.onCbReloaded; self is missing!")
+                    DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
+                    return
+                }
 
-            if let error = error {
-                Logger.logError("(SafariProtection+Filters) - setFilter.onCbReloaded; Error reloading CBs when setting filter with id=\(id), group id=\(groupId) to enabled=\(enabled): \(error)")
-            } else {
-                Logger.logInfo("(SafariProtection+Filters) - setFilter.onCbReloaded; Successfully reloaded CBs after setting filter with id=\(id), group id=\(groupId) to enabled=\(enabled)")
+                if let error = error {
+                    Logger.logError("(SafariProtection+Filters) - setFilter.onCbReloaded; Error reloading CBs when setting filter with id=\(id), group id=\(groupId) to enabled=\(enabled): \(error)")
+                } else {
+                    Logger.logInfo("(SafariProtection+Filters) - setFilter.onCbReloaded; Successfully reloaded CBs after setting filter with id=\(id), group id=\(groupId) to enabled=\(enabled)")
+                }
+                self.completionQueue.async { onCbReloaded?(error) }
             }
-            self.completionQueue.async { onCbReloaded?(error) }
         }
     }
 
@@ -259,27 +260,28 @@ extension SafariProtection {
 
     public func deleteCustomFilter(withId id: Int) throws {
         try workingQueue.sync {
-            Logger.logInfo("(SafariProtection+Filters) - deleteCustomFilter; Delete custom filter with id=\(id)")
-            try self.filters.deleteCustomFilter(withId: id)
+            try deleteCustomFilterInternal(withId: id)
         }
     }
 
     public func deleteCustomFilter(withId id: Int, onCbReloaded: ((_ error: Error?) -> Void)?) throws {
-        try executeBlockAndReloadCbs {
-            try deleteCustomFilter(withId: id)
-        } onCbReloaded: { [weak self] error in
-            guard let self = self else {
-                Logger.logError("(SafariProtection+Filters) - deleteCustomFilter.onCbReloaded; self is missing!")
-                DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
-                return
-            }
+        try workingQueue.sync {
+            try executeBlockAndReloadCbs {
+                try deleteCustomFilterInternal(withId: id)
+            } onCbReloaded: { [weak self] error in
+                guard let self = self else {
+                    Logger.logError("(SafariProtection+Filters) - deleteCustomFilter.onCbReloaded; self is missing!")
+                    DispatchQueue.main.async { onCbReloaded?(CommonError.missingSelf) }
+                    return
+                }
 
-            if let error = error {
-                Logger.logError("(SafariProtection+Filters) - deleteCustomFilter.onCbReloaded; Error reloading CBs when deleting custom filter with id=\(id): \(error)")
-            } else {
-                Logger.logInfo("(SafariProtection+Filters) - deleteCustomFilter.onCbReloaded; Successfully reloaded CBs after deleting custom filter with id=\(id)")
+                if let error = error {
+                    Logger.logError("(SafariProtection+Filters) - deleteCustomFilter.onCbReloaded; Error reloading CBs when deleting custom filter with id=\(id): \(error)")
+                } else {
+                    Logger.logInfo("(SafariProtection+Filters) - deleteCustomFilter.onCbReloaded; Successfully reloaded CBs after deleting custom filter with id=\(id)")
+                }
+                self.completionQueue.async { onCbReloaded?(error) }
             }
-            self.completionQueue.async { onCbReloaded?(error) }
         }
     }
 
@@ -333,5 +335,22 @@ extension SafariProtection {
             try self.filters.enablePredefinedGroupsAndFilters()
             Logger.logInfo("(SafariProtection+Filters) - enablePredefinedGroupsAndFilters; Enabling predefined groups and filters successfully ended")
         }
+    }
+
+    // MARK: - Private methods
+
+    private func setGroupInternal(_ groupType: SafariGroup.GroupType, enabled: Bool) throws {
+        Logger.logInfo("(SafariProtection+Filters) - setGroupInternal; Setting group with id=\(groupType.id) to enabled=\(enabled)")
+        try filters.setGroup(withId: groupType.id, enabled: enabled)
+    }
+
+    private func setFilterInternal(withId id: Int, groupId: Int, enabled: Bool) throws {
+        Logger.logInfo("(SafariProtection+Filters) - setFilterInternal; Setting filter with id=\(id), group id=\(groupId) to enabled=\(enabled)")
+        try self.filters.setFilter(withId: id, groupId, enabled: enabled)
+    }
+
+    private func deleteCustomFilterInternal(withId id: Int) throws {
+        Logger.logInfo("(SafariProtection+Filters) - deleteCustomFilterInternal; Delete custom filter with id=\(id)")
+        try self.filters.deleteCustomFilter(withId: id)
     }
 }

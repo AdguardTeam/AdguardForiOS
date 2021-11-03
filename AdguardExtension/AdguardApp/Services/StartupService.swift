@@ -140,9 +140,6 @@ final class StartupService : NSObject {
         let setappService: SetappServiceProtocol = SetappService(purchaseService: purchaseService, resources: sharedResources)
         locator.addService(service: setappService)
 
-        let importSettings: ImportSettingsServiceProtocol = ImportSettingsService(dnsProvidersManager: dnsProvidersManager, safariProtection: safariProtection, dnsProtection: dnsProtection, vpnManager: vpnManager, purchaseService: purchaseService)
-        locator.addService(service: importSettings)
-
         let activityStatistics: ActivityStatisticsProtocol = try! ActivityStatistics(statisticsDbContainerUrl: sharedUrls.statisticsFolderUrl)
         locator.addService(service: activityStatistics)
 
