@@ -18,12 +18,11 @@
 
 import UIKit
 
-class EditBlockRequestController: BottomAlertController {
+final class EditBlockRequestController: BottomAlertController {
 
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var descriptionLabel: ThemableLabel!
-    @IBOutlet weak var domainNameTextField: UITextField!
-    @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
+    @IBOutlet weak var domainNameTextField: AGTextField!
 
     @IBOutlet weak var addButton: RoundRectButton!
     @IBOutlet weak var backButton: RoundRectButton!
@@ -39,6 +38,7 @@ class EditBlockRequestController: BottomAlertController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        domainNameTextField.delegate = self
 
         titleLabel.text = (type == .addDomainToAllowList) ? String.localizedString("whitelist_request") : String.localizedString("block_request")
 
@@ -70,14 +70,6 @@ class EditBlockRequestController: BottomAlertController {
             presenter?.presentBlockRequestController(with: self.originalDomain, type: self.type, delegate: self.delegate)
         }
     }
-
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textViewUnderline.state = .enabled
-    }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        textViewUnderline.state = .disabled
-    }
 }
 
 extension EditBlockRequestController: ThemableProtocol {
@@ -86,5 +78,6 @@ extension EditBlockRequestController: ThemableProtocol {
         contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupTextField(domainNameTextField)
         theme.setupPopupLabels(themableLabels)
+        domainNameTextField.updateTheme()
     }
 }
