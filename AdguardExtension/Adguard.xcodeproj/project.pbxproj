@@ -178,14 +178,10 @@
 		24CE2B85271DA4E700E169E7 /* NetworkSettingsMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CE2B83271DA4E700E169E7 /* NetworkSettingsMigration.swift */; };
 		24D11F2D26F5CCA500EC269F /* DnsProvidersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D11F2C26F5CCA500EC269F /* DnsProvidersModel.swift */; };
 		24D11F2E26F5CCA600EC269F /* DnsProvidersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D11F2C26F5CCA500EC269F /* DnsProvidersModel.swift */; };
-		24D6A9E125FB698A00674D11 /* StatusBarWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6A9E025FB698A00674D11 /* StatusBarWindow.swift */; };
-		24D6A9E225FB698A00674D11 /* StatusBarWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D6A9E025FB698A00674D11 /* StatusBarWindow.swift */; };
 		24D9225B2604B28B002F368B /* AppDelegate+UserNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D9225A2604B28B002F368B /* AppDelegate+UserNotifications.swift */; };
 		24D9226D2604B3DD002F368B /* AppDelegate+UserNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D9225A2604B28B002F368B /* AppDelegate+UserNotifications.swift */; };
 		24D922802604B41C002F368B /* AppDelegate+CheckPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D9227F2604B41C002F368B /* AppDelegate+CheckPeriod.swift */; };
 		24D922922604B428002F368B /* AppDelegate+CheckPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D9227F2604B41C002F368B /* AppDelegate+CheckPeriod.swift */; };
-		24D922B62604B496002F368B /* AppDelegate+StatusBarWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D922B52604B496002F368B /* AppDelegate+StatusBarWindow.swift */; };
-		24D922C82604B4A3002F368B /* AppDelegate+StatusBarWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D922B52604B496002F368B /* AppDelegate+StatusBarWindow.swift */; };
 		24EAE7EC26F759C200386544 /* NewDnsServerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EAE7EB26F759C200386544 /* NewDnsServerModel.swift */; };
 		24EAE7ED26F759C200386544 /* NewDnsServerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EAE7EB26F759C200386544 /* NewDnsServerModel.swift */; };
 		24ED98C6259B78DF00A73B17 /* Array+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24ED98C5259B78DF00A73B17 /* Array+Utils.swift */; };
@@ -394,6 +390,10 @@
 		7E0B222925DBB3C900AF88BB /* UpsellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0B222625DBB3C900AF88BB /* UpsellViewController.swift */; };
 		7E0B226125DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0B226025DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift */; };
 		7E0B226225DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0B226025DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift */; };
+		7E0F9BA9272BED3500B1D831 /* StatusBarWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0F9BA8272BED3500B1D831 /* StatusBarWindow.swift */; };
+		7E0F9BAA272BED3500B1D831 /* StatusBarWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0F9BA8272BED3500B1D831 /* StatusBarWindow.swift */; };
+		7E0F9BAD272BF49200B1D831 /* StatusBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0F9BAC272BF49200B1D831 /* StatusBarManager.swift */; };
+		7E0F9BAE272BF49200B1D831 /* StatusBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0F9BAC272BF49200B1D831 /* StatusBarManager.swift */; };
 		7E1022CE23E1655A00604C90 /* DnsRequestDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1022CD23E1655A00604C90 /* DnsRequestDetailsController.swift */; };
 		7E103A4B23B60B7800C0C67E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 		7E1104F922DE27C700720501 /* StartupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1104F822DE27C700720501 /* StartupService.swift */; };
@@ -534,7 +534,6 @@
 		7E536C7B238D3A9400A83A79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C12EFB1BD7CC5600FFC71C /* Assets.xcassets */; };
 		7E5844D823FD87E900BAD052 /* RateAppServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5844D723FD87E900BAD052 /* RateAppServiceTest.swift */; };
 		7E5844DB23FD88E700BAD052 /* UserNotificationServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5844DA23FD88E700BAD052 /* UserNotificationServiceMock.swift */; };
-		7E59D791236056ED00E7ABA4 /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E59D790236056ED00E7ABA4 /* StatusView.swift */; };
 		7E59F246255D33A40097CD97 /* LocalizedStringsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E59F245255D33A40097CD97 /* LocalizedStringsTests.swift */; };
 		7E6081A926D55BCD00D778F4 /* YouTubeAdsActionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7E60819B26D55BCD00D778F4 /* YouTubeAdsActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7E6081D326D55C0100D778F4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E6081AE26D55C0000D778F4 /* InfoPlist.strings */; };
@@ -1903,7 +1902,6 @@
 		D0B545E12435D69B002F0AEC /* ThemableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E9647216CE5E400313AB1 /* ThemableLabel.swift */; };
 		D0B545E22435D69B002F0AEC /* UIViewController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D034DDAC22CA23030007641A /* UIViewController+Utils.swift */; };
 		D0B545E32435D69B002F0AEC /* BottomShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC3318C234738E400229194 /* BottomShadowView.swift */; };
-		D0B545E42435D69B002F0AEC /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E59D790236056ED00E7ABA4 /* StatusView.swift */; };
 		D0B545E52435D69B002F0AEC /* NetworkSettingsCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101902355A71900935FE9 /* NetworkSettingsCells.swift */; };
 		D0B545E72435D6A1002F0AEC /* UIButton+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0D64C23D593D2004D9E7C /* UIButton+Utils.swift */; };
 		D0B545E82435D6A4002F0AEC /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCC13237194B200FA651F /* ChartView.swift */; };
@@ -2370,11 +2368,9 @@
 		24CBA66125939CC200E28308 /* CustomSchemeURLParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSchemeURLParserTest.swift; sourceTree = "<group>"; };
 		24CE2B83271DA4E700E169E7 /* NetworkSettingsMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsMigration.swift; sourceTree = "<group>"; };
 		24D11F2C26F5CCA500EC269F /* DnsProvidersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersModel.swift; sourceTree = "<group>"; };
-		24D6A9E025FB698A00674D11 /* StatusBarWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarWindow.swift; sourceTree = "<group>"; };
 		24D7367826EA1895003EE3EC /* ServiceInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceInitializer.swift; sourceTree = "<group>"; };
 		24D9225A2604B28B002F368B /* AppDelegate+UserNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+UserNotifications.swift"; sourceTree = "<group>"; };
 		24D9227F2604B41C002F368B /* AppDelegate+CheckPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+CheckPeriod.swift"; sourceTree = "<group>"; };
-		24D922B52604B496002F368B /* AppDelegate+StatusBarWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+StatusBarWindow.swift"; sourceTree = "<group>"; };
 		24EAE7EB26F759C200386544 /* NewDnsServerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDnsServerModel.swift; sourceTree = "<group>"; };
 		24ED98C5259B78DF00A73B17 /* Array+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Utils.swift"; sourceTree = "<group>"; };
 		24F66A8426033C9D0097B426 /* OpenDnsSettingsControllerWithLaunchScreenParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDnsSettingsControllerWithLaunchScreenParser.swift; sourceTree = "<group>"; };
@@ -2665,6 +2661,8 @@
 		7E06B69322FB1606006859AC /* AdguardBlockingExtensionSecurity.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AdguardBlockingExtensionSecurity.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E0B222625DBB3C900AF88BB /* UpsellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpsellViewController.swift; sourceTree = "<group>"; };
 		7E0B226025DBBB3C00AF88BB /* UIApplication+AdGuardVpn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+AdGuardVpn.swift"; sourceTree = "<group>"; };
+		7E0F9BA8272BED3500B1D831 /* StatusBarWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarWindow.swift; sourceTree = "<group>"; };
+		7E0F9BAC272BF49200B1D831 /* StatusBarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarManager.swift; sourceTree = "<group>"; };
 		7E1022CD23E1655A00604C90 /* DnsRequestDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsRequestDetailsController.swift; sourceTree = "<group>"; };
 		7E1104F822DE27C700720501 /* StartupService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartupService.swift; sourceTree = "<group>"; };
 		7E11568A26D38723000ADC3B /* AddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTableViewCell.swift; sourceTree = "<group>"; };
@@ -2851,7 +2849,6 @@
 		7E5985DA25120164004A58AB /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/TodayExtension.strings; sourceTree = "<group>"; };
 		7E5985DB25120165004A58AB /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7E5985DC25120165004A58AB /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = vi; path = vi.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
-		7E59D790236056ED00E7ABA4 /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 		7E59F245255D33A40097CD97 /* LocalizedStringsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringsTests.swift; sourceTree = "<group>"; };
 		7E60819B26D55BCD00D778F4 /* YouTubeAdsActionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = YouTubeAdsActionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E6081AF26D55C0000D778F4 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -4025,7 +4022,6 @@
 				247CB5652600B2F60047974C /* AppDelegate+IURLSchemeExecutor.swift */,
 				24D9225A2604B28B002F368B /* AppDelegate+UserNotifications.swift */,
 				24D9227F2604B41C002F368B /* AppDelegate+CheckPeriod.swift */,
-				24D922B52604B496002F368B /* AppDelegate+StatusBarWindow.swift */,
 				241346CB26131CA300CF8601 /* AppDelegate+Themable.swift */,
 			);
 			path = Extensions;
@@ -5369,6 +5365,15 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		7E0F9BAB272BF47C00B1D831 /* StatusBar */ = {
+			isa = PBXGroup;
+			children = (
+				7E0F9BA8272BED3500B1D831 /* StatusBarWindow.swift */,
+				7E0F9BAC272BF49200B1D831 /* StatusBarManager.swift */,
+			);
+			path = StatusBar;
+			sourceTree = "<group>";
+		};
 		7E1A8F5A26FDBFB400BA98D5 /* ContentBlockers */ = {
 			isa = PBXGroup;
 			children = (
@@ -5841,7 +5846,7 @@
 			isa = PBXGroup;
 			children = (
 				24557DF625EFD4AE00BC5B26 /* AppDelegate.swift */,
-				24D6A9E025FB698A00674D11 /* StatusBarWindow.swift */,
+				7E0F9BAB272BF47C00B1D831 /* StatusBar */,
 				24D923212604C6D6002F368B /* Extensions */,
 				24D6A9CB25FB60A200674D11 /* URLScheme */,
 			);
@@ -6265,7 +6270,6 @@
 				D034DDAC22CA23030007641A /* UIViewController+Utils.swift */,
 				7E2BA2E326F9D3D600B44D4A /* UIViewController+Alert.swift */,
 				7EC3318C234738E400229194 /* BottomShadowView.swift */,
-				7E59D790236056ED00E7ABA4 /* StatusView.swift */,
 				7E5101902355A71900935FE9 /* NetworkSettingsCells.swift */,
 				7ECCCC172372B2AF00FA651F /* ChartView */,
 				7ED0D64C23D593D2004D9E7C /* UIButton+Utils.swift */,
@@ -7854,7 +7858,6 @@
 				659886551CF74DE9003ECD1C /* ACNHttpUtils.m in Sources */,
 				D0B545962435D630002F0AEC /* ThemeService.swift in Sources */,
 				7E2D93FD26F4891D00534DC5 /* Constants+Sentry.swift in Sources */,
-				24D922C82604B4A3002F368B /* AppDelegate+StatusBarWindow.swift in Sources */,
 				D04B4A24263AF7D100815F30 /* SharedResources+applicationResources.swift in Sources */,
 				659886571CF74DE9003ECD1C /* ADLocales.m in Sources */,
 				247CB63B2600CBE40047974C /* OpenTunnelModeControllerParser.swift in Sources */,
@@ -7900,7 +7903,6 @@
 				D0B545D52435D697002F0AEC /* OnboardingAnimationsController.swift in Sources */,
 				248448BD259383ED00D52DE0 /* SignInFailureHandler.swift in Sources */,
 				2430CE1826F360F6005A05DA /* ExtendedRadioButtonCell.swift in Sources */,
-				24D6A9E225FB698A00674D11 /* StatusBarWindow.swift in Sources */,
 				D0D7E5E524444EBD001801A5 /* ParsedHost.swift in Sources */,
 				24037B0725874F7000C4F195 /* DNSSettings.swift in Sources */,
 				2410C1C425EFDC3E00F29487 /* AppDelegate.swift in Sources */,
@@ -7959,6 +7961,7 @@
 				7EF5C53C26C2621D001851D6 /* SharedResources+Statistics.swift in Sources */,
 				D0B545A72435D640002F0AEC /* DnsProvidersController.swift in Sources */,
 				B2673DC727173DFD00E04747 /* SafariProtectionCustomFiltersMigrationHelper.swift in Sources */,
+				7E0F9BAA272BED3500B1D831 /* StatusBarWindow.swift in Sources */,
 				B26B924827197D2400F1D482 /* DnsProtectionCustomProvidersMigrationHelper.swift in Sources */,
 				D0B545DD2435D69B002F0AEC /* LongLabelCell.swift in Sources */,
 				D0B545BA2435D655002F0AEC /* DnsRequestDetailsController.swift in Sources */,
@@ -8061,7 +8064,6 @@
 				7EF5C56926C26BD0001851D6 /* Constants.swift in Sources */,
 				7E21CBA925F918FA00A5A735 /* NetworkManager.swift in Sources */,
 				24CE2B85271DA4E700E169E7 /* NetworkSettingsMigration.swift in Sources */,
-				D0B545E42435D69B002F0AEC /* StatusView.swift in Sources */,
 				D0B545F72435D6C4002F0AEC /* UIView+Utils.swift in Sources */,
 				D08A21AC270493D200267930 /* DnsLogRecord.swift in Sources */,
 				2443394D2580C13600AB4F26 /* LowLevelSettingsController.swift in Sources */,
@@ -8107,6 +8109,7 @@
 				7E31217324DC028300642879 /* BottomAlertTransition.swift in Sources */,
 				D0B545BC2435D659002F0AEC /* BlockRequestController.swift in Sources */,
 				247432DF261731C00025C7B8 /* UIAlerController+Style.swift in Sources */,
+				7E0F9BAE272BF49200B1D831 /* StatusBarManager.swift in Sources */,
 				7E3FEFB526CD3AB60080EC03 /* UITableView+Utils.swift in Sources */,
 				D031A0D0219EFC99002C17D9 /* DDTTYLogger.m in Sources */,
 				2490F65E27009E7200B1514D /* RequestFactory.swift in Sources */,
@@ -8337,7 +8340,6 @@
 				D07D41D121FF1F6400B03872 /* DnsModeController.swift in Sources */,
 				B2673DE82717418600E04747 /* DnsLogRecordHelper.swift in Sources */,
 				D077D5F52139774E00D3D5B3 /* RoundRectButton.swift in Sources */,
-				24D922B62604B496002F368B /* AppDelegate+StatusBarWindow.swift in Sources */,
 				2490F65A2700983D00B1514D /* SuccessFailureParser.swift in Sources */,
 				24B36A9426F3948800085E7A /* BackgroundFetchUpdateInterval.swift in Sources */,
 				7EE9F63E26DCC55300646D62 /* FilterDetailsProtocol.swift in Sources */,
@@ -8346,7 +8348,6 @@
 				7E50493022F07C4E0095181C /* UIView+Utils.swift in Sources */,
 				D0CDAEA52191C9540028001B /* String+Utils.swift in Sources */,
 				242A07B126C677D900181D35 /* AdvancedProtectionController.swift in Sources */,
-				24D6A9E125FB698A00674D11 /* StatusBarWindow.swift in Sources */,
 				24B36A8F26F393F200085E7A /* SharedResources+BackgroundFetchTimePeriod.swift in Sources */,
 				24F67F5826E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift in Sources */,
 				7E2D93FC26F4891D00534DC5 /* Constants+Sentry.swift in Sources */,
@@ -8401,6 +8402,7 @@
 				247CB57B2600B8030047974C /* OpenUserFilterControllerParser.swift in Sources */,
 				D02B550122EED4AF0039BC48 /* Date+Utils.swift in Sources */,
 				7E50493322F07FFA0095181C /* FilterTagsButtons.swift in Sources */,
+				7E0F9BA9272BED3500B1D831 /* StatusBarWindow.swift in Sources */,
 				7EBDFE9126CFAE2B00CCE8CC /* FilterDetailsCell.swift in Sources */,
 				B26B924727197D2400F1D482 /* DnsProtectionCustomProvidersMigrationHelper.swift in Sources */,
 				D0F9117A213422E1006DF0D3 /* PurchaseService.swift in Sources */,
@@ -8493,7 +8495,6 @@
 				D028DB8921550615002E4E8E /* MainMenuController.swift in Sources */,
 				24F66A9A26033DA00097B426 /* OpenMainPageControllerControllerWithLaunchScreenParser.swift in Sources */,
 				7E15B65E2343B39A0048E63F /* AdvancedSettingsController.swift in Sources */,
-				7E59D791236056ED00E7ABA4 /* StatusView.swift in Sources */,
 				2490F65C27009DF800B1514D /* HttpRequestServiceProtocol+sendFeedback.swift in Sources */,
 				D0A614ED26EBA18B00793922 /* BootstrapsHelper.swift in Sources */,
 				7EC67F6C2548301000FEEEE2 /* ChooseDnsImplementationController.swift in Sources */,
@@ -8549,6 +8550,7 @@
 				7E85A82326F37FBD0059BB33 /* OpenLicenseControllerParser.swift in Sources */,
 				24C31EC226FF703800673309 /* ApplicationWebReporter.swift in Sources */,
 				D09CB60523ABBA7D008C9FF7 /* OnboardingController.swift in Sources */,
+				7E0F9BAD272BF49200B1D831 /* StatusBarManager.swift in Sources */,
 				655A02761C6B7686000F00D7 /* NSDate+Utils.m in Sources */,
 				7E6D962623E17347006202C2 /* RequestDetailsCell.swift in Sources */,
 				D020B27B21F894F90075BB8D /* DnsRequestLogModel.swift in Sources */,

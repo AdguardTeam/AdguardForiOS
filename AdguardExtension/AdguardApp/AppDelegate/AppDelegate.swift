@@ -1,20 +1,20 @@
-/**
-    This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © Adguard Software Limited. All rights reserved.
-
-    Adguard for iOS is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    Adguard for iOS is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
- */
+//
+// This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
+// Copyright © Adguard Software Limited. All rights reserved.
+//
+// Adguard for iOS is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Adguard for iOS is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
+//
 
 import SharedAdGuardSDK
 import SafariAdGuardSDK
@@ -28,16 +28,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Public properties
 
-    let statusBarWindow: IStatusBarWindow
     var window: UIWindow?
 
-    // AppDelegate+StatusBarWindow notifications
-    var filtersUpdateStarted: SharedAdGuardSDK.NotificationToken?
-    var filtersUpdateFinished: SharedAdGuardSDK.NotificationToken?
-    var contentBlockersUpdateStarted: SharedAdGuardSDK.NotificationToken?
-    var contentBlockersUpdateFinished: SharedAdGuardSDK.NotificationToken?
-    var orientationChangeNotification: SharedAdGuardSDK.NotificationToken?
-    // AppDelegate addPurchaseStatusObserver notifications
+    // MARK: - Private properties
+
+    private var statusBarManager: StatusBarManager?
+
+    /* Pro status observers */
     private var purchaseObservation: NotificationToken?
     private var proStatusObservation: NotificationToken?
     private var setappObservation: NotificationToken?
@@ -91,8 +88,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.complexProtection = ServiceLocator.shared.getService()!
         self.themeService = ServiceLocator.shared.getService()!
         self.dnsProtection = ServiceLocator.shared.getService()!
-
-        self.statusBarWindow = StatusBarWindow(configuration: configuration)
 
         super.init()
 
@@ -180,11 +175,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        DDLogInfo("(AppDelegate) applicationDidBecomeActive.")
-        initStatusBarNotifications(application)
+        DDLogInfo("(AppDelegate) applicationDidBecomeActive")
+        application.applicationIconBadgeNumber = 0
 
         // If theme mode is System Default gets current style
         setAppInterfaceStyle()
+
+        // Initialize status bar
+        if statusBarManager == nil {
+            let keyWindow: UIWindow?
+            if #available(iOS 13.0, *) {
+                keyWindow = UIApplication.shared.windows.filter { $0.isKeyWindow }.first
+            } else {
+                keyWindow = UIApplication.shared.keyWindow
+            }
+            if let keyWindow = keyWindow {
+                statusBarManager = StatusBarManager(configuration: configuration, keyWindow: keyWindow)
+            }
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
