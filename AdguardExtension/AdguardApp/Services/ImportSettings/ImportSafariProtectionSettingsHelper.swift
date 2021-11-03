@@ -52,7 +52,7 @@ final class ImportSafariProtectionSettingsHelper {
     }
 
     /// Imports Safari blocklist rules. If **override** is true then all old rules will be replaced with new ones. Returns true if storage was changed
-    func importSafariBlocklistRules(_ rules: [String]?, override: Bool) -> Bool {
+    func importSafariBlocklistRules(_ rules: [String], override: Bool) -> Bool {
         workingQueue.sync {
             var result = false
             if override {
@@ -60,17 +60,9 @@ final class ImportSafariProtectionSettingsHelper {
                 result = true
             }
 
-            if let rules = rules {
-                rules.forEach {
-                    do {
-                        let userRule = UserRule(ruleText: $0)
-                        try safariProtection.add(rule: userRule, for: .blocklist, override: override)
-                        DDLogInfo("(ImportSafariProtectionSettingsHelper) - importSafariBlocklistRules; Successfully add rule \($0) to blocklist")
-                        result = true
-                    } catch {
-                        DDLogError("(ImportSafariProtectionSettingsHelper) - importSafariBlocklistRules; Error occurred while adding rule = \($0) for blocklist; Error: \(error)")
-                    }
-                }
+            if !rules.isEmpty {
+                safariProtection.set(rules: rules, for: .blocklist)
+                result = true
             }
             return result
         }

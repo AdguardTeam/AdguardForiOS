@@ -70,6 +70,15 @@ public protocol SafariProtectionUserRulesProtocol {
     func add(rules: [UserRule], for type: SafariUserRuleType, override: Bool, onCbReloaded: ((Error?) -> Void)?) throws
 
     /**
+     Replaces old rules models with provided rules string
+     If one of passed rules did already exist than it's state will be preserved
+
+     - Parameter rules: Rules texts to add to storage
+     - Parameter type: User rules type (blocklist / allowlist / inverted allowlist) to add rules for
+     */
+    func set(rules: [String], for type: SafariUserRuleType)
+
+    /**
      Replaces old rules models with provided rules string and reloads CBs than
      If one of passed rules did already exist than it's state will be preserved
 
@@ -209,13 +218,16 @@ extension SafariProtection {
         }
     }
 
+    public func set(rules: [String], for type: SafariUserRuleType) {
+        workingQueue.sync {
+            setRulesInternal(rules, for: type)
+        }
+    }
+
     public func set(rules: [String], for type: SafariUserRuleType, onCbReloaded: ((Error?) -> Void)?) {
         workingQueue.sync {
-            Logger.logInfo("(SafariProtection+UserRules) - setRules; Setting \(rules.count) rules; for type=\(type)")
-
-            let provider = self.getProvider(for: type)
             executeBlockAndReloadCbs {
-                provider.set(rules: rules)
+                setRulesInternal(rules, for: type)
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+UserRules) - setRules.onCbReloaded; self is missing!")
@@ -404,6 +416,12 @@ extension SafariProtection {
         Logger.logInfo("(SafariProtection+UserRules) - addRuleInternal; Adding rule: \(rule); for type=\(type); override=\(override)")
         let provider = getProvider(for: type)
         try provider.add(rule: rule, override: override)
+    }
+
+    private func setRulesInternal(_ rules: [String], for type: SafariUserRuleType) {
+        Logger.logInfo("(SafariProtection+UserRules) - setRulesInternal; Setting \(rules.count) rules; for type=\(type)")
+        let provider = self.getProvider(for: type)
+        provider.set(rules: rules)
     }
 
     private func removeAllRulesInternal(for type: SafariUserRuleType) {

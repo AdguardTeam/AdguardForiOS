@@ -40,7 +40,7 @@ final class ImportDNSSettingsHelper {
     // MARK: - DNS protection imports
 
     /// Imports DNS blocklist rules. If **override** is true then all old rules will be replaced new ones. Returns true if storage was changed
-    func importDnsBlocklistRules(_ rules: [UserRule], override: Bool) -> Bool {
+    func importDnsBlocklistRules(_ rules: [String], override: Bool) -> Bool {
         workingQueue.sync {
             var result = false
 
@@ -49,15 +49,11 @@ final class ImportDNSSettingsHelper {
                 result = true
             }
 
-            rules.forEach {
-                do {
-                    try dnsProtection.add(rule: $0, override: override, for: .blocklist)
-                    DDLogInfo("(ImportDNSSettingsHelper) - importDnsBlocklistRules; Rule = \($0) were successfully added")
-                    result = true
-                } catch {
-                    DDLogError("(ImportDNSSettingsHelper) - importDnsBlocklistRules; Error occurred while adding rule = \($0); Error: = \(error)")
-                }
+            if !rules.isEmpty {
+                dnsProtection.set(rules: rules, for: .blocklist)
+                result = true
             }
+
             return result
         }
     }

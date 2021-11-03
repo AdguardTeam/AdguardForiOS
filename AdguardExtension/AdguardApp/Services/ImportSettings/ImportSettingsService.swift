@@ -188,8 +188,7 @@ final class ImportSettingsService: ImportSettingsServiceProtocol {
         guard let dnsUserRules = settings.dnsBlocklistRules else { return settings.importDnsBlocklistRulesStatus }
         if settings.isDnsBlocklistRulesImportEnabled {
             let overrideDnsUserRules = settings.overrideDnsBlocklistRules ?? false
-            let rulesToImport = dnsUserRules.map { UserRule(ruleText: $0) }
-            let result = dnsImportHelper.importDnsBlocklistRules(rulesToImport, override: overrideDnsUserRules)
+            let result = dnsImportHelper.importDnsBlocklistRules(dnsUserRules, override: overrideDnsUserRules)
             return result ? .successful : .unsuccessful
         }
         return settings.importDnsBlocklistRulesStatus
