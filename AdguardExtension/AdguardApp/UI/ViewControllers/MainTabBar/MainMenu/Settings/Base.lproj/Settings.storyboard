@@ -2809,11 +2809,11 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         </variation>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PQ9-qY-pkX">
-                                                        <rect key="frame" x="32" y="49" width="350" height="18"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PQ9-qY-pkX" customClass="AGTextField" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="16" y="41" width="382" height="40"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="18" id="8fE-me-8sA">
-                                                                <variation key="heightClass=regular-widthClass=regular" constant="28"/>
+                                                            <constraint firstAttribute="height" constant="40" id="8fE-me-8sA">
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
                                                             </constraint>
                                                         </constraints>
                                                         <color key="textColor" red="0.28627450980000002" green="0.28627450980000002" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -2825,18 +2825,7 @@
                                                         <variation key="heightClass=regular-widthClass=regular">
                                                             <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                         </variation>
-                                                        <connections>
-                                                            <action selector="ttlChangedAction:" destination="ted-HM-sBA" eventType="editingChanged" id="LCL-se-A7C"/>
-                                                            <outlet property="delegate" destination="ted-HM-sBA" id="4ds-u2-fbN"/>
-                                                        </connections>
                                                     </textField>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cMm-ii-xvc" customClass="TextFieldIndicatorView" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="24" y="67" width="366" height="1"/>
-                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="1" id="8sD-GI-gmK"/>
-                                                        </constraints>
-                                                    </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sNF-Hy-NdB" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                                                         <rect key="frame" x="16" y="92" width="382" height="40"/>
                                                         <constraints>
@@ -2878,23 +2867,34 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstItem="sNF-Hy-NdB" firstAttribute="leading" secondItem="oLm-6n-xCk" secondAttribute="leading" constant="16" id="2Vw-UE-2Vt"/>
-                                                    <constraint firstItem="Dfm-If-1AX" firstAttribute="leading" secondItem="oLm-6n-xCk" secondAttribute="leading" constant="16" id="4wz-Hm-uhU"/>
+                                                    <constraint firstItem="sNF-Hy-NdB" firstAttribute="leading" secondItem="oLm-6n-xCk" secondAttribute="leading" constant="16" id="2Vw-UE-2Vt">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                    </constraint>
+                                                    <constraint firstItem="Dfm-If-1AX" firstAttribute="leading" secondItem="oLm-6n-xCk" secondAttribute="leading" constant="16" id="4wz-Hm-uhU">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                    </constraint>
                                                     <constraint firstItem="Dfm-If-1AX" firstAttribute="top" secondItem="sNF-Hy-NdB" secondAttribute="bottom" constant="16" id="6ZM-53-0ig"/>
-                                                    <constraint firstAttribute="trailing" secondItem="2A9-hH-oY3" secondAttribute="trailing" constant="32" id="90p-At-U7H"/>
-                                                    <constraint firstAttribute="trailing" secondItem="cMm-ii-xvc" secondAttribute="trailing" constant="24" id="C3K-iE-ncO"/>
-                                                    <constraint firstItem="cMm-ii-xvc" firstAttribute="leading" secondItem="oLm-6n-xCk" secondAttribute="leading" constant="24" id="E5r-95-Zmk"/>
+                                                    <constraint firstAttribute="trailing" secondItem="2A9-hH-oY3" secondAttribute="trailing" constant="16" id="90p-At-U7H">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                    </constraint>
                                                     <constraint firstItem="PQ9-qY-pkX" firstAttribute="trailing" secondItem="2A9-hH-oY3" secondAttribute="trailing" id="HEl-iu-RGP"/>
-                                                    <constraint firstItem="sNF-Hy-NdB" firstAttribute="top" secondItem="cMm-ii-xvc" secondAttribute="bottom" constant="24" id="HLC-SV-Ds1"/>
                                                     <constraint firstItem="2A9-hH-oY3" firstAttribute="top" secondItem="oLm-6n-xCk" secondAttribute="top" constant="16" id="KRc-e4-NZi"/>
-                                                    <constraint firstAttribute="trailing" secondItem="sNF-Hy-NdB" secondAttribute="trailing" constant="16" id="PcT-kY-y1f"/>
+                                                    <constraint firstAttribute="trailing" secondItem="sNF-Hy-NdB" secondAttribute="trailing" constant="16" id="PcT-kY-y1f">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                    </constraint>
                                                     <constraint firstItem="PQ9-qY-pkX" firstAttribute="leading" secondItem="2A9-hH-oY3" secondAttribute="leading" id="bUL-iD-qnW"/>
-                                                    <constraint firstItem="2A9-hH-oY3" firstAttribute="leading" secondItem="oLm-6n-xCk" secondAttribute="leading" constant="32" id="eH1-u9-nVg"/>
-                                                    <constraint firstItem="cMm-ii-xvc" firstAttribute="top" secondItem="PQ9-qY-pkX" secondAttribute="bottom" constant="4" id="ehq-mg-Omi"/>
+                                                    <constraint firstItem="2A9-hH-oY3" firstAttribute="leading" secondItem="oLm-6n-xCk" secondAttribute="leading" constant="16" id="eH1-u9-nVg">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                    </constraint>
+                                                    <constraint firstItem="sNF-Hy-NdB" firstAttribute="top" secondItem="PQ9-qY-pkX" secondAttribute="bottom" constant="24" id="k7d-Xb-UiV">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                                                    </constraint>
                                                     <constraint firstAttribute="bottom" secondItem="Dfm-If-1AX" secondAttribute="bottom" constant="24" id="pIF-Of-74l"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Dfm-If-1AX" secondAttribute="trailing" constant="16" id="tJg-H1-hif"/>
-                                                    <constraint firstItem="PQ9-qY-pkX" firstAttribute="top" secondItem="2A9-hH-oY3" secondAttribute="bottom" constant="16" id="usu-IE-2Rt">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="22"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Dfm-If-1AX" secondAttribute="trailing" constant="16" id="tJg-H1-hif">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                    </constraint>
+                                                    <constraint firstItem="PQ9-qY-pkX" firstAttribute="top" secondItem="2A9-hH-oY3" secondAttribute="bottom" constant="8" id="usu-IE-2Rt">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="16"/>
                                                     </constraint>
                                                 </constraints>
                                             </view>
@@ -2944,10 +2944,8 @@
                         <outlet property="keyboardHeightLayoutConstraint" destination="49P-Mi-Ltn" id="Q6l-F4-p5R"/>
                         <outlet property="saveButton" destination="sNF-Hy-NdB" id="ir8-AG-MWE"/>
                         <outlet property="scrollContentView" destination="G4l-zc-GgF" id="fbd-GU-aA4"/>
-                        <outlet property="textViewUnderline" destination="cMm-ii-xvc" id="2Hx-hf-Vzw"/>
                         <outlet property="titleLabel" destination="uRk-qq-TJH" id="A2b-B7-WHZ"/>
                         <outlet property="ttlTextField" destination="PQ9-qY-pkX" id="e2f-5w-vaM"/>
-                        <outletCollection property="separators" destination="cMm-ii-xvc" collectionClass="NSMutableArray" id="c1v-8v-1RZ"/>
                         <outletCollection property="themableLabels" destination="2A9-hH-oY3" collectionClass="NSMutableArray" id="pK1-al-m4k"/>
                     </connections>
                 </viewController>
@@ -3163,7 +3161,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bnL-IC-jxK">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bnL-IC-jxK">
                                 <rect key="frame" x="0.0" y="567" width="414" height="329"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tRH-gM-893">
