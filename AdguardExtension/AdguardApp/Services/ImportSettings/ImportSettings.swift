@@ -16,18 +16,16 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
-
 /// This struct responsible for storing import data and import statuses
-struct ImportSettings: Codable {
+struct ImportSettings: Decodable {
 
-    enum ImportSettingStatus: Int, Codable {
+    enum ImportSettingStatus {
         case successful, unsuccessful, notImported
     }
 
     // MARK: - Safari protection filters object
     /// Safari protection default filters struct
-    struct DefaultSafariFilterSettings: Codable {
+    struct DefaultSafariFilterSettings: Decodable {
         var id: Int
         var enable: Bool
         var isImportEnabled = true // UI flag, if true - import this settings
@@ -41,7 +39,7 @@ struct ImportSettings: Codable {
     // MARK: - Safari protection custom filter and DNS protection filter object
 
     /// Safari protection custom filter and DNS protection filter struct
-    struct FilterSettings: Codable {
+    struct FilterSettings: Decodable {
         var name: String
         var url: String
         var isImportEnabled = true // UI flag, if true - import this settings

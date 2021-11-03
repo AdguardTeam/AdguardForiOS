@@ -184,7 +184,7 @@ final class ImportSafariProtectionSettingsHelper {
         groupsToEnable.forEach {
             do {
                 try safariProtection.setGroup(groupType: $0, enabled: true)
-                DDLogInfo("(ImportSafariProtectionSettingsHelper) - enableGroups; Group \($0) were enabled")
+                DDLogInfo("(ImportSafariProtectionSettingsHelper) - enableGroups; Group \($0) was enabled")
             } catch {
                 DDLogError("(ImportSafariProtectionSettingsHelper) - enableGroups; Error occurred while enabling group \($0); Error: \(error)")
             }
@@ -223,7 +223,7 @@ final class ImportSafariProtectionSettingsHelper {
     private func disableGroupAndAllFilters(for group: SafariGroup) {
         do {
             try safariProtection.setGroup(groupType: group.groupType, enabled: false)
-            DDLogInfo("(ImportSafariProtectionSettingsHelper) - disableGroupAndAllFilters; Group = \(group.groupType) were disabled")
+            DDLogInfo("(ImportSafariProtectionSettingsHelper) - disableGroupAndAllFilters; Group = \(group.groupType) was disabled")
         } catch {
             DDLogError("(ImportSafariProtectionSettingsHelper) - disableGroupAndAllFilters; Error occurred while disabling group = \(group.groupType); Error: \(error)")
         }
@@ -231,7 +231,7 @@ final class ImportSafariProtectionSettingsHelper {
         group.filters.forEach { filter in
             do {
                 try safariProtection.setFilter(withId: filter.filterId, groupId: filter.group.groupId, enabled: false)
-                DDLogInfo("(ImportSafariProtectionSettingsHelper) - disableGroupAndAllFilters; Filter with id = \(filter.filterId) were disabled")
+                DDLogInfo("(ImportSafariProtectionSettingsHelper) - disableGroupAndAllFilters; Filter with id = \(filter.filterId) was disabled")
             } catch {
                 DDLogError("(ImportSafariProtectionSettingsHelper) - disableGroupAndAllFilters; Error occurred while disabling filter with id = \(filter.filterId); Error: \(error)")
             }
