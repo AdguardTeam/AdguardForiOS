@@ -126,8 +126,8 @@ final class ImportSettingsService: ImportSettingsServiceProtocol {
 
     private func importSafariBlocklistRules(settings: ImportSettings) -> ImportSettings.ImportSettingStatus {
 
-        if settings.isSafariBlocklistRulesImportEnabled {
-            let result = safariImportHelper.importSafariBlocklistRules(settings.safariBlocklistRules ?? [], override: settings.overrideSafariBlocklistRules ?? false)
+        if settings.isSafariBlocklistRulesImportEnabled, let rules = settings.safariBlocklistRules {
+            let result = safariImportHelper.importSafariBlocklistRules(rules, override: settings.overrideSafariBlocklistRules ?? false)
             return result ? .successful : .unsuccessful
         }
         return settings.importSafariBlocklistRulesStatus
