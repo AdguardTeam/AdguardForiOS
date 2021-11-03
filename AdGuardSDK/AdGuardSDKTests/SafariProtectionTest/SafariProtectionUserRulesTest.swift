@@ -81,7 +81,42 @@ class SafariProtectionUserRulesTest: XCTestCase {
 
     typealias Method = (_ completion: @escaping (Error?) -> Void) throws -> Void
 
-    func testAddRule() {
+    func testAddRuleWithSuccess() {
+        mocks.forEach { mock in
+            mock.addRuleCalledCount = 0
+
+            converter.convertFiltersCalledCount = 0
+            cbStorage.invokedSaveCount = 0
+            cbService.updateContentBlockersCalledCount = 0
+
+            try! self.safariProtection.add(rule: UserRule(ruleText: "rule"), for: mock.type, override: true)
+
+            XCTAssertEqual(converter.convertFiltersCalledCount, 0)
+            XCTAssertEqual(cbStorage.invokedSaveCount, 0)
+            XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
+        }
+    }
+
+    func testAddRuleWithError() {
+        try! mocks.forEach { mock in
+            mock.addRuleCalledCount = 0
+            mock.addRuleError = MetaStorageMockError.error
+
+            converter.convertFiltersCalledCount = 0
+            cbStorage.invokedSaveCount = 0
+            cbService.updateContentBlockersCalledCount = 0
+
+            XCTAssertThrowsError(try self.safariProtection.add(rule: UserRule(ruleText: "rule"), for: mock.type, override: true)) { error in
+                XCTAssertEqual(error as! MetaStorageMockError, .error)
+            }
+
+            XCTAssertEqual(converter.convertFiltersCalledCount, 0)
+            XCTAssertEqual(cbStorage.invokedSaveCount, 0)
+            XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
+        }
+    }
+
+    func testAddRuleWithReloadCB() {
         mocks.forEach { mock in
             let method: Method = { completion in
                 try self.safariProtection.add(rule: UserRule(ruleText: "rule"), for: mock.type, override: true) { error in
@@ -94,7 +129,6 @@ class SafariProtectionUserRulesTest: XCTestCase {
                 try method(completion)
             }
             XCTAssertEqual(mock.addRuleCalledCount, 1)
-
 
             mock.addRuleCalledCount = 0
             mock.addRuleError = MetaStorageMockError.error
@@ -268,7 +302,22 @@ class SafariProtectionUserRulesTest: XCTestCase {
 
     // MARK: - Test removeAllRules
 
-    func testRemoveAllRules() {
+    func testRemoveAllRulesWithSuccess() {
+        mocks.forEach { mock in
+            mock.removeAllRulesCalledCount = 0
+            converter.convertFiltersCalledCount = 0
+            cbStorage.invokedSaveCount = 0
+            cbService.updateContentBlockersCalledCount = 0
+
+            self.safariProtection.removeAllRules(for: mock.type)
+
+            XCTAssertEqual(converter.convertFiltersCalledCount, 0)
+            XCTAssertEqual(cbStorage.invokedSaveCount, 0)
+            XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
+        }
+    }
+
+    func testRemoveAllRulesWithReloadCB() {
         mocks.forEach { mock in
             let method: Method = { completion in
                 self.safariProtection.removeAllRules(for: mock.type) { error in
@@ -347,6 +396,40 @@ class SafariProtectionUserRulesTest: XCTestCase {
         XCTAssertEqual(converter.convertFiltersCalledCount, 1)
         XCTAssertEqual(cbStorage.invokedSaveCount, 1)
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
+    }
+
+    func testSetRulesWithSuccess() {
+        mocks.forEach { mock in
+            mock.setRulesCalledCount = 0
+            safariProtection.set(rules: ["rule1", "rule2", "rule3"], for: mock.type)
+            XCTAssertEqual(mock.setRulesCalledCount, 1)
+
+            mock.setRulesCalledCount = 0
+            safariProtection.set(rules: [], for: mock.type)
+            XCTAssertEqual(mock.setRulesCalledCount, 1)
+        }
+    }
+
+    func testSetRulesWithReloadCB() {
+        mocks.forEach { mock in
+            let method: Method = { completion in
+                self.safariProtection.set(rules: ["rule1", "rule2", "rule3"], for: mock.type) { error in
+                    completion(error)
+                }
+            }
+
+            mock.setRulesCalledCount = 0
+            testMethodWithSuccess() { completion in
+                try! method(completion)
+            }
+            XCTAssertEqual(mock.setRulesCalledCount, 1)
+
+            mock.setRulesCalledCount = 0
+            testMethodWithCbReloadError { completion in
+                try! method(completion)
+            }
+            XCTAssertEqual(mock.setRulesCalledCount, 1)
+        }
     }
 
     // MARK: - Methods to help testing
