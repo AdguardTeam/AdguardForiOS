@@ -56,7 +56,6 @@ final class UserRulesTableController: UIViewController {
     private let searchHeader = AGSearchView()
 
     /* Services */
-    private var themeObserver: NotificationToken?
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
     private let dnsProtection: DnsProtectionProtocol = ServiceLocator.shared.getService()!
@@ -74,10 +73,6 @@ final class UserRulesTableController: UIViewController {
         setupBackButton()
         updateTheme()
         searchHeader.delegate = self
-        themeObserver = NotificationCenter.default.observe(name: .themeChanged, object: nil, queue: .main) { [weak self] _ in
-            self?.updateTheme()
-        }
-
         setupToHideKeyboardOnTapOnView(ignoringViews: [])
     }
 
@@ -500,6 +495,7 @@ extension UserRulesTableController: ThemableProtocol {
         cancelButton.setTitleColor(themeService.lightGrayTextColor, for: .normal)
         cancelButton.tintColor = themeService.lightGrayTextColor
         tableView.reloadWithSelectedRows()
+        searchHeader.updateTheme()
     }
 }
 
