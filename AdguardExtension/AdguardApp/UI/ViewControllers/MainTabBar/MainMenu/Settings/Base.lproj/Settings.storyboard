@@ -2873,7 +2873,9 @@
                                                     <constraint firstItem="Dfm-If-1AX" firstAttribute="leading" secondItem="oLm-6n-xCk" secondAttribute="leading" constant="16" id="4wz-Hm-uhU">
                                                         <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                     </constraint>
-                                                    <constraint firstItem="Dfm-If-1AX" firstAttribute="top" secondItem="sNF-Hy-NdB" secondAttribute="bottom" constant="16" id="6ZM-53-0ig"/>
+                                                    <constraint firstItem="Dfm-If-1AX" firstAttribute="top" secondItem="sNF-Hy-NdB" secondAttribute="bottom" constant="16" id="6ZM-53-0ig">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                    </constraint>
                                                     <constraint firstAttribute="trailing" secondItem="2A9-hH-oY3" secondAttribute="trailing" constant="16" id="90p-At-U7H">
                                                         <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                     </constraint>
@@ -3007,11 +3009,11 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         </variation>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7SC-Bu-Ro1">
-                                                        <rect key="frame" x="32" y="49" width="350" height="18"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7SC-Bu-Ro1" customClass="AGTextField" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="16" y="41" width="382" height="40"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="18" id="VAp-Nt-Tcq">
-                                                                <variation key="heightClass=regular-widthClass=regular" constant="28"/>
+                                                            <constraint firstAttribute="height" constant="40" id="VAp-Nt-Tcq">
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
                                                             </constraint>
                                                         </constraints>
                                                         <color key="textColor" red="0.28627450980000002" green="0.28627450980000002" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -3023,17 +3025,7 @@
                                                         <variation key="heightClass=regular-widthClass=regular">
                                                             <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                         </variation>
-                                                        <connections>
-                                                            <outlet property="delegate" destination="SZa-Ac-cS3" id="i1i-fb-KEg"/>
-                                                        </connections>
                                                     </textField>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bTT-mb-hJC" customClass="TextFieldIndicatorView" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="24" y="67" width="366" height="1"/>
-                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="1" id="aW1-pD-cMN"/>
-                                                        </constraints>
-                                                    </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="95J-h1-QgG" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                                                         <rect key="frame" x="16" y="92" width="382" height="40"/>
                                                         <constraints>
@@ -3075,24 +3067,37 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="A89-2M-jqd" secondAttribute="trailing" constant="32" id="95u-ba-Pyf"/>
-                                                    <constraint firstItem="95J-h1-QgG" firstAttribute="leading" secondItem="FsP-cI-lzI" secondAttribute="leading" constant="16" id="C0k-g3-ci7"/>
-                                                    <constraint firstItem="7SC-Bu-Ro1" firstAttribute="trailing" secondItem="A89-2M-jqd" secondAttribute="trailing" id="DFf-QR-ErF"/>
-                                                    <constraint firstItem="bTT-mb-hJC" firstAttribute="top" secondItem="7SC-Bu-Ro1" secondAttribute="bottom" constant="4" id="EJd-zb-ecV"/>
-                                                    <constraint firstItem="95J-h1-QgG" firstAttribute="top" secondItem="bTT-mb-hJC" secondAttribute="bottom" constant="24" id="JfH-kd-kwW"/>
-                                                    <constraint firstAttribute="bottom" secondItem="WUY-Cq-SPm" secondAttribute="bottom" constant="24" id="KcE-cu-h5h"/>
-                                                    <constraint firstItem="7SC-Bu-Ro1" firstAttribute="top" secondItem="A89-2M-jqd" secondAttribute="bottom" constant="16" id="RIV-zR-1wC">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="22"/>
+                                                    <constraint firstAttribute="trailing" secondItem="A89-2M-jqd" secondAttribute="trailing" constant="16" id="95u-ba-Pyf">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                     </constraint>
-                                                    <constraint firstItem="A89-2M-jqd" firstAttribute="leading" secondItem="FsP-cI-lzI" secondAttribute="leading" constant="32" id="Tfh-n0-Txm"/>
-                                                    <constraint firstItem="WUY-Cq-SPm" firstAttribute="leading" secondItem="FsP-cI-lzI" secondAttribute="leading" constant="16" id="YP5-Xa-RQM"/>
+                                                    <constraint firstItem="95J-h1-QgG" firstAttribute="leading" secondItem="FsP-cI-lzI" secondAttribute="leading" constant="16" id="C0k-g3-ci7">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                    </constraint>
+                                                    <constraint firstItem="7SC-Bu-Ro1" firstAttribute="trailing" secondItem="A89-2M-jqd" secondAttribute="trailing" id="DFf-QR-ErF"/>
+                                                    <constraint firstAttribute="bottom" secondItem="WUY-Cq-SPm" secondAttribute="bottom" constant="24" id="KcE-cu-h5h"/>
+                                                    <constraint firstItem="7SC-Bu-Ro1" firstAttribute="top" secondItem="A89-2M-jqd" secondAttribute="bottom" constant="8" id="RIV-zR-1wC">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="16"/>
+                                                    </constraint>
+                                                    <constraint firstItem="A89-2M-jqd" firstAttribute="leading" secondItem="FsP-cI-lzI" secondAttribute="leading" constant="16" id="Tfh-n0-Txm">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                    </constraint>
+                                                    <constraint firstItem="WUY-Cq-SPm" firstAttribute="leading" secondItem="FsP-cI-lzI" secondAttribute="leading" constant="16" id="YP5-Xa-RQM">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                    </constraint>
                                                     <constraint firstItem="7SC-Bu-Ro1" firstAttribute="leading" secondItem="A89-2M-jqd" secondAttribute="leading" id="ezL-IV-7bz"/>
-                                                    <constraint firstItem="bTT-mb-hJC" firstAttribute="leading" secondItem="FsP-cI-lzI" secondAttribute="leading" constant="24" id="fmo-Dm-Evw"/>
-                                                    <constraint firstAttribute="trailing" secondItem="95J-h1-QgG" secondAttribute="trailing" constant="16" id="h8l-3B-Zb7"/>
-                                                    <constraint firstAttribute="trailing" secondItem="bTT-mb-hJC" secondAttribute="trailing" constant="24" id="kfv-d2-dPJ"/>
+                                                    <constraint firstAttribute="trailing" secondItem="95J-h1-QgG" secondAttribute="trailing" constant="16" id="h8l-3B-Zb7">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                    </constraint>
                                                     <constraint firstItem="A89-2M-jqd" firstAttribute="top" secondItem="FsP-cI-lzI" secondAttribute="top" constant="16" id="m9C-0O-Pk2"/>
-                                                    <constraint firstAttribute="trailing" secondItem="WUY-Cq-SPm" secondAttribute="trailing" constant="16" id="rDW-Us-8uu"/>
-                                                    <constraint firstItem="WUY-Cq-SPm" firstAttribute="top" secondItem="95J-h1-QgG" secondAttribute="bottom" constant="16" id="vVm-Bi-MLx"/>
+                                                    <constraint firstAttribute="trailing" secondItem="WUY-Cq-SPm" secondAttribute="trailing" constant="16" id="rDW-Us-8uu">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                    </constraint>
+                                                    <constraint firstItem="WUY-Cq-SPm" firstAttribute="top" secondItem="95J-h1-QgG" secondAttribute="bottom" constant="16" id="vVm-Bi-MLx">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                    </constraint>
+                                                    <constraint firstItem="95J-h1-QgG" firstAttribute="top" secondItem="7SC-Bu-Ro1" secondAttribute="bottom" constant="24" id="yP3-Dk-Fo2">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                                                    </constraint>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -3142,10 +3147,8 @@
                         <outlet property="saveButton" destination="95J-h1-QgG" id="jJ7-be-4ow"/>
                         <outlet property="scrollContentView" destination="r6T-bT-aoz" id="A4D-kM-fBB"/>
                         <outlet property="textFieldDesciptionLabel" destination="A89-2M-jqd" id="RxC-Nt-Png"/>
-                        <outlet property="textViewUnderline" destination="bTT-mb-hJC" id="nQn-Nb-slm"/>
                         <outlet property="upstreamTypeLabel" destination="bRu-jJ-qsB" id="nJB-Ns-oIG"/>
                         <outlet property="upstreamsTextField" destination="7SC-Bu-Ro1" id="5N5-yA-bXe"/>
-                        <outletCollection property="separators" destination="bTT-mb-hJC" collectionClass="NSMutableArray" id="Obz-YI-Oce"/>
                         <outletCollection property="themableLabels" destination="A89-2M-jqd" collectionClass="NSMutableArray" id="6cO-uZ-Ibt"/>
                     </connections>
                 </viewController>

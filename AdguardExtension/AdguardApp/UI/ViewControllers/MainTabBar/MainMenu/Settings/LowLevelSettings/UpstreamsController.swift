@@ -25,17 +25,15 @@ protocol UpstreamsControllerDelegate: AnyObject {
     func updateDescriptionLabel(type: UpstreamType, text: String)
 }
 
-class UpstreamsController: BottomAlertController {
+final class UpstreamsController: BottomAlertController {
     @IBOutlet weak var upstreamTypeLabel: ThemableLabel!
     @IBOutlet weak var textFieldDesciptionLabel: ThemableLabel!
     @IBOutlet weak var saveButton: RoundRectButton!
     @IBOutlet weak var cancelButton: RoundRectButton!
-    @IBOutlet weak var upstreamsTextField: UITextField!
+    @IBOutlet weak var upstreamsTextField: AGTextField!
     @IBOutlet weak var scrollContentView: UIView!
-    @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
 
     @IBOutlet var themableLabels: [ThemableLabel]!
-    @IBOutlet var separators: [UIView]!
 
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
@@ -47,6 +45,7 @@ class UpstreamsController: BottomAlertController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        upstreamsTextField.delegate = self
 
         prepareUpstreamTextField()
         prepareTextFieldDescription()
@@ -61,6 +60,7 @@ class UpstreamsController: BottomAlertController {
     }
 
     // MARK: - Actions
+
     @IBAction func cancelAction(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
@@ -94,14 +94,6 @@ class UpstreamsController: BottomAlertController {
                 }
             }
         }
-    }
-
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textViewUnderline.state = .enabled
-    }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        textViewUnderline.state = .disabled
     }
 
     // MARK: - Private methods
@@ -222,8 +214,6 @@ extension UpstreamsController: ThemableProtocol {
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(upstreamsTextField)
         saveButton?.indicatorStyle = theme.indicatorStyle
-        for separator in separators {
-            separator.backgroundColor = theme.separatorColor
-        }
+        upstreamsTextField.updateTheme()
     }
 }
