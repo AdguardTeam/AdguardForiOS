@@ -240,7 +240,7 @@ extension SafariProtection {
                 DispatchQueue.main.async { onFilterAddedToDb?(CommonError.missingSelf); onCbReloaded?(CommonError.missingSelf) }
                 return
             }
-
+            self.completionQueue.async { onFilterAddedToDb?(nil) }
             self.reloadContentBlockers { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Filters) - addCustomFilter.onCbReloaded; self is missing!")
