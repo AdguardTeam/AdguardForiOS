@@ -121,18 +121,18 @@ final class ImportDNSSettingsHelper {
     private func addDnsFilter(_ filter: ImportSettings.FilterSettings, completion: @escaping (_ success: Bool) -> Void) {
         guard let url = URL(string: filter.url) else {
             DDLogError("(ImportDNSSettingsHelper) - subscribeDnsFilter; Invalid URL string: \(filter.url)")
-            self.completionQueue.async { completion(false) }
+            completion(false)
             return
         }
 
         dnsProtection.addFilter(withName: filter.name, url: url, isEnabled: true) { error in
             if let error = error {
                 DDLogError("(ImportDNSSettingsHelper) - subscribeDnsFilter; Error occurred while trying to add DNS filter with url = \(url); Error: \(error)")
-                self.completionQueue.async { completion(false) }
+                completion(false)
                 return
             }
             DDLogInfo("(ImportDNSSettingsHelper) - subscribeDnsFilter; DNS Filter with url = \(url) successfully added")
-            self.completionQueue.async { completion(true) }
+            completion(true)
         }
     }
 
