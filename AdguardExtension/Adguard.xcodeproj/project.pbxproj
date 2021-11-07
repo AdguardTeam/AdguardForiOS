@@ -7509,8 +7509,8 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "JS_SOURCES=\"${SRCROOT}/SafariWebExtension/extension\"\nRESOURCES=\"${SRCROOT}/SafariWebExtension/Resources\"\ncd \"${JS_SOURCES}\" && yarn install && yarn build && cp -r build/* \"${RESOURCES}\"\n";
+			shellPath = "/bin/sh -l";
+			shellScript = "set -e -x\n\nJS_SOURCES=\"${SRCROOT}/SafariWebExtension/extension\"\nRESOURCES=\"${SRCROOT}/SafariWebExtension/Resources\"\ncd \"${JS_SOURCES}\" && yarn install && yarn build && cp -r build/* \"${RESOURCES}\"\n";
 		};
 		4982C2F926D79F9500CACBBE /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7527,7 +7527,7 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
+			shellPath = "/bin/sh -l";
 			shellScript = "set -e -x\n\nJS_SOURCES=\"${SRCROOT}/SafariWebExtension/extension\"\nRESOURCES=\"${SRCROOT}/SafariWebExtension/Resources\"\ncd \"${JS_SOURCES}\" && yarn install && yarn build && cp -r build/* \"${RESOURCES}\"\n";
 		};
 		6506CC2B1BD853140020F31E /* Setting Required device capabilities */ = {
