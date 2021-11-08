@@ -38,14 +38,12 @@ class ImportSafariProtectionSettingsHelperMock: ImportSafariProtectionSettingsHe
     var invokedImportSafariBlocklistRulesCount = 0
     var invokedImportSafariBlocklistRulesParameters: (rules: [String], override: Bool)?
     var invokedImportSafariBlocklistRulesParametersList = [(rules: [String], override: Bool)]()
-    var stubbedImportSafariBlocklistRulesResult: Bool! = false
 
-    func importSafariBlocklistRules(_ rules: [String], override: Bool) -> Bool {
+    func importSafariBlocklistRules(_ rules: [String], override: Bool) {
         invokedImportSafariBlocklistRules = true
         invokedImportSafariBlocklistRulesCount += 1
         invokedImportSafariBlocklistRulesParameters = (rules, override)
         invokedImportSafariBlocklistRulesParametersList.append((rules, override))
-        return stubbedImportSafariBlocklistRulesResult
     }
 
     var invokedImportCustomSafariFilters = false

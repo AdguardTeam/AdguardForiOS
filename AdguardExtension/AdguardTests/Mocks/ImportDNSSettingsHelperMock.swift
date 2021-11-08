@@ -24,14 +24,12 @@ class ImportDNSSettingsHelperMock: ImportDNSSettingsHelperProtocol {
     var invokedImportDnsBlocklistRulesCount = 0
     var invokedImportDnsBlocklistRulesParameters: (rules: [String], override: Bool)?
     var invokedImportDnsBlocklistRulesParametersList = [(rules: [String], override: Bool)]()
-    var stubbedImportDnsBlocklistRulesResult: Bool! = false
 
-    func importDnsBlocklistRules(_ rules: [String], override: Bool) -> Bool {
+    func importDnsBlocklistRules(_ rules: [String], override: Bool) {
         invokedImportDnsBlocklistRules = true
         invokedImportDnsBlocklistRulesCount += 1
         invokedImportDnsBlocklistRulesParameters = (rules, override)
         invokedImportDnsBlocklistRulesParametersList.append((rules, override))
-        return stubbedImportDnsBlocklistRulesResult
     }
 
     var invokedImportDnsServer = false

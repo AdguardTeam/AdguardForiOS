@@ -23,8 +23,8 @@ protocol ImportSafariProtectionSettingsHelperProtocol {
     /// Imports Safari filters. If **override** is true then all filters and groups will be disabled except new setted filters. If group contains enabled filters it will be enabled too. Returns import result
     func importSafariFilters(_ filtersToImport: [ImportSettings.DefaultSafariFilterSettings], override: Bool) -> [ImportSettings.DefaultSafariFilterSettings]
 
-    /// Imports Safari blocklist rules. If **override** is true then all old rules will be replaced with new ones. Returns true if storage was changed
-    func importSafariBlocklistRules(_ rules: [String], override: Bool) -> Bool
+    /// Imports Safari blocklist rules. If **override** is true then all old rules will be replaced with new ones.
+    func importSafariBlocklistRules(_ rules: [String], override: Bool)
 
     /// Imports custom Safari filters. If **override** is true then all old filters will be replaced with new ones. Returns import result in completion
     func importCustomSafariFilters(_ filters: [ImportSettings.FilterSettings], override: Bool, completion: @escaping ([ImportSettings.FilterSettings]) -> Void)
@@ -65,19 +65,13 @@ final class ImportSafariProtectionSettingsHelper: ImportSafariProtectionSettings
         }
     }
 
-    func importSafariBlocklistRules(_ rules: [String], override: Bool) -> Bool {
+    func importSafariBlocklistRules(_ rules: [String], override: Bool) {
         workingQueue.sync {
-            var result = false
             if override {
                 safariProtection.removeAllRules(for: .blocklist)
-                result = true
             }
 
-            if !rules.isEmpty {
-                safariProtection.set(rules: rules, for: .blocklist)
-                result = true
-            }
-            return result
+            safariProtection.set(rules: rules, for: .blocklist)
         }
     }
 

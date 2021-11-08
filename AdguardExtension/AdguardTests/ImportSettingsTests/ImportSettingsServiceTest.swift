@@ -178,7 +178,6 @@ class ImportSettingsServiceTest: XCTestCase {
 
         let rules = ["Rule1", "Rule2", "Rule3"]
         let importSettings = generateImportSettings(isSafariBlocklistRulesImportEnabled: true, safariBlocklistRules: rules)
-        importSafariHelper.stubbedImportSafariBlocklistRulesResult = true
 
         XCTAssertEqual(importSafariHelper.invokedImportSafariBlocklistRulesCount, 0)
         XCTAssertEqual(safariProtection.updateFiltersMetaAndLocalizationsCalledCount, 0)
@@ -193,32 +192,11 @@ class ImportSettingsServiceTest: XCTestCase {
         XCTAssertEqual(safariProtection.updateFiltersMetaAndLocalizationsCalledCount, 1)
     }
 
-    func testApplySafariBlocklistRulesWithUnsuccess() {
-        let expectation = XCTestExpectation()
-
-        let rules = ["Rule1", "Rule2", "Rule3"]
-        let importSettings = generateImportSettings(isSafariBlocklistRulesImportEnabled: true, safariBlocklistRules: rules)
-        importSafariHelper.stubbedImportSafariBlocklistRulesResult = false
-
-        XCTAssertEqual(importSafariHelper.invokedImportSafariBlocklistRulesCount, 0)
-        XCTAssertEqual(safariProtection.updateFiltersMetaAndLocalizationsCalledCount, 0)
-        service.applySettings(importSettings) { result in
-            XCTAssertEqual(result.safariBlocklistRules!, rules)
-            XCTAssertEqual(result.importSafariBlocklistRulesStatus, .unsuccessful)
-            expectation.fulfill()
-        }
-
-        wait(for: [expectation], timeout: 0.5)
-        XCTAssertEqual(importSafariHelper.invokedImportSafariBlocklistRulesCount, 1)
-        XCTAssertEqual(safariProtection.updateFiltersMetaAndLocalizationsCalledCount, 0)
-    }
-
     func testApplySafariBlocklistRulesWithDisabledImport() {
         let expectation = XCTestExpectation()
 
         let rules = ["Rule1", "Rule2", "Rule3"]
         let importSettings = generateImportSettings(isSafariBlocklistRulesImportEnabled: false, safariBlocklistRules: rules)
-        importSafariHelper.stubbedImportSafariBlocklistRulesResult = true
 
         XCTAssertEqual(importSafariHelper.invokedImportSafariBlocklistRulesCount, 0)
         XCTAssertEqual(safariProtection.updateFiltersMetaAndLocalizationsCalledCount, 0)
@@ -237,7 +215,6 @@ class ImportSettingsServiceTest: XCTestCase {
         let expectation = XCTestExpectation()
 
         let importSettings = generateImportSettings(isSafariBlocklistRulesImportEnabled: true, safariBlocklistRules: nil)
-        importSafariHelper.stubbedImportSafariBlocklistRulesResult = true
 
         XCTAssertEqual(importSafariHelper.invokedImportSafariBlocklistRulesCount, 0)
         XCTAssertEqual(safariProtection.updateFiltersMetaAndLocalizationsCalledCount, 0)
@@ -252,7 +229,7 @@ class ImportSettingsServiceTest: XCTestCase {
         XCTAssertEqual(safariProtection.updateFiltersMetaAndLocalizationsCalledCount, 0)
     }
 
-    // MARK: - test import license
+    // MARK: - Test import license
 
     func testApplyImportLicense() {
         let importSettings = generateImportSettings(isLicenseImportEnabled: true, license: "license")
@@ -400,7 +377,6 @@ class ImportSettingsServiceTest: XCTestCase {
         let importSettings = generateImportSettings(isDnsBlocklistRulesImportEnabled: true, dnsBlocklistRules: ["Rule1", "Rule2", "Rule3"])
         let expectation = XCTestExpectation()
         purchaseService.isProPurchased = true
-        importDNSHelper.stubbedImportDnsBlocklistRulesResult = true
         XCTAssertEqual(importDNSHelper.invokedImportDnsBlocklistRulesCount, 0)
         XCTAssertEqual(vpnManager.updateSettingsCalledCount, 0)
         service.applySettings(importSettings) { result in
@@ -413,28 +389,11 @@ class ImportSettingsServiceTest: XCTestCase {
         XCTAssertEqual(vpnManager.updateSettingsCalledCount, 1)
     }
 
-    func testApplyImportDnsBlocklistRulesWithUnsuccess() {
-        let importSettings = generateImportSettings(isDnsBlocklistRulesImportEnabled: true, dnsBlocklistRules: ["Rule1", "Rule2", "Rule3"])
-        let expectation = XCTestExpectation()
-        purchaseService.isProPurchased = true
-        importDNSHelper.stubbedImportDnsBlocklistRulesResult = false
-        XCTAssertEqual(importDNSHelper.invokedImportDnsBlocklistRulesCount, 0)
-        XCTAssertEqual(vpnManager.updateSettingsCalledCount, 0)
-        service.applySettings(importSettings) { result in
-            XCTAssertEqual(result.importDnsBlocklistRulesStatus, .unsuccessful)
-            expectation.fulfill()
-        }
-
-        wait(for: [expectation], timeout: 0.5)
-        XCTAssertEqual(importDNSHelper.invokedImportDnsBlocklistRulesCount, 1)
-        XCTAssertEqual(vpnManager.updateSettingsCalledCount, 0)
-    }
 
     func testApplyImportDnsBlocklistRulesWithDisabledImport() {
         let importSettings = generateImportSettings(isDnsBlocklistRulesImportEnabled: false, dnsBlocklistRules: ["Rule1", "Rule2", "Rule3"])
         let expectation = XCTestExpectation()
         purchaseService.isProPurchased = true
-        importDNSHelper.stubbedImportDnsBlocklistRulesResult = false
         XCTAssertEqual(importDNSHelper.invokedImportDnsBlocklistRulesCount, 0)
         XCTAssertEqual(vpnManager.updateSettingsCalledCount, 0)
         service.applySettings(importSettings) { result in
@@ -447,7 +406,7 @@ class ImportSettingsServiceTest: XCTestCase {
         XCTAssertEqual(vpnManager.updateSettingsCalledCount, 0)
     }
 
-    // MARK: Test import dns server
+    // MARK: - Test import dns server
 
     func testApplyImportDnsServerWithSuccess() {
         let importSettings = generateImportSettings(isDnsServerImportEnabled: true, dnsServerId: 1)

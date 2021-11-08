@@ -42,31 +42,27 @@ class ImportDNSSettingsHelperTest: XCTestCase {
         XCTAssertEqual(dnsProtection.removeAllRulesCalledCount, 0)
         XCTAssertEqual(dnsProtection.setRulesCalledCount, 0)
 
-        var result = helper.importDnsBlocklistRules(rules, override: false)
-        XCTAssert(result)
+        helper.importDnsBlocklistRules(rules, override: false)
         XCTAssertEqual(dnsProtection.removeAllRulesCalledCount, 0)
         XCTAssertEqual(dnsProtection.setRulesCalledCount, 1)
 
         dnsProtection.removeAllRulesCalledCount = 0
         dnsProtection.setRulesCalledCount = 0
-        result = helper.importDnsBlocklistRules(rules, override: true)
-        XCTAssert(result)
+        helper.importDnsBlocklistRules(rules, override: true)
         XCTAssertEqual(dnsProtection.removeAllRulesCalledCount, 1)
         XCTAssertEqual(dnsProtection.setRulesCalledCount, 1)
 
         dnsProtection.removeAllRulesCalledCount = 0
         dnsProtection.setRulesCalledCount = 0
-        result = helper.importDnsBlocklistRules([], override: false)
-        XCTAssertFalse(result)
+        helper.importDnsBlocklistRules([], override: false)
         XCTAssertEqual(dnsProtection.removeAllRulesCalledCount, 0)
-        XCTAssertEqual(dnsProtection.setRulesCalledCount, 0)
+        XCTAssertEqual(dnsProtection.setRulesCalledCount, 1)
 
         dnsProtection.removeAllRulesCalledCount = 0
         dnsProtection.setRulesCalledCount = 0
-        result = helper.importDnsBlocklistRules([], override: true)
-        XCTAssert(result)
+        helper.importDnsBlocklistRules([], override: true)
         XCTAssertEqual(dnsProtection.removeAllRulesCalledCount, 1)
-        XCTAssertEqual(dnsProtection.setRulesCalledCount, 0)
+        XCTAssertEqual(dnsProtection.setRulesCalledCount, 1)
     }
 
     // MARK: - Test importDnsServer
@@ -93,7 +89,7 @@ class ImportDNSSettingsHelperTest: XCTestCase {
 
         dnsProviderManager.invokedSelectProviderCount = 0
         dnsProviderManager.stubbedActiveDnsServer = servers.first!
-        XCTAssertFalse(helper.importDnsServer(serverId: servers.first!.id))
+        XCTAssert(helper.importDnsServer(serverId: servers.first!.id))
         XCTAssertEqual(dnsProviderManager.invokedSelectProviderCount, 0)
     }
 

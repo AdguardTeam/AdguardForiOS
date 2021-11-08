@@ -38,22 +38,22 @@ class ImportSafariProtectionSettingsHelperTest: XCTestCase {
 
     func testImportSafariBlocklistRules() {
         XCTAssertEqual(safariProtection.setRulesCalledCount, 0)
-        XCTAssert(helper.importSafariBlocklistRules(rules, override: false))
+        helper.importSafariBlocklistRules(rules, override: false)
         XCTAssertEqual(safariProtection.setRulesCalledCount, 1)
 
         safariProtection.setRulesCalledCount = 0
-        XCTAssertFalse(helper.importSafariBlocklistRules([], override: false))
-        XCTAssertEqual(safariProtection.setRulesCalledCount, 0)
-
-        safariProtection.rules = presettedRules
-        safariProtection.setRulesCalledCount = 0
-        XCTAssert(helper.importSafariBlocklistRules(rules, override: true))
+        helper.importSafariBlocklistRules([], override: false)
         XCTAssertEqual(safariProtection.setRulesCalledCount, 1)
 
         safariProtection.rules = presettedRules
         safariProtection.setRulesCalledCount = 0
-        XCTAssert(helper.importSafariBlocklistRules([], override: true))
-        XCTAssertEqual(safariProtection.setRulesCalledCount, 0)
+        helper.importSafariBlocklistRules(rules, override: true)
+        XCTAssertEqual(safariProtection.setRulesCalledCount, 1)
+
+        safariProtection.rules = presettedRules
+        safariProtection.setRulesCalledCount = 0
+        helper.importSafariBlocklistRules([], override: true)
+        XCTAssertEqual(safariProtection.setRulesCalledCount, 1)
     }
 
     // MARK: - Test importSafariFilters

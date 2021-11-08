@@ -20,10 +20,10 @@ import SharedAdGuardSDK
 import DnsAdGuardSDK
 
 protocol ImportDNSSettingsHelperProtocol {
-    /// Imports DNS blocklist rules. If **override** is true then all old rules will be replaced new ones. Returns true if storage was changed
-    func importDnsBlocklistRules(_ rules: [String], override: Bool) -> Bool
+    /// Imports DNS blocklist rules. If **override** is true then all old rules will be replaced new ones.
+    func importDnsBlocklistRules(_ rules: [String], override: Bool)
 
-    /// Imports DNS server with **serverId**. Returns true if server was setted
+    /// Imports DNS server with **serverId**. Returns true if server was set
     func importDnsServer(serverId: Int) -> Bool
 
     /// Imports DNS filters.
@@ -51,27 +51,20 @@ final class ImportDNSSettingsHelper: ImportDNSSettingsHelperProtocol {
 
     // MARK: - DNS protection imports
 
-    func importDnsBlocklistRules(_ rules: [String], override: Bool) -> Bool {
+    func importDnsBlocklistRules(_ rules: [String], override: Bool) {
         workingQueue.sync {
-            var result = false
 
             if override {
                 dnsProtection.removeAllRules(for: .blocklist)
-                result = true
             }
 
-            if !rules.isEmpty {
-                dnsProtection.set(rules: rules, for: .blocklist)
-                result = true
-            }
-
-            return result
+            dnsProtection.set(rules: rules, for: .blocklist)
         }
     }
 
     func importDnsServer(serverId: Int) -> Bool {
         workingQueue.sync {
-            guard dnsProvidersManager.activeDnsServer.id != serverId else { return false }
+            guard dnsProvidersManager.activeDnsServer.id != serverId else { return true }
             if let provider = dnsProvidersManager.allProviders.first(where: { $0.dnsServers.contains(where: { $0.id == serverId }) }) {
                 do {
                     try dnsProvidersManager.selectProvider(withId: provider.providerId, serverId: serverId)

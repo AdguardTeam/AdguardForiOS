@@ -159,8 +159,14 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
                 return
             }
 
-            let error = self.addFilter(withName: name, url: url, isEnabled: isEnabled)
-            self.completionQueue.async { onFilterAdded(error) }
+            var addError: Error?
+            do {
+                try self.addFilter(withName: name, url: url, isEnabled: isEnabled)
+            } catch {
+                addError = error
+            }
+
+            self.completionQueue.async { onFilterAdded(addError) }
         }
     }
 
@@ -179,8 +185,14 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
                 return
             }
 
-            let error = self.updateFilter(withId: id)
-            self.completionQueue.async { onFilterUpdated(error) }
+            var updateError: Error?
+
+            do {
+                try self.updateFilter(withId: id)
+            } catch {
+                updateError = error
+            }
+            self.completionQueue.async { onFilterUpdated(updateError) }
         }
     }
 
@@ -197,10 +209,10 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
             var unupdatedIds: [Int] = []
             let enabledFilters = self.filters.filter { $0.isEnabled }
             for filter in enabledFilters {
-                let error = self.updateFilter(withId: filter.filterId)
-                if error == nil {
+                do {
+                    try self.updateFilter(withId: filter.filterId)
                     updatedIds.append(filter.filterId)
-                } else {
+                } catch {
                     unupdatedIds.append(filter.filterId)
                 }
             }
@@ -238,43 +250,33 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
 
     // MARK: - Private methods
 
-    private func addFilter(withName name: String, url: URL, isEnabled: Bool) -> Error? {
+    private func addFilter(withName name: String, url: URL, isEnabled: Bool) throws {
         Logger.logInfo("(DnsFiltersService) - addFilter; Trying to add filter with name=\(name) url=\(url)")
         let filterId = nextFilterId
-        let result = updateFilterSync(with: filterId, url: url)
-
-        if let error = result.error {
-            return error
-        }
-
-        let filter = DnsFilter(meta: result.meta, name: name, filterId: filterId, subscriptionUrl: url, isEnabled: isEnabled)
+        let result = try updateFilterSync(with: filterId, url: url)
+        let filter = DnsFilter(meta: result, name: name, filterId: filterId, subscriptionUrl: url, isEnabled: isEnabled)
         self.filters.append(filter)
 
         Logger.logInfo("(DnsFiltersService) - addFilter; Added DNS filter with name=\(name) url=\(url)")
-        return nil
     }
 
-    private func updateFilter(withId id: Int) -> Error? {
+    private func updateFilter(withId id: Int) throws {
         Logger.logInfo("(DnsFiltersService) - updateFilter; Trying to update DNS filter with id=\(id)")
 
         guard let dnsFilterIndex = filters.firstIndex(where: { $0.filterId == id }) else {
-            return DnsFilterError.dnsFilterAbsent(filterId: id)
+            throw DnsFilterError.dnsFilterAbsent(filterId: id)
         }
 
         let dnsFilter = filters[dnsFilterIndex]
-        let result = updateFilterSync(with: dnsFilter.filterId, url: dnsFilter.subscriptionUrl)
-        if let error = result.error {
-            return error
-        }
+        let result = try updateFilterSync(with: dnsFilter.filterId, url: dnsFilter.subscriptionUrl)
 
-        let newFilter = DnsFilter(meta: result.meta, name: dnsFilter.name ?? "", filterId: dnsFilter.filterId, subscriptionUrl: dnsFilter.subscriptionUrl, isEnabled: dnsFilter.isEnabled)
+        let newFilter = DnsFilter(meta: result, name: dnsFilter.name ?? "", filterId: dnsFilter.filterId, subscriptionUrl: dnsFilter.subscriptionUrl, isEnabled: dnsFilter.isEnabled)
         self.filters[dnsFilterIndex] = newFilter
 
         Logger.logInfo("(DnsFiltersService) - updateFilter; Updated DNS filter with id=\(id)")
-        return nil
     }
 
-    private func updateFilterSync(with filterId: Int, url: URL) -> (error: Error?, meta: ExtendedCustomFilterMetaProtocol?) {
+    private func updateFilterSync(with filterId: Int, url: URL) throws -> ExtendedCustomFilterMetaProtocol? {
         let group = DispatchGroup()
         var resultError: Error?
         var filterMeta: ExtendedCustomFilterMetaProtocol?
@@ -300,7 +302,10 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
             group.leave()
         }
         group.wait()
-        return (error: resultError, meta: filterMeta)
+        if let error = resultError {
+            throw error
+        }
+        return filterMeta
     }
 }
 

@@ -139,8 +139,8 @@ final class ImportSettingsService: ImportSettingsServiceProtocol {
     private func importSafariBlocklistRules(settings: ImportSettings) -> ImportSettings.ImportSettingStatus {
 
         if settings.isSafariBlocklistRulesImportEnabled, let rules = settings.safariBlocklistRules {
-            let result = safariImportHelper.importSafariBlocklistRules(rules, override: settings.overrideSafariBlocklistRules ?? false)
-            return result ? .successful : .unsuccessful
+            safariImportHelper.importSafariBlocklistRules(rules, override: settings.overrideSafariBlocklistRules ?? false)
+            return .successful
         }
         return settings.importSafariBlocklistRulesStatus
     }
@@ -200,8 +200,8 @@ final class ImportSettingsService: ImportSettingsServiceProtocol {
         guard let dnsUserRules = settings.dnsBlocklistRules else { return settings.importDnsBlocklistRulesStatus }
         if settings.isDnsBlocklistRulesImportEnabled {
             let overrideDnsUserRules = settings.overrideDnsBlocklistRules ?? false
-            let result = dnsImportHelper.importDnsBlocklistRules(dnsUserRules, override: overrideDnsUserRules)
-            return result ? .successful : .unsuccessful
+            dnsImportHelper.importDnsBlocklistRules(dnsUserRules, override: overrideDnsUserRules)
+            return .successful
         }
         return settings.importDnsBlocklistRulesStatus
     }
