@@ -130,18 +130,17 @@ final public class ChartStatistics: ChartStatisticsProtocol {
                 .order(ChartStatisticsTable.timeStamp)
 
             /// Here must be only 1 point, we'll check it later
-            let points: [Point] = try statisticsDb.prepare(query.asSQL()).map {
+            let points: [Point] = try statisticsDb.prepare(query.asSQL()).compactMap {
                 guard let x = $0[1] as? Int64, let y = $0[0] as? Int64 else {
-                    let middle = Int(interval.middle.timeIntervalSince1970)
-                    /// If there is no points in the specified interval than we return zero point in the middle of this interval
-                    return Point(x: middle, y: 0)
+                    /// If there are no points in the specified interval than we don't count it
+                    return nil
                 }
                 return Point(x: Int(x), y: Int(y))
             }
 
             /// Check if point is the only one
             if points.count != 1 {
-                return Point(x: Int(interval.middle.timeIntervalSince1970), y: 0)
+                return nil
             } else {
                 return points.first!
             }

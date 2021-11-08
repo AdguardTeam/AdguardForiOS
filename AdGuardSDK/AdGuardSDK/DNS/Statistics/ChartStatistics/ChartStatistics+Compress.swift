@@ -100,7 +100,7 @@ extension ChartStatistics {
         // Intervals where records will be compressed into 1 record
         let intervals = chartIntervals(for: .all)
 
-        let compressedRecords = try intervals.map { interval -> ChartStatisticsRecord in
+        let compressedRecords = try intervals.compactMap { interval -> ChartStatisticsRecord? in
             let start = interval.start
             let end = interval.end
             let query = ChartStatisticsTable.table
@@ -117,8 +117,8 @@ extension ChartStatistics {
 
             // The result always should be unique
             if result.count != 1 {
-                // If there are multiple results or result is missing we return zero record with date in the middle of the interval
-                return ChartStatisticsRecord(timeStamp: interval.middle, requests: 0, encrypted: 0, blocked: 0, elapsedSumm: 0)
+                // If there are multiple results or result is missing we return nil and don't add this record to compressed
+                return nil
             } else {
                 return result.first!
             }
