@@ -84,7 +84,7 @@ class AGTextField: UITextField {
         }
     }
 
-    // MARK: - Overrided properties
+    // MARK: - Overriden properties
 
     override var placeholder: String? {
         didSet {

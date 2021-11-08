@@ -18,12 +18,9 @@
 
 import Foundation
 
-/**
- ThemeService - service is responsible for dark/light theme switching
- */
-
+/// ThemeService - service is responsible for dark/light theme switching
 protocol ThemeServiceProtocol {
-
+    /// This variable should be used in extensions of `ThemeServiceProtocol`
     var themeIsDark: Bool { get }
 
     var backgroundColor: UIColor { get }
