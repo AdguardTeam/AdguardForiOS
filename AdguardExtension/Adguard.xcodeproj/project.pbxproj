@@ -12,11 +12,17 @@
 		240F14FA271DAF4700C0C8F1 /* NetworkSettingsMigrationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240F14F9271DAF4700C0C8F1 /* NetworkSettingsMigrationTest.swift */; };
 		240F1E5E2595D03000580102 /* RateAppProblemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240F1E5D2595D03000580102 /* RateAppProblemController.swift */; };
 		240F1E5F2595D03000580102 /* RateAppProblemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240F1E5D2595D03000580102 /* RateAppProblemController.swift */; };
+		240F6F322732C14000FD5430 /* ImportDNSSettingsHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240F6F312732C14000FD5430 /* ImportDNSSettingsHelperTest.swift */; };
+		240F6F342732C16500FD5430 /* ImportSafariProtectionSettingsHelperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240F6F332732C16500FD5430 /* ImportSafariProtectionSettingsHelperTest.swift */; };
+		240F6F362732C17B00FD5430 /* ImportSettingsServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240F6F352732C17B00FD5430 /* ImportSettingsServiceTest.swift */; };
+		240F6F382732C29300FD5430 /* DnsProtectionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240F6F372732C29300FD5430 /* DnsProtectionMock.swift */; };
 		2410C1C425EFDC3E00F29487 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24557DF625EFD4AE00BC5B26 /* AppDelegate.swift */; };
+		2411AA292733F6F500E82F2E /* SafariProtectionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2411AA282733F6F500E82F2E /* SafariProtectionMock.swift */; };
 		241346CC26131CA300CF8601 /* AppDelegate+Themable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241346CB26131CA300CF8601 /* AppDelegate+Themable.swift */; };
 		241346CD26131CA300CF8601 /* AppDelegate+Themable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241346CB26131CA300CF8601 /* AppDelegate+Themable.swift */; };
 		2414089B26C4226000741F32 /* OnboardingContentBlockerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2414089A26C4226000741F32 /* OnboardingContentBlockerCell.swift */; };
 		2414089D26C42E6700741F32 /* OnboardingAdvancedProtectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2414089C26C42E6700741F32 /* OnboardingAdvancedProtectionView.swift */; };
+		241436FF273568DC00E33EF0 /* CustomFiltersMetaParserMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241436FE273568DC00E33EF0 /* CustomFiltersMetaParserMock.swift */; };
 		241819FD2594D76900380A8A /* QueryParametersFromURLStringTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241819FC2594D76900380A8A /* QueryParametersFromURLStringTest.swift */; };
 		24195D432719FA2300F31547 /* SystemLibsResolv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24195D422719FA2300F31547 /* SystemLibsResolv.framework */; };
 		24195D442719FA2300F31547 /* SystemLibsResolv.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 24195D422719FA2300F31547 /* SystemLibsResolv.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -114,6 +120,8 @@
 		248448BD259383ED00D52DE0 /* SignInFailureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248448BB259383ED00D52DE0 /* SignInFailureHandler.swift */; };
 		2487C017272AECD900449BC2 /* ImportDNSSettingsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2487C016272AECD900449BC2 /* ImportDNSSettingsHelper.swift */; };
 		2487C019272AECE800449BC2 /* ImportSafariProtectionSettingsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2487C018272AECE800449BC2 /* ImportSafariProtectionSettingsHelper.swift */; };
+		2488C45127357FC600BA6918 /* ImportDNSSettingsHelperMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2488C45027357FC600BA6918 /* ImportDNSSettingsHelperMock.swift */; };
+		2488C4532735800400BA6918 /* ImportSafariProtectionSettingsHelperMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2488C4522735800400BA6918 /* ImportSafariProtectionSettingsHelperMock.swift */; };
 		2490F6452700685D00B1514D /* ActionExtensionWebReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2490F6442700685D00B1514D /* ActionExtensionWebReporter.swift */; };
 		2490F6462700685D00B1514D /* ActionExtensionWebReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2490F6442700685D00B1514D /* ActionExtensionWebReporter.swift */; };
 		2490F6472700685D00B1514D /* ActionExtensionWebReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2490F6442700685D00B1514D /* ActionExtensionWebReporter.swift */; };
@@ -2319,9 +2327,15 @@
 		24037B0525874F7000C4F195 /* DNSSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSSettings.swift; sourceTree = "<group>"; };
 		240F14F9271DAF4700C0C8F1 /* NetworkSettingsMigrationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSettingsMigrationTest.swift; sourceTree = "<group>"; };
 		240F1E5D2595D03000580102 /* RateAppProblemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateAppProblemController.swift; sourceTree = "<group>"; };
+		240F6F312732C14000FD5430 /* ImportDNSSettingsHelperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportDNSSettingsHelperTest.swift; sourceTree = "<group>"; };
+		240F6F332732C16500FD5430 /* ImportSafariProtectionSettingsHelperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportSafariProtectionSettingsHelperTest.swift; sourceTree = "<group>"; };
+		240F6F352732C17B00FD5430 /* ImportSettingsServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportSettingsServiceTest.swift; sourceTree = "<group>"; };
+		240F6F372732C29300FD5430 /* DnsProtectionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProtectionMock.swift; sourceTree = "<group>"; };
+		2411AA282733F6F500E82F2E /* SafariProtectionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariProtectionMock.swift; sourceTree = "<group>"; };
 		241346CB26131CA300CF8601 /* AppDelegate+Themable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Themable.swift"; sourceTree = "<group>"; };
 		2414089A26C4226000741F32 /* OnboardingContentBlockerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContentBlockerCell.swift; sourceTree = "<group>"; };
 		2414089C26C42E6700741F32 /* OnboardingAdvancedProtectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAdvancedProtectionView.swift; sourceTree = "<group>"; };
+		241436FE273568DC00E33EF0 /* CustomFiltersMetaParserMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFiltersMetaParserMock.swift; sourceTree = "<group>"; };
 		241819FC2594D76900380A8A /* QueryParametersFromURLStringTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParametersFromURLStringTest.swift; sourceTree = "<group>"; };
 		24195D422719FA2300F31547 /* SystemLibsResolv.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SystemLibsResolv.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		241FEB0B2701C84F00C1C487 /* WebReporterWrapperProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebReporterWrapperProtocol.swift; sourceTree = "<group>"; };
@@ -2361,6 +2375,8 @@
 		248448BB259383ED00D52DE0 /* SignInFailureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInFailureHandler.swift; sourceTree = "<group>"; };
 		2487C016272AECD900449BC2 /* ImportDNSSettingsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportDNSSettingsHelper.swift; sourceTree = "<group>"; };
 		2487C018272AECE800449BC2 /* ImportSafariProtectionSettingsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportSafariProtectionSettingsHelper.swift; sourceTree = "<group>"; };
+		2488C45027357FC600BA6918 /* ImportDNSSettingsHelperMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportDNSSettingsHelperMock.swift; sourceTree = "<group>"; };
+		2488C4522735800400BA6918 /* ImportSafariProtectionSettingsHelperMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportSafariProtectionSettingsHelperMock.swift; sourceTree = "<group>"; };
 		2490F6442700685D00B1514D /* ActionExtensionWebReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionExtensionWebReporter.swift; sourceTree = "<group>"; };
 		2490F64927006CF300B1514D /* WebReporterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebReporterProtocol.swift; sourceTree = "<group>"; };
 		2491F74026F63AF5006CF561 /* DnsProviderDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProviderDetailsModel.swift; sourceTree = "<group>"; };
@@ -3922,6 +3938,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		240F6F302732C11E00FD5430 /* ImportSettingsTests */ = {
+			isa = PBXGroup;
+			children = (
+				240F6F312732C14000FD5430 /* ImportDNSSettingsHelperTest.swift */,
+				240F6F332732C16500FD5430 /* ImportSafariProtectionSettingsHelperTest.swift */,
+				240F6F352732C17B00FD5430 /* ImportSettingsServiceTest.swift */,
+			);
+			path = ImportSettingsTests;
+			sourceTree = "<group>";
+		};
 		2414089726C41B0500741F32 /* OnboardingViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -5332,6 +5358,7 @@
 				7E59F245255D33A40097CD97 /* LocalizedStringsTests.swift */,
 				7E8D4298258CCF1700B6300E /* DnsProvidersMigrationsTest.swift */,
 				24B2F12F25FF4DD500CE46C8 /* URLSchemeParcerTest.swift */,
+				240F6F302732C11E00FD5430 /* ImportSettingsTests */,
 			);
 			path = AdguardTests;
 			sourceTree = "<group>";
@@ -6271,6 +6298,11 @@
 				7E3244D4255AD4F20058BCDF /* NetworkSettingsServiceMock.swift */,
 				24C03C4525FF73790062DEED /* URLSchemeExecutorMock.swift */,
 				2438CA19271F112500173E23 /* InAppDnsProvidersManagerMock.swift */,
+				240F6F372732C29300FD5430 /* DnsProtectionMock.swift */,
+				2411AA282733F6F500E82F2E /* SafariProtectionMock.swift */,
+				241436FE273568DC00E33EF0 /* CustomFiltersMetaParserMock.swift */,
+				2488C45027357FC600BA6918 /* ImportDNSSettingsHelperMock.swift */,
+				2488C4522735800400BA6918 /* ImportSafariProtectionSettingsHelperMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -8679,6 +8711,7 @@
 				7E85765F2435F1EC0055F63D /* DomainParser.swift in Sources */,
 				D0288F3A230698DB00A4EBEF /* ACNNetworking.m in Sources */,
 				D0AEC269240930C0003E8FCC /* VpnManagerTest.swift in Sources */,
+				240F6F362732C17B00FD5430 /* ImportSettingsServiceTest.swift in Sources */,
 				2425D6DE258F8C710037AEBE /* Dictionary+Utils.swift in Sources */,
 				24CBA66225939CC200E28308 /* CustomSchemeURLParserTest.swift in Sources */,
 				D0F7F0CC2268975100592B1E /* KeychainServiceTest.swift in Sources */,
@@ -8712,6 +8745,7 @@
 				7E18952723FD8E6D006FB241 /* RateAppService.swift in Sources */,
 				249E10FE2600D380003A5FBD /* OpenUserFilterControllerParser.swift in Sources */,
 				D0EFBF5E22BB6BAC00D2D391 /* LoginResponseParser.swift in Sources */,
+				241436FF273568DC00E33EF0 /* CustomFiltersMetaParserMock.swift in Sources */,
 				2455B21327317FA9002B86D7 /* ImportSettings.swift in Sources */,
 				7E8576632435F1F70055F63D /* RuleLabel.swift in Sources */,
 				24F67F5A26E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift in Sources */,
@@ -8723,12 +8757,14 @@
 				24F66A9C26033DA00097B426 /* OpenMainPageControllerControllerWithLaunchScreenParser.swift in Sources */,
 				D0288F2E2306974F00A4EBEF /* DDLog.m in Sources */,
 				249E11582600D38B003A5FBD /* OpenImportSettingsControllerParser.swift in Sources */,
+				240F6F322732C14000FD5430 /* ImportDNSSettingsHelperTest.swift in Sources */,
 				D0EC86B523A7738E00EDF107 /* VpnManagerMock.swift in Sources */,
 				D0288F3F2306997D00A4EBEF /* DDFileLogger.m in Sources */,
 				D0288F39230698D300A4EBEF /* ACNHttpUtils.m in Sources */,
 				7E8576672435F1F70055F63D /* ParsedHost.swift in Sources */,
 				D03E532A21B41FF000C62152 /* CocoaLumberjack.swift in Sources */,
 				D09E2D56255D7633002D6BC0 /* SettingsParserTest.swift in Sources */,
+				2488C4532735800400BA6918 /* ImportSafariProtectionSettingsHelperMock.swift in Sources */,
 				7E5844DB23FD88E700BAD052 /* UserNotificationServiceMock.swift in Sources */,
 				B26B92952719BADE00F1D482 /* DnsProtectionCustomProvidersMigrationHelper.swift in Sources */,
 				B26B929F2719DFB700F1D482 /* DnsProtectionUserRulesMigrationHelperTests.swift in Sources */,
@@ -8747,6 +8783,7 @@
 				7E8576662435F1F70055F63D /* BasicRulesParser.swift in Sources */,
 				D09E2D32255D6AFF002D6BC0 /* SettingsParser.swift in Sources */,
 				D04C2B78240FA462009330A8 /* UIApplication+OpenAdguardUrl.swift in Sources */,
+				240F6F382732C29300FD5430 /* DnsProtectionMock.swift in Sources */,
 				2438CA18271F109000173E23 /* DnsProtectionCustomProvidersMigrationHelperTest.swift in Sources */,
 				249E118E2600D393003A5FBD /* SocialNetworkAuthParametersParser.swift in Sources */,
 				249E117C2600D390003A5FBD /* OpenTunnelModeControllerParser.swift in Sources */,
@@ -8770,6 +8807,7 @@
 				D0288F372306984A00A4EBEF /* ACLExecuteBlockDelayed.m in Sources */,
 				7EE715CB2316765800C03DE9 /* String+UtilsTest.swift in Sources */,
 				24F8A94D271DB62600ADA050 /* NetworkSettingsMigration.swift in Sources */,
+				2488C45127357FC600BA6918 /* ImportDNSSettingsHelperMock.swift in Sources */,
 				2438CA1A271F112500173E23 /* InAppDnsProvidersManagerMock.swift in Sources */,
 				249E11222600D384003A5FBD /* OpenMainPageControllerParser.swift in Sources */,
 				B26B928F2719BA4100F1D482 /* OpenAdvancedProtectionParser.swift in Sources */,
@@ -8781,9 +8819,11 @@
 				B26B92782719B46F00F1D482 /* SDKMigrationNewDbWrapper.swift in Sources */,
 				B26B92892719B78600F1D482 /* PurchaseAssistant.swift in Sources */,
 				65EC9BCD1BB9824C00F53F3B /* ADLocations.m in Sources */,
+				2411AA292733F6F500E82F2E /* SafariProtectionMock.swift in Sources */,
 				D0F5F87625E941B1004E4A82 /* VpnConfigurationStatus.swift in Sources */,
 				D0288F3D2306995800A4EBEF /* ACLLogger.m in Sources */,
 				7EF5C55226C26226001851D6 /* SharedResources+Statistics.swift in Sources */,
+				240F6F342732C16500FD5430 /* ImportSafariProtectionSettingsHelperTest.swift in Sources */,
 				7ED0B19B26C4220900B0CE7B /* PreloadedFilesManager.swift in Sources */,
 				D0D7E62D2444C412001801A5 /* ACSSystemUtils.m in Sources */,
 				B26B92922719BA8900F1D482 /* SafariProtectionCustomFiltersMigrationHelper.swift in Sources */,
