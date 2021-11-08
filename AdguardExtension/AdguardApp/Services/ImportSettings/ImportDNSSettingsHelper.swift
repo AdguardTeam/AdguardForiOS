@@ -19,8 +19,20 @@
 import SharedAdGuardSDK
 import DnsAdGuardSDK
 
+protocol ImportDNSSettingsHelperProtocol {
+    /// Imports DNS blocklist rules. If **override** is true then all old rules will be replaced new ones. Returns true if storage was changed
+    func importDnsBlocklistRules(_ rules: [String], override: Bool) -> Bool
+
+    /// Imports DNS server with **serverId**. Returns true if server was setted
+    func importDnsServer(serverId: Int) -> Bool
+
+    /// Imports DNS filters.
+    /// If **override** is true then all old filters will be replaced with new ones. Returns import result
+    func importDnsFilters(_ filters: [ImportSettings.FilterSettings], override: Bool, completion: @escaping ([ImportSettings.FilterSettings]) -> Void)
+}
+
 /// This object is responsible for importing DNS protection settings
-final class ImportDNSSettingsHelper {
+final class ImportDNSSettingsHelper: ImportDNSSettingsHelperProtocol {
 
     // MARK: - Private properties
 
@@ -39,7 +51,6 @@ final class ImportDNSSettingsHelper {
 
     // MARK: - DNS protection imports
 
-    /// Imports DNS blocklist rules. If **override** is true then all old rules will be replaced new ones. Returns true if storage was changed
     func importDnsBlocklistRules(_ rules: [String], override: Bool) -> Bool {
         workingQueue.sync {
             var result = false
@@ -58,7 +69,6 @@ final class ImportDNSSettingsHelper {
         }
     }
 
-    /// Imports DNS server with **serverId**. Returns true if server was setted
     func importDnsServer(serverId: Int) -> Bool {
         workingQueue.sync {
             guard dnsProvidersManager.activeDnsServer.id != serverId else { return false }
@@ -76,8 +86,6 @@ final class ImportDNSSettingsHelper {
         }
     }
 
-    /// Imports DNS filters.
-    /// If **override** is true then all old filters will be replaced with new ones. Returns import result
     func importDnsFilters(_ filters: [ImportSettings.FilterSettings], override: Bool, completion: @escaping ([ImportSettings.FilterSettings]) -> Void) {
         workingQueue.async { [weak self] in
             guard let self = self else {

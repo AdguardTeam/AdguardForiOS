@@ -39,8 +39,8 @@ final class ImportSettingsService: ImportSettingsServiceProtocol {
 
     //MARK: - Private properties
 
-    private let safariImportHelper: ImportSafariProtectionSettingsHelper
-    private let dnsImportHelper: ImportDNSSettingsHelper
+    private let safariImportHelper: ImportSafariProtectionSettingsHelperProtocol
+    private let dnsImportHelper: ImportDNSSettingsHelperProtocol
 
     private let workingQueue = DispatchQueue(label: "AdGuardApp.ImportSettingsQueue")
 
@@ -56,6 +56,18 @@ final class ImportSettingsService: ImportSettingsServiceProtocol {
 
         self.safariImportHelper = ImportSafariProtectionSettingsHelper(safariProtection: safariProtection)
         self.dnsImportHelper = ImportDNSSettingsHelper(dnsProvidersManager: dnsProvidersManager, dnsProtection: dnsProtection)
+    }
+
+    /// Init for tests
+    init(dnsProvidersManager: DnsProvidersManagerProtocol, safariProtection: SafariProtectionProtocol, dnsProtection: DnsProtectionProtocol, vpnManager: VpnManagerProtocol, purchaseService: PurchaseServiceProtocol, safariImportHelper: ImportSafariProtectionSettingsHelperProtocol, dnsImportHelper: ImportDNSSettingsHelperProtocol) {
+
+        self.dnsProvidersManager = dnsProvidersManager
+        self.safariProtection = safariProtection
+        self.dnsProtection = dnsProtection
+        self.vpnManager = vpnManager
+        self.purchaseService = purchaseService
+        self.safariImportHelper = safariImportHelper
+        self.dnsImportHelper = dnsImportHelper
     }
 
     // MARK: - Internal methods
@@ -87,8 +99,8 @@ final class ImportSettingsService: ImportSettingsServiceProtocol {
         resultSettings.customSafariFilters = importSafariCustomFiltersResult
         resultSettings.importSafariBlocklistRulesStatus = importSafariBlocklistResult
 
-        if !importSafariFiltersResult.isEmpty ||
-            !importSafariCustomFiltersResult.isEmpty ||
+        if importSafariFiltersResult.contains(where: { $0.status == .successful }) ||
+            importSafariCustomFiltersResult.contains(where: { $0.status == .successful }) ||
             importSafariBlocklistResult == .successful {
             updateMetaAndReloadCB()
         }
@@ -113,7 +125,7 @@ final class ImportSettingsService: ImportSettingsServiceProtocol {
         resultSettings.importDnsServerStatus = importDnsServerResult
         resultSettings.importDnsBlocklistRulesStatus = importDnsRulesResult
 
-        if !importDnsFiltersResult.isEmpty ||
+        if importDnsFiltersResult.contains(where: { $0.status == .successful }) ||
             importDnsRulesResult == .successful ||
             importDnsServerResult == .successful {
             vpnManager.updateSettings(completion: nil)

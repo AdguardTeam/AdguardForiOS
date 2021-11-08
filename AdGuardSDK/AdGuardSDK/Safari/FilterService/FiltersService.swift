@@ -30,6 +30,14 @@ public struct FiltersUpdateResult {
     public var addedFilterIds: [Int] = [] // Identifiers of filters that were successfully added while updating
     public var removedFiltersIds: [Int] = [] // Identifiers of filters that were successfully removed
     public var error: Error? // If this object exists and was passed till SafariProtection the only step where error can occur is Reloading CBs
+
+    public init(updatedFilterIds: [Int] = [], failedFilterIds: [Int] = [], addedFilterIds: [Int] = [], removedFiltersIds: [Int] = [], error: Error? = nil) {
+        self.updatedFilterIds = updatedFilterIds
+        self.failedFilterIds = failedFilterIds
+        self.addedFilterIds = addedFilterIds
+        self.removedFiltersIds = removedFiltersIds
+        self.error = error
+    }
 }
 
 // MARK: - FiltersService
