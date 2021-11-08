@@ -297,7 +297,12 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
 
             // TODO: - DNS filter version is not checked now. This code can be improved by adding filter version check
             if let filterContent = self.filterFilesStorage.getFilterContentForFilter(withId: filterId) {
-                filterMeta = try? self.metaParser.parse(filterContent, for: .system, filterDownloadPage: url.absoluteString)
+                do {
+                    filterMeta = try self.metaParser.parse(filterContent, for: .system, filterDownloadPage: url.absoluteString)
+                } catch {
+                    Logger.logError("(DnsFiltersService) - updateFilterSync; Parsing error occurred: \(error)")
+                    resultError = error
+                }
             }
             group.leave()
         }
