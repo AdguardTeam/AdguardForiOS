@@ -49,10 +49,12 @@ final class DnsProviderDetailsController : UITableViewController {
     private let dnsProvidersManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!
     private let domainParserService: DomainParserServiceProtocol = ServiceLocator.shared.getService()!
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
+    private let nativeDnsManager: NativeDnsSettingsManagerProtocol = ServiceLocator.shared.getService()!
 
-    // MARK: - private properties
+    // MARK: - Private properties
+
     private lazy var model: DnsProviderDetailsModel = {
-        return DnsProviderDetailsModel(providerId: providerId, resources: resources, dnsProvidersManager: dnsProvidersManager, vpnManager: vpnManager)
+        return DnsProviderDetailsModel(providerId: providerId, resources: resources, dnsProvidersManager: dnsProvidersManager, vpnManager: vpnManager, nativeDnsManager: nativeDnsManager)
     }()
     private let providerDetailSections: [ProviderSection] = ProviderSection.allCases
     private let providerDetailRows: [ProviderRow]  = ProviderRow.allCases

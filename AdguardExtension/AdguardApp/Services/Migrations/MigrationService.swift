@@ -38,6 +38,7 @@ final class MigrationService: MigrationServiceProtocol {
     private let safariProtection: SafariProtectionProtocol
     private let dnsProvidersManager: DnsProvidersManagerProtocol
     private let networkSettings: NetworkSettingsServiceProtocol
+    private let nativeDnsManager: NativeDnsSettingsManagerProtocol
 
     private let migrationQueue = DispatchQueue(label: "MigrationService queue", qos: .userInitiated)
 
@@ -49,7 +50,8 @@ final class MigrationService: MigrationServiceProtocol {
         productInfo: ADProductInfoProtocol,
         safariProtection: SafariProtectionProtocol,
         dnsProvidersManager: DnsProvidersManagerProtocol,
-        networkSettings: NetworkSettingsServiceProtocol
+        networkSettings: NetworkSettingsServiceProtocol,
+        nativeDnsManager: NativeDnsSettingsManagerProtocol
     ) {
         self.vpnManager = vpnManager
         self.resources = resources
@@ -59,6 +61,7 @@ final class MigrationService: MigrationServiceProtocol {
         self.safariProtection = safariProtection
         self.dnsProvidersManager = dnsProvidersManager
         self.networkSettings = networkSettings
+        self.nativeDnsManager = nativeDnsManager
 
         resources.sharedDefaults().set(self.currentSchemaVersion, forKey: AEDefaultsProductSchemaVersion)
     }
@@ -191,7 +194,12 @@ final class MigrationService: MigrationServiceProtocol {
         */
         if lastBuildVersion < 585 {
             DDLogInfo("(MigrationService) - restart tunnel to change tunnel ip address. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
-            vpnManager.updateSettings(completion: nil)
+
+            if resources.dnsImplementation == .adGuard {
+                vpnManager.updateSettings(completion: nil)
+            } else if #available(iOS 14.0, *) {
+                nativeDnsManager.saveDnsConfig { _ in }
+            }
         }
 
         /*
@@ -277,7 +285,11 @@ final class MigrationService: MigrationServiceProtocol {
 
                 try sdkMigrationHelper.migrate()
                 // Reloads Tunnel if it active to apply migrated DNS settings
-                vpnManager.updateSettings(completion: nil)
+                if resources.dnsImplementation == .adGuard {
+                    vpnManager.updateSettings(completion: nil)
+                } else if #available(iOS 14.0, *) {
+                    nativeDnsManager.saveDnsConfig { _ in }
+                }
                 DDLogInfo("(MigrationService) - Successfully migrated old data to SDK")
             } catch {
                 DDLogError("(MigrationService) - Failed to migrate old data to SDK; Error: \(error)")

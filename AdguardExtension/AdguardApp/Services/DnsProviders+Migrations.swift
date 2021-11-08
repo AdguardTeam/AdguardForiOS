@@ -119,6 +119,8 @@ extension DnsProvidersService: DnsProvidersServiceMigratable {
                     if serverToMigrate.serverId == activeDnsServer?.serverId {
                         activeDnsServer = serverToMigrate
                     }
+
+                    // TODO: Add implementation checking
                     vpnManager?.updateSettings(completion: nil)
                 }
             }
@@ -136,6 +138,8 @@ extension DnsProvidersService: DnsProvidersServiceMigratable {
                         if serverToMigrate.serverId == activeDnsServer?.serverId {
                             activeDnsServer = serverToMigrate
                         }
+
+                        // TODO: Add implementation checking
                         vpnManager?.updateSettings(completion: nil)
                     }
                 }

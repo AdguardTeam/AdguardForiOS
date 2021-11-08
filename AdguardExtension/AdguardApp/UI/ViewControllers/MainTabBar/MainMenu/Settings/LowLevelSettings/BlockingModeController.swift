@@ -138,7 +138,9 @@ class BlockingModeController: UITableViewController {
 
     private func setupMode(mode: DnsProxyBlockingMode) {
         resources.blockingMode = mode
-        vpnManager.updateSettings(completion: nil)
+        if resources.dnsImplementation == .adGuard {
+            vpnManager.updateSettings(completion: nil)
+        }
         updateButtons(by: selectedCell)
     }
 }

@@ -65,7 +65,9 @@ class BlockedResponseTtlController: BottomAlertController {
         guard let text = ttlTextField.text, !text.isEmpty else { return }
         guard let numeric = Int(text), numeric >= 0 else { return }
         resources.blockedResponseTtlSecs = numeric
-        vpnManager.updateSettings(completion: nil)
+        if resources.dnsImplementation == .adGuard {
+            vpnManager.updateSettings(completion: nil)
+        }
         delegate?.setTtlDescription(ttl: String(numeric))
         dismiss(animated: true)
     }

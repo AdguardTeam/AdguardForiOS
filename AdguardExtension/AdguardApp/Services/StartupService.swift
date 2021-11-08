@@ -163,7 +163,8 @@ final class StartupService : NSObject {
             productInfo: productInfo,
             safariProtection: safariProtection,
             dnsProvidersManager: dnsProvidersManager,
-            networkSettings: networkSettingsService
+            networkSettings: networkSettingsService,
+            nativeDnsManager: nativeDnsManager
         )
         locator.addService(service: migrationService)
 

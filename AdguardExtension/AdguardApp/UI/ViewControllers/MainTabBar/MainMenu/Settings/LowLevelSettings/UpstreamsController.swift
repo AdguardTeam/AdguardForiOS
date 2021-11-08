@@ -149,7 +149,9 @@ class UpstreamsController: BottomAlertController {
 
     private func applyChanges(addresses: [String]) {
         saveUpstreams(upstreams: addresses)
-        vpnManager.updateSettings(completion: nil)
+        if resources.dnsImplementation == .adGuard {
+            vpnManager.updateSettings(completion: nil)
+        }
         dismiss(animated: true)
     }
 

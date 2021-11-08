@@ -88,7 +88,9 @@ class DnsModeController: UITableViewController {
         }
 
         resources.tunnelMode = mode
-        vpnManager.updateSettings(completion: nil)
+        if resources.dnsImplementation == .adGuard {
+            vpnManager.updateSettings(completion: nil)
+        }
 
         selectedCell = indexPath.row
         updateButtons()

@@ -40,35 +40,51 @@ final class NewDnsServerModel {
     let provider: CustomDnsProviderProtocol?
     private let dnsProvidersManager: DnsProvidersManagerProtocol
     private let vpnManager: VpnManagerProtocol
+    private let nativeDnsManager: NativeDnsSettingsManagerProtocol
+    private let resources: AESharedResourcesProtocol
 
     // MARK: - Init
 
     init(dnsProvidersManager: DnsProvidersManagerProtocol,
          vpnManager: VpnManagerProtocol,
+         nativeDnsManager: NativeDnsSettingsManagerProtocol,
+         resource: AESharedResourcesProtocol,
          provider: CustomDnsProviderProtocol? = nil) {
 
         self.dnsProvidersManager = dnsProvidersManager
         self.vpnManager = vpnManager
+        self.nativeDnsManager = nativeDnsManager
         self.provider = provider
+        self.resources = resource
     }
 
     /// Function to add custom provider
     func addCustomProvider(name: String, upstream: String) throws {
         try dnsProvidersManager.addCustomProvider(name: name, upstreams: [upstream], selectAsCurrent: true)
-        vpnManager.updateSettings(completion: nil)
+        applyImplementationSettings()
     }
 
     /// Function to update custom provider
     func updateCustomProvider(newName: String, newUpstream: String, provider: DnsProviderMetaProtocol) throws {
         let providerId = provider.providerId
         try dnsProvidersManager.updateCustomProvider(withId: providerId, newName: newName, newUpstreams: [newUpstream], selectAsCurrent: false)
-        vpnManager.updateSettings(completion: nil)
+        applyImplementationSettings()
     }
 
     /// Function to remove custom provider
     func removeCustomProvider(provider: DnsProviderMetaProtocol) throws {
         let providerId = provider.providerId
         try dnsProvidersManager.removeCustomProvider(withId: providerId)
-        vpnManager.updateSettings(completion: nil)
+        applyImplementationSettings()
+    }
+
+    private func applyImplementationSettings() {
+        if resources.dnsImplementation == .adGuard {
+            vpnManager.updateSettings(completion: nil)
+        } else {
+            if #available(iOS 14.0, *) {
+                nativeDnsManager.saveDnsConfig { _ in }
+            }
+        }
     }
 }

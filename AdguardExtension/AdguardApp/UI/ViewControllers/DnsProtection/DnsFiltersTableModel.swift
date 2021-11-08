@@ -52,13 +52,15 @@ final class DnsFiltersTableModel {
 
     private let dnsProtection: DnsProtectionProtocol
     private let vpnManager: VpnManagerProtocol
+    private let resources: AESharedResourcesProtocol
     private var modelsProvider: DnsFiltersModelsProviderProtocol
 
     // MARK: - Initialization
 
-    init(dnsProtection: DnsProtectionProtocol, vpnManager: VpnManagerProtocol) {
+    init(dnsProtection: DnsProtectionProtocol, vpnManager: VpnManagerProtocol, resources: AESharedResourcesProtocol) {
         self.dnsProtection = dnsProtection
         self.vpnManager = vpnManager
+        self.resources = resources
         self.modelsProvider = DnsFiltersModelsProvider(sdkModels: dnsProtection.filters)
     }
 
@@ -85,7 +87,7 @@ extension DnsFiltersTableModel: NewCustomFilterDetailsControllerDelegate {
             }
 
             // Restart tunnel to apply new filter
-            if error == nil {
+            if error == nil, self?.resources.dnsImplementation == .adGuard {
                 self?.vpnManager.updateSettings(completion: nil)
             }
 
@@ -111,14 +113,18 @@ extension DnsFiltersTableModel: FilterDetailsViewControllerDelegate {
         try dnsProtection.removeFilter(withId: filterId)
         updateModels()
         delegate?.modelsChanged()
-        vpnManager.updateSettings(completion: nil)
+        if resources.dnsImplementation == .adGuard {
+            vpnManager.updateSettings(completion: nil)
+        }
     }
 
     func setFilter(with groupId: Int?, filterId: Int, enabled: Bool) throws -> FilterDetailsProtocol {
         try dnsProtection.setFilter(withId: filterId, to: enabled)
         updateModels()
         delegate?.modelsChanged()
-        vpnManager.updateSettings(completion: nil)
+        if resources.dnsImplementation == .adGuard {
+            vpnManager.updateSettings(completion: nil)
+        }
 
         if let filter = dnsProtection.filters.first(where: { $0.filterId == filterId }) {
             return filter

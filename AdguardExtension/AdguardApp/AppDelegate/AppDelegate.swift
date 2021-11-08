@@ -212,7 +212,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             // If there was a fase with donwloading filters, than we need to restart tunnel to apply newest ones
             else if result.oldBackgroundFetchState == .updateFinished || result.oldBackgroundFetchState == .loadAndSaveFilters {
-                self?.vpnManager.updateSettings { _ in
+                if self?.resources.dnsImplementation == .adGuard {
+                    self?.vpnManager.updateSettings { _ in
+                        completionHandler(result.backgroundFetchResult)
+                    }
+                } else {
                     completionHandler(result.backgroundFetchResult)
                 }
             }
