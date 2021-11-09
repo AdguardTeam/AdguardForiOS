@@ -17,7 +17,7 @@
 //
 
 import DnsAdGuardSDK
-import struct CoreGraphics.CGPoint
+import UIKit
 
 protocol ChartViewModelDelegate: AnyObject {
     func numberOfRequestsChanged(with points: (requests: [CGPoint], encrypted: [CGPoint]),
@@ -73,6 +73,8 @@ final class ChartViewModel: ChartViewModelProtocol {
 
     // MARK: - Private properties
 
+    private let chartPointsCount = 25
+
     private let chartStatistics: ChartStatisticsProtocol
     private let activityStatistics: ActivityStatisticsProtocol
     private var isStarted: Bool = false
@@ -123,13 +125,13 @@ final class ChartViewModel: ChartViewModelProtocol {
         var resultRequests: ChartRecords!
         var resultEncrypted: ChartRecords!
 
-        if let requests = try? chartStatistics.getPoints(for: .requests, for: period) {
+        if let requests = try? chartStatistics.getPoints(for: .requests, for: period, pointsCount: chartPointsCount) {
             resultRequests = requests
         } else {
             resultRequests = ChartRecords(chartType: .requests, points: [])
         }
 
-        if let encrypted = try? chartStatistics.getPoints(for: .encrypted, for: period) {
+        if let encrypted = try? chartStatistics.getPoints(for: .encrypted, for: period, pointsCount: chartPointsCount) {
             resultEncrypted = encrypted
         } else {
             resultRequests = ChartRecords(chartType: .encrypted, points: [])
