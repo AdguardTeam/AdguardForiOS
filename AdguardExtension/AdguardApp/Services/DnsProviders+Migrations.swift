@@ -120,7 +120,6 @@ extension DnsProvidersService: DnsProvidersServiceMigratable {
                         activeDnsServer = serverToMigrate
                     }
 
-                    // TODO: Add implementation checking
                     vpnManager?.updateSettings(completion: nil)
                 }
             }
@@ -139,7 +138,6 @@ extension DnsProvidersService: DnsProvidersServiceMigratable {
                             activeDnsServer = serverToMigrate
                         }
 
-                        // TODO: Add implementation checking
                         vpnManager?.updateSettings(completion: nil)
                     }
                 }

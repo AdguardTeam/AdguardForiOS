@@ -84,9 +84,7 @@ final class LowLevelSettingsController: UITableViewController {
 
     @IBAction func blockIpv6Action(_ sender: UISwitch) {
         resources.blockIpv6 = sender.isOn
-        if resources.dnsImplementation == .adGuard {
-            vpnManager.updateSettings(completion: nil)
-        }
+        vpnManager.updateSettings(completion: nil)
     }
 
     // MARK: - Table view data source

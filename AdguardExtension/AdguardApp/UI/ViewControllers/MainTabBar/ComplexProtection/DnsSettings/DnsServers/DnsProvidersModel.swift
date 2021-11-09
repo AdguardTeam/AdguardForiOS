@@ -34,18 +34,16 @@ final class DnsProvidersModel {
 
     // MARK: - Private properties
 
-    private let dnsProvidersManager: DnsProvidersManagerProtocol
-    private let vpnManager: VpnManagerProtocol
-    private let nativeDnsManager: NativeDnsSettingsManagerProtocol
     private let resources: AESharedResourcesProtocol
+    private let dnsProvidersManager: DnsProvidersManagerProtocol
+    private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol
 
     // MARK: - Init
 
     init(dnsProvidersManager: DnsProvidersManagerProtocol, vpnManager: VpnManagerProtocol, nativeDnsManager: NativeDnsSettingsManagerProtocol, resources: AESharedResourcesProtocol) {
-        self.dnsProvidersManager = dnsProvidersManager
-        self.vpnManager = vpnManager
-        self.nativeDnsManager = nativeDnsManager
         self.resources = resources
+        self.dnsProvidersManager = dnsProvidersManager
+        self.dnsConfigAssistant = DnsConfigManagerAssistant(vpnManager: vpnManager, nativeDnsManager: nativeDnsManager, resource: resources)
     }
 
     // MARK: - Public methods
@@ -53,7 +51,7 @@ final class DnsProvidersModel {
     func setProviderActive(provider: DnsProviderMetaProtocol) throws {
         let serverId = getActiveServerId(provider: provider)
         try dnsProvidersManager.selectProvider(withId: provider.providerId, serverId: serverId)
-        applyImplementationSettings()
+        dnsConfigAssistant.applyDnsPreferences(completion: nil)
         NotificationCenter.default.post(name: .currentDnsServerChanged, object: nil)
     }
 
@@ -73,16 +71,6 @@ final class DnsProvidersModel {
         }
 
         return dohServerId
-    }
-
-    private func applyImplementationSettings() {
-        if resources.dnsImplementation == .adGuard {
-            vpnManager.updateSettings(completion: nil)
-        } else {
-            if #available(iOS 14.0, *) {
-                nativeDnsManager.saveDnsConfig { _ in }
-            }
-        }
     }
 }
 

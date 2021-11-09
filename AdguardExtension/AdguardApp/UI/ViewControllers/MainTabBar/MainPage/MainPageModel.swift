@@ -78,7 +78,7 @@ final class MainPageModel: MainPageModelProtocol {
                 case .success(let updateResult):
                     _filtersCount.mutate { $0 += updateResult.updatedFilterIds.count }
                     // Reloads vpn if dns filters have been updated
-                    if needRestartVpn, self.resources.dnsImplementation == .adGuard {
+                    if needRestartVpn {
                         self.vpnManager.updateSettings(completion: nil)
                         _needRestartVpn.mutate { $0 = false }
                     }
@@ -107,7 +107,7 @@ final class MainPageModel: MainPageModelProtocol {
             else if filtersCount > 0 {
                 let format = String.localizedString("filters_updated_format")
                 message = String(format: format, filtersCount)
-                if needRestartVpn, self.resources.dnsImplementation == .adGuard { self.vpnManager.updateSettings(completion: nil) }
+                if needRestartVpn { self.vpnManager.updateSettings(completion: nil) }
             }
             else {
                 message = String.localizedString("filters_noUpdates")

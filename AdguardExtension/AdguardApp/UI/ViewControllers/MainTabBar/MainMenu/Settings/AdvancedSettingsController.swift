@@ -76,9 +76,7 @@ final class AdvancedSettingsController: UITableViewController {
 
     @IBAction func restartProtectionAction(_ sender: UISwitch) {
         resources.restartByReachability = sender.isOn
-        if resources.dnsImplementation == .adGuard {
-            vpnManager.updateSettings(completion: nil)
-        }
+        vpnManager.updateSettings(completion: nil)
     }
 
     @IBAction func debugLogsAction(_ sender: UISwitch) {
@@ -87,9 +85,7 @@ final class AdvancedSettingsController: UITableViewController {
         DDLogInfo("Log level changed to \(isDebugLogs ? "DEBUG" : "Normal")")
         ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
         AGLogger.setLevel(isDebugLogs ? .AGLL_TRACE : .AGLL_INFO)
-        if resources.dnsImplementation == .adGuard {
-            vpnManager.updateSettings(completion: nil) // restart tunnel to apply new log level
-        }
+        vpnManager.updateSettings(completion: nil) // restart tunnel to apply new log level
     }
 
     // MARK: - Table view data source

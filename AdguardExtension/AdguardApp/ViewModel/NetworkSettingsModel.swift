@@ -26,7 +26,7 @@ final class NetworkSettingsModel: RuleDetailsControllerDelegate {
         }
         set {
             networkSettingsService.filterWifiDataEnabled = newValue
-            applyImplementationSettings()
+            dnsConfigAssistant.applyDnsPreferences(completion: nil)
         }
     }
 
@@ -36,7 +36,7 @@ final class NetworkSettingsModel: RuleDetailsControllerDelegate {
         }
         set {
             networkSettingsService.filterMobileDataEnabled = newValue
-            applyImplementationSettings()
+            dnsConfigAssistant.applyDnsPreferences(completion: nil)
         }
     }
 
@@ -55,15 +55,11 @@ final class NetworkSettingsModel: RuleDetailsControllerDelegate {
     // MARK: - Private variables
 
     private let networkSettingsService: NetworkSettingsServiceProtocol
-    private let vpnManager: VpnManagerProtocol
-    private let resources: AESharedResourcesProtocol
-    private let nativeDnsManager: NativeDnsSettingsManagerProtocol
+    private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol
 
     init(networkSettingsService: NetworkSettingsServiceProtocol, vpnManager: VpnManagerProtocol, resources: AESharedResourcesProtocol, nativeDnsManager: NativeDnsSettingsManagerProtocol) {
         self.networkSettingsService = networkSettingsService
-        self.vpnManager = vpnManager
-        self.resources = resources
-        self.nativeDnsManager = nativeDnsManager
+        self.dnsConfigAssistant = DnsConfigManagerAssistant(vpnManager: vpnManager, nativeDnsManager: nativeDnsManager, resource: resources)
     }
 
     // MARK: - Global methods
@@ -71,12 +67,12 @@ final class NetworkSettingsModel: RuleDetailsControllerDelegate {
     func addException(rule: String) throws {
         let exception = WifiException(rule: rule, enabled: true)
         try networkSettingsService.add(exception: exception)
-        applyImplementationSettings()
+        dnsConfigAssistant.applyDnsPreferences(completion: nil)
     }
 
     func changeState(rule: String, enabled: Bool) {
         networkSettingsService.changeState(name: rule, enabled: enabled)
-        applyImplementationSettings()
+        dnsConfigAssistant.applyDnsPreferences(completion: nil)
     }
 
     // MARK: - RuleDetailsControllerDelegate methods
@@ -84,21 +80,11 @@ final class NetworkSettingsModel: RuleDetailsControllerDelegate {
     func removeRule(_ ruleText: String, at indexPath: IndexPath) throws {
         let exception = exceptions[indexPath.row]
         networkSettingsService.delete(exception: exception)
-        applyImplementationSettings()
+        dnsConfigAssistant.applyDnsPreferences(completion: nil)
     }
 
     func modifyRule(_ oldRuleText: String, newRule: UserRule, at indexPath: IndexPath) throws {
         try networkSettingsService.rename(oldName: oldRuleText, newName: newRule.ruleText)
-        applyImplementationSettings()
-    }
-
-    private func applyImplementationSettings() {
-        if resources.dnsImplementation == .adGuard {
-            vpnManager.updateSettings(completion: nil)
-        } else {
-            if #available(iOS 14.0, *) {
-                nativeDnsManager.saveDnsConfig { _ in }
-            }
-        }
+        dnsConfigAssistant.applyDnsPreferences(completion: nil)
     }
 }
