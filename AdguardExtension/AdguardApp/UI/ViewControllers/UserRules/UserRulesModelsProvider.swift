@@ -30,7 +30,7 @@ protocol UserRulesModelsProviderProtocol {
     func deselectAll()
 }
 
-/// Thiis object is responsible for providing view models to `SafariUserRulesTableModel` and `DnsUserRulesTableModel`
+/// This object is responsible for providing view models to `SafariUserRulesTableModel` and `DnsUserRulesTableModel`
 /// Note that rules order is not the same as it is stored in SDK
 /// When this object is initialized the rules are inverted and sorted for 2 groups (enabled / disabled)
 /// Newly added rules are inserted to the very begging of the list
