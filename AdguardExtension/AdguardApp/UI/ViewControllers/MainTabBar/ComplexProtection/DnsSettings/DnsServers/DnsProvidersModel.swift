@@ -51,7 +51,7 @@ final class DnsProvidersModel {
     func setProviderActive(provider: DnsProviderMetaProtocol) throws {
         let serverId = getActiveServerId(provider: provider)
         try dnsProvidersManager.selectProvider(withId: provider.providerId, serverId: serverId)
-        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsProviderOrDnsServer, completion: nil)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsServer, completion: nil)
         NotificationCenter.default.post(name: .currentDnsServerChanged, object: nil)
     }
 

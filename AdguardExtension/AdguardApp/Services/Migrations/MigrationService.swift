@@ -192,7 +192,7 @@ final class MigrationService: MigrationServiceProtocol {
         if lastBuildVersion < 585 {
             DDLogInfo("(MigrationService) - restart tunnel to change tunnel ip address. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
 
-            dnsConfigAssistant.applyDnsPreferences(for: .dnsMigration, completion: nil)
+            dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsSettings, completion: nil)
         }
 
         /*
@@ -278,7 +278,7 @@ final class MigrationService: MigrationServiceProtocol {
 
                 try sdkMigrationHelper.migrate()
                 // Reloads Tunnel if it active to apply migrated DNS settings
-                dnsConfigAssistant.applyDnsPreferences(for: .dnsMigration, completion: nil)
+                dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsSettings, completion: nil)
                 DDLogInfo("(MigrationService) - Successfully migrated old data to SDK")
             } catch {
                 DDLogError("(MigrationService) - Failed to migrate old data to SDK; Error: \(error)")

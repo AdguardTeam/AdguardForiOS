@@ -138,6 +138,6 @@ final class DnsProviderDetailsModel {
         let selectedServerId = provider.dnsServers.first { $0.type == dnsProtocol }?.id ??
         provider.dnsServers.first!.id
         try dnsProvidersManager.selectProvider(withId: providerId, serverId: selectedServerId)
-        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsProviderOrDnsServer, completion: nil)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsServer, completion: nil)
     }
 }

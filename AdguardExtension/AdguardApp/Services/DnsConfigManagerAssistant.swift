@@ -26,34 +26,34 @@ protocol DnsConfigManagerAssistantProtocol {
 /// This class is responsible for updating DNS preferences for AdGuard or native implementations
 final class DnsConfigManagerAssistant: DnsConfigManagerAssistantProtocol {
 
-    enum DnsAction {
+    enum DnsAction: CaseIterable {
         case modifiedDnsProtectionState
         case modifiedDnsFilters
         case modifiedDnsRules
         case modifiedLowLevelSettings
         case modifiedAdvancedSettings
-        case modifiedDnsProviderOrDnsServer // support native
+        case modifiedDnsServer // support native
         case modifiedNetworkSettings // support native
-        case dnsMigration // support native
+        case modifiedDnsSettings // support native
+
+        static let nativeActions: [DnsAction] = [.modifiedDnsServer, .modifiedNetworkSettings, modifiedDnsSettings]
+        static let adguardActions: [DnsAction] = DnsAction.allCases
     }
 
     private enum ApplyingPreferenceError: Error, CustomDebugStringConvertible {
         case notSupportedIOSVersion
         case notSupportedActionForNative(DnsAction)
-        case missingSelf
 
         var debugDescription: String {
             switch self {
-            case .notSupportedIOSVersion: return "Current iOS version not support native implementation."
-            case .notSupportedActionForNative(let action): return "Native implementation not support action = \(action)"
-            case .missingSelf: return "Missing SELF"
+            case .notSupportedIOSVersion: return "Current iOS version doesn't support native implementation"
+            case .notSupportedActionForNative(let action): return "Native implementation doesn't support action = \(action)"
             }
         }
     }
 
     // MARK: - Private properties
 
-    private let workingQueue = DispatchQueue(label: "AdGuardApp.DnsConfigManagerAssistantQueue")
     private let completionQueue = DispatchQueue(label: "AdGuardApp.DnsConfigManagerAssistantCompletionQueue")
     private let vpnManager: VpnManagerProtocol
     private let nativeDnsManager: NativeDnsSettingsManagerProtocol
@@ -70,30 +70,24 @@ final class DnsConfigManagerAssistant: DnsConfigManagerAssistantProtocol {
     // MARK: - Public methods
 
     func applyDnsPreferences(for action: DnsConfigManagerAssistant.DnsAction, completion: ((_ error: Error?) -> Void)?) {
-        workingQueue.async { [weak self] in
-            guard let self = self else {
-                DispatchQueue.main.async { completion?(ApplyingPreferenceError.missingSelf) }
-                return
-            }
 
-            switch self.resources.dnsImplementation {
-            case .adGuard:
-                self.vpnManager.updateSettings { error in
-                    guard let completion = completion else { return }
-                    self.completionQueue.async { completion(error) }
-                }
-            case .native:
-                self.processNative(action: action) { error in
-                    guard let completion = completion else { return }
-                    self.completionQueue.async { completion(error )}
-                }
+        switch self.resources.dnsImplementation {
+        case .adGuard:
+            vpnManager.updateSettings { [weak self] error in
+                guard let completion = completion else { return }
+                self?.completionQueue.async { completion(error) }
+            }
+        case .native:
+            processNative(action: action) { [weak self] error in
+                guard let completion = completion else { return }
+                self?.completionQueue.async { completion(error )}
             }
         }
     }
 
     private func processNative(action: DnsAction, completion: @escaping (_ error: Error?) -> Void) {
         if #available(iOS 14.0, *) {
-            if isNativeSupported(for: action) {
+            if DnsAction.nativeActions.contains(action) {
                 self.nativeDnsManager.saveDnsConfig(completion)
             } else {
                 completion(ApplyingPreferenceError.notSupportedActionForNative(action))
@@ -101,11 +95,5 @@ final class DnsConfigManagerAssistant: DnsConfigManagerAssistantProtocol {
         } else {
             completion(ApplyingPreferenceError.notSupportedIOSVersion)
         }
-    }
-
-    private func isNativeSupported(for action: DnsConfigManagerAssistant.DnsAction) -> Bool {
-        return action == .modifiedDnsProviderOrDnsServer ||
-        action == .modifiedNetworkSettings ||
-        action == .dnsMigration
     }
 }

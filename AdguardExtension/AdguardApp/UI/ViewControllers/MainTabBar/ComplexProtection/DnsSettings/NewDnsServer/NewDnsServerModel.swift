@@ -55,20 +55,20 @@ final class NewDnsServerModel {
     /// Function to add custom provider
     func addCustomProvider(name: String, upstream: String) throws {
         try dnsProvidersManager.addCustomProvider(name: name, upstreams: [upstream], selectAsCurrent: true)
-        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsProviderOrDnsServer, completion: nil)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsServer, completion: nil)
     }
 
     /// Function to update custom provider
     func updateCustomProvider(newName: String, newUpstream: String, provider: DnsProviderMetaProtocol) throws {
         let providerId = provider.providerId
         try dnsProvidersManager.updateCustomProvider(withId: providerId, newName: newName, newUpstreams: [newUpstream], selectAsCurrent: false)
-        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsProviderOrDnsServer, completion: nil)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsServer, completion: nil)
     }
 
     /// Function to remove custom provider
     func removeCustomProvider(provider: DnsProviderMetaProtocol) throws {
         let providerId = provider.providerId
         try dnsProvidersManager.removeCustomProvider(withId: providerId)
-        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsProviderOrDnsServer, completion: nil)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsServer, completion: nil)
     }
 }
