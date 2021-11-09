@@ -65,6 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let rateService: RateAppServiceProtocol
     private let complexProtection: ComplexProtectionServiceProtocol
     private let themeService: ThemeServiceProtocol
+    private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol
 
     // MARK: - Application init
 
@@ -88,6 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.complexProtection = ServiceLocator.shared.getService()!
         self.themeService = ServiceLocator.shared.getService()!
         self.dnsProtection = ServiceLocator.shared.getService()!
+        self.dnsConfigAssistant = ServiceLocator.shared.getService()!
 
         super.init()
 
@@ -212,7 +214,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             // If there was a fase with donwloading filters, than we need to restart tunnel to apply newest ones
             else if result.oldBackgroundFetchState == .updateFinished || result.oldBackgroundFetchState == .loadAndSaveFilters {
-                self?.vpnManager.updateSettings { _ in
+                self?.dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsFilters) { _ in
                     completionHandler(result.backgroundFetchResult)
                 }
             }

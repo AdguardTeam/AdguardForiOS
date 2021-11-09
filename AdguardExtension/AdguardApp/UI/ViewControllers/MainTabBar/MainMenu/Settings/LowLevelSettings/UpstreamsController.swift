@@ -39,7 +39,7 @@ class UpstreamsController: BottomAlertController {
 
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
+    private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol = ServiceLocator.shared.getService()!
 
     var upstreamType: UpstreamType!
     weak var delegate: UpstreamsControllerDelegate?
@@ -78,7 +78,7 @@ class UpstreamsController: BottomAlertController {
         let validAddresses = addresses.filter { UrlUtils.isIpv4($0) || UrlUtils.isIpv6($0) }
 
         if validAddresses.count != addresses.count && !text.isEmpty {
-            DDLogError("(UppstreamsController) saveAction error - invalid addresses)")
+            DDLogError("(UpstreamsController) saveAction error - invalid addresses)")
             let messsage = type == .customAddress ? String.localizedString("invalid_ip_message") : String.localizedString("invalid_upstream_message")
             ACSSystemUtils.showSimpleAlert(for: self, withTitle: String.localizedString("common_error_title"), message: messsage)
             return
@@ -149,7 +149,7 @@ class UpstreamsController: BottomAlertController {
 
     private func applyChanges(addresses: [String]) {
         saveUpstreams(upstreams: addresses)
-        vpnManager.updateSettings(completion: nil)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedLowLevelSettings, completion: nil)
         dismiss(animated: true)
     }
 

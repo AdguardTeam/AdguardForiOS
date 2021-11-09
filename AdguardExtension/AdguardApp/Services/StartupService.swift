@@ -110,6 +110,9 @@ final class StartupService : NSObject {
         let vpnManager: VpnManager = VpnManager(resources: sharedResources, configuration: configuration, networkSettings: networkSettingsService)
         locator.addService(service: vpnManager as VpnManagerProtocol)
 
+        let dnsConfigAssistant: DnsConfigManagerAssistantProtocol = DnsConfigManagerAssistant(vpnManager: vpnManager, nativeDnsManager: nativeDnsManager, resource: sharedResources)
+        locator.addService(service: dnsConfigAssistant)
+
         let complexProtection: ComplexProtectionServiceProtocol = ComplexProtectionService(resources: sharedResources, configuration: configuration, vpnManager: vpnManager, productInfo: productInfo, nativeDnsSettingsManager: nativeDnsManager, safariProtection: safariProtection)
         locator.addService(service: complexProtection)
 
@@ -156,7 +159,6 @@ final class StartupService : NSObject {
         locator.addService(service: dnsLogRecordsHelper)
 
         let migrationService: MigrationServiceProtocol = MigrationService(
-            vpnManager: vpnManager,
             resources: sharedResources,
             networking: networkService,
             configurationService: configuration,
@@ -164,7 +166,7 @@ final class StartupService : NSObject {
             safariProtection: safariProtection,
             dnsProvidersManager: dnsProvidersManager,
             networkSettings: networkSettingsService,
-            nativeDnsManager: nativeDnsManager
+            dnsConfigAssistant: dnsConfigAssistant
         )
         locator.addService(service: migrationService)
 

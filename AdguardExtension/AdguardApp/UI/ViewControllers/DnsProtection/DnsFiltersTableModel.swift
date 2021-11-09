@@ -51,14 +51,14 @@ final class DnsFiltersTableModel {
     // MARK: - Private variables
 
     private let dnsProtection: DnsProtectionProtocol
-    private let vpnManager: VpnManagerProtocol
+    private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol
     private var modelsProvider: DnsFiltersModelsProviderProtocol
 
     // MARK: - Initialization
 
-    init(dnsProtection: DnsProtectionProtocol, vpnManager: VpnManagerProtocol) {
+    init(dnsProtection: DnsProtectionProtocol, dnsConfigAssistant: DnsConfigManagerAssistantProtocol) {
         self.dnsProtection = dnsProtection
-        self.vpnManager = vpnManager
+        self.dnsConfigAssistant = dnsConfigAssistant
         self.modelsProvider = DnsFiltersModelsProvider(sdkModels: dnsProtection.filters)
     }
 
@@ -86,7 +86,7 @@ extension DnsFiltersTableModel: NewCustomFilterDetailsControllerDelegate {
 
             // Restart tunnel to apply new filter
             if error == nil {
-                self?.vpnManager.updateSettings(completion: nil)
+                self?.dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsFilters, completion: nil)
             }
 
             onFilterAdded(error)
@@ -111,14 +111,14 @@ extension DnsFiltersTableModel: FilterDetailsViewControllerDelegate {
         try dnsProtection.removeFilter(withId: filterId)
         updateModels()
         delegate?.modelsChanged()
-        vpnManager.updateSettings(completion: nil)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsFilters, completion: nil)
     }
 
     func setFilter(with groupId: Int?, filterId: Int, enabled: Bool) throws -> FilterDetailsProtocol {
         try dnsProtection.setFilter(withId: filterId, to: enabled)
         updateModels()
         delegate?.modelsChanged()
-        vpnManager.updateSettings(completion: nil)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsFilters, completion: nil)
 
         if let filter = dnsProtection.filters.first(where: { $0.filterId == filterId }) {
             return filter

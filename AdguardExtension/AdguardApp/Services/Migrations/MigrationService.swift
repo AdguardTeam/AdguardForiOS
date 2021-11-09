@@ -42,7 +42,6 @@ final class MigrationService: MigrationServiceProtocol {
     private let migrationQueue = DispatchQueue(label: "MigrationService queue", qos: .userInitiated)
 
     init(
-        vpnManager: VpnManagerProtocol,
         resources: AESharedResourcesProtocol,
         networking: ACNNetworkingProtocol,
         configurationService: ConfigurationServiceProtocol,
@@ -50,7 +49,7 @@ final class MigrationService: MigrationServiceProtocol {
         safariProtection: SafariProtectionProtocol,
         dnsProvidersManager: DnsProvidersManagerProtocol,
         networkSettings: NetworkSettingsServiceProtocol,
-        nativeDnsManager: NativeDnsSettingsManagerProtocol
+        dnsConfigAssistant: DnsConfigManagerAssistantProtocol
     ) {
         self.resources = resources
         self.networking = networking
@@ -59,7 +58,7 @@ final class MigrationService: MigrationServiceProtocol {
         self.safariProtection = safariProtection
         self.dnsProvidersManager = dnsProvidersManager
         self.networkSettings = networkSettings
-        self.dnsConfigAssistant = DnsConfigManagerAssistant(vpnManager: vpnManager, nativeDnsManager: nativeDnsManager, resource: resources)
+        self.dnsConfigAssistant = dnsConfigAssistant
 
         resources.sharedDefaults().set(self.currentSchemaVersion, forKey: AEDefaultsProductSchemaVersion)
     }
@@ -193,7 +192,7 @@ final class MigrationService: MigrationServiceProtocol {
         if lastBuildVersion < 585 {
             DDLogInfo("(MigrationService) - restart tunnel to change tunnel ip address. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
 
-            dnsConfigAssistant.applyDnsPreferences(completion: nil)
+            dnsConfigAssistant.applyDnsPreferences(for: .dnsMigration, completion: nil)
         }
 
         /*
@@ -279,7 +278,7 @@ final class MigrationService: MigrationServiceProtocol {
 
                 try sdkMigrationHelper.migrate()
                 // Reloads Tunnel if it active to apply migrated DNS settings
-                dnsConfigAssistant.applyDnsPreferences(completion: nil)
+                dnsConfigAssistant.applyDnsPreferences(for: .dnsMigration, completion: nil)
                 DDLogInfo("(MigrationService) - Successfully migrated old data to SDK")
             } catch {
                 DDLogError("(MigrationService) - Failed to migrate old data to SDK; Error: \(error)")

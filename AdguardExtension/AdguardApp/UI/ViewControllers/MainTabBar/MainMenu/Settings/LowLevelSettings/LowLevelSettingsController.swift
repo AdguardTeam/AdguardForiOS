@@ -40,8 +40,8 @@ final class LowLevelSettingsController: UITableViewController {
 
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
+    private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol = ServiceLocator.shared.getService()!
 
     private let customAddress = 1
     private let blockIpv6 = 2
@@ -84,7 +84,7 @@ final class LowLevelSettingsController: UITableViewController {
 
     @IBAction func blockIpv6Action(_ sender: UISwitch) {
         resources.blockIpv6 = sender.isOn
-        vpnManager.updateSettings(completion: nil)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedLowLevelSettings, completion: nil)
     }
 
     // MARK: - Table view data source
