@@ -57,14 +57,7 @@ final class UserRulesModelsProvider: UserRulesModelsProviderProtocol {
     private var searchModels: [UserRuleCellModel] = []
 
     init(initialModels: [UserRuleCellModel]) {
-        self.initialModels = initialModels.reversed().sorted(by: { model1, model2 in
-            switch (model1.isEnabled, model2.isEnabled) {
-            case (true, true): return false
-            case (true, false): return true
-            case (false, true): return false
-            case (false, false): return false
-            }
-        })
+        self.initialModels = initialModels.reversed().sorted(by: { $0.isEnabled && !$1.isEnabled })
     }
 
     // MARK: - Internal methods
