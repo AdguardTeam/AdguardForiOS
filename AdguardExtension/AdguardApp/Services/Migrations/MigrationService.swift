@@ -240,39 +240,11 @@ final class MigrationService: MigrationServiceProtocol {
             networkSettingsMigration.startMigration()
 
             do {
-                let filtersDbMigration = try SafariProtectionFiltersDatabaseMigrationHelper(
-                    oldAdguardDBFilePath: resources.sharedResuorcesURL().appendingPathComponent("adguard.db").path,
-                    oldDefaultDBFilePath: resources.sharedResuorcesURL().appendingPathComponent("default.db").path
-                )
-                let allowlistRulesMigration = SafariProtectionAllowlistRulesMigrationHelper(rulesContainerDirectoryPath: resources.sharedResuorcesURL().path)
-                let customFiltersMigration = try SafariProtectionCustomFiltersMigrationHelper(
-                    newDBFilePath: SharedStorageUrls().dbFolderUrl.appendingPathComponent("adguard.db").path,
-                    filtersDirectoryUrl: SharedStorageUrls().filtersFolderUrl
-                )
-                let dnsFiltersMigration = DnsProtectionFiltersMigrationHelper(
-                    oldDnsFiltersContainerFolderUrl: resources.sharedResuorcesURL(),
-                    newDnsFiltersContainerFolderUrl: SharedStorageUrls().dnsFiltersFolderUrl,
-                    resources: resources
-                )
-                let dnsRulesMigration = DnsProtectionUserRulesMigrationHelper(
-                    oldDnsUserRulesContainerFolderUrl: resources.sharedResuorcesURL(),
-                    newDnsUserRulesContainerFolderUrl: SharedStorageUrls().dnsFiltersFolderUrl
-                )
-                let dnsProvidersMigration = DnsProtectionCustomProvidersMigrationHelper(resources: resources, dnsProvidersManager: dnsProvidersManager)
-
-                let lowLevelSettingsMigration: LowlevelSettingsMigrationHelperProtocol = LowlevelSettingsMigrationHelper(resources: resources)
-                let dnsStatisticsMigration = DnsStatisticsMigrationHelper(oldContainerFolderUrl: resources.sharedResuorcesURL(), newContainerDbUrl: SharedStorageUrls().statisticsFolderUrl)
+                let dnsMigration = DnsMigration4_3(resources: resources, dnsProvidersManager: dnsProvidersManager)
+                let safariMigration = try SafariMigration4_3(resources: resources, safariProtection: safariProtection)
                 let sdkMigrationHelper = SDKMigrationServiceHelper(
-                    safariProtection: safariProtection as! SafariProtectionMigrationsProtocol,
-                    filtersDbMigration: filtersDbMigration,
-                    allowlistRulesMigration: allowlistRulesMigration,
-                    customFiltersMigration: customFiltersMigration,
-                    dnsFiltersMigration: dnsFiltersMigration,
-                    dnsRulesMigration: dnsRulesMigration,
-                    dnsProvidersMigration: dnsProvidersMigration,
-                    dnsProvidersManager: dnsProvidersManager,
-                    lowLevelSettingsMigration: lowLevelSettingsMigration,
-                    dnsStatisticsMigration: dnsStatisticsMigration
+                    safariMigration: safariMigration,
+                    dnsMigration: dnsMigration
                 )
 
                 try sdkMigrationHelper.migrate()
