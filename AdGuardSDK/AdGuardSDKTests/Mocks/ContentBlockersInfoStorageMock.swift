@@ -43,7 +43,7 @@ final class ContentBlockersInfoStorageMock: ContentBlockersInfoStorageProtocol {
     }
 
     var stubbedJsonUrls: [ContentBlockerType: URL] = [:]
-    func urlForJson(withType cbType: ContentBlockerType) -> URL {
+    func getJsonUrl(for cbType: ContentBlockerType) -> URL {
         return stubbedJsonUrls[cbType]!
     }
 

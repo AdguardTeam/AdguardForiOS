@@ -57,7 +57,7 @@ extension SafariProtection {
     }
 
     public var allContentBlockerJsonUrls: [URL] {
-        return ContentBlockerType.allCases.map { cbStorage.urlForJson(withType: $0) }
+        return ContentBlockerType.allCases.map { cbStorage.getJsonUrl(for: $0) }
     }
 
     public func getState(for cbType: ContentBlockerType) -> Bool {

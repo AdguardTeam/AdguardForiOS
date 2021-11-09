@@ -87,7 +87,7 @@ protocol ContentBlockersInfoStorageProtocol: ResetableSyncProtocol {
     func getConverterResult(for cbType: ContentBlockerType) -> ConverterResult?
 
     /// returns url to content blocker json for specified content blocker type
-    func urlForJson(withType cbType: ContentBlockerType) -> URL
+    func getJsonUrl(for cbType: ContentBlockerType) -> URL
 }
 
 /* This class is responsible for managing JSON files for every content blocker */
@@ -130,7 +130,7 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
         Logger.logInfo("(ContentBlockersJSONStorage) - save cbJsons; Trying to save \(converterResults.count) jsons")
 
         let result: [ConverterResult] = try converterResults.map {
-            let urlToSave = urlForJson(withType: $0.type)
+            let urlToSave = getJsonUrl(for: $0.type)
             try $0.jsonString.write(to: urlToSave, atomically: true, encoding: .utf8)
             return ConverterResult(result: $0)
         }
@@ -159,7 +159,7 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
         Logger.logInfo("(ContentBlockersJSONStorage) - reset; Successfully deleted directory with CBs JSONs")
     }
 
-    func urlForJson(withType cbType: ContentBlockerType) -> URL {
+    func getJsonUrl(for cbType: ContentBlockerType) -> URL {
         return jsonStorageUrl.appendingPathComponent(cbType.fileName)
     }
 
