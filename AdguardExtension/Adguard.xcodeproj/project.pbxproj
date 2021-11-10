@@ -1574,7 +1574,6 @@
 		D083AD7F27313FC100A8F96E /* ContentBlockerMigrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D083AD7B27313FC100A8F96E /* ContentBlockerMigrationService.swift */; };
 		D083AD8027313FC100A8F96E /* ContentBlockerMigrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D083AD7B27313FC100A8F96E /* ContentBlockerMigrationService.swift */; };
 		D083AD8127313FC100A8F96E /* ContentBlockerMigrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D083AD7B27313FC100A8F96E /* ContentBlockerMigrationService.swift */; };
-		D083AD8227313FC100A8F96E /* ContentBlockerMigrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D083AD7B27313FC100A8F96E /* ContentBlockerMigrationService.swift */; };
 		D083AD8327313FC100A8F96E /* ContentBlockerMigrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D083AD7B27313FC100A8F96E /* ContentBlockerMigrationService.swift */; };
 		D083AD8427313FC100A8F96E /* ContentBlockerMigrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D083AD7B27313FC100A8F96E /* ContentBlockerMigrationService.swift */; };
 		D083AD8527313FC100A8F96E /* ContentBlockerMigrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D083AD7B27313FC100A8F96E /* ContentBlockerMigrationService.swift */; };
@@ -9032,7 +9031,6 @@
 			files = (
 				D0A23547271ED4AE00CE1730 /* DnsProvidersManagerProtocol+ServerName.swift in Sources */,
 				B2C19E5E2716BA2B00331109 /* TodayViewController.swift in Sources */,
-				D083AD8227313FC100A8F96E /* ContentBlockerMigrationService.swift in Sources */,
 				B2C8E9852716E97F00ACDED8 /* DDTTYLogger.m in Sources */,
 				7E174BF6271F13EB006B7271 /* PurchaseService.swift in Sources */,
 				B2C19E5F2716BA2E00331109 /* ServiceInitializer.swift in Sources */,
