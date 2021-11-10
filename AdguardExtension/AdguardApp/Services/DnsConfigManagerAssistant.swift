@@ -27,7 +27,6 @@ protocol DnsConfigManagerAssistantProtocol {
 final class DnsConfigManagerAssistant: DnsConfigManagerAssistantProtocol {
 
     enum DnsAction: CaseIterable {
-        case modifiedDnsProtectionState
         case modifiedDnsFilters
         case modifiedDnsRules
         case modifiedLowLevelSettings
@@ -38,18 +37,6 @@ final class DnsConfigManagerAssistant: DnsConfigManagerAssistantProtocol {
 
         static let nativeActions: [DnsAction] = [.modifiedDnsServer, .modifiedNetworkSettings, modifiedDnsSettings]
         static let adguardActions: [DnsAction] = DnsAction.allCases
-    }
-
-    private enum ApplyingPreferenceError: Error, CustomDebugStringConvertible {
-        case notSupportedIOSVersion
-        case notSupportedActionForNative(DnsAction)
-
-        var debugDescription: String {
-            switch self {
-            case .notSupportedIOSVersion: return "Current iOS version doesn't support native implementation"
-            case .notSupportedActionForNative(let action): return "Native implementation doesn't support action = \(action)"
-            }
-        }
     }
 
     // MARK: - Private properties
@@ -85,15 +72,17 @@ final class DnsConfigManagerAssistant: DnsConfigManagerAssistantProtocol {
         }
     }
 
+    // MARK: - Private methods
+
     private func processNative(action: DnsAction, completion: @escaping (_ error: Error?) -> Void) {
         if #available(iOS 14.0, *) {
             if DnsAction.nativeActions.contains(action) {
                 self.nativeDnsManager.saveDnsConfig(completion)
             } else {
-                completion(ApplyingPreferenceError.notSupportedActionForNative(action))
+                completion(nil)
             }
         } else {
-            completion(ApplyingPreferenceError.notSupportedIOSVersion)
+            assertionFailure("Current iOS version doesn't support native implementation")
         }
     }
 }
