@@ -83,6 +83,7 @@ final class DnsConfigManagerAssistant: DnsConfigManagerAssistantProtocol {
             }
         } else {
             assertionFailure("Current iOS version doesn't support native implementation")
+            completion(nil)
         }
     }
 }
