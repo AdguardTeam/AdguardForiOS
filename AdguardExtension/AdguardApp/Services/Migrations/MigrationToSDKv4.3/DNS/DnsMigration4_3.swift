@@ -16,10 +16,11 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import DnsAdGuardSDK
 import SharedAdGuardSDK
+import os
 
+/// migration to v4.3. Dns part.
 protocol DnsMigration4_3Protocol {
     func migrate()
 }
@@ -59,17 +60,40 @@ class DnsMigration4_3: DnsMigration4_3Protocol {
 
     func migrate() {
 
-        if stateManager.state == .notStarted {
+        Logger.logInfo("(DnsMigration4_3) magrate called")
+        switch stateManager.state {
+        case .notStarted:
+            Logger.logInfo("(DnsMigration4_3) start migration")
             stateManager.start()
 
             do {
                 try migrateDnsProtection()
                 try migrateDnsStatistics()
                 stateManager.finish()
+
+                Logger.logInfo("(DnsMigration4_3) migration succeeded")
             }
             catch {
+                Logger.logError("(DnsMigration4_3) failure: \(error)")
                 stateManager.failure()
             }
+
+        case .finished:
+            Logger.logInfo("(DnsMigration4_3) allready migrated")
+            return
+        case .started:
+
+            Logger.logInfo("(DnsMigration4_3) allready started. Wait for finish.")
+            // wait for finish
+            let group = DispatchGroup()
+            group.enter()
+            stateManager.onReady {
+                group.leave()
+            }
+            group.wait()
+
+            Logger.logInfo("(DnsMigration4_3) the wait is over")
+            return
         }
     }
 

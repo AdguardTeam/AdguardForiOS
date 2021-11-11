@@ -16,11 +16,10 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
-import AdGuardTodayExtension
 import SafariAdGuardSDK
 import SharedAdGuardSDK
 
+/// migration to v4.3. Safari part.
 protocol SafariMigration4_3Protocol {
     func migrate()
 }
@@ -51,16 +50,37 @@ class SafariMigration4_3: SafariMigration4_3Protocol {
 
     func migrate() {
 
-        if stateManager.state == .notStarted {
+        Logger.logInfo("(SafariMigration4_3) migrate called")
+        switch stateManager.state {
+        case .notStarted:
+            Logger.logInfo("(SafariMigration4_3) start migration")
             stateManager.start()
 
             do {
                 try migrateSafariProtection()
                 stateManager.finish()
+
+                Logger.logInfo("(SafariMigration4_3) migration succeeded")
             }
             catch {
                 stateManager.failure()
+                Logger.logError("(SafariMigration4_3) migration failed: \(error)")
             }
+        case .finished:
+            Logger.logInfo("(SafariMigration4_3) migration allready finished")
+            return
+        case .started:
+            Logger.logInfo("(SafariMigration4_3) migration allready started. Wait it")
+            // wait for finish
+            let group = DispatchGroup()
+            group.enter()
+            stateManager.onReady {
+                group.leave()
+            }
+            group.wait()
+
+            Logger.logInfo("(SafariMigration4_3) the wait is over")
+            return
         }
     }
 

@@ -30,12 +30,16 @@ protocol MigrationStateManagerProtocol {
     func start()
     func finish()
     func failure()
+
+    func onReady(_ callback: ()->Void)
 }
 
-class MigrationStateManager: MigrationStateManagerProtocol {
+class MigrationStateManager: NSObject, MigrationStateManagerProtocol {
 
     private let migrationKey: String
     private let resources: AESharedResourcesProtocol
+
+    private var callback: (()->Void)? = nil
 
     init(resources: AESharedResourcesProtocol, migrationKey: String) {
         self.resources = resources
@@ -43,7 +47,6 @@ class MigrationStateManager: MigrationStateManagerProtocol {
     }
 
     var state: MigrationState {
-        resources.sharedDefaults().synchronize()
         return MigrationState(rawValue: resources.sharedDefaults().integer(forKey: migrationKey)) ?? .notStarted
     }
 
@@ -60,5 +63,30 @@ class MigrationStateManager: MigrationStateManagerProtocol {
     func failure() {
         resources.sharedDefaults().set(MigrationState.notStarted.rawValue, forKey: migrationKey)
         resources.sharedDefaults().synchronize()
+    }
+
+    func onReady(_ callback: () -> Void) {
+
+        if state != .started {
+            callback()
+            return
+        }
+
+        resources.sharedDefaults().addObserver(self, forKeyPath: migrationKey, options: .new, context: nil)
+    }
+
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == migrationKey && state != .started {
+            callback?()
+
+            resources.sharedDefaults().removeObserver(self, forKeyPath: migrationKey)
+            callback = nil
+        }
+    }
+
+    deinit {
+        if callback != nil {
+            resources.sharedDefaults().removeObserver(self, forKeyPath: migrationKey)
+        }
     }
 }
