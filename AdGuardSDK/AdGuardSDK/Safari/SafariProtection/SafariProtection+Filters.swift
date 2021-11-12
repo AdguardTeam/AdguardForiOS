@@ -118,6 +118,7 @@ extension SafariProtection {
             try executeBlockAndReloadCbs {
                 Logger.logInfo("(SafariProtection+Filters) - setGroup; Setting group with id=\(groupType.id) to enabled=\(enabled)")
                 try filters.setGroup(withId: groupType.id, enabled: enabled)
+                return true
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Filters) - setGroup.onCbReloaded; self is missing!")
@@ -140,6 +141,7 @@ extension SafariProtection {
             try executeBlockAndReloadCbs {
                 Logger.logInfo("(SafariProtection+Filters) - setFilter; Setting filter with id=\(id), group id=\(groupId) to enabled=\(enabled)")
                 try self.filters.setFilter(withId: id, groupId, enabled: enabled)
+                return true
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Filters) - setFilter.onCbReloaded; self is missing!")
@@ -209,6 +211,7 @@ extension SafariProtection {
             try executeBlockAndReloadCbs {
                 Logger.logInfo("(SafariProtection+Filters) - deleteCustomFilter; Delete custom filter with id=\(id)")
                 try self.filters.deleteCustomFilter(withId: id)
+                return true
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Filters) - deleteCustomFilter.onCbReloaded; self is missing!")

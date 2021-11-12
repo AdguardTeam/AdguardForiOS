@@ -148,6 +148,7 @@ extension SafariProtection {
             let provider = getProvider(for: type)
             try executeBlockAndReloadCbs {
                 try provider.add(rule: rule, override: override)
+                return true
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+UserRules) - addRule.onCbReloaded; self is missing!")
@@ -172,6 +173,7 @@ extension SafariProtection {
             let provider = self.getProvider(for: type)
             try executeBlockAndReloadCbs {
                 try provider.add(rules: rules, override: override)
+                return true
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+UserRules) - addRules.onCbReloaded; self is missing!")
@@ -196,6 +198,7 @@ extension SafariProtection {
             let provider = self.getProvider(for: type)
             executeBlockAndReloadCbs {
                 provider.set(rules: rules)
+                return true
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+UserRules) - setRules.onCbReloaded; self is missing!")
@@ -220,6 +223,7 @@ extension SafariProtection {
             let provider = getProvider(for: type)
             try executeBlockAndReloadCbs {
                 try provider.modifyRule(oldRuleText, newRule)
+                return true
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+UserRules) - modifyRule.onCbReloaded; self is missing!")
@@ -246,6 +250,7 @@ extension SafariProtection {
                 rules.forEach {
                     try? provider.modifyRule($0, UserRule(ruleText: $0, isEnabled: on))
                 }
+                return true
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+UserRules) - turnRules.onCbReloaded; self is missing!")
@@ -270,6 +275,7 @@ extension SafariProtection {
             let provider = getProvider(for: type)
             try executeBlockAndReloadCbs {
                 try provider.removeRule(withText: ruleText)
+                return true
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+UserRules) - removeRule.onCbReloaded; self is missing!")
@@ -296,6 +302,7 @@ extension SafariProtection {
                 rules.forEach {
                     try? provider.removeRule(withText: $0)
                 }
+                return true
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+UserRules) - removeRules.onCbReloaded; self is missing!")
@@ -320,6 +327,7 @@ extension SafariProtection {
             let provider = getProvider(for: type)
             executeBlockAndReloadCbs {
                 provider.removeAllRules()
+                return true
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+UserRules) - removeAllRules.onCbReloaded; self is missing!")
@@ -348,6 +356,7 @@ extension SafariProtection {
                         try? provider.removeRule(withText: rule.ruleText)
                     }
                 }
+                return true
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+UserRules) - removeAllUserRulesAssociatedWithDomain.onCbReloaded; self is missing!")

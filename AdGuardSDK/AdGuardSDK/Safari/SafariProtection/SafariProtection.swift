@@ -187,18 +187,16 @@ public final class SafariProtection: SafariProtectionProtocol {
 
     // MARK: - Internal methods
 
-    /* Executes block that leads to CB JSON files changes, after that reloads CBs */
-    func executeBlockAndReloadCbs(block: () throws -> Void, onCbReloaded: @escaping (_ error: Error?) -> Void) rethrows {
-        do {
-            try block()
+    // Executes block that leads to CB JSON files changes, after that reloads CBs
+    // the block should return true if content blockers need to be reloaded, false otherwise
+    // onCbReloaded will be called anyway
+    func executeBlockAndReloadCbs(block: () throws -> Bool, onCbReloaded: @escaping (_ error: Error?) -> Void) rethrows {
+        if try block() {
+            reloadContentBlockers(onCbReloaded: onCbReloaded)
         }
-        catch {
-            Logger.logError("(SafariProtection) - createNewCbJsonsAndReloadCbs; Error: \(error)")
-            onCbReloaded(error)
-            throw error
+        else {
+            onCbReloaded(nil)
         }
-
-        reloadContentBlockers(onCbReloaded: onCbReloaded)
     }
 
     /* Creates JSON files for Content blockers and reloads CBs to apply new JSONs */

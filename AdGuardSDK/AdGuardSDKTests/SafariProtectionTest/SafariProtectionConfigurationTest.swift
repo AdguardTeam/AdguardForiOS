@@ -85,10 +85,7 @@ class SafariProtectionConfigurationTest: XCTestCase {
         let expectation = XCTestExpectation()
         let sameValue = configuration.proStatus
         safariProtection.update(proStatus: sameValue) { error in
-            if case CommonError.dataDidNotChange = error as! CommonError {}
-            else {
-                XCTFail()
-            }
+
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.5)
@@ -122,10 +119,7 @@ class SafariProtectionConfigurationTest: XCTestCase {
         let expectation = XCTestExpectation()
         let sameValue = configuration.safariProtectionEnabled
         safariProtection.update(safariProtectionEnabled: sameValue) { error in
-            if case CommonError.dataDidNotChange = error as! CommonError {}
-            else {
-                XCTFail()
-            }
+            XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.5)
@@ -178,10 +172,7 @@ class SafariProtectionConfigurationTest: XCTestCase {
         let expectation = XCTestExpectation()
         let sameValue = configuration.advancedBlockingIsEnabled
         safariProtection.update(advancedProtectionEnabled: sameValue) { error in
-            if case CommonError.dataDidNotChange = error as! CommonError {}
-            else {
-                XCTFail()
-            }
+            XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.5)
@@ -234,10 +225,7 @@ class SafariProtectionConfigurationTest: XCTestCase {
         let expectation = XCTestExpectation()
         let sameValue = configuration.blocklistIsEnabled
         safariProtection.update(blocklistIsEnabled: sameValue) { error in
-            if case CommonError.dataDidNotChange = error as! CommonError {}
-            else {
-                XCTFail()
-            }
+            XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.5)
@@ -290,10 +278,7 @@ class SafariProtectionConfigurationTest: XCTestCase {
         let expectation = XCTestExpectation()
         let sameValue = configuration.allowlistIsEnabled
         safariProtection.update(allowlistIsEnabled: sameValue) { error in
-            if case CommonError.dataDidNotChange = error as! CommonError {}
-            else {
-                XCTFail()
-            }
+            XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.5)
@@ -346,10 +331,7 @@ class SafariProtectionConfigurationTest: XCTestCase {
         let expectation = XCTestExpectation()
         let sameValue = configuration.allowlistIsInverted
         safariProtection.update(allowlistIsInverted: sameValue) { error in
-            if case CommonError.dataDidNotChange = error as! CommonError {}
-            else {
-                XCTFail()
-            }
+            XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.5)

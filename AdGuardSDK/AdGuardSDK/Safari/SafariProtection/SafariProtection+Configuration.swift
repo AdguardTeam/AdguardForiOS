@@ -94,9 +94,9 @@ extension SafariProtection {
             try? executeBlockAndReloadCbs {
                 if configuration.proStatus != proStatus {
                     configuration.proStatus = proStatus
+                    return true
                 } else {
-                    // Throw error to not reload CB
-                    throw CommonError.dataDidNotChange
+                    return false
                 }
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
@@ -122,8 +122,9 @@ extension SafariProtection {
             try? executeBlockAndReloadCbs {
                 if configuration.safariProtectionEnabled != safariProtectionEnabled {
                     configuration.safariProtectionEnabled = safariProtectionEnabled
+                    return true
                 } else {
-                    throw CommonError.dataDidNotChange
+                    return false
                 }
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
@@ -149,8 +150,9 @@ extension SafariProtection {
             try? executeBlockAndReloadCbs {
                 if configuration.advancedBlockingIsEnabled != advancedProtectionEnabled {
                     configuration.advancedBlockingIsEnabled = advancedProtectionEnabled
+                    return true
                 } else {
-                    throw CommonError.dataDidNotChange
+                    return false
                 }
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
@@ -176,8 +178,9 @@ extension SafariProtection {
             try? executeBlockAndReloadCbs {
                 if configuration.blocklistIsEnabled != blocklistIsEnabled {
                     configuration.blocklistIsEnabled = blocklistIsEnabled
+                    return true
                 } else {
-                    throw CommonError.dataDidNotChange
+                    return false
                 }
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
@@ -203,8 +206,9 @@ extension SafariProtection {
             try? executeBlockAndReloadCbs {
                 if configuration.allowlistIsEnabled != allowlistIsEnabled {
                     configuration.allowlistIsEnabled = allowlistIsEnabled
+                    return true
                 } else {
-                    throw CommonError.dataDidNotChange
+                    return false
                 }
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
@@ -230,8 +234,9 @@ extension SafariProtection {
             try? executeBlockAndReloadCbs {
                 if configuration.allowlistIsInverted != allowlistIsInverted {
                     configuration.allowlistIsInverted = allowlistIsInverted
+                    return true
                 } else {
-                    throw CommonError.dataDidNotChange
+                    return false
                 }
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
