@@ -19,7 +19,7 @@
 import SafariAdGuardSDK
 import SharedAdGuardSDK
 
-/// migration to v4.3. Safari part.
+/// This object is responsible for migrating data related with Safari protection when transitioning the app to v4.3
 protocol SafariMigration4_3Protocol {
     func migrate()
 }

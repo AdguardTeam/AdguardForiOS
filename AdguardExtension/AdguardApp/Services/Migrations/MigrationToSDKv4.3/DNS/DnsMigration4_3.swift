@@ -20,7 +20,7 @@ import DnsAdGuardSDK
 import SharedAdGuardSDK
 import os
 
-/// migration to v4.3. Dns part.
+/// This object is responsible for migrating data related with DNS protection when transitioning the app to v4.3
 protocol DnsMigration4_3Protocol {
     func migrate()
 }

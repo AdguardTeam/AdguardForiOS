@@ -31,7 +31,7 @@ protocol MigrationStateManagerProtocol {
     func finish()
     func failure()
 
-    func onReady(_ callback: ()->Void)
+    func onMigrationFinished(_ callback: ()->Void)
 }
 
 class MigrationStateManager: NSObject, MigrationStateManagerProtocol {
@@ -65,13 +65,13 @@ class MigrationStateManager: NSObject, MigrationStateManagerProtocol {
         resources.sharedDefaults().synchronize()
     }
 
-    func onReady(_ callback: () -> Void) {
+    func onMigrationFinished(_ callback: @escaping () -> Void) {
 
         if state != .started {
             callback()
             return
         }
-
+        self.callback = callback
         resources.sharedDefaults().addObserver(self, forKeyPath: migrationKey, options: .new, context: nil)
     }
 
