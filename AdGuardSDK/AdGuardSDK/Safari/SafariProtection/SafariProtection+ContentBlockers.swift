@@ -28,8 +28,11 @@ public protocol SafariProtectionContentBlockersProtocol {
     /* Returns every content blocker state */
     var allContentBlockersStates: [ContentBlockerType: Bool] { get }
 
-    /* Returns all content blocker conversion results and JSONs urls */
+    /* Returns all content blocker conversion results */
     var allConverterResults: [ConverterResult] { get }
+
+    /* Returns all content blocker JSON urls */
+    var allContentBlockerJsonUrls: [URL] { get }
 
     /* Returns state of the specified content blocker */
     func getState(for cbType: ContentBlockerType) -> Bool
@@ -51,6 +54,10 @@ extension SafariProtection {
 
     public var allConverterResults: [ConverterResult] {
         return workingQueue.sync { return cbStorage.allConverterResults }
+    }
+
+    public var allContentBlockerJsonUrls: [URL] {
+        return ContentBlockerType.allCases.map { cbStorage.getJsonUrl(for: $0) }
     }
 
     public func getState(for cbType: ContentBlockerType) -> Bool {
