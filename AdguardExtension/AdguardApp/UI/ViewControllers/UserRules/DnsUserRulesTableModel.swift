@@ -86,11 +86,13 @@ final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
 
     // MARK: - Initialization
 
-    init(type: DnsUserRuleType,
-         dnsProtection: DnsProtectionProtocol,
-         resources: AESharedResourcesProtocol,
-         fileShareHelper: FileShareHelperProtocol,
-         vpnManager: VpnManagerProtocol) {
+    init(
+        type: DnsUserRuleType,
+        dnsProtection: DnsProtectionProtocol,
+        resources: AESharedResourcesProtocol,
+        fileShareHelper: FileShareHelperProtocol,
+        vpnManager: VpnManagerProtocol
+    ) {
         self.type = type
         self.dnsProtection = dnsProtection
         self.resources = resources

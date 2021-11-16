@@ -70,14 +70,17 @@ class TunnelProvider: PacketTunnelProvider {
                                              allowlistIsEnabled: true,
                                              lowLevelConfiguration: LowLevelDnsConfiguration.fromResources(resources))
 
-        try! super.init(userDefaults: resources.sharedDefaults(),
-                       debugLoggs: debugLoggs,
-                       dnsConfiguration: configuration,
-                       addresses: TunnelProvider.getAddresses(mode: resources.tunnelMode),
-                       filterStorageUrl: filterStorageUrl,
-                       statisticsDbContainerUrl: statisticsUrl)
+        let networkUtils = NetworkUtils()
 
-        migrateIfNeeded(configuration: configuration)
+        try! super.init(userDefaults: resources.sharedDefaults(),
+                        debugLoggs: debugLoggs,
+                        dnsConfiguration: configuration,
+                        addresses: TunnelProvider.getAddresses(mode: resources.tunnelMode),
+                        filterStorageUrl: filterStorageUrl,
+                        statisticsDbContainerUrl: statisticsUrl,
+                        networkUtils: networkUtils)
+
+        migrateIfNeeded(configuration: configuration, networkUtils: networkUtils)
     }
 
     static func getAddresses(mode: TunnelMode)-> PacketTunnelProvider.Addresses {
@@ -127,12 +130,12 @@ class TunnelProvider: PacketTunnelProvider {
         }
     }
 
-    private func migrateIfNeeded(configuration: DnsConfigurationProtocol) {
+    private func migrateIfNeeded(configuration: DnsConfigurationProtocol, networkUtils: NetworkUtilsProtocol) {
 
         let migrationVersionProvider = MigrationServiceVersionProvider(resources: resources)
         if migrationVersionProvider.needsMigrateTo4_3() {
             do {
-                let dnsProvidersManager = try DnsProvidersManager(configuration: configuration, userDefaults: resources.sharedDefaults())
+                let dnsProvidersManager = try DnsProvidersManager(configuration: configuration, userDefaults: resources.sharedDefaults(), networkUtils: networkUtils)
                 let migration = DnsMigration4_3(resources: resources, dnsProvidersManager: dnsProvidersManager)
                 migration.migrate()
             }

@@ -20,7 +20,7 @@ class URLSchemeExecutorMock: IURLSchemeExecutor {
         true
     }
 
-    func openImportSettingsController(showLaunchScreen: Bool, settings: Settings?) -> Bool {
+    func openImportSettingsController(showLaunchScreen: Bool, settings: ImportSettings) -> Bool {
         true
     }
 

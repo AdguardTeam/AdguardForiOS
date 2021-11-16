@@ -30,6 +30,13 @@ protocol UserRulesModelsProviderProtocol {
     func deselectAll()
 }
 
+/// This object is responsible for providing view models to `SafariUserRulesTableModel` and `DnsUserRulesTableModel`
+/// Note that rules order is not the same as it is stored in SDK
+/// When this object is initialized the rules are inverted and sorted for 2 groups (enabled / disabled)
+/// Newly added rules are inserted to the very begging of the list
+/// What is more when some logic is applied to multiple rules (importing / removing / disabling rules) this model is reinitialized
+/// And all the rules will be resorted by 2 groups again
+// TODO: - We shouldn't reinitialize models provider in the ideal world
 final class UserRulesModelsProvider: UserRulesModelsProviderProtocol {
 
     // MARK: - Internal properties
@@ -50,13 +57,13 @@ final class UserRulesModelsProvider: UserRulesModelsProviderProtocol {
     private var searchModels: [UserRuleCellModel] = []
 
     init(initialModels: [UserRuleCellModel]) {
-        self.initialModels = initialModels
+        self.initialModels = initialModels.reversed().sorted(by: { $0.isEnabled && !$1.isEnabled })
     }
 
     // MARK: - Internal methods
 
     func addRuleModel(_ ruleModel: UserRuleCellModel) {
-        initialModels.append(ruleModel)
+        initialModels.insert(ruleModel, at: 0)
         processSearchString()
     }
 

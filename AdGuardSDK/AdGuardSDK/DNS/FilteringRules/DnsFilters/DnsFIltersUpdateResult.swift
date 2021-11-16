@@ -22,4 +22,9 @@ import Foundation
 public struct DnsFiltersUpdateResult {
     public let updatedFiltersIds: [Int]
     public let unupdatedFiltersIds: [Int]
+
+    public init(updatedFiltersIds: [Int], unupdatedFiltersIds: [Int]) {
+        self.updatedFiltersIds = updatedFiltersIds
+        self.unupdatedFiltersIds = unupdatedFiltersIds
+    }
 }

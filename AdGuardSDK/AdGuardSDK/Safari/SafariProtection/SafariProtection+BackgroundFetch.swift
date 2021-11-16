@@ -31,6 +31,13 @@ public struct BackgroundFetchUpdateResult: Equatable {
         && lhs.newBackgroundFetchState == rhs.newBackgroundFetchState
         && lhs.oldBackgroundFetchState == rhs.oldBackgroundFetchState
     }
+
+    public init(backgroundFetchResult: UIBackgroundFetchResult, newBackgroundFetchState: BackgroundFetchState, oldBackgroundFetchState: BackgroundFetchState, error: Error?) {
+        self.backgroundFetchResult = backgroundFetchResult
+        self.newBackgroundFetchState = newBackgroundFetchState
+        self.oldBackgroundFetchState = oldBackgroundFetchState
+        self.error = error
+    }
 }
 
 /**

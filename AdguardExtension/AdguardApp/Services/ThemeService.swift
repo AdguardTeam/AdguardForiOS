@@ -18,11 +18,10 @@
 
 import Foundation
 
-/**
- ThemeService - service is responsible for dark/light theme switching
- */
-
-@objc protocol ThemeServiceProtocol : NSObjectProtocol {
+/// ThemeService - service is responsible for dark/light theme switching
+protocol ThemeServiceProtocol {
+    /// This variable should be used in extensions of `ThemeServiceProtocol`
+    var themeIsDark: Bool { get }
 
     var backgroundColor: UIColor { get }
     var invertedBackgroundColor: UIColor { get }
@@ -47,7 +46,6 @@ import Foundation
     var ruleTextColor: UIColor { get }
     var textFieldTextColor: UIColor { get }
     var tagColor: UIColor { get }
-    var textFieldIndicatorBorderColor: UIColor { get }
 
     var indicatorStyle: UIActivityIndicatorView.Style { get }
 
@@ -78,13 +76,14 @@ import Foundation
     func setupSeparators(_ separators: [UIView])
 }
 
-class ThemeService : NSObject, ThemeServiceProtocol {
+final class ThemeService: ThemeServiceProtocol {
 
-    let configuration: ConfigurationServiceProtocol
+    var themeIsDark: Bool { configuration.darkTheme }
+
+    private let configuration: ConfigurationServiceProtocol
 
     init(_ configuration: ConfigurationServiceProtocol) {
         self.configuration = configuration
-        super.init()
     }
 
     var backgroundColor: UIColor {
@@ -177,10 +176,6 @@ class ThemeService : NSObject, ThemeServiceProtocol {
 
     var textFieldTextColor: UIColor {
         return configuration.darkTheme ? .white : .darkGray
-    }
-
-    var textFieldIndicatorBorderColor: UIColor {
-        return configuration.darkTheme ? UIColor.AdGuardColor.lightGray5 : UIColor.AdGuardColor.lightGray2
     }
 
     var tagColor: UIColor { configuration.darkTheme ? UIColor.AdGuardColor.lightGray6  : UIColor.AdGuardColor.lightGray2 }

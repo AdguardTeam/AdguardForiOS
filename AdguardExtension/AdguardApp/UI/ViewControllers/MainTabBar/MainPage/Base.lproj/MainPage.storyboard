@@ -557,6 +557,7 @@
                                             <constraint firstAttribute="height" constant="24" id="W7m-Na-BuO"/>
                                             <constraint firstAttribute="width" constant="24" id="r81-r2-HFd"/>
                                         </constraints>
+                                        <color key="tintColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" image="cross">
                                             <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -636,6 +637,7 @@
                                             <constraint firstAttribute="height" constant="24" id="Gcc-vo-9JB"/>
                                             <constraint firstAttribute="width" constant="24" id="UV9-rY-GgZ"/>
                                         </constraints>
+                                        <color key="tintColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" image="cross"/>
                                         <connections>
                                             <action selector="crossTapped:" destination="T6V-s9-cBk" eventType="touchUpInside" id="Zug-6s-Eth"/>
