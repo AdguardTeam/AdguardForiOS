@@ -135,6 +135,7 @@ final class SafariGroupFiltersTableController: UITableViewController {
         headerSearchView = AGSearchView()
         headerSearchView?.delegate = self
         headerSearchView?.textField.returnKeyType = .search
+        headerSearchView?.updateTheme()
         tableView.tableHeaderView = headerSearchView
     }
 
@@ -215,6 +216,7 @@ extension SafariGroupFiltersTableController: ThemableProtocol {
     func updateTheme() {
         view.backgroundColor = themeService.backgroundColor
         themeService.setupTable(tableView)
+        headerSearchView?.updateTheme()
         tableView.reloadData()
     }
 }

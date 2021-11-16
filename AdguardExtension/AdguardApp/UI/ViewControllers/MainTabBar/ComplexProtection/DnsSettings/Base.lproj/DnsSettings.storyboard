@@ -1445,11 +1445,11 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         </variation>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3BA-9g-I6J">
-                                                        <rect key="frame" x="32" y="33" width="350" height="18"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3BA-9g-I6J" customClass="AGTextField" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="16" y="25" width="382" height="40"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="18" id="hr9-Gg-hOb">
-                                                                <variation key="heightClass=regular-widthClass=regular" constant="28"/>
+                                                            <constraint firstAttribute="height" constant="40" id="hr9-Gg-hOb">
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
                                                             </constraint>
                                                         </constraints>
                                                         <color key="textColor" red="0.28627450980000002" green="0.28627450980000002" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -1461,20 +1461,9 @@
                                                         <variation key="heightClass=regular-widthClass=regular">
                                                             <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                         </variation>
-                                                        <connections>
-                                                            <action selector="editingChanged:" destination="rrq-5g-czh" eventType="editingChanged" id="maD-PA-DxK"/>
-                                                            <outlet property="delegate" destination="rrq-5g-czh" id="5us-Ko-I5y"/>
-                                                        </connections>
                                                     </textField>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pWW-ls-3uJ" customClass="TextFieldIndicatorView" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="24" y="51" width="366" height="1"/>
-                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="1" id="c26-BT-Zi3"/>
-                                                        </constraints>
-                                                    </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DNS server address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dW3-zk-BPr" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="32" y="92" width="350" height="17"/>
+                                                        <rect key="frame" x="16" y="89" width="382" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" red="0.53333333329999999" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -1486,11 +1475,11 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         </variation>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="IP, sdns://, https:// or tls://" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZgC-4d-Peb">
-                                                        <rect key="frame" x="32" y="124.5" width="350" height="18"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="IP, sdns://, https:// or tls://" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZgC-4d-Peb" customClass="AGTextField" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="16" y="114" width="382" height="40"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="18" id="uMp-X1-WUk">
-                                                                <variation key="heightClass=regular-widthClass=regular" constant="28"/>
+                                                            <constraint firstAttribute="height" constant="40" id="uMp-X1-WUk">
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
                                                             </constraint>
                                                         </constraints>
                                                         <color key="textColor" red="0.28627450980000002" green="0.28627450980000002" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -1502,18 +1491,7 @@
                                                         <variation key="heightClass=regular-widthClass=regular">
                                                             <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                         </variation>
-                                                        <connections>
-                                                            <action selector="editingChanged:" destination="rrq-5g-czh" eventType="editingChanged" id="t0J-VX-uf0"/>
-                                                            <outlet property="delegate" destination="rrq-5g-czh" id="gcm-lc-rjc"/>
-                                                        </connections>
                                                     </textField>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ko3-HW-YZi" customClass="TextFieldIndicatorView" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="24" y="147" width="366" height="1"/>
-                                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="1" id="Zrd-oN-roy"/>
-                                                        </constraints>
-                                                    </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B2l-7z-M2N" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                                                         <rect key="frame" x="16" y="180" width="382" height="40"/>
                                                         <constraints>
@@ -1556,36 +1534,38 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstItem="pWW-ls-3uJ" firstAttribute="leading" secondItem="5bW-bv-vhg" secondAttribute="leading" constant="24" id="2Qa-at-9R4"/>
-                                                    <constraint firstItem="Ko3-HW-YZi" firstAttribute="leading" secondItem="5bW-bv-vhg" secondAttribute="leading" constant="24" id="46Q-HR-8Bl"/>
-                                                    <constraint firstAttribute="trailing" secondItem="pWW-ls-3uJ" secondAttribute="trailing" constant="24" id="5xN-Qa-T8a"/>
-                                                    <constraint firstAttribute="trailing" secondItem="pzP-ns-QSS" secondAttribute="trailing" constant="32" id="GUM-Xp-eIF"/>
+                                                    <constraint firstAttribute="trailing" secondItem="pzP-ns-QSS" secondAttribute="trailing" constant="16" id="GUM-Xp-eIF">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                    </constraint>
                                                     <constraint firstItem="3BA-9g-I6J" firstAttribute="leading" secondItem="pzP-ns-QSS" secondAttribute="leading" id="Lju-40-e3e"/>
-                                                    <constraint firstItem="pzP-ns-QSS" firstAttribute="leading" secondItem="5bW-bv-vhg" secondAttribute="leading" constant="32" id="Qef-jX-Tm7"/>
-                                                    <constraint firstItem="ZdD-yx-6ph" firstAttribute="top" secondItem="B2l-7z-M2N" secondAttribute="bottom" constant="16" id="XDq-pT-ZYp"/>
-                                                    <constraint firstItem="B2l-7z-M2N" firstAttribute="leading" secondItem="5bW-bv-vhg" secondAttribute="leading" constant="16" id="YAi-vB-VA4"/>
-                                                    <constraint firstItem="ZgC-4d-Peb" firstAttribute="leading" secondItem="dW3-zk-BPr" secondAttribute="leading" id="YRO-PD-VS4"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Ko3-HW-YZi" secondAttribute="trailing" constant="24" id="ZXp-Vq-NSr"/>
-                                                    <constraint firstItem="pWW-ls-3uJ" firstAttribute="top" secondItem="3BA-9g-I6J" secondAttribute="bottom" constant="4" id="aiN-So-OEt"/>
-                                                    <constraint firstAttribute="trailing" secondItem="B2l-7z-M2N" secondAttribute="trailing" constant="16" id="bq0-17-fUv"/>
-                                                    <constraint firstItem="B2l-7z-M2N" firstAttribute="top" secondItem="Ko3-HW-YZi" secondAttribute="bottom" constant="32" id="cRk-zo-3Nz">
+                                                    <constraint firstItem="B2l-7z-M2N" firstAttribute="top" secondItem="ZgC-4d-Peb" secondAttribute="bottom" constant="24" id="MIE-HS-4FA">
                                                         <variation key="heightClass=regular-widthClass=regular" constant="48"/>
                                                     </constraint>
+                                                    <constraint firstItem="pzP-ns-QSS" firstAttribute="leading" secondItem="5bW-bv-vhg" secondAttribute="leading" constant="16" id="Qef-jX-Tm7">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                    </constraint>
+                                                    <constraint firstItem="ZdD-yx-6ph" firstAttribute="top" secondItem="B2l-7z-M2N" secondAttribute="bottom" constant="16" id="XDq-pT-ZYp">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                    </constraint>
+                                                    <constraint firstItem="B2l-7z-M2N" firstAttribute="leading" secondItem="5bW-bv-vhg" secondAttribute="leading" constant="16" id="YAi-vB-VA4"/>
+                                                    <constraint firstItem="ZgC-4d-Peb" firstAttribute="leading" secondItem="dW3-zk-BPr" secondAttribute="leading" id="YRO-PD-VS4"/>
+                                                    <constraint firstAttribute="trailing" secondItem="B2l-7z-M2N" secondAttribute="trailing" constant="16" id="bq0-17-fUv"/>
                                                     <constraint firstItem="dW3-zk-BPr" firstAttribute="leading" secondItem="3BA-9g-I6J" secondAttribute="leading" id="dfd-mH-VRX"/>
                                                     <constraint firstAttribute="trailing" secondItem="ZdD-yx-6ph" secondAttribute="trailing" constant="16" id="eWc-TT-VST"/>
                                                     <constraint firstItem="3BA-9g-I6J" firstAttribute="trailing" secondItem="pzP-ns-QSS" secondAttribute="trailing" id="eex-c5-PVc"/>
                                                     <constraint firstItem="dW3-zk-BPr" firstAttribute="trailing" secondItem="3BA-9g-I6J" secondAttribute="trailing" id="fy1-Wb-m9w"/>
-                                                    <constraint firstItem="3BA-9g-I6J" firstAttribute="top" secondItem="pzP-ns-QSS" secondAttribute="bottom" constant="16" id="h0l-xT-NkH">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="22"/>
+                                                    <constraint firstItem="3BA-9g-I6J" firstAttribute="top" secondItem="pzP-ns-QSS" secondAttribute="bottom" constant="8" id="h0l-xT-NkH">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="16"/>
                                                     </constraint>
-                                                    <constraint firstItem="Ko3-HW-YZi" firstAttribute="top" secondItem="ZgC-4d-Peb" secondAttribute="bottom" constant="4" id="h7G-e6-uRz"/>
                                                     <constraint firstItem="ZgC-4d-Peb" firstAttribute="trailing" secondItem="dW3-zk-BPr" secondAttribute="trailing" id="hUY-IC-wlp"/>
                                                     <constraint firstAttribute="bottom" secondItem="ZdD-yx-6ph" secondAttribute="bottom" constant="24" id="iPv-zp-nAx"/>
-                                                    <constraint firstItem="dW3-zk-BPr" firstAttribute="top" secondItem="pWW-ls-3uJ" secondAttribute="bottom" constant="40" id="qdm-vR-JUN"/>
                                                     <constraint firstItem="pzP-ns-QSS" firstAttribute="top" secondItem="5bW-bv-vhg" secondAttribute="top" id="sIF-Cy-WWX"/>
                                                     <constraint firstItem="ZdD-yx-6ph" firstAttribute="leading" secondItem="5bW-bv-vhg" secondAttribute="leading" constant="16" id="tfG-35-mYS"/>
-                                                    <constraint firstItem="ZgC-4d-Peb" firstAttribute="top" secondItem="dW3-zk-BPr" secondAttribute="bottom" constant="16" id="weN-TV-W55">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="22"/>
+                                                    <constraint firstItem="dW3-zk-BPr" firstAttribute="top" secondItem="3BA-9g-I6J" secondAttribute="bottom" constant="24" id="tqf-l4-Zsl">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                                                    </constraint>
+                                                    <constraint firstItem="ZgC-4d-Peb" firstAttribute="top" secondItem="dW3-zk-BPr" secondAttribute="bottom" constant="8" id="weN-TV-W55">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="16"/>
                                                     </constraint>
                                                 </constraints>
                                             </view>
@@ -1642,10 +1622,8 @@
                     <connections>
                         <outlet property="cancelOrDeleteButton" destination="ZdD-yx-6ph" id="95G-aq-MW2"/>
                         <outlet property="contentView" destination="cSo-DU-Zta" id="arK-A7-0Vz"/>
-                        <outlet property="dnsSeparator" destination="Ko3-HW-YZi" id="oiu-Ef-Weu"/>
                         <outlet property="keyboardHeightLayoutConstraint" destination="yOt-65-2su" id="SP7-t3-XV1"/>
                         <outlet property="nameField" destination="3BA-9g-I6J" id="OkL-FE-VKE"/>
-                        <outlet property="nameFieldSeparator" destination="pWW-ls-3uJ" id="4Nq-9R-WEM"/>
                         <outlet property="saveOrAddButton" destination="B2l-7z-M2N" id="j2y-5j-zKG"/>
                         <outlet property="scrollContentView" destination="cSo-DU-Zta" id="FDb-A7-W4s"/>
                         <outlet property="titleLabel" destination="3lB-T7-fSO" id="zVb-8R-QjS"/>

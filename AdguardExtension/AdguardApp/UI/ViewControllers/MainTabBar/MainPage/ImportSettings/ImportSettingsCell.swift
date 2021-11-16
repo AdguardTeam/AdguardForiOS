@@ -16,7 +16,7 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import UIKit
 
 protocol ImportSettingsCellDelegate: AnyObject {
     func stateChanged(tag: Int, state: Bool)
@@ -54,6 +54,7 @@ class ImportSettingsCell: UITableViewCell {
                 image = UIImage(named: "cross")
             }
 
+            check.tintColor = UIColor.AdGuardColor.lightGray3
             check.image = image
         } else {
             check.isHighlighted = model.enabled

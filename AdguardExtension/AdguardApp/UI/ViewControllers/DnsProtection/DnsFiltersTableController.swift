@@ -168,6 +168,7 @@ final class DnsFiltersTableController: UITableViewController {
         headerView = AGSearchView()
         headerView?.delegate = self
         headerView?.textField.returnKeyType = .search
+        headerView?.updateTheme()
         tableView.tableHeaderView = headerView
     }
 
@@ -207,6 +208,7 @@ extension DnsFiltersTableController: ThemableProtocol {
     func updateTheme() {
         view.backgroundColor = themeService.backgroundColor
         themeService.setupTable(tableView)
+        headerView?.updateTheme()
         tableView.reloadData()
     }
 }

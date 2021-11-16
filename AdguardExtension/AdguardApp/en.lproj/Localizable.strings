@@ -365,7 +365,7 @@
 "off_state" = "OFF";
 
 /* (NewCustomFilterDetailedController) homepage string */
-"homepage_title" = "Homepage:";
+"homepage_title" = "Homepage: ";
 
 /* (FilterDetailsController) delete filter title */
 "delete_filter_title" = "Delete filter";
