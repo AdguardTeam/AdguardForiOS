@@ -91,7 +91,7 @@ extension SafariProtection {
         workingQueue.sync {
             Logger.logInfo("(SafariProtection+Configuration) - updateProStatus; Updating proStatus from=\(self.configuration.proStatus) to=\(proStatus)")
 
-            try? executeBlockAndReloadCbs {
+            executeBlockAndReloadCbs {
                 if configuration.proStatus != proStatus {
                     configuration.proStatus = proStatus
                     return true
@@ -119,7 +119,7 @@ extension SafariProtection {
         workingQueue.sync {
             Logger.logInfo("(SafariProtection+Configuration) - updateSafariProtection; Updating safariProtection from=\(self.configuration.safariProtectionEnabled) to=\(safariProtectionEnabled)")
 
-            try? executeBlockAndReloadCbs {
+            executeBlockAndReloadCbs {
                 if configuration.safariProtectionEnabled != safariProtectionEnabled {
                     configuration.safariProtectionEnabled = safariProtectionEnabled
                     return true
@@ -147,7 +147,7 @@ extension SafariProtection {
         workingQueue.sync {
             Logger.logInfo("(SafariProtection+Configuration) - updateAdvancedProtection; Updating updateAdvancedProtection from=\(self.configuration.advancedBlockingIsEnabled) to=\(advancedProtectionEnabled)")
 
-            try? executeBlockAndReloadCbs {
+            executeBlockAndReloadCbs {
                 if configuration.advancedBlockingIsEnabled != advancedProtectionEnabled {
                     configuration.advancedBlockingIsEnabled = advancedProtectionEnabled
                     return true
@@ -175,7 +175,7 @@ extension SafariProtection {
         workingQueue.sync {
             Logger.logInfo("(SafariProtection+Configuration) - updateBlocklistIsEnabled; Updating blocklist state from=\(self.configuration.blocklistIsEnabled) to=\(blocklistIsEnabled)")
 
-            try? executeBlockAndReloadCbs {
+            executeBlockAndReloadCbs {
                 if configuration.blocklistIsEnabled != blocklistIsEnabled {
                     configuration.blocklistIsEnabled = blocklistIsEnabled
                     return true
@@ -203,7 +203,7 @@ extension SafariProtection {
         workingQueue.sync {
             Logger.logInfo("(SafariProtection+Configuration) - updateAllowlistIsEnabled; Updating allowlist state from=\(self.configuration.allowlistIsEnabled) to=\(allowlistIsEnabled)")
 
-            try? executeBlockAndReloadCbs {
+            executeBlockAndReloadCbs {
                 if configuration.allowlistIsEnabled != allowlistIsEnabled {
                     configuration.allowlistIsEnabled = allowlistIsEnabled
                     return true
@@ -231,7 +231,7 @@ extension SafariProtection {
         workingQueue.sync {
             Logger.logInfo("(SafariProtection+Configuration) - updateAllowlistIsInverted; Updating allowlist invertion state from=\(self.configuration.allowlistIsInverted) to=\(allowlistIsInverted)")
 
-            try? executeBlockAndReloadCbs {
+            executeBlockAndReloadCbs {
                 if configuration.allowlistIsInverted != allowlistIsInverted {
                     configuration.allowlistIsInverted = allowlistIsInverted
                     return true
