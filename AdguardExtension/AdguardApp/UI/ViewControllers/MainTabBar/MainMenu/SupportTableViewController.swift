@@ -135,7 +135,6 @@ class SupportTableViewController: UITableViewController {
             zipLog = try support.exportLogs()
         } catch {
             DDLogError("(SupportTableViewController) - exportLogsTapped; On export zip file error occurred: \(error)")
-            print("\(error)")
             showUnknownErrorAlert()
         }
         guard let zipLog = zipLog else {
