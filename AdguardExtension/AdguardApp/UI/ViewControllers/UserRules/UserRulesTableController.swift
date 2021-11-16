@@ -475,7 +475,7 @@ extension UserRulesTableController: UserRulesTableModelDelegate {
     }
 
     func ruleSuccessfullyAdded() {
-        tableView.insertRows(at: [IndexPath(row: model.rulesModels.count, section: 0)], with: .automatic)
+        tableView.insertRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
     }
 }
 
