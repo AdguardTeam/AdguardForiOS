@@ -16,22 +16,19 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
-struct OpenImportSettingsControllerParser: IURLSchemeParametersParser {
-    private let executor: IURLSchemeExecutor
+import Foundation
 
-    init(executor: IURLSchemeExecutor) {
-        self.executor = executor
-    }
+/// This class is responsible for parsing app settings which received via custom url scheme
+protocol SettingsParserProtocol {
+    /// Parses query and return settings prepared to import. Throws error if parsing error occurred
+    func parse(query: String) throws -> ImportSettings
+}
 
-    func parse(_ url: URL) -> Bool {
-        guard let json = url.parseUrl().params?["json"], !json.isEmpty else { return false }
-        let parser = SettingsParser()
-        do {
-            let settings = try parser.parse(query: json)
-            return executor.openImportSettingsController(showLaunchScreen: true, settings: settings)
-        } catch {
-            DDLogError("(OpenImportSettingsControllerParser) - parse; Error occurred while parsing json = \(json)")
-            return false
-        }
+final class SettingsParser: SettingsParserProtocol {
+
+    func parse(query: String) throws -> ImportSettings {
+        let json = query.removingPercentEncoding
+        let settings = try JSONDecoder().decode(ImportSettings.self, from: json?.data(using: .utf8) ?? Data())
+        return settings
     }
 }

@@ -58,7 +58,7 @@ final class SafariGroupsModel {
         DDLogInfo("(SafariGroupsModel) - setGroup; Trying to change group=\(groupType) to state=\(enabled)")
 
         do {
-            try safariProtection.setGroup(groupType, enabled: enabled, onCbReloaded: nil)
+            try safariProtection.setGroup(groupType: groupType, enabled: enabled, onCbReloaded: nil)
             let row = groups.firstIndex(where: { $0.groupType == groupType }) ?? 0
             createModels()
             delegate?.modelChanged(row)

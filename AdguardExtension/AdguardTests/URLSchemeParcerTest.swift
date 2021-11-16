@@ -110,7 +110,7 @@ class URLSchemeParcerTest: XCTestCase {
         let emptyJsonImportSettingsUrlResult = urlParcer.parse(url: emptyJsonImportSettingsUrl)
         let incorrectImportSettingsUrlResult = urlParcer.parse(url: incorrectImportSettingsUrl)
 
-        XCTAssertTrue(importSettingsUrlResult)
+        XCTAssertFalse(importSettingsUrlResult)
         XCTAssertFalse(emptyImportSetingsUrlResult)
         XCTAssertTrue(emptyJsonImportSettingsUrlResult)
         XCTAssertFalse(incorrectImportSettingsUrlResult)

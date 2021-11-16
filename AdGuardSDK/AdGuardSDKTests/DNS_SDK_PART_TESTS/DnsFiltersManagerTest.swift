@@ -134,6 +134,7 @@ class DnsFiltersManagerTest: XCTestCase {
                                        rulesCount: 0)
 
         let exp = XCTestExpectation()
+        XCTAssertEqual(metaParser.parseWithFilterDownloadPageCalledCount, 0)
         manager.addFilter(withName: expectedFilter.name!, url: expectedFilter.subscriptionUrl, isEnabled: expectedFilter.isEnabled, onFilterAdded: { error in
             XCTAssertNil(error)
             exp.fulfill()
@@ -143,20 +144,79 @@ class DnsFiltersManagerTest: XCTestCase {
         var expectedFilters = filters
         expectedFilters.append(expectedFilter)
         XCTAssertEqual(manager.filters, expectedFilters)
+        XCTAssertEqual(metaParser.parseWithFilterDownloadPageCalledCount, 0)
+    }
+
+    func testAddFilterWithSuccessParsingMeta() {
+        set(filters)
+        XCTAssertEqual(manager.filters, filters)
+
+        let expectedFilter = DnsFilter(filterId: 3,
+                                       subscriptionUrl: URL(string: "https://filter.com")!,
+                                       isEnabled: true,
+                                       name: "Added filter name",
+                                       description: nil,
+                                       version: nil,
+                                       lastUpdateDate: nil,
+                                       updateFrequency: nil,
+                                       homePage: nil,
+                                       licensePage: nil,
+                                       issuesReportPage: nil,
+                                       communityPage: nil,
+                                       filterDownloadPage: nil,
+                                       rulesCount: 0)
+
+        let exp = XCTestExpectation()
+        metaParser.parseWithFilterDownloadPageResult = .success(expectedFilter)
+        filtersStorage.getFilterResultHandler = { _ in "content" }
+        XCTAssertEqual(metaParser.parseWithFilterDownloadPageCalledCount, 0)
+        manager.addFilter(withName: expectedFilter.name!, url: expectedFilter.subscriptionUrl, isEnabled: expectedFilter.isEnabled, onFilterAdded: { error in
+            XCTAssertNil(error)
+            exp.fulfill()
+        })
+        wait(for: [exp], timeout: 1.0)
+
+        var expectedFilters = filters
+        expectedFilters.append(expectedFilter)
+        XCTAssertEqual(manager.filters, expectedFilters)
+        XCTAssertEqual(metaParser.parseWithFilterDownloadPageCalledCount, 1)
+
     }
 
     func testAddFilterWithFiltersStorageError() {
         set(filters)
         XCTAssertEqual(manager.filters, filters)
-
+        let exp = XCTestExpectation()
         filtersStorage.updateCustomFilterError = CommonError.missingData
-
+        XCTAssertEqual(metaParser.parseWithFilterDownloadPageCalledCount, 0)
         manager.addFilter(withName: "name", url: URL(string: "https://filter.com")!, isEnabled: true, onFilterAdded: { error in
             if case CommonError.missingData = error as! CommonError {}
             else {
                 XCTFail()
             }
+            exp.fulfill()
         })
+        wait(for: [exp], timeout: 1.0)
+        XCTAssertEqual(metaParser.parseWithFilterDownloadPageCalledCount, 0)
+    }
+
+    func testAddFilterWithParserEror() {
+        set(filters)
+        XCTAssertEqual(manager.filters, filters)
+        let exp = XCTestExpectation()
+
+        filtersStorage.getFilterResultHandler = { _ in "content" }
+        XCTAssertEqual(metaParser.parseWithFilterDownloadPageCalledCount, 0)
+        manager.addFilter(withName: "name", url: URL(string: "https://filter.com")!, isEnabled: true, onFilterAdded: { error in
+            if case CommonError.missingData = error as! CommonError {}
+            else {
+                XCTFail()
+            }
+            exp.fulfill()
+        })
+
+        wait(for: [exp], timeout: 0.5)
+        XCTAssertEqual(metaParser.parseWithFilterDownloadPageCalledCount, 1)
     }
 
     // MARK: - Test removeFilter
@@ -208,6 +268,7 @@ class DnsFiltersManagerTest: XCTestCase {
                                        rulesCount: 0)
 
         let exp = XCTestExpectation()
+        XCTAssertEqual(metaParser.parseWithFilterDownloadPageCalledCount, 0)
         manager.updateFilter(withId: 1) { error in
             XCTAssertNil(error)
             exp.fulfill()
@@ -215,6 +276,40 @@ class DnsFiltersManagerTest: XCTestCase {
         wait(for: [exp], timeout: 0.5)
 
         XCTAssertEqual([expectedFilter, filters[1]], manager.filters)
+        XCTAssertEqual(metaParser.parseWithFilterDownloadPageCalledCount, 0)
+    }
+
+    func testUpdateFilterWithSuccessParsingMeta() {
+        set(filters)
+        XCTAssertEqual(manager.filters, filters)
+
+        let expectedFilter = DnsFilter(filterId: filters.first!.filterId,
+                                       subscriptionUrl: filters.first!.subscriptionUrl,
+                                       isEnabled: filters.first!.isEnabled,
+                                       name: filters.first!.name,
+                                       description: nil,
+                                       version: nil,
+                                       lastUpdateDate: nil,
+                                       updateFrequency: nil,
+                                       homePage: nil,
+                                       licensePage: nil,
+                                       issuesReportPage: nil,
+                                       communityPage: nil,
+                                       filterDownloadPage: nil,
+                                       rulesCount: 0)
+
+        let exp = XCTestExpectation()
+        metaParser.parseWithFilterDownloadPageResult = .success(expectedFilter)
+        filtersStorage.getFilterResultHandler = { _ in "content" }
+        XCTAssertEqual(metaParser.parseWithFilterDownloadPageCalledCount, 0)
+        manager.updateFilter(withId: 1) { error in
+            XCTAssertNil(error)
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 0.5)
+
+        XCTAssertEqual([expectedFilter, filters[1]], manager.filters)
+        XCTAssertEqual(metaParser.parseWithFilterDownloadPageCalledCount, 1)
     }
 
     func testUpdateFilterWithAbsentFilter() {
@@ -222,6 +317,7 @@ class DnsFiltersManagerTest: XCTestCase {
         XCTAssertEqual(manager.filters, filters)
 
         let exp = XCTestExpectation()
+        XCTAssertEqual(metaParser.parseWithFilterDownloadPageCalledCount, 0)
         manager.updateFilter(withId: 100) { error in
             if case DnsFiltersManager.DnsFilterError.dnsFilterAbsent(filterId: _) = error as! DnsFiltersManager.DnsFilterError {}
             else {
@@ -230,6 +326,7 @@ class DnsFiltersManagerTest: XCTestCase {
             exp.fulfill()
         }
         wait(for: [exp], timeout: 0.5)
+        XCTAssertEqual(metaParser.parseWithFilterDownloadPageCalledCount, 0)
     }
 
     func testUpdateFilterWithFiltersStorageError() {
@@ -238,6 +335,7 @@ class DnsFiltersManagerTest: XCTestCase {
 
         filtersStorage.updateCustomFilterError = CommonError.missingData
 
+        XCTAssertEqual(metaParser.parseWithFilterDownloadPageCalledCount, 0)
         let exp = XCTestExpectation()
         manager.updateFilter(withId: 1) { error in
             if case CommonError.missingData = error as! CommonError {}
@@ -247,6 +345,26 @@ class DnsFiltersManagerTest: XCTestCase {
             exp.fulfill()
         }
         wait(for: [exp], timeout: 0.5)
+        XCTAssertEqual(metaParser.parseWithFilterDownloadPageCalledCount, 0)
+    }
+
+    func testUpdateFilterWithParserError() {
+        set(filters)
+        XCTAssertEqual(manager.filters, filters)
+
+        XCTAssertEqual(metaParser.parseWithFilterDownloadPageCalledCount, 0)
+
+        let exp = XCTestExpectation()
+        filtersStorage.getFilterResultHandler = { _ in "content" }
+        manager.updateFilter(withId: 1) { error in
+            if case CommonError.missingData = error as! CommonError {}
+            else {
+                XCTFail()
+            }
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 0.5)
+        XCTAssertEqual(metaParser.parseWithFilterDownloadPageCalledCount, 1)
     }
 
     // MARK: - Test updateAllFilters

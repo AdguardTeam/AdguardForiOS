@@ -134,7 +134,7 @@ extension OneSafariGroupFiltersModel {
             throw CommonError.missingData
         }
 
-        try safariProtection.setFilter(withId: filterId, groupId, enabled: enabled, onCbReloaded: nil)
+        try safariProtection.setFilter(withId: filterId, groupId: groupId, enabled: enabled, onCbReloaded: nil)
         reinit()
 
         guard let newFilterMeta = group.filters.first(where: { $0.filterId == filterId }) else {
@@ -194,7 +194,7 @@ extension OneSafariGroupFiltersModel {
         DDLogInfo("(OneSafariGroupFiltersModel) - setGroup; Trying to change group=\(groupType) to state=\(newModel.isEnabled)")
 
         do {
-            try safariProtection.setGroup(groupType, enabled: newModel.isEnabled, onCbReloaded: nil)
+            try safariProtection.setGroup(groupType: groupType, enabled: newModel.isEnabled, onCbReloaded: nil)
         } catch {
             DDLogError("(OneSafariGroupFiltersModel) - setGroup; DB error when changing group=\(groupType) to state=\(newModel.isEnabled); Error: \(error)")
         }

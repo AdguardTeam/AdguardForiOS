@@ -98,6 +98,9 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
         return maxId + 1
     }
 
+    private let workingQueue = DispatchQueue(label: "DnsAdGuardSDK.DnsFiltersManagerQueue")
+    private let completionQueue = DispatchQueue(label: "DnsAdGuardSDK.DnsFiltersManagerCompletionQueue")
+
     /* Services */
     private let userDefaults: UserDefaultsStorageProtocol
     private let filterFilesStorage: CustomFilterFilesStorageProtocol
@@ -121,141 +124,193 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
     // MARK: - Internal methods
 
     func setFilter(withId id: Int, to enabled: Bool) throws {
-        Logger.logInfo("(DnsFiltersService) - setFilter; Trying to set filter with id=\(id) to enabled=\(enabled)")
+        try workingQueue.sync {
+            Logger.logInfo("(DnsFiltersService) - setFilter; Trying to set filter with id=\(id) to enabled=\(enabled)")
 
-        if let filterIndex = filters.firstIndex(where: { $0.filterId == id }) {
-            filters[filterIndex].isEnabled = enabled
-        } else {
-            throw DnsFilterError.dnsFilterAbsent(filterId: id)
+            if let filterIndex = filters.firstIndex(where: { $0.filterId == id }) {
+                filters[filterIndex].isEnabled = enabled
+            } else {
+                throw DnsFilterError.dnsFilterAbsent(filterId: id)
+            }
+
+            Logger.logInfo("(DnsFiltersService) - setFilter; Set filter with id=\(id) to enabled=\(enabled)")
         }
-
-        Logger.logInfo("(DnsFiltersService) - setFilter; Set filter with id=\(id) to enabled=\(enabled)")
     }
 
     func renameFilter(withId id: Int, to name: String) throws {
-        Logger.logInfo("(DnsFiltersService) - renameFilter; Renaming filter with id=\(id) to name=\(name)")
+        try workingQueue.sync {
+            Logger.logInfo("(DnsFiltersService) - renameFilter; Renaming filter with id=\(id) to name=\(name)")
 
-        if let filterIndex = filters.firstIndex(where: { $0.filterId == id }) {
-            filters[filterIndex].name = name
-        } else {
-            throw DnsFilterError.dnsFilterAbsent(filterId: id)
+            if let filterIndex = filters.firstIndex(where: { $0.filterId == id }) {
+                filters[filterIndex].name = name
+            } else {
+                throw DnsFilterError.dnsFilterAbsent(filterId: id)
+            }
+
+            Logger.logInfo("(DnsFiltersService) - renameFilter; Renamed filter with id=\(id) to name=\(name)")
         }
-
-        Logger.logInfo("(DnsFiltersService) - renameFilter; Renamed filter with id=\(id) to name=\(name)")
     }
 
     func addFilter(withName name: String, url: URL, isEnabled: Bool, onFilterAdded: @escaping (Error?) -> Void) {
-        Logger.logInfo("(DnsFiltersService) - addFilter; Trying to add filter with name=\(name) url=\(url)")
-
-        let filterId = nextFilterId
-        filterFilesStorage.updateCustomFilter(withId: filterId, subscriptionUrl: url) { [weak self] error in
+        workingQueue.async { [weak self] in
             guard let self = self else {
-                onFilterAdded(CommonError.missingSelf)
+                Logger.logError("(DnsFiltersService) - addFilter; Error: \(CommonError.missingSelf.debugDescription)")
+                DispatchQueue.main.async { onFilterAdded(CommonError.missingSelf) }
                 return
             }
 
-            if let error = error {
-                Logger.logError("(DnsFiltersService) - addFilter; Error adding custom filter to storage; Error: \(error)")
-                onFilterAdded(error)
-                return
+            var addError: Error?
+            do {
+                try self.addFilter(withName: name, url: url, isEnabled: isEnabled)
+            } catch {
+                addError = error
             }
 
-            var filterMeta: ExtendedCustomFilterMetaProtocol?
-            if let filterContent = self.filterFilesStorage.getFilterContentForFilter(withId: filterId) {
-                filterMeta = try? self.metaParser.parse(filterContent, for: .system, filterDownloadPage: url.absoluteString)
-            }
-            let filter = DnsFilter(meta: filterMeta, name: name, filterId: filterId, subscriptionUrl: url, isEnabled: isEnabled)
-            self.filters.append(filter)
-
-            Logger.logInfo("(DnsFiltersService) - addFilter; Added DNS filter with name=\(name) url=\(url)")
-            onFilterAdded(nil)
+            self.completionQueue.async { onFilterAdded(addError) }
         }
     }
 
     func removeFilter(withId id: Int) throws {
-        try filterFilesStorage.deleteFilter(withId: id)
-        filters.removeAll(where: { $0.filterId == id })
+        try workingQueue.sync {
+            try filterFilesStorage.deleteFilter(withId: id)
+            filters.removeAll(where: { $0.filterId == id })
+        }
     }
 
     func updateFilter(withId id: Int, onFilterUpdated: @escaping (Error?) -> Void) {
-        Logger.logInfo("(DnsFiltersService) - updateFilter; Trying to update DNS filter with id=\(id)")
-
-        guard let dnsFilterIndex = filters.firstIndex(where: { $0.filterId == id }) else {
-            onFilterUpdated(DnsFilterError.dnsFilterAbsent(filterId: id))
-            return
-        }
-        let dnsFilter = filters[dnsFilterIndex]
-
-        filterFilesStorage.updateCustomFilter(withId: id, subscriptionUrl: dnsFilter.subscriptionUrl) { [weak self] error in
+        workingQueue.async { [weak self] in
             guard let self = self else {
-                onFilterUpdated(CommonError.missingSelf)
+                Logger.logError("(DnsFiltersService) - updateFilter; Error: \(CommonError.missingSelf.debugDescription)")
+                DispatchQueue.main.async { onFilterUpdated(CommonError.missingSelf) }
                 return
             }
 
-            if let error = error {
-                Logger.logError("(DnsFiltersService) - updateFilter; Error updating custom DNS filter; Error: \(error)")
-                onFilterUpdated(error)
-                return
+            var updateError: Error?
+
+            do {
+                try self.updateFilter(withId: id)
+            } catch {
+                updateError = error
             }
-
-            // TODO: - DNS filter version is not checked now. This code can be improved by adding filter version check
-            var filterMeta: ExtendedCustomFilterMetaProtocol?
-            if let filterContent = self.filterFilesStorage.getFilterContentForFilter(withId: dnsFilter.filterId) {
-                filterMeta = try? self.metaParser.parse(filterContent, for: .system, filterDownloadPage: dnsFilter.subscriptionUrl.absoluteString)
-            }
-
-            let newFilter = DnsFilter(meta: filterMeta, name: dnsFilter.name ?? "", filterId: dnsFilter.filterId, subscriptionUrl: dnsFilter.subscriptionUrl, isEnabled: dnsFilter.isEnabled)
-            self.filters[dnsFilterIndex] = newFilter
-
-            Logger.logInfo("(DnsFiltersService) - updateFilter; Updated DNS filter with id=\(id)")
-            onFilterUpdated(nil)
+            self.completionQueue.async { onFilterUpdated(updateError) }
         }
     }
 
     func updateAllFilters(onFilterUpdated: @escaping (DnsFiltersUpdateResult) -> Void) {
-        Logger.logInfo("(DnsFiltersService) - updateAllFilters; Start")
+        workingQueue.async { [weak self] in
+            guard let self = self else {
+                Logger.logError("(DnsFiltersService) - updateAllFilters; Error: \(CommonError.missingSelf.debugDescription)")
+                DispatchQueue.main.async { onFilterUpdated(DnsFiltersUpdateResult(updatedFiltersIds: [], unupdatedFiltersIds: [])) }
+                return
+            }
+            Logger.logInfo("(DnsFiltersService) - updateAllFilters; Start")
 
-        let group = DispatchGroup()
-
-        var updatedIds: [Int] = []
-        var unupdatedIds: [Int] = []
-        let enabledFilters = filters.filter { $0.isEnabled }
-        for filter in enabledFilters {
-            group.enter()
-            updateFilter(withId: filter.filterId) { error in
-                if error == nil {
+            var updatedIds: [Int] = []
+            var unupdatedIds: [Int] = []
+            let enabledFilters = self.filters.filter { $0.isEnabled }
+            for filter in enabledFilters {
+                do {
+                    try self.updateFilter(withId: filter.filterId)
                     updatedIds.append(filter.filterId)
-                } else {
+                } catch {
                     unupdatedIds.append(filter.filterId)
                 }
-                group.leave()
             }
-        }
 
-        group.notify(queue: .main) {
-            onFilterUpdated(DnsFiltersUpdateResult(updatedFiltersIds: updatedIds, unupdatedFiltersIds: unupdatedIds))
+            self.completionQueue.async {
+                onFilterUpdated(DnsFiltersUpdateResult(updatedFiltersIds: updatedIds, unupdatedFiltersIds: unupdatedIds))
+            }
         }
     }
 
     func getDnsLibsFilters() -> [Int: String] {
-        Logger.logInfo("(DnsFiltersService) - getDnsLibsFilters; DnsFiltering is enabled=\(configuration.dnsFilteringIsEnabled)")
+        workingQueue.sync {
+            Logger.logInfo("(DnsFiltersService) - getDnsLibsFilters; DnsFiltering is enabled=\(configuration.dnsFilteringIsEnabled)")
 
-        guard configuration.dnsFilteringIsEnabled else {
-            return [:]
+            guard configuration.dnsFilteringIsEnabled else {
+                return [:]
+            }
+
+            let enabledFiltersIds = filters.compactMap { $0.isEnabled ? $0.filterId : nil }
+
+            var pathById: [Int: String] = [:]
+            enabledFiltersIds.forEach { pathById[$0] = filterFilesStorage.getUrlForFilter(withId: $0).path }
+            return pathById
         }
-
-        let enabledFiltersIds = filters.compactMap { $0.isEnabled ? $0.filterId : nil }
-
-        var pathById: [Int: String] = [:]
-        enabledFiltersIds.forEach { pathById[$0] = filterFilesStorage.getUrlForFilter(withId: $0).path }
-        return pathById
     }
 
     func reset() throws {
-        try filters.forEach { filter in
-            try filterFilesStorage.deleteFilter(withId: filter.filterId)
-            filters.removeAll(where: { $0.filterId == filter.filterId })
+        try workingQueue.sync {
+            try filters.forEach { filter in
+                try filterFilesStorage.deleteFilter(withId: filter.filterId)
+                filters.removeAll(where: { $0.filterId == filter.filterId })
+            }
         }
+    }
+
+    // MARK: - Private methods
+
+    private func addFilter(withName name: String, url: URL, isEnabled: Bool) throws {
+        Logger.logInfo("(DnsFiltersService) - addFilter; Trying to add filter with name=\(name) url=\(url)")
+        let filterId = nextFilterId
+        let result = try updateFilterSync(with: filterId, url: url)
+        let filter = DnsFilter(meta: result, name: name, filterId: filterId, subscriptionUrl: url, isEnabled: isEnabled)
+        self.filters.append(filter)
+
+        Logger.logInfo("(DnsFiltersService) - addFilter; Added DNS filter with name=\(name) url=\(url)")
+    }
+
+    private func updateFilter(withId id: Int) throws {
+        Logger.logInfo("(DnsFiltersService) - updateFilter; Trying to update DNS filter with id=\(id)")
+
+        guard let dnsFilterIndex = filters.firstIndex(where: { $0.filterId == id }) else {
+            throw DnsFilterError.dnsFilterAbsent(filterId: id)
+        }
+
+        let dnsFilter = filters[dnsFilterIndex]
+        let result = try updateFilterSync(with: dnsFilter.filterId, url: dnsFilter.subscriptionUrl)
+
+        let newFilter = DnsFilter(meta: result, name: dnsFilter.name ?? "", filterId: dnsFilter.filterId, subscriptionUrl: dnsFilter.subscriptionUrl, isEnabled: dnsFilter.isEnabled)
+        self.filters[dnsFilterIndex] = newFilter
+
+        Logger.logInfo("(DnsFiltersService) - updateFilter; Updated DNS filter with id=\(id)")
+    }
+
+    private func updateFilterSync(with filterId: Int, url: URL) throws -> ExtendedCustomFilterMetaProtocol? {
+        let group = DispatchGroup()
+        var resultError: Error?
+        var filterMeta: ExtendedCustomFilterMetaProtocol?
+        group.enter()
+        filterFilesStorage.updateCustomFilter(withId: filterId, subscriptionUrl: url) { [weak self] error in
+            guard let self = self else {
+                resultError = CommonError.missingSelf
+                group.leave()
+                return
+            }
+
+            if let error = error {
+                Logger.logError("(DnsFiltersService) - updateFilterSync; Error updating custom DNS filter; Error: \(error)")
+                resultError = error
+                group.leave()
+                return
+            }
+
+            // TODO: - DNS filter version is not checked now. This code can be improved by adding filter version check
+            if let filterContent = self.filterFilesStorage.getFilterContentForFilter(withId: filterId) {
+                do {
+                    filterMeta = try self.metaParser.parse(filterContent, for: .system, filterDownloadPage: url.absoluteString)
+                } catch {
+                    Logger.logError("(DnsFiltersService) - updateFilterSync; Parsing error occurred: \(error)")
+                    resultError = error
+                }
+            }
+            group.leave()
+        }
+        group.wait()
+        if let error = resultError {
+            throw error
+        }
+        return filterMeta
     }
 }
 

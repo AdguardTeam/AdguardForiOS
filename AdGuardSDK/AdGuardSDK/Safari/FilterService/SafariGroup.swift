@@ -48,7 +48,7 @@ public struct SafariGroup: SafariGroupProtocol {
         self.displayNumber = displayNumber
     }
 
-    init(filters: [SafariGroup.Filter], isEnabled: Bool, groupType: SafariGroup.GroupType, groupName: String, displayNumber: Int) {
+    public init(filters: [SafariGroup.Filter], isEnabled: Bool, groupType: SafariGroup.GroupType, groupName: String, displayNumber: Int) {
         self.groupId = groupType.id
         self.filters = filters
         self.isEnabled = isEnabled

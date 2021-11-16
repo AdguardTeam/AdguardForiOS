@@ -22,7 +22,7 @@ protocol IURLSchemeExecutor {
     func openMainPageController(showLaunchScreen: Bool, complexProtectionIsEnabled: Bool?) -> Bool
     func openLoginController(license: String?) -> Bool
     func openDnsProvidersController(showLaunchScreen: Bool, urlAbsoluteString: String) -> Bool
-    func openImportSettingsController(showLaunchScreen: Bool, settings: Settings?) -> Bool
+    func openImportSettingsController(showLaunchScreen: Bool, settings: ImportSettings) -> Bool
     func openFiltersMasterController(showLaunchScreen: Bool, url: String?, title: String?) -> Bool
     func openTunnelModeController(showLaunchScreen: Bool) -> Bool
     func login(withAccessToken: String?, state: String?) -> Bool
