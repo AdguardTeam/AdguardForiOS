@@ -90,11 +90,17 @@ final class StartupService : NSObject {
             userDefaults: sharedResources.sharedDefaults(),
             dnsBackgroundFetchUpdater: dnsProtection)
 
-        let dnsProvidersManager: DnsProvidersManagerProtocol = try! DnsProvidersManager(configuration: dnsProtectionConfiguration, userDefaults: sharedResources.sharedDefaults())
+        let networkUtils: NetworkUtilsProtocol = NetworkUtils()
+        locator.addService(service: networkUtils)
+
+        let dnsProvidersManager: DnsProvidersManagerProtocol = try! DnsProvidersManager(configuration: dnsProtectionConfiguration, userDefaults: sharedResources.sharedDefaults(), networkUtils: networkUtils)
 
         locator.addService(service: safariProtection)
         locator.addService(service: dnsProtection)
         locator.addService(service: dnsProvidersManager)
+
+        let bootstrapsHelper: BootstrapsHelperProtocol = BootstrapsHelper(networkUtils: networkUtils)
+        locator.addService(service: bootstrapsHelper)
 
         /* End of initializing SDK */
 
@@ -139,9 +145,6 @@ final class StartupService : NSObject {
 
         let setappService: SetappServiceProtocol = SetappService(purchaseService: purchaseService, resources: sharedResources)
         locator.addService(service: setappService)
-
-        let importSettings: ImportSettingsServiceProtocol = ImportSettingsService(networking: networkService, dnsProvidersManager: dnsProvidersManager, purchaseService: purchaseService, resources: sharedResources, safariProtection: safariProtection)
-        locator.addService(service: importSettings)
 
         let activityStatistics: ActivityStatisticsProtocol = try! ActivityStatistics(statisticsDbContainerUrl: sharedUrls.statisticsFolderUrl)
         locator.addService(service: activityStatistics)

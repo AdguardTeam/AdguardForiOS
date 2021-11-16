@@ -22,8 +22,13 @@ class SettingsParserTest: XCTestCase {
 
     func testEmptyJson() {
         let parser = SettingsParser()
-        let settings = parser.parse(querry: "{}")
+        let settings = try! parser.parse(query: "{}")
         XCTAssertNotNil(settings)
+    }
+
+    func testParseJsonWithError() {
+        let parser = SettingsParser()
+        XCTAssertThrowsError(try parser.parse(query: "JSON"))
     }
 
     func testAllSettings() {
@@ -71,23 +76,23 @@ class SettingsParserTest: XCTestCase {
                       "dns_server_id": 33
                     }
         """
-        let settings = parser.parse(querry: json)
+        let settings = try! parser.parse(query: json)
 
         XCTAssertNotNil(settings)
 
-        XCTAssertEqual(settings?.defaultCbFilters?[0].id, 1)
-        XCTAssertEqual(settings?.defaultCbFilters?[0].enable, true)
-        XCTAssertEqual(settings?.defaultCbFilters?[1].id, 2)
-        XCTAssertEqual(settings?.defaultCbFilters?[1].enable, false)
-        XCTAssertEqual(settings?.customCbFilters?.first?.name, "custom")
-        XCTAssertEqual(settings?.customCbFilters?.first?.url, "custom_filter_url")
-        XCTAssertEqual(settings?.dnsFilters?.first?.name, "custom_dns_filter")
-        XCTAssertEqual(settings?.dnsFilters?.first?.url, "dns_filter_url")
-        XCTAssertEqual(settings?.license, "LICENSE")
-        XCTAssertEqual(settings?.userRules, ["rule1", "rule2"])
-        XCTAssertEqual(settings?.dnsUserRules, ["dns_rule1", "dns_rule2"])
-        XCTAssertEqual(settings?.dnsServerId, 33)
-        XCTAssertEqual(settings?.overrideDnsUserRules, true)
-        XCTAssertEqual(settings?.overrideDnsFilters, true)
+        XCTAssertEqual(settings.defaultSafariFilters?[0].id, 1)
+        XCTAssertEqual(settings.defaultSafariFilters?[0].enable, true)
+        XCTAssertEqual(settings.defaultSafariFilters?[1].id, 2)
+        XCTAssertEqual(settings.defaultSafariFilters?[1].enable, false)
+        XCTAssertEqual(settings.customSafariFilters?.first?.name, "custom")
+        XCTAssertEqual(settings.customSafariFilters?.first?.url, "custom_filter_url")
+        XCTAssertEqual(settings.dnsFilters?.first?.name, "custom_dns_filter")
+        XCTAssertEqual(settings.dnsFilters?.first?.url, "dns_filter_url")
+        XCTAssertEqual(settings.license, "LICENSE")
+        XCTAssertEqual(settings.safariBlocklistRules, ["rule1", "rule2"])
+        XCTAssertEqual(settings.dnsBlocklistRules, ["dns_rule1", "dns_rule2"])
+        XCTAssertEqual(settings.dnsServerId, 33)
+        XCTAssertEqual(settings.overrideDnsBlocklistRules, true)
+        XCTAssertEqual(settings.overrideDnsFilters, true)
     }
 }

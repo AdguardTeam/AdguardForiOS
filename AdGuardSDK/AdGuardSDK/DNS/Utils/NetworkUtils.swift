@@ -19,8 +19,9 @@
 import AGDnsProxy
 import SystemLibsResolv
 import SharedAdGuardSDK
+import Network
 
-protocol NetworkUtilsProtocol {
+public protocol NetworkUtilsProtocol {
     /* Returns list of ip addresses of system DNS servers */
     var systemDnsServers: [String] { get }
 
@@ -37,7 +38,37 @@ protocol NetworkUtilsProtocol {
     func upstreamIsValid(_ upstream: String) -> Bool
 }
 
-public struct NetworkUtils: NetworkUtilsProtocol {
+public class NetworkUtils: NetworkUtilsProtocol {
+
+    // We cannot use the @available attribute on properties. Therefore, we have to use a function to get it.
+    private var _monitor: Any?
+    @available(iOS 12.0, *)
+    private func monitor() -> NWPathMonitor {
+        return _monitor as! NWPathMonitor
+    }
+
+    public init() {
+        if #available(iOS 12.0, *) {
+            _monitor = NWPathMonitor()
+            var group: DispatchGroup? = DispatchGroup()
+            group?.enter()
+            monitor().pathUpdateHandler = { _ in
+                group?.leave()
+                group = nil
+            }
+            // We must start the monitor to have the actual value of the path at any time
+            monitor().start(queue: DispatchQueue(label: "NWPathMonitor handler queue"))
+
+            // we must wait for fist pathUpdateHandler call to get actual network state
+            _ = group?.wait(timeout: .now() + 0.5)
+        }
+    }
+
+    deinit {
+        if #available(iOS 12.0, *) {
+            monitor().cancel()
+        }
+    }
 
     public var systemDnsServers: [String] {
         var state = __res_9_state()
@@ -57,6 +88,14 @@ public struct NetworkUtils: NetworkUtilsProtocol {
     }
 
     public var isIpv4Available: Bool {
+
+        if #available(iOS 12.0, *) {
+            // availableInterfaces theoretically can be empty if currentPath was not initialised yet
+            if !monitor().currentPath.availableInterfaces.isEmpty {
+                return monitor().currentPath.supportsIPv4
+            }
+        }
+
         var result = false
         enumerateNetworkInterfaces { (cursor) -> Bool in
             if cursor.pointee.ifa_addr.pointee.sa_family == AF_INET {
@@ -69,6 +108,14 @@ public struct NetworkUtils: NetworkUtilsProtocol {
     }
 
     public var isIpv6Available: Bool {
+
+        if #available(iOS 12.0, *) {
+            // availableInterfaces theoretically can be empty if currentPath was not initialised yet
+            if !monitor().currentPath.availableInterfaces.isEmpty {
+                return monitor().currentPath.supportsIPv6
+            }
+        }
+
         var result = false
         enumerateNetworkInterfaces { (cursor) -> Bool in
             if cursor.pointee.ifa_addr.pointee.sa_family == AF_INET6 {
@@ -79,8 +126,6 @@ public struct NetworkUtils: NetworkUtilsProtocol {
         }
         return result
     }
-
-    public init() {}
 
     public func getProtocol(from upstream: String) throws -> DnsProtocol {
         if upstream.hasPrefix("sdns://") {
@@ -101,7 +146,7 @@ public struct NetworkUtils: NetworkUtilsProtocol {
         }
     }
 
-    func upstreamIsValid(_ upstream: String) -> Bool {
+    public func upstreamIsValid(_ upstream: String) -> Bool {
         let bootstraps = systemDnsServers
 
         let dnsUpstream = AGDnsUpstream(address: upstream, bootstrap: bootstraps, timeoutMs: AGDnsUpstream.defaultTimeoutMs, serverIp: Data(), id: 0, outboundInterfaceName: nil)

@@ -30,7 +30,7 @@ final class PacketTunnelSettingsProvider: PacketTunnelSettingsProviderProtocol {
     private let addresses: PacketTunnelProvider.Addresses
     private let networkUtils: NetworkUtilsProtocol
 
-    init(addresses: PacketTunnelProvider.Addresses, networkUtils: NetworkUtilsProtocol = NetworkUtils()) {
+    init(addresses: PacketTunnelProvider.Addresses, networkUtils: NetworkUtilsProtocol) {
         self.addresses = addresses
         self.networkUtils = networkUtils
     }

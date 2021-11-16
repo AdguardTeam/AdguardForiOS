@@ -48,9 +48,12 @@ class PurchaseServiceMock: PurchaseServiceProtocol {
     func login(withAccessToken token: String?, state: String?) {
     }
 
+    var loginWithLicenseKeyResult = true
+    var loginWithLicenseKeyCalledCount = 0
     func login(withLicenseKey key: String, completion: @escaping (Bool) -> Void) {
         activateLicesnseCalled = true
-        completion(true)
+        loginWithLicenseKeyCalledCount += 1
+        completion(loginWithLicenseKeyResult)
     }
 
     func login(name: String, password: String, code2fa: String?) {

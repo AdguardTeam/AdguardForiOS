@@ -488,7 +488,7 @@ extension AppDelegate {
     func presentHowToSetupController() {
         let dnsStoryboard = UIStoryboard(name: "DnsSettings", bundle: nil)
         guard let howToSetupVC = dnsStoryboard.instantiateViewController(withIdentifier: "HowToSetupController") as? HowToSetupController else {
-            DDLogError("DnsSettings.storyboard doesnt't have HowToSetupController")
+            DDLogError("DnsSettings.storyboard doesn't have HowToSetupController")
             return
         }
         guard let topVC = AppDelegate.topViewController() else {
@@ -502,7 +502,7 @@ extension AppDelegate {
      Presents DnsModeController
      Returns true on success and false otherwise
      */
-    func presentImportSettingsController(showLaunchScreen: Bool = false, settings: Settings?) -> Bool {
+    func presentImportSettingsController(showLaunchScreen: Bool = false, settings: ImportSettings) -> Bool {
         guard let tabBar = getMainTabController() else {
             DDLogError("Tab bar is nil")
             return false
@@ -519,7 +519,7 @@ extension AppDelegate {
 
         let mainPageStoryboard = UIStoryboard(name: "MainPage", bundle: Bundle.main)
         guard let mainPageController = mainPageStoryboard.instantiateViewController(withIdentifier: "MainPageController") as? MainPageController else {
-            DDLogError("MainPage.storyboard doesnt't have MainPageController")
+            DDLogError("MainPage.storyboard doesn't have MainPageController")
             return false
         }
         mainPageController.importSettings = settings
@@ -538,7 +538,7 @@ extension AppDelegate {
         }
         let userFilterStoryboard = UIStoryboard(name: "UserFilter", bundle: nil)
         guard let userRulesRedirectVC = userFilterStoryboard.instantiateViewController(withIdentifier: "UserRulesRedirectController") as? UserRulesRedirectController else {
-            DDLogError("UserFilter.storyboard doesnt't have UserRulesRedirectController")
+            DDLogError("UserFilter.storyboard doesn't have UserRulesRedirectController")
             return false
         }
         // Check if VC does not present any controller

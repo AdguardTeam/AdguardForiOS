@@ -25,21 +25,21 @@ protocol UpstreamsControllerDelegate: AnyObject {
     func updateDescriptionLabel(type: UpstreamType, text: String)
 }
 
-class UpstreamsController: BottomAlertController {
+final class UpstreamsController: BottomAlertController {
     @IBOutlet weak var upstreamTypeLabel: ThemableLabel!
     @IBOutlet weak var textFieldDesciptionLabel: ThemableLabel!
     @IBOutlet weak var saveButton: RoundRectButton!
     @IBOutlet weak var cancelButton: RoundRectButton!
-    @IBOutlet weak var upstreamsTextField: UITextField!
+    @IBOutlet weak var upstreamsTextField: AGTextField!
     @IBOutlet weak var scrollContentView: UIView!
-    @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
 
     @IBOutlet var themableLabels: [ThemableLabel]!
-    @IBOutlet var separators: [UIView]!
 
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
+    private let networkUtils: NetworkUtilsProtocol = ServiceLocator.shared.getService()!
+    private let bootstrapsHelper: BootstrapsHelperProtocol = ServiceLocator.shared.getService()!
 
     var upstreamType: UpstreamType!
     weak var delegate: UpstreamsControllerDelegate?
@@ -47,6 +47,7 @@ class UpstreamsController: BottomAlertController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        upstreamsTextField.delegate = self
 
         prepareUpstreamTextField()
         prepareTextFieldDescription()
@@ -61,6 +62,7 @@ class UpstreamsController: BottomAlertController {
     }
 
     // MARK: - Actions
+
     @IBAction func cancelAction(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
@@ -94,14 +96,6 @@ class UpstreamsController: BottomAlertController {
                 }
             }
         }
-    }
-
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textViewUnderline.state = .enabled
-    }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        textViewUnderline.state = .disabled
     }
 
     // MARK: - Private methods
@@ -176,9 +170,7 @@ class UpstreamsController: BottomAlertController {
         saveButton?.isEnabled = false
         saveButton?.startIndicator()
 
-        let networkUtils = NetworkUtils()
-        let bootstraps = BootstrapsHelper.bootstraps
-
+        let bootstraps = bootstrapsHelper.bootstraps
         let upstreams = upstreams.map {
             AGDnsUpstream(address: $0, bootstrap: bootstraps, timeoutMs: AGDnsUpstream.defaultTimeoutMs, serverIp: Data(), id: 0, outboundInterfaceName: nil)
         }
@@ -187,7 +179,7 @@ class UpstreamsController: BottomAlertController {
             guard let self = self else { return }
 
             let errors = upstreams.compactMap {
-                AGDnsUtils.test($0, ipv6Available: networkUtils.isIpv6Available)
+                AGDnsUtils.test($0, ipv6Available: self.networkUtils.isIpv6Available)
             }
 
             DispatchQueue.main.async {
@@ -222,8 +214,6 @@ extension UpstreamsController: ThemableProtocol {
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(upstreamsTextField)
         saveButton?.indicatorStyle = theme.indicatorStyle
-        for separator in separators {
-            separator.backgroundColor = theme.separatorColor
-        }
+        upstreamsTextField.updateTheme()
     }
 }

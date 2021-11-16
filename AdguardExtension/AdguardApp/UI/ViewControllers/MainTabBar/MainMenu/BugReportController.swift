@@ -18,13 +18,12 @@
 
 import UIKit
 
-class BugReportController: UIViewController {
+final class BugReportController: UIViewController {
 
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var descriptionLabel: ThemableLabel!
 
-    @IBOutlet weak var emailAddressTextField: UITextField!
-    @IBOutlet weak var emailTextFieldIndicatorView: TextFieldIndicatorView!
+    @IBOutlet weak var emailAddressTextField: AGTextField!
     @IBOutlet weak var emailErrorLabel: UILabel!
 
     @IBOutlet weak var descriptionTextView: UITextView!
@@ -54,10 +53,11 @@ class BugReportController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        emailAddressTextField.delegate = self
 
         keyboardMover = KeyboardMover(bottomConstraint: scrollViewBottomConstraint, view: scrollView, tabBar: tabBarController?.tabBar)
 
-        setupToHideKeyboardOnTapOnView() // Tap anywhere to hide keyboard
+        setupToHideKeyboardOnTapOnView(ignoringViews: [emailAddressTextField, emailAddressTextField.rightView].compactMap { $0 }) // Tap anywhere to hide keyboard
         setupTextView()
         processReportType()
 
@@ -87,7 +87,7 @@ class BugReportController: UIViewController {
         let isValidDescription = !description.isEmpty
 
         if !isValidEmail {
-            emailTextFieldIndicatorView.state = .error
+            emailAddressTextField.borderState = .error
             emailErrorLabel.isHidden = false
         }
 
@@ -171,31 +171,46 @@ class BugReportController: UIViewController {
     }
 }
 
+// MARK: - BugReportController + UITextFieldDelegate
+
 extension BugReportController: UITextFieldDelegate {
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        emailTextFieldIndicatorView.state = .enabled
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+
+        emailAddressTextField.borderState = .enabled
+        emailAddressTextField.rightView?.isHidden = updatedText.isEmpty
         emailErrorLabel.isHidden = true
         return true
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        emailTextFieldIndicatorView.state = .enabled
+        emailAddressTextField.rightView?.isHidden = (textField.text ?? "").isEmpty
+        emailAddressTextField.borderState = .enabled
         emailErrorLabel.isHidden = true
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         let email = textField.text ?? ""
         let isValidEmail = email.isValidEmail() || email.isEmpty
-        emailTextFieldIndicatorView.state = isValidEmail ? .disabled : .error
+        emailAddressTextField.rightView?.isHidden = email.isEmpty
+        emailAddressTextField.borderState = isValidEmail ? .disabled : .error
         emailErrorLabel.isHidden = isValidEmail
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField.text?.isValidEmail() == true {
+        let email = textField.text ?? ""
+        if email.isEmpty {
+            emailAddressTextField.borderState = .disabled
+            emailErrorLabel.isHidden = true
+            textField.resignFirstResponder()
+        } else if email.isValidEmail() {
             descriptionTextView.becomeFirstResponder()
+            emailAddressTextField.borderState = .disabled
         } else {
-            emailTextFieldIndicatorView.state = .error
+            emailAddressTextField.borderState = .error
             emailErrorLabel.isHidden = false
             textField.resignFirstResponder()
         }
@@ -233,5 +248,6 @@ extension BugReportController: ThemableProtocol {
         themeService.setupTextField(emailAddressTextField)
         themeService.setupTextView(descriptionTextView)
         textViewPlaceholder.textColor = themeService.placeholderTextColor
+        emailAddressTextField.updateTheme()
     }
 }
