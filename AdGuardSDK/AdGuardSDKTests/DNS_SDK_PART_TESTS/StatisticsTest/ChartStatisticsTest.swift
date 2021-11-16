@@ -89,7 +89,7 @@ class ChartStatisticsTest: XCTestCase {
         statistics.process(record: record1)
         statistics.process(record: record2)
 
-        let points = try! statistics.getPoints(for: .encrypted, for: .all)
+        let points = try! statistics.getPoints(for: .encrypted, for: .all, pointsCount: 100)
         check(points: points, chartType: .encrypted, sum: 5)
     }
 
@@ -99,19 +99,19 @@ class ChartStatisticsTest: XCTestCase {
         let recordsFromDb = try! stat.getRecords(for: .all)
         XCTAssert(recordsFromDb.isEmpty)
 
-        var points = try! statistics.getPoints(for: .requests, for: .all)
+        var points = try! statistics.getPoints(for: .requests, for: .all, pointsCount: 100)
         check(points: points, chartType: .requests, sum: 0)
 
-        points = try! statistics.getPoints(for: .requests, for: .month)
+        points = try! statistics.getPoints(for: .requests, for: .month, pointsCount: 100)
         check(points: points, chartType: .requests, sum: 0)
 
-        points = try! statistics.getPoints(for: .requests, for: .week)
+        points = try! statistics.getPoints(for: .requests, for: .week, pointsCount: 100)
         check(points: points, chartType: .requests, sum: 0)
 
-        points = try! statistics.getPoints(for: .requests, for: .day)
+        points = try! statistics.getPoints(for: .requests, for: .day, pointsCount: 100)
         check(points: points, chartType: .requests, sum: 0)
 
-        points = try! statistics.getPoints(for: .requests, for: .today)
+        points = try! statistics.getPoints(for: .requests, for: .today, pointsCount: 100)
         check(points: points, chartType: .requests, sum: 0)
     }
 
@@ -162,19 +162,19 @@ class ChartStatisticsTest: XCTestCase {
         XCTAssertEqual(recordsFromDb.count, 13)
 
         // Check points
-        let todayPoints = try! statistics.getPoints(for: .requests, for: .today)
+        let todayPoints = try! statistics.getPoints(for: .requests, for: .today, pointsCount: 100)
         check(points: todayPoints, chartType: .requests, sum: 3)
 
-        let dayPoints = try! statistics.getPoints(for: .encrypted, for: .day)
+        let dayPoints = try! statistics.getPoints(for: .encrypted, for: .day, pointsCount: 100)
         check(points: dayPoints, chartType: .encrypted, sum: 11)
 
-        let weekPoints = try! statistics.getPoints(for: .blocked, for: .week)
+        let weekPoints = try! statistics.getPoints(for: .blocked, for: .week, pointsCount: 100)
         check(points: weekPoints, chartType: .blocked, sum: 17)
 
-        let monthPoints = try! statistics.getPoints(for: .elapsed, for: .month)
+        let monthPoints = try! statistics.getPoints(for: .elapsed, for: .month, pointsCount: 100)
         check(points: monthPoints, chartType: .elapsed, sum: 21)
 
-        let allPoints = try! statistics.getPoints(for: .requests, for: .all)
+        let allPoints = try! statistics.getPoints(for: .requests, for: .all, pointsCount: 100)
         check(points: allPoints, chartType: .requests, sum: 36)
     }
 
@@ -191,7 +191,7 @@ class ChartStatisticsTest: XCTestCase {
         let recordsFromDb = try! stat.getRecords(for: .all)
         XCTAssertEqual(recordsFromDb.count, 1000)
 
-        let points = try! statistics.getPoints(for: .requests, for: .all)
+        let points = try! statistics.getPoints(for: .requests, for: .all, pointsCount: 100)
         check(points: points, chartType: .requests, sum: 1000)
     }
 
