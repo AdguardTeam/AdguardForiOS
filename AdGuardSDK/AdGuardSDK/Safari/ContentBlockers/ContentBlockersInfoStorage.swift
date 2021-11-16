@@ -49,7 +49,6 @@ public enum ContentBlockerType: Int, CaseIterable, Codable {
  It is more convenient to use URLs because Content Blockers are waiting JSON URL with converted rules.
  */
 public struct ConverterResult: Codable, Equatable {
-    public let jsonUrl: URL // URL where JSON with converted rules is stored
     public let type: ContentBlockerType // Content blocker type the result is related with
     public let totalRules: Int // Total valis rules number, because some rules that we pass can be invalid
     public let totalConverted: Int // The result number of rules with Content blockers limit of 'contentBlockerRulesLimit' rules
@@ -58,8 +57,7 @@ public struct ConverterResult: Codable, Equatable {
     public let advancedBlockingConvertedCount: Int // Number of entries in advanced blocking part
     public let message: String // Result message
 
-    init(result: FiltersConverterResult, jsonUrl: URL) {
-        self.jsonUrl = jsonUrl
+    init(result: FiltersConverterResult) {
         self.type = result.type
         self.totalRules = result.totalRules
         self.totalConverted = result.totalConverted
@@ -87,6 +85,9 @@ protocol ContentBlockersInfoStorageProtocol: ResetableSyncProtocol {
 
     /* Loads filters convertion result and JSON file url for specified content blocker type */
     func getConverterResult(for cbType: ContentBlockerType) -> ConverterResult?
+
+    /// returns url to content blocker json for specified content blocker type
+    func getJsonUrl(for cbType: ContentBlockerType) -> URL
 }
 
 /* This class is responsible for managing JSON files for every content blocker */
@@ -129,9 +130,9 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
         Logger.logInfo("(ContentBlockersJSONStorage) - save cbJsons; Trying to save \(converterResults.count) jsons")
 
         let result: [ConverterResult] = try converterResults.map {
-            let urlToSave = urlForJson(withType: $0.type)
+            let urlToSave = getJsonUrl(for: $0.type)
             try $0.jsonString.write(to: urlToSave, atomically: true, encoding: .utf8)
-            return ConverterResult(result: $0, jsonUrl: urlToSave)
+            return ConverterResult(result: $0)
         }
         userDefaultsStorage.allCbInfo = result
         try saveAdvancedRules(from: converterResults)
@@ -158,11 +159,11 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
         Logger.logInfo("(ContentBlockersJSONStorage) - reset; Successfully deleted directory with CBs JSONs")
     }
 
-    // MARK: - Private methods
-
-    private func urlForJson(withType cbType: ContentBlockerType) -> URL {
+    func getJsonUrl(for cbType: ContentBlockerType) -> URL {
         return jsonStorageUrl.appendingPathComponent(cbType.fileName)
     }
+
+    // MARK: - Private methods
 
     private func saveAdvancedRules(from results: [FiltersConverterResult]) throws {
         // Advanced rules from every Content Blocker in one string

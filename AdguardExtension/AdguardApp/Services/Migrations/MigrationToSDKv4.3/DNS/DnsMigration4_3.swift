@@ -87,7 +87,7 @@ class DnsMigration4_3: DnsMigration4_3Protocol {
             // wait for finish
             let group = DispatchGroup()
             group.enter()
-            stateManager.onReady {
+            stateManager.onMigrationFinished {
                 group.leave()
             }
             group.wait()

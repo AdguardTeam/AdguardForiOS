@@ -31,7 +31,7 @@ protocol MigrationStateManagerProtocol {
     func finish()
     func failure()
 
-    func onMigrationFinished(_ callback: ()->Void)
+    func onMigrationFinished(_ callback: @escaping ()->Void)
 }
 
 class MigrationStateManager: NSObject, MigrationStateManagerProtocol {

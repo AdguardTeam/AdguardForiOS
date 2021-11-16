@@ -74,7 +74,7 @@ class SafariMigration4_3: SafariMigration4_3Protocol {
             // wait for finish
             let group = DispatchGroup()
             group.enter()
-            stateManager.onReady {
+            stateManager.onMigrationFinished {
                 group.leave()
             }
             group.wait()
