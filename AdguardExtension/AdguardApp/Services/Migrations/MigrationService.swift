@@ -37,6 +37,7 @@ final class MigrationService: MigrationServiceProtocol {
     private let safariProtection: SafariProtectionProtocol
     private let dnsProvidersManager: DnsProvidersManagerProtocol
     private let networkSettings: NetworkSettingsServiceProtocol
+    private let versionProvider: MigrationServiceVersionProvider
     private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol
 
     private let migrationQueue = DispatchQueue(label: "MigrationService queue", qos: .userInitiated)
@@ -58,6 +59,7 @@ final class MigrationService: MigrationServiceProtocol {
         self.safariProtection = safariProtection
         self.dnsProvidersManager = dnsProvidersManager
         self.networkSettings = networkSettings
+        self.versionProvider = MigrationServiceVersionProvider(resources: resources)
         self.dnsConfigAssistant = dnsConfigAssistant
 
         resources.sharedDefaults().set(self.currentSchemaVersion, forKey: AEDefaultsProductSchemaVersion)
@@ -228,8 +230,7 @@ final class MigrationService: MigrationServiceProtocol {
             All data from User rules, allowlist rules, inverted allowlist rules, DNS blocklist, DNS allowlist, filters(safari/dns) data was replaced in different storages
             So we need to migrate this data respectively
          */
-        // TODO: - Change migration version before release
-        if lastBuildVersion < 800 {
+        if versionProvider.needsMigrateTo4_3() {
             let oldFilesMigration = SDKMigrationOldFilesHelper(
                 oldFilesContainerUrl: resources.sharedResuorcesURL(),
                 cbJsonFolderUrl: SharedStorageUrls().cbJsonsFolderUrl

@@ -55,11 +55,8 @@ final class NewDnsServerController: BottomAlertController {
     @IBOutlet weak var saveOrAddButton: RoundRectButton!
     @IBOutlet weak var cancelOrDeleteButton: RoundRectButton!
 
-    @IBOutlet weak var nameField: UITextField!
-    @IBOutlet weak var upstreamsField: UITextField!
-
-    @IBOutlet weak var nameFieldSeparator: TextFieldIndicatorView!
-    @IBOutlet weak var dnsSeparator: TextFieldIndicatorView!
+    @IBOutlet weak var nameField: AGTextField!
+    @IBOutlet weak var upstreamsField: AGTextField!
 
     @IBOutlet weak var scrollContentView: UIView!
 
@@ -80,6 +77,8 @@ final class NewDnsServerController: BottomAlertController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        nameField.delegate = self
+        upstreamsField.delegate = self
 
         if let openUrl = openUrl {
             // Native DNS implementation doesn't support port syntax
@@ -90,7 +89,7 @@ final class NewDnsServerController: BottomAlertController {
         }
 
         nameField.becomeFirstResponder()
-        updateSaveButton()
+        updateSaveButton(upstreamsField.text ?? "")
         updateTheme()
         configureAlertTitles()
     }
@@ -113,41 +112,46 @@ final class NewDnsServerController: BottomAlertController {
             deleteAction()
         }
     }
-    @IBAction func editingChanged(_ sender: Any) {
-        updateSaveButton()
-    }
 
     // MARK: - textfield delegate methods
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField != nameField { return true }
-
         let currentText = textField.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-        if  updatedText.count >= textFieldCharectersLimit {
+
+        if textField === nameField {
+            nameField.borderState = .enabled
+            nameField.rightView?.isHidden = updatedText.isEmpty
+        } else {
+            upstreamsField.borderState = isCorrectDns(updatedText) || updatedText.isEmpty ? .enabled : .error
+            upstreamsField.rightView?.isHidden = updatedText.isEmpty
+        }
+        updateSaveButton(updatedText)
+
+        if updatedText.count >= textFieldCharectersLimit, textField === nameField {
             textField.text = String(updatedText.prefix(textFieldCharectersLimit))
             return false
         }
+
         return true
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField === nameField {
-            nameFieldSeparator.state = .enabled
-        } else {
-            dnsSeparator.state = .enabled
+        guard let textField = textField as? AGTextField else {
+            return
         }
+        textField.rightView?.isHidden = (textField.text ?? "").isEmpty
+        textField.borderState = .enabled
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField === nameField {
-            nameFieldSeparator.state = .disabled
-        } else {
-            dnsSeparator.state = .disabled
+        guard let textField = textField as? AGTextField else {
+            return
         }
+        textField.rightView?.isHidden = (textField.text ?? "").isEmpty
+        textField.borderState = .disabled
     }
-
 
     // MARK: - Private methods
     private func showWrongProtocolAlert(dnsProtocol: DnsProtocol) {
@@ -158,17 +162,14 @@ final class NewDnsServerController: BottomAlertController {
         presentSimpleAlert(title: title, message: message)
     }
 
-    private func updateSaveButton() {
-        let dnsName = nameField.text ?? ""
-        let dnsUrl = upstreamsField.text ?? ""
-        let correctDns = dnsUrl.isValidUpstream()
-        let enabled = dnsName.count > 0 && correctDns
+    private func isCorrectDns(_ dns: String) -> Bool {
+        let correctDns = dns.isValidUpstream()
+        return correctDns
+    }
 
-        if !correctDns && !dnsUrl.isEmpty {
-            dnsSeparator.backgroundColor = UIColor.AdGuardColor.red
-        } else {
-            dnsSeparator.backgroundColor = UIColor.lightGray
-        }
+    private func updateSaveButton(_ dns: String) {
+        let dnsName = nameField.text ?? ""
+        let enabled = dnsName.count > 0 && isCorrectDns(dns)
         saveOrAddButton.isEnabled = enabled
     }
 
@@ -199,7 +200,6 @@ final class NewDnsServerController: BottomAlertController {
 
         saveOrAddButton.applyStandardGreenStyle()
         cancelOrDeleteButton.applyStandardOpaqueStyle(color: cancelOrDeleteButtonColor)
-
     }
 
     // MARK: - Button actions
@@ -284,6 +284,7 @@ final class NewDnsServerController: BottomAlertController {
         case .notSupportedProtocol(let dnsProtocol, _):
             showWrongProtocolAlert(dnsProtocol: dnsProtocol)
         }
+        upstreamsField.borderState = .error
     }
 }
 
@@ -297,5 +298,7 @@ extension NewDnsServerController: ThemableProtocol {
         theme.setupTextField(nameField)
         theme.setupTextField(upstreamsField)
         saveOrAddButton.indicatorStyle = theme.indicatorStyle
+        nameField.updateTheme()
+        upstreamsField.updateTheme()
     }
 }

@@ -33,6 +33,9 @@ protocol SafariGroupFiltersModelProtocol: UITableViewDelegate, UITableViewDataSo
     func setup(tableView: UITableView)
 }
 
+// TODO: - We should change the order of the filters
+// For more info about filters order implementation look up `UserRulesModelsProvider`
+
 final class OneSafariGroupFiltersModel: NSObject, SafariGroupFiltersModelProtocol {
 
     // MARK: - Public properties
@@ -108,6 +111,13 @@ final class OneSafariGroupFiltersModel: NSObject, SafariGroupFiltersModelProtoco
         tableView?.reloadData()
     }
 
+    // TODO: - Don't reinitalize models for every action
+    /// There is a problem with interface of `SafariProtection` object from SDK
+    /// All the methods that influence custom filters change filters storage directly
+    /// For example let's look at `safariProtection.addCustomFilter`
+    /// We provide it with `meta` to save and it appdends the filter to the storage
+    /// But we can't handle or influence the data we save
+    /// We also don't know when and what the filter was added recently when we obtain them from storage
     private func reinit() {
         guard let newGroup = safariProtection.groups.first(where: { $0.groupType == group.groupType }) else {
             assertionFailure("safariProtection should contain group with type=\(group.groupType)")
@@ -134,7 +144,7 @@ extension OneSafariGroupFiltersModel {
             throw CommonError.missingData
         }
 
-        try safariProtection.setFilter(withId: filterId, groupId, enabled: enabled, onCbReloaded: nil)
+        try safariProtection.setFilter(withId: filterId, groupId: groupId, enabled: enabled, onCbReloaded: nil)
         reinit()
 
         guard let newFilterMeta = group.filters.first(where: { $0.filterId == filterId }) else {
@@ -194,7 +204,7 @@ extension OneSafariGroupFiltersModel {
         DDLogInfo("(OneSafariGroupFiltersModel) - setGroup; Trying to change group=\(groupType) to state=\(newModel.isEnabled)")
 
         do {
-            try safariProtection.setGroup(groupType, enabled: newModel.isEnabled, onCbReloaded: nil)
+            try safariProtection.setGroup(groupType: groupType, enabled: newModel.isEnabled, onCbReloaded: nil)
         } catch {
             DDLogError("(OneSafariGroupFiltersModel) - setGroup; DB error when changing group=\(groupType) to state=\(newModel.isEnabled); Error: \(error)")
         }

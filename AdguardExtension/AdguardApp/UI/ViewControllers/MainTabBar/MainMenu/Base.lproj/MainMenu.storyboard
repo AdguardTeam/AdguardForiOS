@@ -1127,30 +1127,28 @@
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                                 </variation>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gap-Uy-5ka">
-                                                <rect key="frame" x="24" y="65" width="366" height="21"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gap-Uy-5ka" customClass="AGTextField" customModule="Adguard" customModuleProvider="target">
+                                                <rect key="frame" x="16" y="57" width="382" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="7aN-kq-sng">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                                    </constraint>
+                                                </constraints>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" textContentType="email"/>
                                                 <variation key="heightClass=regular-widthClass=regular">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 </variation>
-                                                <connections>
-                                                    <outlet property="delegate" destination="dW7-TV-Sn0" id="Ebn-SM-CFC"/>
-                                                </connections>
                                             </textField>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w1T-ab-GUR" customClass="TextFieldIndicatorView" customModule="Adguard" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="116" width="382" height="1"/>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="0Mh-4W-jag"/>
-                                                </constraints>
-                                            </view>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rYd-R5-7TJ">
                                                 <rect key="frame" x="24" y="180" width="366" height="35.5"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                </variation>
                                                 <connections>
                                                     <outlet property="delegate" destination="dW7-TV-Sn0" id="see-z3-RpQ"/>
                                                 </connections>
@@ -1281,7 +1279,7 @@
                                                 <color key="textColor" red="0.87450980389999999" green="0.21960784310000001" blue="0.070588235289999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                                 <variation key="heightClass=regular-widthClass=regular">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your email address (optional):" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHj-Ne-4zA" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
@@ -1316,7 +1314,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                                 <variation key="heightClass=regular-widthClass=regular">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 </variation>
                                             </label>
                                         </subviews>
@@ -1328,18 +1326,17 @@
                                                 <variation key="heightClass=regular-widthClass=regular" constant="48"/>
                                             </constraint>
                                             <constraint firstItem="pJU-2c-JHy" firstAttribute="top" secondItem="F6u-LX-1dd" secondAttribute="bottom" constant="8" id="3id-OL-MBo"/>
-                                            <constraint firstAttribute="trailing" secondItem="w1T-ab-GUR" secondAttribute="trailing" constant="16" id="42C-L2-aMH">
-                                                <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                            <constraint firstItem="5nl-wn-tlv" firstAttribute="top" secondItem="gap-Uy-5ka" secondAttribute="bottom" constant="32" id="4XF-b6-9IA">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="48"/>
                                             </constraint>
-                                            <constraint firstItem="rYd-R5-7TJ" firstAttribute="top" secondItem="5nl-wn-tlv" secondAttribute="bottom" constant="16" id="58s-wa-F5Y">
-                                                <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                            <constraint firstItem="rYd-R5-7TJ" firstAttribute="top" secondItem="5nl-wn-tlv" secondAttribute="bottom" constant="8" id="58s-wa-F5Y">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="16"/>
                                             </constraint>
                                             <constraint firstAttribute="bottom" secondItem="in9-YT-8ra" secondAttribute="bottom" constant="48" id="6qx-ok-BLv"/>
-                                            <constraint firstItem="rYd-R5-7TJ" firstAttribute="leading" secondItem="odf-XX-emR" secondAttribute="leading" constant="24" id="8UQ-N7-QtP"/>
-                                            <constraint firstAttribute="trailing" secondItem="in9-YT-8ra" secondAttribute="trailing" constant="16" id="CyZ-Qt-WbC">
+                                            <constraint firstItem="rYd-R5-7TJ" firstAttribute="leading" secondItem="odf-XX-emR" secondAttribute="leading" constant="16" id="8UQ-N7-QtP">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                             </constraint>
-                                            <constraint firstItem="w1T-ab-GUR" firstAttribute="leading" secondItem="odf-XX-emR" secondAttribute="leading" constant="16" id="I0l-05-TtH">
+                                            <constraint firstAttribute="trailing" secondItem="in9-YT-8ra" secondAttribute="trailing" constant="16" id="CyZ-Qt-WbC">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                             </constraint>
                                             <constraint firstItem="5nl-wn-tlv" firstAttribute="leading" secondItem="odf-XX-emR" secondAttribute="leading" constant="16" id="K1x-rE-I21">
@@ -1357,7 +1354,9 @@
                                             <constraint firstAttribute="trailing" secondItem="rHj-Ne-4zA" secondAttribute="trailing" constant="16" id="Pir-RO-PhQ">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                             </constraint>
-                                            <constraint firstAttribute="trailing" secondItem="rYd-R5-7TJ" secondAttribute="trailing" constant="24" id="THg-sX-U52"/>
+                                            <constraint firstAttribute="trailing" secondItem="rYd-R5-7TJ" secondAttribute="trailing" constant="16" id="THg-sX-U52">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                            </constraint>
                                             <constraint firstItem="gap-Uy-5ka" firstAttribute="leading" secondItem="odf-XX-emR" secondAttribute="leading" constant="16" id="TSY-UM-OTi">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                             </constraint>
@@ -1368,24 +1367,22 @@
                                             <constraint firstItem="5dK-DT-TDt" firstAttribute="trailing" secondItem="2jN-yQ-V1x" secondAttribute="trailing" id="VNU-KQ-3Zs"/>
                                             <constraint firstItem="F6u-LX-1dd" firstAttribute="top" secondItem="odf-XX-emR" secondAttribute="top" id="Vwv-ee-tT3"/>
                                             <constraint firstAttribute="trailing" secondItem="F6u-LX-1dd" secondAttribute="trailing" constant="24" id="WSg-6B-Sn4"/>
-                                            <constraint firstItem="5nl-wn-tlv" firstAttribute="top" secondItem="w1T-ab-GUR" secondAttribute="bottom" constant="32" id="XWc-GI-zTm">
-                                                <variation key="heightClass=regular-widthClass=regular" constant="48"/>
-                                            </constraint>
                                             <constraint firstItem="in9-YT-8ra" firstAttribute="leading" secondItem="odf-XX-emR" secondAttribute="leading" constant="16" id="d0Y-mi-Nmp">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                             </constraint>
-                                            <constraint firstItem="gap-Uy-5ka" firstAttribute="top" secondItem="rHj-Ne-4zA" secondAttribute="bottom" constant="16" id="gRR-XE-ObK">
-                                                <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                            <constraint firstItem="gap-Uy-5ka" firstAttribute="top" secondItem="rHj-Ne-4zA" secondAttribute="bottom" constant="8" id="gRR-XE-ObK">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="16"/>
                                             </constraint>
-                                            <constraint firstItem="5dK-DT-TDt" firstAttribute="top" secondItem="w1T-ab-GUR" secondAttribute="bottom" id="hik-97-sEJ"/>
                                             <constraint firstItem="rHj-Ne-4zA" firstAttribute="leading" secondItem="odf-XX-emR" secondAttribute="leading" constant="16" id="hzr-Pb-0XM">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                             </constraint>
                                             <constraint firstItem="2jN-yQ-V1x" firstAttribute="top" secondItem="rYd-R5-7TJ" secondAttribute="bottom" constant="4" id="jeG-QN-G2D"/>
                                             <constraint firstAttribute="trailing" secondItem="pJU-2c-JHy" secondAttribute="trailing" constant="24" id="kEU-iV-tml"/>
-                                            <constraint firstItem="w1T-ab-GUR" firstAttribute="top" secondItem="gap-Uy-5ka" secondAttribute="bottom" constant="4" id="mYv-iT-MOg"/>
                                             <constraint firstItem="5dK-DT-TDt" firstAttribute="leading" secondItem="2jN-yQ-V1x" secondAttribute="leading" id="nnj-06-VbU"/>
                                             <constraint firstItem="srJ-sd-sZF" firstAttribute="leading" secondItem="2jN-yQ-V1x" secondAttribute="leading" id="qHP-BZ-tnc"/>
+                                            <constraint firstItem="5dK-DT-TDt" firstAttribute="top" secondItem="gap-Uy-5ka" secondAttribute="bottom" constant="4" id="rIh-mg-Bph">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="6"/>
+                                            </constraint>
                                             <constraint firstItem="rHj-Ne-4zA" firstAttribute="top" secondItem="pJU-2c-JHy" secondAttribute="bottom" constant="24" id="uPn-Vj-RAg">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="96"/>
                                             </constraint>
@@ -1426,7 +1423,6 @@
                         <outlet property="detailedInfoViewHeight" destination="nf2-ka-ega" id="OYg-9j-bqW"/>
                         <outlet property="emailAddressTextField" destination="gap-Uy-5ka" id="JvV-OB-Ivo"/>
                         <outlet property="emailErrorLabel" destination="5dK-DT-TDt" id="ZNm-uv-SXJ"/>
-                        <outlet property="emailTextFieldIndicatorView" destination="w1T-ab-GUR" id="gNg-sD-nc1"/>
                         <outlet property="optionalSpace" destination="Pg9-Rn-adR" id="icq-Kc-56G"/>
                         <outlet property="scrollView" destination="g06-tX-ung" id="agL-MW-b6C"/>
                         <outlet property="scrollViewBottomConstraint" destination="VEg-Zl-ZFR" id="IJY-i6-0rT"/>

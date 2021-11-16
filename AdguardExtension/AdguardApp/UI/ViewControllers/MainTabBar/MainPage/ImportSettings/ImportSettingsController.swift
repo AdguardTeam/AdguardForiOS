@@ -19,29 +19,30 @@
 import DnsAdGuardSDK
 import SafariAdGuardSDK
 
-class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITableViewDataSource, ImportSettingsCellDelegate {
+final class ImportSettingsController: BottomAlertController {
 
-    var settings: Settings?
+    // MARK: - Outlets
 
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var importButton: RoundRectButton!
     @IBOutlet weak var okButton: RoundRectButton!
-
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
-    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let importService: ImportSettingsServiceProtocol = ServiceLocator.shared.getService()!
-    private let dnsProvidersManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!
-    private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
 
+    // MARK: - Services
+
+    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+
+    // MARK: - Properties
+
+    var settings: ImportSettings?
     private var model: ImportSettingsViewModelProtocol?
+
+    // MARK: - ViewController lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if settings != nil {
-            model = ImportSettingsViewModel(settings: settings!, importSettingsService: importService, dnsProvidersManager: dnsProvidersManager, safariProtection: safariProtection)
-        }
+        model = initModel(settings: settings)
 
         updateTheme()
         okButton.isHidden = true
@@ -60,6 +61,8 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
         let maxHeight = view.frame.size.height - 250
         tableViewHeightConstraint.constant = min(contentHeight, maxHeight)
     }
+
+    // MARK: - IBActions
 
     @IBAction func importAction(_ sender: Any) {
         importButton.startIndicator()
@@ -86,6 +89,27 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
         self.dismiss(animated: true, completion: nil)
     }
 
+    // MARK: - Private methods
+
+    private func initModel(settings: ImportSettings?) -> ImportSettingsViewModel? {
+        guard let settings = settings else { return nil }
+
+        let dnsProvidersManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!
+        let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
+        let dnsProtection: DnsProtectionProtocol = ServiceLocator.shared.getService()!
+        let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
+        let purchaseService: PurchaseServiceProtocol = ServiceLocator.shared.getService()!
+
+        let importService = ImportSettingsService(dnsProvidersManager: dnsProvidersManager, safariProtection: safariProtection, dnsProtection: dnsProtection, vpnManager: vpnManager, purchaseService: purchaseService)
+
+        return ImportSettingsViewModel(settings: settings, importSettingsService: importService, dnsProvidersManager: dnsProvidersManager, safariProtection: safariProtection)
+    }
+}
+
+// MARK: - ImportSettingsController + UITableViewDataSource
+
+extension ImportSettingsController: UITableViewDataSource {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return model?.rows.count ?? 0
     }
@@ -108,13 +132,17 @@ class ImportSettingsController: BottomAlertController, UITextViewDelegate, UITab
 
         return cell
     }
+}
 
-    // MARK: - cell delegate
+// MARK: - ImportSettingsController + ImportSettingsCellDelegate
 
+extension ImportSettingsController: ImportSettingsCellDelegate {
     func stateChanged(tag: Int, state: Bool) {
         model?.setState(state, forRow: tag)
     }
 }
+
+// MARK: - ImportSettingsController + ThemableProtocol
 
 extension ImportSettingsController: ThemableProtocol {
     func updateTheme() {

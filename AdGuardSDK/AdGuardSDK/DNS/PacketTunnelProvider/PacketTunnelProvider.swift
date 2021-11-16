@@ -71,10 +71,11 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
         dnsConfiguration: DnsConfigurationProtocol,
         addresses: Addresses,
         filterStorageUrl: URL,
-        statisticsDbContainerUrl: URL
+        statisticsDbContainerUrl: URL,
+        networkUtils: NetworkUtilsProtocol
     ) throws {
         let userDefaultsStorage = UserDefaultsStorage(storage: userDefaults)
-        let dnsProvidersManager = try DnsProvidersManager(configuration: dnsConfiguration, userDefaults: userDefaultsStorage)
+        let dnsProvidersManager = try DnsProvidersManager(configuration: dnsConfiguration, userDefaults: userDefaultsStorage, networkUtils: networkUtils)
 
         let filtersFileStorage = try FilterFilesStorage(filterFilesDirectoryUrl: filterStorageUrl)
 
@@ -95,7 +96,8 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
         let proxySettingsProvider = DnsProxyConfigurationProvider(
             dnsProvidersManager: dnsProvidersManager,
             dnsLibsRulesProvider: dnsLibsRulesProvider,
-            dnsConfiguration: dnsConfiguration
+            dnsConfiguration: dnsConfiguration,
+            networkUtils: networkUtils
         )
 
         let dnsProxy = DnsProxy(
@@ -103,7 +105,7 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
             statisticsDbContainerUrl: statisticsDbContainerUrl
         )
 
-        let tunnelSettingsProvider = PacketTunnelSettingsProvider(addresses: addresses)
+        let tunnelSettingsProvider = PacketTunnelSettingsProvider(addresses: addresses, networkUtils: networkUtils)
 
         self.tunnelProxy = PacketTunnelProviderProxy(
             isDebugLogs: debugLoggs,
@@ -112,7 +114,7 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
             dnsConfiguration: dnsConfiguration,
             tunnelSettings: tunnelSettingsProvider,
             providersManager: dnsProvidersManager,
-            networkUtils: NetworkUtils(),
+            networkUtils: networkUtils,
             addresses: addresses
         )
 

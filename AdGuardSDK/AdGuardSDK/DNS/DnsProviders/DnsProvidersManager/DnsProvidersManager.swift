@@ -97,13 +97,13 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
 
     // MARK: - Initialization
 
-    public convenience init(configuration: DnsConfigurationProtocol, userDefaults: UserDefaults) throws {
+    public convenience init(configuration: DnsConfigurationProtocol, userDefaults: UserDefaults, networkUtils: NetworkUtilsProtocol) throws {
         let userDefaultsStorage = UserDefaultsStorage(storage: userDefaults)
-        try self.init(configuration: configuration, userDefaults: userDefaultsStorage)
+        try self.init(configuration: configuration, userDefaults: userDefaultsStorage, networkUtils: networkUtils)
     }
 
-    convenience init(configuration: DnsConfigurationProtocol, userDefaults: UserDefaultsStorageProtocol) throws {
-        let customProvidersStorage = CustomDnsProvidersStorage(userDefaults: userDefaults, configuration: configuration)
+    convenience init(configuration: DnsConfigurationProtocol, userDefaults: UserDefaultsStorageProtocol, networkUtils: NetworkUtilsProtocol) throws {
+        let customProvidersStorage = CustomDnsProvidersStorage(userDefaults: userDefaults, networkUtils: networkUtils,configuration: configuration)
         let predefinedDnsProviders = try PredefinedDnsProvidersDecoder(currentLocale: configuration.currentLocale)
         self.init(
             configuration: configuration,

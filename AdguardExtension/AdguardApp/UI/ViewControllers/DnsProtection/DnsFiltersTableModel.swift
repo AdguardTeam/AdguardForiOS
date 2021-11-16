@@ -25,6 +25,9 @@ protocol DnsFiltersTableModelDelegate: AnyObject {
     func modelsChanged()
 }
 
+// TODO: - We should change the order of the filters
+// For more info about filters order implementation look up `UserRulesModelsProvider`
+
 /// Model for `DnsFiltersTableController`
 /// It encapsulates logic for working with `DnsAdGuardSDK`
 final class DnsFiltersTableModel {
@@ -64,6 +67,13 @@ final class DnsFiltersTableModel {
 
     // MARK: - Private methods
 
+    // TODO: - Don't reinitalize models for every action
+    /// There is a problem with interface of `DnsProtection` object from SDK
+    /// All the methods that influence custom filters change filters storage directly
+    /// For example let's look at `dnsProtection.addFilter`
+    /// We provide it with `name` and `url` and it appdends the filter to the storage
+    /// But we can't handle or influence the data we save to the storage
+    /// We also don't know when and what the filter was added recently when we obtain them from storage
     private func updateModels() {
         modelsProvider = DnsFiltersModelsProvider(sdkModels: dnsProtection.filters)
         modelsProvider.searchString = searchString

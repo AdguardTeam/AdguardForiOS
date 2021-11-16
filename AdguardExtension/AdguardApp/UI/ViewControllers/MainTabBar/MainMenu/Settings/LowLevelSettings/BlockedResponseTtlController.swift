@@ -22,17 +22,15 @@ protocol BlockedResponseTtlDelegate: AnyObject {
     func setTtlDescription(ttl: String)
 }
 
-class BlockedResponseTtlController: BottomAlertController {
+final class BlockedResponseTtlController: BottomAlertController {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var saveButton: RoundRectButton!
     @IBOutlet weak var cancelButton: RoundRectButton!
-    @IBOutlet weak var ttlTextField: UITextField!
+    @IBOutlet weak var ttlTextField: AGTextField!
     @IBOutlet weak var scrollContentView: UIView!
-    @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
 
     @IBOutlet var themableLabels: [ThemableLabel]!
-    @IBOutlet var separators: [UIView]!
 
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
@@ -42,12 +40,13 @@ class BlockedResponseTtlController: BottomAlertController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        ttlTextField.delegate = self
 
         ttlTextField.text = String(resources.blockedResponseTtlSecs)
         ttlTextField.keyboardType = .numberPad
         ttlTextField.becomeFirstResponder()
 
-        updateSaveButton()
+        updateSaveButton(ttlTextField.text)
         updateTheme()
         saveButton.makeTitleTextCapitalized()
         saveButton.applyStandardGreenStyle()
@@ -70,24 +69,23 @@ class BlockedResponseTtlController: BottomAlertController {
         dismiss(animated: true)
     }
 
+    // MARK: - UITextFieldDelegate
 
-    @IBAction func ttlChangedAction(_ sender: UITextField) {
-        updateSaveButton()
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+
+        ttlTextField.borderState = .enabled
+        ttlTextField.rightView?.isHidden = updatedText.isEmpty
+        updateSaveButton(updatedText)
+        return true
     }
-
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textViewUnderline.state = .enabled
-    }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        textViewUnderline.state = .disabled
-    }
-
 
     // MARK: - Private methods
 
-    private func updateSaveButton() {
-        let ttl = ttlTextField.text ?? ""
+    private func updateSaveButton(_ text: String?) {
+        let ttl = text ?? ""
         guard !ttl.isEmpty && Int(ttl) != nil else { saveButton.isEnabled = false; return }
         saveButton?.isEnabled = true
     }
@@ -100,6 +98,6 @@ extension BlockedResponseTtlController: ThemableProtocol {
         theme.setupPopupLabels(themableLabels)
         theme.setupTextField(ttlTextField)
         saveButton?.indicatorStyle = theme.indicatorStyle
-        theme.setupSeparators(separators)
+        ttlTextField.updateTheme()
     }
 }

@@ -55,10 +55,9 @@ final class NewCustomFilterDetailsController: BottomAlertController {
     // MARK: - IB Outlets
     @IBOutlet weak var rulesCount: UILabel!
     @IBOutlet weak var homepage: UILabel!
-    @IBOutlet weak var name: UITextField!
+    @IBOutlet weak var name: AGTextField!
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var newFilterTitle: ThemableLabel!
-    @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
 
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
@@ -70,6 +69,7 @@ final class NewCustomFilterDetailsController: BottomAlertController {
     // MARK: - View Controller life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        name.delegate = self
 
         if let newFilterModel = newFilterModel {
             setupAddingNewFilter(newFilterModel)
@@ -82,6 +82,7 @@ final class NewCustomFilterDetailsController: BottomAlertController {
         updateTheme()
         addButton.makeTitleTextCapitalized()
         addButton.applyStandardGreenStyle()
+        addButton.isEnabled = !(name.text ?? "").isEmpty
         cancelButton.makeTitleTextCapitalized()
         cancelButton.applyStandardOpaqueStyle()
     }
@@ -110,23 +111,27 @@ final class NewCustomFilterDetailsController: BottomAlertController {
 
     // MARK: - UITextFieldDelegate
 
+    override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        name.borderState = .disabled
+        name.resignFirstResponder()
+        return true
+    }
+
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = textField.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+
+        name.borderState = .enabled
+        name.rightView?.isHidden = updatedText.isEmpty
+        addButton.isEnabled = !updatedText.isEmpty
+
         if updatedText.count >= textFieldCharectersLimit {
             textField.text = String(updatedText.prefix(textFieldCharectersLimit))
             return false
         }
+
         return true
-    }
-
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textViewUnderline.state = .enabled
-    }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        textViewUnderline.state = .disabled
     }
 
     // MARK: - private methods
@@ -236,12 +241,15 @@ final class NewCustomFilterDetailsController: BottomAlertController {
     }
 }
 
+// MARK: - NewCustomFilterDetailsController + ThemableProtocol
+
 extension NewCustomFilterDetailsController: ThemableProtocol {
     func updateTheme() {
         newFilterTitle.textColor = theme.popupTitleTextColor
         contentView.backgroundColor = theme.popupBackgroundColor
         theme.setupTextField(name)
         theme.setupPopupLabels(themableLabels)
+        name.updateTheme()
     }
 }
 

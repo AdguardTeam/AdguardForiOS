@@ -21,9 +21,10 @@ import Foundation
 class VpnManagerMock: NSObject, VpnManagerProtocol {
 
     var updateCalled = false
-
+    var updateSettingsCalledCount = 0
     func updateSettings(completion: ((Error?) -> Void)?) {
         updateCalled = true
+        updateSettingsCalledCount += 1
         completion?(nil)
     }
 

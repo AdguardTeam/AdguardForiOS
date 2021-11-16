@@ -78,6 +78,8 @@ final class AGSearchView: UIView {
     }
 }
 
+// MARK: - AGSearchView + UITextFieldDelegate
+
 extension AGSearchView: UITextFieldDelegate {
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -91,26 +93,12 @@ extension AGSearchView: UITextFieldDelegate {
         self.textField.rightView?.isHidden = updatedText.isEmpty
         return true
     }
-
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        self.textField.borderState = .enabled
-    }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        self.textField.borderState = .disabled
-    }
-
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.textField.resignFirstResponder()
-        self.textField.borderState = .disabled
-        return true
-    }
 }
 
 extension AGSearchView: ThemableProtocol {
     func updateTheme() {
         backgroundColor = themeService.backgroundColor
-        textField.themeChanged()
+        textField.updateTheme()
         textField.tintColor = themeService.grayTextColor
         textField.backgroundColor = themeService.selectedCellColor
         textField.textColor = themeService.grayTextColor
