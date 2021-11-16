@@ -24,7 +24,11 @@ enum MigrationState: Int {
     case finished = 2
 }
 
+
+/// this manager manages the states of partial migrations
 protocol MigrationStateManagerProtocol {
+
+    /// current state
     var state: MigrationState { get }
 
     func start()

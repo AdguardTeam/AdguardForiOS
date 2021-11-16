@@ -113,16 +113,16 @@ final class ActionExtensionLoaderViewController: UIViewController {
 
         let resources = ServicesInitializer.shared.resources
         let safariProtection = ServicesInitializer.shared.safariProtection
+        let migrationVersionProvider = ServicesInitializer.shared.migrationVersionProvider
 
-        // FIXME: use dimanc verision
-        if resources.buildVersion < 800 {
+        if migrationVersionProvider.needsMigrateTo4_3() {
 
             do {
                 let migration = try SafariMigration4_3(resources: resources, safariProtection: safariProtection)
                 migration.migrate()
             }
             catch {
-                // FIXME: do something
+                DDLogError("(ActionExtensionLoaderViewController) migration failed: \(error)")
             }
         }
     }

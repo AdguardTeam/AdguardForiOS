@@ -131,14 +131,13 @@ final class SupportService: SupportServiceProtocol {
     func deleteLogsFiles() {
         let fm = FileManager.default
 
-        guard let logsDirectory = self.logsDirectory, let logsZipDirectory = self.logsZipDirectory else {
-            DDLogWarn("(SupportService) - deleteLogsFiles; File is missing")
-            return
-        }
-
         do {
-            try fm.removeItem(at: logsDirectory)
-            try fm.removeItem(at: logsZipDirectory)
+            if let logsDirectory = self.logsDirectory {
+                try fm.removeItem(at: logsDirectory)
+            }
+            if let logsZipDirectory = self.logsZipDirectory {
+                try fm.removeItem(at: logsZipDirectory)
+            }
 
             self.logsDirectory = nil
             self.logsZipDirectory = nil

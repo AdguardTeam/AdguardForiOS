@@ -65,7 +65,7 @@ final class MigrationService: MigrationServiceProtocol {
     }
 
     func migrateIfNeeded(){
-        migrationQueue.async {[weak self] in
+        migrationQueue.sync {[weak self] in
             guard let self = self else { return }
                 self.migrateIfNeededPrivate()
         }
@@ -119,8 +119,6 @@ final class MigrationService: MigrationServiceProtocol {
         /// Migration: Update Antibanner and DnsFilters on every migration
         if lastBuildVersion != currentBuildVersion {
             DDLogInfo("(MigrationService) Patch migration from \(lastBuildVersion) to \(String(describing: currentBuildVersion))")
-
-            resources.buildVersion = currentBuildVersion ?? 0
 
 //            if inBackground {
 //                resources.needUpdateFilters = true
@@ -255,6 +253,8 @@ final class MigrationService: MigrationServiceProtocol {
                 DDLogError("(MigrationService) - Failed to migrate old data to SDK; Error: \(error)")
             }
         }
+
+        resources.buildVersion = currentBuildVersion ?? 0
     }
 
     // MARK: - Methods for migrations

@@ -77,8 +77,7 @@ class TunnelProvider: PacketTunnelProvider {
                        filterStorageUrl: filterStorageUrl,
                        statisticsDbContainerUrl: statisticsUrl)
 
-
-
+        migrateIfNeeded(configuration: configuration)
     }
 
     static func getAddresses(mode: TunnelMode)-> PacketTunnelProvider.Addresses {
@@ -130,17 +129,15 @@ class TunnelProvider: PacketTunnelProvider {
 
     private func migrateIfNeeded(configuration: DnsConfigurationProtocol) {
 
-        let lastBuildVersion = resources.buildVersion
-
-        // FIXME: use dinamic build number
-        if lastBuildVersion < 800 {
+        let migrationVersionProvider = MigrationServiceVersionProvider(resources: resources)
+        if migrationVersionProvider.needsMigrateTo4_3() {
             do {
                 let dnsProvidersManager = try DnsProvidersManager(configuration: configuration, userDefaults: resources.sharedDefaults())
                 let migration = DnsMigration4_3(resources: resources, dnsProvidersManager: dnsProvidersManager)
                 migration.migrate()
             }
             catch {
-
+                DDLogError("(TunnelProvider) migration failed: \(error)")
             }
         }
     }

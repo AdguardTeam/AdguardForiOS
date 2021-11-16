@@ -28,6 +28,7 @@ final class ServicesInitializer {
     let resources: AESharedResourcesProtocol
     let themeService: ThemeServiceProtocol
     let configuration: ConfigurationServiceProtocol
+    let migrationVersionProvider: MigrationServiceVersionProviderProtocol
 
     init() throws {
         self.resources = AESharedResources()
@@ -80,6 +81,8 @@ final class ServicesInitializer {
         )
 
         self.themeService = ThemeService(configuration)
+
+        self.migrationVersionProvider = MigrationServiceVersionProvider(resources: resources)
     }
 
     private static func setupLogger(_ resources: AESharedResourcesProtocol) {
