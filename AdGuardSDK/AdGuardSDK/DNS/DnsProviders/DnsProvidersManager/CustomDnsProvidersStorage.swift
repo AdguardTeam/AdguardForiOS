@@ -108,7 +108,7 @@ final class CustomDnsProvidersStorage: CustomDnsProvidersStorageProtocol {
 
     // MARK: - Initialization
 
-    init(userDefaults: UserDefaultsStorageProtocol, networkUtils: NetworkUtilsProtocol = NetworkUtils(), configuration: DnsConfigurationProtocol) {
+    init(userDefaults: UserDefaultsStorageProtocol, networkUtils: NetworkUtilsProtocol, configuration: DnsConfigurationProtocol) {
         self.userDefaults = userDefaults
         self.networkUtils = networkUtils
         self.configuration = configuration

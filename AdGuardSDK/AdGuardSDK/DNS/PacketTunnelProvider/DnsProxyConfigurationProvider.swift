@@ -77,7 +77,7 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
         dnsProvidersManager: DnsProvidersManagerProtocol,
         dnsLibsRulesProvider: DnsLibsRulesProviderProtocol,
         dnsConfiguration: DnsConfigurationProtocol,
-        networkUtils: NetworkUtilsProtocol = NetworkUtils()
+        networkUtils: NetworkUtilsProtocol
     ) {
         self.dnsProvidersManager = dnsProvidersManager
         self.dnsLibsRulesProvider = dnsLibsRulesProvider

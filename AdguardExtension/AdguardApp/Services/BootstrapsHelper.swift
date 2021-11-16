@@ -22,9 +22,20 @@ import DnsAdGuardSDK
  This object is responsible for obtaining correct bootstraps that are able
  to resolve DNS addresses
  */
-struct BootstrapsHelper {
-    static var bootstraps: [String] {
-        var bootstraps = NetworkUtils().systemDnsServers
+protocol BootstrapsHelperProtocol: AnyObject {
+    var bootstraps: [String] { get }
+}
+
+class BootstrapsHelper: BootstrapsHelperProtocol {
+
+    private let networkUtils: NetworkUtilsProtocol
+
+    init (networkUtils: NetworkUtilsProtocol) {
+        self.networkUtils = networkUtils
+    }
+
+    var bootstraps: [String] {
+        var bootstraps = networkUtils.systemDnsServers
 
         // If our Tunnel appears in system DNS servers we should remove it
         // Because the tunnel is unable to resolve DNS servers
