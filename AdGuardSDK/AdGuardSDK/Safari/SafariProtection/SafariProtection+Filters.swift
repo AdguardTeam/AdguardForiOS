@@ -153,7 +153,9 @@ extension SafariProtection {
     public func setGroup(groupType: SafariGroup.GroupType, enabled: Bool, onCbReloaded: ((_ error: Error?) -> Void)?) throws {
         try workingQueue.sync {
             try executeBlockAndReloadCbs {
+                Logger.logInfo("(SafariProtection+Filters) - setGroup; Setting group with id=\(groupType.id) to enabled=\(enabled)")
                 try setGroupInternal(groupType, enabled: enabled)
+                return true
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Filters) - setGroup.onCbReloaded; self is missing!")
@@ -180,7 +182,9 @@ extension SafariProtection {
     public func setFilter(withId id: Int, groupId: Int, enabled: Bool, onCbReloaded: ((_ error: Error?) -> Void)?) throws {
         try workingQueue.sync {
             try executeBlockAndReloadCbs {
+                Logger.logInfo("(SafariProtection+Filters) - setFilter; Setting filter with id=\(id), group id=\(groupId) to enabled=\(enabled)")
                 try setFilterInternal(withId: id, groupId: groupId, enabled: enabled)
+                return true
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Filters) - setFilter.onCbReloaded; self is missing!")
@@ -275,7 +279,9 @@ extension SafariProtection {
     public func deleteCustomFilter(withId id: Int, onCbReloaded: ((_ error: Error?) -> Void)?) throws {
         try workingQueue.sync {
             try executeBlockAndReloadCbs {
+                Logger.logInfo("(SafariProtection+Filters) - deleteCustomFilter; Delete custom filter with id=\(id)")
                 try deleteCustomFilterInternal(withId: id)
+                return true
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Filters) - deleteCustomFilter.onCbReloaded; self is missing!")

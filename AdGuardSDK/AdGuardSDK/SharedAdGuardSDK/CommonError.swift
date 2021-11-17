@@ -22,7 +22,6 @@ public enum CommonError: Error, CustomDebugStringConvertible {
     case missingSelf
     case missingData
     case missingFile(filename: String)
-    case dataDidNotChange
     case error(message: String)
 
     public var debugDescription: String {
@@ -30,7 +29,6 @@ public enum CommonError: Error, CustomDebugStringConvertible {
         case .missingSelf: return "self object is nil"
         case .missingData: return "The required data is missing"
         case .missingFile(filename: let fileName): return "The file with name=\(fileName) is missing"
-        case .dataDidNotChange: return "Data did not change"
         case .error(let message): return message
         }
     }
