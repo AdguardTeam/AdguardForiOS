@@ -40,8 +40,8 @@ extension ChartStatistics {
         Logger.logInfo("(ChartStatistics) - compressTable; Successfully compressed the table; from \(recordsCountBeforeCompression) to \(compressedRecords.count)")
     }
 
-    /// Returns date intervals for specified `period`
-    func chartIntervals(for period: StatisticsPeriod) -> [DateInterval] {
+    /// Returns specified `intervalsCount` number of  date intervals for specified `period`
+    func chartIntervals(for period: StatisticsPeriod, intervalsCount: Int) -> [DateInterval] {
         var interval: DateInterval
 
         /// `.all` period is not defined strictly because we don't know how long is it `all` so we've made a workaround
@@ -71,16 +71,16 @@ extension ChartStatistics {
         let targetSegments: Int
 
         /// There can occur a case when the `.today` period is requested and now is 00.01
-        /// It means that we should devide 1 second into 100 segments and it is bad case
+        /// It means that we should devide 1 second into `intervalsCount` segments and it is bad case
         let datesDiff = end.timeIntervalSinceReferenceDate - start.timeIntervalSinceReferenceDate
 
-        /// Check if dates difference is at least 100 seconds to make one segment at least 1 second
-        if datesDiff < 100 {
+        /// Check if dates difference is at least `intervalsCount` seconds to make one segment at least 1 second
+        if datesDiff < Double(intervalsCount) {
             let segments = Int(datesDiff)
             /// Dates difference can also be less than 1 second
             targetSegments = segments > 1 ? segments : 1
         } else {
-            targetSegments = 100
+            targetSegments = intervalsCount
         }
 
         /// Creating intervals
@@ -97,8 +97,24 @@ extension ChartStatistics {
 
     /// Returns compressed records
     private func getCompressedRecords() throws -> [ChartStatisticsRecord] {
-        // Intervals where records will be compressed into 1 record
-        let intervals = chartIntervals(for: .all)
+        let allRecords = try getRecords(for: .all)
+
+        guard allRecords.count > 2 else {
+            return []
+        }
+
+        let targetIntervalsCount = 100
+        let oldestRerord = allRecords.first!
+        let newestRecord = allRecords.last!
+        let intervalDuration = (newestRecord.timeStamp.timeIntervalSinceReferenceDate - oldestRerord.timeStamp.timeIntervalSinceReferenceDate) / Double(targetIntervalsCount)
+
+        var intervals: [DateInterval] = []
+        var start = oldestRerord.timeStamp
+        for _ in 1...targetIntervalsCount {
+            let dateInterval = DateInterval(start: start, duration: intervalDuration)
+            intervals.append(dateInterval)
+            start = start.addingTimeInterval(intervalDuration)
+        }
 
         let compressedRecords = try intervals.map { interval -> ChartStatisticsRecord in
             let start = interval.start

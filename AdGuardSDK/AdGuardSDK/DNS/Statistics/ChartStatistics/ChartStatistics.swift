@@ -34,10 +34,11 @@ public protocol ChartStatisticsProtocol: ResetableSyncProtocol {
      - Parameters:
        - chartType: Variable that should be used as `y`
        - period: Desired period for points
+       - pointsCount: Number of points to return
      - Returns: Array of points and `chartType`
      - Throws: error if an error occurred in DB
      */
-    func getPoints(for chartType: ChartType, for period: StatisticsPeriod) throws -> ChartRecords
+    func getPoints(for chartType: ChartType, for period: StatisticsPeriod, pointsCount: Int) throws -> ChartRecords
 }
 
 /// This object is responsible for managing statistics that is used to build charts
@@ -116,13 +117,13 @@ final public class ChartStatistics: ChartStatisticsProtocol {
         return records
     }
 
-    public func getPoints(for chartType: ChartType, for period: StatisticsPeriod) throws -> ChartRecords {
+    public func getPoints(for chartType: ChartType, for period: StatisticsPeriod, pointsCount: Int) throws -> ChartRecords {
         Logger.logDebug("(ChartStatistics) - getPoints for chartType=\(chartType) for period=\(period.debugDescription)")
 
         /// Intervals for points. Each interval will contain 1 aggregated point
-        let intervals = chartIntervals(for: period)
+        let intervals = chartIntervals(for: period, intervalsCount: pointsCount)
 
-        let points = try intervals.compactMap { interval -> Point? in
+        let points = try intervals.map { interval -> Point in
             let query = ChartStatisticsTable.table
                 .select([chartType.expression.varSum,
                          dateInSeconds(ChartStatisticsTable.timeStamp)])
@@ -133,7 +134,7 @@ final public class ChartStatistics: ChartStatisticsProtocol {
             let points: [Point] = try statisticsDb.prepare(query.asSQL()).map {
                 guard let x = $0[1] as? Int64, let y = $0[0] as? Int64 else {
                     let middle = Int(interval.middle.timeIntervalSince1970)
-                    /// If there is no points in the specified interval than we return zero point in the middle of this interval
+                    /// If there are no points in the specified interval than we return zero point in the middle of this interval
                     return Point(x: middle, y: 0)
                 }
                 return Point(x: Int(x), y: Int(y))
