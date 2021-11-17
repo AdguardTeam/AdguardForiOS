@@ -33,9 +33,9 @@ class DnsModeController: UITableViewController {
 
     // MARK: - Services
 
-    let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
-    let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
+    private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
+    private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
+    private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol = ServiceLocator.shared.getService()!
 
     // MARK: - Public properties
 
@@ -88,7 +88,7 @@ class DnsModeController: UITableViewController {
         }
 
         resources.tunnelMode = mode
-        vpnManager.updateSettings(completion: nil)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedLowLevelSettings, completion: nil)
 
         selectedCell = indexPath.row
         updateButtons()

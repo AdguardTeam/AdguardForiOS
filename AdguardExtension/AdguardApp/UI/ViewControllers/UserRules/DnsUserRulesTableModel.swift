@@ -51,7 +51,7 @@ final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
                 resources.systemWhitelistEnabled = newValue
                 dnsProtection.update(allowlistIsEnabled: newValue)
             }
-            vpnManager.updateSettings(completion: nil)
+            dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
         }
     }
 
@@ -82,7 +82,7 @@ final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
     private let resources: AESharedResourcesProtocol
     private let fileShareHelper: FileShareHelperProtocol
     private var modelProvider: UserRulesModelsProviderProtocol
-    private let vpnManager: VpnManagerProtocol
+    private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol
 
     // MARK: - Initialization
 
@@ -91,14 +91,14 @@ final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
         dnsProtection: DnsProtectionProtocol,
         resources: AESharedResourcesProtocol,
         fileShareHelper: FileShareHelperProtocol,
-        vpnManager: VpnManagerProtocol
+        dnsConfigAssistant: DnsConfigManagerAssistantProtocol
     ) {
         self.type = type
         self.dnsProtection = dnsProtection
         self.resources = resources
         self.fileShareHelper = fileShareHelper
+        self.dnsConfigAssistant = dnsConfigAssistant
         self.modelProvider = UserRulesModelsProvider(initialModels: Self.models(dnsProtection, type))
-        self.vpnManager = vpnManager
     }
 
     // MARK: - Internal methods
@@ -106,7 +106,7 @@ final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
     func addRule(_ ruleText: String) throws {
         let rule = UserRule(ruleText: ruleText, isEnabled: true)
         try dnsProtection.add(rule: rule, override: false, for: type)
-        vpnManager.updateSettings(completion: nil)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
         let model = UserRuleCellModel(rule: ruleText, isEnabled: true, isSelected: false, isEditing: isEditing)
         modelProvider.addRuleModel(model)
         delegate?.ruleSuccessfullyAdded()
@@ -116,7 +116,7 @@ final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
         do {
             let newRule = UserRule(ruleText: rule, isEnabled: newState)
             try dnsProtection.modifyRule(rule, newRule, for: type)
-            vpnManager.updateSettings(completion: nil)
+            dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
             modelProvider.modifyRule(rule, newRule: newRule)
         }
         catch {
@@ -126,21 +126,21 @@ final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
 
     func removeRule(_ ruleText: String, at indexPath: IndexPath) throws {
         try dnsProtection.removeRule(withText: ruleText, for: type)
-        vpnManager.updateSettings(completion: nil)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
         modelProvider.removeRule(ruleText)
         delegate?.rulesRemoved(at: [indexPath])
     }
 
     func modifyRule(_ oldRuleText: String, newRule: UserRule, at indexPath: IndexPath) throws {
         try dnsProtection.modifyRule(oldRuleText, newRule, for: type)
-        vpnManager.updateSettings(completion: nil)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
         modelProvider.modifyRule(oldRuleText, newRule: newRule)
         delegate?.rulesChanged(at: [indexPath])
     }
 
     func turn(rules: [String], for indexPaths: [IndexPath], on: Bool) {
         dnsProtection.turnRules(rules, on: on, for: type)
-        vpnManager.updateSettings(completion: nil)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
         modelProvider = UserRulesModelsProvider(initialModels: Self.models(dnsProtection, type))
         modelProvider.searchString = searchString
         delegate?.rulesChanged(at: indexPaths)
@@ -148,7 +148,7 @@ final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
 
     func remove(rules: [String], for indexPaths: [IndexPath]) {
         dnsProtection.removeRules(rules, for: type)
-        vpnManager.updateSettings(completion: nil)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
         modelProvider = UserRulesModelsProvider(initialModels: Self.models(dnsProtection, type))
         modelProvider.searchString = searchString
         delegate?.rulesRemoved(at: indexPaths)
@@ -161,7 +161,7 @@ final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
     func saveUserRules(from text: String) {
         let userRulesString = text.split(separator: "\n").map { String($0).trimmingCharacters(in: .whitespaces) }
         dnsProtection.set(rules: userRulesString, for: type)
-        vpnManager.updateSettings(completion: nil)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
         modelProvider = UserRulesModelsProvider(initialModels: Self.models(dnsProtection, type))
         delegate?.rulesChanged()
     }
@@ -181,7 +181,7 @@ final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
                 switch result {
                 case .success(let text):
                     self?.addNewRulesAfterImport(text, completion)
-                    self?.vpnManager.updateSettings(completion: nil)
+                    self?.dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
                 case .failure(let error):
                     completion(error)
                 }

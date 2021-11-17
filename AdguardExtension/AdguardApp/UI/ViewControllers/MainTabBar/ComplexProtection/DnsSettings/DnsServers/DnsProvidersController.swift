@@ -30,10 +30,10 @@ final class DnsProvidersController: UITableViewController {
     var openUrl: String?
 
     // MARK: - services
-    private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let dnsProvidersManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!
+    private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol = ServiceLocator.shared.getService()!
 
     // View model
     private let model: DnsProvidersModel
@@ -50,7 +50,7 @@ final class DnsProvidersController: UITableViewController {
     // MARK: - Init
 
     required init?(coder: NSCoder) {
-        model = DnsProvidersModel(dnsProvidersManager: dnsProvidersManager, vpnManager: vpnManager, resources: resources)
+        model = DnsProvidersModel(dnsProvidersManager: dnsProvidersManager, dnsConfigAssistant: dnsConfigAssistant, resources: resources)
         super.init(coder: coder)
     }
 

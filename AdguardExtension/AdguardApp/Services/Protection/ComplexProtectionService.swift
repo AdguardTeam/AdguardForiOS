@@ -298,13 +298,11 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
                 self.vpnManager.installVpnConfiguration(completion: completion)
             }
             #endif
-        }
-        else {
-            vpnManager.updateSettings { (error) in
+        } else {
+            vpnManager.updateSettings { error in
                 if error as? VpnManagerError == VpnManagerError.managerNotInstalled {
                     completion(nil)
-                }
-                else {
+                } else {
                     completion(error)
                 }
             }

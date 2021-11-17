@@ -21,6 +21,8 @@ import SharedAdGuardSDK
 
 class SafariProtectionMock: SafariProtectionProtocol {
 
+    var allContentBlockerJsonUrls: [URL] = []
+
     var rules: [UserRule] = []
 
     var proStatus: Bool = false

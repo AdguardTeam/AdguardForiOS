@@ -119,7 +119,7 @@ extension DnsProvidersService: DnsProvidersServiceMigratable {
                     if serverToMigrate.serverId == activeDnsServer?.serverId {
                         activeDnsServer = serverToMigrate
                     }
-                    vpnManager?.updateSettings(completion: nil)
+                    dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsSettings, completion: nil)
                 }
             }
             // Process sdns link
@@ -136,7 +136,7 @@ extension DnsProvidersService: DnsProvidersServiceMigratable {
                         if serverToMigrate.serverId == activeDnsServer?.serverId {
                             activeDnsServer = serverToMigrate
                         }
-                        vpnManager?.updateSettings(completion: nil)
+                        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsSettings, completion: nil)
                     }
                 }
             }

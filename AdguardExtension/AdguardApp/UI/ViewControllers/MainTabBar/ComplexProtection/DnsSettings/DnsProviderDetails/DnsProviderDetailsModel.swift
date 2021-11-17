@@ -91,19 +91,19 @@ final class DnsProviderDetailsModel {
     private let providerId: Int
     private let resources: AESharedResourcesProtocol
     private let dnsProvidersManager: DnsProvidersManagerProtocol
-    private let vpnManager: VpnManagerProtocol
+    private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol
 
     // MARK: - Init
 
     init(providerId: Int,
          resources: AESharedResourcesProtocol,
          dnsProvidersManager: DnsProvidersManagerProtocol,
-         vpnManager: VpnManagerProtocol
+         dnsConfigAssistant: DnsConfigManagerAssistantProtocol
     ) {
         self.providerId = providerId
         self.dnsProvidersManager = dnsProvidersManager
         self.resources = resources
-        self.vpnManager = vpnManager
+        self.dnsConfigAssistant = dnsConfigAssistant
         self.provider = dnsProvidersManager.allProviders.first(where: { $0.providerId == providerId })!.predefined
     }
 
@@ -138,6 +138,6 @@ final class DnsProviderDetailsModel {
         let selectedServerId = provider.dnsServers.first { $0.type == dnsProtocol }?.id ??
         provider.dnsServers.first!.id
         try dnsProvidersManager.selectProvider(withId: providerId, serverId: selectedServerId)
-        vpnManager.updateSettings { _ in }
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsServer, completion: nil)
     }
 }

@@ -63,14 +63,14 @@ final class NewDnsServerController: BottomAlertController {
     // MARK: - Services
 
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
+    private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol = ServiceLocator.shared.getService()!
 
     // MARK: - Private properties
 
     private let textFieldCharectersLimit = 50
     private lazy var model: NewDnsServerModel = {
-        return NewDnsServerModel(dnsProvidersManager: dnsProviderManager, vpnManager: vpnManager, provider: customDnsProvider)
+        return NewDnsServerModel(dnsProvidersManager: dnsProviderManager, dnsConfigAssistant: dnsConfigAssistant, provider: customDnsProvider)
     }()
 
     // MARK: - ViewController lifecycle
