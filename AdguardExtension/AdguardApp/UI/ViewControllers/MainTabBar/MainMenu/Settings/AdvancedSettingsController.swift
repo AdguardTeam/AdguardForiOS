@@ -35,6 +35,7 @@ final class AdvancedSettingsController: UITableViewController {
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
+    private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol = ServiceLocator.shared.getService()!
 
     private let showStatusbarRow = 0
     private let restartProtectionRow = 1
@@ -76,7 +77,8 @@ final class AdvancedSettingsController: UITableViewController {
 
     @IBAction func restartProtectionAction(_ sender: UISwitch) {
         resources.restartByReachability = sender.isOn
-        vpnManager.updateSettings(completion: nil)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedAdvancedSettings, completion: nil)
+
     }
 
     @IBAction func debugLogsAction(_ sender: UISwitch) {
@@ -85,7 +87,7 @@ final class AdvancedSettingsController: UITableViewController {
         DDLogInfo("Log level changed to \(isDebugLogs ? "DEBUG" : "Normal")")
         ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
         AGLogger.setLevel(isDebugLogs ? .AGLL_TRACE : .AGLL_INFO)
-        vpnManager.updateSettings(completion: nil) // restart tunnel to apply new log level
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedAdvancedSettings, completion: nil) // restart tunnel to apply new log level
     }
 
     // MARK: - Table view data source

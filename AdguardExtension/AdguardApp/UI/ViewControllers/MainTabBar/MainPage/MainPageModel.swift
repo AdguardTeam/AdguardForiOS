@@ -40,21 +40,16 @@ final class MainPageModel: MainPageModelProtocol {
     private let workingQueue = DispatchQueue(label: "AdGuardApp.MainPageModelQueue")
     private let safariProtection: SafariProtectionProtocol
     private let dnsProtection: DnsProtectionProtocol
-    private let resources: AESharedResourcesProtocol
-    private let vpnManager: VpnManagerProtocol
+    private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol
 
     // MARK: - init
 
-    init(
-        resource: AESharedResourcesProtocol,
-        safariProtection: SafariProtectionProtocol,
-        dnsProtection: DnsProtectionProtocol,
-        vpnManager: VpnManagerProtocol
-    ) {
-        self.resources = resource
+    init(safariProtection: SafariProtectionProtocol,
+         dnsProtection: DnsProtectionProtocol,
+         dnsConfigAssistant: DnsConfigManagerAssistantProtocol) {
         self.safariProtection = safariProtection
         self.dnsProtection = dnsProtection
-        self.vpnManager = vpnManager
+        self.dnsConfigAssistant = dnsConfigAssistant
     }
 
     // MARK: - public methods
@@ -79,7 +74,7 @@ final class MainPageModel: MainPageModelProtocol {
                     _filtersCount.mutate { $0 += updateResult.updatedFilterIds.count }
                     // Reloads vpn if dns filters have been updated
                     if needRestartVpn {
-                        self.vpnManager.updateSettings(completion: nil)
+                        self.dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsFilters, completion: nil)
                         _needRestartVpn.mutate { $0 = false }
                     }
                 }
@@ -107,7 +102,7 @@ final class MainPageModel: MainPageModelProtocol {
             else if filtersCount > 0 {
                 let format = String.localizedString("filters_updated_format")
                 message = String(format: format, filtersCount)
-                if needRestartVpn { self.vpnManager.updateSettings(completion: nil) }
+                if needRestartVpn { self.dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsFilters, completion: nil) }
             }
             else {
                 message = String.localizedString("filters_noUpdates")

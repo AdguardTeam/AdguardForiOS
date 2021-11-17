@@ -39,36 +39,36 @@ final class NewDnsServerModel {
 
     let provider: CustomDnsProviderProtocol?
     private let dnsProvidersManager: DnsProvidersManagerProtocol
-    private let vpnManager: VpnManagerProtocol
+    private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol
 
     // MARK: - Init
 
     init(dnsProvidersManager: DnsProvidersManagerProtocol,
-         vpnManager: VpnManagerProtocol,
+         dnsConfigAssistant: DnsConfigManagerAssistantProtocol,
          provider: CustomDnsProviderProtocol? = nil) {
 
-        self.dnsProvidersManager = dnsProvidersManager
-        self.vpnManager = vpnManager
         self.provider = provider
+        self.dnsProvidersManager = dnsProvidersManager
+        self.dnsConfigAssistant = dnsConfigAssistant
     }
 
     /// Function to add custom provider
     func addCustomProvider(name: String, upstream: String) throws {
         try dnsProvidersManager.addCustomProvider(name: name, upstreams: [upstream], selectAsCurrent: true)
-        vpnManager.updateSettings(completion: nil)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsServer, completion: nil)
     }
 
     /// Function to update custom provider
     func updateCustomProvider(newName: String, newUpstream: String, provider: DnsProviderMetaProtocol) throws {
         let providerId = provider.providerId
         try dnsProvidersManager.updateCustomProvider(withId: providerId, newName: newName, newUpstreams: [newUpstream], selectAsCurrent: false)
-        vpnManager.updateSettings(completion: nil)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsServer, completion: nil)
     }
 
     /// Function to remove custom provider
     func removeCustomProvider(provider: DnsProviderMetaProtocol) throws {
         let providerId = provider.providerId
         try dnsProvidersManager.removeCustomProvider(withId: providerId)
-        vpnManager.updateSettings(completion: nil)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsServer, completion: nil)
     }
 }
