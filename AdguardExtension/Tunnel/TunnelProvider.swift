@@ -39,9 +39,11 @@ class TunnelProvider: PacketTunnelProvider {
     static let interfaceSplitIpv4 = "172.16.209.5"
     static let interfaceSplitIpv6 = "fd12:1:1:1::5"
 
+    private let resources: AESharedResourcesProtocol
+
     public override init() {
         // init logger
-        let resources = AESharedResources()
+        resources = AESharedResources()
         Self.setupLogger(resources)
 
         let debugLoggs = resources.isDebugLogs
@@ -68,14 +70,17 @@ class TunnelProvider: PacketTunnelProvider {
                                              allowlistIsEnabled: true,
                                              lowLevelConfiguration: LowLevelDnsConfiguration.fromResources(resources))
 
+        let networkUtils = NetworkUtils()
+
         try! super.init(userDefaults: resources.sharedDefaults(),
                         debugLoggs: debugLoggs,
                         dnsConfiguration: configuration,
                         addresses: TunnelProvider.getAddresses(mode: resources.tunnelMode),
                         filterStorageUrl: filterStorageUrl,
                         statisticsDbContainerUrl: statisticsUrl,
-                        networkUtils: NetworkUtils()
-        )
+                        networkUtils: networkUtils)
+
+        migrateIfNeeded(configuration: configuration, networkUtils: networkUtils)
     }
 
     static func getAddresses(mode: TunnelMode)-> PacketTunnelProvider.Addresses {
@@ -104,6 +109,8 @@ class TunnelProvider: PacketTunnelProvider {
         )
     }
 
+    // MARK: - private methods
+
     private static func setupLogger(_ resources: AESharedResourcesProtocol) {
         let debugLoggs = resources.isDebugLogs
         ACLLogger.singleton().initLogger(resources.sharedAppLogsURL())
@@ -120,6 +127,21 @@ class TunnelProvider: PacketTunnelProvider {
 
         Logger.logError = { msg in
             DDLogError(msg)
+        }
+    }
+
+    private func migrateIfNeeded(configuration: DnsConfigurationProtocol, networkUtils: NetworkUtilsProtocol) {
+
+        let migrationVersionProvider = MigrationServiceVersionProvider(resources: resources)
+        if migrationVersionProvider.needsMigrateTo4_3() {
+            do {
+                let dnsProvidersManager = try DnsProvidersManager(configuration: configuration, userDefaults: resources.sharedDefaults(), networkUtils: networkUtils)
+                let migration = DnsMigration4_3(resources: resources, dnsProvidersManager: dnsProvidersManager)
+                migration.migrate()
+            }
+            catch {
+                DDLogError("(TunnelProvider) migration failed: \(error)")
+            }
         }
     }
 }

@@ -39,7 +39,12 @@ final class ActionExtensionLoaderViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         activityIndicator.startAnimating()
+
+        // FIXME: do not stop ui thread. 
+        migrateIfNeeded()
+
         configuration.systemAppearenceIsDark = systemStyleIsDark
         updateTheme()
 
@@ -102,6 +107,24 @@ final class ActionExtensionLoaderViewController: UIViewController {
         activityIndicator.isHidden = true
         messageLabel.isHidden = false
         messageLabel.text = error.localizedErrorDescription
+    }
+
+    private func migrateIfNeeded() {
+
+        let resources = ServicesInitializer.shared.resources
+        let safariProtection = ServicesInitializer.shared.safariProtection
+        let migrationVersionProvider = ServicesInitializer.shared.migrationVersionProvider
+
+        if migrationVersionProvider.needsMigrateTo4_3() {
+
+            do {
+                let migration = try SafariMigration4_3(resources: resources, safariProtection: safariProtection)
+                migration.migrate()
+            }
+            catch {
+                DDLogError("(ActionExtensionLoaderViewController) migration failed: \(error)")
+            }
+        }
     }
 }
 
