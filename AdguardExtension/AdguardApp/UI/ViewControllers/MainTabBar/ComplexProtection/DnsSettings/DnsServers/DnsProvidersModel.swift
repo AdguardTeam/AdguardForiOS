@@ -34,16 +34,16 @@ final class DnsProvidersModel {
 
     // MARK: - Private properties
 
-    private let dnsProvidersManager: DnsProvidersManagerProtocol
-    private let vpnManager: VpnManagerProtocol
     private let resources: AESharedResourcesProtocol
+    private let dnsProvidersManager: DnsProvidersManagerProtocol
+    private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol
 
     // MARK: - Init
 
-    init(dnsProvidersManager: DnsProvidersManagerProtocol, vpnManager: VpnManagerProtocol, resources: AESharedResourcesProtocol) {
-        self.dnsProvidersManager = dnsProvidersManager
-        self.vpnManager = vpnManager
+    init(dnsProvidersManager: DnsProvidersManagerProtocol, dnsConfigAssistant: DnsConfigManagerAssistantProtocol, resources: AESharedResourcesProtocol) {
         self.resources = resources
+        self.dnsProvidersManager = dnsProvidersManager
+        self.dnsConfigAssistant = dnsConfigAssistant
     }
 
     // MARK: - Public methods
@@ -51,7 +51,7 @@ final class DnsProvidersModel {
     func setProviderActive(provider: DnsProviderMetaProtocol) throws {
         let serverId = getActiveServerId(provider: provider)
         try dnsProvidersManager.selectProvider(withId: provider.providerId, serverId: serverId)
-        vpnManager.updateSettings(completion: nil)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsServer, completion: nil)
         NotificationCenter.default.post(name: .currentDnsServerChanged, object: nil)
     }
 

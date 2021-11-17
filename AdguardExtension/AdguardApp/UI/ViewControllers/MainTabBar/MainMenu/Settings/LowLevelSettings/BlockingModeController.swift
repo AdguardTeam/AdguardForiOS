@@ -41,8 +41,8 @@ class BlockingModeController: UITableViewController {
 
     // MARK: - services
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
+    private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol = ServiceLocator.shared.getService()!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -138,7 +138,7 @@ class BlockingModeController: UITableViewController {
 
     private func setupMode(mode: DnsProxyBlockingMode) {
         resources.blockingMode = mode
-        vpnManager.updateSettings(completion: nil)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedLowLevelSettings, completion: nil)
         updateButtons(by: selectedCell)
     }
 }

@@ -34,7 +34,7 @@ final class BlockedResponseTtlController: BottomAlertController {
 
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
+    private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol = ServiceLocator.shared.getService()!
 
     weak var delegate: BlockedResponseTtlDelegate?
 
@@ -64,7 +64,7 @@ final class BlockedResponseTtlController: BottomAlertController {
         guard let text = ttlTextField.text, !text.isEmpty else { return }
         guard let numeric = Int(text), numeric >= 0 else { return }
         resources.blockedResponseTtlSecs = numeric
-        vpnManager.updateSettings(completion: nil)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedLowLevelSettings, completion: nil)
         delegate?.setTtlDescription(ttl: String(numeric))
         dismiss(animated: true)
     }

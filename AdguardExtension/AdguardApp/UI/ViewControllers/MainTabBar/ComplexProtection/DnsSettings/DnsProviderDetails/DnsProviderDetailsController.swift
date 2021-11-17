@@ -48,11 +48,12 @@ final class DnsProviderDetailsController : UITableViewController {
     private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let dnsProvidersManager: DnsProvidersManagerProtocol = ServiceLocator.shared.getService()!
     private let domainParserService: DomainParserServiceProtocol = ServiceLocator.shared.getService()!
-    private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
+    private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol = ServiceLocator.shared.getService()!
 
-    // MARK: - private properties
+    // MARK: - Private properties
+
     private lazy var model: DnsProviderDetailsModel = {
-        return DnsProviderDetailsModel(providerId: providerId, resources: resources, dnsProvidersManager: dnsProvidersManager, vpnManager: vpnManager)
+        return DnsProviderDetailsModel(providerId: providerId, resources: resources, dnsProvidersManager: dnsProvidersManager, dnsConfigAssistant: dnsConfigAssistant)
     }()
     private let providerDetailSections: [ProviderSection] = ProviderSection.allCases
     private let providerDetailRows: [ProviderRow]  = ProviderRow.allCases

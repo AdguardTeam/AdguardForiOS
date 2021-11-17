@@ -40,9 +40,7 @@ final class NetworkSettingsTableController: UITableViewController, AddRuleContro
     /* Services and models */
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let networkSettingsService: NetworkSettingsServiceProtocol = ServiceLocator.shared.getService()!
-    private let vpnManager: VpnManagerProtocol = ServiceLocator.shared.getService()!
-    private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
-    private let nativeDnsManager: NativeDnsSettingsManagerProtocol = ServiceLocator.shared.getService()!
+    private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol = ServiceLocator.shared.getService()!
 
     private var model: NetworkSettingsModel!
 
@@ -50,7 +48,7 @@ final class NetworkSettingsTableController: UITableViewController, AddRuleContro
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        model = NetworkSettingsModel(networkSettingsService: networkSettingsService, vpnManager: vpnManager, resources: resources, nativeDnsManager: nativeDnsManager)
+        model = NetworkSettingsModel(networkSettingsService: networkSettingsService, dnsConfigAssistant: dnsConfigAssistant)
         model.delegate = self
     }
 

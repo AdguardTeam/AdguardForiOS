@@ -80,6 +80,8 @@
 		2449000D272C3E5E00557CEE /* ImportDNSSettingsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2487C016272AECD900449BC2 /* ImportDNSSettingsHelper.swift */; };
 		244AFB792704A4CA00D628E6 /* ContentSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244AFB782704A4CA00D628E6 /* ContentSizedTableView.swift */; };
 		244AFB7A2704A4CA00D628E6 /* ContentSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244AFB782704A4CA00D628E6 /* ContentSizedTableView.swift */; };
+		244E3B0D273988A300FD4C1E /* DnsConfigManagerAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244E3B0C273988A300FD4C1E /* DnsConfigManagerAssistant.swift */; };
+		244E3B0E273988A300FD4C1E /* DnsConfigManagerAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244E3B0C273988A300FD4C1E /* DnsConfigManagerAssistant.swift */; };
 		24557DF725EFD4AE00BC5B26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24557DF625EFD4AE00BC5B26 /* AppDelegate.swift */; };
 		2455B21127317FA9002B86D7 /* ImportSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2455B21027317FA9002B86D7 /* ImportSettings.swift */; };
 		2455B21227317FA9002B86D7 /* ImportSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2455B21027317FA9002B86D7 /* ImportSettings.swift */; };
@@ -2447,6 +2449,7 @@
 		2444013826EE2F9500FB7CE5 /* ChartType+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChartType+Utils.swift"; sourceTree = "<group>"; };
 		244419832614C1BC009555F3 /* String+NSRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+NSRange.swift"; sourceTree = "<group>"; };
 		244AFB782704A4CA00D628E6 /* ContentSizedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizedTableView.swift; sourceTree = "<group>"; };
+		244E3B0C273988A300FD4C1E /* DnsConfigManagerAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsConfigManagerAssistant.swift; sourceTree = "<group>"; };
 		24557DF625EFD4AE00BC5B26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2455B21027317FA9002B86D7 /* ImportSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportSettings.swift; sourceTree = "<group>"; };
 		247432DD261731C00025C7B8 /* UIAlerController+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlerController+Style.swift"; sourceTree = "<group>"; };
@@ -6504,6 +6507,7 @@
 				D06E6BD225E8F6000069013C /* VpnConfigurationStatus.swift */,
 				7E21CBA725F918FA00A5A735 /* NetworkManager.swift */,
 				D0A614EC26EBA18B00793922 /* BootstrapsHelper.swift */,
+				244E3B0C273988A300FD4C1E /* DnsConfigManagerAssistant.swift */,
 				24C31EC026FF702500673309 /* WebReporter */,
 				7ED0B1A526C4335700B0CE7B /* NewAndRefactoredObjects */,
 				7EC67FB5254843B300FEEEE2 /* NativeDnsService */,
@@ -8316,6 +8320,7 @@
 				D0B5459D2435D63D002F0AEC /* MainPageController.swift in Sources */,
 				D0B545952435D630002F0AEC /* StartupService.swift in Sources */,
 				247CB64F2600CD480047974C /* SocialNetworkAuthParametersParser.swift in Sources */,
+				244E3B0E273988A300FD4C1E /* DnsConfigManagerAssistant.swift in Sources */,
 				7EC8A40C26E7919D005244CF /* UserRulesRedirectAction.swift in Sources */,
 				24B33CFF26C50E0300499281 /* OnboardingContentBlockerCell.swift in Sources */,
 				659886911CF74DE9003ECD1C /* ACLExecuteBlockDelayed.m in Sources */,
@@ -8770,6 +8775,7 @@
 				7E1E415A2424C01100567C8D /* MostActiveCompaniesCell.swift in Sources */,
 				7EEF93F22360365300F5856A /* NetworkSettingsService.swift in Sources */,
 				D0A29F8923E0334000D974CF /* RateAppService.swift in Sources */,
+				244E3B0D273988A300FD4C1E /* DnsConfigManagerAssistant.swift in Sources */,
 				7E3FEFC026CEBAE80080EC03 /* ExtendedTitleTableHeaderView.swift in Sources */,
 				24037B0625874F7000C4F195 /* DNSSettings.swift in Sources */,
 				244419842614C1BC009555F3 /* String+NSRange.swift in Sources */,

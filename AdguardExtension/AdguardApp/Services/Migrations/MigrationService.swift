@@ -30,7 +30,6 @@ final class MigrationService: MigrationServiceProtocol {
 
     private let currentSchemaVersion = 5
 
-    private let vpnManager: VpnManagerProtocol
     private let resources: AESharedResourcesProtocol
     private let networking: ACNNetworkingProtocol
     private let configurationService: ConfigurationServiceProtocol
@@ -39,19 +38,20 @@ final class MigrationService: MigrationServiceProtocol {
     private let dnsProvidersManager: DnsProvidersManagerProtocol
     private let networkSettings: NetworkSettingsServiceProtocol
     private let versionProvider: MigrationServiceVersionProvider
+    private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol
+
     private let migrationQueue = DispatchQueue(label: "MigrationService queue", qos: .userInitiated)
 
     init(
-        vpnManager: VpnManagerProtocol,
         resources: AESharedResourcesProtocol,
         networking: ACNNetworkingProtocol,
         configurationService: ConfigurationServiceProtocol,
         productInfo: ADProductInfoProtocol,
         safariProtection: SafariProtectionProtocol,
         dnsProvidersManager: DnsProvidersManagerProtocol,
-        networkSettings: NetworkSettingsServiceProtocol
+        networkSettings: NetworkSettingsServiceProtocol,
+        dnsConfigAssistant: DnsConfigManagerAssistantProtocol
     ) {
-        self.vpnManager = vpnManager
         self.resources = resources
         self.networking = networking
         self.configurationService = configurationService
@@ -60,6 +60,7 @@ final class MigrationService: MigrationServiceProtocol {
         self.dnsProvidersManager = dnsProvidersManager
         self.networkSettings = networkSettings
         self.versionProvider = MigrationServiceVersionProvider(resources: resources)
+        self.dnsConfigAssistant = dnsConfigAssistant
 
         resources.sharedDefaults().set(self.currentSchemaVersion, forKey: AEDefaultsProductSchemaVersion)
     }
@@ -190,7 +191,8 @@ final class MigrationService: MigrationServiceProtocol {
         */
         if lastBuildVersion < 585 {
             DDLogInfo("(MigrationService) - restart tunnel to change tunnel ip address. Current build version is: \(String(describing: currentBuildVersion)). Saved build version is: \(lastBuildVersion)")
-            vpnManager.updateSettings(completion: nil)
+
+            dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsSettings, completion: nil)
         }
 
         /*
@@ -247,7 +249,7 @@ final class MigrationService: MigrationServiceProtocol {
 
                 try sdkMigrationHelper.migrate()
                 // Reloads Tunnel if it active to apply migrated DNS settings
-                vpnManager.updateSettings(completion: nil)
+                dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsSettings, completion: nil)
                 DDLogInfo("(MigrationService) - Successfully migrated old data to SDK")
             } catch {
                 DDLogError("(MigrationService) - Failed to migrate old data to SDK; Error: \(error)")
