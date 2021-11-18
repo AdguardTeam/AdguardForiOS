@@ -20,8 +20,9 @@ import SafariAdGuardSDK
 import SharedAdGuardSDK
 
 class SafariProtectionMock: SafariProtectionProtocol {
-
     var allContentBlockerJsonUrls: [URL] = []
+
+    var advancedRulesFileUrl: URL = URL(string: "https://")!
 
     var rules: [UserRule] = []
 
