@@ -300,8 +300,12 @@ final class SupportService: SupportServiceProtocol {
     }
 
     private func appendCBJsonsIntoTemporaryDirectory(cbUrl: URL) throws {
+        let advancedRulesFileUrl = safariProtection.advancedRulesFileUrl
+        if FileManager.default.fileExists(atPath: advancedRulesFileUrl.path) {
+            try FileManager.default.copyItem(at: advancedRulesFileUrl, to: cbUrl.appendingPathComponent(advancedRulesFileUrl.lastPathComponent))
+        }
         try safariProtection.allContentBlockerJsonUrls.forEach { fileUrl in
-            try FileManager.default.copyItem(at: fileUrl, to: cbUrl.appendingPathComponent( fileUrl.lastPathComponent))
+            try FileManager.default.copyItem(at: fileUrl, to: cbUrl.appendingPathComponent(fileUrl.lastPathComponent))
         }
     }
 

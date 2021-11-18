@@ -34,6 +34,9 @@ public protocol SafariProtectionContentBlockersProtocol {
     /* Returns all content blocker JSON urls */
     var allContentBlockerJsonUrls: [URL] { get }
 
+    /* Returns advanced rules file URL */
+    var advancedRulesFileUrl: URL { get }
+
     /* Returns state of the specified content blocker */
     func getState(for cbType: ContentBlockerType) -> Bool
 }
@@ -57,7 +60,15 @@ extension SafariProtection {
     }
 
     public var allContentBlockerJsonUrls: [URL] {
-        return ContentBlockerType.allCases.map { cbStorage.getJsonUrl(for: $0) }
+        return workingQueue.sync {
+            return ContentBlockerType.allCases.map { cbStorage.getJsonUrl(for: $0) }
+        }
+    }
+
+    public var advancedRulesFileUrl: URL {
+        return workingQueue.sync {
+            return cbStorage.advancedRulesFileUrl
+        }
     }
 
     public func getState(for cbType: ContentBlockerType) -> Bool {
