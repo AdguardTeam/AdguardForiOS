@@ -16,19 +16,18 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+#if canImport(iAd)
+import iAd
+#endif
 
-public struct RequestFactory {
-    static func sendFeedbackConfig(_ feedback: FeedBackProtocol) -> RequestConfig<SuccessFailureParser> {
-        return RequestConfig<SuccessFailureParser>(request: SendFeedbackRequest(feedback), parser: SuccessFailureParser())
-    }
+protocol AdClientWrapperProtocol {
+    /// Requests attribution data
+    func requestAttributionDetails(completionHander: @escaping ([String: NSObject]?, Error?) -> Void)
+}
 
-    /// Returns attribution records request config
-    static func attributionRecordsConfig(_ attributionToken: String) -> RequestConfig<AdServicesAttributionRecordsParser> {
-
-        return RequestConfig<AdServicesAttributionRecordsParser>(
-            request: AdServicesAttributionRecordsRequest(attributionToken),
-            parser: AdServicesAttributionRecordsParser()
-        )
+/// This object is a wrapper for supporting unit tests
+final class AdClientWrapper: AdClientWrapperProtocol {
+    func requestAttributionDetails(completionHander: @escaping ([String: NSObject]?, Error?) -> Void) {
+        ADClient.shared().requestAttributionDetails(completionHander)
     }
 }

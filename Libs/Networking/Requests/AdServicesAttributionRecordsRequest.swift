@@ -18,17 +18,32 @@
 
 import Foundation
 
-public struct RequestFactory {
-    static func sendFeedbackConfig(_ feedback: FeedBackProtocol) -> RequestConfig<SuccessFailureParser> {
-        return RequestConfig<SuccessFailureParser>(request: SendFeedbackRequest(feedback), parser: SuccessFailureParser())
+/// This object represent URL request
+final class AdServicesAttributionRecordsRequest: RequestProtocol {
+
+    //MARK: - Public properties
+
+    /// URL request with Apple API to receive attribution records
+    var urlRequest: URLRequest? {
+        let request = "https://api-adservices.apple.com/api/v1/"
+
+        if let url = URL(string: request) {
+            var request = URLRequest(url: url)
+            request.setValue("text/plain", forHTTPHeaderField: "Content-Type")
+            request.httpMethod = "POST"
+            request.httpBody = Data(attributionToken.utf8)
+            return request
+        }
+        return nil
     }
 
-    /// Returns attribution records request config
-    static func attributionRecordsConfig(_ attributionToken: String) -> RequestConfig<AdServicesAttributionRecordsParser> {
+    // MARK: - Private properties
 
-        return RequestConfig<AdServicesAttributionRecordsParser>(
-            request: AdServicesAttributionRecordsRequest(attributionToken),
-            parser: AdServicesAttributionRecordsParser()
-        )
+    private let attributionToken: String
+
+    // MARK: - Init
+
+    init(_ attributionToken: String) {
+        self.attributionToken = attributionToken
     }
 }

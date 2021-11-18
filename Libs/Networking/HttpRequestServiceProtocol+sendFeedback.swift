@@ -30,4 +30,10 @@ extension HttpRequestServiceProtocol {
             }
         }
     }
+
+    /// HTTP POST request fotr getting attribution records
+    func getAttributionRecords(_ attributionToken: String, completion: @escaping (_ result: Result<[String: String], Error>) -> Void) {
+        let config = RequestFactory.attributionRecordsConfig(attributionToken)
+        requestSender.send(requestConfig: config, completionHandler: completion)
+    }
 }

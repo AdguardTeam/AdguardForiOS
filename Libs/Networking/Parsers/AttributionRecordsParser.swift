@@ -17,18 +17,3 @@
 //
 
 import Foundation
-
-public struct RequestFactory {
-    static func sendFeedbackConfig(_ feedback: FeedBackProtocol) -> RequestConfig<SuccessFailureParser> {
-        return RequestConfig<SuccessFailureParser>(request: SendFeedbackRequest(feedback), parser: SuccessFailureParser())
-    }
-
-    /// Returns attribution records request config
-    static func attributionRecordsConfig(_ attributionToken: String) -> RequestConfig<AdServicesAttributionRecordsParser> {
-
-        return RequestConfig<AdServicesAttributionRecordsParser>(
-            request: AdServicesAttributionRecordsRequest(attributionToken),
-            parser: AdServicesAttributionRecordsParser()
-        )
-    }
-}

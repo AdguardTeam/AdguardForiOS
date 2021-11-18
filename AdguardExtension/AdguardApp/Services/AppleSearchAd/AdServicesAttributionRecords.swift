@@ -18,17 +18,14 @@
 
 import Foundation
 
-public struct RequestFactory {
-    static func sendFeedbackConfig(_ feedback: FeedBackProtocol) -> RequestConfig<SuccessFailureParser> {
-        return RequestConfig<SuccessFailureParser>(request: SendFeedbackRequest(feedback), parser: SuccessFailureParser())
-    }
-
-    /// Returns attribution records request config
-    static func attributionRecordsConfig(_ attributionToken: String) -> RequestConfig<AdServicesAttributionRecordsParser> {
-
-        return RequestConfig<AdServicesAttributionRecordsParser>(
-            request: AdServicesAttributionRecordsRequest(attributionToken),
-            parser: AdServicesAttributionRecordsParser()
-        )
-    }
+struct AdServicesAttributionRecords: Codable {
+    let attribution : Bool
+    let orgId: Int
+    let campaignId: Int
+    let conversionType: StringLiteralType
+    let clickDate: String?
+    let adGroupId: Int
+    let countryOrRegion: String
+    let keywordId: Int
+    let creativeSetId: Int
 }
