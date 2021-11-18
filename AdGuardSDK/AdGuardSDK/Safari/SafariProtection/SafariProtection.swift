@@ -191,11 +191,16 @@ public final class SafariProtection: SafariProtectionProtocol {
     // the block should return true if content blockers need to be reloaded, false otherwise
     // onCbReloaded will be called anyway
     func executeBlockAndReloadCbs(block: () throws -> Bool, onCbReloaded: @escaping (_ error: Error?) -> Void) rethrows {
-        if try block() {
-            reloadContentBlockers(onCbReloaded: onCbReloaded)
-        }
-        else {
-            onCbReloaded(nil)
+        do {
+            if try block() {
+                reloadContentBlockers(onCbReloaded: onCbReloaded)
+            }
+            else {
+                onCbReloaded(nil)
+            }
+        } catch {
+            onCbReloaded(error)
+            throw error
         }
     }
 

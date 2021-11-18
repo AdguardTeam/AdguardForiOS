@@ -157,7 +157,9 @@ class SafariProtectionTest: XCTestCase {
     func testExecuteBlockAndReloadCbsWithNotThrowingBlock() {
         let expectation = XCTestExpectation()
         let sp = safariProtection as! SafariProtection
-        sp.executeBlockAndReloadCbs {}
+        sp.executeBlockAndReloadCbs {
+            return true
+        }
         onCbReloaded: { error in
             expectation.fulfill()
         }
