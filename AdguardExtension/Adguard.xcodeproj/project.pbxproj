@@ -1229,6 +1229,8 @@
 		B2C8E9902716ECA100ACDED8 /* PurchaseAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C8E9772716E4AD00ACDED8 /* PurchaseAssistant.swift */; };
 		B2C8E9A42716FDF500ACDED8 /* Setapp in Frameworks */ = {isa = PBXBuildFile; productRef = B2C8E9A32716FDF500ACDED8 /* Setapp */; };
 		B2C8E9A52716FECB00ACDED8 /* AdGuardDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C8E9982716FDB300ACDED8 /* AdGuardDependencies.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		C73374372746D2FF00989447 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
+		C73374382746D30000989447 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
 		D005096D2202F5EB006BC10C /* DnsProviderDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D005096C2202F5EB006BC10C /* DnsProviderDetailsController.swift */; };
 		D00E43F12562A484002DDE98 /* ImportSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00E43F02562A484002DDE98 /* ImportSettingsController.swift */; };
 		D00E43F22562A484002DDE98 /* ImportSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00E43F02562A484002DDE98 /* ImportSettingsController.swift */; };
@@ -9273,6 +9275,7 @@
 				D083ADC327394DBE00A8F96E /* FileManager+Utils.swift in Sources */,
 				D083ADBA27394D1100A8F96E /* DnsProtectionUserRulesMigrationHelper.swift in Sources */,
 				B22FCDA8270B81C100B1C935 /* SharedResources.swift in Sources */,
+				C73374372746D2FF00989447 /* Bundle+Utils.swift in Sources */,
 				B22FCDB5270B8D9700B1C935 /* ACLFileLogger.m in Sources */,
 				D083ADC027394D3200A8F96E /* DnsStatisticsMigrationHelper.swift in Sources */,
 				B22FCDA1270B7F2200B1C935 /* SharedResources+DebugLogs.swift in Sources */,
@@ -10022,6 +10025,7 @@
 				D083ADC227394DBD00A8F96E /* FileManager+Utils.swift in Sources */,
 				D083ADBB27394D1200A8F96E /* DnsProtectionUserRulesMigrationHelper.swift in Sources */,
 				B2673E6E2717548100E04747 /* TunnelProvider.swift in Sources */,
+				C73374382746D30000989447 /* Bundle+Utils.swift in Sources */,
 				B2673E712717548B00E04747 /* DDTTYLogger.m in Sources */,
 				D083ADC127394D3300A8F96E /* DnsStatisticsMigrationHelper.swift in Sources */,
 				B2673E742717549600E04747 /* SharedResources+DebugLogs.swift in Sources */,

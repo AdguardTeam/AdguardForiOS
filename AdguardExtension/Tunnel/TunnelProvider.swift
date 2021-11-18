@@ -63,11 +63,11 @@ class TunnelProvider: PacketTunnelProvider {
         let filterStorageUrl = urlStorage.dnsFiltersFolderUrl
         let statisticsUrl = urlStorage.statisticsFolderUrl
 
-        let configuration = DnsConfiguration(proStatus: true,
+        let configuration = DnsConfiguration(proStatus: Bundle.main.isPro ? true : resources.isProPurchased,
                                              dnsFilteringIsEnabled: resources.systemProtectionEnabled,
                                              dnsImplementation: resources.dnsImplementation,
-                                             blocklistIsEnabled: true,
-                                             allowlistIsEnabled: true,
+                                             blocklistIsEnabled: resources.systemUserFilterEnabled,
+                                             allowlistIsEnabled: resources.systemWhitelistEnabled,
                                              lowLevelConfiguration: LowLevelDnsConfiguration.fromResources(resources))
 
         let networkUtils = NetworkUtils()

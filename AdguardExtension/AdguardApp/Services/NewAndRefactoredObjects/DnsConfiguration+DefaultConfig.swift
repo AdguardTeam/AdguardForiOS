@@ -35,11 +35,11 @@ extension DnsConfiguration {
     static func defaultConfiguration(from resources: AESharedResourcesProtocol, bundle: Bundle = .main, currentLocale: Locale = .current) -> DnsConfiguration {
         return DnsConfiguration(
             currentLocale: currentLocale,
-            proStatus: bundle.isPro ? true : false,
+            proStatus: bundle.isPro,
             dnsFilteringIsEnabled: false,
             dnsImplementation: .adGuard,
-            blocklistIsEnabled: false,
-            allowlistIsEnabled: false,
+            blocklistIsEnabled: true,
+            allowlistIsEnabled: true,
             lowLevelConfiguration: LowLevelDnsConfiguration.defaultConfiguration
         )
     }

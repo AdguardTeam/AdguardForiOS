@@ -122,13 +122,17 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
         var proxyFilters = dnsLibsRulesProvider.enabledCustomDnsFilters
         customDnsFilterIds = proxyFilters.map { $0.filterId }
 
-        let blocklistFilter = dnsLibsRulesProvider.blocklistFilter
-        proxyFilters.append(blocklistFilter)
-        dnsBlocklistFilterId = blocklistFilter.filterId
+        if dnsConfiguration.blocklistIsEnabled {
+            let blocklistFilter = dnsLibsRulesProvider.blocklistFilter
+            proxyFilters.append(blocklistFilter)
+            dnsBlocklistFilterId = blocklistFilter.filterId
+        }
 
-        let allowlistFilter = dnsLibsRulesProvider.allowlistFilter
-        dnsAllowlistFilterId = allowlistFilter.filterId
-        proxyFilters.append(allowlistFilter)
+        if dnsConfiguration.allowlistIsEnabled {
+            let allowlistFilter = dnsLibsRulesProvider.allowlistFilter
+            dnsAllowlistFilterId = allowlistFilter.filterId
+            proxyFilters.append(allowlistFilter)
+        }
 
         return DnsProxyConfiguration(
             upstreams: proxyUpstreams,
