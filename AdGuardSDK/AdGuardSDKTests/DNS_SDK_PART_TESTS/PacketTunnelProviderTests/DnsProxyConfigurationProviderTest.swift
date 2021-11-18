@@ -22,6 +22,9 @@ class DnsProxyConfigurationProviderTest: XCTestCase {
     }
 
     func test() {
+        dnsConfiguration.blocklistIsEnabled = true
+        dnsConfiguration.allowlistIsEnabled = true
+
         dnsProvidersManager.stubbedActiveDnsServer = DnsServer(
             features: [],
             upstreams: [DnsUpstream(upstream: "8.8.8.8", protocol: .dns)],
