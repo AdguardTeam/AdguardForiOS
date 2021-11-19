@@ -124,7 +124,7 @@ extern NSString*  _Nonnull AEDefaultsAuthStateString;
 /**
  User defaults key, which defines that appId allready saved with right access rights.
  */
-// todo: remove this in future
+// TODO: - This key is obsolete and can be removed
 extern NSString*  _Nonnull AEDefaultsAppIdSavedWithAccessRights;
 
 /**
