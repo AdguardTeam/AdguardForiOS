@@ -21,16 +21,23 @@ protocol AdServicesHelperProtocol {
     func fetchAttributionRecords(completionHandler: @escaping (Result<[String: String], Error>) -> Void)
 }
 
+/// This object is a helper for `AppleSearchAdsService` and works with AdService framework
 final class AdServicesHelper: AdServicesHelperProtocol {
+
+    // MARK: - Private properties
 
     private let httpRequestService: HttpRequestServiceProtocol
     private let adServicesWrapper: AdServicesWrapperProtocol
+
+    // MARK: - Init
 
     init(httpRequestService: HttpRequestServiceProtocol,
          adServicesWrapper: AdServicesWrapperProtocol) {
         self.httpRequestService = httpRequestService
         self.adServicesWrapper = adServicesWrapper
     }
+
+    // MARK: - Public methods
 
     @available(iOS 14.3, *)
     func fetchAttributionRecords(completionHandler: @escaping (Result<[String: String], Error>) -> Void) {

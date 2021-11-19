@@ -20,13 +20,20 @@ protocol IAdFrameworkHelperProtocol {
     func fetchAttributionRecords(completionHandler: @escaping (Result<[String: String], Error>) -> Void)
 }
 
+/// This object is a helper for `AppleSearchAdsService` and works with iAd framework
 final class IAdFrameworkHelper: IAdFrameworkHelperProtocol {
 
+    // MARK: - Private properties
+
     private let adClientWrapper: AdClientWrapperProtocol
+
+    // MARK: - Init
 
     init(adClientWrapper: AdClientWrapperProtocol) {
         self.adClientWrapper = adClientWrapper
     }
+
+    // MARK: - Public methods
 
     func fetchAttributionRecords(completionHandler: @escaping (Result<[String: String], Error>) -> Void) {
         adClientWrapper.requestAttributionDetails { attributionDetails, error in
