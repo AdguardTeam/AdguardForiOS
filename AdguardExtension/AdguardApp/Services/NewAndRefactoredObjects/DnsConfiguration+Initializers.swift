@@ -18,6 +18,7 @@
 
 import DnsAdGuardSDK
 
+/// This extension adds methods which constuct `DnsConfiguration` objects from inner services
 extension DnsConfiguration {
     convenience init(bundle: Bundle = .main, currentLocale: Locale = .current, resources: AESharedResourcesProtocol, isProPurchased: Bool) {
         let sdkDnsImplementation: DnsAdGuardSDK.DnsImplementation = resources.dnsImplementation == .adGuard ? .adGuard : .native
@@ -32,7 +33,9 @@ extension DnsConfiguration {
         )
     }
 
-    static func defaultConfiguration(from resources: AESharedResourcesProtocol, bundle: Bundle = .main, currentLocale: Locale = .current) -> DnsConfiguration {
+    /// Default configuration is used when resetting application to default
+    /// All the parameters are set as if the app starts for the first time
+    static func defaultConfiguration(bundle: Bundle = .main, currentLocale: Locale = .current) -> DnsConfiguration {
         return DnsConfiguration(
             currentLocale: currentLocale,
             proStatus: bundle.isPro,

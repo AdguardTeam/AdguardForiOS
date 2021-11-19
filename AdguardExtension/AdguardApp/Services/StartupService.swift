@@ -72,7 +72,7 @@ final class StartupService : NSObject {
             resources: sharedResources,
             isProPurchased: purchaseService.isProPurchased
         )
-        let defaultDnsProtectionConfiguration = DnsConfiguration.defaultConfiguration(from: sharedResources)
+        let defaultDnsProtectionConfiguration = DnsConfiguration.defaultConfiguration()
 
         // TODO: - try! is bad
         let dnsProtection: DnsProtectionProtocol = try! DnsProtection(configuration: dnsProtectionConfiguration,

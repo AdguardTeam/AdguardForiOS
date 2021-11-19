@@ -19,6 +19,7 @@
 import UIKit.UIDevice
 import SafariAdGuardSDK
 
+/// This extension adds methods which constuct `SafariConfiguration` objects from inner services
 extension SafariConfiguration {
     convenience init(bundle: Bundle = .main, currentLocale: Locale = .current, resources: AESharedResourcesProtocol, isProPurchased: Bool) {
         self.init(iosVersion: UIDevice.current.iosVersion,
@@ -35,6 +36,8 @@ extension SafariConfiguration {
                   cid: UIDevice.current.identifierForVendor?.uuidString ?? "")
     }
 
+    /// Default configuration is used when resetting application to default
+    /// All the parameters are set as if the app starts for the first time
     static func defaultConfiguration(bundle: Bundle = .main, currentLocale: Locale = Locale.current) -> SafariConfiguration {
         return SafariConfiguration(
             iosVersion: UIDevice.current.iosVersion,
