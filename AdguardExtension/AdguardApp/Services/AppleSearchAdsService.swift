@@ -16,30 +16,9 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
-#if canImport(AdServices)
-import AdServices
-#endif
-
 protocol AppleSearchAdsServiceProtocol {
     /// Provides attribution records in string JSON format
     func provideAttributionRecords(completionHandler: @escaping (_ jsonString: String?) -> Void)
-}
-
-// MARK: - AppleSearchAdsServiceError
-
-fileprivate enum AppleSearchAdsServiceError: Error, CustomDebugStringConvertible {
-    case missingAttributionData
-    case mockData
-
-    var debugDescription: String {
-        switch self {
-        case .missingAttributionData: return "Attribution data was missing"
-        case .mockData: return "Received mock data"
-        }
-    }
-
-    /// Apples mock id
-    static let campaignMockId = "1234567890"
 }
 
 // MARK: - UsedFrameworks
@@ -57,19 +36,47 @@ fileprivate enum UsedFrameworks {
 /// This object is responsible for providing attribution records
 final class AppleSearchAdsService: AppleSearchAdsServiceProtocol {
 
+    // MARK: - AppleSearchAdsServiceError
+
+     enum AdsError: Error, CustomDebugStringConvertible {
+        case missingAttributionData
+        case mockData
+
+        var debugDescription: String {
+            switch self {
+            case .missingAttributionData: return "Attribution data was missing"
+            case .mockData: return "Received mock data"
+            }
+        }
+
+        /// Apples mock id
+        static let campaignMockId = "1234567890"
+    }
+
     // MARK: - Private properties
 
     private let completionQueue = DispatchQueue(label: "AdGuardApp.AppleSearchAdsServiceCompletionQueue")
     private let workingQueue = DispatchQueue(label: "AdGuardApp.AppleSearchAdsServiceQueue")
-    private let httpRequestService: HttpRequestServiceProtocol
-    private let adClientWrapper: AdClientWrapperProtocol
+
+    private let adServicesHelper: AdServicesHelperProtocol
+    private let iAdFrameworkHelper: IAdFrameworkHelperProtocol
+
 
     // MARK: - Init
 
     init(httpRequestService: HttpRequestServiceProtocol = HttpRequestService(),
-         adClientWrapper: AdClientWrapperProtocol = AdClientWrapper()) {
-        self.httpRequestService = httpRequestService
-        self.adClientWrapper = adClientWrapper
+         adClientWrapper: AdClientWrapperProtocol = AdClientWrapper(),
+         adServicesWrapper: AdServicesWrapperProtocol = AdServicesWrapper()) {
+        self.adServicesHelper = AdServicesHelper(httpRequestService: httpRequestService,
+                                                 adServicesWrapper: adServicesWrapper)
+        self.iAdFrameworkHelper = IAdFrameworkHelper(adClientWrapper: adClientWrapper)
+    }
+
+    /// Init for tests
+    init(adServicesHelper: AdServicesHelperProtocol,
+         iAdFrameworkHelper: IAdFrameworkHelperProtocol) {
+        self.adServicesHelper = adServicesHelper
+        self.iAdFrameworkHelper = iAdFrameworkHelper
     }
 
     // MARK: - Public methods
@@ -77,93 +84,20 @@ final class AppleSearchAdsService: AppleSearchAdsServiceProtocol {
     func provideAttributionRecords(completionHandler: @escaping (_ jsonString: String?) -> Void) {
         workingQueue.async { [weak self] in
             if #available(iOS 14.3, *) {
-                self?.fetchAttributionRecordsWithAdServices { result in
+                self?.adServicesHelper.fetchAttributionRecords{ result in
                     self?.processResult(result, type: .AdServices, completionHandler: completionHandler)
                 }
             } else {
-                self?.fetchAttributionRecordsWithIAd { result in
+                self?.iAdFrameworkHelper.fetchAttributionRecords { result in
                     self?.processResult(result, type: .iAd, completionHandler: completionHandler)
                 }
             }
         }
     }
 
-    // MARK: - AdServices framework methods
-
-    @available(iOS 14.3, *)
-    private func fetchAttributionRecordsWithAdServices(completionHandler: @escaping (Result<[String: String], Error>) -> Void) {
-        do {
-            let attributionToken = try AAAttribution.attributionToken()
-            httpRequestService.getAttributionRecords(attributionToken) { result in
-                switch result {
-                case .success(let json):
-                    if json.isEmpty {
-                        DDLogError("(AppleSearchAdsService) - fetchAttributionRecordsWithAdServices; Search Ads data is missing")
-                        completionHandler(.failure(AppleSearchAdsServiceError.missingAttributionData))
-                        return
-                    }
-
-                    if json["campaignId"] == AppleSearchAdsServiceError.campaignMockId {
-                        DDLogError("(AppleSearchAdsService) - fetchAttributionRecordsWithAdServices; Received mock data")
-                        completionHandler(.failure(AppleSearchAdsServiceError.mockData))
-                        return
-                    }
-
-                    completionHandler(.success(json))
-                case .failure(let error):
-                    DDLogError("(AppleSearchAdsService) - fetchAttributionRecordsWithAdServices; Error")
-                    completionHandler(.failure(error))
-                }
-            }
-        } catch {
-            DDLogError("(AppleSearchAdsService) - fetchAttributionRecordsWithAdServices; Attribution token error occurred: \(error)")
-            completionHandler(.failure(AppleSearchAdsServiceError.missingAttributionData))
-        }
-    }
-
-    // MARK: - iAd Framework methods
-
-    private func fetchAttributionRecordsWithIAd(completionHandler: @escaping (Result<[String: String], Error>) -> Void) {
-        adClientWrapper.requestAttributionDetails { attributionDetails, error in
-            if let error = error {
-                DDLogError("(AppleSearchAdsService) - fetchAttributionRecordsWithIAd; Search Ads error: \(error)")
-                completionHandler(.failure(error))
-                return
-            }
-
-            guard let attributionDetails = attributionDetails else {
-                DDLogError("(AppleSearchAdsService) - fetchAttributionRecordsWithIAd; Search Ads error:")
-                completionHandler(.failure(AppleSearchAdsServiceError.missingAttributionData))
-                return
-            }
-
-            var json = [String: String]()
-            for (version, adDictionary) in attributionDetails {
-                DDLogInfo("(AppleSearchAdsService) - fetchAttributionRecordsWithIAd; Search Ads version: \(version)")
-                if let attributionInfo = adDictionary as? [String: String] {
-                    json = attributionInfo
-                }
-            }
-
-            if json.isEmpty {
-                DDLogError("(AppleSearchAdsService) - fetchAttributionRecordsWithIAd; Search Ads data is missing")
-                completionHandler(.failure(AppleSearchAdsServiceError.missingAttributionData))
-                return
-            }
-
-            if json["iad-campaign-id"] == AppleSearchAdsServiceError.campaignMockId {
-                DDLogError("(AppleSearchAdsService) - fetchAttributionRecordsWithIAd; Received mock data")
-                completionHandler(.failure(AppleSearchAdsServiceError.mockData))
-                return
-            }
-
-            completionHandler(.success(json))
-        }
-    }
-
     // MARK: - Private methods
 
-    private func convertJSONtoStringJSON(json: [String: String], type: UsedFrameworks) -> String? {
+    private func convertJSONtoParameterString(json: [String: String], type: UsedFrameworks) -> String {
         var json = json
         switch type {
         case .iAd:
@@ -172,13 +106,13 @@ final class AppleSearchAdsService: AppleSearchAdsServiceProtocol {
             json["v"] = "adservices"
         }
 
-        do {
-            let data = try JSONSerialization.data(withJSONObject: json, options: [])
-            return String(data: data, encoding: .utf8)
-        } catch {
-            DDLogError("(AppleSearchAdsService) - convertJSONtoStringJSON; Error occurred while trying to serialize attribution json data with framework = \(type); Error: \(error)")
-            return nil
+        let result = json.map { key, value in
+            let escapedKey = "\(key)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+            let escapedValue = "\(value)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+            return escapedKey + "=" + escapedValue
         }
+            .joined(separator: "&")
+        return result
     }
 
     private func processResult(
@@ -189,7 +123,7 @@ final class AppleSearchAdsService: AppleSearchAdsServiceProtocol {
         let jsonString: String?
         switch result {
         case .success(let json):
-            jsonString = convertJSONtoStringJSON(json: json, type: type)
+            jsonString = convertJSONtoParameterString(json: json, type: type)
         case .failure(let error):
             jsonString = nil
             DDLogError("(AppleSearchAdsService) - processResult; Error occurred while receiving attribution records for framework = \(type); Error: \(error)")

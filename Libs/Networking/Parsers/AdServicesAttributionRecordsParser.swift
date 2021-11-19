@@ -18,7 +18,8 @@
 
 import Foundation
 
-fileprivate struct AttributionRecords: Decodable {
+/// This struct represent Apple search ads attribution records JSON
+struct AttributionRecords: Codable {
     let attribution: Bool
     let orgId: Int
     let campaignId: Int

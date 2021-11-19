@@ -17,3 +17,18 @@
 //
 
 import Foundation
+
+class AdServicesHelperMock: AdServicesHelperProtocol {
+
+    var invokedFetchAttributionRecords = false
+    var invokedFetchAttributionRecordsCount = 0
+    var stubbedFetchAttributionRecordsCompletionHandlerResult: Result<[String: String], Error>?
+
+    func fetchAttributionRecords(completionHandler: @escaping (Result<[String: String], Error>) -> Void) {
+        invokedFetchAttributionRecords = true
+        invokedFetchAttributionRecordsCount += 1
+        if let result = stubbedFetchAttributionRecordsCompletionHandlerResult {
+            completionHandler(result)
+        }
+    }
+}

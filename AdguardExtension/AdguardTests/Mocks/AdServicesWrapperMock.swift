@@ -18,14 +18,19 @@
 
 import Foundation
 
-struct AdServicesAttributionRecords: Codable {
-    let attribution : Bool
-    let orgId: Int
-    let campaignId: Int
-    let conversionType: StringLiteralType
-    let clickDate: String?
-    let adGroupId: Int
-    let countryOrRegion: String
-    let keywordId: Int
-    let creativeSetId: Int
+class AdServicesWrapperMock: AdServicesWrapperProtocol {
+
+    var invokedGetAttributionToken = false
+    var invokedGetAttributionTokenCount = 0
+    var stubbedGetAttributionTokenError: Error?
+    var stubbedGetAttributionTokenResult: String! = ""
+
+    func getAttributionToken() throws -> String {
+        invokedGetAttributionToken = true
+        invokedGetAttributionTokenCount += 1
+        if let error = stubbedGetAttributionTokenError {
+            throw error
+        }
+        return stubbedGetAttributionTokenResult
+    }
 }
