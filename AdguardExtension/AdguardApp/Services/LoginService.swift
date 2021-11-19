@@ -149,6 +149,7 @@ final class LoginService: LoginServiceProtocol {
     private let LOGIN_ACCESS_TOKEN_PARAM = "access_token"
     private let LOGIN_APP_VERSION_PARAM = "app_version"
     private let STATUS_DEVICE_NAME_PARAM = "device_name"
+    private let STATUS_ATTRIBUTION_RECORDS_PARAM = "iad_metadata" // Param for Apple Search Ads
 
     private let resources: AESharedResourcesProtocol
     private var network: ACNNetworkingProtocol
@@ -363,6 +364,10 @@ final class LoginService: LoginServiceProtocol {
             params[LOGIN_LICENSE_KEY_PARAM] = licenseKey
         }
 
+        if let attributionRecords = provideAttributionRecords() {
+            params[STATUS_ATTRIBUTION_RECORDS_PARAM] = attributionRecords
+        }
+
         guard let url = URL(string: STATUS_URL) else  {
             callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
             DDLogError("(LoginService) checkStatus error. Can not make URL from String \(STATUS_URL)")
@@ -465,5 +470,19 @@ final class LoginService: LoginServiceProtocol {
         }
 
         RunLoop.main.add(timer!, forMode: .common)
+    }
+
+    private func provideAttributionRecords() -> String? {
+        var result: String?
+        let group = DispatchGroup()
+        group.enter()
+        let service = AppleSearchAdsService()
+        service.provideAttributionRecords { paramString in
+            result = paramString
+            group.leave()
+        }
+
+        group.wait()
+        return result
     }
 }

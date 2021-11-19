@@ -18,7 +18,7 @@
 
 protocol AppleSearchAdsServiceProtocol {
     /// Provides attribution records in string JSON format
-    func provideAttributionRecords(completionHandler: @escaping (_ jsonString: String?) -> Void)
+    func provideAttributionRecords(completionHandler: @escaping (_ paramString: String?) -> Void)
 }
 
 // MARK: - UsedFrameworks
@@ -81,7 +81,7 @@ final class AppleSearchAdsService: AppleSearchAdsServiceProtocol {
 
     // MARK: - Public methods
 
-    func provideAttributionRecords(completionHandler: @escaping (_ jsonString: String?) -> Void) {
+    func provideAttributionRecords(completionHandler: @escaping (_ paramString: String?) -> Void) {
         workingQueue.async { [weak self] in
             if #available(iOS 14.3, *) {
                 self?.adServicesHelper.fetchAttributionRecords{ result in
