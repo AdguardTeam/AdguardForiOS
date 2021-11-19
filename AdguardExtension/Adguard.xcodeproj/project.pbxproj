@@ -3078,7 +3078,6 @@
 		7E88A63F23E8361A00A10F3A /* SystemProtectionEnablerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemProtectionEnablerController.swift; sourceTree = "<group>"; };
 		7E8AC81A23A7C41700669C75 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		7E8C8C4124E19779000B4B9C /* UIImage+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Utils.swift"; sourceTree = "<group>"; };
-		7E8D423B258CC52100B6300E /* DnsProviders+Migrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DnsProviders+Migrations.swift"; sourceTree = "<group>"; };
 		7E8D4298258CCF1700B6300E /* DnsProvidersMigrationsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersMigrationsTest.swift; sourceTree = "<group>"; };
 		7E9082072549D5430048C4B0 /* HowToSetupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToSetupController.swift; sourceTree = "<group>"; };
 		7E92753626C67A1D007B2C80 /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
@@ -6489,7 +6488,6 @@
 				B2673DD427173E0F00E04747 /* DomainParserService.swift */,
 				B2673DB327173DFD00E04747 /* Migrations */,
 				B2C19E7A2716DE3A00331109 /* Purchase */,
-				7E8D423B258CC52100B6300E /* DnsProviders+Migrations.swift */,
 				D07427F1232B96CB0019AAF4 /* Utils */,
 				7E9F3E0E23CE08C100A7BDA2 /* DnsFilterService */,
 				7E5EA7AD239A38C500A07DE0 /* Protection */,
