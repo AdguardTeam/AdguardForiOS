@@ -170,18 +170,34 @@ class NativeProvidersService: NativeProvidersServiceProtocol {
     
     @available(iOS 14.0, *)
     func removeDnsManager(_ onErrorReceived: @escaping (_ error: Error?) -> Void) {
+        guard let server = currentServer else {
+            onErrorReceived(NativeDnsProviderError.failedToLoadManager)
+            return
+        }
+
+        guard let upstream = server.upstreams.first else {
+            onErrorReceived(NativeDnsProviderError.unsupportedDnsProtocol)
+            return
+        }
+        
+        let dnsProtocol = DnsProtocol.getProtocolByUpstream(upstream)
+        
+        guard NativeProvidersService.supportedProtocols.contains(dnsProtocol) else {
+            DDLogError("NativeProvidersService(setProvider) trying to add server with unsupported protocol")
+            onErrorReceived(NativeDnsProviderError.unsupportedDnsProtocol)
+            return
+        }
         loadDnsManager { [weak self] dnsManager in
             guard let dnsManager = dnsManager else {
                 DDLogError("Received nil DNS manager")
                 onErrorReceived(NativeDnsProviderError.failedToLoadManager)
                 return
             }
-            dnsManager.removeFromPreferences(completionHandler: onErrorReceived)
-            // Check manager status after delete
-            self?.getDnsManagerStatus({ [weak self] isInstalled, isEnabled in
-                self?.managerIsEnabled = isInstalled && isEnabled
-            })
+            self?.disableDnsManager(dnsManager: dnsManager, dnsProtocol: dnsProtocol, upstreams: server.upstreams, onErrorReceived)
         }
+        self.getDnsManagerStatus({ [weak self] isInstalled, isEnabled in
+            self?.managerIsEnabled = !isEnabled && isInstalled
+        })
     }
     
     func reinitializeProviders() {
@@ -263,11 +279,48 @@ class NativeProvidersService: NativeProvidersServiceProtocol {
             return
         }
         dnsManager.dnsSettings = settings
-        
+        let status = NEOnDemandRuleConnect()
+        dnsManager.onDemandRules = [status]
         dnsManager.localizedDescription = Bundle.main.applicationName
         dnsManager.saveToPreferences(completionHandler: onErrorReceived)
     }
     
+    @available(iOS 14.0, *)
+    private func disableDnsManager(dnsManager: NEDNSSettingsManager, dnsProtocol: DnsProtocol, upstreams: [String], _ onErrorReceived: @escaping (_ error: Error?) -> ()) {
+        setupDnsManager(dnsManager: dnsManager)
+        
+        let settings: NEDNSSettings
+        switch dnsProtocol {
+        case .dns: settings = NEDNSSettings(servers: upstreams)
+        case .doh:
+            guard upstreams.count == 1, let serverUrl = upstreams.first else {
+                onErrorReceived(NativeDnsProviderError.invalidUpstreamsNumber)
+                return
+            }
+            let dohSettings = NEDNSOverHTTPSSettings(servers: [])
+            dohSettings.serverURL = URL(string: serverUrl)
+            settings = dohSettings
+        case .dot:
+            guard upstreams.count == 1, var serverUrl = upstreams.first else {
+                onErrorReceived(NativeDnsProviderError.invalidUpstreamsNumber)
+                return
+            }
+            let dotSettings = NEDNSOverTLSSettings(servers: [])
+            if let range = serverUrl.range(of: "tls://") {
+                serverUrl.removeSubrange(range)
+            }
+            dotSettings.serverName = serverUrl
+            settings = dotSettings
+        default:
+            onErrorReceived(NativeDnsProviderError.unsupportedDnsProtocol)
+            return
+        }
+        dnsManager.dnsSettings = settings
+        let status = NEOnDemandRuleDisconnect()
+        dnsManager.onDemandRules = [status]
+        dnsManager.localizedDescription = Bundle.main.applicationName
+        dnsManager.saveToPreferences(completionHandler: onErrorReceived)
+    }
     @available(iOS 14.0, *)
     private func loadDnsManager(_ onManagerLoaded: @escaping (_ dnsManager: NEDNSSettingsManager?) -> Void) {
         let dnsManager = NEDNSSettingsManager.shared()
