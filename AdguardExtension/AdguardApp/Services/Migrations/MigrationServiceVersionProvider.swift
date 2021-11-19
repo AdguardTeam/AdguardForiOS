@@ -34,7 +34,7 @@ class MigrationServiceVersionProvider: MigrationServiceVersionProviderProtocol {
 
         let lastBuildVersion = resources.buildVersion
 
-        // TODO: - Change migration version before release
+        // FIXME: - Change migration version before release
         return lastBuildVersion < 800
     }
 }
