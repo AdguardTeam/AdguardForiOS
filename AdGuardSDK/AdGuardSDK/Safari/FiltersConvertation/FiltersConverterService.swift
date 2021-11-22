@@ -104,13 +104,19 @@ final class FiltersConverterService: FiltersConverterServiceProtocol {
 
         // Get enabled blocklist rules
         let blocklistRulesManager = safariManagers.blocklistRulesManager
-        let enabledBlockListRules = blocklistRulesManager.allRules.filter { $0.isEnabled }
-                                                                  .map { $0.ruleText }
+        var enabledBlockListRules: [String] = []
+        if configuration.blocklistIsEnabled {
+            enabledBlockListRules = blocklistRulesManager.allRules.filter { $0.isEnabled }.map { $0.ruleText }
+        }
 
         // Get either allowlist rules or inverted allowlist rules (they aren't working at the same time)
         var enabledAllowlistRules: [String]?
         var enabledInvertedAllowlistRules: [String]?
-        if configuration.allowlistIsInverted {
+
+        if !configuration.allowlistIsEnabled {
+            enabledAllowlistRules = nil
+            enabledInvertedAllowlistRules = nil
+        } else if configuration.allowlistIsInverted {
             let invertedAllowlistRulesManager = safariManagers.invertedAllowlistRulesManager
             enabledInvertedAllowlistRules = invertedAllowlistRulesManager.allRules.filter { $0.isEnabled }
                                                                                   .map { $0.ruleText }

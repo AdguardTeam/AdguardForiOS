@@ -144,8 +144,13 @@ const applyCss = (styleSelectors: string[], verbose: boolean) => {
     (document.head || document.documentElement).appendChild(styleElement);
 
     const selectors = styleSelectors.map((s) => s.trim());
+
     selectors.forEach((selector) => {
-        styleElement.sheet!.insertRule(selector);
+        try {
+            styleElement.sheet?.insertRule(selector);
+        } catch (e) {
+            logMessage(verbose, `Was unable to inject selector: ${selector}, due to error: ${e}`);
+        }
     });
 
     protectStyleElementContent(styleElement);

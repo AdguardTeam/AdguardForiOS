@@ -23,6 +23,8 @@ class FiltersConverterServiceTest: XCTestCase {
         filesStorage.getFilterResultHandler = { return "testFilter_\($0)" }
         configuration.allowlistIsInverted = false
         configuration.safariProtectionEnabled = true
+        configuration.allowlistIsEnabled = true
+        configuration.blocklistIsEnabled = true
 
         let blockRules = [UserRule(ruleText: "block_rule_1", isEnabled: true), UserRule(ruleText: "block_rule_2", isEnabled: false)]
         (safariManagers.blocklistRulesManager as! BlocklistRulesManagerMock).allRules = blockRules
@@ -53,6 +55,62 @@ class FiltersConverterServiceTest: XCTestCase {
         XCTAssertNil(filtersConverter.passedAllowlistRules)
     }
 
+    func testWithDisabledBlocklist() {
+        filtersService.groups = getGroups()
+        filesStorage.getFilterResultHandler = { return "testFilter_\($0)" }
+        configuration.allowlistIsInverted = false
+        configuration.safariProtectionEnabled = true
+        configuration.allowlistIsEnabled = true
+        configuration.blocklistIsEnabled = false
+
+        let blockRules = [UserRule(ruleText: "block_rule_1", isEnabled: true), UserRule(ruleText: "block_rule_2", isEnabled: false)]
+        (safariManagers.blocklistRulesManager as! BlocklistRulesManagerMock).allRules = blockRules
+
+        let allowRules = [UserRule(ruleText: "allow_rule_1", isEnabled: false), UserRule(ruleText: "allow_rule_2", isEnabled: true)]
+        (safariManagers.allowlistRulesManager as! AllowlistRulesManagerMock).allRules = allowRules
+
+        let invAllowRules = [UserRule(ruleText: "inv_allow_rule_1", isEnabled: false), UserRule(ruleText: "inv_allow_rule_2", isEnabled: true)]
+        (safariManagers.invertedAllowlistRulesManager as! InvertedAllowlistRulesManagerMock).allRules = invAllowRules
+
+        filtersConverter.resultFilters = []
+        let _ = converterService.convertFiltersAndUserRulesToJsons()
+
+        XCTAssertEqual(filtersConverter.convertCalledCount, 1)
+
+        let expectedFilters = [FilterFileContent(text: "testFilter_3", group: .socialWidgets)]
+        XCTAssertEqual(expectedFilters, filtersConverter.passedFilters)
+        XCTAssert(filtersConverter.passedBlocklistRules!.isEmpty)
+        XCTAssertEqual(["allow_rule_2"], filtersConverter.passedAllowlistRules)
+    }
+
+    func testWithDisabledAllowlist() {
+        filtersService.groups = getGroups()
+        filesStorage.getFilterResultHandler = { return "testFilter_\($0)" }
+        configuration.allowlistIsInverted = false
+        configuration.safariProtectionEnabled = true
+        configuration.allowlistIsEnabled = false
+        configuration.blocklistIsEnabled = true
+
+        let blockRules = [UserRule(ruleText: "block_rule_1", isEnabled: true), UserRule(ruleText: "block_rule_2", isEnabled: false)]
+        (safariManagers.blocklistRulesManager as! BlocklistRulesManagerMock).allRules = blockRules
+
+        let allowRules = [UserRule(ruleText: "allow_rule_1", isEnabled: false), UserRule(ruleText: "allow_rule_2", isEnabled: true)]
+        (safariManagers.allowlistRulesManager as! AllowlistRulesManagerMock).allRules = allowRules
+
+        let invAllowRules = [UserRule(ruleText: "inv_allow_rule_1", isEnabled: false), UserRule(ruleText: "inv_allow_rule_2", isEnabled: true)]
+        (safariManagers.invertedAllowlistRulesManager as! InvertedAllowlistRulesManagerMock).allRules = invAllowRules
+
+        filtersConverter.resultFilters = []
+        let _ = converterService.convertFiltersAndUserRulesToJsons()
+
+        XCTAssertEqual(filtersConverter.convertCalledCount, 1)
+
+        let expectedFilters = [FilterFileContent(text: "testFilter_3", group: .socialWidgets)]
+        XCTAssertEqual(expectedFilters, filtersConverter.passedFilters)
+        XCTAssertEqual(["block_rule_1"], filtersConverter.passedBlocklistRules)
+        XCTAssertNil(filtersConverter.passedAllowlistRules)
+    }
+
     func testProGroupsOnlyWithoutProStatus() {
         var groups = getGroups()
 
@@ -65,6 +123,8 @@ class FiltersConverterServiceTest: XCTestCase {
         filesStorage.getFilterResultHandler = { return "testFilter_\($0)" }
         configuration.allowlistIsInverted = false
         configuration.safariProtectionEnabled = true
+        configuration.allowlistIsEnabled = true
+        configuration.blocklistIsEnabled = true
 
         let blockRules = [UserRule(ruleText: "block_rule_1", isEnabled: true), UserRule(ruleText: "block_rule_2", isEnabled: false)]
         (safariManagers.blocklistRulesManager as! BlocklistRulesManagerMock).allRules = blockRules

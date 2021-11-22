@@ -33,7 +33,7 @@ export const buildStyleSheet = (
     }
 
     const elemHideStyle = elemhideSelectors.join('');
-    const cssStyle = injectRules.map((x) => x.getContent()).join('\r\n');
+    const cssStyle = injectRules.map((x) => x.getContent());
 
     const styles = [];
     if (elemHideStyle) {
@@ -41,7 +41,7 @@ export const buildStyleSheet = (
     }
 
     if (cssStyle) {
-        styles.push(cssStyle);
+        styles.push(...cssStyle);
     }
 
     return styles;
