@@ -256,7 +256,7 @@ class ImportDNSSettingsHelperTest: XCTestCase {
     private func generateDnsFilters() -> [DnsFilter] {
         var result: [DnsFilter] = []
         for i in 0..<3 {
-            result.append(DnsFilter(filterId: i, subscriptionUrl: URL(string: "URL")!, isEnabled: true, name: "", description: "", version: "", lastUpdateDate: nil, updateFrequency: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: i))
+            result.append(DnsFilter(filterId: i, subscriptionUrl: URL(string: "URL")!, isEnabled: true, name: "", description: "", version: "", lastUpdateDate: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: i))
         }
         return result
     }

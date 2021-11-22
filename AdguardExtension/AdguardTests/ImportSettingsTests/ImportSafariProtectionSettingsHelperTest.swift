@@ -207,7 +207,7 @@ class ImportSafariProtectionSettingsHelperTest: XCTestCase {
         let filtersToImport = generateCustomSafariFilters()
         let expectation = XCTestExpectation()
         safariProtection.groups = generateSafariGroups(groupsEnabled: false)
-        parser.stubbedParseResult = CustomFilterMeta(name: nil, description: nil, version: nil, lastUpdateDate: nil, updateFrequency: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0)
+        parser.stubbedParseResult = CustomFilterMeta(name: nil, description: nil, version: nil, lastUpdateDate: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0)
 
         XCTAssertEqual(parser.invokedParseCount, 0)
         XCTAssertEqual(safariProtection.deleteCustomFilterCalledCount, 0)
@@ -233,7 +233,7 @@ class ImportSafariProtectionSettingsHelperTest: XCTestCase {
         let filtersToImport = generateCustomSafariFilters()
         let expectation = XCTestExpectation()
         safariProtection.groups = generateSafariGroups(groupsEnabled: false)
-        parser.stubbedParseResult = CustomFilterMeta(name: nil, description: nil, version: nil, lastUpdateDate: nil, updateFrequency: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0)
+        parser.stubbedParseResult = CustomFilterMeta(name: nil, description: nil, version: nil, lastUpdateDate: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0)
 
         safariProtection.addCustomFilterResult = error
         XCTAssertEqual(parser.invokedParseCount, 0)
@@ -260,7 +260,7 @@ class ImportSafariProtectionSettingsHelperTest: XCTestCase {
         let filtersToImport = generateCustomSafariFilters()
         let expectation = XCTestExpectation()
         safariProtection.groups = generateSafariGroups(groupsEnabled: false)
-        parser.stubbedParseResult = CustomFilterMeta(name: nil, description: nil, version: nil, lastUpdateDate: nil, updateFrequency: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0)
+        parser.stubbedParseResult = CustomFilterMeta(name: nil, description: nil, version: nil, lastUpdateDate: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0)
 
         parser.stubbedParseError = error
         XCTAssertEqual(parser.invokedParseCount, 0)
@@ -287,7 +287,7 @@ class ImportSafariProtectionSettingsHelperTest: XCTestCase {
         let filtersToImport = generateCustomSafariFilters(url: "#$%^!")
         let expectation = XCTestExpectation()
         safariProtection.groups = generateSafariGroups(groupsEnabled: false)
-        parser.stubbedParseResult = CustomFilterMeta(name: nil, description: nil, version: nil, lastUpdateDate: nil, updateFrequency: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0)
+        parser.stubbedParseResult = CustomFilterMeta(name: nil, description: nil, version: nil, lastUpdateDate: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0)
 
         XCTAssertEqual(parser.invokedParseCount, 0)
         XCTAssertEqual(safariProtection.deleteCustomFilterCalledCount, 0)
@@ -313,7 +313,7 @@ class ImportSafariProtectionSettingsHelperTest: XCTestCase {
         let filtersToImport = generateCustomSafariFilters(isImportEnabled: false)
         let expectation = XCTestExpectation()
         safariProtection.groups = generateSafariGroups(groupsEnabled: false)
-        parser.stubbedParseResult = CustomFilterMeta(name: nil, description: nil, version: nil, lastUpdateDate: nil, updateFrequency: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0)
+        parser.stubbedParseResult = CustomFilterMeta(name: nil, description: nil, version: nil, lastUpdateDate: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0)
 
         XCTAssertEqual(parser.invokedParseCount, 0)
         XCTAssertEqual(safariProtection.deleteCustomFilterCalledCount, 0)
@@ -338,7 +338,7 @@ class ImportSafariProtectionSettingsHelperTest: XCTestCase {
     func testImportCustomSafariFiltersWithEmptyImportFilters() {
         let expectation = XCTestExpectation()
         safariProtection.groups = generateSafariGroups(groupsEnabled: false)
-        parser.stubbedParseResult = CustomFilterMeta(name: nil, description: nil, version: nil, lastUpdateDate: nil, updateFrequency: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0)
+        parser.stubbedParseResult = CustomFilterMeta(name: nil, description: nil, version: nil, lastUpdateDate: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0)
 
         XCTAssertEqual(parser.invokedParseCount, 0)
         XCTAssertEqual(safariProtection.deleteCustomFilterCalledCount, 0)
@@ -361,7 +361,7 @@ class ImportSafariProtectionSettingsHelperTest: XCTestCase {
         let filtersToImport = generateCustomSafariFilters()
         let expectation = XCTestExpectation()
         safariProtection.groups = generateSafariGroups(groupsEnabled: true)
-        parser.stubbedParseResult = CustomFilterMeta(name: nil, description: nil, version: nil, lastUpdateDate: nil, updateFrequency: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0)
+        parser.stubbedParseResult = CustomFilterMeta(name: nil, description: nil, version: nil, lastUpdateDate: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0)
 
         XCTAssertEqual(parser.invokedParseCount, 0)
         XCTAssertEqual(safariProtection.deleteCustomFilterCalledCount, 0)
@@ -387,7 +387,7 @@ class ImportSafariProtectionSettingsHelperTest: XCTestCase {
         let filtersToImport = generateCustomSafariFilters()
         let expectation = XCTestExpectation()
         safariProtection.groups = generateSafariGroupsWithFilters()
-        parser.stubbedParseResult = CustomFilterMeta(name: nil, description: nil, version: nil, lastUpdateDate: nil, updateFrequency: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0)
+        parser.stubbedParseResult = CustomFilterMeta(name: nil, description: nil, version: nil, lastUpdateDate: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0)
 
         XCTAssertEqual(parser.invokedParseCount, 0)
         XCTAssertEqual(safariProtection.deleteCustomFilterCalledCount, 0)
@@ -413,7 +413,7 @@ class ImportSafariProtectionSettingsHelperTest: XCTestCase {
         let filtersToImport = generateCustomSafariFilters()
         let expectation = XCTestExpectation()
         safariProtection.groups = generateSafariGroups(groupsEnabled: false)
-        parser.stubbedParseResult = CustomFilterMeta(name: nil, description: nil, version: nil, lastUpdateDate: nil, updateFrequency: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0)
+        parser.stubbedParseResult = CustomFilterMeta(name: nil, description: nil, version: nil, lastUpdateDate: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0)
 
         XCTAssertEqual(parser.invokedParseCount, 0)
         XCTAssertEqual(safariProtection.deleteCustomFilterCalledCount, 0)
@@ -462,7 +462,7 @@ class ImportSafariProtectionSettingsHelperTest: XCTestCase {
         let groups = generateSafariGroups(groupsEnabled: groupsEnabled)
 
         for (i, group) in groups.enumerated() {
-            let filter = SafariGroup.Filter(name: "Filter#\(i)", description: "", isEnabled: filtersEnabled, filterId: i, version: nil, lastUpdateDate: nil, updateFrequency: nil, group: groups[i], displayNumber: i, languages: [], tags: [], homePage: nil, filterDownloadPage: nil, rulesCount: i)
+            let filter = SafariGroup.Filter(name: "Filter#\(i)", description: "", isEnabled: filtersEnabled, filterId: i, version: nil, lastUpdateDate: nil, group: groups[i], displayNumber: i, languages: [], tags: [], homePage: nil, filterDownloadPage: nil, rulesCount: i)
 
             result.append(SafariGroup(filters: [filter],
                             isEnabled: group.isEnabled,

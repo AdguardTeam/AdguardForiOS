@@ -28,7 +28,6 @@ public protocol SafariFilterProtocol: FilterMetaProtocol {
     var isEnabled: Bool { get set } // Filter state. We won't use rules from disabled filters.
     var version: String? { get } // Filter version. Filter content always changes by it's authors, so we store the version of filter to identify it
     var lastUpdateDate: Date? { get } // The last time the filter was updated
-    var updateFrequency: Int? { get } // The frequency with which we should update filters
     var homePage: String? { get } // Filter's homepage. It's just a link to somewhere
     var filterDownloadPage: String? { get } // The link we should download filter from
     var filterId: Int { get } // Filter's unique identifier. It is different for every filter
@@ -51,7 +50,6 @@ public extension SafariGroup {
         public let filterId: Int
         public let version: String?
         public let lastUpdateDate: Date?
-        public let updateFrequency: Int?
         public let group: GroupMetaProtocol
         public let displayNumber: Int
         public let languages: [String]
@@ -63,14 +61,13 @@ public extension SafariGroup {
 
         // MARK: - Initialization
 
-        public init(name: String?, description: String?, isEnabled: Bool, filterId: Int, version: String?, lastUpdateDate: Date?, updateFrequency: Int?, group: GroupMetaProtocol, displayNumber: Int, languages: [String], tags: [ExtendedFiltersMeta.Tag], homePage: String?, filterDownloadPage: String?, rulesCount: Int) {
+        public init(name: String?, description: String?, isEnabled: Bool, filterId: Int, version: String?, lastUpdateDate: Date?, group: GroupMetaProtocol, displayNumber: Int, languages: [String], tags: [ExtendedFiltersMeta.Tag], homePage: String?, filterDownloadPage: String?, rulesCount: Int) {
             self.name = name
             self.description = description
             self.isEnabled = isEnabled
             self.filterId = filterId
             self.version = version
             self.lastUpdateDate = lastUpdateDate
-            self.updateFrequency = updateFrequency
             self.group = group
             self.displayNumber = displayNumber
             self.languages = languages
@@ -87,7 +84,6 @@ public extension SafariGroup {
             self.filterId = dbFilter.filterId
             self.version = dbFilter.version
             self.lastUpdateDate = dbFilter.lastUpdateTime
-            self.updateFrequency = dbFilter.expires
             self.group = group
             self.displayNumber = dbFilter.displayNumber
             self.languages = languages
@@ -104,7 +100,6 @@ public extension SafariGroup {
             self.isEnabled = isEnabled
             self.version = customFilter.version
             self.lastUpdateDate = customFilter.lastUpdateDate
-            self.updateFrequency = customFilter.updateFrequency
             self.group = group
             self.displayNumber = displayNumber
             self.languages = []

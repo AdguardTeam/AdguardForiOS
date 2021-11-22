@@ -78,7 +78,6 @@ final class DnsProtectionFiltersMigrationHelper: DnsProtectionFiltersMigrationHe
                 description: $0.desc,
                 version: $0.version,
                 lastUpdateDate: $0.updateDate,
-                updateFrequency: nil,
                 homePage: $0.homepage,
                 licensePage: nil,
                 issuesReportPage: nil,

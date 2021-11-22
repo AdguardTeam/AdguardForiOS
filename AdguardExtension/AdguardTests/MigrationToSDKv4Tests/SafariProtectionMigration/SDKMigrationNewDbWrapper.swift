@@ -23,14 +23,10 @@ final class SDKMigrationNewDbWrapper {
                 is_enabled BOOLEAN NOT NULL DEFAULT 1,
                 version TEXT,
                 last_update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                last_check_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                editable BOOLEAN NOT NULL DEFAULT 0,
                 display_number INTEGER NOT NULL DEFAULT 0,
                 name TEXT,
                 description TEXT,
                 homepage TEXT,
-                removable BOOLEAN NOT NULL DEFAULT 1,
-                expires INTEGER,
                 subscriptionUrl TEXT
             );
             """
@@ -54,14 +50,10 @@ extension SDKMigrationNewDbWrapper {
         let isEnabled: Bool
         let version: String?
         let lastUpdateTime: Date?
-        let lastCheckTime: Date?
-        let editable: Bool
         let displayNumber: Int
         let name: String?
         let description: String?
         let homePage: String?
-        let removable: Bool
-        let expires: Int?
         let subscriptionUrl: String?
 
         // Table name
@@ -73,14 +65,10 @@ extension SDKMigrationNewDbWrapper {
         static let isEnabled = Expression<Bool>("is_enabled")
         static let version = Expression<String?>("version")
         static let lastUpdateTime = Expression<Date?>("last_update_time")
-        static let lastCheckTime = Expression<Date?>("last_check_time")
-        static let editable = Expression<Bool>("editable")
         static let displayNumber = Expression<Int>("display_number")
         static let name = Expression<String?>("name")
         static let description = Expression<String?>("description")
         static let homePage = Expression<String?>("homepage")
-        static let removable = Expression<Bool>("removable")
-        static let expires = Expression<Int?>("expires")
         static let subscriptionUrl = Expression<String?>("subscriptionUrl")
 
         init(dbFilter: Row) {
@@ -89,14 +77,10 @@ extension SDKMigrationNewDbWrapper {
             self.isEnabled = dbFilter[CustomFiltersTable.isEnabled]
             self.version = dbFilter[CustomFiltersTable.version]
             self.lastUpdateTime = dbFilter[CustomFiltersTable.lastUpdateTime]
-            self.lastCheckTime = dbFilter[CustomFiltersTable.lastCheckTime]
-            self.editable = dbFilter[CustomFiltersTable.editable]
             self.displayNumber = dbFilter[CustomFiltersTable.displayNumber]
             self.name = dbFilter[CustomFiltersTable.name]
             self.description = dbFilter[CustomFiltersTable.description]
             self.homePage = dbFilter[CustomFiltersTable.homePage]
-            self.removable = dbFilter[CustomFiltersTable.removable]
-            self.expires = dbFilter[CustomFiltersTable.expires]
             self.subscriptionUrl = dbFilter[CustomFiltersTable.subscriptionUrl]
         }
     }

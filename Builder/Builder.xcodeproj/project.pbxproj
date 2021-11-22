@@ -13,7 +13,6 @@
 		D049EBB826B18BEA00B8088B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049EBB726B18BEA00B8088B /* main.swift */; };
 		D080EF012726FB0300146FB2 /* SystemLibsResolv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D080EF002726FB0300146FB2 /* SystemLibsResolv.framework */; };
 		D080EF022726FB0300146FB2 /* SystemLibsResolv.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D080EF002726FB0300146FB2 /* SystemLibsResolv.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D09B6EE426B9E0A200AC3BE7 /* schema.sql in CopyFiles */ = {isa = PBXBuildFile; fileRef = 659C60D31B8B50200081EBE3 /* schema.sql */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,27 +34,17 @@
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
-				D09B6EE426B9E0A200AC3BE7 /* schema.sql in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		659C60CE1B8B4F040081EBE3 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		659C60D01B8B4F200081EBE3 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		659C60D31B8B50200081EBE3 /* schema.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = schema.sql; sourceTree = "<group>"; };
-		65D59F8C1BC2FBBB00E7B8BF /* schema0.100.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = schema0.100.sql; sourceTree = "<group>"; };
-		65D59F8E1BC2FE5700E7B8BF /* update0.100.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = update0.100.sql; sourceTree = "<group>"; };
 		65DAE6E01B8B69A10020BC3C /* clean-script.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "clean-script.sh"; sourceTree = "<group>"; };
 		65DAE6E21B8B73E50020BC3C /* builder.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = builder.xcconfig; sourceTree = "<group>"; };
 		D049EBA826B1869C00B8088B /* AdGuardSDK_mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AdGuardSDK_mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D049EBB026B18B7B00B8088B /* Builder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Builder; sourceTree = BUILT_PRODUCTS_DIR; };
 		D049EBB726B18BEA00B8088B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		D067D8CD213EC8A900ECDE6D /* schema0.101.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = schema0.101.sql; sourceTree = "<group>"; };
-		D067D8CE213EC8A900ECDE6D /* update0.101.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = update0.101.sql; sourceTree = "<group>"; };
-		D070CAAC22F489910061D9FC /* schema0.102.sql */ = {isa = PBXFileReference; lastKnownFileType = text; path = schema0.102.sql; sourceTree = "<group>"; };
-		D070CAAD22F489910061D9FC /* update0.102.sql */ = {isa = PBXFileReference; lastKnownFileType = text; path = update0.102.sql; sourceTree = "<group>"; };
 		D080EF002726FB0300146FB2 /* SystemLibsResolv.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SystemLibsResolv.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0D561782191F6EB00A35DEC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D0D5617A2191F6F700A35DEC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -96,27 +85,10 @@
 			isa = PBXGroup;
 			children = (
 				65DAE6E21B8B73E50020BC3C /* builder.xcconfig */,
-				659C60D21B8B50200081EBE3 /* Resources */,
 				65DAE6E01B8B69A10020BC3C /* clean-script.sh */,
 				D049EBB726B18BEA00B8088B /* main.swift */,
 			);
 			path = Builder;
-			sourceTree = "<group>";
-		};
-		659C60D21B8B50200081EBE3 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				D067D8CD213EC8A900ECDE6D /* schema0.101.sql */,
-				D067D8CE213EC8A900ECDE6D /* update0.101.sql */,
-				659C60D01B8B4F200081EBE3 /* libz.tbd */,
-				659C60CE1B8B4F040081EBE3 /* libsqlite3.tbd */,
-				659C60D31B8B50200081EBE3 /* schema.sql */,
-				65D59F8C1BC2FBBB00E7B8BF /* schema0.100.sql */,
-				65D59F8E1BC2FE5700E7B8BF /* update0.100.sql */,
-				D070CAAC22F489910061D9FC /* schema0.102.sql */,
-				D070CAAD22F489910061D9FC /* update0.102.sql */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		D0D561772191F6EB00A35DEC /* Frameworks */ = {

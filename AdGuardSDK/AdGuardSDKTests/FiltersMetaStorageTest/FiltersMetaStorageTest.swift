@@ -42,16 +42,12 @@ class FiltersMetaStorageTest: XCTestCase {
             XCTAssertNotNil($0.version)
             XCTAssertFalse($0.version!.isEmpty)
             XCTAssertNotNil($0.lastUpdateTime)
-            XCTAssertNotNil($0.lastCheckTime)
-            XCTAssertNotNil($0.editable)
             XCTAssertNotNil($0.displayNumber)
             XCTAssertFalse($0.name.isEmpty)
             XCTAssertNotNil($0.description)
             XCTAssertFalse($0.description.isEmpty)
             XCTAssertNotNil($0.homePage)
             XCTAssertFalse($0.homePage!.isEmpty)
-            XCTAssertNotNil($0.removable)
-            XCTAssertNotNil($0.expires)
             XCTAssertFalse($0.subscriptionUrl!.isEmpty)
         }
 
@@ -66,16 +62,12 @@ class FiltersMetaStorageTest: XCTestCase {
             XCTAssertNotNil($0.version)
             XCTAssertFalse($0.version!.isEmpty)
             XCTAssertNotNil($0.lastUpdateTime)
-            XCTAssertNotNil($0.lastCheckTime)
-            XCTAssertNotNil($0.editable)
             XCTAssertNotNil($0.displayNumber)
             XCTAssertFalse($0.name.isEmpty)
             XCTAssertNotNil($0.description)
             XCTAssertFalse($0.description.isEmpty)
             XCTAssertNotNil($0.homePage)
             XCTAssertFalse($0.homePage!.isEmpty)
-            XCTAssertNotNil($0.removable)
-            XCTAssertNotNil($0.expires)
             XCTAssertFalse($0.subscriptionUrl!.isEmpty)
         }
     }
@@ -91,16 +83,12 @@ class FiltersMetaStorageTest: XCTestCase {
             XCTAssertNotNil($0.version)
             XCTAssertFalse($0.version!.isEmpty)
             XCTAssertNotNil($0.lastUpdateTime)
-            XCTAssertNotNil($0.lastCheckTime)
-            XCTAssertNotNil($0.editable)
             XCTAssertNotNil($0.displayNumber)
             XCTAssertFalse($0.name.isEmpty)
             XCTAssertNotNil($0.description)
             XCTAssertFalse($0.description.isEmpty)
             XCTAssertNotNil($0.homePage)
             XCTAssertFalse($0.homePage!.isEmpty)
-            XCTAssertNotNil($0.removable)
-            XCTAssertNotNil($0.expires)
             XCTAssertFalse($0.subscriptionUrl!.isEmpty)
         }
     }
@@ -124,9 +112,7 @@ class FiltersMetaStorageTest: XCTestCase {
         let modifiedFilter = ExtendedFiltersMeta.Meta(filterId: filterToModify.filterId,
                                                       name: "newName",
                                                       description: "newDescription",
-                                                      timeAdded: nil,
                                                       homePage: filterToModify.homePage,
-                                                      updateFrequency: filterToModify.expires,
                                                       displayNumber: 0,
                                                       group: ExtendedFiltersMeta.Group(groupId: adsGroupId, groupName: "name", displayNumber: 1),
                                                       filterDownloadPage: filterToModify.subscriptionUrl,
@@ -158,9 +144,7 @@ class FiltersMetaStorageTest: XCTestCase {
             let modifiedFilter = ExtendedFiltersMeta.Meta(filterId: filterToModify.filterId,
                                                           name: "newName",
                                                           description: "newDescription",
-                                                          timeAdded: nil,
                                                           homePage: filterToModify.homePage,
-                                                          updateFrequency: filterToModify.expires,
                                                           displayNumber: 0,
                                                           group: ExtendedFiltersMeta.Group(groupId: adsGroupId, groupName: "name", displayNumber: 1),
                                                           filterDownloadPage: filterToModify.subscriptionUrl,
@@ -196,9 +180,7 @@ class FiltersMetaStorageTest: XCTestCase {
         let modifiedFilter = ExtendedFiltersMeta.Meta(filterId: filterToModify.filterId,
                                                       name: "newName",
                                                       description: "newDescription",
-                                                      timeAdded: nil,
                                                       homePage: filterToModify.homePage,
-                                                      updateFrequency: filterToModify.expires,
                                                       displayNumber: 0,
                                                       group: ExtendedFiltersMeta.Group(groupId: adsGroupId, groupName: "name", displayNumber: 1),
                                                       filterDownloadPage: filterToModify.subscriptionUrl,
@@ -212,9 +194,7 @@ class FiltersMetaStorageTest: XCTestCase {
         let filterThatShouldNotChange = ExtendedFiltersMeta.Meta(filterId: freshFilter.filterId,
                                                                  name: "newName112",
                                                                  description: "newDescription323",
-                                                                 timeAdded: nil,
                                                                  homePage: freshFilter.homePage,
-                                                                 updateFrequency: freshFilter.expires,
                                                                  displayNumber: 210,
                                                                  group: ExtendedFiltersMeta.Group(groupId: adsGroupId, groupName: "name", displayNumber: 1),
                                                                  filterDownloadPage: freshFilter.subscriptionUrl,
@@ -289,9 +269,7 @@ class FiltersMetaStorageTest: XCTestCase {
         let customFilter = ExtendedFiltersMeta.Meta(filterId: customFilterId,
                                                     name: "Custom filter",
                                                     description: "Custom filter description",
-                                                    timeAdded: nil,
                                                     homePage: "some.home.page",
-                                                    updateFrequency: 1000,
                                                     displayNumber: 0,
                                                     group: ExtendedFiltersMeta.Group(groupId: groupId, groupName: "name", displayNumber: 1),
                                                     filterDownloadPage: "some.download.page",
@@ -326,9 +304,7 @@ class FiltersMetaStorageTest: XCTestCase {
         let customFilter = ExtendedFiltersMeta.Meta(filterId: customFilterId,
                                                     name: "Custom filter",
                                                     description: "Custom filter description",
-                                                    timeAdded: nil,
                                                     homePage: "some.home.page",
-                                                    updateFrequency: 1000,
                                                     displayNumber: 0,
                                                     group: ExtendedFiltersMeta.Group(groupId: customGroupId, groupName: "name", displayNumber: 1),
                                                     filterDownloadPage: "some.download.page",

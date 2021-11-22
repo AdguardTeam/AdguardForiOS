@@ -45,40 +45,6 @@ class ProductionDatabaseManagerTest: XCTestCase {
         XCTAssertNotNil(try! filtersDb.pluck(versionTable)?.get(versionColumn))
     }
 
-    func testUpdateDatabaseWithNewVersionSucceeded() {
-        XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
-        XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.adguardDbFileRootUrl.path))
-        XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbArchiveRootUrl.path))
-        XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.adguardDbFileWorkingUrl.path))
-        XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileWorkingUrl.path))
-
-        try! setUpOldVersionProductionDb()
-
-        let productionDbManager = try! ProductionDatabaseManager(dbContainerUrl: workingUrl)
-        XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
-        XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.adguardDbFileRootUrl.path))
-        XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbArchiveRootUrl.path))
-        XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.adguardDbFileWorkingUrl.path))
-        XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileWorkingUrl.path))
-
-        try! productionDbManager.updateDatabaseIfNeeded()
-
-        XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
-        XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.adguardDbFileRootUrl.path))
-        XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.defaultDbArchiveRootUrl.path))
-        XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.adguardDbFileWorkingUrl.path))
-        XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileWorkingUrl.path))
-
-        let versionTable = Table("version")
-        let versionColumn = Expression<String>("schema_version")
-        let filtersDb = try! Connection(TestsFileManager.adguardDbFileWorkingUrl.path)
-        let version = try! filtersDb.pluck(versionTable)?.get(versionColumn)
-        XCTAssertTrue(try! exists(column: "affinity", inTable: "filter_rules", forDB: filtersDb))
-        XCTAssertTrue(try! exists(column: "subscriptionUrl", inTable: "filters", forDB: filtersDb))
-        XCTAssertNotNil(version)
-        XCTAssertNotEqual(version, "0.100")
-    }
-
     func testDBExistsAfterInitialization() {
         XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
         XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.adguardDbFileRootUrl.path))
@@ -115,7 +81,6 @@ class ProductionDatabaseManagerTest: XCTestCase {
         XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.adguardDbFileWorkingUrl.path))
         XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileWorkingUrl.path))
 
-        try! setUpOldVersionProductionDb() // Setup old version to be sure DB is updated after reset
         let productionDbManager = try! ProductionDatabaseManager(dbContainerUrl: workingUrl)
 
         XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.defaultDbFileRootUrl.path))
@@ -139,7 +104,6 @@ class ProductionDatabaseManagerTest: XCTestCase {
         XCTAssertTrue(try! exists(column: "affinity", inTable: "filter_rules", forDB: filtersDb))
         XCTAssertTrue(try! exists(column: "subscriptionUrl", inTable: "filters", forDB: filtersDb))
         XCTAssertNotNil(version)
-        XCTAssertNotEqual(version, "0.100")
     }
 
     private func applySchemeToDefaultDb(db: Connection) throws {
@@ -149,25 +113,6 @@ class ProductionDatabaseManagerTest: XCTestCase {
         let latestSchemaUrl = rootDirectory.appendingPathComponent(schemaFileName)
         let schemaQuery = try String(contentsOf: latestSchemaUrl)
         try db.execute(schemaQuery)
-    }
-
-    private func setUpOldVersionProductionDb() throws {
-
-        try fileManager.createDirectory(at: workingUrl, withIntermediateDirectories: true, attributes: nil)
-
-        XCTAssertFalse(fileManager.fileExists(atPath: TestsFileManager.adguardDbFileWorkingUrl.path))
-        let pruductionDb = try Connection(TestsFileManager.adguardDbFileWorkingUrl.path)
-
-        XCTAssertTrue(fileManager.fileExists(atPath: TestsFileManager.adguardDbFileWorkingUrl.path))
-        try applySchemeToDefaultDb(db: pruductionDb)
-
-
-        let versionTable = Table("version")
-        let versionColumn = Expression<String>("schema_version")
-        let productionVersion = try pruductionDb.pluck(versionTable)?.get(versionColumn)
-
-        XCTAssertEqual(productionVersion, "0.100")
-        XCTAssertFalse(try exists(column: "affinity", inTable: "filter_rules", forDB: pruductionDb))
     }
 
     private func exists(column: String, inTable table: String, forDB db: Connection) throws -> Bool {

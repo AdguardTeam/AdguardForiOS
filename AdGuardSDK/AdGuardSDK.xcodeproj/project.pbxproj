@@ -284,19 +284,7 @@
 		7E9B1DF526F22B9E0003EB0E /* ACNCidrRange.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A3CF9826E7AF31006E90AD /* ACNCidrRange.m */; };
 		7E9B1DF926F2310A0003EB0E /* DnsProvidersManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9B1DF826F2310A0003EB0E /* DnsProvidersManagerMock.swift */; };
 		7E9B1DFB26F232120003EB0E /* DnsLibsRulesProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9B1DFA26F232120003EB0E /* DnsLibsRulesProviderMock.swift */; };
-		7EA5108B26C2B2CA00207781 /* update0.102.sql in Resources */ = {isa = PBXBuildFile; fileRef = 7E6E80CF26C2A05200925F96 /* update0.102.sql */; };
-		7EA5108C26C2B2CA00207781 /* update0.101.sql in Resources */ = {isa = PBXBuildFile; fileRef = 7E6E80CE26C2A05200925F96 /* update0.101.sql */; };
-		7EA5108D26C2B2CA00207781 /* update0.100.sql in Resources */ = {isa = PBXBuildFile; fileRef = 7E6E80CD26C2A05200925F96 /* update0.100.sql */; };
-		7EA5108E26C2B2CA00207781 /* schema0.101.sql in Resources */ = {isa = PBXBuildFile; fileRef = 7E6E80D026C2A05200925F96 /* schema0.101.sql */; };
-		7EA5108F26C2B2CA00207781 /* schema0.102.sql in Resources */ = {isa = PBXBuildFile; fileRef = 7E6E80D226C2A05200925F96 /* schema0.102.sql */; };
-		7EA5109026C2B2CA00207781 /* schema0.100.sql in Resources */ = {isa = PBXBuildFile; fileRef = 7E6E80D126C2A05200925F96 /* schema0.100.sql */; };
 		7EA5109126C2B2CA00207781 /* schema.sql in Resources */ = {isa = PBXBuildFile; fileRef = 7E6E80CC26C2A05200925F96 /* schema.sql */; };
-		7EA5109226C2B2CB00207781 /* update0.102.sql in Resources */ = {isa = PBXBuildFile; fileRef = 7E6E80CF26C2A05200925F96 /* update0.102.sql */; };
-		7EA5109326C2B2CB00207781 /* update0.101.sql in Resources */ = {isa = PBXBuildFile; fileRef = 7E6E80CE26C2A05200925F96 /* update0.101.sql */; };
-		7EA5109426C2B2CB00207781 /* update0.100.sql in Resources */ = {isa = PBXBuildFile; fileRef = 7E6E80CD26C2A05200925F96 /* update0.100.sql */; };
-		7EA5109526C2B2CB00207781 /* schema0.101.sql in Resources */ = {isa = PBXBuildFile; fileRef = 7E6E80D026C2A05200925F96 /* schema0.101.sql */; };
-		7EA5109626C2B2CB00207781 /* schema0.102.sql in Resources */ = {isa = PBXBuildFile; fileRef = 7E6E80D226C2A05200925F96 /* schema0.102.sql */; };
-		7EA5109726C2B2CB00207781 /* schema0.100.sql in Resources */ = {isa = PBXBuildFile; fileRef = 7E6E80D126C2A05200925F96 /* schema0.100.sql */; };
 		7EA5109826C2B2CB00207781 /* schema.sql in Resources */ = {isa = PBXBuildFile; fileRef = 7E6E80CC26C2A05200925F96 /* schema.sql */; };
 		7EAD34F226C2B397001AFB3A /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049EB9326B17C0A00B8088B /* CharacterSet+Utils.swift */; };
 		7EAD34F526C2B456001AFB3A /* ProductionDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E80E926C2A05200925F96 /* ProductionDatabaseManager.swift */; };
@@ -590,12 +578,6 @@
 		7E6E807726C2A04100925F96 /* OpaqueRuleConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpaqueRuleConverter.swift; sourceTree = "<group>"; };
 		7E6E807826C2A04100925F96 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		7E6E80CC26C2A05200925F96 /* schema.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = schema.sql; sourceTree = "<group>"; };
-		7E6E80CD26C2A05200925F96 /* update0.100.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = update0.100.sql; sourceTree = "<group>"; };
-		7E6E80CE26C2A05200925F96 /* update0.101.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = update0.101.sql; sourceTree = "<group>"; };
-		7E6E80CF26C2A05200925F96 /* update0.102.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = update0.102.sql; sourceTree = "<group>"; };
-		7E6E80D026C2A05200925F96 /* schema0.101.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = schema0.101.sql; sourceTree = "<group>"; };
-		7E6E80D126C2A05200925F96 /* schema0.100.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = schema0.100.sql; sourceTree = "<group>"; };
-		7E6E80D226C2A05200925F96 /* schema0.102.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = schema0.102.sql; sourceTree = "<group>"; };
 		7E6E80D526C2A05200925F96 /* FiltersMetadataParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersMetadataParser.swift; sourceTree = "<group>"; };
 		7E6E80D626C2A05200925F96 /* FiltersLocalizationsParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersLocalizationsParser.swift; sourceTree = "<group>"; };
 		7E6E80D726C2A05200925F96 /* RequestsFactory+Safari.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RequestsFactory+Safari.swift"; sourceTree = "<group>"; };
@@ -1163,12 +1145,6 @@
 			isa = PBXGroup;
 			children = (
 				7E6E80CC26C2A05200925F96 /* schema.sql */,
-				7E6E80CD26C2A05200925F96 /* update0.100.sql */,
-				7E6E80CE26C2A05200925F96 /* update0.101.sql */,
-				7E6E80CF26C2A05200925F96 /* update0.102.sql */,
-				7E6E80D026C2A05200925F96 /* schema0.101.sql */,
-				7E6E80D126C2A05200925F96 /* schema0.100.sql */,
-				7E6E80D226C2A05200925F96 /* schema0.102.sql */,
 			);
 			path = SQLScripts;
 			sourceTree = "<group>";
@@ -1908,22 +1884,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E6E805826C299DF00925F96 /* AdGuardSDNSFilterTest.txt in Resources */,
-				7EA5109426C2B2CB00207781 /* update0.100.sql in Resources */,
 				7E6E805926C299DF00925F96 /* AdGuardBaseFilterTest.txt in Resources */,
 				7E6E81DA26C2A05B00925F96 /* providers.json in Resources */,
 				7E6E805026C299DE00925F96 /* filters_test.json in Resources */,
 				7E6E81DC26C2A05B00925F96 /* DnsProvidersAssets.xcassets in Resources */,
-				7EA5109226C2B2CB00207781 /* update0.102.sql in Resources */,
 				B26B925A27198FC800F1D482 /* public_suffix_list.dat in Resources */,
 				7EA5109826C2B2CB00207781 /* schema.sql in Resources */,
-				7EA5109626C2B2CB00207781 /* schema0.102.sql in Resources */,
 				7E6E805B26C299DF00925F96 /* EasyListTest.txt in Resources */,
-				7EA5109326C2B2CB00207781 /* update0.101.sql in Resources */,
 				7E667A6826E29D970013B1D5 /* default.db.zip in Resources */,
 				7E667A7026E3896D0013B1D5 /* adguard.json in Resources */,
-				7EA5109526C2B2CB00207781 /* schema0.101.sql in Resources */,
 				7E6E805A26C299DF00925F96 /* AdblockIcelandicFilterTest.txt in Resources */,
-				7EA5109726C2B2CB00207781 /* schema0.100.sql in Resources */,
 				7E667A7226E3896D0013B1D5 /* whotracksme.json in Resources */,
 				7E6E804326C299DE00925F96 /* filters_i18n_test.json in Resources */,
 				7E6E81DE26C2A05B00925F96 /* providers_i18n.json in Resources */,
@@ -1934,13 +1904,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EA5108C26C2B2CA00207781 /* update0.101.sql in Resources */,
 				7EA5109126C2B2CA00207781 /* schema.sql in Resources */,
-				7EA5108B26C2B2CA00207781 /* update0.102.sql in Resources */,
-				7EA5108E26C2B2CA00207781 /* schema0.101.sql in Resources */,
-				7EA5108F26C2B2CA00207781 /* schema0.102.sql in Resources */,
-				7EA5108D26C2B2CA00207781 /* update0.100.sql in Resources */,
-				7EA5109026C2B2CA00207781 /* schema0.100.sql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

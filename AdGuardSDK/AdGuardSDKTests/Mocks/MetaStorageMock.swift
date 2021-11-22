@@ -369,14 +369,10 @@ class MetaStorageMock: MetaStorageProtocol {
                             isEnabled: isEnabled,
                             version: filter.version,
                             lastUpdateTime: filter.lastUpdateTime,
-                            lastCheckTime: filter.lastCheckTime,
-                            editable: filter.editable,
                             displayNumber: filter.displayNumber,
                             name: filter.name,
                             description: filter.description,
                             homePage: filter.homePage,
-                            removable: filter.removable,
-                            expires: filter.expires,
                             subscriptionUrl: filter.subscriptionUrl)
     }
 
@@ -400,14 +396,10 @@ class MetaStorageMock: MetaStorageProtocol {
                                     isEnabled: false,
                                     version: "1.1.1",
                                     lastUpdateTime: Date(),
-                                    lastCheckTime: Date(),
-                                    editable: false,
                                     displayNumber: filterId,
                                     name: "filter_\(filterId)",
                                     description: "description_\(filterId)",
                                     homePage: "some.home.page_\(filterId)",
-                                    removable: false,
-                                    expires: 100,
                                     subscriptionUrl: "some.download.page_\(filterId)")
             }
         }

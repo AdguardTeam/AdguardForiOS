@@ -23,7 +23,6 @@ public protocol FilterMetaProtocol {
     var description: String? { get }
     var version: String? { get }
     var lastUpdateDate: Date? { get }
-    var updateFrequency: Int? { get }
     var homePage: String? { get }
     var filterDownloadPage: String? { get }
     var rulesCount: Int { get }

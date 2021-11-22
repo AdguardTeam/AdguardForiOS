@@ -408,7 +408,6 @@ final class FiltersService: FiltersServiceProtocol {
                                                filterId: filter.filterId,
                                                version: filter.version,
                                                lastUpdateDate: filter.lastUpdateDate,
-                                               updateFrequency: filter.updateFrequency,
                                                group: filter.group,
                                                displayNumber: filter.displayNumber,
                                                languages: filter.languages,

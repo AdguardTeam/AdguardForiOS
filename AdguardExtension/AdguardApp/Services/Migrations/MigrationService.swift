@@ -240,7 +240,7 @@ final class MigrationService: MigrationServiceProtocol {
             networkSettingsMigration.startMigration()
 
             do {
-                let dnsMigration = DnsMigration4_3(resources: resources, dnsProvidersManager: dnsProvidersManager)
+                let dnsMigration = try DnsMigration4_3(resources: resources, dnsProvidersManager: dnsProvidersManager)
                 let safariMigration = try SafariMigration4_3(resources: resources, safariProtection: safariProtection)
                 let sdkMigrationHelper = SDKMigrationServiceHelper(
                     safariMigration: safariMigration,

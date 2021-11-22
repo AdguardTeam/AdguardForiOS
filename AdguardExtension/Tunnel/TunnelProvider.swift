@@ -136,7 +136,7 @@ class TunnelProvider: PacketTunnelProvider {
         if migrationVersionProvider.needsMigrateTo4_3() {
             do {
                 let dnsProvidersManager = try DnsProvidersManager(configuration: configuration, userDefaults: resources.sharedDefaults(), networkUtils: networkUtils)
-                let migration = DnsMigration4_3(resources: resources, dnsProvidersManager: dnsProvidersManager)
+                let migration = try DnsMigration4_3(resources: resources, dnsProvidersManager: dnsProvidersManager)
                 migration.migrate()
             }
             catch {
