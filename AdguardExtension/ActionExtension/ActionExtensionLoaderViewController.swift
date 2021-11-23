@@ -115,7 +115,7 @@ final class ActionExtensionLoaderViewController: UIViewController {
         let safariProtection = ServicesInitializer.shared.safariProtection
         let migrationVersionProvider = ServicesInitializer.shared.migrationVersionProvider
 
-        if migrationVersionProvider.needsMigrateTo4_3() {
+        if migrationVersionProvider.isMigrationFrom4_1To4_3Needed {
 
             do {
                 let migration = try SafariMigration4_3(resources: resources, safariProtection: safariProtection)

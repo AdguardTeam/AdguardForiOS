@@ -170,7 +170,7 @@ class SettingsController: UITableViewController {
 
         let yesAction = UIAlertAction(title: String.localizedString("common_action_yes"), style: .destructive) { [weak self] _ in
             alert.dismiss(animated: true, completion: nil)
-            self?.settingsReset.resetAllSettings()
+            self?.settingsReset.resetAllSettings(synchroniously: false, fromUI: true, resetLicense: true)
         }
 
         alert.addAction(yesAction)

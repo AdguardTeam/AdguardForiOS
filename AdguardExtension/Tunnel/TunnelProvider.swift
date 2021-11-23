@@ -133,7 +133,7 @@ class TunnelProvider: PacketTunnelProvider {
     private func migrateIfNeeded(configuration: DnsConfigurationProtocol, networkUtils: NetworkUtilsProtocol) {
 
         let migrationVersionProvider = MigrationServiceVersionProvider(resources: resources)
-        if migrationVersionProvider.needsMigrateTo4_3() {
+        if migrationVersionProvider.isMigrationFrom4_1To4_3Needed {
             do {
                 let dnsProvidersManager = try DnsProvidersManager(configuration: configuration, userDefaults: resources.sharedDefaults(), networkUtils: networkUtils)
                 let migration = try DnsMigration4_3(resources: resources, dnsProvidersManager: dnsProvidersManager)

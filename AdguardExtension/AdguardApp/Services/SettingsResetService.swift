@@ -22,13 +22,20 @@ import DnsAdGuardSDK
 /// Protocol for reseting service
 protocol SettingsResetServiceProtocol: AnyObject {
     /// Reset safari protection, DNS protection, all in app statistics, providers, purchase info, resources, vpn manager. Post notification that settings were reseted
-    func resetAllSettings()
+    /// - Parameter synchroniously: if true than method is executed synchroniously
+    /// - Parameter fromUI: if true than a loader will be displayed while settings are being reset
+    /// - Parameter resetLicense: if true then current license will be removed
+    func resetAllSettings(synchroniously: Bool, fromUI: Bool, resetLicense: Bool)
+
     /// Reset all statistics info like chart statistics, activity statistics and DNS log statistics. Post notification that statistics were reseted
     func resetAllStatistics()
+
     /// Reset activity statistics. Return true if successfully reseted
     func resetActivityStatistics() -> Bool
+
     /// Reset chart statistics.  Return true if successfully reseted
     func resetChartStatistics() -> Bool
+
     /// Reset DNS log statistics.  Return true if successfully reseted
     func resetDnsLogStatistics() -> Bool
 }
@@ -80,13 +87,21 @@ final class SettingsResetService: SettingsResetServiceProtocol {
 
     // MARK: - Public methods
 
-    func resetAllSettings() {
-        DispatchQueue.asyncSafeMain {
-            AppDelegate.shared.presentLoadingAlert()
+    // TODO: - Method looks ugly. We should refactor it
+    func resetAllSettings(synchroniously: Bool, fromUI: Bool, resetLicense: Bool) {
+        if fromUI {
+            DispatchQueue.asyncSafeMain {
+                AppDelegate.shared.presentLoadingAlert()
+            }
         }
-
+        var syncGroup: DispatchGroup?
+        if synchroniously {
+            syncGroup = DispatchGroup()
+            syncGroup?.enter()
+        }
         workingQueue.async { [weak self] in
             guard let self = self else { return }
+
             DDLogInfo("(SettingsReseterService) - resetAllSettings; Start reset")
 
             // Reset Shared Defaults
@@ -128,22 +143,31 @@ final class SettingsResetService: SettingsResetServiceProtocol {
 
             // Reset purchase service
 
-            group.enter()
-            self.purchaseService.reset {
-                group.leave()
+            if resetLicense {
+                group.enter()
+                self.purchaseService.reset {
+                    group.leave()
+                }
+
+                group.wait()
             }
 
-            group.wait()
-
-            AppDelegate.shared.setAppInterfaceStyle()
+            DispatchQueue.main.async {
+                AppDelegate.shared.setAppInterfaceStyle()
+            }
             // Notify that settings were reset
             NotificationCenter.default.post(name: .resetSettings, object: self)
 
-            DispatchQueue.main.async {
-                AppDelegate.shared.setMainPageAsCurrentAndPopToRootControllersEverywhere()
-                DDLogInfo("(SettingsReseterService) - resetAllSettings; Reseting is over")
+            syncGroup?.leave()
+
+            if fromUI {
+                DispatchQueue.main.async {
+                    AppDelegate.shared.setMainPageAsCurrentAndPopToRootControllersEverywhere()
+                    DDLogInfo("(SettingsReseterService) - resetAllSettings; Reseting is over")
+                }
             }
         }
+        syncGroup?.wait()
     }
 
     // MARK: - Statistics reset

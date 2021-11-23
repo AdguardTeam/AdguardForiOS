@@ -161,18 +161,6 @@ final class StartupService : NSObject {
         let dnsLogRecordsHelper = DnsLogRecordHelper(dnsProtection: dnsProtection, dnsTrackers: dnsTrackers, domainConverter: DomainConverter())
         locator.addService(service: dnsLogRecordsHelper)
 
-        let migrationService: MigrationServiceProtocol = MigrationService(
-            resources: sharedResources,
-            networking: networkService,
-            configurationService: configuration,
-            productInfo: productInfo,
-            safariProtection: safariProtection,
-            dnsProvidersManager: dnsProvidersManager,
-            networkSettings: networkSettingsService,
-            dnsConfigAssistant: dnsConfigAssistant
-        )
-        locator.addService(service: migrationService)
-
         let settingsReset: SettingsResetServiceProtocol = SettingsResetService(
             vpnManager: vpnManager,
             resources: sharedResources,
@@ -186,5 +174,18 @@ final class StartupService : NSObject {
             dnsLogStatistics: dnsLogStatistics
         )
         locator.addService(service: settingsReset)
+
+        let migrationService: MigrationServiceProtocol = MigrationService(
+            resources: sharedResources,
+            networking: networkService,
+            configurationService: configuration,
+            productInfo: productInfo,
+            safariProtection: safariProtection,
+            dnsProvidersManager: dnsProvidersManager,
+            networkSettings: networkSettingsService,
+            dnsConfigAssistant: dnsConfigAssistant,
+            settingsResetor: settingsReset
+        )
+        locator.addService(service: migrationService)
     }
 }
