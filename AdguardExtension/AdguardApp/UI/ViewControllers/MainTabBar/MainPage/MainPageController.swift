@@ -458,7 +458,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     private func showChartDateTypeController(){
         guard let controller = storyboard?.instantiateViewController(withIdentifier: "ChartDateTypeController") as? ChartDateTypeController else { return }
         controller.delegate = self
-
+        controller.periodType = resources.chartDateType
         present(controller, animated: true, completion: nil)
     }
 

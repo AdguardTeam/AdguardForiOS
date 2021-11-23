@@ -61,7 +61,6 @@ final class ActivityViewController: UITableViewController {
 
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
-    private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
     private let dnsTrackers: DnsTrackersProviderProtocol = ServiceLocator.shared.getService()!
     private let domainParserService: DomainParserServiceProtocol = ServiceLocator.shared.getService()!
     private let settingsReset: SettingsResetServiceProtocol = ServiceLocator.shared.getService()!
@@ -102,12 +101,14 @@ final class ActivityViewController: UITableViewController {
         guard let companyStatistics = try? CompaniesStatistics(activityStatistics: activityStatistics, dnsTrackersProvider: dnsTrackers) else {
             return nil
         }
+        let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
 
         activityModel = ActivityStatisticsModel(
             dnsTrackers: dnsTrackers,
             domainParserService: domainParserService,
             activityStatistics: activityStatistics,
-            companiesStatistics: companyStatistics
+            companiesStatistics: companyStatistics,
+            resources: resources
         )
         super.init(coder: coder)
     }
@@ -120,10 +121,10 @@ final class ActivityViewController: UITableViewController {
         activityImage.tintColor = UIColor.AdGuardColor.lightGreen1
         updateTheme()
         setupTableView()
-        statisticsPeriodChanged(statisticsPeriod: resources.activityStatisticsType)
+        statisticsPeriodChanged(statisticsPeriod: activityModel.period)
         addObservers()
         filterButton.isHidden = !configuration.advancedMode
-        requestsModel?.obtainRecords(for: resources.activityStatisticsType, domains: nil)
+        requestsModel?.obtainRecords(for: activityModel.period, domains: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -163,7 +164,7 @@ final class ActivityViewController: UITableViewController {
             controller.delegate = self
         } else if segue.identifier == showMostActiveCompaniesSegueId, let controller = segue.destination as? MostActiveCompaniesController {
             controller.mostRequestedCompanies = mostRequestedCompanies
-            controller.chartDateType = resources.activityStatisticsType
+            controller.chartDateType = activityModel.period
             controller.activityVC = self
         }
     }
@@ -343,21 +344,21 @@ final class ActivityViewController: UITableViewController {
         let allRequestsAction = UIAlertAction(title: String.localizedString("all_requests_alert_action"), style: .default) {[weak self] _ in
             guard let self = self else { return }
             self.requestsModel?.displayedStatisticsType = .allRequests
-            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
+            self.requestsModel?.obtainRecords(for: self.activityModel.period)
             alert.dismiss(animated: true, completion: nil)
         }
 
         let blockedOnlyAction = UIAlertAction(title: String.localizedString("blocked_only_alert_action"), style: .default) {[weak self] _ in
             guard let self = self else { return }
             self.requestsModel?.displayedStatisticsType = .blockedRequests
-            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
+            self.requestsModel?.obtainRecords(for: self.activityModel.period)
             alert.dismiss(animated: true, completion: nil)
         }
 
         let allowedOnlyAction = UIAlertAction(title: String.localizedString("allowed_only_alert_action"), style: .default) {[weak self] _ in
             guard let self = self else { return }
             self.requestsModel?.displayedStatisticsType = .allowedRequests
-            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
+            self.requestsModel?.obtainRecords(for: self.activityModel.period)
             alert.dismiss(animated: true, completion: nil)
         }
 
@@ -380,6 +381,7 @@ final class ActivityViewController: UITableViewController {
         let storyboard = UIStoryboard(name: "MainPage", bundle: nil)
         guard let controller = storyboard.instantiateViewController(withIdentifier: "ChartDateTypeController") as? ChartDateTypeController else { return }
         controller.delegate = self
+        controller.periodType = activityModel.period
         present(controller, animated: true, completion: nil)
     }
 
@@ -413,12 +415,12 @@ final class ActivityViewController: UITableViewController {
 
         resetStatisticsToken = NotificationCenter.default.observe(name: NSNotification.resetStatistics, object: nil, queue: .main) { [weak self] _ in
             guard let self = self else { return }
-            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
+            self.requestsModel?.obtainRecords(for: self.activityModel.period)
         }
 
         resetSettingsToken = NotificationCenter.default.observe(name: NSNotification.resetSettings, object: nil, queue: .main) { [weak self] _ in
             guard let self = self else { return }
-            self.requestsModel?.obtainRecords(for: self.resources.activityStatisticsType)
+            self.requestsModel?.obtainRecords(for: self.activityModel.period)
         }
 
         requestsModel?.recordsObserver = { [weak self] (records) in
@@ -480,9 +482,9 @@ final class ActivityViewController: UITableViewController {
     }
 
     @objc private final func updateTableView(sender: UIRefreshControl) {
-        requestsModel?.obtainRecords(for: resources.activityStatisticsType, domains: nil)
-        statisticsPeriodChanged(statisticsPeriod: resources.activityStatisticsType)
-        activityModel.period = resources.activityStatisticsType
+        requestsModel?.obtainRecords(for: activityModel.period, domains: nil)
+        statisticsPeriodChanged(statisticsPeriod: activityModel.period)
+        activityModel.period = activityModel.period
     }
 }
 
