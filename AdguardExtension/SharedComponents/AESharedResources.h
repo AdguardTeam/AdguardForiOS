@@ -151,6 +151,7 @@ extern NSString*  _Nonnull AEDefaultsDnsWhitelistEnabled;
  User defaults key, which defines dns  blacklist is enabled */
 extern NSString*  _Nonnull AEDefaultsDnsBlacklistEnabled;
 
+// TODO: - These keys are obsolete and should be removed later
 /**
  User defaults keys, which contains number of rules for each content blocker*/
 extern NSString*  _Nonnull AEDefaultsGeneralContentBlockerRulesCount;
