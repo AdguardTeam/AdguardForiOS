@@ -192,7 +192,7 @@ extension AppDelegate {
             return false
         }
 
-        guard let navController = getNavigationController(for: .settingTab) else {
+        guard let navController = getNavigationController(for: .protectionTab) else {
             DDLogError("Navigation controller is nil")
             return false
         }
@@ -201,8 +201,8 @@ extension AppDelegate {
             window?.rootViewController = launchScreen
         }
 
-        guard let mainMenuController = navController.viewControllers.first as? MainMenuController else {
-            DDLogError("Navigation controller first VC is not MainMenuController")
+        guard let complexProtectionController = navController.viewControllers.first as? ComplexProtectionController else {
+            DDLogError("Navigation controller first VC is not ComplexProtectionController")
             return false
         }
 
@@ -218,7 +218,7 @@ extension AppDelegate {
         }
         dnsProvidersController.openUrl = url
 
-        navController.viewControllers = [mainMenuController, dnsSettingsController, dnsProvidersController]
+        navController.viewControllers = [complexProtectionController, dnsSettingsController, dnsProvidersController]
         dnsProvidersController.loadViewIfNeeded()
         tabBar.selectedViewController = navController
         window?.rootViewController = tabBar
@@ -238,7 +238,7 @@ extension AppDelegate {
             return false
         }
 
-        guard let navController = getNavigationController(for: .settingTab) else {
+        guard let navController = getNavigationController(for: .protectionTab) else {
             DDLogError("Navigation controller is nil")
             return false
         }
@@ -247,8 +247,8 @@ extension AppDelegate {
             window?.rootViewController = launchScreen
         }
 
-        guard let mainMenuController = navController.viewControllers.first as? MainMenuController else {
-            DDLogError("Navigation controller first VC is not MainMenuController")
+        guard let complexProtectionController = navController.viewControllers.first as? ComplexProtectionController else {
+            DDLogError("Navigation controller first VC is not ComplexProtectionController")
             return false
         }
 
@@ -275,7 +275,7 @@ extension AppDelegate {
 
         window?.rootViewController = tabBar
         tabBar.selectedViewController = navController
-        navController.viewControllers = [mainMenuController, safariProtectionController, safariGroupTableController, safariGroupFiltersTableController]
+        navController.viewControllers = [complexProtectionController, safariProtectionController, safariGroupTableController, safariGroupFiltersTableController]
 
         return true
     }
