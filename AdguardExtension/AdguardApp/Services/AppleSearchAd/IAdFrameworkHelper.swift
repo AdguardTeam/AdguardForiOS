@@ -41,7 +41,7 @@ final class IAdFrameworkHelper: IAdFrameworkHelperProtocol {
             case .success(let details):
                 self?.processAttributionDetails(details, completionHandler: completionHandler)
             case .failure(let error):
-                DDLogError("(IAdFrameworkHelper) - fetchAttributionRecordsWithIAd; Search Ads error: \(error)")
+                DDLogError("(IAdFrameworkHelper) - fetchAttributionRecords; Search Ads error: \(error)")
                 completionHandler(.failure(error))
                 return
             }

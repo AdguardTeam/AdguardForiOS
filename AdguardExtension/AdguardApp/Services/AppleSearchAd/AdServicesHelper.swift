@@ -47,25 +47,25 @@ final class AdServicesHelper: AdServicesHelperProtocol {
                 switch result {
                 case .success(let json):
                     if json.isEmpty {
-                        DDLogError("(AdServicesHelper) - fetchAttributionRecordsWithAdServices; Search Ads data is missing")
+                        DDLogError("(AdServicesHelper) - fetchAttributionRecords; Search Ads data is missing")
                         completionHandler(.failure(AppleSearchAdsService.AdsError.missingAttributionData))
                         return
                     }
 
                     if json["campaignId"] == AppleSearchAdsService.AdsError.campaignMockId {
-                        DDLogError("(AdServicesHelper) - fetchAttributionRecordsWithAdServices; Received mock data")
+                        DDLogError("(AdServicesHelper) - fetchAttributionRecords; Received mock data")
                         completionHandler(.failure(AppleSearchAdsService.AdsError.mockData))
                         return
                     }
 
                     completionHandler(.success(json))
                 case .failure(let error):
-                    DDLogError("(AdServicesHelper) - fetchAttributionRecordsWithAdServices; Error")
+                    DDLogError("(AdServicesHelper) - fetchAttributionRecords; On http request error: \(error)")
                     completionHandler(.failure(error))
                 }
             }
         } catch {
-            DDLogError("(AdServicesHelper) - fetchAttributionRecordsWithAdServices; Attribution token error occurred: \(error)")
+            DDLogError("(AdServicesHelper) - fetchAttributionRecords; Attribution token error occurred: \(error)")
             completionHandler(.failure(error))
         }
     }
