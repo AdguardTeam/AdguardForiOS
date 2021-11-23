@@ -68,7 +68,7 @@ extension AppDelegate {
             return false
         }
 
-        guard let navController = getNavigationController(for: .settingTab) else {
+        guard let navController = getNavigationController(for: .protectionTab) else {
             DDLogError("Navigation controller is nil")
             return false
         }
@@ -77,8 +77,8 @@ extension AppDelegate {
             window?.rootViewController = launchScreen
         }
 
-        guard let mainMenuController = navController.viewControllers.first as? MainMenuController else {
-            DDLogError("Navigation controller first VC is not MainMenuController")
+        guard let complexProtectionController = navController.viewControllers.first as? ComplexProtectionController else {
+            DDLogError("Navigation controller first VC is not ComplexProtectionController")
             return false
         }
 
@@ -88,7 +88,7 @@ extension AppDelegate {
             return false
         }
         dnsSettingsController.stateFromWidget = enabled
-        navController.viewControllers = [mainMenuController, dnsSettingsController]
+        navController.viewControllers = [complexProtectionController, dnsSettingsController]
 
         dnsSettingsController.loadViewIfNeeded()
         tabBar.selectedViewController = navController
