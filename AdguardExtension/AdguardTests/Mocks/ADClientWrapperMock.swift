@@ -54,12 +54,11 @@ class ADClientWrapperMock: AdClientWrapperProtocol {
 
     var invokedRequestAttributionDetails = false
     var invokedRequestAttributionDetailsCount = 0
-    var stubbedRequestAttributionDetailsCompletionHanderResult: ([String: NSObject]?, Error?)?
+    var stubbedRequestAttributionDetailsCompletionHanderResult: Result<[String: NSObject], Error> = .success([:])
 
-    func requestAttributionDetails(completionHander: @escaping ([String: NSObject]?, Error?) -> Void) {
+    func requestAttributionDetails(completionHander: @escaping (Result<[String: NSObject], Error>) -> Void) {
         invokedRequestAttributionDetails = true
         invokedRequestAttributionDetailsCount += 1
-        completionHander(stubbedRequestAttributionDetailsCompletionHanderResult?.0,
-                         stubbedRequestAttributionDetailsCompletionHanderResult?.1)
+        completionHander(stubbedRequestAttributionDetailsCompletionHanderResult)
     }
 }

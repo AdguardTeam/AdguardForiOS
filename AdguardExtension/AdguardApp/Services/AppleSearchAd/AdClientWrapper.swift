@@ -22,12 +22,24 @@ import iAd
 
 protocol AdClientWrapperProtocol {
     /// Requests attribution data
-    func requestAttributionDetails(completionHander: @escaping ([String: NSObject]?, Error?) -> Void)
+    func requestAttributionDetails(completionHander: @escaping (Result<[String: NSObject], Error>) -> Void)
 }
 
 /// This object is a wrapper for supporting unit tests
 final class AdClientWrapper: AdClientWrapperProtocol {
-    func requestAttributionDetails(completionHander: @escaping ([String: NSObject]?, Error?) -> Void) {
-        ADClient.shared().requestAttributionDetails(completionHander)
+    func requestAttributionDetails(completionHander: @escaping (Result<[String: NSObject], Error>) -> Void) {
+        ADClient.shared().requestAttributionDetails { records, error  in
+            if let error = error {
+                completionHander(.failure(error))
+                return
+            }
+
+            if let records = records {
+                completionHander(.success(records))
+                return
+            }
+
+            completionHander(.failure(AppleSearchAdsService.AdsError.missingAttributionData))
+        }
     }
 }

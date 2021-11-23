@@ -36,40 +36,40 @@ final class IAdFrameworkHelper: IAdFrameworkHelperProtocol {
     // MARK: - Public methods
 
     func fetchAttributionRecords(completionHandler: @escaping (Result<[String: String], Error>) -> Void) {
-        adClientWrapper.requestAttributionDetails { attributionDetails, error in
-            if let error = error {
+        adClientWrapper.requestAttributionDetails { [weak self] result in
+            switch result {
+            case .success(let details):
+                self?.processAttributionDetails(details, completionHandler: completionHandler)
+            case .failure(let error):
                 DDLogError("(IAdFrameworkHelper) - fetchAttributionRecordsWithIAd; Search Ads error: \(error)")
                 completionHandler(.failure(error))
                 return
             }
-
-            guard let attributionDetails = attributionDetails else {
-                DDLogError("(IAdFrameworkHelper) - fetchAttributionRecordsWithIAd; Search Ads error:")
-                completionHandler(.failure(AppleSearchAdsService.AdsError.missingAttributionData))
-                return
-            }
-
-            var json = [String: String]()
-            for (version, adDictionary) in attributionDetails {
-                DDLogInfo("(IAdFrameworkHelper) - fetchAttributionRecordsWithIAd; Search Ads version: \(version)")
-                if let attributionInfo = adDictionary as? [String: String] {
-                    json = attributionInfo
-                }
-            }
-
-            if json.isEmpty {
-                DDLogError("(IAdFrameworkHelper) - fetchAttributionRecordsWithIAd; Search Ads data is missing")
-                completionHandler(.failure(AppleSearchAdsService.AdsError.missingAttributionData))
-                return
-            }
-
-            if json["iad-campaign-id"] == AppleSearchAdsService.AdsError.campaignMockId {
-                DDLogError("(IAdFrameworkHelper) - fetchAttributionRecordsWithIAd; Received mock data")
-                completionHandler(.failure(AppleSearchAdsService.AdsError.mockData))
-                return
-            }
-
-            completionHandler(.success(json))
         }
+    }
+
+    private func processAttributionDetails(_ attributionDetails: [String: NSObject], completionHandler: @escaping (Result<[String: String], Error>) -> Void) {
+
+        var json = [String: String]()
+        for (version, adDictionary) in attributionDetails {
+            DDLogInfo("(IAdFrameworkHelper) - processAttributionDetails; Search Ads version: \(version)")
+            if let attributionInfo = adDictionary as? [String: String] {
+                json = attributionInfo
+            }
+        }
+
+        if json.isEmpty {
+            DDLogError("(IAdFrameworkHelper) - processAttributionDetails; Search Ads data is missing")
+            completionHandler(.failure(AppleSearchAdsService.AdsError.missingAttributionData))
+            return
+        }
+
+        if json["iad-campaign-id"] == AppleSearchAdsService.AdsError.campaignMockId {
+            DDLogError("(IAdFrameworkHelper) - processAttributionDetails; Received mock data")
+            completionHandler(.failure(AppleSearchAdsService.AdsError.mockData))
+            return
+        }
+
+        completionHandler(.success(json))
     }
 }

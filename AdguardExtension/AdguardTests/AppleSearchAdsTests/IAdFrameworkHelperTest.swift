@@ -31,7 +31,7 @@ class IAdFrameworkHelperTest: XCTestCase {
     }
 
     func testFetchAttributionRecordsWithSuccess() {
-        adClientWrapper.stubbedRequestAttributionDetailsCompletionHanderResult = (adClientWrapper.adClientAttributionRecords, nil)
+        adClientWrapper.stubbedRequestAttributionDetailsCompletionHanderResult = .success(adClientWrapper.adClientAttributionRecords)
 
         helper.fetchAttributionRecords { records in
             switch records {
@@ -46,7 +46,7 @@ class IAdFrameworkHelperTest: XCTestCase {
     }
 
     func testFetchAttributionRecordsWithMockData() {
-        adClientWrapper.stubbedRequestAttributionDetailsCompletionHanderResult = (adClientWrapper.adClientAttributionRecordsWithMockCompaignId, nil)
+        adClientWrapper.stubbedRequestAttributionDetailsCompletionHanderResult = .success(adClientWrapper.adClientAttributionRecordsWithMockCompaignId)
 
         helper.fetchAttributionRecords { records in
             switch records {
@@ -61,22 +61,7 @@ class IAdFrameworkHelperTest: XCTestCase {
     }
 
     func testFetchAttributionRecordsWithEmptyData() {
-        adClientWrapper.stubbedRequestAttributionDetailsCompletionHanderResult = ([:], nil)
-
-        helper.fetchAttributionRecords { records in
-            switch records {
-            case .success(_): XCTFail()
-            case .failure(let error):
-                XCTAssertEqual(error as! AppleSearchAdsService.AdsError,
-                               AppleSearchAdsService.AdsError.missingAttributionData)
-            }
-        }
-
-        XCTAssertEqual(adClientWrapper.invokedRequestAttributionDetailsCount, 1)
-    }
-
-    func testFetchAttributionRecordsWithNilData() {
-        adClientWrapper.stubbedRequestAttributionDetailsCompletionHanderResult = (nil, nil)
+        adClientWrapper.stubbedRequestAttributionDetailsCompletionHanderResult = .success([:])
 
         helper.fetchAttributionRecords { records in
             switch records {
@@ -91,7 +76,7 @@ class IAdFrameworkHelperTest: XCTestCase {
     }
 
     func testFetchAttributionRecordsWithError() {
-        adClientWrapper.stubbedRequestAttributionDetailsCompletionHanderResult = (nil, testError)
+        adClientWrapper.stubbedRequestAttributionDetailsCompletionHanderResult = .failure(testError)
 
         helper.fetchAttributionRecords { records in
             switch records {
