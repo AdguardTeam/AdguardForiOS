@@ -464,9 +464,6 @@ final class ActivityViewController: UITableViewController {
     private func removeRuleFromUserFilter(record: DnsLogRecord) {
         do {
             try requestsModel?.removeDomainFromUserFilter(record.event.domain)
-            if let swipedIndexPath = swipedIndexPath {
-
-            }
         }
         catch {
             self.showUnknownErrorAlert()
