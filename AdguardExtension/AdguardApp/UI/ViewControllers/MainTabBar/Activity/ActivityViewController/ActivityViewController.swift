@@ -464,6 +464,9 @@ final class ActivityViewController: UITableViewController {
     private func removeRuleFromUserFilter(record: DnsLogRecord) {
         do {
             try requestsModel?.removeDomainFromUserFilter(record.event.domain)
+            if let swipedIndexPath = swipedIndexPath {
+
+            }
         }
         catch {
             self.showUnknownErrorAlert()
@@ -597,6 +600,14 @@ extension ActivityViewController: UIGestureRecognizerDelegate {
 }
 
 extension ActivityViewController: AddDomainToListDelegate {
+    func addEditedBlocklistRule(_ blocklistRule: String) {
+        do {
+            try requestsModel?.addEditedBlocklistRule(blocklistRule)
+        }
+        catch {
+            showUnknownErrorAlert()
+        }
+    }
 
     func add(domain: String, by type: DnsLogButtonType) {
         do {

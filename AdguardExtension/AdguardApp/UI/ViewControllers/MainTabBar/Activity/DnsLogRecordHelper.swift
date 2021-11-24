@@ -19,34 +19,50 @@
 import SharedAdGuardSDK
 import DnsAdGuardSDK
 
-/** this class is helper for DnsLogRecord  */
+/// This class is helper for DnsLogRecord
 final class DnsLogRecordHelper {
 
     private let dnsProtection: DnsProtectionProtocol
     private let dnsTrackers: DnsTrackersProviderProtocol
     private let domainConverter: DomainConverterProtocol
+    private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol
 
-    init(dnsProtection: DnsProtectionProtocol, dnsTrackers: DnsTrackersProviderProtocol, domainConverter: DomainConverterProtocol) {
+    init(
+        dnsProtection: DnsProtectionProtocol,
+        dnsTrackers: DnsTrackersProviderProtocol,
+        domainConverter: DomainConverterProtocol,
+        dnsConfigAssistant: DnsConfigManagerAssistantProtocol
+    ) {
         self.dnsProtection = dnsProtection
         self.dnsTrackers = dnsTrackers
         self.domainConverter = domainConverter
+        self.dnsConfigAssistant = dnsConfigAssistant
     }
 
     func addDomainToAllowlist(_ domain: String) throws {
         try dnsProtection.add(rule: UserRule(ruleText: domain), override: true, for: .allowlist)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
     }
 
     func addDomainToUserRules(_ domain: String) throws {
         let rule = domainConverter.userFilterBlockRuleFromDomain(domain)
         try dnsProtection.add(rule: UserRule(ruleText: rule), override: true, for: .blocklist)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
+    }
+
+    func addEditedBlocklistRule(_ blocklistRule: String) throws {
+        try dnsProtection.add(rule: UserRule(ruleText: blocklistRule), override: true, for: .blocklist)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
     }
 
     func removeDomainFromAllowlist(_ domain: String) throws {
         try dnsProtection.removeDomainFromAllowlist(domain)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
     }
 
     func removeDomainFromUserRules(_ domain: String) throws {
         try dnsProtection.removeDomainFromUserFilter(domain)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
     }
 
     func getUserFilterStatusForDomain(_ domain: String) -> UserFilterStatus {

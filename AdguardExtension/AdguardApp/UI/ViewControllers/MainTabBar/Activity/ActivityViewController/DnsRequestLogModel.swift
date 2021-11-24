@@ -244,6 +244,7 @@ final class DnsRequestLogViewModel {
     private let dnsProtection: DnsProtectionProtocol
     private let domainParser: DomainParser?
     private let logRecordHelper: DnsLogRecordHelper
+    private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol
 
     private var allRecords: [DnsLogRecord] = []
     private var searchRecords: [DnsLogRecord] = []
@@ -256,13 +257,15 @@ final class DnsRequestLogViewModel {
         dnsStatistics: DnsLogStatisticsProtocol,
         dnsProtection: DnsProtectionProtocol,
         domainParser: DomainParserServiceProtocol,
-        logRecordHelper: DnsLogRecordHelper
+        logRecordHelper: DnsLogRecordHelper,
+        dnsConfigAssistant: DnsConfigManagerAssistantProtocol
     ) {
         self.dnsTrackers = dnsTrackers
         self.dnsStatistics = dnsStatistics
         self.dnsProtection = dnsProtection
         self.domainParser = domainParser.domainParser
         self.logRecordHelper = logRecordHelper
+        self.dnsConfigAssistant = dnsConfigAssistant
     }
 
     // MARK: - public methods
@@ -283,18 +286,27 @@ final class DnsRequestLogViewModel {
 
     func addDomainToAllowlist(_ domain: String) throws {
         try dnsProtection.add(rule: UserRule(ruleText: domain), override: true, for: .allowlist)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
     }
 
     func addDomainToUserRules(_ domain: String) throws {
         try logRecordHelper.addDomainToUserRules(domain)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
+    }
+
+    func addEditedBlocklistRule(_ blocklistRule: String) throws {
+        try logRecordHelper.addEditedBlocklistRule(blocklistRule)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
     }
 
     func removeDomainFromUserFilter(_ domain: String) throws {
         try dnsProtection.removeDomainFromUserFilter(domain)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
     }
 
     func removeDomainFromAllowlist(_ domain: String) throws {
         try dnsProtection.removeDomainFromAllowlist(domain)
+        dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
     }
 
     func updateUserStatuses() {
@@ -303,7 +315,7 @@ final class DnsRequestLogViewModel {
         }
     }
 
-    func logRecordViewModelFor(record: DnsLogRecord)->DnsRequestDetailsViewModel {
+    func logRecordViewModelFor(record: DnsLogRecord) -> DnsRequestDetailsViewModel {
         return DnsRequestDetailsViewModel(logRecord: record, helper: logRecordHelper)
     }
 
