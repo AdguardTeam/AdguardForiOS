@@ -456,6 +456,7 @@ extension AppDelegate {
     func setMainPageAsCurrentAndPopToRootControllersEverywhere() {
         window?.rootViewController?.dismiss(animated: true) { [weak self] in
             self?.dismissToMainPage()
+            self?.updateTheme()
         }
     }
 

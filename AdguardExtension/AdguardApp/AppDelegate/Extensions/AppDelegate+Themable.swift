@@ -26,11 +26,11 @@ extension AppDelegate {
         NotificationCenter.default.addObserver(forName: .themeChanged, object: nil, queue: .main) { [weak self] _ in
             let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
             self?.window?.backgroundColor = themeService.backgroundColor
-            self?.themeChange()
+            self?.updateTheme()
         }
     }
 
-    private func themeChange() {
+    func updateTheme() {
         guard let root =  window?.rootViewController else { return }
         recursiveThemeUpdate(vc: root)
     }
