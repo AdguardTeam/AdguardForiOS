@@ -30,9 +30,9 @@ final class ChartDateTypeController: BottomAlertController {
     @IBOutlet weak var tableView: UITableView!
 
     weak var delegate: DateTypeChangedProtocol?
+    var periodType: StatisticsPeriod!
 
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let resources: AESharedResourcesProtocol = ServiceLocator.shared.getService()!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,7 +73,7 @@ extension ChartDateTypeController: UITableViewDataSource {
         let cell = ExtendedRadioButtonCell.getCell(forTableView: tableView)
         let period = StatisticsPeriod.allCases[indexPath.row]
         cell.titleString = period.dateTypeString
-        cell.radioButtonSelected = resources.chartDateType == period
+        cell.radioButtonSelected = periodType == period
         cell.isArrowRightHidden = true
         cell.updateTheme(themeService: theme)
         cell.cellTag = indexPath.row

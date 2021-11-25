@@ -43,10 +43,18 @@ final class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
     private let domainParserService: DomainParserServiceProtocol
     private let activityStatistics: ActivityStatisticsProtocol
     private let companiesStatistics: CompaniesStatistics
+    private let resources: AESharedResourcesProtocol
 
     private let workingQueue = DispatchQueue(label: "ActivityStatisticsModel queue", qos: .userInitiated)
 
-    var period: StatisticsPeriod = .all
+    var period: StatisticsPeriod {
+        get {
+            resources.activityStatisticsType
+        }
+        set {
+            resources.activityStatisticsType = newValue
+        }
+    }
 
     var counters: CountersStatisticsRecord {
         return (try? activityStatistics.getCounters(for: period)) ?? CountersStatisticsRecord.emptyRecord()
@@ -56,12 +64,14 @@ final class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
         dnsTrackers: DnsTrackersProviderProtocol,
         domainParserService: DomainParserServiceProtocol,
         activityStatistics: ActivityStatisticsProtocol,
-        companiesStatistics: CompaniesStatistics
+        companiesStatistics: CompaniesStatistics,
+        resources: AESharedResourcesProtocol
     ) {
         self.dnsTrackers = dnsTrackers
         self.domainParserService = domainParserService
         self.activityStatistics = activityStatistics
         self.companiesStatistics = companiesStatistics
+        self.resources = resources
     }
 
     func getCompanies(for type: StatisticsPeriod, _ completion: @escaping (_ info: CompaniesInfo) -> Void) {
