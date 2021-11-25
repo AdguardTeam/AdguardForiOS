@@ -228,62 +228,6 @@ extension AESharedResourcesProtocol {
         }
     }
 
-    // MARK: - Content blockers rules count
-
-    dynamic var generalContentBlockerRulesCount : Int {
-        get {
-            sharedDefaults().integer(forKey: AEDefaultsGeneralContentBlockerRulesCount)
-        }
-        set {
-            sharedDefaults().set(newValue, forKey: AEDefaultsGeneralContentBlockerRulesCount)
-        }
-    }
-
-    dynamic var privacyContentBlockerRulesCount : Int {
-        get {
-            sharedDefaults().integer(forKey: AEDefaultsPrivacyContentBlockerRulesCount)
-        }
-        set {
-            sharedDefaults().set(newValue, forKey: AEDefaultsPrivacyContentBlockerRulesCount)
-        }
-    }
-
-    dynamic var socialContentBlockerRulesCount : Int {
-        get {
-            sharedDefaults().integer(forKey: AEDefaultsSocialContentBlockerRulesCount)
-        }
-        set {
-            sharedDefaults().set(newValue, forKey: AEDefaultsSocialContentBlockerRulesCount)
-        }
-    }
-
-    dynamic var otherContentBlockerRulesCount : Int {
-        get {
-            sharedDefaults().integer(forKey: AEDefaultsOtherContentBlockerRulesCount)
-        }
-        set {
-            sharedDefaults().set(newValue, forKey: AEDefaultsOtherContentBlockerRulesCount)
-        }
-    }
-
-    dynamic var customContentBlockerRulesCount : Int {
-        get {
-            sharedDefaults().integer(forKey: AEDefaultsCustomContentBlockerRulesCount)
-        }
-        set {
-            sharedDefaults().set(newValue, forKey: AEDefaultsCustomContentBlockerRulesCount)
-        }
-    }
-
-    dynamic var securityContentBlockerRulesCount : Int {
-        get {
-            sharedDefaults().integer(forKey: AEDefaultsSecurityContentBlockerRulesCount)
-        }
-        set {
-            sharedDefaults().set(newValue, forKey: AEDefaultsSecurityContentBlockerRulesCount)
-        }
-    }
-
     dynamic var lastDnsFiltersUpdateTime: Date? {
         get {
             sharedDefaults().object(forKey: LastDnsFiltersUpdateTime) as? Date

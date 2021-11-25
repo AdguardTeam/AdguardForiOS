@@ -197,12 +197,13 @@ final class SupportService: SupportServiceProtocol {
         Locale: \(ADLocales.lang() ?? "Unknown")
         Region: \(ADLocales.region() ?? "Unknown")
 
-        GeneralContentBlockerRulesCount: \(resources.generalContentBlockerRulesCount)
-        PrivacyContentBlockerRulesCount: \(resources.privacyContentBlockerRulesCount)
-        SocialContentBlockerRulesCount: \(resources.socialContentBlockerRulesCount)
-        OtherContentBlockerRulesCount: \(resources.otherContentBlockerRulesCount)
-        CustomContentBlockerRulesCount: \(resources.customContentBlockerRulesCount)
-        SecurityContentBlockerRulesCount: \(resources.securityContentBlockerRulesCount)
+        General CB rules count: \(safariProtection.allConverterResults.first(where: { $0.type == .general })?.totalConverted ?? 0)
+        Privacy CB rules count: \(safariProtection.allConverterResults.first(where: { $0.type == .privacy })?.totalConverted ?? 0)
+        Social CB rules count: \(safariProtection.allConverterResults.first(where: { $0.type == .socialWidgetsAndAnnoyances })?.totalConverted ?? 0)
+        Other CB rules count: \(safariProtection.allConverterResults.first(where: { $0.type == .other })?.totalConverted ?? 0)
+        Custom CB rules count: \(safariProtection.allConverterResults.first(where: { $0.type == .custom })?.totalConverted ?? 0)
+        Security CB rules count: \(safariProtection.allConverterResults.first(where: { $0.type == .security })?.totalConverted ?? 0)
+        Advanced rules count: \(safariProtection.advancedRulesCount)
 
         Safari Filters information:
         Enabled Groups:
