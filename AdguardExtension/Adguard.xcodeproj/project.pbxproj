@@ -13071,7 +13071,7 @@
 			repositoryURL = "https://github.com/getsentry/sentry-cocoa";
 			requirement = {
 				kind = exactVersion;
-				version = 7.2.9;
+				version = 7.5.3;
 			};
 		};
 		A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */ = {
