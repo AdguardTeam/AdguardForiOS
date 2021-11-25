@@ -133,16 +133,12 @@ final class LoginService: LoginServiceProtocol {
     private let AUTH_SERVER = "https://auth.adguard.com"
 
     // login request
-    // todo: remove auth request in future builds
-    lazy private var LOGIN_URL = { "\(LOGIN_SERVER)/api/2.0/auth" }()
     lazy private var STATUS_URL = { "\(LOGIN_SERVER)/api/1.0/status.html" }()
     lazy private var AUTH_TOKEN_URL = { "\(LOGIN_SERVER)/api/2.0/auth_token" }()
     lazy private var RESET_LICENSE_URL = { "\(LOGIN_SERVER)/api/1.0/resetlicense.html" }()
     lazy private var OAUTH_TOKEN_URL = { "\(AUTH_SERVER)/oauth/token" } ()
 
     // - request fileds
-    private let LOGIN_EMAIL_PARAM = "email"
-    private let LOGIN_PASSWORD_PARAM = "password"
     private let LOGIN_APP_NAME_PARAM = "app_name"
     private let LOGIN_APP_ID_PARAM = "app_id"
     private let LOGIN_LICENSE_KEY_PARAM = "license_key"
@@ -180,7 +176,7 @@ final class LoginService: LoginServiceProtocol {
                 callback(error)
             }
             else {
-                self?.loginInternal(name: nil, password: nil, accessToken: accessToken, attributionRecords: attributionRecords, callback: callback)
+                self?.loginInternal(accessToken: accessToken, callback: callback)
             }
         }
     }
@@ -279,8 +275,7 @@ final class LoginService: LoginServiceProtocol {
 
     // MARK: - Private methods
 
-    // todo: name/password are deprecated and must be removed in future versions, when all 3.0.0 user will be migrated to new authorization scheme
-    private func loginInternal(name: String?, password: String?, accessToken: String?, attributionRecords: String?, callback: @escaping (NSError?) -> Void) {
+    private func loginInternal(accessToken: String, callback: @escaping (NSError?) -> Void) {
 
         guard let appId = keychain.appId else {
             DDLogError("(LoginService) loginInternal error - can not obtain appId)")
@@ -288,30 +283,19 @@ final class LoginService: LoginServiceProtocol {
             return
         }
 
-        let loginByToken = accessToken != nil
+        DDLogInfo("(LoginService) - loginInternal. Login with access_token")
 
-        DDLogInfo("(LoginService) loginInternal. login with " + (loginByToken ? "access_token": "login/password"))
-
-        var params = [LOGIN_APP_NAME_PARAM: LoginService.APP_NAME_VALUE,
+        let params = [LOGIN_APP_NAME_PARAM: LoginService.APP_NAME_VALUE,
                       LOGIN_APP_ID_PARAM: appId,
                       LOGIN_APP_VERSION_PARAM:productInfo.version()!]
 
-        if !loginByToken {
-            params[LOGIN_EMAIL_PARAM] = name
-            params[LOGIN_PASSWORD_PARAM] = password
-        }
-
-        guard let url = URL(string: loginByToken ? AUTH_TOKEN_URL : LOGIN_URL) else  {
+        guard let url = URL(string: AUTH_TOKEN_URL) else  {
             callback(NSError(domain: LoginService.loginErrorDomain, code: LoginService.loginError, userInfo: nil))
-            DDLogError("(LoginService) login error. Can not make URL from String \(LOGIN_URL)")
+            DDLogError("(LoginService) login error. Can not make URL from String \(AUTH_TOKEN_URL)")
             return
         }
 
-        var headers: [String : String] = [:]
-
-        if loginByToken {
-            headers["Authorization"] = "Bearer \(accessToken!)"
-        }
+        let headers = ["Authorization": "Bearer \(accessToken)"]
 
         let request: URLRequest = ABECRequest.post(for: url, parameters: params, headers: headers)
 

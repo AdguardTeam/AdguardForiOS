@@ -71,11 +71,10 @@ final class SafariProtectionCustomFiltersMigrationHelper: SafariProtectionCustom
             FiltersTable.name <- filter.name,
             FiltersTable.description <- filter.description,
             FiltersTable.homePage <- filter.homePage,
-            FiltersTable.expires <- nil,
             FiltersTable.subscriptionUrl <- filter.subscriptionUrl
         ]
 
-        // Query: INSERT OR REPLACE INTO "filters" (filter_id, group_id, is_enabled, version, last_update_time, editable, display_number, name, description, homepage, removable, expires, subscriptionUrl)
+        // Query: INSERT OR REPLACE INTO "filters" (filter_id, group_id, is_enabled, version, last_update_time, display_number, name, description, homepage, subscriptionUrl)
         let query = FiltersTable.table.insert(or: .replace, setters)
         try newAdguardDB.run(query)
     }
@@ -110,15 +109,10 @@ fileprivate extension SafariProtectionCustomFiltersMigrationHelper {
         let groupId: Int
         let isEnabled: Bool
         let version: String?
-        let lastUpdateTime: Date? // TODO: - Don't forget to remove it if removed in SDK
-        let lastCheckTime: Date? // TODO: - Don't forget to remove it if removed in SDK
-        let editable: Bool
         let displayNumber: Int
         let name: String
         let description: String
         let homePage: String?
-        let removable: Bool
-        let expires: Int? // TODO: - Don't forget to remove it if removed in SDK
         let subscriptionUrl: String?
 
         // Table name
@@ -130,14 +124,10 @@ fileprivate extension SafariProtectionCustomFiltersMigrationHelper {
         static let isEnabled = Expression<Bool>("is_enabled")
         static let version = Expression<String?>("version")
         static let lastUpdateTime = Expression<Date?>("last_update_time")
-        static let lastCheckTime = Expression<Date?>("last_check_time")
-        static let editable = Expression<Bool>("editable")
         static let displayNumber = Expression<Int>("display_number")
         static let name = Expression<String?>("name")
         static let description = Expression<String?>("description")
         static let homePage = Expression<String?>("homepage")
-        static let removable = Expression<Bool>("removable")
-        static let expires = Expression<Int?>("expires")
         static let subscriptionUrl = Expression<String?>("subscriptionUrl")
     }
 }

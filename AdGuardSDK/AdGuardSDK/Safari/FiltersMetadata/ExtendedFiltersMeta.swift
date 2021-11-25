@@ -24,7 +24,6 @@ public protocol ExtendedFilterMetaProtocol: FilterMetaProtocol {
     var filterId: Int { get }
     var group: GroupMetaProtocol { get }
     var displayNumber: Int { get }
-    var timeAdded: Date? { get }
     var trustLevel: ExtendedFiltersMeta.TrustLevel { get }
     var languages: [String] { get }
     var tags: [ExtendedFiltersMeta.Tag] { get }
@@ -87,9 +86,7 @@ extension ExtendedFiltersMeta {
         let filterId: Int
         let name: String?
         let description: String?
-        let timeAdded: Date?
         let homePage: String?
-        let updateFrequency: Int?
         let displayNumber: Int
         let group: GroupMetaProtocol
         let filterDownloadPage: String?
@@ -104,9 +101,7 @@ extension ExtendedFiltersMeta {
             case filterId
             case name
             case description
-            case timeAdded
             case homePage = "homepage"
-            case updateFrequency = "expires"
             case displayNumber
             case group = "groupId"
             case filterDownloadPage = "subscriptionUrl"
@@ -128,7 +123,6 @@ extension ExtendedFiltersMeta {
             self.name = try container.decode(String.self, forKey: .name)
             self.description = try container.decode(String.self, forKey: .description)
             self.homePage = try container.decode(String.self, forKey: .homePage)
-            self.updateFrequency = try container.decode(Int.self, forKey: .updateFrequency)
             self.displayNumber = try container.decode(Int.self, forKey: .displayNumber)
             self.filterDownloadPage = try container.decode(String.self, forKey: .filterDownloadPage)
             self.trustLevel = try container.decode(TrustLevel.self, forKey: .trustLevel)
@@ -146,21 +140,17 @@ extension ExtendedFiltersMeta {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
 
-            let timeAddedString = try container.decode(String.self, forKey: .timeAdded)
             let lastUpdateDateString = try container.decode(String.self, forKey: .lastUpdateDate)
-
-            self.timeAdded = dateFormatter.date(from: timeAddedString)
             self.lastUpdateDate = dateFormatter.date(from: lastUpdateDateString)
+
             self.rulesCount = 0
         }
 
-        init(filterId: Int, name: String?, description: String?, timeAdded: Date?, homePage: String?, updateFrequency: Int?, displayNumber: Int, group: GroupMetaProtocol, filterDownloadPage: String?, trustLevel: ExtendedFiltersMeta.TrustLevel, version: String?, lastUpdateDate: Date?, languages: [String], tags: [ExtendedFiltersMeta.Tag], rulesCount: Int) {
+        init(filterId: Int, name: String?, description: String?, homePage: String?, displayNumber: Int, group: GroupMetaProtocol, filterDownloadPage: String?, trustLevel: ExtendedFiltersMeta.TrustLevel, version: String?, lastUpdateDate: Date?, languages: [String], tags: [ExtendedFiltersMeta.Tag], rulesCount: Int) {
             self.filterId = filterId
             self.name = name
             self.description = description
-            self.timeAdded = timeAdded
             self.homePage = homePage
-            self.updateFrequency = updateFrequency
             self.displayNumber = displayNumber
             self.group = group
             self.filterDownloadPage = filterDownloadPage
@@ -173,16 +163,14 @@ extension ExtendedFiltersMeta {
         }
 
         // Initializer for custom filter
-        init(customFilterMeta: ExtendedCustomFilterMetaProtocol, filterId: Int, timeAdded: Date? = Date(), displayNumber: Int, group: GroupMetaProtocol) {
+        init(customFilterMeta: ExtendedCustomFilterMetaProtocol, filterId: Int, displayNumber: Int, group: GroupMetaProtocol) {
             self.filterId = filterId
             self.name = customFilterMeta.name
             self.description = customFilterMeta.description
             self.version = customFilterMeta.version
             self.lastUpdateDate = customFilterMeta.lastUpdateDate
-            self.updateFrequency = customFilterMeta.updateFrequency
             self.homePage = customFilterMeta.homePage
             self.filterDownloadPage = customFilterMeta.filterDownloadPage
-            self.timeAdded = timeAdded
             self.displayNumber = displayNumber
             self.trustLevel = .full
             self.languages = []

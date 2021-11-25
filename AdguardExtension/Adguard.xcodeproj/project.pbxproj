@@ -1038,8 +1038,6 @@
 		B2673DCD27173DFD00E04747 /* DnsProtectionUserRulesMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2673DBE27173DFD00E04747 /* DnsProtectionUserRulesMigrationHelper.swift */; };
 		B2673DCE27173DFD00E04747 /* DnsProtectionFiltersMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2673DBF27173DFD00E04747 /* DnsProtectionFiltersMigrationHelper.swift */; };
 		B2673DCF27173DFD00E04747 /* DnsProtectionFiltersMigrationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2673DBF27173DFD00E04747 /* DnsProtectionFiltersMigrationHelper.swift */; };
-		B2673DD027173DFD00E04747 /* MigrationService+AntibannerMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2673DC027173DFD00E04747 /* MigrationService+AntibannerMigration.swift */; };
-		B2673DD127173DFD00E04747 /* MigrationService+AntibannerMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2673DC027173DFD00E04747 /* MigrationService+AntibannerMigration.swift */; };
 		B2673DD227173DFD00E04747 /* MigrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2673DC127173DFD00E04747 /* MigrationService.swift */; };
 		B2673DD327173DFD00E04747 /* MigrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2673DC127173DFD00E04747 /* MigrationService.swift */; };
 		B2673DD527173E0F00E04747 /* DomainParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2673DD427173E0F00E04747 /* DomainParserService.swift */; };
@@ -3206,7 +3204,6 @@
 		7E88A63F23E8361A00A10F3A /* SystemProtectionEnablerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemProtectionEnablerController.swift; sourceTree = "<group>"; };
 		7E8AC81A23A7C41700669C75 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		7E8C8C4124E19779000B4B9C /* UIImage+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Utils.swift"; sourceTree = "<group>"; };
-		7E8D423B258CC52100B6300E /* DnsProviders+Migrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DnsProviders+Migrations.swift"; sourceTree = "<group>"; };
 		7E8D4298258CCF1700B6300E /* DnsProvidersMigrationsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProvidersMigrationsTest.swift; sourceTree = "<group>"; };
 		7E9082072549D5430048C4B0 /* HowToSetupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToSetupController.swift; sourceTree = "<group>"; };
 		7E92753626C67A1D007B2C80 /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
@@ -3466,7 +3463,6 @@
 		B2673DBC27173DFD00E04747 /* SafariProtectionAllowlistRulesMigrationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafariProtectionAllowlistRulesMigrationHelper.swift; sourceTree = "<group>"; };
 		B2673DBE27173DFD00E04747 /* DnsProtectionUserRulesMigrationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DnsProtectionUserRulesMigrationHelper.swift; sourceTree = "<group>"; };
 		B2673DBF27173DFD00E04747 /* DnsProtectionFiltersMigrationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DnsProtectionFiltersMigrationHelper.swift; sourceTree = "<group>"; };
-		B2673DC027173DFD00E04747 /* MigrationService+AntibannerMigration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MigrationService+AntibannerMigration.swift"; sourceTree = "<group>"; };
 		B2673DC127173DFD00E04747 /* MigrationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MigrationService.swift; sourceTree = "<group>"; };
 		B2673DD427173E0F00E04747 /* DomainParserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomainParserService.swift; sourceTree = "<group>"; };
 		B2673DDB2717402C00E04747 /* DnsRequestDetailsContainerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DnsRequestDetailsContainerController.swift; sourceTree = "<group>"; };
@@ -6215,7 +6211,6 @@
 			isa = PBXGroup;
 			children = (
 				B2673DB427173DFD00E04747 /* MigrationToSDKv4.3 */,
-				B2673DC027173DFD00E04747 /* MigrationService+AntibannerMigration.swift */,
 				24CE2B83271DA4E700E169E7 /* NetworkSettingsMigration.swift */,
 				B2673DC127173DFD00E04747 /* MigrationService.swift */,
 				D083ADAA2732BC3500A8F96E /* MigrationStateManager.swift */,
@@ -6656,7 +6651,6 @@
 				B2673DD427173E0F00E04747 /* DomainParserService.swift */,
 				B2673DB327173DFD00E04747 /* Migrations */,
 				B2C19E7A2716DE3A00331109 /* Purchase */,
-				7E8D423B258CC52100B6300E /* DnsProviders+Migrations.swift */,
 				D07427F1232B96CB0019AAF4 /* Utils */,
 				7E9F3E0E23CE08C100A7BDA2 /* DnsFilterService */,
 				7E5EA7AD239A38C500A07DE0 /* Protection */,
@@ -8525,7 +8519,6 @@
 				D0D0CAFE268B058700AD427E /* ABECRequest.m in Sources */,
 				7E51C1ED2729375D006D7411 /* UserRulesEditorController.swift in Sources */,
 				659886991CF74DE9003ECD1C /* Reachability.m in Sources */,
-				B2673DD127173DFD00E04747 /* MigrationService+AntibannerMigration.swift in Sources */,
 				7E85A82426F37FBD0059BB33 /* OpenLicenseControllerParser.swift in Sources */,
 				7EAD352826C2C657001AFB3A /* NotificationCenter+Utils.swift in Sources */,
 				D031A16A219EFC99002C17D9 /* DDAbstractDatabaseLogger.m in Sources */,
@@ -8755,7 +8748,6 @@
 				247CB5C52600BB1C0047974C /* OpenMainPageControllerParser.swift in Sources */,
 				2490F6582700983400B1514D /* SendFeedbackRequest.swift in Sources */,
 				244339712580D8AB00AB4F26 /* BlockingModeController.swift in Sources */,
-				B2673DD027173DFD00E04747 /* MigrationService+AntibannerMigration.swift in Sources */,
 				D031A10F219EFC99002C17D9 /* CocoaLumberjack.swift in Sources */,
 				247CB6122600C8870047974C /* OpenImportSettingsControllerParser.swift in Sources */,
 				24B3DAF326F8B50A00A66C0F /* DnsProviderFeatureCell.swift in Sources */,

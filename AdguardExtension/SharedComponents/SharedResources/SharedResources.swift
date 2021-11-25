@@ -131,6 +131,7 @@ extension AESharedResourcesProtocol {
         }
     }
 
+    // TODO: - This variable is obsolete and can be removed
     dynamic var needUpdateFilters: Bool {
         get {
             return sharedDefaults().bool(forKey: NeedToUpdateFiltersKey)

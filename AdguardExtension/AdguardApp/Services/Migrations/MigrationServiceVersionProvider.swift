@@ -19,22 +19,27 @@
 import Foundation
 
 protocol MigrationServiceVersionProviderProtocol {
-    func needsMigrateTo4_3() -> Bool
+    var isMigrationFrom4_1To4_3Needed: Bool { get }
+    var isLastVersionLessThan4_1: Bool { get }
 }
 
 class MigrationServiceVersionProvider: MigrationServiceVersionProviderProtocol {
+
+    var isMigrationFrom4_1To4_3Needed: Bool {
+        let lastBuildVersion = resources.buildVersion
+
+        // FIXME: - Change migration version before release
+        return lastBuildVersion >= 650 && lastBuildVersion < 850
+    }
+
+    var isLastVersionLessThan4_1: Bool {
+        let lastBuildVersion = resources.buildVersion
+        return lastBuildVersion < 650
+    }
 
     private let resources: AESharedResourcesProtocol
 
     init(resources: AESharedResourcesProtocol) {
         self.resources = resources
-    }
-
-    func needsMigrateTo4_3() -> Bool {
-
-        let lastBuildVersion = resources.buildVersion
-
-        // TODO: - Change migration version before release
-        return lastBuildVersion < 800
     }
 }

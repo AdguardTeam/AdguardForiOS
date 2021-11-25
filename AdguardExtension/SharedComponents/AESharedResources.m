@@ -23,7 +23,7 @@
 NSString *AE_URLSCHEME = @ADGUARD_URL_SCHEME;
 
 NSString *AEDefaultsFirstRunKey = @"AEDefaultsFirstRunKey";
-NSString *AEDefaultsProductSchemaVersion = @"AEDefaultsProductSchemaVersion";
+NSString *AEDefaultsProductSchemaVersion = @"AEDefaultsProductSchemaVersion"; // TODO: - This key is obsolete and can be removed
 NSString *AEDefaultsProductBuildVersion = @"AEDefaultsProductBuildVersion";
 NSString *AEDefaultsCheckFiltersLastDate = @"AEDefaultsCheckFiltersLastDate";
 NSString *AEDefaultsJSONMaximumConvertedRules = @"AEDefaultsJSONMaximumConvertedRules";
@@ -41,7 +41,7 @@ NSString* AEDefaultsNonConsumableItemPurchased = @"AEDefaultsNonConsumableItemPu
 NSString* AEDefaultsDarkTheme = @"AEDefaultsDarkTheme";
 NSString* AEDefaultsSystemAppearenceStyle = @"AEDefaultsSystemAppearenceStyle";
 NSString* AEDefaultsAuthStateString = @"AEDefaultsAuthStateString";
-NSString* AEDefaultsAppIdSavedWithAccessRights = @"AEDefaultsAppIdSavedWithAccessRights";
+NSString* AEDefaultsAppIdSavedWithAccessRights = @"AEDefaultsAppIdSavedWithAccessRights"; // TODO: - This key is obsolete and can be removed
 NSString* AEDefaultsUserFilterEnabled = @"AEDefaultsUserFilterEnabled";
 NSString* AEDefaultsSafariWhitelistEnabled = @"AEDefaultsWhitelistEnabled";
 NSString* AEDefaultsDnsWhitelistEnabled = @"AEDefaultsDnsWhitelistEnabled";
@@ -96,7 +96,7 @@ NSString *TunnelErrorCode = @"TunnelErrorCode";
 
 NSString *BackgroundFetchStateKey = @"BackgroundFetchStateKey";
 
-NSString *NeedToUpdateFiltersKey = @"NeedToUpdateFiltersKey";
+NSString *NeedToUpdateFiltersKey = @"NeedToUpdateFiltersKey"; // TODO: - This key is obsolete and can be removed
 
 NSString *DnsImplementationKey = @"DnsImplementationKey";
 

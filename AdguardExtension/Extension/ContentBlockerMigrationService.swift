@@ -29,7 +29,7 @@ class ContentBlockerMigrationService {
     }
 
     func migrateIfNeeded() {
-        if versionProvider.needsMigrateTo4_3() {
+        if versionProvider.isMigrationFrom4_1To4_3Needed {
             let oldFilesMigration = SDKMigrationOldFilesHelper(oldFilesContainerUrl: resources.sharedResuorcesURL(),
                                                                cbJsonFolderUrl: SharedStorageUrls().cbJsonsFolderUrl)
             oldFilesMigration.replaceCbJsonFiles()

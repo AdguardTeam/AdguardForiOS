@@ -35,25 +35,30 @@ class DnsMigration4_3: DnsMigration4_3Protocol {
     private let lowLevelSettingsMigration: LowlevelSettingsMigrationHelperProtocol
     private let dnsStatisticsMigration: DnsStatisticsMigrationHelperProtocol
 
-    init(resources: AESharedResourcesProtocol, dnsProvidersManager: DnsProvidersManagerProtocol) {
+    init(resources: AESharedResourcesProtocol, dnsProvidersManager: DnsProvidersManagerProtocol) throws {
         self.resources = resources
+
+        let sharedStorageUrls = SharedStorageUrls()
+        // Create directories if don't exist
+        try FileManager.default.createDirectory(at: sharedStorageUrls.dnsFiltersFolderUrl, withIntermediateDirectories: true, attributes: [:])
+        try FileManager.default.createDirectory(at: sharedStorageUrls.statisticsFolderUrl, withIntermediateDirectories: true, attributes: [:])
 
         dnsFiltersMigration = DnsProtectionFiltersMigrationHelper(
             oldDnsFiltersContainerFolderUrl: resources.sharedResuorcesURL(),
-            newDnsFiltersContainerFolderUrl: SharedStorageUrls().dnsFiltersFolderUrl,
+            newDnsFiltersContainerFolderUrl: sharedStorageUrls.dnsFiltersFolderUrl,
             resources: resources
         )
 
         dnsRulesMigration = DnsProtectionUserRulesMigrationHelper(
             oldDnsUserRulesContainerFolderUrl: resources.sharedResuorcesURL(),
-            newDnsUserRulesContainerFolderUrl: SharedStorageUrls().dnsFiltersFolderUrl
+            newDnsUserRulesContainerFolderUrl: sharedStorageUrls.dnsFiltersFolderUrl
         )
 
         dnsProvidersMigration = DnsProtectionCustomProvidersMigrationHelper(resources: resources, dnsProvidersManager: dnsProvidersManager)
 
         lowLevelSettingsMigration = LowlevelSettingsMigrationHelper(resources: resources)
 
-        dnsStatisticsMigration = DnsStatisticsMigrationHelper(oldContainerFolderUrl: resources.sharedResuorcesURL(), newContainerDbUrl: SharedStorageUrls().statisticsFolderUrl)
+        dnsStatisticsMigration = DnsStatisticsMigrationHelper(oldContainerFolderUrl: resources.sharedResuorcesURL(), newContainerDbUrl: sharedStorageUrls.statisticsFolderUrl)
 
         stateManager = MigrationStateManager(resources: resources, migrationKey: "Dns4_3MigrationKey")
     }

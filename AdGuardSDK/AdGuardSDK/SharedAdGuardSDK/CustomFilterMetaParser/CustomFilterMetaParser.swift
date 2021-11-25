@@ -68,7 +68,6 @@ public extension CustomFilterMetaParserProtocol {
         var description: String?
         var version: String?
         var lastUpdateDate: Date?
-        var updateFrequency: Int?
         var homePage: String?
         var licensePage: String?
         var issuesReportPage: String?
@@ -91,7 +90,6 @@ public extension CustomFilterMetaParserProtocol {
                               &description,
                               &version,
                               &lastUpdateDate,
-                              &updateFrequency,
                               &homePage,
                               &licensePage,
                               &issuesReportPage,
@@ -128,7 +126,6 @@ public extension CustomFilterMetaParserProtocol {
             description: description,
             version: version,
             lastUpdateDate: lastUpdateDate,
-            updateFrequency: updateFrequency,
             homePage: homePage,
             licensePage: licensePage,
             issuesReportPage: issuesReportPage,
@@ -149,7 +146,6 @@ public extension CustomFilterMetaParserProtocol {
                                       _ description: inout String?,
                                       _ version: inout String?,
                                       _ lastUpdateDate: inout Date?,
-                                      _ updateFrequency: inout Int?,
                                       _ homePage: inout String?,
                                       _ licensePage: inout String?,
                                       _ issuesReportPage: inout String?,
@@ -157,8 +153,7 @@ public extension CustomFilterMetaParserProtocol {
                                       _ filterDownloadPage: inout String?) {
 
         let lowercasedLine = line.lowercased()
-        let headerLowercasedTags = ["title", "description", "version", "last modified", "timeupdated",
-                                    "expires", "homepage", "license", "licence", "reporting issues", "community", "download"]
+        let headerLowercasedTags = ["title", "description", "version", "last modified", "timeupdated", "homepage", "license", "licence", "reporting issues", "community", "download"]
 
         for tag in headerLowercasedTags {
             if let tagRange = lowercasedLine.range(of: tag + ":"), tagRange.upperBound < line.endIndex {
@@ -168,7 +163,6 @@ public extension CustomFilterMetaParserProtocol {
                 case "description": description = tagValue
                 case "version": version = tagValue
                 case "last modified", "timeupdated": lastUpdateDate = processUpdateDate(tagValue)
-                case "expires": updateFrequency = processUpdateFrequency(tagValue)
                 case "homepage": homePage = tagValue
                 case "license", "licence": licensePage = tagValue
                 case "reporting issues": issuesReportPage = tagValue
@@ -197,29 +191,6 @@ public extension CustomFilterMetaParserProtocol {
                 return date
             }
         }
-        return nil
-    }
-
-    /**
-     Converts update frequency string to seconds
-     For example: "4 days (update frequency)" -> 345 600
-     Returns update frequency in seconds or nil if failed to parse string
-     */
-    private func processUpdateFrequency(_ frequencyString: String) -> Int? {
-        if let dayWordRange = frequencyString.range(of: "day"), frequencyString.startIndex < dayWordRange.lowerBound {
-            let daysString = frequencyString[frequencyString.startIndex ..< dayWordRange.lowerBound].trimmingCharacters(in: .whitespaces)
-            if let daysNumber = Int(daysString) {
-                return daysNumber * 24 * 3600
-            }
-        }
-
-        if let hourWordRange = frequencyString.range(of: "hour"), frequencyString.startIndex < hourWordRange.lowerBound {
-            let hoursString = frequencyString[frequencyString.startIndex ..< hourWordRange.lowerBound].trimmingCharacters(in: .whitespaces)
-            if let hoursNumber = Int(hoursString) {
-                return hoursNumber * 3600
-            }
-        }
-
         return nil
     }
 

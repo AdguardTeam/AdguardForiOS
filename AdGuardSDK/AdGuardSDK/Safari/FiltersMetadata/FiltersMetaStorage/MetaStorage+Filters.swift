@@ -28,15 +28,11 @@ struct FiltersTable: Equatable {
     let groupId: Int
     let isEnabled: Bool
     let version: String?
-    let lastUpdateTime: Date? // TODO: - Looks like this property is useless
-    let lastCheckTime: Date? // TODO: - Looks like this property is useless
-    let editable: Bool
+    let lastUpdateTime: Date?
     let displayNumber: Int
     let name: String
     let description: String
     let homePage: String?
-    let removable: Bool
-    let expires: Int? // TODO: - Looks like this property is useless
     let subscriptionUrl: String?
 
     // Table name
@@ -48,14 +44,10 @@ struct FiltersTable: Equatable {
     static let isEnabled = Expression<Bool>("is_enabled")
     static let version = Expression<String?>("version")
     static let lastUpdateTime = Expression<Date?>("last_update_time")
-    static let lastCheckTime = Expression<Date?>("last_check_time")
-    static let editable = Expression<Bool>("editable")
     static let displayNumber = Expression<Int>("display_number")
     static let name = Expression<String?>("name")
     static let description = Expression<String?>("description")
     static let homePage = Expression<String?>("homepage")
-    static let removable = Expression<Bool>("removable")
-    static let expires = Expression<Int?>("expires")
     static let subscriptionUrl = Expression<String?>("subscriptionUrl")
 
     // Localized initializer
@@ -65,14 +57,10 @@ struct FiltersTable: Equatable {
         self.isEnabled = dbFilter[FiltersTable.isEnabled]
         self.version = dbFilter[FiltersTable.version]
         self.lastUpdateTime = dbFilter[FiltersTable.lastUpdateTime]
-        self.lastCheckTime = dbFilter[FiltersTable.lastCheckTime]
-        self.editable = dbFilter[FiltersTable.editable]
         self.displayNumber = dbFilter[FiltersTable.displayNumber]
         self.name = localizedName
         self.description = localizedDescription
         self.homePage = dbFilter[FiltersTable.homePage]
-        self.removable = dbFilter[FiltersTable.removable]
-        self.expires = dbFilter[FiltersTable.expires]
         self.subscriptionUrl = dbFilter[FiltersTable.subscriptionUrl]
     }
 
@@ -83,32 +71,24 @@ struct FiltersTable: Equatable {
         self.isEnabled = dbFilter[FiltersTable.isEnabled]
         self.version = dbFilter[FiltersTable.version]
         self.lastUpdateTime = dbFilter[FiltersTable.lastUpdateTime]
-        self.lastCheckTime = dbFilter[FiltersTable.lastCheckTime]
-        self.editable = dbFilter[FiltersTable.editable]
         self.displayNumber = dbFilter[FiltersTable.displayNumber]
         self.name = dbFilter[FiltersTable.name] ?? ""
         self.description = dbFilter[FiltersTable.description] ?? ""
         self.homePage = dbFilter[FiltersTable.homePage]
-        self.removable = dbFilter[FiltersTable.removable]
-        self.expires = dbFilter[FiltersTable.expires]
         self.subscriptionUrl = dbFilter[FiltersTable.subscriptionUrl]
     }
 
     // Default initializer
-    init(filterId: Int, groupId: Int, isEnabled: Bool, version: String?, lastUpdateTime: Date?, lastCheckTime: Date?, editable: Bool, displayNumber: Int, name: String, description: String, homePage: String?, removable: Bool, expires: Int?, subscriptionUrl: String?) {
+    init(filterId: Int, groupId: Int, isEnabled: Bool, version: String?, lastUpdateTime: Date?, displayNumber: Int, name: String, description: String, homePage: String?, subscriptionUrl: String?) {
         self.filterId = filterId
         self.groupId = groupId
         self.isEnabled = isEnabled
         self.version = version
         self.lastUpdateTime = lastUpdateTime
-        self.lastCheckTime = lastCheckTime
-        self.editable = editable
         self.displayNumber = displayNumber
         self.name = name
         self.description = description
         self.homePage = homePage
-        self.removable = removable
-        self.expires = expires
         self.subscriptionUrl = subscriptionUrl
     }
 }
@@ -124,7 +104,6 @@ fileprivate extension ExtendedFilterMetaProtocol {
             FiltersTable.name <- self.name,
             FiltersTable.description <- self.description,
             FiltersTable.homePage <- self.homePage,
-            FiltersTable.expires <- self.updateFrequency,
             FiltersTable.subscriptionUrl <- self.filterDownloadPage
         ]
         return sttrs
@@ -209,7 +188,7 @@ extension MetaStorage: FiltersMetaStorageProtocol {
         Logger.logDebug("(FiltersMetaStorage) - updateFilter; Filter id=\(filter.filterId); Update \(currentFilterVersion) -> \(filter.version ?? "nil")")
         guard currentFilterVersion != filter.version else { return false }
 
-        // Query: UPDATE filters SET (group_id, version, last_update_time, editable, display_number, name, description, homepage, removable, expires, subscriptionUrl) WHERE filter_id = filter.filterId
+        // Query: UPDATE filters SET (group_id, version, last_update_time, display_number, name, description, homepage, subscriptionUrl) WHERE filter_id = filter.filterId
         let query = FiltersTable.table
                                 .where(FiltersTable.filterId == filter.filterId)
                                 .update(filter.updateSetters)
@@ -234,7 +213,7 @@ extension MetaStorage: FiltersMetaStorageProtocol {
 
     // Creates filter with passed meta
     func add(filter: ExtendedFilterMetaProtocol, enabled: Bool) throws {
-        // Query: INSERT OR REPLACE INTO "filters" (filter_id, group_id, is_enabled, version, last_update_time, editable, display_number, name, description, homepage, removable, expires, subscriptionUrl)
+        // Query: INSERT OR REPLACE INTO "filters" (filter_id, group_id, is_enabled, version, last_update_time, display_number, name, description, homepage, subscriptionUrl)
         let query = FiltersTable.table.insert(or: .replace, filter.getDbAddSetters(isEnabled: enabled))
         try filtersDb.run(query)
         Logger.logInfo("(FiltersMetaStorage) - Filter was added with id \(filter.filterId)")

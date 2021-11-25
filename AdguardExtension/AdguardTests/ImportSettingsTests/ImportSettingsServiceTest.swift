@@ -482,7 +482,7 @@ class ImportSettingsServiceTest: XCTestCase {
         var result: [DnsFilter] = []
         for i in 0..<3 {
             result.append(
-                DnsFilter(filterId: i, subscriptionUrl: URL(string: "url")!, isEnabled: false, name: nil, description: nil, version: nil, lastUpdateDate: nil, updateFrequency: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0)
+                DnsFilter(filterId: i, subscriptionUrl: URL(string: "url")!, isEnabled: false, name: nil, description: nil, version: nil, lastUpdateDate: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0)
             )
         }
         return result
@@ -507,7 +507,7 @@ class ImportSettingsServiceTest: XCTestCase {
 
     private func generateCustomGroupAndFilter() -> [SafariGroup] {
         let group = SafariGroup(filters: [], isEnabled: false, groupType: .custom, groupName: "group", displayNumber: 0)
-        let filter = SafariGroup.Filter(name: "PresetedFilter#", description: "", isEnabled: false, filterId: 0, version: nil, lastUpdateDate: nil, updateFrequency: nil, group: group, displayNumber: 0, languages: [], tags: [], homePage: nil, filterDownloadPage: "example.org", rulesCount: 0)
+        let filter = SafariGroup.Filter(name: "PresetedFilter#", description: "", isEnabled: false, filterId: 0, version: nil, lastUpdateDate: nil, group: group, displayNumber: 0, languages: [], tags: [], homePage: nil, filterDownloadPage: "example.org", rulesCount: 0)
 
         return [SafariGroup(filters: [filter],
                         isEnabled: group.isEnabled,

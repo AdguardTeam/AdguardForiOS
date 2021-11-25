@@ -24,9 +24,7 @@ class ExtendedFiltersMetaTest: XCTestCase {
             extendedFiltersMeta.filters.forEach { filter in
                 XCTAssertNotNil(filter.name)
                 XCTAssertNotNil(filter.description)
-                XCTAssertNotNil(filter.timeAdded)
                 XCTAssertNotNil(filter.homePage)
-                XCTAssertNotNil(filter.updateFrequency)
                 XCTAssertNotNil(filter.filterDownloadPage)
                 XCTAssertNotNil(filter.lastUpdateDate)
                 XCTAssertNotNil(filter.version)

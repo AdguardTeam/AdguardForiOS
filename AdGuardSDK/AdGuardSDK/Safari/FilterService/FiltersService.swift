@@ -162,7 +162,7 @@ final class FiltersService: FiltersServiceProtocol {
     private let workingQueue = DispatchQueue(label: "AdGuardSDK.FiltersService.workingQueue")
 
     // Queue to call completion blocks
-    private let completionQueue = DispatchQueue.main
+    private let completionQueue = DispatchQueue(label: "AdGuardSDK.FiltersService.completionQueue")
 
     /* Services */
     let configuration: SafariConfigurationProtocol
@@ -280,7 +280,7 @@ final class FiltersService: FiltersServiceProtocol {
                 self.userDefaultsStorage.lastFiltersUpdateCheckDate = Date()
             }
         }
-        comletionGroup.notify(queue: .main) {
+        comletionGroup.notify(queue: completionQueue) {
             if let preconditionError = preconditionError {
                 onFiltersUpdated(.error(preconditionError))
             }
@@ -408,7 +408,6 @@ final class FiltersService: FiltersServiceProtocol {
                                                filterId: filter.filterId,
                                                version: filter.version,
                                                lastUpdateDate: filter.lastUpdateDate,
-                                               updateFrequency: filter.updateFrequency,
                                                group: filter.group,
                                                displayNumber: filter.displayNumber,
                                                languages: filter.languages,
@@ -739,7 +738,7 @@ final class FiltersService: FiltersServiceProtocol {
                 group.leave()
             }
         }
-        group.notify(queue: .main) {
+        group.notify(queue: completionQueue) {
             let result = (_successfullyLoadedFilterIds.wrappedValue, _failedFilterIds.wrappedValue)
             onFilesUpdated(result)
         }
@@ -789,7 +788,7 @@ final class FiltersService: FiltersServiceProtocol {
             group.leave()
         }
 
-        group.notify(queue: .main) {
+        group.notify(queue: completionQueue) {
             if let error = resultError {
                 onFiltersMetaUpdated(.error(error))
             } else if let metaUpdateResult = metaUpdateResult {

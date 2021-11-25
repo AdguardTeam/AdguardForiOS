@@ -24,14 +24,10 @@ CREATE TABLE [filters] (
 [is_enabled] BOOLEAN NOT NULL DEFAULT 1,
 [version] TEXT,
 [last_update_time] TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-[last_check_time] TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-[editable] BOOLEAN NOT NULL DEFAULT 0,
 [display_number] INTEGER NOT NULL DEFAULT 0,
 [name] TEXT,
 [description] TEXT,
 [homepage] TEXT,
-[removable] BOOLEAN NOT NULL DEFAULT 1,
-[expires] INTEGER,
 [subscriptionUrl] TEXT
 );
 

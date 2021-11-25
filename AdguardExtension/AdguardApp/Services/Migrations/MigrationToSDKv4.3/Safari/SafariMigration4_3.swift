@@ -37,14 +37,20 @@ class SafariMigration4_3: SafariMigration4_3Protocol {
         self.safariProtection = safariProtection as! SafariProtectionMigrationsProtocol
         self.stateManager = MigrationStateManager(resources: resources, migrationKey: "SafariMigration4_3Key")
 
+        let sharedStorageUrls = SharedStorageUrls()
+
+        // Create directories if don't exist
+        try FileManager.default.createDirectory(at: sharedStorageUrls.dbFolderUrl, withIntermediateDirectories: true, attributes: [:])
+        try FileManager.default.createDirectory(at: sharedStorageUrls.filtersFolderUrl, withIntermediateDirectories: true, attributes: [:])
+
         filtersDbMigration = try SafariProtectionFiltersDatabaseMigrationHelper(
             oldAdguardDBFilePath: resources.sharedResuorcesURL().appendingPathComponent("adguard.db").path,
             oldDefaultDBFilePath: resources.sharedResuorcesURL().appendingPathComponent("default.db").path
         )
         allowlistRulesMigration = SafariProtectionAllowlistRulesMigrationHelper(rulesContainerDirectoryPath: resources.sharedResuorcesURL().path)
         customFiltersMigration = try SafariProtectionCustomFiltersMigrationHelper(
-            newDBFilePath: SharedStorageUrls().dbFolderUrl.appendingPathComponent("adguard.db").path,
-            filtersDirectoryUrl: SharedStorageUrls().filtersFolderUrl
+            newDBFilePath: sharedStorageUrls.dbFolderUrl.appendingPathComponent("adguard.db").path,
+            filtersDirectoryUrl: sharedStorageUrls.filtersFolderUrl
         )
     }
 
