@@ -194,9 +194,8 @@ enum DnsStatisticsDisplayedRequestsType {
 }
 
 // MARK: - DnsRequestLogModel -
-/**
- view model for ActivityViewController
- */
+
+/// view model for ActivityViewController
 final class DnsRequestLogViewModel {
 
     // MARK: - pubic fields
@@ -287,26 +286,31 @@ final class DnsRequestLogViewModel {
     func addDomainToAllowlist(_ domain: String) throws {
         try dnsProtection.add(rule: UserRule(ruleText: domain), override: true, for: .allowlist)
         dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
+        updateUserStatuses()
     }
 
     func addDomainToUserRules(_ domain: String) throws {
         try logRecordHelper.addDomainToUserRules(domain)
         dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
+        updateUserStatuses()
     }
 
     func addEditedBlocklistRule(_ blocklistRule: String) throws {
         try logRecordHelper.addEditedBlocklistRule(blocklistRule)
         dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
+        updateUserStatuses()
     }
 
     func removeDomainFromUserFilter(_ domain: String) throws {
         try dnsProtection.removeDomainFromUserFilter(domain)
         dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
+        updateUserStatuses()
     }
 
     func removeDomainFromAllowlist(_ domain: String) throws {
         try dnsProtection.removeDomainFromAllowlist(domain)
         dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
+        updateUserStatuses()
     }
 
     func updateUserStatuses() {

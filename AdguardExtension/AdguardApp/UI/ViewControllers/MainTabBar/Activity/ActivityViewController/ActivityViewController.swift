@@ -92,7 +92,6 @@ final class ActivityViewController: UITableViewController {
     private var companiesNumber = 0
 
     private var swipedRecord: DnsLogRecord?
-    private var swipedIndexPath: IndexPath?
 
     // MARK: - ViewController life cycle
 
@@ -259,7 +258,6 @@ final class ActivityViewController: UITableViewController {
         guard configuration.advancedMode, let record = requestsModel?.records[indexPath.row] else {
             return UISwipeActionsConfiguration(actions: [])
         }
-        swipedIndexPath = indexPath
         swipedRecord = record
         let availableTypes = record.getButtons()
         for buttonType in availableTypes {
@@ -277,7 +275,6 @@ final class ActivityViewController: UITableViewController {
         guard configuration.advancedMode, let record = requestsModel?.records[indexPath.row] else {
             return UISwipeActionsConfiguration(actions: [])
         }
-        swipedIndexPath = indexPath
         swipedRecord = record
         let availableTypes = record.getButtons()
         for buttonType in availableTypes {
@@ -464,6 +461,7 @@ final class ActivityViewController: UITableViewController {
     private func removeRuleFromUserFilter(record: DnsLogRecord) {
         do {
             try requestsModel?.removeDomainFromUserFilter(record.event.domain)
+            tableView.reloadData()
         }
         catch {
             self.showUnknownErrorAlert()
@@ -473,6 +471,7 @@ final class ActivityViewController: UITableViewController {
     private func removeDomainFromWhitelist(record: DnsLogRecord) {
         do {
             try requestsModel?.removeDomainFromAllowlist(record.event.domain)
+            tableView.reloadData()
         }
         catch {
             self.showUnknownErrorAlert()
@@ -600,6 +599,7 @@ extension ActivityViewController: AddDomainToListDelegate {
     func addEditedBlocklistRule(_ blocklistRule: String) {
         do {
             try requestsModel?.addEditedBlocklistRule(blocklistRule)
+            tableView.reloadData()
         }
         catch {
             showUnknownErrorAlert()
@@ -609,15 +609,14 @@ extension ActivityViewController: AddDomainToListDelegate {
     func add(domain: String, by type: DnsLogButtonType) {
         do {
             switch type {
-            case .removeDomainFromWhitelist:
-                break
-            case .removeRuleFromUserFilter:
-                break
+            case .removeDomainFromWhitelist, .removeRuleFromUserFilter:
+                return
             case .addDomainToAllowList:
                 try requestsModel?.addDomainToAllowlist(domain)
             case .addRuleToUserFlter:
                 try requestsModel?.addDomainToUserRules(domain)
             }
+            tableView.reloadData()
         }
         catch {
             showUnknownErrorAlert()
