@@ -202,7 +202,7 @@ class LoginServiceTest: XCTestCase {
 
         parser.statusResults = [(false, Date(timeIntervalSinceNow: -1), nil), (false, Date(timeIntervalSinceNow: -1), nil)]
 
-        loginService.checkStatus { (error) in
+        loginService.checkStatus(attributionRecords: "records") { (error) in
         }
 
         wait(for: [expectation], timeout: 5.0)

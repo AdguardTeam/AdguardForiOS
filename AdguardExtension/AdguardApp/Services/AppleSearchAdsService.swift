@@ -24,13 +24,8 @@ protocol AppleSearchAdsServiceProtocol {
 // MARK: - UsedFrameworks
 
 fileprivate enum UsedFrameworks {
-    ///  for iAd framework response:
-    ///  https://developer.apple.com/documentation/iad/setting_up_apple_search_ads_attribution/
-    ///  for AdServices framework response:
-    ///  https://developer.apple.com/documentation/adservices/aaattribution/3697093-attributiontoken
-
     case iAd
-    case AdServices
+    case adServices
 }
 
 /// This object is responsible for providing attribution records
@@ -49,7 +44,12 @@ final class AppleSearchAdsService: AppleSearchAdsServiceProtocol {
             }
         }
 
-        /// Apples mock id
+         /// Ad services or iAd framework may return mock data
+         /// Apples mock id
+         ///     ///  for iAd framework response:
+         ///  https://developer.apple.com/documentation/iad/setting_up_apple_search_ads_attribution/
+         ///  for AdServices framework response:
+         ///  https://developer.apple.com/documentation/adservices/aaattribution/3697093-attributiontoken
         static let campaignMockId = "1234567890"
     }
 
@@ -64,15 +64,6 @@ final class AppleSearchAdsService: AppleSearchAdsServiceProtocol {
 
     // MARK: - Init
 
-    init(httpRequestService: HttpRequestServiceProtocol = HttpRequestService(),
-         adClientWrapper: AdClientWrapperProtocol = AdClientWrapper(),
-         adServicesWrapper: AdServicesWrapperProtocol = AdServicesWrapper()) {
-        self.adServicesHelper = AdServicesHelper(httpRequestService: httpRequestService,
-                                                 adServicesWrapper: adServicesWrapper)
-        self.iAdFrameworkHelper = IAdFrameworkHelper(adClientWrapper: adClientWrapper)
-    }
-
-    /// Init for tests
     init(adServicesHelper: AdServicesHelperProtocol,
          iAdFrameworkHelper: IAdFrameworkHelperProtocol) {
         self.adServicesHelper = adServicesHelper
@@ -85,7 +76,7 @@ final class AppleSearchAdsService: AppleSearchAdsServiceProtocol {
         workingQueue.async { [weak self] in
             if #available(iOS 14.3, *) {
                 self?.adServicesHelper.fetchAttributionRecords{ result in
-                    self?.processResult(result, type: .AdServices, completionHandler: completionHandler)
+                    self?.processResult(result, type: .adServices, completionHandler: completionHandler)
                 }
             } else {
                 self?.iAdFrameworkHelper.fetchAttributionRecords { result in
@@ -102,7 +93,7 @@ final class AppleSearchAdsService: AppleSearchAdsServiceProtocol {
         switch type {
         case .iAd:
             json["v"] = "iadframework"
-        case .AdServices:
+        case .adServices:
             json["v"] = "adservices"
         }
 

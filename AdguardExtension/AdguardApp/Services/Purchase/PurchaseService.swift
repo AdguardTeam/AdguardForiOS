@@ -102,6 +102,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
     private let resources: AESharedResourcesProtocol
     private let keychain: KeychainServiceProtocol
     private let productInfo: ADProductInfoProtocol
+    private let appleSearchAdsService: AppleSearchAdsServiceProtocol?
 
     private var productRequest: SKProductsRequest?
     private var productsToPurchase: [SKProduct] { _atomicProductsToPurchase.wrappedValue }
@@ -205,12 +206,13 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
     }
 
     // MARK: - public methods
-    init(network: ACNNetworkingProtocol, resources: AESharedResourcesProtocol, productInfo: ADProductInfoProtocol) {
+    init(network: ACNNetworkingProtocol, resources: AESharedResourcesProtocol, productInfo: ADProductInfoProtocol, appleSearchAdsService: AppleSearchAdsServiceProtocol? = nil) {
         self.network = network
         self.resources = resources
         self.keychain = KeychainService(resources: resources)
         self.productInfo = productInfo
         loginService = LoginService(resources: resources, network: network, keychain: keychain, productInfo: productInfo)
+        self.appleSearchAdsService = appleSearchAdsService
 
         super.init()
 
@@ -228,15 +230,17 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
 
     @objc
     func checkLicenseStatus() {
-        loginService.checkStatus { [weak self] (error) in
-            _ = self?.processLoginResult(error)
+        provideCheckStatus { [weak self] error in
+            self?.processLoginResult(error)
         }
     }
 
     func login(withLicenseKey key: String, completion: @escaping (Bool)->Void) {
-        loginService.login(licenseKey: key){ [weak self] (error) in
-            let result = self?.processLoginResult(error) ?? false
-            completion(result)
+        appleSearchAdsService?.provideAttributionRecords { [weak self] attributionRecords in
+            self?.loginService.login(licenseKey: key, attributionRecords: attributionRecords) { error in
+                let result = self?.processLoginResult(error) ?? false
+                completion(result)
+            }
         }
     }
 
@@ -262,16 +266,18 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
 
         postNotification(PurchaseAssistant.kPSNotificationOauthSucceeded, nil)
 
-        loginService.login(accessToken: token!) { [weak self]  (error) in
-            guard let sSelf = self else { return }
-
-            sSelf.processLoginResult(error)
+        appleSearchAdsService?.provideAttributionRecords { [weak self] attributionRecords in
+            self?.loginService.login(accessToken: token!, attributionRecords: attributionRecords) { (error) in
+                self?.processLoginResult(error)
+            }
         }
     }
 
     func login(name: String, password: String, code2fa: String?) {
-        loginService.login(name: name, password: password, code2fa: code2fa) { [weak self] (error) in
-            self?.processLoginResult(error)
+        appleSearchAdsService?.provideAttributionRecords { [weak self] attributionRecords in
+            self?.loginService.login(name: name, password: password, code2fa: code2fa, attributionRecords: attributionRecords) { (error) in
+                self?.processLoginResult(error)
+            }
         }
     }
 
@@ -378,7 +384,8 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
 
         if loginService.loggedIn && loginService.hasPremiumLicense {
             DDLogInfo("(PurchaseService) checkPremiumExpired - сheck adguard license status")
-            loginService.checkStatus { [weak self] (error) in
+
+            provideCheckStatus { [weak self] error in
                 if error != nil || !(self?.loginService.active ?? false) {
                     if !(self?.loginService.hasPremiumLicense ?? true) {
                         self?.postNotification(PurchaseAssistant.kPSNotificationPremiumExpired)
@@ -706,6 +713,14 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
 
     private func isDiscountCurrencyLocale(locale: String)->Bool {
         return locale.contains("_RU") || locale.contains("_UA")
+    }
+
+    private func provideCheckStatus(completion: @escaping (_ error: Error?) -> Void) {
+        appleSearchAdsService?.provideAttributionRecords { [weak self] attributionRecords in
+            self?.loginService.checkStatus(attributionRecords: attributionRecords) { (error) in
+                completion(error)
+            }
+        }
     }
 
     func updateSetappState(subscription: SetappSubscription) {
