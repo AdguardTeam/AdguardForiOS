@@ -176,7 +176,7 @@ final class LoginService: LoginServiceProtocol {
                 callback(error)
             }
             else {
-                self?.loginInternal(accessToken: accessToken, callback: callback)
+                self?.loginInternal(accessToken: accessToken, attributionRecords: attributionRecords, callback: callback)
             }
         }
     }
@@ -275,7 +275,7 @@ final class LoginService: LoginServiceProtocol {
 
     // MARK: - Private methods
 
-    private func loginInternal(accessToken: String, callback: @escaping (NSError?) -> Void) {
+    private func loginInternal(accessToken: String, attributionRecords: String?, callback: @escaping (NSError?) -> Void) {
 
         guard let appId = keychain.appId else {
             DDLogError("(LoginService) loginInternal error - can not obtain appId)")
