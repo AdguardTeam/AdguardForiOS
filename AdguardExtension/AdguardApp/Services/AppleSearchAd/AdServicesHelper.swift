@@ -52,12 +52,6 @@ final class AdServicesHelper: AdServicesHelperProtocol {
                         return
                     }
 
-                    if json["campaignId"] == AppleSearchAdsService.AdsError.campaignMockId {
-                        DDLogError("(AdServicesHelper) - fetchAttributionRecords; Received mock data")
-                        completionHandler(.failure(AppleSearchAdsService.AdsError.mockData))
-                        return
-                    }
-
                     completionHandler(.success(json))
                 case .failure(let error):
                     DDLogError("(AdServicesHelper) - fetchAttributionRecords; On http request error: \(error)")

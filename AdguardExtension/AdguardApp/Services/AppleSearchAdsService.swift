@@ -29,28 +29,22 @@ fileprivate enum UsedFrameworks {
 }
 
 /// This object is responsible for providing attribution records
+/// for iAd framework response:
+/// https://developer.apple.com/documentation/iad/setting_up_apple_search_ads_attribution/
+/// for AdServices framework response:
+/// https://developer.apple.com/documentation/adservices/aaattribution/3697093-attributiontoken
 final class AppleSearchAdsService: AppleSearchAdsServiceProtocol {
 
     // MARK: - AppleSearchAdsServiceError
 
      enum AdsError: Error, CustomDebugStringConvertible {
         case missingAttributionData
-        case mockData
 
         var debugDescription: String {
             switch self {
             case .missingAttributionData: return "Attribution data was missing"
-            case .mockData: return "Received mock data"
             }
         }
-
-         /// Ad services or iAd framework may return mock data
-         /// Apples mock id
-         ///     ///  for iAd framework response:
-         ///  https://developer.apple.com/documentation/iad/setting_up_apple_search_ads_attribution/
-         ///  for AdServices framework response:
-         ///  https://developer.apple.com/documentation/adservices/aaattribution/3697093-attributiontoken
-        static let campaignMockId = "1234567890"
     }
 
     // MARK: - Private properties

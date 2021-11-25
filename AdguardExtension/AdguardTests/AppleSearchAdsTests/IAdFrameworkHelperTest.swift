@@ -45,21 +45,6 @@ class IAdFrameworkHelperTest: XCTestCase {
         XCTAssertEqual(adClientWrapper.invokedRequestAttributionDetailsCount, 1)
     }
 
-    func testFetchAttributionRecordsWithMockData() {
-        adClientWrapper.stubbedRequestAttributionDetailsCompletionHanderResult = .success(adClientWrapper.adClientAttributionRecordsWithMockCompaignId)
-
-        helper.fetchAttributionRecords { records in
-            switch records {
-            case .success(_): XCTFail()
-            case .failure(let error):
-                XCTAssertEqual(error as! AppleSearchAdsService.AdsError,
-                               AppleSearchAdsService.AdsError.mockData)
-            }
-        }
-
-        XCTAssertEqual(adClientWrapper.invokedRequestAttributionDetailsCount, 1)
-    }
-
     func testFetchAttributionRecordsWithEmptyData() {
         adClientWrapper.stubbedRequestAttributionDetailsCompletionHanderResult = .success([:])
 

@@ -36,7 +36,7 @@ class AdServicesHelperTest: XCTestCase {
 
     func testFetchAttributionRecordsWithSuccess() {
         let expectation = XCTestExpectation()
-        let attributionData = getAttributionData(withClickDate: false, withMockData: false)
+        let attributionData = getAttributionData(withClickDate: false)
         let sender = RequestSenderMock(valueToReturn: .success(attributionData))
         httpRequestService.stubbedRequestSender = sender
         adServicesWrapper.stubbedGetAttributionTokenResult = "token"
@@ -58,7 +58,7 @@ class AdServicesHelperTest: XCTestCase {
 
     func testFetchAttributionRecordsWithSuccessClickDate() {
         let expectation = XCTestExpectation()
-        let attributionData = getAttributionData(withClickDate: true, withMockData: false)
+        let attributionData = getAttributionData(withClickDate: true)
         let sender = RequestSenderMock(valueToReturn: .success(attributionData))
         httpRequestService.stubbedRequestSender = sender
         adServicesWrapper.stubbedGetAttributionTokenResult = "token"
@@ -118,30 +118,9 @@ class AdServicesHelperTest: XCTestCase {
         XCTAssertEqual(httpRequestService.invokedRequestSenderGetterCount, 1)
     }
 
-    func testFetchAttributionRecordsWithMockData() {
-        let expectation = XCTestExpectation()
-        let attributionData = getAttributionData(withClickDate: true, withMockData: true)
-        let sender = RequestSenderMock(valueToReturn: .success(attributionData))
-        httpRequestService.stubbedRequestSender = sender
-        adServicesWrapper.stubbedGetAttributionTokenResult = "token"
-        helper.fetchAttributionRecords { result in
-            switch result {
-            case .success(_): XCTFail()
-            case .failure(let error):
-                XCTAssertEqual(error as! AppleSearchAdsService.AdsError,
-                               AppleSearchAdsService.AdsError.mockData)
-                expectation.fulfill()
-            }
-        }
-
-        wait(for: [expectation], timeout: 0.5)
-        XCTAssertEqual(adServicesWrapper.invokedGetAttributionTokenCount, 1)
-        XCTAssertEqual(httpRequestService.invokedRequestSenderGetterCount, 1)
-    }
-
     func testFetchAttributionRecordsWithAdServiceError() {
         let expectation = XCTestExpectation()
-        let attributionData = getAttributionData(withClickDate: true, withMockData: true)
+        let attributionData = getAttributionData(withClickDate: true)
         let sender = RequestSenderMock(valueToReturn: .success(attributionData))
         httpRequestService.stubbedRequestSender = sender
         adServicesWrapper.stubbedGetAttributionTokenError = testError
@@ -160,10 +139,9 @@ class AdServicesHelperTest: XCTestCase {
         XCTAssertEqual(httpRequestService.invokedRequestSenderGetterCount, 0)
     }
 
-    private func getAttributionData(withClickDate: Bool, withMockData: Bool) -> [String: String] {
+    private func getAttributionData(withClickDate: Bool) -> [String: String] {
         let clickDate = withClickDate ? "2020-04-08T17:17Z" : nil
-        let compaignId = withMockData ? Int(AppleSearchAdsService.AdsError.campaignMockId)! : 542370539
-        let records = AttributionRecords(attribution: true, orgId: 40669820, campaignId: compaignId, conversionType: "Download", clickDate: clickDate, adGroupId: 542317095, countryOrRegion: "US", keywordId: 87675432, creativeSetId: 542317136)
+        let records = AttributionRecords(attribution: true, orgId: 40669820, campaignId: 542370539, conversionType: "Download", clickDate: clickDate, adGroupId: 542317095, countryOrRegion: "US", keywordId: 87675432, creativeSetId: 542317136)
         return records.jsonMap
     }
 }

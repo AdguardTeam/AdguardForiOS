@@ -64,12 +64,6 @@ final class IAdFrameworkHelper: IAdFrameworkHelperProtocol {
             return
         }
 
-        if json["iad-campaign-id"] == AppleSearchAdsService.AdsError.campaignMockId {
-            DDLogError("(IAdFrameworkHelper) - processAttributionDetails; Received mock data")
-            completionHandler(.failure(AppleSearchAdsService.AdsError.mockData))
-            return
-        }
-
         completionHandler(.success(json))
     }
 }

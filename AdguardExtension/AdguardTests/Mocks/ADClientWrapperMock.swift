@@ -25,15 +25,9 @@ class ADClientWrapperMock: AdClientWrapperProtocol {
         return ["Version3.1": copy]
     }
 
-    var adClientAttributionRecordsWithMockCompaignId: [String: NSObject] {
-        let copy = attributionRecords.mutableCopy() as! NSMutableDictionary
-        copy.setValue("1234567890", forKey: "iad-campaign-id")
-
-        return ["Version3.1": copy]
-    }
-
      let attributionRecords: NSMutableDictionary = [
         "iad-attribution": "true",
+        "iad-campaign-id": "1234567890",
         "iad-org-name": "org name",
         "iad-org-id": "555555",
         "iad-campaign-id": "11111111",
