@@ -34,7 +34,7 @@ class MigrationServiceVersionProvider: MigrationServiceVersionProviderProtocol {
 
     var isLastVersionLessThan4_1: Bool {
         let lastBuildVersion = resources.buildVersion
-        return lastBuildVersion < 650
+        return lastBuildVersion > 0 && lastBuildVersion < 650
     }
 
     private let resources: AESharedResourcesProtocol
