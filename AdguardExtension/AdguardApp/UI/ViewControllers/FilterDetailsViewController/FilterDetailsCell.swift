@@ -70,18 +70,18 @@ final class FilterDetailsCell: UITableViewCell, Reusable {
     }
 
     private func setupUI() {
-        addSubview(titleLabel)
-        addSubview(descriptionLabel)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(descriptionLabel)
 
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16.0),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16.0),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16.0),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16.0),
 
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2.0),
-            descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
-            descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
-            descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16.0),
+            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16.0),
+            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16.0),
+            descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16.0),
         ])
     }
 }
