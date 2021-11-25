@@ -18,7 +18,7 @@
 
 import Foundation
 
-/** View model for DnsRequestDetailsContainerController */
+/// View model for DnsRequestDetailsContainerController
 final class DnsRequestDetailsViewModel {
 
     let logRecord: DnsLogRecord
@@ -37,6 +37,11 @@ final class DnsRequestDetailsViewModel {
 
     func addDomainToUserRules(_ domain: String) throws {
         try helper.addDomainToUserRules(domain)
+        logRecord.userFilterStatus = helper.getUserFilterStatusForDomain(logRecord.event.domain)
+    }
+
+    func addEditedBlocklistRule(_ blocklistRule: String) throws {
+        try helper.addEditedBlocklistRule(blocklistRule)
         logRecord.userFilterStatus = helper.getUserFilterStatusForDomain(logRecord.event.domain)
     }
 

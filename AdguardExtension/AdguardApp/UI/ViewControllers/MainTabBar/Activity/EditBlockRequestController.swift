@@ -59,7 +59,12 @@ final class EditBlockRequestController: BottomAlertController {
 
     @IBAction func addTapped(_ sender: UIButton) {
         let domain = domainNameTextField.text ?? ""
-        delegate?.add(domain: domain, by: type)
+
+        switch type {
+        case .removeDomainFromWhitelist, .removeRuleFromUserFilter: break
+        case .addDomainToAllowList: delegate?.add(domain: domain, by: .addDomainToAllowList)
+        case .addRuleToUserFlter: delegate?.addEditedBlocklistRule(domain)
+        }
         dismiss(animated: true)
     }
 

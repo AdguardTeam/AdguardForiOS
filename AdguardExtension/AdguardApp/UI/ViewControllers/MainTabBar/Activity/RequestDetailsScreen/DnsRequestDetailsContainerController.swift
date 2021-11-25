@@ -28,6 +28,12 @@ protocol AddDomainToListDelegate: AnyObject {
         - type: type of domain blacklist / whitelist.
      */
     func add(domain: String, by type: DnsLogButtonType)
+
+    /**
+     Adds blocklist rule that was edited by the user
+     - Parameter blocklistRule: Rule that user did enter
+     */
+    func addEditedBlocklistRule(_ blocklistRule: String)
 }
 
 protocol DnsRequestDetailsContainerControllerDelegate: AnyObject {
@@ -86,6 +92,16 @@ final class DnsRequestDetailsContainerController: UIViewController, AddDomainToL
             } else if type == .addRuleToUserFlter {
                 try model.addDomainToUserRules(domain)
             }
+        }
+        catch {
+            self.showUnknownErrorAlert()
+        }
+        updateUserStatus()
+    }
+
+    func addEditedBlocklistRule(_ blocklistRule: String) {
+        do {
+            try model.addEditedBlocklistRule(blocklistRule)
         }
         catch {
             self.showUnknownErrorAlert()

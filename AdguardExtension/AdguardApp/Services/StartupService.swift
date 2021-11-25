@@ -158,7 +158,7 @@ final class StartupService : NSObject {
         let dnsLogStatistics: DnsLogStatisticsProtocol = try! DnsLogStatistics(statisticsDbContainerUrl: sharedUrls.statisticsFolderUrl)
         locator.addService(service: dnsLogStatistics)
 
-        let dnsLogRecordsHelper = DnsLogRecordHelper(dnsProtection: dnsProtection, dnsTrackers: dnsTrackers, domainConverter: DomainConverter())
+        let dnsLogRecordsHelper = DnsLogRecordHelper(dnsProtection: dnsProtection, dnsTrackers: dnsTrackers, domainConverter: DomainConverter(), dnsConfigAssistant: dnsConfigAssistant)
         locator.addService(service: dnsLogRecordsHelper)
 
         let migrationService: MigrationServiceProtocol = MigrationService(

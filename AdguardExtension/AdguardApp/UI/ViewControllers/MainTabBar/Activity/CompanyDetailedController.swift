@@ -75,7 +75,8 @@ final class CompanyDetailedController: UITableViewController {
             dnsStatistics: ServiceLocator.shared.getService()!,
             dnsProtection: ServiceLocator.shared.getService()!,
             domainParser: ServiceLocator.shared.getService()!,
-            logRecordHelper: ServiceLocator.shared.getService()!
+            logRecordHelper: ServiceLocator.shared.getService()!,
+            dnsConfigAssistant: ServiceLocator.shared.getService()!
         )
         super.init(coder: coder)
     }

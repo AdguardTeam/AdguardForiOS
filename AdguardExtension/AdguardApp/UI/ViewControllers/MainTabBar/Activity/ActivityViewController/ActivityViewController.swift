@@ -597,6 +597,14 @@ extension ActivityViewController: UIGestureRecognizerDelegate {
 }
 
 extension ActivityViewController: AddDomainToListDelegate {
+    func addEditedBlocklistRule(_ blocklistRule: String) {
+        do {
+            try requestsModel?.addEditedBlocklistRule(blocklistRule)
+        }
+        catch {
+            showUnknownErrorAlert()
+        }
+    }
 
     func add(domain: String, by type: DnsLogButtonType) {
         do {
