@@ -169,7 +169,7 @@ final class NewDnsServerController: BottomAlertController {
 
     private func updateSaveButton(_ dns: String) {
         let dnsName = nameField.text ?? ""
-        let enabled = dnsName.count > 0 && isCorrectDns(dns)
+        let enabled = dnsName.trimmingCharacters(in: .whitespaces).count > 0 && isCorrectDns(dns)
         saveOrAddButton.isEnabled = enabled
     }
 
