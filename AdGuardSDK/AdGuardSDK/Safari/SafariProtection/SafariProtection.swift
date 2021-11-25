@@ -48,7 +48,7 @@ public final class SafariProtection: SafariProtectionProtocol {
     let cbQueue = DispatchQueue(label: "SafariAdGuardSDK.SafariProtection.cbQueue", qos: .background)
 
     // Queue to call completion handlers
-    let completionQueue = DispatchQueue.main
+    let completionQueue = DispatchQueue(label: "SafariAdGuardSDK.SafariProtection.completionQueue")
 
     /* Services */
     var configuration: SafariConfigurationProtocol

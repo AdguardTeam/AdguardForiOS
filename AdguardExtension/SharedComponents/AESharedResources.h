@@ -40,7 +40,7 @@ extern NSString * _Nonnull AEDefaultsFirstRunKey;
 /**
  User Defaults key that defines schema version for upgrade procedure.
  */
-extern NSString * _Nonnull AEDefaultsProductSchemaVersion;
+extern NSString * _Nonnull AEDefaultsProductSchemaVersion; // TODO: - This key is obsolete and can be removed
 
 /**
  User Defaults key that defines last used build version for upgrade procedure.
@@ -124,7 +124,7 @@ extern NSString*  _Nonnull AEDefaultsAuthStateString;
 /**
  User defaults key, which defines that appId allready saved with right access rights.
  */
-// todo: remove this in future
+// TODO: - This key is obsolete and can be removed
 extern NSString*  _Nonnull AEDefaultsAppIdSavedWithAccessRights;
 
 /**
@@ -262,7 +262,7 @@ extern NSString* _Nonnull BackgroundFetchStateKey;
 /**
  User defaults key for migrations.
  */
-extern NSString* _Nonnull NeedToUpdateFiltersKey;
+extern NSString* _Nonnull NeedToUpdateFiltersKey; // TODO: - This key is obsolete and can be removed
 
 /**
  User defaults key for storing current DNS implementation.

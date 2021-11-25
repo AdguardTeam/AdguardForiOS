@@ -31,9 +31,7 @@ class FiltersServiceTest: XCTestCase {
             return ExtendedFiltersMeta.Meta(filterId: filter.filterId,
                                             name: filter.name,
                                             description: filter.description,
-                                            timeAdded: filter.lastUpdateTime,
                                             homePage: filter.homePage,
-                                            updateFrequency: filter.expires,
                                             displayNumber: filter.displayNumber,
                                             group: groups.first(where: { $0.groupId == filter.groupId })!,
                                             filterDownloadPage: filter.subscriptionUrl,
@@ -256,9 +254,7 @@ class FiltersServiceTest: XCTestCase {
         modifiedFilter = ExtendedFiltersMeta.Meta(filterId: modifiedFilter.filterId,
                                                   name: modifiedFilter.name! + "_mod",
                                                   description: modifiedFilter.description! + "_mod",
-                                                  timeAdded: modifiedFilter.timeAdded,
                                                   homePage: modifiedFilter.homePage,
-                                                  updateFrequency: modifiedFilter.updateFrequency,
                                                   displayNumber: modifiedFilter.displayNumber,
                                                   group: modifiedFilter.group,
                                                   filterDownloadPage: modifiedFilter.filterDownloadPage,
@@ -275,9 +271,7 @@ class FiltersServiceTest: XCTestCase {
         let newFilter = ExtendedFiltersMeta.Meta(filterId: addedFilterId,
                                                  name: "newFilterName",
                                                  description: "newFilterDescription",
-                                                 timeAdded: Date(),
                                                  homePage: "newFilterHomepage",
-                                                 updateFrequency: 30000,
                                                  displayNumber: addedFilterId,
                                                  group: newFilterGroup,
                                                  filterDownloadPage: "newFilterDownloadPage",
@@ -592,7 +586,6 @@ class FiltersServiceTest: XCTestCase {
                              description: "Bar",
                              version: "123",
                              lastUpdateDate: lastUpdateDate,
-                             updateFrequency: 123,
                              homePage: "url",
                              licensePage: "license",
                              issuesReportPage: "issuePage",
@@ -618,7 +611,6 @@ class FiltersServiceTest: XCTestCase {
         XCTAssertEqual(newFilter?.description, "Bar")
         XCTAssertEqual(newFilter?.version, "123")
         XCTAssertEqual(newFilter?.lastUpdateDate, lastUpdateDate)
-        XCTAssertEqual(newFilter?.updateFrequency, 123)
         XCTAssertEqual(newFilter?.homePage, "url")
         XCTAssertEqual(newFilter?.filterDownloadPage, "filterDownloadPage")
 
@@ -632,7 +624,6 @@ class FiltersServiceTest: XCTestCase {
                                             description: "Bar",
                                             version: "123",
                                             lastUpdateDate: Date(),
-                                            updateFrequency: 123,
                                             homePage: "url",
                                             licensePage: "license",
                                             issuesReportPage: "issuePage",
@@ -659,7 +650,6 @@ class FiltersServiceTest: XCTestCase {
                                             description: "Bar",
                                             version: "123",
                                             lastUpdateDate: Date(),
-                                            updateFrequency: 123,
                                             homePage: "url",
                                             licensePage: "license",
                                             issuesReportPage: "issuePage",
@@ -687,7 +677,6 @@ class FiltersServiceTest: XCTestCase {
                                             description: "Bar",
                                             version: "123",
                                             lastUpdateDate: Date(),
-                                            updateFrequency: 123,
                                             homePage: "url",
                                             licensePage: "license",
                                             issuesReportPage: "issuePage",
@@ -716,7 +705,6 @@ class FiltersServiceTest: XCTestCase {
                              description: "Bar",
                              version: "123",
                              lastUpdateDate: Date(),
-                             updateFrequency: 123,
                              homePage: "url",
                              licensePage: "license",
                              issuesReportPage: "issuePage",
@@ -817,7 +805,6 @@ class FiltersServiceTest: XCTestCase {
                              description: "Bar",
                              version: "123",
                              lastUpdateDate: Date(),
-                             updateFrequency: 123,
                              homePage: "url",
                              licensePage: "license",
                              issuesReportPage: "issuePage",

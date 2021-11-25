@@ -20,7 +20,7 @@ import SystemConfiguration.CaptiveNetwork
 import NetworkExtension
 import SharedAdGuardSDK
 
-/** struct for using in NetworkSettingsTableController */
+/// struct for using in NetworkSettingsTableController
 struct WifiException: Equatable, Codable {
     // rule - ssid the wi-fi network in which the dns filtering should not work
     let rule: String
@@ -36,9 +36,8 @@ protocol NetworkSettingsChangedDelegate {
     func settingsChanged()
 }
 
-/** The NetworkSettingsService is responsible for storing DNS Network settings
-    Also it constructs ondemand rules for vpn manager.
- */
+/// The NetworkSettingsService is responsible for storing DNS Network settings
+/// Also it constructs ondemand rules for vpn manager.
 protocol NetworkSettingsServiceProtocol: AnyObject {
     // wi-fi exception rules
     var exceptions: [WifiException] { get }
@@ -245,8 +244,6 @@ fileprivate extension AESharedResourcesProtocol {
         }
     }
 
-    // TODO: write migration
-    // in v4.2 Wi-Fi exceptions were saved in the json file. We now store them in user defaults.
     var wifiExceptions: [WifiException] {
         get {
             guard let decoded = sharedDefaults().object(forKey: wifiExceptionsKey) as? Data else {

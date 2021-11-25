@@ -82,7 +82,7 @@ class DnsProtectionMock: DnsProtectionProtocol {
         if let error = addFilterResult {
             onFilterAdded(error)
         } else {
-            filters.append(DnsFilter(filterId: addFilterCalledCount, subscriptionUrl: url, isEnabled: isEnabled, name: name, description: nil, version: nil, lastUpdateDate: nil, updateFrequency: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0))
+            filters.append(DnsFilter(filterId: addFilterCalledCount, subscriptionUrl: url, isEnabled: isEnabled, name: name, description: nil, version: nil, lastUpdateDate: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0))
             onFilterAdded(nil)
         }
     }

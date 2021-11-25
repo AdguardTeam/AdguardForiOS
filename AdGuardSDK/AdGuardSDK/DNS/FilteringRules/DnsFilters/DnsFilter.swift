@@ -26,7 +26,6 @@ public struct DnsFilter: ExtendedCustomFilterMetaProtocol, Codable, Equatable {
     public let description: String?
     public let version: String?
     public let lastUpdateDate: Date?
-    public let updateFrequency: Int?
     public let homePage: String?
     public let licensePage: String?
     public let issuesReportPage: String?
@@ -34,7 +33,7 @@ public struct DnsFilter: ExtendedCustomFilterMetaProtocol, Codable, Equatable {
     public let filterDownloadPage: String?
     public let rulesCount: Int
 
-    public init(filterId: Int, subscriptionUrl: URL, isEnabled: Bool, name: String?, description: String?, version: String?, lastUpdateDate: Date?, updateFrequency: Int?, homePage: String?, licensePage: String?, issuesReportPage: String?, communityPage: String?, filterDownloadPage: String?, rulesCount: Int) {
+    public init(filterId: Int, subscriptionUrl: URL, isEnabled: Bool, name: String?, description: String?, version: String?, lastUpdateDate: Date?, homePage: String?, licensePage: String?, issuesReportPage: String?, communityPage: String?, filterDownloadPage: String?, rulesCount: Int) {
         self.filterId = filterId
         self.subscriptionUrl = subscriptionUrl
         self.isEnabled = isEnabled
@@ -42,7 +41,6 @@ public struct DnsFilter: ExtendedCustomFilterMetaProtocol, Codable, Equatable {
         self.description = description
         self.version = version
         self.lastUpdateDate = lastUpdateDate
-        self.updateFrequency = updateFrequency
         self.homePage = homePage
         self.licensePage = licensePage
         self.issuesReportPage = issuesReportPage
@@ -59,7 +57,6 @@ public struct DnsFilter: ExtendedCustomFilterMetaProtocol, Codable, Equatable {
         self.description = meta?.description
         self.version = meta?.version
         self.lastUpdateDate = meta?.lastUpdateDate
-        self.updateFrequency = meta?.updateFrequency
         self.homePage = meta?.homePage
         self.licensePage = meta?.licensePage
         self.issuesReportPage = meta?.issuesReportPage

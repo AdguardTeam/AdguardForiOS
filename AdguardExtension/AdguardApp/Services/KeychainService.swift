@@ -50,8 +50,6 @@ class KeychainService : KeychainServiceProtocol {
 
             DDLogInfo("(KeychainService) get appId. strored: \(storedId ?? "nil")")
 
-            migrate3_0_0appIdIfNeeded(storedId)
-
             if storedId != nil {
                 return storedId
             }
@@ -302,15 +300,7 @@ class KeychainService : KeychainServiceProtocol {
 
         DDLogInfo("(KeychainService) save app id status: \(status)")
 
-        let success = status == errSecSuccess
-
-        if success {
-            // explanation in func migrate3_0_0appIdIfNeeded
-            // todo: remove in future
-            resources.sharedDefaults().set(true, forKey: AEDefaultsAppIdSavedWithAccessRights)
-        }
-
-        return success
+        return status == errSecSuccess
     }
 
     internal func deleteAppId()-> Bool {
@@ -357,34 +347,5 @@ class KeychainService : KeychainServiceProtocol {
         }
 
         return true
-    }
-
-    // todo: remove this in future
-    /*
-     in v 3.0.0 we saved appId with default access rights and it was not been accessible when device was locked with PIN-code
-     Here we remove old keychain record and make new with kSecAttrAccessibleAfterFirstUnlock access rights (if it needed)
-     */
-    private func migrate3_0_0appIdIfNeeded(_ appId: String?) {
-
-        DDLogInfo("(KeychainService) migrate3_0_0appIdIfNeeded")
-
-        if appId == nil {
-            DDLogInfo("(KeychainService) migrate3_0_0appIdIfNeeded - appId = nil")
-            return
-        }
-
-        let allreadyMigrated = resources.sharedDefaults().bool(forKey: AEDefaultsAppIdSavedWithAccessRights)
-        if allreadyMigrated {
-            DDLogInfo("(KeychainService) migrate3_0_0appIdIfNeeded - allreadyMigrated)")
-            return
-        }
-
-        if deleteAppId() {
-            DDLogInfo("(KeychainService) migrate3_0_0appIdIfNeeded - success")
-            _ = save(appId: appId!)
-        }
-        else {
-            DDLogInfo("(KeychainService) migrate3_0_0appIdIfNeeded - error. Can not delete old app id)")
-        }
     }
 }

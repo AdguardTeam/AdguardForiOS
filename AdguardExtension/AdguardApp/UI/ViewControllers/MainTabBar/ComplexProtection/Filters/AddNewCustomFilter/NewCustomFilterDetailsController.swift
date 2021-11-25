@@ -18,6 +18,7 @@
 
 import SharedAdGuardSDK
 import SafariAdGuardSDK
+import UIKit
 
 protocol NewCustomFilterDetailsControllerDelegate: AnyObject {
     func addCustomFilter(_ meta: ExtendedCustomFilterMetaProtocol, _ onFilterAdded: @escaping (Error?) -> Void)
@@ -146,7 +147,6 @@ final class NewCustomFilterDetailsController: BottomAlertController {
             description: model.meta.description,
             version: model.meta.version,
             lastUpdateDate: model.meta.lastUpdateDate,
-            updateFrequency: model.meta.updateFrequency,
             homePage: model.meta.homePage,
             licensePage: model.meta.licensePage,
             issuesReportPage: model.meta.issuesReportPage,
