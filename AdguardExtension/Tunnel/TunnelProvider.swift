@@ -72,6 +72,9 @@ class TunnelProvider: PacketTunnelProvider {
 
         let networkUtils = NetworkUtils()
 
+        // DNS data should be migrated before super.init is called
+        Self.migrateIfNeeded(resources: resources, configuration: configuration, networkUtils: networkUtils)
+
         try! super.init(userDefaults: resources.sharedDefaults(),
                         debugLoggs: debugLoggs,
                         dnsConfiguration: configuration,
@@ -79,8 +82,6 @@ class TunnelProvider: PacketTunnelProvider {
                         filterStorageUrl: filterStorageUrl,
                         statisticsDbContainerUrl: statisticsUrl,
                         networkUtils: networkUtils)
-
-        migrateIfNeeded(configuration: configuration, networkUtils: networkUtils)
     }
 
     static func getAddresses(mode: TunnelMode)-> PacketTunnelProvider.Addresses {
@@ -130,7 +131,7 @@ class TunnelProvider: PacketTunnelProvider {
         }
     }
 
-    private func migrateIfNeeded(configuration: DnsConfigurationProtocol, networkUtils: NetworkUtilsProtocol) {
+    private static func migrateIfNeeded(resources: AESharedResourcesProtocol, configuration: DnsConfigurationProtocol, networkUtils: NetworkUtilsProtocol) {
 
         let migrationVersionProvider = MigrationServiceVersionProvider(resources: resources)
         if migrationVersionProvider.isMigrationFrom4_1To4_3Needed {
