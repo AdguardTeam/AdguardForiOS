@@ -349,6 +349,7 @@ final class LoginService: LoginServiceProtocol {
         }
 
         if let attributionRecords = attributionRecords {
+            DDLogInfo("(LoginService) - requestStatus; Attribution records added as parameter for request status")
             params[STATUS_ATTRIBUTION_RECORDS_PARAM] = attributionRecords
         }
 

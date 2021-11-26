@@ -228,9 +228,8 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         requestProducts()
     }
 
-    @objc
     func checkLicenseStatus() {
-        provideCheckStatus { [weak self] error in
+        checkStatusInternal { [weak self] error in
             self?.processLoginResult(error)
         }
     }
@@ -385,7 +384,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         if loginService.loggedIn && loginService.hasPremiumLicense {
             DDLogInfo("(PurchaseService) checkPremiumExpired - сheck adguard license status")
 
-            provideCheckStatus { [weak self] error in
+            checkStatusInternal { [weak self] error in
                 if error != nil || !(self?.loginService.active ?? false) {
                     if !(self?.loginService.hasPremiumLicense ?? true) {
                         self?.postNotification(PurchaseAssistant.kPSNotificationPremiumExpired)
@@ -715,7 +714,7 @@ final class PurchaseService: NSObject, PurchaseServiceProtocol, SKPaymentTransac
         return locale.contains("_RU") || locale.contains("_UA")
     }
 
-    private func provideCheckStatus(completion: @escaping (_ error: Error?) -> Void) {
+    private func checkStatusInternal(completion: @escaping (_ error: Error?) -> Void) {
         appleSearchAdsService?.provideAttributionRecords { [weak self] attributionRecords in
             self?.loginService.checkStatus(attributionRecords: attributionRecords) { (error) in
                 completion(error)
