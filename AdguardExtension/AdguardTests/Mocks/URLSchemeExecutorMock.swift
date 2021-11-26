@@ -1,4 +1,8 @@
 class URLSchemeExecutorMock: IURLSchemeExecutor {
+    func openDnsProvidersController(showLaunchScreen: Bool, upstream: String, title: String?) -> Bool {
+        true
+    }
+
 
     func openUserFilterController(rule: String) -> Bool {
         true
