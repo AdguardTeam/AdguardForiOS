@@ -32,8 +32,9 @@
  9. <adguardScheme>://auth#access_token=<TOKEN>&token_type=<TOKEN TYPE>&state=<STATE>&expires_in=<EXPIRES IN>   <--- Log in by social networks
  10. <adguardScheme>://safariWebExtension?action=<ACTION>&domain=<DOMAIN> <--- Open with safari web extension action
     <ACTION> = removeFromAllowlist or addToAllowlist or addToBlocklist or removeAllBlocklistRules
- 11. <adguardScheme>://upgradeApp <--- Open License screen
- 12. <adguardScheme>://enableAdvancedProtection <--- Open Advanced protection screen
+ 11. <adguardScheme>://upgradeApp                                   <--- Open License screen
+ 12. <adguardScheme>://enableAdvancedProtection                     <--- Open Advanced protection screen
+ 13. <adguardScheme>://add_dns_server?address:<upstream>&name:<name> <--- Adding custom DNS server
  */
 
 protocol IURLSchemeParser {
