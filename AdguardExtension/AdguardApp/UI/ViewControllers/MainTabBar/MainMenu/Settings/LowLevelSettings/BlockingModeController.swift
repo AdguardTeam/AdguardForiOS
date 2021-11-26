@@ -86,14 +86,15 @@ class BlockingModeController: UITableViewController {
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         theme.setupTableCell(cell)
-
         return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            return
+        }
         updateBlockingMode(index: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
     }

@@ -66,14 +66,15 @@ class DnsModeController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         theme.setupTableCell(cell)
-
         return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            return
+        }
 
         var mode: TunnelMode = .full
         switch indexPath.row {
@@ -122,12 +123,9 @@ extension DnsModeController: ThemableProtocol {
     func updateTheme() {
         view.backgroundColor = theme.backgroundColor
         theme.setupTable(tableView)
-        DispatchQueue.main.async { [weak self] in
-            guard let sSelf = self else { return }
-            sSelf.tableView.reloadData()
-        }
         theme.setupLabels(themableLabels)
         separator1.backgroundColor = theme.separatorColor
         separator2.backgroundColor = theme.separatorColor
+        tableView.reloadData()
     }
 }

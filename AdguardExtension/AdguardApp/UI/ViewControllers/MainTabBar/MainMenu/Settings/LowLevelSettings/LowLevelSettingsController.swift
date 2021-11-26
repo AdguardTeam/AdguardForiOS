@@ -98,6 +98,9 @@ final class LowLevelSettingsController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            return
+        }
         switch indexPath.row {
         case blockIpv6:
             blockIpv6Switch.setOn(!blockIpv6Switch.isOn, animated: true)
