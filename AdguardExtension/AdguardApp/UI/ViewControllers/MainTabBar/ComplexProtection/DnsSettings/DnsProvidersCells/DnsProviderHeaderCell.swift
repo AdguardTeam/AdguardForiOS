@@ -46,6 +46,7 @@ final class DnsProviderHeaderCell : UITableViewCell, Reusable {
     private var logoImageView: ThemableImageView = {
         let imageView = ThemableImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .center
         return imageView
     }()
 
