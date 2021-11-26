@@ -54,6 +54,7 @@ fileprivate enum StringConstants: String {
     case urlSchemeSafariWebExtension = "safariWebExtension"
     case upgradeApp = "upgradeApp"
     case enableAdvancedProtection = "enableAdvancedProtection"
+    case addDnsServer = "add_dns_server"
 
     static func getStringConstant(string: String?) -> StringConstants? {
         guard let string = string else { return nil }
@@ -112,7 +113,13 @@ struct URLSchemeParser: IURLSchemeParser {
         // Adding custom DNS server
         case (.sdnsScheme, _):
             DDLogInfo("(URLSchemeParser) openurl sdns: \(url.absoluteString)")
-            let processor = OpenDnsProvidersControllerParser(executor: executor)
+            let processor = OpenDnsProvidersControllerWithSDNSParser(executor: executor)
+            return processor.parse(url)
+
+        // Adding custom DNS server
+        case (.urlScheme, .addDnsServer):
+            DDLogInfo("(URLSchemeParser) openurl - add dns server: \(url.absoluteString)")
+            let processor = OpenDnsProvidersControllerWithAdguardParser(executor: executor)
             return processor.parse(url)
 
         // Import settings

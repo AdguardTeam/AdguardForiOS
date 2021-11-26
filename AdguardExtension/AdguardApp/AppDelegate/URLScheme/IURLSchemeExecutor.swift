@@ -21,7 +21,7 @@ protocol IURLSchemeExecutor {
     func openDnsSettingsController(showLaunchScreen: Bool, dnsProtectionIsEnabled: Bool?) -> Bool
     func openMainPageController(showLaunchScreen: Bool, complexProtectionIsEnabled: Bool?) -> Bool
     func openLoginController(license: String?) -> Bool
-    func openDnsProvidersController(showLaunchScreen: Bool, urlAbsoluteString: String) -> Bool
+    func openDnsProvidersController(showLaunchScreen: Bool, upstream: String, title: String?) -> Bool
     func openImportSettingsController(showLaunchScreen: Bool, settings: ImportSettings) -> Bool
     func openFiltersMasterController(showLaunchScreen: Bool, url: String?, title: String?) -> Bool
     func openTunnelModeController(showLaunchScreen: Bool) -> Bool

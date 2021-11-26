@@ -108,8 +108,8 @@
 		247CB5C62600BB1C0047974C /* OpenMainPageControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB5C42600BB1C0047974C /* OpenMainPageControllerParser.swift */; };
 		247CB5EA2600C1B10047974C /* OpenLoginControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB5E92600C1B10047974C /* OpenLoginControllerParser.swift */; };
 		247CB5EB2600C1B10047974C /* OpenLoginControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB5E92600C1B10047974C /* OpenLoginControllerParser.swift */; };
-		247CB5FE2600C5A10047974C /* OpenDnsProvidersControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB5FD2600C5A10047974C /* OpenDnsProvidersControllerParser.swift */; };
-		247CB5FF2600C5A10047974C /* OpenDnsProvidersControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB5FD2600C5A10047974C /* OpenDnsProvidersControllerParser.swift */; };
+		247CB5FE2600C5A10047974C /* OpenDnsProvidersControllerWithSDNSParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB5FD2600C5A10047974C /* OpenDnsProvidersControllerWithSDNSParser.swift */; };
+		247CB5FF2600C5A10047974C /* OpenDnsProvidersControllerWithSDNSParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB5FD2600C5A10047974C /* OpenDnsProvidersControllerWithSDNSParser.swift */; };
 		247CB6122600C8870047974C /* OpenImportSettingsControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB6112600C8870047974C /* OpenImportSettingsControllerParser.swift */; };
 		247CB6132600C8870047974C /* OpenImportSettingsControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB6112600C8870047974C /* OpenImportSettingsControllerParser.swift */; };
 		247CB6262600CA5B0047974C /* OpenFiltersMasterControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB6252600CA5B0047974C /* OpenFiltersMasterControllerParser.swift */; };
@@ -157,7 +157,7 @@
 		249E11102600D382003A5FBD /* OpenDnsSettingsControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB5B02600B9940047974C /* OpenDnsSettingsControllerParser.swift */; };
 		249E11222600D384003A5FBD /* OpenMainPageControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB5C42600BB1C0047974C /* OpenMainPageControllerParser.swift */; };
 		249E11342600D387003A5FBD /* OpenLoginControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB5E92600C1B10047974C /* OpenLoginControllerParser.swift */; };
-		249E11462600D389003A5FBD /* OpenDnsProvidersControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB5FD2600C5A10047974C /* OpenDnsProvidersControllerParser.swift */; };
+		249E11462600D389003A5FBD /* OpenDnsProvidersControllerWithSDNSParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB5FD2600C5A10047974C /* OpenDnsProvidersControllerWithSDNSParser.swift */; };
 		249E11582600D38B003A5FBD /* OpenImportSettingsControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB6112600C8870047974C /* OpenImportSettingsControllerParser.swift */; };
 		249E116A2600D38D003A5FBD /* OpenFiltersMasterControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB6252600CA5B0047974C /* OpenFiltersMasterControllerParser.swift */; };
 		249E117C2600D390003A5FBD /* OpenTunnelModeControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247CB6392600CBE40047974C /* OpenTunnelModeControllerParser.swift */; };
@@ -2047,6 +2047,9 @@
 		D0C4EF2A23C7532800C57E22 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0B8EB8E2248E54A0066C5AC /* Default-568h@2x.png */; };
 		D0C940E623EAE3E4008B85EC /* NetworkSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5101942355CEE200935FE9 /* NetworkSettingsService.swift */; };
 		D0CB347B212DD1AB003B650E /* ConfigurationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CB347A212DD1AB003B650E /* ConfigurationService.swift */; };
+		D0CC0F3D27510D18005E9DA3 /* OpenDnsProvidersControllerWithAdguardParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CC0F3C27510D18005E9DA3 /* OpenDnsProvidersControllerWithAdguardParser.swift */; };
+		D0CC0F3E27510D18005E9DA3 /* OpenDnsProvidersControllerWithAdguardParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CC0F3C27510D18005E9DA3 /* OpenDnsProvidersControllerWithAdguardParser.swift */; };
+		D0CC0F3F27510D18005E9DA3 /* OpenDnsProvidersControllerWithAdguardParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CC0F3C27510D18005E9DA3 /* OpenDnsProvidersControllerWithAdguardParser.swift */; };
 		D0CDAEA52191C9540028001B /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDAEA42191C9540028001B /* String+Utils.swift */; };
 		D0D0CAFA268A27CC00AD427E /* ACObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D0CAF8268A27CC00AD427E /* ACObject.m */; };
 		D0D0CAFD268B058200AD427E /* ABECRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D0CAFC268B058100AD427E /* ABECRequest.m */; };
@@ -2462,7 +2465,7 @@
 		247CB5B02600B9940047974C /* OpenDnsSettingsControllerParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDnsSettingsControllerParser.swift; sourceTree = "<group>"; };
 		247CB5C42600BB1C0047974C /* OpenMainPageControllerParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenMainPageControllerParser.swift; sourceTree = "<group>"; };
 		247CB5E92600C1B10047974C /* OpenLoginControllerParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLoginControllerParser.swift; sourceTree = "<group>"; };
-		247CB5FD2600C5A10047974C /* OpenDnsProvidersControllerParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDnsProvidersControllerParser.swift; sourceTree = "<group>"; };
+		247CB5FD2600C5A10047974C /* OpenDnsProvidersControllerWithSDNSParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDnsProvidersControllerWithSDNSParser.swift; sourceTree = "<group>"; };
 		247CB6112600C8870047974C /* OpenImportSettingsControllerParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenImportSettingsControllerParser.swift; sourceTree = "<group>"; };
 		247CB6252600CA5B0047974C /* OpenFiltersMasterControllerParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenFiltersMasterControllerParser.swift; sourceTree = "<group>"; };
 		247CB6392600CBE40047974C /* OpenTunnelModeControllerParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenTunnelModeControllerParser.swift; sourceTree = "<group>"; };
@@ -3578,6 +3581,7 @@
 		D0BDDD26215AAF43000C85F1 /* AddCustomFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCustomFilterController.swift; sourceTree = "<group>"; };
 		D0CB3476212DCE21003B650E /* Adguard-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Adguard-Bridging-Header.h"; sourceTree = "<group>"; };
 		D0CB347A212DD1AB003B650E /* ConfigurationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationService.swift; sourceTree = "<group>"; };
+		D0CC0F3C27510D18005E9DA3 /* OpenDnsProvidersControllerWithAdguardParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenDnsProvidersControllerWithAdguardParser.swift; sourceTree = "<group>"; };
 		D0CDAEA42191C9540028001B /* String+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Utils.swift"; sourceTree = "<group>"; };
 		D0D0CAF8268A27CC00AD427E /* ACObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACObject.m; sourceTree = "<group>"; };
 		D0D0CAF9268A27CC00AD427E /* ACObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACObject.h; sourceTree = "<group>"; };
@@ -4079,7 +4083,8 @@
 				247CB5C42600BB1C0047974C /* OpenMainPageControllerParser.swift */,
 				24F66A9926033DA00097B426 /* OpenMainPageControllerControllerWithLaunchScreenParser.swift */,
 				247CB5E92600C1B10047974C /* OpenLoginControllerParser.swift */,
-				247CB5FD2600C5A10047974C /* OpenDnsProvidersControllerParser.swift */,
+				247CB5FD2600C5A10047974C /* OpenDnsProvidersControllerWithSDNSParser.swift */,
+				D0CC0F3C27510D18005E9DA3 /* OpenDnsProvidersControllerWithAdguardParser.swift */,
 				247CB6112600C8870047974C /* OpenImportSettingsControllerParser.swift */,
 				247CB6252600CA5B0047974C /* OpenFiltersMasterControllerParser.swift */,
 				247CB6392600CBE40047974C /* OpenTunnelModeControllerParser.swift */,
@@ -8059,6 +8064,7 @@
 				B2673DCF27173DFD00E04747 /* DnsProtectionFiltersMigrationHelper.swift in Sources */,
 				247CB5672600B2F60047974C /* AppDelegate+IURLSchemeExecutor.swift in Sources */,
 				2490F65B2700983F00B1514D /* SuccessFailureParser.swift in Sources */,
+				D0CC0F3E27510D18005E9DA3 /* OpenDnsProvidersControllerWithAdguardParser.swift in Sources */,
 				B2673DCB27173DFD00E04747 /* SafariProtectionAllowlistRulesMigrationHelper.swift in Sources */,
 				D0B545BD2435D659002F0AEC /* EditBlockRequestController.swift in Sources */,
 				B2673DC927173DFD00E04747 /* ObsoleteSafariAllowlistRulesWrappers.swift in Sources */,
@@ -8203,7 +8209,7 @@
 				24ED98CA259B78DF00A73B17 /* Array+Utils.swift in Sources */,
 				7EE8AC1726C595350070D477 /* ThemeMode.swift in Sources */,
 				D0B5459B2435D636002F0AEC /* MainTabBarController.swift in Sources */,
-				247CB5FF2600C5A10047974C /* OpenDnsProvidersControllerParser.swift in Sources */,
+				247CB5FF2600C5A10047974C /* OpenDnsProvidersControllerWithSDNSParser.swift in Sources */,
 				2490F655270097FE00B1514D /* RequestSenderProtocol.swift in Sources */,
 				D0D7E5F724444F05001801A5 /* RuleLabel.swift in Sources */,
 				D0D7E62124445728001801A5 /* CompanyDetailedController.swift in Sources */,
@@ -8514,6 +8520,7 @@
 				7EF4285C23AB77AB00948B65 /* ComplexProtectionController.swift in Sources */,
 				D09E2D30255D6AFF002D6BC0 /* SettingsParser.swift in Sources */,
 				D0F9117621303E4C006DF0D3 /* ServiceLocator.swift in Sources */,
+				D0CC0F3D27510D18005E9DA3 /* OpenDnsProvidersControllerWithAdguardParser.swift in Sources */,
 				7EE461CA26FE569900DFBF2A /* DnsConfiguration+Initializers.swift in Sources */,
 				244339A72580EA2600AB4F26 /* BlockedResponseTtlController.swift in Sources */,
 				D07D41D121FF1F6400B03872 /* DnsModeController.swift in Sources */,
@@ -8661,7 +8668,7 @@
 				24ED98C6259B78DF00A73B17 /* Array+Utils.swift in Sources */,
 				24A6021426FCB0AE0049A329 /* AdvancedYouTubeBlockingController.swift in Sources */,
 				D05CA86D1F3B6455006DFD7F /* APCommonSharedResources.m in Sources */,
-				247CB5FE2600C5A10047974C /* OpenDnsProvidersControllerParser.swift in Sources */,
+				247CB5FE2600C5A10047974C /* OpenDnsProvidersControllerWithSDNSParser.swift in Sources */,
 				7EB2F95623F2B96B00F9A544 /* CharacterSet+Utils.swift in Sources */,
 				7E1A8F6626FDE1AE00BA98D5 /* ContentBlockerType+Name.swift in Sources */,
 				7ED0D64D23D593D2004D9E7C /* UIButton+Utils.swift in Sources */,
@@ -8813,7 +8820,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				249E11462600D389003A5FBD /* OpenDnsProvidersControllerParser.swift in Sources */,
+				249E11462600D389003A5FBD /* OpenDnsProvidersControllerWithSDNSParser.swift in Sources */,
 				D0288F41230699A900A4EBEF /* ACLFileLogger.m in Sources */,
 				B26B927B2719B46F00F1D482 /* SDKMigrationsDirectoriesManager.swift in Sources */,
 				B26B92972719BAF100F1D482 /* SafariProtectionAllowlistRulesMigrationHelper.swift in Sources */,
@@ -8852,6 +8859,7 @@
 				D0288F362306983800A4EBEF /* ACIOUtils.m in Sources */,
 				7EF14477242A288D0034A727 /* Date+Utils.swift in Sources */,
 				249E11A02600D3AB003A5FBD /* IURLSchemeExecutor.swift in Sources */,
+				D0CC0F3F27510D18005E9DA3 /* OpenDnsProvidersControllerWithAdguardParser.swift in Sources */,
 				2449000B272C3E5100557CEE /* ImportSettingsService.swift in Sources */,
 				D0EFBF5C22BA63B100D2D391 /* SharedResourcesMock.swift in Sources */,
 				D0EFBF5922BA62E800D2D391 /* String+Utils.swift in Sources */,

@@ -43,7 +43,8 @@ final class NewDnsServerController: BottomAlertController {
     var controllerType: DnsServerControllerType = .add
     var dnsProviderManager: DnsProvidersManagerProtocol!
     var customDnsProvider: CustomDnsProviderProtocol?
-    var openUrl: String?
+    var openUpstream: String?
+    var openTitle: String?
 
     weak var delegate: NewDnsServerControllerDelegate?
 
@@ -80,12 +81,18 @@ final class NewDnsServerController: BottomAlertController {
         nameField.delegate = self
         upstreamsField.delegate = self
 
-        if let openUrl = openUrl {
+        if let openUpstream = openUpstream {
             // Native DNS implementation doesn't support port syntax
-            upstreamsField.text = resources.dnsImplementation == .adGuard ? openUrl : openUrl.discardPortFromIpAddress()
+            upstreamsField.text = resources.dnsImplementation == .adGuard ? openUpstream : openUpstream.discardPortFromIpAddress()
         } else {
-            nameField.text = model.providerName
             upstreamsField.text = model.providerUpstream
+        }
+
+        if let openTitle = openTitle {
+            nameField.text = openTitle
+        }
+        else {
+            nameField.text = model.providerName
         }
 
         nameField.becomeFirstResponder()

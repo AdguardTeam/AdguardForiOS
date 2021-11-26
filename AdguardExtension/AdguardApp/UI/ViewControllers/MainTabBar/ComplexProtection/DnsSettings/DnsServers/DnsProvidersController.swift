@@ -27,7 +27,10 @@ final class DnsProvidersController: UITableViewController {
     }
 
     // MARK: - public fields
-    var openUrl: String?
+
+    /// this properties are used when a custom DNS server is added via openUrl
+    var openUpstream: String?
+    var openTitle: String?
 
     // MARK: - services
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -69,11 +72,13 @@ final class DnsProvidersController: UITableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        guard let _ = openUrl else { return }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-            self?.presentNewDnsServerController(controllerType: .add, nil)
-            self?.openUrl = nil
+        if openUpstream != nil || openTitle != nil {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                self?.presentNewDnsServerController(controllerType: .add, nil)
+                self?.openUpstream = nil
+                self?.openTitle = nil
+            }
         }
     }
 
@@ -163,7 +168,8 @@ final class DnsProvidersController: UITableViewController {
         switch controllerType {
         case .add:
             controller.dnsProviderManager = dnsProvidersManager
-            controller.openUrl = openUrl
+            controller.openUpstream = openUpstream
+            controller.openTitle = openTitle
         case .edit:
             guard let provider = tableModel?.provider.custom else { return }
             controller.customDnsProvider = provider
