@@ -699,7 +699,7 @@ class FiltersServiceTest: XCTestCase {
         wait(for: [expectation], timeout: 0.5)
     }
 
-    func testAddExisteCustomFilter() {
+    func testAddExistingCustomFilter() {
 
         let expectation = XCTestExpectation()
 
