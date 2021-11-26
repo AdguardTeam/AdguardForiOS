@@ -203,6 +203,7 @@ public extension CustomFilterMetaParserProtocol {
         let nsContent = content as NSString
         var contentBeginsWith = nsContent.substring(to: nsContent.length > 256 ? 256 : nsContent.length)
         contentBeginsWith = contentBeginsWith.lowercased()
+        contentBeginsWith = contentBeginsWith.trimmingCharacters(in: .whitespacesAndNewlines)
 
         return contentBeginsWith.isEmpty
             || contentBeginsWith.contains("<!doctype")

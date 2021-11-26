@@ -699,6 +699,29 @@ class FiltersServiceTest: XCTestCase {
         wait(for: [expectation], timeout: 0.5)
     }
 
+    func testAddExistingCustomFilter() {
+
+        let expectation = XCTestExpectation()
+
+        filterService.add(customFilter: customFilterMeta(name: "first", filterDownloadPage: "http://flter_download_page"), enabled: true) { error in
+            XCTAssertNil(error)
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 0.5)
+
+        // try to add another filter with the same download url
+
+        let expectation2 = XCTestExpectation()
+
+        filterService.add(customFilter: customFilterMeta(name: "second", filterDownloadPage: "http://flter_download_page"), enabled: true) { error in
+            XCTAssertNotNil(error)
+            expectation2.fulfill()
+        }
+
+        wait(for: [expectation2], timeout: 0.5)
+    }
+
     func testDeleteCustomFilterWithSuccess() {
         let expectedFilterId = metaStorage.nextCustomFilterId
         let filter = CustomFilterMeta(name: "Foo",
@@ -1287,5 +1310,19 @@ class FiltersServiceTest: XCTestCase {
             let type = filter.offset == filters.count - 1 ? recommendedId : platformId
             return FilterTagsTable(filterId: filter.element.filterId, tagId: 1, type: type, name: "tag_name")
         }
+    }
+
+    private func customFilterMeta(name: String? = nil, filterDownloadPage: String? = nil) -> ExtendedCustomFilterMetaProtocol {
+        return  CustomFilterMeta(name: name,
+                                 description: nil,
+                                 version: nil,
+                                 lastUpdateDate: nil,
+                                 homePage: nil,
+                                 licensePage: nil,
+                                 issuesReportPage: nil,
+                                 communityPage: nil,
+                                 filterDownloadPage: filterDownloadPage,
+                                 rulesCount: 0)
+
     }
 }

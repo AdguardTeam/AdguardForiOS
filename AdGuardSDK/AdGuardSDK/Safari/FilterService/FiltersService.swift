@@ -128,6 +128,7 @@ final class FiltersService: FiltersServiceProtocol {
         case missedFilterDownloadPage(filterName: String)
         case nonExistingGroupId(groupId: Int)
         case nonExistingFilterId(filterId: Int)
+        case customFilterAlreadyExists(downloadUrl: String)
         case unknownError
 
         var debugDescription: String {
@@ -137,6 +138,7 @@ final class FiltersService: FiltersServiceProtocol {
             case .missedFilterDownloadPage(let filterName): return "Filter download page is missed for filter with name \(filterName)"
             case .nonExistingGroupId(groupId: let id): return "Group with id: \(id) not exists"
             case .nonExistingFilterId(filterId: let id): return "Filter with id: \(id) not exists"
+            case .customFilterAlreadyExists(let downloadUrl): return "Custom filter with download URL = \(downloadUrl) already exists"
             case .unknownError: return "Unknown error"
             }
         }
@@ -348,8 +350,17 @@ final class FiltersService: FiltersServiceProtocol {
                 return
             }
 
-            let filterId = self.metaStorage.nextCustomFilterId
+            // check filter allready exists
             let customGroup = self.groupsAtomic.first(where: { $0.groupType == .custom })!
+
+            let exists = customGroup.filters.contains { $0.filterDownloadPage == customFilter.filterDownloadPage } ?? false
+
+            if exists {
+                onFilterAdded(FilterServiceError.customFilterAlreadyExists(downloadUrl: customFilter.filterDownloadPage ?? ""))
+                return
+            }
+
+            let filterId = self.metaStorage.nextCustomFilterId
             let filterToAdd = ExtendedFiltersMeta.Meta(customFilterMeta: customFilter, filterId: filterId, displayNumber: filterId, group: customGroup)
 
             do {
