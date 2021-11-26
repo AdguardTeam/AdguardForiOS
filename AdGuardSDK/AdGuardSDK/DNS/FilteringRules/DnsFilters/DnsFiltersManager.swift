@@ -252,6 +252,11 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
 
     private func addFilter(withName name: String, url: URL, isEnabled: Bool) throws {
         Logger.logInfo("(DnsFiltersService) - addFilter; Trying to add filter with name=\(name) url=\(url)")
+
+        if filters.contains(where: { $0.subscriptionUrl == url }) {
+            throw DnsFilterError.dnsFilterExists(subscriptionUrl: url.absoluteString)
+        }
+        
         let filterId = nextFilterId
         let result = try updateFilterSync(with: filterId, url: url)
         let filter = DnsFilter(meta: result, name: name, filterId: filterId, subscriptionUrl: url, isEnabled: isEnabled)
@@ -318,10 +323,12 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
 extension DnsFiltersManager {
     enum DnsFilterError: Error, CustomDebugStringConvertible {
         case dnsFilterAbsent(filterId: Int)
+        case dnsFilterExists(subscriptionUrl: String)
 
         var debugDescription: String {
             switch self {
             case .dnsFilterAbsent(let filterId): return "DNS filter with id=\(filterId) doesn't exist"
+            case .dnsFilterExists(let subscriptionUrl): return "DNS filter with subscriptionUrl=\(subscriptionUrl) exists"
             }
         }
     }

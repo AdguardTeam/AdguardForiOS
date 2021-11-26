@@ -19,6 +19,7 @@
 import UIKit
 import SharedAdGuardSDK
 import DnsAdGuardSDK
+import SafariAdGuardSDK
 
 enum NewFilterType {
     case safariCustom, dnsCustom
@@ -43,6 +44,7 @@ final class AddCustomFilterController: BottomAlertController {
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private var themeObserver: NotificationToken?
     private let dnsFilters: DnsProtectionProtocol = ServiceLocator.shared.getService()!
+    private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
 
     // MARK: - View Controller life cycle
 
@@ -169,7 +171,13 @@ final class AddCustomFilterController: BottomAlertController {
     }
 
     private func isfilterExist(url: String) -> Bool {
-        return dnsFilters.filters.contains { $0.subscriptionUrl.absoluteString == url }
+        switch type {
+        case .safariCustom:
+            let customFilters = safariProtection.groups.first { $0.groupId == SafariGroup.GroupType.custom.id }?.filters
+            return customFilters?.contains { $0.filterDownloadPage == url } ?? false
+        case .dnsCustom:
+            return dnsFilters.filters.contains { $0.subscriptionUrl.absoluteString == url }
+        }
     }
 }
 

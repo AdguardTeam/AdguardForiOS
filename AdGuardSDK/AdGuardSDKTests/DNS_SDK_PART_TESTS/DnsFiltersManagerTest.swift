@@ -117,7 +117,7 @@ class DnsFiltersManagerTest: XCTestCase {
         XCTAssertEqual(manager.filters, filters)
 
         let expectedFilter = DnsFilter(filterId: 3,
-                                       subscriptionUrl: URL(string: "https://filter.com")!,
+                                       subscriptionUrl: URL(string: "https://new_filter.com")!,
                                        isEnabled: true,
                                        name: "Added filter name",
                                        description: nil,
@@ -149,7 +149,7 @@ class DnsFiltersManagerTest: XCTestCase {
         XCTAssertEqual(manager.filters, filters)
 
         let expectedFilter = DnsFilter(filterId: 3,
-                                       subscriptionUrl: URL(string: "https://filter.com")!,
+                                       subscriptionUrl: URL(string: "https://new_filter.com")!,
                                        isEnabled: true,
                                        name: "Added filter name",
                                        description: nil,
@@ -185,7 +185,7 @@ class DnsFiltersManagerTest: XCTestCase {
         let exp = XCTestExpectation()
         filtersStorage.updateCustomFilterError = CommonError.missingData
         XCTAssertEqual(metaParser.parseWithFilterDownloadPageCalledCount, 0)
-        manager.addFilter(withName: "name", url: URL(string: "https://filter.com")!, isEnabled: true, onFilterAdded: { error in
+        manager.addFilter(withName: "name", url: URL(string: "https://new_filter.com")!, isEnabled: true, onFilterAdded: { error in
             if case CommonError.missingData = error as! CommonError {}
             else {
                 XCTFail()
@@ -203,7 +203,7 @@ class DnsFiltersManagerTest: XCTestCase {
 
         filtersStorage.getFilterResultHandler = { _ in "content" }
         XCTAssertEqual(metaParser.parseWithFilterDownloadPageCalledCount, 0)
-        manager.addFilter(withName: "name", url: URL(string: "https://filter.com")!, isEnabled: true, onFilterAdded: { error in
+        manager.addFilter(withName: "name", url: URL(string: "https://new_filter.com")!, isEnabled: true, onFilterAdded: { error in
             if case CommonError.missingData = error as! CommonError {}
             else {
                 XCTFail()
@@ -458,10 +458,62 @@ class DnsFiltersManagerTest: XCTestCase {
         }
     }
 
+    func testAddExists() {
+        set([dnsFilter(filterId: 0, subscriptionUrl: URL(string: "http://custom_dns_server")!)])
+
+        let exp = XCTestExpectation()
+
+        manager.addFilter(withName: "", url: URL(string: "http://custom_dns_server")!, isEnabled: true) { error in
+            XCTAssertNotNil(error)
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: 0.5)
+
+        // check successfull add
+
+        let exp2 = XCTestExpectation()
+
+        manager.addFilter(withName: "", url: URL(string: "http://ANOTHER_custom_dns_server")!, isEnabled: true) { error in
+            XCTAssertNil(error) // No errors
+            exp2.fulfill()
+        }
+
+        wait(for: [exp2], timeout: 0.5)
+    }
+
     private func set(_ filters: [DnsFilter]) {
         let key = "DnsAdGuardSDK.dnsFiltersKey"
         let encoder = JSONEncoder()
         let filtersData = try! encoder.encode(filters)
         userDefaults.storage.setValue(filtersData, forKey: key)
+    }
+
+    private func dnsFilter(filterId: Int,
+                           subscriptionUrl: URL = URL(string: "")!,
+                           isEnabled: Bool = true,
+                           name: String? = nil,
+                           description: String? = nil,
+                           version: String? = nil,
+                           lastUpdateDate: Date? = nil,
+                           homePage: String? = nil,
+                           licensePage: String? = nil,
+                           issuesReportPage: String? = nil,
+                           communityPage: String? = nil,
+                           filterDownloadPage: String? = nil,
+                           rulesCount: Int = 0) -> DnsFilter {
+        return DnsFilter(filterId: filterId,
+                         subscriptionUrl: subscriptionUrl,
+                         isEnabled: isEnabled,
+                         name: name,
+                         description: description,
+                         version: version,
+                         lastUpdateDate: lastUpdateDate,
+                         homePage: homePage,
+                         licensePage: licensePage,
+                         issuesReportPage: issuesReportPage,
+                         communityPage: communityPage,
+                         filterDownloadPage: filterDownloadPage,
+                         rulesCount: rulesCount)
     }
 }
