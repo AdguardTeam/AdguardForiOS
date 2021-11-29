@@ -169,6 +169,12 @@ final class NewDnsServerController: BottomAlertController {
         presentSimpleAlert(title: title, message: message)
     }
 
+    private func showServerExistsAlert() {
+        let message = String.localizedString("custom_dns_server_exists")
+        let title = String.localizedString("common_error_title")
+        presentSimpleAlert(title: title, message: message)
+    }
+
     private func isCorrectDns(_ dns: String) -> Bool {
         let correctDns = dns.isValidUpstream()
         return correctDns
@@ -227,7 +233,10 @@ final class NewDnsServerController: BottomAlertController {
         } catch {
             if let error = error as? CustomDnsProvidersStorageError {
                 self.processError(error: error)
-            } else {
+            } else if let error = error as? DnsProvidersManager.DnsProviderError {
+                self.processError(error: error)
+            }
+            else {
                 self.showUnknownErrorAlert()
             }
         }
@@ -247,6 +256,8 @@ final class NewDnsServerController: BottomAlertController {
             self.dismiss(animated: true)
         } catch {
             if let error = error as? CustomDnsProvidersStorageError {
+                self.processError(error: error)
+            } else if let error = error as? DnsProvidersManager.DnsProviderError {
                 self.processError(error: error)
             } else {
                 self.showUnknownErrorAlert()
@@ -292,6 +303,16 @@ final class NewDnsServerController: BottomAlertController {
             showWrongProtocolAlert(dnsProtocol: dnsProtocol)
         }
         upstreamsField.borderState = .error
+    }
+
+    private func processError(error: DnsProvidersManager.DnsProviderError) {
+        switch error {
+        case .dnsProviderExists(_):
+            showServerExistsAlert()
+            upstreamsField.borderState = .error
+        default:
+            showUnknownErrorAlert()
+        }
     }
 }
 
