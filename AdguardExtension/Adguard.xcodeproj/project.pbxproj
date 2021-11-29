@@ -18,8 +18,8 @@
 		2408A87F2747ADE400D2D1DE /* AdServicesWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2408A87C2747AC7C00D2D1DE /* AdServicesWrapper.swift */; };
 		2408A8812747AF9A00D2D1DE /* AdServicesWrapperMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2408A8802747AF9A00D2D1DE /* AdServicesWrapperMock.swift */; };
 		2408A8832747D47B00D2D1DE /* AdServicesAttributionRecordsParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2408A8822747D47B00D2D1DE /* AdServicesAttributionRecordsParserTest.swift */; };
-		2408A8862747DC7700D2D1DE /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24DB3DB5274525AD0038627C /* iAd.framework */; };
-		2408A8872747DC8200D2D1DE /* AdServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24DB3DBA27452BF30038627C /* AdServices.framework */; };
+		2408A8862747DC7700D2D1DE /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24DB3DB5274525AD0038627C /* iAd.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		2408A8872747DC8200D2D1DE /* AdServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24DB3DBA27452BF30038627C /* AdServices.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2408A8882747DC8A00D2D1DE /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24DB3DB5274525AD0038627C /* iAd.framework */; };
 		2408A8892747DC9000D2D1DE /* AdServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24DB3DBA27452BF30038627C /* AdServices.framework */; };
 		2408A88B2747E3D000D2D1DE /* AppleSearchAdsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240C3AD927464B7C00CD10B3 /* AppleSearchAdsService.swift */; };
