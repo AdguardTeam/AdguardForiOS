@@ -230,15 +230,14 @@ final class NewDnsServerController: BottomAlertController {
             try self.model.updateCustomProvider(newName: name, newUpstream: upstream, provider: provider)
             self.dismiss(animated: true)
             self.delegate?.customProviderUpdated()
-        } catch {
-            if let error = error as? CustomDnsProvidersStorageError {
-                self.processError(error: error)
-            } else if let error = error as? DnsProvidersManager.DnsProviderError {
-                self.processError(error: error)
-            }
-            else {
-                self.showUnknownErrorAlert()
-            }
+        } catch let error as CustomDnsProvidersStorageError  {
+            processError(error: error)
+        }
+        catch let error as DnsProvidersManager.DnsProviderError {
+            processError(error: error)
+        }
+        catch {
+            self.showUnknownErrorAlert()
         }
 
         saveOrAddButton.isEnabled = true
@@ -254,14 +253,14 @@ final class NewDnsServerController: BottomAlertController {
             try self.model.addCustomProvider(name: self.nameField.text ?? "", upstream: upstream)
             self.delegate?.customProviderUpdated()
             self.dismiss(animated: true)
-        } catch {
-            if let error = error as? CustomDnsProvidersStorageError {
-                self.processError(error: error)
-            } else if let error = error as? DnsProvidersManager.DnsProviderError {
-                self.processError(error: error)
-            } else {
-                self.showUnknownErrorAlert()
-            }
+        } catch let error as CustomDnsProvidersStorageError  {
+            processError(error: error)
+        }
+        catch let error as DnsProvidersManager.DnsProviderError {
+            processError(error: error)
+        }
+        catch {
+            self.showUnknownErrorAlert()
         }
 
         saveOrAddButton.isEnabled = true
