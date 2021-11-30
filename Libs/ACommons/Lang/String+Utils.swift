@@ -334,7 +334,7 @@ extension String {
         for pair in pairs {
             let values = pair.components(separatedBy: "=")
             if values.count == 2 {
-                params[values[0]] = values[1]
+                params[values[0]] = values[1].removingPercentEncoding
             }
 
             if values.count == 1 {

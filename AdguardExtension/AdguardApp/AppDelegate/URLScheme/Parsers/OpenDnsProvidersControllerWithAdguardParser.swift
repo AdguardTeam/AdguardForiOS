@@ -16,7 +16,10 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
-struct OpenDnsProvidersControllerParser: IURLSchemeParametersParser {
+import Foundation
+
+/// this object should be used for parsing "adguard:add_dns_server" urls
+struct OpenDnsProvidersControllerWithAdguardParser: IURLSchemeParametersParser {
     private let executor: IURLSchemeExecutor
 
     init(executor: IURLSchemeExecutor) {
@@ -24,8 +27,14 @@ struct OpenDnsProvidersControllerParser: IURLSchemeParametersParser {
     }
 
     func parse(_ url: URL) -> Bool {
-        // If host is nil than there is no data in URL (sdns://<DATA>)
-        guard let _ = url.host else { return false }
-        return executor.openDnsProvidersController(showLaunchScreen: false, urlAbsoluteString: url.absoluteString)
+        let params = url.parseUrl().params
+        guard let upstream = params?["address"], !upstream.isEmpty else {
+            DDLogError("OpenDnsProvidersControllerWithAdguardParser error: there is no 'address' field in url: \(url.absoluteString)")
+            return false
+        }
+
+        let title = params?["name"]
+
+        return executor.openDnsProvidersController(showLaunchScreen: false, upstream: upstream, title: title)
     }
 }

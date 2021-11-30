@@ -184,7 +184,7 @@ extension AppDelegate {
      Presents DnsProvidersController
      Returns true on success and false otherwise
      */
-    func presentDnsProvidersController(showLaunchScreen: Bool = false, url: String? = nil) -> Bool {
+    func presentDnsProvidersController(showLaunchScreen: Bool = false, upstream: String?, title: String?) -> Bool {
         if !proStatus { return presentPurchaseLicenseController() }
 
         guard let tabBar = getMainTabController() else {
@@ -216,7 +216,8 @@ extension AppDelegate {
             DDLogError("DnsSettings.storyboard doesn't have DnsProvidersController")
             return false
         }
-        dnsProvidersController.openUrl = url
+        dnsProvidersController.openUpstream = upstream
+        dnsProvidersController.openTitle = title
 
         navController.viewControllers = [complexProtectionController, dnsSettingsController, dnsProvidersController]
         dnsProvidersController.loadViewIfNeeded()
