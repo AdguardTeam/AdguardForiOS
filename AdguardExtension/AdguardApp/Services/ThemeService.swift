@@ -16,7 +16,7 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import UIKit
 
 /// ThemeService - service is responsible for dark/light theme switching
 protocol ThemeServiceProtocol {
@@ -62,6 +62,7 @@ protocol ThemeServiceProtocol {
     func setupPopupButton(_ button: RoundRectButton)
     func setupPopupButtons(_ buttons: [RoundRectButton])
     func setupNavigationBar(_ navBar: UINavigationBar?)
+    func setupNavigationBar(_ navBarOrNil: UINavigationBar?, backgroundColor: UIColor)
     func setupSearchBar(_ searchBar: UISearchBar)
     func setupTextField(_ textField: UITextField)
     func setupTextView(_ textView: UITextView)
@@ -74,6 +75,7 @@ protocol ThemeServiceProtocol {
     func setupSegmentedControl(_ segmentedControl: UISegmentedControl)
     func setupSeparator(_ separator: UIView)
     func setupSeparators(_ separators: [UIView])
+    func getLicensePageTraitSpecificColor(_ isIpadTrait: Bool) -> UIColor
 }
 
 final class ThemeService: ThemeServiceProtocol {
@@ -244,6 +246,10 @@ final class ThemeService: ThemeServiceProtocol {
     }
 
     func setupNavigationBar(_ navBarOrNil: UINavigationBar?) {
+        setupNavigationBar(navBarOrNil, backgroundColor: self.backgroundColor)
+    }
+
+    func setupNavigationBar(_ navBarOrNil: UINavigationBar?, backgroundColor: UIColor) {
         guard let navBar = navBarOrNil else { return }
         let dark = configuration.darkTheme
         let textAttributes = [NSAttributedString.Key.foregroundColor: navigationBarColor]
@@ -251,6 +257,19 @@ final class ThemeService: ThemeServiceProtocol {
         navBar.barTintColor = backgroundColor
         navBar.tintColor = UIColor.AdGuardColor.lightGray3
         navBar.barStyle = dark ? .black : .default
+
+
+        if #available(iOS 13.0, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.titleTextAttributes = textAttributes
+            appearance.backgroundColor = backgroundColor
+            appearance.backgroundImage = UIImage()
+            appearance.shadowColor = .clear
+            appearance.shadowImage = UIImage()
+            navBar.standardAppearance = appearance
+            navBar.scrollEdgeAppearance = appearance
+        }
     }
 
     func setupSearchBar(_ searchBar: UISearchBar) {
@@ -366,4 +385,11 @@ final class ThemeService: ThemeServiceProtocol {
         }
     }
 
+    func getLicensePageTraitSpecificColor(_ isIpadTrait: Bool) -> UIColor {
+        if isIpadTrait {
+            return backgroundColor
+        } else {
+            return themeIsDark ? UIColor.AdGuardColor.darkBackground : UIColor.AdGuardColor.lightGray6
+        }
+    }
 }

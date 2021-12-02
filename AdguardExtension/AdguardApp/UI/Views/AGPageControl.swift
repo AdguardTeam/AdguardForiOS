@@ -18,23 +18,34 @@
 
 import UIKit
 
-extension UITraitEnvironment {
-    var isIpadTrait: Bool {
-        if #available(iOS 13, *) {
-            return traitCollection.isIpadTraitCollection
-        }
-        return UIDevice.current.userInterfaceIdiom == .pad
+/// `UIPageControl` that is styled with our colors
+class AGPageControl: UIPageControl {
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        initialize()
     }
 
-    var systemStyleIsDark: Bool {
-        if #available(iOS 13.0, *) {
-            switch traitCollection.userInterfaceStyle {
-            case .light, .unspecified: return false
-            case .dark: return true
-            @unknown default: return false
-            }
-        } else {
-            return false
-        }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        initialize()
     }
+
+    init() {
+        super.init(frame: .zero)
+        initialize()
+    }
+
+    func updateTheme(_ themeService: ThemeServiceProtocol) {
+        pageIndicatorTintColor = themeService.pageIndicatorTintColor
+    }
+
+    private func initialize() {
+        currentPageIndicatorTintColor = UIColor.AdGuardColor.lightGreen1
+        pageIndicatorTintColor = .clear
+    }
+}
+
+fileprivate extension ThemeServiceProtocol {
+    var pageIndicatorTintColor: UIColor { themeIsDark ? UIColor.AdGuardColor.lightGray3 : UIColor.AdGuardColor.lightGray5 }
 }

@@ -20,7 +20,7 @@ import UIKit
 import SafariAdGuardSDK
 import DnsAdGuardSDK
 
-final class MainPageController: UIViewController, DateTypeChangedProtocol, ComplexSwitchDelegate, OnboardingControllerDelegate, GetProControllerDelegate, MainPageModelDelegate {
+final class MainPageController: UIViewController, DateTypeChangedProtocol, ComplexSwitchDelegate, OnboardingControllerDelegate, LicensePageViewControllerDelegate, MainPageModelDelegate {
 
     var ready = false
     var onReady: (()->Void)? {
@@ -428,9 +428,9 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         callOnready()
     }
 
-    // MARK: - GetProControllerDelegate delegate
+    // MARK: - LicensePageViewControllerDelegate delegate
 
-    func getProControllerClosed() {
+    func controllerDismissed() {
         onboardingDidFinish()
     }
 
