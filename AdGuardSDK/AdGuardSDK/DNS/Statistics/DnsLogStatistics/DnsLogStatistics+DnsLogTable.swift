@@ -55,8 +55,6 @@ extension DnsRequestProcessedEvent {
         self.bytesReceived = dbLogRecord[DnsLogTable.bytesReceived]
         self.blockRules = dbLogRecord[DnsLogTable.blockRules]
         self.cacheHit = dbLogRecord[DnsLogTable.cacheHit]
-        // In alpha versions 4.3 the "dns filters" field was omitted.
-        // An optional try is used here, so as not to write a migration between alpha versions.
-        self.filterListIds = (try? dbLogRecord.get(DnsLogTable.filterListIds)) ?? []
+        self.filterListIds = dbLogRecord[DnsLogTable.filterListIds]
     }
 }
