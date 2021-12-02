@@ -55,6 +55,9 @@ class DnsProtectionMock: DnsProtectionProtocol {
 
     var filters: [DnsFilter] = []
 
+    var allowlistFilterId: Int = 0
+    var blocklistFilterId: Int = 1
+
     var dnsLibsFilters: [Int : String] = [:]
 
     var setFilterError: Error?

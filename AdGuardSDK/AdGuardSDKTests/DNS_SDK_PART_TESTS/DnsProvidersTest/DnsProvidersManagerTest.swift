@@ -234,7 +234,7 @@ class DnsProvidersManagerTest: XCTestCase {
     }
 
     func testAddCustomProviderWithSelectAsCurrent() {
-        let upstream = DnsUpstream(upstream: "1.1.1.1", protocol: .dns)
+        let upstream = DnsUpstream(upstream: "1.1.1.0", protocol: .dns)
         let customServer = CustomDnsServer(upstreams: [upstream], providerId: 1, type: .dnscrypt, id: 100010, isEnabled: true)
         let customProvider = CustomDnsProvider(name: "name", server: customServer, providerId: 1, isEnabled: true)
         customProviders.providers = [customProvider]
@@ -250,7 +250,7 @@ class DnsProvidersManagerTest: XCTestCase {
     }
 
     func testAddCustomProviderWithoutSelectAsCurrent() {
-        let upstream = DnsUpstream(upstream: "1.1.1.1", protocol: .dns)
+        let upstream = DnsUpstream(upstream: "1.1.1.0", protocol: .dns)
         let customServer = CustomDnsServer(upstreams: [upstream], providerId: 1, type: .dnscrypt, id: 100010, isEnabled: true)
         let customProvider = CustomDnsProvider(name: "name", server: customServer, providerId: 1, isEnabled: true)
         customProviders.providers = [customProvider]

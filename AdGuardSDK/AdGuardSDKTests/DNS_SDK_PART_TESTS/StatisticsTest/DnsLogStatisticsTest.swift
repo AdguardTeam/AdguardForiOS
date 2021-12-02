@@ -15,6 +15,7 @@ class DnsLogStatisticsTest: XCTestCase {
                                               bytesSent: 100,
                                               bytesReceived: 10,
                                               blockRules: [],
+                                              filterListIds: [],
                                               cacheHit: true)
 
     let mockEvent2 = DnsRequestProcessedEvent(domain: "domain2",
@@ -28,6 +29,7 @@ class DnsLogStatisticsTest: XCTestCase {
                                               bytesSent: 200,
                                               bytesReceived: 20,
                                               blockRules: [],
+                                              filterListIds: [],
                                               cacheHit: false)
 
     override func setUp() {
@@ -112,6 +114,7 @@ class DnsLogStatisticsTest: XCTestCase {
                                      bytesSent: i,
                                      bytesReceived: i * 2,
                                      blockRules: [],
+                                     filterListIds: [],
                                      cacheHit: true)
         }
     }
