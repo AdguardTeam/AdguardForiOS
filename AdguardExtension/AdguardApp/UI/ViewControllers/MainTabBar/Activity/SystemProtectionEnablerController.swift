@@ -32,6 +32,10 @@ class SystemProtectionEnablerController: UIViewController {
         enableButton.applyStandardGreenStyle()
         updateTheme()
     }
+
+    @IBAction func enableAction(_ sender: Any) {
+        AppDelegate.shared.presentDnsSettingsController()
+    }
 }
 
 extension SystemProtectionEnablerController: ThemableProtocol {

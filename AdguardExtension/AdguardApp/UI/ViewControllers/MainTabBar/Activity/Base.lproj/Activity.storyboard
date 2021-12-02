@@ -2004,7 +2004,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 </variation>
                                 <connections>
-                                    <segue destination="mY4-FA-RWN" kind="show" id="yQg-Bm-VqF"/>
+                                    <action selector="enableAction:" destination="ax5-Qu-4Mn" eventType="touchUpInside" id="MR1-7G-Vt4"/>
                                 </connections>
                             </button>
                         </subviews>
