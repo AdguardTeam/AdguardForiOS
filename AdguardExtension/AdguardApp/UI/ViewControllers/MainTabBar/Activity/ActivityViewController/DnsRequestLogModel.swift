@@ -320,7 +320,7 @@ final class DnsRequestLogViewModel {
     }
 
     func logRecordViewModelFor(record: DnsLogRecord) -> DnsRequestDetailsViewModel {
-        return DnsRequestDetailsViewModel(logRecord: record, helper: logRecordHelper)
+        return DnsRequestDetailsViewModel(logRecord: record, helper: logRecordHelper, dnsFilters: dnsProtection)
     }
 
     // MARK: - private methods

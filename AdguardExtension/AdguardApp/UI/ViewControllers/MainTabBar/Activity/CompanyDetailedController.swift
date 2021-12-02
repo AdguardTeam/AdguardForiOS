@@ -47,6 +47,7 @@ final class CompanyDetailedController: UITableViewController {
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsTrackers: DnsTrackersProviderProtocol = ServiceLocator.shared.getService()!
     private let domainParserService: DomainParserServiceProtocol = ServiceLocator.shared.getService()!
+    private let dnsProtection: DnsProtectionProtocol = ServiceLocator.shared.getService()!
 
     // MARK: - Notifications
 
@@ -121,7 +122,7 @@ final class CompanyDetailedController: UITableViewController {
         if segue.identifier == showDnsContainerSegueId {
             if let controller = segue.destination as? DnsRequestDetailsContainerController, let record = selectedRecord {
                 let helper: DnsLogRecordHelper = ServiceLocator.shared.getService()!
-                let model = DnsRequestDetailsViewModel(logRecord: record, helper: helper)
+                let model = DnsRequestDetailsViewModel(logRecord: record, helper: helper, dnsFilters: dnsProtection)
                 controller.model = model
                 controller.delegate = self
             }

@@ -36,6 +36,7 @@ struct DnsLogTable: Equatable {
     static let bytesSent = Expression<Int>("bytes_sent")
     static let bytesReceived = Expression<Int>("bytes_received")
     static let blockRules = Expression<[String]>("block_rules")
+    static let filterListIds = Expression<[Int]>("filter_list_ids")
     static let cacheHit = Expression<Bool>("cache_hit")
 }
 
@@ -54,5 +55,8 @@ extension DnsRequestProcessedEvent {
         self.bytesReceived = dbLogRecord[DnsLogTable.bytesReceived]
         self.blockRules = dbLogRecord[DnsLogTable.blockRules]
         self.cacheHit = dbLogRecord[DnsLogTable.cacheHit]
+        // In alpha versions 4.3 the "dns filters" field was omitted.
+        // An optional try is used here, so as not to write a migration between alpha versions.
+        self.filterListIds = (try? dbLogRecord.get(DnsLogTable.filterListIds)) ?? []
     }
 }
