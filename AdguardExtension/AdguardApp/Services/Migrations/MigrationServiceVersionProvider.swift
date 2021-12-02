@@ -29,7 +29,7 @@ class MigrationServiceVersionProvider: MigrationServiceVersionProviderProtocol {
         let lastBuildVersion = resources.buildVersion
 
         // FIXME: - Are ya releasing, son?
-        return lastBuildVersion >= 650 && lastBuildVersion < 875
+        return lastBuildVersion >= 650 && lastBuildVersion < 876
     }
 
     var isLastVersionLessThan4_1: Bool {
