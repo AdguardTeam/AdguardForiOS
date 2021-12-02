@@ -12,6 +12,8 @@ class DnsStatisticsMigrationHelperTests: XCTestCase {
         SDKMigrationsDirectoriesManager.clear()
         SDKMigrationsDirectoriesManager.createFolders()
 
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+
         statisticsMigration = DnsStatisticsMigrationHelper(
             oldContainerFolderUrl: SDKMigrationsDirectoriesManager.rootUrl,
             newContainerDbUrl: SDKMigrationsDirectoriesManager.subfolderUrl

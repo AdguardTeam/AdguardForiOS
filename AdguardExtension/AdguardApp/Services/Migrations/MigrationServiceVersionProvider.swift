@@ -28,8 +28,8 @@ class MigrationServiceVersionProvider: MigrationServiceVersionProviderProtocol {
     var isMigrationFrom4_1To4_3Needed: Bool {
         let lastBuildVersion = resources.buildVersion
 
-        // FIXME: - Change migration version before release
-        return lastBuildVersion >= 650 && lastBuildVersion < 850
+        // FIXME: - Are ya releasing, son?
+        return lastBuildVersion >= 650 && lastBuildVersion < 875
     }
 
     var isLastVersionLessThan4_1: Bool {
