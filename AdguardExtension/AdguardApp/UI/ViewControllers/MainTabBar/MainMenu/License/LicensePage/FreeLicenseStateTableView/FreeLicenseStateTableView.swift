@@ -58,7 +58,7 @@ final class FreeLicenseStateTableView: UITableView, FreeLicenseStateTableViewPro
     }
 
     func updateSubscriptionInfo() {
-        reloadSections([0, 1], with: .fade)
+        reloadData()
     }
 
     func setLoading(_ isLoading: Bool) {

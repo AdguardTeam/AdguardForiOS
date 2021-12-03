@@ -35,6 +35,7 @@ final class LicenseSubscriptionTermsCell: UITableViewCell, Reusable {
         textView.backgroundColor = .clear
         textView.tintColor = UIColor.AdGuardColor.lightGreen1
         textView.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
+        textView.textColor = UIColor.AdGuardColor.lightGray2
         return textView
     }()
 

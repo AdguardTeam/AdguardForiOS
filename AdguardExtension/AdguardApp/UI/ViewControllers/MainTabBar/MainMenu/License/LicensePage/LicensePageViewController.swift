@@ -105,6 +105,7 @@ final class LicensePageViewController: UIViewController {
             freeModel = FreeLicenseStateTableViewModel(purchaseService: purchaseService, productInfo: productInfo)
             freeModel?.presentor = self
             let freeView = FreeLicenseStateTableView(model: freeModel!, themeService: themeService)
+            freeView.updateTheme()
             self.view = freeView
         case .premium:
             freeModel = nil
@@ -113,6 +114,7 @@ final class LicensePageViewController: UIViewController {
                 PremiumFeatureViewModel(icon: $0.icon, featureName: $0.localizedName, featureDescription: $0.localizedDescr)
             }
             premiumView.delegate = self
+            premiumView.updateTheme()
             self.view = premiumView
         }
     }
