@@ -1,6 +1,9 @@
 /* Class = "UIButton"; normalTitle = "Video guide"; ObjectID = "3ju-B8-UIZ"; */
 "3ju-B8-UIZ.normalTitle" = "Video guide";
 
+/* Class = "UILabel"; text = "Terms and Conditions"; ObjectID = "E6C-TE-ZI6"; */
+"E6C-TE-ZI6.text" = "Terms and Conditions";
+
 /* Class = "UILabel"; text = "Enable AdGuard for Safari"; ObjectID = "F7O-MB-LHu"; */
 "F7O-MB-LHu.text" = "Enable AdGuard for Safari";
 
@@ -18,9 +21,6 @@
 
 /* Class = "UILabel"; text = "Block Ads"; ObjectID = "hXU-wD-fbI"; */
 "hXU-wD-fbI.text" = "Block Ads";
-
-/* Class = "UILabel"; text = "Thank you for installing AdGuard!"; ObjectID = "hak-o1-HWp"; */
-"hak-o1-HWp.text" = "Thank you for installing AdGuard!";
 
 /* Class = "UILabel"; text = "Block Annoyances"; ObjectID = "hf9-6r-TUk"; */
 "hf9-6r-TUk.text" = "Block Annoyances";
