@@ -34,6 +34,7 @@ public struct DnsRequestProcessedEvent {
     public let blockRules: [String] // Filtering rules texts
     public let filterListIds: [Int] // Matched filter ids
     public let cacheHit: Bool // True if this response was served from the cache
+    public let dnsStatus: String // NXDOMAIN, REFUSED, NOERROR...
 
     public var isBlocked: Bool {
         switch processedStatus {
@@ -66,6 +67,7 @@ extension DnsRequestProcessedEvent {
         self.blockRules = event.rules
         self.cacheHit = event.cacheHit
         self.filterListIds = event.filterListIds
+        self.dnsStatus = event.status
     }
 
     private static func isLocalHost(dnsAnswer: String, type: String) -> Bool {
@@ -146,6 +148,8 @@ extension DnsRequestProcessedEvent: Equatable {
                 && lhs.bytesReceived == rhs.bytesReceived
                 && lhs.blockRules == rhs.blockRules
                 && lhs.cacheHit == rhs.cacheHit
+                && lhs.dnsStatus == rhs.dnsStatus
+                && lhs.filterListIds == rhs.filterListIds
     }
 }
 
