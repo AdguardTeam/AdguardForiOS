@@ -20,4 +20,10 @@ import UIKit
 
 extension UITraitCollection {
     var isIpadTraitCollection: Bool { horizontalSizeClass == .regular && verticalSizeClass == .regular }
+
+    func onSizeClassChange(_ previousTraitCollection: UITraitCollection?, execute block: () -> Void) {
+        if previousTraitCollection?.verticalSizeClass != verticalSizeClass || previousTraitCollection?.horizontalSizeClass != horizontalSizeClass {
+            block()
+        }
+    }
 }

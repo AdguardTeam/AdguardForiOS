@@ -52,14 +52,9 @@ final class FreeLicenseStateTableView: UITableView, FreeLicenseStateTableViewPro
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-
-        guard
-            previousTraitCollection?.verticalSizeClass != traitCollection.verticalSizeClass ||
-            previousTraitCollection?.horizontalSizeClass != traitCollection.horizontalSizeClass
-        else {
-            return
+        traitCollection.onSizeClassChange(previousTraitCollection) {
+            setBackgroundColor()
         }
-        setBackgroundColor()
     }
 
     func updateSubscriptionInfo() {

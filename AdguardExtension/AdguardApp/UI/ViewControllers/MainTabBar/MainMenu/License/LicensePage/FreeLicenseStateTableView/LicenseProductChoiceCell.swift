@@ -93,14 +93,10 @@ final class LicenseProductChoiceCell: UITableViewCell, Reusable {
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        guard
-            previousTraitCollection?.verticalSizeClass != traitCollection.verticalSizeClass ||
-            previousTraitCollection?.horizontalSizeClass != traitCollection.horizontalSizeClass
-        else {
-            return
+        traitCollection.onSizeClassChange(previousTraitCollection) {
+            layout(for: traitCollection)
+            setFonts(for: traitCollection)
         }
-        layout(for: traitCollection)
-        setFonts(for: traitCollection)
     }
 
     func setTrialLabelTitle(_ title: String?) {

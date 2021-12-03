@@ -97,14 +97,10 @@ class LicenseProductButton: UIButton {
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        guard
-            previousTraitCollection?.verticalSizeClass != traitCollection.verticalSizeClass ||
-            previousTraitCollection?.horizontalSizeClass != traitCollection.horizontalSizeClass
-        else {
-            return
+        traitCollection.onSizeClassChange(previousTraitCollection) {
+            layout(for: traitCollection)
+            setFonts(for: traitCollection)
         }
-        layout(for: traitCollection)
-        setFonts(for: traitCollection)
     }
 
     func updateTheme(_ themeService: ThemeServiceProtocol) {
