@@ -50,7 +50,6 @@ final class DnsStatisticsMigrationHelper: DnsStatisticsMigrationHelperProtocol {
         self.oldStatisticsDbUrl = oldContainerFolderUrl.appendingPathComponent("dns-statistics.db")
         self.oldRequestDbJournalUrl = oldContainerFolderUrl.appendingPathComponent("dns-log-records.db-journal")
         self.oldStatististicsDbJournalUrl = oldContainerFolderUrl.appendingPathComponent("dns-log-records.db-journal")
-
         self.newStatisticsDbUrl = newContainerDbUrl.appendingPathComponent("activity_statistics.db")
     }
 
@@ -153,8 +152,13 @@ final class DnsStatisticsMigrationHelper: DnsStatisticsMigrationHelperProtocol {
              DnsStatisticsTable.elapsedSumm <- record.elapsedSumm]
         }
 
+        let oldDateFormat = dateFormatter.dateFormat
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+
         let addQuery = DnsStatisticsTable.newTable.insertMany(setters)
         try db.run(addQuery)
+
+        dateFormatter.dateFormat = oldDateFormat
     }
 
     private func readActivity(db: Connection) throws -> [ActivityStatisticsRecord] {
@@ -183,8 +187,13 @@ final class DnsStatisticsMigrationHelper: DnsStatisticsMigrationHelperProtocol {
              DnsActivityTable.elapsedSumm <- record.elapsedSumm]
         }
 
+        let oldDateFormat = dateFormatter.dateFormat
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+
         let addQuery = DnsActivityTable.newTable.insertMany(setters)
         try db.run(addQuery)
+
+        dateFormatter.dateFormat = oldDateFormat
     }
 
     private func iso8601Formatter() -> DateFormatter {

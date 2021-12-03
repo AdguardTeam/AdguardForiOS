@@ -18,17 +18,30 @@
 
 import Foundation
 
-public struct RequestFactory {
-    static func sendFeedbackConfig(_ feedback: FeedBackProtocol) -> RequestConfig<SuccessFailureParser> {
-        return RequestConfig<SuccessFailureParser>(request: SendFeedbackRequest(feedback), parser: SuccessFailureParser())
+enum RequestSenderMockError: Error {
+    case testError
+    case resultCastFailed
+}
+
+class RequestSenderMock: RequestSenderProtocol {
+
+    var valueToReturn: Result<Any, Error>
+
+    init(valueToReturn: Result<Any, Error>) {
+        self.valueToReturn = valueToReturn
     }
 
-    /// Returns attribution records request config
-    static func attributionRecordsConfig(_ attributionToken: String) -> RequestConfig<AdServicesAttributionRecordsParser> {
+    func send<Parser>(requestConfig: RequestConfig<Parser>, completionHandler: @escaping (Result<Parser.Model, Error>) -> Void) where Parser : ParserProtocol {
+        if case let .success(value) = valueToReturn {
+            if let value = value as? Parser.Model {
+                completionHandler(.success(value))
+            } else {
+                completionHandler(.failure(RequestSenderMockError.resultCastFailed))
+            }
+        }
+        else if case let .failure(error) = valueToReturn {
+            completionHandler(.failure(error))
+        }
 
-        return RequestConfig<AdServicesAttributionRecordsParser>(
-            request: AdServicesAttributionRecordsRequest(attributionToken),
-            parser: AdServicesAttributionRecordsParser()
-        )
     }
 }

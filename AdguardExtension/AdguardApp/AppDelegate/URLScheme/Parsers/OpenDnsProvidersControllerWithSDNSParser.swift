@@ -16,19 +16,16 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+struct OpenDnsProvidersControllerWithSDNSParser: IURLSchemeParametersParser {
+    private let executor: IURLSchemeExecutor
 
-public struct RequestFactory {
-    static func sendFeedbackConfig(_ feedback: FeedBackProtocol) -> RequestConfig<SuccessFailureParser> {
-        return RequestConfig<SuccessFailureParser>(request: SendFeedbackRequest(feedback), parser: SuccessFailureParser())
+    init(executor: IURLSchemeExecutor) {
+        self.executor = executor
     }
 
-    /// Returns attribution records request config
-    static func attributionRecordsConfig(_ attributionToken: String) -> RequestConfig<AdServicesAttributionRecordsParser> {
-
-        return RequestConfig<AdServicesAttributionRecordsParser>(
-            request: AdServicesAttributionRecordsRequest(attributionToken),
-            parser: AdServicesAttributionRecordsParser()
-        )
+    func parse(_ url: URL) -> Bool {
+        // If host is nil than there is no data in URL (sdns://<DATA>)
+        guard let _ = url.host else { return false }
+        return executor.openDnsProvidersController(showLaunchScreen: false, upstream: url.absoluteString, title: nil)
     }
 }

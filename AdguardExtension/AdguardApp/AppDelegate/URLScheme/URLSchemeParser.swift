@@ -32,8 +32,9 @@
  9. <adguardScheme>://auth#access_token=<TOKEN>&token_type=<TOKEN TYPE>&state=<STATE>&expires_in=<EXPIRES IN>   <--- Log in by social networks
  10. <adguardScheme>://safariWebExtension?action=<ACTION>&domain=<DOMAIN> <--- Open with safari web extension action
     <ACTION> = removeFromAllowlist or addToAllowlist or addToBlocklist or removeAllBlocklistRules
- 11. <adguardScheme>://upgradeApp <--- Open License screen
- 12. <adguardScheme>://enableAdvancedProtection <--- Open Advanced protection screen
+ 11. <adguardScheme>://upgradeApp                                   <--- Open License screen
+ 12. <adguardScheme>://enableAdvancedProtection                     <--- Open Advanced protection screen
+ 13. <adguardScheme>://add_dns_server?address:<upstream>&name:<name> <--- Adding custom DNS server
  */
 
 protocol IURLSchemeParser {
@@ -54,6 +55,7 @@ fileprivate enum StringConstants: String {
     case urlSchemeSafariWebExtension = "safariWebExtension"
     case upgradeApp = "upgradeApp"
     case enableAdvancedProtection = "enableAdvancedProtection"
+    case addDnsServer = "add_dns_server"
 
     static func getStringConstant(string: String?) -> StringConstants? {
         guard let string = string else { return nil }
@@ -112,7 +114,13 @@ struct URLSchemeParser: IURLSchemeParser {
         // Adding custom DNS server
         case (.sdnsScheme, _):
             DDLogInfo("(URLSchemeParser) openurl sdns: \(url.absoluteString)")
-            let processor = OpenDnsProvidersControllerParser(executor: executor)
+            let processor = OpenDnsProvidersControllerWithSDNSParser(executor: executor)
+            return processor.parse(url)
+
+        // Adding custom DNS server
+        case (.urlScheme, .addDnsServer):
+            DDLogInfo("(URLSchemeParser) openurl - add dns server: \(url.absoluteString)")
+            let processor = OpenDnsProvidersControllerWithAdguardParser(executor: executor)
             return processor.parse(url)
 
         // Import settings

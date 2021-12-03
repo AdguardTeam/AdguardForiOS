@@ -18,17 +18,23 @@
 
 import Foundation
 
-public struct RequestFactory {
-    static func sendFeedbackConfig(_ feedback: FeedBackProtocol) -> RequestConfig<SuccessFailureParser> {
-        return RequestConfig<SuccessFailureParser>(request: SendFeedbackRequest(feedback), parser: SuccessFailureParser())
+/// this object should be used for parsing "adguard:add_dns_server" urls
+struct OpenDnsProvidersControllerWithAdguardParser: IURLSchemeParametersParser {
+    private let executor: IURLSchemeExecutor
+
+    init(executor: IURLSchemeExecutor) {
+        self.executor = executor
     }
 
-    /// Returns attribution records request config
-    static func attributionRecordsConfig(_ attributionToken: String) -> RequestConfig<AdServicesAttributionRecordsParser> {
+    func parse(_ url: URL) -> Bool {
+        let params = url.parseUrl().params
+        guard let upstream = params?["address"], !upstream.isEmpty else {
+            DDLogError("OpenDnsProvidersControllerWithAdguardParser error: there is no 'address' field in url: \(url.absoluteString)")
+            return false
+        }
 
-        return RequestConfig<AdServicesAttributionRecordsParser>(
-            request: AdServicesAttributionRecordsRequest(attributionToken),
-            parser: AdServicesAttributionRecordsParser()
-        )
+        let title = params?["name"]
+
+        return executor.openDnsProvidersController(showLaunchScreen: false, upstream: upstream, title: title)
     }
 }

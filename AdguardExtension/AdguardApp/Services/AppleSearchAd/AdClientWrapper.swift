@@ -16,24 +16,30 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+#if canImport(iAd)
+import iAd
+#endif
 
-extension HttpRequestServiceProtocol {
-    func sendFeedback(_ feedback: FeedBackProtocol, completion: @escaping (_ success: Bool)->()) {
-        let config = RequestFactory.sendFeedbackConfig(feedback)
-        requestSender.send(requestConfig: config) { (result: Result<Bool, Error>) in
-            switch result{
-            case .success(let isSuccess):
-                completion(isSuccess)
-            case .failure(_):
-                completion(false)
+protocol AdClientWrapperProtocol {
+    /// Requests attribution data
+    func requestAttributionDetails(completionHander: @escaping (Result<[String: NSObject], Error>) -> Void)
+}
+
+/// This object is a wrapper for supporting unit tests
+final class AdClientWrapper: AdClientWrapperProtocol {
+    func requestAttributionDetails(completionHander: @escaping (Result<[String: NSObject], Error>) -> Void) {
+        ADClient.shared().requestAttributionDetails { records, error  in
+            if let error = error {
+                completionHander(.failure(error))
+                return
             }
-        }
-    }
 
-    /// HTTP POST request for getting attribution records
-    func getAttributionRecords(_ attributionToken: String, completion: @escaping (_ result: Result<[String: String], Error>) -> Void) {
-        let config = RequestFactory.attributionRecordsConfig(attributionToken)
-        requestSender.send(requestConfig: config, completionHandler: completion)
+            if let records = records {
+                completionHander(.success(records))
+                return
+            }
+
+            completionHander(.failure(AppleSearchAdsService.AdsError.missingAttributionData))
+        }
     }
 }

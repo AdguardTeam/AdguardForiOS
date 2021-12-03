@@ -18,17 +18,15 @@
 
 import Foundation
 
-public struct RequestFactory {
-    static func sendFeedbackConfig(_ feedback: FeedBackProtocol) -> RequestConfig<SuccessFailureParser> {
-        return RequestConfig<SuccessFailureParser>(request: SendFeedbackRequest(feedback), parser: SuccessFailureParser())
-    }
+class HttpRequestServiceMock: HttpRequestServiceProtocol {
 
-    /// Returns attribution records request config
-    static func attributionRecordsConfig(_ attributionToken: String) -> RequestConfig<AdServicesAttributionRecordsParser> {
+    var invokedRequestSenderGetter = false
+    var invokedRequestSenderGetterCount = 0
+    var stubbedRequestSender: RequestSenderProtocol!
 
-        return RequestConfig<AdServicesAttributionRecordsParser>(
-            request: AdServicesAttributionRecordsRequest(attributionToken),
-            parser: AdServicesAttributionRecordsParser()
-        )
+    var requestSender: RequestSenderProtocol {
+        invokedRequestSenderGetter = true
+        invokedRequestSenderGetterCount += 1
+        return stubbedRequestSender
     }
 }

@@ -16,16 +16,19 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
-struct OpenDnsProvidersControllerParser: IURLSchemeParametersParser {
-    private let executor: IURLSchemeExecutor
+import Foundation
 
-    init(executor: IURLSchemeExecutor) {
-        self.executor = executor
-    }
+class AdServicesHelperMock: AdServicesHelperProtocol {
 
-    func parse(_ url: URL) -> Bool {
-        // If host is nil than there is no data in URL (sdns://<DATA>)
-        guard let _ = url.host else { return false }
-        return executor.openDnsProvidersController(showLaunchScreen: false, urlAbsoluteString: url.absoluteString)
+    var invokedFetchAttributionRecords = false
+    var invokedFetchAttributionRecordsCount = 0
+    var stubbedFetchAttributionRecordsCompletionHandlerResult: Result<[String: String], Error>?
+
+    func fetchAttributionRecords(completionHandler: @escaping (Result<[String: String], Error>) -> Void) {
+        invokedFetchAttributionRecords = true
+        invokedFetchAttributionRecordsCount += 1
+        if let result = stubbedFetchAttributionRecordsCompletionHandlerResult {
+            completionHandler(result)
+        }
     }
 }

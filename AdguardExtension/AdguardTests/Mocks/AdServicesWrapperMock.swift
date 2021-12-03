@@ -18,17 +18,19 @@
 
 import Foundation
 
-public struct RequestFactory {
-    static func sendFeedbackConfig(_ feedback: FeedBackProtocol) -> RequestConfig<SuccessFailureParser> {
-        return RequestConfig<SuccessFailureParser>(request: SendFeedbackRequest(feedback), parser: SuccessFailureParser())
-    }
+class AdServicesWrapperMock: AdServicesWrapperProtocol {
 
-    /// Returns attribution records request config
-    static func attributionRecordsConfig(_ attributionToken: String) -> RequestConfig<AdServicesAttributionRecordsParser> {
+    var invokedGetAttributionToken = false
+    var invokedGetAttributionTokenCount = 0
+    var stubbedGetAttributionTokenError: Error?
+    var stubbedGetAttributionTokenResult: String! = ""
 
-        return RequestConfig<AdServicesAttributionRecordsParser>(
-            request: AdServicesAttributionRecordsRequest(attributionToken),
-            parser: AdServicesAttributionRecordsParser()
-        )
+    func getAttributionToken() throws -> String {
+        invokedGetAttributionToken = true
+        invokedGetAttributionTokenCount += 1
+        if let error = stubbedGetAttributionTokenError {
+            throw error
+        }
+        return stubbedGetAttributionTokenResult
     }
 }

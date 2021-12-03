@@ -718,6 +718,9 @@
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ is not supported by iOS yet. Try to add different upstream.";
 
+/*(DnsFiltersController) the error message that is shown when trying to add a duplicate custom dns server */
+"custom_dns_server_exists" = "You've tried to add a duplicate DNS serve. The server with the specified upstream is already in the list";
+
 /* (NewDnsServerController) save and select button title */
 "save_and_select_button_title" = "Save and select";
 

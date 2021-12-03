@@ -43,7 +43,8 @@ final class NewDnsServerController: BottomAlertController {
     var controllerType: DnsServerControllerType = .add
     var dnsProviderManager: DnsProvidersManagerProtocol!
     var customDnsProvider: CustomDnsProviderProtocol?
-    var openUrl: String?
+    var openUpstream: String?
+    var openTitle: String?
 
     weak var delegate: NewDnsServerControllerDelegate?
 
@@ -80,12 +81,18 @@ final class NewDnsServerController: BottomAlertController {
         nameField.delegate = self
         upstreamsField.delegate = self
 
-        if let openUrl = openUrl {
+        if let openUpstream = openUpstream {
             // Native DNS implementation doesn't support port syntax
-            upstreamsField.text = resources.dnsImplementation == .adGuard ? openUrl : openUrl.discardPortFromIpAddress()
+            upstreamsField.text = resources.dnsImplementation == .adGuard ? openUpstream : openUpstream.discardPortFromIpAddress()
         } else {
-            nameField.text = model.providerName
             upstreamsField.text = model.providerUpstream
+        }
+
+        if let openTitle = openTitle {
+            nameField.text = openTitle
+        }
+        else {
+            nameField.text = model.providerName
         }
 
         nameField.becomeFirstResponder()
@@ -162,6 +169,12 @@ final class NewDnsServerController: BottomAlertController {
         presentSimpleAlert(title: title, message: message)
     }
 
+    private func showServerExistsAlert() {
+        let message = String.localizedString("custom_dns_server_exists")
+        let title = String.localizedString("common_error_title")
+        presentSimpleAlert(title: title, message: message)
+    }
+
     private func isCorrectDns(_ dns: String) -> Bool {
         let correctDns = dns.isValidUpstream()
         return correctDns
@@ -217,12 +230,14 @@ final class NewDnsServerController: BottomAlertController {
             try self.model.updateCustomProvider(newName: name, newUpstream: upstream, provider: provider)
             self.dismiss(animated: true)
             self.delegate?.customProviderUpdated()
-        } catch {
-            if let error = error as? CustomDnsProvidersStorageError {
-                self.processError(error: error)
-            } else {
-                self.showUnknownErrorAlert()
-            }
+        } catch let error as CustomDnsProvidersStorageError  {
+            processError(error: error)
+        }
+        catch let error as DnsProvidersManager.DnsProviderError {
+            processError(error: error)
+        }
+        catch {
+            self.showUnknownErrorAlert()
         }
 
         saveOrAddButton.isEnabled = true
@@ -238,12 +253,14 @@ final class NewDnsServerController: BottomAlertController {
             try self.model.addCustomProvider(name: self.nameField.text ?? "", upstream: upstream)
             self.delegate?.customProviderUpdated()
             self.dismiss(animated: true)
-        } catch {
-            if let error = error as? CustomDnsProvidersStorageError {
-                self.processError(error: error)
-            } else {
-                self.showUnknownErrorAlert()
-            }
+        } catch let error as CustomDnsProvidersStorageError  {
+            processError(error: error)
+        }
+        catch let error as DnsProvidersManager.DnsProviderError {
+            processError(error: error)
+        }
+        catch {
+            self.showUnknownErrorAlert()
         }
 
         saveOrAddButton.isEnabled = true
@@ -285,6 +302,16 @@ final class NewDnsServerController: BottomAlertController {
             showWrongProtocolAlert(dnsProtocol: dnsProtocol)
         }
         upstreamsField.borderState = .error
+    }
+
+    private func processError(error: DnsProvidersManager.DnsProviderError) {
+        switch error {
+        case .dnsProviderExists(_):
+            showServerExistsAlert()
+            upstreamsField.borderState = .error
+        default:
+            showUnknownErrorAlert()
+        }
     }
 }
 

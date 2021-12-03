@@ -18,17 +18,17 @@
 
 import Foundation
 
-public struct RequestFactory {
-    static func sendFeedbackConfig(_ feedback: FeedBackProtocol) -> RequestConfig<SuccessFailureParser> {
-        return RequestConfig<SuccessFailureParser>(request: SendFeedbackRequest(feedback), parser: SuccessFailureParser())
-    }
+class IAdFrameworkHelperMock: IAdFrameworkHelperProtocol {
 
-    /// Returns attribution records request config
-    static func attributionRecordsConfig(_ attributionToken: String) -> RequestConfig<AdServicesAttributionRecordsParser> {
+    var invokedFetchAttributionRecords = false
+    var invokedFetchAttributionRecordsCount = 0
+    var stubbedFetchAttributionRecordsCompletionHandlerResult: Result<[String: String], Error>?
 
-        return RequestConfig<AdServicesAttributionRecordsParser>(
-            request: AdServicesAttributionRecordsRequest(attributionToken),
-            parser: AdServicesAttributionRecordsParser()
-        )
+    func fetchAttributionRecords(completionHandler: @escaping (Result<[String: String], Error>) -> Void) {
+        invokedFetchAttributionRecords = true
+        invokedFetchAttributionRecordsCount += 1
+        if let result = stubbedFetchAttributionRecordsCompletionHandlerResult {
+            completionHandler(result)
+        }
     }
 }
