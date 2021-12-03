@@ -499,7 +499,7 @@ final class DnsRequestDetailsController: UITableViewController {
         }
 
         // Dns status model
-        let dnsStatus = model.logRecord.event.processedStatus.title
+        let dnsStatus = model.logRecord.event.dnsStatus
         let dnsStatusTitle = String.localizedString("dns_status_title")
         let dnsStatusModelIsNil = dnsStatus.isEmpty
         let dnsStatusModel = dnsStatusModelIsNil ? nil : LogCellModel(copiedString: dnsStatus, title: dnsStatusTitle, info: dnsStatus, theme: theme)
