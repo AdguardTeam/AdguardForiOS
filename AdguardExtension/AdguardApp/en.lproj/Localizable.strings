@@ -263,7 +263,7 @@
 "purchase_description_format" = "AdGuard Subscription Terms<br><br>•Payment will be charged to your iTunes Account at confirmation of purchase.<br><br>• Subscription automatically renews unless auto-renew is turned off at least 24 hours before the end of the current period.<br><br>• The subscription renewal fee will be charged to your iTunes Account within 24 hours of the end of the current period.<br><br>• You can manage your subscription and turn off auto-renewal by going to your Account Settings after purchase.<br><br>AdGuard <a href=%2$@>EULA</a> and <a href=%1$@>Privacy policy</a>";
 
 /* lifetime purchase secription format */
-"lifetime_purchase_description_format" = "<a href=%2$@>Terms and conditions</a> and <a href=%1$@>Privacy policy</a>";
+"lifetime_purchase_description_format" = "AdGuard <a href=%2$@>EULA</a> and <a href=%1$@>Privacy policy</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "Ok";
