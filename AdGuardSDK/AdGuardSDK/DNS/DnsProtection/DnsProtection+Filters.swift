@@ -23,6 +23,12 @@ public protocol DnsProtectionFiltersProtocol {
     /** Returns DNS filters meta objects */
     var filters: [DnsFilter] { get }
 
+    /// returns DNS allowlist filter identifier
+    var allowlistFilterId: Int { get }
+
+    /// returns DNS blocklist filter identifier
+    var blocklistFilterId: Int { get }
+
     /**
         This variable is used when initializing DNS-lib to pass information about enabled DNS filters
         Returns enabled DNS filters paths by filters ids
@@ -78,6 +84,14 @@ extension DnsProtection {
         workingQueue.sync {
             return dnsFiltersManager.filters
         }
+    }
+
+    public var allowlistFilterId: Int {
+        return DnsUserRuleType.allowlist.enabledRulesFilterId
+    }
+
+    public var blocklistFilterId: Int {
+        return DnsUserRuleType.blocklist.enabledRulesFilterId
     }
 
     public var dnsLibsFilters: [Int: String]  {

@@ -32,6 +32,7 @@ public struct DnsRequestProcessedEvent {
     public let bytesSent: Int // Number of bytes sent to a server
     public let bytesReceived: Int // Number of bytes received from a server
     public let blockRules: [String] // Filtering rules texts
+    public let filterListIds: [Int] // Matched filter ids
     public let cacheHit: Bool // True if this response was served from the cache
 
     public var isBlocked: Bool {
@@ -64,6 +65,7 @@ extension DnsRequestProcessedEvent {
         self.bytesReceived = event.bytesReceived
         self.blockRules = event.rules
         self.cacheHit = event.cacheHit
+        self.filterListIds = event.filterListIds
     }
 
     private static func isLocalHost(dnsAnswer: String, type: String) -> Bool {

@@ -159,6 +159,7 @@ final public class DnsLogStatistics: DnsLogStatisticsProtocol {
             builder.column(DnsLogTable.bytesReceived)
             builder.column(DnsLogTable.blockRules)
             builder.column(DnsLogTable.cacheHit)
+            builder.column(DnsLogTable.filterListIds)
         }
         try statisticsDb.run(query)
     }
@@ -196,7 +197,8 @@ final public class DnsLogStatistics: DnsLogStatisticsProtocol {
                                  DnsLogTable.bytesSent <- record.bytesSent,
                                  DnsLogTable.bytesReceived <- record.bytesReceived,
                                  DnsLogTable.blockRules <- record.blockRules,
-                                 DnsLogTable.cacheHit <- record.cacheHit]
+                                 DnsLogTable.cacheHit <- record.cacheHit,
+                                 DnsLogTable.filterListIds <- record.filterListIds]
         let addQuery = DnsLogTable.table.insert(setters)
         try statisticsDb.run(addQuery)
     }

@@ -17,6 +17,7 @@
 //
 
 import Foundation
+import DnsAdGuardSDK
 
 /// View model for DnsRequestDetailsContainerController
 final class DnsRequestDetailsViewModel {
@@ -24,10 +25,12 @@ final class DnsRequestDetailsViewModel {
     let logRecord: DnsLogRecord
 
     private let helper: DnsLogRecordHelper
+    private let dnsFilters: DnsProtectionFiltersProtocol
 
-    init (logRecord: DnsLogRecord, helper: DnsLogRecordHelper) {
+    init (logRecord: DnsLogRecord, helper: DnsLogRecordHelper, dnsFilters: DnsProtectionFiltersProtocol) {
         self.logRecord = logRecord
         self.helper = helper
+        self.dnsFilters = dnsFilters
     }
 
     func addDomainToAllowlist(_ domain: String) throws {
@@ -53,5 +56,26 @@ final class DnsRequestDetailsViewModel {
     func removeFromUserRules() throws {
         try helper.removeDomainFromUserRules(logRecord.event.domain)
         logRecord.userFilterStatus = helper.getUserFilterStatusForDomain(logRecord.event.domain)
+    }
+
+    func getMatchedFilters() -> String? {
+        if logRecord.event.filterListIds.isEmpty {
+            return nil
+        }
+
+        let filters = logRecord.event.filterListIds.compactMap { filterId -> String? in
+
+            if filterId == dnsFilters.allowlistFilterId {
+                return String.localizedString("allowlist_title")
+            }
+            else if filterId == dnsFilters.blocklistFilterId {
+                return String.localizedString("dns_blacklist_title")
+            }
+
+            let filter = dnsFilters.filters.first { $0.filterId == filterId }
+            return filter?.name
+        }
+
+        return filters.joined(separator: ",")
     }
 }
