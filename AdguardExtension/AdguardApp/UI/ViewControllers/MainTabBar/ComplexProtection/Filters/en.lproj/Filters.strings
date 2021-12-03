@@ -49,5 +49,5 @@
 /* Class = "UILabel"; text = "Homepage: "; ObjectID = "t8x-PU-hFK"; */
 "t8x-PU-hFK.text" = "Homepage: ";
 
-/* Class = "UITextField"; placeholder = "Name of the filter:"; ObjectID = "zcB-eh-Ou4"; Note = "(Add Custom Filter) url hint"; */
-"zcB-eh-Ou4.placeholder" = "Name of the filter:";
+/* Class = "UITextField"; placeholder = "Name of the filter"; ObjectID = "zcB-eh-Ou4"; Note = "(Add Custom Filter) url hint"; */
+"zcB-eh-Ou4.placeholder" = "Name of the filter";
