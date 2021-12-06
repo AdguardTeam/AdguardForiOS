@@ -559,6 +559,30 @@
 /* (OneSafariGroupFiltersModel) Add new filter title */
 "add_new_filter" = "Add a filter";
 
+/* (OneSafariGroupFiltersModel) Ads filters group description */
+"ads_filters_group_description" = "Ads";
+
+/* (OneSafariGroupFiltersModel) Privacy filters group description */
+"privacy_filters_group_description" = "Privacy";
+
+/* (OneSafariGroupFiltersModel) Social Widgets filters group description */
+"social_widgets_filters_group_description" = "Social Widgets";
+
+/* (OneSafariGroupFiltersModel) Annoyances filters group description */
+"annoyances_filters_group_description" = "Annoyances";
+
+/* (OneSafariGroupFiltersModel) Security filters group description */
+"security_filters_group_description" = "Security";
+
+/* (OneSafariGroupFiltersModel) Other filters group description */
+"other_filters_group_description" = "Other";
+
+/* (OneSafariGroupFiltersModel) Language Specific filters group description */
+"language_specific_filters_group_description" = "Language Specific";
+
+/* (OneSafariGroupFiltersModel) Custom filters group description */
+"custom_filters_group_description" = "Custom";
+
 /* confirm reset lert text */
 "confirm_reset_text" = "All settings, including user rules, DNS protection, interface and authorization settings, will be reset. This operation cannot be undone. Reset the settings?";
 
