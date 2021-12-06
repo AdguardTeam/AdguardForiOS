@@ -395,7 +395,7 @@
 "copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\nAll rights reserved. AdGuard.com";
 
 /* (LicensePageViewController) Login title */
-"common_login" = "Login";
+"common_login" = "Log in";
 
 /* (AboutViewController) Logout title */
 "common_logout" = "Logout";

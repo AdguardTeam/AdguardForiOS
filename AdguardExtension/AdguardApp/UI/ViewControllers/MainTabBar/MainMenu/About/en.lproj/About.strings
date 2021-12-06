@@ -7,8 +7,8 @@
 /* Class = "UIButton"; normalTitle = "Acknowledgments"; ObjectID = "htU-yE-FEi"; */
 "htU-yE-FEi.normalTitle" = "Acknowledgments";
 
-/* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "jMW-e4-GbU"; */
-"jMW-e4-GbU.title" = "Login";
+/* Class = "UIBarButtonItem"; title = "Log in"; ObjectID = "jMW-e4-GbU"; */
+"jMW-e4-GbU.title" = "Log in";
 
 /* Class = "UIButton"; normalTitle = "More info"; ObjectID = "oMX-oj-ZeJ"; */
 "oMX-oj-ZeJ.normalTitle" = "More info";
