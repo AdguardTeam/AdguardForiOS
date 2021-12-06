@@ -26,44 +26,10 @@ final class ChineseUserExposer {
 
     static let isUserFromChina: Bool = {
         return hasChineseLanguageInSystem
-            || hasChineseCarrier
-            || hasChineseKeybord
     }()
 
     private static var hasChineseLanguageInSystem: Bool {
         let langId = Locale.current.identifier
         return langId.lowercased().contains("zh")
-    }
-
-    private static var hasChineseCarrier: Bool {
-        var providers: [CTCarrier] = []
-        if #available(iOS 12.0, *) {
-            if let carriers = CTTelephonyNetworkInfo().serviceSubscriberCellularProviders {
-                providers = Array(carriers.values)
-            }
-        } else {
-            if let carrier = CTTelephonyNetworkInfo().subscriberCellularProvider {
-                providers = [carrier]
-            }
-        }
-
-        // All ISO codes can be found here https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
-        let chineseIsoCodes = ["cn", "chn", "hk", "hkg", "mo", "mac", "tw", "twn"]
-        return providers.reduce(false) { partialResult, carrier in
-            if let isoCode = carrier.isoCountryCode {
-                return chineseIsoCodes.contains(isoCode.lowercased())
-            }
-            return partialResult || false
-        }
-    }
-
-    private static var hasChineseKeybord: Bool {
-        let keyboards = UITextInputMode.activeInputModes
-        return keyboards.reduce(false) { partialResult, inputMode in
-            if let primary = inputMode.primaryLanguage {
-                return partialResult || primary.lowercased().contains("zh")
-            }
-            return partialResult || false
-        }
     }
 }
