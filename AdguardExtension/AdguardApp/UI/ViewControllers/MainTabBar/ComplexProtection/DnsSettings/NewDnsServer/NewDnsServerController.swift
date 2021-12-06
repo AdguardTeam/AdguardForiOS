@@ -74,6 +74,8 @@ final class NewDnsServerController: BottomAlertController {
         return NewDnsServerModel(dnsProvidersManager: dnsProviderManager, dnsConfigAssistant: dnsConfigAssistant, provider: customDnsProvider)
     }()
 
+    private let dnsCheckQueue = DispatchQueue(label: "NewDnsServerController.dnsCheckQueue")
+
     // MARK: - ViewController lifecycle
 
     override func viewDidLoad() {
@@ -223,51 +225,81 @@ final class NewDnsServerController: BottomAlertController {
     private func saveAction() {
         saveOrAddButton.isEnabled = false
         saveOrAddButton.startIndicator()
-
         let name = self.nameField.text ?? ""
         let upstream = self.upstreamsField.text ?? ""
 
-        guard let provider = self.model.provider else { return }
+        dnsCheckQueue.async { [weak self] in
+            guard
+                let self = self,
+                let provider = self.model.provider
+            else {
+                return
+            }
 
-        do {
-            try self.model.updateCustomProvider(newName: name, newUpstream: upstream, provider: provider)
-            self.dismiss(animated: true)
-            self.delegate?.customProviderUpdated()
-        } catch let error as CustomDnsProvidersStorageError  {
-            processError(error: error)
-        }
-        catch let error as DnsProvidersManager.DnsProviderError {
-            processError(error: error)
-        }
-        catch {
-            self.showUnknownErrorAlert()
-        }
+            do {
+                try self.model.updateCustomProvider(newName: name, newUpstream: upstream, provider: provider)
+                DispatchQueue.main.async { [weak self] in
+                    self?.dismiss(animated: true)
+                    self?.delegate?.customProviderUpdated()
+                }
+            } catch let error as CustomDnsProvidersStorageError  {
+                DispatchQueue.main.async { [weak self] in
+                    self?.processError(error: error)
+                }
+            }
+            catch let error as DnsProvidersManager.DnsProviderError {
+                DispatchQueue.main.async { [weak self] in
+                    self?.processError(error: error)
+                }
+            }
+            catch {
+                DispatchQueue.main.async { [weak self] in
+                    self?.showUnknownErrorAlert()
+                }
+            }
 
-        saveOrAddButton.isEnabled = true
-        saveOrAddButton.stopIndicator()
+            DispatchQueue.main.async { [weak self] in
+                self?.saveOrAddButton.isEnabled = true
+                self?.saveOrAddButton.stopIndicator()
+            }
+        }
     }
 
     private func addAction() {
         saveOrAddButton.isEnabled = false
         saveOrAddButton.startIndicator()
         let upstream = self.upstreamsField.text ?? ""
+        let name = self.nameField.text ?? ""
 
-        do {
-            try self.model.addCustomProvider(name: self.nameField.text ?? "", upstream: upstream)
-            self.delegate?.customProviderUpdated()
-            self.dismiss(animated: true)
-        } catch let error as CustomDnsProvidersStorageError  {
-            processError(error: error)
-        }
-        catch let error as DnsProvidersManager.DnsProviderError {
-            processError(error: error)
-        }
-        catch {
-            self.showUnknownErrorAlert()
-        }
+        dnsCheckQueue.async { [weak self] in
+            guard let self = self else { return }
 
-        saveOrAddButton.isEnabled = true
-        saveOrAddButton.stopIndicator()
+            do {
+                try self.model.addCustomProvider(name: name, upstream: upstream)
+                DispatchQueue.main.async { [weak self] in
+                    self?.delegate?.customProviderUpdated()
+                    self?.dismiss(animated: true)
+                }
+            } catch let error as CustomDnsProvidersStorageError  {
+                DispatchQueue.main.async { [weak self] in
+                    self?.processError(error: error)
+                }
+            }
+            catch let error as DnsProvidersManager.DnsProviderError {
+                DispatchQueue.main.async { [weak self] in
+                    self?.processError(error: error)
+                }
+            }
+            catch {
+                DispatchQueue.main.async { [weak self] in
+                    self?.showUnknownErrorAlert()
+                }
+            }
+            DispatchQueue.main.async { [weak self] in
+                self?.saveOrAddButton.isEnabled = true
+                self?.saveOrAddButton.stopIndicator()
+            }
+        }
     }
 
     private func deleteAction() {
