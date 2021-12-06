@@ -400,10 +400,9 @@ final class DnsRequestDetailsController: UITableViewController {
         }
 
         // Matched filters model
-        // TODO: store matched filters in SDK
-        let matchedFilters = model.logRecord.event.blockRules.joined(separator: ", ")
+        let matchedFilters = model.getMatchedFilters()
         let matchedFiltersTitle = String.localizedString("matched_filter_title")
-        let matchedFiltersModelIsNil = matchedFilters.isEmpty
+        let matchedFiltersModelIsNil = matchedFilters == nil
         let matchedFiltersModel = matchedFiltersModelIsNil ? nil : LogCellModel(copiedString: matchedFilters, title: matchedFiltersTitle, info: matchedFilters, theme: theme)
         if !matchedFiltersModelIsNil {
             generalSection = generalSectionToAssign
@@ -500,7 +499,7 @@ final class DnsRequestDetailsController: UITableViewController {
         }
 
         // Dns status model
-        let dnsStatus = model.logRecord.event.processedStatus.title
+        let dnsStatus = model.logRecord.event.dnsStatus
         let dnsStatusTitle = String.localizedString("dns_status_title")
         let dnsStatusModelIsNil = dnsStatus.isEmpty
         let dnsStatusModel = dnsStatusModelIsNil ? nil : LogCellModel(copiedString: dnsStatus, title: dnsStatusTitle, info: dnsStatus, theme: theme)

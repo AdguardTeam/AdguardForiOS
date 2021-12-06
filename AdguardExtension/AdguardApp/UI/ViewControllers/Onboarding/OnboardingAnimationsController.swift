@@ -69,11 +69,11 @@ class OnboardingAnimationsController: UIViewController {
         if let controller = segue.destination as? OnboardingController {
             controller.delegate = delegate
             controller.needsShowingPremium = true
-        } else if let getProController = segue.destination as? GetProController {
+        } else if let licensePageController = segue.destination as? LicensePageViewController {
             navigationController?.setNavigationBarHidden(false, animated: true)
-            getProController.needsShowingExitButton = true
-            if let getProControllerDelegate = delegate as? GetProControllerDelegate {
-                getProController.getProControllerDelegate = getProControllerDelegate
+            licensePageController.showExitButton = true
+            if let licenseControllerDelegate = delegate as? LicensePageViewControllerDelegate {
+                licensePageController.delegate = licenseControllerDelegate
             }
         }
     }

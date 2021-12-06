@@ -240,25 +240,29 @@ final class EmailSignInController: UIViewController, UITextFieldDelegate {
             notificationService.postNotificationInForeground(body: message, title: "")
 
         } else {
-            let proController = self.navigationController?.viewControllers.first { $0 is GetProController } as? GetProController
+            let licensePageController = self.navigationController?.viewControllers.first { $0 is LicensePageViewController } as? LicensePageViewController
             self.navigationController?.dismiss(animated: true) { [weak self] in
                 self?.notificationService.postNotificationInForeground(body: message, title: "")
-                proController?.getProControllerDelegate?.getProControllerClosed()
+                licensePageController?.delegate?.controllerDismissed()
             }
         }
     }
 
     private func premiumExpired() {
-        guard let controller = self.navigationController?.viewControllers.first(where: { $0 is GetProController }) else { return }
+        guard let controller = navigationController?.viewControllers.first(where: { $0 is LicensePageViewController }) else {
+            return
+        }
         let message = String.localizedString("login_premium_expired_message")
-        self.navigationController?.popToViewController(controller, animated: true)
+        navigationController?.popToViewController(controller, animated: true)
         notificationService.postNotificationInForeground(body: message, title: "")
     }
 
     private func notPremium() {
-        guard let controller = self.navigationController?.viewControllers.first(where: { $0 is GetProController }) else { return }
+        guard let controller = navigationController?.viewControllers.first(where: { $0 is LicensePageViewController }) else {
+            return
+        }
         let message = String.localizedString("not_premium_message")
-        self.navigationController?.popToViewController(controller, animated: true)
+        navigationController?.popToViewController(controller, animated: true)
         notificationService.postNotificationInForeground(body: message, title: "")
     }
 

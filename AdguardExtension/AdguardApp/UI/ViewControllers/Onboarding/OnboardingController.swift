@@ -68,11 +68,11 @@ final class OnboardingController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let getProController = segue.destination as? GetProController {
+        if let licenseController = segue.destination as? LicensePageViewController {
             navigationController?.setNavigationBarHidden(false, animated: true)
-            getProController.needsShowingExitButton = true
-            if let getProControllerDelegate = delegate as? GetProControllerDelegate {
-                getProController.getProControllerDelegate = getProControllerDelegate
+            licenseController.showExitButton = true
+            if let licenseControllerDelegate = delegate as? LicensePageViewControllerDelegate {
+                licenseController.delegate = licenseControllerDelegate
             }
         }
     }

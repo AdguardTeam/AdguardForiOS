@@ -119,16 +119,18 @@ extension DnsLogRecord {
             additionalTitleKey = "dns_request_user_status_added_to_blacklist"
         case (.blocklistedByDnsFilter, .allowlisted):
             additionalTitleKey = "dns_request_user_status_added_to_whitelist"
-        case (.allowlistedByUserFilter, .none):
-            additionalTitleKey = "dns_request_user_status_removed_from_whitelist"
         case (.allowlistedByUserFilter, .blocklisted):
             additionalTitleKey = "dns_request_user_status_added_to_blacklist"
         case (.allowlistedByDnsFilter, .blocklisted):
             additionalTitleKey = "dns_request_user_status_added_to_blacklist"
-        case (.blocklistedByUserFilter, .none):
-            additionalTitleKey = "dns_request_user_status_removed_from_blacklist"
         case (.blocklistedByUserFilter, .allowlisted):
             additionalTitleKey = "dns_request_user_status_added_to_whitelist"
+
+        // TODO: - These statuses were set incorrectly and we decided to fix them later
+        // additionalTitleKey = "dns_request_user_status_removed_from_whitelist"
+        // additionalTitleKey = "dns_request_user_status_removed_from_blacklist"
+        case (.allowlistedByUserFilter, .none), (.blocklistedByUserFilter, .none):
+            break
         default:
             break
         }
@@ -320,7 +322,7 @@ final class DnsRequestLogViewModel {
     }
 
     func logRecordViewModelFor(record: DnsLogRecord) -> DnsRequestDetailsViewModel {
-        return DnsRequestDetailsViewModel(logRecord: record, helper: logRecordHelper)
+        return DnsRequestDetailsViewModel(logRecord: record, helper: logRecordHelper, dnsFilters: dnsProtection)
     }
 
     // MARK: - private methods

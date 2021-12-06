@@ -36,7 +36,9 @@ struct DnsLogTable: Equatable {
     static let bytesSent = Expression<Int>("bytes_sent")
     static let bytesReceived = Expression<Int>("bytes_received")
     static let blockRules = Expression<[String]>("block_rules")
+    static let filterListIds = Expression<[Int]>("filter_list_ids")
     static let cacheHit = Expression<Bool>("cache_hit")
+    static let dnsStatus = Expression<String>("dns_status")
 }
 
 extension DnsRequestProcessedEvent {
@@ -54,5 +56,7 @@ extension DnsRequestProcessedEvent {
         self.bytesReceived = dbLogRecord[DnsLogTable.bytesReceived]
         self.blockRules = dbLogRecord[DnsLogTable.blockRules]
         self.cacheHit = dbLogRecord[DnsLogTable.cacheHit]
+        self.filterListIds = dbLogRecord[DnsLogTable.filterListIds]
+        self.dnsStatus = dbLogRecord[DnsLogTable.dnsStatus]
     }
 }
