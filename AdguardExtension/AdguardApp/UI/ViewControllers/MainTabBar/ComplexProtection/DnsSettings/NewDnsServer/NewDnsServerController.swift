@@ -99,6 +99,9 @@ final class NewDnsServerController: BottomAlertController {
         updateSaveButton(upstreamsField.text ?? "")
         updateTheme()
         configureAlertTitles()
+
+        saveOrAddButton.setBackgroundColor()
+        saveOrAddButton.needsToDisplayIndicator = true
     }
 
     // MARK: - IBActions
