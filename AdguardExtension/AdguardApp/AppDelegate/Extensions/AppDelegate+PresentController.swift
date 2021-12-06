@@ -161,8 +161,8 @@ extension AppDelegate {
         }
 
         let licenseStoryboard = UIStoryboard(name: "License", bundle: Bundle.main)
-        guard let getProController = licenseStoryboard.instantiateViewController(withIdentifier: "GetProController") as? GetProController else {
-            DDLogError("License.storyboard doesn't have GetProController")
+        guard let licenseController = licenseStoryboard.instantiateViewController(withIdentifier: "LicensePageViewController") as? LicensePageViewController else {
+            DDLogError("License.storyboard doesn't have LicensePageViewController")
             return false
         }
 
@@ -173,7 +173,7 @@ extension AppDelegate {
         loginController.licenseKey = key
         loginController.loadViewIfNeeded()
 
-        navController.viewControllers = [mainPageController, getProController, loginController]
+        navController.viewControllers = [mainPageController, licenseController, loginController]
         tabBar.selectedViewController = navController
         window?.rootViewController = tabBar
 
@@ -573,12 +573,12 @@ extension AppDelegate {
         }
 
         let licenseStoryboard = UIStoryboard(name: "License", bundle: Bundle.main)
-        guard let getProController = licenseStoryboard.instantiateViewController(withIdentifier: "GetProController") as? GetProController else {
-            DDLogError("License.storyboard doesnt't have GetProController")
+        guard let licenseController = licenseStoryboard.instantiateViewController(withIdentifier: "LicensePageViewController") as? LicensePageViewController else {
+            DDLogError("License.storyboard doesnt't have LicensePageViewController")
             return false
         }
 
-        navController.viewControllers = [mainPageController, getProController]
+        navController.viewControllers = [mainPageController, licenseController]
         tabBar.selectedViewController = navController
         window?.rootViewController = tabBar
 

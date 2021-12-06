@@ -82,6 +82,21 @@
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Subscribe";
 
+/* (LicenseProductChoiceCell) restore purchase button title */
+"restore_purchase_button_title" = "Restore purchase";
+
+/* (FreeLicenseStateTableViewModel) One month subscription title */
+"one_month_subscription_title" = "Monthly";
+
+/* (FreeLicenseStateTableViewModel) One year subscription title */
+"one_year_subscription_title" = "Yearly";
+
+/* (FreeLicenseStateTableViewModel) title for permanent subscription */
+"permanent_subscription_title" = "Lifetime";
+
+/* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
+"go_to_my_account_title" = "Go to my account";
+
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "Purchase";
 
@@ -245,10 +260,10 @@
 "login_error_message" = "An error occurred while logging in";
 
 /* purchase secription format */
-"purchase_description_format" = "About AdGuard Subscription:<br><br>• Payment will be charged to your iTunes Account at confirmation of purchase.<br><br>• The subscription is automatically renewed unless auto-renew is turned off at least 24-hours before the end of the current period.<br><br>• The subscription renewal fee will be charged within 24-hours prior to the end of the current period.<br><br>Your subscriptions may be managed and your auto-renewal may be turned off in your iTunes Account Settings after purchasing a subscription.<br><br><a href=%2$@>Terms and conditions</a> and <a href=%1$@>Privacy policy</a>";
+"purchase_description_format" = "AdGuard Subscription Terms<br><br>•Payment will be charged to your iTunes Account at confirmation of purchase.<br><br>• Subscription automatically renews unless auto-renew is turned off at least 24 hours before the end of the current period.<br><br>• The subscription renewal fee will be charged to your iTunes Account within 24 hours of the end of the current period.<br><br>• You can manage your subscription and turn off auto-renewal by going to your Account Settings after purchase.<br><br>AdGuard <a href=%2$@>EULA</a> and <a href=%1$@>Privacy policy</a>";
 
 /* lifetime purchase secription format */
-"lifetime_purchase_description_format" = "<a href=%2$@>Terms and conditions</a> and <a href=%1$@>Privacy policy</a>";
+"lifetime_purchase_description_format" = "AdGuard <a href=%2$@>EULA</a> and <a href=%1$@>Privacy policy</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "Ok";
@@ -355,9 +370,6 @@
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "You have exceeded the maximum number of filter rules.";
 
-/* (GetProController) title for permanent subscription */
-"permanent_subscription_title" = "Lifetime";
-
 /* (FiltersController) ON state in groups section */
 "on_state" = "ON";
 
@@ -378,6 +390,9 @@
 
 /* (AboutViewController) AdGuard copyright string */
 "copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\nAll rights reserved. AdGuard.com";
+
+/* (LicensePageViewController) Login title */
+"common_login" = "Login";
 
 /* (AboutViewController) Logout title */
 "common_logout" = "Logout";
@@ -920,6 +935,32 @@
 
 /* (UserRulesRedirectController) - Description when blocklist rules are removed */
 "user_rules_blocklist_rules_removed" = "has no more user rules";
+
+// MARK: - Strings for license screen
+
+/* (PremiumFeature) - Advanced protection premium feature name */
+"advanced_protection_feature_name" = "Advanced protection";
+
+/* (PremiumFeature) -  Security filters premium feature name */
+"security_filters_feature_name" = "Security filters ";
+
+/* (PremiumFeature) - DNS privacy premium feature name */
+"dns_privacy_feature_name" = "DNS privacy";
+
+/* (PremiumFeature) - Custom filters premium feature name */
+"custom_filters_feature_name" = "Custom filters";
+
+/* (PremiumFeature) - Advanced protection premium feature description */
+"advanced_protection_feature_description" = "Userscript support, blocking YouTube ads in Safari and much more";
+
+/* (PremiumFeature) - Security filters premium feature description */
+"security_filters_feature_description" = "Block phishing & malware";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "Control your private data";
+
+/* (PremiumFeature) - Custom filters premium feature description */
+"custom_filters_feature_description" = "Set your own rules";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController

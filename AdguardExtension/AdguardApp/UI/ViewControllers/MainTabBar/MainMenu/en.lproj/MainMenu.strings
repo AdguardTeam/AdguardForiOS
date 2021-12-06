@@ -22,9 +22,6 @@
 /* Class = "UILabel"; text = "Report a bug"; ObjectID = "GA6-E3-BcJ"; Note = "(Main Menu) Advanced Settings caption"; */
 "GA6-E3-BcJ.text" = "Report a bug";
 
-/* Class = "UILabel"; text = "Safari protection"; ObjectID = "HiP-B6-ATJ"; */
-"HiP-B6-ATJ.text" = "Safari protection";
-
 /* Class = "UILabel"; text = "General"; ObjectID = "L2l-pO-K3q"; Note = "(Main Menu) Advanced Settings caption"; */
 "L2l-pO-K3q.text" = "General";
 
@@ -78,9 +75,6 @@
 
 /* Class = "UILabel"; text = "You can export logs and send them to us in a convenient way for you"; ObjectID = "qDy-4e-MsZ"; */
 "qDy-4e-MsZ.text" = "You can export logs and send them to us in a convenient way for you";
-
-/* Class = "UILabel"; text = "DNS protection"; ObjectID = "r4M-ec-gKY"; */
-"r4M-ec-gKY.text" = "DNS protection";
 
 /* Class = "UILabel"; text = "Your email address (optional):"; ObjectID = "rHj-Ne-4zA"; */
 "rHj-Ne-4zA.text" = "Your email address (optional):";
