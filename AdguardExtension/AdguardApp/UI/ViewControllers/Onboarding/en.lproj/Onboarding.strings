@@ -31,5 +31,5 @@
 /* Class = "UILabel"; text = "AdGuard blocks ads in Safari on most websites. Enjoy faster web surfing without ads!"; ObjectID = "r3n-Il-Qe8"; Note = "String must be less or equal 4 lines"; */
 "r3n-Il-Qe8.text" = "AdGuard blocks ads in Safari on most websites. Enjoy faster web surfing without ads!";
 
-/* Class = "UILabel"; text = "Use our collection of flexible filters to remove any type of content. Tune the filtering to your liking and surf the web your way. "; ObjectID = "thP-lV-BhN"; Note = "String must be less or equal 4 lines"; */
-"thP-lV-BhN.text" = "Use our collection of flexible filters to remove any type of content. Tune the filtering to your liking and surf the web your way. ";
+/* Class = "UILabel"; text = "Use our collection of flexible filters to remove any type of content. Tune the filtering to your liking and surf the web your way."; ObjectID = "thP-lV-BhN"; Note = "String must be less or equal 4 lines"; */
+"thP-lV-BhN.text" = "Use our collection of flexible filters to remove any type of content. Tune the filtering to your liking and surf the web your way.";

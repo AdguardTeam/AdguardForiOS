@@ -286,7 +286,7 @@
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thP-lV-BhN" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
                                                         <rect key="frame" x="24" y="42.333333333333371" width="380" height="61"/>
-                                                        <string key="text">Use our collection of flexible filters to remove any type of content. Tune the filtering to your liking and surf the web your way. </string>
+                                                        <string key="text">Use our collection of flexible filters to remove any type of content. Tune the filtering to your liking and surf the web your way.</string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
