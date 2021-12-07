@@ -295,9 +295,9 @@ fileprivate extension UserDefaultsStorageProtocol {
     var currentBackgroundFetchState: BackgroundFetchState {
         get {
             if let intObject = storage.value(forKey: currentBackgroundFetchStateKey) as? Int {
-                return BackgroundFetchState(rawValue: intObject) ?? .loadAndSaveFilters
+                return BackgroundFetchState(rawValue: intObject) ?? .updateFinished
             }
-            return .loadAndSaveFilters
+            return .updateFinished
         }
         set {
             storage.setValue(newValue.rawValue, forKey: currentBackgroundFetchStateKey)

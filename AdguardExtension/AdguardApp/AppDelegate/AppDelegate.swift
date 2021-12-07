@@ -142,6 +142,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
 
+        // Install default DNS filter if needed
+        let defaultDnsFilterInstaller = DefaultDnsFilterInstaller(resources: resources, dnsProtection: dnsProtection)
+        defaultDnsFilterInstaller.installDefaultDnsFilterIfNeeded()
+
         // Background fetch consists of 3 steps, so if the update process didn't fully finish in the background than we should continue it here
 
         safariProtection.finishBackgroundUpdate { error in
