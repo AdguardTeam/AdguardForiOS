@@ -37,11 +37,14 @@ final class DefaultDnsFilterInstaller: DefaultDnsFilterInstallerProtocol {
     func installDefaultDnsFilterIfNeeded() {
         let defaultFilterUrl = URL(string: "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt")!
 
-        // Check if filter was already installed or exists in the current list
-        guard
-            !resources.defaultDnsFilterWasInstalled,
-            !dnsProtection.filters.map({ $0.subscriptionUrl }).contains(where: { $0 == defaultFilterUrl })
-        else {
+        // Check if filter was already installed
+        if resources.defaultDnsFilterWasInstalled {
+            return
+        }
+
+        // If DNS filter is already in the list then we suppose that user knows what it is and won't set the filter again
+        if dnsProtection.filters.map({ $0.subscriptionUrl }).contains(where: { $0 == defaultFilterUrl }) {
+            resources.defaultDnsFilterWasInstalled = true
             return
         }
 
