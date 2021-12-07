@@ -33,7 +33,7 @@ class URLSchemeParcerTest: XCTestCase {
 
     func testAddSafariRuleUrl() {
         let urlParcer = self.urlParcer!
-        let safariRuleUrl = URL(string: "adguard://add/foo")!
+        let safariRuleUrl = URL(string: "adguard://add/some.domain")!
         let safariEmptyRuleUrl = URL(string: "adguard://add/")!
         let incorrectCommand = URL(string: "adguard://ad")!
 

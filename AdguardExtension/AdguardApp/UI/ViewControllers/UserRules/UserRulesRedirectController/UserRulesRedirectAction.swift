@@ -19,10 +19,10 @@
 import Foundation
 
 enum UserRulesRedirectAction {
-    case enableSiteProtection(domain: String, domainLevels: String)
-    case disableSiteProtection(domain: String, domainLevels: String)
-    case addToBlocklist(domain: String, domainLevels: String)
-    case removeAllBlocklistRules(domain: String, domainLevels: String)
+    case enableSiteProtection(domain: String, absoluteDomainString: String)
+    case disableSiteProtection(domain: String, absoluteDomainString: String)
+    case addToBlocklist(domain: String, absoluteDomainString: String)
+    case removeAllBlocklistRules(domain: String, absoluteDomainString: String)
 
     var scheme: String {
         switch self {
@@ -33,15 +33,15 @@ enum UserRulesRedirectAction {
         }
     }
 
-    static func action(from actionString: String, domain: String, domainLevels: String) -> Self {
+    static func action(from actionString: String, domain: String, absoluteDomainString: String) -> Self {
         switch actionString {
-        case "enableSiteProtection": return .enableSiteProtection(domain: domain, domainLevels: domainLevels)
-        case "disableSiteProtection": return .disableSiteProtection(domain: domain, domainLevels: domainLevels)
-        case "addToBlocklist": return .addToBlocklist(domain: domain, domainLevels: domainLevels)
-        case "removeAllBlocklistRules": return .removeAllBlocklistRules(domain: domain, domainLevels: domainLevels)
+        case "enableSiteProtection": return .enableSiteProtection(domain: domain, absoluteDomainString: absoluteDomainString)
+        case "disableSiteProtection": return .disableSiteProtection(domain: domain, absoluteDomainString: absoluteDomainString)
+        case "addToBlocklist": return .addToBlocklist(domain: domain, absoluteDomainString: absoluteDomainString)
+        case "removeAllBlocklistRules": return .removeAllBlocklistRules(domain: domain, absoluteDomainString: absoluteDomainString)
         default:
             assertionFailure("Undefined action=\(actionString) in scheme")
-            return .enableSiteProtection(domain: "", domainLevels: "")
+            return .enableSiteProtection(domain: "", absoluteDomainString: "")
         }
     }
 }

@@ -26,23 +26,25 @@ struct OpenUserFilterControllerParser: IURLSchemeParametersParser {
 
     func parse(_ url: URL) -> Bool {
         let rule = String(url.path.suffix(url.path.count - 1))
-        if rule.isEmpty { return false }
-        if let domainLevels = getDomainLevels(fullDomain: rule) {
-            let action: UserRulesRedirectAction = UserRulesRedirectAction.addToBlocklist(domain: rule, domainLevels: domainLevels)
-            return executor.openUserRulesRedirectController(for: action)
+        if rule.isEmpty {
+            DDLogError("(OpenUserFilterControllerParser) - parse; Failed to get rule from URL=\(url.absoluteString)")
+            return false
         }
 
-        DDLogError("(OpenUserFilterControllerParser) - parse; Failed to get domain levels for string: \(rule)")
-        return false
-    }
+        do {
+            let result = try Domain.parse(rule)
 
-    private func getDomainLevels(fullDomain: String) -> String? {
-        if let index = fullDomain.firstIndex(of: "#") {
-            let result = fullDomain[fullDomain.startIndex..<index]
-            return result.isEmpty ? nil : String(result)
-        } else {
-            let splited = fullDomain.split(separator: ".")
-            return splited.count > 0 ? fullDomain : nil
+            if result.count > 1 {
+                DDLogError("(OpenUserFilterControllerParser) - parse; Invalid parse result. Contains more than one domain: \(result)")
+                return false
+            }
+
+            let absoluteDomainString = result.first! // Domain.parse throws error if result of parsing is empty
+            let action: UserRulesRedirectAction = .addToBlocklist(domain: rule, absoluteDomainString: absoluteDomainString)
+            return executor.openUserRulesRedirectController(for: action)
+        } catch {
+            DDLogError("(OpenUserFilterControllerParser) - parse; Failed to get absolute domain string from string=\(rule); Error: \(error)")
+            return false
         }
     }
 }

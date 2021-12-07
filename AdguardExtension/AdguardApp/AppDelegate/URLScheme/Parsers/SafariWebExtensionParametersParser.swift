@@ -17,6 +17,7 @@
 //
 
 import Foundation
+//TODO: Need tests for this parser
 
 /// This object is responsible for obtaining parameters from app scheme links
 /// And performing an action considering these parameters
@@ -36,22 +37,20 @@ struct SafariWebExtensionParametersParser: IURLSchemeParametersParser {
             return false
         }
 
-        if let domainLevels = getDomainLevels(fullDomain: decodedDomain) {
-            let action = UserRulesRedirectAction.action(from: actionStr, domain: decodedDomain, domainLevels: domainLevels)
+        do {
+            let result = try Domain.parse(decodedDomain)
+
+            if result.count > 1 {
+                DDLogError("(SafariWebExtensionParametersParser) - parse; Invalid parse result. Contains more than one domain: \(result)")
+                return false
+            }
+
+            let absoluteDomainString = result.first! // Domain.parse throws error if result of parsing is empty
+            let action = UserRulesRedirectAction.action(from: actionStr, domain: decodedDomain, absoluteDomainString: absoluteDomainString)
             return executor.openUserRulesRedirectController(for: action)
-        }
-
-        DDLogError("(SafariWebExtensionParametersParser) - parse; Failed to get domain levels for string: \(decodedDomain)")
-        return false
-    }
-
-    private func getDomainLevels(fullDomain: String) -> String? {
-        if let index = fullDomain.firstIndex(of: "#") {
-            let result = fullDomain[fullDomain.startIndex..<index]
-            return result.isEmpty ? nil : String(result)
-        } else {
-            let splited = fullDomain.split(separator: ".")
-            return splited.count > 0 ? fullDomain : nil
+        } catch {
+            DDLogError("(SafariWebExtensionParametersParser) - parse; Failed to get absolute domain string from string=\(decodedDomain); Error: \(error)")
+            return false
         }
     }
 }

@@ -74,10 +74,10 @@ final class UserRulesRedirectControllerModel: UserRulesRedirectControllerModelPr
 fileprivate extension UserRulesRedirectAction {
     var title: String {
         switch self {
-        case .disableSiteProtection(_, let domainLevels): return domainLevels
-        case .enableSiteProtection(_, let domainLevels): return domainLevels
-        case .addToBlocklist(_, let domainLevels): return domainLevels
-        case .removeAllBlocklistRules(_, let domainLevels): return domainLevels
+        case .disableSiteProtection(_, let domain): return domain
+        case .enableSiteProtection(_, let domain): return domain
+        case .addToBlocklist(_, let domain): return domain
+        case .removeAllBlocklistRules(_, let domain): return domain
         }
     }
 
