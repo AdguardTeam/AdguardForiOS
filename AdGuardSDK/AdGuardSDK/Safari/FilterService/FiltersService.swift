@@ -152,6 +152,11 @@ final class FiltersService: FiltersServiceProtocol {
         workingQueue.sync { userDefaultsStorage.lastFiltersUpdateCheckDate }
     }
 
+    /// Sometimes we don't want some filters to exist in our app
+    /// So this list of identifiers is for such filters
+    /// 208 - Online Malicious URL Blocklist; Should be removed because it contains `malware` word in it's description; There was a case when Apple declined our app review because of this.
+    let restrictedFilterIds = [208]
+
     // MARK: - Private properties
 
     // Filters update period; We should check filters updates once per 6 hours
@@ -353,7 +358,7 @@ final class FiltersService: FiltersServiceProtocol {
             // check filter allready exists
             let customGroup = self.groupsAtomic.first(where: { $0.groupType == .custom })!
 
-            let exists = customGroup.filters.contains { $0.filterDownloadPage == customFilter.filterDownloadPage } ?? false
+            let exists = customGroup.filters.contains { $0.filterDownloadPage == customFilter.filterDownloadPage }
 
             if exists {
                 onFilterAdded(FilterServiceError.customFilterAlreadyExists(downloadUrl: customFilter.filterDownloadPage ?? ""))
@@ -557,6 +562,23 @@ final class FiltersService: FiltersServiceProtocol {
         group.wait()
 
         return addedFiltersIds
+    }
+
+    /// Internal method to remove restricted filters meta from meta downloaded from our server
+    func removeRestrictedFilters(from meta: ExtendedFiltersMeta) -> ExtendedFiltersMeta {
+        let filtersWithoutRestricted = meta.filters.filter { !self.restrictedFilterIds.contains($0.filterId) }
+        let metaWithoutRestricted = ExtendedFiltersMeta(groups: meta.groups, tags: meta.tags, filters: filtersWithoutRestricted)
+        return metaWithoutRestricted
+    }
+
+    /// Internal method to remove restricted filters localizations from localizations downloaded from our server
+    func removeRestrictedFilters(from localizations: ExtendedFiltersMetaLocalizations) -> ExtendedFiltersMetaLocalizations {
+        var filtersLocalizationsWithoutRestricted = localizations.filters
+        self.restrictedFilterIds.forEach {
+            filtersLocalizationsWithoutRestricted[$0] = nil
+        }
+        let localizationsWithoutRestricted = ExtendedFiltersMetaLocalizations(groups: localizations.groups, tags: localizations.tags, filters: filtersLocalizationsWithoutRestricted)
+        return localizationsWithoutRestricted
     }
 
     /**
@@ -775,9 +797,13 @@ final class FiltersService: FiltersServiceProtocol {
             cid: configuration.cid,
             lang: lang
         ) { [weak self] filtersMeta in
+            guard let self = self else { return }
+
             if let meta = filtersMeta {
+                let metaWithoutRestricted = self.removeRestrictedFilters(from: meta)
+
                 do {
-                    metaUpdateResult = try self?.save(predefinedFiltersMeta: meta, filtersIdsToUpdate: ids)
+                    metaUpdateResult = try self.save(predefinedFiltersMeta: metaWithoutRestricted, filtersIdsToUpdate: ids)
                 } catch {
                     resultError = error
                     Logger.logError("(FiltersService) - Saving filters metadata error: \(error)")
@@ -788,9 +814,13 @@ final class FiltersService: FiltersServiceProtocol {
 
         group.enter()
         apiMethods.loadFiltersLocalizations { [weak self] filtersMetaLocalizations in
+            guard let self = self else { return }
+
             if let localizations = filtersMetaLocalizations {
+                let localizationsWithoutRestricted = self.removeRestrictedFilters(from: localizations)
+
                 do {
-                    try self?.save(localizations: localizations, filtersIdsToSave: ids)
+                    try self.save(localizations: localizationsWithoutRestricted, filtersIdsToSave: ids)
                 } catch {
                     resultError = error
                     Logger.logError("(FiltersService) - Saving filters localizations error: \(error)")

@@ -36,8 +36,10 @@ extension FiltersService: FiltersServiceForBuilderProtocol {
         ) { [unowned self] filtersMeta in
 
             if let meta = filtersMeta {
+                let metaWithoutRestricted = removeRestrictedFilters(from: meta)
+
                 do {
-                    try saveFiltersMetaToDB(meta)
+                    try saveFiltersMetaToDB(metaWithoutRestricted)
                 } catch {
                     resultError = error
                 }
@@ -55,8 +57,10 @@ extension FiltersService: FiltersServiceForBuilderProtocol {
         group.enter()
         apiMethods.loadFiltersLocalizations { [unowned self] filtersMetaLocalizations in
             if let localizations = filtersMetaLocalizations {
+                let localizationsWithoutRestricted = removeRestrictedFilters(from: localizations)
+
                 do {
-                    try save(localizations: localizations)
+                    try save(localizations: localizationsWithoutRestricted)
                 } catch {
                     resultError = error
                 }
