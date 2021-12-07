@@ -36,7 +36,22 @@ struct SafariWebExtensionParametersParser: IURLSchemeParametersParser {
             return false
         }
 
-        let action = UserRulesRedirectAction.action(from: actionStr, domain: decodedDomain)
-        return executor.openUserRulesRedirectController(for: action)
+        if let domainLevels = getDomainLevels(fullDomain: decodedDomain) {
+            let action = UserRulesRedirectAction.action(from: actionStr, domain: decodedDomain, domainLevels: domainLevels)
+            return executor.openUserRulesRedirectController(for: action)
+        }
+
+        DDLogError("(SafariWebExtensionParametersParser) - parse; Failed to get domain levels for string: \(decodedDomain)")
+        return false
+    }
+
+    private func getDomainLevels(fullDomain: String) -> String? {
+        if let index = fullDomain.firstIndex(of: "#") {
+            let result = fullDomain[fullDomain.startIndex..<index]
+            return result.isEmpty ? nil : String(result)
+        } else {
+            let splited = fullDomain.split(separator: ".")
+            return splited.count > 0 ? fullDomain : nil
+        }
     }
 }

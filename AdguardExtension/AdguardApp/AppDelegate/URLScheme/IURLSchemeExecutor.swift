@@ -17,7 +17,6 @@
 //
 
 protocol IURLSchemeExecutor {
-    func openUserFilterController(rule: String) -> Bool
     func openDnsSettingsController(showLaunchScreen: Bool, dnsProtectionIsEnabled: Bool?) -> Bool
     func openMainPageController(showLaunchScreen: Bool, complexProtectionIsEnabled: Bool?) -> Bool
     func openLoginController(license: String?) -> Bool

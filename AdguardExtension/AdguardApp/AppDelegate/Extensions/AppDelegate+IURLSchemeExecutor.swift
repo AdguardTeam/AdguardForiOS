@@ -20,11 +20,6 @@ import SafariAdGuardSDK
 
 extension AppDelegate: IURLSchemeExecutor {
 
-
-    func openUserFilterController(rule: String) -> Bool {
-        self.presentUserRulesRedirectController(for: .addToBlocklist(domain: rule))
-    }
-
     func openDnsSettingsController(showLaunchScreen: Bool, dnsProtectionIsEnabled: Bool?) -> Bool {
         self.presentDnsSettingsController(showLaunchScreen: showLaunchScreen, dnsProtectionIsEnabled: dnsProtectionIsEnabled)
     }

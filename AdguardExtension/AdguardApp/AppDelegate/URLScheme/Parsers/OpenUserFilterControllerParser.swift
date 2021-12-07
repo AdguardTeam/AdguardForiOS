@@ -27,8 +27,22 @@ struct OpenUserFilterControllerParser: IURLSchemeParametersParser {
     func parse(_ url: URL) -> Bool {
         let rule = String(url.path.suffix(url.path.count - 1))
         if rule.isEmpty { return false }
-        return executor.openUserFilterController(rule: rule)
+        if let domainLevels = getDomainLevels(fullDomain: rule) {
+            let action: UserRulesRedirectAction = UserRulesRedirectAction.addToBlocklist(domain: rule, domainLevels: domainLevels)
+            return executor.openUserRulesRedirectController(for: action)
+        }
+
+        DDLogError("(OpenUserFilterControllerParser) - parse; Failed to get domain levels for string: \(rule)")
+        return false
     }
 
-
+    private func getDomainLevels(fullDomain: String) -> String? {
+        if let index = fullDomain.firstIndex(of: "#") {
+            let result = fullDomain[fullDomain.startIndex..<index]
+            return result.isEmpty ? nil : String(result)
+        } else {
+            let splited = fullDomain.split(separator: ".")
+            return splited.count > 0 ? fullDomain : nil
+        }
+    }
 }
