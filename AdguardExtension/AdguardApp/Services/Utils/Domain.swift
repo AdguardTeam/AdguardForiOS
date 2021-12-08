@@ -18,7 +18,7 @@
 
 import Foundation
 
-/// This struct  parse domains with subdomains from string
+/// This object is responsible for working with domain objects
 struct Domain {
 
     enum ParsingError: Error, CustomDebugStringConvertible {
