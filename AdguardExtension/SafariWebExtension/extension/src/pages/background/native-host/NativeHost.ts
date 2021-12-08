@@ -3,6 +3,7 @@ import browser from 'webextension-polyfill';
 
 import { MessagesToNativeApp } from '../../common/constants';
 import { getDomain } from '../../common/utils/url';
+import { storage } from '../storage';
 
 interface NativeHostMessage {
     type: MessagesToNativeApp,
@@ -49,6 +50,8 @@ export class NativeHost implements NativeHostInterface {
     APP_ID = 'application_id';
 
     links: ActionLinks | null = null;
+
+    ACTION_LINKS_STORAGE_KEY = 'action_links';
 
     /**
      * Sends message to the native messaging host
@@ -100,11 +103,44 @@ export class NativeHost implements NativeHostInterface {
     }
 
     /**
+     * Saves links in the storage
+     * @param links
+     */
+    async saveLinksInStorage(links: ActionLinks) {
+        return storage.set(this.ACTION_LINKS_STORAGE_KEY, links);
+    }
+
+    /**
+     * Retrieves links from storage
+     */
+    async getLinksFromStorage(): Promise<ActionLinks | null> {
+        const links = await storage.get(this.ACTION_LINKS_STORAGE_KEY);
+
+        if (!links) {
+            return null;
+        }
+
+        return links as ActionLinks;
+    }
+
+    /**
      * Saves action links received from native host
      * @param links
      */
-    setLinks(links: ActionLinks) {
+    async setLinks(links: ActionLinks) {
         this.links = links;
+
+        await this.saveLinksInStorage(this.links);
+    }
+
+    /**
+     * Returns links from memory or from storage;
+     */
+    async getLinks(): Promise<ActionLinks | null> {
+        if (!this.links) {
+            this.links = await this.getLinksFromStorage();
+        }
+        return this.links;
     }
 
     /**
@@ -113,41 +149,49 @@ export class NativeHost implements NativeHostInterface {
      * @param ruleText
      */
     async addToUserRules(ruleText: string) {
-        if (!this.links?.addToBlocklistLink) {
+        const links = await this.getLinks();
+
+        if (!links?.addToBlocklistLink) {
             return;
         }
 
-        const linkWithRule = this.links.addToBlocklistLink + encodeURIComponent(ruleText);
+        const linkWithRule = links.addToBlocklistLink + encodeURIComponent(ruleText);
         await this.openNativeLink(linkWithRule);
     }
 
     async enableProtection(url: string): Promise<void> {
-        if (!this.links?.enableSiteProtectionLink) {
+        const links = await this.getLinks();
+
+        if (!links?.enableSiteProtectionLink) {
             return;
         }
 
         const domain = getDomain(url);
-        const linkWithDomain = this.links.enableSiteProtectionLink + encodeURIComponent(domain);
+        const linkWithDomain = links.enableSiteProtectionLink + encodeURIComponent(domain);
         await this.openNativeLink(linkWithDomain);
     }
 
     async disableProtection(url: string): Promise<void> {
-        if (!this.links?.disableSiteProtectionLink) {
+        const links = await this.getLinks();
+
+        if (!links?.disableSiteProtectionLink) {
             return;
         }
 
         const domain = getDomain(url);
-        const linkWithDomain = this.links.disableSiteProtectionLink + encodeURIComponent(domain);
+        const linkWithDomain = links.disableSiteProtectionLink + encodeURIComponent(domain);
         await this.openNativeLink(linkWithDomain);
     }
 
     async removeUserRulesBySite(url: string) {
-        if (!this.links?.removeAllBlocklistRulesLink) {
+        const links = await this.getLinks();
+
+        if (!links?.removeAllBlocklistRulesLink) {
             return;
         }
 
         const domain = getDomain(url);
-        const linkWithDomain = this.links.removeAllBlocklistRulesLink + encodeURIComponent(domain);
+        const linkWithDomain = links.removeAllBlocklistRulesLink + encodeURIComponent(domain);
         await this.openNativeLink(linkWithDomain);
     }
 
@@ -156,27 +200,32 @@ export class NativeHost implements NativeHostInterface {
      * reportProblemLink already contains url to the website
      */
     async reportProblem() {
-        if (!this.links?.reportProblemLink) {
+        const links = await this.getLinks();
+        if (!links?.reportProblemLink) {
             return;
         }
 
-        await browser.tabs.create({ url: this.links.reportProblemLink });
+        await browser.tabs.create({ url: links.reportProblemLink });
     }
 
     async upgradeMe() {
-        if (!this.links?.upgradeAppLink) {
+        const links = await this.getLinks();
+
+        if (!links?.upgradeAppLink) {
             return;
         }
 
-        await this.openNativeLink(this.links.upgradeAppLink);
+        await this.openNativeLink(links.upgradeAppLink);
     }
 
     async enableAdvancedBlocking() {
-        if (!this.links?.enableAdvancedBlockingLink) {
+        const links = await this.getLinks();
+
+        if (!links?.enableAdvancedBlockingLink) {
             return;
         }
 
-        await this.openNativeLink(this.links.enableAdvancedBlockingLink);
+        await this.openNativeLink(links.enableAdvancedBlockingLink);
     }
 
     /**
@@ -243,7 +292,7 @@ export class NativeHost implements NativeHostInterface {
             enable_advanced_blocking_link: enableAdvancedBlockingLink,
         } = result;
 
-        this.setLinks({
+        await this.setLinks({
             addToBlocklistLink,
             disableSiteProtectionLink,
             removeAllBlocklistRulesLink,
@@ -275,7 +324,7 @@ export class NativeHost implements NativeHostInterface {
         if (!response
             || !Object.prototype.hasOwnProperty.call(
                 response,
-                MessagesToNativeApp.ShouldUpdateAdvancedRules
+                MessagesToNativeApp.ShouldUpdateAdvancedRules,
             )) {
             return false;
         }
