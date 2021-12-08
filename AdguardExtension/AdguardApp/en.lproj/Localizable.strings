@@ -851,7 +851,7 @@
 "leave_feedback_title" = "Leave feedback";
 
 /* (BugReportController) description for bug report */
-"bug_report_description" = "Please include the problem description (did it start after an update?) and info about other software you have (VPN/AV/extension)";
+"bug_report_description" = "Please include the problem description. Did it start after an update or new software install?";
 
 /* (BugReportController) description for leaving feedback */
 "leave_feedback_description_format" = "Tell us what you think about %@ — what you like or don't like, which features you'd like to suggest";
