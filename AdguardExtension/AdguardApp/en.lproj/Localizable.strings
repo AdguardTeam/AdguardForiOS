@@ -863,7 +863,7 @@
 "leave_feedback_button_title" = "Send feedback";
 
 /* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "I agree to AdGuard's <a href=%2$@>EULA</a> and the <a href=%1$@>Privacy Policy</a>.";
+"introduction_license_agreement" = "I agree to AdGuard's <a href=%2$@>EULA</a> and <a href=%1$@>Privacy Policy</a>.";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Requests";
