@@ -25,7 +25,7 @@ struct Domain {
     static func findDomains(in string: String) -> [String] {
         if string.isEmpty { return [] }
 
-        // Regex string domains and subdomains for any languages
+        // RegEx for finding domains and subdomains in any language
         let regExString = "(?:[\\p{L}0-9](?:[\\p{L}0-9-]{0,}[\\p{L}0-9])?\\.)+[\\p{L}0-9][\\p{L}0-9-]{0,}[\\p{L}0-9]"
         guard let regex = try? NSRegularExpression(pattern: regExString) else { return [] }
 
