@@ -22,13 +22,15 @@ import Foundation
 struct DnsFilterCellModel {
     let filterId: Int // Filter unique identifier
     let filterNameAttrString: NSAttributedString // Filter name
+    let filterDescription: String? // Filter description
     let isEnabled: Bool // Filter state
     let version: String? // Filter version. Filter content always changes by it's authors, so we store the version of filter to identify it
     let lastUpdateDate: Date? // The last time the filter was updated
 
-    init(filterId: Int, filterNameAttrString: NSAttributedString, isEnabled: Bool, version: String?, lastUpdateDate: Date?) {
+    init(filterId: Int, filterNameAttrString: NSAttributedString, filterDescription: String?, isEnabled: Bool, version: String?, lastUpdateDate: Date?) {
         self.filterId = filterId
         self.filterNameAttrString = filterNameAttrString
+        self.filterDescription = filterDescription
         self.isEnabled = isEnabled
         self.version = version
         self.lastUpdateDate = lastUpdateDate
@@ -37,6 +39,7 @@ struct DnsFilterCellModel {
     init() {
         self.filterId = 0
         self.filterNameAttrString = NSAttributedString(string: "")
+        self.filterDescription = ""
         self.isEnabled = false
         self.version = nil
         self.lastUpdateDate = nil
@@ -65,7 +68,7 @@ final class DnsFilterCell: UITableViewCell, Reusable {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.greyText = true
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 16.0, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: isIpadTrait ? 24.0 : 16.0, weight: .medium)
         label.textAlignment = .left
         label.attributedText = model.filterNameAttrString
         return label
@@ -142,6 +145,12 @@ final class DnsFilterCell: UITableViewCell, Reusable {
             descriptionLabels.append(label)
         }
 
+        if let description = model.filterDescription {
+            let label = getDescriptionLabel(description)
+            stackView.addArrangedSubview(label)
+            descriptionLabels.append(label)
+        }
+
         if let updateDate = model.lastUpdateDate, let dateString = updateDate.formatedStringWithHoursAndMinutes() {
             let format = String.localizedString("filter_date_format")
             let updateDateString = String(format: format, dateString)
@@ -155,7 +164,7 @@ final class DnsFilterCell: UITableViewCell, Reusable {
         let label = ThemableLabel()
         label.lightGreyText = true
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: isIpadTrait ? 20.0 : 14.0, weight: .regular)
         label.textAlignment = .left
         label.text = text
         return label
