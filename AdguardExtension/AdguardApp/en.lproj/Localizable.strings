@@ -563,28 +563,28 @@
 "add_new_filter" = "Add a filter";
 
 /* (OneSafariGroupFiltersModel) Ads filters group description */
-"ads_filters_group_description" = "Ads";
+"ads_filters_group_description" = "Filter lists that remove ads";
 
 /* (OneSafariGroupFiltersModel) Privacy filters group description */
-"privacy_filters_group_description" = "Privacy";
+"privacy_filters_group_description" = "Filter lists that prevent tracking";
 
 /* (OneSafariGroupFiltersModel) Social Widgets filters group description */
-"social_widgets_filters_group_description" = "Social Widgets";
+"social_widgets_filters_group_description" = "Filter lists that hide social media widgets (“Like” buttons and such)";
 
 /* (OneSafariGroupFiltersModel) Annoyances filters group description */
-"annoyances_filters_group_description" = "Annoyances";
+"annoyances_filters_group_description" = "Filter lists that block irritating elements on web pages. The definition of “irritating” may be subjective and depends on the list author";
 
 /* (OneSafariGroupFiltersModel) Security filters group description */
-"security_filters_group_description" = "Security";
+"security_filters_group_description" = "Filter lists that block known online threats";
 
 /* (OneSafariGroupFiltersModel) Other filters group description */
-"other_filters_group_description" = "Other";
+"other_filters_group_description" = "Miscellaneous filter lists for different purposes";
 
 /* (OneSafariGroupFiltersModel) Language Specific filters group description */
-"language_specific_filters_group_description" = "Language Specific";
+"language_specific_filters_group_description" = "Filter lists that target websites in specific languages";
 
 /* (OneSafariGroupFiltersModel) Custom filters group description */
-"custom_filters_group_description" = "Custom";
+"custom_filters_group_description" = "Filter lists that you add manually";
 
 /* confirm reset lert text */
 "confirm_reset_text" = "All settings, including user rules, DNS protection, interface and authorization settings, will be reset. This operation cannot be undone. Reset the settings?";
@@ -863,7 +863,7 @@
 "leave_feedback_button_title" = "Send feedback";
 
 /* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "I agree to the AdGuard <a href=%2$@>EULA</a> and the <a href=%1$@>Privacy Policy</a>.";
+"introduction_license_agreement" = "I agree to AdGuard's <a href=%2$@>EULA</a> and the <a href=%1$@>Privacy Policy</a>.";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Requests";
