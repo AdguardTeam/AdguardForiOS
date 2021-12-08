@@ -61,6 +61,7 @@ final class DnsFiltersModelsProvider: DnsFiltersModelsProviderProtocol {
             DnsFilterCellModel(
                 filterId: sdkModel.filterId,
                 filterNameAttrString: (sdkModel.name ?? "").clearAttrString,
+                filterDescription: sdkModel.description,
                 isEnabled: sdkModel.isEnabled,
                 version: sdkModel.version,
                 lastUpdateDate: sdkModel.lastUpdateDate
@@ -80,6 +81,7 @@ final class DnsFiltersModelsProvider: DnsFiltersModelsProviderProtocol {
                 return DnsFilterCellModel(
                     filterId: initialModel.filterId,
                     filterNameAttrString: occuranceInfo.attrString,
+                    filterDescription: initialModel.filterDescription,
                     isEnabled: initialModel.isEnabled,
                     version: initialModel.version,
                     lastUpdateDate: initialModel.lastUpdateDate

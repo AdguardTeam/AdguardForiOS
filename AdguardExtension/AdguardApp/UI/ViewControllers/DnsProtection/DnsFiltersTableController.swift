@@ -103,9 +103,9 @@ final class DnsFiltersTableController: UITableViewController {
 
         let cell = DnsFilterCell.getCell(forTableView: tableView)
         cell.delegate = model
-        cell.updateTheme(themeService)
         let cellModelIndex = cellModelIndex(for: indexPath.row)
         cell.model = model.cellModels[cellModelIndex]
+        cell.updateTheme(themeService)
         return cell
     }
 
