@@ -21,34 +21,20 @@ import Foundation
 /// This object is responsible for working with domain objects
 struct Domain {
 
-    enum ParsingError: Error, CustomDebugStringConvertible {
-        case emptyInputString
-        case emptyParsingResult
+    /// Returns all domains (with subdomains if it exists) from string
+    static func findDomains(in string: String) -> [String] {
+        if string.isEmpty { return [] }
 
-        var debugDescription: String {
-            switch self {
-            case .emptyInputString: return "Input string is empty"
-            case .emptyParsingResult: return "Parsing result is empty"
-            }
-        }
-    }
+        // Regex string domains and subdomains for any languages
+        let regExString = "(?:[\\p{L}0-9](?:[\\p{L}0-9-]{0,}[\\p{L}0-9])?\\.)+[\\p{L}0-9][\\p{L}0-9-]{0,}[\\p{L}0-9]"
+        guard let regex = try? NSRegularExpression(pattern: regExString) else { return [] }
 
-    /// Regex string domains and subdomains for any languages
-    static private let regExString = "(?:[\\p{L}0-9](?:[\\p{L}0-9-]{0,}[\\p{L}0-9])?\\.)+[\\p{L}0-9][\\p{L}0-9-]{0,}[\\p{L}0-9]"
-
-    /// Parses string and returns domains with subdomains (if it exists).
-    /// Throws error if input string is empty, if parsing result is empty or if regex pattern is wrong
-    static func parse(_ string: String) throws -> [String] {
-        if string.isEmpty { throw ParsingError.emptyInputString }
-
-        let regex = try NSRegularExpression(pattern: regExString)
         let range = NSRange(string.startIndex..., in: string)
         let regexResult = regex.matches(in: string, range: range)
         let allMatches: [String] = regexResult.compactMap {
             guard let range = Range($0.range, in: string) else { return nil }
             return String(string[range])
         }
-        if allMatches.isEmpty { throw ParsingError.emptyParsingResult }
         return allMatches
     }
 }

@@ -17,7 +17,6 @@
 //
 
 import Foundation
-//TODO: Need tests for this parser
 
 /// This object is responsible for obtaining parameters from app scheme links
 /// And performing an action considering these parameters
@@ -37,20 +36,20 @@ struct SafariWebExtensionParametersParser: IURLSchemeParametersParser {
             return false
         }
 
-        do {
-            let result = try Domain.parse(decodedDomain)
+        let result = Domain.findDomains(in: decodedDomain)
 
-            if result.count > 1 {
-                DDLogError("(SafariWebExtensionParametersParser) - parse; Invalid parse result. Contains more than one domain: \(result)")
-                return false
-            }
-
-            let absoluteDomainString = result.first! // Domain.parse throws error if result of parsing is empty
-            let action = UserRulesRedirectAction.action(from: actionStr, domain: decodedDomain, absoluteDomainString: absoluteDomainString)
-            return executor.openUserRulesRedirectController(for: action)
-        } catch {
-            DDLogError("(SafariWebExtensionParametersParser) - parse; Failed to get absolute domain string from string=\(decodedDomain); Error: \(error)")
+        if result.isEmpty {
+            DDLogError("(SafariWebExtensionParametersParser) - parse; Failed to get absolute domain string from string=\(decodedDomain)")
             return false
         }
+
+        if result.count > 1 {
+            DDLogError("(SafariWebExtensionParametersParser) - parse; Invalid domain count. Contains more than one domain: \(result)")
+            return false
+        }
+
+        let absoluteDomainString = result.first!
+        let action = UserRulesRedirectAction.action(from: actionStr, domain: decodedDomain, absoluteDomainString: absoluteDomainString)
+        return executor.openUserRulesRedirectController(for: action)
     }
 }

@@ -31,20 +31,19 @@ struct OpenUserFilterControllerParser: IURLSchemeParametersParser {
             return false
         }
 
-        do {
-            let result = try Domain.parse(rule)
-
-            if result.count > 1 {
-                DDLogError("(OpenUserFilterControllerParser) - parse; Invalid parse result. Contains more than one domain: \(result)")
-                return false
-            }
-
-            let absoluteDomainString = result.first! // Domain.parse throws error if result of parsing is empty
-            let action: UserRulesRedirectAction = .addToBlocklist(domain: rule, absoluteDomainString: absoluteDomainString)
-            return executor.openUserRulesRedirectController(for: action)
-        } catch {
-            DDLogError("(OpenUserFilterControllerParser) - parse; Failed to get absolute domain string from string=\(rule); Error: \(error)")
+        let result = Domain.findDomains(in: rule)
+        if result.isEmpty {
+            DDLogError("(OpenUserFilterControllerParser) - parse; Failed to get absolute domain string from string=\(rule)")
             return false
         }
+
+        if result.count > 1 {
+            DDLogError("(OpenUserFilterControllerParser) - parse; Invalid domain count. Contains more than one domain: \(result)")
+            return false
+        }
+
+        let absoluteDomainString = result.first!
+        let action: UserRulesRedirectAction = .addToBlocklist(domain: rule, absoluteDomainString: absoluteDomainString)
+        return executor.openUserRulesRedirectController(for: action)
     }
 }
