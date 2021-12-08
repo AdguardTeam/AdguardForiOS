@@ -46,8 +46,8 @@
 /* Class = "UILabel"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "free";
 
-/* Class = "UIButton"; normalTitle = "Buy full version"; ObjectID = "pv0-hE-9gb"; */
-"pv0-hE-9gb.normalTitle" = "Buy full version";
+/* Class = "UIButton"; normalTitle = "Purchase license"; ObjectID = "pv0-hE-9gb"; */
+"pv0-hE-9gb.normalTitle" = "Purchase license";
 
 /* Class = "UILabel"; text = "Works even on websites that detect and circumvent regular ad blocking"; ObjectID = "rm0-Ip-riS"; */
 "rm0-Ip-riS.text" = "Works even on websites that detect and circumvent regular ad blocking";

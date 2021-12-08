@@ -175,7 +175,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qR5-hz-sPb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <barButtonItem title="Login" id="jMW-e4-GbU">
+                <barButtonItem title="Log in" id="jMW-e4-GbU">
                     <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                 </barButtonItem>
             </objects>

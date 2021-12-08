@@ -35,7 +35,7 @@ extension UIViewController {
 
     /// Presents native alert for unknown error. Title and message are already set.
     func showUnknownErrorAlert() {
-        let title = String.localizedString("common_error_title")
+        let title = String.localizedString("something_went_wrong_title")
         let message = String.localizedString("unknown_error_description")
         presentSimpleAlert(title: title, message: message, onOkButtonTapped: nil)
     }

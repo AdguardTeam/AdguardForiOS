@@ -421,7 +421,6 @@
 		656B2ACF1B9EFBDD006A1C48 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656B2ACE1B9EFBDD006A1C48 /* Social.framework */; };
 		656D7D041B8FA7E500CC8A19 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 656D7D031B8FA7E500CC8A19 /* JavaScriptCore.framework */; };
 		65711E561B8C670A00C8C4E7 /* defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65711E551B8C670A00C8C4E7 /* defaults.plist */; };
-		6578E3851BC5084300E2DFFD /* StaticDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6578E3841BC5084300E2DFFD /* StaticDataTableViewController.m */; };
 		658E43981E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		658E439B1E8911A3008DAA59 /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		65982AE91BA02D6800770EA9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65982AE81BA02D6800770EA9 /* MessageUI.framework */; };
@@ -436,7 +435,6 @@
 		659886651CF74DE9003ECD1C /* ACIOStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B01C6B7686000F00D7 /* ACIOStream.m */; };
 		6598866A1CF74DE9003ECD1C /* ACNNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A02001C6B7686000F00D7 /* ACNNetworking.m */; };
 		6598866E1CF74DE9003ECD1C /* NSURL+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F61C6B7686000F00D7 /* NSURL+Utils.m */; };
-		6598866F1CF74DE9003ECD1C /* StaticDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6578E3841BC5084300E2DFFD /* StaticDataTableViewController.m */; };
 		659886711CF74DE9003ECD1C /* ACIOUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01B21C6B7686000F00D7 /* ACIOUtils.m */; };
 		659886721CF74DE9003ECD1C /* ACLFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01BC1C6B7686000F00D7 /* ACLFileLogger.m */; };
 		6598867B1CF74DE9003ECD1C /* ACFFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01A51C6B7686000F00D7 /* ACFFileUtils.m */; };
@@ -1384,10 +1382,6 @@
 		D0116CEF20627E58009598B1 /* ACNCidrRange.m in Sources */ = {isa = PBXBuildFile; fileRef = D0116CED20627E58009598B1 /* ACNCidrRange.m */; };
 		D0116CF22063E004009598B1 /* ACNCidrRangeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D0116CF12063E004009598B1 /* ACNCidrRangeTest.m */; };
 		D016FBB9224CF46B00CF3B29 /* UIApplication+OpenAdguardUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D016FBB8224CF46B00CF3B29 /* UIApplication+OpenAdguardUrl.swift */; };
-		D018672A203C86050003110A /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D0186726203C86040003110A /* MGSwipeButton.m */; };
-		D018672B203C86050003110A /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D0186726203C86040003110A /* MGSwipeButton.m */; };
-		D018672C203C86050003110A /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0186728203C86050003110A /* MGSwipeTableCell.m */; };
-		D018672D203C86050003110A /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D0186728203C86050003110A /* MGSwipeTableCell.m */; };
 		D020B27B21F894F90075BB8D /* DnsRequestLogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D020B27A21F894F90075BB8D /* DnsRequestLogModel.swift */; };
 		D0227DD4244D4A08009B7579 /* SupportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0227DD3244D4A08009B7579 /* SupportService.swift */; };
 		D023181522FD9C2000905DD6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659E59751BC6D82700FA2384 /* Localizable.strings */; };
@@ -2880,8 +2874,6 @@
 		656B2ACE1B9EFBDD006A1C48 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		656D7D031B8FA7E500CC8A19 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		65711E551B8C670A00C8C4E7 /* defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaults.plist; sourceTree = "<group>"; };
-		6578E3831BC5084300E2DFFD /* StaticDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaticDataTableViewController.h; sourceTree = "<group>"; };
-		6578E3841BC5084300E2DFFD /* StaticDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaticDataTableViewController.m; sourceTree = "<group>"; };
 		658237361D07FE6700B824F4 /* tunnel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = tunnel.entitlements; sourceTree = "<group>"; };
 		6582373A1D07FE6700B824F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		658E43961E8911A3008DAA59 /* NSStringPunycodeAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringPunycodeAdditions.h; sourceTree = "<group>"; };
@@ -3551,10 +3543,6 @@
 		D0183BB920C93FD200813714 /* ja */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0183BC720CBF2C400813714 /* es */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		D0183BC920CBF2C500813714 /* es */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
-		D0186726203C86040003110A /* MGSwipeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSwipeButton.m; sourceTree = "<group>"; };
-		D0186727203C86050003110A /* MGSwipeTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSwipeTableCell.h; sourceTree = "<group>"; };
-		D0186728203C86050003110A /* MGSwipeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSwipeTableCell.m; sourceTree = "<group>"; };
-		D0186729203C86050003110A /* MGSwipeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSwipeButton.h; sourceTree = "<group>"; };
 		D020B27A21F894F90075BB8D /* DnsRequestLogModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsRequestLogModel.swift; sourceTree = "<group>"; };
 		D0227DD3244D4A08009B7579 /* SupportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportService.swift; sourceTree = "<group>"; };
 		D0249571256BD0E4000EED34 /* ImportSettingsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportSettingsTest.swift; sourceTree = "<group>"; };
@@ -5232,7 +5220,6 @@
 			children = (
 				D0F91165212EDE45006DF0D3 /* ViewControllers */,
 				D0F91161212EDD51006DF0D3 /* Views */,
-				6578E3821BC5082000E2DFFD /* vendors */,
 				7E0B227425DBBB4300AF88BB /* Utils */,
 				7E1A8F6126FDDCDA00BA98D5 /* GenericTableHeaders */,
 				7E92753D26C67A2E007B2C80 /* GenericCells */,
@@ -5389,16 +5376,6 @@
 				655A020F1C6B7686000F00D7 /* Reachability.m */,
 			);
 			path = Reachability;
-			sourceTree = "<group>";
-		};
-		6578E3821BC5082000E2DFFD /* vendors */ = {
-			isa = PBXGroup;
-			children = (
-				D04B97DE1F601D1900CE2E03 /* MGSwipeTableCell */,
-				6578E3831BC5084300E2DFFD /* StaticDataTableViewController.h */,
-				6578E3841BC5084300E2DFFD /* StaticDataTableViewController.m */,
-			);
-			path = vendors;
 			sourceTree = "<group>";
 		};
 		658237341D07FE6700B824F4 /* Tunnel */ = {
@@ -6461,17 +6438,6 @@
 				D031A0BC219EFC99002C17D9 /* DDDispatchQueueLogFormatter.h */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		D04B97DE1F601D1900CE2E03 /* MGSwipeTableCell */ = {
-			isa = PBXGroup;
-			children = (
-				D0186729203C86050003110A /* MGSwipeButton.h */,
-				D0186726203C86040003110A /* MGSwipeButton.m */,
-				D0186727203C86050003110A /* MGSwipeTableCell.h */,
-				D0186728203C86050003110A /* MGSwipeTableCell.m */,
-			);
-			path = MGSwipeTableCell;
 			sourceTree = "<group>";
 		};
 		D067D8CF213ED55100ECDE6D /* ViewModel */ = {
@@ -8404,7 +8370,6 @@
 				D0B545CD2435D692002F0AEC /* ImportRulesController.swift in Sources */,
 				7E18443726F773470085CDE3 /* SharedResources+Theme.swift in Sources */,
 				2449000A272C3E3900557CEE /* ImportDNSSettingsHelper.swift in Sources */,
-				6598866F1CF74DE9003ECD1C /* StaticDataTableViewController.m in Sources */,
 				7E303C2226F6463400EBACD1 /* DnsFiltersModelsProvider.swift in Sources */,
 				D0B545FF2435D6D2002F0AEC /* ConfigurationServiceProtocol.swift in Sources */,
 				24DB3DBF2745443D0038627C /* AdServicesAttributionRecordsRequest.swift in Sources */,
@@ -8420,7 +8385,6 @@
 				659886721CF74DE9003ECD1C /* ACLFileLogger.m in Sources */,
 				7E2D940026F4893200534DC5 /* Constants+SafariFilters.swift in Sources */,
 				D0B5458B2435D630002F0AEC /* FileShareHelper.swift in Sources */,
-				D018672D203C86050003110A /* MGSwipeTableCell.m in Sources */,
 				D0B545A62435D640002F0AEC /* DnsProviderDetailsController.swift in Sources */,
 				D0B545942435D630002F0AEC /* ServiceLocator.swift in Sources */,
 				7E1A8F6A26FDE37200BA98D5 /* ContentBlockerTableViewCellModel.swift in Sources */,
@@ -8573,7 +8537,6 @@
 				D0B545D92435D69B002F0AEC /* StackElementView.swift in Sources */,
 				2463A7A52746B1BB007C9935 /* IAdFrameworkHelper.swift in Sources */,
 				6598868D1CF74DE9003ECD1C /* NSDate+Utils.m in Sources */,
-				D018672B203C86050003110A /* MGSwipeButton.m in Sources */,
 				24F66A8626033C9D0097B426 /* OpenDnsSettingsControllerWithLaunchScreenParser.swift in Sources */,
 				247CB5532600AF710047974C /* IURLSchemeExecutor.swift in Sources */,
 				24C31ECC26FF790200673309 /* WebReporterSafariFiltersWrapper.swift in Sources */,
@@ -8794,7 +8757,6 @@
 				7E8AC81B23A7C41700669C75 /* MainTabBarController.swift in Sources */,
 				B2673DCC27173DFD00E04747 /* DnsProtectionUserRulesMigrationHelper.swift in Sources */,
 				D034DDAD22CA23030007641A /* UIViewController+Utils.swift in Sources */,
-				D018672A203C86050003110A /* MGSwipeButton.m in Sources */,
 				65EC9BD01BB9824C00F53F3B /* ADProductInfo.m in Sources */,
 				7E7702A226FF5113004A8616 /* TitleHeaderView.swift in Sources */,
 				D090FC952407E53700A0C026 /* VpnManager.swift in Sources */,
@@ -8896,7 +8858,6 @@
 				D07A16442168AC0A008BB432 /* NewCustomFilterDetailsController.swift in Sources */,
 				247CB6262600CA5B0047974C /* OpenFiltersMasterControllerParser.swift in Sources */,
 				248448BC259383ED00D52DE0 /* SignInFailureHandler.swift in Sources */,
-				6578E3851BC5084300E2DFFD /* StaticDataTableViewController.m in Sources */,
 				7EBDFE8D26CFA44300CCE8CC /* SwitchTableViewCell.swift in Sources */,
 				24DB3DBE2745443D0038627C /* AdServicesAttributionRecordsRequest.swift in Sources */,
 				B2C8E9782716E4AD00ACDED8 /* PurchaseAssistant.swift in Sources */,
@@ -9028,7 +8989,6 @@
 				24B3DAEF26F8B4D000A66C0F /* DnsProviderActionCell.swift in Sources */,
 				7E303C2126F6463400EBACD1 /* DnsFiltersModelsProvider.swift in Sources */,
 				240C3AE02746775800CD10B3 /* AdClientWrapper.swift in Sources */,
-				D018672C203C86050003110A /* MGSwipeTableCell.m in Sources */,
 				D031A163219EFC99002C17D9 /* DDAbstractDatabaseLogger.m in Sources */,
 				7EF5C51326C261AF001851D6 /* SharedResources.swift in Sources */,
 				7E85A82326F37FBD0059BB33 /* OpenLicenseControllerParser.swift in Sources */,

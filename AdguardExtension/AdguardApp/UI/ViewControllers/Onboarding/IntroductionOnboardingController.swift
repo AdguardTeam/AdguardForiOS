@@ -18,8 +18,9 @@
 
 import UIKit
 
-class IntroductionOnboardingController: UIViewController {
+final class IntroductionOnboardingController: UIViewController {
 
+    @IBOutlet weak var checkBoxButton: UIButton!
     @IBOutlet weak var titleLabel: ThemableLabel!
     @IBOutlet weak var licenseTextView: UITextView!
     @IBOutlet weak var nextButton: RoundRectButton!
@@ -32,10 +33,15 @@ class IntroductionOnboardingController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        checkBoxButton.isSelected = false
         nextButton.applyStandardGreenStyle()
+        nextButton.isEnabled = false
         updateTheme()
         setupBackButton()
+
+        licenseTextView.textContainerInset = .zero
+        licenseTextView.textContainer.lineFragmentPadding = 0.0
+        licenseTextView.tintColor = UIColor.AdGuardColor.lightGreen1
 
         if let navController = navigationController as? MainNavigationController {
             navController.removeGestureRecognizer()
@@ -54,6 +60,11 @@ class IntroductionOnboardingController: UIViewController {
 
     // MARK: - Actions
 
+    @IBAction func checkboxButtonTapped(_ sender: UIButton) {
+        checkBoxButton.isSelected = !checkBoxButton.isSelected
+        nextButton.isEnabled = checkBoxButton.isSelected
+    }
+
     // MARK: - Private methods
 
     private func setupLicenseTextView() {
@@ -63,7 +74,7 @@ class IntroductionOnboardingController: UIViewController {
         let htmlString = String(format: format, privacy, eula)
 
         let font = licenseTextView.font ?? UIFont.systemFont(ofSize: 16.0)
-        let attributeString = NSMutableAttributedString.fromHtml(htmlString, fontSize: font.pointSize, color: theme.blackTextColor, textAlignment: .center)
+        let attributeString = NSMutableAttributedString.fromHtml(htmlString, fontSize: font.pointSize, color: theme.blackTextColor, textAlignment: .left)
 
         licenseTextView.attributedText = attributeString
     }

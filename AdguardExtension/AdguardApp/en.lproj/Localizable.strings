@@ -19,8 +19,11 @@
 /* Alert title. On error. */
 "common_error_title" = "Error";
 
+/* Something went wrong title for unknown error */
+"something_went_wrong_title" = "Something went wrong";
+
 /* Unknown error desription */
-"unknown_error_description" = "An unknown error occurred";
+"unknown_error_description" = "Please report this error to support.";
 
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Filters couldn't be loaded into Safari, so your recent changes were not applied.";
@@ -71,13 +74,13 @@
 "common_action_yes" = "Yes";
 
 /* (MainController) login status caption on main screen */
-"protection_enabled_caption" = "Protection is On";
+"protection_enabled_caption" = "Protection is on";
 
 /* (MainController) login status caption on main screen */
 "protection_partly_enabled_caption" = "Some content blockers are disabled";
 
 /* (MainController) login status caption on main screen */
-"protection_disabled_caption" = "Protection is Off";
+"protection_disabled_caption" = "Protection is off";
 
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Subscribe";
@@ -101,7 +104,7 @@
 "upgrade_lifetime_button_title" = "Purchase";
 
 /* (GetProTableController) missing purchase alert message */
-"upgrade_missing_purchase_message" = "The list of subscriptions is not available. Please check your Internet connection and try again.";
+"upgrade_missing_purchase_message" = "Subscription plans are not available. Please check your Internet connection and try again.";
 
 /* (LoginController) lost password button title */
 "lost_password" = "Lost password?";
@@ -263,7 +266,7 @@
 "purchase_description_format" = "AdGuard Subscription Terms<br><br>•Payment will be charged to your iTunes Account at confirmation of purchase.<br><br>• Subscription automatically renews unless auto-renew is turned off at least 24 hours before the end of the current period.<br><br>• The subscription renewal fee will be charged to your iTunes Account within 24 hours of the end of the current period.<br><br>• You can manage your subscription and turn off auto-renewal by going to your Account Settings after purchase.<br><br>AdGuard <a href=%2$@>EULA</a> and <a href=%1$@>Privacy policy</a>";
 
 /* lifetime purchase secription format */
-"lifetime_purchase_description_format" = "AdGuard <a href=%2$@>EULA</a> and <a href=%1$@>Privacy policy</a>";
+"lifetime_purchase_description_format" = "AdGuard's <a href=%2$@>EULA</a> and <a href=%1$@>Privacy Policy</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "Ok";
@@ -392,7 +395,7 @@
 "copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\nAll rights reserved. AdGuard.com";
 
 /* (LicensePageViewController) Login title */
-"common_login" = "Login";
+"common_login" = "Log in";
 
 /* (AboutViewController) Logout title */
 "common_logout" = "Logout";
@@ -452,7 +455,7 @@
 "open_user_rules_editor" = "Open editor";
 
 /* (UserRulesTableController) - description for Safari user rules in editor  */
-"editor_safari_user_rules_description" = "Add custom Safari user rules";
+"editor_safari_user_rules_description" = "Add Safari user rules";
 
 /* (UserRulesTableController) - description for allowlist rules in editor  */
 "editor_allowlist_rules_description" = "Add custom allowlist rules";
@@ -559,6 +562,30 @@
 /* (OneSafariGroupFiltersModel) Add new filter title */
 "add_new_filter" = "Add a filter";
 
+/* (OneSafariGroupFiltersModel) Ads filters group description */
+"ads_filters_group_description" = "Filter lists that remove ads";
+
+/* (OneSafariGroupFiltersModel) Privacy filters group description */
+"privacy_filters_group_description" = "Filter lists that prevent tracking";
+
+/* (OneSafariGroupFiltersModel) Social Widgets filters group description */
+"social_widgets_filters_group_description" = "Filter lists that hide social media widgets (“Like” buttons and such)";
+
+/* (OneSafariGroupFiltersModel) Annoyances filters group description */
+"annoyances_filters_group_description" = "Filter lists that block irritating elements on web pages. The definition of “irritating” may be subjective and depends on the list author";
+
+/* (OneSafariGroupFiltersModel) Security filters group description */
+"security_filters_group_description" = "Filter lists that block known online threats";
+
+/* (OneSafariGroupFiltersModel) Other filters group description */
+"other_filters_group_description" = "Miscellaneous filter lists for different purposes";
+
+/* (OneSafariGroupFiltersModel) Language Specific filters group description */
+"language_specific_filters_group_description" = "Filter lists that target websites in specific languages";
+
+/* (OneSafariGroupFiltersModel) Custom filters group description */
+"custom_filters_group_description" = "Filter lists that you add manually";
+
 /* confirm reset lert text */
 "confirm_reset_text" = "All settings, including user rules, DNS protection, interface and authorization settings, will be reset. This operation cannot be undone. Reset the settings?";
 
@@ -608,19 +635,19 @@
 "common_add" = "Add";
 
 /*(TodayViewController) Protection is disabled title  */
-"protection_disabled" = "Protection is Off";
+"protection_disabled" = "Protection is off";
 
 /*(TodayViewController) Protection is enabled title  */
-"protection_enabled" = "Protection is On";
+"protection_enabled" = "Protection is on";
 
 /*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Safari and DNS protection is On";
+"complex_enabled" = "Safari and DNS protection is on";
 
 /*(TodayViewController) Safari protection is enabled text  */
-"safari_enabled" = "Safari Protection is On";
+"safari_enabled" = "Safari Protection is on";
 
 /*(TodayViewController) All protection is disabled text  */
-"complex_disabled" = "Safari and DNS protection is Off";
+"complex_disabled" = "Safari and DNS protection is off";
 
 /*(TodayViewController) DNS protection is enabled text  */
 "system_enabled" = "DNS protection";
@@ -674,28 +701,25 @@
 "dns_request_user_status_removed_from_blacklist" = "removed from the blocklist";
 
 /* (OnboardingController) first step text*/
-"onboarding_first_step_text" = "Open <b>Settings.</b>";
+"onboarding_first_step_text" = "Open <b>Settings</b>.";
 
 /* (OnboardingController) first step with advanced protection text*/
-"advanced_protection_onboarding_first_step_text" = "Tap <b>Settings.</b>";
+"advanced_protection_onboarding_first_step_text" = "Tap <b>Settings</b>.";
 
 /* (OnboardingController) second step text */
-"onboarding_second_step_text" = "Tap <b>Safari</b>, swipe down, and tap <b>Content blockers.</b>";
+"onboarding_second_step_text" = "Tap <b>Safari</b>, swipe down, and tap <b>Content blockers</b>.";
 
 /* (OnboardingController) second step with advanced protection text */
-"advanced_protection_onboarding_second_step_text" = "Go to <b>Safari > Extensions.</b>";
+"advanced_protection_onboarding_second_step_text" = "Go to <b>Safari > Extensions</b>.";
 
 /* (OnboardingController) third step text */
 "onboarding_third_step_text" = "<b>Enable</b> all AdGuard extensions.";
 
 /* (OnboardingController) third step with advanced protection text */
-"advanced_protection_onboarding_third_step_text" = "Set all AdGuard toggles to <b>On.</b> You`re good to go!";
+"advanced_protection_onboarding_third_step_text" = "Set all AdGuard toggles to <b>on</b>. You`re good to go!";
 
 /* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
-"onboarding_fours_step_text" = "For <b>Advanced</b> protection, open the Safari app, tap the <b>aA</b> icon on the left side of the URL field,<br><br> %@ <br><br>then tap Manage extensions and enable <b>AdGuard</b> toggle.";
-
-/* (DnsProvidersController) default systen dns server description */
-"default_dns_server_description" = "Use system default DNS servers provided by your Internet service provider";
+"onboarding_fours_step_text" = "For <b>Advanced</b> protection, open Safari, tap the <b>aA</b> icon on the left side of the URL field,<br><br> %@ <br><br>then tap Manage extensions and enable the <b>AdGuard</b> toggle.";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "Block request";
@@ -707,7 +731,7 @@
 "video_tutorial_title" = "Video Tutorial";
 
 /* (NewDnsServerController) error message text */
-"invalid_upstream_message" = "You have entered the invalid upstream";
+"invalid_upstream_message" = "You have entered an invalid upstream";
 
 /* (UpstreamsController) error message text */
 "invalid_ip_message" = "You have entered an invalid IP address";
@@ -719,7 +743,7 @@
 "invalid_dns_protocol_message" = "%@ is not supported by iOS yet. Try to add different upstream.";
 
 /*(DnsFiltersController) the error message that is shown when trying to add a duplicate custom dns server */
-"custom_dns_server_exists" = "You've tried to add a duplicate DNS serve. The server with the specified upstream is already in the list";
+"custom_dns_server_exists" = "You've tried to add a duplicate DNS server. The server with the specified upstream is already in the list";
 
 /* (NewDnsServerController) save and select button title */
 "save_and_select_button_title" = "Save and select";
@@ -827,7 +851,7 @@
 "leave_feedback_title" = "Leave feedback";
 
 /* (BugReportController) description for bug report */
-"bug_report_description" = "Please include the problem description (did it start after an update?) and info about other software you have (VPN/AV/extension)";
+"bug_report_description" = "Please include the problem description. Did it start after an update or new software install?";
 
 /* (BugReportController) description for leaving feedback */
 "leave_feedback_description_format" = "Tell us what you think about %@ — what you like or don't like, which features you'd like to suggest";
@@ -839,7 +863,7 @@
 "leave_feedback_button_title" = "Send feedback";
 
 /* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "By continuing using it, you accept the<br /><a href=%2$@>Terms and conditions</a> and <a href=%1$@>Privacy policy</a>";
+"introduction_license_agreement" = "I agree to AdGuard's <a href=%2$@>EULA</a> and <a href=%1$@>Privacy Policy</a>.";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Requests";
@@ -914,7 +938,7 @@
 "detailed_filter_info_subscription_subtitle" = "Subscription URL";
 
 /* (AddRuleController) Error description when adding rule that already exists */
-"user_rule_exists_error" = "You're trying to add the rule, which is already in the list";
+"user_rule_exists_error" = "You're trying to add the rule which is already in the list";
 
 // MARK: - Strings for UserRulesRedirectController
 
@@ -1137,7 +1161,7 @@
 "background_fetch_default_period" = "Default period";
 
 /* (BackgroundFetchController) - Background app refresh every 1 hour title */
-"background_fetch_hour_period" = "Every 1 hour";
+"background_fetch_hour_period" = "Every hour";
 
 /* (BackgroundFetchController) - Background app refresh every 3 hours title */
 "background_fetch_tree_hours_period" = "Every 3 hours";

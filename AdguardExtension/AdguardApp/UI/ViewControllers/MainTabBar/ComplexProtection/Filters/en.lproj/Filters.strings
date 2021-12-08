@@ -25,8 +25,8 @@
 /* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "QHZ-sJ-wTL"; */
 "QHZ-sJ-wTL.text" = "Blocks ads and trackers on websites opened in Safari";
 
-/* Class = "UILabel"; text = "Rule count:"; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
-"RJU-32-r8h.text" = "Rule count:";
+/* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
+"RJU-32-r8h.text" = "Rules count: ";
 
 /* Class = "UILabel"; text = "User rules"; ObjectID = "VCK-db-aeg"; */
 "VCK-db-aeg.text" = "User rules";
@@ -49,5 +49,6 @@
 /* Class = "UILabel"; text = "Homepage: "; ObjectID = "t8x-PU-hFK"; */
 "t8x-PU-hFK.text" = "Homepage: ";
 
-/* Class = "UITextField"; placeholder = "Name of the filter"; ObjectID = "zcB-eh-Ou4"; Note = "(Add Custom Filter) url hint"; */
-"zcB-eh-Ou4.placeholder" = "Name of the filter";
+
+/* Class = "UITextField"; placeholder = "Enter filter name:"; ObjectID = "zcB-eh-Ou4"; Note = "(Add Custom Filter) url hint"; */
+"zcB-eh-Ou4.placeholder" = "Enter filter name:";

@@ -42,7 +42,7 @@ final class OneSafariGroupFiltersModel: NSObject, SafariGroupFiltersModelProtoco
 
     var title: String { groupModel.title }
 
-    var summary: String { "Here will be a group description when content team provides us with it" }
+    var summary: String { group.localizedSummary }
 
     var searchString: String? {
         didSet {
@@ -280,5 +280,22 @@ extension OneSafariGroupFiltersModel {
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
+    }
+}
+
+// MARK: - SafariGroup + localized summary
+
+fileprivate extension SafariGroup {
+    var localizedSummary: String {
+        switch groupType {
+        case .ads: return String.localizedString("ads_filters_group_description")
+        case .privacy: return String.localizedString("privacy_filters_group_description")
+        case .socialWidgets: return String.localizedString("social_widgets_filters_group_description")
+        case .annoyances: return String.localizedString("annoyances_filters_group_description")
+        case .security: return String.localizedString("security_filters_group_description")
+        case .other: return String.localizedString("other_filters_group_description")
+        case .languageSpecific: return String.localizedString("language_specific_filters_group_description")
+        case .custom: return String.localizedString("custom_filters_group_description")
+        }
     }
 }

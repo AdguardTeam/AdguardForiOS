@@ -503,8 +503,8 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uWd-ZI-H88">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="265"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Rule count:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RJU-32-r8h" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="16" y="89" width="77.5" height="18"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Rules count: " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RJU-32-r8h" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="16" y="89" width="89" height="18"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="textColor" red="0.28627450980000002" green="0.28627450980000002" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -574,8 +574,8 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         </variation>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name of the filter" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zcB-eh-Ou4" customClass="AGTextField" customModule="Adguard" customModuleProvider="target">
-                                                        <rect key="frame" x="16" y="25" width="382" height="40"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter filter name:" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zcB-eh-Ou4" customClass="AGTextField" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="16" y="25" width="568" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="shn-sj-gIP">
                                                                 <variation key="heightClass=regular-widthClass=regular" constant="60"/>
