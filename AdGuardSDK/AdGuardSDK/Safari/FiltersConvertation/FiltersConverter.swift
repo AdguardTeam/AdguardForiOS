@@ -175,15 +175,36 @@ final class FiltersConverter: FiltersConverterProtocol {
         }
     }
 
-    // Converts all rules to jsons
+//    // Converts all rules to jsons
+//    private func convert(filters: [ContentBlockerType: [String]]) -> [FiltersConverterResult] {
+//        // TODO: - converter.convertArray is very long operation and we need to call it 6 times in a row
+//        // Would be great to do it in different threads; Needs to be discussed!
+//        Logger.logInfo("🚀 start")
+//        var conversionResult: [FiltersConverterResult] = []
+//
+//        let safariVersion = SafariVersion(rawValue: configuration.iosVersion) ?? .safari15
+//        for (cbType, rules) in filters {
+//            let result = converter.convertArray(
+//                rules: rules,
+//                safariVersion: safariVersion,
+//                optimize: false,
+//                advancedBlocking: configuration.advancedBlockingIsEnabled && configuration.proStatus
+//            )
+//            Logger.logInfo("FiltersConverter result: \(result.message)")
+//
+//            // Just take the info we need
+//            let converterResult = FiltersConverterResult(type: cbType, conversionResult: result)
+//            conversionResult.append(converterResult)
+//        }
+//        Logger.logInfo("🏁 finish")
+//        return conversionResult
+//    }
+
     private func convert(filters: [ContentBlockerType: [String]]) -> [FiltersConverterResult] {
-        // TODO: - converter.convertArray is very long operation and we need to call it 6 times in a row
-        // Would be great to do it in different threads; Needs to be discussed!
-
-        var conversionResult: [FiltersConverterResult] = []
-
+        Logger.logInfo("🚀 start")
         let safariVersion = SafariVersion(rawValue: configuration.iosVersion) ?? .safari15
-        for (cbType, rules) in filters {
+        let conversionResult: [FiltersConverterResult] = filters.concurrentMap { [unowned self] cbType, rules -> FiltersConverterResult in
+            let converter = ContentBlockerConverterWrapper()
             let result = converter.convertArray(
                 rules: rules,
                 safariVersion: safariVersion,
@@ -194,8 +215,9 @@ final class FiltersConverter: FiltersConverterProtocol {
 
             // Just take the info we need
             let converterResult = FiltersConverterResult(type: cbType, conversionResult: result)
-            conversionResult.append(converterResult)
+            return converterResult
         }
+        Logger.logInfo("🏁 finish")
         return conversionResult
     }
 }
