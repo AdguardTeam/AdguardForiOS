@@ -16,7 +16,7 @@
 // along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import UIKit
 
 class RoundRectButton: UIButton {
 
@@ -149,6 +149,12 @@ class RoundRectButton: UIButton {
     func stopIndicator(){
         activityIndicator.stopAnimating()
         activityIndicator.removeFromSuperview()
+    }
+
+    func setBackgroundColor() {
+        customBackgroundColor = UIColor.AdGuardColor.lightGreen1
+        customDisabledBackgroundColor = UIColor.AdGuardColor.green
+        customHighlightedBackgroundColor = UIColor.AdGuardColor.lightGreen1.withAlphaComponent(0.5)
     }
 
     // MARK: - Private methods
