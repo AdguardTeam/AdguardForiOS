@@ -26,9 +26,19 @@ struct OpenUserFilterControllerParser: IURLSchemeParametersParser {
 
     func parse(_ url: URL) -> Bool {
         let rule = String(url.path.suffix(url.path.count - 1))
-        if rule.isEmpty { return false }
-        return executor.openUserFilterController(rule: rule)
+        if rule.isEmpty {
+            DDLogError("(OpenUserFilterControllerParser) - parse; Failed to get rule from URL=\(url.absoluteString)")
+            return false
+        }
+
+        let result = Domain.findDomains(in: rule)
+        if result.isEmpty {
+            DDLogError("(OpenUserFilterControllerParser) - parse; Failed to get absolute domain string from string=\(rule)")
+            return false
+        }
+
+        let absoluteDomainString = result.first!
+        let action: UserRulesRedirectAction = .addToBlocklist(domain: rule, absoluteDomainString: absoluteDomainString)
+        return executor.openUserRulesRedirectController(for: action)
     }
-
-
 }

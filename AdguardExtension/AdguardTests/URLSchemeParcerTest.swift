@@ -33,7 +33,7 @@ class URLSchemeParcerTest: XCTestCase {
 
     func testAddSafariRuleUrl() {
         let urlParcer = self.urlParcer!
-        let safariRuleUrl = URL(string: "adguard://add/foo")!
+        let safariRuleUrl = URL(string: "adguard://add/some.domain")!
         let safariEmptyRuleUrl = URL(string: "adguard://add/")!
         let incorrectCommand = URL(string: "adguard://ad")!
 
@@ -156,5 +156,33 @@ class URLSchemeParcerTest: XCTestCase {
         XCTAssertFalse(emptyAuthUrlResult)
         XCTAssertFalse(incorrectAuthUrlResult)
         XCTAssertFalse(errorAuthResult)
+    }
+
+    func testSafariWebExtensionEnableProtectionUrl() {
+        let urlParcer = self.urlParcer!
+        let urls = [ "adguard://safariWebExtension?action=enableSiteProtection&domain=",
+                     "adguard://safariWebExtension?action=disableSiteProtection&domain=",
+                     "adguard://safariWebExtension?action=addToBlocklist&domain=",
+                     "adguard://safariWebExtension?action=removeAllBlocklistRules&domain="]
+
+        urls.forEach {
+            let url = URL(string: $0)!
+            XCTAssertFalse(urlParcer.parse(url: url))
+        }
+
+        urls.forEach {
+            let url = URL(string: $0 + "some.domain")!
+            XCTAssertTrue(urlParcer.parse(url: url))
+        }
+
+        urls.forEach {
+            let url = URL(string: $0 + "wrongDomain")!
+            XCTAssertFalse(urlParcer.parse(url: url))
+        }
+
+        XCTAssertFalse(urlParcer.parse(url: URL(string: "adguard://safariWebExtension")!))
+        XCTAssertFalse(urlParcer.parse(url: URL(string: "adguard://safariWebExtension?action=")!))
+        XCTAssertFalse(urlParcer.parse(url: URL(string: "adguard://safariWebExtension?foo")!))
+        XCTAssertFalse(urlParcer.parse(url: URL(string: "nonValid")!))
     }
 }

@@ -46,24 +46,24 @@ final class UserRulesRedirectControllerModel: UserRulesRedirectControllerModelPr
 
     func processAction() {
         switch action {
-        case .disableSiteProtection(let domain):
+        case .disableSiteProtection(let domain, _):
             if resources.invertedWhitelist {
                 try? safariProtection.removeRule(withText: domain, for: .invertedAllowlist, onCbReloaded: nil)
             } else {
                 let rule = UserRule(ruleText: domain, isEnabled: true)
                 try? safariProtection.add(rule: rule, for: .allowlist, override: true, onCbReloaded: nil)
             }
-        case .enableSiteProtection(let domain):
+        case .enableSiteProtection(let domain, _):
             if resources.invertedWhitelist {
                 let rule = UserRule(ruleText: domain, isEnabled: true)
                 try? safariProtection.add(rule: rule, for: .invertedAllowlist, override: true, onCbReloaded: nil)
             } else {
                 try? safariProtection.removeRule(withText: domain, for: .allowlist, onCbReloaded: nil)
             }
-        case .addToBlocklist(let domain):
+        case .addToBlocklist(let domain, _):
             let rule = UserRule(ruleText: domain, isEnabled: true)
             try? safariProtection.add(rule: rule, for: .blocklist, override: true, onCbReloaded: nil)
-        case .removeAllBlocklistRules(let domain):
+        case .removeAllBlocklistRules(let domain, _):
             safariProtection.removeAllUserRulesAssociatedWith(domain: domain, onCbReloaded: nil)
         }
     }
@@ -74,29 +74,29 @@ final class UserRulesRedirectControllerModel: UserRulesRedirectControllerModelPr
 fileprivate extension UserRulesRedirectAction {
     var title: String {
         switch self {
-        case .disableSiteProtection(let domain): return domain
-        case .enableSiteProtection(let domain): return domain
-        case .addToBlocklist(let domain): return domain
-        case .removeAllBlocklistRules(let domain): return domain
+        case .disableSiteProtection(_, let domain): return domain
+        case .enableSiteProtection(_, let domain): return domain
+        case .addToBlocklist(_, let domain): return domain
+        case .removeAllBlocklistRules(_, let domain): return domain
         }
     }
 
     func getIcon(_ allowlistIsInverted: Bool) -> UIImage? {
         switch self {
-        case .disableSiteProtection(_):
+        case .disableSiteProtection(_, _):
             if allowlistIsInverted {
                 return UIImage(named: "kill_switch")
             } else {
                 return UIImage(named: "thumbsup")
             }
-        case .enableSiteProtection(_):
+        case .enableSiteProtection(_, _):
             if allowlistIsInverted {
                 return UIImage(named: "thumbsup")
             } else {
                 return UIImage(named: "kill_switch")
             }
-        case .addToBlocklist(_): return UIImage(named: "ad_blocking_feature_logo")
-        case .removeAllBlocklistRules(_): return UIImage(named: "kill_switch")
+        case .addToBlocklist(_, _): return UIImage(named: "ad_blocking_feature_logo")
+        case .removeAllBlocklistRules(_, _): return UIImage(named: "kill_switch")
         }
     }
 
@@ -104,20 +104,20 @@ fileprivate extension UserRulesRedirectAction {
         let color = UIColor.AdGuardColor.lightGreen1
         let format: String
         switch self {
-        case .disableSiteProtection(_):
+        case .disableSiteProtection(_, _):
             if allowlistIsInverted {
                 format = String.localizedString("user_rules_allowlist_rule_removed")
             } else {
                 format = String.localizedString("user_rules_allowlist_rule_added")
             }
-        case .enableSiteProtection(_):
+        case .enableSiteProtection(_, _):
             if allowlistIsInverted {
                 format = String.localizedString("user_rules_allowlist_rule_added")
             } else {
                 format = String.localizedString("user_rules_allowlist_rule_removed")
             }
-        case .addToBlocklist(_): format = String.localizedString("user_rules_blocklist_rule_added")
-        case .removeAllBlocklistRules(_): format = String.localizedString("user_rules_blocklist_rules_removed")
+        case .addToBlocklist(_, _): format = String.localizedString("user_rules_blocklist_rule_added")
+        case .removeAllBlocklistRules(_, _): format = String.localizedString("user_rules_blocklist_rules_removed")
         }
         return String(format: format, color.hex())
     }

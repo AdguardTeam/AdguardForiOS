@@ -19,29 +19,29 @@
 import Foundation
 
 enum UserRulesRedirectAction {
-    case enableSiteProtection(domain: String)
-    case disableSiteProtection(domain: String)
-    case addToBlocklist(domain: String)
-    case removeAllBlocklistRules(domain: String)
+    case enableSiteProtection(domain: String, absoluteDomainString: String)
+    case disableSiteProtection(domain: String, absoluteDomainString: String)
+    case addToBlocklist(domain: String, absoluteDomainString: String)
+    case removeAllBlocklistRules(domain: String, absoluteDomainString: String)
 
     var scheme: String {
         switch self {
-        case .enableSiteProtection(_): return "\(Bundle.main.appScheme)://safariWebExtension?action=enableSiteProtection&domain="
-        case .disableSiteProtection(_): return "\(Bundle.main.appScheme)://safariWebExtension?action=disableSiteProtection&domain="
-        case .addToBlocklist(_): return "\(Bundle.main.appScheme)://safariWebExtension?action=addToBlocklist&domain="
-        case .removeAllBlocklistRules(_): return "\(Bundle.main.appScheme)://safariWebExtension?action=removeAllBlocklistRules&domain="
+        case .enableSiteProtection(_, _): return "\(Bundle.main.appScheme)://safariWebExtension?action=enableSiteProtection&domain="
+        case .disableSiteProtection(_, _): return "\(Bundle.main.appScheme)://safariWebExtension?action=disableSiteProtection&domain="
+        case .addToBlocklist(_, _): return "\(Bundle.main.appScheme)://safariWebExtension?action=addToBlocklist&domain="
+        case .removeAllBlocklistRules(_, _): return "\(Bundle.main.appScheme)://safariWebExtension?action=removeAllBlocklistRules&domain="
         }
     }
 
-    static func action(from actionString: String, domain: String) -> Self {
+    static func action(from actionString: String, domain: String, absoluteDomainString: String) -> Self {
         switch actionString {
-        case "enableSiteProtection": return .enableSiteProtection(domain: domain)
-        case "disableSiteProtection": return .disableSiteProtection(domain: domain)
-        case "addToBlocklist": return .addToBlocklist(domain: domain)
-        case "removeAllBlocklistRules": return .removeAllBlocklistRules(domain: domain)
+        case "enableSiteProtection": return .enableSiteProtection(domain: domain, absoluteDomainString: absoluteDomainString)
+        case "disableSiteProtection": return .disableSiteProtection(domain: domain, absoluteDomainString: absoluteDomainString)
+        case "addToBlocklist": return .addToBlocklist(domain: domain, absoluteDomainString: absoluteDomainString)
+        case "removeAllBlocklistRules": return .removeAllBlocklistRules(domain: domain, absoluteDomainString: absoluteDomainString)
         default:
             assertionFailure("Undefined action=\(actionString) in scheme")
-            return .enableSiteProtection(domain: "")
+            return .enableSiteProtection(domain: "", absoluteDomainString: "")
         }
     }
 }

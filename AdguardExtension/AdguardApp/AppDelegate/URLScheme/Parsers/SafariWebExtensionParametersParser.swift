@@ -36,7 +36,15 @@ struct SafariWebExtensionParametersParser: IURLSchemeParametersParser {
             return false
         }
 
-        let action = UserRulesRedirectAction.action(from: actionStr, domain: decodedDomain)
+        let result = Domain.findDomains(in: decodedDomain)
+
+        if result.isEmpty {
+            DDLogError("(SafariWebExtensionParametersParser) - parse; Failed to get absolute domain string from string=\(decodedDomain)")
+            return false
+        }
+
+        let absoluteDomainString = result.first!
+        let action = UserRulesRedirectAction.action(from: actionStr, domain: decodedDomain, absoluteDomainString: absoluteDomainString)
         return executor.openUserRulesRedirectController(for: action)
     }
 }
