@@ -21,7 +21,7 @@ import Foundation
 /// This object is responsible for working with domain objects
 struct Domain {
 
-    /// Returns all domains (with subdomains if it exists) from string
+    /// Returns all domains and subdomains found in the passed string
     static func findDomains(in string: String) -> [String] {
         if string.isEmpty { return [] }
 
