@@ -60,31 +60,43 @@ extension SafariProtection: SafariProtectionMigrationsProtocol {
     }
 
     public func convertFiltersAndReloadCbs(onCbReloaded: ((_ error: Error?) -> Void)?) {
-        cbQueue.async { [weak self] in
-            guard let self = self else {
-                Logger.logError("(SafariProtection+Migrations) - reloadContentBlockers; self is missing!")
-                onCbReloaded?(CommonError.missingSelf)
-                return
-            }
-
-            do {
-                let convertedfilters = self.converter.convertFiltersAndUserRulesToJsons()
-                try self.cbStorage.save(converterResults: convertedfilters)
-            }
-            catch {
-                Logger.logError("(SafariProtection+Migrations) - createNewCbJsonsAndReloadCbs; Error conveerting filters: \(error)")
-                self.completionQueue.async { onCbReloaded?(error) }
-                return
-            }
-
-            self.cbService.updateContentBlockers { [weak self] error in
+        BackgroundTaskExecutor.executeAsyncronousTask("SafariProtection+Migrations.convertFiltersAndReloadCbs") { [weak self] onTaskFinished in
+            self?.cbQueue.async { [weak self] in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Migrations) - reloadContentBlockers; self is missing!")
-                    self?.completionQueue.async { onCbReloaded?(CommonError.missingSelf) }
+                    onCbReloaded?(CommonError.missingSelf)
+                    onTaskFinished()
                     return
                 }
 
-                self.completionQueue.async { onCbReloaded?(error) }
+                do {
+                    let convertedfilters = self.converter.convertFiltersAndUserRulesToJsons()
+                    try self.cbStorage.save(converterResults: convertedfilters)
+                }
+                catch {
+                    Logger.logError("(SafariProtection+Migrations) - createNewCbJsonsAndReloadCbs; Error conveerting filters: \(error)")
+                    self.completionQueue.async {
+                        onCbReloaded?(error)
+                        onTaskFinished()
+                    }
+                    return
+                }
+
+                self.cbService.updateContentBlockers { [weak self] error in
+                    guard let self = self else {
+                        Logger.logError("(SafariProtection+Migrations) - reloadContentBlockers; self is missing!")
+                        self?.completionQueue.async {
+                            onCbReloaded?(CommonError.missingSelf)
+                            onTaskFinished()
+                        }
+                        return
+                    }
+
+                    self.completionQueue.async {
+                        onCbReloaded?(error)
+                        onTaskFinished()
+                    }
+                }
             }
         }
     }

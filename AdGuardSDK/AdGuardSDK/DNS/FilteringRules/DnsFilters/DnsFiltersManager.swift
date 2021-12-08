@@ -152,21 +152,29 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
     }
 
     func addFilter(withName name: String, url: URL, isEnabled: Bool, onFilterAdded: @escaping (Error?) -> Void) {
-        workingQueue.async { [weak self] in
-            guard let self = self else {
-                Logger.logError("(DnsFiltersService) - addFilter; Error: \(CommonError.missingSelf.debugDescription)")
-                DispatchQueue.main.async { onFilterAdded(CommonError.missingSelf) }
-                return
-            }
+        BackgroundTaskExecutor.executeAsyncronousTask("DnsFiltersManager.addFilter") { [weak self] onTaskFinished in
+            self?.workingQueue.async { [weak self] in
+                guard let self = self else {
+                    Logger.logError("(DnsFiltersService) - addFilter; Error: \(CommonError.missingSelf.debugDescription)")
+                    DispatchQueue.main.async {
+                        onFilterAdded(CommonError.missingSelf)
+                        onTaskFinished()
+                    }
+                    return
+                }
 
-            var addError: Error?
-            do {
-                try self.addFilter(withName: name, url: url, isEnabled: isEnabled)
-            } catch {
-                addError = error
-            }
+                var addError: Error?
+                do {
+                    try self.addFilter(withName: name, url: url, isEnabled: isEnabled)
+                } catch {
+                    addError = error
+                }
 
-            self.completionQueue.async { onFilterAdded(addError) }
+                self.completionQueue.async {
+                    onFilterAdded(addError)
+                    onTaskFinished()
+                }
+            }
         }
     }
 
@@ -178,47 +186,61 @@ final class DnsFiltersManager: DnsFiltersManagerProtocol {
     }
 
     func updateFilter(withId id: Int, onFilterUpdated: @escaping (Error?) -> Void) {
-        workingQueue.async { [weak self] in
-            guard let self = self else {
-                Logger.logError("(DnsFiltersService) - updateFilter; Error: \(CommonError.missingSelf.debugDescription)")
-                DispatchQueue.main.async { onFilterUpdated(CommonError.missingSelf) }
-                return
-            }
+        BackgroundTaskExecutor.executeAsyncronousTask("DnsFiltersManager.updateFilter") { [weak self] onTaskFinished in
+            self?.workingQueue.async { [weak self] in
+                guard let self = self else {
+                    Logger.logError("(DnsFiltersService) - updateFilter; Error: \(CommonError.missingSelf.debugDescription)")
+                    DispatchQueue.main.async {
+                        onFilterUpdated(CommonError.missingSelf)
+                        onTaskFinished()
+                    }
+                    return
+                }
 
-            var updateError: Error?
+                var updateError: Error?
 
-            do {
-                try self.updateFilter(withId: id)
-            } catch {
-                updateError = error
+                do {
+                    try self.updateFilter(withId: id)
+                } catch {
+                    updateError = error
+                }
+                self.completionQueue.async {
+                    onFilterUpdated(updateError)
+                    onTaskFinished()
+                }
             }
-            self.completionQueue.async { onFilterUpdated(updateError) }
         }
     }
 
     func updateAllFilters(onFilterUpdated: @escaping (DnsFiltersUpdateResult) -> Void) {
-        workingQueue.async { [weak self] in
-            guard let self = self else {
-                Logger.logError("(DnsFiltersService) - updateAllFilters; Error: \(CommonError.missingSelf.debugDescription)")
-                DispatchQueue.main.async { onFilterUpdated(DnsFiltersUpdateResult(updatedFiltersIds: [], unupdatedFiltersIds: [])) }
-                return
-            }
-            Logger.logInfo("(DnsFiltersService) - updateAllFilters; Start")
-
-            var updatedIds: [Int] = []
-            var unupdatedIds: [Int] = []
-            let enabledFilters = self.filters.filter { $0.isEnabled }
-            for filter in enabledFilters {
-                do {
-                    try self.updateFilter(withId: filter.filterId)
-                    updatedIds.append(filter.filterId)
-                } catch {
-                    unupdatedIds.append(filter.filterId)
+        BackgroundTaskExecutor.executeAsyncronousTask("DnsFiltersManager.updateAllFilters") { [weak self] onTaskFinished in
+            self?.workingQueue.async { [weak self] in
+                guard let self = self else {
+                    Logger.logError("(DnsFiltersService) - updateAllFilters; Error: \(CommonError.missingSelf.debugDescription)")
+                    DispatchQueue.main.async {
+                        onFilterUpdated(DnsFiltersUpdateResult(updatedFiltersIds: [], unupdatedFiltersIds: []))
+                        onTaskFinished()
+                    }
+                    return
                 }
-            }
+                Logger.logInfo("(DnsFiltersService) - updateAllFilters; Start")
 
-            self.completionQueue.async {
-                onFilterUpdated(DnsFiltersUpdateResult(updatedFiltersIds: updatedIds, unupdatedFiltersIds: unupdatedIds))
+                var updatedIds: [Int] = []
+                var unupdatedIds: [Int] = []
+                let enabledFilters = self.filters.filter { $0.isEnabled }
+                for filter in enabledFilters {
+                    do {
+                        try self.updateFilter(withId: filter.filterId)
+                        updatedIds.append(filter.filterId)
+                    } catch {
+                        unupdatedIds.append(filter.filterId)
+                    }
+                }
+
+                self.completionQueue.async {
+                    onFilterUpdated(DnsFiltersUpdateResult(updatedFiltersIds: updatedIds, unupdatedFiltersIds: unupdatedIds))
+                    onTaskFinished()
+                }
             }
         }
     }

@@ -421,6 +421,7 @@
 		B2C8E9B92717009800ACDED8 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = B2C8E9B82717009800ACDED8 /* Zip */; };
 		B2C8E9C927170EB400ACDED8 /* AdGuardSdkDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C8E9AF2717008C00ACDED8 /* AdGuardSdkDependencies.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B2C8E9CE27170ED500ACDED8 /* AdGuardSdkDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C8E9AF2717008C00ACDED8 /* AdGuardSdkDependencies.framework */; };
+		C76FE7E6275FB90E002569DF /* BackgroundTaskExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76FE7E5275FB90E002569DF /* BackgroundTaskExecutor.swift */; };
 		D049EE9B26B2F31A00B8088B /* Dictionary+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049EB9426B17C0A00B8088B /* Dictionary+Utils.swift */; };
 		D049EE9E26B2F33200B8088B /* CharacterSet+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D049EB9326B17C0A00B8088B /* CharacterSet+Utils.swift */; };
 		D04F6A952718307700224DEF /* ContentBlockerConverter in Frameworks */ = {isa = PBXBuildFile; productRef = D04F6A942718307700224DEF /* ContentBlockerConverter */; };
@@ -704,6 +705,7 @@
 		B29D53A6270D267C0045CB16 /* SharedAdGuardSDK.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = SharedAdGuardSDK.modulemap; sourceTree = "<group>"; };
 		B29D53A7270D27270045CB16 /* SharedAdGuardSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharedAdGuardSDK.h; sourceTree = "<group>"; };
 		B2C8E9AF2717008C00ACDED8 /* AdGuardSdkDependencies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AdGuardSdkDependencies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C76FE7E5275FB90E002569DF /* BackgroundTaskExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTaskExecutor.swift; sourceTree = "<group>"; };
 		D049EB9326B17C0A00B8088B /* CharacterSet+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CharacterSet+Utils.swift"; path = "../Libs/Utils/CharacterSet+Utils.swift"; sourceTree = "<group>"; };
 		D049EB9426B17C0A00B8088B /* Dictionary+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Dictionary+Utils.swift"; path = "../Libs/Utils/Dictionary+Utils.swift"; sourceTree = "<group>"; };
 		D049EBA026B1868200B8088B /* AdGuardSDK_mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AdGuardSDK_mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1069,6 +1071,7 @@
 				7E6E807826C2A04100925F96 /* Configuration.swift */,
 				B29D53A6270D267C0045CB16 /* SharedAdGuardSDK.modulemap */,
 				B29D53A7270D27270045CB16 /* SharedAdGuardSDK.h */,
+				C76FE7E5275FB90E002569DF /* BackgroundTaskExecutor.swift */,
 			);
 			name = SharedAdGuardSDK;
 			path = AdGuardSDK/SharedAdGuardSDK;
@@ -2292,6 +2295,7 @@
 				7EC8A3E426E77D5E005244CF /* DateInterval+Utils.swift in Sources */,
 				7EC8A39526E769CA005244CF /* Result.swift in Sources */,
 				7EC8A3E826E77D5E005244CF /* Atomic.swift in Sources */,
+				C76FE7E6275FB90E002569DF /* BackgroundTaskExecutor.swift in Sources */,
 				7EC8A3A126E769DB005244CF /* UserRulesStorageProtocol.swift in Sources */,
 				7EC8A38B26E769B4005244CF /* RequestProtocol.swift in Sources */,
 				7EC8A39726E769D3005244CF /* UserRuleConverter.swift in Sources */,
