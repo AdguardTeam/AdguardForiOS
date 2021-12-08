@@ -16,7 +16,8 @@ class DnsLogStatisticsTest: XCTestCase {
                                               bytesReceived: 10,
                                               blockRules: [],
                                               filterListIds: [],
-                                              cacheHit: true)
+                                              cacheHit: true,
+                                              dnsStatus: "dnsStatus1")
 
     let mockEvent2 = DnsRequestProcessedEvent(domain: "domain2",
                                               startDate: Date(),
@@ -30,7 +31,8 @@ class DnsLogStatisticsTest: XCTestCase {
                                               bytesReceived: 20,
                                               blockRules: [],
                                               filterListIds: [],
-                                              cacheHit: false)
+                                              cacheHit: false,
+                                              dnsStatus: "dnsStatus2")
 
     override func setUp() {
         TestsFileManager.deleteTestFolder()
@@ -115,7 +117,8 @@ class DnsLogStatisticsTest: XCTestCase {
                                      bytesReceived: i * 2,
                                      blockRules: [],
                                      filterListIds: [],
-                                     cacheHit: true)
+                                     cacheHit: true,
+                                     dnsStatus: "dnsStatus")
         }
     }
 }
