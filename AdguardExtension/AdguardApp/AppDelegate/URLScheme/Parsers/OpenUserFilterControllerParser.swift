@@ -37,11 +37,6 @@ struct OpenUserFilterControllerParser: IURLSchemeParametersParser {
             return false
         }
 
-        if result.count > 1 {
-            DDLogError("(OpenUserFilterControllerParser) - parse; Invalid domain count. Contains more than one domain: \(result)")
-            return false
-        }
-
         let absoluteDomainString = result.first!
         let action: UserRulesRedirectAction = .addToBlocklist(domain: rule, absoluteDomainString: absoluteDomainString)
         return executor.openUserRulesRedirectController(for: action)

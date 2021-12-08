@@ -20,39 +20,22 @@ import XCTest
 
 class DomainTest: XCTestCase {
 
+    let domains = [ "some.string.with.domain.and.subdomains.com" : "some.string.with.domain.and.subdomains.com",
+                    "foo.bar" : "foo.bar",
+                    "some-string.with123.dom--ain.and.subdomains.com" : "some-string.with123.dom--ain.and.subdomains.com",
+                    "하위.도메인이.있는.일부.줄.한국" : "하위.도메인이.있는.일부.줄.한국",
+                    "фуу.бар" : "фуу.бар",
+                    "하-위.도메123인--이.있는.일부.줄.한국" : "하-위.도메123인--이.있는.일부.줄.한국",
+                    "someDomain" : nil,
+                    "someDomain#$%$" : nil,
+                    "someDomain..net" : nil,
+                    "foo.b" : nil,
+                    "some-.domain" : nil ]
+
     func testFindDomains() {
-        let domainWithSubdomains = "some.string.with.domain.and.subdomains.com"
-        XCTAssertEqual(Domain.findDomains(in: domainWithSubdomains).first!, domainWithSubdomains)
-
-        let singleDomain = "foo.bar"
-        XCTAssertEqual(Domain.findDomains(in: singleDomain).first!, singleDomain)
-
-        let domainWithDigitsAndOtherSymbols = "some-string.with123.dom--ain.and.subdomains.com"
-        XCTAssertEqual(Domain.findDomains(in: domainWithDigitsAndOtherSymbols).first!, domainWithDigitsAndOtherSymbols)
-
-        let wrongDomain1 = "someDomain"
-        XCTAssertEqual(Domain.findDomains(in: wrongDomain1).count, 0)
-
-        let wrongDomain2 = "someDomain#$%$"
-        XCTAssertEqual(Domain.findDomains(in: wrongDomain2).count, 0)
-
-        let wrongDomain3 = "someDomain..net"
-        XCTAssertEqual(Domain.findDomains(in: wrongDomain3).count, 0)
-
-        let wrongDomain4 = "foo.b"
-        XCTAssertEqual(Domain.findDomains(in: wrongDomain4).count, 0)
-
-        let wrongDomain5 = "some-.domain"
-        XCTAssertEqual(Domain.findDomains(in: wrongDomain5).count, 0)
-
-        let foreignLanguageDomainWithSubdomains = "하위.도메인이.있는.일부.줄.한국"
-        XCTAssertEqual(Domain.findDomains(in: foreignLanguageDomainWithSubdomains).first!, foreignLanguageDomainWithSubdomains)
-
-        let foreignLanguageDomain = "фуу.бар"
-        XCTAssertEqual(Domain.findDomains(in: foreignLanguageDomain).first!, foreignLanguageDomain)
-
-        let foreignLanguageDomainWithDigitsAndOtherSymbols = "하-위.도메123인--이.있는.일부.줄.한국"
-        XCTAssertEqual(Domain.findDomains(in: foreignLanguageDomainWithDigitsAndOtherSymbols).first!, foreignLanguageDomainWithDigitsAndOtherSymbols)
+        domains.forEach {
+            XCTAssertEqual(Domain.findDomains(in: $0).first, $1)
+        }
 
         let multipleDomainsWithSubdomains = "someSchema://somedomain.with.sub.domains.com?parameter=another.domain.with.sub.domains.ru"
         let result = Domain.findDomains(in: multipleDomainsWithSubdomains)

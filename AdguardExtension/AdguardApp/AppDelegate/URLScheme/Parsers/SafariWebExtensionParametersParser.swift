@@ -43,11 +43,6 @@ struct SafariWebExtensionParametersParser: IURLSchemeParametersParser {
             return false
         }
 
-        if result.count > 1 {
-            DDLogError("(SafariWebExtensionParametersParser) - parse; Invalid domain count. Contains more than one domain: \(result)")
-            return false
-        }
-
         let absoluteDomainString = result.first!
         let action = UserRulesRedirectAction.action(from: actionStr, domain: decodedDomain, absoluteDomainString: absoluteDomainString)
         return executor.openUserRulesRedirectController(for: action)
