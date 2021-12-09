@@ -2,10 +2,11 @@ import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 
 import { Action } from '../Action';
-import { InfoButton } from './InfoButton';
 import { popupStore } from '../../../stores/PopupStore';
 import { translator } from '../../../../common/translators/translator';
 import { SiteStatus } from '../../../constants';
+import { Button } from '../../Button';
+import { Icon } from '../../ui/Icon';
 
 const SiteStatusesMessages = {
     [SiteStatus.ProtectionStarting]: translator.getMessage('popup_action_current_site_desc_starting'),
@@ -46,6 +47,45 @@ export const CurrentSite = observer(() => {
         descriptionColor = 'yellow';
     }
 
+    const determineHandlerAndIcon = () => {
+        const showAttentionButton = !store.premiumApp || !store.advancedBlockingEnabled;
+
+        const noopHandler = () => {};
+        let button;
+        let handler;
+        if (showAttentionButton) {
+            if (!store.advancedBlockingEnabled) {
+                handler = () => {
+                    store.showAdvancedBlockingDisabledModal();
+                };
+            }
+
+            if (!store.premiumApp) {
+                handler = () => {
+                    store.showUpgradeModal();
+                };
+            }
+
+            if (handler) {
+                button = (
+                    <Button onClick={handler} classNames="actions__control">
+                        <Icon color="yellow" iconId="info" />
+                    </Button>
+                );
+            }
+        }
+
+        if (!store.contentBlockersEnabled) {
+            button = undefined;
+            handler = noopHandler;
+        }
+
+        return {
+            button,
+            handler: handler || noopHandler,
+        };
+    };
+
     return (
         <Action
             iconId="network"
@@ -55,8 +95,9 @@ export const CurrentSite = observer(() => {
             titleMod="bold"
             description={description}
             descriptionMod={descriptionColor}
+            onClick={determineHandlerAndIcon().handler}
         >
-            <InfoButton />
+            {determineHandlerAndIcon().button}
         </Action>
     );
 });
