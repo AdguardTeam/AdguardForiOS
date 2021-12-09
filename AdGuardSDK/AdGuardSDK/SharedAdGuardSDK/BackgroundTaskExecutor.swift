@@ -18,7 +18,7 @@
 
 import Foundation
 
-/// This object is responsible for execurting tasks that can be continued in background
+/// This object is responsible for executing tasks that can be continued in background
 /// Usually iOS gives us 30 seconds to complete such tasks
 public final class BackgroundTaskExecutor {
 
