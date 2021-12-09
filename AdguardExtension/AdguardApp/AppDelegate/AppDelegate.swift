@@ -136,6 +136,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppDelegate.setBackgroundFetchInterval(interval)
         subscribeToNotifications()
 
+        // Install default DNS filter if needed
+        let defaultDnsFilterInstaller = DefaultDnsFilterInstaller(resources: resources, dnsProtection: dnsProtection)
+        defaultDnsFilterInstaller.installDefaultDnsFilterIfNeeded()
+
         if firstRun {
             setupOnFirstAppRun()
             // After first app run we don't need to call finishBackgroundUpdate

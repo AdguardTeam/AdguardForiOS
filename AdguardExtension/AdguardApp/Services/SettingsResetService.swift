@@ -105,7 +105,6 @@ final class SettingsResetService: SettingsResetServiceProtocol {
             DDLogInfo("(SettingsReseterService) - resetAllSettings; Start reset")
 
             // Reset Shared Defaults
-
             self.resources.reset()
             self.resources.firstRun = false
 
@@ -125,24 +124,24 @@ final class SettingsResetService: SettingsResetServiceProtocol {
             group.wait()
 
             // Reset VpnManager
-
             self.vpnManager.removeVpnConfiguration { _ in }
 
             // Reset Statistics
-
             self.resetAllStatistics()
 
             // Reset DNS protection
-
             self.resetDnsProtection()
 
-            // Reset DNS providers
+            // Install default DNS filter after reset
+            let defaultDnsFilterInstaller = DefaultDnsFilterInstaller(resources: self.resources, dnsProtection: self.dnsProtection)
+            defaultDnsFilterInstaller.installDefaultDnsFilterIfNeeded()
 
+            // Reset DNS providers
             self.resetDnsProviderManager()
+
             if #available(iOS 14.0, *) { self.nativeDnsManager.reset() }
 
             // Reset purchase service
-
             if resetLicense {
                 group.enter()
                 self.purchaseService.reset {
@@ -155,6 +154,7 @@ final class SettingsResetService: SettingsResetServiceProtocol {
             DispatchQueue.main.async {
                 AppDelegate.shared.setAppInterfaceStyle()
             }
+
             // Notify that settings were reset
             NotificationCenter.default.post(name: .resetSettings, object: self)
 

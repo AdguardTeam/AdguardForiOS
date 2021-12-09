@@ -1342,6 +1342,8 @@
 		C73374382746D30000989447 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
 		C767A55E27590F1800D8DBEA /* PremiumOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C767A55D27590F1800D8DBEA /* PremiumOptionCell.swift */; };
 		C767A55F27590F1800D8DBEA /* PremiumOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C767A55D27590F1800D8DBEA /* PremiumOptionCell.swift */; };
+		C76FE7DD275F8D53002569DF /* DefaultDnsFilterInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76FE7DC275F8D53002569DF /* DefaultDnsFilterInstaller.swift */; };
+		C76FE7DE275F8D53002569DF /* DefaultDnsFilterInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76FE7DC275F8D53002569DF /* DefaultDnsFilterInstaller.swift */; };
 		C7DD463C2754D3BB006E1E6C /* LicensePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DD463B2754D3BB006E1E6C /* LicensePageViewController.swift */; };
 		C7DD463D2754D3BB006E1E6C /* LicensePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DD463B2754D3BB006E1E6C /* LicensePageViewController.swift */; };
 		C7DD46402754D6E2006E1E6C /* PremiumLicenseStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DD463F2754D6E2006E1E6C /* PremiumLicenseStateView.swift */; };
@@ -3513,6 +3515,7 @@
 		B2C8E9772716E4AD00ACDED8 /* PurchaseAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseAssistant.swift; sourceTree = "<group>"; };
 		B2C8E9982716FDB300ACDED8 /* AdGuardDependencies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AdGuardDependencies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C767A55D27590F1800D8DBEA /* PremiumOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumOptionCell.swift; sourceTree = "<group>"; };
+		C76FE7DC275F8D53002569DF /* DefaultDnsFilterInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDnsFilterInstaller.swift; sourceTree = "<group>"; };
 		C7DD463B2754D3BB006E1E6C /* LicensePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicensePageViewController.swift; sourceTree = "<group>"; };
 		C7DD463F2754D6E2006E1E6C /* PremiumLicenseStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumLicenseStateView.swift; sourceTree = "<group>"; };
 		C7DD46422754D6EF006E1E6C /* FreeLicenseStateTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeLicenseStateTableView.swift; sourceTree = "<group>"; };
@@ -6725,6 +6728,7 @@
 				7EC67FB5254843B300FEEEE2 /* NativeDnsService */,
 				D0A23544271ED12A00CE1730 /* DnsProvidersManagerProtocol+ServerName.swift */,
 				7EA40F892722C81A00FAEE0B /* ChineseUserExposer.swift */,
+				C76FE7DC275F8D53002569DF /* DefaultDnsFilterInstaller.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -8450,6 +8454,7 @@
 				247CB51A2600ADD30047974C /* IURLSchemeParametersParser.swift in Sources */,
 				D0D7E5FB24444F83001801A5 /* Constant.swift in Sources */,
 				659886801CF74DE9003ECD1C /* AEUILongLabelViewCell.m in Sources */,
+				C76FE7DE275F8D53002569DF /* DefaultDnsFilterInstaller.swift in Sources */,
 				7E11568C26D38723000ADC3B /* AddTableViewCell.swift in Sources */,
 				7E86A9BB26CBB84E000B395F /* SafariTagButton.swift in Sources */,
 				D0B545CB2435D669002F0AEC /* Confirm2FaController.swift in Sources */,
@@ -8865,6 +8870,7 @@
 				7E2D93F526F3A2ED00534DC5 /* DnsFiltersTableModel.swift in Sources */,
 				D0953E7B231FF83900AE80DB /* Confirm2FaController.swift in Sources */,
 				655A02281C6B7686000F00D7 /* ACIOUtils.m in Sources */,
+				C76FE7DD275F8D53002569DF /* DefaultDnsFilterInstaller.swift in Sources */,
 				7E21CBA825F918FA00A5A735 /* NetworkManager.swift in Sources */,
 				7E822C0F2435EDD30015B4D0 /* BasicRulesParser.swift in Sources */,
 				7EE740E526F35B0C0033B673 /* UserRulesRedirectAction.swift in Sources */,
