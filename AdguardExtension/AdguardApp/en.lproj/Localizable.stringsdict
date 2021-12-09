@@ -45,7 +45,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>Subscribe and get a 7-month free trial</string>
+			<string>Subscribe and get a one-month free trial</string>
 			<key>other</key>
 			<string>Subscribe and get a %d-month free trial</string>
 		</dict>
