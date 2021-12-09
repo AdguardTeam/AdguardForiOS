@@ -116,7 +116,7 @@ extension AGDns64Settings {
 
 public extension AGDnsUpstream {
     /// AGDnsProxy Fallback timeout
-    static let defaultTimeoutMs = 2000
+    static let defaultTimeoutMs = 6000
 }
 
 // MARK: - AGDnsProxyConfig + DnsProxyConfiguration
