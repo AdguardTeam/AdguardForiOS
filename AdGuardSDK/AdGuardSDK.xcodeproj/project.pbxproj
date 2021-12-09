@@ -106,7 +106,6 @@
 		7E6E804A26C299DE00925F96 /* ContentBlockersInfoStorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E800326C299DD00925F96 /* ContentBlockersInfoStorageTest.swift */; };
 		7E6E804B26C299DE00925F96 /* ContentBlockerServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E800426C299DD00925F96 /* ContentBlockerServiceTest.swift */; };
 		7E6E804C26C299DE00925F96 /* ContentBlockerJsonProviderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E800526C299DD00925F96 /* ContentBlockerJsonProviderTest.swift */; };
-		7E6E804D26C299DE00925F96 /* FiltersConverterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E800726C299DD00925F96 /* FiltersConverterTest.swift */; };
 		7E6E804E26C299DE00925F96 /* AffinityRulesParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E800826C299DD00925F96 /* AffinityRulesParserTest.swift */; };
 		7E6E804F26C299DE00925F96 /* FiltersConverterServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E6E800926C299DD00925F96 /* FiltersConverterServiceTest.swift */; };
 		7E6E805026C299DE00925F96 /* filters_test.json in Resources */ = {isa = PBXBuildFile; fileRef = 7E6E800B26C299DE00925F96 /* filters_test.json */; };
@@ -1973,7 +1972,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E6E804D26C299DE00925F96 /* FiltersConverterTest.swift in Sources */,
 				7EC8A3D126E77413005244CF /* Import.swift in Sources */,
 				7E6E802D26C299DE00925F96 /* DefaultDatabaseManagerTest.swift in Sources */,
 				241D084726F22DE40008FD17 /* DnsFIltersUpdateResult.swift in Sources */,

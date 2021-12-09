@@ -79,9 +79,13 @@ final public class ContentBlockerService: ContentBlockerServiceProtocol {
 
     public func updateContentBlockers(onContentBlockersUpdated: @escaping (_ error: Error?) -> Void) {
         updateQueue.async { [weak self] in
+            Logger.logInfo("(ContentBlockerService) - updateContentBlockers; CBs update started")
+
             NotificationCenter.default.contentBlockersUpdateStarted()
             let updateError = self?.updateContentBlockersSync()
             NotificationCenter.default.contentBlockersUpdateFinished()
+
+            Logger.logInfo("(ContentBlockerService) - updateContentBlockers; CBs update finished")
             onContentBlockersUpdated(updateError)
         }
     }
