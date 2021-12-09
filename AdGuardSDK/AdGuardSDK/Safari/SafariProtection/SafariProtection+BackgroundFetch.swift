@@ -114,10 +114,11 @@ extension SafariProtection {
     }
 
     public func finishBackgroundUpdate(_ onUpdateFinished: @escaping (_ error: Error?) -> Void) {
-        DispatchQueue(label: "SafariAdGuardSDK.SafariProtection.finishBackgroundUpdate").async { [weak self] in
+        BackgroundTaskExecutor.executeAsyncronousTask("SafariProtection+BackgroundFetch.finishBackgroundUpdate") { [weak self] onTaskFinished in
             guard let self = self else {
                 Logger.logError("(SafariProtection+BackgroundFetch) - finishBackgroundUpdate; Missing self")
                 onUpdateFinished(CommonError.missingSelf)
+                onTaskFinished()
                 return
             }
             Logger.logInfo("(SafariProtection+BackgroundFetch) - finishBackgroundUpdate start; Current state = \(self.currentBackgroundFetchState)")
@@ -134,16 +135,25 @@ extension SafariProtection {
             case .convertFilters:
                 let result = self.convertFilters()
                 if let error = result.error {
-                    self.completionQueue.async { onUpdateFinished(error) }
+                    self.completionQueue.async {
+                        onUpdateFinished(error)
+                        onTaskFinished()
+                    }
                     return
                 }
                 fallthrough
             case .reloadContentBlockers:
-                self.reloadContentBlockers { result in
-                    self.completionQueue.async { onUpdateFinished(result.error) }
-                }
+                self.reloadContentBlockers({ result in
+                    self.completionQueue.async {
+                        onUpdateFinished(result.error)
+                        onTaskFinished()
+                    }
+                })
             case .updateFinished:
-                self.completionQueue.async { onUpdateFinished(nil) }
+                self.completionQueue.async {
+                    onUpdateFinished(nil)
+                    onTaskFinished()
+                }
             }
         }
     }

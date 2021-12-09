@@ -206,36 +206,48 @@ public final class SafariProtection: SafariProtectionProtocol {
 
     /* Creates JSON files for Content blockers and reloads CBs to apply new JSONs */
     func reloadContentBlockers(onCbReloaded: @escaping (_ error: Error?) -> Void) {
-        cbQueue.async { [weak self] in
-            guard let self = self else {
-                Logger.logError("(SafariProtection) - reloadContentBlockers; self is missing!")
-                onCbReloaded(CommonError.missingSelf)
-                return
-            }
-
-            do {
-                let convertedfilters = self.converter.convertFiltersAndUserRulesToJsons()
-                try self.cbStorage.save(converterResults: convertedfilters)
-            }
-            catch {
-                Logger.logError("(SafariProtection) - createNewCbJsonsAndReloadCbs; Error converting filters: \(error)")
-                self.workingQueue.sync { onCbReloaded(error) }
-                return
-            }
-
-            // TODO: - Can be improved
-            // This flag is set when advanced rules are converted and saved to file
-            // Now it is done for messaging in Safari Web extension as we haven't found another solution yet
-            self.userDefaults.shouldUpdateAdvancedRules = true
-
-            self.cbService.updateContentBlockers { [weak self] error in
+        BackgroundTaskExecutor.executeAsyncronousTask("SafariProtection.reloadContentBlockers") { [weak self] onTaskFinished in
+            self?.cbQueue.async { [weak self] in
                 guard let self = self else {
                     Logger.logError("(SafariProtection) - reloadContentBlockers; self is missing!")
-                    self?.workingQueue.sync { onCbReloaded(CommonError.missingSelf) }
+                    onCbReloaded(CommonError.missingSelf)
+                    onTaskFinished()
                     return
                 }
 
-                self.workingQueue.sync { onCbReloaded(error) }
+                do {
+                    let convertedfilters = self.converter.convertFiltersAndUserRulesToJsons()
+                    try self.cbStorage.save(converterResults: convertedfilters)
+                }
+                catch {
+                    Logger.logError("(SafariProtection) - createNewCbJsonsAndReloadCbs; Error converting filters: \(error)")
+                    self.workingQueue.sync {
+                        onCbReloaded(error)
+                        onTaskFinished()
+                    }
+                    return
+                }
+
+                // TODO: - Can be improved
+                // This flag is set when advanced rules are converted and saved to file
+                // Now it is done for messaging in Safari Web extension as we haven't found another solution yet
+                self.userDefaults.shouldUpdateAdvancedRules = true
+
+                self.cbService.updateContentBlockers { [weak self] error in
+                    guard let self = self else {
+                        Logger.logError("(SafariProtection) - reloadContentBlockers; self is missing!")
+                        self?.workingQueue.sync {
+                            onCbReloaded(CommonError.missingSelf)
+                            onTaskFinished()
+                        }
+                        return
+                    }
+
+                    self.workingQueue.sync {
+                        onCbReloaded(error)
+                        onTaskFinished()
+                    }
+                }
             }
         }
     }
