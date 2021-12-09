@@ -13,9 +13,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>Free  for one day, then pay</string>
+			<string>Subscribe and get a one-day free trial</string>
 			<key>other</key>
-			<string>Free  for %d days, then pay</string>
+			<string>Subscribe and get a %d-day free trial</string>
 		</dict>
 	</dict>
 	<key>trial_description_weeks</key>
@@ -29,9 +29,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>Free  for one week, then pay</string>
+			<string>Subscribe and get a one-week free trial</string>
 			<key>other</key>
-			<string>Free  for %d weeks, then pay</string>
+			<string>Subscribe and get a %d-week free trial</string>
 		</dict>
 	</dict>
 	<key>trial_description_months</key>
@@ -45,9 +45,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>Free  for one month, then pay</string>
+			<string>Subscribe and get a 7-month free trial</string>
 			<key>other</key>
-			<string>Free  for %d months, then pay</string>
+			<string>Subscribe and get a %d-month free trial</string>
 		</dict>
 	</dict>
 	<key>trial_description_years</key>
@@ -61,9 +61,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>Free  for one year, then pay</string>
+			<string>Subscribe and get a one-year free trial</string>
 			<key>other</key>
-			<string>Free  for %d years, then pay</string>
+			<string>Subscribe and get a %d-year free trial</string>
 		</dict>
 	</dict>
 	<key>user_rules_format</key>
