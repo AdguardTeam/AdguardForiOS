@@ -63,7 +63,6 @@ final class StatusBarManager: NSObject {
     private var contentBlockersUpdateStarted: SharedAdGuardSDK.NotificationToken?
     private var contentBlockersUpdateFinished: SharedAdGuardSDK.NotificationToken?
     private var orientationChangeNotification: SharedAdGuardSDK.NotificationToken?
-    private var advancedModeObserver: NotificationToken?
     private var showStatusBarObserver: NotificationToken?
 
     init(configuration: ConfigurationServiceProtocol, keyWindow: UIWindow) {
@@ -120,12 +119,6 @@ final class StatusBarManager: NSObject {
             // This code will be executed after the rotation was completed (in the main queue) and the new sizes are available
             DispatchQueue.main.async { [weak self] in
                 self?.rotate()
-            }
-        }
-
-        advancedModeObserver = NotificationCenter.default.observe(name: .advancedModeChanged, object: nil, queue: .main) { [weak self] _ in
-            if self?.configuration.showStatusBar == false {
-                self?.hideStatusBar()
             }
         }
 

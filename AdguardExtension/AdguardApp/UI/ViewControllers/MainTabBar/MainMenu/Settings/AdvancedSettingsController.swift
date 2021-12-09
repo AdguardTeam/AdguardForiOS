@@ -22,7 +22,6 @@ import AGDnsProxy
 
 final class AdvancedSettingsController: UITableViewController {
 
-    @IBOutlet weak var showStatusbarSwitch: UISwitch!
     @IBOutlet weak var restartProtectionSwitch: UISwitch!
     @IBOutlet weak var debugLogsSwitch: UISwitch!
     @IBOutlet weak var lastSeparator: UIView!
@@ -37,10 +36,9 @@ final class AdvancedSettingsController: UITableViewController {
     private let configuration: ConfigurationServiceProtocol = ServiceLocator.shared.getService()!
     private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol = ServiceLocator.shared.getService()!
 
-    private let showStatusbarRow = 0
-    private let restartProtectionRow = 1
-    private let debugLogsRow = 2
-    private let removeVpnProfile = 5
+    private let restartProtectionRow = 0
+    private let debugLogsRow = 1
+    private let removeVpnProfile = 4
 
     private var vpnConfigurationObserver: NotificationToken?
 
@@ -52,7 +50,6 @@ final class AdvancedSettingsController: UITableViewController {
 
         restartProtectionSwitch.isOn = resources.restartByReachability
         debugLogsSwitch.isOn = resources.isDebugLogs
-        showStatusbarSwitch.isOn = configuration.showStatusBar
 
         let descriptionText: String
         if #available(iOS 15.0, *) {
@@ -70,10 +67,6 @@ final class AdvancedSettingsController: UITableViewController {
     }
 
     // MARK: - actions
-
-    @IBAction func showProgressbarAction(_ sender: UISwitch) {
-        configuration.showStatusBar = sender.isOn
-    }
 
     @IBAction func restartProtectionAction(_ sender: UISwitch) {
         resources.restartByReachability = sender.isOn
@@ -118,9 +111,6 @@ final class AdvancedSettingsController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
-        case showStatusbarRow:
-            showStatusbarSwitch.setOn(!showStatusbarSwitch.isOn, animated: true)
-            showProgressbarAction(showStatusbarSwitch)
         case restartProtectionRow:
             restartProtectionSwitch.setOn(!restartProtectionSwitch.isOn, animated: true)
             restartProtectionAction(restartProtectionSwitch)
@@ -186,7 +176,6 @@ extension AdvancedSettingsController: ThemableProtocol {
         theme.setupNavigationBar(navigationController?.navigationBar)
         theme.setupTable(tableView)
         theme.setupSeparators(separators)
-        theme.setupSwitch(showStatusbarSwitch)
         theme.setupSwitch(restartProtectionSwitch)
         theme.setupSwitch(debugLogsSwitch)
 
