@@ -433,6 +433,74 @@
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="P00-SA-j02">
+                                        <rect key="frame" x="0.0" y="634" width="414" height="71"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P00-SA-j02" id="2TH-FW-2ut">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="71"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" ambiguous="YES" text="Show status bar" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qxo-YS-JWL" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="16" width="317" height="0.0"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
+                                                    </variation>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Show filter updates progress bar" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BOT-Ej-15M" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="37.5" width="309" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    </variation>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ieW-uu-eVz">
+                                                    <rect key="frame" x="349" y="16" width="51" height="31"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="49" id="RLd-ZI-xIg"/>
+                                                    </constraints>
+                                                    <color key="onTintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="toggleShowStatusBar:" destination="oKf-oS-AAR" eventType="valueChanged" id="cWH-Wp-KOs"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="BOT-Ej-15M" firstAttribute="leading" secondItem="qxo-YS-JWL" secondAttribute="leading" id="320-cQ-xB2"/>
+                                                <constraint firstItem="qxo-YS-JWL" firstAttribute="leading" secondItem="2TH-FW-2ut" secondAttribute="leading" constant="16" id="BMk-Dc-y4c">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
+                                                <constraint firstItem="ieW-uu-eVz" firstAttribute="leading" secondItem="BOT-Ej-15M" secondAttribute="trailing" constant="24" id="JVc-Zp-DuO"/>
+                                                <constraint firstAttribute="trailing" secondItem="ieW-uu-eVz" secondAttribute="trailing" constant="16" id="UMW-pY-33m">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
+                                                <constraint firstAttribute="bottom" secondItem="BOT-Ej-15M" secondAttribute="bottom" constant="16" id="Ucu-4m-Xs5">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
+                                                <constraint firstItem="BOT-Ej-15M" firstAttribute="top" secondItem="qxo-YS-JWL" secondAttribute="bottom" constant="2" id="ash-Ci-qLE"/>
+                                                <constraint firstItem="ieW-uu-eVz" firstAttribute="leading" secondItem="qxo-YS-JWL" secondAttribute="trailing" constant="16" id="cOr-ki-Kqu">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
+                                                <constraint firstItem="ieW-uu-eVz" firstAttribute="top" secondItem="2TH-FW-2ut" secondAttribute="top" constant="16" id="gwi-zi-8x8">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
+                                                <constraint firstItem="qxo-YS-JWL" firstAttribute="top" secondItem="2TH-FW-2ut" secondAttribute="top" constant="16" id="y7i-9C-kgK">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="87U-pg-EKi">
                                         <rect key="frame" x="0.0" y="634.00000152587893" width="414" height="87.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -621,6 +689,7 @@
                     <connections>
                         <outlet property="advancedModeSwitch" destination="JuF-bI-rjJ" id="9Xw-88-Tfh"/>
                         <outlet property="invertedSwitch" destination="tsC-TD-KHj" id="wZE-FR-fFL"/>
+                        <outlet property="showStatusBarSwitch" destination="ieW-uu-eVz" id="ZZV-qr-Lmv"/>
                         <outlet property="wifiUpdateSwitch" destination="EgE-ep-1Y8" id="QIp-Vb-EIe"/>
                         <outletCollection property="themableLabels" destination="X0A-gU-hzf" collectionClass="NSMutableArray" id="jKh-Xh-JxO"/>
                         <outletCollection property="themableLabels" destination="tTY-BW-QcN" collectionClass="NSMutableArray" id="txX-hR-hkW"/>
@@ -641,6 +710,8 @@
                         <outletCollection property="themableLabels" destination="0RM-mR-ikS" collectionClass="NSMutableArray" id="agH-zS-9tT"/>
                         <outletCollection property="themableLabels" destination="Twq-5a-kOB" collectionClass="NSMutableArray" id="PW6-Sc-EKp"/>
                         <outletCollection property="themableLabels" destination="sc6-Tw-xnL" collectionClass="NSMutableArray" id="Zuh-AX-mFD"/>
+                        <outletCollection property="themableLabels" destination="qxo-YS-JWL" collectionClass="NSMutableArray" id="tQm-Wx-hCm"/>
+                        <outletCollection property="themableLabels" destination="BOT-Ej-15M" collectionClass="NSMutableArray" id="o11-cl-Wyj"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rud-IB-zWN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -693,82 +764,6 @@
                             </tableViewSection>
                             <tableViewSection id="suv-lj-8Dy">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="P00-SA-j02">
-                                        <rect key="frame" x="0.0" y="164.50000076293946" width="414" height="71"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P00-SA-j02" id="2TH-FW-2ut">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="71"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Show status bar" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qxo-YS-JWL" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="16" width="317" height="19.5"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <variation key="heightClass=regular-widthClass=regular">
-                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
-                                                    </variation>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show filter updates progress bar" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BOT-Ej-15M" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="27.5" width="309" height="0.0"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <variation key="heightClass=regular-widthClass=regular">
-                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    </variation>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ieW-uu-eVz">
-                                                    <rect key="frame" x="349" y="16" width="51" height="31"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="49" id="RLd-ZI-xIg"/>
-                                                    </constraints>
-                                                    <connections>
-                                                        <action selector="showProgressbarAction:" destination="71r-k4-iOF" eventType="valueChanged" id="KkX-R8-2Yh"/>
-                                                    </connections>
-                                                </switch>
-                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f8E-WC-3FZ">
-                                                    <rect key="frame" x="0.0" y="77" width="414" height="1"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="0.5" id="bcn-gn-oBu"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="BOT-Ej-15M" firstAttribute="leading" secondItem="qxo-YS-JWL" secondAttribute="leading" id="320-cQ-xB2"/>
-                                                <constraint firstItem="qxo-YS-JWL" firstAttribute="leading" secondItem="2TH-FW-2ut" secondAttribute="leading" constant="16" id="BMk-Dc-y4c">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
-                                                </constraint>
-                                                <constraint firstAttribute="trailing" secondItem="f8E-WC-3FZ" secondAttribute="trailing" id="DjN-Ke-fC9"/>
-                                                <constraint firstItem="ieW-uu-eVz" firstAttribute="leading" secondItem="BOT-Ej-15M" secondAttribute="trailing" constant="24" id="JVc-Zp-DuO"/>
-                                                <constraint firstAttribute="trailing" secondItem="ieW-uu-eVz" secondAttribute="trailing" constant="16" id="UMW-pY-33m">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
-                                                </constraint>
-                                                <constraint firstItem="BOT-Ej-15M" firstAttribute="top" secondItem="qxo-YS-JWL" secondAttribute="bottom" constant="2" id="ash-Ci-qLE"/>
-                                                <constraint firstItem="ieW-uu-eVz" firstAttribute="leading" secondItem="qxo-YS-JWL" secondAttribute="trailing" constant="16" id="cOr-ki-Kqu">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
-                                                </constraint>
-                                                <constraint firstItem="ieW-uu-eVz" firstAttribute="top" secondItem="2TH-FW-2ut" secondAttribute="top" constant="16" id="gwi-zi-8x8">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                                </constraint>
-                                                <constraint firstAttribute="bottom" secondItem="f8E-WC-3FZ" secondAttribute="bottom" id="qgY-kv-FNK"/>
-                                                <constraint firstItem="f8E-WC-3FZ" firstAttribute="leading" secondItem="2TH-FW-2ut" secondAttribute="leading" id="rYL-zs-W9T"/>
-                                                <constraint firstItem="f8E-WC-3FZ" firstAttribute="top" secondItem="BOT-Ej-15M" secondAttribute="bottom" constant="16" id="xpM-Lg-Hrl">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                                </constraint>
-                                                <constraint firstItem="qxo-YS-JWL" firstAttribute="top" secondItem="2TH-FW-2ut" secondAttribute="top" constant="16" id="y7i-9C-kgK">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
-                                                </constraint>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="XAP-3s-1px">
                                         <rect key="frame" x="0.0" y="235.50000076293946" width="414" height="87.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -1144,10 +1139,7 @@
                         <outlet property="debugLogsSwitch" destination="BZ8-9j-arQ" id="n2t-W8-cfy"/>
                         <outlet property="lastSeparator" destination="8OZ-ef-mbG" id="3pL-P2-ZfY"/>
                         <outlet property="restartProtectionSwitch" destination="Imm-1j-t70" id="7QM-Lx-Do6"/>
-                        <outlet property="showStatusbarSwitch" destination="ieW-uu-eVz" id="Mbp-L9-8ip"/>
                         <outletCollection property="themableLabels" destination="Lig-ju-iTI" collectionClass="NSMutableArray" id="VaJ-2a-V5b"/>
-                        <outletCollection property="themableLabels" destination="qxo-YS-JWL" collectionClass="NSMutableArray" id="ihX-N4-9fO"/>
-                        <outletCollection property="themableLabels" destination="BOT-Ej-15M" collectionClass="NSMutableArray" id="P2x-A1-VFn"/>
                         <outletCollection property="themableLabels" destination="dLN-5K-c1N" collectionClass="NSMutableArray" id="ViU-oB-eEb"/>
                         <outletCollection property="themableLabels" destination="H3Q-H6-YV0" collectionClass="NSMutableArray" id="b6K-v4-65H"/>
                         <outletCollection property="themableLabels" destination="BQY-q7-BQU" collectionClass="NSMutableArray" id="mRG-6r-WJc"/>
@@ -1156,7 +1148,6 @@
                         <outletCollection property="themableLabels" destination="9hH-ca-VHY" collectionClass="NSMutableArray" id="VzR-T9-oxR"/>
                         <outletCollection property="separators" destination="9jr-ep-Jso" collectionClass="NSMutableArray" id="bmH-Ra-XFi"/>
                         <outletCollection property="separators" destination="Wt4-db-etp" collectionClass="NSMutableArray" id="lIC-3L-ScL"/>
-                        <outletCollection property="separators" destination="f8E-WC-3FZ" collectionClass="NSMutableArray" id="MoH-yk-wbJ"/>
                         <outletCollection property="themableLabels" destination="3zG-B5-jE5" collectionClass="NSMutableArray" id="VkP-FJ-oZr"/>
                         <outletCollection property="themableLabels" destination="GFO-xu-Bir" collectionClass="NSMutableArray" id="FCW-Tl-T1q"/>
                         <outletCollection property="separators" destination="p0T-ub-wAj" collectionClass="NSMutableArray" id="14b-EF-EhL"/>

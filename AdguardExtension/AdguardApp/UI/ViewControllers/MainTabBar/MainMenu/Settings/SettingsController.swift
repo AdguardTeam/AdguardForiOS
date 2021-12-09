@@ -29,6 +29,7 @@ class SettingsController: UITableViewController {
     @IBOutlet weak var wifiUpdateSwitch: UISwitch!
     @IBOutlet weak var invertedSwitch: UISwitch!
     @IBOutlet weak var advancedModeSwitch: UISwitch!
+    @IBOutlet weak var showStatusBarSwitch: UISwitch!
 
     @IBOutlet var themableLabels: [ThemableLabel]!
 
@@ -47,9 +48,10 @@ class SettingsController: UITableViewController {
     private let wifiOnlyRow = 0
     private let invertWhitelistRow = 1
     private let advancedModeRow = 2
-    private let advancedSettingsRow = 3
-    private let resetStatisticsRow = 4
-    private let resetSettingsRow = 5
+    private let showStatusBarRow = 3
+    private let advancedSettingsRow = 4
+    private let resetStatisticsRow = 5
+    private let resetSettingsRow = 6
 
     private var isBigScreen: Bool { traitCollection.verticalSizeClass == .regular && traitCollection.horizontalSizeClass == .regular }
 
@@ -69,6 +71,8 @@ class SettingsController: UITableViewController {
         wifiUpdateSwitch.isOn = wifiOnly
 
         advancedModeSwitch.isOn = configuration.advancedMode
+
+        showStatusBarSwitch.isOn = configuration.showStatusBar
 
         let inverted = resources.sharedDefaults().bool(forKey: AEDefaultsInvertedWhitelist)
         invertedSwitch.isOn = inverted
@@ -108,6 +112,9 @@ class SettingsController: UITableViewController {
         case (otherSection, advancedModeRow):
             advancedModeSwitch.setOn(!advancedModeSwitch!.isOn, animated: true)
             advancedModeAction(advancedModeSwitch)
+        case (otherSection, showStatusBarRow):
+            showStatusBarSwitch.setOn(!showStatusBarSwitch.isOn, animated: true)
+            toggleShowStatusBar(showStatusBarSwitch)
         case (otherSection, resetStatisticsRow):
             resetStatistics(indexPath)
         case (otherSection, resetSettingsRow):
@@ -132,6 +139,10 @@ class SettingsController: UITableViewController {
     @IBAction func advancedModeAction(_ sender: UISwitch) {
         configuration.advancedMode = sender.isOn
         tableView.reloadData()
+    }
+
+    @IBAction func toggleShowStatusBar(_ sender: UISwitch) {
+        configuration.showStatusBar = sender.isOn
     }
 
     @IBAction func systemDefaultTheme(_ sender: UIButton) {
@@ -317,9 +328,7 @@ extension SettingsController: ThemableProtocol {
         theme.setupTable(tableView)
         theme.setupSwitch(wifiUpdateSwitch)
         theme.setupSwitch(invertedSwitch)
-        DispatchQueue.main.async { [weak self] in
-            self?.tableView.reloadData()
-            self?.updateUI()
-        }
+        tableView.reloadData()
+        updateUI()
     }
 }

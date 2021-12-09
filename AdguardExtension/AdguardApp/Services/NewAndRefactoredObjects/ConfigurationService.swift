@@ -143,8 +143,7 @@ final class ConfigurationService: ConfigurationServiceProtocol {
     /// Status bar is shown in the bottom of the app
     var showStatusBar: Bool {
         get {
-            let showStatusBar: Bool = resources.sharedDefaults().object(forKey: AEDefaultsShowStatusBar) as? Bool ?? true
-            return showStatusBar && advancedMode
+            resources.sharedDefaults().object(forKey: AEDefaultsShowStatusBar) as? Bool ?? true
         }
         set{
             if newValue != showStatusBar {
