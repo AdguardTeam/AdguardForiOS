@@ -18,8 +18,9 @@ final class ContentBlockerConverterMock: ContentBlockerConverterProtocol {
     }
 }
 
+// TODO: - These tests should be recovered because they are rather usefull
+
 class FiltersConverterTest: XCTestCase {
-    // TODO: - write tests after new converter added
     var converterMock: ContentBlockerConverterMock!
     var configuaration: SafariConfigurationMock!
     var converter: FiltersConverterProtocol!

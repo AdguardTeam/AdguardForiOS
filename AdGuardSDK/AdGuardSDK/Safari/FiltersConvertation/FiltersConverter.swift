@@ -85,16 +85,15 @@ final class FiltersConverter: FiltersConverterProtocol {
      So we just pass json with empty rule to avoid this error
      */
     private lazy var emptyRuleJsonResult: ConversionResult = {
+        let converter = ContentBlockerConverterWrapper()
         let safariVersion = SafariVersion(rawValue: configuration.iosVersion) ?? .safari15
         return converter.convertArray(rules: [], safariVersion: safariVersion, optimize: false, advancedBlocking: false)
     }()
 
     private let configuration: SafariConfigurationProtocol
-    private let converter: ContentBlockerConverterProtocol
 
-    init(configuration: SafariConfigurationProtocol, converter: ContentBlockerConverterProtocol = ContentBlockerConverterWrapper()) {
+    init(configuration: SafariConfigurationProtocol) {
         self.configuration = configuration
-        self.converter = converter
     }
 
     // MARK: - Internal method
@@ -175,15 +174,12 @@ final class FiltersConverter: FiltersConverterProtocol {
         }
     }
 
-    // Converts all rules to jsons
     private func convert(filters: [ContentBlockerType: [String]]) -> [FiltersConverterResult] {
-        // TODO: - converter.convertArray is very long operation and we need to call it 6 times in a row
-        // Would be great to do it in different threads; Needs to be discussed!
-
-        var conversionResult: [FiltersConverterResult] = []
+        Logger.logInfo("(FiltersConverter) - convertFilters; Safari rules convertion started")
 
         let safariVersion = SafariVersion(rawValue: configuration.iosVersion) ?? .safari15
-        for (cbType, rules) in filters {
+        let conversionResult: [FiltersConverterResult] = filters.concurrentMap { [unowned self] cbType, rules -> FiltersConverterResult in
+            let converter = ContentBlockerConverterWrapper()
             let result = converter.convertArray(
                 rules: rules,
                 safariVersion: safariVersion,
@@ -194,8 +190,10 @@ final class FiltersConverter: FiltersConverterProtocol {
 
             // Just take the info we need
             let converterResult = FiltersConverterResult(type: cbType, conversionResult: result)
-            conversionResult.append(converterResult)
+            return converterResult
         }
+
+        Logger.logInfo("(FiltersConverter) - convertFilters; Safari rules convertion finished")
         return conversionResult
     }
 }
