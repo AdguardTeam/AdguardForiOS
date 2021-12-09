@@ -206,6 +206,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         addPurchaseStatusObserver()
         purchaseService.checkLicenseStatus()
 
+        func shouldUpdateFilters() -> Bool {
+            if !resources.wifiOnlyUpdates {
+                return true
+            }
+            let reachability = Reachability.forInternetConnection()
+            let isWiFiNetwork = reachability?.isReachableViaWiFi() ?? false
+            return isWiFiNetwork
+        }
+
+        let shouldUpdate = shouldUpdateFilters()
+        DDLogInfo("(AppDelegate) - backgroundFetch; shouldUpdateFilters=\(shouldUpdate)")
+        if !shouldUpdate {
+            completionHandler(.noData)
+            return
+        }
+
         // Update filters in background
         safariProtection.updateSafariProtectionInBackground { [weak self] result in
             if let error = result.error {
