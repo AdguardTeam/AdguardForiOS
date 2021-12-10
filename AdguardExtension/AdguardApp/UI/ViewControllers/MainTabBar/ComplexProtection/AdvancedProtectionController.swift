@@ -85,10 +85,7 @@ final class AdvancedProtectionController: UIViewController {
             self?.configureScreenContent()
         }
 
-        if let state = enableAdvancedProtection {
-            uiSwitch.isOn = state
-            switchValueChanged(uiSwitch)
-        }
+        enableAdvancedProtectionIfNeeded()
     }
 
     // MARK: - Actions
@@ -130,6 +127,16 @@ final class AdvancedProtectionController: UIViewController {
         purchaseButton.isHidden = configurationService.proStatus
         let hideView = resources.safariWebExtensionIsOn && resources.advancedProtectionPermissionsGranted
         advancedProtectionIsHidden =  hideView || !configurationService.proStatus
+    }
+
+    private func enableAdvancedProtectionIfNeeded() {
+        guard let state = enableAdvancedProtection else { return }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+            guard let self = self else { return }
+            self.uiSwitch.setOn(state, animated: true)
+            self.switchValueChanged(self.uiSwitch)
+            self.enableAdvancedProtection = nil
+        }
     }
 }
 

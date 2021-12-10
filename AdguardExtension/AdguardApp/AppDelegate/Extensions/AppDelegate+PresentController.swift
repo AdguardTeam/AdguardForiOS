@@ -646,8 +646,6 @@ extension AppDelegate {
 
         advancedProtectionController.enableAdvancedProtection = enableAdvancedProtection
         navController.viewControllers = [complexProtectionController, advancedProtectionController]
-        complexProtectionController.loadViewIfNeeded()
-        advancedProtectionController.loadViewIfNeeded()
         tabBar.selectedViewController = navController
         window?.rootViewController = tabBar
 
