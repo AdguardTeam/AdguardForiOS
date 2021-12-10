@@ -142,10 +142,8 @@ final class SafariGroupFiltersModelsProvider {
 
     /// Returns sorted `SafariTagButtonModels` by lang tag type
     private func getSafariTagButtonModelsSortedByLangTagType(tags: [ExtendedFiltersMeta.Tag]) -> [SafariTagButtonModel] {
-         return tags.sorted { lhs, rhs in
-             let lhsWeight = lhs.tagType == .lang ? 0 : 1
-             let rhsWeight = rhs.tagType == .lang ? 0 : 1
-            return lhsWeight < rhsWeight
-        }.map { SafariTagButtonModel(tag: $0, isSelected: true) }
+        return tags
+            .sorted { $0.tagType == .lang && $1.tagType != .lang }
+            .map { SafariTagButtonModel(tag: $0, isSelected: true) }
     }
 }
