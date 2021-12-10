@@ -37,6 +37,12 @@ final class AdvancedProtectionController: UIViewController {
 
     @IBOutlet var themableLabels: [ThemableLabel]!
 
+    // MARK: - URL redirect value
+
+    /// If `enableAdvancedProtection` contains value then advanced protection state will be changed in `viewDidLoad`.
+    /// After applying the new state, this variable will be set to nil.
+    var enableAdvancedProtection: Bool?
+
     // MARK: - Private properties
 
     private let showLicenseSegue = "ShowLicenseSegueId"
@@ -77,6 +83,11 @@ final class AdvancedProtectionController: UIViewController {
 
         proStatusObserver = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
             self?.configureScreenContent()
+        }
+
+        if let state = enableAdvancedProtection {
+            uiSwitch.isOn = state
+            switchValueChanged(uiSwitch)
         }
     }
 

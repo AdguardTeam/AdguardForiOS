@@ -27,5 +27,5 @@ protocol IURLSchemeExecutor {
     func login(withAccessToken: String?, state: String?) -> Bool
     func openUserRulesRedirectController(for action: UserRulesRedirectAction) -> Bool
     func openPurchaseLicenseController() -> Bool
-    func openAdvancedProtectionController() -> Bool
+    func openAdvancedProtectionController(enableAdvancedProtection: Bool?) -> Bool
 }

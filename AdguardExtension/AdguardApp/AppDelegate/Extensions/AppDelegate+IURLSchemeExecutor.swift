@@ -66,8 +66,9 @@ extension AppDelegate: IURLSchemeExecutor {
         return self.presentPurchaseLicenseController()
     }
 
-    func openAdvancedProtectionController() -> Bool {
-        DDLogInfo("(AppDelegate) - open openAdvancedProtectionController")
-        return self.presentAdvancedProtectionController()
+    func openAdvancedProtectionController(enableAdvancedProtection: Bool?) -> Bool {
+        let enabledState = enableAdvancedProtection == nil ? "nil" : "\(enableAdvancedProtection!)"
+        DDLogInfo("(AppDelegate) - open openAdvancedProtectionController; enabledAdvancedProtection = \(enabledState)")
+        return self.presentAdvancedProtectionController(enableAdvancedProtection: enableAdvancedProtection)
     }
 }
