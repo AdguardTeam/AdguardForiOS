@@ -62,7 +62,7 @@ final class SafariGroupFiltersModelsProvider {
             self.initialGroupModels.append(groupModel)
 
             let filtersModels = group.filters.map { filter -> SafariFilterCellModel in
-                let tagsModels = filter.tags.map { SafariTagButtonModel(tag: $0, isSelected: true) }
+                let tagsModels = getSafariTagButtonModelsSortedByLangTagType(tags: filter.tags)
                 return SafariFilterCellModel(
                     filterId: filter.filterId,
                     groupType: group.groupType,
@@ -138,5 +138,12 @@ final class SafariGroupFiltersModelsProvider {
         } else {
             return nil
         }
+    }
+
+    /// Returns sorted `SafariTagButtonModels` by lang tag type
+    private func getSafariTagButtonModelsSortedByLangTagType(tags: [ExtendedFiltersMeta.Tag]) -> [SafariTagButtonModel] {
+        return tags
+            .sorted { $0.tagType == .lang && $1.tagType != .lang }
+            .map { SafariTagButtonModel(tag: $0, isSelected: true) }
     }
 }
