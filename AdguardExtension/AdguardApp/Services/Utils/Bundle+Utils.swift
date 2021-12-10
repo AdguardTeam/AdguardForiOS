@@ -48,4 +48,10 @@ extension Bundle {
     /// We use different app schemes for pro and normal adguard
     /// This variable  is used to get an app scheme without filling plist files
     var appScheme: String { isPro ? "adguard-pro" : "adguard" }
+
+    /// We use different in-app schemes for pro and normal adguard
+    /// An `appScheme` scheme is used for redirecting outside the app (e.g from Safari)
+    /// And this scheme is used to communicate between of our app's extensions
+    /// This variable  is used to get an app scheme without filling plist files
+    var inAppScheme: String { isPro ? "in-app-adguard-pro-url-scheme" : "in-app-adguard-url-scheme" }
 }

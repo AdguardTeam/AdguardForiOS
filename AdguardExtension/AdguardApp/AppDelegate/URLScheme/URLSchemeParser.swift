@@ -51,6 +51,7 @@ fileprivate enum StringConstants: String {
     case authScheme = "auth"
     case sdnsScheme = "sdns"
     case urlScheme = "adguardScheme"
+    case inAppUrlScheme = "inAppAdguardScheme"
     case urlSchemeCommandAdd = "add"
     case urlSchemeSafariWebExtension = "safariWebExtension"
     case upgradeApp = "upgradeApp"
@@ -62,6 +63,10 @@ fileprivate enum StringConstants: String {
 
         if string == "adguard" || string == "adguard-pro" {
             return .urlScheme
+        }
+
+        if string == "in-app-adguard-url-scheme" || string == "in-app-adguard-pro-url-scheme" {
+            return .inAppUrlScheme
         }
 
         guard let const = StringConstants(rawValue: string) else { return nil }
@@ -148,19 +153,19 @@ struct URLSchemeParser: IURLSchemeParser {
             return processor.parse(url)
 
         // Open with safari web extension action
-        case (.urlScheme, .urlSchemeSafariWebExtension):
+        case (.inAppUrlScheme, .urlSchemeSafariWebExtension):
             DDLogInfo("(URLSchemeParser) openurl - open with safari web extension action")
             let processor = SafariWebExtensionParametersParser(executor: executor)
             return processor.parse(url)
 
         // Open license controller
-        case (.urlScheme, .upgradeApp):
+        case (.inAppUrlScheme, .upgradeApp):
             DDLogInfo("(URLSchemeParser) openurl - open license screen; proStatus=\(configurationService.proStatus)")
             let processor = OpenLicenseControllerParser(executor: executor)
             return processor.parse(url)
 
         // Open license controller
-        case (.urlScheme, .enableAdvancedProtection):
+        case (.inAppUrlScheme, .enableAdvancedProtection):
             DDLogInfo("(URLSchemeParser) openurl - open advanced protection screen; proStatus=\(configurationService.proStatus)")
             let processor = OpenAdvancedProtectionParser(executor: executor)
             return processor.parse(url)

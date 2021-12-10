@@ -26,6 +26,9 @@ AG_GIT_TAG_SUFIX = pro
 // URL scheme for receiving commands in Adguard main app from Safari
 ADGUARD_URL_SCHEME = adguard-pro
 
+// URL scheme for receiving in app messages from different targets
+INN_APP_ADGUARD_URL_SCHEME = in-app-adguard-pro-url-scheme
+
 #include "project.xcconfig"
 #include "../macro-definitions.xcconfig"
 

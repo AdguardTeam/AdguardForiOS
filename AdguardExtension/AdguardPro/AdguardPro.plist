@@ -68,6 +68,16 @@
 				<string>adguard</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.adguard-pro.extension</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>$(INN_APP_ADGUARD_URL_SCHEME)</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(AG_BUILD)</string>

@@ -99,8 +99,8 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
             Message.disableSiteProtectionLink: UserRulesRedirectAction.disableSiteProtection(domain: "", absoluteDomainString: "").scheme,
             Message.addToBlocklistLink: UserRulesRedirectAction.addToBlocklist(domain: "", absoluteDomainString: "").scheme,
             Message.removeAllBlocklistRulesLink: UserRulesRedirectAction.removeAllBlocklistRules(domain: "", absoluteDomainString: "").scheme,
-            Message.upgradeAppLink: "\(Bundle.main.appScheme)://upgradeApp",
-            Message.enableAdvancedBlockingLink: "\(Bundle.main.appScheme)://enableAdvancedProtection",
+            Message.upgradeAppLink: "\(Bundle.main.inAppScheme)://upgradeApp",
+            Message.enableAdvancedBlockingLink: "\(Bundle.main.inAppScheme)://enableAdvancedProtection",
             Message.reportProblemLink: constructReportLink(url ?? "unknown")
         ]
     }
