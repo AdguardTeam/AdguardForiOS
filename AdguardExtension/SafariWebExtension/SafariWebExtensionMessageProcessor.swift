@@ -145,13 +145,13 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
         return isAllowlistInverted ? isDomainInRules : !isDomainInRules
     }
 
-    private func constructReportLink(_ url: String) -> String {
+    private func constructReportLink(_ problemUrl: String) -> String {
         let url = "https://reports.adguard.com/new_issue.html"
         let params: [String: String] = [
             "product_type": "iOS",
             "product_version": ADProductInfo().version() ?? "0",
             "browser": "Safari",
-            "url": url
+            "url": problemUrl
         ]
         let paramsString = params.constructLink(url: url)
         return paramsString ?? ""

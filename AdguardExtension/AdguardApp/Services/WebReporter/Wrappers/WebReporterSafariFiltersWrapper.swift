@@ -48,7 +48,7 @@ struct WebReporterSafariFiltersWrapper: WebReporterWrapperProtocol {
             .flatMap { $0.filters }
             .reduce("") { partialResult, filter in
                 if filter.isEnabled {
-                    let separator = partialResult.isEmpty ? "" : ","
+                    let separator = partialResult.isEmpty ? "" : "."
                     return partialResult + "\(separator)\(filter.filterId)"
                 }
                 return partialResult
