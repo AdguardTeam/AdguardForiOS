@@ -835,32 +835,8 @@
 /* (BugReportController) Message when bug report failed */
 "bug_report_failed_message" = "Failed to submit a bug report, please try again";
 
-/* (BugReportController) Message when leaving feedback failed */
-"feedback_failed_message" = "Failed to send feedback, please try again";
-
 /* (BugReportController) Message when bug report successed */
 "bug_report_successed_message" = "Your bug report was successfully sent!";
-
-/* (BugReportController) Message when feedback leaving successed */
-"feedback_successed_message" = "Your feedback was successfully sent!";
-
-/* (BugReportController) title for bug report */
-"bug_report_title" = "Report a bug";
-
-/* (BugReportController) title for leaving feedback */
-"leave_feedback_title" = "Leave feedback";
-
-/* (BugReportController) description for bug report */
-"bug_report_description" = "Please include the problem description. Did it start after an update or new software install?";
-
-/* (BugReportController) description for leaving feedback */
-"leave_feedback_description_format" = "Tell us what you think about %@ — what you like or don't like, which features you'd like to suggest";
-
-/* (BugReportController) button title for bug report */
-"bug_report_button_title" = "Send a report";
-
-/* (BugReportController) button title for leaving feedback */
-"leave_feedback_button_title" = "Send feedback";
 
 /* (IntroductionOnboardingController) - License agreement text */
 "introduction_license_agreement" = "I agree to AdGuard's <a href=%2$@>EULA</a> and <a href=%1$@>Privacy Policy</a>.";

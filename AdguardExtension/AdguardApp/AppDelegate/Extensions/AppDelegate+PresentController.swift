@@ -372,7 +372,7 @@ extension AppDelegate {
         }
     }
 
-    func presentBugReportController(withType type: ReportType) {
+    func presentBugReportController() {
         guard let tabBar = getMainTabController() else {
             DDLogError("Tab bar is nil")
             return
@@ -400,7 +400,6 @@ extension AppDelegate {
         }
 
         supportVC.loadViewIfNeeded()
-        bugReportVC.reportType = type
 
         navController.viewControllers = [mainMenuController, supportVC, bugReportVC]
         tabBar.selectedViewController = navController

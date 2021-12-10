@@ -50,17 +50,3 @@ struct FeedBack: FeedBackProtocol {
         self.debugInfo = debugInfo
     }
 }
-
-enum ReportType {
-    case bugReport
-    case feedback
-
-    // email subject
-    var subject: String {
-        let appName = Bundle.main.applicationName
-        switch self {
-        case .bugReport: return "\(appName) app bug report"
-        case .feedback: return "\(appName) app user feedback"
-        }
-    }
-}

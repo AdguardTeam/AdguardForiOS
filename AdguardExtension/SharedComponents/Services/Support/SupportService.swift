@@ -29,7 +29,7 @@ protocol SupportServiceProtocol {
     func deleteLogsFiles()
 
     /// Sending feedback data to our backend
-    func sendFeedback(_ email: String, description: String, reportType: ReportType, sendLogs: Bool, _ completion: @escaping (_ logsSentSuccessfully: Bool) -> Void)
+    func sendFeedback(_ email: String, description: String, sendLogs: Bool, _ completion: @escaping (_ logsSentSuccessfully: Bool) -> Void)
 }
 
 /// Support service assemble app state info
@@ -147,16 +147,16 @@ final class SupportService: SupportServiceProtocol {
         }
     }
 
-    func sendFeedback(_ email: String, description: String, reportType: ReportType, sendLogs: Bool, _ completion: @escaping (_ logsSentSuccessfully: Bool) -> Void) {
+    func sendFeedback(_ email: String, description: String, sendLogs: Bool, _ completion: @escaping (_ logsSentSuccessfully: Bool) -> Void) {
         let appId = keyChainService.appId
         let version = productInfo.buildVersion()
         let email = email
         let language = ADLocales.lang()
-        let subject = reportType.subject
+        let subject = "\(Bundle.main.applicationName) app bug report"
         let description = description
         let applicationState = createApplicationStateInfo()
         let debugInfo = sendLogs ? createDebugInfo() : ""
-        let feedback: FeedBackProtocol = FeedBack(applicationId: appId, version: version, email: email, language: language, subject: subject, description: description, applicationState: applicationState, debugInfo: debugInfo)
+        let feedback = FeedBack(applicationId: appId, version: version, email: email, language: language, subject: subject, description: description, applicationState: applicationState, debugInfo: debugInfo)
 
         let httpRequestService = HttpRequestService()
         httpRequestService.sendFeedback(feedback) { success in
