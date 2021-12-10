@@ -160,10 +160,10 @@ class URLSchemeParcerTest: XCTestCase {
 
     func testSafariWebExtensionEnableProtectionUrl() {
         let urlParcer = self.urlParcer!
-        let urls = [ "adguard://safariWebExtension?action=enableSiteProtection&domain=",
-                     "adguard://safariWebExtension?action=disableSiteProtection&domain=",
-                     "adguard://safariWebExtension?action=addToBlocklist&domain=",
-                     "adguard://safariWebExtension?action=removeAllBlocklistRules&domain="]
+        let urls = [ "in-app-adguard-url-scheme://safariWebExtension?action=enableSiteProtection&domain=",
+                     "in-app-adguard-url-scheme://safariWebExtension?action=disableSiteProtection&domain=",
+                     "in-app-adguard-url-scheme://safariWebExtension?action=addToBlocklist&domain=",
+                     "in-app-adguard-url-scheme://safariWebExtension?action=removeAllBlocklistRules&domain="]
 
         urls.forEach {
             let url = URL(string: $0)!
@@ -180,9 +180,9 @@ class URLSchemeParcerTest: XCTestCase {
             XCTAssertFalse(urlParcer.parse(url: url))
         }
 
-        XCTAssertFalse(urlParcer.parse(url: URL(string: "adguard://safariWebExtension")!))
-        XCTAssertFalse(urlParcer.parse(url: URL(string: "adguard://safariWebExtension?action=")!))
-        XCTAssertFalse(urlParcer.parse(url: URL(string: "adguard://safariWebExtension?foo")!))
+        XCTAssertFalse(urlParcer.parse(url: URL(string: "in-app-adguard-url-scheme://safariWebExtension")!))
+        XCTAssertFalse(urlParcer.parse(url: URL(string: "in-app-adguard-url-scheme://safariWebExtension?action=")!))
+        XCTAssertFalse(urlParcer.parse(url: URL(string: "in-app-adguard-url-scheme://safariWebExtension?foo")!))
         XCTAssertFalse(urlParcer.parse(url: URL(string: "nonValid")!))
     }
 }
