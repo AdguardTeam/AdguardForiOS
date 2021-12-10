@@ -12,13 +12,13 @@
         "message": "voor deze website"
     },
     "popup_action_safari_protection_description_disabled": {
-        "message": "uitgeschakeld"
+        "message": "bescherming is Uit"
     },
     "popup_action_current_site_status_desc_enabled": {
-        "message": "bescherming is AAN"
+        "message": "bescherming is Aan"
     },
     "popup_action_current_site_status_desc_disabled": {
-        "message": "bescherming uitgeschakeld"
+        "message": "bescherming is Uit"
     },
     "popup_action_block_element": {
         "message": "Elementen op deze pagina blokkeren"
@@ -27,7 +27,7 @@
         "message": "Alle gebruikersregels voor deze website verwijderen"
     },
     "popup_action_current_site_desc_starting": {
-        "message": "bescherming wordt ingeschakeld"
+        "message": "bescherming wordt ingeschakeld..."
     },
     "popup_action_current_site_desc_allowlisted": {
         "message": "toegevoegd aan toestemmingslijst"
@@ -42,19 +42,28 @@
         "message": "Goed gedaan! AdGuard blokkeert nu nog meer advertenties en kan omgaan met de moeilijkste uitdagingen!"
     },
     "popup_modal_all_sites_allowed_button": {
-        "message": "Laat de magie beginnen"
+        "message": "Doorgaan"
     },
     "popup_modal_not_all_sites_allowed_title": {
         "message": "Selectieve bescherming"
     },
     "popup_modal_not_all_sites_allowed_desc": {
-        "message": "Je hebt AdGuard alleen voor deze website ingeschakeld. Je zult advertenties op andere websites blijven zien, tenzij je AdGuard meer rechten geeft."
+        "message": "Je hebt AdGuard alleen voor deze website ingeschakeld. Advertenties op andere websites blijven verschijnen, tenzij je AdGuard meer rechten geeft."
     },
     "popup_modal_not_all_sites_allowed_button": {
         "message": "Doorgaan"
     },
+    "popup_modal_advanced_blocking_disabled_title": {
+        "message": "Geavanceerde bescherming is uitgeschakeld"
+    },
+    "popup_modal_advanced_blocking_disabled_description": {
+        "message": "Gebruikersscripts en YouTube-advertentieblokkering zijn niet geactiveerd."
+    },
+    "popup_modal_advanced_blocking_disabled_button": {
+        "message": "Inschakelen"
+    },
     "popup_modal_title_free": {
-        "message": "Wees alles wat je kunt zijn"
+        "message": "Bereik je volledige potentieel"
     },
     "popup_modal_desc_free": {
         "message": "Je mist nog steeds de geavanceerde bescherming die beschikbaar is in AdGuard Premium. Zullen we nog meer advertenties blokkeren, zoals YouTube-advertenties in Safari?"
@@ -63,19 +72,19 @@
         "message": "Upgraden"
     },
     "popup_fullscreen_support_title": {
-        "message": "Uh-oh, wil je opnieuw beginnen vanaf het begin?"
+        "message": "Uh-oh, heb je hulp nodig?"
     },
     "popup_fullscreen_support_desc": {
         "message": "Is er iets mis? We hebben misschien een oplossing."
     },
     "popup_protection_disabled_support_desc": {
-        "message": "Uh-oh, de bescherming voor deze website staat UIT. Is er iets mis? We hebben misschien een oplossing."
+        "message": "Uh-oh, bescherming voor deze website staat Uit. Is er iets mis? We hebben misschien een oplossing."
     },
     "popup_support_button_text": {
         "message": "Een probleem rapporteren"
     },
     "modal_protection_off_title": {
-        "message": "Bescherming inschakelen"
+        "message": "AdGuard inschakelen"
     },
     "modal_protection_off_settings": {
         "message": "Open <b>Instellingen<\/b>"
@@ -84,6 +93,6 @@
         "message": "Tik op <b>Safari<\/b>, veeg omlaag en tik op <b>Inhoudblokkers<\/b>"
     },
     "modal_protection_off_switch": {
-        "message": "Alle AdGuard-uitbreidingen <b>inschakelen<\/b>."
+        "message": "Alle AdGuard-uitbreidingen <b>inschakelen<\/b>"
     }
 }

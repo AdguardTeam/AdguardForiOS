@@ -3,6 +3,96 @@
         "message": "AdGuard"
     },
     "extension_description": {
-        "message": "AdGuard Safari Web Extension"
+        "message": "Extension Web AdGuard pour Safari"
+    },
+    "popup_action_safari_protection_title": {
+        "message": "Protection pour Safari"
+    },
+    "popup_action_safari_protection_description": {
+        "message": "pour ce site Web"
+    },
+    "popup_action_safari_protection_description_disabled": {
+        "message": "protection désactivée"
+    },
+    "popup_action_current_site_status_desc_enabled": {
+        "message": "protection activée"
+    },
+    "popup_action_current_site_status_desc_disabled": {
+        "message": "protection désactivée"
+    },
+    "popup_action_block_element": {
+        "message": "Bloquer des éléments sur la page"
+    },
+    "popup_action_delete_user_rules": {
+        "message": "Supprimer toutes les règles d’utilisateur pour ce site"
+    },
+    "popup_action_current_site_desc_starting": {
+        "message": "démarrage de la protection..."
+    },
+    "popup_action_current_site_desc_allowlisted": {
+        "message": "ajouté à la liste blanche"
+    },
+    "popup_action_current_site_desc_basic_only": {
+        "message": "protection basique uniquement"
+    },
+    "popup_modal_all_sites_allowed_title": {
+        "message": "Protection ultime"
+    },
+    "popup_modal_all_sites_allowed_desc": {
+        "message": "Bien joué ! AdGuard bloquera presque toutes les publicités et relèvera les défis les plus difficiles ."
+    },
+    "popup_modal_all_sites_allowed_button": {
+        "message": "Continuer"
+    },
+    "popup_modal_not_all_sites_allowed_title": {
+        "message": "Protection sélective"
+    },
+    "popup_modal_not_all_sites_allowed_desc": {
+        "message": "Vous avez activé AdGuard uniquement pour ce site Web. Donc les publicités pourront apparaitre sur d’autres sites Web à moins que vous n’accordiez plus d'autorisations à AdGuard."
+    },
+    "popup_modal_not_all_sites_allowed_button": {
+        "message": "Continuer"
+    },
+    "popup_modal_advanced_blocking_disabled_title": {
+        "message": "La Protection avancée est désactivée"
+    },
+    "popup_modal_advanced_blocking_disabled_description": {
+        "message": "Les scripts utilisateur et le blocage des publicités YouTube ne sont pas activés."
+    },
+    "popup_modal_advanced_blocking_disabled_button": {
+        "message": "Activer"
+    },
+    "popup_modal_title_free": {
+        "message": "Très bien mais..."
+    },
+    "popup_modal_desc_free": {
+        "message": "Il vous manque encore la protection avancée disponible dans AdGuard Premium. Bloquons encore plus de publicités comme celles de YouTube dans Safari ?"
+    },
+    "popup_modal_btn_free": {
+        "message": "Surclasser"
+    },
+    "popup_fullscreen_support_title": {
+        "message": "Avez-vous besoin d'assistance ?"
+    },
+    "popup_fullscreen_support_desc": {
+        "message": "Quelque chose ne va pas ? On peut tout réparer."
+    },
+    "popup_protection_disabled_support_desc": {
+        "message": "Oh-oh, on dirait que vous avez désactivé la protection... Quelque chose ne va pas? Nous pouvons le réparer."
+    },
+    "popup_support_button_text": {
+        "message": "Signaler un problème"
+    },
+    "modal_protection_off_title": {
+        "message": "Activer AdGuard"
+    },
+    "modal_protection_off_settings": {
+        "message": "Ouvrir les <b>Paramètres<\/b>"
+    },
+    "modal_protection_off_extensions": {
+        "message": "Appuyez sur <b>Safari<\/b> , glissez vers le bas et appuyez <b>Bloqueurs de contenu<\/b>"
+    },
+    "modal_protection_off_switch": {
+        "message": "<b>Activer<\/b> toutes les extensions AdGuard"
     }
 }
