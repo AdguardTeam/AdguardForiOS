@@ -12,13 +12,13 @@
         "message": "for this website"
     },
     "popup_action_safari_protection_description_disabled": {
-        "message": "protection is Off"
+        "message": "protection is disabled"
     },
     "popup_action_current_site_status_desc_enabled": {
-        "message": "protection is On"
+        "message": "enabled for this website"
     },
     "popup_action_current_site_status_desc_disabled": {
-        "message": "protection is Off"
+        "message": "disabled for this website"
     },
     "popup_action_block_element": {
         "message": "Block elements on this page"
@@ -57,13 +57,13 @@
         "message": "Continue"
     },
     "popup_modal_advanced_blocking_disabled_title": {
-        "message": "Advanced protection is off"
+        "message": "Advanced protection is disabled"
     },
     "popup_modal_advanced_blocking_disabled_description": {
-        "message": "Userscripts and YouTube ad blocking are not activated."
+        "message": "Advanced blocking rules and other extended features are not available."
     },
     "popup_modal_advanced_blocking_disabled_button": {
-        "message": "Turn on"
+        "message": "Enable"
     },
     "popup_modal_title_free": {
         "message": "Reach your full potential"
@@ -81,7 +81,7 @@
         "message": "Is something wrong? We may have a fix."
     },
     "popup_protection_disabled_support_desc": {
-        "message": "Uh-oh, protection for this website is Off. Is something wrong? We may have a fix."
+        "message": "Uh-oh, protection for this website is disabled. Is something wrong? We may have a fix."
     },
     "popup_support_button_text": {
         "message": "Report an issue"
