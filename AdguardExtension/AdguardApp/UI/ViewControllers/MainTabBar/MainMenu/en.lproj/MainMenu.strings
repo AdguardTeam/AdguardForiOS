@@ -61,8 +61,8 @@
 /* Class = "UITextField"; placeholder = "Email Address"; ObjectID = "gap-Uy-5ka"; */
 "gap-Uy-5ka.placeholder" = "Email Address";
 
-/* Class = "UIButton"; normalTitle = "Send a report"; ObjectID = "in9-YT-8ra"; */
-"in9-YT-8ra.normalTitle" = "Send a report";
+/* Class = "UIButton"; normalTitle = "Submit a report"; ObjectID = "in9-YT-8ra"; */
+"in9-YT-8ra.normalTitle" = "Submit a report";
 
 /* Class = "UILabel"; text = "How to block ads with AdGuard"; ObjectID = "iwI-Gm-rAp"; */
 "iwI-Gm-rAp.text" = "How to block ads with AdGuard";

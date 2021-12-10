@@ -57,7 +57,6 @@ final class BugReportController: UIViewController {
         updateTheme()
         setupBackButton()
 
-        sendButton.makeTitleTextCapitalized()
         sendButton.applyStandardGreenStyle()
         sendButton.setBackgroundColor()
         sendButton.isEnabled = false
