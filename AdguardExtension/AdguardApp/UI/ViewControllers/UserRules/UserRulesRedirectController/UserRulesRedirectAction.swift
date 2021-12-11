@@ -26,10 +26,10 @@ enum UserRulesRedirectAction {
 
     var scheme: String {
         switch self {
-        case .enableSiteProtection(_, _): return "\(Bundle.main.appScheme)://safariWebExtension?action=enableSiteProtection&domain="
-        case .disableSiteProtection(_, _): return "\(Bundle.main.appScheme)://safariWebExtension?action=disableSiteProtection&domain="
-        case .addToBlocklist(_, _): return "\(Bundle.main.appScheme)://safariWebExtension?action=addToBlocklist&domain="
-        case .removeAllBlocklistRules(_, _): return "\(Bundle.main.appScheme)://safariWebExtension?action=removeAllBlocklistRules&domain="
+        case .enableSiteProtection(_, _): return "\(Bundle.main.inAppScheme)://safariWebExtension?action=enableSiteProtection&domain="
+        case .disableSiteProtection(_, _): return "\(Bundle.main.inAppScheme)://safariWebExtension?action=disableSiteProtection&domain="
+        case .addToBlocklist(_, _): return "\(Bundle.main.inAppScheme)://safariWebExtension?action=addToBlocklist&domain="
+        case .removeAllBlocklistRules(_, _): return "\(Bundle.main.inAppScheme)://safariWebExtension?action=removeAllBlocklistRules&domain="
         }
     }
 
