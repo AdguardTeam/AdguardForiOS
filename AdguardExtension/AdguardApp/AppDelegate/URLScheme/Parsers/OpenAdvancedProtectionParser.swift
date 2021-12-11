@@ -26,6 +26,6 @@ struct OpenAdvancedProtectionParser: IURLSchemeParametersParser {
     }
 
     func parse(_ url: URL) -> Bool {
-        return executor.openAdvancedProtectionController()
+        return executor.openAdvancedProtectionController(enableAdvancedProtection: true)
     }
 }

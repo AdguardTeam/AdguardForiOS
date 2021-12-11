@@ -37,6 +37,12 @@ final class AdvancedProtectionController: UIViewController {
 
     @IBOutlet var themableLabels: [ThemableLabel]!
 
+    // MARK: - URL redirect value
+
+    /// If `enableAdvancedProtection` contains value then advanced protection state will be changed in `viewDidLoad`.
+    /// After applying the new state, this variable will be set to nil.
+    var enableAdvancedProtection: Bool?
+
     // MARK: - Private properties
 
     private let showLicenseSegue = "ShowLicenseSegueId"
@@ -78,6 +84,8 @@ final class AdvancedProtectionController: UIViewController {
         proStatusObserver = NotificationCenter.default.observe(name: .proStatusChanged, object: nil, queue: .main) { [weak self] _ in
             self?.configureScreenContent()
         }
+
+        enableAdvancedProtectionIfNeeded()
     }
 
     // MARK: - Actions
@@ -119,6 +127,16 @@ final class AdvancedProtectionController: UIViewController {
         purchaseButton.isHidden = configurationService.proStatus
         let hideView = resources.safariWebExtensionIsOn && resources.advancedProtectionPermissionsGranted
         advancedProtectionIsHidden =  hideView || !configurationService.proStatus
+    }
+
+    private func enableAdvancedProtectionIfNeeded() {
+        guard let state = enableAdvancedProtection else { return }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+            guard let self = self else { return }
+            self.uiSwitch.setOn(state, animated: true)
+            self.switchValueChanged(self.uiSwitch)
+            self.enableAdvancedProtection = nil
+        }
     }
 }
 

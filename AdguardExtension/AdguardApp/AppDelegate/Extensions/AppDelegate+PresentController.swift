@@ -622,7 +622,7 @@ extension AppDelegate {
         window?.rootViewController = tabBar
     }
 
-    func presentAdvancedProtectionController() -> Bool {
+    func presentAdvancedProtectionController(enableAdvancedProtection: Bool? = nil) -> Bool {
         guard let tabBar = getMainTabController() else {
             DDLogError("Tab bar is nil")
             return false
@@ -643,9 +643,8 @@ extension AppDelegate {
             return false
         }
 
+        advancedProtectionController.enableAdvancedProtection = enableAdvancedProtection
         navController.viewControllers = [complexProtectionController, advancedProtectionController]
-        complexProtectionController.loadViewIfNeeded()
-        advancedProtectionController.loadViewIfNeeded()
         tabBar.selectedViewController = navController
         window?.rootViewController = tabBar
 

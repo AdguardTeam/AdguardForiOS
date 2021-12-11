@@ -48,7 +48,7 @@ class URLSchemeExecutorMock: IURLSchemeExecutor {
         true
     }
 
-    func openAdvancedProtectionController() -> Bool {
+    func openAdvancedProtectionController(enableAdvancedProtection: Bool?) -> Bool {
         true
     }
 }
