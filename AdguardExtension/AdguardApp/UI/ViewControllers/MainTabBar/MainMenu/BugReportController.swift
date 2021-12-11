@@ -30,11 +30,7 @@ final class BugReportController: UIViewController {
     @IBOutlet weak var textViewPlaceholder: UILabel!
     @IBOutlet weak var descriptionTextViewIndicatorView: TextFieldIndicatorView!
 
-    @IBOutlet weak var detailedInfoView: UIView!
     @IBOutlet weak var detailedInfoButton: UIButton!
-    @IBOutlet weak var detailedInfoViewHeight: NSLayoutConstraint!
-
-    @IBOutlet weak var optionalSpace: NSLayoutConstraint!
 
     @IBOutlet weak var sendButton: RoundRectButton!
 
@@ -49,20 +45,23 @@ final class BugReportController: UIViewController {
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
     private let supportService: SupportServiceProtocol = ServiceLocator.shared.getService()!
 
-    var reportType: ReportType = .bugReport
-
     override func viewDidLoad() {
         super.viewDidLoad()
         emailAddressTextField.delegate = self
 
         keyboardMover = KeyboardMover(bottomConstraint: scrollViewBottomConstraint, view: scrollView, tabBar: tabBarController?.tabBar)
 
-        setupToHideKeyboardOnTapOnView(ignoringViews: [emailAddressTextField, emailAddressTextField.rightView].compactMap { $0 }) // Tap anywhere to hide keyboard
+        setupToHideKeyboardOnTapOnView(ignoringViews: [emailAddressTextField, emailAddressTextField.rightView, sendButton].compactMap { $0 }) // Tap anywhere to hide keyboard
         setupTextView()
-        processReportType()
 
         updateTheme()
         setupBackButton()
+
+        sendButton.applyStandardGreenStyle()
+        sendButton.setBackgroundColor()
+        sendButton.isEnabled = false
+
+        detailedInfoButton.isSelected = true
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -80,7 +79,7 @@ final class BugReportController: UIViewController {
         sendButton.startIndicator()
         sendButton.isEnabled = false
 
-        let email = emailAddressTextField.text ?? ""
+        let email = (emailAddressTextField.text ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
         let isValidEmail = email.isValidEmail() || email.isEmpty
 
         let description = descriptionTextView.text ?? ""
@@ -104,7 +103,7 @@ final class BugReportController: UIViewController {
 
         let shouldSendLogs = detailedInfoButton.isSelected
 
-        supportService.sendFeedback(email, description: description, reportType: reportType, sendLogs: shouldSendLogs) { logsSentSuccessfully in
+        supportService.sendFeedback(email, description: description, sendLogs: shouldSendLogs) { logsSentSuccessfully in
             DispatchQueue.main.async { [weak self] in
                 self?.sendButton.stopIndicator()
                 self?.sendButton.isEnabled = true
@@ -119,30 +118,6 @@ final class BugReportController: UIViewController {
     }
 
     // MARK: - Private methods
-
-    private func processReportType() {
-        titleLabel.text = reportType == .bugReport ? String.localizedString("bug_report_title") : String.localizedString("leave_feedback_title")
-
-        if reportType == .bugReport {
-            descriptionLabel.text = String.localizedString("bug_report_description")
-        } else {
-            let feedbackFormat = String.localizedString("leave_feedback_description_format")
-            let appName = Bundle.main.applicationName
-            descriptionLabel.text = String(format: feedbackFormat, appName)
-        }
-
-        sendButton.setTitle(reportType == .bugReport ? String.localizedString("bug_report_button_title") : String.localizedString("leave_feedback_button_title"), for: .normal)
-
-        sendButton.makeTitleTextCapitalized()
-        sendButton.applyStandardGreenStyle()
-
-        detailedInfoButton.isSelected = reportType == .bugReport
-
-        detailedInfoView.isHidden = reportType == .feedback
-
-        detailedInfoViewHeight.isActive = reportType == .feedback
-        optionalSpace.constant = reportType == .bugReport ? 32.0 : 0.0
-    }
 
     private func setupTextView() {
         descriptionTextView.textContainerInset = .zero
@@ -159,12 +134,12 @@ final class BugReportController: UIViewController {
     }
 
     private func showBugReportFailedAlert() {
-        let message = String.localizedString(reportType == .bugReport ? "bug_report_failed_message" : "feedback_failed_message")
+        let message = String.localizedString("bug_report_failed_message")
         ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: message)
     }
 
     private func showBugReportSuccessAlert() {
-        let message = String.localizedString(reportType == .bugReport ? "bug_report_successed_message" : "feedback_successed_message")
+        let message = String.localizedString("bug_report_successed_message")
         ACSSystemUtils.showSimpleAlert(for: self, withTitle: nil, message: message) { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
@@ -178,10 +153,11 @@ extension BugReportController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = textField.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
-        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string).trimmingCharacters(in: .whitespacesAndNewlines)
 
         emailAddressTextField.borderState = .enabled
         emailAddressTextField.rightView?.isHidden = updatedText.isEmpty
+        sendButton.isEnabled = !updatedText.isEmpty && updatedText.isValidEmail()
         emailErrorLabel.isHidden = true
         return true
     }

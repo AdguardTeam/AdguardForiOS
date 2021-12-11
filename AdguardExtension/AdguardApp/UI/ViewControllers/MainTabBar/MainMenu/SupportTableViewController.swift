@@ -36,25 +36,14 @@ class SupportTableViewController: UITableViewController {
     private let faqRow = 1
     private let reportIncorrectBlockingRow = 2
     private let reportBugRow = 3
-    private let leaveFeedbackRow = 4
-    private let discussRow = 5
-    private let rateAppRow = 6
-    private let exportLogsRow = 7
-
-    private let bugReportSegueId = "BugReportSegueId"
-    private var reportType: ReportType = .bugReport
+    private let discussRow = 4
+    private let rateAppRow = 5
+    private let exportLogsRow = 6
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         updateTheme()
         setupBackButton()
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == bugReportSegueId, let bugReportVC = segue.destination as? BugReportController {
-            bugReportVC.reportType = reportType
-        }
     }
 
     // MARK: - Table view data source
@@ -93,10 +82,6 @@ class SupportTableViewController: UITableViewController {
             UIApplication.shared.openAdguardUrl(action: "faq", from: "support", buildVersion: productInfo.buildVersion())
         case (optionsSection, reportIncorrectBlockingRow):
             reportIncorrectBlockingRowTapped()
-        case (optionsSection, reportBugRow):
-            showBugReportController(.bugReport)
-        case (optionsSection, leaveFeedbackRow):
-            showBugReportController(.feedback)
         case (optionsSection, discussRow):
             UIApplication.shared.openAdguardUrl(action: "discuss", from: "support", buildVersion: productInfo.buildVersion())
         case (optionsSection, rateAppRow):
@@ -110,11 +95,6 @@ class SupportTableViewController: UITableViewController {
     }
 
     // MARK: - private methods
-
-    private func showBugReportController(_ type: ReportType) {
-        reportType = type
-        performSegue(withIdentifier: bugReportSegueId, sender: self)
-    }
 
     private func reportIncorrectBlockingRowTapped() {
         let reportUrl = ApplicationWebReporter().createUrl()

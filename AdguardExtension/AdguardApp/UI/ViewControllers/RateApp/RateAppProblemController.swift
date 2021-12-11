@@ -50,7 +50,7 @@ class RateAppProblemController: BottomAlertController {
 
     @IBAction func problemRemains(_ sender: UIButton) {
         dismiss(animated: true) {
-            AppDelegate.shared.presentBugReportController(withType: .bugReport)
+            AppDelegate.shared.presentBugReportController()
         }
     }
 
