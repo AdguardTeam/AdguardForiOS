@@ -65,6 +65,34 @@ export const config = {
                     context: 'src',
                     from: '_locales',
                     to: '_locales',
+                    /**
+                     * Update extension name if extension is built for AdGuard Pro
+                     * @param content
+                     * @param absoluteFrom
+                     */
+                    transform: (content, absoluteFrom) => {
+                        if (process.env.ADG_PRO !== '1') {
+                            return content;
+                        }
+
+                        if (!absoluteFrom.endsWith('_locales/en/messages.json')) {
+                            return content;
+                        }
+
+                        try {
+                            const strings = JSON.parse(content.toString());
+                            const nameString = strings?.extension_name?.message;
+                            if (!nameString) {
+                                return content;
+                            }
+
+                            strings.extension_name.message = `${nameString} Pro`;
+
+                            return Buffer.from(JSON.stringify(strings, null, 4));
+                        } catch (e) {
+                            return content;
+                        }
+                    },
                 },
                 {
                     context: 'src',
