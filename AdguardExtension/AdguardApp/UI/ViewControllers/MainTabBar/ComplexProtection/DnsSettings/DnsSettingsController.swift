@@ -219,12 +219,20 @@ final class DnsSettingsController : UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return section == 0 ? 32.0 : 0.1
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
     }
 
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
+    }
+
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return section == 0 ? 32.0 : 0.1
+    }
+
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.01
     }
 
     // MARK: Actions
@@ -266,7 +274,7 @@ final class DnsSettingsController : UITableViewController {
     private func updateVpnInfo() {
         let enabled = complexProtection.systemProtectionEnabled
         enabledSwitch.isOn = enabled
-        systemProtectionStateLabel.text = enabled ? String.localizedString("on_state") : String.localizedString("off_state")
+        systemProtectionStateLabel.text = enabled.localizedStateDescription
         systemIcon.tintColor = enabled ? enabledColor : disabledColor
 
         updateServerName()

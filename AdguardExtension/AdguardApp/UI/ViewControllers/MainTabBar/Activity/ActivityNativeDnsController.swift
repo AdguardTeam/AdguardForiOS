@@ -52,7 +52,7 @@ final class ActivityNativeDnsController: UIViewController {
     }
 
     private func setupLabels() {
-        dnsStatusLabel.text = nativeDnsManager.dnsConfigIsEnabled ? String.localizedString("on_state") : String.localizedString("off_state")
+        dnsStatusLabel.text = nativeDnsManager.dnsConfigIsEnabled.localizedStateDescription
         dnsNameLabel.text = dnsProvidersManager.activeDnsProvider.name
         dnsProtocolLabel.text = dnsProvidersManager.activeDnsServer.type.localizedName
     }

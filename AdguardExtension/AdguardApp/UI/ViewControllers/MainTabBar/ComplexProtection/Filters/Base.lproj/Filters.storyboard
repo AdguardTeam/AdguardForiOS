@@ -105,10 +105,28 @@
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                     </variation>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="safari" translatesAutoresizingMaskIntoConstraints="NO" id="vyW-YR-IM6">
+                                                    <rect key="frame" x="16" y="20" width="24" height="24"/>
+                                                    <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="ITn-wR-Ayw">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="32"/>
+                                                        </constraint>
+                                                        <constraint firstAttribute="width" constant="24" id="qyv-xg-tDw">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="32"/>
+                                                        </constraint>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="T8x-Ho-7mV" secondAttribute="bottom" constant="16" id="3pp-o2-zYX">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                </constraint>
+                                                <constraint firstItem="8zX-PY-5pt" firstAttribute="leading" secondItem="vyW-YR-IM6" secondAttribute="trailing" constant="16" id="7x8-1l-azE">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
+                                                <constraint firstItem="vyW-YR-IM6" firstAttribute="leading" secondItem="1Hb-xD-o6z" secondAttribute="leading" constant="16" id="LM2-0W-QJt">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
                                                 <constraint firstItem="8zX-PY-5pt" firstAttribute="centerY" secondItem="T8x-Ho-7mV" secondAttribute="centerY" id="SfB-fr-9hO"/>
                                                 <constraint firstItem="T8x-Ho-7mV" firstAttribute="top" secondItem="1Hb-xD-o6z" secondAttribute="top" constant="16" id="i8j-Ja-I2I">
@@ -117,9 +135,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="T8x-Ho-7mV" secondAttribute="trailing" constant="16" id="lDc-9J-l8z">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
-                                                <constraint firstItem="8zX-PY-5pt" firstAttribute="leading" secondItem="1Hb-xD-o6z" secondAttribute="leading" constant="16" id="u0U-Yf-V2B">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
-                                                </constraint>
+                                                <constraint firstItem="vyW-YR-IM6" firstAttribute="centerY" secondItem="1Hb-xD-o6z" secondAttribute="centerY" id="vg5-kQ-p3U"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>

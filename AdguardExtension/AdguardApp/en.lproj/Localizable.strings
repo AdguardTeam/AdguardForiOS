@@ -373,11 +373,11 @@
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "You have exceeded the maximum number of filter rules.";
 
-/* (FiltersController) ON state in groups section */
-"on_state" = "ON";
+/* (FiltersController) Enabled state in groups section */
+"on_state" = "Enabled";
 
-/* (FiltersController) OFF state in groups section */
-"off_state" = "OFF";
+/* (FiltersController) Disabled state in groups section */
+"off_state" = "Disabled";
 
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "Homepage: ";
