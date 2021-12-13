@@ -54,6 +54,7 @@ final class UserRulesTableController: UIViewController {
         ExtendedTitleTableHeaderView(title: model.title, htmlDescription: model.description)
     }()
     private let searchHeader = AGSearchView()
+    private var stateHeaderView: StateHeaderView<Bool>?
 
     /* Services */
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -372,6 +373,7 @@ extension UserRulesTableController: UITableViewDataSource {
         let model = StateHeaderViewModel(iconImage: model.icon, title: isEnabled.localizedStateDescription, isEnabled: isEnabled, id: isEnabled)
         let view =  StateHeaderView<Bool>(frame: .zero)
         view.config = IdentifiableViewConfig(model: model, delegate: self)
+        self.stateHeaderView = view
         return view
     }
 
@@ -515,6 +517,8 @@ extension UserRulesTableController: IdentifiableObjectDelegate {
             return
         }
         model.isEnabled = changedModel.isEnabled
+        let model = StateHeaderViewModel(iconImage: model.icon, title: model.isEnabled.localizedStateDescription, isEnabled: model.isEnabled, id: model.isEnabled)
+        self.stateHeaderView?.config.model = model
     }
 }
 
