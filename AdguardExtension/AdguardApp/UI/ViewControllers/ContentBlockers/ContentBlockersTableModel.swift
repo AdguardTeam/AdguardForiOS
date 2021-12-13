@@ -58,7 +58,7 @@ final class ContentBlockersTableModel {
         let enabledFiltersByCB = getEnabledFiltersByCb()
 
         // Converter lib results
-        let converterResults = safariProtection.allConverterResults
+        let converterResults = safariProtection.allConverterResults.sorted(by: { $0.type.rawValue < $1.type.rawValue })
 
         // Reloading state for each CB
         let cbReloadingStates = safariProtection.reloadingContentBlockers
