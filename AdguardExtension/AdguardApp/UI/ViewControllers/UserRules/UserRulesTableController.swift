@@ -171,6 +171,10 @@ final class UserRulesTableController: UIViewController {
         tableView.sectionFooterHeight = 0.01
         tableView.estimatedRowHeight = 48.0
         tableView.rowHeight = UITableView.automaticDimension
+        if #available(iOS 15.0, *) {
+            tableView.sectionHeaderTopPadding = 0.0
+            tableView.fillerRowHeight = 0.0
+        }
 
         AddTableViewCell.registerCell(forTableView: tableView)
         UserRuleTableViewCell.registerCell(forTableView: tableView)
@@ -366,7 +370,7 @@ final class UserRulesTableController: UIViewController {
 extension UserRulesTableController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if model.isEditing || model.isSearching {
-            return nil
+            return UIView()
         }
         let isEnabled = model.isEnabled
         let model = StateHeaderViewModel(iconImage: model.icon, title: isEnabled.localizedStateDescription, isEnabled: isEnabled, id: isEnabled)
@@ -377,6 +381,17 @@ extension UserRulesTableController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if model.isEditing || model.isSearching {
+            return 0.01
+        }
+        return UITableView.automaticDimension
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
