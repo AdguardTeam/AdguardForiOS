@@ -318,7 +318,7 @@ extension AESharedResourcesProtocol {
     /* Advanced protection state */
     var advancedProtection: Bool {
         get {
-            sharedDefaults().object(forKey: advancedProtectionKey) as? Bool ?? true
+            sharedDefaults().bool(forKey: advancedProtectionKey)
         }
         set {
             sharedDefaults().set(newValue, forKey: advancedProtectionKey)
