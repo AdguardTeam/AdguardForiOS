@@ -625,7 +625,7 @@
                                             <action selector="fixItTapped:" destination="T6V-s9-cBk" eventType="touchUpInside" id="eqb-KA-yAD"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some Safari content blockers are disabled" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvv-CS-LMQ">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Some Safari content blockers are disabled" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvv-CS-LMQ">
                                         <rect key="frame" x="16" y="16" width="307" height="57.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <color key="textColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
