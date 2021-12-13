@@ -22,6 +22,7 @@ export const CurrentSite = observer(() => {
 
     let description = SiteStatusesMessages[SiteStatus.ProtectionEnabled];
     let descriptionColor = 'gray';
+    let iconEnabled = true;
 
     if (!store.premiumApp || !store.advancedBlockingEnabled) {
         description = SiteStatusesMessages[SiteStatus.BasicOnly];
@@ -30,21 +31,25 @@ export const CurrentSite = observer(() => {
     if (!store.protectionEnabled) {
         description = SiteStatusesMessages[SiteStatus.Allowlisted];
         descriptionColor = 'green';
+        iconEnabled = false;
     }
 
     if (store.allowlistInverted) {
         if (store.protectionEnabled) {
             description = SiteStatusesMessages[SiteStatus.AllowlistedInverted];
             descriptionColor = 'green';
+            iconEnabled = true;
         } else {
             description = SiteStatusesMessages[SiteStatus.ProtectionDisabled];
             descriptionColor = 'gray';
+            iconEnabled = false;
         }
     }
 
     if (!store.contentBlockersEnabled) {
         description = SiteStatusesMessages[SiteStatus.ProtectionDisabled];
         descriptionColor = 'yellow';
+        iconEnabled = false;
     }
 
     const determineHandlerAndIcon = () => {
@@ -96,6 +101,7 @@ export const CurrentSite = observer(() => {
             description={description}
             descriptionMod={descriptionColor}
             onClick={determineHandlerAndIcon().handler}
+            iconEnabled={iconEnabled}
         >
             {determineHandlerAndIcon().button}
         </Action>

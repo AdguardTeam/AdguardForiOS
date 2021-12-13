@@ -3,6 +3,8 @@ import axios from 'axios';
 import { getDomain } from '../common/utils/url';
 import { log } from '../common/log';
 
+const FALLBACK_ICON_COLOR = '67b279';
+
 const toDataUrl = async (url: string): Promise<string> => {
     const response = await axios(url, { responseType: 'blob' });
     return new Promise((resolve, reject) => {
@@ -24,7 +26,7 @@ export const getFaviconDataUrl = async (url?: string): Promise<string | null> =>
         return null;
     }
 
-    const ADGUARD_FAVICON_SERVICE_URL = 'https://icons.adguard.org/icon?domain=';
+    const ADGUARD_FAVICON_SERVICE_URL = `https://icons.adguard.org/icon?fallback_icon_color=${FALLBACK_ICON_COLOR}&domain=`;
     const favIconUrl = `${ADGUARD_FAVICON_SERVICE_URL}${domain}`;
 
     const TIMEOUT_MS = 1000;
