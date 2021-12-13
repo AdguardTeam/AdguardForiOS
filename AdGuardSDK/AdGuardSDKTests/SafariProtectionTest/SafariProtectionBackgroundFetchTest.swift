@@ -38,7 +38,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
         let expectedResult1 = BackgroundFetchUpdateResult(
             backgroundFetchResult: .newData,
             newBackgroundFetchState: .convertFilters,
-            oldBackgroundFetchState: .loadAndSaveFilters,
+            oldBackgroundFetchState: .updateFinished,
             error: nil
         )
         let expectation = XCTestExpectation()
@@ -118,8 +118,8 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
     func testUpdateSafariProtectionInBackgroundExecutesInRightSequenceWithErrors() {
         let expectedResult1 = BackgroundFetchUpdateResult(
             backgroundFetchResult: .noData,
-            newBackgroundFetchState: .loadAndSaveFilters,
-            oldBackgroundFetchState: .loadAndSaveFilters,
+            newBackgroundFetchState: .updateFinished,
+            oldBackgroundFetchState: .updateFinished,
             error: nil
         )
         let expectation = XCTestExpectation()
@@ -140,7 +140,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
         let expectedResult2 = BackgroundFetchUpdateResult(
             backgroundFetchResult: .newData,
             newBackgroundFetchState: .convertFilters,
-            oldBackgroundFetchState: .loadAndSaveFilters,
+            oldBackgroundFetchState: .updateFinished,
             error: nil
         )
         let expectation2 = XCTestExpectation()
@@ -267,7 +267,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
         let expectedResult1 = BackgroundFetchUpdateResult(
             backgroundFetchResult: .newData,
             newBackgroundFetchState: .convertFilters,
-            oldBackgroundFetchState: .loadAndSaveFilters,
+            oldBackgroundFetchState: .updateFinished,
             error: nil
         )
         let expectation = XCTestExpectation()
@@ -299,7 +299,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
         let expectedResult1 = BackgroundFetchUpdateResult(
             backgroundFetchResult: .newData,
             newBackgroundFetchState: .convertFilters,
-            oldBackgroundFetchState: .loadAndSaveFilters,
+            oldBackgroundFetchState: .updateFinished,
             error: nil
         )
         let expectation = XCTestExpectation()
@@ -351,7 +351,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
         let expectedResult1 = BackgroundFetchUpdateResult(
             backgroundFetchResult: .newData,
             newBackgroundFetchState: .convertFilters,
-            oldBackgroundFetchState: .loadAndSaveFilters,
+            oldBackgroundFetchState: .updateFinished,
             error: nil
         )
         let expectation = XCTestExpectation()
@@ -404,7 +404,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
         let expectedResult1 = BackgroundFetchUpdateResult(
             backgroundFetchResult: .newData,
             newBackgroundFetchState: .convertFilters,
-            oldBackgroundFetchState: .loadAndSaveFilters,
+            oldBackgroundFetchState: .updateFinished,
             error: nil
         )
         let expectation = XCTestExpectation()
@@ -476,6 +476,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
             error: nil
         )
         let expectation = XCTestExpectation()
+        userDefaults.storage.setValue(BackgroundFetchState.loadAndSaveFilters.rawValue, forKey: "AdGuardSDK.currentBackgroundFetchStateKey")
         dnsBackgroundFetchUpdater.updateFiltersInBackgroundError = CommonError.error(message: "")
         safariProtection.updateSafariProtectionInBackground { fetchResult in
             XCTAssertEqual(fetchResult, expectedResult1)
@@ -510,6 +511,7 @@ class SafariProtectionBackgroundFetchTest: XCTestCase {
         )
         let expectation = XCTestExpectation()
         filters.updateAllMetaResult = .error(MetaStorageMockError.error)
+        userDefaults.storage.setValue(BackgroundFetchState.loadAndSaveFilters.rawValue, forKey: "AdGuardSDK.currentBackgroundFetchStateKey")
         safariProtection.updateSafariProtectionInBackground { fetchResult in
             XCTAssertEqual(fetchResult, expectedResult1)
             XCTAssertNotNil(fetchResult.error)

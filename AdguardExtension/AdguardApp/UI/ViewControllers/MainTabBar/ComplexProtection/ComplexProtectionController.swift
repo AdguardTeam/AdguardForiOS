@@ -176,6 +176,7 @@ final class ComplexProtectionController: UITableViewController {
         let enabled = sender.isOn
         complexProtection.switchSafariProtection(state: enabled, for: self) { _ in }
         updateSafariProtectionInfo()
+        updateAdvancedProtectionInfo()
     }
 
     @IBAction func systemProtectionChanged(_ sender: UISwitch) {
@@ -219,6 +220,7 @@ final class ComplexProtectionController: UITableViewController {
             }
         }
         updateVpnInfo()
+        updateAdvancedProtectionInfo()
     }
 
     @IBAction func advancedProtectionChanged(_ sender: UISwitch) {
@@ -378,8 +380,10 @@ final class ComplexProtectionController: UITableViewController {
 
     private func updateAdvancedProtectionInfo() {
         let protectionEnabled = configuration.isAdvancedProtectionEnabled
-        advancedProtectionSwitch.isOn = protectionEnabled
-        advancedProtectionIcon.tintColor = protectionEnabled ? enabledColor : disabledColor
+        if advancedProtectionSwitch.isOn != protectionEnabled {
+            advancedProtectionSwitch.setOn(protectionEnabled, animated: true)
+            advancedProtectionIcon.tintColor = protectionEnabled ? enabledColor : disabledColor
+        }
     }
 
     private func updateAdGuardVpnStatus() {

@@ -18,46 +18,49 @@
 
 import SharedAdGuardSDK
 
-/*  Application user configuration */
+/// Application user configuration
 public protocol SafariProtectionConfigurationProtocol {
 
-    /* Shows if user has Premium app version */
+    /// Shows if user has Premium app version
     var proStatus: Bool { get }
 
-    /* State of the whole Safari protection. If it is false nothing will be filtered */
+    /// State of the whole Safari protection. If it is false nothing will be filtered
     var safariProtectionEnabled: Bool { get }
 
-    /* State of advanced protection. If it is true than there will be added extra rules for more precise safari blocking */
+    /// State of advanced protection. If it is true than there will be added extra rules for more precise safari blocking
     var advancedProtectionIsEnabled: Bool { get }
 
-    /* State of the list that is responsible for blocking rules. In UI it is called User rules */
+    /// State of the list that is responsible for blocking rules. In UI it is called User rules
     var blocklistIsEnabled: Bool { get }
 
-    /* State of the list that is responsible for the rules that cancel blocklist rules actions */
+    /// State of the list that is responsible for the rules that cancel blocklist rules actions
     var allowlistIsEnabled: Bool { get }
 
-    /* Allowlist rules can be inverted. That means that blocklist rules will work on all sites except the sites from the inverted allowlist  */
+    /// Allowlist rules can be inverted. That means that blocklist rules will work on all sites except the sites from the inverted allowlist
     var allowlistIsInverted: Bool { get }
 
-    /* Updates pro status in configuration and reloads content blockers */
+    /// Updates pro status in configuration and reloads content blockers
     func update(proStatus: Bool, onCbReloaded: ((_ error: Error?) -> Void)?)
 
-    /* Updates Safari protection state and reloads content blockers */
+    /// Updates Safari protection state and reloads content blockers
     func update(safariProtectionEnabled: Bool, onCbReloaded: ((_ error: Error?) -> Void)?)
 
-    /* Updates Advanced protection state and reloads content blockers */
+    /// Updates Advanced protection state
+    func update(advancedProtectionEnabled: Bool)
+
+    /// Updates Advanced protection state and reloads content blockers
     func update(advancedProtectionEnabled: Bool, onCbReloaded: ((_ error: Error?) -> Void)?)
 
-    /* Updates block list state and reloads content blockers */
+    /// Updates block list state and reloads content blockers
     func update(blocklistIsEnabled: Bool, onCbReloaded: ((_ error: Error?) -> Void)?)
 
-    /* Updates allow list state and reloads content blockers */
+    /// Updates allow list state and reloads content blockers
     func update(allowlistIsEnabled: Bool, onCbReloaded: ((_ error: Error?) -> Void)?)
 
-    /* Updates state of allowlist invertion and reloads content blockers */
+    /// Updates state of allowlist invertion and reloads content blockers
     func update(allowlistIsInverted: Bool, onCbReloaded: ((_ error: Error?) -> Void)?)
 
-    /* Update configuration with new one */
+    /// Update configuration with new one
     func updateConfig(with newConfig: SafariConfigurationProtocol)
 }
 
@@ -143,17 +146,20 @@ extension SafariProtection {
         }
     }
 
+    public func update(advancedProtectionEnabled: Bool) {
+        workingQueue.sync {
+            Logger.logInfo("(SafariProtection) - updateAdvancedProtection; Updating updateAdvancedProtection from=\(self.configuration.advancedBlockingIsEnabled) to=\(advancedProtectionEnabled)")
+            let result = updateInternal(advancedProtectionEnabled: advancedProtectionEnabled)
+            Logger.logInfo("(SafariProtection - updateAdvancedProtection; advancedProtection was updated = \(result)")
+        }
+    }
+
     public func update(advancedProtectionEnabled: Bool, onCbReloaded: ((Error?) -> Void)?) {
         workingQueue.sync {
             Logger.logInfo("(SafariProtection+Configuration) - updateAdvancedProtection; Updating updateAdvancedProtection from=\(self.configuration.advancedBlockingIsEnabled) to=\(advancedProtectionEnabled)")
 
             executeBlockAndReloadCbs {
-                if configuration.advancedBlockingIsEnabled != advancedProtectionEnabled {
-                    configuration.advancedBlockingIsEnabled = advancedProtectionEnabled
-                    return true
-                } else {
-                    return false
-                }
+                return updateInternal(advancedProtectionEnabled: advancedProtectionEnabled)
             } onCbReloaded: { [weak self] error in
                 guard let self = self else {
                     Logger.logError("(SafariProtection+Configuration) - update.advancedProtection.reloadContentBlockers; self is missing!")
@@ -259,6 +265,17 @@ extension SafariProtection {
         workingQueue.sync {
             Logger.logInfo("(SafariProtection+Configuration) - updateConfig;")
             configuration.updateConfig(with: newConfig)
+        }
+    }
+
+    // MARK: - Private methods
+
+    private func updateInternal(advancedProtectionEnabled: Bool) -> Bool {
+        if configuration.advancedBlockingIsEnabled != advancedProtectionEnabled {
+            configuration.advancedBlockingIsEnabled = advancedProtectionEnabled
+            return true
+        } else {
+            return false
         }
     }
 }
