@@ -62,6 +62,9 @@
     "popup_modal_advanced_blocking_disabled_description": {
         "message": "Advanced blocking rules and other extended features are not available."
     },
+    "popup_modal_read_more": {
+        "message": "Read more"
+    },
     "popup_modal_advanced_blocking_disabled_button": {
         "message": "Enable"
     },
