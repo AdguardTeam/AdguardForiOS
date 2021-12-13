@@ -7890,7 +7890,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = "/bin/sh -l";
-			shellScript = "set -e -x\n\nJS_SOURCES=\"${SRCROOT}/SafariWebExtension/extension\"\nRESOURCES=\"${SRCROOT}/SafariWebExtension/Resources\"\ncd \"${JS_SOURCES}\" && yarn install && yarn build && cp -r build/* \"${RESOURCES}\"\n";
+			shellScript = "set -e -x\n\nJS_SOURCES=\"${SRCROOT}/SafariWebExtension/extension\"\nRESOURCES=\"${SRCROOT}/SafariWebExtension/Resources\"\ncd \"${JS_SOURCES}\" && yarn install && ADG_PRO=1 yarn build && cp -r build/* \"${RESOURCES}\"\n";
 		};
 		4982C2F926D79F9500CACBBE /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
