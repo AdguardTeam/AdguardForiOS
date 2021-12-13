@@ -1,10 +1,11 @@
 import React from 'react';
+import { waitFor } from '@testing-library/react';
+
 import { render, screen } from '../../test-utils';
 
 import { Popup } from '../../../src/pages/popup/components/Popup';
 import { messenger } from '../../../src/pages/common/messenger';
 import { DeleteUserRules } from '../../../src/pages/popup/components/Actions/DeleteUserRules';
-import { waitFor } from '@testing-library/react';
 
 jest.mock('webextension-polyfill', () => {
     return {
