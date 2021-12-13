@@ -23,6 +23,7 @@ class UpsellViewController: UIViewController {
     @IBOutlet weak var installButton: UIButton!
 
     private var gradient: CAGradientLayer?
+    private let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +43,7 @@ class UpsellViewController: UIViewController {
     }
 
     @IBAction func installButtonTapped(_ sender: UIButton) {
-        UIApplication.openAdGuardVpnAppStorePage()
+        UIApplication.shared.openAdguardUrl(action: "adguard_vpn", from: "vpn_sale_screen", buildVersion: productInfo.buildVersion())
         dismiss(animated: true)
     }
 
