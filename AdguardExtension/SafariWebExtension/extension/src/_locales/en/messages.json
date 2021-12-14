@@ -51,7 +51,7 @@
         "message": "Selective protection"
     },
     "popup_modal_not_all_sites_allowed_desc": {
-        "message": "You enabled AdGuard only for this website. Ads may appear on other websites unless you give AdGuard more permissions."
+        "message": "You enabled AdGuard only for this website. Ads may appear on other websites unless you give AdGuard more permissions. <a>Read more</a>"
     },
     "popup_modal_not_all_sites_allowed_button": {
         "message": "Continue"
@@ -61,9 +61,6 @@
     },
     "popup_modal_advanced_blocking_disabled_description": {
         "message": "Advanced blocking rules and other extended features are not available."
-    },
-    "popup_modal_read_more": {
-        "message": "Read more"
     },
     "popup_modal_advanced_blocking_disabled_button": {
         "message": "Enable"

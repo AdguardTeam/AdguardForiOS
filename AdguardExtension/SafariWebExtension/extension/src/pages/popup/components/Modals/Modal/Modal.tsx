@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 import { Icon } from '../../ui/Icon';
 import { Button } from '../../Button';
@@ -7,7 +7,7 @@ import './modal.pcss';
 
 interface ModalProps {
     title?: string,
-    description?: string,
+    description?: string | ReactNode,
     close: () => void,
     children?: ReactElement,
 }

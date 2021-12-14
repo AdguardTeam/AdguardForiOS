@@ -2,9 +2,17 @@ import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 
 import { Modal } from '../Modal';
+import { WEB_EXTENSION_MORE_URL } from '../../../../common/constants';
+import { reactTranslator } from '../../../../common/translators/reactTranslator';
 import { translator } from '../../../../common/translators/translator';
 import { Button } from '../../Button';
 import { popupStore } from '../../../stores/PopupStore';
+
+const link = (text: string) => (
+    <a href={WEB_EXTENSION_MORE_URL} className="link">
+        {text}
+    </a>
+);
 
 const CONTENT_MAP = {
     allowed: {
@@ -15,7 +23,7 @@ const CONTENT_MAP = {
 
     notAllowed: {
         title: translator.getMessage('popup_modal_not_all_sites_allowed_title'),
-        desc: translator.getMessage('popup_modal_not_all_sites_allowed_desc'),
+        desc: reactTranslator.getMessage('popup_modal_not_all_sites_allowed_desc', { a: link }),
         button: translator.getMessage('popup_modal_not_all_sites_allowed_button'),
     },
 };
