@@ -19,6 +19,9 @@
 /* Alert title. On error. */
 "common_error_title" = "Hiba";
 
+/* Something went wrong title for unknown error */
+"something_went_wrong_title" = "Valami hiba történt";
+
 /* NO Button caption in alert */
 "common_action_no" = "NEM";
 
@@ -62,19 +65,19 @@
 "common_action_yes" = "Igen";
 
 /* (MainController) login status caption on main screen */
-"protection_enabled_caption" = "Védelem engedélyezve";
-
-/* (MainController) login status caption on main screen */
 "protection_partly_enabled_caption" = "Néhány tartalomblokkoló ki van kapcsolva";
-
-/* (MainController) login status caption on main screen */
-"protection_disabled_caption" = "Védelem le van tiltva";
 
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Előfizetés";
 
+/* (LicenseProductChoiceCell) restore purchase button title */
+"restore_purchase_button_title" = "Vásárlás visszaállítása";
+
+/* (FreeLicenseStateTableViewModel) title for permanent subscription */
+"permanent_subscription_title" = "Élethosszig";
+
 /* (GetProTableController) upgrade button title for lifetime license */
-"upgrade_lifetime_button_title" = "VÁSÁRLÁS";
+"upgrade_lifetime_button_title" = "Vásárlás";
 
 /* (LoginController) lost password button title */
 "lost_password" = "Elfelejtette a jelszót?";
@@ -172,9 +175,6 @@
 /* (MainController) Message on main screen during update - count of updated filters */
 "filters_updated_format" = "Szűrők frissítve %lu ";
 
-/* (FiltersController) Filter Version format */
-"filter_version_format" = "verzió %@";
-
 /* (DnsSettingController) split tunel mode description */
 "tunnel_mode_split_description" = "Split-Tunnel, kompatibilis a „Personal VPN” alkalmazással";
 
@@ -189,9 +189,6 @@
 
 /* (DnsSettingController) Native DNS implementation title */
 "native_dns_implementation_title" = "Natív";
-
-/* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
-"system_dns_server" = "Nincs titkosítás (rendszer DNS)";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "Engedélyezve  %1$d az összesből %2$d";
@@ -220,14 +217,8 @@
 /* login error message */
 "login_error_message" = "Hiba történt a kijelentkezés során";
 
-/* purchase secription format */
-"purchase_description_format" = "Az AdGuard előfizetésről:<br><br>• A fizetés az Ön iTunes-fiókjára kerül felszámolásra a vásárlás visszaigazolásakor.<br><br>• Az előfizetés automatikusan megújul, kivéve, ha az automatikus megújítást legalább 24 órával az aktuális időszak vége előtt kikapcsolják.<br><br>• Az előfizetés megújításának díját az aktuális időszak vége előtt 24 órán belül felszámítják.<br><br>Előfizetéseit az Tunes-fiókbeállításokban kezelheti, valamint az automatikus megújítását az előfizetés megvásárlását követően szintén itt tudja kikapcsolni.<br><br><a href=%2$@>Felhasználási feltételek</a> és <a href=%1$@>Adatvédelmi irányelvek</a>";
-
-/* lifetime purchase secription format */
-"lifetime_purchase_description_format" = "<a href=%2$@>Felhasználási feltételek</a> és <a href=%1$@>Adatvédelmi irányelvek</a>";
-
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
-"common_action_ok" = "OK";
+"common_action_ok" = "Ok";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "privacy_policy_action" = "Adatvédelmi Irányelvek";
@@ -316,17 +307,11 @@
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "Elérte a szűrőszabályok maximális számát.";
 
-/* (GetProController) title for permanent subscription */
-"permanent_subscription_title" = "Élethosszig";
+/* (FiltersController) Enabled state in groups section */
+"on_state" = "Bekapcsolva";
 
-/* (FiltersController) ON state in groups section */
-"on_state" = "BE";
-
-/* (FiltersController) OFF state in groups section */
-"off_state" = "KI";
-
-/* (NewCustomFilterDetailedController) homepage string */
-"homepage_title" = "Honlap:";
+/* (FiltersController) Disabled state in groups section */
+"off_state" = "Kikapcsolva";
 
 /* (FilterDetailsController) delete filter title */
 "delete_filter_title" = "Szűrő törlése";
@@ -393,6 +378,9 @@
 
 /* (ListOfRulesModel) title for export */
 "export" = "Exportálás";
+
+/* (UserRulesTableController) - title for editing user rules option  */
+"open_user_rules_editor" = "Szerkesztő megnyitása";
 
 /* (ListOfRulesModel) title for Clear button*/
 "common_clear" = "Törlés";
@@ -484,6 +472,9 @@
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "Új szabály hozzáadása";
 
+/* (OneSafariGroupFiltersModel) Add new filter title */
+"add_new_filter" = "Szűrő hozzáadás";
+
 /* confirm reset lert text */
 "confirm_reset_text" = "Minden beállítás, beleértve a felhasználói szabályokat, a DNS védelmet, a felületet és a hitelesítési beállításokat, vissza lesz állítva. Ez a művelet nem vonható vissza. Biztosan visszaállítja a beállításokat?";
 
@@ -526,21 +517,6 @@
 /*(NewCustomFilterDetailsController) add button title */
 "common_add" = "Hozzáadás";
 
-/*(TodayViewController) Protection is disabled title  */
-"protection_disabled" = "Védelem kikapcsolva";
-
-/*(TodayViewController) Protection is enabled title  */
-"protection_enabled" = "Védelem engedélyezve";
-
-/*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Safari DNS védelem";
-
-/*(TodayViewController) Safari protection is enabled text  */
-"safari_enabled" = "Safari tartalomblokkolás";
-
-/*(TodayViewController) All protection is disabled text  */
-"complex_disabled" = "Az összes védelmi modul ki van kapcsolva";
-
 /*(TodayViewController) DNS protection is enabled text  */
 "system_enabled" = "DNS védelem";
 
@@ -565,6 +541,9 @@
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_notification_title" = "Kapcsoljon ki néhány szűrőt az optimális működés érdekében";
 
+/* (DnsFiltersTableController) - DNS filters title */
+"dns_filters_title" = "DNS szűrők";
+
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Blokkolva";
 
@@ -579,30 +558,6 @@
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_whitelist" = "hozzáadva az engedélyezési listához";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_blacklist" = "hozzáadva a blokkolási listához";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "eltávolítva az engedélyezési listáról";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "eltávolítva a blokkolási listáról";
-
-/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "<b>Beállítások</b> megnyitása";
-
-/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "Érintse meg a <b>Safari</b> ikonját és válassza a <b>\"Tartalomblokkolók\"</b> menüpontot";
-
-/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Engedélyezze az összes tartalomblokkolót</b>, majd térjen vissza ebbe az appba!";
-
-/* (DnsProvidersController) default systen dns server name */
-"default_dns_server_name" = "Rendszer DNS";
-
-/* (DnsProvidersController) default systen dns server description */
-"default_dns_server_description" = "Alapértelmezett DNS szerver használata, amit az internetszolgáltató biztosít";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "Kérés blokkolása";
@@ -715,35 +670,8 @@
 /* (BugReportController) Message when bug report failed */
 "bug_report_failed_message" = "Nem sikerült a hibajelentés elküldése, kérjük, hogy próbálja később";
 
-/* (BugReportController) Message when leaving feedback failed */
-"feedback_failed_message" = "Nem sikerült a visszajelzés elküldése, kérjük, hogy próbálja később";
-
 /* (BugReportController) Message when bug report successed */
 "bug_report_successed_message" = "A hibajelentés sikeresen el lett küldve!";
-
-/* (BugReportController) Message when feedback leaving successed */
-"feedback_successed_message" = "A visszajelzés sikeresen el lett küldve!";
-
-/* (BugReportController) title for bug report */
-"bug_report_title" = "Hiba jelentése";
-
-/* (BugReportController) title for leaving feedback */
-"leave_feedback_title" = "Visszajelzés küldése";
-
-/* (BugReportController) description for bug report */
-"bug_report_description" = "Kérjük, hogy mellékelje a probléma leírását (egy frissítés után jelentkezett?), valamint információkat arról, hogy milyen egyéb szoftvereket használ (VPN/vírusirtó/kiegészítő)";
-
-/* (BugReportController) description for leaving feedback */
-"leave_feedback_description_format" = "Mondja el nekünk, mi a véleménye erről: %@ — mi az amit szeret, mi az, amit nem, illetve milyen új funkciókat szeretne";
-
-/* (BugReportController) button title for bug report */
-"bug_report_button_title" = "Jelentés küldése";
-
-/* (BugReportController) button title for leaving feedback */
-"leave_feedback_button_title" = "Visszajelzés küldése";
-
-/* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "A használat folytatásával Ön elfogadja a <br /><a href=%2$@>Felhasználási feltételeket</a> és az <a href=%1$@>Adatvédelmi irányelveket</a>";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Kérések";
@@ -787,17 +715,29 @@
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d kérés";
 
-/* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
-"native_dns_setup_title" = "Kérjük, engedélyezze a(z) %@ lehetőséget a DNS beállításokban";
-
-/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
-"native_dns_setup_description" = "A natív DNS engedélyezéséhez nyissa meg a <b>Rendszerbeállításokat</b>, menjen az <b>Általános > VPN & Hálózat > DNS</b> részhez, ott pedig válassza ki ezt: <b>%@</b>.";
-
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Mondja el, hogy elégedett-e a hirdetések eddigi blokkolásával";
 
 /* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
 "rate_app_problem_description" = "Győződjön meg arról, hogy <b>Safari böngészőt</b> használ.<br>Jelenleg a tartalomblokkolás technikailag lehetetlen más böngészőkben.<br>Folytassa a Safari védelmi beállításaival, és engedélyezze az összes szükséges szűrőlistát.<br>Indítsa újra a Safari alkalmazást: lépjen ki és nyissa meg újra.";
+
+/* (FilterDetailsViewController) Version subtitle for detailed filter info */
+"detailed_filter_info_version_subtitle" = "Verzió";
+
+/* (FilterDetailsViewController) Updated subtitle for detailed filter info */
+"detailed_filter_info_updated_subtitle" = "Frissítve";
+
+/* (FilterDetailsViewController) Rules count subtitle for detailed filter info */
+"detailed_filter_info_rules_count_subtitle" = "Szabályok száma";
+
+/* (FilterDetailsViewController) Website subtitle for detailed filter info */
+"detailed_filter_info_website_subtitle" = "Weboldal";
+
+/* (FilterDetailsViewController) Subscription URL subtitle for detailed filter info */
+"detailed_filter_info_subscription_subtitle" = "Feliratkozási URL";
+
+/* (PremiumFeature) - Custom filters premium feature name */
+"custom_filters_feature_name" = "Egyéni szűrők";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -842,6 +782,8 @@
 /* (MainPageController) saved data size for VoiceOver*/
 "elapsed_time_voiceover" = "DNS kérések átlagos feldolgozási ideje";
 
+/* (AGSearchView) Placeholder text for search bar */
+"search_view_placeholder" = "Keresés";
 
 // MARK: - SystemProtectionEnablerController
 /* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
@@ -933,3 +875,18 @@
 
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "A maximális számú eszközt csatlakoztatta a Setapp fiókjához.";
+
+/* (BackgroundFetchController) - Background app refresh every 1 hour title */
+"background_fetch_hour_period" = "Óránként";
+
+/* (DnsProvidersController) - add new dns server title */
+"add_custom_dns_server_title" = "Egyéni DNS szerver hozzáadása";
+
+/* (DnsProvidersController) - Header title */
+"dns_provider_controller_title" = "DNS szerver";
+
+/* (DnsProviderDetailsController) Server title */
+"server_title" = "Szerver";
+
+/* (DnsProviderDetailsController) Website title */
+"website_title" = "Weboldal";

@@ -10,8 +10,8 @@
 /* Class = "UILabel"; text = "Enable on this page"; ObjectID = "eVN-fj-ATQ"; */
 "eVN-fj-ATQ.text" = "Zapnúť na tejto stránke";
 
-/* Class = "UIButton"; normalTitle = "CLOSE"; ObjectID = "fxW-Cr-iPW"; */
-"fxW-Cr-iPW.normalTitle" = "UKONČIŤ";
+/* Class = "UIButton"; normalTitle = "Close"; ObjectID = "fxW-Cr-iPW"; */
+"fxW-Cr-iPW.normalTitle" = "Ukončiť";
 
 /* Class = "UILabel"; text = "Report an issue on this page"; ObjectID = "kuu-kI-Ott"; */
 "kuu-kI-Ott.text" = "Nahlásiť problém na tejto stránke";

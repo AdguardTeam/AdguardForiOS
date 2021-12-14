@@ -33,7 +33,7 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Начните с пробного периода на одну неделю</string>
+        <string>Начните c пробного периода на одну неделю</string>
         <key>few</key>
         <string>Начните c пробного периода на %d недели</string>
         <key>many</key>
@@ -53,13 +53,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Начните с пробного периода на один месяц </string>
+        <string>Начните c пробного периода на один месяц</string>
         <key>few</key>
-        <string>Начните с пробного периода на %d месяца </string>
+        <string>Начните c пробного периода на %d месяца</string>
         <key>many</key>
-        <string>Начните с пробного периода на %d месяцев </string>
+        <string>Начните c пробного периода на %d месяцев</string>
         <key>other</key>
-        <string>Начните с пробного периода на %d месяцев </string>
+        <string>Начните c пробного периода на %d месяцев</string>
       </dict>
     </dict>
     <key>trial_description_years</key>
@@ -73,13 +73,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Начните с пробного периода на один год </string>
+        <string>Начните c пробного периода на один год</string>
         <key>few</key>
-        <string>Начните с пробного периода на %d года </string>
+        <string>Начните c пробного периода на %d года</string>
         <key>many</key>
-        <string>Начните с пробного периода на %d лет </string>
+        <string>Начните c пробного периода на %d лет</string>
         <key>other</key>
-        <string>Начните с пробного периода на %d лет </string>
+        <string>Начните c пробного периода на %d лет</string>
       </dict>
     </dict>
     <key>user_rules_format</key>
@@ -200,86 +200,6 @@
         <string>Бесплатный полный доступ на %d лет</string>
         <key>other</key>
         <string>Бесплатный полный доступ на %d лет</string>
-      </dict>
-    </dict>
-    <key>trial_period_days</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@days@</string>
-      <key>days</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Один день</string>
-        <key>few</key>
-        <string>%d дня</string>
-        <key>many</key>
-        <string>%d дней</string>
-        <key>other</key>
-        <string>%d дней</string>
-      </dict>
-    </dict>
-    <key>trial_period_weeks</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@weeks@</string>
-      <key>weeks</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Одна неделя</string>
-        <key>few</key>
-        <string>%d недели</string>
-        <key>many</key>
-        <string>%d недель</string>
-        <key>other</key>
-        <string>%d недель</string>
-      </dict>
-    </dict>
-    <key>trial_period_months</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@months@</string>
-      <key>months</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Один месяц</string>
-        <key>few</key>
-        <string>%d месяца</string>
-        <key>many</key>
-        <string>%d месяцев</string>
-        <key>other</key>
-        <string>%d месяцев</string>
-      </dict>
-    </dict>
-    <key>trial_period_years</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@years@</string>
-      <key>years</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Один год</string>
-        <key>few</key>
-        <string>%d года</string>
-        <key>many</key>
-        <string>%d лет</string>
-        <key>other</key>
-        <string>%d лет</string>
       </dict>
     </dict>
   </dict>

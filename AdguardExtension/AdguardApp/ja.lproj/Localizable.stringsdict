@@ -13,7 +13,7 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>1日無料でお試しいただけます。</string>
+        <string>%d日無料でお試しいただけます。</string>
       </dict>
     </dict>
     <key>trial_description_weeks</key>
@@ -27,7 +27,7 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>1週間無料でお試しいただけます。</string>
+        <string>%d週間無料でお試しいただけます。</string>
       </dict>
     </dict>
     <key>trial_description_months</key>
@@ -41,7 +41,7 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>1ヶ月無料でお試しいただけます。</string>
+        <string>%dヶ月無料でお試しいただけます。</string>
       </dict>
     </dict>
     <key>trial_description_years</key>
@@ -55,7 +55,7 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>other</key>
-        <string>1年間無料でお試しいただけます。</string>
+        <string>%d年間無料でお試しいただけます。</string>
       </dict>
     </dict>
     <key>user_rules_format</key>
@@ -140,62 +140,6 @@
         <string>d</string>
         <key>other</key>
         <string>%d年間無料お試し</string>
-      </dict>
-    </dict>
-    <key>trial_period_days</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@days@</string>
-      <key>days</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>other</key>
-        <string>%d日間</string>
-      </dict>
-    </dict>
-    <key>trial_period_weeks</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@weeks@</string>
-      <key>weeks</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>other</key>
-        <string>%d週間</string>
-      </dict>
-    </dict>
-    <key>trial_period_months</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@months@</string>
-      <key>months</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>other</key>
-        <string>%dヵ月間</string>
-      </dict>
-    </dict>
-    <key>trial_period_years</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@years@</string>
-      <key>years</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>other</key>
-        <string>%d年間</string>
       </dict>
     </dict>
   </dict>

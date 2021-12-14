@@ -1,26 +1,29 @@
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "5eU-q4-Xed"; Note = "(AddRuleController) cancel button"; */
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "5eU-q4-Xed"; Note = "(AddRuleController) cancel button"; */
 "5eU-q4-Xed.normalTitle" = "キャンセル";
 
-/* Class = "UILabel"; text = "The rule has been added to the User rules"; ObjectID = "BfI-YN-iXe"; */
-"BfI-YN-iXe.text" = "ユーザールールにルール追加完了。";
-
-/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "Bvs-mI-vEr"; */
-"Bvs-mI-vEr.normalTitle" = "保存";
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "Bvs-mI-vEr"; */
+"Bvs-mI-vEr.normalTitle" = "保存する";
 
 /* Class = "UILabel"; text = "Edit"; ObjectID = "EH6-Zr-YRP"; */
 "EH6-Zr-YRP.text" = "編集";
 
-/* Class = "UIButton"; normalTitle = "Select"; ObjectID = "HFf-Yp-hjB"; */
-"HFf-Yp-hjB.normalTitle" = "選択する";
+/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "Tei-uI-6Gr"; */
+"Tei-uI-6Gr.normalTitle" = "削除する";
 
-/* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "Tei-uI-6Gr"; */
-"Tei-uI-6Gr.normalTitle" = "削除";
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "UGP-Xr-H1p"; */
+"UGP-Xr-H1p.normalTitle" = "キャンセル";
 
-/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "fCd-gA-rXS"; */
-"fCd-gA-rXS.normalTitle" = "追加";
+/* Class = "UIButton"; normalTitle = "Disable"; ObjectID = "VSR-Wf-7c8"; */
+"VSR-Wf-7c8.normalTitle" = "無効にする";
+
+/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "WEk-KB-xeG"; */
+"WEk-KB-xeG.normalTitle" = "削除";
+
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "fCd-gA-rXS"; */
+"fCd-gA-rXS.normalTitle" = "追加する";
+
+/* Class = "UIButton"; normalTitle = "Enable"; ObjectID = "gON-PA-nSb"; */
+"gON-PA-nSb.normalTitle" = "有効にする";
 
 /* Class = "UILabel"; text = "Domain:"; ObjectID = "x7r-Ln-XiZ"; */
 "x7r-Ln-XiZ.text" = "ドメイン：";
-
-/* Class = "UIButton"; normalTitle = "OK"; ObjectID = "zRm-I7-37E"; */
-"zRm-I7-37E.normalTitle" = "OK";

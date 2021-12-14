@@ -4,5 +4,5 @@
 /* Class = "UILabel"; text = "Import settings"; ObjectID = "fry-VW-ub3"; */
 "fry-VW-ub3.text" = "설정 가져오기";
 
-/* Class = "UIButton"; normalTitle = "OK"; ObjectID = "ktl-xf-pyK"; */
+/* Class = "UIButton"; normalTitle = "Ok"; ObjectID = "ktl-xf-pyK"; */
 "ktl-xf-pyK.normalTitle" = "확인";

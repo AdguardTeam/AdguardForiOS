@@ -16,8 +16,8 @@
 /* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
 "8jT-85-XFp.text" = "Inkompatibel mit anderen VPN-Apps; instabil";
 
-/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "95J-h1-QgG"; */
-"95J-h1-QgG.normalTitle" = "SPEICHERN";
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "95J-h1-QgG"; */
+"95J-h1-QgG.normalTitle" = "Speichern";
 
 /* Class = "UILabel"; text = "Delete VPN profile"; ObjectID = "9hH-ca-VHY"; */
 "9hH-ca-VHY.text" = "VPN-Profil entfernen";
@@ -34,8 +34,8 @@
 /* Class = "UILabel"; text = "Content blockers"; ObjectID = "BQY-q7-BQU"; */
 "BQY-q7-BQU.text" = "Inhaltsblocker";
 
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "Dfm-If-1AX"; Note = "(AddCustomFilterController) cancel button"; */
-"Dfm-If-1AX.normalTitle" = "ABBRECHEN";
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "Dfm-If-1AX"; Note = "(AddCustomFilterController) cancel button"; */
+"Dfm-If-1AX.normalTitle" = "Abbrechen";
 
 /* Class = "UILabel"; text = "Blocking mode"; ObjectID = "ESe-CM-On1"; */
 "ESe-CM-On1.text" = "Sperrmodus";
@@ -53,7 +53,7 @@
 "GFO-xu-Bir.text" = "AdGuard fügt weitere Details in die Protokolldatei ein. Aktivieren Sie diese Option nur, wenn Sie einen Fehler identifizieren müssen.";
 
 /* Class = "UILabel"; text = "Split-Tunnel"; ObjectID = "GGp-kp-YJI"; */
-"GGp-kp-YJI.text" = "Split-Tunnel";
+"GGp-kp-YJI.text" = "Getrennter Tunnel";
 
 /* Class = "UILabel"; text = "Enable this option if you experience issues with the Internet connection while AdGuard is running"; ObjectID = "H3Q-H6-YV0"; */
 "H3Q-H6-YV0.text" = "Aktivieren Sie diese Option, wenn während der Ausführung von AdGuard Probleme mit der Internetverbindung auftreten";
@@ -73,9 +73,6 @@
 /* Class = "UILabel"; text = "Block IPv6"; ObjectID = "NC2-8A-E6f"; */
 "NC2-8A-E6f.text" = "IPv6 sperren";
 
-/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain up to 50,000 rules"; ObjectID = "ObO-g4-VHL"; */
-"ObO-g4-VHL.text" = "Sie verwenden 6 Inhaltsblocker, wovon jeder bis zu 50.000 Regeln enthalten kann";
-
 /* Class = "UILabel"; text = "Advanced mode"; ObjectID = "Ory-8I-Ih0"; */
 "Ory-8I-Ih0.text" = "Erweiterter Modus";
 
@@ -94,7 +91,7 @@
 /* Class = "UITableViewSection"; headerTitle = "Theme"; ObjectID = "Vtx-vp-WIV"; */
 "Vtx-vp-WIV.headerTitle" = "Thema";
 
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "WUY-Cq-SPm"; Note = "(AddCustomFilterController) cancel button"; */
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "WUY-Cq-SPm"; Note = "(AddCustomFilterController) cancel button"; */
 "WUY-Cq-SPm.normalTitle" = "Abbrechen";
 
 /* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
@@ -134,16 +131,13 @@
 "gxl-pG-zh1.text" = "Kompatibel mit \"Personal VPN\"-Apps";
 
 /* Class = "UILabel"; text = "In the Split-Tunnel mode AdGuard is compatible with so-called “Personal VPN” apps. As a trade-off, in this mode it may be bypassed by system in case of bad connectivity."; ObjectID = "jmQ-ze-hFG"; */
-"jmQ-ze-hFG.text" = "Im Split-Tunnel-Modus ist AdGuard mit sogenannten „Personal VPN”-Anwendungen kompatibel. Bei schlechter Internet-Verbindung kann dieser Modus vom System umgangen werden.";
+"jmQ-ze-hFG.text" = "Im Modus „Getrenntes Tunneln” ist AdGuard mit sogenannten „Personal VPN”-Anwendungen kompatibel. Bei schlechter Internet-Verbindung kann dieser Modus vom System umgangen werden.";
 
 /* Class = "UILabel"; text = "Fallback servers"; ObjectID = "k0U-fn-m9X"; */
 "k0U-fn-m9X.text" = "Fallbacks";
 
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "Sonstiges";
-
-/* Class = "UILabel"; text = "Content blockers"; ObjectID = "nPj-OI-Pcb"; */
-"nPj-OI-Pcb.text" = "Inhaltsblocker";
 
 /* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
 "ocH-QT-NRZ.text" = "Hell";
@@ -160,7 +154,7 @@
 /* Class = "UILabel"; text = "Low-level settings"; ObjectID = "reQ-4X-84i"; */
 "reQ-4X-84i.text" = "Low-Level-Einstellungen";
 
-/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "sNF-Hy-NdB"; */
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "sNF-Hy-NdB"; */
 "sNF-Hy-NdB.normalTitle" = "Speichern";
 
 /* Class = "UILabel"; text = "Settings"; ObjectID = "sc6-Tw-xnL"; */

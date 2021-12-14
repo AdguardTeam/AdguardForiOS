@@ -1,26 +1,29 @@
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "5eU-q4-Xed"; Note = "(AddRuleController) cancel button"; */
-"5eU-q4-Xed.normalTitle" = "ANNULER";
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "5eU-q4-Xed"; Note = "(AddRuleController) cancel button"; */
+"5eU-q4-Xed.normalTitle" = "Annuler";
 
-/* Class = "UILabel"; text = "The rule has been added to the User rules"; ObjectID = "BfI-YN-iXe"; */
-"BfI-YN-iXe.text" = "La règle a été ajoutée aux règles d'utilisateur";
-
-/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "Bvs-mI-vEr"; */
-"Bvs-mI-vEr.normalTitle" = "SAUVEGARDER";
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "Bvs-mI-vEr"; */
+"Bvs-mI-vEr.normalTitle" = "Enregistrer";
 
 /* Class = "UILabel"; text = "Edit"; ObjectID = "EH6-Zr-YRP"; */
 "EH6-Zr-YRP.text" = "Éditer";
 
-/* Class = "UIButton"; normalTitle = "Select"; ObjectID = "HFf-Yp-hjB"; */
-"HFf-Yp-hjB.normalTitle" = "Sélectionner";
+/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "Tei-uI-6Gr"; */
+"Tei-uI-6Gr.normalTitle" = "Supprimer";
 
-/* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "Tei-uI-6Gr"; */
-"Tei-uI-6Gr.normalTitle" = "SUPPRIMER";
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "UGP-Xr-H1p"; */
+"UGP-Xr-H1p.normalTitle" = "Annuler";
 
-/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "fCd-gA-rXS"; */
-"fCd-gA-rXS.normalTitle" = "AJOUTER";
+/* Class = "UIButton"; normalTitle = "Disable"; ObjectID = "VSR-Wf-7c8"; */
+"VSR-Wf-7c8.normalTitle" = "Désactiver";
+
+/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "WEk-KB-xeG"; */
+"WEk-KB-xeG.normalTitle" = "Supprimer";
+
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "fCd-gA-rXS"; */
+"fCd-gA-rXS.normalTitle" = "Ajouter";
+
+/* Class = "UIButton"; normalTitle = "Enable"; ObjectID = "gON-PA-nSb"; */
+"gON-PA-nSb.normalTitle" = "Activer";
 
 /* Class = "UILabel"; text = "Domain:"; ObjectID = "x7r-Ln-XiZ"; */
-"x7r-Ln-XiZ.text" = "Domaine";
-
-/* Class = "UIButton"; normalTitle = "OK"; ObjectID = "zRm-I7-37E"; */
-"zRm-I7-37E.normalTitle" = "OK";
+"x7r-Ln-XiZ.text" = "Domaine :";

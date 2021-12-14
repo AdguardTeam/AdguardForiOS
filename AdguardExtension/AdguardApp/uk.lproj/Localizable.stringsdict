@@ -53,13 +53,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Почніть з одного місяця пробного періоду </string>
+        <string>Почніть з одного місяця пробного періоду</string>
         <key>few</key>
-        <string>Почніть з %d місяців пробного періоду </string>
+        <string>Почніть з %d місяців пробного періоду</string>
         <key>many</key>
-        <string>Почніть з %d місяців пробного періоду </string>
+        <string>Почніть з %d місяців пробного періоду</string>
         <key>other</key>
-        <string>Почніть з %d місяців пробного періоду </string>
+        <string>Почніть з %d місяців пробного періоду</string>
       </dict>
     </dict>
     <key>trial_description_years</key>
@@ -73,13 +73,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Почніть з одного року пробного періоду </string>
+        <string>Почніть з одного року пробного періоду</string>
         <key>few</key>
-        <string>Почніть з %d років пробного періоду </string>
+        <string>Почніть з %d років пробного періоду</string>
         <key>many</key>
-        <string>Почніть з %d років пробного періоду </string>
+        <string>Почніть з %d років пробного періоду</string>
         <key>other</key>
-        <string>Почніть з %d років пробного періоду </string>
+        <string>Почніть з %d років пробного періоду</string>
       </dict>
     </dict>
     <key>user_rules_format</key>
@@ -200,86 +200,6 @@
         <string>Безкоштовний повний доступ на %d років</string>
         <key>other</key>
         <string>Безкоштовний повний доступ на %d років</string>
-      </dict>
-    </dict>
-    <key>trial_period_days</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@days@</string>
-      <key>days</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Один день</string>
-        <key>few</key>
-        <string>%d дні</string>
-        <key>many</key>
-        <string>%d днів</string>
-        <key>other</key>
-        <string>%d днів</string>
-      </dict>
-    </dict>
-    <key>trial_period_weeks</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@weeks@</string>
-      <key>weeks</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Один тиждень</string>
-        <key>few</key>
-        <string>%d тижні</string>
-        <key>many</key>
-        <string>%d тижнів</string>
-        <key>other</key>
-        <string>%d тижнів</string>
-      </dict>
-    </dict>
-    <key>trial_period_months</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@months@</string>
-      <key>months</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Один місяць</string>
-        <key>few</key>
-        <string>%d місяці</string>
-        <key>many</key>
-        <string>%d місяців</string>
-        <key>other</key>
-        <string>%d місяців</string>
-      </dict>
-    </dict>
-    <key>trial_period_years</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@years@</string>
-      <key>years</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Один рік</string>
-        <key>few</key>
-        <string>%d роки</string>
-        <key>many</key>
-        <string>%d років</string>
-        <key>other</key>
-        <string>%d років</string>
       </dict>
     </dict>
   </dict>
