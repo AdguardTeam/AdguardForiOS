@@ -39,6 +39,7 @@ final class EditBlockRequestController: BottomAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
         domainNameTextField.delegate = self
+        domainNameTextField.onDeleBackwardDelegate = self
 
         titleLabel.text = (type == .addDomainToAllowList) ? String.localizedString("whitelist_request") : String.localizedString("block_request")
 
@@ -84,6 +85,13 @@ final class EditBlockRequestController: BottomAlertController {
 
         addButton.isEnabled = !updatedText.trimmingCharacters(in: .whitespaces).isEmpty
         return true
+    }
+}
+
+extension EditBlockRequestController: AGTextFieldOnDeleBackwardDelegate {
+    func didDeleteBackward(newText: String?) {
+        let text = newText ?? ""
+        addButton.isEnabled = !text.trimmingCharacters(in: .whitespaces).isEmpty
     }
 }
 
