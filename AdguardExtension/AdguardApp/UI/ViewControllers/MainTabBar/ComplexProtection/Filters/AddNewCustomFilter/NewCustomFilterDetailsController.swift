@@ -60,7 +60,7 @@ final class NewCustomFilterDetailsController: BottomAlertController {
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var newFilterTitle: ThemableLabel!
 
-    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var addButton: RoundRectButton!
     @IBOutlet weak var cancelButton: UIButton!
 
     @IBOutlet weak var homepageTopConstraint: NSLayoutConstraint!
@@ -83,6 +83,7 @@ final class NewCustomFilterDetailsController: BottomAlertController {
         updateTheme()
         addButton.makeTitleTextCapitalized()
         addButton.applyStandardGreenStyle()
+        addButton.setBackgroundColor()
         addButton.isEnabled = !(name.text ?? "").isEmpty
         cancelButton.makeTitleTextCapitalized()
         cancelButton.applyStandardOpaqueStyle()
