@@ -46,8 +46,8 @@
 /* Class = "UILabel"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "free";
 
-/* Class = "UIButton"; normalTitle = "Get AdGuard Premium"; ObjectID = "pv0-hE-9gb"; */
-"pv0-hE-9gb.normalTitle" = "Get AdGuard Premium";
+/* Class = "UIButton"; normalTitle = "Purchase license"; ObjectID = "pv0-hE-9gb"; */
+"pv0-hE-9gb.normalTitle" = "Purchase license";
 
 /* Class = "UILabel"; text = "Blocks stubborn ads including YouTube ads in Safari"; ObjectID = "rm0-Ip-riS"; */
 "rm0-Ip-riS.text" = "Blocks stubborn ads including YouTube ads in Safari";
