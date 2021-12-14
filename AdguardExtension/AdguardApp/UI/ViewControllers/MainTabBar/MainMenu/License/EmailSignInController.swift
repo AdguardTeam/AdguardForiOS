@@ -169,9 +169,8 @@ final class EmailSignInController: UIViewController, UITextFieldDelegate {
         let passwordText = passwordEdit.text ?? ""
         let passwordFieldIsEmpty = passwordText.trimmingCharacters(in: .whitespaces).isEmpty
         let loginFieldIsEmpty = loginText.trimmingCharacters(in: .whitespaces).isEmpty
-        let licenceKeyLength = 10
 
-        let isLicense = isLicenseKey(text: loginText) && passwordFieldIsEmpty && loginText.count >= licenceKeyLength
+        let isLicense = isLicenseKey(text: loginText) && passwordFieldIsEmpty
         let loginAndPassword = !loginFieldIsEmpty && !passwordFieldIsEmpty
         let enabled = isLicense ? true : loginAndPassword
 
