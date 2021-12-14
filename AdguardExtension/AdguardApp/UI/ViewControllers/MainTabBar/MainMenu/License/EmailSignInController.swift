@@ -149,12 +149,11 @@ final class EmailSignInController: UIViewController, UITextFieldDelegate {
 
         if textField == nameEdit {
             nameEdit.rightView?.isHidden = updatedText.isEmpty
-        }
-        nameEdit.borderState = .enabled
-
-        if textField == passwordEdit {
+        } else {
             passwordEdit.rightView?.isHidden = updatedText.isEmpty
         }
+
+        nameEdit.borderState = .enabled
         passwordEdit.borderState = .enabled
 
         errorLabel.text = ""
@@ -166,7 +165,17 @@ final class EmailSignInController: UIViewController, UITextFieldDelegate {
     // MARK: - private methods
 
     private func updateLoginButton() {
-        loginButton.isEnabled = nameEdit.text?.count ?? 0 > 0
+        let loginText = nameEdit.text ?? ""
+        let passwordText = passwordEdit.text ?? ""
+        let passwordFieldIsEmpty = passwordText.trimmingCharacters(in: .whitespaces).isEmpty
+        let loginFieldIsEmpty = loginText.trimmingCharacters(in: .whitespaces).isEmpty
+        let licenceKeyLength = 10
+
+        let isLicense = isLicenseKey(text: loginText) && passwordFieldIsEmpty && loginText.count >= licenceKeyLength
+        let loginAndPassword = !loginFieldIsEmpty && !passwordFieldIsEmpty
+        let enabled = isLicense ? true : loginAndPassword
+
+        loginButton.isEnabled = enabled
     }
 
     private func isLicenseKey(text: String)->Bool {

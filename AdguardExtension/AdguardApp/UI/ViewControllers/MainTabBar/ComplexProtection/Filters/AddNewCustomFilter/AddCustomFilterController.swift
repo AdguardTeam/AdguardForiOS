@@ -58,6 +58,7 @@ final class AddCustomFilterController: BottomAlertController {
 
         nextButton.applyStandardGreenStyle()
         cancelButton.applyStandardOpaqueStyle()
+        nextButton.setBackgroundColor()
 
         if openUrl != nil {
             urlTextField.text = openUrl

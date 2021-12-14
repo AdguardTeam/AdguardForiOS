@@ -62,6 +62,7 @@ final class Confirm2FaController : UIViewController, UITextFieldDelegate {
         setupBackButton()
         confirmButton.makeTitleTextCapitalized()
         confirmButton.applyStandardGreenStyle()
+        confirmButton.setBackgroundColor()
         confirmButton.isEnabled = false
     }
 

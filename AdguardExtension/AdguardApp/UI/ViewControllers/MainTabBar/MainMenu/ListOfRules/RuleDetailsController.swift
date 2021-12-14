@@ -43,7 +43,7 @@ final class RuleDetailsController: BottomAlertController, UITextViewDelegate {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var ruleTextView: UITextView!
     @IBOutlet weak var textUnderline: TextFieldIndicatorView!
-    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var saveButton: RoundRectButton!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet var themableLabels: [ThemableLabel]!
     @IBOutlet weak var domainOrRuleLabel: ThemableLabel!
@@ -79,6 +79,7 @@ final class RuleDetailsController: BottomAlertController, UITextViewDelegate {
         changeKeyboardReturnKeyTypeIfNeeded()
         saveButton.makeTitleTextCapitalized()
         saveButton.applyStandardGreenStyle()
+        saveButton.setBackgroundColor()
         deleteButton.makeTitleTextCapitalized()
         deleteButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.red)
 
