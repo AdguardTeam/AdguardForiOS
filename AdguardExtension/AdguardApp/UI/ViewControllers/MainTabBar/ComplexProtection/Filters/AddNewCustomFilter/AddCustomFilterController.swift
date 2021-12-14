@@ -52,6 +52,7 @@ final class AddCustomFilterController: BottomAlertController {
         super.viewDidLoad()
 
         urlTextField.delegate = self
+        urlTextField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
 
         nextButton.makeTitleTextCapitalized()
         cancelButton.makeTitleTextCapitalized()
@@ -179,6 +180,11 @@ final class AddCustomFilterController: BottomAlertController {
         case .dnsCustom:
             return dnsFilters.filters.contains { $0.subscriptionUrl.absoluteString == url }
         }
+    }
+
+    @objc private final func textFieldEditingChanged(_ sender: UITextField) {
+        let text = sender.text ?? ""
+        nextButton.isEnabled = !text.trimmingCharacters(in: .whitespaces).isEmpty
     }
 }
 

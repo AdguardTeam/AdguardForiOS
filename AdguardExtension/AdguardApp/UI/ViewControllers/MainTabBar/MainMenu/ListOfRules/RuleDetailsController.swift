@@ -144,6 +144,11 @@ final class RuleDetailsController: BottomAlertController, UITextViewDelegate {
         textUnderline.state = .disabled
     }
 
+    func textViewDidChange(_ textView: UITextView) {
+        let text = textView.text ?? ""
+        saveButton.isEnabled = !text.trimmingCharacters(in: .whitespaces).isEmpty
+    }
+
     // MARK: - private methods
 
     private func changeKeyboardReturnKeyTypeIfNeeded() {

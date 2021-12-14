@@ -18,11 +18,6 @@
 
 import UIKit
 
-protocol AGTextFieldOnDeleBackwardDelegate: AnyObject {
-    /// Called when remove button tapped on keyboard
-    func didDeleteBackward(newText: String?)
-}
-
 class AGTextField: UITextField {
 
     enum TextSecurityType {
@@ -51,8 +46,6 @@ class AGTextField: UITextField {
     }
 
     // MARK: - Properties
-
-    weak var onDeleBackwardDelegate: AGTextFieldOnDeleBackwardDelegate?
 
     var leftTextAreaOffset: CGFloat = 16.0 {
         didSet {
@@ -174,11 +167,6 @@ class AGTextField: UITextField {
         } else {
             return super.forwardingTarget(for: aSelector)
         }
-    }
-
-    override func deleteBackward() {
-        super.deleteBackward()
-        onDeleBackwardDelegate?.didDeleteBackward(newText: text)
     }
 
     // MARK: - Public methods

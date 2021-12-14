@@ -88,6 +88,9 @@ final class NewDnsServerController: BottomAlertController {
         nameField.delegate = self
         upstreamsField.delegate = self
 
+        nameField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
+        upstreamsField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
+
         if let openUpstream = openUpstream {
             // Native DNS implementation doesn't support port syntax
             upstreamsField.text = resources.dnsImplementation == .adGuard ? openUpstream : openUpstream.discardPortFromIpAddress()
@@ -362,6 +365,11 @@ final class NewDnsServerController: BottomAlertController {
         default:
             showUnknownErrorAlert()
         }
+    }
+
+    @objc private func textFieldEditingChanged(_ sender: UITextField) {
+        let interactionField: InteractionField = sender == nameField ? .nameField : .upstreamField
+        updateSaveButton(interactionWithField: interactionField, fieldText: sender.text ?? "")
     }
 }
 

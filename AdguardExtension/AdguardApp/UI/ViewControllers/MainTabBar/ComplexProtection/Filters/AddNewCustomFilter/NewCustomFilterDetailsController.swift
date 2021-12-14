@@ -71,6 +71,7 @@ final class NewCustomFilterDetailsController: BottomAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
         name.delegate = self
+        name.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
 
         if let newFilterModel = newFilterModel {
             setupAddingNewFilter(newFilterModel)
@@ -239,6 +240,11 @@ final class NewCustomFilterDetailsController: BottomAlertController {
         returnString.append(urlAttributedString)
 
         return returnString
+    }
+
+    @objc private final func textFieldEditingChanged(_ sender: UITextField) {
+        let text = sender.text ?? ""
+        addButton.isEnabled = !text.trimmingCharacters(in: .whitespaces).isEmpty
     }
 }
 

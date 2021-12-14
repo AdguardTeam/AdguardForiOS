@@ -74,6 +74,7 @@ final class EmailSignInController: UIViewController, UITextFieldDelegate {
         setupLostPasswordButton()
         passwordEdit.textFieldType = .secure
         nameEdit.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
+        passwordEdit.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
         updateLoginButton()
 
         notificationObserver = NotificationCenter.default.addObserver(forName: Notification.Name(PurchaseAssistant.kPurchaseServiceNotification),

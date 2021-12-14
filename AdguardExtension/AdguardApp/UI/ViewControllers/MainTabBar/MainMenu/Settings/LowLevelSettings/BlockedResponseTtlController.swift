@@ -41,6 +41,7 @@ final class BlockedResponseTtlController: BottomAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ttlTextField.delegate = self
+        ttlTextField.addTarget(self, action: #selector(textFieldEditingChanged), for: .editingChanged)
 
         ttlTextField.text = String(resources.blockedResponseTtlSecs)
         ttlTextField.keyboardType = .numberPad
@@ -89,6 +90,10 @@ final class BlockedResponseTtlController: BottomAlertController {
         let ttl = text ?? ""
         guard !ttl.isEmpty && Int(ttl) != nil else { saveButton.isEnabled = false; return }
         saveButton?.isEnabled = true
+    }
+
+    @objc private func textFieldEditingChanged(_ sender: UITextField) {
+        updateSaveButton(sender.text)
     }
 }
 

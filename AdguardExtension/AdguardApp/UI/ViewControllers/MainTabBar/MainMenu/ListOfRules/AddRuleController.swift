@@ -126,6 +126,11 @@ final class AddRuleController: BottomAlertController, UITextViewDelegate {
         textViewUnderline.state = .disabled
     }
 
+    func textViewDidChange(_ textView: UITextView) {
+        let text = textView.text ?? ""
+        addButton.isEnabled = !text.trimmingCharacters(in: .whitespaces).isEmpty
+    }
+
     // MARK: - private methods
 
     private func fillTextViewWithCurrentWiFiName() {
