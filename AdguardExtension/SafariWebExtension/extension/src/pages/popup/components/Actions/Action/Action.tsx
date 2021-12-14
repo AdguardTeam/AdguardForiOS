@@ -18,6 +18,7 @@ interface ActionProps {
     onClick?: () => void,
     children?: ReactElement,
     disable?: boolean,
+    iconEnabled?: boolean,
 }
 
 export const Action = ({
@@ -31,6 +32,7 @@ export const Action = ({
     onClick,
     children,
     disable,
+    iconEnabled = true,
 }: ActionProps) => {
     const actionClass = cn('action', disable && 'action--disable');
     const titleClass = cn('action__title', titleMod && `action__title--${titleMod}`);
@@ -43,12 +45,16 @@ export const Action = ({
         }
     };
 
+    const iconClassname = cn('icon', {
+        'icon--disable': !iconEnabled,
+    });
+
     let icon;
 
     if (iconDataUrl) {
-        icon = <img className="icon" src={iconDataUrl} alt="favicon" />;
+        icon = <img className={iconClassname} src={iconDataUrl} alt="favicon" />;
     } else {
-        icon = <Icon iconId={iconId} color={iconColor} />;
+        icon = <Icon className={iconClassname} iconId={iconId} color={iconColor} />;
     }
 
     return (

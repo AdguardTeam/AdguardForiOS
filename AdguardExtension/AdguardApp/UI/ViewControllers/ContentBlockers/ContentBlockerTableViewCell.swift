@@ -52,7 +52,7 @@ final class ContentBlockerTableViewCell: UITableViewCell, Reusable {
         let label = ThemableLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.greyText = false
+        label.lightGreyText = true
         label.font = UIFont.systemFont(ofSize: isIpadTrait ? 20.0 : 14.0, weight: .regular)
         label.textAlignment = .left
         return label
@@ -62,7 +62,7 @@ final class ContentBlockerTableViewCell: UITableViewCell, Reusable {
         let label = ThemableLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.greyText = false
+        label.lightGreyText = true
         label.font = UIFont.systemFont(ofSize: isIpadTrait ? 20.0 : 14.0, weight: .regular)
         label.textAlignment = .left
         return label

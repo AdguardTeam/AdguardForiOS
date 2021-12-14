@@ -100,7 +100,7 @@ final class SafariProtectionController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return section == 0 ? 32.0 : 0.1
+        return section == 1 ? 32.0 : 0.1
     }
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -115,7 +115,7 @@ final class SafariProtectionController: UITableViewController {
 
     @IBAction func protectionSwitchAction(_ sender: UISwitch) {
         let enabled = sender.isOn
-        safariProtectionStateLabel.text = enabled ? String.localizedString("on_state") : String.localizedString("off_state")
+        safariProtectionStateLabel.text = enabled.localizedStateDescription
 
         complexProtection.switchSafariProtection(state: enabled, for: self) { _ in }
     }
@@ -125,7 +125,7 @@ final class SafariProtectionController: UITableViewController {
     private func updateSafariProtectionInfo(){
         let protectionEnabled = complexProtection.safariProtectionEnabled
         protectionStateSwitch.isOn = protectionEnabled
-        safariProtectionStateLabel.text = protectionEnabled ? String.localizedString("on_state") : String.localizedString("off_state")
+        safariProtectionStateLabel.text = protectionEnabled.localizedStateDescription
 
         safariIcon.tintColor = protectionEnabled ? enabledColor : disabledColor
     }

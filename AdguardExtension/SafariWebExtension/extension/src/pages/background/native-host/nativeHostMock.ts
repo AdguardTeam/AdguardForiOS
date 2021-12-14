@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable no-console,class-methods-use-this */
 import { storage } from '../storage';
 import { APPEARANCE_THEME_DEFAULT, AppearanceTheme } from '../../common/constants';
 import { ActionLinks, NativeHostInterface } from './NativeHost';
@@ -27,7 +27,7 @@ class NativeHostMock implements NativeHostInterface {
         premiumApp: true,
         contentBlockersEnabled: true,
         hasUserRules: true,
-        advancedBlockingEnabled: false,
+        advancedBlockingEnabled: true,
     };
 
     links?: ActionLinks;
@@ -83,7 +83,7 @@ class NativeHostMock implements NativeHostInterface {
         return this.withSleep(state.premiumApp);
     };
 
-     togglePremium = async () => {
+    togglePremium = async () => {
         const state = await this.getState();
         await this.setState('premiumApp', !state.premiumApp);
     };
@@ -158,6 +158,7 @@ testcases.adguard.com,surge.sh#?##case28 > :is(.case28, #main, footer, span):con
         this.links = links;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async getInitData(url: string) {
         const state = await this.getState();
         return this.withSleep({
@@ -171,21 +172,27 @@ testcases.adguard.com,surge.sh#?##case28 > :is(.case28, #main, footer, span):con
             addToAllowlistLink: '',
             removeAllBlocklistRulesLink: '',
             removeFromAllowlistLink: '',
-        })
+        });
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     addToUserRules(ruleText: string): Promise<void> {
         throw new Error('Method not implemented.');
     }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     reportProblem(url: string): Promise<void> {
         throw new Error('Method not implemented.');
     }
+
     upgradeMe(): Promise<void> {
         throw new Error('Method not implemented.');
     }
+
     enableAdvancedBlocking(): Promise<void> {
         throw new Error('Method not implemented.');
     }
+
     shouldUpdateAdvancedRules(): Promise<boolean> {
         throw new Error('Method not implemented.');
     }

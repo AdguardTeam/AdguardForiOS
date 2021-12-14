@@ -54,6 +54,7 @@ final class UserRulesTableController: UIViewController {
         ExtendedTitleTableHeaderView(title: model.title, htmlDescription: model.description)
     }()
     private let searchHeader = AGSearchView()
+    private var stateHeaderView: StateHeaderView<Bool>?
 
     /* Services */
     private let themeService: ThemeServiceProtocol = ServiceLocator.shared.getService()!
@@ -292,6 +293,7 @@ final class UserRulesTableController: UIViewController {
         searchHeader.textField.returnKeyType = .search
         searchHeader.textField.borderState = .enabled
         searchHeader.textField.becomeFirstResponder()
+        tableView.layoutTableHeaderView()
         tableView.reloadWithSelectedRows()
     }
 
@@ -366,17 +368,29 @@ final class UserRulesTableController: UIViewController {
 extension UserRulesTableController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if model.isEditing || model.isSearching {
-            return nil
+            return UIView()
         }
         let isEnabled = model.isEnabled
         let model = StateHeaderViewModel(iconImage: model.icon, title: isEnabled.localizedStateDescription, isEnabled: isEnabled, id: isEnabled)
         let view =  StateHeaderView<Bool>(frame: .zero)
         view.config = IdentifiableViewConfig(model: model, delegate: self)
+        self.stateHeaderView = view
         return view
     }
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if model.isEditing || model.isSearching {
+            return 0.01
+        }
+        return UITableView.automaticDimension
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -515,6 +529,8 @@ extension UserRulesTableController: IdentifiableObjectDelegate {
             return
         }
         model.isEnabled = changedModel.isEnabled
+        let model = StateHeaderViewModel(iconImage: model.icon, title: model.isEnabled.localizedStateDescription, isEnabled: model.isEnabled, id: model.isEnabled)
+        self.stateHeaderView?.config.model = model
     }
 }
 

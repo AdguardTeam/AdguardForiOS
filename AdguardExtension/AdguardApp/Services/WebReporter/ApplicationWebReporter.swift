@@ -25,7 +25,7 @@ final class ApplicationWebReporter: WebReporterProtocol {
 
     private let safariFiltersWrapper: WebReporterWrapperProtocol
     private let dnsProtectionWrapper = WebReporterDnsProtectionWrapper()
-    private let reportUrl = "https://reports.adguard.com/new_issue.html" // TODO: - It should be TDS link
+    private let reportUrl = "https://reports.adguard.com/new_issue.html"
 
     // MARK: - Init
 
