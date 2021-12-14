@@ -106,6 +106,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
     private var topBottomInset: CGFloat { isIpadTrait ? 16.0 : 12.0 }
     private let switchWidth: CGFloat = 50.0
     private var tagHeight: CGFloat { isIpadTrait ? 22.0 : 16.0 }
+    private var tagsInset: CGFloat { isIpadTrait ? 10.0 : 6.0 }
     private var tagsStackViewWidth: CGFloat { lastFrame.width - (sideInset * 3) - switchWidth }
 
     // We use it to avoid changing constraints when frame didn't change
@@ -243,6 +244,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
 
             horStack.addArrangedSubview(button)
             currentStackWidth += width
+            currentStackWidth += tagsInset
         }
 
         addEmptyView(to: horStack, currentStackWidth: currentStackWidth)
@@ -267,7 +269,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         stackView.distribution = .fillProportionally
         stackView.alignment = .leading
         stackView.heightAnchor.constraint(equalToConstant: tagHeight).isActive = true
-        stackView.spacing = isIpadTrait ? 10.0 : 6.0
+        stackView.spacing = tagsInset
         return stackView
     }
 

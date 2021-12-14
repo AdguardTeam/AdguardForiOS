@@ -34,6 +34,7 @@ final class FilterDetailsTagsCell: UITableViewCell, Reusable {
     // UI elements constraints
     private var sideInset: CGFloat { isIpadTrait ? 24.0 : 16.0 }
     private var topBottomInset: CGFloat { isIpadTrait ? 16.0 : 12.0 }
+    private var tagsInset: CGFloat { isIpadTrait ? 10.0 : 6.0 }
     private var tagHeight: CGFloat { isIpadTrait ? 22.0 : 16.0 }
     private var tagsStackViewWidth: CGFloat { lastFrame.width - (sideInset * 2) }
 
@@ -111,6 +112,7 @@ final class FilterDetailsTagsCell: UITableViewCell, Reusable {
 
             horStack.addArrangedSubview(button)
             currentStackWidth += width
+            currentStackWidth += tagsInset
         }
 
         addEmptyView(to: horStack, currentStackWidth: currentStackWidth)
@@ -122,7 +124,7 @@ final class FilterDetailsTagsCell: UITableViewCell, Reusable {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.distribution = .fillProportionally
-        stackView.spacing = isIpadTrait ? 10.0 : 6.0
+        stackView.spacing = tagsInset
         stackView.alignment = .leading
         stackView.heightAnchor.constraint(equalToConstant: tagHeight).isActive = true
         return stackView
