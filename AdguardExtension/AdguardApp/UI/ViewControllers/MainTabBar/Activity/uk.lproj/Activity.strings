@@ -1,8 +1,8 @@
 /* Class = "UIButton"; normalTitle = "Switch mode"; ObjectID = "1A6-DD-78f"; */
 "1A6-DD-78f.normalTitle" = "Перемкнути режим";
 
-/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "1rj-wD-aeH"; */
-"1rj-wD-aeH.normalTitle" = "ДОДАТИ";
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "1rj-wD-aeH"; */
+"1rj-wD-aeH.normalTitle" = "Додати";
 
 /* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "4IJ-xy-hky"; */
 "4IJ-xy-hky.normalTitle" = "зашифровано";
@@ -10,11 +10,11 @@
 /* Class = "UILabel"; text = "Activity"; ObjectID = "5bV-zZ-4dr"; */
 "5bV-zZ-4dr.text" = "Активність";
 
-/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "6xN-ij-jJj"; */
-"6xN-ij-jJj.normalTitle" = "СПРОБУВАТИ";
+/* Class = "UIButton"; normalTitle = "Try for free"; ObjectID = "6xN-ij-jJj"; */
+"6xN-ij-jJj.normalTitle" = "Спробувати";
 
-/* Class = "UIButton"; normalTitle = "EDIT"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
-"7mk-7J-iLD.normalTitle" = "РЕДАГУВАТИ";
+/* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
+"7mk-7J-iLD.normalTitle" = "Редагувати";
 
 /* Class = "UILabel"; text = "Most active companies"; ObjectID = "Asq-k8-hi1"; */
 "Asq-k8-hi1.text" = "Найактивніші компанії";
@@ -37,8 +37,8 @@
 /* Class = "UILabel"; text = "DNS protection is disabled"; ObjectID = "X1F-2p-Xpe"; */
 "X1F-2p-Xpe.text" = "DNS-захист вимкнено";
 
-/* Class = "UIButton"; normalTitle = "ENABLE"; ObjectID = "XYE-JT-WSH"; */
-"XYE-JT-WSH.normalTitle" = "УВІМКНУТИ";
+/* Class = "UIButton"; normalTitle = "Enable"; ObjectID = "XYE-JT-WSH"; */
+"XYE-JT-WSH.normalTitle" = "Увімкнути";
 
 /* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "Xgg-jX-hwe"; */
 "Xgg-jX-hwe.normalTitle" = "Скопійовано";
@@ -64,8 +64,8 @@
 /* Class = "UILabel"; text = "Recent activity"; ObjectID = "hR9-Pm-Gq0"; */
 "hR9-Pm-Gq0.text" = "Нещодавня активність";
 
-/* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
-"hoI-YR-JcD.normalTitle" = "НАЗАД";
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
+"hoI-YR-JcD.normalTitle" = "Назад";
 
 /* Class = "UILabel"; text = "Recent activity"; ObjectID = "kX9-ZX-NOu"; */
 "kX9-ZX-NOu.text" = "Нещодавня активність";
@@ -73,8 +73,8 @@
 /* Class = "UILabel"; text = "Block request"; ObjectID = "kwZ-Kw-f1R"; */
 "kwZ-Kw-f1R.text" = "Блокувати запит";
 
-/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "l5B-oj-DnW"; */
-"l5B-oj-DnW.normalTitle" = "ДОДАТИ";
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "l5B-oj-DnW"; */
+"l5B-oj-DnW.normalTitle" = "Додати";
 
 /* Class = "UIButton"; normalTitle = "requests"; ObjectID = "lKJ-8V-GJi"; */
 "lKJ-8V-GJi.normalTitle" = "запитів";

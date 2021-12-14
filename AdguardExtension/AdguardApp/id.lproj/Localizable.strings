@@ -19,6 +19,9 @@
 /* Alert title. On error. */
 "common_error_title" = "Kesalahan";
 
+/* Something went wrong title for unknown error */
+"something_went_wrong_title" = "Something went wrong";
+
 /* NO Button caption in alert */
 "common_action_no" = "TIDAK";
 
@@ -53,22 +56,22 @@
 "user_filter_helper" = "Masukkan aturan kustom Anda di sini, pisahkan dengan jeda baris";
 
 /* YES Button caption in alert */
-"common_action_yes" = "YA";
-
-/* (MainController) login status caption on main screen */
-"protection_enabled_caption" = "Perlindungan diaktifkan";
+"common_action_yes" = "Ya";
 
 /* (MainController) login status caption on main screen */
 "protection_partly_enabled_caption" = "Beberapa pemblokir konten dinonaktifkan";
 
-/* (MainController) login status caption on main screen */
-"protection_disabled_caption" = "Perlindungan dinonaktifkan";
-
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Berlangganan";
 
+/* (LicenseProductChoiceCell) restore purchase button title */
+"restore_purchase_button_title" = "Pulihkan pembelian";
+
+/* (FreeLicenseStateTableViewModel) title for permanent subscription */
+"permanent_subscription_title" = "Permanen";
+
 /* (GetProTableController) upgrade button title for lifetime license */
-"upgrade_lifetime_button_title" = "BELI";
+"upgrade_lifetime_button_title" = "Pembelian";
 
 /* (LoginController) lost password button title */
 "lost_password" = "Kehilangan kata sandi?";
@@ -121,6 +124,9 @@
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Memperbarui...";
 
+/* (UserFilterController) add blocklist rule button title */
+"add_blacklist_rule_title" = "Tambah aturan baru";
+
 /* (UserFilterController) add wifi name placeholder */
 "add_wifi_name_placeholder" = "Nama Wi-Fi Anda";
 
@@ -145,9 +151,6 @@
 /* (MainController) Message on main screen during update - count of updated filters */
 "filters_updated_format" = "Filter diperbarui: %lu ";
 
-/* (FiltersController) Filter Version format */
-"filter_version_format" = "versi %@";
-
 /* (DnsSettingController) split tunel mode description */
 "tunnel_mode_split_description" = "Split-Tunnel, kompatibel dengan aplikasi \"VPN Personal\"";
 
@@ -157,8 +160,11 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (tanpa ikon VPN), tidak kompatibel dengan aplikasi VPN lain, kurang stabil";
 
-/* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
-"system_dns_server" = "Tanpa enkripsi (Sistem DNS)";
+/* (DnsSettingController) AdGuard DNS implementation title */
+"adguard_dns_implementation_title" = "AdGuard";
+
+/* (DnsSettingController) Native DNS implementation title */
+"native_dns_implementation_title" = "Asli";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "Diaktifkan %1$d dari %2$d";
@@ -184,14 +190,8 @@
 /* login error message */
 "login_error_message" = "Terjadi kesalahan saat masuk";
 
-/* purchase secription format */
-"purchase_description_format" = "Tentang Berlangganan AdGuard:<br><br>• Pembayaran akan dibebankan ke Akun iTunes Anda saat konfirmasi pembelian.<br>• Langganan akan secara otomatis diperpanjang kecuali perpanjangan otomatis dimatikan setidaknya 24 jam sebelum akhir periode berjalan.<br>• Biaya perpanjang langganan akan dibebankan dalam 24 jam sebelum akhir periode berjalan. Langganan Anda dapat dikelola dan perpanjangan otomatis Anda dapat dimatikan di Pengaturan Akun iTunes Anda setelah membeli langganan.<br><br><a href=%1$@>Kebijakan privasi</a><br><br><a href=%2$@>Ketentuan Penggunaan</a>";
-
-/* lifetime purchase secription format */
-"lifetime_purchase_description_format" = "<a href=%1$@>Kebijakan Privasi</a> <br><br><a href=%2$@>Ketentuan Penggunaan</a>";
-
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
-"common_action_ok" = "OK";
+"common_action_ok" = "Ok";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "privacy_policy_action" = "Kebijakan Privasi";
@@ -225,6 +225,9 @@
 
 /* (AdvancedSettingsController) Reset button title */
 "reset_title" = "Reset";
+
+/* (AdvancedSettingsController) Remove button title */
+"delete_title" = "Hapus";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Hapus profil VPN";
@@ -274,17 +277,11 @@
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "Anda telah melampaui jumlah maksimum aturan penyaringan.";
 
-/* (GetProController) title for permanent subscription */
-"permanent_subscription_title" = "Permanen";
+/* (FiltersController) Enabled state in groups section */
+"on_state" = "Aktif";
 
-/* (FiltersController) ON state in groups section */
-"on_state" = "HIDUP";
-
-/* (FiltersController) OFF state in groups section */
-"off_state" = "MATI";
-
-/* (NewCustomFilterDetailedController) homepage string */
-"homepage_title" = "Halaman utama:";
+/* (FiltersController) Disabled state in groups section */
+"off_state" = "Tidak diaktifkan";
 
 /* (FilterDetailsController) delete filter title */
 "delete_filter_title" = "Hapus filter";
@@ -351,6 +348,9 @@
 
 /* (ListOfRulesModel) title for export */
 "export" = "Ekspor";
+
+/* (UserRulesTableController) - title for editing user rules option  */
+"open_user_rules_editor" = "Buka editor";
 
 /* (ListOfRulesModel) title for Clear button*/
 "common_clear" = "Bersihkan";
@@ -442,6 +442,9 @@
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "Tambah aturan baru";
 
+/* (OneSafariGroupFiltersModel) Add new filter title */
+"add_new_filter" = "Tambah penyaring";
+
 /* confirm reset lert text */
 "confirm_reset_text" = "Semua pengaturan, termasuk aturan pengguna, perlindungan DNS, antarmuka dan otorisasi, akan diatur ulang. Operasi ini tidak dapat diurungkan. Setel ulang pengaturan?";
 
@@ -478,21 +481,6 @@
 /*(NewCustomFilterDetailsController) add button title */
 "common_add" = "Tambah";
 
-/*(TodayViewController) Protection is disabled title  */
-"protection_disabled" = "Perlindungan dimatikan";
-
-/*(TodayViewController) Protection is enabled title  */
-"protection_enabled" = "Perlindungan diaktifkan";
-
-/*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Perlindungan Safari dan DNS";
-
-/*(TodayViewController) Safari protection is enabled text  */
-"safari_enabled" = "Pemblokir konten Safari";
-
-/*(TodayViewController) All protection is disabled text  */
-"complex_disabled" = "Semua modul perlindungan dimatikan";
-
 /*(TodayViewController) DNS protection is enabled text  */
 "system_enabled" = "Proteksi DNS";
 
@@ -517,6 +505,9 @@
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_notification_title" = "Matikan beberapa filter agar bekerja dengan benar";
 
+/* (DnsFiltersTableController) - DNS filters title */
+"dns_filters_title" = "Filter DNS";
+
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Terblokir";
 
@@ -532,27 +523,6 @@
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_whitelist" = "tambah ke daftar Putih";
 
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_blacklist" = "tambah ke daftar Hitam";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "telah dihapus dari daftar Putih";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "buang dari daftar Diblok";
-
-/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "Buka <b>pengaturan</b>";
-
-/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "Ketuk <b>Safari</b> dan pilih item menu <b>\"Pemblokir konten\"</b>";
-
-/* (DnsProvidersController) default systen dns server name */
-"default_dns_server_name" = "Sistem DNS";
-
-/* (DnsProvidersController) default systen dns server description */
-"default_dns_server_description" = "Gunakan server DNS bawaan sistem yang disediakan oleh penyedia Internet Anda";
-
 /* (BlockRequestController) Block request title */
 "block_request" = "Permintaan blokir";
 
@@ -564,6 +534,21 @@
 
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Kamu memasuki upstream yang tidak valid";
+
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "Simpan dan pilih";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "Simpan";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "Batal";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "Hapus";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "Tambah server DNS buatan";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Daftar Hitam Sistem";
@@ -676,6 +661,24 @@
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d permintaan";
 
+/* (FilterDetailsViewController) Version subtitle for detailed filter info */
+"detailed_filter_info_version_subtitle" = "Versi";
+
+/* (FilterDetailsViewController) Updated subtitle for detailed filter info */
+"detailed_filter_info_updated_subtitle" = "Diperbarui";
+
+/* (FilterDetailsViewController) Rules count subtitle for detailed filter info */
+"detailed_filter_info_rules_count_subtitle" = "Jumlah Aturan";
+
+/* (FilterDetailsViewController) Website subtitle for detailed filter info */
+"detailed_filter_info_website_subtitle" = "Situs";
+
+/* (FilterDetailsViewController) Subscription URL subtitle for detailed filter info */
+"detailed_filter_info_subscription_subtitle" = "URL Berlangganan";
+
+/* (PremiumFeature) - Custom filters premium feature name */
+"custom_filters_feature_name" = "Kustom filter";
+
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
 /* (MainTabBarController) Main page tab for VoiceOver*/
@@ -719,6 +722,8 @@
 /* (MainPageController) saved data size for VoiceOver*/
 "elapsed_time_voiceover" = "Waktu rerata memproses permintaan DNS";
 
+/* (AGSearchView) Placeholder text for search bar */
+"search_view_placeholder" = "Cari";
 
 // MARK: - SystemProtectionEnablerController
 /* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
@@ -738,3 +743,36 @@
 
 /* (LoginController) Enter your password here title for VoiceOver*/
 "enter_password_voiceover" = "Masukkan sandi Anda disini";
+
+/* (ImportSettingsController) Unsuccessful */
+"import_unseccuessful" = "Gagal";
+
+/* (ImportSettingsController) add user rules title */
+"import_user_rules" = "Tambah Aturan Pengguna";
+
+/* (ImportSettingsController) add dns rules title */
+"import_dns_user_rules" = "Tambah Aturan DNS Pengguna";
+
+/* (UpstreamsController) Custom address description */
+"upstreams_custom_address_description" = "Alamat IP";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Penyaring";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "Filter DNS";
+
+/* (BackgroundFetchController) - Background app refresh every 1 hour title */
+"background_fetch_hour_period" = "Setiap jam";
+
+/* (DnsProvidersController) - add new dns server title */
+"add_custom_dns_server_title" = "Tambah server DNS buatan";
+
+/* (DnsProvidersController) - Header title */
+"dns_provider_controller_title" = "Server DNS";
+
+/* (DnsProviderDetailsController) Server title */
+"server_title" = "Server";
+
+/* (DnsProviderDetailsController) Website title */
+"website_title" = "Situs";

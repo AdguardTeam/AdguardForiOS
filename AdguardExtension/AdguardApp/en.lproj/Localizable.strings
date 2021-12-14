@@ -917,8 +917,8 @@
 "user_rule_exists_error" = "You're trying to add the rule which is already in the list";
 
 // MARK: - Strings for UserRulesRedirectController
-
 /* (UserRulesRedirectController) - Processing state title */
+
 "user_rules_processing_title" = "Processing...";
 
 /* (UserRulesRedirectController) - Processing state description */
@@ -937,8 +937,8 @@
 "user_rules_blocklist_rules_removed" = "has no more user rules";
 
 // MARK: - Strings for license screen
-
 /* (PremiumFeature) - Advanced protection premium feature name */
+
 "advanced_protection_feature_name" = "Advanced protection";
 
 /* (PremiumFeature) -  Security filters premium feature name */

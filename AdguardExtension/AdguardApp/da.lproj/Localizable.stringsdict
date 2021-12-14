@@ -13,9 +13,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Start med en gratis éndags prøveperiode</string>
+        <string>Abonnér, og få en gratis endags prøveperiode</string>
         <key>other</key>
-        <string>Start med en gratis %d-dages prøveperiode</string>
+        <string>Abonnér, og få en gratis %d-dags prøveperiode</string>
       </dict>
     </dict>
     <key>trial_description_weeks</key>
@@ -29,9 +29,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Start med en gratis énuges prøveperiode</string>
+        <string>Abonnér, og få en gratis %d-uges prøveperiode</string>
         <key>other</key>
-        <string>Start med en gratis %d-ugers prøveperiode</string>
+        <string>Abonnér, og få en gratis %d-ugers prøveperiode</string>
       </dict>
     </dict>
     <key>trial_description_months</key>
@@ -45,9 +45,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Start med en gratis énmåneds prøveperiode </string>
+        <string>Abonnér, og få en gratis %d-måneds prøveperiode</string>
         <key>other</key>
-        <string>Start med en gratis %d-måneders prøveperiode </string>
+        <string>Abonnér, og få en gratis %d-måneders prøveperiode</string>
       </dict>
     </dict>
     <key>trial_description_years</key>
@@ -61,9 +61,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Start med en gratis étårs prøveperiode </string>
+        <string>Abonnér, og få en gratis etårs prøveperiode</string>
         <key>other</key>
-        <string>Start med en gratis %d-års prøveperiode </string>
+        <string>Abonnér, og få en gratis %d-års prøveperiode</string>
       </dict>
     </dict>
     <key>user_rules_format</key>
@@ -160,70 +160,6 @@
         <string>Étårs gratis fuld adgang</string>
         <key>other</key>
         <string>%d-års gratis fuld adgang</string>
-      </dict>
-    </dict>
-    <key>trial_period_days</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@days@</string>
-      <key>days</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Éndags</string>
-        <key>other</key>
-        <string>%d-dages</string>
-      </dict>
-    </dict>
-    <key>trial_period_weeks</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@weeks@</string>
-      <key>weeks</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Énuges</string>
-        <key>other</key>
-        <string>%d-ugers</string>
-      </dict>
-    </dict>
-    <key>trial_period_months</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@months@</string>
-      <key>months</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Énmåneds</string>
-        <key>other</key>
-        <string>%d-måneders</string>
-      </dict>
-    </dict>
-    <key>trial_period_years</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@years@</string>
-      <key>years</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Étårs</string>
-        <key>other</key>
-        <string>%d-års</string>
       </dict>
     </dict>
   </dict>
