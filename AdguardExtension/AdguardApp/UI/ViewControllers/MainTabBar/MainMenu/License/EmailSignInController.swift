@@ -87,6 +87,7 @@ final class EmailSignInController: UIViewController, UITextFieldDelegate {
 
         loginButton.makeTitleTextCapitalized()
         loginButton.applyStandardGreenStyle()
+        loginButton.setBackgroundColor()
 
         nameEdit.accessibilityLabel = String.localizedString("enter_email_voiceover")
         passwordEdit.accessibilityLabel = String.localizedString("enter_password_voiceover")
@@ -157,6 +158,7 @@ final class EmailSignInController: UIViewController, UITextFieldDelegate {
         passwordEdit.borderState = .enabled
 
         errorLabel.text = ""
+        updateLoginButton()
 
         return true
     }
