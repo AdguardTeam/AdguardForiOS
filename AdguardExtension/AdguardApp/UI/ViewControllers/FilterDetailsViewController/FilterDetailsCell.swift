@@ -74,14 +74,14 @@ final class FilterDetailsCell: UITableViewCell, Reusable {
         contentView.addSubview(descriptionLabel)
 
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16.0),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16.0),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16.0),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: isIpadTrait ? 20.0 : 16.0),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: isIpadTrait ? 24.0 : 16.0),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: isIpadTrait ? -24.0 : -16.0),
 
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2.0),
-            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16.0),
-            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16.0),
-            descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16.0),
+            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: isIpadTrait ? 24.0 : 16.0),
+            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: isIpadTrait ? -24.0 : -16.0),
+            descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: isIpadTrait ? -20.0 : -16.0),
         ])
     }
 }
