@@ -27,7 +27,7 @@
         "message": "Delete all user rules for this website"
     },
     "popup_action_insufficient_permissions": {
-        "message": "Insufficient permissions <a>(learn more)</a>"
+        "message": "Limited permissions"
     },
     "popup_action_current_site_desc_starting": {
         "message": "turning on protection..."

@@ -1,18 +1,19 @@
-import React, { ReactNode, useContext } from 'react';
+import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
+import browser from 'webextension-polyfill';
 
 import { Action } from '../Action';
-import { reactTranslator } from '../../../../common/translators/reactTranslator';
 import { popupStore } from '../../../stores/PopupStore';
-
-// TODO find out the link
-const PERMISSIONS_LEARN_MORE_URL = 'https://kb.adguard.com';
+import { WEB_EXTENSION_MORE_URL } from '../../../../common/constants';
+import { translator } from '../../../../common/translators/translator';
+import { Icon } from '../../ui/Icon';
+import { Button } from '../../Button';
 
 export const Permissions = observer(() => {
     const store = useContext(popupStore);
 
-    const handleClick = () => {
-        console.log('insufficient permissions');
+    const handleClick = async () => {
+        await browser.tabs.create({ url: WEB_EXTENSION_MORE_URL });
     };
 
     if (store.allSitesAllowed) {
@@ -24,9 +25,11 @@ export const Permissions = observer(() => {
             iconId="info"
             iconColor="yellow"
             onClick={handleClick}
-            title={reactTranslator.getMessage('popup_action_insufficient_permissions', {
-                a: (chunks: ReactNode) => <a className="support__link" href={PERMISSIONS_LEARN_MORE_URL}>{chunks}</a>,
-            })}
-        />
+            title={translator.getMessage('popup_action_insufficient_permissions')}
+        >
+            <Button onClick={() => {}} classNames="actions__control">
+                <Icon color="gray400" iconId="faq" />
+            </Button>
+        </Action>
     );
 });
