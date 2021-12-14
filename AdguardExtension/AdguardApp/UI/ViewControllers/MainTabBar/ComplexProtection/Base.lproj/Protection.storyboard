@@ -814,8 +814,8 @@
                                                 </constraints>
                                                 <imageReference key="image" image="subscribed-icon"/>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Blocks stubborn ads, including YouTube ads in Safari" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZgQ-6Q-ytX" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                <rect key="frame" x="54" y="360.5" width="344" height="38.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Bypasses adblock detectors on websites" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZgQ-6Q-ytX" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                <rect key="frame" x="48" y="360" width="350" height="38.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -866,8 +866,8 @@
                                                 <rect key="frame" x="17" y="214.5" width="365" height="122"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Works even on websites that detect and circumvent regular ad blocking" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rm0-Ip-riS" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                <rect key="frame" x="54" y="423" width="344" height="38.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Blocks stubborn ads including YouTube ads in Safari" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rm0-Ip-riS" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                <rect key="frame" x="56" y="423" width="342" height="38.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -878,8 +878,8 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Requires additional access permissions and uses them strictly to block ads" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i0Z-fi-Rc0" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                <rect key="frame" x="54" y="485.5" width="344" height="38.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Requires system-level permissions and uses them only for ad blocking" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i0Z-fi-Rc0" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                <rect key="frame" x="56" y="567" width="342" height="38.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -911,7 +911,7 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <color key="tintColor" systemColor="systemBackgroundColor"/>
-                                                <state key="normal" title="Purchase license"/>
+                                                <state key="normal" title="Get AdGuard Premium"/>
                                                 <variation key="heightClass=regular-widthClass=regular">
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 </variation>
@@ -931,6 +931,30 @@
                                                     </constraint>
                                                 </constraints>
                                             </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dd9-mI-dwZ">
+                                                <rect key="frame" x="24" y="491" width="24" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="24" id="coh-O4-leW">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="32"/>
+                                                    </constraint>
+                                                    <constraint firstAttribute="height" constant="24" id="ufZ-A4-8QR">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="32"/>
+                                                    </constraint>
+                                                </constraints>
+                                                <imageReference key="image" image="logocheck"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Uses multi-level sophisticated filtering rules" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rr4-ic-Pg8" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
+                                                <rect key="frame" x="56" y="491" width="342" height="38.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                </variation>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -941,7 +965,11 @@
                                             <constraint firstItem="gpV-f6-CX5" firstAttribute="centerX" secondItem="cIW-ej-Mu3" secondAttribute="centerX" id="537-fO-hY8"/>
                                             <constraint firstAttribute="bottom" secondItem="pv0-hE-9gb" secondAttribute="bottom" constant="24" id="5bP-JB-KUd"/>
                                             <constraint firstItem="ZgQ-6Q-ytX" firstAttribute="trailing" secondItem="WNs-Mf-o2E" secondAttribute="trailing" id="7Qv-2Q-16l"/>
+                                            <constraint firstItem="rr4-ic-Pg8" firstAttribute="leading" secondItem="Dd9-mI-dwZ" secondAttribute="trailing" constant="8" id="A8X-yU-abF"/>
                                             <constraint firstItem="9wg-p1-Dh8" firstAttribute="trailing" secondItem="OxY-0X-J4W" secondAttribute="trailing" id="DZM-s1-6SI"/>
+                                            <constraint firstItem="rr4-ic-Pg8" firstAttribute="top" secondItem="rm0-Ip-riS" secondAttribute="bottom" constant="24" id="FxO-tx-x6g">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="32"/>
+                                            </constraint>
                                             <constraint firstItem="9wg-p1-Dh8" firstAttribute="leading" secondItem="OxY-0X-J4W" secondAttribute="leading" id="H3u-Fg-pSw"/>
                                             <constraint firstAttribute="trailing" secondItem="I6b-LU-Dw9" secondAttribute="trailing" constant="16" id="HkF-Im-HwA">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="24"/>
@@ -949,6 +977,7 @@
                                             <constraint firstItem="i0Z-fi-Rc0" firstAttribute="leading" secondItem="qpz-cD-SkB" secondAttribute="trailing" constant="8" id="IDr-yn-TDc">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="12"/>
                                             </constraint>
+                                            <constraint firstItem="Dd9-mI-dwZ" firstAttribute="top" secondItem="rr4-ic-Pg8" secondAttribute="top" id="Iu9-Co-BZu"/>
                                             <constraint firstItem="kfG-2o-Ru6" firstAttribute="centerY" secondItem="I6b-LU-Dw9" secondAttribute="centerY" id="JaZ-R1-ymF"/>
                                             <constraint firstAttribute="trailing" secondItem="OxY-0X-J4W" secondAttribute="trailing" constant="24" id="Kxf-Pd-SuX"/>
                                             <constraint firstAttribute="trailing" secondItem="ZgQ-6Q-ytX" secondAttribute="trailing" constant="16" id="Nib-M0-NAf"/>
@@ -977,25 +1006,27 @@
                                             </constraint>
                                             <constraint firstItem="qpz-cD-SkB" firstAttribute="leading" secondItem="XH8-Ky-Bjc" secondAttribute="leading" id="afn-5t-mxf"/>
                                             <constraint firstItem="WNs-Mf-o2E" firstAttribute="leading" secondItem="9wg-p1-Dh8" secondAttribute="leading" id="cGg-WX-2vN"/>
+                                            <constraint firstItem="i0Z-fi-Rc0" firstAttribute="top" secondItem="rr4-ic-Pg8" secondAttribute="bottom" constant="24" id="chC-uc-tSs">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="32"/>
+                                            </constraint>
                                             <constraint firstItem="pv0-hE-9gb" firstAttribute="leading" secondItem="cIW-ej-Mu3" secondAttribute="leading" constant="16" id="czR-g9-clg">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                             </constraint>
                                             <constraint firstItem="XH8-Ky-Bjc" firstAttribute="top" secondItem="rm0-Ip-riS" secondAttribute="top" id="dqM-P2-Acu"/>
+                                            <constraint firstItem="Dd9-mI-dwZ" firstAttribute="leading" secondItem="XH8-Ky-Bjc" secondAttribute="leading" id="e0F-R4-a9h"/>
                                             <constraint firstItem="OxY-0X-J4W" firstAttribute="leading" secondItem="cIW-ej-Mu3" secondAttribute="leading" constant="24" id="eEj-oe-50b"/>
                                             <constraint firstItem="ZgQ-6Q-ytX" firstAttribute="top" secondItem="WNs-Mf-o2E" secondAttribute="bottom" constant="36" id="eZ4-z4-y8Y">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="48"/>
                                             </constraint>
                                             <constraint firstItem="j5C-JI-DlO" firstAttribute="leading" secondItem="WNs-Mf-o2E" secondAttribute="leading" id="ev2-2N-siI"/>
                                             <constraint firstItem="WNs-Mf-o2E" firstAttribute="leading" secondItem="cIW-ej-Mu3" secondAttribute="leading" constant="16" id="ewe-XX-er8"/>
+                                            <constraint firstItem="rr4-ic-Pg8" firstAttribute="trailing" secondItem="rm0-Ip-riS" secondAttribute="trailing" id="fcw-Fd-BW3"/>
                                             <constraint firstItem="i0Z-fi-Rc0" firstAttribute="trailing" secondItem="rm0-Ip-riS" secondAttribute="trailing" id="fiM-io-LRa"/>
                                             <constraint firstItem="kfG-2o-Ru6" firstAttribute="leading" secondItem="lYn-no-nd2" secondAttribute="trailing" constant="16" id="gac-W9-fQX">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                             </constraint>
                                             <constraint firstItem="kfG-2o-Ru6" firstAttribute="leading" secondItem="cIW-ej-Mu3" secondAttribute="leading" constant="16" id="hnv-cM-d5r"/>
                                             <constraint firstItem="WNs-Mf-o2E" firstAttribute="trailing" secondItem="9wg-p1-Dh8" secondAttribute="trailing" id="i9j-7w-zT9"/>
-                                            <constraint firstItem="i0Z-fi-Rc0" firstAttribute="top" secondItem="rm0-Ip-riS" secondAttribute="bottom" constant="24" id="l9y-0T-s99">
-                                                <variation key="heightClass=regular-widthClass=regular" constant="32"/>
-                                            </constraint>
                                             <constraint firstItem="9wg-p1-Dh8" firstAttribute="centerX" secondItem="cIW-ej-Mu3" secondAttribute="centerX" id="mdr-5v-nJc"/>
                                             <constraint firstAttribute="trailing" secondItem="pv0-hE-9gb" secondAttribute="trailing" constant="16" id="n0r-8g-stu">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="24"/>
@@ -1090,6 +1121,7 @@
                         <outletCollection property="themableLabels" destination="rm0-Ip-riS" collectionClass="NSMutableArray" id="jaY-EG-LLi"/>
                         <outletCollection property="themableLabels" destination="i0Z-fi-Rc0" collectionClass="NSMutableArray" id="Ew0-5R-Mub"/>
                         <outletCollection property="themableLabels" destination="kfG-2o-Ru6" collectionClass="NSMutableArray" id="eZM-rg-yCj"/>
+                        <outletCollection property="themableLabels" destination="rr4-ic-Pg8" collectionClass="NSMutableArray" id="8ZK-7u-Tb6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fq3-UF-Sfo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

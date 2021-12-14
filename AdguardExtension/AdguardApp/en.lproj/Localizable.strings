@@ -263,7 +263,7 @@
 "login_error_message" = "An error occurred while logging in";
 
 /* purchase secription format */
-"purchase_description_format" = "AdGuard Subscription Terms<br><br>•Payment will be charged to your iTunes Account at confirmation of purchase.<br><br>• Subscription automatically renews unless auto-renew is turned off at least 24 hours before the end of the current period.<br><br>• The subscription renewal fee will be charged to your iTunes Account within 24 hours of the end of the current period.<br><br>• You can manage your subscription and turn off auto-renewal by going to your Account Settings after purchase.<br><br>AdGuard <a href=%2$@>EULA</a> and <a href=%1$@>Privacy policy</a>";
+"purchase_description_format" = "AdGuard Subscription Terms<br><br>• Payment will be charged to your iTunes Account at confirmation of purchase.<br><br>• Subscription automatically renews unless auto-renew is turned off at least 24 hours before the end of the current period.<br><br>• The subscription renewal fee will be charged to your iTunes Account within 24 hours of the end of the current period.<br><br>• You can manage your subscription and turn off auto-renewal by going to your Account Settings after purchase.<br><br>AdGuard <a href=%2$@>EULA</a> and <a href=%1$@>Privacy policy</a>";
 
 /* lifetime purchase secription format */
 "lifetime_purchase_description_format" = "AdGuard's <a href=%2$@>EULA</a> and <a href=%1$@>Privacy Policy</a>";
@@ -704,7 +704,7 @@
 "onboarding_first_step_text" = "Open <b>Settings</b>.";
 
 /* (OnboardingController) first step with advanced protection text*/
-"advanced_protection_onboarding_first_step_text" = "Tap <b>Settings</b>.";
+"advanced_protection_onboarding_first_step_text" = "Open <b>Settings</b>.";
 
 /* (OnboardingController) second step text */
 "onboarding_second_step_text" = "Tap <b>Safari</b>, swipe down, and tap <b>Content blockers</b>.";
@@ -719,7 +719,7 @@
 "advanced_protection_onboarding_third_step_text" = "Set all AdGuard toggles to <b>on</b>. You`re good to go!";
 
 /* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
-"onboarding_fours_step_text" = "For <b>Advanced</b> protection, open Safari, tap the <b>aA</b> icon on the left side of the URL field,<br><br> %@ <br><br>then tap Manage extensions and enable the <b>AdGuard</b> toggle.";
+"onboarding_fours_step_text" = "For <b>Advanced</b> protection, open Safari, tap the <b>aA</b> icon on the left side of the URL field,<br><br> %@ <br><br>then tap <b>Manage extensions</b> and enable the <b>AdGuard</b> toggle.";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "Block request";
@@ -951,16 +951,16 @@
 "custom_filters_feature_name" = "Custom filters";
 
 /* (PremiumFeature) - Advanced protection premium feature description */
-"advanced_protection_feature_description" = "Userscript support, blocking YouTube ads in Safari and much more";
+"advanced_protection_feature_description" = "Enhanced methods to block complex ads, such as YouTube ads in Safari";
 
 /* (PremiumFeature) - Security filters premium feature description */
-"security_filters_feature_description" = "Block phishing & malware";
+"security_filters_feature_description" = "Block phishing, malware, and suspicious content";
 
 /* (PremiumFeature) - DNS privacy premium feature description */
-"dns_privacy_feature_description" = "Control your private data";
+"dns_privacy_feature_description" = "Encrypt DNS requests locally and control your privacy";
 
 /* (PremiumFeature) - Custom filters premium feature description */
-"custom_filters_feature_description" = "Set your own rules";
+"custom_filters_feature_description" = "Use third-party filters, or create your own";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
