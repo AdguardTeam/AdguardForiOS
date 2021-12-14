@@ -919,6 +919,18 @@
                                                     <segue destination="J4w-JZ-q8A" kind="show" identifier="ShowLicenseSegueId" id="tqk-Tx-Td7"/>
                                                 </connections>
                                             </button>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subscribed-icon" translatesAutoresizingMaskIntoConstraints="NO" id="lYn-no-nd2">
+                                                <rect key="frame" x="16" y="171" width="24" height="24"/>
+                                                <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="24" id="TxG-Co-Asu">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="32"/>
+                                                    </constraint>
+                                                    <constraint firstAttribute="height" constant="24" id="VTO-yp-YBP">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="32"/>
+                                                    </constraint>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -928,9 +940,6 @@
                                             <constraint firstItem="OxY-0X-J4W" firstAttribute="top" secondItem="gpV-f6-CX5" secondAttribute="bottom" constant="12" id="4NS-8e-Ado"/>
                                             <constraint firstItem="gpV-f6-CX5" firstAttribute="centerX" secondItem="cIW-ej-Mu3" secondAttribute="centerX" id="537-fO-hY8"/>
                                             <constraint firstAttribute="bottom" secondItem="pv0-hE-9gb" secondAttribute="bottom" constant="24" id="5bP-JB-KUd"/>
-                                            <constraint firstItem="kfG-2o-Ru6" firstAttribute="leading" secondItem="cIW-ej-Mu3" secondAttribute="leading" constant="16" id="5l9-lc-Eff">
-                                                <variation key="heightClass=regular-widthClass=regular" constant="24"/>
-                                            </constraint>
                                             <constraint firstItem="ZgQ-6Q-ytX" firstAttribute="trailing" secondItem="WNs-Mf-o2E" secondAttribute="trailing" id="7Qv-2Q-16l"/>
                                             <constraint firstItem="9wg-p1-Dh8" firstAttribute="trailing" secondItem="OxY-0X-J4W" secondAttribute="trailing" id="DZM-s1-6SI"/>
                                             <constraint firstItem="9wg-p1-Dh8" firstAttribute="leading" secondItem="OxY-0X-J4W" secondAttribute="leading" id="H3u-Fg-pSw"/>
@@ -944,6 +953,7 @@
                                             <constraint firstAttribute="trailing" secondItem="OxY-0X-J4W" secondAttribute="trailing" constant="24" id="Kxf-Pd-SuX"/>
                                             <constraint firstAttribute="trailing" secondItem="ZgQ-6Q-ytX" secondAttribute="trailing" constant="16" id="Nib-M0-NAf"/>
                                             <constraint firstItem="9wg-p1-Dh8" firstAttribute="top" secondItem="OxY-0X-J4W" secondAttribute="bottom" constant="8" id="Pee-mG-AEh"/>
+                                            <constraint firstItem="lYn-no-nd2" firstAttribute="centerY" secondItem="kfG-2o-Ru6" secondAttribute="centerY" id="PpX-1B-bei"/>
                                             <constraint firstItem="I6b-LU-Dw9" firstAttribute="top" secondItem="9wg-p1-Dh8" secondAttribute="bottom" constant="24" id="SDX-FD-eoK">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="96"/>
                                             </constraint>
@@ -978,6 +988,9 @@
                                             <constraint firstItem="j5C-JI-DlO" firstAttribute="leading" secondItem="WNs-Mf-o2E" secondAttribute="leading" id="ev2-2N-siI"/>
                                             <constraint firstItem="WNs-Mf-o2E" firstAttribute="leading" secondItem="cIW-ej-Mu3" secondAttribute="leading" constant="16" id="ewe-XX-er8"/>
                                             <constraint firstItem="i0Z-fi-Rc0" firstAttribute="trailing" secondItem="rm0-Ip-riS" secondAttribute="trailing" id="fiM-io-LRa"/>
+                                            <constraint firstItem="kfG-2o-Ru6" firstAttribute="leading" secondItem="lYn-no-nd2" secondAttribute="trailing" constant="16" id="gac-W9-fQX">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                            </constraint>
                                             <constraint firstItem="kfG-2o-Ru6" firstAttribute="leading" secondItem="cIW-ej-Mu3" secondAttribute="leading" constant="16" id="hnv-cM-d5r"/>
                                             <constraint firstItem="WNs-Mf-o2E" firstAttribute="trailing" secondItem="9wg-p1-Dh8" secondAttribute="trailing" id="i9j-7w-zT9"/>
                                             <constraint firstItem="i0Z-fi-Rc0" firstAttribute="top" secondItem="rm0-Ip-riS" secondAttribute="bottom" constant="24" id="l9y-0T-s99">
@@ -993,6 +1006,9 @@
                                             </constraint>
                                             <constraint firstItem="9wg-p1-Dh8" firstAttribute="leading" secondItem="OxY-0X-J4W" secondAttribute="leading" id="pgt-Rs-t1y"/>
                                             <constraint firstItem="I6b-LU-Dw9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kfG-2o-Ru6" secondAttribute="trailing" constant="16" id="sqM-hy-ZLs"/>
+                                            <constraint firstItem="lYn-no-nd2" firstAttribute="leading" secondItem="cIW-ej-Mu3" secondAttribute="leading" constant="16" id="tWi-5R-9r2">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                            </constraint>
                                             <constraint firstItem="rm0-Ip-riS" firstAttribute="top" secondItem="ZgQ-6Q-ytX" secondAttribute="bottom" constant="24" id="uwy-Y5-jOd">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="32"/>
                                             </constraint>

@@ -97,15 +97,15 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sU7-pP-eTN" customClass="ThemableLabel" customModule="Adguard" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="22" width="0.0" height="0.0"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                    <rect key="frame" x="56" y="31.5" width="0.0" height="0.0"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="greyText" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <variation key="heightClass=regular-widthClass=regular">
-                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     </variation>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d2y-PM-g5Z">
@@ -114,18 +114,34 @@
                                                         <action selector="toggleEnableSwitch:" destination="So5-wP-aAQ" eventType="valueChanged" id="9D6-db-uIh"/>
                                                     </connections>
                                                 </switch>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_adguard" translatesAutoresizingMaskIntoConstraints="NO" id="Md0-F8-0Am">
+                                                    <rect key="frame" x="16" y="19.5" width="24" height="24"/>
+                                                    <color key="tintColor" red="0.4039215686" green="0.69803921570000005" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="24" id="Qvh-9t-pc2">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="32"/>
+                                                        </constraint>
+                                                        <constraint firstAttribute="height" constant="24" id="W3c-Ra-R8E">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="32"/>
+                                                        </constraint>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
+                                                <constraint firstItem="Md0-F8-0Am" firstAttribute="leading" secondItem="lCQ-zH-1w3" secondAttribute="leading" constant="16" id="41w-y9-BjW">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                                                </constraint>
                                                 <constraint firstAttribute="bottom" secondItem="d2y-PM-g5Z" secondAttribute="bottom" constant="16" id="LNN-XT-sbS">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                                 </constraint>
-                                                <constraint firstItem="sU7-pP-eTN" firstAttribute="leading" secondItem="lCQ-zH-1w3" secondAttribute="leading" constant="16" id="R0G-6K-OfB">
+                                                <constraint firstItem="sU7-pP-eTN" firstAttribute="leading" secondItem="Md0-F8-0Am" secondAttribute="trailing" constant="16" id="WoV-Fz-Upl">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
                                                 <constraint firstAttribute="trailing" secondItem="d2y-PM-g5Z" secondAttribute="trailing" constant="16" id="Yms-6l-zqk">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                                 </constraint>
+                                                <constraint firstItem="Md0-F8-0Am" firstAttribute="centerY" secondItem="lCQ-zH-1w3" secondAttribute="centerY" id="hca-fz-lmL"/>
                                                 <constraint firstItem="d2y-PM-g5Z" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sU7-pP-eTN" secondAttribute="trailing" constant="16" id="rXo-ho-bpj"/>
                                                 <constraint firstItem="d2y-PM-g5Z" firstAttribute="top" secondItem="lCQ-zH-1w3" secondAttribute="top" constant="16" id="ukO-WD-KUW">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="20"/>
