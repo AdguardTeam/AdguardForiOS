@@ -293,6 +293,7 @@ final class UserRulesTableController: UIViewController {
         searchHeader.textField.returnKeyType = .search
         searchHeader.textField.borderState = .enabled
         searchHeader.textField.becomeFirstResponder()
+        tableView.layoutTableHeaderView()
         tableView.reloadWithSelectedRows()
     }
 
