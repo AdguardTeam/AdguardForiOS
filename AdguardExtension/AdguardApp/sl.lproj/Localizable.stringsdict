@@ -13,7 +13,7 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Naročite se in si zagotovite si %d-dnevno brezplačno preizkusno obdobje</string>
+        <string>Naročite se in si zagotovite si 1-dnevno brezplačno preizkusno obdobje</string>
         <key>two</key>
         <string>Naročite se in si zagotovite %d-dnevno brezplačno preskusno obdobje</string>
         <key>few</key>
@@ -33,7 +33,7 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Naročite se in si zagotovite %d-tedensko brezplačno preizkusno obdobje</string>
+        <string>Naročite se in si zagotovite 1-tedensko brezplačno preizkusno obdobje</string>
         <key>two</key>
         <string>Naročite se in si zagotovite %d-tedensko brezplačno preizkusno obdobje</string>
         <key>few</key>
@@ -53,7 +53,7 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Naročite se in si zagotovite %d-mesečno brezplačno preskusno obdobje</string>
+        <string>Naročite se in si zagotovite 1-mesečno brezplačno preskusno obdobje</string>
         <key>two</key>
         <string>Naročite se in si zagotovite %d-mesečno brezplačno preskusno obdobje</string>
         <key>few</key>
@@ -73,7 +73,7 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Naročite se in si zagotovite %d-letno brezplačno preskusno obdobje</string>
+        <string>Naročite se in si zagotovite 1-letno brezplačno preskusno obdobje</string>
         <key>two</key>
         <string>Naročite se in si zagotovite %d-letno brezplačno preskusno obdobje</string>
         <key>few</key>

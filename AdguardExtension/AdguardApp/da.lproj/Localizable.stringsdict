@@ -29,7 +29,7 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Abonnér, og få en gratis %d-uges prøveperiode</string>
+        <string>Abonnér, og få en gratis 1-uges prøveperiode</string>
         <key>other</key>
         <string>Abonnér, og få en gratis %d-ugers prøveperiode</string>
       </dict>
@@ -45,7 +45,7 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Abonnér, og få en gratis %d-måneds prøveperiode</string>
+        <string>Abonnér, og få en gratis 1-måneds prøveperiode</string>
         <key>other</key>
         <string>Abonnér, og få en gratis %d-måneders prøveperiode</string>
       </dict>
