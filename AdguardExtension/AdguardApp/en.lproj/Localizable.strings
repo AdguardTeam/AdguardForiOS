@@ -1128,7 +1128,7 @@
 // MARK: - ActionExtensionMainController
 
 /* (ActionExtensionMainController) - ActionExtension info for iOS 15>= */
-"action_extension_obsolete_info" = "This AdGuard extension is out of date. Check the Extensions tab of the menu for an updated free AdGuard extension with improved UI and ad-blocking tools.";
+"action_extension_obsolete_info" = "This action extension is out of date. From iOS 15, you can use the newest AdGuard Web Safari extension. To enable it, open the aA menu, tap Manage Extensions and switch the AdGuard toggle to on.";
 
 /* (ActionExtensionMainController) - ActionExtension info for iOS 14<= */
 "action_extension_new_version_info" = "A new version of this extension is available for iOS 15. It has more capabilities and an improved UI. Remember to update!";
