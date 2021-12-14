@@ -34,8 +34,7 @@ final class FilterDetailsTagsCell: UITableViewCell, Reusable {
     // UI elements constraints
     private var sideInset: CGFloat { isIpadTrait ? 24.0 : 16.0 }
     private var topBottomInset: CGFloat { isIpadTrait ? 16.0 : 12.0 }
-    private var tagsInset: CGFloat { isIpadTrait ? 16.0 : 8.0 }
-    private var tagHeight: CGFloat { isIpadTrait ? 32.0 : 22.0 }
+    private var tagHeight: CGFloat { isIpadTrait ? 22.0 : 16.0 }
     private var tagsStackViewWidth: CGFloat { lastFrame.width - (sideInset * 2) }
 
     // We use it to avoid changing constraints when frame didn't change
@@ -69,15 +68,6 @@ final class FilterDetailsTagsCell: UITableViewCell, Reusable {
     }
 
     func updateTheme() {
-        tagsStackView.subviews.forEach { stackView in
-            if let stackView = stackView as? UIStackView {
-                stackView.subviews.forEach {
-                    if let tag = $0 as? SafariTagButton {
-                        tag.updateTheme(themeService)
-                    }
-                }
-            }
-        }
         themeService.setupTableCell(self)
     }
 
@@ -106,7 +96,7 @@ final class FilterDetailsTagsCell: UITableViewCell, Reusable {
 
         for tag in tagModels {
             let button = SafariTagButton(model: tag)
-            button.updateTheme(themeService)
+            button.setTitleColor(UIColor.AdGuardColor.lightGreen1, for: .normal)
             let width = button.frame.width
             button.translatesAutoresizingMaskIntoConstraints = false
             button.widthAnchor.constraint(equalToConstant: width).isActive = true
@@ -121,7 +111,6 @@ final class FilterDetailsTagsCell: UITableViewCell, Reusable {
 
             horStack.addArrangedSubview(button)
             currentStackWidth += width
-            currentStackWidth += tagsInset
         }
 
         addEmptyView(to: horStack, currentStackWidth: currentStackWidth)
@@ -133,7 +122,7 @@ final class FilterDetailsTagsCell: UITableViewCell, Reusable {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.distribution = .fillProportionally
-        stackView.spacing = tagsInset
+        stackView.spacing = isIpadTrait ? 10.0 : 6.0
         stackView.alignment = .leading
         stackView.heightAnchor.constraint(equalToConstant: tagHeight).isActive = true
         return stackView

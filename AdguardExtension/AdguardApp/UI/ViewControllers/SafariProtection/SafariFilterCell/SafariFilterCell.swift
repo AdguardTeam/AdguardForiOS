@@ -105,8 +105,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
     private var sideInset: CGFloat { isIpadTrait ? 24.0 : 16.0 }
     private var topBottomInset: CGFloat { isIpadTrait ? 16.0 : 12.0 }
     private let switchWidth: CGFloat = 50.0
-    private var tagsInset: CGFloat { isIpadTrait ? 16.0 : 8.0 }
-    private var tagHeight: CGFloat { isIpadTrait ? 32.0 : 22.0 }
+    private var tagHeight: CGFloat { isIpadTrait ? 22.0 : 16.0 }
     private var tagsStackViewWidth: CGFloat { lastFrame.width - (sideInset * 3) - switchWidth }
 
     // We use it to avoid changing constraints when frame didn't change
@@ -162,7 +161,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
 
             tagsStackView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
             tagsStackView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
-            tagsStackView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 8.0),
+            tagsStackView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 4.0),
             tagsStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -topBottomInset)
         ])
     }
@@ -228,7 +227,8 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         for tag in model.tags {
             let button = SafariTagButton(model: tag)
             button.addTarget(self, action: #selector(tagButtonTapped(_:)), for: .touchUpInside)
-            button.updateTheme(themeService)
+            button.setTitleColor(UIColor.AdGuardColor.lightGreen1, for: .normal)
+            button.setTitleColor(UIColor.AdGuardColor.lightGreen1.withAlphaComponent(0.3), for: .highlighted)
             let width = button.frame.width
             button.translatesAutoresizingMaskIntoConstraints = false
             button.widthAnchor.constraint(equalToConstant: width).isActive = true
@@ -243,7 +243,6 @@ final class SafariFilterCell: UITableViewCell, Reusable {
 
             horStack.addArrangedSubview(button)
             currentStackWidth += width
-            currentStackWidth += tagsInset
         }
 
         addEmptyView(to: horStack, currentStackWidth: currentStackWidth)
@@ -254,7 +253,7 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         let label = ThemableLabel()
         label.lightGreyText = true
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: isIpadTrait ? 24.0 : 16.0, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: isIpadTrait ? 18.0 : 12.0, weight: .regular)
         label.textAlignment = .left
         label.text = text
         themeService.setupLabel(label)
@@ -266,9 +265,9 @@ final class SafariFilterCell: UITableViewCell, Reusable {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.distribution = .fillProportionally
-        stackView.spacing = tagsInset
         stackView.alignment = .leading
         stackView.heightAnchor.constraint(equalToConstant: tagHeight).isActive = true
+        stackView.spacing = isIpadTrait ? 10.0 : 6.0
         return stackView
     }
 
