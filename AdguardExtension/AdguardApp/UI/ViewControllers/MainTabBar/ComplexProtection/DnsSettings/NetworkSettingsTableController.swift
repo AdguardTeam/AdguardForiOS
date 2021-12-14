@@ -131,23 +131,19 @@ final class NetworkSettingsTableController: UITableViewController, AddRuleContro
     // MARK: - UITableViewDelegate
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == exceptionsSection { return nil }
-        return UIView()
+        return section == exceptionsSection && !model.exceptions.isEmpty ? nil : UIView()
     }
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == exceptionsSection { return 0.0 }
-        return 0.01
+        return section == exceptionsSection && !model.exceptions.isEmpty ? 0.0 : 0.01
     }
 
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if section == addExceptionSection { return nil }
-        return UIView()
+        return section == addExceptionSection && !model.exceptions.isEmpty ? nil : UIView()
     }
 
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == addExceptionSection { return 0.0 }
-        return 0.01
+        return section == addExceptionSection && !model.exceptions.isEmpty ? 0.0 : 0.01
     }
 
     // MARK: - AddRuleControllerDelegate method
