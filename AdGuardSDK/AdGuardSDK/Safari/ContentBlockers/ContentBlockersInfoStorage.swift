@@ -24,9 +24,9 @@ import ContentBlockerConverter
 public enum ContentBlockerType: Int, CaseIterable, Codable {
     case general
     case privacy
+    case custom
     case socialWidgetsAndAnnoyances
     case other
-    case custom
     case security
 
     var affinity: Affinity {

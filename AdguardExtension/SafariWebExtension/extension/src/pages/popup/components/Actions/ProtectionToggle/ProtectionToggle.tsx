@@ -12,20 +12,20 @@ import { Icon } from '../../ui/Icon';
 export const ProtectionToggle = observer(() => {
     const store = useContext(popupStore);
 
-    const { protectionEnabled } = store;
-
     const toggleProtection = () => {
         store.toggleProtection();
     };
 
     let description = translator.getMessage('popup_action_safari_protection_description');
     let descriptionColor = 'gray';
+    let iconEnabled = true;
 
     let button;
 
     if (!store.contentBlockersEnabled) {
         description = translator.getMessage('popup_action_safari_protection_description_disabled');
         descriptionColor = 'yellow';
+        iconEnabled = false;
 
         const handleInfoTouch = () => {
             store.setProtectionModalVisibleState(true);
@@ -37,8 +37,10 @@ export const ProtectionToggle = observer(() => {
             </Button>
         );
     } else {
+        iconEnabled = store.protectionEnabled;
+
         button = <div className="actions__control">
-            <Switcher onChange={toggleProtection} enabled={protectionEnabled} />
+            <Switcher onChange={toggleProtection} enabled={store.protectionEnabled} />
         </div>
     }
 
@@ -51,6 +53,7 @@ export const ProtectionToggle = observer(() => {
                 titleMod="light"
                 description={description}
                 descriptionMod={descriptionColor}
+                iconEnabled={iconEnabled}
             >
                 {button}
             </Action>

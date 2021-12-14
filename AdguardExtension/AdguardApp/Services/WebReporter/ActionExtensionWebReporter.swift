@@ -25,7 +25,7 @@ final class ActionExtensionWebReporter: WebReporterProtocol {
 
     private let url: URL
     private let webReporterSafariFiltersWrapper: WebReporterWrapperProtocol
-    private let reportUrl = "https://reports.adguard.com/new_issue.html" // TODO: - It should be TDS link
+    private let reportUrl = "https://reports.adguard.com/new_issue.html"
 
     // MARK: - Init
 
