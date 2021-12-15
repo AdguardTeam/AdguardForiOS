@@ -3,6 +3,96 @@
         "message": "AdGuard"
     },
     "extension_description": {
-        "message": "AdGuard Safari Web Extension"
+        "message": "AdGuard Safari Επέκταση Ιστού"
+    },
+    "popup_action_safari_protection_title": {
+        "message": "Προστασία Safari"
+    },
+    "popup_action_safari_protection_description": {
+        "message": "για αυτόν τον ιστότοπο"
+    },
+    "popup_action_safari_protection_description_disabled": {
+        "message": "η προστασία είναι απενεργοποιημένη"
+    },
+    "popup_action_current_site_status_desc_enabled": {
+        "message": "η προστασία είναι ενεργοποιημένη"
+    },
+    "popup_action_current_site_status_desc_disabled": {
+        "message": "η προστασία είναι απενεργοποιημένη"
+    },
+    "popup_action_block_element": {
+        "message": "Αποκλεισμός στοιχείων σε αυτήν τη σελίδα"
+    },
+    "popup_action_delete_user_rules": {
+        "message": "Διαγραφή όλων των κανόνων χρήστη για αυτόν τον ιστότοπο"
+    },
+    "popup_action_current_site_desc_starting": {
+        "message": "ενεργοποίηση προστασίας..."
+    },
+    "popup_action_current_site_desc_allowlisted": {
+        "message": "προστέθηκε στη λίστα επιτρεπόμενων"
+    },
+    "popup_action_current_site_desc_basic_only": {
+        "message": "βασική προστασία μόνο"
+    },
+    "popup_modal_all_sites_allowed_title": {
+        "message": "Απεριόριστη προστασία"
+    },
+    "popup_modal_all_sites_allowed_desc": {
+        "message": "Καλή δουλειά! Το AdGuard θα αποκλείσει σχεδόν κάθε διαφήμιση και θα αντιμετωπίσει τις πιο δύσκολες προκλήσεις."
+    },
+    "popup_modal_all_sites_allowed_button": {
+        "message": "Συνέχεια"
+    },
+    "popup_modal_not_all_sites_allowed_title": {
+        "message": "Επιλεκτική προστασία"
+    },
+    "popup_modal_not_all_sites_allowed_desc": {
+        "message": "Ενεργοποιήσατε το AdGuard μόνο για αυτόν τον ιστότοπο. Οι διαφημίσεις ενδέχεται να εμφανίζονται σε άλλους ιστότοπους, εκτός εάν παρέχετε περισσότερα δικαιώματα στο AdGuard."
+    },
+    "popup_modal_not_all_sites_allowed_button": {
+        "message": "Συνέχεια"
+    },
+    "popup_modal_advanced_blocking_disabled_title": {
+        "message": "Η προηγμένη προστασία είναι απενεργοποιημένη"
+    },
+    "popup_modal_advanced_blocking_disabled_description": {
+        "message": "Τα σενάρια χρήστη και ο αποκλεισμός διαφημίσεων YouTube δεν είναι ενεργοποιημένα."
+    },
+    "popup_modal_advanced_blocking_disabled_button": {
+        "message": "Ενεργοποίηση"
+    },
+    "popup_modal_title_free": {
+        "message": "Αξιοποιήστε πλήρως τις δυνατότητές σας"
+    },
+    "popup_modal_desc_free": {
+        "message": "Σας λείπει ακόμα η προηγμένη προστασία που είναι διαθέσιμη στο AdGuard Premium. Ας αποκλείσουμε ακόμη περισσότερες διαφημίσεις όπως οι διαφημίσεις YouTube στο Safari;"
+    },
+    "popup_modal_btn_free": {
+        "message": "Αναβάθμιση"
+    },
+    "popup_fullscreen_support_title": {
+        "message": "Ε, χρειάζεστε βοήθεια;"
+    },
+    "popup_fullscreen_support_desc": {
+        "message": "Πάει κάτι στραβά? Μπορεί να έχουμε μια διόρθωση."
+    },
+    "popup_protection_disabled_support_desc": {
+        "message": "Ε, η προστασία για αυτόν τον ιστότοπο είναι Απενεργοποιημένη. Πάει κάτι στραβά? Μπορεί να έχουμε μια διόρθωση."
+    },
+    "popup_support_button_text": {
+        "message": "Αναφέρετε ένα πρόβλημα"
+    },
+    "modal_protection_off_title": {
+        "message": "Ενεργοποίηση AdGuard"
+    },
+    "modal_protection_off_settings": {
+        "message": "Άνοιγμα <b>Ρυθμίσεις<\/b>"
+    },
+    "modal_protection_off_extensions": {
+        "message": "Πατήστε <b>Safari<\/b>, σύρετε προς τα κάτω και πατήστε <b>Αποκλειστές περιεχομένου<\/b>"
+    },
+    "modal_protection_off_switch": {
+        "message": "<b>Ενεργοποίηση<\/b> όλες τις επεκτάσεις AdGuard"
     }
 }

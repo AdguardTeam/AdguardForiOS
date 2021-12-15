@@ -3,6 +3,96 @@
         "message": "AdGuard"
     },
     "extension_description": {
-        "message": "AdGuard Safari Web Extension"
+        "message": "AdGuard Safari Web拡張機能"
+    },
+    "popup_action_safari_protection_title": {
+        "message": "Safariでブロック"
+    },
+    "popup_action_safari_protection_description": {
+        "message": "このサイトでブロックする"
+    },
+    "popup_action_safari_protection_description_disabled": {
+        "message": "OFF"
+    },
+    "popup_action_current_site_status_desc_enabled": {
+        "message": "保護はオンです"
+    },
+    "popup_action_current_site_status_desc_disabled": {
+        "message": "保護はオフです"
+    },
+    "popup_action_block_element": {
+        "message": "このページで要素をブロック"
+    },
+    "popup_action_delete_user_rules": {
+        "message": "このページに対するユーザールールを全部削除する"
+    },
+    "popup_action_current_site_desc_starting": {
+        "message": "保護を開始中..."
+    },
+    "popup_action_current_site_desc_allowlisted": {
+        "message": "ホワイトリストに追加されています"
+    },
+    "popup_action_current_site_desc_basic_only": {
+        "message": "基本レベル保護のみ"
+    },
+    "popup_modal_all_sites_allowed_title": {
+        "message": "フル機能が有効になりました"
+    },
+    "popup_modal_all_sites_allowed_desc": {
+        "message": "これで、AdGuardはほぼすべての広告をブロックし、困難なケースにも対応します。"
+    },
+    "popup_modal_all_sites_allowed_button": {
+        "message": "次へ"
+    },
+    "popup_modal_not_all_sites_allowed_title": {
+        "message": "保護が一部無効になっています"
+    },
+    "popup_modal_not_all_sites_allowed_desc": {
+        "message": "お客様はこのサイトに対してのみAdGuardを有効にしています。AdGuardにさらなる許可を与えない限り、他のWebサイトで広告が表示される可能性があります。"
+    },
+    "popup_modal_not_all_sites_allowed_button": {
+        "message": "次へ"
+    },
+    "popup_modal_advanced_blocking_disabled_title": {
+        "message": "高度な保護機能はオフになっています"
+    },
+    "popup_modal_advanced_blocking_disabled_description": {
+        "message": "YouTube広告ブロックとユーザースクリプトは無効になっています。"
+    },
+    "popup_modal_advanced_blocking_disabled_button": {
+        "message": "オンにする"
+    },
+    "popup_modal_title_free": {
+        "message": "フル機能の効果を実感しよう"
+    },
+    "popup_modal_desc_free": {
+        "message": "AdGuardプレミアムのより強力な保護がまだオフになっております。SafariでのYouTube広告など、さらに多くの広告をブロックしませんか？"
+    },
+    "popup_modal_btn_free": {
+        "message": "アップグレード"
+    },
+    "popup_fullscreen_support_title": {
+        "message": "お困りの点ございますか？"
+    },
+    "popup_fullscreen_support_desc": {
+        "message": "不具合などがある場合、ご報告いただければ対応いたします。"
+    },
+    "popup_protection_disabled_support_desc": {
+        "message": "このサイトに対する保護はオフになっています。何か問題がある場合、ご報告いただければ対応いたします。"
+    },
+    "popup_support_button_text": {
+        "message": "問題を報告する"
+    },
+    "modal_protection_off_title": {
+        "message": "AdGuardを有効にする方法"
+    },
+    "modal_protection_off_settings": {
+        "message": "<b>設定<\/b>アプリを開き"
+    },
+    "modal_protection_off_extensions": {
+        "message": "「<b>Safari<\/b>」をタップし、下にスワイプして「<b>コンテンツブロッカー<\/b>」をタップ"
+    },
+    "modal_protection_off_switch": {
+        "message": "すべてのAdGuard拡張機能を<b>オン<\/b>にしてください。"
     }
 }
