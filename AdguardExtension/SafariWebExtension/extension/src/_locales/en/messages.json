@@ -24,10 +24,10 @@
         "message": "Block elements on this page"
     },
     "popup_action_delete_user_rules": {
-        "message": "Delete all user rules for this website"
+        "message": "Delete user rules for the site"
     },
     "popup_action_current_site_desc_starting": {
-        "message": "turning on protection..."
+        "message": "enabling protection..."
     },
     "popup_action_current_site_desc_allowlisted": {
         "message": "added to allowlist"
@@ -75,13 +75,13 @@
         "message": "Upgrade"
     },
     "popup_fullscreen_support_title": {
-        "message": "Uh-oh, do you need help?"
+        "message": "Do you need help?"
     },
     "popup_fullscreen_support_desc": {
         "message": "Is something wrong? We may have a fix."
     },
     "popup_protection_disabled_support_desc": {
-        "message": "Uh-oh, protection for this website is disabled. Is something wrong? We may have a fix."
+        "message": "Protection for this website is disabled. Is something wrong? We may have a fix."
     },
     "popup_support_button_text": {
         "message": "Report an issue"
