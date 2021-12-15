@@ -98,21 +98,21 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
     }
 
     func switchComplexProtection(state enabled: Bool, for VC: UIViewController?, completion: @escaping (_ safariError: Error?,_ systemError: Error?)->Void) {
-        let complexEnabled = resources.complexProtectionEnabled
-        let safariEnabled = resources.safariProtectionEnabled
-        let systemEnabled = resources.systemProtectionEnabled
-        let advancedProtectionEnabled = configuration.isAdvancedProtectionEnabled
+        let complexEnabledOld = resources.complexProtectionEnabled
+        let safariEnabledOld = resources.safariProtectionEnabled
+        let systemEnabledOld = resources.systemProtectionEnabled
+        let advancedProtectionEnabledOld = configuration.isAdvancedProtectionEnabled
         resources.complexProtectionEnabled = enabled
-        updateAdvancedProtection(withState: enabled)
 
-        DDLogInfo("(ComplexProtectionService) - complexProtection state: \(complexEnabled)")
-        DDLogInfo("(ComplexProtectionService) - safariEnabled state: \(safariEnabled)")
-        DDLogInfo("(ComplexProtectionService) - systemProtection state: \(systemEnabled)")
-        DDLogInfo("(ComplexProtectionService) - advancedProtection state: \(advancedProtectionEnabled)")
+        DDLogInfo("(ComplexProtectionService) - complexProtection state: \(complexEnabledOld)")
+        DDLogInfo("(ComplexProtectionService) - safariEnabled state: \(safariEnabledOld)")
+        DDLogInfo("(ComplexProtectionService) - systemProtection state: \(systemEnabledOld)")
+        DDLogInfo("(ComplexProtectionService) - advancedProtection state: \(advancedProtectionEnabledOld)")
         DDLogInfo("(ComplexProtectionService) - switchComplexProtection to state: \(enabled)")
 
-        if enabled && !safariEnabled && !systemEnabled {
+        if enabled && !safariEnabledOld && !systemEnabledOld {
             resources.safariProtectionEnabled = true
+            updateAdvancedProtection(withState: true)
             if resources.dnsImplementation == .adGuard {
                 resources.systemProtectionEnabled = proStatus
             }
@@ -131,15 +131,18 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
         // We can't control native DNS configuration, we can only check it's state
         let shouldUpdateSystemProtection = resources.dnsImplementation == .adGuard
 
+        let withReloadCB = resources.systemProtectionEnabled && !resources.safariProtectionEnabled
+        updateAdvancedProtection(withState: enabled, withReloadCB: withReloadCB)
+
         updateProtections(safari: true, system: shouldUpdateSystemProtection, vc: VC) { [weak self] (safariError, systemError) in
             guard let self = self else { return }
 
             if safariError != nil {
-                self.resources.safariProtectionEnabled = safariEnabled
+                self.resources.safariProtectionEnabled = safariEnabledOld
             }
 
             if systemError != nil {
-                self.resources.systemProtectionEnabled = systemEnabled
+                self.resources.systemProtectionEnabled = systemEnabledOld
             }
 
             completion(safariError, systemError)
@@ -270,7 +273,7 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
 
         if enabled && !resources.complexProtectionEnabled {
             resources.complexProtectionEnabled = true
-            updateAdvancedProtection(withState: true)
+            updateAdvancedProtection(withState: true, withReloadCB: true)
 
             if resources.safariProtectionEnabled {
                 resources.safariProtectionEnabled = false
@@ -279,7 +282,7 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
 
         if !enabled && !safariProtection.safariProtectionEnabled {
             self.resources.complexProtectionEnabled = false
-            updateAdvancedProtection(withState: false)
+            updateAdvancedProtection(withState: false, withReloadCB: true)
         }
 
         resources.systemProtectionEnabled = enabled
@@ -414,10 +417,14 @@ final class ComplexProtectionService: ComplexProtectionServiceProtocol{
     }
 #endif
 
-    private func updateAdvancedProtection(withState: Bool) {
-        guard #available(iOS 15.0, *) else { return }
-        DDLogInfo("(ComplexProtectionService) - updateAdvancedProtection; Updating advanced protection with state = \(withState)")
+    private func updateAdvancedProtection(withState: Bool, withReloadCB: Bool = false) {
+        guard #available(iOS 15.0, *), configuration.proStatus else { return }
+        DDLogInfo("(ComplexProtectionService) - updateAdvancedProtection; Updating advanced protection with new state = \(withState)")
         configuration.isAdvancedProtectionEnabled = withState
+        if withReloadCB {
+            safariProtection.update(advancedProtectionEnabled: withState, onCbReloaded: nil)
+            return
+        }
         safariProtection.update(advancedProtectionEnabled: withState)
     }
 }

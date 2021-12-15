@@ -232,7 +232,7 @@ final class ComplexProtectionController: UITableViewController {
         let newAdvancedProtectionState = sender.isOn
         configuration.isAdvancedProtectionEnabled = newAdvancedProtectionState
         safariProtection.update(advancedProtectionEnabled: newAdvancedProtectionState, onCbReloaded: nil)
-        updateAdvancedProtectionInfo()
+        updateAdvancedProtectionInfo(animated: false)
     }
 
     // MARK: - Table view delegates and dataSource methods
@@ -378,12 +378,10 @@ final class ComplexProtectionController: UITableViewController {
         }
     }
 
-    private func updateAdvancedProtectionInfo() {
+    private func updateAdvancedProtectionInfo(animated: Bool = true) {
         let protectionEnabled = configuration.isAdvancedProtectionEnabled
-        if advancedProtectionSwitch.isOn != protectionEnabled {
-            advancedProtectionSwitch.setOn(protectionEnabled, animated: true)
-            advancedProtectionIcon.tintColor = protectionEnabled ? enabledColor : disabledColor
-        }
+        advancedProtectionSwitch.setOn(protectionEnabled, animated: animated)
+        advancedProtectionIcon.tintColor = protectionEnabled ? enabledColor : disabledColor
     }
 
     private func updateAdGuardVpnStatus() {

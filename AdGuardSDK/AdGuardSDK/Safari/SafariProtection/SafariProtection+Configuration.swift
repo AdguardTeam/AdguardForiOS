@@ -148,9 +148,9 @@ extension SafariProtection {
 
     public func update(advancedProtectionEnabled: Bool) {
         workingQueue.sync {
-            Logger.logInfo("(SafariProtection) - updateAdvancedProtection; Updating updateAdvancedProtection from=\(self.configuration.advancedBlockingIsEnabled) to=\(advancedProtectionEnabled)")
+            Logger.logInfo("(SafariProtection+Configuration) - updateAdvancedProtection; Updating updateAdvancedProtection from=\(self.configuration.advancedBlockingIsEnabled) to=\(advancedProtectionEnabled)")
             let result = updateInternal(advancedProtectionEnabled: advancedProtectionEnabled)
-            Logger.logInfo("(SafariProtection - updateAdvancedProtection; advancedProtection was updated = \(result)")
+            Logger.logInfo("(SafariProtection+Configuration - updateAdvancedProtection; advancedProtection was updated = \(result)")
         }
     }
 
@@ -275,6 +275,7 @@ extension SafariProtection {
             configuration.advancedBlockingIsEnabled = advancedProtectionEnabled
             return true
         } else {
+            Logger.logInfo("(SafariProtection+Configuration) - updateInternalAdvancedProtection; Advanced protection hasn't been updated; reason - old value is equal to new value")
             return false
         }
     }

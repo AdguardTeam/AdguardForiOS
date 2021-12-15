@@ -53,7 +53,7 @@ final class ConfigurationService: ConfigurationServiceProtocol {
 
                 let enableAdvancedProtection = self.proStatus && self.resources.complexProtectionEnabled
                 self.safariProtection.update(advancedProtectionEnabled: enableAdvancedProtection)
-                self.resources.advancedProtection = enableAdvancedProtection
+                self.isAdvancedProtectionEnabled = enableAdvancedProtection
                 self.proStatusChanged()
             }
         }
