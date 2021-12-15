@@ -372,10 +372,13 @@ final class DnsRequestDetailsController: UITableViewController {
             generalSectionModel[timeCell!.row] = timeModel
         }
 
+        // TODO: - Server model is empty now, but it should contain readable DNS server (e.g AdGuard DNS)
+        // It was not working in v4.2, so we've decided to leave it empty in v4.3 till v4.4
+
         // Server model
-        let server = model.logRecord.event.upstream?.upstream
+        let server = ""
         let serverTitle = String.localizedString("server_title")
-        let serverModelIsNil = server?.isEmpty ?? true
+        let serverModelIsNil = server.isEmpty
         let serverModel = serverModelIsNil ? nil : LogCellModel(copiedString: server, title: serverTitle, info: server, theme: theme)
         if !serverModelIsNil {
             generalSection = generalSectionToAssign
