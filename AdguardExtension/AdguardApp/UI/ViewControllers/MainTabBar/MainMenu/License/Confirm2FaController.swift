@@ -47,6 +47,7 @@ final class Confirm2FaController : UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         codeTextField.delegate = self
+        codeTextField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
         fromOnboarding = self.tabBarController == nil
 
         purchaseObserver = NotificationCenter.default.observe(
@@ -62,6 +63,7 @@ final class Confirm2FaController : UIViewController, UITextFieldDelegate {
         setupBackButton()
         confirmButton.makeTitleTextCapitalized()
         confirmButton.applyStandardGreenStyle()
+        confirmButton.setBackgroundColor()
         confirmButton.isEnabled = false
     }
 
@@ -183,6 +185,11 @@ final class Confirm2FaController : UIViewController, UITextFieldDelegate {
         else {
             errorLabel.text = ""
         }
+    }
+
+    @objc private final func textFieldEditingChanged(_ sender: UITextField) {
+        let text = sender.text ?? ""
+        confirmButton.isEnabled = !text.trimmingCharacters(in: .whitespaces).isEmpty
     }
 }
 

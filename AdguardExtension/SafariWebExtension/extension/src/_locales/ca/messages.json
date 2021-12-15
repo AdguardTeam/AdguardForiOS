@@ -1,4 +1,13 @@
 {
+    "popup_action_safari_protection_title": {
+        "message": "Protecció de Safari"
+    },
+    "popup_support_button_text": {
+        "message": "Informar d’un problema"
+    },
+    "modal_protection_off_title": {
+        "message": "Habilita AdGuard"
+    },
     "extension_name": {
         "message": "AdGuard"
     },

@@ -2,8 +2,23 @@
     "extension_name": {
         "message": "AdGuard"
     },
+    "popup_modal_all_sites_allowed_button": {
+        "message": "Fortsätt"
+    },
+    "popup_modal_not_all_sites_allowed_button": {
+        "message": "Fortsätt"
+    },
+    "popup_modal_advanced_blocking_disabled_button": {
+        "message": "Aktivera"
+    },
     "popup_modal_btn_free": {
         "message": "Uppgradera"
+    },
+    "popup_support_button_text": {
+        "message": "Rapportera ett problem"
+    },
+    "modal_protection_off_title": {
+        "message": "Koppa på AdGuard."
     },
     "modal_protection_off_settings": {
         "message": "Öppna <b>Inställningar<\/b>"

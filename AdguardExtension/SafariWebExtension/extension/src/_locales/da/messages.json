@@ -12,13 +12,13 @@
         "message": "til dette websted"
     },
     "popup_action_safari_protection_description_disabled": {
-        "message": "deaktiveret"
+        "message": "beskyttelse er Fra"
     },
     "popup_action_current_site_status_desc_enabled": {
         "message": "beskyttelse er TIL"
     },
     "popup_action_current_site_status_desc_disabled": {
-        "message": "beskyttelse deaktiveret"
+        "message": "beskyttelse er Fra"
     },
     "popup_action_block_element": {
         "message": "Blokér elementer på denne side"
@@ -27,7 +27,7 @@
         "message": "Slet alle brugerregler for dette websted"
     },
     "popup_action_current_site_desc_starting": {
-        "message": "aktiverer beskyttelse"
+        "message": "slår beskyttelse til..."
     },
     "popup_action_current_site_desc_allowlisted": {
         "message": "føjet til hvidliste"
@@ -42,19 +42,28 @@
         "message": "Godt gået! AdGuard vil blokere næsten alle annoncer og imødegå de sværeste udfordringer."
     },
     "popup_modal_all_sites_allowed_button": {
-        "message": "Lad magien begynde"
+        "message": "Fortsæt"
     },
     "popup_modal_not_all_sites_allowed_title": {
         "message": "Selektiv beskyttelse"
     },
     "popup_modal_not_all_sites_allowed_desc": {
-        "message": "AdGuard er kun aktiveret for dette websted. Annoncer vises stadig på andre websteder, medmindre AdGuard tildeles yderligere tilladelser."
+        "message": "AdGuard er kun aktiveret for dette websted. Annoncer kan stadig vises på andre websteder, medmindre AdGuard tildeles yderligere tilladelser."
     },
     "popup_modal_not_all_sites_allowed_button": {
         "message": "Fortsæt"
     },
+    "popup_modal_advanced_blocking_disabled_title": {
+        "message": "Avanceret beskyttelse er Fra"
+    },
+    "popup_modal_advanced_blocking_disabled_description": {
+        "message": "Bruger-scripts og YouTube-adblocking er ikke aktiveret."
+    },
+    "popup_modal_advanced_blocking_disabled_button": {
+        "message": "Slå Til"
+    },
     "popup_modal_title_free": {
-        "message": "Vær alt, hvad du kan være"
+        "message": "Nå dit fulde potentiale"
     },
     "popup_modal_desc_free": {
         "message": "Yderligere avanceret beskyttelse i AdGuard er stadig ikke aktiveret. Hvad med at blokere endnu mere, såsom YouTube-annoncer i Safari?"
@@ -63,19 +72,19 @@
         "message": "Opgradér"
     },
     "popup_fullscreen_support_title": {
-        "message": "Ups, ville du starte igen fra begyndelsen?"
+        "message": "Ups, behøver du hjælp?"
     },
     "popup_fullscreen_support_desc": {
         "message": "Er der noget galt? Vi har måske en løsning."
     },
     "popup_protection_disabled_support_desc": {
-        "message": "Hmm, beskyttelse for dette websted er FRA. Er der noget galt? Vi har måske en løsning."
+        "message": "Hmm, beskyttelse for dette websted er Fra. Er der noget galt? Vi har måske en løsning."
     },
     "popup_support_button_text": {
         "message": "Anmeld et problem"
     },
     "modal_protection_off_title": {
-        "message": "Aktivere beskyttelse"
+        "message": "Aktivere AdGuard"
     },
     "modal_protection_off_settings": {
         "message": "Åbn <b>Indstillinger<\/b>"
@@ -84,6 +93,6 @@
         "message": "Tryk på <b>Safari<\/b>, stryg nedad og tryk på <b>Indholdsblockere<\/b>"
     },
     "modal_protection_off_switch": {
-        "message": "<b>Aktivér<\/b> alle AdGuard-tilføjelser."
+        "message": "<b>Aktivér<\/b> alle AdGuard-udvidelser"
     }
 }

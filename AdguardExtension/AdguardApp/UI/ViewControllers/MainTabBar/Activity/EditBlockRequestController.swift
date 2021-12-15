@@ -39,6 +39,7 @@ final class EditBlockRequestController: BottomAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
         domainNameTextField.delegate = self
+        domainNameTextField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
 
         titleLabel.text = (type == .addDomainToAllowList) ? String.localizedString("whitelist_request") : String.localizedString("block_request")
 
@@ -52,6 +53,7 @@ final class EditBlockRequestController: BottomAlertController {
         addButton.makeTitleTextCapitalized()
         backButton.makeTitleTextCapitalized()
         addButton.applyStandardGreenStyle()
+        addButton.setBackgroundColor()
         backButton.applyStandardOpaqueStyle()
     }
 
@@ -74,6 +76,22 @@ final class EditBlockRequestController: BottomAlertController {
             guard let self = self else { return }
             presenter?.presentBlockRequestController(with: self.originalDomain, type: self.type, delegate: self.delegate)
         }
+    }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+
+        addButton.isEnabled = !updatedText.trimmingCharacters(in: .whitespaces).isEmpty
+        return true
+    }
+
+    // MARK: - Private methods
+
+    @objc private final func textFieldEditingChanged(_ sender: UITextField) {
+        let text = sender.text ?? ""
+        addButton.isEnabled = !text.trimmingCharacters(in: .whitespaces).isEmpty
     }
 }
 

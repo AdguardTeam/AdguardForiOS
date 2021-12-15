@@ -12,13 +12,13 @@
         "message": "dla tej witryny"
     },
     "popup_action_safari_protection_description_disabled": {
-        "message": "wyłączona"
+        "message": "ochrona jest Wyłączona"
     },
     "popup_action_current_site_status_desc_enabled": {
-        "message": "ochrona jest WŁĄCZONA"
+        "message": "ochrona jest Włączona"
     },
     "popup_action_current_site_status_desc_disabled": {
-        "message": "ochrona wyłączona"
+        "message": "ochrona jest wyłączona"
     },
     "popup_action_block_element": {
         "message": "Zablokuj elementy na tej stronie"
@@ -27,7 +27,7 @@
         "message": "Usuń wszystkie reguły użytkownika dla tej strony"
     },
     "popup_action_current_site_desc_starting": {
-        "message": "włączanie ochrony"
+        "message": "włączam ochronę..."
     },
     "popup_action_current_site_desc_allowlisted": {
         "message": "dodano do listy dozwolonych"
@@ -42,19 +42,28 @@
         "message": "Dobra robota! AdGuard zablokuje niemal każdą reklamę i stawi czoła najtrudniejszym wyzwaniom."
     },
     "popup_modal_all_sites_allowed_button": {
-        "message": "Niech zacznie się magia"
+        "message": "Kontynuuj"
     },
     "popup_modal_not_all_sites_allowed_title": {
         "message": "Ochrona selektywna"
     },
     "popup_modal_not_all_sites_allowed_desc": {
-        "message": "Włączyłeś AdGuard tylko dla tej witryny. Będziesz nadal widzieć reklamy w innych witrynach, chyba że udzielisz AdGuard dodatkowych uprawnień."
+        "message": "Włączyłeś AdGuard tylko dla tej witryny. Reklamy mogą pojawiać się w innych witrynach, chyba że udzielisz AdGuard dodatkowych uprawnień."
     },
     "popup_modal_not_all_sites_allowed_button": {
         "message": "Kontynuuj"
     },
+    "popup_modal_advanced_blocking_disabled_title": {
+        "message": "Zaawansowana ochrona jest wyłączona"
+    },
+    "popup_modal_advanced_blocking_disabled_description": {
+        "message": "Skrypty użytkownika i blokowanie reklam YouTube nie są aktywowane."
+    },
+    "popup_modal_advanced_blocking_disabled_button": {
+        "message": "Włącz"
+    },
     "popup_modal_title_free": {
-        "message": "Bądź tym, kim możesz być"
+        "message": "Osiągnij pełny potencjał"
     },
     "popup_modal_desc_free": {
         "message": "Nadal brakuje Ci zaawansowanej ochrony dostępnej w AdGuard Premium. Zablokujmy jeszcze więcej reklam, takich jak reklamy YouTube w Safari?"
@@ -63,19 +72,19 @@
         "message": "Ulepsz"
     },
     "popup_fullscreen_support_title": {
-        "message": "Ojej, czy chcesz zacząć od początku?"
+        "message": "Ojej, czy potrzebujesz pomocy?"
     },
     "popup_fullscreen_support_desc": {
         "message": "Czy coś jest nie tak? Być może mamy rozwiązanie."
     },
     "popup_protection_disabled_support_desc": {
-        "message": "Ojej, ochrona tej strony jest WYŁĄCZONA. Czy coś jest nie tak? Być może mamy rozwiązanie."
+        "message": "Ojej, ochrona tej strony jest Wyłączona. Czy coś jest nie tak? Być może mamy rozwiązanie."
     },
     "popup_support_button_text": {
         "message": "Zgłoś problem"
     },
     "modal_protection_off_title": {
-        "message": "Włącz ochronę"
+        "message": "Włącz AdGuard"
     },
     "modal_protection_off_settings": {
         "message": "Otwórz <b>Ustawienia<\/b>"
@@ -84,6 +93,6 @@
         "message": "Stuknij w <b>Safari<\/b>, przesuń palcem w dół i kliknij <b>Blokery treści<\/b>"
     },
     "modal_protection_off_switch": {
-        "message": "<b>Włącz<\/b> wszystkie rozszerzenia AdGuard."
+        "message": "<b>Włącz<\/b> wszystkie rozszerzenia AdGuard"
     }
 }
