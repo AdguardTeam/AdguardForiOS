@@ -149,7 +149,6 @@ final class FilterDetailsViewController: UIViewController {
         DispatchQueue.asyncSafeMain { [weak self] in
             self?.filterMeta = newFilterMeta
             self?.setupTableView()
-            self?.tableView.reloadData()
             if let header = self?.tableView.tableHeaderView as? ExtendedTitleTableHeaderView {
                 header.title = newFilterMeta.filterName
                 header.setNormalTitle(newFilterMeta.description ?? "")
