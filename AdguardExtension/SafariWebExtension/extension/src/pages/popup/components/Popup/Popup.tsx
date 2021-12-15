@@ -28,8 +28,9 @@ export const Popup = observer(() => {
     return (
         <div className="popup">
             <Icons />
-            <Modals />
-            <Actions />
+            {store.modalIsOpen
+                ? <Modals />
+                : <Actions />}
             <Support />
             <Loader />
         </div>

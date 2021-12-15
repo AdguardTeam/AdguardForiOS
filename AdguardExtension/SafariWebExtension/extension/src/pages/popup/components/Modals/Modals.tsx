@@ -10,6 +10,8 @@ import { AdvancedBlockingModal } from './AdvancedBlockingModal';
 export const Modals = observer(() => {
     const store = useContext(popupStore);
 
+    // When adding a new modal, add it to store.modalIsOpen
+
     if (!store.permissionsModalViewed) {
         return <SitesAllowedModal />;
     }
