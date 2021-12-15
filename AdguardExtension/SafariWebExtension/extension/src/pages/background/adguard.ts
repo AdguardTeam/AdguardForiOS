@@ -2,7 +2,7 @@ import { nativeHost } from './native-host';
 import { nativeHostMock } from './native-host/nativeHostMock';
 
 class AdGuard {
-    mockNativeHost = false;
+    mockNativeHost = true;
 
     get nativeHost() {
         if (this.mockNativeHost) {

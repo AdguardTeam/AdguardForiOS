@@ -110,15 +110,6 @@ export class PopupStore {
     };
 
     @computed
-    get modalIsOpen(): boolean {
-        return (!this.permissionsModalViewed
-            || this.upgradeModalVisible
-            || this.advancedBlockingModalVisible
-            || this.protectionModalVisible
-        );
-    }
-
-    @computed
     get currentSiteDomain(): string {
         if (!this.currentSiteUrl) {
             return '';
