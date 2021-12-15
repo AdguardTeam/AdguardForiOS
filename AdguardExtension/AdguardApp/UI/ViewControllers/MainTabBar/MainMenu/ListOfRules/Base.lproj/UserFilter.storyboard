@@ -82,7 +82,7 @@
                                                             <constraint firstAttribute="height" constant="1" id="3QW-ay-mn2"/>
                                                         </constraints>
                                                     </view>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bvs-mI-vEr">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bvs-mI-vEr" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                                                         <rect key="frame" x="16" y="97.5" width="382" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="brZ-dP-kXb">
@@ -271,7 +271,7 @@
                                                             <constraint firstAttribute="height" constant="1" id="J1L-VW-pXl"/>
                                                         </constraints>
                                                     </view>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fCd-gA-rXS">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fCd-gA-rXS" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
                                                         <rect key="frame" x="16" y="78" width="382" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="j2e-jc-CQV">

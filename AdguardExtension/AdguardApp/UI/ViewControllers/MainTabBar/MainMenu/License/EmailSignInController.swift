@@ -74,6 +74,7 @@ final class EmailSignInController: UIViewController, UITextFieldDelegate {
         setupLostPasswordButton()
         passwordEdit.textFieldType = .secure
         nameEdit.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
+        passwordEdit.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
         updateLoginButton()
 
         notificationObserver = NotificationCenter.default.addObserver(forName: Notification.Name(PurchaseAssistant.kPurchaseServiceNotification),
@@ -87,6 +88,7 @@ final class EmailSignInController: UIViewController, UITextFieldDelegate {
 
         loginButton.makeTitleTextCapitalized()
         loginButton.applyStandardGreenStyle()
+        loginButton.setBackgroundColor()
 
         nameEdit.accessibilityLabel = String.localizedString("enter_email_voiceover")
         passwordEdit.accessibilityLabel = String.localizedString("enter_password_voiceover")
@@ -148,15 +150,15 @@ final class EmailSignInController: UIViewController, UITextFieldDelegate {
 
         if textField == nameEdit {
             nameEdit.rightView?.isHidden = updatedText.isEmpty
-        }
-        nameEdit.borderState = .enabled
-
-        if textField == passwordEdit {
+        } else {
             passwordEdit.rightView?.isHidden = updatedText.isEmpty
         }
+
+        nameEdit.borderState = .enabled
         passwordEdit.borderState = .enabled
 
         errorLabel.text = ""
+        updateLoginButton()
 
         return true
     }
@@ -164,7 +166,16 @@ final class EmailSignInController: UIViewController, UITextFieldDelegate {
     // MARK: - private methods
 
     private func updateLoginButton() {
-        loginButton.isEnabled = nameEdit.text?.count ?? 0 > 0
+        let loginText = nameEdit.text ?? ""
+        let passwordText = passwordEdit.text ?? ""
+        let passwordFieldIsEmpty = passwordText.trimmingCharacters(in: .whitespaces).isEmpty
+        let loginFieldIsEmpty = loginText.trimmingCharacters(in: .whitespaces).isEmpty
+
+        let isLicense = isLicenseKey(text: loginText) && passwordFieldIsEmpty
+        let loginAndPassword = !loginFieldIsEmpty && !passwordFieldIsEmpty
+        let enabled = isLicense ? true : loginAndPassword
+
+        loginButton.isEnabled = enabled
     }
 
     private func isLicenseKey(text: String)->Bool {

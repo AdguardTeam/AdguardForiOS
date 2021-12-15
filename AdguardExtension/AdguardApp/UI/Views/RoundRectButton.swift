@@ -153,8 +153,8 @@ class RoundRectButton: UIButton {
 
     func setBackgroundColor() {
         customBackgroundColor = UIColor.AdGuardColor.lightGreen1
-        customDisabledBackgroundColor = UIColor.AdGuardColor.green
-        customHighlightedBackgroundColor = UIColor.AdGuardColor.lightGreen1.withAlphaComponent(0.5)
+        customDisabledBackgroundColor = UIColor.AdGuardColor.lightGreen1.withAlphaComponent(0.5)
+        customHighlightedBackgroundColor = UIColor.AdGuardColor.green
     }
 
     // MARK: - Private methods

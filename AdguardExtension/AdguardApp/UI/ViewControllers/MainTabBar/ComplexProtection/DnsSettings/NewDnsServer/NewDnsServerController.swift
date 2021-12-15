@@ -31,6 +31,11 @@ enum DnsServerControllerType {
 /// Controller that provide managing custom providers
 final class NewDnsServerController: BottomAlertController {
 
+    private enum InteractionField {
+        case nameField
+        case upstreamField
+    }
+
     struct CustomDnsProviderInfo {
         let name: String
         let upstream: String
@@ -83,6 +88,9 @@ final class NewDnsServerController: BottomAlertController {
         nameField.delegate = self
         upstreamsField.delegate = self
 
+        nameField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
+        upstreamsField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
+
         if let openUpstream = openUpstream {
             // Native DNS implementation doesn't support port syntax
             upstreamsField.text = resources.dnsImplementation == .adGuard ? openUpstream : openUpstream.discardPortFromIpAddress()
@@ -98,7 +106,7 @@ final class NewDnsServerController: BottomAlertController {
         }
 
         nameField.becomeFirstResponder()
-        updateSaveButton(upstreamsField.text ?? "")
+        updateSaveButton(interactionWithField: .nameField, fieldText: nameField.text ?? "")
         updateTheme()
         configureAlertTitles()
 
@@ -131,15 +139,18 @@ final class NewDnsServerController: BottomAlertController {
         let currentText = textField.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        let interactionField: InteractionField
 
         if textField === nameField {
             nameField.borderState = .enabled
             nameField.rightView?.isHidden = updatedText.isEmpty
+            interactionField = .nameField
         } else {
             upstreamsField.borderState = isCorrectDns(updatedText) || updatedText.isEmpty ? .enabled : .error
             upstreamsField.rightView?.isHidden = updatedText.isEmpty
+            interactionField = .upstreamField
         }
-        updateSaveButton(updatedText)
+        updateSaveButton(interactionWithField: interactionField, fieldText: updatedText)
 
         if updatedText.count >= textFieldCharectersLimit, textField === nameField {
             textField.text = String(updatedText.prefix(textFieldCharectersLimit))
@@ -185,9 +196,16 @@ final class NewDnsServerController: BottomAlertController {
         return correctDns
     }
 
-    private func updateSaveButton(_ dns: String) {
-        let dnsName = nameField.text ?? ""
-        let enabled = dnsName.trimmingCharacters(in: .whitespaces).count > 0 && isCorrectDns(dns)
+    private func updateSaveButton(interactionWithField: InteractionField, fieldText: String = "") {
+        let enabled: Bool
+        switch interactionWithField {
+        case .nameField:
+            enabled = !fieldText.trimmingCharacters(in: .whitespaces).isEmpty && isCorrectDns(upstreamsField.text ?? "")
+        case .upstreamField:
+            let nameField = nameField.text ?? ""
+            enabled = !nameField.trimmingCharacters(in: .whitespaces).isEmpty && isCorrectDns(fieldText)
+        }
+
         saveOrAddButton.isEnabled = enabled
     }
 
@@ -347,6 +365,11 @@ final class NewDnsServerController: BottomAlertController {
         default:
             showUnknownErrorAlert()
         }
+    }
+
+    @objc private func textFieldEditingChanged(_ sender: UITextField) {
+        let interactionField: InteractionField = sender == nameField ? .nameField : .upstreamField
+        updateSaveButton(interactionWithField: interactionField, fieldText: sender.text ?? "")
     }
 }
 
