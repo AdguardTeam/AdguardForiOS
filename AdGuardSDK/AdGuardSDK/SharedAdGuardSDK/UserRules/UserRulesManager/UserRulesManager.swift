@@ -98,7 +98,7 @@ public final class UserRulesManager: UserRulesManagerProtocol {
 
     public func modifyRule(_ oldRuleText: String, _ newRule: UserRule) throws {
         // Check if modified rule is not already in the list
-        guard !allRules.contains(where: { $0.ruleText == newRule.ruleText }) else {
+        if oldRuleText != newRule.ruleText, allRules.contains(where: { $0.ruleText == newRule.ruleText }) {
             throw UserRulesStorageError.ruleAlreadyExists(ruleString: newRule.ruleText)
         }
 
