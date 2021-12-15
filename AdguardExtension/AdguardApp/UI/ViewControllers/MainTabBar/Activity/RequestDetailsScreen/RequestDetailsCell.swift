@@ -108,6 +108,11 @@ class RequestDetailsCell: UITableViewCell, CopiableCellInfo {
         showSeparator()
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateInfoLabelFont(model)
+    }
+
     // MARK: - Public methods
 
     func hideSeparator(){
@@ -178,16 +183,20 @@ class RequestDetailsCell: UITableViewCell, CopiableCellInfo {
             infoLabel.isHidden = false
         }
 
-        infoLabel.text = model.info
-        let font = UIFont.systemFont(ofSize: infoLabel.font.pointSize, weight: model.infoFontWeight ?? .regular)
-        infoLabel.font = font
-        infoLabel.textColor = model.infoColor == nil ? infoLabel.textColor : model.infoColor
+        updateInfoLabelFont(model)
 
         let categoryImage = UIImage.getCategoryImage(withId: model.categoryId)
         categoryImageView.isHidden = categoryImage == nil
         categoryImageView.image = categoryImage
-        self.setNeedsLayout()
         self.layoutIfNeeded()
+    }
+
+    private func updateInfoLabelFont(_ model: LogCellModelProtocol?) {
+        guard let model = model else { return }
+        infoLabel.text = model.info
+        let font = UIFont.systemFont(ofSize: infoLabel.font.pointSize, weight: model.infoFontWeight ?? .regular)
+        infoLabel.font = font
+        infoLabel.textColor = model.infoColor == nil ? infoLabel.textColor : model.infoColor
     }
 
     private func updateTheme(_ theme: ThemeServiceProtocol?){
