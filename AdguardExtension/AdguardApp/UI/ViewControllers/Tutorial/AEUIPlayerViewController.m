@@ -20,9 +20,10 @@
 #import "ADomain/ADomain.h"
 #import "NSString+Utils.h"
 
-#define URL_TEMPLATE                    @"https://cdn.adguard.com/public/Adguard/iOS/videotutorial/4.0/%@/%@.mp4"
+#define URL_TEMPLATE                                @"https://cdn.adguard.com/public/Adguard/iOS/videotutorial/4.0/%@/%@.mp4"
 
-#define DEFAULT_TUTORIAL_VIDEO          @"ManageContentBlocker"
+#define DEFAULT_TUTORIAL_VIDEO                      @"ManageContentBlocker"
+#define DEFAULT_TUTORIAL_VIDEO_SINCE_IOS_15         @"ManageContentBlockerSinceIOS15"
 #define HIDE_NAVIGATION_DELAY 4 // seconds
 
 @implementation AEUIPlayerViewController
@@ -30,7 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    NSURL *videoURL = [NSURL URLWithString:[NSString stringWithFormat:URL_TEMPLATE, [ADLocales lang], DEFAULT_TUTORIAL_VIDEO]];
+    NSURL *videoURL = [self getUrlForPlayer:false];
 
     if (videoURL) {
         [self createPlayerForUrl:videoURL];
@@ -88,7 +89,7 @@
 
         if (status == AVPlayerItemStatusFailed) {
 
-            NSURL *videoURL = [NSURL URLWithString:[NSString stringWithFormat:URL_TEMPLATE, ADL_DEFAULT_LANG, DEFAULT_TUTORIAL_VIDEO]];
+            NSURL *videoURL = [self getUrlForPlayer:true];
 
             if (videoURL) {
                 [self removePlayer];
@@ -99,6 +100,14 @@
         else if (status == AVPlayerItemStatusReadyToPlay) {
             [self.player play];
         }
+    }
+}
+
+-(NSURL*)getUrlForPlayer:(BOOL)useDefaultLanguage {
+    if (@available(iOS 15, *)) {
+        return [NSURL URLWithString:[NSString stringWithFormat:URL_TEMPLATE, useDefaultLanguage ? ADL_DEFAULT_LANG : [ADLocales lang], DEFAULT_TUTORIAL_VIDEO_SINCE_IOS_15]];
+    } else {
+        return [NSURL URLWithString:[NSString stringWithFormat:URL_TEMPLATE, useDefaultLanguage ? ADL_DEFAULT_LANG : [ADLocales lang], DEFAULT_TUTORIAL_VIDEO]];
     }
 }
 
