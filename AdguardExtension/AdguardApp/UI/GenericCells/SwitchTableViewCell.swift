@@ -84,6 +84,7 @@ final class SwitchTableViewCell: UITableViewCell, Reusable {
 
     /// Switch action handler
     @objc private final func switchValueChanged(_ sender: UISwitch) {
+        switchIsOn = sender.isOn
         delegate?.switchStateChanged(to: sender.isOn)
     }
 }
