@@ -109,7 +109,7 @@ final class NewDnsServerController: BottomAlertController {
         saveOrAddButton.setBackgroundColor()
         saveOrAddButton.needsToDisplayIndicator = true
 
-        updateSaveButton(for: name, upstream: upstream)
+        updateSaveButton()
     }
 
     // MARK: - IBActions
@@ -167,7 +167,7 @@ final class NewDnsServerController: BottomAlertController {
         return correctDns
     }
 
-    private func updateSaveButton(for name: String, upstream: String) {
+    private func updateSaveButton() {
         let nameIsCorrect = !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         let upstreamIsCorrect = !upstream.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && isCorrectDns(upstream)
         saveOrAddButton.isEnabled = nameIsCorrect && upstreamIsCorrect
@@ -343,13 +343,14 @@ final class NewDnsServerController: BottomAlertController {
 
     @objc private func textFieldEditingChanged(_ sender: UITextField) {
         if sender === nameField {
-            nameField.borderState = .enabled
+            nameField.borderState = sender.isFirstResponder ? .enabled : .disabled
             nameField.rightView?.isHidden = name.isEmpty
         } else {
-            upstreamsField.borderState = isCorrectDns(upstream) || upstream.isEmpty ? .enabled : .error
+            let state: AGTextField.IndicatorState = sender.isFirstResponder ? .enabled : .disabled
+            upstreamsField.borderState = isCorrectDns(upstream) || upstream.isEmpty ? state : .error
             upstreamsField.rightView?.isHidden = upstream.isEmpty
         }
-        updateSaveButton(for: name, upstream: upstream)
+        updateSaveButton()
     }
 }
 

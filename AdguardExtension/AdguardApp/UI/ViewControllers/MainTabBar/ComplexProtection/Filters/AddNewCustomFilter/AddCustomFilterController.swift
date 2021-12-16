@@ -42,9 +42,10 @@ final class AddCustomFilterController: BottomAlertController {
     @IBOutlet var themableLabels: [ThemableLabel]!
 
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private var themeObserver: NotificationToken?
     private let dnsFilters: DnsProtectionProtocol = ServiceLocator.shared.getService()!
     private let safariProtection: SafariProtectionProtocol = ServiceLocator.shared.getService()!
+
+    private var enteredUrl: String { urlTextField?.text ?? "" }
 
     // MARK: - View Controller life cycle
 
@@ -68,11 +69,8 @@ final class AddCustomFilterController: BottomAlertController {
         else {
             urlTextField.becomeFirstResponder()
         }
-        nextButton.isEnabled = !(urlTextField.text ?? "").isEmpty
         updateTheme()
-        themeObserver = NotificationCenter.default.observe(name: .themeChanged, object: nil, queue: .main) { [weak self] _ in
-            self?.updateTheme()
-        }
+        updateNextButton()
     }
 
     // MARK: - UITextFieldDelegate
@@ -83,28 +81,16 @@ final class AddCustomFilterController: BottomAlertController {
         return true
     }
 
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let currentText = textField.text ?? ""
-        guard let stringRange = Range(range, in: currentText) else { return false }
-        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-
-        urlTextField.borderState = .enabled
-        urlTextField.rightView?.isHidden = updatedText.isEmpty
-        nextButton.isEnabled = !updatedText.isEmpty
-        return true
-    }
-
     // MARK: - Actions
 
     @IBAction func continueAction(_ sender: Any) {
-        nextButton.startIndicator()
-        nextButton.isEnabled = false
-
-        guard let urlString = urlTextField?.text else {
-            nextButton.isEnabled = true
-            nextButton.stopIndicator()
+        let urlString = enteredUrl.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !urlString.isEmpty else {
             return
         }
+
+        nextButton.startIndicator()
+        nextButton.isEnabled = false
 
         if isfilterExist(url: urlString) {
             nextButton.isEnabled = true
@@ -183,8 +169,12 @@ final class AddCustomFilterController: BottomAlertController {
     }
 
     @objc private final func textFieldEditingChanged(_ sender: UITextField) {
-        let text = sender.text ?? ""
-        nextButton.isEnabled = !text.trimmingCharacters(in: .whitespaces).isEmpty
+        updateNextButton()
+    }
+
+    private func updateNextButton() {
+        let url = enteredUrl.trimmingCharacters(in: .whitespacesAndNewlines)
+        nextButton.isEnabled = !url.isEmpty
     }
 }
 

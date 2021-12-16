@@ -225,6 +225,7 @@ class AGTextField: UITextField {
     @objc private final func clearTapped(_ sender: UIButton) {
         self.text = nil
         let _ = delegate?.textField?(self, shouldChangeCharactersIn: NSRange(), replacementString: "")
+        sendActions(for: .editingChanged)
     }
 
     private func animateBorderStyle(with color: UIColor) {
