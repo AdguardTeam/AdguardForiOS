@@ -214,8 +214,6 @@ final class UpstreamsController: BottomAlertController {
     private func updateSaveButton() {
         let upstreams = enteredUpstreams.trimmingCharacters(in: .whitespacesAndNewlines)
         saveButton.isEnabled = !upstreams.isEmpty
-
-        upstreamsTextField.borderState = isFirstResponder ? .enabled : .disabled
         upstreamsTextField.rightView?.isHidden = enteredUpstreams.isEmpty
     }
 
