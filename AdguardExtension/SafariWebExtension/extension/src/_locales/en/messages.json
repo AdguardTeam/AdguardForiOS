@@ -26,6 +26,9 @@
     "popup_action_delete_user_rules": {
         "message": "Delete user rules for the site"
     },
+    "popup_action_insufficient_permissions": {
+        "message": "Limited permissions"
+    },
     "popup_action_current_site_desc_starting": {
         "message": "enabling protection..."
     },

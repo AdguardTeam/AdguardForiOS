@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */
-import React, { ReactElement } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import cn from 'classnames';
 
 import { IconId } from '../../../../common/ui/Icons';
@@ -11,7 +11,7 @@ interface ActionProps {
     iconId: IconId,
     iconColor?: string,
     iconDataUrl?: string
-    title: string,
+    title: string | ReactNode,
     titleMod?: string,
     description?: string,
     descriptionMod?: string,
