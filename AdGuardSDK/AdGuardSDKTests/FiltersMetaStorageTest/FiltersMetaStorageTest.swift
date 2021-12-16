@@ -183,7 +183,27 @@ class FiltersMetaStorageTest: XCTestCase {
         XCTAssertEqual(modifiedFilterAfterUpdate.displayNumber, 0)
         XCTAssertEqual(modifiedFilterAfterUpdate.version, "2.2.2.2")
         XCTAssertEqual(modifiedFilterAfterUpdate.lastUpdateTime, filterToModify.lastUpdateTime)
+    }
 
+    func testUpdateFilterWithNilDateInDBAndUpdatingFilter() {
+        let adsGroupId = SafariGroup.GroupType.ads.id
+        var filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["en"])
+        XCTAssertEqual(filters.count, 4)
+
+        let filterToModify = filters.first!
+        let _ = try! productionDbManager.filtersDb.scalar("UPDATE filters SET last_update_time = NULL WHERE filter_id = \(filterToModify.filterId)")
+        let modifiedFilter = getMeta(filter: filterToModify, updateDate: nil)
+
+        let isUpdated = try! metaStorage.update(filter: modifiedFilter)
+        XCTAssert(isUpdated)
+
+        filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["en"])
+        XCTAssertEqual(filters.count, 4)
+
+        let modifiedFilterAfterUpdate = filters.first(where: { filterToModify.filterId == $0.filterId })!
+        XCTAssertEqual(modifiedFilterAfterUpdate.displayNumber, 0)
+        XCTAssertEqual(modifiedFilterAfterUpdate.version, "2.2.2.2")
+        XCTAssertEqual(modifiedFilterAfterUpdate.lastUpdateTime, nil)
     }
 
     func testUpdateFilters() {
