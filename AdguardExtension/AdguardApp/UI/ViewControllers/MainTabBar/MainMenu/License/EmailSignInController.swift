@@ -53,6 +53,8 @@ final class EmailSignInController: UIViewController, UITextFieldDelegate {
 
     private var isKeyboardNextButtonEnabled = true
 
+    private var enteredLogin: String { nameEdit.text ?? "" }
+    private var enteredPassword: String { passwordEdit.text ?? "" }
 
     // MARK: - VC lifecycle
 
@@ -75,12 +77,9 @@ final class EmailSignInController: UIViewController, UITextFieldDelegate {
         passwordEdit.textFieldType = .secure
         nameEdit.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
         passwordEdit.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
-        updateLoginButton()
 
-        notificationObserver = NotificationCenter.default.addObserver(forName: Notification.Name(PurchaseAssistant.kPurchaseServiceNotification),
-                                                                      object: nil, queue: nil)
-        { [weak self](notification) in
-            if let info = notification.userInfo {
+        notificationObserver = NotificationCenter.default.addObserver(forName: Notification.Name(PurchaseAssistant.kPurchaseServiceNotification), object: nil, queue: nil) { [weak self] note in
+            if let info = note.userInfo {
                 self?.processNotification(info: info)
             }
         }
@@ -92,6 +91,8 @@ final class EmailSignInController: UIViewController, UITextFieldDelegate {
 
         nameEdit.accessibilityLabel = String.localizedString("enter_email_voiceover")
         passwordEdit.accessibilityLabel = String.localizedString("enter_password_voiceover")
+
+        updateLoginButton()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -104,25 +105,23 @@ final class EmailSignInController: UIViewController, UITextFieldDelegate {
         }
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-    }
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == confirm2faSegue {
-            guard let controller = segue.destination as? Confirm2FaController else { return }
-            guard let name = nameEdit.text, let password = passwordEdit.text else { return }
+            guard
+                let controller = segue.destination as? Confirm2FaController,
+                let name = nameEdit.text,
+                let password = passwordEdit.text
+            else {
+                return
+            }
             controller.credentials = (name, password)
         }
     }
 
     // MARK: - Actions
+
     @IBAction func loginAction(_ sender: Any) {
         login()
-    }
-
-    @IBAction func editingChanged(_ sender: Any) {
-        updateLoginButton()
     }
 
     @IBAction func recoverAction(_ sender: Any) {
@@ -134,42 +133,20 @@ final class EmailSignInController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == nameEdit {
             passwordEdit.becomeFirstResponder()
-        }
-        else if (nameEdit.text?.count ?? 0) > 0 &&
-            (passwordEdit.text?.count ?? 0) > 0 && isKeyboardNextButtonEnabled {
+        } else if !enteredLogin.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && !enteredPassword.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && isKeyboardNextButtonEnabled {
             isKeyboardNextButtonEnabled = false
             login()
         }
         return true
     }
 
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let currentText = textField.text ?? ""
-        guard let stringRange = Range(range, in: currentText) else { return false }
-        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-
-        if textField == nameEdit {
-            nameEdit.rightView?.isHidden = updatedText.isEmpty
-        } else {
-            passwordEdit.rightView?.isHidden = updatedText.isEmpty
-        }
-
-        nameEdit.borderState = .enabled
-        passwordEdit.borderState = .enabled
-
-        errorLabel.text = ""
-        updateLoginButton()
-
-        return true
-    }
-
     // MARK: - private methods
 
     private func updateLoginButton() {
-        let loginText = nameEdit.text ?? ""
-        let passwordText = passwordEdit.text ?? ""
-        let passwordFieldIsEmpty = passwordText.trimmingCharacters(in: .whitespaces).isEmpty
-        let loginFieldIsEmpty = loginText.trimmingCharacters(in: .whitespaces).isEmpty
+        let loginText = enteredLogin.trimmingCharacters(in: .whitespacesAndNewlines)
+        let passwordText = enteredPassword.trimmingCharacters(in: .whitespacesAndNewlines)
+        let loginFieldIsEmpty = loginText.isEmpty
+        let passwordFieldIsEmpty = passwordText.isEmpty
 
         let isLicense = isLicenseKey(text: loginText) && passwordFieldIsEmpty
         let loginAndPassword = !loginFieldIsEmpty && !passwordFieldIsEmpty
@@ -187,17 +164,14 @@ final class EmailSignInController: UIViewController, UITextFieldDelegate {
         loginButton.isEnabled = false
         isKeyboardNextButtonEnabled = false
 
-        let name = nameEdit.text
-        let password = passwordEdit.text
+        let name = enteredLogin.trimmingCharacters(in: .whitespacesAndNewlines)
+        let password = enteredPassword.trimmingCharacters(in: .whitespacesAndNewlines)
 
-        if (name?.count ?? 0) > 0 &&
-            (password?.count ?? 0) > 0 {
-            purchaseService.login(name: name!, password: password!, code2fa: nil)
-        }
-        else if (name?.count ?? 0 > 0) && isLicenseKey(text: name!) {
-            purchaseService.login(withLicenseKey: name!) {_ in }
-        }
-        else {
+        if !name.isEmpty && !password.isEmpty {
+            purchaseService.login(name: name, password: password, code2fa: nil)
+        } else if !name.isEmpty && isLicenseKey(text: name) {
+            purchaseService.login(withLicenseKey: name) { _ in }
+        } else {
             let body = String.localizedString("login_error_message")
             notificationService.postNotificationInForeground(body: body, title: "")
             loginButton.stopIndicator()
@@ -206,7 +180,6 @@ final class EmailSignInController: UIViewController, UITextFieldDelegate {
     }
 
     private func processNotification(info: [AnyHashable: Any]) {
-
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
 
@@ -312,6 +285,20 @@ final class EmailSignInController: UIViewController, UITextFieldDelegate {
         attributedString.addAttribute(.font, value: font!, range: nsRange)
 
         lostPasswordButton.setAttributedTitle(attributedString, for: .normal)
+    }
+
+    @objc private final func editingChanged(_ sender: AGTextField) {
+        updateLoginButton()
+
+        nameEdit.borderState = nameEdit.isFirstResponder ? .enabled : .disabled
+        passwordEdit.borderState = passwordEdit.isFirstResponder ? .enabled : .disabled
+        errorLabel.text = ""
+
+        if sender == nameEdit {
+            nameEdit.rightView?.isHidden = enteredLogin.isEmpty
+        } else {
+            passwordEdit.rightView?.isHidden = enteredPassword.isEmpty
+        }
     }
 }
 
