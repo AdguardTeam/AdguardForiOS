@@ -173,10 +173,9 @@ class FiltersMetaStorageTest: XCTestCase {
         XCTAssertEqual(filters.count, 4)
 
         let filterToModify = filters[1]
-        let freshFilter = filters[2]
+        let filterToModify2 = filters[2]
         let unchangedFilter = filters[3]
 
-        // Filter version is modified
         let modifiedFilter = ExtendedFiltersMeta.Meta(filterId: filterToModify.filterId,
                                                       name: "newName",
                                                       description: "newDescription",
@@ -190,37 +189,38 @@ class FiltersMetaStorageTest: XCTestCase {
                                                       languages: [],
                                                       tags: [],
                                                       rulesCount: 0)
-        // Filter version is not modified
-        let filterThatShouldNotChange = ExtendedFiltersMeta.Meta(filterId: freshFilter.filterId,
+
+        let modifiedFilter2 = ExtendedFiltersMeta.Meta(filterId: filterToModify2.filterId,
                                                                  name: "newName112",
                                                                  description: "newDescription323",
-                                                                 homePage: freshFilter.homePage,
+                                                                 homePage: filterToModify2.homePage,
                                                                  displayNumber: 210,
                                                                  group: ExtendedFiltersMeta.Group(groupId: adsGroupId, groupName: "name", displayNumber: 1),
-                                                                 filterDownloadPage: freshFilter.subscriptionUrl,
+                                                                 filterDownloadPage: filterToModify2.subscriptionUrl,
                                                                  trustLevel: .full,
-                                                                 version: freshFilter.version!,
-                                                                 lastUpdateDate: freshFilter.lastUpdateTime,
+                                                                 version: filterToModify2.version!,
+                                                                 lastUpdateDate: filterToModify2.lastUpdateTime,
                                                                  languages: [],
                                                                  tags: [],
                                                                  rulesCount: 0)
 
-        let updatedFilterIds = try! metaStorage.update(filters: [modifiedFilter, filterThatShouldNotChange])
-        XCTAssertEqual(updatedFilterIds, [filterToModify.filterId])
+        let updatedFilterIds = try! metaStorage.update(filters: [modifiedFilter, modifiedFilter2])
+        XCTAssertEqual(updatedFilterIds, [filterToModify.filterId, filterToModify2.filterId])
 
         filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["en"])
         XCTAssertEqual(filters.count, 4)
 
         let changedFilter = filters.first(where: { $0.filterId == filterToModify.filterId })!
-        let freshFilterAfterUpdate = filters.first(where: { $0.filterId == freshFilter.filterId })!
+        let changedFilter2 = filters.first(where: { $0.filterId == filterToModify2.filterId })!
         let unchangedFilterAfterUpdate = filters.first(where: { $0.filterId == unchangedFilter.filterId })
 
         // Note that name and desc won't change as they are fetched from localizations
         XCTAssertNotEqual(changedFilter, filterToModify)
+        XCTAssertNotEqual(changedFilter2, filterToModify2)
         XCTAssertEqual(changedFilter.displayNumber, 0)
+        XCTAssertEqual(changedFilter2.displayNumber, 210)
         XCTAssertEqual(changedFilter.version, filterToModify.version! + "dddd")
-
-        XCTAssertEqual(freshFilterAfterUpdate, freshFilter)
+        XCTAssertEqual(changedFilter2.version, filterToModify2.version!)
         XCTAssertEqual(unchangedFilterAfterUpdate, unchangedFilter)
     }
 
