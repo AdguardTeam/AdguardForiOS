@@ -44,10 +44,12 @@ final class UpstreamsController: BottomAlertController {
     var upstreamType: UpstreamType!
     weak var delegate: UpstreamsControllerDelegate?
 
+    private var enteredUpstreams: String { upstreamsTextField.text ?? "" }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         upstreamsTextField.delegate = self
+        upstreamsTextField.addTarget(self, action: #selector(upstreamTextChanged(_:)), for: .editingChanged)
 
         prepareUpstreamTextField()
         prepareTextFieldDescription()
@@ -64,12 +66,14 @@ final class UpstreamsController: BottomAlertController {
     // MARK: - Actions
 
     @IBAction func cancelAction(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
 
     @IBAction func saveAction(_ sender: UIButton) {
-        guard let text = upstreamsTextField.text?.trimmingCharacters(in: .whitespaces) else { return }
-        guard let type = upstreamType else { return }
+        let text = enteredUpstreams.trimmingCharacters(in: .whitespaces)
+        guard let type = upstreamType else {
+            return
+        }
 
         if type == .fallback, text == "none" {
             applyChanges(addresses: [text])
@@ -96,16 +100,6 @@ final class UpstreamsController: BottomAlertController {
                 }
             }
         }
-    }
-
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let currentText = textField.text ?? ""
-        guard let stringRange = Range(range, in: currentText) else { return false }
-        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-
-        upstreamsTextField.borderState = .enabled
-        upstreamsTextField.rightView?.isHidden = updatedText.isEmpty
-        return true
     }
 
     // MARK: - Private methods
@@ -193,7 +187,6 @@ final class UpstreamsController: BottomAlertController {
             }
 
             DispatchQueue.main.async {
-
                 self.saveButton?.isEnabled = true
                 self.saveButton?.stopIndicator()
 
@@ -214,6 +207,11 @@ final class UpstreamsController: BottomAlertController {
         let ipv6 = ips.first { UrlUtils.isIpv6($0) }
         resources.customBlockingIpv4 = ipv4
         resources.customBlockingIpv6 = ipv6
+    }
+
+    @objc private final func upstreamTextChanged(_ textField: AGTextField) {
+        textField.borderState = textField.isFirstResponder ? .enabled : .disabled
+        textField.rightView?.isHidden = enteredUpstreams.isEmpty
     }
 }
 
