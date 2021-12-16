@@ -73,7 +73,7 @@ final class SwitchTableViewCell: UITableViewCell, Reusable {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: isIpadTrait ? 20.0 : 16.0),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: isIpadTrait ? 24.0 : 16.0),
-            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: isIpadTrait ? 20.0 : 16.0),
+            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: isIpadTrait ? -20.0 : -16.0),
             titleLabel.trailingAnchor.constraint(equalTo: stateSwitch.leadingAnchor, constant: isIpadTrait ? -24.0 : -16.0),
 
             stateSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: isIpadTrait ? -24.0 : -16.0),
@@ -84,6 +84,7 @@ final class SwitchTableViewCell: UITableViewCell, Reusable {
 
     /// Switch action handler
     @objc private final func switchValueChanged(_ sender: UISwitch) {
+        switchIsOn = sender.isOn
         delegate?.switchStateChanged(to: sender.isOn)
     }
 }
