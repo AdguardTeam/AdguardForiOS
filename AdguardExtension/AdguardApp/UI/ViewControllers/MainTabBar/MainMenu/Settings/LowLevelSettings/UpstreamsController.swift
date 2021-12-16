@@ -61,8 +61,6 @@ final class UpstreamsController: BottomAlertController {
         cancelButton.applyStandardOpaqueStyle()
         saveButton.makeTitleTextCapitalized()
         saveButton.applyStandardGreenStyle()
-
-        updateSaveButton()
     }
 
     // MARK: - Actions
@@ -211,14 +209,9 @@ final class UpstreamsController: BottomAlertController {
         resources.customBlockingIpv6 = ipv6
     }
 
-    private func updateSaveButton() {
-        let upstreams = enteredUpstreams.trimmingCharacters(in: .whitespacesAndNewlines)
-        saveButton.isEnabled = !upstreams.isEmpty
-        upstreamsTextField.rightView?.isHidden = enteredUpstreams.isEmpty
-    }
-
     @objc private final func upstreamTextChanged(_ textField: AGTextField) {
-        updateSaveButton()
+        textField.borderState = textField.isFirstResponder ? .enabled : .disabled
+        textField.rightView?.isHidden = enteredUpstreams.isEmpty
     }
 }
 
