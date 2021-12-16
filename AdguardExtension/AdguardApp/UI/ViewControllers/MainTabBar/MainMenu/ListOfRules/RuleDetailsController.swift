@@ -55,6 +55,8 @@ final class RuleDetailsController: BottomAlertController, UITextViewDelegate {
     private let disabledLineColor = UIColor.AdGuardColor.lightGray5
     private let textViewCharectersLimit = 50
 
+    private var enteredRule: String { ruleTextView.text ?? "" }
+
     // MARK: - View controller life cycle
 
     override func viewDidLoad() {
@@ -84,11 +86,13 @@ final class RuleDetailsController: BottomAlertController, UITextViewDelegate {
         deleteButton.applyStandardOpaqueStyle(color: UIColor.AdGuardColor.red)
 
         ruleTextView.becomeFirstResponder()
+        updateSaveButton()
     }
 
     // MARK: - Actions
     @IBAction func saveAction(_ sender: Any) {
-        let ruleText = ruleTextView.text ?? ""
+        let ruleText = enteredRule.trimmingCharacters(in: .whitespacesAndNewlines)
+
         if ruleText == context.rule.ruleText {
             dismiss(animated: true, completion: nil)
             return
@@ -125,8 +129,6 @@ final class RuleDetailsController: BottomAlertController, UITextViewDelegate {
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
 
-        saveButton.isEnabled = updatedText.count > 0
-
         if context.ruleType != .wifiExceptions { return true }
 
         if updatedText.count >= textViewCharectersLimit {
@@ -145,8 +147,7 @@ final class RuleDetailsController: BottomAlertController, UITextViewDelegate {
     }
 
     func textViewDidChange(_ textView: UITextView) {
-        let text = textView.text ?? ""
-        saveButton.isEnabled = !text.trimmingCharacters(in: .whitespaces).isEmpty
+        updateSaveButton()
     }
 
     // MARK: - private methods
@@ -166,6 +167,11 @@ final class RuleDetailsController: BottomAlertController, UITextViewDelegate {
         }
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
+    }
+
+    private func updateSaveButton() {
+        let rule = enteredRule.trimmingCharacters(in: .whitespacesAndNewlines)
+        saveButton.isEnabled = !rule.isEmpty
     }
 }
 
