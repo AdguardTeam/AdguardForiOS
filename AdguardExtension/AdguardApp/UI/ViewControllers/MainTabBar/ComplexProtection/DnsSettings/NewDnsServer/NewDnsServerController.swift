@@ -31,11 +31,6 @@ enum DnsServerControllerType {
 /// Controller that provide managing custom providers
 final class NewDnsServerController: BottomAlertController {
 
-    private enum InteractionField {
-        case nameField
-        case upstreamField
-    }
-
     struct CustomDnsProviderInfo {
         let name: String
         let upstream: String
@@ -81,6 +76,9 @@ final class NewDnsServerController: BottomAlertController {
 
     private let dnsCheckQueue = DispatchQueue(label: "NewDnsServerController.dnsCheckQueue")
 
+    private var name: String { nameField.text ?? "" }
+    private var upstream: String { upstreamsField.text ?? "" }
+
     // MARK: - ViewController lifecycle
 
     override func viewDidLoad() {
@@ -100,18 +98,18 @@ final class NewDnsServerController: BottomAlertController {
 
         if let openTitle = openTitle {
             nameField.text = openTitle
-        }
-        else {
+        } else {
             nameField.text = model.providerName
         }
 
         nameField.becomeFirstResponder()
-        updateSaveButton(interactionWithField: .nameField, fieldText: nameField.text ?? "")
         updateTheme()
         configureAlertTitles()
 
         saveOrAddButton.setBackgroundColor()
         saveOrAddButton.needsToDisplayIndicator = true
+
+        updateSaveButton(for: name, upstream: upstream)
     }
 
     // MARK: - IBActions
@@ -137,43 +135,16 @@ final class NewDnsServerController: BottomAlertController {
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = textField.text ?? ""
-        guard let stringRange = Range(range, in: currentText) else { return false }
-        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-        let interactionField: InteractionField
-
-        if textField === nameField {
-            nameField.borderState = .enabled
-            nameField.rightView?.isHidden = updatedText.isEmpty
-            interactionField = .nameField
-        } else {
-            upstreamsField.borderState = isCorrectDns(updatedText) || updatedText.isEmpty ? .enabled : .error
-            upstreamsField.rightView?.isHidden = updatedText.isEmpty
-            interactionField = .upstreamField
+        guard let stringRange = Range(range, in: currentText) else {
+            return false
         }
-        updateSaveButton(interactionWithField: interactionField, fieldText: updatedText)
 
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
         if updatedText.count >= textFieldCharectersLimit, textField === nameField {
             textField.text = String(updatedText.prefix(textFieldCharectersLimit))
             return false
         }
-
         return true
-    }
-
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        guard let textField = textField as? AGTextField else {
-            return
-        }
-        textField.rightView?.isHidden = (textField.text ?? "").isEmpty
-        textField.borderState = .enabled
-    }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let textField = textField as? AGTextField else {
-            return
-        }
-        textField.rightView?.isHidden = (textField.text ?? "").isEmpty
-        textField.borderState = .disabled
     }
 
     // MARK: - Private methods
@@ -192,21 +163,14 @@ final class NewDnsServerController: BottomAlertController {
     }
 
     private func isCorrectDns(_ dns: String) -> Bool {
-        let correctDns = dns.isValidUpstream()
+        let correctDns = dns.trimmingCharacters(in: .whitespacesAndNewlines).isValidUpstream()
         return correctDns
     }
 
-    private func updateSaveButton(interactionWithField: InteractionField, fieldText: String = "") {
-        let enabled: Bool
-        switch interactionWithField {
-        case .nameField:
-            enabled = !fieldText.trimmingCharacters(in: .whitespaces).isEmpty && isCorrectDns(upstreamsField.text ?? "")
-        case .upstreamField:
-            let nameField = nameField.text ?? ""
-            enabled = !nameField.trimmingCharacters(in: .whitespaces).isEmpty && isCorrectDns(fieldText)
-        }
-
-        saveOrAddButton.isEnabled = enabled
+    private func updateSaveButton(for name: String, upstream: String) {
+        let nameIsCorrect = !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        let upstreamIsCorrect = !upstream.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && isCorrectDns(upstream)
+        saveOrAddButton.isEnabled = nameIsCorrect && upstreamIsCorrect
     }
 
     private func configureAlertTitles() {
@@ -241,10 +205,15 @@ final class NewDnsServerController: BottomAlertController {
     // MARK: - Button actions
 
     private func saveAction() {
+        let name = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        let upstream = upstream.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        guard !name.isEmpty && !upstream.isEmpty else {
+            return
+        }
+
         saveOrAddButton.isEnabled = false
         saveOrAddButton.startIndicator()
-        let name = self.nameField.text ?? ""
-        let upstream = self.upstreamsField.text ?? ""
 
         dnsCheckQueue.async { [weak self] in
             guard
@@ -284,10 +253,15 @@ final class NewDnsServerController: BottomAlertController {
     }
 
     private func addAction() {
+        let name = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        let upstream = upstream.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        guard !name.isEmpty && !upstream.isEmpty else {
+            return
+        }
+
         saveOrAddButton.isEnabled = false
         saveOrAddButton.startIndicator()
-        let upstream = self.upstreamsField.text ?? ""
-        let name = self.nameField.text ?? ""
 
         dnsCheckQueue.async { [weak self] in
             guard let self = self else { return }
@@ -368,8 +342,14 @@ final class NewDnsServerController: BottomAlertController {
     }
 
     @objc private func textFieldEditingChanged(_ sender: UITextField) {
-        let interactionField: InteractionField = sender == nameField ? .nameField : .upstreamField
-        updateSaveButton(interactionWithField: interactionField, fieldText: sender.text ?? "")
+        if sender === nameField {
+            nameField.borderState = .enabled
+            nameField.rightView?.isHidden = name.isEmpty
+        } else {
+            upstreamsField.borderState = isCorrectDns(upstream) || upstream.isEmpty ? .enabled : .error
+            upstreamsField.rightView?.isHidden = upstream.isEmpty
+        }
+        updateSaveButton(for: name, upstream: upstream)
     }
 }
 
