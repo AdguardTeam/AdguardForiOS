@@ -170,6 +170,7 @@ final class AddCustomFilterController: BottomAlertController {
 
     @objc private final func textFieldEditingChanged(_ sender: UITextField) {
         updateNextButton()
+        urlTextField.rightView?.isHidden = enteredUrl.isEmpty
     }
 
     private func updateNextButton() {

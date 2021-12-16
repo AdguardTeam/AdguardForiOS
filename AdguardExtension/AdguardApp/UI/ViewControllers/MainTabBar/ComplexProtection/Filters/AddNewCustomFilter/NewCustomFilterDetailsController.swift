@@ -67,6 +67,8 @@ final class NewCustomFilterDetailsController: BottomAlertController {
 
     private let textFieldCharectersLimit = 50
 
+    private var enteredName: String { name.text ?? "" }
+
     // MARK: - View Controller life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,13 +87,16 @@ final class NewCustomFilterDetailsController: BottomAlertController {
         addButton.makeTitleTextCapitalized()
         addButton.applyStandardGreenStyle()
         addButton.setBackgroundColor()
-        addButton.isEnabled = !(name.text ?? "").isEmpty
         cancelButton.makeTitleTextCapitalized()
         cancelButton.applyStandardOpaqueStyle()
+        updateAddButton()
     }
 
     // MARK: - Actions
     @IBAction func addAction(_ sender: Any) {
+        guard !enteredName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            return
+        }
         addButton.isEnabled = false
         if let newFilterModel = newFilterModel {
             addCustomFilter(newFilterModel)
@@ -107,8 +112,12 @@ final class NewCustomFilterDetailsController: BottomAlertController {
     }
 
     @IBAction func redirectToSafariAction(_ sender: UIButton) {
-        guard let link = homepageLink else { return }
-        guard let url = URL(string: link) else { return }
+        guard
+            let link = homepageLink,
+            let url = URL(string: link)
+        else {
+            return
+        }
         UIApplication.shared.open(url)
     }
 
@@ -125,10 +134,6 @@ final class NewCustomFilterDetailsController: BottomAlertController {
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
 
-        name.borderState = .enabled
-        name.rightView?.isHidden = updatedText.isEmpty
-        addButton.isEnabled = !updatedText.isEmpty
-
         if updatedText.count >= textFieldCharectersLimit {
             textField.text = String(updatedText.prefix(textFieldCharectersLimit))
             return false
@@ -140,7 +145,8 @@ final class NewCustomFilterDetailsController: BottomAlertController {
     // MARK: - private methods
 
     private func addCustomFilter(_ model: NewCustomFilterModel) {
-        guard let filterName = name.text, !filterName.isEmpty else {
+        let filterName = enteredName.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !filterName.isEmpty else {
             return
         }
 
@@ -170,7 +176,8 @@ final class NewCustomFilterDetailsController: BottomAlertController {
     }
 
     private func editFilter(_ model: EditCustomFilterModel) {
-        guard let filterName = name.text, !filterName.isEmpty else {
+        let filterName = enteredName.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !filterName.isEmpty else {
             return
         }
 
@@ -243,8 +250,13 @@ final class NewCustomFilterDetailsController: BottomAlertController {
     }
 
     @objc private final func textFieldEditingChanged(_ sender: UITextField) {
-        let text = sender.text ?? ""
-        addButton.isEnabled = !text.trimmingCharacters(in: .whitespaces).isEmpty
+        updateAddButton()
+        name.rightView?.isHidden = enteredName.isEmpty
+    }
+
+    private func updateAddButton() {
+        let text = enteredName.trimmingCharacters(in: .whitespacesAndNewlines)
+        addButton.isEnabled = !text.isEmpty
     }
 }
 
