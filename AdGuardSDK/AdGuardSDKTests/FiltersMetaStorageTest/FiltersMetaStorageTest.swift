@@ -103,25 +103,14 @@ class FiltersMetaStorageTest: XCTestCase {
         XCTAssertNotEqual(filter.isEnabled, updatedFilter.isEnabled)
     }
 
-    func testUpdateFilterWithNewVersion() {
+    func testUpdateFilterWithNewDate() {
         let adsGroupId = SafariGroup.GroupType.ads.id
         var filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["en"])
         XCTAssertEqual(filters.count, 4)
 
         let filterToModify = filters.first!
-        let modifiedFilter = ExtendedFiltersMeta.Meta(filterId: filterToModify.filterId,
-                                                      name: "newName",
-                                                      description: "newDescription",
-                                                      homePage: filterToModify.homePage,
-                                                      displayNumber: 0,
-                                                      group: ExtendedFiltersMeta.Group(groupId: adsGroupId, groupName: "name", displayNumber: 1),
-                                                      filterDownloadPage: filterToModify.subscriptionUrl,
-                                                      trustLevel: .full,
-                                                      version: "2.2.2.2",
-                                                      lastUpdateDate: filterToModify.lastUpdateTime,
-                                                      languages: [],
-                                                      tags: [],
-                                                      rulesCount: 0)
+        let updateDate = Date(timeIntervalSinceReferenceDate: 123)
+        let modifiedFilter = getMeta(filter: filterToModify, updateDate: updateDate)
 
         let isUpdated = try! metaStorage.update(filter: modifiedFilter)
         XCTAssert(isUpdated)
@@ -132,39 +121,69 @@ class FiltersMetaStorageTest: XCTestCase {
         let modifiedFilterAfterUpdate = filters.first(where: { filterToModify.filterId == $0.filterId })!
         XCTAssertEqual(modifiedFilterAfterUpdate.displayNumber, 0)
         XCTAssertEqual(modifiedFilterAfterUpdate.version, "2.2.2.2")
+        XCTAssertEqual(modifiedFilterAfterUpdate.lastUpdateTime, updateDate)
     }
 
-    func testUpdateFilterWithOldVersion() {
-        func testUpdateFilterWithNewVersion() {
-            let adsGroupId = SafariGroup.GroupType.ads.id
-            var filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["en"])
-            XCTAssertEqual(filters.count, 4)
+    func testUpdateFilterWithSameDate() {
+        let adsGroupId = SafariGroup.GroupType.ads.id
+        var filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["en"])
+        XCTAssertEqual(filters.count, 4)
 
-            let filterToModify = filters.first!
-            let modifiedFilter = ExtendedFiltersMeta.Meta(filterId: filterToModify.filterId,
-                                                          name: "newName",
-                                                          description: "newDescription",
-                                                          homePage: filterToModify.homePage,
-                                                          displayNumber: 0,
-                                                          group: ExtendedFiltersMeta.Group(groupId: adsGroupId, groupName: "name", displayNumber: 1),
-                                                          filterDownloadPage: filterToModify.subscriptionUrl,
-                                                          trustLevel: .full,
-                                                          version: filterToModify.version,
-                                                          lastUpdateDate: filterToModify.lastUpdateTime,
-                                                          languages: [],
-                                                          tags: [],
-                                                          rulesCount: 0)
+        let filterToModify = filters.first!
+        let modifiedFilter = getMeta(filter: filterToModify, updateDate: filterToModify.lastUpdateTime)
 
-            let isUpdated = try! metaStorage.update(filter: modifiedFilter)
-            XCTAssertFalse(isUpdated)
+        let isUpdated = try! metaStorage.update(filter: modifiedFilter)
+        XCTAssertFalse(isUpdated)
 
-            filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["en"])
-            XCTAssertEqual(filters.count, 4)
+        filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["en"])
+        XCTAssertEqual(filters.count, 4)
 
-            let modifiedFilterAfterUpdate = filters.first(where: { filterToModify.filterId == $0.filterId })!
-            XCTAssertEqual(modifiedFilterAfterUpdate.displayNumber, filterToModify.displayNumber)
-            XCTAssertEqual(modifiedFilterAfterUpdate.version, filterToModify.version)
-        }
+        let modifiedFilterAfterUpdate = filters.first(where: { filterToModify.filterId == $0.filterId })!
+        XCTAssertEqual(modifiedFilterAfterUpdate.displayNumber, filterToModify.displayNumber)
+        XCTAssertEqual(modifiedFilterAfterUpdate.version, filterToModify.version)
+        XCTAssertEqual(modifiedFilterAfterUpdate.lastUpdateTime, filterToModify.lastUpdateTime)
+    }
+
+    func testUpdateFilterWithNilDate() {
+        let adsGroupId = SafariGroup.GroupType.ads.id
+        var filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["en"])
+        XCTAssertEqual(filters.count, 4)
+
+        let filterToModify = filters.first!
+        let modifiedFilter = getMeta(filter: filterToModify, updateDate: nil)
+
+        let isUpdated = try! metaStorage.update(filter: modifiedFilter)
+        XCTAssert(isUpdated)
+
+        filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["en"])
+        XCTAssertEqual(filters.count, 4)
+
+        let modifiedFilterAfterUpdate = filters.first(where: { filterToModify.filterId == $0.filterId })!
+        XCTAssertEqual(modifiedFilterAfterUpdate.displayNumber, 0)
+        XCTAssertEqual(modifiedFilterAfterUpdate.version, "2.2.2.2")
+        XCTAssertEqual(modifiedFilterAfterUpdate.lastUpdateTime, nil)
+    }
+
+    func testUpdateFilterWithNilDateInDBForFilter() {
+        let adsGroupId = SafariGroup.GroupType.ads.id
+        var filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["en"])
+        XCTAssertEqual(filters.count, 4)
+
+        let filterToModify = filters.first!
+        let _ = try! productionDbManager.filtersDb.scalar("UPDATE filters SET last_update_time = NULL WHERE filter_id = \(filterToModify.filterId)")
+        let modifiedFilter = getMeta(filter: filterToModify, updateDate: filterToModify.lastUpdateTime)
+
+        let isUpdated = try! metaStorage.update(filter: modifiedFilter)
+        XCTAssert(isUpdated)
+
+        filters = try! metaStorage.getLocalizedFiltersForGroup(withId: adsGroupId, forSuitableLanguages: ["en"])
+        XCTAssertEqual(filters.count, 4)
+
+        let modifiedFilterAfterUpdate = filters.first(where: { filterToModify.filterId == $0.filterId })!
+        XCTAssertEqual(modifiedFilterAfterUpdate.displayNumber, 0)
+        XCTAssertEqual(modifiedFilterAfterUpdate.version, "2.2.2.2")
+        XCTAssertEqual(modifiedFilterAfterUpdate.lastUpdateTime, filterToModify.lastUpdateTime)
+
     }
 
     func testUpdateFilters() {
@@ -176,6 +195,7 @@ class FiltersMetaStorageTest: XCTestCase {
         let filterToModify2 = filters[2]
         let unchangedFilter = filters[3]
 
+        let date = Date(timeIntervalSinceReferenceDate: 123)
         let modifiedFilter = ExtendedFiltersMeta.Meta(filterId: filterToModify.filterId,
                                                       name: "newName",
                                                       description: "newDescription",
@@ -185,7 +205,7 @@ class FiltersMetaStorageTest: XCTestCase {
                                                       filterDownloadPage: filterToModify.subscriptionUrl,
                                                       trustLevel: .full,
                                                       version: filterToModify.version! + "dddd",
-                                                      lastUpdateDate: filterToModify.lastUpdateTime,
+                                                      lastUpdateDate: date,
                                                       languages: [],
                                                       tags: [],
                                                       rulesCount: 0)
@@ -199,7 +219,7 @@ class FiltersMetaStorageTest: XCTestCase {
                                                                  filterDownloadPage: filterToModify2.subscriptionUrl,
                                                                  trustLevel: .full,
                                                                  version: filterToModify2.version!,
-                                                                 lastUpdateDate: filterToModify2.lastUpdateTime,
+                                                                 lastUpdateDate: date,
                                                                  languages: [],
                                                                  tags: [],
                                                                  rulesCount: 0)
@@ -390,5 +410,21 @@ class FiltersMetaStorageTest: XCTestCase {
 
         let query = FilterLocalizationsTable.table.insert(setters)
         try! metaStorage.filtersDb.run(query)
+    }
+
+    private func getMeta(filter: FiltersTable, updateDate: Date?, groupId: Int = SafariGroup.GroupType.ads.id) -> ExtendedFiltersMeta.Meta {
+        return ExtendedFiltersMeta.Meta(filterId: filter.filterId,
+                                                      name: "newName",
+                                                      description: "newDescription",
+                                                      homePage: filter.homePage,
+                                                      displayNumber: 0,
+                                                      group: ExtendedFiltersMeta.Group(groupId: groupId, groupName: "name", displayNumber: 1),
+                                                      filterDownloadPage: filter.subscriptionUrl,
+                                                      trustLevel: .full,
+                                                      version: "2.2.2.2",
+                                                      lastUpdateDate: updateDate,
+                                                      languages: [],
+                                                      tags: [],
+                                                      rulesCount: 0)
     }
  }

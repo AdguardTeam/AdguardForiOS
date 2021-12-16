@@ -179,6 +179,17 @@ extension MetaStorage: FiltersMetaStorageProtocol {
     func update(filter: ExtendedFilterMetaProtocol) throws -> Bool {
         Logger.logDebug("(FiltersMetaStorage) - updateFilter start; Filter id=\(filter.filterId)")
 
+
+        // Query: SELECT version FROM filters WHERE filter_id = filter.filterId
+        let lastUpdateDateQuery = FiltersTable.table.select(FiltersTable.lastUpdateTime).where(FiltersTable.filterId == filter.filterId)
+
+        if let currentFilterLastUpdateDate = try filtersDb.pluck(lastUpdateDateQuery)?.get(FiltersTable.lastUpdateTime) {
+            if let newUpdateDate = filter.lastUpdateDate, currentFilterLastUpdateDate == newUpdateDate {
+                Logger.logInfo("(FiltersMetaStorage) - updateFilter; Update ended with reason: New meta update date is the same as current meta update date")
+                return false
+            }
+        }
+
         // Query: UPDATE filters SET (group_id, version, last_update_time, display_number, name, description, homepage, subscriptionUrl) WHERE filter_id = filter.filterId
         let query = FiltersTable.table
                                 .where(FiltersTable.filterId == filter.filterId)
