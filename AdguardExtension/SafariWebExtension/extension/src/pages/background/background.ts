@@ -142,6 +142,7 @@ const handleMessages = () => {
                     contentBlockersEnabled,
                     advancedBlockingEnabled,
                     allowlistInverted,
+                    platform,
                 } = await adguard.nativeHost.getInitData(url);
 
                 return {
@@ -154,6 +155,7 @@ const handleMessages = () => {
                     contentBlockersEnabled,
                     advancedBlockingEnabled,
                     allowlistInverted,
+                    platform,
                 };
             }
             case MessagesToBackgroundPage.SetProtectionStatus: {
