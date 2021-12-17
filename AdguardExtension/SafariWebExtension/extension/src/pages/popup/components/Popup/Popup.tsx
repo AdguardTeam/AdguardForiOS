@@ -8,8 +8,8 @@ import { Modals } from '../Modals';
 import { popupStore } from '../../stores/PopupStore';
 import { Support } from '../Support';
 import { Loader } from '../Loader';
+import { ExpandButton } from '../ExpandButton';
 import { useFullscreen } from '../../hooks/useFullscreen';
-import { ExpandButton } from '../ExpandButton/ExpandButton';
 
 import './popup.pcss';
 
@@ -19,14 +19,6 @@ export const Popup = observer(() => {
     useEffect(() => {
         store.getPopupData();
     }, []);
-
-    useEffect(() => {
-        if (store.popupExpanded) {
-            document.body.style.height = '340px';
-        } else {
-            document.body.style.height = '280px';
-        }
-    }, [store.popupExpanded]);
 
     useAppearanceTheme(store.appearanceTheme);
 
