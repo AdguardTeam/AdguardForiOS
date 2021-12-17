@@ -5,8 +5,8 @@ import { ProtectionToggle } from './ProtectionToggle';
 import { DeleteUserRules } from './DeleteUserRules';
 import { CurrentSite } from './CurrentSite';
 import { BlockElement } from './BlockElement';
-import { ReportIssue } from './ReportIssue';
 import { Permissions } from './Permissions';
+import { ReportIssue } from './ReportIssue';
 
 import './actions.pcss';
 

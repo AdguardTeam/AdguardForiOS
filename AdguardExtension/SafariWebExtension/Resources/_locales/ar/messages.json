@@ -2,6 +2,21 @@
     "extension_name": {
         "message": "AdGuard"
     },
+    "popup_modal_all_sites_allowed_button": {
+        "message": "استمرار"
+    },
+    "popup_modal_not_all_sites_allowed_button": {
+        "message": "استمرار"
+    },
+    "popup_modal_advanced_blocking_disabled_button": {
+        "message": "تشغيل"
+    },
+    "popup_support_button_text": {
+        "message": "الإبلاغ عن مشكلة"
+    },
+    "modal_protection_off_title": {
+        "message": "AdGuardتمكين"
+    },
     "extension_description": {
         "message": "AdGuard Safari Web Extension"
     }
