@@ -12,7 +12,7 @@ import {
 import { getDomain } from '../../common/utils/url';
 import { messenger } from '../../common/messenger';
 import { getFaviconDataUrl } from '../image-utils';
-import { AppearanceTheme } from '../../common/constants';
+import { AppearanceTheme, Platforms } from '../../common/constants';
 import { SiteStatus } from '../constants';
 
 // Do not allow property change outside of store actions
@@ -57,6 +57,8 @@ export class PopupStore {
 
     @observable advancedBlockingModalVisible: boolean = false;
 
+    @observable platform: Platforms = Platforms.IPhone;
+
     /**
      * Flag variable
      * - true means that app is premium (user bought it),
@@ -98,6 +100,7 @@ export class PopupStore {
             this.appearanceTheme = popupData.appearanceTheme;
             this.advancedBlockingEnabled = popupData.advancedBlockingEnabled;
             this.allowlistInverted = popupData.allowlistInverted;
+            this.platform = popupData.platform;
         });
     };
 
