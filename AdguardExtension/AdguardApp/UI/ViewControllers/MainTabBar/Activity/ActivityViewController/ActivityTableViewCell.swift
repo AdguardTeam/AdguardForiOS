@@ -69,10 +69,9 @@ final class ActivityTableViewCell: UITableViewCell {
         guard let record = record else { return }
         let timeString = record.time()
         let name = record.tracker?.name
-        let domain = record.getDetailsString(isIpadTrait ? 16.0 : 14.0, advancedMode)
 
         companyLabel.text = (name == nil || advancedMode) ? record.firstLevelDomain : name
-        infoLabel.attributedText = domain
+        record.getAttributedText(isIpadTrait ? 16.0 : 14.0, advancedMode) { self.infoLabel.attributedText = $0 }
         timeLabel.text = timeString
 
         // Setup cell background color

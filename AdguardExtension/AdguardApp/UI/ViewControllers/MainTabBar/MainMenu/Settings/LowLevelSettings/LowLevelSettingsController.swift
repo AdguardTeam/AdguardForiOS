@@ -195,7 +195,7 @@ final class LowLevelSettingsController: UITableViewController {
     private func setupWarningDescriptionTextView() {
         let warningDescriptionFormat = String.localizedString("low_level_description")
         let warningDescription = String(format: warningDescriptionFormat)
-        warningTextView.attributedText = NSMutableAttributedString.fromHtml(warningDescription, fontSize: warningTextView.font!.pointSize, color: theme.blackTextColor, textAlignment: .center)
+        warningTextView.setAttributedTitle(warningDescription, fontSize: warningTextView.font!.pointSize, color: theme.blackTextColor, textAlignment: .center)
     }
 
     private func setBetaChannelLink(_ text: String){

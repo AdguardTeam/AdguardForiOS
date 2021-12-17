@@ -89,11 +89,7 @@ final class OnboardingAdvancedProtectionView: UIView {
             size: .customSize(width: image.size.width, height: image.size.height)
         )
 
-        DispatchQueue.asyncSafeMain { [weak self] in
-            guard let self = self else { return }
-            let attributedText = NSMutableAttributedString.fromHtml(string, fontSize: self.isIpadTrait ? 24.0 : 16.0, color: self.themeService.grayTextColor, attachmentSettings: attachmentSettings, textAlignment: .left)
-            self.attributedLabel.attributedText = attributedText
-        }
+        attributedLabel.setAttributedTitle(string, fontSize: isIpadTrait ? 24.0 : 16.0, color: themeService.grayTextColor, attachmentSettings: attachmentSettings)
     }
 }
 

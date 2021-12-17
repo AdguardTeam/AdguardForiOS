@@ -43,39 +43,41 @@ final class DnsLogRecord {
         self.userFilterStatus = userFilterStatus
     }
 
-    // returns subtitle text for table view cell
-    func getDetailsString(_ fontSize: CGFloat, _ advancedMode: Bool) -> NSMutableAttributedString {
+    // returns in completion attributed string
+    func getAttributedText(_ fontSize: CGFloat, _ advancedMode: Bool, completion: @escaping (_ attributedString: NSMutableAttributedString) -> Void) {
+        DispatchQueue.asyncSafeMain { [weak self] in
+            guard let self = self else { return }
+            let recordType = self.event.type
 
-        let recordType = event.type
+            if advancedMode {
+                var newDomain = self.event.domain.hasSuffix(".") ? String(self.event.domain.dropLast()) : self.event.domain
+                newDomain = " " + newDomain
 
-        if advancedMode {
-            var newDomain = event.domain.hasSuffix(".") ? String(event.domain.dropLast()) : event.domain
-            newDomain = " " + newDomain
+                let typeAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .semibold) ]
+                let domainAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .regular) ]
 
-            let typeAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .semibold) ]
-            let domainAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .regular) ]
+                let typeAttrString = NSAttributedString(string: recordType, attributes: typeAttr)
+                let domainAttrString = NSAttributedString(string: newDomain, attributes: domainAttr)
 
-            let typeAttrString = NSAttributedString(string: recordType, attributes: typeAttr)
-            let domainAttrString = NSAttributedString(string: newDomain, attributes: domainAttr)
+                let combination = NSMutableAttributedString()
+                combination.append(typeAttrString)
+                combination.append(domainAttrString)
 
-            let combination = NSMutableAttributedString()
-            combination.append(typeAttrString)
-            combination.append(domainAttrString)
+                completion(combination)
+            } else {
+                let typeAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .semibold) ]
+                let statusAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .regular),
+                                   NSAttributedString.Key.foregroundColor: self.event.processedStatus.textColor]
 
-            return combination
-        } else {
-            let typeAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .semibold) ]
-            let statusAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .regular),
-                               NSAttributedString.Key.foregroundColor: event.processedStatus.textColor]
+                let typeAttrString = NSAttributedString(string: " (" + recordType + ")", attributes: typeAttr)
+                let statusAttrString = NSAttributedString(string: self.event.processedStatus.title, attributes: statusAttr)
 
-            let typeAttrString = NSAttributedString(string: " (" + recordType + ")", attributes: typeAttr)
-            let statusAttrString = NSAttributedString(string: event.processedStatus.title, attributes: statusAttr)
+                let combination = NSMutableAttributedString()
+                combination.append(statusAttrString)
+                combination.append(typeAttrString)
 
-            let combination = NSMutableAttributedString()
-            combination.append(statusAttrString)
-            combination.append(typeAttrString)
-
-            return combination
+                completion(combination)
+            }
         }
     }
 }
