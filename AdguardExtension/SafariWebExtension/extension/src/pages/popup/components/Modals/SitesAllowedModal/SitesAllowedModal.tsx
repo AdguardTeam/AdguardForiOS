@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
-
 import browser from 'webextension-polyfill';
+
 import { Modal } from '../Modal';
 import { WEB_EXTENSION_MORE_URL } from '../../../../common/constants';
 import { reactTranslator } from '../../../../common/translators/reactTranslator';

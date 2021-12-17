@@ -10,7 +10,7 @@ import { AdvancedBlockingModal } from './AdvancedBlockingModal';
 export const Modals = observer(() => {
     const store = useContext(popupStore);
 
-    if (true || !store.permissionsModalViewed) {
+    if (!store.permissionsModalViewed) {
         return <SitesAllowedModal />;
     }
 
