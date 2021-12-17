@@ -9,7 +9,8 @@ import { Button } from '../Button';
 export const ExpandButton = observer(() => {
     const store = useContext(popupStore);
 
-    if (store.platform !== Platforms.IPad) {
+    if (store.platform !== Platforms.IPad
+        || store.popupExpanded) {
         return null;
     }
 
