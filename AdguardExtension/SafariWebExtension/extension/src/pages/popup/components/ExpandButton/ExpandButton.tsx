@@ -10,6 +10,7 @@ export const ExpandButton = observer(() => {
     const store = useContext(popupStore);
 
     if (store.platform !== Platforms.IPad
+        // hide button after popup is expanded because safari doesn't allow to shrink it back
         || store.popupExpanded) {
         return null;
     }
