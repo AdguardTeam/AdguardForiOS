@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 
+import { Icon } from '../ui/Icon';
 import { popupStore } from '../../stores/PopupStore';
 import { Platforms } from '../../../common/constants';
+import { Button } from '../Button';
 
 export const ExpandButton = observer(() => {
     const store = useContext(popupStore);
@@ -16,10 +18,11 @@ export const ExpandButton = observer(() => {
     };
 
     return (
-        <div
+        <Button
             onClick={handleExpandClick}
+            classNames="button--roll"
         >
-            button
-        </div>
+            <Icon iconId="arrow" />
+        </Button>
     );
 });
