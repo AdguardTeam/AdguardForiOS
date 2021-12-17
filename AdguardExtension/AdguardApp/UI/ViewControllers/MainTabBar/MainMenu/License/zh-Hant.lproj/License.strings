@@ -1,62 +1,23 @@
 /* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
 "53G-qY-SZ5.text" = "來自驗證應用程式的代碼：";
 
-/* Class = "UILabel"; text = "Security filters"; ObjectID = "6P7-a5-VLL"; */
-"6P7-a5-VLL.text" = "安全性過濾器";
-
-/* Class = "UIBarButtonItem"; title = "Logout"; ObjectID = "70b-CS-wqh"; */
-"70b-CS-wqh.title" = "登出";
-
-/* Class = "UILabel"; text = "All Premium features are available"; ObjectID = "FLH-Qd-Atk"; */
-"FLH-Qd-Atk.text" = "所有的高級版功能為可用的";
-
-/* Class = "UILabel"; text = "Login"; ObjectID = "J8s-sG-FKu"; */
+/* Class = "UILabel"; text = "Log in"; ObjectID = "J8s-sG-FKu"; */
 "J8s-sG-FKu.text" = "登入";
-
-/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "KOP-vw-FG7"; */
-"KOP-vw-FG7.text" = "設定您自己的規則";
 
 /* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
 "LJj-cc-Ko5.text" = "電子郵件位址：";
 
-/* Class = "UILabel"; text = "BLOCK MORE\nADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
-"NlM-RH-NgY.text" = "封鎖更多的\n廣告 & 追蹤器";
-
 /* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
 "P6N-OK-fHG.text" = "密碼：";
 
-/* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
-"Rxf-sg-Wfk.normalTitle" = "至我的帳戶";
-
-/* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "UaA-JQ-kV4"; */
-"UaA-JQ-kV4.title" = "登入";
-
-/* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
-"YIm-R8-cxj.text" = "封鎖網路釣魚、詐騙和加密貨幣劫持";
-
-/* Class = "UILabel"; text = "Log in with your AdGuard account or with connected social networks"; ObjectID = "ZuM-Nn-uXv"; */
+/* Class = "UILabel"; text = "Log in with your AdGuard account or with social networks"; ObjectID = "ZuM-Nn-uXv"; */
 "ZuM-Nn-uXv.text" = "用您的 AdGuard 帳戶或社群網路登入";
 
-/* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "bUa-fF-AXO"; */
+/* Class = "UIButton"; normalTitle = "Log in"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "登入";
-
-/* Class = "UILabel"; text = "Value your privacy"; ObjectID = "fwp-I7-Qtl"; */
-"fwp-I7-Qtl.text" = "重視您的隱私";
 
 /* Class = "UILabel"; text = "Sign in"; ObjectID = "fxK-6y-LB6"; */
 "fxK-6y-LB6.text" = "登入";
 
-/* Class = "UILabel"; text = "DNS protection"; ObjectID = "gLL-6o-GGa"; */
-"gLL-6o-GGa.text" = "DNS 防護";
-
-/* Class = "UILabel"; text = "Premium is activated"; ObjectID = "hjF-1C-hFa"; */
-"hjF-1C-hFa.text" = "高級版被啟動";
-
-/* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
-"mR4-EU-MFx.normalTitle" = "回復購買";
-
-/* Class = "UILabel"; text = "Custom filters"; ObjectID = "ppx-jv-rek"; */
-"ppx-jv-rek.text" = "自訂的過濾器";
-
-/* Class = "UIButton"; normalTitle = "CONFIRM"; ObjectID = "rrj-Gm-LCJ"; */
+/* Class = "UIButton"; normalTitle = "Confirm"; ObjectID = "rrj-Gm-LCJ"; */
 "rrj-Gm-LCJ.normalTitle" = "確認";

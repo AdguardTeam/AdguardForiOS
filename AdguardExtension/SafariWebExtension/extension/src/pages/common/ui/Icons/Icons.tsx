@@ -3,6 +3,7 @@ import React from 'react';
 import './icons.pcss';
 
 export type IconId =
+    'faq' |
     'delete' |
     'aim' |
     'cross' |
@@ -158,6 +159,12 @@ export const Icons = () => (
             <path d="M9.50098 16.1275C10.3341 16.0425 11.1673 16 12.0004 16C12.8335 16 13.6667 16.0425 14.4998 16.1275" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             <path d="M14.4998 7.87253C13.6667 7.95753 12.8335 8.00003 12.0004 8.00003C11.1673 8.00003 10.3341 7.95753 9.50098 7.87253" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             <path d="M3 12H21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </symbol>
+        <symbol id="faq" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path clipRule="evenodd" d="M12 20.5a8.5 8.5 0 1 0 0-17 8.5 8.5 0 0 0 0 17Z" />
+                <path d="M10 9.303c.02-.821 1.002-1.526 2.004-1.526s1.6.39 2.004 1.223c.31.703.006 1.546-1.069 2.28-.87.557-1.143 1.133-1.143 2.179M11.796 15.895c.012.002 0-.19 0-.19" />
+            </g>
         </symbol>
     </svg>
 );

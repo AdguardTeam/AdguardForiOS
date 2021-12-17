@@ -97,10 +97,17 @@ public final class UserRulesManager: UserRulesManagerProtocol {
     }
 
     public func modifyRule(_ oldRuleText: String, _ newRule: UserRule) throws {
+        // Check if modified rule is not already in the list
+        if oldRuleText != newRule.ruleText, allRules.contains(where: { $0.ruleText == newRule.ruleText }) {
+            throw UserRulesStorageError.ruleAlreadyExists(ruleString: newRule.ruleText)
+        }
+
+        // Check if rule that should be modified exist
         guard let ruleIndex = allRules.firstIndex(where: { $0.ruleText == oldRuleText }) else {
             throw UserRulesStorageError.ruleDoesNotExist(ruleString: oldRuleText)
         }
 
+        // Check if rule that should be modified is really changing
         guard storage.rules[ruleIndex].ruleText != newRule.ruleText || storage.rules[ruleIndex].isEnabled != newRule.isEnabled else {
             throw UserRulesStorageError.ruleAlreadyExists(ruleString: newRule.ruleText)
         }

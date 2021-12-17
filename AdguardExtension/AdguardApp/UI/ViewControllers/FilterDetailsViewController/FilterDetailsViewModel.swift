@@ -41,7 +41,7 @@ final class FilterDetailsViewModel: NSObject {
 
         var sections: [Section] = []
         var metaRows: [FilterDetailsCellModel] = []
-        self.tagModels = filterMeta.tags.map { SafariTagButtonModel(tag: $0, isSelected: true) }
+        self.tagModels = filterMeta.tags.sorted { $0.tagType == .lang && $1.tagType != .lang }.map { SafariTagButtonModel(tag: $0, isSelected: true) }
         sections.append(.state)
 
         if let version = filterMeta.version {

@@ -7,8 +7,8 @@
 /* Class = "UILabel"; text = "Enable on this page"; ObjectID = "eVN-fj-ATQ"; */
 "eVN-fj-ATQ.text" = "Skru på på denne siden";
 
-/* Class = "UIButton"; normalTitle = "CLOSE"; ObjectID = "fxW-Cr-iPW"; */
-"fxW-Cr-iPW.normalTitle" = "LUKK";
+/* Class = "UIButton"; normalTitle = "Close"; ObjectID = "fxW-Cr-iPW"; */
+"fxW-Cr-iPW.normalTitle" = "Lukk";
 
 /* Class = "UILabel"; text = "Report an issue on this page"; ObjectID = "kuu-kI-Ott"; */
 "kuu-kI-Ott.text" = "Meld inn et problem på denne siden";

@@ -1,3 +1,6 @@
+/* Class = "UILabel"; text = "premium"; ObjectID = "7ma-TB-Yab"; */
+"7ma-TB-Yab.text" = "高級版";
+
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "884-Hm-mb6"; */
 "884-Hm-mb6.text" = "Safari 防護";
 
@@ -7,11 +10,11 @@
 /* Class = "UILabel"; text = "AdGuard VPN"; ObjectID = "Hnw-bh-Bgh"; */
 "Hnw-bh-Bgh.text" = "AdGuard VPN";
 
-/* Class = "UITextView"; text = "premium"; ObjectID = "P9C-72-GAw"; */
+/* Class = "UILabel"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "高級版";
 
-/* Class = "UILabel"; text = "Safari extension that removes ads and ad leftovers and brings back autoplay on YouTube"; ObjectID = "Sry-3f-FQj"; */
-"Sry-3f-FQj.text" = "移除廣告和廣告殘留物，並把於 YouTube 上之自動播放帶回的 Safari 延伸功能";
+/* Class = "UILabel"; text = "This Safari extension removes ads and ad leftovers, and revives the Autoplay feature on YouTube"; ObjectID = "Sry-3f-FQj"; */
+"Sry-3f-FQj.text" = "此 Safari 延伸功能移除廣告和廣告殘留物，並使於 YouTube 上的自動播放功能生效";
 
 /* Class = "UILabel"; text = "Block YouTube Ads (by AdGuard)"; ObjectID = "XXP-EO-M4h"; */
 "XXP-EO-M4h.text" = "封鎖 YouTube 廣告（由 AdGuard 製作）";
@@ -22,16 +25,19 @@
 /* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "kDM-2d-bRK"; */
 "kDM-2d-bRK.text" = "YouTube 廣告封鎖";
 
-/* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
+/* Class = "UILabel"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "免費版";
 
-/* Class = "UILabel"; text = "Works along with AdGuard ad blocker"; ObjectID = "tKQ-Yn-fgL"; */
-"tKQ-Yn-fgL.text" = "和 AdGuard 廣告封鎖器一起運作";
+/* Class = "UIButton"; normalTitle = "Purchase license"; ObjectID = "pv0-hE-9gb"; */
+"pv0-hE-9gb.normalTitle" = "購買授權";
 
-/* Class = "UILabel"; text = "Blocks ads and trackers on domain level and encrypts your queries"; ObjectID = "teo-vm-NRJ"; */
-"teo-vm-NRJ.text" = "於網域層級上封鎖廣告和追蹤器，並加密您的查詢";
+/* Class = "UILabel"; text = "Works alongside the AdGuard ad blocker"; ObjectID = "tKQ-Yn-fgL"; */
+"tKQ-Yn-fgL.text" = "與 AdGuard 廣告封鎖器一起運作";
 
-/* Class = "UITextView"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
+/* Class = "UILabel"; text = "This module allows you to use a custom DNS server and enhances your privacy by encrypting your DNS queries"; ObjectID = "teo-vm-NRJ"; */
+"teo-vm-NRJ.text" = "此模組允許您使用自訂的 DNS 伺服器，並透過加密您的 DNS 查詢來提升您的隱私。";
+
+/* Class = "UILabel"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
 "vNo-hV-l4c.text" = "未被安裝";
 
 /* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "vlx-BS-A2y"; */

@@ -1,5 +1,11 @@
+/* Class = "UILabel"; text = "premium"; ObjectID = "7ma-TB-Yab"; */
+"7ma-TB-Yab.text" = "premium";
+
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "884-Hm-mb6"; */
 "884-Hm-mb6.text" = "Protección para Safari";
+
+/* Class = "UILabel"; text = "A set of advanced ad-blocking tools for better filtering"; ObjectID = "9wg-p1-Dh8"; */
+"9wg-p1-Dh8.text" = "Conjunto de herramientas avanzadas de bloqueo de anuncios para un mejor filtrado";
 
 /* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "AZY-QZ-8d9"; */
 "AZY-QZ-8d9.text" = "Bloqueo de anuncios de YouTube";
@@ -7,14 +13,26 @@
 /* Class = "UILabel"; text = "AdGuard VPN"; ObjectID = "Hnw-bh-Bgh"; */
 "Hnw-bh-Bgh.text" = "AdGuard VPN";
 
-/* Class = "UITextView"; text = "premium"; ObjectID = "P9C-72-GAw"; */
+/* Class = "UILabel"; text = "Advanced protection"; ObjectID = "Lsa-74-hd5"; */
+"Lsa-74-hd5.text" = "Protección avanzada";
+
+/* Class = "UILabel"; text = "Advanced protection"; ObjectID = "OxY-0X-J4W"; */
+"OxY-0X-J4W.text" = "Protección avanzada";
+
+/* Class = "UILabel"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "premium";
 
-/* Class = "UILabel"; text = "Safari extension that removes ads and ad leftovers and brings back autoplay on YouTube"; ObjectID = "Sry-3f-FQj"; */
-"Sry-3f-FQj.text" = "Extensión para Safari que elimina anuncios, restos de anuncios y devuelve la reproducción automática en YouTube";
+/* Class = "UILabel"; text = "This Safari extension removes ads and ad leftovers, and revives the Autoplay feature on YouTube"; ObjectID = "Sry-3f-FQj"; */
+"Sry-3f-FQj.text" = "Esta extensión para Safari elimina anuncios y restos de anuncios, y revive la función de reproducción automática en YouTube";
+
+/* Class = "UILabel"; text = "Blocks stubborn ads, including YouTube ads in Safari"; ObjectID = "WOG-Hk-11z"; */
+"WOG-Hk-11z.text" = "Bloquea anuncios obstinados, incluidos los anuncios de YouTube en Safari";
 
 /* Class = "UILabel"; text = "Block YouTube Ads (by AdGuard)"; ObjectID = "XXP-EO-M4h"; */
 "XXP-EO-M4h.text" = "Bloquear anuncios de YouTube (por AdGuard)";
+
+/* Class = "UILabel"; text = "Bypasses adblock detectors on websites"; ObjectID = "ZgQ-6Q-ytX"; */
+"ZgQ-6Q-ytX.text" = "Bloquea anuncios obstinados, incluidos los anuncios de YouTube en Safari";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "cnF-td-Ba1"; */
 "cnF-td-Ba1.text" = "Protección DNS";
@@ -22,16 +40,19 @@
 /* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "kDM-2d-bRK"; */
 "kDM-2d-bRK.text" = "Bloqueo de anuncios de YouTube";
 
-/* Class = "UITextView"; text = "free"; ObjectID = "l1g-hs-4EK"; */
+/* Class = "UILabel"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "gratuito";
 
-/* Class = "UILabel"; text = "Works along with AdGuard ad blocker"; ObjectID = "tKQ-Yn-fgL"; */
+/* Class = "UIButton"; normalTitle = "Purchase license"; ObjectID = "pv0-hE-9gb"; */
+"pv0-hE-9gb.normalTitle" = "Comprar licencia";
+
+/* Class = "UILabel"; text = "Works alongside the AdGuard ad blocker"; ObjectID = "tKQ-Yn-fgL"; */
 "tKQ-Yn-fgL.text" = "Funciona junto con el bloqueador de anuncios AdGuard";
 
-/* Class = "UILabel"; text = "Blocks ads and trackers on domain level and encrypts your queries"; ObjectID = "teo-vm-NRJ"; */
-"teo-vm-NRJ.text" = "Bloquea anuncios y rastreadores a nivel de dominio y cifra tus consultas";
+/* Class = "UILabel"; text = "This module allows you to use a custom DNS server and enhances your privacy by encrypting your DNS queries"; ObjectID = "teo-vm-NRJ"; */
+"teo-vm-NRJ.text" = "Este módulo te permite utilizar un servidor DNS personalizado y mejora tu privacidad al cifrar tus consultas DNS";
 
-/* Class = "UITextView"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
+/* Class = "UILabel"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
 "vNo-hV-l4c.text" = "No instalado";
 
 /* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "vlx-BS-A2y"; */

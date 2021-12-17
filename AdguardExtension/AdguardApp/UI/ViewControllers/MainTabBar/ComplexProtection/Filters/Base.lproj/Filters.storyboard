@@ -616,8 +616,8 @@
                                                             <action selector="redirectToSafariAction:" destination="iY4-7b-KHH" eventType="touchUpInside" id="JBg-Yo-7SN"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kCb-lJ-BLL">
-                                                        <rect key="frame" x="16" y="146.5" width="382" height="40"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kCb-lJ-BLL" customClass="RoundRectButton" customModule="Adguard" customModuleProvider="target">
+                                                        <rect key="frame" x="16" y="152" width="382" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="0kI-YO-tAU">
                                                                 <variation key="heightClass=regular-widthClass=regular" constant="60"/>

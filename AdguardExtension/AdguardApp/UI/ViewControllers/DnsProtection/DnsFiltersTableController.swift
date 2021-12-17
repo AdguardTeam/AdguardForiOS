@@ -73,6 +73,7 @@ final class DnsFiltersTableController: UITableViewController {
         navigationItem.setHidesBackButton(false, animated: true)
         setupBackButton()
         setTitleHeaderView()
+        model.searchString = nil
     }
 
     @IBAction func searchButtonTapped(_ sender: UIBarButtonItem) {

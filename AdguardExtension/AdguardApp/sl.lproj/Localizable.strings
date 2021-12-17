@@ -4,6 +4,9 @@
 /* (AESFilterConverter) Error occured when checking of the result from JSON converter. */
 "support_rule_converting_error" = "Pravil ni mogoče pretvoriti. Prišlo je do nepričakovane napake. Obrnite se na skupino za podporo.";
 
+/* (AEService) Service errors descriptions */
+"json_converting_error" = "Ni mogoče inicializirati Pretvornika v format JSON.";
+
 /* (Action Extension - Adguard Assistant) Assistant UI. Title for 'close icon' button */
 "common_action_cancel" = "Prekliči";
 
@@ -15,6 +18,12 @@
 
 /* Alert title. On error. */
 "common_error_title" = "Napaka";
+
+/* Something went wrong title for unknown error */
+"something_went_wrong_title" = "Nekaj je šlo narobe";
+
+/* Unknown error desription */
+"unknown_error_description" = "Prosimo, prijavite to napako podpori.";
 
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Filtrov ni mogoče naložiti v Safari, zato vaše nedavne spremembe niso bile uporabljene.";
@@ -62,22 +71,40 @@
 "user_filter_helper" = "Tukaj vnesite svoja pravila, ločena s prelomi vrstic";
 
 /* YES Button caption in alert */
-"common_action_yes" = "DA";
+"common_action_yes" = "Da";
 
 /* (MainController) login status caption on main screen */
-"protection_enabled_caption" = "Zaščita je omogočena";
+"protection_enabled_caption" = "Zaščita je vključena";
 
 /* (MainController) login status caption on main screen */
 "protection_partly_enabled_caption" = "Nekateri zaviralci vsebine so onemogočeni";
 
 /* (MainController) login status caption on main screen */
-"protection_disabled_caption" = "Zaščita je onemogočena";
+"protection_disabled_caption" = "Zaščite je izkjučena";
 
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Naroči se";
 
+/* (LicenseProductChoiceCell) restore purchase button title */
+"restore_purchase_button_title" = "Obnovi nakup";
+
+/* (FreeLicenseStateTableViewModel) One month subscription title */
+"one_month_subscription_title" = "Mesečno";
+
+/* (FreeLicenseStateTableViewModel) One year subscription title */
+"one_year_subscription_title" = "Letno";
+
+/* (FreeLicenseStateTableViewModel) title for permanent subscription */
+"permanent_subscription_title" = "Doživljensko";
+
+/* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
+"go_to_my_account_title" = "Pojdi v moj račun";
+
 /* (GetProTableController) upgrade button title for lifetime license */
-"upgrade_lifetime_button_title" = "NAKUP";
+"upgrade_lifetime_button_title" = "Nakup";
+
+/* (GetProTableController) missing purchase alert message */
+"upgrade_missing_purchase_message" = "Naročniški načrti niso na voljo. Preverite svojo internetno povezavo in poskusite znova.";
 
 /* (LoginController) lost password button title */
 "lost_password" = "Izgubljeno geslo?";
@@ -191,7 +218,7 @@
 "filters_updated_format" = "Posodobljenih filtrov: %lu ";
 
 /* (FiltersController) Filter Version format */
-"filter_version_format" = "različica %@";
+"filter_version_format" = "Različica %@";
 
 /* (DnsSettingController) split tunel mode description */
 "tunnel_mode_split_description" = "'Razdeli-Tunel', združljiv z aplikacijami 'Osebni VPN'";
@@ -207,9 +234,6 @@
 
 /* (DnsSettingController) Native DNS implementation title */
 "native_dns_implementation_title" = "Izvorni";
-
-/* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
-"system_dns_server" = "Brez šifriranja (Sistemski DNS)";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "Omogočen %1$d izven %2$d";
@@ -239,13 +263,13 @@
 "login_error_message" = "Prišlo do napake pri prijavi v";
 
 /* purchase secription format */
-"purchase_description_format" = "O naročnini AdGuarda:<br><br>• Plačilo bo nakazano na vaš račun iTunes ob potrditvi nakupa.<br><br>• Naročnina se samodejno obnovi, razen če je samodejno podaljšanje izklopljeno vsaj 24 ur pred koncem trenutnega obdobja.<br><br>• Nadomestilo naročnine se bo zaračunalo v 24 urah pred koncem tekočega obdobja.<br><br>Po naročilu lahko upravljate svoje naročnine in po nakupu naročnine v nastavitvah računa iTunes izklopite samodejno obnovo.<br><br><a href=%2$@>Pogoji in določila</a> in <a href=%1$@>Politika zasebnosti</a>";
+"purchase_description_format" = "Pogoji naročnine AdGuarda<br><br>• Plačilo bo zaračunano na vaš račun iTunes ob potrditvi nakupa.<br><br>• Naročnina se samodejno obnovi, razen če je samodejno podaljšanje izklopljeno vsaj 24 ur pred koncem trenutnega obdobja.<br><br>• Pristojbina za podaljšanje naročnine bo zaračunana vašemu iTunes računu v 24 urah po koncu trenutnega obdobja.<br><br>Lahko upravljate svojo naročnino in izklopite samodejno podaljšanje tako, da po nakupu odprete svoje 'Nastavitve računa'.<br><br>AdGuard <a href=%2$@>Licenčna pogodba za končnega uporabnika</a> in <a href=%1$@>Politika zasebnosti</a>";
 
 /* lifetime purchase secription format */
-"lifetime_purchase_description_format" = "<a href=%2$@>Pogoji in določila</a> in <a href=%1$@>Politika zasebnosti</a>";
+"lifetime_purchase_description_format" = "AdGuardova <a href=%2$@>Licenčna pogodba za končnega uporabnika</a> in <a href=%1$@>Politika zasebnosti</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
-"common_action_ok" = "VREDU";
+"common_action_ok" = "Vredu";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "privacy_policy_action" = "Politika zasebnosti";
@@ -265,8 +289,20 @@
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "Ostalo";
 
+/* (AdvancedSettingsController) Content blocker description text */
+"cb_description_common" = "6 zaviralcev vsebin, vsak z do 50.000 pravil";
+
+/* (AdvancedSettingsController) Content blocker description text */
+"cb_description_advanced_protection" = "6 zaviralcev vsebin, vsak z do 150.000 pravil, dodatno z napredno zaščito";
+
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Filtri:";
+
+/* (ContentBlockersTableController) - Advanced protection title */
+"cb_screen_advanced_protection_title" = "Napredna zaščita";
+
+/* (ContentBlockersTableController) - Content Blockers title */
+"cb_screen_content_blockers_title" = "Zaviralci vsebine";
 
 /* (AdvancedSettingsController) Restart when network changes error */
 "general_settings_restart_tunnel_error" = "Najprej omogočite VPN";
@@ -301,6 +337,9 @@
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "Onemogočeno v nastavitvah Safarija";
 
+/* (ContentBlockerStateCell) Description for advanced protection disabled state */
+"disabled_current_state_advanced_protection" = "Onemogočeno v nastavitvah zaščite";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
 "update_current_state_label" = "Nalaganje v Safari...";
 
@@ -334,17 +373,14 @@
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "Presegli ste največje število pravil za filtriranje.";
 
-/* (GetProController) title for permanent subscription */
-"permanent_subscription_title" = "Doživljensko";
+/* (FiltersController) Enabled state in groups section */
+"on_state" = "Omogočeno";
 
-/* (FiltersController) ON state in groups section */
-"on_state" = "VKL";
-
-/* (FiltersController) OFF state in groups section */
-"off_state" = "IZKL";
+/* (FiltersController) Disabled state in groups section */
+"off_state" = "Onemogočeno";
 
 /* (NewCustomFilterDetailedController) homepage string */
-"homepage_title" = "Domača stran:";
+"homepage_title" = "Domača stran: ";
 
 /* (FilterDetailsController) delete filter title */
 "delete_filter_title" = "Izbriši filter";
@@ -357,6 +393,9 @@
 
 /* (AboutViewController) AdGuard copyright string */
 "copyright_format" = "© 2009–%@. Adguard Software Ltd.\nVse pravice so pridržane. AdGuard.com";
+
+/* (LicensePageViewController) Login title */
+"common_login" = "Vpis";
 
 /* (AboutViewController) Logout title */
 "common_logout" = "Odjava";
@@ -411,6 +450,24 @@
 
 /* (ListOfRulesModel) title for export */
 "export" = "Izvozi";
+
+/* (UserRulesTableController) - title for editing user rules option  */
+"open_user_rules_editor" = "Odpri urejevalnik";
+
+/* (UserRulesTableController) - description for Safari user rules in editor  */
+"editor_safari_user_rules_description" = "Dodaj uporabniška pravila Safari";
+
+/* (UserRulesTableController) - description for allowlist rules in editor  */
+"editor_allowlist_rules_description" = "Dodaj pravila poljubnega seznama dovoljenih";
+
+/* (UserRulesTableController) - description for inverted allowlist rules in editor  */
+"editor_inverted_allowlist_rules_description" = "Dodaj pravila obrnjenega poljubnega seznama dovoljenih";
+
+/* (UserRulesTableController) - description for DNS allowlist rules in editor  */
+"editor_dns_allowlist_rules_description" = "Dodaj pravila poljubnega seznama dovoljenih DNS";
+
+/* (UserRulesTableController) - description for DNS blocklist rules in editor  */
+"editor_dns_blocklist_rules_description" = "Dodaj pravila poljubnega seznama onemogočenih DNS";
 
 /* (ListOfRulesModel) title for Clear button*/
 "common_clear" = "Počisti";
@@ -502,6 +559,33 @@
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "Dodaj novo pravilo";
 
+/* (OneSafariGroupFiltersModel) Add new filter title */
+"add_new_filter" = "Dodaj filter";
+
+/* (OneSafariGroupFiltersModel) Ads filters group description */
+"ads_filters_group_description" = "Seznami filtrov, ki odstranijo oglase";
+
+/* (OneSafariGroupFiltersModel) Privacy filters group description */
+"privacy_filters_group_description" = "Seznami filtrov, ki preprečujejo sledenje";
+
+/* (OneSafariGroupFiltersModel) Social Widgets filters group description */
+"social_widgets_filters_group_description" = "Seznami filtrov, ki skrijejo pripomočke družbenih medijev (gumbi 'Všečkaj' in podobno)";
+
+/* (OneSafariGroupFiltersModel) Annoyances filters group description */
+"annoyances_filters_group_description" = "Seznami filtrov, ki zavirajo dražilne elemente na spletnih straneh. Opredelitev »dražilnega« je lahko subjektivna in je odvisna od avtorja seznama";
+
+/* (OneSafariGroupFiltersModel) Security filters group description */
+"security_filters_group_description" = "Seznami filtrov,, ki zavirajo znane spletne grožnje";
+
+/* (OneSafariGroupFiltersModel) Other filters group description */
+"other_filters_group_description" = "Razni seznami filtrov za različne namene";
+
+/* (OneSafariGroupFiltersModel) Language Specific filters group description */
+"language_specific_filters_group_description" = "Seznami filtrov, ki ciljajo na spletne strani v določenih jezikih";
+
+/* (OneSafariGroupFiltersModel) Custom filters group description */
+"custom_filters_group_description" = "Seznami filtrov, ki jih dodate ročno";
+
 /* confirm reset lert text */
 "confirm_reset_text" = "Vse nastavitve, vključno z nastavitvami uporabniških pravili, zaščite DNS, vmesnika in pooblastil, bodo ponastavljene. Tega postopka ni mogoče razveljaviti. Ponastavim nastavitve?";
 
@@ -541,6 +625,9 @@
 /*(NewCustomFilterDetailsController) title for new dns filter */
 "new_dns_filter_title" = "Nov filter DNS";
 
+/* (NewCustomFilterDetailsController) Error message when adding custom filter fails */
+"add_custom_filter_error_message" = "Nekaj je šlo narobe ali pa je format datoteke s filtriranjem po meri napačen";
+
 /*(NewCustomFilterDetailsController) title for editing custom filter */
 "edit_custom_filter_title" = "Uredi filter po meri";
 
@@ -548,19 +635,19 @@
 "common_add" = "Dodaj";
 
 /*(TodayViewController) Protection is disabled title  */
-"protection_disabled" = "Zaščita je onemogočena";
+"protection_disabled" = "Zaščite je izkjučena";
 
 /*(TodayViewController) Protection is enabled title  */
 "protection_enabled" = "Zaščita je omogočena";
 
 /*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Zaščita Safarija in DNS";
+"complex_enabled" = "Zaščita Safarija in DNS je vključena";
 
 /*(TodayViewController) Safari protection is enabled text  */
-"safari_enabled" = "Zaviranje vsebine Safarija";
+"safari_enabled" = "Zaščita Safarija je vključena";
 
 /*(TodayViewController) All protection is disabled text  */
-"complex_disabled" = "Vsi zaščitni moduli so onemogočeni";
+"complex_disabled" = "Zaščita Safarija in DNS je izključena";
 
 /*(TodayViewController) DNS protection is enabled text  */
 "system_enabled" = "Zaščita DNS";
@@ -586,6 +673,9 @@
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_notification_title" = "Za pravilno delo izklopite nekaj filtrov";
 
+/* (DnsFiltersTableController) - DNS filters title */
+"dns_filters_title" = "Filtri DNS";
+
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Onemogočeno";
 
@@ -602,28 +692,34 @@
 "dns_request_user_status_added_to_whitelist" = "dodano na Seznam dovoljenih";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_blacklist" = "dodano na Seznam nedovoljenih";
+"dns_request_user_status_added_to_blacklist" = "dodano na seznam nedovoljenih";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "odstranjeno s Seznama dovoljenih";
+"dns_request_user_status_removed_from_whitelist" = "odstranjeno s seznama dovoljenih";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "odstranjeno s Seznama nedovoljenih";
+"dns_request_user_status_removed_from_blacklist" = "odstranjeno s seznama nedovoljenih";
 
-/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "Odpri <b>nastavitve</b>";
+/* (OnboardingController) first step text*/
+"onboarding_first_step_text" = "Odpri <b>Nastavitve</b>.";
 
-/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "Tapnite na <b>Safari</b> in izberite menijski vnos <b>\"Zaviralci vsebine\"</b>";
+/* (OnboardingController) first step with advanced protection text*/
+"advanced_protection_onboarding_first_step_text" = "Odpri <b>Nastavitve</b>.";
 
-/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Preklopite na vse zaviralce vsebine</b> in se vrnite v aplikacijo!";
+/* (OnboardingController) second step text */
+"onboarding_second_step_text" = "Tapnite <b>Safari</b>, povlecite navzdol in tapnite <b>Zaviralci vsebine</b>.";
 
-/* (DnsProvidersController) default systen dns server name */
-"default_dns_server_name" = "Sistemski DNS";
+/* (OnboardingController) second step with advanced protection text */
+"advanced_protection_onboarding_second_step_text" = "Pojdite v <b>Safari -> Razširitve</b>.";
 
-/* (DnsProvidersController) default systen dns server description */
-"default_dns_server_description" = "Uporabite sistemsko privzete strežnike DNS, ki jih ponuja vaš ponudnik internetnih storitev";
+/* (OnboardingController) third step text */
+"onboarding_third_step_text" = "<b>Omogoči</b> vse AdGuard razširitve.";
+
+/* (OnboardingController) third step with advanced protection text */
+"advanced_protection_onboarding_third_step_text" = "Nastavi vse stikala AdGuard na <b>vklopljeno</b>. Pripravljeni ste!";
+
+/* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
+"onboarding_fours_step_text" = "Za <b>Napredno</b> zaščito, odprite Safari, tapnite ikono <b>aA</b> na levi strani URL polja,<br><br> %@ <br><br>nato tapnite <b>'Upravljaj razširitve'</b> in omogočite preklop <b>AdGuard</b>.";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "Onemogoči zahtevo";
@@ -645,6 +741,9 @@
 
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "iOS še ne podpira %@. poskusite dodati drugačen tok.";
+
+/*(DnsFiltersController) the error message that is shown when trying to add a duplicate custom dns server */
+"custom_dns_server_exists" = "Poskusili ste dodati podvojen strežnik DNS. Strežnik z navedenim gorvodnim tokom je že na seznamu";
 
 /* (NewDnsServerController) save and select button title */
 "save_and_select_button_title" = "Shrani in izberi";
@@ -736,35 +835,11 @@
 /* (BugReportController) Message when bug report failed */
 "bug_report_failed_message" = "Poročila o napaki ni bilo mogoče poslati. Prosimo, poskusite kasneje";
 
-/* (BugReportController) Message when leaving feedback failed */
-"feedback_failed_message" = "Povratnih informacij ni bilo mogoče poslati. Prosimo, poskusite kasneje";
-
 /* (BugReportController) Message when bug report successed */
 "bug_report_successed_message" = "Vaše poročilo o programski napaki je bilo uspešno poslano!";
 
-/* (BugReportController) Message when feedback leaving successed */
-"feedback_successed_message" = "Vaše povratne informacije so bile uspešno poslane!";
-
-/* (BugReportController) title for bug report */
-"bug_report_title" = "Prijavi napako";
-
-/* (BugReportController) title for leaving feedback */
-"leave_feedback_title" = "Pošlji povratne informacije";
-
-/* (BugReportController) description for bug report */
-"bug_report_description" = "Vključite opis težave (ali se je začela po posodobitvi?) in podatke o drugem programu, ki ga imate (VPN/protivirusni program/razširitev)";
-
-/* (BugReportController) description for leaving feedback */
-"leave_feedback_description_format" = "Povejte nam, kaj mislite o %@ — kaj vam je všeč ali ne. Katere funkcije bi radi predlagali";
-
-/* (BugReportController) button title for bug report */
-"bug_report_button_title" = "Pošlji poročilo";
-
-/* (BugReportController) button title for leaving feedback */
-"leave_feedback_button_title" = "Pošlji povratne informacije";
-
 /* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "Z nadaljevanjem uporabe sprejemate<br /><a href=%2$@>Pogoje in določila</a> in <a href=%1$@>Licenco za končnega uporabnika</a>";
+"introduction_license_agreement" = "Sprejmem AdGuardovo <a href=%2$@>Licenčno pogodbo za končnega uporabnika</a> in <a href=%1$@>Politiko zasebnosti</a>.";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Zahteve";
@@ -809,16 +884,83 @@
 "requests_number" = "%d zahtev";
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
-"native_dns_setup_title" = "Prosimo, omogočite %@ v nastavitvah sistemskega DNS";
+"native_dns_setup_title" = "Omogočite %@ v svojih nastavitvah DNS";
 
 /* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
-"native_dns_setup_description" = "Da omogočite izvorni DNS, morate odpreti <b>Nastavitve sistema</b>, pojdite na <b>Splošno > VPN in omrežje > DNS</b> in tam izberite <b>%@</b>.";
+"native_dns_setup_description" = "Za uporabo izvornega DNS, izberite <b>%@</b> v <b>Nastavitve sistema -> Splošno -> VPN in omrežje -> DNS</b>.";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name; String for iOS 15 and newer */
+"native_dns_setup_description_ios15" = "Za uporabo izvornega DNS, izberite <b>%@</b> v <b>Nastavitve sistema -> Splošno -> VPN in upravljanje naprav -> DNS</b>.";
 
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Povejte nam, ali ste zadovoljni z dosedanjo izkušnjo zaviranja oglasov";
 
 /* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
 "rate_app_problem_description" = "Prepričajte se, da uporabljate <b>brskalnik Safari</b>.<br> Trenutno je tehnično nemogoče zavirati vsebino v drugih brskalnikih.<br> Nadaljujte z nastavitvami zaščite Safari in omogočite vse potrebne sezname filtrov.<br> Znova zaženite aplikacijo Safari: zaprite jo in odprite znova.";
+
+/* (FilterDetailsViewController) Version subtitle for detailed filter info */
+"detailed_filter_info_version_subtitle" = "Različica";
+
+/* (FilterDetailsViewController) Updated subtitle for detailed filter info */
+"detailed_filter_info_updated_subtitle" = "Posodobljen";
+
+/* (FilterDetailsViewController) Rules count subtitle for detailed filter info */
+"detailed_filter_info_rules_count_subtitle" = "Število pravil";
+
+/* (FilterDetailsViewController) Website subtitle for detailed filter info */
+"detailed_filter_info_website_subtitle" = "Spletna stran";
+
+/* (FilterDetailsViewController) Subscription URL subtitle for detailed filter info */
+"detailed_filter_info_subscription_subtitle" = "URL naročnine";
+
+/* (AddRuleController) Error description when adding rule that already exists */
+"user_rule_exists_error" = "Poskušate dodati pravilo, ki je že na seznamu";
+
+// MARK: - Strings for UserRulesRedirectController
+/* (UserRulesRedirectController) - Processing state title */
+
+"user_rules_processing_title" = "Obdelava...";
+
+/* (UserRulesRedirectController) - Processing state description */
+"user_rules_processing_descr" = "Prosimo, počakajte sekundo...";
+
+/* (UserRulesRedirectController) - Description when allowlist rule is removed; %@ stands for 'allowlist' word hex color */
+"user_rules_allowlist_rule_removed" = "je bil odstranjen s <u style=color:%@>seznama dovoljenih</u>";
+
+/* (UserRulesRedirectController) - Description when new allowlist rule is added; %@ stands for 'allowlist' word hex color */
+"user_rules_allowlist_rule_added" = "je bil dodan na <u style=color:%@>seznam dovoljenih</u>";
+
+/* (UserRulesRedirectController) - Description when blocklist rule is added; %@ stands for 'user rules' words hex color */
+"user_rules_blocklist_rule_added" = "ima novo pravilo zaviranja v <u style=color:%@>uporabniških pravilih</u>";
+
+/* (UserRulesRedirectController) - Description when blocklist rules are removed */
+"user_rules_blocklist_rules_removed" = "nima več uporabniških pravil";
+
+// MARK: - Strings for license screen
+/* (PremiumFeature) - Advanced protection premium feature name */
+
+"advanced_protection_feature_name" = "Napredna zaščita";
+
+/* (PremiumFeature) -  Security filters premium feature name */
+"security_filters_feature_name" = "Varnostni filtri ";
+
+/* (PremiumFeature) - DNS privacy premium feature name */
+"dns_privacy_feature_name" = "Zasebnost DNS";
+
+/* (PremiumFeature) - Custom filters premium feature name */
+"custom_filters_feature_name" = "Filtri po meri";
+
+/* (PremiumFeature) - Advanced protection premium feature description */
+"advanced_protection_feature_description" = "Izboljšane metode za zaviranje zapletenih oglasov, kot so oglasi v YouTubu v Safariju";
+
+/* (PremiumFeature) - Security filters premium feature description */
+"security_filters_feature_description" = "Onemogočite lažno predstavljanje, zlonamerne programe in sumljivo vsebino";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "Šifrirajte zahteve DNS lokalno in nadzorujte svojo zasebnost";
+
+/* (PremiumFeature) - Custom filters premium feature description */
+"custom_filters_feature_description" = "Uporabite filtre tretjih oseb ali ustvarite svoje";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -863,6 +1005,8 @@
 /* (MainPageController) saved data size for VoiceOver*/
 "elapsed_time_voiceover" = "Povprečen čas za obdelavo zahteve DNS";
 
+/* (AGSearchView) Placeholder text for search bar */
+"search_view_placeholder" = "Poišči";
 
 // MARK: - SystemProtectionEnablerController
 /* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
@@ -885,7 +1029,7 @@
 
 // MARK: = ImportSettingsController
 /* (ImportSettingsController) add custom content blocker filter format */
-"import_custom_cb_filter_format" = "Dodaj filter zaviranje vsebine po meri: %@";
+"import_custom_cb_filter_format" = "Dodaj filter zaviranja vsebine, po meri: %@";
 
 /* (ImportSettingsController) add custom dns filter format */
 "import_dns_filter_format" = "Dodaj filter DNS po meri: %@";
@@ -962,21 +1106,62 @@
 "block_youtube_ads_instructions" = "Ali ste vedeli, da je YouTube spremenil svoje algoritme, da vam prikazuje več oglasov?<br><br>Zdaj, da jih onemogočitee, morate::<br><br>1. Odprite <a href=\"%@\">youtube.com</a> v Safariju.<br><br>2. Tapnite %@ Deli.<br><br>3. Tapnite \"Onemogoči oglase YouTube (z AdGuard)\".";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
-"block_youtube_ads_instructions_done_text_safari" = "Končano! Zdaj lahko YouTube gledate brez oglasov.\n\nKo je razširitev omogočena, se poleg logotipa YouTube prikaže napis \"z AdGuard\".<br><br><b> Če znova naložite stran, boste morali znova izvesti 3. in 4. korak.</b>";
+"block_youtube_ads_instructions_done_text_safari" = "Končano! Zdaj lahko gledate YouTube brez oglasov.\n\nKo je razširitev omogočena, se poleg YouTubovega logotipa prikaže napis »z AdGuardom«.<br><br><b>Če znova naložite stran, boste morali ponoviti koraka 3 in 4.</b>";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
-"block_youtube_ads_instructions_done_text" = "Končano! Zdaj lahko YouTube gledate brez oglasov.\n\nKo je razširitev omogočena, se poleg logotipa YouTube prikaže napis \"z AdGuard\".<br><br><b> Če znova naložite stran, boste morali znova izvesti 2. in 3. korak.</b>";
+"block_youtube_ads_instructions_done_text" = "Končano! Zdaj lahko gledate YouTube brez oglasov.\n\nKo je razširitev omogočena, se poleg YouTubovega logotipa prikaže napis »z AdGuardom«.<br><br><b>Če znova naložite stran, boste morali ponoviti koraka 2 in 3.</b>";
 
 // MARK: - YouTubeAdsRequestHandler
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
 
-"youtube_script_success_title" = "YouTube je zdaj brez oglasov! Če znova naložite stran, morate to razširitev znova zagnati";
+"youtube_script_success_title" = "YouTube je zdaj brez oglasov! To razširitev boste morali znova zagnati vsakič, ko znova naložite stran.";
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
-"youtube_script_wrong_domain_title" = "Ta razširitev naj bi se izvajala samo v YouTubu";
+"youtube_script_wrong_domain_title" = "Ta razširitev deluje samo za YouTube.";
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
 "youtube_script_already_executed_title" = "Razširitev je že izvedena";
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
-"youtube_script_error_title" = "Med odstranjevanjem oglasov v YouTubu je prišlo do neznane napake";
+"youtube_script_error_title" = "Pri odstranjevanju oglasov v YouTubu je prišlo do neznane napake";
+
+// MARK: - ActionExtensionMainController
+/* (ActionExtensionMainController) - ActionExtension info for iOS 15>= */
+
+"action_extension_obsolete_info" = "Ta akcija razširitve je zastarela, vendar je nova razširitev AdGuard Web Safari na voljo v meniju aA. Za začetek uporabe nove razširitve odprite meni aA, tapnite 'Upravljaj razširitve' in vklopite stikalo AdGuarda.";
+
+/* (ActionExtensionMainController) - ActionExtension info for iOS 14<= */
+"action_extension_new_version_info" = "Nova različica te razširitve je na voljo za iOS 15. Ima več zmogljivosti in izboljšan uporabniški vmesnik. Ne pozabite jo posodobiti!";
+
+/* (BackgroundFetchController) - Background app refresh default title */
+"background_fetch_default_period" = "Privzeto obdobje";
+
+/* (BackgroundFetchController) - Background app refresh every 1 hour title */
+"background_fetch_hour_period" = "Vsako uro";
+
+/* (BackgroundFetchController) - Background app refresh every 3 hours title */
+"background_fetch_tree_hours_period" = "Vsake 3 ure";
+
+/* (BackgroundFetchController) - Background app refresh every 12 hours title */
+"background_fetch_twelve_hours_period" = "Vsakih 12 ur";
+
+/* (BackgroundFetchController) - Background app refresh every 24 hours title */
+"background_fetch_twenty_four_hours_period" = "Vsakih 24 ur";
+
+/* Background app refresh time title */
+"background_app_refresh_time_title" = "Čas osveževanja aplikacije v ozadju";
+
+/* (DnsProvidersController) - add new dns server title */
+"add_custom_dns_server_title" = "Dodaj uporabniški strežnik DNS";
+
+/* (DnsProvidersController) - Header title */
+"dns_provider_controller_title" = "Strežnik DNS";
+
+/* (DnsProvidersController) - Header description */
+"dns_provider_controller_description" = "Svojo spletno zasebnost lahko izboljšate s šifriranjem prometa DNS. Da to naredite, izberite enega od priporočenih ponudnikov DNS.";
+
+/* (DnsProviderDetailsController) Server title */
+"server_title" = "Strežnik";
+
+/* (DnsProviderDetailsController) Website title */
+"website_title" = "Spletna stran";

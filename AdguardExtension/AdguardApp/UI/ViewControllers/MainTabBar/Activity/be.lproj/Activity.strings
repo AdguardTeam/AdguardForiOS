@@ -1,18 +1,12 @@
 
-/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "1rj-wD-aeH"; */
-"1rj-wD-aeH.normalTitle" = "ДАДАЦЬ";
-
 /* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "4IJ-xy-hky"; */
 "4IJ-xy-hky.normalTitle" = "зашыфравана";
 
 /* Class = "UILabel"; text = "Activity"; ObjectID = "5bV-zZ-4dr"; */
 "5bV-zZ-4dr.text" = "Актыўнасць";
 
-/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "6xN-ij-jJj"; */
-"6xN-ij-jJj.normalTitle" = "ПАСПРАБУЙЦЕ";
-
-/* Class = "UIButton"; normalTitle = "EDIT"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
-"7mk-7J-iLD.normalTitle" = "РЭДАГАВАЦЬ";
+/* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
+"7mk-7J-iLD.normalTitle" = "Рэдагаваць";
 
 /* Class = "UILabel"; text = "Most active companies"; ObjectID = "Asq-k8-hi1"; */
 "Asq-k8-hi1.text" = "Найбольш актыўныя кампаніі";
@@ -35,8 +29,8 @@
 /* Class = "UILabel"; text = "DNS protection is disabled"; ObjectID = "X1F-2p-Xpe"; */
 "X1F-2p-Xpe.text" = "Ахова DNS адключана";
 
-/* Class = "UIButton"; normalTitle = "ENABLE"; ObjectID = "XYE-JT-WSH"; */
-"XYE-JT-WSH.normalTitle" = "УКЛЮЧЫЦЬ";
+/* Class = "UIButton"; normalTitle = "Enable"; ObjectID = "XYE-JT-WSH"; */
+"XYE-JT-WSH.normalTitle" = "Уключыць";
 
 /* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "Xgg-jX-hwe"; */
 "Xgg-jX-hwe.normalTitle" = "Скапіравана";
@@ -47,20 +41,26 @@
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
 "ae4-WL-0pQ.text" = "Фільтры бяспекі, прыватнасць DNS, карыстальніцкія фільтры і іншае.";
 
+/* Class = "UILabel"; text = "Server"; ObjectID = "baH-YE-AMw"; */
+"baH-YE-AMw.text" = "Сервер";
+
+/* Class = "UILabel"; text = "Status"; ObjectID = "ckn-Oh-2aa"; */
+"ckn-Oh-2aa.text" = "Статус";
+
+/* Class = "UILabel"; text = "Protocol"; ObjectID = "eye-K9-gbK"; */
+"eye-K9-gbK.text" = "Пратакол";
+
 /* Class = "UILabel"; text = "Recent activity"; ObjectID = "hR9-Pm-Gq0"; */
 "hR9-Pm-Gq0.text" = "Нядаўняя актыўнасць";
 
-/* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
-"hoI-YR-JcD.normalTitle" = "НАЗАД";
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
+"hoI-YR-JcD.normalTitle" = "Back";
 
 /* Class = "UILabel"; text = "Recent activity"; ObjectID = "kX9-ZX-NOu"; */
 "kX9-ZX-NOu.text" = "Нядаўняя актыўнасць";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "kwZ-Kw-f1R"; */
 "kwZ-Kw-f1R.text" = "Заблакіраваць запыт";
-
-/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "l5B-oj-DnW"; */
-"l5B-oj-DnW.normalTitle" = "ДАДАЦЬ";
 
 /* Class = "UIButton"; normalTitle = "requests"; ObjectID = "lKJ-8V-GJi"; */
 "lKJ-8V-GJi.normalTitle" = "запытаў(-ы)";

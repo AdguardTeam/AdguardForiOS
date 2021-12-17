@@ -50,7 +50,10 @@ final class ConfigurationService: ConfigurationServiceProtocol {
             let command = note.userInfo?[PurchaseAssistant.kPSNotificationTypeKey] as! String
             if  command == PurchaseAssistant.kPSNotificationPremiumStatusChanged {
                 self.safariProtection.update(proStatus: self.proStatus, onCbReloaded: nil)
-                self.resources.advancedProtection = false
+
+                let enableAdvancedProtection = self.proStatus && self.resources.complexProtectionEnabled
+                self.safariProtection.update(advancedProtectionEnabled: enableAdvancedProtection)
+                self.isAdvancedProtectionEnabled = enableAdvancedProtection
                 self.proStatusChanged()
             }
         }

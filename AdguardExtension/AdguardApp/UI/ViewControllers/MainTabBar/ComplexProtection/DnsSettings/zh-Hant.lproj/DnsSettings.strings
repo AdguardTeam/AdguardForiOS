@@ -1,6 +1,3 @@
-/* Class = "UIButton"; normalTitle = "Regular"; ObjectID = "03E-rd-Slw"; */
-"03E-rd-Slw.normalTitle" = "一般的";
-
 /* Class = "UILabel"; text = "Network settings"; ObjectID = "0ZJ-BI-849"; */
 "0ZJ-BI-849.text" = "網路設定";
 
@@ -16,9 +13,6 @@
 /* Class = "UILabel"; text = "AdGuard will block the domains from this list"; ObjectID = "AOm-kV-l4z"; */
 "AOm-kV-l4z.text" = "AdGuard 將封鎖來自此清單中的網域";
 
-/* Class = "UIButton"; normalTitle = "DNS-over-HTTPS"; ObjectID = "DrO-hc-ilW"; */
-"DrO-hc-ilW.normalTitle" = "DNS-over-HTTPS";
-
 /* Class = "UILabel"; text = "Advanced network settings"; ObjectID = "FUx-XP-SzD"; */
 "FUx-XP-SzD.text" = "進階的網路設定";
 
@@ -28,14 +22,8 @@
 /* Class = "UILabel"; text = "Provided by the OS itself. Inspecting DNS activity won't be possible in this mode.\n\n"; ObjectID = "Mxf-0w-5MP"; */
 "Mxf-0w-5MP.text" = "由該作業系統本身提供。於此模式下將無法檢閱 DNS 活動。\n\n";
 
-/* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
-"NX4-vI-1WP.text" = "增加一個過濾器";
-
-/* Class = "UILabel"; text = "Blocks ads and trackers on the domain level and enhances your privacy by encrypting your DNS queries"; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
-"PFY-Cq-NFN.text" = "於網域層級上封鎖廣告和追蹤器，並透過加密您的 DNS 查詢來增強您的隱私";
-
-/* Class = "UIButton"; normalTitle = "DNS-over-QUIC (experimental)"; ObjectID = "PYL-vX-Dge"; */
-"PYL-vX-Dge.normalTitle" = "DNS-over-QUIC（實驗性的）";
+/* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
+"PFY-Cq-NFN.text" = "啟用此模組以透過加密您的 DNS 流量來提升您的隱私。";
 
 /* Class = "UILabel"; text = "AdGuard"; ObjectID = "QD7-ng-Xb6"; */
 "QD7-ng-Xb6.text" = "AdGuard";
@@ -43,7 +31,7 @@
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "QYv-iX-uIo"; */
 "QYv-iX-uIo.text" = "DNS 防護";
 
-/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "Uem-fP-tai"; */
+/* Class = "UIButton"; normalTitle = "Try for free"; ObjectID = "Uem-fP-tai"; */
 "Uem-fP-tai.normalTitle" = "免費地試用";
 
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
@@ -55,29 +43,11 @@
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "ZgC-4d-Peb"; Note = "(Add Custom Filter) url hint"; */
 "ZgC-4d-Peb.placeholder" = "IP、sdns://、https:// 或 tls://";
 
-/* Class = "UIButton"; normalTitle = "DNS-over-TLS"; ObjectID = "Zn0-J3-lVl"; */
-"Zn0-J3-lVl.normalTitle" = "DNS-over-TLS";
-
-/* Class = "UILabel"; text = "DNS server"; ObjectID = "c9G-jn-5ym"; */
-"c9G-jn-5ym.text" = "DNS 伺服器";
-
-/* Class = "UILabel"; text = "Server"; ObjectID = "csw-3H-3tU"; */
-"csw-3H-3tU.text" = "伺服器";
-
-/* Class = "UILabel"; text = "Add a custom DNS server"; ObjectID = "d1u-rO-z2K"; */
-"d1u-rO-z2K.text" = "增加一個自訂的 DNS 伺服器";
-
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "dW3-zk-BPr"; */
 "dW3-zk-BPr.text" = "DNS 伺服器位址";
 
-/* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
-"hh1-EV-7KD.normalTitle" = "DNSCrypt";
-
 /* Class = "UILabel"; text = "Network settings"; ObjectID = "iPl-vI-lX5"; */
 "iPl-vI-lX5.text" = "網路設定";
-
-/* Class = "UILabel"; text = "You can enhance your online privacy by encrypting DNS traffic. To do so, choose one of the recommended DNS providers."; ObjectID = "iaJ-tk-ohH"; */
-"iaJ-tk-ohH.text" = "您可透過加密 DNS 流量提升您的線上隱私。為此，選擇被建議的 DNS 供應商的其中之一。";
 
 /* Class = "UILabel"; text = "Blocklist"; ObjectID = "ihd-7R-RfE"; */
 "ihd-7R-RfE.text" = "封鎖清單";
@@ -85,17 +55,11 @@
 /* Class = "UILabel"; text = "Works as a local \"pseudo\" VPN. Supports any DNS protocol, allows you to inspect your device DNS activity."; ObjectID = "lEg-oH-oxd"; */
 "lEg-oH-oxd.text" = "以本機\"偽\" VPN 的方式運作。支援任何的 DNS 協定，允許您檢閱您裝置的 DNS 活動。";
 
-/* Class = "UILabel"; text = "Website"; ObjectID = "mN8-Uh-sLQ"; */
-"mN8-Uh-sLQ.text" = "網站";
-
-/* Class = "UIButton"; normalTitle = "OK"; ObjectID = "o1z-O6-Bk9"; */
+/* Class = "UIButton"; normalTitle = "Ok"; ObjectID = "o1z-O6-Bk9"; */
 "o1z-O6-Bk9.normalTitle" = "確定";
 
 /* Class = "UILabel"; text = "DNS filtering"; ObjectID = "pC4-RU-DaD"; */
 "pC4-RU-DaD.text" = "DNS 過濾";
-
-/* Class = "UILabel"; text = "DNS Filters"; ObjectID = "pXa-VP-4yy"; */
-"pXa-VP-4yy.text" = "DNS 過濾器";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "pY3-X6-fFy"; */
 "pY3-X6-fFy.text" = "安全性過濾器、DNS 隱私、自訂的過濾器等等";

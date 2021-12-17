@@ -3,6 +3,96 @@
         "message": "AdGuard"
     },
     "extension_description": {
-        "message": "AdGuard Safari Web Extension"
+        "message": "Sambungan Sesawang Safari AdGuard"
+    },
+    "popup_action_safari_protection_title": {
+        "message": "Perlindungan Safari"
+    },
+    "popup_action_safari_protection_description": {
+        "message": "untuk halaman ini"
+    },
+    "popup_action_safari_protection_description_disabled": {
+        "message": "perlindungan Dimatikan"
+    },
+    "popup_action_current_site_status_desc_enabled": {
+        "message": "perlindungan Dihidupkan"
+    },
+    "popup_action_current_site_status_desc_disabled": {
+        "message": "perlindungan Dimatikan"
+    },
+    "popup_action_block_element": {
+        "message": "Sekat unsur di halaman ini"
+    },
+    "popup_action_delete_user_rules": {
+        "message": "Padam semua peraturan pengguna untuk halaman ini"
+    },
+    "popup_action_current_site_desc_starting": {
+        "message": "menghidupkan perlindungan..."
+    },
+    "popup_action_current_site_desc_allowlisted": {
+        "message": "ditambahkan ke senarai putih"
+    },
+    "popup_action_current_site_desc_basic_only": {
+        "message": "perlindungan asas sahaja"
+    },
+    "popup_modal_all_sites_allowed_title": {
+        "message": "Perlindungan terulung"
+    },
+    "popup_modal_all_sites_allowed_desc": {
+        "message": "Syabas! AdGuard akan menyekat hampir kesemua iklan dan mengatasi cabaran yang paling sukar."
+    },
+    "popup_modal_all_sites_allowed_button": {
+        "message": "Teruskan"
+    },
+    "popup_modal_not_all_sites_allowed_title": {
+        "message": "Perlindungan terpilih"
+    },
+    "popup_modal_not_all_sites_allowed_desc": {
+        "message": "Anda menghidupkan AdGuard hanya untuk laman sesawang ini. Iklan boleh muncul pada laman sesawang lain melainkan anda memberikan lebih banyak kebenaran kepada AdGuard."
+    },
+    "popup_modal_not_all_sites_allowed_button": {
+        "message": "Teruskan"
+    },
+    "popup_modal_advanced_blocking_disabled_title": {
+        "message": "Perlindungan lanjutan dimatikan"
+    },
+    "popup_modal_advanced_blocking_disabled_description": {
+        "message": "Skrip pengguna dan penyekat iklan YouTube tidak dihidupkan."
+    },
+    "popup_modal_advanced_blocking_disabled_button": {
+        "message": "Hidupkan"
+    },
+    "popup_modal_title_free": {
+        "message": "Kecapi keupayaan terunggul anda"
+    },
+    "popup_modal_desc_free": {
+        "message": "Anda masih lagi kekurangan perlindungan lanjutan yang terdapat dalam AdGuard Premium. Ayuh sekat lebih banyak lagi iklan seperti iklan YouTube di Safari?"
+    },
+    "popup_modal_btn_free": {
+        "message": "Naik taraf"
+    },
+    "popup_fullscreen_support_title": {
+        "message": "Adakah anda memerlukan bantuan?"
+    },
+    "popup_fullscreen_support_desc": {
+        "message": "Ada sesuatu yang tidak kena? Kami mungkin ada penyelesaian."
+    },
+    "popup_protection_disabled_support_desc": {
+        "message": "Perlindungan untuk laman sesawang ini Dimatikan. Ada sesuatu yang tidak kena? Kami mungkin ada penyelesaian."
+    },
+    "popup_support_button_text": {
+        "message": "Laporkan masalah"
+    },
+    "modal_protection_off_title": {
+        "message": "Hidupkan AdGuard"
+    },
+    "modal_protection_off_settings": {
+        "message": "Buka <b>Tetapan<\/b>"
+    },
+    "modal_protection_off_extensions": {
+        "message": "Ketik <b>Safari<\/b>, seret ke bawah, dan ketik <b>Penyekat Kandungan<\/b>"
+    },
+    "modal_protection_off_switch": {
+        "message": "<b>Hidupkan<\/b> semua sambungan AdGuard"
     }
 }

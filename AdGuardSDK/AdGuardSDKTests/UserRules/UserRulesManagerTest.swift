@@ -267,8 +267,12 @@ class UserRulesManagerTest: XCTestCase {
 
         //Throws error if bar1 exists
         XCTAssertThrowsError(try userRuleManager.modifyRule("foo999", UserRule(ruleText: "bar1", isEnabled: true)))
-        //Throws error if foo999 non exists
+
+        //Throws error if foo999 doesn't exist
         XCTAssertThrowsError(try userRuleManager.modifyRule("foo999", UserRule(ruleText: "bar2", isEnabled: true)))
+
+        //Throws error if foo2 exists
+        XCTAssertThrowsError(try userRuleManager.modifyRule("foo1", UserRule(ruleText: "foo2", isEnabled: true)))
 
         userRuleManager.removeAllRules()
     }

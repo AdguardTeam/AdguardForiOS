@@ -14,10 +14,13 @@
 "rule_converting_error" = "無法轉換該過濾器規則。規則文字為無效的。";
 
 /* (AEUIUtils) User filter convertering error description. */
-"filter_rules_converting_error" = "無法對 Safari 增加這些使用者規則";
+"filter_rules_converting_error" = "無法對 Safari 新增這些使用者規則";
 
 /* Alert title. On error. */
 "common_error_title" = "錯誤";
+
+/* Something went wrong title for unknown error */
+"something_went_wrong_title" = "某事物出現問題";
 
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "過濾器無法被載進 Safari，所以您最近的更改未被套用。";
@@ -68,16 +71,16 @@
 "common_action_yes" = "是";
 
 /* (MainController) login status caption on main screen */
-"protection_enabled_caption" = "防護被啟用";
-
-/* (MainController) login status caption on main screen */
 "protection_partly_enabled_caption" = "某些內容阻擋器被禁用";
-
-/* (MainController) login status caption on main screen */
-"protection_disabled_caption" = "防護被禁用";
 
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "訂閱";
+
+/* (LicenseProductChoiceCell) restore purchase button title */
+"restore_purchase_button_title" = "回復購買";
+
+/* (FreeLicenseStateTableViewModel) title for permanent subscription */
+"permanent_subscription_title" = "終身";
 
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "購買";
@@ -140,13 +143,13 @@
 "filter_date_format" = "過濾器已更新於：%@";
 
 /* (UserFilterController) blacklist description format */
-"blacklist_text_format" = "於此您可增加您自己的規則。<br>閱讀這個<a href=\"%@\">關於規則語法之註釋</a>。";
+"blacklist_text_format" = "於此您可新增您自己的規則。<br>閱讀這個<a href=\"%@\">關於規則語法之註釋</a>。";
 
 /* (UserFilterController) whitelist description */
 "whitelist_text" = "輸入被排除在過濾之外的網域。此清單優先於其它的設定。";
 
 /* (UserFilterController) inverted whitelist description */
-"inverted_whitelist_text" = "於此輸入該域名。AdGuard 將在 Safari 中僅對於這些網站啟用過濾。";
+"inverted_whitelist_text" = "於此輸入域名。AdGuard 將在 Safari 中僅對這些網站啟用過濾。";
 
 /* (UserFilterController) dns whitelist description */
 "dns_whitelist_text" = "於此輸入被換行分隔的域名。AdGuard 將允許所有至這些網域的連線。";
@@ -158,10 +161,10 @@
 "update_filter_start_message" = "正在更新…";
 
 /* (UserFilterController) add blocklist rule button title */
-"add_blacklist_rule_title" = "增加一項新規則";
+"add_blacklist_rule_title" = "新增一項新的規則";
 
 /* (UserFilterController) add whitelist domain button title */
-"add_whitelist_domain_title" = "增加一個網域";
+"add_whitelist_domain_title" = "新增一個網域";
 
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
@@ -193,9 +196,6 @@
 /* (MainController) Message on main screen during update - count of updated filters */
 "filters_updated_format" = "已更新的過濾器：%lu";
 
-/* (FiltersController) Filter Version format */
-"filter_version_format" = "版本 %@";
-
 /* (DnsSettingController) split tunel mode description */
 "tunnel_mode_split_description" = "分離的隧道，與\"個人級 VPN\"應用程式相容";
 
@@ -210,9 +210,6 @@
 
 /* (DnsSettingController) Native DNS implementation title */
 "native_dns_implementation_title" = "原生的";
-
-/* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
-"system_dns_server" = "無加密（系統 DNS）";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "已啟用 %2$d 當中的 %1$d";
@@ -240,12 +237,6 @@
 
 /* login error message */
 "login_error_message" = "當登入時，錯誤已發生。";
-
-/* purchase secription format */
-"purchase_description_format" = "關於 AdGuard 訂閱：<br><br>• 付款將在購買確認時被記在您的 iTunes 帳戶上。<br><br>• 除非在現行的週期結束前至少 24 小時自動續訂被關掉，否則該訂閱被自動地續訂。<br><br>• 該訂閱續訂費用將在現行的週期結束前 24 小時內被收費。<br><br>您的訂閱可被管理，且在購買訂閱後，您的自動續訂可在您的 iTunes 帳戶設定裡被關掉。<br><br><a href=%2$@>條款和條件</a>及<a href=%1$@>隱私政策</a>";
-
-/* lifetime purchase secription format */
-"lifetime_purchase_description_format" = "<a href=%2$@>條款和條件</a>及<a href=%1$@>隱私政策</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "確定";
@@ -329,7 +320,7 @@
 "assistant_launching_unable" = "此網站的安全性政策不允許發動 AdGuard 助理。";
 
 /* (Action Extension - ActionViewController) Some errors when starting. */
-"support_error_safari_extension" = "當初始 Safari 動作延伸功能時，非預期性的錯誤已發生。如果這個再次發生，請與 AdGuard 支援聯繫。";
+"support_error_safari_extension" = "當初始化 Safari 動作延伸功能時，非預期性的錯誤發生了。如果這個再次發生，請與 AdGuard 支援聯繫。";
 
 /* (APUIAdguardDNSController) PRO version. Alert title. On warning. */
 "common_warning_title" = "警告";
@@ -337,17 +328,11 @@
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "您已超出過濾器規則之最大數量。";
 
-/* (GetProController) title for permanent subscription */
-"permanent_subscription_title" = "終身";
+/* (FiltersController) Enabled state in groups section */
+"on_state" = "已啟用";
 
-/* (FiltersController) ON state in groups section */
-"on_state" = "開著";
-
-/* (FiltersController) OFF state in groups section */
-"off_state" = "關著";
-
-/* (NewCustomFilterDetailedController) homepage string */
-"homepage_title" = "首頁：";
+/* (FiltersController) Disabled state in groups section */
+"off_state" = "已禁用";
 
 /* (FilterDetailsController) delete filter title */
 "delete_filter_title" = "刪除過濾器";
@@ -360,6 +345,9 @@
 
 /* (AboutViewController) AdGuard copyright string */
 "copyright_format" = "© 2009–%@。AdGuard 軟體有限公司\n保留所有的權利。AdGuard.com";
+
+/* (LicensePageViewController) Login title */
+"common_login" = "登入";
 
 /* (AboutViewController) Logout title */
 "common_logout" = "登出";
@@ -386,7 +374,7 @@
 "wifi_exceptions_description" = "DNS 防護將不對下列的 Wi-Fi 網路起作用";
 
 /* (NetworkSettingsController) button title for "Add an exception" */
-"add_exception_title" = "增加一個例外";
+"add_exception_title" = "新增一個例外";
 
 /* (NetworkSettingsController) title for "Filter mobile data" */
 "filter_mobile_title" = "過濾行動數據";
@@ -414,6 +402,9 @@
 
 /* (ListOfRulesModel) title for export */
 "export" = "匯出";
+
+/* (UserRulesTableController) - title for editing user rules option  */
+"open_user_rules_editor" = "開啟編輯器";
 
 /* (ListOfRulesModel) title for Clear button*/
 "common_clear" = "清除";
@@ -443,7 +434,7 @@
 "security_description" = "允許封鎖網路釣魚網站和其它危險的網域。對於高級版用戶是可用的";
 
 /*(GroupsController) Custom filters description without premium  */
-"custom_description" = "允許增加第三方的過濾器。對於高級版用戶是可用的";
+"custom_description" = "允許新增第三方的過濾器。對於高級版用戶是可用的";
 
 /*(LogCategory) audio video player category*/
 "audio_video_player" = "影音播放器";
@@ -500,10 +491,13 @@
 "common_select_all" = "全選";
 
 /*(ListOfRules) Add domain title */
-"add_domain" = "增加一個網域";
+"add_domain" = "新增一個網域";
 
 /*(ListOfRules) Add new rule title */
-"add_new_rule" = "增加一項新的規則";
+"add_new_rule" = "新增一項新的規則";
+
+/* (OneSafariGroupFiltersModel) Add new filter title */
+"add_new_filter" = "新增一個過濾器";
 
 /* confirm reset lert text */
 "confirm_reset_text" = "包括使用者規則、DNS 防護、介面和授權設定之所有的設定將被重置。這操作無法被復原。重置該設定嗎？";
@@ -548,22 +542,7 @@
 "edit_custom_filter_title" = "編輯自訂的過濾器";
 
 /*(NewCustomFilterDetailsController) add button title */
-"common_add" = "增加";
-
-/*(TodayViewController) Protection is disabled title  */
-"protection_disabled" = "防護被禁用";
-
-/*(TodayViewController) Protection is enabled title  */
-"protection_enabled" = "防護被啟用";
-
-/*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Safari 和 DNS 防護";
-
-/*(TodayViewController) Safari protection is enabled text  */
-"safari_enabled" = "Safari 內容阻擋";
-
-/*(TodayViewController) All protection is disabled text  */
-"complex_disabled" = "所有的防護模組被禁用";
+"common_add" = "新增";
 
 /*(TodayViewController) DNS protection is enabled text  */
 "system_enabled" = "DNS 防護";
@@ -578,7 +557,7 @@
 "common_action_more" = "更多的";
 
 /*(DnsFiltersController) action title adding existing filter  */
-"filter_exists" = "您已嘗試增加一個重複的過濾器。此過濾器已經在該清單中。";
+"filter_exists" = "您已嘗試新增一個重複的過濾器。此過濾器已在該清單中。";
 
 /*(DnsFiltersController) DNS filters number title */
 "dns_filters_number_title" = "%@ 項規則被啟用";
@@ -588,6 +567,9 @@
 
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_notification_title" = "為了正常的運作，關掉一些過濾器";
+
+/* (DnsFiltersTableController) - DNS filters title */
+"dns_filters_title" = "DNS 過濾器";
 
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "已封鎖的";
@@ -604,35 +586,11 @@
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_whitelist" = "被加至允許清單";
 
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_blacklist" = "被加至封鎖清單";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "已從允許清單中移除";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "已從封鎖清單中移除";
-
-/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "開啟該<b>設定</b>";
-
-/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "向 <b>Safari</b> 輕觸並選擇<b>\"內容阻擋器\"</b>選單項目";
-
-/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>打開所有的內容阻擋器</b>，然後回到該應用程式！";
-
-/* (DnsProvidersController) default systen dns server name */
-"default_dns_server_name" = "系統 DNS";
-
-/* (DnsProvidersController) default systen dns server description */
-"default_dns_server_description" = "使用由您的網際網路服務供應商提供之系統預設 DNS 伺服器";
-
 /* (BlockRequestController) Block request title */
 "block_request" = "封鎖該請求";
 
 /* (BlockRequestController) Allowlist request title */
-"whitelist_request" = "增加該網域到允許清單";
+"whitelist_request" = "新增該網域到允許清單";
 
 /* (AEUIPlayerViewController) Video Tutorial title */
 "video_tutorial_title" = "視訊導覽";
@@ -647,7 +605,7 @@
 "invalid_dns_protocol_title" = "無效的 DNS 協定";
 
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
-"invalid_dns_protocol_message" = "%@ 尚未被 iOS 支援。嘗試加入不同的上游。";
+"invalid_dns_protocol_message" = "%@ 尚未被 iOS 支援。嘗試新增不同的上游。";
 
 /* (NewDnsServerController) save and select button title */
 "save_and_select_button_title" = "儲存並選擇";
@@ -662,7 +620,7 @@
 "delete_button_title" = "刪除";
 
 /* (NewDnsServerController) add dns server alert title */
-"add_dns_server_alert_title" = "增加一個自訂的 DNS 伺服器";
+"add_dns_server_alert_title" = "新增一個自訂的 DNS 伺服器";
 
 /* (NewDnsServerController) edit dns server alert title */
 "edit_dns_server_alert_title" = "編輯自訂的 DNS 伺服器";
@@ -739,35 +697,8 @@
 /* (BugReportController) Message when bug report failed */
 "bug_report_failed_message" = "未能提交程式錯誤報告，請再次嘗試";
 
-/* (BugReportController) Message when leaving feedback failed */
-"feedback_failed_message" = "未能傳送回饋意見，請再次嘗試";
-
 /* (BugReportController) Message when bug report successed */
 "bug_report_successed_message" = "您的程式錯誤報告已被成功地傳送！";
-
-/* (BugReportController) Message when feedback leaving successed */
-"feedback_successed_message" = "您的回饋意見已被成功地傳送！";
-
-/* (BugReportController) title for bug report */
-"bug_report_title" = "報告程式錯誤";
-
-/* (BugReportController) title for leaving feedback */
-"leave_feedback_title" = "留下回饋意見";
-
-/* (BugReportController) description for bug report */
-"bug_report_description" = "請包括該問題說明（問題在更新之後發生？）及關於其它您有的軟體（VPN/防毒軟體/擴充功能）之資訊";
-
-/* (BugReportController) description for leaving feedback */
-"leave_feedback_description_format" = "告訴我們您對於 %@ 有什麼想法 — 您喜歡或不喜歡的東西，您想要建議哪些功能";
-
-/* (BugReportController) button title for bug report */
-"bug_report_button_title" = "傳送報告";
-
-/* (BugReportController) button title for leaving feedback */
-"leave_feedback_button_title" = "傳送回饋意見";
-
-/* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "透過繼續使用它，您接受該<br /><a href=%2$@>條款和條件</a>及<a href=%1$@>隱私政策</a>";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "請求";
@@ -811,17 +742,29 @@
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d 項請求";
 
-/* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
-"native_dns_setup_title" = "請在系統 DNS 設定中啟用 %@";
-
-/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
-"native_dns_setup_description" = "為了啟用原生的 DNS，您需要開啟<b>系統設定</b>，前往<b>一般 > VPN 與網路 > DNS</b>，然後在那選擇 <b>%@</b>。";
-
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "告訴我們到目前為止您是否對廣告封鎖體驗感到滿意";
 
 /* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
 "rate_app_problem_description" = "確保您正在使用 <b>Safari 瀏覽器</b>。<br>目前在技術上不可能封鎖在其它瀏覽器中的內容。<br>前往 Safari 防護設定並啟用所有必要的過濾器清單。<br>重新啟動 Safari 應用程式：退出然後再次開啟。";
+
+/* (FilterDetailsViewController) Version subtitle for detailed filter info */
+"detailed_filter_info_version_subtitle" = "版本";
+
+/* (FilterDetailsViewController) Updated subtitle for detailed filter info */
+"detailed_filter_info_updated_subtitle" = "已更新於";
+
+/* (FilterDetailsViewController) Rules count subtitle for detailed filter info */
+"detailed_filter_info_rules_count_subtitle" = "規則總數";
+
+/* (FilterDetailsViewController) Website subtitle for detailed filter info */
+"detailed_filter_info_website_subtitle" = "網站";
+
+/* (FilterDetailsViewController) Subscription URL subtitle for detailed filter info */
+"detailed_filter_info_subscription_subtitle" = "訂閱網址";
+
+/* (PremiumFeature) - Custom filters premium feature name */
+"custom_filters_feature_name" = "自訂的過濾器";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -866,6 +809,8 @@
 /* (MainPageController) saved data size for VoiceOver*/
 "elapsed_time_voiceover" = "處理一項 DNS 請求的平均時間";
 
+/* (AGSearchView) Placeholder text for search bar */
+"search_view_placeholder" = "搜尋";
 
 // MARK: - SystemProtectionEnablerController
 /* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
@@ -888,10 +833,10 @@
 
 // MARK: = ImportSettingsController
 /* (ImportSettingsController) add custom content blocker filter format */
-"import_custom_cb_filter_format" = "增加自訂的內容阻擋器過濾器：%@";
+"import_custom_cb_filter_format" = "新增自訂的內容阻擋器過濾器：%@";
 
 /* (ImportSettingsController) add custom dns filter format */
-"import_dns_filter_format" = "增加自訂的 DNS 過濾器：%@";
+"import_dns_filter_format" = "新增自訂的 DNS 過濾器：%@";
 
 /* (ImportSettingsController) enable content blocker filter format */
 "enable_cb_filter_format" = "啟用過濾器：%@";
@@ -909,10 +854,10 @@
 "import_license_format" = "以 %@ 授權金鑰啟動高級版功能";
 
 /* (ImportSettingsController) add user rules title */
-"import_user_rules" = "增加使用者規則";
+"import_user_rules" = "新增使用者規則";
 
 /* (ImportSettingsController) add dns rules title */
-"import_dns_user_rules" = "增加 DNS 使用者規則";
+"import_dns_user_rules" = "新增 DNS 使用者規則";
 
 /* (LowLevelSettingsController) Low level settings description. <b style=color:#c23814ff> It is a color for WARNING! word*/
 "low_level_description" = "<b style=color:#c23814ff>警告！</b>啟用這些功能可能破壞網際網路連線或危害您的安全性及隱私。";
@@ -938,7 +883,7 @@
 "upstreams_fallbacks_title" = "應變（Fallback）伺服器";
 
 /* (UpstreamsController) Custom address title */
-"upstreams_custom_address_title" = "增加一組自訂的 IP";
+"upstreams_custom_address_title" = "新增一組自訂的 IP";
 
 /* (UpstreamsController) Custom address description */
 "upstreams_custom_address_description" = "IP 位址";
@@ -964,22 +909,20 @@
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
 "block_youtube_ads_instructions" = "您知道 YouTube 已更改它的演算法以向您顯示更多的廣告嗎？<br><br>現在，為了封鎖它們，您需要：<br><br>1. 在 Safari 中打開 <a href=\"%@\">youtube.com</a>。<br><br>2. 輕觸 %@ 分享。<br><br>3. 輕觸\"封鎖 YouTube 廣告（由 AdGuard 製作）\"。";
 
-/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
-"block_youtube_ads_instructions_done_text_safari" = "完成！現在，您可觀看無廣告的 YouTube。\n\n當該延伸功能被啟用時，標題 “偕同 AdGuard” 緊鄰著 YouTube 商標被顯示。<br><br><b>若您重新載入該頁面，您將需要再次執行步驟 3 和 4。</b>";
-
-/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
-"block_youtube_ads_instructions_done_text" = "完成！現在，您可觀看無廣告的 YouTube。\n\n當該延伸功能被啟用時，標題 “偕同 AdGuard” 緊鄰著 YouTube 商標被顯示。<br><br><b>若您重新載入該頁面，您將需要再次執行步驟 2 和 3。</b>";
-
-// MARK: - YouTubeAdsRequestHandler
-/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
-
-"youtube_script_success_title" = "現在 YouTube 為無廣告的！請注意，若您重新載入該頁面，您需要再次執行此延伸功能";
-
-/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
-"youtube_script_wrong_domain_title" = "此延伸功能被規劃僅於 YouTube 上被執行";
-
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
 "youtube_script_already_executed_title" = "此延伸功能已被執行";
 
-/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
-"youtube_script_error_title" = "當移除 YouTube 廣告時，未知的錯誤發生了";
+/* (BackgroundFetchController) - Background app refresh every 1 hour title */
+"background_fetch_hour_period" = "每小時";
+
+/* (DnsProvidersController) - add new dns server title */
+"add_custom_dns_server_title" = "新增一個自訂的 DNS 伺服器";
+
+/* (DnsProvidersController) - Header title */
+"dns_provider_controller_title" = "DNS 伺服器";
+
+/* (DnsProviderDetailsController) Server title */
+"server_title" = "伺服器";
+
+/* (DnsProviderDetailsController) Website title */
+"website_title" = "網站";

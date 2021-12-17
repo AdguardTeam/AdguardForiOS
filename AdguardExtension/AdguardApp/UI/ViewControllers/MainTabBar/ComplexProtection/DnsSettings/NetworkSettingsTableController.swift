@@ -128,6 +128,24 @@ final class NetworkSettingsTableController: UITableViewController, AddRuleContro
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
+    // MARK: - UITableViewDelegate
+
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return section == exceptionsSection && !model.exceptions.isEmpty ? nil : UIView()
+    }
+
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return section == exceptionsSection && !model.exceptions.isEmpty ? 0.0 : 0.01
+    }
+
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return section == addExceptionSection && !model.exceptions.isEmpty ? nil : UIView()
+    }
+
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return section == addExceptionSection && !model.exceptions.isEmpty ? 0.0 : 0.01
+    }
+
     // MARK: - AddRuleControllerDelegate method
 
     func addRule(_ rule: String) throws {

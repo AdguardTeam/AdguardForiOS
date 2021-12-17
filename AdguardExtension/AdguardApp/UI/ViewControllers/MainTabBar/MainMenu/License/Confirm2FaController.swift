@@ -42,27 +42,35 @@ final class Confirm2FaController : UIViewController, UITextFieldDelegate {
 
     private var purchaseObserver: NotificationToken?
 
+    private var enteredToken: String { codeTextField.text ?? "" }
+
     // MARK: - VC lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         codeTextField.delegate = self
+        codeTextField.addTarget(self, action: #selector(textFieldEditingChanged(_:)), for: .editingChanged)
+        codeTextField.keyboardType = .numberPad
+
         fromOnboarding = self.tabBarController == nil
 
         purchaseObserver = NotificationCenter.default.observe(
             name: Notification.Name(PurchaseAssistant.kPurchaseServiceNotification),
-            object: nil, queue: OperationQueue.main) { [weak self](notification) in
-            if let info = notification.userInfo {
+            object: nil,
+            queue: .main
+        ) { [weak self] note in
+            if let info = note.userInfo {
                 self?.processNotification(info: info)
             }
         }
 
-        updateUI()
         updateTheme()
         setupBackButton()
         confirmButton.makeTitleTextCapitalized()
         confirmButton.applyStandardGreenStyle()
-        confirmButton.isEnabled = false
+        confirmButton.setBackgroundColor()
+        updateConfirmButton()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -73,47 +81,24 @@ final class Confirm2FaController : UIViewController, UITextFieldDelegate {
     // MARK: - actions
 
     @IBAction func confirmAction(_ sender: Any) {
-        if credentials != nil {
+        if let credentials = credentials {
             confirmButton.isEnabled = false
             confirmButton.startIndicator()
-            purchaseService.login(name: credentials!.name, password: credentials!.password, code2fa: codeTextField.text)
+            purchaseService.login(name: credentials.name, password: credentials.password, code2fa: enteredToken.trimmingCharacters(in: .whitespacesAndNewlines))
         }
-    }
-
-    // MARK: - TextFieldDelegate
-
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let currentText = textField.text ?? ""
-        guard let stringRange = Range(range, in: currentText) else { return false }
-        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-
-        codeTextField.rightView?.isHidden = updatedText.isEmpty
-        confirmButton.isEnabled = !updatedText.isEmpty
-        codeTextField.borderState = .enabled
-        errorLabel.text = ""
-
-        return true
     }
 
     // MARK: - private methods
 
-    private func updateUI() {
-        confirmButton.isEnabled = codeTextField.text?.count ?? 0 > 0
-    }
-
     private func processNotification(info: [AnyHashable: Any]) {
-
         DispatchQueue.main.async { [weak self] in
-
             self?.confirmButton.isEnabled = true
             self?.confirmButton.stopIndicator()
-
 
             let type = info[PurchaseAssistant.kPSNotificationTypeKey] as? String
             let error = info[PurchaseAssistant.kPSNotificationErrorKey] as? NSError
 
             switch type {
-
             case PurchaseAssistant.kPSNotificationLoginSuccess:
                 self?.loginSuccess()
             case PurchaseAssistant.kPSNotificationLoginFailure:
@@ -122,7 +107,6 @@ final class Confirm2FaController : UIViewController, UITextFieldDelegate {
                 self?.premiumExpired()
             case PurchaseAssistant.kPSNotificationLoginNotPremiumAccount:
                 self?.notPremium()
-
             default:
                 break
             }
@@ -132,10 +116,7 @@ final class Confirm2FaController : UIViewController, UITextFieldDelegate {
     private func loginSuccess() {
         let message = String.localizedString("login_success_message")
 
-        /*
-            If there is no tab bar this mean that we trying to login from onboarding license screen and we must dismiss it after successful login
-        */
-
+        // If there is no tab bar this mean that we trying to login from onboarding license screen and we must dismiss it after successful login
         if !fromOnboarding {
             self.navigationController?.popToRootViewController(animated: false)
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -179,10 +160,23 @@ final class Confirm2FaController : UIViewController, UITextFieldDelegate {
         if let message = messages?.errorMessage {
             errorLabel.text = message
             codeTextField.borderState = .error
-        }
-        else {
+        } else {
             errorLabel.text = ""
         }
+    }
+
+    @objc private final func textFieldEditingChanged(_ sender: AGTextField) {
+        updateConfirmButton()
+
+        sender.rightView?.isHidden = enteredToken.isEmpty
+        confirmButton.isEnabled = !enteredToken.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        codeTextField.borderState = .enabled
+        errorLabel.text = ""
+    }
+
+    private func updateConfirmButton() {
+        let text = enteredToken.trimmingCharacters(in: .whitespacesAndNewlines)
+        confirmButton.isEnabled = !text.isEmpty
     }
 }
 

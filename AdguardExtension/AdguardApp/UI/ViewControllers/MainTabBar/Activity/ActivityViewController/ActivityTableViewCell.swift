@@ -69,7 +69,7 @@ final class ActivityTableViewCell: UITableViewCell {
         guard let record = record else { return }
         let timeString = record.time()
         let name = record.tracker?.name
-        let domain = record.getDetailsString(infoLabel.font.pointSize, advancedMode)
+        let domain = record.getDetailsString(isIpadTrait ? 16.0 : 14.0, advancedMode)
 
         companyLabel.text = (name == nil || advancedMode) ? record.firstLevelDomain : name
         infoLabel.attributedText = domain

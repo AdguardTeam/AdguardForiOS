@@ -38,21 +38,26 @@ final class BlockedResponseTtlController: BottomAlertController {
 
     weak var delegate: BlockedResponseTtlDelegate?
 
+    private var ttlEntered: String { ttlTextField.text ?? "" }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         ttlTextField.delegate = self
+        ttlTextField.addTarget(self, action: #selector(textFieldEditingChanged), for: .editingChanged)
 
         ttlTextField.text = String(resources.blockedResponseTtlSecs)
         ttlTextField.keyboardType = .numberPad
         ttlTextField.becomeFirstResponder()
 
-        updateSaveButton(ttlTextField.text)
         updateTheme()
         saveButton.makeTitleTextCapitalized()
         saveButton.applyStandardGreenStyle()
+        saveButton.setBackgroundColor()
 
         cancelButton.makeTitleTextCapitalized()
         cancelButton.applyStandardOpaqueStyle()
+
+        updateSaveButton()
     }
 
     // MARK: - Actions
@@ -61,33 +66,36 @@ final class BlockedResponseTtlController: BottomAlertController {
     }
 
     @IBAction func saveAction(_ sender: UIButton) {
-        guard let text = ttlTextField.text, !text.isEmpty else { return }
-        guard let numeric = Int(text), numeric >= 0 else { return }
+        let ttlString = ttlEntered.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard
+            !ttlString.isEmpty,
+            let numeric = Int(ttlString),
+            numeric >= 0
+        else {
+            return
+        }
+
         resources.blockedResponseTtlSecs = numeric
         dnsConfigAssistant.applyDnsPreferences(for: .modifiedLowLevelSettings, completion: nil)
         delegate?.setTtlDescription(ttl: String(numeric))
         dismiss(animated: true)
     }
 
-    // MARK: - UITextFieldDelegate
-
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let currentText = textField.text ?? ""
-        guard let stringRange = Range(range, in: currentText) else { return false }
-        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-
-        ttlTextField.borderState = .enabled
-        ttlTextField.rightView?.isHidden = updatedText.isEmpty
-        updateSaveButton(updatedText)
-        return true
-    }
-
     // MARK: - Private methods
 
-    private func updateSaveButton(_ text: String?) {
-        let ttl = text ?? ""
-        guard !ttl.isEmpty && Int(ttl) != nil else { saveButton.isEnabled = false; return }
-        saveButton?.isEnabled = true
+    private func updateSaveButton() {
+        let ttlStirng = ttlEntered.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let ttl = Int(ttlStirng) {
+            saveButton.isEnabled = ttl >= 0
+        } else {
+            saveButton.isEnabled = false
+        }
+    }
+
+    @objc private func textFieldEditingChanged(_ sender: UITextField) {
+        updateSaveButton()
+        ttlTextField.borderState = .enabled
+        ttlTextField.rightView?.isHidden = ttlEntered.isEmpty
     }
 }
 

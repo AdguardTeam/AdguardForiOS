@@ -1,8 +1,8 @@
 /* Class = "UIButton"; normalTitle = "Switch mode"; ObjectID = "1A6-DD-78f"; */
 "1A6-DD-78f.normalTitle" = "Przełącz tryb";
 
-/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "1rj-wD-aeH"; */
-"1rj-wD-aeH.normalTitle" = "DODAJ";
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "1rj-wD-aeH"; */
+"1rj-wD-aeH.normalTitle" = "Dodaj";
 
 /* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "4IJ-xy-hky"; */
 "4IJ-xy-hky.normalTitle" = "zaszyfrowane";
@@ -10,11 +10,11 @@
 /* Class = "UILabel"; text = "Activity"; ObjectID = "5bV-zZ-4dr"; */
 "5bV-zZ-4dr.text" = "Aktywność";
 
-/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "6xN-ij-jJj"; */
-"6xN-ij-jJj.normalTitle" = "WYPRÓBUJ";
+/* Class = "UIButton"; normalTitle = "Try for free"; ObjectID = "6xN-ij-jJj"; */
+"6xN-ij-jJj.normalTitle" = "Poznaj za free";
 
-/* Class = "UIButton"; normalTitle = "EDIT"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
-"7mk-7J-iLD.normalTitle" = "EDYTUJ";
+/* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
+"7mk-7J-iLD.normalTitle" = "Edytuj";
 
 /* Class = "UILabel"; text = "Most active companies"; ObjectID = "Asq-k8-hi1"; */
 "Asq-k8-hi1.text" = "Najbardziej aktywne firmy";
@@ -37,8 +37,8 @@
 /* Class = "UILabel"; text = "DNS protection is disabled"; ObjectID = "X1F-2p-Xpe"; */
 "X1F-2p-Xpe.text" = "Ochrona DNS jest wyłączona";
 
-/* Class = "UIButton"; normalTitle = "ENABLE"; ObjectID = "XYE-JT-WSH"; */
-"XYE-JT-WSH.normalTitle" = "WŁĄCZ";
+/* Class = "UIButton"; normalTitle = "Enable"; ObjectID = "XYE-JT-WSH"; */
+"XYE-JT-WSH.normalTitle" = "Włącz";
 
 /* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "Xgg-jX-hwe"; */
 "Xgg-jX-hwe.normalTitle" = "Skopiowano";
@@ -64,8 +64,8 @@
 /* Class = "UILabel"; text = "Recent activity"; ObjectID = "hR9-Pm-Gq0"; */
 "hR9-Pm-Gq0.text" = "Ostatnia aktywność";
 
-/* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
-"hoI-YR-JcD.normalTitle" = "WSTECZ";
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
+"hoI-YR-JcD.normalTitle" = "Wróć";
 
 /* Class = "UILabel"; text = "Recent activity"; ObjectID = "kX9-ZX-NOu"; */
 "kX9-ZX-NOu.text" = "Ostatnia aktywność";
@@ -73,8 +73,8 @@
 /* Class = "UILabel"; text = "Block request"; ObjectID = "kwZ-Kw-f1R"; */
 "kwZ-Kw-f1R.text" = "Zablokuj żądanie";
 
-/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "l5B-oj-DnW"; */
-"l5B-oj-DnW.normalTitle" = "DODAJ";
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "l5B-oj-DnW"; */
+"l5B-oj-DnW.normalTitle" = "Dodaj";
 
 /* Class = "UIButton"; normalTitle = "requests"; ObjectID = "lKJ-8V-GJi"; */
 "lKJ-8V-GJi.normalTitle" = "żądania";

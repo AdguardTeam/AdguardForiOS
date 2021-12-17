@@ -13,13 +13,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Začnite enodnevni brezplačni preizkus</string>
+        <string>Naročite se in si zagotovite si 1-dnevno brezplačno preizkusno obdobje</string>
         <key>two</key>
-        <string>Začnite dvodnevni brezplačni preizkus</string>
+        <string>Naročite se in si zagotovite %d-dnevno brezplačno preskusno obdobje</string>
         <key>few</key>
-        <string>Začnite %d-dnevni brezplačni preizkus</string>
+        <string>Naročite se in si zagotovite si %d-dnevno brezplačno preizkusno obdobje</string>
         <key>other</key>
-        <string>Začnite %d-dnevni brezplačni preizkus</string>
+        <string>Naročite se in si zagotovite si %d-dnevno brezplačno preizkusno obdobje</string>
       </dict>
     </dict>
     <key>trial_description_weeks</key>
@@ -33,13 +33,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Začnite enotedenski brezplačni preizkus</string>
+        <string>Naročite se in si zagotovite 1-tedensko brezplačno preizkusno obdobje</string>
         <key>two</key>
-        <string>Začnite dvotedenski brezplačni preizkus</string>
+        <string>Naročite se in si zagotovite %d-tedensko brezplačno preizkusno obdobje</string>
         <key>few</key>
-        <string>Začnite %d-tedenski brezplačni preizkus</string>
+        <string>Naročite se in si zagotovite %d-tedensko brezplačno preizkusno obdobje</string>
         <key>other</key>
-        <string>Začnite %d-tedenski brezplačni preizkus</string>
+        <string>Naročite se in si zagotovite %d-tedensko brezplačno prizkusno obdobje</string>
       </dict>
     </dict>
     <key>trial_description_months</key>
@@ -53,13 +53,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Začnite enomesečni brezplačni preizkus </string>
+        <string>Naročite se in si zagotovite 1-mesečno brezplačno preskusno obdobje</string>
         <key>two</key>
-        <string>Začnite dvomesečni brezplačni preizkus </string>
+        <string>Naročite se in si zagotovite %d-mesečno brezplačno preskusno obdobje</string>
         <key>few</key>
-        <string>Začnite %d-mesečni brezplačni preizkus </string>
+        <string>Naročite se in si zagotovite %d-mesečno brezplačno preskusno obdobje</string>
         <key>other</key>
-        <string>Začnite %d-mesečni brezplačni preizkus </string>
+        <string>Naročite se in si zagotovite %d-mesečno brezplačno preskusno obdobje</string>
       </dict>
     </dict>
     <key>trial_description_years</key>
@@ -73,13 +73,13 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Začnite enoletni brezplačni preizkus </string>
+        <string>Naročite se in si zagotovite 1-letno brezplačno preskusno obdobje</string>
         <key>two</key>
-        <string>Začnite dvoletni brezplačni preizkus </string>
+        <string>Naročite se in si zagotovite %d-letno brezplačno preskusno obdobje</string>
         <key>few</key>
-        <string>Začnite %d-letni brezplačni preizkus </string>
+        <string>Naročite se in si zagotovite %d-letno brezplačno preskusno obdobje</string>
         <key>other</key>
-        <string>Začnite %d-letni brezplačni preizkus </string>
+        <string>Naročite se in si zagotovite %d-letno brezplačno preskusno obdobje</string>
       </dict>
     </dict>
     <key>user_rules_format</key>
@@ -200,86 +200,6 @@
         <string>%d-letni brezplačen popoln dostop</string>
         <key>other</key>
         <string>%d-letni brezplačen popoln dostop</string>
-      </dict>
-    </dict>
-    <key>trial_period_days</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@days@</string>
-      <key>days</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>En dan</string>
-        <key>two</key>
-        <string>%d deva</string>
-        <key>few</key>
-        <string>%d dni</string>
-        <key>other</key>
-        <string>%d dni</string>
-      </dict>
-    </dict>
-    <key>trial_period_weeks</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@weeks@</string>
-      <key>weeks</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>En teden</string>
-        <key>two</key>
-        <string>Dva tedna</string>
-        <key>few</key>
-        <string>%d tednov</string>
-        <key>other</key>
-        <string>%d tednov</string>
-      </dict>
-    </dict>
-    <key>trial_period_months</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@months@</string>
-      <key>months</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>En mesec</string>
-        <key>two</key>
-        <string>%d meseca</string>
-        <key>few</key>
-        <string>%d mesecev</string>
-        <key>other</key>
-        <string>%d mesecev</string>
-      </dict>
-    </dict>
-    <key>trial_period_years</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@years@</string>
-      <key>years</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Eno leto</string>
-        <key>two</key>
-        <string>%d leti</string>
-        <key>few</key>
-        <string>%d let</string>
-        <key>other</key>
-        <string>%d let</string>
       </dict>
     </dict>
   </dict>

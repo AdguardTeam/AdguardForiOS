@@ -145,20 +145,16 @@ final class FilterDetailsViewController: UIViewController {
         }
     }
 
-    private func apply(newFilterMeta: FilterDetailsProtocol) {
+    private func updateTableHeader(_ filterMeta: FilterDetailsProtocol) {
         DispatchQueue.asyncSafeMain { [weak self] in
-            self?.filterMeta = newFilterMeta
-            self?.setupTableView()
-            self?.tableView.reloadData()
             if let header = self?.tableView.tableHeaderView as? ExtendedTitleTableHeaderView {
-                header.title = newFilterMeta.filterName
-                header.setNormalTitle(newFilterMeta.description ?? "")
+                header.title = filterMeta.filterName
+                header.setNormalTitle(filterMeta.description ?? "")
                 self?.tableView.layoutTableHeaderView()
             }
         }
     }
 }
-
 
 // MARK: - FilterDetailsTableController + SwitchTableViewCellDelegate
 
@@ -166,7 +162,7 @@ extension FilterDetailsViewController: SwitchTableViewCellDelegate {
     func switchStateChanged(to enabled: Bool) {
         do {
             let newFilterMeta = try delegate.setFilter(with: filterMeta.groupId, filterId: filterMeta.filterId, enabled: enabled)
-            apply(newFilterMeta: newFilterMeta)
+            filterMeta = newFilterMeta
         }
         catch {
             DDLogError("(FilterDetailsViewController) - switchStateChanged; Error changing state for filter with id=\(filterMeta.filterId), group id=\(filterMeta.groupId.debugDescription); Error: \(error)")
@@ -185,7 +181,8 @@ extension FilterDetailsViewController: NewCustomFilterDetailsControllerDelegate 
 
     func renameFilter(withId filterId: Int, to newName: String) throws -> FilterDetailsProtocol {
         let newFilterMeta = try delegate.renameFilter(withId: filterId, to: newName)
-        apply(newFilterMeta: newFilterMeta)
+        filterMeta = newFilterMeta
+        updateTableHeader(filterMeta)
         return newFilterMeta
     }
 }

@@ -1,26 +1,29 @@
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "5eU-q4-Xed"; Note = "(AddRuleController) cancel button"; */
-"5eU-q4-Xed.normalTitle" = "CANCELAR";
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "5eU-q4-Xed"; Note = "(AddRuleController) cancel button"; */
+"5eU-q4-Xed.normalTitle" = "Cancelar";
 
-/* Class = "UILabel"; text = "The rule has been added to the User rules"; ObjectID = "BfI-YN-iXe"; */
-"BfI-YN-iXe.text" = "A regra foi adicionada as regras do usuário";
-
-/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "Bvs-mI-vEr"; */
-"Bvs-mI-vEr.normalTitle" = "SALVAR";
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "Bvs-mI-vEr"; */
+"Bvs-mI-vEr.normalTitle" = "Salvar";
 
 /* Class = "UILabel"; text = "Edit"; ObjectID = "EH6-Zr-YRP"; */
 "EH6-Zr-YRP.text" = "Editar";
 
-/* Class = "UIButton"; normalTitle = "Select"; ObjectID = "HFf-Yp-hjB"; */
-"HFf-Yp-hjB.normalTitle" = "Selecionar";
+/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "Tei-uI-6Gr"; */
+"Tei-uI-6Gr.normalTitle" = "Excluir";
 
-/* Class = "UIButton"; normalTitle = "DELETE"; ObjectID = "Tei-uI-6Gr"; */
-"Tei-uI-6Gr.normalTitle" = "EXCLUIR";
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "UGP-Xr-H1p"; */
+"UGP-Xr-H1p.normalTitle" = "Cancelar";
 
-/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "fCd-gA-rXS"; */
-"fCd-gA-rXS.normalTitle" = "ADICIONAR";
+/* Class = "UIButton"; normalTitle = "Disable"; ObjectID = "VSR-Wf-7c8"; */
+"VSR-Wf-7c8.normalTitle" = "Desativar";
+
+/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "WEk-KB-xeG"; */
+"WEk-KB-xeG.normalTitle" = "Excluir";
+
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "fCd-gA-rXS"; */
+"fCd-gA-rXS.normalTitle" = "Adicionar";
+
+/* Class = "UIButton"; normalTitle = "Enable"; ObjectID = "gON-PA-nSb"; */
+"gON-PA-nSb.normalTitle" = "Ativar";
 
 /* Class = "UILabel"; text = "Domain:"; ObjectID = "x7r-Ln-XiZ"; */
 "x7r-Ln-XiZ.text" = "Domínio:";
-
-/* Class = "UIButton"; normalTitle = "OK"; ObjectID = "zRm-I7-37E"; */
-"zRm-I7-37E.normalTitle" = "OK";
