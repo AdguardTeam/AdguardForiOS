@@ -25,7 +25,7 @@ enum ContentBlockerCellState {
     case disabled(isAdvancedProtection: Bool)
     case convertingFilters
     case updatingContentBlockers
-    case overlimited(overlimitRulesCount: Int)
+    case overlimited(maxRulesLimit: Int, currentRulesCount: Int, totalRulesInCB: Int, overlimitRulesCount: Int)
 
     fileprivate var image: UIImage? {
         switch self {
@@ -51,9 +51,9 @@ enum ContentBlockerCellState {
             return String.localizedString("converting_rules")
         case .updatingContentBlockers:
             return String.localizedString("update_current_state_label")
-        case .overlimited(let overLimitRulesCount):
+        case .overlimited(let maxRulesLimit, let currentRulesCount, let totalRulesInCB, let overlimitRulesCount):
             let format = String.localizedString("over_limit_current_state_label")
-            return String(format: format, overLimitRulesCount)
+            return String(format: format, "\(maxRulesLimit)", "\(currentRulesCount)", "\(totalRulesInCB)", "\(overlimitRulesCount)")
         }
     }
 

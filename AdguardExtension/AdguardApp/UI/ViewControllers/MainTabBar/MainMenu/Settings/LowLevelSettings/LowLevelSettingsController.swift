@@ -205,10 +205,13 @@ final class LowLevelSettingsController: UITableViewController {
             let style = NSMutableParagraphStyle()
             style.alignment = .center
 
-            headerText.addAttribute(.foregroundColor, value: theme.lightGrayTextColor , range: NSRange(location: 0, length: headerText.length))
-            headerText.addAttribute(.font, value: font, range: NSRange(location: 0, length: headerText.length))
-            headerText.addAttributes([.paragraphStyle : style], range: NSRange(location: 0, length: headerText.length))
-            betaChannelTextView.attributedText = headerText
+            DispatchQueue.asyncSafeMain { [weak self] in
+                guard let self = self else { return }
+                headerText.addAttribute(.foregroundColor, value: self.theme.lightGrayTextColor , range: NSRange(location: 0, length: headerText.length))
+                headerText.addAttribute(.font, value: font, range: NSRange(location: 0, length: headerText.length))
+                headerText.addAttributes([.paragraphStyle : style], range: NSRange(location: 0, length: headerText.length))
+                self.betaChannelTextView.attributedText = headerText
+            }
         }
     }
 
