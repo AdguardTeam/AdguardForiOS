@@ -57,7 +57,8 @@ export class PopupStore {
 
     @observable advancedBlockingModalVisible: boolean = false;
 
-    @observable platform: Platforms = Platforms.IPhone;
+    // FIXME change default to IPad
+    @observable platform: Platforms = Platforms.IPad;
 
     @observable popupExpanded: boolean = false;
 
@@ -102,7 +103,8 @@ export class PopupStore {
             this.appearanceTheme = popupData.appearanceTheme;
             this.advancedBlockingEnabled = popupData.advancedBlockingEnabled;
             this.allowlistInverted = popupData.allowlistInverted;
-            this.platform = popupData.platform;
+            // FIXME uncomment
+            // this.platform = popupData.platform;
         });
     };
 

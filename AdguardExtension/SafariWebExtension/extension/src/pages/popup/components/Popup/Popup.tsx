@@ -20,6 +20,14 @@ export const Popup = observer(() => {
         store.getPopupData();
     }, []);
 
+    useEffect(() => {
+        if (store.popupExpanded) {
+            document.body.style.height = '340px';
+        } else {
+            document.body.style.height = '280px';
+        }
+    }, [store.popupExpanded]);
+
     useAppearanceTheme(store.appearanceTheme);
 
     useFullscreen((isFullscreen) => {

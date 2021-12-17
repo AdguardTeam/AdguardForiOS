@@ -1,1 +1,0 @@
-export { ReportIssue } from './ReportIssue';
