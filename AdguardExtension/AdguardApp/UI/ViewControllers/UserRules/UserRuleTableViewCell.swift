@@ -45,7 +45,7 @@ final class UserRuleTableViewCell: UITableViewCell, Reusable {
     var model: UserRuleCellModel! {
         didSet {
             stateButton.isSelected = model.isEditing ? model.isSelected : model.isEnabled
-            ruleLabel.attributedText = model.ruleAttrString
+            DispatchQueue.asyncSafeMain { self.ruleLabel.attributedText = self.model.ruleAttrString }
 
             stateButton.setImage(UIImage(named: model.isEditing ? "box_normal" : "check-off"), for: .normal)
             stateButton.setImage(UIImage(named: model.isEditing ? "box_selected" : "check-on"), for: .selected)

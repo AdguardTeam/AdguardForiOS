@@ -64,18 +64,16 @@ final class LicenseSubscriptionTermsCell: UITableViewCell, Reusable {
     }
 
     func setAttributedText(_ text: NSAttributedString) {
-        DispatchQueue.asyncSafeMain { [weak self] in
-            guard let self = self else { return }
-            let mutableAttrString = NSMutableAttributedString(attributedString: text)
 
-            mutableAttrString.removeAttribute(NSAttributedString.Key.foregroundColor, range: NSRange(location: 0, length: mutableAttrString.length))
-            mutableAttrString.addAttribute(NSAttributedString.Key.foregroundColor, value: self.textView.textColor!, range: NSRange(location: 0, length: mutableAttrString.length))
+        let mutableAttrString = NSMutableAttributedString(attributedString: text)
 
-            mutableAttrString.removeAttribute(NSAttributedString.Key.font, range: NSRange(location: 0, length: mutableAttrString.length))
-            mutableAttrString.addAttribute(NSAttributedString.Key.font, value: self.textView.font!, range: NSRange(location: 0, length: mutableAttrString.length))
+        mutableAttrString.removeAttribute(NSAttributedString.Key.foregroundColor, range: NSRange(location: 0, length: mutableAttrString.length))
+        mutableAttrString.addAttribute(NSAttributedString.Key.foregroundColor, value: textView.textColor!, range: NSRange(location: 0, length: mutableAttrString.length))
 
-            self.textView.attributedText = mutableAttrString
-        }
+        mutableAttrString.removeAttribute(NSAttributedString.Key.font, range: NSRange(location: 0, length: mutableAttrString.length))
+        mutableAttrString.addAttribute(NSAttributedString.Key.font, value: textView.font!, range: NSRange(location: 0, length: mutableAttrString.length))
+
+        DispatchQueue.asyncSafeMain { self.textView.attributedText = mutableAttrString }
     }
 
     func updateTheme(_ themeService: ThemeServiceProtocol) {
@@ -83,13 +81,11 @@ final class LicenseSubscriptionTermsCell: UITableViewCell, Reusable {
         textView.textColor = themeService.lightGrayTextColor
 
         if let currentAttrString = textView.attributedText {
-            DispatchQueue.asyncSafeMain { [weak self] in
-                guard let self = self else { return }
-                let mutableAttrString = NSMutableAttributedString(attributedString: currentAttrString)
-                mutableAttrString.removeAttribute(NSAttributedString.Key.foregroundColor, range: NSRange(location: 0, length: mutableAttrString.length))
-                mutableAttrString.addAttribute(NSAttributedString.Key.foregroundColor, value: self.textView.textColor!, range: NSRange(location: 0, length: mutableAttrString.length))
-                self.textView.attributedText = mutableAttrString
-            }
+            let mutableAttrString = NSMutableAttributedString(attributedString: currentAttrString)
+            mutableAttrString.removeAttribute(NSAttributedString.Key.foregroundColor, range: NSRange(location: 0, length: mutableAttrString.length))
+            mutableAttrString.addAttribute(NSAttributedString.Key.foregroundColor, value: textView.textColor!, range: NSRange(location: 0, length: mutableAttrString.length))
+
+            DispatchQueue.asyncSafeMain { self.textView.attributedText = mutableAttrString }
         }
     }
 

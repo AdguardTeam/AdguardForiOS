@@ -46,7 +46,7 @@ final class ActivityTableViewCell: UITableViewCell {
 
         backgroundColor = nil
         blockStateView.backgroundColor = .clear
-        infoLabel.attributedText = nil
+        DispatchQueue.asyncSafeMain { self.infoLabel.attributedText = nil }
         companyLabel.text = nil
         timeLabel.text = nil
         categoryImageView.isHidden = false
@@ -71,8 +71,10 @@ final class ActivityTableViewCell: UITableViewCell {
         let name = record.tracker?.name
 
         companyLabel.text = (name == nil || advancedMode) ? record.firstLevelDomain : name
-        record.getAttributedText(isIpadTrait ? 16.0 : 14.0, advancedMode) { self.infoLabel.attributedText = $0 }
         timeLabel.text = timeString
+
+        let attributedText = record.getAttributedText(self.isIpadTrait ? 16.0 : 14.0, self.advancedMode)
+        DispatchQueue.asyncSafeMain { self.infoLabel.attributedText = attributedText }
 
         // Setup cell background color
         let type: BlockedRecordType

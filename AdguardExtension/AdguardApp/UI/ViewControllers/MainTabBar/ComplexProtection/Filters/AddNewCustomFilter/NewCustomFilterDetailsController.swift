@@ -199,8 +199,10 @@ final class NewCustomFilterDetailsController: BottomAlertController {
 
         if let homepageUrl = model.meta.homePage, homepageUrl.count > 0 {
             homepageLink = homepageUrl
-            makeAttributedLink(with: homepageUrl) { self.homepage.attributedText = $0 }
             homepageTopConstraint.constant = 52.0
+
+            let attributedText = makeAttributedLink(with: homepageUrl)
+            DispatchQueue.asyncSafeMain { self.homepage.attributedText = attributedText }
         }
         else {
             homepage.isHidden = true
@@ -217,8 +219,10 @@ final class NewCustomFilterDetailsController: BottomAlertController {
 
         if let homepageUrl = model.homePage, homepageUrl.count > 0 {
             homepageLink = homepageUrl
-            makeAttributedLink(with: homepageUrl) { self.homepage.attributedText = $0 }
             homepageTopConstraint.constant = 52.0
+
+            let attributedText = makeAttributedLink(with: homepageUrl)
+            DispatchQueue.asyncSafeMain { self.homepage.attributedText = attributedText }
         }
         else {
             homepage.isHidden = true
@@ -228,8 +232,7 @@ final class NewCustomFilterDetailsController: BottomAlertController {
         addButton.setTitle(String.localizedString("common_save").capitalized, for: .normal)
     }
 
-    private func makeAttributedLink(with url: String, completion: @escaping (_ attributedString: NSAttributedString) -> Void) {
-        DispatchQueue.asyncSafeMain {
+    private func makeAttributedLink(with url: String) -> NSMutableAttributedString {
             let homepageString = String.localizedString("homepage_title")
 
             let homepageAttributedString = NSAttributedString(string: homepageString)
@@ -247,8 +250,7 @@ final class NewCustomFilterDetailsController: BottomAlertController {
             returnString.append(homepageAttributedString)
             returnString.append(urlAttributedString)
 
-            completion(returnString)
-        }
+            return returnString
     }
 
     @objc private final func textFieldEditingChanged(_ sender: UITextField) {
