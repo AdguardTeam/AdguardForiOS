@@ -1,4 +1,7 @@
 {
+    "popup_modal_btn_free": {
+        "message": "Արդիացնել"
+    },
     "extension_name": {
         "message": "AdGuard"
     },

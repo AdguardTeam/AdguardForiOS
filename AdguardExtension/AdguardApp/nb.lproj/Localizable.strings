@@ -19,6 +19,9 @@
 /* Alert title. On error. */
 "common_error_title" = "Feil";
 
+/* Something went wrong title for unknown error */
+"something_went_wrong_title" = "Noe gikk galt";
+
 /* NO Button caption in alert */
 "common_action_no" = "NEI";
 
@@ -53,22 +56,22 @@
 "user_filter_helper" = "Skriv inn dine egne regler her, adskilt med linjebrytinger";
 
 /* YES Button caption in alert */
-"common_action_yes" = "JA";
-
-/* (MainController) login status caption on main screen */
-"protection_enabled_caption" = "Beskyttelse er skrudd på";
+"common_action_yes" = "Ja";
 
 /* (MainController) login status caption on main screen */
 "protection_partly_enabled_caption" = "Noen innholdsblokkerere er skrudd av";
 
-/* (MainController) login status caption on main screen */
-"protection_disabled_caption" = "Beskyttelse er skrudd av";
-
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Abonner";
 
+/* (LicenseProductChoiceCell) restore purchase button title */
+"restore_purchase_button_title" = "Gjenopprett kjøp";
+
+/* (FreeLicenseStateTableViewModel) title for permanent subscription */
+"permanent_subscription_title" = "Livstid";
+
 /* (GetProTableController) upgrade button title for lifetime license */
-"upgrade_lifetime_button_title" = "KJØP";
+"upgrade_lifetime_button_title" = "Kjøp";
 
 /* (LoginController) lost password button title */
 "lost_password" = "Har du glemt passordet?";
@@ -115,6 +118,15 @@
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Oppdaterer…";
 
+/* (UserFilterController) add blocklist rule button title */
+"add_blacklist_rule_title" = "Legg til ny regel";
+
+/* (UserFilterController) add blacklist rule placeholder */
+"add_blacklist_rule_placeholder" = "||example.org^";
+
+/* (UserFilterController) add whitelist domain placeholder */
+"add_whitelist_domain_placeholder" = "example.org";
+
 /* (UserFilterController) add wifi name placeholder */
 "add_wifi_name_placeholder" = "Navnet på ditt Wi-Fi";
 
@@ -139,9 +151,6 @@
 /* (MainController) Message on main screen during update - count of updated filters */
 "filters_updated_format" = "Filtre oppdatert: %lu ";
 
-/* (FiltersController) Filter Version format */
-"filter_version_format" = "versjon %@";
-
 /* (DnsSettingController) split tunel mode description */
 "tunnel_mode_split_description" = "Split-tunnel, kompatibel med «Personlig VPN»-apper";
 
@@ -156,9 +165,6 @@
 
 /* (DnsSettingController) Native DNS implementation title */
 "native_dns_implementation_title" = "Morsmål";
-
-/* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
-"system_dns_server" = "Ingen kryptering (System-DNS)";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "Skrudde på %1$d av %2$d";
@@ -187,11 +193,8 @@
 /* login error message */
 "login_error_message" = "En feil oppstod under pålogging";
 
-/* lifetime purchase secription format */
-"lifetime_purchase_description_format" = "<a href=%2$@>Vilkår og betingelser</a> og <a href=%1$@>personvernsretningslinjer</a>";
-
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
-"common_action_ok" = "OK";
+"common_action_ok" = "Ok";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "privacy_policy_action" = "Personvern";
@@ -253,17 +256,11 @@
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "Du har oversteget maks antall filteroppføringer.";
 
-/* (GetProController) title for permanent subscription */
-"permanent_subscription_title" = "Livstid";
+/* (FiltersController) Enabled state in groups section */
+"on_state" = "Aktivert";
 
-/* (FiltersController) ON state in groups section */
-"on_state" = "PÅ";
-
-/* (FiltersController) OFF state in groups section */
-"off_state" = "AV";
-
-/* (NewCustomFilterDetailedController) homepage string */
-"homepage_title" = "Hjemmeside:";
+/* (FiltersController) Disabled state in groups section */
+"off_state" = "Skrudd av";
 
 /* (FilterDetailsController) delete filter title */
 "delete_filter_title" = "Slett filter";
@@ -327,6 +324,9 @@
 
 /* (ListOfRulesModel) title for export */
 "export" = "Eksporter";
+
+/* (UserRulesTableController) - title for editing user rules option  */
+"open_user_rules_editor" = "Åpne redigerer";
 
 /* (ListOfRulesModel) title for Clear button*/
 "common_clear" = "Tøm";
@@ -415,6 +415,9 @@
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "Legg til en ny oppføring";
 
+/* (OneSafariGroupFiltersModel) Add new filter title */
+"add_new_filter" = "Legg til filter";
+
 /* (DnsLogContainerController) reset activity log title */
 "reset_activity_title" = "Tilbakestill aktivitetsloggen";
 
@@ -448,21 +451,6 @@
 /*(NewCustomFilterDetailsController) add button title */
 "common_add" = "Legg til";
 
-/*(TodayViewController) Protection is disabled title  */
-"protection_disabled" = "Beskyttelse er skrudd av";
-
-/*(TodayViewController) Protection is enabled title  */
-"protection_enabled" = "Beskyttelse er skrudd på";
-
-/*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Safari- og DNS-beskyttelse";
-
-/*(TodayViewController) Safari protection is enabled text  */
-"safari_enabled" = "Safari-innholdsblokkering";
-
-/*(TodayViewController) All protection is disabled text  */
-"complex_disabled" = "Alle beskyttelsesmoduler er skrudd av";
-
 /*(TodayViewController) DNS protection is enabled text  */
 "system_enabled" = "DNS-beskyttelse";
 
@@ -481,6 +469,9 @@
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_notification_title" = "Skru av noen filtre for at det skal fungere riktig";
 
+/* (DnsFiltersTableController) - DNS filters title */
+"dns_filters_title" = "DNS-filtre";
+
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Blokkert";
 
@@ -495,24 +486,6 @@
 
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_whitelist" = "lagt til i hvitelisten";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_blacklist" = "lagt til i blokkeringslisten";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "fjernet fra hvitelisten";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "fjernet fra blokkeringslisten";
-
-/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "Åpne <b>innstillingene</b>";
-
-/* (DnsProvidersController) default systen dns server name */
-"default_dns_server_name" = "System-DNS";
-
-/* (DnsProvidersController) default systen dns server description */
-"default_dns_server_description" = "Bruk systemstandard-DNS-tjenerne som din ISP (internettleverandør) gir deg";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "Blokker forespørsel";
@@ -616,23 +589,8 @@
 /* (BugReportController) Message when bug report failed */
 "bug_report_failed_message" = "Mislyktes i å sende inn feilrapporten, vennligst prøv igjen";
 
-/* (BugReportController) Message when leaving feedback failed */
-"feedback_failed_message" = "Mislyktes i å sende inn tilbakemeldingen, vennligst prøv igjen";
-
 /* (BugReportController) Message when bug report successed */
 "bug_report_successed_message" = "Feilrapporten din ble vellykket sendt!";
-
-/* (BugReportController) title for bug report */
-"bug_report_title" = "Meld inn en feil";
-
-/* (BugReportController) title for leaving feedback */
-"leave_feedback_title" = "Gi tilbakemelding";
-
-/* (BugReportController) button title for bug report */
-"bug_report_button_title" = "Send en rapport";
-
-/* (BugReportController) button title for leaving feedback */
-"leave_feedback_button_title" = "Send tilbakemelding";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Forespørsler";
@@ -669,6 +627,24 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d forespørsler";
+
+/* (FilterDetailsViewController) Version subtitle for detailed filter info */
+"detailed_filter_info_version_subtitle" = "Versjon";
+
+/* (FilterDetailsViewController) Updated subtitle for detailed filter info */
+"detailed_filter_info_updated_subtitle" = "Oppdatert";
+
+/* (FilterDetailsViewController) Rules count subtitle for detailed filter info */
+"detailed_filter_info_rules_count_subtitle" = "Antall oppføringer";
+
+/* (FilterDetailsViewController) Website subtitle for detailed filter info */
+"detailed_filter_info_website_subtitle" = "Nettsted";
+
+/* (FilterDetailsViewController) Subscription URL subtitle for detailed filter info */
+"detailed_filter_info_subscription_subtitle" = "Abonnements-URL";
+
+/* (PremiumFeature) - Custom filters premium feature name */
+"custom_filters_feature_name" = "Selvvalgte lister";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -713,6 +689,8 @@
 /* (MainPageController) saved data size for VoiceOver*/
 "elapsed_time_voiceover" = "Gjennomsnittstiden for å behandle en DNS-forespørsel";
 
+/* (AGSearchView) Placeholder text for search bar */
+"search_view_placeholder" = "Søk";
 
 // MARK: - SystemProtectionEnablerController
 /* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
@@ -759,6 +737,9 @@
 /* (UpstreamsController) Fallbacks description */
 "upstreams_description" = "Oppstrømsadresse";
 
+/* (UpstreamsController) Fallbacks title */
+"upstreams_fallbacks_title" = "Reservetjenere";
+
 /* (UpstreamsController) Custom address description */
 "upstreams_custom_address_description" = "IP-adresse";
 
@@ -767,3 +748,18 @@
 
 /* (DnsFiltersController) Header DNS Filters title */
 "navigation_item_dns_filters_title" = "DNS-filtre";
+
+/* (BackgroundFetchController) - Background app refresh every 1 hour title */
+"background_fetch_hour_period" = "Hver time";
+
+/* (DnsProvidersController) - add new dns server title */
+"add_custom_dns_server_title" = "Legg til en selvvalgt DNS-tjener";
+
+/* (DnsProvidersController) - Header title */
+"dns_provider_controller_title" = "DNS-tjener";
+
+/* (DnsProviderDetailsController) Server title */
+"server_title" = "Server";
+
+/* (DnsProviderDetailsController) Website title */
+"website_title" = "Nettsted";

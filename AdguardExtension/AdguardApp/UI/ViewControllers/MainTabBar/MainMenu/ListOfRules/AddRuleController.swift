@@ -36,22 +36,23 @@ final class AddRuleController: BottomAlertController, UITextViewDelegate {
     @IBOutlet weak var rulePlaceholderLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var editCaption: UILabel!
-    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var addButton: RoundRectButton!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var textViewUnderline: TextFieldIndicatorView!
 
     @IBOutlet var themableLabels: [ThemableLabel]!
 
     private let theme: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-    private let textViewCharectersLimit = 50
+    private let textViewCharactersLimit = 50
+
+    private var enteredRule: String { ruleTextView.text ?? "" }
 
     // MARK: - View Controller life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.text = type.title
         editCaption.text = type.captionText
-
-        addButton.isEnabled = false
 
         if type == .wifiExceptions {
             fillTextViewWithCurrentWiFiName()
@@ -74,7 +75,9 @@ final class AddRuleController: BottomAlertController, UITextViewDelegate {
 
         changeKeyboardReturnKeyTypeIfNeeded()
         addButton.applyStandardGreenStyle()
+        addButton.setBackgroundColor()
         cancelButton.applyStandardOpaqueStyle()
+        updateAddButton()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -90,7 +93,7 @@ final class AddRuleController: BottomAlertController, UITextViewDelegate {
     }
 
     @IBAction func cancelAction(_ sender: Any) {
-        dismiss(animated: true) {}
+        dismiss(animated: true)
     }
 
     // MARK: - TextViewDelegateMethods
@@ -106,12 +109,11 @@ final class AddRuleController: BottomAlertController, UITextViewDelegate {
         let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
 
         rulePlaceholderLabel.isHidden = updatedText.count > 0
-        addButton.isEnabled = updatedText.count > 0
 
         if type != .wifiExceptions { return true }
 
-        if updatedText.count >= textViewCharectersLimit {
-            textView.text = String(updatedText.prefix(textViewCharectersLimit))
+        if updatedText.count >= textViewCharactersLimit {
+            textView.text = String(updatedText.prefix(textViewCharactersLimit))
             return false
         }
         return true
@@ -125,13 +127,17 @@ final class AddRuleController: BottomAlertController, UITextViewDelegate {
         textViewUnderline.state = .disabled
     }
 
+    func textViewDidChange(_ textView: UITextView) {
+        updateAddButton()
+    }
+
     // MARK: - private methods
 
     private func fillTextViewWithCurrentWiFiName() {
         let networkSettingsService: NetworkSettingsServiceProtocol = ServiceLocator.shared.getService()!
         networkSettingsService.fetchCurrentWiFiName { [weak self] ssid in
             guard let self = self else { return }
-            if let ssid = ssid, ssid.count <= self.textViewCharectersLimit {
+            if let ssid = ssid, ssid.count <= self.textViewCharactersLimit {
                 self.ruleTextView.text = ssid
                 self.ruleTextView.selectAll(self)
                 self.rulePlaceholderLabel.isHidden = true
@@ -154,9 +160,13 @@ final class AddRuleController: BottomAlertController, UITextViewDelegate {
     }
 
     private func addRuleInternal() {
+        let rule = enteredRule.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !rule.isEmpty else {
+            return
+        }
 
         do {
-            try delegate?.addRule(ruleTextView.text!)
+            try delegate?.addRule(rule)
             dismiss(animated: true, completion: nil)
         }
         catch {
@@ -177,6 +187,11 @@ final class AddRuleController: BottomAlertController, UITextViewDelegate {
         }
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
+    }
+
+    private func updateAddButton() {
+        let ruleText = enteredRule.trimmingCharacters(in: .whitespacesAndNewlines)
+        addButton.isEnabled = !ruleText.isEmpty
     }
 }
 

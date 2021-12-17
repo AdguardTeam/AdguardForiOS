@@ -50,10 +50,9 @@ final class SafariTagButton: UIButton {
     // MARK: - Private properties
 
     private var tagCornerRadius: CGFloat { isIpadTrait ? 5.0 : 3.0 }
-    private var buttonHeight: CGFloat { isIpadTrait ? 32.0 : 22.0 }
-    private var langButtonWidth: CGFloat { isIpadTrait ? 40.0 : 30.0 }
-    private var tagFont: UIFont { UIFont.systemFont(ofSize: isIpadTrait ? 18.0 : 12.0, weight: .regular) }
-    private var buttonTextInset: CGFloat { isIpadTrait ? 12.0 : 6.0 }
+    private var buttonHeight: CGFloat { isIpadTrait ? 22.0 : 16.0 }
+    private var langButtonWidth: CGFloat { isIpadTrait ? 32.0 : 23.0 }
+    private var tagFont: UIFont { UIFont.systemFont(ofSize: isIpadTrait ? 20.0 : 14.0, weight: .regular) }
 
     private let langFlags = [
         "en":"gb",
@@ -91,15 +90,6 @@ final class SafariTagButton: UIButton {
         model.isLang ? initializeLang() : initializeTag()
     }
 
-    // MARK: - Public methods
-
-    func updateTheme(_ themeService: ThemeServiceProtocol) {
-        if !model.isLang {
-            backgroundColor = themeService.tagColor
-            setTitleColor(themeService.placeholderTextColor, for: .normal)
-        }
-    }
-
     // MARK: - Private methods
 
     private func initializeTag() {
@@ -112,10 +102,7 @@ final class SafariTagButton: UIButton {
 
         alpha = model.isSelected ? 1.0 : 0.3
 
-        var desiredFrame = sizeThatFits(CGSize(width: .greatestFiniteMagnitude, height: buttonHeight))
-        desiredFrame.width += 2 * buttonTextInset
-
-        frame.size = desiredFrame
+        frame.size = sizeThatFits(CGSize(width: .greatestFiniteMagnitude, height: buttonHeight))
     }
 
     private func initializeLang() {

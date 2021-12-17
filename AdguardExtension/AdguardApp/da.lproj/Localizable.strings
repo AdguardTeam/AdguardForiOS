@@ -19,6 +19,12 @@
 /* Alert title. On error. */
 "common_error_title" = "Fejl";
 
+/* Something went wrong title for unknown error */
+"something_went_wrong_title" = "Noget gik galt";
+
+/* Unknown error desription */
+"unknown_error_description" = "Anmeld venligst denne fejl til supporten.";
+
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Filtre kunne ikke indlæses i Safari, og dine seneste ændringer er derfor ikke effektueret.";
 
@@ -65,22 +71,40 @@
 "user_filter_helper" = "Angiv egne regler her adskilt af linjeskift";
 
 /* YES Button caption in alert */
-"common_action_yes" = "JA";
+"common_action_yes" = "Ja";
 
 /* (MainController) login status caption on main screen */
-"protection_enabled_caption" = "Beskyttelsen er aktiveret";
+"protection_enabled_caption" = "Beskyttelsen er slået til";
 
 /* (MainController) login status caption on main screen */
 "protection_partly_enabled_caption" = "Nogle indholdsblockere er deaktiverede";
 
 /* (MainController) login status caption on main screen */
-"protection_disabled_caption" = "Beskyttelsen er deaktiveret";
+"protection_disabled_caption" = "Beskyttelsen er slået fra";
 
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Abonnér";
 
+/* (LicenseProductChoiceCell) restore purchase button title */
+"restore_purchase_button_title" = "Gendan køb";
+
+/* (FreeLicenseStateTableViewModel) One month subscription title */
+"one_month_subscription_title" = "Månedlig";
+
+/* (FreeLicenseStateTableViewModel) One year subscription title */
+"one_year_subscription_title" = "Årlig";
+
+/* (FreeLicenseStateTableViewModel) title for permanent subscription */
+"permanent_subscription_title" = "Livstid";
+
+/* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
+"go_to_my_account_title" = "Gå til min konto";
+
 /* (GetProTableController) upgrade button title for lifetime license */
-"upgrade_lifetime_button_title" = "KØB";
+"upgrade_lifetime_button_title" = "Køb";
+
+/* (GetProTableController) missing purchase alert message */
+"upgrade_missing_purchase_message" = "Abonnementer er utilgængelige. Tjek internetforbindelsen og forsøg igen.";
 
 /* (LoginController) lost password button title */
 "lost_password" = "Glemt adgangskode?";
@@ -194,7 +218,7 @@
 "filters_updated_format" = "Filtre opdateret: %lu ";
 
 /* (FiltersController) Filter Version format */
-"filter_version_format" = "version %@";
+"filter_version_format" = "Version %@";
 
 /* (DnsSettingController) split tunel mode description */
 "tunnel_mode_split_description" = "Split-Tunnel, kompatibel med \"Personlige VPN\"-apps";
@@ -210,9 +234,6 @@
 
 /* (DnsSettingController) Native DNS implementation title */
 "native_dns_implementation_title" = "Indbygget";
-
-/* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
-"system_dns_server" = "Ingen kryptering (system-DNS)";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "%1$d ud af %2$d aktiveret";
@@ -242,10 +263,10 @@
 "login_error_message" = "En fejl opstod under indlogningen";
 
 /* purchase secription format */
-"purchase_description_format" = "Om AdGuard-abonnement:<br><br>Betaling opkræves fra din iTunes-konto ved købsbekræftelse.<br><br>Abonnementet fornyes automatisk, medmindre autofornyelse er deaktiveret mindst 24 timer inden udløb af den aktuelle periode.<br><br>Betalingen for abonnementsfornyelse vil blive opkrævet inden for 24 timer inden udløb af den aktuelle periode.<br><br>Dine abonnementer kan håndteres, og din autofornyelse kan slås fra ved at gå til dine iTunes-kontoindstillinger efter køb af et abonnement.<br><br><a href=%2$@>Vilkår og Betingelse</a> og <a href=%1$@>Fortrolighedspolitik</a>";
+"purchase_description_format" = "AdGuard-abonnementsbetingelser:<br><br>• Betaling opkræves fra din iTunes-konto ved købsbekræftelse.<br><br>• Abonnementet fornyes automatisk, medmindre autofornyelse deaktiveres mindst 24 timer inden udløb af den aktuelle periode.<br><br>• Betalingen for abonnementsfornyelse opkræves på din iTune-konto inden for 24 timer inden udløb af den aktuelle periode.<br><br>Abonnementer kan håndteres, og autofornyelse kan slås fra ved at gå til dine Kontoindstillinger efter købet.<br><br>AdGuard <a href=%2$@>EULA</a> og <a href=%1$@>Fortrolighedspolitik</a>";
 
 /* lifetime purchase secription format */
-"lifetime_purchase_description_format" = "<a href=%2$@>Vilkår og Betingelser</a> and <a href=%1$@>Fortrolighedspolitik</a>";
+"lifetime_purchase_description_format" = "AdGuard <a href=%2$@>EULA</a> og <a href=%1$@>Fortrolighedspolitik</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "OK";
@@ -268,8 +289,20 @@
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "Andet";
 
+/* (AdvancedSettingsController) Content blocker description text */
+"cb_description_common" = "6 indholdsblockere, hver med op til 50.000 regler";
+
+/* (AdvancedSettingsController) Content blocker description text */
+"cb_description_advanced_protection" = "6 indholdsblockere, hver med op til 50.000 regler, samt Avanceret beskyttelse";
+
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Filtre:";
+
+/* (ContentBlockersTableController) - Advanced protection title */
+"cb_screen_advanced_protection_title" = "Avanceret beskyttelse";
+
+/* (ContentBlockersTableController) - Content Blockers title */
+"cb_screen_content_blockers_title" = "Indholdsblockere";
 
 /* (AdvancedSettingsController) Restart when network changes error */
 "general_settings_restart_tunnel_error" = "Du skal først aktivere VPN";
@@ -304,6 +337,9 @@
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "Deaktiveret i Safaris indstillinger";
 
+/* (ContentBlockerStateCell) Description for advanced protection disabled state */
+"disabled_current_state_advanced_protection" = "Deaktiveret i Beskyttelsesindstillinger";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
 "update_current_state_label" = "Indlæser i Safari...";
 
@@ -337,14 +373,11 @@
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "Du har overskredet det maksimale antal filterregler.";
 
-/* (GetProController) title for permanent subscription */
-"permanent_subscription_title" = "Livstid";
+/* (FiltersController) Enabled state in groups section */
+"on_state" = "Aktiveret";
 
-/* (FiltersController) ON state in groups section */
-"on_state" = "TIL";
-
-/* (FiltersController) OFF state in groups section */
-"off_state" = "FRA";
+/* (FiltersController) Disabled state in groups section */
+"off_state" = "Deaktiveret";
 
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "Hjemmeside:";
@@ -360,6 +393,9 @@
 
 /* (AboutViewController) AdGuard copyright string */
 "copyright_format" = "©2009 — %@ Adguard Software Ltd.\nAlle rettigheder forbeholdes. AdGuard.com";
+
+/* (LicensePageViewController) Login title */
+"common_login" = "Log ind";
 
 /* (AboutViewController) Logout title */
 "common_logout" = "Log ud";
@@ -414,6 +450,24 @@
 
 /* (ListOfRulesModel) title for export */
 "export" = "Eksportér";
+
+/* (UserRulesTableController) - title for editing user rules option  */
+"open_user_rules_editor" = "Åbn editor";
+
+/* (UserRulesTableController) - description for Safari user rules in editor  */
+"editor_safari_user_rules_description" = "Tilføj Safari-brugerregler";
+
+/* (UserRulesTableController) - description for allowlist rules in editor  */
+"editor_allowlist_rules_description" = "Tilføj tilpassede hvidlsteregler";
+
+/* (UserRulesTableController) - description for inverted allowlist rules in editor  */
+"editor_inverted_allowlist_rules_description" = "Tilføj tilpassede, inverterede hvidlsteregler";
+
+/* (UserRulesTableController) - description for DNS allowlist rules in editor  */
+"editor_dns_allowlist_rules_description" = "Tilføj tilpassede DNS-hvidlsteregler";
+
+/* (UserRulesTableController) - description for DNS blocklist rules in editor  */
+"editor_dns_blocklist_rules_description" = "Tilføj tilpassede DNS-sortlisteregler";
 
 /* (ListOfRulesModel) title for Clear button*/
 "common_clear" = "Ryd";
@@ -505,6 +559,33 @@
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "Tilføj en ny regel";
 
+/* (OneSafariGroupFiltersModel) Add new filter title */
+"add_new_filter" = "Tilføj filter";
+
+/* (OneSafariGroupFiltersModel) Ads filters group description */
+"ads_filters_group_description" = "Filterlister, som fjerner annoncer";
+
+/* (OneSafariGroupFiltersModel) Privacy filters group description */
+"privacy_filters_group_description" = "Filterlister, som forhindrer sporing";
+
+/* (OneSafariGroupFiltersModel) Social Widgets filters group description */
+"social_widgets_filters_group_description" = "Filterlister, som skjuler socialmedie-widgets (\"Like\"-knapper mv.)";
+
+/* (OneSafariGroupFiltersModel) Annoyances filters group description */
+"annoyances_filters_group_description" = "Filterlister, som blokerer irriterende websideelementer. Definitionen af \"irriterende\" kan være subjektiv og afhænger af listeforfatteren";
+
+/* (OneSafariGroupFiltersModel) Security filters group description */
+"security_filters_group_description" = "Filterlister, som blokerer kendte onlinetrusler";
+
+/* (OneSafariGroupFiltersModel) Other filters group description */
+"other_filters_group_description" = "Div. filterlister til forskellige formål";
+
+/* (OneSafariGroupFiltersModel) Language Specific filters group description */
+"language_specific_filters_group_description" = "Filtrerlister målrettet websteder på bestemte sprog";
+
+/* (OneSafariGroupFiltersModel) Custom filters group description */
+"custom_filters_group_description" = "Filtrerlister, som tilføjes manuelt";
+
 /* confirm reset lert text */
 "confirm_reset_text" = "Alle indstillinger, inkl. brugerregler, DNS-beskyttelse, brugerflade og godkendelsesindstillinger nulstilles. Handlingen er irreversibel. Nulstil indstillingerne?";
 
@@ -544,6 +625,9 @@
 /*(NewCustomFilterDetailsController) title for new dns filter */
 "new_dns_filter_title" = "Nyt DNS-filter";
 
+/* (NewCustomFilterDetailsController) Error message when adding custom filter fails */
+"add_custom_filter_error_message" = "Noget gik galt, eller forkert format på filen for tilpasset filtrering";
+
 /*(NewCustomFilterDetailsController) title for editing custom filter */
 "edit_custom_filter_title" = "Redigér tilpasset filter";
 
@@ -551,19 +635,19 @@
 "common_add" = "Tilføj";
 
 /*(TodayViewController) Protection is disabled title  */
-"protection_disabled" = "Beskyttelsen er deaktiveret";
+"protection_disabled" = "Beskyttelsen er slået fra";
 
 /*(TodayViewController) Protection is enabled title  */
-"protection_enabled" = "Beskyttelsen er aktiveret";
+"protection_enabled" = "Beskyttelsen er slået til";
 
 /*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Safari og DNS-beskyttelse";
+"complex_enabled" = "Safari- og DNS-beskyttelse er slået til";
 
 /*(TodayViewController) Safari protection is enabled text  */
-"safari_enabled" = "Safari-indholdsblocking";
+"safari_enabled" = "Safari-beskyttelse er slået fra";
 
 /*(TodayViewController) All protection is disabled text  */
-"complex_disabled" = "Alle beskyttelsesmoduler er deaktiverede";
+"complex_disabled" = "Safari- og DNS-beskyttelse er slået fra";
 
 /*(TodayViewController) DNS protection is enabled text  */
 "system_enabled" = "DNS-beskyttelse";
@@ -589,6 +673,9 @@
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_notification_title" = "Slå nogle filtre fra for korrekt funktion";
 
+/* (DnsFiltersTableController) - DNS filters title */
+"dns_filters_title" = "DNS-filtre";
+
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Blokeret";
 
@@ -613,20 +700,23 @@
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_removed_from_blacklist" = "fjernet fra sortlisten";
 
-/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "Åbn <b>indstillingerne</b>";
+/* (OnboardingController) first step text*/
+"onboarding_first_step_text" = "Åbn <b>Indstillingerne</b>.";
 
-/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "Tryk på <b>Safari</b> og vælg menupunktet <b>\"Indholdsblockere\"</b>";
+/* (OnboardingController) first step with advanced protection text*/
+"advanced_protection_onboarding_first_step_text" = "Åbn <b>Indstillingerne</b>.";
 
-/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Slå alle indholdsblockere til</b> og returnér til appen!";
+/* (OnboardingController) second step text */
+"onboarding_second_step_text" = "Tryk på <b>Safari</b>, stryg nedad og tryk på <b>Indholdsblockere</b>.";
 
-/* (DnsProvidersController) default systen dns server name */
-"default_dns_server_name" = "System DNS";
+/* (OnboardingController) second step with advanced protection text */
+"advanced_protection_onboarding_second_step_text" = "Gå til <b>Safari > Udvidelser</b>.";
 
-/* (DnsProvidersController) default systen dns server description */
-"default_dns_server_description" = "Brug systemets standard DNS-servere leveret af din internetudbyder";
+/* (OnboardingController) third step text */
+"onboarding_third_step_text" = "<b>Aktivér</b> alle AdGuard-udvidelser.";
+
+/* (OnboardingController) third step with advanced protection text */
+"advanced_protection_onboarding_third_step_text" = "Sæt alle AdGuard-omskiftere på <b>Til</b>. Alt er nu klar!";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "Blokér forespørgsel";
@@ -648,6 +738,9 @@
 
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ understøttes ikke af iOS endnu. Prøv at tilføje en anden upstream.";
+
+/*(DnsFiltersController) the error message that is shown when trying to add a duplicate custom dns server */
+"custom_dns_server_exists" = "En dublet DNS-server er forsøgt tilføjet. Serveren med den angivne upstream findes allerede på listen";
 
 /* (NewDnsServerController) save and select button title */
 "save_and_select_button_title" = "Gem og vælg";
@@ -739,35 +832,11 @@
 /* (BugReportController) Message when bug report failed */
 "bug_report_failed_message" = "Kunne ikke indsende fejlrapport. Forsøg igen senere";
 
-/* (BugReportController) Message when leaving feedback failed */
-"feedback_failed_message" = "Kunne ikke indsende feedbacken. Forsøg igen senere";
-
 /* (BugReportController) Message when bug report successed */
 "bug_report_successed_message" = "Din fejlrapport er indsendt!";
 
-/* (BugReportController) Message when feedback leaving successed */
-"feedback_successed_message" = "Din feedback er indsendt!";
-
-/* (BugReportController) title for bug report */
-"bug_report_title" = "Rapportér en fejl";
-
-/* (BugReportController) title for leaving feedback */
-"leave_feedback_title" = "Giv feedback";
-
-/* (BugReportController) description for bug report */
-"bug_report_description" = "Medtag problembeskrivelsen (startede det efter en opdatering?) og info om anden software, du har (VPN/AV/udvidelse)";
-
-/* (BugReportController) description for leaving feedback */
-"leave_feedback_description_format" = "Fortæl os, hvad du synes om %@ — hvad du kan eller ikke kan lide, hvilke funktioner du vil foreslå";
-
-/* (BugReportController) button title for bug report */
-"bug_report_button_title" = "Indsend en rapport";
-
-/* (BugReportController) button title for leaving feedback */
-"leave_feedback_button_title" = "Indsend feedback";
-
 /* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "Ved fortsat brug af den, accepterer du<br /><a href=%2$@>Vilkår og Betingelser</a> og <a href=%1$@>Fortrolighedspolitik</a>";
+"introduction_license_agreement" = "Jeg accepterer AdGuards <a href=%2$@>EULA</a> og <a href=%1$@>Fortrolighedspolitik</a>.";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Forespørgsler";
@@ -812,16 +881,68 @@
 "requests_number" = "%d forespørgsler";
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
-"native_dns_setup_title" = "Aktivér %@ i systemet DNS-indstillingerne";
+"native_dns_setup_title" = "Aktivér %@ i system DNS-indstillingerne";
 
 /* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
-"native_dns_setup_description" = "For at aktivere den indbyggede DNS, så åbn <b>Systemindstillinger</b>, find <b>Generelt > VPN og Netværk > DNS</b> og vælg her <b>%@</b>.";
+"native_dns_setup_description" = "For brug af indbygget DNS, vælg <b>%@</b> i <b>Systemindstillinger > Generelt > VPN og Netværk > DNS</b>.";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name; String for iOS 15 and newer */
+"native_dns_setup_description_ios15" = "For at bruge indbygget DNS, så vælg <b>%@</b> i <b>Systemindstillinger > Generelt > VPN- og Enhedshåndtering > DNS</b>.";
 
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Fortæl os, om du er tilfreds med adblockingen indtil videre";
 
 /* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
 "rate_app_problem_description" = "Sørg for at benytte <b>Safari-browseren</b>.<br>Det er pt. teknisk umuligt at blokere indhold i andre browsere.<br>Fortsæt til Safari-beskyttelsesindstillingerne, og aktivér alle nødvendige filterlister.<br>Genstart Safari-appen (afslut og åbn den igen).";
+
+/* (FilterDetailsViewController) Version subtitle for detailed filter info */
+"detailed_filter_info_version_subtitle" = "Version";
+
+/* (FilterDetailsViewController) Updated subtitle for detailed filter info */
+"detailed_filter_info_updated_subtitle" = "Opdateret";
+
+/* (FilterDetailsViewController) Rules count subtitle for detailed filter info */
+"detailed_filter_info_rules_count_subtitle" = "Antal regler";
+
+/* (FilterDetailsViewController) Website subtitle for detailed filter info */
+"detailed_filter_info_website_subtitle" = "Websted";
+
+/* (FilterDetailsViewController) Subscription URL subtitle for detailed filter info */
+"detailed_filter_info_subscription_subtitle" = "Abonnements-URL";
+
+/* (AddRuleController) Error description when adding rule that already exists */
+"user_rule_exists_error" = "En regel, der allerede findes på listen, forsøges tiføjet";
+
+// MARK: - Strings for UserRulesRedirectController
+/* (UserRulesRedirectController) - Processing state title */
+
+"user_rules_processing_title" = "Behandler...";
+
+/* (UserRulesRedirectController) - Description when allowlist rule is removed; %@ stands for 'allowlist' word hex color */
+"user_rules_allowlist_rule_removed" = "er fjernet fra <u style=color:%@>hvidlisten</u>";
+
+/* (UserRulesRedirectController) - Description when new allowlist rule is added; %@ stands for 'allowlist' word hex color */
+"user_rules_allowlist_rule_added" = "er føjet til <u style=color:%@>hvidlisten</u>";
+
+/* (UserRulesRedirectController) - Description when blocklist rule is added; %@ stands for 'user rules' words hex color */
+"user_rules_blocklist_rule_added" = "har en ny blokeringsregel i <u style=color:%@>brugerregler</u>";
+
+/* (UserRulesRedirectController) - Description when blocklist rules are removed */
+"user_rules_blocklist_rules_removed" = "har ikke flere brugerregler";
+
+// MARK: - Strings for license screen
+/* (PremiumFeature) - Advanced protection premium feature name */
+
+"advanced_protection_feature_name" = "Avanceret beskyttelse";
+
+/* (PremiumFeature) -  Security filters premium feature name */
+"security_filters_feature_name" = "Sikkerhedsfiltre ";
+
+/* (PremiumFeature) - DNS privacy premium feature name */
+"dns_privacy_feature_name" = "DNS-fortrolighed";
+
+/* (PremiumFeature) - Custom filters premium feature name */
+"custom_filters_feature_name" = "Tilpassede filtre";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -866,6 +987,8 @@
 /* (MainPageController) saved data size for VoiceOver*/
 "elapsed_time_voiceover" = "Gns. behandlingstid for en DNS-forespørgsel";
 
+/* (AGSearchView) Placeholder text for search bar */
+"search_view_placeholder" = "Søg";
 
 // MARK: - SystemProtectionEnablerController
 /* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
@@ -965,21 +1088,57 @@
 "block_youtube_ads_instructions" = "Vidste du, at YouTube har ændret sine algoritmer for at vise dig flere annoncer?<br><br>For at blokere dem skal du nu:<br><br> 1. Åbne <a href=\"%@\">youtube.com</a> i Safari.<br><br>2. Trykke på %@ Del.<br><br>3. Trykke på \"Blokér YouTube-annoncer (fra AdGuard)\".";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
-"block_youtube_ads_instructions_done_text_safari" = "Færdig! Nu kan du kigge YouTube uden annoncer.\n\nNår udvidelsen er aktiveret, vises billedteksten \"med AdGuard\" ved siden af YouTube-logoet.<br><br><b>Genindlæses siden, skal du udføre trin 3 og 4 igen.</b >";
+"block_youtube_ads_instructions_done_text_safari" = "Færdig! Nu kan der kigges YouTube uden annoncer.\n\nNår udvidelsen er aktiveret, vises billedteksten \"med AdGuard\" ved siden af YouTube-logoet.<br><br><b>Genindlæses siden, skal trin 3 og 4 gentages.</b >";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
-"block_youtube_ads_instructions_done_text" = "Færdig! Nu kan du kigge YouTube uden annoncer.\n\nNår udvidelsen er aktiveret, vises billedteksten \"med AdGuard\" ved siden af YouTube-logoet.<br><br><b>Ved genindlæsning af siden, skal du udføre trin 2 og 3 igen.</b >";
+"block_youtube_ads_instructions_done_text" = "Færdig! Nu kan der kigges YouTube uden annoncer.\n\nNår udvidelsen er aktiveret, vises billedteksten \"med AdGuard\" ved siden af YouTube-logoet.<br><br><b>Genindlæses siden, skal trin 3 og 4 gentages.</b >";
 
 // MARK: - YouTubeAdsRequestHandler
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
 
-"youtube_script_success_title" = "YouTube er nu annoncefrit! Bemærk, at denne udvidelse skal eksekveres igen, hvis siden genindlæses";
+"youtube_script_success_title" = "YouTube er nu annoncefri! Bemærk, at denne udvidelse skal eksekveres, hver gang siden genindlæses.";
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
-"youtube_script_wrong_domain_title" = "Denne udvidelse er beregnet til kun at blive eksekveret på YouTube";
+"youtube_script_wrong_domain_title" = "Denne udvidelse fungerer kun til YouTube.";
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
 "youtube_script_already_executed_title" = "Udvidelse er allerede eksekveret";
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
 "youtube_script_error_title" = "Unkendt fejl opstod under fjernelse af YouTube-annoncer";
+
+/* (ActionExtensionMainController) - ActionExtension info for iOS 14<= */
+"action_extension_new_version_info" = "En ny version af denne udvidelse er tilgængelig til iOS 15. Den har flere muligheder og en forbedret brugerflade. Husk at opdatere!";
+
+/* (BackgroundFetchController) - Background app refresh default title */
+"background_fetch_default_period" = "Standardperiode";
+
+/* (BackgroundFetchController) - Background app refresh every 1 hour title */
+"background_fetch_hour_period" = "Hver time";
+
+/* (BackgroundFetchController) - Background app refresh every 3 hours title */
+"background_fetch_tree_hours_period" = "Hver 3. time";
+
+/* (BackgroundFetchController) - Background app refresh every 12 hours title */
+"background_fetch_twelve_hours_period" = "Hver 12. time";
+
+/* (BackgroundFetchController) - Background app refresh every 24 hours title */
+"background_fetch_twenty_four_hours_period" = "Hver 24. time";
+
+/* Background app refresh time title */
+"background_app_refresh_time_title" = "Baggrunds-app opdateringsinterval";
+
+/* (DnsProvidersController) - add new dns server title */
+"add_custom_dns_server_title" = "Tilføj en bruger-DNS-server";
+
+/* (DnsProvidersController) - Header title */
+"dns_provider_controller_title" = "DNS-server";
+
+/* (DnsProvidersController) - Header description */
+"dns_provider_controller_description" = "Onlinefortroligheden kan forbedres ved at kryptere DNS-trafik. Dette gøres ved at vælge en af de anbefalede DNS-udbydere.";
+
+/* (DnsProviderDetailsController) Server title */
+"server_title" = "Server";
+
+/* (DnsProviderDetailsController) Website title */
+"website_title" = "Websted";

@@ -12,13 +12,13 @@
         "message": "bu site için"
     },
     "popup_action_safari_protection_description_disabled": {
-        "message": "devre dışı"
+        "message": "koruma Kapalı"
     },
     "popup_action_current_site_status_desc_enabled": {
-        "message": "koruma AÇIK"
+        "message": "koruma Açık"
     },
     "popup_action_current_site_status_desc_disabled": {
-        "message": "koruma devre dışı"
+        "message": "koruma Kapalı"
     },
     "popup_action_block_element": {
         "message": "Bu sayfadaki öğeleri engelle"
@@ -27,7 +27,7 @@
         "message": "Bu site için tüm kullanıcı kurallarını sil"
     },
     "popup_action_current_site_desc_starting": {
-        "message": "koruma etkinleştiriliyor"
+        "message": "koruma açılıyor..."
     },
     "popup_action_current_site_desc_allowlisted": {
         "message": "izin listesine eklendi"
@@ -42,19 +42,28 @@
         "message": "Aferin! AdGuard, neredeyse tüm reklamları engelleyecek ve en zor meydan okumalarla yüzleşecektir."
     },
     "popup_modal_all_sites_allowed_button": {
-        "message": "Sihir başlasın"
+        "message": "Devam et"
     },
     "popup_modal_not_all_sites_allowed_title": {
         "message": "Seçici koruma"
     },
     "popup_modal_not_all_sites_allowed_desc": {
-        "message": "AdGuard'ı yalnızca bu internet sitesi için etkinleştirdiniz. AdGuard'a daha fazla izin vermediğiniz sürece diğer internet sitelerinde reklam görmeye devam edeceksiniz."
+        "message": "AdGuard'ı yalnızca bu internet sitesi için etkinleştirdiniz. AdGuard'a daha fazla izin vermediğiniz sürece, reklamlar diğer web sitelerinde görünebilir."
     },
     "popup_modal_not_all_sites_allowed_button": {
         "message": "Devam et"
     },
+    "popup_modal_advanced_blocking_disabled_title": {
+        "message": "Gelişmiş koruma kapalı"
+    },
+    "popup_modal_advanced_blocking_disabled_description": {
+        "message": "Kullanıcı betikleri ve YouTube reklam engelleme etkinleştirilmemiş."
+    },
+    "popup_modal_advanced_blocking_disabled_button": {
+        "message": "Aç"
+    },
     "popup_modal_title_free": {
-        "message": "Olabileceğin her şey ol"
+        "message": "Tam potansiyelinize ulaşın"
     },
     "popup_modal_desc_free": {
         "message": "AdGuard Premium'da bulunan gelişmiş korumadan hâlâ yoksunsunuz. Safari'de YouTube reklamları gibi daha da fazla reklamı engelleyelim mi?"
@@ -62,11 +71,20 @@
     "popup_modal_btn_free": {
         "message": "Yükselt"
     },
+    "popup_fullscreen_support_title": {
+        "message": "Ah, yardıma mı ihtiyacın var?"
+    },
+    "popup_fullscreen_support_desc": {
+        "message": "Bir sorun mu var? Bir çözümümüz olabilir."
+    },
+    "popup_protection_disabled_support_desc": {
+        "message": "Ah, bu internet sitesi için koruma Kapalı. Bir sorun mu var? Bir çözümümüz olabilir."
+    },
     "popup_support_button_text": {
         "message": "Bir sorun bildir"
     },
     "modal_protection_off_title": {
-        "message": "Korumayı etkinleştir"
+        "message": "AdGuard'ı etkinleştir"
     },
     "modal_protection_off_settings": {
         "message": "<b>Ayarları<\/b> açın"
@@ -75,6 +93,6 @@
         "message": "<b>Safari'ye<\/b> dokunun, aşağı kaydırın ve <b>İçerik Engelleyiciler'e<\/b> dokunun"
     },
     "modal_protection_off_switch": {
-        "message": "Tüm AdGuard eklentilerini <b>etkinleştirin<\/b>."
+        "message": "Tüm AdGuard eklentilerini <b>etkinleştirin<\/b>"
     }
 }

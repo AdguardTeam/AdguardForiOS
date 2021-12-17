@@ -6,6 +6,7 @@ import { DeleteUserRules } from './DeleteUserRules';
 import { CurrentSite } from './CurrentSite';
 import { BlockElement } from './BlockElement';
 import { ReportIssue } from './ReportIssue';
+import { Permissions } from './Permissions';
 
 import './actions.pcss';
 
@@ -15,6 +16,7 @@ export const Actions = observer(() => {
             <CurrentSite />
             <ProtectionToggle />
             <BlockElement />
+            <Permissions />
             <DeleteUserRules />
             <ReportIssue />
         </div>

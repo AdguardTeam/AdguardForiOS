@@ -29,9 +29,6 @@
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="lightGreyText" value="YES"/>
                         </userDefinedRuntimeAttributes>
-                        <variation key="heightClass=regular-widthClass=regular">
-                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        </variation>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eLE-3d-E6L">
                         <rect key="frame" x="24" y="15" width="4" height="4"/>

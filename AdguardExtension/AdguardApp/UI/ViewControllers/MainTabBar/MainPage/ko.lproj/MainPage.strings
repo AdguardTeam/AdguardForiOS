@@ -1,17 +1,21 @@
-/* Class = "UILabel"; text = "Get stronger with PREMIUM!"; ObjectID = "3qN-uj-pOb"; */
+
+/* Class = "UILabel"; text = "Get stronger with Premium!"; ObjectID = "3qN-uj-pOb"; */
 "3qN-uj-pOb.text" = "프리미엄 버전의 강력한 기능을 사용해 보세요!";
 
-/* Class = "UIButton"; normalTitle = "FIX IT"; ObjectID = "46F-Jh-wHm"; */
+/* Class = "UIButton"; normalTitle = "Fix it"; ObjectID = "46F-Jh-wHm"; */
 "46F-Jh-wHm.normalTitle" = "변경";
 
-/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "4Ft-5h-4Jd"; */
-"4Ft-5h-4Jd.normalTitle" = "무료로 이용해보세요";
+/* Class = "UIButton"; normalTitle = "Try for free"; ObjectID = "4Ft-5h-4Jd"; */
+"4Ft-5h-4Jd.normalTitle" = "무료 체험";
 
 /* Class = "UILabel"; text = "Period"; ObjectID = "5pX-mg-2fq"; */
 "5pX-mg-2fq.text" = "기간";
 
-/* Class = "UILabel"; text = "Native DNS is working"; ObjectID = "8Z0-0U-Hfk"; */
-"8Z0-0U-Hfk.text" = "기본 DNS가 작동 중입니다";
+/* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "7SB-2j-FAc"; */
+"7SB-2j-FAc.normalTitle" = "계속하기";
+
+/* Class = "UILabel"; text = "Using native DNS"; ObjectID = "8Z0-0U-Hfk"; */
+"8Z0-0U-Hfk.text" = "기본 DNS 작동 중";
 
 /* Class = "UILabel"; text = "requests"; ObjectID = "Btd-nN-zLO"; */
 "Btd-nN-zLO.text" = "요청";
@@ -22,15 +26,6 @@
 /* Class = "UILabel"; text = "Some content blockers are disabled"; ObjectID = "FcP-gP-TsG"; */
 "FcP-gP-TsG.text" = "몇몇의 콘텐츠 차단기가 비활성화 됨";
 
-/* Class = "UIButton"; normalTitle = "Today"; ObjectID = "Oez-VU-4fi"; */
-"Oez-VU-4fi.normalTitle" = "오늘";
-
-/* Class = "UIButton"; normalTitle = "24 hours"; ObjectID = "Roe-x7-9e8"; */
-"Roe-x7-9e8.normalTitle" = "24시간";
-
-/* Class = "UIButton"; normalTitle = "7 days"; ObjectID = "VRw-EP-ZlF"; */
-"VRw-EP-ZlF.normalTitle" = "7일";
-
 /* Class = "UINavigationItem"; title = "AdGuard"; ObjectID = "YaQ-RE-YZT"; Note = "Main Menu header"; */
 "YaQ-RE-YZT.title" = "AdGuard";
 
@@ -40,14 +35,8 @@
 /* Class = "UILabel"; text = "Some Safari content blockers are disabled"; ObjectID = "cvv-CS-LMQ"; */
 "cvv-CS-LMQ.text" = "몇몇의 Safari 콘텐츠 차단기가 비활성화 됨";
 
-/* Class = "UIButton"; normalTitle = "All time"; ObjectID = "gDb-ep-jQg"; */
-"gDb-ep-jQg.normalTitle" = "전체";
+/* Class = "UILabel"; text = "New AdGuard features in iOS 15"; ObjectID = "gDV-cq-ZDm"; */
+"gDV-cq-ZDm.text" = "iOS 15 내 AdGuard의 새 기능";
 
-/* Class = "UIButton"; normalTitle = "30 days"; ObjectID = "gu3-as-BZN"; */
-"gu3-as-BZN.normalTitle" = "30일";
-
-/* Class = "UIButton"; normalTitle = "All time"; ObjectID = "kfe-5H-fB1"; */
-"kfe-5H-fB1.normalTitle" = "전체";
-
-/* Class = "UIButton"; normalTitle = "FIX IT"; ObjectID = "oe6-9O-dBB"; */
+/* Class = "UIButton"; normalTitle = "Fix it"; ObjectID = "oe6-9O-dBB"; */
 "oe6-9O-dBB.normalTitle" = "변경";

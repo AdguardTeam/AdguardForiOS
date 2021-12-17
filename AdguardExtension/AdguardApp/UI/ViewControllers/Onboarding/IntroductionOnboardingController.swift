@@ -35,6 +35,7 @@ final class IntroductionOnboardingController: UIViewController {
         super.viewDidLoad()
         checkBoxButton.isSelected = false
         nextButton.applyStandardGreenStyle()
+        nextButton.setBackgroundColor()
         nextButton.isEnabled = false
         updateTheme()
         setupBackButton()

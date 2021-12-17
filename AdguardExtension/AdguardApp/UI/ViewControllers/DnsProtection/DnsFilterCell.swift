@@ -164,7 +164,7 @@ final class DnsFilterCell: UITableViewCell, Reusable {
         let label = ThemableLabel()
         label.lightGreyText = true
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: isIpadTrait ? 20.0 : 14.0, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: isIpadTrait ? 18.0 : 12.0, weight: .regular)
         label.textAlignment = .left
         label.text = text
         return label

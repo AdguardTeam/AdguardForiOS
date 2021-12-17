@@ -2,6 +2,27 @@
     "extension_name": {
         "message": "AdGuard"
     },
+    "popup_action_safari_protection_title": {
+        "message": "Zaštita za Safari"
+    },
+    "popup_modal_all_sites_allowed_button": {
+        "message": "Nastavi"
+    },
+    "popup_modal_not_all_sites_allowed_button": {
+        "message": "Nastavi"
+    },
+    "popup_modal_advanced_blocking_disabled_button": {
+        "message": "Uključi"
+    },
+    "popup_modal_btn_free": {
+        "message": "Nadogradi"
+    },
+    "popup_support_button_text": {
+        "message": "Prijavi poteškoću"
+    },
+    "modal_protection_off_title": {
+        "message": "Uključi AdGuard"
+    },
     "extension_description": {
         "message": "AdGuard Safari Web Extension"
     }

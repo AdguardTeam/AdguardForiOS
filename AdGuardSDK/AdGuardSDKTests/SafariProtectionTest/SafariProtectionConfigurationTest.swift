@@ -168,7 +168,25 @@ class SafariProtectionConfigurationTest: XCTestCase {
 
     // MARK: - Test updateAdvancedProtectionEnabled
 
-    func testUpdateAdvancedProtectionEnabledWithSameValue() {
+    func testUpdateAdvancedProtection() {
+        XCTAssertEqual(configuration.advancedBlockingIsEnabled, false)
+        safariProtection.update(advancedProtectionEnabled: true)
+        XCTAssertEqual(configuration.advancedBlockingIsEnabled, true)
+        XCTAssertEqual(converter.convertFiltersCalledCount, 0)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 0)
+        XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
+    }
+
+    func testUpdateAdvancedProtectionWithSaveValue() {
+        XCTAssertEqual(configuration.advancedBlockingIsEnabled, false)
+        safariProtection.update(advancedProtectionEnabled: false)
+        XCTAssertEqual(configuration.advancedBlockingIsEnabled, false)
+        XCTAssertEqual(converter.convertFiltersCalledCount, 0)
+        XCTAssertEqual(cbStorage.invokedSaveCount, 0)
+        XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
+    }
+
+    func testUpdateAdvancedProtectionEnabledWithReloadCBWithSameValue() {
         let expectation = XCTestExpectation()
         let sameValue = configuration.advancedBlockingIsEnabled
         safariProtection.update(advancedProtectionEnabled: sameValue) { error in
@@ -184,7 +202,7 @@ class SafariProtectionConfigurationTest: XCTestCase {
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 0)
     }
 
-    func testUpdateAdvancedProtectionEnabledWithDifferentValue() {
+    func testUpdateAdvancedProtectionEnabledWithReloadCBWithDifferentValue() {
         let expectation = XCTestExpectation()
         let differentValue = !configuration.advancedBlockingIsEnabled
         safariProtection.update(advancedProtectionEnabled: differentValue) { error in
@@ -200,7 +218,7 @@ class SafariProtectionConfigurationTest: XCTestCase {
         XCTAssertEqual(cbService.updateContentBlockersCalledCount, 1)
     }
 
-    func testUpdateAdvancedProtectionEnabledWithError() {
+    func testUpdateAdvancedProtectionEnabledWithReloadCBWithError() {
         let expectation = XCTestExpectation()
         let differentValue = !configuration.advancedBlockingIsEnabled
 

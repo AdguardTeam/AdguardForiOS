@@ -179,14 +179,13 @@ class RequestDetailsCell: UITableViewCell, CopiableCellInfo {
         }
 
         infoLabel.text = model.info
-        let font = UIFont.systemFont(ofSize: infoLabel.font.pointSize, weight: model.infoFontWeight ?? .regular)
+        let font = UIFont.systemFont(ofSize: isIpadTrait ? 20.0 : 16.0, weight: model.infoFontWeight ?? .regular)
         infoLabel.font = font
         infoLabel.textColor = model.infoColor == nil ? infoLabel.textColor : model.infoColor
 
         let categoryImage = UIImage.getCategoryImage(withId: model.categoryId)
         categoryImageView.isHidden = categoryImage == nil
         categoryImageView.image = categoryImage
-        self.setNeedsLayout()
         self.layoutIfNeeded()
     }
 

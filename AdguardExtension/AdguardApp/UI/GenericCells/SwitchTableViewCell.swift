@@ -71,12 +71,12 @@ final class SwitchTableViewCell: UITableViewCell, Reusable {
         contentView.addSubview(stateSwitch)
 
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16.0),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16.0),
-            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16.0),
-            titleLabel.trailingAnchor.constraint(equalTo: stateSwitch.leadingAnchor, constant: -16.0),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: isIpadTrait ? 20.0 : 16.0),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: isIpadTrait ? 24.0 : 16.0),
+            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: isIpadTrait ? -20.0 : -16.0),
+            titleLabel.trailingAnchor.constraint(equalTo: stateSwitch.leadingAnchor, constant: isIpadTrait ? -24.0 : -16.0),
 
-            stateSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16.0),
+            stateSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: isIpadTrait ? -24.0 : -16.0),
             stateSwitch.widthAnchor.constraint(equalToConstant: 50.0),
             stateSwitch.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor)
         ])
@@ -84,6 +84,7 @@ final class SwitchTableViewCell: UITableViewCell, Reusable {
 
     /// Switch action handler
     @objc private final func switchValueChanged(_ sender: UISwitch) {
+        switchIsOn = sender.isOn
         delegate?.switchStateChanged(to: sender.isOn)
     }
 }

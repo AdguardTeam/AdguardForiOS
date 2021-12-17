@@ -1,20 +1,6 @@
-/* Class = "UIButton"; normalTitle = "Watch manual"; ObjectID = "3ju-B8-UIZ"; */
-"3ju-B8-UIZ.normalTitle" = "Se bruksanvisningen";
 
-/* Class = "UILabel"; text = "To use AdGuard in Safari follow a few easy steps"; ObjectID = "F7O-MB-LHu"; */
-"F7O-MB-LHu.text" = "For å bruke AdGuard i Safari, følg noen få enkle trinn";
+/* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "cMV-qC-ZdE"; */
+"cMV-qC-ZdE.normalTitle" = "Fortsett";
 
-/* Class = "UIButton"; normalTitle = "WATCH MANUAL"; ObjectID = "GOu-4j-RcN"; */
-"GOu-4j-RcN.normalTitle" = "SE BRUKSANVISNINGEN";
-
-/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "cMV-qC-ZdE"; */
-"cMV-qC-ZdE.normalTitle" = "NESTE";
-
-/* Class = "UILabel"; text = "Thank you for installing AdGuard!"; ObjectID = "hak-o1-HWp"; */
-"hak-o1-HWp.text" = "Takk for at du installerte AdGuard!";
-
-/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "q8l-xM-B5q"; */
-"q8l-xM-B5q.normalTitle" = "NESTE";
-
-/* Class = "UILabel"; text = "Open the settings"; ObjectID = "tsx-Ce-cc8"; */
-"tsx-Ce-cc8.text" = "Åpne innstillingene";
+/* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "q8l-xM-B5q"; */
+"q8l-xM-B5q.normalTitle" = "Fortsett";

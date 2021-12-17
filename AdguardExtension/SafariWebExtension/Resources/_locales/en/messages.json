@@ -1,6 +1,6 @@
 {
     "extension_name": {
-        "message": "AdGuard"
+        "message": "AdGuard Pro"
     },
     "extension_description": {
         "message": "AdGuard Safari Web Extension"
@@ -25,6 +25,9 @@
     },
     "popup_action_delete_user_rules": {
         "message": "Delete all user rules for this website"
+    },
+    "popup_action_insufficient_permissions": {
+        "message": "Limited permissions"
     },
     "popup_action_current_site_desc_starting": {
         "message": "turning on protection..."
@@ -90,12 +93,12 @@
         "message": "Enable AdGuard"
     },
     "modal_protection_off_settings": {
-        "message": "Open <b>Settings<\/b>"
+        "message": "Open <b>Settings</b>"
     },
     "modal_protection_off_extensions": {
-        "message": "Tap <b>Safari<\/b>, swipe down, and tap <b>Content Blockers<\/b>"
+        "message": "Tap <b>Safari</b>, swipe down, and tap <b>Content Blockers</b>"
     },
     "modal_protection_off_switch": {
-        "message": "<b>Enable<\/b> all AdGuard extensions"
+        "message": "<b>Enable</b> all AdGuard extensions"
     }
 }

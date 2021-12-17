@@ -104,7 +104,8 @@ fileprivate extension ExtendedFilterMetaProtocol {
             FiltersTable.name <- self.name,
             FiltersTable.description <- self.description,
             FiltersTable.homePage <- self.homePage,
-            FiltersTable.subscriptionUrl <- self.filterDownloadPage
+            FiltersTable.subscriptionUrl <- self.filterDownloadPage,
+            FiltersTable.lastUpdateTime <- self.lastUpdateDate
         ]
         return sttrs
     }
@@ -178,15 +179,16 @@ extension MetaStorage: FiltersMetaStorageProtocol {
     func update(filter: ExtendedFilterMetaProtocol) throws -> Bool {
         Logger.logDebug("(FiltersMetaStorage) - updateFilter start; Filter id=\(filter.filterId)")
 
-        // Query: SELECT version FROM filters WHERE filter_id = filter.filterId
-        let versionQuery = FiltersTable.table.select(FiltersTable.version).where(FiltersTable.filterId == filter.filterId)
-        guard let currentFilterVersion = try filtersDb.pluck(versionQuery)?.get(FiltersTable.version) else {
-            Logger.logDebug("(FiltersMetaStorage) - updateFilter; Failed to get current filter version; Filter id=\(filter.filterId)")
-            return false
-        }
 
-        Logger.logDebug("(FiltersMetaStorage) - updateFilter; Filter id=\(filter.filterId); Update \(currentFilterVersion) -> \(filter.version ?? "nil")")
-        guard currentFilterVersion != filter.version else { return false }
+        // Query: SELECT version FROM filters WHERE filter_id = filter.filterId
+        let lastUpdateDateQuery = FiltersTable.table.select(FiltersTable.lastUpdateTime).where(FiltersTable.filterId == filter.filterId)
+
+        if let currentFilterLastUpdateDate = try filtersDb.pluck(lastUpdateDateQuery)?.get(FiltersTable.lastUpdateTime) {
+            if let newUpdateDate = filter.lastUpdateDate, currentFilterLastUpdateDate == newUpdateDate {
+                Logger.logInfo("(FiltersMetaStorage) - updateFilter; Update ended with reason: New meta update date is the same as current meta update date")
+                return false
+            }
+        }
 
         // Query: UPDATE filters SET (group_id, version, last_update_time, display_number, name, description, homepage, subscriptionUrl) WHERE filter_id = filter.filterId
         let query = FiltersTable.table

@@ -372,10 +372,13 @@ final class DnsRequestDetailsController: UITableViewController {
             generalSectionModel[timeCell!.row] = timeModel
         }
 
+        // TODO: - Server model is empty now, but it should contain readable DNS server (e.g AdGuard DNS)
+        // It was not working in v4.2, so we've decided to leave it empty in v4.3 till v4.4
+
         // Server model
-        let server = model.logRecord.event.upstream?.upstream
+        let server = ""
         let serverTitle = String.localizedString("server_title")
-        let serverModelIsNil = server?.isEmpty ?? true
+        let serverModelIsNil = server.isEmpty
         let serverModel = serverModelIsNil ? nil : LogCellModel(copiedString: server, title: serverTitle, info: server, theme: theme)
         if !serverModelIsNil {
             generalSection = generalSectionToAssign
@@ -429,15 +432,13 @@ final class DnsRequestDetailsController: UITableViewController {
             sectionModels[generalSection] = generalSectionModel
         }
 
-        /**
-         Tracker Details Section
-         */
+        // Tracker Details Section
         var trackerDetailsSectionModel: [Int : LogCellModelProtocol?] = [:]
         var trackerDetailsRows = 0
         let trackerSectionToAssign = sectionNumber
 
         // Category model
-        let category = model.logRecord.tracker?.name ?? ""
+        let category = model.logRecord.tracker?.category.localizedName ?? ""
         let categoryTitle = String.localizedString("category_title")
         let categoryModelIsNil = category.isEmpty
         let categoryModel: LogCellModel? = categoryModelIsNil ? nil : LogCellModel(copiedString: category, title: categoryTitle, info: category, categoryId: model.logRecord.tracker?.category.rawValue, theme: theme)
@@ -479,9 +480,7 @@ final class DnsRequestDetailsController: UITableViewController {
             sectionModels[trackerDetailsSection] = trackerDetailsSectionModel
         }
 
-        /**
-         DNS Section
-        */
+        // DNS Section
         var dnsSectionModel: [Int : LogCellModelProtocol?] = [:]
         var dnsRows = 0
         let dnsSectionToAssign = sectionNumber
@@ -549,6 +548,27 @@ final class DnsRequestDetailsController: UITableViewController {
 
         if let dnsSection = dnsSection {
             sectionModels[dnsSection] = dnsSectionModel
+        }
+    }
+}
+
+extension DnsTracker.Category {
+    var localizedName: String {
+        switch self {
+        case .audioVideoPlayer: return String.localizedString("audio_video_player")
+        case .comments: return String.localizedString("comments")
+        case .customerInteraction: return String.localizedString("customer_interaction")
+        case .pornvertising: return String.localizedString("pornvertising")
+        case .advertising: return String.localizedString("advertising")
+        case .essential: return String.localizedString("essential")
+        case .siteAnalytics: return String.localizedString("site_analytics")
+        case .socialMedia: return String.localizedString("social_media")
+        case .misc: return String.localizedString("misc")
+        case .cdn: return String.localizedString("cdn")
+        case .hosting: return String.localizedString("hosting")
+        case .unknown: return String.localizedString("unknown")
+        case .extensions: return String.localizedString("extensions")
+        case .mobileAnalytics: return String.localizedString("mobile_analytics")
         }
     }
 }

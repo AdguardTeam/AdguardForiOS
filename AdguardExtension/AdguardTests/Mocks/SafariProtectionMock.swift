@@ -87,11 +87,16 @@ class SafariProtectionMock: SafariProtectionProtocol {
         onCbReloaded?(updateSafariProtectionEnabledResult)
     }
 
-    var updateAdvancedProtectionEnabledResult: Error?
-    var updateAdvancedProtectionEnabledCalledCount = 0
+    var updateAdvancedProtectionCount = 0
+    func update(advancedProtectionEnabled: Bool) {
+        updateAdvancedProtectionCount += 1
+    }
+
+    var updateAdvancedProtectionWithReloadCBResult: Error?
+    var updateAdvancedProtectionWithReloadCBCalledCount = 0
     func update(advancedProtectionEnabled: Bool, onCbReloaded: ((Error?) -> Void)?) {
-        updateAdvancedProtectionEnabledCalledCount += 1
-        onCbReloaded?(updateAdvancedProtectionEnabledResult)
+        updateAdvancedProtectionWithReloadCBCalledCount += 1
+        onCbReloaded?(updateAdvancedProtectionWithReloadCBResult)
     }
 
     var updateBlocklistIsEnabledResult: Error?
