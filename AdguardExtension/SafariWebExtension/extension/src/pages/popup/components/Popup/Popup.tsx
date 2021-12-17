@@ -9,6 +9,7 @@ import { popupStore } from '../../stores/PopupStore';
 import { Support } from '../Support';
 import { Loader } from '../Loader';
 import { useFullscreen } from '../../hooks/useFullscreen';
+import { ExpandButton } from '../ExpandButton/ExpandButton';
 
 import './popup.pcss';
 
@@ -31,6 +32,7 @@ export const Popup = observer(() => {
             <Modals />
             <Actions />
             <Support />
+            <ExpandButton />
             <Loader />
         </div>
     );

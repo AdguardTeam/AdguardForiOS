@@ -59,6 +59,8 @@ export class PopupStore {
 
     @observable platform: Platforms = Platforms.IPhone;
 
+    @observable popupExpanded: boolean = false;
+
     /**
      * Flag variable
      * - true means that app is premium (user bought it),
@@ -173,6 +175,11 @@ export class PopupStore {
     @action
     setProtectionModalVisibleState(state: boolean) {
         this.protectionModalVisible = state;
+    }
+
+    @action
+    togglePopupExpanded() {
+        this.popupExpanded = !this.popupExpanded;
     }
 }
 

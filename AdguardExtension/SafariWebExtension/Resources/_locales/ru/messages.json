@@ -12,7 +12,7 @@
         "message": "для этого сайта"
     },
     "popup_action_safari_protection_description_disabled": {
-        "message": "выключено"
+        "message": "защита выключена"
     },
     "popup_action_current_site_status_desc_enabled": {
         "message": "защита включена"
@@ -27,7 +27,7 @@
         "message": "Удалить все пользовательские правила для этого сайта"
     },
     "popup_action_current_site_desc_starting": {
-        "message": "включаем защиту"
+        "message": "включаем защиту..."
     },
     "popup_action_current_site_desc_allowlisted": {
         "message": "сайт в белом списке"
@@ -42,7 +42,7 @@
         "message": "Отличная работа! Теперь AdGuard будет блокировать ещё больше рекламы и справляться с самыми сложными задачами."
     },
     "popup_modal_all_sites_allowed_button": {
-        "message": "Поехали!"
+        "message": "Продолжить"
     },
     "popup_modal_not_all_sites_allowed_title": {
         "message": "Выборочная защита"
@@ -50,17 +50,47 @@
     "popup_modal_not_all_sites_allowed_desc": {
         "message": "AdGuard включен только на этом сайте. Вы будете видеть рекламу на других сайтах, пока не дадите AdGuard разрешение блокировать её везде."
     },
+    "popup_modal_not_all_sites_allowed_button": {
+        "message": "Понятно"
+    },
+    "popup_modal_advanced_blocking_disabled_title": {
+        "message": "Расширенная защита отключена"
+    },
+    "popup_modal_advanced_blocking_disabled_description": {
+        "message": "Пользовательские скрипты и блокировка рекламы на YouTube не активированы."
+    },
+    "popup_modal_advanced_blocking_disabled_button": {
+        "message": "Включить"
+    },
+    "popup_modal_title_free": {
+        "message": "Используйте все возможности AdGuard"
+    },
+    "popup_modal_desc_free": {
+        "message": "Обратите внимание, что в бесплатной версии отсутствует расширенная защита. Она поможет справиться с большим количеством рекламы, включая рекламу на YouTube в Safari."
+    },
     "popup_modal_btn_free": {
         "message": "Улучшить"
+    },
+    "popup_fullscreen_support_title": {
+        "message": "Вам нужна помощь?"
+    },
+    "popup_fullscreen_support_desc": {
+        "message": "Что-то не так? Мы это исправим."
+    },
+    "popup_protection_disabled_support_desc": {
+        "message": "Упс, кажется, вы отключили защиту... Что-то пошло не так? Мы можем это исправить."
     },
     "popup_support_button_text": {
         "message": "Сообщить о проблеме"
     },
     "modal_protection_off_title": {
-        "message": "Включить защиту"
+        "message": "Включить AdGuard"
     },
     "modal_protection_off_settings": {
         "message": "Откройте <b>Настройки<\/b>"
+    },
+    "modal_protection_off_extensions": {
+        "message": "Нажмите на <b>Safari<\/b>, проведите пальцем вниз и выберите раздел <b>«Блокировщики контента»<\/b>"
     },
     "modal_protection_off_switch": {
         "message": "<b>Включите<\/b> все расширения AdGuard"

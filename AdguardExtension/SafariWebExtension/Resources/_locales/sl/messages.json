@@ -12,13 +12,13 @@
         "message": "za to spletno stran"
     },
     "popup_action_safari_protection_description_disabled": {
-        "message": "onemogočena"
+        "message": "zaščite je izkjučena"
     },
     "popup_action_current_site_status_desc_enabled": {
-        "message": "zaščita je VKLOPLJENA"
+        "message": "zaščita je vključena"
     },
     "popup_action_current_site_status_desc_disabled": {
-        "message": "zaščita je onemogočena"
+        "message": "zaščite je izkjučena"
     },
     "popup_action_block_element": {
         "message": "Onemogoči element na tej strani"
@@ -27,7 +27,7 @@
         "message": "Izbriši vsa uporabniška pravila za to spletno stran"
     },
     "popup_action_current_site_desc_starting": {
-        "message": "omogočanje zaščite"
+        "message": "vklop zaščite..."
     },
     "popup_action_current_site_desc_allowlisted": {
         "message": "dodana na seznam dovoljenih"
@@ -42,19 +42,28 @@
         "message": "Dobro opravljeno! AdGuard bo onemogočil skoraj vsak oglas in se soočil z najtežjimi izzivi."
     },
     "popup_modal_all_sites_allowed_button": {
-        "message": "Naj se čarovnija začne"
+        "message": "Nadaljuj"
     },
     "popup_modal_not_all_sites_allowed_title": {
         "message": "Izbirna zaščita"
     },
     "popup_modal_not_all_sites_allowed_desc": {
-        "message": "AdGuard ste omogočili samo za to spletno stran. Oglase boste še naprej videli na drugih spletnih straneh razen, če AdGuardu date več dovoljenj."
+        "message": "AdGuard ste omogočili samo za to spletno stran. Oglasi se lahko prikazujejo na drugih spletnih straneh razen, če AdGuardu date več dovoljenj."
     },
     "popup_modal_not_all_sites_allowed_button": {
         "message": "Nadaljuj"
     },
+    "popup_modal_advanced_blocking_disabled_title": {
+        "message": "Napredna zaščita je izklopljena"
+    },
+    "popup_modal_advanced_blocking_disabled_description": {
+        "message": "Uporabniški skripti in zaviranje oglasov v YouTubu niso aktivirani."
+    },
+    "popup_modal_advanced_blocking_disabled_button": {
+        "message": "Vklopi"
+    },
     "popup_modal_title_free": {
-        "message": "Bodi vse, kar lahko"
+        "message": "Izkoristite svoj polni potencial"
     },
     "popup_modal_desc_free": {
         "message": "Napredne zaščite, ki je na voljo v AdGuard Premium, še vedno nimate. Onemogočimo še več oglasov, kot so oglasi v YouTubu v Safariju?"
@@ -63,19 +72,19 @@
         "message": "Nadgradi"
     },
     "popup_fullscreen_support_title": {
-        "message": "Uh, oh, ali želite znova zagnati od začetka?"
+        "message": "Uh, oh, ali rabite pomoč?"
     },
     "popup_fullscreen_support_desc": {
         "message": "Je kaj narobe? Morda imamo popravek."
     },
     "popup_protection_disabled_support_desc": {
-        "message": "Uh, oh, zaščita za to spletno stran je IZKLOPLJENA. Je kaj narobe? Morda imamo popravek."
+        "message": "Uh, oh, zaščita za to spletno stran je izključena. Je kaj narobe? Morda imamo popravek."
     },
     "popup_support_button_text": {
         "message": "Prijavi težavo"
     },
     "modal_protection_off_title": {
-        "message": "Omogoči zaščito"
+        "message": "Omogoči AdGuard"
     },
     "modal_protection_off_settings": {
         "message": "Odpri <b>Nastavitve<\/b>"

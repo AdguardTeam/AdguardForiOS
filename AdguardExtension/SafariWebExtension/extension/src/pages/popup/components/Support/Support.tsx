@@ -28,7 +28,7 @@ export const Support = observer(() => {
 
     if (protectionDisabledVisible) {
         supportType = supportMap.protectionDisabled;
-    } else if (store.isFullscreen) {
+    } else if (store.isFullscreen || store.popupExpanded) {
         supportType = supportMap.popupFullscreen;
     }
 

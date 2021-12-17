@@ -3,6 +3,96 @@
         "message": "AdGuard"
     },
     "extension_description": {
-        "message": "AdGuard Safari Web Extension"
+        "message": "Extensie web AdGuard pentru Safari"
+    },
+    "popup_action_safari_protection_title": {
+        "message": "Protecție Safari"
+    },
+    "popup_action_safari_protection_description": {
+        "message": "pentru acest site"
+    },
+    "popup_action_safari_protection_description_disabled": {
+        "message": "protecția este oprită"
+    },
+    "popup_action_current_site_status_desc_enabled": {
+        "message": "protecția este pornită"
+    },
+    "popup_action_current_site_status_desc_disabled": {
+        "message": "protecția este oprită"
+    },
+    "popup_action_block_element": {
+        "message": "Blocați elemente din pagină"
+    },
+    "popup_action_delete_user_rules": {
+        "message": "Ștergeți toate regulile de utilizator pentru acest site"
+    },
+    "popup_action_current_site_desc_starting": {
+        "message": "activarea protecției..."
+    },
+    "popup_action_current_site_desc_allowlisted": {
+        "message": "adăugată la lista de autorizări"
+    },
+    "popup_action_current_site_desc_basic_only": {
+        "message": "numai protecție de bază"
+    },
+    "popup_modal_all_sites_allowed_title": {
+        "message": "Protecție maximă"
+    },
+    "popup_modal_all_sites_allowed_desc": {
+        "message": "Bună treabă! AdGuard va bloca aproape orice anunț și se va confrunta cu cele mai dificile provocări."
+    },
+    "popup_modal_all_sites_allowed_button": {
+        "message": "Continuă"
+    },
+    "popup_modal_not_all_sites_allowed_title": {
+        "message": "Protecție selectivă"
+    },
+    "popup_modal_not_all_sites_allowed_desc": {
+        "message": "Ați activat AdGuard numai pentru acest site. Anunțurile pot apărea pe alte site-uri web dacă nu acordați AdGuard mai multe permisiuni."
+    },
+    "popup_modal_not_all_sites_allowed_button": {
+        "message": "Continuă"
+    },
+    "popup_modal_advanced_blocking_disabled_title": {
+        "message": "Protecția avansată este oprită"
+    },
+    "popup_modal_advanced_blocking_disabled_description": {
+        "message": "Scripturile de utilizator și blocarea reclamelor YouTube nu sunt activate."
+    },
+    "popup_modal_advanced_blocking_disabled_button": {
+        "message": "Activați"
+    },
+    "popup_modal_title_free": {
+        "message": "Eliberați-vă întregul potențial"
+    },
+    "popup_modal_desc_free": {
+        "message": "Încă nu aveți protecția avansată disponibilă în AdGuard Premium. Să blocăm și mai multe anunțuri, cum ar fi anunțurile YouTube în Safari?"
+    },
+    "popup_modal_btn_free": {
+        "message": "Faceți upgrade"
+    },
+    "popup_fullscreen_support_title": {
+        "message": "Uh-oh, aveți nevoie de ajutor?"
+    },
+    "popup_fullscreen_support_desc": {
+        "message": "S-a întâmplat ceva? S-ar putea să avem o soluție."
+    },
+    "popup_protection_disabled_support_desc": {
+        "message": "Uh-oh, protecția pentru acest site este oprită. S-a întâmplat ceva? S-ar putea să avem o soluție."
+    },
+    "popup_support_button_text": {
+        "message": "Raportați o problemă"
+    },
+    "modal_protection_off_title": {
+        "message": "Activare AdGuard"
+    },
+    "modal_protection_off_settings": {
+        "message": "Deschideți <b>Setări<\/b>"
+    },
+    "modal_protection_off_extensions": {
+        "message": "Apăsați <b>Safari<\/b>, trageți în jos și apăsați <b>Blocant de Conținut<\/b>"
+    },
+    "modal_protection_off_switch": {
+        "message": "<b>Activați<\/b> toate extensiile AdGuard"
     }
 }

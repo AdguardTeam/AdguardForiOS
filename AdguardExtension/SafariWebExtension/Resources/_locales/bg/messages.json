@@ -2,6 +2,9 @@
     "extension_name": {
         "message": "AdGuard"
     },
+    "popup_support_button_text": {
+        "message": "Съобщи за проблем"
+    },
     "extension_description": {
         "message": "AdGuard Safari Web Extension"
     }
