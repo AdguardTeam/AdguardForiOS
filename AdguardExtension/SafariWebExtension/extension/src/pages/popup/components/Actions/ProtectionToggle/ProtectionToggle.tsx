@@ -16,7 +16,10 @@ export const ProtectionToggle = observer(() => {
         store.toggleProtection();
     };
 
-    let description = translator.getMessage('popup_action_safari_protection_description');
+    let description = store.protectionEnabled
+        ? translator.getMessage('popup_action_safari_protection_description_enabled_for_site')
+        : translator.getMessage('popup_action_safari_protection_description_disabled_for_site');
+
     let descriptionColor = 'gray';
     let iconEnabled = true;
 
