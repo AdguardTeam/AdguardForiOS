@@ -70,7 +70,7 @@ final class DnsFilterCell: UITableViewCell, Reusable {
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: isIpadTrait ? 24.0 : 16.0, weight: .medium)
         label.textAlignment = .left
-        label.attributedText = model.filterNameAttrString
+        DispatchQueue.asyncSafeMain { label.attributedText = self.model.filterNameAttrString }
         return label
     }()
 
@@ -134,7 +134,7 @@ final class DnsFilterCell: UITableViewCell, Reusable {
 
         stateSwitch.isOn = model.isEnabled
 
-        titleLabel.attributedText = model.filterNameAttrString
+        DispatchQueue.asyncSafeMain { self.titleLabel.attributedText = self.model.filterNameAttrString }
         stackView.addArrangedSubview(titleLabel)
 
         if let version = model.version {

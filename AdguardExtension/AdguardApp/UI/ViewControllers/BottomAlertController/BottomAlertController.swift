@@ -74,6 +74,7 @@ class BottomAlertController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var keyboardHeightLayoutConstraint: NSLayoutConstraint!
 
+    /// This completion will be called if user tap on dismiss area
     var onDismissCompletion: (() -> Void)?
     private var keyboardMover: KeyboardMover!
 

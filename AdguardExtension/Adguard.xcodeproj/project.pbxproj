@@ -121,6 +121,8 @@
 		2411AA292733F6F500E82F2E /* SafariProtectionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2411AA282733F6F500E82F2E /* SafariProtectionMock.swift */; };
 		241346CC26131CA300CF8601 /* AppDelegate+Themable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241346CB26131CA300CF8601 /* AppDelegate+Themable.swift */; };
 		241346CD26131CA300CF8601 /* AppDelegate+Themable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241346CB26131CA300CF8601 /* AppDelegate+Themable.swift */; };
+		2413B619276C964200CAA585 /* UILabel+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2413B618276C964200CAA585 /* UILabel+Utils.swift */; };
+		2413B61A276C984000CAA585 /* UILabel+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2413B618276C964200CAA585 /* UILabel+Utils.swift */; };
 		2414089B26C4226000741F32 /* OnboardingContentBlockerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2414089A26C4226000741F32 /* OnboardingContentBlockerCell.swift */; };
 		2414089D26C42E6700741F32 /* OnboardingAdvancedProtectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2414089C26C42E6700741F32 /* OnboardingAdvancedProtectionView.swift */; };
 		241436FF273568DC00E33EF0 /* CustomFiltersMetaParserMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241436FE273568DC00E33EF0 /* CustomFiltersMetaParserMock.swift */; };
@@ -2574,6 +2576,7 @@
 		240F6F372732C29300FD5430 /* DnsProtectionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsProtectionMock.swift; sourceTree = "<group>"; };
 		2411AA282733F6F500E82F2E /* SafariProtectionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariProtectionMock.swift; sourceTree = "<group>"; };
 		241346CB26131CA300CF8601 /* AppDelegate+Themable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Themable.swift"; sourceTree = "<group>"; };
+		2413B618276C964200CAA585 /* UILabel+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Utils.swift"; sourceTree = "<group>"; };
 		2414089A26C4226000741F32 /* OnboardingContentBlockerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContentBlockerCell.swift; sourceTree = "<group>"; };
 		2414089C26C42E6700741F32 /* OnboardingAdvancedProtectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAdvancedProtectionView.swift; sourceTree = "<group>"; };
 		241436FE273568DC00E33EF0 /* CustomFiltersMetaParserMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFiltersMetaParserMock.swift; sourceTree = "<group>"; };
@@ -5699,6 +5702,7 @@
 				247432DD261731C00025C7B8 /* UIAlerController+Style.swift */,
 				7E94742F26CA83090031B8F4 /* SafariGroup.GroupType+IconImage.swift */,
 				7EAA0D8626CA8E8C007208E5 /* UITextView+Utils.swift */,
+				2413B618276C964200CAA585 /* UILabel+Utils.swift */,
 				7E86A9B626CBB591000B395F /* UITraitEnvironment+Utils.swift */,
 				7E3FEFB326CD3AB60080EC03 /* UITableView+Utils.swift */,
 				C7DD464A2754E144006E1E6C /* UITraitCollection+Utils.swift */,
@@ -8261,6 +8265,7 @@
 				D031A15C219EFC99002C17D9 /* DDLoggerNames.m in Sources */,
 				D0B545912435D630002F0AEC /* PurchaseService.swift in Sources */,
 				D0B545FB2435D6CB002F0AEC /* URL+Utils.swift in Sources */,
+				2413B61A276C984000CAA585 /* UILabel+Utils.swift in Sources */,
 				D0D7E61D244456D2001801A5 /* ActivityViewController.swift in Sources */,
 				D09E2D31255D6AFF002D6BC0 /* SettingsParser.swift in Sources */,
 				D031A178219EFC99002C17D9 /* DDFileLogger.m in Sources */,
@@ -8986,6 +8991,7 @@
 				7E2BA2E426F9D3D600B44D4A /* UIViewController+Alert.swift in Sources */,
 				D0116CEE20627E58009598B1 /* ACNCidrRange.m in Sources */,
 				7EA40F8A2722C81A00FAEE0B /* ChineseUserExposer.swift in Sources */,
+				2413B619276C964200CAA585 /* UILabel+Utils.swift in Sources */,
 				24B3DAEF26F8B4D000A66C0F /* DnsProviderActionCell.swift in Sources */,
 				7E303C2126F6463400EBACD1 /* DnsFiltersModelsProvider.swift in Sources */,
 				240C3AE02746775800CD10B3 /* AdClientWrapper.swift in Sources */,

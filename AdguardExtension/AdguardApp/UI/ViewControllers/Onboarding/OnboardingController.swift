@@ -122,11 +122,9 @@ final class OnboardingController: UIViewController {
 
             let fontSize: CGFloat = self.isIpadTrait ? 24.0 : 16.0
 
-            self.settingsLabel.attributedText = NSMutableAttributedString.fromHtml(settingsLabelText, fontSize: fontSize, color: self.theme.grayTextColor)
-
-            self.safariLabel.attributedText = NSMutableAttributedString.fromHtml(safariLabelText, fontSize: fontSize, color: self.theme.grayTextColor)
-
-            self.switchLabel.attributedText = NSMutableAttributedString.fromHtml(switchLabelText, fontSize: fontSize, color: self.theme.grayTextColor)
+            self.settingsLabel.setAttributedTitle(settingsLabelText, fontSize: fontSize, color: self.theme.grayTextColor)
+            self.safariLabel.setAttributedTitle(safariLabelText, fontSize: fontSize, color: self.theme.grayTextColor)
+            self.switchLabel.setAttributedTitle(switchLabelText, fontSize: fontSize, color: self.theme.grayTextColor)
         }
     }
 
