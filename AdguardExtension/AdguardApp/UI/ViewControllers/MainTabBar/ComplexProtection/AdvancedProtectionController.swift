@@ -147,5 +147,6 @@ extension AdvancedProtectionController: ThemableProtocol {
         advancedProtectionView.updateTheme()
         themeService.setupLabels(themableLabels)
         themeService.setupSwitch(uiSwitch)
+        themeService.setupNavigationBar(navigationController?.navigationBar)
     }
 }

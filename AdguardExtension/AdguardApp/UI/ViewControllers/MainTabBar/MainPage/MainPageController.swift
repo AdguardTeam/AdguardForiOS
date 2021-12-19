@@ -926,12 +926,11 @@ extension MainPageController: ThemableProtocol {
 }
 
 extension MainPageController: WhatsNewBottomAlertControllerDelegate {
-    func enableButtonForNonProTapped() {
+    func continueButtonForNonProTapped() {
         if configuration.proStatus { return }
         resources.whatsNewScreenShown = true
-        self.dismiss(animated: true) { [weak self] in
-            guard let self = self else { return }
-            self.performSegue(withIdentifier: self.getProSegueId, sender: nil)
+        self.dismiss(animated: true) {
+            let _ = AppDelegate.shared.presentAdvancedProtectionController(enableAdvancedProtection: nil)
         }
     }
 }
