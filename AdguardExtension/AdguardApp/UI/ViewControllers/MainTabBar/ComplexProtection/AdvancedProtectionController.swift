@@ -86,6 +86,7 @@ final class AdvancedProtectionController: UIViewController {
         }
 
         enableAdvancedProtectionIfNeeded()
+        setupNavigationBarButtonItem()
     }
 
     // MARK: - Actions
@@ -137,6 +138,17 @@ final class AdvancedProtectionController: UIViewController {
             self.switchValueChanged(self.uiSwitch)
             self.enableAdvancedProtection = nil
         }
+    }
+
+    private func setupNavigationBarButtonItem() {
+        guard let faqImage = UIImage(named: "faq") else { return }
+        let barButton = UIBarButtonItem(image: faqImage, style: .done, target: self, action: #selector(onRightBarButtonItemTapped(_:)))
+        navigationItem.rightBarButtonItem = barButton
+    }
+
+    @objc final private func onRightBarButtonItemTapped(_ sender: UIBarButtonItem) {
+        let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
+        UIApplication.shared.openAdguardUrl(action: "web_extension_more", from: "advanced_protection_screen", buildVersion: productInfo.buildVersion())
     }
 }
 
