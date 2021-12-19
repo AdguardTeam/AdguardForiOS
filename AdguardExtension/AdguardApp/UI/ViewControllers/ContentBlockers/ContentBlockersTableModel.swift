@@ -84,7 +84,8 @@ final class ContentBlockersTableModel {
                 state = .updatingContentBlockers
             } else if cbStates[cbType] == true {
                 if overLimitCount > 0 {
-                    state = .overlimited(overlimitRulesCount: overLimitCount)
+                    let maxRulesLimit = UIDevice.current.iosVersion < 15 ? 50_000 : 150_000
+                    state = .overlimited(maxRulesLimit: maxRulesLimit, currentRulesCount: converterResult.totalConverted, totalRulesInCB: converterResult.totalRules, overlimitRulesCount: overLimitCount)
                 } else {
                     state = .enabled(
                         rulesCount: converterResult.totalConverted,

@@ -73,14 +73,7 @@ final class UserRulesRedirectController: BottomAlertController {
 
     private func setTexts() {
         titleLabel.text = model.title
-        descriptionLabel.attributedText = NSMutableAttributedString.fromHtml(
-            model.description,
-            fontSize: descriptionLabel.font.pointSize,
-            color: themeService.lightGrayTextColor,
-            attachmentSettings: nil,
-            textAlignment: .center,
-            lineBreakMode: .byWordWrapping
-        )
+        descriptionLabel.setAttributedTitle(model.description, fontSize: descriptionLabel.font.pointSize, color: themeService.lightGrayTextColor,textAlignment: .center, lineBreakMode: .byWordWrapping)
     }
 }
 

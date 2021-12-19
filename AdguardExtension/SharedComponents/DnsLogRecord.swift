@@ -43,13 +43,12 @@ final class DnsLogRecord {
         self.userFilterStatus = userFilterStatus
     }
 
-    // returns subtitle text for table view cell
-    func getDetailsString(_ fontSize: CGFloat, _ advancedMode: Bool) -> NSMutableAttributedString {
-
-        let recordType = event.type
+    // returns attributed string
+    func getAttributedText(_ fontSize: CGFloat, _ advancedMode: Bool) -> NSMutableAttributedString {
+            let recordType = self.event.type
 
         if advancedMode {
-            var newDomain = event.domain.hasSuffix(".") ? String(event.domain.dropLast()) : event.domain
+            var newDomain = self.event.domain.hasSuffix(".") ? String(self.event.domain.dropLast()) : self.event.domain
             newDomain = " " + newDomain
 
             let typeAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .semibold) ]
@@ -66,10 +65,10 @@ final class DnsLogRecord {
         } else {
             let typeAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .semibold) ]
             let statusAttr = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize, weight: .regular),
-                               NSAttributedString.Key.foregroundColor: event.processedStatus.textColor]
+                               NSAttributedString.Key.foregroundColor: self.event.processedStatus.textColor]
 
             let typeAttrString = NSAttributedString(string: " (" + recordType + ")", attributes: typeAttr)
-            let statusAttrString = NSAttributedString(string: event.processedStatus.title, attributes: statusAttr)
+            let statusAttrString = NSAttributedString(string: self.event.processedStatus.title, attributes: statusAttr)
 
             let combination = NSMutableAttributedString()
             combination.append(statusAttrString)

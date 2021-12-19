@@ -199,8 +199,10 @@ final class NewCustomFilterDetailsController: BottomAlertController {
 
         if let homepageUrl = model.meta.homePage, homepageUrl.count > 0 {
             homepageLink = homepageUrl
-            homepage.attributedText = makeAttributedLink(with: homepageUrl)
             homepageTopConstraint.constant = 52.0
+
+            let attributedText = makeAttributedLink(with: homepageUrl)
+            DispatchQueue.asyncSafeMain { self.homepage.attributedText = attributedText }
         }
         else {
             homepage.isHidden = true
@@ -217,8 +219,10 @@ final class NewCustomFilterDetailsController: BottomAlertController {
 
         if let homepageUrl = model.homePage, homepageUrl.count > 0 {
             homepageLink = homepageUrl
-            homepage.attributedText = makeAttributedLink(with: homepageUrl)
             homepageTopConstraint.constant = 52.0
+
+            let attributedText = makeAttributedLink(with: homepageUrl)
+            DispatchQueue.asyncSafeMain { self.homepage.attributedText = attributedText }
         }
         else {
             homepage.isHidden = true
@@ -228,25 +232,25 @@ final class NewCustomFilterDetailsController: BottomAlertController {
         addButton.setTitle(String.localizedString("common_save").capitalized, for: .normal)
     }
 
-    private func makeAttributedLink(with url: String) -> NSAttributedString {
-        let homepageString = String.localizedString("homepage_title")
+    private func makeAttributedLink(with url: String) -> NSMutableAttributedString {
+            let homepageString = String.localizedString("homepage_title")
 
-        let homepageAttributedString = NSAttributedString(string: homepageString)
-        let urlAttributedString = NSMutableAttributedString(string: url)
+            let homepageAttributedString = NSAttributedString(string: homepageString)
+            let urlAttributedString = NSMutableAttributedString(string: url)
 
-        let urlStringRange = NSRange(location: 0, length: url.count)
+            let urlStringRange = NSRange(location: 0, length: url.count)
 
-        let highlightColor = UIColor.AdGuardColor.lightGreen1
+            let highlightColor = UIColor.AdGuardColor.lightGreen1
 
-        urlAttributedString.addAttribute(.underlineStyle, value: 1, range: urlStringRange)
-        urlAttributedString.addAttribute(.underlineColor, value: highlightColor, range: urlStringRange)
-        urlAttributedString.addAttribute(.foregroundColor, value: highlightColor, range: urlStringRange)
+            urlAttributedString.addAttribute(.underlineStyle, value: 1, range: urlStringRange)
+            urlAttributedString.addAttribute(.underlineColor, value: highlightColor, range: urlStringRange)
+            urlAttributedString.addAttribute(.foregroundColor, value: highlightColor, range: urlStringRange)
 
-        let returnString = NSMutableAttributedString()
-        returnString.append(homepageAttributedString)
-        returnString.append(urlAttributedString)
+            let returnString = NSMutableAttributedString()
+            returnString.append(homepageAttributedString)
+            returnString.append(urlAttributedString)
 
-        return returnString
+            return returnString
     }
 
     @objc private final func textFieldEditingChanged(_ sender: UITextField) {

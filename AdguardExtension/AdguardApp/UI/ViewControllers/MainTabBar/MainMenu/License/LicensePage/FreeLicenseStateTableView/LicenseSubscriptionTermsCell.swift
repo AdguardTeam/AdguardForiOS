@@ -64,6 +64,7 @@ final class LicenseSubscriptionTermsCell: UITableViewCell, Reusable {
     }
 
     func setAttributedText(_ text: NSAttributedString) {
+
         let mutableAttrString = NSMutableAttributedString(attributedString: text)
 
         mutableAttrString.removeAttribute(NSAttributedString.Key.foregroundColor, range: NSRange(location: 0, length: mutableAttrString.length))
@@ -72,7 +73,7 @@ final class LicenseSubscriptionTermsCell: UITableViewCell, Reusable {
         mutableAttrString.removeAttribute(NSAttributedString.Key.font, range: NSRange(location: 0, length: mutableAttrString.length))
         mutableAttrString.addAttribute(NSAttributedString.Key.font, value: textView.font!, range: NSRange(location: 0, length: mutableAttrString.length))
 
-        textView.attributedText = mutableAttrString
+        DispatchQueue.asyncSafeMain { self.textView.attributedText = mutableAttrString }
     }
 
     func updateTheme(_ themeService: ThemeServiceProtocol) {
@@ -83,7 +84,8 @@ final class LicenseSubscriptionTermsCell: UITableViewCell, Reusable {
             let mutableAttrString = NSMutableAttributedString(attributedString: currentAttrString)
             mutableAttrString.removeAttribute(NSAttributedString.Key.foregroundColor, range: NSRange(location: 0, length: mutableAttrString.length))
             mutableAttrString.addAttribute(NSAttributedString.Key.foregroundColor, value: textView.textColor!, range: NSRange(location: 0, length: mutableAttrString.length))
-            textView.attributedText = mutableAttrString
+
+            DispatchQueue.asyncSafeMain { self.textView.attributedText = mutableAttrString }
         }
     }
 
