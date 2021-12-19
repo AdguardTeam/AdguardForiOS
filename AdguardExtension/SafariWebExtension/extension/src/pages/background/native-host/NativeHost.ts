@@ -18,6 +18,7 @@ export interface ActionLinks {
     upgradeAppLink: string,
     reportProblemLink: string,
     enableAdvancedBlockingLink: string,
+    enableSafariProtectionLink: string,
 }
 
 type AppearanceTheme = 'system' | 'dark' | 'light';
@@ -30,6 +31,7 @@ interface NativeHostInitData {
     protectionEnabled: boolean,
     advancedBlockingEnabled: boolean,
     allowlistInverted: boolean,
+    safariProtectionEnabled: boolean,
 }
 
 export interface NativeHostInterface {
@@ -274,6 +276,7 @@ export class NativeHost implements NativeHostInterface {
             content_blockers_enabled: contentBlockersEnabled,
             advanced_blocking_enabled: advancedBlockingEnabled,
             allowlist_inverted: allowlistInverted,
+            safari_protection_enabled: safariProtectionEnabled,
 
             // links
             // e.g. "adguard://safariWebExtension?action=removeFromAllowlist&domain="
@@ -290,6 +293,7 @@ export class NativeHost implements NativeHostInterface {
             report_problem_link: reportProblemLink,
             // e.g. "adguard://enableAdvancedBlocking"
             enable_advanced_blocking_link: enableAdvancedBlockingLink,
+            enable_safari_protection_link: enableSafariProtectionLink,
         } = result;
 
         await this.setLinks({
@@ -300,6 +304,7 @@ export class NativeHost implements NativeHostInterface {
             upgradeAppLink,
             reportProblemLink,
             enableAdvancedBlockingLink,
+            enableSafariProtectionLink,
         });
 
         return {
@@ -310,6 +315,7 @@ export class NativeHost implements NativeHostInterface {
             protectionEnabled,
             advancedBlockingEnabled,
             allowlistInverted,
+            safariProtectionEnabled,
         };
     }
 

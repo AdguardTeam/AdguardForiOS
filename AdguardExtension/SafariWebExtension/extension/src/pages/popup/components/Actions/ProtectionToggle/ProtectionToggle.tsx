@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 
@@ -39,12 +38,15 @@ export const ProtectionToggle = observer(() => {
     } else {
         iconEnabled = store.protectionEnabled;
 
-        button = <div className="actions__control">
-            <Switcher onChange={toggleProtection} enabled={store.protectionEnabled} />
-        </div>
+        button = (
+            <div className="actions__control">
+                <Switcher onChange={toggleProtection} enabled={store.protectionEnabled} />
+            </div>
+        );
     }
 
     return (
+        // eslint-disable-next-line jsx-a11y/label-has-associated-control
         <label className="action-label">
             <Action
                 iconId="compass"
