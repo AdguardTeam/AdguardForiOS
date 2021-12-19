@@ -1,7 +1,7 @@
 /* eslint-disable no-console,class-methods-use-this */
 import { storage } from '../storage';
 import { APPEARANCE_THEME_DEFAULT, AppearanceTheme } from '../../common/constants';
-import { ActionLinks, NativeHostInterface } from './NativeHost';
+import { ActionLinks, NativeHostInitData, NativeHostInterface } from './NativeHost';
 
 const sleep = (timeout: number) => {
     return new Promise((resolve) => {
@@ -159,7 +159,7 @@ testcases.adguard.com,surge.sh#?##case28 > :is(.case28, #main, footer, span):con
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    async getInitData(url: string) {
+    async getInitData(url: string): Promise<NativeHostInitData> {
         const state = await this.getState();
         return this.withSleep({
             appearanceTheme: state.appearanceTheme,

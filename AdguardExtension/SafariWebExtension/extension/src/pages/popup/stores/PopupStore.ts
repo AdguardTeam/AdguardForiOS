@@ -39,6 +39,8 @@ export class PopupStore {
 
     @observable protectionEnabled: boolean = false;
 
+    @observable safariProtectionEnabled: boolean = false;
+
     @observable hasUserRules: boolean = false;
 
     @observable upgradeModalVisible: boolean = false;
@@ -91,6 +93,7 @@ export class PopupStore {
             this.permissionsModalViewed = popupData.permissionsModalViewed;
             this.allSitesAllowed = popupData.allSitesAllowed;
             this.protectionEnabled = popupData.protectionEnabled;
+            this.protectionEnabled = popupData.safariProtectionEnabled;
             this.hasUserRules = popupData.hasUserRules;
             this.premiumApp = popupData.premiumApp;
             this.contentBlockersEnabled = popupData.contentBlockersEnabled;

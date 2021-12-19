@@ -35,6 +35,22 @@ export const ProtectionToggle = observer(() => {
                 <Icon color="yellow" iconId="info" />
             </Button>
         );
+    } else if (!store.safariProtectionEnabled) {
+        iconEnabled = store.protectionEnabled;
+
+        // FIXME handle safari protection enable
+        const handleEnableSafariProtection = () => {
+
+        };
+
+        button = (
+            <div className="actions__control">
+                <Switcher
+                    onChange={handleEnableSafariProtection}
+                    enabled={store.safariProtectionEnabled}
+                />
+            </div>
+        );
     } else {
         iconEnabled = store.protectionEnabled;
 

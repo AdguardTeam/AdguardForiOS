@@ -141,6 +141,7 @@ const handleMessages = () => {
                     appearanceTheme,
                     contentBlockersEnabled,
                     advancedBlockingEnabled,
+                    safariProtectionEnabled,
                     allowlistInverted,
                 } = await adguard.nativeHost.getInitData(url);
 
@@ -153,6 +154,7 @@ const handleMessages = () => {
                     appearanceTheme,
                     contentBlockersEnabled,
                     advancedBlockingEnabled,
+                    safariProtectionEnabled,
                     allowlistInverted,
                 };
             }

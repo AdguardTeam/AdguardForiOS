@@ -23,7 +23,7 @@ export interface ActionLinks {
 
 type AppearanceTheme = 'system' | 'dark' | 'light';
 
-interface NativeHostInitData {
+export interface NativeHostInitData {
     appearanceTheme: AppearanceTheme,
     contentBlockersEnabled: boolean,
     hasUserRules: boolean,
