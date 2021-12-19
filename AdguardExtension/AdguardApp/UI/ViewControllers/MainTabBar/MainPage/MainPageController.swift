@@ -423,6 +423,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
     func onboardingDidFinish() {
         resources.sharedDefaults().set(true, forKey: OnboardingWasShown)
+        configuration.showStatusBar = true
         onBoardingIsInProcess = false
         ready = true
         callOnready()
@@ -706,6 +707,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         DDLogInfo("Content blockers states changed; onboardingShown = \(onboardingShown); onBoardingIsInProcess = \(onBoardingIsInProcess)")
         if !onBoardingIsInProcess {
             if !onboardingShown {
+                configuration.showStatusBar = false
                 showOnboarding()
             } else {
                 processContentBlockersHelper()

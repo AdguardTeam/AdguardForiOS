@@ -141,6 +141,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         defaultDnsFilterInstaller.installDefaultDnsFilterIfNeeded()
 
         if firstRun {
+            configuration.showStatusBar = false
             setupOnFirstAppRun()
             // After first app run we don't need to call finishBackgroundUpdate
             return true
