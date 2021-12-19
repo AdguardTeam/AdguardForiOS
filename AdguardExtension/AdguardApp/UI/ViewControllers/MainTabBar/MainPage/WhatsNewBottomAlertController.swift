@@ -21,7 +21,7 @@ import SafariAdGuardSDK
 
 /// WhatsNewBottomAlertControllerDelegate - Delegate protocol
 protocol WhatsNewBottomAlertControllerDelegate: AnyObject {
-    func enableButtonForNonProTapped()
+    func continueButtonForNonProTapped()
 }
 
 /// WhatsNewBottomAlertController - Responsible for representation new features available in new version of app
@@ -29,7 +29,7 @@ final class WhatsNewBottomAlertController: BottomAlertController {
 
     // MARK: - Outlets
 
-    @IBOutlet weak var enableButton: UIButton!
+    @IBOutlet weak var continueButton: UIButton!
     @IBOutlet var themableLabels: [ThemableLabel]!
 
     // MARK: - Properties
@@ -46,21 +46,21 @@ final class WhatsNewBottomAlertController: BottomAlertController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        enableButton.applyStandardGreenStyle()
+        continueButton.applyStandardGreenStyle()
         updateTheme()
     }
 
     // MARK: - Actions
 
-    @IBAction func enableButtonTapped(_ sender: UIButton) {
+    @IBAction func continueButtonTapped(_ sender: UIButton) {
         if !configuration.proStatus {
-            delegate?.enableButtonForNonProTapped()
+            delegate?.continueButtonForNonProTapped()
             return
         }
 
-        configuration.isAdvancedProtectionEnabled = true
-        safariProtection.update(advancedProtectionEnabled: true, onCbReloaded: nil)
-        dismiss(animated: true, completion: onDismissCompletion)
+        dismiss(animated: true) {
+            let _ = AppDelegate.shared.presentAdvancedProtectionController(enableAdvancedProtection: nil)
+        }
     }
 }
 

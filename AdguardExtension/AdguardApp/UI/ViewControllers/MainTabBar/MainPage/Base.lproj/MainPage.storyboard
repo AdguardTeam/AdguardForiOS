@@ -1058,7 +1058,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         </variation>
                                         <connections>
-                                            <action selector="enableButtonTapped:" destination="pxv-Jf-U7n" eventType="touchUpInside" id="hLL-EX-aUn"/>
+                                            <action selector="continueButtonTapped:" destination="pxv-Jf-U7n" eventType="touchUpInside" id="tk9-SA-cf8"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1108,7 +1108,7 @@
                     </view>
                     <connections>
                         <outlet property="contentView" destination="fqS-eX-cxs" id="8yh-ui-SQf"/>
-                        <outlet property="enableButton" destination="7SB-2j-FAc" id="wwm-xj-RCC"/>
+                        <outlet property="continueButton" destination="7SB-2j-FAc" id="tWP-re-GHC"/>
                         <outlet property="keyboardHeightLayoutConstraint" destination="Ct8-0t-hcZ" id="PBp-hu-Xwd"/>
                         <outletCollection property="themableLabels" destination="gDV-cq-ZDm" collectionClass="NSMutableArray" id="UQa-PM-5OE"/>
                         <outletCollection property="themableLabels" destination="0IU-PO-Xeh" collectionClass="NSMutableArray" id="bKH-KI-cAy"/>

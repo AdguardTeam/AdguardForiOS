@@ -86,6 +86,7 @@ final class AdvancedProtectionController: UIViewController {
         }
 
         enableAdvancedProtectionIfNeeded()
+        setupNavigationBarButtonItem()
     }
 
     // MARK: - Actions
@@ -138,6 +139,17 @@ final class AdvancedProtectionController: UIViewController {
             self.enableAdvancedProtection = nil
         }
     }
+
+    private func setupNavigationBarButtonItem() {
+        guard let faqImage = UIImage(named: "faq") else { return }
+        let barButton = UIBarButtonItem(image: faqImage, style: .done, target: self, action: #selector(onRightBarButtonItemTapped(_:)))
+        navigationItem.rightBarButtonItem = barButton
+    }
+
+    @objc final private func onRightBarButtonItemTapped(_ sender: UIBarButtonItem) {
+        let productInfo: ADProductInfoProtocol = ServiceLocator.shared.getService()!
+        UIApplication.shared.openAdguardUrl(action: "web_extension_more", from: "advanced_protection_screen", buildVersion: productInfo.buildVersion())
+    }
 }
 
 extension AdvancedProtectionController: ThemableProtocol {
@@ -147,5 +159,6 @@ extension AdvancedProtectionController: ThemableProtocol {
         advancedProtectionView.updateTheme()
         themeService.setupLabels(themableLabels)
         themeService.setupSwitch(uiSwitch)
+        themeService.setupNavigationBar(navigationController?.navigationBar)
     }
 }

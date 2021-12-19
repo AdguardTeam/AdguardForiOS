@@ -65,16 +65,12 @@ final class AdvancedYouTubeBlockingController: UIViewController {
                                                      leftEdge: 5,
                                                      size: .customSize(width: image.size.width, height: image.size.height))
 
-        let isIpad = traitCollection.horizontalSizeClass == .regular && traitCollection.verticalSizeClass == .regular
-        let attributedText = NSMutableAttributedString.fromHtml(formattedText, fontSize: isIpad ? 24.0 : 16.0, color: themeService.grayTextColor, attachmentSettings: attachmentSetttings, textAlignment: .left)
-        mainTextView.attributedText = attributedText
+        mainTextView.setAttributedTitle(formattedText, fontSize: isIpadTrait ? 24.0 : 16.0, color: themeService.grayTextColor, attachmentSettings: attachmentSetttings, textAlignment: .left)
     }
 
     private func setupDoneTextView() {
         let text = String.localizedString(UIApplication.youtubeAppInstalled() ? "block_youtube_ads_instructions_done_text_safari" : "block_youtube_ads_instructions_done_text")
-        let isIpad = traitCollection.horizontalSizeClass == .regular && traitCollection.verticalSizeClass == .regular
-        let attributedText = NSMutableAttributedString.fromHtml(text, fontSize: isIpad ? 24.0 : 16.0, color: themeService.grayTextColor)
-        doneTextView.attributedText = attributedText
+        doneTextView.setAttributedTitle(text, fontSize: isIpadTrait ? 24.0 : 16.0, color: themeService.grayTextColor)
     }
 }
 
