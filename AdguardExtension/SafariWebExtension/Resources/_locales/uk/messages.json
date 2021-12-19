@@ -11,13 +11,88 @@
     "popup_action_safari_protection_description": {
         "message": "для цього сайту"
     },
+    "popup_action_safari_protection_description_disabled": {
+        "message": "захист вимкнено"
+    },
+    "popup_action_current_site_status_desc_enabled": {
+        "message": "захист увімкнено"
+    },
+    "popup_action_current_site_status_desc_disabled": {
+        "message": "захист вимкнено"
+    },
+    "popup_action_block_element": {
+        "message": "Блокувати елемент на цій сторінці"
+    },
+    "popup_action_delete_user_rules": {
+        "message": "Видалити всі правила користувача для цього сайту"
+    },
+    "popup_action_current_site_desc_starting": {
+        "message": "захист запускається..."
+    },
+    "popup_action_current_site_desc_allowlisted": {
+        "message": "дозволений сайт"
+    },
     "popup_action_current_site_desc_basic_only": {
         "message": "лише базовий захист"
+    },
+    "popup_modal_all_sites_allowed_title": {
+        "message": "Максимальний захист"
+    },
+    "popup_modal_all_sites_allowed_desc": {
+        "message": "Чудово! Тепер AdGuard буде блокувати ще більше реклами, справляючись з більш складними задачами."
+    },
+    "popup_modal_all_sites_allowed_button": {
+        "message": "Продовжити"
+    },
+    "popup_modal_not_all_sites_allowed_title": {
+        "message": "Вибірковий захист"
+    },
+    "popup_modal_not_all_sites_allowed_desc": {
+        "message": "Ви дозволити AdGuard працювати лише на цьому сайті. Тому на інших сайтах реклама блокуватись не буде, поки не надасте дозвіл працювати AdGuard усюди."
+    },
+    "popup_modal_not_all_sites_allowed_button": {
+        "message": "Продовжити"
+    },
+    "popup_modal_advanced_blocking_disabled_title": {
+        "message": "Розширений захист вимкнено"
+    },
+    "popup_modal_advanced_blocking_disabled_description": {
+        "message": "Розширення та блокування реклами на YouTube не активовано."
+    },
+    "popup_modal_advanced_blocking_disabled_button": {
+        "message": "Увімкнути"
+    },
+    "popup_modal_title_free": {
+        "message": "Блокуйте повною мірою"
+    },
+    "popup_modal_desc_free": {
+        "message": "Зверніть увагу, що в безкоштовній версії недоступний розширений захист. Він здатний блокувати більше реклами, зокрема рекламу на YouTube в Safari. Згодні покращити захист?"
     },
     "popup_modal_btn_free": {
         "message": "Покращити"
     },
+    "popup_fullscreen_support_title": {
+        "message": "Вам допомогти?"
+    },
+    "popup_fullscreen_support_desc": {
+        "message": "Щось не так? Ми це виправимо."
+    },
+    "popup_protection_disabled_support_desc": {
+        "message": "Схоже, ви вимкнули захист для цього сайту. Щось не так? Ми можемо це виправити."
+    },
+    "popup_support_button_text": {
+        "message": "Повідомити про проблему"
+    },
+    "modal_protection_off_title": {
+        "message": "Увімкнути AdGuard"
+    },
     "modal_protection_off_settings": {
         "message": "Відкрийте <b>Параметри<\/b>"
+    },
+    "modal_protection_off_extensions": {
+        "message": "Торкніться <b>Safari<\/b> та оберіть <b>«Розширення»<\/b>"
+    },
+    "modal_protection_off_switch": {
+        "message": "<b>Увімкніть<\/b> усі розширення AdGuard"
     }
 }

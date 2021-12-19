@@ -94,6 +94,7 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
             Message.protectionEnabled: isSafariProtectionEnabled(for: domain, resources: resources),
             Message.advancedBlockingEnabled: resources.advancedProtection,
             Message.allowlistIsInverted: resources.invertedWhitelist,
+            Message.platform: UIDevice.current.platformString,
 
             Message.enableSiteProtectionLink: UserRulesRedirectAction.enableSiteProtection(domain: "", absoluteDomainString: "").scheme,
             Message.disableSiteProtectionLink: UserRulesRedirectAction.disableSiteProtection(domain: "", absoluteDomainString: "").scheme,
@@ -155,5 +156,15 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
         ]
         let paramsString = params.constructLink(url: url)
         return paramsString ?? ""
+    }
+}
+
+fileprivate extension UIDevice {
+    var platformString: String {
+        switch userInterfaceIdiom {
+        case .pad: return "ipad"
+        case .phone: return "iphone"
+        default: return "unsupported"
+        }
     }
 }
