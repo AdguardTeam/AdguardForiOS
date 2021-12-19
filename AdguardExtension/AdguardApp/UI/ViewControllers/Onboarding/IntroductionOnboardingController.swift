@@ -75,9 +75,7 @@ final class IntroductionOnboardingController: UIViewController {
         let htmlString = String(format: format, privacy, eula)
 
         let font = licenseTextView.font ?? UIFont.systemFont(ofSize: 16.0)
-        let attributeString = NSMutableAttributedString.fromHtml(htmlString, fontSize: font.pointSize, color: theme.blackTextColor, textAlignment: .left)
-
-        licenseTextView.attributedText = attributeString
+        licenseTextView.setAttributedTitle(htmlString, fontSize: font.pointSize, color: theme.blackTextColor)
     }
 }
 

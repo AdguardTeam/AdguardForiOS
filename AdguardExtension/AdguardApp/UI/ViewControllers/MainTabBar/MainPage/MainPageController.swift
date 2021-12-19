@@ -423,6 +423,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
     func onboardingDidFinish() {
         resources.sharedDefaults().set(true, forKey: OnboardingWasShown)
+        configuration.showStatusBar = true
         onBoardingIsInProcess = false
         ready = true
         callOnready()
@@ -706,6 +707,7 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         DDLogInfo("Content blockers states changed; onboardingShown = \(onboardingShown); onBoardingIsInProcess = \(onBoardingIsInProcess)")
         if !onBoardingIsInProcess {
             if !onboardingShown {
+                configuration.showStatusBar = false
                 showOnboarding()
             } else {
                 processContentBlockersHelper()
@@ -926,12 +928,11 @@ extension MainPageController: ThemableProtocol {
 }
 
 extension MainPageController: WhatsNewBottomAlertControllerDelegate {
-    func enableButtonForNonProTapped() {
+    func continueButtonForNonProTapped() {
         if configuration.proStatus { return }
         resources.whatsNewScreenShown = true
-        self.dismiss(animated: true) { [weak self] in
-            guard let self = self else { return }
-            self.performSegue(withIdentifier: self.getProSegueId, sender: nil)
+        self.dismiss(animated: true) {
+            let _ = AppDelegate.shared.presentAdvancedProtectionController(enableAdvancedProtection: nil)
         }
     }
 }
