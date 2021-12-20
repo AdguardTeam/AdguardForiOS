@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import browser from 'webextension-polyfill';
 
-import { MessagesToNativeApp } from '../../common/constants';
+import { MessagesToNativeApp, Platforms } from '../../common/constants';
 import { getDomain } from '../../common/utils/url';
 import { storage } from '../storage';
 
@@ -31,6 +31,7 @@ export interface NativeHostInitData {
     protectionEnabled: boolean,
     advancedBlockingEnabled: boolean,
     allowlistInverted: boolean,
+    platform: Platforms,
     safariProtectionEnabled: boolean,
 }
 
@@ -276,6 +277,7 @@ export class NativeHost implements NativeHostInterface {
             content_blockers_enabled: contentBlockersEnabled,
             advanced_blocking_enabled: advancedBlockingEnabled,
             allowlist_inverted: allowlistInverted,
+            platform,
             safari_protection_enabled: safariProtectionEnabled,
 
             // links
@@ -315,6 +317,7 @@ export class NativeHost implements NativeHostInterface {
             protectionEnabled,
             advancedBlockingEnabled,
             allowlistInverted,
+            platform,
             safariProtectionEnabled,
         };
     }

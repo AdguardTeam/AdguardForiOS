@@ -143,6 +143,7 @@ const handleMessages = () => {
                     advancedBlockingEnabled,
                     safariProtectionEnabled,
                     allowlistInverted,
+                    platform,
                 } = await adguard.nativeHost.getInitData(url);
 
                 return {
@@ -156,6 +157,7 @@ const handleMessages = () => {
                     advancedBlockingEnabled,
                     safariProtectionEnabled,
                     allowlistInverted,
+                    platform,
                 };
             }
             case MessagesToBackgroundPage.SetProtectionStatus: {

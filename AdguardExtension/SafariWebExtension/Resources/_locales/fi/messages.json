@@ -12,7 +12,7 @@
         "message": "tälle sivustolle"
     },
     "popup_action_safari_protection_description_disabled": {
-        "message": "ei käytössä"
+        "message": "suojaus ei ole käytössä"
     },
     "popup_action_current_site_status_desc_enabled": {
         "message": "suojaus on käytössä"
@@ -27,7 +27,7 @@
         "message": "Poista sivustolle luodut käyttäjän säännöt"
     },
     "popup_action_current_site_desc_starting": {
-        "message": "suojaus aloitetaan"
+        "message": "käynnistetään suojaus..."
     },
     "popup_action_current_site_desc_allowlisted": {
         "message": "lisätty sallittujen listalle"
@@ -42,16 +42,28 @@
         "message": "Hienoa! Nyt AdGuard estää entistäkin enemmän mainoksia, kohdaten vaikeimmatkin haasteet."
     },
     "popup_modal_all_sites_allowed_button": {
-        "message": "Anna taikuuden alkaa"
+        "message": "Jatka"
     },
     "popup_modal_not_all_sites_allowed_title": {
         "message": "Valikoiva suojaus"
     },
     "popup_modal_not_all_sites_allowed_desc": {
-        "message": "Olet sallinut AdGuardin toiminnan vain tällä sivustolla. Näet mainoksia edelleen muilla sivustoilla ellet laajenna AdGuardin oikeuksia."
+        "message": "Olet sallinut AdGuardin vain tälle sivustolle. Näet edelleen mainoksia muilla sivustoilla ellet laajenna AdGuardin oikeuksia."
     },
     "popup_modal_not_all_sites_allowed_button": {
         "message": "Jatka"
+    },
+    "popup_modal_advanced_blocking_disabled_title": {
+        "message": "Edistynyt suojaus ei ole käytössä"
+    },
+    "popup_modal_advanced_blocking_disabled_description": {
+        "message": "Käyttäjäskriptit ja YouTube-mainosesto eivät ole käytössä."
+    },
+    "popup_modal_advanced_blocking_disabled_button": {
+        "message": "Ota käyttöön"
+    },
+    "popup_modal_title_free": {
+        "message": "Hyödynnä täysi potentiaalisi"
     },
     "popup_modal_desc_free": {
         "message": "Jäät edelleen paitsi AdGuard Premiumin edistyneistä suojausominaisuuksista. Eikö estetä vielä enemmän mainoksia, kuten YouTuben mainokset Safarissa?"
@@ -60,27 +72,27 @@
         "message": "Päivitä"
     },
     "popup_fullscreen_support_title": {
-        "message": "Hups, haluatko aloittaa alusta?"
+        "message": "Tarvitsetko apua?"
     },
     "popup_fullscreen_support_desc": {
         "message": "Onko jokin on pielessä? Meiltä saattaa löytyä korjaus."
     },
     "popup_protection_disabled_support_desc": {
-        "message": "Hups! Suojaus on poistettu käytöstä tällä sivustolla. Onko jokin on pielessä? Meiltä saattaa löytyä korjaus."
+        "message": "Suojaus ei ole käytössä tällä sivustolla. Onko jokin on pielessä? Meiltä saattaa löytyä korjaus."
     },
     "popup_support_button_text": {
         "message": "Ilmoita ongelmasta"
     },
     "modal_protection_off_title": {
-        "message": "Ota suojaus käyttöön"
+        "message": "Ota AdGuard käyttöön"
     },
     "modal_protection_off_settings": {
         "message": "Avaa <b>Asetukset<\/b>"
     },
     "modal_protection_off_extensions": {
-        "message": "Napauta <b>Safari<\/b>, pyyhkäise alas ja napauta <b>Sisällön estäjät<\/b>"
+        "message": "Napauta <b>Safari<\/b>, pyyhkäise alas ja napauta <b>\"Sisällönestot\"<\/b>"
     },
     "modal_protection_off_switch": {
-        "message": "<b>Käytä<\/b> kaikkia AdGuardin laajennuksia."
+        "message": "<b>Käytä<\/b> kaikkia AdGuardin laajennuksia"
     }
 }

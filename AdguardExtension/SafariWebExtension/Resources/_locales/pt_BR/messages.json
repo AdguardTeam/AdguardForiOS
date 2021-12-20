@@ -12,7 +12,7 @@
         "message": "para este site"
     },
     "popup_action_safari_protection_description_disabled": {
-        "message": "desativada"
+        "message": "proteção está desligada"
     },
     "popup_action_current_site_status_desc_enabled": {
         "message": "proteção está ligada"
@@ -27,7 +27,7 @@
         "message": "Apagar todas as regras do usuário para este site"
     },
     "popup_action_current_site_desc_starting": {
-        "message": "ativando a proteção"
+        "message": "ativando a proteção..."
     },
     "popup_action_current_site_desc_allowlisted": {
         "message": "adicionado na lista de permissões"
@@ -42,19 +42,28 @@
         "message": "Bom trabalho! O AdGuard bloqueará quase qualquer anúncio e enfrentará os desafios mais difíceis."
     },
     "popup_modal_all_sites_allowed_button": {
-        "message": "Deixe a magia começar"
+        "message": "Continuar"
     },
     "popup_modal_not_all_sites_allowed_title": {
         "message": "Proteção seletiva"
     },
     "popup_modal_not_all_sites_allowed_desc": {
-        "message": "Você ativou o AdGuard apenas para este site. Você continuará vendo anúncios em outros sites, a menos que conceda mais permissões ao AdGuard."
+        "message": "Você ativou o AdGuard apenas para este site. Os anúncios podem aparecer em outros sites, a menos que você conceda mais permissões ao AdGuard."
     },
     "popup_modal_not_all_sites_allowed_button": {
         "message": "Continuar"
     },
+    "popup_modal_advanced_blocking_disabled_title": {
+        "message": "A proteção avançada está desativada"
+    },
+    "popup_modal_advanced_blocking_disabled_description": {
+        "message": "Os scripts do usuário e o bloqueio de anúncios do YouTube não estão ativados."
+    },
+    "popup_modal_advanced_blocking_disabled_button": {
+        "message": "Ligar"
+    },
     "popup_modal_title_free": {
-        "message": "Seja tudo o que você pode ser"
+        "message": "Alcance todo o seu potencial"
     },
     "popup_modal_desc_free": {
         "message": "Você ainda não possui a proteção avançada disponível no AdGuard Premium. Vamos bloquear ainda mais anúncios, como anúncios do YouTube no Safari?"
@@ -63,19 +72,19 @@
         "message": "Atualizar"
     },
     "popup_fullscreen_support_title": {
-        "message": "Opa, deseja recomeçar?"
+        "message": "Opa, você precisa de ajuda?"
     },
     "popup_fullscreen_support_desc": {
         "message": "Algo está errado? Podemos ter uma solução."
     },
     "popup_protection_disabled_support_desc": {
-        "message": "Ops, a proteção para este site está DESLIGADA. Algo está errado? Podemos ter uma solução."
+        "message": "Ops, a proteção para este site está desligada. Algo está errado? Podemos ter uma solução."
     },
     "popup_support_button_text": {
         "message": "Reportar um problema"
     },
     "modal_protection_off_title": {
-        "message": "Ativar proteção"
+        "message": "Ativar o AdGuard"
     },
     "modal_protection_off_settings": {
         "message": "Abrir <b>Configurações<\/b>"
@@ -84,6 +93,6 @@
         "message": "Toque em <b>Safari<\/b> e escolha o item de menu <b>Bloqueadores de conteúdo<\/b>"
     },
     "modal_protection_off_switch": {
-        "message": "<b>Ativar<\/b> todas as extensões do AdGuard."
+        "message": "<b>Ativar<\/b> todas as extensões do AdGuard"
     }
 }
