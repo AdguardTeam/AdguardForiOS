@@ -9,7 +9,9 @@ import { Button } from '../Button';
 export const ExpandButton = observer(() => {
     const store = useContext(popupStore);
 
-    const siteAllowlisted = !store.protectionEnabled && store.contentBlockersEnabled;
+    const siteAllowlisted = store.allowlistInverted
+        ? store.protectionEnabled
+        : !store.protectionEnabled;
 
     if (store.platform !== Platforms.IPad
         // hide button after popup is expanded because safari doesn't allow to shrink it back
