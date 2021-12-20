@@ -18,11 +18,12 @@ export interface ActionLinks {
     upgradeAppLink: string,
     reportProblemLink: string,
     enableAdvancedBlockingLink: string,
+    enableSafariProtectionLink: string,
 }
 
 type AppearanceTheme = 'system' | 'dark' | 'light';
 
-interface NativeHostInitData {
+export interface NativeHostInitData {
     appearanceTheme: AppearanceTheme,
     contentBlockersEnabled: boolean,
     hasUserRules: boolean,
@@ -31,6 +32,7 @@ interface NativeHostInitData {
     advancedBlockingEnabled: boolean,
     allowlistInverted: boolean,
     platform: Platforms,
+    safariProtectionEnabled: boolean,
 }
 
 export interface NativeHostInterface {
@@ -45,6 +47,7 @@ export interface NativeHostInterface {
     getAdvancedRulesText(): Promise<string | void>
     enableAdvancedBlocking(): Promise<void>
     shouldUpdateAdvancedRules(): Promise<boolean>
+    enableSafariProtection(url: string): Promise<void>
 }
 
 export class NativeHost implements NativeHostInterface {
@@ -184,6 +187,19 @@ export class NativeHost implements NativeHostInterface {
         await this.openNativeLink(linkWithDomain);
     }
 
+    async enableSafariProtection(url: string): Promise<void> {
+        const links = await this.getLinks();
+
+        if (!links?.enableSafariProtectionLink) {
+            return;
+        }
+
+        const domain = getDomain(url);
+        const linkWithDomain = links.enableSafariProtectionLink + encodeURIComponent(domain);
+
+        await this.openNativeLink(linkWithDomain);
+    }
+
     async removeUserRulesBySite(url: string) {
         const links = await this.getLinks();
 
@@ -276,6 +292,7 @@ export class NativeHost implements NativeHostInterface {
             advanced_blocking_enabled: advancedBlockingEnabled,
             allowlist_inverted: allowlistInverted,
             platform,
+            safari_protection_enabled: safariProtectionEnabled,
 
             // links
             // e.g. "adguard://safariWebExtension?action=removeFromAllowlist&domain="
@@ -292,6 +309,7 @@ export class NativeHost implements NativeHostInterface {
             report_problem_link: reportProblemLink,
             // e.g. "adguard://enableAdvancedBlocking"
             enable_advanced_blocking_link: enableAdvancedBlockingLink,
+            enable_safari_protection_link: enableSafariProtectionLink,
         } = result;
 
         await this.setLinks({
@@ -302,6 +320,7 @@ export class NativeHost implements NativeHostInterface {
             upgradeAppLink,
             reportProblemLink,
             enableAdvancedBlockingLink,
+            enableSafariProtectionLink,
         });
 
         return {
@@ -313,6 +332,7 @@ export class NativeHost implements NativeHostInterface {
             advancedBlockingEnabled,
             allowlistInverted,
             platform,
+            safariProtectionEnabled,
         };
     }
 

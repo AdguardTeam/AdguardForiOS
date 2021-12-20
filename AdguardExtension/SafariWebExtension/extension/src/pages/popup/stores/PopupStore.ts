@@ -39,6 +39,8 @@ export class PopupStore {
 
     @observable protectionEnabled: boolean = false;
 
+    @observable safariProtectionEnabled: boolean = false;
+
     @observable hasUserRules: boolean = false;
 
     @observable upgradeModalVisible: boolean = false;
@@ -95,6 +97,7 @@ export class PopupStore {
             this.permissionsModalViewed = popupData.permissionsModalViewed;
             this.allSitesAllowed = popupData.allSitesAllowed;
             this.protectionEnabled = popupData.protectionEnabled;
+            this.safariProtectionEnabled = popupData.safariProtectionEnabled;
             this.hasUserRules = popupData.hasUserRules;
             this.premiumApp = popupData.premiumApp;
             this.contentBlockersEnabled = popupData.contentBlockersEnabled;
@@ -175,6 +178,15 @@ export class PopupStore {
     @action
     setProtectionModalVisibleState(state: boolean) {
         this.protectionModalVisible = state;
+    }
+
+    @action
+    async enableSafariProtection() {
+        if (!this.currentSiteUrl) {
+            return;
+        }
+
+        await messenger.enableSafariProtection(this.currentSiteUrl);
     }
 
     @action

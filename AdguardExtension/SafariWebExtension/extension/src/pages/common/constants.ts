@@ -16,6 +16,7 @@ export enum MessagesToBackgroundPage {
     ReportProblem = 'report_problem',
     UpgradeClicked = 'upgrade_clicked',
     EnableAdvancedBlocking = 'enable_advanced_blocking',
+    EnableSafariProtection = 'enable_safari_protection',
 }
 
 export enum MessagesToContentScript {

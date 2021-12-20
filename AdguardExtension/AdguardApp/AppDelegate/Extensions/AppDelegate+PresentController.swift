@@ -552,6 +552,33 @@ extension AppDelegate {
         return false
     }
 
+    func presentMainPageControllerAndTurnOnProtection(for domain: String) -> Bool {
+        guard let tabBar = getMainTabController() else {
+            DDLogError("Tab bar is nil")
+            return false
+        }
+
+        guard let navController = getNavigationController(for: .mainTab) else {
+            DDLogError("Navigation controller is nil")
+            return false
+        }
+
+        let mainPageStoryboard = UIStoryboard(name: "MainPage", bundle: Bundle.main)
+        guard let mainPageController = mainPageStoryboard.instantiateViewController(withIdentifier: "MainPageController") as? MainPageController else {
+            DDLogError("MainPage.storyboard doesn't have MainPageController")
+            return false
+        }
+
+        mainPageController.domainToEnableProtectionFor = domain
+        mainPageController.loadViewIfNeeded()
+
+        navController.viewControllers = [mainPageController]
+        tabBar.selectedViewController = navController
+        window?.rootViewController = tabBar
+
+        return true
+    }
+
     func presentPurchaseLicenseController() -> Bool {
         if proStatus { return false }
 
