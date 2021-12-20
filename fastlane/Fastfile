@@ -114,8 +114,9 @@ platform :ios do
     clean()
     prepare_key()
 
+    app_identifiers_to_match = ENV['APP_IDENTIFIERS_TO_MATCH'].gsub("\n", "").gsub(" ", "")
     if !options[:ignore_match]
-      match(type: "adhoc", force_for_new_devices: true)
+      match(app_identifier: app_identifiers_to_match, type: "adhoc", force_for_new_devices: true)
     end
     build_app(
       scheme: ENV['BUILD_SCHEME'],
