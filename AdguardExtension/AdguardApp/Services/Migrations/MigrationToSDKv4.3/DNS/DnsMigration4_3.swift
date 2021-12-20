@@ -92,6 +92,7 @@ class DnsMigration4_3: DnsMigration4_3Protocol {
             let group = DispatchGroup()
             group.enter()
             stateManager.onMigrationFinished {
+                Logger.logInfo("(DnsMigration4_3) migration finished")
                 group.leave()
             }
             group.wait()
