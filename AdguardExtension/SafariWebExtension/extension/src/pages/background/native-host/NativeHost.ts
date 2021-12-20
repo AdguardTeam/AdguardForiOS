@@ -47,6 +47,7 @@ export interface NativeHostInterface {
     getAdvancedRulesText(): Promise<string | void>
     enableAdvancedBlocking(): Promise<void>
     shouldUpdateAdvancedRules(): Promise<boolean>
+    enableSafariProtection(url: string): Promise<void>
 }
 
 export class NativeHost implements NativeHostInterface {
@@ -183,6 +184,19 @@ export class NativeHost implements NativeHostInterface {
 
         const domain = getDomain(url);
         const linkWithDomain = links.disableSiteProtectionLink + encodeURIComponent(domain);
+        await this.openNativeLink(linkWithDomain);
+    }
+
+    async enableSafariProtection(url: string): Promise<void> {
+        const links = await this.getLinks();
+
+        if (!links?.enableSafariProtectionLink) {
+            return;
+        }
+
+        const domain = getDomain(url);
+        const linkWithDomain = links.enableSafariProtectionLink + encodeURIComponent(domain);
+
         await this.openNativeLink(linkWithDomain);
     }
 

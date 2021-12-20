@@ -39,11 +39,12 @@ export const ProtectionToggle = observer(() => {
             </Button>
         );
     } else if (!store.safariProtectionEnabled) {
-        iconEnabled = store.protectionEnabled;
+        description = translator.getMessage('popup_action_safari_protection_description_disabled');
+        descriptionColor = 'yellow';
+        iconEnabled = false;
 
-        // FIXME handle safari protection enable
-        const handleEnableSafariProtection = () => {
-
+        const handleEnableSafariProtection = async () => {
+            await store.enableSafariProtection();
         };
 
         button = (

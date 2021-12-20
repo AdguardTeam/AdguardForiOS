@@ -47,14 +47,15 @@ export const CurrentSite = observer(() => {
         }
     }
 
-    if (!store.contentBlockersEnabled) {
+    if (!store.contentBlockersEnabled || !store.safariProtectionEnabled) {
         description = SiteStatusesMessages[SiteStatus.ProtectionDisabled];
         descriptionColor = 'yellow';
         iconEnabled = false;
     }
 
     const determineHandlerAndIcon = () => {
-        const showAttentionButton = !store.premiumApp || !store.advancedBlockingEnabled;
+        const showAttentionButton = !store.premiumApp
+            || (!store.advancedBlockingEnabled && store.safariProtectionEnabled);
 
         const noopHandler = () => {};
         let button;

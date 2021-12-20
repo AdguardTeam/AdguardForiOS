@@ -196,6 +196,11 @@ testcases.adguard.com,surge.sh#?##case28 > :is(.case28, #main, footer, span):con
     shouldUpdateAdvancedRules(): Promise<boolean> {
         throw new Error('Method not implemented.');
     }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    enableSafariProtection(url: string): Promise<void> {
+        throw new Error('Method not implemented');
+    }
 }
 
 export const nativeHostMock = new NativeHostMock();

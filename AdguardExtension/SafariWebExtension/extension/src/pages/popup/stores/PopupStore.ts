@@ -181,6 +181,15 @@ export class PopupStore {
     }
 
     @action
+    async enableSafariProtection() {
+        if (!this.currentSiteUrl) {
+            return;
+        }
+
+        await messenger.enableSafariProtection(this.currentSiteUrl);
+    }
+
+    @action
     togglePopupExpanded() {
         this.popupExpanded = !this.popupExpanded;
     }

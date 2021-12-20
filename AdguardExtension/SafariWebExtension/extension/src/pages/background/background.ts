@@ -167,6 +167,10 @@ const handleMessages = () => {
                 }
                 return adguard.nativeHost.disableProtection(url);
             }
+            case MessagesToBackgroundPage.EnableSafariProtection: {
+                const { url } = data;
+                return adguard.nativeHost.enableSafariProtection(url);
+            }
             case MessagesToBackgroundPage.ReportProblem: {
                 const { url } = data;
                 return adguard.nativeHost.reportProblem(url);
