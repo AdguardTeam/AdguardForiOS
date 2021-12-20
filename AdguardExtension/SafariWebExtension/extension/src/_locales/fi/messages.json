@@ -3,96 +3,102 @@
         "message": "AdGuard"
     },
     "extension_description": {
-        "message": "AdGuard Safari Web-laajennus"
+        "message": "AdGuard Safari web-laajennus"
     },
     "popup_action_safari_protection_title": {
-        "message": "Safarin suojaus"
-    },
-    "popup_action_safari_protection_description": {
-        "message": "tälle sivustolle"
+        "message": "Safarin suojaus",
+        "description": "TEXT MAX LENGTH: 25"
     },
     "popup_action_safari_protection_description_disabled": {
-        "message": "suojaus ei ole käytössä"
-    },
-    "popup_action_current_site_status_desc_enabled": {
-        "message": "suojaus on käytössä"
+        "message": "suojaus ei ole käytössä",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_status_desc_disabled": {
-        "message": "suojaus ei ole käytössä"
+        "message": "suojaus ei ole käytössä",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_block_element": {
-        "message": "Estä elementtejä tältä sivulta"
+        "message": "Estä elementtejä tältä sivulta",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_delete_user_rules": {
-        "message": "Poista sivustolle luodut käyttäjän säännöt"
+        "message": "Poista sivustolle luodut käyttäjän säännöt",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_starting": {
-        "message": "käynnistetään suojaus..."
+        "message": "käynnistetään suojaus...",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_allowlisted": {
-        "message": "lisätty sallittujen listalle"
+        "message": "lisätty sallittujen listalle",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_allowlisted_inverted": {
+        "message": "lisättiin sallittujen listalle (käänteinen)",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_basic_only": {
-        "message": "vain perussuojaus"
+        "message": "vain perussuojaus",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_modal_all_sites_allowed_title": {
-        "message": "Äärimmäinen suojaus"
+        "message": "Äärimmäinen suojaus",
+        "description": "TEXT MAX LENGTH: 25"
     },
     "popup_modal_all_sites_allowed_desc": {
-        "message": "Hienoa! Nyt AdGuard estää entistäkin enemmän mainoksia, kohdaten vaikeimmatkin haasteet."
+        "message": "Hienoa! Nyt AdGuard estää entistäkin enemmän mainoksia, kohdaten vaikeimmatkin haasteet.",
+        "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_all_sites_allowed_button": {
-        "message": "Jatka"
+        "message": "Jatka",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_not_all_sites_allowed_title": {
-        "message": "Valikoiva suojaus"
-    },
-    "popup_modal_not_all_sites_allowed_desc": {
-        "message": "Olet sallinut AdGuardin vain tälle sivustolle. Näet edelleen mainoksia muilla sivustoilla ellet laajenna AdGuardin oikeuksia."
+        "message": "Valikoiva suojaus",
+        "description": "TEXT MAX LENGTH: 25"
     },
     "popup_modal_not_all_sites_allowed_button": {
-        "message": "Jatka"
+        "message": "Jatka",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_advanced_blocking_disabled_title": {
-        "message": "Edistynyt suojaus ei ole käytössä"
-    },
-    "popup_modal_advanced_blocking_disabled_description": {
-        "message": "Käyttäjäskriptit ja YouTube-mainosesto eivät ole käytössä."
+        "message": "Edistynyt suojaus ei ole käytössä",
+        "description": "TEXT MAX LENGTH: 40"
     },
     "popup_modal_advanced_blocking_disabled_button": {
-        "message": "Ota käyttöön"
+        "message": "Ota käyttöön",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_title_free": {
-        "message": "Hyödynnä täysi potentiaalisi"
-    },
-    "popup_modal_desc_free": {
-        "message": "Jäät edelleen paitsi AdGuard Premiumin edistyneistä suojausominaisuuksista. Eikö estetä vielä enemmän mainoksia, kuten YouTuben mainokset Safarissa?"
+        "message": "Hyödynnä täysi potentiaalisi",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_modal_btn_free": {
-        "message": "Päivitä"
+        "message": "Päivitä",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_fullscreen_support_title": {
-        "message": "Tarvitsetko apua?"
+        "message": "Tarvitsetko apua?",
+        "description": "TEXT MAX LENGTH: 28"
     },
     "popup_fullscreen_support_desc": {
-        "message": "Onko jokin on pielessä? Meiltä saattaa löytyä korjaus."
+        "message": "Onko jokin on pielessä? Meiltä saattaa löytyä korjaus.",
+        "description": "TEXT MAX LENGTH: 45"
     },
     "popup_protection_disabled_support_desc": {
-        "message": "Suojaus ei ole käytössä tällä sivustolla. Onko jokin on pielessä? Meiltä saattaa löytyä korjaus."
+        "message": "Suojaus ei ole käytössä tällä sivustolla. Onko jotain pielessä? Meiltä voi löytyä korjaus.",
+        "description": "TEXT MAX LENGTH: 85"
     },
     "popup_support_button_text": {
-        "message": "Ilmoita ongelmasta"
+        "message": "Ilmoita ongelmasta",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "modal_protection_off_title": {
-        "message": "Ota AdGuard käyttöön"
+        "message": "Ota AdGuard käyttöön",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "modal_protection_off_settings": {
-        "message": "Avaa <b>Asetukset<\/b>"
-    },
-    "modal_protection_off_extensions": {
-        "message": "Napauta <b>Safari<\/b>, pyyhkäise alas ja napauta <b>\"Sisällönestot\"<\/b>"
-    },
-    "modal_protection_off_switch": {
-        "message": "<b>Käytä<\/b> kaikkia AdGuardin laajennuksia"
+        "message": "Avaa <b>Asetukset<\/b>",
+        "description": "TEXT MAX LENGTH: 28"
     }
 }

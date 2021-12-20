@@ -3,96 +3,114 @@
         "message": "AdGuard"
     },
     "extension_description": {
-        "message": "Расширение AdGuard для Safari"
+        "message": "Веб-расширение AdGuard для Safari"
     },
     "popup_action_safari_protection_title": {
-        "message": "Защита Safari"
+        "message": "Защита Safari",
+        "description": "TEXT MAX LENGTH: 25"
     },
-    "popup_action_safari_protection_description": {
-        "message": "для этого сайта"
+    "popup_action_safari_protection_description_enabled_for_site": {
+        "message": "включена на этом сайте",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_safari_protection_description_disabled_for_site": {
+        "message": "отключена на этом сайте",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_safari_protection_description_disabled": {
-        "message": "защита выключена"
+        "message": "защита отключена",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_status_desc_enabled": {
-        "message": "защита включена"
+        "message": "защита включена",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_status_desc_disabled": {
-        "message": "защита выключена"
+        "message": "защита отключена",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_block_element": {
-        "message": "Заблокировать элементы на этой странице"
+        "message": "Заблокировать элементы на этой странице",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_delete_user_rules": {
-        "message": "Удалить все пользовательские правила для этого сайта"
+        "message": "Удалить пользовательские правила для этого сайта",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_starting": {
-        "message": "включаем защиту..."
+        "message": "включаем защиту...",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_allowlisted": {
-        "message": "сайт в белом списке"
+        "message": "сайт в белом списке",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_allowlisted_inverted": {
+        "message": "добавлен в белый список (инвертированный)",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_basic_only": {
-        "message": "только базовая защита"
+        "message": "только базовая защита",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_modal_all_sites_allowed_title": {
-        "message": "Максимальная защита"
+        "message": "Максимальная защита",
+        "description": "TEXT MAX LENGTH: 25"
     },
     "popup_modal_all_sites_allowed_desc": {
-        "message": "Отличная работа! Теперь AdGuard будет блокировать ещё больше рекламы и справляться с самыми сложными задачами."
+        "message": "Отличная работа! Теперь AdGuard будет блокировать ещё больше рекламы и справляться с самыми сложными задачами.",
+        "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_all_sites_allowed_button": {
-        "message": "Продолжить"
+        "message": "Продолжить",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_not_all_sites_allowed_title": {
-        "message": "Выборочная защита"
-    },
-    "popup_modal_not_all_sites_allowed_desc": {
-        "message": "AdGuard включен только на этом сайте. Вы будете видеть рекламу на других сайтах, пока не дадите AdGuard разрешение блокировать её везде."
+        "message": "Выборочная защита",
+        "description": "TEXT MAX LENGTH: 25"
     },
     "popup_modal_not_all_sites_allowed_button": {
-        "message": "Понятно"
+        "message": "Понятно",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_advanced_blocking_disabled_title": {
-        "message": "Расширенная защита отключена"
-    },
-    "popup_modal_advanced_blocking_disabled_description": {
-        "message": "Пользовательские скрипты и блокировка рекламы на YouTube не активированы."
+        "message": "Расширенная защита отключена",
+        "description": "TEXT MAX LENGTH: 40"
     },
     "popup_modal_advanced_blocking_disabled_button": {
-        "message": "Включить"
+        "message": "Включить",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_title_free": {
-        "message": "Используйте все возможности AdGuard"
-    },
-    "popup_modal_desc_free": {
-        "message": "Обратите внимание, что в бесплатной версии отсутствует расширенная защита. Она поможет справиться с большим количеством рекламы, включая рекламу на YouTube в Safari."
+        "message": "Используйте все возможности AdGuard",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_modal_btn_free": {
-        "message": "Улучшить"
+        "message": "Улучшить",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_fullscreen_support_title": {
-        "message": "Вам нужна помощь?"
+        "message": "Вам нужна помощь?",
+        "description": "TEXT MAX LENGTH: 28"
     },
     "popup_fullscreen_support_desc": {
-        "message": "Что-то не так? Мы это исправим."
+        "message": "Что-то не так? Мы это исправим.",
+        "description": "TEXT MAX LENGTH: 45"
     },
     "popup_protection_disabled_support_desc": {
-        "message": "Упс, кажется, вы отключили защиту... Что-то пошло не так? Мы можем это исправить."
+        "message": "Вы отключили защиту. Что-то пошло не так? Мы можем это исправить.",
+        "description": "TEXT MAX LENGTH: 85"
     },
     "popup_support_button_text": {
-        "message": "Сообщить о проблеме"
+        "message": "Сообщить о проблеме",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "modal_protection_off_title": {
-        "message": "Включить AdGuard"
+        "message": "Включить AdGuard",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "modal_protection_off_settings": {
-        "message": "Откройте <b>Настройки<\/b>"
-    },
-    "modal_protection_off_extensions": {
-        "message": "Нажмите на <b>Safari<\/b>, проведите пальцем вниз и выберите раздел <b>«Блокировщики контента»<\/b>"
-    },
-    "modal_protection_off_switch": {
-        "message": "<b>Включите<\/b> все расширения AdGuard"
+        "message": "Откройте <b>Настройки<\/b>",
+        "description": "TEXT MAX LENGTH: 28"
     }
 }

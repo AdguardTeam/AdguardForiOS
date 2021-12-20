@@ -3,96 +3,110 @@
         "message": "AdGuard"
     },
     "extension_description": {
-        "message": "Dies ist ein Beispiel für eine Werbeblocker-Erweiterung. Sie sollten uns sagen, was Ihre Erweiterung hier tut"
+        "message": "AdGuard — Web-Erweiterung für Safari"
     },
     "popup_action_safari_protection_title": {
-        "message": "Schutz in Safari"
+        "message": "Schutz in Safari",
+        "description": "TEXT MAX LENGTH: 25"
     },
-    "popup_action_safari_protection_description": {
-        "message": "für diese Website"
+    "popup_action_safari_protection_description_enabled_for_site": {
+        "message": "auf dieser Website aktiviert",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_safari_protection_description_disabled_for_site": {
+        "message": "auf dieser Website deaktiviert",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_safari_protection_description_disabled": {
-        "message": "deaktiviert"
-    },
-    "popup_action_current_site_status_desc_enabled": {
-        "message": "Schutz ist aktiviert"
+        "message": "Schutz deaktiviert",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_status_desc_disabled": {
-        "message": "Schutz ist deaktiviert"
+        "message": "Schutz deaktiviert",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_block_element": {
-        "message": "Element auf dieser Seite sperren"
+        "message": "Element auf dieser Seite sperren",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_delete_user_rules": {
-        "message": "Alle benutzerdefinierten Regeln für diese Seite löschen"
+        "message": "Benutzerregeln für diese Seite löschen",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_starting": {
-        "message": "Schutz wird gestartet …"
+        "message": "Schutz wird aktiviert …",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_allowlisted": {
-        "message": "zur Freigabeliste hinzugefügt"
+        "message": "zur Freigabeliste hinzugefügt",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_allowlisted_inverted": {
+        "message": "zur invertierten Freigabeliste hinzugefügt",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_basic_only": {
-        "message": "nur Grundschutz"
+        "message": "nur Grundschutz",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_modal_all_sites_allowed_title": {
-        "message": "Ultimativer Schutz"
+        "message": "Ultimativer Schutz",
+        "description": "TEXT MAX LENGTH: 25"
     },
     "popup_modal_all_sites_allowed_desc": {
-        "message": "Großartig! Ab jetzt wird AdGuard fast jede Anzeige sperren und auch die schwierigsten Herausforderungen meistern!"
+        "message": "Großartig! Ab jetzt wird AdGuard fast jede Anzeige sperren und auch die schwierigsten Herausforderungen meistern!",
+        "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_all_sites_allowed_button": {
-        "message": "Weiter"
+        "message": "Weiter",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_not_all_sites_allowed_title": {
-        "message": "Selektiver Schutz"
-    },
-    "popup_modal_not_all_sites_allowed_desc": {
-        "message": "Sie haben AdGuard nur für diese Website aktiviert. Anzeigen können auf anderen Websites erscheinen, bis Sie AdGuard weitere Berechtigungen erteilen."
+        "message": "Selektiver Schutz",
+        "description": "TEXT MAX LENGTH: 25"
     },
     "popup_modal_not_all_sites_allowed_button": {
-        "message": "Weiter"
+        "message": "Weiter",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_advanced_blocking_disabled_title": {
-        "message": "Erweiterter Schutz ist deaktiviert"
-    },
-    "popup_modal_advanced_blocking_disabled_description": {
-        "message": "Benutzerskripte und YouTube-Werbeblocker sind nicht aktiviert."
+        "message": "Erweiterter Schutz deaktiviert",
+        "description": "TEXT MAX LENGTH: 40"
     },
     "popup_modal_advanced_blocking_disabled_button": {
-        "message": "Aktivieren"
+        "message": "Aktivieren",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_title_free": {
-        "message": "Erreichen Sie Ihr volles Potenzial"
-    },
-    "popup_modal_desc_free": {
-        "message": "Ihnen fehlt immer noch der erweiterte Schutz, der in AdGuard Premium verfügbar ist. Lassen Sie uns noch mehr Anzeigen wie YouTube-Anzeigen in Safari blockieren!"
+        "message": "Erreichen Sie Ihr volles Potenzial",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_modal_btn_free": {
-        "message": "Upgraden"
+        "message": "Upgraden",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_fullscreen_support_title": {
-        "message": "Oh-oh, brauchen Sie Hilfe?"
+        "message": "Brauchen Sie Hilfe?",
+        "description": "TEXT MAX LENGTH: 28"
     },
     "popup_fullscreen_support_desc": {
-        "message": "Ist etwas falsch? Wir können es beheben."
+        "message": "Ist etwas falsch? Wir können es beheben.",
+        "description": "TEXT MAX LENGTH: 45"
     },
     "popup_protection_disabled_support_desc": {
-        "message": "Oh-oh, der Schutz für diese Website ist deaktiviert. Stimmt etwas nicht? Wir können es beheben!"
+        "message": "Schutz für diese Website ist deaktiviert. Ist etwas los? Wir können es beheben.",
+        "description": "TEXT MAX LENGTH: 85"
     },
     "popup_support_button_text": {
-        "message": "Ein Problem melden"
+        "message": "Ein Problem melden",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "modal_protection_off_title": {
-        "message": "AdGuard aktivieren"
+        "message": "AdGuard aktivieren",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "modal_protection_off_settings": {
-        "message": "Öffnen Sie die <b>Einstellungen<\/b>"
-    },
-    "modal_protection_off_extensions": {
-        "message": "Tippen Sie auf <b>Safari<\/b> und wählen Sie <b>Erweiterungen<\/b>"
-    },
-    "modal_protection_off_switch": {
-        "message": "<b>Aktivieren<\/b> Sie alle AdGuard-Filter"
+        "message": "Öffnen Sie die <b>Einstellungen<\/b>",
+        "description": "TEXT MAX LENGTH: 28"
     }
 }

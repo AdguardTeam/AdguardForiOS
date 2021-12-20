@@ -6,93 +6,127 @@
         "message": "AdGuard Safari 網路延伸功能"
     },
     "popup_action_safari_protection_title": {
-        "message": "Safari 防護"
-    },
-    "popup_action_safari_protection_description": {
-        "message": "用於此網站"
+        "message": "Safari 防護",
+        "description": "TEXT MAX LENGTH: 25"
     },
     "popup_action_safari_protection_description_disabled": {
-        "message": "防護為關著"
+        "message": "防護被禁用",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_status_desc_enabled": {
-        "message": "防護為開著"
+        "message": "防護被啟用",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_status_desc_disabled": {
-        "message": "防護為關著"
+        "message": "防護被禁用",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_block_element": {
-        "message": "封鎖於此頁面上之元件"
+        "message": "封鎖於此頁面上之元件",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_delete_user_rules": {
-        "message": "刪除關於此網站之所有的使用者規則"
+        "message": "刪除關於此網站之使用者規則",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_insufficient_permissions": {
+        "message": "受限的權限",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_starting": {
-        "message": "正在打開防護…"
+        "message": "正在啟用防護…",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_allowlisted": {
-        "message": "被加至允許清單"
+        "message": "被加至允許清單",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_allowlisted_inverted": {
+        "message": "被加至允許清單（反向的）",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_basic_only": {
-        "message": "僅基本的防護"
+        "message": "僅基本的防護",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_modal_all_sites_allowed_title": {
-        "message": "終極的防護"
+        "message": "終極的防護",
+        "description": "TEXT MAX LENGTH: 25"
     },
     "popup_modal_all_sites_allowed_desc": {
-        "message": "做得好！AdGuard 將幾乎封鎖任何的廣告並面對最困難的挑戰。"
+        "message": "做得好！AdGuard 將幾乎封鎖任何的廣告並面對最困難的挑戰。",
+        "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_all_sites_allowed_button": {
-        "message": "繼續"
+        "message": "繼續",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_not_all_sites_allowed_title": {
-        "message": "選擇性防護"
+        "message": "選擇性防護",
+        "description": "TEXT MAX LENGTH: 25"
     },
     "popup_modal_not_all_sites_allowed_desc": {
-        "message": "您僅對此網站啟用了 AdGuard。除非您授予 AdGuard 更多的權限，否則廣告可能於其它的網站上出現。"
+        "message": "您僅對幾個網站啟用了 AdGuard。除非您授予 AdGuard 更多的權限，否則廣告可能於其它的網站上出現。<a>閱讀更多<\/a>",
+        "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_not_all_sites_allowed_button": {
-        "message": "繼續"
+        "message": "繼續",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_advanced_blocking_disabled_title": {
-        "message": "進階的防護為關著"
+        "message": "進階的防護被禁用",
+        "description": "TEXT MAX LENGTH: 40"
     },
     "popup_modal_advanced_blocking_disabled_description": {
-        "message": "使用者腳本和 YouTube 廣告封鎖未被啟動。"
+        "message": "進階的封鎖規則和其它的功能為不可用的。<a>閱讀更多<\/a>",
+        "description": "TEXT MAX LENGTH: 85"
     },
     "popup_modal_advanced_blocking_disabled_button": {
-        "message": "打開"
+        "message": "啟用",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_title_free": {
-        "message": "發揮您的完整潛能"
+        "message": "發揮您的完整潛能",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_modal_desc_free": {
-        "message": "您仍然缺少在 AdGuard 高級版中可用的進階的防護。咱們在 Safari 中封鎖甚至更多的廣告，諸如 YouTube 廣告？"
+        "message": "您仍然缺少在 AdGuard 高級版中可用的進階的防護。咱們封鎖甚至更複雜的廣告和追蹤器？",
+        "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_btn_free": {
-        "message": "升級"
+        "message": "升級",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_fullscreen_support_title": {
-        "message": "哎呀，您需要幫助嗎？"
+        "message": "您需要幫助嗎？",
+        "description": "TEXT MAX LENGTH: 28"
     },
     "popup_fullscreen_support_desc": {
-        "message": "有什麼問題嗎？我們可能有個修正。"
+        "message": "有什麼問題嗎？我們可能有個修正。",
+        "description": "TEXT MAX LENGTH: 45"
     },
     "popup_protection_disabled_support_desc": {
-        "message": "哎呀，對此網站的防護為關著。有什麼問題嗎？我們可能有個修正。"
+        "message": "對此網站的防護被禁用。有什麼問題嗎？我們可能有個修正。",
+        "description": "TEXT MAX LENGTH: 85"
     },
     "popup_support_button_text": {
-        "message": "報告問題"
+        "message": "報告問題",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "modal_protection_off_title": {
-        "message": "啟用 AdGuard"
+        "message": "啟用 AdGuard",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "modal_protection_off_settings": {
-        "message": "開啟<b>設定<\/b>"
+        "message": "開啟<b>設定<\/b>",
+        "description": "TEXT MAX LENGTH: 28"
     },
     "modal_protection_off_extensions": {
-        "message": "輕觸 <b>Safari<\/b>、向下滑動並輕觸<b>內容阻擋器<\/b>"
+        "message": "輕觸 <b>Safari<\/b>、向下滑動並輕觸<b>延伸功能<\/b>",
+        "description": "TEXT MAX LENGTH: 56"
     },
     "modal_protection_off_switch": {
-        "message": "<b>啟用<\/b>所有的 AdGuard 延伸功能"
+        "message": "<b>啟用<\/b>所有的 AdGuard 內容阻擋器",
+        "description": "TEXT MAX LENGTH: 28"
     }
 }

@@ -86,7 +86,7 @@
         "description": "TEXT MAX LENGTH: 40"
     },
     "popup_modal_advanced_blocking_disabled_description": {
-        "message": "Advanced blocking rules and other extended features are not available. <a>Read more</a>",
+        "message": "Advanced blocking rules and other extended features are not available. <a>Read more<\/a>",
         "description": "TEXT MAX LENGTH: 85"
     },
     "popup_modal_advanced_blocking_disabled_button": {

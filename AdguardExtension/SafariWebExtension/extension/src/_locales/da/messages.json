@@ -6,93 +6,135 @@
         "message": "AdGuard Safari Web-udvidelse"
     },
     "popup_action_safari_protection_title": {
-        "message": "Safari-beskyttelse"
+        "message": "Safari-beskyttelse",
+        "description": "TEXT MAX LENGTH: 25"
     },
-    "popup_action_safari_protection_description": {
-        "message": "til dette websted"
+    "popup_action_safari_protection_description_enabled_for_site": {
+        "message": "slået til for dette websted",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_safari_protection_description_disabled_for_site": {
+        "message": "slået fra for dette websted",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_safari_protection_description_disabled": {
-        "message": "beskyttelse er Fra"
+        "message": "beskyttelse er slået fra",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_status_desc_enabled": {
-        "message": "beskyttelse er TIL"
+        "message": "beskyttelse er slået til",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_status_desc_disabled": {
-        "message": "beskyttelse er Fra"
+        "message": "beskyttelse er slået fra",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_block_element": {
-        "message": "Blokér elementer på denne side"
+        "message": "Blokér elementer på denne side",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_delete_user_rules": {
-        "message": "Slet alle brugerregler for dette websted"
+        "message": "Slet brugerregler for webstedet",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_insufficient_permissions": {
+        "message": "Begrænsede tilladelser",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_starting": {
-        "message": "slår beskyttelse til..."
+        "message": "slår beskyttelse til...",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_allowlisted": {
-        "message": "føjet til hvidliste"
+        "message": "føjet til hvidliste",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_allowlisted_inverted": {
+        "message": "føjet til hvidliste (inverteret)",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_basic_only": {
-        "message": "kun basisbeskyttelse"
+        "message": "kun basisbeskyttelse",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_modal_all_sites_allowed_title": {
-        "message": "Ultimativ beskyttelse"
+        "message": "Ultimativ beskyttelse",
+        "description": "TEXT MAX LENGTH: 25"
     },
     "popup_modal_all_sites_allowed_desc": {
-        "message": "Godt gået! AdGuard vil blokere næsten alle annoncer og imødegå de sværeste udfordringer."
+        "message": "Godt gået! AdGuard vil blokere næsten alle annoncer og imødegå de sværeste udfordringer.",
+        "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_all_sites_allowed_button": {
-        "message": "Fortsæt"
+        "message": "Fortsæt",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_not_all_sites_allowed_title": {
-        "message": "Selektiv beskyttelse"
+        "message": "Selektiv beskyttelse",
+        "description": "TEXT MAX LENGTH: 25"
     },
     "popup_modal_not_all_sites_allowed_desc": {
-        "message": "AdGuard er kun aktiveret for dette websted. Annoncer kan stadig vises på andre websteder, medmindre AdGuard tildeles yderligere tilladelser."
+        "message": "AdGuard er kun slået til for bestemte websteder. Annoncer kan blive vist på andre websteder, medmindre AdGuard tildeles flere tilladelser. <a>Læs mere<\/a>",
+        "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_not_all_sites_allowed_button": {
-        "message": "Fortsæt"
+        "message": "Fortsæt",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_advanced_blocking_disabled_title": {
-        "message": "Avanceret beskyttelse er Fra"
+        "message": "Avanceret beskyttelse er slået fra",
+        "description": "TEXT MAX LENGTH: 40"
     },
     "popup_modal_advanced_blocking_disabled_description": {
-        "message": "Bruger-scripts og YouTube-adblocking er ikke aktiveret."
+        "message": "Avancerede blokeringsregler og andre udvidede funktioner er utilgængelige. <a>Læs mere<\/a>",
+        "description": "TEXT MAX LENGTH: 85"
     },
     "popup_modal_advanced_blocking_disabled_button": {
-        "message": "Slå Til"
+        "message": "Slå til",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_title_free": {
-        "message": "Nå dit fulde potentiale"
+        "message": "Nå dit fulde potentiale",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_modal_desc_free": {
-        "message": "Yderligere avanceret beskyttelse i AdGuard er stadig ikke aktiveret. Hvad med at blokere endnu mere, såsom YouTube-annoncer i Safari?"
+        "message": "Der vil stadig mangle den avanceret beskyttelse fra AdGuard Premium. Lad os blokere endnu flere komplekse annoncer og trackere?",
+        "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_btn_free": {
-        "message": "Opgradér"
+        "message": "Opgradér",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_fullscreen_support_title": {
-        "message": "Ups, behøver du hjælp?"
+        "message": "Behov for hjælp?",
+        "description": "TEXT MAX LENGTH: 28"
     },
     "popup_fullscreen_support_desc": {
-        "message": "Er der noget galt? Vi har måske en løsning."
+        "message": "Er der noget galt? Vi har måske en løsning.",
+        "description": "TEXT MAX LENGTH: 45"
     },
     "popup_protection_disabled_support_desc": {
-        "message": "Hmm, beskyttelse for dette websted er Fra. Er der noget galt? Vi har måske en løsning."
+        "message": "Beskyttelse for dette websted er slået fra. Er der noget galt? Vi har måske en løsning.",
+        "description": "TEXT MAX LENGTH: 85"
     },
     "popup_support_button_text": {
-        "message": "Anmeld et problem"
+        "message": "Anmeld et problem",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "modal_protection_off_title": {
-        "message": "Aktivere AdGuard"
+        "message": "Aktivere AdGuard",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "modal_protection_off_settings": {
-        "message": "Åbn <b>Indstillinger<\/b>"
+        "message": "Åbn <b>Indstillinger<\/b>",
+        "description": "TEXT MAX LENGTH: 28"
     },
     "modal_protection_off_extensions": {
-        "message": "Tryk på <b>Safari<\/b>, stryg nedad og tryk på <b>Indholdsblockere<\/b>"
+        "message": "Tryk på <b>Safari<\/b>, stryg nedad og tryk på <b>Udvidelser<\/b>",
+        "description": "TEXT MAX LENGTH: 56"
     },
     "modal_protection_off_switch": {
-        "message": "<b>Aktivér<\/b> alle AdGuard-udvidelser"
+        "message": "<b>Aktivér<\/b> alle AdGuard indholds-blockere",
+        "description": "TEXT MAX LENGTH: 28"
     }
 }
