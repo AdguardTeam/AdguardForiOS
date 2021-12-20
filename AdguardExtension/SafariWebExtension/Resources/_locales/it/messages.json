@@ -12,13 +12,13 @@
         "message": "per questo sito web"
     },
     "popup_action_safari_protection_description_disabled": {
-        "message": "disattivata"
+        "message": "la protezione è Disattivata"
     },
     "popup_action_current_site_status_desc_enabled": {
-        "message": "la protezione è ATTIVA"
+        "message": "la protezione è Attiva"
     },
     "popup_action_current_site_status_desc_disabled": {
-        "message": "protezione disattivata"
+        "message": "la protezione è Disattivata"
     },
     "popup_action_block_element": {
         "message": "Blocca elementi su questa pagina"
@@ -42,7 +42,7 @@
         "message": "Ottimo lavoro! AdGuard bloccherà quasi tutti gli annunci ed affronterà le sfide più difficili."
     },
     "popup_modal_all_sites_allowed_button": {
-        "message": "Che la magia abbia inizio"
+        "message": "Continua"
     },
     "popup_modal_not_all_sites_allowed_title": {
         "message": "Protezione selettiva"
@@ -52,6 +52,15 @@
     },
     "popup_modal_not_all_sites_allowed_button": {
         "message": "Continua"
+    },
+    "popup_modal_advanced_blocking_disabled_title": {
+        "message": "La protezione avanzata è disattivata"
+    },
+    "popup_modal_advanced_blocking_disabled_description": {
+        "message": "Gli script dell'utente e il blocco annunci di YouTube sono disattivati."
+    },
+    "popup_modal_advanced_blocking_disabled_button": {
+        "message": "Attiva"
     },
     "popup_modal_title_free": {
         "message": "Sii tutto ciò che puoi essere"
@@ -63,19 +72,19 @@
         "message": "Aggiorna"
     },
     "popup_fullscreen_support_title": {
-        "message": "Uh-oh, vorresti ricominciare da capo?"
+        "message": "Uh-oh, hai bisogno di aiuto?"
     },
     "popup_fullscreen_support_desc": {
         "message": "Qualcosa è andato storto? Potremmo sistemarlo."
     },
     "popup_protection_disabled_support_desc": {
-        "message": "Uh-oh, la protezione per questo sito web è DISATTIVATA. Qualcosa è andato storto? Potremmo sistemarlo."
+        "message": "Uh-oh, la protezione per questo sito web è disattivata. Qualcosa è andato storto? Potremmo sistemarlo."
     },
     "popup_support_button_text": {
         "message": "Segnala un problema"
     },
     "modal_protection_off_title": {
-        "message": "Attiva protezione"
+        "message": "Attiva AdGuard"
     },
     "modal_protection_off_settings": {
         "message": "Apri <b>Impostazioni<\/b>"
@@ -84,6 +93,6 @@
         "message": "Clicca su <b>Safari<\/b>, scorri verso il basso, e clicca su <b>Blocchi dei Contenuti<\/b>"
     },
     "modal_protection_off_switch": {
-        "message": "<b>Attiva<\/b> tutte le estensioni di AdGuard."
+        "message": "<b>Attiva<\/b> tutte le estensioni AdGuard"
     }
 }

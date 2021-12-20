@@ -11,22 +11,88 @@
     "popup_action_safari_protection_description": {
         "message": "用於此網站"
     },
+    "popup_action_safari_protection_description_disabled": {
+        "message": "防護為關著"
+    },
+    "popup_action_current_site_status_desc_enabled": {
+        "message": "防護為開著"
+    },
+    "popup_action_current_site_status_desc_disabled": {
+        "message": "防護為關著"
+    },
     "popup_action_block_element": {
         "message": "封鎖於此頁面上之元件"
     },
     "popup_action_delete_user_rules": {
         "message": "刪除關於此網站之所有的使用者規則"
     },
+    "popup_action_current_site_desc_starting": {
+        "message": "正在打開防護…"
+    },
+    "popup_action_current_site_desc_allowlisted": {
+        "message": "被加至允許清單"
+    },
     "popup_action_current_site_desc_basic_only": {
         "message": "僅基本的防護"
+    },
+    "popup_modal_all_sites_allowed_title": {
+        "message": "終極的防護"
+    },
+    "popup_modal_all_sites_allowed_desc": {
+        "message": "做得好！AdGuard 將幾乎封鎖任何的廣告並面對最困難的挑戰。"
+    },
+    "popup_modal_all_sites_allowed_button": {
+        "message": "繼續"
+    },
+    "popup_modal_not_all_sites_allowed_title": {
+        "message": "選擇性防護"
+    },
+    "popup_modal_not_all_sites_allowed_desc": {
+        "message": "您僅對此網站啟用了 AdGuard。除非您授予 AdGuard 更多的權限，否則廣告可能於其它的網站上出現。"
+    },
+    "popup_modal_not_all_sites_allowed_button": {
+        "message": "繼續"
+    },
+    "popup_modal_advanced_blocking_disabled_title": {
+        "message": "進階的防護為關著"
+    },
+    "popup_modal_advanced_blocking_disabled_description": {
+        "message": "使用者腳本和 YouTube 廣告封鎖未被啟動。"
+    },
+    "popup_modal_advanced_blocking_disabled_button": {
+        "message": "打開"
+    },
+    "popup_modal_title_free": {
+        "message": "發揮您的完整潛能"
+    },
+    "popup_modal_desc_free": {
+        "message": "您仍然缺少在 AdGuard 高級版中可用的進階的防護。咱們在 Safari 中封鎖甚至更多的廣告，諸如 YouTube 廣告？"
     },
     "popup_modal_btn_free": {
         "message": "升級"
     },
+    "popup_fullscreen_support_title": {
+        "message": "哎呀，您需要幫助嗎？"
+    },
+    "popup_fullscreen_support_desc": {
+        "message": "有什麼問題嗎？我們可能有個修正。"
+    },
+    "popup_protection_disabled_support_desc": {
+        "message": "哎呀，對此網站的防護為關著。有什麼問題嗎？我們可能有個修正。"
+    },
+    "popup_support_button_text": {
+        "message": "報告問題"
+    },
     "modal_protection_off_title": {
-        "message": "啟用防護"
+        "message": "啟用 AdGuard"
     },
     "modal_protection_off_settings": {
         "message": "開啟<b>設定<\/b>"
+    },
+    "modal_protection_off_extensions": {
+        "message": "輕觸 <b>Safari<\/b>、向下滑動並輕觸<b>內容阻擋器<\/b>"
+    },
+    "modal_protection_off_switch": {
+        "message": "<b>啟用<\/b>所有的 AdGuard 延伸功能"
     }
 }

@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import browser from 'webextension-polyfill';
 
-import { MessagesToNativeApp } from '../../common/constants';
+import { MessagesToNativeApp, Platforms } from '../../common/constants';
 import { getDomain } from '../../common/utils/url';
 import { storage } from '../storage';
 
@@ -30,6 +30,7 @@ interface NativeHostInitData {
     protectionEnabled: boolean,
     advancedBlockingEnabled: boolean,
     allowlistInverted: boolean,
+    platform: Platforms,
 }
 
 export interface NativeHostInterface {
@@ -274,6 +275,7 @@ export class NativeHost implements NativeHostInterface {
             content_blockers_enabled: contentBlockersEnabled,
             advanced_blocking_enabled: advancedBlockingEnabled,
             allowlist_inverted: allowlistInverted,
+            platform,
 
             // links
             // e.g. "adguard://safariWebExtension?action=removeFromAllowlist&domain="
@@ -310,6 +312,7 @@ export class NativeHost implements NativeHostInterface {
             protectionEnabled,
             advancedBlockingEnabled,
             allowlistInverted,
+            platform,
         };
     }
 

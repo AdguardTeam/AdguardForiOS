@@ -12,6 +12,7 @@ export type IconId =
     'safari' |
     'settings' |
     'compass' |
+    'arrow' |
     'network';
 
 export const Icons = () => (
@@ -165,6 +166,9 @@ export const Icons = () => (
                 <path clipRule="evenodd" d="M12 20.5a8.5 8.5 0 1 0 0-17 8.5 8.5 0 0 0 0 17Z" />
                 <path d="M10 9.303c.02-.821 1.002-1.526 2.004-1.526s1.6.39 2.004 1.223c.31.703.006 1.546-1.069 2.28-.87.557-1.143 1.133-1.143 2.179M11.796 15.895c.012.002 0-.19 0-.19" />
             </g>
+        </symbol>
+        <symbol id="arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.03516 10.9305L11.9647 14.9997L16.0339 11.0702" stroke="#A4A4A4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </symbol>
     </svg>
 );
