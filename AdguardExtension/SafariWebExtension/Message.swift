@@ -46,6 +46,7 @@ struct Message {
     static let shouldUpdateAdvancedRules = "should_update_advanced_rules"
     static let allowlistIsInverted = "allowlist_inverted"
     static let platform = "platform"
+    static let safariProtectionEnabled = "safariProtectionEnabled"
 
     // Links
     static let enableSiteProtectionLink = "enable_site_protection_link"
@@ -55,6 +56,7 @@ struct Message {
     static let upgradeAppLink = "upgrade_app_link"
     static let enableAdvancedBlockingLink = "enable_advanced_blocking_link"
     static let reportProblemLink = "report_problem_link"
+    static let enableSafariProtectionLink = "enable_safari_protection_link"
 
     // Advanced rules
     static let advancedRulesKey = "advanced_rules"
