@@ -149,7 +149,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Background fetch consists of 3 steps, so if the update process didn't fully finish in the background than we should continue it here
 
-        if UIApplication.shared.applicationState != .background {
+        if application.applicationState != .background {
             safariProtection.finishBackgroundUpdate { error in
                 if let error = error {
                     DDLogError("(AppDelegate) - didFinishLaunchingWithOptions; Finished background update with error: \(error)")
@@ -236,7 +236,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 completionHandler(result.backgroundFetchResult)
                 return
             }
-            // If there was a false with downloading filters, than we need to restart tunnel to apply newest ones
+            // If there was a phase with downloading filters, than we need to restart tunnel to apply newest ones
             if result.oldBackgroundFetchState == .updateFinished || result.oldBackgroundFetchState == .loadAndSaveFilters {
                 self?.dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsFilters) { _ in
                     DDLogInfo("(AppDelegate) - backgroundFetch; Background fetch ended call performFetchWithCompletionHandler after updating dns preferences")
