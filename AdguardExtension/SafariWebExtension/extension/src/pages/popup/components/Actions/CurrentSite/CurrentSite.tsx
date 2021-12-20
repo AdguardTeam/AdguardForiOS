@@ -26,6 +26,7 @@ export const CurrentSite = observer(() => {
 
     if (!store.premiumApp || !store.advancedBlockingEnabled) {
         description = SiteStatusesMessages[SiteStatus.BasicOnly];
+        descriptionColor = 'yellow';
     }
 
     if (!store.protectionEnabled) {

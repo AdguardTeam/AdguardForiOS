@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
+import browser from 'webextension-polyfill';
 
 import { Modal } from '../Modal';
 import { WEB_EXTENSION_MORE_URL } from '../../../../common/constants';
@@ -8,11 +9,19 @@ import { translator } from '../../../../common/translators/translator';
 import { Button } from '../../Button';
 import { popupStore } from '../../../stores/PopupStore';
 
-const link = (text: string) => (
-    <a href={WEB_EXTENSION_MORE_URL} className="link">
-        {text}
-    </a>
-);
+const link = (text: string) => {
+    const handleClick = async () => {
+        await browser.tabs.create({ url: WEB_EXTENSION_MORE_URL });
+    };
+
+    return (
+        // eslint-disable-next-line max-len
+        // eslint-disable-next-line jsx-a11y/no-static-element-interactions,jsx-a11y/anchor-is-valid,jsx-a11y/click-events-have-key-events
+        <a onClick={handleClick} className="link">
+            {text}
+        </a>
+    );
+};
 
 const CONTENT_MAP = {
     allowed: {
