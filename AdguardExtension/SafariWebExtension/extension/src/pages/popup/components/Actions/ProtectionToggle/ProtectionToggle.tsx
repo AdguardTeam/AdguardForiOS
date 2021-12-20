@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react';
 
@@ -39,15 +38,35 @@ export const ProtectionToggle = observer(() => {
                 <Icon color="yellow" iconId="info" />
             </Button>
         );
+    } else if (!store.safariProtectionEnabled) {
+        description = translator.getMessage('popup_action_safari_protection_description_disabled');
+        descriptionColor = 'yellow';
+        iconEnabled = false;
+
+        const handleEnableSafariProtection = async () => {
+            await store.enableSafariProtection();
+        };
+
+        button = (
+            <div className="actions__control">
+                <Switcher
+                    onChange={handleEnableSafariProtection}
+                    enabled={store.safariProtectionEnabled}
+                />
+            </div>
+        );
     } else {
         iconEnabled = store.protectionEnabled;
 
-        button = <div className="actions__control">
-            <Switcher onChange={toggleProtection} enabled={store.protectionEnabled} />
-        </div>
+        button = (
+            <div className="actions__control">
+                <Switcher onChange={toggleProtection} enabled={store.protectionEnabled} />
+            </div>
+        );
     }
 
     return (
+        // eslint-disable-next-line jsx-a11y/label-has-associated-control
         <label className="action-label">
             <Action
                 iconId="compass"

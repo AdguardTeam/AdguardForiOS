@@ -61,6 +61,11 @@ extension AppDelegate: IURLSchemeExecutor {
         return self.presentUserRulesRedirectController(for: action)
     }
 
+    func openMainPageControllerAndTurnOnProtection(for domain: String) -> Bool {
+        DDLogInfo("(AppDelegate) - openMainPageControllerAndTurnOnProtection for domain=\(domain) ")
+        return self.presentMainPageControllerAndTurnOnProtection(for: domain)
+    }
+
     func openPurchaseLicenseController() -> Bool {
         DDLogInfo("(AppDelegate) - open PurchaseLicenseController")
         return self.presentPurchaseLicenseController()

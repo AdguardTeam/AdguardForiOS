@@ -95,6 +95,7 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
             Message.advancedBlockingEnabled: resources.advancedProtection,
             Message.allowlistIsInverted: resources.invertedWhitelist,
             Message.platform: UIDevice.current.platformString,
+            Message.safariProtectionEnabled: resources.safariProtectionEnabled && resources.complexProtectionEnabled,
 
             Message.enableSiteProtectionLink: UserRulesRedirectAction.enableSiteProtection(domain: "", absoluteDomainString: "").scheme,
             Message.disableSiteProtectionLink: UserRulesRedirectAction.disableSiteProtection(domain: "", absoluteDomainString: "").scheme,
@@ -102,7 +103,8 @@ final class SafariWebExtensionMessageProcessor: SafariWebExtensionMessageProcess
             Message.removeAllBlocklistRulesLink: UserRulesRedirectAction.removeAllBlocklistRules(domain: "", absoluteDomainString: "").scheme,
             Message.upgradeAppLink: "\(Bundle.main.inAppScheme)://upgradeApp",
             Message.enableAdvancedBlockingLink: "\(Bundle.main.inAppScheme)://enableAdvancedProtection",
-            Message.reportProblemLink: constructReportLink(url ?? "unknown")
+            Message.reportProblemLink: constructReportLink(url ?? "unknown"),
+            Message.enableSafariProtectionLink: UserRulesRedirectAction.enableSiteAndSafariProtection(domain: "").scheme
         ]
     }
 

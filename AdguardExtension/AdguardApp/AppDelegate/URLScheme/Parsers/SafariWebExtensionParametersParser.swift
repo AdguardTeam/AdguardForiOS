@@ -36,6 +36,10 @@ struct SafariWebExtensionParametersParser: IURLSchemeParametersParser {
             return false
         }
 
+        if actionStr == "enableSiteAndSafariProtection" {
+            return executor.openMainPageControllerAndTurnOnProtection(for: decodedDomain)
+        }
+
         let result = Domain.findDomains(in: decodedDomain)
 
         if result.isEmpty {

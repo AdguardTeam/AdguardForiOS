@@ -141,6 +141,7 @@ const handleMessages = () => {
                     appearanceTheme,
                     contentBlockersEnabled,
                     advancedBlockingEnabled,
+                    safariProtectionEnabled,
                     allowlistInverted,
                     platform,
                 } = await adguard.nativeHost.getInitData(url);
@@ -154,6 +155,7 @@ const handleMessages = () => {
                     appearanceTheme,
                     contentBlockersEnabled,
                     advancedBlockingEnabled,
+                    safariProtectionEnabled,
                     allowlistInverted,
                     platform,
                 };
@@ -164,6 +166,10 @@ const handleMessages = () => {
                     return adguard.nativeHost.enableProtection(url);
                 }
                 return adguard.nativeHost.disableProtection(url);
+            }
+            case MessagesToBackgroundPage.EnableSafariProtection: {
+                const { url } = data;
+                return adguard.nativeHost.enableSafariProtection(url);
             }
             case MessagesToBackgroundPage.ReportProblem: {
                 const { url } = data;

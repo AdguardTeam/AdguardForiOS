@@ -47,6 +47,7 @@ describe('current site action', () => {
                 appearanceTheme: true,
                 contentBlockersEnabled: true,
                 advancedBlockingEnabled: true,
+                safariProtectionEnabled: true,
             });
         });
 
@@ -89,6 +90,7 @@ describe('current site action', () => {
                 appearanceTheme: true,
                 contentBlockersEnabled: true,
                 advancedBlockingEnabled: false,
+                safariProtectionEnabled: true,
             });
         });
 
@@ -132,6 +134,7 @@ describe('current site action', () => {
                 contentBlockersEnabled: true,
                 advancedBlockingEnabled: false,
                 allowlistInverted: true,
+                safariProtectionEnabled: true,
             });
 
             render(<Popup />);
@@ -151,6 +154,7 @@ describe('current site action', () => {
                 contentBlockersEnabled: true,
                 advancedBlockingEnabled: false,
                 allowlistInverted: true,
+                safariProtectionEnabled: true,
             });
 
             render(<Popup />);

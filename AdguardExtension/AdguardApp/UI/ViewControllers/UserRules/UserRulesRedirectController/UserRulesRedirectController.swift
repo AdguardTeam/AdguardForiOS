@@ -58,6 +58,8 @@ final class UserRulesRedirectController: BottomAlertController {
             AppDelegate.shared.presentUserRulesTableController(for: .blocklist)
         case .none:
             break
+        default:
+            break
         }
         dismiss(animated: true)
     }

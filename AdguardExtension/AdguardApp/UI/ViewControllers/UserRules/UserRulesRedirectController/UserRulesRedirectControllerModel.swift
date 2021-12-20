@@ -65,6 +65,8 @@ final class UserRulesRedirectControllerModel: UserRulesRedirectControllerModelPr
             try? safariProtection.add(rule: rule, for: .blocklist, override: true, onCbReloaded: nil)
         case .removeAllBlocklistRules(let domain, _):
             safariProtection.removeAllUserRulesAssociatedWith(domain: domain, onCbReloaded: nil)
+        default:
+            break
         }
     }
 }
@@ -78,6 +80,7 @@ fileprivate extension UserRulesRedirectAction {
         case .enableSiteProtection(_, let domain): return domain
         case .addToBlocklist(_, let domain): return domain
         case .removeAllBlocklistRules(_, let domain): return domain
+        default: return ""
         }
     }
 
@@ -97,6 +100,7 @@ fileprivate extension UserRulesRedirectAction {
             }
         case .addToBlocklist(_, _): return UIImage(named: "ad_blocking_feature_logo")
         case .removeAllBlocklistRules(_, _): return UIImage(named: "kill_switch")
+        default: return nil
         }
     }
 
@@ -118,6 +122,8 @@ fileprivate extension UserRulesRedirectAction {
             }
         case .addToBlocklist(_, _): format = String.localizedString("user_rules_blocklist_rule_added")
         case .removeAllBlocklistRules(_, _): format = String.localizedString("user_rules_blocklist_rules_removed")
+        default:
+            return ""
         }
         return String(format: format, color.hex())
     }

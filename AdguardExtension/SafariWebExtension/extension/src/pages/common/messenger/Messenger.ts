@@ -44,6 +44,13 @@ export class Messenger {
         );
     };
 
+    enableSafariProtection = (url: string) => {
+        return this.sendMessage(
+            MessagesToBackgroundPage.EnableSafariProtection,
+            { url },
+        );
+    };
+
     deleteUserRules = (url: string) => {
         return this.sendMessage(
             MessagesToBackgroundPage.DeleteUserRulesByUrl,

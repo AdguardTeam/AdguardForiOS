@@ -17,6 +17,7 @@
 //
 
 import UIKit
+import SharedAdGuardSDK
 import SafariAdGuardSDK
 import DnsAdGuardSDK
 
@@ -133,6 +134,8 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
 
     var importSettings: ImportSettings?
 
+    var domainToEnableProtectionFor: String?
+
     // MARK: - Variables
 
     private var iconButton: UIButton? = nil
@@ -222,6 +225,10 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
         processDnsServerChange()
         checkAdGuardVpnIsInstalled()
         observeContentBlockersState()
+
+        if let domain = domainToEnableProtectionFor, !domain.isEmpty {
+            processDomainAndEnableProtection(domain)
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -452,6 +459,26 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     }
 
     // MARK: - Private methods
+
+    private func processDomainAndEnableProtection(_ domain: String) {
+        if resources.invertedWhitelist {
+            let rule = UserRule(ruleText: domain, isEnabled: true)
+            try? safariProtection.add(rule: rule, for: .invertedAllowlist, override: true, onCbReloaded: nil)
+        } else {
+            try? safariProtection.removeRule(withText: domain, for: .allowlist, onCbReloaded: nil)
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            guard
+                let self = self,
+                !self.complexProtection.safariProtectionEnabled,
+                !self.safariProtectionButton.buttonIsOn
+            else {
+                return
+            }
+            self.changeSafariProtectionState(self.safariProtectionButton)
+        }
+    }
 
     /**
      Presents ChartDateTypeController
