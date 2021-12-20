@@ -37,6 +37,10 @@
         "message": "Удалить пользовательские правила для этого сайта",
         "description": "TEXT MAX LENGTH: 30"
     },
+    "popup_action_insufficient_permissions": {
+        "message": "Ограниченные права доступа",
+        "description": "TEXT MAX LENGTH: 30"
+    },
     "popup_action_current_site_desc_starting": {
         "message": "включаем защиту...",
         "description": "TEXT MAX LENGTH: 30"
@@ -69,6 +73,10 @@
         "message": "Выборочная защита",
         "description": "TEXT MAX LENGTH: 25"
     },
+    "popup_modal_not_all_sites_allowed_desc": {
+        "message": "AdGuard включен только на некоторых сайтах. Реклама может появляться на других сайтах, пока вы не дадите AdGuard разрешение блокировать её везде. <a>Узнать больше<\/a>",
+        "description": "TEXT MAX LENGTH: 140"
+    },
     "popup_modal_not_all_sites_allowed_button": {
         "message": "Понятно",
         "description": "TEXT MAX LENGTH: 20"
@@ -77,6 +85,10 @@
         "message": "Расширенная защита отключена",
         "description": "TEXT MAX LENGTH: 40"
     },
+    "popup_modal_advanced_blocking_disabled_description": {
+        "message": "Расширенные правила блокировки и другие функции недоступны. <a>Узнать больше<\/a>",
+        "description": "TEXT MAX LENGTH: 85"
+    },
     "popup_modal_advanced_blocking_disabled_button": {
         "message": "Включить",
         "description": "TEXT MAX LENGTH: 20"
@@ -84,6 +96,10 @@
     "popup_modal_title_free": {
         "message": "Используйте все возможности AdGuard",
         "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_modal_desc_free": {
+        "message": "В бесплатной версии отсутствует расширенная защита. Она поможет справиться с большим количеством рекламы и трекеров.",
+        "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_btn_free": {
         "message": "Улучшить",
@@ -111,6 +127,14 @@
     },
     "modal_protection_off_settings": {
         "message": "Откройте <b>Настройки<\/b>",
+        "description": "TEXT MAX LENGTH: 28"
+    },
+    "modal_protection_off_extensions": {
+        "message": "Нажмите <b>Safari<\/b>, проведите вниз и нажмите <b>«Расширения»<\/b>",
+        "description": "TEXT MAX LENGTH: 56"
+    },
+    "modal_protection_off_switch": {
+        "message": "<b>Включите<\/b> все блокировщики контента AdGuard",
         "description": "TEXT MAX LENGTH: 28"
     }
 }

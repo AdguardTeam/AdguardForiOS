@@ -21,8 +21,12 @@
         "message": "Schutz deaktiviert",
         "description": "TEXT MAX LENGTH: 30"
     },
+    "popup_action_current_site_status_desc_enabled": {
+        "message": "Schutz ist aktiviert",
+        "description": "TEXT MAX LENGTH: 30"
+    },
     "popup_action_current_site_status_desc_disabled": {
-        "message": "Schutz deaktiviert",
+        "message": "Schutz ist deaktiviert",
         "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_block_element": {

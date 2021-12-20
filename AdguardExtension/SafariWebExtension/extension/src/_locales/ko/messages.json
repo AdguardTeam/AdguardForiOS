@@ -9,8 +9,20 @@
         "message": "Safari 보호",
         "description": "TEXT MAX LENGTH: 25"
     },
+    "popup_action_safari_protection_description_enabled_for_site": {
+        "message": "이 웹 사이트에 대해 활성화됨",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_safari_protection_description_disabled_for_site": {
+        "message": "이 웹 사이트에 대해 비활성화됨",
+        "description": "TEXT MAX LENGTH: 30"
+    },
     "popup_action_safari_protection_description_disabled": {
         "message": "보호가 비활성화됨",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_status_desc_enabled": {
+        "message": "보호가 활성화됨",
         "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_status_desc_disabled": {
@@ -23,6 +35,10 @@
     },
     "popup_action_delete_user_rules": {
         "message": "이 웹 사이트에 대한 사용자 규칙 제거",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_insufficient_permissions": {
+        "message": "제한된 권한",
         "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_starting": {
@@ -57,6 +73,10 @@
         "message": "선택적 보호",
         "description": "TEXT MAX LENGTH: 25"
     },
+    "popup_modal_not_all_sites_allowed_desc": {
+        "message": "여러 사이트에서만 AdGuard가 동작하도록 설정되어 있습니다. AdGuard에 추가 권한을 부여하지 않는 이상 다른 사이트에서는 광고를 차단하지 않게 됩니다. <a>자세히 알아보기<\/a>",
+        "description": "TEXT MAX LENGTH: 140"
+    },
     "popup_modal_not_all_sites_allowed_button": {
         "message": "계속하기",
         "description": "TEXT MAX LENGTH: 20"
@@ -65,6 +85,10 @@
         "message": "고급 보호 꺼짐",
         "description": "TEXT MAX LENGTH: 40"
     },
+    "popup_modal_advanced_blocking_disabled_description": {
+        "message": "고급 차단 규칙 및 기타 고급 기능을 사용할 수 없습니다. <a>자세히 알아보기<\/a>",
+        "description": "TEXT MAX LENGTH: 85"
+    },
     "popup_modal_advanced_blocking_disabled_button": {
         "message": "활성화",
         "description": "TEXT MAX LENGTH: 20"
@@ -72,6 +96,10 @@
     "popup_modal_title_free": {
         "message": "보호 기능을 최대한 활용",
         "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_modal_desc_free": {
+        "message": "AdGuard 프리미엄 버전에서는 사용할 수 있는 고급 보호 기능을 놓치지 마세요. 더 복잡한 광고와 추적기를 차단합시다.",
+        "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_btn_free": {
         "message": "업그레이드",
@@ -99,6 +127,14 @@
     },
     "modal_protection_off_settings": {
         "message": "<b>설정<\/b>을 엽니다",
+        "description": "TEXT MAX LENGTH: 28"
+    },
+    "modal_protection_off_extensions": {
+        "message": "<b>Safari<\/b>를 탭하고 아래로 스와이프한 후 <b>확장 프로그램<\/b>을 누릅니다",
+        "description": "TEXT MAX LENGTH: 56"
+    },
+    "modal_protection_off_switch": {
+        "message": "모든 AdGuard 콘텐츠 차단기를 <b>활성화합니다<\/b>",
         "description": "TEXT MAX LENGTH: 28"
     }
 }
