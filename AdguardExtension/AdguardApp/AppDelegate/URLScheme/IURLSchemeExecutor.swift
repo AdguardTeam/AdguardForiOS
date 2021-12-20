@@ -26,6 +26,7 @@ protocol IURLSchemeExecutor {
     func openTunnelModeController(showLaunchScreen: Bool) -> Bool
     func login(withAccessToken: String?, state: String?) -> Bool
     func openUserRulesRedirectController(for action: UserRulesRedirectAction) -> Bool
+    func openMainPageControllerAndTurnOnProtection(for domain: String) -> Bool
     func openPurchaseLicenseController() -> Bool
     func openAdvancedProtectionController(enableAdvancedProtection: Bool?) -> Bool
 }

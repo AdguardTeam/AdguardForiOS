@@ -44,6 +44,10 @@ class URLSchemeExecutorMock: IURLSchemeExecutor {
         true
     }
 
+    func openMainPageControllerAndTurnOnProtection(for domain: String) -> Bool {
+        return true
+    }
+
     func openPurchaseLicenseController() -> Bool {
         true
     }
