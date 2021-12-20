@@ -922,7 +922,7 @@
 "user_rules_processing_title" = "Processing...";
 
 /* (UserRulesRedirectController) - Processing state description */
-"user_rules_processing_descr" = "Please, wait a second...";
+"user_rules_processing_descr" = "Please wait a second...";
 
 /* (UserRulesRedirectController) - Description when allowlist rule is removed; %@ stands for 'allowlist' word hex color */
 "user_rules_allowlist_rule_removed" = "was removed from <u style=color:%@>allowlist</u>";

@@ -4,8 +4,8 @@
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "884-Hm-mb6"; */
 "884-Hm-mb6.text" = "Safari protection";
 
-/* Class = "UILabel"; text = "A set of advanced ad-blocking tools for better filtering"; ObjectID = "9wg-p1-Dh8"; */
-"9wg-p1-Dh8.text" = "A set of advanced ad-blocking tools for better filtering";
+/* Class = "UILabel"; text = "Enhanced functionality for ultimate ad blocking and content filtering"; ObjectID = "9wg-p1-Dh8"; */
+"9wg-p1-Dh8.text" = "Enhanced functionality for ultimate ad blocking and content filtering";
 
 /* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "AZY-QZ-8d9"; */
 "AZY-QZ-8d9.text" = "YouTube ad blocking";
@@ -25,8 +25,8 @@
 /* Class = "UILabel"; text = "This Safari extension removes ads and ad leftovers, and revives the Autoplay feature on YouTube"; ObjectID = "Sry-3f-FQj"; */
 "Sry-3f-FQj.text" = "This Safari extension removes ads and ad leftovers, and revives the Autoplay feature on YouTube";
 
-/* Class = "UILabel"; text = "Blocks stubborn ads, including YouTube ads in Safari"; ObjectID = "WOG-Hk-11z"; */
-"WOG-Hk-11z.text" = "Blocks stubborn ads, including YouTube ads in Safari";
+/* Class = "UILabel"; text = "Uses enhanced functionality for ultimate ad blocking and content filtering"; ObjectID = "WOG-Hk-11z"; */
+"WOG-Hk-11z.text" = "Uses enhanced functionality for ultimate ad blocking and content filtering";
 
 /* Class = "UILabel"; text = "Block YouTube Ads (by AdGuard)"; ObjectID = "XXP-EO-M4h"; */
 "XXP-EO-M4h.text" = "Block YouTube Ads (by AdGuard)";
@@ -37,8 +37,8 @@
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "cnF-td-Ba1"; */
 "cnF-td-Ba1.text" = "DNS protection";
 
-/* Class = "UILabel"; text = "Requires access to web pages contents and uses them only for ad blocking"; ObjectID = "i0Z-fi-Rc0"; */
-"i0Z-fi-Rc0.text" = "Requires access to web pages contents and uses them only for ad blocking";
+/* Class = "UILabel"; text = "Requires access to web pages' contents but uses it only for ad blocking"; ObjectID = "i0Z-fi-Rc0"; */
+"i0Z-fi-Rc0.text" = "Requires access to web pages' contents but uses it only for ad blocking";
 
 /* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "kDM-2d-bRK"; */
 "kDM-2d-bRK.text" = "YouTube ad blocking";
@@ -58,8 +58,8 @@
 /* Class = "UILabel"; text = "Works alongside the AdGuard ad blocker"; ObjectID = "tKQ-Yn-fgL"; */
 "tKQ-Yn-fgL.text" = "Works alongside the AdGuard ad blocker";
 
-/* Class = "UILabel"; text = "This module allows you to use a custom DNS server and enhances your privacy by encrypting your DNS queries"; ObjectID = "teo-vm-NRJ"; */
-"teo-vm-NRJ.text" = "This module allows you to use a custom DNS server and enhances your privacy by encrypting your DNS queries";
+/* Class = "UILabel"; text = "Allows you to use custom DNS servers and enhances your privacy by encrypting your DNS queries"; ObjectID = "teo-vm-NRJ"; */
+"teo-vm-NRJ.text" = "Allows you to use custom DNS servers and enhances your privacy by encrypting your DNS queries";
 
 /* Class = "UILabel"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
 "vNo-hV-l4c.text" = "Not installed";
