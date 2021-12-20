@@ -149,12 +149,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Background fetch consists of 3 steps, so if the update process didn't fully finish in the background than we should continue it here
 
-        safariProtection.finishBackgroundUpdate { error in
-            if let error = error {
-                DDLogError("(AppDelegate) - didFinishLaunchingWithOptions; Finished background update with error: \(error)")
-                return
+        if UIApplication.shared.applicationState != .background {
+            safariProtection.finishBackgroundUpdate { error in
+                if let error = error {
+                    DDLogError("(AppDelegate) - didFinishLaunchingWithOptions; Finished background update with error: \(error)")
+                    return
+                }
+                DDLogInfo("(AppDelegate) - didFinishLaunchingWithOptions; Finish background update successfully")
             }
-            DDLogInfo("(AppDelegate) - didFinishLaunchingWithOptions; Finish background update successfully")
         }
 
         return true
@@ -232,12 +234,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let error = result.error {
                 DDLogError("(AppDelegate) - backgroundFetch; Received error from SDK: \(error)")
                 completionHandler(result.backgroundFetchResult)
+                return
             }
-            // If there was a fase with donwloading filters, than we need to restart tunnel to apply newest ones
-            else if result.oldBackgroundFetchState == .updateFinished || result.oldBackgroundFetchState == .loadAndSaveFilters {
+            // If there was a false with downloading filters, than we need to restart tunnel to apply newest ones
+            if result.oldBackgroundFetchState == .updateFinished || result.oldBackgroundFetchState == .loadAndSaveFilters {
                 self?.dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsFilters) { _ in
+                    DDLogInfo("(AppDelegate) - backgroundFetch; Background fetch ended call performFetchWithCompletionHandler after updating dns preferences")
                     completionHandler(result.backgroundFetchResult)
                 }
+            } else {
+                DDLogInfo("(AppDelegate) - backgroundFetch; Background fetch ended call performFetchWithCompletionHandler")
+                completionHandler(result.backgroundFetchResult)
             }
         }
     }
