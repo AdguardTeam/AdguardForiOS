@@ -92,11 +92,15 @@ class DnsMigration4_3: DnsMigration4_3Protocol {
             let group = DispatchGroup()
             group.enter()
             stateManager.onMigrationFinished {
+                Logger.logInfo("(DnsMigration4_3) migration finished")
                 group.leave()
             }
-            group.wait()
 
-            Logger.logInfo("(DnsMigration4_3) the wait is over")
+            // The timeout is a crutch because code for IPC is rather bad
+            // TODO: - Refactor it later
+            let waitResult = group.wait(timeout: .now() + 12.0)
+
+            Logger.logInfo("(DnsMigration4_3) the wait is over; waitResult successeeded=\(waitResult == .success)")
             return
         }
     }

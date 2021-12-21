@@ -132,13 +132,14 @@ class TunnelProvider: PacketTunnelProvider {
     }
 
     private static func migrateIfNeeded(resources: AESharedResourcesProtocol, configuration: DnsConfigurationProtocol, networkUtils: NetworkUtilsProtocol) {
-
+        DDLogInfo("(TunnelProvider) - migrateIfNeeded; Starting migration in tunnel")
         let migrationVersionProvider = MigrationServiceVersionProvider(resources: resources)
         if migrationVersionProvider.isMigrationFrom4_1To4_3Needed {
             do {
                 let dnsProvidersManager = try DnsProvidersManager(configuration: configuration, userDefaults: resources.sharedDefaults(), networkUtils: networkUtils)
                 let migration = try DnsMigration4_3(resources: resources, dnsProvidersManager: dnsProvidersManager)
                 migration.migrate()
+                DDLogInfo("(TunnelProvider) - migrateIfNeeded; Migration in tunnel finished")
             }
             catch {
                 DDLogError("(TunnelProvider) migration failed: \(error)")
