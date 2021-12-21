@@ -921,9 +921,6 @@
 
 "user_rules_processing_title" = "Zpracovávám...";
 
-/* (UserRulesRedirectController) - Processing state description */
-"user_rules_processing_descr" = "Chvilku strpení...";
-
 /* (UserRulesRedirectController) - Description when allowlist rule is removed; %@ stands for 'allowlist' word hex color */
 "user_rules_allowlist_rule_removed" = "bylo odstraněno ze <u style=color:%@>seznamu povolených</u>";
 

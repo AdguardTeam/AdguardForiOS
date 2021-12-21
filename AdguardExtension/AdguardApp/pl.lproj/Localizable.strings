@@ -374,10 +374,10 @@
 "filter_rules_maximum" = "Przekroczono maksymalną liczbę reguł filtrowania.";
 
 /* (FiltersController) Enabled state in groups section */
-"on_state" = "Włączony";
+"on_state" = "Włączone";
 
 /* (FiltersController) Disabled state in groups section */
-"off_state" = "Wyłączona";
+"off_state" = "Wyłączone";
 
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "Strona domowa: ";
@@ -718,6 +718,9 @@
 /* (OnboardingController) third step with advanced protection text */
 "advanced_protection_onboarding_third_step_text" = "Ustaw wszystkie przełączniki AdGuard na <b>włączone</b>. Jesteś gotowy!";
 
+/* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
+"onboarding_fours_step_text" = "Aby uzyskać <b>Zaawansowaną</b> ochronę, otwórz Safari, dotknij ikony <b>aA</b> po lewej stronie pola adresu URL,<br><br> %@ <br><br>a następnie dotknij <b>Zarządzaj rozszerzeniami</b> i włącz przełącznik <b>AdGuard</b>.";
+
 /* (BlockRequestController) Block request title */
 "block_request" = "Zablokuj żądanie";
 
@@ -944,6 +947,18 @@
 /* (PremiumFeature) - Custom filters premium feature name */
 "custom_filters_feature_name" = "Niestandardowe filtry";
 
+/* (PremiumFeature) - Advanced protection premium feature description */
+"advanced_protection_feature_description" = "Ulepszone metody blokowania złożonych reklam, takich jak reklamy YouTube w Safari";
+
+/* (PremiumFeature) - Security filters premium feature description */
+"security_filters_feature_description" = "Blokuj phishing, złośliwe oprogramowanie i podejrzaną zawartość";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "Szyfruj żądania DNS lokalnie i kontroluj swoją prywatność";
+
+/* (PremiumFeature) - Custom filters premium feature description */
+"custom_filters_feature_description" = "Użyj filtrów innych firm lub utwórz własne";
+
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
 /* (MainTabBarController) Main page tab for VoiceOver*/
@@ -1106,6 +1121,11 @@
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
 "youtube_script_error_title" = "Wystąpił nieznany błąd podczas usuwania reklam na YouTube";
+
+// MARK: - ActionExtensionMainController
+/* (ActionExtensionMainController) - ActionExtension info for iOS 15>= */
+
+"action_extension_obsolete_info" = "To rozszerzenie akcji jest nieaktualne, ale nowe rozszerzenie AdGuard Web Safari jest dostępne w menu aA. Aby rozpocząć korzystanie z nowego rozszerzenia, otwórz menu aA, dotknij Zarządzaj rozszerzeniami i włącz przełącznik AdGuard.";
 
 /* (ActionExtensionMainController) - ActionExtension info for iOS 14<= */
 "action_extension_new_version_info" = "Nowa wersja tego rozszerzenia jest dostępna dla iOS 15. Ma więcej możliwości i ulepszony interfejs użytkownika. Pamiętaj o aktualizacji!";

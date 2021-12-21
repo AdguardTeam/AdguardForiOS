@@ -4,11 +4,17 @@
 /* Class = "UILabel"; text = "Terms and Conditions"; ObjectID = "E6C-TE-ZI6"; */
 "E6C-TE-ZI6.text" = "條款和條件";
 
+/* Class = "UILabel"; text = "Enable AdGuard for Safari"; ObjectID = "F7O-MB-LHu"; */
+"F7O-MB-LHu.text" = "對 Safari 啟用 AdGuard";
+
 /* Class = "UILabel"; text = "Block Trackers"; ObjectID = "FDG-As-HDY"; */
 "FDG-As-HDY.text" = "封鎖追蹤器";
 
 /* Class = "UIButton"; normalTitle = "Video guide"; ObjectID = "GOu-4j-RcN"; */
 "GOu-4j-RcN.normalTitle" = "視訊導覽";
+
+/* Class = "UILabel"; text = "Stop thousands of corporations from tracking your every move. Regain control of your online privacy."; ObjectID = "Mzf-WJ-CpC"; Note = "String must be less or equal 4 lines"; */
+"Mzf-WJ-CpC.text" = "防止數千上萬家公司追蹤使用者的所有動作。奪回自己隱私保護的限制權。";
 
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "cMV-qC-ZdE"; */
 "cMV-qC-ZdE.normalTitle" = "繼續";
@@ -21,3 +27,9 @@
 
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "q8l-xM-B5q"; */
 "q8l-xM-B5q.normalTitle" = "繼續";
+
+/* Class = "UILabel"; text = "AdGuard blocks ads in Safari on most websites. Enjoy faster web surfing without ads!"; ObjectID = "r3n-Il-Qe8"; Note = "String must be less or equal 4 lines"; */
+"r3n-Il-Qe8.text" = "AdGuard 在 Safari 裡的網站上封鎖幾乎所有廣告。享受無廣告的極速瀏覽體驗！";
+
+/* Class = "UILabel"; text = "Use our collection of flexible filters to remove any type of content. Tune the filtering to your liking and surf the web your way."; ObjectID = "thP-lV-BhN"; Note = "String must be less or equal 4 lines"; */
+"thP-lV-BhN.text" = "使用我們靈活的過濾器移除任何內容。按自己的喜好調整過濾流程，享受網頁瀏覽。";

@@ -377,7 +377,7 @@
 "on_state" = "Aktiveret";
 
 /* (FiltersController) Disabled state in groups section */
-"off_state" = "Deaktiveret";
+"off_state" = "Dektiveret";
 
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "Hjemmeside:";
@@ -704,7 +704,7 @@
 "onboarding_first_step_text" = "Åbn <b>Indstillingerne</b>.";
 
 /* (OnboardingController) first step with advanced protection text*/
-"advanced_protection_onboarding_first_step_text" = "Åbn <b>Indstillingerne</b>.";
+"advanced_protection_onboarding_first_step_text" = "Åbn <b>Indstillinger</b>.";
 
 /* (OnboardingController) second step text */
 "onboarding_second_step_text" = "Tryk på <b>Safari</b>, stryg nedad og tryk på <b>Indholdsblockere</b>.";
@@ -717,6 +717,9 @@
 
 /* (OnboardingController) third step with advanced protection text */
 "advanced_protection_onboarding_third_step_text" = "Sæt alle AdGuard-omskiftere på <b>Til</b>. Alt er nu klar!";
+
+/* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
+"onboarding_fours_step_text" = "For <b>Avanceret</b> beskyttelse, så åbn Safari, tryk på ikonet <b>aA</b> i venstre side af URL-feltet,<br><br> %@ <br><br>, tryk derefter på Håndtér udvidelser og slå <b>AdGuard</b>-omskifteren til.";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "Blokér forespørgsel";
@@ -944,6 +947,18 @@
 /* (PremiumFeature) - Custom filters premium feature name */
 "custom_filters_feature_name" = "Tilpassede filtre";
 
+/* (PremiumFeature) - Advanced protection premium feature description */
+"advanced_protection_feature_description" = "Forbedrede metoder til kompleks adblocking, såsom YouTube-annoncer i Safari";
+
+/* (PremiumFeature) - Security filters premium feature description */
+"security_filters_feature_description" = "Blokér phishing, malware og mistænkeligt indhold";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "Kryptér DNS-forespørgsler lokalt og styr fortroligheden";
+
+/* (PremiumFeature) - Custom filters premium feature description */
+"custom_filters_feature_description" = "Benyt tredjepartsfiltre eller opret selv nogle";
+
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
 /* (MainTabBarController) Main page tab for VoiceOver*/
@@ -1106,6 +1121,11 @@
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
 "youtube_script_error_title" = "Unkendt fejl opstod under fjernelse af YouTube-annoncer";
+
+// MARK: - ActionExtensionMainController
+/* (ActionExtensionMainController) - ActionExtension info for iOS 15>= */
+
+"action_extension_obsolete_info" = "Denne handlingsudvidelse er forældet, men den nye AdGuard Web Safari-udvidelse er tilgængelig i aA-menuen. For at begynde at bruge den nye udvidelse, så åbn aA-menuen, tryk på Håndtér udvidelser og slå AdGuard-omskifteren til.";
 
 /* (ActionExtensionMainController) - ActionExtension info for iOS 14<= */
 "action_extension_new_version_info" = "En ny version af denne udvidelse er tilgængelig til iOS 15. Den har flere muligheder og en forbedret brugerflade. Husk at opdatere!";

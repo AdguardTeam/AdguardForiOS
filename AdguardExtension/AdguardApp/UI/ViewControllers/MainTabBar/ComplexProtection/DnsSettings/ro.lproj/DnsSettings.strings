@@ -31,6 +31,9 @@
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "QYv-iX-uIo"; */
 "QYv-iX-uIo.text" = "Protecție DNS";
 
+/* Class = "UIButton"; normalTitle = "Try for free"; ObjectID = "Uem-fP-tai"; */
+"Uem-fP-tai.normalTitle" = "Test gratuit";
+
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
 "Wml-J6-ced.text" = "Listă autorizări";
 

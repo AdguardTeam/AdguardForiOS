@@ -23,7 +23,7 @@
 "F6u-LX-1dd.text" = "Поділитись";
 
 /* Class = "UILabel"; text = "Leave feedback"; ObjectID = "GA6-E3-BcJ"; Note = "(Main Menu) Advanced Settings caption"; */
-"GA6-E3-BcJ.text" = "Поділитись";
+"GA6-E3-BcJ.text" = "Залишити відгук";
 
 /* Class = "UILabel"; text = "General"; ObjectID = "L2l-pO-K3q"; Note = "(Main Menu) Advanced Settings caption"; */
 "L2l-pO-K3q.text" = "Загальні";
@@ -67,17 +67,26 @@
 /* Class = "UILabel"; text = "How to block ads with AdGuard"; ObjectID = "iwI-Gm-rAp"; */
 "iwI-Gm-rAp.text" = "Як блокувати рекламу з AdGuard";
 
+/* Class = "UILabel"; text = "Report a bug or submit a feature request"; ObjectID = "ow5-MW-Ued"; */
+"ow5-MW-Ued.text" = "Повідомте про помилку або запропонуйте нову функцію";
+
+/* Class = "UILabel"; text = "If you've run into a problem or have a suggestion on how to improve AdGuard, tell us about it"; ObjectID = "pJU-2c-JHy"; */
+"pJU-2c-JHy.text" = "Якщо трапилась помилка або ви маєте пропозицію, як покращити AdGuard, розкажіть нам про це";
+
 /* Class = "UILabel"; text = "Report incorrect blocking"; ObjectID = "q9f-Zw-7sc"; Note = "(Main Menu) Advanced Settings caption"; */
 "q9f-Zw-7sc.text" = "Повідомити про неправильне блокування";
 
 /* Class = "UILabel"; text = "You can export logs and send them to us in a convenient way for you"; ObjectID = "qDy-4e-MsZ"; */
 "qDy-4e-MsZ.text" = "Ви можете експортувати журнал і надіслати його нам зручним способом";
 
+/* Class = "UILabel"; text = "Your email address:"; ObjectID = "rHj-Ne-4zA"; */
+"rHj-Ne-4zA.text" = "Ваша електронна адреса:";
+
 /* Class = "UILabel"; text = "Discuss"; ObjectID = "rlh-5H-fPk"; Note = "(Main Menu) Advanced Settings caption"; */
 "rlh-5H-fPk.text" = "Обговорення";
 
 /* Class = "UILabel"; text = "Subscriptions and account"; ObjectID = "se6-jk-4Az"; */
-"se6-jk-4Az.text" = "Обліковий запис і передплата";
+"se6-jk-4Az.text" = "Обліковий запис та підписки";
 
 /* Class = "UILabel"; text = "Message"; ObjectID = "srJ-sd-sZF"; */
 "srJ-sd-sZF.text" = "Повідомлення";

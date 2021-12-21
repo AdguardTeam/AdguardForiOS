@@ -718,6 +718,9 @@
 /* (OnboardingController) third step with advanced protection text */
 "advanced_protection_onboarding_third_step_text" = "Defina todos os interruptores do AdGuard para <b>ativado</b>. Você está pronto para ir!";
 
+/* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
+"onboarding_fours_step_text" = "Para proteção <b>Avançada</b>, abra o Safari, toque no ícone <b>aA</b> no lado esquerdo do campo URL, <br><br> %@ <br><br>e toque em <b>Gerenciar extensões</b> e e ative o botão de alternância <b>AdGuard</b>.";
+
 /* (BlockRequestController) Block request title */
 "block_request" = "Bloquear solicitação";
 
@@ -918,6 +921,9 @@
 
 "user_rules_processing_title" = "Processando...";
 
+/* (UserRulesRedirectController) - Processing state description */
+"user_rules_processing_descr" = "Por favor, espere um segundo...";
+
 /* (UserRulesRedirectController) - Description when allowlist rule is removed; %@ stands for 'allowlist' word hex color */
 "user_rules_allowlist_rule_removed" = "foi removido da <u style=color:%@>lista de permissões</u>";
 
@@ -943,6 +949,18 @@
 
 /* (PremiumFeature) - Custom filters premium feature name */
 "custom_filters_feature_name" = "Filtros personalizados";
+
+/* (PremiumFeature) - Advanced protection premium feature description */
+"advanced_protection_feature_description" = "Métodos aprimorados para bloquear anúncios complexos, como anúncios do YouTube no Safari";
+
+/* (PremiumFeature) - Security filters premium feature description */
+"security_filters_feature_description" = "Bloqueie phishing, malware e conteúdo suspeito";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "Criptografe as solicitações de DNS localmente e controle sua privacidade";
+
+/* (PremiumFeature) - Custom filters premium feature description */
+"custom_filters_feature_description" = "Use filtros de terceiros ou crie o seu próprio";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -1087,6 +1105,12 @@
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
 "block_youtube_ads_instructions" = "Você sabia que o YouTube mudou seus algoritmos para mostrar a você mais anúncios?<br><br>Agora, para bloqueá-los, você precisa:<br><br>1. Abra o <a href=\"%@\">youtube.com</a> no Safari.<br><br>2. Toque em %@ no botão de Compartilhar.<br><br>3. Toque em \"Bloquear anúncios no YouTube (por AdGuard)\".";
 
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "Feito! Agora você pode assistir o YouTube sem anúncios.\n\nQuando a extensão está ativada, uma legenda “com AdGuard” é exibida ao lado do logotipo do YouTube.<br><br><b>Se você recarregar a página, terá que refazer as etapas 3 e 4.</b>";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "Feito! Agora você pode assistir o YouTube sem anúncios.\n\nQuando a extensão está ativada, uma legenda “com AdGuard” é exibida ao lado do logotipo do YouTube.<br><br><b>Se você recarregar a página, terá que refazer as etapas 2 e 3.</b>";
+
 // MARK: - YouTubeAdsRequestHandler
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
 
@@ -1100,6 +1124,11 @@
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
 "youtube_script_error_title" = "Ocorreu um erro desconhecido ao remover anúncios do YouTube";
+
+// MARK: - ActionExtensionMainController
+/* (ActionExtensionMainController) - ActionExtension info for iOS 15>= */
+
+"action_extension_obsolete_info" = "Esta extensão de ação está desatualizada, mas a nova extensão AdGuard para Safari Web está disponível no menu aA. Para começar a usar a nova extensão, abra o menu aA, toque em Gerenciar extensões e ative o botão de alternância do AdGuard.";
 
 /* (ActionExtensionMainController) - ActionExtension info for iOS 14<= */
 "action_extension_new_version_info" = "Uma nova versão desta extensão está disponível para o iOS 15. Tem mais recursos e uma interface de usuário aprimorada. Lembre-se de atualizar!";

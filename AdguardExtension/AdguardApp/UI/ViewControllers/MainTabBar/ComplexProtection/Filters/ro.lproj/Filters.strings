@@ -10,6 +10,9 @@
 /* Class = "UITextField"; placeholder = "https://example.com"; ObjectID = "Fwl-LI-5Fu"; Note = "(Add Custom Filter) url hint"; */
 "Fwl-LI-5Fu.placeholder" = "https://exemplu.com";
 
+/* Class = "UILabel"; text = "AdGuard is disabled for the websites from this list"; ObjectID = "Gg8-4u-qvU"; */
+"Gg8-4u-qvU.text" = "AdGuard este dezactivat pentru site-urile din această listă";
+
 /* Class = "UILabel"; text = "Filters"; ObjectID = "Lq2-mi-McV"; */
 "Lq2-mi-McV.text" = "Filtre";
 
@@ -17,7 +20,7 @@
 "NsT-wt-1hd.text" = "Filtru adaptat nou";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "OpB-AR-Og7"; Note = "(AddCustomFilterController) cancel button"; */
-"OpB-AR-Og7.normalTitle" = "Anulați";
+"OpB-AR-Og7.normalTitle" = "Anulare";
 
 /* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "QHZ-sJ-wTL"; */
 "QHZ-sJ-wTL.text" = "Blochează anunțuri și trackere pe site-urile deschise în Safari";
@@ -34,8 +37,11 @@
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "f3z-Yh-zY2"; */
 "f3z-Yh-zY2.text" = "Listă autorizări";
 
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "kCb-lJ-BLL"; */
+"kCb-lJ-BLL.normalTitle" = "Adaugă";
+
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "mEm-ll-QZR"; Note = "(NewCustomFilterDetailsController) CANCEL button"; */
-"mEm-ll-QZR.normalTitle" = "Anulați";
+"mEm-ll-QZR.normalTitle" = "Anulare";
 
 /* Class = "UIButton"; normalTitle = "Next"; ObjectID = "nch-wu-mKC"; */
 "nch-wu-mKC.normalTitle" = "Următor";

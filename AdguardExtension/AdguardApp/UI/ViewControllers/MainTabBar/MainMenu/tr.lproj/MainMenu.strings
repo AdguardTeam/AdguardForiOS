@@ -67,6 +67,9 @@
 /* Class = "UILabel"; text = "How to block ads with AdGuard"; ObjectID = "iwI-Gm-rAp"; */
 "iwI-Gm-rAp.text" = "AdGuard ile reklamlar nasıl engellenir";
 
+/* Class = "UILabel"; text = "Report a bug or submit a feature request"; ObjectID = "ow5-MW-Ued"; */
+"ow5-MW-Ued.text" = "Bir hatayı bildirin veya bir özellik isteği gönderin";
+
 /* Class = "UILabel"; text = "If you've run into a problem or have a suggestion on how to improve AdGuard, tell us about it"; ObjectID = "pJU-2c-JHy"; */
 "pJU-2c-JHy.text" = "Bir sorunla karşılaşırsanız veya AdGuard'ı nasıl iyileştireceğinize dair bir öneriniz varsa, bize bildirin";
 

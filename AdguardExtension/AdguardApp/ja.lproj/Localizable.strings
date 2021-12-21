@@ -719,7 +719,7 @@
 "advanced_protection_onboarding_third_step_text" = "AdGuardスイッチをすべて<b>オン</b>にします。完了です！";
 
 /* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
-"onboarding_fours_step_text" = "<b>高度な保護機能</b>を有効にするには、<br>①Safariを開く→URL欄左側の「<b>ぁあ</b>」アイコンをタップ<br><br> %@ <br><br>②「機能拡張を管理」をタップ→「<b>AdGuard</b>」スイッチをオンにしてください。";
+"onboarding_fours_step_text" = "<b>高度な保護機能</b>を有効にするには、<br>①Safariを開く→URL欄左側の「<b>ぁあ</b>」アイコンをタップ<br><br> %@ <br><br>②「<b>機能拡張を管理</b>」をタップ→「<b>AdGuard</b>」スイッチをオンにしてください。";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "リクエストをブロック";

@@ -1,12 +1,23 @@
+/* Class = "UILabel"; text = "AdGuard uses iOS 15 Safari Extensions to remove ads more effectively. Now it takes just one tap to block YouTube ads in Safari."; ObjectID = "0IU-PO-Xeh"; */
+"0IU-PO-Xeh.text" = "AdGuard folosește extensiile iOS 15 Safari pentru a elimina mai eficient reclamele. Acum este nevoie de o singură atingere pentru a bloca reclamele YouTube în Safari.";
+
+/* Class = "UILabel"; text = "Get stronger with Premium!"; ObjectID = "3qN-uj-pOb"; */
+"3qN-uj-pOb.text" = "Fiți mai puternic cu Premium!";
 
 /* Class = "UIButton"; normalTitle = "Fix it"; ObjectID = "46F-Jh-wHm"; */
 "46F-Jh-wHm.normalTitle" = "Corectați";
+
+/* Class = "UIButton"; normalTitle = "Try for free"; ObjectID = "4Ft-5h-4Jd"; */
+"4Ft-5h-4Jd.normalTitle" = "Test gratuit";
 
 /* Class = "UILabel"; text = "Period"; ObjectID = "5pX-mg-2fq"; */
 "5pX-mg-2fq.text" = "Perioadă";
 
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "7SB-2j-FAc"; */
-"7SB-2j-FAc.normalTitle" = "Continuă";
+"7SB-2j-FAc.normalTitle" = "Continuați";
+
+/* Class = "UILabel"; text = "Using native DNS"; ObjectID = "8Z0-0U-Hfk"; */
+"8Z0-0U-Hfk.text" = "DNS nativ în uz";
 
 /* Class = "UILabel"; text = "requests"; ObjectID = "Btd-nN-zLO"; */
 "Btd-nN-zLO.text" = "solicitări";
@@ -24,7 +35,10 @@
 "a5U-A8-S8G.text" = "criptate";
 
 /* Class = "UILabel"; text = "Some Safari content blockers are disabled"; ObjectID = "cvv-CS-LMQ"; */
-"cvv-CS-LMQ.text" = "Unii blocanți de conținut Safari sunt dezactivați";
+"cvv-CS-LMQ.text" = "Unele blocante de conținut Safari sunt dezactivate";
+
+/* Class = "UILabel"; text = "New AdGuard features in iOS 15"; ObjectID = "gDV-cq-ZDm"; */
+"gDV-cq-ZDm.text" = "Noi funcții AdGuard în iOS 15";
 
 /* Class = "UIButton"; normalTitle = "Fix it"; ObjectID = "oe6-9O-dBB"; */
 "oe6-9O-dBB.normalTitle" = "Corectați";

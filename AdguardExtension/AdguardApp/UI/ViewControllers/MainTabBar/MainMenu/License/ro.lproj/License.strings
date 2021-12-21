@@ -1,6 +1,9 @@
 /* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
 "53G-qY-SZ5.text" = "Codul din aplicația de autentificare:";
 
+/* Class = "UILabel"; text = "Log in"; ObjectID = "J8s-sG-FKu"; */
+"J8s-sG-FKu.text" = "Conectare";
+
 /* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
 "LJj-cc-Ko5.text" = "E-mail:";
 
@@ -10,5 +13,11 @@
 /* Class = "UILabel"; text = "Log in with your AdGuard account or with social networks"; ObjectID = "ZuM-Nn-uXv"; */
 "ZuM-Nn-uXv.text" = "Conectați-vă cu contul dvs. AdGuard sau cu rețelele sociale";
 
+/* Class = "UIButton"; normalTitle = "Log in"; ObjectID = "bUa-fF-AXO"; */
+"bUa-fF-AXO.normalTitle" = "Conectare";
+
 /* Class = "UILabel"; text = "Sign in"; ObjectID = "fxK-6y-LB6"; */
 "fxK-6y-LB6.text" = "Conectare";
+
+/* Class = "UIButton"; normalTitle = "Confirm"; ObjectID = "rrj-Gm-LCJ"; */
+"rrj-Gm-LCJ.normalTitle" = "Confirmați";

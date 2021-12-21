@@ -19,9 +19,6 @@
 /* Class = "UIButton"; normalTitle = "Purchase license"; ObjectID = "pv0-hE-9gb"; */
 "pv0-hE-9gb.normalTitle" = "Купіць ліцэнзію";
 
-/* Class = "UILabel"; text = "This module allows you to use a custom DNS server and enhances your privacy by encrypting your DNS queries"; ObjectID = "teo-vm-NRJ"; */
-"teo-vm-NRJ.text" = "Гэты модуль дазваляе вам выкарыстоўваць уласны DNS-сервер і павялічвае вашу прыватнасць шляхам шыфравання вашых DNS-запытаў";
-
 /* Class = "UILabel"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
 "vNo-hV-l4c.text" = "Не ўсталяваны";
 
