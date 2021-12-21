@@ -4,6 +4,9 @@
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "884-Hm-mb6"; */
 "884-Hm-mb6.text" = "Bảo vệ Safari";
 
+/* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "AZY-QZ-8d9"; */
+"AZY-QZ-8d9.text" = "Chặn quảng cáo trên YouTube";
+
 /* Class = "UILabel"; text = "AdGuard VPN"; ObjectID = "Hnw-bh-Bgh"; */
 "Hnw-bh-Bgh.text" = "AdGuard VPN";
 

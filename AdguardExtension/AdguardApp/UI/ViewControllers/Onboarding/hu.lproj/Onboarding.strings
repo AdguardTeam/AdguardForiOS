@@ -1,4 +1,7 @@
 
+/* Class = "UILabel"; text = "Terms and Conditions"; ObjectID = "E6C-TE-ZI6"; */
+"E6C-TE-ZI6.text" = "Felhasználási feltételek";
+
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "cMV-qC-ZdE"; */
 "cMV-qC-ZdE.normalTitle" = "Folytatás";
 

@@ -1,11 +1,20 @@
 /* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
 "53G-qY-SZ5.text" = "Kód a hitelesítő alkalmazásból:";
 
+/* Class = "UILabel"; text = "Log in"; ObjectID = "J8s-sG-FKu"; */
+"J8s-sG-FKu.text" = "Belépés";
+
 /* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
 "LJj-cc-Ko5.text" = "Email:";
 
 /* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
 "P6N-OK-fHG.text" = "Jelszó:";
 
+/* Class = "UIButton"; normalTitle = "Log in"; ObjectID = "bUa-fF-AXO"; */
+"bUa-fF-AXO.normalTitle" = "Belépés";
+
 /* Class = "UILabel"; text = "Sign in"; ObjectID = "fxK-6y-LB6"; */
 "fxK-6y-LB6.text" = "Bejelentkezés";
+
+/* Class = "UIButton"; normalTitle = "Confirm"; ObjectID = "rrj-Gm-LCJ"; */
+"rrj-Gm-LCJ.normalTitle" = "Megerősítés";

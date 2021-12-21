@@ -1,6 +1,14 @@
+/* Class = "UILabel"; text = "AdGuard uses iOS 15 Safari Extensions to remove ads more effectively. Now it takes just one tap to block YouTube ads in Safari."; ObjectID = "0IU-PO-Xeh"; */
+"0IU-PO-Xeh.text" = "AdGuard používa rozšírenie Safari pre iOS 15 na efektívnejšie odstraňovanie reklám. Blokovanie reklám v službe YouTube v prehliadači Safari je teraz možné len jedným ťuknutím.";
+
+/* Class = "UILabel"; text = "Get stronger with Premium!"; ObjectID = "3qN-uj-pOb"; */
+"3qN-uj-pOb.text" = "Buďte silnejší s Premium!";
 
 /* Class = "UIButton"; normalTitle = "Fix it"; ObjectID = "46F-Jh-wHm"; */
 "46F-Jh-wHm.normalTitle" = "Opraviť";
+
+/* Class = "UIButton"; normalTitle = "Try for free"; ObjectID = "4Ft-5h-4Jd"; */
+"4Ft-5h-4Jd.normalTitle" = "Vyskúšajte";
 
 /* Class = "UILabel"; text = "Period"; ObjectID = "5pX-mg-2fq"; */
 "5pX-mg-2fq.text" = "Obdobie";
@@ -25,6 +33,9 @@
 
 /* Class = "UILabel"; text = "Some Safari content blockers are disabled"; ObjectID = "cvv-CS-LMQ"; */
 "cvv-CS-LMQ.text" = "Niektoré blokovače obsahu Safari sú vypnuté";
+
+/* Class = "UILabel"; text = "New AdGuard features in iOS 15"; ObjectID = "gDV-cq-ZDm"; */
+"gDV-cq-ZDm.text" = "Nové funkcie AdGuard v iOS 15";
 
 /* Class = "UIButton"; normalTitle = "Fix it"; ObjectID = "oe6-9O-dBB"; */
 "oe6-9O-dBB.normalTitle" = "Opraviť";

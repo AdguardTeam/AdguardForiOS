@@ -38,7 +38,7 @@
 "X1F-2p-Xpe.text" = "A DNS-védelem le van tiltva";
 
 /* Class = "UIButton"; normalTitle = "Enable"; ObjectID = "XYE-JT-WSH"; */
-"XYE-JT-WSH.normalTitle" = "Bekapcsolás";
+"XYE-JT-WSH.normalTitle" = "Engedélyezve";
 
 /* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "Xgg-jX-hwe"; */
 "Xgg-jX-hwe.normalTitle" = "Átmásolva";

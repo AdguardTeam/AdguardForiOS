@@ -33,6 +33,10 @@
         "message": "Bu sayfadaki öğeleri engelle",
         "description": "TEXT MAX LENGTH: 30"
     },
+    "popup_action_delete_user_rules": {
+        "message": "Bu site için tüm kullanıcı kurallarını sil",
+        "description": "TEXT MAX LENGTH: 30"
+    },
     "popup_action_insufficient_permissions": {
         "message": "Kısıtlı izinler",
         "description": "TEXT MAX LENGTH: 30"
@@ -68,6 +72,10 @@
     "popup_modal_not_all_sites_allowed_title": {
         "message": "Seçici koruma",
         "description": "TEXT MAX LENGTH: 25"
+    },
+    "popup_modal_not_all_sites_allowed_desc": {
+        "message": "AdGuard'ı yalnızca birkaç site için etkinleştirdiniz. AdGuard'a daha fazla izin vermediğiniz sürece, reklamlar diğer sitelerde görünebilir. <a>Daha fazla okuyun<\/a>",
+        "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_not_all_sites_allowed_button": {
         "message": "Devam et",
@@ -120,5 +128,9 @@
     "modal_protection_off_settings": {
         "message": "<b>Ayarları<\/b> açın",
         "description": "TEXT MAX LENGTH: 28"
+    },
+    "modal_protection_off_extensions": {
+        "message": "<b>Safari'ye<\/b> dokunun, aşağı kaydırın ve <b>Eklentiler'e<\/b> dokunun",
+        "description": "TEXT MAX LENGTH: 56"
     }
 }

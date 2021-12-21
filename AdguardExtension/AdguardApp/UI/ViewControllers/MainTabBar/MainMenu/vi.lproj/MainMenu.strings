@@ -70,6 +70,9 @@
 /* Class = "UILabel"; text = "You can export logs and send them to us in a convenient way for you"; ObjectID = "qDy-4e-MsZ"; */
 "qDy-4e-MsZ.text" = "Bạn có thể xuất nhật ký và gửi cho chúng tôi một cách thuận tiện";
 
+/* Class = "UILabel"; text = "Your email address:"; ObjectID = "rHj-Ne-4zA"; */
+"rHj-Ne-4zA.text" = "Địa chỉ Email của bạn:";
+
 /* Class = "UILabel"; text = "Discuss"; ObjectID = "rlh-5H-fPk"; Note = "(Main Menu) Advanced Settings caption"; */
 "rlh-5H-fPk.text" = "Yêu cầu tính năng";
 

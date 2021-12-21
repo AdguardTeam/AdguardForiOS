@@ -280,8 +280,20 @@
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "Egyéb";
 
+/* (AdvancedSettingsController) Content blocker description text */
+"cb_description_common" = "6 tartalomblokkoló, mindegyik akár 50 000 szabályt is tartalmazhat";
+
+/* (AdvancedSettingsController) Content blocker description text */
+"cb_description_advanced_protection" = "6 tartalomblokkoló, egyenként akár 150,000 szabállyal, plusz fejlett védelem";
+
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Szűrők:";
+
+/* (ContentBlockersTableController) - Advanced protection title */
+"cb_screen_advanced_protection_title" = "Fejlett védelem";
+
+/* (ContentBlockersTableController) - Content Blockers title */
+"cb_screen_content_blockers_title" = "Tartalomblokkolók";
 
 /* (AdvancedSettingsController) Restart when network changes error */
 "general_settings_restart_tunnel_error" = "Először engedélyeznie kell a VPN-t";
@@ -315,6 +327,9 @@
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "Kikapcsolva a Safari beállításaiban";
+
+/* (ContentBlockerStateCell) Description for advanced protection disabled state */
+"disabled_current_state_advanced_protection" = "Letiltva a védelmi beállításokban";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
 "update_current_state_label" = "Betöltés a Safariba...";
@@ -355,6 +370,9 @@
 /* (FiltersController) Disabled state in groups section */
 "off_state" = "Kikapcsolva";
 
+/* (NewCustomFilterDetailedController) homepage string */
+"homepage_title" = "Honlap: ";
+
 /* (FilterDetailsController) delete filter title */
 "delete_filter_title" = "Szűrő törlése";
 
@@ -366,6 +384,9 @@
 
 /* (AboutViewController) AdGuard copyright string */
 "copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\nMinden jog fenntartva. AdGuard.com";
+
+/* (LicensePageViewController) Login title */
+"common_login" = "Belépés";
 
 /* (AboutViewController) Logout title */
 "common_logout" = "Kilépés";
@@ -423,6 +444,21 @@
 
 /* (UserRulesTableController) - title for editing user rules option  */
 "open_user_rules_editor" = "Szerkesztő megnyitása";
+
+/* (UserRulesTableController) - description for Safari user rules in editor  */
+"editor_safari_user_rules_description" = "Safari felhasználói szabályok hozzáadása";
+
+/* (UserRulesTableController) - description for allowlist rules in editor  */
+"editor_allowlist_rules_description" = "Egyéni engedélyezési lista szabályok hozzáadása";
+
+/* (UserRulesTableController) - description for inverted allowlist rules in editor  */
+"editor_inverted_allowlist_rules_description" = "Egyéni invertált engedélyezési lista szabályok hozzáadása";
+
+/* (UserRulesTableController) - description for DNS allowlist rules in editor  */
+"editor_dns_allowlist_rules_description" = "Egyéni DNS engedélyezési lista szabályok hozzáadása";
+
+/* (UserRulesTableController) - description for DNS blocklist rules in editor  */
+"editor_dns_blocklist_rules_description" = "Egyéni DNS blokkolási szabályok hozzáadása";
 
 /* (ListOfRulesModel) title for Clear button*/
 "common_clear" = "Törlés";
@@ -517,6 +553,30 @@
 /* (OneSafariGroupFiltersModel) Add new filter title */
 "add_new_filter" = "Szűrő hozzáadás";
 
+/* (OneSafariGroupFiltersModel) Ads filters group description */
+"ads_filters_group_description" = "Hirdetéseket eltávolító szűrőlisták";
+
+/* (OneSafariGroupFiltersModel) Privacy filters group description */
+"privacy_filters_group_description" = "Szűrőlisták, amelyek megakadályozzák a nyomon követést";
+
+/* (OneSafariGroupFiltersModel) Social Widgets filters group description */
+"social_widgets_filters_group_description" = "Szűrőlisták, amelyek elrejtik a közösségi média widgetekhez (“Like” gombok és ilyesmik)";
+
+/* (OneSafariGroupFiltersModel) Annoyances filters group description */
+"annoyances_filters_group_description" = "Szűrőlisták, amelyek blokkolják a weboldalak zavaró elemeit. Az \"irritating\" fogalma szubjektív lehet, és a lista szerzőjétől függ";
+
+/* (OneSafariGroupFiltersModel) Security filters group description */
+"security_filters_group_description" = "Szűrőlisták, amelyek blokkolják az ismert online fenyegetéseket";
+
+/* (OneSafariGroupFiltersModel) Other filters group description */
+"other_filters_group_description" = "Különféle szűrőlisták különböző célokra";
+
+/* (OneSafariGroupFiltersModel) Language Specific filters group description */
+"language_specific_filters_group_description" = "Szűrőlisták, amelyek meghatározott nyelvű weboldalakat céloznak meg";
+
+/* (OneSafariGroupFiltersModel) Custom filters group description */
+"custom_filters_group_description" = "Kézzel hozzáadott szűrőlisták";
+
 /* confirm reset lert text */
 "confirm_reset_text" = "Minden beállítás, beleértve a felhasználói szabályokat, a DNS védelmet, a felületet és a hitelesítési beállításokat, vissza lesz állítva. Ez a művelet nem vonható vissza. Biztosan visszaállítja a beállításokat?";
 
@@ -541,6 +601,9 @@
 /*(MainScreen) "all time" chart date type */
 "chart_alltime" = "Mindenkori";
 
+/*(SafariService) notification about loading content blockers  */
+"loading_content_blockers" = "A tartalomblokkolók frissítve lesznek...";
+
 /*(FiltersService) notification about filters laoding  */
 "loading_filters" = "Szűrők betöltése...";
 
@@ -552,6 +615,9 @@
 
 /*(NewCustomFilterDetailsController) title for new dns filter */
 "new_dns_filter_title" = "Új DNS szűrő";
+
+/* (NewCustomFilterDetailsController) Error message when adding custom filter fails */
+"add_custom_filter_error_message" = "Valami elromlott, vagy az egyéni szűrést tartalmazó fájl formátuma helytelen";
 
 /*(NewCustomFilterDetailsController) title for editing custom filter */
 "edit_custom_filter_title" = "Egyedi szűrő módosítása";
@@ -607,6 +673,30 @@
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_whitelist" = "hozzáadva az engedélyezési listához";
 
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_blacklist" = "hozzáadva a blokkolási listához";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_whitelist" = "eltávolítva az engedélyezési listáról";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_blacklist" = "eltávolítva a blokkolási listáról";
+
+/* (OnboardingController) first step text*/
+"onboarding_first_step_text" = "<b>Beállítások</b> megnyitása.";
+
+/* (OnboardingController) first step with advanced protection text*/
+"advanced_protection_onboarding_first_step_text" = "<b>Beállítások</b> megnyitása.";
+
+/* (OnboardingController) second step with advanced protection text */
+"advanced_protection_onboarding_second_step_text" = "Menjen <b>Safari > Bővítések</b>.";
+
+/* (OnboardingController) third step with advanced protection text */
+"advanced_protection_onboarding_third_step_text" = "Állítsa az összes AdGuard kapcsolót <b>be</b> állásba. Már mehet is!";
+
+/* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
+"onboarding_fours_step_text" = "For <b>Advanced</b> protection, open Safari, tap the <b>aA</b> icon on the left side of the URL field,<br><br> %@ <br><br>majd koppintson a <b>Bővítmények kezelése</b> lehetőségre, és kapcsolja be az <b>AdGuard</b> kapcsolót.";
+
 /* (BlockRequestController) Block request title */
 "block_request" = "Kérés blokkolása";
 
@@ -627,6 +717,9 @@
 
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "Az iOS még nem támogatja a(z) %@ lehetőséget. Próbáljon meg másik upstream-et hozzáadni.";
+
+/*(DnsFiltersController) the error message that is shown when trying to add a duplicate custom dns server */
+"custom_dns_server_exists" = "Megpróbált hozzáadni egy duplikált DNS-kiszolgálót. A megadott upstream szerver már szerepel a listán";
 
 /* (NewDnsServerController) save and select button title */
 "save_and_select_button_title" = "Mentés és kiválasztás";
@@ -763,6 +856,9 @@
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d kérés";
 
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name; String for iOS 15 and newer */
+"native_dns_setup_description_ios15" = "A natív DNS használatához válassza az <b>%@</b> lehetőséget a <b>Rendszerbeállítások > Általános > VPN és eszközkezelés > DNS</b> menüpontban.";
+
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Mondja el, hogy elégedett-e a hirdetések eddigi blokkolásával";
 
@@ -784,8 +880,54 @@
 /* (FilterDetailsViewController) Subscription URL subtitle for detailed filter info */
 "detailed_filter_info_subscription_subtitle" = "Feliratkozási URL";
 
+/* (AddRuleController) Error description when adding rule that already exists */
+"user_rule_exists_error" = "Megpróbálod hozzáadni azt a szabályt, amely már szerepel a listában";
+
+// MARK: - Strings for UserRulesRedirectController
+/* (UserRulesRedirectController) - Processing state title */
+
+"user_rules_processing_title" = "Feldolgozás...";
+
+/* (UserRulesRedirectController) - Processing state description */
+"user_rules_processing_descr" = "Kérem, várjon egy percet...";
+
+/* (UserRulesRedirectController) - Description when allowlist rule is removed; %@ stands for 'allowlist' word hex color */
+"user_rules_allowlist_rule_removed" = "eltávolították az <u style=color:%@>allowlist</u>-ból";
+
+/* (UserRulesRedirectController) - Description when new allowlist rule is added; %@ stands for 'allowlist' word hex color */
+"user_rules_allowlist_rule_added" = "hozzá lett adva az <u style=color:%@>allowlist</u>-hez";
+
+/* (UserRulesRedirectController) - Description when blocklist rule is added; %@ stands for 'user rules' words hex color */
+"user_rules_blocklist_rule_added" = "van egy új blokkoló szabály a <u style=color:%@>felhasználói szabályok</u> menüpontban";
+
+/* (UserRulesRedirectController) - Description when blocklist rules are removed */
+"user_rules_blocklist_rules_removed" = "nincs több felhasználói szabály";
+
+// MARK: - Strings for license screen
+/* (PremiumFeature) - Advanced protection premium feature name */
+
+"advanced_protection_feature_name" = "Fejlett védelem";
+
+/* (PremiumFeature) -  Security filters premium feature name */
+"security_filters_feature_name" = "Biztonsági szűrők ";
+
+/* (PremiumFeature) - DNS privacy premium feature name */
+"dns_privacy_feature_name" = "DNS adatvédelem";
+
 /* (PremiumFeature) - Custom filters premium feature name */
 "custom_filters_feature_name" = "Egyéni szűrők";
+
+/* (PremiumFeature) - Advanced protection premium feature description */
+"advanced_protection_feature_description" = "Továbbfejlesztett módszerek az összetett hirdetések, például a YouTube hirdetések blokkolására a Safariban";
+
+/* (PremiumFeature) - Security filters premium feature description */
+"security_filters_feature_description" = "Adathalászat, rosszindulatú programok és gyanús tartalmak blokkolása";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "A DNS-kérelmek helyi titkosítása és az adatvédelem ellenőrzése";
+
+/* (PremiumFeature) - Custom filters premium feature description */
+"custom_filters_feature_description" = "Használjon harmadik féltől származó szűrőket, vagy hozzon létre sajátot";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -924,14 +1066,40 @@
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "A maximális számú eszközt csatlakoztatta a Setapp fiókjához.";
 
+// MARK: - ActionExtensionMainController
+/* (ActionExtensionMainController) - ActionExtension info for iOS 15>= */
+
+"action_extension_obsolete_info" = "Ez az akcióbővítmény elavult, de az új AdGuard Web Safari bővítmény elérhető az aA menüben. Az új bővítmény használatának megkezdéséhez nyissa meg az aA menüt, koppintson a Bővítmények kezelése elemre, és kapcsolja be az AdGuard kapcsolót.";
+
+/* (ActionExtensionMainController) - ActionExtension info for iOS 14<= */
+"action_extension_new_version_info" = "A bővítmény új verziója elérhető iOS 15-re. Több képességgel és továbbfejlesztett felhasználói felülettel rendelkezik. Ne feledje frissíteni!";
+
+/* (BackgroundFetchController) - Background app refresh default title */
+"background_fetch_default_period" = "Alapértelmezett időszak";
+
 /* (BackgroundFetchController) - Background app refresh every 1 hour title */
 "background_fetch_hour_period" = "Óránként";
+
+/* (BackgroundFetchController) - Background app refresh every 3 hours title */
+"background_fetch_tree_hours_period" = "3 óránként";
+
+/* (BackgroundFetchController) - Background app refresh every 12 hours title */
+"background_fetch_twelve_hours_period" = "12 óránként";
+
+/* (BackgroundFetchController) - Background app refresh every 24 hours title */
+"background_fetch_twenty_four_hours_period" = "24 óránként";
+
+/* Background app refresh time title */
+"background_app_refresh_time_title" = "Háttéralkalmazás frissítési intervallum";
 
 /* (DnsProvidersController) - add new dns server title */
 "add_custom_dns_server_title" = "Egyéni DNS szerver hozzáadása";
 
 /* (DnsProvidersController) - Header title */
 "dns_provider_controller_title" = "DNS szerver";
+
+/* (DnsProvidersController) - Header description */
+"dns_provider_controller_description" = "Növelheti az online adatbiztonságot a DNS forgalom titkosításával. Ahhoz, hogy engedélyezze, válasszon egyet az ajánlott DNS szolgáltatók közül.";
 
 /* (DnsProviderDetailsController) Server title */
 "server_title" = "Szerver";

@@ -17,12 +17,32 @@
         "message": "vypnuté na tejto stránke",
         "description": "TEXT MAX LENGTH: 30"
     },
+    "popup_action_safari_protection_description_disabled": {
+        "message": "ochrana je vypnutá",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_status_desc_enabled": {
+        "message": "ochrana je zapnutá",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_status_desc_disabled": {
+        "message": "ochrana je vypnutá",
+        "description": "TEXT MAX LENGTH: 30"
+    },
     "popup_action_block_element": {
         "message": "Blokovať prvky na tejto stránke",
         "description": "TEXT MAX LENGTH: 30"
     },
+    "popup_action_delete_user_rules": {
+        "message": "Vymazať používateľské pravidlá pre stránku",
+        "description": "TEXT MAX LENGTH: 30"
+    },
     "popup_action_insufficient_permissions": {
         "message": "Obmedzené povolenia",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_starting": {
+        "message": "zapína sa ochrana...",
         "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_allowlisted": {
@@ -57,6 +77,10 @@
         "message": "Pokračovať",
         "description": "TEXT MAX LENGTH: 20"
     },
+    "popup_modal_advanced_blocking_disabled_title": {
+        "message": "Pokročilá ochrana je vypnutá",
+        "description": "TEXT MAX LENGTH: 40"
+    },
     "popup_modal_advanced_blocking_disabled_button": {
         "message": "Zapnúť",
         "description": "TEXT MAX LENGTH: 20"
@@ -69,9 +93,17 @@
         "message": "Upgradovať",
         "description": "TEXT MAX LENGTH: 20"
     },
+    "popup_fullscreen_support_title": {
+        "message": "Potrebujete pomôcť?",
+        "description": "TEXT MAX LENGTH: 28"
+    },
     "popup_fullscreen_support_desc": {
         "message": "Je niečo zle? Môžeme zabezpečiť opravu.",
         "description": "TEXT MAX LENGTH: 45"
+    },
+    "popup_protection_disabled_support_desc": {
+        "message": "Ochrana pre túto webovú stránku je vypnutá. Je niečo zle? Môžeme to napraviť.",
+        "description": "TEXT MAX LENGTH: 85"
     },
     "popup_support_button_text": {
         "message": "Nahlásiť problém",
