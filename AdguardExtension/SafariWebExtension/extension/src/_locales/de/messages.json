@@ -37,6 +37,10 @@
         "message": "Benutzerregeln für diese Seite löschen",
         "description": "TEXT MAX LENGTH: 30"
     },
+    "popup_action_insufficient_permissions": {
+        "message": "Zugriff eingeschränkt",
+        "description": "TEXT MAX LENGTH: 30"
+    },
     "popup_action_current_site_desc_starting": {
         "message": "Schutz wird aktiviert …",
         "description": "TEXT MAX LENGTH: 30"
@@ -69,6 +73,10 @@
         "message": "Selektiver Schutz",
         "description": "TEXT MAX LENGTH: 25"
     },
+    "popup_modal_not_all_sites_allowed_desc": {
+        "message": "AdGuard ist nur auf einigen Websites aktiviert. Geben Sie AdGuard weitere Rechte, um Werbung überall zu sperren. <a>Mehr erfahren<\/a>",
+        "description": "TEXT MAX LENGTH: 140"
+    },
     "popup_modal_not_all_sites_allowed_button": {
         "message": "Weiter",
         "description": "TEXT MAX LENGTH: 20"
@@ -77,6 +85,10 @@
         "message": "Erweiterter Schutz deaktiviert",
         "description": "TEXT MAX LENGTH: 40"
     },
+    "popup_modal_advanced_blocking_disabled_description": {
+        "message": "Erweiterte Sperrregeln\/Funktionen sind nicht verfügbar. <a>Mehr erfahren<\/a>",
+        "description": "TEXT MAX LENGTH: 85"
+    },
     "popup_modal_advanced_blocking_disabled_button": {
         "message": "Aktivieren",
         "description": "TEXT MAX LENGTH: 20"
@@ -84,6 +96,10 @@
     "popup_modal_title_free": {
         "message": "Erreichen Sie Ihr volles Potenzial",
         "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_modal_desc_free": {
+        "message": "Die kostenlose Version bietet keinen erweiterten Schutz. Möchten Sie mehr komplexe Werbung und Tracker sperren?",
+        "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_btn_free": {
         "message": "Upgraden",
@@ -111,6 +127,14 @@
     },
     "modal_protection_off_settings": {
         "message": "Öffnen Sie die <b>Einstellungen<\/b>",
+        "description": "TEXT MAX LENGTH: 28"
+    },
+    "modal_protection_off_extensions": {
+        "message": "Tippen Sie auf <b>Safari<\/b>, wischen Sie nach unten und wählen Sie <b>Erweiterungen<\/b>",
+        "description": "TEXT MAX LENGTH: 56"
+    },
+    "modal_protection_off_switch": {
+        "message": "<b>Aktivieren<\/b> Sie alle AdGuard Inhaltsblocker",
         "description": "TEXT MAX LENGTH: 28"
     }
 }

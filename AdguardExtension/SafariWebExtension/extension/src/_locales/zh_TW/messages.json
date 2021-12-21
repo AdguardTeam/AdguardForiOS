@@ -9,6 +9,14 @@
         "message": "Safari 防護",
         "description": "TEXT MAX LENGTH: 25"
     },
+    "popup_action_safari_protection_description_enabled_for_site": {
+        "message": "已對此網站啟用",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_safari_protection_description_disabled_for_site": {
+        "message": "已對此網站禁用",
+        "description": "TEXT MAX LENGTH: 30"
+    },
     "popup_action_safari_protection_description_disabled": {
         "message": "防護被禁用",
         "description": "TEXT MAX LENGTH: 30"
