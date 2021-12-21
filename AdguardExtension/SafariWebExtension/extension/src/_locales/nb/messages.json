@@ -3,25 +3,32 @@
         "message": "AdGuard"
     },
     "popup_action_safari_protection_title": {
-        "message": "Safari-beskyttelse"
+        "message": "Safari-beskyttelse",
+        "description": "TEXT MAX LENGTH: 25"
     },
     "popup_modal_all_sites_allowed_button": {
-        "message": "Fortsett"
+        "message": "Fortsett",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_not_all_sites_allowed_button": {
-        "message": "Fortsett"
+        "message": "Fortsett",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_advanced_blocking_disabled_button": {
-        "message": "Skru på"
+        "message": "Aktiver",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_btn_free": {
-        "message": "Oppgrader nå"
+        "message": "Oppgrader nå",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_support_button_text": {
-        "message": "Send inn en klage på denne nettsiden"
+        "message": "Send inn en klage på denne nettsiden",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "modal_protection_off_title": {
-        "message": "Aktiver AdGuard"
+        "message": "Aktiver AdGuard",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "extension_description": {
         "message": "AdGuard Safari Web Extension"

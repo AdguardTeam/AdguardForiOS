@@ -3,25 +3,32 @@
         "message": "AdGuard"
     },
     "popup_action_safari_protection_title": {
-        "message": "Zaštita za Safari"
+        "message": "Zaštita za Safari",
+        "description": "TEXT MAX LENGTH: 25"
     },
     "popup_modal_all_sites_allowed_button": {
-        "message": "Nastavi"
+        "message": "Nastavi",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_not_all_sites_allowed_button": {
-        "message": "Nastavi"
+        "message": "Nastavi",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_advanced_blocking_disabled_button": {
-        "message": "Uključi"
+        "message": "Uključi",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_btn_free": {
-        "message": "Nadogradi"
+        "message": "Nadogradi",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_support_button_text": {
-        "message": "Prijavi poteškoću"
+        "message": "Prijavi poteškoću",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "modal_protection_off_title": {
-        "message": "Uključi AdGuard"
+        "message": "Uključi AdGuard",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "extension_description": {
         "message": "AdGuard Safari Web Extension"

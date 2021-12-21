@@ -1,12 +1,15 @@
 {
     "popup_action_safari_protection_title": {
-        "message": "Protecció de Safari"
+        "message": "Protecció de Safari",
+        "description": "TEXT MAX LENGTH: 25"
     },
     "popup_support_button_text": {
-        "message": "Informar d’un problema"
+        "message": "Informar d’un problema",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "modal_protection_off_title": {
-        "message": "Habilita AdGuard"
+        "message": "Habilita AdGuard",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "extension_name": {
         "message": "AdGuard"
