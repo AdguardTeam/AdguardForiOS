@@ -28,6 +28,9 @@
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "QYv-iX-uIo"; */
 "QYv-iX-uIo.text" = "DNS védelem";
 
+/* Class = "UIButton"; normalTitle = "Try for free"; ObjectID = "Uem-fP-tai"; */
+"Uem-fP-tai.normalTitle" = "Ingyenes próba";
+
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
 "Wml-J6-ced.text" = "Engedélyezési lista";
 

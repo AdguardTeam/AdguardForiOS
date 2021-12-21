@@ -22,6 +22,15 @@
 /* Something went wrong title for unknown error */
 "something_went_wrong_title" = "Valami hiba történt";
 
+/* Unknown error desription */
+"unknown_error_description" = "Kérjük, jelentse ezt a hibát az ügyfélszolgálatnak.";
+
+/* (AEService) Service errors descriptions */
+"safari_filters_loading_error" = "Nem lehetett betölteni a szűrőket a Safariba. Ezért a változások nem léptek életbe.";
+
+/* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
+"load_to_safari_error" = "A szűrőket nem sikerült betölteni a Safariba. Próbálja üríteni a szabályok és kivételek listáját, vagy módosítsa a felhasznált szűrőket.";
+
 /* NO Button caption in alert */
 "common_action_no" = "NEM";
 
@@ -65,7 +74,13 @@
 "common_action_yes" = "Igen";
 
 /* (MainController) login status caption on main screen */
+"protection_enabled_caption" = "Védelem bekapcsolva";
+
+/* (MainController) login status caption on main screen */
 "protection_partly_enabled_caption" = "Néhány tartalomblokkoló ki van kapcsolva";
+
+/* (MainController) login status caption on main screen */
+"protection_disabled_caption" = "Védelem kapcsolva";
 
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Előfizetés";
@@ -73,11 +88,23 @@
 /* (LicenseProductChoiceCell) restore purchase button title */
 "restore_purchase_button_title" = "Vásárlás visszaállítása";
 
+/* (FreeLicenseStateTableViewModel) One month subscription title */
+"one_month_subscription_title" = "Havi";
+
+/* (FreeLicenseStateTableViewModel) One year subscription title */
+"one_year_subscription_title" = "Éves";
+
 /* (FreeLicenseStateTableViewModel) title for permanent subscription */
 "permanent_subscription_title" = "Élethosszig";
 
+/* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
+"go_to_my_account_title" = "Menj a fiókomhoz";
+
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "Vásárlás";
+
+/* (GetProTableController) missing purchase alert message */
+"upgrade_missing_purchase_message" = "Előfizetési csomagok nem állnak rendelkezésre. Kérjük, ellenőrizze internetkapcsolatát, és próbálja meg újra.";
 
 /* (LoginController) lost password button title */
 "lost_password" = "Elfelejtette a jelszót?";
@@ -115,8 +142,14 @@
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Hiba történt a vásárlás visszaállítása közben.";
 
+/* (AEUIGetProViewController) message that appears when purchase successfully restored */
+"restore_success_message" = "A vásárlás visszaállt! Aktiválta az AdGuard prémium verzióját az iOS számára.";
+
 /* (AEUIGetProControllerViewController) this message showes when user try ro restore purchases but there is nothing to restore. */
 "nothing_to_restore_message" = "Nincs visszaállítható vásárlás";
+
+/* (AEUIGetProViewController) message that appears when the purchase is successful */
+"purchase_success_message" = "A vásárlás sikeresen befejeződött! Aktiválta az AdGuard prémium verzióját az iOS számára.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase */
 "purchase_failure_message" = "Hiba történt a vásárlás során.";
@@ -132,6 +165,9 @@
 
 /* (UserFilterController) blacklist description format */
 "blacklist_text_format" = "Itt tudja megadni az egyedi szabályait.<br>Olvassa el <a href=\"%@\">a szűrőszabályok dokumentációját</a>.";
+
+/* (UserFilterController) whitelist description */
+"whitelist_text" = "Itt adja meg azokat a domaineket, amelyeket nem szeretne, hogy az AdGuard kiszűrje. Ez a lista elsőbbséget élvez a többi beállítással szemben.";
 
 /* (UserFilterController) inverted whitelist description */
 "inverted_whitelist_text" = "Ide írja be a domain neveket. Az AdGuard csak ezeken a webhelyeken engedélyezi a szűrést a Safari-ban.";
@@ -175,6 +211,9 @@
 /* (MainController) Message on main screen during update - count of updated filters */
 "filters_updated_format" = "Szűrők frissítve %lu ";
 
+/* (FiltersController) Filter Version format */
+"filter_version_format" = "Verzió %@";
+
 /* (DnsSettingController) split tunel mode description */
 "tunnel_mode_split_description" = "Split-Tunnel, kompatibilis a „Personal VPN” alkalmazással";
 
@@ -216,6 +255,9 @@
 
 /* login error message */
 "login_error_message" = "Hiba történt a kijelentkezés során";
+
+/* lifetime purchase secription format */
+"lifetime_purchase_description_format" = "AdGuard <a href=%2$@>Felhasználási feltételek</a> és <a href=%1$@>Adatvédelmi irányelvek</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "Ok";
@@ -516,6 +558,12 @@
 
 /*(NewCustomFilterDetailsController) add button title */
 "common_add" = "Hozzáadás";
+
+/*(TodayViewController) Protection is disabled title  */
+"protection_disabled" = "Védelem kapcsolva";
+
+/*(TodayViewController) Protection is enabled title  */
+"protection_enabled" = "Védelem bekapcsolva";
 
 /*(TodayViewController) DNS protection is enabled text  */
 "system_enabled" = "DNS védelem";

@@ -3,25 +3,32 @@
         "message": "AdGuard"
     },
     "popup_action_safari_protection_title": {
-        "message": "Bảo vệ Safari"
+        "message": "Bảo vệ Safari",
+        "description": "TEXT MAX LENGTH: 25"
     },
     "popup_modal_all_sites_allowed_button": {
-        "message": "Tiếp tục"
+        "message": "Tiếp tục",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_not_all_sites_allowed_button": {
-        "message": "Tiếp tục"
+        "message": "Tiếp tục",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_advanced_blocking_disabled_button": {
-        "message": "Bật"
+        "message": "Kích hoạt",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_btn_free": {
-        "message": "Cập nhật"
+        "message": "Cập nhật",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_support_button_text": {
-        "message": "Báo lỗi"
+        "message": "Báo lỗi",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "modal_protection_off_title": {
-        "message": "Bật AdGuard"
+        "message": "Bật AdGuard",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "extension_description": {
         "message": "AdGuard Safari Web Extension"

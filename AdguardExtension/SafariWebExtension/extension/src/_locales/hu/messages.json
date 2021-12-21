@@ -30,17 +30,37 @@
         "message": "Bekapcsolás",
         "description": "TEXT MAX LENGTH: 20"
     },
+    "popup_modal_title_free": {
+        "message": "Érje el teljes potenciálját",
+        "description": "TEXT MAX LENGTH: 30"
+    },
     "popup_modal_btn_free": {
         "message": "Frissítés",
         "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_fullscreen_support_title": {
+        "message": "Segítségre van szüksége?",
+        "description": "TEXT MAX LENGTH: 28"
+    },
+    "popup_fullscreen_support_desc": {
+        "message": "Valami baj van? Lehet hogy van rá megoldásunk.",
+        "description": "TEXT MAX LENGTH: 45"
+    },
+    "popup_protection_disabled_support_desc": {
+        "message": "A webhely védelme ki van kapcsolva. Valami baj van? Lehet, hogy van rá megoldásunk.",
+        "description": "TEXT MAX LENGTH: 85"
     },
     "popup_support_button_text": {
         "message": "Probléma bejelentése",
         "description": "TEXT MAX LENGTH: 30"
     },
     "modal_protection_off_title": {
-        "message": "Adguard engedélyezése",
+        "message": "AdGuard engedélyezése",
         "description": "TEXT MAX LENGTH: 30"
+    },
+    "modal_protection_off_settings": {
+        "message": "<b>Beállítások<\/b> megnyitása",
+        "description": "TEXT MAX LENGTH: 28"
     },
     "extension_description": {
         "message": "AdGuard Safari Web Extension"

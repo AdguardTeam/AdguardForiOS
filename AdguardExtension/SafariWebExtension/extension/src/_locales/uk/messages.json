@@ -9,12 +9,24 @@
         "message": "Захист Safari",
         "description": "TEXT MAX LENGTH: 25"
     },
+    "popup_action_safari_protection_description_enabled_for_site": {
+        "message": "увімкнено на цьому сайті",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_safari_protection_description_disabled_for_site": {
+        "message": "вимкнено на цьому сайті",
+        "description": "TEXT MAX LENGTH: 30"
+    },
     "popup_action_safari_protection_description_disabled": {
         "message": "захист вимкнено",
         "description": "TEXT MAX LENGTH: 30"
     },
+    "popup_action_current_site_status_desc_enabled": {
+        "message": "увімкнено на цьому сайті",
+        "description": "TEXT MAX LENGTH: 30"
+    },
     "popup_action_current_site_status_desc_disabled": {
-        "message": "захист вимкнено",
+        "message": "вимкнено на цьому сайті",
         "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_block_element": {
@@ -23,6 +35,10 @@
     },
     "popup_action_delete_user_rules": {
         "message": "Видалити правила користувача для цього сайту",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_insufficient_permissions": {
+        "message": "Обмежені права доступу",
         "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_starting": {
@@ -57,6 +73,10 @@
         "message": "Вибірковий захист",
         "description": "TEXT MAX LENGTH: 25"
     },
+    "popup_modal_not_all_sites_allowed_desc": {
+        "message": "AdGuard увімкнено лише на деяких сайтах, тому на всіх інших буде реклама, поки не надасте AdGuard додаткові права доступу. <a>Детальніше<\/a>",
+        "description": "TEXT MAX LENGTH: 140"
+    },
     "popup_modal_not_all_sites_allowed_button": {
         "message": "Продовжити",
         "description": "TEXT MAX LENGTH: 20"
@@ -65,6 +85,10 @@
         "message": "Розширений захист вимкнено",
         "description": "TEXT MAX LENGTH: 40"
     },
+    "popup_modal_advanced_blocking_disabled_description": {
+        "message": "Розширені правила блокування та інші функції недоступні. <a>Детальніше<\/a>",
+        "description": "TEXT MAX LENGTH: 85"
+    },
     "popup_modal_advanced_blocking_disabled_button": {
         "message": "Увімкнути",
         "description": "TEXT MAX LENGTH: 20"
@@ -72,6 +96,10 @@
     "popup_modal_title_free": {
         "message": "Блокуйте повною мірою",
         "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_modal_desc_free": {
+        "message": "В безкоштовній версії недоступний розширений захист, який здатний блокувати більш складну рекламу та стеження. Згодні покращити захист?",
+        "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_btn_free": {
         "message": "Покращити",
@@ -99,6 +127,14 @@
     },
     "modal_protection_off_settings": {
         "message": "Відкрийте <b>Параметри<\/b>",
+        "description": "TEXT MAX LENGTH: 28"
+    },
+    "modal_protection_off_extensions": {
+        "message": "Торкніть <b>Safari<\/b> та оберіть <b>Розширення<\/b>",
+        "description": "TEXT MAX LENGTH: 56"
+    },
+    "modal_protection_off_switch": {
+        "message": "<b>Увімкніть<\/b> усі блокувальники вмісту AdGuard",
         "description": "TEXT MAX LENGTH: 28"
     }
 }

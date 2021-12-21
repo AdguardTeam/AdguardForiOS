@@ -1,11 +1,17 @@
 /* Class = "UIButton"; normalTitle = "Switch mode"; ObjectID = "1A6-DD-78f"; */
 "1A6-DD-78f.normalTitle" = "Mód váltása";
 
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "1rj-wD-aeH"; */
+"1rj-wD-aeH.normalTitle" = "Hozzáad";
+
 /* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "4IJ-xy-hky"; */
 "4IJ-xy-hky.normalTitle" = "titkosított";
 
 /* Class = "UILabel"; text = "Activity"; ObjectID = "5bV-zZ-4dr"; */
 "5bV-zZ-4dr.text" = "Tevékenység";
+
+/* Class = "UIButton"; normalTitle = "Try for free"; ObjectID = "6xN-ij-jJj"; */
+"6xN-ij-jJj.normalTitle" = "Ingyenes próba";
 
 /* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
 "7mk-7J-iLD.normalTitle" = "Szerkesztés";
@@ -66,6 +72,9 @@
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "kwZ-Kw-f1R"; */
 "kwZ-Kw-f1R.text" = "Kérés blokkolása";
+
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "l5B-oj-DnW"; */
+"l5B-oj-DnW.normalTitle" = "Hozzáad";
 
 /* Class = "UIButton"; normalTitle = "requests"; ObjectID = "lKJ-8V-GJi"; */
 "lKJ-8V-GJi.normalTitle" = "kérés";

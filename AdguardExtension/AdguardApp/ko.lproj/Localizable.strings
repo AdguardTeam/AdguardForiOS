@@ -921,6 +921,9 @@
 
 "user_rules_processing_title" = "처리하는 중...";
 
+/* (UserRulesRedirectController) - Processing state description */
+"user_rules_processing_descr" = "잠시만 기다려 주세요...";
+
 /* (UserRulesRedirectController) - Description when allowlist rule is removed; %@ stands for 'allowlist' word hex color */
 "user_rules_allowlist_rule_removed" = "항목이 <u style=color:%@>허용 목록</u>에서 제거됨";
 

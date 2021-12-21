@@ -2,97 +2,67 @@
     "extension_name": {
         "message": "AdGuard"
     },
-    "extension_description": {
-        "message": "Sambungan Sesawang Safari AdGuard"
-    },
     "popup_action_safari_protection_title": {
-        "message": "Perlindungan Safari"
-    },
-    "popup_action_safari_protection_description": {
-        "message": "untuk halaman ini"
-    },
-    "popup_action_safari_protection_description_disabled": {
-        "message": "perlindungan Dimatikan"
-    },
-    "popup_action_current_site_status_desc_enabled": {
-        "message": "perlindungan Dihidupkan"
-    },
-    "popup_action_current_site_status_desc_disabled": {
-        "message": "perlindungan Dimatikan"
+        "message": "Perlindungan Safari",
+        "description": "TEXT MAX LENGTH: 25"
     },
     "popup_action_block_element": {
-        "message": "Sekat unsur di halaman ini"
-    },
-    "popup_action_delete_user_rules": {
-        "message": "Padam semua peraturan pengguna untuk halaman ini"
-    },
-    "popup_action_current_site_desc_starting": {
-        "message": "menghidupkan perlindungan..."
+        "message": "Sekat unsur di halaman ini",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_allowlisted": {
-        "message": "ditambahkan ke senarai putih"
+        "message": "ditambahkan ke senarai putih",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_basic_only": {
-        "message": "perlindungan asas sahaja"
+        "message": "perlindungan asas sahaja",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_modal_all_sites_allowed_title": {
-        "message": "Perlindungan terulung"
+        "message": "Perlindungan terulung",
+        "description": "TEXT MAX LENGTH: 25"
     },
     "popup_modal_all_sites_allowed_desc": {
-        "message": "Syabas! AdGuard akan menyekat hampir kesemua iklan dan mengatasi cabaran yang paling sukar."
+        "message": "Syabas! AdGuard akan menyekat hampir kesemua iklan dan mengatasi cabaran yang paling sukar.",
+        "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_all_sites_allowed_button": {
-        "message": "Teruskan"
+        "message": "Teruskan",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_not_all_sites_allowed_title": {
-        "message": "Perlindungan terpilih"
-    },
-    "popup_modal_not_all_sites_allowed_desc": {
-        "message": "Anda menghidupkan AdGuard hanya untuk laman sesawang ini. Iklan boleh muncul pada laman sesawang lain melainkan anda memberikan lebih banyak kebenaran kepada AdGuard."
+        "message": "Perlindungan terpilih",
+        "description": "TEXT MAX LENGTH: 25"
     },
     "popup_modal_not_all_sites_allowed_button": {
-        "message": "Teruskan"
-    },
-    "popup_modal_advanced_blocking_disabled_title": {
-        "message": "Perlindungan lanjutan dimatikan"
-    },
-    "popup_modal_advanced_blocking_disabled_description": {
-        "message": "Skrip pengguna dan penyekat iklan YouTube tidak dihidupkan."
-    },
-    "popup_modal_advanced_blocking_disabled_button": {
-        "message": "Hidupkan"
+        "message": "Teruskan",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_title_free": {
-        "message": "Kecapi keupayaan terunggul anda"
-    },
-    "popup_modal_desc_free": {
-        "message": "Anda masih lagi kekurangan perlindungan lanjutan yang terdapat dalam AdGuard Premium. Ayuh sekat lebih banyak lagi iklan seperti iklan YouTube di Safari?"
+        "message": "Kecapi keupayaan terunggul anda",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_modal_btn_free": {
-        "message": "Naik taraf"
-    },
-    "popup_fullscreen_support_title": {
-        "message": "Adakah anda memerlukan bantuan?"
+        "message": "Naik taraf",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_fullscreen_support_desc": {
-        "message": "Ada sesuatu yang tidak kena? Kami mungkin ada penyelesaian."
-    },
-    "popup_protection_disabled_support_desc": {
-        "message": "Perlindungan untuk laman sesawang ini Dimatikan. Ada sesuatu yang tidak kena? Kami mungkin ada penyelesaian."
+        "message": "Ada sesuatu yang tidak kena? Kami mungkin ada penyelesaian.",
+        "description": "TEXT MAX LENGTH: 45"
     },
     "popup_support_button_text": {
-        "message": "Laporkan masalah"
+        "message": "Laporkan masalah",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "modal_protection_off_title": {
-        "message": "Hidupkan AdGuard"
+        "message": "Hidupkan AdGuard",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "modal_protection_off_settings": {
-        "message": "Buka <b>Tetapan<\/b>"
+        "message": "Buka <b>Tetapan<\/b>",
+        "description": "TEXT MAX LENGTH: 28"
     },
-    "modal_protection_off_extensions": {
-        "message": "Ketik <b>Safari<\/b>, seret ke bawah, dan ketik <b>Penyekat Kandungan<\/b>"
-    },
-    "modal_protection_off_switch": {
-        "message": "<b>Hidupkan<\/b> semua sambungan AdGuard"
+    "extension_description": {
+        "message": "AdGuard Safari Web Extension"
     }
 }

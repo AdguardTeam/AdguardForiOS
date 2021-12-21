@@ -915,6 +915,9 @@
 
 "user_rules_processing_title" = "Обробка...";
 
+/* (UserRulesRedirectController) - Processing state description */
+"user_rules_processing_descr" = "Зачекайте, будь ласка...";
+
 /* (UserRulesRedirectController) - Description when allowlist rule is removed; %@ stands for 'allowlist' word hex color */
 "user_rules_allowlist_rule_removed" = "видалено з <u style=color:%@>списку дозволів</u>";
 
