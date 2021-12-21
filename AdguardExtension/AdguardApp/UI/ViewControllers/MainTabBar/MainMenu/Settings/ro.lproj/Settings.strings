@@ -11,7 +11,7 @@
 "7nl-3p-BP2.text" = "Răspuns blocat TTL";
 
 /* Class = "UILabel"; text = "Invert the Allowlist"; ObjectID = "8ad-4w-rbs"; */
-"8ad-4w-rbs.text" = "Inversați lista de autorizări";
+"8ad-4w-rbs.text" = "Listă autorizări inversată";
 
 /* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
 "8jT-85-XFp.text" = "Incompatibil cu alte aplicații VPN, instabil";
@@ -92,7 +92,7 @@
 "Vtx-vp-WIV.headerTitle" = "Temă";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "WUY-Cq-SPm"; Note = "(AddCustomFilterController) cancel button"; */
-"WUY-Cq-SPm.normalTitle" = "Anulați";
+"WUY-Cq-SPm.normalTitle" = "Anulare";
 
 /* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
 "X0A-gU-hzf.text" = "Actualizare automată doar prin Wi-Fi";

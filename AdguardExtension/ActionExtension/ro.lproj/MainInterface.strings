@@ -11,7 +11,7 @@
 "eVN-fj-ATQ.text" = "Activați pe această pagină";
 
 /* Class = "UIButton"; normalTitle = "Close"; ObjectID = "fxW-Cr-iPW"; */
-"fxW-Cr-iPW.normalTitle" = "Închideți";
+"fxW-Cr-iPW.normalTitle" = "Închide";
 
 /* Class = "UILabel"; text = "Report an issue on this page"; ObjectID = "kuu-kI-Ott"; */
 "kuu-kI-Ott.text" = "Raportați o problemă cu pagina";

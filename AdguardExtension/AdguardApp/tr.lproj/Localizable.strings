@@ -718,6 +718,9 @@
 /* (OnboardingController) third step with advanced protection text */
 "advanced_protection_onboarding_third_step_text" = "Tüm AdGuard geçişlerini <b>açık</b> olarak ayarlayın. Başlayabilirsiniz!";
 
+/* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
+"onboarding_fours_step_text" = "<b>Gelişmiş</b> koruma için Safari'yi açın, URL alanının sol tarafındaki <b>aA</b> simgesine dokunun,<br><br> %@ <br><br>sonra <b>Eklentileri yönet'e</b> dokunun ve <b>AdGuard</b> geçişini açın.";
+
 /* (BlockRequestController) Block request title */
 "block_request" = "İsteği engelle";
 
@@ -917,9 +920,6 @@
 /* (UserRulesRedirectController) - Processing state title */
 
 "user_rules_processing_title" = "İşleniyor...";
-
-/* (UserRulesRedirectController) - Processing state description */
-"user_rules_processing_descr" = "Lütfen bir saniye bekleyin...";
 
 /* (UserRulesRedirectController) - Description when allowlist rule is removed; %@ stands for 'allowlist' word hex color */
 "user_rules_allowlist_rule_removed" = "<u style=color:%@>izin listesinden</u> kaldırıldı";

@@ -704,7 +704,7 @@
 "onboarding_first_step_text" = "Apri le <b>Impostazioni</b>.";
 
 /* (OnboardingController) first step with advanced protection text*/
-"advanced_protection_onboarding_first_step_text" = "Apri le <b>Impostazioni</b>.";
+"advanced_protection_onboarding_first_step_text" = "Apri <b>Impostazioni</b>.";
 
 /* (OnboardingController) second step text */
 "onboarding_second_step_text" = "Clicca su <b>Safari</b>, scorri verso il basso, e clicca nuovamente su <b>Blocchi di contenuto</b>.";
@@ -717,6 +717,9 @@
 
 /* (OnboardingController) third step with advanced protection text */
 "advanced_protection_onboarding_third_step_text" = "Imposta tutti gli interruttori di AdGuard su <b>attivo</b>. Sei pronto!";
+
+/* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
+"onboarding_fours_step_text" = "Per la protezione <b>Avanzata</b>, apri Safari, clicca l'icona <b>aA</b> sul lato sinistro del campo dell'URL,<br><br> %@ <br><br>dopodichè clicca su <b>Gestisci estensioni</b> e attiva l'interruttore di <b>AdGuard</b>.";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "Bloccare richiesta";
@@ -918,6 +921,9 @@
 
 "user_rules_processing_title" = "Elaborazione...";
 
+/* (UserRulesRedirectController) - Processing state description */
+"user_rules_processing_descr" = "Si prega di attendere...";
+
 /* (UserRulesRedirectController) - Description when allowlist rule is removed; %@ stands for 'allowlist' word hex color */
 "user_rules_allowlist_rule_removed" = "è stato rimosso dalla<u style=color:%@>lista bianca</u>";
 
@@ -943,6 +949,18 @@
 
 /* (PremiumFeature) - Custom filters premium feature name */
 "custom_filters_feature_name" = "Filtri personalizzati";
+
+/* (PremiumFeature) - Advanced protection premium feature description */
+"advanced_protection_feature_description" = "Migliori metodi per il blocco di annunci complessi, come gli annunci YouTube in Safari";
+
+/* (PremiumFeature) - Security filters premium feature description */
+"security_filters_feature_description" = "Blocca phishing, malware, e contenuti sospetti";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "Crittografa le richieste DNS localmente e controlla la tua privacy";
+
+/* (PremiumFeature) - Custom filters premium feature description */
+"custom_filters_feature_description" = "Utilizza filtri di terze parti, o creane di personalizzati";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -1106,6 +1124,11 @@
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
 "youtube_script_error_title" = "Si è verificato un errore sconosciuto durante la rimozione degli annunci YouTube";
+
+// MARK: - ActionExtensionMainController
+/* (ActionExtensionMainController) - ActionExtension info for iOS 15>= */
+
+"action_extension_obsolete_info" = "Questa estensione non è aggiornata, ma la nuova estensione di AdGuard Web Safari è disponibile nel menu aA. Per iniziare ad utilizzare la nuova estensione, apri il menu aA, tocca Gestisci Estensioni e attiva l'interruttore di AdGuard.";
 
 /* (ActionExtensionMainController) - ActionExtension info for iOS 14<= */
 "action_extension_new_version_info" = "Una nuova versione di questa estensione è disponibile per iOS 15. Essa ha più funzionalità e una UI migliorata. Ricordati di aggiornare!";

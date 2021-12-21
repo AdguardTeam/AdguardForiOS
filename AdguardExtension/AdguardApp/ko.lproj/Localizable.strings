@@ -374,10 +374,10 @@
 "filter_rules_maximum" = "필터 규칙의 최대 갯수를 초과했습니다.";
 
 /* (FiltersController) Enabled state in groups section */
-"on_state" = "사용 중";
+"on_state" = "켜기";
 
 /* (FiltersController) Disabled state in groups section */
-"off_state" = "사용 안함";
+"off_state" = "끄기";
 
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "홈페이지:";
@@ -704,7 +704,7 @@
 "onboarding_first_step_text" = "<b>설정</b>을 엽니다";
 
 /* (OnboardingController) first step with advanced protection text*/
-"advanced_protection_onboarding_first_step_text" = "<b>설정</b>을 엽니다";
+"advanced_protection_onboarding_first_step_text" = "<b>설정</b>을 누릅니다.";
 
 /* (OnboardingController) second step text */
 "onboarding_second_step_text" = "<b>Safari</b>를 누르고 아래로 스와이프한 후<b>'콘텐츠 차단기'</b>를 누릅니다.";
@@ -717,6 +717,9 @@
 
 /* (OnboardingController) third step with advanced protection text */
 "advanced_protection_onboarding_third_step_text" = "모든 AdGuard 설정을 <b>켜세요</b>. 그럼 준비는 끝났습니다!";
+
+/* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
+"onboarding_fours_step_text" = "<b>고급 보호</b> 기능을 이용하려면, Safari를 열고, URL 입력란 좌측의 <b>가가</b> 아이콘을 누르고,<br><br> %@ <br><br>확장 프로그램 관리를 누른 다음 <b>AdGuard</b> 항목을 켜세요.";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "요청 차단";
@@ -944,6 +947,18 @@
 /* (PremiumFeature) - Custom filters premium feature name */
 "custom_filters_feature_name" = "시용자 지정 필터";
 
+/* (PremiumFeature) - Advanced protection premium feature description */
+"advanced_protection_feature_description" = "Safari 내 YouTube 광고와 같은 광고를 차단하는 향상된 방법";
+
+/* (PremiumFeature) - Security filters premium feature description */
+"security_filters_feature_description" = "피싱, 멀웨어 및 수상한 콘텐츠 차단";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "DNS 요청을 로컬로 암호화하고 개인정보를 통제해 보세요";
+
+/* (PremiumFeature) - Custom filters premium feature description */
+"custom_filters_feature_description" = "타사 필터를 사용하거나 나만의 필터를 만들어 보세요";
+
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
 /* (MainTabBarController) Main page tab for VoiceOver*/
@@ -1106,6 +1121,11 @@
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
 "youtube_script_error_title" = "YouTube 광고 제거 중 알 수 없는 오류가 발생했습니다";
+
+// MARK: - ActionExtensionMainController
+/* (ActionExtensionMainController) - ActionExtension info for iOS 15>= */
+
+"action_extension_obsolete_info" = "이 확장 프로그램은 최신 버전이 아니지만 가가 메뉴에서 새 Safari용 AdGuard 확장 프로그램을 찾을 수 있습니다. 새 확장 프로그램을 사용하려면 가가 메뉴를 열고 확장 프로그램 관리를 탭한 후 AdGuard 토글을 켭니다.";
 
 /* (ActionExtensionMainController) - ActionExtension info for iOS 14<= */
 "action_extension_new_version_info" = "iOS 15용으로 새로운 버전의 확장 프로그램이 출시되었습니다. 호환성이 뛰어나고 UI도 개선되었습니다. 업데이트하는 걸 잊지 마세요!";

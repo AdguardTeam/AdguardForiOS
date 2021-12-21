@@ -365,10 +365,10 @@
 "filter_rules_maximum" = "Het maximaal aantal filterregels is overschreden.";
 
 /* (FiltersController) Enabled state in groups section */
-"on_state" = "Ingeschakeld";
+"on_state" = "Aan";
 
 /* (FiltersController) Disabled state in groups section */
-"off_state" = "Niet ingeschakeld";
+"off_state" = "Uit";
 
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "Startpagina:";
@@ -695,7 +695,7 @@
 "onboarding_first_step_text" = "Open <b>Instellingen</b>.";
 
 /* (OnboardingController) first step with advanced protection text*/
-"advanced_protection_onboarding_first_step_text" = "Open <b>Instellingen</b>.";
+"advanced_protection_onboarding_first_step_text" = "<b>Instellingen</b> openen.";
 
 /* (OnboardingController) second step text */
 "onboarding_second_step_text" = "Tik op <b>Safari</b>, veeg omlaag en tik op <b>Inhoudblokkers</b>.";
@@ -708,6 +708,9 @@
 
 /* (OnboardingController) third step with advanced protection text */
 "advanced_protection_onboarding_third_step_text" = "Zet alle AdGuard-schakelaars op <b>aan</b>. Je bent er klaar voor!";
+
+/* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
+"onboarding_fours_step_text" = "Voor <b>Geavanceerde</b> bescherming, open Safari en tik het pictogram <b>aA</b> aan de linkerkant van het URL-veld,<br><br> %@ <br><br>tik vervolgens op <b>Uitbreidingen beheren</b> en schakel de uitbreiding <b>AdGuard</b> in.";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "Verzoek blokkeren";
@@ -935,6 +938,18 @@
 /* (PremiumFeature) - Custom filters premium feature name */
 "custom_filters_feature_name" = "Aangepaste filters";
 
+/* (PremiumFeature) - Advanced protection premium feature description */
+"advanced_protection_feature_description" = "Verbeterde methoden om complexe advertenties te blokkeren, zoals YouTube-advertenties in Safari";
+
+/* (PremiumFeature) - Security filters premium feature description */
+"security_filters_feature_description" = "Phishing, malware en verdachte inhoud blokkeren";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "DNS-verzoeken lokaal versleutelen en je privacy beheren";
+
+/* (PremiumFeature) - Custom filters premium feature description */
+"custom_filters_feature_description" = "Filters van derden gebruiken of je eigen filters maken";
+
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
 /* (MainTabBarController) Main page tab for VoiceOver*/
@@ -1097,6 +1112,11 @@
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
 "youtube_script_error_title" = "Er is een onbekende fout opgetreden bij het verwijderen van YouTube-advertenties";
+
+// MARK: - ActionExtensionMainController
+/* (ActionExtensionMainController) - ActionExtension info for iOS 15>= */
+
+"action_extension_obsolete_info" = "Deze actie-uitbreiding is verouderd, maar de nieuwe AdGuard Web Safari-uitbreiding is beschikbaar in het aA-menu. Om de nieuwe extensie te gebruiken, open je het aA-menu, tik je op Uitbreidingen beheren en schakel je de AdGuard-schakelaar in.";
 
 /* (ActionExtensionMainController) - ActionExtension info for iOS 14<= */
 "action_extension_new_version_info" = "Er is een nieuwe versie van deze uitbreiding beschikbaar voor iOS 15. Deze heeft meer mogelijkheden en een verbeterde gebruikersinterface. Vergeet niet bij te werken!";

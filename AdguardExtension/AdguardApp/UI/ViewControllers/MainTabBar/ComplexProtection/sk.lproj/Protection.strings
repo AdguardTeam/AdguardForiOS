@@ -28,12 +28,6 @@
 /* Class = "UIButton"; normalTitle = "Purchase license"; ObjectID = "pv0-hE-9gb"; */
 "pv0-hE-9gb.normalTitle" = "Kúpiť licenciu";
 
-/* Class = "UILabel"; text = "Uses multi-level sophisticated filtering rules"; ObjectID = "rr4-ic-Pg8"; */
-"rr4-ic-Pg8.text" = "Používa viacúrovňové sofistikované filtračné pravidlá";
-
-/* Class = "UILabel"; text = "This module allows you to use a custom DNS server and enhances your privacy by encrypting your DNS queries"; ObjectID = "teo-vm-NRJ"; */
-"teo-vm-NRJ.text" = "Tento modul umožňuje používať vlastný server DNS a zvyšuje Vaše súkromie šifrovaním vašich DNS dopytov";
-
 /* Class = "UILabel"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
 "vNo-hV-l4c.text" = "Nie je nainštalované";
 

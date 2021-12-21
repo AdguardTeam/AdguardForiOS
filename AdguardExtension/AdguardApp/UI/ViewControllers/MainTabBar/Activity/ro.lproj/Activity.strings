@@ -1,14 +1,20 @@
 /* Class = "UIButton"; normalTitle = "Switch mode"; ObjectID = "1A6-DD-78f"; */
 "1A6-DD-78f.normalTitle" = "Mod de comutare";
 
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "1rj-wD-aeH"; */
+"1rj-wD-aeH.normalTitle" = "Adaugă";
+
 /* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "4IJ-xy-hky"; */
 "4IJ-xy-hky.normalTitle" = "criptate";
 
 /* Class = "UILabel"; text = "Activity"; ObjectID = "5bV-zZ-4dr"; */
 "5bV-zZ-4dr.text" = "Activitate";
 
+/* Class = "UIButton"; normalTitle = "Try for free"; ObjectID = "6xN-ij-jJj"; */
+"6xN-ij-jJj.normalTitle" = "Test gratuit";
+
 /* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
-"7mk-7J-iLD.normalTitle" = "Editează";
+"7mk-7J-iLD.normalTitle" = "Editare";
 
 /* Class = "UILabel"; text = "Most active companies"; ObjectID = "Asq-k8-hi1"; */
 "Asq-k8-hi1.text" = "Companiile cele mai active";
@@ -26,13 +32,13 @@
 "M4r-q5-RXv.text" = "Nume domeniu:";
 
 /* Class = "UILabel"; text = "You can see who tries to track you, view stats and the log of DNS requests blocking"; ObjectID = "T0y-mr-Zwa"; */
-"T0y-mr-Zwa.text" = "Puteți vedea cine vă urmărește, afișa statistici și jurnale de solicitări DNS blocate";
+"T0y-mr-Zwa.text" = "Puteți vedea cine încearcă să vă urmărească, puteți vedea statisticile și jurnalul de solicitări DNS blocate";
 
 /* Class = "UILabel"; text = "DNS protection is disabled"; ObjectID = "X1F-2p-Xpe"; */
 "X1F-2p-Xpe.text" = "Protecția DNS este dezactivată";
 
 /* Class = "UIButton"; normalTitle = "Enable"; ObjectID = "XYE-JT-WSH"; */
-"XYE-JT-WSH.normalTitle" = "Activează";
+"XYE-JT-WSH.normalTitle" = "Activare";
 
 /* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "Xgg-jX-hwe"; */
 "Xgg-jX-hwe.normalTitle" = "Copiat";
@@ -62,10 +68,13 @@
 "hoI-YR-JcD.normalTitle" = "Înapoi";
 
 /* Class = "UILabel"; text = "Recent activity"; ObjectID = "kX9-ZX-NOu"; */
-"kX9-ZX-NOu.text" = "Activitate recentă";
+"kX9-ZX-NOu.text" = "Activitatea recentă";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "kwZ-Kw-f1R"; */
 "kwZ-Kw-f1R.text" = "Blocare solicitare";
+
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "l5B-oj-DnW"; */
+"l5B-oj-DnW.normalTitle" = "Adaugă";
 
 /* Class = "UIButton"; normalTitle = "requests"; ObjectID = "lKJ-8V-GJi"; */
 "lKJ-8V-GJi.normalTitle" = "solicitări";

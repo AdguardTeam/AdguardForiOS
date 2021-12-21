@@ -1,11 +1,23 @@
 /* Class = "UIButton"; normalTitle = "Video guide"; ObjectID = "3ju-B8-UIZ"; */
 "3ju-B8-UIZ.normalTitle" = "Ghid video";
 
+/* Class = "UILabel"; text = "Terms and Conditions"; ObjectID = "E6C-TE-ZI6"; */
+"E6C-TE-ZI6.text" = "Termeni și condiții";
+
+/* Class = "UILabel"; text = "Enable AdGuard for Safari"; ObjectID = "F7O-MB-LHu"; */
+"F7O-MB-LHu.text" = "Activarea AdGuard pentru Safari";
+
+/* Class = "UILabel"; text = "Block Trackers"; ObjectID = "FDG-As-HDY"; */
+"FDG-As-HDY.text" = "Blochează tracker-ele";
+
 /* Class = "UIButton"; normalTitle = "Video guide"; ObjectID = "GOu-4j-RcN"; */
 "GOu-4j-RcN.normalTitle" = "Ghid video";
 
+/* Class = "UILabel"; text = "Stop thousands of corporations from tracking your every move. Regain control of your online privacy."; ObjectID = "Mzf-WJ-CpC"; Note = "String must be less or equal 4 lines"; */
+"Mzf-WJ-CpC.text" = "Oprește mii de corporații să vă urmărească fiecare mișcare. Recăpătați controlul asupra confidențialității dvs. online.";
+
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "cMV-qC-ZdE"; */
-"cMV-qC-ZdE.normalTitle" = "Continuă";
+"cMV-qC-ZdE.normalTitle" = "Continuați";
 
 /* Class = "UILabel"; text = "Block Ads"; ObjectID = "hXU-wD-fbI"; */
 "hXU-wD-fbI.text" = "Blocare de reclame";
@@ -14,4 +26,10 @@
 "hf9-6r-TUk.text" = "Blocare de deranjări";
 
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "q8l-xM-B5q"; */
-"q8l-xM-B5q.normalTitle" = "Continuă";
+"q8l-xM-B5q.normalTitle" = "Continuați";
+
+/* Class = "UILabel"; text = "AdGuard blocks ads in Safari on most websites. Enjoy faster web surfing without ads!"; ObjectID = "r3n-Il-Qe8"; Note = "String must be less or equal 4 lines"; */
+"r3n-Il-Qe8.text" = "AdGuard blochează reclamele în Safari pe cele mai multe site-uri web. Bucurați-vă de navigarea pe Web mai rapidă fără reclame!";
+
+/* Class = "UILabel"; text = "Use our collection of flexible filters to remove any type of content. Tune the filtering to your liking and surf the web your way."; ObjectID = "thP-lV-BhN"; Note = "String must be less or equal 4 lines"; */
+"thP-lV-BhN.text" = "Utilizați colecția noastră de filtre flexibile pentru a elimina orice tip de conținut. Reglați filtrarea după bunul plac și navigați pe web după cum doriți.";
