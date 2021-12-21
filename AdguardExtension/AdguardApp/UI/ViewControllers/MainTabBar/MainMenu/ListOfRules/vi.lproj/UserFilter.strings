@@ -1,5 +1,5 @@
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "5eU-q4-Xed"; Note = "(AddRuleController) cancel button"; */
-"5eU-q4-Xed.normalTitle" = "Huỷ";
+"5eU-q4-Xed.normalTitle" = "Hủy bỏ";
 
 /* Class = "UIButton"; normalTitle = "Save"; ObjectID = "Bvs-mI-vEr"; */
 "Bvs-mI-vEr.normalTitle" = "Lưu";
@@ -18,6 +18,9 @@
 
 /* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "WEk-KB-xeG"; */
 "WEk-KB-xeG.normalTitle" = "Xoá";
+
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "fCd-gA-rXS"; */
+"fCd-gA-rXS.normalTitle" = "Thêm";
 
 /* Class = "UIButton"; normalTitle = "Enable"; ObjectID = "gON-PA-nSb"; */
 "gON-PA-nSb.normalTitle" = "Kích hoạt";

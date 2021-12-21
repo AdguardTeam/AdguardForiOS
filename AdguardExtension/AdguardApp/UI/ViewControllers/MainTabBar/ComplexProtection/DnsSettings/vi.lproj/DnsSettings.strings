@@ -28,6 +28,9 @@
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "QYv-iX-uIo"; */
 "QYv-iX-uIo.text" = "Bảo vệ hệ thống";
 
+/* Class = "UIButton"; normalTitle = "Try for free"; ObjectID = "Uem-fP-tai"; */
+"Uem-fP-tai.normalTitle" = "Thử miễn phí";
+
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
 "Wml-J6-ced.text" = "Danh sách bỏ qua";
 

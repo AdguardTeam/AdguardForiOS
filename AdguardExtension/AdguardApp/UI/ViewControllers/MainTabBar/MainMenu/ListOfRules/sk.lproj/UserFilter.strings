@@ -19,6 +19,9 @@
 /* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "WEk-KB-xeG"; */
 "WEk-KB-xeG.normalTitle" = "Vymazať";
 
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "fCd-gA-rXS"; */
+"fCd-gA-rXS.normalTitle" = "Pridať";
+
 /* Class = "UIButton"; normalTitle = "Enable"; ObjectID = "gON-PA-nSb"; */
 "gON-PA-nSb.normalTitle" = "Zapnúť";
 

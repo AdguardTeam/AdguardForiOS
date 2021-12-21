@@ -35,7 +35,7 @@
 "BQY-q7-BQU.text" = "Chặn thành phần";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "Dfm-If-1AX"; Note = "(AddCustomFilterController) cancel button"; */
-"Dfm-If-1AX.normalTitle" = "Huỷ";
+"Dfm-If-1AX.normalTitle" = "Hủy bỏ";
 
 /* Class = "UILabel"; text = "Blocking mode"; ObjectID = "ESe-CM-On1"; */
 "ESe-CM-On1.text" = "Chế độ chặn";
@@ -92,7 +92,7 @@
 "Vtx-vp-WIV.headerTitle" = "Chủ đề";
 
 /* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "WUY-Cq-SPm"; Note = "(AddCustomFilterController) cancel button"; */
-"WUY-Cq-SPm.normalTitle" = "Huỷ";
+"WUY-Cq-SPm.normalTitle" = "Hủy bỏ";
 
 /* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
 "X0A-gU-hzf.text" = "Chỉ tự động cập nhật qua Wi-Fi";

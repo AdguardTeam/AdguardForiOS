@@ -1,11 +1,17 @@
 /* Class = "UIButton"; normalTitle = "Switch mode"; ObjectID = "1A6-DD-78f"; */
 "1A6-DD-78f.normalTitle" = "Chuyển chế độ";
 
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "1rj-wD-aeH"; */
+"1rj-wD-aeH.normalTitle" = "Thêm";
+
 /* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "4IJ-xy-hky"; */
 "4IJ-xy-hky.normalTitle" = "đã chặn";
 
 /* Class = "UILabel"; text = "Activity"; ObjectID = "5bV-zZ-4dr"; */
 "5bV-zZ-4dr.text" = "Hoạt động";
+
+/* Class = "UIButton"; normalTitle = "Try for free"; ObjectID = "6xN-ij-jJj"; */
+"6xN-ij-jJj.normalTitle" = "Thử miễn phí";
 
 /* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
 "7mk-7J-iLD.normalTitle" = "Chỉnh sửa";
@@ -59,13 +65,16 @@
 "hR9-Pm-Gq0.text" = "Hoạt động gần đây";
 
 /* Class = "UIButton"; normalTitle = "Back"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
-"hoI-YR-JcD.normalTitle" = "Back";
+"hoI-YR-JcD.normalTitle" = "Trở lại";
 
 /* Class = "UILabel"; text = "Recent activity"; ObjectID = "kX9-ZX-NOu"; */
 "kX9-ZX-NOu.text" = "Hoạt động gần đây";
 
 /* Class = "UILabel"; text = "Block request"; ObjectID = "kwZ-Kw-f1R"; */
 "kwZ-Kw-f1R.text" = "Chặn yên cầu";
+
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "l5B-oj-DnW"; */
+"l5B-oj-DnW.normalTitle" = "Thêm";
 
 /* Class = "UIButton"; normalTitle = "requests"; ObjectID = "lKJ-8V-GJi"; */
 "lKJ-8V-GJi.normalTitle" = "Yêu cầu";

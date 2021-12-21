@@ -67,11 +67,20 @@
 /* Class = "UILabel"; text = "How to block ads with AdGuard"; ObjectID = "iwI-Gm-rAp"; */
 "iwI-Gm-rAp.text" = "Kako blokirati oglase s AdGuardom";
 
+/* Class = "UILabel"; text = "Report a bug or submit a feature request"; ObjectID = "ow5-MW-Ued"; */
+"ow5-MW-Ued.text" = "Prijavite grešku ili pošaljite zahtjev za značajku";
+
+/* Class = "UILabel"; text = "If you've run into a problem or have a suggestion on how to improve AdGuard, tell us about it"; ObjectID = "pJU-2c-JHy"; */
+"pJU-2c-JHy.text" = "Ako ste naišli na problem ili imate prijedlog kako poboljšati AdGuard, javite nam";
+
 /* Class = "UILabel"; text = "Report incorrect blocking"; ObjectID = "q9f-Zw-7sc"; Note = "(Main Menu) Advanced Settings caption"; */
 "q9f-Zw-7sc.text" = "Prijavi netočno blokiranje";
 
 /* Class = "UILabel"; text = "You can export logs and send them to us in a convenient way for you"; ObjectID = "qDy-4e-MsZ"; */
 "qDy-4e-MsZ.text" = "Možete izvesti zapisnike i poslati nam ih na prikladan način za vas";
+
+/* Class = "UILabel"; text = "Your email address:"; ObjectID = "rHj-Ne-4zA"; */
+"rHj-Ne-4zA.text" = "Vaša adresa e-pošte:";
 
 /* Class = "UILabel"; text = "Discuss"; ObjectID = "rlh-5H-fPk"; Note = "(Main Menu) Advanced Settings caption"; */
 "rlh-5H-fPk.text" = "Rasprava";

@@ -1,6 +1,9 @@
 /* Class = "UIButton"; normalTitle = "Video guide"; ObjectID = "3ju-B8-UIZ"; */
 "3ju-B8-UIZ.normalTitle" = "Video návod";
 
+/* Class = "UILabel"; text = "Terms and Conditions"; ObjectID = "E6C-TE-ZI6"; */
+"E6C-TE-ZI6.text" = "Pravidlá a podmienky";
+
 /* Class = "UIButton"; normalTitle = "Video guide"; ObjectID = "GOu-4j-RcN"; */
 "GOu-4j-RcN.normalTitle" = "Video návod";
 

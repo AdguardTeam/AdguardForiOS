@@ -1,6 +1,11 @@
 {
+    "popup_modal_advanced_blocking_disabled_button": {
+        "message": "Միացնել",
+        "description": "TEXT MAX LENGTH: 20"
+    },
     "popup_modal_btn_free": {
-        "message": "Արդիացնել"
+        "message": "Արդիացնել",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "extension_name": {
         "message": "AdGuard"

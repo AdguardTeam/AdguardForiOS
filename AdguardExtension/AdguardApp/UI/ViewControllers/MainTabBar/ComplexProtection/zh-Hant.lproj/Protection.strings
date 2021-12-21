@@ -50,7 +50,7 @@
 "pv0-hE-9gb.normalTitle" = "購買授權";
 
 /* Class = "UILabel"; text = "Blocks complex ads, such as YouTube ads in Safari"; ObjectID = "rm0-Ip-riS"; */
-"rm0-Ip-riS.text" = "封鎖復雜廣告，比如 Safari 中的 YouTube 廣告";
+"rm0-Ip-riS.text" = "封鎖複雜廣告，諸如在 Safari 中的 YouTube 廣告";
 
 /* Class = "UILabel"; text = "Uses sophisticated multi-level filtering rules"; ObjectID = "rr4-ic-Pg8"; */
 "rr4-ic-Pg8.text" = "使用多層細緻過濾規則";

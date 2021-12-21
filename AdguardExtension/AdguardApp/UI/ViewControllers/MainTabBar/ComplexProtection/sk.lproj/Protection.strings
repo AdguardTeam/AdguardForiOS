@@ -4,20 +4,38 @@
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "884-Hm-mb6"; */
 "884-Hm-mb6.text" = "Ochrana Safari";
 
+/* Class = "UILabel"; text = "Enhanced functionality for ultimate ad blocking and content filtering"; ObjectID = "9wg-p1-Dh8"; */
+"9wg-p1-Dh8.text" = "Súbor pokročilých nástrojov na blokovanie reklám na lepšie filtrovanie";
+
 /* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "AZY-QZ-8d9"; */
 "AZY-QZ-8d9.text" = "Bblokovanie reklám na YouTube";
 
 /* Class = "UILabel"; text = "AdGuard VPN"; ObjectID = "Hnw-bh-Bgh"; */
 "Hnw-bh-Bgh.text" = "AdGuard VPN";
 
+/* Class = "UILabel"; text = "Advanced protection"; ObjectID = "Lsa-74-hd5"; */
+"Lsa-74-hd5.text" = "Pokročilá ochrana";
+
+/* Class = "UILabel"; text = "Advanced protection"; ObjectID = "OxY-0X-J4W"; */
+"OxY-0X-J4W.text" = "Pokročilá ochrana";
+
 /* Class = "UILabel"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "premium";
+
+/* Class = "UILabel"; text = "Uses enhanced functionality for ultimate ad blocking and content filtering"; ObjectID = "WOG-Hk-11z"; */
+"WOG-Hk-11z.text" = "Blokuje tvrdohlavé reklamy vrátane reklám YouTube v prehliadači Safari";
 
 /* Class = "UILabel"; text = "Block YouTube Ads (by AdGuard)"; ObjectID = "XXP-EO-M4h"; */
 "XXP-EO-M4h.text" = "Blokovanie YouTube reklám (pomocou AdGuard)";
 
+/* Class = "UILabel"; text = "Blocks ads even on the websites that try to circumvent ad blocking"; ObjectID = "ZgQ-6Q-ytX"; */
+"ZgQ-6Q-ytX.text" = "Obchádza detektory adblock na webových stránkach";
+
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "cnF-td-Ba1"; */
 "cnF-td-Ba1.text" = "DNS ochrana";
+
+/* Class = "UILabel"; text = "Requires access to web pages' contents but uses it only for ad blocking"; ObjectID = "i0Z-fi-Rc0"; */
+"i0Z-fi-Rc0.text" = "Vyžaduje oprávnenia na úrovni systému a používa ich len na blokovanie reklám";
 
 /* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "kDM-2d-bRK"; */
 "kDM-2d-bRK.text" = "Bblokovanie reklám na YouTube";
@@ -27,6 +45,12 @@
 
 /* Class = "UIButton"; normalTitle = "Purchase license"; ObjectID = "pv0-hE-9gb"; */
 "pv0-hE-9gb.normalTitle" = "Kúpiť licenciu";
+
+/* Class = "UILabel"; text = "Blocks complex ads, such as YouTube ads in Safari"; ObjectID = "rm0-Ip-riS"; */
+"rm0-Ip-riS.text" = "Blokuje tvrdohlavé reklamy vrátane reklám YouTube v prehliadači Safari";
+
+/* Class = "UILabel"; text = "Uses sophisticated multi-level filtering rules"; ObjectID = "rr4-ic-Pg8"; */
+"rr4-ic-Pg8.text" = "Používa viacúrovňové sofistikované filtračné pravidlá";
 
 /* Class = "UILabel"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
 "vNo-hV-l4c.text" = "Nie je nainštalované";

@@ -921,6 +921,9 @@
 
 "user_rules_processing_title" = "Behandler...";
 
+/* (UserRulesRedirectController) - Processing state description */
+"user_rules_processing_descr" = "Et øjeblik...";
+
 /* (UserRulesRedirectController) - Description when allowlist rule is removed; %@ stands for 'allowlist' word hex color */
 "user_rules_allowlist_rule_removed" = "er fjernet fra <u style=color:%@>hvidlisten</u>";
 

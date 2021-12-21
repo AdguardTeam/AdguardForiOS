@@ -37,6 +37,9 @@
 /* Class = "UILabel"; text = "Settings"; ObjectID = "UJb-NW-d5B"; */
 "UJb-NW-d5B.text" = "Beállítások";
 
+/* Class = "UILabel"; text = "Attach application logs"; ObjectID = "V7E-QE-uIA"; */
+"V7E-QE-uIA.text" = "Alkalmazási naplók csatolása";
+
 /* Class = "UILabel"; text = "Discuss on our forum, in social networks, or on GitHub"; ObjectID = "W6h-Gt-MMt"; */
 "W6h-Gt-MMt.text" = "Beszélgessen a fórumunkon, a közösségi hálóinkon vagy a GitHub-on";
 
@@ -64,11 +67,20 @@
 /* Class = "UILabel"; text = "How to block ads with AdGuard"; ObjectID = "iwI-Gm-rAp"; */
 "iwI-Gm-rAp.text" = "Hogyan blokkolja a hirdetéseket az AdGuarddal";
 
+/* Class = "UILabel"; text = "Report a bug or submit a feature request"; ObjectID = "ow5-MW-Ued"; */
+"ow5-MW-Ued.text" = "Hibajelentés vagy funkciókérelem benyújtása";
+
+/* Class = "UILabel"; text = "If you've run into a problem or have a suggestion on how to improve AdGuard, tell us about it"; ObjectID = "pJU-2c-JHy"; */
+"pJU-2c-JHy.text" = "Ha problémába ütközik, vagy javaslata van az AdGuard fejlesztésére, szóljon nekünk";
+
 /* Class = "UILabel"; text = "Report incorrect blocking"; ObjectID = "q9f-Zw-7sc"; Note = "(Main Menu) Advanced Settings caption"; */
 "q9f-Zw-7sc.text" = "Téves blokkolás jelentése";
 
 /* Class = "UILabel"; text = "You can export logs and send them to us in a convenient way for you"; ObjectID = "qDy-4e-MsZ"; */
 "qDy-4e-MsZ.text" = "Exportálhatja a naplókat és elküldheti nekünk kényelmes módon";
+
+/* Class = "UILabel"; text = "Your email address:"; ObjectID = "rHj-Ne-4zA"; */
+"rHj-Ne-4zA.text" = "Az Ön email címe:";
 
 /* Class = "UILabel"; text = "Discuss"; ObjectID = "rlh-5H-fPk"; Note = "(Main Menu) Advanced Settings caption"; */
 "rlh-5H-fPk.text" = "Beszélgetés";

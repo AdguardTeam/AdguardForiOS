@@ -6,93 +6,135 @@
         "message": "AdGuard Safari Web 扩展"
     },
     "popup_action_safari_protection_title": {
-        "message": "Safari 防护"
+        "message": "Safari 防护",
+        "description": "TEXT MAX LENGTH: 25"
     },
-    "popup_action_safari_protection_description": {
-        "message": "用于此网站"
+    "popup_action_safari_protection_description_enabled_for_site": {
+        "message": "在此网站上启用",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_safari_protection_description_disabled_for_site": {
+        "message": "在此网站上已禁用",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_safari_protection_description_disabled": {
-        "message": "已禁用"
+        "message": "保护已禁用",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_status_desc_enabled": {
-        "message": "保护已启用"
+        "message": "保护已启用",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_status_desc_disabled": {
-        "message": "保护已禁用"
+        "message": "保护已禁用",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_block_element": {
-        "message": "屏蔽此页面上的元素"
+        "message": "屏蔽此页面上的元素",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_delete_user_rules": {
-        "message": "删除用于此网页上的所有用户规则"
+        "message": "删除用于此网页上的用户规则",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_insufficient_permissions": {
+        "message": "访问权受限",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_starting": {
-        "message": "正在启用保护..."
+        "message": "正在启用保护...",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_allowlisted": {
-        "message": "已添加到白名单"
+        "message": "已添加到白名单",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_allowlisted_inverted": {
+        "message": "已添加白名单（颠倒的）",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_action_current_site_desc_basic_only": {
-        "message": "现在为您进行基础保护"
+        "message": "现在为您进行基础保护",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_modal_all_sites_allowed_title": {
-        "message": "高级保护"
+        "message": "高级保护",
+        "description": "TEXT MAX LENGTH: 25"
     },
     "popup_modal_all_sites_allowed_desc": {
-        "message": "太好了！AdGuard 现在可以拦截更多广告，应对最困难的挑战。"
+        "message": "太好了！AdGuard 现在可以拦截更多广告，应对最困难的挑战。",
+        "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_all_sites_allowed_button": {
-        "message": "继续"
+        "message": "继续",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_not_all_sites_allowed_title": {
-        "message": "选择性保护"
+        "message": "选择性保护",
+        "description": "TEXT MAX LENGTH: 25"
     },
     "popup_modal_not_all_sites_allowed_desc": {
-        "message": "您仅在此网站上启用 AdGuard。除非您允许 AdGuard 拦截所有广告，否则其他网站上依然会出现广告。"
+        "message": "您仅在一些网站上启用 AdGuard。除非您允许 AdGuard 拦截所有广告，否则其他网站上依然会出现广告。<a>了解更多<\/a>",
+        "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_not_all_sites_allowed_button": {
-        "message": "继续"
+        "message": "继续",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_advanced_blocking_disabled_title": {
-        "message": "高级保护被关闭"
+        "message": "高级保护被关闭",
+        "description": "TEXT MAX LENGTH: 40"
     },
     "popup_modal_advanced_blocking_disabled_description": {
-        "message": "Userscripts 和 YouTube 广告拦截未激活。"
+        "message": "进阶拦截规则及其他功能不可用。<a>阅读更多<\/a>",
+        "description": "TEXT MAX LENGTH: 85"
     },
     "popup_modal_advanced_blocking_disabled_button": {
-        "message": "打开"
+        "message": "启用",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_title_free": {
-        "message": "享受 AdGuard 全部功能"
+        "message": "享受 AdGuard 全部功能",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "popup_modal_desc_free": {
-        "message": "您还没有 AdGuard 高级版提供的进阶保护水平。快来拦截更多广告，包括 Safari 里的 YouTube 广告。"
+        "message": "您还没有 AdGuard 高级版提供的进阶保护水平。快试试拦截更多更复杂的广告及跟踪器。",
+        "description": "TEXT MAX LENGTH: 140"
     },
     "popup_modal_btn_free": {
-        "message": "升级"
+        "message": "升级",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_fullscreen_support_title": {
-        "message": "Uh-oh！您需要帮助吗？"
+        "message": "您需要帮助吗？",
+        "description": "TEXT MAX LENGTH: 28"
     },
     "popup_fullscreen_support_desc": {
-        "message": "发生错误？让我们来解决。"
+        "message": "发生错误？让我们来解决。",
+        "description": "TEXT MAX LENGTH: 45"
     },
     "popup_protection_disabled_support_desc": {
-        "message": "Uh-oh！用于此网站的保护已禁用。发生错误了吗？让我们来解决吧！"
+        "message": "用于此网站的保护已禁用。发生错误了吗？让我们来解决。",
+        "description": "TEXT MAX LENGTH: 85"
     },
     "popup_support_button_text": {
-        "message": "报告错误"
+        "message": "报告错误",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "modal_protection_off_title": {
-        "message": "开启 AdGuard"
+        "message": "开启 AdGuard",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "modal_protection_off_settings": {
-        "message": "打开<b>设置<\/b>"
+        "message": "打开<b>设置<\/b>",
+        "description": "TEXT MAX LENGTH: 28"
     },
     "modal_protection_off_extensions": {
-        "message": "点击 <b>Safari<\/b>，往下滑动并点击<b>内容拦截器<\/b>"
+        "message": "点击 <b>Safari<\/b>，往下滑动并点击<b>扩展<\/b>",
+        "description": "TEXT MAX LENGTH: 56"
     },
     "modal_protection_off_switch": {
-        "message": "<b>启用<\/b>所有 AdGuard 扩展"
+        "message": "<b>启用<\/b>所有 AdGuard 内容拦截器",
+        "description": "TEXT MAX LENGTH: 28"
     }
 }

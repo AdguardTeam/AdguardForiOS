@@ -3,25 +3,32 @@
         "message": "AdGuard"
     },
     "popup_modal_all_sites_allowed_button": {
-        "message": "Fortsätt"
+        "message": "Fortsätt",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_not_all_sites_allowed_button": {
-        "message": "Fortsätt"
+        "message": "Fortsätt",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_advanced_blocking_disabled_button": {
-        "message": "Aktivera"
+        "message": "Aktivera",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_modal_btn_free": {
-        "message": "Uppgradera"
+        "message": "Uppgradera",
+        "description": "TEXT MAX LENGTH: 20"
     },
     "popup_support_button_text": {
-        "message": "Rapportera ett problem"
+        "message": "Rapportera ett problem",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "modal_protection_off_title": {
-        "message": "Koppa på AdGuard."
+        "message": "Koppa på AdGuard.",
+        "description": "TEXT MAX LENGTH: 30"
     },
     "modal_protection_off_settings": {
-        "message": "Öppna <b>Inställningar<\/b>"
+        "message": "Öppna <b>Inställningar<\/b>",
+        "description": "TEXT MAX LENGTH: 28"
     },
     "extension_description": {
         "message": "AdGuard Safari Web Extension"

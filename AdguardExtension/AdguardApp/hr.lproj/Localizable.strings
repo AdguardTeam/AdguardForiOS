@@ -374,7 +374,7 @@
 "filter_rules_maximum" = "Dosegli ste maksimalni broj pravila filtara.";
 
 /* (FiltersController) Enabled state in groups section */
-"on_state" = "Omogućen";
+"on_state" = "Omogućeno";
 
 /* (FiltersController) Disabled state in groups section */
 "off_state" = "Onemogućeno";
@@ -704,7 +704,7 @@
 "onboarding_first_step_text" = "Otvorite <b>postavke</b>";
 
 /* (OnboardingController) first step with advanced protection text*/
-"advanced_protection_onboarding_first_step_text" = "Otvorite <b>postavke</b>";
+"advanced_protection_onboarding_first_step_text" = "Otvorite <b>Postavke</b>.";
 
 /* (OnboardingController) second step text */
 "onboarding_second_step_text" = "Pritisnite na <b>Safari</b> i odaberite <b>\"Blokeri sadržaja\"</b> u izborniku";
@@ -717,6 +717,9 @@
 
 /* (OnboardingController) third step with advanced protection text */
 "advanced_protection_onboarding_third_step_text" = "Postavite sve AdGuard preklopnike na <b>uključeno</b>. Spremni ste!";
+
+/* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
+"onboarding_fours_step_text" = "Za <b>Naprednu</b> zaštitu, otvorite Safari, dodirnite <b>aA</b> ikonu na lijevoj strani polja za unos adrese,<br><br> %@ <br><br>potom dodirnite <b>Upravljaj proširenjima</b> i omogućite <b>AdGuard</b> preklopnik.";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "Blokiraj zahtjev";
@@ -918,6 +921,9 @@
 
 "user_rules_processing_title" = "Procesiram...";
 
+/* (UserRulesRedirectController) - Processing state description */
+"user_rules_processing_descr" = "Molimo, pričekajte trenutak...";
+
 /* (UserRulesRedirectController) - Description when allowlist rule is removed; %@ stands for 'allowlist' word hex color */
 "user_rules_allowlist_rule_removed" = "je uklonjen sa <u style=color:%@>allowlist</u>";
 
@@ -943,6 +949,18 @@
 
 /* (PremiumFeature) - Custom filters premium feature name */
 "custom_filters_feature_name" = "Prilagođeni filtri";
+
+/* (PremiumFeature) - Advanced protection premium feature description */
+"advanced_protection_feature_description" = "Poboljšane metode za blokiranje složenih oglasa, kao što su YouTube oglasi u Safariju";
+
+/* (PremiumFeature) - Security filters premium feature description */
+"security_filters_feature_description" = "Blokiraj phishing, štetan softver i sumnjiv sadržaj";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "Šifrirajte DNS zahtjeve lokalno i kontrolirajte svoju privatnost";
+
+/* (PremiumFeature) - Custom filters premium feature description */
+"custom_filters_feature_description" = "Koristite filtre trećih strana ili izradite svoje";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -1107,6 +1125,11 @@
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
 "youtube_script_error_title" = "Došlo je do nepoznate pogreške tijekom uklanjanja YouTube oglasa";
 
+// MARK: - ActionExtensionMainController
+/* (ActionExtensionMainController) - ActionExtension info for iOS 15>= */
+
+"action_extension_obsolete_info" = "Ovo proširenje akcije je zastarjelo, ali novo proširenje AdGuard Web Safari dostupno je u izborniku aA. Da biste počeli koristiti novo proširenje, otvorite aA izbornik, dodirnite Upravljanje proširenjima i uključite prekidač AdGuard.";
+
 /* (ActionExtensionMainController) - ActionExtension info for iOS 14<= */
 "action_extension_new_version_info" = "Dostupna je nova inačica proširenja za iOS 15. Ista sadrži unaprjeđeno korisničko sučelje. Nemojte zaboraviti nadogradnju!";
 
@@ -1124,6 +1147,9 @@
 
 /* (BackgroundFetchController) - Background app refresh every 24 hours title */
 "background_fetch_twenty_four_hours_period" = "Svakih 24 sata";
+
+/* Background app refresh time title */
+"background_app_refresh_time_title" = "Vrijeme osvježavanja aplikacije u pozadini";
 
 /* (DnsProvidersController) - add new dns server title */
 "add_custom_dns_server_title" = "Dodaj prilagođeni DNS poslužitelj";
