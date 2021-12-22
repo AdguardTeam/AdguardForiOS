@@ -351,6 +351,15 @@ extension AESharedResourcesProtocol {
             sharedDefaults().set(newValue, forKey: whatsNewScreenShownKey)
         }
     }
+
+    var isMigrationTo4_3Passed: Bool {
+        get {
+            return sharedDefaults().bool(forKey: "isMigrationTo4_3PassedKey")
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: "isMigrationTo4_3PassedKey")
+        }
+    }
 }
 
 fileprivate extension AESharedResourcesProtocol {

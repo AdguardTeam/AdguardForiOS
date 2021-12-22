@@ -101,9 +101,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        DDLogInfo("(AppDelegate) willFinishLaunchingWithOptions called in background=\(application.applicationState == .background)")
 
         //------------- Preparing for start application. Stage 1. -----------------
-        migrationService.migrateIfNeeded()
+
+        // Do not migrate data while background fetch
+        if application.applicationState != .background {
+            migrationService.migrateIfNeeded()
+        }
         purchaseService.checkLicenseStatus()
 
         activateWithOpenUrl = false
@@ -113,7 +118,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //------------ Interface Tuning -----------------------------------
         self.window?.backgroundColor = UIColor.clear
 
-        if (application.applicationState != .background) {
+        if application.applicationState != .background {
             purchaseService.checkPremiumStatusChanged()
         }
 
@@ -121,13 +126,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        DDLogInfo("(AppDelegate) didFinishLaunchingWithOptions called in background=\(application.applicationState == .background)")
 
         SentrySDK.start { options in
             options.dsn = Constants.Sentry.dsnUrl
             options.enableAutoSessionTracking = false
         }
 
-        prepareControllers()
+        if application.applicationState != .background {
+            prepareControllers()
+        }
 
         //------------- Preparing for start application. Stage 2. -----------------
         DDLogInfo("(AppDelegate) Preparing for start application. Stage 2.")
@@ -137,10 +145,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         subscribeToNotifications()
 
         // Install default DNS filter if needed
-        let defaultDnsFilterInstaller = DefaultDnsFilterInstaller(resources: resources, dnsProtection: dnsProtection)
-        defaultDnsFilterInstaller.installDefaultDnsFilterIfNeeded()
+        if application.applicationState != .background {
+            let defaultDnsFilterInstaller = DefaultDnsFilterInstaller(resources: resources, dnsProtection: dnsProtection)
+            defaultDnsFilterInstaller.installDefaultDnsFilterIfNeeded()
+        }
 
-        if firstRun {
+        if firstRun && application.applicationState != .background {
             configuration.showStatusBar = false
             setupOnFirstAppRun()
             // After first app run we don't need to call finishBackgroundUpdate
@@ -230,6 +240,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         // Update filters in background
+
+        // Do not update filters in background while migration in the main process wasn't called
+        guard resources.isMigrationTo4_3Passed else {
+            completionHandler(.noData)
+            return
+        }
+
         safariProtection.updateSafariProtectionInBackground { [weak self] result in
             if let error = result.error {
                 DDLogError("(AppDelegate) - backgroundFetch; Received error from SDK: \(error)")

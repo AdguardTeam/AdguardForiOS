@@ -134,6 +134,7 @@ final class MigrationService: MigrationServiceProtocol {
 
         let currentBuildVersion = Int(productInfo.buildNumber())
         resources.buildVersion = currentBuildVersion ?? 0
+        resources.isMigrationTo4_3Passed = true
     }
 }
 
