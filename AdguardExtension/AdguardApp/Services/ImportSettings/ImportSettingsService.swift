@@ -29,6 +29,11 @@ protocol ImportSettingsServiceProtocol {
 /// This class is responsible for applying the imported settings
 final class ImportSettingsService: ImportSettingsServiceProtocol {
 
+    struct FiltersImportContainer {
+        let toImportFilters: [ImportSettings.FilterSettings]
+        let toEnableFilters: [ImportSettings.FilterSettings]
+    }
+
     // MARK: - Services
 
     private let dnsProvidersManager: DnsProvidersManagerProtocol
@@ -150,12 +155,12 @@ final class ImportSettingsService: ImportSettingsServiceProtocol {
         let customFilters = safariProtection.groups.first { $0.groupType == .custom }?.filters ?? []
         let overrideCustomFilters = settings.overrideCustomSafariFilters ?? false
 
-        let uniqueCustomSafariFiltersSettings = collectUniqueFiltersToImport(filters: customFilters, filtersToImport: uniqueImportCustomSafariFilters, override: overrideCustomFilters)
+        let importFilters = parseFiltersToImport(filters: customFilters, filtersToImport: uniqueImportCustomSafariFilters, override: overrideCustomFilters)
 
         var resultSettings = [ImportSettings.FilterSettings]()
         let group = DispatchGroup()
         group.enter()
-        safariImportHelper.importCustomSafariFilters(uniqueCustomSafariFiltersSettings, override: overrideCustomFilters) { result in
+        safariImportHelper.importCustomSafariFilters(importFilters, override: overrideCustomFilters) { result in
             resultSettings = result
             group.leave()
         }
@@ -171,12 +176,12 @@ final class ImportSettingsService: ImportSettingsServiceProtocol {
         let dnsFilters = dnsProtection.filters
         let overrideDnsFilters = settings.overrideDnsFilters ?? false
 
-        let uniqueCustomDnsFilterSettings = collectUniqueFiltersToImport(filters: dnsFilters, filtersToImport: uniqueImportDnsFilters, override: overrideDnsFilters)
+        let importFilters = parseFiltersToImport(filters: dnsFilters, filtersToImport: uniqueImportDnsFilters, override: overrideDnsFilters)
 
         var resultSettings = [ImportSettings.FilterSettings]()
         let group = DispatchGroup()
         group.enter()
-        dnsImportHelper.importDnsFilters(uniqueCustomDnsFilterSettings, override: overrideDnsFilters) { result in
+        dnsImportHelper.importDnsFilters(importFilters, override: overrideDnsFilters) { result in
             resultSettings = result
             group.leave()
         }
@@ -206,14 +211,23 @@ final class ImportSettingsService: ImportSettingsServiceProtocol {
         return settings.importDnsBlocklistRulesStatus
     }
 
-    // Return unique filters
-    private func collectUniqueFiltersToImport(filters: [FilterMetaProtocol], filtersToImport: [ImportSettings.FilterSettings], override: Bool) -> [ImportSettings.FilterSettings] {
-        return filtersToImport.compactMap { filterToImport in
-            if override || !filters.contains(where: { $0.filterDownloadPage == filterToImport.url }) {
-                return filterToImport
-            }
-            return nil
+    private func parseFiltersToImport(filters: [FilterMetaProtocol], filtersToImport: [ImportSettings.FilterSettings], override: Bool) -> FiltersImportContainer {
+
+        if override {
+            return FiltersImportContainer(toImportFilters: filtersToImport, toEnableFilters: [])
         }
+
+        var toImportFilters: [ImportSettings.FilterSettings] = []
+        var toEnableFilters: [ImportSettings.FilterSettings] = []
+        filtersToImport.forEach { filterToImport in
+            if filters.contains(where: { $0.filterDownloadPage == filterToImport.url }) {
+                toEnableFilters.append(filterToImport)
+            } else {
+                toImportFilters.append(filterToImport)
+            }
+        }
+
+        return FiltersImportContainer(toImportFilters: toImportFilters, toEnableFilters: toEnableFilters)
     }
 
     private func updateMetaAndReloadCB() {

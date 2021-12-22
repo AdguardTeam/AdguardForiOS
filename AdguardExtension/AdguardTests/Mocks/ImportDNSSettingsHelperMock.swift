@@ -48,15 +48,15 @@ class ImportDNSSettingsHelperMock: ImportDNSSettingsHelperProtocol {
 
     var invokedImportDnsFilters = false
     var invokedImportDnsFiltersCount = 0
-    var invokedImportDnsFiltersParameters: (filters: [ImportSettings.FilterSettings], override: Bool)?
-    var invokedImportDnsFiltersParametersList = [(filters: [ImportSettings.FilterSettings], override: Bool)]()
+    var invokedImportDnsFiltersParameters: (filtersContainer: ImportSettingsService.FiltersImportContainer, override: Bool)?
+    var invokedImportDnsFiltersParametersList = [(filtersContainer: ImportSettingsService.FiltersImportContainer, override: Bool)]()
     var stubbedImportDnsFiltersCompletionResult: [ImportSettings.FilterSettings] = []
 
-    func importDnsFilters(_ filters: [ImportSettings.FilterSettings], override: Bool, completion: @escaping ([ImportSettings.FilterSettings]) -> Void) {
+    func importDnsFilters(_ filtersContainer: ImportSettingsService.FiltersImportContainer, override: Bool, completion: @escaping ([ImportSettings.FilterSettings]) -> Void) {
         invokedImportDnsFilters = true
         invokedImportDnsFiltersCount += 1
-        invokedImportDnsFiltersParameters = (filters, override)
-        invokedImportDnsFiltersParametersList.append((filters, override))
+        invokedImportDnsFiltersParameters = (filtersContainer, override)
+        invokedImportDnsFiltersParametersList.append((filtersContainer, override))
         completion(stubbedImportDnsFiltersCompletionResult)
     }
 }

@@ -70,7 +70,7 @@ class ImportSafariProtectionSettingsHelperTest: XCTestCase {
             XCTAssertEqual($0.element.id, $0.offset)
             XCTAssertEqual($0.element.status, .successful)
         }
-        
+
         XCTAssertEqual(safariProtection.setGroupCalledCount, 3)
         XCTAssertEqual(safariProtection.groups.filter { $0.isEnabled }.count, 3)
     }
@@ -213,7 +213,8 @@ class ImportSafariProtectionSettingsHelperTest: XCTestCase {
         XCTAssertEqual(safariProtection.deleteCustomFilterCalledCount, 0)
         XCTAssertEqual(safariProtection.addCustomFilterCalledCount, 0)
         XCTAssertEqual(safariProtection.setGroupCalledCount, 0)
-        helper.importCustomSafariFilters(filtersToImport, override: false) { result in
+        let container = ImportSettingsService.FiltersImportContainer(toImportFilters: filtersToImport, toEnableFilters: [])
+        helper.importCustomSafariFilters(container, override: false) { result in
             XCTAssertEqual(result.count, 3)
             result.forEach {
                 XCTAssertEqual($0.status, .successful)
@@ -240,7 +241,8 @@ class ImportSafariProtectionSettingsHelperTest: XCTestCase {
         XCTAssertEqual(safariProtection.deleteCustomFilterCalledCount, 0)
         XCTAssertEqual(safariProtection.addCustomFilterCalledCount, 0)
         XCTAssertEqual(safariProtection.setGroupCalledCount, 0)
-        helper.importCustomSafariFilters(filtersToImport, override: false) { result in
+        let container = ImportSettingsService.FiltersImportContainer(toImportFilters: filtersToImport, toEnableFilters: [])
+        helper.importCustomSafariFilters(container, override: false) { result in
             XCTAssertEqual(result.count, 3)
             result.forEach {
                 XCTAssertEqual($0.status, .unsuccessful)
@@ -267,7 +269,8 @@ class ImportSafariProtectionSettingsHelperTest: XCTestCase {
         XCTAssertEqual(safariProtection.deleteCustomFilterCalledCount, 0)
         XCTAssertEqual(safariProtection.addCustomFilterCalledCount, 0)
         XCTAssertEqual(safariProtection.setGroupCalledCount, 0)
-        helper.importCustomSafariFilters(filtersToImport, override: false) { result in
+        let container = ImportSettingsService.FiltersImportContainer(toImportFilters: filtersToImport, toEnableFilters: [])
+        helper.importCustomSafariFilters(container, override: false) { result in
             XCTAssertEqual(result.count, 3)
             result.forEach {
                 XCTAssertEqual($0.status, .unsuccessful)
@@ -293,7 +296,8 @@ class ImportSafariProtectionSettingsHelperTest: XCTestCase {
         XCTAssertEqual(safariProtection.deleteCustomFilterCalledCount, 0)
         XCTAssertEqual(safariProtection.addCustomFilterCalledCount, 0)
         XCTAssertEqual(safariProtection.setGroupCalledCount, 0)
-        helper.importCustomSafariFilters(filtersToImport, override: false) { result in
+        let container = ImportSettingsService.FiltersImportContainer(toImportFilters: filtersToImport, toEnableFilters: [])
+        helper.importCustomSafariFilters(container, override: false) { result in
             XCTAssertEqual(result.count, 3)
             result.forEach {
                 XCTAssertEqual($0.status, .unsuccessful)
@@ -319,7 +323,8 @@ class ImportSafariProtectionSettingsHelperTest: XCTestCase {
         XCTAssertEqual(safariProtection.deleteCustomFilterCalledCount, 0)
         XCTAssertEqual(safariProtection.addCustomFilterCalledCount, 0)
         XCTAssertEqual(safariProtection.setGroupCalledCount, 0)
-        helper.importCustomSafariFilters(filtersToImport, override: false) { result in
+        let container = ImportSettingsService.FiltersImportContainer(toImportFilters: filtersToImport, toEnableFilters: [])
+        helper.importCustomSafariFilters(container, override: false) { result in
             XCTAssertEqual(result.count, 3)
             result.forEach {
                 XCTAssertEqual($0.status, .notImported)
@@ -344,7 +349,8 @@ class ImportSafariProtectionSettingsHelperTest: XCTestCase {
         XCTAssertEqual(safariProtection.deleteCustomFilterCalledCount, 0)
         XCTAssertEqual(safariProtection.addCustomFilterCalledCount, 0)
         XCTAssertEqual(safariProtection.setGroupCalledCount, 0)
-        helper.importCustomSafariFilters([], override: false) { result in
+        let container = ImportSettingsService.FiltersImportContainer(toImportFilters: [], toEnableFilters: [])
+        helper.importCustomSafariFilters(container, override: false) { result in
             XCTAssertEqual(result.count, 0)
             expectation.fulfill()
         }
@@ -367,7 +373,8 @@ class ImportSafariProtectionSettingsHelperTest: XCTestCase {
         XCTAssertEqual(safariProtection.deleteCustomFilterCalledCount, 0)
         XCTAssertEqual(safariProtection.addCustomFilterCalledCount, 0)
         XCTAssertEqual(safariProtection.setGroupCalledCount, 0)
-        helper.importCustomSafariFilters(filtersToImport, override: false) { result in
+        let container = ImportSettingsService.FiltersImportContainer(toImportFilters: filtersToImport, toEnableFilters: [])
+        helper.importCustomSafariFilters(container, override: false) { result in
             XCTAssertEqual(result.count, 3)
             result.forEach {
                 XCTAssertEqual($0.status, .successful)
@@ -393,7 +400,8 @@ class ImportSafariProtectionSettingsHelperTest: XCTestCase {
         XCTAssertEqual(safariProtection.deleteCustomFilterCalledCount, 0)
         XCTAssertEqual(safariProtection.addCustomFilterCalledCount, 0)
         XCTAssertEqual(safariProtection.setGroupCalledCount, 0)
-        helper.importCustomSafariFilters(filtersToImport, override: true) { result in
+        let container = ImportSettingsService.FiltersImportContainer(toImportFilters: filtersToImport, toEnableFilters: [])
+        helper.importCustomSafariFilters(container, override: true) { result in
             XCTAssertEqual(result.count, 3)
             result.forEach {
                 XCTAssertEqual($0.status, .successful)
@@ -419,7 +427,8 @@ class ImportSafariProtectionSettingsHelperTest: XCTestCase {
         XCTAssertEqual(safariProtection.deleteCustomFilterCalledCount, 0)
         XCTAssertEqual(safariProtection.addCustomFilterCalledCount, 0)
         XCTAssertEqual(safariProtection.setGroupCalledCount, 0)
-        helper.importCustomSafariFilters(filtersToImport, override: true) { result in
+        let container = ImportSettingsService.FiltersImportContainer(toImportFilters: filtersToImport, toEnableFilters: [])
+        helper.importCustomSafariFilters(container, override: true) { result in
             XCTAssertEqual(result.count, 3)
             result.forEach {
                 XCTAssertEqual($0.status, .successful)
@@ -435,13 +444,133 @@ class ImportSafariProtectionSettingsHelperTest: XCTestCase {
         XCTAssertEqual(safariProtection.groups.filter { $0.groupType == .custom && $0.isEnabled }.count, 1)
     }
 
+    func testImportCustomSafariFiltersWithOnlyEnablingFilters() {
+        let filtersToImport = generateCustomSafariFilters(url: "URL")
+        let expectation = XCTestExpectation()
+        safariProtection.groups = generateCustomGroupWithFilters(filterDownloadPage: "URL")
+        parser.stubbedParseResult = CustomFilterMeta(name: nil, description: nil, version: nil, lastUpdateDate: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0)
+
+        XCTAssertEqual(parser.invokedParseCount, 0)
+        XCTAssertEqual(safariProtection.deleteCustomFilterCalledCount, 0)
+        XCTAssertEqual(safariProtection.addCustomFilterCalledCount, 0)
+        XCTAssertEqual(safariProtection.setGroupCalledCount, 0)
+        let container = ImportSettingsService.FiltersImportContainer(toImportFilters: [], toEnableFilters: filtersToImport)
+        helper.importCustomSafariFilters(container, override: false) { result in
+            XCTAssertEqual(result.count, 3)
+            result.forEach {
+                XCTAssertEqual($0.status, .successful)
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 0.5)
+        XCTAssertEqual(parser.invokedParseCount, 0)
+        XCTAssertEqual(safariProtection.deleteCustomFilterCalledCount, 0)
+        XCTAssertEqual(safariProtection.addCustomFilterCalledCount, 0)
+        XCTAssertEqual(safariProtection.setFilterCalledCount, 3)
+        XCTAssertEqual(safariProtection.setGroupCalledCount, 1)
+        XCTAssertEqual(safariProtection.groups.filter { $0.groupType == .custom && $0.isEnabled }.count, 1)
+    }
+
+    func testImportCustomSafariFiltersWithFullContainer() {
+        let customGroup = generateCustomGroupWithFilters(filterDownloadPage: "URL")
+        var groups = generateSafariGroupsWithFilters()
+        groups.removeAll(where: { $0.groupType == .custom })
+        groups.append(contentsOf: customGroup)
+
+        let toImportFilters = generateCustomSafariFilters()
+        let toEnableFilters = generateCustomSafariFilters(url: "URL")
+
+        let expectation = XCTestExpectation()
+        safariProtection.groups = generateCustomGroupWithFilters(filterDownloadPage: "URL")
+        parser.stubbedParseResult = CustomFilterMeta(name: nil, description: nil, version: nil, lastUpdateDate: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0)
+
+        XCTAssertEqual(parser.invokedParseCount, 0)
+        XCTAssertEqual(safariProtection.deleteCustomFilterCalledCount, 0)
+        XCTAssertEqual(safariProtection.addCustomFilterCalledCount, 0)
+        XCTAssertEqual(safariProtection.setGroupCalledCount, 0)
+        let container = ImportSettingsService.FiltersImportContainer(toImportFilters: toImportFilters, toEnableFilters: toEnableFilters)
+        helper.importCustomSafariFilters(container, override: false) { result in
+            XCTAssertEqual(result.count, 6)
+            result.forEach {
+                XCTAssertEqual($0.status, .successful)
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 0.5)
+        XCTAssertEqual(parser.invokedParseCount, 3)
+        XCTAssertEqual(safariProtection.deleteCustomFilterCalledCount, 0)
+        XCTAssertEqual(safariProtection.addCustomFilterCalledCount, 3)
+        XCTAssertEqual(safariProtection.setFilterCalledCount, 3)
+        XCTAssertEqual(safariProtection.setGroupCalledCount, 1)
+        XCTAssertEqual(safariProtection.groups.filter { $0.groupType == .custom && $0.isEnabled }.count, 1)
+    }
+
+    func testImportCustomSafariFiltersWithSetFilterError() {
+        let filtersToImport = generateCustomSafariFilters(url: "URL")
+        let expectation = XCTestExpectation()
+        safariProtection.groups = generateCustomGroupWithFilters(filterDownloadPage: "URL")
+        parser.stubbedParseResult = CustomFilterMeta(name: nil, description: nil, version: nil, lastUpdateDate: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0)
+
+        safariProtection.setFilterError = error
+        XCTAssertEqual(parser.invokedParseCount, 0)
+        XCTAssertEqual(safariProtection.deleteCustomFilterCalledCount, 0)
+        XCTAssertEqual(safariProtection.addCustomFilterCalledCount, 0)
+        XCTAssertEqual(safariProtection.setGroupCalledCount, 0)
+        let container = ImportSettingsService.FiltersImportContainer(toImportFilters: [], toEnableFilters: filtersToImport)
+        helper.importCustomSafariFilters(container, override: false) { result in
+            XCTAssertEqual(result.count, 3)
+            result.forEach {
+                XCTAssertEqual($0.status, .unsuccessful)
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 0.5)
+        XCTAssertEqual(parser.invokedParseCount, 0)
+        XCTAssertEqual(safariProtection.deleteCustomFilterCalledCount, 0)
+        XCTAssertEqual(safariProtection.addCustomFilterCalledCount, 0)
+        XCTAssertEqual(safariProtection.setFilterCalledCount, 3)
+        XCTAssertEqual(safariProtection.setGroupCalledCount, 0)
+        XCTAssertEqual(safariProtection.groups.filter { $0.groupType == .custom && $0.isEnabled }.count, 0)
+    }
+
+    func testImportCustomSafariFiltersWithEmptyCusromFilters() {
+        let filtersToImport = generateCustomSafariFilters(url: "URL")
+        let expectation = XCTestExpectation()
+        safariProtection.groups = []
+        parser.stubbedParseResult = CustomFilterMeta(name: nil, description: nil, version: nil, lastUpdateDate: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0)
+
+        XCTAssertEqual(parser.invokedParseCount, 0)
+        XCTAssertEqual(safariProtection.deleteCustomFilterCalledCount, 0)
+        XCTAssertEqual(safariProtection.addCustomFilterCalledCount, 0)
+        XCTAssertEqual(safariProtection.setGroupCalledCount, 0)
+        let container = ImportSettingsService.FiltersImportContainer(toImportFilters: [], toEnableFilters: filtersToImport)
+        helper.importCustomSafariFilters(container, override: false) { result in
+            XCTAssertEqual(result.count, 3)
+            result.forEach {
+                XCTAssertEqual($0.status, .unsuccessful)
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 0.5)
+        XCTAssertEqual(parser.invokedParseCount, 0)
+        XCTAssertEqual(safariProtection.deleteCustomFilterCalledCount, 0)
+        XCTAssertEqual(safariProtection.addCustomFilterCalledCount, 0)
+        XCTAssertEqual(safariProtection.setFilterCalledCount, 0)
+        XCTAssertEqual(safariProtection.setGroupCalledCount, 0)
+        XCTAssertEqual(safariProtection.groups.filter { $0.groupType == .custom && $0.isEnabled }.count, 0)
+    }
+
     // MARK: - Private methods
 
     private func generateCustomSafariFilters(isImportEnabled: Bool = true, url: String = "example.org") -> [ImportSettings.FilterSettings] {
         var result: [ImportSettings.FilterSettings] = []
         for i in 0..<3 {
             result.append(
-                ImportSettings.FilterSettings.init(name: "name#\(i)", url: url, isImportEnabled: isImportEnabled, status: .notImported)
+                ImportSettings.FilterSettings.init(name: "name#\(i)", url: "\(url)#\(i)", isImportEnabled: isImportEnabled, status: .notImported)
             )
         }
         return result
@@ -457,12 +586,12 @@ class ImportSafariProtectionSettingsHelperTest: XCTestCase {
         return result
     }
 
-    private func generateSafariGroupsWithFilters(groupsEnabled: Bool = false, filtersEnabled: Bool = false) -> [SafariGroup] {
+    private func generateSafariGroupsWithFilters(groupsEnabled: Bool = false, filtersEnabled: Bool = false, filterDownloadPage: String = "example.org") -> [SafariGroup] {
         var result: [SafariGroup] = []
         let groups = generateSafariGroups(groupsEnabled: groupsEnabled)
 
         for (i, group) in groups.enumerated() {
-            let filter = SafariGroup.Filter(name: "Filter#\(i)", description: "", isEnabled: filtersEnabled, filterId: i, version: nil, lastUpdateDate: nil, group: groups[i], displayNumber: i, languages: [], tags: [], homePage: nil, filterDownloadPage: nil, rulesCount: i)
+            let filter = SafariGroup.Filter(name: "Filter#\(i)", description: "", isEnabled: filtersEnabled, filterId: i, version: nil, lastUpdateDate: nil, group: groups[i], displayNumber: i, languages: [], tags: [], homePage: nil, filterDownloadPage: "\(filterDownloadPage)#\(i)", rulesCount: i)
 
             result.append(SafariGroup(filters: [filter],
                             isEnabled: group.isEnabled,
@@ -482,6 +611,23 @@ class ImportSafariProtectionSettingsHelperTest: XCTestCase {
                 SafariGroup(filters: [], isEnabled: groupsEnabled, groupType: groupType[i], groupName: "group#\(i)", displayNumber: i)
             )
         }
+        return result
+    }
+
+    private func generateCustomGroupWithFilters(groupsEnabled: Bool = false, filtersEnabled: Bool = false, numberOfFilters: Int = 3, filterDownloadPage: String = "example.org") -> [SafariGroup] {
+        var result: [SafariGroup] = []
+        var filters: [SafariGroup.Filter] = []
+        let group = SafariGroup(filters: [], isEnabled: groupsEnabled, groupType: .custom, groupName: "group#", displayNumber: 1)
+        for i in 0..<numberOfFilters {
+            let filter = SafariGroup.Filter(name: "Filter#\(i)", description: "", isEnabled: filtersEnabled, filterId: i, version: nil, lastUpdateDate: nil, group: group, displayNumber: i, languages: [], tags: [], homePage: nil, filterDownloadPage: "\(filterDownloadPage)#\(i)", rulesCount: i)
+            filters.append(filter)
+
+        }
+        result.append(SafariGroup(filters: filters,
+                        isEnabled: group.isEnabled,
+                        groupType: group.groupType,
+                        groupName: group.groupName,
+                        displayNumber: group.displayNumber))
         return result
     }
 }

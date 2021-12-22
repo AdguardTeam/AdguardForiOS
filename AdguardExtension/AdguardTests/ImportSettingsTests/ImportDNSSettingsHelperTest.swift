@@ -102,7 +102,8 @@ class ImportDNSSettingsHelperTest: XCTestCase {
         XCTAssertEqual(dnsProtection.removeFilterCalledCount, 0)
         XCTAssertEqual(dnsProtection.addFilterCalledCount, 0)
         XCTAssertEqual(dnsProtection.filters.count, 3)
-        helper.importDnsFilters(settings, override: false) { result in
+        let container = ImportSettingsService.FiltersImportContainer(toImportFilters: settings, toEnableFilters: [])
+        helper.importDnsFilters(container, override: false) { result in
             XCTAssertEqual(result.count, 3)
             result.forEach { XCTAssertEqual($0.status, .successful) }
             expectation.fulfill()
@@ -110,6 +111,7 @@ class ImportDNSSettingsHelperTest: XCTestCase {
 
         wait(for: [expectation], timeout: 0.5)
         XCTAssertEqual(dnsProtection.removeFilterCalledCount, 0)
+        XCTAssertEqual(dnsProtection.setFilterCalledCount, 0)
         XCTAssertEqual(dnsProtection.addFilterCalledCount, 3)
         XCTAssertEqual(dnsProtection.filters.count, 6)
     }
@@ -121,13 +123,15 @@ class ImportDNSSettingsHelperTest: XCTestCase {
         XCTAssertEqual(dnsProtection.addFilterCalledCount, 0)
         XCTAssertEqual(dnsProtection.filters.count, 3)
         dnsProtection.filters = generateDnsFilters()
-        helper.importDnsFilters([], override: false) { result in
+        let container = ImportSettingsService.FiltersImportContainer(toImportFilters: [], toEnableFilters: [])
+        helper.importDnsFilters(container, override: false) { result in
             XCTAssertEqual(result.count, 0)
             expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 0.5)
         XCTAssertEqual(dnsProtection.removeFilterCalledCount, 0)
+        XCTAssertEqual(dnsProtection.setFilterCalledCount, 0)
         XCTAssertEqual(dnsProtection.addFilterCalledCount, 0)
         XCTAssertEqual(dnsProtection.filters.count, 3)
     }
@@ -140,7 +144,8 @@ class ImportDNSSettingsHelperTest: XCTestCase {
         XCTAssertEqual(dnsProtection.addFilterCalledCount, 0)
         XCTAssertEqual(dnsProtection.filters.count, 3)
         dnsProtection.addFilterResult = error
-        helper.importDnsFilters(settings, override: false) { result in
+        let container = ImportSettingsService.FiltersImportContainer(toImportFilters: settings, toEnableFilters: [])
+        helper.importDnsFilters(container, override: false) { result in
             XCTAssertEqual(result.count, 3)
             result.forEach { XCTAssertEqual($0.status, .unsuccessful) }
             expectation.fulfill()
@@ -148,6 +153,7 @@ class ImportDNSSettingsHelperTest: XCTestCase {
 
         wait(for: [expectation], timeout: 0.5)
         XCTAssertEqual(dnsProtection.removeFilterCalledCount, 0)
+        XCTAssertEqual(dnsProtection.setFilterCalledCount, 0)
         XCTAssertEqual(dnsProtection.addFilterCalledCount, 3)
         XCTAssertEqual(dnsProtection.filters.count, 3)
     }
@@ -159,7 +165,8 @@ class ImportDNSSettingsHelperTest: XCTestCase {
         XCTAssertEqual(dnsProtection.removeFilterCalledCount, 0)
         XCTAssertEqual(dnsProtection.addFilterCalledCount, 0)
         XCTAssertEqual(dnsProtection.filters.count, 3)
-        helper.importDnsFilters(settings, override: false) { result in
+        let container = ImportSettingsService.FiltersImportContainer(toImportFilters: settings, toEnableFilters: [])
+        helper.importDnsFilters(container, override: false) { result in
             XCTAssertEqual(result.count, 3)
             result.forEach { XCTAssertEqual($0.status, .unsuccessful) }
             expectation.fulfill()
@@ -167,6 +174,7 @@ class ImportDNSSettingsHelperTest: XCTestCase {
 
         wait(for: [expectation], timeout: 0.5)
         XCTAssertEqual(dnsProtection.removeFilterCalledCount, 0)
+        XCTAssertEqual(dnsProtection.setFilterCalledCount, 0)
         XCTAssertEqual(dnsProtection.addFilterCalledCount, 0)
         XCTAssertEqual(dnsProtection.filters.count, 3)
     }
@@ -178,7 +186,8 @@ class ImportDNSSettingsHelperTest: XCTestCase {
         XCTAssertEqual(dnsProtection.removeFilterCalledCount, 0)
         XCTAssertEqual(dnsProtection.addFilterCalledCount, 0)
         XCTAssertEqual(dnsProtection.filters.count, 3)
-        helper.importDnsFilters(settings, override: false) { result in
+        let container = ImportSettingsService.FiltersImportContainer(toImportFilters: settings, toEnableFilters: [])
+        helper.importDnsFilters(container, override: false) { result in
             XCTAssertEqual(result.count, 3)
             result.forEach { XCTAssertEqual($0.status, .notImported) }
             expectation.fulfill()
@@ -186,6 +195,7 @@ class ImportDNSSettingsHelperTest: XCTestCase {
 
         wait(for: [expectation], timeout: 0.5)
         XCTAssertEqual(dnsProtection.removeFilterCalledCount, 0)
+        XCTAssertEqual(dnsProtection.setFilterCalledCount, 0)
         XCTAssertEqual(dnsProtection.addFilterCalledCount, 0)
         XCTAssertEqual(dnsProtection.filters.count, 3)
     }
@@ -198,7 +208,8 @@ class ImportDNSSettingsHelperTest: XCTestCase {
         XCTAssertEqual(dnsProtection.addFilterCalledCount, 0)
         XCTAssertEqual(dnsProtection.filters.count, 3)
         dnsProtection.filters = generateDnsFilters()
-        helper.importDnsFilters(settings, override: true) { result in
+        let container = ImportSettingsService.FiltersImportContainer(toImportFilters: settings, toEnableFilters: [])
+        helper.importDnsFilters(container, override: true) { result in
             XCTAssertEqual(result.count, 3)
             result.enumerated().forEach {
                 XCTAssertEqual($0.element.name, self.dnsProtection.filters[$0.offset].name)
@@ -209,6 +220,7 @@ class ImportDNSSettingsHelperTest: XCTestCase {
 
         wait(for: [expectation], timeout: 0.5)
         XCTAssertEqual(dnsProtection.removeFilterCalledCount, 3)
+        XCTAssertEqual(dnsProtection.setFilterCalledCount, 0)
         XCTAssertEqual(dnsProtection.addFilterCalledCount, 3)
         XCTAssertEqual(dnsProtection.filters.count, 3)
     }
@@ -220,13 +232,106 @@ class ImportDNSSettingsHelperTest: XCTestCase {
         XCTAssertEqual(dnsProtection.addFilterCalledCount, 0)
         XCTAssertEqual(dnsProtection.filters.count, 3)
         dnsProtection.filters = generateDnsFilters()
-        helper.importDnsFilters([], override: true) { result in
+        let container = ImportSettingsService.FiltersImportContainer(toImportFilters: [], toEnableFilters: [])
+        helper.importDnsFilters(container, override: true) { result in
             XCTAssertEqual(result.count, 0)
             expectation.fulfill()
         }
 
         wait(for: [expectation], timeout: 0.5)
         XCTAssertEqual(dnsProtection.removeFilterCalledCount, 3)
+        XCTAssertEqual(dnsProtection.setFilterCalledCount, 0)
+        XCTAssertEqual(dnsProtection.addFilterCalledCount, 0)
+        XCTAssertEqual(dnsProtection.filters.count, 0)
+    }
+
+    func testImportFiltersWithOnlyEnablingFilters() {
+        let settings = generateImportSettings(url: "URL")
+        let expectation = XCTestExpectation()
+        dnsProtection.filters = generateDnsFilters(isEnabled: false)
+        XCTAssertEqual(dnsProtection.removeFilterCalledCount, 0)
+        XCTAssertEqual(dnsProtection.addFilterCalledCount, 0)
+        XCTAssertEqual(dnsProtection.filters.count, 3)
+
+        let container = ImportSettingsService.FiltersImportContainer(toImportFilters: [], toEnableFilters: settings)
+        helper.importDnsFilters(container, override: false) { result in
+            XCTAssertEqual(result.count, 3)
+            result.forEach { XCTAssertEqual($0.status, .successful) }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 0.5)
+        XCTAssertEqual(dnsProtection.removeFilterCalledCount, 0)
+        XCTAssertEqual(dnsProtection.setFilterCalledCount, 3)
+        XCTAssertEqual(dnsProtection.addFilterCalledCount, 0)
+        XCTAssertEqual(dnsProtection.filters.count, 3)
+    }
+
+    func testImportFiltersWithFullContainer() {
+        let toEnableFilters = generateImportSettings(url: "URL")
+        let toImportFilters = generateImportSettings()
+        let expectation = XCTestExpectation()
+        dnsProtection.filters = generateDnsFilters(isEnabled: false)
+        XCTAssertEqual(dnsProtection.removeFilterCalledCount, 0)
+        XCTAssertEqual(dnsProtection.addFilterCalledCount, 0)
+        XCTAssertEqual(dnsProtection.filters.count, 3)
+
+        let container = ImportSettingsService.FiltersImportContainer(toImportFilters: toImportFilters, toEnableFilters: toEnableFilters)
+        helper.importDnsFilters(container, override: false) { result in
+            XCTAssertEqual(result.count, 6)
+            result.forEach { XCTAssertEqual($0.status, .successful) }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 0.5)
+        XCTAssertEqual(dnsProtection.removeFilterCalledCount, 0)
+        XCTAssertEqual(dnsProtection.setFilterCalledCount, 3)
+        XCTAssertEqual(dnsProtection.addFilterCalledCount, 3)
+        XCTAssertEqual(dnsProtection.filters.count, 6)
+    }
+
+    func testImportFiltersWithSetFilterError() {
+        let settings = generateImportSettings(url: "URL")
+        let expectation = XCTestExpectation()
+        dnsProtection.filters = generateDnsFilters(isEnabled: false)
+        dnsProtection.setFilterError = error
+        XCTAssertEqual(dnsProtection.removeFilterCalledCount, 0)
+        XCTAssertEqual(dnsProtection.addFilterCalledCount, 0)
+        XCTAssertEqual(dnsProtection.filters.count, 3)
+
+        let container = ImportSettingsService.FiltersImportContainer(toImportFilters: [], toEnableFilters: settings)
+        helper.importDnsFilters(container, override: false) { result in
+            XCTAssertEqual(result.count, 3)
+            result.forEach { XCTAssertEqual($0.status, .unsuccessful) }
+            self.dnsProtection.filters.forEach { XCTAssertFalse($0.isEnabled)}
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 0.5)
+        XCTAssertEqual(dnsProtection.removeFilterCalledCount, 0)
+        XCTAssertEqual(dnsProtection.setFilterCalledCount, 3)
+        XCTAssertEqual(dnsProtection.addFilterCalledCount, 0)
+        XCTAssertEqual(dnsProtection.filters.count, 3)
+    }
+
+    func testImportFiltersWithEmptyCustomFilters() {
+        let settings = generateImportSettings(url: "URL")
+        let expectation = XCTestExpectation()
+        dnsProtection.filters = []
+        XCTAssertEqual(dnsProtection.removeFilterCalledCount, 0)
+        XCTAssertEqual(dnsProtection.addFilterCalledCount, 0)
+        XCTAssertEqual(dnsProtection.filters.count, 0)
+
+        let container = ImportSettingsService.FiltersImportContainer(toImportFilters: [], toEnableFilters: settings)
+        helper.importDnsFilters(container, override: false) { result in
+            XCTAssertEqual(result.count, 3)
+            result.forEach { XCTAssertEqual($0.status, .unsuccessful) }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 0.5)
+        XCTAssertEqual(dnsProtection.removeFilterCalledCount, 0)
+        XCTAssertEqual(dnsProtection.setFilterCalledCount, 0)
         XCTAssertEqual(dnsProtection.addFilterCalledCount, 0)
         XCTAssertEqual(dnsProtection.filters.count, 0)
     }
@@ -248,15 +353,15 @@ class ImportDNSSettingsHelperTest: XCTestCase {
     private func generateImportSettings(isImportEnabled: Bool = true, url: String = "example.org") -> [ImportSettings.FilterSettings] {
         var result: [ImportSettings.FilterSettings] = []
         for i in 0..<3 {
-            result.append(ImportSettings.FilterSettings(name: "name#\(i)", url: url, isImportEnabled: isImportEnabled))
+            result.append(ImportSettings.FilterSettings(name: "name#\(i)", url: "\(url)#\(i)", isImportEnabled: isImportEnabled))
         }
         return result
     }
 
-    private func generateDnsFilters() -> [DnsFilter] {
+    private func generateDnsFilters(isEnabled: Bool = true) -> [DnsFilter] {
         var result: [DnsFilter] = []
         for i in 0..<3 {
-            result.append(DnsFilter(filterId: i, subscriptionUrl: URL(string: "URL")!, isEnabled: true, name: "", description: "", version: "", lastUpdateDate: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: i))
+            result.append(DnsFilter(filterId: i, subscriptionUrl: URL(string: "URL#\(i)")!, isEnabled: isEnabled, name: "", description: "", version: "", lastUpdateDate: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: "URL#\(i)", rulesCount: i))
         }
         return result
     }

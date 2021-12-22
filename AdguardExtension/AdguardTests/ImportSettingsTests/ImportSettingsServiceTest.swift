@@ -119,9 +119,10 @@ class ImportSettingsServiceTest: XCTestCase {
 
         wait(for: [expectation], timeout: 0.5)
         XCTAssertEqual(safariProtection.updateFiltersMetaAndLocalizationsCalledCount, 1)
-        XCTAssertEqual(importSafariHelper.invokedImportCustomSafariFiltersParameters!.filters.count, 3)
-        importSafariHelper.invokedImportCustomSafariFiltersParameters!.filters.enumerated().forEach {
-            XCTAssertEqual($0.element.url, "url#\($0.offset + 1)")
+        XCTAssertEqual(importSafariHelper.invokedImportCustomSafariFiltersParameters!.filtersContainer.toImportFilters.count, 3)
+        XCTAssertEqual(importSafariHelper.invokedImportCustomSafariFiltersParameters!.filtersContainer.toEnableFilters.count, 0)
+        importSafariHelper.invokedImportCustomSafariFiltersParameters!.filtersContainer.toImportFilters.enumerated().forEach {
+            XCTAssertEqual($0.element.url, "url#\($0.offset)")
         }
     }
 
@@ -144,9 +145,10 @@ class ImportSettingsServiceTest: XCTestCase {
 
         wait(for: [expectation], timeout: 0.5)
         XCTAssertEqual(safariProtection.updateFiltersMetaAndLocalizationsCalledCount, 1)
-        XCTAssertEqual(importSafariHelper.invokedImportCustomSafariFiltersParameters!.filters.count, 3)
-        importSafariHelper.invokedImportCustomSafariFiltersParameters!.filters.enumerated().forEach {
-            XCTAssertEqual($0.element.url, "url#\($0.offset + 1)")
+        XCTAssertEqual(importSafariHelper.invokedImportCustomSafariFiltersParameters!.filtersContainer.toImportFilters.count, 3)
+        XCTAssertEqual(importSafariHelper.invokedImportCustomSafariFiltersParameters!.filtersContainer.toEnableFilters.count, 0)
+        importSafariHelper.invokedImportCustomSafariFiltersParameters!.filtersContainer.toImportFilters.enumerated().forEach {
+            XCTAssertEqual($0.element.url, "url#\($0.offset)")
         }
     }
 
@@ -164,10 +166,69 @@ class ImportSettingsServiceTest: XCTestCase {
 
         wait(for: [expectation], timeout: 0.5)
         XCTAssertEqual(safariProtection.updateFiltersMetaAndLocalizationsCalledCount, 0)
-        XCTAssertEqual(importSafariHelper.invokedImportCustomSafariFiltersParameters!.filters.count, 0)
-        XCTAssertEqual(importSafariHelper.invokedImportCustomSafariFiltersParameters?.filters.count, 0)
-        importSafariHelper.invokedImportCustomSafariFiltersParameters!.filters.enumerated().forEach {
+        XCTAssertEqual(importSafariHelper.invokedImportCustomSafariFiltersParameters!.filtersContainer.toImportFilters.count, 0)
+        XCTAssertEqual(importSafariHelper.invokedImportCustomSafariFiltersParameters!.filtersContainer.toEnableFilters.count, 0)
+        importSafariHelper.invokedImportCustomSafariFiltersParameters!.filtersContainer.toImportFilters.enumerated().forEach {
             XCTAssertEqual($0.element.url, "url#\($0.offset + 1)")
+        }
+    }
+
+    func testApplyCustomSafariFiltersSettingsWithImportEnabledFilters() {
+        let expectation = XCTestExpectation()
+
+        let filters = generateFiltersToImport(filtersStatus: .successful)
+
+        let importSettings = generateImportSettings(customSafariFilters: filters.filters)
+        importSafariHelper.stubbedImportCustomSafariFiltersCompletionResult = filters.filtersResult
+        safariProtection.groups = generateCustomGroupWithFiltersForEnabling(filterDownloadPage: "url")
+
+        XCTAssertEqual(safariProtection.updateFiltersMetaAndLocalizationsCalledCount, 0)
+        service.applySettings(importSettings) { result in
+            XCTAssertEqual(result.customSafariFilters!.count, 3)
+            result.customSafariFilters!.forEach {
+                XCTAssertEqual($0.status, .successful)
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 0.5)
+        XCTAssertEqual(safariProtection.updateFiltersMetaAndLocalizationsCalledCount, 1)
+        XCTAssertEqual(importSafariHelper.invokedImportCustomSafariFiltersParameters!.filtersContainer.toImportFilters.count, 0)
+        XCTAssertEqual(importSafariHelper.invokedImportCustomSafariFiltersParameters!.filtersContainer.toEnableFilters.count, 3)
+        importSafariHelper.invokedImportCustomSafariFiltersParameters!.filtersContainer.toImportFilters.enumerated().forEach {
+            XCTAssertEqual($0.element.url, "url#\($0.offset)")
+        }
+    }
+
+    func testApplyCustomSafariFiltersSettingsWithImportAllCases() {
+        let expectation = XCTestExpectation()
+
+        let filters = generateFiltersToImportWithAllCases(filtersStatus: .successful)
+
+        let importSettings = generateImportSettings(customSafariFilters: filters.filters)
+        importSafariHelper.stubbedImportCustomSafariFiltersCompletionResult = filters.filtersResult
+        safariProtection.groups = generateCustomGroupWithFiltersForEnabling(filterDownloadPage: "url")
+
+        XCTAssertEqual(safariProtection.updateFiltersMetaAndLocalizationsCalledCount, 0)
+        service.applySettings(importSettings) { result in
+            XCTAssertEqual(result.customSafariFilters!.count, 6)
+            result.customSafariFilters!.forEach {
+                XCTAssertEqual($0.status, .successful)
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 0.5)
+        XCTAssertEqual(safariProtection.updateFiltersMetaAndLocalizationsCalledCount, 1)
+        XCTAssertEqual(importSafariHelper.invokedImportCustomSafariFiltersParameters!.filtersContainer.toImportFilters.count, 3)
+        XCTAssertEqual(importSafariHelper.invokedImportCustomSafariFiltersParameters!.filtersContainer.toEnableFilters.count, 3)
+
+        importSafariHelper.invokedImportCustomSafariFiltersParameters!.filtersContainer.toEnableFilters.enumerated().forEach {
+            XCTAssertEqual($0.element.url, "url#\($0.offset)")
+        }
+
+        importSafariHelper.invokedImportCustomSafariFiltersParameters!.filtersContainer.toImportFilters.enumerated().forEach {
+            XCTAssertEqual($0.element.url, "url#\($0.offset + 3)")
         }
     }
 
@@ -323,17 +384,18 @@ class ImportSettingsServiceTest: XCTestCase {
 
         let filters = generateFiltersToImport(filtersStatus: .successful)
         importSettings.dnsFilters = filters.filters
-        dnsProtection.filters = generateDnsFilters()
+        dnsProtection.filters = []
         importDNSHelper.stubbedImportDnsFiltersCompletionResult = filters.filtersResult
 
         XCTAssertEqual(importDNSHelper.invokedImportDnsFiltersCount, 0)
         XCTAssertEqual(vpnManager.updateSettingsCalledCount, 0)
         service.applySettings(importSettings) { result in
             XCTAssertEqual(result.dnsFilters?.count, 3)
-            XCTAssertEqual(self.importDNSHelper.invokedImportDnsFiltersParameters?.filters.count, 3)
+            XCTAssertEqual(self.importDNSHelper.invokedImportDnsFiltersParameters?.filtersContainer.toImportFilters.count, 3)
+            XCTAssertEqual(self.importDNSHelper.invokedImportDnsFiltersParameters?.filtersContainer.toEnableFilters.count, 0)
             result.dnsFilters?.enumerated().forEach {
                 XCTAssertEqual($0.element.status, .successful)
-                XCTAssertEqual($0.element.url, "url#\($0.offset + 1)")
+                XCTAssertEqual($0.element.url, "url#\($0.offset)")
             }
             expectation.fulfill()
         }
@@ -358,10 +420,69 @@ class ImportSettingsServiceTest: XCTestCase {
         XCTAssertEqual(vpnManager.updateSettingsCalledCount, 0)
         service.applySettings(importSettings) { result in
             XCTAssertEqual(result.dnsFilters?.count, 3)
-            XCTAssertEqual(self.importDNSHelper.invokedImportDnsFiltersParameters?.filters.count, 3)
+            XCTAssertEqual(self.importDNSHelper.invokedImportDnsFiltersParameters?.filtersContainer.toImportFilters.count, 3)
+            XCTAssertEqual(self.importDNSHelper.invokedImportDnsFiltersParameters?.filtersContainer.toEnableFilters.count, 0)
             result.dnsFilters?.enumerated().forEach {
                 XCTAssertEqual($0.element.status, .successful)
-                XCTAssertEqual($0.element.url, "url#\($0.offset + 1)")
+                XCTAssertEqual($0.element.url, "url#\($0.offset)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 0.5)
+        XCTAssertEqual(importDNSHelper.invokedImportDnsFiltersCount, 1)
+        XCTAssertEqual(vpnManager.updateSettingsCalledCount, 1)
+    }
+
+    func testApplyDnsFiltersWithImportEnabledFilters() {
+        var importSettings = generateImportSettings(isLicenseImportEnabled: true, license: "license")
+        purchaseService.isProPurchased = true
+        purchaseService.loginWithLicenseKeyResult = true
+        let expectation = XCTestExpectation()
+
+        let filters = generateFiltersToImport(filtersStatus: .successful)
+        importSettings.dnsFilters = filters.filters
+        dnsProtection.filters = generateDnsFilters()
+        importDNSHelper.stubbedImportDnsFiltersCompletionResult = filters.filtersResult
+
+        XCTAssertEqual(importDNSHelper.invokedImportDnsFiltersCount, 0)
+        XCTAssertEqual(vpnManager.updateSettingsCalledCount, 0)
+        service.applySettings(importSettings) { result in
+            XCTAssertEqual(result.dnsFilters?.count, 3)
+            XCTAssertEqual(self.importDNSHelper.invokedImportDnsFiltersParameters?.filtersContainer.toImportFilters.count, 0)
+            XCTAssertEqual(self.importDNSHelper.invokedImportDnsFiltersParameters?.filtersContainer.toEnableFilters.count, 3)
+            result.dnsFilters?.enumerated().forEach {
+                XCTAssertEqual($0.element.status, .successful)
+                XCTAssertEqual($0.element.url, "url#\($0.offset)")
+            }
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 0.5)
+        XCTAssertEqual(importDNSHelper.invokedImportDnsFiltersCount, 1)
+        XCTAssertEqual(vpnManager.updateSettingsCalledCount, 1)
+    }
+
+    func testApplyDnsFiltersWithImportAllCases() {
+        var importSettings = generateImportSettings(isLicenseImportEnabled: true, license: "license")
+        purchaseService.isProPurchased = true
+        purchaseService.loginWithLicenseKeyResult = true
+        let expectation = XCTestExpectation()
+
+        let filters = generateFiltersToImportWithAllCases(filtersStatus: .successful)
+        importSettings.dnsFilters = filters.filters
+        dnsProtection.filters = generateDnsFilters()
+        importDNSHelper.stubbedImportDnsFiltersCompletionResult = filters.filtersResult
+
+        XCTAssertEqual(importDNSHelper.invokedImportDnsFiltersCount, 0)
+        XCTAssertEqual(vpnManager.updateSettingsCalledCount, 0)
+        service.applySettings(importSettings) { result in
+            XCTAssertEqual(result.dnsFilters?.count, 6)
+            XCTAssertEqual(self.importDNSHelper.invokedImportDnsFiltersParameters?.filtersContainer.toImportFilters.count, 3)
+            XCTAssertEqual(self.importDNSHelper.invokedImportDnsFiltersParameters?.filtersContainer.toEnableFilters.count, 3)
+            result.dnsFilters?.enumerated().forEach {
+                XCTAssertEqual($0.element.status, .successful)
+                XCTAssertEqual($0.element.url, "url#\($0.offset)")
             }
             expectation.fulfill()
         }
@@ -482,7 +603,7 @@ class ImportSettingsServiceTest: XCTestCase {
         var result: [DnsFilter] = []
         for i in 0..<3 {
             result.append(
-                DnsFilter(filterId: i, subscriptionUrl: URL(string: "url")!, isEnabled: false, name: nil, description: nil, version: nil, lastUpdateDate: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: nil, rulesCount: 0)
+                DnsFilter(filterId: i, subscriptionUrl: URL(string: "url")!, isEnabled: false, name: nil, description: nil, version: nil, lastUpdateDate: nil, homePage: nil, licensePage: nil, issuesReportPage: nil, communityPage: nil, filterDownloadPage: "url#\(i)", rulesCount: 0)
             )
         }
         return result
@@ -490,17 +611,36 @@ class ImportSettingsServiceTest: XCTestCase {
 
     private func generateFiltersToImport(filtersStatus: ImportSettings.ImportSettingStatus) -> (filters: [ImportSettings.FilterSettings], filtersResult: [ImportSettings.FilterSettings]) {
         let filters = [
-            ImportSettings.FilterSettings(name: "filter#1", url: "url#1", isImportEnabled: true, status: .notImported),
-            ImportSettings.FilterSettings(name: "filter#2", url: "url#2", isImportEnabled: true, status: .notImported),
-            ImportSettings.FilterSettings(name: "filter#3", url: "url#2", isImportEnabled: true, status: .notImported),
-            ImportSettings.FilterSettings(name: "filter#3", url: "url#2", isImportEnabled: true, status: .notImported),
-            ImportSettings.FilterSettings(name: "filter#4", url: "url#3", isImportEnabled: true, status: .notImported)]
+            ImportSettings.FilterSettings(name: "filter#1", url: "url#0", isImportEnabled: true, status: .notImported),
+            ImportSettings.FilterSettings(name: "filter#2", url: "url#1", isImportEnabled: true, status: .notImported),
+            ImportSettings.FilterSettings(name: "filter#3", url: "url#1", isImportEnabled: true, status: .notImported),
+            ImportSettings.FilterSettings(name: "filter#3", url: "url#1", isImportEnabled: true, status: .notImported),
+            ImportSettings.FilterSettings(name: "filter#4", url: "url#2", isImportEnabled: true, status: .notImported)]
 
         let filtersResult = [
-            ImportSettings.FilterSettings(name: "filter#1", url: "url#1", isImportEnabled: true, status: filtersStatus),
-            ImportSettings.FilterSettings(name: "filter#2", url: "url#2", isImportEnabled: true, status: filtersStatus),
-            ImportSettings.FilterSettings(name: "filter#3", url: "url#3", isImportEnabled: true, status: filtersStatus)]
+            ImportSettings.FilterSettings(name: "filter#1", url: "url#0", isImportEnabled: true, status: filtersStatus),
+            ImportSettings.FilterSettings(name: "filter#2", url: "url#1", isImportEnabled: true, status: filtersStatus),
+            ImportSettings.FilterSettings(name: "filter#3", url: "url#2", isImportEnabled: true, status: filtersStatus)]
 
+        return (filters, filtersResult)
+    }
+
+    private func generateFiltersToImportWithAllCases(filtersStatus: ImportSettings.ImportSettingStatus) -> (filters: [ImportSettings.FilterSettings], filtersResult: [ImportSettings.FilterSettings]) {
+        let filters = [
+            ImportSettings.FilterSettings(name: "filter#1", url: "url#0", isImportEnabled: true, status: .notImported),
+            ImportSettings.FilterSettings(name: "filter#2", url: "url#1", isImportEnabled: true, status: .notImported),
+            ImportSettings.FilterSettings(name: "filter#3", url: "url#2", isImportEnabled: true, status: .notImported),
+            ImportSettings.FilterSettings(name: "filter#4", url: "url#3", isImportEnabled: true, status: .notImported),
+            ImportSettings.FilterSettings(name: "filter#5", url: "url#4", isImportEnabled: true, status: .notImported),
+            ImportSettings.FilterSettings(name: "filter#6", url: "url#5", isImportEnabled: true, status: .notImported)]
+
+        let filtersResult = [
+            ImportSettings.FilterSettings(name: "filter#1", url: "url#0", isImportEnabled: true, status: filtersStatus),
+            ImportSettings.FilterSettings(name: "filter#2", url: "url#1", isImportEnabled: true, status: filtersStatus),
+            ImportSettings.FilterSettings(name: "filter#3", url: "url#2", isImportEnabled: true, status: filtersStatus),
+            ImportSettings.FilterSettings(name: "filter#4", url: "url#3", isImportEnabled: true, status: filtersStatus),
+            ImportSettings.FilterSettings(name: "filter#5", url: "url#4", isImportEnabled: true, status: filtersStatus),
+            ImportSettings.FilterSettings(name: "filter#6", url: "url#5", isImportEnabled: true, status: filtersStatus)]
         return (filters, filtersResult)
     }
 
@@ -510,6 +650,22 @@ class ImportSettingsServiceTest: XCTestCase {
         let filter = SafariGroup.Filter(name: "PresetedFilter#", description: "", isEnabled: false, filterId: 0, version: nil, lastUpdateDate: nil, group: group, displayNumber: 0, languages: [], tags: [], homePage: nil, filterDownloadPage: "example.org", rulesCount: 0)
 
         return [SafariGroup(filters: [filter],
+                        isEnabled: group.isEnabled,
+                        groupType: group.groupType,
+                        groupName: group.groupName,
+                        displayNumber: group.displayNumber)]
+    }
+
+    private func generateCustomGroupWithFiltersForEnabling(filterDownloadPage: String = "example.org", numberOfFilters: Int = 3) -> [SafariGroup] {
+        let group = SafariGroup(filters: [], isEnabled: false, groupType: .custom, groupName: "group", displayNumber: 0)
+
+        var filters: [SafariGroup.Filter] = []
+        for i in 0..<numberOfFilters {
+            let filter = SafariGroup.Filter(name: "PresetedFilter#", description: "", isEnabled: false, filterId: 0, version: nil, lastUpdateDate: nil, group: group, displayNumber: 0, languages: [], tags: [], homePage: nil, filterDownloadPage: "\(filterDownloadPage)#\(i)", rulesCount: 0)
+            filters.append(filter)
+        }
+
+        return [SafariGroup(filters: filters,
                         isEnabled: group.isEnabled,
                         groupType: group.groupType,
                         groupName: group.groupName,
