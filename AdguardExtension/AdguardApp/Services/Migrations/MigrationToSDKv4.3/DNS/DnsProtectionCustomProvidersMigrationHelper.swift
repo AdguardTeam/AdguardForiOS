@@ -68,7 +68,7 @@ final class DnsProtectionCustomProvidersMigrationHelper: DnsProtectionCustomProv
 
         try providers.forEach {
             let selectAsCurrent = activeServerInfo != nil && $0.providerId == activeServerInfo?.providerId && $0.server.serverId == activeServerInfo?.serverId
-            try dnsProvidersManager.addCustomProvider(name: $0.name, upstreams: [$0.server.upstream], selectAsCurrent: selectAsCurrent)
+            try dnsProvidersManager.addCustomProvider(name: $0.name, upstreams: [$0.server.upstream], selectAsCurrent: selectAsCurrent, isMigration: true)
         }
         DDLogInfo("(DnsProtectionCustomProvidersMigrationHelper) - saveCustomDnsProviders; Saved \(providers.count) providers to SDK")
     }

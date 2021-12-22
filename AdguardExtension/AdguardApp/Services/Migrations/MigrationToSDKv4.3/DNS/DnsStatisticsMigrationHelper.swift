@@ -163,7 +163,6 @@ final class DnsStatisticsMigrationHelper: DnsStatisticsMigrationHelperProtocol {
 
     private func readActivity(db: Connection) throws -> [ActivityStatisticsRecord] {
         let oldDateFormatter = dateFormatter
-
         dateFormatter = iso8601Formatter()
 
         let query = DnsActivityTable.table

@@ -6,7 +6,7 @@ final class CustomDnsProvidersStorageMock: CustomDnsProvidersStorageProtocol {
 
     var addCustomProviderCalledCount = 0
     var addCustomProviderResult: Result<(Int, Int)> = .error(CommonError.missingData)
-    func addCustomProvider(name: String, upstreams: [String]) throws -> (providerId: Int, serverId: Int) {
+    func addCustomProvider(name: String, upstreams: [String], isMigration: Bool) throws -> (providerId: Int, serverId: Int) {
         addCustomProviderCalledCount += 1
         switch addCustomProviderResult {
         case .success(let ids): return ids

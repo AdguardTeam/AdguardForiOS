@@ -86,7 +86,7 @@ final class InAppDnsProvidersManagerMock: DnsProvidersManagerProtocol {
     var invokedAddCustomProviderParametersList = [(name: String, upstreams: [String], selectAsCurrent: Bool)]()
     var stubbedAddCustomProviderError: Error?
 
-    func addCustomProvider(name: String, upstreams: [String], selectAsCurrent: Bool) throws {
+    func addCustomProvider(name: String, upstreams: [String], selectAsCurrent: Bool, isMigration: Bool) throws {
         invokedAddCustomProvider = true
         invokedAddCustomProviderCount += 1
         invokedAddCustomProviderParameters = (name, upstreams, selectAsCurrent)

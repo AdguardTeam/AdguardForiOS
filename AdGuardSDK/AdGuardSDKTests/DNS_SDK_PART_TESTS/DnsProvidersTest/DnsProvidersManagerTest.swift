@@ -223,7 +223,7 @@ class DnsProvidersManagerTest: XCTestCase {
         initialize()
         checkEnabledProvider(providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId)
 
-        XCTAssertThrowsError(try providersManager.addCustomProvider(name: "name", upstreams: [], selectAsCurrent: false)) { error in
+        XCTAssertThrowsError(try providersManager.addCustomProvider(name: "name", upstreams: [], selectAsCurrent: false, isMigration: false)) { error in
             if case CommonError.missingData = error {}
             else {
                 XCTFail()
@@ -243,7 +243,7 @@ class DnsProvidersManagerTest: XCTestCase {
         checkVariables(custom: 1, predefined: 11, servers: 37, providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId, dnsImp: .adGuard)
         checkEnabledProvider(providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId)
 
-        XCTAssertNoThrow(try providersManager.addCustomProvider(name: "name", upstreams: ["1.1.1.1"], selectAsCurrent: true))
+        XCTAssertNoThrow(try providersManager.addCustomProvider(name: "name", upstreams: ["1.1.1.1"], selectAsCurrent: true, isMigration: false))
 
         checkVariables(custom: 1, predefined: 11, servers: 37, providerId: 1, serverId: 100010, dnsImp: .adGuard)
         checkEnabledProvider(providerId: 1, serverId: 100010)
@@ -259,7 +259,7 @@ class DnsProvidersManagerTest: XCTestCase {
         checkVariables(custom: 1, predefined: 11, servers: 37, providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId, dnsImp: .adGuard)
         checkEnabledProvider(providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId)
 
-        XCTAssertNoThrow(try providersManager.addCustomProvider(name: "name", upstreams: ["1.1.1.1"], selectAsCurrent: false))
+        XCTAssertNoThrow(try providersManager.addCustomProvider(name: "name", upstreams: ["1.1.1.1"], selectAsCurrent: false, isMigration: false))
 
         checkVariables(custom: 1, predefined: 11, servers: 37, providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId, dnsImp: .adGuard)
         checkEnabledProvider(providerId: PredefinedDnsProvider.systemDefaultProviderId, serverId: PredefinedDnsServer.systemDefaultServerId)
