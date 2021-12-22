@@ -29,7 +29,7 @@ protocol CustomDnsProvidersStorageProtocol: ResetableSyncProtocol {
      - Throws: Throws an error if upstreams are invalid or have different protocols
      - Returns: Provider and server id of newly created object
      */
-    func addCustomProvider(name: String, upstreams: [String]) throws -> (providerId: Int, serverId: Int)
+    func addCustomProvider(name: String, upstreams: [String], isMigration: Bool) throws -> (providerId: Int, serverId: Int)
 
     /**
      Updates custom provider in the storage
@@ -116,9 +116,13 @@ final class CustomDnsProvidersStorage: CustomDnsProvidersStorageProtocol {
 
     // MARK: - Internal methods
 
-    func addCustomProvider(name: String, upstreams: [String]) throws -> (providerId: Int, serverId: Int) {
-        let dnsProtocol = try checkProviderInfo(name: name, upstreams: upstreams)
-        try checkDnsImplementation(dnsProtocol: dnsProtocol)
+    // TODO: - It's a crutch, should be refactored
+    /// isMigration parameter is a crutch to quickly migrate custom DNS providers without checking their upstreams
+    func addCustomProvider(name: String, upstreams: [String], isMigration: Bool) throws -> (providerId: Int, serverId: Int) {
+        let dnsProtocol = try checkProviderInfo(name: name, upstreams: upstreams, isMigration: isMigration)
+        if !isMigration {
+            try checkDnsImplementation(dnsProtocol: dnsProtocol)
+        }
         let dnsUpstreams = upstreams.map { DnsUpstream(upstream: $0, protocol: dnsProtocol) }
 
         let ids = nextCustomIds
@@ -164,7 +168,9 @@ final class CustomDnsProvidersStorage: CustomDnsProvidersStorageProtocol {
 
     // MARK: - Private methods
 
-    private func checkProviderInfo(name: String, upstreams: [String]) throws -> DnsProtocol {
+    // TODO: - It's a crutch, should be refactored
+    /// isMigration parameter is a crutch to quickly migrate custom DNS providers without checking their upstreams
+    private func checkProviderInfo(name: String, upstreams: [String], isMigration: Bool = false) throws -> DnsProtocol {
         guard !upstreams.isEmpty else {
             throw CustomDnsProvidersStorageError.emptyUpstreams
         }
@@ -172,6 +178,10 @@ final class CustomDnsProvidersStorage: CustomDnsProvidersStorageProtocol {
         let protocols = try upstreams.map { try networkUtils.getProtocol(from: $0) }
         guard protocols.allElementsAreEqual else {
             throw CustomDnsProvidersStorageError.differentDnsProtocols(upstreams: upstreams)
+        }
+
+        if isMigration {
+            return protocols.first!
         }
 
         try upstreams.forEach {

@@ -53,7 +53,7 @@ public protocol DnsProvidersManagerProtocol: ResetableSyncProtocol {
      - Throws:  Throws an error if upstreams are invalid or have different protocols
                 or custom dns provider with the same upstream exists
      */
-    func addCustomProvider(name: String, upstreams: [String], selectAsCurrent: Bool) throws
+    func addCustomProvider(name: String, upstreams: [String], selectAsCurrent: Bool, isMigration: Bool) throws
 
     /**
      Updates custom provider in the storage
@@ -160,7 +160,9 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
         Logger.logInfo("(DnsProvidersManager) - selectProvider; Selected provider with id=\(id) serverId=\(serverId)")
     }
 
-    public func addCustomProvider(name: String, upstreams: [String], selectAsCurrent: Bool) throws {
+    // TODO: - It's a crutch, should be refactored
+    /// isMigration parameter is a crutch to quickly migrate custom DNS providers without checking their upstreams
+    public func addCustomProvider(name: String, upstreams: [String], selectAsCurrent: Bool, isMigration: Bool) throws {
         Logger.logInfo("(DnsProvidersManager) - addCustomProvider; Trying to add custom provider with name=\(name), upstreams=\(upstreams.joined(separator: "; ")) selectAsCurrent=\(selectAsCurrent)")
 
         // check server exists
@@ -173,7 +175,7 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
             throw DnsProviderError.dnsProviderExists(upstreams: upstreams)
         }
 
-        let ids = try customProvidersStorage.addCustomProvider(name: name, upstreams: upstreams)
+        let ids = try customProvidersStorage.addCustomProvider(name: name, upstreams: upstreams, isMigration: isMigration)
         if selectAsCurrent {
             userDefaults.activeDnsInfo = DnsProvidersManager.ActiveDnsInfo(providerId: ids.providerId, serverId: ids.serverId)
         }

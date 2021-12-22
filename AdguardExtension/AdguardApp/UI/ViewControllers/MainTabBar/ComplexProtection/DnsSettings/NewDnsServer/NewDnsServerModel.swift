@@ -54,7 +54,7 @@ final class NewDnsServerModel {
 
     /// Function to add custom provider
     func addCustomProvider(name: String, upstream: String) throws {
-        try dnsProvidersManager.addCustomProvider(name: name, upstreams: [upstream], selectAsCurrent: true)
+        try dnsProvidersManager.addCustomProvider(name: name, upstreams: [upstream], selectAsCurrent: true, isMigration: false)
         dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsServer, completion: nil)
     }
 
