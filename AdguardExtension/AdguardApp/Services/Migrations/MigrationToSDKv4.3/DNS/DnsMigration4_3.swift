@@ -98,7 +98,7 @@ class DnsMigration4_3: DnsMigration4_3Protocol {
 
             // The timeout is a crutch because code for IPC is rather bad
             // TODO: - Refactor it later
-            let waitResult = group.wait(timeout: .now() + 12.0)
+            let waitResult = group.wait(timeout: .now() + 10.0)
 
             Logger.logInfo("(DnsMigration4_3) the wait is over; waitResult successeeded=\(waitResult == .success)")
             return
