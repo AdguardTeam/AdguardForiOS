@@ -28,7 +28,7 @@ protocol ImportDNSSettingsHelperProtocol {
 
     /// Imports DNS filters.
     /// If **override** is true then all old filters will be replaced with new ones. Returns import result
-    func importDnsFilters(_ filters: [ImportSettings.FilterSettings], override: Bool, completion: @escaping ([ImportSettings.FilterSettings]) -> Void)
+    func importDnsFilters(_ filtersContainer: ImportSettingsService.FiltersImportContainer, override: Bool, completion: @escaping ([ImportSettings.FilterSettings]) -> Void)
 }
 
 /// This object is responsible for importing DNS protection settings
@@ -79,7 +79,7 @@ final class ImportDNSSettingsHelper: ImportDNSSettingsHelperProtocol {
         }
     }
 
-    func importDnsFilters(_ filters: [ImportSettings.FilterSettings], override: Bool, completion: @escaping ([ImportSettings.FilterSettings]) -> Void) {
+    func importDnsFilters(_ filtersContainer: ImportSettingsService.FiltersImportContainer, override: Bool, completion: @escaping ([ImportSettings.FilterSettings]) -> Void) {
         workingQueue.async { [weak self] in
             guard let self = self else {
                 DDLogError("(ImportDNSSettingsHelper) - importDnsFilters; Missing self")
@@ -90,9 +90,17 @@ final class ImportDNSSettingsHelper: ImportDNSSettingsHelperProtocol {
             if override { self.removeAllDnsFilters() }
 
             var resultDnsFilters: [ImportSettings.FilterSettings] = []
+
+            filtersContainer.toEnableFilters.forEach {
+                var filter = $0
+                let result = self.setDnsFilter($0)
+                filter.status = result ? .successful : .unsuccessful
+                resultDnsFilters.append(filter)
+            }
+
             let group = DispatchGroup()
 
-            filters.forEach { filter in
+            filtersContainer.toImportFilters.forEach { filter in
                 group.enter()
                 self.subscribe(filter) { settings in
                     resultDnsFilters.append(settings)
@@ -134,6 +142,22 @@ final class ImportDNSSettingsHelper: ImportDNSSettingsHelperProtocol {
             }
             DDLogInfo("(ImportDNSSettingsHelper) - subscribeDnsFilter; DNS Filter with url = \(url) successfully added")
             completion(true)
+        }
+    }
+
+    private func setDnsFilter(_ filter: ImportSettings.FilterSettings) -> Bool {
+        guard let id = dnsProtection.filters.first(where: { $0.filterDownloadPage == filter.url })?.filterId else {
+            DDLogError("(ImportDNSSettingsHelper) - setDnsFilter; Dns filter with url=\(filter.url) not exists")
+            return false
+        }
+
+        do {
+            try dnsProtection.setFilter(withId: id, to: true)
+            DDLogInfo("(ImportDNSSettingsHelper) - setDnsFilter; Successfully enable dns filter with url=\(filter.url)")
+            return true
+        } catch {
+            DDLogError("(ImportDNSSettingsHelper) - setDnsFilter; Dns filter with url=\(filter.url) were not enabled: Error: \(error)")
+            return false
         }
     }
 

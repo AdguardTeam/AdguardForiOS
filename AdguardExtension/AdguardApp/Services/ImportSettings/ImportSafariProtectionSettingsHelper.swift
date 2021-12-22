@@ -27,7 +27,7 @@ protocol ImportSafariProtectionSettingsHelperProtocol {
     func importSafariBlocklistRules(_ rules: [String], override: Bool)
 
     /// Imports custom Safari filters. If **override** is true then all old filters will be replaced with new ones. Returns import result in completion
-    func importCustomSafariFilters(_ filters: [ImportSettings.FilterSettings], override: Bool, completion: @escaping ([ImportSettings.FilterSettings]) -> Void)
+    func importCustomSafariFilters(_ filtersContainer: ImportSettingsService.FiltersImportContainer, override: Bool, completion: @escaping ([ImportSettings.FilterSettings]) -> Void)
 }
 
 /// This object is responsible for importing Safari protection settings
@@ -75,7 +75,7 @@ final class ImportSafariProtectionSettingsHelper: ImportSafariProtectionSettings
         }
     }
 
-    func importCustomSafariFilters(_ filters: [ImportSettings.FilterSettings], override: Bool, completion: @escaping ([ImportSettings.FilterSettings]) -> Void) {
+    func importCustomSafariFilters(_ filtersContainer: ImportSettingsService.FiltersImportContainer, override: Bool, completion: @escaping ([ImportSettings.FilterSettings]) -> Void) {
         workingQueue.async { [weak self] in
             guard let self = self else {
                 DDLogError("(ImportSafariProtectionSettingsHelper) - importCustomSafariFilters; Missing self")
@@ -88,7 +88,14 @@ final class ImportSafariProtectionSettingsHelper: ImportSafariProtectionSettings
             let group = DispatchGroup()
             var result = [ImportSettings.FilterSettings]()
 
-            filters.forEach { filter in
+            filtersContainer.toEnableFilters.forEach {
+                var filter = $0
+                let status = self.setCustomSafariFilter(filter)
+                filter.status = status
+                result.append(filter)
+            }
+
+            filtersContainer.toImportFilters.forEach { filter in
                 group.enter()
                 self.subscribe(filter) { settings in
                     result.append(settings)
@@ -245,6 +252,24 @@ final class ImportSafariProtectionSettingsHelper: ImportSafariProtectionSettings
             } catch {
                 DDLogError("(ImportSafariProtectionSettingsHelper) - deleteFilters; Error occurred while deleting filter with id = \($0.filterId); Error: \(error)")
             }
+        }
+    }
+
+    private func setCustomSafariFilter(_ filter: ImportSettings.FilterSettings) -> ImportSettings.ImportSettingStatus {
+        guard let customGroup = safariProtection.groups.first(where: { $0.groupType == .custom }),
+              let customSafariFilter = customGroup.filters.first(where: { $0.filterDownloadPage == filter.url })
+        else {
+            DDLogError("(ImportSafariProtectionSettingsHelper) - setCustomSafariFilter; Custom safari filter with url=\(filter.url) not exists")
+            return .unsuccessful
+        }
+
+        do {
+            try safariProtection.setFilter(withId: customSafariFilter.filterId, groupId: SafariGroup.GroupType.custom.id, enabled: true)
+            DDLogInfo("(ImportSafariProtectionSettingsHelper) - setCustomSafariFilter; Successfully enable custom safari filter with url=\(filter.url)")
+            return .successful
+        } catch {
+            DDLogError("(ImportSafariProtectionSettingsHelper) - setCustomSafariFilter; Custom safari filter with url=\(filter.url) were not enabled: Error: \(error)")
+            return .unsuccessful
         }
     }
 }

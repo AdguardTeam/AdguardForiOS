@@ -48,15 +48,15 @@ class ImportSafariProtectionSettingsHelperMock: ImportSafariProtectionSettingsHe
 
     var invokedImportCustomSafariFilters = false
     var invokedImportCustomSafariFiltersCount = 0
-    var invokedImportCustomSafariFiltersParameters: (filters: [ImportSettings.FilterSettings], override: Bool)?
-    var invokedImportCustomSafariFiltersParametersList = [(filters: [ImportSettings.FilterSettings], override: Bool)]()
+    var invokedImportCustomSafariFiltersParameters: (filtersContainer: ImportSettingsService.FiltersImportContainer, override: Bool)?
+    var invokedImportCustomSafariFiltersParametersList = [(filtersContainer: ImportSettingsService.FiltersImportContainer, override: Bool)]()
     var stubbedImportCustomSafariFiltersCompletionResult: [ImportSettings.FilterSettings] = []
 
-    func importCustomSafariFilters(_ filters: [ImportSettings.FilterSettings], override: Bool, completion: @escaping ([ImportSettings.FilterSettings]) -> Void) {
+    func importCustomSafariFilters(_ filtersContainer: ImportSettingsService.FiltersImportContainer, override: Bool, completion: @escaping ([ImportSettings.FilterSettings]) -> Void) {
         self.invokedImportCustomSafariFilters = true
         self.invokedImportCustomSafariFiltersCount += 1
-        self.invokedImportCustomSafariFiltersParameters = (filters, override)
-        self.invokedImportCustomSafariFiltersParametersList.append((filters, override))
+        self.invokedImportCustomSafariFiltersParameters = (filtersContainer, override)
+        self.invokedImportCustomSafariFiltersParametersList.append((filtersContainer, override))
         completion(self.stubbedImportCustomSafariFiltersCompletionResult)
     }
 }
