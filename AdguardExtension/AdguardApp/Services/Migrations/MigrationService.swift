@@ -130,11 +130,11 @@ final class MigrationService: MigrationServiceProtocol {
             } catch {
                 DDLogError("(MigrationService) - Failed to migrate old data to SDK; Error: \(error)")
             }
-            resources.isMigrationTo4_3Passed = true
         }
 
         let currentBuildVersion = Int(productInfo.buildNumber())
         resources.buildVersion = currentBuildVersion ?? 0
+        resources.isMigrationTo4_3Passed = true
     }
 }
 
