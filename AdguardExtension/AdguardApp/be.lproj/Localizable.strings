@@ -643,6 +643,9 @@
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Пуста";
 
+/* (IntroductionOnboardingController) - License agreement text */
+"introduction_license_agreement" = "Працягваючы выкарыстанне, вы прымаеце <br /><a href=%2$@>Становішчы і ўмовы</a> і <a href=%1$@>Палітыку прыватнасці</a>";
+
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Запыты";
 

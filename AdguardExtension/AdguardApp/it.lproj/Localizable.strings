@@ -482,13 +482,13 @@
 "disabled" = "Disattivati";
 
 /*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
-"remove_from_whitelist" = "Rimuovi dalla lista bianca";
+"remove_from_whitelist" = "Rimuovi dalla Lista bianca";
 
 /*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
 "remove_from_blacklist" = "Rimuovi dalla lista nera";
 
 /*(LogRecord) "ADD TO ALLOWLIST" button title */
-"add_to_whitelist" = "Aggiungi alla lista bianca";
+"add_to_whitelist" = "Aggiungi alla Lista bianca";
 
 /*(LogRecord) "ADD TO BLOCKLIST" button title */
 "add_to_blacklist" = "Aggiungi alla lista nera";
