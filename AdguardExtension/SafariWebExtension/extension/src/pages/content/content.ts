@@ -66,7 +66,7 @@ const applyScripts = (scripts: string[], verbose: boolean) => {
     }
 
     logMessage(verbose, `scripts length: ${scripts.length}`);
-    executeScripts(scripts.reverse());
+    executeScripts(scripts);
 };
 
 /**
