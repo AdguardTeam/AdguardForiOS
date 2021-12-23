@@ -542,8 +542,18 @@ extension AppDelegate {
             DDLogError("UserFilter.storyboard doesn't have UserRulesRedirectController")
             return false
         }
+
         // Check if VC does not present any controller
         if topVC.presentedViewController == nil {
+
+            // TODO: It`s a crutch, must be reworked
+            if let navBar = getMainTabController()?.selectedViewController as? UINavigationController,
+               let controller = navBar.topViewController as? UserRulesTableController {
+                userRulesRedirectVC.refreshUI = {
+                    controller.updateUIFromRedirect()
+                }
+            }
+            
             userRulesRedirectVC.action = action
             topVC.present(userRulesRedirectVC, animated: true)
             return true
