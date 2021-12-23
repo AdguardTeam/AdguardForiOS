@@ -169,8 +169,10 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
         // Advanced rules from every Content Blocker in one string
         let bigRule = results.reduce("", { $0 + "\n" + ($1.advancedBlockingText ?? "") })
 
-        // Unique rules from all rules
-        let rules = Set(bigRule.split(separator: "\n"))
+        // Unique rules from all rules preserving their order
+        // It's very important to leave order the same we receive from converter!
+        // Otherwise Advanced Protection wouldn't work
+        let rules = bigRule.split(separator: "\n").uniqueElements
 
         // String from unique rules
         let uniqueRulesText = rules.joined(separator: "\n")
