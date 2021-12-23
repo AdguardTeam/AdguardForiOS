@@ -145,13 +145,6 @@ final class UserRulesTableController: UIViewController {
         goToNormalMode()
     }
 
-    // MARK: - Public methods
-
-    func updateUIFromRedirect() {
-        setupTableView()
-        tableView.reloadData()
-    }
-
     // MARK: - Private methods
 
     private func setupTableView() {

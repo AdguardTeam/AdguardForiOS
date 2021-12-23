@@ -545,12 +545,10 @@ extension AppDelegate {
 
         // Check if VC does not present any controller
         if topVC.presentedViewController == nil {
-
             // TODO: It`s a crutch, must be reworked
-            if let navBar = getMainTabController()?.selectedViewController as? UINavigationController,
-               let controller = navBar.topViewController as? UserRulesTableController {
-                userRulesRedirectVC.refreshUI = {
-                    controller.updateUIFromRedirect()
+            if let userRulesTableController = topVC as? UserRulesTableController {
+                userRulesRedirectVC.onViewDidLoad = {
+                    self.presentUserRulesTableController(for: userRulesTableController.rulesType)
                 }
             }
             
