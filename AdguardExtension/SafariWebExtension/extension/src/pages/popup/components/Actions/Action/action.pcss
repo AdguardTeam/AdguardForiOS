@@ -23,6 +23,7 @@
     }
 
     &__icon {
+        flex-shrink: 0;
         margin-right: 16px;
         border-radius: 100%;
         overflow: hidden;
@@ -30,7 +31,6 @@
 
     &__title,
     &__description {
-        max-width: 240px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -104,5 +104,10 @@
                 left: 15px;
             }
         }
+    }
+
+    &__details {
+        min-width: 0;
+        padding-right: 16px
     }
 }
