@@ -270,9 +270,9 @@ final class MainPageController: UIViewController, DateTypeChangedProtocol, Compl
     private func processContentBlockersHelper() {
         if #available(iOS 15.0, *), !resources.whatsNewScreenShown {
             showWhatsNewWithAdvancedProtectionInfo { [weak self] in
-                self?.resources.whatsNewScreenShown = true
                 self?.showContentBlockersHelperIfNeeded()
             }
+            resources.whatsNewScreenShown = true
         } else {
             showContentBlockersHelperIfNeeded()
         }
