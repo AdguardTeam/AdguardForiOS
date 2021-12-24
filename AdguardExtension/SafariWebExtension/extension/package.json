@@ -17,7 +17,7 @@
     "@adguard/translate": "^0.2.3",
     "@adguard/tsurlfilter": "^0.7.1",
     "@babel/runtime": "^7.14.6",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "classnames": "^2.3.1",
     "extended-css": "https://github.com/AdguardTeam/ExtendedCss",
     "mobx": "^6.3.3",
