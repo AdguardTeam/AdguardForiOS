@@ -22,9 +22,6 @@
 /* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "QHZ-sJ-wTL"; */
 "QHZ-sJ-wTL.text" = "Blokuje reklamy a sledovače na webových stránkach otvorených v prehliadači Safari";
 
-/* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "QHZ-sJ-wTL"; */
-"QHZ-sJ-wTL.text" = "Blokuje reklamy a sledovače na webových stránkach otvorených v prehliadači Safari";
-
 /* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
 "RJU-32-r8h.text" = "Počet pravidiel: ";
 

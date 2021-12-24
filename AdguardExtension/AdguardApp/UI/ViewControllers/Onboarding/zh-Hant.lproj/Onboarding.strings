@@ -14,7 +14,7 @@
 "GOu-4j-RcN.normalTitle" = "視訊導覽";
 
 /* Class = "UILabel"; text = "Stop thousands of corporations from tracking your every move. Regain control of your online privacy."; ObjectID = "Mzf-WJ-CpC"; Note = "String must be less or equal 4 lines"; */
-"Mzf-WJ-CpC.text" = "防止數千上萬家公司追蹤使用者的所有動作。奪回自己隱私保護的限制權。";
+"Mzf-WJ-CpC.text" = "阻止大量的公司免於追蹤您的每個動作。取回您的線上隱私之控制。";
 
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "cMV-qC-ZdE"; */
 "cMV-qC-ZdE.normalTitle" = "繼續";
@@ -29,7 +29,7 @@
 "q8l-xM-B5q.normalTitle" = "繼續";
 
 /* Class = "UILabel"; text = "AdGuard blocks ads in Safari on most websites. Enjoy faster web surfing without ads!"; ObjectID = "r3n-Il-Qe8"; Note = "String must be less or equal 4 lines"; */
-"r3n-Il-Qe8.text" = "AdGuard 在 Safari 裡的網站上封鎖幾乎所有廣告。享受無廣告的極速瀏覽體驗！";
+"r3n-Il-Qe8.text" = "AdGuard 在 Safari 裡封鎖於多數網站上的廣告。享受更快的無廣告的網路瀏覽！";
 
 /* Class = "UILabel"; text = "Use our collection of flexible filters to remove any type of content. Tune the filtering to your liking and surf the web your way."; ObjectID = "thP-lV-BhN"; Note = "String must be less or equal 4 lines"; */
-"thP-lV-BhN.text" = "使用我們靈活的過濾器移除任何內容。按自己的喜好調整過濾流程，享受網頁瀏覽。";
+"thP-lV-BhN.text" = "使用我們靈活的過濾器之收集來移除任何類型的內容。調整過濾成您的喜好並以您的方式瀏覽網路。";

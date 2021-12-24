@@ -361,9 +361,6 @@
 /* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
 "hostname_obtaining_error" = "L'hostname non è ottenuto. Forse la pagina non è stata ancora caricata.";
 
-/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
-"assistant_launching_unable" = "La politica di sicurezza di questo sito web non consente l'avvio del Assistente AdGuard.";
-
 /* (Action Extension - ActionViewController) Some errors when starting. */
 "support_error_safari_extension" = "Si è verificato un errore imprevisto durante l'inizializzazione dell'estensione dell'azione Safari. Contatta il supporto AdGuard se questo se succede di nuovo.";
 
@@ -452,7 +449,7 @@
 "export" = "Esporta";
 
 /* (UserRulesTableController) - title for editing user rules option  */
-"open_user_rules_editor" = "Apri l'editor";
+"open_user_rules_editor" = "Apri editor";
 
 /* (UserRulesTableController) - description for Safari user rules in editor  */
 "editor_safari_user_rules_description" = "Aggiungi regole utente di Safari";
@@ -482,13 +479,13 @@
 "disabled" = "Disattivati";
 
 /*(LogRecord) "REMOVE FROM ALLOWLIST" button title */
-"remove_from_whitelist" = "Rimuovi dalla Lista bianca";
+"remove_from_whitelist" = "Rimuovi dalla lista bianca";
 
 /*(LogRecord) "REMOVE FROM BLOCKLIST" button title */
 "remove_from_blacklist" = "Rimuovi dalla lista nera";
 
 /*(LogRecord) "ADD TO ALLOWLIST" button title */
-"add_to_whitelist" = "Aggiungi alla Lista bianca";
+"add_to_whitelist" = "Aggiungi alla lista bianca";
 
 /*(LogRecord) "ADD TO BLOCKLIST" button title */
 "add_to_blacklist" = "Aggiungi alla lista nera";
@@ -716,7 +713,7 @@
 "onboarding_third_step_text" = "<b>Attiva</b> tutte le estensioni AdGuard.";
 
 /* (OnboardingController) third step with advanced protection text */
-"advanced_protection_onboarding_third_step_text" = "Imposta tutti gli interruttori di AdGuard su <b>attivo</b>. Sei pronto!";
+"advanced_protection_onboarding_third_step_text" = "Imposta tutte le opzioni di AdGuard su <b>attiva</b>. Ora è tutto ok!";
 
 /* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
 "onboarding_fours_step_text" = "Per la protezione <b>Avanzata</b>, apri Safari, clicca l'icona <b>aA</b> sul lato sinistro del campo dell'URL,<br><br> %@ <br><br>dopodichè clicca su <b>Gestisci estensioni</b> e attiva l'interruttore di <b>AdGuard</b>.";
@@ -905,13 +902,13 @@
 "detailed_filter_info_updated_subtitle" = "Aggiornato";
 
 /* (FilterDetailsViewController) Rules count subtitle for detailed filter info */
-"detailed_filter_info_rules_count_subtitle" = "Conteggio regole";
+"detailed_filter_info_rules_count_subtitle" = "Numero regole";
 
 /* (FilterDetailsViewController) Website subtitle for detailed filter info */
 "detailed_filter_info_website_subtitle" = "Sito web";
 
 /* (FilterDetailsViewController) Subscription URL subtitle for detailed filter info */
-"detailed_filter_info_subscription_subtitle" = "URL d'iscrizione";
+"detailed_filter_info_subscription_subtitle" = "URL di sottoscrizione";
 
 /* (AddRuleController) Error description when adding rule that already exists */
 "user_rule_exists_error" = "Stai cercando di aggiungere una regola già esistente nell'elenco";
@@ -1152,13 +1149,13 @@
 "background_app_refresh_time_title" = "Intervallo aggiornamento dell'app in background";
 
 /* (DnsProvidersController) - add new dns server title */
-"add_custom_dns_server_title" = "Aggiungi un server DNS personalizzato";
+"add_custom_dns_server_title" = "Aggiungi utente al server DNS";
 
 /* (DnsProvidersController) - Header title */
 "dns_provider_controller_title" = "Server DNS";
 
 /* (DnsProvidersController) - Header description */
-"dns_provider_controller_description" = "Puoi migliorare la tua privacy online crittografando il traffico DNS. Per farlo, scegli uno dei fornitori DNS consigliati.";
+"dns_provider_controller_description" = "Puoi migliorare la tua privacy online crittografando il traffico DNS. Per fare ciò, scegli uno dei provider DNS consigliati.";
 
 /* (DnsProviderDetailsController) Server title */
 "server_title" = "Server";

@@ -5,7 +5,7 @@
 "884-Hm-mb6.text" = "Safari 防護";
 
 /* Class = "UILabel"; text = "Enhanced functionality for ultimate ad blocking and content filtering"; ObjectID = "9wg-p1-Dh8"; */
-"9wg-p1-Dh8.text" = "用於全面封鎖廣告及過濾內容的進階功能";
+"9wg-p1-Dh8.text" = "供終極的廣告封鎖和內容過濾的增進功能";
 
 /* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "AZY-QZ-8d9"; */
 "AZY-QZ-8d9.text" = "YouTube 廣告封鎖";
@@ -26,7 +26,7 @@
 "Sry-3f-FQj.text" = "此 Safari 延伸功能移除廣告和廣告殘留物，並使於 YouTube 上的自動播放功能生效";
 
 /* Class = "UILabel"; text = "Uses enhanced functionality for ultimate ad blocking and content filtering"; ObjectID = "WOG-Hk-11z"; */
-"WOG-Hk-11z.text" = "使用進階功能以全面封鎖廣告並過濾內容";
+"WOG-Hk-11z.text" = "使用供終極的廣告封鎖和內容過濾的增進功能";
 
 /* Class = "UILabel"; text = "Block YouTube Ads (by AdGuard)"; ObjectID = "XXP-EO-M4h"; */
 "XXP-EO-M4h.text" = "封鎖 YouTube 廣告（由 AdGuard 製作）";
@@ -38,7 +38,7 @@
 "cnF-td-Ba1.text" = "DNS 防護";
 
 /* Class = "UILabel"; text = "Requires access to web pages' contents but uses it only for ad blocking"; ObjectID = "i0Z-fi-Rc0"; */
-"i0Z-fi-Rc0.text" = "需要網頁內容的訪問權限，這些權限僅用於阻止廣告";
+"i0Z-fi-Rc0.text" = "需要對網頁內容的權限，但僅在廣告封鎖方面使用它";
 
 /* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "kDM-2d-bRK"; */
 "kDM-2d-bRK.text" = "YouTube 廣告封鎖";
@@ -53,7 +53,7 @@
 "rm0-Ip-riS.text" = "封鎖複雜廣告，諸如在 Safari 中的 YouTube 廣告";
 
 /* Class = "UILabel"; text = "Uses sophisticated multi-level filtering rules"; ObjectID = "rr4-ic-Pg8"; */
-"rr4-ic-Pg8.text" = "使用多層細緻過濾規則";
+"rr4-ic-Pg8.text" = "使用複雜多層的過濾規則";
 
 /* Class = "UILabel"; text = "Works alongside the AdGuard ad blocker"; ObjectID = "tKQ-Yn-fgL"; */
 "tKQ-Yn-fgL.text" = "與 AdGuard 廣告封鎖器一起運作";

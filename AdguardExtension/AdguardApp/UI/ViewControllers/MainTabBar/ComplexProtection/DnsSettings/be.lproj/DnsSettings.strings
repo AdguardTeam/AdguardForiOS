@@ -22,9 +22,6 @@
 /* Class = "UILabel"; text = "AdGuard"; ObjectID = "QD7-ng-Xb6"; */
 "QD7-ng-Xb6.text" = "AdGuard";
 
-/* Class = "UILabel"; text = "Enable this module to enhance your privacy by encrypting your DNS traffic."; ObjectID = "PFY-Cq-NFN"; Note = "No more than 100 symbols"; */
-"PFY-Cq-NFN.text" = "Уключыце гэты модуль, каб павысіць прыватнасць праз шыфроўку DNS-трафіку.";
-
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "QYv-iX-uIo"; */
 "QYv-iX-uIo.text" = "Ахова DNS";
 

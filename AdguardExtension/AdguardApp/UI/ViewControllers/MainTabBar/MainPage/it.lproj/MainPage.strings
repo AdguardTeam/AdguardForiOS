@@ -37,8 +37,5 @@
 /* Class = "UILabel"; text = "Some Safari content blockers are disabled"; ObjectID = "cvv-CS-LMQ"; */
 "cvv-CS-LMQ.text" = "Alcuni blocchi dei contenuti per Safari sono disattivati";
 
-/* Class = "UILabel"; text = "New AdGuard features in iOS 15"; ObjectID = "gDV-cq-ZDm"; */
-"gDV-cq-ZDm.text" = "Nuove funzionalità di AdGuard su iOS 15";
-
 /* Class = "UIButton"; normalTitle = "Fix it"; ObjectID = "oe6-9O-dBB"; */
 "oe6-9O-dBB.normalTitle" = "Risolvi";

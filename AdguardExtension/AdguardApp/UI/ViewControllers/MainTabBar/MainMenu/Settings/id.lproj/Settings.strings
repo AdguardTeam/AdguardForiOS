@@ -22,9 +22,6 @@
 /* Class = "UILabel"; text = "Delete VPN profile"; ObjectID = "9hH-ca-VHY"; */
 "9hH-ca-VHY.text" = "Hapus profil VPN";
 
-/* Class = "UILabel"; text = "Delete VPN profile"; ObjectID = "9hH-ca-VHY"; */
-"9hH-ca-VHY.text" = "Hapus profil VPN";
-
 /* Class = "UILabel"; text = "Bootstrap IP address"; ObjectID = "A89-2M-jqd"; */
 "A89-2M-jqd.text" = "Alamat IP Bootstrap";
 

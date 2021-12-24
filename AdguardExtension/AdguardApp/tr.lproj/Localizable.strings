@@ -404,7 +404,7 @@
 "common_license" = "Lisans";
 
 /* (LoginController) incorrect email/passsword mesage */
-"bad_credentials_error" = "Yanlış e-posta adresi veya parola";
+"bad_credentials_error" = "Yanlış e-posta veya parola";
 
 /* (LoginController) disabled account mesage */
 "account_is_disabled_error" = "Hesap engellenmiştir";

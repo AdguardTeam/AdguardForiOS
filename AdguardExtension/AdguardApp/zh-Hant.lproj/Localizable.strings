@@ -239,7 +239,7 @@
 "filters_description_format" = "已啟用 %2$d 當中的 %1$d";
 
 /* DnsProviderDetailsController - regular dns protocol */
-"regular_dns_protocol" = "一般的";
+"regular_dns_protocol" = "常規的";
 
 /* DnsProviderDetailsController - dns crypt protocol */
 "dns_crypt_protocol" = "DNSCrypt";
@@ -293,7 +293,7 @@
 "cb_description_common" = "6 個內容阻擋器，每個有高達 50,000 項規則";
 
 /* (AdvancedSettingsController) Content blocker description text */
-"cb_description_advanced_protection" = "6 個內容阻擋器，每個有高達 150,000 項規則，加上進階的防護";
+"cb_description_advanced_protection" = "6 個內容阻擋器，每個有高達 150,000 項規則，加上進階防護";
 
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "過濾器：";
@@ -563,28 +563,28 @@
 "add_new_filter" = "新增一個過濾器";
 
 /* (OneSafariGroupFiltersModel) Ads filters group description */
-"ads_filters_group_description" = "移除廣告的過濾清單";
+"ads_filters_group_description" = "移除廣告的過濾器清單";
 
 /* (OneSafariGroupFiltersModel) Privacy filters group description */
-"privacy_filters_group_description" = "避免追蹤的過濾清單";
+"privacy_filters_group_description" = "避免追蹤的過濾器清單";
 
 /* (OneSafariGroupFiltersModel) Social Widgets filters group description */
-"social_widgets_filters_group_description" = "隱藏社群媒體小工具（“讚”按鈕和諸如此類）之過濾清單";
+"social_widgets_filters_group_description" = "隱藏社群媒體小工具（“讚”按鈕和諸如此類）之過濾器清單";
 
 /* (OneSafariGroupFiltersModel) Annoyances filters group description */
-"annoyances_filters_group_description" = "封鎖於網頁上令人惱怒的元件之過濾清單。“令人惱怒”的定義可能是主觀的並取決於該清單的作者";
+"annoyances_filters_group_description" = "封鎖於網頁上令人惱怒的元件之過濾器清單。“令人惱怒”的定義可能是主觀的並取決於該清單的作者";
 
 /* (OneSafariGroupFiltersModel) Security filters group description */
-"security_filters_group_description" = "封鎖已知的線上威脅之過濾清單";
+"security_filters_group_description" = "封鎖已知的線上威脅之過濾器清單";
 
 /* (OneSafariGroupFiltersModel) Other filters group description */
-"other_filters_group_description" = "用於不同目的之各種各樣的過濾清單";
+"other_filters_group_description" = "用於不同目的之各種各樣的過濾器清單";
 
 /* (OneSafariGroupFiltersModel) Language Specific filters group description */
-"language_specific_filters_group_description" = "針對特定語言網站的過濾清單";
+"language_specific_filters_group_description" = "針對特定語言網站的過濾器清單";
 
 /* (OneSafariGroupFiltersModel) Custom filters group description */
-"custom_filters_group_description" = "手動新增的過濾清單";
+"custom_filters_group_description" = "您手動地新增的過濾器清單";
 
 /* confirm reset lert text */
 "confirm_reset_text" = "包括使用者規則、DNS 防護、介面和授權設定之所有的設定將被重置。這操作無法被復原。重置該設定嗎？";
@@ -716,10 +716,10 @@
 "onboarding_third_step_text" = "<b>啟用</b>所有的 AdGuard 延伸功能。";
 
 /* (OnboardingController) third step with advanced protection text */
-"advanced_protection_onboarding_third_step_text" = "設定所有 AdGuard 的切換為<b>開著</b>。您準備好了！";
+"advanced_protection_onboarding_third_step_text" = "設定所有的 AdGuard 切換為<b>開著</b>。您準備好了！";
 
 /* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
-"onboarding_fours_step_text" = "以啟用<b>進階</b>防護，請開啟 Safari 瀏覽器，點擊網址字段左側的 <b>大小</b>圖示，<br><br>%@<br><br>然後點擊<b>管理延伸功能</b> ，啟用 <b>AdGuard</b> 切換。";
+"onboarding_fours_step_text" = "為了啟用<b>進階</b>防護，開啟 Safari，於網址欄位的左側上輕觸該<b>大小</b>圖像，<br><br>%@<br><br>然後輕觸<b>管理延伸功能</b>，並打開該 <b>AdGuard</b> 切換。";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "封鎖該請求";
@@ -1128,7 +1128,7 @@
 // MARK: - ActionExtensionMainController
 /* (ActionExtensionMainController) - ActionExtension info for iOS 15>= */
 
-"action_extension_obsolete_info" = "此操作已經過期，但是在「大小」菜單中可用 AdGuard Safari 網路延伸功能。以使用新延伸功能，請開啟「大小」菜單，點擊「管理延伸功能」並勾 AdGuard。";
+"action_extension_obsolete_info" = "此動作延伸功能為過時的，而新的 AdGuard Safari 網路延伸功能在大小選單中為可用的。為了開始使用新的延伸功能，開啟大小選單、輕觸管理延伸功能並打開該 AdGuard 切換。";
 
 /* (ActionExtensionMainController) - ActionExtension info for iOS 14<= */
 "action_extension_new_version_info" = "此延伸功能的新版本對 iOS 15 為可用的。它有更多的功能和改進的使用者介面。記得去更新！";

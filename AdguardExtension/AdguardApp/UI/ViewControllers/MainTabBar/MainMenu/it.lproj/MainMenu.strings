@@ -20,7 +20,7 @@
 "Em7-2h-SKs.text" = "Aiutaci a migliorare AdGuard";
 
 /* Class = "UILabel"; text = "Leave feedback"; ObjectID = "F6u-LX-1dd"; */
-"F6u-LX-1dd.text" = "Lascia un feedback";
+"F6u-LX-1dd.text" = "Lascia feedback";
 
 /* Class = "UILabel"; text = "Leave feedback"; ObjectID = "GA6-E3-BcJ"; Note = "(Main Menu) Advanced Settings caption"; */
 "GA6-E3-BcJ.text" = "Lascia un feedback";
@@ -71,7 +71,7 @@
 "ow5-MW-Ued.text" = "Segnala un bug o invia una richiesta per una nuova funzionalità";
 
 /* Class = "UILabel"; text = "If you've run into a problem or have a suggestion on how to improve AdGuard, tell us about it"; ObjectID = "pJU-2c-JHy"; */
-"pJU-2c-JHy.text" = "Se hai riscontrato un problema o hai un suggerimento su come migliorare AdGuard, faccelo sapere";
+"pJU-2c-JHy.text" = "Se hai riscontrato un problema o hai un suggerimento su come migliorare AdGuard, comunicacelo";
 
 /* Class = "UILabel"; text = "Report incorrect blocking"; ObjectID = "q9f-Zw-7sc"; Note = "(Main Menu) Advanced Settings caption"; */
 "q9f-Zw-7sc.text" = "Segnala filtraggio non corretto";

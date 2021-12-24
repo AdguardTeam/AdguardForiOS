@@ -68,13 +68,13 @@
 "Jnb-4w-9NY.text" = "這將實際上刪除您的 VPN 設定檔並禁用 DNS 防護";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "Lig-ju-iTI"; */
-"Lig-ju-iTI.text" = "進階的設定";
+"Lig-ju-iTI.text" = "進階設定";
 
 /* Class = "UILabel"; text = "Block IPv6"; ObjectID = "NC2-8A-E6f"; */
 "NC2-8A-E6f.text" = "封鎖 IPv6";
 
 /* Class = "UILabel"; text = "Advanced mode"; ObjectID = "Ory-8I-Ih0"; */
-"Ory-8I-Ih0.text" = "進階的模式";
+"Ory-8I-Ih0.text" = "進階模式";
 
 /* Class = "UILabel"; text = "Reset statistics"; ObjectID = "QEc-dY-TtB"; */
 "QEc-dY-TtB.text" = "重置統計資料";
@@ -122,7 +122,7 @@
 "dsw-Ub-m4M.text" = "以 NXDOMAIN 碼回覆";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
-"eIa-RB-Phv.text" = "進階的設定";
+"eIa-RB-Phv.text" = "進階設定";
 
 /* Class = "UILabel"; text = "Full-Tunnel (without VPN icon)"; ObjectID = "eiP-yl-Xb3"; */
 "eiP-yl-Xb3.text" = "完全的隧道（無 VPN 圖像）";

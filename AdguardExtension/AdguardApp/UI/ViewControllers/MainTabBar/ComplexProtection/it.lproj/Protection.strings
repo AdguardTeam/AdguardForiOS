@@ -52,9 +52,6 @@
 /* Class = "UILabel"; text = "Blocks complex ads, such as YouTube ads in Safari"; ObjectID = "rm0-Ip-riS"; */
 "rm0-Ip-riS.text" = "Blocca annunci complessi, come gli annunci di YouTube su Safari";
 
-/* Class = "UILabel"; text = "Uses sophisticated multi-level filtering rules"; ObjectID = "rr4-ic-Pg8"; */
-"rr4-ic-Pg8.text" = "Usa regole di filtraggio multi-livello sofisticate";
-
 /* Class = "UILabel"; text = "Works alongside the AdGuard ad blocker"; ObjectID = "tKQ-Yn-fgL"; */
 "tKQ-Yn-fgL.text" = "Opera parallelamente al blocca-annunci AdGuard";
 
