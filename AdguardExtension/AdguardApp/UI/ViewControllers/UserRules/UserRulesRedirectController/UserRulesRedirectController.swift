@@ -22,6 +22,8 @@ import SafariAdGuardSDK
 final class UserRulesRedirectController: BottomAlertController {
 
     var action: UserRulesRedirectAction!
+    // TODO: It`s a crutch, must be removed
+    var onViewDidLoad: (() -> Void)?
 
     // MARK: - UI Elements
 
@@ -44,6 +46,9 @@ final class UserRulesRedirectController: BottomAlertController {
         setupOkButton()
         updateTheme()
         model.processAction()
+
+        onViewDidLoad?()
+        onViewDidLoad = nil
     }
 
     @IBAction func okButtonTapped(_ sender: UIButton) {
