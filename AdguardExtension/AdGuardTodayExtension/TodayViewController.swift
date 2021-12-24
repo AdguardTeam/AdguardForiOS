@@ -1,153 +1,101 @@
-/**
-      This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-      Copyright © Adguard Software Limited. All rights reserved.
-
-      Adguard for iOS is free software: you can redistribute it and/or modify
-      it under the terms of the GNU General Public License as published by
-      the Free Software Foundation, either version 3 of the License, or
-      (at your option) any later version.
-
-      Adguard for iOS is distributed in the hope that it will be useful,
-      but WITHOUT ANY WARRANTY; without even the implied warranty of
-      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-      GNU General Public License for more details.
-
-      You should have received a copy of the GNU General Public License
-      along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
-*/
+//
+// This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
+// Copyright © Adguard Software Limited. All rights reserved.
+//
+// Adguard for iOS is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Adguard for iOS is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
+//
 
 import UIKit
 import NotificationCenter
-import NetworkExtension
+import SafariAdGuardSDK
 
 class TodayViewController: UIViewController, NCWidgetProviding {
-    
+
     @IBOutlet weak var height: NSLayoutConstraint!
-    
+
     @IBOutlet weak var safariSwitchOutlet: UISwitch!
     @IBOutlet weak var systemSwitchOutlet: UISwitch!
-    
+
     @IBOutlet weak var safariImageView: UIImageView!
     @IBOutlet weak var systemImageView: UIImageView!
-    
+
     @IBOutlet weak var safariTitleLabel: UILabel!
-    
+
     @IBOutlet weak var safariTextLabel: UILabel!
-    
+
     @IBOutlet weak var systemTitleLabel: UILabel!
-    
+
     @IBOutlet weak var systemTextLabel: UILabel!
-    
+
     @IBOutlet weak var allTimeStaisticsLabel: UILabel!
-    
+
     @IBOutlet weak var requestsLabel: UILabel!
-    
+
     @IBOutlet weak var encryptedLabel: UILabel!
-    
+
     @IBOutlet weak var elapsedLabel: UILabel!
-    
+
     @IBOutlet var labels: [UILabel]!
 
     @IBOutlet weak var expandedStackView: UIStackView!
     @IBOutlet weak var compactView: UIView!
-    
+
     @IBOutlet weak var complexSwitchOutlet: UISwitch!
     @IBOutlet weak var complexProtectionTitle: UILabel!
     @IBOutlet weak var complexStatusLabel: UILabel!
     @IBOutlet weak var complexStatisticsLabel: UILabel!
-    
-    
-    private let resources: AESharedResources = AESharedResources()
-    private var safariService: SafariService
-    private var complexProtection: ComplexProtectionServiceProtocol
-    private let networkService = ACNNetworking()
-    private var purchaseService: PurchaseServiceProtocol
-    private var configuration: ConfigurationService
-    private let dnsStatisticsService: DnsStatisticsServiceProtocol
-    private let dnsProvidersService: DnsProvidersServiceProtocol
-    private let productInfo: ADProductInfoProtocol
-    
+
+    private let resources: AESharedResourcesProtocol = AESharedResources()
+    private let serviceInitializer: ServiceInitializerProtocol
+
+    private var prevRequestNumber = 0
     private var requestNumber = 0
     private var encryptedNumber = 0
-    
-    private var counters: DnsCounters?
-    
+
+    private var timer: Timer?
+
     // MARK: View Controller lifecycle
-    
+
     required init?(coder: NSCoder) {
-        
-        // Init Logger
-        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
-        
-        let isDebugLogs = resources.isDebugLogs
-        DDLogInfo("Start today extension with log level: \(isDebugLogs ? "DEBUG" : "Normal")")
-        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
-        
-        #if DEBUG
-        ACLLogger.singleton()?.logLevel = ACLLDebugLevel
-        #endif
-        
-        DDLogInfo("(TodayViewController) - init start")
-        ACLLogger.singleton()?.flush()
-        
-        safariService = SafariService(resources: resources)
-        
-        productInfo = ADProductInfo()
-        purchaseService = PurchaseService(network: networkService, resources: resources, productInfo: productInfo)
-        configuration = ConfigurationService(purchaseService: purchaseService, resources: resources, safariService: safariService)
-        dnsProvidersService = DnsProvidersService(resources: resources)
-        dnsStatisticsService = DnsStatisticsService(resources: resources)
-        let vpnManager = VpnManager(resources: resources, configuration: configuration, networkSettings: NetworkSettingsService(resources: resources), dnsProviders: dnsProvidersService as! DnsProvidersService)
-        
-        let safariProtection = SafariProtectionService(resources: resources)
-        let networkSettings = NetworkSettingsService(resources: resources)
-        let nativeProviders = NativeProvidersService(dnsProvidersService: dnsProvidersService, networkSettingsService: networkSettings, resources: resources, configuration: configuration)
-        complexProtection = ComplexProtectionService(resources: resources, safariService: safariService, configuration: configuration, vpnManager: vpnManager, safariProtection: safariProtection, productInfo: productInfo, nativeProvidersService: nativeProviders)
-        
-        super.init(coder: coder)
-        
-        DDLogInfo("(TodayViewController) - init end")
-        ACLLogger.singleton()?.flush()
-        ACLLogger.singleton()?.flush()
-    }
-    
-    override func viewDidLoad() {
-        DDLogInfo("(TodayViewController) - viewDidLoad")
-        ACLLogger.singleton()?.flush()
-        super.viewDidLoad()
-        
-        height.constant = extensionContext?.widgetMaximumSize(for: .compact).height ?? 110.0
-        
-        extensionContext?.widgetLargestAvailableDisplayMode = .expanded
-        
-        counters = dnsStatisticsService.getAllCounters()
-        changeTextForButton(counters: counters)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        DDLogInfo("(TodayViewController) - viewWillAppear")
-        super.viewWillAppear(animated)
-        addStatisticsObservers()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        removeStatisticsObservers()
-    }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        
-        DDLogInfo("(TodayViewController) - observeValue")
-        
-        if keyPath == LastStatisticsSaveTime {
-            counters = dnsStatisticsService.getAllCounters()
+        Self.initLogger(with: resources)
+
+        // Services initialising
+        do {
+            self.serviceInitializer = try ServiceInitializer(resources: resources)
+        } catch {
+            DDLogError("(TodayViewController) - init; error - \(error)")
+            return nil
         }
-        
-        changeTextForButton(counters: counters)
+
+        super.init(coder: coder)
+
+        DDLogInfo("(TodayViewController) - init end")
     }
-        
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        DDLogInfo("(TodayViewController) - viewDidLoad")
+
+        height.constant = extensionContext?.widgetMaximumSize(for: .compact).height ?? 110.0
+
+        extensionContext?.widgetLargestAvailableDisplayMode = .expanded
+
+        initTimer(timeInterval: 1.0)
+    }
+
     // MARK: - NCWidgetProviding methods
-    
+
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
         setColorsToLabels()
         updateWidgetSafari()
@@ -155,70 +103,68 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         updateWidgetComplex()
         completionHandler(NCUpdateResult.newData)
     }
-    
+
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
-        
         updateWidgetComplex()
         updateWidgetSystem()
         updateWidgetSafari()
-        
-        if (activeDisplayMode == .compact) {
+
+        if activeDisplayMode == .compact {
             showForCompactMode()
             preferredContentSize = maxSize
-        }
-        else {
+        } else {
             showForExpandedMode()
-            
             let height:CGFloat = 225.0
             preferredContentSize = CGSize(width: maxSize.width, height: height)
         }
     }
-    
+
     // MARK: - Actions
 
     @IBAction func safariSwitch(_ sender: UISwitch) {
         let enabled = sender.isOn
-        complexProtection.switchSafariProtection(state: enabled, for: self) { (error) in
+        serviceInitializer.complexProtection.switchSafariProtection(state: enabled, for: self) { (error) in
             if error != nil {
                 DDLogError("Error invalidating json from Today Extension")
             } else {
                 DDLogInfo("Successfull invalidating of json from Today Extension")
             }
         }
-        
+
         updateWidgetSafari()
     }
-    
+
     @IBAction func systemSwitch(_ sender: UISwitch) {
         let enabled = sender.isOn
-        
+
         let alpha: CGFloat = enabled ? 1.0 : 0.5
         systemImageView.alpha = alpha
         systemTextLabel.alpha = alpha
         systemTitleLabel.alpha = alpha
         systemSwitchOutlet.isOn = enabled
-        
+
         turnProtection(.system, to: enabled)
     }
-    
+
     @IBAction func complexSwitch(_ sender: UISwitch) {
+        let complexProtection = serviceInitializer.complexProtection
         let enabled = sender.isOn
-        
+
         let systemEnabledOldValue = complexProtection.systemProtectionEnabled
         complexProtection.switchComplexProtection(state: enabled, for: nil) { (_, _) in }
-        
+
         if systemEnabledOldValue != complexProtection.systemProtectionEnabled {
             turnProtection(.complex, to: complexProtection.systemProtectionEnabled)
         }
         updateWidgetComplex()
     }
-    
+
     // MARK: Private methods
-    
+
     enum Protection {
         case complex, system
     }
-    
+
     func turnProtection(_ protection: Protection, to state: Bool) {
         var openSystemProtectionUrl = AE_URLSCHEME + (protection == .system ? "://systemProtection/" : "://complexProtection/")
         openSystemProtectionUrl += state ? "on" : "off"
@@ -233,104 +179,122 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             DDLogError("Error redirecting to app from Today Extension")
         }
     }
-    
-    /**
-     Updates safari protection view
-     */
-    private func updateWidgetSafari(){
-        let safariEnabled = complexProtection.safariProtectionEnabled
-        
+
+    private func initTimer(timeInterval: TimeInterval) {
+        timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) { [weak self] _ in
+            guard let self = self else {
+                self?.timer?.invalidate()
+                self?.timer = nil
+                return
+            }
+
+            self.changeTextForButton()
+
+            guard self.prevRequestNumber < self.requestNumber else { return }
+            var timeInterval: TimeInterval = 0.0
+
+            if self.requestNumber >= 10000 {
+                timeInterval = 60.0
+            } else if self.requestNumber >= 100 {
+                timeInterval = 2.0
+            } else {
+                timeInterval = 1.0
+            }
+
+            self.timer?.invalidate()
+            self.timer = nil
+            self.initTimer(timeInterval: timeInterval)
+        }
+    }
+
+    /// Updates safari protection view
+    private func updateWidgetSafari() {
+        let safariEnabled = serviceInitializer.complexProtection.safariProtectionEnabled
+
         let alpha: CGFloat = safariEnabled ? 1.0 : 0.5
         safariImageView.alpha = alpha
         safariTextLabel.alpha = alpha
         safariTitleLabel.alpha = alpha
         safariSwitchOutlet.isOn = safariEnabled
-        
-        if let lastUpdateDate = resources.sharedDefaults().object(forKey: AEDefaultsCheckFiltersLastDate) as? Date {
-    
+
+        if let lastUpdateDate = serviceInitializer.safariProtection.lastFiltersUpdateCheckDate {
             let dateString = lastUpdateDate.formatedString() ?? ""
-            safariTextLabel.text = String(format: ACLocalizedString("filter_date_format", nil), dateString)
+            safariTextLabel.text = String(format: String.localizedString("filter_date_format"), dateString)
         }
     }
-    
-    /**
-     Updates DNS protection view
-     */
-    private func updateWidgetSystem(){
-            
-        let vpnEnabled = complexProtection.systemProtectionEnabled
-        
+
+    /// Updates DNS protection view
+    private func updateWidgetSystem() {
+        let vpnEnabled = serviceInitializer.complexProtection.systemProtectionEnabled
+
         let alpha: CGFloat = vpnEnabled ? 1.0 : 0.5
         self.systemSwitchOutlet.isOn = vpnEnabled
         self.systemImageView.alpha = alpha
         self.systemTitleLabel.alpha = alpha
         self.systemTextLabel.alpha = alpha
-        
+
         self.systemTextLabel.text = self.getServerName()
     }
-    
-    /**
-     Updates complex protection view
-     */
+
+    /// Updates complex protection view
     private func updateWidgetComplex() {
+        let complexProtection = serviceInitializer.complexProtection
         let safariEnabled = complexProtection.safariProtectionEnabled
         let systemEnabled = complexProtection.systemProtectionEnabled
         let complexEnabled = complexProtection.complexProtectionEnabled
-                
-        let enabledText = complexEnabled ? ACLocalizedString("protection_enabled", nil) : ACLocalizedString("protection_disabled", nil)
-        
+
+        let enabledText = complexEnabled ? String.localizedString("protection_enabled") : String.localizedString("protection_disabled")
+
         self.complexSwitchOutlet.isOn = complexEnabled
         self.complexProtectionTitle.text = enabledText
-        
+
         var complexText = ""
-        
+
         if safariEnabled && systemEnabled {
-            complexText = ACLocalizedString("complex_enabled", nil)
+            complexText = String.localizedString("complex_enabled")
         } else if !complexEnabled{
-            complexText = ACLocalizedString("complex_disabled", nil)
+            complexText = String.localizedString("complex_disabled")
         } else if safariEnabled {
-            complexText = ACLocalizedString("safari_enabled", nil)
+            complexText = String.localizedString("safari_enabled")
         } else if systemEnabled {
-            complexText = ACLocalizedString("system_enabled", nil)
+            complexText = String.localizedString("system_enabled")
         }
         self.complexStatusLabel.text = complexText
-        
-        self.complexStatisticsLabel.text = String(format: ACLocalizedString("widget_statistics", nil), self.requestNumber, self.encryptedNumber)
+
+        self.complexStatisticsLabel.text = String(format: String.localizedString("widget_statistics"), self.requestNumber, self.encryptedNumber)
     }
-    
+
     /**
      Set text colors and switches backgrounds
      Must be called from NCWidgetProviding method in ios 13
      */
-    private func setColorsToLabels(){
-        safariTitleLabel.textColor = .widgetTitleColor
-        safariTextLabel.textColor = .widgetTextColor
-        
-        systemTitleLabel.textColor = .widgetTitleColor
-        systemTextLabel.textColor = .widgetTextColor
-        
-        complexProtectionTitle.textColor = .widgetTitleColor
-        complexStatusLabel.textColor = .widgetTextColor
-        complexStatisticsLabel.textColor = .widgetTextColor
-        
-        allTimeStaisticsLabel.textColor = .widgetTitleColor
-        requestsLabel.textColor = .widgetTitleColor
-        encryptedLabel.textColor = .widgetTitleColor
-        elapsedLabel.textColor = .widgetTitleColor
-        
-        labels.forEach({ $0.textColor = .widgetTextColor })
-        
+    private func setColorsToLabels() {
+        safariTitleLabel.textColor = widgetTitleColor
+        safariTextLabel.textColor = widgetTextColor
+
+        systemTitleLabel.textColor = widgetTitleColor
+        systemTextLabel.textColor = widgetTextColor
+
+        complexProtectionTitle.textColor = widgetTitleColor
+        complexStatusLabel.textColor = widgetTextColor
+        complexStatisticsLabel.textColor = widgetTextColor
+
+        allTimeStaisticsLabel.textColor = widgetTitleColor
+        requestsLabel.textColor = widgetTitleColor
+        encryptedLabel.textColor = widgetTitleColor
+        elapsedLabel.textColor = widgetTitleColor
+
+        labels.forEach({ $0.textColor = widgetTextColor })
+
         safariSwitchOutlet.layer.cornerRadius = safariSwitchOutlet.frame.height / 2
         systemSwitchOutlet.layer.cornerRadius = systemSwitchOutlet.frame.height / 2
         complexSwitchOutlet.layer.cornerRadius = complexSwitchOutlet.frame.height / 2
     }
-    
-    /**
-     Animates an appearing of compact mode
-     */
-    private func showForCompactMode(){
+
+    /// Animates an appearing of compact mode
+    private func showForCompactMode() {
         compactView.isHidden = false
-        
+
         UIView.animate(withDuration: 0.5, animations: {[weak self] in
             guard let self = self else { return }
             self.expandedStackView.alpha = 0.0
@@ -342,13 +306,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             }
         }
     }
-    
-    /**
-     Animates an appearing of expanded mode
-     */
-    private func showForExpandedMode(){
+
+    /// Animates an appearing of expanded mode
+    private func showForExpandedMode() {
         expandedStackView.isHidden = false
-        
+
         UIView.animate(withDuration: 0.5, animations: {[weak self] in
             guard let self = self else { return }
             self.expandedStackView.alpha = 1.0
@@ -361,69 +323,57 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
     }
 
-    /**
-     Gets current server name from vpnManager
-     */
+    /// Gets current server name from vpnManager
     private func getServerName() -> String {
-        
+
         if resources.dnsImplementation == .native {
-            return complexProtection.systemProtectionEnabled ? String.localizedString("native_dns_working") : String.localizedString("native_dns_not_working")
+            return serviceInitializer.complexProtection.systemProtectionEnabled ? String.localizedString("native_dns_working") : String.localizedString("native_dns_not_working")
         }
-        guard let server = dnsProvidersService.activeDnsServer else {
-            return String.localizedString("system_dns_server")
-        }
-        
-        let provider = dnsProvidersService.activeDnsProvider
-        let protocolName = String.localizedString(DnsProtocol.stringIdByProtocol[server.dnsProtocol]!)
-        
-        return "\(provider?.name ?? server.name) (\(protocolName))"
+
+        let serverName = serviceInitializer.dnsProvidersManager.activeServerName
+        return serverName
     }
-    
-    /**
-     Changes number of requests for specific button
-     */
-    private func changeTextForButton(counters: DnsCounters?){
-        DispatchQueue.main.async {[weak self] in
+
+    /// Changes number of requests for specific button
+    private func changeTextForButton() {
+        DispatchQueue.asyncSafeMain { [weak self] in
             guard let self = self else { return }
-            
-            let requests = counters?.totalRequests ?? 0
-            let encrypted = counters?.encrypted ?? 0
-            let elapsedSumm = counters?.totalTime ?? 0
-            
-            let requestsNumber = self.resources.tempRequestsCount + requests
+            let statisticRecord = try? self.serviceInitializer.activityStatistics.getCounters(for: .all)
+
+            let requestsNumber = statisticRecord?.requests ?? 0
+            let encryptedNumber = statisticRecord?.encrypted ?? 0
+            let elapsedSumm = statisticRecord?.elapsedSumm ?? 0
+
             self.requestsLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsNumber))
+            self.prevRequestNumber = self.requestNumber
             self.requestNumber = requestsNumber
-            
-            let encryptedNumber = self.resources.tempEncryptedRequestsCount + encrypted
+
             self.encryptedLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedNumber))
             self.encryptedNumber = encryptedNumber
-            
-            let averageElapsed = requests == 0 ? 0 : Double(elapsedSumm) / Double(requests)
+
+            let averageElapsed = requestsNumber == 0 ? 0 : Double(elapsedSumm) / Double(requestsNumber)
             self.elapsedLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: averageElapsed))
         }
     }
-    
-    private func addStatisticsObservers() {
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsRequests, options: .new, context: nil)
-        resources.sharedDefaults().addObserver(self, forKeyPath: AEDefaultsEncryptedRequests, options: .new, context: nil)
-        resources.sharedDefaults().addObserver(self, forKeyPath: LastStatisticsSaveTime, options: .new, context: nil)
-    }
-    
-    private func removeStatisticsObservers() {
-        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsRequests, context: nil)
-        resources.sharedDefaults().removeObserver(self, forKeyPath: AEDefaultsEncryptedRequests, context: nil)
+
+    /// Initializes logger
+    private static func initLogger(with resources: AESharedResourcesProtocol) {
+        // Init Logger
+        ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
+
+        let isDebugLogs = resources.isDebugLogs
+        DDLogInfo("Start today extension with log level: \(isDebugLogs ? "DEBUG" : "Normal")")
+        ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
     }
 }
 
-/**
- Themable colors for today extension
- */
-extension UIColor {
-    @objc class var widgetTextColor: UIColor {
+/// Themable colors for today extension
+fileprivate extension TodayViewController {
+    var widgetTextColor: UIColor {
         return UIColor(named: "widgetTextColor")!
     }
-    
-    @objc class var widgetTitleColor: UIColor {
+
+    var widgetTitleColor: UIColor {
         return UIColor(named: "widgetTitleColor")!
     }
 }

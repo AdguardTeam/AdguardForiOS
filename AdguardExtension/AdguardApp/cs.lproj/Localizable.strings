@@ -19,6 +19,12 @@
 /* Alert title. On error. */
 "common_error_title" = "Chyba";
 
+/* Something went wrong title for unknown error */
+"something_went_wrong_title" = "Něco se pokazilo";
+
+/* Unknown error desription */
+"unknown_error_description" = "Nahlaste prosím tuto chybu podpoře.";
+
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Filtry nelze načíst do Safari, takže nedošlo k použití nedávných změn.";
 
@@ -65,22 +71,40 @@
 "user_filter_helper" = "Zde zadejte svá vlastní pravidla oddělená zalomením řádků";
 
 /* YES Button caption in alert */
-"common_action_yes" = "ANO";
+"common_action_yes" = "Ano";
 
 /* (MainController) login status caption on main screen */
-"protection_enabled_caption" = "Ochrana je zapnuta";
+"protection_enabled_caption" = "Ochrana je zapnutá";
 
 /* (MainController) login status caption on main screen */
 "protection_partly_enabled_caption" = "Některé blokátory obsahu jsou vypnuty";
 
 /* (MainController) login status caption on main screen */
-"protection_disabled_caption" = "Ochrana je vypnuta";
+"protection_disabled_caption" = "Ochrana je vypnutá";
 
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Odebírat";
 
+/* (LicenseProductChoiceCell) restore purchase button title */
+"restore_purchase_button_title" = "Obnovit nákup";
+
+/* (FreeLicenseStateTableViewModel) One month subscription title */
+"one_month_subscription_title" = "Měsíční";
+
+/* (FreeLicenseStateTableViewModel) One year subscription title */
+"one_year_subscription_title" = "Roční";
+
+/* (FreeLicenseStateTableViewModel) title for permanent subscription */
+"permanent_subscription_title" = "Doživotní";
+
+/* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
+"go_to_my_account_title" = "Přejít na můj účet";
+
 /* (GetProTableController) upgrade button title for lifetime license */
-"upgrade_lifetime_button_title" = "ZAKOUPIT";
+"upgrade_lifetime_button_title" = "Zakoupit";
+
+/* (GetProTableController) missing purchase alert message */
+"upgrade_missing_purchase_message" = "Plány předplatného nejsou k dispozici. Zkontrolujte prosím své internetové připojení a zkuste to znovu.";
 
 /* (LoginController) lost password button title */
 "lost_password" = "Zapomněli jste heslo?";
@@ -194,7 +218,7 @@
 "filters_updated_format" = "Aktualizováno filtrů: %lu ";
 
 /* (FiltersController) Filter Version format */
-"filter_version_format" = "verze %@";
+"filter_version_format" = "Verze %@";
 
 /* (DnsSettingController) split tunel mode description */
 "tunnel_mode_split_description" = "Dělený tunel, kompatibilní s aplikacemi „Osobní VPN“";
@@ -210,9 +234,6 @@
 
 /* (DnsSettingController) Native DNS implementation title */
 "native_dns_implementation_title" = "Nativní";
-
-/* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
-"system_dns_server" = "Bez šifrování (Systémový DNS)";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "Povoleno %1$d z %2$d";
@@ -242,13 +263,13 @@
 "login_error_message" = "Při přihlašování došlo k chybě";
 
 /* purchase secription format */
-"purchase_description_format" = "O předplatném AdGuardu:<br><br>• Platba bude připsána na účet iTunes při potvrzení nákupu.<br><br>• Předplatné se automaticky obnoví, pokud není automatické obnovení vypnuto alespoň 24 hodin před koncem aktuálního období.<br><br>• Na účet bude účtován poplatek za obnovení do 24 hodin před koncem běžného období.<br><br>Vaše odběry můžou být spravovány v nastavení vašeho účtu iTunes a vaše automatické obnovení může být po zakoupení předplatného vypnuto.<br><br><a href=%2$@>Pravidla a podmínky</a> a <a href=%1$@>Zásady ochrany osobních údajů</a>";
+"purchase_description_format" = "Podmínky předplatného AdGuardu<br><br>• Platba bude připsána na účet iTunes při potvrzení nákupu.<br><br>• Předplatné se automaticky obnovuje, pokud není automatické obnovení vypnuto alespoň 24 hodin před koncem aktuálního období.<br><br>• Poplatek za prodloužení předplatného bude z vašeho účtu iTunes stržen do 24 hodin po skončení aktuálního období.<br><br>• Po zakoupení můžete spravovat své předplatné a vypnout automatické obnovování v Nastavení účtu.<br><br>AdGuard <a href=%2$@>EULA</a> a <a href=%1$@>Zásady ochrany osobních údajů</a>";
 
 /* lifetime purchase secription format */
-"lifetime_purchase_description_format" = "<a href=%2$@>Pravidla a podmínky</a> a <a href=%1$@>Zásady ochrany osobních údajů</a>";
+"lifetime_purchase_description_format" = "AdGuard – <a href=%2$@>EULA</a> a <a href=%1$@>Zásady ochrany osobních údajů</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
-"common_action_ok" = "OK";
+"common_action_ok" = "Ok";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "privacy_policy_action" = "Zásady ochrany osobních údajů";
@@ -268,8 +289,20 @@
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "Ostatní";
 
+/* (AdvancedSettingsController) Content blocker description text */
+"cb_description_common" = "6 blokátorů obsahu, každý s až 50 000 pravidly";
+
+/* (AdvancedSettingsController) Content blocker description text */
+"cb_description_advanced_protection" = "6 blokátorů obsahu, každý s až 150 000 pravidly, plus pokročilá ochrana";
+
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Filtry:";
+
+/* (ContentBlockersTableController) - Advanced protection title */
+"cb_screen_advanced_protection_title" = "Pokročilá ochrana";
+
+/* (ContentBlockersTableController) - Content Blockers title */
+"cb_screen_content_blockers_title" = "Blokátory obsahu";
 
 /* (AdvancedSettingsController) Restart when network changes error */
 "general_settings_restart_tunnel_error" = "Nejprve musíte zapnout VPN";
@@ -304,6 +337,9 @@
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "Vypnuto v nastavení Safari";
 
+/* (ContentBlockerStateCell) Description for advanced protection disabled state */
+"disabled_current_state_advanced_protection" = "Vypnuto v nastavení Ochrany";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
 "update_current_state_label" = "Kontroluji aktualizace...";
 
@@ -337,17 +373,14 @@
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "Překročili jste maximální počet pravidel filtrování.";
 
-/* (GetProController) title for permanent subscription */
-"permanent_subscription_title" = "Doživotní";
+/* (FiltersController) Enabled state in groups section */
+"on_state" = "Zapnuto";
 
-/* (FiltersController) ON state in groups section */
-"on_state" = "ZAPNUTO";
-
-/* (FiltersController) OFF state in groups section */
-"off_state" = "VYPNUTO";
+/* (FiltersController) Disabled state in groups section */
+"off_state" = "Vypnuto";
 
 /* (NewCustomFilterDetailedController) homepage string */
-"homepage_title" = "Domovská stránka:";
+"homepage_title" = "Domovská stránka: ";
 
 /* (FilterDetailsController) delete filter title */
 "delete_filter_title" = "Smazat filtr";
@@ -360,6 +393,9 @@
 
 /* (AboutViewController) AdGuard copyright string */
 "copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\nVšechna práva vyhrazena. AdGuard.com";
+
+/* (LicensePageViewController) Login title */
+"common_login" = "Přihlásit se";
 
 /* (AboutViewController) Logout title */
 "common_logout" = "Odhlásit se";
@@ -414,6 +450,24 @@
 
 /* (ListOfRulesModel) title for export */
 "export" = "Exportovat";
+
+/* (UserRulesTableController) - title for editing user rules option  */
+"open_user_rules_editor" = "Otevřít editor";
+
+/* (UserRulesTableController) - description for Safari user rules in editor  */
+"editor_safari_user_rules_description" = "Přidat uživatelská pravidla Safari";
+
+/* (UserRulesTableController) - description for allowlist rules in editor  */
+"editor_allowlist_rules_description" = "Přidat vlastní pravidla seznamu povolených";
+
+/* (UserRulesTableController) - description for inverted allowlist rules in editor  */
+"editor_inverted_allowlist_rules_description" = "Přidat vlastní pravidla obráceného seznamu povolených";
+
+/* (UserRulesTableController) - description for DNS allowlist rules in editor  */
+"editor_dns_allowlist_rules_description" = "Přidat vlastní DNS pravidla seznamu povolených";
+
+/* (UserRulesTableController) - description for DNS blocklist rules in editor  */
+"editor_dns_blocklist_rules_description" = "Přidat vlastní DNS pravidla seznamu zakázaných";
 
 /* (ListOfRulesModel) title for Clear button*/
 "common_clear" = "Vymazat";
@@ -505,6 +559,33 @@
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "Přidat nové pravidlo";
 
+/* (OneSafariGroupFiltersModel) Add new filter title */
+"add_new_filter" = "Přidat filtr";
+
+/* (OneSafariGroupFiltersModel) Ads filters group description */
+"ads_filters_group_description" = "Seznamy filtrů, které odstraňují reklamy";
+
+/* (OneSafariGroupFiltersModel) Privacy filters group description */
+"privacy_filters_group_description" = "Seznamy filtrů, které zabraňují sledování";
+
+/* (OneSafariGroupFiltersModel) Social Widgets filters group description */
+"social_widgets_filters_group_description" = "Seznamy filtrů, které skrývají widgety sociálních médií (tlačítka \"Like\" a podobně)";
+
+/* (OneSafariGroupFiltersModel) Annoyances filters group description */
+"annoyances_filters_group_description" = "Seznamy filtrů, které blokují otravné prvky na webových stránkách. Definice pojmu \"otravný\" může být subjektivní a závisí na autorovi seznamu";
+
+/* (OneSafariGroupFiltersModel) Security filters group description */
+"security_filters_group_description" = "Seznamy filtrů, které blokují známé online hrozby";
+
+/* (OneSafariGroupFiltersModel) Other filters group description */
+"other_filters_group_description" = "Různé seznamy filtrů pro různé účely";
+
+/* (OneSafariGroupFiltersModel) Language Specific filters group description */
+"language_specific_filters_group_description" = "Seznamy filtrů zaměřené na webové stránky v konkrétních jazycích";
+
+/* (OneSafariGroupFiltersModel) Custom filters group description */
+"custom_filters_group_description" = "Seznamy filtrů, které přidáte ručně";
+
 /* confirm reset lert text */
 "confirm_reset_text" = "Všechna nastavení včetně uživatelských pravidel, DNS ochrany, rozhraní a autorizačních nastavení budou resetována do výchozího stavu. Tuto operaci nelze vrátit zpět. Obnovit nastavení?";
 
@@ -544,6 +625,9 @@
 /*(NewCustomFilterDetailsController) title for new dns filter */
 "new_dns_filter_title" = "Nový DNS filtr";
 
+/* (NewCustomFilterDetailsController) Error message when adding custom filter fails */
+"add_custom_filter_error_message" = "Něco se pokazilo nebo je formát souboru s vlastním filtrováním nesprávný";
+
 /*(NewCustomFilterDetailsController) title for editing custom filter */
 "edit_custom_filter_title" = "Upravit vlastní filtr";
 
@@ -551,19 +635,19 @@
 "common_add" = "Přidat";
 
 /*(TodayViewController) Protection is disabled title  */
-"protection_disabled" = "Ochrana je vypnuta";
+"protection_disabled" = "Ochrana je vypnutá";
 
 /*(TodayViewController) Protection is enabled title  */
-"protection_enabled" = "Ochrana je zapnuta";
+"protection_enabled" = "Ochrana je zapnutá";
 
 /*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Ochrana Safari a DNS ochrana";
+"complex_enabled" = "Ochrana Safari a DNS ochrana je zapnutá";
 
 /*(TodayViewController) Safari protection is enabled text  */
-"safari_enabled" = "Blokování obsahu v Safari";
+"safari_enabled" = "Ochrana Safari je zapnutá";
 
 /*(TodayViewController) All protection is disabled text  */
-"complex_disabled" = "Všechny moduly ochrany jsou vypnuty";
+"complex_disabled" = "Ochrana Safari a DNS ochrana je vypnutá";
 
 /*(TodayViewController) DNS protection is enabled text  */
 "system_enabled" = "DNS ochrana";
@@ -589,6 +673,9 @@
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_notification_title" = "Pro správnou funkci vypněte některé filtry";
 
+/* (DnsFiltersTableController) - DNS filters title */
+"dns_filters_title" = "DNS filtry";
+
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Zablokováno";
 
@@ -613,23 +700,26 @@
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_removed_from_blacklist" = "odebráno ze seznamu zakázaných";
 
-/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "Otevřít <b>nastavení</b>";
+/* (OnboardingController) first step text*/
+"onboarding_first_step_text" = "Otevřít <b>Nastavení</b>.";
 
-/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "Klepněte na <b>Safari</b> a vyberte položku nabídky <b>„Blokátory obsahu“</b>";
+/* (OnboardingController) first step with advanced protection text*/
+"advanced_protection_onboarding_first_step_text" = "Otevřít <b>Nastavení</b>.";
 
-/* (OnboardingController) second step text iOS15 . '%@' will be replaced with the safari icon */
-"onboarding_second_step_text_iOS15" = "Klepněte na <b>Safari</b> a vyberte položku nabídky <b>„Rozšíření“</b>";
+/* (OnboardingController) second step text */
+"onboarding_second_step_text" = "Klepněte na <b>Safari</b>, přejeďte dolů a klepněte na <b>Blokátory obsahu</b>.";
 
-/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Zapněte všechny blokátory obsahu</b> a vraťte se do aplikace!";
+/* (OnboardingController) second step with advanced protection text */
+"advanced_protection_onboarding_second_step_text" = "Přejděte na <b>Safari > Rozšíření</b>.";
 
-/* (DnsProvidersController) default systen dns server name */
-"default_dns_server_name" = "Systémový DNS";
+/* (OnboardingController) third step text */
+"onboarding_third_step_text" = "<b>Povolte</b> všechna rozšíření AdGuardu.";
 
-/* (DnsProvidersController) default systen dns server description */
-"default_dns_server_description" = "Použít výchozí systémové DNS servery, které poskytuje váš poskytovatel internetu";
+/* (OnboardingController) third step with advanced protection text */
+"advanced_protection_onboarding_third_step_text" = "Nastavte přepínače AdGuardu na <b>zapnuto</b>. Můžete začít!";
+
+/* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
+"onboarding_fours_step_text" = "Pro <b>Pokročilou</b> ochranu otevřete Safari, klepněte na ikonu <b>aA</b> na levé straně pole URL,<br><br> %@ <br><br>pak klepněte na <b>Spravovat rozšíření</b> a zapněte přepínač <b>AdGuard</b>.";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "Blokovat požadavek";
@@ -651,6 +741,9 @@
 
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ zatím není podporován systémem iOS. Zkuste přidat jiný upstream.";
+
+/*(DnsFiltersController) the error message that is shown when trying to add a duplicate custom dns server */
+"custom_dns_server_exists" = "Pokusili jste se přidat duplicitní server DNS. Server se zadaným odchozím připojením je již v seznamu";
 
 /* (NewDnsServerController) save and select button title */
 "save_and_select_button_title" = "Uložit a vybrat";
@@ -742,35 +835,11 @@
 /* (BugReportController) Message when bug report failed */
 "bug_report_failed_message" = "Nepodařilo se odeslat zprávu o chybě, zkuste to znovu";
 
-/* (BugReportController) Message when leaving feedback failed */
-"feedback_failed_message" = "Nepodařilo se odeslat zpětnou vazbu, zkuste to znovu";
-
 /* (BugReportController) Message when bug report successed */
 "bug_report_successed_message" = "Vaše zpráva o chybě byla úspěšně odeslána!";
 
-/* (BugReportController) Message when feedback leaving successed */
-"feedback_successed_message" = "Vaše zpětná vazba byla úspěšně odeslána!";
-
-/* (BugReportController) title for bug report */
-"bug_report_title" = "Nahlásit chybu";
-
-/* (BugReportController) title for leaving feedback */
-"leave_feedback_title" = "Zanechat zpětnou vazbu";
-
-/* (BugReportController) description for bug report */
-"bug_report_description" = "Uveďte popis problému (začalo to po aktualizaci?) a informace o dalším softwaru, který máte (VPN/AV/rozšíření)";
-
-/* (BugReportController) description for leaving feedback */
-"leave_feedback_description_format" = "Řekněte nám, co si myslíte o %@ — co se vám líbí nebo nelíbí, jaké funkce byste chtěli navrhnout";
-
-/* (BugReportController) button title for bug report */
-"bug_report_button_title" = "Odeslat hlášení";
-
-/* (BugReportController) button title for leaving feedback */
-"leave_feedback_button_title" = "Odeslat zpětnou vazbu";
-
 /* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "Dalším používáním přijímáte<br /><a href=%2$@>Pravidla a podmínky</a> a <a href=%1$@>Zásady ochrany osobních údajů</a>";
+"introduction_license_agreement" = "Souhlasím s <a href=%2$@>EULA</a> a <a href=%1$@>Zásadami ochrany osobních údajů</a> AdGuardu.";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Požadavky";
@@ -818,13 +887,80 @@
 "native_dns_setup_title" = "Povolte %@ v nastavení DNS systému";
 
 /* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
-"native_dns_setup_description" = "Chcete-li povolit nativní DNS, musíte otevřít <b>Nastavení systému</b>, přejít na <b>VPN a síť > DNS</b> a zde vybrat <b>%@</b>.";
+"native_dns_setup_description" = "Chcete-li povolit nativní DNS, vyberte <b>%@</b> v <b>Nastavení systému > Obecné > VPN & Síť > DNS</b>.";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name; String for iOS 15 and newer */
+"native_dns_setup_description_ios15" = "Chcete-li povolit nativní DNS, vyberte <b>%@</b> v <b>Nastavení systému > Obecné > VPN & správa zařízení > DNS</b>.";
 
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Sdělte nám, zda jste s blokováním reklam zatím spokojeni";
 
 /* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
 "rate_app_problem_description" = "Ujistěte se, že používáte <b>prohlížeč Safari</b>.<br>V současnosti je technicky nemožné blokovat obsah v jiných prohlížečích.<br>Pokračujte do nastavení ochrany Safari a povolte všechny potřebné seznamy filtrů.<br>Restartujte aplikaci Safari: ukončete ji a znovu otevřete.";
+
+/* (FilterDetailsViewController) Version subtitle for detailed filter info */
+"detailed_filter_info_version_subtitle" = "Verze";
+
+/* (FilterDetailsViewController) Updated subtitle for detailed filter info */
+"detailed_filter_info_updated_subtitle" = "Aktualizováno";
+
+/* (FilterDetailsViewController) Rules count subtitle for detailed filter info */
+"detailed_filter_info_rules_count_subtitle" = "Počet pravidel";
+
+/* (FilterDetailsViewController) Website subtitle for detailed filter info */
+"detailed_filter_info_website_subtitle" = "Webová stránka";
+
+/* (FilterDetailsViewController) Subscription URL subtitle for detailed filter info */
+"detailed_filter_info_subscription_subtitle" = "URL odběru";
+
+/* (AddRuleController) Error description when adding rule that already exists */
+"user_rule_exists_error" = "Snažíte se přidat pravidlo, které je již v seznamu";
+
+// MARK: - Strings for UserRulesRedirectController
+/* (UserRulesRedirectController) - Processing state title */
+
+"user_rules_processing_title" = "Zpracovávám...";
+
+/* (UserRulesRedirectController) - Processing state description */
+"user_rules_processing_descr" = "Chvilku strpení...";
+
+/* (UserRulesRedirectController) - Description when allowlist rule is removed; %@ stands for 'allowlist' word hex color */
+"user_rules_allowlist_rule_removed" = "bylo odstraněno ze <u style=color:%@>seznamu povolených</u>";
+
+/* (UserRulesRedirectController) - Description when new allowlist rule is added; %@ stands for 'allowlist' word hex color */
+"user_rules_allowlist_rule_added" = "bylo přidáno do <u style=color:%@>seznamu povolených</u>";
+
+/* (UserRulesRedirectController) - Description when blocklist rule is added; %@ stands for 'user rules' words hex color */
+"user_rules_blocklist_rule_added" = "má nové pravidlo blokování v <u style=color:%@>uživatelských pravidlech</u>";
+
+/* (UserRulesRedirectController) - Description when blocklist rules are removed */
+"user_rules_blocklist_rules_removed" = "nemá žádná další uživatelská pravidla";
+
+// MARK: - Strings for license screen
+/* (PremiumFeature) - Advanced protection premium feature name */
+
+"advanced_protection_feature_name" = "Pokročilá ochrana";
+
+/* (PremiumFeature) -  Security filters premium feature name */
+"security_filters_feature_name" = "Bezpečnostní filtry ";
+
+/* (PremiumFeature) - DNS privacy premium feature name */
+"dns_privacy_feature_name" = "Soukromí DNS";
+
+/* (PremiumFeature) - Custom filters premium feature name */
+"custom_filters_feature_name" = "Vlastní filtry";
+
+/* (PremiumFeature) - Advanced protection premium feature description */
+"advanced_protection_feature_description" = "Vylepšené metody blokování složitých reklam, například reklam na YouTube v prohlížeči Safari";
+
+/* (PremiumFeature) - Security filters premium feature description */
+"security_filters_feature_description" = "Blokování krádeže identity, zákeřného softwaru a podezřelého obsahu";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "Šifrujte požadavky DNS lokálně a ovládejte své soukromí";
+
+/* (PremiumFeature) - Custom filters premium feature description */
+"custom_filters_feature_description" = "Použijte filtry třetích stran nebo si vytvořte vlastní";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -869,6 +1005,8 @@
 /* (MainPageController) saved data size for VoiceOver*/
 "elapsed_time_voiceover" = "Průměrný čas na zpracování DNS dotazu";
 
+/* (AGSearchView) Placeholder text for search bar */
+"search_view_placeholder" = "Hledat";
 
 // MARK: - SystemProtectionEnablerController
 /* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
@@ -976,13 +1114,54 @@
 // MARK: - YouTubeAdsRequestHandler
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
 
-"youtube_script_success_title" = "YouTube je nyní bez reklam! Upozorňujeme, že pokud znovu stránku obnovíte, musíte toto rozšíření spustit znovu";
+"youtube_script_success_title" = "YouTube je nyní bez reklam! Toto rozšíření budete muset znovu spustit při každém načtení stránky.";
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
-"youtube_script_wrong_domain_title" = "Toto rozšíření má být spuštěno pouze v YouTube";
+"youtube_script_wrong_domain_title" = "Toto rozšíření funguje pouze pro YouTube.";
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
 "youtube_script_already_executed_title" = "Rozšíření bylo již spuštěno";
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
 "youtube_script_error_title" = "Při odstraňování reklam v YouTube došlo k neznámé chybě";
+
+// MARK: - ActionExtensionMainController
+/* (ActionExtensionMainController) - ActionExtension info for iOS 15>= */
+
+"action_extension_obsolete_info" = "Toto rozšíření je zastaralé, ale nové rozšíření AdGuard Web Safari je k dispozici v nabídce aA. Chcete-li začít používat nové rozšíření, otevřete nabídku aA, klepněte na položku Spravovat rozšíření a zapněte přepínač AdGuard.";
+
+/* (ActionExtensionMainController) - ActionExtension info for iOS 14<= */
+"action_extension_new_version_info" = "Pro iOS 15 je k dispozici nová verze tohoto rozšíření. Má více možností a vylepšené uživatelské rozhraní. Nezapomeňte aktualizovat!";
+
+/* (BackgroundFetchController) - Background app refresh default title */
+"background_fetch_default_period" = "Výchozí interval";
+
+/* (BackgroundFetchController) - Background app refresh every 1 hour title */
+"background_fetch_hour_period" = "Každou hodinu";
+
+/* (BackgroundFetchController) - Background app refresh every 3 hours title */
+"background_fetch_tree_hours_period" = "Každé 3 hodiny";
+
+/* (BackgroundFetchController) - Background app refresh every 12 hours title */
+"background_fetch_twelve_hours_period" = "Každých 12 hodin";
+
+/* (BackgroundFetchController) - Background app refresh every 24 hours title */
+"background_fetch_twenty_four_hours_period" = "Každých 24 hodin";
+
+/* Background app refresh time title */
+"background_app_refresh_time_title" = "Interval obnovení aplikace na pozadí";
+
+/* (DnsProvidersController) - add new dns server title */
+"add_custom_dns_server_title" = "Přidat uživatelský DNS server";
+
+/* (DnsProvidersController) - Header title */
+"dns_provider_controller_title" = "DNS server";
+
+/* (DnsProvidersController) - Header description */
+"dns_provider_controller_description" = "Šifrováním DNS provozu můžete zlepšit své online soukromí. Vyberte některého z doporučených poskytovatelů DNS.";
+
+/* (DnsProviderDetailsController) Server title */
+"server_title" = "Server";
+
+/* (DnsProviderDetailsController) Website title */
+"website_title" = "Webová stránka";

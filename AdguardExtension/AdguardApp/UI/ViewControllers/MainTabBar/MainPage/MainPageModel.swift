@@ -1,105 +1,116 @@
-/**
-      This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-      Copyright © Adguard Software Limited. All rights reserved.
+//
+// This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
+// Copyright © Adguard Software Limited. All rights reserved.
+//
+// Adguard for iOS is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Adguard for iOS is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
+//
 
-      Adguard for iOS is free software: you can redistribute it and/or modify
-      it under the terms of the GNU General Public License as published by
-      the Free Software Foundation, either version 3 of the License, or
-      (at your option) any later version.
+import SharedAdGuardSDK
+import SafariAdGuardSDK
+import DnsAdGuardSDK
 
-      Adguard for iOS is distributed in the hope that it will be useful,
-      but WITHOUT ANY WARRANTY; without even the implied warranty of
-      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-      GNU General Public License for more details.
-
-      You should have received a copy of the GNU General Public License
-      along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-import Foundation
-
-protocol MainPageModelDelegate: class {
+protocol MainPageModelDelegate: AnyObject {
     func updateStarted()
-    func updateFinished(message: String?)
-    func updateFailed(error: String)
+    func updateFinished(message: String)
 }
 
-protocol MainPageModelProtocol: class {
+protocol MainPageModelProtocol: AnyObject {
     func updateFilters()
     var delegate: MainPageModelDelegate? { get set }
 }
 
-class MainPageModel: MainPageModelProtocol {
-    
+/// Super old model, it should be removed
+/// Actually it was rewritten in Stories PR
+final class MainPageModel: MainPageModelProtocol {
+
     weak var delegate: MainPageModelDelegate?
-    
+
     // MARK: - private members
-    
-    private let antibanner: AESAntibannerProtocol
-    private var observers = [NSObjectProtocol]()
-    
+    private let workingQueue = DispatchQueue(label: "AdGuardApp.MainPageModelQueue")
+    private let safariProtection: SafariProtectionProtocol
+    private let dnsProtection: DnsProtectionProtocol
+    private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol
+
     // MARK: - init
-    
-    init(antibanner: AESAntibannerProtocol) {
-        self.antibanner = antibanner
-        self.observeAntibanerState()
+
+    init(safariProtection: SafariProtectionProtocol,
+         dnsProtection: DnsProtectionProtocol,
+         dnsConfigAssistant: DnsConfigManagerAssistantProtocol) {
+        self.safariProtection = safariProtection
+        self.dnsProtection = dnsProtection
+        self.dnsConfigAssistant = dnsConfigAssistant
     }
-    
-    deinit {
-        observers.forEach { (observer) in
-            NotificationCenter.default.removeObserver(observer)
-        }
-    }
-    
-    
+
     // MARK: - public methods
-    
-    /**
-     updates filters. calls callback during updating process
-     */
+
+    /// Updates safari and dns filters.
     func updateFilters() {
-        
-        antibanner.beginTransaction()
-        antibanner.startUpdatingForced(true, interactive: true)
-    }
-    
-    
-    // MARK: - private methods
-    
-    private func observeAntibanerState(){
-        let observer1 = NotificationCenter.default.observe(name: .appDelegateStartedUpdateNotification, object: nil, queue: .main) { [weak self] (note) in
-            self?.delegate?.updateStarted()
-        }
-        observers.append(observer1)
-        
-        let observer2 = NotificationCenter.default.observe(name: .appDelegateFinishedUpdateNotification, object: nil, queue: .main) { [weak self] (note) in
-            
-            let updatedMetas: Int = (note.userInfo?[Notification.Name.appDelegateUpdatedFiltersKey] as? Int) ?? 0
-            
-            let message: String?
-            if updatedMetas > 0 {
-                let format = ACLocalizedString("filters_updated_format", nil);
-                message = String(format: format, updatedMetas)
-            } else {
-                message = ACLocalizedString("filters_noUpdates", nil);
+        delegate?.updateStarted()
+
+        workingQueue.async { [weak self] in
+            guard let self = self else { return }
+            @Atomic var filtersCount = 0
+            @Atomic var needRestartVpn = false
+            @Atomic var updateError: Error?
+            let group = DispatchGroup()
+
+            group.enter()
+            self.safariProtection.updateFiltersMetaAndLocalizations(true) { result in
+                switch result {
+                case .error(let error):
+                    _updateError.mutate { $0 = error }
+                case .success(let updateResult):
+                    _filtersCount.mutate { $0 += updateResult.updatedFilterIds.count }
+                    // Reloads vpn if dns filters have been updated
+                    if needRestartVpn {
+                        self.dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsFilters, completion: nil)
+                        _needRestartVpn.mutate { $0 = false }
+                    }
+                }
+            } onCbReloaded: { error in
+                if let error = error {
+                    _updateError.mutate { $0 = error }
+                }
+                group.leave()
             }
-            
-            self?.delegate?.updateFinished(message: message)
+
+            group.enter()
+            self.dnsProtection.updateAllFilters { result in
+                _filtersCount.mutate { $0 += result.updatedFiltersIds.count }
+                _needRestartVpn.mutate { $0 = !result.updatedFiltersIds.isEmpty }
+                group.leave()
+            }
+
+            group.wait()
+
+            let message: String
+            if let error = updateError {
+                DDLogError("(MainPageModel) - updateFilters; Error: \(error)")
+                message = String.localizedString("filter_updates_error")
+            }
+            else if filtersCount > 0 {
+                let format = String.localizedString("filters_updated_format")
+                message = String(format: format, filtersCount)
+                if needRestartVpn { self.dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsFilters, completion: nil) }
+            }
+            else {
+                message = String.localizedString("filters_noUpdates")
+            }
+
+            DispatchQueue.main.async {
+                self.delegate?.updateFinished(message: message)
+            }
         }
-        observers.append(observer2)
-        
-        let observer3 = NotificationCenter.default.observe(name: .appDelegateFailuredUpdateNotification, object: nil, queue: .main) { [weak self] (note) in
-            guard let self = self else { return }
-            
-            self.delegate?.updateFailed(error: ACLocalizedString("filter_updates_error", nil))
-        }
-        observers.append(observer3)
-        
-        let observer4 = NotificationCenter.default.observe(name: .appDelegateUpdateDidNotStartedNotification, object: nil, queue: .main) { [weak self] (note) in
-            guard let self = self else { return }
-            DDLogInfo("(MainPageModel) update did not start")
-            self.delegate?.updateFinished(message: String.localizedString("filters_noUpdates"))
-        }
-        observers.append(observer4)
     }
 }

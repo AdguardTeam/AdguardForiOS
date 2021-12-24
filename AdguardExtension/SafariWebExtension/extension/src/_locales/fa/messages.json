@@ -1,0 +1,36 @@
+{
+    "extension_name": {
+        "message": "AdGuard"
+    },
+    "popup_action_safari_protection_title": {
+        "message": "حفاظت سافاری",
+        "description": "TEXT MAX LENGTH: 25"
+    },
+    "popup_modal_all_sites_allowed_button": {
+        "message": "ادامه",
+        "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_modal_not_all_sites_allowed_button": {
+        "message": "ادامه",
+        "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_modal_advanced_blocking_disabled_button": {
+        "message": "فعالسازي",
+        "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_modal_btn_free": {
+        "message": "ارتقاء",
+        "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_support_button_text": {
+        "message": "گزارش یک مشکل",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "modal_protection_off_title": {
+        "message": "فعالسازی AdGuard",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "extension_description": {
+        "message": "AdGuard Safari Web Extension"
+    }
+}

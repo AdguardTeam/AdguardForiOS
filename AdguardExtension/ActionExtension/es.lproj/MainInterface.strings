@@ -10,8 +10,8 @@
 /* Class = "UILabel"; text = "Enable on this page"; ObjectID = "eVN-fj-ATQ"; */
 "eVN-fj-ATQ.text" = "Habilitar en esta página";
 
-/* Class = "UIButton"; normalTitle = "CLOSE"; ObjectID = "fxW-Cr-iPW"; */
-"fxW-Cr-iPW.normalTitle" = "CERRAR";
+/* Class = "UIButton"; normalTitle = "Close"; ObjectID = "fxW-Cr-iPW"; */
+"fxW-Cr-iPW.normalTitle" = "Cerrar";
 
 /* Class = "UILabel"; text = "Report an issue on this page"; ObjectID = "kuu-kI-Ott"; */
 "kuu-kI-Ott.text" = "Informar de un problema en esta página";

@@ -10,10 +10,10 @@
       <FileRef
          location = "group:runBuilder.sh">
       </FileRef>
-      <FileRef
-         location = "group:getExtResources.sh">
-      </FileRef>
    </Group>
+   <FileRef
+      location = "group:AdGuardSDK/AdGuardSDK.xcodeproj">
+   </FileRef>
    <FileRef
       location = "container:Builder/Builder.xcodeproj">
    </FileRef>

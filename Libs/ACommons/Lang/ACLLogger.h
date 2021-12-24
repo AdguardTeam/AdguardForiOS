@@ -1,20 +1,20 @@
-/**
-    This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © Adguard Software Limited. All rights reserved.
-
-    Adguard for iOS is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    Adguard for iOS is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
-*/
+//
+// This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
+// Copyright © Adguard Software Limited. All rights reserved.
+//
+// Adguard for iOS is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Adguard for iOS is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
+//
 
 #import <Foundation/Foundation.h>
 #import "Logger/Lumberjack/DDLogMacros.h"
@@ -27,15 +27,16 @@
 
 // Set this log level for application.
 typedef enum{
-    
+
     ACLLDefaultLevel = DDLogLevelInfo,
     ACLLDebugLevel = DDLogLevelDebug,
     ACLLVerboseLevel = DDLogLevelVerbose
-    
+
 } ACLLogLevelType;
 
 //---------------------------------------------------
 
+#undef LOG_ASYNC_ENABLED
 #define LOG_ASYNC_ENABLED false
 
 #define DDLogTrace() LOG_OBJC_MAYBE(LOG_ASYNC_VERBOSE, ddLogLevel, DDLogFlagVerbose, 0, @"%@[%p]: %@", THIS_FILE, self, THIS_METHOD)
@@ -54,7 +55,7 @@ extern int ddLogLevel;
     Global logger class, which have one singleton object.
  */
 @interface ACLLogger : NSObject{
-    
+
     BOOL _initialized;
 }
 
@@ -82,7 +83,7 @@ extern int ddLogLevel;
 /**
  Initializing of logger.
  This method must be called before writing to log file.
- 
+
  @param appName Directory name where logger will be write logs.
  If nil then will be used default value, that is name of process.
  */

@@ -19,17 +19,14 @@
 /* Class = "UILabel"; text = "Help us make AdGuard better"; ObjectID = "Em7-2h-SKs"; */
 "Em7-2h-SKs.text" = "Zgłoś błędy, wyślij swoje komentarze i sugestie";
 
-/* Class = "UILabel"; text = "Report a bug"; ObjectID = "GA6-E3-BcJ"; Note = "(Main Menu) Advanced Settings caption"; */
-"GA6-E3-BcJ.text" = "Zgłoś błąd";
+/* Class = "UILabel"; text = "Leave feedback"; ObjectID = "F6u-LX-1dd"; */
+"F6u-LX-1dd.text" = "Zostaw opinię";
 
-/* Class = "UILabel"; text = "Safari protection"; ObjectID = "HiP-B6-ATJ"; */
-"HiP-B6-ATJ.text" = "Ochrona Safari";
+/* Class = "UILabel"; text = "Leave feedback"; ObjectID = "GA6-E3-BcJ"; Note = "(Main Menu) Advanced Settings caption"; */
+"GA6-E3-BcJ.text" = "Zostaw komentarz";
 
 /* Class = "UILabel"; text = "General"; ObjectID = "L2l-pO-K3q"; Note = "(Main Menu) Advanced Settings caption"; */
 "L2l-pO-K3q.text" = "Główne";
-
-/* Class = "UILabel"; text = "Send detailed system information about running processes and application log"; ObjectID = "LHx-0a-FxM"; */
-"LHx-0a-FxM.text" = "Wyślij szczegółowe informacje systemowe o uruchomionych procesach i dzienniku aplikacji";
 
 /* Class = "UILabel"; text = "What is AdGuard?"; ObjectID = "NQS-fl-oOe"; */
 "NQS-fl-oOe.text" = "Czym jest AdGuard";
@@ -40,8 +37,8 @@
 /* Class = "UILabel"; text = "Settings"; ObjectID = "UJb-NW-d5B"; */
 "UJb-NW-d5B.text" = "Ustawienia";
 
-/* Class = "UILabel"; text = "Send detailed system info"; ObjectID = "V7E-QE-uIA"; */
-"V7E-QE-uIA.text" = "Wyślij szczegółowe informacje o systemie";
+/* Class = "UILabel"; text = "Attach application logs"; ObjectID = "V7E-QE-uIA"; */
+"V7E-QE-uIA.text" = "Dołącz dzienniki aplikacji";
 
 /* Class = "UILabel"; text = "Discuss on our forum, in social networks, or on GitHub"; ObjectID = "W6h-Gt-MMt"; */
 "W6h-Gt-MMt.text" = "Porozmawiaj na naszym forum, w sieciach społecznościowych lub na GitHub";
@@ -61,17 +58,20 @@
 /* Class = "UILabel"; text = "Frequently asked questions"; ObjectID = "dNj-vb-TQe"; */
 "dNj-vb-TQe.text" = "Często zadawane pytania";
 
-/* Class = "UILabel"; text = "Submit feature requests and suggestions"; ObjectID = "fva-Rp-ExO"; */
-"fva-Rp-ExO.text" = "Wyślij propozycję funkcji i sugestii";
-
 /* Class = "UITextField"; placeholder = "Email Address"; ObjectID = "gap-Uy-5ka"; */
 "gap-Uy-5ka.placeholder" = "Adres email";
+
+/* Class = "UIButton"; normalTitle = "Submit a report"; ObjectID = "in9-YT-8ra"; */
+"in9-YT-8ra.normalTitle" = "Prześlij raport";
 
 /* Class = "UILabel"; text = "How to block ads with AdGuard"; ObjectID = "iwI-Gm-rAp"; */
 "iwI-Gm-rAp.text" = "Jak blokować reklamy za pomocą AdGuard";
 
-/* Class = "UILabel"; text = "Help us improve the app"; ObjectID = "ow5-MW-Ued"; */
-"ow5-MW-Ued.text" = "Pomóż nam ulepszyć naszą aplikację";
+/* Class = "UILabel"; text = "Report a bug or submit a feature request"; ObjectID = "ow5-MW-Ued"; */
+"ow5-MW-Ued.text" = "Zgłoś błąd lub prześlij prośbę o nową funkcję";
+
+/* Class = "UILabel"; text = "If you've run into a problem or have a suggestion on how to improve AdGuard, tell us about it"; ObjectID = "pJU-2c-JHy"; */
+"pJU-2c-JHy.text" = "Jeśli napotkasz problem lub masz sugestię, jak ulepszyć AdGuard, poinformuj nas o tym";
 
 /* Class = "UILabel"; text = "Report incorrect blocking"; ObjectID = "q9f-Zw-7sc"; Note = "(Main Menu) Advanced Settings caption"; */
 "q9f-Zw-7sc.text" = "Zgłoś nieprawidłowe zablokowanie";
@@ -79,11 +79,8 @@
 /* Class = "UILabel"; text = "You can export logs and send them to us in a convenient way for you"; ObjectID = "qDy-4e-MsZ"; */
 "qDy-4e-MsZ.text" = "Możesz wyeksportować logi i przesłać je do nas w wygodny dla Ciebie sposób";
 
-/* Class = "UILabel"; text = "DNS protection"; ObjectID = "r4M-ec-gKY"; */
-"r4M-ec-gKY.text" = "Ochrona DNS";
-
-/* Class = "UILabel"; text = "Your email address (optional):"; ObjectID = "rHj-Ne-4zA"; */
-"rHj-Ne-4zA.text" = "Twój adres e-mail (opcjonalnie):";
+/* Class = "UILabel"; text = "Your email address:"; ObjectID = "rHj-Ne-4zA"; */
+"rHj-Ne-4zA.text" = "Twój adres e-mail:";
 
 /* Class = "UILabel"; text = "Discuss"; ObjectID = "rlh-5H-fPk"; Note = "(Main Menu) Advanced Settings caption"; */
 "rlh-5H-fPk.text" = "Podyskutuj";
@@ -96,9 +93,6 @@
 
 /* Class = "UILabel"; text = "About"; ObjectID = "x8F-Jr-rGi"; */
 "x8F-Jr-rGi.text" = "O programie";
-
-/* Class = "UILabel"; text = "Leave feedback"; ObjectID = "xJd-fJ-cmx"; Note = "(Main Menu) Advanced Settings caption"; */
-"xJd-fJ-cmx.text" = "Zostaw opinię";
 
 /* Class = "UILabel"; text = "Appearance and other"; ObjectID = "xb2-Gf-9h7"; */
 "xb2-Gf-9h7.text" = "Wygląd i inne";

@@ -1,17 +1,23 @@
-/* Class = "UILabel"; text = "Get stronger with PREMIUM!"; ObjectID = "3qN-uj-pOb"; */
+/* Class = "UILabel"; text = "AdGuard uses iOS 15 Safari Extensions to remove ads more effectively. Now it takes just one tap to block YouTube ads in Safari."; ObjectID = "0IU-PO-Xeh"; */
+"0IU-PO-Xeh.text" = "AdGuard používá rozšíření Safari pro iOS 15 k efektivnějšímu odstraňování reklam. K blokování reklam na YouTube v Safari teď stačí jediné klepnutí.";
+
+/* Class = "UILabel"; text = "Get stronger with Premium!"; ObjectID = "3qN-uj-pOb"; */
 "3qN-uj-pOb.text" = "Buďte silnější díky PREMIUM!";
 
-/* Class = "UIButton"; normalTitle = "FIX IT"; ObjectID = "46F-Jh-wHm"; */
-"46F-Jh-wHm.normalTitle" = "OPRAVIT";
+/* Class = "UIButton"; normalTitle = "Fix it"; ObjectID = "46F-Jh-wHm"; */
+"46F-Jh-wHm.normalTitle" = "Opravit";
 
-/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "4Ft-5h-4Jd"; */
-"4Ft-5h-4Jd.normalTitle" = "VYZKOUŠEJTE ZDARMA";
+/* Class = "UIButton"; normalTitle = "Try for free"; ObjectID = "4Ft-5h-4Jd"; */
+"4Ft-5h-4Jd.normalTitle" = "Zkusit zdarma";
 
 /* Class = "UILabel"; text = "Period"; ObjectID = "5pX-mg-2fq"; */
 "5pX-mg-2fq.text" = "Období";
 
-/* Class = "UILabel"; text = "Native DNS is operating"; ObjectID = "8Z0-0U-Hfk"; */
-"8Z0-0U-Hfk.text" = "Nativní DNS funguje";
+/* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "7SB-2j-FAc"; */
+"7SB-2j-FAc.normalTitle" = "Pokračovat";
+
+/* Class = "UILabel"; text = "Using native DNS"; ObjectID = "8Z0-0U-Hfk"; */
+"8Z0-0U-Hfk.text" = "Použití nativního DNS";
 
 /* Class = "UILabel"; text = "requests"; ObjectID = "Btd-nN-zLO"; */
 "Btd-nN-zLO.text" = "požadavky";
@@ -22,15 +28,6 @@
 /* Class = "UILabel"; text = "Some content blockers are disabled"; ObjectID = "FcP-gP-TsG"; */
 "FcP-gP-TsG.text" = "Některé blokátory obsahu jsou vypnuty";
 
-/* Class = "UIButton"; normalTitle = "Today"; ObjectID = "Oez-VU-4fi"; */
-"Oez-VU-4fi.normalTitle" = "Dnes";
-
-/* Class = "UIButton"; normalTitle = "24 hours"; ObjectID = "Roe-x7-9e8"; */
-"Roe-x7-9e8.normalTitle" = "24 hodin";
-
-/* Class = "UIButton"; normalTitle = "7 days"; ObjectID = "VRw-EP-ZlF"; */
-"VRw-EP-ZlF.normalTitle" = "7 dní";
-
 /* Class = "UINavigationItem"; title = "AdGuard"; ObjectID = "YaQ-RE-YZT"; Note = "Main Menu header"; */
 "YaQ-RE-YZT.title" = "AdGuard";
 
@@ -40,14 +37,8 @@
 /* Class = "UILabel"; text = "Some Safari content blockers are disabled"; ObjectID = "cvv-CS-LMQ"; */
 "cvv-CS-LMQ.text" = "Některé blokátory obsahu Safari jsou vypnuty";
 
-/* Class = "UIButton"; normalTitle = "All time"; ObjectID = "gDb-ep-jQg"; */
-"gDb-ep-jQg.normalTitle" = "Celé období";
+/* Class = "UILabel"; text = "New AdGuard features in iOS 15"; ObjectID = "gDV-cq-ZDm"; */
+"gDV-cq-ZDm.text" = "Nové funkce AdGuardu v iOS 15";
 
-/* Class = "UIButton"; normalTitle = "30 days"; ObjectID = "gu3-as-BZN"; */
-"gu3-as-BZN.normalTitle" = "30 dní";
-
-/* Class = "UIButton"; normalTitle = "All time"; ObjectID = "kfe-5H-fB1"; */
-"kfe-5H-fB1.normalTitle" = "Celé období";
-
-/* Class = "UIButton"; normalTitle = "FIX IT"; ObjectID = "oe6-9O-dBB"; */
-"oe6-9O-dBB.normalTitle" = "OPRAVIT";
+/* Class = "UIButton"; normalTitle = "Fix it"; ObjectID = "oe6-9O-dBB"; */
+"oe6-9O-dBB.normalTitle" = "Opravit";

@@ -70,6 +70,16 @@
 				<string>com.adguard.AdguardExtension</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.adguard.extension</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>$(INN_APP_ADGUARD_URL_SCHEME)</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(AG_BUILD)</string>
@@ -87,6 +97,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>SharedResourcesGroup</key>
+	<string>$(ADGUARD_SHARED_RESOURCES_GROUP)</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>PTMono-Regular.ttf</string>

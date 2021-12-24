@@ -1,44 +1,35 @@
 /* Class = "UIButton"; normalTitle = "Video guide"; ObjectID = "3ju-B8-UIZ"; */
 "3ju-B8-UIZ.normalTitle" = "Видеоинструкция";
 
-/* Class = "UILabel"; text = "To use AdGuard in Safari follow a few easy steps"; ObjectID = "F7O-MB-LHu"; */
-"F7O-MB-LHu.text" = "Чтобы пользоваться AdGuard в Safari, выполните несколько простых шагов:";
+/* Class = "UILabel"; text = "Terms and Conditions"; ObjectID = "E6C-TE-ZI6"; */
+"E6C-TE-ZI6.text" = "Условия и положения";
 
-/* Class = "UILabel"; text = "Block Tracking"; ObjectID = "FDG-As-HDY"; */
+/* Class = "UILabel"; text = "Enable AdGuard for Safari"; ObjectID = "F7O-MB-LHu"; */
+"F7O-MB-LHu.text" = "Включите AdGuard для Safari";
+
+/* Class = "UILabel"; text = "Block Trackers"; ObjectID = "FDG-As-HDY"; */
 "FDG-As-HDY.text" = "Блокируйте трекинг";
 
-/* Class = "UIButton"; normalTitle = "VIDEO GUIDE"; ObjectID = "GOu-4j-RcN"; */
-"GOu-4j-RcN.normalTitle" = "ВИДЕОИНСТРУКЦИЯ";
+/* Class = "UIButton"; normalTitle = "Video guide"; ObjectID = "GOu-4j-RcN"; */
+"GOu-4j-RcN.normalTitle" = "Видеоинструкция";
 
-/* Class = "UILabel"; text = "AdGuard fights thousands of corporations that track your every click and makes sure your privacy is safe."; ObjectID = "Mzf-WJ-CpC"; Note = "String must be less or equal 4 lines"; */
-"Mzf-WJ-CpC.text" = "AdGuard борется с тысячами корпораций, которые отслеживают каждый ваш клик, и делает все, чтобы защитить ваши персональные данные.";
+/* Class = "UILabel"; text = "Stop thousands of corporations from tracking your every move. Regain control of your online privacy."; ObjectID = "Mzf-WJ-CpC"; Note = "String must be less or equal 4 lines"; */
+"Mzf-WJ-CpC.text" = "Не дайте тысячам корпораций отслеживать каждый ваш клик. Защитите свои личные данные.";
 
-/* Class = "UILabel"; text = "Tap on Safari and choose the \"Content blockers\" menu item"; ObjectID = "QL3-U7-vA8"; */
-"QL3-U7-vA8.text" = "Нажмите на Safari и выберите раздел «Правила блокирования контента»";
-
-/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "cMV-qC-ZdE"; */
-"cMV-qC-ZdE.normalTitle" = "ДАЛЕЕ";
-
-/* Class = "UILabel"; text = "Switch on all content blockers and return to the app!"; ObjectID = "eyJ-Xh-OdS"; */
-"eyJ-Xh-OdS.text" = "Включите все блокировщики контента и возвращайтесь в приложение!";
+/* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "cMV-qC-ZdE"; */
+"cMV-qC-ZdE.normalTitle" = "Продолжить";
 
 /* Class = "UILabel"; text = "Block Ads"; ObjectID = "hXU-wD-fbI"; */
 "hXU-wD-fbI.text" = "Блокируйте рекламу";
 
-/* Class = "UILabel"; text = "Thank you for installing AdGuard!"; ObjectID = "hak-o1-HWp"; */
-"hak-o1-HWp.text" = "Спасибо, что установили AdGuard!";
-
 /* Class = "UILabel"; text = "Block Annoyances"; ObjectID = "hf9-6r-TUk"; */
 "hf9-6r-TUk.text" = "Блокируйте раздражители";
 
-/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "q8l-xM-B5q"; */
-"q8l-xM-B5q.normalTitle" = "ДАЛЕЕ";
+/* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "q8l-xM-B5q"; */
+"q8l-xM-B5q.normalTitle" = "Продолжить";
 
-/* Class = "UILabel"; text = "AdGuard excels at blocking ads on any website in Safari, so you can browse ad-freely and fast."; ObjectID = "r3n-Il-Qe8"; Note = "String must be less or equal 4 lines"; */
-"r3n-Il-Qe8.text" = "AdGuard отлично справляется с блокировкой рекламы на любом сайте в Safari, так что вы можете пользоваться быстрым интернетом без рекламы.";
+/* Class = "UILabel"; text = "AdGuard blocks ads in Safari on most websites. Enjoy faster web surfing without ads!"; ObjectID = "r3n-Il-Qe8"; Note = "String must be less or equal 4 lines"; */
+"r3n-Il-Qe8.text" = "AdGuard блокирует рекламу на большинстве сайтов в Safari. Наслаждайтесь интернетом без рекламы!";
 
-/* Class = "UILabel"; text = "AdGuard is able to filter any type of content, and you can tune the filtering to exactly suit your needs."; ObjectID = "thP-lV-BhN"; Note = "String must be less or equal 4 lines"; */
+/* Class = "UILabel"; text = "Use our collection of flexible filters to remove any type of content. Tune the filtering to your liking and surf the web your way."; ObjectID = "thP-lV-BhN"; Note = "String must be less or equal 4 lines"; */
 "thP-lV-BhN.text" = "AdGuard умеет фильтровать любой вид контента, и вы можете настроить фильтрацию полностью под ваши нужды.";
-
-/* Class = "UILabel"; text = "Open the settings"; ObjectID = "tsx-Ce-cc8"; */
-"tsx-Ce-cc8.text" = "Откройте настройки";

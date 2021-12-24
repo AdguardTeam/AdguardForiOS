@@ -1,7 +1,7 @@
 /* Class = "UIButton"; normalTitle = "Switch mode"; ObjectID = "1A6-DD-78f"; */
 "1A6-DD-78f.normalTitle" = "轉換模式";
 
-/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "1rj-wD-aeH"; */
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "1rj-wD-aeH"; */
 "1rj-wD-aeH.normalTitle" = "新增";
 
 /* Class = "UIButton"; normalTitle = "encrypted"; ObjectID = "4IJ-xy-hky"; */
@@ -10,10 +10,10 @@
 /* Class = "UILabel"; text = "Activity"; ObjectID = "5bV-zZ-4dr"; */
 "5bV-zZ-4dr.text" = "活動";
 
-/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "6xN-ij-jJj"; */
+/* Class = "UIButton"; normalTitle = "Try for free"; ObjectID = "6xN-ij-jJj"; */
 "6xN-ij-jJj.normalTitle" = "免費地試用";
 
-/* Class = "UIButton"; normalTitle = "EDIT"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
+/* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
 "7mk-7J-iLD.normalTitle" = "編輯";
 
 /* Class = "UILabel"; text = "Most active companies"; ObjectID = "Asq-k8-hi1"; */
@@ -37,7 +37,7 @@
 /* Class = "UILabel"; text = "DNS protection is disabled"; ObjectID = "X1F-2p-Xpe"; */
 "X1F-2p-Xpe.text" = "DNS 防護被禁用";
 
-/* Class = "UIButton"; normalTitle = "ENABLE"; ObjectID = "XYE-JT-WSH"; */
+/* Class = "UIButton"; normalTitle = "Enable"; ObjectID = "XYE-JT-WSH"; */
 "XYE-JT-WSH.normalTitle" = "啟用";
 
 /* Class = "UIButton"; normalTitle = "Copied"; ObjectID = "Xgg-jX-hwe"; */
@@ -64,7 +64,7 @@
 /* Class = "UILabel"; text = "Recent activity"; ObjectID = "hR9-Pm-Gq0"; */
 "hR9-Pm-Gq0.text" = "最近的活動";
 
-/* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
 "hoI-YR-JcD.normalTitle" = "返回";
 
 /* Class = "UILabel"; text = "Recent activity"; ObjectID = "kX9-ZX-NOu"; */
@@ -73,7 +73,7 @@
 /* Class = "UILabel"; text = "Block request"; ObjectID = "kwZ-Kw-f1R"; */
 "kwZ-Kw-f1R.text" = "封鎖該請求";
 
-/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "l5B-oj-DnW"; */
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "l5B-oj-DnW"; */
 "l5B-oj-DnW.normalTitle" = "新增";
 
 /* Class = "UIButton"; normalTitle = "requests"; ObjectID = "lKJ-8V-GJi"; */

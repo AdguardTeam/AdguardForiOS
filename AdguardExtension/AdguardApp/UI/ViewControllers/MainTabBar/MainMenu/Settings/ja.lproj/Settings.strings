@@ -16,8 +16,8 @@
 /* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
 "8jT-85-XFp.text" = "他のVPNアプリと互換性なし、不安定";
 
-/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "95J-h1-QgG"; */
-"95J-h1-QgG.normalTitle" = "保存";
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "95J-h1-QgG"; */
+"95J-h1-QgG.normalTitle" = "保存する";
 
 /* Class = "UILabel"; text = "Delete VPN profile"; ObjectID = "9hH-ca-VHY"; */
 "9hH-ca-VHY.text" = "VPNプロファイルを削除する";
@@ -34,7 +34,7 @@
 /* Class = "UILabel"; text = "Content blockers"; ObjectID = "BQY-q7-BQU"; */
 "BQY-q7-BQU.text" = "コンテンツブロッカー";
 
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "Dfm-If-1AX"; Note = "(AddCustomFilterController) cancel button"; */
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "Dfm-If-1AX"; Note = "(AddCustomFilterController) cancel button"; */
 "Dfm-If-1AX.normalTitle" = "キャンセル";
 
 /* Class = "UILabel"; text = "Blocking mode"; ObjectID = "ESe-CM-On1"; */
@@ -73,9 +73,6 @@
 /* Class = "UILabel"; text = "Block IPv6"; ObjectID = "NC2-8A-E6f"; */
 "NC2-8A-E6f.text" = "IPv6をブロックする";
 
-/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain up to 50,000 rules"; ObjectID = "ObO-g4-VHL"; */
-"ObO-g4-VHL.text" = "コンテンツブロッカーは6つあり、それぞれに50,000本までのルールを含めることができます（計30万本）。";
-
 /* Class = "UILabel"; text = "Advanced mode"; ObjectID = "Ory-8I-Ih0"; */
 "Ory-8I-Ih0.text" = "高度な設定モード";
 
@@ -94,7 +91,7 @@
 /* Class = "UITableViewSection"; headerTitle = "Theme"; ObjectID = "Vtx-vp-WIV"; */
 "Vtx-vp-WIV.headerTitle" = "テーマ";
 
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "WUY-Cq-SPm"; Note = "(AddCustomFilterController) cancel button"; */
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "WUY-Cq-SPm"; Note = "(AddCustomFilterController) cancel button"; */
 "WUY-Cq-SPm.normalTitle" = "キャンセル";
 
 /* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
@@ -142,9 +139,6 @@
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "その他";
 
-/* Class = "UILabel"; text = "Content blockers"; ObjectID = "nPj-OI-Pcb"; */
-"nPj-OI-Pcb.text" = "コンテンツブロッカー";
-
 /* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
 "ocH-QT-NRZ.text" = "ライト（明るい）";
 
@@ -160,8 +154,8 @@
 /* Class = "UILabel"; text = "Low-level settings"; ObjectID = "reQ-4X-84i"; */
 "reQ-4X-84i.text" = "ローレベル設定";
 
-/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "sNF-Hy-NdB"; */
-"sNF-Hy-NdB.normalTitle" = "保存";
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "sNF-Hy-NdB"; */
+"sNF-Hy-NdB.normalTitle" = "保存する";
 
 /* Class = "UILabel"; text = "Settings"; ObjectID = "sc6-Tw-xnL"; */
 "sc6-Tw-xnL.text" = "設定";

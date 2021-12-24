@@ -1,31 +1,31 @@
-/**
-      This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-      Copyright © Adguard Software Limited. All rights reserved.
-
-      Adguard for iOS is free software: you can redistribute it and/or modify
-      it under the terms of the GNU General Public License as published by
-      the Free Software Foundation, either version 3 of the License, or
-      (at your option) any later version.
-
-      Adguard for iOS is distributed in the hope that it will be useful,
-      but WITHOUT ANY WARRANTY; without even the implied warranty of
-      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-      GNU General Public License for more details.
-
-      You should have received a copy of the GNU General Public License
-      along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
-*/
+//
+// This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
+// Copyright © Adguard Software Limited. All rights reserved.
+//
+// Adguard for iOS is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Adguard for iOS is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
+//
 
 import Foundation
 
 class CustomNavigationTransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
-    
+
     let presenting: Bool
 
     init(presenting: Bool) {
         self.presenting = presenting
     }
-    
+
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return TimeInterval(floatLiteral: 0.3)
     }
@@ -36,7 +36,7 @@ class CustomNavigationTransitionAnimator: NSObject, UIViewControllerAnimatedTran
 
         let duration = transitionDuration(using: transitionContext)
         let container = transitionContext.containerView
-        
+
         if presenting {
             container.addSubview(toView)
         } else {
@@ -65,14 +65,14 @@ class CustomNavigationTransitionAnimator: NSObject, UIViewControllerAnimatedTran
 }
 
 class CustomNavigationTransitionCoordinator: NSObject, UINavigationControllerDelegate {
-    
+
     var interactionController: UIPercentDrivenInteractiveTransition?
 
     private var lastFromVc: UIViewController?
     private var lastToVc: UIViewController?
-    
+
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
+
         switch operation {
         case .push:
             return CustomNavigationTransitionAnimator(presenting: true)
@@ -82,7 +82,7 @@ class CustomNavigationTransitionCoordinator: NSObject, UINavigationControllerDel
             return nil
         }
     }
-    
+
     func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         return interactionController
     }

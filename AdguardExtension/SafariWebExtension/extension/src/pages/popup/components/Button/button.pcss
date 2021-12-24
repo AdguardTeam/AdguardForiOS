@@ -1,0 +1,51 @@
+.button {
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid transparent;
+    outline: none;
+    background-color: transparent;
+    border-radius: 8px;
+    text-align: center;
+
+    &:hover,
+    &:focus,
+    &:active {
+        background-color: transparent;
+    }
+
+    &--green {
+        color: #fff;
+        background-color: var(--green);
+        transition: background-color var(--t3);
+
+        &:hover,
+        &:focus,
+        &:active {
+            background-color: var(--green-hover);
+        }
+    }
+
+    &--l {
+        font-size: 16px;
+        height: 40px;
+    }
+
+    &--bottom {
+        margin-top: 16px;
+    }
+
+    &--roll {
+        margin-top: auto;
+        border: 0;
+        border-radius: 0;
+        box-shadow: 0 -1px 0 0 var(--gray100);
+        text-align: center;
+        height: 26px;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        width: 100%;
+        transform: translateY(11px);
+    }
+}

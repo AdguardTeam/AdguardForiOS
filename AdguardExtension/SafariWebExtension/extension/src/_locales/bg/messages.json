@@ -1,0 +1,16 @@
+{
+    "extension_name": {
+        "message": "AdGuard"
+    },
+    "popup_modal_advanced_blocking_disabled_button": {
+        "message": "Включи",
+        "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_support_button_text": {
+        "message": "Съобщи за проблем",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "extension_description": {
+        "message": "AdGuard Safari Web Extension"
+    }
+}

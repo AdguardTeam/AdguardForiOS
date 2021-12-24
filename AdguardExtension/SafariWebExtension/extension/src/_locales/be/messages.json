@@ -1,0 +1,32 @@
+{
+    "extension_name": {
+        "message": "AdGuard"
+    },
+    "popup_action_safari_protection_title": {
+        "message": "Абарона Safari",
+        "description": "TEXT MAX LENGTH: 25"
+    },
+    "popup_modal_all_sites_allowed_button": {
+        "message": "Працягнуць",
+        "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_modal_not_all_sites_allowed_button": {
+        "message": "Працягнуць",
+        "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_modal_advanced_blocking_disabled_button": {
+        "message": "Уключыць",
+        "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_support_button_text": {
+        "message": "Паведаміць пра праблему",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "modal_protection_off_title": {
+        "message": "Дазволіць AdGuard",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "extension_description": {
+        "message": "AdGuard Safari Web Extension"
+    }
+}

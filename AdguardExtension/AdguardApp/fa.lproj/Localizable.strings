@@ -19,6 +19,9 @@
 /* Alert title. On error. */
 "common_error_title" = "خطا";
 
+/* Something went wrong title for unknown error */
+"something_went_wrong_title" = "مشکلی وجود دارد";
+
 /* NO Button caption in alert */
 "common_action_no" = "خیر";
 
@@ -32,13 +35,10 @@
 "common_action_yes" = "بله";
 
 /* (MainController) login status caption on main screen */
-"protection_enabled_caption" = "حفاظت فعال شده است";
-
-/* (MainController) login status caption on main screen */
 "protection_partly_enabled_caption" = "برخی مسدودسازی های محتوا غیرفعال شده اند";
 
-/* (MainController) login status caption on main screen */
-"protection_disabled_caption" = "حفاظت غيرفعال شده است";
+/* (FreeLicenseStateTableViewModel) title for permanent subscription */
+"permanent_subscription_title" = "دائمی";
 
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "خرید";
@@ -88,6 +88,9 @@
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "بروز رسانی...";
 
+/* (UserFilterController) add blocklist rule button title */
+"add_blacklist_rule_title" = "افزودن دستور جدید";
+
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
 
@@ -99,6 +102,9 @@
 
 /* (UserFilterController) add whitelist domain caption */
 "add_whitelist_domain_caption" = "دامنه:";
+
+/* (UserFilterController) add wifi name caption */
+"add_wifi_name_caption" = "نام:";
 
 /* (AESupport) Alert message if user have no e-mail account on device */
 "bug_report_sending_error" = "گزارش مشکل را نمیتوان ارسال کرد چون ایمیل بدرستی در دستگاه شما پیکربندی نشده است.";
@@ -112,9 +118,6 @@
 /* (MainController) Message on main screen during update - count of updated filters */
 "filters_updated_format" = "%lu فیلتر بروز رسانی شده";
 
-/* (FiltersController) Filter Version format */
-"filter_version_format" = "نسخه %@";
-
 /* (DnsSettingController) split tunel mode description */
 "tunnel_mode_split_description" = "تقسیم تونل،سازگار با برنامه های \"وی پی اِن شخصی\"";
 
@@ -123,6 +126,9 @@
 
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "تونل-کامل(بدون آیکون VPN)،ناسازگار با سایر برنامه های VPN،کمتر پایدار";
+
+/* (DnsSettingController) AdGuard DNS implementation title */
+"adguard_dns_implementation_title" = "AdGuard";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "فعال شده %1$d از %2$d";
@@ -147,9 +153,6 @@
 
 /* login error message */
 "login_error_message" = "یک خطا حین ورود رخ داده است";
-
-/* lifetime purchase secription format */
-"lifetime_purchase_description_format" = "<a href=%1$@>سیاست حریم خصوصی</a> <br><br><a href=%2$@>شرایط استفاده</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "تأیید";
@@ -177,6 +180,15 @@
 
 /* (AdvancedSettingsController) Restart when network changes error */
 "general_settings_restart_tunnel_error" = "شما ابتدا باید VPN را فعال کنید";
+
+/* (AdvancedSettingsController) Reset statistics title */
+"reset_stat_title" = "ریست آمار";
+
+/* (AdvancedSettingsController) Reset button title */
+"reset_title" = "ريست";
+
+/* (AdvancedSettingsController) Remove button title */
+"delete_title" = "حذف";
 
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when enabled  */
 "enabled_current_content_blocker_state_label" = "%@ دستور در حال استفاده است";
@@ -217,17 +229,17 @@
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "شما از حداکثر تعداد دستورات فیلتر تخطی کرده اید.";
 
-/* (GetProController) title for permanent subscription */
-"permanent_subscription_title" = "دائمی";
+/* (FiltersController) Enabled state in groups section */
+"on_state" = "فعال شده";
 
-/* (FiltersController) ON state in groups section */
-"on_state" = "روشن";
+/* (FiltersController) Disabled state in groups section */
+"off_state" = "فعال نشده";
 
-/* (FiltersController) OFF state in groups section */
-"off_state" = "خاموش";
+/* (AboutViewController) Logout title */
+"common_logout" = "خروج";
 
-/* (NewCustomFilterDetailedController) homepage string */
-"homepage_title" = "صفحه خانگي:";
+/* (AboutViewController) Login title */
+"common_license" = "مجوز";
 
 /* (LoginController) incorrect email/passsword mesage */
 "bad_credentials_error" = "رمزعبور یا ایمیل اشتباه است";
@@ -241,11 +253,17 @@
 /* (Confirm2faController) Invalid 2fa token on login */
 "invalid_2fa_code_error" = "توکن احراز هویت دو مرحله ای نامعتبر است";
 
+/* (NetworkSettingsController) button title for "Add an exception" */
+"add_exception_title" = "افزودن یک استثناء";
+
 /* (ListOfRulesModel) title for safari user filter */
 "safari_userfilter_title" = "دستورات کاربر سافاری";
 
 /* (ListOfRulesModel) title for export */
 "export" = "خروجيگيري";
+
+/* (UserRulesTableController) - title for editing user rules option  */
+"open_user_rules_editor" = "بازکردن ویرایشگر";
 
 /* (ListOfRulesModel) title for Clear button*/
 "common_clear" = "پاکسازی";
@@ -319,5 +337,143 @@
 /*(LogCategory) extensions category*/
 "extensions" = "افزونه ها";
 
-/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "روی آیکون <b>سافاری</b> را ضربه زده و <b>\"مسدودساز محتوا\"</b> را از منو انتخاب کنید";
+/*(ListOfRules) Select title */
+"common_select" = "انتخاب";
+
+/*(ListOfRules) Edit title */
+"common_edit" = "ويرايش";
+
+/*(ListOfRules) Delete title */
+"common_delete" = "حذف";
+
+/*(ListOfRules) Add new rule title */
+"add_new_rule" = "افزودن دستور جدید";
+
+/* (OneSafariGroupFiltersModel) Add new filter title */
+"add_new_filter" = "افزودن فیلتر";
+
+/*(MainScreen) "24 hours" chart date type */
+"chart_24hours" = "24 ساعت";
+
+/*(MainScreen) "today" chart date type */
+"chart_date_today" = "امروز";
+
+/*(MainScreen) "7 days" chart date type */
+"chart_7days" = "7 روز";
+
+/*(MainScreen) "30 days" chart date type */
+"chart_30days" = "30 روز";
+
+/*(MainScreen) "all time" chart date type */
+"chart_alltime" = "همیشه";
+
+/*(NewCustomFilterDetailsController) title for new custom filter */
+"new_filter_title" = "فیلتر دستی جدید";
+
+/*(NewCustomFilterDetailsController) title for new dns filter */
+"new_dns_filter_title" = "فیلتر DNS جدید";
+
+/*(NewCustomFilterDetailsController) add button title */
+"common_add" = "افزودن";
+
+/*(TodayViewController) DNS protection is enabled text  */
+"system_enabled" = "حفاظت از DNS";
+
+/*(DnsRequestDetailsController) action title for info alert  */
+"common_action_more" = "بیشتر...";
+
+/* (DnsFiltersTableController) - DNS filters title */
+"dns_filters_title" = "فيلترهای DNS";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_blocked" = "مسدود شده";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_processed" = "پردازش شده";
+
+/*(DnsLogController) status of dns request */
+"dns_request_status_allowlisted" = "لیست سفید";
+
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "ذخیره و انتخاب";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "ذخیره";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "لغو";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "حذف";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "افزودن سرور DNS دستی";
+
+/* (DnsRequestDetailsController) "General" title for section header */
+"general_header" = "General";
+
+/* (DnsRequestDetailsController) "Category" title for cell */
+"category_title" = "دسته بندی";
+
+/* (DnsRequestDetailsController) "Name" title for cell */
+"name_title" = "نام";
+
+/* (DnsRequestDetailsController) "Domain" title for cell */
+"domain_title" = "دامنه";
+
+/* (DnsRequestDetailsController) "Status" title for cell */
+"status_title" = "وضعیت";
+
+/* (DnsRequestDetailsController) "Time" title for cell */
+"time_title" = "زمان";
+
+/* (DnsRequestDetailsController) "Size" title for cell */
+"size_title" = "حجم";
+
+/* (DnsRequestDetailsController) "Type" title for cell */
+"type_title" = "نوع";
+
+/* (DnsRequestDetailsController) - empty dns answer title */
+"empty_dns_answer" = "خالی";
+
+/* (ActivityViewController) - All requests alert action */
+"all_requests_alert_action" = "همه درخواست ها";
+
+/* (ActivityViewController) - None message when there is no statistics */
+"none_message" = "هيچکدام";
+
+/* (FilterDetailsViewController) Version subtitle for detailed filter info */
+"detailed_filter_info_version_subtitle" = "نسخه";
+
+/* (FilterDetailsViewController) Updated subtitle for detailed filter info */
+"detailed_filter_info_updated_subtitle" = "بروز رسانی شده";
+
+/* (FilterDetailsViewController) Rules count subtitle for detailed filter info */
+"detailed_filter_info_rules_count_subtitle" = "تعداد دستور";
+
+/* (FilterDetailsViewController) Subscription URL subtitle for detailed filter info */
+"detailed_filter_info_subscription_subtitle" = "آدرس اشتراک";
+
+/* (PremiumFeature) - Custom filters premium feature name */
+"custom_filters_feature_name" = "فیلترهای دستی";
+
+/* (AGSearchView) Placeholder text for search bar */
+"search_view_placeholder" = "جستجو";
+
+/* (UpstreamsController) Custom address description */
+"upstreams_custom_address_description" = "آدرس آی پی";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "فيلترها";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "فيلترهای DNS";
+
+/* (BackgroundFetchController) - Background app refresh every 1 hour title */
+"background_fetch_hour_period" = "هر ساعت";
+
+/* (DnsProvidersController) - add new dns server title */
+"add_custom_dns_server_title" = "افزودن سرور DNS دستی";
+
+/* (DnsProvidersController) - Header title */
+"dns_provider_controller_title" = "سرور DNS";

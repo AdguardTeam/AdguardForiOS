@@ -16,8 +16,8 @@
 /* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
 "8jT-85-XFp.text" = "Nekompatibilné s inými VPN aplikáciami, nestabilné";
 
-/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "95J-h1-QgG"; */
-"95J-h1-QgG.normalTitle" = "ULOŽIŤ";
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "95J-h1-QgG"; */
+"95J-h1-QgG.normalTitle" = "Uložiť";
 
 /* Class = "UILabel"; text = "Delete VPN profile"; ObjectID = "9hH-ca-VHY"; */
 "9hH-ca-VHY.text" = "Vymazať VPN profil";
@@ -34,8 +34,8 @@
 /* Class = "UILabel"; text = "Content blockers"; ObjectID = "BQY-q7-BQU"; */
 "BQY-q7-BQU.text" = "Blokovače obsahu";
 
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "Dfm-If-1AX"; Note = "(AddCustomFilterController) cancel button"; */
-"Dfm-If-1AX.normalTitle" = "ZRUŠIŤ";
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "Dfm-If-1AX"; Note = "(AddCustomFilterController) cancel button"; */
+"Dfm-If-1AX.normalTitle" = "Zrušiť";
 
 /* Class = "UILabel"; text = "Blocking mode"; ObjectID = "ESe-CM-On1"; */
 "ESe-CM-On1.text" = "Spôsob blokovania";
@@ -73,9 +73,6 @@
 /* Class = "UILabel"; text = "Block IPv6"; ObjectID = "NC2-8A-E6f"; */
 "NC2-8A-E6f.text" = "Blokovať IPv6";
 
-/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain up to 50,000 rules"; ObjectID = "ObO-g4-VHL"; */
-"ObO-g4-VHL.text" = "Máte 6 blokovačov obsahu, každý z nich môže obsahovať až 50.000 pravidiel";
-
 /* Class = "UILabel"; text = "Advanced mode"; ObjectID = "Ory-8I-Ih0"; */
 "Ory-8I-Ih0.text" = "Pokročilý režim";
 
@@ -94,8 +91,8 @@
 /* Class = "UITableViewSection"; headerTitle = "Theme"; ObjectID = "Vtx-vp-WIV"; */
 "Vtx-vp-WIV.headerTitle" = "Téma";
 
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "WUY-Cq-SPm"; Note = "(AddCustomFilterController) cancel button"; */
-"WUY-Cq-SPm.normalTitle" = "ZRUŠIŤ";
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "WUY-Cq-SPm"; Note = "(AddCustomFilterController) cancel button"; */
+"WUY-Cq-SPm.normalTitle" = "Zrušiť";
 
 /* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
 "X0A-gU-hzf.text" = "Automaticky aktualizovať len cez Wi-Fi";
@@ -142,9 +139,6 @@
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "Iné";
 
-/* Class = "UILabel"; text = "Content blockers"; ObjectID = "nPj-OI-Pcb"; */
-"nPj-OI-Pcb.text" = "Blokovače obsahu";
-
 /* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
 "ocH-QT-NRZ.text" = "Svetlá";
 
@@ -160,8 +154,8 @@
 /* Class = "UILabel"; text = "Low-level settings"; ObjectID = "reQ-4X-84i"; */
 "reQ-4X-84i.text" = "Nízkoúrovňové nastavenia";
 
-/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "sNF-Hy-NdB"; */
-"sNF-Hy-NdB.normalTitle" = "ULOŽIŤ";
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "sNF-Hy-NdB"; */
+"sNF-Hy-NdB.normalTitle" = "Uložiť";
 
 /* Class = "UILabel"; text = "Settings"; ObjectID = "sc6-Tw-xnL"; */
 "sc6-Tw-xnL.text" = "Nastavenia";

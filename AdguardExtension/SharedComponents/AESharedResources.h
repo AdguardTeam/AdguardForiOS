@@ -1,28 +1,22 @@
-/**
-    This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © Adguard Software Limited. All rights reserved.
+//
+// This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
+// Copyright © Adguard Software Limited. All rights reserved.
+//
+// Adguard for iOS is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Adguard for iOS is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
+//
 
-    Adguard for iOS is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    Adguard for iOS is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
-*/
 #import <Foundation/Foundation.h>
-
-typedef enum : NSUInteger {
-    
-    APVpnManagerTunnelModeSplit = 0,
-    APVpnManagerTunnelModeFull = 1,
-    APVpnManagerTunnelModeFullWithoutVPNIcon = 2,
-} APVpnManagerTunnelMode;
 
 @class ASDFilterMetadata, ASDFilter, ABECFilterClientMetadata, ASDFilterRule, AEInvertedWhitelistDomainsObject, ABECFilterClientLocalization, DnsServerInfo;
 
@@ -32,15 +26,12 @@ typedef enum : NSUInteger {
 
 #define AE_PRODUCT_NAME                     @AG_PRODUCT
 #define AE_HOSTAPP_ID                       @ADGUARD_BUNDLE_ID
-//#define AE_EXTENSION_ID                     @ADGUARD_EXTENSION_BUNDLE_ID
 #define AE_SHARED_RESOURCES_GROUP           @ADGUARD_SHARED_RESOURCES_GROUP
 #define AE_FILTER_UPDATES_ID                @ADGUARD_FILTER_UPDATES_ID
 
 #define AE_PRODUCTION_DB                    @"adguard.db"
 
 extern NSString * _Nonnull AE_URLSCHEME;
-extern NSString * _Nonnull AE_URLSCHEME_COMMAND_ADD;
-extern NSString * _Nonnull AE_SDNS_SCHEME;
 
 /**
  User Defaults key that defines app performs first start or not.
@@ -49,7 +40,7 @@ extern NSString * _Nonnull AEDefaultsFirstRunKey;
 /**
  User Defaults key that defines schema version for upgrade procedure.
  */
-extern NSString * _Nonnull AEDefaultsProductSchemaVersion;
+extern NSString * _Nonnull AEDefaultsProductSchemaVersion; // TODO: - This key is obsolete and can be removed
 
 /**
  User Defaults key that defines last used build version for upgrade procedure.
@@ -68,34 +59,9 @@ extern NSString * _Nonnull AEDefaultsCheckFiltersLastDate;
 extern NSString * _Nonnull AEDefaultsJSONMaximumConvertedRules;
 
 /**
- User Defaults key that define current count of the rules, which put into converter.
- */
-extern NSString * _Nonnull AEDefaultsJSONRulesForConvertion;
-
-/**
- User Defaults key that define current count of the converted rules.
- */
-extern NSString * _Nonnull AEDefaultsJSONConvertedRules;
-
-/**
- User Defaults key, which define that overlimit of rules was reached.
- */
-extern NSString * _Nonnull AEDefaultsJSONRulesOverlimitReached;
-
-/**
  User Defaults key, which defines that filter updates will performed only in Wi-Fi network.
  */
 extern NSString * _Nonnull AEDefaultsWifiOnlyUpdates;
-
-/**
- User Defaults key, which defines that video tutorial cell must be hidden.
- */
-extern NSString * _Nonnull AEDefaultsHideVideoTutorial;
-
-/**
- User Defaults key, which defines that "manage adguard from safari" video tutorial cell must be hidden.
- */
-extern NSString * _Nonnull AEDefaultsHideSafariVideoTutorial;
 
 /**
  User Defaults key, which defines that content blocker must use inverted whitelist - blocks ads ONLY on sites from this list.
@@ -111,11 +77,6 @@ extern NSString * _Nonnull AEDefaultsAppEntryCount;
  User Defaults key, which defines whether rate app dialog was shown
  */
 extern NSString * _Nonnull AEDefaultsRateAppShown;
-
-/**
- User Defaults key, which defines the next minimum time to show rate app alert
- */
-extern NSString * _Nonnull MinTimeIntervalToRate;
 
 /**
  User Defaults key, which defines that pro feature is purchased through in app purchases.
@@ -149,10 +110,6 @@ extern NSString* _Nonnull AEDefaultsRenewableSubscriptionExpirationDate;
 extern NSString* _Nonnull AEDefaultsNonConsumableItemPurchased;
 
 /**
- User defaults key, which defines that "pro expired" message showed */
-extern NSString*  _Nonnull AEDefaultsPremiumExpiredMessageShowed;
-
-/**
  User defaults key, which defines dark theme is on */
 extern NSString*  _Nonnull AEDefaultsDarkTheme;
 
@@ -162,16 +119,12 @@ extern NSString* _Nonnull AEDefaultsSystemAppearenceStyle;
 
 /**
  User defaults key, which defines dark theme is on */
-extern NSString*  _Nonnull AEDefaultsAppRated;
-
-/**
- User defaults key, which defines dark theme is on */
 extern NSString*  _Nonnull AEDefaultsAuthStateString;
 
 /**
  User defaults key, which defines that appId allready saved with right access rights.
  */
-// todo: remove this in future
+// TODO: - This key is obsolete and can be removed
 extern NSString*  _Nonnull AEDefaultsAppIdSavedWithAccessRights;
 
 /**
@@ -198,6 +151,7 @@ extern NSString*  _Nonnull AEDefaultsDnsWhitelistEnabled;
  User defaults key, which defines dns  blacklist is enabled */
 extern NSString*  _Nonnull AEDefaultsDnsBlacklistEnabled;
 
+// TODO: - These keys are obsolete and should be removed later
 /**
  User defaults keys, which contains number of rules for each content blocker*/
 extern NSString*  _Nonnull AEDefaultsGeneralContentBlockerRulesCount;
@@ -219,10 +173,6 @@ extern NSString*  _Nonnull AEDefaultsSecurityContentBlockerRulesOverLimitCount;
 /**
  User default key, which indicates whether safari protection is enabled*/
 extern NSString* _Nonnull SafariProtectionState;
-
-/**
- User defaults key, which defines, whether vpn is enabled */
-extern NSString* _Nonnull AEDefaultsVPNEnabled;
 
 /**
  User defaults key, which defines, whether restart by reachability is enabled */
@@ -260,21 +210,6 @@ extern NSString* _Nonnull AEDefaultsEncryptedRequests;
  User defaults key, which defines last statistics save time
  */
 extern NSString*  _Nonnull LastStatisticsSaveTime;
-
-/**
- String to send notifications for StatusView
- */
-extern NSString* _Nonnull AEDefaultsShowStatusViewInfo;
-
-/**
- Notify to show status view
- */
-extern NSString* _Nonnull ShowStatusViewNotification;
-
-/**
- Hide status view
- */
-extern NSString* _Nonnull HideStatusViewNotification;
 
 /**
  Unique id for dns filters
@@ -328,7 +263,7 @@ extern NSString* _Nonnull BackgroundFetchStateKey;
 /**
  User defaults key for migrations.
  */
-extern NSString* _Nonnull NeedToUpdateFiltersKey;
+extern NSString* _Nonnull NeedToUpdateFiltersKey; // TODO: - This key is obsolete and can be removed
 
 /**
  User defaults key for storing current DNS implementation.
@@ -354,11 +289,6 @@ extern NSString* _Nonnull BlockingMode;
  User defaults key for blocked response Ttl in secs.
  */
 extern NSString* _Nonnull BlockedResponseTtlSecs;
-
-/**
- User defaults key for custom blocking Ipv4.
- */
-extern NSString* _Nonnull CustomBlockingIp;
 
 /**
  User defaults key for custom blocking Ipv4.
@@ -433,42 +363,6 @@ extern NSString* _Nonnull LastDnsFiltersUpdateTime;
  read data from file
  */
 - (nullable NSData *)loadDataFromFileRelativePath:(nonnull NSString *)relativePath;
-
-/**
- Rules from whitelist, which used for Safari content-blocking.
- */
-@property (nullable) NSMutableArray <ASDFilterRule *> *whitelistContentBlockingRules;
-
- /**
- Rules from inverted whitelist, which used for Safari content-blocking.
- */
-@property (nullable) AEInvertedWhitelistDomainsObject *invertedWhitelistContentBlockingObject;
-
-/**
- Filter metadata from last filter update process.
- We need it because filter update process is performed in two steps.
- */
-@property (nullable) ABECFilterClientMetadata *lastUpdateFilterMetadata;
-
-/**
- Filter metadata cache. We need this to work with subscriptions when the remote server is not reachable.
- */
-@property (nullable) ABECFilterClientMetadata *filtersMetadataCache;
-
-/**
- Filter localizations cache. We need this to work with subscriptions when the remote server is not reachable.
- */
-@property (nullable) ABECFilterClientLocalization *i18nCacheForFilterSubscription;
-
-/**
- Filter Ids from last filter update process.
- */
-@property (nullable) NSArray <NSNumber *> *lastUpdateFilterIds;
-/**
- Filter rules from last filter update process.
- We need it because filter update process is performed in two steps.
- */
-@property (nullable) NSDictionary <NSNumber *, ASDFilter *> *lastUpdateFilters;
 
 - (nonnull NSString*) pathForRelativePath:(nonnull NSString*) relativePath;
 

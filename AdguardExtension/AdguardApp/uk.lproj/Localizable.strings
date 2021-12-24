@@ -19,6 +19,12 @@
 /* Alert title. On error. */
 "common_error_title" = "Помилка";
 
+/* Something went wrong title for unknown error */
+"something_went_wrong_title" = "Щось пішло не так";
+
+/* Unknown error desription */
+"unknown_error_description" = "Будь ласка, повідомте нашій службі підтримки про цю помилку.";
+
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Неможливо завантажити фільтри в Safari. Тому ваші останні зміни не вдалось застосувати.";
 
@@ -65,7 +71,7 @@
 "user_filter_helper" = "Вводьте власні правила тут - кожне правило в новому рядку";
 
 /* YES Button caption in alert */
-"common_action_yes" = "ТАК";
+"common_action_yes" = "Так";
 
 /* (MainController) login status caption on main screen */
 "protection_enabled_caption" = "Захист увімкнено";
@@ -79,8 +85,26 @@
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Передплатити";
 
+/* (LicenseProductChoiceCell) restore purchase button title */
+"restore_purchase_button_title" = "Відновити покупку";
+
+/* (FreeLicenseStateTableViewModel) One month subscription title */
+"one_month_subscription_title" = "Місячна";
+
+/* (FreeLicenseStateTableViewModel) One year subscription title */
+"one_year_subscription_title" = "Річна";
+
+/* (FreeLicenseStateTableViewModel) title for permanent subscription */
+"permanent_subscription_title" = "Постійний";
+
+/* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
+"go_to_my_account_title" = "Перейти до облікового запису";
+
 /* (GetProTableController) upgrade button title for lifetime license */
-"upgrade_lifetime_button_title" = "КУПИТИ";
+"upgrade_lifetime_button_title" = "Придбати";
+
+/* (GetProTableController) missing purchase alert message */
+"upgrade_missing_purchase_message" = "Підписки недоступні. Будь ласка, перевірте з'єднання з інтернетом та спробуйте ще раз.";
 
 /* (LoginController) lost password button title */
 "lost_password" = "Забули пароль?";
@@ -188,7 +212,7 @@
 "filters_updated_format" = "Фільтрів оновлено: %lu ";
 
 /* (FiltersController) Filter Version format */
-"filter_version_format" = "версія %@";
+"filter_version_format" = "Версія %@";
 
 /* (DnsSettingController) split tunel mode description */
 "tunnel_mode_split_description" = "Split-Tunnel. Сумісний з «Personal VPN» програмами";
@@ -204,9 +228,6 @@
 
 /* (DnsSettingController) Native DNS implementation title */
 "native_dns_implementation_title" = "Вбудований";
-
-/* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
-"system_dns_server" = "Без шифрування (Системний DNS)";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "Увімкнено %1$d з %2$d";
@@ -235,11 +256,14 @@
 /* login error message */
 "login_error_message" = "Під час входу сталася помилка";
 
+/* purchase secription format */
+"purchase_description_format" = "Умови підписки AdGuard:<br><br>• Платіж буде стягнуто з вашого облікового запису iTunes під час підтвердження купівлі.<br><br>• Передплата автоматично продовжується, доки не буде вимкнена принаймні за 24 години до завершення поточного періоду.<br><br>• Оплата за продовження буде стягнута впродовж 24 годин до завершення поточного періоду.<br><br>Ви можете керувати своїми передплатами та вимкнути автоматичне продовження в налаштуваннях свого облікового запису iTunes після придбання передплати.<br><br><a href=%2$@>Ліцензійна угода</a> та <a href=%1$@>Політика приватності</a> AdGuard";
+
 /* lifetime purchase secription format */
-"lifetime_purchase_description_format" = "<a href=%2$@>Умови користування</a> та <a href=%1$@>Політика приватності</a>";
+"lifetime_purchase_description_format" = "<a href=%2$@>Ліцензійна угода</a> та <a href=%1$@>Політика приватності</a> AdGuard";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
-"common_action_ok" = "ОК";
+"common_action_ok" = "Добре";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "privacy_policy_action" = "Політика приватності";
@@ -259,8 +283,20 @@
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "Інші";
 
+/* (AdvancedSettingsController) Content blocker description text */
+"cb_description_common" = "6 блокувальників вмісту, кожен містить до 50 тисяч правил";
+
+/* (AdvancedSettingsController) Content blocker description text */
+"cb_description_advanced_protection" = "6 блокувальників вмісту, кожен містить до 150 тисяч правил, а також Розширений захист";
+
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Фільтри:";
+
+/* (ContentBlockersTableController) - Advanced protection title */
+"cb_screen_advanced_protection_title" = "Розширений захист";
+
+/* (ContentBlockersTableController) - Content Blockers title */
+"cb_screen_content_blockers_title" = "Блокувальники вмісту";
 
 /* (AdvancedSettingsController) Restart when network changes error */
 "general_settings_restart_tunnel_error" = "Спочатку потрібно ввімкнути VPN";
@@ -295,6 +331,9 @@
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "Вимкнено в параметрах Safari";
 
+/* (ContentBlockerStateCell) Description for advanced protection disabled state */
+"disabled_current_state_advanced_protection" = "Вимкнено в параметрах Захисту";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
 "update_current_state_label" = "Завантаження в Safari...";
 
@@ -305,7 +344,7 @@
 "failed_updating_current_state_label" = "Не вдалось оновити фільтри";
 
 /* (GetProController) login error message text */
-"login_max_computers_exceeded" = "Цю ліцензію активовано на максимальній кількості пристроїв.\nВи можете відкріпити ліцензію з пристроїв, якими не користуєтесь, у своєму особистому кабінеті на: adguard.com";
+"login_max_computers_exceeded" = "Цю ліцензію активовано на максимальній кількості пристроїв.\nВи можете відкріпити ліцензію з пристроїв, якими не користуєтесь, у своєму обліковому запису на сайті adguard.com";
 
 /* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
 "action_extension_no_configuration_message_format" = "Перед тим, як використовувати це розширення, %1$@ повинен виконати початкову конфігурацію. Відкрийте основну програму %2$@, щоб дозволити зробити це.";
@@ -328,17 +367,14 @@
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "Ви перевищили обмеження кількості правил фільтрування.";
 
-/* (GetProController) title for permanent subscription */
-"permanent_subscription_title" = "Постійний";
+/* (FiltersController) Enabled state in groups section */
+"on_state" = "Увімкнено";
 
-/* (FiltersController) ON state in groups section */
-"on_state" = "УВІМКНЕНО";
-
-/* (FiltersController) OFF state in groups section */
-"off_state" = "ВИМКНЕНО";
+/* (FiltersController) Disabled state in groups section */
+"off_state" = "Вимкнено";
 
 /* (NewCustomFilterDetailedController) homepage string */
-"homepage_title" = "Домівка:";
+"homepage_title" = "Домашня сторінка: ";
 
 /* (FilterDetailsController) delete filter title */
 "delete_filter_title" = "Видалити фільтр";
@@ -351,6 +387,9 @@
 
 /* (AboutViewController) AdGuard copyright string */
 "copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\nУсі права захищено. AdGuard.com";
+
+/* (LicensePageViewController) Login title */
+"common_login" = "Увійти";
 
 /* (AboutViewController) Logout title */
 "common_logout" = "Вийти";
@@ -405,6 +444,24 @@
 
 /* (ListOfRulesModel) title for export */
 "export" = "Експорт";
+
+/* (UserRulesTableController) - title for editing user rules option  */
+"open_user_rules_editor" = "Відкрити редактор";
+
+/* (UserRulesTableController) - description for Safari user rules in editor  */
+"editor_safari_user_rules_description" = "Додати до користувацьких правил Safari";
+
+/* (UserRulesTableController) - description for allowlist rules in editor  */
+"editor_allowlist_rules_description" = "Додати користувацьке правило до списку дозволів";
+
+/* (UserRulesTableController) - description for inverted allowlist rules in editor  */
+"editor_inverted_allowlist_rules_description" = "Додати користувацьке правило до інвертованого списку дозволів";
+
+/* (UserRulesTableController) - description for DNS allowlist rules in editor  */
+"editor_dns_allowlist_rules_description" = "Додати користувацьке правило до списку DNS-дозволів";
+
+/* (UserRulesTableController) - description for DNS blocklist rules in editor  */
+"editor_dns_blocklist_rules_description" = "Додати користувацьке правило до списку DNS-блокування";
 
 /* (ListOfRulesModel) title for Clear button*/
 "common_clear" = "Очистити";
@@ -496,8 +553,35 @@
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "Додати нове правило";
 
+/* (OneSafariGroupFiltersModel) Add new filter title */
+"add_new_filter" = "Додати фільтр";
+
+/* (OneSafariGroupFiltersModel) Ads filters group description */
+"ads_filters_group_description" = "Фільтри, які видаляють рекламу";
+
+/* (OneSafariGroupFiltersModel) Privacy filters group description */
+"privacy_filters_group_description" = "Фільтри, які запобігають стеженню";
+
+/* (OneSafariGroupFiltersModel) Social Widgets filters group description */
+"social_widgets_filters_group_description" = "Фільтри, які ховають віджети соціальних мереж (кнопки «Поширити» тощо)";
+
+/* (OneSafariGroupFiltersModel) Annoyances filters group description */
+"annoyances_filters_group_description" = "Фільтри, які блокують надокучливі елементи на вебсторінках. Визначення «надокучливості» суб'єктивне та залежить від автора фільтра";
+
+/* (OneSafariGroupFiltersModel) Security filters group description */
+"security_filters_group_description" = "Фільтри, які блокують відомі онлайн-загроз";
+
+/* (OneSafariGroupFiltersModel) Other filters group description */
+"other_filters_group_description" = "Фільтри для різних цілей";
+
+/* (OneSafariGroupFiltersModel) Language Specific filters group description */
+"language_specific_filters_group_description" = "Фільтри, що працюють на сайтах певною мовою";
+
+/* (OneSafariGroupFiltersModel) Custom filters group description */
+"custom_filters_group_description" = "Фільтри, які ви додаєте самостійно";
+
 /* confirm reset lert text */
-"confirm_reset_text" = "Всі параметри, включно з правилами користувача, DNS-захистом, інтерфейсом та авторизацією, будуть скинуті. Цю операцію неможливо скасувати. Скинути параметри?";
+"confirm_reset_text" = "Всі налаштування, зокрема правила користувача, DNS-захист, інтерфейс та авторизація, буде скинуто. Цю операцію не можна буде скасувати. Скинути параметри?";
 
 /* (DnsLogContainerController) reset activity log title */
 "reset_activity_title" = "Скинути журнал активності";
@@ -535,6 +619,9 @@
 /*(NewCustomFilterDetailsController) title for new dns filter */
 "new_dns_filter_title" = "Новий DNS-фільтр";
 
+/* (NewCustomFilterDetailsController) Error message when adding custom filter fails */
+"add_custom_filter_error_message" = "Щось пішло не так, або ж формат вашого власного фільтра неправильний";
+
 /*(NewCustomFilterDetailsController) title for editing custom filter */
 "edit_custom_filter_title" = "Змінити власний фільтр";
 
@@ -548,13 +635,13 @@
 "protection_enabled" = "Захист увімкнено";
 
 /*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Захист Safari та DNS";
+"complex_enabled" = "Захист Safari та DNS-захист увімкнено";
 
 /*(TodayViewController) Safari protection is enabled text  */
-"safari_enabled" = "Блокування вмісту Safari";
+"safari_enabled" = "Захист Safari увімкнено";
 
 /*(TodayViewController) All protection is disabled text  */
-"complex_disabled" = "Всі модулі захисту вимкнено";
+"complex_disabled" = "Захист Safari та DNS-захист вимкнено";
 
 /*(TodayViewController) DNS protection is enabled text  */
 "system_enabled" = "DNS-захист";
@@ -580,6 +667,9 @@
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_notification_title" = "Вимкніть деякі фільтри для правильної роботи";
 
+/* (DnsFiltersTableController) - DNS filters title */
+"dns_filters_title" = "DNS-фільтри";
+
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Заблоковано";
 
@@ -599,25 +689,31 @@
 "dns_request_user_status_added_to_blacklist" = "додано до списку блокування";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "вилучено зі Списку дозволів";
+"dns_request_user_status_removed_from_whitelist" = "видалено зі списку дозволів";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "вилучено зі списку блокування";
+"dns_request_user_status_removed_from_blacklist" = "видалено зі списку блокування";
 
-/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
+/* (OnboardingController) first step text*/
 "onboarding_first_step_text" = "Відкрийте <b>Параметри</b>";
 
-/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "Торкніться <b>Safari</b> та оберіть елемент <b>«Блокувальники вмісту»</b>";
+/* (OnboardingController) first step with advanced protection text*/
+"advanced_protection_onboarding_first_step_text" = "Відкрийте <b>Параметри</b>.";
 
-/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Увімкніть усі блокувальники вмісту</b> та повертайтеся!";
+/* (OnboardingController) second step text */
+"onboarding_second_step_text" = "Виберіть <b>Safari</b>, а потім — <b>Блокувальники вмісту</b>.";
 
-/* (DnsProvidersController) default systen dns server name */
-"default_dns_server_name" = "Системний DNS";
+/* (OnboardingController) second step with advanced protection text */
+"advanced_protection_onboarding_second_step_text" = "Перейдіть до <b>Safari > Розширення</b>.";
 
-/* (DnsProvidersController) default systen dns server description */
-"default_dns_server_description" = "Використовувати усталені системні DNS-сервери, надані вашим інтернет-провайдером";
+/* (OnboardingController) third step text */
+"onboarding_third_step_text" = "<b>Увімкніть</b> усі розширення AdGuard.";
+
+/* (OnboardingController) third step with advanced protection text */
+"advanced_protection_onboarding_third_step_text" = "<b>Увімкніть</b> кожен перемикач для AdGuard. Готово!";
+
+/* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
+"onboarding_fours_step_text" = "Щоб увімкнути <b>Розширений захист</b>, відкрийте Safari, торкніть <b>aA</b> ліворуч від поля адреси, <br><br> %@ <br><br>потім торкніть <b>Керувати розширеннями</b> та увімкніть <b>AdGuard</b>.";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "Блокувати запит";
@@ -640,8 +736,11 @@
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ ще не підтримується в iOS. Спробуйте додати інший сервер.";
 
+/*(DnsFiltersController) the error message that is shown when trying to add a duplicate custom dns server */
+"custom_dns_server_exists" = "Ви спробували додати дублікат DNS-сервера. Сервер з такою адресою уже в списку";
+
 /* (NewDnsServerController) save and select button title */
-"save_and_select_button_title" = "Зберегти й вибрати";
+"save_and_select_button_title" = "Зберегти та обрати";
 
 /* (NewDnsServerController) save button title */
 "save_button_title" = "Зберегти";
@@ -730,35 +829,11 @@
 /* (BugReportController) Message when bug report failed */
 "bug_report_failed_message" = "Не вдалося відправити звіт про помилку, повторіть спробу";
 
-/* (BugReportController) Message when leaving feedback failed */
-"feedback_failed_message" = "Не вдалося надіслати відгук, спробуйте знову";
-
 /* (BugReportController) Message when bug report successed */
 "bug_report_successed_message" = "Ваш звіт про помилку успішно надіслано!";
 
-/* (BugReportController) Message when feedback leaving successed */
-"feedback_successed_message" = "Ваш відгук успішно надіслано!";
-
-/* (BugReportController) title for bug report */
-"bug_report_title" = "Повідомити про помилку";
-
-/* (BugReportController) title for leaving feedback */
-"leave_feedback_title" = "Залишити відгук";
-
-/* (BugReportController) description for bug report */
-"bug_report_description" = "Будь ласка, додайте опис проблеми (чи проблема з'явилася після оновлення?), а також інформацію про інші встановлені програми (VPN, антивірус, розширення тощо)";
-
-/* (BugReportController) description for leaving feedback */
-"leave_feedback_description_format" = "Розкажіть нам про свої враження від %@ — що вам подобається, а що ні, які функції ви хотіли б запропонувати";
-
-/* (BugReportController) button title for bug report */
-"bug_report_button_title" = "Надіслати звіт";
-
-/* (BugReportController) button title for leaving feedback */
-"leave_feedback_button_title" = "Надіслати відгук";
-
 /* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "Я приймаю <a href=%2$@>Ліцензійну угоду з кінцевим користувачем</a> та <a href=%1$@>Політику приватності</a>.";
+"introduction_license_agreement" = "Я приймаю <a href=%2$@>Ліцензійну угоду</a> та <a href=%1$@>Політику приватності</a> AdGuard.";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Запити";
@@ -806,13 +881,80 @@
 "native_dns_setup_title" = "Увімкніть %@ в системних параметрах DNS";
 
 /* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
-"native_dns_setup_description" = "Щоб увімкнути вбудований DNS, вам необхідно відкрити <b>Параметри системи</b>, перейти до <b>VPN і мережа > DNS</b>, та вибрати там <b>%@</b>.";
+"native_dns_setup_description" = "Щоб увімкнути вбудований DNS, виберіть <b>%@</b> у системних <b>Параметрах > Загальні > VPN і мережа > DNS</b>.";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name; String for iOS 15 and newer */
+"native_dns_setup_description_ios15" = "Щоб використовувати вбудований DNS, виберіть <b>%@</b> у системних <b>Параметрах > Загальні > VPN і керування пристроями > DNS</b>.";
 
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Розкажіть нам чи задоволені ви роботою блокування реклами";
 
 /* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
 "rate_app_problem_description" = "Упевніться, що ви використовуєте <b>браузер Safari.</b><br> Наразі технічно неможливо блокувати рекламу в інших браузерах.<br> Відкрийте параметри захисту Safari та увімкніть всі необхідні списки фільтрів.<br> Перезапустіть Safari: вийдіть та відкрийте знову.";
+
+/* (FilterDetailsViewController) Version subtitle for detailed filter info */
+"detailed_filter_info_version_subtitle" = "Версія";
+
+/* (FilterDetailsViewController) Updated subtitle for detailed filter info */
+"detailed_filter_info_updated_subtitle" = "Оновлено";
+
+/* (FilterDetailsViewController) Rules count subtitle for detailed filter info */
+"detailed_filter_info_rules_count_subtitle" = "Кількість правил";
+
+/* (FilterDetailsViewController) Website subtitle for detailed filter info */
+"detailed_filter_info_website_subtitle" = "Вебсайт";
+
+/* (FilterDetailsViewController) Subscription URL subtitle for detailed filter info */
+"detailed_filter_info_subscription_subtitle" = "URL-адреса підписки";
+
+/* (AddRuleController) Error description when adding rule that already exists */
+"user_rule_exists_error" = "Ви намагаєтесь додати правило, яке уже в списку";
+
+// MARK: - Strings for UserRulesRedirectController
+/* (UserRulesRedirectController) - Processing state title */
+
+"user_rules_processing_title" = "Обробка...";
+
+/* (UserRulesRedirectController) - Processing state description */
+"user_rules_processing_descr" = "Зачекайте, будь ласка...";
+
+/* (UserRulesRedirectController) - Description when allowlist rule is removed; %@ stands for 'allowlist' word hex color */
+"user_rules_allowlist_rule_removed" = "видалено з <u style=color:%@>списку дозволів</u>";
+
+/* (UserRulesRedirectController) - Description when new allowlist rule is added; %@ stands for 'allowlist' word hex color */
+"user_rules_allowlist_rule_added" = "додано до <u style=color:%@>списку дозволів</u>";
+
+/* (UserRulesRedirectController) - Description when blocklist rule is added; %@ stands for 'user rules' words hex color */
+"user_rules_blocklist_rule_added" = "нове правило блокування в <u style=color:%@>правилах користувача</u>";
+
+/* (UserRulesRedirectController) - Description when blocklist rules are removed */
+"user_rules_blocklist_rules_removed" = "немає правил користувача";
+
+// MARK: - Strings for license screen
+/* (PremiumFeature) - Advanced protection premium feature name */
+
+"advanced_protection_feature_name" = "Розширений захист";
+
+/* (PremiumFeature) -  Security filters premium feature name */
+"security_filters_feature_name" = "Фільтри безпеки ";
+
+/* (PremiumFeature) - DNS privacy premium feature name */
+"dns_privacy_feature_name" = "DNS-приватність";
+
+/* (PremiumFeature) - Custom filters premium feature name */
+"custom_filters_feature_name" = "Спеціальні фільтри";
+
+/* (PremiumFeature) - Advanced protection premium feature description */
+"advanced_protection_feature_description" = "Підтримка користувацьких скриптів, блокування реклами на YouTube в Safari тощо";
+
+/* (PremiumFeature) - Security filters premium feature description */
+"security_filters_feature_description" = "Блокування фішингу та зловмисних програм";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "Блокуйте DNS-запити локально та тримайте особисті дані під контролем";
+
+/* (PremiumFeature) - Custom filters premium feature description */
+"custom_filters_feature_description" = "Використовуйте сторонні фільтри або ж створюйте власні";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -857,6 +999,8 @@
 /* (MainPageController) saved data size for VoiceOver*/
 "elapsed_time_voiceover" = "Середній час обробки DNS-запиту";
 
+/* (AGSearchView) Placeholder text for search bar */
+"search_view_placeholder" = "Пошук";
 
 // MARK: - SystemProtectionEnablerController
 /* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
@@ -956,21 +1100,62 @@
 "block_youtube_ads_instructions" = "А ви знали, що YouTube змінив свої алгоритми, щоб показувати більше реклами?<br><br>І тепер, щоб блокувати її, вам треба:<br><br>1. Відкрити <a href=\"%@\">youtube.com</a> у Safari.<br><br>2. Натиснути %@ «Поділитись».<br><br>3. Обрати «Блокувати рекламу YouTube (з AdGuard)».";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
-"block_youtube_ads_instructions_done_text_safari" = "Готово! Тепер вы можете переглядати YouTube без реклами.\n\nКоли розширення увімкнено, поруч з логотипом YouTube буде «з AdGuard».<br><br><b>Якщо ви перезавантажите сторінку, необхідно буде повторити кроки 3 та 4 знову.</b>";
+"block_youtube_ads_instructions_done_text_safari" = "Готово! Тепер вы можете дивитись YouTube без реклами.\n\nКоли розширення увімкнено, поруч з логотипом YouTube буде «з AdGuard».<br><br><b>Якщо ви перезавантажите сторінку, необхідно повторити кроки 3 та 4 знову.</b>";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
-"block_youtube_ads_instructions_done_text" = "Готово! Тепер вы можете переглядати YouTube без реклами.\n\nКоли розширення увімкнено, поруч з логотипом YouTube буде «з AdGuard».<br><br><b>Якщо ви перезавантажите сторінку, необхідно буде повторити кроки 2 та 3 знову.</b>";
+"block_youtube_ads_instructions_done_text" = "Готово! Тепер вы можете переглядати YouTube без реклами.\n\nКоли розширення увімкнено, поруч з логотипом YouTube буде «з AdGuard».<br><br><b>Якщо ви перезавантажите сторінку, необхідно повторити кроки 2 та 3 знову.</b>";
 
 // MARK: - YouTubeAdsRequestHandler
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
 
-"youtube_script_success_title" = "Тепер YouTube без реклами! Проте після перезавантаження сторінки необхідно знову запустити це розширення";
+"youtube_script_success_title" = "Тепер YouTube без реклами! Проте після перезавантаження сторінки необхідно знову запустити це розширення.";
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
-"youtube_script_wrong_domain_title" = "Це розширення слід запускати лише на YouTube";
+"youtube_script_wrong_domain_title" = "Це розширення слід запускати лише на YouTube.";
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
 "youtube_script_already_executed_title" = "Це розширення вже виконується";
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
-"youtube_script_error_title" = "Під час виделення реклами на YouTube трапилась невідома помилка";
+"youtube_script_error_title" = "Під час видалення реклами на YouTube трапилась невідома помилка";
+
+// MARK: - ActionExtensionMainController
+/* (ActionExtensionMainController) - ActionExtension info for iOS 15>= */
+
+"action_extension_obsolete_info" = "Це розширення AdGuard застаріло. В меню «аА» ви знайдете нове розширення AdGuard. Щоб почати користуватись ним, торкніть «аА», потім торкніть «Керувати розширеннями» та увімкніть AdGuard.";
+
+/* (ActionExtensionMainController) - ActionExtension info for iOS 14<= */
+"action_extension_new_version_info" = "Доступна нова версія розширення для iOS 15. Вона має більше можливостей та покращений інтерфейс. Не забудьте оновитись!";
+
+/* (BackgroundFetchController) - Background app refresh default title */
+"background_fetch_default_period" = "Усталений інтервал";
+
+/* (BackgroundFetchController) - Background app refresh every 1 hour title */
+"background_fetch_hour_period" = "Щогодини";
+
+/* (BackgroundFetchController) - Background app refresh every 3 hours title */
+"background_fetch_tree_hours_period" = "Що 3 години";
+
+/* (BackgroundFetchController) - Background app refresh every 12 hours title */
+"background_fetch_twelve_hours_period" = "Що 12 годин";
+
+/* (BackgroundFetchController) - Background app refresh every 24 hours title */
+"background_fetch_twenty_four_hours_period" = "Що 24 години";
+
+/* Background app refresh time title */
+"background_app_refresh_time_title" = "Інтервал оновлення програми";
+
+/* (DnsProvidersController) - add new dns server title */
+"add_custom_dns_server_title" = "Додати власний DNS-сервер";
+
+/* (DnsProvidersController) - Header title */
+"dns_provider_controller_title" = "DNS-сервер";
+
+/* (DnsProvidersController) - Header description */
+"dns_provider_controller_description" = "Ви можете покращити приватність в інтернеті, зашифрувавши DNS-трафік. Для цього виберіть один із рекомендованих DNS-провайдерів.";
+
+/* (DnsProviderDetailsController) Server title */
+"server_title" = "Сервер";
+
+/* (DnsProviderDetailsController) Website title */
+"website_title" = "Вебсайт";

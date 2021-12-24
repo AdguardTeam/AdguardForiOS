@@ -1,0 +1,136 @@
+{
+    "extension_name": {
+        "message": "AdGuard"
+    },
+    "extension_description": {
+        "message": "AdGuard Safari Web Eklentisi"
+    },
+    "popup_action_safari_protection_title": {
+        "message": "Safari koruması",
+        "description": "TEXT MAX LENGTH: 25"
+    },
+    "popup_action_safari_protection_description_enabled_for_site": {
+        "message": "bu site için etkinleştirildi",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_safari_protection_description_disabled_for_site": {
+        "message": "bu site için devre dışı bırakıldı",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_safari_protection_description_disabled": {
+        "message": "koruma devre dışı",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_status_desc_enabled": {
+        "message": "koruma etkin",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_status_desc_disabled": {
+        "message": "koruma devre dışı",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_block_element": {
+        "message": "Bu sayfadaki öğeleri engelle",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_delete_user_rules": {
+        "message": "Bu site için tüm kullanıcı kurallarını sil",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_insufficient_permissions": {
+        "message": "Kısıtlı izinler",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_starting": {
+        "message": "koruma etkinleştiriliyor...",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_allowlisted": {
+        "message": "izin listesine eklendi",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_allowlisted_inverted": {
+        "message": "izin listesine eklendi (ters çevrilmiş)",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_basic_only": {
+        "message": "sadece temel koruma",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_modal_all_sites_allowed_title": {
+        "message": "Üst düzey koruma",
+        "description": "TEXT MAX LENGTH: 25"
+    },
+    "popup_modal_all_sites_allowed_desc": {
+        "message": "Aferin! AdGuard, neredeyse tüm reklamları engelleyecek ve en zor meydan okumalarla yüzleşecektir.",
+        "description": "TEXT MAX LENGTH: 140"
+    },
+    "popup_modal_all_sites_allowed_button": {
+        "message": "Devam et",
+        "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_modal_not_all_sites_allowed_title": {
+        "message": "Seçici koruma",
+        "description": "TEXT MAX LENGTH: 25"
+    },
+    "popup_modal_not_all_sites_allowed_desc": {
+        "message": "AdGuard'ı yalnızca birkaç site için etkinleştirdiniz. AdGuard'a daha fazla izin vermediğiniz sürece, reklamlar diğer sitelerde görünebilir. <a>Daha fazla okuyun<\/a>",
+        "description": "TEXT MAX LENGTH: 140"
+    },
+    "popup_modal_not_all_sites_allowed_button": {
+        "message": "Devam et",
+        "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_modal_advanced_blocking_disabled_title": {
+        "message": "Gelişmiş koruma devre dışı bırakıldı",
+        "description": "TEXT MAX LENGTH: 40"
+    },
+    "popup_modal_advanced_blocking_disabled_description": {
+        "message": "Gelişmiş engelleme kuralları ve diğer genişletilmiş özellikler kullanılamaz. <a>Daha fazla okuyun<\/a>",
+        "description": "TEXT MAX LENGTH: 85"
+    },
+    "popup_modal_advanced_blocking_disabled_button": {
+        "message": "Etkinleştir",
+        "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_modal_title_free": {
+        "message": "Tam potansiyelinize ulaşın",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_modal_desc_free": {
+        "message": "AdGuard Premium'da bulunan gelişmiş korumadan hâlâ yoksunsunuz. Daha da karmaşık reklamları ve izleyicileri engelleyelim mi?",
+        "description": "TEXT MAX LENGTH: 140"
+    },
+    "popup_modal_btn_free": {
+        "message": "Yükselt",
+        "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_fullscreen_support_title": {
+        "message": "Yardıma mı ihtiyacınız var?",
+        "description": "TEXT MAX LENGTH: 28"
+    },
+    "popup_fullscreen_support_desc": {
+        "message": "Bir sorun mu var? Bir çözümümüz olabilir.",
+        "description": "TEXT MAX LENGTH: 45"
+    },
+    "popup_protection_disabled_support_desc": {
+        "message": "Bu site için koruma devre dışı bırakıldı. Bir sorun mu var? Bir çözümümüz olabilir.",
+        "description": "TEXT MAX LENGTH: 85"
+    },
+    "popup_support_button_text": {
+        "message": "Bir sorun bildir",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "modal_protection_off_title": {
+        "message": "AdGuard'ı etkinleştir",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "modal_protection_off_settings": {
+        "message": "<b>Ayarları<\/b> açın",
+        "description": "TEXT MAX LENGTH: 28"
+    },
+    "modal_protection_off_extensions": {
+        "message": "<b>Safari'ye<\/b> dokunun, aşağı kaydırın ve <b>Eklentiler'e<\/b> dokunun",
+        "description": "TEXT MAX LENGTH: 56"
+    }
+}

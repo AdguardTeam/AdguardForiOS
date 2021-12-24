@@ -13,9 +13,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Met een 1-daagse gratis proefversie starten</string>
+        <string>Abonneer en ontvang een gratis proefperiode van één dag</string>
         <key>other</key>
-        <string>Met een %d-daagse gratis proefversie starten</string>
+        <string>Abonneer en ontvang een gratis proefperiode van %d dagen</string>
       </dict>
     </dict>
     <key>trial_description_weeks</key>
@@ -29,9 +29,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Met een 1-week gratis proefversie starten</string>
+        <string>Abonneer en ontvang een gratis proefperiode van één week</string>
         <key>other</key>
-        <string>Met een %d-weken gratis proefversie starten</string>
+        <string>Abonneer en ontvang een gratis proefperiode van %d weken</string>
       </dict>
     </dict>
     <key>trial_description_months</key>
@@ -45,9 +45,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Met een 1-maand gratis proefversie starten </string>
+        <string>Abonneer en ontvang een gratis proefperiode van één maand</string>
         <key>other</key>
-        <string>Met een %d-maanden gratis proefversie starten </string>
+        <string>Abonneer en ontvang een gratis proefperiode van %d maanden</string>
       </dict>
     </dict>
     <key>trial_description_years</key>
@@ -61,9 +61,9 @@
         <key>NSStringFormatValueTypeKey</key>
         <string>d</string>
         <key>one</key>
-        <string>Met een 1-jaar gratis proefversie starten </string>
+        <string>Abonneer en ontvang een gratis proefperiode van één jaar</string>
         <key>other</key>
-        <string>Met een %d-jaren gratis proefversie starten </string>
+        <string>Abonneer en ontvang een gratis proefperiode van %d jaren</string>
       </dict>
     </dict>
     <key>user_rules_format</key>
@@ -160,70 +160,6 @@
         <string>1 jaar volledig gratis toegang</string>
         <key>other</key>
         <string>%d jaar volledig gratis toegang</string>
-      </dict>
-    </dict>
-    <key>trial_period_days</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@days@</string>
-      <key>days</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Een dag</string>
-        <key>other</key>
-        <string>%d dagen</string>
-      </dict>
-    </dict>
-    <key>trial_period_weeks</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@weeks@</string>
-      <key>weeks</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Een week</string>
-        <key>other</key>
-        <string>%d weken</string>
-      </dict>
-    </dict>
-    <key>trial_period_months</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@months@</string>
-      <key>months</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Een maand</string>
-        <key>other</key>
-        <string>%d maanden</string>
-      </dict>
-    </dict>
-    <key>trial_period_years</key>
-    <dict>
-      <key>NSStringLocalizedFormatKey</key>
-      <string>%#@years@</string>
-      <key>years</key>
-      <dict>
-        <key>NSStringFormatSpecTypeKey</key>
-        <string>NSStringPluralRuleType</string>
-        <key>NSStringFormatValueTypeKey</key>
-        <string>d</string>
-        <key>one</key>
-        <string>Een jaar</string>
-        <key>other</key>
-        <string>%d jaren</string>
       </dict>
     </dict>
   </dict>

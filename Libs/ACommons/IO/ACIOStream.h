@@ -1,20 +1,21 @@
-/**
-    This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © Adguard Software Limited. All rights reserved.
+//
+// This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
+// Copyright © Adguard Software Limited. All rights reserved.
+//
+// Adguard for iOS is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Adguard for iOS is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
+//
 
-    Adguard for iOS is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    Adguard for iOS is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
-*/
 #import <Foundation/Foundation.h>
 #import "ACIOUtilsProtocols.h"
 
@@ -23,7 +24,7 @@
 #define ACIOStreamErrorException            @"ACIOStreamErrorException"
 
 enum{
-    
+
     ACIO_ERROR =  -1,
     ACIO_EOF
 };
@@ -44,7 +45,7 @@ enum{
 - (NSInteger)read:(uint8_t *)buffer maxLength:(NSUInteger)len stream:(ACIOStream *)stream;
 /**
     Writes the contents of a provided data buffer to the receiver.
- 
+
     @return Method must return the number of bytes actually written, or ACIO_ERROR constant if an error occurs. If the receiver is a fixed-length and has reached its capacity, method must return ACIO_EOF constant.
  */
 - (NSInteger)write:(const uint8_t *)buffer maxLength:(NSUInteger)len stream:(ACIOStream *)stream;
@@ -58,7 +59,7 @@ enum{
  *  All work is performed through delegate, which conform ACIOStreamDelegate protocol
  */
 @interface ACIOStream : NSObject <ACIOUtilReadProtocol, ACIOUtilWriteProtocol>{
-    
+
     NSLock *_counterWrittenBytesLocker;
 }
 
@@ -89,9 +90,9 @@ enum{
 
 /**
     Writes the bytes from the specified buffer to the stream up to len bytes.
-    Returns the number of bytes actually written, 
-    or ACIO_ERROR constant if an error occurs. 
-    If the receiver is a fixed-length and has reached its capacity, 
+    Returns the number of bytes actually written,
+    or ACIO_ERROR constant if an error occurs.
+    If the receiver is a fixed-length and has reached its capacity,
     ACIO_EOF constant is returned.
  */
 - (NSInteger)write:(const uint8_t *)buffer maxLength:(NSUInteger)len;

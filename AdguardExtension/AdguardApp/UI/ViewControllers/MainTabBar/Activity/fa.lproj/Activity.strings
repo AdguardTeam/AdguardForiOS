@@ -1,3 +1,24 @@
 
-/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "6xN-ij-jJj"; */
-"6xN-ij-jJj.normalTitle" = "ارزیابی رایگان";
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "1rj-wD-aeH"; */
+"1rj-wD-aeH.normalTitle" = "افزودن";
+
+/* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "7mk-7J-iLD"; Note = "(AddCustomFilterController) cancel button"; */
+"7mk-7J-iLD.normalTitle" = "ويرايش";
+
+/* Class = "UIButton"; normalTitle = "Enable"; ObjectID = "XYE-JT-WSH"; */
+"XYE-JT-WSH.normalTitle" = "فعالسازي";
+
+/* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "ae4-WL-0pQ"; */
+"ae4-WL-0pQ.text" = "فیلترهای امنیتی، حریم خصوصی DNS، فیلترهای سفارشی و غیره";
+
+/* Class = "UILabel"; text = "Status"; ObjectID = "ckn-Oh-2aa"; */
+"ckn-Oh-2aa.text" = "وضعیت";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "hoI-YR-JcD"; Note = "(AddCustomFilterController) cancel button"; */
+"hoI-YR-JcD.normalTitle" = "قبلی";
+
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "l5B-oj-DnW"; */
+"l5B-oj-DnW.normalTitle" = "افزودن";
+
+/* Class = "UILabel"; text = "Request details"; ObjectID = "uni-H6-XNc"; */
+"uni-H6-XNc.text" = "جزئیات درخواست";

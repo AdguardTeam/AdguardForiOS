@@ -1,3 +1,6 @@
+/* Class = "UILabel"; text = "premium"; ObjectID = "7ma-TB-Yab"; */
+"7ma-TB-Yab.text" = "premium";
+
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "884-Hm-mb6"; */
 "884-Hm-mb6.text" = "Safari-beskyttelse";
 
@@ -18,6 +21,9 @@
 
 /* Class = "UILabel"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "Gratis";
+
+/* Class = "UIButton"; normalTitle = "Purchase license"; ObjectID = "pv0-hE-9gb"; */
+"pv0-hE-9gb.normalTitle" = "Kjøp lisens";
 
 /* Class = "UILabel"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
 "vNo-hV-l4c.text" = "Ikke installert";

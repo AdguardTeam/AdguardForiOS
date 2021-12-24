@@ -1,0 +1,140 @@
+{
+    "extension_name": {
+        "message": "AdGuard"
+    },
+    "extension_description": {
+        "message": "AdGuard Safari Web機能拡張"
+    },
+    "popup_action_safari_protection_title": {
+        "message": "Safariでブロック",
+        "description": "TEXT MAX LENGTH: 25"
+    },
+    "popup_action_safari_protection_description_enabled_for_site": {
+        "message": "このサイトに対して有効です",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_safari_protection_description_disabled_for_site": {
+        "message": "このサイトに対して無効です",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_safari_protection_description_disabled": {
+        "message": "OFF",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_status_desc_enabled": {
+        "message": "AdGuardによるフル保護が有効です",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_status_desc_disabled": {
+        "message": "保護はオフです",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_block_element": {
+        "message": "このページで要素をブロック",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_delete_user_rules": {
+        "message": "このサイトに対するユーザールールを削除する",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_insufficient_permissions": {
+        "message": "アクセス権限が制限されています",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_starting": {
+        "message": "保護を有効化中...",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_allowlisted": {
+        "message": "ホワイトリストに追加されています",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_allowlisted_inverted": {
+        "message": "逆ホワイトリストに追加済み",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_basic_only": {
+        "message": "基本レベル保護のみ",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_modal_all_sites_allowed_title": {
+        "message": "フル機能が有効になりました",
+        "description": "TEXT MAX LENGTH: 25"
+    },
+    "popup_modal_all_sites_allowed_desc": {
+        "message": "これで、AdGuardはほぼすべての広告をブロックし、困難なケースにも対応します。",
+        "description": "TEXT MAX LENGTH: 140"
+    },
+    "popup_modal_all_sites_allowed_button": {
+        "message": "次へ",
+        "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_modal_not_all_sites_allowed_title": {
+        "message": "保護が一部無効になっています",
+        "description": "TEXT MAX LENGTH: 25"
+    },
+    "popup_modal_not_all_sites_allowed_desc": {
+        "message": "ユーザ様はいくつかのウェブサイトに対してのみAdGuardを有効にしています。AdGuardにさらなる許可を与えない限り、他のウェブサイトで広告が表示される可能性があります。<a>詳しくはこちら<\/a>",
+        "description": "TEXT MAX LENGTH: 140"
+    },
+    "popup_modal_not_all_sites_allowed_button": {
+        "message": "次へ",
+        "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_modal_advanced_blocking_disabled_title": {
+        "message": "高度な保護機能はオフになっています",
+        "description": "TEXT MAX LENGTH: 40"
+    },
+    "popup_modal_advanced_blocking_disabled_description": {
+        "message": "高度な広告ブロックルールとその他の追加機能は無効になっています。<a>詳しくはこちら<\/a>",
+        "description": "TEXT MAX LENGTH: 85"
+    },
+    "popup_modal_advanced_blocking_disabled_button": {
+        "message": "オンにする",
+        "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_modal_title_free": {
+        "message": "フル機能の効果を実感しよう",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_modal_desc_free": {
+        "message": "AdGuardプレミアムでご利用いただけるより強力な保護がまだオフになっております。SafariでのYouTube広告など、より複雑な広告や個人情報追跡をブロックしませんか？",
+        "description": "TEXT MAX LENGTH: 140"
+    },
+    "popup_modal_btn_free": {
+        "message": "アップグレード",
+        "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_fullscreen_support_title": {
+        "message": "お困りの点ございますか？",
+        "description": "TEXT MAX LENGTH: 28"
+    },
+    "popup_fullscreen_support_desc": {
+        "message": "不具合などがある場合、ご報告いただければ対応いたします。",
+        "description": "TEXT MAX LENGTH: 45"
+    },
+    "popup_protection_disabled_support_desc": {
+        "message": "このサイトに対する保護はオフになっています。AdGuardオン時に何か問題がある場合、ご報告いただければ対応いたします。",
+        "description": "TEXT MAX LENGTH: 85"
+    },
+    "popup_support_button_text": {
+        "message": "問題を報告する",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "modal_protection_off_title": {
+        "message": "AdGuardを有効にする方法",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "modal_protection_off_settings": {
+        "message": "<b>設定<\/b>アプリを開く",
+        "description": "TEXT MAX LENGTH: 28"
+    },
+    "modal_protection_off_extensions": {
+        "message": "「<b>Safari<\/b>」をタップし、下にスワイプして「<b>機能拡張<\/b>」をタップ",
+        "description": "TEXT MAX LENGTH: 56"
+    },
+    "modal_protection_off_switch": {
+        "message": "すべてのAdGuardコンテンツブロッカーを<b>オン<\/b>にしてください。",
+        "description": "TEXT MAX LENGTH: 28"
+    }
+}

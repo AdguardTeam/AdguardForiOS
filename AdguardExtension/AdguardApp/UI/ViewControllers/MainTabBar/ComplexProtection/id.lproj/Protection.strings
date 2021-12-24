@@ -1,5 +1,11 @@
+/* Class = "UILabel"; text = "premium"; ObjectID = "7ma-TB-Yab"; */
+"7ma-TB-Yab.text" = "premium";
+
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "884-Hm-mb6"; */
 "884-Hm-mb6.text" = "Proteksi Safari";
+
+/* Class = "UILabel"; text = "AdGuard VPN"; ObjectID = "Hnw-bh-Bgh"; */
+"Hnw-bh-Bgh.text" = "AdGuard VPN";
 
 /* Class = "UILabel"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "premium";
@@ -9,6 +15,15 @@
 
 /* Class = "UILabel"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "gratis";
+
+/* Class = "UIButton"; normalTitle = "Purchase license"; ObjectID = "pv0-hE-9gb"; */
+"pv0-hE-9gb.normalTitle" = "Beli lisensi";
+
+/* Class = "UILabel"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
+"vNo-hV-l4c.text" = "Belum terpasang";
+
+/* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "vlx-BS-A2y"; */
+"vlx-BS-A2y.text" = "Blokir iklan dan pelacakan pada situs yang dibuka di Safari";
 
 /* Class = "UILabel"; text = "Protection"; ObjectID = "wyK-CX-EwT"; */
 "wyK-CX-EwT.text" = "Perlindungan";

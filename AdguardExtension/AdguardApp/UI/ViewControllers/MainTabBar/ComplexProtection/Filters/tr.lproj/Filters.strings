@@ -1,6 +1,3 @@
-/* Class = "UILabel"; text = "Add a filter"; ObjectID = "2wy-vg-qvr"; */
-"2wy-vg-qvr.text" = "Filtre ekle";
-
 /* Class = "UILabel"; text = "Add a filter"; ObjectID = "3WM-jW-br8"; */
 "3WM-jW-br8.text" = "Filtre ekle";
 
@@ -10,7 +7,7 @@
 /* Class = "UILabel"; text = "Name:"; ObjectID = "Cyn-cw-Zrm"; */
 "Cyn-cw-Zrm.text" = "İsim:";
 
-/* Class = "UILabel"; text = "AdGuard doesn’t work on the sites from this list"; ObjectID = "Gg8-4u-qvU"; */
+/* Class = "UILabel"; text = "AdGuard is disabled for the websites from this list"; ObjectID = "Gg8-4u-qvU"; */
 "Gg8-4u-qvU.text" = "AdGuard bu listedeki sitelerde çalışmıyor";
 
 /* Class = "UILabel"; text = "Filters"; ObjectID = "Lq2-mi-McV"; */
@@ -19,11 +16,8 @@
 /* Class = "UILabel"; text = "New custom filter"; ObjectID = "NsT-wt-1hd"; Note = "(New Custom Filter Details)"; */
 "NsT-wt-1hd.text" = "Yeni özel filtre";
 
-/* Class = "UILabel"; text = "Subscription URL:"; ObjectID = "O7x-wu-TBi"; */
-"O7x-wu-TBi.text" = "Abonelik URL'si:";
-
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "OpB-AR-Og7"; Note = "(AddCustomFilterController) cancel button"; */
-"OpB-AR-Og7.normalTitle" = "İPTAL";
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "OpB-AR-Og7"; Note = "(AddCustomFilterController) cancel button"; */
+"OpB-AR-Og7.normalTitle" = "İptal";
 
 /* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "QHZ-sJ-wTL"; */
 "QHZ-sJ-wTL.text" = "Safari'de açılan web sitelerindeki reklamları ve izleyicileri engeller";
@@ -31,44 +25,26 @@
 /* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
 "RJU-32-r8h.text" = "Kural sayısı:";
 
-/* Class = "UILabel"; text = "Updated"; ObjectID = "UR2-d4-zYf"; */
-"UR2-d4-zYf.text" = "Güncellendi";
-
 /* Class = "UILabel"; text = "User rules"; ObjectID = "VCK-db-aeg"; */
 "VCK-db-aeg.text" = "Kullanıcı kuralları";
-
-/* Class = "UILabel"; text = "Website"; ObjectID = "Ve5-DF-RNB"; */
-"Ve5-DF-RNB.text" = "Site";
 
 /* Class = "UILabel"; text = "Filter URL:"; ObjectID = "Z16-OR-tjl"; */
 "Z16-OR-tjl.text" = "Filtre URL'si:";
 
-/* Class = "UILabel"; text = "Version"; ObjectID = "cTI-39-Vwx"; */
-"cTI-39-Vwx.text" = "Sürüm";
-
-/* Class = "UILabel"; text = "Add custom filter lists here"; ObjectID = "eAd-RZ-bHN"; */
-"eAd-RZ-bHN.text" = "Buraya özel filtre listeleri ekleyin";
-
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "f3z-Yh-zY2"; */
 "f3z-Yh-zY2.text" = "İzin listesi";
 
-/* Class = "UIButton"; normalTitle = "ADD"; ObjectID = "kCb-lJ-BLL"; */
-"kCb-lJ-BLL.normalTitle" = "EKLE";
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "kCb-lJ-BLL"; */
+"kCb-lJ-BLL.normalTitle" = "Ekle";
 
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "mEm-ll-QZR"; Note = "(NewCustomFilterDetailsController) CANCEL button"; */
-"mEm-ll-QZR.normalTitle" = "İPTAL";
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "mEm-ll-QZR"; Note = "(NewCustomFilterDetailsController) CANCEL button"; */
+"mEm-ll-QZR.normalTitle" = "İptal";
 
-/* Class = "UILabel"; text = "Filters"; ObjectID = "mTM-IO-iFw"; */
-"mTM-IO-iFw.text" = "Filtreler";
-
-/* Class = "UIButton"; normalTitle = "NEXT"; ObjectID = "nch-wu-mKC"; */
-"nch-wu-mKC.normalTitle" = "SONRAKİ";
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "nch-wu-mKC"; */
+"nch-wu-mKC.normalTitle" = "Sonraki";
 
 /* Class = "UILabel"; text = "Homepage: "; ObjectID = "t8x-PU-hFK"; */
 "t8x-PU-hFK.text" = "Ana sayfa: ";
-
-/* Class = "UILabel"; text = "Rules count:"; ObjectID = "wzJ-ge-NyI"; */
-"wzJ-ge-NyI.text" = "Kural adedi:";
 
 /* Class = "UITextField"; placeholder = "Enter filter name:"; ObjectID = "zcB-eh-Ou4"; Note = "(Add Custom Filter) url hint"; */
 "zcB-eh-Ou4.placeholder" = "Filtre adı girin:";

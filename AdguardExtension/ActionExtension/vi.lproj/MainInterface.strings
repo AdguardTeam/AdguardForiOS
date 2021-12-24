@@ -10,7 +10,7 @@
 /* Class = "UILabel"; text = "Enable on this page"; ObjectID = "eVN-fj-ATQ"; */
 "eVN-fj-ATQ.text" = "Bật trong trang này";
 
-/* Class = "UIButton"; normalTitle = "CLOSE"; ObjectID = "fxW-Cr-iPW"; */
+/* Class = "UIButton"; normalTitle = "Close"; ObjectID = "fxW-Cr-iPW"; */
 "fxW-Cr-iPW.normalTitle" = "Đóng";
 
 /* Class = "UILabel"; text = "Report an issue on this page"; ObjectID = "kuu-kI-Ott"; */

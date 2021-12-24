@@ -1,38 +1,38 @@
-/**
-    This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © Adguard Software Limited. All rights reserved.
- 
-    Adguard for iOS is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
- 
-    Adguard for iOS is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
- 
-    You should have received a copy of the GNU General Public License
-    along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
- */
+//
+// This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
+// Copyright © Adguard Software Limited. All rights reserved.
+//
+// Adguard for iOS is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Adguard for iOS is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
+//
 
 import XCTest
 
 class LoginResponseParserTest: XCTestCase {
-    
+
     var parser: LoginResponseParserProtocol!
-    
+
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         parser = LoginResponseParser()
     }
-    
+
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-    
+
     func testMaxComputer() {
-        
+
         let responseString = """
                                 {
                                     "status":"ERROR",
@@ -41,17 +41,17 @@ class LoginResponseParserTest: XCTestCase {
                                     "expirationDate":1566302768202
                                 }
                              """
-        
+
         guard let data = responseString.data(using: .utf8) else { return XCTFail() }
-        
+
         let (premium, _, error) = parser.processStatusResponse(data: data)
-        
+
         XCTAssertFalse(premium)
         XCTAssertEqual(error?.domain, LoginService.loginErrorDomain)
         XCTAssertEqual(error?.code, LoginService.loginMaxComputersExceeded)
-        
+
     }
-    
+
     func testGetOuathTokenSuccess() {
         let responseString = """
                                {
@@ -61,17 +61,17 @@ class LoginResponseParserTest: XCTestCase {
                                  "scope" : "trust"
                                }
                              """
-        
+
         guard let data = responseString.data(using: .utf8) else { return XCTFail() }
-        
+
         let (token, expiration, error) = parser.processOauthTokenResponse(data: data)
-        
+
         XCTAssertEqual(token, "123-321")
         XCTAssertNotNil(expiration)
         XCTAssertTrue(expiration! > Date(timeIntervalSinceNow: 0))
         XCTAssertNil(error)
     }
-    
+
     func testGetToken2FARequired() {
         let responseString = """
                                {
@@ -80,18 +80,18 @@ class LoginResponseParserTest: XCTestCase {
                                  "error_code" : "2fa_required"
                                }
                              """
-        
+
         guard let data = responseString.data(using: .utf8) else { return XCTFail() }
-        
+
         let (token, expiration, error) = parser.processOauthTokenResponse(data: data)
-        
+
         XCTAssertNil(token)
         XCTAssertNil(expiration)
         XCTAssertNotNil(error)
         XCTAssertEqual(error?.domain, LoginService.loginErrorDomain)
         XCTAssertEqual(error?.code, LoginService.auth2FaRequired)
     }
-    
+
     func testGetTokenBadCredentials() {
         let responseString = """
                                {
@@ -100,18 +100,18 @@ class LoginResponseParserTest: XCTestCase {
                                  "error_code" : "bad_credentials"
                                }
                              """
-        
+
         guard let data = responseString.data(using: .utf8) else { return XCTFail() }
-        
+
         let (token, expiration, error) = parser.processOauthTokenResponse(data: data)
-        
+
         XCTAssertNil(token)
         XCTAssertNil(expiration)
         XCTAssertNotNil(error)
         XCTAssertEqual(error?.domain, LoginService.loginErrorDomain)
         XCTAssertEqual(error?.code, LoginService.loginBadCredentials)
     }
-    
+
     func testGetTokenLocked() {
         let responseString = """
                                {
@@ -120,18 +120,18 @@ class LoginResponseParserTest: XCTestCase {
                                  "error_code" : "account_locked"
                                }
                              """
-        
+
         guard let data = responseString.data(using: .utf8) else { return XCTFail() }
-        
+
         let (token, expiration, error) = parser.processOauthTokenResponse(data: data)
-        
+
         XCTAssertNil(token)
         XCTAssertNil(expiration)
         XCTAssertNotNil(error)
         XCTAssertEqual(error?.domain, LoginService.loginErrorDomain)
         XCTAssertEqual(error?.code, LoginService.accountIsLocked)
     }
-    
+
     func testGetTokenDisabled() {
         let responseString = """
                                {
@@ -140,18 +140,18 @@ class LoginResponseParserTest: XCTestCase {
                                  "error_code" : "account_disabled"
                                }
                              """
-        
+
         guard let data = responseString.data(using: .utf8) else { return XCTFail() }
-        
+
         let (token, expiration, error) = parser.processOauthTokenResponse(data: data)
-        
+
         XCTAssertNil(token)
         XCTAssertNil(expiration)
         XCTAssertNotNil(error)
         XCTAssertEqual(error?.domain, LoginService.loginErrorDomain)
         XCTAssertEqual(error?.code, LoginService.accountIsDisabled)
     }
-    
+
     func testGetTokenInvalide2FAToken() {
         let responseString = """
                                {
@@ -160,18 +160,18 @@ class LoginResponseParserTest: XCTestCase {
                                  "error_code" : "2fa_invalid"
                                }
                              """
-        
+
         guard let data = responseString.data(using: .utf8) else { return XCTFail() }
-        
+
         let (token, expiration, error) = parser.processOauthTokenResponse(data: data)
-        
+
         XCTAssertNil(token)
         XCTAssertNil(expiration)
         XCTAssertNotNil(error)
         XCTAssertEqual(error?.domain, LoginService.loginErrorDomain)
         XCTAssertEqual(error?.code, LoginService.outh2FAInvalid)
     }
-    
+
     func testGetTokenUnknownError() {
         let responseString = """
                                {
@@ -179,11 +179,11 @@ class LoginResponseParserTest: XCTestCase {
                                  "error_description" : "Some Error"
                                }
                              """
-        
+
         guard let data = responseString.data(using: .utf8) else { return XCTFail() }
-        
+
         let (token, expiration, error) = parser.processOauthTokenResponse(data: data)
-        
+
         XCTAssertNil(token)
         XCTAssertNil(expiration)
         XCTAssertNotNil(error)
@@ -192,5 +192,5 @@ class LoginResponseParserTest: XCTestCase {
         XCTAssertNotNil(error?.userInfo)
         XCTAssertEqual(error?.userInfo[LoginService.errorDescription] as? String, "Some Error")
     }
-    
+
 }

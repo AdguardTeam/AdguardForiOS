@@ -1,20 +1,21 @@
-/**
-    This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © Adguard Software Limited. All rights reserved.
+//
+// This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
+// Copyright © Adguard Software Limited. All rights reserved.
+//
+// Adguard for iOS is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Adguard for iOS is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
+//
 
-    Adguard for iOS is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    Adguard for iOS is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
-*/
 #import <Foundation/Foundation.h>
 
 @interface ACFFileUtils : NSObject
@@ -52,25 +53,25 @@
 
 /**
     Finds file by name in specified directory including subdirectories.
- 
+
     @param fileName         Filename for search. May be wildcard pattern.
     @param directoryToScan  The location of the directory that defines start point of search.
     @param level            Level of nesting. Set to 0 for infinity.
- 
-    @return                 Array of NSURL objects that point to files. 
+
+    @return                 Array of NSURL objects that point to files.
                             If files not found returns empty array.
  */
 + (NSArray *)findFileByName:(NSString *)fileName inDirectory:(NSURL *)directoryToScan level:(NSUInteger)level;
 
 /**
     Finds file Url by name in specified directory including subdirectories.
- 
+
     @param fileName         Filename or folder for search. May be wildcard pattern.
     @param directoryToScan  The location of the directory that defines start point of search.
     @param level            Level of nesting. Set to 0 for infinity.
     @param ignoreDirectory  Not include in returned array Url for directory.
 
-    @return                 Array of NSURL objects that point to files. 
+    @return                 Array of NSURL objects that point to files.
                             If files not found returns empty array.
  */
 + (NSArray *)findUrlByName:(NSString *)fileName inDirectory:(NSURL *)directoryToScan level:(NSUInteger)level ignoreDirectory:(BOOL)ignoreDirectory;

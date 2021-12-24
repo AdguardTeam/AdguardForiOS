@@ -1,0 +1,113 @@
+.action {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 60px;
+    overflow: hidden;
+    padding: 0 16px;
+    transition: background-color var(--t3);
+
+    &-label {
+        display: block;
+    }
+
+    &--disable {
+        opacity: 0.4;
+        pointer-events: none;
+    }
+
+    &:focus,
+    &:active {
+        background-color: var(--gray100);
+    }
+
+    &__icon {
+        flex-shrink: 0;
+        margin-right: 16px;
+        border-radius: 100%;
+        overflow: hidden;
+    }
+
+    &__title,
+    &__description {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__title {
+        line-height: 19px;
+        font-size: 16px;
+
+        &--bold {
+            font-weight: 700;
+        }
+
+        &--light {
+            font-weight: 400;
+            font-size: 14px;
+        }
+    }
+
+    &__description {
+        line-height: 17px;
+
+        &--yellow {
+            color: var(--yellow);
+        }
+
+        &--gray {
+            color: var(--gray700);
+        }
+
+        &--green {
+            color: var(--green);
+        }
+    }
+
+    &__checkbox {
+        position: absolute;
+        cursor: pointer;
+        right: 47px;
+
+
+        &:after {
+            content: "";
+            position: absolute;
+            left: -6px;
+            top: -6px;
+            width: 48px;
+            height: 28px;
+            background-color: var(--gray700);
+            border-radius: 16px;
+        }
+
+        &:before {
+            content: "";
+            width: 26px;
+            height: 26px;
+            background-color: var(--white);
+            z-index: 1;
+            border-radius: 100%;
+            position: absolute;
+            left: -5px;
+            top: -5px;
+        }
+
+        &:checked {
+            &:after {
+                background-color: var(--green);
+            }
+
+            &:before {
+                left: 15px;
+            }
+        }
+    }
+
+    &__details {
+        min-width: 0;
+        padding-right: 16px
+    }
+}

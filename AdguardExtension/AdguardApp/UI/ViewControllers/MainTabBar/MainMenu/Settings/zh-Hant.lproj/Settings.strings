@@ -16,7 +16,7 @@
 /* Class = "UILabel"; text = "Incompatible with other VPN apps, unstable"; ObjectID = "8jT-85-XFp"; */
 "8jT-85-XFp.text" = "與其它的 VPN 應用程式不相容，不穩定的";
 
-/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "95J-h1-QgG"; */
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "95J-h1-QgG"; */
 "95J-h1-QgG.normalTitle" = "儲存";
 
 /* Class = "UILabel"; text = "Delete VPN profile"; ObjectID = "9hH-ca-VHY"; */
@@ -34,7 +34,7 @@
 /* Class = "UILabel"; text = "Content blockers"; ObjectID = "BQY-q7-BQU"; */
 "BQY-q7-BQU.text" = "內容阻擋器";
 
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "Dfm-If-1AX"; Note = "(AddCustomFilterController) cancel button"; */
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "Dfm-If-1AX"; Note = "(AddCustomFilterController) cancel button"; */
 "Dfm-If-1AX.normalTitle" = "取消";
 
 /* Class = "UILabel"; text = "Blocking mode"; ObjectID = "ESe-CM-On1"; */
@@ -68,16 +68,13 @@
 "Jnb-4w-9NY.text" = "這將實際上刪除您的 VPN 設定檔並禁用 DNS 防護";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "Lig-ju-iTI"; */
-"Lig-ju-iTI.text" = "進階的設定";
+"Lig-ju-iTI.text" = "進階設定";
 
 /* Class = "UILabel"; text = "Block IPv6"; ObjectID = "NC2-8A-E6f"; */
 "NC2-8A-E6f.text" = "封鎖 IPv6";
 
-/* Class = "UILabel"; text = "You have 6 content blockers, each of them can contain up to 50,000 rules"; ObjectID = "ObO-g4-VHL"; */
-"ObO-g4-VHL.text" = "您有 6 個內容阻擋器，它們每個可包含高達 50,000 項規則";
-
 /* Class = "UILabel"; text = "Advanced mode"; ObjectID = "Ory-8I-Ih0"; */
-"Ory-8I-Ih0.text" = "進階的模式";
+"Ory-8I-Ih0.text" = "進階模式";
 
 /* Class = "UILabel"; text = "Reset statistics"; ObjectID = "QEc-dY-TtB"; */
 "QEc-dY-TtB.text" = "重置統計資料";
@@ -94,7 +91,7 @@
 /* Class = "UITableViewSection"; headerTitle = "Theme"; ObjectID = "Vtx-vp-WIV"; */
 "Vtx-vp-WIV.headerTitle" = "主題";
 
-/* Class = "UIButton"; normalTitle = "CANCEL"; ObjectID = "WUY-Cq-SPm"; Note = "(AddCustomFilterController) cancel button"; */
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "WUY-Cq-SPm"; Note = "(AddCustomFilterController) cancel button"; */
 "WUY-Cq-SPm.normalTitle" = "取消";
 
 /* Class = "UILabel"; text = "Auto-update over Wi-Fi only"; ObjectID = "X0A-gU-hzf"; */
@@ -125,7 +122,7 @@
 "dsw-Ub-m4M.text" = "以 NXDOMAIN 碼回覆";
 
 /* Class = "UILabel"; text = "Advanced settings"; ObjectID = "eIa-RB-Phv"; */
-"eIa-RB-Phv.text" = "進階的設定";
+"eIa-RB-Phv.text" = "進階設定";
 
 /* Class = "UILabel"; text = "Full-Tunnel (without VPN icon)"; ObjectID = "eiP-yl-Xb3"; */
 "eiP-yl-Xb3.text" = "完全的隧道（無 VPN 圖像）";
@@ -142,9 +139,6 @@
 /* Class = "UITableViewSection"; headerTitle = "Other"; ObjectID = "nL4-Vl-Gcz"; */
 "nL4-Vl-Gcz.headerTitle" = "其它的";
 
-/* Class = "UILabel"; text = "Content blockers"; ObjectID = "nPj-OI-Pcb"; */
-"nPj-OI-Pcb.text" = "內容阻擋器";
-
 /* Class = "UILabel"; text = "Light"; ObjectID = "ocH-QT-NRZ"; */
 "ocH-QT-NRZ.text" = "淺色";
 
@@ -160,7 +154,7 @@
 /* Class = "UILabel"; text = "Low-level settings"; ObjectID = "reQ-4X-84i"; */
 "reQ-4X-84i.text" = "底層設定";
 
-/* Class = "UIButton"; normalTitle = "SAVE"; ObjectID = "sNF-Hy-NdB"; */
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "sNF-Hy-NdB"; */
 "sNF-Hy-NdB.normalTitle" = "儲存";
 
 /* Class = "UILabel"; text = "Settings"; ObjectID = "sc6-Tw-xnL"; */

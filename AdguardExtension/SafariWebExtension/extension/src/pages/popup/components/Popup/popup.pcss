@@ -1,0 +1,47 @@
+@import "../../../../vars.pcss";
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    font-size: 14px;
+    color: var(--gray-base);
+    background-color: var(--white);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+input:is([type="button"],
+[type="submit"],
+[type="reset"]),
+input[type="file"]::file-selector-button,
+button {
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.popup {
+    display: flex;
+    flex-direction: column;
+    min-width: 320px;
+    min-height: 280px;
+    padding: 11px 0;
+}
+
+a {
+    text-decoration: underline
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.link {
+    color: var(--green);
+    white-space: nowrap;
+    cursor: pointer;
+}

@@ -1,35 +1,19 @@
-//
-//  Use this file to import your target's public headers that you would like to expose to Swift.
-//
+#ifndef AdGuard_Bridging_Header_h
+#define AdGuard_Bridging_Header_h
 
-#import "ASDFilterObjects.h"
-#import "AESAntibanner.h"
 #import "AEUIPlayerViewController.h"
 #import "AESharedResources.h"
-#import "ABECRequest.h"
 #import "ACNNetworking.h"
 #import "ACSSystemUtils.h"
-#import "AEInvertedWhitelistDomainsObject.h"
-#import "AEWhitelistDomainObject.h"
-#import "AASFilterSubscriptionParser.h"
 #import "ADProductInfo.h"
 #import "NSString+Utils.h"
-#import "AEWhitelistDomainObject.h"
 #import "ACDnsUtils.h"
 #import "DDLogMacros.h"
-#import "ACNUrlUtils.h"
-#import "Constants.h"
-#import "AdguardApp/Services/AEThemeModeEnum.h"
-#import "AERDomainFilterRule.h"
-#import "ASDatabase.h"
 #import "Reachability.h"
-#import <AGDnsProxy/AGDnsProxy.h>
-#import "ADBTableRow.h"
-#import "ADBTable.h"
-#import "APDnsLogTable.h"
-#import "ACNIPUtils.h"
 #import "ADLocales.h"
 #import "APCommonSharedResources.h"
-#import "APBlockingSubscription.h"
-#import "APDnsServerObject.h"
 #import "ACNCidrRange.h"
+#import "ABECRequest.h"
+#import "ACLLogger.h"
+
+#endif /* AdGuard_Bridging_Header_h */

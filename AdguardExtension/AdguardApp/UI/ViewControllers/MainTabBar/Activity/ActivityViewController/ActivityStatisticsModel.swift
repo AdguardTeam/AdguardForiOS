@@ -1,36 +1,28 @@
-/**
-      This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-      Copyright © Adguard Software Limited. All rights reserved.
+//
+// This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
+// Copyright © Adguard Software Limited. All rights reserved.
+//
+// Adguard for iOS is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Adguard for iOS is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
+//
 
-      Adguard for iOS is free software: you can redistribute it and/or modify
-      it under the terms of the GNU General Public License as published by
-      the Free Software Foundation, either version 3 of the License, or
-      (at your option) any later version.
+import DnsAdGuardSDK
 
-      Adguard for iOS is distributed in the hope that it will be useful,
-      but WITHOUT ANY WARRANTY; without even the implied warranty of
-      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-      GNU General Public License for more details.
-
-      You should have received a copy of the GNU General Public License
-      along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-import Foundation
-
-class CompanyRequestsRecord {
-    var domains = Set<String>()
-    let company: String?
-    let key: String
-    var requests: Int
-    var encrypted: Int
-    
-    init(company: String?, key: String, requests: Int, encrypted: Int) {
-        self.company = company
-        self.key = key
-        self.requests = requests
-        self.encrypted = encrypted
-    }
+struct CompanyRequestsRecord {
+    let domains: Set<String>
+    let company: String
+    let requests: Int
+    let encrypted: Int
 }
 
 struct CompaniesInfo {
@@ -38,62 +30,68 @@ struct CompaniesInfo {
     let companiesNumber: Int
 }
 
-protocol ActivityStatisticsModelProtocol {
-    func getCompanies(for type: ChartDateType, _ completion: @escaping (_ info: CompaniesInfo)->())
+protocol ActivityStatisticsModelProtocol: AnyObject {
+    var period: StatisticsPeriod { get set }
+    var counters: CountersStatisticsRecord { get }
+
+    func getCompanies(for type: StatisticsPeriod, _ completion: @escaping (_ info: CompaniesInfo) -> Void)
 }
 
-class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
-    
-    private let activityStatisticsService: ActivityStatisticsServiceProtocol
-    private let dnsTrackersService: DnsTrackerServiceProtocol
-    private let domainsParserService: DomainsParserServiceProtocol
-    
+final class ActivityStatisticsModel: ActivityStatisticsModelProtocol {
+
+    private let dnsTrackers: DnsTrackersProviderProtocol
+    private let domainParserService: DomainParserServiceProtocol
+    private let activityStatistics: ActivityStatisticsProtocol
+    private let companiesStatistics: CompaniesStatistics
+    private let resources: AESharedResourcesProtocol
+
     private let workingQueue = DispatchQueue(label: "ActivityStatisticsModel queue", qos: .userInitiated)
-    
-    init(activityStatisticsService: ActivityStatisticsServiceProtocol, dnsTrackersService: DnsTrackerServiceProtocol, domainsParserService: DomainsParserServiceProtocol) {
-        self.activityStatisticsService = activityStatisticsService
-        self.dnsTrackersService = dnsTrackersService
-        self.domainsParserService = domainsParserService
+
+    var period: StatisticsPeriod {
+        get {
+            resources.activityStatisticsType
+        }
+        set {
+            resources.activityStatisticsType = newValue
+        }
     }
-    
-    func getCompanies(for type: ChartDateType, _ completion: @escaping (_ info: CompaniesInfo)->()) {
-        workingQueue.async {[weak self] in
-            
+
+    var counters: CountersStatisticsRecord {
+        return (try? activityStatistics.getCounters(for: period)) ?? CountersStatisticsRecord.emptyRecord()
+    }
+
+    init(
+        dnsTrackers: DnsTrackersProviderProtocol,
+        domainParserService: DomainParserServiceProtocol,
+        activityStatistics: ActivityStatisticsProtocol,
+        companiesStatistics: CompaniesStatistics,
+        resources: AESharedResourcesProtocol
+    ) {
+        self.dnsTrackers = dnsTrackers
+        self.domainParserService = domainParserService
+        self.activityStatistics = activityStatistics
+        self.companiesStatistics = companiesStatistics
+        self.resources = resources
+    }
+
+    func getCompanies(for type: StatisticsPeriod, _ completion: @escaping (_ info: CompaniesInfo) -> Void) {
+        workingQueue.async { [weak self] in
             guard let self = self else { return }
-            let records = self.activityStatisticsService.getRecords(by: type)
-            var recordsByCompanies: [String : CompanyRequestsRecord] = [:]
-            var companiesNumber = 0
-            let parser = self.domainsParserService.domainsParser
-                
-            for record in records {
-                let company = self.dnsTrackersService.getTrackerInfo(by: record.domain)?.name
-                let domain = parser?.parse(host: record.domain)?.domain ?? record.domain
-                let key = company ?? domain
-                
-                if let existingRecord = recordsByCompanies[key] {
-                    existingRecord.requests += record.requests
-                    existingRecord.encrypted += record.encrypted
-                    existingRecord.domains.insert(record.domain)
-                } else {
-                    let requestRecord = CompanyRequestsRecord(company: company, key: key, requests: record.requests, encrypted: record.encrypted)
-                    requestRecord.domains.insert(record.domain)
-                    recordsByCompanies[key] = requestRecord
-                    
-                    /* We count unique domains as companies if a company wasn't found by domain */
-                    companiesNumber += 1
-                }
+
+            guard let statistics = try? self.companiesStatistics.getCompaniesStatistics(for: type) else {
+                let info = CompaniesInfo(mostRequested: [], companiesNumber: 0)
+                completion(info)
+                return
             }
-                
-            let recordsArray = Array(recordsByCompanies.values)
-            let mostRequested = recordsArray.sorted(by: {
-                if $0.requests != $1.requests {
-                    return $0.requests > $1.requests
-                } else {
-                    return $0.key < $1.key
-                }
-            })
-                
-            let info = CompaniesInfo(mostRequested: mostRequested, companiesNumber: companiesNumber)
+            let records: [CompanyRequestsRecord] = statistics.map {
+                return CompanyRequestsRecord(
+                    domains: $0.domains,
+                    company: $0.company,
+                    requests: $0.counters.requests,
+                    encrypted: $0.counters.encrypted
+                )
+            }
+            let info = CompaniesInfo(mostRequested: records, companiesNumber: records.count)
             completion(info)
         }
     }

@@ -1,0 +1,68 @@
+{
+    "extension_name": {
+        "message": "AdGuard"
+    },
+    "popup_action_safari_protection_title": {
+        "message": "Perlindungan Safari",
+        "description": "TEXT MAX LENGTH: 25"
+    },
+    "popup_action_block_element": {
+        "message": "Sekat unsur di halaman ini",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_allowlisted": {
+        "message": "ditambahkan ke senarai putih",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_basic_only": {
+        "message": "perlindungan asas sahaja",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_modal_all_sites_allowed_title": {
+        "message": "Perlindungan terulung",
+        "description": "TEXT MAX LENGTH: 25"
+    },
+    "popup_modal_all_sites_allowed_desc": {
+        "message": "Syabas! AdGuard akan menyekat hampir kesemua iklan dan mengatasi cabaran yang paling sukar.",
+        "description": "TEXT MAX LENGTH: 140"
+    },
+    "popup_modal_all_sites_allowed_button": {
+        "message": "Teruskan",
+        "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_modal_not_all_sites_allowed_title": {
+        "message": "Perlindungan terpilih",
+        "description": "TEXT MAX LENGTH: 25"
+    },
+    "popup_modal_not_all_sites_allowed_button": {
+        "message": "Teruskan",
+        "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_modal_title_free": {
+        "message": "Kecapi keupayaan terunggul anda",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_modal_btn_free": {
+        "message": "Naik taraf",
+        "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_fullscreen_support_desc": {
+        "message": "Ada sesuatu yang tidak kena? Kami mungkin ada penyelesaian.",
+        "description": "TEXT MAX LENGTH: 45"
+    },
+    "popup_support_button_text": {
+        "message": "Laporkan masalah",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "modal_protection_off_title": {
+        "message": "Hidupkan AdGuard",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "modal_protection_off_settings": {
+        "message": "Buka <b>Tetapan<\/b>",
+        "description": "TEXT MAX LENGTH: 28"
+    },
+    "extension_description": {
+        "message": "AdGuard Safari Web Extension"
+    }
+}

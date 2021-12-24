@@ -1,5 +1,11 @@
+/* Class = "UILabel"; text = "premium"; ObjectID = "7ma-TB-Yab"; */
+"7ma-TB-Yab.text" = "premium";
+
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "884-Hm-mb6"; */
 "884-Hm-mb6.text" = "Protección para Safari";
+
+/* Class = "UILabel"; text = "Enhanced functionality for ultimate ad blocking and content filtering"; ObjectID = "9wg-p1-Dh8"; */
+"9wg-p1-Dh8.text" = "Funcionalidad mejorada para el mejor bloqueo de anuncios y filtrado de contenido";
 
 /* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "AZY-QZ-8d9"; */
 "AZY-QZ-8d9.text" = "Bloqueo de anuncios de YouTube";
@@ -7,17 +13,32 @@
 /* Class = "UILabel"; text = "AdGuard VPN"; ObjectID = "Hnw-bh-Bgh"; */
 "Hnw-bh-Bgh.text" = "AdGuard VPN";
 
+/* Class = "UILabel"; text = "Advanced protection"; ObjectID = "Lsa-74-hd5"; */
+"Lsa-74-hd5.text" = "Protección avanzada";
+
+/* Class = "UILabel"; text = "Advanced protection"; ObjectID = "OxY-0X-J4W"; */
+"OxY-0X-J4W.text" = "Protección avanzada";
+
 /* Class = "UILabel"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "premium";
 
-/* Class = "UILabel"; text = "Safari extension that removes ads and ad leftovers and brings back autoplay on YouTube"; ObjectID = "Sry-3f-FQj"; */
-"Sry-3f-FQj.text" = "Extensión para Safari que elimina anuncios, restos de anuncios y devuelve la reproducción automática en YouTube";
+/* Class = "UILabel"; text = "This Safari extension removes ads and ad leftovers, and revives the Autoplay feature on YouTube"; ObjectID = "Sry-3f-FQj"; */
+"Sry-3f-FQj.text" = "Esta extensión para Safari elimina anuncios y restos de anuncios, y revive la función de reproducción automática en YouTube";
+
+/* Class = "UILabel"; text = "Uses enhanced functionality for ultimate ad blocking and content filtering"; ObjectID = "WOG-Hk-11z"; */
+"WOG-Hk-11z.text" = "Utiliza funcionalidad mejorada para el mejor bloqueo de anuncios y filtrado de contenido";
 
 /* Class = "UILabel"; text = "Block YouTube Ads (by AdGuard)"; ObjectID = "XXP-EO-M4h"; */
 "XXP-EO-M4h.text" = "Bloquear anuncios de YouTube (por AdGuard)";
 
+/* Class = "UILabel"; text = "Blocks ads even on the websites that try to circumvent ad blocking"; ObjectID = "ZgQ-6Q-ytX"; */
+"ZgQ-6Q-ytX.text" = "Bloquea anuncios incluso en los sitios web que intentan eludir el bloqueo de anuncios";
+
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "cnF-td-Ba1"; */
 "cnF-td-Ba1.text" = "Protección DNS";
+
+/* Class = "UILabel"; text = "Requires access to web pages' contents but uses it only for ad blocking"; ObjectID = "i0Z-fi-Rc0"; */
+"i0Z-fi-Rc0.text" = "Requiere acceso al contenido de las páginas web, pero lo utiliza solo para el bloqueo de anuncios";
 
 /* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "kDM-2d-bRK"; */
 "kDM-2d-bRK.text" = "Bloqueo de anuncios de YouTube";
@@ -25,11 +46,20 @@
 /* Class = "UILabel"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "gratuito";
 
-/* Class = "UILabel"; text = "Works alongside AdGuard ad blocker"; ObjectID = "tKQ-Yn-fgL"; */
+/* Class = "UIButton"; normalTitle = "Purchase license"; ObjectID = "pv0-hE-9gb"; */
+"pv0-hE-9gb.normalTitle" = "Comprar licencia";
+
+/* Class = "UILabel"; text = "Blocks complex ads, such as YouTube ads in Safari"; ObjectID = "rm0-Ip-riS"; */
+"rm0-Ip-riS.text" = "Bloquea anuncios complejos, como los anuncios de YouTube en Safari";
+
+/* Class = "UILabel"; text = "Uses sophisticated multi-level filtering rules"; ObjectID = "rr4-ic-Pg8"; */
+"rr4-ic-Pg8.text" = "Utiliza reglas de filtrado sofisticadas de múltiples niveles";
+
+/* Class = "UILabel"; text = "Works alongside the AdGuard ad blocker"; ObjectID = "tKQ-Yn-fgL"; */
 "tKQ-Yn-fgL.text" = "Funciona junto con el bloqueador de anuncios AdGuard";
 
-/* Class = "UILabel"; text = "This module allows you to use a custom DNS server and enhances your privacy by encrypting your DNS queries"; ObjectID = "teo-vm-NRJ"; */
-"teo-vm-NRJ.text" = "Este módulo te permite utilizar un servidor DNS personalizado y mejora tu privacidad al cifrar tus consultas DNS";
+/* Class = "UILabel"; text = "Allows you to use custom DNS servers and enhances your privacy by encrypting your DNS queries"; ObjectID = "teo-vm-NRJ"; */
+"teo-vm-NRJ.text" = "Te permite utilizar servidores DNS personalizados y mejora tu privacidad al cifrar tus consultas DNS";
 
 /* Class = "UILabel"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
 "vNo-hV-l4c.text" = "No instalado";

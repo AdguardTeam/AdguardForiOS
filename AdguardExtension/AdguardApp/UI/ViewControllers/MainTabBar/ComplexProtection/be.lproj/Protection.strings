@@ -1,5 +1,11 @@
+/* Class = "UILabel"; text = "premium"; ObjectID = "7ma-TB-Yab"; */
+"7ma-TB-Yab.text" = "прэміум";
+
 /* Class = "UILabel"; text = "Safari protection"; ObjectID = "884-Hm-mb6"; */
 "884-Hm-mb6.text" = "Абарона Safari";
+
+/* Class = "UILabel"; text = "AdGuard VPN"; ObjectID = "Hnw-bh-Bgh"; */
+"Hnw-bh-Bgh.text" = "AdGuard VPN";
 
 /* Class = "UILabel"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "прэміум";
@@ -10,8 +16,14 @@
 /* Class = "UILabel"; text = "free"; ObjectID = "l1g-hs-4EK"; */
 "l1g-hs-4EK.text" = "задарма";
 
-/* Class = "UILabel"; text = "This module allows you to use a custom DNS server and enhances your privacy by encrypting your DNS queries"; ObjectID = "teo-vm-NRJ"; */
-"teo-vm-NRJ.text" = "Гэты модуль дазваляе вам выкарыстоўваць уласны DNS-сервер і павялічвае вашу прыватнасць шляхам шыфравання вашых DNS-запытаў";
+/* Class = "UIButton"; normalTitle = "Purchase license"; ObjectID = "pv0-hE-9gb"; */
+"pv0-hE-9gb.normalTitle" = "Купіць ліцэнзію";
+
+/* Class = "UILabel"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
+"vNo-hV-l4c.text" = "Не ўсталяваны";
+
+/* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "vlx-BS-A2y"; */
+"vlx-BS-A2y.text" = "Гэты модуль блакуе рэкламу і асочванне на сайтах, адкрытых у Safari";
 
 /* Class = "UILabel"; text = "Protection"; ObjectID = "wyK-CX-EwT"; */
 "wyK-CX-EwT.text" = "Ахова";

@@ -23,10 +23,15 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OhP-9I-o1V">
                                         <rect key="frame" x="16" y="160" width="992" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="ZGp-Us-Ff5"/>
+                                            <constraint firstAttribute="height" constant="40" id="ZGp-Us-Ff5">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                            </constraint>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="No, I have a problem"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        </variation>
                                         <connections>
                                             <action selector="haveAProblemTapped:" destination="CNv-Rb-w1l" eventType="touchUpInside" id="rFA-tC-mqO"/>
                                         </connections>
@@ -34,10 +39,15 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XCD-6t-VdZ">
                                         <rect key="frame" x="16" y="104" width="992" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="pIQ-iD-ufI"/>
+                                            <constraint firstAttribute="height" constant="40" id="pIQ-iD-ufI">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                            </constraint>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="Yes, rate it"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        </variation>
                                         <connections>
                                             <action selector="rateAppTapped:" destination="CNv-Rb-w1l" eventType="touchUpInside" id="4O6-hK-RwQ"/>
                                         </connections>

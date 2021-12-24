@@ -1,62 +1,23 @@
 /* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
 "53G-qY-SZ5.text" = "Codice di autenticazione da app:";
 
-/* Class = "UILabel"; text = "Security filters"; ObjectID = "6P7-a5-VLL"; */
-"6P7-a5-VLL.text" = "Filtri di sicurezza";
-
-/* Class = "UIBarButtonItem"; title = "Logout"; ObjectID = "70b-CS-wqh"; */
-"70b-CS-wqh.title" = "Disconnessione";
-
-/* Class = "UILabel"; text = "All Premium features are available"; ObjectID = "FLH-Qd-Atk"; */
-"FLH-Qd-Atk.text" = "Tutte le funzionalità Premium sono disponibili";
-
-/* Class = "UILabel"; text = "Login"; ObjectID = "J8s-sG-FKu"; */
+/* Class = "UILabel"; text = "Log in"; ObjectID = "J8s-sG-FKu"; */
 "J8s-sG-FKu.text" = "Accedi";
-
-/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "KOP-vw-FG7"; */
-"KOP-vw-FG7.text" = "Imposta le tue regole";
 
 /* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
 "LJj-cc-Ko5.text" = "Email:";
 
-/* Class = "UILabel"; text = "BLOCK MORE\nADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
-"NlM-RH-NgY.text" = "BLOCCA PIÙ\nANNUNCI E TRACCIANTI";
-
 /* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
 "P6N-OK-fHG.text" = "Password:";
-
-/* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
-"Rxf-sg-Wfk.normalTitle" = "VAI AL MIO PROFILO";
-
-/* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "UaA-JQ-kV4"; */
-"UaA-JQ-kV4.title" = "Accedi";
-
-/* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
-"YIm-R8-cxj.text" = "Bloccare phishing, truffe e cripto-jacking";
 
 /* Class = "UILabel"; text = "Log in with your AdGuard account or with social networks"; ObjectID = "ZuM-Nn-uXv"; */
 "ZuM-Nn-uXv.text" = "Accedi con il tuo profilo AdGuard o tramite reti social";
 
-/* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "bUa-fF-AXO"; */
-"bUa-fF-AXO.normalTitle" = "ACCEDI";
-
-/* Class = "UILabel"; text = "Value your privacy"; ObjectID = "fwp-I7-Qtl"; */
-"fwp-I7-Qtl.text" = "Valorizza la tua privacy";
+/* Class = "UIButton"; normalTitle = "Log in"; ObjectID = "bUa-fF-AXO"; */
+"bUa-fF-AXO.normalTitle" = "Accedi";
 
 /* Class = "UILabel"; text = "Sign in"; ObjectID = "fxK-6y-LB6"; */
 "fxK-6y-LB6.text" = "Accedi";
 
-/* Class = "UILabel"; text = "DNS protection"; ObjectID = "gLL-6o-GGa"; */
-"gLL-6o-GGa.text" = "Protezione DNS";
-
-/* Class = "UILabel"; text = "Premium is activated"; ObjectID = "hjF-1C-hFa"; */
-"hjF-1C-hFa.text" = "Premium é attivato";
-
-/* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
-"mR4-EU-MFx.normalTitle" = "Ripristina acquisto";
-
-/* Class = "UILabel"; text = "Custom filters"; ObjectID = "ppx-jv-rek"; */
-"ppx-jv-rek.text" = "Filtri personalizzati";
-
-/* Class = "UIButton"; normalTitle = "CONFIRM"; ObjectID = "rrj-Gm-LCJ"; */
-"rrj-Gm-LCJ.normalTitle" = "CONFERMA";
+/* Class = "UIButton"; normalTitle = "Confirm"; ObjectID = "rrj-Gm-LCJ"; */
+"rrj-Gm-LCJ.normalTitle" = "Conferma";

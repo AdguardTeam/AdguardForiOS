@@ -1,0 +1,45 @@
+.switcher {
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    &:focus,
+    &:active {
+        background-color: transparent;
+    }
+
+    &__inner {
+        display: inline-block;
+        position: relative;
+        width: 48px;
+        height: 28px;
+        background-color: var(--gray700);
+        border-radius: 16px;
+
+        &:before {
+            content: "";
+            width: 26px;
+            height: 26px;
+            background-color: #fff;
+            z-index: 1;
+            border-radius: 100%;
+            position: absolute;
+            left: 1px;
+            top: 1px;
+        }
+    }
+
+    &__checkbox {
+        position: absolute;
+        opacity: 0;
+
+        &:checked {
+            & + .switcher__inner {
+                background-color: var(--green);
+
+                &:before {
+                    left: 21px;
+                }
+            }
+        }
+    }
+}

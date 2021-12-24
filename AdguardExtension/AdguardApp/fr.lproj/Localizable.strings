@@ -19,6 +19,12 @@
 /* Alert title. On error. */
 "common_error_title" = "Erreur ";
 
+/* Something went wrong title for unknown error */
+"something_went_wrong_title" = "Quelque chose s'est mal passé";
+
+/* Unknown error desription */
+"unknown_error_description" = "Veuillez signaler cette erreur à l'équipe d'assistance.";
+
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Les filtres ne peuvent pas être chargés dans Safari, par conséquent vos dernières modifications n'ont pas été appliquées.";
 
@@ -65,7 +71,7 @@
 "user_filter_helper" = "Saisissez vos règles personnalisées ici, en les séparant par des sauts de ligne";
 
 /* YES Button caption in alert */
-"common_action_yes" = "OUI";
+"common_action_yes" = "Oui";
 
 /* (MainController) login status caption on main screen */
 "protection_enabled_caption" = "La protection est activée";
@@ -79,8 +85,26 @@
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "M'abonner";
 
+/* (LicenseProductChoiceCell) restore purchase button title */
+"restore_purchase_button_title" = "Rétablir l'achat";
+
+/* (FreeLicenseStateTableViewModel) One month subscription title */
+"one_month_subscription_title" = "Mensuel";
+
+/* (FreeLicenseStateTableViewModel) One year subscription title */
+"one_year_subscription_title" = "Annuel";
+
+/* (FreeLicenseStateTableViewModel) title for permanent subscription */
+"permanent_subscription_title" = "Permanent";
+
+/* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
+"go_to_my_account_title" = "Aller dans mon compte";
+
 /* (GetProTableController) upgrade button title for lifetime license */
-"upgrade_lifetime_button_title" = "ACHETER";
+"upgrade_lifetime_button_title" = "Acheter";
+
+/* (GetProTableController) missing purchase alert message */
+"upgrade_missing_purchase_message" = "Les plans d'abonnement ne son pas disponibles. Veuillez vérifier votre connexion internet et réessayer.";
 
 /* (LoginController) lost password button title */
 "lost_password" = "Mot de passe oublié ?";
@@ -194,7 +218,7 @@
 "filters_updated_format" = "Filtres mis à jour : %lu";
 
 /* (FiltersController) Filter Version format */
-"filter_version_format" = "version %@";
+"filter_version_format" = "Version %@";
 
 /* (DnsSettingController) split tunel mode description */
 "tunnel_mode_split_description" = "Split-Tunnel, compatible avec les applis “VPN Personnel”";
@@ -210,9 +234,6 @@
 
 /* (DnsSettingController) Native DNS implementation title */
 "native_dns_implementation_title" = "Natif";
-
-/* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
-"system_dns_server" = "Aucun chiffrage (DNS du système)";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "Filtres activés: %1$d sur %2$d";
@@ -242,13 +263,13 @@
 "login_error_message" = "Une erreur s'est produite pendant la connexion";
 
 /* purchase secription format */
-"purchase_description_format" = "Les détails de l'abonnement AdGuard :<br><br>• Le paiement sera débité de votre compte iTunes lors de la confirmation de l'achat.<br><br>• L'abonnement est renouvelé automatiquement sauf si le renouvellement automatique est désactivé au moins 24 heures avant la fin de la période en cours.<br><br>• Les frais de renouvellement d'abonnement seront débités dans les 24 heures avant la fin de la période courante.<br><br>Vos abonnements peuvent être gérés et votre renouvellement automatique peut être désactivé dans les paramètres de votre compte iTunes après l'achat d'un abonnement.<br><br><a href=%2$@>Conditions d'utilisation</a> et <a href=%1$@>Politique de confidentialité</a>";
+"purchase_description_format" = "Les détails de l'abonnement AdGuard :<br><br>• Le paiement sera débité de votre compte iTunes lors de la confirmation de l'achat.<br><br>• L'abonnement est renouvelé automatiquement sauf si le renouvellement automatique est désactivé au moins 24 heures avant la fin de la période en cours.<br><br>• Les frais de renouvellement d'abonnement seront débités dans les 24 heures avant la fin de la période courante.<br><br>• Vos abonnements peuvent être gérés et votre renouvellement automatique peut être désactivé dans les paramètres de votre compte iTunes après l'achat d'un abonnement.<br><br><a href=%2$@>Conditions d'utilisation</a> et <a href=%1$@>Politique de confidentialité</a> de AdGuard";
 
 /* lifetime purchase secription format */
-"lifetime_purchase_description_format" = "<a href=%2$@>Conditions d'utilisation</a> et <a href=%1$@>Politique de confidentialité</a>";
+"lifetime_purchase_description_format" = "<a href=%2$@>Conditions d'utilisation</a> et <a href=%1$@>Politique de confidentialité</a> de AdGuard";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
-"common_action_ok" = "OK";
+"common_action_ok" = "Ok";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "privacy_policy_action" = "Politique de confidentialité";
@@ -268,8 +289,20 @@
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "Autre";
 
+/* (AdvancedSettingsController) Content blocker description text */
+"cb_description_common" = "6 bloqueurs de contenus, chacun avec près de 50,000 règles";
+
+/* (AdvancedSettingsController) Content blocker description text */
+"cb_description_advanced_protection" = "6 bloqueurs de contenu, contenant jusqu'à 150,000 règles chacun, plus la Protection avancée";
+
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "Filtres :";
+
+/* (ContentBlockersTableController) - Advanced protection title */
+"cb_screen_advanced_protection_title" = "Protection avancée";
+
+/* (ContentBlockersTableController) - Content Blockers title */
+"cb_screen_content_blockers_title" = "Bloqueurs de contenu";
 
 /* (AdvancedSettingsController) Restart when network changes error */
 "general_settings_restart_tunnel_error" = "Vous devez d'abord activer le VPN";
@@ -304,6 +337,9 @@
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "Désactivé dans les paramètres de Safari";
 
+/* (ContentBlockerStateCell) Description for advanced protection disabled state */
+"disabled_current_state_advanced_protection" = "Désactivé dans les paramètres de Protection";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
 "update_current_state_label" = "Téléchargement dans Safari en cours...";
 
@@ -337,17 +373,14 @@
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "Vous avez dépassé le nombre maximal de règles de filtrage.";
 
-/* (GetProController) title for permanent subscription */
-"permanent_subscription_title" = "Permanent";
+/* (FiltersController) Enabled state in groups section */
+"on_state" = "Activé";
 
-/* (FiltersController) ON state in groups section */
-"on_state" = "ON";
-
-/* (FiltersController) OFF state in groups section */
-"off_state" = "OFF";
+/* (FiltersController) Disabled state in groups section */
+"off_state" = "Désactivé";
 
 /* (NewCustomFilterDetailedController) homepage string */
-"homepage_title" = "Page d'accueil :";
+"homepage_title" = "Page d'accueil : ";
 
 /* (FilterDetailsController) delete filter title */
 "delete_filter_title" = "Supprimer filtre";
@@ -360,6 +393,9 @@
 
 /* (AboutViewController) AdGuard copyright string */
 "copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\nTous droits réservés. AdGuard.com";
+
+/* (LicensePageViewController) Login title */
+"common_login" = "Connexion";
 
 /* (AboutViewController) Logout title */
 "common_logout" = "Déconnexion";
@@ -414,6 +450,24 @@
 
 /* (ListOfRulesModel) title for export */
 "export" = "Exporter";
+
+/* (UserRulesTableController) - title for editing user rules option  */
+"open_user_rules_editor" = "Ouvrir l'éditeur";
+
+/* (UserRulesTableController) - description for Safari user rules in editor  */
+"editor_safari_user_rules_description" = "Ajouter les règles d'utilisateur pour Safari";
+
+/* (UserRulesTableController) - description for allowlist rules in editor  */
+"editor_allowlist_rules_description" = "Ajouter des règles personnalisées de la liste blanche";
+
+/* (UserRulesTableController) - description for inverted allowlist rules in editor  */
+"editor_inverted_allowlist_rules_description" = "Ajouter des règles personnalisées inversées à la liste blanche";
+
+/* (UserRulesTableController) - description for DNS allowlist rules in editor  */
+"editor_dns_allowlist_rules_description" = "Ajouter des règles DNS personnalisées à la liste blanche";
+
+/* (UserRulesTableController) - description for DNS blocklist rules in editor  */
+"editor_dns_blocklist_rules_description" = "Ajouter des règles DNS personnalisées à la liste noire";
 
 /* (ListOfRulesModel) title for Clear button*/
 "common_clear" = "Effacer";
@@ -505,6 +559,33 @@
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "Ajouter une nouvelle règle";
 
+/* (OneSafariGroupFiltersModel) Add new filter title */
+"add_new_filter" = "Ajouter un filtre";
+
+/* (OneSafariGroupFiltersModel) Ads filters group description */
+"ads_filters_group_description" = "Listes de filtres qui suppriment les annonces";
+
+/* (OneSafariGroupFiltersModel) Privacy filters group description */
+"privacy_filters_group_description" = "Listes de filtres qui empêchent le suivi";
+
+/* (OneSafariGroupFiltersModel) Social Widgets filters group description */
+"social_widgets_filters_group_description" = "Listes de filtres pour dissimuler les widgets des médias sociaux (bouton \"J'aime\" et similaires)";
+
+/* (OneSafariGroupFiltersModel) Annoyances filters group description */
+"annoyances_filters_group_description" = "Listes de filtres qui bloquent les éléments irritants sur les pages web. La définition du terme \"irritant\" peut être subjective et dépend de l'auteur de la liste";
+
+/* (OneSafariGroupFiltersModel) Security filters group description */
+"security_filters_group_description" = "Listes de filtres qui bloquent les menaces en ligne connues";
+
+/* (OneSafariGroupFiltersModel) Other filters group description */
+"other_filters_group_description" = "Listes de filtres variés pour des fins différentes";
+
+/* (OneSafariGroupFiltersModel) Language Specific filters group description */
+"language_specific_filters_group_description" = "Listes de filtres qui ciblent les sites web en langues particulières";
+
+/* (OneSafariGroupFiltersModel) Custom filters group description */
+"custom_filters_group_description" = "Filtres que vous ajoutez manuellement";
+
 /* confirm reset lert text */
 "confirm_reset_text" = "Tous les paramètres, y compris les règles utilisateur, la protection DNS, les paramètres d’interface et d’autorisation, seront réinitialisés. Cette opération ne peut pas être annulée. Réinitialiser les paramètres?";
 
@@ -544,6 +625,9 @@
 /*(NewCustomFilterDetailsController) title for new dns filter */
 "new_dns_filter_title" = "Nouveau filtre DNS";
 
+/* (NewCustomFilterDetailsController) Error message when adding custom filter fails */
+"add_custom_filter_error_message" = "Quelque chose s'est mal passé, soit le format du fichier avec le filtrage personnalisé est incorrect";
+
 /*(NewCustomFilterDetailsController) title for editing custom filter */
 "edit_custom_filter_title" = "Modifier le filtre personnalisé";
 
@@ -557,13 +641,13 @@
 "protection_enabled" = "La protection est activée";
 
 /*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Safari et protection DNS";
+"complex_enabled" = "La protection Safari et DNS est activée";
 
 /*(TodayViewController) Safari protection is enabled text  */
-"safari_enabled" = "Blocage des contenus de Safari";
+"safari_enabled" = "Protection pour Safari est activée";
 
 /*(TodayViewController) All protection is disabled text  */
-"complex_disabled" = "Tous les modules de protection sont désactivés";
+"complex_disabled" = "La protection Safari et DNS est désactivée";
 
 /*(TodayViewController) DNS protection is enabled text  */
 "system_enabled" = "Protection DNS";
@@ -589,6 +673,9 @@
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_notification_title" = "Désactiver certains filtres pour le bon fonctionnement";
 
+/* (DnsFiltersTableController) - DNS filters title */
+"dns_filters_title" = "Filtres DNS";
+
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Bloqués";
 
@@ -605,31 +692,34 @@
 "dns_request_user_status_added_to_whitelist" = "ajoutée à la liste Blanche";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_blacklist" = "ajoutée à la liste Noire";
+"dns_request_user_status_added_to_blacklist" = "ajoutée à la liste noire";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "retiré de la liste blanche";
+"dns_request_user_status_removed_from_whitelist" = "retirée de la liste blanche";
 
 /*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "retirée de la liste Noire";
+"dns_request_user_status_removed_from_blacklist" = "retirée de la liste noire";
 
-/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "Ouvrez les <b>paramétrages</b>";
+/* (OnboardingController) first step text*/
+"onboarding_first_step_text" = "Ouvrez les <b>Paramètres</b>.";
 
-/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "Appuyez sur <b>Safari</b> et choisissez l'élément du menu <b>\"Bloqueurs de contenu\"</b>";
+/* (OnboardingController) first step with advanced protection text*/
+"advanced_protection_onboarding_first_step_text" = "Ouvrez les <b>Paramètres</b>.";
 
-/* (OnboardingController) second step text iOS15 . '%@' will be replaced with the safari icon */
-"onboarding_second_step_text_iOS15" = "Appuyez sur <b>Safari</b> et choisissez l’élément de menu <b>\"Extensions\"</b>";
+/* (OnboardingController) second step text */
+"onboarding_second_step_text" = "Appuyez sur <b>Safari</b>, défilez la page en bas et tapez <b>Bloqueurs de contenu</b>.";
 
-/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>Activez tous les bloqueurs de contenu</b> et revenez à l'application !";
+/* (OnboardingController) second step with advanced protection text */
+"advanced_protection_onboarding_second_step_text" = "Allez sur <b>Safari > Extensions</b>.";
 
-/* (DnsProvidersController) default systen dns server name */
-"default_dns_server_name" = "DNS du système";
+/* (OnboardingController) third step text */
+"onboarding_third_step_text" = "<b>Activez</b> toutes les extensions AdGuard.";
 
-/* (DnsProvidersController) default systen dns server description */
-"default_dns_server_description" = "Utilisez les serveurs DNS du système par défaut provenus de votre fournisseur d'accès Internet";
+/* (OnboardingController) third step with advanced protection text */
+"advanced_protection_onboarding_third_step_text" = "Réglez tous les commutateurs AdGuard sur <b>Activé</b>. Ça y est !";
+
+/* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
+"onboarding_fours_step_text" = "Pour la protection <b>Avancée</b>, ouvrez Safari, tapez l'icône <b>aA</b> à gauche du champ de lien URL,<br><br> %@ <br><br>puis tapez <b>Gérer les extensions</b> et activez le commutateur <b>AdGuard</b> .";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "Bloquer requête";
@@ -651,6 +741,9 @@
 
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ n'est pas encore pris en charge par iOS. Essayez d'en ajouter d'autres en amont.";
+
+/*(DnsFiltersController) the error message that is shown when trying to add a duplicate custom dns server */
+"custom_dns_server_exists" = "Vous avez essayé d'ajouter un serveur DNS en double. Le serveur en amont spécifié est déjà dans la liste";
 
 /* (NewDnsServerController) save and select button title */
 "save_and_select_button_title" = "Enregistrer et sélectionner";
@@ -742,35 +835,11 @@
 /* (BugReportController) Message when bug report failed */
 "bug_report_failed_message" = "Échec d'envoi du rapport de bogue, veuillez réessayer";
 
-/* (BugReportController) Message when leaving feedback failed */
-"feedback_failed_message" = "Échec d'envoi de commentaire, veuillez réessayer";
-
 /* (BugReportController) Message when bug report successed */
 "bug_report_successed_message" = "Votre rapport de bogue a été envoyé !";
 
-/* (BugReportController) Message when feedback leaving successed */
-"feedback_successed_message" = "Votre commentaire a été envoyé !";
-
-/* (BugReportController) title for bug report */
-"bug_report_title" = "Signaler un bogue";
-
-/* (BugReportController) title for leaving feedback */
-"leave_feedback_title" = "Laisser un commentaire";
-
-/* (BugReportController) description for bug report */
-"bug_report_description" = "Veuillez inclure la description du problème (a-t-il commencé après une mise à jour ?) et les informations sur les autres logiciels dont vous disposez (VPN/AV/extension)";
-
-/* (BugReportController) description for leaving feedback */
-"leave_feedback_description_format" = "Dites-nous ce que vous pensez de %@ - ce que vous aimez ou n'aimez pas, les fonctionnalités que vous aimeriez suggérer";
-
-/* (BugReportController) button title for bug report */
-"bug_report_button_title" = "Envoyer un rapport";
-
-/* (BugReportController) button title for leaving feedback */
-"leave_feedback_button_title" = "Envoyer un commentaire";
-
 /* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "En continuant à l’utiliser, vous acceptez les <br/><a href=%2$@>Conditions générales</a> et la <a href=%1$@>Politique de confidentialité</a>";
+"introduction_license_agreement" = "J'accepte les <a href=%2$@>Conditions d'utilisation</a> et la <a href=%1$@>Politique de confidentialité</a> de AdGuard.";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Requêtes";
@@ -815,16 +884,83 @@
 "requests_number" = "%d requêtes";
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
-"native_dns_setup_title" = "Veuillez activer %@ dans les paramètres DNS du système";
+"native_dns_setup_title" = "Veuillez activer %@ dans les paramètres DNS";
 
 /* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
-"native_dns_setup_description" = "Pour activer le DNS natif, vous devez ouvrir <b>Paramètres système</b>, aller à <b>VPN & Réseau > DNS</b> et là, sélectionner <b>%@</b>.";
+"native_dns_setup_description" = "Pour activer le DNS natif, sélectionnez <b>%@</b>dans les <b>Paramètres système> Général > VPN & Réseau > DNS</b> .";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name; String for iOS 15 and newer */
+"native_dns_setup_description_ios15" = "Pour utiliser le DNS natif, sélectionnez <b>%@</b> dans <b>Paramètres du système > Général > Gestion du VPN & Dispositif > DNS</b>.";
 
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "Dites nous si vous êtes satisfait(e) de votre expérience de blocage de pub à présent";
 
 /* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
 "rate_app_problem_description" = "Assurez-vous que vous utilisez le <b>navigateur Safari.</b><br> Actuellement, il est techniquement impossible de bloquer le contenu dans d’autres navigateurs.<br> Accédez aux paramètres de protection dans Safari et activez toutes les listes de filtres nécessaires.<br> Redémarrez l’application Safari : fermez-la et puis relancez à nouveau.";
+
+/* (FilterDetailsViewController) Version subtitle for detailed filter info */
+"detailed_filter_info_version_subtitle" = "Version";
+
+/* (FilterDetailsViewController) Updated subtitle for detailed filter info */
+"detailed_filter_info_updated_subtitle" = "Mis à jour";
+
+/* (FilterDetailsViewController) Rules count subtitle for detailed filter info */
+"detailed_filter_info_rules_count_subtitle" = "Nombre des règles";
+
+/* (FilterDetailsViewController) Website subtitle for detailed filter info */
+"detailed_filter_info_website_subtitle" = "Site Web";
+
+/* (FilterDetailsViewController) Subscription URL subtitle for detailed filter info */
+"detailed_filter_info_subscription_subtitle" = "URL d'abonnement";
+
+/* (AddRuleController) Error description when adding rule that already exists */
+"user_rule_exists_error" = "Vous essayez d’ajouter une règle qui figure déjà dans la liste";
+
+// MARK: - Strings for UserRulesRedirectController
+/* (UserRulesRedirectController) - Processing state title */
+
+"user_rules_processing_title" = "Traitement en cours...";
+
+/* (UserRulesRedirectController) - Processing state description */
+"user_rules_processing_descr" = "Veuillez patienter un peu...";
+
+/* (UserRulesRedirectController) - Description when allowlist rule is removed; %@ stands for 'allowlist' word hex color */
+"user_rules_allowlist_rule_removed" = "a été supprimé de la <u style=color:%@>liste blanche</u>";
+
+/* (UserRulesRedirectController) - Description when new allowlist rule is added; %@ stands for 'allowlist' word hex color */
+"user_rules_allowlist_rule_added" = "a été ajouté à la <u style=color:%@>liste blanche</u>";
+
+/* (UserRulesRedirectController) - Description when blocklist rule is added; %@ stands for 'user rules' words hex color */
+"user_rules_blocklist_rule_added" = "a une nouvelle règle de blocage dans les <u style=color:%@>règles d'utilisateur</u>";
+
+/* (UserRulesRedirectController) - Description when blocklist rules are removed */
+"user_rules_blocklist_rules_removed" = "n'a plus de règles d'utilisateur";
+
+// MARK: - Strings for license screen
+/* (PremiumFeature) - Advanced protection premium feature name */
+
+"advanced_protection_feature_name" = "Protection avancée";
+
+/* (PremiumFeature) -  Security filters premium feature name */
+"security_filters_feature_name" = "Filtres de sécurité ";
+
+/* (PremiumFeature) - DNS privacy premium feature name */
+"dns_privacy_feature_name" = "Confidentialité DNS";
+
+/* (PremiumFeature) - Custom filters premium feature name */
+"custom_filters_feature_name" = "Filtres personnalisés";
+
+/* (PremiumFeature) - Advanced protection premium feature description */
+"advanced_protection_feature_description" = "Méthodes avancées pour bloquer les annonces compliquées comme celles de YouTube dans Safari";
+
+/* (PremiumFeature) - Security filters premium feature description */
+"security_filters_feature_description" = "Bloquez l'hameçonnage, les maliciels et les contenus douteux";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "Chiffrez vos requêtes DNS et contrôlez votre confidentialité";
+
+/* (PremiumFeature) - Custom filters premium feature description */
+"custom_filters_feature_description" = "Utilisez des filtres tiers, ou créez vos filtres personnels";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -869,6 +1005,8 @@
 /* (MainPageController) saved data size for VoiceOver*/
 "elapsed_time_voiceover" = "Temps moyen pour traiter une demande DNS";
 
+/* (AGSearchView) Placeholder text for search bar */
+"search_view_placeholder" = "Rechercher";
 
 // MARK: - SystemProtectionEnablerController
 /* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
@@ -976,7 +1114,7 @@
 // MARK: - YouTubeAdsRequestHandler
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
 
-"youtube_script_success_title" = "YouTube est désormais sans publicité ! Veuillez noter que vous devez exécuter cette extension à nouveau si vous rechargez la page";
+"youtube_script_success_title" = "YouTube est désormais sans publicité ! Notez qu'il faudra exécuter cette extension à nouveau chaque fois quand vous rechargez la page.";
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
 "youtube_script_wrong_domain_title" = "Cette extension est censée être lancée uniquement sur YouTube";
@@ -986,3 +1124,44 @@
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
 "youtube_script_error_title" = "Une erreur inconnue s'est produite lors de la suppression des publicités YouTube";
+
+// MARK: - ActionExtensionMainController
+/* (ActionExtensionMainController) - ActionExtension info for iOS 15>= */
+
+"action_extension_obsolete_info" = "Cette extension est obsolète, mais la nouvelle extension AdGuard Web Safari est disponible via le menu Aa. Pour commencer son utilisation, ouvrez le menu Aa, tapez Gérer les extensions et activez le commutateur AdGuard.";
+
+/* (ActionExtensionMainController) - ActionExtension info for iOS 14<= */
+"action_extension_new_version_info" = "Une nouvelle version de cette extension est disponible pour iOS 15. Elle dispose de plus de capacités et d'une interface utilisateur améliorée. N'oubliez pas de la mettre à jour !";
+
+/* (BackgroundFetchController) - Background app refresh default title */
+"background_fetch_default_period" = "Période par défaut";
+
+/* (BackgroundFetchController) - Background app refresh every 1 hour title */
+"background_fetch_hour_period" = "Chaque heure";
+
+/* (BackgroundFetchController) - Background app refresh every 3 hours title */
+"background_fetch_tree_hours_period" = "Toutes les 3 heures";
+
+/* (BackgroundFetchController) - Background app refresh every 12 hours title */
+"background_fetch_twelve_hours_period" = "Toutes les 12 heures";
+
+/* (BackgroundFetchController) - Background app refresh every 24 hours title */
+"background_fetch_twenty_four_hours_period" = "Toutes les 24 heures";
+
+/* Background app refresh time title */
+"background_app_refresh_time_title" = "Temps de réactualisation de l'application en arrière-plan";
+
+/* (DnsProvidersController) - add new dns server title */
+"add_custom_dns_server_title" = "Ajouter un serveur DNS de l’utilisateur";
+
+/* (DnsProvidersController) - Header title */
+"dns_provider_controller_title" = "Serveur DNS";
+
+/* (DnsProvidersController) - Header description */
+"dns_provider_controller_description" = "Vous pouvez améliorer votre confidentialité en ligne en chiffrant le trafic DNS. Pour ça, choisissez un des fournisseurs DNS recommandés.";
+
+/* (DnsProviderDetailsController) Server title */
+"server_title" = "Serveur";
+
+/* (DnsProviderDetailsController) Website title */
+"website_title" = "Site Web";

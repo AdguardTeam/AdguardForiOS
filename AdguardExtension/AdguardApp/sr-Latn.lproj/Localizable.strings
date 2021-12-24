@@ -19,6 +19,9 @@
 /* Alert title. On error. */
 "common_error_title" = "Greška";
 
+/* Something went wrong title for unknown error */
+"something_went_wrong_title" = "Nešto je pošlo naopako";
+
 /* NO Button caption in alert */
 "common_action_no" = "Ne";
 
@@ -56,16 +59,16 @@
 "common_action_yes" = "Da";
 
 /* (MainController) login status caption on main screen */
-"protection_enabled_caption" = "Zaštita je uključena";
-
-/* (MainController) login status caption on main screen */
 "protection_partly_enabled_caption" = "Neki blokatori sadržaja su isključeni";
-
-/* (MainController) login status caption on main screen */
-"protection_disabled_caption" = "Zaštita je isključena";
 
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "Pretplati se";
+
+/* (LicenseProductChoiceCell) restore purchase button title */
+"restore_purchase_button_title" = "Oporavi kupovinu";
+
+/* (FreeLicenseStateTableViewModel) title for permanent subscription */
+"permanent_subscription_title" = "Doživotno";
 
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "Kupi";
@@ -121,6 +124,9 @@
 /* (MainController) message that appers when filters updating */
 "update_filter_start_message" = "Ažuriram...";
 
+/* (UserFilterController) add blocklist rule button title */
+"add_blacklist_rule_title" = "Dodaj novo pravilo";
+
 /* (UserFilterController) add blacklist rule placeholder */
 "add_blacklist_rule_placeholder" = "||example.org^";
 
@@ -151,9 +157,6 @@
 /* (MainController) Message on main screen during update - count of updated filters */
 "filters_updated_format" = "Filteri su ažurirani: %lu ";
 
-/* (FiltersController) Filter Version format */
-"filter_version_format" = "verzija %@";
-
 /* (DnsSettingController) split tunel mode description */
 "tunnel_mode_split_description" = "Split-Tunnel, kompatibilan sa “ličnim VPN” aplikacijama";
 
@@ -163,8 +166,8 @@
 /* (DnsSettingController) Full (without VPN icon) mode description */
 "tunnel_mode_full_without_icon_description" = "Full-Tunnel (bez VPN ikonice), nekompatibilan sa drugim VPN aplikacijama, manje stabilno";
 
-/* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
-"system_dns_server" = "Sistemski Dns";
+/* (DnsSettingController) AdGuard DNS implementation title */
+"adguard_dns_implementation_title" = "AdGuard";
 
 /* MainMenuController - filters menu description */
 "filters_description_format" = "Uključeno %1$d od %2$d";
@@ -192,9 +195,6 @@
 
 /* login error message */
 "login_error_message" = "Došlo je do greške prilikom prijavljivanja";
-
-/* lifetime purchase secription format */
-"lifetime_purchase_description_format" = "<a href=%1$@>Politika privatnosti</a> <br><br><a href=%2$@>Uslovi korišćenja</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "U redu";
@@ -231,6 +231,9 @@
 
 /* (AdvancedSettingsController) Reset button title */
 "reset_title" = "Resetuj";
+
+/* (AdvancedSettingsController) Remove button title */
+"delete_title" = "Izbriši";
 
 /* (AdvancedSettingsController) Remove Vpn profile title */
 "remove_vpn_profile_title" = "Ukloni VPn profil";
@@ -280,17 +283,11 @@
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "Dostigli ste najveći broj dozvoljenih pravila.";
 
-/* (GetProController) title for permanent subscription */
-"permanent_subscription_title" = "Doživotno";
-
-/* (FiltersController) ON state in groups section */
+/* (FiltersController) Enabled state in groups section */
 "on_state" = "Uključeno";
 
-/* (FiltersController) OFF state in groups section */
-"off_state" = "Isključeno";
-
-/* (NewCustomFilterDetailedController) homepage string */
-"homepage_title" = "Početna stranica:";
+/* (FiltersController) Disabled state in groups section */
+"off_state" = "Onemogućeno";
 
 /* (FilterDetailsController) delete filter title */
 "delete_filter_title" = "Izbriši filter";
@@ -357,6 +354,9 @@
 
 /* (ListOfRulesModel) title for export */
 "export" = "Izvezi";
+
+/* (UserRulesTableController) - title for editing user rules option  */
+"open_user_rules_editor" = "Otvori korisnički filter";
 
 /* (ListOfRulesModel) title for Clear button*/
 "common_clear" = "Očisti";
@@ -448,6 +448,9 @@
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "Dodaj novo pravilo";
 
+/* (OneSafariGroupFiltersModel) Add new filter title */
+"add_new_filter" = "Dodaj filter";
+
 /* confirm reset lert text */
 "confirm_reset_text" = "Sve postavke, uključujući korisnička pravila, sistemsku zaštitu, okruženje i postavke autorizacije, biće vraćene na podrazumevane vrednosti. Ova radnja se ne može opozvati. Želite li da nastavite?";
 
@@ -484,21 +487,6 @@
 /*(NewCustomFilterDetailsController) add button title */
 "common_add" = "Dodaj";
 
-/*(TodayViewController) Protection is disabled title  */
-"protection_disabled" = "Zaštita je isključena";
-
-/*(TodayViewController) Protection is enabled title  */
-"protection_enabled" = "Zaštita je uključena";
-
-/*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Safari i sistemska zaštita";
-
-/*(TodayViewController) Safari protection is enabled text  */
-"safari_enabled" = "Safari blokiranje sadržaja";
-
-/*(TodayViewController) All protection is disabled text  */
-"complex_disabled" = "Svi podprogrami zaštite su isključeni";
-
 /*(TodayViewController) DNS protection is enabled text  */
 "system_enabled" = "Sistemska zaštita";
 
@@ -523,6 +511,9 @@
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_notification_title" = "Isključite neke filtere za ispravan rad";
 
+/* (DnsFiltersTableController) - DNS filters title */
+"dns_filters_title" = "DNS filteri";
+
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "Blokirano";
 
@@ -538,27 +529,6 @@
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_whitelist" = "dodato na belu listu";
 
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_added_to_blacklist" = "dodato na crnu listu";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_whitelist" = "uklonjeno sa bele liste";
-
-/*(DnsLogController) user status of dns request */
-"dns_request_user_status_removed_from_blacklist" = "uklonjeno sa crne liste";
-
-/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
-"onboarding_first_step_text" = "Otvorite <b>postavke</b>";
-
-/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "Dodirnite <b>Safari</b> i izaberite <b>\"blokatori sadržaja\"</b>";
-
-/* (DnsProvidersController) default systen dns server name */
-"default_dns_server_name" = "Sistemski DNS";
-
-/* (DnsProvidersController) default systen dns server description */
-"default_dns_server_description" = "Koristite podrazumevane DNS servere sistema koje vam daje vaš dobavljač internet usluga";
-
 /* (BlockRequestController) Block request title */
 "block_request" = "Blokiraj zahtev";
 
@@ -570,6 +540,21 @@
 
 /* (NewDnsServerController) error message text */
 "invalid_upstream_message" = "Uneli ste nevažeći upstream";
+
+/* (NewDnsServerController) save and select button title */
+"save_and_select_button_title" = "Sačuvaj i izaberi";
+
+/* (NewDnsServerController) save button title */
+"save_button_title" = "Sačuvaj";
+
+/* (NewDnsServerController) cancel button title */
+"cancel_button_title" = "Otkaži";
+
+/* (NewDnsServerController) delete button title */
+"delete_button_title" = "Izbriši";
+
+/* (NewDnsServerController) add dns server alert title */
+"add_dns_server_alert_title" = "Dodaj korisnički DNS server";
 
 /* (DnsRequestDetailsController) - matched filter name for user filter */
 "system_blacklist" = "Crna lista sistema";
@@ -682,6 +667,24 @@
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d zahteva";
 
+/* (FilterDetailsViewController) Version subtitle for detailed filter info */
+"detailed_filter_info_version_subtitle" = "Verzija";
+
+/* (FilterDetailsViewController) Updated subtitle for detailed filter info */
+"detailed_filter_info_updated_subtitle" = "Ažurirano";
+
+/* (FilterDetailsViewController) Rules count subtitle for detailed filter info */
+"detailed_filter_info_rules_count_subtitle" = "Broj pravila";
+
+/* (FilterDetailsViewController) Website subtitle for detailed filter info */
+"detailed_filter_info_website_subtitle" = "Sajt";
+
+/* (FilterDetailsViewController) Subscription URL subtitle for detailed filter info */
+"detailed_filter_info_subscription_subtitle" = "URL do pretplate";
+
+/* (PremiumFeature) - Custom filters premium feature name */
+"custom_filters_feature_name" = "Prilagođeni filteri";
+
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
 /* (MainTabBarController) Main page tab for VoiceOver*/
@@ -725,6 +728,8 @@
 /* (MainPageController) saved data size for VoiceOver*/
 "elapsed_time_voiceover" = "Prosečno vreme za obradu DNS zahteva";
 
+/* (AGSearchView) Placeholder text for search bar */
+"search_view_placeholder" = "Traži";
 
 // MARK: - SystemProtectionEnablerController
 /* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
@@ -772,3 +777,27 @@
 
 /* (ImportSettingsController) add dns rules title */
 "import_dns_user_rules" = "Dodaj DNS korisnička pravila";
+
+/* (UpstreamsController) Custom address description */
+"upstreams_custom_address_description" = "IP adresa";
+
+/* (FiltersMasterController) Header Filters title */
+"navigation_item_filters_title" = "Filteri";
+
+/* (DnsFiltersController) Header DNS Filters title */
+"navigation_item_dns_filters_title" = "DNS filteri";
+
+/* (BackgroundFetchController) - Background app refresh every 1 hour title */
+"background_fetch_hour_period" = "Svaki sat";
+
+/* (DnsProvidersController) - add new dns server title */
+"add_custom_dns_server_title" = "Dodaj korisnički DNS server";
+
+/* (DnsProvidersController) - Header title */
+"dns_provider_controller_title" = "DNs Server";
+
+/* (DnsProviderDetailsController) Server title */
+"server_title" = "Server";
+
+/* (DnsProviderDetailsController) Website title */
+"website_title" = "Sajt";

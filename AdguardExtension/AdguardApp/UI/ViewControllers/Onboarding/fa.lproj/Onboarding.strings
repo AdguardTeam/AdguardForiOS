@@ -1,6 +1,6 @@
 
-/* Class = "UILabel"; text = "To use AdGuard in Safari follow a few easy steps"; ObjectID = "F7O-MB-LHu"; */
-"F7O-MB-LHu.text" = "برای استفاده AdGuard در سافاری چند گام آسان را دنبال کنید:";
+/* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "cMV-qC-ZdE"; */
+"cMV-qC-ZdE.normalTitle" = "ادامه";
 
-/* Class = "UILabel"; text = "Block Tracking"; ObjectID = "FDG-As-HDY"; */
-"FDG-As-HDY.text" = "حفاظت ردیابی";
+/* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "q8l-xM-B5q"; */
+"q8l-xM-B5q.normalTitle" = "ادامه";

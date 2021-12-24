@@ -1,6 +1,3 @@
-/* Class = "UIButton"; normalTitle = "Regular"; ObjectID = "03E-rd-Slw"; */
-"03E-rd-Slw.normalTitle" = "عادی";
-
 /* Class = "UILabel"; text = "Network settings"; ObjectID = "0ZJ-BI-849"; */
 "0ZJ-BI-849.text" = "تنظیمات شبکه";
 
@@ -8,28 +5,22 @@
 "3BA-9g-I6J.placeholder" = "نام";
 
 /* Class = "UILabel"; text = "AdGuard won't block the domains from this list"; ObjectID = "84p-U2-sd8"; */
-"84p-U2-sd8.text" = "AdGuard دامنهای این لیست را فیلتر نمی کند";
+"84p-U2-sd8.text" = "ادگارد دامنهای این لیست را فیلتر نمی کند";
 
 /* Class = "UILabel"; text = "AdGuard will block the domains from this list"; ObjectID = "AOm-kV-l4z"; */
 "AOm-kV-l4z.text" = "AdGuard دامنهای این لیست را فیلتر می کند";
-
-/* Class = "UIButton"; normalTitle = "DNS-over-HTTPS"; ObjectID = "DrO-hc-ilW"; */
-"DrO-hc-ilW.normalTitle" = "DNS-over-HTTPS";
 
 /* Class = "UILabel"; text = "Advanced network settings"; ObjectID = "FUx-XP-SzD"; */
 "FUx-XP-SzD.text" = "تنظیمات پیشرفته شبکه";
 
 /* Class = "UILabel"; text = "DNS server"; ObjectID = "LTC-71-V9S"; */
-"LTC-71-V9S.text" = "سرور";
+"LTC-71-V9S.text" = "سرور DNS";
 
-/* Class = "UILabel"; text = "Add a filter"; ObjectID = "NX4-vI-1WP"; */
-"NX4-vI-1WP.text" = "افزودن فیلتر";
+/* Class = "UILabel"; text = "AdGuard"; ObjectID = "QD7-ng-Xb6"; */
+"QD7-ng-Xb6.text" = "AdGuard";
 
 /* Class = "UILabel"; text = "DNS protection"; ObjectID = "QYv-iX-uIo"; */
-"QYv-iX-uIo.text" = "حفاظت سیستم";
-
-/* Class = "UIButton"; normalTitle = "TRY FOR FREE"; ObjectID = "Uem-fP-tai"; */
-"Uem-fP-tai.normalTitle" = "ارزیابی رایگان";
+"QYv-iX-uIo.text" = "حفاظت از DNS";
 
 /* Class = "UILabel"; text = "Allowlist"; ObjectID = "Wml-J6-ced"; */
 "Wml-J6-ced.text" = "لیست سفید سیستم";
@@ -37,53 +28,38 @@
 /* Class = "UITextField"; placeholder = "IP, sdns://, https:// or tls://"; ObjectID = "ZgC-4d-Peb"; Note = "(Add Custom Filter) url hint"; */
 "ZgC-4d-Peb.placeholder" = "IP, sdns://, https:// یا tls://";
 
-/* Class = "UIButton"; normalTitle = "DNS-over-TLS"; ObjectID = "Zn0-J3-lVl"; */
-"Zn0-J3-lVl.normalTitle" = "DNS-over-TLS";
-
-/* Class = "UILabel"; text = "DNS server"; ObjectID = "c9G-jn-5ym"; */
-"c9G-jn-5ym.text" = "رمزگُذاری DNS";
-
-/* Class = "UILabel"; text = "Server"; ObjectID = "csw-3H-3tU"; */
-"csw-3H-3tU.text" = "سرور";
-
-/* Class = "UILabel"; text = "Add a custom DNS server"; ObjectID = "d1u-rO-z2K"; */
-"d1u-rO-z2K.text" = "افزودن سرور DNS دستی";
-
 /* Class = "UILabel"; text = "DNS server address"; ObjectID = "dW3-zk-BPr"; */
 "dW3-zk-BPr.text" = "آدرس DNS سرور";
 
-/* Class = "UIButton"; normalTitle = "DNSCrypt"; ObjectID = "hh1-EV-7KD"; */
-"hh1-EV-7KD.normalTitle" = "DNSCrypt";
-
-/* Class = "UILabel"; text = "You can enhance your online privacy by encrypting DNS traffic. To do so, choose one of the recommended DNS providers."; ObjectID = "iaJ-tk-ohH"; */
-"iaJ-tk-ohH.text" = "DNS (سیستم نام دامنه) معادل اینترنتی دفترچه تلفن است. آن فهرست نام های دامنه را نگه داشته و آن ها را به آی پی ترجمه می کند.";
+/* Class = "UILabel"; text = "Network settings"; ObjectID = "iPl-vI-lX5"; */
+"iPl-vI-lX5.text" = "تنظیمات شبکه";
 
 /* Class = "UILabel"; text = "Blocklist"; ObjectID = "ihd-7R-RfE"; */
-"ihd-7R-RfE.text" = "لیست سیاه سیستم";
+"ihd-7R-RfE.text" = "لیست سیاه";
 
-/* Class = "UILabel"; text = "Website"; ObjectID = "mN8-Uh-sLQ"; */
-"mN8-Uh-sLQ.text" = "وبسایت";
+/* Class = "UIButton"; normalTitle = "Ok"; ObjectID = "o1z-O6-Bk9"; */
+"o1z-O6-Bk9.normalTitle" = "تأیید";
 
 /* Class = "UILabel"; text = "DNS filtering"; ObjectID = "pC4-RU-DaD"; */
-"pC4-RU-DaD.text" = "مسدودسازی درخواست DNS";
-
-/* Class = "UILabel"; text = "DNS Filters"; ObjectID = "pXa-VP-4yy"; */
-"pXa-VP-4yy.text" = "فيلترهای DNS";
+"pC4-RU-DaD.text" = "فیلترکردن DNS";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "pY3-X6-fFy"; */
-"pY3-X6-fFy.text" = "فیلترهای امنیتی، حریم خصوصی DNS،فیلترهای دستی،غیره.";
+"pY3-X6-fFy.text" = "فیلترهای امنیتی، حریم خصوصی DNS، فیلترهای سفارشی و غیره";
 
 /* Class = "UILabel"; text = "DNS filters"; ObjectID = "plc-eu-aXh"; */
-"plc-eu-aXh.text" = "فیلترها";
+"plc-eu-aXh.text" = "فیلترهای DNS";
 
 /* Class = "UILabel"; text = "Server name"; ObjectID = "pzP-ns-QSS"; */
 "pzP-ns-QSS.text" = "نام سرور";
 
 /* Class = "UILabel"; text = "Customize your DNS traffic by applying your own rules."; ObjectID = "qjN-LB-N3T"; */
-"qjN-LB-N3T.text" = "این مدل دامنه های ردیابی را مسدود و ترافیک DNS را رمزگذاری کند";
+"qjN-LB-N3T.text" = "با اعمال قوانین خود، ترافیک DNS خود را سفارشی کنید.";
+
+/* Class = "UIBarButtonItem"; title = "Select"; ObjectID = "uCw-Mi-HiJ"; */
+"uCw-Mi-HiJ.title" = "انتخاب";
 
 /* Class = "UILabel"; text = "DNS filtering"; ObjectID = "vDF-5j-uJn"; */
-"vDF-5j-uJn.text" = "مسدودسازی سفارشی";
+"vDF-5j-uJn.text" = "فیلترکردن DNS";
 
 /* Class = "UILabel"; text = "Filters and exceptions"; ObjectID = "xiD-h8-XrC"; */
 "xiD-h8-XrC.text" = "فیلترها و استثناها";

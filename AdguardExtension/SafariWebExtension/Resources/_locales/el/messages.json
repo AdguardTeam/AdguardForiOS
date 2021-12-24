@@ -1,0 +1,72 @@
+{
+    "extension_name": {
+        "message": "AdGuard"
+    },
+    "popup_action_safari_protection_title": {
+        "message": "Προστασία Safari",
+        "description": "TEXT MAX LENGTH: 25"
+    },
+    "popup_action_block_element": {
+        "message": "Αποκλεισμός στοιχείων σε αυτήν τη σελίδα",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_allowlisted": {
+        "message": "προστέθηκε στη λίστα επιτρεπόμενων",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_action_current_site_desc_basic_only": {
+        "message": "βασική προστασία μόνο",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_modal_all_sites_allowed_title": {
+        "message": "Απεριόριστη προστασία",
+        "description": "TEXT MAX LENGTH: 25"
+    },
+    "popup_modal_all_sites_allowed_desc": {
+        "message": "Καλή δουλειά! Το AdGuard θα αποκλείσει σχεδόν κάθε διαφήμιση και θα αντιμετωπίσει τις πιο δύσκολες προκλήσεις.",
+        "description": "TEXT MAX LENGTH: 140"
+    },
+    "popup_modal_all_sites_allowed_button": {
+        "message": "Συνέχεια",
+        "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_modal_not_all_sites_allowed_title": {
+        "message": "Επιλεκτική προστασία",
+        "description": "TEXT MAX LENGTH: 25"
+    },
+    "popup_modal_not_all_sites_allowed_button": {
+        "message": "Συνέχεια",
+        "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_modal_advanced_blocking_disabled_button": {
+        "message": "Ενεργοποίηση",
+        "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_modal_title_free": {
+        "message": "Αξιοποιήστε πλήρως τις δυνατότητές σας",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "popup_modal_btn_free": {
+        "message": "Αναβάθμιση",
+        "description": "TEXT MAX LENGTH: 20"
+    },
+    "popup_fullscreen_support_desc": {
+        "message": "Πάει κάτι στραβά? Μπορεί να έχουμε μια διόρθωση.",
+        "description": "TEXT MAX LENGTH: 45"
+    },
+    "popup_support_button_text": {
+        "message": "Αναφέρετε ένα πρόβλημα",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "modal_protection_off_title": {
+        "message": "Ενεργοποίηση AdGuard",
+        "description": "TEXT MAX LENGTH: 30"
+    },
+    "modal_protection_off_settings": {
+        "message": "Άνοιγμα <b>Ρυθμίσεις<\/b>",
+        "description": "TEXT MAX LENGTH: 28"
+    },
+    "extension_description": {
+        "message": "AdGuard Safari Web Extension"
+    }
+}

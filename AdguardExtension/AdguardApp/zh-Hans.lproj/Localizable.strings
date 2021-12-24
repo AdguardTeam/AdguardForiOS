@@ -19,6 +19,12 @@
 /* Alert title. On error. */
 "common_error_title" = "错误";
 
+/* Something went wrong title for unknown error */
+"something_went_wrong_title" = "发生错误";
+
+/* Unknown error desription */
+"unknown_error_description" = "请把问题报告给技术支持。";
+
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "无法将过滤器加载到 Safari。因此，无法应用您的最近更新。";
 
@@ -79,8 +85,26 @@
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "订阅";
 
+/* (LicenseProductChoiceCell) restore purchase button title */
+"restore_purchase_button_title" = "恢复购买";
+
+/* (FreeLicenseStateTableViewModel) One month subscription title */
+"one_month_subscription_title" = "每月";
+
+/* (FreeLicenseStateTableViewModel) One year subscription title */
+"one_year_subscription_title" = "每年";
+
+/* (FreeLicenseStateTableViewModel) title for permanent subscription */
+"permanent_subscription_title" = "永久";
+
+/* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
+"go_to_my_account_title" = "转到我的账号";
+
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "购买";
+
+/* (GetProTableController) missing purchase alert message */
+"upgrade_missing_purchase_message" = "订阅方案发生错误。请查看您的网络连接重新尝试。";
 
 /* (LoginController) lost password button title */
 "lost_password" = "忘记密码？";
@@ -211,9 +235,6 @@
 /* (DnsSettingController) Native DNS implementation title */
 "native_dns_implementation_title" = "本地";
 
-/* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
-"system_dns_server" = "无加密（系统DNS）";
-
 /* MainMenuController - filters menu description */
 "filters_description_format" = "已开启 %1$d / %2$d";
 
@@ -242,10 +263,10 @@
 "login_error_message" = "登录时发生错误";
 
 /* purchase secription format */
-"purchase_description_format" = "关于 AdGuard 订阅：<br><br>• 在购买确认后，您的 iTunes 账号会直接付款。<br><br>• 订阅会自动续订，除非在当前订阅期结束前的 24 小时内关闭自动续订。<br><br>• 在当前订阅期结束前的 24 小时内，软件会自动收取续订费。<br><br>• 购买订阅后，您可转到您的 iTunes 账号设置管理订阅，关闭自动续订。 <br><br><a href=%2$@>条款与条件</a>和<a href=%1$@>隐私政策</a>";
+"purchase_description_format" = "关于 AdGuard 订阅：<br><br>• 在购买确认后，您的 iTunes 账号会直接付款。<br><br>• 订阅会自动续订，除非在当前订阅期结束前的 24 小时内关闭自动续订。<br><br>• 在当前订阅期结束前的 24 小时内，软件会自动收取续订费。<br><br>• 购买订阅后，您可转到您的 iTunes 账号设置管理订阅，关闭自动续订。 <br><br>AdGuard<a href=%2$@>最终用户许可协议</a>和<a href=%1$@>隐私政策</a>";
 
 /* lifetime purchase secription format */
-"lifetime_purchase_description_format" = "<a href=%1$@>隐私政策</a> <br><br><a href=%2$@>使用条款</a>";
+"lifetime_purchase_description_format" = "AdGuard 的<a href=%2$@>最终用户许可协议</a>和<a href=%1$@>隐私政策</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "确定";
@@ -268,8 +289,20 @@
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "其它";
 
+/* (AdvancedSettingsController) Content blocker description text */
+"cb_description_common" = "6个内容拦截器，每个包含5万规则";
+
+/* (AdvancedSettingsController) Content blocker description text */
+"cb_description_advanced_protection" = "6个内容拦截器，每一个包含15万规则，外加高级保护";
+
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "过滤器：";
+
+/* (ContentBlockersTableController) - Advanced protection title */
+"cb_screen_advanced_protection_title" = "高级保护";
+
+/* (ContentBlockersTableController) - Content Blockers title */
+"cb_screen_content_blockers_title" = "内容拦截器";
 
 /* (AdvancedSettingsController) Restart when network changes error */
 "general_settings_restart_tunnel_error" = "你需要先启用 VPN";
@@ -304,6 +337,9 @@
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "在 Safari 设置内已禁用";
 
+/* (ContentBlockerStateCell) Description for advanced protection disabled state */
+"disabled_current_state_advanced_protection" = "在保护设置里已被禁用";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
 "update_current_state_label" = "检查更新...";
 
@@ -337,14 +373,11 @@
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "过滤器规则数量已超过上限。";
 
-/* (GetProController) title for permanent subscription */
-"permanent_subscription_title" = "永久";
+/* (FiltersController) Enabled state in groups section */
+"on_state" = "已启用";
 
-/* (FiltersController) ON state in groups section */
-"on_state" = "启用中";
-
-/* (FiltersController) OFF state in groups section */
-"off_state" = "禁用中";
+/* (FiltersController) Disabled state in groups section */
+"off_state" = "已禁用";
 
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "主页：";
@@ -360,6 +393,9 @@
 
 /* (AboutViewController) AdGuard copyright string */
 "copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\n保留所有版权。AdGuard.com";
+
+/* (LicensePageViewController) Login title */
+"common_login" = "登录";
 
 /* (AboutViewController) Logout title */
 "common_logout" = "登出";
@@ -414,6 +450,24 @@
 
 /* (ListOfRulesModel) title for export */
 "export" = "导出";
+
+/* (UserRulesTableController) - title for editing user rules option  */
+"open_user_rules_editor" = "打开编辑器";
+
+/* (UserRulesTableController) - description for Safari user rules in editor  */
+"editor_safari_user_rules_description" = "添加 Safari 用户规则";
+
+/* (UserRulesTableController) - description for allowlist rules in editor  */
+"editor_allowlist_rules_description" = "添加自定义白名单规则";
+
+/* (UserRulesTableController) - description for inverted allowlist rules in editor  */
+"editor_inverted_allowlist_rules_description" = "添加自定义反白名单的规则";
+
+/* (UserRulesTableController) - description for DNS allowlist rules in editor  */
+"editor_dns_allowlist_rules_description" = "添加自定义 DNS 白名单规则";
+
+/* (UserRulesTableController) - description for DNS blocklist rules in editor  */
+"editor_dns_blocklist_rules_description" = "添加自定义 DNS 黑名单的规则";
 
 /* (ListOfRulesModel) title for Clear button*/
 "common_clear" = "清除";
@@ -505,6 +559,33 @@
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "添加新规则";
 
+/* (OneSafariGroupFiltersModel) Add new filter title */
+"add_new_filter" = "添加过滤器";
+
+/* (OneSafariGroupFiltersModel) Ads filters group description */
+"ads_filters_group_description" = "移除广告的过滤列表";
+
+/* (OneSafariGroupFiltersModel) Privacy filters group description */
+"privacy_filters_group_description" = "避免跟踪过滤列表";
+
+/* (OneSafariGroupFiltersModel) Social Widgets filters group description */
+"social_widgets_filters_group_description" = "此过滤器会隐藏社交媒体小部件（「点赞」按钮及类似的元素）";
+
+/* (OneSafariGroupFiltersModel) Annoyances filters group description */
+"annoyances_filters_group_description" = "拦截网上恼人元素的过滤列表。“恼人\"的定义非常主观，取决于该名单的作者";
+
+/* (OneSafariGroupFiltersModel) Security filters group description */
+"security_filters_group_description" = "拦截所知的网上威胁的过滤列表";
+
+/* (OneSafariGroupFiltersModel) Other filters group description */
+"other_filters_group_description" = "用于不同目的的其他过滤列表";
+
+/* (OneSafariGroupFiltersModel) Language Specific filters group description */
+"language_specific_filters_group_description" = "针对特定语言网站的过滤列表";
+
+/* (OneSafariGroupFiltersModel) Custom filters group description */
+"custom_filters_group_description" = "手动添加的过滤列表";
+
 /* confirm reset lert text */
 "confirm_reset_text" = "重置所有设置包括用户规则、DNS防护、界面和授权设置。此操作无法撤消。您确定要重置吗？";
 
@@ -544,6 +625,9 @@
 /*(NewCustomFilterDetailsController) title for new dns filter */
 "new_dns_filter_title" = "新建 DNS 过滤器";
 
+/* (NewCustomFilterDetailsController) Error message when adding custom filter fails */
+"add_custom_filter_error_message" = "发生错误，或是包含自定义过滤的文件格式有错";
+
 /*(NewCustomFilterDetailsController) title for editing custom filter */
 "edit_custom_filter_title" = "编辑自定义过滤器";
 
@@ -557,13 +641,13 @@
 "protection_enabled" = "防护已开启";
 
 /*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Safari与DNS防护";
+"complex_enabled" = "Safari 与 DNS 防护被启用";
 
 /*(TodayViewController) Safari protection is enabled text  */
-"safari_enabled" = "Safari内容拦截";
+"safari_enabled" = "Safari 保护已启用";
 
 /*(TodayViewController) All protection is disabled text  */
-"complex_disabled" = "所有防护模组被禁用";
+"complex_disabled" = "Safari 与 DNS 防护被禁用";
 
 /*(TodayViewController) DNS protection is enabled text  */
 "system_enabled" = "DNS防护";
@@ -589,6 +673,9 @@
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_notification_title" = "以正常工作，关闭一些过滤器";
 
+/* (DnsFiltersTableController) - DNS filters title */
+"dns_filters_title" = "DNS 过滤器";
+
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "已拦截";
 
@@ -613,23 +700,26 @@
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_removed_from_blacklist" = "已从黑名单移除";
 
-/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
+/* (OnboardingController) first step text*/
 "onboarding_first_step_text" = "打开<b>设置</b>";
 
-/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "点击 <b>Safari浏览器</b>，选择 <b>\"内容拦截器\"</b> 菜单项";
+/* (OnboardingController) first step with advanced protection text*/
+"advanced_protection_onboarding_first_step_text" = "打开<b>设置</b>";
 
-/* (OnboardingController) second step text iOS15 . '%@' will be replaced with the safari icon */
-"onboarding_second_step_text_iOS15" = "点击 <b>Safari</b>，选择 <b>「扩展」</b> 菜单项";
+/* (OnboardingController) second step text */
+"onboarding_second_step_text" = "点击 <b>Safari 浏览器</b>，选择 <b>内容拦截器</b> 菜单项。";
 
-/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>开启所有内容拦截器</b>后，返回应用程序！";
+/* (OnboardingController) second step with advanced protection text */
+"advanced_protection_onboarding_second_step_text" = "前往 <b>Safari > 扩展</b>";
 
-/* (DnsProvidersController) default systen dns server name */
-"default_dns_server_name" = "系统DNS";
+/* (OnboardingController) third step text */
+"onboarding_third_step_text" = "<b>开启</b>所有 AdGuard 扩展";
 
-/* (DnsProvidersController) default systen dns server description */
-"default_dns_server_description" = "使用运营商提供的系统默认DNS服务器";
+/* (OnboardingController) third step with advanced protection text */
+"advanced_protection_onboarding_third_step_text" = "将所有 AdGuard 的开关设置为<b>开</b>。现在可以开始了！";
+
+/* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
+"onboarding_fours_step_text" = "以启用<b>高级</b>保护，请打开 Safari 浏览器，点击网址字段左侧的 <b>大小</b> 图标，<br><br>%@<br><br>然后点击<b>管理扩展程序</b> ，启用 <b>AdGuard</b> 切换。";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "拦截请求";
@@ -651,6 +741,9 @@
 
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "iOS 尚未支持 %@。请尝试添加其他上游。";
+
+/*(DnsFiltersController) the error message that is shown when trying to add a duplicate custom dns server */
+"custom_dns_server_exists" = "您试图添加一个已存在的 DNS 服务器。具有指定上游的服务器已在列表中。";
 
 /* (NewDnsServerController) save and select button title */
 "save_and_select_button_title" = "保存并选择";
@@ -742,35 +835,11 @@
 /* (BugReportController) Message when bug report failed */
 "bug_report_failed_message" = "无法提交错误报告。请稍后再试";
 
-/* (BugReportController) Message when leaving feedback failed */
-"feedback_failed_message" = "无法提交意见反馈。请稍后再试";
-
 /* (BugReportController) Message when bug report successed */
 "bug_report_successed_message" = "已成功发送您的错误报告！";
 
-/* (BugReportController) Message when feedback leaving successed */
-"feedback_successed_message" = "已成功发送您的意见反馈！";
-
-/* (BugReportController) title for bug report */
-"bug_report_title" = "报告错误";
-
-/* (BugReportController) title for leaving feedback */
-"leave_feedback_title" = "留下反馈";
-
-/* (BugReportController) description for bug report */
-"bug_report_description" = "请在此输入问题描述（该问题是否在更新后出现?）以及其他您正在使用的软件信息（VPN/反病毒/扩展）";
-
-/* (BugReportController) description for leaving feedback */
-"leave_feedback_description_format" = "请告诉我们您对 %@ 的看法。您对什么满意或不满意，推荐我们添加哪些功能";
-
-/* (BugReportController) button title for bug report */
-"bug_report_button_title" = "发送报告";
-
-/* (BugReportController) button title for leaving feedback */
-"leave_feedback_button_title" = "发送反馈";
-
 /* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "继续使用 AdGuard，即代表您同意<br /><a href=%2$@>条款和条件</a> 和 <a href=%1$@>隐私政策</a>";
+"introduction_license_agreement" = "我接受 AdGuard <a href=%2$@>EULA</a> 和 <a href=%1$@>隐私政策</a>。";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "请求";
@@ -815,16 +884,83 @@
 "requests_number" = "%d请求";
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
-"native_dns_setup_title" = "请在系统 DNS 设置开启 %@";
+"native_dns_setup_title" = "请在您的 DNS 设置开启 %@";
 
 /* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
 "native_dns_setup_description" = "以开启本地 DNS 请您打开<b>系统设置 </b>，前往 <b>通用 > VPN 和网络 > DNS</b> 并选择 <b>%@</b>。";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name; String for iOS 15 and newer */
+"native_dns_setup_description_ios15" = "以开启本地 DNS 请您打开<b>系统设置 </b>，前往 <b>通用 > VPN 和网络 > DNS</b> 并选择 <b>%@</b>。";
 
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "请告诉我们您对广告拦截体验是否满意";
 
 /* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
 "rate_app_problem_description" = "请确认一下您使用的是 <b>Safari 浏览器。</b><br> 就技术层面，目前我们无法在其他浏览器中拦截内容。<br>请前往 Safari 保护设置并开启所需要的过滤器列表。<br>重启 Safari 应用程序：关闭后再重新打开。";
+
+/* (FilterDetailsViewController) Version subtitle for detailed filter info */
+"detailed_filter_info_version_subtitle" = "版本";
+
+/* (FilterDetailsViewController) Updated subtitle for detailed filter info */
+"detailed_filter_info_updated_subtitle" = "已更新";
+
+/* (FilterDetailsViewController) Rules count subtitle for detailed filter info */
+"detailed_filter_info_rules_count_subtitle" = "规则数";
+
+/* (FilterDetailsViewController) Website subtitle for detailed filter info */
+"detailed_filter_info_website_subtitle" = "网站";
+
+/* (FilterDetailsViewController) Subscription URL subtitle for detailed filter info */
+"detailed_filter_info_subscription_subtitle" = "订阅地址";
+
+/* (AddRuleController) Error description when adding rule that already exists */
+"user_rule_exists_error" = "您正在尝试添加的规则已经在列表中";
+
+// MARK: - Strings for UserRulesRedirectController
+/* (UserRulesRedirectController) - Processing state title */
+
+"user_rules_processing_title" = "正在处理...";
+
+/* (UserRulesRedirectController) - Processing state description */
+"user_rules_processing_descr" = "请稍后...";
+
+/* (UserRulesRedirectController) - Description when allowlist rule is removed; %@ stands for 'allowlist' word hex color */
+"user_rules_allowlist_rule_removed" = "已从<u style=color:%@>白名单</u>移除";
+
+/* (UserRulesRedirectController) - Description when new allowlist rule is added; %@ stands for 'allowlist' word hex color */
+"user_rules_allowlist_rule_added" = "已添加到 <u style=color:%@>白名单</u>";
+
+/* (UserRulesRedirectController) - Description when blocklist rule is added; %@ stands for 'user rules' words hex color */
+"user_rules_blocklist_rule_added" = "在<u style=color:%@>用户规则</u>里有新拦截规则";
+
+/* (UserRulesRedirectController) - Description when blocklist rules are removed */
+"user_rules_blocklist_rules_removed" = "没有更多的用户规则";
+
+// MARK: - Strings for license screen
+/* (PremiumFeature) - Advanced protection premium feature name */
+
+"advanced_protection_feature_name" = "高级保护";
+
+/* (PremiumFeature) -  Security filters premium feature name */
+"security_filters_feature_name" = "安全过滤器 ";
+
+/* (PremiumFeature) - DNS privacy premium feature name */
+"dns_privacy_feature_name" = "DNS 隐私";
+
+/* (PremiumFeature) - Custom filters premium feature name */
+"custom_filters_feature_name" = "自定义过滤器";
+
+/* (PremiumFeature) - Advanced protection premium feature description */
+"advanced_protection_feature_description" = "拦截复杂广告（如 Safari 浏览器里的 YouTube 广告）的改进方式";
+
+/* (PremiumFeature) - Security filters premium feature description */
+"security_filters_feature_description" = "拦截钓鱼、恶意或其他可疑内容";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "本地加密 DNS 请求来有效管理个人隐私";
+
+/* (PremiumFeature) - Custom filters premium feature description */
+"custom_filters_feature_description" = "使用第三方过滤器或创建自己的";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -869,6 +1005,8 @@
 /* (MainPageController) saved data size for VoiceOver*/
 "elapsed_time_voiceover" = "处理DNS请求的平均时间";
 
+/* (AGSearchView) Placeholder text for search bar */
+"search_view_placeholder" = "搜索";
 
 // MARK: - SystemProtectionEnablerController
 /* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
@@ -938,7 +1076,7 @@
 "upstreams_description" = "上游地址";
 
 /* (UpstreamsController) Fallbacks title */
-"upstreams_fallbacks_title" = "Fallback 服务器";
+"upstreams_fallbacks_title" = "后备（Fallback）服务器";
 
 /* (UpstreamsController) Custom address title */
 "upstreams_custom_address_title" = "添加自定义 IP";
@@ -979,10 +1117,51 @@
 "youtube_script_success_title" = "YouTube 现在无广告！请注意，如果重新加载页面，则需要再次运行此扩展";
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
-"youtube_script_wrong_domain_title" = "此扩展应该仅在 YouTube 页面上启动";
+"youtube_script_wrong_domain_title" = "此扩展仅在 YouTube 页面上有效";
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
 "youtube_script_already_executed_title" = "此扩展已被执行";
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
 "youtube_script_error_title" = "删除 YouTube 广告时发生未知错误";
+
+// MARK: - ActionExtensionMainController
+/* (ActionExtensionMainController) - ActionExtension info for iOS 15>= */
+
+"action_extension_obsolete_info" = "此操作已经过期，但是在“大小”菜单中可用 AdGuard Safari Web 扩展。以使用新扩展，请打开“大小”菜单，点击「管理扩展」并勾 AdGuard。";
+
+/* (ActionExtensionMainController) - ActionExtension info for iOS 14<= */
+"action_extension_new_version_info" = "该扩展的新版本可用于 iOS 15。它有更多的功能和改进的用户界面。请记得更新！";
+
+/* (BackgroundFetchController) - Background app refresh default title */
+"background_fetch_default_period" = "默认周期";
+
+/* (BackgroundFetchController) - Background app refresh every 1 hour title */
+"background_fetch_hour_period" = "每小时";
+
+/* (BackgroundFetchController) - Background app refresh every 3 hours title */
+"background_fetch_tree_hours_period" = "每个3小时";
+
+/* (BackgroundFetchController) - Background app refresh every 12 hours title */
+"background_fetch_twelve_hours_period" = "每个12小时";
+
+/* (BackgroundFetchController) - Background app refresh every 24 hours title */
+"background_fetch_twenty_four_hours_period" = "每个24小时";
+
+/* Background app refresh time title */
+"background_app_refresh_time_title" = "后台应用程序刷新时间";
+
+/* (DnsProvidersController) - add new dns server title */
+"add_custom_dns_server_title" = "添加用户 DNS 服务器";
+
+/* (DnsProvidersController) - Header title */
+"dns_provider_controller_title" = "DNS服务器";
+
+/* (DnsProvidersController) - Header description */
+"dns_provider_controller_description" = "通过加密 DNS 流量您可以加强您的在线隐私保护。请从推荐的 DNS 提供商中选择一个。";
+
+/* (DnsProviderDetailsController) Server title */
+"server_title" = "服务器";
+
+/* (DnsProviderDetailsController) Website title */
+"website_title" = "网站";

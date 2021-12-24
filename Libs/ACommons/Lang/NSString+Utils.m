@@ -1,20 +1,21 @@
-/**
-    This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © Adguard Software Limited. All rights reserved.
+//
+// This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
+// Copyright © Adguard Software Limited. All rights reserved.
+//
+// Adguard for iOS is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Adguard for iOS is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
+//
 
-    Adguard for iOS is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    Adguard for iOS is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
-*/
 #import <CommonCrypto/CommonDigest.h>
 #import "NSString+Utils.h"
 #import "NSException+Utils.h"
@@ -329,7 +330,7 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
     }
 
     BOOL foundFor = asciiContains(self, chars, length, ignoreCase);
-    
+
     if (charsNeedFree) {
         free(chars);
     }
@@ -338,43 +339,43 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
 }
 
 - (NSArray *)asciiSplitByDelimiter:(char)delimiter escapeCharacter:(char)escapeCharacter{
-    
+
     if ([NSString isNullOrEmpty:self]) {
         return @[];
     }
-    
+
     NSMutableArray *list = [NSMutableArray array];
-    
+
     // Prepare pointers or buffers
     CFIndex selfLength = CFStringGetLength((__bridge CFStringRef)self);
-    
+
     BOOL selfCharsNeedFree = NO;
     char *selfChars = (char *)CFStringGetCStringPtr((__bridge CFStringRef)self,
                                                     kCFStringEncodingASCII);
     if (selfChars == NULL) {
-        
+
         selfChars = malloc((selfLength + 1) * sizeof(char));
         if (selfChars == NULL)
             @throw [NSException mallocException:@"selfChars"];
-        
+
         if (!CFStringGetCString((__bridge CFStringRef)self, selfChars,
                                 (selfLength + 1), kCFStringEncodingASCII)) {
-            
+
             free(selfChars);
             return nil;
         }
-        
+
         selfCharsNeedFree = YES;
     }
-    
+
     char *buffer = malloc((selfLength + 1) * sizeof(char));
     NSString *out;
-    
+
     int j = 0;
     for (int i = 0; i < selfLength; i++) {
-        
+
         if (selfChars[i] == delimiter){
-            
+
             if (i == 0){
                 // Ignore
             }
@@ -383,7 +384,7 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
             }
             else{
                 if (j > 0){
-                    
+
                     out = [[NSString alloc] initWithBytes:buffer length:j encoding:NSASCIIStringEncoding];
                     [list addObject:out];
                     j = 0;
@@ -395,19 +396,19 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
             buffer[j++] = selfChars[i];
         }
     }
-    
+
     if (j > 0){
         out = [[NSString alloc] initWithBytes:buffer length:j encoding:NSASCIIStringEncoding];
         [list addObject:out];
     }
-    
+
     // free memory
     free(buffer);
-    
+
     if (selfCharsNeedFree) {
         free(selfChars);
     }
-    
+
     return list;
 }
 
@@ -509,11 +510,11 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
 }
 
 - (NSString *)sha256Digest {
-    
+
     const char *cstr = [self UTF8String];
     unsigned char result[CC_SHA256_DIGEST_LENGTH];
     CC_SHA256(cstr, (CC_LONG)strlen(cstr), result);
-    
+
     return [NSString
             stringWithFormat:
             @"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x"
@@ -527,7 +528,7 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
 }
 
 - (NSUInteger )countOccurencesOfString:(NSString *)str {
-    
+
     NSUInteger count = 0;
     NSUInteger length = [self length];
     NSRange range = NSMakeRange(0, length);
@@ -540,34 +541,34 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
             count++;
         }
     }
-    
+
     return count;
 }
 
 + (NSString *)repeat:(NSString *)string separator:(NSString *)separator repeat:(NSInteger)repeat {
-    
+
     NSMutableString* result = [NSMutableString new];
-    
+
     for(int i = 0; i < repeat; ++i) {
-        
+
         if(i != 0) [result appendString:separator];
-        
+
         [result appendString:string];
     }
-    
+
     return result.copy;
 }
 
 - (NSMutableAttributedString *)attributedStringFromHtml {
-    
+
     NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
-    
+
     NSError* error;
     NSDictionary* options = @{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)};
     NSMutableAttributedString* string = [[NSMutableAttributedString alloc] initWithData:data
                                                                                 options:options
                                                                      documentAttributes:nil error:&error];
-    
+
     return string;
 }
 
@@ -623,7 +624,7 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
     CFIndex *inputCharsAIndexArray = calloc((strings.count), sizeof(CFIndex));
     if (inputCharsAIndexArray == nil)
         @throw [NSException mallocException:@"inputCharsAIndexArray"];
-    
+
     CFIndex *inputCharsRangePosArray =
         malloc((strings.count) * sizeof(CFIndex));
     if (inputCharsRangePosArray == nil)
@@ -812,7 +813,7 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
                 break;
             }
         } else{
-            
+
             indexA -= indexB;
             // reset B counter
             indexB = 0;
@@ -833,49 +834,49 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
 #pragma mark - Private Fuctions
 
  BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase) {
-    
+
     // Fast special method
-    
+
     if (!chars)
         return NO;
-    
+
     // Prepare pointers or buffers
     CFIndex selfLength = CFStringGetLength((__bridge CFStringRef)self);
-    
+
     BOOL selfCharsNeedFree = NO;
     char *selfChars = (char *)CFStringGetCStringPtr((__bridge CFStringRef)self,
                                                     kCFStringEncodingASCII);
     if (selfChars == NULL) {
-        
+
         selfChars = malloc((selfLength + 1) * sizeof(char));
         if (selfChars == NULL)
             @throw [NSException mallocException:@"selfChars"];
-        
+
         if (!CFStringGetCString((__bridge CFStringRef)self, selfChars,
                                 (selfLength + 1), kCFStringEncodingASCII)) {
-            
+
             free(selfChars);
             return NO;
         }
-        
+
         selfCharsNeedFree = YES;
     }
-    
+
     char _selfChar = 0, _char = 0;
     BOOL foundFor = NO;
-    
+
     for (CFIndex indexA = 0, indexB = 0; indexA < selfLength; indexA++) {
-        
+
         _selfChar = selfChars[indexA];
         if (ignoreCase && _selfChar >= 0x41 && _selfChar <= 0x5A)
             _selfChar += 0x20;
-        
+
         _char = chars[indexB];
         if (ignoreCase && _char >= 0x41 && _char <= 0x5A)
             _char += 0x20;
-        
+
         if (_selfChar == _char) {
-            
+
             // increment B counter
             if (++indexB == length) {
                 // found
@@ -883,33 +884,33 @@ BOOL asciiContains(NSString *self, char *chars, CFIndex length, BOOL ignoreCase)
                 break;
             }
         } else{
-            
+
             indexA -= indexB;
             // reset B counter
             indexB = 0;
         }
     }
-    
+
     if (selfCharsNeedFree) {
         free(selfChars);
     }
-    
+
     return foundFor;
 }
 
 NSString* ACLocalizedString(NSString* key, NSString* comment) {
-    
+
     if (!key) {
         return @"";
     }
-    
+
     NSString* localizedString = NSLocalizedString(key, nil);
-    
+
     if (![[[NSLocale preferredLanguages] objectAtIndex:0] isEqualToString:@"en"] && [localizedString isEqualToString:key]) {
         NSString * path = [[NSBundle mainBundle] pathForResource:@"en" ofType:@"lproj"];
         NSBundle * languageBundle = [NSBundle bundleWithPath:path];
         localizedString = [languageBundle localizedStringForKey:key value:@"" table:nil];
-        
+
         NSCAssert(![localizedString isEqualToString:key], @"there is no localizable string for key: %@", key);
     }
     return localizedString;

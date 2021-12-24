@@ -1,20 +1,20 @@
-/**
-    This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © Adguard Software Limited. All rights reserved.
-
-    Adguard for iOS is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    Adguard for iOS is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
-*/
+//
+// This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
+// Copyright © Adguard Software Limited. All rights reserved.
+//
+// Adguard for iOS is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Adguard for iOS is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
+//
 
 #import <Foundation/Foundation.h>
 
@@ -24,7 +24,7 @@
 #pragma mark - Utilities
 //////////////////////////////////////////////////////////////
 
-/** 
+/**
  Gets encoding from the encoding name. If not found - returns default
 */
 + (NSStringEncoding)encodingFromString:(nonnull NSString *)encodingName default:(NSStringEncoding)defaultEncoding;
@@ -42,7 +42,7 @@
 
 - (nonnull NSString *)replace:(nonnull NSString *)from to:(nonnull NSString *)to;
 
-/** 
+/**
  @return index of string into receiver, or -1 if not found
 */
 - (NSInteger)indexOf:(nonnull NSString *)string fromIndex:(NSUInteger)index;
@@ -58,7 +58,7 @@
  @param count The maximum number of substrings to return.
 
  @param omitEmpty Set YES to omit empty array elements from the array returned.
- 
+
  */
 - (nonnull NSArray *)splitByArray:(nonnull NSArray *)strings count:(NSUInteger)count omitEmpty:(BOOL)omitEmpty;
 
@@ -71,11 +71,11 @@
 
 /**
  Splits string in ascii mode by the delimiter, ignoring escaped delimiters (and empty parts).
- 
+
  @return List with string parts, where escaped characters became unescaped.
- 
+
  Exemples:
- 
+
  NSArray *test = @[];
  XCTAssert([[@"    " asciiSplitByDelimiter:' ' escapeCharacter:'\\'] isEqual:@[]]);
  test = @[@" "];
@@ -88,7 +88,7 @@
  XCTAssert([test isEqualToArray:[@"str\\ str" asciiSplitByDelimiter:' ' escapeCharacter:'\\']]);
  test = @[@"str,", @" ", @"\\st,r"];
  XCTAssert([test isEqualToArray:[@"str\\,, ,\\st\\,r" asciiSplitByDelimiter:',' escapeCharacter:'\\']]);
- 
+
  */
 - (nullable NSArray *)asciiSplitByDelimiter:(char)delimiter escapeCharacter:(char)escapeCharacter;
 
@@ -112,10 +112,10 @@
 
 /**
     Find any string from string array as substring in receiver.
- 
+
     @param strings An array of strings that finding in this string, an empty array that contains no strings, or nil.
     @param startIndex Index, from it will be performed search.
- 
+
     @return Range of first occurence of any string from string array, otherwise range where range.location equals NSNotFound.
  */
 - (NSRange)rangeOfAny:(nonnull NSArray *)strings from:(NSUInteger)startIndex;

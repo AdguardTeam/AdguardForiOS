@@ -1,0 +1,6 @@
+framework module DnsAdGuardSDK {
+    umbrella header "DnsAdGuardSDK.h"
+
+    export *
+    module * { export * }
+}

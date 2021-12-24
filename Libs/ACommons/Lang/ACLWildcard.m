@@ -1,20 +1,21 @@
-/**
-    This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-    Copyright © Adguard Software Limited. All rights reserved.
+//
+// This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
+// Copyright © Adguard Software Limited. All rights reserved.
+//
+// Adguard for iOS is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Adguard for iOS is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
+//
 
-    Adguard for iOS is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    Adguard for iOS is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
-*/
 #import "ACLLogger.h"
 #import "NSString+Utils.h"
 #import "NSException+Utils.h"
@@ -52,14 +53,14 @@
 {
     NSError *err;
     ACLWildcard *wildcard = [[ACLWildcard alloc] initWithWildcard:pattern options:options error:&err];
-    
+
     if  (err){
-        
+
         DDLogWarn(@"Can't create regex for: %@", pattern);
         DDLogWarn(@"Regex creation error: %@", [err localizedDescription]);
         return nil;
     }
-    
+
     return wildcard;
 }
 
@@ -89,11 +90,11 @@
 
     if (![NSString isNullOrEmpty:_shortcut] && ![input contains:_shortcut])
         return NO;
-    
-    
+
+
     NSRange result = [self rangeOfFirstMatchInString:input options:0 range:NSMakeRange(0, input.length)];
     return result.location != NSNotFound;
-    
+
 }
 
 
@@ -112,13 +113,13 @@
     NSString *longest = @"";
     NSCharacterSet *cSet = [NSCharacterSet characterSetWithCharactersInString:[NSString stringWithFormat:@"%@%@", MASK_ANY_SYMBOLS, MASK_ANY_SYMBOL]];
     NSArray *parts = [fromPattern componentsSeparatedByCharactersInSet:cSet];
-    
+
     for (NSString *part in parts)
         if (part.length > longest.length)
         {
             longest = part;
         }
-    
+
     return longest;
 }
 

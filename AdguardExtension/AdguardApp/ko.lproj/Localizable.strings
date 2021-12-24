@@ -19,6 +19,12 @@
 /* Alert title. On error. */
 "common_error_title" = "오류";
 
+/* Something went wrong title for unknown error */
+"something_went_wrong_title" = "무엇인가 잘못되었습니다!";
+
+/* Unknown error desription */
+"unknown_error_description" = "지원을 받으려면 오류를 신고해주십시오.";
+
 /* (AEService) Service errors descriptions */
 "safari_filters_loading_error" = "Safari에 필터를 로드할 수 없으므로 최근 변경 사항이 적용되지 않았습니다.";
 
@@ -68,19 +74,37 @@
 "common_action_yes" = "예";
 
 /* (MainController) login status caption on main screen */
-"protection_enabled_caption" = "보호가 활성화 되었습니다.";
+"protection_enabled_caption" = "보호 켜짐";
 
 /* (MainController) login status caption on main screen */
 "protection_partly_enabled_caption" = "몇몇의 콘텐츠 차단기가 비활성화 됨";
 
 /* (MainController) login status caption on main screen */
-"protection_disabled_caption" = "보호가 비활성화 되었습니다.";
+"protection_disabled_caption" = "보호 꺼짐";
 
 /* (GetProTableController) upgrade button title */
 "upgrade_button_title" = "구독";
 
+/* (LicenseProductChoiceCell) restore purchase button title */
+"restore_purchase_button_title" = "구매 내역 복구";
+
+/* (FreeLicenseStateTableViewModel) One month subscription title */
+"one_month_subscription_title" = "월간";
+
+/* (FreeLicenseStateTableViewModel) One year subscription title */
+"one_year_subscription_title" = "연간";
+
+/* (FreeLicenseStateTableViewModel) title for permanent subscription */
+"permanent_subscription_title" = "영구";
+
+/* (PremiumLicenseStateView) Title for button that leads to account page in Safari */
+"go_to_my_account_title" = "내 계정으로 이동";
+
 /* (GetProTableController) upgrade button title for lifetime license */
 "upgrade_lifetime_button_title" = "구매";
+
+/* (GetProTableController) missing purchase alert message */
+"upgrade_missing_purchase_message" = "구독 플랜을 이용할 수 없습니다. 인터넷 연결을 확인하고 다시 시도해 주세요.";
 
 /* (LoginController) lost password button title */
 "lost_password" = "비밀번호를 잊어버렸나요?";
@@ -211,9 +235,6 @@
 /* (DnsSettingController) Native DNS implementation title */
 "native_dns_implementation_title" = "기본";
 
-/* MainMenuController - No encryption (System DNS) Title, when a server is not selected */
-"system_dns_server" = "암호화 없음 (시스템 DNS)";
-
 /* MainMenuController - filters menu description */
 "filters_description_format" = "%2$d가지 중 %1$d가지가 활성화 됨";
 
@@ -241,8 +262,11 @@
 /* login error message */
 "login_error_message" = "로그인 중 오류가 발생했습니다.";
 
+/* purchase secription format */
+"purchase_description_format" = "AdGuard 구독 서비스에 대하여:<br><br>• 결제는 구입 확인 시 iTunes 계정을 통해 이루어집니다.<br><br>• 구독 서비스는 자동 갱신이 종료되기 24시간 전에 비활성화하지 않는 한 자동으로 갱신됩니다.<br><br>• \n구독 갱신 수수료는 현재 기간 종료 후 24시간 이내에 iTunes 계정으로 청구됩니다. / 구독 갱신 요금은 기존 구독 만료 후 24시간 이내에 iTunes 계정으로 청구됩니다. / 구독 갱신 수수료는 기존 구독 만료 후 24시간 이내에 iTunes 계정으로 청구됩니다. <br><br>• 고객님은 구독을 직접 관리할 수 있으며, 자동 갱신은 구독 후 계정 설정에서 비활성화할 수 있습니다. <br><br>AdGuard의<a href=%2$@>최종 사용자 라이선스 계약(EULA)</a> 및 <a href=%1$@>개인정보취급방침</a>";
+
 /* lifetime purchase secription format */
-"lifetime_purchase_description_format" = "<a href=%2$@>이용 약관</a> 및<a href=%1$@>개인정보취급방침</a>";
+"lifetime_purchase_description_format" = "AdGuard의 <a href=%2$@>최종 사용자 라이선스 계약(EULA)</a> 및<a href=%1$@>개인정보취급방침</a>";
 
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "확인";
@@ -265,8 +289,20 @@
 /* (AdvancedSettingsController) "Other" header view title*/
 "other_header_title" = "기타";
 
+/* (AdvancedSettingsController) Content blocker description text */
+"cb_description_common" = "각각 규칙 최대 50,000개를 포함하는 콘텐츠 차단기 6개가 있습니다";
+
+/* (AdvancedSettingsController) Content blocker description text */
+"cb_description_advanced_protection" = "각각 규칙 최대 150,000개를 포함하는 콘텐츠 차단기 6개가 있으며, 고급 보호 기능도 있습니다";
+
 /* (ContentBlockerStateController) Enabled filters */
 "content_blocker_filters" = "필터:";
+
+/* (ContentBlockersTableController) - Advanced protection title */
+"cb_screen_advanced_protection_title" = "고급 보호";
+
+/* (ContentBlockersTableController) - Content Blockers title */
+"cb_screen_content_blockers_title" = "콘텐츠 차단기";
 
 /* (AdvancedSettingsController) Restart when network changes error */
 "general_settings_restart_tunnel_error" = "VPN 을 먼저 활성화해야합니다";
@@ -301,6 +337,9 @@
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when disabled  */
 "disabled_current_state_label" = "사파리 설정에서 비활성화 됨";
 
+/* (ContentBlockerStateCell) Description for advanced protection disabled state */
+"disabled_current_state_advanced_protection" = "보호 설정에서 비활성화됨";
+
 /* (ContentBlockerStateCell) text is shown in currentFilterStateLabel when updating  */
 "update_current_state_label" = "업데이트 확인 중...";
 
@@ -334,13 +373,10 @@
 /* (Action Extension - AEAUIMainController) error occurs when try turn off filtration on site. */
 "filter_rules_maximum" = "필터 규칙의 최대 갯수를 초과했습니다.";
 
-/* (GetProController) title for permanent subscription */
-"permanent_subscription_title" = "영구";
-
-/* (FiltersController) ON state in groups section */
+/* (FiltersController) Enabled state in groups section */
 "on_state" = "켜기";
 
-/* (FiltersController) OFF state in groups section */
+/* (FiltersController) Disabled state in groups section */
 "off_state" = "끄기";
 
 /* (NewCustomFilterDetailedController) homepage string */
@@ -357,6 +393,9 @@
 
 /* (AboutViewController) AdGuard copyright string */
 "copyright_format" = "© 2009 — %@ AdGuard Software Ltd.\nAll rights reserved. AdGuard.com";
+
+/* (LicensePageViewController) Login title */
+"common_login" = "로그인";
 
 /* (AboutViewController) Logout title */
 "common_logout" = "로그아웃";
@@ -411,6 +450,24 @@
 
 /* (ListOfRulesModel) title for export */
 "export" = "내보내기";
+
+/* (UserRulesTableController) - title for editing user rules option  */
+"open_user_rules_editor" = "편집기 열기";
+
+/* (UserRulesTableController) - description for Safari user rules in editor  */
+"editor_safari_user_rules_description" = "Safari 사용자 규칙 추가";
+
+/* (UserRulesTableController) - description for allowlist rules in editor  */
+"editor_allowlist_rules_description" = "허용 목록 사용자 지정 규칙 추가";
+
+/* (UserRulesTableController) - description for inverted allowlist rules in editor  */
+"editor_inverted_allowlist_rules_description" = "반전된 허용 목록 사용자 지정 규칙 추가";
+
+/* (UserRulesTableController) - description for DNS allowlist rules in editor  */
+"editor_dns_allowlist_rules_description" = "DNS 허용 목록 사용자 지정 규칙 추가";
+
+/* (UserRulesTableController) - description for DNS blocklist rules in editor  */
+"editor_dns_blocklist_rules_description" = "DNS 차단 목록 사용자 지정 규칙 추가";
 
 /* (ListOfRulesModel) title for Clear button*/
 "common_clear" = "비우기";
@@ -502,6 +559,33 @@
 /*(ListOfRules) Add new rule title */
 "add_new_rule" = "새 규칙 추가";
 
+/* (OneSafariGroupFiltersModel) Add new filter title */
+"add_new_filter" = "필터 추가";
+
+/* (OneSafariGroupFiltersModel) Ads filters group description */
+"ads_filters_group_description" = "광고를 제거하는 필터 리스트";
+
+/* (OneSafariGroupFiltersModel) Privacy filters group description */
+"privacy_filters_group_description" = "추적을 차단하는 필터 리스트";
+
+/* (OneSafariGroupFiltersModel) Social Widgets filters group description */
+"social_widgets_filters_group_description" = "소셜 미디어 위젯('좋아요' 버튼 등)을 차단하는 필터 리스트";
+
+/* (OneSafariGroupFiltersModel) Annoyances filters group description */
+"annoyances_filters_group_description" = "웹 페이지의 성가신 요소를 차단하는 필터 리스트. '성가신'의 정의는 주관적일 수 있으며 목록을 작성한 사람에 따라 기준이 다를 수 있습니다";
+
+/* (OneSafariGroupFiltersModel) Security filters group description */
+"security_filters_group_description" = "알려진 온라인 위협을 차단하는 필터 리스트";
+
+/* (OneSafariGroupFiltersModel) Other filters group description */
+"other_filters_group_description" = "다른 기능들을 수행하는 기타 필터 리스트";
+
+/* (OneSafariGroupFiltersModel) Language Specific filters group description */
+"language_specific_filters_group_description" = "특정 언어로 된 웹 사이트를 겨냥하는 필터 리스트";
+
+/* (OneSafariGroupFiltersModel) Custom filters group description */
+"custom_filters_group_description" = "내가 수동으로 추가한 필터 리스트";
+
 /* confirm reset lert text */
 "confirm_reset_text" = "사용자 규칙, DNS 보호, 인터페이스 및 인증 설정을 포함한 모든 설정이 초기화됩니다. 이 작업은 취소할 수 없습니다. 설정을 초기화합니까?";
 
@@ -541,6 +625,9 @@
 /*(NewCustomFilterDetailsController) title for new dns filter */
 "new_dns_filter_title" = "새 DNS 필터";
 
+/* (NewCustomFilterDetailsController) Error message when adding custom filter fails */
+"add_custom_filter_error_message" = "문제가 발생했거나 사용자 정의 필터링 규칙이 있는 파일의 형식이 잘못되었습니다";
+
 /*(NewCustomFilterDetailsController) title for editing custom filter */
 "edit_custom_filter_title" = "사용자 정의 필터 수정";
 
@@ -548,19 +635,19 @@
 "common_add" = "추가";
 
 /*(TodayViewController) Protection is disabled title  */
-"protection_disabled" = "보호가 비활성화 되었습니다.";
+"protection_disabled" = "보호 꺼짐";
 
 /*(TodayViewController) Protection is enabled title  */
-"protection_enabled" = "보호가 활성화 되었습니다.";
+"protection_enabled" = "보호 켜짐";
 
 /*(TodayViewController) Complex protection is enabled text  */
-"complex_enabled" = "Safari 및 DNS 보호";
+"complex_enabled" = "Safari 및 DNS 보호 켜짐";
 
 /*(TodayViewController) Safari protection is enabled text  */
-"safari_enabled" = "Safari 콘텐츠 차단";
+"safari_enabled" = "Safari 보호 켜짐";
 
 /*(TodayViewController) All protection is disabled text  */
-"complex_disabled" = "모든 보호 모듈이 비활성화 되었습니다";
+"complex_disabled" = "Safari 및 DNS 보호 꺼짐";
 
 /*(TodayViewController) DNS protection is enabled text  */
 "system_enabled" = "DNS 보호";
@@ -586,6 +673,9 @@
 /*(DnsFiltersController) DNS filters overlimit title */
 "dns_filters_notification_title" = "올바른 작업을 위해 일부 필터를 끄세요";
 
+/* (DnsFiltersTableController) - DNS filters title */
+"dns_filters_title" = "DNS 필터";
+
 /*(DnsLogController) status of dns request */
 "dns_request_status_blocked" = "차단됨";
 
@@ -610,20 +700,26 @@
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_removed_from_blacklist" = "차단 목록에서 제거됨";
 
-/* (OnboardingController) first step text. '%@' will be replaced with the settings icon */
+/* (OnboardingController) first step text*/
 "onboarding_first_step_text" = "<b>설정</b>을 엽니다";
 
-/* (OnboardingController) second step text. '%@' will be replaced with the safari icon */
-"onboarding_second_step_text" = "<b>Safari</b>를 누르고 <b>\"콘텐츠 차단기\"</b> 메뉴 항목을 선택합니다";
+/* (OnboardingController) first step with advanced protection text*/
+"advanced_protection_onboarding_first_step_text" = "<b>설정</b>을 누릅니다.";
 
-/* (OnboardingController) third step text. '%@' will be replaced with the switch icon */
-"onboarding_third_step_text" = "<b>모든 콘텐츠 차단기를 켜고</b> 앱으로 돌아갑니다.";
+/* (OnboardingController) second step text */
+"onboarding_second_step_text" = "<b>Safari</b>를 누르고 아래로 스와이프한 후<b>'콘텐츠 차단기'</b>를 누릅니다.";
 
-/* (DnsProvidersController) default systen dns server name */
-"default_dns_server_name" = "시스템 DNS";
+/* (OnboardingController) second step with advanced protection text */
+"advanced_protection_onboarding_second_step_text" = "<b>Safari > 확장 프로그램</b>으로 이동합니다.";
 
-/* (DnsProvidersController) default systen dns server description */
-"default_dns_server_description" = "인터넷 서비스 공급자가 제공하는 시스템 기본 DNS 서버를 사용합니다";
+/* (OnboardingController) third step text */
+"onboarding_third_step_text" = "모든 AdGuard 확장 프로그램을 <b>활성화합니다</b>.";
+
+/* (OnboardingController) third step with advanced protection text */
+"advanced_protection_onboarding_third_step_text" = "모든 AdGuard 설정을 <b>켜세요</b>. 그럼 준비는 끝났습니다!";
+
+/* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
+"onboarding_fours_step_text" = "<b>고급 보호</b> 기능을 이용하려면, Safari를 열고, URL 입력란 좌측의 <b>가가</b> 아이콘을 누르고,<br><br> %@ <br><br>확장 프로그램 관리를 누른 다음 <b>AdGuard</b> 항목을 켜세요.";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "요청 차단";
@@ -645,6 +741,9 @@
 
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@은 아직 iOS에서 지원되지 않습니다. 다른 업스트림을 추가해 보십시오.";
+
+/*(DnsFiltersController) the error message that is shown when trying to add a duplicate custom dns server */
+"custom_dns_server_exists" = "겹치는 DNS 서버를 추가하려고 했습니다. 지정한 업스트림의 서버가 이미 목록에 있습니다";
 
 /* (NewDnsServerController) save and select button title */
 "save_and_select_button_title" = "저장하고 선택";
@@ -736,35 +835,11 @@
 /* (BugReportController) Message when bug report failed */
 "bug_report_failed_message" = "버그 보고서 전송에 실패했습니다. 다시 시도해주세요";
 
-/* (BugReportController) Message when leaving feedback failed */
-"feedback_failed_message" = "피드백을 보내지 못했습니다. 다시 시도해주세요";
-
 /* (BugReportController) Message when bug report successed */
 "bug_report_successed_message" = "버그 신고가 성공적으로 전송되었습니다!";
 
-/* (BugReportController) Message when feedback leaving successed */
-"feedback_successed_message" = "피드백이 성공적으로 전송되었습니다!";
-
-/* (BugReportController) title for bug report */
-"bug_report_title" = "버그 신고";
-
-/* (BugReportController) title for leaving feedback */
-"leave_feedback_title" = "피드백 남기기";
-
-/* (BugReportController) description for bug report */
-"bug_report_description" = "문제가 언제부터 발생했는지 (업데이트 후 발생한 문제인지?), 다른 소프트웨어(VPN/안티바이러스/확장 프로그램 등)를 사용하시는지에 대해 자세히 알려주세요.";
-
-/* (BugReportController) description for leaving feedback */
-"leave_feedback_description_format" = "%@에 대해 어떻게 생각하는지 알려주세요. 마음에 드는 점이나 개선할 점, 제안하고 싶은 기능이 있나요?";
-
-/* (BugReportController) button title for bug report */
-"bug_report_button_title" = "제보 전송";
-
-/* (BugReportController) button title for leaving feedback */
-"leave_feedback_button_title" = "피드백 전송";
-
 /* (IntroductionOnboardingController) - License agreement text */
-"introduction_license_agreement" = "계속하면, <br /><a href=%2$@>이용 약관</a>및<a href=%1$@>개인정보취급방침</a>에 동의하는 것입니다";
+"introduction_license_agreement" = "<a href=%2$@>최종 사용자 라이선스 계약(EULA)</a>및<a href=%1$@>개인정보취급방침</a>에 동의하는 것으로 간주됩니다.";
 
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "요청";
@@ -809,16 +884,83 @@
 "requests_number" = "%d 요청";
 
 /* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
-"native_dns_setup_title" = "시스템 DNS 설정에서 %@을(를) 활성화하십시오";
+"native_dns_setup_title" = "DNS 설정에서 %@을(를) 활성화하세요";
 
 /* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
-"native_dns_setup_description" = "기본 DNS를 활성화하려면 <b>시스템 설정을</b> 열고 <b>VPN 및 네트워크 > DNS로</b> 이동한 후 <b>%@</b>을(를) 선택해야 합니다.";
+"native_dns_setup_description" = "기본 DNS를 사용하려면 <b>시스템 설정을</b> 열고 <b>VPN 및 네트워크 > DNS로</b> 이동한 후 <b>%@</b>을(를) 선택하세요.";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name; String for iOS 15 and newer */
+"native_dns_setup_description_ios15" = "기존 DNS를 사용하려면 <b>시스템 설정 > 일반 > VPN 및 기기 관리 > DNS</b>에서 <b>%@</b> 항목을 선택하세요.";
 
 /* (RateAppController) Rate app description text (\n) stands for new line */
 "rate_app_description" = "지금까지의 광고 차단이 만족스러웠는지 알려주세요";
 
 /* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
 "rate_app_problem_description" = "<b>Safari 브라우저를</b><br> 사용하고 있는지 확인하십시오. 현재 다른 브라우저에서 콘텐츠를 차단하는 것은 기술적으로 불가능합니다.<br> Safari 보호 설정으로 이동하여 필요한 필터 목록을 활성화하십시오. <br>Safari 앱을 다시 시작합니다. 종료한 후 다시 여십시오.";
+
+/* (FilterDetailsViewController) Version subtitle for detailed filter info */
+"detailed_filter_info_version_subtitle" = "버전";
+
+/* (FilterDetailsViewController) Updated subtitle for detailed filter info */
+"detailed_filter_info_updated_subtitle" = "업데이트 됨";
+
+/* (FilterDetailsViewController) Rules count subtitle for detailed filter info */
+"detailed_filter_info_rules_count_subtitle" = "규칙 개수";
+
+/* (FilterDetailsViewController) Website subtitle for detailed filter info */
+"detailed_filter_info_website_subtitle" = "웹사이트";
+
+/* (FilterDetailsViewController) Subscription URL subtitle for detailed filter info */
+"detailed_filter_info_subscription_subtitle" = "구독 주소";
+
+/* (AddRuleController) Error description when adding rule that already exists */
+"user_rule_exists_error" = "목록에 이미 있는 규칙을 추가하려고 했습니다";
+
+// MARK: - Strings for UserRulesRedirectController
+/* (UserRulesRedirectController) - Processing state title */
+
+"user_rules_processing_title" = "처리하는 중...";
+
+/* (UserRulesRedirectController) - Processing state description */
+"user_rules_processing_descr" = "잠시만 기다려 주세요...";
+
+/* (UserRulesRedirectController) - Description when allowlist rule is removed; %@ stands for 'allowlist' word hex color */
+"user_rules_allowlist_rule_removed" = "항목이 <u style=color:%@>허용 목록</u>에서 제거됨";
+
+/* (UserRulesRedirectController) - Description when new allowlist rule is added; %@ stands for 'allowlist' word hex color */
+"user_rules_allowlist_rule_added" = "항목이 <u style=color:%@>허용 목록</u>에 추가됨";
+
+/* (UserRulesRedirectController) - Description when blocklist rule is added; %@ stands for 'user rules' words hex color */
+"user_rules_blocklist_rule_added" = "항목에 <u style=color:%@>사용자 규칙</u> 내의 새 차단 규칙을 적용함";
+
+/* (UserRulesRedirectController) - Description when blocklist rules are removed */
+"user_rules_blocklist_rules_removed" = "항목에 더 이상 사용자 규칙이 적용되지 않음";
+
+// MARK: - Strings for license screen
+/* (PremiumFeature) - Advanced protection premium feature name */
+
+"advanced_protection_feature_name" = "고급 보호";
+
+/* (PremiumFeature) -  Security filters premium feature name */
+"security_filters_feature_name" = "보안 필터 ";
+
+/* (PremiumFeature) - DNS privacy premium feature name */
+"dns_privacy_feature_name" = "DNS 보호";
+
+/* (PremiumFeature) - Custom filters premium feature name */
+"custom_filters_feature_name" = "시용자 지정 필터";
+
+/* (PremiumFeature) - Advanced protection premium feature description */
+"advanced_protection_feature_description" = "Safari 내 YouTube 광고와 같은 광고를 차단하는 향상된 방법";
+
+/* (PremiumFeature) - Security filters premium feature description */
+"security_filters_feature_description" = "피싱, 멀웨어 및 수상한 콘텐츠 차단";
+
+/* (PremiumFeature) - DNS privacy premium feature description */
+"dns_privacy_feature_description" = "DNS 요청을 로컬로 암호화하고 개인정보를 통제해 보세요";
+
+/* (PremiumFeature) - Custom filters premium feature description */
+"custom_filters_feature_description" = "타사 필터를 사용하거나 나만의 필터를 만들어 보세요";
 
 // MARK: - Strings for VoiceOver -
 // MARK: - MainTabBarController
@@ -863,6 +1005,8 @@
 /* (MainPageController) saved data size for VoiceOver*/
 "elapsed_time_voiceover" = "DNS 요청을 처리하는 평균 시간";
 
+/* (AGSearchView) Placeholder text for search bar */
+"search_view_placeholder" = "검색";
 
 // MARK: - SystemProtectionEnablerController
 /* (SystemProtectionEnablerController) Enable DNS protection for VoiceOver*/
@@ -962,7 +1106,7 @@
 "block_youtube_ads_instructions" = "YouTube가 더 많은 광고를 보여 주기 위해 알고리즘을 바꾼 사실을 알고 계십니까? <br><br>이제 광고를 차단하려면 아래와 같이 해야 합니다.<br><br>1. Safari에서 <a href=\"%@\">youtube.com</a> 실행<br><br>2. 공유 버튼을 %@ 누릅니다.<br><br>3. '(AdGuard를 통해) YouTube 광고 차단'을 누릅니다.";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
-"block_youtube_ads_instructions_done_text_safari" = "끝! 이제 광고없이 YouTube를 시청할 수 있습니다.\n\n확장 프로그램이 활성화되면, YouTube 로고 옆에 'AdGuard 사용'이 붙을 것입니다.<br><br><b>페이지를 새로 고치면 두 번째, 세 번째 단계를 다시 따라야 합니다.</b>";
+"block_youtube_ads_instructions_done_text_safari" = "끝! 이제 광고없이 YouTube를 시청할 수 있습니다.\n\n확장 프로그램이 활성화되면, YouTube 로고 옆에 'AdGuard 사용'이 붙을 것입니다.<br><br><b>페이지를 새로고치면 세 번째, 네 번째 단계를 다시 따라야 합니다.</b>";
 
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
 "block_youtube_ads_instructions_done_text" = "끝! 이제 광고없이 YouTube를 시청할 수 있습니다.\n\n확장 프로그램이 활성화되면, YouTube 로고 옆에 'AdGuard 사용'이 붙을 것입니다.<br><br><b>페이지를 새로 고치면 두 번째, 세 번째 단계를 다시 따라야 합니다.</b>";
@@ -980,3 +1124,44 @@
 
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
 "youtube_script_error_title" = "YouTube 광고 제거 중 알 수 없는 오류가 발생했습니다";
+
+// MARK: - ActionExtensionMainController
+/* (ActionExtensionMainController) - ActionExtension info for iOS 15>= */
+
+"action_extension_obsolete_info" = "이 확장 프로그램은 최신 버전이 아니지만 가가 메뉴에서 새 Safari용 AdGuard 확장 프로그램을 찾을 수 있습니다. 새 확장 프로그램을 사용하려면 가가 메뉴를 열고 확장 프로그램 관리를 탭한 후 AdGuard 토글을 켭니다.";
+
+/* (ActionExtensionMainController) - ActionExtension info for iOS 14<= */
+"action_extension_new_version_info" = "iOS 15용으로 새로운 버전의 확장 프로그램이 출시되었습니다. 호환성이 뛰어나고 UI도 개선되었습니다. 업데이트하는 걸 잊지 마세요!";
+
+/* (BackgroundFetchController) - Background app refresh default title */
+"background_fetch_default_period" = "기본 기간";
+
+/* (BackgroundFetchController) - Background app refresh every 1 hour title */
+"background_fetch_hour_period" = "한 시간 마다";
+
+/* (BackgroundFetchController) - Background app refresh every 3 hours title */
+"background_fetch_tree_hours_period" = "매 3시간";
+
+/* (BackgroundFetchController) - Background app refresh every 12 hours title */
+"background_fetch_twelve_hours_period" = "매 12시간";
+
+/* (BackgroundFetchController) - Background app refresh every 24 hours title */
+"background_fetch_twenty_four_hours_period" = "매 24시간";
+
+/* Background app refresh time title */
+"background_app_refresh_time_title" = "백그라운드 앱 새로고침 시간";
+
+/* (DnsProvidersController) - add new dns server title */
+"add_custom_dns_server_title" = "사용자 DNS 서버 추가";
+
+/* (DnsProvidersController) - Header title */
+"dns_provider_controller_title" = "DNS 서버";
+
+/* (DnsProvidersController) - Header description */
+"dns_provider_controller_description" = "DNS 트래픽을 암호화하여 온라인 환경에서 개인정보 보호를 향상시켜 보세요. 권장 DNS 공급자 중 하나를 선택해 활성화할 수 있습니다.";
+
+/* (DnsProviderDetailsController) Server title */
+"server_title" = "서버";
+
+/* (DnsProviderDetailsController) Website title */
+"website_title" = "웹사이트";

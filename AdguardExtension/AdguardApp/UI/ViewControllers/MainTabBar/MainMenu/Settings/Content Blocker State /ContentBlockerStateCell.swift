@@ -1,20 +1,20 @@
-/**
-       This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
-       Copyright © Adguard Software Limited. All rights reserved.
- 
-       Adguard for iOS is free software: you can redistribute it and/or modify
-       it under the terms of the GNU General Public License as published by
-       the Free Software Foundation, either version 3 of the License, or
-       (at your option) any later version.
- 
-       Adguard for iOS is distributed in the hope that it will be useful,
-       but WITHOUT ANY WARRANTY; without even the implied warranty of
-       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-       GNU General Public License for more details.
- 
-       You should have received a copy of the GNU General Public License
-       along with Adguard for iOS.  If not, see <http://www.gnu.org/licenses/>.
- */
+//
+// This file is part of Adguard for iOS (https://github.com/AdguardTeam/AdguardForiOS).
+// Copyright © Adguard Software Limited. All rights reserved.
+//
+// Adguard for iOS is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Adguard for iOS is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Adguard for iOS. If not, see <http://www.gnu.org/licenses/>.
+//
 
 import UIKit
 
@@ -92,7 +92,7 @@ class ContentBlockerStateCell: UITableViewCell {
         
         let numberOfRules = String.formatSringNumber(number: blockerState?.numberOfRules ?? 0)
 
-        self.currentFilterStateLabel.text = String(format: ACLocalizedString("enabled_current_content_blocker_state_label", nil), numberOfRules)
+        self.currentFilterStateLabel.text = String(format: String.localizedString("enabled_current_content_blocker_state_label"), numberOfRules)
         self.currentFilterStateLabel.textColor = theme.lightGrayTextColor
         
         hideFilterListIfNeeded()
@@ -103,7 +103,7 @@ class ContentBlockerStateCell: UITableViewCell {
     private func disabledUISetup(){
         self.stateImage.image = disabledImage
         
-        self.currentFilterStateLabel.text = ACLocalizedString("disabled_current_state_label", nil)
+        self.currentFilterStateLabel.text = String.localizedString("disabled_current_state_label")
         self.currentFilterStateLabel.textColor = theme.lightGrayTextColor
         
         hideFilterListIfNeeded()
@@ -114,7 +114,7 @@ class ContentBlockerStateCell: UITableViewCell {
     private func updatingUISetup(){
         self.stateImage.image = updatingImage
 
-        self.currentFilterStateLabel.text = ACLocalizedString("update_current_state_label", nil)
+        self.currentFilterStateLabel.text = String.localizedString("update_current_state_label")
         self.currentFilterStateLabel.textColor = theme.lightGrayTextColor
         
         hideFilterListIfNeeded()
@@ -132,7 +132,7 @@ class ContentBlockerStateCell: UITableViewCell {
         
         let limit = String.formatSringNumber(number: resources.sharedDefaults().integer(forKey: AEDefaultsJSONMaximumConvertedRules))
         
-        self.currentFilterStateLabel.text = String(format: ACLocalizedString("over_limit_current_state_label", nil), limit, limit, firstString, secondString)
+        self.currentFilterStateLabel.text = String(format: String.localizedString("over_limit_current_state_label"), limit, limit, firstString, secondString)
         self.currentFilterStateLabel.textColor = theme.errorRedColor
         
         hideFilterListIfNeeded()
@@ -143,7 +143,7 @@ class ContentBlockerStateCell: UITableViewCell {
     private func failedUpdatingUISetup(){
         self.stateImage.image = errorImage
 
-        self.currentFilterStateLabel.text = ACLocalizedString("failed_updating_current_state_label", nil)
+        self.currentFilterStateLabel.text = String.localizedString("failed_updating_current_state_label")
         self.currentFilterStateLabel.textColor = theme.errorRedColor
         
         hideFilterListIfNeeded()

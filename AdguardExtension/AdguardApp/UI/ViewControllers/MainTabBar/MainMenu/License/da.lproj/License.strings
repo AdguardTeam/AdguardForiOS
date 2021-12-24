@@ -1,62 +1,23 @@
 /* Class = "UILabel"; text = "Code from the authentication app:"; ObjectID = "53G-qY-SZ5"; */
 "53G-qY-SZ5.text" = "Kode fra godkendelses-appen:";
 
-/* Class = "UILabel"; text = "Security filters"; ObjectID = "6P7-a5-VLL"; */
-"6P7-a5-VLL.text" = "Sikkerhedsfiltre";
-
-/* Class = "UIBarButtonItem"; title = "Logout"; ObjectID = "70b-CS-wqh"; */
-"70b-CS-wqh.title" = "Log ud";
-
-/* Class = "UILabel"; text = "All Premium features are available"; ObjectID = "FLH-Qd-Atk"; */
-"FLH-Qd-Atk.text" = "Alle Premium-funktioner er tilgængelige";
-
-/* Class = "UILabel"; text = "Login"; ObjectID = "J8s-sG-FKu"; */
+/* Class = "UILabel"; text = "Log in"; ObjectID = "J8s-sG-FKu"; */
 "J8s-sG-FKu.text" = "Log ind";
-
-/* Class = "UILabel"; text = "Set your own rules"; ObjectID = "KOP-vw-FG7"; */
-"KOP-vw-FG7.text" = "Indstil egne regler";
 
 /* Class = "UILabel"; text = "Email:"; ObjectID = "LJj-cc-Ko5"; */
 "LJj-cc-Ko5.text" = "E-mail:";
 
-/* Class = "UILabel"; text = "BLOCK MORE\nADS & TRACKERS"; ObjectID = "NlM-RH-NgY"; */
-"NlM-RH-NgY.text" = "BLOKÉR FLERE\nANNONCER OG TRACKERS";
-
 /* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
 "P6N-OK-fHG.text" = "Adgangskode:";
-
-/* Class = "UIButton"; normalTitle = "GO TO MY ACCOUNT"; ObjectID = "Rxf-sg-Wfk"; */
-"Rxf-sg-Wfk.normalTitle" = "GÅ TIL MIN KONTO";
-
-/* Class = "UIBarButtonItem"; title = "Login"; ObjectID = "UaA-JQ-kV4"; */
-"UaA-JQ-kV4.title" = "Log ind";
-
-/* Class = "UILabel"; text = "Block phishing, scam and crypto-jacking"; ObjectID = "YIm-R8-cxj"; */
-"YIm-R8-cxj.text" = "Blokér phishing, svindel og crypto-jacking";
 
 /* Class = "UILabel"; text = "Log in with your AdGuard account or with social networks"; ObjectID = "ZuM-Nn-uXv"; */
 "ZuM-Nn-uXv.text" = "Log ind med din AdGuard-konto eller sociale netværk";
 
-/* Class = "UIButton"; normalTitle = "LOGIN"; ObjectID = "bUa-fF-AXO"; */
-"bUa-fF-AXO.normalTitle" = "LOG IND";
-
-/* Class = "UILabel"; text = "Value your privacy"; ObjectID = "fwp-I7-Qtl"; */
-"fwp-I7-Qtl.text" = "Værdsæt din fortrolighed";
+/* Class = "UIButton"; normalTitle = "Log in"; ObjectID = "bUa-fF-AXO"; */
+"bUa-fF-AXO.normalTitle" = "Log ind";
 
 /* Class = "UILabel"; text = "Sign in"; ObjectID = "fxK-6y-LB6"; */
 "fxK-6y-LB6.text" = "Log ind";
 
-/* Class = "UILabel"; text = "DNS protection"; ObjectID = "gLL-6o-GGa"; */
-"gLL-6o-GGa.text" = "DNS-beskyttelse";
-
-/* Class = "UILabel"; text = "Premium is activated"; ObjectID = "hjF-1C-hFa"; */
-"hjF-1C-hFa.text" = "Premium er aktiveret";
-
-/* Class = "UIButton"; normalTitle = "Restore purchase"; ObjectID = "mR4-EU-MFx"; */
-"mR4-EU-MFx.normalTitle" = "Gendan køb";
-
-/* Class = "UILabel"; text = "Custom filters"; ObjectID = "ppx-jv-rek"; */
-"ppx-jv-rek.text" = "Tilpassede filtre";
-
-/* Class = "UIButton"; normalTitle = "CONFIRM"; ObjectID = "rrj-Gm-LCJ"; */
-"rrj-Gm-LCJ.normalTitle" = "BEKRÆFT";
+/* Class = "UIButton"; normalTitle = "Confirm"; ObjectID = "rrj-Gm-LCJ"; */
+"rrj-Gm-LCJ.normalTitle" = "Bekræft";
