@@ -379,7 +379,7 @@ fileprivate extension AESharedResourcesProtocol {
     var whatsNewScreenShownKey: String { "whatsNewScreenShownKey" }
 
     // Migration keys
-    var migrationTo4_3PassedKey: String { "isMigrationTo4_3_1PassedKey" }
+    var migrationTo4_3PassedKey: String { "isMigrationTo4_3PassedKey" }
     var migrationTo4_3_1PassedKey: String { "isMigrationTo4_3_1PassedKey" }
 }
 
