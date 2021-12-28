@@ -64,6 +64,14 @@ final class SafariMigration4_3_1: SafariMigration4_3_1Protocol {
             try migrateSafariRules(for: .invertedAllowlist)
             stateManager.finish()
             Logger.logInfo("(SafariMigration4_3_1) - onNotStarted; Migration succeeded")
+
+            safariProtection.convertFiltersAndReloadCbs { error in
+                if let error = error {
+                    Logger.logInfo("(SafariMigration4_3_1) - onNotStarted; Error occurred while reloading CBs; Error: \(error)")
+                    return
+                }
+                Logger.logInfo("(SafariMigration4_3_1) - onNotStarted; Successfully reload CBs after safari user rules migration")
+            }
         } catch {
             stateManager.failure()
             Logger.logError("(SafariMigration4_3_1) - onNotStarted; Migration failed: \(error)")
