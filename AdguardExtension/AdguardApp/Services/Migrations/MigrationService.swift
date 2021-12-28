@@ -38,6 +38,7 @@ final class MigrationService: MigrationServiceProtocol {
     private let versionProvider: MigrationServiceVersionProvider
     private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol
     private let settingsResetor: SettingsResetServiceProtocol
+    private let dnsProtection: DnsProtectionProtocol
 
     private let migrationQueue = DispatchQueue(label: "MigrationService queue", qos: .userInitiated)
 
@@ -50,7 +51,8 @@ final class MigrationService: MigrationServiceProtocol {
         dnsProvidersManager: DnsProvidersManagerProtocol,
         networkSettings: NetworkSettingsServiceProtocol,
         dnsConfigAssistant: DnsConfigManagerAssistantProtocol,
-        settingsResetor: SettingsResetServiceProtocol
+        settingsResetor: SettingsResetServiceProtocol,
+        dnsProtection: DnsProtectionProtocol
     ) {
         self.resources = resources
         self.networking = networking
@@ -62,6 +64,7 @@ final class MigrationService: MigrationServiceProtocol {
         self.versionProvider = MigrationServiceVersionProvider(resources: resources)
         self.dnsConfigAssistant = dnsConfigAssistant
         self.settingsResetor = settingsResetor
+        self.dnsProtection = dnsProtection
     }
 
     func migrateIfNeeded(){
@@ -132,9 +135,22 @@ final class MigrationService: MigrationServiceProtocol {
             }
         }
 
+        if versionProvider.isMigrationFrom4_3_0To4_3_1Needed {
+            DDLogInfo("(MigrationService) - Starting migrate rules from 4.3.0 to 4.3.1")
+            let safariMigration4_3_1 = SafariMigration4_3_1(resources: resources, safariProtection: safariProtection as! SafariProtectionMigrationsProtocol)
+            let dnsMigration4_3_1 = DnsMigration4_3_1(resources: resources, dnsProtection: dnsProtection)
+
+            safariMigration4_3_1.migrate()
+            DDLogInfo("(MigrationService) - Successfully migrate safari rules from 4.3.0 to 4.3.1")
+
+            dnsMigration4_3_1.migrate()
+            DDLogInfo("(MigrationService) - Successfully migrate dns rules from 4.3.0 to 4.3.1")
+        }
+
         let currentBuildVersion = Int(productInfo.buildNumber())
         resources.buildVersion = currentBuildVersion ?? 0
         resources.isMigrationTo4_3Passed = true
+        resources.isMigrationTo4_3_1Passed = true
     }
 }
 

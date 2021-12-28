@@ -20,6 +20,8 @@ import SharedAdGuardSDK
 
 /// This protocol helps main app to perform migration from v4.2 to v4.3
 public protocol SafariProtectionMigrationsProtocol: AnyObject {
+    func getRules(for type: SafariUserRuleType) -> [UserRule]
+    func removeRules(for type: SafariUserRuleType)
     func add(rules: [UserRule], for type: SafariUserRuleType, override: Bool) throws
     func setGroup(_ groupType: SafariGroup.GroupType, enabled: Bool) throws
     func setFilter(withId id: Int, _ groupId: Int, enabled: Bool) throws
@@ -30,6 +32,20 @@ public protocol SafariProtectionMigrationsProtocol: AnyObject {
 // TODO: - We should change the way we migrate data in main app and remove this extension
 /// This extension is responsible for providing methods for migration in main app
 extension SafariProtection: SafariProtectionMigrationsProtocol {
+
+    public func getRules(for type: SafariUserRuleType) -> [UserRule] {
+        workingQueue.sync {
+            let allRules = getProvider(for: type).allRules
+            Logger.logInfo("(SafariProtection+Migrations) - getRules; Getting rules \(allRules.count) for type=\(type)")
+            return allRules
+        }
+    }
+
+    public func removeRules(for type: SafariUserRuleType) {
+        Logger.logInfo("(SafariProtection+Migrations) - removeRules; Remove all rules for type=\(type)")
+        removeAllRules(for: type)
+    }
+
     public func add(rules: [UserRule], for type: SafariUserRuleType, override: Bool) throws {
         try workingQueue.sync {
             Logger.logInfo("(SafariProtection+Migrations) - addRules; Adding \(rules.count) rules; for type=\(type); override=\(override)")

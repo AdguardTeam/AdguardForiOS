@@ -64,7 +64,7 @@ class DnsMigration4_3: DnsMigration4_3Protocol {
 
     func migrate() {
 
-        Logger.logInfo("(DnsMigration4_3) magrate called")
+        Logger.logInfo("(DnsMigration4_3) migrate called")
         switch stateManager.state {
         case .notStarted:
             Logger.logInfo("(DnsMigration4_3) start migration")
