@@ -83,6 +83,7 @@ final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
     private let fileShareHelper: FileShareHelperProtocol
     private var modelProvider: UserRulesModelsProviderProtocol
     private let dnsConfigAssistant: DnsConfigManagerAssistantProtocol
+    private let workingQueue = DispatchQueue(label: "AdGuardApp.DnsUserRulesTableModelQueue")
 
     // MARK: - Initialization
 
@@ -176,15 +177,14 @@ final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
     }
 
     func importFile(for vc: UIViewController, _ completion: @escaping (Error?) -> Void) {
-        fileShareHelper.importFile(for: vc) { result in
-            DispatchQueue.asyncSafeMain { [weak self] in
-                switch result {
-                case .success(let text):
-                    self?.addNewRulesAfterImport(text, completion)
-                    self?.dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
-                case .failure(let error):
-                    completion(error)
-                }
+        fileShareHelper.importFile(for: vc) { [weak self] result in
+            switch result {
+            case .success(let text):
+                self?.delegate?.importWillStart()
+                self?.addNewRulesAfterImport(text, completion)
+                self?.dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsRules, completion: nil)
+            case .failure(let error):
+                completion(error)
             }
         }
     }
@@ -192,16 +192,22 @@ final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
     // MARK: - Private methods
 
     private func addNewRulesAfterImport(_ rulesText: String, _ completion: @escaping (Error?) -> Void) {
-        let rules = rulesText.split(separator: "\n").map { UserRule(ruleText: String($0), isEnabled: true) }
-        do {
-            try dnsProtection.add(rules: rules, override: true, for: type)
-            modelProvider = UserRulesModelsProvider(initialModels: Self.models(dnsProtection, type))
-            completion(nil)
+        workingQueue.async { [weak self] in
+            guard let self = self else { return }
+            let rules = rulesText.components(separatedBy: .newlines).map { UserRule(ruleText: String($0), isEnabled: true) }
+            do {
+                try self.dnsProtection.add(rules: rules, override: true, for: self.type)
+                self.modelProvider = UserRulesModelsProvider(initialModels: Self.models(self.dnsProtection, self.type))
+                completion(nil)
+            }
+            catch {
+                completion(error)
+            }
+
+            DispatchQueue.main.async {
+                self.delegate?.rulesChanged()
+            }
         }
-        catch {
-            completion(error)
-        }
-        delegate?.rulesChanged()
     }
 
     private static func models(_ dnsProtection: DnsProtectionProtocol, _ type: DnsUserRuleType) -> [UserRuleCellModel] {

@@ -354,10 +354,19 @@ extension AESharedResourcesProtocol {
 
     var isMigrationTo4_3Passed: Bool {
         get {
-            return sharedDefaults().bool(forKey: "isMigrationTo4_3PassedKey")
+            return sharedDefaults().bool(forKey: migrationTo4_3PassedKey)
         }
         set {
-            sharedDefaults().set(newValue, forKey: "isMigrationTo4_3PassedKey")
+            sharedDefaults().set(newValue, forKey: migrationTo4_3PassedKey)
+        }
+    }
+
+    var isMigrationTo4_3_1Passed: Bool {
+        get {
+            return sharedDefaults().bool(forKey: migrationTo4_3_1PassedKey)
+        }
+        set {
+            sharedDefaults().set(newValue, forKey: migrationTo4_3_1PassedKey)
         }
     }
 }
@@ -368,6 +377,10 @@ fileprivate extension AESharedResourcesProtocol {
     var advancedProtectionPermissionsGrantedKey: String { "advancedProtectionPermissionsGrantedKey" }
     var safariWebExtensionIsOnKey: String { "safariWebExtensionIsOnKey" }
     var whatsNewScreenShownKey: String { "whatsNewScreenShownKey" }
+
+    // Migration keys
+    var migrationTo4_3PassedKey: String { "isMigrationTo4_3_1PassedKey" }
+    var migrationTo4_3_1PassedKey: String { "isMigrationTo4_3_1PassedKey" }
 }
 
 extension Notification.Name {

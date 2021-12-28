@@ -81,6 +81,7 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
     private let resources: AESharedResourcesProtocol
     private let fileShareHelper: FileShareHelperProtocol
     private var modelProvider: UserRulesModelsProviderProtocol
+    private let workingQueue = DispatchQueue(label: "AdGuardApp.SafariUserRulesTableModelQueue")
 
     // MARK: - Initialization
 
@@ -160,14 +161,13 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
     }
 
     func importFile(for vc: UIViewController, _ completion: @escaping (Error?) -> Void) {
-        fileShareHelper.importFile(for: vc) { result in
-            DispatchQueue.asyncSafeMain { [weak self] in
-                switch result {
-                case .success(let text):
-                    self?.addNewRulesAfterImport(text, completion)
-                case .failure(let error):
-                    completion(error)
-                }
+        fileShareHelper.importFile(for: vc) { [weak self] result in
+            switch result {
+            case .success(let text):
+                self?.delegate?.importWillStart()
+                self?.addNewRulesAfterImport(text, completion)
+            case .failure(let error):
+                completion(error)
             }
         }
     }
@@ -175,16 +175,22 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
     // MARK: - Private methods
 
     private func addNewRulesAfterImport(_ rulesText: String, _ completion: @escaping (Error?) -> Void) {
-        let rules = rulesText.split(separator: "\n").map { UserRule(ruleText: String($0), isEnabled: true) }
-        do {
-            try safariProtection.add(rules: rules, for: type, override: true, onCbReloaded: nil)
-            modelProvider = UserRulesModelsProvider(initialModels: Self.models(safariProtection, type))
-            completion(nil)
+        workingQueue.async { [weak self] in
+            guard let self = self else { return }
+            let rules = rulesText.components(separatedBy: .newlines).map { UserRule(ruleText: String($0), isEnabled: true) }
+            do {
+                try self.safariProtection.add(rules: rules, for: self.type, override: true, onCbReloaded: nil)
+                self.modelProvider = UserRulesModelsProvider(initialModels: Self.models(self.safariProtection, self.type))
+                completion(nil)
+            }
+            catch {
+                completion(error)
+            }
+
+            DispatchQueue.main.async {
+                self.delegate?.rulesChanged()
+            }
         }
-        catch {
-            completion(error)
-        }
-        delegate?.rulesChanged()
     }
 
     private static func models(_ safariProtection: SafariProtectionProtocol, _ type: SafariUserRuleType) -> [UserRuleCellModel] {

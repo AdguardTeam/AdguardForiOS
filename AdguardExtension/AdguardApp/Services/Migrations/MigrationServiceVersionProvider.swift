@@ -21,6 +21,7 @@ import Foundation
 protocol MigrationServiceVersionProviderProtocol {
     var isMigrationFrom4_1To4_3Needed: Bool { get }
     var isLastVersionLessThan4_1: Bool { get }
+    var isMigrationFrom4_3_0To4_3_1Needed: Bool { get }
 }
 
 class MigrationServiceVersionProvider: MigrationServiceVersionProviderProtocol {
@@ -35,6 +36,11 @@ class MigrationServiceVersionProvider: MigrationServiceVersionProviderProtocol {
     var isLastVersionLessThan4_1: Bool {
         let lastBuildVersion = resources.buildVersion
         return lastBuildVersion > 0 && lastBuildVersion < 650
+    }
+
+    var isMigrationFrom4_3_0To4_3_1Needed: Bool {
+        let lastBuildVersion = resources.buildVersion
+        return lastBuildVersion >= 915 && lastBuildVersion <= 917
     }
 
     private let resources: AESharedResourcesProtocol

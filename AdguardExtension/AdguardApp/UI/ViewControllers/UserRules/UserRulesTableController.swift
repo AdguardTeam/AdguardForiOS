@@ -237,8 +237,12 @@ final class UserRulesTableController: UIViewController {
 
     private func importRules() {
         model.importFile(for: self) { [weak self] error in
-            if error != nil {
-                self?.showUnknownErrorAlert()
+            DispatchQueue.main.async {
+                self?.presentLoader(isNeedPresent: false)
+
+                if error != nil {
+                    self?.showUnknownErrorAlert()
+                }
             }
         }
     }
@@ -361,6 +365,17 @@ final class UserRulesTableController: UIViewController {
             return UIBarButtonItem(image: image, style: .done, target: self, action: #selector(editButtonTapped(_:)))
         }
     }
+
+    private func presentLoader(isNeedPresent: Bool) {
+        if isNeedPresent, self.presentedViewController == nil {
+            AppDelegate.shared.presentLoadingAlert()
+            return
+        }
+
+        if !isNeedPresent, self.presentedViewController is UIAlertController {
+            presentedViewController?.dismiss(animated: true)
+        }
+    }
 }
 
 // MARK: - UserRulesTableController + UITableViewDatasource
@@ -476,6 +491,11 @@ extension UserRulesTableController: UITableViewDelegate {
 // MARK: - UserRulesTableController + UserRulesTableModelDelegate
 
 extension UserRulesTableController: UserRulesTableModelDelegate {
+
+    func importWillStart() {
+        presentLoader(isNeedPresent: true)
+    }
+
     func rulesChanged() {
         tableView.reloadWithSelectedRows()
     }

@@ -53,7 +53,7 @@ public final class UserRulesManager: UserRulesManagerProtocol {
     // MARK: - Public methods
 
     public func add(rule: UserRule, override: Bool) throws {
-        try internalAdd(rule: rule, override: override)
+        try internalAdd(rules: [rule], override: override)
     }
 
     public func add(rules: [UserRule], override: Bool) throws {
@@ -72,14 +72,13 @@ public final class UserRulesManager: UserRulesManagerProtocol {
         if existingRules.isEmpty && duplicates.isEmpty {
             storage.rules.append(contentsOf: rules)
         } else {
-            try rules.forEach {
-                try internalAdd(rule: $0, override: override)
-            }
+            try internalAdd(rules: rules, override: override)
         }
     }
 
     public func set(rules: [String]) {
         let uniqueRules = rules.uniqueElements
+        let setOfRules = storage.rules
         
         let newRules: [UserRule] = uniqueRules.compactMap { ruleToAdd in
             let trimmedRule = ruleToAdd.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -88,7 +87,7 @@ public final class UserRulesManager: UserRulesManagerProtocol {
                 return nil
             }
 
-            if let existingRule = storage.rules.first(where: { $0.ruleText == trimmedRule }) {
+            if let existingRule = setOfRules.first(where: { $0.ruleText == trimmedRule }) {
                 return existingRule
             }
             return UserRule(ruleText: trimmedRule, isEnabled: true)
@@ -138,17 +137,22 @@ public final class UserRulesManager: UserRulesManagerProtocol {
     }
 
     // This func us used to prevent deadlock in queue. Call it in rulesModificationQueue sync
-    private func internalAdd(rule: UserRule, override: Bool) throws {
-        let ruleIndex = storage.rules.firstIndex(where: { $0.ruleText == rule.ruleText })
-        if ruleIndex != nil, !override {
-            throw UserRulesStorageError.ruleAlreadyExists(ruleString: rule.ruleText)
+    private func internalAdd(rules: [UserRule], override: Bool) throws {
+        var setOfRules = storage.rules
+        try rules.forEach { rule in
+            let ruleIndex = setOfRules.firstIndex(where: { $0.ruleText == rule.ruleText} )
+            if ruleIndex != nil, !override {
+                throw UserRulesStorageError.ruleAlreadyExists(ruleString: rule.ruleText)
+            }
+
+            if let ruleIndex = ruleIndex {
+                setOfRules.remove(at: ruleIndex)
+                setOfRules.insert(rule, at: ruleIndex)
+            } else {
+                setOfRules.append(rule)
+            }
         }
 
-        if let ruleIndex = ruleIndex {
-            storage.rules.remove(at: ruleIndex)
-            storage.rules.insert(rule, at: ruleIndex)
-        } else {
-            storage.rules.append(rule)
-        }
+        storage.rules = setOfRules
     }
 }

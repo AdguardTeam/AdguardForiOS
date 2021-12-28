@@ -19,6 +19,7 @@
 import UIKit
 
 protocol UserRulesTableModelDelegate: AnyObject {
+    func importWillStart()
     func rulesChanged()
     func ruleSuccessfullyAdded()
     func rulesChanged(at indexPaths: [IndexPath])

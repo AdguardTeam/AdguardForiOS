@@ -139,8 +139,10 @@ class DnsProtectionMock: DnsProtectionProtocol {
 
     var addRulesError: Error?
     var addRulesCalledCount = 0
+    var addRulesParametersList: [(rules: [UserRule], override: Bool, type: DnsUserRuleType)] = []
     func add(rules: [UserRule], override: Bool, for type: DnsUserRuleType) throws {
         addRulesCalledCount += 1
+        addRulesParametersList.append((rules, override, type))
         if let error = addRulesError {
             throw error
         }
