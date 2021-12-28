@@ -117,10 +117,11 @@ class SafariMigration4_3: SafariMigration4_3Protocol {
             }
         }
 
+        // We must reinitialize models inside safari protection before starts change state of models
+        try safariProtection.reinitializeGroupsAndFilters()
+
         let filtersStates = try filtersDbMigration.getFiltersStates()
         try filtersStates.forEach { try safariProtection.setFilter(withId: $0.filterId, $0.groupId, enabled: $0.isEnabled) }
-
-        try safariProtection.reinitializeGroupsAndFilters()
 
         /* Remove old files */
         try allowlistRulesMigration.removeOldRuleFiles()
