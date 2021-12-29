@@ -73,37 +73,13 @@ export class NativeHost implements NativeHostInterface {
     }
 
     /**
-     * Return to the tab where user called an action
-     * Without this method browser will move to the last open tab in the safari
-     * @param tabIdToObserve - tab id which will be intercepted by ios app
-     * @param tabIdToReturn - tab id where to return
-     * @private
-     */
-    private returnWhenTabIsIntercepted(tabIdToObserve: number, tabIdToReturn: number) {
-        const removeHandler = async (tabId: number) => {
-            if (tabId === tabIdToObserve) {
-                await browser.tabs.update(tabIdToReturn, { active: true });
-                browser.tabs.onRemoved.removeListener(removeHandler);
-            }
-        };
-
-        browser.tabs.onRemoved.addListener(removeHandler);
-    }
-
-    /**
      * Opens tabs with special links, which are intercepted by ios app
      * @param link
      * @private
      */
     private async openNativeLink(link: string) {
         const [currentTab] = await browser.tabs.query({ currentWindow: true, active: true });
-        const tab = await browser.tabs.create({ url: link });
-
-        const tabIdToReturn = currentTab?.id;
-        const tabIdToObserver = tab?.id;
-        if (tabIdToReturn && tabIdToObserver) {
-            this.returnWhenTabIsIntercepted(tabIdToObserver, tabIdToReturn);
-        }
+        await browser.tabs.update(currentTab.id, { url: link });
     }
 
     /**
