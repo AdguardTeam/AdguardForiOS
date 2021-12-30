@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 
 import { Icon } from '../ui/Icon';
 import { popupStore } from '../../stores/PopupStore';
-import { Platforms } from '../../../common/constants';
+import { Platform } from '../../../common/constants';
 import { Button } from '../Button';
 
 export const ExpandButton = observer(() => {
@@ -13,7 +13,7 @@ export const ExpandButton = observer(() => {
         ? store.protectionEnabled
         : !store.protectionEnabled;
 
-    if (store.platform !== Platforms.IPad
+    if (store.platform !== Platform.IPad
         // hide button after popup is expanded because safari doesn't allow to shrink it back
         || store.popupExpanded
         // when site is allowlisted we show support info without expanding popup

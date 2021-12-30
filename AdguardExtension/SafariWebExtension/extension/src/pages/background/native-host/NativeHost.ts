@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import browser from 'webextension-polyfill';
 
-import { MessagesToNativeApp, Platforms } from '../../common/constants';
+import { MessagesToNativeApp, Platform } from '../../common/constants';
 import { getDomain } from '../../common/utils/url';
 import { storage } from '../storage';
 
@@ -31,7 +31,7 @@ export interface NativeHostInitData {
     protectionEnabled: boolean,
     advancedBlockingEnabled: boolean,
     allowlistInverted: boolean,
-    platform: Platforms,
+    platform: Platform,
     safariProtectionEnabled: boolean,
 }
 
@@ -57,6 +57,10 @@ export class NativeHost implements NativeHostInterface {
 
     ACTION_LINKS_STORAGE_KEY = 'action_links';
 
+    PLATFORM_STORAGE_KEY = 'platform';
+
+    platform: Platform = Platform.IPhone;
+
     /**
      * Sends message to the native messaging host
      * @param type
@@ -73,13 +77,71 @@ export class NativeHost implements NativeHostInterface {
     }
 
     /**
+     * Return to the tab where user called an action
+     * Without this method browser will move to the last open tab in the safari
+     * @param tabIdToObserve - tab id which will be intercepted by ios app
+     * @param tabIdToReturn - tab id where to return
+     * @private
+     */
+    private returnWhenTabIsIntercepted(tabIdToObserve: number, tabIdToReturn: number) {
+        const removeHandler = async (tabId: number) => {
+            if (tabId === tabIdToObserve) {
+                await browser.tabs.update(tabIdToReturn, { active: true });
+                browser.tabs.onRemoved.removeListener(removeHandler);
+            }
+        };
+
+        browser.tabs.onRemoved.addListener(removeHandler);
+    }
+
+    /**
      * Opens tabs with special links, which are intercepted by ios app
      * @param link
      * @private
      */
     private async openNativeLink(link: string) {
         const [currentTab] = await browser.tabs.query({ currentWindow: true, active: true });
-        await browser.tabs.update(currentTab.id, { url: link });
+
+        /**
+         * Fix for opening native urls on ipad https://github.com/AdguardTeam/AdguardForiOS/issues/1878
+         * We separated this solution from iphone implementation,
+         * because it is not working fully correctly:
+         * if user cancels opening application, extension can't open native links until
+         * page is reloaded
+         */
+        if (await this.getPlatform() === Platform.IPad) {
+            await browser.tabs.update(currentTab.id, { url: link });
+            return;
+        }
+
+        const tab = await browser.tabs.create({ url: link });
+
+        const tabIdToReturn = currentTab?.id;
+        const tabIdToObserver = tab?.id;
+        if (tabIdToReturn && tabIdToObserver) {
+            this.returnWhenTabIsIntercepted(tabIdToObserver, tabIdToReturn);
+        }
+    }
+
+    async savePlatformInStorage(platform: Platform) {
+        return storage.set(this.PLATFORM_STORAGE_KEY, platform);
+    }
+
+    async getPlatformFromStorage() {
+        const platform = await storage.get(this.PLATFORM_STORAGE_KEY);
+        if (!platform) {
+            return null;
+        }
+
+        return platform as Platform;
+    }
+
+    async getPlatform() {
+        if (!this.platform) {
+            this.platform = await this.getPlatformFromStorage() || Platform.IPhone;
+        }
+
+        return this.platform;
     }
 
     /**
@@ -101,6 +163,16 @@ export class NativeHost implements NativeHostInterface {
         }
 
         return links as ActionLinks;
+    }
+
+    /**
+     * Saves platform data received from native host
+     * @param platform
+     */
+    async setPlatform(platform: Platform) {
+        this.platform = platform;
+
+        await this.savePlatformInStorage(this.platform);
     }
 
     /**
@@ -298,6 +370,8 @@ export class NativeHost implements NativeHostInterface {
             enableAdvancedBlockingLink,
             enableSafariProtectionLink,
         });
+
+        await this.setPlatform(platform);
 
         return {
             appearanceTheme,

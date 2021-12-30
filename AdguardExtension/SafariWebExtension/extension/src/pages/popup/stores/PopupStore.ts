@@ -12,7 +12,7 @@ import {
 import { getDomain } from '../../common/utils/url';
 import { messenger } from '../../common/messenger';
 import { getFaviconDataUrl } from '../image-utils';
-import { AppearanceTheme, Platforms } from '../../common/constants';
+import { AppearanceTheme, Platform } from '../../common/constants';
 import { SiteStatus } from '../constants';
 
 // Do not allow property change outside of store actions
@@ -59,7 +59,7 @@ export class PopupStore {
 
     @observable advancedBlockingModalVisible: boolean = false;
 
-    @observable platform: Platforms = Platforms.IPhone;
+    @observable platform: Platform = Platform.IPhone;
 
     @observable popupExpanded: boolean = false;
 
