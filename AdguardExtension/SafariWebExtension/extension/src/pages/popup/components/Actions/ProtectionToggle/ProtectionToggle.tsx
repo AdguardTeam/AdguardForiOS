@@ -11,8 +11,9 @@ import { Icon } from '../../ui/Icon';
 export const ProtectionToggle = observer(() => {
     const store = useContext(popupStore);
 
-    const toggleProtection = () => {
-        store.toggleProtection();
+    const toggleProtection = async () => {
+        await store.toggleProtection();
+        window.close();
     };
 
     let description = store.protectionEnabled
@@ -45,6 +46,7 @@ export const ProtectionToggle = observer(() => {
 
         const handleEnableSafariProtection = async () => {
             await store.enableSafariProtection();
+            window.close();
         };
 
         button = (

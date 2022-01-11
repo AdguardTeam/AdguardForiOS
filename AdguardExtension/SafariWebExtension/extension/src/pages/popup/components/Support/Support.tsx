@@ -38,9 +38,10 @@ export const Support = observer(() => {
 
     const supportClass = cn('support', supportType.class);
 
-    const handleReportTouch = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleReportTouch = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        messenger.reportProblem(store.currentSiteUrl);
+        await messenger.reportProblem(store.currentSiteUrl);
+        window.close();
     };
 
     return (
