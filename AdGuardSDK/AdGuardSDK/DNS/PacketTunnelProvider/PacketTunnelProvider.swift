@@ -60,6 +60,7 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
 
     override public init() {
         assertionFailure("This initializer shouldn't be called")
+        // TODO: consider getting rid of Reachability in favor of NWPathMonitor which we already use in NetworkUtils
         self.reachabilityHandler = try! Reachability()
         self.reachabilityConnection = .unavailable
         super.init()
@@ -143,7 +144,7 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
         }
 
         tunnelProxy.startTunnel(options: options) { [weak self] error in
-            self?.startReachcbilityHandling()
+            self?.startReachabilityHandling()
             completionHandler(error)
         }
     }
@@ -164,7 +165,7 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
         tunnelProxy.wake()
     }
 
-    private func startReachcbilityHandling() {
+    private func startReachabilityHandling() {
         self.reachabilityConnection = self.reachabilityHandler.connection
 
         self.reachabilityObserver = NotificationCenter.default.observe(name: .reachabilityChanged, object: nil, queue: nil) { [weak self] note in

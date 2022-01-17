@@ -106,26 +106,35 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
     }
 
     func networkChanged() {
-        // Restarting tunnel syncroniously in separate queue to avoid races
+        // Restarting tunnel synchronously in a separate queue to avoid races
         restartQueue.async { [weak self] in
             guard let self = self else { return }
 
             let shouldRestartWhenNetworkChanges = self.dnsConfiguration.lowLevelConfiguration.restartByReachability
             Logger.logInfo("(PacketTunnelProviderProxy) - networkChanged; shouldRestartWhenNetworkChanges=\(shouldRestartWhenNetworkChanges)")
-            guard !shouldRestartWhenNetworkChanges else { return }
 
-            // Restart tunnel internally without reinitializing PacketTunnelProvider
+            // Stop packet handling and dnsProxy right away
             self.stopPacketHanding()
             self.dnsProxy.stop()
 
+            // If the user has enabled "restartByReachability", we reinitialize the whole PacketTunnelProvider on every network change
+            // This is done by cancelling tunnel (it will be then restarted back automatically due to the on-demand rules)
+            if shouldRestartWhenNetworkChanges {
+                Logger.logInfo("(PacketTunnelProviderProxy) - cancelling tunnel")
+                self.delegate?.cancelTunnel(with: nil)
+                return
+            }
+
+            // This is the default behavior, we restart proxy internally without reinitializing PacketTunnelProvider.
             let group = DispatchGroup()
             group.enter()
+            Logger.logInfo("(PacketTunnelProviderProxy) - starting the tunnel")
             self.startTunnel { [weak self] error in
                 if let error = error {
                     Logger.logError("(PacketTunnelProviderProxy) - networkChanged; Error: \(error)")
                     self?.delegate?.cancelTunnel(with: error)
                 } else {
-                    Logger.logInfo("(PacketTunnelProviderProxy) - networkChanged; Successfully restarted tunnel after network change")
+                    Logger.logInfo("(PacketTunnelProviderProxy) - networkChanged; Successfully restarted proxy after the network change")
                 }
                 group.leave()
             }

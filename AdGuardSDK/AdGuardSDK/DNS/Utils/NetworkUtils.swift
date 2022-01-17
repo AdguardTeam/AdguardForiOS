@@ -52,14 +52,35 @@ public class NetworkUtils: NetworkUtilsProtocol {
             _monitor = NWPathMonitor()
             var group: DispatchGroup? = DispatchGroup()
             group?.enter()
-            monitor().pathUpdateHandler = { _ in
+            monitor().pathUpdateHandler = { newPath in
+                Logger.logInfo("(NetworkUtils) - NWPathMonitor received the current path update")
+                Logger.logInfo("(NetworkUtils) - path status: \(newPath.status)")
+                Logger.logInfo("(NetworkUtils) - path debugDescription: \(newPath.debugDescription)")
+                Logger.logInfo("(NetworkUtils) - path supportsIPv4: \(newPath.supportsIPv4)")
+                Logger.logInfo("(NetworkUtils) - path supportsIPv6: \(newPath.supportsIPv6)")
+
+                if #available(iOS 13.0, *) {
+                    for gateway in newPath.gateways {
+                        Logger.logInfo("(NetworkUtils) - gateway: \(gateway.debugDescription)")
+                    }
+                }
+
+                for interface in newPath.availableInterfaces {
+                    Logger.logInfo("(NetworkUtils) - interface: [\(interface.index)] \(interface.name)")
+                    Logger.logInfo("(NetworkUtils) - interface debugDescription: \(interface.debugDescription)")
+                    Logger.logInfo("(NetworkUtils) - interface type: \(interface.type)")
+                }
+
                 group?.leave()
                 group = nil
             }
+            Logger.logInfo("(NetworkUtils) - NWPathMonitor start")
+
             // We must start the monitor to have the actual value of the path at any time
             monitor().start(queue: DispatchQueue(label: "NWPathMonitor handler queue"))
 
-            // we must wait for fist pathUpdateHandler call to get actual network state
+            // we must wait for fist pathUpdateHandler call to get the actual network state
+            // TODO: 0.5 is a magic number, at least should be explained why.
             _ = group?.wait(timeout: .now() + 0.5)
         }
     }
