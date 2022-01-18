@@ -333,6 +333,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          To quickly show stats in ActivityViewController, we load ViewController when app starts
          */
         dnsLogContainerVC.loadViewIfNeeded()
+        DDLogInfo("Finished preparing controllers")
     }
 
     // TODO: - Change the way we show overlimit error for DNS filters and handle the error
