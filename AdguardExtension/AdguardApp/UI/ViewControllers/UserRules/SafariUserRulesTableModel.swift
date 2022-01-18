@@ -177,7 +177,9 @@ final class SafariUserRulesTableModel: UserRulesTableModelProtocol {
     private func addNewRulesAfterImport(_ rulesText: String, _ completion: @escaping (Error?) -> Void) {
         workingQueue.async { [weak self] in
             guard let self = self else { return }
-            let rules = rulesText.components(separatedBy: .newlines).map { UserRule(ruleText: String($0), isEnabled: true) }
+            let rules = rulesText.components(separatedBy: .newlines)
+                .filter { !$0.isEmpty }
+                .map { UserRule(ruleText: String($0), isEnabled: true) }
             do {
                 try self.safariProtection.add(rules: rules, for: self.type, override: true, onCbReloaded: nil)
                 self.modelProvider = UserRulesModelsProvider(initialModels: Self.models(self.safariProtection, self.type))

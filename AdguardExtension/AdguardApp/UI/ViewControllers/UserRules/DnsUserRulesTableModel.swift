@@ -194,7 +194,9 @@ final class DnsUserRulesTableModel: UserRulesTableModelProtocol {
     private func addNewRulesAfterImport(_ rulesText: String, _ completion: @escaping (Error?) -> Void) {
         workingQueue.async { [weak self] in
             guard let self = self else { return }
-            let rules = rulesText.components(separatedBy: .newlines).map { UserRule(ruleText: String($0), isEnabled: true) }
+            let rules = rulesText.components(separatedBy: .newlines)
+                .filter { !$0.isEmpty }
+                .map { UserRule(ruleText: String($0), isEnabled: true) }
             do {
                 try self.dnsProtection.add(rules: rules, override: true, for: self.type)
                 self.modelProvider = UserRulesModelsProvider(initialModels: Self.models(self.dnsProtection, self.type))
