@@ -39,12 +39,14 @@ final class ServiceInitializer: ServiceInitializerProtocol {
     let activityStatistics: ActivityStatisticsProtocol
 
     init(resources: AESharedResourcesProtocol) throws {
+        DDLogInfo("(TodayViewController) - init services start")
         let networkService = ACNNetworking()
         let productInfo = ADProductInfo()
         let purchaseService = PurchaseService(network: networkService, resources: resources, productInfo: productInfo)
 
         let sharedStorageUrls = SharedStorageUrls()
 
+        DDLogInfo("(TodayViewController) - init safari protection service")
         let safariConfiguration = SafariConfiguration(
             resources: resources, 
             isProPurchased: purchaseService.isProPurchased
@@ -72,6 +74,8 @@ final class ServiceInitializer: ServiceInitializerProtocol {
             isProPurchased: purchaseService.isProPurchased
         )
 
+        DDLogInfo("(TodayViewController) - init dns protection service")
+
         self.dnsProvidersManager = try DnsProvidersManager(configuration: dnsConfiguration, userDefaults: resources.sharedDefaults(), networkUtils: NetworkUtils())
 
         let nativeDnsSettingsManager = NativeDnsSettingsManager(networkSettingsService: networkSettings, dnsProvidersManager: dnsProvidersManager, configuration: configuration, resources: resources)
@@ -93,6 +97,9 @@ final class ServiceInitializer: ServiceInitializerProtocol {
 
         // MARK: - ActivityStatistics
 
+        DDLogInfo("(TodayViewController) - init activity statistics service")
         self.activityStatistics = try ActivityStatistics(statisticsDbContainerUrl: sharedStorageUrls.statisticsFolderUrl)
+
+        DDLogInfo("(TodayViewController) - init services end")
     }
 }
