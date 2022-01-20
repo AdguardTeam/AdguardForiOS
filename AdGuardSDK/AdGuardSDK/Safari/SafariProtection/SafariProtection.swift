@@ -82,6 +82,8 @@ public final class SafariProtection: SafariProtectionProtocol {
                 userDefaults: UserDefaults,
                 dnsBackgroundFetchUpdater: DnsBackgroundFetchUpdateProtocol? = nil) throws
     {
+        Logger.logInfo("(SafariProtection) - init start")
+
         let services = try ServicesStorage(configuration: configuration,
                                           filterFilesDirectoryUrl: filterFilesDirectoryUrl,
                                           dbContainerUrl: dbContainerUrl,
@@ -98,6 +100,8 @@ public final class SafariProtection: SafariProtectionProtocol {
         self.safariManagers = services.safariManagers
         self.converterHelper = WebExtensionHelpers()
         self.dnsBackgroundFetchUpdater = dnsBackgroundFetchUpdater
+
+        Logger.logInfo("(SafariProtection) - init end")
     }
 
     // Initializer for tests

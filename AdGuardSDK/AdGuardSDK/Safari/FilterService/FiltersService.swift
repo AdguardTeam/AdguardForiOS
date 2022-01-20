@@ -193,6 +193,8 @@ final class FiltersService: FiltersServiceProtocol {
         metaParser: CustomFilterMetaParserProtocol = CustomFilterMetaParser(),
         apiMethods: SafariProtectionApiMethodsProtocol) throws {
 
+        Logger.logInfo("(FiltersService) - init start")
+
         self.configuration = configuration
         self.filterFilesStorage = filterFilesStorage
         self.metaStorage = metaStorage
@@ -201,6 +203,8 @@ final class FiltersService: FiltersServiceProtocol {
         self.apiMethods = apiMethods
 
         try self._groupsAtomic.mutate { $0.append(contentsOf: try getAllLocalizedGroups()) }
+
+        Logger.logInfo("(FiltersService) - init end")
     }
 
     // MARK: - Public methods
@@ -623,32 +627,44 @@ final class FiltersService: FiltersServiceProtocol {
     private func getFilters(forGroup group: SafariGroupProtocol) throws -> [SafariGroup.Filter] {
         let localizedFiltersMeta = try metaStorage.getLocalizedFiltersForGroup(withId: group.groupId, forSuitableLanguages: suitableLanguages)
         return try localizedFiltersMeta.map { dbFilter in
-            // TODO: - Maybe we should store rulesCount in database
-            let meta = getMetaForFilter(withId: dbFilter.filterId, filterDownloadPage: dbFilter.subscriptionUrl)
+            // TODO: We should store rulesCount in the database instead of counting it every time.
+            let rulesCount = getRulesCountForFilter(withId: dbFilter.filterId)
             let languages = try metaStorage.getLangsForFilter(withId: dbFilter.filterId)
             let tags = try metaStorage.getTagsForFilter(withId: dbFilter.filterId)
             return SafariGroup.Filter(dbFilter: dbFilter,
                                       group: group,
-                                      rulesCount: meta?.rulesCount ?? 0,
+                                      rulesCount: rulesCount,
                                       languages: languages,
                                       tags: tags,
                                       filterDownloadPage: dbFilter.subscriptionUrl)
         }
     }
 
-    /* Gets filter file content, parses it's meta and returns it */
-    private func getMetaForFilter(withId id: Int, filterDownloadPage: String?) -> ExtendedCustomFilterMetaProtocol? {
+    /**
+     Relatively quick function to count rules in a filter list.
+     - Parameter id: filter identifier
+     - Returns the number of rules in the filter list
+     */
+    private func getRulesCountForFilter(withId id: Int) -> Int {
         guard let filterContent = filterFilesStorage.getFilterContentForFilter(withId: id) else {
             Logger.logError("(FiltersService) - getRulesCountForFilter; received nil for filter with id=\(id)")
-            return nil
+            return 0
         }
 
-        do {
-            return try metaParser.parse(filterContent, for: .safari, filterDownloadPage: filterDownloadPage)
-        } catch {
-            Logger.logError("(FiltersService) - getRulesCountForFilter; received error for filter with id=\(id); error: \(error)")
-            return nil
+        // Use NSString to count lines in the filter content because Swift's String
+        // is extremely slow.
+        var rulesCount: Int = 0
+        let commentChar1 = "!".utf16.first!
+        let commentChar2 = "#".utf16.first!
+        let nsString = filterContent as NSString
+        nsString.enumerateLines{ str, _ in
+            let firstChar = (str as NSString).character(at: 0)
+            if firstChar != commentChar1 && firstChar != commentChar2 {
+                rulesCount += 1
+            }
         }
+
+        return rulesCount
     }
 
     /**
