@@ -175,10 +175,13 @@ final class FiltersConverter: FiltersConverterProtocol {
     }
 
     private func convert(filters: [ContentBlockerType: [String]]) -> [FiltersConverterResult] {
-        Logger.logInfo("(FiltersConverter) - convertFilters; Safari rules convertion started")
+        Logger.logInfo("(FiltersConverter) - convertFilters; Safari rules conversion started")
 
         let safariVersion = SafariVersion(rawValue: configuration.iosVersion) ?? .safari15
         let conversionResult: [FiltersConverterResult] = filters.concurrentMap { [unowned self] cbType, rules -> FiltersConverterResult in
+
+            Logger.logInfo("(FiltersConverter) - convertFilters; Start converting \(cbType)")
+
             let converter = ContentBlockerConverterWrapper()
             let result = converter.convertArray(
                 rules: rules,
@@ -186,14 +189,16 @@ final class FiltersConverter: FiltersConverterProtocol {
                 optimize: false,
                 advancedBlocking: configuration.advancedBlockingIsEnabled && configuration.proStatus
             )
-            Logger.logInfo("FiltersConverter result: \(result.message)")
+
+            Logger.logInfo("(FiltersConverter) - FiltersConverter for \(cbType) result: \(result.convertedCount) rules")
+            Logger.logDebug("(FiltersConverter) - FiltersConverter for \(cbType) result message: \(result.message)")
 
             // Just take the info we need
             let converterResult = FiltersConverterResult(type: cbType, conversionResult: result)
             return converterResult
         }
 
-        Logger.logInfo("(FiltersConverter) - convertFilters; Safari rules convertion finished")
+        Logger.logInfo("(FiltersConverter) - convertFilters; Safari rules conversion finished")
         return conversionResult
     }
 }
