@@ -1165,3 +1165,39 @@
 
 /* (DnsProviderDetailsController) Website title */
 "website_title" = "Website";
+
+/* (YoutubePlayerController) 'bad url' alert title */
+"youtube_player_controller_bad_url_title" = "The URL is invalid";
+
+/* (YoutubePlayerController) 'bad url' alert message */
+"youtube_player_controller_bad_url_message" = "Please provide a link to YouTube";
+
+/* (YoutubePlayerController) 'content blocking list error' alert title */
+"youtube_player_controller_content_blocking_list_error_title" = "Filtering error";
+
+/* (YoutubePlayerController) 'content blocking list error' alert message */
+"youtube_player_controller_content_blocking_list_error_message" = "Failed to compile content blocking list";
+
+/* (YoutubePlayerController) 'userscript error' alert title */
+"youtube_player_controller_userscript_error_title" = "Userscript error";
+
+/* (YoutubePlayerController) 'userscript error' alert message */
+"youtube_player_controller_userscript_error_message" = "Failed to create userscript";
+
+/* (ShareViewController) 'no url error' alert title */
+"youtube_share_extension_no_url_title" = "No URL provided";
+
+/* (ShareViewController) 'no url error' alert message */
+"youtube_share_extension_no_url_summary" = "Share youtube video to AdGuard to watch videos without ads";
+
+/* (ShareViewController) 'bad url error' alert title */
+"youtube_share_extension_bad_url_title" = "URL is invalid";
+
+/* (ShareViewController) 'bad url error' alert message */
+"youtube_share_extension_bad_url_summary" = "Share youtube video to AdGuard to watch videos without ads";
+
+/* (ShareViewController) 'item provider error' alert title */
+"youtube_share_extension_item_provider_error_title" = "Internal error";
+
+/* (ShareViewController) 'item provider error' alert message */
+"youtube_share_extension_item_provider_error_summary" = "Failed to share link with AdGuard";

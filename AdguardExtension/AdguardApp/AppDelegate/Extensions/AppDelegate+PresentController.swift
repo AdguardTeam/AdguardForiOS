@@ -686,6 +686,41 @@ extension AppDelegate {
         return true
     }
 
+    /** Creates ans presents YoutubePlayerController */
+    func presentYoutubePlayerController(videoId: String) -> Bool {
+        guard var topVC = Self.topViewController() else {
+            DDLogError("Failed to get top view controller")
+            return false
+        }
+
+        // We need to check if top view controller is youtube alert and dismiss it
+        if topVC is YoutubeAlertController {
+            topVC.dismiss(animated: true)
+
+            // We should re-set topVC since the current one has been dismissed
+            guard let newTopVC = Self.topViewController() else {
+                DDLogError("Failed to get top view controller")
+                return false
+            }
+
+            topVC = newTopVC
+        }
+
+        if topVC is YoutubePlayerController {
+            (topVC as? YoutubePlayerController)?.reload(videoId: videoId)
+            return true
+        }
+
+        // Everything's clear, I hope you took a popcorn because the cinema session will start before long
+        let controller = YoutubePlayerController(videoId: videoId, nibName: nil, bundle: nil)
+        let navigationController = UINavigationController()
+        navigationController.modalPresentationStyle = .fullScreen
+        navigationController.viewControllers = [controller]
+        topVC.present(navigationController, animated: true)
+
+        return true
+    }
+
     /* Returns top view controller for controller  */
     static func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
         if let navigationController = controller as? UINavigationController {

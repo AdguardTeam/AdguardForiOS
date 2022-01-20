@@ -57,6 +57,7 @@ fileprivate enum StringConstants: String {
     case upgradeApp = "upgradeApp"
     case enableAdvancedProtection = "enableAdvancedProtection"
     case addDnsServer = "add_dns_server"
+    case watchYoutubeVideo = "watch_youtube_video"
 
     static func getStringConstant(string: String?) -> StringConstants? {
         guard let string = string else { return nil }
@@ -168,6 +169,12 @@ struct URLSchemeParser: IURLSchemeParser {
         case (.inAppUrlScheme, .enableAdvancedProtection):
             DDLogInfo("(URLSchemeParser) openurl - open advanced protection screen; proStatus=\(configurationService.proStatus)")
             let processor = OpenAdvancedProtectionParser(executor: executor)
+            return processor.parse(url)
+
+        // Open Youtube player controller
+        case (.urlScheme, .watchYoutubeVideo):
+            DDLogInfo("(URLSchemeParser) openurl - open youtube player; proStatus=\(configurationService.proStatus)")
+            let processor = OpenYoutubeControllerParser(executor: executor)
             return processor.parse(url)
 
         default: return false

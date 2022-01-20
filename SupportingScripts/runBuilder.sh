@@ -33,6 +33,12 @@ exit 0
 
 esac
 
+# Let's update 'Block YouTube Ads' userscript
+# See https://github.com/AdguardTeam/BlockYouTubeAdsShortcut
+# See https://jira.adguard.com/browse/AG-11561
+echo "================ DOWNLOADING BLOCK ADS ON YOUTUBE USERSCRIPT ==================="
+wget -O "${SRCROOT}/../AdGuardExtension/AdGuardApp/UI/ViewControllers/YoutubePlayer/userscript.js" https://raw.githubusercontent.com/AdguardTeam/BlockYouTubeAdsShortcut/master/dist/index.js
+
 
 echo "============================== BUILD BUILDER ==================================="
 xcodebuild -workspace "${SRCROOT}/../AdguardSafariExtension-iOS.xcworkspace" -scheme "Builder" -configuration "${CONFIGURATION}" -derivedDataPath "${SYMROOT}"

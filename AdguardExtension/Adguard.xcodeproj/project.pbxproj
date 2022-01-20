@@ -383,6 +383,29 @@
 		4982C2F426D7973F00CACBBE /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EBDD99926D6A777009531FA /* manifest.json */; };
 		4982C2F626D7973F00CACBBE /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = 7EBDD9AB26D6A77D009531FA /* popup.html */; };
 		4982C2F726D7973F00CACBBE /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = 7E7D636626D6A91A0002EE6A /* popup.js */; };
+		60BB66A12795BBAE00AAE8CE /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BB66A02795BBAE00AAE8CE /* ShareViewController.swift */; };
+		60BB66A82795BBAE00AAE8CE /* ProYoutubeShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 60BB669E2795BBAE00AAE8CE /* ProYoutubeShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		60BB66AE2795D24100AAE8CE /* userscript.js in Resources */ = {isa = PBXBuildFile; fileRef = 60BB66AD2795D24100AAE8CE /* userscript.js */; };
+		60BB66AF2795D30F00AAE8CE /* URL+CustomSchemeURLParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */; };
+		60BB66B02795D39A00AAE8CE /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDAEA42191C9540028001B /* String+Utils.swift */; };
+		60BB66B12795D3DD00AAE8CE /* UIColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9116D212FFCD6006DF0D3 /* UIColorUtils.swift */; };
+		60BB66B22795D40900AAE8CE /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
+		60BB66B32795D43E00AAE8CE /* String+NSRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244419832614C1BC009555F3 /* String+NSRange.swift */; };
+		60BB66B52795D75300AAE8CE /* DDLog.h in Sources */ = {isa = PBXBuildFile; fileRef = D031A0A8219EFC99002C17D9 /* DDLog.h */; };
+		60BB66B62795D75300AAE8CE /* DDLoggerNames.h in Sources */ = {isa = PBXBuildFile; fileRef = D031A0AD219EFC99002C17D9 /* DDLoggerNames.h */; };
+		60BB66B72795D75300AAE8CE /* DDLogMacros.h in Sources */ = {isa = PBXBuildFile; fileRef = D031A0AE219EFC99002C17D9 /* DDLogMacros.h */; };
+		60BB66B82795D75300AAE8CE /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0BE219EFC99002C17D9 /* DDLog.m */; };
+		60BB66B92795D75300AAE8CE /* DDLog+LOGV.h in Sources */ = {isa = PBXBuildFile; fileRef = D031A0C3219EFC99002C17D9 /* DDLog+LOGV.h */; };
+		60BB66BA2795D75300AAE8CE /* DDLoggerNames.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0C4219EFC99002C17D9 /* DDLoggerNames.m */; };
+		60BB66BB2795D78400AAE8CE /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D031A0B4219EFC99002C17D9 /* CocoaLumberjack.swift */; };
+		60BB66BC2795D78400AAE8CE /* CocoaLumberjack.h in Sources */ = {isa = PBXBuildFile; fileRef = D031A0BF219EFC99002C17D9 /* CocoaLumberjack.h */; };
+		60BB66BD2795D7DC00AAE8CE /* NSString+Utils.h in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F11C6B7686000F00D7 /* NSString+Utils.h */; };
+		60BB66BE2795D7DC00AAE8CE /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F21C6B7686000F00D7 /* NSString+Utils.m */; };
+		60BB66BF2795D7DC00AAE8CE /* NSStringPunycodeAdditions.h in Sources */ = {isa = PBXBuildFile; fileRef = 658E43961E8911A3008DAA59 /* NSStringPunycodeAdditions.h */; };
+		60BB66C02795D7DD00AAE8CE /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; };
+		60BB66C22796B9E200AAE8CE /* DispatchQueue+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E92754A26C6C02F007B2C80 /* DispatchQueue+Utils.swift */; };
+		60BB66C32798462200AAE8CE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659E59751BC6D82700FA2384 /* Localizable.strings */; };
+		60BB66C42798499E00AAE8CE /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2BA2E326F9D3D600B44D4A /* UIViewController+Alert.swift */; };
 		6513182E1BDE448D008DCFF9 /* ActionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 65C52B361B906105003AF42F /* ActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		655A02161C6B7686000F00D7 /* ACFFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01A51C6B7686000F00D7 /* ACFFileUtils.m */; };
 		655A02171C6B7686000F00D7 /* ACFFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01A51C6B7686000F00D7 /* ACFFileUtils.m */; };
@@ -1353,6 +1376,9 @@
 		B2C8E9902716ECA100ACDED8 /* PurchaseAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C8E9772716E4AD00ACDED8 /* PurchaseAssistant.swift */; };
 		B2C8E9A42716FDF500ACDED8 /* Setapp in Frameworks */ = {isa = PBXBuildFile; productRef = B2C8E9A32716FDF500ACDED8 /* Setapp */; };
 		B2C8E9A52716FECB00ACDED8 /* AdGuardDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C8E9982716FDB300ACDED8 /* AdGuardDependencies.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		C230E5C7A09791E856326EC9 /* filter.json in Resources */ = {isa = PBXBuildFile; fileRef = C23960A7AB8939FAD8FFE994 /* filter.json */; };
+		C2352988732ED4B26A5BE8CC /* OpenYoutubeControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2359CA1A1F43E4AF7B28637 /* OpenYoutubeControllerParser.swift */; };
+		C2378BBF8ED9D53CA44F600F /* YoutubePlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F9BFAE7D94E7DD647DB43 /* YoutubePlayerController.swift */; };
 		C73374372746D2FF00989447 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
 		C73374382746D30000989447 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
 		C767A55E27590F1800D8DBEA /* PremiumOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C767A55D27590F1800D8DBEA /* PremiumOptionCell.swift */; };
@@ -2273,6 +2299,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		60BB66A62795BBAE00AAE8CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 60BB669D2795BBAE00AAE8CE;
+			remoteInfo = ProYoutubeShareExtension;
+		};
 		6513182F1BDE448D008DCFF9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
@@ -2479,6 +2512,7 @@
 				D0B5453E2435C7B9002F0AEC /* AdguardProBlockingExtensionCustom.appex in Embed App Extensions */,
 				7E6081EA26D55C6A00D778F4 /* ProYouTubeAdsActionExtension.appex in Embed App Extensions */,
 				D0B5453F2435C7B9002F0AEC /* AdguardProBlockingExtensionSecurity.appex in Embed App Extensions */,
+				60BB66A82795BBAE00AAE8CE /* ProYoutubeShareExtension.appex in Embed App Extensions */,
 				D0B545402435C7B9002F0AEC /* AdGuardProTodayExtension.appex in Embed App Extensions */,
 				D0B545412435C7B9002F0AEC /* ProActionExtension.appex in Embed App Extensions */,
 				D0B545422435C7B9002F0AEC /* ProTunnel.appex in Embed App Extensions */,
@@ -2833,6 +2867,10 @@
 		4982C1AB26D78F2A00CACBBE /* constants.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = constants.ts; sourceTree = "<group>"; };
 		4982C1AC26D78F2A00CACBBE /* log.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = log.ts; sourceTree = "<group>"; };
 		4982C1AD26D78F2A00CACBBE /* logNative.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = logNative.ts; sourceTree = "<group>"; };
+		60BB669E2795BBAE00AAE8CE /* ProYoutubeShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ProYoutubeShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		60BB66A02795BBAE00AAE8CE /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		60BB66A52795BBAE00AAE8CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		60BB66AD2795D24100AAE8CE /* userscript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = userscript.js; sourceTree = "<group>"; };
 		65040D251E11652A00DE25D1 /* ExternalLibsSources.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ExternalLibsSources.js; sourceTree = "<group>"; };
 		65163CBD1BE7BA01000A3575 /* it */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/MainInterface.strings; sourceTree = "<group>"; };
 		65163CC11BE7BA03000A3575 /* it */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; lineEnding = 0; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
@@ -3533,6 +3571,9 @@
 		B2C7275E2716AC6300A37BA3 /* Tunnel-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tunnel-Bridging-Header.h"; sourceTree = "<group>"; };
 		B2C8E9772716E4AD00ACDED8 /* PurchaseAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseAssistant.swift; sourceTree = "<group>"; };
 		B2C8E9982716FDB300ACDED8 /* AdGuardDependencies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AdGuardDependencies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2359CA1A1F43E4AF7B28637 /* OpenYoutubeControllerParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenYoutubeControllerParser.swift; sourceTree = "<group>"; };
+		C23960A7AB8939FAD8FFE994 /* filter.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = filter.json; sourceTree = "<group>"; };
+		C23F9BFAE7D94E7DD647DB43 /* YoutubePlayerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubePlayerController.swift; sourceTree = "<group>"; };
 		C767A55D27590F1800D8DBEA /* PremiumOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumOptionCell.swift; sourceTree = "<group>"; };
 		C76FE7DC275F8D53002569DF /* DefaultDnsFilterInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDnsFilterInstaller.swift; sourceTree = "<group>"; };
 		C7DD463B2754D3BB006E1E6C /* LicensePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicensePageViewController.swift; sourceTree = "<group>"; };
@@ -3913,6 +3954,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		60BB669B2795BBAE00AAE8CE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6598869C1CF74DE9003ECD1C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -4286,6 +4334,7 @@
 				24F67F5726E778DB00ABF2BE /* SafariWebExtensionParametersParser.swift */,
 				7E85A82226F37FBD0059BB33 /* OpenLicenseControllerParser.swift */,
 				7E9AE47D26FB8C4B00F6A953 /* OpenAdvancedProtectionParser.swift */,
+				C2359CA1A1F43E4AF7B28637 /* OpenYoutubeControllerParser.swift */,
 			);
 			path = Parsers;
 			sourceTree = "<group>";
@@ -5237,6 +5286,25 @@
 			path = messenger;
 			sourceTree = "<group>";
 		};
+		60BB669F2795BBAE00AAE8CE /* ProYoutubeShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				60BB66A02795BBAE00AAE8CE /* ShareViewController.swift */,
+				60BB66A52795BBAE00AAE8CE /* Info.plist */,
+			);
+			path = ProYoutubeShareExtension;
+			sourceTree = "<group>";
+		};
+		60BB66AC2795CD1500AAE8CE /* YoutubePlayer */ = {
+			isa = PBXGroup;
+			children = (
+				60BB66AD2795D24100AAE8CE /* userscript.js */,
+				C23F9BFAE7D94E7DD647DB43 /* YoutubePlayerController.swift */,
+				C23960A7AB8939FAD8FFE994 /* filter.json */,
+			);
+			path = YoutubePlayer;
+			sourceTree = "<group>";
+		};
 		652F89EE1B92E064002E0601 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -5561,6 +5629,7 @@
 				7E536C68238D2AC400A83A79 /* AdGuardTodayExtension */,
 				7E6081AD26D55C0000D778F4 /* YouTubeAdsActionExtension */,
 				7E4ABFFB26BD75E700DF5CF0 /* SafariWebExtension */,
+				60BB669F2795BBAE00AAE8CE /* ProYoutubeShareExtension */,
 				65F398121B7B684700ABCD39 /* Products */,
 				65D8294D1EDDA905008F7F30 /* Frameworks */,
 			);
@@ -5596,6 +5665,7 @@
 				7E4AC01B26BD796800DF5CF0 /* ProSafariWebExtension.appex */,
 				B22FCD9C270B7DBF00B1C935 /* Tunnel.appex */,
 				B2C8E9982716FDB300ACDED8 /* AdGuardDependencies.framework */,
+				60BB669E2795BBAE00AAE8CE /* ProYoutubeShareExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -6694,6 +6764,7 @@
 		D0F91165212EDE45006DF0D3 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				60BB66AC2795CD1500AAE8CE /* YoutubePlayer */,
 				7E6E73B223F6C5D7001D5019 /* RateApp */,
 				7E8AC81523A7BF2700669C75 /* MainTabBar */,
 				D09CB60123ABB5BF008C9FF7 /* Onboarding */,
@@ -6801,6 +6872,23 @@
 /* End PBXLegacyTarget section */
 
 /* Begin PBXNativeTarget section */
+		60BB669D2795BBAE00AAE8CE /* ProYoutubeShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 60BB66A92795BBAE00AAE8CE /* Build configuration list for PBXNativeTarget "ProYoutubeShareExtension" */;
+			buildPhases = (
+				60BB669A2795BBAE00AAE8CE /* Sources */,
+				60BB669B2795BBAE00AAE8CE /* Frameworks */,
+				60BB669C2795BBAE00AAE8CE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ProYoutubeShareExtension;
+			productName = ProYoutubeShareExtension;
+			productReference = 60BB669E2795BBAE00AAE8CE /* ProYoutubeShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		659886481CF74DE9003ECD1C /* AdguardPro */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 659886B61CF74DE9003ECD1C /* Build configuration list for PBXNativeTarget "AdguardPro" */;
@@ -6831,6 +6919,7 @@
 				D08AB2B226BA5D010065221C /* PBXTargetDependency */,
 				7E6081E926D55C6A00D778F4 /* PBXTargetDependency */,
 				7E4AC03226BD796800DF5CF0 /* PBXTargetDependency */,
+				60BB66A72795BBAE00AAE8CE /* PBXTargetDependency */,
 			);
 			name = AdguardPro;
 			packageProductDependencies = (
@@ -7382,10 +7471,13 @@
 		65F398091B7B684700ABCD39 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1300;
+				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = Performiks;
 				TargetAttributes = {
+					60BB669D2795BBAE00AAE8CE = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
 					65423D951C89B7C900DD1224 = {
 						CreatedOnToolsVersion = 7.2.1;
 					};
@@ -7546,10 +7638,10 @@
 			mainGroup = 65F398081B7B684700ABCD39;
 			packageReferences = (
 				7E2522122408201700743648 /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */,
-				7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */,
+				D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */,
+				7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */,
 				A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */,
-				D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */,
+				D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */,
 				7EF5C55E26C269D6001851D6 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 			);
 			productRefGroup = 65F398121B7B684700ABCD39 /* Products */;
@@ -7585,15 +7677,25 @@
 				65F398291B7B684700ABCD39 /* AdguardTests */,
 				D0288F4823069D7200A4EBEF /* TestHostApp */,
 				B2C8E9972716FDB300ACDED8 /* AdGuardDependencies */,
+				60BB669D2795BBAE00AAE8CE /* ProYoutubeShareExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		60BB669C2795BBAE00AAE8CE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60BB66C32798462200AAE8CE /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		659886A41CF74DE9003ECD1C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60BB66AE2795D24100AAE8CE /* userscript.js in Resources */,
 				7E92753B26C67A1D007B2C80 /* TitleTableViewCell.xib in Resources */,
 				D0D7E54524371C8C001801A5 /* MainPage.storyboard in Resources */,
 				D098B44924497764003BA4DA /* ActivityTableViewCell.xib in Resources */,
@@ -7624,6 +7726,7 @@
 				D0D7E54724371C8C001801A5 /* Filters.storyboard in Resources */,
 				D0D7E55124373E89001801A5 /* Assets.xcassets in Resources */,
 				659886AC1CF74DE9003ECD1C /* stringUIResources.plist in Resources */,
+				C230E5C7A09791E856326EC9 /* filter.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8245,6 +8348,33 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		60BB669A2795BBAE00AAE8CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60BB66C42798499E00AAE8CE /* UIViewController+Alert.swift in Sources */,
+				60BB66BD2795D7DC00AAE8CE /* NSString+Utils.h in Sources */,
+				60BB66BE2795D7DC00AAE8CE /* NSString+Utils.m in Sources */,
+				60BB66BF2795D7DC00AAE8CE /* NSStringPunycodeAdditions.h in Sources */,
+				60BB66C02795D7DD00AAE8CE /* NSStringPunycodeAdditions.m in Sources */,
+				60BB66BB2795D78400AAE8CE /* CocoaLumberjack.swift in Sources */,
+				60BB66BC2795D78400AAE8CE /* CocoaLumberjack.h in Sources */,
+				60BB66B52795D75300AAE8CE /* DDLog.h in Sources */,
+				60BB66B62795D75300AAE8CE /* DDLoggerNames.h in Sources */,
+				60BB66B72795D75300AAE8CE /* DDLogMacros.h in Sources */,
+				60BB66B82795D75300AAE8CE /* DDLog.m in Sources */,
+				60BB66B92795D75300AAE8CE /* DDLog+LOGV.h in Sources */,
+				60BB66BA2795D75300AAE8CE /* DDLoggerNames.m in Sources */,
+				60BB66B22795D40900AAE8CE /* UIColor+Utils.swift in Sources */,
+				60BB66AF2795D30F00AAE8CE /* URL+CustomSchemeURLParserProtocol.swift in Sources */,
+				60BB66A12795BBAE00AAE8CE /* ShareViewController.swift in Sources */,
+				60BB66B02795D39A00AAE8CE /* String+Utils.swift in Sources */,
+				60BB66B12795D3DD00AAE8CE /* UIColorUtils.swift in Sources */,
+				60BB66B32795D43E00AAE8CE /* String+NSRange.swift in Sources */,
+				60BB66C22796B9E200AAE8CE /* DispatchQueue+Utils.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		659886511CF74DE9003ECD1C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -8615,6 +8745,8 @@
 				D0B545E32435D69B002F0AEC /* BottomShadowView.swift in Sources */,
 				7EAA0D7B26CA8785007208E5 /* SafariFilterCell.swift in Sources */,
 				7E2D93F626F3A2ED00534DC5 /* DnsFiltersTableModel.swift in Sources */,
+				C2378BBF8ED9D53CA44F600F /* YoutubePlayerController.swift in Sources */,
+				C2352988732ED4B26A5BE8CC /* OpenYoutubeControllerParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -10437,6 +10569,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		60BB66A72795BBAE00AAE8CE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 60BB669D2795BBAE00AAE8CE /* ProYoutubeShareExtension */;
+			targetProxy = 60BB66A62795BBAE00AAE8CE /* PBXContainerItemProxy */;
+		};
 		651318301BDE448D008DCFF9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 65C52B351B906105003AF42F /* ActionExtension */;
@@ -11283,6 +11420,91 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		60BB66AA2795BBAE00AAE8CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N33TQXN8C7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ProYoutubeShareExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ProYoutubeShareExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Performiks. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardPro.ProYoutubeShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		60BB66AB2795BBAE00AAE8CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N33TQXN8C7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ProYoutubeShareExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ProYoutubeShareExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Performiks. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardPro.ProYoutubeShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		65423D971C89B7C900DD1224 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -13159,6 +13381,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		60BB66A92795BBAE00AAE8CE /* Build configuration list for PBXNativeTarget "ProYoutubeShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				60BB66AA2795BBAE00AAE8CE /* Debug */,
+				60BB66AB2795BBAE00AAE8CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		65423D961C89B7C900DD1224 /* Build configuration list for PBXLegacyTarget "Clean Script" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -13440,7 +13671,7 @@
 				minimumVersion = 3.1.6;
 			};
 		};
-		7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */ = {
+		7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/marmelroy/Zip.git";
 			requirement = {
@@ -13464,7 +13695,7 @@
 				version = 1.6.71;
 			};
 		};
-		D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */ = {
+		D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MacPaw/Setapp-framework.git";
 			requirement = {
@@ -13472,7 +13703,7 @@
 				minimumVersion = 0.0.3;
 			};
 		};
-		D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
+		D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
 			requirement = {
@@ -13525,22 +13756,22 @@
 		};
 		B2C8E9A32716FDF500ACDED8 /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
 			productName = Setapp;
 		};
 		D024973D25714928000EED34 /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
 			productName = Setapp;
 		};
 		D093AA5F25344B4E0015351F /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
 			productName = Setapp;
 		};
 		D09E271A2541D00B002D6BC0 /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
 			productName = Setapp;
 		};
 		D0B546032435D740002F0AEC /* Lottie */ = {
