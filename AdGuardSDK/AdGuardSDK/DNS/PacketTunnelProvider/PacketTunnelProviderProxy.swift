@@ -269,7 +269,7 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
             AGLogger.setLevel(isDebugLogs ? .AGLL_DEBUG : .AGLL_INFO)
             AGLogger.setCallback { _, msg, size in
                 if let msg = msg {
-                    let logMsg = NSString(bytes: msg, length: Int(size), encoding: String.Encoding.ascii.rawValue)! as String
+                    let logMsg = NSString(bytes: msg, length: Int(size), encoding: String.Encoding.utf8.rawValue)! as String
                     Logger.logInfo("(DnsLibs) - \(logMsg)")
                 }
             }
