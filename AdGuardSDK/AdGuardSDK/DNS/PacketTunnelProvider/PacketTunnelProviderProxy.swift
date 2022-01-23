@@ -114,7 +114,10 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
             Logger.logInfo("(PacketTunnelProviderProxy) - networkChanged; shouldRestartWhenNetworkChanges=\(shouldRestartWhenNetworkChanges)")
 
             // Stop packet handling and dnsProxy right away
+            Logger.logInfo("(PacketTunnelProviderProxy) - stopping packet handling")
             self.stopPacketHanding()
+
+            Logger.logInfo("(PacketTunnelProviderProxy) - stopping dnsProxy")
             self.dnsProxy.stop()
 
             // If the user has enabled "restartByReachability", we reinitialize the whole PacketTunnelProvider on every network change
@@ -261,10 +264,14 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
 
     /// Initializes DNS-lib logger
     private func setupLogger(isDebugLogs: Bool) {
-        AGLogger.setLevel(isDebugLogs ? .AGLL_DEBUG : .AGLL_WARN )
+        AGLogger.setLevel(isDebugLogs ? .AGLL_DEBUG : .AGLL_INFO)
         AGLogger.setCallback { _, msg, size in
-            if let msg = msg {
-                Logger.logInfo("(DnsLibs) -> \(String(cString: msg))")
+            AGLogger.setLevel(isDebugLogs ? .AGLL_DEBUG : .AGLL_INFO)
+            AGLogger.setCallback { _, msg, size in
+                if let msg = msg {
+                    let logMsg = NSString(bytes: msg, length: Int(size), encoding: String.Encoding.utf8.rawValue)! as String
+                    Logger.logInfo("(DnsLibs) - \(logMsg)")
+                }
             }
         }
     }
