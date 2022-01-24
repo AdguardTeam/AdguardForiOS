@@ -35,6 +35,7 @@
  11. <adguardScheme>://upgradeApp                                   <--- Open License screen
  12. <adguardScheme>://enableAdvancedProtection                     <--- Open Advanced protection screen
  13. <adguardScheme>://add_dns_server?address:<upstream>&name:<name> <--- Adding custom DNS server
+ 14. <adguardScheme>://watch_youtube_video?video_id=<ID>            <--- Open YouTube player to watch YouTube video with given <ID>
  */
 
 protocol IURLSchemeParser {

@@ -32,12 +32,12 @@ class ShareViewController: UIViewController {
     private let youtubeUrlWithWww = "https://www.youtube.com"
     private let youtubeEmbed = "/embed/"
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
         guard let extensionItem = extensionContext?.inputItems.first as? NSExtensionItem,
               let itemProvider = extensionItem.attachments?.first else {
-            finish(withError: .noUrl, logMessage: "Failed to get item provider")
+            finish(withError: .noUrl, fromFunction: "viewDidLoad", logMessage: "Failed to get item provider")
             return
         }
 
@@ -46,8 +46,7 @@ class ShareViewController: UIViewController {
         } else if itemProvider.hasItemConformingToTypeIdentifier(typeURL) {
             processUrl(from: itemProvider)
         } else {
-            finish(withError: .noUrl, logMessage: "No url or text found")
-            return
+            finish(withError: .noUrl, fromFunction: "viewDidLoad", logMessage: "No url or text found")
         }
     }
 
@@ -55,23 +54,23 @@ class ShareViewController: UIViewController {
     private func processText(from itemProvider: NSItemProvider) {
         itemProvider.loadItem(forTypeIdentifier: typeText, options: nil) { (item, error) in
             if let error = error {
-                self.finish(withError: .itemProviderError, logMessage: error.localizedDescription)
+                self.finish(withError: .itemProviderError, fromFunction: "processText", logMessage: error.localizedDescription)
                 return
             }
 
-            if let text = item as? String {
-                do {
-                    let detector = try NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
-                    let matches = detector.matches(in: text, options: [], range: NSRange(location: 0, length: text.utf16.count))
+            guard let text = item as? String else { return }
 
-                    if let firstMatch = matches.first, let range = Range(firstMatch.range, in: text) {
-                        self.openMainApp(String(text[range]))
-                    } else {
-                        self.finish(withError: .itemProviderError, logMessage: "No matches found")
-                    }
-                } catch let error {
-                    self.finish(withError: .itemProviderError, logMessage: error.localizedDescription)
+            do {
+                let detector = try NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+                let matches = detector.matches(in: text, options: [], range: NSRange(location: 0, length: text.utf16.count))
+
+                if let firstMatch = matches.first, let range = Range(firstMatch.range, in: text) {
+                    self.openMainApp(String(text[range]))
+                } else {
+                    self.finish(withError: .itemProviderError, fromFunction: "processText", logMessage: "No matches found")
                 }
+            } catch {
+                self.finish(withError: .itemProviderError, fromFunction: "processText", logMessage: error.localizedDescription)
             }
         }
     }
@@ -80,49 +79,33 @@ class ShareViewController: UIViewController {
     private func processUrl(from itemProvider: NSItemProvider) {
         itemProvider.loadItem(forTypeIdentifier: typeURL, options: nil) { (item, error) in
             if let error = error {
-                self.finish(withError: .itemProviderError, logMessage: error.localizedDescription)
+                self.finish(withError: .itemProviderError, fromFunction: "processUrl", logMessage: error.localizedDescription)
                 return
             }
 
             if let url = item as? NSURL, let urlString = url.absoluteString {
                 self.openMainApp(urlString)
             } else {
-                self.finish(withError: .itemProviderError, logMessage: "Failed to handle incoming URL")
+                self.finish(withError: .itemProviderError, fromFunction: "processUrl", logMessage: "Failed to handle incoming URL")
             }
         }
-    }
-
-    private func getVideoId(from url: String) -> String? {
-        if url.starts(with: youtubeCompressedUrl) {
-            guard let idx = url.lastIndex(of: "/") else {
-                return nil
-            }
-
-            return String(youtubeCompressedUrl[idx...])
-        }
-
-        if url.starts(with: youtubeUrl) || url.starts(with: youtubeUrlWithWww) {
-
-        }
-
-        return nil
     }
 
     /** Validates urlString, converts it to adguard scheme and opens main app */
     private func openMainApp(_ urlString: String) {
         guard let urlValidationResult = validateUrl(url: urlString) else {
-            finish(withError: .badUrl, logMessage: "Shared URL is not from YouTube")
+            finish(withError: .badUrl, fromFunction: "openMainApp", logMessage: "Shared URL is not from YouTube")
             return
         }
 
-        guard let videoId = UrlValidationResult.extractVideoId(forResult: urlValidationResult, from: urlString) else {
-            finish(withError: .badUrl, logMessage: "Failed to get video ID from \(urlString)")
+        guard let videoId = urlValidationResult.extractVideoId(from: urlString) else {
+            finish(withError: .badUrl, fromFunction: "openMainApp", logMessage: "Failed to get video ID from \(urlString)")
             return
         }
 
         extensionContext?.completeRequest(returningItems: nil, completionHandler: { _ in
             guard let url = URL(string: "\(self.appURL)\(videoId)") else { return }
-            _ = self.openURL(url)
+            self.openURL(url)
         })
     }
 
@@ -133,31 +116,25 @@ class ShareViewController: UIViewController {
         }
 
         if url.starts(with: youtubeUrl) || url.starts(with: youtubeUrlWithWww) {
-            if url.contains(youtubeEmbed) {
-                return .embed
-            }
-            return .regular
+            return url.contains(youtubeEmbed) ? .embed : .regular
         }
 
         return nil
     }
 
-    @objc private func openURL(_ url: URL) -> Bool {
+    @objc private func openURL(_ url: URL) {
         var responder: UIResponder? = self
         while responder != nil {
             if let application = responder as? UIApplication {
-                return application.perform(#selector(openURL(_:)), with: url) != nil
+                application.perform(#selector(openURL(_:)), with: url) != nil
             }
             responder = responder?.next
         }
-
-        return false
     }
 
-    private func finish(withError error: Error, logMessage: String) {
-        DDLogError("(ShareViewController) -> \(logMessage)")
-        let (title, message) = Error.getAlertTitleAndMessage(for: error)
-        presentSimpleAlert(title: String.localizedString(title), message: String.localizedString(message)) {
+    private func finish(withError error: SharingLinkError, fromFunction: String, logMessage: String) {
+        DDLogError("(ShareViewController) -> \(fromFunction); \(logMessage)")
+        presentSimpleAlert(title: error.alertTitle, message: error.alertMessage) {
             self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
         }
     }
@@ -165,20 +142,24 @@ class ShareViewController: UIViewController {
 
 
     /** Possible errors that may occur during sharing a link*/
-    private enum Error {
+    private enum SharingLinkError : Error {
         case noUrl
         case badUrl
         case itemProviderError
 
-        static func getAlertTitleAndMessage(for error: Error) -> (String, String) {
-            switch error {
+        var alertTitle: String {
+            switch self {
+            case .noUrl:                return String.localizedString("youtube_share_extension_no_url_title")
+            case .badUrl:               return String.localizedString("youtube_share_extension_bad_url_title")
+            case .itemProviderError:    return String.localizedString("youtube_share_extension_item_provider_error_title")
+            }
+        }
 
-            case .noUrl:
-                return ("youtube_share_extension_no_url_title", "youtube_share_extension_no_url_summary")
-            case .badUrl:
-                return ("youtube_share_extension_bad_url_title", "youtube_share_extension_bad_url_summary")
-            case .itemProviderError:
-                return ("youtube_share_extension_item_provider_error_title", "youtube_share_extension_item_provider_error_summary")
+        var alertMessage: String {
+            switch self {
+            case .noUrl:                return String.localizedString("youtube_share_extension_no_url_summary")
+            case .badUrl:               return String.localizedString("youtube_share_extension_bad_url_summary")
+            case .itemProviderError:    return String.localizedString("youtube_share_extension_item_provider_error_summary")
             }
         }
     }
@@ -193,15 +174,11 @@ class ShareViewController: UIViewController {
         case regular
 
         /** Extracts video ID from given youtube URL according to given validation result */
-        static func extractVideoId(forResult: UrlValidationResult, from: String) -> String? {
-            switch forResult {
+        func extractVideoId(from: String) -> String? {
+            switch self {
 
-            case .compressed:
-                fallthrough
-            case .embed:
-                guard let firstIdx = from.lastIndex(of: "/") else {
-                    return nil
-                }
+            case .compressed, .embed:
+                guard let firstIdx = from.lastIndex(of: "/") else { return nil }
 
                 if let lastIdx = from.firstIndex(of: "?") {
                     return String(from[firstIdx...lastIdx])
@@ -209,7 +186,7 @@ class ShareViewController: UIViewController {
                     return String(from[firstIdx...])
                 }
             case .regular:
-                return URL.init(string: from)?.parseUrl().params?["v"]
+                return URL(string: from)?.parseUrl().params?["v"]
             }
         }
     }

@@ -1167,7 +1167,7 @@
 "website_title" = "Website";
 
 /* (YoutubePlayerController) 'bad url' alert title */
-"youtube_player_controller_bad_url_title" = "The URL is invalid";
+"youtube_player_controller_bad_url_title" = "Invalid URL";
 
 /* (YoutubePlayerController) 'bad url' alert message */
 "youtube_player_controller_bad_url_message" = "Please provide a link to YouTube";
@@ -1188,16 +1188,16 @@
 "youtube_share_extension_no_url_title" = "No URL provided";
 
 /* (ShareViewController) 'no url error' alert message */
-"youtube_share_extension_no_url_summary" = "Share youtube video to AdGuard to watch videos without ads";
+"youtube_share_extension_no_url_summary" = "Share YouTube videos to AdGuard to watch them without ads";
 
 /* (ShareViewController) 'bad url error' alert title */
-"youtube_share_extension_bad_url_title" = "URL is invalid";
+"youtube_share_extension_bad_url_title" = "Invalid URL";
 
 /* (ShareViewController) 'bad url error' alert message */
-"youtube_share_extension_bad_url_summary" = "Share youtube video to AdGuard to watch videos without ads";
+"youtube_share_extension_bad_url_summary" = "Share YouTube videos to AdGuard to watch them without ads";
 
 /* (ShareViewController) 'item provider error' alert title */
 "youtube_share_extension_item_provider_error_title" = "Internal error";
 
 /* (ShareViewController) 'item provider error' alert message */
-"youtube_share_extension_item_provider_error_summary" = "Failed to share link with AdGuard";
+"youtube_share_extension_item_provider_error_summary" = "Failed to share the link to AdGuard";

@@ -694,25 +694,23 @@ extension AppDelegate {
         }
 
         // We need to check if top view controller is youtube alert and dismiss it
-        if topVC is YoutubeAlertController {
-            topVC.dismiss(animated: true)
-
+        if topVC is UIAlertController {
             // We should re-set topVC since the current one has been dismissed
-            guard let newTopVC = Self.topViewController() else {
+            guard let newTopVC = topVC.presentingViewController else {
                 DDLogError("Failed to get top view controller")
                 return false
             }
-
+            topVC.dismiss(animated: false)
             topVC = newTopVC
         }
 
-        if topVC is YoutubePlayerController {
-            (topVC as? YoutubePlayerController)?.reload(videoId: videoId)
+        if let topVC = topVC as? YoutubePlayerController {
+            topVC.reload(videoId: videoId)
             return true
         }
 
         // Everything's clear, I hope you took a popcorn because the cinema session will start before long
-        let controller = YoutubePlayerController(videoId: videoId, nibName: nil, bundle: nil)
+        let controller = YoutubePlayerController(videoId: videoId)
         let navigationController = UINavigationController()
         navigationController.modalPresentationStyle = .fullScreen
         navigationController.viewControllers = [controller]
