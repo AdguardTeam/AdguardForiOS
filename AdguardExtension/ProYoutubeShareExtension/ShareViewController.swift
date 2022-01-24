@@ -27,9 +27,12 @@ class ShareViewController: UIViewController {
     private let typeURL = String(kUTTypeURL)
 
     private let appURL = "adguard-pro://watch_youtube_video?video_id="
-    private let youtubeUrl = "https://youtube.com"
-    private let youtubeCompressedUrl = "https://youtu.be"
-    private let youtubeUrlWithWww = "https://www.youtube.com"
+    private let youtubeUrl = "youtube.com"
+    private let youtubeCompressedUrl = "youtu.be"
+    private let youtubeKids = "youtubekids.com"
+    private let youtubeMusic = "music.youtube.com"
+    private let youtubeMobile = "m.youtube.com"
+    private let youtubeNoCookie = "youtube-nocookie.com"
     private let youtubeEmbed = "/embed/"
 
     override func viewDidLoad() {
@@ -111,11 +114,13 @@ class ShareViewController: UIViewController {
 
     /** Returns UrlValidationResult or nil if given url is not valid */
     private func validateUrl(url: String) -> UrlValidationResult? {
-        if url.starts(with: youtubeCompressedUrl) {
+        guard let domain: String = URL(string: url)?.domain else { return nil }
+
+        if equalsAny(domain, [youtubeCompressedUrl]) {
             return .compressed
         }
 
-        if url.starts(with: youtubeUrl) || url.starts(with: youtubeUrlWithWww) {
+        if equalsAny(domain, [youtubeUrl, youtubeKids, youtubeMusic, youtubeMobile, youtubeNoCookie]) {
             return url.contains(youtubeEmbed) ? .embed : .regular
         }
 
@@ -137,6 +142,16 @@ class ShareViewController: UIViewController {
         presentSimpleAlert(title: error.alertTitle, message: error.alertMessage) {
             self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
         }
+    }
+
+    private func equalsAny(_ a: String, _ b: [String]) -> Bool {
+        for s in b {
+            if a.compare(s, options: .caseInsensitive) == .orderedSame {
+                return true
+            }
+        }
+
+        return false
     }
 
 
