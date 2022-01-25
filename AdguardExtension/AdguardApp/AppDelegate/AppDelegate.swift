@@ -73,6 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let resources = StartupService.initResources()
 
         AppDelegate.initLogger(resources: resources)
+        DDLogInfo("Starting application")
         StartupService.start()
 
         self.resources = ServiceLocator.shared.getService()!
@@ -93,7 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         super.init()
 
-        DDLogInfo("Application started. Version: \(productInfo.buildVersion() ?? "nil")")
+        DDLogInfo("Application has been started. Version: \(productInfo.buildVersion() ?? "nil")")
     }
 
     deinit {
@@ -333,6 +334,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          To quickly show stats in ActivityViewController, we load ViewController when app starts
          */
         dnsLogContainerVC.loadViewIfNeeded()
+        DDLogInfo("Finished preparing controllers")
     }
 
     // TODO: - Change the way we show overlimit error for DNS filters and handle the error

@@ -44,6 +44,8 @@ final class ServicesStorage: ServicesStorageProtocol {
          userDefaults: UserDefaults,
          jsonStorageUrl: URL) throws
     {
+        Logger.logInfo("(ServicesStorage) - init start")
+
         let filterFilesStorage = try FilterFilesStorage(filterFilesDirectoryUrl: filterFilesDirectoryUrl)
         try filterFilesStorage.unzipPredefinedFiltersIfNeeded()
 
@@ -79,5 +81,7 @@ final class ServicesStorage: ServicesStorageProtocol {
             safariManagers: safariManagers,
             filtersConverter: filtersConverter
         )
+
+        Logger.logInfo("(ServicesStorage) - init end")
     }
 }

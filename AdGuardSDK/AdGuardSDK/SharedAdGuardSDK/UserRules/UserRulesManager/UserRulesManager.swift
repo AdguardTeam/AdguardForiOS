@@ -127,9 +127,10 @@ public final class UserRulesManager: UserRulesManagerProtocol {
     }
 
     public func checkEnabledRuleExists(_ ruleText: String) -> Bool {
-        return storage.rules.contains { rule in
-            rule.ruleText == ruleText && rule.isEnabled
-        }
+        // Create a hashable UserRule object so that we could quickly check
+        // if the the rules set contains it or not.
+        let ruleToCheck = UserRule(ruleText: ruleText, isEnabled: true)
+        return storage.rules.contains(ruleToCheck)
     }
 
     public func reset() throws {

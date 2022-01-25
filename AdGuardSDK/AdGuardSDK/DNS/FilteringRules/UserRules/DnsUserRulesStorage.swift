@@ -23,13 +23,20 @@ final class DnsUserRulesStorage: UserRulesStorageProtocol {
 
     var rules: OrderedSet<UserRule> {
         get {
+            if self.userRules != nil {
+                return self.userRules!
+            }
+
+            // TODO: we should store DISABLED rules, not enabled, the list would be shorter this way
             let allRules = getAllRules()
-            let enabledRules = getEnabledRules()
+            let enabledRules = Set(getEnabledRules())
             let rulesObjects: [UserRule] = allRules.map {
                 let isEnabled = enabledRules.contains($0)
                 return UserRule(ruleText: $0, isEnabled: isEnabled)
             }
-            return OrderedSet(rulesObjects)
+            self.userRules = OrderedSet(rulesObjects)
+
+            return self.userRules!;
         }
         set {
             var allRules: [String] = []
@@ -42,6 +49,7 @@ final class DnsUserRulesStorage: UserRulesStorageProtocol {
             }
             saveAllRules(allRules)
             saveEnabledRules(enabledRules)
+            self.userRules = nil
         }
     }
 
@@ -49,6 +57,7 @@ final class DnsUserRulesStorage: UserRulesStorageProtocol {
 
     private let type: DnsUserRuleType
     private let fileStorage: FilterFilesStorageProtocol
+    private var userRules: OrderedSet<UserRule>?
 
     // fileStorage should be passed as new object with unique folder to avoid filters ids collisions
     init(type: DnsUserRuleType, fileStorage: FilterFilesStorageProtocol) {

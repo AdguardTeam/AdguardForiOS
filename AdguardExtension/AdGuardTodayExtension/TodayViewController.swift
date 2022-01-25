@@ -69,6 +69,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
     required init?(coder: NSCoder) {
         Self.initLogger(with: resources)
+        DDLogInfo("(TodayViewController) - init start")
 
         // Services initialising
         do {
@@ -97,10 +98,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     // MARK: - NCWidgetProviding methods
 
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
+        DDLogInfo("(TodayViewController) - widgetPerformUpdate start")
         setColorsToLabels()
         updateWidgetSafari()
         updateWidgetSystem()
         updateWidgetComplex()
+        DDLogInfo("(TodayViewController) - widgetPerformUpdate end")
         completionHandler(NCUpdateResult.newData)
     }
 

@@ -23,12 +23,19 @@ final public class SafariUserRulesStorage: UserRulesStorageProtocol {
 
     public var rules: OrderedSet<UserRule> {
         get {
+            if self.userRules != nil {
+                return self.userRules!
+            }
+
             if let savedRulesData = userDefaults.storage.data(forKey: type.key) {
                 let decoder = JSONDecoder()
                 let rules = try? decoder.decode(OrderedSet<UserRule>.self, from: savedRulesData)
-                return rules ?? OrderedSet<UserRule>([])
+                self.userRules = rules ?? OrderedSet<UserRule>([])
+            } else {
+                self.userRules = []
             }
-            return []
+
+            return self.userRules!
         }
         set {
             let encoder = JSONEncoder()
@@ -37,11 +44,13 @@ final public class SafariUserRulesStorage: UserRulesStorageProtocol {
             } else {
                 userDefaults.storage.set(Data(), forKey: type.key)
             }
+            self.userRules = nil
         }
     }
 
     private let userDefaults: UserDefaultsStorageProtocol
     private let type: UserRuleType
+    private var userRules: OrderedSet<UserRule>?
 
     public init(userDefaults: UserDefaultsStorageProtocol, rulesType: UserRuleType) {
         self.userDefaults = userDefaults

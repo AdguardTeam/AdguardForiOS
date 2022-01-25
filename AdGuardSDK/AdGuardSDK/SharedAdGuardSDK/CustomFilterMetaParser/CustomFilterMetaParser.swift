@@ -76,6 +76,7 @@ public extension CustomFilterMetaParserProtocol {
         var rulesCount: Int = 0
 
         // Iterating over file's content line by line
+        // TODO: rework this to use NSString everywhere (for working with lines as well)
         filterFileContentString.enumerateLines { line, _ in
 
             // Filter's header can begin with it's name in brackets, for example: [Adblock Plus 2.0]
