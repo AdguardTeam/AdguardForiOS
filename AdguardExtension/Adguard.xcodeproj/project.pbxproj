@@ -1380,6 +1380,7 @@
 		C230E5C7A09791E856326EC9 /* filter.json in Resources */ = {isa = PBXBuildFile; fileRef = C23960A7AB8939FAD8FFE994 /* filter.json */; };
 		C2352988732ED4B26A5BE8CC /* OpenYoutubeControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2359CA1A1F43E4AF7B28637 /* OpenYoutubeControllerParser.swift */; };
 		C2378BBF8ED9D53CA44F600F /* YoutubePlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F9BFAE7D94E7DD647DB43 /* YoutubePlayerController.swift */; };
+		C23D27BA05926DBC3DDE44EB /* YoutubeHtmlBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23C42321ED50590D66B1C68 /* YoutubeHtmlBuilder.swift */; };
 		C73374372746D2FF00989447 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
 		C73374382746D30000989447 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
 		C767A55E27590F1800D8DBEA /* PremiumOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C767A55D27590F1800D8DBEA /* PremiumOptionCell.swift */; };
@@ -3574,6 +3575,7 @@
 		B2C8E9982716FDB300ACDED8 /* AdGuardDependencies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AdGuardDependencies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2359CA1A1F43E4AF7B28637 /* OpenYoutubeControllerParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenYoutubeControllerParser.swift; sourceTree = "<group>"; };
 		C23960A7AB8939FAD8FFE994 /* filter.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = filter.json; sourceTree = "<group>"; };
+		C23C42321ED50590D66B1C68 /* YoutubeHtmlBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeHtmlBuilder.swift; sourceTree = "<group>"; };
 		C23F9BFAE7D94E7DD647DB43 /* YoutubePlayerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubePlayerController.swift; sourceTree = "<group>"; };
 		C767A55D27590F1800D8DBEA /* PremiumOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumOptionCell.swift; sourceTree = "<group>"; };
 		C76FE7DC275F8D53002569DF /* DefaultDnsFilterInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDnsFilterInstaller.swift; sourceTree = "<group>"; };
@@ -5302,6 +5304,7 @@
 				60BB66AD2795D24100AAE8CE /* userscript.js */,
 				C23F9BFAE7D94E7DD647DB43 /* YoutubePlayerController.swift */,
 				C23960A7AB8939FAD8FFE994 /* filter.json */,
+				C23C42321ED50590D66B1C68 /* YoutubeHtmlBuilder.swift */,
 			);
 			path = YoutubePlayer;
 			sourceTree = "<group>";
@@ -7639,10 +7642,10 @@
 			mainGroup = 65F398081B7B684700ABCD39;
 			packageReferences = (
 				7E2522122408201700743648 /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */,
-				7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */,
+				D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */,
+				7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */,
 				A5E0261A261E31FA00198396 /* XCRemoteSwiftPackageReference "DnsLibs" */,
-				D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */,
+				D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */,
 				7EF5C55E26C269D6001851D6 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 			);
 			productRefGroup = 65F398121B7B684700ABCD39 /* Products */;
@@ -8749,6 +8752,7 @@
 				7E2D93F626F3A2ED00534DC5 /* DnsFiltersTableModel.swift in Sources */,
 				C2378BBF8ED9D53CA44F600F /* YoutubePlayerController.swift in Sources */,
 				C2352988732ED4B26A5BE8CC /* OpenYoutubeControllerParser.swift in Sources */,
+				C23D27BA05926DBC3DDE44EB /* YoutubeHtmlBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -13673,7 +13677,7 @@
 				minimumVersion = 3.1.6;
 			};
 		};
-		7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip" */ = {
+		7ECAA27A257E4AAD004DA0D3 /* XCRemoteSwiftPackageReference "Zip.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/marmelroy/Zip.git";
 			requirement = {
@@ -13697,7 +13701,7 @@
 				version = 1.6.71;
 			};
 		};
-		D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */ = {
+		D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MacPaw/Setapp-framework.git";
 			requirement = {
@@ -13705,7 +13709,7 @@
 				minimumVersion = 0.0.3;
 			};
 		};
-		D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
+		D08C5D98268C93B30074DE1D /* XCRemoteSwiftPackageReference "SQLite.swift.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
 			requirement = {
@@ -13758,22 +13762,22 @@
 		};
 		B2C8E9A32716FDF500ACDED8 /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
 			productName = Setapp;
 		};
 		D024973D25714928000EED34 /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
 			productName = Setapp;
 		};
 		D093AA5F25344B4E0015351F /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
 			productName = Setapp;
 		};
 		D09E271A2541D00B002D6BC0 /* Setapp */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework" */;
+			package = D02CF39025270B2200F6EF14 /* XCRemoteSwiftPackageReference "Setapp-framework.git" */;
 			productName = Setapp;
 		};
 		D0B546032435D740002F0AEC /* Lottie */ = {

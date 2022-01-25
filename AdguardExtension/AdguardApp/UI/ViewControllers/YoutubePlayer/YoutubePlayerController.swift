@@ -32,55 +32,6 @@ class YoutubePlayerController : UIViewController, WKUIDelegate {
     private var webView: WKWebView!
     private var videoId: String
 
-    private let doctype = "<!DOCTYPE html>"
-    private let htmlOpenTag = "<html>"
-    private let htmlCloseTag = "</html>"
-    private let bodyOpenTag = "<body>"
-    private let bodyCloseTag = "</body>"
-    private let scriptOpenTag = "<script>"
-    private let scriptCloseTag = "</script>"
-    private let divDefinition = "<div id=\"player\"></div>"
-    private let scriptGenerator: (String) -> String = { videoId in
-        """
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        var player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: window.innerHeight,
-                width: window.innerWidth,
-                videoId: '\(videoId)',
-                playerVars: {
-                    'playsinline': 0,
-                    'autoplay': 1,
-                    'mute': 1,
-                    'controls': 1,
-                    'disablekb': 0,
-                    'fs': 1,
-                    'modestbranding': 1,
-                    'enablejsapi': 1,
-                    'rel': 0,
-                    'autohide': 0,
-                    'wmode': 'transparent',
-                    'showinfo': 0,
-                    'loop': 1,
-                    'iv_load_policy': 3
-                },
-                events: {
-                   'onReady': onPlayerReady,
-                }
-            });
-        }
-
-        function onPlayerReady(event) {
-            event.target.playVideo()
-        }
-        """
-    }
-
     init(videoId: String) {
         self.videoId = videoId
         super.init(nibName: nil, bundle: nil)
@@ -99,12 +50,7 @@ class YoutubePlayerController : UIViewController, WKUIDelegate {
             return
         }
 
-        guard let url = createEmbedUrl(videoId: videoId) else {
-            showAlert(withError: .badUrl, fromFunction: "reload", logMessage: "Failed to create URL on reloading")
-            return
-        }
-
-        webView?.load(URLRequest(url: url))
+        webView.loadHTMLString(createHtml(videoId: videoId), baseURL: nil)
     }
 
     override func loadView() {
@@ -161,21 +107,16 @@ class YoutubePlayerController : UIViewController, WKUIDelegate {
 
             self.webView.configuration.userContentController.addUserScript(userscript)
             self.webView.configuration.userContentController.add(list!)
-            self.webView.configuration.allowsInlineMediaPlayback = false
-            self.webView.configuration.mediaTypesRequiringUserActionForPlayback = []
 
-            guard let url = self.createEmbedUrl(videoId: videoId) else {
-                self.showAlert(withError: .badUrl, fromFunction: "startPlayer", logMessage: "Failed to create URL")
-                return
-            }
-
-            self.webView.load(URLRequest(url: url))
+            self.webView.loadHTMLString(self.createHtml(videoId: videoId), baseURL: nil)
         }
     }
 
     /** Sets up WKWebView with given configuration and loads given playerUrl */
     private func createWebView() {
         let config = WKWebViewConfiguration()
+        config.allowsInlineMediaPlayback = false
+        config.mediaTypesRequiringUserActionForPlayback = []
         let webView = WKWebView(frame: .zero, configuration: config)
 
         webView.uiDelegate = self
@@ -205,22 +146,17 @@ class YoutubePlayerController : UIViewController, WKUIDelegate {
         return nil
     }
 
-    @objc final private func close() {
-        dismiss(animated: true)
+    private func createHtml(videoId: String) -> String {
+        YoutubeHtmlBuilder(videoId: videoId)
+                .setAutoPlay(enabled: true)
+                .setFullScreen(enabled: true)
+                .setJsApi(enabled: true)
+                .setRelatedVideos(enabled: true)
+                .build()
     }
 
-    private func createWebPage(videoId: String) -> String {
-        """
-        \(doctype)
-        \(htmlOpenTag)
-        \(bodyOpenTag)
-        \(divDefinition)
-        \(scriptOpenTag)
-        \(scriptGenerator(videoId))
-        \(scriptCloseTag)
-        \(bodyCloseTag)
-        \(htmlCloseTag)
-        """
+    @objc final private func close() {
+        dismiss(animated: true)
     }
 
 
