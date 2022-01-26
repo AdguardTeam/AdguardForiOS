@@ -30,13 +30,13 @@ final class DnsUserRulesManagersProvider: DnsUserRulesManagersProviderProtocol {
     private let fileStorage: FilterFilesStorageProtocol
 
     // fileStorage should be passed as new object with unique folder to avoid filters ids collisions
-    init(fileStorage: FilterFilesStorageProtocol) {
+    init(fileStorage: FilterFilesStorageProtocol, readOnly: Bool = false) {
         self.fileStorage = fileStorage
 
-        let blocklistStorage = DnsUserRulesStorage(type: .blocklist, fileStorage: fileStorage)
+        let blocklistStorage = DnsUserRulesStorage(type: .blocklist, fileStorage: fileStorage, readOnly: readOnly)
         self.blocklistRulesManager = UserRulesManager(type: .dnsBlocklist, storage: blocklistStorage, converter: OpaqueRuleConverter())
 
-        let allowlistStorage = DnsUserRulesStorage(type: .allowlist, fileStorage: fileStorage)
+        let allowlistStorage = DnsUserRulesStorage(type: .allowlist, fileStorage: fileStorage, readOnly: readOnly)
         self.allowlistRulesManager = UserRulesManager(type: .dnsAllowlist, storage: allowlistStorage, converter: OpaqueRuleConverter())
     }
 

@@ -68,13 +68,15 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
 
     public init(
         userDefaults: UserDefaults,
-        debugLoggs: Bool,
+        debugLogs: Bool,
         dnsConfiguration: DnsConfigurationProtocol,
         addresses: Addresses,
         filterStorageUrl: URL,
         statisticsDbContainerUrl: URL,
         networkUtils: NetworkUtilsProtocol
     ) throws {
+        Logger.logInfo("(PacketTunnelProvider) init start")
+
         let userDefaultsStorage = UserDefaultsStorage(storage: userDefaults)
         let dnsProvidersManager = try DnsProvidersManager(configuration: dnsConfiguration, userDefaults: userDefaultsStorage, networkUtils: networkUtils)
 
@@ -86,7 +88,7 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
             configuration: dnsConfiguration
         )
 
-        let userRulesProvider = DnsUserRulesManagersProvider(fileStorage: filtersFileStorage)
+        let userRulesProvider = DnsUserRulesManagersProvider(fileStorage: filtersFileStorage, readOnly: true)
 
         let dnsLibsRulesProvider = DnsLibsRulesProvider(
             dnsFiltersManager: filtersManager,
@@ -109,7 +111,7 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
         let tunnelSettingsProvider = PacketTunnelSettingsProvider(addresses: addresses, networkUtils: networkUtils)
 
         self.tunnelProxy = PacketTunnelProviderProxy(
-            isDebugLogs: debugLoggs,
+            isDebugLogs: debugLogs,
             tunnelAddresses: addresses,
             dnsProxy: dnsProxy,
             dnsConfiguration: dnsConfiguration,

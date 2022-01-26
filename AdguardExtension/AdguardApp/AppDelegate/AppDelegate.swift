@@ -74,6 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         AppDelegate.initLogger(resources: resources)
         DDLogInfo("Starting application")
+
         StartupService.start()
 
         self.resources = ServiceLocator.shared.getService()!
@@ -404,15 +405,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private static func initLogger(resources: AESharedResourcesProtocol) {
         let isDebugLogs = resources.sharedDefaults().bool(forKey: AEDefaultsDebugLogs)
-        DDLogInfo("(AppDelegate) Init app with loglevel %s", level: isDebugLogs ? .debug : .all)
+        dynamicLogLevel = isDebugLogs ? .debug : .info
         ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
         ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
+
+        DDLogInfo("(AppDelegate) - Init app, log level debug=\(isDebugLogs)")
 
         #if DEBUG
         ACLLogger.singleton()?.logLevel = ACLLDebugLevel
         #endif
-
-        dynamicLogLevel = DDLogLevel(rawValue: UInt(ddLogLevel)) ?? .info
 
         AGLogger.setLevel(isDebugLogs ? .AGLL_DEBUG : .AGLL_INFO)
         AGLogger.setCallback { level, msg, length in

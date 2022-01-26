@@ -94,38 +94,49 @@ public final class FilterFilesStorage: FilterFilesStorageProtocol {
     // MARK: - Initialization
 
     public init(filterFilesDirectoryUrl: URL) throws {
+        Logger.logInfo("(FilterFilesStorage) - init start; filterFilesDirectoryUrl=\(filterFilesDirectoryUrl)")
+
         // We are trying to create directory if passed URL is not a valid directory
         if !filterFilesDirectoryUrl.isDirectory {
+            Logger.logInfo("(FilterFilesStorage) - creating a new filter files directory")
             try fileManager.createDirectory(at: filterFilesDirectoryUrl, withIntermediateDirectories: true, attributes: nil)
         }
+
         self.filterFilesDirectoryUrl = filterFilesDirectoryUrl
     }
 
     // MARK: - Public methods
 
     public func updateFilter(withId id: Int, onFilterUpdated: @escaping (Error?) -> Void) {
+        Logger.logInfo("(FilterFilesStorage) - update filter \(id)")
         let filterFileUrl = urlForFilter(withId: id)
         downloadFilter(withUrl: filterFileUrl, filterId: id, onFilterDownloaded: onFilterUpdated)
     }
 
     public func updateCustomFilter(withId id: Int, subscriptionUrl: URL, onFilterUpdated: @escaping (Error?) -> Void) {
+        Logger.logInfo("(FilterFilesStorage) - update custom filter \(id) from \(subscriptionUrl)")
         downloadFilter(withUrl: subscriptionUrl, filterId: id, onFilterDownloaded: onFilterUpdated)
     }
 
     public func getFilterContentForFilter(withId id: Int) -> String? {
+        Logger.logDebug("(FilterFilesStorage) - get filter \(id) content")
         let fileUrl = fileUrlForFilter(withId: id)
 
         guard let content = try? String.init(contentsOf: fileUrl, encoding: .utf8) else {
-            Logger.logError("FiltersStorage getFilterContentForFilter error. Can not read filter with url: \(fileUrl)")
+            Logger.logError("(FilterFilesStorage) - getFilterContentForFilter error. Can not read filter with url: \(fileUrl)")
 
             // try to get presaved filter file
             if  let presavedFilterFileUrl = defaultFilteUrlForFilter(withId: id),
                 let content = try? String.init(contentsOf: presavedFilterFileUrl, encoding: .utf8) {
-                Logger.logInfo("FiltersStorage return default filter for filter with id=\(id)")
+                Logger.logInfo("(FilterFilesStorage) - return default filter for filter with id=\(id)")
                 return content
             }
+
+            Logger.logDebug("(FilterFilesStorage) - filter \(id) not found")
             return nil
         }
+
+        Logger.logDebug("(FilterFilesStorage) - filter \(id) content length is \(content.utf8.count)")
         return content
     }
 
@@ -141,11 +152,14 @@ public final class FilterFilesStorage: FilterFilesStorageProtocol {
     }
 
     public func saveFilter(withId id: Int, filterContent: String) throws {
+        Logger.logInfo("(FilterFilesStorage) - save filter \(id), content length is \(filterContent.utf8.count)")
         let filterFileUrl = fileUrlForFilter(withId: id)
         try filterContent.write(to: filterFileUrl, atomically: true, encoding: .utf8)
+        Logger.logInfo("(FilterFilesStorage) - filter \(id) has been saved to \(filterFileUrl)")
     }
 
     public func deleteFilter(withId id: Int) throws {
+        Logger.logInfo("(FilterFilesStorage) - delete filter \(id)")
         let filterFileUrl = fileUrlForFilter(withId: id)
         try fileManager.removeItem(at: filterFileUrl)
     }
@@ -173,6 +187,7 @@ public final class FilterFilesStorage: FilterFilesStorageProtocol {
     // MARK: - Private methods
 
     private func downloadFilter(withUrl url: URL, filterId: Int, onFilterDownloaded: @escaping (Error?) -> Void) {
+        Logger.logDebug("(FilterFilesStorage) - download \(filterId) from \(url)")
         let filterFileUrl = fileUrlForFilter(withId: filterId)
 
         filtersDownloadQueue.async {
@@ -182,7 +197,7 @@ public final class FilterFilesStorage: FilterFilesStorageProtocol {
                 onFilterDownloaded(nil)
             }
             catch {
-                Logger.logError("FiltersStorage downloadFilter - download error: \(error)")
+                Logger.logError("(FilterFilesStorage) - downloadFilter - download error: \(error)")
                 onFilterDownloaded(error)
             }
         }

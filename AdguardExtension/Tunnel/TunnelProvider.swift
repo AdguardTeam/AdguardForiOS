@@ -46,7 +46,7 @@ class TunnelProvider: PacketTunnelProvider {
         resources = AESharedResources()
         Self.setupLogger(resources)
 
-        let debugLoggs = resources.isDebugLogs
+        let debugLogs = resources.isDebugLogs
 
         // start and configure Sentry
         SentrySDK.start { options in
@@ -56,7 +56,7 @@ class TunnelProvider: PacketTunnelProvider {
 
         SentrySDK.configureScope { scope in
             scope.setTag(value: AGDnsProxy.libraryVersion(), key: "dnslibs.version")
-            scope.setTag(value: debugLoggs ? "true" : "false" , key: "dnslibs.debuglogs")
+            scope.setTag(value: debugLogs ? "true" : "false" , key: "dnslibs.debuglogs")
         }
 
         let urlStorage = SharedStorageUrls()
@@ -76,7 +76,7 @@ class TunnelProvider: PacketTunnelProvider {
         Self.migrateIfNeeded(resources: resources, configuration: configuration, networkUtils: networkUtils)
 
         try! super.init(userDefaults: resources.sharedDefaults(),
-                        debugLoggs: debugLoggs,
+                        debugLogs: debugLogs,
                         dnsConfiguration: configuration,
                         addresses: TunnelProvider.getAddresses(mode: resources.tunnelMode),
                         filterStorageUrl: filterStorageUrl,
@@ -113,10 +113,10 @@ class TunnelProvider: PacketTunnelProvider {
     // MARK: - private methods
 
     private static func setupLogger(_ resources: AESharedResourcesProtocol) {
-        let debugLoggs = resources.isDebugLogs
+        let debugLogs = resources.isDebugLogs
         ACLLogger.singleton().initLogger(resources.sharedAppLogsURL())
-        ACLLogger.singleton().logLevel = debugLoggs ? ACLLDebugLevel : ACLLDefaultLevel
-        DDLogInfo("Init tunnel with loglevel: \(debugLoggs ? "DEBUG" : "NORMAL")")
+        ACLLogger.singleton().logLevel = debugLogs ? ACLLDebugLevel : ACLLDefaultLevel
+        DDLogInfo("Init tunnel with loglevel: \(debugLogs ? "DEBUG" : "NORMAL")")
 
         Logger.logInfo = { msg in
             DDLogInfo(msg)
