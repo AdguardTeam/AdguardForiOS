@@ -32,10 +32,10 @@ struct OpenYoutubeControllerParser : IURLSchemeParametersParser {
 
     func parse(_ url: URL) -> Bool {
         guard let videoId = url.parseUrl().params?[videoIdParamName], !videoId.isEmpty else {
-            DDLogWarn("(OpenYoutubeControllerParser) - Youtube URL is empty")
+            DDLogWarn("(OpenYoutubeControllerParser) - parse; Youtube URL is empty")
             return false
         }
-        DDLogInfo("(OpenYoutubeControllerParser) - Opening video with ID \(videoId)")
+        DDLogInfo("(OpenYoutubeControllerParser) - parse; Opening video with ID \(videoId)")
         return executor.openYoutubePlayerController(videoId: videoId)
     }
 }
