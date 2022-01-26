@@ -693,7 +693,7 @@ extension AppDelegate {
             return false
         }
 
-        // We need to check if top view controller is youtube alert and dismiss it
+        // We need to check if top view controller is an alert and dismiss it
         if topVC is UIAlertController {
             // We should re-set topVC since the current one has been dismissed
             guard let newTopVC = topVC.presentingViewController else {
