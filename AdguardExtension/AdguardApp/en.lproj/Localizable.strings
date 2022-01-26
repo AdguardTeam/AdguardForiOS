@@ -1176,7 +1176,7 @@
 "youtube_player_controller_content_blocking_list_error_title" = "Filtering error";
 
 /* (YoutubePlayerController) 'content blocking list error' alert message */
-"youtube_player_controller_content_blocking_list_error_message" = "Failed to compile content blocking list";
+"youtube_player_controller_content_blocking_list_error_message" = "Failed to compile blocklist";
 
 /* (YoutubePlayerController) 'userscript error' alert title */
 "youtube_player_controller_userscript_error_title" = "Userscript error";
