@@ -40,7 +40,7 @@ class ShareViewController: UIViewController {
 
         guard let extensionItem = extensionContext?.inputItems.first as? NSExtensionItem,
               let itemProvider = extensionItem.attachments?.first else {
-            finish(withError: .noUrl, fromFunction: "viewDidLoad", logMessage: "Failed to get item provider")
+            finish(withError: .noUrl, logMessage: "Failed to get item provider")
             return
         }
 
@@ -49,7 +49,7 @@ class ShareViewController: UIViewController {
         } else if itemProvider.hasItemConformingToTypeIdentifier(typeURL) {
             processUrl(from: itemProvider)
         } else {
-            finish(withError: .noUrl, fromFunction: "viewDidLoad", logMessage: "No url or text found")
+            finish(withError: .noUrl, logMessage: "No url or text found")
         }
     }
 
@@ -57,7 +57,7 @@ class ShareViewController: UIViewController {
     private func processText(from itemProvider: NSItemProvider) {
         itemProvider.loadItem(forTypeIdentifier: typeText, options: nil) { (item, error) in
             if let error = error {
-                self.finish(withError: .itemProviderError, fromFunction: "processText", logMessage: error.localizedDescription)
+                self.finish(withError: .itemProviderError, logMessage: error.localizedDescription)
                 return
             }
 
@@ -70,10 +70,10 @@ class ShareViewController: UIViewController {
                 if let firstMatch = matches.first, let range = Range(firstMatch.range, in: text) {
                     self.openMainApp(String(text[range]))
                 } else {
-                    self.finish(withError: .itemProviderError, fromFunction: "processText", logMessage: "No matches found")
+                    self.finish(withError: .itemProviderError, logMessage: "No matches found")
                 }
             } catch {
-                self.finish(withError: .itemProviderError, fromFunction: "processText", logMessage: error.localizedDescription)
+                self.finish(withError: .itemProviderError, logMessage: error.localizedDescription)
             }
         }
     }
@@ -82,14 +82,14 @@ class ShareViewController: UIViewController {
     private func processUrl(from itemProvider: NSItemProvider) {
         itemProvider.loadItem(forTypeIdentifier: typeURL, options: nil) { (item, error) in
             if let error = error {
-                self.finish(withError: .itemProviderError, fromFunction: "processUrl", logMessage: error.localizedDescription)
+                self.finish(withError: .itemProviderError, logMessage: error.localizedDescription)
                 return
             }
 
             if let url = item as? NSURL, let urlString = url.absoluteString {
                 self.openMainApp(urlString)
             } else {
-                self.finish(withError: .itemProviderError, fromFunction: "processUrl", logMessage: "Failed to handle incoming URL")
+                self.finish(withError: .itemProviderError, logMessage: "Failed to handle incoming URL")
             }
         }
     }
@@ -97,12 +97,12 @@ class ShareViewController: UIViewController {
     /** Validates urlString, converts it to adguard scheme and opens main app */
     private func openMainApp(_ urlString: String) {
         guard let urlValidationResult = validateUrl(url: urlString) else {
-            finish(withError: .badUrl, fromFunction: "openMainApp", logMessage: "Shared URL is not from YouTube")
+            finish(withError: .badUrl, logMessage: "Shared URL is not from YouTube")
             return
         }
 
         guard let videoId = urlValidationResult.extractVideoId(from: urlString) else {
-            finish(withError: .badUrl, fromFunction: "openMainApp", logMessage: "Failed to get video ID from \(urlString)")
+            finish(withError: .badUrl, logMessage: "Failed to get video ID from \(urlString)")
             return
         }
 
@@ -131,13 +131,13 @@ class ShareViewController: UIViewController {
         var responder: UIResponder? = self
         while responder != nil {
             if let application = responder as? UIApplication {
-                application.perform(#selector(openURL(_:)), with: url) != nil
+                application.perform(#selector(openURL(_:)), with: url)
             }
             responder = responder?.next
         }
     }
 
-    private func finish(withError error: SharingLinkError, fromFunction: String, logMessage: String) {
+    private func finish(withError error: SharingLinkError, logMessage: String, fromFunction: String = #function) {
         DDLogError("(ShareViewController) -> \(fromFunction); \(logMessage)")
         presentSimpleAlert(title: error.alertTitle, message: error.alertMessage) {
             self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)

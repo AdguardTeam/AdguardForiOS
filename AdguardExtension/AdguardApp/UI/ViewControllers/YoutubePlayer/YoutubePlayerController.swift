@@ -44,17 +44,10 @@ class YoutubePlayerController : UIViewController, WKUIDelegate {
     }
 
     func reload(videoId: String) {
-        if webView == nil {
-            DDLogError("WebView is not initialized")
-            dismiss(animated: true)
-            return
-        }
-
         webView.loadHTMLString(createHtml(videoId: videoId), baseURL: nil)
     }
 
     override func loadView() {
-        super.loadView()
         createWebView()
     }
 
@@ -76,18 +69,18 @@ class YoutubePlayerController : UIViewController, WKUIDelegate {
     /** Starts Youtube player with given playerUrl and configures content blocking list and userscript */
     private func startPlayer(videoId: String) {
         guard let userscriptSource = readFileToString(resIdentifier: "userscript", type: "js") else {
-            showAlert(withError: .userscriptError, fromFunction: "startPlayer", logMessage: "Failed to read userscript")
+            showAlert(withError: .userscriptError, logMessage: "Failed to read userscript")
             return
         }
 
         let userscript = WKUserScript(source: userscriptSource, injectionTime: .atDocumentStart, forMainFrameOnly: true)
         if (userscript == nil) {
-            showAlert(withError: .userscriptError, fromFunction: "startPlayer", logMessage: "Userscript is not valid")
+            showAlert(withError: .userscriptError, logMessage: "Userscript is not valid")
             return
         }
 
         guard let blockRules = readFileToString(resIdentifier: "filter", type: "json") else {
-            showAlert(withError: .contentBlockingListError, fromFunction: "startPlayer", logMessage: "Failed to read content blocking rules")
+            showAlert(withError: .contentBlockingListError, logMessage: "Failed to read content blocking rules")
             return
         }
 
@@ -96,12 +89,12 @@ class YoutubePlayerController : UIViewController, WKUIDelegate {
                 encodedContentRuleList: blockRules) { list, error in
 
             if let error = error {
-                self.showAlert(withError: .contentBlockingListError, fromFunction: "startPlayer", logMessage: error.localizedDescription)
+                self.showAlert(withError: .contentBlockingListError, logMessage: error.localizedDescription)
                 return
             }
 
             if list == nil {
-                self.showAlert(withError: .contentBlockingListError, fromFunction: "startPlayer", logMessage: "Failed to convert filtering rules")
+                self.showAlert(withError: .contentBlockingListError, logMessage: "Failed to convert filtering rules")
                 return
             }
 
@@ -131,7 +124,7 @@ class YoutubePlayerController : UIViewController, WKUIDelegate {
     }
 
     /** Shows alert for given error and prints logMessage to the log */
-    private func showAlert(withError error: YouTubePlayerError, fromFunction: String, logMessage: String) {
+    private func showAlert(withError error: YouTubePlayerError, logMessage: String, fromFunction: String = #function) {
         DDLogError("(YoutubePlayerController) -> \(fromFunction); \(logMessage)")
         presentSimpleAlert(title: error.alertTitle, message: error.alertMessage) {
             self.dismiss(animated: true)
