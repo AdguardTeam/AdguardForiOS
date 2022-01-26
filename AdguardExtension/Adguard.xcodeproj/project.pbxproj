@@ -435,6 +435,7 @@
 		60BB66C22796B9E200AAE8CE /* DispatchQueue+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E92754A26C6C02F007B2C80 /* DispatchQueue+Utils.swift */; };
 		60BB66C32798462200AAE8CE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659E59751BC6D82700FA2384 /* Localizable.strings */; };
 		60BB66C42798499E00AAE8CE /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2BA2E326F9D3D600B44D4A /* UIViewController+Alert.swift */; };
+		60F3AEE027A1E626000C3302 /* OpenYoutubeControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2359CA1A1F43E4AF7B28637 /* OpenYoutubeControllerParser.swift */; };
 		6513182E1BDE448D008DCFF9 /* ActionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 65C52B361B906105003AF42F /* ActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		655A02161C6B7686000F00D7 /* ACFFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01A51C6B7686000F00D7 /* ACFFileUtils.m */; };
 		655A02171C6B7686000F00D7 /* ACFFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01A51C6B7686000F00D7 /* ACFFileUtils.m */; };
@@ -9363,6 +9364,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60F3AEE027A1E626000C3302 /* OpenYoutubeControllerParser.swift in Sources */,
 				249E11462600D389003A5FBD /* OpenDnsProvidersControllerWithSDNSParser.swift in Sources */,
 				D0288F41230699A900A4EBEF /* ACLFileLogger.m in Sources */,
 				B26B927B2719B46F00F1D482 /* SDKMigrationsDirectoriesManager.swift in Sources */,
