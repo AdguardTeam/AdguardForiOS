@@ -13,6 +13,7 @@ app_identifier(["com.adguard.AdguardExtension",
                 "com.adguard.AdguardExtension.todayExtension",
                 "com.adguard.AdguardExtension.YouTubeAdsActionExtension",
                 "com.adguard.AdguardExtension.SafariWebExtension",
+                "com.adguard.AdguardExtension.YoutubeShareExtension",
                 "com.adguard.AdguardPro", 
                 "com.adguard.AdguardPro.extension",
                 "com.adguard.AdguardPro.extensionPrivacy", 
@@ -24,7 +25,8 @@ app_identifier(["com.adguard.AdguardExtension",
                 "com.adguard.AdguardPro.ActionExtension", 
                 "com.adguard.AdguardPro.tunnel",
                 "com.adguard.AdguardPro.ProYouTubeAdsActionExtension",
-                "com.adguard.AdguardPro.ProSafariWebExtension"
+                "com.adguard.AdguardPro.ProSafariWebExtension",
+                "com.adguard.AdguardPro.ProYoutubeShareExtension",
                 ])
 username("apple-dev@adguard.com")
 team_id("N33TQXN8C7")
