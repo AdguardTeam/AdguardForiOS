@@ -265,13 +265,11 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
     /// Initializes DNS-lib logger
     private func setupLogger(isDebugLogs: Bool) {
         AGLogger.setLevel(isDebugLogs ? .AGLL_DEBUG : .AGLL_INFO)
-        AGLogger.setCallback { _, msg, size in
-            AGLogger.setLevel(isDebugLogs ? .AGLL_DEBUG : .AGLL_INFO)
-            AGLogger.setCallback { _, msg, size in
-                if let msg = msg {
-                    let logMsg = NSString(bytes: msg, length: Int(size), encoding: String.Encoding.utf8.rawValue)! as String
-                    Logger.logInfo("(DnsLibs) - \(logMsg)")
-                }
+        AGLogger.setCallback { _, msg, length in
+            guard let msg = msg else { return }
+            let data = Data(bytes: msg, count: Int(length))
+            if let str = String(data: data, encoding: .utf8) {
+                Logger.logInfo("(DnsLibs) - \(str)")
             }
         }
     }

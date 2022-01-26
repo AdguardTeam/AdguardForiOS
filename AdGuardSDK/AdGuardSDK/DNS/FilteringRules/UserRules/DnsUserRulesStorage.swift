@@ -60,27 +60,42 @@ final class DnsUserRulesStorage: UserRulesStorageProtocol {
     private var userRules: OrderedSet<UserRule>?
 
     // fileStorage should be passed as new object with unique folder to avoid filters ids collisions
-    init(type: DnsUserRuleType, fileStorage: FilterFilesStorageProtocol) {
+    init(type: DnsUserRuleType, fileStorage: FilterFilesStorageProtocol, readOnly: Bool = false) {
+        Logger.logInfo("(DnsUserRulesStorage) - init start")
         self.type = type
         self.fileStorage = fileStorage
 
-        // Create empty file if doesn't exist for all rules
-        if fileStorage.getFilterContentForFilter(withId: type.allRulesFilterId) == nil {
-            do {
-                try fileStorage.saveFilter(withId: type.allRulesFilterId, filterContent: "")
-            } catch {
-                Logger.logError("(DnsUserRulesStorage) - init; Failed to create empty file with id=\(type.allRulesFilterId). It can lead to various errors")
+        /*
+         The only purpose of readOnly is to disable this part of functionality when this
+         class is initialized in the Tunnel process.
+         The reason for it is this bug: https://github.com/AdguardTeam/AdguardForiOS/issues/1907
+         Despite that the code below is perfectly valid and *should* work inside Tunnel,
+         something very wrong happens after the device reboot and we somehow replace the
+         existing user rules files with empty ones.
+         TODO: figure out what's the real cause or reformat the code.
+         */
+        if (!readOnly) {
+            // Create empty file if doesn't exist for all rules
+            if fileStorage.getFilterContentForFilter(withId: type.allRulesFilterId) == nil {
+                do {
+                    Logger.logInfo("(DnsUserRulesStorage) - filter \(type.allRulesFilterId) not found, creating an empty filter")
+                    try fileStorage.saveFilter(withId: type.allRulesFilterId, filterContent: "")
+                } catch {
+                    Logger.logError("(DnsUserRulesStorage) - init; Failed to create empty file with id=\(type.allRulesFilterId). It can lead to various errors")
+                }
             }
-        }
 
-        // Create empty file if doesn't exist for enabled rules
-        if fileStorage.getFilterContentForFilter(withId: type.enabledRulesFilterId) == nil {
-            do {
-                try fileStorage.saveFilter(withId: type.enabledRulesFilterId, filterContent: "")
-            } catch {
-                Logger.logError("(DnsUserRulesStorage) - init; Failed to create empty file with id=\(type.enabledRulesFilterId). It can lead to various errors")
+            // Create empty file if doesn't exist for enabled rules
+            if fileStorage.getFilterContentForFilter(withId: type.enabledRulesFilterId) == nil {
+                do {
+                    Logger.logInfo("(DnsUserRulesStorage) - filter \(type.enabledRulesFilterId) not found, creating an empty filter")
+                    try fileStorage.saveFilter(withId: type.enabledRulesFilterId, filterContent: "")
+                } catch {
+                    Logger.logError("(DnsUserRulesStorage) - init; Failed to create empty file with id=\(type.enabledRulesFilterId). It can lead to various errors")
+                }
             }
         }
+        Logger.logInfo("(DnsUserRulesStorage) - init end")
     }
 
     // MARK: - Private methods
