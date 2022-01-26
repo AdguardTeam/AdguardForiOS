@@ -35,8 +35,8 @@ class ShareViewController: UIViewController {
     private let youtubeNoCookie = "youtube-nocookie.com"
     private let youtubeEmbed = "/embed/"
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
 
         guard let extensionItem = extensionContext?.inputItems.first as? NSExtensionItem,
               let itemProvider = extensionItem.attachments?.first else {
