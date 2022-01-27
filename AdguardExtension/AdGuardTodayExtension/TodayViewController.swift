@@ -20,6 +20,7 @@ import UIKit
 import NotificationCenter
 import SafariAdGuardSDK
 import SharedAdGuardSDK
+import DnsAdGuardSDK
 
 class TodayViewController: UIViewController, NCWidgetProviding {
 
@@ -192,14 +193,15 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 return
             }
 
-            self.changeTextForButton()
+            let statisticRecord = try? self.serviceInitializer.activityStatistics.getCounters(for: .all)
+            self.changeTextForButton(statisticRecord: statisticRecord)
 
-            guard self.prevRequestNumber < self.requestNumber else { return }
             var timeInterval: TimeInterval = 0.0
 
-            if self.requestNumber >= 10000 {
+            let requestNumber = statisticRecord?.requests ?? 0
+            if requestNumber >= 10000 {
                 timeInterval = 60.0
-            } else if self.requestNumber >= 100 {
+            } else if requestNumber >= 100 {
                 timeInterval = 2.0
             } else {
                 timeInterval = 1.0
@@ -264,8 +266,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             complexText = String.localizedString("system_enabled")
         }
         self.complexStatusLabel.text = complexText
-
-        self.complexStatisticsLabel.text = String(format: String.localizedString("widget_statistics"), self.requestNumber, self.encryptedNumber)
     }
 
     /**
@@ -339,24 +339,25 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
 
     /// Changes number of requests for specific button
-    private func changeTextForButton() {
+    private func changeTextForButton(statisticRecord: CountersStatisticsRecord?) {
         DispatchQueue.asyncSafeMain { [weak self] in
             guard let self = self else { return }
-            let statisticRecord = try? self.serviceInitializer.activityStatistics.getCounters(for: .all)
 
             let requestsNumber = statisticRecord?.requests ?? 0
             let encryptedNumber = statisticRecord?.encrypted ?? 0
             let elapsedSumm = statisticRecord?.elapsedSumm ?? 0
 
-            self.requestsLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: requestsNumber))
-            self.prevRequestNumber = self.requestNumber
-            self.requestNumber = requestsNumber
+            let requestsLabelTxt = String.formatNumberByLocale(NSNumber(integerLiteral: requestsNumber))
+            self.requestsLabel.text = requestsLabelTxt
 
-            self.encryptedLabel.text = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedNumber))
-            self.encryptedNumber = encryptedNumber
+            let encryptedLabelTxt = String.formatNumberByLocale(NSNumber(integerLiteral: encryptedNumber))
+            self.encryptedLabel.text = encryptedLabelTxt
 
             let averageElapsed = requestsNumber == 0 ? 0 : Double(elapsedSumm) / Double(requestsNumber)
             self.elapsedLabel.text = String.simpleSecondsFormatter(NSNumber(floatLiteral: averageElapsed))
+            
+            // TODO: change this to use requestsLabelTxt/encryptedLabelTxt later (requires new localized string)
+            self.complexStatisticsLabel.text = String(format: String.localizedString("widget_statistics"), requestsNumber, encryptedNumber)
         }
     }
 
