@@ -115,6 +115,26 @@ platform :ios do
     prepare_key()
 
     app_identifiers_to_match = ENV['APP_IDENTIFIERS_TO_MATCH'].gsub("\n", "").gsub(" ", "")
+
+    # This is a potentially dangerous place when creating new targets.
+    #
+    # To catch more than a glimpse of the process of signing targets using profiles we need to discuss XCode build process.
+    # Each target has a build configuration. There are two configurations by default: debug and release.
+    # 'Debug' build is signing with 'Development' profile whereas 'Release' build is signing with 'AppStore' profile.
+    # 'AdHoc' profile does not appear in any of the configurations.
+    # One of the intermediate stages of the XCode build is checking for the presence of a default profile and the default
+    # profile is 'AppStore'. Herewith, the validity of the profile is not checked - only its presence. The validity of the
+    # profile will be checked when signing, in which the 'AdHoc' profile will be used. Thus, the absence of an 'AppStore'
+    # profile breaks the build. We match an 'AppStore' profile in read-only mode so that it appears on the machine,
+    # meanwhile, time is not wasted on an expensive operation (not read-only mode).
+    #
+    # This solution is not flexible enough.
+    # A good solution may be to create an additional configuration that meets the 'AdHoc' profile out-of-the-box.
+    # But this leads to another less obvious problem. The build of dependencies is directly related to the configuration
+    # of the target. Going beyond the standard configurations, we break the logic of dependencies building.
+    #
+    # As a result, to stay in the legal field of XCode and at the same time not suffer from gut-wrenching restrictions
+    # we should learn how to resolve dependency configurations for custom target configurations.
     match(type: "appstore", readonly: true)
     if !options[:ignore_match]
       match(app_identifier: app_identifiers_to_match, type: "adhoc", force_for_new_devices: true)
