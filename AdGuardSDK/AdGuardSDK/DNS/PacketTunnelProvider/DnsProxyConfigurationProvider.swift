@@ -103,7 +103,7 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
             return dnsProxy
         }
 
-        // DNS fallbacks
+        // DNS fallbacks.
         let fallbacks = getDnsUpstreams(from: lowLevelConfiguration.fallbackServers ?? [])
         let proxyFallbacks: [DnsProxyUpstream] = fallbacks.map {
             let id = nextUpstreamId
@@ -116,7 +116,14 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
          Detect ipv6 addresses,
          We need to use system DNS in dns64Settings variable, that's why we iterate through fallbacks variable
          */
-        let ipv6Fallbacks = proxyFallbacks.filter { UrlUtils.isIpv6($0.dnsUpstreamInfo.upstream) }
+        let ipv6Fallbacks: [DnsProxyUpstream] = systemDnsUpstreams
+            .filter { UrlUtils.isIpv6($0.upstream) }
+            .map {
+                let id = nextUpstreamId
+                let dnsProxy = DnsProxyUpstream(dnsUpstreamInfo: $0, dnsBootstraps: bootstraps, id: id)
+                dnsUpstreamById[id] = dnsProxy
+                return dnsProxy
+            }
 
         // Filters for DNS-lib
         var proxyFilters = dnsLibsRulesProvider.enabledCustomDnsFilters
