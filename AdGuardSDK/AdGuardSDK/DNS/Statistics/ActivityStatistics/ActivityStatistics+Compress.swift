@@ -26,7 +26,6 @@ extension ActivityStatistics {
     /// Compresses the table
     func compressTable() throws {
         try statisticsDb.transaction(.immediate) {
-
             Logger.logInfo("(ActivityStatistics) - compressTable; Trying to compress the table")
 
             let recordsCountBeforeCompression = try statisticsDb.scalar(ActivityStatisticsTable.table.count)
@@ -36,6 +35,23 @@ extension ActivityStatistics {
 
             Logger.logInfo("(ActivityStatistics) - compressTable; Successfully compressed the table; from \(recordsCountBeforeCompression) to \(compressedRecords.count)")
         }
+    }
+
+    private func add(records: [ActivityStatisticsRecord]) throws {
+        // If there are no records, there will be no setters and addQuery will be incorrect
+        guard records.count > 0 else { return }
+
+        let setters: [[Setter]] = records.map { record in
+            [ActivityStatisticsTable.timeStamp <- record.timeStamp,
+             ActivityStatisticsTable.domain <- record.domain,
+             ActivityStatisticsTable.requests <- record.requests,
+             ActivityStatisticsTable.encrypted <- record.encrypted,
+             ActivityStatisticsTable.blocked <- record.blocked,
+             ActivityStatisticsTable.elapsedSumm <- record.elapsedSumm]
+        }
+
+        let addQuery = ActivityStatisticsTable.table.insertMany(setters)
+        try statisticsDb.run(addQuery)
     }
 
     private func getCompressedRecords() throws -> [ActivityStatisticsRecord] {

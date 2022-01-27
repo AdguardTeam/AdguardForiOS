@@ -98,7 +98,8 @@ final class ServiceInitializer: ServiceInitializerProtocol {
         // MARK: - ActivityStatistics
 
         DDLogInfo("(TodayViewController) - init activity statistics service")
-        self.activityStatistics = try ActivityStatistics(statisticsDbContainerUrl: sharedStorageUrls.statisticsFolderUrl)
+
+        self.activityStatistics = try ActivityStatistics(statisticsDbContainerUrl: sharedStorageUrls.statisticsFolderUrl, readOnly: true)
 
         DDLogInfo("(TodayViewController) - init services end")
     }

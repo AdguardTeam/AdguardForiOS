@@ -46,22 +46,36 @@ final public class ActivityStatistics: ActivityStatisticsProtocol {
 
     let statisticsDb: Connection
 
-    public init(statisticsDbContainerUrl: URL) throws {
+    /**
+     Initializes the ActivityStatistics service.
+     - Parameter statisticsDbContainerUrl: path to the folder where we store the database file.
+     - Parameter readOnly: if true, we won't try to create and compress the database on the service init. Default value is false. This flag is needed when this service is used for read-only purposes (for instance, in a Widget).
+     */
+    public init(statisticsDbContainerUrl: URL, readOnly: Bool = false) throws {
+        Logger.logInfo("(ActivityStatistics) - init start")
+
         // Create directory if doesn't exist
         try FileManager.default.createDirectory(at: statisticsDbContainerUrl, withIntermediateDirectories: true, attributes: [:])
 
         let dbName = Constants.Statistics.StatisticsType.activity.dbFileName
         self.statisticsDb = try Connection(statisticsDbContainerUrl.appendingPathComponent(dbName).path)
+        Logger.logInfo("(ActivityStatistics) - connected to \(dbName)")
 
         // TODO: - It's a crutch; Refactor it later
-        // This database is used by several threads at the same time.
-        // It is possible that a database file is temporarily locked in one thread and is being accessed from another.
-        // Here we set a timeout to resolve this issue
+        // This database is used by several threads/processes at the same time.
+        // It is possible that a database file is temporarily locked in one thread/process and is being accessed from another.
+        // Here we set a timeout to resolve this issue.
         self.statisticsDb.busyTimeout = 10.0
 
+        // TODO: why is it set globally here?
         dateFormatter.dateFormat = Constants.Statistics.dbDateFormat
-        try self.createTableIfNotExists()
-        try compressTable()
+
+        if !readOnly {
+            try self.createTableIfNotExists()
+            try compressTable()
+        }
+
+        Logger.logInfo("(ActivityStatistics) - init end")
     }
 
     // MARK: - Public methods
@@ -149,6 +163,8 @@ final public class ActivityStatistics: ActivityStatisticsProtocol {
     }
 
     func add(record: ActivityStatisticsRecord) throws {
+        Logger.logDebug("(ActivityStatistics) - adding a record for \(record.domain)")
+
         let setters: [Setter] = [ActivityStatisticsTable.timeStamp <- record.timeStamp,
                                  ActivityStatisticsTable.domain <- record.domain,
                                  ActivityStatisticsTable.requests <- record.requests,
@@ -158,29 +174,16 @@ final public class ActivityStatistics: ActivityStatisticsProtocol {
 
         let addQuery = ActivityStatisticsTable.table.insert(setters)
         try statisticsDb.run(addQuery)
-    }
 
-    func add(records: [ActivityStatisticsRecord]) throws {
-        // If numbert of records is zero there will be no setters and addQuery will be incorrect
-        guard records.count > 0 else { return }
-
-        let setters: [[Setter]] = records.map { record in
-            [ActivityStatisticsTable.timeStamp <- record.timeStamp,
-             ActivityStatisticsTable.domain <- record.domain,
-             ActivityStatisticsTable.requests <- record.requests,
-             ActivityStatisticsTable.encrypted <- record.encrypted,
-             ActivityStatisticsTable.blocked <- record.blocked,
-             ActivityStatisticsTable.elapsedSumm <- record.elapsedSumm]
-        }
-
-        let addQuery = ActivityStatisticsTable.table.insertMany(setters)
-        try statisticsDb.run(addQuery)
+        Logger.logDebug("(ActivityStatistics) - record for \(record.domain) has been added")
     }
 
     // MARK: - Private methods
 
     /// Creates `activity_statistics_table` in statistics DB if it doesn't exist
     private func createTableIfNotExists() throws {
+        Logger.logInfo("(ActivityStatistics) - create the statistics table if it does not exist")
+
         let query = ActivityStatisticsTable.table.create(temporary: false, ifNotExists: true) { builder in
             builder.column(ActivityStatisticsTable.timeStamp)
             builder.column(ActivityStatisticsTable.domain)
@@ -190,5 +193,7 @@ final public class ActivityStatistics: ActivityStatisticsProtocol {
             builder.column(ActivityStatisticsTable.elapsedSumm)
         }
         try statisticsDb.run(query)
+
+        Logger.logInfo("(ActivityStatistics) - statistics table has been created")
     }
 }

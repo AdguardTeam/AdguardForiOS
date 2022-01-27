@@ -91,5 +91,17 @@ final class ServicesInitializer {
         let isDebugLogs = resources.isDebugLogs
         DDLogInfo("Start Action extension with log level: \(isDebugLogs ? "DEBUG" : "NORMAL")")
         ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
+
+        Logger.logInfo = { msg in
+            DDLogInfo(msg)
+        }
+
+        Logger.logDebug = { msg in
+            DDLogDebug(msg)
+        }
+
+        Logger.logError = { msg in
+            DDLogError(msg)
+        }
     }
 }
