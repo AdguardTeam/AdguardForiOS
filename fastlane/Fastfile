@@ -115,10 +115,15 @@ platform :ios do
     prepare_key()
 
     app_identifiers_to_match = ENV['APP_IDENTIFIERS_TO_MATCH'].gsub("\n", "").gsub(" ", "")
+    match(type: "appstore", readonly: true)
     if !options[:ignore_match]
       match(app_identifier: app_identifiers_to_match, type: "adhoc", force_for_new_devices: true)
+    else
+      match(app_identifier: app_identifiers_to_match, type: "adhoc", readonly: true)
     end
+
     build_app(
+      export_method: "ad-hoc",
       scheme: ENV['BUILD_SCHEME'],
       output_directory: ENV['OUTPUT_DIRECTORY'],
       include_bitcode: false,
