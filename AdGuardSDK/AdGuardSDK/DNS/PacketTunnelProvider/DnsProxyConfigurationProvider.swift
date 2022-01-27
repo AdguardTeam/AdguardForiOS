@@ -114,17 +114,17 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
 
         /**
          Upstreams that we use to detect DNS64 prefix (we use system DNS here).
-         Note, that we only specify dns64Upstreams when IPv6 interface is available, here's why:
+         Note, that we only specify dns64Upstreams when no IPv4 interface is available, here's why:
          https://github.com/AdguardTeam/AdguardForAndroid/issues/3886#issuecomment-884042555
          */
-        let dns64Upstreams: [DnsProxyUpstream] = networkUtils.isIpv6Available ? systemDnsUpstreams
+        let dns64Upstreams: [DnsProxyUpstream] = networkUtils.isIpv4Available ? [] : systemDnsUpstreams
             .filter { UrlUtils.isIpv6($0.upstream) }
             .map {
                 let id = nextUpstreamId
                 let dnsProxy = DnsProxyUpstream(dnsUpstreamInfo: $0, dnsBootstraps: bootstraps, id: id)
                 dnsUpstreamById[id] = dnsProxy
                 return dnsProxy
-            } : []
+            }
 
         // Filters for DNS-lib
         var proxyFilters = dnsLibsRulesProvider.enabledCustomDnsFilters
