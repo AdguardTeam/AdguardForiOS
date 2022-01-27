@@ -19,6 +19,7 @@
 import UIKit
 import NotificationCenter
 import SafariAdGuardSDK
+import SharedAdGuardSDK
 
 class TodayViewController: UIViewController, NCWidgetProviding {
 
@@ -361,12 +362,25 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
     /// Initializes logger
     private static func initLogger(with resources: AESharedResourcesProtocol) {
+        // TODO: refactor, everywhere is the same code
         // Init Logger
         ACLLogger.singleton()?.initLogger(resources.sharedAppLogsURL())
 
         let isDebugLogs = resources.isDebugLogs
         DDLogInfo("Start today extension with log level: \(isDebugLogs ? "DEBUG" : "Normal")")
         ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
+
+        Logger.logInfo = { msg in
+            DDLogInfo(msg)
+        }
+
+        Logger.logDebug = { msg in
+            DDLogDebug(msg)
+        }
+
+        Logger.logError = { msg in
+            DDLogError(msg)
+        }
     }
 }
 
