@@ -172,7 +172,7 @@ public class NetworkUtils: NetworkUtilsProtocol {
 
         let dnsUpstream = AGDnsUpstream(address: upstream, bootstrap: bootstraps, timeoutMs: AGDnsUpstream.defaultTimeoutMs, serverIp: Data(), id: 0, outboundInterfaceName: nil)
 
-        if let error = AGDnsUtils.test(dnsUpstream, ipv6Available: isIpv6Available) {
+        if let error = AGDnsUtils.test(dnsUpstream, ipv6Available: isIpv6Available, offline: false) {
             Logger.logError("(NetworkUtils) - upstreamIsValid; Error: \(error)")
             return false
         } else {

@@ -183,7 +183,7 @@ final class UpstreamsController: BottomAlertController {
             guard let self = self else { return }
 
             let errors = upstreams.compactMap {
-                AGDnsUtils.test($0, ipv6Available: self.networkUtils.isIpv6Available)
+                AGDnsUtils.test($0, ipv6Available: self.networkUtils.isIpv6Available, offline: false)
             }
 
             DispatchQueue.main.async {
