@@ -103,7 +103,7 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
             return dnsProxy
         }
 
-        // DNS fallbacks
+        // DNS fallbacks.
         let fallbacks = getDnsUpstreams(from: lowLevelConfiguration.fallbackServers ?? [])
         let proxyFallbacks: [DnsProxyUpstream] = fallbacks.map {
             let id = nextUpstreamId
@@ -113,10 +113,18 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
         }
 
         /**
-         Detect ipv6 addresses,
-         We need to use system DNS in dns64Settings variable, that's why we iterate through fallbacks variable
+         Upstreams that we use to detect DNS64 prefix (we use system DNS here).
+         Note, that we only specify dns64Upstreams when no IPv4 interface is available, here's why:
+         https://github.com/AdguardTeam/AdguardForAndroid/issues/3886#issuecomment-884042555
          */
-        let ipv6Fallbacks = proxyFallbacks.filter { UrlUtils.isIpv6($0.dnsUpstreamInfo.upstream) }
+        let dns64Upstreams: [DnsProxyUpstream] = networkUtils.isIpv4Available ? [] : systemDnsUpstreams
+            .filter { UrlUtils.isIpv6($0.upstream) }
+            .map {
+                let id = nextUpstreamId
+                let dnsProxy = DnsProxyUpstream(dnsUpstreamInfo: $0, dnsBootstraps: bootstraps, id: id)
+                dnsUpstreamById[id] = dnsProxy
+                return dnsProxy
+            }
 
         // Filters for DNS-lib
         var proxyFilters = dnsLibsRulesProvider.enabledCustomDnsFilters
@@ -137,7 +145,7 @@ final class DnsProxyConfigurationProvider: DnsProxyConfigurationProviderProtocol
         return DnsProxyConfiguration(
             upstreams: proxyUpstreams,
             fallbacks: proxyFallbacks,
-            dns64Upstreams: ipv6Fallbacks,
+            dns64Upstreams: dns64Upstreams,
             filters: proxyFilters,
             ipv6Available: networkUtils.isIpv6Available,
             rulesBlockingMode: lowLevelConfiguration.blockingMode,

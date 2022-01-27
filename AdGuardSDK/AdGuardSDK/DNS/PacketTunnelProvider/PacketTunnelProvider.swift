@@ -61,6 +61,7 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
     override public init() {
         assertionFailure("This initializer shouldn't be called")
         // TODO: consider getting rid of Reachability in favor of NWPathMonitor which we already use in NetworkUtils
+        // TODO: strongly consider getting rid of Reachability, it does not fire when the user switches between two different Wi-Fi networks
         self.reachabilityHandler = try! Reachability()
         self.reachabilityConnection = .unavailable
         super.init()
