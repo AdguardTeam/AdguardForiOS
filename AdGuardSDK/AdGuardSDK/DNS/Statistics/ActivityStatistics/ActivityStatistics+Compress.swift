@@ -38,7 +38,7 @@ extension ActivityStatistics {
     }
 
     private func add(records: [ActivityStatisticsRecord]) throws {
-        // If numbert of records is zero there will be no setters and addQuery will be incorrect
+        // If there are no records, there will be no setters and addQuery will be incorrect
         guard records.count > 0 else { return }
 
         let setters: [[Setter]] = records.map { record in
