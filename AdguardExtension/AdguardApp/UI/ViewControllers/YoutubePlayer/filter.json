@@ -51,17 +51,6 @@
   {
     "trigger": {
       "url-filter": "\\/googleads\\.",
-      "resource-type": [
-        "image",
-        "style-sheet",
-        "media",
-        "fetch",
-        "other",
-        "websocket",
-        "font",
-        "document",
-        "ping"
-      ],
       "unless-domain": [
         "*github.com",
         "*github.io"
