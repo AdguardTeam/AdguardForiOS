@@ -265,11 +265,18 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
     /// Initializes DNS-lib logger
     private func setupLogger(isDebugLogs: Bool) {
         AGLogger.setLevel(isDebugLogs ? .AGLL_DEBUG : .AGLL_INFO)
-        AGLogger.setCallback { _, msg, length in
+        AGLogger.setCallback { level, msg, length in
             guard let msg = msg else { return }
             let data = Data(bytes: msg, count: Int(length))
             if let str = String(data: data, encoding: .utf8) {
-                Logger.logInfo("(DnsLibs) - \(str)")
+                switch (level) {
+                case AGLogLevel.AGLL_INFO:
+                    Logger.logInfo("(DnsLibs) - \(str)")
+                case AGLogLevel.AGLL_ERR, AGLogLevel.AGLL_WARN:
+                    Logger.logError("(DnsLibs) - \(str)")
+                default:
+                    Logger.logDebug("(DnsLibs) - \(str)")
+                }
             }
         }
     }
