@@ -686,7 +686,7 @@ extension AppDelegate {
         return true
     }
 
-    /** Creates ans presents YoutubePlayerController */
+    // Creates and presents YoutubePlayerController
     func presentYoutubePlayerController(videoId: String) -> Bool {
         guard var topVC = Self.topViewController() else {
             DDLogError("Failed to get top view controller")
@@ -719,7 +719,7 @@ extension AppDelegate {
         return true
     }
 
-    /* Returns top view controller for controller  */
+    // Returns top view controller for controller
     static func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
         if let navigationController = controller as? UINavigationController {
             return topViewController(controller: navigationController.visibleViewController)

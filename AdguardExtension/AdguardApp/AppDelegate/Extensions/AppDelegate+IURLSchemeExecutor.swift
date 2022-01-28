@@ -77,7 +77,7 @@ extension AppDelegate: IURLSchemeExecutor {
         return self.presentAdvancedProtectionController(enableAdvancedProtection: enableAdvancedProtection)
     }
 
-    /** Opens YoutubePlayerController as the top VC and passes given url to be opened */
+    // Opens YoutubePlayerController as the top VC and passes given url to be opened
     func openYoutubePlayerController(videoId: String) -> Bool {
         DDLogInfo("(AppDelegate) - open YoutubePlayerController; videoId = \(videoId)")
         return self.presentYoutubePlayerController(videoId: videoId)

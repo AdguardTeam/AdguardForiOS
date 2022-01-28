@@ -19,18 +19,16 @@
 import UIKit
 import WebKit
 
-/**
- * UIViewController with WKWebView to watch Youtube videos without ads 🎥
- *
- * - See: https://jira.adguard.com/browse/AG-11561
- *
- * FIXME Explore the mechanism that prohibits playing videos outside of the YouTube
- * FIXME: Investigate which way to load URL is the best
- */
-class YoutubePlayerController : UIViewController, WKUIDelegate {
+/// UIViewController with WKWebView to watch Youtube videos without ads 🎥
+/// See: [Jira task](https://jira.adguard.com/browse/AG-11561)
+class YoutubePlayerController : UIViewController {
+
+    // MARK - Properties
 
     private var webView: WKWebView!
     private var videoId: String
+
+    // MARK - Initializer
 
     init(videoId: String) {
         self.videoId = videoId
@@ -43,7 +41,10 @@ class YoutubePlayerController : UIViewController, WKUIDelegate {
         return nil
     }
 
+    // MARK - Public functions
+
     func reload(videoId: String) {
+        self.videoId = videoId
         webView.loadHTMLString(createHtml(videoId: videoId), baseURL: nil)
     }
 
@@ -60,13 +61,17 @@ class YoutubePlayerController : UIViewController, WKUIDelegate {
         startPlayer(videoId: videoId)
     }
 
+
+
+    // MARK - Private functions
+
     private func setUpCloseButton() {
         let image = UIImage(named: "cross")
         let buttonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(close))
         navigationItem.setRightBarButton(buttonItem, animated: true)
     }
 
-    /** Starts Youtube player with given playerUrl and configures content blocking list and userscript */
+    /// Starts Youtube player with given playerUrl and configures content blocking list and userscript
     private func startPlayer(videoId: String) {
         guard let userscriptSource = readFileToString(resIdentifier: "userscript", type: "js") else {
             showAlert(withError: .userscriptError, logMessage: "Failed to read userscript")
@@ -105,25 +110,24 @@ class YoutubePlayerController : UIViewController, WKUIDelegate {
         }
     }
 
-    /** Sets up WKWebView with given configuration and loads given playerUrl */
+    // Sets up WKWebView with given configuration and loads given playerUrl
     private func createWebView() {
         let config = WKWebViewConfiguration()
         config.allowsInlineMediaPlayback = false
         config.mediaTypesRequiringUserActionForPlayback = []
-        let webView = WKWebView(frame: .zero, configuration: config)
 
-        webView.uiDelegate = self
+        let webView = WKWebView(frame: .zero, configuration: config)
         self.webView = webView
         view = webView
     }
 
-    /** Creates embed YouTube URL */
+    // Creates embed YouTube URL
     private func createEmbedUrl(videoId: String) -> URL? {
         let url = "https://www.youtube.com/embed/\(videoId)"
         return URL(string: url)
     }
 
-    /** Shows alert for given error and prints logMessage to the log */
+    // Shows alert for given error and prints logMessage to the log
     private func showAlert(withError error: YouTubePlayerError, logMessage: String, fromFunction: String = #function) {
         DDLogError("(YoutubePlayerController) -> \(fromFunction); \(logMessage)")
         presentSimpleAlert(title: error.alertTitle, message: error.alertMessage) {
@@ -131,7 +135,7 @@ class YoutubePlayerController : UIViewController, WKUIDelegate {
         }
     }
 
-    /** Reads file with given resIdentifier and type to the String */
+    // Reads file with given resIdentifier and type to the String
     private func readFileToString(resIdentifier: String, type: String) -> String? {
         if let filePath = Bundle.main.path(forResource: resIdentifier, ofType: type) {
             return try? String(contentsOfFile: filePath)
@@ -154,7 +158,9 @@ class YoutubePlayerController : UIViewController, WKUIDelegate {
 
 
 
-    /** Errors that may occur during user's flow */
+    // MARK - Private enums
+
+    /// Errors that may occur during user's flow
     private enum YouTubePlayerError : Error {
         case badUrl
         case contentBlockingListError
@@ -177,6 +183,10 @@ class YoutubePlayerController : UIViewController, WKUIDelegate {
         }
     }
 }
+
+
+
+// MARK - YoutubePlayerController + ThemableProtocol
 
 extension YoutubePlayerController : ThemableProtocol {
     func updateTheme() {

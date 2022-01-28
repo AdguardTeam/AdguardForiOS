@@ -20,8 +20,10 @@ import UIKit
 import Social
 import MobileCoreServices
 
-/** UIViewController that handles https scheme, retrieves Youtube video ID and passes it to the main app */
+/// UIViewController that handles https scheme, retrieves Youtube video ID and passes it to the main app
 class ShareViewController: UIViewController {
+
+    // MARK - Private constants
 
     private let typeText = String(kUTTypeText)
     private let typeURL = String(kUTTypeURL)
@@ -34,6 +36,8 @@ class ShareViewController: UIViewController {
     private let youtubeMobile = "m.youtube.com"
     private let youtubeNoCookie = "youtube-nocookie.com"
     private let youtubeEmbed = "/embed/"
+
+    // MARK - Public functions
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -53,7 +57,11 @@ class ShareViewController: UIViewController {
         }
     }
 
-    /** Processes itemProvider as it contains a text */
+
+
+    // MARK - Private functions
+
+    // Processes itemProvider as it contains a text
     private func processText(from itemProvider: NSItemProvider) {
         itemProvider.loadItem(forTypeIdentifier: typeText, options: nil) { (item, error) in
             if let error = error {
@@ -78,7 +86,7 @@ class ShareViewController: UIViewController {
         }
     }
 
-    /** Processes itemProvider as it contains an url */
+    // Processes itemProvider as it contains an url
     private func processUrl(from itemProvider: NSItemProvider) {
         itemProvider.loadItem(forTypeIdentifier: typeURL, options: nil) { (item, error) in
             if let error = error {
@@ -94,7 +102,7 @@ class ShareViewController: UIViewController {
         }
     }
 
-    /** Validates urlString, converts it to adguard scheme and opens main app */
+    // Validates urlString, converts it to adguard scheme and opens main app
     private func openMainApp(_ urlString: String) {
         guard let urlValidationResult = validateUrl(url: urlString) else {
             finish(withError: .badUrl, logMessage: "Shared URL is not from YouTube")
@@ -112,7 +120,7 @@ class ShareViewController: UIViewController {
         })
     }
 
-    /** Returns UrlValidationResult or nil if given url is not valid */
+    // Returns UrlValidationResult or nil if given url is not valid
     private func validateUrl(url: String) -> UrlValidationResult? {
         guard let domain: String = URL(string: url)?.domain else { return nil }
 
@@ -156,7 +164,9 @@ class ShareViewController: UIViewController {
 
 
 
-    /** Possible errors that may occur during sharing a link*/
+    // Mark - Private enums
+
+    // Possible errors that may occur during sharing a link
     private enum SharingLinkError : Error {
         case noUrl
         case badUrl
@@ -179,7 +189,7 @@ class ShareViewController: UIViewController {
         }
     }
 
-    /** Possible valid YouTube URL formats */
+    // Possible valid YouTube URL formats
     private enum UrlValidationResult {
         // https://youtu.be/<video_id><?params>
         case compressed
@@ -188,7 +198,7 @@ class ShareViewController: UIViewController {
         // https://youtube.com/embed/watch?v=<video_id><?params>
         case regular
 
-        /** Extracts video ID from given youtube URL according to given validation result */
+        // Extracts video ID from given youtube URL according to given validation result
         func extractVideoId(from: String) -> String? {
             switch self {
 

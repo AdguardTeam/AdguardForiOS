@@ -18,15 +18,18 @@
 
 import Foundation
 
-/**
- * A simple builder to create an html page with configured YouTube player.
- *
- * @- See: https://developers.google.com/youtube/iframe_api_reference
- * @- See: https://developers.google.com/youtube/player_parameters
- */
+
+/// A simple builder to create an html page with configured YouTube player.
+/// See: [API doc](https://developers.google.com/youtube/iframe_api_reference)
+/// See: [Player params](https://developers.google.com/youtube/player_parameters)
 class YoutubeHtmlBuilder {
+
+    // MARK - Properties
+
     private let videoId: String
     private var params = [String: String]()
+
+    // MARK - Private constants
 
     private static let doctype = "<!DOCTYPE html>"
     private static let htmlOpenTag = "<html>"
@@ -76,9 +79,13 @@ class YoutubeHtmlBuilder {
         """
     }
 
+    // MARK - Initializers
+
     init(videoId: String) {
         self.videoId = videoId
     }
+
+    // MARK - Public functions
 
     func setAutoPlay(enabled: Bool) -> YoutubeHtmlBuilder {
         params["autoplay"] = enabled ? "1" : "0"
