@@ -50,11 +50,7 @@
   },
   {
     "trigger": {
-      "url-filter": "\\/googleads\\.",
-      "unless-domain": [
-        "*github.com",
-        "*github.io"
-      ]
+      "url-filter": "\\/googleads\\."
     },
     "action": {
       "type": "block"
