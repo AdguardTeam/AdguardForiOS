@@ -36,6 +36,7 @@ class YoutubeHtmlBuilder {
     private static let divDefinition = "<div id=\"player\"></div>"
     private static let scriptGenerator: (String, [String: String]) -> String = { (videoId: String, params: [String: String]) in
         """
+        document.body.style.backgroundColor = "black";
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
