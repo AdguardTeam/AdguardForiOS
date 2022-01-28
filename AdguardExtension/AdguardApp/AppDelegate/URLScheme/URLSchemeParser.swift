@@ -35,7 +35,7 @@
  11. <adguardScheme>://upgradeApp                                   <--- Open License screen
  12. <adguardScheme>://enableAdvancedProtection                     <--- Open Advanced protection screen
  13. <adguardScheme>://add_dns_server?address:<upstream>&name:<name> <--- Adding custom DNS server
- 14. <adguardScheme>://watch_youtube_video?video_id=<ID>            <--- Open YouTube player to watch YouTube video with given <ID>
+ 14. <inAppUrlScheme>://watch_youtube_video?video_id=<ID>            <--- Open YouTube player to watch YouTube video with given <ID>
  */
 
 protocol IURLSchemeParser {
@@ -173,7 +173,7 @@ struct URLSchemeParser: IURLSchemeParser {
             return processor.parse(url)
 
         // Open Youtube player controller
-        case (.urlScheme, .watchYoutubeVideo):
+        case (.inAppUrlScheme, .watchYoutubeVideo):
             DDLogInfo("(URLSchemeParser) openurl - open youtube player; proStatus=\(configurationService.proStatus)")
             let processor = OpenYoutubeControllerParser(executor: executor)
             return processor.parse(url)

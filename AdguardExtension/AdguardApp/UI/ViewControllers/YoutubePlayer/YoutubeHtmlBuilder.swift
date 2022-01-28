@@ -34,9 +34,18 @@ class YoutubeHtmlBuilder {
     private static let scriptOpenTag = "<script>"
     private static let scriptCloseTag = "</script>"
     private static let divDefinition = "<div id=\"player\"></div>"
+    private static let style =
+            """
+            <style>
+                body {
+                    background: #000;
+                    padding: 0px;
+                    margin: 0px;
+                }
+            </style>
+            """
     private static let scriptGenerator: (String, [String: String]) -> String = { (videoId: String, params: [String: String]) in
         """
-        document.body.style.backgroundColor = "black";
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -127,6 +136,7 @@ class YoutubeHtmlBuilder {
         \(YoutubeHtmlBuilder.doctype)
         \(YoutubeHtmlBuilder.htmlOpenTag)
         \(YoutubeHtmlBuilder.bodyOpenTag)
+        \(YoutubeHtmlBuilder.style)
         \(YoutubeHtmlBuilder.divDefinition)
         \(YoutubeHtmlBuilder.scriptOpenTag)
         \(YoutubeHtmlBuilder.scriptGenerator(videoId, params))

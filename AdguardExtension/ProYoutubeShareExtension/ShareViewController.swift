@@ -26,7 +26,7 @@ class ShareViewController: UIViewController {
     private let typeText = String(kUTTypeText)
     private let typeURL = String(kUTTypeURL)
 
-    private let appURL = "adguard://watch_youtube_video?video_id="
+    private let appURL = "\(Bundle.main.inAppScheme)://watch_youtube_video?video_id="
     private let youtubeUrl = "youtube.com"
     private let youtubeCompressedUrl = "youtu.be"
     private let youtubeKids = "youtubekids.com"

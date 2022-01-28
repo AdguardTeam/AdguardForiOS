@@ -693,6 +693,11 @@ extension AppDelegate {
             return false
         }
 
+        if topVC is IntroductionOnboardingController {
+            DDLogError("Onboarding has not been passed")
+            return false
+        }
+
         // We need to check if top view controller is an alert and dismiss it
         if topVC is UIAlertController {
             // We should re-set topVC since the current one has been dismissed

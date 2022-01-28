@@ -411,6 +411,8 @@
 		6040EE9F27A167E0003EF2AA /* userscript.js in Resources */ = {isa = PBXBuildFile; fileRef = 60BB66AD2795D24100AAE8CE /* userscript.js */; };
 		6040EEA027A167E7003EF2AA /* filter.json in Resources */ = {isa = PBXBuildFile; fileRef = C23960A7AB8939FAD8FFE994 /* filter.json */; };
 		6040EEA127A16C03003EF2AA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659E59751BC6D82700FA2384 /* Localizable.strings */; };
+		606C916327A4555C0088436E /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
+		606C916427A4556C0088436E /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
 		607A4432279ED771008D533C /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40799A231E7E4E007EFB26 /* URL+Utils.swift */; };
 		60BB66A12795BBAE00AAE8CE /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BB66A02795BBAE00AAE8CE /* ShareViewController.swift */; };
 		60BB66A82795BBAE00AAE8CE /* ProYoutubeShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 60BB669E2795BBAE00AAE8CE /* ProYoutubeShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -8438,6 +8440,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				606C916427A4556C0088436E /* Bundle+Utils.swift in Sources */,
 				6040EE9E27A15B10003EF2AA /* DispatchQueue+Utils.swift in Sources */,
 				6040EE9D27A15B0B003EF2AA /* String+NSRange.swift in Sources */,
 				6040EE9C27A15B02003EF2AA /* String+Utils.swift in Sources */,
@@ -8466,6 +8469,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				606C916327A4555C0088436E /* Bundle+Utils.swift in Sources */,
 				607A4432279ED771008D533C /* URL+Utils.swift in Sources */,
 				60BB66C42798499E00AAE8CE /* UIViewController+Alert.swift in Sources */,
 				60BB66BD2795D7DC00AAE8CE /* NSString+Utils.h in Sources */,
