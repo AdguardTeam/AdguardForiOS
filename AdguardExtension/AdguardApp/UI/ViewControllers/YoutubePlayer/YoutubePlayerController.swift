@@ -98,7 +98,7 @@ class YoutubePlayerController : UIViewController {
             self.webView.configuration.userContentController.addUserScript(userscript)
             self.webView.configuration.userContentController.add(list!)
 
-            self.webView.loadHTMLString(self.createHtml(videoId: videoId), baseURL: nil)
+            self.webView.loadHTMLString(self.createHtml(videoId: videoId), baseURL: URL(string: "https://m.youtube.com/")!)
         }
     }
 
