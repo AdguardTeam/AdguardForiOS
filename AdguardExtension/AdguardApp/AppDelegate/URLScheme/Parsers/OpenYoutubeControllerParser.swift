@@ -18,9 +18,7 @@
 
 import Foundation
 
-/**
- * IURLSchemeParametersParser that retrieves video_id from the given url and starts YoutubePlayerController
- */
+/// IURLSchemeParametersParser that retrieves video_id from the given url and starts YoutubePlayerController
 struct OpenYoutubeControllerParser : IURLSchemeParametersParser {
 
     private let executor: IURLSchemeExecutor

@@ -164,7 +164,7 @@ class ShareViewController: UIViewController {
 
 
 
-    // Mark - Private enums
+    // MARK - Private enums
 
     // Possible errors that may occur during sharing a link
     private enum SharingLinkError : Error {
