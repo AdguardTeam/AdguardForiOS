@@ -18,7 +18,6 @@
 
 import Foundation
 
-
 /// A simple builder to create an html page with configured YouTube player.
 /// See: [API doc](https://developers.google.com/youtube/iframe_api_reference)
 /// See: [Player params](https://developers.google.com/youtube/player_parameters)
