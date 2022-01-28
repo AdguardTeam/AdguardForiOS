@@ -23,12 +23,12 @@ import WebKit
 /// See: [Jira task](https://jira.adguard.com/browse/AG-11561)
 class YoutubePlayerController : UIViewController {
 
-    // MARK - Properties
+    // MARK: - Properties
 
     private var webView: WKWebView!
     private var videoId: String
 
-    // MARK - Initializer
+    // MARK: - Initializer
 
     init(videoId: String) {
         self.videoId = videoId
@@ -41,7 +41,7 @@ class YoutubePlayerController : UIViewController {
         return nil
     }
 
-    // MARK - Public functions
+    // MARK: - Public functions
 
     func reload(videoId: String) {
         self.videoId = videoId
@@ -63,7 +63,7 @@ class YoutubePlayerController : UIViewController {
 
 
 
-    // MARK - Private functions
+    // MARK: - Private functions
 
     private func setUpCloseButton() {
         let image = UIImage(named: "cross")
@@ -158,7 +158,7 @@ class YoutubePlayerController : UIViewController {
 
 
 
-    // MARK - Private enums
+    // MARK: - Private enums
 
     /// Errors that may occur during user's flow
     private enum YouTubePlayerError : Error {
@@ -186,7 +186,7 @@ class YoutubePlayerController : UIViewController {
 
 
 
-// MARK - YoutubePlayerController + ThemableProtocol
+// MARK: - YoutubePlayerController + ThemableProtocol
 
 extension YoutubePlayerController : ThemableProtocol {
     func updateTheme() {

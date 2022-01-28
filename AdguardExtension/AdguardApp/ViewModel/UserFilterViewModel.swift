@@ -113,7 +113,7 @@ class RuleInfo: NSObject {
  */
 class UserFilterViewModel: NSObject {
     
-    // MARK - public fields
+    // MARK: - public fields
     
     var type: UserFilterType
     
@@ -127,7 +127,7 @@ class UserFilterViewModel: NSObject {
         }
     }
     
-    // MARK - private members
+    // MARK: - private members
     private var allRules = [RuleInfo]()
     private var searchRules = [RuleInfo]()
     

@@ -23,7 +23,7 @@ import MobileCoreServices
 /// UIViewController that handles https scheme, retrieves Youtube video ID and passes it to the main app
 class ShareViewController: UIViewController {
 
-    // MARK - Private constants
+    // MARK: - Private constants
 
     private let typeText = String(kUTTypeText)
     private let typeURL = String(kUTTypeURL)
@@ -37,7 +37,7 @@ class ShareViewController: UIViewController {
     private let youtubeNoCookie = "youtube-nocookie.com"
     private let youtubeEmbed = "/embed/"
 
-    // MARK - Public functions
+    // MARK: - Public functions
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -59,7 +59,7 @@ class ShareViewController: UIViewController {
 
 
 
-    // MARK - Private functions
+    // MARK: - Private functions
 
     // Processes itemProvider as it contains a text
     private func processText(from itemProvider: NSItemProvider) {
@@ -164,7 +164,7 @@ class ShareViewController: UIViewController {
 
 
 
-    // MARK - Private enums
+    // MARK: - Private enums
 
     // Possible errors that may occur during sharing a link
     private enum SharingLinkError : Error {
