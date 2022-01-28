@@ -39,7 +39,7 @@ class YoutubePlayerController : UIViewController {
 
     func reload(videoId: String) {
         self.videoId = videoId
-        webView.loadHTMLString(createHtml(videoId: videoId), baseURL: nil)
+        webView.loadHTMLString(createHtml(videoId: videoId), baseURL: URL(string: "https://m.youtube.com/")!)
     }
 
     override func loadView() {
