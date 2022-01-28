@@ -63,13 +63,24 @@ class YoutubeHtmlBuilder {
                     'iv_load_policy': 3
                 },
                 events: {
-                   'onReady': onPlayerReady,
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
                 }
             });
         }
 
         function onPlayerReady(event) {
             player.playVideo();
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data == YT.PlayerState.ENDED) {
+                // We use this approach to prevent the player from loading recommended videos.
+                // Why not to show this list for the user? System passes youtu.be and youtube.com links to YouTube 
+                // main app by default. It means that tap on the recommended video produces native YouTube application
+                // start to handle the link. Whereas player#stopVideo invocation sets video to the 'initial' state.
+                player.stopVideo()
+            }
         }
         """
     }
