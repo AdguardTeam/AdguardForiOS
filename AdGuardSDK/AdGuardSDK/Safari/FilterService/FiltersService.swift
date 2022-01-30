@@ -657,10 +657,13 @@ final class FiltersService: FiltersServiceProtocol {
         let commentChar1 = "!".utf16.first!
         let commentChar2 = "#".utf16.first!
         let nsString = filterContent as NSString
-        nsString.enumerateLines{ str, _ in
-            let firstChar = (str as NSString).character(at: 0)
-            if firstChar != commentChar1 && firstChar != commentChar2 {
-                rulesCount += 1
+        nsString.enumerateLines { str, _ in
+            let line = str as NSString
+            if line.length > 0 {
+                let firstChar = line.character(at: 0)
+                if firstChar != commentChar1 && firstChar != commentChar2 {
+                    rulesCount += 1
+                }
             }
         }
 
