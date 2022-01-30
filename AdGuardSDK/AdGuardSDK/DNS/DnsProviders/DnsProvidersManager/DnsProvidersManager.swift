@@ -120,7 +120,7 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
          userDefaults: UserDefaultsStorageProtocol,
          customProvidersStorage: CustomDnsProvidersStorageProtocol,
          predefinedProviders: PredefinedDnsProvidersDecoderProtocol) {
-
+        Logger.logInfo("(DnsProvidersManager) - init start")
         self.configuration = configuration
         self.userDefaults = userDefaults
         self.customProvidersStorage = customProvidersStorage
@@ -132,6 +132,7 @@ final public class DnsProvidersManager: DnsProvidersManagerProtocol {
         self.customProviders = providersWithState.custom
         self.activeDnsProvider = providersWithState.activeDnsProvider
         self.activeDnsServer = providersWithState.activeDnsServer
+        Logger.logInfo("(DnsProvidersManager) - init end")
     }
 
     // MARK: - Public methods

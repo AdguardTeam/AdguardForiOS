@@ -92,7 +92,7 @@ extension StatisticsPeriod {
      |------|------------------------------|------------|------|----------|---->
                                         NOW
 
-     Every segment will be compressed sepately
+     Every segment will be compressed separately
      So every next segment records will include previous segments
      */
     static var activityCompressionIntervals: [DateInterval] {
