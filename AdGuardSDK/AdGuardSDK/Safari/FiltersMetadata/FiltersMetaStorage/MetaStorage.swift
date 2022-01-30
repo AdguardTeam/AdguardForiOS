@@ -54,7 +54,7 @@ final class MetaStorage: MetaStorageProtocol {
         // It is possible that a database file is temporarily locked in one thread and is being accessed from another.
         // Here we set a timeout and `busyHadler` to resolve this issue
         // `busyHandler` is needed to handle error when db is locked and try once more
-        self.filtersDb.busyTimeout = 0.5
+        self.filtersDb.busyTimeout = 5
         self.filtersDb.busyHandler { _ in
             Logger.logError("(MetaStorage) - init; Safari filters db is locked")
             return true

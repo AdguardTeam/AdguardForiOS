@@ -54,11 +54,13 @@ extension DnsRequestProcessedEvent {
         self.type = event.type
         self.answer = event.answer
         self.processedStatus = Self.getEventStatus(
-            event,
-            isEncrypted: upstream?.`protocol`.isCrypto ?? false,
-            customDnsFilterIds: customDnsFilterIds,
-            dnsBlocklistFilterId: dnsBlocklistFilterId,
-            dnsAllowlistFilterId: dnsAllowlistFilterId
+                event,
+                // empty upstream means that the request was blocked locally.
+                // could be considered kind of encrypted:)
+                isEncrypted: upstream == nil || upstream?.`protocol`.isCrypto ?? false,
+                customDnsFilterIds: customDnsFilterIds,
+                dnsBlocklistFilterId: dnsBlocklistFilterId,
+                dnsAllowlistFilterId: dnsAllowlistFilterId
         )
         self.originalAnswer = event.originalAnswer
         self.upstream = upstream

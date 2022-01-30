@@ -154,8 +154,9 @@ final class FiltersService: FiltersServiceProtocol {
 
     /// Sometimes we don't want some filters to exist in our app
     /// So this list of identifiers is for such filters
-    /// 208 - Online Malicious URL Blocklist; Should be removed because it contains `malware` word in it's description; There was a case when Apple declined our app review because of this.
-    let restrictedFilterIds = [208]
+    /// 208 - Online Malicious URL Blocklist; Should be removed because it contains `malware` word in it's description;
+    /// There was a case when Apple declined our app because there can't be any malware on iOS :)
+    private static let restrictedFilterIds = [208]
 
     // MARK: - Private properties
 
@@ -202,7 +203,7 @@ final class FiltersService: FiltersServiceProtocol {
         self.metaParser = metaParser
         self.apiMethods = apiMethods
 
-        try self._groupsAtomic.mutate { $0.append(contentsOf: try getAllLocalizedGroups()) }
+        try initGroups()
 
         Logger.logInfo("(FiltersService) - init end")
     }
@@ -277,7 +278,7 @@ final class FiltersService: FiltersServiceProtocol {
             // Fill groups with actual objects
             // Even if updateMetadataError exists we update groups variable to make it actual as DB could change
             do {
-                try self._groupsAtomic.mutate { $0 = try self.getAllLocalizedGroups() }
+                try self.initGroups()
             } catch {
                 groupsUpdateError = error
                 Logger.logError("(FiltersService) - updateAllMeta; Localized groups fetching error: \(error)")
@@ -348,7 +349,6 @@ final class FiltersService: FiltersServiceProtocol {
 
     func add(customFilter: ExtendedCustomFilterMetaProtocol, enabled: Bool, _ onFilterAdded: @escaping (_ error: Error?) -> Void) {
         workingQueue.async { [weak self] in
-
             guard let self = self,
                   let filterDownloadPage = customFilter.filterDownloadPage,
                   let subscriptionUrl = URL(string: filterDownloadPage)
@@ -359,7 +359,7 @@ final class FiltersService: FiltersServiceProtocol {
                 return
             }
 
-            // check filter allready exists
+            // check filter already exists
             let customGroup = self.groupsAtomic.first(where: { $0.groupType == .custom })!
 
             let exists = customGroup.filters.contains { $0.filterDownloadPage == customFilter.filterDownloadPage }
@@ -443,7 +443,7 @@ final class FiltersService: FiltersServiceProtocol {
 
     func reinitializeGroups() throws {
         try workingQueue.sync {
-            try self._groupsAtomic.mutate { $0 = try self.getAllLocalizedGroups() }
+            try self.initGroups()
         }
     }
 
@@ -478,7 +478,7 @@ final class FiltersService: FiltersServiceProtocol {
                 }
 
                 do {
-                    try self._groupsAtomic.mutate { $0 = try self.getAllLocalizedGroups() }
+                    try self.initGroups()
                     Logger.logInfo("(FiltersService) - reset; Successfully updated groups")
                 }
                 catch {
@@ -500,11 +500,34 @@ final class FiltersService: FiltersServiceProtocol {
             // The first element of the `suitableLanguages` list is the language code with the highest priority.
             let lang = suitableLanguages.first ?? Locale.defaultLanguageCode
             try enablePredefinedGroupsAndFiltersInternal(with: groups, currentLanguage: lang)
-            try self._groupsAtomic.mutate { $0 = try getAllLocalizedGroups() }
+            try self.initGroups()
         }
     }
 
     // MARK: - Private methods
+
+    private func initGroups() throws {
+        try _groupsAtomic.mutate { $0 = try getAllLocalizedGroups() }
+        workingQueue.async {
+            // Schedule an async operation that updates filters rule counts.
+            // The problem is that this is a very slow operation and we keep it async for now.
+            // TODO: rulesCount should be stored in the database in the next versions.
+
+            var updatedGroups: [SafariGroup] = []
+            for group in self._groupsAtomic.wrappedValue {
+                var updatedGroup = group
+                var updatedFilters: [SafariGroup.Filter] = []
+                for filter in group.filters {
+                    var updatedFilter = filter
+                    updatedFilter.rulesCount = self.getRulesCountForFilter(withId: filter.filterId)
+                    updatedFilters.append(updatedFilter)
+                }
+                updatedGroup.filters = updatedFilters
+                updatedGroups.append(updatedGroup)
+            }
+            self._groupsAtomic.mutate { $0 = updatedGroups }
+        }
+    }
 
     /**
      Adds info about filter to all storages
@@ -570,7 +593,7 @@ final class FiltersService: FiltersServiceProtocol {
 
     /// Internal method to remove restricted filters meta from meta downloaded from our server
     func removeRestrictedFilters(from meta: ExtendedFiltersMeta) -> ExtendedFiltersMeta {
-        let filtersWithoutRestricted = meta.filters.filter { !self.restrictedFilterIds.contains($0.filterId) }
+        let filtersWithoutRestricted = meta.filters.filter { !FiltersService.restrictedFilterIds.contains($0.filterId) }
         let metaWithoutRestricted = ExtendedFiltersMeta(groups: meta.groups, tags: meta.tags, filters: filtersWithoutRestricted)
         return metaWithoutRestricted
     }
@@ -578,7 +601,7 @@ final class FiltersService: FiltersServiceProtocol {
     /// Internal method to remove restricted filters localizations from localizations downloaded from our server
     func removeRestrictedFilters(from localizations: ExtendedFiltersMetaLocalizations) -> ExtendedFiltersMetaLocalizations {
         var filtersLocalizationsWithoutRestricted = localizations.filters
-        self.restrictedFilterIds.forEach {
+        FiltersService.restrictedFilterIds.forEach {
             filtersLocalizationsWithoutRestricted[$0] = nil
         }
         let localizationsWithoutRestricted = ExtendedFiltersMetaLocalizations(groups: localizations.groups, tags: localizations.tags, filters: filtersLocalizationsWithoutRestricted)
@@ -627,16 +650,18 @@ final class FiltersService: FiltersServiceProtocol {
     private func getFilters(forGroup group: SafariGroupProtocol) throws -> [SafariGroup.Filter] {
         let localizedFiltersMeta = try metaStorage.getLocalizedFiltersForGroup(withId: group.groupId, forSuitableLanguages: suitableLanguages)
         return try localizedFiltersMeta.map { dbFilter in
+            // Note that we initialize rulesCount with 0 here because the rulesCount will be updated asynchronously.
+            // Check the initGroup function to see why.
             // TODO: We should store rulesCount in the database instead of counting it every time.
-            let rulesCount = getRulesCountForFilter(withId: dbFilter.filterId)
+            let rulesCount = 0
             let languages = try metaStorage.getLangsForFilter(withId: dbFilter.filterId)
             let tags = try metaStorage.getTagsForFilter(withId: dbFilter.filterId)
             return SafariGroup.Filter(dbFilter: dbFilter,
-                                      group: group,
-                                      rulesCount: rulesCount,
-                                      languages: languages,
-                                      tags: tags,
-                                      filterDownloadPage: dbFilter.subscriptionUrl)
+                    group: group,
+                    rulesCount: rulesCount,
+                    languages: languages,
+                    tags: tags,
+                    filterDownloadPage: dbFilter.subscriptionUrl)
         }
     }
 
