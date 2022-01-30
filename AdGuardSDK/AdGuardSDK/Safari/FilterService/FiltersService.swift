@@ -569,7 +569,7 @@ final class FiltersService: FiltersServiceProtocol {
      It's a wrapper for **addFilter** function to add multiple filters syncroniously
      - Returns ids of filters that were successfully added to our storage
      */
-    private func add(filters: [ExtendedFilterMetaProtocol]) -> [Int] {
+    func add(filters: [ExtendedFilterMetaProtocol]) -> [Int] {
         Logger.logInfo("(FiltersService) - addFilters; Trying to add \(filters.count) filters")
 
         @Atomic var addedFiltersIds: [Int] = []
@@ -592,14 +592,14 @@ final class FiltersService: FiltersServiceProtocol {
     }
 
     /// Internal method to remove restricted filters meta from meta downloaded from our server
-    private func removeRestrictedFilters(from meta: ExtendedFiltersMeta) -> ExtendedFiltersMeta {
+    func removeRestrictedFilters(from meta: ExtendedFiltersMeta) -> ExtendedFiltersMeta {
         let filtersWithoutRestricted = meta.filters.filter { !FiltersService.restrictedFilterIds.contains($0.filterId) }
         let metaWithoutRestricted = ExtendedFiltersMeta(groups: meta.groups, tags: meta.tags, filters: filtersWithoutRestricted)
         return metaWithoutRestricted
     }
 
     /// Internal method to remove restricted filters localizations from localizations downloaded from our server
-    private func removeRestrictedFilters(from localizations: ExtendedFiltersMetaLocalizations) -> ExtendedFiltersMetaLocalizations {
+    func removeRestrictedFilters(from localizations: ExtendedFiltersMetaLocalizations) -> ExtendedFiltersMetaLocalizations {
         var filtersLocalizationsWithoutRestricted = localizations.filters
         FiltersService.restrictedFilterIds.forEach {
             filtersLocalizationsWithoutRestricted[$0] = nil
