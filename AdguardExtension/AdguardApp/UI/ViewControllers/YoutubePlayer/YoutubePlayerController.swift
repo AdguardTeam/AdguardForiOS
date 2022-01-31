@@ -39,6 +39,7 @@ class YoutubePlayerController : UIViewController {
 
     func reload(videoId: String) {
         self.videoId = videoId
+        // See https://jira.adguard.com/browse/AG-11561?focusedCommentId=57282&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#comment-57282 for more details
         webView.loadHTMLString(createHtml(videoId: videoId), baseURL: URL(string: "https://m.youtube.com/")!)
     }
 
@@ -98,6 +99,7 @@ class YoutubePlayerController : UIViewController {
             self.webView.configuration.userContentController.addUserScript(userscript)
             self.webView.configuration.userContentController.add(list!)
 
+            // See https://jira.adguard.com/browse/AG-11561?focusedCommentId=57282&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#comment-57282 for more details
             self.webView.loadHTMLString(self.createHtml(videoId: videoId), baseURL: URL(string: "https://m.youtube.com/")!)
         }
     }

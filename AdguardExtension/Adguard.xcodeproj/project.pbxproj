@@ -411,9 +411,21 @@
 		6040EE9F27A167E0003EF2AA /* userscript.js in Resources */ = {isa = PBXBuildFile; fileRef = 60BB66AD2795D24100AAE8CE /* userscript.js */; };
 		6040EEA027A167E7003EF2AA /* filter.json in Resources */ = {isa = PBXBuildFile; fileRef = C23960A7AB8939FAD8FFE994 /* filter.json */; };
 		6040EEA127A16C03003EF2AA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659E59751BC6D82700FA2384 /* Localizable.strings */; };
+		605E812A27A7DC2300AFC107 /* URL+CustomSchemeURLParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */; };
+		605E812B27A7DC2D00AFC107 /* URL+CustomSchemeURLParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */; };
+		605E812C27A7F1E500AFC107 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
+		605E812D27A7F1F200AFC107 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
+		605E812E27A7F38E00AFC107 /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40799A231E7E4E007EFB26 /* URL+Utils.swift */; };
+		605E812F27A7F39600AFC107 /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40799A231E7E4E007EFB26 /* URL+Utils.swift */; };
+		605E813027A82E6400AFC107 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2BA2E326F9D3D600B44D4A /* UIViewController+Alert.swift */; };
 		606C916327A4555C0088436E /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
 		606C916427A4556C0088436E /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
 		607A4432279ED771008D533C /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40799A231E7E4E007EFB26 /* URL+Utils.swift */; };
+		6089DFC227A83CFF00536667 /* DispatchQueue+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E92754A26C6C02F007B2C80 /* DispatchQueue+Utils.swift */; };
+		6089DFC327A83D0600536667 /* DispatchQueue+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E92754A26C6C02F007B2C80 /* DispatchQueue+Utils.swift */; };
+		6089DFC427A8432C00536667 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2BA2E326F9D3D600B44D4A /* UIViewController+Alert.swift */; };
+		6089DFC627A846C200536667 /* ProInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6089DFC527A846C200536667 /* ProInfo.plist */; };
+		6089DFC727A846C200536667 /* ProInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6089DFC527A846C200536667 /* ProInfo.plist */; };
 		60BB66A12795BBAE00AAE8CE /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BB66A02795BBAE00AAE8CE /* ShareViewController.swift */; };
 		60BB66A82795BBAE00AAE8CE /* ProYoutubeShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 60BB669E2795BBAE00AAE8CE /* ProYoutubeShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		60BB66AE2795D24100AAE8CE /* userscript.js in Resources */ = {isa = PBXBuildFile; fileRef = 60BB66AD2795D24100AAE8CE /* userscript.js */; };
@@ -2909,6 +2921,7 @@
 		4982C1AC26D78F2A00CACBBE /* log.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = log.ts; sourceTree = "<group>"; };
 		4982C1AD26D78F2A00CACBBE /* logNative.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = logNative.ts; sourceTree = "<group>"; };
 		6040EE7C27A1586C003EF2AA /* YoutubeShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = YoutubeShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		6089DFC527A846C200536667 /* ProInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ProInfo.plist; sourceTree = "<group>"; };
 		60BB669E2795BBAE00AAE8CE /* ProYoutubeShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ProYoutubeShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		60BB66A02795BBAE00AAE8CE /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		60BB66A52795BBAE00AAE8CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -6001,6 +6014,7 @@
 				7E6081CD26D55C0100D778F4 /* BlockYouTubeAds.js */,
 				7E6081D126D55C0100D778F4 /* Info.plist */,
 				7ED68E4426EB98E200929E57 /* YouTubeAdsActionExtension-Bridging-Header.h */,
+				6089DFC527A846C200536667 /* ProInfo.plist */,
 			);
 			path = YouTubeAdsActionExtension;
 			sourceTree = "<group>";
@@ -7790,6 +7804,7 @@
 				D0D7E55024371C8C001801A5 /* Tutorial.storyboard in Resources */,
 				659886A51CF74DE9003ECD1C /* defaults.plist in Resources */,
 				659886A61CF74DE9003ECD1C /* LaunchScreen.storyboard in Resources */,
+				6089DFC627A846C200536667 /* ProInfo.plist in Resources */,
 				655AACD61D4233A000E316EA /* ProLaunchScreen.storyboard in Resources */,
 				D0D7E57E243B15DF001801A5 /* Localizable.stringsdict in Resources */,
 				D0D7E54424371C8C001801A5 /* RateApp.storyboard in Resources */,
@@ -7958,6 +7973,7 @@
 				7E6081F126D55F1400D778F4 /* InfoPlist.strings in Resources */,
 				7E60821B26D56A7600D778F4 /* Localizable.strings in Resources */,
 				7E6081F226D55F1700D778F4 /* Media.xcassets in Resources */,
+				6089DFC727A846C200536667 /* ProInfo.plist in Resources */,
 				7E6081EF26D55F0900D778F4 /* BlockYouTubeAds.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -9819,6 +9835,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6089DFC327A83D0600536667 /* DispatchQueue+Utils.swift in Sources */,
+				605E813027A82E6400AFC107 /* UIViewController+Alert.swift in Sources */,
+				605E812E27A7F38E00AFC107 /* URL+Utils.swift in Sources */,
+				605E812D27A7F1F200AFC107 /* Bundle+Utils.swift in Sources */,
+				605E812A27A7DC2300AFC107 /* URL+CustomSchemeURLParserProtocol.swift in Sources */,
 				7E6081F926D561C700D778F4 /* UserNotificationService.swift in Sources */,
 				7E60821426D5638200D778F4 /* DDTTYLogger.m in Sources */,
 				7E60820626D562BC00D778F4 /* CocoaLumberjack.swift in Sources */,
@@ -9844,6 +9865,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6089DFC427A8432C00536667 /* UIViewController+Alert.swift in Sources */,
+				6089DFC227A83CFF00536667 /* DispatchQueue+Utils.swift in Sources */,
+				605E812F27A7F39600AFC107 /* URL+Utils.swift in Sources */,
+				605E812C27A7F1E500AFC107 /* Bundle+Utils.swift in Sources */,
+				605E812B27A7DC2D00AFC107 /* URL+CustomSchemeURLParserProtocol.swift in Sources */,
 				7E6081FB26D561CB00D778F4 /* UserNotificationService.swift in Sources */,
 				7E60821326D5638100D778F4 /* DDTTYLogger.m in Sources */,
 				7E60820526D562BB00D778F4 /* CocoaLumberjack.swift in Sources */,
@@ -12602,7 +12628,7 @@
 					"$(inherited)",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = YouTubeAdsActionExtension/Info.plist;
+				INFOPLIST_FILE = YouTubeAdsActionExtension/ProInfo.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = YouTube;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
@@ -12648,7 +12674,7 @@
 				DEVELOPMENT_TEAM = N33TQXN8C7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = YouTubeAdsActionExtension/Info.plist;
+				INFOPLIST_FILE = YouTubeAdsActionExtension/ProInfo.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = YouTube;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2021 Performiks. All rights reserved.";
