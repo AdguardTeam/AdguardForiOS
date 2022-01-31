@@ -1,0 +1,67 @@
+[
+  {
+    "trigger": {
+      "url-filter": "^[htpsw]+:\\/\\/([a-z0-9-]+\\.)?static\\.doubleclick\\.net([\\/:&\\?].*)?$"
+    },
+    "action": {
+      "type": "block"
+    }
+  },
+  {
+    "trigger": {
+      "url-filter": "^[htpsw]+:\\/\\/([a-z0-9-]+\\.)?youtube\\.com\\/api\\/stats\\/qoe\\?"
+    },
+    "action": {
+      "type": "block"
+    }
+  },
+  {
+    "trigger": {
+      "url-filter": "^[htpsw]+:\\/\\/([a-z0-9-]+\\.)?youtube\\.com\\/ptracking\\?"
+    },
+    "action": {
+      "type": "block"
+    }
+  },
+  {
+    "trigger": {
+      "url-filter": "^[htpsw]+:\\/\\/([a-z0-9-]+\\.)?youtube\\.com\\/pagead\\/"
+    },
+    "action": {
+      "type": "block"
+    }
+  },
+  {
+    "trigger": {
+      "url-filter": "^[htpsw]+:\\/\\/([a-z0-9-]+\\.)?doubleclick\\.net([\\/:&\\?].*)?$",
+      "load-type": [
+        "third-party"
+      ],
+      "resource-type": [
+        "image"
+      ],
+      "unless-domain": [
+        "*doubleclick.net"
+      ]
+    },
+    "action": {
+      "type": "block"
+    }
+  },
+  {
+    "trigger": {
+      "url-filter": "\\/googleads\\."
+    },
+    "action": {
+      "type": "block"
+    }
+  },
+  {
+    "trigger": {
+      "url-filter": "\\/log_event\\?"
+    },
+    "action": {
+      "type": "block"
+    }
+  }
+]

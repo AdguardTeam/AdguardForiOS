@@ -29,4 +29,5 @@ protocol IURLSchemeExecutor {
     func openMainPageControllerAndTurnOnProtection(for domain: String) -> Bool
     func openPurchaseLicenseController() -> Bool
     func openAdvancedProtectionController(enableAdvancedProtection: Bool?) -> Bool
+    func openYoutubePlayerController(videoId: String) -> Bool
 }

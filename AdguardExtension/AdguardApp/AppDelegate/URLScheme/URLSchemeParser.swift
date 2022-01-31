@@ -19,7 +19,8 @@
 // TODO: - We need to write links creator; Now it looks awful to construct links in different targets
 
 /* URL's that might be processed
- <adguardScheme> = adguard or adguard-pro
+ <adguardScheme> = adguard or adguard-pro (URL scheme for receiving commands in Adguard main app from Safari)
+ <inAppUrlScheme> = in-app-adguard-url-scheme or in-app-adguard-pro-url-scheme (URL scheme for receiving in app messages from different targets)
 
  1. <adguardScheme>:license=<LICENSE>                               <--- Activate license by URL
  2. <adguardScheme>://add/<RULE>                                    <--- Adding new user rule from safari
@@ -30,11 +31,12 @@
  7. abp://subscribe?location=<LOCATION URL>&title=<TITLE>           <--- Subscribe to custom safari filter
  8. <adguardScheme>://openTunnelModeSettings                        <--- Open Tunnel Mode settings
  9. <adguardScheme>://auth#access_token=<TOKEN>&token_type=<TOKEN TYPE>&state=<STATE>&expires_in=<EXPIRES IN>   <--- Log in by social networks
- 10. <adguardScheme>://safariWebExtension?action=<ACTION>&domain=<DOMAIN> <--- Open with safari web extension action
+ 10. <inAppUrlScheme>://safariWebExtension?action=<ACTION>&domain=<DOMAIN> <--- Open with safari web extension action
     <ACTION> = removeFromAllowlist or addToAllowlist or addToBlocklist or removeAllBlocklistRules
- 11. <adguardScheme>://upgradeApp                                   <--- Open License screen
- 12. <adguardScheme>://enableAdvancedProtection                     <--- Open Advanced protection screen
+ 11. <inAppUrlScheme>://upgradeApp                                   <--- Open License screen
+ 12. <inAppUrlScheme>://enableAdvancedProtection                     <--- Open Advanced protection screen
  13. <adguardScheme>://add_dns_server?address:<upstream>&name:<name> <--- Adding custom DNS server
+ 14. <inAppUrlScheme>://watch_youtube_video?video_id=<ID>            <--- Open YouTube player to watch YouTube video with given <ID>
  */
 
 protocol IURLSchemeParser {
@@ -57,6 +59,7 @@ fileprivate enum StringConstants: String {
     case upgradeApp = "upgradeApp"
     case enableAdvancedProtection = "enableAdvancedProtection"
     case addDnsServer = "add_dns_server"
+    case watchYoutubeVideo = "watch_youtube_video"
 
     static func getStringConstant(string: String?) -> StringConstants? {
         guard let string = string else { return nil }
@@ -168,6 +171,12 @@ struct URLSchemeParser: IURLSchemeParser {
         case (.inAppUrlScheme, .enableAdvancedProtection):
             DDLogInfo("(URLSchemeParser) openurl - open advanced protection screen; proStatus=\(configurationService.proStatus)")
             let processor = OpenAdvancedProtectionParser(executor: executor)
+            return processor.parse(url)
+
+        // Open Youtube player controller
+        case (.inAppUrlScheme, .watchYoutubeVideo):
+            DDLogInfo("(URLSchemeParser) openurl - open youtube player; proStatus=\(configurationService.proStatus)")
+            let processor = OpenYoutubeControllerParser(executor: executor)
             return processor.parse(url)
 
         default: return false
