@@ -19,118 +19,7 @@
 import UIKit
 import MobileCoreServices
 
-/// The result of processing shared YouTube link
-struct YouTubeShareLinkResult {
-
-    let sharingLinkError: SharingLinkError?
-    let validationResult: UrlValidationResult?
-    let videoId: String?
-    let messageForLog: String
-
-    init(videoId: String, validationResult: UrlValidationResult, messageForLog: String) {
-        self.sharingLinkError = nil
-        self.validationResult = validationResult
-        self.videoId = videoId
-        self.messageForLog = messageForLog
-    }
-
-    init(sharingLinkError: SharingLinkError, messageForLog: String) {
-        self.sharingLinkError = sharingLinkError
-        self.messageForLog = messageForLog
-        self.videoId = nil
-        self.validationResult = nil
-    }
-
-    // Possible errors that may occur during sharing a link
-    enum SharingLinkError : Error {
-        case noUrl
-        case badUrl
-        case itemProviderError
-
-        var alertTitle: String {
-            switch self {
-            case .noUrl:                return String.localizedString("youtube_share_extension_no_url_title")
-            case .badUrl:               return String.localizedString("youtube_share_extension_bad_url_title")
-            case .itemProviderError:    return String.localizedString("youtube_share_extension_item_provider_error_title")
-            }
-        }
-
-        var alertMessage: String {
-            switch self {
-            case .noUrl:                return String.localizedString("youtube_share_extension_no_url_summary")
-            case .badUrl:               return String.localizedString("youtube_share_extension_bad_url_summary")
-            case .itemProviderError:    return String.localizedString("youtube_share_extension_item_provider_error_summary")
-            }
-        }
-    }
-
-    // Possible valid YouTube URL formats
-    enum UrlValidationResult {
-        // https://youtu.be/<video_id><?params>
-        case compressed
-        // https://youtube.com/embed/<video_id><?params>
-        case embed
-        // https://youtube.com/embed/watch?v=<video_id><?params>
-        case regular
-
-        // Extracts video ID from given youtube URL according to given validation result
-        func extractVideoId(from: String) -> String? {
-            switch self {
-
-            case .compressed, .embed:
-                guard let firstIdx = from.lastIndex(of: "/") else { return nil }
-
-                if let lastIdx = from.firstIndex(of: "?") {
-                    return String(from[firstIdx...lastIdx])
-                } else {
-                    return String(from[firstIdx...])
-                }
-            case .regular:
-                return URL(string: from)?.parseUrl().params?["v"]
-            }
-        }
-    }
-}
-
-
-
-struct YouTubeAdsJsResult {
-
-    enum Status: String {
-        case success
-        case wrongDomain
-        case alreadyExecuted
-        case error
-
-        var title: String {
-            switch self {
-            case .success: return String.localizedString("youtube_script_success_title")
-            case .wrongDomain: return String.localizedString("youtube_script_wrong_domain_title")
-            case .alreadyExecuted: return String.localizedString("youtube_script_already_executed_title")
-            case .error: return String.localizedString("youtube_script_error_title")
-            }
-        }
-    }
-
-    let successfullyExecuted: Bool
-    let status: Status
-
-    init?(jsDict: [String: Any]) {
-        guard let successfullyExecuted = jsDict["success"] as? Bool,
-              let statusString = jsDict["status"] as? String,
-              let status = Status(rawValue: statusString)
-        else {
-            return nil
-        }
-
-        self.successfullyExecuted = successfullyExecuted
-        self.status = status
-    }
-}
-
-
-
-/// Handler that can processes 2 cases:
+/// Handler that can process 2 cases:
 /// - The YouTube link has been shared from the browser
 /// In this case we should run userscript on the given page
 /// - The YouTube link has been shared from another place (e.g. YouTube app)
@@ -201,13 +90,6 @@ class YouTubeAdsRequestHandler : UIViewController {
             self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
         }
     }
-}
-
-
-
-fileprivate enum RequestType {
-    case safari
-    case application
 }
 
 
