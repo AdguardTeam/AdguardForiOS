@@ -386,31 +386,8 @@
 		6040EE2827A148EB003EF2AA /* YoutubePlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23F9BFAE7D94E7DD647DB43 /* YoutubePlayerController.swift */; };
 		6040EE2927A148EC003EF2AA /* YoutubeHtmlBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23C42321ED50590D66B1C68 /* YoutubeHtmlBuilder.swift */; };
 		6040EE2A27A148EC003EF2AA /* OpenYoutubeControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2359CA1A1F43E4AF7B28637 /* OpenYoutubeControllerParser.swift */; };
-		6040EE8627A1586C003EF2AA /* YoutubeShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6040EE7C27A1586C003EF2AA /* YoutubeShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		6040EE8A27A15AA1003EF2AA /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40799A231E7E4E007EFB26 /* URL+Utils.swift */; };
-		6040EE8B27A15AAA003EF2AA /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2BA2E326F9D3D600B44D4A /* UIViewController+Alert.swift */; };
-		6040EE8C27A15AB3003EF2AA /* NSString+Utils.h in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F11C6B7686000F00D7 /* NSString+Utils.h */; };
-		6040EE8D27A15AB3003EF2AA /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F21C6B7686000F00D7 /* NSString+Utils.m */; };
-		6040EE8E27A15ABC003EF2AA /* NSStringPunycodeAdditions.h in Sources */ = {isa = PBXBuildFile; fileRef = 658E43961E8911A3008DAA59 /* NSStringPunycodeAdditions.h */; };
-		6040EE8F27A15ABC003EF2AA /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; };
-		6040EE9027A15AC2003EF2AA /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D031A0B4219EFC99002C17D9 /* CocoaLumberjack.swift */; };
-		6040EE9127A15AC9003EF2AA /* CocoaLumberjack.h in Sources */ = {isa = PBXBuildFile; fileRef = D031A0BF219EFC99002C17D9 /* CocoaLumberjack.h */; };
-		6040EE9227A15ADA003EF2AA /* DDLog.h in Sources */ = {isa = PBXBuildFile; fileRef = D031A0A8219EFC99002C17D9 /* DDLog.h */; };
-		6040EE9327A15ADA003EF2AA /* DDLoggerNames.h in Sources */ = {isa = PBXBuildFile; fileRef = D031A0AD219EFC99002C17D9 /* DDLoggerNames.h */; };
-		6040EE9427A15ADA003EF2AA /* DDLogMacros.h in Sources */ = {isa = PBXBuildFile; fileRef = D031A0AE219EFC99002C17D9 /* DDLogMacros.h */; };
-		6040EE9527A15ADA003EF2AA /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0BE219EFC99002C17D9 /* DDLog.m */; };
-		6040EE9627A15ADA003EF2AA /* DDLog+LOGV.h in Sources */ = {isa = PBXBuildFile; fileRef = D031A0C3219EFC99002C17D9 /* DDLog+LOGV.h */; };
-		6040EE9727A15ADA003EF2AA /* DDLoggerNames.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0C4219EFC99002C17D9 /* DDLoggerNames.m */; };
-		6040EE9827A15AE8003EF2AA /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
-		6040EE9927A15AE8003EF2AA /* UIColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9116D212FFCD6006DF0D3 /* UIColorUtils.swift */; };
-		6040EE9A27A15AF0003EF2AA /* URL+CustomSchemeURLParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */; };
-		6040EE9B27A15AF8003EF2AA /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BB66A02795BBAE00AAE8CE /* ShareViewController.swift */; };
-		6040EE9C27A15B02003EF2AA /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDAEA42191C9540028001B /* String+Utils.swift */; };
-		6040EE9D27A15B0B003EF2AA /* String+NSRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244419832614C1BC009555F3 /* String+NSRange.swift */; };
-		6040EE9E27A15B10003EF2AA /* DispatchQueue+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E92754A26C6C02F007B2C80 /* DispatchQueue+Utils.swift */; };
 		6040EE9F27A167E0003EF2AA /* userscript.js in Resources */ = {isa = PBXBuildFile; fileRef = 60BB66AD2795D24100AAE8CE /* userscript.js */; };
 		6040EEA027A167E7003EF2AA /* filter.json in Resources */ = {isa = PBXBuildFile; fileRef = C23960A7AB8939FAD8FFE994 /* filter.json */; };
-		6040EEA127A16C03003EF2AA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659E59751BC6D82700FA2384 /* Localizable.strings */; };
 		605E812A27A7DC2300AFC107 /* URL+CustomSchemeURLParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */; };
 		605E812B27A7DC2D00AFC107 /* URL+CustomSchemeURLParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */; };
 		605E812C27A7F1E500AFC107 /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
@@ -418,37 +395,12 @@
 		605E812E27A7F38E00AFC107 /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40799A231E7E4E007EFB26 /* URL+Utils.swift */; };
 		605E812F27A7F39600AFC107 /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40799A231E7E4E007EFB26 /* URL+Utils.swift */; };
 		605E813027A82E6400AFC107 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2BA2E326F9D3D600B44D4A /* UIViewController+Alert.swift */; };
-		606C916327A4555C0088436E /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
-		606C916427A4556C0088436E /* Bundle+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09E2A97254AC0D5002D6BC0 /* Bundle+Utils.swift */; };
-		607A4432279ED771008D533C /* URL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40799A231E7E4E007EFB26 /* URL+Utils.swift */; };
 		6089DFC227A83CFF00536667 /* DispatchQueue+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E92754A26C6C02F007B2C80 /* DispatchQueue+Utils.swift */; };
 		6089DFC327A83D0600536667 /* DispatchQueue+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E92754A26C6C02F007B2C80 /* DispatchQueue+Utils.swift */; };
 		6089DFC427A8432C00536667 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2BA2E326F9D3D600B44D4A /* UIViewController+Alert.swift */; };
 		6089DFC627A846C200536667 /* ProInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6089DFC527A846C200536667 /* ProInfo.plist */; };
 		6089DFC727A846C200536667 /* ProInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6089DFC527A846C200536667 /* ProInfo.plist */; };
-		60BB66A12795BBAE00AAE8CE /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BB66A02795BBAE00AAE8CE /* ShareViewController.swift */; };
-		60BB66A82795BBAE00AAE8CE /* ProYoutubeShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 60BB669E2795BBAE00AAE8CE /* ProYoutubeShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		60BB66AE2795D24100AAE8CE /* userscript.js in Resources */ = {isa = PBXBuildFile; fileRef = 60BB66AD2795D24100AAE8CE /* userscript.js */; };
-		60BB66AF2795D30F00AAE8CE /* URL+CustomSchemeURLParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247521F12594C0D500BE9177 /* URL+CustomSchemeURLParserProtocol.swift */; };
-		60BB66B02795D39A00AAE8CE /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CDAEA42191C9540028001B /* String+Utils.swift */; };
-		60BB66B12795D3DD00AAE8CE /* UIColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9116D212FFCD6006DF0D3 /* UIColorUtils.swift */; };
-		60BB66B22795D40900AAE8CE /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9C0BCC25627E8D00F1999D /* UIColor+Utils.swift */; };
-		60BB66B32795D43E00AAE8CE /* String+NSRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244419832614C1BC009555F3 /* String+NSRange.swift */; };
-		60BB66B52795D75300AAE8CE /* DDLog.h in Sources */ = {isa = PBXBuildFile; fileRef = D031A0A8219EFC99002C17D9 /* DDLog.h */; };
-		60BB66B62795D75300AAE8CE /* DDLoggerNames.h in Sources */ = {isa = PBXBuildFile; fileRef = D031A0AD219EFC99002C17D9 /* DDLoggerNames.h */; };
-		60BB66B72795D75300AAE8CE /* DDLogMacros.h in Sources */ = {isa = PBXBuildFile; fileRef = D031A0AE219EFC99002C17D9 /* DDLogMacros.h */; };
-		60BB66B82795D75300AAE8CE /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0BE219EFC99002C17D9 /* DDLog.m */; };
-		60BB66B92795D75300AAE8CE /* DDLog+LOGV.h in Sources */ = {isa = PBXBuildFile; fileRef = D031A0C3219EFC99002C17D9 /* DDLog+LOGV.h */; };
-		60BB66BA2795D75300AAE8CE /* DDLoggerNames.m in Sources */ = {isa = PBXBuildFile; fileRef = D031A0C4219EFC99002C17D9 /* DDLoggerNames.m */; };
-		60BB66BB2795D78400AAE8CE /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D031A0B4219EFC99002C17D9 /* CocoaLumberjack.swift */; };
-		60BB66BC2795D78400AAE8CE /* CocoaLumberjack.h in Sources */ = {isa = PBXBuildFile; fileRef = D031A0BF219EFC99002C17D9 /* CocoaLumberjack.h */; };
-		60BB66BD2795D7DC00AAE8CE /* NSString+Utils.h in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F11C6B7686000F00D7 /* NSString+Utils.h */; };
-		60BB66BE2795D7DC00AAE8CE /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01F21C6B7686000F00D7 /* NSString+Utils.m */; };
-		60BB66BF2795D7DC00AAE8CE /* NSStringPunycodeAdditions.h in Sources */ = {isa = PBXBuildFile; fileRef = 658E43961E8911A3008DAA59 /* NSStringPunycodeAdditions.h */; };
-		60BB66C02795D7DD00AAE8CE /* NSStringPunycodeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 658E43971E8911A3008DAA59 /* NSStringPunycodeAdditions.m */; };
-		60BB66C22796B9E200AAE8CE /* DispatchQueue+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E92754A26C6C02F007B2C80 /* DispatchQueue+Utils.swift */; };
-		60BB66C32798462200AAE8CE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659E59751BC6D82700FA2384 /* Localizable.strings */; };
-		60BB66C42798499E00AAE8CE /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2BA2E326F9D3D600B44D4A /* UIViewController+Alert.swift */; };
 		60F3AEE027A1E626000C3302 /* OpenYoutubeControllerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2359CA1A1F43E4AF7B28637 /* OpenYoutubeControllerParser.swift */; };
 		6513182E1BDE448D008DCFF9 /* ActionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 65C52B361B906105003AF42F /* ActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		655A02161C6B7686000F00D7 /* ACFFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655A01A51C6B7686000F00D7 /* ACFFileUtils.m */; };
@@ -2344,20 +2296,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		6040EE8427A1586C003EF2AA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6040EE7B27A1586C003EF2AA;
-			remoteInfo = YoutubeShareExtension;
-		};
-		60BB66A62795BBAE00AAE8CE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 60BB669D2795BBAE00AAE8CE;
-			remoteInfo = ProYoutubeShareExtension;
-		};
 		6513182F1BDE448D008DCFF9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 65F398091B7B684700ABCD39 /* Project object */;
@@ -2564,7 +2502,6 @@
 				D0B5453E2435C7B9002F0AEC /* AdguardProBlockingExtensionCustom.appex in Embed App Extensions */,
 				7E6081EA26D55C6A00D778F4 /* ProYouTubeAdsActionExtension.appex in Embed App Extensions */,
 				D0B5453F2435C7B9002F0AEC /* AdguardProBlockingExtensionSecurity.appex in Embed App Extensions */,
-				60BB66A82795BBAE00AAE8CE /* ProYoutubeShareExtension.appex in Embed App Extensions */,
 				D0B545402435C7B9002F0AEC /* AdGuardProTodayExtension.appex in Embed App Extensions */,
 				D0B545412435C7B9002F0AEC /* ProActionExtension.appex in Embed App Extensions */,
 				D0B545422435C7B9002F0AEC /* ProTunnel.appex in Embed App Extensions */,
@@ -2586,7 +2523,6 @@
 				D067D9A92142A20000ECDE6D /* AdguardBlockingExtensionAnnoyances.appex in Embed App Extensions */,
 				D067D9AA2142A20000ECDE6D /* AdguardBlockingExtensionOther.appex in Embed App Extensions */,
 				7E536C71238D2AC400A83A79 /* AdGuardTodayExtension.appex in Embed App Extensions */,
-				6040EE8627A1586C003EF2AA /* YoutubeShareExtension.appex in Embed App Extensions */,
 				D067D9AB2142A20000ECDE6D /* AdguardBlockingExtensionCustom.appex in Embed App Extensions */,
 				6513182E1BDE448D008DCFF9 /* ActionExtension.appex in Embed App Extensions */,
 				65F398681B7B6A5300ABCD39 /* AdguardBlockingExtensionGeneral.appex in Embed App Extensions */,
@@ -2920,13 +2856,8 @@
 		4982C1AB26D78F2A00CACBBE /* constants.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = constants.ts; sourceTree = "<group>"; };
 		4982C1AC26D78F2A00CACBBE /* log.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = log.ts; sourceTree = "<group>"; };
 		4982C1AD26D78F2A00CACBBE /* logNative.ts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = logNative.ts; sourceTree = "<group>"; };
-		6040EE7C27A1586C003EF2AA /* YoutubeShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = YoutubeShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		6089DFC527A846C200536667 /* ProInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ProInfo.plist; sourceTree = "<group>"; };
-		60BB669E2795BBAE00AAE8CE /* ProYoutubeShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ProYoutubeShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		60BB66A02795BBAE00AAE8CE /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
-		60BB66A52795BBAE00AAE8CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		60BB66AD2795D24100AAE8CE /* userscript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = userscript.js; sourceTree = "<group>"; };
-		60F3AEE127A28F87000C3302 /* ProYoutubeShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProYoutubeShareExtension.entitlements; sourceTree = "<group>"; };
 		60F3AEE227A28FAA000C3302 /* YoutubeShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YoutubeShareExtension.entitlements; sourceTree = "<group>"; };
 		65040D251E11652A00DE25D1 /* ExternalLibsSources.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = ExternalLibsSources.js; sourceTree = "<group>"; };
 		65163CBD1BE7BA01000A3575 /* it */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/MainInterface.strings; sourceTree = "<group>"; };
@@ -4012,20 +3943,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		6040EE7927A1586C003EF2AA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		60BB669B2795BBAE00AAE8CE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		6598869C1CF74DE9003ECD1C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -5351,16 +5268,6 @@
 			path = messenger;
 			sourceTree = "<group>";
 		};
-		60BB669F2795BBAE00AAE8CE /* ProYoutubeShareExtension */ = {
-			isa = PBXGroup;
-			children = (
-				60F3AEE127A28F87000C3302 /* ProYoutubeShareExtension.entitlements */,
-				60BB66A02795BBAE00AAE8CE /* ShareViewController.swift */,
-				60BB66A52795BBAE00AAE8CE /* Info.plist */,
-			);
-			path = ProYoutubeShareExtension;
-			sourceTree = "<group>";
-		};
 		60BB66AC2795CD1500AAE8CE /* YoutubePlayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -5697,7 +5604,6 @@
 				7E536C68238D2AC400A83A79 /* AdGuardTodayExtension */,
 				7E6081AD26D55C0000D778F4 /* YouTubeAdsActionExtension */,
 				7E4ABFFB26BD75E700DF5CF0 /* SafariWebExtension */,
-				60BB669F2795BBAE00AAE8CE /* ProYoutubeShareExtension */,
 				65F398121B7B684700ABCD39 /* Products */,
 				65D8294D1EDDA905008F7F30 /* Frameworks */,
 			);
@@ -5733,8 +5639,6 @@
 				7E4AC01B26BD796800DF5CF0 /* ProSafariWebExtension.appex */,
 				B22FCD9C270B7DBF00B1C935 /* Tunnel.appex */,
 				B2C8E9982716FDB300ACDED8 /* AdGuardDependencies.framework */,
-				60BB669E2795BBAE00AAE8CE /* ProYoutubeShareExtension.appex */,
-				6040EE7C27A1586C003EF2AA /* YoutubeShareExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -6942,40 +6846,6 @@
 /* End PBXLegacyTarget section */
 
 /* Begin PBXNativeTarget section */
-		6040EE7B27A1586C003EF2AA /* YoutubeShareExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6040EE8727A1586C003EF2AA /* Build configuration list for PBXNativeTarget "YoutubeShareExtension" */;
-			buildPhases = (
-				6040EE7827A1586C003EF2AA /* Sources */,
-				6040EE7927A1586C003EF2AA /* Frameworks */,
-				6040EE7A27A1586C003EF2AA /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = YoutubeShareExtension;
-			productName = YoutubeShareExtension;
-			productReference = 6040EE7C27A1586C003EF2AA /* YoutubeShareExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
-		60BB669D2795BBAE00AAE8CE /* ProYoutubeShareExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 60BB66A92795BBAE00AAE8CE /* Build configuration list for PBXNativeTarget "ProYoutubeShareExtension" */;
-			buildPhases = (
-				60BB669A2795BBAE00AAE8CE /* Sources */,
-				60BB669B2795BBAE00AAE8CE /* Frameworks */,
-				60BB669C2795BBAE00AAE8CE /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = ProYoutubeShareExtension;
-			productName = ProYoutubeShareExtension;
-			productReference = 60BB669E2795BBAE00AAE8CE /* ProYoutubeShareExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		659886481CF74DE9003ECD1C /* AdguardPro */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 659886B61CF74DE9003ECD1C /* Build configuration list for PBXNativeTarget "AdguardPro" */;
@@ -7006,7 +6876,6 @@
 				D08AB2B226BA5D010065221C /* PBXTargetDependency */,
 				7E6081E926D55C6A00D778F4 /* PBXTargetDependency */,
 				7E4AC03226BD796800DF5CF0 /* PBXTargetDependency */,
-				60BB66A72795BBAE00AAE8CE /* PBXTargetDependency */,
 			);
 			name = AdguardPro;
 			packageProductDependencies = (
@@ -7068,7 +6937,6 @@
 				7E536C70238D2AC400A83A79 /* PBXTargetDependency */,
 				7E6081A826D55BCD00D778F4 /* PBXTargetDependency */,
 				7E4AC01126BD75E700DF5CF0 /* PBXTargetDependency */,
-				6040EE8527A1586C003EF2AA /* PBXTargetDependency */,
 			);
 			name = Adguard;
 			packageProductDependencies = (
@@ -7563,12 +7431,6 @@
 				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = Performiks;
 				TargetAttributes = {
-					6040EE7B27A1586C003EF2AA = {
-						CreatedOnToolsVersion = 13.2.1;
-					};
-					60BB669D2795BBAE00AAE8CE = {
-						CreatedOnToolsVersion = 13.2.1;
-					};
 					65423D951C89B7C900DD1224 = {
 						CreatedOnToolsVersion = 7.2.1;
 					};
@@ -7768,29 +7630,11 @@
 				65F398291B7B684700ABCD39 /* AdguardTests */,
 				D0288F4823069D7200A4EBEF /* TestHostApp */,
 				B2C8E9972716FDB300ACDED8 /* AdGuardDependencies */,
-				60BB669D2795BBAE00AAE8CE /* ProYoutubeShareExtension */,
-				6040EE7B27A1586C003EF2AA /* YoutubeShareExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		6040EE7A27A1586C003EF2AA /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6040EEA127A16C03003EF2AA /* Localizable.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		60BB669C2795BBAE00AAE8CE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				60BB66C32798462200AAE8CE /* Localizable.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		659886A41CF74DE9003ECD1C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -8452,64 +8296,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		6040EE7827A1586C003EF2AA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				606C916427A4556C0088436E /* Bundle+Utils.swift in Sources */,
-				6040EE9E27A15B10003EF2AA /* DispatchQueue+Utils.swift in Sources */,
-				6040EE9D27A15B0B003EF2AA /* String+NSRange.swift in Sources */,
-				6040EE9C27A15B02003EF2AA /* String+Utils.swift in Sources */,
-				6040EE9B27A15AF8003EF2AA /* ShareViewController.swift in Sources */,
-				6040EE9A27A15AF0003EF2AA /* URL+CustomSchemeURLParserProtocol.swift in Sources */,
-				6040EE9827A15AE8003EF2AA /* UIColor+Utils.swift in Sources */,
-				6040EE9927A15AE8003EF2AA /* UIColorUtils.swift in Sources */,
-				6040EE9227A15ADA003EF2AA /* DDLog.h in Sources */,
-				6040EE9327A15ADA003EF2AA /* DDLoggerNames.h in Sources */,
-				6040EE9427A15ADA003EF2AA /* DDLogMacros.h in Sources */,
-				6040EE9527A15ADA003EF2AA /* DDLog.m in Sources */,
-				6040EE9627A15ADA003EF2AA /* DDLog+LOGV.h in Sources */,
-				6040EE9727A15ADA003EF2AA /* DDLoggerNames.m in Sources */,
-				6040EE9127A15AC9003EF2AA /* CocoaLumberjack.h in Sources */,
-				6040EE9027A15AC2003EF2AA /* CocoaLumberjack.swift in Sources */,
-				6040EE8E27A15ABC003EF2AA /* NSStringPunycodeAdditions.h in Sources */,
-				6040EE8F27A15ABC003EF2AA /* NSStringPunycodeAdditions.m in Sources */,
-				6040EE8C27A15AB3003EF2AA /* NSString+Utils.h in Sources */,
-				6040EE8D27A15AB3003EF2AA /* NSString+Utils.m in Sources */,
-				6040EE8B27A15AAA003EF2AA /* UIViewController+Alert.swift in Sources */,
-				6040EE8A27A15AA1003EF2AA /* URL+Utils.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		60BB669A2795BBAE00AAE8CE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				606C916327A4555C0088436E /* Bundle+Utils.swift in Sources */,
-				607A4432279ED771008D533C /* URL+Utils.swift in Sources */,
-				60BB66C42798499E00AAE8CE /* UIViewController+Alert.swift in Sources */,
-				60BB66BD2795D7DC00AAE8CE /* NSString+Utils.h in Sources */,
-				60BB66BE2795D7DC00AAE8CE /* NSString+Utils.m in Sources */,
-				60BB66BF2795D7DC00AAE8CE /* NSStringPunycodeAdditions.h in Sources */,
-				60BB66C02795D7DD00AAE8CE /* NSStringPunycodeAdditions.m in Sources */,
-				60BB66BB2795D78400AAE8CE /* CocoaLumberjack.swift in Sources */,
-				60BB66BC2795D78400AAE8CE /* CocoaLumberjack.h in Sources */,
-				60BB66B52795D75300AAE8CE /* DDLog.h in Sources */,
-				60BB66B62795D75300AAE8CE /* DDLoggerNames.h in Sources */,
-				60BB66B72795D75300AAE8CE /* DDLogMacros.h in Sources */,
-				60BB66B82795D75300AAE8CE /* DDLog.m in Sources */,
-				60BB66B92795D75300AAE8CE /* DDLog+LOGV.h in Sources */,
-				60BB66BA2795D75300AAE8CE /* DDLoggerNames.m in Sources */,
-				60BB66B22795D40900AAE8CE /* UIColor+Utils.swift in Sources */,
-				60BB66AF2795D30F00AAE8CE /* URL+CustomSchemeURLParserProtocol.swift in Sources */,
-				60BB66A12795BBAE00AAE8CE /* ShareViewController.swift in Sources */,
-				60BB66B02795D39A00AAE8CE /* String+Utils.swift in Sources */,
-				60BB66B12795D3DD00AAE8CE /* UIColorUtils.swift in Sources */,
-				60BB66B32795D43E00AAE8CE /* String+NSRange.swift in Sources */,
-				60BB66C22796B9E200AAE8CE /* DispatchQueue+Utils.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		659886511CF74DE9003ECD1C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -10719,16 +10505,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		6040EE8527A1586C003EF2AA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6040EE7B27A1586C003EF2AA /* YoutubeShareExtension */;
-			targetProxy = 6040EE8427A1586C003EF2AA /* PBXContainerItemProxy */;
-		};
-		60BB66A72795BBAE00AAE8CE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 60BB669D2795BBAE00AAE8CE /* ProYoutubeShareExtension */;
-			targetProxy = 60BB66A62795BBAE00AAE8CE /* PBXContainerItemProxy */;
-		};
 		651318301BDE448D008DCFF9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 65C52B351B906105003AF42F /* ActionExtension */;
@@ -11575,176 +11351,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		6040EE8827A1586C003EF2AA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = YoutubeShareExtension.entitlements;
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N33TQXN8C7;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ProYoutubeShareExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = YoutubeShareExtension;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Performiks. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardExtension.YoutubeShareExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardExtension.YoutubeShareExtension";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		6040EE8927A1586C003EF2AA /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = YoutubeShareExtension.entitlements;
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N33TQXN8C7;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ProYoutubeShareExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = YoutubeShareExtension;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Performiks. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardExtension.YoutubeShareExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardExtension.YoutubeShareExtension";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		60BB66AA2795BBAE00AAE8CE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = ProYoutubeShareExtension/ProYoutubeShareExtension.entitlements;
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N33TQXN8C7;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ProYoutubeShareExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = ProYoutubeShareExtension;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Performiks. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardPro.ProYoutubeShareExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development com.adguard.AdguardPro.ProYoutubeShareExtension";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		60BB66AB2795BBAE00AAE8CE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = ProYoutubeShareExtension/ProYoutubeShareExtension.entitlements;
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N33TQXN8C7;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ProYoutubeShareExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = ProYoutubeShareExtension;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Performiks. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.adguard.AdguardPro.ProYoutubeShareExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.adguard.AdguardPro.ProYoutubeShareExtension";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		65423D971C89B7C900DD1224 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -13619,24 +13225,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6040EE8727A1586C003EF2AA /* Build configuration list for PBXNativeTarget "YoutubeShareExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6040EE8827A1586C003EF2AA /* Debug */,
-				6040EE8927A1586C003EF2AA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		60BB66A92795BBAE00AAE8CE /* Build configuration list for PBXNativeTarget "ProYoutubeShareExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				60BB66AA2795BBAE00AAE8CE /* Debug */,
-				60BB66AB2795BBAE00AAE8CE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		65423D961C89B7C900DD1224 /* Build configuration list for PBXLegacyTarget "Clean Script" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

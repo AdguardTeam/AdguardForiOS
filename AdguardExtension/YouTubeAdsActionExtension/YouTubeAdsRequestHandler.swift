@@ -130,7 +130,7 @@ struct YouTubeAdsJsResult {
 
 
 
-/// Handler that can process 2 cases:
+/// Handler that can processes 2 cases:
 /// - The YouTube link has been shared from the browser
 /// In this case we should run userscript on the given page
 /// - The YouTube link has been shared from another place (e.g. YouTube app)

@@ -15,5 +15,4 @@ APP_IDENTIFIERS_TO_MATCH="
     com.adguard.AdguardPro.extensionOther,                  com.adguard.AdguardPro.extensionCustom,
     com.adguard.AdguardPro.extensionSecurity,               com.adguard.AdguardPro.todayExtension,
     com.adguard.AdguardPro.ActionExtension,                 com.adguard.AdguardPro.tunnel,
-    com.adguard.AdguardPro.ProYouTubeAdsActionExtension,    com.adguard.AdguardPro.ProSafariWebExtension,
-    com.adguard.AdguardPro.ProYoutubeShareExtension"
+    com.adguard.AdguardPro.ProYouTubeAdsActionExtension,    com.adguard.AdguardPro.ProSafariWebExtension"
