@@ -106,8 +106,7 @@ extension SafariProtection {
         case .loadAndSaveFilters, .updateFinished:
             updateFilters(onStateExecutionFinished)
         case .convertFilters:
-            let result = convertFilters()
-            completionQueue.async { onStateExecutionFinished(result) }
+            convertFilters(onStateExecutionFinished)
         case .reloadContentBlockers:
             reloadContentBlockers(onStateExecutionFinished)
         }
@@ -133,8 +132,15 @@ extension SafariProtection {
                 group.wait()
                 fallthrough
             case .convertFilters:
-                let result = self.convertFilters()
-                if let error = result.error {
+                var result: BackgroundFetchUpdateResult?
+                let group = DispatchGroup()
+                group.enter()
+                self.convertFilters { res in
+                    result = res
+                    group.leave()
+                }
+                group.wait()
+                if let error = result?.error {
                     self.completionQueue.async {
                         onUpdateFinished(error)
                         onTaskFinished()
@@ -229,34 +235,31 @@ extension SafariProtection {
         }
     }
 
-    // 2nd step of background update
-    private func convertFilters() -> BackgroundFetchUpdateResult {
+    // 2nd step of the background update
+    private func convertFilters(_ onFiltersConverted: @escaping (_ result: BackgroundFetchUpdateResult) -> Void) {
         Logger.logInfo("(SafariProtection+BackgroundFetch) - convertFiltersInBackground start")
 
-        return cbQueue.sync {
-            let oldState = currentBackgroundFetchState
+        cbQueue.async {
+            let oldState = self.currentBackgroundFetchState
             do {
-                let convertedfilters = converter.convertFiltersAndUserRulesToJsons()
-                try cbStorage.save(converterResults: convertedfilters)
-                currentBackgroundFetchState = .reloadContentBlockers
-                let result = BackgroundFetchUpdateResult(
-                    backgroundFetchResult: .newData,
-                    newBackgroundFetchState: .reloadContentBlockers,
-                    oldBackgroundFetchState: oldState,
-                    error: nil
-                )
+                let convertedFilters = self.converter.convertFiltersAndUserRulesToJsons()
+                try self.cbStorage.save(converterResults: convertedFilters)
+                self.currentBackgroundFetchState = .reloadContentBlockers
                 Logger.logInfo("(SafariProtection+BackgroundFetch) - convertFilters; Successfully converted all filters to JSONs")
-                return result
-            }
-            catch {
                 let result = BackgroundFetchUpdateResult(
-                    backgroundFetchResult: .noData,
-                    newBackgroundFetchState: oldState,
-                    oldBackgroundFetchState: oldState,
-                    error: error
-                )
+                        backgroundFetchResult: .newData,
+                        newBackgroundFetchState: .reloadContentBlockers,
+                        oldBackgroundFetchState: oldState,
+                        error: nil)
+                self.completionQueue.async { onFiltersConverted(result) }
+            } catch {
                 Logger.logError("(SafariProtection+BackgroundFetch) - convertFilters; Error converting filters: \(error)")
-                return result
+                let result = BackgroundFetchUpdateResult(
+                        backgroundFetchResult: .noData,
+                        newBackgroundFetchState: oldState,
+                        oldBackgroundFetchState: oldState,
+                        error: error)
+                self.completionQueue.async { onFiltersConverted(result) }
             }
         }
     }
