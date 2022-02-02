@@ -857,7 +857,7 @@
 "average_info_alert_title" = "Durchschnittliche Dauer";
 
 /* (ActivityViewController) - Average time message */
-"average_info_alert_message" = "Durchschnittliche Dauer der Verarbeitung einer DNS-Anfrage. Je schneller der verwendete DNS-Server antwortet, um so weniger Zeit wird benötigt.";
+"average_info_alert_message" = "So lange wird eine DNS-Anfrage verarbeitet. Je schneller der verwendete DNS-Server antwortet, desto weniger Zeit wird benötigt.";
 
 /* (ActivityViewController) - Companies alert title */
 "companies_info_alert_title" = "Zahl der Unternehmen";
@@ -896,7 +896,7 @@
 "rate_app_description" = "Wie würden Sie Ihre Erfahrung mit AdGuard beschreiben?";
 
 /* (RateAppProblemController) Rate app problem description text (\n) stands for new line */
-"rate_app_problem_description" = "Stellen Sie sicher, dass Sie den Browser <b>Safari</b> verwenden.<br> Derzeit ist es technisch nicht möglich, Inhalte in anderen Browsern zu sperren.<br> Öffnen Sie die „Einstellungen” > „Safari” > „Allgemein” > „Inhaltsblocker” und aktivieren Sie dort alle benötigten Filterlisten.<br> Starten Sie Safari neu: Beenden und erneut öffnen.";
+"rate_app_problem_description" = "Stellen Sie sicher, dass Sie den Browser <b>Safari</b> verwenden.<br> Derzeit ist es technisch nicht möglich, Inhalte in anderen Browsern zu sperren.<br> Öffnen Sie die „Einstellungen” ➜ „Safari” ➜ „Allgemein” ➜ „Inhaltsblocker” und aktivieren Sie dort alle benötigten Filterlisten.<br> Starten Sie die App „Safari” neu: Beenden und erneut öffnen.";
 
 /* (FilterDetailsViewController) Version subtitle for detailed filter info */
 "detailed_filter_info_version_subtitle" = "Version";
@@ -1165,3 +1165,12 @@
 
 /* (DnsProviderDetailsController) Website title */
 "website_title" = "Website";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert title */
+"youtube_share_extension_item_provider_error_title" = "Interner Fehler";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert title */
+"youtube_share_extension_item_provider_unknown_error_title" = "Unbekannter Fehler";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_unknown_error_summary" = "Etwas ist schief gelaufen";

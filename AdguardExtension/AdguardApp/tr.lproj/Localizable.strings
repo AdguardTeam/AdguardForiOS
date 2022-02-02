@@ -26,7 +26,7 @@
 "unknown_error_description" = "Lütfen bu hatayı desteğe bildirin.";
 
 /* (AEService) Service errors descriptions */
-"safari_filters_loading_error" = "Filtreler Safari'ye yüklenemedi. Bu nedenle, son değişiklikler uygulanamadı.";
+"safari_filters_loading_error" = "Filtreler Safari'ye yüklenemedi, bu nedenle son değişiklikleriniz uygulanmadı.";
 
 /* (AppDegelate) Alert message. When converting rules process finished in foreground updating. */
 "load_to_safari_error" = "Filtreler Safari'ye yüklenemedi. Kurallarınızı ve İzin Listenizi temizlemeyi deneyin veya kullanılan filtreler grubunu değiştirin.";
@@ -125,7 +125,7 @@
 "sign_in_via_facebook_title" = "Facebook ile devam edin";
 
 /* (AEUIGetProViewController) message that appears if the account has expired */
-"premium_expired_message" = "Premium hesabınızın süresi doldu";
+"premium_expired_message" = "Premium hesabınızın süresi sona erdi";
 
 /* (AEUIGetProViewController) title of the message that appears if the account has expired */
 "premium_expired_title" = "Dikkat";
@@ -137,7 +137,7 @@
 "login_success_message" = "AdGuard hesabınıza başarıyla giriş yaptınız! iOS için AdGuard Premium sürümü etkinleştirildi.";
 
 /* (AEUIGetProViewController) message that appears when the user successfully logs in but all premium keys have expired */
-"login_premium_expired_message" = "AdGuard hesabınıza başarıyla giriş yaptınız, ancak premium sürümü etkinleştirmenize izin veren lisans anahtarlarının süresi doldu.";
+"login_premium_expired_message" = "AdGuard hesabınıza başarıyla giriş yaptınız, ancak Premium sürümü etkinleştirmenize izin veren lisans anahtarlarının süresi sona erdi.";
 
 /* (AEUIGetProViewController) message that appears when an error occurred during purchase restoring */
 "restore_purchases_failure_message" = "Satın alma işlemini geri yüklemeye çalışırken bir hata oluştu.";
@@ -806,7 +806,7 @@
 "size_title" = "Boyut";
 
 /* (DnsRequestDetailsController) "Elapsed" title for cell */
-"elapsed_title" = "Geçen zaman";
+"elapsed_title" = "Geçen süre";
 
 /* (DnsRequestDetailsController) "Type" title for cell */
 "type_title" = "Tür";
@@ -827,7 +827,7 @@
 "matched_rule_title" = "Eşleşen kural";
 
 /* (DnsRequestDetailsController) "Original answer" title for cell */
-"original_answer_title" = "Orijinal cevap";
+"original_answer_title" = "Gerçek yanıt";
 
 /* (DnsRequestDetailsController) - empty dns answer title */
 "empty_dns_answer" = "Boş";
@@ -1000,10 +1000,10 @@
 "requests_number_voiceover" = "İstek sayısı";
 
 /* (MainPageController) blocked requests number title for VoiceOver*/
-"encrypted_number_voiceover" = "Şifrelenmiş DNS isteği sayısı";
+"encrypted_number_voiceover" = "Şifrelenmiş DNS isteklerinin sayısı";
 
 /* (MainPageController) saved data size for VoiceOver*/
-"elapsed_time_voiceover" = "Bir DNS isteğininin işlenmesi için ortalama süre";
+"elapsed_time_voiceover" = "DNS isteğini işlemek için ortalama süre";
 
 /* (AGSearchView) Placeholder text for search bar */
 "search_view_placeholder" = "Ara";
@@ -1165,3 +1165,45 @@
 
 /* (DnsProviderDetailsController) Website title */
 "website_title" = "Site";
+
+/* (YoutubePlayerController) 'bad url' alert title */
+"youtube_player_controller_bad_url_title" = "Geçersiz URL";
+
+/* (YoutubePlayerController) 'bad url' alert message */
+"youtube_player_controller_bad_url_message" = "Lütfen YouTube'a bir bağlantı sağlayın";
+
+/* (YoutubePlayerController) 'content blocking list error' alert title */
+"youtube_player_controller_content_blocking_list_error_title" = "Filtreleme hatası";
+
+/* (YoutubePlayerController) 'content blocking list error' alert message */
+"youtube_player_controller_content_blocking_list_error_message" = "Engel listesi derlenemedi";
+
+/* (YoutubePlayerController) 'userscript error' alert title */
+"youtube_player_controller_userscript_error_title" = "Kullanıcı betiği hatası";
+
+/* (YoutubePlayerController) 'userscript error' alert message */
+"youtube_player_controller_userscript_error_message" = "Kullanıcı betiği oluşturulamadı";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert title */
+"youtube_share_extension_no_url_title" = "URL sağlanmadı";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert message */
+"youtube_share_extension_no_url_summary" = "YouTube videolarını reklamsız izlemek için AdGuard ile paylaşın";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert title */
+"youtube_share_extension_bad_url_title" = "Geçersiz URL";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert message */
+"youtube_share_extension_bad_url_summary" = "YouTube videolarını reklamsız izlemek için AdGuard ile paylaşın";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert title */
+"youtube_share_extension_item_provider_error_title" = "Dahili hata";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_error_summary" = "AdGuard bağlantısı paylaşılamadı";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert title */
+"youtube_share_extension_item_provider_unknown_error_title" = "Bilinmeyen hata";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_unknown_error_summary" = "Bir şeyler ters gitti";

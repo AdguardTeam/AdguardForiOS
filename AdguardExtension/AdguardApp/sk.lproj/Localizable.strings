@@ -262,6 +262,12 @@
 /* login error message */
 "login_error_message" = "Počas prihlasovania sa vyskytla chyba";
 
+/* purchase secription format */
+"purchase_description_format" = "Podmienky predplatného AdGuard:<br><br>• Platba bude účtovaná na Váš účet iTunes pri potvrdení nákupu.<br><br>• Predplatné sa automaticky obnoví, pokiaľ nevypnete automatické obnovenie najmenej 24 hodín pred koncom aktuálneho obdobia.<br><br>• Poplatok za obnovenie predplatného bude účtovaný do 24 hodín pred koncom aktuálneho obdobia.<br><br>Vaše predplatné je možné spravovať a Vaše automatické obnovenie môže byť vypnuté v nastaveniach účtu iTunes po zakúpení predplatného.<br><br>AdGuard<a href=%2$@>Zmluva EULA</a> a <a href=%1$@>Zásady ochrany osobných údajov</a>";
+
+/* lifetime purchase secription format */
+"lifetime_purchase_description_format" = "<a href=%2$@>Zmluva EULA</a> a <a href=%1$@>Zásady ochrany osobných údajov</a> aplikácie AdGuard";
+
 /* DnsSettingsController - alert button. This message is shown when the user first starts the VPN. */
 "common_action_ok" = "Ok";
 
@@ -634,6 +640,15 @@
 /*(TodayViewController) Protection is enabled title  */
 "protection_enabled" = "Ochrana je zapnutá";
 
+/*(TodayViewController) Complex protection is enabled text  */
+"complex_enabled" = "Safari a DNS ochrana je zapnutá";
+
+/*(TodayViewController) Safari protection is enabled text  */
+"safari_enabled" = "Safari ochrana je zapnutá";
+
+/*(TodayViewController) All protection is disabled text  */
+"complex_disabled" = "Safari a DNS ochrana je vypnutá";
+
 /*(TodayViewController) DNS protection is enabled text  */
 "system_enabled" = "DNS ochrana";
 
@@ -676,14 +691,35 @@
 /*(DnsLogController) user status of dns request */
 "dns_request_user_status_added_to_whitelist" = "pridané do zoznamu povolení";
 
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_added_to_blacklist" = "pridané do zoznamu blokovaní";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_whitelist" = "odstránené zo zoznamu povolení";
+
+/*(DnsLogController) user status of dns request */
+"dns_request_user_status_removed_from_blacklist" = "odstránené zo zoznamu blokovaní";
+
 /* (OnboardingController) first step text*/
 "onboarding_first_step_text" = "Otvorte <b>Nastavenia</b>.";
 
 /* (OnboardingController) first step with advanced protection text*/
 "advanced_protection_onboarding_first_step_text" = "Otvorte <b>Nastavenia</b>.";
 
+/* (OnboardingController) second step text */
+"onboarding_second_step_text" = "Ťuknite na <b>Safari</b> a vyberte položku ponuky <b>\"Blokovače obsahu\"</b>";
+
 /* (OnboardingController) second step with advanced protection text */
 "advanced_protection_onboarding_second_step_text" = "Prejdite na <b>Safari > Rozšírenia</b>.";
+
+/* (OnboardingController) third step text */
+"onboarding_third_step_text" = "<b>Zapnúť</b> všetky AdGuard rozšírenia.";
+
+/* (OnboardingController) third step with advanced protection text */
+"advanced_protection_onboarding_third_step_text" = "Nastavte všetky prepínače AdGuard na <b>zapnuté</b>. Ste pripravení vyraziť!";
+
+/* (OnboardingContentView) fours step. '%@' will be replaced with the share icon */
+"onboarding_fours_step_text" = "Pre <b>rozšírenú</b> ochranu otvorte Safari, ťuknite na ikonu <b>aA</b> a ľavej strane poľa URL adresy,<br><br> %@ <br><br>potom ťuknite na <b>položku Spravovať rozšírenia</b> a zapnite prepínač <b>AdGuard</b>.";
 
 /* (BlockRequestController) Block request title */
 "block_request" = "Zablokovať dopyt";
@@ -705,6 +741,9 @@
 
 /* (NewDnsServerController) error message when trying to add unsupported protocol for DNS native implementation */
 "invalid_dns_protocol_message" = "%@ zatiaľ nie je podporovaný systémom iOS. Skúste pridať rôzne upstream.";
+
+/*(DnsFiltersController) the error message that is shown when trying to add a duplicate custom dns server */
+"custom_dns_server_exists" = "Pokúsili ste sa pridať duplicitný DNS server. Server so zadaným odchádzajúcim pripojením je už v zozname";
 
 /* (NewDnsServerController) save and select button title */
 "save_and_select_button_title" = "Uložiť a zvoliť";
@@ -799,6 +838,9 @@
 /* (BugReportController) Message when bug report successed */
 "bug_report_successed_message" = "Vaše hlásenie chyby bolo úspešne odoslané!";
 
+/* (IntroductionOnboardingController) - License agreement text */
+"introduction_license_agreement" = "Súhlasím s AdGuard dokumentami <a href=%2$@>Zmluva EULA</a> and <a href=%1$@>Zásady ochrany osobných údajov</a>.";
+
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Dopyty";
 
@@ -840,6 +882,12 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d dopytov";
+
+/* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
+"native_dns_setup_title" = "Zapnite %@ vo Vašich DNS nastaveniach";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "Ak chcete povoliť natívne DNS, musíte otvoriť <b>Nastavenia systému</b>, prejsť na <b>Všeobecné > VPN a sieť > DNS</b> a tam zvoliť <b>%@</b>.";
 
 /* (HowToSetupController) - Native DNS setup description '%@' stands for application name; String for iOS 15 and newer */
 "native_dns_setup_description_ios15" = "Ak chcete povoliť natívny systém DNS, vyberte <b>%@</b> v <b>Nastavenia systému > Všeobecné > Správa VPN a zariadení > DNS</b>.";
@@ -1057,8 +1105,25 @@
 /* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
 "block_youtube_ads_instructions" = "Vedeli ste, že služba YouTube zmenila svoje algoritmy, aby Vám zobrazovala viac reklám?<br><br>Teraz, aby ste ich mohli zablokovať, musíte:<br><br>1. Otvorte stránku <a href=\"%@\">youtube.com</a> v prehliadači Safari.<br><br>2. Kliknite na tlačidlo %@ Zdieľať.<br><br>3. Kliknite na možnosť „Blokovať reklamy na YouTube (pomocou AdGuard)“.";
 
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "Hotovo! Teraz môžete sledovať YouTube bez reklám.\n\nKeď je rozšírenie povolené, vedľa loga YouTube sa zobrazí nápis „s AdGuard“.<br><br><b>Ak stránku znova načítate, budete musieť zopakovať kroky 3 a 4.</b>";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "Hotovo! Teraz môžete sledovať YouTube bez reklám.\n\nKeď je rozšírenie povolené, vedľa loga YouTube sa zobrazí nápis „s AdGuard“.<br><br><b>Ak stránku znova načítate, budete musieť zopakovať kroky 2 a 3.</b>";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "YouTube je teraz bez reklám! Toto rozšírenie budete musieť znova spustiť pri každom opätovnom načítaní stránky.";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "Toto rozšírenie pracuje len na YouTube.";
+
 /* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
 "youtube_script_already_executed_title" = "Rozšírenie už bolo spustené";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "Pri odstraňovaní reklám YouTube sa vyskytla neznáma chyba";
 
 // MARK: - ActionExtensionMainController
 /* (ActionExtensionMainController) - ActionExtension info for iOS 15>= */
@@ -1100,3 +1165,45 @@
 
 /* (DnsProviderDetailsController) Website title */
 "website_title" = "Webová stránka";
+
+/* (YoutubePlayerController) 'bad url' alert title */
+"youtube_player_controller_bad_url_title" = "Neplatná URL adresa";
+
+/* (YoutubePlayerController) 'bad url' alert message */
+"youtube_player_controller_bad_url_message" = "Uveďte, prosím, odkaz na YouTube";
+
+/* (YoutubePlayerController) 'content blocking list error' alert title */
+"youtube_player_controller_content_blocking_list_error_title" = "Chyba filtrácie";
+
+/* (YoutubePlayerController) 'content blocking list error' alert message */
+"youtube_player_controller_content_blocking_list_error_message" = "Kompilácia zoznamu blokovaní zlyhala";
+
+/* (YoutubePlayerController) 'userscript error' alert title */
+"youtube_player_controller_userscript_error_title" = "Chyba používateľského skriptu";
+
+/* (YoutubePlayerController) 'userscript error' alert message */
+"youtube_player_controller_userscript_error_message" = "Tvorba používateľského skriptu zlahala";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert title */
+"youtube_share_extension_no_url_title" = "Nebola poskytnutá URL adresa";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert message */
+"youtube_share_extension_no_url_summary" = "Zdieľajte YouTube videá s AdGuard pre ich prezeranie bez reklám";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert title */
+"youtube_share_extension_bad_url_title" = "Neplatná URL adresa";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert message */
+"youtube_share_extension_bad_url_summary" = "Zdieľajte YouTube videá s AdGuard pre ich prezeranie bez reklám";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert title */
+"youtube_share_extension_item_provider_error_title" = "Interná chyba";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_error_summary" = "Zdieľanie odkazu s AdGuardom zlyhalo";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert title */
+"youtube_share_extension_item_provider_unknown_error_title" = "Neznáma chyba";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_unknown_error_summary" = "Niečo sa pokazilo";

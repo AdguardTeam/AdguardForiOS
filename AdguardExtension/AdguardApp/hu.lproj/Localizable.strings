@@ -256,6 +256,9 @@
 /* login error message */
 "login_error_message" = "Hiba történt a kijelentkezés során";
 
+/* purchase secription format */
+"purchase_description_format" = "Az AdGuard előfizetés feltételei:<br><br>• Az előfizetés az Ön iTunes fiókjához lesz társítva a vásárlás visszaigazolásakor.<br><br>• Az előfizetés automatikusan megújul, kivéve, ha az automatikus megújítást legalább 24 órával az aktuális időszak vége előtt kikapcsolja.<br><br>• Az előfizetés megújításának díját az aktuális időszak vége előtt 24 órán belül felszámoljuk.<br><br>Előfizetéseit az iTunes fiókbeállításokban kezelheti, valamint az automatikus megújítását az előfizetés megvásárlását követően szintén itt tudja kikapcsolni.<br><br>AdGuard <a href=%2$@>Felhasználási feltételek</a> és <a href=%1$@>Adatvédelmi irányelvek</a>";
+
 /* lifetime purchase secription format */
 "lifetime_purchase_description_format" = "AdGuard <a href=%2$@>Felhasználási feltételek</a> és <a href=%1$@>Adatvédelmi irányelvek</a>";
 
@@ -365,10 +368,10 @@
 "filter_rules_maximum" = "Elérte a szűrőszabályok maximális számát.";
 
 /* (FiltersController) Enabled state in groups section */
-"on_state" = "Bekapcsolva";
+"on_state" = "Engedélyezve";
 
 /* (FiltersController) Disabled state in groups section */
-"off_state" = "Kikapcsolva";
+"off_state" = "Letiltva";
 
 /* (NewCustomFilterDetailedController) homepage string */
 "homepage_title" = "Honlap: ";
@@ -626,10 +629,19 @@
 "common_add" = "Hozzáadás";
 
 /*(TodayViewController) Protection is disabled title  */
-"protection_disabled" = "Védelem kapcsolva";
+"protection_disabled" = "Védelem kikapcsolva";
 
 /*(TodayViewController) Protection is enabled title  */
 "protection_enabled" = "Védelem bekapcsolva";
+
+/*(TodayViewController) Complex protection is enabled text  */
+"complex_enabled" = "Safari és DNS védelem bekapcsolva";
+
+/*(TodayViewController) Safari protection is enabled text  */
+"safari_enabled" = "Safari védelem bekapcsolva";
+
+/*(TodayViewController) All protection is disabled text  */
+"complex_disabled" = "Safari és DNS védelem kikapcsolva";
 
 /*(TodayViewController) DNS protection is enabled text  */
 "system_enabled" = "DNS védelem";
@@ -688,8 +700,14 @@
 /* (OnboardingController) first step with advanced protection text*/
 "advanced_protection_onboarding_first_step_text" = "<b>Beállítások</b> megnyitása.";
 
+/* (OnboardingController) second step text */
+"onboarding_second_step_text" = "Érintse meg a <b>Safari</b> lehetőséget, majd alul válassza ki, hogy <b>Tartalomblokkolók</b>.";
+
 /* (OnboardingController) second step with advanced protection text */
 "advanced_protection_onboarding_second_step_text" = "Menjen <b>Safari > Bővítések</b>.";
+
+/* (OnboardingController) third step text */
+"onboarding_third_step_text" = "<b>Engedélyezze</b> az összes AdGuard kiegészítőt.";
 
 /* (OnboardingController) third step with advanced protection text */
 "advanced_protection_onboarding_third_step_text" = "Állítsa az összes AdGuard kapcsolót <b>be</b> állásba. Már mehet is!";
@@ -814,6 +832,9 @@
 /* (BugReportController) Message when bug report successed */
 "bug_report_successed_message" = "A hibajelentés sikeresen el lett küldve!";
 
+/* (IntroductionOnboardingController) - License agreement text */
+"introduction_license_agreement" = "Elfogadom a <a href=%2$@>Felhasználási feltételeket</a> és az <a href=%1$@>Adatvédelmi irányelveket</a>.";
+
 /* (ActivityViewController) - Requests alert title */
 "requests_info_alert_title" = "Kérések";
 
@@ -855,6 +876,12 @@
 
 /* (MostActiveCompaniesController) - Requests number label */
 "requests_number" = "%d kérés";
+
+/* (HowToSetupController) - Native DNS setup title '%@' stands for application name */
+"native_dns_setup_title" = "Engedélyezze a(z) %@ lehetőséget a DNS beállításokban";
+
+/* (HowToSetupController) - Native DNS setup description '%@' stands for application name */
+"native_dns_setup_description" = "A natív DNS használatához válassza ki a(z) <b>%@</b> lehetőséget a <b>Rendszerbeállítások > Általános > VPN & Hálózat > DNS</b> menüpontban.";
 
 /* (HowToSetupController) - Native DNS setup description '%@' stands for application name; String for iOS 15 and newer */
 "native_dns_setup_description_ios15" = "A natív DNS használatához válassza az <b>%@</b> lehetőséget a <b>Rendszerbeállítások > Általános > VPN és eszközkezelés > DNS</b> menüpontban.";
@@ -1066,6 +1093,32 @@
 /* (SetappManager) - alert message on error during login via setapp  */
 "setapp_device_limit_reached" = "A maximális számú eszközt csatlakoztatta a Setapp fiókjához.";
 
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_safari" = "Tudta, hogy a YouTube megváltoztatta algoritmusait, hogy több hirdetést jelenítsen meg?<br><br>A blokkolásukhoz a lövetkezőket szükséges tennie:<br><br>1. Nyissa meg a <a href=\"%@\">Safarit</a>.<br><br>2.Nyissa meg a youtube.com-ot.<br><br>3. Érintse meg a Megosztás gombot (%@).<br><br>4. Érintse meg a \"YouTube hirdetések blokkolása (az AdGuard által)\" lehetőséget.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction text  */
+"block_youtube_ads_instructions" = "Tudta, hogy a YouTube megváltoztatta algoritmusait, hogy több hirdetést jelenítsen meg?<br><br>A blokkolásukhoz a lövetkezőket szükséges tennie:<br><br>1. Nyissa meg a <a href=\"%@\">youtube.com</a> webhelyet a Safariban.<br><br>2. Érintse meg a Megosztás gombot (%@).<br><br>3. Érintse meg a \"YouTube hirdetések blokkolása (az AdGuard által)\" lehetőséget.";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text that is shown if youtube app is installed */
+"block_youtube_ads_instructions_done_text_safari" = "Kész! Már hirdetések nélkül nézheti a YouTube-ot.\n\nHa a kiegészítő engedélyezve van, a YouTube logója mellett megjelenik a \"with AdGuard\" felirat.<br><br><b>Ha újratölti az oldalt, újra el kell végeznie a 3. és 4. lépést.</b>";
+
+/* (AdvancedYouTubeBlockingController) YouTube blocking instruction done text  */
+"block_youtube_ads_instructions_done_text" = "Kész! Már hirdetések nélkül nézheti a YouTube-ot.\n\nHa a kiegészítő engedélyezve van, a YouTube logója mellett megjelenik a \"with AdGuard\" felirat.<br><br><b>Ha újratölti az oldalt, újra el kell végeznie a 2. és 3. lépést.</b>";
+
+// MARK: - YouTubeAdsRequestHandler
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was successfully executed */
+
+"youtube_script_success_title" = "A YouTube mostantól hirdetésmentes! Felhívjuk figyelmét, hogy újra kell futtatnia ezt a bővítményt, ha újratölti az oldalt";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was launched on wrong domain */
+"youtube_script_wrong_domain_title" = "Ez a bővítmény csak a YouTube-al működik.";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was already executed */
+"youtube_script_already_executed_title" = "A bővítmény már lefutott";
+
+/* (YouTubeAdsRequestHandler) - Title for notification when YouTube ads script was executed with error */
+"youtube_script_error_title" = "Ismeretlen hiba történt a YouTube hirdetések eltávolításakor";
+
 // MARK: - ActionExtensionMainController
 /* (ActionExtensionMainController) - ActionExtension info for iOS 15>= */
 
@@ -1106,3 +1159,12 @@
 
 /* (DnsProviderDetailsController) Website title */
 "website_title" = "Weboldal";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert title */
+"youtube_share_extension_item_provider_error_title" = "Belső hiba";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert title */
+"youtube_share_extension_item_provider_unknown_error_title" = "Ismeretlen hiba";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_unknown_error_summary" = "Valami hiba történt";

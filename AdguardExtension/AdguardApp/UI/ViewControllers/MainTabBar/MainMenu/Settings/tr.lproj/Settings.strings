@@ -170,7 +170,7 @@
 "wPe-ae-X0G.text" = "Bir geliştirici misiniz?";
 
 /* Class = "UILabel"; text = "This option will clear all statistical data, such as number of requests, etc."; ObjectID = "wYq-g0-5k6"; */
-"wYq-g0-5k6.text" = "Bu seçenek, istek sayısı vb. gibi tüm istatistiksel verileri temizler.";
+"wYq-g0-5k6.text" = "Bu seçenek, istek sayısı, vb. gibi tüm istatistiksel verileri temizleyecektir.";
 
 /* Class = "UILabel"; text = "Unblock ads everywhere except for the websites from this list"; ObjectID = "yBG-d2-ebt"; */
 "yBG-d2-ebt.text" = "Bu listedeki web siteleri dışında her yerde reklamların engelini kaldırın";

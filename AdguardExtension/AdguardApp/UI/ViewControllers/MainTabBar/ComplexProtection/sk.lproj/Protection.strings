@@ -22,6 +22,9 @@
 /* Class = "UILabel"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "premium";
 
+/* Class = "UILabel"; text = "This Safari extension removes ads and ad leftovers, and revives the Autoplay feature on YouTube"; ObjectID = "Sry-3f-FQj"; */
+"Sry-3f-FQj.text" = "Toto rozšírenie Safari odstraňuje reklamy aj zvyšky reklám a vracia automatické prehrávanie na YouTube";
+
 /* Class = "UILabel"; text = "Uses enhanced functionality for ultimate ad blocking and content filtering"; ObjectID = "WOG-Hk-11z"; */
 "WOG-Hk-11z.text" = "Blokuje tvrdohlavé reklamy vrátane reklám YouTube v prehliadači Safari";
 
@@ -51,6 +54,12 @@
 
 /* Class = "UILabel"; text = "Uses sophisticated multi-level filtering rules"; ObjectID = "rr4-ic-Pg8"; */
 "rr4-ic-Pg8.text" = "Používa viacúrovňové sofistikované filtračné pravidlá";
+
+/* Class = "UILabel"; text = "Works alongside the AdGuard ad blocker"; ObjectID = "tKQ-Yn-fgL"; */
+"tKQ-Yn-fgL.text" = "Pracuje spolu s AdGuard blokovačom reklamy";
+
+/* Class = "UILabel"; text = "Allows you to use custom DNS servers and enhances your privacy by encrypting your DNS queries"; ObjectID = "teo-vm-NRJ"; */
+"teo-vm-NRJ.text" = "Umožňuje Vám používať vlastné DNS servery a zvyšuje Vaše súkromie šifrovaním vašich DNS dopytov";
 
 /* Class = "UILabel"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
 "vNo-hV-l4c.text" = "Nie je nainštalované";

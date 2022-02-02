@@ -361,6 +361,9 @@
 /* (Action Extension - ActionViewController) Can't obtain hostname when starting. */
 "hostname_obtaining_error" = "L'hostname non è ottenuto. Forse la pagina non è stata ancora caricata.";
 
+/* (Action Extension - AEAUIMainController) error occurs when click on Block Element button. */
+"assistant_launching_unable" = "La politica di sicurezza di questo sito web non consente l'avvio del AdGuard Assistant.";
+
 /* (Action Extension - ActionViewController) Some errors when starting. */
 "support_error_safari_extension" = "Si è verificato un errore imprevisto durante l'inizializzazione dell'estensione dell'azione Safari. Contatta il supporto AdGuard se questo se succede di nuovo.";
 
@@ -515,7 +518,7 @@
 "essential" = "Essenziale";
 
 /*(LogCategory) site_analytics category*/
-"site_analytics" = "Analitici del sito";
+"site_analytics" = "Statistiche sito";
 
 /*(LogCategory) social media category*/
 "social_media" = "Social media";
@@ -527,7 +530,7 @@
 "cdn" = "CDN";
 
 /*(LogCategory) mobile analytics category*/
-"mobile_analytics" = "Analitici mobili";
+"mobile_analytics" = "Statistiche mobili";
 
 /*(LogCategory) hosting category*/
 "hosting" = "Hosting";
@@ -1162,3 +1165,45 @@
 
 /* (DnsProviderDetailsController) Website title */
 "website_title" = "Sito web";
+
+/* (YoutubePlayerController) 'bad url' alert title */
+"youtube_player_controller_bad_url_title" = "URL non valido";
+
+/* (YoutubePlayerController) 'bad url' alert message */
+"youtube_player_controller_bad_url_message" = "Ti suggeriamo di immettere un indirizzo YouTube";
+
+/* (YoutubePlayerController) 'content blocking list error' alert title */
+"youtube_player_controller_content_blocking_list_error_title" = "Errore di filtraggio";
+
+/* (YoutubePlayerController) 'content blocking list error' alert message */
+"youtube_player_controller_content_blocking_list_error_message" = "Errore nella compilazione della lista nera";
+
+/* (YoutubePlayerController) 'userscript error' alert title */
+"youtube_player_controller_userscript_error_title" = "Errore script utente";
+
+/* (YoutubePlayerController) 'userscript error' alert message */
+"youtube_player_controller_userscript_error_message" = "Errore nella creazione dello script utente";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert title */
+"youtube_share_extension_no_url_title" = "Non è stato fornito alcun URL";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert message */
+"youtube_share_extension_no_url_summary" = "Condividi video di YouTube verso AdGuard per eseguirne la riproduzione senza pubblicità";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert title */
+"youtube_share_extension_bad_url_title" = "URL non valido";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert message */
+"youtube_share_extension_bad_url_summary" = "Condividi video di YouTube verso AdGuard per eseguirne la riproduzione senza pubblicità";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert title */
+"youtube_share_extension_item_provider_error_title" = "Errore interno";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_error_summary" = "Errore nella condivisione dell'indirizzo verso AdGuard";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert title */
+"youtube_share_extension_item_provider_unknown_error_title" = "Errore sconosciuto";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_unknown_error_summary" = "Qualcosa è andato storto";

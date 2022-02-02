@@ -763,3 +763,9 @@
 
 /* (DnsProviderDetailsController) Website title */
 "website_title" = "Nettsted";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert title */
+"youtube_share_extension_item_provider_unknown_error_title" = "Ukjent feil";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_unknown_error_summary" = "Noe gikk galt";

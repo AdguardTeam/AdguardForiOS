@@ -16,6 +16,9 @@
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "7SB-2j-FAc"; */
 "7SB-2j-FAc.normalTitle" = "Folytatás";
 
+/* Class = "UILabel"; text = "Using native DNS"; ObjectID = "8Z0-0U-Hfk"; */
+"8Z0-0U-Hfk.text" = "Natív DNS használata";
+
 /* Class = "UILabel"; text = "requests"; ObjectID = "Btd-nN-zLO"; */
 "Btd-nN-zLO.text" = "kérés";
 
