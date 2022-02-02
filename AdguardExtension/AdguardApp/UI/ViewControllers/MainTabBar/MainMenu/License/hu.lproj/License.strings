@@ -10,6 +10,9 @@
 /* Class = "UILabel"; text = "Password:"; ObjectID = "P6N-OK-fHG"; */
 "P6N-OK-fHG.text" = "Jelszó:";
 
+/* Class = "UILabel"; text = "Log in with your AdGuard account or with social networks"; ObjectID = "ZuM-Nn-uXv"; */
+"ZuM-Nn-uXv.text" = "Jelentkezzen be az AdGuard fiókjával vagy a kapcsolt közösségi hálózatok valamelyikével";
+
 /* Class = "UIButton"; normalTitle = "Log in"; ObjectID = "bUa-fF-AXO"; */
 "bUa-fF-AXO.normalTitle" = "Belépés";
 

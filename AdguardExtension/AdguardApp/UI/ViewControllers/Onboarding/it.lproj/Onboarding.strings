@@ -1,11 +1,14 @@
 /* Class = "UIButton"; normalTitle = "Video guide"; ObjectID = "3ju-B8-UIZ"; */
 "3ju-B8-UIZ.normalTitle" = "Guida video";
 
+/* Class = "UILabel"; text = "Terms and Conditions"; ObjectID = "E6C-TE-ZI6"; */
+"E6C-TE-ZI6.text" = "Termini e Condizioni";
+
 /* Class = "UILabel"; text = "Enable AdGuard for Safari"; ObjectID = "F7O-MB-LHu"; */
 "F7O-MB-LHu.text" = "Attiva AdGuard per Safari";
 
 /* Class = "UILabel"; text = "Block Trackers"; ObjectID = "FDG-As-HDY"; */
-"FDG-As-HDY.text" = "Blocco Traccianti";
+"FDG-As-HDY.text" = "Blocco Tracciatori";
 
 /* Class = "UIButton"; normalTitle = "Video guide"; ObjectID = "GOu-4j-RcN"; */
 "GOu-4j-RcN.normalTitle" = "Video guida";

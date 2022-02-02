@@ -8,7 +8,7 @@
 "9wg-p1-Dh8.text" = "Továbbfejlesztett funkciók a végső hirdetésblokkoláshoz és tartalomszűréshez";
 
 /* Class = "UILabel"; text = "YouTube ad blocking"; ObjectID = "AZY-QZ-8d9"; */
-"AZY-QZ-8d9.text" = "YouTube hirdetésblokkolás";
+"AZY-QZ-8d9.text" = "YouTube hirdetések blokkolása";
 
 /* Class = "UILabel"; text = "AdGuard VPN"; ObjectID = "Hnw-bh-Bgh"; */
 "Hnw-bh-Bgh.text" = "AdGuard VPN";
@@ -21,6 +21,9 @@
 
 /* Class = "UILabel"; text = "premium"; ObjectID = "P9C-72-GAw"; */
 "P9C-72-GAw.text" = "prémium";
+
+/* Class = "UILabel"; text = "This Safari extension removes ads and ad leftovers, and revives the Autoplay feature on YouTube"; ObjectID = "Sry-3f-FQj"; */
+"Sry-3f-FQj.text" = "Ez a Safari bővítmény eltávolítja a hirdetéseket és a hirdetésmaradványokat, valamint működésre bírja a YouTube automatikus lejátszási funkcióját";
 
 /* Class = "UILabel"; text = "Uses enhanced functionality for ultimate ad blocking and content filtering"; ObjectID = "WOG-Hk-11z"; */
 "WOG-Hk-11z.text" = "Továbbfejlesztett funkciókat használ a végső hirdetésblokkoláshoz és tartalomszűréshez";
@@ -52,8 +55,17 @@
 /* Class = "UILabel"; text = "Uses sophisticated multi-level filtering rules"; ObjectID = "rr4-ic-Pg8"; */
 "rr4-ic-Pg8.text" = "Többszintű, kifinomult szűrési szabályokat használ";
 
+/* Class = "UILabel"; text = "Works alongside the AdGuard ad blocker"; ObjectID = "tKQ-Yn-fgL"; */
+"tKQ-Yn-fgL.text" = "Az AdGuard hirdetésblokkolóval együtt működik";
+
+/* Class = "UILabel"; text = "Allows you to use custom DNS servers and enhances your privacy by encrypting your DNS queries"; ObjectID = "teo-vm-NRJ"; */
+"teo-vm-NRJ.text" = "Ez a modul lehetővé teszi, hogy egyéni DNS szervert használjon és növelje adatai biztonságát a DNS kérések titkosításával.";
+
 /* Class = "UILabel"; text = "Not installed"; ObjectID = "vNo-hV-l4c"; */
 "vNo-hV-l4c.text" = "Nincs telepítve";
+
+/* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "vlx-BS-A2y"; */
+"vlx-BS-A2y.text" = "Hirdetések és követők tiltása a Safariban megnyitott webhelyeken";
 
 /* Class = "UILabel"; text = "Protection"; ObjectID = "wyK-CX-EwT"; */
 "wyK-CX-EwT.text" = "Védelem";

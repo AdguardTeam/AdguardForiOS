@@ -1165,3 +1165,45 @@
 
 /* (DnsProviderDetailsController) Website title */
 "website_title" = "Webová stránka";
+
+/* (YoutubePlayerController) 'bad url' alert title */
+"youtube_player_controller_bad_url_title" = "Neplatná URL";
+
+/* (YoutubePlayerController) 'bad url' alert message */
+"youtube_player_controller_bad_url_message" = "Uveďte prosím odkaz na YouTube";
+
+/* (YoutubePlayerController) 'content blocking list error' alert title */
+"youtube_player_controller_content_blocking_list_error_title" = "Chyba filtrování";
+
+/* (YoutubePlayerController) 'content blocking list error' alert message */
+"youtube_player_controller_content_blocking_list_error_message" = "Nepodařilo se sestavit seznam zakázaných";
+
+/* (YoutubePlayerController) 'userscript error' alert title */
+"youtube_player_controller_userscript_error_title" = "Chyba uživatelského skriptu";
+
+/* (YoutubePlayerController) 'userscript error' alert message */
+"youtube_player_controller_userscript_error_message" = "Nepodařilo se vytvořit uživatelský skript";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert title */
+"youtube_share_extension_no_url_title" = "Nebyla uvedena adresa URL";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert message */
+"youtube_share_extension_no_url_summary" = "Sdílejte videa YouTube do AdGuardu a sledujte je bez reklam";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert title */
+"youtube_share_extension_bad_url_title" = "Neplatná URL";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert message */
+"youtube_share_extension_bad_url_summary" = "Sdílejte videa YouTube do AdGuardu a sledujte je bez reklam";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert title */
+"youtube_share_extension_item_provider_error_title" = "Interní chyba";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_error_summary" = "Nepodařilo se sdílet odkaz do AdGuardu";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert title */
+"youtube_share_extension_item_provider_unknown_error_title" = "Neznámá chyba";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_unknown_error_summary" = "Něco se pokazilo";

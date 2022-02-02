@@ -1165,3 +1165,42 @@
 
 /* (DnsProviderDetailsController) Website title */
 "website_title" = "Веб-сайт";
+
+/* (YoutubePlayerController) 'bad url' alert title */
+"youtube_player_controller_bad_url_title" = "Недействительный URL";
+
+/* (YoutubePlayerController) 'content blocking list error' alert title */
+"youtube_player_controller_content_blocking_list_error_title" = "Ошибка фильтрации";
+
+/* (YoutubePlayerController) 'content blocking list error' alert message */
+"youtube_player_controller_content_blocking_list_error_message" = "Не удалось скомпилировать список блокировки";
+
+/* (YoutubePlayerController) 'userscript error' alert title */
+"youtube_player_controller_userscript_error_title" = "Ошибка пользовательского скрипта";
+
+/* (YoutubePlayerController) 'userscript error' alert message */
+"youtube_player_controller_userscript_error_message" = "Не удалось создать пользовательский скрипт";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert title */
+"youtube_share_extension_no_url_title" = "Не указан URL-адрес";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert message */
+"youtube_share_extension_no_url_summary" = "Открывайте видео YouTube в приложении AdGuard, чтобы смотреть их без рекламы";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert title */
+"youtube_share_extension_bad_url_title" = "Некорректный URL";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert message */
+"youtube_share_extension_bad_url_summary" = "Открывайте видео YouTube в приложении AdGuard, чтобы смотреть их без рекламы";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert title */
+"youtube_share_extension_item_provider_error_title" = "Внутренняя ошибка";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_error_summary" = "Не удалось поделиться ссылкой с AdGuard";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert title */
+"youtube_share_extension_item_provider_unknown_error_title" = "Неизвестная ошибка";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_unknown_error_summary" = "Что-то пошло не так";

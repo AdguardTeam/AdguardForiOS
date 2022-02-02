@@ -1165,3 +1165,45 @@
 
 /* (DnsProviderDetailsController) Website title */
 "website_title" = "Spletna stran";
+
+/* (YoutubePlayerController) 'bad url' alert title */
+"youtube_player_controller_bad_url_title" = "Neveljaven URL";
+
+/* (YoutubePlayerController) 'bad url' alert message */
+"youtube_player_controller_bad_url_message" = "Prosimo, navedite povezavo do YouTuba";
+
+/* (YoutubePlayerController) 'content blocking list error' alert title */
+"youtube_player_controller_content_blocking_list_error_title" = "Napaka pri filtriranju";
+
+/* (YoutubePlayerController) 'content blocking list error' alert message */
+"youtube_player_controller_content_blocking_list_error_message" = "Seznam onemogočenih ni uspešno sestavljen";
+
+/* (YoutubePlayerController) 'userscript error' alert title */
+"youtube_player_controller_userscript_error_title" = "Napaka uporabniškega skripta";
+
+/* (YoutubePlayerController) 'userscript error' alert message */
+"youtube_player_controller_userscript_error_message" = "Ustvarjanje uporabniškega skripta ni uspelo";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert title */
+"youtube_share_extension_no_url_title" = "URL ni naveden";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert message */
+"youtube_share_extension_no_url_summary" = "Delite videoposnetke z YouTuba v AdGuardu za ogled brez oglasov";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert title */
+"youtube_share_extension_bad_url_title" = "Neveljaven URL";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert message */
+"youtube_share_extension_bad_url_summary" = "Delite videoposnetke z YouTuba v AdGuardu za ogled brez oglasov";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert title */
+"youtube_share_extension_item_provider_error_title" = "Notranja napaka";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_error_summary" = "Delitev povezave na Adguard ni uspela";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert title */
+"youtube_share_extension_item_provider_unknown_error_title" = "Neznana napaka";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_unknown_error_summary" = "Nekaj je šlo narobe";

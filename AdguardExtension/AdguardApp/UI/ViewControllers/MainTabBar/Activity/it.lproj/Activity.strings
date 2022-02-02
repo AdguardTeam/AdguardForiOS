@@ -35,7 +35,7 @@
 "T0y-mr-Zwa.text" = "Puoi vedere chi cerca di tracciarti, visualizzare statistiche ed il registro delle richieste di blocco DNS";
 
 /* Class = "UILabel"; text = "DNS protection is disabled"; ObjectID = "X1F-2p-Xpe"; */
-"X1F-2p-Xpe.text" = "La protezione della tracciabilità è disattivata";
+"X1F-2p-Xpe.text" = "La protezione DNS è disattivata";
 
 /* Class = "UIButton"; normalTitle = "Enable"; ObjectID = "XYE-JT-WSH"; */
 "XYE-JT-WSH.normalTitle" = "Attiva";

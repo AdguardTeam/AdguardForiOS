@@ -209,7 +209,7 @@
 "bug_report_sending_error" = "無法傳送程式錯誤報告。您可能於您的裝置上沒有已配置的電子郵件帳號。";
 
 /* (MainController) Error on check filter uspdates */
-"filter_updates_error" = "過濾器更新出錯";
+"filter_updates_error" = "過濾器更新錯誤";
 
 /* (MainController) Message on main screen during update */
 "filters_noUpdates" = "無已發現的更新";
@@ -350,7 +350,7 @@
 "failed_updating_current_state_label" = "過濾器尚未被更新";
 
 /* (GetProController) login error message text */
-"login_max_computers_exceeded" = "此授權已被啟動處於裝置之最大數量的狀態。\n您可於網站：adguard.com 上在您個人的帳戶中由未使用的裝置解除綁定此授權";
+"login_max_computers_exceeded" = "此授權已被啟動處於裝置之最大數量的狀態。\n您可於網站：adguard.com 上在您個人帳戶中由未使用的裝置解除綁定此授權";
 
 /* (Action Extension - ActionViewController) An error which occurs if the action extension is launched before the main Adguard app. */
 "action_extension_no_configuration_message_format" = "在您可使用該動作延伸功能之前，%1$@ 必須執行一個初始的配置。啟動主要的 %2$@ 應用程式，讓它這樣做。";
@@ -1165,3 +1165,45 @@
 
 /* (DnsProviderDetailsController) Website title */
 "website_title" = "網站";
+
+/* (YoutubePlayerController) 'bad url' alert title */
+"youtube_player_controller_bad_url_title" = "無效的網址";
+
+/* (YoutubePlayerController) 'bad url' alert message */
+"youtube_player_controller_bad_url_message" = "請提供一個往 YouTube 的連結";
+
+/* (YoutubePlayerController) 'content blocking list error' alert title */
+"youtube_player_controller_content_blocking_list_error_title" = "過濾錯誤";
+
+/* (YoutubePlayerController) 'content blocking list error' alert message */
+"youtube_player_controller_content_blocking_list_error_message" = "未能編譯封鎖清單";
+
+/* (YoutubePlayerController) 'userscript error' alert title */
+"youtube_player_controller_userscript_error_title" = "使用者腳本錯誤";
+
+/* (YoutubePlayerController) 'userscript error' alert message */
+"youtube_player_controller_userscript_error_message" = "未能創建使用者腳本";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert title */
+"youtube_share_extension_no_url_title" = "無被提供的網址";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert message */
+"youtube_share_extension_no_url_summary" = "分享 YouTube 視訊給 AdGuard 以無廣告地觀賞它們";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert title */
+"youtube_share_extension_bad_url_title" = "無效的網址";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert message */
+"youtube_share_extension_bad_url_summary" = "分享 YouTube 視訊給 AdGuard 以無廣告地觀賞它們";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert title */
+"youtube_share_extension_item_provider_error_title" = "內部錯誤";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_error_summary" = "未能分享此連結給 AdGuard";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert title */
+"youtube_share_extension_item_provider_unknown_error_title" = "未知的錯誤";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_unknown_error_summary" = "某事物出現問題";

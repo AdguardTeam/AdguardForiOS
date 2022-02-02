@@ -65,7 +65,7 @@
 "vNo-hV-l4c.text" = "Nicht installiert";
 
 /* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "vlx-BS-A2y"; */
-"vlx-BS-A2y.text" = "Sperrt Werbeanzeigen und Tracker auf in Safari geöffneten Websites";
+"vlx-BS-A2y.text" = "Sperrt Werbung und Tracker auf in Safari geöffneten Websites";
 
 /* Class = "UILabel"; text = "Protection"; ObjectID = "wyK-CX-EwT"; */
 "wyK-CX-EwT.text" = "Schutz";

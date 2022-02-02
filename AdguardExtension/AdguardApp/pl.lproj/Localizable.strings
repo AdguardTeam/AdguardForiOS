@@ -1165,3 +1165,45 @@
 
 /* (DnsProviderDetailsController) Website title */
 "website_title" = "Strona";
+
+/* (YoutubePlayerController) 'bad url' alert title */
+"youtube_player_controller_bad_url_title" = "Nieprawidłowy URL";
+
+/* (YoutubePlayerController) 'bad url' alert message */
+"youtube_player_controller_bad_url_message" = "Podaj link do YouTube";
+
+/* (YoutubePlayerController) 'content blocking list error' alert title */
+"youtube_player_controller_content_blocking_list_error_title" = "Błąd filtrowania";
+
+/* (YoutubePlayerController) 'content blocking list error' alert message */
+"youtube_player_controller_content_blocking_list_error_message" = "Nie udało się skompilować listy zablokowanych";
+
+/* (YoutubePlayerController) 'userscript error' alert title */
+"youtube_player_controller_userscript_error_title" = "Błąd skryptu użytkownika";
+
+/* (YoutubePlayerController) 'userscript error' alert message */
+"youtube_player_controller_userscript_error_message" = "Nie udało się utworzyć skryptu użytkownika";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert title */
+"youtube_share_extension_no_url_title" = "Nie podano adresu URL";
+
+/* (YouTubeAdsRequestHandler) 'no url error' alert message */
+"youtube_share_extension_no_url_summary" = "Udostępniaj filmy z YouTube do AdGuard, aby oglądać je bez reklam";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert title */
+"youtube_share_extension_bad_url_title" = "Nieprawidłowy URL";
+
+/* (YouTubeAdsRequestHandler) 'bad url error' alert message */
+"youtube_share_extension_bad_url_summary" = "Udostępniaj filmy z YouTube do AdGuard, aby oglądać je bez reklam";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert title */
+"youtube_share_extension_item_provider_error_title" = "Błąd wewnętrzny";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_error_summary" = "Nie udało się udostępnić linku do AdGuard";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert title */
+"youtube_share_extension_item_provider_unknown_error_title" = "Nieznany błąd";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_unknown_error_summary" = "Coś poszło nie tak";

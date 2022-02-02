@@ -52,6 +52,9 @@
 /* Class = "UILabel"; text = "Blocks complex ads, such as YouTube ads in Safari"; ObjectID = "rm0-Ip-riS"; */
 "rm0-Ip-riS.text" = "Blocca annunci complessi, come gli annunci di YouTube su Safari";
 
+/* Class = "UILabel"; text = "Uses sophisticated multi-level filtering rules"; ObjectID = "rr4-ic-Pg8"; */
+"rr4-ic-Pg8.text" = "Utilizza sofisticate regole di filtraggio multi-livello";
+
 /* Class = "UILabel"; text = "Works alongside the AdGuard ad blocker"; ObjectID = "tKQ-Yn-fgL"; */
 "tKQ-Yn-fgL.text" = "Opera parallelamente al blocca-annunci AdGuard";
 
@@ -62,7 +65,7 @@
 "vNo-hV-l4c.text" = "Non installata";
 
 /* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "vlx-BS-A2y"; */
-"vlx-BS-A2y.text" = "Blocca annunci e traccianti sui siti web aperti in Safari";
+"vlx-BS-A2y.text" = "Blocca annunci e tracciatori sui siti web aperti in Safari";
 
 /* Class = "UILabel"; text = "Protection"; ObjectID = "wyK-CX-EwT"; */
 "wyK-CX-EwT.text" = "Protezione";

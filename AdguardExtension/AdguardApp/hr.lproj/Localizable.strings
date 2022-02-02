@@ -1165,3 +1165,12 @@
 
 /* (DnsProviderDetailsController) Website title */
 "website_title" = "Web stranica";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert title */
+"youtube_share_extension_item_provider_error_title" = "Interna pogreška";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert title */
+"youtube_share_extension_item_provider_unknown_error_title" = "Nepoznata pogreška";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_unknown_error_summary" = "Nešto je pošlo po zlu";

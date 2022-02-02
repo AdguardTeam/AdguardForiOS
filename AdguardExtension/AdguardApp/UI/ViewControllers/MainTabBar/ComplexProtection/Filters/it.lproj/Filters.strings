@@ -23,7 +23,7 @@
 "OpB-AR-Og7.normalTitle" = "Annulla";
 
 /* Class = "UILabel"; text = "Blocks ads and trackers on websites opened in Safari"; ObjectID = "QHZ-sJ-wTL"; */
-"QHZ-sJ-wTL.text" = "Blocca annunci e traccianti sui siti web aperti in Safari";
+"QHZ-sJ-wTL.text" = "Blocca annunci e tracciatori sui siti web aperti in Safari";
 
 /* Class = "UILabel"; text = "Rules count: "; ObjectID = "RJU-32-r8h"; Note = "(New Custom Filter) rules count caption"; */
 "RJU-32-r8h.text" = "N. Regole: ";

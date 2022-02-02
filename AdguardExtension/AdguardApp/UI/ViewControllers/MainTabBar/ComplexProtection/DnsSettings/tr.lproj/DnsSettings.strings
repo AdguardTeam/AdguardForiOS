@@ -62,7 +62,7 @@
 "pC4-RU-DaD.text" = "DNS filtreleme";
 
 /* Class = "UILabel"; text = "Security filters, DNS privacy, custom filters, etc."; ObjectID = "pY3-X6-fFy"; */
-"pY3-X6-fFy.text" = "Güvenlik filtreleri, DNS gizliliği, özel filtreler vb.";
+"pY3-X6-fFy.text" = "Güvenlik filtreleri, DNS gizliliği, özel filtreler, vs.";
 
 /* Class = "UILabel"; text = "DNS filters"; ObjectID = "plc-eu-aXh"; */
 "plc-eu-aXh.text" = "DNS filtreleri";

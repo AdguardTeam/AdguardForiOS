@@ -1159,3 +1159,12 @@
 
 /* (DnsProviderDetailsController) Website title */
 "website_title" = "Вебсайт";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert title */
+"youtube_share_extension_item_provider_error_title" = "Внутрішня помилка";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert title */
+"youtube_share_extension_item_provider_unknown_error_title" = "Невідома помилка";
+
+/* (YouTubeAdsRequestHandler) 'item provider error' alert message */
+"youtube_share_extension_item_provider_unknown_error_summary" = "Щось пішло не так";
