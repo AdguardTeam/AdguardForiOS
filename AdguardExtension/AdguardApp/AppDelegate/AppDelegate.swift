@@ -221,50 +221,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         resources.synchronizeSharedDefaults()
     }
 
+    // TODO: rework how background fetch works (read the description below)
+    // Currently, we're using the old approach to background fetches. It guarantees that background fetch is called
+    // periodically without the need to schedule anything. The problem is that this type of fetches has rather strict
+    // execution limits.
+    // Our background operations may be time-consuming since both rules conversion and re-compiling Safari content
+    // blockers requires a lot of time. There's a solution to it in iOS 13, we should use BGProcessingTask.
+    // Unfortunately, this way we'll run into a different problem. BGProcessingTask must be scheduled manually using
+    // BGTaskScheduler. To make the task periodic, you may try to reschedule it again after it has been launched.
+    // But once the user reboots the device, all your scheduled tasks are gone. In order to get it scheduled back the
+    // app must be launched again by the user. And you cannot use the old bg fetch method since:
+    // > In iOS 13 and later, adding a BGTaskSchedulerPermittedIdentifiers key to the Info.plist disables the
+    // > application(_:performFetchWithCompletionHandler:)
+    // The only feasible option to re-schedule the BGProcessingTask would be to wake your app with a background push.
+    // These strategies are outlined in Apple's documentation:
+    // https://developer.apple.com/documentation/backgroundtasks/choosing_background_strategies_for_your_app
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        addPurchaseStatusObserver()
-        purchaseService.checkLicenseStatus()
-
-        func shouldUpdateFilters() -> Bool {
-            if !resources.wifiOnlyUpdates {
-                return true
-            }
-            let reachability = Reachability.forInternetConnection()
-            let isWiFiNetwork = reachability?.isReachableViaWiFi() ?? false
-            return isWiFiNetwork
+        // Note that all heavy background operations should be accompanied by calling beginBackgroundTask/endBackgroundTask.
+        // The explanation on why it is important can be found in the documentation (see the section on 0xdead10cc).
+        // https://developer.apple.com/documentation/xcode/understanding-the-exception-types-in-a-crash-report
+        // The problem is that it does not guarantee anything and helps only a little. There's still a high chance that
+        // the app will be killed. Killing occurs when the system tries to suspends the app while we're holding an open
+        // file handle, for instance when we are working with a file or an SQLite database so it is rather dangerous since
+        // there're risks of data corruption.
+        let backgroundTaskId = UIApplication.shared.beginBackgroundTask {
+            DDLogInfo("(AppDelegate) - backgroundFetch; background task is expiring, remaining time: \(UIApplication.shared.backgroundTimeRemaining)")
         }
 
-        let shouldUpdate = shouldUpdateFilters()
-        DDLogInfo("(AppDelegate) - backgroundFetch; shouldUpdateFilters=\(shouldUpdate)")
-        if !shouldUpdate {
+        if backgroundTaskId == UIBackgroundTaskIdentifier.invalid {
+            DDLogError("(AppDelegate) - backgroundFetch; cannot start background operation")
             completionHandler(.noData)
             return
         }
 
-        // Update filters in background
+        DDLogInfo("(AppDelegate) - backgroundFetch; start, remaining time: \(UIApplication.shared.backgroundTimeRemaining)")
 
-        // Do not update filters in background while migration in the main process wasn't called
-        guard resources.isMigrationTo4_3Passed else {
+        if UIApplication.shared.backgroundTimeRemaining < 20 {
+            // If less than 20 seconds is available for the background task we simply don't run it.
+            DDLogInfo("(AppDelegate) - backgroundFetch; remaining time is not enough to complete the task, exiting immediately")
             completionHandler(.noData)
             return
         }
 
-        safariProtection.updateSafariProtectionInBackground { [weak self] result in
-            if let error = result.error {
-                DDLogError("(AppDelegate) - backgroundFetch; Received error from SDK: \(error)")
-                completionHandler(result.backgroundFetchResult)
-                return
-            }
-            // If there was a phase with downloading filters, than we need to restart tunnel to apply newest ones
-            if result.oldBackgroundFetchState == .updateFinished || result.oldBackgroundFetchState == .loadAndSaveFilters {
-                self?.dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsFilters) { _ in
-                    DDLogInfo("(AppDelegate) - backgroundFetch; Background fetch ended call performFetchWithCompletionHandler after updating dns preferences")
-                    completionHandler(result.backgroundFetchResult)
-                }
-            } else {
-                DDLogInfo("(AppDelegate) - backgroundFetch; Background fetch ended call performFetchWithCompletionHandler")
-                completionHandler(result.backgroundFetchResult)
-            }
+        DispatchQueue.global().async {
+            let result = self.backgroundFetch()
+            UIApplication.shared.endBackgroundTask(backgroundTaskId)
+            completionHandler(result)
+
+            DDLogInfo("(AppDelegate) - backgroundFetch; finished successfully")
         }
     }
 
@@ -310,6 +314,62 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     // MARK: - Private methods
+
+    private func backgroundFetch() -> UIBackgroundFetchResult {
+        addPurchaseStatusObserver()
+        purchaseService.checkLicenseStatus()
+
+        func shouldUpdateFilters() -> Bool {
+            if !resources.wifiOnlyUpdates {
+                return true
+            }
+            let reachability = Reachability.forInternetConnection()
+            let isWiFiNetwork = reachability?.isReachableViaWiFi() ?? false
+            return isWiFiNetwork
+        }
+
+        let shouldUpdate = shouldUpdateFilters()
+        DDLogInfo("(AppDelegate) - backgroundFetch; shouldUpdateFilters=\(shouldUpdate)")
+        if !shouldUpdate {
+            return .noData
+        }
+
+        // Update filters in background
+
+        // Do not update filters in background while migration in the main process wasn't called.
+        guard resources.isMigrationTo4_3Passed else {
+            return .noData
+        }
+
+        var bgFetchResult: UIBackgroundFetchResult = .noData
+        let group = DispatchGroup()
+        group.enter()
+
+        safariProtection.updateSafariProtectionInBackground { [weak self] result in
+            if let error = result.error {
+                DDLogError("(AppDelegate) - backgroundFetch; received error from SDK: \(error)")
+                bgFetchResult = result.backgroundFetchResult
+                group.leave()
+                return
+            }
+            // If there was a phase with downloading filters, than we need to restart tunnel to apply newest ones.
+            if result.oldBackgroundFetchState == .updateFinished || result.oldBackgroundFetchState == .loadAndSaveFilters {
+                // TODO: this is rather strange that we update DNS filters as a part of SafariProtection update.
+                self?.dnsConfigAssistant.applyDnsPreferences(for: .modifiedDnsFilters) { _ in
+                    DDLogInfo("(AppDelegate) - backgroundFetch; background fetch ended call performFetchWithCompletionHandler after updating dns preferences")
+                    bgFetchResult = result.backgroundFetchResult
+                    group.leave()
+                }
+            } else {
+                DDLogInfo("(AppDelegate) - backgroundFetch; background fetch ended call performFetchWithCompletionHandler")
+                bgFetchResult = result.backgroundFetchResult
+                group.leave()
+            }
+        }
+
+        group.wait()
+        return bgFetchResult
+    }
 
     private func prepareControllers() {
         setappService.start()

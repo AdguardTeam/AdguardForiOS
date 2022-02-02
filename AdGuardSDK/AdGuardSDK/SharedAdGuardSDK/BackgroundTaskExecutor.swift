@@ -26,6 +26,7 @@ public final class BackgroundTaskExecutor {
 #if os(iOS)
         ProcessInfo().performExpiringActivity(withReason: reason) { expired in
             if expired {
+                // TODO: this does not help much since iOS will still kill the app if the task is still in progress.
                 Logger.logInfo("(BackgroundTaskExecutor) - executeSyncronousTask; Task with reason=\(reason) has expired")
             } else {
                 blockToExecute()
@@ -38,6 +39,7 @@ public final class BackgroundTaskExecutor {
 #if os(iOS)
         ProcessInfo().performExpiringActivity(withReason: reason) { expired in
             if expired {
+                // TODO: this does not help much since iOS will still kill the app if the task is still in progress.
                 Logger.logInfo("(BackgroundTaskExecutor) - executeAsyncronousTask; Task with reason=\(reason) has expired")
             } else {
                 Logger.logInfo("(BackgroundTaskExecutor) - executeAsyncronousTask; Task with reason=\(reason) has started")
