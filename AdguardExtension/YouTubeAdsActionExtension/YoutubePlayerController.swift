@@ -37,12 +37,6 @@ class YoutubePlayerController : UIViewController {
         return nil
     }
 
-    func reload(videoId: String) {
-        self.videoId = videoId
-        // See https://jira.adguard.com/browse/AG-11561?focusedCommentId=57282&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#comment-57282 for more details
-        webView.loadHTMLString(createHtml(videoId: videoId), baseURL: URL(string: "https://m.youtube.com/")!)
-    }
-
     override func loadView() {
         createWebView()
     }
@@ -50,16 +44,15 @@ class YoutubePlayerController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        updateTheme()
         setUpCloseButton()
-
         startPlayer(videoId: videoId)
     }
 
 
 
     private func setUpCloseButton() {
-        let image = UIImage(named: "cross")
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        let image = UIImage(named: "cross_original")
         let buttonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(close))
         navigationItem.setRightBarButton(buttonItem, animated: true)
     }
@@ -148,6 +141,7 @@ class YoutubePlayerController : UIViewController {
 
     @objc final private func close() {
         dismiss(animated: true)
+        navigationController?.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
     }
 
 
@@ -173,14 +167,5 @@ class YoutubePlayerController : UIViewController {
             case .userscriptError:          return String.localizedString("youtube_player_controller_userscript_error_message")
             }
         }
-    }
-}
-
-
-
-extension YoutubePlayerController : ThemableProtocol {
-    func updateTheme() {
-        let service: ThemeServiceProtocol = ServiceLocator.shared.getService()!
-        service.setupNavigationBar(navigationController?.navigationBar)
     }
 }
