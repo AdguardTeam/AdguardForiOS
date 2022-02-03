@@ -55,8 +55,4 @@ class URLSchemeExecutorMock: IURLSchemeExecutor {
     func openAdvancedProtectionController(enableAdvancedProtection: Bool?) -> Bool {
         true
     }
-
-    func openYoutubePlayerController(videoId: String) -> Bool {
-        true
-    }
 }

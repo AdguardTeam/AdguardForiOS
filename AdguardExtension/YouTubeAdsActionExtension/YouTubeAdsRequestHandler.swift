@@ -24,15 +24,15 @@ import MobileCoreServices
 /// In this case we should run userscript on the given page
 /// - The YouTube link has been shared from another place (e.g. YouTube app)
 /// In this case we should start in-app youtube player
-class YouTubeAdsRequestHandler : UIViewController {
-
-    // App url is different for AdGuard and AdGuardPro targets
-    private let appURL: String = "\(Bundle.main.inAppScheme)://watch_youtube_video?video_id="
+class YouTubeAdsRequestHandler : UINavigationController {
 
     private lazy var notifications: UserNotificationServiceProtocol = { UserNotificationService() }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Hide navigation bar to avoid UI flickering
+        setNavigationBarHidden(true, animated: false)
 
         let resources = AESharedResources()
 
@@ -43,11 +43,8 @@ class YouTubeAdsRequestHandler : UIViewController {
         ACLLogger.singleton()?.logLevel = isDebugLogs ? ACLLDebugLevel : ACLLDefaultLevel
     }
 
-    // It's important to perform payload in this callback:
-    // - It guarantees that 'beginRequest' has been executed earlier and extensionContext has been set;
-    // - It guarantees that UIResponder is not nil.
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func beginRequest(with context: NSExtensionContext) {
+        super.beginRequest(with: context)
 
         extensionContext?.handleInputItem({ [weak self] jsResult in
             if let result = jsResult {
@@ -66,10 +63,10 @@ class YouTubeAdsRequestHandler : UIViewController {
                 return
             }
 
-            self?.extensionContext?.completeRequest(returningItems: nil, completionHandler: { _ in
-                guard let url = URL(string: "\(self?.appURL ?? "")\(videoId)") else { return }
-                self?.openURL(url)
-            })
+            DispatchQueue.main.async {
+                let playerController = YoutubePlayerController(videoId: videoId)
+                self?.viewControllers.append(playerController)
+            }
         } ?? DDLogInfo("(YouTubeAdsRequestHandler) Failed to access extensionContext")
     }
 

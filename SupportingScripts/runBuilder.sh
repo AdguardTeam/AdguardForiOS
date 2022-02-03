@@ -37,7 +37,7 @@ esac
 # See https://github.com/AdguardTeam/BlockYouTubeAdsShortcut
 # See https://jira.adguard.com/browse/AG-11561
 echo "================ DOWNLOADING BLOCK ADS ON YOUTUBE USERSCRIPT ==================="
-wget -O "${SRCROOT}/../AdGuardExtension/AdGuardApp/UI/ViewControllers/YoutubePlayer/userscript.js" https://raw.githubusercontent.com/AdguardTeam/BlockYouTubeAdsShortcut/master/dist/index.js
+wget -O "${SRCROOT}/../YouTubeAdsActionExtension/userscript.js" https://raw.githubusercontent.com/AdguardTeam/BlockYouTubeAdsShortcut/master/dist/index.js
 
 
 echo "============================== BUILD BUILDER ==================================="

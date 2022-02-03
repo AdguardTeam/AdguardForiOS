@@ -27,7 +27,7 @@
         <key>NSExtensionPrincipalClass</key>
         <string>$(PRODUCT_MODULE_NAME).YouTubeAdsRequestHandler</string>
         <key>NSExtensionActionWantsFullScreenPresentation</key>
-        <false/>
+        <true/>
         <key>NSExtensionAttributes</key>
         <dict>
             <key>NSExtensionActivationRule</key>
