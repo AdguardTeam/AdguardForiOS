@@ -71,8 +71,10 @@ final public class ActivityStatistics: ActivityStatisticsProtocol {
         dateFormatter.dateFormat = Constants.Statistics.dbDateFormat
 
         if !readOnly {
-            try self.createTableIfNotExists()
-            try compressTable()
+            try createTableIfNotExists()
+
+            // Ignoring the error here since compressing the table is not a crucial operation.
+            try? compressTable()
         }
 
         Logger.logInfo("(ActivityStatistics) - init end")

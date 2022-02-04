@@ -25,7 +25,9 @@ extension ChartStatistics {
         let recordsCount = try statisticsDb.scalar(ChartStatisticsTable.table.count)
         if recordsCount >= 1000 {
             Logger.logInfo("(ChartStatistics) - compressTableIfNeeded; Number of records is greater 1500, compress now")
-            try compressTable()
+
+            // Ignoring the error here since compressing the table is not a crucial operation.
+            try? compressTable()
         }
     }
 

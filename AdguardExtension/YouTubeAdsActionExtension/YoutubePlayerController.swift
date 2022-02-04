@@ -65,7 +65,13 @@ class YoutubePlayerController : UIViewController {
             return
         }
 
-        let userscript = WKUserScript(source: userscriptSource, injectionTime: .atDocumentStart, forMainFrameOnly: true)
+        guard let pipSource = readFileToString(resIdentifier: "pip", type: "js") else {
+            showAlert(withError: .userscriptError, logMessage: "Failed to read userscript")
+            return
+        }
+
+        let jsSource = userscriptSource + "\n" + pipSource
+        let userscript = WKUserScript(source: jsSource, injectionTime: .atDocumentStart, forMainFrameOnly: false)
         if (userscript == nil) {
             showAlert(withError: .userscriptError, logMessage: "Userscript is not valid")
             return
