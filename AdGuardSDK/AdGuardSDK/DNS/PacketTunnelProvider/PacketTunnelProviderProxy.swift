@@ -85,6 +85,11 @@ final class PacketTunnelProviderProxy: PacketTunnelProviderProxyProtocol {
         setupLogger(isDebugLogs: isDebugLogs)
     }
 
+    deinit {
+        // Make sure that dnsProxy is stopped
+        dnsProxy.stop()
+    }
+
     // MARK: - Internal methods
 
     func startTunnel(options: [String: NSObject]?, completionHandler: @escaping (Error?) -> Void) {

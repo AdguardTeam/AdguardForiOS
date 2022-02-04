@@ -122,8 +122,8 @@ final class ChartViewModel: ChartViewModelProtocol {
 
     // Return statistics date from SDK
     private func getChartRecords(for period: StatisticsPeriod) -> (requests: ChartRecords, encrypted: ChartRecords) {
-        var resultRequests: ChartRecords!
-        var resultEncrypted: ChartRecords!
+        let resultRequests: ChartRecords!
+        let resultEncrypted: ChartRecords!
 
         if let requests = try? chartStatistics.getPoints(for: .requests, for: period, pointsCount: chartPointsCount) {
             resultRequests = requests
@@ -134,7 +134,7 @@ final class ChartViewModel: ChartViewModelProtocol {
         if let encrypted = try? chartStatistics.getPoints(for: .encrypted, for: period, pointsCount: chartPointsCount) {
             resultEncrypted = encrypted
         } else {
-            resultRequests = ChartRecords(chartType: .encrypted, points: [])
+            resultEncrypted = ChartRecords(chartType: .encrypted, points: [])
         }
 
         let oldestDate = chartStatistics.oldestRecordDate
