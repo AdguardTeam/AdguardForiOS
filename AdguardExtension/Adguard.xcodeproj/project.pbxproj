@@ -2308,6 +2308,10 @@
 		D0F9117621303E4C006DF0D3 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9117521303E4C006DF0D3 /* ServiceLocator.swift */; };
 		D0F9117A213422E1006DF0D3 /* PurchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F91179213422E1006DF0D3 /* PurchaseService.swift */; };
 		D0F911932136DAB0006DF0D3 /* PurchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F91179213422E1006DF0D3 /* PurchaseService.swift */; };
+		D7C90DE927AD764F008BD92C /* pip.js in Resources */ = {isa = PBXBuildFile; fileRef = D7C90DE827AD764E008BD92C /* pip.js */; };
+		D7C90DEA27AD764F008BD92C /* pip.js in Resources */ = {isa = PBXBuildFile; fileRef = D7C90DE827AD764E008BD92C /* pip.js */; };
+		D7C90DEB27AD764F008BD92C /* pip.js in Resources */ = {isa = PBXBuildFile; fileRef = D7C90DE827AD764E008BD92C /* pip.js */; };
+		D7C90DEC27AD764F008BD92C /* pip.js in Resources */ = {isa = PBXBuildFile; fileRef = D7C90DE827AD764E008BD92C /* pip.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -3955,6 +3959,7 @@
 		D0F9117521303E4C006DF0D3 /* ServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
 		D0F91179213422E1006DF0D3 /* PurchaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseService.swift; sourceTree = "<group>"; };
 		D0F9117B2134414A006DF0D3 /* AdguardTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AdguardTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		D7C90DE827AD764E008BD92C /* pip.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = pip.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -5919,6 +5924,7 @@
 				7E6081C226D55C0000D778F4 /* YouTubeAdsActionExtension.entitlements */,
 				7E6081CD26D55C0100D778F4 /* BlockYouTubeAds.js */,
 				60DB6EC327AC266C00C2CFC4 /* userscript.js */,
+				D7C90DE827AD764E008BD92C /* pip.js */,
 				7E6081D126D55C0100D778F4 /* Info.plist */,
 				7ED68E4426EB98E200929E57 /* YouTubeAdsActionExtension-Bridging-Header.h */,
 				6089DFC527A846C200536667 /* ProInfo.plist */,
@@ -7650,6 +7656,7 @@
 				D0D7E54524371C8C001801A5 /* MainPage.storyboard in Resources */,
 				D098B44924497764003BA4DA /* ActivityTableViewCell.xib in Resources */,
 				D0D7E54C24371C8C001801A5 /* About.storyboard in Resources */,
+				D7C90DEB27AD764F008BD92C /* pip.js in Resources */,
 				D0D7E54824371C8C001801A5 /* Protection.storyboard in Resources */,
 				D0D7E55024371C8C001801A5 /* Tutorial.storyboard in Resources */,
 				659886A51CF74DE9003ECD1C /* defaults.plist in Resources */,
@@ -7705,6 +7712,7 @@
 				65711E561B8C670A00C8C4E7 /* defaults.plist in Resources */,
 				D0D6B9F621A6AF40007360BC /* About.storyboard in Resources */,
 				7E536C7B238D3A9400A83A79 /* Assets.xcassets in Resources */,
+				D7C90DE927AD764F008BD92C /* pip.js in Resources */,
 				7EA7DCC026C674FE0032AD5C /* SafariProtectionGroupCell.xib in Resources */,
 				D0D6BA0B21A6AF6C007360BC /* UserFilter.storyboard in Resources */,
 				7EA2B3262424FE8F00FD3304 /* ActivityTableViewCell.xib in Resources */,
@@ -7812,6 +7820,7 @@
 			files = (
 				60DB6EC527AC266C00C2CFC4 /* userscript.js in Resources */,
 				7E6081D426D55C0100D778F4 /* Media.xcassets in Resources */,
+				D7C90DEA27AD764F008BD92C /* pip.js in Resources */,
 				7E60821C26D56A7600D778F4 /* Localizable.strings in Resources */,
 				7E6081D826D55C0100D778F4 /* BlockYouTubeAds.js in Resources */,
 				60DB6EC927AC2E9300C2CFC4 /* Assets.xcassets in Resources */,
@@ -7825,6 +7834,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E6081F126D55F1400D778F4 /* InfoPlist.strings in Resources */,
+				D7C90DEC27AD764F008BD92C /* pip.js in Resources */,
 				7E60821B26D56A7600D778F4 /* Localizable.strings in Resources */,
 				7E6081F226D55F1700D778F4 /* Media.xcassets in Resources */,
 				60DB6EC727AC266C00C2CFC4 /* userscript.js in Resources */,
