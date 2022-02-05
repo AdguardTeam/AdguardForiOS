@@ -80,9 +80,9 @@ struct PredefinedDnsProvidersDecoder: PredefinedDnsProvidersDecoderProtocol {
         let allLocalizations = providersJson[id] as! [String: Any]
         let lang = collectLocalizationLanguage(suitableLanguages: suitableLanguages, availableLanguages: allLocalizations)
         if let currentLocalization = allLocalizations[lang] as? [String: Any] {
-            let name = currentLocalization["name"] as! String
-            let desc = currentLocalization["description"] as! String
-            return (name, desc)
+            let name = currentLocalization["name"] as? String
+            let desc = currentLocalization["description"] as? String
+            return (name ?? provider.name, desc ?? provider.providerDescription)
         } else {
             return (provider.name, provider.providerDescription)
         }
