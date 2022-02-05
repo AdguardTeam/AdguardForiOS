@@ -190,8 +190,14 @@ def download_file(file_name, language, format, path):
         raise ValueError(
             "Target directory does not exist: {0}, make sure that you've added this language in XCode".format(target_dir))
 
-    file = open(path, "wb")
-    file.write(result.content)
+    result_text = result.text
+    if format == "stringsdict" and "<dict/>" in result_text:
+        # See this issue for the details on this validation check:
+        # https://github.com/AdguardTeam/AdguardForiOS/issues/1922
+        result_text = result_text.replace("<dict/>", "<dict></dict>")
+
+    file = open(path, "w")
+    file.write(result_text)
     file.close()
     print("The file was downloaded to {0}".format(path))
     return

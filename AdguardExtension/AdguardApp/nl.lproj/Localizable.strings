@@ -1197,4 +1197,4 @@
 "youtube_share_extension_item_provider_unknown_error_title" = "Onbekende fout";
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert message */
-"youtube_share_extension_item_provider_unknown_error_summary" = "Er liep iets fout";
+"youtube_share_extension_item_provider_unknown_error_summary" = "Er is iets verkeerd gegaan";

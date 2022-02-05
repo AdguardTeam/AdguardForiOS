@@ -784,4 +784,4 @@
 "youtube_share_extension_item_provider_unknown_error_title" = "Kesalahan tidak diketahui";
 
 /* (YouTubeAdsRequestHandler) 'item provider error' alert message */
-"youtube_share_extension_item_provider_unknown_error_summary" = "Something went wrong";
+"youtube_share_extension_item_provider_unknown_error_summary" = "Ada yang salah";
