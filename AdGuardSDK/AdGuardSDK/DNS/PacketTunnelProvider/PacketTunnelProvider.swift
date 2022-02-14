@@ -147,6 +147,11 @@ open class PacketTunnelProvider: NEPacketTunnelProvider {
         }
 
         tunnelProxy.startTunnel(options: options) { [weak self] error in
+            if error == nil {
+                Logger.logInfo("(PacketTunnelProvider) startTunnel; finished starting")
+            } else {
+                Logger.logInfo("(PacketTunnelProvider) startTunnel; finished starting with error: \(error!)")
+            }
             self?.startReachabilityHandling()
             completionHandler(error)
         }
