@@ -23,6 +23,10 @@ Adguard.ipa
 # idea files
 .idea
 
+# bundle directories for local vendoring when running CI
+# bundle config set --local path '.bundle/vendor'
+.bundle
+
 # ------------------ OS X -----------------
 .DS_Store
 

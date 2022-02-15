@@ -30,6 +30,12 @@ extension ActivityStatistics {
 
             let recordsCountBeforeCompression = try statisticsDb.scalar(ActivityStatisticsTable.table.count)
             let compressedRecords = try getCompressedRecords()
+
+            guard compressedRecords.count != recordsCountBeforeCompression else {
+                Logger.logInfo("(ActivityStatistics) - compressTable; No need to compress statistics")
+                return
+            }
+
             try reset()
             try add(records: compressedRecords)
 
@@ -39,19 +45,33 @@ extension ActivityStatistics {
 
     private func add(records: [ActivityStatisticsRecord]) throws {
         // If there are no records, there will be no setters and addQuery will be incorrect
-        guard records.count > 0 else { return }
-
-        let setters: [[Setter]] = records.map { record in
-            [ActivityStatisticsTable.timeStamp <- record.timeStamp,
-             ActivityStatisticsTable.domain <- record.domain,
-             ActivityStatisticsTable.requests <- record.requests,
-             ActivityStatisticsTable.encrypted <- record.encrypted,
-             ActivityStatisticsTable.blocked <- record.blocked,
-             ActivityStatisticsTable.elapsedSumm <- record.elapsedSumm]
+        guard records.count > 0 else {
+            return
         }
 
-        let addQuery = ActivityStatisticsTable.table.insertMany(setters)
-        try statisticsDb.run(addQuery)
+        Logger.logInfo("(ActivityStatistics) - adding \(records.count) records")
+
+        // Use chunks of smaller size to call insertMany in order to avoid exceeding NEPacketTunnelProvider's
+        // memory limit. See here for details: https://github.com/AdguardTeam/AdguardForiOS/issues/1935
+        let chunkSize = 500
+        let chunks = stride(from: 0, to: records.count, by: chunkSize).map {
+            Array(records[$0..<min($0 + chunkSize, records.count)])
+        }
+
+        for chunk in chunks {
+            let setters: [[Setter]] = chunk.map { record in
+                [ActivityStatisticsTable.timeStamp <- record.timeStamp,
+                 ActivityStatisticsTable.domain <- record.domain,
+                 ActivityStatisticsTable.requests <- record.requests,
+                 ActivityStatisticsTable.encrypted <- record.encrypted,
+                 ActivityStatisticsTable.blocked <- record.blocked,
+                 ActivityStatisticsTable.elapsedSumm <- record.elapsedSumm]
+            }
+            let addQuery = ActivityStatisticsTable.table.insertMany(setters)
+            try statisticsDb.run(addQuery)
+        }
+
+        Logger.logInfo("(ActivityStatistics) - finished adding records")
     }
 
     private func getCompressedRecords() throws -> [ActivityStatisticsRecord] {

@@ -48,6 +48,7 @@ class TunnelProvider: PacketTunnelProvider {
 
         let debugLogs = resources.isDebugLogs
 
+        // TODO: consider not using Sentry or using just a part of it. Sentry's init takes 1MB RAM, a lot for a tunnel.
         // start and configure Sentry
         SentrySDK.start { options in
             options.dsn = Constants.Sentry.dsnUrl
