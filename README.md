@@ -95,6 +95,10 @@ Prepare and install Ruby bundler:
 
 - `sudo gem install bundler`
 
+Configure bundler to use local directory for storing dependencies:
+
+- `bundle config set --local path '.bundle/vendor'`
+
 Then run bundle install:
 
 - `bundle install`
