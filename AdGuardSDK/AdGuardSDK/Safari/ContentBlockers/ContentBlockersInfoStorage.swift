@@ -127,7 +127,7 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
             throw CommonError.error(message: "Received \(converterResults.count) results, but expecting \(ContentBlockerType.allCases.count)")
         }
 
-        Logger.logInfo("(ContentBlockersJSONStorage) - save cbJsons; Trying to save \(converterResults.count) jsons")
+        Logger.logInfo("(ContentBlockersInfoStorage) - save cbJsons; Trying to save \(converterResults.count) jsons")
 
         let result: [ConverterResult] = try converterResults.map {
             let urlToSave = getJsonUrl(for: $0.type)
@@ -139,13 +139,13 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
     }
 
     func getConverterResult(for cbType: ContentBlockerType) -> ConverterResult? {
-        Logger.logInfo("(ContentBlockersJSONStorage) - getConverterResult; Result request for \(cbType)")
+        Logger.logInfo("(ContentBlockersInfoStorage) - getConverterResult; Result request for \(cbType)")
         let allResults = userDefaultsStorage.allCbInfo
         return allResults.first(where: { $0.type == cbType })
     }
 
     func reset() throws {
-        Logger.logInfo("(ContentBlockersJSONStorage) - reset start")
+        Logger.logInfo("(ContentBlockersInfoStorage) - reset start")
 
         // Remove all converted JSON fils
         try fileManager.removeItem(at: jsonStorageUrl)
@@ -156,7 +156,7 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
         // Clear user defaults
         userDefaultsStorage.allCbInfo = []
 
-        Logger.logInfo("(ContentBlockersJSONStorage) - reset; Successfully deleted directory with CBs JSONs")
+        Logger.logInfo("(ContentBlockersInfoStorage) - reset; Successfully deleted directory with CBs JSONs")
     }
 
     func getJsonUrl(for cbType: ContentBlockerType) -> URL {
@@ -166,19 +166,28 @@ final class ContentBlockersInfoStorage: ContentBlockersInfoStorageProtocol {
     // MARK: - Private methods
 
     private func saveAdvancedRules(from results: [FiltersConverterResult]) throws {
-        // Advanced rules from every Content Blocker in one string
-        let bigRule = results.reduce("", { $0 + "\n" + ($1.advancedBlockingText ?? "") })
+        Logger.logInfo("(ContentBlockersInfoStorage) - saveAdvancedRules; start")
 
-        // Unique rules from all rules preserving their order
-        // It's very important to leave order the same we receive from converter!
-        // Otherwise Advanced Protection wouldn't work
-        let rules = bigRule.split(separator: "\n").uniqueElements
+        // Remove duplicates from the rules.
+        // Note that we persist the rules order (it is very important for interpreting them in the Web Extension).
+        var uniqueRules: Set<String> = []
+        var rules: [String] = []
+        for result in results {
+            let content = (result.advancedBlockingText ?? "") as NSString
+            content.enumerateLines { line, _ in
+                if !uniqueRules.contains(line) {
+                    rules.append(line)
+                    uniqueRules.insert(line)
+                }
+            }
+        }
 
         // String from unique rules
         let uniqueRulesText = rules.joined(separator: "\n")
 
         try uniqueRulesText.write(to: advancedRulesFileUrl, atomically: true, encoding: .utf8)
         userDefaultsStorage.advancedRulesCount = rules.count
+        Logger.logInfo("(ContentBlockersInfoStorage) - saveAdvancedRules; finished saving \(rules.count) rules")
     }
 }
 
